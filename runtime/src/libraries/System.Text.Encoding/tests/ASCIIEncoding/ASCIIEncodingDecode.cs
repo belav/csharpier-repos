@@ -35,7 +35,11 @@ namespace System.Text.Tests
             EncodingHelpers.Decode(new ASCIIEncoding(), bytes, index, count, expected);
 
             // Decoding valid bytes should not throw with a DecoderExceptionFallback
-            Encoding exceptionEncoding = Encoding.GetEncoding("ascii", new EncoderReplacementFallback("?"), new DecoderExceptionFallback());
+            Encoding exceptionEncoding = Encoding.GetEncoding(
+                "ascii",
+                new EncoderReplacementFallback("?"),
+                new DecoderExceptionFallback()
+            );
             EncodingHelpers.Decode(exceptionEncoding, bytes, index, count, expected);
         }
 
@@ -61,7 +65,11 @@ namespace System.Text.Tests
             EncodingHelpers.Decode(new ASCIIEncoding(), bytes, index, count, expected);
 
             // Decoding invalid bytes should throw with a DecoderExceptionFallback
-            Encoding exceptionEncoding = Encoding.GetEncoding("ascii", new EncoderReplacementFallback("?"), new DecoderExceptionFallback());
+            Encoding exceptionEncoding = Encoding.GetEncoding(
+                "ascii",
+                new EncoderReplacementFallback("?"),
+                new DecoderExceptionFallback()
+            );
             NegativeEncodingTests.Decode_Invalid(exceptionEncoding, bytes, index, count);
         }
 
@@ -82,7 +90,11 @@ namespace System.Text.Tests
         [InlineData("\ud800\udc00", 10)]
         public void GetByteCount_WithReplacementFallback(string input, int expectedByteCount)
         {
-            Encoding encoding = Encoding.GetEncoding("ascii", new EncoderReplacementFallback("abcde"), DecoderFallback.ExceptionFallback);
+            Encoding encoding = Encoding.GetEncoding(
+                "ascii",
+                new EncoderReplacementFallback("abcde"),
+                DecoderFallback.ExceptionFallback
+            );
             Assert.Equal(expectedByteCount, encoding.GetByteCount(input));
         }
 
@@ -92,7 +104,11 @@ namespace System.Text.Tests
             // Tests trying to replace one non-ASCII character with another, which should cause
             // fallback logic to identify the invalid data and abort the operation.
 
-            Encoding encoding = Encoding.GetEncoding("ascii", new EncoderReplacementFallback("\u1234"), DecoderFallback.ExceptionFallback);
+            Encoding encoding = Encoding.GetEncoding(
+                "ascii",
+                new EncoderReplacementFallback("\u1234"),
+                DecoderFallback.ExceptionFallback
+            );
             Assert.Throws<ArgumentException>("chars", () => encoding.GetByteCount("\u0080"));
         }
 
@@ -102,7 +118,11 @@ namespace System.Text.Tests
         [InlineData("\ud800\udc00", "abcdeabcde")]
         public void GetBytes_WithReplacementFallback(string input, string expectedResult)
         {
-            Encoding encoding = Encoding.GetEncoding("ascii", new EncoderReplacementFallback("abcde"), DecoderFallback.ExceptionFallback);
+            Encoding encoding = Encoding.GetEncoding(
+                "ascii",
+                new EncoderReplacementFallback("abcde"),
+                DecoderFallback.ExceptionFallback
+            );
             Assert.Equal(WideToAsciiStr(expectedResult), encoding.GetBytes(input));
         }
 
@@ -112,7 +132,11 @@ namespace System.Text.Tests
             // Tests trying to replace one non-ASCII character with another, which should cause
             // fallback logic to identify the invalid data and abort the operation.
 
-            Encoding encoding = Encoding.GetEncoding("ascii", new EncoderReplacementFallback("\u1234"), DecoderFallback.ExceptionFallback);
+            Encoding encoding = Encoding.GetEncoding(
+                "ascii",
+                new EncoderReplacementFallback("\u1234"),
+                DecoderFallback.ExceptionFallback
+            );
             Assert.Throws<ArgumentException>("chars", () => encoding.GetBytes("\u0080"));
         }
 

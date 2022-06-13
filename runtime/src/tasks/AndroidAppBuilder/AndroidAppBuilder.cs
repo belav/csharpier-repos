@@ -113,7 +113,11 @@ public class AndroidAppBuilderTask : Task
         apkBuilder.RuntimeComponents = RuntimeComponents;
         apkBuilder.DiagnosticPorts = DiagnosticPorts;
         apkBuilder.Assemblies = Assemblies;
-        (ApkBundlePath, ApkPackageId) = apkBuilder.BuildApk(abi, MainLibraryFileName, MonoRuntimeHeaders);
+        (ApkBundlePath, ApkPackageId) = apkBuilder.BuildApk(
+            abi,
+            MainLibraryFileName,
+            MonoRuntimeHeaders
+        );
 
         return true;
     }

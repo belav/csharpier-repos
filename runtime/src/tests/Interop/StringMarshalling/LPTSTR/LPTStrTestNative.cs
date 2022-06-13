@@ -19,6 +19,7 @@ class LPTStrTestNative
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string str1;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string str2;
     }
@@ -35,6 +36,7 @@ class LPTStrTestNative
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string str1;
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 10)]
         public string str2;
     }
@@ -42,21 +44,37 @@ class LPTStrTestNative
     [DllImport(nameof(LPTStrTestNative), CharSet = CharSet.Unicode)]
     public static extern bool Verify_NullTerminators_PastEnd(StringBuilder builder, int length);
 
-    [DllImport(nameof(LPTStrTestNative), EntryPoint = "Verify_NullTerminators_PastEnd", CharSet = CharSet.Unicode)]
-    public static extern bool Verify_NullTerminators_PastEnd_Out([Out] StringBuilder builder, int length);
+    [DllImport(
+        nameof(LPTStrTestNative),
+        EntryPoint = "Verify_NullTerminators_PastEnd",
+        CharSet = CharSet.Unicode
+    )]
+    public static extern bool Verify_NullTerminators_PastEnd_Out(
+        [Out] StringBuilder builder,
+        int length
+    );
 
     [DllImport(nameof(LPTStrTestNative))]
     public static extern bool MatchFuncNameAnsi(ByValStringInStructAnsi str);
+
     [DllImport(nameof(LPTStrTestNative))]
     public static extern bool MatchFuncNameUni(ByValStringInStructUnicode str);
 
     [DllImport(nameof(LPTStrTestNative))]
     public static extern void ReverseByValStringAnsi(ref ByValStringInStructAnsi str);
+
     [DllImport(nameof(LPTStrTestNative))]
     public static extern void ReverseByValStringUni(ref ByValStringInStructUnicode str);
 
     [DllImport(nameof(LPTStrTestNative))]
-    public static extern void ReverseCopyByValStringAnsi(ByValStringInStructAnsi str, out ByValStringInStructSplitAnsi strOut);
+    public static extern void ReverseCopyByValStringAnsi(
+        ByValStringInStructAnsi str,
+        out ByValStringInStructSplitAnsi strOut
+    );
+
     [DllImport(nameof(LPTStrTestNative))]
-    public static extern void ReverseCopyByValStringUni(ByValStringInStructUnicode str, out ByValStringInStructSplitUnicode strOut);
+    public static extern void ReverseCopyByValStringUni(
+        ByValStringInStructUnicode str,
+        out ByValStringInStructSplitUnicode strOut
+    );
 }

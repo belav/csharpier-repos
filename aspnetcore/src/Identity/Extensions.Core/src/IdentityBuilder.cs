@@ -30,8 +30,8 @@ public class IdentityBuilder
     /// <param name="user">The <see cref="Type"/> to use for the users.</param>
     /// <param name="role">The <see cref="Type"/> to use for the roles.</param>
     /// <param name="services">The <see cref="IServiceCollection"/> to attach to.</param>
-    public IdentityBuilder(Type user, Type role, IServiceCollection services) : this(user, services)
-        => RoleType = role;
+    public IdentityBuilder(Type user, Type role, IServiceCollection services)
+        : this(user, services) => RoleType = role;
 
     /// <summary>
     /// Gets the <see cref="Type"/> used for users.
@@ -68,23 +68,27 @@ public class IdentityBuilder
     /// </summary>
     /// <typeparam name="TValidator">The user validator type.</typeparam>
     /// <returns>The current <see cref="IdentityBuilder"/> instance.</returns>
-    public virtual IdentityBuilder AddUserValidator<TValidator>() where TValidator : class
-        => AddScoped(typeof(IUserValidator<>).MakeGenericType(UserType), typeof(TValidator));
+    public virtual IdentityBuilder AddUserValidator<TValidator>() where TValidator : class =>
+        AddScoped(typeof(IUserValidator<>).MakeGenericType(UserType), typeof(TValidator));
 
     /// <summary>
     /// Adds an <see cref="IUserClaimsPrincipalFactory{TUser}"/> for the <see cref="UserType"/>.
     /// </summary>
     /// <typeparam name="TFactory">The type of the claims principal factory.</typeparam>
     /// <returns>The current <see cref="IdentityBuilder"/> instance.</returns>
-    public virtual IdentityBuilder AddClaimsPrincipalFactory<TFactory>() where TFactory : class
-        => AddScoped(typeof(IUserClaimsPrincipalFactory<>).MakeGenericType(UserType), typeof(TFactory));
+    public virtual IdentityBuilder AddClaimsPrincipalFactory<TFactory>() where TFactory : class =>
+        AddScoped(
+            typeof(IUserClaimsPrincipalFactory<>).MakeGenericType(UserType),
+            typeof(TFactory)
+        );
 
     /// <summary>
     /// Adds an <see cref="IdentityErrorDescriber"/>.
     /// </summary>
     /// <typeparam name="TDescriber">The type of the error describer.</typeparam>
     /// <returns>The current <see cref="IdentityBuilder"/> instance.</returns>
-    public virtual IdentityBuilder AddErrorDescriber<TDescriber>() where TDescriber : IdentityErrorDescriber
+    public virtual IdentityBuilder AddErrorDescriber<TDescriber>()
+        where TDescriber : IdentityErrorDescriber
     {
         Services.AddScoped<IdentityErrorDescriber, TDescriber>();
         return this;
@@ -95,16 +99,16 @@ public class IdentityBuilder
     /// </summary>
     /// <typeparam name="TValidator">The validator type used to validate passwords.</typeparam>
     /// <returns>The current <see cref="IdentityBuilder"/> instance.</returns>
-    public virtual IdentityBuilder AddPasswordValidator<TValidator>() where TValidator : class
-        => AddScoped(typeof(IPasswordValidator<>).MakeGenericType(UserType), typeof(TValidator));
+    public virtual IdentityBuilder AddPasswordValidator<TValidator>() where TValidator : class =>
+        AddScoped(typeof(IPasswordValidator<>).MakeGenericType(UserType), typeof(TValidator));
 
     /// <summary>
     /// Adds an <see cref="IUserStore{TUser}"/> for the <see cref="UserType"/>.
     /// </summary>
     /// <typeparam name="TStore">The user store type.</typeparam>
     /// <returns>The current <see cref="IdentityBuilder"/> instance.</returns>
-    public virtual IdentityBuilder AddUserStore<TStore>() where TStore : class
-        => AddScoped(typeof(IUserStore<>).MakeGenericType(UserType), typeof(TStore));
+    public virtual IdentityBuilder AddUserStore<TStore>() where TStore : class =>
+        AddScoped(typeof(IUserStore<>).MakeGenericType(UserType), typeof(TStore));
 
     /// <summary>
     /// Adds a token provider.
@@ -112,8 +116,8 @@ public class IdentityBuilder
     /// <typeparam name="TProvider">The type of the token provider to add.</typeparam>
     /// <param name="providerName">The name of the provider to add.</param>
     /// <returns>The current <see cref="IdentityBuilder"/> instance.</returns>
-    public virtual IdentityBuilder AddTokenProvider<TProvider>(string providerName) where TProvider : class
-        => AddTokenProvider(providerName, typeof(TProvider));
+    public virtual IdentityBuilder AddTokenProvider<TProvider>(string providerName)
+        where TProvider : class => AddTokenProvider(providerName, typeof(TProvider));
 
     /// <summary>
     /// Adds a token provider for the <see cref="UserType"/>.
@@ -123,9 +127,19 @@ public class IdentityBuilder
     /// <returns>The current <see cref="IdentityBuilder"/> instance.</returns>
     public virtual IdentityBuilder AddTokenProvider(string providerName, Type provider)
     {
-        if (!typeof(IUserTwoFactorTokenProvider<>).MakeGenericType(UserType).IsAssignableFrom(provider))
+        if (
+            !typeof(IUserTwoFactorTokenProvider<>)
+                .MakeGenericType(UserType)
+                .IsAssignableFrom(provider)
+        )
         {
-            throw new InvalidOperationException(Resources.FormatInvalidManagerType(provider.Name, "IUserTwoFactorTokenProvider", UserType.Name));
+            throw new InvalidOperationException(
+                Resources.FormatInvalidManagerType(
+                    provider.Name,
+                    "IUserTwoFactorTokenProvider",
+                    UserType.Name
+                )
+            );
         }
         Services.Configure<IdentityOptions>(options =>
         {
@@ -146,11 +160,16 @@ public class IdentityBuilder
         var customType = typeof(TUserManager);
         if (!userManagerType.IsAssignableFrom(customType))
         {
-            throw new InvalidOperationException(Resources.FormatInvalidManagerType(customType.Name, "UserManager", UserType.Name));
+            throw new InvalidOperationException(
+                Resources.FormatInvalidManagerType(customType.Name, "UserManager", UserType.Name)
+            );
         }
         if (userManagerType != customType)
         {
-            Services.AddScoped(customType, services => services.GetRequiredService(userManagerType));
+            Services.AddScoped(
+                customType,
+                services => services.GetRequiredService(userManagerType)
+            );
         }
         return AddScoped(userManagerType, customType);
     }
@@ -165,7 +184,10 @@ public class IdentityBuilder
         RoleType = typeof(TRole);
         AddRoleValidator<RoleValidator<TRole>>();
         Services.TryAddScoped<RoleManager<TRole>>();
-        Services.AddScoped(typeof(IUserClaimsPrincipalFactory<>).MakeGenericType(UserType), typeof(UserClaimsPrincipalFactory<,>).MakeGenericType(UserType, RoleType));
+        Services.AddScoped(
+            typeof(IUserClaimsPrincipalFactory<>).MakeGenericType(UserType),
+            typeof(UserClaimsPrincipalFactory<,>).MakeGenericType(UserType, RoleType)
+        );
         return this;
     }
 
@@ -228,11 +250,16 @@ public class IdentityBuilder
         var customType = typeof(TRoleManager);
         if (!managerType.IsAssignableFrom(customType))
         {
-            throw new InvalidOperationException(Resources.FormatInvalidManagerType(customType.Name, "RoleManager", RoleType.Name));
+            throw new InvalidOperationException(
+                Resources.FormatInvalidManagerType(customType.Name, "RoleManager", RoleType.Name)
+            );
         }
         if (managerType != customType)
         {
-            Services.AddScoped(typeof(TRoleManager), services => services.GetRequiredService(managerType));
+            Services.AddScoped(
+                typeof(TRoleManager),
+                services => services.GetRequiredService(managerType)
+            );
         }
         return AddScoped(managerType, typeof(TRoleManager));
     }
@@ -242,6 +269,7 @@ public class IdentityBuilder
     /// </summary>
     /// <typeparam name="TUserConfirmation">The type of the user confirmation to add.</typeparam>
     /// <returns>The current <see cref="IdentityBuilder"/> instance.</returns>
-    public virtual IdentityBuilder AddUserConfirmation<TUserConfirmation>() where TUserConfirmation : class
-        => AddScoped(typeof(IUserConfirmation<>).MakeGenericType(UserType), typeof(TUserConfirmation));
+    public virtual IdentityBuilder AddUserConfirmation<TUserConfirmation>()
+        where TUserConfirmation : class =>
+        AddScoped(typeof(IUserConfirmation<>).MakeGenericType(UserType), typeof(TUserConfirmation));
 }

@@ -9,10 +9,7 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 {
-    protected ConnectionInterceptionTestBase(InterceptionFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+    protected ConnectionInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(false)]
@@ -129,7 +126,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         var interceptor4 = new ConnectionOverridingInterceptor();
         using var context = CreateContext(
             new IInterceptor[] { new NoOpConnectionInterceptor(), interceptor1, interceptor2 },
-            new IInterceptor[] { interceptor3, interceptor4, new NoOpConnectionInterceptor() });
+            new IInterceptor[] { interceptor3, interceptor4, new NoOpConnectionInterceptor() }
+        );
         // Test infrastructure uses an open connection, so close it first.
         var connection = context.Database.GetDbConnection();
         var startedOpen = connection.State == ConnectionState.Open;
@@ -189,7 +187,9 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
     {
         var interceptor = new ConnectionInterceptor();
 
-        using var context = CreateBadUniverse(new DbContextOptionsBuilder().AddInterceptors(interceptor));
+        using var context = CreateBadUniverse(
+            new DbContextOptionsBuilder().AddInterceptors(interceptor)
+        );
         try
         {
             if (async)
@@ -450,7 +450,9 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         Assert.True(connectionDisposed2);
     }
 
-    protected abstract DbContextOptionsBuilder ConfigureProvider(DbContextOptionsBuilder optionsBuilder);
+    protected abstract DbContextOptionsBuilder ConfigureProvider(
+        DbContextOptionsBuilder optionsBuilder
+    );
 
     protected class ConnectionCreationInterceptor : IDbConnectionInterceptor
     {
@@ -467,7 +469,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 
         public virtual InterceptionResult<DbConnection> ConnectionCreating(
             ConnectionCreatingEventData eventData,
-            InterceptionResult<DbConnection> result)
+            InterceptionResult<DbConnection> result
+        )
         {
             Assert.NotNull(eventData.Context);
             Assert.NotEqual(default, eventData.ConnectionId);
@@ -481,7 +484,10 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
             return result;
         }
 
-        public virtual DbConnection ConnectionCreated(ConnectionCreatedEventData eventData, DbConnection result)
+        public virtual DbConnection ConnectionCreated(
+            ConnectionCreatedEventData eventData,
+            DbConnection result
+        )
         {
             Assert.Same(Context, eventData.Context);
             Assert.Equal(ConnectionId, eventData.ConnectionId);
@@ -497,7 +503,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         public virtual InterceptionResult ConnectionDisposing(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -509,7 +516,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         public virtual ValueTask<InterceptionResult> ConnectionDisposingAsync(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -520,7 +528,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 
         public virtual void ConnectionDisposed(
             DbConnection connection,
-            ConnectionEndEventData eventData)
+            ConnectionEndEventData eventData
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -529,7 +538,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 
         public virtual Task ConnectionDisposedAsync(
             DbConnection connection,
-            ConnectionEndEventData eventData)
+            ConnectionEndEventData eventData
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -566,7 +576,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 
         public override InterceptionResult<DbConnection> ConnectionCreating(
             ConnectionCreatingEventData eventData,
-            InterceptionResult<DbConnection> result)
+            InterceptionResult<DbConnection> result
+        )
         {
             base.ConnectionCreating(eventData, result);
 
@@ -583,7 +594,10 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
             _replacementConnection = replacementConnection;
         }
 
-        public override DbConnection ConnectionCreated(ConnectionCreatedEventData eventData, DbConnection result)
+        public override DbConnection ConnectionCreated(
+            ConnectionCreatedEventData eventData,
+            DbConnection result
+        )
         {
             base.ConnectionCreated(eventData, result);
 
@@ -594,14 +608,22 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 
     protected class ConnectionCreationNoDisposeInterceptor : ConnectionCreationInterceptor
     {
-        public override InterceptionResult ConnectionDisposing(DbConnection connection, ConnectionEventData eventData, InterceptionResult result)
+        public override InterceptionResult ConnectionDisposing(
+            DbConnection connection,
+            ConnectionEventData eventData,
+            InterceptionResult result
+        )
         {
             base.ConnectionDisposing(connection, eventData, result);
 
             return InterceptionResult.Suppress();
         }
 
-        public override async ValueTask<InterceptionResult> ConnectionDisposingAsync(DbConnection connection, ConnectionEventData eventData, InterceptionResult result)
+        public override async ValueTask<InterceptionResult> ConnectionDisposingAsync(
+            DbConnection connection,
+            ConnectionEventData eventData,
+            InterceptionResult result
+        )
         {
             await base.ConnectionDisposingAsync(connection, eventData, result);
 
@@ -613,37 +635,36 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
     {
         private readonly Func<DbContextOptionsBuilder, DbContextOptionsBuilder> _configureProvider;
 
-        public ConnectionStringContext(Func<DbContextOptionsBuilder, DbContextOptionsBuilder> configureProvider)
+        public ConnectionStringContext(
+            Func<DbContextOptionsBuilder, DbContextOptionsBuilder> configureProvider
+        )
         {
             _configureProvider = configureProvider;
         }
 
-        public List<ConnectionCreationInterceptor> Interceptors { get; } = new List<ConnectionCreationInterceptor>();
+        public List<ConnectionCreationInterceptor> Interceptors { get; } =
+            new List<ConnectionCreationInterceptor>();
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => _configureProvider(optionsBuilder).AddInterceptors(Interceptors);
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            _configureProvider(optionsBuilder).AddInterceptors(Interceptors);
     }
 
     protected abstract BadUniverseContext CreateBadUniverse(DbContextOptionsBuilder optionsBuilder);
 
     protected class BadUniverseContext : UniverseContext
     {
-        public BadUniverseContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public BadUniverseContext(DbContextOptions options) : base(options) { }
     }
 
-    protected class NoOpConnectionInterceptor : DbConnectionInterceptor
-    {
-    }
+    protected class NoOpConnectionInterceptor : DbConnectionInterceptor { }
 
     protected class ConnectionOverridingInterceptor : ConnectionInterceptor
     {
         public override InterceptionResult ConnectionOpening(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             base.ConnectionOpening(connection, eventData, result);
 
@@ -659,7 +680,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
             DbConnection connection,
             ConnectionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             await base.ConnectionOpeningAsync(connection, eventData, result, cancellationToken);
 
@@ -704,7 +726,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         public virtual InterceptionResult ConnectionOpening(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -717,7 +740,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
             DbConnection connection,
             ConnectionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -728,7 +752,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 
         public virtual void ConnectionOpened(
             DbConnection connection,
-            ConnectionEndEventData eventData)
+            ConnectionEndEventData eventData
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -738,7 +763,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         public virtual Task ConnectionOpenedAsync(
             DbConnection connection,
             ConnectionEndEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -750,7 +776,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         public virtual InterceptionResult ConnectionClosing(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -762,7 +789,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         public virtual ValueTask<InterceptionResult> ConnectionClosingAsync(
             DbConnection connection,
             ConnectionEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -773,7 +801,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 
         public virtual void ConnectionClosed(
             DbConnection connection,
-            ConnectionEndEventData eventData)
+            ConnectionEndEventData eventData
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -782,7 +811,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 
         public virtual Task ConnectionClosedAsync(
             DbConnection connection,
-            ConnectionEndEventData eventData)
+            ConnectionEndEventData eventData
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -793,7 +823,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 
         public virtual void ConnectionFailed(
             DbConnection connection,
-            ConnectionErrorEventData eventData)
+            ConnectionErrorEventData eventData
+        )
         {
             Assert.False(eventData.IsAsync);
             SyncCalled = true;
@@ -803,7 +834,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         public virtual Task ConnectionFailedAsync(
             DbConnection connection,
             ConnectionErrorEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.True(eventData.IsAsync);
             AsyncCalled = true;
@@ -866,7 +898,11 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         }
     }
 
-    private static void AssertNormalOpen(DbContext context, ConnectionInterceptor interceptor, bool async)
+    private static void AssertNormalOpen(
+        DbContext context,
+        ConnectionInterceptor interceptor,
+        bool async
+    )
     {
         Assert.Equal(async, interceptor.AsyncCalled);
         Assert.NotEqual(async, interceptor.SyncCalled);
@@ -879,7 +915,11 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         Assert.Same(context, interceptor.Context);
     }
 
-    private static void AssertNormalClose(DbContext context, ConnectionInterceptor interceptor, bool async)
+    private static void AssertNormalClose(
+        DbContext context,
+        ConnectionInterceptor interceptor,
+        bool async
+    )
     {
         Assert.Equal(async, interceptor.AsyncCalled);
         Assert.NotEqual(async, interceptor.SyncCalled);
@@ -892,7 +932,11 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         Assert.Same(context, interceptor.Context);
     }
 
-    private static void AssertErrorOnOpen(DbContext context, ConnectionInterceptor interceptor, bool async)
+    private static void AssertErrorOnOpen(
+        DbContext context,
+        ConnectionInterceptor interceptor,
+        bool async
+    )
     {
         Assert.Equal(async, interceptor.AsyncCalled);
         Assert.NotEqual(async, interceptor.SyncCalled);
@@ -905,10 +949,11 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
         Assert.Same(context, interceptor.Context);
     }
 
-    private static void AsertOpenCloseEvents(ITestDiagnosticListener listener)
-        => listener.AssertEventsInOrder(
+    private static void AsertOpenCloseEvents(ITestDiagnosticListener listener) =>
+        listener.AssertEventsInOrder(
             RelationalEventId.ConnectionOpening.Name,
             RelationalEventId.ConnectionOpened.Name,
             RelationalEventId.ConnectionClosing.Name,
-            RelationalEventId.ConnectionClosed.Name);
+            RelationalEventId.ConnectionClosed.Name
+        );
 }

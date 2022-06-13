@@ -37,11 +37,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CSharpSyntaxNode root,
                 Syntax.InternalSyntax.DirectiveStack directives,
                 ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions,
-                bool cloneRoot)
+                bool cloneRoot
+            )
             {
                 Debug.Assert(root != null);
                 Debug.Assert(options != null);
-                Debug.Assert(textOpt == null || textOpt.Encoding == encodingOpt && textOpt.ChecksumAlgorithm == checksumAlgorithm);
+                Debug.Assert(
+                    textOpt == null
+                        || textOpt.Encoding == encodingOpt
+                            && textOpt.ChecksumAlgorithm == checksumAlgorithm
+                );
 
                 _lazyText = textOpt;
                 _encodingOpt = encodingOpt ?? textOpt?.Encoding;
@@ -64,7 +69,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_lazyText == null)
                 {
-                    Interlocked.CompareExchange(ref _lazyText, this.GetRoot(cancellationToken).GetText(_encodingOpt, _checksumAlgorithm), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyText,
+                        this.GetRoot(cancellationToken).GetText(_encodingOpt, _checksumAlgorithm),
+                        null
+                    );
                 }
 
                 return _lazyText;
@@ -99,22 +108,20 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override bool HasCompilationUnitRoot
             {
-                get
-                {
-                    return _hasCompilationUnitRoot;
-                }
+                get { return _hasCompilationUnitRoot; }
             }
 
             public override CSharpParseOptions Options
             {
-                get
-                {
-                    return _options;
-                }
+                get { return _options; }
             }
 
-            [Obsolete("Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead", error: false)]
-            public override ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions => _diagnosticOptions;
+            [Obsolete(
+                "Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead",
+                error: false
+            )]
+            public override ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions =>
+                _diagnosticOptions;
 
             public override SyntaxReference GetReference(SyntaxNode node)
             {
@@ -137,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (CSharpSyntaxNode)root,
                     _directives,
                     _diagnosticOptions,
-                    cloneRoot: true);
+                    cloneRoot: true
+                );
             }
 
             public override SyntaxTree WithFilePath(string path)
@@ -156,11 +164,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                     _root,
                     _directives,
                     _diagnosticOptions,
-                    cloneRoot: true);
+                    cloneRoot: true
+                );
             }
 
-            [Obsolete("Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead", error: false)]
-            public override SyntaxTree WithDiagnosticOptions(ImmutableDictionary<string, ReportDiagnostic> options)
+            [Obsolete(
+                "Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead",
+                error: false
+            )]
+            public override SyntaxTree WithDiagnosticOptions(
+                ImmutableDictionary<string, ReportDiagnostic> options
+            )
             {
                 if (options is null)
                 {
@@ -181,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     _root,
                     _directives,
                     options,
-                    cloneRoot: true);
+                    cloneRoot: true
+                );
             }
         }
     }

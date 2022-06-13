@@ -24,7 +24,8 @@ namespace Microsoft.Interop
         public ManagedToNativeStubCodeContext(
             StubEnvironment environment,
             string returnIdentifier,
-            string nativeReturnIdentifier)
+            string nativeReturnIdentifier
+        )
         {
             _framework = environment.TargetFramework;
             _frameworkVersion = environment.TargetFrameworkVersion;
@@ -32,8 +33,8 @@ namespace Microsoft.Interop
             _nativeReturnIdentifier = nativeReturnIdentifier;
         }
 
-        public override (TargetFramework framework, Version version) GetTargetFramework()
-            =>  (_framework, _frameworkVersion);
+        public override (TargetFramework framework, Version version) GetTargetFramework() =>
+            (_framework, _frameworkVersion);
 
         public override (string managed, string native) GetIdentifiers(TypePositionInfo info)
         {

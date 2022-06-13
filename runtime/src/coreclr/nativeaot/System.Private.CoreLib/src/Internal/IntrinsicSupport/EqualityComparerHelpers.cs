@@ -88,7 +88,12 @@ namespace Internal.IntrinsicSupport
                 }
             }
 
-            bool success = RuntimeAugments.TypeLoaderCallbacks.TryGetConstructedGenericTypeForComponents(openComparerType, new RuntimeTypeHandle[] { comparerTypeArgument }, out comparerType);
+            bool success =
+                RuntimeAugments.TypeLoaderCallbacks.TryGetConstructedGenericTypeForComponents(
+                    openComparerType,
+                    new RuntimeTypeHandle[] { comparerTypeArgument },
+                    out comparerType
+                );
             if (!success)
             {
                 Environment.FailFast("Unable to create comparer");
@@ -113,7 +118,8 @@ namespace Internal.IntrinsicSupport
             return x.Equals(y);
         }
 
-        private static bool StructOnlyEqualsNullable<T>(Nullable<T> x, Nullable<T> y) where T : struct, IEquatable<T>
+        private static bool StructOnlyEqualsNullable<T>(Nullable<T> x, Nullable<T> y)
+            where T : struct, IEquatable<T>
         {
             if (x.HasValue)
             {
@@ -155,8 +161,7 @@ namespace Internal.IntrinsicSupport
             return EqualityComparer<T>.Default;
         }
 
-        private static bool StructOnlyNormalEquals<T>(T left, T right)
-            where T : notnull
+        private static bool StructOnlyNormalEquals<T>(T left, T right) where T : notnull
         {
             return left.Equals(right);
         }

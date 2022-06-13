@@ -16,8 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
 {
     public class BraceHighlightingTests : AbstractBraceHighlightingTests
     {
-        protected override TestWorkspace CreateWorkspace(string markup, ParseOptions options)
-            => TestWorkspace.CreateCSharp(markup, parseOptions: options);
+        protected override TestWorkspace CreateWorkspace(string markup, ParseOptions options) =>
+            TestWorkspace.CreateCSharp(markup, parseOptions: options);
 
         [WpfTheory, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         [InlineData("public class C$$ {\r\n} ")]
@@ -53,15 +53,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         [InlineData("/// <summary>Goo</$$summary>")]
         [InlineData("/// <summary>Goo</summary$$>")]
         [InlineData("/// <summary>Goo</summary>$$")]
-
         [InlineData("public class C$$[|<|]T[|>|] { }")]
         [InlineData("public class C<$$T> { }")]
         [InlineData("public class C<T$$> { }")]
         [InlineData("public class C[|<|]T[|>$$|] { }")]
-
         [InlineData("unsafe class C { delegate*$$[|<|] int, int[|>|] functionPointer; }")]
         [InlineData("unsafe class C { delegate*[|<|]int, int[|>$$|] functionPointer; }")]
-        [InlineData("unsafe class C { delegate*<int, delegate*[|<|]int, int[|>|]$$> functionPointer; }")]
+        [InlineData(
+            "unsafe class C { delegate*<int, delegate*[|<|]int, int[|>|]$$> functionPointer; }"
+        )]
         public async Task TestAngles(string testCase)
         {
             await TestBraceHighlightingAsync(testCase);
@@ -71,48 +71,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestNoHighlightingOnOperators()
         {
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     void Goo()
     {
         bool a = b $$< c;
         bool d = e > f;
     }
-}");
+}"
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     void Goo()
     {
         bool a = b <$$ c;
         bool d = e > f;
     }
-}");
+}"
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     void Goo()
     {
         bool a = b < c;
         bool d = e $$> f;
     }
-}");
+}"
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     void Goo()
     {
         bool a = b < c;
         bool d = e >$$ f;
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestSwitch()
         {
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     void M(int variable)
     {
@@ -122,9 +126,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 break;
         }
     }
-}");
+}"
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     void M(int variable)
     {
@@ -134,9 +139,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 break;
         }
     }
-}");
+}"
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     void M(int variable)
     {
@@ -146,9 +152,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 break;
         }
     }
-}");
+}"
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     void M(int variable)
     {
@@ -158,9 +165,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 break;
         }
     }
-}");
+}"
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     void M(int variable)
     {
@@ -170,9 +178,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 break;
         [|}|]
     }
-}");
+}"
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     void M(int variable)
     {
@@ -182,9 +191,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 break;
         }
     }
-}");
+}"
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     void M(int variable)
     {
@@ -194,9 +204,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 break;
         $$}
     }
-}");
+}"
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     void M(int variable)
     {
@@ -206,7 +217,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
                 break;
         [|}$$|]
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
@@ -220,51 +232,64 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceHighlighting
         public async Task TestTuples()
         {
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     [|(|]int, int[|)$$|] x = (1, 2);
-}", TestOptions.Regular);
+}",
+                TestOptions.Regular
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     (int, int) x = [|(|]1, 2[|)$$|];
-}", TestOptions.Regular);
+}",
+                TestOptions.Regular
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestNestedTuples()
         {
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     ([|(|]int, int[|)$$|], string) x = ((1, 2), ""hello"";
-}", TestOptions.Regular);
+}",
+                TestOptions.Regular
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     ((int, int), string) x = ([|(|]1, 2[|)$$|], ""hello"";
-}", TestOptions.Regular);
+}",
+                TestOptions.Regular
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestTuplesWithGenerics()
         {
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     [|(|]Dictionary<int, string>, List<int>[|)$$|] x = (null, null);
-}", TestOptions.Regular);
+}",
+                TestOptions.Regular
+            );
             await TestBraceHighlightingAsync(
-@"class C
+                @"class C
 {
     var x = [|(|]new Dictionary<int, string>(), new List<int>()[|)$$|];
-}", TestOptions.Regular);
+}",
+                TestOptions.Regular
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestRegexGroupBracket1()
         {
-            var input = @"
+            var input =
+                @"
 using System.Text.RegularExpressions;
 
 class C
@@ -281,7 +306,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestRegexGroupBracket2()
         {
-            var input = @"
+            var input =
+                @"
 using System.Text.RegularExpressions;
 
 class C
@@ -298,7 +324,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestRegexUnclosedGroupBracket1()
         {
-            var input = @"
+            var input =
+                @"
 using System.Text.RegularExpressions;
 
 class C
@@ -315,7 +342,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestRegexCommentBracket1()
         {
-            var input = @"
+            var input =
+                @"
 using System.Text.RegularExpressions;
 
 class C
@@ -332,7 +360,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestRegexCommentBracket2()
         {
-            var input = @"
+            var input =
+                @"
 using System.Text.RegularExpressions;
 
 class C
@@ -349,7 +378,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestRegexUnclosedCommentBracket()
         {
-            var input = @"
+            var input =
+                @"
 using System.Text.RegularExpressions;
 
 class C
@@ -366,7 +396,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestRegexCharacterClassBracket1()
         {
-            var input = @"
+            var input =
+                @"
 using System.Text.RegularExpressions;
 
 class C
@@ -383,7 +414,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestRegexCharacterClassBracket2()
         {
-            var input = @"
+            var input =
+                @"
 using System.Text.RegularExpressions;
 
 class C
@@ -399,7 +431,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestRegexUnclosedCharacterClassBracket1()
         {
-            var input = @"
+            var input =
+                @"
 using System.Text.RegularExpressions;
 
 class C
@@ -416,7 +449,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestRegexNegativeCharacterClassBracket1()
         {
-            var input = @"
+            var input =
+                @"
 using System.Text.RegularExpressions;
 
 class C
@@ -433,7 +467,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestRegexNegativeCharacterClassBracket2()
         {
-            var input = @"
+            var input =
+                @"
 using System.Text.RegularExpressions;
 
 class C
@@ -450,7 +485,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestJsonBracket1()
         {
-            var input = @"
+            var input =
+                @"
 class C
 {
     void Goo()
@@ -464,7 +500,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestJsonBracket2()
         {
-            var input = @"
+            var input =
+                @"
 class C
 {
     void Goo()
@@ -478,7 +515,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestJsonBracket_RawStrings()
         {
-            var input = @"
+            var input =
+                @"
 class C
 {
     void Goo()
@@ -492,7 +530,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestUnmatchedJsonBracket1()
         {
-            var input = @"
+            var input =
+                @"
 class C
 {
     void Goo()
@@ -506,7 +545,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestJsonBracket_NoComment_NotLikelyJson()
         {
-            var input = @"
+            var input =
+                @"
 class C
 {
     void Goo()
@@ -520,7 +560,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.BraceHighlighting)]
         public async Task TestJsonBracket_NoComment_LikelyJson()
         {
-            var input = @"
+            var input =
+                @"
 class C
 {
     void Goo()

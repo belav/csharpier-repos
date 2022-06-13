@@ -16,7 +16,14 @@ namespace Internal.Runtime.InteropServices
     public static class InMemoryAssemblyLoader
     {
         private static bool IsSupported { get; } = InitializeIsSupported();
-        private static bool InitializeIsSupported() => AppContext.TryGetSwitch("System.Runtime.InteropServices.EnableCppCLIHostActivation", out bool isSupported) ? isSupported : true;
+
+        private static bool InitializeIsSupported() =>
+            AppContext.TryGetSwitch(
+                "System.Runtime.InteropServices.EnableCppCLIHostActivation",
+                out bool isSupported
+            )
+                ? isSupported
+                : true;
 
         /// <summary>
         /// Loads an assembly that has already been loaded into memory by the OS loader as a native module
@@ -42,9 +49,16 @@ namespace Internal.Runtime.InteropServices
         /// <param name="assemblyPath">The path to the assembly (as a pointer to a UTF-16 C string).</param>
         /// <param name="loadContext">Load context (currently must be IntPtr.Zero)</param>
         [UnmanagedCallersOnly]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The same C++/CLI feature switch applies to LoadInMemoryAssembly and this function. We rely on the warning from LoadInMemoryAssembly.")]
-        public static unsafe void LoadInMemoryAssemblyInContext(IntPtr moduleHandle, IntPtr assemblyPath, IntPtr loadContext)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The same C++/CLI feature switch applies to LoadInMemoryAssembly and this function. We rely on the warning from LoadInMemoryAssembly."
+        )]
+        public static unsafe void LoadInMemoryAssemblyInContext(
+            IntPtr moduleHandle,
+            IntPtr assemblyPath,
+            IntPtr loadContext
+        )
         {
             if (!IsSupported)
                 throw new NotSupportedException(SR.NotSupported_CppCli);
@@ -52,11 +66,22 @@ namespace Internal.Runtime.InteropServices
             if (loadContext != IntPtr.Zero)
                 throw new ArgumentOutOfRangeException(nameof(loadContext));
 
-            LoadInMemoryAssemblyInContextImpl(moduleHandle, assemblyPath, AssemblyLoadContext.Default);
+            LoadInMemoryAssemblyInContextImpl(
+                moduleHandle,
+                assemblyPath,
+                AssemblyLoadContext.Default
+            );
         }
 
-        [RequiresUnreferencedCode("C++/CLI is not trim-compatible", Url = "https://aka.ms/dotnet-illink/nativehost")]
-        private static void LoadInMemoryAssemblyInContextImpl(IntPtr moduleHandle, IntPtr assemblyPath, AssemblyLoadContext? alc = null)
+        [RequiresUnreferencedCode(
+            "C++/CLI is not trim-compatible",
+            Url = "https://aka.ms/dotnet-illink/nativehost"
+        )]
+        private static void LoadInMemoryAssemblyInContextImpl(
+            IntPtr moduleHandle,
+            IntPtr assemblyPath,
+            AssemblyLoadContext? alc = null
+        )
         {
             string? assemblyPathString = Marshal.PtrToStringUni(assemblyPath);
             if (assemblyPathString == null)
@@ -71,15 +96,15 @@ namespace Internal.Runtime.InteropServices
             else if (alc == AssemblyLoadContext.Default)
             {
                 var resolver = new AssemblyDependencyResolver(assemblyPathString);
-                AssemblyLoadContext.Default.Resolving +=
-                    [RequiresUnreferencedCode("C++/CLI is not trim-compatible", Url = "https://aka.ms/dotnet-illink/nativehost")]
-                    (context, assemblyName) =>
-                    {
-                        string? assemblyPath = resolver.ResolveAssemblyToPath(assemblyName);
-                        return assemblyPath != null
-                            ? context.LoadFromAssemblyPath(assemblyPath)
-                            : null;
-                    };
+                AssemblyLoadContext.Default.Resolving += [RequiresUnreferencedCode(
+                    "C++/CLI is not trim-compatible",
+                    Url = "https://aka.ms/dotnet-illink/nativehost"
+                )]
+                (context, assemblyName) =>
+                {
+                    string? assemblyPath = resolver.ResolveAssemblyToPath(assemblyName);
+                    return assemblyPath != null ? context.LoadFromAssemblyPath(assemblyPath) : null;
+                };
             }
 
             alc.LoadFromInMemoryModule(moduleHandle);

@@ -11,7 +11,5 @@ namespace Microsoft.Internal.VisualStudio.Shell.Interop
 {
     [Guid("DFF66CB5-603C-4716-89BD-24BD0E8C172C")]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    internal interface SVsExperimentationService
-    {
-    }
+    internal interface SVsExperimentationService { }
 }

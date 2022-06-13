@@ -16,18 +16,20 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteExtensionMethodImportCompletionService : BrokeredServiceBase, IRemoteExtensionMethodImportCompletionService
+    internal sealed class RemoteExtensionMethodImportCompletionService
+        : BrokeredServiceBase,
+            IRemoteExtensionMethodImportCompletionService
     {
         internal sealed class Factory : FactoryBase<IRemoteExtensionMethodImportCompletionService>
         {
-            protected override IRemoteExtensionMethodImportCompletionService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteExtensionMethodImportCompletionService(arguments);
+            protected override IRemoteExtensionMethodImportCompletionService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteExtensionMethodImportCompletionService(arguments);
         }
 
-        public RemoteExtensionMethodImportCompletionService(in ServiceConstructionArguments arguments)
-            : base(arguments)
-        {
-        }
+        public RemoteExtensionMethodImportCompletionService(
+            in ServiceConstructionArguments arguments
+        ) : base(arguments) { }
 
         public ValueTask<SerializableUnimportedExtensionMethods?> GetUnimportedExtensionMethodsAsync(
             Checksum solutionChecksum,
@@ -38,38 +40,84 @@ namespace Microsoft.CodeAnalysis.Remote
             ImmutableArray<string> targetTypesSymbolKeyData,
             bool forceCacheCreation,
             bool hideAdvancedMembers,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(solutionChecksum, async solution =>
-            {
-                var document = solution.GetDocument(documentId)!;
-                var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-                var symbol = SymbolKey.ResolveString(receiverTypeSymbolKeyData, compilation, cancellationToken: cancellationToken).GetAnySymbol();
-
-                if (symbol is ITypeSymbol receiverTypeSymbol)
+            return RunServiceAsync(
+                solutionChecksum,
+                async solution =>
                 {
-                    var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-                    var namespaceInScopeSet = new HashSet<string>(namespaceInScope, syntaxFacts.StringComparer);
-                    var targetTypes = targetTypesSymbolKeyData
-                            .Select(symbolKey => SymbolKey.ResolveString(symbolKey, compilation, cancellationToken: cancellationToken).GetAnySymbol() as ITypeSymbol)
-                            .WhereNotNull().ToImmutableArray();
+                    var document = solution.GetDocument(documentId)!;
+                    var compilation = await document.Project
+                        .GetRequiredCompilationAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    var symbol = SymbolKey
+                        .ResolveString(
+                            receiverTypeSymbolKeyData,
+                            compilation,
+                            cancellationToken: cancellationToken
+                        )
+                        .GetAnySymbol();
 
-                    return await ExtensionMethodImportCompletionHelper.GetUnimportedExtensionMethodsInCurrentProcessAsync(
-                        document, position, receiverTypeSymbol, namespaceInScopeSet, targetTypes, forceCacheCreation, hideAdvancedMembers, isRemote: true, cancellationToken).ConfigureAwait(false);
-                }
+                    if (symbol is ITypeSymbol receiverTypeSymbol)
+                    {
+                        var syntaxFacts =
+                            document.GetRequiredLanguageService<ISyntaxFactsService>();
+                        var namespaceInScopeSet = new HashSet<string>(
+                            namespaceInScope,
+                            syntaxFacts.StringComparer
+                        );
+                        var targetTypes = targetTypesSymbolKeyData
+                            .Select(
+                                symbolKey =>
+                                    SymbolKey
+                                        .ResolveString(
+                                            symbolKey,
+                                            compilation,
+                                            cancellationToken: cancellationToken
+                                        )
+                                        .GetAnySymbol() as ITypeSymbol
+                            )
+                            .WhereNotNull()
+                            .ToImmutableArray();
 
-                return null;
-            }, cancellationToken);
+                        return await ExtensionMethodImportCompletionHelper
+                            .GetUnimportedExtensionMethodsInCurrentProcessAsync(
+                                document,
+                                position,
+                                receiverTypeSymbol,
+                                namespaceInScopeSet,
+                                targetTypes,
+                                forceCacheCreation,
+                                hideAdvancedMembers,
+                                isRemote: true,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
+                    }
+
+                    return null;
+                },
+                cancellationToken
+            );
         }
 
-        public ValueTask WarmUpCacheAsync(Checksum solutionChecksum, ProjectId projectId, CancellationToken cancellationToken)
+        public ValueTask WarmUpCacheAsync(
+            Checksum solutionChecksum,
+            ProjectId projectId,
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(solutionChecksum, solution =>
-            {
-                var project = solution.GetRequiredProject(projectId);
-                ExtensionMethodImportCompletionHelper.WarmUpCacheInCurrentProcess(project);
-                return ValueTaskFactory.CompletedTask;
-            }, cancellationToken);
+            return RunServiceAsync(
+                solutionChecksum,
+                solution =>
+                {
+                    var project = solution.GetRequiredProject(projectId);
+                    ExtensionMethodImportCompletionHelper.WarmUpCacheInCurrentProcess(project);
+                    return ValueTaskFactory.CompletedTask;
+                },
+                cancellationToken
+            );
         }
     }
 }

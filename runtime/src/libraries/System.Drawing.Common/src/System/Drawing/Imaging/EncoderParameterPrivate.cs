@@ -8,9 +8,9 @@ namespace System.Drawing.Imaging
     [StructLayout(LayoutKind.Sequential)]
     internal struct EncoderParameterPrivate
     {
-        public Guid ParameterGuid;                    // GUID of the parameter
-        public int NumberOfValues;                    // Number of the parameter values
+        public Guid ParameterGuid; // GUID of the parameter
+        public int NumberOfValues; // Number of the parameter values
         public EncoderParameterValueType ParameterValueType; // Value type, like ValueTypeLONG  etc.
-        public IntPtr ParameterValue;                 // A pointer to the parameter values
+        public IntPtr ParameterValue; // A pointer to the parameter values
     }
 }

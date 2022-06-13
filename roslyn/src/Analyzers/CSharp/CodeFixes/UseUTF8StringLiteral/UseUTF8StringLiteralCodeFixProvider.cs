@@ -21,7 +21,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseUTF8StringLiteral), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseUTF8StringLiteral
+        ),
+        Shared
+    ]
     internal sealed class UseUTF8StringLiteralCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         private const char QuoteCharacter = '"';
@@ -29,31 +35,46 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UseUTF8StringLiteralCodeFixProvider()
-        {
-        }
+        public UseUTF8StringLiteralCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.UseUTF8StringLiteralDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, CSharpAnalyzersResources.Use_UTF8_string_literal, nameof(CSharpAnalyzersResources.Use_UTF8_string_literal));
+            RegisterCodeFix(
+                context,
+                CSharpAnalyzersResources.Use_UTF8_string_literal,
+                nameof(CSharpAnalyzersResources.Use_UTF8_string_literal)
+            );
             return Task.CompletedTask;
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider options, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider options,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var diagnostic in diagnostics)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var node = diagnostic.Location.FindNode(getInnermostNodeForTie: true, cancellationToken);
-                var stringValue = GetUTF8StringValueForDiagnostic(semanticModel, diagnostic, cancellationToken);
+                var node = diagnostic.Location.FindNode(
+                    getInnermostNodeForTie: true,
+                    cancellationToken
+                );
+                var stringValue = GetUTF8StringValueForDiagnostic(
+                    semanticModel,
+                    diagnostic,
+                    cancellationToken
+                );
 
                 // If we're replacing a byte array that is passed to a parameter array, not and an explicit array creation
                 // then node will be the ArgumentListSyntax that the implicit array creation is just a part of, so we have
@@ -68,7 +89,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
 
                 if (node is BaseArgumentListSyntax argumentList)
                 {
-                    editor.ReplaceNode(node, CreateArgumentListWithUTF8String(argumentList, diagnostic.Location, stringValue));
+                    editor.ReplaceNode(
+                        node,
+                        CreateArgumentListWithUTF8String(
+                            argumentList,
+                            diagnostic.Location,
+                            stringValue
+                        )
+                    );
                 }
                 else
                 {
@@ -77,7 +105,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
             }
         }
 
-        private static string GetUTF8StringValueForDiagnostic(SemanticModel semanticModel, Diagnostic diagnostic, CancellationToken cancellationToken)
+        private static string GetUTF8StringValueForDiagnostic(
+            SemanticModel semanticModel,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
             // For computing the UTF8 string we need the original location of the array creation
             // operation, which is stored in additional locations.
@@ -86,29 +118,47 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
 
             var operation = semanticModel.GetRequiredOperation(node, cancellationToken);
 
-            var operationLocationString = diagnostic.Properties[nameof(UseUTF8StringLiteralDiagnosticAnalyzer.ArrayCreationOperationLocation)];
-            if (!Enum.TryParse(operationLocationString, out UseUTF8StringLiteralDiagnosticAnalyzer.ArrayCreationOperationLocation operationLocation))
+            var operationLocationString = diagnostic.Properties[
+                nameof(UseUTF8StringLiteralDiagnosticAnalyzer.ArrayCreationOperationLocation)
+            ];
+            if (
+                !Enum.TryParse(
+                    operationLocationString,
+                    out UseUTF8StringLiteralDiagnosticAnalyzer.ArrayCreationOperationLocation operationLocation
+                )
+            )
                 throw ExceptionUtilities.Unreachable;
 
             IArrayCreationOperation arrayOp;
 
             // Because we get the location from an IOperation.Syntax, sometimes we have to look a
             // little harder to get back from syntax to the operation that triggered the diagnostic
-            if (operationLocation == UseUTF8StringLiteralDiagnosticAnalyzer.ArrayCreationOperationLocation.Ancestors)
+            if (
+                operationLocation
+                == UseUTF8StringLiteralDiagnosticAnalyzer.ArrayCreationOperationLocation.Ancestors
+            )
             {
                 // For collection initializers where the Add method takes a param array, and the array creation
                 // will be a parent of the operation
                 arrayOp = FindArrayCreationOperationAncestor(operation);
             }
-            else if (operationLocation == UseUTF8StringLiteralDiagnosticAnalyzer.ArrayCreationOperationLocation.Descendants)
+            else if (
+                operationLocation
+                == UseUTF8StringLiteralDiagnosticAnalyzer.ArrayCreationOperationLocation.Descendants
+            )
             {
                 // Otherwise, we must have an implicit array creation for a parameter array, so the location
                 // will be the invocation, or similar, that has the argument, and we need to descend child
                 // nodes to find the one we are interested in. To make sure we're finding the right one,
                 // we can use the diagnostic location for that, since the analyzer raises it on the first element.
-                arrayOp = operation.DescendantsAndSelf()
+                arrayOp = operation
+                    .DescendantsAndSelf()
                     .OfType<IArrayCreationOperation>()
-                    .Where(a => a.Initializer?.ElementValues.FirstOrDefault()?.Syntax.SpanStart == diagnostic.Location.SourceSpan.Start)
+                    .Where(
+                        a =>
+                            a.Initializer?.ElementValues.FirstOrDefault()?.Syntax.SpanStart
+                            == diagnostic.Location.SourceSpan.Start
+                    )
                     .First();
             }
             else
@@ -121,7 +171,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
             // Get our list of bytes from the array elements
             using var _ = PooledStringBuilder.GetInstance(out var builder);
             builder.Capacity = arrayOp.Initializer.ElementValues.Length;
-            if (!UseUTF8StringLiteralDiagnosticAnalyzer.TryConvertToUTF8String(builder, arrayOp.Initializer.ElementValues))
+            if (
+                !UseUTF8StringLiteralDiagnosticAnalyzer.TryConvertToUTF8String(
+                    builder,
+                    arrayOp.Initializer.ElementValues
+                )
+            )
             {
                 // We shouldn't get here, because the code fix shouldn't ask for a string value
                 // if the analyzer couldn't convert it
@@ -144,7 +199,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
             }
         }
 
-        private static SyntaxNode CreateArgumentListWithUTF8String(BaseArgumentListSyntax argumentList, Location location, string stringValue)
+        private static SyntaxNode CreateArgumentListWithUTF8String(
+            BaseArgumentListSyntax argumentList,
+            Location location,
+            string stringValue
+        )
         {
             // To construct our new argument list we add any existing tokens before the location
             // and then once we hit the location, we add our string literal
@@ -164,7 +223,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
                 {
                     // We don't need to worry about leading trivia here, because anything before the current
                     // argument will have been trailing trivia on the previous comma.
-                    var stringLiteral = CreateUTF8String(SyntaxTriviaList.Empty, stringValue, argumentList.Arguments.Last().GetTrailingTrivia());
+                    var stringLiteral = CreateUTF8String(
+                        SyntaxTriviaList.Empty,
+                        stringValue,
+                        argumentList.Arguments.Last().GetTrailingTrivia()
+                    );
                     arguments.Add(SyntaxFactory.Argument(stringLiteral));
                     break;
                 }
@@ -172,22 +235,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
                 arguments.Add(argument);
             }
 
-            return argumentList.WithArguments(SyntaxFactory.SeparatedList<ArgumentSyntax>(arguments));
+            return argumentList.WithArguments(
+                SyntaxFactory.SeparatedList<ArgumentSyntax>(arguments)
+            );
         }
 
-        private static LiteralExpressionSyntax CreateUTF8String(SyntaxNode nodeToTakeTriviaFrom, string stringValue)
+        private static LiteralExpressionSyntax CreateUTF8String(
+            SyntaxNode nodeToTakeTriviaFrom,
+            string stringValue
+        )
         {
-            return CreateUTF8String(nodeToTakeTriviaFrom.GetLeadingTrivia(), stringValue, nodeToTakeTriviaFrom.GetTrailingTrivia());
+            return CreateUTF8String(
+                nodeToTakeTriviaFrom.GetLeadingTrivia(),
+                stringValue,
+                nodeToTakeTriviaFrom.GetTrailingTrivia()
+            );
         }
 
-        private static LiteralExpressionSyntax CreateUTF8String(SyntaxTriviaList leadingTrivia, string stringValue, SyntaxTriviaList trailingTrivia)
+        private static LiteralExpressionSyntax CreateUTF8String(
+            SyntaxTriviaList leadingTrivia,
+            string stringValue,
+            SyntaxTriviaList trailingTrivia
+        )
         {
             var literal = SyntaxFactory.Token(
-                    leading: leadingTrivia,
-                    kind: SyntaxKind.UTF8StringLiteralToken,
-                    text: QuoteCharacter + stringValue + QuoteCharacter + Suffix,
-                    valueText: "",
-                    trailing: trailingTrivia);
+                leading: leadingTrivia,
+                kind: SyntaxKind.UTF8StringLiteralToken,
+                text: QuoteCharacter + stringValue + QuoteCharacter + Suffix,
+                valueText: "",
+                trailing: trailingTrivia
+            );
 
             return SyntaxFactory.LiteralExpression(SyntaxKind.UTF8StringLiteralExpression, literal);
         }

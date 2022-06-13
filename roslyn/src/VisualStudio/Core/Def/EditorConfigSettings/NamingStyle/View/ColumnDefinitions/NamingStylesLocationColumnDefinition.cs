@@ -22,9 +22,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NamingStylesLocationColumnDefinition()
-        {
-        }
+        public NamingStylesLocationColumnDefinition() { }
 
         public override string Name => Location;
         public override string DisplayName => ServicesVSResources.Location;
@@ -36,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
         public override bool TryCreateColumnContent(
             ITableEntryHandle entry,
             bool singleColumnView,
-            out FrameworkElement? content)
+            out FrameworkElement? content
+        )
         {
             if (!entry.TryGetValue(Location, out NamingStyleSetting setting))
             {

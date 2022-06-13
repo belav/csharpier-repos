@@ -80,7 +80,10 @@ public static class ViewComponentConventions
     {
         if (componentType.Name.EndsWith(ViewComponentSuffix, StringComparison.OrdinalIgnoreCase))
         {
-            return componentType.Name.Substring(0, componentType.Name.Length - ViewComponentSuffix.Length);
+            return componentType.Name.Substring(
+                0,
+                componentType.Name.Length - ViewComponentSuffix.Length
+            );
         }
         else
         {
@@ -102,17 +105,18 @@ public static class ViewComponentConventions
             throw new ArgumentNullException(nameof(typeInfo));
         }
 
-        if (!typeInfo.IsClass ||
-            !typeInfo.IsPublic ||
-            typeInfo.IsAbstract ||
-            typeInfo.ContainsGenericParameters ||
-            typeInfo.IsDefined(typeof(NonViewComponentAttribute)))
+        if (
+            !typeInfo.IsClass
+            || !typeInfo.IsPublic
+            || typeInfo.IsAbstract
+            || typeInfo.ContainsGenericParameters
+            || typeInfo.IsDefined(typeof(NonViewComponentAttribute))
+        )
         {
             return false;
         }
 
-        return
-            typeInfo.Name.EndsWith(ViewComponentSuffix, StringComparison.OrdinalIgnoreCase) ||
-            typeInfo.IsDefined(typeof(ViewComponentAttribute));
+        return typeInfo.Name.EndsWith(ViewComponentSuffix, StringComparison.OrdinalIgnoreCase)
+            || typeInfo.IsDefined(typeof(ViewComponentAttribute));
     }
 }

@@ -14,12 +14,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly ImmutableArray<ParameterSymbol> _parameters;
 
-        public SynthesizedDelegateConstructor(NamedTypeSymbol containingType, TypeSymbol objectType, TypeSymbol intPtrType)
-            : base(containingType)
+        public SynthesizedDelegateConstructor(
+            NamedTypeSymbol containingType,
+            TypeSymbol objectType,
+            TypeSymbol intPtrType
+        ) : base(containingType)
         {
             _parameters = ImmutableArray.Create<ParameterSymbol>(
-               SynthesizedParameterSymbol.Create(this, TypeWithAnnotations.Create(objectType), 0, RefKind.None, "object"),
-               SynthesizedParameterSymbol.Create(this, TypeWithAnnotations.Create(intPtrType), 1, RefKind.None, "method"));
+                SynthesizedParameterSymbol.Create(
+                    this,
+                    TypeWithAnnotations.Create(objectType),
+                    0,
+                    RefKind.None,
+                    "object"
+                ),
+                SynthesizedParameterSymbol.Create(
+                    this,
+                    TypeWithAnnotations.Create(intPtrType),
+                    1,
+                    RefKind.None,
+                    "method"
+                )
+            );
         }
 
         public override ImmutableArray<ParameterSymbol> Parameters
@@ -32,14 +48,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly NamedTypeSymbol _containingType;
 
-        internal SynthesizedDelegateInvokeMethod(NamedTypeSymbol containingType, ArrayBuilder<TypeWithAnnotations> parameterTypes, ArrayBuilder<RefKind> parameterRefKinds, TypeWithAnnotations returnType, RefKind refKind)
+        internal SynthesizedDelegateInvokeMethod(
+            NamedTypeSymbol containingType,
+            ArrayBuilder<TypeWithAnnotations> parameterTypes,
+            ArrayBuilder<RefKind> parameterRefKinds,
+            TypeWithAnnotations returnType,
+            RefKind refKind
+        )
         {
             _containingType = containingType;
 
             var parameters = ArrayBuilder<ParameterSymbol>.GetInstance(parameterTypes.Count);
             for (int i = 0; i < parameterTypes.Count; i++)
             {
-                parameters.Add(SynthesizedParameterSymbol.Create(this, parameterTypes[i], i, parameterRefKinds[i]));
+                parameters.Add(
+                    SynthesizedParameterSymbol.Create(
+                        this,
+                        parameterTypes[i],
+                        i,
+                        parameterRefKinds[i]
+                    )
+                );
             }
             Parameters = parameters.ToImmutableAndFree();
             ReturnTypeWithAnnotations = returnType;
@@ -63,10 +92,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsMetadataFinal
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override MethodKind MethodKind
@@ -143,9 +169,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override TypeWithAnnotations ReturnTypeWithAnnotations { get; }
 
-        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
-        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
         public override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotations
         {
@@ -203,7 +231,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                // Invoke method of a delegate used in a dynamic call-site must be public 
+                // Invoke method of a delegate used in a dynamic call-site must be public
                 // since the DLR looks only for public Invoke methods:
                 return Accessibility.Public;
             }
@@ -239,6 +267,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return false; }
         }
 
-        protected sealed override bool HasSetsRequiredMembersImpl => throw ExceptionUtilities.Unreachable;
+        protected sealed override bool HasSetsRequiredMembersImpl =>
+            throw ExceptionUtilities.Unreachable;
     }
 }

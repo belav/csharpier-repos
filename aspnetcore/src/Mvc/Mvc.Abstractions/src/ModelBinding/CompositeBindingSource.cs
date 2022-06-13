@@ -22,7 +22,8 @@ public class CompositeBindingSource : BindingSource
     /// <returns>A <see cref="CompositeBindingSource"/>.</returns>
     public static CompositeBindingSource Create(
         IEnumerable<BindingSource> bindingSources,
-        string displayName)
+        string displayName
+    )
     {
         if (bindingSources == null)
         {
@@ -35,7 +36,8 @@ public class CompositeBindingSource : BindingSource
             {
                 var message = Resources.FormatBindingSource_CannotBeGreedy(
                     bindingSource.DisplayName,
-                    nameof(CompositeBindingSource));
+                    nameof(CompositeBindingSource)
+                );
                 throw new ArgumentException(message, nameof(bindingSources));
             }
 
@@ -43,7 +45,8 @@ public class CompositeBindingSource : BindingSource
             {
                 var message = Resources.FormatBindingSource_MustBeFromRequest(
                     bindingSource.DisplayName,
-                    nameof(CompositeBindingSource));
+                    nameof(CompositeBindingSource)
+                );
                 throw new ArgumentException(message, nameof(bindingSources));
             }
 
@@ -51,20 +54,24 @@ public class CompositeBindingSource : BindingSource
             {
                 var message = Resources.FormatBindingSource_CannotBeComposite(
                     bindingSource.DisplayName,
-                    nameof(CompositeBindingSource));
+                    nameof(CompositeBindingSource)
+                );
                 throw new ArgumentException(message, nameof(bindingSources));
             }
         }
 
-        var id = string.Join("&", bindingSources.Select(s => s.Id).OrderBy(s => s, StringComparer.Ordinal));
+        var id = string.Join(
+            "&",
+            bindingSources.Select(s => s.Id).OrderBy(s => s, StringComparer.Ordinal)
+        );
         return new CompositeBindingSource(id, displayName, bindingSources);
     }
 
     private CompositeBindingSource(
         string id,
         string displayName,
-        IEnumerable<BindingSource> bindingSources)
-        : base(id, displayName, isGreedy: false, isFromRequest: true)
+        IEnumerable<BindingSource> bindingSources
+    ) : base(id, displayName, isGreedy: false, isFromRequest: true)
     {
         if (id == null)
         {
@@ -96,7 +103,8 @@ public class CompositeBindingSource : BindingSource
         {
             var message = Resources.FormatBindingSource_CannotBeComposite(
                 bindingSource.DisplayName,
-                nameof(CanAcceptDataFrom));
+                nameof(CanAcceptDataFrom)
+            );
             throw new ArgumentException(message, nameof(bindingSource));
         }
 

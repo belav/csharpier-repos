@@ -14,14 +14,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
 {
     public class ReturnStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(ReturnStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(ReturnStatementHighlighter);
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInLambda()
         {
             await TestAsync(
-@"static double CalculateArea(double radius)
+                @"static double CalculateArea(double radius)
 {
     Func<double, double> f = r => {
         if (Double.IsNan(r))
@@ -34,14 +33,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         }
     };
     return calcArea(radius);
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInLambda_NotOnReturnValue()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     static double CalculateArea(double radius)
     {
@@ -57,14 +57,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         };
         return calcArea(radius);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInLambda_OnSemicolon()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     static double CalculateArea(double radius)
     {
@@ -80,14 +81,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         };
         return calcArea(radius);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInLambda_SecondOccurence()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     static double CalculateArea(double radius)
     {
@@ -103,14 +105,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         };
         return calcArea(radius);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInLambda_SecondOccurence_NotOnReturnValue()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     static double CalculateArea(double radius)
     {
@@ -126,14 +129,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         };
         return calcArea(radius);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInLambda_SecondOccurence_OnSemicolon()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     static double CalculateArea(double radius)
     {
@@ -149,14 +153,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         };
         return calcArea(radius);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInMethodWithLambda()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     static double CalculateArea(double radius)
     {
@@ -172,14 +177,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         };
         {|Cursor:[|return|]|} calcArea(radius);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInMethodWithLambda_NotOnReturnValue()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     static double CalculateArea(double radius)
     {
@@ -195,14 +201,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         };
         return {|Cursor:calcArea(radius)|};
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInMethodWithLambda_OnSemicolon()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     static double CalculateArea(double radius)
     {
@@ -218,70 +225,75 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
         };
         [|return|] calcArea(radius);{|Cursor:|}
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInConstructor()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     C()
     {
         {|Cursor:[|return|]|};
         [|return|];
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInDestructor()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     ~C()
     {
         {|Cursor:[|return|]|};
         [|return|];
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInOperator()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     public static string operator +(C a)
     {
         {|Cursor:[|return|]|} null;
         [|return|] null;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInConversionOperator()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     public static explicit operator string(C a)
     {
         {|Cursor:[|return|]|} null;
         [|return|] null;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInGetter()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     int P
     {
@@ -296,14 +308,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             return;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInSetter()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     int P
     {
@@ -318,14 +331,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             [|return|];
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInInit()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     int P
     {
@@ -340,14 +354,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             [|return|];
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInAdder()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     event EventHandler E
     {
@@ -362,14 +377,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             return;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInRemover()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     event EventHandler E
     {
@@ -384,14 +400,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             [|return|];
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInLocalFunction()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -403,14 +420,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
 
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInSimpleLambda()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -422,14 +440,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
 
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInParenthesizedLambda()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -441,14 +460,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
 
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInAnonymousMethod()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -460,15 +480,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
 
         return;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestInTopLevelStatements()
         {
             await TestAsync(
-@"if (args.Length > 0) [|return|] 0;
-{|Cursor:[|return|]|} 1;");
+                @"if (args.Length > 0) [|return|] 0;
+{|Cursor:[|return|]|} 1;"
+            );
         }
     }
 }

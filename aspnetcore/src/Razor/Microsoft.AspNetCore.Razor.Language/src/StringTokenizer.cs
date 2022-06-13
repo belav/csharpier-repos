@@ -56,9 +56,7 @@ internal readonly struct StringTokenizer
 
         public StringSegment Current { get; private set; }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public bool MoveNext()
         {

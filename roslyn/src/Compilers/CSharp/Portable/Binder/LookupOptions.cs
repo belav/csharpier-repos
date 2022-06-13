@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// Options that can be used to modify the symbol lookup mechanism. 
+    /// Options that can be used to modify the symbol lookup mechanism.
     /// </summary>
     /// <remarks>
     /// Multiple options can be combined together.  LookupOptions.AreValid checks for valid combinations.
@@ -114,7 +114,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <remarks>
         /// Some checks made here:
-        /// 
+        ///
         /// - Default is valid.
         /// - If LabelsOnly is set, it must be the only option.
         /// - If one of MustBeInstance or MustNotBeInstance are set, the other one must not be set.
@@ -136,23 +136,39 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // These are exclusive; both must not be present.
-            LookupOptions mustBeAndNotBeInstance = (LookupOptions.MustBeInstance | LookupOptions.MustNotBeInstance);
+            LookupOptions mustBeAndNotBeInstance = (
+                LookupOptions.MustBeInstance | LookupOptions.MustNotBeInstance
+            );
             if ((options & mustBeAndNotBeInstance) == mustBeAndNotBeInstance)
             {
                 return false;
             }
 
             // If MustNotBeNamespace or MustNotBeMethodTypeParameter is set, neither NamespaceAliasesOnly nor NamespacesOrTypesOnly must be set.
-            if ((options & (LookupOptions.MustNotBeNamespace | LookupOptions.MustNotBeMethodTypeParameter)) != 0 &&
-                (options & (LookupOptions.NamespaceAliasesOnly | LookupOptions.NamespacesOrTypesOnly)) != 0)
+            if (
+                (
+                    options
+                    & (
+                        LookupOptions.MustNotBeNamespace
+                        | LookupOptions.MustNotBeMethodTypeParameter
+                    )
+                ) != 0
+                && (
+                    options
+                    & (LookupOptions.NamespaceAliasesOnly | LookupOptions.NamespacesOrTypesOnly)
+                ) != 0
+            )
             {
                 return false;
             }
 
-            LookupOptions onlyOptions = options &
-                (LookupOptions.NamespaceAliasesOnly
-                 | LookupOptions.NamespacesOrTypesOnly
-                 | LookupOptions.AllMethodsOnArityZero);
+            LookupOptions onlyOptions =
+                options
+                & (
+                    LookupOptions.NamespaceAliasesOnly
+                    | LookupOptions.NamespacesOrTypesOnly
+                    | LookupOptions.AllMethodsOnArityZero
+                );
 
             return OnlyOneBitSet(onlyOptions);
         }
@@ -172,22 +188,52 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static bool CanConsiderMembers(this LookupOptions options)
         {
-            return (options & (LookupOptions.NamespaceAliasesOnly | LookupOptions.NamespacesOrTypesOnly | LookupOptions.LabelsOnly)) == 0;
+            return (
+                    options
+                    & (
+                        LookupOptions.NamespaceAliasesOnly
+                        | LookupOptions.NamespacesOrTypesOnly
+                        | LookupOptions.LabelsOnly
+                    )
+                ) == 0;
         }
 
         internal static bool CanConsiderLocals(this LookupOptions options)
         {
-            return (options & (LookupOptions.NamespaceAliasesOnly | LookupOptions.NamespacesOrTypesOnly | LookupOptions.LabelsOnly)) == 0;
+            return (
+                    options
+                    & (
+                        LookupOptions.NamespaceAliasesOnly
+                        | LookupOptions.NamespacesOrTypesOnly
+                        | LookupOptions.LabelsOnly
+                    )
+                ) == 0;
         }
 
         internal static bool CanConsiderTypes(this LookupOptions options)
         {
-            return (options & (LookupOptions.NamespaceAliasesOnly | LookupOptions.MustBeInvocableIfMember | LookupOptions.MustBeInstance | LookupOptions.LabelsOnly)) == 0;
+            return (
+                    options
+                    & (
+                        LookupOptions.NamespaceAliasesOnly
+                        | LookupOptions.MustBeInvocableIfMember
+                        | LookupOptions.MustBeInstance
+                        | LookupOptions.LabelsOnly
+                    )
+                ) == 0;
         }
 
         internal static bool CanConsiderNamespaces(this LookupOptions options)
         {
-            return (options & (LookupOptions.MustNotBeNamespace | LookupOptions.MustBeInvocableIfMember | LookupOptions.MustBeInstance | LookupOptions.LabelsOnly)) == 0;
+            return (
+                    options
+                    & (
+                        LookupOptions.MustNotBeNamespace
+                        | LookupOptions.MustBeInvocableIfMember
+                        | LookupOptions.MustBeInstance
+                        | LookupOptions.LabelsOnly
+                    )
+                ) == 0;
         }
 
         internal static bool IsAttributeTypeLookup(this LookupOptions options)
@@ -197,7 +243,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static bool IsVerbatimNameAttributeTypeLookup(this LookupOptions options)
         {
-            return (options & LookupOptions.VerbatimNameAttributeTypeOnly) == LookupOptions.VerbatimNameAttributeTypeOnly;
+            return (options & LookupOptions.VerbatimNameAttributeTypeOnly)
+                == LookupOptions.VerbatimNameAttributeTypeOnly;
         }
     }
 }

@@ -15,7 +15,8 @@ namespace HostActivation.Tests
 {
     public class StandaloneAppActivation : IClassFixture<StandaloneAppActivation.SharedTestState>
     {
-        private readonly string AppHostExeName = RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform("apphost");
+        private readonly string AppHostExeName =
+            RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform("apphost");
 
         private SharedTestState sharedTestState;
 
@@ -27,69 +28,81 @@ namespace HostActivation.Tests
         [Fact]
         public void Running_Build_Output_Standalone_EXE_with_DepsJson_and_RuntimeConfig_Local_Succeeds()
         {
-            var fixture = sharedTestState.StandaloneAppFixture_Built
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Built.Copy();
 
             var appExe = fixture.TestProject.AppExe;
 
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                .And.HaveStdOutContaining(
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
         }
 
         [Fact]
         public void Running_Publish_Output_Standalone_EXE_with_DepsJson_and_RuntimeConfig_Local_Succeeds()
         {
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             var appExe = fixture.TestProject.AppExe;
 
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                .And.HaveStdOutContaining(
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
         }
 
         [Fact]
         public void Running_Publish_Output_Standalone_EXE_with_no_DepsJson_and_no_RuntimeConfig_Local_Succeeds()
         {
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             File.Delete(fixture.TestProject.RuntimeConfigJson);
             File.Delete(fixture.TestProject.DepsJson);
 
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 // Note that this is an exact match - we don't expect any output from the host itself
-                .And.HaveStdOut($"Hello World!{Environment.NewLine}{Environment.NewLine}.NET {sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion}{Environment.NewLine}")
+                .And.HaveStdOut(
+                    $"Hello World!{Environment.NewLine}{Environment.NewLine}.NET {sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion}{Environment.NewLine}"
+                )
                 .And.NotHaveStdErr();
         }
 
         [Fact]
         public void Running_Publish_Output_Standalone_EXE_with_Unbound_AppHost_Fails()
         {
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             var appExe = fixture.TestProject.AppExe;
 
-            string builtAppHost = Path.Combine(sharedTestState.RepoDirectories.HostArtifacts, AppHostExeName);
+            string builtAppHost = Path.Combine(
+                sharedTestState.RepoDirectories.HostArtifacts,
+                AppHostExeName
+            );
             File.Copy(builtAppHost, appExe, true);
 
-            int exitCode = Command.Create(appExe)
+            int exitCode = Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute(expectedToFail: true)
@@ -102,23 +115,30 @@ namespace HostActivation.Tests
             else
             {
                 // Some Unix flavors filter exit code to ubyte.
-                (exitCode & 0xFF).Should().Be(0x95);
+                (exitCode & 0xFF)
+                    .Should()
+                    .Be(0x95);
             }
         }
 
         [Fact]
         public void Running_Publish_Output_Standalone_EXE_By_Renaming_dotnet_exe_Fails()
         {
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             var appExe = fixture.TestProject.AppExe;
 
-            string hostExeName = RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform("dotnet");
-            string builtHost = Path.Combine(sharedTestState.RepoDirectories.HostArtifacts, hostExeName);
+            string hostExeName = RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform(
+                "dotnet"
+            );
+            string builtHost = Path.Combine(
+                sharedTestState.RepoDirectories.HostArtifacts,
+                hostExeName
+            );
             File.Copy(builtHost, appExe, true);
 
-            int exitCode = Command.Create(appExe)
+            int exitCode = Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute(expectedToFail: true)
@@ -131,35 +151,41 @@ namespace HostActivation.Tests
             else
             {
                 // Some Unix flavors filter exit code to ubyte.
-                (exitCode & 0xFF).Should().Be(0x84);
+                (exitCode & 0xFF)
+                    .Should()
+                    .Be(0x84);
             }
         }
 
         [Fact]
         public void Running_Publish_Output_Standalone_EXE_By_Renaming_apphost_exe_Succeeds()
         {
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             var appExe = fixture.TestProject.AppExe;
-            var renamedAppExe = fixture.TestProject.AppExe + RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform("renamed");
+            var renamedAppExe =
+                fixture.TestProject.AppExe
+                + RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform("renamed");
 
             File.Copy(appExe, renamedAppExe, true);
 
-            Command.Create(renamedAppExe)
+            Command
+                .Create(renamedAppExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                .And.HaveStdOutContaining(
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
         }
 
         [Fact]
         public void Running_Publish_Output_Standalone_EXE_With_Relative_Embedded_Path_Succeeds()
         {
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             var appExe = fixture.TestProject.AppExe;
 
@@ -180,22 +206,29 @@ namespace HostActivation.Tests
             string appDll = fixture.TestProject.AppDll;
             string appDllName = Path.GetFileName(appDll);
             string relativeDllPath = Path.Combine(relativeNewPath, appDllName);
-            BinaryUtils.SearchAndReplace(appExe, Encoding.UTF8.GetBytes(appDllName), Encoding.UTF8.GetBytes(relativeDllPath));
+            BinaryUtils.SearchAndReplace(
+                appExe,
+                Encoding.UTF8.GetBytes(appDllName),
+                Encoding.UTF8.GetBytes(relativeDllPath)
+            );
 
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                .And.HaveStdOutContaining(
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
         }
 
         [Fact]
         public void Running_Publish_Output_Standalone_EXE_With_DOTNET_ROOT_Fails()
         {
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             var appDll = fixture.TestProject.AppDll;
@@ -219,40 +252,49 @@ namespace HostActivation.Tests
 
             // This verifies a self-contained apphost cannot use DOTNET_ROOT to reference a flat
             // self-contained layout since a flat layout of the shared framework is not supported.
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .EnableTracingAndCaptureOutputs()
                 .DotNetRoot(newOutDir)
                 .Execute(expectedToFail: true)
-                .Should().Fail()
-                .And.HaveUsedDotNetRootInstallLocation(Path.GetFullPath(newOutDir), fixture.CurrentRid)
-                .And.HaveStdErrContaining($"The required library {RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostfxr")} could not be found.");
+                .Should()
+                .Fail()
+                .And.HaveUsedDotNetRootInstallLocation(
+                    Path.GetFullPath(newOutDir),
+                    fixture.CurrentRid
+                )
+                .And.HaveStdErrContaining(
+                    $"The required library {RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostfxr")} could not be found."
+                );
         }
 
         [Fact]
         public void Running_Publish_Output_Standalone_EXE_with_Bound_AppHost_Succeeds()
         {
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             string appExe = fixture.TestProject.AppExe;
 
             UseBuiltAppHost(appExe);
             AppHostExtensions.BindAppHost(appExe);
 
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
-                .And.HaveStdOutContaining(sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion);
+                .And.HaveStdOutContaining(
+                    sharedTestState.RepoDirectories.MicrosoftNETCoreAppVersion
+                );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // GUI app host is only supported on Windows.
         public void Running_AppHost_with_GUI_No_Console()
         {
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             string appExe = fixture.TestProject.AppExe;
 
@@ -260,20 +302,23 @@ namespace HostActivation.Tests
             UseBuiltAppHost(appExe);
             AppHostExtensions.SetWindowsGraphicalUserInterfaceBit(appExe);
 
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Fail()
-                .And.HaveStdErrContaining("This executable is not bound to a managed DLL to execute.");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    "This executable is not bound to a managed DLL to execute."
+                );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // GUI app host is only supported on Windows.
         public void Running_AppHost_with_GUI_Traces()
         {
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             string appExe = fixture.TestProject.AppExe;
 
@@ -282,22 +327,33 @@ namespace HostActivation.Tests
             AppHostExtensions.SetWindowsGraphicalUserInterfaceBit(appExe);
 
             string traceFilePath;
-            Command.Create(appExe)
+            Command
+                .Create(appExe)
                 .EnableHostTracingToFile(out traceFilePath)
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.FileExists(traceFilePath)
-                .And.FileContains(traceFilePath, "This executable is not bound to a managed DLL to execute.")
-                .And.HaveStdErrContaining("This executable is not bound to a managed DLL to execute.");
+                .And.FileContains(
+                    traceFilePath,
+                    "This executable is not bound to a managed DLL to execute."
+                )
+                .And.HaveStdErrContaining(
+                    "This executable is not bound to a managed DLL to execute."
+                );
 
             FileUtils.DeleteFileIfPossible(traceFilePath);
         }
 
         private void UseBuiltAppHost(string appExe)
         {
-            File.Copy(Path.Combine(sharedTestState.RepoDirectories.HostArtifacts, AppHostExeName), appExe, true);
+            File.Copy(
+                Path.Combine(sharedTestState.RepoDirectories.HostArtifacts, AppHostExeName),
+                appExe,
+                true
+            );
         }
 
         public class SharedTestState : IDisposable
@@ -337,7 +393,9 @@ namespace HostActivation.Tests
              * graph in the build output.
              * https://github.com/dotnet/cli/issues/2343
              */
-            private static void ReplaceTestProjectOutputHostInTestProjectFixture(TestProjectFixture testProjectFixture)
+            private static void ReplaceTestProjectOutputHostInTestProjectFixture(
+                TestProjectFixture testProjectFixture
+            )
             {
                 var dotnet = testProjectFixture.BuiltDotnet;
 
@@ -346,11 +404,23 @@ namespace HostActivation.Tests
 
                 if (!File.Exists(testProjectHostPolicy))
                 {
-                    throw new Exception("host or hostpolicy does not exist in test project output. Is this a standalone app?");
+                    throw new Exception(
+                        "host or hostpolicy does not exist in test project output. Is this a standalone app?"
+                    );
                 }
 
-                var dotnetHostPolicy = Path.Combine(dotnet.GreatestVersionSharedFxPath, RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostpolicy"));
-                var dotnetHostFxr = Path.Combine(dotnet.GreatestVersionHostFxrPath, RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform("hostfxr"));
+                var dotnetHostPolicy = Path.Combine(
+                    dotnet.GreatestVersionSharedFxPath,
+                    RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform(
+                        "hostpolicy"
+                    )
+                );
+                var dotnetHostFxr = Path.Combine(
+                    dotnet.GreatestVersionHostFxrPath,
+                    RuntimeInformationExtensions.GetSharedLibraryFileNameForCurrentPlatform(
+                        "hostfxr"
+                    )
+                );
 
                 File.Copy(dotnetHostPolicy, testProjectHostPolicy, true);
 
@@ -362,4 +432,3 @@ namespace HostActivation.Tests
         }
     }
 }
-

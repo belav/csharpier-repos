@@ -12,12 +12,25 @@ namespace System.IO.Compression
 {
     public class ZLibStreamUnitTests : CompressionStreamUnitTestBase
     {
-        public override Stream CreateStream(Stream stream, CompressionMode mode) => new ZLibStream(stream, mode);
-        public override Stream CreateStream(Stream stream, CompressionMode mode, bool leaveOpen) => new ZLibStream(stream, mode, leaveOpen);
-        public override Stream CreateStream(Stream stream, CompressionLevel level) => new ZLibStream(stream, level);
-        public override Stream CreateStream(Stream stream, CompressionLevel level, bool leaveOpen) => new ZLibStream(stream, level, leaveOpen);
+        public override Stream CreateStream(Stream stream, CompressionMode mode) =>
+            new ZLibStream(stream, mode);
+
+        public override Stream CreateStream(Stream stream, CompressionMode mode, bool leaveOpen) =>
+            new ZLibStream(stream, mode, leaveOpen);
+
+        public override Stream CreateStream(Stream stream, CompressionLevel level) =>
+            new ZLibStream(stream, level);
+
+        public override Stream CreateStream(
+            Stream stream,
+            CompressionLevel level,
+            bool leaveOpen
+        ) => new ZLibStream(stream, level, leaveOpen);
+
         public override Stream BaseStream(Stream stream) => ((ZLibStream)stream).BaseStream;
-        protected override string CompressedTestFile(string uncompressedPath) => Path.Combine("ZLibTestData", Path.GetFileName(uncompressedPath) + ".z");
+
+        protected override string CompressedTestFile(string uncompressedPath) =>
+            Path.Combine("ZLibTestData", Path.GetFileName(uncompressedPath) + ".z");
 
         [Fact]
         public void StreamCorruption_IsDetected()
@@ -44,11 +57,20 @@ namespace System.IO.Compression
 
                 using (var decompressedStream = new MemoryStream(compressedData))
                 {
-                    using (Stream decompressor = CreateStream(decompressedStream, CompressionMode.Decompress))
+                    using (
+                        Stream decompressor = CreateStream(
+                            decompressedStream,
+                            CompressionMode.Decompress
+                        )
+                    )
                     {
                         Assert.Throws<InvalidDataException>(() =>
                         {
-                            while (ZipFileTestBase.ReadAllBytes(decompressor, buffer, 0, buffer.Length) != 0);
+                            while (
+                                ZipFileTestBase.ReadAllBytes(decompressor, buffer, 0, buffer.Length)
+                                != 0
+                            )
+                                ;
                         });
                     }
                 }

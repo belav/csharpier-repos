@@ -9,42 +9,136 @@ namespace System.Xml.Tests
 {
     public class MyXmlReader : XmlReader
     {
-        public MyXmlReader() { IsDisposed = false; }
+        public MyXmlReader()
+        {
+            IsDisposed = false;
+        }
+
         public bool IsDisposed { get; private set; }
-        protected override void Dispose(bool disposing) { IsDisposed = true; }
+
+        protected override void Dispose(bool disposing)
+        {
+            IsDisposed = true;
+        }
 
         // Implementation of the abstract class
-        public override int AttributeCount { get { return default(int); } }
-        public override string BaseURI { get { return default(string); } }
-        public override int Depth { get { return default(int); } }
-        public override bool EOF { get { return default(bool); } }
-        public override string GetAttribute(int i) { return default(string); }
-        public override string GetAttribute(string name, string namespaceURI) { return default(string); }
-        public override string GetAttribute(string name) { return default(string); }
-        public override bool IsEmptyElement { get { return default(bool); } }
-        public override string LocalName { get { return default(string); } }
-        public override string LookupNamespace(string prefix) { return default(string); }
-        public override bool MoveToAttribute(string name, string ns) { return default(bool); }
-        public override bool MoveToAttribute(string name) { return default(bool); }
-        public override bool MoveToElement() { return default(bool); }
-        public override bool MoveToFirstAttribute() { return default(bool); }
-        public override bool MoveToNextAttribute() { return default(bool); }
-        public override XmlNameTable NameTable { get { return default(XmlNameTable); } }
-        public override string NamespaceURI { get { return default(string); } }
-        public override XmlNodeType NodeType { get { return default(XmlNodeType); } }
-        public override string Prefix { get { return default(string); } }
-        public override bool Read() { return default(bool); }
-        public override bool ReadAttributeValue() { return default(bool); }
-        public override ReadState ReadState { get { return default(ReadState); } }
+        public override int AttributeCount
+        {
+            get { return default(int); }
+        }
+        public override string BaseURI
+        {
+            get { return default(string); }
+        }
+        public override int Depth
+        {
+            get { return default(int); }
+        }
+        public override bool EOF
+        {
+            get { return default(bool); }
+        }
+
+        public override string GetAttribute(int i)
+        {
+            return default(string);
+        }
+
+        public override string GetAttribute(string name, string namespaceURI)
+        {
+            return default(string);
+        }
+
+        public override string GetAttribute(string name)
+        {
+            return default(string);
+        }
+
+        public override bool IsEmptyElement
+        {
+            get { return default(bool); }
+        }
+        public override string LocalName
+        {
+            get { return default(string); }
+        }
+
+        public override string LookupNamespace(string prefix)
+        {
+            return default(string);
+        }
+
+        public override bool MoveToAttribute(string name, string ns)
+        {
+            return default(bool);
+        }
+
+        public override bool MoveToAttribute(string name)
+        {
+            return default(bool);
+        }
+
+        public override bool MoveToElement()
+        {
+            return default(bool);
+        }
+
+        public override bool MoveToFirstAttribute()
+        {
+            return default(bool);
+        }
+
+        public override bool MoveToNextAttribute()
+        {
+            return default(bool);
+        }
+
+        public override XmlNameTable NameTable
+        {
+            get { return default(XmlNameTable); }
+        }
+        public override string NamespaceURI
+        {
+            get { return default(string); }
+        }
+        public override XmlNodeType NodeType
+        {
+            get { return default(XmlNodeType); }
+        }
+        public override string Prefix
+        {
+            get { return default(string); }
+        }
+
+        public override bool Read()
+        {
+            return default(bool);
+        }
+
+        public override bool ReadAttributeValue()
+        {
+            return default(bool);
+        }
+
+        public override ReadState ReadState
+        {
+            get { return default(ReadState); }
+        }
+
         public override void ResolveEntity() { }
-        public override string Value { get { return default(string); } }
+
+        public override string Value
+        {
+            get { return default(string); }
+        }
     }
 
     public static class XmlReaderDisposeTests
     {
         public static Stream CreateXmlStream()
         {
-            const string xml = @"<?xml version=""1.0""?>
+            const string xml =
+                @"<?xml version=""1.0""?>
 <test>
    <asd id=""testid0"">
       <a>test test</author>

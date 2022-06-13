@@ -16,7 +16,11 @@ namespace System.Net.NetworkInformation
             // Parse the number of active connections out of /proc/net/sockstat
             string sockstatFile = ReadAllText(filePath);
             int indexOfTcp = sockstatFile.IndexOf(protocolName, StringComparison.Ordinal);
-            int endOfTcpLine = sockstatFile.IndexOf(Environment.NewLine, indexOfTcp + 1, StringComparison.Ordinal);
+            int endOfTcpLine = sockstatFile.IndexOf(
+                Environment.NewLine,
+                indexOfTcp + 1,
+                StringComparison.Ordinal
+            );
             string tcpLineData = sockstatFile.Substring(indexOfTcp, endOfTcpLine - indexOfTcp);
             StringParser sockstatParser = new StringParser(tcpLineData, ' ');
             sockstatParser.MoveNextOrFail(); // Skip "<name>:"
@@ -24,7 +28,10 @@ namespace System.Net.NetworkInformation
             return sockstatParser.ParseNextInt32();
         }
 
-        internal static TcpConnectionInformation[] ParseActiveTcpConnectionsFromFiles(string? tcp4ConnectionsFile, string? tcp6ConnectionsFile)
+        internal static TcpConnectionInformation[] ParseActiveTcpConnectionsFromFiles(
+            string? tcp4ConnectionsFile,
+            string? tcp6ConnectionsFile
+        )
         {
             string[] v4connections;
             string[] v6connections;
@@ -32,7 +39,10 @@ namespace System.Net.NetworkInformation
             if (tcp4ConnectionsFile != null)
             {
                 string tcp4FileContents = ReadAllText(tcp4ConnectionsFile);
-                v4connections = tcp4FileContents.Split(s_newLineSeparator, StringSplitOptions.RemoveEmptyEntries);
+                v4connections = tcp4FileContents.Split(
+                    s_newLineSeparator,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
             }
             else
             {
@@ -42,7 +52,10 @@ namespace System.Net.NetworkInformation
             if (tcp6ConnectionsFile != null)
             {
                 string tcp6FileContents = ReadAllText(tcp6ConnectionsFile);
-                v6connections = tcp6FileContents.Split(s_newLineSeparator, StringSplitOptions.RemoveEmptyEntries);
+                v6connections = tcp6FileContents.Split(
+                    s_newLineSeparator,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
             }
             else
             {
@@ -104,7 +117,10 @@ namespace System.Net.NetworkInformation
             return connections;
         }
 
-        internal static IPEndPoint[] ParseActiveTcpListenersFromFiles(string? tcp4ConnectionsFile, string? tcp6ConnectionsFile)
+        internal static IPEndPoint[] ParseActiveTcpListenersFromFiles(
+            string? tcp4ConnectionsFile,
+            string? tcp6ConnectionsFile
+        )
         {
             string[] v4connections;
             string[] v6connections;
@@ -112,7 +128,10 @@ namespace System.Net.NetworkInformation
             if (tcp4ConnectionsFile != null)
             {
                 string tcp4FileContents = ReadAllText(tcp4ConnectionsFile);
-                v4connections = tcp4FileContents.Split(s_newLineSeparator, StringSplitOptions.RemoveEmptyEntries);
+                v4connections = tcp4FileContents.Split(
+                    s_newLineSeparator,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
             }
             else
             {
@@ -122,7 +141,10 @@ namespace System.Net.NetworkInformation
             if (tcp6ConnectionsFile != null)
             {
                 string tcp6FileContents = ReadAllText(tcp6ConnectionsFile);
-                v6connections = tcp6FileContents.Split(s_newLineSeparator, StringSplitOptions.RemoveEmptyEntries);
+                v6connections = tcp6FileContents.Split(
+                    s_newLineSeparator,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
             }
             else
             {
@@ -149,7 +171,9 @@ namespace System.Net.NetworkInformation
             // TCP Connections
             for (int i = 1; i < v4connections.Length; i++) // Skip first line header.
             {
-                TcpConnectionInformation ti = ParseTcpConnectionInformationFromLine(v4connections[i]);
+                TcpConnectionInformation ti = ParseTcpConnectionInformationFromLine(
+                    v4connections[i]
+                );
                 if (ti.State == TcpState.Listen)
                 {
                     endPoints[index] = ti.LocalEndPoint;
@@ -164,7 +188,9 @@ namespace System.Net.NetworkInformation
             // TCP6 Connections
             for (int i = 1; i < v6connections.Length; i++) // Skip first line header.
             {
-                TcpConnectionInformation ti = ParseTcpConnectionInformationFromLine(v6connections[i]);
+                TcpConnectionInformation ti = ParseTcpConnectionInformationFromLine(
+                    v6connections[i]
+                );
                 if (ti.State == TcpState.Listen)
                 {
                     endPoints[index] = ti.LocalEndPoint;
@@ -184,7 +210,10 @@ namespace System.Net.NetworkInformation
             return endPoints;
         }
 
-        public static IPEndPoint[] ParseActiveUdpListenersFromFiles(string? udp4File, string? udp6File)
+        public static IPEndPoint[] ParseActiveUdpListenersFromFiles(
+            string? udp4File,
+            string? udp6File
+        )
         {
             string[] v4connections;
             string[] v6connections;
@@ -192,7 +221,10 @@ namespace System.Net.NetworkInformation
             if (udp4File != null)
             {
                 string udp4FileContents = ReadAllText(udp4File);
-                v4connections = udp4FileContents.Split(s_newLineSeparator, StringSplitOptions.RemoveEmptyEntries);
+                v4connections = udp4FileContents.Split(
+                    s_newLineSeparator,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
             }
             else
             {
@@ -202,7 +234,10 @@ namespace System.Net.NetworkInformation
             if (udp6File != null)
             {
                 string udp6FileContents = ReadAllText(udp6File);
-                v6connections = udp6FileContents.Split(s_newLineSeparator, StringSplitOptions.RemoveEmptyEntries);
+                v6connections = udp6FileContents.Split(
+                    s_newLineSeparator,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
             }
             else
             {
@@ -257,7 +292,14 @@ namespace System.Net.NetworkInformation
 
             string socketStateHex = parser.MoveAndExtractNext();
             int nativeTcpState;
-            if (!int.TryParse(socketStateHex, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out nativeTcpState))
+            if (
+                !int.TryParse(
+                    socketStateHex,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out nativeTcpState
+                )
+            )
             {
                 throw ExceptionHelper.CreateForParseFailure();
             }
@@ -280,11 +322,23 @@ namespace System.Net.NetworkInformation
                 throw ExceptionHelper.CreateForParseFailure();
             }
 
-            IPAddress localIPAddress = ParseHexIPAddress(localAddressAndPort.AsSpan(0, indexOfColon));
+            IPAddress localIPAddress = ParseHexIPAddress(
+                localAddressAndPort.AsSpan(0, indexOfColon)
+            );
 
-            ReadOnlySpan<char> portSpan = localAddressAndPort.AsSpan(indexOfColon + 1, localAddressAndPort.Length - (indexOfColon + 1));
+            ReadOnlySpan<char> portSpan = localAddressAndPort.AsSpan(
+                indexOfColon + 1,
+                localAddressAndPort.Length - (indexOfColon + 1)
+            );
             int localPort;
-            if (!int.TryParse(portSpan, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out localPort))
+            if (
+                !int.TryParse(
+                    portSpan,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out localPort
+                )
+            )
             {
                 throw ExceptionHelper.CreateForParseFailure();
             }
@@ -302,9 +356,19 @@ namespace System.Net.NetworkInformation
 
             IPAddress ipAddress = ParseHexIPAddress(colonSeparatedAddress.AsSpan(0, indexOfColon));
 
-            ReadOnlySpan<char> portSpan = colonSeparatedAddress.AsSpan(indexOfColon + 1, colonSeparatedAddress.Length - (indexOfColon + 1));
+            ReadOnlySpan<char> portSpan = colonSeparatedAddress.AsSpan(
+                indexOfColon + 1,
+                colonSeparatedAddress.Length - (indexOfColon + 1)
+            );
             int port;
-            if (!int.TryParse(portSpan, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out port))
+            if (
+                !int.TryParse(
+                    portSpan,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out port
+                )
+            )
             {
                 throw ExceptionHelper.CreateForParseFailure();
             }
@@ -340,7 +404,14 @@ namespace System.Net.NetworkInformation
         {
             IPAddress ipAddress;
             long addressValue;
-            if (!long.TryParse(hexAddress, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out addressValue))
+            if (
+                !long.TryParse(
+                    hexAddress,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out addressValue
+                )
+            )
             {
                 throw ExceptionHelper.CreateForParseFailure();
             }
@@ -357,7 +428,10 @@ namespace System.Net.NetworkInformation
         //      It's represenation in /proc/net/tcp6: 00-00-80-FE  00-00-00-00  FF-5D-15-02  02-04-00-FE
         //                                             (dashes and spaces added above for readability)
         // Strings passed to this must be 32 characters in length.
-        private static IPAddress ParseIPv6HexString(ReadOnlySpan<char> hexAddress, bool isNetworkOrder = false)
+        private static IPAddress ParseIPv6HexString(
+            ReadOnlySpan<char> hexAddress,
+            bool isNetworkOrder = false
+        )
         {
             Debug.Assert(hexAddress.Length == 32);
             Span<byte> addressBytes = stackalloc byte[16];
@@ -365,8 +439,9 @@ namespace System.Net.NetworkInformation
             {
                 for (int i = 0; i < 16; i++)
                 {
-                    addressBytes[i] = (byte)(HexToByte(hexAddress[(i * 2)]) * 16
-                                           + HexToByte(hexAddress[(i * 2) + 1]));
+                    addressBytes[i] = (byte)(
+                        HexToByte(hexAddress[(i * 2)]) * 16 + HexToByte(hexAddress[(i * 2) + 1])
+                    );
                 }
             }
             else
@@ -377,8 +452,10 @@ namespace System.Net.NetworkInformation
                     {
                         int srcIndex = i * 4 + 3 - j;
                         int targetIndex = i * 4 + j;
-                        addressBytes[targetIndex] = (byte)(HexToByte(hexAddress[srcIndex * 2]) * 16
-                                                         + HexToByte(hexAddress[srcIndex * 2 + 1]));
+                        addressBytes[targetIndex] = (byte)(
+                            HexToByte(hexAddress[srcIndex * 2]) * 16
+                            + HexToByte(hexAddress[srcIndex * 2 + 1])
+                        );
                     }
                 }
             }

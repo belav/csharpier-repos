@@ -18,27 +18,47 @@ internal static class CSharpCodeGenerationOptionsStorage
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public Service()
-        {
-        }
+        public Service() { }
 
-        public CodeGenerationOptions GetOptions(IGlobalOptionService globalOptions)
-            => GetCSharpCodeGenerationOptions(globalOptions);
+        public CodeGenerationOptions GetOptions(IGlobalOptionService globalOptions) =>
+            GetCSharpCodeGenerationOptions(globalOptions);
     }
 
-    public static CSharpCodeGenerationOptions GetCSharpCodeGenerationOptions(this IGlobalOptionService globalOptions)
-        => new()
+    public static CSharpCodeGenerationOptions GetCSharpCodeGenerationOptions(
+        this IGlobalOptionService globalOptions
+    ) =>
+        new()
         {
             Common = globalOptions.GetCommonCodeGenerationOptions(LanguageNames.CSharp),
-            PreferExpressionBodiedMethods = globalOptions.GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedMethods),
-            PreferExpressionBodiedAccessors = globalOptions.GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedAccessors),
-            PreferExpressionBodiedProperties = globalOptions.GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedProperties),
-            PreferExpressionBodiedIndexers = globalOptions.GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedIndexers),
-            PreferExpressionBodiedConstructors = globalOptions.GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedConstructors),
-            PreferExpressionBodiedOperators = globalOptions.GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedOperators),
-            PreferExpressionBodiedLocalFunctions = globalOptions.GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions),
-            PreferExpressionBodiedLambdas = globalOptions.GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedLambdas),
-            PreferStaticLocalFunction = globalOptions.GetOption(CSharpCodeStyleOptions.PreferStaticLocalFunction),
-            NamespaceDeclarations = globalOptions.GetOption(CSharpCodeStyleOptions.NamespaceDeclarations)
+            PreferExpressionBodiedMethods = globalOptions.GetOption(
+                CSharpCodeStyleOptions.PreferExpressionBodiedMethods
+            ),
+            PreferExpressionBodiedAccessors = globalOptions.GetOption(
+                CSharpCodeStyleOptions.PreferExpressionBodiedAccessors
+            ),
+            PreferExpressionBodiedProperties = globalOptions.GetOption(
+                CSharpCodeStyleOptions.PreferExpressionBodiedProperties
+            ),
+            PreferExpressionBodiedIndexers = globalOptions.GetOption(
+                CSharpCodeStyleOptions.PreferExpressionBodiedIndexers
+            ),
+            PreferExpressionBodiedConstructors = globalOptions.GetOption(
+                CSharpCodeStyleOptions.PreferExpressionBodiedConstructors
+            ),
+            PreferExpressionBodiedOperators = globalOptions.GetOption(
+                CSharpCodeStyleOptions.PreferExpressionBodiedOperators
+            ),
+            PreferExpressionBodiedLocalFunctions = globalOptions.GetOption(
+                CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions
+            ),
+            PreferExpressionBodiedLambdas = globalOptions.GetOption(
+                CSharpCodeStyleOptions.PreferExpressionBodiedLambdas
+            ),
+            PreferStaticLocalFunction = globalOptions.GetOption(
+                CSharpCodeStyleOptions.PreferStaticLocalFunction
+            ),
+            NamespaceDeclarations = globalOptions.GetOption(
+                CSharpCodeStyleOptions.NamespaceDeclarations
+            )
         };
 }

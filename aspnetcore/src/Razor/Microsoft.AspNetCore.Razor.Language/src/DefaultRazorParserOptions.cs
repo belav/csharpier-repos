@@ -8,7 +8,13 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class DefaultRazorParserOptions : RazorParserOptions
 {
-    public DefaultRazorParserOptions(DirectiveDescriptor[] directives, bool designTime, bool parseLeadingDirectives, RazorLanguageVersion version, string fileKind)
+    public DefaultRazorParserOptions(
+        DirectiveDescriptor[] directives,
+        bool designTime,
+        bool parseLeadingDirectives,
+        RazorLanguageVersion version,
+        string fileKind
+    )
     {
         if (directives == null)
         {

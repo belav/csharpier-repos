@@ -69,7 +69,8 @@ namespace Internal.Reflection.Core.NonPortable
                 return GetRuntimeTypeBypassCache(eeType);
             }
 
-            public static readonly RuntimeTypeHandleToTypeCache Table = new RuntimeTypeHandleToTypeCache();
+            public static readonly RuntimeTypeHandleToTypeCache Table =
+                new RuntimeTypeHandleToTypeCache();
         }
 
         // This bypasses the CoreLib's unifier, but there's another unifier deeper within the reflection stack:
@@ -84,7 +85,10 @@ namespace Internal.Reflection.Core.NonPortable
             {
                 if (eeType.IsGenericTypeDefinition)
                 {
-                    return callbacks.GetNamedTypeForHandle(runtimeTypeHandle, isGenericTypeDefinition: true);
+                    return callbacks.GetNamedTypeForHandle(
+                        runtimeTypeHandle,
+                        isGenericTypeDefinition: true
+                    );
                 }
                 else if (eeType.IsGeneric)
                 {
@@ -92,7 +96,10 @@ namespace Internal.Reflection.Core.NonPortable
                 }
                 else
                 {
-                    return callbacks.GetNamedTypeForHandle(runtimeTypeHandle, isGenericTypeDefinition: false);
+                    return callbacks.GetNamedTypeForHandle(
+                        runtimeTypeHandle,
+                        isGenericTypeDefinition: false
+                    );
                 }
             }
             else if (eeType.IsArray)

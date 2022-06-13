@@ -9,11 +9,13 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 {
     internal readonly record struct SymbolDescriptionOptions(
         QuickInfoOptions QuickInfoOptions,
-        ClassificationOptions ClassificationOptions)
+        ClassificationOptions ClassificationOptions
+    )
     {
-        public static readonly SymbolDescriptionOptions Default
-          = new(
-              QuickInfoOptions: QuickInfoOptions.Default,
-              ClassificationOptions: ClassificationOptions.Default);
+        public static readonly SymbolDescriptionOptions Default =
+            new(
+                QuickInfoOptions: QuickInfoOptions.Default,
+                ClassificationOptions: ClassificationOptions.Default
+            );
     }
 }

@@ -26,10 +26,14 @@ namespace SdtEventSources
 
         [Event(1)]
         public void Error(int errorCode, string msg)
-        { WriteEvent(1, errorCode, msg); }
+        {
+            WriteEvent(1, errorCode, msg);
+        }
 
         [Event(2)]
         public void Warning(string msg)
-        { WriteEvent(2, msg); }
+        {
+            WriteEvent(2, msg);
+        }
     }
 }

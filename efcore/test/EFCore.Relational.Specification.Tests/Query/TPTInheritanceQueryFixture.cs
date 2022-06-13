@@ -7,14 +7,11 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class TPTInheritanceQueryFixture : InheritanceQueryFixtureBase
 {
-    protected override string StoreName
-        => "TPTInheritanceTest";
+    protected override string StoreName => "TPTInheritanceTest";
 
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-    protected override bool HasDiscriminator
-        => false;
+    protected override bool HasDiscriminator => false;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
@@ -31,7 +28,12 @@ public abstract class TPTInheritanceQueryFixture : InheritanceQueryFixtureBase
         modelBuilder.Entity<Eagle>().ToTable("Eagle");
         modelBuilder.Entity<Kiwi>().ToTable("Kiwi");
         modelBuilder.Entity<Animal>().Property(e => e.Species).HasMaxLength(100);
-        modelBuilder.Entity<Eagle>().HasMany(e => e.Prey).WithOne().HasForeignKey(e => e.EagleId).IsRequired(false);
+        modelBuilder
+            .Entity<Eagle>()
+            .HasMany(e => e.Prey)
+            .WithOne()
+            .HasForeignKey(e => e.EagleId)
+            .IsRequired(false);
 
         modelBuilder.Entity<Drink>().ToTable("Drinks");
         modelBuilder.Entity<Coke>().ToTable("Coke");

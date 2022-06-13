@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis
                 ImmutableArray<string> searchPaths,
                 string? baseDirectory,
                 ImmutableArray<KeyValuePair<string, string>> pathMap,
-                TouchedFileLogger? logger)
-                : base(searchPaths, baseDirectory, pathMap)
+                TouchedFileLogger? logger
+            ) : base(searchPaths, baseDirectory, pathMap)
             {
                 _logger = logger;
             }
@@ -34,10 +34,14 @@ namespace Microsoft.CodeAnalysis
             }
 
             public LoggingSourceFileResolver WithBaseDirectory(string value) =>
-                (BaseDirectory == value) ? this : new LoggingSourceFileResolver(SearchPaths, value, PathMap, _logger);
+                (BaseDirectory == value)
+                    ? this
+                    : new LoggingSourceFileResolver(SearchPaths, value, PathMap, _logger);
 
             public LoggingSourceFileResolver WithSearchPaths(ImmutableArray<string> value) =>
-                (SearchPaths == value) ? this : new LoggingSourceFileResolver(value, BaseDirectory, PathMap, _logger);
+                (SearchPaths == value)
+                    ? this
+                    : new LoggingSourceFileResolver(value, BaseDirectory, PathMap, _logger);
         }
     }
 }

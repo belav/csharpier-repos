@@ -20,12 +20,25 @@ namespace Microsoft.CodeAnalysis
         private readonly IIncrementalGeneratorNode<TInput> _sourceNode;
         private readonly string? _name;
 
-        public TransformNode(IIncrementalGeneratorNode<TInput> sourceNode, Func<TInput, CancellationToken, TOutput> userFunc, IEqualityComparer<TOutput>? comparer = null, string? name = null)
-            : this(sourceNode, userFunc: (i, token) => ImmutableArray.Create(userFunc(i, token)), comparer, name)
-        {
-        }
+        public TransformNode(
+            IIncrementalGeneratorNode<TInput> sourceNode,
+            Func<TInput, CancellationToken, TOutput> userFunc,
+            IEqualityComparer<TOutput>? comparer = null,
+            string? name = null
+        )
+            : this(
+                sourceNode,
+                userFunc: (i, token) => ImmutableArray.Create(userFunc(i, token)),
+                comparer,
+                name
+            ) { }
 
-        public TransformNode(IIncrementalGeneratorNode<TInput> sourceNode, Func<TInput, CancellationToken, ImmutableArray<TOutput>> userFunc, IEqualityComparer<TOutput>? comparer = null, string? name = null)
+        public TransformNode(
+            IIncrementalGeneratorNode<TInput> sourceNode,
+            Func<TInput, CancellationToken, ImmutableArray<TOutput>> userFunc,
+            IEqualityComparer<TOutput>? comparer = null,
+            string? name = null
+        )
         {
             _sourceNode = sourceNode;
             _func = userFunc;
@@ -33,11 +46,18 @@ namespace Microsoft.CodeAnalysis
             _name = name;
         }
 
-        public IIncrementalGeneratorNode<TOutput> WithComparer(IEqualityComparer<TOutput> comparer) => new TransformNode<TInput, TOutput>(_sourceNode, _func, comparer, _name);
+        public IIncrementalGeneratorNode<TOutput> WithComparer(
+            IEqualityComparer<TOutput> comparer
+        ) => new TransformNode<TInput, TOutput>(_sourceNode, _func, comparer, _name);
 
-        public IIncrementalGeneratorNode<TOutput> WithTrackingName(string name) => new TransformNode<TInput, TOutput>(_sourceNode, _func, _comparer, name);
+        public IIncrementalGeneratorNode<TOutput> WithTrackingName(string name) =>
+            new TransformNode<TInput, TOutput>(_sourceNode, _func, _comparer, name);
 
-        public NodeStateTable<TOutput> UpdateStateTable(DriverStateTable.Builder builder, NodeStateTable<TOutput> previousTable, CancellationToken cancellationToken)
+        public NodeStateTable<TOutput> UpdateStateTable(
+            DriverStateTable.Builder builder,
+            NodeStateTable<TOutput> previousTable,
+            CancellationToken cancellationToken
+        )
         {
             // grab the source inputs
             var sourceTable = builder.GetLatestStateTableForNode(_sourceNode);
@@ -60,26 +80,47 @@ namespace Microsoft.CodeAnalysis
 
             foreach (var entry in sourceTable)
             {
-                var inputs = newTable.TrackIncrementalSteps ? ImmutableArray.Create((entry.Step!, entry.OutputIndex)) : default;
+                var inputs = newTable.TrackIncrementalSteps
+                    ? ImmutableArray.Create((entry.Step!, entry.OutputIndex))
+                    : default;
                 if (entry.State == EntryState.Removed)
                 {
                     newTable.TryRemoveEntries(TimeSpan.Zero, inputs);
                 }
-                else if (entry.State != EntryState.Cached || !newTable.TryUseCachedEntries(TimeSpan.Zero, inputs))
+                else if (
+                    entry.State != EntryState.Cached
+                    || !newTable.TryUseCachedEntries(TimeSpan.Zero, inputs)
+                )
                 {
                     var stopwatch = SharedStopwatch.StartNew();
                     // generate the new entries
                     var newOutputs = _func(entry.Item, cancellationToken);
 
-                    if (entry.State != EntryState.Modified || !newTable.TryModifyEntries(newOutputs, _comparer, stopwatch.Elapsed, inputs, entry.State))
+                    if (
+                        entry.State != EntryState.Modified
+                        || !newTable.TryModifyEntries(
+                            newOutputs,
+                            _comparer,
+                            stopwatch.Elapsed,
+                            inputs,
+                            entry.State
+                        )
+                    )
                     {
-                        newTable.AddEntries(newOutputs, EntryState.Added, stopwatch.Elapsed, inputs, entry.State);
+                        newTable.AddEntries(
+                            newOutputs,
+                            EntryState.Added,
+                            stopwatch.Elapsed,
+                            inputs,
+                            entry.State
+                        );
                     }
                 }
             }
             return newTable.ToImmutableAndFree();
         }
 
-        public void RegisterOutput(IIncrementalGeneratorOutputNode output) => _sourceNode.RegisterOutput(output);
+        public void RegisterOutput(IIncrementalGeneratorOutputNode output) =>
+            _sourceNode.RegisterOutput(output);
     }
 }

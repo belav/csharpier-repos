@@ -15,21 +15,24 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwitch
 {
-    public partial class PopulateSwitchStatementTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class PopulateSwitchStatementTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public PopulateSwitchStatementTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public PopulateSwitchStatementTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpPopulateSwitchStatementDiagnosticAnalyzer(), new CSharpPopulateSwitchStatementCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpPopulateSwitchStatementDiagnosticAnalyzer(),
+                new CSharpPopulateSwitchStatementCodeFixProvider()
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task OnlyOnFirstToken()
         {
             await TestMissingInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -52,14 +55,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task AllMembersAndDefaultExist()
         {
             await TestMissingInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -83,14 +87,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task AllMembersExist_NotDefault()
         {
             await TestInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -114,7 +119,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         }
     }
 }",
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -139,14 +144,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task NotAllMembersExist_NotDefault()
         {
             await TestInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -169,7 +175,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         }
     }
 }",
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -195,14 +201,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
             }
         }
     }
-}", index: 2);
+}",
+                index: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task NotAllMembersExist_WithDefault()
         {
             await TestInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -227,7 +235,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         }
     }
 }",
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -253,14 +261,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task NotAllMembersExist_NotDefault_EnumHasExplicitType()
         {
             await TestInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum : long
     {
@@ -283,7 +292,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         }
     }
 }",
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum : long
     {
@@ -309,14 +318,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
             }
         }
     }
-}", index: 2);
+}",
+                index: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task NotAllMembersExist_WithMembersAndDefaultInSection_NewValuesAboveDefaultSection()
         {
             await TestInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -340,7 +351,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         }
     }
 }",
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -365,14 +376,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task NotAllMembersExist_WithMembersAndDefaultInSection_AssumesDefaultIsInLastSection()
         {
             await TestInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -397,7 +409,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         }
     }
 }",
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -423,14 +435,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task NoMembersExist0()
         {
             await TestInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -450,7 +463,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         }
     }
 }",
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -475,14 +488,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
             }
         }
     }
-}", index: 0);
+}",
+                index: 0
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task NoMembersExist1()
         {
             await TestInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -502,7 +517,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         }
     }
 }",
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -523,14 +538,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
             }
         }
     }
-}", index: 1);
+}",
+                index: 1
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task NoMembersExist2()
         {
             await TestInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -550,7 +567,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
         }
     }
 }",
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     enum MyEnum
     {
@@ -577,14 +594,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
             }
         }
     }
-}", index: 2);
+}",
+                index: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task UsingStaticEnum_AllMembersExist()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using static System.IO.FileMode;
+                @"using static System.IO.FileMode;
 
 namespace ConsoleApplication1
 {
@@ -612,14 +631,15 @@ namespace ConsoleApplication1
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task UsingStaticEnum_AllMembersExist_OutOfDefaultOrder()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using static System.IO.FileMode;
+                @"using static System.IO.FileMode;
 
 namespace ConsoleApplication1
 {
@@ -647,14 +667,15 @@ namespace ConsoleApplication1
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task UsingStaticEnum_MembersExist()
         {
             await TestInRegularAndScriptAsync(
-@"using static System.IO.FileMode;
+                @"using static System.IO.FileMode;
 
 namespace ConsoleApplication1
 {
@@ -679,7 +700,7 @@ namespace ConsoleApplication1
         }
     }
 }",
-@"using static System.IO.FileMode;
+                @"using static System.IO.FileMode;
 
 namespace ConsoleApplication1
 {
@@ -707,14 +728,15 @@ namespace ConsoleApplication1
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task UsingStaticEnum_NoMembersExist()
         {
             await TestInRegularAndScriptAsync(
-@"using static System.IO.FileMode;
+                @"using static System.IO.FileMode;
 
 namespace ConsoleApplication1
 {
@@ -729,7 +751,7 @@ namespace ConsoleApplication1
         }
     }
 }",
-@"using static System.IO.FileMode;
+                @"using static System.IO.FileMode;
 
 namespace ConsoleApplication1
 {
@@ -757,14 +779,16 @@ namespace ConsoleApplication1
             }
         }
     }
-}", index: 2);
+}",
+                index: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task NotAllMembersExist_NotDefault_EnumHasNonFlagsAttribute()
         {
             await TestInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     [System.Obsolete]
     enum MyEnum
@@ -788,7 +812,7 @@ namespace ConsoleApplication1
         }
     }
 }",
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     [System.Obsolete]
     enum MyEnum
@@ -815,14 +839,16 @@ namespace ConsoleApplication1
             }
         }
     }
-}", index: 2);
+}",
+                index: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task NotAllMembersExist_NotDefault_EnumIsNested()
         {
             await TestInRegularAndScriptAsync(
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     class MyClass
     {
@@ -845,7 +871,7 @@ namespace ConsoleApplication1
         }
     }
 }",
-@"namespace ConsoleApplication1
+                @"namespace ConsoleApplication1
 {
     class MyClass
     {
@@ -871,14 +897,16 @@ namespace ConsoleApplication1
             }
         }
     }
-}", index: 2);
+}",
+                index: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task NotAllMembersExist_SwitchIsNotEnum()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 namespace ConsoleApplication1
 {
@@ -896,14 +924,15 @@ namespace ConsoleApplication1
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
         public async Task NotAllMembersExist_NotDefault_UsingConstants()
         {
             await TestInRegularAndScriptAsync(
-@"enum MyEnum
+                @"enum MyEnum
 {
     Fizz,
     Buzz,
@@ -923,7 +952,7 @@ class MyClass
         }
     }
 }",
-@"enum MyEnum
+                @"enum MyEnum
 {
     Fizz,
     Buzz,
@@ -946,7 +975,9 @@ class MyClass
                 break;
         }
     }
-}", index: 2);
+}",
+                index: 2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
@@ -954,7 +985,7 @@ class MyClass
         public async Task AllMissingTokens()
         {
             await TestInRegularAndScriptAsync(
-            @"
+                @"
 enum MyEnum
 {
     Fizz
@@ -968,7 +999,7 @@ class MyClass
     }
 }
 ",
-            @"
+                @"
 enum MyEnum
 {
     Fizz
@@ -984,7 +1015,8 @@ class MyClass
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -992,7 +1024,7 @@ class MyClass
         public async Task TestAddMissingCasesForNullableEnum()
         {
             await TestInRegularAndScriptAsync(
-@"public class Program
+                @"public class Program
 {
     void Main() 
     {
@@ -1016,7 +1048,7 @@ public enum Bar
     Option3,
 }
 ",
-@"public class Program
+                @"public class Program
 {
     void Main() 
     {
@@ -1041,7 +1073,8 @@ public enum Bar
     Option2, 
     Option3,
 }
-");
+"
+            );
         }
     }
 }

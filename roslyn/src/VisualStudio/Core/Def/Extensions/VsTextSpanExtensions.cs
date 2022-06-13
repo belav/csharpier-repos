@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
             IThreadingContext threadingContext,
             Workspace workspace,
             DocumentId documentId,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (workspace is not VisualStudioWorkspaceImpl visualStudioWorkspace)
                 return null;
@@ -33,7 +34,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
             var bufferCoordinator = containedDocument.BufferCoordinator;
 
             var primary = new VsTextSpan[1];
-            var hresult = bufferCoordinator.MapSecondaryToPrimarySpan(spanInSecondaryBuffer, primary);
+            var hresult = bufferCoordinator.MapSecondaryToPrimarySpan(
+                spanInSecondaryBuffer,
+                primary
+            );
 
             var result = primary[0];
 

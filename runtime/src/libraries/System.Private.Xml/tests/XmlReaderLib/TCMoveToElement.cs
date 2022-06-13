@@ -16,18 +16,17 @@ namespace System.Xml.Tests
                 this.AddChild(new CVariation(v1) { Attribute = new Variation("Attribute node") });
             }
 
-
             // for function v2
             {
                 this.AddChild(new CVariation(v2) { Attribute = new Variation("Element node") });
             }
 
-
             // for function v3
             {
-                this.AddChild(new CVariation(v3) { Attribute = new Variation("XmlDeclaration node") });
+                this.AddChild(
+                    new CVariation(v3) { Attribute = new Variation("XmlDeclaration node") }
+                );
             }
-
 
             // for function v5
             {

@@ -81,10 +81,7 @@ namespace System.Data.OleDb
 
         public int NativeError
         {
-            get
-            {
-                return this.nativeError;
-            }
+            get { return this.nativeError; }
         }
 
         public string Source

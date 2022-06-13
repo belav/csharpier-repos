@@ -50,8 +50,8 @@ public class BringUpTest
             Console.WriteLine("Exception caught!");
             if (e.Message != "My exception")
             {
-                 Console.WriteLine("Unexpected exception message!");
-                 return Fail;
+                Console.WriteLine("Unexpected exception message!");
+                return Fail;
             }
 
             string stackTrace = e.StackTrace;
@@ -65,7 +65,7 @@ public class BringUpTest
 
         try
         {
-             g.myObjectField = new Object();
+            g.myObjectField = new Object();
         }
         catch (NullReferenceException)
         {
@@ -75,14 +75,14 @@ public class BringUpTest
 
         try
         {
-             try
-             {
-                 g.myField++;
-             }
-             finally
-             {
-                 counter++;
-             }
+            try
+            {
+                g.myField++;
+            }
+            finally
+            {
+                counter++;
+            }
         }
         catch (NullReferenceException)
         {
@@ -99,8 +99,8 @@ public class BringUpTest
             Console.WriteLine("Exception caught via filter!");
             if (e.Message != "Testing filter")
             {
-                 Console.WriteLine("Unexpected exception message!");
-                 return Fail;
+                Console.WriteLine("Unexpected exception message!");
+                return Fail;
             }
             counter++;
         }
@@ -225,4 +225,3 @@ public class BringUpTest
         return true;
     }
 }
-

@@ -48,25 +48,37 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         internal OptionsCollection Options { get; }
 
 #if !CODE_STYLE
-        internal CodeActionOptionsProvider CodeActionOptions { get; set; } = CodeAnalysis.CodeActions.CodeActionOptions.DefaultProvider;
+        internal CodeActionOptionsProvider CodeActionOptions { get; set; } =
+            CodeAnalysis.CodeActions.CodeActionOptions.DefaultProvider;
         internal IdeAnalyzerOptions? IdeAnalyzerOptions { get; set; }
 
-        internal IdeAnalyzerOptions GetIdeAnalyzerOptions(Project project)
-            => IdeAnalyzerOptions ?? IdeAnalyzerOptions.GetDefault(project.LanguageServices);
+        internal IdeAnalyzerOptions GetIdeAnalyzerOptions(Project project) =>
+            IdeAnalyzerOptions ?? IdeAnalyzerOptions.GetDefault(project.LanguageServices);
 #endif
+
         internal void Apply()
         {
-            var (analyzerConfigSource, remainingOptions) = CodeFixVerifierHelper.ConvertOptionsToAnalyzerConfig(_defaultFileExt, EditorConfig, Options);
+            var (analyzerConfigSource, remainingOptions) =
+                CodeFixVerifierHelper.ConvertOptionsToAnalyzerConfig(
+                    _defaultFileExt,
+                    EditorConfig,
+                    Options
+                );
             if (analyzerConfigSource is not null)
             {
                 if (_analyzerConfigIndex is null)
                 {
                     _analyzerConfigIndex = _test.TestState.AnalyzerConfigFiles.Count;
-                    _test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", analyzerConfigSource));
+                    _test.TestState.AnalyzerConfigFiles.Add(
+                        ("/.editorconfig", analyzerConfigSource)
+                    );
                 }
                 else
                 {
-                    _test.TestState.AnalyzerConfigFiles[_analyzerConfigIndex.Value] = ("/.editorconfig", analyzerConfigSource);
+                    _test.TestState.AnalyzerConfigFiles[_analyzerConfigIndex.Value] = (
+                        "/.editorconfig",
+                        analyzerConfigSource
+                    );
                 }
             }
             else if (_analyzerConfigIndex is { } index)
@@ -75,7 +87,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 _test.TestState.AnalyzerConfigFiles.RemoveAt(index);
             }
 
-            var solutionTransformIndex = _remainingOptionsSolutionTransform is not null ? _test.SolutionTransforms.IndexOf(_remainingOptionsSolutionTransform) : -1;
+            var solutionTransformIndex = _remainingOptionsSolutionTransform is not null
+                ? _test.SolutionTransforms.IndexOf(_remainingOptionsSolutionTransform)
+                : -1;
             if (remainingOptions is not null)
             {
                 // Generate a new solution transform
@@ -100,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 }
                 else
                 {
-                    _test.SolutionTransforms[solutionTransformIndex] = _remainingOptionsSolutionTransform;
+                    _test.SolutionTransforms[solutionTransformIndex] =
+                        _remainingOptionsSolutionTransform;
                 }
             }
             else if (_remainingOptionsSolutionTransform is not null)

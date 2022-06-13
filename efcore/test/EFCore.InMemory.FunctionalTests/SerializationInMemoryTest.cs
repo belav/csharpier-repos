@@ -5,8 +5,5 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class SerializationInMemoryTest : SerializationTestBase<F1InMemoryFixture>
 {
-    public SerializationInMemoryTest(F1InMemoryFixture fixture)
-        : base(fixture)
-    {
-    }
+    public SerializationInMemoryTest(F1InMemoryFixture fixture) : base(fixture) { }
 }

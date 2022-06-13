@@ -49,7 +49,8 @@ public class DocumentIntermediateNodeExtensionsTest
         // Arrange
         var document = new DocumentIntermediateNode();
         var @namespace = new NamespaceDeclarationIntermediateNode();
-        @namespace.Annotations[CommonAnnotations.PrimaryNamespace] = CommonAnnotations.PrimaryNamespace;
+        @namespace.Annotations[CommonAnnotations.PrimaryNamespace] =
+            CommonAnnotations.PrimaryNamespace;
 
         var builder = IntermediateNodeBuilder.Create(document);
         builder.Add(@namespace);
@@ -74,22 +75,13 @@ public class DocumentIntermediateNodeExtensionsTest
         var builder = IntermediateNodeBuilder.Create(document);
         builder.Push(@namespace);
 
-        var match1 = new DirectiveIntermediateNode()
-        {
-            Directive = directive,
-        };
+        var match1 = new DirectiveIntermediateNode() { Directive = directive, };
         builder.Add(match1);
 
-        var nonMatch = new DirectiveIntermediateNode()
-        {
-            Directive = directive2,
-        };
+        var nonMatch = new DirectiveIntermediateNode() { Directive = directive2, };
         builder.Add(nonMatch);
 
-        var match2 = new DirectiveIntermediateNode()
-        {
-            Directive = directive,
-        };
+        var match2 = new DirectiveIntermediateNode() { Directive = directive, };
         builder.Add(match2);
 
         // Act
@@ -107,6 +99,7 @@ public class DocumentIntermediateNodeExtensionsTest
             {
                 Assert.Same(@namespace, r.Parent);
                 Assert.Same(match2, r.Node);
-            });
+            }
+        );
     }
 }

@@ -1,3 +1,3 @@
 using System;
 
-Console.WriteLine ("Hello, Browser!");
+Console.WriteLine("Hello, Browser!");

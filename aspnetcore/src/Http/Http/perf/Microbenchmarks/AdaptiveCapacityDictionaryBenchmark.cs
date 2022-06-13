@@ -23,22 +23,31 @@ public class AdaptiveCapacityDictionaryBenchmark
         _oneValue = new KeyValuePair<string, string>("a", "b");
 
         _tenValues = new List<KeyValuePair<string, string>>()
-            {
-                new KeyValuePair<string, string>("a", "b"),
-                new KeyValuePair<string, string>("c", "d"),
-                new KeyValuePair<string, string>("e", "f"),
-                new KeyValuePair<string, string>("g", "h"),
-                new KeyValuePair<string, string>("i", "j"),
-                new KeyValuePair<string, string>("k", "l"),
-                new KeyValuePair<string, string>("m", "n"),
-                new KeyValuePair<string, string>("o", "p"),
-                new KeyValuePair<string, string>("q", "r"),
-                new KeyValuePair<string, string>("s", "t"),
-            };
+        {
+            new KeyValuePair<string, string>("a", "b"),
+            new KeyValuePair<string, string>("c", "d"),
+            new KeyValuePair<string, string>("e", "f"),
+            new KeyValuePair<string, string>("g", "h"),
+            new KeyValuePair<string, string>("i", "j"),
+            new KeyValuePair<string, string>("k", "l"),
+            new KeyValuePair<string, string>("m", "n"),
+            new KeyValuePair<string, string>("o", "p"),
+            new KeyValuePair<string, string>("q", "r"),
+            new KeyValuePair<string, string>("s", "t"),
+        };
 
-        _smallCapDict = new AdaptiveCapacityDictionary<string, string>(capacity: 1, StringComparer.OrdinalIgnoreCase);
-        _smallCapDictTen = new AdaptiveCapacityDictionary<string, string>(capacity: 10, StringComparer.OrdinalIgnoreCase);
-        _filledSmallDictionary = new AdaptiveCapacityDictionary<string, string>(capacity: 10, StringComparer.OrdinalIgnoreCase);
+        _smallCapDict = new AdaptiveCapacityDictionary<string, string>(
+            capacity: 1,
+            StringComparer.OrdinalIgnoreCase
+        );
+        _smallCapDictTen = new AdaptiveCapacityDictionary<string, string>(
+            capacity: 10,
+            StringComparer.OrdinalIgnoreCase
+        );
+        _filledSmallDictionary = new AdaptiveCapacityDictionary<string, string>(
+            capacity: 10,
+            StringComparer.OrdinalIgnoreCase
+        );
         foreach (var a in _tenValues)
         {
             _filledSmallDictionary[a.Key] = a.Value;
@@ -190,6 +199,7 @@ public class AdaptiveCapacityDictionaryBenchmark
             _ = _dictTen[val.Key];
         }
     }
+
     [Benchmark]
     public void SixValues_Dict()
     {
@@ -200,6 +210,7 @@ public class AdaptiveCapacityDictionaryBenchmark
             _ = _dictTen[val.Key];
         }
     }
+
     [Benchmark]
     public void SevenValues_Dict()
     {
@@ -210,6 +221,7 @@ public class AdaptiveCapacityDictionaryBenchmark
             _ = _dictTen[val.Key];
         }
     }
+
     [Benchmark]
     public void EightValues_Dict()
     {
@@ -220,6 +232,7 @@ public class AdaptiveCapacityDictionaryBenchmark
             _ = _dictTen[val.Key];
         }
     }
+
     [Benchmark]
     public void NineValues_Dict()
     {
@@ -258,7 +271,6 @@ public class AdaptiveCapacityDictionaryBenchmark
     public void SixValues_SmallDictGetGet()
     {
         _ = _filledSmallDictionary["k"];
-
     }
 
     [Benchmark]

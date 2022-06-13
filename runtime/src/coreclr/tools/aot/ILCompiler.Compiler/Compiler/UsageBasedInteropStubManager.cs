@@ -22,24 +22,45 @@ namespace ILCompiler
     {
         private Logger _logger;
 
-        public UsageBasedInteropStubManager(InteropStateManager interopStateManager, PInvokeILEmitterConfiguration pInvokeILEmitterConfiguration, Logger logger)
-            : base(interopStateManager, pInvokeILEmitterConfiguration)
+        public UsageBasedInteropStubManager(
+            InteropStateManager interopStateManager,
+            PInvokeILEmitterConfiguration pInvokeILEmitterConfiguration,
+            Logger logger
+        ) : base(interopStateManager, pInvokeILEmitterConfiguration)
         {
             _logger = logger;
         }
 
-        public override void AddDependenciesDueToPInvoke(ref DependencyList dependencies, NodeFactory factory, MethodDesc method)
+        public override void AddDependenciesDueToPInvoke(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method
+        )
         {
-            if (method.IsPInvoke && method.OwningType is MetadataType type && MarshalHelpers.IsRuntimeMarshallingEnabled(type.Module))
+            if (
+                method.IsPInvoke
+                && method.OwningType is MetadataType type
+                && MarshalHelpers.IsRuntimeMarshallingEnabled(type.Module)
+            )
             {
                 dependencies = dependencies ?? new DependencyList();
 
                 MethodSignature methodSig = method.Signature;
-                AddParameterMarshallingDependencies(ref dependencies, factory, method, methodSig.ReturnType);
+                AddParameterMarshallingDependencies(
+                    ref dependencies,
+                    factory,
+                    method,
+                    methodSig.ReturnType
+                );
 
                 for (int i = 0; i < methodSig.Length; i++)
                 {
-                    AddParameterMarshallingDependencies(ref dependencies, factory, method, methodSig[i]);
+                    AddParameterMarshallingDependencies(
+                        ref dependencies,
+                        factory,
+                        method,
+                        methodSig[i]
+                    );
                 }
             }
 
@@ -50,16 +71,28 @@ namespace ILCompiler
             }
         }
 
-        private void AddParameterMarshallingDependencies(ref DependencyList dependencies, NodeFactory factory, MethodDesc method, TypeDesc type)
+        private void AddParameterMarshallingDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method,
+            TypeDesc type
+        )
         {
             if (type.IsDelegate)
             {
-                dependencies.Add(factory.DelegateMarshallingData((DefType)type), "Delegate marshaling");
+                dependencies.Add(
+                    factory.DelegateMarshallingData((DefType)type),
+                    "Delegate marshaling"
+                );
             }
 
             TypeSystemContext context = type.Context;
-            if ((type.IsWellKnownType(WellKnownType.MulticastDelegate)
-                    || type == context.GetWellKnownType(WellKnownType.MulticastDelegate).BaseType))
+            if (
+                (
+                    type.IsWellKnownType(WellKnownType.MulticastDelegate)
+                    || type == context.GetWellKnownType(WellKnownType.MulticastDelegate).BaseType
+                )
+            )
             {
                 // If we hit this p/invoke as part of delegate marshalling (i.e. this is a delegate
                 // that has another delegate in the signature), blame the delegate type, not the marshalling thunk.
@@ -68,12 +101,19 @@ namespace ILCompiler
                 // we won't miss a spot (e.g. a p/invoke that has a delegate and that delegate contains
                 // a System.Delegate parameter).
                 MethodDesc reportedMethod = method;
-                if (reportedMethod is Internal.IL.Stubs.DelegateMarshallingMethodThunk delegateThunkMethod)
+                if (
+                    reportedMethod
+                    is Internal.IL.Stubs.DelegateMarshallingMethodThunk delegateThunkMethod
+                )
                 {
                     reportedMethod = delegateThunkMethod.InvokeMethod;
                 }
 
-                _logger.LogWarning(reportedMethod, DiagnosticId.CorrectnessOfAbstractDelegatesCannotBeGuaranteed, DiagnosticUtilities.GetMethodSignatureDisplayName(method));
+                _logger.LogWarning(
+                    reportedMethod,
+                    DiagnosticId.CorrectnessOfAbstractDelegatesCannotBeGuaranteed,
+                    DiagnosticUtilities.GetMethodSignatureDisplayName(method)
+                );
             }
 
             // struct may contain delegate fields, hence we need to add dependencies for it
@@ -87,20 +127,37 @@ namespace ILCompiler
                     if (field.IsStatic)
                         continue;
 
-                    AddParameterMarshallingDependencies(ref dependencies, factory, method, field.FieldType);
+                    AddParameterMarshallingDependencies(
+                        ref dependencies,
+                        factory,
+                        method,
+                        field.FieldType
+                    );
                 }
             }
         }
 
-        public override void AddInterestingInteropConstructedTypeDependencies(ref DependencyList dependencies, NodeFactory factory, TypeDesc type)
+        public override void AddInterestingInteropConstructedTypeDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            TypeDesc type
+        )
         {
             if (type.IsDelegate)
             {
                 var delegateType = (MetadataType)type;
-                if (delegateType.HasCustomAttribute("System.Runtime.InteropServices", "UnmanagedFunctionPointerAttribute"))
+                if (
+                    delegateType.HasCustomAttribute(
+                        "System.Runtime.InteropServices",
+                        "UnmanagedFunctionPointerAttribute"
+                    )
+                )
                 {
                     dependencies = dependencies ?? new DependencyList();
-                    dependencies.Add(factory.DelegateMarshallingData(delegateType), "Delegate marshalling");
+                    dependencies.Add(
+                        factory.DelegateMarshallingData(delegateType),
+                        "Delegate marshalling"
+                    );
                 }
             }
         }
@@ -109,34 +166,55 @@ namespace ILCompiler
         /// For Marshal generic APIs(eg. Marshal.StructureToPtr<T>, GetFunctionPointerForDelegate) we add
         /// the generic parameter as dependencies so that we can generate runtime data for them
         /// </summary>
-        public override void AddMarshalAPIsGenericDependencies(ref DependencyList dependencies, NodeFactory factory, MethodDesc method)
+        public override void AddMarshalAPIsGenericDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method
+        )
         {
             Debug.Assert(method.HasInstantiation);
 
             TypeDesc owningType = method.OwningType;
             MetadataType metadataType = owningType as MetadataType;
-            if (metadataType != null && metadataType.Module == factory.TypeSystemContext.SystemModule)
+            if (
+                metadataType != null
+                && metadataType.Module == factory.TypeSystemContext.SystemModule
+            )
             {
-                if (metadataType.Name == "Marshal" && metadataType.Namespace == "System.Runtime.InteropServices")
+                if (
+                    metadataType.Name == "Marshal"
+                    && metadataType.Namespace == "System.Runtime.InteropServices"
+                )
                 {
                     string methodName = method.Name;
-                    if (methodName == "GetFunctionPointerForDelegate" ||
-                        methodName == "GetDelegateForFunctionPointer" ||
-                        methodName == "PtrToStructure" ||
-                        methodName == "StructureToPtr" ||
-                        methodName == "SizeOf" ||
-                        methodName == "OffsetOf")
+                    if (
+                        methodName == "GetFunctionPointerForDelegate"
+                        || methodName == "GetDelegateForFunctionPointer"
+                        || methodName == "PtrToStructure"
+                        || methodName == "StructureToPtr"
+                        || methodName == "SizeOf"
+                        || methodName == "OffsetOf"
+                    )
                     {
                         foreach (TypeDesc type in method.Instantiation)
                         {
                             dependencies = dependencies ?? new DependencyList();
                             if (type.IsDelegate)
                             {
-                                dependencies.Add(factory.DelegateMarshallingData((DefType)type), "Delegate marshlling");
+                                dependencies.Add(
+                                    factory.DelegateMarshallingData((DefType)type),
+                                    "Delegate marshlling"
+                                );
                             }
-                            else if (MarshalHelpers.IsStructMarshallingRequired(type) || (methodName == "OffsetOf" && type is DefType))
+                            else if (
+                                MarshalHelpers.IsStructMarshallingRequired(type)
+                                || (methodName == "OffsetOf" && type is DefType)
+                            )
                             {
-                                dependencies.Add(factory.StructMarshallingData((DefType)type), "Struct marshalling");
+                                dependencies.Add(
+                                    factory.StructMarshallingData((DefType)type),
+                                    "Struct marshalling"
+                                );
                             }
                         }
                     }

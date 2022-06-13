@@ -10,7 +10,9 @@ public class NavigationExpansionExtensibilityHelper : INavigationExpansionExtens
     ///     Creates a new instance of the <see cref="NavigationExpansionExtensibilityHelper" /> class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
-    public NavigationExpansionExtensibilityHelper(NavigationExpansionExtensibilityHelperDependencies dependencies)
+    public NavigationExpansionExtensibilityHelper(
+        NavigationExpansionExtensibilityHelperDependencies dependencies
+    )
     {
         Dependencies = dependencies;
     }
@@ -21,18 +23,25 @@ public class NavigationExpansionExtensibilityHelper : INavigationExpansionExtens
     protected virtual NavigationExpansionExtensibilityHelperDependencies Dependencies { get; }
 
     /// <inheritdoc />
-    public virtual QueryRootExpression CreateQueryRoot(IEntityType entityType, QueryRootExpression? source)
-        => source?.QueryProvider != null
+    public virtual QueryRootExpression CreateQueryRoot(
+        IEntityType entityType,
+        QueryRootExpression? source
+    ) =>
+        source?.QueryProvider != null
             ? new QueryRootExpression(source.QueryProvider, entityType)
             : new QueryRootExpression(entityType);
 
     /// <inheritdoc />
-    public virtual void ValidateQueryRootCreation(IEntityType entityType, QueryRootExpression? source)
-    {
-    }
+    public virtual void ValidateQueryRootCreation(
+        IEntityType entityType,
+        QueryRootExpression? source
+    ) { }
 
     /// <inheritdoc />
-    public virtual bool AreQueryRootsCompatible(QueryRootExpression? first, QueryRootExpression? second)
+    public virtual bool AreQueryRootsCompatible(
+        QueryRootExpression? first,
+        QueryRootExpression? second
+    )
     {
         if (first is null && second is null)
         {

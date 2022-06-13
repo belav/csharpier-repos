@@ -19,14 +19,25 @@ public class IndexAttributeConventionTest
     {
         var modelBuilder = new InternalModelBuilder(new Model());
 
-        var entityBuilder = modelBuilder.Entity(typeof(EntityWithIndex), ConfigurationSource.Convention);
+        var entityBuilder = modelBuilder.Entity(
+            typeof(EntityWithIndex),
+            ConfigurationSource.Convention
+        );
         entityBuilder.Property("Id", ConfigurationSource.Convention);
         var propABuilder = entityBuilder.Property("A", ConfigurationSource.Convention);
         var propBBuilder = entityBuilder.Property("B", ConfigurationSource.Convention);
         entityBuilder.PrimaryKey(new List<string> { "Id" }, ConfigurationSource.Convention);
 
-        var indexProperties = new List<string> { propABuilder.Metadata.Name, propBBuilder.Metadata.Name };
-        var indexBuilder = entityBuilder.HasIndex(indexProperties, "IndexOnAAndB", ConfigurationSource.Convention);
+        var indexProperties = new List<string>
+        {
+            propABuilder.Metadata.Name,
+            propBBuilder.Metadata.Name
+        };
+        var indexBuilder = entityBuilder.HasIndex(
+            indexProperties,
+            "IndexOnAAndB",
+            ConfigurationSource.Convention
+        );
         indexBuilder.IsUnique(false, ConfigurationSource.Convention);
         indexBuilder.IsDescending(new[] { false, true }, ConfigurationSource.Convention);
 
@@ -40,11 +51,15 @@ public class IndexAttributeConventionTest
         Assert.True(index.IsUnique);
         Assert.Equal(ConfigurationSource.DataAnnotation, index.GetIsUniqueConfigurationSource());
         Assert.Equal(new[] { true, false }, index.IsDescending);
-        Assert.Equal(ConfigurationSource.DataAnnotation, index.GetIsDescendingConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            index.GetIsDescendingConfigurationSource()
+        );
         Assert.Collection(
             index.Properties,
             prop0 => Assert.Equal("A", prop0.Name),
-            prop1 => Assert.Equal("B", prop1.Name));
+            prop1 => Assert.Equal("B", prop1.Name)
+        );
     }
 
     [ConditionalFact]
@@ -53,7 +68,8 @@ public class IndexAttributeConventionTest
         var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
         var entityBuilder = modelBuilder.Entity<EntityWithIndex>();
 
-        entityBuilder.HasIndex(new[] { "A", "B" }, "IndexOnAAndB")
+        entityBuilder
+            .HasIndex(new[] { "A", "B" }, "IndexOnAAndB")
             .IsUnique(false)
             .IsDescending(false, true);
 
@@ -69,7 +85,8 @@ public class IndexAttributeConventionTest
         Assert.Collection(
             index.Properties,
             prop0 => Assert.Equal("A", prop0.Name),
-            prop1 => Assert.Equal("B", prop1.Name));
+            prop1 => Assert.Equal("B", prop1.Name)
+        );
     }
 
     [ConditionalFact]
@@ -79,8 +96,10 @@ public class IndexAttributeConventionTest
 
         Assert.Equal(
             AbstractionsStrings.CollectionArgumentIsEmpty("propertyNames"),
-            Assert.Throws<ArgumentException>(
-                () => modelBuilder.Entity<EntityWithInvalidEmptyIndex>()).Message);
+            Assert
+                .Throws<ArgumentException>(() => modelBuilder.Entity<EntityWithInvalidEmptyIndex>())
+                .Message
+        );
     }
 
     [InlineData(typeof(EntityWithInvalidNullIndexProperty))]
@@ -93,8 +112,10 @@ public class IndexAttributeConventionTest
 
         Assert.Equal(
             AbstractionsStrings.CollectionArgumentHasEmptyElements("propertyNames"),
-            Assert.Throws<ArgumentException>(
-                () => modelBuilder.Entity(entityTypeWithInvalidIndex)).Message);
+            Assert
+                .Throws<ArgumentException>(() => modelBuilder.Entity(entityTypeWithInvalidIndex))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -115,7 +136,8 @@ public class IndexAttributeConventionTest
         Assert.Collection(
             index0.Properties,
             prop0 => Assert.Equal("A", prop0.Name),
-            prop1 => Assert.Equal("B", prop1.Name));
+            prop1 => Assert.Equal("B", prop1.Name)
+        );
 
         var index1 = (Index)indexes.Skip(1).First();
         Assert.Equal(ConfigurationSource.DataAnnotation, index1.GetConfigurationSource());
@@ -125,7 +147,8 @@ public class IndexAttributeConventionTest
         Assert.Collection(
             index1.Properties,
             prop0 => Assert.Equal("B", prop0.Name),
-            prop1 => Assert.Equal("C", prop1.Name));
+            prop1 => Assert.Equal("C", prop1.Name)
+        );
     }
 
     [ConditionalFact]
@@ -137,8 +160,10 @@ public class IndexAttributeConventionTest
 
         // assert that the base type is not part of the model
         Assert.Empty(
-            modelBuilder.Model.GetEntityTypes()
-                .Where(e => e.ClrType == typeof(BaseUnmappedEntityWithIndex)));
+            modelBuilder.Model
+                .GetEntityTypes()
+                .Where(e => e.ClrType == typeof(BaseUnmappedEntityWithIndex))
+        );
 
         // assert that we see the index anyway
         var index = (Index)entityBuilder.Metadata.GetIndexes().Single();
@@ -149,7 +174,8 @@ public class IndexAttributeConventionTest
         Assert.Collection(
             index.Properties,
             prop0 => Assert.Equal("A", prop0.Name),
-            prop1 => Assert.Equal("B", prop1.Name));
+            prop1 => Assert.Equal("B", prop1.Name)
+        );
     }
 
     [ConditionalFact]
@@ -162,9 +188,12 @@ public class IndexAttributeConventionTest
             CoreStrings.UnnamedIndexDefinedOnIgnoredProperty(
                 nameof(EntityUnnamedIndexWithIgnoredProperty),
                 "{'A', 'B'}",
-                "B"),
-            Assert.Throws<InvalidOperationException>(
-                () => modelBuilder.Model.FinalizeModel()).Message);
+                "B"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => modelBuilder.Model.FinalizeModel())
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -178,9 +207,12 @@ public class IndexAttributeConventionTest
                 "IndexOnAAndIgnoredProperty",
                 nameof(EntityIndexWithIgnoredProperty),
                 "{'A', 'B'}",
-                "B"),
-            Assert.Throws<InvalidOperationException>(
-                () => modelBuilder.Model.FinalizeModel()).Message);
+                "B"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => modelBuilder.Model.FinalizeModel())
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -193,9 +225,12 @@ public class IndexAttributeConventionTest
             CoreStrings.UnnamedIndexDefinedOnNonExistentProperty(
                 nameof(EntityUnnamedIndexWithNonExistentProperty),
                 "{'A', 'DoesNotExist'}",
-                "DoesNotExist"),
-            Assert.Throws<InvalidOperationException>(
-                () => modelBuilder.Model.FinalizeModel()).Message);
+                "DoesNotExist"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => modelBuilder.Model.FinalizeModel())
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -209,9 +244,12 @@ public class IndexAttributeConventionTest
                 "IndexOnAAndNonExistentProperty",
                 nameof(EntityIndexWithNonExistentProperty),
                 "{'A', 'DoesNotExist'}",
-                "DoesNotExist"),
-            Assert.Throws<InvalidOperationException>(
-                () => modelBuilder.Model.FinalizeModel()).Message);
+                "DoesNotExist"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => modelBuilder.Model.FinalizeModel())
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -236,8 +274,7 @@ public class IndexAttributeConventionTest
         Assert.NotNull(childEntityBuilder.Metadata.BaseType);
 
         // The Index is replicated on the Parent type, but not on the Child.
-        var index = (Index)
-            Assert.Single(parentEntityBuilder.Metadata.GetDeclaredIndexes());
+        var index = (Index)Assert.Single(parentEntityBuilder.Metadata.GetDeclaredIndexes());
         Assert.Equal(ConfigurationSource.DataAnnotation, index.GetConfigurationSource());
         Assert.Equal("IndexOnGrandparentGetsReplicatedToParent", index.Name);
         Assert.False(index.IsUnique);
@@ -247,12 +284,14 @@ public class IndexAttributeConventionTest
 
         // The Child still has its own index even though
         // the property is defined on the Grandparent type.
-        var childIndex = (Index)
-            Assert.Single(childEntityBuilder.Metadata.GetDeclaredIndexes());
+        var childIndex = (Index)Assert.Single(childEntityBuilder.Metadata.GetDeclaredIndexes());
         Assert.Equal(ConfigurationSource.DataAnnotation, childIndex.GetConfigurationSource());
         Assert.Equal("IndexOnChildUnaffectedWhenParentBaseTypeRemoved", childIndex.Name);
         Assert.True(childIndex.IsUnique);
-        Assert.Equal(ConfigurationSource.DataAnnotation, childIndex.GetIsUniqueConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            childIndex.GetIsUniqueConfigurationSource()
+        );
         var childIndexProperty = Assert.Single(childIndex.Properties);
         Assert.Equal("A", childIndexProperty.Name);
 
@@ -271,15 +310,15 @@ public class IndexAttributeConventionTest
         entityBuilder.Property<int>("Y");
         modelBuilder.Model.FinalizeModel();
 
-        var index = (Index)
-            Assert.Single(entityBuilder.Metadata.GetDeclaredIndexes());
+        var index = (Index)Assert.Single(entityBuilder.Metadata.GetDeclaredIndexes());
 
         Assert.Equal(ConfigurationSource.DataAnnotation, index.GetConfigurationSource());
         Assert.Equal("IndexOnShadowProperty", index.Name);
         Assert.Collection(
             index.Properties,
             prop0 => Assert.Equal("X", prop0.Name),
-            prop1 => Assert.Equal("Y", prop1.Name));
+            prop1 => Assert.Equal("Y", prop1.Name)
+        );
     }
 
     [ConditionalFact]
@@ -289,15 +328,15 @@ public class IndexAttributeConventionTest
         var entityBuilder = modelBuilder.Entity(typeof(EntityWithIndexOnPrivateProperty));
         modelBuilder.Model.FinalizeModel();
 
-        var index = (Index)
-            Assert.Single(entityBuilder.Metadata.GetDeclaredIndexes());
+        var index = (Index)Assert.Single(entityBuilder.Metadata.GetDeclaredIndexes());
 
         Assert.Equal(ConfigurationSource.DataAnnotation, index.GetConfigurationSource());
         Assert.Equal("IndexOnPrivateProperty", index.Name);
         Assert.Collection(
             index.Properties,
             prop0 => Assert.Equal("X", prop0.Name),
-            prop1 => Assert.Equal("Y", prop1.Name));
+            prop1 => Assert.Equal("Y", prop1.Name)
+        );
     }
 
     #endregion
@@ -305,25 +344,35 @@ public class IndexAttributeConventionTest
     private void RunConvention(InternalEntityTypeBuilder entityTypeBuilder)
     {
         var context = new ConventionContext<IConventionEntityTypeBuilder>(
-            entityTypeBuilder.Metadata.Model.ConventionDispatcher);
+            entityTypeBuilder.Metadata.Model.ConventionDispatcher
+        );
 
         CreateIndexAttributeConvention().ProcessEntityTypeAdded(entityTypeBuilder, context);
     }
 
     private void RunConvention(InternalModelBuilder modelBuilder)
     {
-        var context = new ConventionContext<IConventionModelBuilder>(modelBuilder.Metadata.ConventionDispatcher);
+        var context = new ConventionContext<IConventionModelBuilder>(
+            modelBuilder.Metadata.ConventionDispatcher
+        );
 
         CreateIndexAttributeConvention().ProcessModelFinalizing(modelBuilder, context);
     }
 
-    private IndexAttributeConvention CreateIndexAttributeConvention()
-        => new(CreateDependencies());
+    private IndexAttributeConvention CreateIndexAttributeConvention() => new(CreateDependencies());
 
-    private ProviderConventionSetBuilderDependencies CreateDependencies()
-        => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+    private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+        InMemoryTestHelpers.Instance
+            .CreateContextServices()
+            .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
-    [Index(nameof(A), nameof(B), Name = "IndexOnAAndB", IsUnique = true, IsDescending = new[] { true, false })]
+    [Index(
+        nameof(A),
+        nameof(B),
+        Name = "IndexOnAAndB",
+        IsUnique = true,
+        IsDescending = new[] { true, false }
+    )]
     private class EntityWithIndex
     {
         public int Id { get; set; }

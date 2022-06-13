@@ -12,22 +12,20 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class MvcTestFixture<TStartup> : WebApplicationFactory<TStartup>
-    where TStartup : class
+public class MvcTestFixture<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder
             .UseRequestCulture<TStartup>("en-GB", "en-US")
             .UseEnvironment("Production")
-            .ConfigureServices(
-                services =>
-                {
-                    var testSink = new TestSink();
-                    var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
-                    services.AddSingleton<ILoggerFactory>(loggerFactory);
-                    services.AddSingleton<TestSink>(testSink);
-                });
+            .ConfigureServices(services =>
+            {
+                var testSink = new TestSink();
+                var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
+                services.AddSingleton<ILoggerFactory>(loggerFactory);
+                services.AddSingleton<TestSink>(testSink);
+            });
     }
 
     protected override TestServer CreateServer(IWebHostBuilder builder)

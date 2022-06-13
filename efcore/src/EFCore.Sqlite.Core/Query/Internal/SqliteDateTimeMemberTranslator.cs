@@ -13,8 +13,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteDateTimeMemberTranslator : IMemberTranslator
 {
-    private static readonly Dictionary<string, string> DatePartMapping
-        = new()
+    private static readonly Dictionary<string, string> DatePartMapping =
+        new()
         {
             { nameof(DateTime.Year), "%Y" },
             { nameof(DateTime.Month), "%m" },
@@ -49,7 +49,8 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (member.DeclaringType == typeof(DateTime))
         {
@@ -62,8 +63,10 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
                         _sqlExpressionFactory,
                         typeof(string),
                         datePart,
-                        instance!),
-                    returnType);
+                        instance!
+                    ),
+                    returnType
+                );
             }
 
             if (memberName == nameof(DateTime.Ticks))
@@ -76,10 +79,14 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
                                 new[] { instance! },
                                 nullable: true,
                                 argumentsPropagateNullability: new[] { true },
-                                typeof(double)),
-                            _sqlExpressionFactory.Constant(1721425.5)), // NB: Result of julianday('0001-01-01 00:00:00')
-                        _sqlExpressionFactory.Constant(TimeSpan.TicksPerDay)),
-                    typeof(long));
+                                typeof(double)
+                            ),
+                            _sqlExpressionFactory.Constant(1721425.5)
+                        ), // NB: Result of julianday('0001-01-01 00:00:00')
+                        _sqlExpressionFactory.Constant(TimeSpan.TicksPerDay)
+                    ),
+                    typeof(long)
+                );
             }
 
             if (memberName == nameof(DateTime.Millisecond))
@@ -91,10 +98,14 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
                                 _sqlExpressionFactory,
                                 typeof(string),
                                 "%f",
-                                instance!),
-                            typeof(double)),
-                        _sqlExpressionFactory.Constant(1000)),
-                    _sqlExpressionFactory.Constant(1000));
+                                instance!
+                            ),
+                            typeof(double)
+                        ),
+                        _sqlExpressionFactory.Constant(1000)
+                    ),
+                    _sqlExpressionFactory.Constant(1000)
+                );
             }
 
             var format = "%Y-%m-%d %H:%M:%f";
@@ -147,17 +158,20 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
                                 returnType,
                                 format,
                                 timestring,
-                                modifiers),
+                                modifiers
+                            ),
                             _sqlExpressionFactory.Constant("0")
                         },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, false },
-                        returnType),
+                        returnType
+                    ),
                     _sqlExpressionFactory.Constant(".")
                 },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true, false },
-                returnType);
+                returnType
+            );
         }
 
         return null;

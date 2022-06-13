@@ -13,25 +13,29 @@ namespace System.Text.Json.SourceGeneration.Tests
     public sealed class ReferenceHandlerTests_Metadata_String : ReferenceHandlerTests_Metadata
     {
         public ReferenceHandlerTests_Metadata_String()
-            : base(new StringSerializerWrapper(ReferenceHandlerTestsContext_Metadata.Default, (options) => new ReferenceHandlerTestsContext_Metadata(options)))
-        {
-        }
+            : base(
+                new StringSerializerWrapper(
+                    ReferenceHandlerTestsContext_Metadata.Default,
+                    (options) => new ReferenceHandlerTestsContext_Metadata(options)
+                )
+            ) { }
     }
 
     public sealed class ReferenceHandlerTests_Metadata_AsyncStream : ReferenceHandlerTests_Metadata
     {
         public ReferenceHandlerTests_Metadata_AsyncStream()
-            : base(new AsyncStreamSerializerWrapper(ReferenceHandlerTestsContext_Metadata.Default, (options) => new ReferenceHandlerTestsContext_Metadata(options)))
-        {
-        }
+            : base(
+                new AsyncStreamSerializerWrapper(
+                    ReferenceHandlerTestsContext_Metadata.Default,
+                    (options) => new ReferenceHandlerTestsContext_Metadata(options)
+                )
+            ) { }
     }
 
     public abstract partial class ReferenceHandlerTests_Metadata : ReferenceHandlerTests
     {
-        public ReferenceHandlerTests_Metadata(JsonSerializerWrapper serializer)
-            : base(serializer)
-        {
-        }
+        public ReferenceHandlerTests_Metadata(JsonSerializerWrapper serializer) : base(serializer)
+        { }
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
         [JsonSerializable(typeof(Employee))]
@@ -135,17 +139,19 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(LinkedList<object[]>))]
         [JsonSerializable(typeof(LinkedList<Base[]>))]
         [JsonSerializable(typeof(LinkedList<Base[][]>))]
-        internal sealed partial class ReferenceHandlerTestsContext_Metadata : JsonSerializerContext
-        {
-        }
+        internal sealed partial class ReferenceHandlerTestsContext_Metadata
+            : JsonSerializerContext { }
     }
 
     public sealed class ReferenceHandlerTests_Default_String : ReferenceHandlerTests_Default
     {
         public ReferenceHandlerTests_Default_String()
-            : base(new StringSerializerWrapper(ReferenceHandlerTestsContext_Default.Default, (options) => new ReferenceHandlerTestsContext_Default(options)))
-        {
-        }
+            : base(
+                new StringSerializerWrapper(
+                    ReferenceHandlerTestsContext_Default.Default,
+                    (options) => new ReferenceHandlerTestsContext_Default(options)
+                )
+            ) { }
 
         [Fact]
         public override async Task ThrowByDefaultOnLoop()
@@ -153,24 +159,27 @@ namespace System.Text.Json.SourceGeneration.Tests
             Employee a = new Employee();
             a.Manager = a;
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(a));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(a)
+            );
         }
     }
 
     public sealed class ReferenceHandlerTests_Default_AsyncStream : ReferenceHandlerTests_Default
     {
         public ReferenceHandlerTests_Default_AsyncStream()
-            : base(new AsyncStreamSerializerWrapper(ReferenceHandlerTestsContext_Default.Default, (options) => new ReferenceHandlerTestsContext_Default(options)))
-        {
-        }
+            : base(
+                new AsyncStreamSerializerWrapper(
+                    ReferenceHandlerTestsContext_Default.Default,
+                    (options) => new ReferenceHandlerTestsContext_Default(options)
+                )
+            ) { }
     }
 
     public abstract partial class ReferenceHandlerTests_Default : ReferenceHandlerTests
     {
-        public ReferenceHandlerTests_Default(JsonSerializerWrapper serializer)
-            : base(serializer)
-        {
-        }
+        public ReferenceHandlerTests_Default(JsonSerializerWrapper serializer) : base(serializer)
+        { }
 
         [JsonSerializable(typeof(Employee))]
         [JsonSerializable(typeof(KeyValuePair<string, string>))]
@@ -273,8 +282,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(LinkedList<object[]>))]
         [JsonSerializable(typeof(LinkedList<Base[]>))]
         [JsonSerializable(typeof(LinkedList<Base[][]>))]
-        internal sealed partial class ReferenceHandlerTestsContext_Default : JsonSerializerContext
-        {
-        }
+        internal sealed partial class ReferenceHandlerTestsContext_Default
+            : JsonSerializerContext { }
     }
 }

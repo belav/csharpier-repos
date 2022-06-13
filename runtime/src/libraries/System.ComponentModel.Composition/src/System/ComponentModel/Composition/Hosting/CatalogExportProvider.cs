@@ -29,15 +29,20 @@ namespace System.ComponentModel.Composition.Hosting
                 _outerExportProvider = outerExportProvider;
             }
 
-            protected override IEnumerable<Export> GetExportsCore(ImportDefinition definition, AtomicComposition? atomicComposition)
+            protected override IEnumerable<Export> GetExportsCore(
+                ImportDefinition definition,
+                AtomicComposition? atomicComposition
+            )
             {
                 return _outerExportProvider.InternalGetExportsCore(definition, atomicComposition);
             }
         }
 
         private readonly CompositionLock _lock;
-        private readonly Dictionary<ComposablePartDefinition, CatalogPart> _activatedParts = new Dictionary<ComposablePartDefinition, CatalogPart>();
-        private readonly HashSet<ComposablePartDefinition> _rejectedParts = new HashSet<ComposablePartDefinition>();
+        private readonly Dictionary<ComposablePartDefinition, CatalogPart> _activatedParts =
+            new Dictionary<ComposablePartDefinition, CatalogPart>();
+        private readonly HashSet<ComposablePartDefinition> _rejectedParts =
+            new HashSet<ComposablePartDefinition>();
         private ConditionalWeakTable<object, List<ComposablePart>>? _gcRoots;
         private readonly HashSet<IDisposable> _partsToDispose = new HashSet<IDisposable>();
         private ComposablePartCatalog _catalog;
@@ -60,19 +65,28 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="catalog"/> is <see langword="null"/>.
         /// </exception>
         public CatalogExportProvider(ComposablePartCatalog catalog)
-            : this(catalog, CompositionOptions.Default)
-        {
-        }
+            : this(catalog, CompositionOptions.Default) { }
 
         public CatalogExportProvider(ComposablePartCatalog catalog, bool isThreadSafe)
-            : this(catalog, isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default)
-        {
-        }
+            : this(
+                catalog,
+                isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default
+            ) { }
 
-        public CatalogExportProvider(ComposablePartCatalog catalog, CompositionOptions compositionOptions)
+        public CatalogExportProvider(
+            ComposablePartCatalog catalog,
+            CompositionOptions compositionOptions
+        )
         {
             Requires.NotNull(catalog, nameof(catalog));
-            if (compositionOptions > (CompositionOptions.DisableSilentRejection | CompositionOptions.IsThreadSafe | CompositionOptions.ExportCompositionService))
+            if (
+                compositionOptions
+                > (
+                    CompositionOptions.DisableSilentRejection
+                    | CompositionOptions.IsThreadSafe
+                    | CompositionOptions.ExportCompositionService
+                )
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(compositionOptions));
             }
@@ -86,14 +100,21 @@ namespace System.ComponentModel.Composition.Hosting
 
             if (_catalog is CompositionScopeDefinition scopeDefinition)
             {
-                _innerExportProvider = new AggregateExportProvider(new ScopeManager(this, scopeDefinition), new InnerCatalogExportProvider(this));
+                _innerExportProvider = new AggregateExportProvider(
+                    new ScopeManager(this, scopeDefinition),
+                    new InnerCatalogExportProvider(this)
+                );
             }
             else
             {
                 _innerExportProvider = new InnerCatalogExportProvider(this);
             }
-            _lock = new CompositionLock(compositionOptions.HasFlag(CompositionOptions.IsThreadSafe));
-            _disableSilentRejection = compositionOptions.HasFlag(CompositionOptions.DisableSilentRejection);
+            _lock = new CompositionLock(
+                compositionOptions.HasFlag(CompositionOptions.IsThreadSafe)
+            );
+            _disableSilentRejection = compositionOptions.HasFlag(
+                CompositionOptions.DisableSilentRejection
+            );
         }
 
         /// <summary>
@@ -231,10 +252,12 @@ namespace System.ComponentModel.Composition.Hosting
                         {
                             if (!_isDisposed)
                             {
-                                catalogToUnsubscribeFrom = _catalog as INotifyComposablePartCatalogChanged;
+                                catalogToUnsubscribeFrom =
+                                    _catalog as INotifyComposablePartCatalogChanged;
                                 _catalog = null!;
 
-                                aggregateExportProvider = _innerExportProvider as AggregateExportProvider;
+                                aggregateExportProvider =
+                                    _innerExportProvider as AggregateExportProvider;
                                 _innerExportProvider = null;
 
                                 sourceProvider = _sourceProvider;
@@ -303,7 +326,10 @@ namespace System.ComponentModel.Composition.Hosting
         /// it should return an empty <see cref="IEnumerable{T}"/> of <see cref="Export"/>.
         /// </note>
         /// </remarks>
-        protected override IEnumerable<Export> GetExportsCore(ImportDefinition definition, AtomicComposition? atomicComposition)
+        protected override IEnumerable<Export> GetExportsCore(
+            ImportDefinition definition,
+            AtomicComposition? atomicComposition
+        )
         {
             ThrowIfDisposed();
             EnsureRunning();
@@ -313,11 +339,18 @@ namespace System.ComponentModel.Composition.Hosting
                 throw new Exception(SR.Diagnostic_InternalExceptionMessage);
             }
 
-            _innerExportProvider.TryGetExports(definition, atomicComposition, out IEnumerable<Export>? exports);
+            _innerExportProvider.TryGetExports(
+                definition,
+                atomicComposition,
+                out IEnumerable<Export>? exports
+            );
             return exports!;
         }
 
-        private IEnumerable<Export> InternalGetExportsCore(ImportDefinition definition, AtomicComposition? atomicComposition)
+        private IEnumerable<Export> InternalGetExportsCore(
+            ImportDefinition definition,
+            AtomicComposition? atomicComposition
+        )
         {
             ThrowIfDisposed();
             EnsureRunning();
@@ -339,30 +372,44 @@ namespace System.ComponentModel.Composition.Hosting
             bool ensureRejection = EnsureRejection(atomicComposition);
             foreach (var partDefinitionAndExportDefinition in currentCatalog.GetExports(definition))
             {
-                bool isPartRejected = ensureRejection && IsRejected(partDefinitionAndExportDefinition.Item1, atomicComposition);
+                bool isPartRejected =
+                    ensureRejection
+                    && IsRejected(partDefinitionAndExportDefinition.Item1, atomicComposition);
                 if (!isPartRejected)
                 {
-                    exports.Add(CreateExport(partDefinitionAndExportDefinition.Item1, partDefinitionAndExportDefinition.Item2, isExportFactory, importPolicy));
+                    exports.Add(
+                        CreateExport(
+                            partDefinitionAndExportDefinition.Item1,
+                            partDefinitionAndExportDefinition.Item2,
+                            isExportFactory,
+                            importPolicy
+                        )
+                    );
                 }
             }
 
             return exports;
         }
 
-        private Export CreateExport(ComposablePartDefinition partDefinition, ExportDefinition exportDefinition, bool isExportFactory, CreationPolicy importPolicy)
+        private Export CreateExport(
+            ComposablePartDefinition partDefinition,
+            ExportDefinition exportDefinition,
+            bool isExportFactory,
+            CreationPolicy importPolicy
+        )
         {
             if (isExportFactory)
             {
-                return new PartCreatorExport(this,
-                            partDefinition,
-                            exportDefinition);
+                return new PartCreatorExport(this, partDefinition, exportDefinition);
             }
             else
             {
-                return CatalogExport.CreateExport(this,
-                            partDefinition,
-                            exportDefinition,
-                            importPolicy);
+                return CatalogExport.CreateExport(
+                    this,
+                    partDefinition,
+                    exportDefinition,
+                    importPolicy
+                );
             }
         }
 
@@ -371,7 +418,9 @@ namespace System.ComponentModel.Composition.Hosting
             UpdateRejections(e.AddedExports.Concat(e.RemovedExports), e.AtomicComposition);
         }
 
-        private static ExportDefinition[] GetExportsFromPartDefinitions(IEnumerable<ComposablePartDefinition> partDefinitions)
+        private static ExportDefinition[] GetExportsFromPartDefinitions(
+            IEnumerable<ComposablePartDefinition> partDefinitions
+        )
         {
             List<ExportDefinition> exports = new List<ExportDefinition>();
 
@@ -400,11 +449,17 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 // Save the preview catalog to use in place of the original while handling
                 // this event
-                atomicComposition.SetValue(_catalog,
-                    new CatalogChangeProxy(_catalog, e.AddedDefinitions, e.RemovedDefinitions));
+                atomicComposition.SetValue(
+                    _catalog,
+                    new CatalogChangeProxy(_catalog, e.AddedDefinitions, e.RemovedDefinitions)
+                );
 
-                IEnumerable<ExportDefinition> addedExports = GetExportsFromPartDefinitions(e.AddedDefinitions);
-                IEnumerable<ExportDefinition> removedExports = GetExportsFromPartDefinitions(e.RemovedDefinitions);
+                IEnumerable<ExportDefinition> addedExports = GetExportsFromPartDefinitions(
+                    e.AddedDefinitions
+                );
+                IEnumerable<ExportDefinition> removedExports = GetExportsFromPartDefinitions(
+                    e.RemovedDefinitions
+                );
 
                 // Remove any parts based on eliminated definitions (in a atomicComposition-friendly
                 // fashion)
@@ -432,19 +487,30 @@ namespace System.ComponentModel.Composition.Hosting
                     }
                 }
 
-                UpdateRejections(addedExports.ConcatAllowingNull(removedExports)!, atomicComposition);
+                UpdateRejections(
+                    addedExports.ConcatAllowingNull(removedExports)!,
+                    atomicComposition
+                );
 
                 OnExportsChanging(
-                    new ExportsChangeEventArgs(addedExports, removedExports, atomicComposition));
+                    new ExportsChangeEventArgs(addedExports, removedExports, atomicComposition)
+                );
 
-                atomicComposition.AddCompleteAction(() => OnExportsChanged(
-                    new ExportsChangeEventArgs(addedExports, removedExports, null)));
+                atomicComposition.AddCompleteAction(
+                    () =>
+                        OnExportsChanged(
+                            new ExportsChangeEventArgs(addedExports, removedExports, null)
+                        )
+                );
 
                 atomicComposition.Complete();
             }
         }
 
-        private CatalogPart GetComposablePart(ComposablePartDefinition partDefinition, bool isSharedPart)
+        private CatalogPart GetComposablePart(
+            ComposablePartDefinition partDefinition,
+            bool isSharedPart
+        )
         {
             ThrowIfDisposed();
             EnsureRunning();
@@ -517,7 +583,11 @@ namespace System.ComponentModel.Composition.Hosting
             return catalogPart;
         }
 
-        private object? GetExportedValue(CatalogPart part, ExportDefinition export, bool isSharedPart)
+        private object? GetExportedValue(
+            CatalogPart part,
+            ExportDefinition export,
+            bool isSharedPart
+        )
         {
             ThrowIfDisposed();
             EnsureRunning();
@@ -538,7 +608,10 @@ namespace System.ComponentModel.Composition.Hosting
             ImportEngine? importEngine = importsSatisfied ? null : _importEngine;
 
             object? exportedValue = CompositionServices.GetExportedValueFromComposedPart(
-                importEngine, part.Part, export);
+                importEngine,
+                part.Part,
+                export
+            );
 
             if (!importsSatisfied)
             {
@@ -556,7 +629,11 @@ namespace System.ComponentModel.Composition.Hosting
             return exportedValue;
         }
 
-        private void ReleasePart(object exportedValue, CatalogPart catalogPart, AtomicComposition atomicComposition)
+        private void ReleasePart(
+            object exportedValue,
+            CatalogPart catalogPart,
+            AtomicComposition atomicComposition
+        )
         {
             ThrowIfDisposed();
             EnsureRunning();
@@ -564,7 +641,11 @@ namespace System.ComponentModel.Composition.Hosting
             DisposePart(exportedValue, catalogPart, atomicComposition);
         }
 
-        private void DisposePart(object? exportedValue, CatalogPart catalogPart, AtomicComposition? atomicComposition)
+        private void DisposePart(
+            object? exportedValue,
+            CatalogPart catalogPart,
+            AtomicComposition? atomicComposition
+        )
         {
             ArgumentNullException.ThrowIfNull(catalogPart);
 
@@ -657,7 +738,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private bool IsRejected(ComposablePartDefinition definition, AtomicComposition? atomicComposition)
+        private bool IsRejected(
+            ComposablePartDefinition definition,
+            AtomicComposition? atomicComposition
+        )
         {
             // Check to see if we're currently working on the definition in question.
             // Recursive queries always answer optimistically, as if the definition hasn't
@@ -713,7 +797,10 @@ namespace System.ComponentModel.Composition.Hosting
             return !(_disableSilentRejection && (atomicComposition == null));
         }
 
-        private bool DetermineRejection(ComposablePartDefinition definition, AtomicComposition? parentAtomicComposition)
+        private bool DetermineRejection(
+            ComposablePartDefinition definition,
+            AtomicComposition? parentAtomicComposition
+        )
         {
             ChangeRejectedException? exception = null;
 
@@ -736,8 +823,11 @@ namespace System.ComponentModel.Composition.Hosting
                 // that cannot be fully satisfied still result in runtime errors.  Doing
                 // otherwise would be possible but potentially expensive - and could be a v2
                 // improvement if deemed worthwhile.
-                UpdateAtomicCompositionQueryForPartEquals(localAtomicComposition,
-                    definition, AtomicCompositionQueryState.TreatAsValidated);
+                UpdateAtomicCompositionQueryForPartEquals(
+                    localAtomicComposition,
+                    definition,
+                    AtomicCompositionQueryState.TreatAsValidated
+                );
 
                 var newPart = definition.CreatePart();
                 try
@@ -788,18 +878,23 @@ namespace System.ComponentModel.Composition.Hosting
                 }
 
                 CompositionTrace.PartDefinitionRejected(definition, exception);
-
             });
             if (parentAtomicComposition != null)
             {
-                UpdateAtomicCompositionQueryForPartEquals(parentAtomicComposition,
-                    definition, AtomicCompositionQueryState.TreatAsRejected);
+                UpdateAtomicCompositionQueryForPartEquals(
+                    parentAtomicComposition,
+                    definition,
+                    AtomicCompositionQueryState.TreatAsRejected
+                );
             }
 
             return true;
         }
 
-        private void UpdateRejections(IEnumerable<ExportDefinition> changedExports, AtomicComposition? atomicComposition)
+        private void UpdateRejections(
+            IEnumerable<ExportDefinition> changedExports,
+            AtomicComposition? atomicComposition
+        )
         {
             using (var localAtomicComposition = new AtomicComposition(atomicComposition))
             {
@@ -814,12 +909,19 @@ namespace System.ComponentModel.Composition.Hosting
                 }
                 foreach (var definition in rejectedParts)
                 {
-                    if (QueryPartState(localAtomicComposition, definition) == AtomicCompositionQueryState.TreatAsValidated)
+                    if (
+                        QueryPartState(localAtomicComposition, definition)
+                        == AtomicCompositionQueryState.TreatAsValidated
+                    )
                     {
                         continue;
                     }
 
-                    foreach (var import in definition.ImportDefinitions.Where(ImportEngine.IsRequiredImportForPreview))
+                    foreach (
+                        var import in definition.ImportDefinitions.Where(
+                            ImportEngine.IsRequiredImportForPreview
+                        )
+                    )
                     {
                         if (changedExports.Any(import.IsConstraintSatisfiedBy))
                         {
@@ -828,8 +930,11 @@ namespace System.ComponentModel.Composition.Hosting
                         }
                     }
                 }
-                UpdateAtomicCompositionQueryForPartInHashSet(localAtomicComposition,
-                    affectedRejections, AtomicCompositionQueryState.NeedsTesting);
+                UpdateAtomicCompositionQueryForPartInHashSet(
+                    localAtomicComposition,
+                    affectedRejections,
+                    AtomicCompositionQueryState.NeedsTesting
+                );
 
                 // Determine if any of the resurrectable parts is now available so that we can
                 // notify listeners of the exact changes to exports
@@ -862,10 +967,23 @@ namespace System.ComponentModel.Composition.Hosting
                 if (resurrectedExports.Any())
                 {
                     OnExportsChanging(
-                        new ExportsChangeEventArgs(resurrectedExports, Array.Empty<ExportDefinition>(), localAtomicComposition));
+                        new ExportsChangeEventArgs(
+                            resurrectedExports,
+                            Array.Empty<ExportDefinition>(),
+                            localAtomicComposition
+                        )
+                    );
 
-                    localAtomicComposition.AddCompleteAction(() => OnExportsChanged(
-                        new ExportsChangeEventArgs(resurrectedExports, Array.Empty<ExportDefinition>(), null)));
+                    localAtomicComposition.AddCompleteAction(
+                        () =>
+                            OnExportsChanged(
+                                new ExportsChangeEventArgs(
+                                    resurrectedExports,
+                                    Array.Empty<ExportDefinition>(),
+                                    null
+                                )
+                            )
+                    );
                 }
 
                 localAtomicComposition.Complete();
@@ -889,7 +1007,9 @@ namespace System.ComponentModel.Composition.Hosting
         {
             if ((_sourceProvider == null) || (_importEngine == null))
             {
-                throw new InvalidOperationException(SR.Format(SR.ObjectMustBeInitialized, "SourceProvider")); // NOLOC
+                throw new InvalidOperationException(
+                    SR.Format(SR.ObjectMustBeInitialized, "SourceProvider")
+                ); // NOLOC
             }
         }
 
@@ -915,8 +1035,7 @@ namespace System.ComponentModel.Composition.Hosting
         /// <typeparam name="T"></typeparam>
         /// <param name="currentValue"></param>
         [DebuggerStepThrough]
-        private void EnsureCanSet<T>(T? currentValue)
-            where T : class
+        private void EnsureCanSet<T>(T? currentValue) where T : class
         {
             if ((_isRunning) || (currentValue != null))
             {
@@ -924,7 +1043,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private AtomicCompositionQueryState QueryPartState(AtomicComposition atomicComposition, ComposablePartDefinition definition)
+        private AtomicCompositionQueryState QueryPartState(
+            AtomicComposition atomicComposition,
+            ComposablePartDefinition definition
+        )
         {
             PartQueryStateNode? node = GetPartQueryStateNode(atomicComposition);
             if (node == null)
@@ -946,19 +1068,27 @@ namespace System.ComponentModel.Composition.Hosting
         private void UpdateAtomicCompositionQueryForPartEquals(
             AtomicComposition atomicComposition,
             ComposablePartDefinition part,
-            AtomicCompositionQueryState state)
+            AtomicCompositionQueryState state
+        )
         {
             PartQueryStateNode? previousNode = GetPartQueryStateNode(atomicComposition);
-            atomicComposition.SetValue(this, new PartEqualsQueryStateNode(part, previousNode, state));
+            atomicComposition.SetValue(
+                this,
+                new PartEqualsQueryStateNode(part, previousNode, state)
+            );
         }
 
         private void UpdateAtomicCompositionQueryForPartInHashSet(
             AtomicComposition atomicComposition,
             HashSet<ComposablePartDefinition> hashset,
-            AtomicCompositionQueryState state)
+            AtomicCompositionQueryState state
+        )
         {
             PartQueryStateNode? previousNode = GetPartQueryStateNode(atomicComposition);
-            atomicComposition.SetValue(this, new PartInHashSetQueryStateNode(hashset, previousNode, state));
+            atomicComposition.SetValue(
+                this,
+                new PartInHashSetQueryStateNode(hashset, previousNode, state)
+            );
         }
 
         private enum AtomicCompositionQueryState
@@ -974,13 +1104,19 @@ namespace System.ComponentModel.Composition.Hosting
             private readonly PartQueryStateNode? _previousNode;
             private readonly AtomicCompositionQueryState _state;
 
-            protected PartQueryStateNode(PartQueryStateNode? previousNode, AtomicCompositionQueryState state)
+            protected PartQueryStateNode(
+                PartQueryStateNode? previousNode,
+                AtomicCompositionQueryState state
+            )
             {
                 _previousNode = previousNode;
                 _state = state;
             }
 
-            protected abstract bool IsMatchingDefinition(ComposablePartDefinition part, int partHashCode);
+            protected abstract bool IsMatchingDefinition(
+                ComposablePartDefinition part,
+                int partHashCode
+            );
 
             public AtomicCompositionQueryState GetQueryState(ComposablePartDefinition definition)
             {
@@ -993,8 +1129,7 @@ namespace System.ComponentModel.Composition.Hosting
                         return node._state;
                     }
                     node = node._previousNode;
-                }
-                while (node != null);
+                } while (node != null);
 
                 return AtomicCompositionQueryState.Unknown;
             }
@@ -1004,14 +1139,21 @@ namespace System.ComponentModel.Composition.Hosting
         {
             private readonly ComposablePartDefinition _part;
             private readonly int _hashCode;
-            public PartEqualsQueryStateNode(ComposablePartDefinition part, PartQueryStateNode? previousNode, AtomicCompositionQueryState state) :
-                base(previousNode, state)
+
+            public PartEqualsQueryStateNode(
+                ComposablePartDefinition part,
+                PartQueryStateNode? previousNode,
+                AtomicCompositionQueryState state
+            ) : base(previousNode, state)
             {
                 _part = part;
                 _hashCode = part.GetHashCode();
             }
 
-            protected override bool IsMatchingDefinition(ComposablePartDefinition part, int partHashCode)
+            protected override bool IsMatchingDefinition(
+                ComposablePartDefinition part,
+                int partHashCode
+            )
             {
                 if (partHashCode != _hashCode)
                 {
@@ -1024,13 +1166,20 @@ namespace System.ComponentModel.Composition.Hosting
         private sealed class PartInHashSetQueryStateNode : PartQueryStateNode
         {
             private readonly HashSet<ComposablePartDefinition> _parts;
-            public PartInHashSetQueryStateNode(HashSet<ComposablePartDefinition> parts, PartQueryStateNode? previousNode, AtomicCompositionQueryState state) :
-                base(previousNode, state)
+
+            public PartInHashSetQueryStateNode(
+                HashSet<ComposablePartDefinition> parts,
+                PartQueryStateNode? previousNode,
+                AtomicCompositionQueryState state
+            ) : base(previousNode, state)
             {
                 _parts = parts;
             }
 
-            protected override bool IsMatchingDefinition(ComposablePartDefinition part, int partHashCode)
+            protected override bool IsMatchingDefinition(
+                ComposablePartDefinition part,
+                int partHashCode
+            )
             {
                 return _parts.Contains(part);
             }
@@ -1039,22 +1188,18 @@ namespace System.ComponentModel.Composition.Hosting
         private sealed class CatalogPart
         {
             private volatile bool _importsSatisfied;
+
             public CatalogPart(ComposablePart part)
             {
                 Part = part;
             }
+
             public ComposablePart Part { get; private set; }
 
             public bool ImportsSatisfied
             {
-                get
-                {
-                    return _importsSatisfied;
-                }
-                set
-                {
-                    _importsSatisfied = value;
-                }
+                get { return _importsSatisfied; }
+                set { _importsSatisfied = value; }
             }
         }
     }

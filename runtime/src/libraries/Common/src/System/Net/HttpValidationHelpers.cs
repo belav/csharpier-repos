@@ -10,13 +10,19 @@ namespace System.Net
             // First, check for absence of separators and spaces.
             if (IsInvalidMethodOrHeaderString(name))
             {
-                throw new ArgumentException(string.Format(SR.net_WebHeaderInvalidHeaderChars, name), nameof(name));
+                throw new ArgumentException(
+                    string.Format(SR.net_WebHeaderInvalidHeaderChars, name),
+                    nameof(name)
+                );
             }
 
             // Second, check for non CTL ASCII-7 characters (32-126).
             if (ContainsNonAsciiChars(name))
             {
-                throw new ArgumentException(string.Format(SR.net_WebHeaderInvalidHeaderChars, name), nameof(name));
+                throw new ArgumentException(
+                    string.Format(SR.net_WebHeaderInvalidHeaderChars, name),
+                    nameof(name)
+                );
             }
             return name;
         }
@@ -40,7 +46,15 @@ namespace System.Net
                 && !ContainsNonAsciiChars(token);
         }
 
-        private static readonly char[] s_httpTrimCharacters = new char[] { (char)0x09, (char)0xA, (char)0xB, (char)0xC, (char)0xD, (char)0x20 };
+        private static readonly char[] s_httpTrimCharacters = new char[]
+        {
+            (char)0x09,
+            (char)0xA,
+            (char)0xB,
+            (char)0xC,
+            (char)0xD,
+            (char)0x20
+        };
 
         /// <summary>
         /// Throws on invalid header value chars.
@@ -77,7 +91,10 @@ namespace System.Net
                         }
                         else if (c == 127 || (c < ' ' && c != '\t'))
                         {
-                            throw new ArgumentException(SR.net_WebHeaderInvalidControlChars, nameof(value));
+                            throw new ArgumentException(
+                                SR.net_WebHeaderInvalidControlChars,
+                                nameof(value)
+                            );
                         }
                         break;
 
@@ -87,7 +104,10 @@ namespace System.Net
                             crlf = 2;
                             break;
                         }
-                        throw new ArgumentException(SR.net_WebHeaderInvalidCRLFChars, nameof(value));
+                        throw new ArgumentException(
+                            SR.net_WebHeaderInvalidCRLFChars,
+                            nameof(value)
+                        );
 
                     case 2:
                         if (c == ' ' || c == '\t')
@@ -95,7 +115,10 @@ namespace System.Net
                             crlf = 0;
                             break;
                         }
-                        throw new ArgumentException(SR.net_WebHeaderInvalidControlChars, nameof(value));
+                        throw new ArgumentException(
+                            SR.net_WebHeaderInvalidControlChars,
+                            nameof(value)
+                        );
                 }
             }
 
@@ -106,7 +129,6 @@ namespace System.Net
 
             return value;
         }
-
 
         // Returns true if stringValue contains characters that cannot appear
         // in a valid method-verb or HTTP header.

@@ -20,7 +20,10 @@ namespace System.Formats.Tar
         internal const byte NewLineChar = 0xa;
 
         internal const TarFileMode DefaultMode = // 644 in octal
-            TarFileMode.UserRead | TarFileMode.UserWrite | TarFileMode.GroupRead | TarFileMode.OtherRead;
+            TarFileMode.UserRead
+            | TarFileMode.UserWrite
+            | TarFileMode.GroupRead
+            | TarFileMode.OtherRead;
 
         // Helps advance the stream a total number of bytes larger than int.MaxValue.
         internal static void AdvanceStream(Stream archiveStream, long bytesToDiscard)
@@ -35,7 +38,10 @@ namespace System.Formats.Tar
                 while (bytesToDiscard > 0)
                 {
                     int currentLengthToRead = (int)Math.Min(MaxBufferLength, bytesToDiscard);
-                    if (archiveStream.Read(buffer.AsSpan(0, currentLengthToRead)) != currentLengthToRead)
+                    if (
+                        archiveStream.Read(buffer.AsSpan(0, currentLengthToRead))
+                        != currentLengthToRead
+                    )
                     {
                         throw new EndOfStreamException();
                     }
@@ -114,9 +120,14 @@ namespace System.Formats.Tar
         }
 
         // Returns a DateTimeOffset instance representing the number of seconds that have passed since the Unix Epoch.
-        internal static DateTimeOffset GetDateTimeFromSecondsSinceEpoch(double secondsSinceUnixEpoch)
+        internal static DateTimeOffset GetDateTimeFromSecondsSinceEpoch(
+            double secondsSinceUnixEpoch
+        )
         {
-            DateTimeOffset offset = new DateTimeOffset((long)(secondsSinceUnixEpoch * TimeSpan.TicksPerSecond) + DateTime.UnixEpoch.Ticks, TimeSpan.Zero);
+            DateTimeOffset offset = new DateTimeOffset(
+                (long)(secondsSinceUnixEpoch * TimeSpan.TicksPerSecond) + DateTime.UnixEpoch.Ticks,
+                TimeSpan.Zero
+            );
             return offset;
         }
 
@@ -138,18 +149,22 @@ namespace System.Formats.Tar
                 trimmedLength--;
             }
 
-            return trimmedLength == 0 ? string.Empty : encoding.GetString(buffer.Slice(0, trimmedLength));
+            return trimmedLength == 0
+                ? string.Empty
+                : encoding.GetString(buffer.Slice(0, trimmedLength));
 
             static bool IsByteNullOrSpace(byte c) => c is 0 or 32;
         }
 
         // Returns the ASCII string contained in the specified buffer of bytes,
         // removing the trailing null or space chars.
-        internal static string GetTrimmedAsciiString(ReadOnlySpan<byte> buffer) => GetTrimmedString(buffer, Encoding.ASCII);
+        internal static string GetTrimmedAsciiString(ReadOnlySpan<byte> buffer) =>
+            GetTrimmedString(buffer, Encoding.ASCII);
 
         // Returns the UTF8 string contained in the specified buffer of bytes,
         // removing the trailing null or space chars.
-        internal static string GetTrimmedUtf8String(ReadOnlySpan<byte> buffer) => GetTrimmedString(buffer, Encoding.UTF8);
+        internal static string GetTrimmedUtf8String(ReadOnlySpan<byte> buffer) =>
+            GetTrimmedString(buffer, Encoding.UTF8);
 
         // Returns true if it successfully converts the specified string to a DateTimeOffset, false otherwise.
         internal static bool TryConvertToDateTimeOffset(string value, out DateTimeOffset timestamp)
@@ -157,7 +172,14 @@ namespace System.Formats.Tar
             timestamp = default;
             if (!string.IsNullOrEmpty(value))
             {
-                if (!double.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out double doubleTime))
+                if (
+                    !double.TryParse(
+                        value,
+                        NumberStyles.Any,
+                        CultureInfo.InvariantCulture,
+                        out double doubleTime
+                    )
+                )
                 {
                     return false;
                 }
@@ -179,16 +201,22 @@ namespace System.Formats.Tar
 
         // Throws if the specified entry type is not supported for the specified format.
         // If 'forWriting' is true, an incompatible 'Regular File' entry type is allowed. It will be converted to the compatible version before writing.
-        internal static void VerifyEntryTypeIsSupported(TarEntryType entryType, TarFormat archiveFormat, bool forWriting)
+        internal static void VerifyEntryTypeIsSupported(
+            TarEntryType entryType,
+            TarFormat archiveFormat,
+            bool forWriting
+        )
         {
             switch (archiveFormat)
             {
                 case TarFormat.V7:
-                    if (entryType is
-                        TarEntryType.Directory or
-                        TarEntryType.HardLink or
-                        TarEntryType.V7RegularFile or
-                        TarEntryType.SymbolicLink)
+                    if (
+                        entryType
+                        is TarEntryType.Directory
+                            or TarEntryType.HardLink
+                            or TarEntryType.V7RegularFile
+                            or TarEntryType.SymbolicLink
+                    )
                     {
                         return;
                     }
@@ -199,14 +227,16 @@ namespace System.Formats.Tar
                     break;
 
                 case TarFormat.Ustar:
-                    if (entryType is
-                        TarEntryType.BlockDevice or
-                        TarEntryType.CharacterDevice or
-                        TarEntryType.Directory or
-                        TarEntryType.Fifo or
-                        TarEntryType.HardLink or
-                        TarEntryType.RegularFile or
-                        TarEntryType.SymbolicLink)
+                    if (
+                        entryType
+                        is TarEntryType.BlockDevice
+                            or TarEntryType.CharacterDevice
+                            or TarEntryType.Directory
+                            or TarEntryType.Fifo
+                            or TarEntryType.HardLink
+                            or TarEntryType.RegularFile
+                            or TarEntryType.SymbolicLink
+                    )
                     {
                         return;
                     }
@@ -217,14 +247,16 @@ namespace System.Formats.Tar
                     break;
 
                 case TarFormat.Pax:
-                    if (entryType is
-                        TarEntryType.BlockDevice or
-                        TarEntryType.CharacterDevice or
-                        TarEntryType.Directory or
-                        TarEntryType.Fifo or
-                        TarEntryType.HardLink or
-                        TarEntryType.RegularFile or
-                        TarEntryType.SymbolicLink)
+                    if (
+                        entryType
+                        is TarEntryType.BlockDevice
+                            or TarEntryType.CharacterDevice
+                            or TarEntryType.Directory
+                            or TarEntryType.Fifo
+                            or TarEntryType.HardLink
+                            or TarEntryType.RegularFile
+                            or TarEntryType.SymbolicLink
+                    )
                     {
                         // Not supported for writing - internally autogenerated:
                         // - ExtendedAttributes
@@ -238,14 +270,16 @@ namespace System.Formats.Tar
                     break;
 
                 case TarFormat.Gnu:
-                    if (entryType is
-                        TarEntryType.BlockDevice or
-                        TarEntryType.CharacterDevice or
-                        TarEntryType.Directory or
-                        TarEntryType.Fifo or
-                        TarEntryType.HardLink or
-                        TarEntryType.RegularFile or
-                        TarEntryType.SymbolicLink)
+                    if (
+                        entryType
+                        is TarEntryType.BlockDevice
+                            or TarEntryType.CharacterDevice
+                            or TarEntryType.Directory
+                            or TarEntryType.Fifo
+                            or TarEntryType.HardLink
+                            or TarEntryType.RegularFile
+                            or TarEntryType.SymbolicLink
+                    )
                     {
                         // Not supported for writing:
                         // - ContiguousFile
@@ -271,7 +305,9 @@ namespace System.Formats.Tar
                     throw new FormatException(string.Format(SR.TarInvalidFormat, archiveFormat));
             }
 
-            throw new InvalidOperationException(string.Format(SR.TarEntryTypeNotSupported, entryType, archiveFormat));
+            throw new InvalidOperationException(
+                string.Format(SR.TarEntryTypeNotSupported, entryType, archiveFormat)
+            );
         }
     }
 }

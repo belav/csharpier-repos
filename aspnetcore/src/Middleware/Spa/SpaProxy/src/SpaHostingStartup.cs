@@ -24,8 +24,12 @@ internal sealed class SpaHostingStartup : IHostingStartup
                     .Build();
 
                 services.AddSingleton<SpaProxyLaunchManager>();
-                services.Configure<SpaDevelopmentServerOptions>(configuration.GetSection("SpaProxyServer"));
-                services.TryAddEnumerable(ServiceDescriptor.Singleton<IStartupFilter, SpaProxyStartupFilter>());
+                services.Configure<SpaDevelopmentServerOptions>(
+                    configuration.GetSection("SpaProxyServer")
+                );
+                services.TryAddEnumerable(
+                    ServiceDescriptor.Singleton<IStartupFilter, SpaProxyStartupFilter>()
+                );
             }
         });
     }

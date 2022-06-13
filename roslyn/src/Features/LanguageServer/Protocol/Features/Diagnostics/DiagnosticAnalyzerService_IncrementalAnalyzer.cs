@@ -12,12 +12,14 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     [ExportIncrementalAnalyzerProvider(
-        highPriorityForActiveFile: true, name: WellKnownSolutionCrawlerAnalyzers.Diagnostic,
-        workspaceKinds: new string[] { WorkspaceKind.Host, WorkspaceKind.Interactive })]
+        highPriorityForActiveFile: true,
+        name: WellKnownSolutionCrawlerAnalyzers.Diagnostic,
+        workspaceKinds: new string[] { WorkspaceKind.Host, WorkspaceKind.Interactive }
+    )]
     internal partial class DiagnosticAnalyzerService : IIncrementalAnalyzerProvider
     {
-        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
-            => _map.GetValue(workspace, _createIncrementalAnalyzer);
+        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
+            _map.GetValue(workspace, _createIncrementalAnalyzer);
 
         public void ShutdownAnalyzerFrom(Workspace workspace)
         {
@@ -34,10 +36,24 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             // subscribe to active context changed event for new workspace
             workspace.DocumentActiveContextChanged += OnDocumentActiveContextChanged;
 
-            return new DiagnosticIncrementalAnalyzer(this, LogAggregator.GetNextId(), workspace, AnalyzerInfoCache);
+            return new DiagnosticIncrementalAnalyzer(
+                this,
+                LogAggregator.GetNextId(),
+                workspace,
+                AnalyzerInfoCache
+            );
         }
 
-        private void OnDocumentActiveContextChanged(object? sender, DocumentActiveContextChangedEventArgs e)
-            => Reanalyze(e.Solution.Workspace, documentIds: SpecializedCollections.SingletonEnumerable(e.NewActiveContextDocumentId), highPriority: true);
+        private void OnDocumentActiveContextChanged(
+            object? sender,
+            DocumentActiveContextChangedEventArgs e
+        ) =>
+            Reanalyze(
+                e.Solution.Workspace,
+                documentIds: SpecializedCollections.SingletonEnumerable(
+                    e.NewActiveContextDocumentId
+                ),
+                highPriority: true
+            );
     }
 }

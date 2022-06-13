@@ -17,25 +17,30 @@ namespace Microsoft.CodeAnalysis.Editor.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ColorSchemeOptions()
-        {
-        }
+        public ColorSchemeOptions() { }
 
-        ImmutableArray<IOption> IOptionProvider.Options => ImmutableArray.Create<IOption>(
-            ColorScheme,
-            LegacyUseEnhancedColors);
+        ImmutableArray<IOption> IOptionProvider.Options =>
+            ImmutableArray.Create<IOption>(ColorScheme, LegacyUseEnhancedColors);
 
         internal const string ColorSchemeSettingKey = "TextEditor.Roslyn.ColorScheme";
 
-        public static readonly Option2<SchemeName> ColorScheme = new(nameof(ColorSchemeOptions),
-            nameof(ColorScheme),
-            defaultValue: SchemeName.VisualStudio2019,
-            storageLocation: new RoamingProfileStorageLocation(ColorSchemeSettingKey));
+        public static readonly Option2<SchemeName> ColorScheme =
+            new(
+                nameof(ColorSchemeOptions),
+                nameof(ColorScheme),
+                defaultValue: SchemeName.VisualStudio2019,
+                storageLocation: new RoamingProfileStorageLocation(ColorSchemeSettingKey)
+            );
 
-        public static readonly Option2<UseEnhancedColors> LegacyUseEnhancedColors = new(nameof(ColorSchemeOptions),
-            nameof(LegacyUseEnhancedColors),
-            defaultValue: UseEnhancedColors.Default,
-            storageLocation: new RoamingProfileStorageLocation("WindowManagement.Options.UseEnhancedColorsForManagedLanguages"));
+        public static readonly Option2<UseEnhancedColors> LegacyUseEnhancedColors =
+            new(
+                nameof(ColorSchemeOptions),
+                nameof(LegacyUseEnhancedColors),
+                defaultValue: UseEnhancedColors.Default,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "WindowManagement.Options.UseEnhancedColorsForManagedLanguages"
+                )
+            );
 
         public enum UseEnhancedColors
         {

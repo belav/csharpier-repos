@@ -37,9 +37,12 @@ public class FileBufferingReadStream : Stream
     /// <param name="inner">The wrapping <see cref="Stream" />.</param>
     /// <param name="memoryThreshold">The maximum size to buffer in memory.</param>
     public FileBufferingReadStream(Stream inner, int memoryThreshold)
-        : this(inner, memoryThreshold, bufferLimit: null, tempFileDirectoryAccessor: AspNetCoreTempDirectory.TempDirectoryFactory)
-    {
-    }
+        : this(
+            inner,
+            memoryThreshold,
+            bufferLimit: null,
+            tempFileDirectoryAccessor: AspNetCoreTempDirectory.TempDirectoryFactory
+        ) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FileBufferingReadStream" />.
@@ -52,10 +55,9 @@ public class FileBufferingReadStream : Stream
         Stream inner,
         int memoryThreshold,
         long? bufferLimit,
-        Func<string> tempFileDirectoryAccessor)
-        : this(inner, memoryThreshold, bufferLimit, tempFileDirectoryAccessor, ArrayPool<byte>.Shared)
-    {
-    }
+        Func<string> tempFileDirectoryAccessor
+    ) : this(inner, memoryThreshold, bufferLimit, tempFileDirectoryAccessor, ArrayPool<byte>.Shared)
+    { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FileBufferingReadStream" />.
@@ -70,7 +72,8 @@ public class FileBufferingReadStream : Stream
         int memoryThreshold,
         long? bufferLimit,
         Func<string> tempFileDirectoryAccessor,
-        ArrayPool<byte> bytePool)
+        ArrayPool<byte> bytePool
+    )
     {
         if (inner == null)
         {
@@ -111,10 +114,8 @@ public class FileBufferingReadStream : Stream
         Stream inner,
         int memoryThreshold,
         long? bufferLimit,
-        string tempFileDirectory)
-        : this(inner, memoryThreshold, bufferLimit, tempFileDirectory, ArrayPool<byte>.Shared)
-    {
-    }
+        string tempFileDirectory
+    ) : this(inner, memoryThreshold, bufferLimit, tempFileDirectory, ArrayPool<byte>.Shared) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FileBufferingReadStream" />.
@@ -129,7 +130,8 @@ public class FileBufferingReadStream : Stream
         int memoryThreshold,
         long? bufferLimit,
         string tempFileDirectory,
-        ArrayPool<byte> bytePool)
+        ArrayPool<byte> bytePool
+    )
     {
         if (inner == null)
         {
@@ -253,9 +255,18 @@ public class FileBufferingReadStream : Stream
             Debug.Assert(_tempFileDirectory != null);
         }
 
-        _tempFileName = Path.Combine(_tempFileDirectory, "ASPNETCORE_" + Guid.NewGuid().ToString() + ".tmp");
-        return new FileStream(_tempFileName, FileMode.Create, FileAccess.ReadWrite, FileShare.Delete, 1024 * 16,
-            FileOptions.Asynchronous | FileOptions.DeleteOnClose | FileOptions.SequentialScan);
+        _tempFileName = Path.Combine(
+            _tempFileDirectory,
+            "ASPNETCORE_" + Guid.NewGuid().ToString() + ".tmp"
+        );
+        return new FileStream(
+            _tempFileName,
+            FileMode.Create,
+            FileAccess.ReadWrite,
+            FileShare.Delete,
+            1024 * 16,
+            FileOptions.Asynchronous | FileOptions.DeleteOnClose | FileOptions.SequentialScan
+        );
     }
 
     /// <inheritdoc/>
@@ -286,7 +297,9 @@ public class FileBufferingReadStream : Stream
             {
                 // Copy data from the in memory buffer to the file stream using a pooled buffer
                 oldBuffer.Position = 0;
-                var rentedBuffer = _bytePool.Rent(Math.Min((int)oldBuffer.Length, _maxRentedBufferSize));
+                var rentedBuffer = _bytePool.Rent(
+                    Math.Min((int)oldBuffer.Length, _maxRentedBufferSize)
+                );
                 try
                 {
                     var copyRead = oldBuffer.Read(rentedBuffer);
@@ -329,14 +342,26 @@ public class FileBufferingReadStream : Stream
     }
 
     /// <inheritdoc/>
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return ReadAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
     }
 
     /// <inheritdoc/>
-    [SuppressMessage("ApiDesign", "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads.", Justification = "Required to maintain compatibility")]
-    public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads.",
+        Justification = "Required to maintain compatibility"
+    )]
+    public override async ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         ThrowIfDisposed();
 
@@ -361,14 +386,19 @@ public class FileBufferingReadStream : Stream
             if (_rentedBuffer == null)
             {
                 oldBuffer.Position = 0;
-                var rentedBuffer = _bytePool.Rent(Math.Min((int)oldBuffer.Length, _maxRentedBufferSize));
+                var rentedBuffer = _bytePool.Rent(
+                    Math.Min((int)oldBuffer.Length, _maxRentedBufferSize)
+                );
                 try
                 {
                     // oldBuffer is a MemoryStream, no need to do async reads.
                     var copyRead = oldBuffer.Read(rentedBuffer);
                     while (copyRead > 0)
                     {
-                        await _buffer.WriteAsync(rentedBuffer.AsMemory(0, copyRead), cancellationToken);
+                        await _buffer.WriteAsync(
+                            rentedBuffer.AsMemory(0, copyRead),
+                            cancellationToken
+                        );
                         copyRead = oldBuffer.Read(rentedBuffer);
                     }
                 }
@@ -379,7 +409,10 @@ public class FileBufferingReadStream : Stream
             }
             else
             {
-                await _buffer.WriteAsync(_rentedBuffer.AsMemory(0, (int)oldBuffer.Length), cancellationToken);
+                await _buffer.WriteAsync(
+                    _rentedBuffer.AsMemory(0, (int)oldBuffer.Length),
+                    cancellationToken
+                );
                 _bytePool.Return(_rentedBuffer);
                 _rentedBuffer = null;
             }
@@ -405,13 +438,21 @@ public class FileBufferingReadStream : Stream
     }
 
     /// <inheritdoc/>
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotSupportedException();
     }
 
     /// <inheritdoc/>
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotSupportedException();
     }
@@ -429,7 +470,11 @@ public class FileBufferingReadStream : Stream
     }
 
     /// <inheritdoc/>
-    public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+    public override Task CopyToAsync(
+        Stream destination,
+        int bufferSize,
+        CancellationToken cancellationToken
+    )
     {
         // Set a minimum buffer size of 4K since the base Stream implementation has weird behavior when the stream is
         // seekable *and* the length is 0 (it passes in a buffer size of 1).

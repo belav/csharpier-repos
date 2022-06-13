@@ -23,7 +23,8 @@ namespace System.IO.Pipes.Tests
             _output = output;
         }
 
-        private static bool IsRemoteExecutorSupportedAndOnUnixAndSuperUser => RemoteExecutor.IsSupported && PlatformDetection.IsUnixAndSuperUser;
+        private static bool IsRemoteExecutorSupportedAndOnUnixAndSuperUser =>
+            RemoteExecutor.IsSupported && PlatformDetection.IsUnixAndSuperUser;
 
         [ConditionalTheory(nameof(IsRemoteExecutorSupportedAndOnUnixAndSuperUser))]
         [OuterLoop("Needs sudo access")]
@@ -32,9 +33,10 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeOptions.CurrentUserOnly, PipeOptions.None)]
         [InlineData(PipeOptions.CurrentUserOnly, PipeOptions.CurrentUserOnly)]
         public async Task Connection_UnderDifferentUsers_BehavesAsExpected(
-            PipeOptions serverPipeOptions, PipeOptions clientPipeOptions)
+            PipeOptions serverPipeOptions,
+            PipeOptions clientPipeOptions
+        )
         {
-
             // Use an absolute path, otherwise, the test can fail if the remote invoker and test runner have
             // different working and/or temp directories.
             string pipeName = "/tmp/" + Path.GetRandomFileName();
@@ -42,18 +44,28 @@ namespace System.IO.Pipes.Tests
 
             _output.WriteLine("Starting as {0} on '{1}'", Environment.UserName, pipeName);
 
-            using (var server = new NamedPipeServerStream(
-                pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, serverPipeOptions | PipeOptions.Asynchronous))
+            using (
+                var server = new NamedPipeServerStream(
+                    pipeName,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    serverPipeOptions | PipeOptions.Asynchronous
+                )
+            )
             {
                 Task serverTask = server.WaitForConnectionAsync(CancellationToken.None);
 
-                using (RemoteExecutor.Invoke(
-                    new Action<string, string>(ConnectClientFromRemoteInvoker),
-                    pipeName,
-                    clientPipeOptions == PipeOptions.CurrentUserOnly && !isRoot ? "true" : "false",
-                    new RemoteInvokeOptions { RunAsSudo = true }))
-                {
-                }
+                using (
+                    RemoteExecutor.Invoke(
+                        new Action<string, string>(ConnectClientFromRemoteInvoker),
+                        pipeName,
+                        clientPipeOptions == PipeOptions.CurrentUserOnly && !isRoot
+                            ? "true"
+                            : "false",
+                        new RemoteInvokeOptions { RunAsSudo = true }
+                    )
+                ) { }
 
                 if (serverPipeOptions == PipeOptions.CurrentUserOnly && !isRoot)
                     await Assert.ThrowsAsync<UnauthorizedAccessException>(() => serverTask);
@@ -62,10 +74,22 @@ namespace System.IO.Pipes.Tests
             }
         }
 
-        private static void ConnectClientFromRemoteInvoker(string pipeName, string isCurrentUserOnly)
+        private static void ConnectClientFromRemoteInvoker(
+            string pipeName,
+            string isCurrentUserOnly
+        )
         {
-            PipeOptions pipeOptions = bool.Parse(isCurrentUserOnly) ? PipeOptions.CurrentUserOnly : PipeOptions.None;
-            using (var client = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, pipeOptions))
+            PipeOptions pipeOptions = bool.Parse(isCurrentUserOnly)
+                ? PipeOptions.CurrentUserOnly
+                : PipeOptions.None;
+            using (
+                var client = new NamedPipeClientStream(
+                    ".",
+                    pipeName,
+                    PipeDirection.InOut,
+                    pipeOptions
+                )
+            )
             {
                 if (pipeOptions == PipeOptions.CurrentUserOnly)
                     Assert.Throws<UnauthorizedAccessException>(() => client.Connect());

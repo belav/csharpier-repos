@@ -29,8 +29,8 @@ public class RelationalModelValidator : ModelValidator
     /// <param name="relationalDependencies">Parameter object containing relational dependencies for this service.</param>
     public RelationalModelValidator(
         ModelValidatorDependencies dependencies,
-        RelationalModelValidatorDependencies relationalDependencies)
-        : base(dependencies)
+        RelationalModelValidatorDependencies relationalDependencies
+    ) : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }
@@ -45,7 +45,10 @@ public class RelationalModelValidator : ModelValidator
     /// </summary>
     /// <param name="model">The model to validate.</param>
     /// <param name="logger">The logger to use.</param>
-    public override void Validate(IModel model, IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+    public override void Validate(
+        IModel model,
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         base.Validate(model, logger);
 
@@ -67,7 +70,8 @@ public class RelationalModelValidator : ModelValidator
     /// <param name="logger">The logger to use.</param>
     protected virtual void ValidateSqlQueries(
         IModel model,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         foreach (var entityType in model.GetEntityTypes())
         {
@@ -77,13 +81,20 @@ public class RelationalModelValidator : ModelValidator
                 continue;
             }
 
-            if (entityType.BaseType != null
-                && (entityType.FindDiscriminatorProperty() == null
-                    || sqlQuery != entityType.BaseType.GetSqlQuery()))
+            if (
+                entityType.BaseType != null
+                && (
+                    entityType.FindDiscriminatorProperty() == null
+                    || sqlQuery != entityType.BaseType.GetSqlQuery()
+                )
+            )
             {
                 throw new InvalidOperationException(
                     RelationalStrings.InvalidMappedSqlQueryDerivedType(
-                        entityType.DisplayName(), entityType.BaseType.DisplayName()));
+                        entityType.DisplayName(),
+                        entityType.BaseType.DisplayName()
+                    )
+                );
             }
         }
     }
@@ -95,7 +106,8 @@ public class RelationalModelValidator : ModelValidator
     /// <param name="logger">The logger to use.</param>
     protected virtual void ValidateDbFunctions(
         IModel model,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         foreach (var dbFunction in model.GetDbFunctions())
         {
@@ -106,7 +118,9 @@ public class RelationalModelValidator : ModelValidator
                     throw new InvalidOperationException(
                         RelationalStrings.DbFunctionInvalidReturnType(
                             dbFunction.ModelName,
-                            dbFunction.ReturnType.ShortDisplayName()));
+                            dbFunction.ReturnType.ShortDisplayName()
+                        )
+                    );
                 }
             }
             else
@@ -114,27 +128,45 @@ public class RelationalModelValidator : ModelValidator
                 var elementType = dbFunction.ReturnType.GetGenericArguments()[0];
                 var entityType = model.FindEntityType(elementType);
 
-                if (entityType?.IsOwned() == true
+                if (
+                    entityType?.IsOwned() == true
                     || ((IConventionModel)model).IsOwned(elementType)
-                    || (entityType == null && model.GetEntityTypes().Any(e => e.ClrType == elementType)))
+                    || (
+                        entityType == null
+                        && model.GetEntityTypes().Any(e => e.ClrType == elementType)
+                    )
+                )
                 {
                     throw new InvalidOperationException(
                         RelationalStrings.DbFunctionInvalidIQueryableOwnedReturnType(
-                            dbFunction.ModelName, elementType.ShortDisplayName()));
+                            dbFunction.ModelName,
+                            elementType.ShortDisplayName()
+                        )
+                    );
                 }
 
                 if (entityType == null)
                 {
                     throw new InvalidOperationException(
                         RelationalStrings.DbFunctionInvalidReturnEntityType(
-                            dbFunction.ModelName, dbFunction.ReturnType.ShortDisplayName(), elementType.ShortDisplayName()));
+                            dbFunction.ModelName,
+                            dbFunction.ReturnType.ShortDisplayName(),
+                            elementType.ShortDisplayName()
+                        )
+                    );
                 }
 
-                if ((entityType.BaseType != null || entityType.GetDerivedTypes().Any())
-                    && entityType.FindDiscriminatorProperty() == null)
+                if (
+                    (entityType.BaseType != null || entityType.GetDerivedTypes().Any())
+                    && entityType.FindDiscriminatorProperty() == null
+                )
                 {
                     throw new InvalidOperationException(
-                        RelationalStrings.TableValuedFunctionNonTph(dbFunction.ModelName, entityType.DisplayName()));
+                        RelationalStrings.TableValuedFunctionNonTph(
+                            dbFunction.ModelName,
+                            entityType.DisplayName()
+                        )
+                    );
                 }
             }
 
@@ -146,7 +178,9 @@ public class RelationalModelValidator : ModelValidator
                         RelationalStrings.DbFunctionInvalidParameterType(
                             parameter.Name,
                             dbFunction.ModelName,
-                            parameter.ClrType.ShortDisplayName()));
+                            parameter.ClrType.ShortDisplayName()
+                        )
+                    );
                 }
             }
         }
@@ -163,37 +197,52 @@ public class RelationalModelValidator : ModelValidator
             if (mappedFunction == null)
             {
                 throw new InvalidOperationException(
-                    RelationalStrings.MappedFunctionNotFound(entityType.DisplayName(), mappedFunctionName));
+                    RelationalStrings.MappedFunctionNotFound(
+                        entityType.DisplayName(),
+                        mappedFunctionName
+                    )
+                );
             }
 
             if (entityType.BaseType != null)
             {
                 throw new InvalidOperationException(
                     RelationalStrings.InvalidMappedFunctionDerivedType(
-                        entityType.DisplayName(), mappedFunctionName, entityType.BaseType.DisplayName()));
+                        entityType.DisplayName(),
+                        mappedFunctionName,
+                        entityType.BaseType.DisplayName()
+                    )
+                );
             }
 
-            if (mappedFunction.IsScalar
-                || mappedFunction.ReturnType.GetGenericArguments()[0] != entityType.ClrType)
+            if (
+                mappedFunction.IsScalar
+                || mappedFunction.ReturnType.GetGenericArguments()[0] != entityType.ClrType
+            )
             {
                 throw new InvalidOperationException(
                     RelationalStrings.InvalidMappedFunctionUnmatchedReturn(
                         entityType.DisplayName(),
                         mappedFunctionName,
                         mappedFunction.ReturnType.ShortDisplayName(),
-                        entityType.ClrType.ShortDisplayName()));
+                        entityType.ClrType.ShortDisplayName()
+                    )
+                );
             }
 
             if (mappedFunction.Parameters.Count > 0)
             {
-                var parameters = "{"
-                    + string.Join(
-                        ", ",
-                        mappedFunction.Parameters.Select(p => "'" + p.Name + "'"))
+                var parameters =
+                    "{"
+                    + string.Join(", ", mappedFunction.Parameters.Select(p => "'" + p.Name + "'"))
                     + "}";
                 throw new InvalidOperationException(
                     RelationalStrings.InvalidMappedFunctionWithParameters(
-                        entityType.DisplayName(), mappedFunctionName, parameters));
+                        entityType.DisplayName(),
+                        mappedFunctionName,
+                        parameters
+                    )
+                );
             }
         }
     }
@@ -205,30 +254,40 @@ public class RelationalModelValidator : ModelValidator
     /// <param name="logger">The logger to use.</param>
     protected virtual void ValidateBoolsWithDefaults(
         IModel model,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         foreach (var entityType in model.GetEntityTypes())
         {
             foreach (var property in entityType.GetDeclaredProperties())
             {
-                if (property.ClrType != typeof(bool)
-                    || property.ValueGenerated == ValueGenerated.Never)
+                if (
+                    property.ClrType != typeof(bool)
+                    || property.ValueGenerated == ValueGenerated.Never
+                )
                 {
                     continue;
                 }
 
-                if (StoreObjectIdentifier.Create(property.DeclaringEntityType, StoreObjectType.Table) is StoreObjectIdentifier table
-                    && (IsNotNullAndFalse(property.GetDefaultValue(table))
-                        || property.GetDefaultValueSql(table) != null))
+                if (
+                    StoreObjectIdentifier.Create(
+                        property.DeclaringEntityType,
+                        StoreObjectType.Table
+                    )
+                        is StoreObjectIdentifier table
+                    && (
+                        IsNotNullAndFalse(property.GetDefaultValue(table))
+                        || property.GetDefaultValueSql(table) != null
+                    )
+                )
                 {
                     logger.BoolWithDefaultWarning(property);
                 }
             }
         }
 
-        static bool IsNotNullAndFalse(object? value)
-            => value != null
-                && (!(value is bool asBool) || asBool);
+        static bool IsNotNullAndFalse(object? value) =>
+            value != null && (!(value is bool asBool) || asBool);
     }
 
     /// <summary>
@@ -238,7 +297,8 @@ public class RelationalModelValidator : ModelValidator
     /// <param name="logger">The logger to use.</param>
     protected virtual void ValidateDefaultValuesOnKeys(
         IModel model,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         foreach (var entityType in model.GetEntityTypes())
         {
@@ -246,9 +306,14 @@ public class RelationalModelValidator : ModelValidator
             {
                 foreach (var property in key.Properties)
                 {
-                    var defaultValue = (IConventionAnnotation?)property.FindAnnotation(RelationalAnnotationNames.DefaultValue);
-                    if (defaultValue?.Value != null
-                        && defaultValue.GetConfigurationSource().Overrides(ConfigurationSource.DataAnnotation))
+                    var defaultValue = (IConventionAnnotation?)
+                        property.FindAnnotation(RelationalAnnotationNames.DefaultValue);
+                    if (
+                        defaultValue?.Value != null
+                        && defaultValue
+                            .GetConfigurationSource()
+                            .Overrides(ConfigurationSource.DataAnnotation)
+                    )
                     {
                         logger.ModelValidationKeyDefaultValueWarning(property);
                     }
@@ -264,7 +329,8 @@ public class RelationalModelValidator : ModelValidator
     /// <param name="logger">The logger to use.</param>
     protected virtual void ValidateSharedTableCompatibility(
         IModel model,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         var tables = new Dictionary<StoreObjectIdentifier, List<IEntityType>>();
         foreach (var entityType in model.GetEntityTypes())
@@ -301,11 +367,11 @@ public class RelationalModelValidator : ModelValidator
                 continue;
             }
 
-            var principalEntityTypesMap = new Dictionary<IEntityType, (List<IEntityType> EntityTypes, bool Optional)>();
+            var principalEntityTypesMap =
+                new Dictionary<IEntityType, (List<IEntityType> EntityTypes, bool Optional)>();
             foreach (var entityType in mappedTypes)
             {
-                if (entityType.BaseType != null
-                    || entityType.FindPrimaryKey() == null)
+                if (entityType.BaseType != null || entityType.FindPrimaryKey() == null)
                 {
                     continue;
                 }
@@ -316,15 +382,15 @@ public class RelationalModelValidator : ModelValidator
                     continue;
                 }
 
-                var principalColumns = principalEntityTypes.SelectMany(e => e.GetProperties())
+                var principalColumns = principalEntityTypes
+                    .SelectMany(e => e.GetProperties())
                     .Select(e => e.GetColumnName(table))
                     .Where(e => e != null)
                     .ToList();
                 var requiredNonSharedColumnFound = false;
                 foreach (var property in entityType.GetProperties())
                 {
-                    if (property.IsPrimaryKey()
-                        || property.IsNullable)
+                    if (property.IsPrimaryKey() || property.IsNullable)
                     {
                         continue;
                     }
@@ -342,23 +408,37 @@ public class RelationalModelValidator : ModelValidator
 
                 if (!requiredNonSharedColumnFound)
                 {
-                    if (entityType.GetReferencingForeignKeys().Select(e => e.DeclaringEntityType).Any(t => mappedTypes.Contains(t)))
+                    if (
+                        entityType
+                            .GetReferencingForeignKeys()
+                            .Select(e => e.DeclaringEntityType)
+                            .Any(t => mappedTypes.Contains(t))
+                    )
                     {
                         throw new InvalidOperationException(
-                            RelationalStrings.OptionalDependentWithDependentWithoutIdentifyingProperty(entityType.DisplayName()));
+                            RelationalStrings.OptionalDependentWithDependentWithoutIdentifyingProperty(
+                                entityType.DisplayName()
+                            )
+                        );
                     }
 
                     logger.OptionalDependentWithoutIdentifyingPropertyWarning(entityType);
                 }
             }
 
-            (List<IEntityType> EntityTypes, bool Optional) GetPrincipalEntityTypes(IEntityType entityType)
+            (List<IEntityType> EntityTypes, bool Optional) GetPrincipalEntityTypes(
+                IEntityType entityType
+            )
             {
                 if (!principalEntityTypesMap.TryGetValue(entityType, out var tuple))
                 {
                     var list = new List<IEntityType>();
                     var optional = false;
-                    foreach (var foreignKey in entityType.FindForeignKeys(entityType.FindPrimaryKey()!.Properties))
+                    foreach (
+                        var foreignKey in entityType.FindForeignKeys(
+                            entityType.FindPrimaryKey()!.Properties
+                        )
+                    )
                     {
                         var principalEntityType = foreignKey.PrincipalEntityType;
                         if (!mappedTypes.Contains(principalEntityType))
@@ -367,7 +447,9 @@ public class RelationalModelValidator : ModelValidator
                         }
 
                         list.Add(principalEntityType);
-                        var (entityTypes, innerOptional) = GetPrincipalEntityTypes(principalEntityType.GetRootType());
+                        var (entityTypes, innerOptional) = GetPrincipalEntityTypes(
+                            principalEntityType.GetRootType()
+                        );
                         list.AddRange(entityTypes);
 
                         optional |= !foreignKey.IsRequiredDependent | innerOptional;
@@ -393,7 +475,8 @@ public class RelationalModelValidator : ModelValidator
         IReadOnlyList<IEntityType> mappedTypes,
         string tableName,
         string? schema,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         if (mappedTypes.Count == 1)
         {
@@ -411,11 +494,19 @@ public class RelationalModelValidator : ModelValidator
             }
 
             var primaryKey = mappedType.FindPrimaryKey();
-            if (primaryKey != null
-                && (mappedType.FindForeignKeys(primaryKey.Properties)
-                    .FirstOrDefault(
-                        fk => fk.PrincipalKey.IsPrimaryKey()
-                            && unvalidatedTypes.Contains(fk.PrincipalEntityType)) is IForeignKey linkingFK))
+            if (
+                primaryKey != null
+                && (
+                    mappedType
+                        .FindForeignKeys(primaryKey.Properties)
+                        .FirstOrDefault(
+                            fk =>
+                                fk.PrincipalKey.IsPrimaryKey()
+                                && unvalidatedTypes.Contains(fk.PrincipalEntityType)
+                        )
+                    is IForeignKey linkingFK
+                )
+            )
             {
                 if (mappedType.BaseType != null)
                 {
@@ -423,7 +514,9 @@ public class RelationalModelValidator : ModelValidator
                         RelationalStrings.IncompatibleTableDerivedRelationship(
                             storeObject.DisplayName(),
                             mappedType.DisplayName(),
-                            linkingFK.PrincipalEntityType.DisplayName()));
+                            linkingFK.PrincipalEntityType.DisplayName()
+                        )
+                    );
                 }
 
                 continue;
@@ -435,7 +528,9 @@ public class RelationalModelValidator : ModelValidator
                     RelationalStrings.IncompatibleTableNoRelationship(
                         storeObject.DisplayName(),
                         mappedType.DisplayName(),
-                        root.DisplayName()));
+                        root.DisplayName()
+                    )
+                );
             }
 
             root = mappedType;
@@ -456,7 +551,8 @@ public class RelationalModelValidator : ModelValidator
             var directlyConnectedTypes = unvalidatedTypes.Where(
                 unvalidatedType =>
                     entityType.IsAssignableFrom(unvalidatedType)
-                    || IsIdentifyingPrincipal(unvalidatedType, entityType));
+                    || IsIdentifyingPrincipal(unvalidatedType, entityType)
+            );
 
             foreach (var nextEntityType in directlyConnectedTypes)
             {
@@ -473,15 +569,19 @@ public class RelationalModelValidator : ModelValidator
                                 key.GetName(storeObject),
                                 key.Properties.Format(),
                                 otherKey.GetName(storeObject),
-                                otherKey.Properties.Format()));
+                                otherKey.Properties.Format()
+                            )
+                        );
                     }
                 }
 
                 var nextComment = nextEntityType.GetComment();
                 if (comment != null)
                 {
-                    if (nextComment != null
-                        && !comment.Equals(nextComment, StringComparison.Ordinal))
+                    if (
+                        nextComment != null
+                        && !comment.Equals(nextComment, StringComparison.Ordinal)
+                    )
                     {
                         throw new InvalidOperationException(
                             RelationalStrings.IncompatibleTableCommentMismatch(
@@ -489,7 +589,9 @@ public class RelationalModelValidator : ModelValidator
                                 entityType.DisplayName(),
                                 nextEntityType.DisplayName(),
                                 comment,
-                                nextComment));
+                                nextComment
+                            )
+                        );
                     }
                 }
                 else
@@ -503,7 +605,9 @@ public class RelationalModelValidator : ModelValidator
                         RelationalStrings.IncompatibleTableExcludedMismatch(
                             storeObject.DisplayName(),
                             entityType.DisplayName(),
-                            nextEntityType.DisplayName()));
+                            nextEntityType.DisplayName()
+                        )
+                    );
                 }
 
                 typesToValidate.Enqueue(nextEntityType);
@@ -527,7 +631,9 @@ public class RelationalModelValidator : ModelValidator
                 RelationalStrings.IncompatibleTableNoRelationship(
                     tableName,
                     invalidEntityType.DisplayName(),
-                    root.DisplayName()));
+                    root.DisplayName()
+                )
+            );
         }
     }
 
@@ -538,7 +644,8 @@ public class RelationalModelValidator : ModelValidator
     /// <param name="logger">The logger to use.</param>
     protected virtual void ValidateSharedViewCompatibility(
         IModel model,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         var views = new Dictionary<StoreObjectIdentifier, List<IEntityType>>();
         foreach (var entityType in model.GetEntityTypes())
@@ -577,7 +684,8 @@ public class RelationalModelValidator : ModelValidator
         IReadOnlyList<IEntityType> mappedTypes,
         string viewName,
         string? schema,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         if (mappedTypes.Count == 1)
         {
@@ -594,24 +702,34 @@ public class RelationalModelValidator : ModelValidator
                 continue;
             }
 
-            if (mappedType.FindPrimaryKey() != null
-                && mappedType.FindForeignKeys(mappedType.FindPrimaryKey()!.Properties)
+            if (
+                mappedType.FindPrimaryKey() != null
+                && mappedType
+                    .FindForeignKeys(mappedType.FindPrimaryKey()!.Properties)
                     .Any(
-                        fk => fk.PrincipalKey.IsPrimaryKey()
-                            && unvalidatedTypes.Contains(fk.PrincipalEntityType)))
+                        fk =>
+                            fk.PrincipalKey.IsPrimaryKey()
+                            && unvalidatedTypes.Contains(fk.PrincipalEntityType)
+                    )
+            )
             {
                 if (mappedType.BaseType != null)
                 {
-                    var principalType = mappedType.FindForeignKeys(mappedType.FindPrimaryKey()!.Properties)
+                    var principalType = mappedType
+                        .FindForeignKeys(mappedType.FindPrimaryKey()!.Properties)
                         .First(
-                            fk => fk.PrincipalKey.IsPrimaryKey()
-                                && unvalidatedTypes.Contains(fk.PrincipalEntityType))
+                            fk =>
+                                fk.PrincipalKey.IsPrimaryKey()
+                                && unvalidatedTypes.Contains(fk.PrincipalEntityType)
+                        )
                         .PrincipalEntityType;
                     throw new InvalidOperationException(
                         RelationalStrings.IncompatibleViewDerivedRelationship(
                             storeObject.DisplayName(),
                             mappedType.DisplayName(),
-                            principalType.DisplayName()));
+                            principalType.DisplayName()
+                        )
+                    );
                 }
 
                 continue;
@@ -623,7 +741,9 @@ public class RelationalModelValidator : ModelValidator
                     RelationalStrings.IncompatibleViewNoRelationship(
                         storeObject.DisplayName(),
                         mappedType.DisplayName(),
-                        root.DisplayName()));
+                        root.DisplayName()
+                    )
+                );
             }
 
             root = mappedType;
@@ -641,7 +761,8 @@ public class RelationalModelValidator : ModelValidator
             var directlyConnectedTypes = unvalidatedTypes.Where(
                 unvalidatedType =>
                     entityType.IsAssignableFrom(unvalidatedType)
-                    || IsIdentifyingPrincipal(unvalidatedType, entityType));
+                    || IsIdentifyingPrincipal(unvalidatedType, entityType)
+            );
 
             foreach (var nextEntityType in directlyConnectedTypes)
             {
@@ -666,15 +787,22 @@ public class RelationalModelValidator : ModelValidator
                 RelationalStrings.IncompatibleViewNoRelationship(
                     viewName,
                     invalidEntityType.DisplayName(),
-                    root.DisplayName()));
+                    root.DisplayName()
+                )
+            );
         }
     }
 
-    private static bool IsIdentifyingPrincipal(IEntityType dependentEntityType, IEntityType principalEntityType)
-        => dependentEntityType.FindForeignKeys(dependentEntityType.FindPrimaryKey()!.Properties)
+    private static bool IsIdentifyingPrincipal(
+        IEntityType dependentEntityType,
+        IEntityType principalEntityType
+    ) =>
+        dependentEntityType
+            .FindForeignKeys(dependentEntityType.FindPrimaryKey()!.Properties)
             .Any(
-                fk => fk.PrincipalKey.IsPrimaryKey()
-                    && fk.PrincipalEntityType == principalEntityType);
+                fk =>
+                    fk.PrincipalKey.IsPrimaryKey() && fk.PrincipalEntityType == principalEntityType
+            );
 
     /// <summary>
     ///     Validates the compatibility of properties sharing columns in a given table-like object.
@@ -685,12 +813,15 @@ public class RelationalModelValidator : ModelValidator
     protected virtual void ValidateSharedColumnsCompatibility(
         IReadOnlyList<IEntityType> mappedTypes,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
-        var concurrencyColumns = TableSharingConcurrencyTokenConvention.GetConcurrencyTokensMap(storeObject, mappedTypes);
+        var concurrencyColumns = TableSharingConcurrencyTokenConvention.GetConcurrencyTokensMap(
+            storeObject,
+            mappedTypes
+        );
         HashSet<string>? missingConcurrencyTokens = null;
-        if (concurrencyColumns != null
-            && storeObject.StoreObjectType == StoreObjectType.Table)
+        if (concurrencyColumns != null && storeObject.StoreObjectType == StoreObjectType.Table)
         {
             missingConcurrencyTokens = new HashSet<string>();
         }
@@ -703,7 +834,13 @@ public class RelationalModelValidator : ModelValidator
                 missingConcurrencyTokens.Clear();
                 foreach (var (key, readOnlyProperties) in concurrencyColumns!)
                 {
-                    if (TableSharingConcurrencyTokenConvention.IsConcurrencyTokenMissing(readOnlyProperties, entityType, mappedTypes))
+                    if (
+                        TableSharingConcurrencyTokenConvention.IsConcurrencyTokenMissing(
+                            readOnlyProperties,
+                            entityType,
+                            mappedTypes
+                        )
+                    )
                     {
                         missingConcurrencyTokens.Add(key);
                     }
@@ -729,7 +866,11 @@ public class RelationalModelValidator : ModelValidator
                 {
                     throw new InvalidOperationException(
                         RelationalStrings.MissingConcurrencyColumn(
-                            entityType.DisplayName(), missingColumn, storeObject.DisplayName()));
+                            entityType.DisplayName(),
+                            missingColumn,
+                            storeObject.DisplayName()
+                        )
+                    );
                 }
             }
         }
@@ -751,7 +892,8 @@ public class RelationalModelValidator : ModelValidator
         {
             logger.DuplicateColumnOrders(
                 storeObject,
-                columnOrders.Where(g => g.Value.Count > 1).SelectMany(g => g.Value).ToList());
+                columnOrders.Where(g => g.Value.Count > 1).SelectMany(g => g.Value).ToList()
+            );
         }
     }
 
@@ -768,9 +910,13 @@ public class RelationalModelValidator : ModelValidator
         IProperty duplicateProperty,
         string columnName,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
-        if (property.IsColumnNullable(storeObject) != duplicateProperty.IsColumnNullable(storeObject))
+        if (
+            property.IsColumnNullable(storeObject)
+            != duplicateProperty.IsColumnNullable(storeObject)
+        )
         {
             throw new InvalidOperationException(
                 RelationalStrings.DuplicateColumnNameNullabilityMismatch(
@@ -779,7 +925,9 @@ public class RelationalModelValidator : ModelValidator
                     property.DeclaringEntityType.DisplayName(),
                     property.Name,
                     columnName,
-                    storeObject.DisplayName()));
+                    storeObject.DisplayName()
+                )
+            );
         }
 
         var currentMaxLength = property.GetMaxLength(storeObject);
@@ -795,7 +943,9 @@ public class RelationalModelValidator : ModelValidator
                     columnName,
                     storeObject.DisplayName(),
                     previousMaxLength,
-                    currentMaxLength));
+                    currentMaxLength
+                )
+            );
         }
 
         if (property.IsUnicode(storeObject) != duplicateProperty.IsUnicode(storeObject))
@@ -807,7 +957,9 @@ public class RelationalModelValidator : ModelValidator
                     property.DeclaringEntityType.DisplayName(),
                     property.Name,
                     columnName,
-                    storeObject.DisplayName()));
+                    storeObject.DisplayName()
+                )
+            );
         }
 
         if (property.IsFixedLength(storeObject) != duplicateProperty.IsFixedLength(storeObject))
@@ -819,7 +971,9 @@ public class RelationalModelValidator : ModelValidator
                     property.DeclaringEntityType.DisplayName(),
                     property.Name,
                     columnName,
-                    storeObject.DisplayName()));
+                    storeObject.DisplayName()
+                )
+            );
         }
 
         var currentPrecision = property.GetPrecision(storeObject);
@@ -835,7 +989,9 @@ public class RelationalModelValidator : ModelValidator
                     columnName,
                     storeObject.DisplayName(),
                     currentPrecision,
-                    previousPrecision));
+                    previousPrecision
+                )
+            );
         }
 
         var currentScale = property.GetScale(storeObject);
@@ -851,7 +1007,9 @@ public class RelationalModelValidator : ModelValidator
                     columnName,
                     storeObject.DisplayName(),
                     currentScale,
-                    previousScale));
+                    previousScale
+                )
+            );
         }
 
         if (property.IsConcurrencyToken != duplicateProperty.IsConcurrencyToken)
@@ -863,16 +1021,23 @@ public class RelationalModelValidator : ModelValidator
                     property.DeclaringEntityType.DisplayName(),
                     property.Name,
                     columnName,
-                    storeObject.DisplayName()));
+                    storeObject.DisplayName()
+                )
+            );
         }
 
         var typeMapping = property.GetRelationalTypeMapping();
         var duplicateTypeMapping = duplicateProperty.GetRelationalTypeMapping();
-        var currentTypeString = property.GetColumnType(storeObject)
-            ?? typeMapping.StoreType;
-        var previousTypeString = duplicateProperty.GetColumnType(storeObject)
-            ?? duplicateTypeMapping.StoreType;
-        if (!string.Equals(currentTypeString, previousTypeString, StringComparison.OrdinalIgnoreCase))
+        var currentTypeString = property.GetColumnType(storeObject) ?? typeMapping.StoreType;
+        var previousTypeString =
+            duplicateProperty.GetColumnType(storeObject) ?? duplicateTypeMapping.StoreType;
+        if (
+            !string.Equals(
+                currentTypeString,
+                previousTypeString,
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             throw new InvalidOperationException(
                 RelationalStrings.DuplicateColumnNameDataTypeMismatch(
@@ -883,11 +1048,14 @@ public class RelationalModelValidator : ModelValidator
                     columnName,
                     storeObject.DisplayName(),
                     previousTypeString,
-                    currentTypeString));
+                    currentTypeString
+                )
+            );
         }
 
         var currentProviderType = typeMapping.Converter?.ProviderClrType ?? typeMapping.ClrType;
-        var previousProviderType = duplicateTypeMapping.Converter?.ProviderClrType ?? duplicateTypeMapping.ClrType;
+        var previousProviderType =
+            duplicateTypeMapping.Converter?.ProviderClrType ?? duplicateTypeMapping.ClrType;
         if (currentProviderType != previousProviderType)
         {
             throw new InvalidOperationException(
@@ -899,12 +1067,19 @@ public class RelationalModelValidator : ModelValidator
                     columnName,
                     storeObject.DisplayName(),
                     previousProviderType.ShortDisplayName(),
-                    currentProviderType.ShortDisplayName()));
+                    currentProviderType.ShortDisplayName()
+                )
+            );
         }
 
         var currentComputedColumnSql = property.GetComputedColumnSql(storeObject) ?? "";
         var previousComputedColumnSql = duplicateProperty.GetComputedColumnSql(storeObject) ?? "";
-        if (!currentComputedColumnSql.Equals(previousComputedColumnSql, StringComparison.OrdinalIgnoreCase))
+        if (
+            !currentComputedColumnSql.Equals(
+                previousComputedColumnSql,
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             throw new InvalidOperationException(
                 RelationalStrings.DuplicateColumnNameComputedSqlMismatch(
@@ -915,7 +1090,9 @@ public class RelationalModelValidator : ModelValidator
                     columnName,
                     storeObject.DisplayName(),
                     previousComputedColumnSql,
-                    currentComputedColumnSql));
+                    currentComputedColumnSql
+                )
+            );
         }
 
         var currentStored = property.GetIsStored(storeObject);
@@ -931,14 +1108,20 @@ public class RelationalModelValidator : ModelValidator
                     columnName,
                     storeObject.DisplayName(),
                     previousStored,
-                    currentStored));
+                    currentStored
+                )
+            );
         }
 
         var hasDefaultValue = property.TryGetDefaultValue(storeObject, out var currentDefaultValue);
-        var duplicateHasDefaultValue = duplicateProperty.TryGetDefaultValue(storeObject, out var previousDefaultValue);
-        if ((hasDefaultValue
-                || duplicateHasDefaultValue)
-            && !Equals(currentDefaultValue, previousDefaultValue))
+        var duplicateHasDefaultValue = duplicateProperty.TryGetDefaultValue(
+            storeObject,
+            out var previousDefaultValue
+        );
+        if (
+            (hasDefaultValue || duplicateHasDefaultValue)
+            && !Equals(currentDefaultValue, previousDefaultValue)
+        )
         {
             currentDefaultValue = GetDefaultColumnValue(property, storeObject);
             previousDefaultValue = GetDefaultColumnValue(duplicateProperty, storeObject);
@@ -954,13 +1137,20 @@ public class RelationalModelValidator : ModelValidator
                         columnName,
                         storeObject.DisplayName(),
                         previousDefaultValue ?? "NULL",
-                        currentDefaultValue ?? "NULL"));
+                        currentDefaultValue ?? "NULL"
+                    )
+                );
             }
         }
 
         var currentDefaultValueSql = property.GetDefaultValueSql(storeObject) ?? "";
         var previousDefaultValueSql = duplicateProperty.GetDefaultValueSql(storeObject) ?? "";
-        if (!currentDefaultValueSql.Equals(previousDefaultValueSql, StringComparison.OrdinalIgnoreCase))
+        if (
+            !currentDefaultValueSql.Equals(
+                previousDefaultValueSql,
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             throw new InvalidOperationException(
                 RelationalStrings.DuplicateColumnNameDefaultSqlMismatch(
@@ -971,7 +1161,9 @@ public class RelationalModelValidator : ModelValidator
                     columnName,
                     storeObject.DisplayName(),
                     previousDefaultValueSql,
-                    currentDefaultValueSql));
+                    currentDefaultValueSql
+                )
+            );
         }
 
         var currentComment = property.GetComment(storeObject) ?? "";
@@ -987,7 +1179,9 @@ public class RelationalModelValidator : ModelValidator
                     columnName,
                     storeObject.DisplayName(),
                     previousComment,
-                    currentComment));
+                    currentComment
+                )
+            );
         }
 
         var currentCollation = property.GetCollation(storeObject) ?? "";
@@ -1003,7 +1197,9 @@ public class RelationalModelValidator : ModelValidator
                     columnName,
                     storeObject.DisplayName(),
                     previousCollation,
-                    currentCollation));
+                    currentCollation
+                )
+            );
         }
 
         var currentColumnOrder = property.GetColumnOrder(storeObject);
@@ -1019,7 +1215,9 @@ public class RelationalModelValidator : ModelValidator
                     columnName,
                     storeObject.DisplayName(),
                     previousColumnOrder,
-                    currentColumnOrder));
+                    currentColumnOrder
+                )
+            );
         }
     }
 
@@ -1031,14 +1229,13 @@ public class RelationalModelValidator : ModelValidator
     /// <returns>The object that is used as the default value for the column the property is mapped to.</returns>
     protected virtual object? GetDefaultColumnValue(
         IProperty property,
-        in StoreObjectIdentifier storeObject)
+        in StoreObjectIdentifier storeObject
+    )
     {
         var value = property.GetDefaultValue(storeObject);
         var converter = property.FindRelationalTypeMapping(storeObject)?.Converter;
 
-        return converter != null
-            ? converter.ConvertToProvider(value)
-            : value;
+        return converter != null ? converter.ConvertToProvider(value) : value;
     }
 
     /// <summary>
@@ -1050,7 +1247,8 @@ public class RelationalModelValidator : ModelValidator
     protected virtual void ValidateSharedForeignKeysCompatibility(
         IReadOnlyList<IEntityType> mappedTypes,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         if (storeObject.StoreObjectType != StoreObjectType.Table)
         {
@@ -1062,8 +1260,14 @@ public class RelationalModelValidator : ModelValidator
         foreach (var foreignKey in mappedTypes.SelectMany(et => et.GetDeclaredForeignKeys()))
         {
             var principalTable = foreignKey.PrincipalKey.IsPrimaryKey()
-                ? StoreObjectIdentifier.Create(foreignKey.PrincipalEntityType, StoreObjectType.Table)
-                : StoreObjectIdentifier.Create(foreignKey.PrincipalKey.DeclaringEntityType, StoreObjectType.Table);
+                ? StoreObjectIdentifier.Create(
+                    foreignKey.PrincipalEntityType,
+                    StoreObjectType.Table
+                )
+                : StoreObjectIdentifier.Create(
+                    foreignKey.PrincipalKey.DeclaringEntityType,
+                    StoreObjectType.Table
+                );
             if (principalTable == null)
             {
                 continue;
@@ -1072,20 +1276,24 @@ public class RelationalModelValidator : ModelValidator
             var foreignKeyName = foreignKey.GetConstraintName(storeObject, principalTable.Value);
             if (foreignKeyName == null)
             {
-                if (foreignKey.PrincipalEntityType.GetMappingStrategy() == RelationalAnnotationNames.TpcMappingStrategy)
+                if (
+                    foreignKey.PrincipalEntityType.GetMappingStrategy()
+                    == RelationalAnnotationNames.TpcMappingStrategy
+                )
                 {
                     logger.ForeignKeyTpcPrincipalWarning(foreignKey);
                 }
 
-                var derivedTables = foreignKey.DeclaringEntityType.GetDerivedTypes()
+                var derivedTables = foreignKey.DeclaringEntityType
+                    .GetDerivedTypes()
                     .Select(t => StoreObjectIdentifier.Create(t, StoreObjectType.Table))
                     .Where(t => t != null);
-                if (foreignKey.GetConstraintName() != null
+                if (
+                    foreignKey.GetConstraintName() != null
                     && derivedTables.All(
-                        t => foreignKey.GetConstraintName(
-                                t!.Value,
-                                principalTable.Value)
-                            == null))
+                        t => foreignKey.GetConstraintName(t!.Value, principalTable.Value) == null
+                    )
+                )
                 {
                     logger.ForeignKeyPropertiesMappedToUnrelatedTables(foreignKey);
                 }
@@ -1099,7 +1307,13 @@ public class RelationalModelValidator : ModelValidator
                 continue;
             }
 
-            ValidateCompatible(foreignKey, duplicateForeignKey, foreignKeyName, storeObject, logger);
+            ValidateCompatible(
+                foreignKey,
+                duplicateForeignKey,
+                foreignKeyName,
+                storeObject,
+                logger
+            );
         }
     }
 
@@ -1116,8 +1330,8 @@ public class RelationalModelValidator : ModelValidator
         IForeignKey duplicateForeignKey,
         string foreignKeyName,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
-        => foreignKey.AreCompatible(duplicateForeignKey, storeObject, shouldThrow: true);
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    ) => foreignKey.AreCompatible(duplicateForeignKey, storeObject, shouldThrow: true);
 
     /// <summary>
     ///     Validates the compatibility of indexes in a given shared table.
@@ -1128,7 +1342,8 @@ public class RelationalModelValidator : ModelValidator
     protected virtual void ValidateSharedIndexesCompatibility(
         IReadOnlyList<IEntityType> mappedTypes,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         var indexMappings = new Dictionary<string, IIndex>();
         foreach (var index in mappedTypes.SelectMany(et => et.GetDeclaredIndexes()))
@@ -1162,8 +1377,8 @@ public class RelationalModelValidator : ModelValidator
         IIndex duplicateIndex,
         string indexName,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
-        => index.AreCompatible(duplicateIndex, storeObject, shouldThrow: true);
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    ) => index.AreCompatible(duplicateIndex, storeObject, shouldThrow: true);
 
     /// <summary>
     ///     Validates the compatibility of primary and alternate keys in a given shared table.
@@ -1174,7 +1389,8 @@ public class RelationalModelValidator : ModelValidator
     protected virtual void ValidateSharedKeysCompatibility(
         IReadOnlyList<IEntityType> mappedTypes,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         var keyMappings = new Dictionary<string, IKey>();
         foreach (var key in mappedTypes.SelectMany(et => et.GetDeclaredKeys()))
@@ -1208,8 +1424,8 @@ public class RelationalModelValidator : ModelValidator
         IKey duplicateKey,
         string keyName,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
-        => key.AreCompatible(duplicateKey, storeObject, shouldThrow: true);
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    ) => key.AreCompatible(duplicateKey, storeObject, shouldThrow: true);
 
     /// <summary>
     ///     Validates the compatibility of check constraints in a given shared table.
@@ -1220,10 +1436,13 @@ public class RelationalModelValidator : ModelValidator
     protected virtual void ValidateSharedCheckConstraintCompatibility(
         IReadOnlyList<IEntityType> mappedTypes,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         var checkConstraintMappings = new Dictionary<string, ICheckConstraint>();
-        foreach (var checkConstraint in mappedTypes.SelectMany(et => et.GetDeclaredCheckConstraints()))
+        foreach (
+            var checkConstraint in mappedTypes.SelectMany(et => et.GetDeclaredCheckConstraints())
+        )
         {
             var checkConstraintName = checkConstraint.GetName(storeObject);
             if (checkConstraintName == null)
@@ -1231,13 +1450,24 @@ public class RelationalModelValidator : ModelValidator
                 continue;
             }
 
-            if (!checkConstraintMappings.TryGetValue(checkConstraintName, out var duplicateCheckConstraint))
+            if (
+                !checkConstraintMappings.TryGetValue(
+                    checkConstraintName,
+                    out var duplicateCheckConstraint
+                )
+            )
             {
                 checkConstraintMappings[checkConstraintName] = checkConstraint;
                 continue;
             }
 
-            ValidateCompatible(checkConstraint, duplicateCheckConstraint, checkConstraintName, storeObject, logger);
+            ValidateCompatible(
+                checkConstraint,
+                duplicateCheckConstraint,
+                checkConstraintName,
+                storeObject,
+                logger
+            );
         }
     }
 
@@ -1254,8 +1484,14 @@ public class RelationalModelValidator : ModelValidator
         ICheckConstraint duplicateCheckConstraint,
         string indexName,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
-        => CheckConstraint.AreCompatible(checkConstraint, duplicateCheckConstraint, storeObject, shouldThrow: true);
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    ) =>
+        CheckConstraint.AreCompatible(
+            checkConstraint,
+            duplicateCheckConstraint,
+            storeObject,
+            shouldThrow: true
+        );
 
     /// <summary>
     ///     Validates the compatibility of triggers in a given shared table.
@@ -1266,7 +1502,8 @@ public class RelationalModelValidator : ModelValidator
     protected virtual void ValidateSharedTriggerCompatibility(
         IReadOnlyList<IEntityType> mappedTypes,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         var triggerMappings = new Dictionary<string, ITrigger>();
         foreach (var trigger in mappedTypes.SelectMany(et => et.GetDeclaredTriggers()))
@@ -1300,9 +1537,8 @@ public class RelationalModelValidator : ModelValidator
         ITrigger duplicateTrigger,
         string indexName,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
-    {
-    }
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    ) { }
 
     /// <summary>
     ///     Validates the mapping/configuration of inheritance in the model.
@@ -1311,7 +1547,8 @@ public class RelationalModelValidator : ModelValidator
     /// <param name="logger">The logger to use.</param>
     protected override void ValidateInheritanceMapping(
         IModel model,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         foreach (var entityType in model.GetEntityTypes())
         {
@@ -1319,25 +1556,32 @@ public class RelationalModelValidator : ModelValidator
             if (mappingStrategy != null)
             {
                 ValidateMappingStrategy(entityType, mappingStrategy);
-                var storeObject = entityType.GetSchemaQualifiedTableName()
+                var storeObject =
+                    entityType.GetSchemaQualifiedTableName()
                     ?? entityType.GetSchemaQualifiedViewName()
                     ?? entityType.GetFunctionName();
-                if (mappingStrategy == RelationalAnnotationNames.TpcMappingStrategy
+                if (
+                    mappingStrategy == RelationalAnnotationNames.TpcMappingStrategy
                     && !entityType.ClrType.IsInstantiable()
-                    && storeObject != null)
+                    && storeObject != null
+                )
                 {
                     throw new InvalidOperationException(
-                       RelationalStrings.AbstractTpc(entityType.DisplayName(), storeObject));
+                        RelationalStrings.AbstractTpc(entityType.DisplayName(), storeObject)
+                    );
                 }
             }
 
             if (entityType.BaseType != null)
             {
-                if (mappingStrategy != null
-                    && mappingStrategy != entityType.BaseType.GetMappingStrategy())
+                if (
+                    mappingStrategy != null
+                    && mappingStrategy != entityType.BaseType.GetMappingStrategy()
+                )
                 {
                     throw new InvalidOperationException(
-                       RelationalStrings.DerivedStrategy(entityType.DisplayName(), mappingStrategy));
+                        RelationalStrings.DerivedStrategy(entityType.DisplayName(), mappingStrategy)
+                    );
                 }
 
                 continue;
@@ -1351,11 +1595,17 @@ public class RelationalModelValidator : ModelValidator
             // Hierarchy mapping strategy must be the same across all types of mappings
             if (entityType.FindDiscriminatorProperty() != null)
             {
-                if (mappingStrategy != null
-                    && mappingStrategy != RelationalAnnotationNames.TphMappingStrategy)
+                if (
+                    mappingStrategy != null
+                    && mappingStrategy != RelationalAnnotationNames.TphMappingStrategy
+                )
                 {
                     throw new InvalidOperationException(
-                       RelationalStrings.NonTphMappingStrategy(mappingStrategy, entityType.DisplayName()));
+                        RelationalStrings.NonTphMappingStrategy(
+                            mappingStrategy,
+                            entityType.DisplayName()
+                        )
+                    );
                 }
 
                 ValidateTphMapping(entityType, forTables: false);
@@ -1367,9 +1617,10 @@ public class RelationalModelValidator : ModelValidator
                 var primaryKey = entityType.FindPrimaryKey();
                 if (mappingStrategy == RelationalAnnotationNames.TpcMappingStrategy)
                 {
-                    var storeGeneratedProperty = primaryKey?.Properties.FirstOrDefault(p => (p.ValueGenerated & ValueGenerated.OnAdd) != 0);
-                    if (storeGeneratedProperty != null
-                        && entityType.GetTableName() != null)
+                    var storeGeneratedProperty = primaryKey?.Properties.FirstOrDefault(
+                        p => (p.ValueGenerated & ValueGenerated.OnAdd) != 0
+                    );
+                    if (storeGeneratedProperty != null && entityType.GetTableName() != null)
                     {
                         logger.TpcStoreGeneratedIdentityWarning(storeGeneratedProperty);
                     }
@@ -1386,7 +1637,11 @@ public class RelationalModelValidator : ModelValidator
                 else if (primaryKey == null)
                 {
                     throw new InvalidOperationException(
-                       RelationalStrings.KeylessMappingStrategy(mappingStrategy ?? RelationalAnnotationNames.TptMappingStrategy, entityType.DisplayName()));
+                        RelationalStrings.KeylessMappingStrategy(
+                            mappingStrategy ?? RelationalAnnotationNames.TptMappingStrategy,
+                            entityType.DisplayName()
+                        )
+                    );
                 }
 
                 ValidateNonTphMapping(entityType, forTables: false);
@@ -1404,13 +1659,22 @@ public class RelationalModelValidator : ModelValidator
                     if (discriminatorValue is not string valueString)
                     {
                         throw new InvalidOperationException(
-                            RelationalStrings.NonTphDiscriminatorValueNotString(discriminatorValue, derivedType.DisplayName()));
+                            RelationalStrings.NonTphDiscriminatorValueNotString(
+                                discriminatorValue,
+                                derivedType.DisplayName()
+                            )
+                        );
                     }
 
                     if (discriminatorValues.TryGetValue(valueString, out var duplicateEntityType))
                     {
-                        throw new InvalidOperationException(RelationalStrings.EntityShortNameNotUnique(
-                            derivedType.Name, discriminatorValue, duplicateEntityType.Name));
+                        throw new InvalidOperationException(
+                            RelationalStrings.EntityShortNameNotUnique(
+                                derivedType.Name,
+                                discriminatorValue,
+                                duplicateEntityType.Name
+                            )
+                        );
                     }
 
                     discriminatorValues[valueString] = derivedType;
@@ -1420,27 +1684,41 @@ public class RelationalModelValidator : ModelValidator
 
         static void AssertNonInternal(IForeignKey foreignKey, StoreObjectType storeObjectType)
         {
-            if (!foreignKey.PrincipalKey.IsPrimaryKey()
+            if (
+                !foreignKey.PrincipalKey.IsPrimaryKey()
                 || foreignKey.PrincipalEntityType == foreignKey.DeclaringEntityType
                 || !foreignKey.IsUnique
 #pragma warning disable EF1001 // Internal EF Core API usage.
-                || !PropertyListComparer.Instance.Equals(foreignKey.Properties, foreignKey.PrincipalKey.Properties))
+                || !PropertyListComparer.Instance.Equals(
+                    foreignKey.Properties,
+                    foreignKey.PrincipalKey.Properties
+                )
+            )
 #pragma warning restore EF1001 // Internal EF Core API usage.
             {
                 return;
             }
 
-            var storeObjectId = StoreObjectIdentifier.Create(foreignKey.DeclaringEntityType, storeObjectType);
-            if (storeObjectId == null
-                || storeObjectId != StoreObjectIdentifier.Create(foreignKey.PrincipalEntityType, storeObjectType))
+            var storeObjectId = StoreObjectIdentifier.Create(
+                foreignKey.DeclaringEntityType,
+                storeObjectType
+            );
+            if (
+                storeObjectId == null
+                || storeObjectId
+                    != StoreObjectIdentifier.Create(foreignKey.PrincipalEntityType, storeObjectType)
+            )
             {
                 return;
             }
 
-            throw new InvalidOperationException(RelationalStrings.TpcTableSharing(
-                foreignKey.DeclaringEntityType.DisplayName(),
-                storeObjectId.Value.DisplayName(),
-                foreignKey.PrincipalEntityType.DisplayName()));
+            throw new InvalidOperationException(
+                RelationalStrings.TpcTableSharing(
+                    foreignKey.DeclaringEntityType.DisplayName(),
+                    storeObjectId.Value.DisplayName(),
+                    foreignKey.PrincipalEntityType.DisplayName()
+                )
+            );
         }
     }
 
@@ -1458,9 +1736,14 @@ public class RelationalModelValidator : ModelValidator
             case RelationalAnnotationNames.TptMappingStrategy:
                 break;
             default:
-                throw new InvalidOperationException(RelationalStrings.InvalidMappingStrategy(
-                    mappingStrategy, entityType.DisplayName()));
-        };
+                throw new InvalidOperationException(
+                    RelationalStrings.InvalidMappingStrategy(
+                        mappingStrategy,
+                        entityType.DisplayName()
+                    )
+                );
+        }
+        ;
     }
 
     private static void ValidateNonTphMapping(IEntityType rootEntityType, bool forTables)
@@ -1480,32 +1763,49 @@ public class RelationalModelValidator : ModelValidator
                 throw new InvalidOperationException(
                     forTables
                         ? RelationalStrings.NonTphTableClash(
-                            entityType.DisplayName(), otherType.DisplayName(), entityType.GetSchemaQualifiedTableName())
+                            entityType.DisplayName(),
+                            otherType.DisplayName(),
+                            entityType.GetSchemaQualifiedTableName()
+                        )
                         : RelationalStrings.NonTphViewClash(
-                            entityType.DisplayName(), otherType.DisplayName(), entityType.GetSchemaQualifiedViewName()));
+                            entityType.DisplayName(),
+                            otherType.DisplayName(),
+                            entityType.GetSchemaQualifiedViewName()
+                        )
+                );
             }
 
             derivedTypes[(name, schema)] = entityType;
         }
 
-        var storeObject = StoreObjectIdentifier.Create(rootEntityType, forTables ? StoreObjectType.Table : StoreObjectType.View);
+        var storeObject = StoreObjectIdentifier.Create(
+            rootEntityType,
+            forTables ? StoreObjectType.Table : StoreObjectType.View
+        );
         if (storeObject == null)
         {
             return;
         }
 
-        var internalForeignKey = rootEntityType.FindRowInternalForeignKeys(storeObject.Value).FirstOrDefault();
-        if (internalForeignKey != null
+        var internalForeignKey = rootEntityType
+            .FindRowInternalForeignKeys(storeObject.Value)
+            .FirstOrDefault();
+        if (
+            internalForeignKey != null
             && derivedTypes.Count > 1
-            && rootEntityType.GetMappingStrategy() == RelationalAnnotationNames.TpcMappingStrategy)
+            && rootEntityType.GetMappingStrategy() == RelationalAnnotationNames.TpcMappingStrategy
+        )
         {
             var derivedTypePair = derivedTypes.First(kv => kv.Value != rootEntityType);
             var (derivedName, derivedSchema) = derivedTypePair.Key;
-            throw new InvalidOperationException(RelationalStrings.TpcTableSharingDependent(
-                rootEntityType.DisplayName(),
-                storeObject.Value.DisplayName(),
-                derivedTypePair.Value.DisplayName(),
-                derivedSchema == null ? derivedName : $"{derivedSchema}.{derivedName}"));
+            throw new InvalidOperationException(
+                RelationalStrings.TpcTableSharingDependent(
+                    rootEntityType.DisplayName(),
+                    storeObject.Value.DisplayName(),
+                    derivedTypePair.Value.DisplayName(),
+                    derivedSchema == null ? derivedName : $"{derivedSchema}.{derivedName}"
+                )
+            );
         }
     }
 
@@ -1536,11 +1836,18 @@ public class RelationalModelValidator : ModelValidator
                 throw new InvalidOperationException(
                     forTables
                         ? RelationalStrings.TphTableMismatch(
-                            entityType.DisplayName(), entityType.GetSchemaQualifiedTableName(),
-                            firstType.DisplayName(), firstType.GetSchemaQualifiedTableName())
+                            entityType.DisplayName(),
+                            entityType.GetSchemaQualifiedTableName(),
+                            firstType.DisplayName(),
+                            firstType.GetSchemaQualifiedTableName()
+                        )
                         : RelationalStrings.TphViewMismatch(
-                            entityType.DisplayName(), entityType.GetSchemaQualifiedViewName(),
-                            firstType.DisplayName(), firstType.GetSchemaQualifiedViewName()));
+                            entityType.DisplayName(),
+                            entityType.GetSchemaQualifiedViewName(),
+                            firstType.DisplayName(),
+                            firstType.GetSchemaQualifiedViewName()
+                        )
+                );
             }
         }
     }
@@ -1552,7 +1859,8 @@ public class RelationalModelValidator : ModelValidator
     /// <param name="logger">The logger to use.</param>
     protected virtual void ValidatePropertyOverrides(
         IModel model,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         foreach (var entityType in model.GetEntityTypes())
         {
@@ -1572,51 +1880,75 @@ public class RelationalModelValidator : ModelValidator
                     switch (storeOverride.StoreObjectType)
                     {
                         case StoreObjectType.Table:
-                            if (!entityType.GetDerivedTypesInclusive().Any(
-                                    d =>
-                                        d.GetTableName() == name
-                                        && d.GetSchema() == schema))
+                            if (
+                                !entityType
+                                    .GetDerivedTypesInclusive()
+                                    .Any(d => d.GetTableName() == name && d.GetSchema() == schema)
+                            )
                             {
                                 throw new InvalidOperationException(
                                     RelationalStrings.TableOverrideMismatch(
                                         entityType.DisplayName() + "." + property.Name,
-                                        (schema == null ? "" : schema + ".") + name));
+                                        (schema == null ? "" : schema + ".") + name
+                                    )
+                                );
                             }
 
                             break;
                         case StoreObjectType.View:
-                            if (!entityType.GetDerivedTypesInclusive().Any(
-                                    d =>
-                                        d.GetViewName() == name
-                                        && d.GetViewSchema() == schema))
+                            if (
+                                !entityType
+                                    .GetDerivedTypesInclusive()
+                                    .Any(
+                                        d => d.GetViewName() == name && d.GetViewSchema() == schema
+                                    )
+                            )
                             {
                                 throw new InvalidOperationException(
                                     RelationalStrings.ViewOverrideMismatch(
                                         entityType.DisplayName() + "." + property.Name,
-                                        (schema == null ? "" : schema + ".") + name));
+                                        (schema == null ? "" : schema + ".") + name
+                                    )
+                                );
                             }
 
                             break;
                         case StoreObjectType.SqlQuery:
-                            if (entityType.GetDerivedTypesInclusive().All(d => d.GetDefaultSqlQueryName() != name))
+                            if (
+                                entityType
+                                    .GetDerivedTypesInclusive()
+                                    .All(d => d.GetDefaultSqlQueryName() != name)
+                            )
                             {
                                 throw new InvalidOperationException(
                                     RelationalStrings.SqlQueryOverrideMismatch(
-                                        entityType.DisplayName() + "." + property.Name, name));
+                                        entityType.DisplayName() + "." + property.Name,
+                                        name
+                                    )
+                                );
                             }
 
                             break;
                         case StoreObjectType.Function:
-                            if (entityType.GetDerivedTypesInclusive().All(d => d.GetFunctionName() != name))
+                            if (
+                                entityType
+                                    .GetDerivedTypesInclusive()
+                                    .All(d => d.GetFunctionName() != name)
+                            )
                             {
                                 throw new InvalidOperationException(
                                     RelationalStrings.FunctionOverrideMismatch(
-                                        entityType.DisplayName() + "." + property.Name, name));
+                                        entityType.DisplayName() + "." + property.Name,
+                                        name
+                                    )
+                                );
                             }
 
                             break;
                         default:
-                            throw new NotSupportedException(storeOverride.StoreObjectType.ToString());
+                            throw new NotSupportedException(
+                                storeOverride.StoreObjectType.ToString()
+                            );
                     }
                 }
             }
@@ -1630,12 +1962,20 @@ public class RelationalModelValidator : ModelValidator
     /// <param name="logger">The logger to use.</param>
     protected virtual void ValidateIndexProperties(
         IModel model,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         foreach (var entityType in model.GetEntityTypes())
         {
-            foreach (var index in entityType.GetDeclaredIndexes()
-                         .Where(i => ConfigurationSource.Convention != ((IConventionIndex)i).GetConfigurationSource()))
+            foreach (
+                var index in entityType
+                    .GetDeclaredIndexes()
+                    .Where(
+                        i =>
+                            ConfigurationSource.Convention
+                            != ((IConventionIndex)i).GetConfigurationSource()
+                    )
+            )
             {
                 IProperty? propertyNotMappedToAnyTable = null;
                 Tuple<string, List<(string Table, string? Schema)>>? firstPropertyTables = null;
@@ -1643,9 +1983,17 @@ public class RelationalModelValidator : ModelValidator
                 HashSet<(string Table, string? Schema)>? overlappingTables = null;
                 foreach (var property in index.Properties)
                 {
-                    var tablesMappedToProperty = property.DeclaringEntityType.GetDerivedTypesInclusive()
-                        .Select(t => (t.GetTableName(), t.GetSchema())).Distinct()
-                        .Where(n => n.Item1 != null && property.GetColumnName(StoreObjectIdentifier.Table(n.Item1, n.Item2)) != null)!
+                    var tablesMappedToProperty = property.DeclaringEntityType
+                        .GetDerivedTypesInclusive()
+                        .Select(t => (t.GetTableName(), t.GetSchema()))
+                        .Distinct()
+                        .Where(
+                            n =>
+                                n.Item1 != null
+                                && property.GetColumnName(
+                                    StoreObjectIdentifier.Table(n.Item1, n.Item2)
+                                ) != null
+                        )!
                         .ToList<(string Table, string? Schema)>();
                     if (tablesMappedToProperty.Count == 0)
                     {
@@ -1663,13 +2011,17 @@ public class RelationalModelValidator : ModelValidator
 
                     if (firstPropertyTables == null)
                     {
-                        firstPropertyTables =
-                            new Tuple<string, List<(string Table, string? Schema)>>(property.Name, tablesMappedToProperty);
+                        firstPropertyTables = new Tuple<
+                            string,
+                            List<(string Table, string? Schema)>
+                        >(property.Name, tablesMappedToProperty);
                     }
                     else
                     {
-                        lastPropertyTables =
-                            new Tuple<string, List<(string Table, string? Schema)>>(property.Name, tablesMappedToProperty);
+                        lastPropertyTables = new Tuple<
+                            string,
+                            List<(string Table, string? Schema)>
+                        >(property.Name, tablesMappedToProperty);
                     }
 
                     if (propertyNotMappedToAnyTable != null)
@@ -1681,7 +2033,9 @@ public class RelationalModelValidator : ModelValidator
 
                     if (overlappingTables == null)
                     {
-                        overlappingTables = new HashSet<(string Table, string? Schema)>(tablesMappedToProperty);
+                        overlappingTables = new HashSet<(string Table, string? Schema)>(
+                            tablesMappedToProperty
+                        );
                     }
                     else
                     {
@@ -1697,16 +2051,15 @@ public class RelationalModelValidator : ModelValidator
                 {
                     if (firstPropertyTables == null)
                     {
-                        logger.AllIndexPropertiesNotToMappedToAnyTable(
-                            entityType,
-                            index);
+                        logger.AllIndexPropertiesNotToMappedToAnyTable(entityType, index);
                     }
                     else
                     {
                         logger.IndexPropertiesBothMappedAndNotMappedToTable(
                             entityType,
                             index,
-                            propertyNotMappedToAnyTable!.Name);
+                            propertyNotMappedToAnyTable!.Name
+                        );
                     }
                 }
                 else if (overlappingTables.Count == 0)
@@ -1720,7 +2073,8 @@ public class RelationalModelValidator : ModelValidator
                         firstPropertyTables.Item1,
                         firstPropertyTables.Item2,
                         lastPropertyTables.Item1,
-                        lastPropertyTables.Item2);
+                        lastPropertyTables.Item2
+                    );
                 }
             }
         }
@@ -1733,7 +2087,8 @@ public class RelationalModelValidator : ModelValidator
     /// <param name="logger">The logger to use.</param>
     protected virtual void ValidateTriggers(
         IModel model,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+    )
     {
         foreach (var entityType in model.GetEntityTypes())
         {
@@ -1745,18 +2100,25 @@ public class RelationalModelValidator : ModelValidator
                 if (tableName is null)
                 {
                     throw new InvalidOperationException(
-                        RelationalStrings.TriggerOnUnmappedEntityType(trigger.ModelName, entityType.DisplayName()));
+                        RelationalStrings.TriggerOnUnmappedEntityType(
+                            trigger.ModelName,
+                            entityType.DisplayName()
+                        )
+                    );
                 }
 
-                if ((trigger.TableName != tableName)
-                    || (trigger.TableSchema is not null && trigger.TableSchema != tableSchema))
+                if (
+                    (trigger.TableName != tableName)
+                    || (trigger.TableSchema is not null && trigger.TableSchema != tableSchema)
+                )
                 {
                     throw new InvalidOperationException(
                         RelationalStrings.TriggerWithMismatchedTable(
                             trigger.ModelName,
                             (trigger.TableName!, trigger.TableSchema).FormatTable(),
                             entityType.DisplayName(),
-                            entityType.GetSchemaQualifiedTableName())
+                            entityType.GetSchemaQualifiedTableName()
+                        )
                     );
                 }
             }
@@ -1773,7 +2135,8 @@ public class RelationalModelValidator : ModelValidator
     protected override void ThrowPropertyNotMappedException(
         string propertyType,
         IConventionEntityType entityType,
-        IConventionProperty unmappedProperty)
+        IConventionProperty unmappedProperty
+    )
     {
         var storeType = unmappedProperty.GetColumnType();
         if (storeType != null)
@@ -1783,7 +2146,9 @@ public class RelationalModelValidator : ModelValidator
                     propertyType,
                     entityType.DisplayName(),
                     unmappedProperty.Name,
-                    storeType));
+                    storeType
+                )
+            );
         }
 
         base.ThrowPropertyNotMappedException(propertyType, entityType, unmappedProperty);

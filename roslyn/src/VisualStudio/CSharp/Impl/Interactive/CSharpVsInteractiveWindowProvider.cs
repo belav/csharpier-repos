@@ -44,8 +44,17 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
             [ImportMany] IInteractiveWindowCommand[] commands,
             IGlobalOptionService globalOptions,
             ITextDocumentFactoryService textDocumentFactoryService,
-            VisualStudioWorkspace workspace)
-            : base(serviceProvider, interactiveWindowFactory, classifierAggregator, contentTypeRegistry, commandsFactory, commands, workspace)
+            VisualStudioWorkspace workspace
+        )
+            : base(
+                serviceProvider,
+                interactiveWindowFactory,
+                classifierAggregator,
+                contentTypeRegistry,
+                commandsFactory,
+                commands,
+                workspace
+            )
         {
             _threadingContext = threadingContext;
             _listener = listenerProvider.GetListener(FeatureAttribute.InteractiveEvaluator);
@@ -60,13 +69,15 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
         // Note: intentionally left unlocalized (we treat these words as if they were unregistered trademarks)
         protected override string Title => "C# Interactive";
 
-        protected override FunctionId InteractiveWindowFunctionId => FunctionId.CSharp_Interactive_Window;
+        protected override FunctionId InteractiveWindowFunctionId =>
+            FunctionId.CSharp_Interactive_Window;
 
         protected override CSharpInteractiveEvaluator CreateInteractiveEvaluator(
             SVsServiceProvider serviceProvider,
             IViewClassifierAggregatorService classifierAggregator,
             IContentTypeRegistryService contentTypeRegistry,
-            VisualStudioWorkspace workspace)
+            VisualStudioWorkspace workspace
+        )
         {
             return new CSharpInteractiveEvaluator(
                 _globalOptions,
@@ -79,7 +90,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
                 Commands,
                 _textDocumentFactoryService,
                 CSharpInteractiveEvaluatorLanguageInfoProvider.Instance,
-                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+            );
         }
     }
 }

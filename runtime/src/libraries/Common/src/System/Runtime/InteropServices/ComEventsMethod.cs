@@ -77,9 +77,11 @@ namespace System.Runtime.InteropServices
 
                     // recognize only 'ref Enum' signatures and cache
                     // both enum type and the underlying type.
-                    if (pi.ParameterType.IsByRef
+                    if (
+                        pi.ParameterType.IsByRef
                         && pi.ParameterType.HasElementType
-                        && pi.ParameterType.GetElementType()!.IsEnum)
+                        && pi.ParameterType.GetElementType()!.IsEnum
+                    )
                     {
                         if (targetTypes == null)
                         {
@@ -195,7 +197,10 @@ namespace System.Runtime.InteropServices
                 for (int i = 0; i < _delegateWrappers.Count; i++)
                 {
                     DelegateWrapper wrapperMaybe = _delegateWrappers[i];
-                    if (wrapperMaybe.Delegate.GetType() == d.GetType() && wrapperMaybe.WrapArgs == wrapArgs)
+                    if (
+                        wrapperMaybe.Delegate.GetType() == d.GetType()
+                        && wrapperMaybe.WrapArgs == wrapArgs
+                    )
                     {
                         removeIdx = i;
                         wrapper = wrapperMaybe;
@@ -236,7 +241,10 @@ namespace System.Runtime.InteropServices
                     {
                         if (condition(delegateMaybe))
                         {
-                            Delegate? newDelegate = Delegate.Remove(wrapper!.Delegate, delegateMaybe);
+                            Delegate? newDelegate = Delegate.Remove(
+                                wrapper!.Delegate,
+                                delegateMaybe
+                            );
                             if (newDelegate != null)
                             {
                                 wrapper.Delegate = newDelegate;

@@ -45,8 +45,8 @@ public class SqlServerModificationCommandBatchTest
         Assert.Same(command, Assert.Single(batch.ModificationCommands));
         Assert.Equal(2098, batch.ParameterValues.Count);
 
-        ColumnModificationParameters CreateModificationParameters(string columnName)
-            => new()
+        ColumnModificationParameters CreateModificationParameters(string columnName) =>
+            new()
             {
                 ColumnName = columnName,
                 ColumnType = "integer",
@@ -57,9 +57,7 @@ public class SqlServerModificationCommandBatchTest
             };
     }
 
-    private class FakeDbContext : DbContext
-    {
-    }
+    private class FakeDbContext : DbContext { }
 
     private static TestSqlServerModificationCommandBatch CreateBatch(int maxBatchSize = 42)
     {
@@ -70,39 +68,47 @@ public class SqlServerModificationCommandBatchTest
                 new RelationalCommandBuilderFactory(
                     new RelationalCommandBuilderDependencies(
                         typeMapper,
-                        new SqlServerExceptionDetector())),
-                new SqlServerSqlGenerationHelper(
-                    new RelationalSqlGenerationHelperDependencies()),
+                        new SqlServerExceptionDetector()
+                    )
+                ),
+                new SqlServerSqlGenerationHelper(new RelationalSqlGenerationHelperDependencies()),
                 new SqlServerUpdateSqlGenerator(
                     new UpdateSqlGeneratorDependencies(
                         new SqlServerSqlGenerationHelper(
-                            new RelationalSqlGenerationHelperDependencies()),
-                        typeMapper)),
+                            new RelationalSqlGenerationHelperDependencies()
+                        ),
+                        typeMapper
+                    )
+                ),
                 new CurrentDbContext(new FakeDbContext()),
-                new FakeRelationalCommandDiagnosticsLogger()),
-            maxBatchSize);
+                new FakeRelationalCommandDiagnosticsLogger()
+            ),
+            maxBatchSize
+        );
     }
 
-    private static SqlServerTypeMappingSource CreateTypeMappingSource()
-        => new(
+    private static SqlServerTypeMappingSource CreateTypeMappingSource() =>
+        new(
             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+        );
 
     private static INonTrackedModificationCommand CreateModificationCommand(
         string name,
         string schema,
-        bool sensitiveLoggingEnabled)
-        => new ModificationCommandFactory().CreateNonTrackedModificationCommand(
-            new NonTrackedModificationCommandParameters(name, schema, sensitiveLoggingEnabled));
+        bool sensitiveLoggingEnabled
+    ) =>
+        new ModificationCommandFactory().CreateNonTrackedModificationCommand(
+            new NonTrackedModificationCommandParameters(name, schema, sensitiveLoggingEnabled)
+        );
 
     private class TestSqlServerModificationCommandBatch : SqlServerModificationCommandBatch
     {
-        public TestSqlServerModificationCommandBatch(ModificationCommandBatchFactoryDependencies dependencies, int maxBatchSize)
-            : base(dependencies, maxBatchSize)
-        {
-        }
+        public TestSqlServerModificationCommandBatch(
+            ModificationCommandBatchFactoryDependencies dependencies,
+            int maxBatchSize
+        ) : base(dependencies, maxBatchSize) { }
 
-        public new Dictionary<string, object> ParameterValues
-            => base.ParameterValues;
+        public new Dictionary<string, object> ParameterValues => base.ParameterValues;
     }
 }

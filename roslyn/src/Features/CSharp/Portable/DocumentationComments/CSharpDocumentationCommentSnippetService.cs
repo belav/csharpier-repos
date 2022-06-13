@@ -20,8 +20,15 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 {
-    [ExportLanguageService(typeof(IDocumentationCommentSnippetService), LanguageNames.CSharp), Shared]
-    internal class CSharpDocumentationCommentSnippetService : AbstractDocumentationCommentSnippetService<DocumentationCommentTriviaSyntax, MemberDeclarationSyntax>
+    [
+        ExportLanguageService(typeof(IDocumentationCommentSnippetService), LanguageNames.CSharp),
+        Shared
+    ]
+    internal class CSharpDocumentationCommentSnippetService
+        : AbstractDocumentationCommentSnippetService<
+            DocumentationCommentTriviaSyntax,
+            MemberDeclarationSyntax
+        >
     {
         public override string DocumentationCommentCharacter => "/";
 
@@ -33,19 +40,24 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                 globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
                 genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                miscellaneousOptions:
-                    SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers |
-                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpDocumentationCommentSnippetService()
-        {
-        }
+        public CSharpDocumentationCommentSnippetService() { }
 
-        protected override MemberDeclarationSyntax? GetContainingMember(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
+        protected override MemberDeclarationSyntax? GetContainingMember(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            return syntaxTree.GetRoot(cancellationToken).FindToken(position).GetAncestor<MemberDeclarationSyntax>();
+            return syntaxTree
+                .GetRoot(cancellationToken)
+                .FindToken(position)
+                .GetAncestor<MemberDeclarationSyntax>();
         }
 
         protected override bool SupportsDocumentationComments(MemberDeclarationSyntax member)
@@ -77,8 +89,13 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             }
         }
 
-        protected override bool HasDocumentationComment(MemberDeclarationSyntax member)
-            => member.GetFirstToken().LeadingTrivia.Any(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia);
+        protected override bool HasDocumentationComment(MemberDeclarationSyntax member) =>
+            member
+                .GetFirstToken()
+                .LeadingTrivia.Any(
+                    SyntaxKind.SingleLineDocumentationCommentTrivia,
+                    SyntaxKind.MultiLineDocumentationCommentTrivia
+                );
 
         protected override int GetPrecedingDocumentationCommentCount(MemberDeclarationSyntax member)
         {
@@ -95,12 +112,20 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             return count;
         }
 
-        protected override List<string> GetDocumentationCommentStubLines(MemberDeclarationSyntax member, string existingCommentText)
+        protected override List<string> GetDocumentationCommentStubLines(
+            MemberDeclarationSyntax member,
+            string existingCommentText
+        )
         {
             var list = new List<string>
             {
                 "/// <summary>",
-                "///" + (existingCommentText.StartsWith(" ") ? existingCommentText : $" {existingCommentText}"),
+                "///"
+                    + (
+                        existingCommentText.StartsWith(" ")
+                            ? existingCommentText
+                            : $" {existingCommentText}"
+                    ),
                 "/// </summary>"
             };
 
@@ -109,7 +134,11 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             {
                 foreach (var typeParam in typeParameterList.Parameters)
                 {
-                    list.Add("/// <typeparam name=\"" + typeParam.Identifier.ValueText + "\"></typeparam>");
+                    list.Add(
+                        "/// <typeparam name=\""
+                            + typeParam.Identifier.ValueText
+                            + "\"></typeparam>"
+                    );
                 }
             }
 
@@ -122,17 +151,27 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                 }
             }
 
-            if (member.IsKind(
+            if (
+                member.IsKind(
                     SyntaxKind.MethodDeclaration,
                     SyntaxKind.IndexerDeclaration,
                     SyntaxKind.DelegateDeclaration,
                     SyntaxKind.OperatorDeclaration,
                     SyntaxKind.ConstructorDeclaration,
-                    SyntaxKind.DestructorDeclaration))
+                    SyntaxKind.DestructorDeclaration
+                )
+            )
             {
                 var returnType = member.GetMemberType();
-                if (returnType != null &&
-                    !(returnType.IsKind(SyntaxKind.PredefinedType, out PredefinedTypeSyntax? predefinedType) && predefinedType.Keyword.IsKindOrHasMatchingText(SyntaxKind.VoidKeyword)))
+                if (
+                    returnType != null
+                    && !(
+                        returnType.IsKind(
+                            SyntaxKind.PredefinedType,
+                            out PredefinedTypeSyntax? predefinedType
+                        ) && predefinedType.Keyword.IsKindOrHasMatchingText(SyntaxKind.VoidKeyword)
+                    )
+                )
                 {
                     list.Add("/// <returns></returns>");
                 }
@@ -148,10 +187,14 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
         private static IEnumerable<string> GetExceptions(SyntaxNode member)
         {
-            var throwExpressionsAndStatements = member.DescendantNodes().Where(n => n.IsKind(SyntaxKind.ThrowExpression, SyntaxKind.ThrowStatement));
+            var throwExpressionsAndStatements = member
+                .DescendantNodes()
+                .Where(n => n.IsKind(SyntaxKind.ThrowExpression, SyntaxKind.ThrowStatement));
 
             var usings = member.GetEnclosingUsingDirectives();
-            var hasUsingSystem = usings.Any(u => u.Name is IdentifierNameSyntax { Identifier.ValueText: nameof(System) });
+            var hasUsingSystem = usings.Any(
+                u => u.Name is IdentifierNameSyntax { Identifier.ValueText: nameof(System) }
+            );
 
             using var _ = PooledHashSet<string>.GetInstance(out var seenExceptionTypes);
             foreach (var throwExpressionOrStatement in throwExpressionsAndStatements)
@@ -166,11 +209,15 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                 if (expression.IsKind(SyntaxKind.NullLiteralExpression))
                 {
                     // `throw null;` throws NullReferenceException at runtime.
-                    var exception = hasUsingSystem ? nameof(NullReferenceException) : $"{nameof(System)}.{nameof(NullReferenceException)}";
+                    var exception = hasUsingSystem
+                        ? nameof(NullReferenceException)
+                        : $"{nameof(System)}.{nameof(NullReferenceException)}";
                     if (seenExceptionTypes.Add(exception))
                         yield return exception;
                 }
-                else if (expression is ObjectCreationExpressionSyntax { Type: TypeSyntax exceptionType })
+                else if (
+                    expression is ObjectCreationExpressionSyntax { Type: TypeSyntax exceptionType }
+                )
                 {
                     exceptionType = exceptionType.ConvertToSingleLine();
                     if (!IsExceptionCaughtAndNotRethrown(hasUsingSystem, exceptionType))
@@ -183,13 +230,21 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             }
         }
 
-        private static bool IsExceptionCaughtAndNotRethrown(bool hasUsingSystem, TypeSyntax exceptionType)
+        private static bool IsExceptionCaughtAndNotRethrown(
+            bool hasUsingSystem,
+            TypeSyntax exceptionType
+        )
         {
             for (SyntaxNode? current = exceptionType; current != null; current = current?.Parent)
             {
-                if (current is not BlockSyntax { Parent: TryStatementSyntax tryStatement } block ||
-                    tryStatement.Block != block ||
-                    block.DescendantNodes().OfType<ThrowStatementSyntax>().Any(t => t.Expression is null))
+                if (
+                    current is not BlockSyntax { Parent: TryStatementSyntax tryStatement } block
+                    || tryStatement.Block != block
+                    || block
+                        .DescendantNodes()
+                        .OfType<ThrowStatementSyntax>()
+                        .Any(t => t.Expression is null)
+                )
                 {
                     continue;
                 }
@@ -204,20 +259,30 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                         return true;
 
                     // Poor mans equivalence check since we don't have semantics here.
-                    if (SyntaxFactory.AreEquivalent(exceptionType, catchClause.Declaration.Type.ConvertToSingleLine()))
+                    if (
+                        SyntaxFactory.AreEquivalent(
+                            exceptionType,
+                            catchClause.Declaration.Type.ConvertToSingleLine()
+                        )
+                    )
                         return true;
 
-                    if (hasUsingSystem &&
-                        catchClause.Declaration.Type is IdentifierNameSyntax { Identifier.ValueText: nameof(Exception) })
+                    if (
+                        hasUsingSystem
+                        && catchClause.Declaration.Type
+                            is IdentifierNameSyntax { Identifier.ValueText: nameof(Exception) }
+                    )
                     {
                         return true;
                     }
 
-                    if (catchClause.Declaration.Type is QualifiedNameSyntax
+                    if (
+                        catchClause.Declaration.Type is QualifiedNameSyntax
                         {
                             Left: IdentifierNameSyntax { Identifier.ValueText: nameof(System) },
                             Right: IdentifierNameSyntax { Identifier.ValueText: nameof(Exception) },
-                        })
+                        }
+                    )
                     {
                         return true;
                     }
@@ -228,36 +293,56 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
         }
 
         protected override SyntaxToken GetTokenToRight(
-            SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             if (position >= syntaxTree.GetText(cancellationToken).Length)
             {
                 return default;
             }
 
-            return syntaxTree.GetRoot(cancellationToken).FindTokenOnRightOfPosition(
-                position, includeDirectives: true, includeDocumentationComments: true);
+            return syntaxTree
+                .GetRoot(cancellationToken)
+                .FindTokenOnRightOfPosition(
+                    position,
+                    includeDirectives: true,
+                    includeDocumentationComments: true
+                );
         }
 
         protected override SyntaxToken GetTokenToLeft(
-            SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             if (position < 1)
             {
                 return default;
             }
 
-            return syntaxTree.GetRoot(cancellationToken).FindTokenOnLeftOfPosition(
-                position - 1, includeDirectives: true, includeDocumentationComments: true, includeSkipped: true);
+            return syntaxTree
+                .GetRoot(cancellationToken)
+                .FindTokenOnLeftOfPosition(
+                    position - 1,
+                    includeDirectives: true,
+                    includeDocumentationComments: true,
+                    includeSkipped: true
+                );
         }
 
-        protected override bool IsDocCommentNewLine(SyntaxToken token)
-            => token.RawKind == (int)SyntaxKind.XmlTextLiteralNewLineToken;
+        protected override bool IsDocCommentNewLine(SyntaxToken token) =>
+            token.RawKind == (int)SyntaxKind.XmlTextLiteralNewLineToken;
 
-        protected override bool IsEndOfLineTrivia(SyntaxTrivia trivia)
-            => trivia.RawKind == (int)SyntaxKind.EndOfLineTrivia;
+        protected override bool IsEndOfLineTrivia(SyntaxTrivia trivia) =>
+            trivia.RawKind == (int)SyntaxKind.EndOfLineTrivia;
 
-        protected override bool IsSingleExteriorTrivia(DocumentationCommentTriviaSyntax documentationComment, [NotNullWhen(true)] out string? existingCommentText)
+        protected override bool IsSingleExteriorTrivia(
+            DocumentationCommentTriviaSyntax documentationComment,
+            [NotNullWhen(true)] out string? existingCommentText
+        )
         {
             existingCommentText = null;
 
@@ -297,12 +382,15 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
             return lastTextToken.Kind() == SyntaxKind.XmlTextLiteralNewLineToken
                 && firstTextToken.LeadingTrivia.Count == 1
-                && firstTextToken.LeadingTrivia.ElementAt(0).Kind() == SyntaxKind.DocumentationCommentExteriorTrivia
+                && firstTextToken.LeadingTrivia.ElementAt(0).Kind()
+                    == SyntaxKind.DocumentationCommentExteriorTrivia
                 && firstTextToken.LeadingTrivia.ElementAt(0).ToString() == ExteriorTriviaText
                 && lastTextToken.TrailingTrivia.Count == 0;
         }
 
-        private static IList<SyntaxToken> GetTextTokensFollowingExteriorTrivia(XmlTextSyntax xmlText)
+        private static IList<SyntaxToken> GetTextTokensFollowingExteriorTrivia(
+            XmlTextSyntax xmlText
+        )
         {
             var result = new List<SyntaxToken>();
 
@@ -322,7 +410,9 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             return result;
         }
 
-        protected override bool EndsWithSingleExteriorTrivia(DocumentationCommentTriviaSyntax? documentationComment)
+        protected override bool EndsWithSingleExteriorTrivia(
+            DocumentationCommentTriviaSyntax? documentationComment
+        )
         {
             if (documentationComment == null)
             {
@@ -351,15 +441,17 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
             return lastTextToken.Kind() == SyntaxKind.XmlTextLiteralNewLineToken
                 && firstTextToken.LeadingTrivia.Count == 1
-                && firstTextToken.LeadingTrivia.ElementAt(0).Kind() == SyntaxKind.DocumentationCommentExteriorTrivia
+                && firstTextToken.LeadingTrivia.ElementAt(0).Kind()
+                    == SyntaxKind.DocumentationCommentExteriorTrivia
                 && firstTextToken.LeadingTrivia.ElementAt(0).ToString() == ExteriorTriviaText
                 && lastTextToken.TrailingTrivia.Count == 0;
         }
 
-        protected override bool IsMultilineDocComment(DocumentationCommentTriviaSyntax? documentationComment)
-            => documentationComment.IsMultilineDocComment();
+        protected override bool IsMultilineDocComment(
+            DocumentationCommentTriviaSyntax? documentationComment
+        ) => documentationComment.IsMultilineDocComment();
 
-        protected override bool HasSkippedTrailingTrivia(SyntaxToken token)
-            => token.TrailingTrivia.Any(t => t.Kind() == SyntaxKind.SkippedTokensTrivia);
+        protected override bool HasSkippedTrailingTrivia(SyntaxToken token) =>
+            token.TrailingTrivia.Any(t => t.Kind() == SyntaxKind.SkippedTokensTrivia);
     }
 }

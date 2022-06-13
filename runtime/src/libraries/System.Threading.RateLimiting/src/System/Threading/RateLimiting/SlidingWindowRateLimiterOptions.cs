@@ -28,7 +28,8 @@ namespace System.Threading.RateLimiting
             int queueLimit,
             TimeSpan window,
             int segmentsPerWindow,
-            bool autoReplenishment = true)
+            bool autoReplenishment = true
+        )
         {
             if (permitLimit < 0)
             {

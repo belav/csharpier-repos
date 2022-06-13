@@ -19,10 +19,17 @@ namespace System.Net.Http.Handlers
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public async Task SendAsync_DoesNotInsertSendProgressWithoutEntityOrHandlerPresent(bool insertRequestEntity, bool addSendProgressHandler)
+        public async Task SendAsync_DoesNotInsertSendProgressWithoutEntityOrHandlerPresent(
+            bool insertRequestEntity,
+            bool addSendProgressHandler
+        )
         {
             // Arrange
-            HttpMessageInvoker invoker = CreateMessageInvoker(includeResponseEntity: false, addReceiveProgressHandler: false, addSendProgressHandler: addSendProgressHandler);
+            HttpMessageInvoker invoker = CreateMessageInvoker(
+                includeResponseEntity: false,
+                addReceiveProgressHandler: false,
+                addSendProgressHandler: addSendProgressHandler
+            );
             HttpRequestMessage request = new HttpRequestMessage();
             HttpContent content = null;
             if (insertRequestEntity)
@@ -60,10 +67,17 @@ namespace System.Net.Http.Handlers
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public async Task SendAsync_InsertsReceiveProgressWhenResponseEntityPresent(bool insertResponseEntity, bool addReceiveProgressHandler)
+        public async Task SendAsync_InsertsReceiveProgressWhenResponseEntityPresent(
+            bool insertResponseEntity,
+            bool addReceiveProgressHandler
+        )
         {
             // Arrange
-            HttpMessageInvoker invoker = CreateMessageInvoker(includeResponseEntity: insertResponseEntity, addSendProgressHandler: false, addReceiveProgressHandler: addReceiveProgressHandler);
+            HttpMessageInvoker invoker = CreateMessageInvoker(
+                includeResponseEntity: insertResponseEntity,
+                addSendProgressHandler: false,
+                addReceiveProgressHandler: addReceiveProgressHandler
+            );
             HttpRequestMessage request = new HttpRequestMessage();
 
             // Act
@@ -89,9 +103,15 @@ namespace System.Net.Http.Handlers
             }
         }
 
-        private static HttpMessageInvoker CreateMessageInvoker(bool includeResponseEntity, bool addSendProgressHandler, bool addReceiveProgressHandler)
+        private static HttpMessageInvoker CreateMessageInvoker(
+            bool includeResponseEntity,
+            bool addSendProgressHandler,
+            bool addReceiveProgressHandler
+        )
         {
-            ShortCircuitMessageHandler innerHandler = new ShortCircuitMessageHandler(includeResponseEntity);
+            ShortCircuitMessageHandler innerHandler = new ShortCircuitMessageHandler(
+                includeResponseEntity
+            );
             ProgressMessageHandler progress = new ProgressMessageHandler(innerHandler);
             if (addSendProgressHandler)
             {
@@ -123,10 +143,16 @@ namespace System.Net.Http.Handlers
                 _includeResponseEntity = includeResponseEntity;
             }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
 #if NETFX_CORE  // Extension method only available on non portable library
-                HttpResponseMessage response = new HttpResponseMessage() { RequestMessage = request };
+                HttpResponseMessage response = new HttpResponseMessage()
+                {
+                    RequestMessage = request
+                };
 #else
                 HttpResponseMessage response = request.CreateResponse();
 #endif

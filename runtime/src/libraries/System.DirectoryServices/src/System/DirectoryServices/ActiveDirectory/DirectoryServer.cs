@@ -33,9 +33,7 @@ namespace System.DirectoryServices.ActiveDirectory
         private ReplicationConnectionCollection? _outbound;
 
         #region constructors
-        protected DirectoryServer()
-        {
-        }
+        protected DirectoryServer() { }
         #endregion constructors
 
         #region IDisposable
@@ -97,15 +95,29 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     // Bind to the target site's server container
                     // Get the distinguished name for the site
-                    string parentDN = "CN=Servers,CN=" + siteName + "," + directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.SitesContainer);
+                    string parentDN =
+                        "CN=Servers,CN="
+                        + siteName
+                        + ","
+                        + directoryEntryMgr.ExpandWellKnownDN(WellKnownDN.SitesContainer);
                     newParentEntry = DirectoryEntryManager.GetDirectoryEntry(context, parentDN);
 
-                    string serverName = (this is DomainController) ? ((DomainController)this).ServerObjectName : ((AdamInstance)this).ServerObjectName;
+                    string serverName =
+                        (this is DomainController)
+                            ? ((DomainController)this).ServerObjectName
+                            : ((AdamInstance)this).ServerObjectName;
 
-                    DirectoryEntry serverEntry = directoryEntryMgr.GetCachedDirectoryEntry(serverName);
+                    DirectoryEntry serverEntry = directoryEntryMgr.GetCachedDirectoryEntry(
+                        serverName
+                    );
 
                     // force binding (needed otherwise S.DS throw an exception while releasing the COM interface pointer)
-                    _ = (string?)PropertyManager.GetPropertyValue(context, serverEntry, PropertyManager.DistinguishedName);
+                    _ = (string?)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            serverEntry,
+                            PropertyManager.DistinguishedName
+                        );
 
                     // move the object to the servers container of the target site
                     serverEntry.MoveTo(newParentEntry);
@@ -150,7 +162,10 @@ namespace System.DirectoryServices.ActiveDirectory
         public DirectoryEntry GetDirectoryEntry()
         {
             CheckIfDisposed();
-            string serverName = (this is DomainController) ? ((DomainController)this).ServerObjectName : ((AdamInstance)this).ServerObjectName;
+            string serverName =
+                (this is DomainController)
+                    ? ((DomainController)this).ServerObjectName
+                    : ((AdamInstance)this).ServerObjectName;
             return DirectoryEntryManager.GetDirectoryEntry(context, serverName);
         }
 
@@ -170,13 +185,18 @@ namespace System.DirectoryServices.ActiveDirectory
 
         public abstract ReplicationFailureCollection GetReplicationConnectionFailures();
 
-        public abstract ActiveDirectoryReplicationMetadata GetReplicationMetadata(string objectPath);
+        public abstract ActiveDirectoryReplicationMetadata GetReplicationMetadata(
+            string objectPath
+        );
 
         public abstract void SyncReplicaFromServer(string partition, string sourceServer);
 
         public abstract void TriggerSyncReplicaFromNeighbors(string partition);
 
-        public abstract void SyncReplicaFromAllServers(string partition, SyncFromAllServersOptions options);
+        public abstract void SyncReplicaFromAllServers(
+            string partition,
+            SyncFromAllServersOptions options
+        );
 
         #endregion public abstract methods
 
@@ -239,7 +259,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
 
                 // also the read only partitions
-                string ntdsaName = (this is DomainController) ? ((DomainController)this).NtdsaObjectName : ((AdamInstance)this).NtdsaObjectName;
+                string ntdsaName =
+                    (this is DomainController)
+                        ? ((DomainController)this).NtdsaObjectName
+                        : ((AdamInstance)this).NtdsaObjectName;
                 serverNtdsaEntry = DirectoryEntryManager.GetDirectoryEntry(context, ntdsaName);
 
                 // use range retrieval
@@ -249,14 +272,20 @@ namespace System.DirectoryServices.ActiveDirectory
                 Hashtable? values = null;
                 try
                 {
-                    values = Utils.GetValuesWithRangeRetrieval(serverNtdsaEntry, null, propertyNames, SearchScope.Base);
+                    values = Utils.GetValuesWithRangeRetrieval(
+                        serverNtdsaEntry,
+                        null,
+                        propertyNames,
+                        SearchScope.Base
+                    );
                 }
                 catch (COMException e)
                 {
                     throw ExceptionHelper.GetExceptionFromCOMException(context, e);
                 }
 
-                ArrayList readOnlyPartitions = (ArrayList)values[PropertyManager.HasPartialReplicaNCs.ToLowerInvariant()]!;
+                ArrayList readOnlyPartitions = (ArrayList)
+                    values[PropertyManager.HasPartialReplicaNCs.ToLowerInvariant()]!;
 
                 Debug.Assert(readOnlyPartitions != null);
                 foreach (string readOnlyPartition in readOnlyPartitions)
@@ -296,7 +325,8 @@ namespace System.DirectoryServices.ActiveDirectory
         internal unsafe void CheckConsistencyHelper(IntPtr dsHandle, SafeLibraryHandle libHandle)
         {
             // call DsReplicaConsistencyCheck
-            var replicaConsistencyCheck = (delegate* unmanaged<IntPtr, int, int, int>)global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaConsistencyCheck");
+            var replicaConsistencyCheck = (delegate* unmanaged<IntPtr, int, int, int>)
+                global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaConsistencyCheck");
             if (replicaConsistencyCheck == null)
             {
                 throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
@@ -308,7 +338,15 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw ExceptionHelper.GetExceptionFromErrorCode(result, Name);
         }
 
-        internal unsafe IntPtr GetReplicationInfoHelper(IntPtr dsHandle, int type, int secondaryType, string? partition, ref bool advanced, int context, SafeLibraryHandle libHandle)
+        internal unsafe IntPtr GetReplicationInfoHelper(
+            IntPtr dsHandle,
+            int type,
+            int secondaryType,
+            string? partition,
+            ref bool advanced,
+            int context,
+            SafeLibraryHandle libHandle
+        )
         {
             IntPtr info = (IntPtr)0;
             int result = 0;
@@ -316,18 +354,42 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // first try to use the DsReplicaGetInfo2W API which does not exist on win2k machine
             // call DsReplicaGetInfo2W
-            var dsReplicaGetInfo2W = (delegate* unmanaged<IntPtr, int, char*, IntPtr, char*, char*, int, int, IntPtr*, int>)global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaGetInfo2W");
+            var dsReplicaGetInfo2W = (delegate* unmanaged<
+                IntPtr,
+                int,
+                char*,
+                IntPtr,
+                char*,
+                char*,
+                int,
+                int,
+                IntPtr*,
+                int>)
+                global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaGetInfo2W");
             if (dsReplicaGetInfo2W == null)
             {
                 // a win2k machine which does not have it.
-                var dsReplicaGetInfoW = (delegate* unmanaged<IntPtr, int, char*, IntPtr, IntPtr*, int>)global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaGetInfoW");
+                var dsReplicaGetInfoW = (delegate* unmanaged<
+                    IntPtr,
+                    int,
+                    char*,
+                    IntPtr,
+                    IntPtr*,
+                    int>)
+                    global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaGetInfoW");
                 if (dsReplicaGetInfoW == null)
                 {
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
                 }
                 fixed (char* partitionPtr = partition)
                 {
-                    result = dsReplicaGetInfoW(dsHandle, secondaryType, partitionPtr, (IntPtr)0, &info);
+                    result = dsReplicaGetInfoW(
+                        dsHandle,
+                        secondaryType,
+                        partitionPtr,
+                        (IntPtr)0,
+                        &info
+                    );
                 }
                 advanced = false;
                 needToTryAgain = false;
@@ -336,7 +398,17 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 fixed (char* partitionPtr = partition)
                 {
-                    result = dsReplicaGetInfo2W(dsHandle, type, partitionPtr, (IntPtr)0, null, null, 0, context, &info);
+                    result = dsReplicaGetInfo2W(
+                        dsHandle,
+                        type,
+                        partitionPtr,
+                        (IntPtr)0,
+                        null,
+                        null,
+                        0,
+                        context,
+                        &info
+                    );
                 }
             }
 
@@ -344,7 +416,14 @@ namespace System.DirectoryServices.ActiveDirectory
             if (needToTryAgain && result == DS_REPL_NOTSUPPORTED)
             {
                 // this is the case that client is xp/win2k3, dc is win2k
-                var dsReplicaGetInfoW = (delegate* unmanaged<IntPtr, int, char*, IntPtr, IntPtr*, int>)global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaGetInfoW");
+                var dsReplicaGetInfoW = (delegate* unmanaged<
+                    IntPtr,
+                    int,
+                    char*,
+                    IntPtr,
+                    IntPtr*,
+                    int>)
+                    global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaGetInfoW");
                 if (dsReplicaGetInfoW == null)
                 {
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
@@ -352,7 +431,13 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 fixed (char* partitionPtr = partition)
                 {
-                    result = dsReplicaGetInfoW(dsHandle, secondaryType, partitionPtr, (IntPtr)0, &info);
+                    result = dsReplicaGetInfoW(
+                        dsHandle,
+                        secondaryType,
+                        partitionPtr,
+                        (IntPtr)0,
+                        &info
+                    );
                 }
                 advanced = false;
             }
@@ -364,21 +449,36 @@ namespace System.DirectoryServices.ActiveDirectory
                     // this is the case of meta data
                     if (type == (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_METADATA_2_FOR_OBJ)
                     {
-                        if (result == ExceptionHelper.ERROR_DS_DRA_BAD_DN || result == ExceptionHelper.ERROR_DS_NAME_UNPARSEABLE)
-                            throw new ArgumentException(ExceptionHelper.GetErrorMessage(result, false), "objectPath");
+                        if (
+                            result == ExceptionHelper.ERROR_DS_DRA_BAD_DN
+                            || result == ExceptionHelper.ERROR_DS_NAME_UNPARSEABLE
+                        )
+                            throw new ArgumentException(
+                                ExceptionHelper.GetErrorMessage(result, false),
+                                "objectPath"
+                            );
 
-                        DirectoryEntry verifyEntry = DirectoryEntryManager.GetDirectoryEntry(this.context, partition);
+                        DirectoryEntry verifyEntry = DirectoryEntryManager.GetDirectoryEntry(
+                            this.context,
+                            partition
+                        );
                         try
                         {
                             verifyEntry.RefreshCache(new string[] { "name" });
                         }
                         catch (COMException e)
                         {
-                            if (e.ErrorCode == unchecked((int)0x80072020) |          // dir_error on server side
-                                   e.ErrorCode == unchecked((int)0x80072030))           // object not exists
+                            if (
+                                e.ErrorCode == unchecked((int)0x80072020)
+                                | // dir_error on server side
+                                e.ErrorCode == unchecked((int)0x80072030)
+                            ) // object not exists
                                 throw new ArgumentException(SR.DSNoObject, "objectPath");
-                            else if (e.ErrorCode == unchecked((int)0x80005000) |          // bad path name
-                                   e.ErrorCode == unchecked((int)0x80072032)) // ERROR_DS_INVALID_DN_SYNTAX
+                            else if (
+                                e.ErrorCode == unchecked((int)0x80005000)
+                                | // bad path name
+                                e.ErrorCode == unchecked((int)0x80072032)
+                            ) // ERROR_DS_INVALID_DN_SYNTAX
                                 throw new ArgumentException(SR.DSInvalidPath, "objectPath");
                         }
                     }
@@ -395,7 +495,14 @@ namespace System.DirectoryServices.ActiveDirectory
             return info;
         }
 
-        internal ReplicationCursorCollection ConstructReplicationCursors(IntPtr dsHandle, bool advanced, IntPtr info, string partition, DirectoryServer server, SafeLibraryHandle libHandle)
+        internal ReplicationCursorCollection ConstructReplicationCursors(
+            IntPtr dsHandle,
+            bool advanced,
+            IntPtr info,
+            string partition,
+            DirectoryServer server,
+            SafeLibraryHandle libHandle
+        )
         {
             int context = 0;
             int count = 0;
@@ -431,11 +538,23 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                     finally
                     {
-                        FreeReplicaInfo(DS_REPL_INFO_TYPE.DS_REPL_INFO_CURSORS_3_FOR_NC, info, libHandle);
+                        FreeReplicaInfo(
+                            DS_REPL_INFO_TYPE.DS_REPL_INFO_CURSORS_3_FOR_NC,
+                            info,
+                            libHandle
+                        );
                     }
 
                     // get the next batch of results
-                    info = GetReplicationInfoHelper(dsHandle, (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_CURSORS_3_FOR_NC, (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_CURSORS_FOR_NC, partition, ref advanced, context, libHandle);
+                    info = GetReplicationInfoHelper(
+                        dsHandle,
+                        (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_CURSORS_3_FOR_NC,
+                        (int)DS_REPL_INFO_TYPE.DS_REPL_INFO_CURSORS_FOR_NC,
+                        partition,
+                        ref advanced,
+                        context,
+                        libHandle
+                    );
                 }
             }
             else
@@ -460,7 +579,11 @@ namespace System.DirectoryServices.ActiveDirectory
             return collection;
         }
 
-        internal ReplicationOperationInformation ConstructPendingOperations(IntPtr info, DirectoryServer server, SafeLibraryHandle libHandle)
+        internal ReplicationOperationInformation ConstructPendingOperations(
+            IntPtr info,
+            DirectoryServer server,
+            SafeLibraryHandle libHandle
+        )
         {
             ReplicationOperationInformation replicationInfo = new ReplicationOperationInformation();
             ReplicationOperationCollection collection = new ReplicationOperationCollection(server);
@@ -477,7 +600,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (count > 0)
                     {
                         collection.AddHelper(operations, info);
-                        replicationInfo.startTime = DateTime.FromFileTime(operations.ftimeCurrentOpStarted);
+                        replicationInfo.startTime = DateTime.FromFileTime(
+                            operations.ftimeCurrentOpStarted
+                        );
                         replicationInfo.currentOp = collection.GetFirstOperation();
                     }
                 }
@@ -489,7 +614,11 @@ namespace System.DirectoryServices.ActiveDirectory
             return replicationInfo;
         }
 
-        internal ReplicationNeighborCollection ConstructNeighbors(IntPtr info, DirectoryServer server, SafeLibraryHandle libHandle)
+        internal ReplicationNeighborCollection ConstructNeighbors(
+            IntPtr info,
+            DirectoryServer server,
+            SafeLibraryHandle libHandle
+        )
         {
             ReplicationNeighborCollection collection = new ReplicationNeighborCollection(server);
             int count = 0;
@@ -513,7 +642,11 @@ namespace System.DirectoryServices.ActiveDirectory
             return collection;
         }
 
-        internal ReplicationFailureCollection ConstructFailures(IntPtr info, DirectoryServer server, SafeLibraryHandle libHandle)
+        internal ReplicationFailureCollection ConstructFailures(
+            IntPtr info,
+            DirectoryServer server,
+            SafeLibraryHandle libHandle
+        )
         {
             ReplicationFailureCollection collection = new ReplicationFailureCollection(server);
             int count = 0;
@@ -531,14 +664,25 @@ namespace System.DirectoryServices.ActiveDirectory
             }
             finally
             {
-                FreeReplicaInfo(DS_REPL_INFO_TYPE.DS_REPL_INFO_KCC_DSA_CONNECT_FAILURES, info, libHandle);
+                FreeReplicaInfo(
+                    DS_REPL_INFO_TYPE.DS_REPL_INFO_KCC_DSA_CONNECT_FAILURES,
+                    info,
+                    libHandle
+                );
             }
             return collection;
         }
 
-        internal ActiveDirectoryReplicationMetadata ConstructMetaData(bool advanced, IntPtr info, DirectoryServer server, SafeLibraryHandle libHandle)
+        internal ActiveDirectoryReplicationMetadata ConstructMetaData(
+            bool advanced,
+            IntPtr info,
+            DirectoryServer server,
+            SafeLibraryHandle libHandle
+        )
         {
-            ActiveDirectoryReplicationMetadata collection = new ActiveDirectoryReplicationMetadata(server);
+            ActiveDirectoryReplicationMetadata collection = new ActiveDirectoryReplicationMetadata(
+                server
+            );
             int count = 0;
 
             if (advanced)
@@ -559,7 +703,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 finally
                 {
-                    FreeReplicaInfo(DS_REPL_INFO_TYPE.DS_REPL_INFO_METADATA_2_FOR_OBJ, info, libHandle);
+                    FreeReplicaInfo(
+                        DS_REPL_INFO_TYPE.DS_REPL_INFO_METADATA_2_FOR_OBJ,
+                        info,
+                        libHandle
+                    );
                 }
             }
             else
@@ -577,7 +725,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 finally
                 {
-                    FreeReplicaInfo(DS_REPL_INFO_TYPE.DS_REPL_INFO_METADATA_FOR_OBJ, info, libHandle);
+                    FreeReplicaInfo(
+                        DS_REPL_INFO_TYPE.DS_REPL_INFO_METADATA_FOR_OBJ,
+                        info,
+                        libHandle
+                    );
                 }
             }
 
@@ -638,7 +790,14 @@ namespace System.DirectoryServices.ActiveDirectory
             }
         }
 
-        internal unsafe void SyncReplicaAllHelper(IntPtr handle, SyncReplicaFromAllServersCallback syncAllCallback, string partition, SyncFromAllServersOptions option, SyncUpdateCallback? callback, SafeLibraryHandle libHandle)
+        internal unsafe void SyncReplicaAllHelper(
+            IntPtr handle,
+            SyncReplicaFromAllServersCallback syncAllCallback,
+            string partition,
+            SyncFromAllServersOptions option,
+            SyncUpdateCallback? callback,
+            SafeLibraryHandle libHandle
+        )
         {
             IntPtr errorInfo = (IntPtr)0;
 
@@ -647,7 +806,15 @@ namespace System.DirectoryServices.ActiveDirectory
 
             // we want to return the dn instead of DNS guid
             // call DsReplicaSyncAllW
-            var dsReplicaSyncAllW = (delegate* unmanaged<IntPtr, char*, int, IntPtr, IntPtr, IntPtr*, int>)global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaSyncAllW");
+            var dsReplicaSyncAllW = (delegate* unmanaged<
+                IntPtr,
+                char*,
+                int,
+                IntPtr,
+                IntPtr,
+                IntPtr*,
+                int>)
+                global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaSyncAllW");
             if (dsReplicaSyncAllW == null)
             {
                 throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
@@ -656,8 +823,17 @@ namespace System.DirectoryServices.ActiveDirectory
             int result;
             fixed (char* partitionPtr = partition)
             {
-                IntPtr syncAllFunctionPointer = Marshal.GetFunctionPointerForDelegate(syncAllCallback);
-                result = dsReplicaSyncAllW(handle, partitionPtr, (int)option | DS_REPSYNCALL_ID_SERVERS_BY_DN, syncAllFunctionPointer, (IntPtr)0, &errorInfo);
+                IntPtr syncAllFunctionPointer = Marshal.GetFunctionPointerForDelegate(
+                    syncAllCallback
+                );
+                result = dsReplicaSyncAllW(
+                    handle,
+                    partitionPtr,
+                    (int)option | DS_REPSYNCALL_ID_SERVERS_BY_DN,
+                    syncAllFunctionPointer,
+                    (IntPtr)0,
+                    &errorInfo
+                );
                 GC.KeepAlive(syncAllCallback);
             }
 
@@ -666,7 +842,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 // error happens during the synchronization
                 if (errorInfo != (IntPtr)0)
                 {
-                    SyncFromAllServersOperationException? e = ExceptionHelper.CreateSyncAllException(errorInfo, false);
+                    SyncFromAllServersOperationException? e =
+                        ExceptionHelper.CreateSyncAllException(errorInfo, false);
                     if (e == null)
                         return;
                     else
@@ -676,7 +853,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     // API does not return error infor occurred during synchronization, but result is not success.
                     if (result != 0)
-                        throw new SyncFromAllServersOperationException(ExceptionHelper.GetErrorMessage(result, false));
+                        throw new SyncFromAllServersOperationException(
+                            ExceptionHelper.GetErrorMessage(result, false)
+                        );
                 }
             }
             finally
@@ -687,12 +866,17 @@ namespace System.DirectoryServices.ActiveDirectory
             }
         }
 
-        private unsafe void FreeReplicaInfo(DS_REPL_INFO_TYPE type, IntPtr value, SafeLibraryHandle libHandle)
+        private unsafe void FreeReplicaInfo(
+            DS_REPL_INFO_TYPE type,
+            IntPtr value,
+            SafeLibraryHandle libHandle
+        )
         {
             if (value != (IntPtr)0)
             {
                 // call DsReplicaFreeInfo
-                var dsReplicaFreeInfo = (delegate* unmanaged<int, IntPtr, int>)global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaFreeInfo");
+                var dsReplicaFreeInfo = (delegate* unmanaged<int, IntPtr, int>)
+                    global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaFreeInfo");
                 if (dsReplicaFreeInfo == null)
                 {
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
@@ -701,7 +885,14 @@ namespace System.DirectoryServices.ActiveDirectory
             }
         }
 
-        internal unsafe void SyncReplicaHelper(IntPtr dsHandle, bool isADAM, string partition, string? sourceServer, int option, SafeLibraryHandle libHandle)
+        internal unsafe void SyncReplicaHelper(
+            IntPtr dsHandle,
+            bool isADAM,
+            string partition,
+            string? sourceServer,
+            int option,
+            SafeLibraryHandle libHandle
+        )
         {
             int structSize = Marshal.SizeOf(typeof(Guid));
             IntPtr unmanagedGuid = (IntPtr)0;
@@ -714,7 +905,11 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 if (sourceServer != null)
                 {
-                    DirectoryContext newContext = Utils.GetNewDirectoryContext(sourceServer, DirectoryContextType.DirectoryServer, context);
+                    DirectoryContext newContext = Utils.GetNewDirectoryContext(
+                        sourceServer,
+                        DirectoryContextType.DirectoryServer,
+                        context
+                    );
                     if (isADAM)
                     {
                         adamServer = AdamInstance.GetAdamInstance(newContext);
@@ -730,7 +925,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
 
                 // call DsReplicaSyncW
-                var dsReplicaSyncW = (delegate* unmanaged<IntPtr, char*, IntPtr, int, int>)global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaSyncW");
+                var dsReplicaSyncW = (delegate* unmanaged<IntPtr, char*, IntPtr, int, int>)
+                    global::Interop.Kernel32.GetProcAddress(libHandle, "DsReplicaSyncW");
                 if (dsReplicaSyncW == null)
                 {
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
@@ -777,17 +973,33 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 // construct the replicationconnection collection
                 _inbound = new ReplicationConnectionCollection();
-                DirectoryContext newContext = Utils.GetNewDirectoryContext(Name, DirectoryContextType.DirectoryServer, context);
+                DirectoryContext newContext = Utils.GetNewDirectoryContext(
+                    Name,
+                    DirectoryContextType.DirectoryServer,
+                    context
+                );
 
                 // this is the first time that user tries to retrieve this property, so get it from the directory
-                string serverName = (this is DomainController) ? ((DomainController)this).ServerObjectName : ((AdamInstance)this).ServerObjectName;
+                string serverName =
+                    (this is DomainController)
+                        ? ((DomainController)this).ServerObjectName
+                        : ((AdamInstance)this).ServerObjectName;
                 string srchDN = "CN=NTDS Settings," + serverName;
-                DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(Utils.GetNewDirectoryContext(Name, DirectoryContextType.DirectoryServer, context), srchDN);
+                DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                    Utils.GetNewDirectoryContext(
+                        Name,
+                        DirectoryContextType.DirectoryServer,
+                        context
+                    ),
+                    srchDN
+                );
 
-                ADSearcher adSearcher = new ADSearcher(de,
-                                                      "(&(objectClass=nTDSConnection)(objectCategory=nTDSConnection))",
-                                                      new string[] { "cn" },
-                                                      SearchScope.OneLevel);
+                ADSearcher adSearcher = new ADSearcher(
+                    de,
+                    "(&(objectClass=nTDSConnection)(objectCategory=nTDSConnection))",
+                    new string[] { "cn" },
+                    SearchScope.OneLevel
+                );
                 SearchResultCollection? srchResults = null;
 
                 try
@@ -795,7 +1007,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     srchResults = adSearcher.FindAll();
                     foreach (SearchResult r in srchResults)
                     {
-                        ReplicationConnection con = new ReplicationConnection(newContext, r.GetDirectoryEntry(), (string)PropertyManager.GetSearchResultPropertyValue(r, PropertyManager.Cn)!);
+                        ReplicationConnection con = new ReplicationConnection(
+                            newContext,
+                            r.GetDirectoryEntry(),
+                            (string)
+                                PropertyManager.GetSearchResultPropertyValue(r, PropertyManager.Cn)!
+                        );
                         _inbound.Add(con);
                     }
                 }
@@ -821,17 +1038,38 @@ namespace System.DirectoryServices.ActiveDirectory
             if (_outbound == null)
             {
                 // search base is the site container
-                string siteName = (this is DomainController) ? ((DomainController)this).SiteObjectName : ((AdamInstance)this).SiteObjectName;
-                DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(Utils.GetNewDirectoryContext(Name, DirectoryContextType.DirectoryServer, context), siteName);
+                string siteName =
+                    (this is DomainController)
+                        ? ((DomainController)this).SiteObjectName
+                        : ((AdamInstance)this).SiteObjectName;
+                DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                    Utils.GetNewDirectoryContext(
+                        Name,
+                        DirectoryContextType.DirectoryServer,
+                        context
+                    ),
+                    siteName
+                );
 
-                string serverName = (this is DomainController) ? ((DomainController)this).ServerObjectName : ((AdamInstance)this).ServerObjectName;
-                ADSearcher adSearcher = new ADSearcher(de,
-                                                               "(&(objectClass=nTDSConnection)(objectCategory=nTDSConnection)(fromServer=CN=NTDS Settings," + serverName + "))",
-                                                               new string[] { "objectClass", "cn" },
-                                                               SearchScope.Subtree);
+                string serverName =
+                    (this is DomainController)
+                        ? ((DomainController)this).ServerObjectName
+                        : ((AdamInstance)this).ServerObjectName;
+                ADSearcher adSearcher = new ADSearcher(
+                    de,
+                    "(&(objectClass=nTDSConnection)(objectCategory=nTDSConnection)(fromServer=CN=NTDS Settings,"
+                        + serverName
+                        + "))",
+                    new string[] { "objectClass", "cn" },
+                    SearchScope.Subtree
+                );
 
                 SearchResultCollection? results = null;
-                DirectoryContext newContext = Utils.GetNewDirectoryContext(Name, DirectoryContextType.DirectoryServer, context);
+                DirectoryContext newContext = Utils.GetNewDirectoryContext(
+                    Name,
+                    DirectoryContextType.DirectoryServer,
+                    context
+                );
 
                 try
                 {
@@ -840,7 +1078,11 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     foreach (SearchResult result in results)
                     {
-                        ReplicationConnection con = new ReplicationConnection(newContext, result.GetDirectoryEntry(), (string)result.Properties["cn"][0]!);
+                        ReplicationConnection con = new ReplicationConnection(
+                            newContext,
+                            result.GetDirectoryEntry(),
+                            (string)result.Properties["cn"][0]!
+                        );
                         _outbound.Add(con);
                     }
                 }

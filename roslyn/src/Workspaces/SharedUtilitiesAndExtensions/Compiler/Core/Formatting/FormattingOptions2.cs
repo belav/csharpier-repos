@@ -28,57 +28,90 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Provider()
-            {
-            }
+            public Provider() { }
 
             public ImmutableArray<IOption> Options { get; } = FormattingOptions2.Options;
         }
 #endif
+
         private const string FeatureName = "FormattingOptions";
 
         public static PerLanguageOption2<bool> UseTabs =
-            new(FeatureName, FormattingOptionGroups.IndentationAndSpacing, nameof(UseTabs), LineFormattingOptions.Default.UseTabs,
-            storageLocation: new EditorConfigStorageLocation<bool>(
-                "indent_style",
-                s => s == "tab",
-                isSet => isSet ? "tab" : "space"));
+            new(
+                FeatureName,
+                FormattingOptionGroups.IndentationAndSpacing,
+                nameof(UseTabs),
+                LineFormattingOptions.Default.UseTabs,
+                storageLocation: new EditorConfigStorageLocation<bool>(
+                    "indent_style",
+                    s => s == "tab",
+                    isSet => isSet ? "tab" : "space"
+                )
+            );
 
         // This is also serialized by the Visual Studio-specific LanguageSettingsPersister
         public static PerLanguageOption2<int> TabSize =
-            new(FeatureName, FormattingOptionGroups.IndentationAndSpacing, nameof(TabSize), LineFormattingOptions.Default.TabSize,
-            storageLocation: EditorConfigStorageLocation.ForInt32Option("tab_width"));
+            new(
+                FeatureName,
+                FormattingOptionGroups.IndentationAndSpacing,
+                nameof(TabSize),
+                LineFormattingOptions.Default.TabSize,
+                storageLocation: EditorConfigStorageLocation.ForInt32Option("tab_width")
+            );
 
         // This is also serialized by the Visual Studio-specific LanguageSettingsPersister
         public static PerLanguageOption2<int> IndentationSize =
-            new(FeatureName, FormattingOptionGroups.IndentationAndSpacing, nameof(IndentationSize), LineFormattingOptions.Default.IndentationSize,
-            storageLocation: EditorConfigStorageLocation.ForInt32Option("indent_size"));
+            new(
+                FeatureName,
+                FormattingOptionGroups.IndentationAndSpacing,
+                nameof(IndentationSize),
+                LineFormattingOptions.Default.IndentationSize,
+                storageLocation: EditorConfigStorageLocation.ForInt32Option("indent_size")
+            );
 
         public static PerLanguageOption2<string> NewLine =
-            new(FeatureName, FormattingOptionGroups.NewLine, nameof(NewLine), LineFormattingOptions.Default.NewLine,
-            storageLocation: new EditorConfigStorageLocation<string>(
-                "end_of_line",
-                parseValue: value => value.Trim() switch
-                {
-                    "lf" => "\n",
-                    "cr" => "\r",
-                    "crlf" => "\r\n",
-                    _ => Environment.NewLine
-                },
-                getEditorConfigStringForValue: option => option switch
-                {
-                    "\n" => "lf",
-                    "\r" => "cr",
-                    "\r\n" => "crlf",
-                    _ => "unset"
-                }));
+            new(
+                FeatureName,
+                FormattingOptionGroups.NewLine,
+                nameof(NewLine),
+                LineFormattingOptions.Default.NewLine,
+                storageLocation: new EditorConfigStorageLocation<string>(
+                    "end_of_line",
+                    parseValue: value =>
+                        value.Trim() switch
+                        {
+                            "lf" => "\n",
+                            "cr" => "\r",
+                            "crlf" => "\r\n",
+                            _ => Environment.NewLine
+                        },
+                    getEditorConfigStringForValue: option =>
+                        option switch
+                        {
+                            "\n" => "lf",
+                            "\r" => "cr",
+                            "\r\n" => "crlf",
+                            _ => "unset"
+                        }
+                )
+            );
 
         internal static Option2<bool> InsertFinalNewLine =
-            new(FeatureName, FormattingOptionGroups.NewLine, nameof(InsertFinalNewLine), DocumentFormattingOptions.Default.InsertFinalNewLine,
-            storageLocation: EditorConfigStorageLocation.ForBoolOption("insert_final_newline"));
+            new(
+                FeatureName,
+                FormattingOptionGroups.NewLine,
+                nameof(InsertFinalNewLine),
+                DocumentFormattingOptions.Default.InsertFinalNewLine,
+                storageLocation: EditorConfigStorageLocation.ForBoolOption("insert_final_newline")
+            );
 
         public static PerLanguageOption2<FormattingOptions2.IndentStyle> SmartIndent { get; } =
-            new(FeatureName, FormattingOptionGroups.IndentationAndSpacing, nameof(SmartIndent), defaultValue: IndentationOptions.DefaultIndentStyle);
+            new(
+                FeatureName,
+                FormattingOptionGroups.IndentationAndSpacing,
+                nameof(SmartIndent),
+                defaultValue: IndentationOptions.DefaultIndentStyle
+            );
 
 #if !CODE_STYLE
         internal static readonly ImmutableArray<IOption> Options = ImmutableArray.Create<IOption>(
@@ -86,13 +119,16 @@ namespace Microsoft.CodeAnalysis.Formatting
             TabSize,
             IndentationSize,
             NewLine,
-            InsertFinalNewLine);
+            InsertFinalNewLine
+        );
 #endif
     }
 
     internal static class FormattingOptionGroups
     {
-        public static readonly OptionGroup IndentationAndSpacing = new(WorkspacesResources.Indentation_and_spacing, priority: 1);
-        public static readonly OptionGroup NewLine = new(WorkspacesResources.New_line_preferences, priority: 2);
+        public static readonly OptionGroup IndentationAndSpacing =
+            new(WorkspacesResources.Indentation_and_spacing, priority: 1);
+        public static readonly OptionGroup NewLine =
+            new(WorkspacesResources.New_line_preferences, priority: 2);
     }
 }

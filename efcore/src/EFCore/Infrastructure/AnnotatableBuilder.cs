@@ -53,14 +53,15 @@ public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConvention
     public virtual AnnotatableBuilder<TMetadata, TModelBuilder>? HasAnnotation(
         string name,
         object? value,
-        ConfigurationSource configurationSource)
-        => HasAnnotation(name, value, configurationSource, canOverrideSameSource: true);
+        ConfigurationSource configurationSource
+    ) => HasAnnotation(name, value, configurationSource, canOverrideSameSource: true);
 
     private AnnotatableBuilder<TMetadata, TModelBuilder>? HasAnnotation(
         string name,
         object? value,
         ConfigurationSource configurationSource,
-        bool canOverrideSameSource)
+        bool canOverrideSameSource
+    )
     {
         var existingAnnotation = Metadata.FindAnnotation(name);
         if (existingAnnotation != null)
@@ -71,7 +72,14 @@ public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConvention
                 return this;
             }
 
-            if (!CanSetAnnotationValue(existingAnnotation, value, configurationSource, canOverrideSameSource))
+            if (
+                !CanSetAnnotationValue(
+                    existingAnnotation,
+                    value,
+                    configurationSource,
+                    canOverrideSameSource
+                )
+            )
             {
                 return null;
             }
@@ -98,8 +106,9 @@ public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConvention
     public virtual AnnotatableBuilder<TMetadata, TModelBuilder>? HasNonNullAnnotation(
         string name,
         object? value,
-        ConfigurationSource configurationSource)
-        => value == null
+        ConfigurationSource configurationSource
+    ) =>
+        value == null
             ? RemoveAnnotation(name, configurationSource)
             : HasAnnotation(name, value, configurationSource, canOverrideSameSource: true);
 
@@ -110,18 +119,28 @@ public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConvention
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <param name="configurationSource">The configuration source of the annotation to be set.</param>
     /// <returns><see langword="true" /> if the annotation can be set, <see langword="false" /> otherwise.</returns>
-    public virtual bool CanSetAnnotation(string name, object? value, ConfigurationSource configurationSource)
+    public virtual bool CanSetAnnotation(
+        string name,
+        object? value,
+        ConfigurationSource configurationSource
+    )
     {
         var existingAnnotation = Metadata.FindAnnotation(name);
         return existingAnnotation == null
-            || CanSetAnnotationValue(existingAnnotation, value, configurationSource, canOverrideSameSource: true);
+            || CanSetAnnotationValue(
+                existingAnnotation,
+                value,
+                configurationSource,
+                canOverrideSameSource: true
+            );
     }
 
     private static bool CanSetAnnotationValue(
         ConventionAnnotation annotation,
         object? value,
         ConfigurationSource configurationSource,
-        bool canOverrideSameSource)
+        bool canOverrideSameSource
+    )
     {
         if (Equals(annotation.Value, value))
         {
@@ -130,8 +149,7 @@ public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConvention
 
         var existingConfigurationSource = annotation.GetConfigurationSource();
         return configurationSource.Overrides(existingConfigurationSource)
-            && (configurationSource != existingConfigurationSource
-                || canOverrideSameSource);
+            && (configurationSource != existingConfigurationSource || canOverrideSameSource);
     }
 
     /// <summary>
@@ -142,7 +160,8 @@ public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConvention
     /// <returns>The same builder so that multiple calls can be chained.</returns>
     public virtual AnnotatableBuilder<TMetadata, TModelBuilder>? RemoveAnnotation(
         string name,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         if (!CanRemoveAnnotation(name, configurationSource))
         {
@@ -170,15 +189,18 @@ public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConvention
     ///     Copies all the explicitly configured annotations from the given object overwriting any existing ones.
     /// </summary>
     /// <param name="annotatable">The object to copy annotations from.</param>
-    public virtual void MergeAnnotationsFrom(TMetadata annotatable)
-        => MergeAnnotationsFrom(annotatable, ConfigurationSource.Explicit);
+    public virtual void MergeAnnotationsFrom(TMetadata annotatable) =>
+        MergeAnnotationsFrom(annotatable, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     Copies all the configured annotations from the given object overwriting any existing ones.
     /// </summary>
     /// <param name="annotatable">The object to copy annotations from.</param>
     /// <param name="minimalConfigurationSource">The minimum configuration source for an annotation to be copied.</param>
-    public virtual void MergeAnnotationsFrom(TMetadata annotatable, ConfigurationSource minimalConfigurationSource)
+    public virtual void MergeAnnotationsFrom(
+        TMetadata annotatable,
+        ConfigurationSource minimalConfigurationSource
+    )
     {
         foreach (var annotation in annotatable.GetAnnotations())
         {
@@ -189,7 +211,8 @@ public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConvention
                     annotation.Name,
                     annotation.Value,
                     configurationSource,
-                    canOverrideSameSource: false);
+                    canOverrideSameSource: false
+                );
             }
         }
     }
@@ -210,29 +233,59 @@ public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConvention
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionAnnotatableBuilder? IConventionAnnotatableBuilder.HasAnnotation(string name, object? value, bool fromDataAnnotation)
-        => HasAnnotation(name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionAnnotatableBuilder? IConventionAnnotatableBuilder.HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation
+    ) =>
+        HasAnnotation(
+            name,
+            value,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
     IConventionAnnotatableBuilder? IConventionAnnotatableBuilder.HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation)
-        => HasNonNullAnnotation(name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool fromDataAnnotation
+    ) =>
+        HasNonNullAnnotation(
+            name,
+            value,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool IConventionAnnotatableBuilder.CanSetAnnotation(string name, object? value, bool fromDataAnnotation)
-        => CanSetAnnotation(name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool IConventionAnnotatableBuilder.CanSetAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation
+    ) =>
+        CanSetAnnotation(
+            name,
+            value,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionAnnotatableBuilder? IConventionAnnotatableBuilder.HasNoAnnotation(string name, bool fromDataAnnotation)
-        => RemoveAnnotation(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionAnnotatableBuilder? IConventionAnnotatableBuilder.HasNoAnnotation(
+        string name,
+        bool fromDataAnnotation
+    ) =>
+        RemoveAnnotation(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool IConventionAnnotatableBuilder.CanRemoveAnnotation(string name, bool fromDataAnnotation)
-        => CanRemoveAnnotation(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool IConventionAnnotatableBuilder.CanRemoveAnnotation(string name, bool fromDataAnnotation) =>
+        CanRemoveAnnotation(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 }

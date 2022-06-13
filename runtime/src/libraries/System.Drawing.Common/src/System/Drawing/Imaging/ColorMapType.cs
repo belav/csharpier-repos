@@ -12,6 +12,7 @@ namespace System.Drawing.Imaging
         /// A default color map.
         /// </summary>
         Default = 0,
+
         /// <summary>
         /// Specifies a color map for a <see cref='Drawing.Brush'/>.
         /// </summary>

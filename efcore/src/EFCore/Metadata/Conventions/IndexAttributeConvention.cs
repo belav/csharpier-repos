@@ -9,7 +9,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeBaseTypeChangedConvention, IModelFinalizingConvention
+public class IndexAttributeConvention
+    : IEntityTypeAddedConvention,
+        IEntityTypeBaseTypeChangedConvention,
+        IModelFinalizingConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="IndexAttributeConvention" />.
@@ -28,15 +31,16 @@ public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeB
     /// <inheritdoc />
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
-        => CheckIndexAttributesAndEnsureIndex(entityTypeBuilder.Metadata, shouldThrow: false);
+        IConventionContext<IConventionEntityTypeBuilder> context
+    ) => CheckIndexAttributesAndEnsureIndex(entityTypeBuilder.Metadata, shouldThrow: false);
 
     /// <inheritdoc />
     public virtual void ProcessEntityTypeBaseTypeChanged(
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionEntityType? newBaseType,
         IConventionEntityType? oldBaseType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
         if (oldBaseType == null)
         {
@@ -49,7 +53,8 @@ public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeB
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
         {
@@ -59,10 +64,14 @@ public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeB
 
     private static void CheckIndexAttributesAndEnsureIndex(
         IConventionEntityType entityType,
-        bool shouldThrow)
+        bool shouldThrow
+    )
     {
-        foreach (var indexAttribute in
-                 entityType.ClrType.GetCustomAttributes<IndexAttribute>(inherit: true))
+        foreach (
+            var indexAttribute in entityType.ClrType.GetCustomAttributes<IndexAttribute>(
+                inherit: true
+            )
+        )
         {
             IConventionIndexBuilder? indexBuilder;
             if (!shouldThrow)
@@ -79,11 +88,14 @@ public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeB
                     indexProperties.Add(property);
                 }
 
-                indexBuilder = indexAttribute.Name == null
-                    ? entityType.Builder.HasIndex(
-                        indexProperties, fromDataAnnotation: true)
-                    : entityType.Builder.HasIndex(
-                        indexProperties, indexAttribute.Name, fromDataAnnotation: true);
+                indexBuilder =
+                    indexAttribute.Name == null
+                        ? entityType.Builder.HasIndex(indexProperties, fromDataAnnotation: true)
+                        : entityType.Builder.HasIndex(
+                            indexProperties,
+                            indexAttribute.Name,
+                            fromDataAnnotation: true
+                        );
             }
             else
             {
@@ -92,11 +104,17 @@ public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeB
                     // Using the HasIndex(propertyNames) overload gives us
                     // a chance to create a missing property
                     // e.g. if the CLR property existed but was non-public.
-                    indexBuilder = indexAttribute.Name == null
-                        ? entityType.Builder.HasIndex(
-                            indexAttribute.PropertyNames, fromDataAnnotation: true)
-                        : entityType.Builder.HasIndex(
-                            indexAttribute.PropertyNames, indexAttribute.Name, fromDataAnnotation: true);
+                    indexBuilder =
+                        indexAttribute.Name == null
+                            ? entityType.Builder.HasIndex(
+                                indexAttribute.PropertyNames,
+                                fromDataAnnotation: true
+                            )
+                            : entityType.Builder.HasIndex(
+                                indexAttribute.PropertyNames,
+                                indexAttribute.Name,
+                                fromDataAnnotation: true
+                            );
                 }
                 catch (InvalidOperationException exception)
                 {
@@ -117,18 +135,27 @@ public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeB
             {
                 if (indexAttribute.IsUniqueHasValue)
                 {
-                    indexBuilder = indexBuilder.IsUnique(indexAttribute.IsUnique, fromDataAnnotation: true);
+                    indexBuilder = indexBuilder.IsUnique(
+                        indexAttribute.IsUnique,
+                        fromDataAnnotation: true
+                    );
                 }
 
                 if (indexBuilder is not null && indexAttribute.IsDescending is not null)
                 {
-                    indexBuilder.IsDescending(indexAttribute.IsDescending, fromDataAnnotation: true);
+                    indexBuilder.IsDescending(
+                        indexAttribute.IsDescending,
+                        fromDataAnnotation: true
+                    );
                 }
             }
         }
     }
 
-    private static void CheckIgnoredProperties(IConventionEntityType entityType, IndexAttribute indexAttribute)
+    private static void CheckIgnoredProperties(
+        IConventionEntityType entityType,
+        IndexAttribute indexAttribute
+    )
     {
         foreach (var propertyName in indexAttribute.PropertyNames)
         {
@@ -140,7 +167,9 @@ public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeB
                         CoreStrings.UnnamedIndexDefinedOnIgnoredProperty(
                             entityType.DisplayName(),
                             indexAttribute.PropertyNames.Format(),
-                            propertyName));
+                            propertyName
+                        )
+                    );
                 }
 
                 throw new InvalidOperationException(
@@ -148,7 +177,9 @@ public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeB
                         indexAttribute.Name,
                         entityType.DisplayName(),
                         indexAttribute.PropertyNames.Format(),
-                        propertyName));
+                        propertyName
+                    )
+                );
             }
         }
     }
@@ -156,7 +187,8 @@ public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeB
     private static void CheckMissingProperties(
         IConventionEntityType entityType,
         IndexAttribute indexAttribute,
-        InvalidOperationException exception)
+        InvalidOperationException exception
+    )
     {
         foreach (var propertyName in indexAttribute.PropertyNames)
         {
@@ -169,8 +201,10 @@ public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeB
                         CoreStrings.UnnamedIndexDefinedOnNonExistentProperty(
                             entityType.DisplayName(),
                             indexAttribute.PropertyNames.Format(),
-                            propertyName),
-                        exception);
+                            propertyName
+                        ),
+                        exception
+                    );
                 }
 
                 throw new InvalidOperationException(
@@ -178,8 +212,10 @@ public class IndexAttributeConvention : IEntityTypeAddedConvention, IEntityTypeB
                         indexAttribute.Name,
                         entityType.DisplayName(),
                         indexAttribute.PropertyNames.Format(),
-                        propertyName),
-                    exception);
+                        propertyName
+                    ),
+                    exception
+                );
             }
         }
     }

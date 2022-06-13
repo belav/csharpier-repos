@@ -17,12 +17,15 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
 internal sealed partial class HttpConnectionDispatcher
 {
-    private static readonly AvailableTransport _webSocketAvailableTransport =
-        new AvailableTransport
+    private static readonly AvailableTransport _webSocketAvailableTransport = new AvailableTransport
+    {
+        Transport = nameof(HttpTransportType.WebSockets),
+        TransferFormats = new List<string>
         {
-            Transport = nameof(HttpTransportType.WebSockets),
-            TransferFormats = new List<string> { nameof(TransferFormat.Text), nameof(TransferFormat.Binary) }
-        };
+            nameof(TransferFormat.Text),
+            nameof(TransferFormat.Binary)
+        }
+    };
 
     private static readonly AvailableTransport _serverSentEventsAvailableTransport =
         new AvailableTransport
@@ -35,7 +38,11 @@ internal sealed partial class HttpConnectionDispatcher
         new AvailableTransport
         {
             Transport = nameof(HttpTransportType.LongPolling),
-            TransferFormats = new List<string> { nameof(TransferFormat.Text), nameof(TransferFormat.Binary) }
+            TransferFormats = new List<string>
+            {
+                nameof(TransferFormat.Text),
+                nameof(TransferFormat.Binary)
+            }
         };
 
     private readonly HttpConnectionManager _manager;
@@ -55,7 +62,11 @@ internal sealed partial class HttpConnectionDispatcher
         _logger = _loggerFactory.CreateLogger<HttpConnectionDispatcher>();
     }
 
-    public async Task ExecuteAsync(HttpContext context, HttpConnectionDispatcherOptions options, ConnectionDelegate connectionDelegate)
+    public async Task ExecuteAsync(
+        HttpContext context,
+        HttpConnectionDispatcherOptions options,
+        ConnectionDelegate connectionDelegate
+    )
     {
         // Create the log scope and attempt to pass the Connection ID to it so as many logs as possible contain
         // the Connection ID metadata. If this is the negotiate request then the Connection ID for the scope will
@@ -96,7 +107,10 @@ internal sealed partial class HttpConnectionDispatcher
         }
     }
 
-    public async Task ExecuteNegotiateAsync(HttpContext context, HttpConnectionDispatcherOptions options)
+    public async Task ExecuteNegotiateAsync(
+        HttpContext context,
+        HttpConnectionDispatcherOptions options
+    )
     {
         // Create the log scope and the scope connectionId param will be set when the connection is created.
         var logScope = new ConnectionLogScope(connectionId: string.Empty);
@@ -115,7 +129,12 @@ internal sealed partial class HttpConnectionDispatcher
         }
     }
 
-    private async Task ExecuteAsync(HttpContext context, ConnectionDelegate connectionDelegate, HttpConnectionDispatcherOptions options, ConnectionLogScope logScope)
+    private async Task ExecuteAsync(
+        HttpContext context,
+        ConnectionDelegate connectionDelegate,
+        HttpConnectionDispatcherOptions options,
+        ConnectionLogScope logScope
+    )
     {
         // set a tag to allow Application Performance Management tools to differentiate long running requests for reporting purposes
         context.Features.Get<IHttpActivityFeature>()?.Activity.AddTag("http.long_running", "true");
@@ -126,7 +145,10 @@ internal sealed partial class HttpConnectionDispatcher
         // GET /{path}
         // Accept: text/event-stream
         var headers = context.Request.GetTypedHeaders();
-        if (headers.Accept?.Contains(new Net.Http.Headers.MediaTypeHeaderValue("text/event-stream")) == true)
+        if (
+            headers.Accept?.Contains(new Net.Http.Headers.MediaTypeHeaderValue("text/event-stream"))
+            == true
+        )
         {
             // Connection must already exist
             var connection = await GetConnectionAsync(context);
@@ -136,7 +158,15 @@ internal sealed partial class HttpConnectionDispatcher
                 return;
             }
 
-            if (!await EnsureConnectionStateAsync(connection, context, HttpTransportType.ServerSentEvents, supportedTransports, logScope))
+            if (
+                !await EnsureConnectionStateAsync(
+                    connection,
+                    context,
+                    HttpTransportType.ServerSentEvents,
+                    supportedTransports,
+                    logScope
+                )
+            )
             {
                 // Bad connection state. It's already set the response status code.
                 return;
@@ -148,7 +178,12 @@ internal sealed partial class HttpConnectionDispatcher
             connection.SupportedFormats = TransferFormat.Text;
 
             // We only need to provide the Input channel since writing to the application is handled through /send.
-            var sse = new ServerSentEventsServerTransport(connection.Application.Input, connection.ConnectionId, connection, _loggerFactory);
+            var sse = new ServerSentEventsServerTransport(
+                connection.Application.Input,
+                connection.ConnectionId,
+                connection,
+                _loggerFactory
+            );
 
             await DoPersistentConnection(connectionDelegate, sse, context, connection);
         }
@@ -162,7 +197,15 @@ internal sealed partial class HttpConnectionDispatcher
                 return;
             }
 
-            if (!await EnsureConnectionStateAsync(connection, context, HttpTransportType.WebSockets, supportedTransports, logScope))
+            if (
+                !await EnsureConnectionStateAsync(
+                    connection,
+                    context,
+                    HttpTransportType.WebSockets,
+                    supportedTransports,
+                    logScope
+                )
+            )
             {
                 // Bad connection state. It's already set the response status code.
                 return;
@@ -173,7 +216,12 @@ internal sealed partial class HttpConnectionDispatcher
             // Allow the reads to be canceled
             connection.Cancellation = new CancellationTokenSource();
 
-            var ws = new WebSocketsServerTransport(options.WebSockets, connection.Application, connection, _loggerFactory);
+            var ws = new WebSocketsServerTransport(
+                options.WebSockets,
+                connection.Application,
+                connection,
+                _loggerFactory
+            );
 
             await DoPersistentConnection(connectionDelegate, ws, context, connection);
         }
@@ -191,7 +239,15 @@ internal sealed partial class HttpConnectionDispatcher
                 return;
             }
 
-            if (!await EnsureConnectionStateAsync(connection, context, HttpTransportType.LongPolling, supportedTransports, logScope))
+            if (
+                !await EnsureConnectionStateAsync(
+                    connection,
+                    context,
+                    HttpTransportType.LongPolling,
+                    supportedTransports,
+                    logScope
+                )
+            )
             {
                 // Bad connection state. It's already set the response status code.
                 return;
@@ -204,16 +260,28 @@ internal sealed partial class HttpConnectionDispatcher
             }
 
             // Create a new Tcs every poll to keep track of the poll finishing, so we can properly wait on previous polls
-            var currentRequestTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var currentRequestTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
-            if (!connection.TryActivateLongPollingConnection(
-                    connectionDelegate, context, options.LongPolling.PollTimeout,
-                    currentRequestTcs.Task, _loggerFactory, _logger))
+            if (
+                !connection.TryActivateLongPollingConnection(
+                    connectionDelegate,
+                    context,
+                    options.LongPolling.PollTimeout,
+                    currentRequestTcs.Task,
+                    _loggerFactory,
+                    _logger
+                )
+            )
             {
                 return;
             }
 
-            var resultTask = await Task.WhenAny(connection.ApplicationTask!, connection.TransportTask!);
+            var resultTask = await Task.WhenAny(
+                connection.ApplicationTask!,
+                connection.TransportTask!
+            );
 
             try
             {
@@ -267,12 +335,21 @@ internal sealed partial class HttpConnectionDispatcher
         }
     }
 
-    private async Task DoPersistentConnection(ConnectionDelegate connectionDelegate,
-                                              IHttpTransport transport,
-                                              HttpContext context,
-                                              HttpConnectionContext connection)
+    private async Task DoPersistentConnection(
+        ConnectionDelegate connectionDelegate,
+        IHttpTransport transport,
+        HttpContext context,
+        HttpConnectionContext connection
+    )
     {
-        if (connection.TryActivatePersistentConnection(connectionDelegate, transport, context, _logger))
+        if (
+            connection.TryActivatePersistentConnection(
+                connectionDelegate,
+                transport,
+                context,
+                _logger
+            )
+        )
         {
             // Wait for any of them to end
             await Task.WhenAny(connection.ApplicationTask!, connection.TransportTask!);
@@ -281,7 +358,11 @@ internal sealed partial class HttpConnectionDispatcher
         }
     }
 
-    private async Task ProcessNegotiate(HttpContext context, HttpConnectionDispatcherOptions options, ConnectionLogScope logScope)
+    private async Task ProcessNegotiate(
+        HttpContext context,
+        HttpConnectionDispatcherOptions options,
+        ConnectionLogScope logScope
+    )
     {
         context.Response.ContentType = "application/json";
         string? error = null;
@@ -292,12 +373,14 @@ internal sealed partial class HttpConnectionDispatcher
             var queryStringVersionValue = queryStringVersion.ToString();
             if (!int.TryParse(queryStringVersionValue, out clientProtocolVersion))
             {
-                error = $"The client requested an invalid protocol version '{queryStringVersionValue}'";
+                error =
+                    $"The client requested an invalid protocol version '{queryStringVersionValue}'";
                 Log.InvalidNegotiateProtocolVersion(_logger, queryStringVersionValue);
             }
             else if (clientProtocolVersion < options.MinimumProtocolVersion)
             {
-                error = $"The client requested version '{clientProtocolVersion}', but the server does not support this version.";
+                error =
+                    $"The client requested version '{clientProtocolVersion}', but the server does not support this version.";
                 Log.NegotiateProtocolVersionMismatch(_logger, clientProtocolVersion);
             }
             else if (clientProtocolVersion > _protocolVersion)
@@ -308,7 +391,8 @@ internal sealed partial class HttpConnectionDispatcher
         else if (options.MinimumProtocolVersion > 0)
         {
             // NegotiateVersion wasn't parsed meaning the client requests version 0.
-            error = $"The client requested version '0', but the server does not support this version.";
+            error =
+                $"The client requested version '0', but the server does not support this version.";
             Log.NegotiateProtocolVersionMismatch(_logger, 0);
         }
 
@@ -329,7 +413,15 @@ internal sealed partial class HttpConnectionDispatcher
         try
         {
             // Get the bytes for the connection id
-            WriteNegotiatePayload(writer, connection?.ConnectionId, connection?.ConnectionToken, context, options, clientProtocolVersion, error);
+            WriteNegotiatePayload(
+                writer,
+                connection?.ConnectionId,
+                connection?.ConnectionToken,
+                context,
+                options,
+                clientProtocolVersion,
+                error
+            );
 
             Log.NegotiationRequest(_logger);
 
@@ -343,8 +435,15 @@ internal sealed partial class HttpConnectionDispatcher
         }
     }
 
-    private static void WriteNegotiatePayload(IBufferWriter<byte> writer, string? connectionId, string? connectionToken, HttpContext context, HttpConnectionDispatcherOptions options,
-        int clientProtocolVersion, string? error)
+    private static void WriteNegotiatePayload(
+        IBufferWriter<byte> writer,
+        string? connectionId,
+        string? connectionToken,
+        HttpContext context,
+        HttpConnectionDispatcherOptions options,
+        int clientProtocolVersion,
+        string? error
+    )
     {
         var response = new NegotiationResponse();
 
@@ -360,7 +459,10 @@ internal sealed partial class HttpConnectionDispatcher
         response.ConnectionToken = connectionToken;
         response.AvailableTransports = new List<AvailableTransport>();
 
-        if ((options.Transports & HttpTransportType.WebSockets) != 0 && ServerHasWebSockets(context.Features))
+        if (
+            (options.Transports & HttpTransportType.WebSockets) != 0
+            && ServerHasWebSockets(context.Features)
+        )
         {
             response.AvailableTransports.Add(_webSocketAvailableTransport);
         }
@@ -383,7 +485,8 @@ internal sealed partial class HttpConnectionDispatcher
         return features.Get<IHttpWebSocketFeature>() != null;
     }
 
-    private static StringValues GetConnectionToken(HttpContext context) => context.Request.Query["id"];
+    private static StringValues GetConnectionToken(HttpContext context) =>
+        context.Request.Query["id"];
 
     private async Task ProcessSend(HttpContext context)
     {
@@ -400,7 +503,9 @@ internal sealed partial class HttpConnectionDispatcher
         {
             Log.PostNotAllowedForWebSockets(_logger);
             context.Response.StatusCode = StatusCodes.Status405MethodNotAllowed;
-            await context.Response.WriteAsync("POST requests are not allowed for WebSocket connections.");
+            await context.Response.WriteAsync(
+                "POST requests are not allowed for WebSocket connections."
+            );
             return;
         }
 
@@ -424,14 +529,21 @@ internal sealed partial class HttpConnectionDispatcher
             {
                 try
                 {
-                    await context.Request.Body.CopyToAsync(connection.ApplicationStream, bufferSize);
+                    await context.Request.Body.CopyToAsync(
+                        connection.ApplicationStream,
+                        bufferSize
+                    );
                 }
                 catch (InvalidOperationException ex)
                 {
                     // PipeWriter will throw an error if it is written to while dispose is in progress and the writer has been completed
                     // Dispose isn't taking WriteLock because it could be held because of backpressure, and calling CancelPendingFlush
                     // then taking the lock introduces a race condition that could lead to a deadlock
-                    Log.ConnectionDisposedWhileWriteInProgress(_logger, connection.ConnectionId, ex);
+                    Log.ConnectionDisposedWhileWriteInProgress(
+                        _logger,
+                        connection.ConnectionId,
+                        ex
+                    );
 
                     context.Response.StatusCode = StatusCodes.Status404NotFound;
                     context.Response.ContentType = "text/plain";
@@ -493,27 +605,40 @@ internal sealed partial class HttpConnectionDispatcher
             Log.ReceivedDeleteRequestForUnsupportedTransport(_logger, connection.TransportType);
             context.Response.StatusCode = StatusCodes.Status400BadRequest;
             context.Response.ContentType = "text/plain";
-            await context.Response.WriteAsync("Cannot terminate this connection using the DELETE endpoint.");
+            await context.Response.WriteAsync(
+                "Cannot terminate this connection using the DELETE endpoint."
+            );
             return;
         }
 
         Log.TerminatingConnection(_logger);
 
         // Dispose the connection, but don't wait for it. We assign it here so we can wait in tests
-        connection.DisposeAndRemoveTask = _manager.DisposeAndRemoveAsync(connection, closeGracefully: false);
+        connection.DisposeAndRemoveTask = _manager.DisposeAndRemoveAsync(
+            connection,
+            closeGracefully: false
+        );
 
         context.Response.StatusCode = StatusCodes.Status202Accepted;
         context.Response.ContentType = "text/plain";
     }
 
-    private async Task<bool> EnsureConnectionStateAsync(HttpConnectionContext connection, HttpContext context, HttpTransportType transportType, HttpTransportType supportedTransports, ConnectionLogScope logScope)
+    private async Task<bool> EnsureConnectionStateAsync(
+        HttpConnectionContext connection,
+        HttpContext context,
+        HttpTransportType transportType,
+        HttpTransportType supportedTransports,
+        ConnectionLogScope logScope
+    )
     {
         if ((supportedTransports & transportType) == 0)
         {
             context.Response.ContentType = "text/plain";
             context.Response.StatusCode = StatusCodes.Status404NotFound;
             Log.TransportNotSupported(_logger, transportType);
-            await context.Response.WriteAsync($"{transportType} transport not supported by this end point type");
+            await context.Response.WriteAsync(
+                $"{transportType} transport not supported by this end point type"
+            );
             return false;
         }
 
@@ -586,7 +711,8 @@ internal sealed partial class HttpConnectionDispatcher
         if (authenticateResultFeature is not null)
         {
             connection.AuthenticationExpiration =
-                authenticateResultFeature.AuthenticateResult?.Properties?.ExpiresUtc ?? DateTimeOffset.MaxValue;
+                authenticateResultFeature.AuthenticateResult?.Properties?.ExpiresUtc
+                ?? DateTimeOffset.MaxValue;
         }
     }
 
@@ -643,7 +769,10 @@ internal sealed partial class HttpConnectionDispatcher
             QueryString = existingRequestFeature.QueryString,
             RawTarget = existingRequestFeature.RawTarget
         };
-        var requestHeaders = new Dictionary<string, StringValues>(existingRequestFeature.Headers.Count, StringComparer.OrdinalIgnoreCase);
+        var requestHeaders = new Dictionary<string, StringValues>(
+            existingRequestFeature.Headers.Count,
+            StringComparer.OrdinalIgnoreCase
+        );
         foreach (var header in existingRequestFeature.Headers)
         {
             requestHeaders[header.Key] = header.Value;
@@ -717,7 +846,10 @@ internal sealed partial class HttpConnectionDispatcher
     }
 
     // This is only used for WebSockets connections, which can connect directly without negotiating
-    private async Task<HttpConnectionContext?> GetOrCreateConnectionAsync(HttpContext context, HttpConnectionDispatcherOptions options)
+    private async Task<HttpConnectionContext?> GetOrCreateConnectionAsync(
+        HttpContext context,
+        HttpConnectionDispatcherOptions options
+    )
     {
         var connectionToken = GetConnectionToken(context);
         HttpConnectionContext? connection;
@@ -739,7 +871,10 @@ internal sealed partial class HttpConnectionDispatcher
         return connection;
     }
 
-    private HttpConnectionContext CreateConnection(HttpConnectionDispatcherOptions options, int clientProtocolVersion = 0)
+    private HttpConnectionContext CreateConnection(
+        HttpConnectionDispatcherOptions options,
+        int clientProtocolVersion = 0
+    )
     {
         return _manager.CreateConnection(options, clientProtocolVersion);
     }
@@ -754,6 +889,7 @@ internal sealed partial class HttpConnectionDispatcher
     private sealed class EmptyServiceProvider : IServiceProvider
     {
         public static EmptyServiceProvider Instance { get; } = new EmptyServiceProvider();
+
         public object? GetService(Type serviceType) => null;
     }
 }

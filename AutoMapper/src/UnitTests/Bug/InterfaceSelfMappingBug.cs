@@ -7,7 +7,7 @@ namespace AutoMapper.UnitTests.Bug
     {
         public interface IFoo
         {
-            int Value { get; set; } 
+            int Value { get; set; }
         }
 
         public class Bar : IFoo
@@ -30,14 +30,8 @@ namespace AutoMapper.UnitTests.Bug
             });
             config.AssertConfigurationIsValid();
 
-            IFoo bar = new Bar
-            {
-                Value = 5
-            };
-            IFoo baz = new Baz
-            {
-                Value = 10
-            };
+            IFoo bar = new Bar { Value = 5 };
+            IFoo baz = new Baz { Value = 10 };
 
             config.CreateMapper().Map(bar, baz);
 

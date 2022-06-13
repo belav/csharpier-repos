@@ -40,7 +40,10 @@ internal static partial class Interop
             internal uint nStartPage;
 
 #if NET7_0_OR_GREATER
-            [CustomTypeMarshaller(typeof(CRYPTUI_VIEWCERTIFICATE_STRUCTW), Features = CustomTypeMarshallerFeatures.UnmanagedResources)]
+            [CustomTypeMarshaller(
+                typeof(CRYPTUI_VIEWCERTIFICATE_STRUCTW),
+                Features = CustomTypeMarshallerFeatures.UnmanagedResources
+            )]
             internal unsafe struct Native
             {
                 private uint dwSize;
@@ -82,7 +85,6 @@ internal static partial class Interop
                     cPropSheetPages = managed.cPropSheetPages;
                     rgPropSheetPages = managed.rgPropSheetPages;
                     nStartPage = managed.nStartPage;
-
                 }
 
                 public void FreeNative()
@@ -143,7 +145,10 @@ internal static partial class Interop
             internal IntPtr hSelectedCertStore;
 
 #if NET7_0_OR_GREATER
-            [CustomTypeMarshaller(typeof(CRYPTUI_SELECTCERTIFICATE_STRUCTW), Features = CustomTypeMarshallerFeatures.UnmanagedResources)]
+            [CustomTypeMarshaller(
+                typeof(CRYPTUI_SELECTCERTIFICATE_STRUCTW),
+                Features = CustomTypeMarshallerFeatures.UnmanagedResources
+            )]
             internal unsafe struct Native
             {
                 private uint dwSize;
@@ -218,9 +223,13 @@ internal static partial class Interop
         [LibraryImport(Interop.Libraries.CryptUI, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool CryptUIDlgViewCertificateW(
-            in CRYPTUI_VIEWCERTIFICATE_STRUCTW ViewInfo, IntPtr pfPropertiesChanged);
+            in CRYPTUI_VIEWCERTIFICATE_STRUCTW ViewInfo,
+            IntPtr pfPropertiesChanged
+        );
 
         [LibraryImport(Interop.Libraries.CryptUI, SetLastError = true)]
-        internal static partial SafeCertContextHandle CryptUIDlgSelectCertificateW(ref CRYPTUI_SELECTCERTIFICATE_STRUCTW csc);
+        internal static partial SafeCertContextHandle CryptUIDlgSelectCertificateW(
+            ref CRYPTUI_SELECTCERTIFICATE_STRUCTW csc
+        );
     }
 }

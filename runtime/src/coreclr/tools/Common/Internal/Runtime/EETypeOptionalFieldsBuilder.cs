@@ -25,7 +25,9 @@ namespace Internal.Runtime
 
         internal UInt32 GetFieldValue(EETypeOptionalFieldTag eTag, UInt32 defaultValueIfNotFound)
         {
-            return _rgFields[(int)eTag]._fieldPresent ? _rgFields[(int)eTag]._value : defaultValueIfNotFound;
+            return _rgFields[(int)eTag]._fieldPresent
+                ? _rgFields[(int)eTag]._value
+                : defaultValueIfNotFound;
         }
 
         internal void SetFieldValue(EETypeOptionalFieldTag eTag, UInt32 value)
@@ -101,7 +103,6 @@ namespace Internal.Runtime
                     sb.Append("x");
                 }
 
-
                 if (i != (int)EETypeOptionalFieldTag.Count - 1)
                 {
                     sb.Append("_");
@@ -127,8 +128,13 @@ namespace Internal.Runtime
             for (EETypeOptionalFieldTag eTag = 0; eTag < EETypeOptionalFieldTag.Count; eTag++)
             {
                 int index = (int)eTag;
-                if (_rgFields[index]._fieldPresent != other._rgFields[index]._fieldPresent ||
-                    (_rgFields[index]._fieldPresent && _rgFields[index]._value != other._rgFields[index]._value))
+                if (
+                    _rgFields[index]._fieldPresent != other._rgFields[index]._fieldPresent
+                    || (
+                        _rgFields[index]._fieldPresent
+                        && _rgFields[index]._value != other._rgFields[index]._value
+                    )
+                )
                     return false;
             }
 

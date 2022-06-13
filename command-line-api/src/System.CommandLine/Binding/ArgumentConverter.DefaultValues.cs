@@ -15,9 +15,13 @@ internal static partial class ArgumentConverter
     private static ConstructorInfo? _listCtor;
 #endif
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL3050", Justification = "https://github.com/dotnet/command-line-api/issues/1638")]
-    private static Array CreateArray(Type itemType, int capacity)
-        => Array.CreateInstance(itemType, capacity);
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL3050",
+        Justification = "https://github.com/dotnet/command-line-api/issues/1638"
+    )]
+    private static Array CreateArray(Type itemType, int capacity) =>
+        Array.CreateInstance(itemType, capacity);
 
     private static IList CreateEmptyList(Type listType)
     {
@@ -48,13 +52,13 @@ internal static partial class ArgumentConverter
         {
             var x = type.GetGenericTypeDefinition() switch
             {
-                { } enumerable when typeof(IEnumerable<>).IsAssignableFrom(enumerable) =>
-                    CreateArray(itemType, capacity),
-                { } array when typeof(IList<>).IsAssignableFrom(array) ||
-                               typeof(ICollection<>).IsAssignableFrom(array) =>
-                    CreateArray(itemType, capacity),
-                { } list when list == typeof(List<>) =>
-                    CreateEmptyList(type),
+                { } enumerable when typeof(IEnumerable<>).IsAssignableFrom(enumerable)
+                    => CreateArray(itemType, capacity),
+                { } array
+                    when typeof(IList<>).IsAssignableFrom(array)
+                        || typeof(ICollection<>).IsAssignableFrom(array)
+                    => CreateArray(itemType, capacity),
+                { } list when list == typeof(List<>) => CreateEmptyList(type),
                 _ => null
             };
 
@@ -67,8 +71,11 @@ internal static partial class ArgumentConverter
         throw new ArgumentException($"Type {type} cannot be created without a custom binder.");
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2067:UnrecognizedReflectionPattern",
-                                  Justification = $"{nameof(CreateDefaultValueType)} is only called on a ValueType. You can always create an instance of a ValueType.")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2067:UnrecognizedReflectionPattern",
+        Justification = $"{nameof(CreateDefaultValueType)} is only called on a ValueType. You can always create an instance of a ValueType."
+    )]
     private static object CreateDefaultValueType(Type type) =>
         FormatterServices.GetUninitializedObject(type);
 }

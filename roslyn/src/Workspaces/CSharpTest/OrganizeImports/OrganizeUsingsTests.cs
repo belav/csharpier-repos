@@ -20,14 +20,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Workspaces.UnitTests.OrganizeImports
     public class OrganizeUsingsTests
     {
         protected static async Task CheckAsync(
-            string initial, string final,
+            string initial,
+            string final,
             bool placeSystemNamespaceFirst = false,
             bool separateImportGroups = false,
-            string? endOfLine = null)
+            string? endOfLine = null
+        )
         {
             using var workspace = new AdhocWorkspace();
-            var project = workspace.CurrentSolution.AddProject("Project", "Project.dll", LanguageNames.CSharp);
-            var document = project.AddDocument("Document", initial.ReplaceLineEndings(endOfLine ?? Environment.NewLine));
+            var project = workspace.CurrentSolution.AddProject(
+                "Project",
+                "Project.dll",
+                LanguageNames.CSharp
+            );
+            var document = project.AddDocument(
+                "Document",
+                initial.ReplaceLineEndings(endOfLine ?? Environment.NewLine)
+            );
 
             var options = new OrganizeImportsOptions()
             {
@@ -36,15 +45,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Workspaces.UnitTests.OrganizeImports
                 NewLine = endOfLine ?? OrganizeImportsOptions.Default.NewLine
             };
 
-            var organizeImportsService = document.GetRequiredLanguageService<IOrganizeImportsService>();
-            var newDocument = await organizeImportsService.OrganizeImportsAsync(document, options, CancellationToken.None);
+            var organizeImportsService =
+                document.GetRequiredLanguageService<IOrganizeImportsService>();
+            var newDocument = await organizeImportsService.OrganizeImportsAsync(
+                document,
+                options,
+                CancellationToken.None
+            );
             var newRoot = await newDocument.GetRequiredSyntaxRootAsync(default);
-            Assert.Equal(final.ReplaceLineEndings(endOfLine ?? Environment.NewLine), newRoot.ToFullString());
+            Assert.Equal(
+                final.ReplaceLineEndings(endOfLine ?? Environment.NewLine),
+                newRoot.ToFullString()
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Organizing)]
-        public async Task EmptyFile()
-            => await CheckAsync(string.Empty, string.Empty);
+        public async Task EmptyFile() => await CheckAsync(string.Empty, string.Empty);
 
         [Fact, Trait(Traits.Feature, Traits.Features.Organizing)]
         public async Task SingleUsingStatement()
@@ -58,13 +74,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Workspaces.UnitTests.OrganizeImports
         public async Task AliasesAtBottom()
         {
             var initial =
-@"using A = B;
+                @"using A = B;
 using C;
 using D = E;
 using F;";
 
             var final =
-@"using C;
+                @"using C;
 using F;
 using A = B;
 using D = E;
@@ -77,7 +93,7 @@ using D = E;
         public async Task UsingStaticsBetweenUsingsAndAliases()
         {
             var initial =
-@"using static System.Convert;
+                @"using static System.Convert;
 using A = B;
 using C;
 using Z;
@@ -86,7 +102,7 @@ using static System.Console;
 using F;";
 
             var final =
-@"using C;
+                @"using C;
 using F;
 using Z;
 using static System.Console;
@@ -102,7 +118,7 @@ using D = E;
         public async Task NestedStatements()
         {
             var initial =
-@"using B;
+                @"using B;
 using A;
 
 namespace N
@@ -142,7 +158,7 @@ namespace N3
 }";
 
             var final =
-@"using A;
+                @"using A;
 using B;
 
 namespace N
@@ -187,7 +203,7 @@ namespace N3
         public async Task FileScopedNamespace()
         {
             var initial =
-@"using B;
+                @"using B;
 using A;
 
 namespace N;
@@ -197,7 +213,7 @@ using C;
 ";
 
             var final =
-@"using A;
+                @"using A;
 using B;
 
 namespace N;
@@ -212,13 +228,13 @@ using D;
         public async Task SpecialCaseSystem()
         {
             var initial =
-@"using M2;
+                @"using M2;
 using M1;
 using System.Linq;
 using System;";
 
             var final =
-@"using System;
+                @"using System;
 using System.Linq;
 using M1;
 using M2;
@@ -230,7 +246,7 @@ using M2;
         public async Task SpecialCaseSystemWithUsingStatic()
         {
             var initial =
-@"using M2;
+                @"using M2;
 using M1;
 using System.Linq;
 using System;
@@ -238,7 +254,7 @@ using static Microsoft.Win32.Registry;
 using static System.BitConverter;";
 
             var final =
-@"using System;
+                @"using System;
 using System.Linq;
 using M1;
 using M2;
@@ -252,13 +268,13 @@ using static Microsoft.Win32.Registry;
         public async Task DoNotSpecialCaseSystem()
         {
             var initial =
-@"using M2;
+                @"using M2;
 using M1;
 using System.Linq;
 using System;";
 
             var final =
-@"using M1;
+                @"using M1;
 using M2;
 using System;
 using System.Linq;
@@ -271,7 +287,7 @@ using System.Linq;
         public async Task DoNotSpecialCaseSystemWithUsingStatics()
         {
             var initial =
-@"using M2;
+                @"using M2;
 using M1;
 using System.Linq;
 using System;
@@ -279,7 +295,7 @@ using static Microsoft.Win32.Registry;
 using static System.BitConverter;";
 
             var final =
-@"using M1;
+                @"using M1;
 using M2;
 using System;
 using System.Linq;
@@ -292,7 +308,7 @@ using static System.BitConverter;";
         public async Task IndentationAfterSorting()
         {
             var initial =
-@"namespace A
+                @"namespace A
 {
     using V.W;
     using U;
@@ -306,7 +322,7 @@ namespace V.W { }
 namespace X.Y.Z { }";
 
             var final =
-@"namespace A
+                @"namespace A
 {
     using U;
     using V.W;
@@ -326,7 +342,7 @@ namespace X.Y.Z { }";
         public async Task DoNotTouchCommentsAtBeginningOfFile1()
         {
             var initial =
-@"// Copyright (c) Microsoft Corporation.  All rights reserved.
+                @"// Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using B;
 // I like namespace A
@@ -336,7 +352,7 @@ namespace A { }
 namespace B { }";
 
             var final =
-@"// Copyright (c) Microsoft Corporation.  All rights reserved.
+                @"// Copyright (c) Microsoft Corporation.  All rights reserved.
 
 // I like namespace A
 using A;
@@ -352,7 +368,7 @@ namespace B { }";
         public async Task DoNotTouchCommentsAtBeginningOfFile2()
         {
             var initial =
-@"/* Copyright (c) Microsoft Corporation.  All rights reserved. */
+                @"/* Copyright (c) Microsoft Corporation.  All rights reserved. */
 
 using B;
 /* I like namespace A */
@@ -362,7 +378,7 @@ namespace A { }
 namespace B { }";
 
             var final =
-@"/* Copyright (c) Microsoft Corporation.  All rights reserved. */
+                @"/* Copyright (c) Microsoft Corporation.  All rights reserved. */
 
 /* I like namespace A */
 using A;
@@ -378,7 +394,7 @@ namespace B { }";
         public async Task DoNotTouchCommentsAtBeginningOfFile3()
         {
             var initial =
-@"// Copyright (c) Microsoft Corporation.  All rights reserved.
+                @"// Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using B;
 /// I like namespace A
@@ -388,7 +404,7 @@ namespace A { }
 namespace B { }";
 
             var final =
-@"// Copyright (c) Microsoft Corporation.  All rights reserved.
+                @"// Copyright (c) Microsoft Corporation.  All rights reserved.
 
 /// I like namespace A
 using A;
@@ -405,7 +421,7 @@ namespace B { }";
         public async Task DoNotTouchCommentsAtBeginningOfFile4()
         {
             var initial =
-@"/// Copyright (c) Microsoft Corporation.  All rights reserved.
+                @"/// Copyright (c) Microsoft Corporation.  All rights reserved.
 
 using B;
 /// I like namespace A
@@ -415,7 +431,7 @@ namespace A { }
 namespace B { }";
 
             var final =
-@"/// Copyright (c) Microsoft Corporation.  All rights reserved.
+                @"/// Copyright (c) Microsoft Corporation.  All rights reserved.
 
 /// I like namespace A
 using A;
@@ -432,7 +448,7 @@ namespace B { }";
         public async Task DoNotTouchCommentsAtBeginningOfFile5()
         {
             var initial =
-@"/** Copyright (c) Microsoft Corporation.  All rights reserved.
+                @"/** Copyright (c) Microsoft Corporation.  All rights reserved.
 */
 
 using B;
@@ -443,7 +459,7 @@ namespace A { }
 namespace B { }";
 
             var final =
-@"/** Copyright (c) Microsoft Corporation.  All rights reserved.
+                @"/** Copyright (c) Microsoft Corporation.  All rights reserved.
 */
 
 /// I like namespace A
@@ -461,7 +477,7 @@ namespace B { }";
         public async Task DoTouchCommentsAtBeginningOfFile1()
         {
             var initial =
-@"// Copyright (c) Microsoft Corporation.  All rights reserved.
+                @"// Copyright (c) Microsoft Corporation.  All rights reserved.
 using B;
 // I like namespace A
 using A;
@@ -470,7 +486,7 @@ namespace A { }
 namespace B { }";
 
             var final =
-@"// Copyright (c) Microsoft Corporation.  All rights reserved.
+                @"// Copyright (c) Microsoft Corporation.  All rights reserved.
 // I like namespace A
 using A;
 using B;
@@ -486,7 +502,7 @@ namespace B { }";
         public async Task DoTouchCommentsAtBeginningOfFile2()
         {
             var initial =
-@"/* Copyright (c) Microsoft Corporation.  All rights reserved. */
+                @"/* Copyright (c) Microsoft Corporation.  All rights reserved. */
 using B;
 /* I like namespace A */
 using A;
@@ -495,7 +511,7 @@ namespace A { }
 namespace B { }";
 
             var final =
-@"/* Copyright (c) Microsoft Corporation.  All rights reserved. */
+                @"/* Copyright (c) Microsoft Corporation.  All rights reserved. */
 /* I like namespace A */
 using A;
 using B;
@@ -511,7 +527,7 @@ namespace B { }";
         public async Task DoTouchCommentsAtBeginningOfFile3()
         {
             var initial =
-@"/// Copyright (c) Microsoft Corporation.  All rights reserved.
+                @"/// Copyright (c) Microsoft Corporation.  All rights reserved.
 using B;
 /// I like namespace A
 using A;
@@ -520,7 +536,7 @@ namespace A { }
 namespace B { }";
 
             var final =
-@"/// I like namespace A
+                @"/// I like namespace A
 using A;
 /// Copyright (c) Microsoft Corporation.  All rights reserved.
 using B;
@@ -536,7 +552,7 @@ namespace B { }";
         public async Task CommentsNotAtTheStartOfTheFile1()
         {
             var initial =
-@"namespace N
+                @"namespace N
 {
     // attached to System.Text
     using System.Text;
@@ -545,7 +561,7 @@ namespace B { }";
 }";
 
             var final =
-@"namespace N
+                @"namespace N
 {
     // attached to System
     using System;
@@ -561,7 +577,7 @@ namespace B { }";
         public async Task CommentsNotAtTheStartOfTheFile2()
         {
             var initial =
-@"namespace N
+                @"namespace N
 {
     // not attached to System.Text
 
@@ -571,7 +587,7 @@ namespace B { }";
 }";
 
             var final =
-@"namespace N
+                @"namespace N
 {
     // not attached to System.Text
 
@@ -587,7 +603,7 @@ namespace B { }";
         public async Task DoNotSortIfEndIfBlocks()
         {
             var initial =
-@"using D;
+                @"using D;
 #if MYCONFIG
 using C;
 #else
@@ -608,7 +624,7 @@ namespace D { }";
         public async Task ExternAliases()
         {
             var initial =
-@"extern alias Z;
+                @"extern alias Z;
 extern alias Y;
 extern alias X;
 using C;
@@ -645,7 +661,7 @@ namespace C
 }";
 
             var final =
-@"extern alias X;
+                @"extern alias X;
 extern alias Y;
 extern alias Z;
 using A;
@@ -688,7 +704,7 @@ namespace C
         public async Task DuplicateUsings()
         {
             var initial =
-@"using A;
+                @"using A;
 using A;";
 
             var final = initial;
@@ -700,14 +716,14 @@ using A;";
         public async Task InlineComments()
         {
             var initial =
-@"/*00*/using/*01*/D/*02*/;/*03*/
+                @"/*00*/using/*01*/D/*02*/;/*03*/
 /*04*/using/*05*/C/*06*/;/*07*/
 /*08*/using/*09*/A/*10*/;/*11*/
 /*12*/using/*13*/B/*14*/;/*15*/
 /*16*/";
 
             var final =
-@"/*08*/using/*09*/A/*10*/;/*11*/
+                @"/*08*/using/*09*/A/*10*/;/*11*/
 /*12*/using/*13*/B/*14*/;/*15*/
 /*04*/using/*05*/C/*06*/;/*07*/
 /*00*/using/*01*/D/*02*/;/*03*/
@@ -719,11 +735,10 @@ using A;";
         [Fact, Trait(Traits.Feature, Traits.Features.Organizing)]
         public async Task AllOnOneLine()
         {
-            var initial =
-@"using C; using B; using A;";
+            var initial = @"using C; using B; using A;";
 
             var final =
-@"using A;
+                @"using A;
 using B; 
 using C; ";
 
@@ -734,7 +749,7 @@ using C; ";
         public async Task InsideRegionBlock()
         {
             var initial =
-@"#region Using directives
+                @"#region Using directives
 using C;
 using A;
 using B;
@@ -744,7 +759,7 @@ class Class1
 {
 }";
             var final =
-@"#region Using directives
+                @"#region Using directives
 using A;
 using B;
 using C;
@@ -761,7 +776,7 @@ class Class1
         public async Task NestedRegionBlock()
         {
             var initial =
-@"using C;
+                @"using C;
 #region Z
 using A;
 #endregion
@@ -776,7 +791,7 @@ using B;";
         public async Task MultipleRegionBlocks()
         {
             var initial =
-@"#region Using directives
+                @"#region Using directives
 using C;
 #region Z
 using A;
@@ -793,7 +808,7 @@ using B;
         public async Task InterleavedNewlines()
         {
             var initial =
-@"using B;
+                @"using B;
 
 using A;
 
@@ -802,7 +817,7 @@ using C;
 class D { }";
 
             var final =
-@"using A;
+                @"using A;
 using B;
 using C;
 
@@ -815,14 +830,14 @@ class D { }";
         public async Task InsideIfEndIfBlock()
         {
             var initial =
-@"#if !X
+                @"#if !X
 using B;
 using A;
 using C;
 #endif";
 
             var final =
-@"#if !X
+                @"#if !X
 using A;
 using B;
 using C;
@@ -835,7 +850,7 @@ using C;
         public async Task IfEndIfBlockAbove()
         {
             var initial =
-@"#if !X
+                @"#if !X
 using C;
 using B;
 using F;
@@ -852,7 +867,7 @@ using E;";
         public async Task IfEndIfBlockMiddle()
         {
             var initial =
-@"using D;
+                @"using D;
 using A;
 using H;
 #if !X
@@ -872,7 +887,7 @@ using G;";
         public async Task IfEndIfBlockBelow()
         {
             var initial =
-@"using D;
+                @"using D;
 using A;
 using E;
 #if !X
@@ -889,7 +904,7 @@ using F;
         public async Task Korean()
         {
             var initial =
-@"using 하;
+                @"using 하;
 using 파;
 using 타;
 using 카;
@@ -905,7 +920,7 @@ using 나;
 using 가;";
 
             var final =
-@"using 가;
+                @"using 가;
 using 나;
 using 다;
 using 라;
@@ -928,7 +943,7 @@ using 하;
         public async Task DoNotSpecialCaseSystem1()
         {
             var initial =
-@"using B;
+                @"using B;
 using System.Collections.Generic;
 using C;
 using _System;
@@ -939,7 +954,7 @@ using System.Collections;
 using A;";
 
             var final =
-@"using _System;
+                @"using _System;
 using A;
 using B;
 using C;
@@ -957,7 +972,7 @@ using SystemZ;
         public async Task DoNotSpecialCaseSystem2()
         {
             var initial =
-@"extern alias S;
+                @"extern alias S;
 extern alias R;
 extern alias T;
 using B;
@@ -975,7 +990,7 @@ using System.Collections;
 using A;";
 
             var final =
-@"extern alias R;
+                @"extern alias R;
 extern alias S;
 extern alias T;
 using _System;
@@ -1000,7 +1015,7 @@ using Z = System.Int32;
         public async Task CaseSensitivity1()
         {
             var initial =
-@"using Bb;
+                @"using Bb;
 using B;
 using bB;
 using b;
@@ -1044,7 +1059,7 @@ using CC;
 // If Width is sensitiveア != ｱ, if Width is insensitive ア == ｱ.";
 
             var final =
-@"using a;
+                @"using a;
 using A;
 using aa;
 using aA;
@@ -1093,7 +1108,7 @@ using ああ;
         public async Task CaseSensitivity2()
         {
             var initial =
-@"using あ;
+                @"using あ;
 using ア;
 using ｱ;
 using ああ;
@@ -1107,7 +1122,7 @@ using ｱア;
 using ｱｱ;";
 
             var final =
-@"using ア;
+                @"using ア;
 using ｱ;
 using あ;
 using アア;
@@ -1129,7 +1144,7 @@ using ああ;
         public async Task TestGrouping()
         {
             var initial =
-@"// Banner
+                @"// Banner
 
 using Microsoft.CodeAnalysis.CSharp.Extensions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -1142,7 +1157,7 @@ using IntList = System.Collections.Generic.List<int>;
 using static System.Console;";
 
             var final =
-@"// Banner
+                @"// Banner
 
 using System.Collections.Generic;
 using System.Linq;
@@ -1158,7 +1173,12 @@ using static System.Console;
 using IntList = System.Collections.Generic.List<int>;
 ";
 
-            await CheckAsync(initial, final, placeSystemNamespaceFirst: true, separateImportGroups: true);
+            await CheckAsync(
+                initial,
+                final,
+                placeSystemNamespaceFirst: true,
+                separateImportGroups: true
+            );
         }
 
         [WorkItem(20988, "https://github.com/dotnet/roslyn/issues/20988")]
@@ -1167,7 +1187,7 @@ using IntList = System.Collections.Generic.List<int>;
         {
             // Make sure we don't insert extra newlines if they're already there.
             var initial =
-@"// Banner
+                @"// Banner
 
 using System.Collections.Generic;
 using System.Linq;
@@ -1184,7 +1204,7 @@ using IntList = System.Collections.Generic.List<int>;
 ";
 
             var final =
-@"// Banner
+                @"// Banner
 
 using System.Collections.Generic;
 using System.Linq;
@@ -1200,7 +1220,12 @@ using static System.Console;
 using IntList = System.Collections.Generic.List<int>;
 ";
 
-            await CheckAsync(initial, final, placeSystemNamespaceFirst: true, separateImportGroups: true);
+            await CheckAsync(
+                initial,
+                final,
+                placeSystemNamespaceFirst: true,
+                separateImportGroups: true
+            );
         }
 
         [WorkItem(20988, "https://github.com/dotnet/roslyn/issues/19306")]
@@ -1210,7 +1235,7 @@ using IntList = System.Collections.Generic.List<int>;
         public async Task TestGrouping3(string endOfLine)
         {
             var initial =
-@"// Banner
+                @"// Banner
 
 using Microsoft.CodeAnalysis.CSharp.Extensions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -1223,7 +1248,7 @@ using IntList = System.Collections.Generic.List<int>;
 using static System.Console;";
 
             var final =
-@"// Banner
+                @"// Banner
 
 using System.Collections.Generic;
 using System.Linq;
@@ -1239,7 +1264,13 @@ using static System.Console;
 using IntList = System.Collections.Generic.List<int>;
 ";
 
-            await CheckAsync(initial, final, placeSystemNamespaceFirst: true, separateImportGroups: true, endOfLine: endOfLine);
+            await CheckAsync(
+                initial,
+                final,
+                placeSystemNamespaceFirst: true,
+                separateImportGroups: true,
+                endOfLine: endOfLine
+            );
         }
     }
 }

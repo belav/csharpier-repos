@@ -17,7 +17,13 @@ internal sealed partial class DefaultTransportFactory : ITransportFactory
     private readonly ILoggerFactory _loggerFactory;
     private static volatile bool _websocketsSupported = true;
 
-    public DefaultTransportFactory(HttpTransportType requestedTransportType, ILoggerFactory loggerFactory, HttpClient? httpClient, HttpConnectionOptions httpConnectionOptions, Func<Task<string?>> accessTokenProvider)
+    public DefaultTransportFactory(
+        HttpTransportType requestedTransportType,
+        ILoggerFactory loggerFactory,
+        HttpClient? httpClient,
+        HttpConnectionOptions httpConnectionOptions,
+        Func<Task<string?>> accessTokenProvider
+    )
     {
         if (httpClient == null && requestedTransportType != HttpTransportType.WebSockets)
         {
@@ -33,26 +39,51 @@ internal sealed partial class DefaultTransportFactory : ITransportFactory
 
     public ITransport CreateTransport(HttpTransportType availableServerTransports)
     {
-        if (_websocketsSupported && (availableServerTransports & HttpTransportType.WebSockets & _requestedTransportType) == HttpTransportType.WebSockets)
+        if (
+            _websocketsSupported
+            && (availableServerTransports & HttpTransportType.WebSockets & _requestedTransportType)
+                == HttpTransportType.WebSockets
+        )
         {
             try
             {
-                return new WebSocketsTransport(_httpConnectionOptions, _loggerFactory, _accessTokenProvider);
+                return new WebSocketsTransport(
+                    _httpConnectionOptions,
+                    _loggerFactory,
+                    _accessTokenProvider
+                );
             }
             catch (PlatformNotSupportedException ex)
             {
-                Log.TransportNotSupported(_loggerFactory.CreateLogger<DefaultTransportFactory>(), HttpTransportType.WebSockets, ex);
+                Log.TransportNotSupported(
+                    _loggerFactory.CreateLogger<DefaultTransportFactory>(),
+                    HttpTransportType.WebSockets,
+                    ex
+                );
                 _websocketsSupported = false;
             }
         }
 
-        if ((availableServerTransports & HttpTransportType.ServerSentEvents & _requestedTransportType) == HttpTransportType.ServerSentEvents)
+        if (
+            (
+                availableServerTransports
+                & HttpTransportType.ServerSentEvents
+                & _requestedTransportType
+            ) == HttpTransportType.ServerSentEvents
+        )
         {
             // We don't need to give the transport the accessTokenProvider because the HttpClient has a message handler that does the work for us.
-            return new ServerSentEventsTransport(_httpClient!, _httpConnectionOptions, _loggerFactory);
+            return new ServerSentEventsTransport(
+                _httpClient!,
+                _httpConnectionOptions,
+                _loggerFactory
+            );
         }
 
-        if ((availableServerTransports & HttpTransportType.LongPolling & _requestedTransportType) == HttpTransportType.LongPolling)
+        if (
+            (availableServerTransports & HttpTransportType.LongPolling & _requestedTransportType)
+            == HttpTransportType.LongPolling
+        )
         {
             // We don't need to give the transport the accessTokenProvider because the HttpClient has a message handler that does the work for us.
             return new LongPollingTransport(_httpClient!, _httpConnectionOptions, _loggerFactory);
@@ -63,7 +94,16 @@ internal sealed partial class DefaultTransportFactory : ITransportFactory
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Transport '{TransportType}' is not supported.", EventName = "TransportNotSupported")]
-        public static partial void TransportNotSupported(ILogger logger, HttpTransportType transportType, Exception ex);
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Transport '{TransportType}' is not supported.",
+            EventName = "TransportNotSupported"
+        )]
+        public static partial void TransportNotSupported(
+            ILogger logger,
+            HttpTransportType transportType,
+            Exception ex
+        );
     }
 }

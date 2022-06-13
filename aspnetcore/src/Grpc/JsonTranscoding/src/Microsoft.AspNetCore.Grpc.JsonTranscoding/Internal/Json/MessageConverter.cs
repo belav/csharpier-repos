@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
 // This converter should be temporary until System.Text.Json supports overriding contacts.
 // We want to eliminate this converter because System.Text.Json has to buffer content in converters.
-internal sealed class MessageConverter<TMessage> : SettingsConverterBase<TMessage> where TMessage : IMessage, new()
+internal sealed class MessageConverter<TMessage> : SettingsConverterBase<TMessage>
+    where TMessage : IMessage, new()
 {
     private readonly Dictionary<string, FieldDescriptor> _jsonFieldMap;
 
@@ -23,7 +24,8 @@ internal sealed class MessageConverter<TMessage> : SettingsConverterBase<TMessag
     public override TMessage Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
-        JsonSerializerOptions options)
+        JsonSerializerOptions options
+    )
     {
         var message = new TMessage();
 
@@ -43,24 +45,44 @@ internal sealed class MessageConverter<TMessage> : SettingsConverterBase<TMessag
                     {
                         if (fieldDescriptor.ContainingOneof != null)
                         {
-                            if (fieldDescriptor.ContainingOneof.Accessor.GetCaseFieldDescriptor(message) != null)
+                            if (
+                                fieldDescriptor.ContainingOneof.Accessor.GetCaseFieldDescriptor(
+                                    message
+                                ) != null
+                            )
                             {
-                                throw new InvalidOperationException($"Multiple values specified for oneof {fieldDescriptor.ContainingOneof.Name}.");
+                                throw new InvalidOperationException(
+                                    $"Multiple values specified for oneof {fieldDescriptor.ContainingOneof.Name}."
+                                );
                             }
                         }
 
                         if (fieldDescriptor.IsMap)
                         {
-                            JsonConverterHelper.PopulateMap(ref reader, options, message, fieldDescriptor);
+                            JsonConverterHelper.PopulateMap(
+                                ref reader,
+                                options,
+                                message,
+                                fieldDescriptor
+                            );
                         }
                         else if (fieldDescriptor.IsRepeated)
                         {
-                            JsonConverterHelper.PopulateList(ref reader, options, message, fieldDescriptor);
+                            JsonConverterHelper.PopulateList(
+                                ref reader,
+                                options,
+                                message,
+                                fieldDescriptor
+                            );
                         }
                         else
                         {
                             var fieldType = JsonConverterHelper.GetFieldType(fieldDescriptor);
-                            var propertyValue = JsonSerializer.Deserialize(ref reader, fieldType, options);
+                            var propertyValue = JsonSerializer.Deserialize(
+                                ref reader,
+                                fieldType,
+                                options
+                            );
                             fieldDescriptor.Accessor.SetValue(message, propertyValue);
                         }
                     }
@@ -73,22 +95,25 @@ internal sealed class MessageConverter<TMessage> : SettingsConverterBase<TMessag
                     // Ignore
                     break;
                 default:
-                    throw new InvalidOperationException($"Unexpected JSON token: {reader.TokenType}");
+                    throw new InvalidOperationException(
+                        $"Unexpected JSON token: {reader.TokenType}"
+                    );
             }
         }
 
         throw new Exception();
     }
 
-    public override void Write(
-        Utf8JsonWriter writer,
-        TMessage value,
-        JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, TMessage value, JsonSerializerOptions options)
     {
         WriteMessage(writer, value, options);
     }
 
-    private void WriteMessage(Utf8JsonWriter writer, IMessage message, JsonSerializerOptions options)
+    private void WriteMessage(
+        Utf8JsonWriter writer,
+        IMessage message,
+        JsonSerializerOptions options
+    )
     {
         writer.WriteStartObject();
 
@@ -97,7 +122,12 @@ internal sealed class MessageConverter<TMessage> : SettingsConverterBase<TMessag
         writer.WriteEndObject();
     }
 
-    internal static void WriteMessageFields(Utf8JsonWriter writer, IMessage message, GrpcJsonSettings settings, JsonSerializerOptions options)
+    internal static void WriteMessageFields(
+        Utf8JsonWriter writer,
+        IMessage message,
+        GrpcJsonSettings settings,
+        JsonSerializerOptions options
+    )
     {
         var fields = message.Descriptor.Fields;
 
@@ -115,7 +145,9 @@ internal sealed class MessageConverter<TMessage> : SettingsConverterBase<TMessag
         }
     }
 
-    private static Dictionary<string, FieldDescriptor> CreateJsonFieldMap(IList<FieldDescriptor> fields)
+    private static Dictionary<string, FieldDescriptor> CreateJsonFieldMap(
+        IList<FieldDescriptor> fields
+    )
     {
         var map = new Dictionary<string, FieldDescriptor>();
         foreach (var field in fields)
@@ -130,13 +162,18 @@ internal sealed class MessageConverter<TMessage> : SettingsConverterBase<TMessag
     /// Determines whether or not a field value should be serialized according to the field,
     /// its value in the message, and the settings of this formatter.
     /// </summary>
-    private static bool ShouldFormatFieldValue(IMessage message, FieldDescriptor field, object value, bool formatDefaultValues) =>
+    private static bool ShouldFormatFieldValue(
+        IMessage message,
+        FieldDescriptor field,
+        object value,
+        bool formatDefaultValues
+    ) =>
         field.HasPresence
-        // Fields that support presence *just* use that
-        ? field.Accessor.HasValue(message)
-        // Otherwise, format if either we've been asked to format default values, or if it's
-        // not a default value anyway.
-        : formatDefaultValues || !IsDefaultValue(field, value);
+            // Fields that support presence *just* use that
+            ? field.Accessor.HasValue(message)
+            // Otherwise, format if either we've been asked to format default values, or if it's
+            // not a default value anyway.
+            : formatDefaultValues || !IsDefaultValue(field, value);
 
     private static bool IsDefaultValue(FieldDescriptor descriptor, object value)
     {

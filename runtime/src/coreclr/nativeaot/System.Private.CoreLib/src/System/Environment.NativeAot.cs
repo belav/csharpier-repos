@@ -36,8 +36,7 @@ namespace System
         // to assign blame for crashes.  Don't mess with this, such as by making it call
         // another managed helper method, unless you consult with some CLR Watson experts.
         [DoesNotReturn]
-        public static void FailFast(string message) =>
-            RuntimeExceptionHelpers.FailFast(message);
+        public static void FailFast(string message) => RuntimeExceptionHelpers.FailFast(message);
 
         [DoesNotReturn]
         public static void FailFast(string message, Exception exception) =>
@@ -47,7 +46,14 @@ namespace System
         {
             // TODO: errorSource originates from CoreCLR (See: https://github.com/dotnet/coreclr/pull/15895)
             // For now, we ignore errorSource but we should distinguish the way FailFast prints exception message using errorSource
-            bool result = DeveloperExperience.Default.OnContractFailure(exception.StackTrace, ContractFailureKind.Assert, message, null, null, null);
+            bool result = DeveloperExperience.Default.OnContractFailure(
+                exception.StackTrace,
+                ContractFailureKind.Assert,
+                message,
+                null,
+                null,
+                null
+            );
             if (!result)
             {
                 RuntimeExceptionHelpers.FailFast(message, exception);

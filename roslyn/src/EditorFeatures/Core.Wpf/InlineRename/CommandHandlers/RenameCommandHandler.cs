@@ -36,14 +36,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RenameCommandHandler(IThreadingContext threadingContext, InlineRenameService renameService)
-            : base(threadingContext, renameService)
-        {
-        }
+        public RenameCommandHandler(
+            IThreadingContext threadingContext,
+            InlineRenameService renameService
+        ) : base(threadingContext, renameService) { }
 
 #if !COCOA
-        protected override bool AdornmentShouldReceiveKeyboardNavigation(ITextView textView)
-            => GetAdornment(textView) switch
+        protected override bool AdornmentShouldReceiveKeyboardNavigation(ITextView textView) =>
+            GetAdornment(textView) switch
             {
                 RenameDashboard dashboard => dashboard.ShouldReceiveKeyboardNavigation,
                 RenameFlyout => true, // Always receive keyboard navigation for the inline adornment
@@ -107,31 +107,43 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 // Session.Commit can throw if it can't commit
                 // rename operation.
                 // handle that case gracefully
-                var notificationService = activeSession.Workspace.Services.GetService<INotificationService>();
-                notificationService?.SendNotification(ex.Message, title: EditorFeaturesResources.Rename, severity: NotificationSeverity.Error);
+                var notificationService =
+                    activeSession.Workspace.Services.GetService<INotificationService>();
+                notificationService?.SendNotification(
+                    ex.Message,
+                    title: EditorFeaturesResources.Rename,
+                    severity: NotificationSeverity.Error
+                );
             }
             catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
             {
                 // Show a nice error to the user via an info bar
-                var errorReportingService = activeSession.Workspace.Services.GetService<IErrorReportingService>();
+                var errorReportingService =
+                    activeSession.Workspace.Services.GetService<IErrorReportingService>();
                 if (errorReportingService is null)
                 {
                     return;
                 }
 
                 errorReportingService.ShowGlobalErrorInfo(
-                    message: string.Format(EditorFeaturesWpfResources.Error_performing_rename_0, ex.Message),
+                    message: string.Format(
+                        EditorFeaturesWpfResources.Error_performing_rename_0,
+                        ex.Message
+                    ),
                     TelemetryFeatureName.InlineRename,
                     ex,
                     new InfoBarUI(
                         WorkspacesResources.Show_Stack_Trace,
                         InfoBarUI.UIKind.HyperLink,
-                        () => errorReportingService.ShowDetailedErrorInfo(ex), closeAfterAction: true));
+                        () => errorReportingService.ShowDetailedErrorInfo(ex),
+                        closeAfterAction: true
+                    )
+                );
             }
         }
 #else
-        protected override bool AdornmentShouldReceiveKeyboardNavigation(ITextView textView)
-            => false;
+        protected override bool AdornmentShouldReceiveKeyboardNavigation(ITextView textView) =>
+            false;
 
         protected override void SetFocusToTextView(ITextView textView)
         {

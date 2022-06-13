@@ -14,6 +14,5 @@ public class Sponsor
     public int Id { get; set; }
     public string Name { get; set; }
 
-    public virtual ICollection<Team> Teams
-        => _teams;
+    public virtual ICollection<Team> Teams => _teams;
 }

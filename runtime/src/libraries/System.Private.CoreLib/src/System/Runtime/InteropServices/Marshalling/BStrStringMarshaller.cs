@@ -11,8 +11,13 @@ namespace System.Runtime.InteropServices.Marshalling
     /// Marshaller for BSTR strings
     /// </summary>
     [CLSCompliant(false)]
-    [CustomTypeMarshaller(typeof(string), BufferSize = 0x100,
-        Features = CustomTypeMarshallerFeatures.UnmanagedResources | CustomTypeMarshallerFeatures.TwoStageMarshalling | CustomTypeMarshallerFeatures.CallerAllocatedBuffer)]
+    [CustomTypeMarshaller(
+        typeof(string),
+        BufferSize = 0x100,
+        Features = CustomTypeMarshallerFeatures.UnmanagedResources
+            | CustomTypeMarshallerFeatures.TwoStageMarshalling
+            | CustomTypeMarshallerFeatures.CallerAllocatedBuffer
+    )]
     public unsafe ref struct BStrStringMarshaller
     {
         private void* _ptrToFirstChar;
@@ -22,9 +27,7 @@ namespace System.Runtime.InteropServices.Marshalling
         /// Initializes a new instance of the <see cref="BStrStringMarshaller"/>.
         /// </summary>
         /// <param name="str">The string to marshal.</param>
-        public BStrStringMarshaller(string? str)
-            : this(str, default)
-        { }
+        public BStrStringMarshaller(string? str) : this(str, default) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BStrStringMarshaller"/>.

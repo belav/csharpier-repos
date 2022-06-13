@@ -16,7 +16,11 @@ namespace Internal.Metadata.NativeFormat
 {
     internal static partial class MdBinaryReader
     {
-        public static unsafe uint Read(this NativeReader reader, uint offset, out BooleanCollection values)
+        public static unsafe uint Read(
+            this NativeReader reader,
+            uint offset,
+            out BooleanCollection values
+        )
         {
             values = new BooleanCollection(reader, offset);
             uint count;
@@ -25,7 +29,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static unsafe uint Read(this NativeReader reader, uint offset, out CharCollection values)
+        public static unsafe uint Read(
+            this NativeReader reader,
+            uint offset,
+            out CharCollection values
+        )
         {
             values = new CharCollection(reader, offset);
             uint count;
@@ -34,7 +42,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static unsafe uint Read(this NativeReader reader, uint offset, out ByteCollection values)
+        public static unsafe uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ByteCollection values
+        )
         {
             values = new ByteCollection(reader, offset);
             uint count;
@@ -43,7 +55,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static unsafe uint Read(this NativeReader reader, uint offset, out SByteCollection values)
+        public static unsafe uint Read(
+            this NativeReader reader,
+            uint offset,
+            out SByteCollection values
+        )
         {
             values = new SByteCollection(reader, offset);
             uint count;
@@ -52,7 +68,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static unsafe uint Read(this NativeReader reader, uint offset, out Int16Collection values)
+        public static unsafe uint Read(
+            this NativeReader reader,
+            uint offset,
+            out Int16Collection values
+        )
         {
             values = new Int16Collection(reader, offset);
             uint count;
@@ -61,7 +81,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static unsafe uint Read(this NativeReader reader, uint offset, out UInt16Collection values)
+        public static unsafe uint Read(
+            this NativeReader reader,
+            uint offset,
+            out UInt16Collection values
+        )
         {
             values = new UInt16Collection(reader, offset);
             uint count;
@@ -70,7 +94,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static unsafe uint Read(this NativeReader reader, uint offset, out Int32Collection values)
+        public static unsafe uint Read(
+            this NativeReader reader,
+            uint offset,
+            out Int32Collection values
+        )
         {
             values = new Int32Collection(reader, offset);
             uint count;
@@ -79,7 +107,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static unsafe uint Read(this NativeReader reader, uint offset, out UInt32Collection values)
+        public static unsafe uint Read(
+            this NativeReader reader,
+            uint offset,
+            out UInt32Collection values
+        )
         {
             values = new UInt32Collection(reader, offset);
             uint count;
@@ -88,7 +120,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static unsafe uint Read(this NativeReader reader, uint offset, out Int64Collection values)
+        public static unsafe uint Read(
+            this NativeReader reader,
+            uint offset,
+            out Int64Collection values
+        )
         {
             values = new Int64Collection(reader, offset);
             uint count;
@@ -97,7 +133,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static unsafe uint Read(this NativeReader reader, uint offset, out UInt64Collection values)
+        public static unsafe uint Read(
+            this NativeReader reader,
+            uint offset,
+            out UInt64Collection values
+        )
         {
             values = new UInt64Collection(reader, offset);
             uint count;
@@ -106,7 +146,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static unsafe uint Read(this NativeReader reader, uint offset, out SingleCollection values)
+        public static unsafe uint Read(
+            this NativeReader reader,
+            uint offset,
+            out SingleCollection values
+        )
         {
             values = new SingleCollection(reader, offset);
             uint count;
@@ -115,7 +159,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static unsafe uint Read(this NativeReader reader, uint offset, out DoubleCollection values)
+        public static unsafe uint Read(
+            this NativeReader reader,
+            uint offset,
+            out DoubleCollection values
+        )
         {
             values = new DoubleCollection(reader, offset);
             uint count;
@@ -132,7 +180,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out AssemblyHashAlgorithm value)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out AssemblyHashAlgorithm value
+        )
         {
             uint ivalue;
             offset = reader.DecodeUnsigned(offset, out ivalue);
@@ -164,7 +216,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out GenericParameterAttributes value)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out GenericParameterAttributes value
+        )
         {
             uint ivalue;
             offset = reader.DecodeUnsigned(offset, out ivalue);
@@ -172,7 +228,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out GenericParameterKind value)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out GenericParameterKind value
+        )
         {
             uint ivalue;
             offset = reader.DecodeUnsigned(offset, out ivalue);
@@ -188,7 +248,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out MethodImplAttributes value)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out MethodImplAttributes value
+        )
         {
             uint ivalue;
             offset = reader.DecodeUnsigned(offset, out ivalue);
@@ -196,7 +260,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out MethodSemanticsAttributes value)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out MethodSemanticsAttributes value
+        )
         {
             uint ivalue;
             offset = reader.DecodeUnsigned(offset, out ivalue);
@@ -204,7 +272,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out NamedArgumentMemberKind value)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out NamedArgumentMemberKind value
+        )
         {
             uint ivalue;
             offset = reader.DecodeUnsigned(offset, out ivalue);
@@ -212,7 +284,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ParameterAttributes value)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ParameterAttributes value
+        )
         {
             uint ivalue;
             offset = reader.DecodeUnsigned(offset, out ivalue);
@@ -256,7 +332,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ArraySignatureHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ArraySignatureHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -265,7 +345,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ByReferenceSignatureHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ByReferenceSignatureHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -274,7 +358,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantBooleanArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantBooleanArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -283,7 +371,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantBooleanValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantBooleanValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -292,7 +384,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantBoxedEnumValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantBoxedEnumValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -301,7 +397,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantByteArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantByteArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -310,7 +410,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantByteValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantByteValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -319,7 +423,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantCharArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantCharArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -328,7 +436,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantCharValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantCharValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -337,7 +449,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantDoubleArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantDoubleArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -346,7 +462,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantDoubleValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantDoubleValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -355,7 +475,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantEnumArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantEnumArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -364,7 +488,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantHandleArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantHandleArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -373,7 +501,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantInt16ArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantInt16ArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -382,7 +514,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantInt16ValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantInt16ValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -391,7 +527,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantInt32ArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantInt32ArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -400,7 +540,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantInt32ValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantInt32ValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -409,7 +553,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantInt64ArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantInt64ArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -418,7 +566,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantInt64ValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantInt64ValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -427,7 +579,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantReferenceValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantReferenceValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -436,7 +592,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantSByteArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantSByteArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -445,7 +605,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantSByteValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantSByteValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -454,7 +618,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantSingleArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantSingleArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -463,7 +631,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantSingleValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantSingleValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -472,7 +644,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantStringArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantStringArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -481,7 +657,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantStringValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantStringValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -490,7 +670,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantUInt16ArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantUInt16ArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -499,7 +683,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantUInt16ValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantUInt16ValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -508,7 +696,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantUInt32ArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantUInt32ArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -517,7 +709,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantUInt32ValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantUInt32ValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -526,7 +722,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantUInt64ArrayHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantUInt64ArrayHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -535,7 +735,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ConstantUInt64ValueHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ConstantUInt64ValueHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -544,7 +748,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out CustomAttributeHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out CustomAttributeHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -571,7 +779,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out FieldSignatureHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out FieldSignatureHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -580,7 +792,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out FunctionPointerSignatureHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out FunctionPointerSignatureHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -589,7 +805,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out GenericParameterHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out GenericParameterHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -598,7 +818,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out MemberReferenceHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out MemberReferenceHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -616,7 +840,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out MethodInstantiationHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out MethodInstantiationHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -625,7 +853,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out MethodSemanticsHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out MethodSemanticsHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -634,7 +866,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out MethodSignatureHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out MethodSignatureHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -643,7 +879,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out MethodTypeVariableSignatureHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out MethodTypeVariableSignatureHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -652,7 +892,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ModifiedTypeHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ModifiedTypeHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -661,7 +905,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out NamedArgumentHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out NamedArgumentHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -670,7 +918,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out NamespaceDefinitionHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out NamespaceDefinitionHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -679,7 +931,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out NamespaceReferenceHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out NamespaceReferenceHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -697,7 +953,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out PointerSignatureHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out PointerSignatureHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -715,7 +975,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out PropertySignatureHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out PropertySignatureHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -724,7 +988,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out QualifiedFieldHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out QualifiedFieldHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -733,7 +1001,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out QualifiedMethodHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out QualifiedMethodHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -742,7 +1014,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out SZArraySignatureHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out SZArraySignatureHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -751,7 +1027,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ScopeDefinitionHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ScopeDefinitionHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -760,7 +1040,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ScopeReferenceHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ScopeReferenceHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -769,7 +1053,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out TypeDefinitionHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out TypeDefinitionHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -778,7 +1066,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out TypeForwarderHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out TypeForwarderHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -787,7 +1079,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out TypeInstantiationSignatureHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out TypeInstantiationSignatureHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -796,7 +1092,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out TypeReferenceHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out TypeReferenceHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -805,7 +1105,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out TypeSpecificationHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out TypeSpecificationHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -814,7 +1118,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out TypeVariableSignatureHandle handle)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out TypeVariableSignatureHandle handle
+        )
         {
             uint value;
             offset = reader.DecodeUnsigned(offset, out value);
@@ -823,7 +1131,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out NamedArgumentHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out NamedArgumentHandleCollection values
+        )
         {
             values = new NamedArgumentHandleCollection(reader, offset);
             uint count;
@@ -835,7 +1147,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out MethodSemanticsHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out MethodSemanticsHandleCollection values
+        )
         {
             values = new MethodSemanticsHandleCollection(reader, offset);
             uint count;
@@ -847,7 +1163,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out CustomAttributeHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out CustomAttributeHandleCollection values
+        )
         {
             values = new CustomAttributeHandleCollection(reader, offset);
             uint count;
@@ -859,7 +1179,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ParameterHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ParameterHandleCollection values
+        )
         {
             values = new ParameterHandleCollection(reader, offset);
             uint count;
@@ -871,7 +1195,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out GenericParameterHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out GenericParameterHandleCollection values
+        )
         {
             values = new GenericParameterHandleCollection(reader, offset);
             uint count;
@@ -883,7 +1211,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out TypeDefinitionHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out TypeDefinitionHandleCollection values
+        )
         {
             values = new TypeDefinitionHandleCollection(reader, offset);
             uint count;
@@ -895,7 +1227,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out TypeForwarderHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out TypeForwarderHandleCollection values
+        )
         {
             values = new TypeForwarderHandleCollection(reader, offset);
             uint count;
@@ -907,7 +1243,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out NamespaceDefinitionHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out NamespaceDefinitionHandleCollection values
+        )
         {
             values = new NamespaceDefinitionHandleCollection(reader, offset);
             uint count;
@@ -919,7 +1259,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out MethodHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out MethodHandleCollection values
+        )
         {
             values = new MethodHandleCollection(reader, offset);
             uint count;
@@ -931,7 +1275,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out FieldHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out FieldHandleCollection values
+        )
         {
             values = new FieldHandleCollection(reader, offset);
             uint count;
@@ -943,7 +1291,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out PropertyHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out PropertyHandleCollection values
+        )
         {
             values = new PropertyHandleCollection(reader, offset);
             uint count;
@@ -955,7 +1307,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out EventHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out EventHandleCollection values
+        )
         {
             values = new EventHandleCollection(reader, offset);
             uint count;
@@ -967,7 +1323,11 @@ namespace Internal.Metadata.NativeFormat
             return offset;
         } // Read
 
-        public static uint Read(this NativeReader reader, uint offset, out ScopeDefinitionHandleCollection values)
+        public static uint Read(
+            this NativeReader reader,
+            uint offset,
+            out ScopeDefinitionHandleCollection values
+        )
         {
             values = new ScopeDefinitionHandleCollection(reader, offset);
             uint count;

@@ -29,7 +29,8 @@ public class RouterTest
         _renderer.ShouldHandleExceptions = true;
         _router = (Router)_renderer.InstantiateComponent<Router>();
         _router.AppAssembly = Assembly.GetExecutingAssembly();
-        _router.Found = routeData => (builder) => builder.AddContent(0, $"Rendering route matching {routeData.PageType}");
+        _router.Found = routeData =>
+            (builder) => builder.AddContent(0, $"Rendering route matching {routeData.PageType}");
         _renderer.AssignRootComponentId(_router);
     }
 
@@ -46,7 +47,9 @@ public class RouterTest
         _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
         // Act
-        await _renderer.Dispatcher.InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
+        await _renderer.Dispatcher.InvokeAsync(
+            () => _router.RunOnNavigateAsync("http://example.com/jan", false)
+        );
 
         // Assert
         Assert.True(called);
@@ -75,8 +78,12 @@ public class RouterTest
         _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
         // Act
-        var janTask = _renderer.Dispatcher.InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
-        var febTask = _renderer.Dispatcher.InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/feb", false));
+        var janTask = _renderer.Dispatcher.InvokeAsync(
+            () => _router.RunOnNavigateAsync("http://example.com/jan", false)
+        );
+        var febTask = _renderer.Dispatcher.InvokeAsync(
+            () => _router.RunOnNavigateAsync("http://example.com/feb", false)
+        );
 
         await janTask;
         await febTask;
@@ -115,8 +122,12 @@ public class RouterTest
         _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
         // Act (start the operations then await them)
-        var jan = _renderer.Dispatcher.InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
-        var feb = _renderer.Dispatcher.InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/feb", false));
+        var jan = _renderer.Dispatcher.InvokeAsync(
+            () => _router.RunOnNavigateAsync("http://example.com/jan", false)
+        );
+        var feb = _renderer.Dispatcher.InvokeAsync(
+            () => _router.RunOnNavigateAsync("http://example.com/feb", false)
+        );
         triggerCancel.TrySetResult();
 
         await jan;
@@ -168,8 +179,12 @@ public class RouterTest
         _router.OnNavigateAsync = new EventCallback<NavigationContext>(null, OnNavigateAsync);
 
         // Act
-        var jan = _renderer.Dispatcher.InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/jan", false));
-        var feb = _renderer.Dispatcher.InvokeAsync(() => _router.RunOnNavigateAsync("http://example.com/feb", false));
+        var jan = _renderer.Dispatcher.InvokeAsync(
+            () => _router.RunOnNavigateAsync("http://example.com/jan", false)
+        );
+        var feb = _renderer.Dispatcher.InvokeAsync(
+            () => _router.RunOnNavigateAsync("http://example.com/feb", false)
+        );
 
         await jan;
         await feb;
@@ -183,19 +198,23 @@ public class RouterTest
         // how many segments are in the exact match
         _navigationManager.NotifyLocationChanged("https://www.example.com/subdir/a/b", false);
         var parameters = new Dictionary<string, object>
-            {
-                { nameof(Router.AppAssembly), typeof(RouterTest).Assembly },
-                { nameof(Router.NotFound), (RenderFragment)(builder => { }) },
-            };
+        {
+            { nameof(Router.AppAssembly), typeof(RouterTest).Assembly },
+            { nameof(Router.NotFound), (RenderFragment)(builder => { }) },
+        };
 
         // Act
-        await _renderer.Dispatcher.InvokeAsync(() =>
-            _router.SetParametersAsync(ParameterView.FromDictionary(parameters)));
+        await _renderer.Dispatcher.InvokeAsync(
+            () => _router.SetParametersAsync(ParameterView.FromDictionary(parameters))
+        );
 
         // Assert
         var renderedFrame = _renderer.Batches.First().ReferenceFrames.First();
         Assert.Equal(RenderTreeFrameType.Text, renderedFrame.FrameType);
-        Assert.Equal($"Rendering route matching {typeof(MultiSegmentRouteComponent)}", renderedFrame.TextContent);
+        Assert.Equal(
+            $"Rendering route matching {typeof(MultiSegmentRouteComponent)}",
+            renderedFrame.TextContent
+        );
     }
 
     internal class TestNavigationManager : NavigationManager
@@ -212,7 +231,8 @@ public class RouterTest
 
     internal sealed class TestNavigationInterception : INavigationInterception
     {
-        public static readonly TestNavigationInterception Instance = new TestNavigationInterception();
+        public static readonly TestNavigationInterception Instance =
+            new TestNavigationInterception();
 
         public Task EnableNavigationInterceptionAsync()
         {

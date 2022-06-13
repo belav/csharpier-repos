@@ -21,14 +21,22 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.RemoveUnreachableCode), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.RemoveUnreachableCode
+        ),
+        Shared
+    ]
     internal class CSharpRemoveUnreachableCodeCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpRemoveUnreachableCodeCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpRemoveUnreachableCodeCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.RemoveUnreachableCodeDiagnosticId);
@@ -45,31 +53,43 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
                 ? CodeActionPriority.Low
                 : CodeActionPriority.Medium;
 
-            RegisterCodeFix(context, CSharpCodeFixesResources.Remove_unreachable_code, nameof(CSharpCodeFixesResources.Remove_unreachable_code), priority);
+            RegisterCodeFix(
+                context,
+                CSharpCodeFixesResources.Remove_unreachable_code,
+                nameof(CSharpCodeFixesResources.Remove_unreachable_code),
+                priority
+            );
 
             return Task.CompletedTask;
         }
 
-        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic)
-            => !IsSubsequentSection(diagnostic);
+        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
+            !IsSubsequentSection(diagnostic);
 
-        private static bool IsSubsequentSection(Diagnostic diagnostic)
-            => diagnostic.Properties.ContainsKey(CSharpRemoveUnreachableCodeDiagnosticAnalyzer.IsSubsequentSection);
+        private static bool IsSubsequentSection(Diagnostic diagnostic) =>
+            diagnostic.Properties.ContainsKey(
+                CSharpRemoveUnreachableCodeDiagnosticAnalyzer.IsSubsequentSection
+            );
 
         protected override Task FixAllAsync(
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
-            CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
                 var firstUnreachableStatementLocation = diagnostic.AdditionalLocations.First();
-                var firstUnreachableStatement = (StatementSyntax)firstUnreachableStatementLocation.FindNode(cancellationToken);
+                var firstUnreachableStatement = (StatementSyntax)
+                    firstUnreachableStatementLocation.FindNode(cancellationToken);
 
                 RemoveStatement(editor, firstUnreachableStatement);
 
-                var sections = RemoveUnreachableCodeHelpers.GetSubsequentUnreachableSections(firstUnreachableStatement);
+                var sections = RemoveUnreachableCodeHelpers.GetSubsequentUnreachableSections(
+                    firstUnreachableStatement
+                );
                 foreach (var section in sections)
                 {
                     foreach (var statement in section)
@@ -84,8 +104,10 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             // Local function
             static void RemoveStatement(SyntaxEditor editor, SyntaxNode statement)
             {
-                if (!statement.IsParentKind(SyntaxKind.Block)
-                    && !statement.IsParentKind(SyntaxKind.SwitchSection))
+                if (
+                    !statement.IsParentKind(SyntaxKind.Block)
+                    && !statement.IsParentKind(SyntaxKind.SwitchSection)
+                )
                 {
                     editor.ReplaceNode(statement, SyntaxFactory.Block());
                 }

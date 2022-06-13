@@ -16,7 +16,12 @@ namespace Internal.IL.Stubs
     {
         private readonly MethodDesc _helperMethod;
 
-        public TypeGetTypeMethodThunk(TypeDesc owningType, MethodSignature signature, MethodDesc helperMethod, string defaultAssemblyName)
+        public TypeGetTypeMethodThunk(
+            TypeDesc owningType,
+            MethodSignature signature,
+            MethodDesc helperMethod,
+            string defaultAssemblyName
+        )
         {
             OwningType = owningType;
             Signature = signature;
@@ -27,18 +32,12 @@ namespace Internal.IL.Stubs
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return OwningType.Context;
-            }
+            get { return OwningType.Context; }
         }
 
         public override string Name
         {
-            get
-            {
-                return $"{_helperMethod.Name}_{Signature.Length}_{DefaultAssemblyName}";
-            }
+            get { return $"{_helperMethod.Name}_{Signature.Length}_{DefaultAssemblyName}"; }
         }
 
         public override string DiagnosticName
@@ -49,20 +48,11 @@ namespace Internal.IL.Stubs
             }
         }
 
-        public override TypeDesc OwningType
-        {
-            get;
-        }
+        public override TypeDesc OwningType { get; }
 
-        public override MethodSignature Signature
-        {
-            get;
-        }
+        public override MethodSignature Signature { get; }
 
-        public string DefaultAssemblyName
-        {
-            get;
-        }
+        public string DefaultAssemblyName { get; }
 
         public override MethodIL EmitIL()
         {
@@ -143,22 +133,30 @@ namespace Internal.IL.Stubs
 
             protected override int GetKeyHashCode(Key key)
             {
-                return key.DefaultAssemblyName.GetHashCode() ^ key.GetTypeOverload.Signature.GetHashCode();
+                return key.DefaultAssemblyName.GetHashCode()
+                    ^ key.GetTypeOverload.Signature.GetHashCode();
             }
+
             protected override int GetValueHashCode(TypeGetTypeMethodThunk value)
             {
                 return value.DefaultAssemblyName.GetHashCode() ^ value.Signature.GetHashCode();
             }
+
             protected override bool CompareKeyToValue(Key key, TypeGetTypeMethodThunk value)
             {
-                return key.DefaultAssemblyName == value.DefaultAssemblyName &&
-                    key.GetTypeOverload.Signature.Equals(value.Signature);
+                return key.DefaultAssemblyName == value.DefaultAssemblyName
+                    && key.GetTypeOverload.Signature.Equals(value.Signature);
             }
-            protected override bool CompareValueToValue(TypeGetTypeMethodThunk value1, TypeGetTypeMethodThunk value2)
+
+            protected override bool CompareValueToValue(
+                TypeGetTypeMethodThunk value1,
+                TypeGetTypeMethodThunk value2
+            )
             {
-                return value1.DefaultAssemblyName == value2.DefaultAssemblyName &&
-                    value1.Signature.Equals(value2.Signature);
+                return value1.DefaultAssemblyName == value2.DefaultAssemblyName
+                    && value1.Signature.Equals(value2.Signature);
             }
+
             protected override TypeGetTypeMethodThunk CreateValueFromKey(Key key)
             {
                 TypeSystemContext contex = key.GetTypeOverload.Context;
@@ -178,7 +176,12 @@ namespace Internal.IL.Stubs
 
                 MethodDesc helper = contex.GetHelperEntryPoint("ReflectionHelpers", helperName);
 
-                return new TypeGetTypeMethodThunk(_parent._owningTypeForThunks, signature, helper, key.DefaultAssemblyName);
+                return new TypeGetTypeMethodThunk(
+                    _parent._owningTypeForThunks,
+                    signature,
+                    helper,
+                    key.DefaultAssemblyName
+                );
             }
         }
     }

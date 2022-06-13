@@ -69,7 +69,9 @@ namespace System.Buffers
         /// <summary>
         /// Converts a <see cref="ReadOnlySpan{Char}"/> into a StandardFormat
         /// </summary>
-        public static StandardFormat Parse([StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format)
+        public static StandardFormat Parse(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format
+        )
         {
             ParseHelper(format, out StandardFormat standardFormat, throws: true);
 
@@ -79,17 +81,26 @@ namespace System.Buffers
         /// <summary>
         /// Converts a classic .NET format string into a StandardFormat
         /// </summary>
-        public static StandardFormat Parse([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format) => format == null ? default : Parse(format.AsSpan());
+        public static StandardFormat Parse(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format
+        ) => format == null ? default : Parse(format.AsSpan());
 
         /// <summary>
         /// Tries to convert a <see cref="ReadOnlySpan{Char}"/> into a StandardFormat. A return value indicates whether the conversion succeeded or failed.
         /// </summary>
-        public static bool TryParse([StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format, out StandardFormat result)
+        public static bool TryParse(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format,
+            out StandardFormat result
+        )
         {
             return ParseHelper(format, out result);
         }
 
-        private static bool ParseHelper(ReadOnlySpan<char> format, out StandardFormat standardFormat, bool throws = false)
+        private static bool ParseHelper(
+            ReadOnlySpan<char> format,
+            out StandardFormat standardFormat,
+            bool throws = false
+        )
         {
             standardFormat = default;
 
@@ -110,12 +121,20 @@ namespace System.Buffers
                     uint digit = format[srcIndex] - 48u; // '0'
                     if (digit > 9)
                     {
-                        return throws ? throw new FormatException(SR.Format(SR.Argument_CannotParsePrecision, MaxPrecision)) : false;
+                        return throws
+                            ? throw new FormatException(
+                                SR.Format(SR.Argument_CannotParsePrecision, MaxPrecision)
+                            )
+                            : false;
                     }
                     parsedPrecision = parsedPrecision * 10 + digit;
                     if (parsedPrecision > MaxPrecision)
                     {
-                        return throws ? throw new FormatException(SR.Format(SR.Argument_PrecisionTooLarge, MaxPrecision)) : false;
+                        return throws
+                            ? throw new FormatException(
+                                SR.Format(SR.Argument_PrecisionTooLarge, MaxPrecision)
+                            )
+                            : false;
                     }
                 }
 
@@ -129,7 +148,8 @@ namespace System.Buffers
         /// <summary>
         /// Returns true if both the Symbol and Precision are equal.
         /// </summary>
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is StandardFormat other && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is StandardFormat other && Equals(other);
 
         /// <summary>
         /// Compute a hash code.
@@ -139,7 +159,8 @@ namespace System.Buffers
         /// <summary>
         /// Returns true if both the Symbol and Precision are equal.
         /// </summary>
-        public bool Equals(StandardFormat other) => _format == other._format && _precision == other._precision;
+        public bool Equals(StandardFormat other) =>
+            _format == other._format && _precision == other._precision;
 
         /// <summary>
         /// Returns the format in classic .NET format.
@@ -164,8 +185,7 @@ namespace System.Buffers
             int count = 0;
             char symbol = Symbol;
 
-            if (symbol != default &&
-                (uint)destination.Length == FormatStringLength) // to eliminate bounds checks
+            if (symbol != default && (uint)destination.Length == FormatStringLength) // to eliminate bounds checks
             {
                 destination[0] = symbol;
                 count = 1;
@@ -200,11 +220,13 @@ namespace System.Buffers
         /// <summary>
         /// Returns true if both the Symbol and Precision are equal.
         /// </summary>
-        public static bool operator ==(StandardFormat left, StandardFormat right) => left.Equals(right);
+        public static bool operator ==(StandardFormat left, StandardFormat right) =>
+            left.Equals(right);
 
         /// <summary>
         /// Returns false if both the Symbol and Precision are equal.
         /// </summary>
-        public static bool operator !=(StandardFormat left, StandardFormat right) => !left.Equals(right);
+        public static bool operator !=(StandardFormat left, StandardFormat right) =>
+            !left.Equals(right);
     }
 }

@@ -35,8 +35,18 @@ namespace ILCompiler
             ILProvider ilProvider,
             DebugInformationProvider debugInformationProvider,
             Logger logger,
-            int parallelism)
-            : base(dependencyGraph, nodeFactory, roots, ilProvider, debugInformationProvider, null, nodeFactory.CompilationModuleGroup, logger)
+            int parallelism
+        )
+            : base(
+                dependencyGraph,
+                nodeFactory,
+                roots,
+                ilProvider,
+                debugInformationProvider,
+                null,
+                nodeFactory.CompilationModuleGroup,
+                logger
+            )
         {
             _helperCache = new HelperCache(this);
             _parallelism = parallelism;
@@ -49,7 +59,9 @@ namespace ILCompiler
             throw new NotSupportedException();
         }
 
-        protected override void ComputeDependencyNodeDependencies(List<DependencyNodeCore<NodeFactory>> obj)
+        protected override void ComputeDependencyNodeDependencies(
+            List<DependencyNodeCore<NodeFactory>> obj
+        )
         {
             // Determine the list of method we actually need to scan
             var methodsToCompile = new List<ScannedMethodNode>();
@@ -63,13 +75,16 @@ namespace ILCompiler
                     // To compute dependencies of the shadow method that tracks dictionary
                     // dependencies we need to ensure there is code for the canonical method body.
                     var dependencyMethod = (ShadowConcreteMethodNode)dependency;
-                    methodCodeNodeNeedingCode = (ScannedMethodNode)dependencyMethod.CanonicalMethodNode;
+                    methodCodeNodeNeedingCode = (ScannedMethodNode)
+                        dependencyMethod.CanonicalMethodNode;
                 }
 
                 // We might have already queued this method for compilation
                 MethodDesc method = methodCodeNodeNeedingCode.Method;
-                if (method.IsCanonicalMethod(CanonicalFormKind.Any)
-                    && !canonicalMethodsToCompile.Add(method))
+                if (
+                    method.IsCanonicalMethod(CanonicalFormKind.Any)
+                    && !canonicalMethodsToCompile.Add(method)
+                )
                 {
                     continue;
                 }
@@ -97,7 +112,8 @@ namespace ILCompiler
             Parallel.ForEach(
                 methodsToCompile,
                 new ParallelOptions { MaxDegreeOfParallelism = _parallelism },
-                CompileSingleMethod);
+                CompileSingleMethod
+            );
         }
 
         private void CompileSingleThreaded(List<ScannedMethodNode> methodsToCompile)
@@ -127,7 +143,11 @@ namespace ILCompiler
                 // Try to compile the method again, but with a throwing method body this time.
                 MethodIL throwingIL = TypeSystemThrowingILEmitter.EmitIL(method, ex);
                 var importer = new ILImporter(this, method, throwingIL);
-                methodCodeNodeNeedingCode.InitializeDependencies(_nodeFactory, importer.Import(), ex);
+                methodCodeNodeNeedingCode.InitializeDependencies(
+                    _nodeFactory,
+                    importer.Import(),
+                    ex
+                );
             }
             catch (Exception ex)
             {
@@ -162,6 +182,7 @@ namespace ILCompiler
         }
 
         private HelperCache _helperCache;
+
         class HelperCache : LockFreeReaderHashtable<ReadyToRunHelper, Helper>
         {
             private Compilation _compilation;
@@ -171,15 +192,26 @@ namespace ILCompiler
                 _compilation = compilation;
             }
 
-            protected override bool CompareKeyToValue(ReadyToRunHelper key, Helper value) => key == value.HelperID;
-            protected override bool CompareValueToValue(Helper value1, Helper value2) => value1.HelperID == value2.HelperID;
+            protected override bool CompareKeyToValue(ReadyToRunHelper key, Helper value) =>
+                key == value.HelperID;
+
+            protected override bool CompareValueToValue(Helper value1, Helper value2) =>
+                value1.HelperID == value2.HelperID;
+
             protected override int GetKeyHashCode(ReadyToRunHelper key) => (int)key;
+
             protected override int GetValueHashCode(Helper value) => (int)value.HelperID;
+
             protected override Helper CreateValueFromKey(ReadyToRunHelper key)
             {
                 string mangledName;
                 MethodDesc methodDesc;
-                JitHelper.GetEntryPoint(_compilation.TypeSystemContext, key, out mangledName, out methodDesc);
+                JitHelper.GetEntryPoint(
+                    _compilation.TypeSystemContext,
+                    key,
+                    out mangledName,
+                    out methodDesc
+                );
                 Debug.Assert(mangledName != null || methodDesc != null);
 
                 ISymbolNode entryPoint;
@@ -190,7 +222,6 @@ namespace ILCompiler
 
                 return new Helper(key, entryPoint);
             }
-
         }
     }
 
@@ -202,23 +233,29 @@ namespace ILCompiler
     internal class ScannerFailedException : InternalCompilerErrorException
     {
         public ScannerFailedException(string message)
-            : base(message + " " + "You can work around by running the compilation with scanner disabled.")
-        {
-        }
+            : base(
+                message
+                    + " "
+                    + "You can work around by running the compilation with scanner disabled."
+            ) { }
     }
 
     public class ILScanResults : CompilationResults
     {
         internal ILScanResults(DependencyAnalyzerBase<NodeFactory> graph, NodeFactory factory)
-            : base(graph, factory)
-        {
-        }
+            : base(graph, factory) { }
 
-        public AnalysisBasedInteropStubManager GetInteropStubManager(InteropStateManager stateManager, PInvokeILEmitterConfiguration pinvokePolicy)
+        public AnalysisBasedInteropStubManager GetInteropStubManager(
+            InteropStateManager stateManager,
+            PInvokeILEmitterConfiguration pinvokePolicy
+        )
         {
-            return new AnalysisBasedInteropStubManager(stateManager, pinvokePolicy,
+            return new AnalysisBasedInteropStubManager(
+                stateManager,
+                pinvokePolicy,
                 _factory.MetadataManager.GetTypesWithStructMarshalling(),
-                _factory.MetadataManager.GetTypesWithDelegateMarshalling());
+                _factory.MetadataManager.GetTypesWithDelegateMarshalling()
+            );
         }
 
         public VTableSliceProvider GetVTableLayoutInfo()
@@ -248,9 +285,12 @@ namespace ILCompiler
 
         private class ScannedVTableProvider : VTableSliceProvider
         {
-            private Dictionary<TypeDesc, IReadOnlyList<MethodDesc>> _vtableSlices = new Dictionary<TypeDesc, IReadOnlyList<MethodDesc>>();
+            private Dictionary<TypeDesc, IReadOnlyList<MethodDesc>> _vtableSlices =
+                new Dictionary<TypeDesc, IReadOnlyList<MethodDesc>>();
 
-            public ScannedVTableProvider(ImmutableArray<DependencyNodeCore<NodeFactory>> markedNodes)
+            public ScannedVTableProvider(
+                ImmutableArray<DependencyNodeCore<NodeFactory>> markedNodes
+            )
             {
                 foreach (var node in markedNodes)
                 {
@@ -279,7 +319,9 @@ namespace ILCompiler
                         // Use the ILCompiler-DependencyGraph-Viewer tool to investigate.
                         Debug.Assert(false);
                         string typeName = ExceptionTypeNameFormatter.Instance.FormatName(type);
-                        throw new ScannerFailedException($"VTable of type '{typeName}' not computed by the IL scanner.");
+                        throw new ScannerFailedException(
+                            $"VTable of type '{typeName}' not computed by the IL scanner."
+                        );
                     }
                     return new PrecomputedVTableSliceNode(type, slots);
                 }
@@ -290,10 +332,15 @@ namespace ILCompiler
 
         private class ScannedDictionaryLayoutProvider : DictionaryLayoutProvider
         {
-            private Dictionary<TypeSystemEntity, IEnumerable<GenericLookupResult>> _layouts = new Dictionary<TypeSystemEntity, IEnumerable<GenericLookupResult>>();
-            private HashSet<TypeSystemEntity> _entitiesWithForcedLazyLookups = new HashSet<TypeSystemEntity>();
+            private Dictionary<TypeSystemEntity, IEnumerable<GenericLookupResult>> _layouts =
+                new Dictionary<TypeSystemEntity, IEnumerable<GenericLookupResult>>();
+            private HashSet<TypeSystemEntity> _entitiesWithForcedLazyLookups =
+                new HashSet<TypeSystemEntity>();
 
-            public ScannedDictionaryLayoutProvider(NodeFactory factory, ImmutableArray<DependencyNodeCore<NodeFactory>> markedNodes)
+            public ScannedDictionaryLayoutProvider(
+                NodeFactory factory,
+                ImmutableArray<DependencyNodeCore<NodeFactory>> markedNodes
+            )
             {
                 foreach (var node in markedNodes)
                 {
@@ -302,8 +349,10 @@ namespace ILCompiler
                         TypeSystemEntity owningMethodOrType = layoutNode.OwningMethodOrType;
                         _layouts.Add(owningMethodOrType, layoutNode.Entries);
                     }
-                    else if (node is ReadyToRunGenericHelperNode genericLookup
-                        && genericLookup.HandlesInvalidEntries(factory))
+                    else if (
+                        node is ReadyToRunGenericHelperNode genericLookup
+                        && genericLookup.HandlesInvalidEntries(factory)
+                    )
                     {
                         // If a dictionary layout has an associated lookup helper that contains handling of broken slots
                         // (because one of our precomputed dictionaries contained an uncompilable entry)
@@ -316,7 +365,9 @@ namespace ILCompiler
 
             private DictionaryLayoutNode GetPrecomputedLayout(TypeSystemEntity methodOrType)
             {
-                if (!_layouts.TryGetValue(methodOrType, out IEnumerable<GenericLookupResult> layout))
+                if (
+                    !_layouts.TryGetValue(methodOrType, out IEnumerable<GenericLookupResult> layout)
+                )
                 {
                     // If we couldn't find the dictionary layout information for this, it's because the scanner
                     // didn't correctly predict what will be needed.
@@ -326,7 +377,9 @@ namespace ILCompiler
                     // only exists in the compiler's graph. That's the place to focus the investigation on.
                     // Use the ILCompiler-DependencyGraph-Viewer tool to investigate.
                     Debug.Assert(false);
-                    throw new ScannerFailedException($"A dictionary layout was not computed by the IL scanner.");
+                    throw new ScannerFailedException(
+                        $"A dictionary layout was not computed by the IL scanner."
+                    );
                 }
                 return new PrecomputedDictionaryLayoutNode(methodOrType, layout);
             }
@@ -366,9 +419,12 @@ namespace ILCompiler
         {
             private HashSet<TypeDesc> _constructedTypes = new HashSet<TypeDesc>();
             private HashSet<TypeDesc> _unsealedTypes = new HashSet<TypeDesc>();
-            private HashSet<TypeDesc> _abstractButNonabstractlyOverridenTypes = new HashSet<TypeDesc>();
+            private HashSet<TypeDesc> _abstractButNonabstractlyOverridenTypes =
+                new HashSet<TypeDesc>();
 
-            public ScannedDevirtualizationManager(ImmutableArray<DependencyNodeCore<NodeFactory>> markedNodes)
+            public ScannedDevirtualizationManager(
+                ImmutableArray<DependencyNodeCore<NodeFactory>> markedNodes
+            )
             {
                 foreach (var node in markedNodes)
                 {
@@ -393,9 +449,12 @@ namespace ILCompiler
 
                             _constructedTypes.Add(type);
 
-                            TypeDesc canonType = type.ConvertToCanonForm(CanonicalFormKind.Specific);
+                            TypeDesc canonType = type.ConvertToCanonForm(
+                                CanonicalFormKind.Specific
+                            );
 
-                            bool hasNonAbstractTypeInHierarchy = canonType is not MetadataType mdType || !mdType.IsAbstract;
+                            bool hasNonAbstractTypeInHierarchy =
+                                canonType is not MetadataType mdType || !mdType.IsAbstract;
                             TypeDesc baseType = canonType.BaseType;
                             bool added = true;
                             while (baseType != null && added)
@@ -440,10 +499,23 @@ namespace ILCompiler
                 return true;
             }
 
-            protected override MethodDesc ResolveVirtualMethod(MethodDesc declMethod, DefType implType, out CORINFO_DEVIRTUALIZATION_DETAIL devirtualizationDetail)
+            protected override MethodDesc ResolveVirtualMethod(
+                MethodDesc declMethod,
+                DefType implType,
+                out CORINFO_DEVIRTUALIZATION_DETAIL devirtualizationDetail
+            )
             {
-                MethodDesc result = base.ResolveVirtualMethod(declMethod, implType, out devirtualizationDetail);
-                if (result != null && result.IsFinal && result.OwningType is MetadataType mdType && mdType.IsAbstract)
+                MethodDesc result = base.ResolveVirtualMethod(
+                    declMethod,
+                    implType,
+                    out devirtualizationDetail
+                );
+                if (
+                    result != null
+                    && result.IsFinal
+                    && result.OwningType is MetadataType mdType
+                    && mdType.IsAbstract
+                )
                 {
                     // If this type is abstract check that we saw a non-abstract type deriving from it.
                     // We don't look at virtual methods introduced by abstract classes unless there's a non-abstract
@@ -451,10 +523,15 @@ namespace ILCompiler
                     // This lets us optimize out some unused virtual method implementations.
                     // Allowing this to devirtualize would cause trouble because we didn't scan the method
                     // and expected it would be optimized out.
-                    if (!_abstractButNonabstractlyOverridenTypes.Contains(mdType.ConvertToCanonForm(CanonicalFormKind.Specific)))
+                    if (
+                        !_abstractButNonabstractlyOverridenTypes.Contains(
+                            mdType.ConvertToCanonForm(CanonicalFormKind.Specific)
+                        )
+                    )
                     {
                         // FAILED_BUBBLE_IMPL_NOT_REFERENCEABLE is close enough...
-                        devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_IMPL_NOT_REFERENCEABLE;
+                        devirtualizationDetail =
+                            CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_IMPL_NOT_REFERENCEABLE;
                         return null;
                     }
                 }
@@ -462,7 +539,8 @@ namespace ILCompiler
                 return result;
             }
 
-            public override bool CanConstructType(TypeDesc type) => _constructedTypes.Contains(type);
+            public override bool CanConstructType(TypeDesc type) =>
+                _constructedTypes.Contains(type);
         }
 
         private class ScannedInliningPolicy : IInliningPolicy
@@ -470,7 +548,10 @@ namespace ILCompiler
             private readonly HashSet<TypeDesc> _constructedTypes = new HashSet<TypeDesc>();
             private readonly CompilationModuleGroup _baseGroup;
 
-            public ScannedInliningPolicy(CompilationModuleGroup baseGroup, ImmutableArray<DependencyNodeCore<NodeFactory>> markedNodes)
+            public ScannedInliningPolicy(
+                CompilationModuleGroup baseGroup,
+                ImmutableArray<DependencyNodeCore<NodeFactory>> markedNodes
+            )
             {
                 _baseGroup = baseGroup;
 
@@ -505,22 +586,27 @@ namespace ILCompiler
 
         private sealed class ScannedMethodImportationErrorProvider : MethodImportationErrorProvider
         {
-            private readonly Dictionary<MethodDesc, TypeSystemException> _importationErrors = new Dictionary<MethodDesc, TypeSystemException>();
+            private readonly Dictionary<MethodDesc, TypeSystemException> _importationErrors =
+                new Dictionary<MethodDesc, TypeSystemException>();
 
-            public ScannedMethodImportationErrorProvider(ImmutableArray<DependencyNodeCore<NodeFactory>> markedNodes)
+            public ScannedMethodImportationErrorProvider(
+                ImmutableArray<DependencyNodeCore<NodeFactory>> markedNodes
+            )
             {
                 foreach (var markedNode in markedNodes)
                 {
-                    if (markedNode is ScannedMethodNode scannedMethod
-                        && scannedMethod.Exception != null)
+                    if (
+                        markedNode is ScannedMethodNode scannedMethod
+                        && scannedMethod.Exception != null
+                    )
                     {
                         _importationErrors.Add(scannedMethod.Method, scannedMethod.Exception);
                     }
                 }
             }
 
-            public override TypeSystemException GetCompilationError(MethodDesc method)
-                => _importationErrors.TryGetValue(method, out var exception) ? exception : null;
+            public override TypeSystemException GetCompilationError(MethodDesc method) =>
+                _importationErrors.TryGetValue(method, out var exception) ? exception : null;
         }
     }
 }

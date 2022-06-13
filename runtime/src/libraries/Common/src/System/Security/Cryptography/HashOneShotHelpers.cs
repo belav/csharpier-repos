@@ -6,8 +6,16 @@ using System.IO;
 
 namespace System.Security.Cryptography
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "Weak algorithms are used as instructed by the caller")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "Weak algorithms are used as instructed by the caller")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Security",
+        "CA5350",
+        Justification = "Weak algorithms are used as instructed by the caller"
+    )]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Security",
+        "CA5351",
+        Justification = "Weak algorithms are used as instructed by the caller"
+    )]
     internal static class HashOneShotHelpers
     {
         internal static byte[] HashData(HashAlgorithmName hashAlgorithm, ReadOnlySpan<byte> source)
@@ -33,14 +41,17 @@ namespace System.Security.Cryptography
                 return MD5.HashData(source);
             }
 
-            throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name)
+            );
         }
 
         internal static bool TryHashData(
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<byte> source,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             if (hashAlgorithm == HashAlgorithmName.SHA256)
             {
@@ -63,7 +74,9 @@ namespace System.Security.Cryptography
                 return MD5.TryHashData(source, destination, out bytesWritten);
             }
 
-            throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name)
+            );
         }
 
         internal static byte[] HashData(HashAlgorithmName hashAlgorithm, Stream source)
@@ -89,14 +102,17 @@ namespace System.Security.Cryptography
                 return MD5.HashData(source);
             }
 
-            throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name)
+            );
         }
 
         internal static int MacData(
             HashAlgorithmName hashAlgorithm,
             ReadOnlySpan<byte> key,
             ReadOnlySpan<byte> source,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             if (Helpers.HasHMAC)
             {
@@ -122,7 +138,9 @@ namespace System.Security.Cryptography
                 }
             }
 
-            throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name)
+            );
         }
     }
 }

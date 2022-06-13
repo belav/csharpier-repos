@@ -32,9 +32,14 @@ public abstract class RoutePatternTransformer
     /// return <c>null</c> if any required value cannot be substituted.
     /// </para>
     /// </remarks>
-    [RequiresUnreferencedCode("This API may perform reflection on supplied parameter which may be trimmed if not referenced directly." +
-        "Consider using a different overload to avoid this issue.")]
-    public abstract RoutePattern? SubstituteRequiredValues(RoutePattern original, object requiredValues);
+    [RequiresUnreferencedCode(
+        "This API may perform reflection on supplied parameter which may be trimmed if not referenced directly."
+            + "Consider using a different overload to avoid this issue."
+    )]
+    public abstract RoutePattern? SubstituteRequiredValues(
+        RoutePattern original,
+        object requiredValues
+    );
 
     /// <summary>
     /// Attempts to substitute the provided <paramref name="requiredValues"/> into the provided
@@ -58,6 +63,8 @@ public abstract class RoutePatternTransformer
     /// return <c>null</c> if any required value cannot be substituted.
     /// </para>
     /// </remarks>
-    public virtual RoutePattern? SubstituteRequiredValues(RoutePattern original, RouteValueDictionary requiredValues)
-        => throw new NotSupportedException("This API is not supported.");
+    public virtual RoutePattern? SubstituteRequiredValues(
+        RoutePattern original,
+        RouteValueDictionary requiredValues
+    ) => throw new NotSupportedException("This API is not supported.");
 }

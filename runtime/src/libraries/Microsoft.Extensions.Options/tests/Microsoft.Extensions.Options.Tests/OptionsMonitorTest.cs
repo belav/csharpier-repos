@@ -74,7 +74,9 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void CanClearNamedOptions()
         {
-            var services = new ServiceCollection().AddOptions().AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
+            var services = new ServiceCollection()
+                .AddOptions()
+                .AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
 
             var sp = services.BuildServiceProvider();
 
@@ -100,11 +102,17 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void CanWatchNamedOptions()
         {
-            var services = new ServiceCollection().AddOptions().AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
+            var services = new ServiceCollection()
+                .AddOptions()
+                .AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
             var changeToken = new FakeChangeToken();
-            services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(new FakeSource(changeToken) { Name = "#1" });
+            services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(
+                new FakeSource(changeToken) { Name = "#1" }
+            );
             var changeToken2 = new FakeChangeToken();
-            services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(new FakeSource(changeToken2) { Name = "#2" });
+            services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(
+                new FakeSource(changeToken2) { Name = "#2" }
+            );
 
             var sp = services.BuildServiceProvider();
 
@@ -130,7 +138,9 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection().AddOptions();
             services.AddSingleton<IConfigureOptions<FakeOptions>>(new CountIncrement(this));
             var changeToken = new FakeChangeToken();
-            services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(new FakeSource(changeToken));
+            services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(
+                new FakeSource(changeToken)
+            );
 
             var sp = services.BuildServiceProvider();
 
@@ -357,14 +367,13 @@ namespace Microsoft.Extensions.Options.Tests
             {
                 var services = new ServiceCollection();
                 services.AddOptions();
-                services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(new ChangeTokenSource<FakeOptions>(token));
+                services.AddSingleton<IOptionsChangeTokenSource<FakeOptions>>(
+                    new ChangeTokenSource<FakeOptions>(token)
+                );
                 using (var sp = services.BuildServiceProvider())
                 {
                     var monitor = sp.GetRequiredService<IOptionsMonitor<FakeOptions>>();
-                    using (monitor.OnChange(o => { }))
-                    {
-
-                    }
+                    using (monitor.OnChange(o => { })) { }
                 }
             }
 
@@ -373,7 +382,8 @@ namespace Microsoft.Extensions.Options.Tests
 
         public class ChangeToken : IChangeToken
         {
-            public List<(Action<object>, object)> Callbacks { get; } = new List<(Action<object>, object)>();
+            public List<(Action<object>, object)> Callbacks { get; } =
+                new List<(Action<object>, object)>();
 
             public bool HasChanged => false;
 
@@ -406,10 +416,11 @@ namespace Microsoft.Extensions.Options.Tests
                 }
             }
         }
-        
+
         public class ChangeTokenSource<T> : IOptionsChangeTokenSource<T>
         {
             private readonly IChangeToken _changeToken;
+
             public ChangeTokenSource(IChangeToken changeToken)
             {
                 _changeToken = changeToken;
@@ -431,11 +442,17 @@ namespace Microsoft.Extensions.Options.Tests
             CreateMonitor(implementedOptionsCache).Get(null);
             Assert.Equal(1, implementedOptionsCache.GetOrAddCalls);
 
-            static OptionsMonitor<FakeOptions> CreateMonitor(IOptionsMonitorCache<FakeOptions> cache) =>
+            static OptionsMonitor<FakeOptions> CreateMonitor(
+                IOptionsMonitorCache<FakeOptions> cache
+            ) =>
                 new OptionsMonitor<FakeOptions>(
-                    new OptionsFactory<FakeOptions>(Enumerable.Empty<IConfigureOptions<FakeOptions>>(), Enumerable.Empty<IPostConfigureOptions<FakeOptions>>()),
+                    new OptionsFactory<FakeOptions>(
+                        Enumerable.Empty<IConfigureOptions<FakeOptions>>(),
+                        Enumerable.Empty<IPostConfigureOptions<FakeOptions>>()
+                    ),
                     Enumerable.Empty<IOptionsChangeTokenSource<FakeOptions>>(),
-                    cache);
+                    cache
+                );
         }
 
         private sealed class DerivedOptionsCache : OptionsCache<FakeOptions>
@@ -461,7 +478,8 @@ namespace Microsoft.Extensions.Options.Tests
                 return createOptions();
             }
 
-            public bool TryAdd(string? name, FakeOptions options) => throw new NotImplementedException();
+            public bool TryAdd(string? name, FakeOptions options) =>
+                throw new NotImplementedException();
 
             public bool TryRemove(string? name) => throw new NotImplementedException();
         }
@@ -471,13 +489,20 @@ namespace Microsoft.Extensions.Options.Tests
         /// Tests the fix for https://github.com/dotnet/runtime/issues/61086
         /// </summary>
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/67611", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/67611",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void TestCurrentValueDoesNotAllocateOnceValueIsCached()
         {
             var monitor = new OptionsMonitor<FakeOptions>(
-                new OptionsFactory<FakeOptions>(Enumerable.Empty<IConfigureOptions<FakeOptions>>(), Enumerable.Empty<IPostConfigureOptions<FakeOptions>>()),
+                new OptionsFactory<FakeOptions>(
+                    Enumerable.Empty<IConfigureOptions<FakeOptions>>(),
+                    Enumerable.Empty<IPostConfigureOptions<FakeOptions>>()
+                ),
                 Enumerable.Empty<IOptionsChangeTokenSource<FakeOptions>>(),
-                new OptionsCache<FakeOptions>());
+                new OptionsCache<FakeOptions>()
+            );
             Assert.NotNull(monitor.CurrentValue); // populate the cache
 
             long initialBytes = GC.GetAllocatedBytesForCurrentThread();

@@ -30,42 +30,72 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
         public EncapsulateFieldTestState(TestWorkspace workspace)
         {
             Workspace = workspace;
-            _testDocument = Workspace.Documents.Single(d => d.CursorPosition.HasValue || d.SelectedSpans.Any());
+            _testDocument = Workspace.Documents.Single(
+                d => d.CursorPosition.HasValue || d.SelectedSpans.Any()
+            );
             TargetDocument = Workspace.CurrentSolution.GetDocument(_testDocument.Id);
 
-            var notificationService = Workspace.Services.GetService<INotificationService>() as INotificationServiceCallback;
-            var callback = new Action<string, string, NotificationSeverity>((message, title, severity) => NotificationMessage = message);
+            var notificationService =
+                Workspace.Services.GetService<INotificationService>()
+                as INotificationServiceCallback;
+            var callback = new Action<string, string, NotificationSeverity>(
+                (message, title, severity) => NotificationMessage = message
+            );
             notificationService.NotificationCallback = callback;
         }
 
         public static EncapsulateFieldTestState Create(string markup)
         {
-            var workspace = TestWorkspace.CreateCSharp(markup, composition: EditorTestCompositions.EditorFeatures);
+            var workspace = TestWorkspace.CreateCSharp(
+                markup,
+                composition: EditorTestCompositions.EditorFeatures
+            );
 
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithOptions(workspace.Options
-                .WithChangedOption(CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement)
-                .WithChangedOption(CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement)));
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options
+                        .WithChangedOption(
+                            CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                            CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                        )
+                        .WithChangedOption(
+                            CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                            CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                        )
+                )
+            );
 
             return new EncapsulateFieldTestState(workspace);
         }
 
         public async Task EncapsulateAsync()
         {
-            var args = new EncapsulateFieldCommandArgs(_testDocument.GetTextView(), _testDocument.GetTextBuffer());
-            var commandHandler = Workspace.ExportProvider.GetCommandHandler<EncapsulateFieldCommandHandler>(PredefinedCommandHandlerNames.EncapsulateField, ContentTypeNames.CSharpContentType);
-            var provider = Workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
-            var waiter = (IAsynchronousOperationWaiter)provider.GetListener(FeatureAttribute.EncapsulateField);
+            var args = new EncapsulateFieldCommandArgs(
+                _testDocument.GetTextView(),
+                _testDocument.GetTextBuffer()
+            );
+            var commandHandler =
+                Workspace.ExportProvider.GetCommandHandler<EncapsulateFieldCommandHandler>(
+                    PredefinedCommandHandlerNames.EncapsulateField,
+                    ContentTypeNames.CSharpContentType
+                );
+            var provider =
+                Workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var waiter = (IAsynchronousOperationWaiter)
+                provider.GetListener(FeatureAttribute.EncapsulateField);
             commandHandler.ExecuteCommand(args, TestCommandExecutionContext.Create());
             await waiter.ExpeditedWaitAsync();
         }
 
-        public void Dispose()
-            => Workspace?.Dispose();
+        public void Dispose() => Workspace?.Dispose();
 
         public async Task AssertEncapsulateAsAsync(string expected)
         {
             await EncapsulateAsync();
-            Assert.Equal(expected, _testDocument.GetTextBuffer().CurrentSnapshot.GetText().ToString());
+            Assert.Equal(
+                expected,
+                _testDocument.GetTextBuffer().CurrentSnapshot.GetText().ToString()
+            );
         }
 
         public async Task AssertErrorAsync()

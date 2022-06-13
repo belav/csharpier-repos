@@ -48,16 +48,14 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
     /// </summary>
     /// <returns><see langword="true" /> if the type is abstract, <see langword="false" /> otherwise.</returns>
     [DebuggerStepThrough]
-    bool IsAbstract()
-        => ClrType.IsAbstract;
+    bool IsAbstract() => ClrType.IsAbstract;
 
     /// <summary>
     ///     Gets the friendly display name for the given <see cref="IReadOnlyTypeBase" />.
     /// </summary>
     /// <returns>The display name.</returns>
     [DebuggerStepThrough]
-    string DisplayName()
-        => DisplayName(omitSharedType: false);
+    string DisplayName() => DisplayName(omitSharedType: false);
 
     /// <summary>
     ///     Gets the friendly display name for the given <see cref="IReadOnlyTypeBase" />.
@@ -88,10 +86,20 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
         }
         else
         {
-            var dotIndex = shortName.LastIndexOf(".", hashIndex, hashIndex + 1, StringComparison.Ordinal);
+            var dotIndex = shortName.LastIndexOf(
+                ".",
+                hashIndex,
+                hashIndex + 1,
+                StringComparison.Ordinal
+            );
             if (dotIndex != -1)
             {
-                dotIndex = shortName.LastIndexOf(".", dotIndex - 1, dotIndex, StringComparison.Ordinal);
+                dotIndex = shortName.LastIndexOf(
+                    ".",
+                    dotIndex - 1,
+                    dotIndex,
+                    StringComparison.Ordinal
+                );
                 if (dotIndex != -1)
                 {
                     shortName = shortName[(dotIndex + 1)..];
@@ -99,9 +107,7 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
             }
         }
 
-        return shortName == Name
-            ? shortName + " (" + ClrType.ShortDisplayName() + ")"
-            : shortName;
+        return shortName == Name ? shortName + " (" + ClrType.ShortDisplayName() + ")" : shortName;
     }
 
     /// <summary>
@@ -123,9 +129,7 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
             if (plusIndex == -1)
             {
                 var dotIndex = Name.LastIndexOf(".", StringComparison.Ordinal);
-                return dotIndex == -1
-                    ? Name
-                    : Name[(dotIndex + 1)..];
+                return dotIndex == -1 ? Name : Name[(dotIndex + 1)..];
             }
 
             return Name[(plusIndex + 1)..];

@@ -19,9 +19,7 @@ namespace System.Diagnostics
         /// <summary>
         ///     Constructs a new sys description.
         /// </summary>
-        public MonitoringDescriptionAttribute(string description) : base(description)
-        {
-        }
+        public MonitoringDescriptionAttribute(string description) : base(description) { }
 
         /// <summary>
         ///     Retrieves the description text.

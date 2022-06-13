@@ -23,7 +23,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
     [UseExportProvider]
     public abstract class AbstractAutomaticBraceCompletionTests
     {
-        internal static void CheckStart(IBraceCompletionSession session, bool expectValidSession = true)
+        internal static void CheckStart(
+            IBraceCompletionSession session,
+            bool expectValidSession = true
+        )
         {
             Type(session, session.OpeningBrace.ToString());
 
@@ -31,7 +34,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
 
             if (expectValidSession)
             {
-                var closingPoint = session.ClosingPoint.GetPoint(session.SubjectBuffer.CurrentSnapshot).Subtract(1);
+                var closingPoint = session.ClosingPoint
+                    .GetPoint(session.SubjectBuffer.CurrentSnapshot)
+                    .Subtract(1);
                 Assert.Equal(closingPoint.GetChar(), session.ClosingBrace);
             }
             else
@@ -43,7 +48,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
 
         internal static void CheckBackspace(IBraceCompletionSession session)
         {
-            session.TextView.TryMoveCaretToAndEnsureVisible(session.OpeningPoint.GetPoint(session.SubjectBuffer.CurrentSnapshot).Add(1));
+            session.TextView.TryMoveCaretToAndEnsureVisible(
+                session.OpeningPoint.GetPoint(session.SubjectBuffer.CurrentSnapshot).Add(1)
+            );
             session.PreBackspace(out var handled);
             if (!handled)
             {
@@ -65,15 +72,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             var caret = session.TextView.GetCaretPoint(session.SubjectBuffer).Value;
             if (allowTab)
             {
-                Assert.Equal(session.ClosingPoint.GetPosition(session.SubjectBuffer.CurrentSnapshot), caret.Position);
+                Assert.Equal(
+                    session.ClosingPoint.GetPosition(session.SubjectBuffer.CurrentSnapshot),
+                    caret.Position
+                );
             }
             else
             {
-                Assert.True(caret.Position < session.ClosingPoint.GetPosition(session.SubjectBuffer.CurrentSnapshot));
+                Assert.True(
+                    caret.Position
+                        < session.ClosingPoint.GetPosition(session.SubjectBuffer.CurrentSnapshot)
+                );
             }
         }
 
-        internal static void CheckReturn(IBraceCompletionSession session, int indentation, string result = null)
+        internal static void CheckReturn(
+            IBraceCompletionSession session,
+            int indentation,
+            string result = null
+        )
         {
             session.PreReturn(out var handled);
 
@@ -85,7 +102,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             }
 
             var virtualCaret = session.TextView.GetVirtualCaretPoint(session.SubjectBuffer).Value;
-            Assert.True(indentation == virtualCaret.VirtualSpaces, $"Expected indentation was {indentation}, but the actual indentation was {virtualCaret.VirtualSpaces}");
+            Assert.True(
+                indentation == virtualCaret.VirtualSpaces,
+                $"Expected indentation was {indentation}, but the actual indentation was {virtualCaret.VirtualSpaces}"
+            );
 
             if (result != null)
             {
@@ -93,10 +113,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             }
         }
 
-        internal static void CheckText(IBraceCompletionSession session, string result)
-            => Assert.Equal(result, session.SubjectBuffer.CurrentSnapshot.GetText());
+        internal static void CheckText(IBraceCompletionSession session, string result) =>
+            Assert.Equal(result, session.SubjectBuffer.CurrentSnapshot.GetText());
 
-        internal static void CheckReturnOnNonEmptyLine(IBraceCompletionSession session, int expectedVirtualSpace)
+        internal static void CheckReturnOnNonEmptyLine(
+            IBraceCompletionSession session,
+            int expectedVirtualSpace
+        )
         {
             session.PreReturn(out var handled);
 
@@ -111,9 +134,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             Assert.Equal(expectedVirtualSpace, virtualCaret.VirtualSpaces);
         }
 
-        internal static void CheckOverType(IBraceCompletionSession session, bool allowOverType = true)
+        internal static void CheckOverType(
+            IBraceCompletionSession session,
+            bool allowOverType = true
+        )
         {
-            var preClosingPoint = session.ClosingPoint.GetPoint(session.SubjectBuffer.CurrentSnapshot);
+            var preClosingPoint = session.ClosingPoint.GetPoint(
+                session.SubjectBuffer.CurrentSnapshot
+            );
             Assert.Equal(session.ClosingBrace, preClosingPoint.Subtract(1).GetChar());
             session.PreOverType(out var handled);
             if (!handled)
@@ -121,7 +149,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
                 session.PostOverType();
             }
 
-            var postClosingPoint = session.ClosingPoint.GetPoint(session.SubjectBuffer.CurrentSnapshot);
+            var postClosingPoint = session.ClosingPoint.GetPoint(
+                session.SubjectBuffer.CurrentSnapshot
+            );
             Assert.Equal(postClosingPoint.Subtract(1).GetChar(), session.ClosingBrace);
 
             var caret = session.TextView.GetCaretPoint(session.SubjectBuffer).Value;
@@ -147,7 +177,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
             }
         }
 
-        internal static Holder CreateSession(TestWorkspace workspace, char opening, char closing, Dictionary<OptionKey2, object> changedOptionSet = null)
+        internal static Holder CreateSession(
+            TestWorkspace workspace,
+            char opening,
+            char closing,
+            Dictionary<OptionKey2, object> changedOptionSet = null
+        )
         {
             if (changedOptionSet != null)
             {
@@ -162,9 +197,22 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
 
             var document = workspace.Documents.First();
 
-            var provider = Assert.IsType<BraceCompletionSessionProvider>(workspace.ExportProvider.GetExportedValue<IBraceCompletionSessionProvider>());
-            var openingPoint = new SnapshotPoint(document.GetTextBuffer().CurrentSnapshot, document.CursorPosition.Value);
-            if (provider.TryCreateSession(document.GetTextView(), openingPoint, opening, closing, out var session))
+            var provider = Assert.IsType<BraceCompletionSessionProvider>(
+                workspace.ExportProvider.GetExportedValue<IBraceCompletionSessionProvider>()
+            );
+            var openingPoint = new SnapshotPoint(
+                document.GetTextBuffer().CurrentSnapshot,
+                document.CursorPosition.Value
+            );
+            if (
+                provider.TryCreateSession(
+                    document.GetTextView(),
+                    openingPoint,
+                    opening,
+                    closing,
+                    out var session
+                )
+            )
             {
                 return new Holder(workspace, session);
             }
@@ -184,8 +232,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.AutomaticCompletion
                 this.Session = session;
             }
 
-            public void Dispose()
-                => this.Workspace.Dispose();
+            public void Dispose() => this.Workspace.Dispose();
         }
     }
 }

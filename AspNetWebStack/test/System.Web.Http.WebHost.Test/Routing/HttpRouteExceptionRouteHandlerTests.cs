@@ -35,7 +35,9 @@ namespace System.Web.Http.WebHost.Routing
             IHttpHandler handler = product.GetHttpHandler(requestContext);
 
             // Assert
-            HttpRouteExceptionHandler typedHandler = Assert.IsType<HttpRouteExceptionHandler>(handler);
+            HttpRouteExceptionHandler typedHandler = Assert.IsType<HttpRouteExceptionHandler>(
+                handler
+            );
             Assert.Same(expectedExceptionInfo, typedHandler.ExceptionInfo);
         }
 
@@ -44,7 +46,9 @@ namespace System.Web.Http.WebHost.Routing
             return ExceptionDispatchInfo.Capture(new Exception());
         }
 
-        private static HttpRouteExceptionRouteHandler CreateProductUnderTest(ExceptionDispatchInfo exceptionInfo)
+        private static HttpRouteExceptionRouteHandler CreateProductUnderTest(
+            ExceptionDispatchInfo exceptionInfo
+        )
         {
             return new HttpRouteExceptionRouteHandler(exceptionInfo);
         }

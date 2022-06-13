@@ -20,9 +20,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicExpressionEvaluator(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         public override async Task InitializeAsync()
         {
@@ -30,9 +28,14 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
 
             VisualStudio.SolutionExplorer.CreateSolution(nameof(BasicBuild));
             var testProj = new ProjectUtils.Project("TestProj");
-            VisualStudio.SolutionExplorer.AddProject(testProj, WellKnownProjectTemplates.ConsoleApplication, LanguageNames.VisualBasic);
+            VisualStudio.SolutionExplorer.AddProject(
+                testProj,
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.VisualBasic
+            );
 
-            VisualStudio.Editor.SetText(@"Imports System
+            VisualStudio.Editor.SetText(
+                @"Imports System
 
 Module Module1
 
@@ -66,7 +69,8 @@ Module Module1
         System.Diagnostics.Debugger.Break()
     End Sub
 
-End Module");
+End Module"
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/35965")]
@@ -84,17 +88,33 @@ End Module");
             VisualStudio.LocalsWindow.Verify.CheckEntry("myUInt", "UInteger", "2147483648");
             VisualStudio.LocalsWindow.Verify.CheckEntry("myULong", "ULong", "9223372036854775808");
             VisualStudio.LocalsWindow.Verify.CheckEntry("myFloat", "Single", "1.70141173E+38");
-            VisualStudio.LocalsWindow.Verify.CheckEntry("myDouble", "Double", "8.9884656743115785E+307");
-            VisualStudio.LocalsWindow.Verify.CheckEntry("myDecimal", "Decimal", "39614081257132168796771975168");
+            VisualStudio.LocalsWindow.Verify.CheckEntry(
+                "myDouble",
+                "Double",
+                "8.9884656743115785E+307"
+            );
+            VisualStudio.LocalsWindow.Verify.CheckEntry(
+                "myDecimal",
+                "Decimal",
+                "39614081257132168796771975168"
+            );
             VisualStudio.LocalsWindow.Verify.CheckEntry("myChar", "Char", "\"A\"c");
             VisualStudio.LocalsWindow.Verify.CheckEntry("myBool", "Boolean", "True");
             VisualStudio.LocalsWindow.Verify.CheckEntry("myObject", "Object", "Nothing");
             VisualStudio.LocalsWindow.Verify.CheckEntry("myString", "String", "\"\"");
-            VisualStudio.LocalsWindow.Verify.CheckEntry("myValueType", "System.ValueType {Short}", "16384");
+            VisualStudio.LocalsWindow.Verify.CheckEntry(
+                "myValueType",
+                "System.ValueType {Short}",
+                "16384"
+            );
             VisualStudio.LocalsWindow.Verify.CheckEntry("myEnum", "System.Enum", "Nothing");
             VisualStudio.LocalsWindow.Verify.CheckEntry("myArray", "System.Array", "Nothing");
             VisualStudio.LocalsWindow.Verify.CheckEntry("myDelegate", "System.Delegate", "Nothing");
-            VisualStudio.LocalsWindow.Verify.CheckEntry("myMulticastDelegate", "System.MulticastDelegate", "Nothing");
+            VisualStudio.LocalsWindow.Verify.CheckEntry(
+                "myMulticastDelegate",
+                "System.MulticastDelegate",
+                "Nothing"
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/35965")]
@@ -122,13 +142,18 @@ End Module");
         public void EvaluateInvalidExpressions()
         {
             VisualStudio.Debugger.Go(waitForBreakMode: true);
-            VisualStudio.Debugger.CheckExpression("myNonsense", "", "error BC30451: 'myNonsense' is not declared. It may be inaccessible due to its protection level.");
+            VisualStudio.Debugger.CheckExpression(
+                "myNonsense",
+                "",
+                "error BC30451: 'myNonsense' is not declared. It may be inaccessible due to its protection level."
+            );
         }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/35965")]
         public void StateMachineTypeParameters()
         {
-            VisualStudio.Editor.SetText(@"
+            VisualStudio.Editor.SetText(
+                @"
 Imports System
 Imports System.Collections.Generic
 
@@ -147,13 +172,22 @@ Module Module1
     End Function
 
 End Module
-");
+"
+            );
             VisualStudio.Debugger.Go(waitForBreakMode: true);
             VisualStudio.LocalsWindow.Verify.CheckEntry("Type variables", "", "");
-            VisualStudio.LocalsWindow.Verify.CheckEntry(new string[] { "Type variables", "T" }, "String", "String");
+            VisualStudio.LocalsWindow.Verify.CheckEntry(
+                new string[] { "Type variables", "T" },
+                "String",
+                "String"
+            );
 
             // It is better to use the Immediate Window but DTE does not provide an access to it.
-            VisualStudio.Debugger.CheckExpression("GetType(T) = GetType(String)", "Boolean", "True");
+            VisualStudio.Debugger.CheckExpression(
+                "GetType(T) = GetType(String)",
+                "Boolean",
+                "True"
+            );
         }
     }
 }

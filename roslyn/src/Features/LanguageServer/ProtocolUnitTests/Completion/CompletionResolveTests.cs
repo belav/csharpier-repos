@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
         public async Task TestResolveCompletionItemFromListAsync()
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -45,24 +45,30 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
                 {
                     Completion = new VSInternalCompletionSetting()
                     {
-                        CompletionList = new VSInternalCompletionListSetting()
-                        {
-                            Data = true,
-                        }
+                        CompletionList = new VSInternalCompletionListSetting() { Data = true, }
                     }
                 }
             };
             using var testLspServer = await CreateTestLspServerAsync(markup, clientCapabilities);
 
-            var clientCompletionItem = await GetCompletionItemToResolveAsync<LSP.VSInternalCompletionItem>(
-                testLspServer,
-                label: "A").ConfigureAwait(false);
+            var clientCompletionItem =
+                await GetCompletionItemToResolveAsync<LSP.VSInternalCompletionItem>(
+                        testLspServer,
+                        label: "A"
+                    )
+                    .ConfigureAwait(false);
 
             var description = new ClassifiedTextElement(CreateClassifiedTextRunForClass("A"));
-            var expected = CreateResolvedCompletionItem(clientCompletionItem, description, "class A", null);
+            var expected = CreateResolvedCompletionItem(
+                clientCompletionItem,
+                description,
+                "class A",
+                null
+            );
 
-            var results = (LSP.VSInternalCompletionItem)await RunResolveCompletionItemAsync(
-                testLspServer, clientCompletionItem).ConfigureAwait(false);
+            var results = (LSP.VSInternalCompletionItem)
+                await RunResolveCompletionItemAsync(testLspServer, clientCompletionItem)
+                    .ConfigureAwait(false);
             AssertJsonEquals(expected, results);
         }
 
@@ -70,21 +76,35 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
         public async Task TestResolveCompletionItemAsync()
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
         {|caret:|}
     }
 }";
-            using var testLspServer = await CreateTestLspServerAsync(markup, new LSP.VSInternalClientCapabilities { SupportsVisualStudioExtensions = true });
-            var clientCompletionItem = await GetCompletionItemToResolveAsync<LSP.VSInternalCompletionItem>(testLspServer, label: "A").ConfigureAwait(false);
+            using var testLspServer = await CreateTestLspServerAsync(
+                markup,
+                new LSP.VSInternalClientCapabilities { SupportsVisualStudioExtensions = true }
+            );
+            var clientCompletionItem =
+                await GetCompletionItemToResolveAsync<LSP.VSInternalCompletionItem>(
+                        testLspServer,
+                        label: "A"
+                    )
+                    .ConfigureAwait(false);
 
             var description = new ClassifiedTextElement(CreateClassifiedTextRunForClass("A"));
-            var expected = CreateResolvedCompletionItem(clientCompletionItem, description, "class A", null);
+            var expected = CreateResolvedCompletionItem(
+                clientCompletionItem,
+                description,
+                "class A",
+                null
+            );
 
-            var results = (LSP.VSInternalCompletionItem)await RunResolveCompletionItemAsync(
-                testLspServer, clientCompletionItem).ConfigureAwait(false);
+            var results = (LSP.VSInternalCompletionItem)
+                await RunResolveCompletionItemAsync(testLspServer, clientCompletionItem)
+                    .ConfigureAwait(false);
             AssertJsonEquals(expected, results);
         }
 
@@ -93,7 +113,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
         public async Task TestResolveOverridesCompletionItemAsync()
         {
             var markup =
-@"abstract class A
+                @"abstract class A
 {
     public abstract void M();
 }
@@ -102,17 +122,29 @@ class B : A
 {
     override {|caret:|}
 }";
-            using var testLspServer = await CreateTestLspServerAsync(markup, new LSP.VSInternalClientCapabilities { SupportsVisualStudioExtensions = true });
-            var clientCompletionItem = await GetCompletionItemToResolveAsync<LSP.VSInternalCompletionItem>(testLspServer, label: "M()").ConfigureAwait(false);
-            var results = (LSP.VSInternalCompletionItem)await RunResolveCompletionItemAsync(
-                testLspServer, clientCompletionItem).ConfigureAwait(false);
+            using var testLspServer = await CreateTestLspServerAsync(
+                markup,
+                new LSP.VSInternalClientCapabilities { SupportsVisualStudioExtensions = true }
+            );
+            var clientCompletionItem =
+                await GetCompletionItemToResolveAsync<LSP.VSInternalCompletionItem>(
+                        testLspServer,
+                        label: "M()"
+                    )
+                    .ConfigureAwait(false);
+            var results = (LSP.VSInternalCompletionItem)
+                await RunResolveCompletionItemAsync(testLspServer, clientCompletionItem)
+                    .ConfigureAwait(false);
 
             Assert.NotNull(results.TextEdit);
             Assert.Null(results.InsertText);
-            Assert.Equal(@"public override void M()
+            Assert.Equal(
+                @"public override void M()
     {
         throw new System.NotImplementedException();
-    }", results.TextEdit.NewText);
+    }",
+                results.TextEdit.NewText
+            );
         }
 
         [Fact]
@@ -120,7 +152,7 @@ class B : A
         public async Task TestResolveOverridesCompletionItem_SnippetsEnabledAsync()
         {
             var markup =
-@"abstract class A
+                @"abstract class A
 {
     public abstract void M();
 }
@@ -138,27 +170,31 @@ class B : A
                 {
                     Completion = new CompletionSetting
                     {
-                        CompletionItem = new CompletionItemSetting
-                        {
-                            SnippetSupport = true
-                        }
+                        CompletionItem = new CompletionItemSetting { SnippetSupport = true }
                     }
                 }
             };
             using var testLspServer = await CreateTestLspServerAsync(markup, clientCapabilities);
-            var clientCompletionItem = await GetCompletionItemToResolveAsync<LSP.VSInternalCompletionItem>(
-                testLspServer,
-                label: "M()").ConfigureAwait(false);
+            var clientCompletionItem =
+                await GetCompletionItemToResolveAsync<LSP.VSInternalCompletionItem>(
+                        testLspServer,
+                        label: "M()"
+                    )
+                    .ConfigureAwait(false);
 
-            var results = (LSP.VSInternalCompletionItem)await RunResolveCompletionItemAsync(
-                testLspServer, clientCompletionItem).ConfigureAwait(false);
+            var results = (LSP.VSInternalCompletionItem)
+                await RunResolveCompletionItemAsync(testLspServer, clientCompletionItem)
+                    .ConfigureAwait(false);
 
             Assert.NotNull(results.TextEdit);
             Assert.Null(results.InsertText);
-            Assert.Equal(@"public override void M()
+            Assert.Equal(
+                @"public override void M()
     {
         throw new System.NotImplementedException();$0
-    }", results.TextEdit.NewText);
+    }",
+                results.TextEdit.NewText
+            );
         }
 
         [Fact]
@@ -166,7 +202,7 @@ class B : A
         public async Task TestResolveOverridesCompletionItem_SnippetsEnabled_CaretOutOfSnippetScopeAsync()
         {
             var markup =
-@"abstract class A
+                @"abstract class A
 {
     public abstract void M();
 }
@@ -180,20 +216,30 @@ class B : A
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
 
             var selectedItem = CodeAnalysis.Completion.CompletionItem.Create(displayText: "M");
-            var textEdit = await CompletionResolveHandler.GenerateTextEditAsync(
-                document, new TestCaretOutOfScopeCompletionService(), selectedItem, snippetsSupported: true, CancellationToken.None).ConfigureAwait(false);
+            var textEdit = await CompletionResolveHandler
+                .GenerateTextEditAsync(
+                    document,
+                    new TestCaretOutOfScopeCompletionService(),
+                    selectedItem,
+                    snippetsSupported: true,
+                    CancellationToken.None
+                )
+                .ConfigureAwait(false);
 
-            Assert.Equal(@"public override void M()
+            Assert.Equal(
+                @"public override void M()
     {
         throw new System.NotImplementedException();
-    }", textEdit.NewText);
+    }",
+                textEdit.NewText
+            );
         }
 
         [Fact]
         public async Task TestResolveCompletionItemWithMarkupContentAsync()
         {
             var markup =
-@"
+                @"
 class A
 {
     /// <summary>
@@ -240,11 +286,14 @@ class A
             };
             using var testLspServer = await CreateTestLspServerAsync(markup, clientCapabilities);
             var clientCompletionItem = await GetCompletionItemToResolveAsync<LSP.CompletionItem>(
-                testLspServer,
-                label: "AMethod").ConfigureAwait(false);
+                    testLspServer,
+                    label: "AMethod"
+                )
+                .ConfigureAwait(false);
             Assert.True(clientCompletionItem is not VSInternalCompletionItem);
 
-            var expected = @"```csharp
+            var expected =
+                @"```csharp
 void A.AMethod(int i)
 ```
   
@@ -258,9 +307,8 @@ _italic&nbsp;text_
   
 [link text](https://google.com)";
 
-            var results = await RunResolveCompletionItemAsync(
-                testLspServer,
-                clientCompletionItem).ConfigureAwait(false);
+            var results = await RunResolveCompletionItemAsync(testLspServer, clientCompletionItem)
+                .ConfigureAwait(false);
             Assert.Equal(expected, results.Documentation.Value.Second.Value);
         }
 
@@ -268,7 +316,7 @@ _italic&nbsp;text_
         public async Task TestResolveCompletionItemWithPlainTextAsync()
         {
             var markup =
-@"
+                @"
 class A
 {
     /// <summary>
@@ -302,11 +350,14 @@ class A
 }";
             using var testLspServer = await CreateTestLspServerAsync(markup);
             var clientCompletionItem = await GetCompletionItemToResolveAsync<LSP.CompletionItem>(
-                testLspServer,
-                label: "AMethod").ConfigureAwait(false);
+                    testLspServer,
+                    label: "AMethod"
+                )
+                .ConfigureAwait(false);
             Assert.True(clientCompletionItem is not VSInternalCompletionItem);
 
-            var expected = @"void A.AMethod(int i)
+            var expected =
+                @"void A.AMethod(int i)
 A cref A.AMethod(int)
 strong text
 italic text
@@ -317,9 +368,8 @@ underline text
 
 link text";
 
-            var results = await RunResolveCompletionItemAsync(
-                testLspServer,
-                clientCompletionItem).ConfigureAwait(false);
+            var results = await RunResolveCompletionItemAsync(testLspServer, clientCompletionItem)
+                .ConfigureAwait(false);
             Assert.Equal(expected, results.Documentation.Value.Second.Value);
         }
 
@@ -327,7 +377,7 @@ link text";
         public async Task TestResolveCompletionItemWithPrefixSuffixAsync()
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -335,26 +385,42 @@ link text";
         a.{|caret:|}
     }
 }";
-            using var testLspServer = await CreateTestLspServerAsync(markup, new LSP.VSInternalClientCapabilities { SupportsVisualStudioExtensions = true });
-            var clientCompletionItem = await GetCompletionItemToResolveAsync<LSP.VSInternalCompletionItem>(testLspServer, label: "(byte)").ConfigureAwait(false);
+            using var testLspServer = await CreateTestLspServerAsync(
+                markup,
+                new LSP.VSInternalClientCapabilities { SupportsVisualStudioExtensions = true }
+            );
+            var clientCompletionItem =
+                await GetCompletionItemToResolveAsync<LSP.VSInternalCompletionItem>(
+                        testLspServer,
+                        label: "(byte)"
+                    )
+                    .ConfigureAwait(false);
 
-            var results = (LSP.VSInternalCompletionItem)await RunResolveCompletionItemAsync(
-                testLspServer, clientCompletionItem).ConfigureAwait(false);
+            var results = (LSP.VSInternalCompletionItem)
+                await RunResolveCompletionItemAsync(testLspServer, clientCompletionItem)
+                    .ConfigureAwait(false);
             Assert.Equal("(byte)", results.Label);
             Assert.NotNull(results.Description);
         }
 
-        private static async Task<LSP.CompletionItem> RunResolveCompletionItemAsync(TestLspServer testLspServer, LSP.CompletionItem completionItem)
+        private static async Task<LSP.CompletionItem> RunResolveCompletionItemAsync(
+            TestLspServer testLspServer,
+            LSP.CompletionItem completionItem
+        )
         {
-            return await testLspServer.ExecuteRequestAsync<LSP.CompletionItem, LSP.CompletionItem>(LSP.Methods.TextDocumentCompletionResolveName,
-                           completionItem, CancellationToken.None);
+            return await testLspServer.ExecuteRequestAsync<LSP.CompletionItem, LSP.CompletionItem>(
+                LSP.Methods.TextDocumentCompletionResolveName,
+                completionItem,
+                CancellationToken.None
+            );
         }
 
         private static LSP.VSInternalCompletionItem CreateResolvedCompletionItem(
             VSInternalCompletionItem completionItem,
             ClassifiedTextElement description,
             string detail,
-            string documentation)
+            string documentation
+        )
         {
             completionItem.Detail = detail;
             if (documentation != null)
@@ -370,8 +436,8 @@ link text";
             return completionItem;
         }
 
-        private static ClassifiedTextRun[] CreateClassifiedTextRunForClass(string className)
-            => new ClassifiedTextRun[]
+        private static ClassifiedTextRun[] CreateClassifiedTextRunForClass(string className) =>
+            new ClassifiedTextRun[]
             {
                 new ClassifiedTextRun("whitespace", string.Empty),
                 new ClassifiedTextRun("keyword", "class"),
@@ -382,35 +448,49 @@ link text";
 
         private static async Task<T> GetCompletionItemToResolveAsync<T>(
             TestLspServer testLspServer,
-            string label) where T : LSP.CompletionItem
+            string label
+        ) where T : LSP.CompletionItem
         {
             var completionParams = CreateCompletionParams(
-                testLspServer.GetLocations("caret").Single(), LSP.VSInternalCompletionInvokeKind.Explicit, "\0", LSP.CompletionTriggerKind.Invoked);
+                testLspServer.GetLocations("caret").Single(),
+                LSP.VSInternalCompletionInvokeKind.Explicit,
+                "\0",
+                LSP.CompletionTriggerKind.Invoked
+            );
 
             var completionList = await RunGetCompletionsAsync(testLspServer, completionParams);
 
             if (testLspServer.ClientCapabilities.HasCompletionListDataCapability())
             {
-                var vsCompletionList = Assert.IsAssignableFrom<VSInternalCompletionList>(completionList);
+                var vsCompletionList = Assert.IsAssignableFrom<VSInternalCompletionList>(
+                    completionList
+                );
                 Assert.NotNull(vsCompletionList.Data);
             }
 
-            var serverCompletionItem = completionList.Items.FirstOrDefault(item => item.Label == label);
+            var serverCompletionItem = completionList.Items.FirstOrDefault(
+                item => item.Label == label
+            );
             var clientCompletionItem = ConvertToClientCompletionItem((T)serverCompletionItem);
             return clientCompletionItem;
         }
 
         private static async Task<LSP.CompletionList> RunGetCompletionsAsync(
             TestLspServer testLspServer,
-            LSP.CompletionParams completionParams)
+            LSP.CompletionParams completionParams
+        )
         {
-            var completionList = await testLspServer.ExecuteRequestAsync<LSP.CompletionParams, LSP.CompletionList>(LSP.Methods.TextDocumentCompletionName,
-                completionParams, CancellationToken.None);
+            var completionList = await testLspServer.ExecuteRequestAsync<
+                LSP.CompletionParams,
+                LSP.CompletionList
+            >(LSP.Methods.TextDocumentCompletionName, completionParams, CancellationToken.None);
 
             // Emulate client behavior of promoting "Data" completion list properties onto completion items.
-            if (testLspServer.ClientCapabilities.HasCompletionListDataCapability() &&
-                completionList is VSInternalCompletionList vsCompletionList &&
-                vsCompletionList.Data != null)
+            if (
+                testLspServer.ClientCapabilities.HasCompletionListDataCapability()
+                && completionList is VSInternalCompletionList vsCompletionList
+                && vsCompletionList.Data != null
+            )
             {
                 foreach (var completionItem in completionList.Items)
                 {
@@ -422,7 +502,8 @@ link text";
             return completionList;
         }
 
-        private static T ConvertToClientCompletionItem<T>(T serverCompletionItem) where T : LSP.CompletionItem
+        private static T ConvertToClientCompletionItem<T>(T serverCompletionItem)
+            where T : LSP.CompletionItem
         {
             var serializedItem = JsonConvert.SerializeObject(serverCompletionItem);
             var clientCompletionItem = JsonConvert.DeserializeObject<T>(serializedItem);
@@ -439,31 +520,49 @@ link text";
                 CompletionTrigger trigger = default,
                 ImmutableHashSet<string> roles = null,
                 OptionSet options = null,
-                CancellationToken cancellationToken = default)
-                => Task.FromResult(CodeAnalysis.Completion.CompletionList.Empty);
+                CancellationToken cancellationToken = default
+            ) => Task.FromResult(CodeAnalysis.Completion.CompletionList.Empty);
 
             public override Task<CompletionChange> GetChangeAsync(
                 Document document,
                 CodeAnalysis.Completion.CompletionItem item,
                 char? commitCharacter = null,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
-                var textChange = new TextChange(span: new TextSpan(start: 77, length: 9), newText: @"public override void M()
+                var textChange = new TextChange(
+                    span: new TextSpan(start: 77, length: 9),
+                    newText: @"public override void M()
     {
         throw new System.NotImplementedException();
-    }");
+    }"
+                );
 
                 return Task.FromResult(CompletionChange.Create(textChange, newPosition: 0));
             }
 
-            internal override bool ShouldTriggerCompletion(Project project, HostLanguageServices languageServices, SourceText text, int caretPosition, CompletionTrigger trigger, CodeAnalysis.Completion.CompletionOptions options, OptionSet passthroughOptions, ImmutableHashSet<string> roles = null)
-                => false;
+            internal override bool ShouldTriggerCompletion(
+                Project project,
+                HostLanguageServices languageServices,
+                SourceText text,
+                int caretPosition,
+                CompletionTrigger trigger,
+                CodeAnalysis.Completion.CompletionOptions options,
+                OptionSet passthroughOptions,
+                ImmutableHashSet<string> roles = null
+            ) => false;
 
-            internal override CompletionRules GetRules(CodeAnalysis.Completion.CompletionOptions options)
-                => CompletionRules.Default;
+            internal override CompletionRules GetRules(
+                CodeAnalysis.Completion.CompletionOptions options
+            ) => CompletionRules.Default;
 
-            internal override Task<CompletionDescription> GetDescriptionAsync(Document document, CodeAnalysis.Completion.CompletionItem item, CodeAnalysis.Completion.CompletionOptions options, SymbolDescriptionOptions displayOptions, CancellationToken cancellationToken = default)
-                => Task.FromResult(CompletionDescription.Empty);
+            internal override Task<CompletionDescription> GetDescriptionAsync(
+                Document document,
+                CodeAnalysis.Completion.CompletionItem item,
+                CodeAnalysis.Completion.CompletionOptions options,
+                SymbolDescriptionOptions displayOptions,
+                CancellationToken cancellationToken = default
+            ) => Task.FromResult(CompletionDescription.Empty);
         }
     }
 }

@@ -43,7 +43,8 @@ namespace Internal.Runtime.TypeLoader
             MethodDesc method,
             out IntPtr methodAddress,
             out IntPtr unboxingStubAddress,
-            out MethodAddressType foundAddressType)
+            out MethodAddressType foundAddressType
+        )
         {
             methodAddress = IntPtr.Zero;
             unboxingStubAddress = IntPtr.Zero;
@@ -51,13 +52,23 @@ namespace Internal.Runtime.TypeLoader
 
 #if SUPPORT_DYNAMIC_CODE
             if (foundAddressType == MethodAddressType.None)
-                MethodEntrypointStubs.TryGetMethodEntrypoint(method, out methodAddress, out unboxingStubAddress, out foundAddressType);
+                MethodEntrypointStubs.TryGetMethodEntrypoint(
+                    method,
+                    out methodAddress,
+                    out unboxingStubAddress,
+                    out foundAddressType
+                );
 #endif
             if (foundAddressType != MethodAddressType.None)
                 return true;
 
             // Otherwise try to find it via an invoke map
-            return TryGetMethodAddressFromTypeSystemMethodViaInvokeMap(method, out methodAddress, out unboxingStubAddress, out foundAddressType);
+            return TryGetMethodAddressFromTypeSystemMethodViaInvokeMap(
+                method,
+                out methodAddress,
+                out unboxingStubAddress,
+                out foundAddressType
+            );
         }
 
         /// <summary>
@@ -74,35 +85,42 @@ namespace Internal.Runtime.TypeLoader
             MethodDesc method,
             out IntPtr methodAddress,
             out IntPtr unboxingStubAddress,
-            out MethodAddressType foundAddressType)
+            out MethodAddressType foundAddressType
+        )
         {
             methodAddress = IntPtr.Zero;
             unboxingStubAddress = IntPtr.Zero;
             foundAddressType = MethodAddressType.None;
 #if SUPPORTS_NATIVE_METADATA_TYPE_LOADING
-            NativeFormatMethod nativeFormatMethod = method.GetTypicalMethodDefinition() as NativeFormatMethod;
+            NativeFormatMethod nativeFormatMethod =
+                method.GetTypicalMethodDefinition() as NativeFormatMethod;
             if (nativeFormatMethod == null)
                 return false;
 
             MethodSignatureComparer methodSignatureComparer = new MethodSignatureComparer(
-                nativeFormatMethod.MetadataReader, nativeFormatMethod.Handle);
+                nativeFormatMethod.MetadataReader,
+                nativeFormatMethod.Handle
+            );
 
             // Try to find a specific canonical match, or if that fails, a universal match
-            if (TryGetMethodInvokeDataFromInvokeMap(
-                nativeFormatMethod,
-                method,
-                ref methodSignatureComparer,
-                CanonicalFormKind.Specific,
-                out methodAddress,
-                out foundAddressType) ||
-
+            if (
                 TryGetMethodInvokeDataFromInvokeMap(
-                nativeFormatMethod,
-                method,
-                ref methodSignatureComparer,
-                CanonicalFormKind.Universal,
-                out methodAddress,
-                out foundAddressType))
+                    nativeFormatMethod,
+                    method,
+                    ref methodSignatureComparer,
+                    CanonicalFormKind.Specific,
+                    out methodAddress,
+                    out foundAddressType
+                )
+                || TryGetMethodInvokeDataFromInvokeMap(
+                    nativeFormatMethod,
+                    method,
+                    ref methodSignatureComparer,
+                    CanonicalFormKind.Universal,
+                    out methodAddress,
+                    out foundAddressType
+                )
+            )
             {
                 if (method.OwningType.IsValueType && !method.Signature.IsStatic)
                 {
@@ -110,12 +128,25 @@ namespace Internal.Runtime.TypeLoader
                     unboxingStubAddress = methodAddress;
                     methodAddress = RuntimeAugments.GetCodeTarget(unboxingStubAddress);
 
-                    if (!method.HasInstantiation && ((foundAddressType != MethodAddressType.Exact) || method.OwningType.IsCanonicalSubtype(CanonicalFormKind.Any)))
+                    if (
+                        !method.HasInstantiation
+                        && (
+                            (foundAddressType != MethodAddressType.Exact)
+                            || method.OwningType.IsCanonicalSubtype(CanonicalFormKind.Any)
+                        )
+                    )
                     {
                         IntPtr underlyingTarget; // unboxing and instantiating stub handling
-                        if (!TypeLoaderEnvironment.TryGetTargetOfUnboxingAndInstantiatingStub(methodAddress, out underlyingTarget))
+                        if (
+                            !TypeLoaderEnvironment.TryGetTargetOfUnboxingAndInstantiatingStub(
+                                methodAddress,
+                                out underlyingTarget
+                            )
+                        )
                         {
-                            Environment.FailFast("Expected this to be an unboxing and instantiating stub.");
+                            Environment.FailFast(
+                                "Expected this to be an unboxing and instantiating stub."
+                            );
                         }
                         methodAddress = underlyingTarget;
                     }
@@ -131,7 +162,12 @@ namespace Internal.Runtime.TypeLoader
         /// <summary>
         /// Attempt a virtual dispatch on a given instanceType based on the method found via a metadata token
         /// </summary>
-        private static bool TryDispatchMethodOnTarget_Inner(NativeFormatModuleInfo module, int metadataToken, RuntimeTypeHandle targetInstanceType, out IntPtr methodAddress)
+        private static bool TryDispatchMethodOnTarget_Inner(
+            NativeFormatModuleInfo module,
+            int metadataToken,
+            RuntimeTypeHandle targetInstanceType,
+            out IntPtr methodAddress
+        )
         {
 #if SUPPORTS_NATIVE_METADATA_TYPE_LOADING
             TypeSystemContext context = TypeSystemContextFactory.Create();
@@ -145,9 +181,15 @@ namespace Internal.Runtime.TypeLoader
             // For non-interface methods we support the target method not being the exact target. (This allows
             // a canonical method to be passed in and work for any generic type instantiation.)
             if (!targetMethod.OwningType.IsInterface)
-                realTargetMethod = instanceType.FindMethodOnTypeWithMatchingTypicalMethod(targetMethod);
+                realTargetMethod = instanceType.FindMethodOnTypeWithMatchingTypicalMethod(
+                    targetMethod
+                );
 
-            bool success = LazyVTableResolver.TryDispatchMethodOnTarget(instanceType, realTargetMethod, out methodAddress);
+            bool success = LazyVTableResolver.TryDispatchMethodOnTarget(
+                instanceType,
+                realTargetMethod,
+                out methodAddress
+            );
 
             TypeSystemContextFactory.Recycle(context);
             return success;
@@ -166,18 +208,28 @@ namespace Internal.Runtime.TypeLoader
         /// Attempt to convert the dispatch cell to a metadata token to a more efficient vtable dispatch or interface/slot dispatch.
         /// Failure to convert is not a correctness issue. We also support performing a dispatch based on metadata token alone.
         /// </summary>
-        private static DispatchCellInfo ConvertDispatchCellInfo_Inner(NativeFormatModuleInfo module, DispatchCellInfo cellInfo)
+        private static DispatchCellInfo ConvertDispatchCellInfo_Inner(
+            NativeFormatModuleInfo module,
+            DispatchCellInfo cellInfo
+        )
         {
             Debug.Assert(cellInfo.CellType == DispatchCellType.MetadataToken);
 
             TypeSystemContext context = TypeSystemContextFactory.Create();
 
-            MethodDesc targetMethod = context.ResolveMetadataUnit(module).GetMethod(cellInfo.MetadataToken.AsHandle(), null);
+            MethodDesc targetMethod = context
+                .ResolveMetadataUnit(module)
+                .GetMethod(cellInfo.MetadataToken.AsHandle(), null);
             Debug.Assert(!targetMethod.HasInstantiation); // At this time we do not support generic virtuals through the dispatch mechanism
             Debug.Assert(targetMethod.IsVirtual);
             if (targetMethod.OwningType.IsInterface)
             {
-                if (!LazyVTableResolver.TryGetInterfaceSlotNumberFromMethod(targetMethod, out cellInfo.InterfaceSlot))
+                if (
+                    !LazyVTableResolver.TryGetInterfaceSlotNumberFromMethod(
+                        targetMethod,
+                        out cellInfo.InterfaceSlot
+                    )
+                )
                 {
                     // Unable to resolve interface method. Fail, by not mutating cellInfo
                     return cellInfo;
@@ -211,7 +263,9 @@ namespace Internal.Runtime.TypeLoader
                 int slotIndexOfMethod = LazyVTableResolver.VirtualMethodToSlotIndex(targetMethod);
                 int vtableOffset = -1;
                 if (slotIndexOfMethod >= 0)
-                    vtableOffset = LazyVTableResolver.SlotIndexToEETypeVTableOffset(slotIndexOfMethod);
+                    vtableOffset = LazyVTableResolver.SlotIndexToEETypeVTableOffset(
+                        slotIndexOfMethod
+                    );
                 if ((vtableOffset < 4096) && (vtableOffset != -1))
                 {
                     cellInfo.CellType = DispatchCellType.VTableOffset;
@@ -229,7 +283,12 @@ namespace Internal.Runtime.TypeLoader
         /// <summary>
         /// Resolve a dispatch on an interface MethodTable/slot index pair to a function pointer
         /// </summary>
-        private static unsafe bool TryResolveTypeSlotDispatch_Inner(MethodTable* pTargetType, MethodTable* pInterfaceType, ushort slot, out IntPtr methodAddress)
+        private static unsafe bool TryResolveTypeSlotDispatch_Inner(
+            MethodTable* pTargetType,
+            MethodTable* pInterfaceType,
+            ushort slot,
+            out IntPtr methodAddress
+        )
         {
             methodAddress = IntPtr.Zero;
 
@@ -246,19 +305,36 @@ namespace Internal.Runtime.TypeLoader
             {
                 // If the interface open type is not a metadata type, this must be an interface not known in the metadata world.
                 // Use the redhawk resolver for this directly.
-                TypeDesc pregeneratedType = LazyVTableResolver.GetMostDerivedPregeneratedOrTemplateLoadedType(targetType);
+                TypeDesc pregeneratedType =
+                    LazyVTableResolver.GetMostDerivedPregeneratedOrTemplateLoadedType(targetType);
                 pregeneratedType.RetrieveRuntimeTypeHandleIfPossible();
                 interfaceType.RetrieveRuntimeTypeHandleIfPossible();
-                methodAddress = RuntimeAugments.ResolveDispatchOnType(pregeneratedType.RuntimeTypeHandle, interfaceType.RuntimeTypeHandle, slot);
+                methodAddress = RuntimeAugments.ResolveDispatchOnType(
+                    pregeneratedType.RuntimeTypeHandle,
+                    interfaceType.RuntimeTypeHandle,
+                    slot
+                );
             }
             else
             {
                 MethodDesc interfaceMethod;
 
-                if (!LazyVTableResolver.TryGetMethodFromInterfaceSlot(interfaceType, slot, out interfaceMethod))
+                if (
+                    !LazyVTableResolver.TryGetMethodFromInterfaceSlot(
+                        interfaceType,
+                        slot,
+                        out interfaceMethod
+                    )
+                )
                     return false;
 
-                if (!LazyVTableResolver.TryDispatchMethodOnTarget(targetType, interfaceMethod, out methodAddress))
+                if (
+                    !LazyVTableResolver.TryDispatchMethodOnTarget(
+                        targetType,
+                        interfaceMethod,
+                        out methodAddress
+                    )
+                )
                     return false;
             }
 

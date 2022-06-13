@@ -17,17 +17,26 @@ public class RateLimitingMiddlewareTests : LoggedTest
         var options = CreateOptionsAccessor();
         options.Value.Limiter = new TestPartitionedRateLimiter<HttpContext>();
 
-        Assert.Throws<ArgumentNullException>(() => new RateLimitingMiddleware(
-            null,
-            new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-            options));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new RateLimitingMiddleware(
+                    null,
+                    new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+                    options
+                )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new RateLimitingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
-        null,
-        options));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new RateLimitingMiddleware(
+                    c =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    null,
+                    options
+                )
+        );
     }
 
     [Fact]
@@ -35,14 +44,18 @@ public class RateLimitingMiddlewareTests : LoggedTest
     {
         var flag = false;
         var options = CreateOptionsAccessor();
-        options.Value.Limiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(true));
-        var middleware = new RateLimitingMiddleware(c =>
-        {
-            flag = true;
-            return Task.CompletedTask;
-        },
-        new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-        options);
+        options.Value.Limiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(true)
+        );
+        var middleware = new RateLimitingMiddleware(
+            c =>
+            {
+                flag = true;
+                return Task.CompletedTask;
+            },
+            new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+            options
+        );
 
         await middleware.Invoke(new DefaultHttpContext());
         Assert.True(flag);
@@ -53,19 +66,23 @@ public class RateLimitingMiddlewareTests : LoggedTest
     {
         var onRejectedInvoked = false;
         var options = CreateOptionsAccessor();
-        options.Value.Limiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(false));
+        options.Value.Limiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(false)
+        );
         options.Value.OnRejected = (httpContext, lease) =>
         {
             onRejectedInvoked = true;
             return Task.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
-        new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-        options);
+        var middleware = new RateLimitingMiddleware(
+            c =>
+            {
+                return Task.CompletedTask;
+            },
+            new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+            options
+        );
 
         var context = new DefaultHttpContext();
         await middleware.Invoke(context).DefaultTimeout();
@@ -78,7 +95,9 @@ public class RateLimitingMiddlewareTests : LoggedTest
     {
         var onRejectedInvoked = false;
         var options = CreateOptionsAccessor();
-        options.Value.Limiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(false));
+        options.Value.Limiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(false)
+        );
         options.Value.OnRejected = (httpContext, lease) =>
         {
             onRejectedInvoked = true;
@@ -86,12 +105,14 @@ public class RateLimitingMiddlewareTests : LoggedTest
             return Task.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
-        new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-        options);
+        var middleware = new RateLimitingMiddleware(
+            c =>
+            {
+                return Task.CompletedTask;
+            },
+            new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+            options
+        );
 
         var context = new DefaultHttpContext();
         await middleware.Invoke(context).DefaultTimeout();
@@ -103,20 +124,26 @@ public class RateLimitingMiddlewareTests : LoggedTest
     public async Task RequestAborted_ThrowsTaskCanceledException()
     {
         var options = CreateOptionsAccessor();
-        options.Value.Limiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(false));
+        options.Value.Limiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(false)
+        );
 
-        var middleware = new RateLimitingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
-        new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-        options);
+        var middleware = new RateLimitingMiddleware(
+            c =>
+            {
+                return Task.CompletedTask;
+            },
+            new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+            options
+        );
 
         var context = new DefaultHttpContext();
         context.RequestAborted = new CancellationToken(true);
-        await Assert.ThrowsAsync<TaskCanceledException>(() => middleware.Invoke(context)).DefaultTimeout();
+        await Assert
+            .ThrowsAsync<TaskCanceledException>(() => middleware.Invoke(context))
+            .DefaultTimeout();
     }
 
-    private IOptions<RateLimiterOptions> CreateOptionsAccessor() => Options.Create(new RateLimiterOptions());
-
+    private IOptions<RateLimiterOptions> CreateOptionsAccessor() =>
+        Options.Create(new RateLimiterOptions());
 }

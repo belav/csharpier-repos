@@ -22,8 +22,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         private SendKeysWithoutActivateImpl? _lazySendKeysWithoutActivate;
 
         private SendKeysImpl SendKeys => _lazySendKeys ?? throw ExceptionUtilities.Unreachable;
-        private SendKeysToNavigateToImpl SendKeysToNavigateTo => _lazySendKeysToNavigateTo ?? throw ExceptionUtilities.Unreachable;
-        private SendKeysWithoutActivateImpl SendKeysWithoutActivate => _lazySendKeysWithoutActivate ?? throw ExceptionUtilities.Unreachable;
+        private SendKeysToNavigateToImpl SendKeysToNavigateTo =>
+            _lazySendKeysToNavigateTo ?? throw ExceptionUtilities.Unreachable;
+        private SendKeysWithoutActivateImpl SendKeysWithoutActivate =>
+            _lazySendKeysWithoutActivate ?? throw ExceptionUtilities.Unreachable;
 
         protected override async Task InitializeCoreAsync()
         {
@@ -85,10 +87,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         private class SendKeysWithoutActivateImpl : SendKeysImpl
         {
-            public SendKeysWithoutActivateImpl(TestServices testServices)
-                : base(testServices)
-            {
-            }
+            public SendKeysWithoutActivateImpl(TestServices testServices) : base(testServices) { }
 
             protected override void ActivateMainWindow()
             {
@@ -98,10 +97,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         private class SendKeysToNavigateToImpl : SendKeysImpl
         {
-            public SendKeysToNavigateToImpl(TestServices testServices)
-                : base(testServices)
-            {
-            }
+            public SendKeysToNavigateToImpl(TestServices testServices) : base(testServices) { }
 
             protected override void ActivateMainWindow()
             {

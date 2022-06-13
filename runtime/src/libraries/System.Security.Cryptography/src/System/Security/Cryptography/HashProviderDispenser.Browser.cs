@@ -7,7 +7,8 @@ namespace System.Security.Cryptography
 {
     internal static partial class HashProviderDispenser
     {
-        internal static readonly bool CanUseSubtleCryptoImpl = Interop.BrowserCrypto.CanUseSimpleDigestHash() == 1;
+        internal static readonly bool CanUseSubtleCryptoImpl =
+            Interop.BrowserCrypto.CanUseSimpleDigestHash() == 1;
 
         public static HashProvider CreateHashProvider(string hashAlgorithmId)
         {
@@ -21,7 +22,9 @@ namespace System.Security.Cryptography
                         ? new SHANativeHashProvider(hashAlgorithmId)
                         : new SHAManagedHashProvider(hashAlgorithmId);
             }
-            throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
+            );
         }
 
         public static class OneShotHashProvider
@@ -30,12 +33,19 @@ namespace System.Security.Cryptography
                 string hashAlgorithmId,
                 ReadOnlySpan<byte> key,
                 ReadOnlySpan<byte> source,
-                Span<byte> destination)
+                Span<byte> destination
+            )
             {
-                throw new PlatformNotSupportedException(SR.SystemSecurityCryptography_PlatformNotSupported);
+                throw new PlatformNotSupportedException(
+                    SR.SystemSecurityCryptography_PlatformNotSupported
+                );
             }
 
-            public static int HashData(string hashAlgorithmId, ReadOnlySpan<byte> source, Span<byte> destination)
+            public static int HashData(
+                string hashAlgorithmId,
+                ReadOnlySpan<byte> source,
+                Span<byte> destination
+            )
             {
                 HashProvider provider = CreateHashProvider(hashAlgorithmId);
                 provider.AppendHashData(source);
@@ -43,9 +53,14 @@ namespace System.Security.Cryptography
             }
         }
 
-        public static unsafe HashProvider CreateMacProvider(string hashAlgorithmId, ReadOnlySpan<byte> key)
+        public static unsafe HashProvider CreateMacProvider(
+            string hashAlgorithmId,
+            ReadOnlySpan<byte> key
+        )
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptography_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptography_PlatformNotSupported
+            );
         }
     }
 }

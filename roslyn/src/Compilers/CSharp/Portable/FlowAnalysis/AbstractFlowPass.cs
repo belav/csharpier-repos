@@ -33,9 +33,13 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// href="https://en.wikipedia.org/wiki/Data-flow_analysis"/>) that moves upward through the <see cref="Join(ref
     /// TLocalState, ref TLocalState)"/> operation.
     /// </remarks>
-    internal abstract partial class AbstractFlowPass<TLocalState, TLocalFunctionState> : BoundTreeVisitor
+    internal abstract partial class AbstractFlowPass<TLocalState, TLocalFunctionState>
+        : BoundTreeVisitor
         where TLocalState : AbstractFlowPass<TLocalState, TLocalFunctionState>.ILocalState
-        where TLocalFunctionState : AbstractFlowPass<TLocalState, TLocalFunctionState>.AbstractLocalFunctionState
+        where TLocalFunctionState : AbstractFlowPass<
+                TLocalState,
+                TLocalFunctionState
+            >.AbstractLocalFunctionState
     {
         protected int _recursionDepth;
 
@@ -168,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         #region Region
         // For region analysis, we maintain some extra data.
         protected RegionPlace regionPlace; // tells whether we are currently analyzing code before, during, or after the region
-        protected readonly BoundNode firstInRegion, lastInRegion;
+        protected readonly BoundNode firstInRegion,
+            lastInRegion;
         protected readonly bool TrackingRegions;
 
         /// <summary>
@@ -185,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode firstInRegion = null,
             BoundNode lastInRegion = null,
             bool trackRegions = false,
-            bool nonMonotonicTransferFunction = false)
+            bool nonMonotonicTransferFunction = false
+        )
         {
             Debug.Assert(node != null);
 
@@ -215,7 +221,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             this.methodMainNode = node;
             this.firstInRegion = firstInRegion;
             this.lastInRegion = lastInRegion;
-            _loopHeadState = new Dictionary<BoundLoopStatement, TLocalState>(ReferenceEqualityComparer.Instance);
+            _loopHeadState = new Dictionary<BoundLoopStatement, TLocalState>(
+                ReferenceEqualityComparer.Instance
+            );
             TrackingRegions = trackRegions;
             _nonMonotonicTransfer = nonMonotonicTransferFunction;
         }
@@ -258,7 +266,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void EnterRegionIfNeeded(BoundNode node)
         {
-            if (TrackingRegions && node == this.firstInRegion && this.regionPlace == RegionPlace.Before)
+            if (
+                TrackingRegions
+                && node == this.firstInRegion
+                && this.regionPlace == RegionPlace.Before
+            )
             {
                 EnterRegion();
             }
@@ -275,7 +287,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void LeaveRegionIfNeeded(BoundNode node)
         {
-            if (TrackingRegions && node == this.lastInRegion && this.regionPlace == RegionPlace.Inside)
+            if (
+                TrackingRegions
+                && node == this.lastInRegion
+                && this.regionPlace == RegionPlace.Inside
+            )
             {
                 LeaveRegion();
             }
@@ -306,10 +322,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected bool IsInside
         {
-            get
-            {
-                return regionPlace == RegionPlace.Inside;
-            }
+            get { return regionPlace == RegionPlace.Inside; }
         }
 
         protected virtual void EnterParameters(ImmutableArray<ParameterSymbol> parameters)
@@ -320,13 +333,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        protected virtual void EnterParameter(ParameterSymbol parameter)
-        { }
+        protected virtual void EnterParameter(ParameterSymbol parameter) { }
 
         protected virtual void LeaveParameters(
             ImmutableArray<ParameterSymbol> parameters,
             SyntaxNode syntax,
-            Location location)
+            Location location
+        )
         {
             foreach (ParameterSymbol parameter in parameters)
             {
@@ -334,9 +347,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        protected virtual void LeaveParameter(ParameterSymbol parameter, SyntaxNode syntax, Location location)
-        { }
-
+        protected virtual void LeaveParameter(
+            ParameterSymbol parameter,
+            SyntaxNode syntax,
+            Location location
+        ) { }
 
         public override BoundNode Visit(BoundNode node)
         {
@@ -399,9 +414,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             public TLocalState StateWhenFalse;
 #nullable enable
             public readonly LabelSymbol? Label;
+
 #nullable disable
 
-            public PendingBranch(BoundNode branch, TLocalState state, LabelSymbol label, bool isConditionalState = false, TLocalState stateWhenTrue = default, TLocalState stateWhenFalse = default)
+            public PendingBranch(
+                BoundNode branch,
+                TLocalState state,
+                LabelSymbol label,
+                bool isConditionalState = false,
+                TLocalState stateWhenTrue = default,
+                TLocalState stateWhenFalse = default
+            )
             {
                 this.Branch = branch;
                 this.State = state.Clone();
@@ -434,7 +457,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return result;
         }
 
-        protected ImmutableArray<PendingBranch> Analyze(ref bool badRegion, Optional<TLocalState> initialState = default)
+        protected ImmutableArray<PendingBranch> Analyze(
+            ref bool badRegion,
+            Optional<TLocalState> initialState = default
+        )
         {
             ImmutableArray<PendingBranch> returns;
             do
@@ -446,8 +472,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 this.stateChangedAfterUse = false;
                 this.Diagnostics.Clear();
                 returns = this.Scan(ref badRegion);
-            }
-            while (this.stateChangedAfterUse);
+            } while (this.stateChangedAfterUse);
 
             return returns;
         }
@@ -469,7 +494,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             get
             {
                 var method = _symbol as MethodSymbol;
-                return (object)method == null ? ImmutableArray<ParameterSymbol>.Empty : method.Parameters;
+                return (object)method == null
+                    ? ImmutableArray<ParameterSymbol>.Empty
+                    : method.Parameters;
             }
         }
 
@@ -571,7 +598,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (Binder.AccessingAutoPropertyFromConstructor(access, _symbol))
                     {
-                        var backingField = (access.PropertySymbol as SourcePropertySymbolBase)?.BackingField;
+                        var backingField = (
+                            access.PropertySymbol as SourcePropertySymbolBase
+                        )?.BackingField;
                         if (backingField != null)
                         {
                             VisitFieldAccessInternal(access.ReceiverOpt, backingField);
@@ -582,22 +611,25 @@ namespace Microsoft.CodeAnalysis.CSharp
                     goto default;
 
                 case BoundKind.FieldAccess:
-                    {
-                        BoundFieldAccess node1 = (BoundFieldAccess)node;
-                        VisitFieldAccessInternal(node1.ReceiverOpt, node1.FieldSymbol);
-                        break;
-                    }
+                {
+                    BoundFieldAccess node1 = (BoundFieldAccess)node;
+                    VisitFieldAccessInternal(node1.ReceiverOpt, node1.FieldSymbol);
+                    break;
+                }
 
                 case BoundKind.EventAccess:
-                    {
-                        BoundEventAccess node1 = (BoundEventAccess)node;
-                        VisitFieldAccessInternal(node1.ReceiverOpt, node1.EventSymbol.AssociatedField);
-                        break;
-                    }
+                {
+                    BoundEventAccess node1 = (BoundEventAccess)node;
+                    VisitFieldAccessInternal(node1.ReceiverOpt, node1.EventSymbol.AssociatedField);
+                    break;
+                }
 
                 case BoundKind.TupleLiteral:
                 case BoundKind.ConvertedTupleLiteral:
-                    ((BoundTupleExpression)node).VisitAllElements((x, self) => self.VisitLvalue(x), this);
+                    ((BoundTupleExpression)node).VisitAllElements(
+                        (x, self) => self.VisitLvalue(x),
+                        this
+                    );
                     break;
 
                 default:
@@ -608,9 +640,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             LeaveRegionIfNeeded(node);
         }
 
-        protected virtual void VisitLvalue(BoundLocal node)
-        {
-        }
+        protected virtual void VisitLvalue(BoundLocal node) { }
 
         /// <summary>
         /// Visit a boolean condition expression.
@@ -634,7 +664,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Unsplit();
                 SetConditionalState(UnreachableState(), this.State);
             }
-            else if ((object)node.Type == null || node.Type.SpecialType != SpecialType.System_Boolean)
+            else if (
+                (object)node.Type == null || node.Type.SpecialType != SpecialType.System_Boolean
+            )
             {
                 // a dynamic type or a type with operator true/false
                 Unsplit();
@@ -752,7 +784,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Subclasses override this if they want to take special actions on processing a goto
         /// statement, when both the jump and the label have been located.
         /// </summary>
-        protected virtual void NoteBranch(PendingBranch pending, BoundNode gotoStmt, BoundStatement target)
+        protected virtual void NoteBranch(
+            PendingBranch pending,
+            BoundNode gotoStmt,
+            BoundStatement target
+        )
         {
             target.AssertIsLabeledStatement();
         }
@@ -782,7 +818,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return labelStateChanged;
         }
 
-        protected virtual void ResolveBranch(PendingBranch pending, LabelSymbol label, BoundStatement? target, ref bool labelStateChanged)
+        protected virtual void ResolveBranch(
+            PendingBranch pending,
+            LabelSymbol label,
+            BoundStatement? target,
+            ref bool labelStateChanged
+        )
         {
             var state = LabelState(label);
             if (target != null)
@@ -803,7 +844,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             public readonly PendingBranchesCollection PendingBranches;
             public readonly PooledHashSet<BoundStatement> LabelsSeen;
 
-            public SavedPending(PendingBranchesCollection pendingBranches, PooledHashSet<BoundStatement> labelsSeen)
+            public SavedPending(
+                PendingBranchesCollection pendingBranches,
+                PooledHashSet<BoundStatement> labelsSeen
+            )
             {
                 this.PendingBranches = pendingBranches;
                 this.LabelsSeen = labelsSeen;
@@ -840,18 +884,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                 switch (node.Kind)
                 {
                     case BoundKind.LabeledStatement:
+
                         {
                             var label = (BoundLabeledStatement)node;
                             stateChangedAfterUse |= ResolveBranches(label.Label, label);
                         }
                         break;
                     case BoundKind.LabelStatement:
+
                         {
                             var label = (BoundLabelStatement)node;
                             stateChangedAfterUse |= ResolveBranches(label.Label, label);
                         }
                         break;
                     case BoundKind.SwitchSection:
+
                         {
                             var sec = (BoundSwitchSection)node;
                             foreach (var label in sec.SwitchLabels)
@@ -877,6 +924,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             _labelsSeen.Free();
             _labelsSeen = oldPending.LabelsSeen;
         }
+
 #nullable disable
 
         #region visitors
@@ -916,10 +964,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(!IsConditionalState);
 
             // Local functions below need to handle all patterns that come through here
-            Debug.Assert(node.Pattern is
-                BoundTypePattern or BoundRecursivePattern or BoundITuplePattern or BoundRelationalPattern or
-                BoundDeclarationPattern or BoundConstantPattern or BoundNegatedPattern or BoundBinaryPattern or
-                BoundDeclarationPattern or BoundDiscardPattern or BoundListPattern or BoundSlicePattern);
+            Debug.Assert(
+                node.Pattern
+                    is BoundTypePattern
+                        or BoundRecursivePattern
+                        or BoundITuplePattern
+                        or BoundRelationalPattern
+                        or BoundDeclarationPattern
+                        or BoundConstantPattern
+                        or BoundNegatedPattern
+                        or BoundBinaryPattern
+                        or BoundDeclarationPattern
+                        or BoundDiscardPattern
+                        or BoundListPattern
+                        or BoundSlicePattern
+            );
 
             bool negated = node.Pattern.IsNegated(out var pattern);
             Debug.Assert(negated == node.IsNegated);
@@ -927,9 +986,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (VisitPossibleConditionalAccess(node.Expression, out var stateWhenNotNull))
             {
                 Debug.Assert(!IsConditionalState);
-                SetConditionalState(patternMatchesNull(pattern)
-                    ? (State, stateWhenNotNull)
-                    : (stateWhenNotNull, State));
+                SetConditionalState(
+                    patternMatchesNull(pattern)
+                        ? (State, stateWhenNotNull)
+                        : (stateWhenNotNull, State)
+                );
             }
             else if (IsConditionalState)
             {
@@ -993,7 +1054,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // `a?.b(out x) is null or C`
                             // pattern matches null if either subpattern matches null
                             var leftNullTest = patternMatchesNull(binary.Left);
-                            return patternMatchesNull(binary.Left) || patternMatchesNull(binary.Right);
+                            return patternMatchesNull(binary.Left)
+                                || patternMatchesNull(binary.Right);
                         }
 
                         // `a?.b out x is not null and var c`
@@ -1014,7 +1076,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 switch (pattern)
                 {
-                    case BoundConstantPattern { ConstantValue: { IsBoolean: true, BooleanValue: var boolValue } }:
+                    case BoundConstantPattern
+                    {
+                        ConstantValue: { IsBoolean: true, BooleanValue: var boolValue }
+                    }:
                         return boolValue;
                     case BoundNegatedPattern negated:
                         return !isBoolTest(negated.Negated);
@@ -1025,9 +1090,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // `(a != null && a.b(out x)) is true or false` matches any boolean
                             // both subpatterns must have the same bool test for the test to propagate out
                             var leftNullTest = isBoolTest(binary.Left);
-                            return leftNullTest is null ? null :
-                                leftNullTest != isBoolTest(binary.Right) ? null :
-                                leftNullTest;
+                            return leftNullTest is null
+                                ? null
+                                : leftNullTest != isBoolTest(binary.Right)
+                                    ? null
+                                    : leftNullTest;
                         }
 
                         // `(a != null && a.b(out x)) is true and true` matches `true`
@@ -1084,7 +1151,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitDynamicObjectCreationExpression(BoundDynamicObjectCreationExpression node)
+        public override BoundNode VisitDynamicObjectCreationExpression(
+            BoundDynamicObjectCreationExpression node
+        )
         {
             VisitArguments(node.Arguments, node.ArgumentRefKindsOpt, null);
             VisitRvalue(node.InitializerExpressionOpt);
@@ -1112,21 +1181,35 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
 #nullable enable
-        protected BoundNode? VisitInterpolatedStringBase(BoundInterpolatedStringBase node, InterpolatedStringHandlerData? data)
+        protected BoundNode? VisitInterpolatedStringBase(
+            BoundInterpolatedStringBase node,
+            InterpolatedStringHandlerData? data
+        )
         {
             // If there can be any branching, then we need to treat the expressions
             // as optionally evaluated. Otherwise, we treat them as always evaluated
-            (BoundExpression? construction, bool useBoolReturns, bool firstPartIsConditional) = data switch
-            {
-                null => (null, false, false),
-                { } d => (d.Construction, d.UsesBoolReturns, d.HasTrailingHandlerValidityParameter)
-            };
+            (BoundExpression? construction, bool useBoolReturns, bool firstPartIsConditional) =
+                data switch
+                {
+                    null => (null, false, false),
+                    { } d
+                        => (
+                            d.Construction,
+                            d.UsesBoolReturns,
+                            d.HasTrailingHandlerValidityParameter
+                        )
+                };
 
             VisitInterpolatedStringHandlerConstructor(construction);
             bool hasConditionalEvaluation = useBoolReturns || firstPartIsConditional;
             TLocalState? shortCircuitState = hasConditionalEvaluation ? State.Clone() : default;
 
-            _ = VisitInterpolatedStringHandlerParts(node, useBoolReturns, firstPartIsConditional, ref shortCircuitState);
+            _ = VisitInterpolatedStringHandlerParts(
+                node,
+                useBoolReturns,
+                firstPartIsConditional,
+                ref shortCircuitState
+            );
 
             if (hasConditionalEvaluation)
             {
@@ -1137,10 +1220,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        protected virtual void VisitInterpolatedStringHandlerConstructor(BoundExpression? constructor)
+        protected virtual void VisitInterpolatedStringHandlerConstructor(
+            BoundExpression? constructor
+        )
         {
             VisitRvalue(constructor);
         }
+
 #nullable disable
 
         public override BoundNode VisitInterpolatedString(BoundInterpolatedString node)
@@ -1148,7 +1234,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return VisitInterpolatedStringBase(node, node.InterpolationData);
         }
 
-        public override BoundNode VisitUnconvertedInterpolatedString(BoundUnconvertedInterpolatedString node)
+        public override BoundNode VisitUnconvertedInterpolatedString(
+            BoundUnconvertedInterpolatedString node
+        )
         {
             // If the node is unconverted, we'll just treat it as if the contents are always evaluated
             return VisitInterpolatedStringBase(node, data: null);
@@ -1170,12 +1258,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitInterpolatedStringHandlerPlaceholder(BoundInterpolatedStringHandlerPlaceholder node)
+        public override BoundNode VisitInterpolatedStringHandlerPlaceholder(
+            BoundInterpolatedStringHandlerPlaceholder node
+        )
         {
             return null;
         }
 
-        public override BoundNode VisitInterpolatedStringArgumentPlaceholder(BoundInterpolatedStringArgumentPlaceholder node)
+        public override BoundNode VisitInterpolatedStringArgumentPlaceholder(
+            BoundInterpolatedStringArgumentPlaceholder node
+        )
         {
             return null;
         }
@@ -1215,7 +1307,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitGlobalStatementInitializer(BoundGlobalStatementInitializer node)
+        public override BoundNode VisitGlobalStatementInitializer(
+            BoundGlobalStatementInitializer node
+        )
         {
             VisitStatement(node.Statement);
             return null;
@@ -1234,7 +1328,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (node.InitializerOpt != null)
             {
                 // analyze the expression
-                VisitRvalue(node.InitializerOpt, isKnownToBeAnLvalue: node.LocalSymbol.RefKind != RefKind.None);
+                VisitRvalue(
+                    node.InitializerOpt,
+                    isKnownToBeAnLvalue: node.LocalSymbol.RefKind != RefKind.None
+                );
 
                 // byref assignment is also a potential write
                 if (node.LocalSymbol.RefKind != RefKind.None)
@@ -1305,7 +1402,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        protected void VisitLocalFunctionUse(LocalFunctionSymbol symbol, SyntaxNode syntax, bool isCall)
+        protected void VisitLocalFunctionUse(
+            LocalFunctionSymbol symbol,
+            SyntaxNode syntax,
+            bool isCall
+        )
         {
             var localFuncState = GetOrCreateLocalFuncUsages(symbol);
             VisitLocalFunctionUse(symbol, localFuncState, syntax, isCall);
@@ -1315,7 +1416,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LocalFunctionSymbol symbol,
             TLocalFunctionState localFunctionState,
             SyntaxNode syntax,
-            bool isCall)
+            bool isCall
+        )
         {
             if (isCall)
             {
@@ -1344,9 +1446,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 WriteArgument(receiverOpt, RefKind.Ref, method: null);
             }
-            else if (method.TryGetThisParameter(out var thisParameter)
+            else if (
+                method.TryGetThisParameter(out var thisParameter)
                 && thisParameter is object
-                && !TypeIsImmutable(thisParameter.Type))
+                && !TypeIsImmutable(thisParameter.Type)
+            )
             {
                 var thisRefKind = thisParameter.RefKind;
                 if (thisRefKind.IsWritableReference())
@@ -1422,14 +1526,21 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Do not call for a local function.
         /// </summary>
-        protected virtual void VisitArguments(ImmutableArray<BoundExpression> arguments, ImmutableArray<RefKind> refKindsOpt, MethodSymbol method)
+        protected virtual void VisitArguments(
+            ImmutableArray<BoundExpression> arguments,
+            ImmutableArray<RefKind> refKindsOpt,
+            MethodSymbol method
+        )
         {
             Debug.Assert(method?.OriginalDefinition.MethodKind != MethodKind.LocalFunction);
             VisitArgumentsBeforeCall(arguments, refKindsOpt);
             VisitArgumentsAfterCall(arguments, refKindsOpt, method);
         }
 
-        private void VisitArgumentsBeforeCall(ImmutableArray<BoundExpression> arguments, ImmutableArray<RefKind> refKindsOpt)
+        private void VisitArgumentsBeforeCall(
+            ImmutableArray<BoundExpression> arguments,
+            ImmutableArray<RefKind> refKindsOpt
+        )
         {
             // first value and ref parameters are read...
             for (int i = 0; i < arguments.Length; i++)
@@ -1449,7 +1560,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Writes ref and out parameters
         /// </summary>
-        private void VisitArgumentsAfterCall(ImmutableArray<BoundExpression> arguments, ImmutableArray<RefKind> refKindsOpt, MethodSymbol method)
+        private void VisitArgumentsAfterCall(
+            ImmutableArray<BoundExpression> arguments,
+            ImmutableArray<RefKind> refKindsOpt,
+            MethodSymbol method
+        )
         {
             for (int i = 0; i < arguments.Length; i++)
             {
@@ -1464,12 +1579,16 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected static RefKind GetRefKind(ImmutableArray<RefKind> refKindsOpt, int index)
         {
-            return refKindsOpt.IsDefault || refKindsOpt.Length <= index ? RefKind.None : refKindsOpt[index];
+            return refKindsOpt.IsDefault || refKindsOpt.Length <= index
+                ? RefKind.None
+                : refKindsOpt[index];
         }
 
-        protected virtual void WriteArgument(BoundExpression arg, RefKind refKind, MethodSymbol method)
-        {
-        }
+        protected virtual void WriteArgument(
+            BoundExpression arg,
+            RefKind refKind,
+            MethodSymbol method
+        ) { }
 
         public override BoundNode VisitBadExpression(BoundBadExpression node)
         {
@@ -1508,7 +1627,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitDelegateCreationExpression(BoundDelegateCreationExpression node)
+        public override BoundNode VisitDelegateCreationExpression(
+            BoundDelegateCreationExpression node
+        )
         {
             var methodGroup = node.Argument as BoundMethodGroup;
             if (methodGroup != null)
@@ -1517,7 +1638,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     VisitLocalFunctionUse(localFunc, node.Syntax, isCall: false);
                 }
-                else if (node.MethodOpt is { } method && methodGroup.ReceiverOpt is { } receiver && !ignoreReceiver(receiver, method))
+                else if (
+                    node.MethodOpt is { } method
+                    && methodGroup.ReceiverOpt is { } receiver
+                    && !ignoreReceiver(receiver, method)
+                )
                 {
                     EnterRegionIfNeeded(methodGroup);
                     VisitRvalue(receiver);
@@ -1599,7 +1724,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitInstrumentationPayloadRoot(BoundInstrumentationPayloadRoot node)
+        public override BoundNode VisitInstrumentationPayloadRoot(
+            BoundInstrumentationPayloadRoot node
+        )
         {
             return null;
         }
@@ -1613,7 +1740,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (node.ConversionKind == ConversionKind.MethodGroup)
             {
-                if (node.IsExtensionMethod || ((object)node.SymbolOpt != null && node.SymbolOpt.RequiresInstanceReceiver))
+                if (
+                    node.IsExtensionMethod
+                    || ((object)node.SymbolOpt != null && node.SymbolOpt.RequiresInstanceReceiver)
+                )
                 {
                     BoundExpression receiver = ((BoundMethodGroup)node.Operand).ReceiverOpt;
                     // A method group's "implicit this" is only used for instance methods.
@@ -1693,7 +1823,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // we will need pending branches as they were before finally later
                 var tryAndCatchPending = SavePending();
                 var stateMovedUpInFinally = ReachableBottomState();
-                VisitFinallyBlockWithAnyTransferFunction(node.FinallyBlockOpt, ref stateMovedUpInFinally);
+                VisitFinallyBlockWithAnyTransferFunction(
+                    node.FinallyBlockOpt,
+                    ref stateMovedUpInFinally
+                );
                 foreach (var pend in tryAndCatchPending.PendingBranches.AsEnumerable())
                 {
                     if (pend.Branch == null)
@@ -1707,8 +1840,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         if (pend.IsConditionalState)
                         {
-                            updatePendingBranchState(ref pend.StateWhenTrue, ref stateMovedUpInFinally);
-                            updatePendingBranchState(ref pend.StateWhenFalse, ref stateMovedUpInFinally);
+                            updatePendingBranchState(
+                                ref pend.StateWhenTrue,
+                                ref stateMovedUpInFinally
+                            );
+                            updatePendingBranchState(
+                                ref pend.StateWhenFalse,
+                                ref stateMovedUpInFinally
+                            );
                         }
                     }
                 }
@@ -1725,7 +1864,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             RestorePending(oldPending);
             return null;
 
-            void updatePendingBranchState(ref TLocalState stateToUpdate, ref TLocalState stateMovedUpInFinally)
+            void updatePendingBranchState(
+                ref TLocalState stateToUpdate,
+                ref TLocalState stateMovedUpInFinally
+            )
             {
                 Meet(ref stateToUpdate, ref this.State);
                 if (_nonMonotonicTransfer)
@@ -1745,7 +1887,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             Join(ref self, ref other);
         }
 
-        private void VisitTryBlockWithAnyTransferFunction(BoundStatement tryBlock, BoundTryStatement node, ref TLocalState tryState)
+        private void VisitTryBlockWithAnyTransferFunction(
+            BoundStatement tryBlock,
+            BoundTryStatement node,
+            ref TLocalState tryState
+        )
         {
             if (_nonMonotonicTransfer)
             {
@@ -1769,12 +1915,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        protected virtual void VisitTryBlock(BoundStatement tryBlock, BoundTryStatement node, ref TLocalState tryState)
+        protected virtual void VisitTryBlock(
+            BoundStatement tryBlock,
+            BoundTryStatement node,
+            ref TLocalState tryState
+        )
         {
             VisitStatement(tryBlock);
         }
 
-        private void VisitCatchBlockWithAnyTransferFunction(BoundCatchBlock catchBlock, ref TLocalState finallyState)
+        private void VisitCatchBlockWithAnyTransferFunction(
+            BoundCatchBlock catchBlock,
+            ref TLocalState finallyState
+        )
         {
             if (_nonMonotonicTransfer)
             {
@@ -1798,7 +1951,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        protected virtual void VisitCatchBlock(BoundCatchBlock catchBlock, ref TLocalState finallyState)
+        protected virtual void VisitCatchBlock(
+            BoundCatchBlock catchBlock,
+            ref TLocalState finallyState
+        )
         {
             if (catchBlock.ExceptionSourceOpt != null)
             {
@@ -1819,7 +1975,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             VisitStatement(catchBlock.Body);
         }
 
-        private void VisitFinallyBlockWithAnyTransferFunction(BoundStatement finallyBlock, ref TLocalState stateMovedUp)
+        private void VisitFinallyBlockWithAnyTransferFunction(
+            BoundStatement finallyBlock,
+            ref TLocalState stateMovedUp
+        )
         {
             if (_nonMonotonicTransfer)
             {
@@ -1843,7 +2002,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        protected virtual void VisitFinallyBlock(BoundStatement finallyBlock, ref TLocalState stateMovedUp)
+        protected virtual void VisitFinallyBlock(
+            BoundStatement finallyBlock,
+            ref TLocalState stateMovedUp
+        )
         {
             VisitStatement(finallyBlock); // this should generate no pending branches
         }
@@ -1879,12 +2041,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitPreviousSubmissionReference(BoundPreviousSubmissionReference node)
+        public override BoundNode VisitPreviousSubmissionReference(
+            BoundPreviousSubmissionReference node
+        )
         {
             return null;
         }
 
-        public override BoundNode VisitHostObjectMemberReference(BoundHostObjectMemberReference node)
+        public override BoundNode VisitHostObjectMemberReference(
+            BoundHostObjectMemberReference node
+        )
         {
             return null;
         }
@@ -1894,13 +2060,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        protected virtual void VisitLvalueParameter(BoundParameter node)
-        {
-        }
+        protected virtual void VisitLvalueParameter(BoundParameter node) { }
 
         public override BoundNode VisitObjectCreationExpression(BoundObjectCreationExpression node)
         {
-
             VisitArguments(node.Arguments, node.ArgumentRefKindsOpt, node.Constructor);
             VisitRvalue(node.InitializerExpressionOpt);
             return null;
@@ -1912,14 +2075,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitNoPiaObjectCreationExpression(BoundNoPiaObjectCreationExpression node)
+        public override BoundNode VisitNoPiaObjectCreationExpression(
+            BoundNoPiaObjectCreationExpression node
+        )
         {
             VisitRvalue(node.InitializerExpressionOpt);
             return null;
         }
 
         // represents anything that occurs at the invocation of the property setter
-        protected virtual void PropertySetter(BoundExpression node, BoundExpression receiver, MethodSymbol setter, BoundExpression value = null)
+        protected virtual void PropertySetter(
+            BoundExpression node,
+            BoundExpression receiver,
+            MethodSymbol setter,
+            BoundExpression value = null
+        )
         {
             VisitReceiverAfterCall(receiver, setter);
         }
@@ -1962,29 +2132,36 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Assume that BadExpression is a ref location to avoid
                 // cascading diagnostics
-                var refKind = node.Left.Kind == BoundKind.BadExpression
-                    ? RefKind.Ref
-                    : node.Left.GetRefKind();
+                var refKind =
+                    node.Left.Kind == BoundKind.BadExpression
+                        ? RefKind.Ref
+                        : node.Left.GetRefKind();
                 WriteArgument(node.Right, refKind, method: null);
             }
 
             return null;
         }
 
-        public override BoundNode VisitDeconstructionAssignmentOperator(BoundDeconstructionAssignmentOperator node)
+        public override BoundNode VisitDeconstructionAssignmentOperator(
+            BoundDeconstructionAssignmentOperator node
+        )
         {
             VisitLvalue(node.Left);
             VisitRvalue(node.Right);
             return null;
         }
 
-        public sealed override BoundNode VisitOutDeconstructVarPendingInference(OutDeconstructVarPendingInference node)
+        public sealed override BoundNode VisitOutDeconstructVarPendingInference(
+            OutDeconstructVarPendingInference node
+        )
         {
             // OutDeconstructVarPendingInference nodes are only used within initial binding, but don't survive past that stage
             throw ExceptionUtilities.Unreachable;
         }
 
-        public override BoundNode VisitCompoundAssignmentOperator(BoundCompoundAssignmentOperator node)
+        public override BoundNode VisitCompoundAssignmentOperator(
+            BoundCompoundAssignmentOperator node
+        )
         {
             VisitCompoundAssignmentTarget(node);
             VisitRvalue(node.Right);
@@ -2002,7 +2179,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (property.RefKind == RefKind.None)
                 {
                     var readMethod = GetReadMethod(property);
-                    Debug.Assert(node.HasAnyErrors || (object)readMethod != (object)GetWriteMethod(property));
+                    Debug.Assert(
+                        node.HasAnyErrors || (object)readMethod != (object)GetWriteMethod(property)
+                    );
                     VisitReceiverBeforeCall(left.ReceiverOpt, readMethod);
                     VisitReceiverAfterCall(left.ReceiverOpt, readMethod);
                     return;
@@ -2026,7 +2205,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return;
                 }
             }
-
         }
 
         public override BoundNode VisitFieldAccess(BoundFieldAccess node)
@@ -2038,14 +2216,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void VisitFieldAccessInternal(BoundExpression receiverOpt, FieldSymbol fieldSymbol)
         {
-            bool asLvalue = (object)fieldSymbol != null &&
-                (fieldSymbol.IsFixedSizeBuffer ||
-                !fieldSymbol.IsStatic &&
-                fieldSymbol.ContainingType.TypeKind == TypeKind.Struct &&
-                receiverOpt != null &&
-                receiverOpt.Kind != BoundKind.TypeExpression &&
-                (object)receiverOpt.Type != null &&
-                !receiverOpt.Type.IsPrimitiveRecursiveStruct());
+            bool asLvalue =
+                (object)fieldSymbol != null
+                && (
+                    fieldSymbol.IsFixedSizeBuffer
+                    || !fieldSymbol.IsStatic
+                        && fieldSymbol.ContainingType.TypeKind == TypeKind.Struct
+                        && receiverOpt != null
+                        && receiverOpt.Kind != BoundKind.TypeExpression
+                        && (object)receiverOpt.Type != null
+                        && !receiverOpt.Type.IsPrimitiveRecursiveStruct()
+                );
             if (asLvalue)
             {
                 VisitLvalue(receiverOpt);
@@ -2113,7 +2294,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        private BoundNode VisitMultipleLocalDeclarationsBase(BoundMultipleLocalDeclarationsBase node)
+        private BoundNode VisitMultipleLocalDeclarationsBase(
+            BoundMultipleLocalDeclarationsBase node
+        )
         {
             foreach (var v in node.LocalDeclarations)
             {
@@ -2123,7 +2306,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitMultipleLocalDeclarations(BoundMultipleLocalDeclarations node)
+        public override BoundNode VisitMultipleLocalDeclarations(
+            BoundMultipleLocalDeclarations node
+        )
         {
             return VisitMultipleLocalDeclarationsBase(node);
         }
@@ -2189,7 +2374,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitUserDefinedConditionalLogicalOperator(BoundUserDefinedConditionalLogicalOperator node)
+        public override BoundNode VisitUserDefinedConditionalLogicalOperator(
+            BoundUserDefinedConditionalLogicalOperator node
+        )
         {
             VisitBinaryLogicalOperatorChildren(node);
             return null;
@@ -2269,7 +2456,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var leftFalse = this.StateWhenFalse;
                 SetState(isAnd ? leftTrue : leftFalse);
 
-                AfterLeftChildOfBinaryLogicalOperatorHasBeenVisited(binary, right, isAnd, isBool, ref leftTrue, ref leftFalse);
+                AfterLeftChildOfBinaryLogicalOperatorHasBeenVisited(
+                    binary,
+                    right,
+                    isAnd,
+                    isBool,
+                    ref leftTrue,
+                    ref leftFalse
+                );
 
                 if (stack.Count == 0)
                 {
@@ -2283,13 +2477,34 @@ namespace Microsoft.CodeAnalysis.CSharp
             stack.Free();
         }
 
-        protected virtual void AfterLeftChildOfBinaryLogicalOperatorHasBeenVisited(BoundExpression binary, BoundExpression right, bool isAnd, bool isBool, ref TLocalState leftTrue, ref TLocalState leftFalse)
+        protected virtual void AfterLeftChildOfBinaryLogicalOperatorHasBeenVisited(
+            BoundExpression binary,
+            BoundExpression right,
+            bool isAnd,
+            bool isBool,
+            ref TLocalState leftTrue,
+            ref TLocalState leftFalse
+        )
         {
             Visit(right); // First part of VisitCondition
-            AfterRightChildOfBinaryLogicalOperatorHasBeenVisited(binary, right, isAnd, isBool, ref leftTrue, ref leftFalse);
+            AfterRightChildOfBinaryLogicalOperatorHasBeenVisited(
+                binary,
+                right,
+                isAnd,
+                isBool,
+                ref leftTrue,
+                ref leftFalse
+            );
         }
 
-        protected void AfterRightChildOfBinaryLogicalOperatorHasBeenVisited(BoundExpression binary, BoundExpression right, bool isAnd, bool isBool, ref TLocalState leftTrue, ref TLocalState leftFalse)
+        protected void AfterRightChildOfBinaryLogicalOperatorHasBeenVisited(
+            BoundExpression binary,
+            BoundExpression right,
+            bool isAnd,
+            bool isBool,
+            ref TLocalState leftTrue,
+            ref TLocalState leftFalse
+        )
         {
             AdjustConditionalState(right); // Second part of VisitCondition
 
@@ -2331,8 +2546,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 stack.Push(binary);
                 binary = binary.Left as BoundBinaryOperator;
-            }
-            while (binary != null && !binary.OperatorKind.IsLogical() && binary.InterpolatedStringHandlerData is null);
+            } while (
+                binary != null
+                && !binary.OperatorKind.IsLogical()
+                && binary.InterpolatedStringHandlerData is null
+            );
 
             VisitBinaryOperatorChildren(stack);
             stack.Free();
@@ -2347,9 +2565,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             // For simplicity, we just special case it here.
             // For example, `a?.b(out x) == true` has a conditional access on the left of the operator,
             // but `expr == a?.b(out x) == true` has a conditional access on the right of the operator
-            if (VisitPossibleConditionalAccess(binary.Left, out var stateWhenNotNull)
+            if (
+                VisitPossibleConditionalAccess(binary.Left, out var stateWhenNotNull)
                 && canLearnFromOperator(binary)
-                && isKnownNullOrNotNull(binary.Right))
+                && isKnownNullOrNotNull(binary.Right)
+            )
             {
                 if (_nonMonotonicTransfer)
                 {
@@ -2378,9 +2598,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 var isNullConstant = binary.Right.ConstantValue?.IsNull == true;
-                SetConditionalState(isNullConstant == isEquals(binary)
-                    ? (State, stateWhenNotNull)
-                    : (stateWhenNotNull, State));
+                SetConditionalState(
+                    isNullConstant == isEquals(binary)
+                        ? (State, stateWhenNotNull)
+                        : (stateWhenNotNull, State)
+                );
 
                 if (stack.Count == 0)
                 {
@@ -2392,8 +2614,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             while (true)
             {
-                if (!canLearnFromOperator(binary)
-                    || !learnFromOperator(binary))
+                if (!canLearnFromOperator(binary) || !learnFromOperator(binary))
                 {
                     Unsplit();
                     VisitRvalue(binary.Right);
@@ -2417,35 +2638,55 @@ namespace Microsoft.CodeAnalysis.CSharp
             static bool isKnownNullOrNotNull(BoundExpression expr)
             {
                 return expr.ConstantValue is object
-                    || (expr is BoundConversion { ConversionKind: ConversionKind.ExplicitNullable or ConversionKind.ImplicitNullable } conv
-                        && conv.Operand.Type!.IsNonNullableValueType());
+                    || (
+                        expr
+                            is BoundConversion
+                            {
+                                ConversionKind: ConversionKind.ExplicitNullable
+                                    or ConversionKind.ImplicitNullable
+                            } conv
+                        && conv.Operand.Type!.IsNonNullableValueType()
+                    );
             }
 
-            static bool isEquals(BoundBinaryOperator binary)
-                => binary.OperatorKind.Operator() == BinaryOperatorKind.Equal;
+            static bool isEquals(BoundBinaryOperator binary) =>
+                binary.OperatorKind.Operator() == BinaryOperatorKind.Equal;
 
             // Returns true if `binary.Right` was visited by the call.
             bool learnFromOperator(BoundBinaryOperator binary)
             {
                 // `true == a?.b(out x)`
-                if (isKnownNullOrNotNull(binary.Left) && TryVisitConditionalAccess(binary.Right, out var stateWhenNotNull))
+                if (
+                    isKnownNullOrNotNull(binary.Left)
+                    && TryVisitConditionalAccess(binary.Right, out var stateWhenNotNull)
+                )
                 {
                     var isNullConstant = binary.Left.ConstantValue?.IsNull == true;
-                    SetConditionalState(isNullConstant == isEquals(binary)
-                        ? (State, stateWhenNotNull)
-                        : (stateWhenNotNull, State));
+                    SetConditionalState(
+                        isNullConstant == isEquals(binary)
+                            ? (State, stateWhenNotNull)
+                            : (stateWhenNotNull, State)
+                    );
 
                     return true;
                 }
                 // `a && b(out x) == true`
-                else if (IsConditionalState && binary.Right.ConstantValue is { IsBoolean: true } rightConstant)
+                else if (
+                    IsConditionalState
+                    && binary.Right.ConstantValue is { IsBoolean: true } rightConstant
+                )
                 {
-                    var (stateWhenTrue, stateWhenFalse) = (StateWhenTrue.Clone(), StateWhenFalse.Clone());
+                    var (stateWhenTrue, stateWhenFalse) = (
+                        StateWhenTrue.Clone(),
+                        StateWhenFalse.Clone()
+                    );
                     Unsplit();
                     Visit(binary.Right);
-                    SetConditionalState(isEquals(binary) == rightConstant.BooleanValue
-                        ? (stateWhenTrue, stateWhenFalse)
-                        : (stateWhenFalse, stateWhenTrue));
+                    SetConditionalState(
+                        isEquals(binary) == rightConstant.BooleanValue
+                            ? (stateWhenTrue, stateWhenFalse)
+                            : (stateWhenFalse, stateWhenTrue)
+                    );
 
                     return true;
                 }
@@ -2474,12 +2715,20 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             node.VisitBinaryOperatorInterpolatedString(
                 (parts, @this: this),
-                stringCallback: static (BoundInterpolatedString interpolatedString, (ArrayBuilder<BoundInterpolatedString> parts, AbstractFlowPass<TLocalState, TLocalFunctionState> @this) arg) =>
+                stringCallback: static (
+                    BoundInterpolatedString interpolatedString,
+                    (ArrayBuilder<BoundInterpolatedString> parts, AbstractFlowPass<
+                        TLocalState,
+                        TLocalFunctionState
+                    > @this) arg
+                ) =>
                 {
                     arg.parts.Add(interpolatedString);
                     return true;
                 },
-                binaryOperatorCallback: (op, arg) => arg.@this.VisitInterpolatedStringBinaryOperatorNode(op));
+                binaryOperatorCallback: (op, arg) =>
+                    arg.@this.VisitInterpolatedStringBinaryOperatorNode(op)
+            );
 
             Debug.Assert(parts.Count >= 2);
 
@@ -2487,12 +2736,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             bool visitedFirst = false;
             bool hasTrailingHandlerValidityParameter = data.HasTrailingHandlerValidityParameter;
-            bool hasConditionalEvaluation = data.UsesBoolReturns || hasTrailingHandlerValidityParameter;
+            bool hasConditionalEvaluation =
+                data.UsesBoolReturns || hasTrailingHandlerValidityParameter;
             TLocalState? shortCircuitState = hasConditionalEvaluation ? State.Clone() : default;
 
             foreach (var part in parts)
             {
-                visitedFirst |= VisitInterpolatedStringHandlerParts(part, data.UsesBoolReturns, firstPartIsConditional: visitedFirst || hasTrailingHandlerValidityParameter, ref shortCircuitState);
+                visitedFirst |= VisitInterpolatedStringHandlerParts(
+                    part,
+                    data.UsesBoolReturns,
+                    firstPartIsConditional: visitedFirst || hasTrailingHandlerValidityParameter,
+                    ref shortCircuitState
+                );
             }
 
             if (hasConditionalEvaluation)
@@ -2503,11 +2758,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             parts.Free();
         }
 
-        protected virtual void VisitInterpolatedStringBinaryOperatorNode(BoundBinaryOperator node) { }
+        protected virtual void VisitInterpolatedStringBinaryOperatorNode(
+            BoundBinaryOperator node
+        ) { }
 
-        protected virtual bool VisitInterpolatedStringHandlerParts(BoundInterpolatedStringBase node, bool usesBoolReturns, bool firstPartIsConditional, ref TLocalState? shortCircuitState)
+        protected virtual bool VisitInterpolatedStringHandlerParts(
+            BoundInterpolatedStringBase node,
+            bool usesBoolReturns,
+            bool firstPartIsConditional,
+            ref TLocalState? shortCircuitState
+        )
         {
-            Debug.Assert(shortCircuitState != null || (!usesBoolReturns && !firstPartIsConditional));
+            Debug.Assert(
+                shortCircuitState != null || (!usesBoolReturns && !firstPartIsConditional)
+            );
             if (node.Parts.IsEmpty)
             {
                 return false;
@@ -2538,6 +2802,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return true;
         }
+
 #nullable disable
 
         public override BoundNode VisitUnaryOperator(BoundUnaryOperator node)
@@ -2626,7 +2891,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 VisitStatement(node.Initializer);
             }
             LoopHead(node);
-            TLocalState bodyState, breakState;
+            TLocalState bodyState,
+                breakState;
             if (node.Condition != null)
             {
                 VisitCondition(node.Condition);
@@ -2664,7 +2930,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             LoopTail(node);
             ResolveBreaks(breakState, node.BreakLabel);
 
-            if (AwaitUsingAndForeachAddsPendingBranch && ((CommonForEachStatementSyntax)node.Syntax).AwaitKeyword != default)
+            if (
+                AwaitUsingAndForeachAddsPendingBranch
+                && ((CommonForEachStatementSyntax)node.Syntax).AwaitKeyword != default
+            )
             {
                 PendingBranches.Add(new PendingBranch(node, this.State, null));
             }
@@ -2677,9 +2946,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             VisitRvalue(node.Expression);
         }
 
-        public virtual void VisitForEachIterationVariables(BoundForEachStatement node)
-        {
-        }
+        public virtual void VisitForEachIterationVariables(BoundForEachStatement node) { }
 
         public override BoundNode VisitAsOperator(BoundAsOperator node)
         {
@@ -2758,12 +3025,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Visits a node only if it is a conditional access.
         /// Returns 'true' if and only if the node was visited.
         /// </summary>
-        private bool TryVisitConditionalAccess(BoundExpression node, [NotNullWhen(true)] out TLocalState? stateWhenNotNull)
+        private bool TryVisitConditionalAccess(
+            BoundExpression node,
+            [NotNullWhen(true)] out TLocalState? stateWhenNotNull
+        )
         {
             var access = node switch
             {
                 BoundConditionalAccess ca => ca,
-                BoundConversion { Conversion: Conversion conversion, Operand: BoundConditionalAccess ca } when CanPropagateStateWhenNotNull(conversion) => ca,
+                BoundConversion
+                {
+                    Conversion: Conversion conversion,
+                    Operand: BoundConditionalAccess ca
+                } when CanPropagateStateWhenNotNull(conversion)
+                    => ca,
                 _ => null
             };
 
@@ -2809,7 +3084,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// If the expression has "state when not null" after visiting,
         /// the method returns 'true' and writes the state to <paramref name="stateWhenNotNull" />.
         /// </summary>
-        private bool VisitPossibleConditionalAccess(BoundExpression node, [NotNullWhen(true)] out TLocalState? stateWhenNotNull)
+        private bool VisitPossibleConditionalAccess(
+            BoundExpression node,
+            [NotNullWhen(true)] out TLocalState? stateWhenNotNull
+        )
         {
             if (TryVisitConditionalAccess(node, out stateWhenNotNull))
             {
@@ -2822,7 +3100,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private void VisitConditionalAccess(BoundConditionalAccess node, out TLocalState stateWhenNotNull)
+        private void VisitConditionalAccess(
+            BoundConditionalAccess node,
+            out TLocalState stateWhenNotNull
+        )
         {
             // The receiver may also be a conditional access.
             // `(a?.b(x = 1))?.c(y = 1)`
@@ -2842,7 +3123,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // We can "know" that `.M0(x = 1)` was evaluated unconditionally but not `M0(y = 1)`.
                 // Therefore we do a VisitPossibleConditionalAccess here which unconditionally includes the "after receiver" state in State
                 // and includes the "after subsequent conditional accesses" in stateWhenNotNull
-                if (VisitPossibleConditionalAccess(node.AccessExpression, out var firstAccessStateWhenNotNull))
+                if (
+                    VisitPossibleConditionalAccess(
+                        node.AccessExpression,
+                        out var firstAccessStateWhenNotNull
+                    )
+                )
                 {
                     stateWhenNotNull = firstAccessStateWhenNotNull;
                 }
@@ -2871,7 +3157,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundExpression expr = node.AccessExpression;
                 while (expr is BoundConditionalAccess innerCondAccess)
                 {
-                    Debug.Assert(innerCondAccess.Receiver is not (BoundConditionalAccess or BoundConversion));
+                    Debug.Assert(
+                        innerCondAccess.Receiver is not (BoundConditionalAccess or BoundConversion)
+                    );
                     // we assume that non-conditional accesses can never contain conditional accesses from the same "chain".
                     // that is, we never have to dig through non-conditional accesses to find and handle conditional accesses.
                     VisitRvalue(innerCondAccess.Receiver);
@@ -2923,7 +3211,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitComplexConditionalReceiver(BoundComplexConditionalReceiver node)
+        public override BoundNode VisitComplexConditionalReceiver(
+            BoundComplexConditionalReceiver node
+        )
         {
             var savedState = this.State.Clone();
 
@@ -2993,7 +3283,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitTypeOrInstanceInitializers(BoundTypeOrInstanceInitializers node)
+        public override BoundNode VisitTypeOrInstanceInitializers(
+            BoundTypeOrInstanceInitializers node
+        )
         {
             return VisitStatementListWorker(node);
         }
@@ -3020,14 +3312,28 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitUnconvertedConditionalOperator(BoundUnconvertedConditionalOperator node)
+        public override BoundNode VisitUnconvertedConditionalOperator(
+            BoundUnconvertedConditionalOperator node
+        )
         {
-            return VisitConditionalOperatorCore(node, isByRef: false, node.Condition, node.Consequence, node.Alternative);
+            return VisitConditionalOperatorCore(
+                node,
+                isByRef: false,
+                node.Condition,
+                node.Consequence,
+                node.Alternative
+            );
         }
 
         public override BoundNode VisitConditionalOperator(BoundConditionalOperator node)
         {
-            return VisitConditionalOperatorCore(node, node.IsRef, node.Condition, node.Consequence, node.Alternative);
+            return VisitConditionalOperatorCore(
+                node,
+                node.IsRef,
+                node.Condition,
+                node.Consequence,
+                node.Alternative
+            );
         }
 
 #nullable enable
@@ -3037,7 +3343,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isByRef,
             BoundExpression condition,
             BoundExpression consequence,
-            BoundExpression alternative)
+            BoundExpression alternative
+        )
         {
             VisitCondition(condition);
             var consequenceState = this.StateWhenTrue;
@@ -3060,7 +3367,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 VisitConditionalOperand(consequenceState, consequence, isByRef);
                 var conditionalAfterConsequence = IsConditionalState;
-                var (afterConsequenceWhenTrue, afterConsequenceWhenFalse) = conditionalAfterConsequence ? (StateWhenTrue, StateWhenFalse) : (State, State);
+                var (afterConsequenceWhenTrue, afterConsequenceWhenFalse) =
+                    conditionalAfterConsequence ? (StateWhenTrue, StateWhenFalse) : (State, State);
 
                 VisitConditionalOperand(alternativeState, alternative, isByRef);
                 if (!conditionalAfterConsequence && !IsConditionalState)
@@ -3081,7 +3389,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
 #nullable disable
 
-        private void VisitConditionalOperand(TLocalState state, BoundExpression operand, bool isByRef)
+        private void VisitConditionalOperand(
+            TLocalState state,
+            BoundExpression operand,
+            bool isByRef
+        )
         {
             SetState(state);
             if (isByRef)
@@ -3198,7 +3510,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitFixedLocalCollectionInitializer(BoundFixedLocalCollectionInitializer node)
+        public override BoundNode VisitFixedLocalCollectionInitializer(
+            BoundFixedLocalCollectionInitializer node
+        )
         {
             VisitRvalue(node.Expression);
             return null;
@@ -3237,7 +3551,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitUnconvertedObjectCreationExpression(BoundUnconvertedObjectCreationExpression node)
+        public override BoundNode VisitUnconvertedObjectCreationExpression(
+            BoundUnconvertedObjectCreationExpression node
+        )
         {
             throw ExceptionUtilities.Unreachable;
         }
@@ -3277,7 +3593,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             this.WriteArgument(operand, RefKind.Out, null); //Out because we know it will definitely be assigned.
         }
 
-        public override BoundNode VisitPointerIndirectionOperator(BoundPointerIndirectionOperator node)
+        public override BoundNode VisitPointerIndirectionOperator(
+            BoundPointerIndirectionOperator node
+        )
         {
             VisitRvalue(node.Operand);
             return null;
@@ -3307,12 +3625,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             return VisitStackAllocArrayCreationBase(node);
         }
 
-        public override BoundNode VisitConvertedStackAllocExpression(BoundConvertedStackAllocExpression node)
+        public override BoundNode VisitConvertedStackAllocExpression(
+            BoundConvertedStackAllocExpression node
+        )
         {
             return VisitStackAllocArrayCreationBase(node);
         }
 
-        public override BoundNode VisitAnonymousObjectCreationExpression(BoundAnonymousObjectCreationExpression node)
+        public override BoundNode VisitAnonymousObjectCreationExpression(
+            BoundAnonymousObjectCreationExpression node
+        )
         {
             //  visit arguments as r-values
             VisitArguments(node.Arguments, default(ImmutableArray<RefKind>), node.Constructor);
@@ -3344,17 +3666,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitObjectInitializerExpression(BoundObjectInitializerExpression node)
+        public override BoundNode VisitObjectInitializerExpression(
+            BoundObjectInitializerExpression node
+        )
         {
             return VisitObjectOrCollectionInitializerExpression(node.Initializers);
         }
 
-        public override BoundNode VisitCollectionInitializerExpression(BoundCollectionInitializerExpression node)
+        public override BoundNode VisitCollectionInitializerExpression(
+            BoundCollectionInitializerExpression node
+        )
         {
             return VisitObjectOrCollectionInitializerExpression(node.Initializers);
         }
 
-        private BoundNode VisitObjectOrCollectionInitializerExpression(ImmutableArray<BoundExpression> initializers)
+        private BoundNode VisitObjectOrCollectionInitializerExpression(
+            ImmutableArray<BoundExpression> initializers
+        )
         {
             foreach (var initializer in initializers)
             {
@@ -3383,12 +3711,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitDynamicObjectInitializerMember(BoundDynamicObjectInitializerMember node)
+        public override BoundNode VisitDynamicObjectInitializerMember(
+            BoundDynamicObjectInitializerMember node
+        )
         {
             return null;
         }
 
-        public override BoundNode VisitCollectionElementInitializer(BoundCollectionElementInitializer node)
+        public override BoundNode VisitCollectionElementInitializer(
+            BoundCollectionElementInitializer node
+        )
         {
             if (node.AddMethod.CallsAreOmitted(node.SyntaxTree))
             {
@@ -3411,7 +3743,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitDynamicCollectionElementInitializer(BoundDynamicCollectionElementInitializer node)
+        public override BoundNode VisitDynamicCollectionElementInitializer(
+            BoundDynamicCollectionElementInitializer node
+        )
         {
             VisitArguments(node.Arguments, default(ImmutableArray<RefKind>), method: null);
             return null;
@@ -3440,27 +3774,37 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitDeconstructValuePlaceholder(BoundDeconstructValuePlaceholder node)
+        public override BoundNode VisitDeconstructValuePlaceholder(
+            BoundDeconstructValuePlaceholder node
+        )
         {
             return null;
         }
 
-        public override BoundNode VisitObjectOrCollectionValuePlaceholder(BoundObjectOrCollectionValuePlaceholder node)
+        public override BoundNode VisitObjectOrCollectionValuePlaceholder(
+            BoundObjectOrCollectionValuePlaceholder node
+        )
         {
             return null;
         }
 
-        public override BoundNode VisitAwaitableValuePlaceholder(BoundAwaitableValuePlaceholder node)
+        public override BoundNode VisitAwaitableValuePlaceholder(
+            BoundAwaitableValuePlaceholder node
+        )
         {
             return null;
         }
 
-        public sealed override BoundNode VisitOutVariablePendingInference(OutVariablePendingInference node)
+        public sealed override BoundNode VisitOutVariablePendingInference(
+            OutVariablePendingInference node
+        )
         {
             throw ExceptionUtilities.Unreachable;
         }
 
-        public sealed override BoundNode VisitDeconstructionVariablePendingInference(DeconstructionVariablePendingInference node)
+        public sealed override BoundNode VisitDeconstructionVariablePendingInference(
+            DeconstructionVariablePendingInference node
+        )
         {
             throw ExceptionUtilities.Unreachable;
         }
@@ -3489,13 +3833,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitNullCoalescingAssignmentOperator(BoundNullCoalescingAssignmentOperator node)
+        public override BoundNode VisitNullCoalescingAssignmentOperator(
+            BoundNullCoalescingAssignmentOperator node
+        )
         {
             TLocalState leftState;
-            if (RegularPropertyAccess(node.LeftOperand) &&
-                (BoundPropertyAccess)node.LeftOperand is var left &&
-                left.PropertySymbol is var property &&
-                property.RefKind == RefKind.None)
+            if (
+                RegularPropertyAccess(node.LeftOperand)
+                && (BoundPropertyAccess)node.LeftOperand is var left
+                && left.PropertySymbol is var property
+                && property.RefKind == RefKind.None
+            )
             {
                 var readMethod = property.GetOwnOrInheritedGetMethod();
 
@@ -3528,14 +3876,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode VisitFunctionPointerInvocation(BoundFunctionPointerInvocation node)
+        public override BoundNode VisitFunctionPointerInvocation(
+            BoundFunctionPointerInvocation node
+        )
         {
             Visit(node.InvokedExpression);
-            VisitArguments(node.Arguments, node.ArgumentRefKindsOpt, node.FunctionPointer.Signature);
+            VisitArguments(
+                node.Arguments,
+                node.ArgumentRefKindsOpt,
+                node.FunctionPointer.Signature
+            );
             return null;
         }
 
-        public override BoundNode VisitUnconvertedAddressOfOperator(BoundUnconvertedAddressOfOperator node)
+        public override BoundNode VisitUnconvertedAddressOfOperator(
+            BoundUnconvertedAddressOfOperator node
+        )
         {
             // This is not encountered in correct programs, but can be seen if the function pointer was
             // unable to be converted and the semantic model is used to query for information.
@@ -3549,7 +3905,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         protected virtual void VisitAssignmentOfNullCoalescingAssignment(
             BoundNullCoalescingAssignmentOperator node,
-            BoundPropertyAccess propertyAccessOpt)
+            BoundPropertyAccess propertyAccessOpt
+        )
         {
             VisitRvalue(node.RightOperand);
             if (propertyAccessOpt != null)
@@ -3560,12 +3917,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        public override BoundNode VisitSavePreviousSequencePoint(BoundSavePreviousSequencePoint node)
+        public override BoundNode VisitSavePreviousSequencePoint(
+            BoundSavePreviousSequencePoint node
+        )
         {
             return null;
         }
 
-        public override BoundNode VisitRestorePreviousSequencePoint(BoundRestorePreviousSequencePoint node)
+        public override BoundNode VisitRestorePreviousSequencePoint(
+            BoundRestorePreviousSequencePoint node
+        )
         {
             return null;
         }
@@ -3579,9 +3940,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// This visitor represents just the non-assignment part of the null coalescing assignment
         /// operator (when the left operand is non-null).
         /// </summary>
-        protected virtual void AdjustStateForNullCoalescingAssignmentNonNullCase(BoundNullCoalescingAssignmentOperator node)
-        {
-        }
+        protected virtual void AdjustStateForNullCoalescingAssignmentNonNullCase(
+            BoundNullCoalescingAssignmentOperator node
+        ) { }
 
         private void VisitMethodBodies(BoundBlock blockBody, BoundBlock expressionBody)
         {
@@ -3621,5 +3982,10 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <remarks>
     /// This should be nested inside <see cref="AbstractFlowPass{TLocalState, TLocalFunctionState}"/> but is not due to https://github.com/dotnet/roslyn/issues/36992 .
     /// </remarks>
-    internal enum RegionPlace { Before, Inside, After };
+    internal enum RegionPlace
+    {
+        Before,
+        Inside,
+        After
+    };
 }

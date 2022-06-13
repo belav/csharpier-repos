@@ -20,33 +20,45 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         private readonly IGlobalOptionService _globalOptions;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be marked with 'ObsoleteAttribute'", Justification = "Used in test code")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be marked with 'ObsoleteAttribute'",
+            Justification = "Used in test code"
+        )]
         public RazorGlobalOptions(IGlobalOptionService globalOptions)
         {
             _globalOptions = globalOptions;
         }
 
-        public RazorAutoFormattingOptions GetAutoFormattingOptions()
-            => new(_globalOptions.GetAutoFormattingOptions(LanguageNames.CSharp));
+        public RazorAutoFormattingOptions GetAutoFormattingOptions() =>
+            new(_globalOptions.GetAutoFormattingOptions(LanguageNames.CSharp));
 
         public bool UseTabs
         {
             get => _globalOptions.GetOption(RazorLineFormattingOptionsStorage.UseTabs);
-            set => _globalOptions.SetGlobalOption(new OptionKey(RazorLineFormattingOptionsStorage.UseTabs), value);
+            set =>
+                _globalOptions.SetGlobalOption(
+                    new OptionKey(RazorLineFormattingOptionsStorage.UseTabs),
+                    value
+                );
         }
 
         public int TabSize
         {
             get => _globalOptions.GetOption(RazorLineFormattingOptionsStorage.TabSize);
-            set => _globalOptions.SetGlobalOption(new OptionKey(RazorLineFormattingOptionsStorage.TabSize), value);
+            set =>
+                _globalOptions.SetGlobalOption(
+                    new OptionKey(RazorLineFormattingOptionsStorage.TabSize),
+                    value
+                );
         }
 
 #pragma warning disable IDE0060 // Remove unused parameter
         /// <summary>
         /// For testing purposes only. Razor does not use MEF composition for host services so we need to return a mock.
         /// </summary>
-        public static RazorGlobalOptions GetGlobalOptions(Workspace workspace)
-            => new(new TestGlobalOptionService());
+        public static RazorGlobalOptions GetGlobalOptions(Workspace workspace) =>
+            new(new TestGlobalOptionService());
 #pragma warning restore
 
         private sealed class TestGlobalOptionService : IGlobalOptionService
@@ -55,26 +67,57 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             public event EventHandler<OptionChangedEventArgs>? OptionChanged;
 #pragma warning restore
 
-            public T GetOption<T>(PerLanguageOption2<T> option, string? languageName)
-                => default!;
+            public T GetOption<T>(PerLanguageOption2<T> option, string? languageName) => default!;
 
-            public T GetOption<T>(Option<T> option)
-                => throw new NotImplementedException();
+            public T GetOption<T>(Option<T> option) => throw new NotImplementedException();
 
             public T GetOption<T>(Option2<T> option) => throw new NotImplementedException();
-            public T GetOption<T>(PerLanguageOption<T> option, string? languageName) => throw new NotImplementedException();
+
+            public T GetOption<T>(PerLanguageOption<T> option, string? languageName) =>
+                throw new NotImplementedException();
+
             public object? GetOption(OptionKey optionKey) => throw new NotImplementedException();
-            public ImmutableArray<object?> GetOptions(ImmutableArray<OptionKey> optionKeys) => throw new NotImplementedException();
-            public IEnumerable<IOption> GetRegisteredOptions() => throw new NotImplementedException();
-            public ImmutableHashSet<IOption> GetRegisteredSerializableOptions(ImmutableHashSet<string> languages) => throw new NotImplementedException();
-            public SerializableOptionSet GetSerializableOptionsSnapshot(ImmutableHashSet<string> languages, IOptionService optionService) => throw new NotImplementedException();
-            public void RefreshOption(OptionKey optionKey, object? newValue) => throw new NotImplementedException();
-            public void RegisterWorkspace(Workspace workspace) => throw new NotImplementedException();
-            public void SetGlobalOption(OptionKey optionKey, object? value) => throw new NotImplementedException();
-            public void SetGlobalOptions(ImmutableArray<OptionKey> optionKeys, ImmutableArray<object?> values) => throw new NotImplementedException();
+
+            public ImmutableArray<object?> GetOptions(ImmutableArray<OptionKey> optionKeys) =>
+                throw new NotImplementedException();
+
+            public IEnumerable<IOption> GetRegisteredOptions() =>
+                throw new NotImplementedException();
+
+            public ImmutableHashSet<IOption> GetRegisteredSerializableOptions(
+                ImmutableHashSet<string> languages
+            ) => throw new NotImplementedException();
+
+            public SerializableOptionSet GetSerializableOptionsSnapshot(
+                ImmutableHashSet<string> languages,
+                IOptionService optionService
+            ) => throw new NotImplementedException();
+
+            public void RefreshOption(OptionKey optionKey, object? newValue) =>
+                throw new NotImplementedException();
+
+            public void RegisterWorkspace(Workspace workspace) =>
+                throw new NotImplementedException();
+
+            public void SetGlobalOption(OptionKey optionKey, object? value) =>
+                throw new NotImplementedException();
+
+            public void SetGlobalOptions(
+                ImmutableArray<OptionKey> optionKeys,
+                ImmutableArray<object?> values
+            ) => throw new NotImplementedException();
+
             public void SetOptions(OptionSet optionSet) => throw new NotImplementedException();
-            public bool TryMapEditorConfigKeyToOption(string key, string? language, [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation, out OptionKey optionKey) => throw new NotImplementedException();
-            public void UnregisterWorkspace(Workspace workspace) => throw new NotImplementedException();
+
+            public bool TryMapEditorConfigKeyToOption(
+                string key,
+                string? language,
+                [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation,
+                out OptionKey optionKey
+            ) => throw new NotImplementedException();
+
+            public void UnregisterWorkspace(Workspace workspace) =>
+                throw new NotImplementedException();
         }
     }
 }

@@ -31,6 +31,7 @@ namespace System.Xml.Tests
         {
             return Path.Combine(GetDataPath(), "TestFiles", "TestData");
         }
+
         public static string GetStandardPath()
         {
             return Path.Combine(GetDataPath(), "TestFiles", "StandardTests");

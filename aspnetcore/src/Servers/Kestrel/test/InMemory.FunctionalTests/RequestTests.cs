@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -31,26 +31,37 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         var requestBodyPersisted = false;
         var responseBodyPersisted = false;
 
-        await using (var server = new TestServer(async context =>
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    if (context.Request.Body is MemoryStream)
+                    {
+                        requestBodyPersisted = true;
+                    }
+
+                    if (context.Response.Body is MemoryStream)
+                    {
+                        responseBodyPersisted = true;
+                    }
+
+                    context.Request.Body = new MemoryStream();
+                    context.Response.Body = new MemoryStream();
+
+                    await context.Response.WriteAsync("hello, world");
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
-            if (context.Request.Body is MemoryStream)
-            {
-                requestBodyPersisted = true;
-            }
-
-            if (context.Response.Body is MemoryStream)
-            {
-                responseBodyPersisted = true;
-            }
-
-            context.Request.Body = new MemoryStream();
-            context.Response.Body = new MemoryStream();
-
-            await context.Response.WriteAsync("hello, world");
-        }, new TestServiceContext(LoggerFactory)))
-        {
-            Assert.Equal(string.Empty, await server.HttpClientSlim.GetStringAsync($"http://localhost:{server.Port}/"));
-            Assert.Equal(string.Empty, await server.HttpClientSlim.GetStringAsync($"http://localhost:{server.Port}/"));
+            Assert.Equal(
+                string.Empty,
+                await server.HttpClientSlim.GetStringAsync($"http://localhost:{server.Port}/")
+            );
+            Assert.Equal(
+                string.Empty,
+                await server.HttpClientSlim.GetStringAsync($"http://localhost:{server.Port}/")
+            );
 
             Assert.False(requestBodyPersisted);
             Assert.False(responseBodyPersisted);
@@ -62,19 +73,30 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     {
         var responseBodyPersisted = false;
         PipeWriter bodyPipe = null;
-        await using (var server = new TestServer(async context =>
-        {
-            if (context.Response.BodyWriter == bodyPipe)
-            {
-                responseBodyPersisted = true;
-            }
-            bodyPipe = context.Response.BodyWriter;
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    if (context.Response.BodyWriter == bodyPipe)
+                    {
+                        responseBodyPersisted = true;
+                    }
+                    bodyPipe = context.Response.BodyWriter;
 
-            await context.Response.WriteAsync("hello, world");
-        }, new TestServiceContext(LoggerFactory)))
+                    await context.Response.WriteAsync("hello, world");
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
-            Assert.Equal("hello, world", await server.HttpClientSlim.GetStringAsync($"http://localhost:{server.Port}/"));
-            Assert.Equal("hello, world", await server.HttpClientSlim.GetStringAsync($"http://localhost:{server.Port}/"));
+            Assert.Equal(
+                "hello, world",
+                await server.HttpClientSlim.GetStringAsync($"http://localhost:{server.Port}/")
+            );
+            Assert.Equal(
+                "hello, world",
+                await server.HttpClientSlim.GetStringAsync($"http://localhost:{server.Port}/")
+            );
 
             Assert.False(responseBodyPersisted);
         }
@@ -87,39 +109,45 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         var readTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var cts = new CancellationTokenSource();
 
-        await using (var server = new TestServer(async context =>
-        {
-            var data = new byte[6];
-            try
-            {
-                await context.Request.Body.FillEntireBufferAsync(data, cts.Token).DefaultTimeout();
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    var data = new byte[6];
+                    try
+                    {
+                        await context.Request.Body
+                            .FillEntireBufferAsync(data, cts.Token)
+                            .DefaultTimeout();
 
-                Assert.Equal("Hello ", Encoding.ASCII.GetString(data));
+                        Assert.Equal("Hello ", Encoding.ASCII.GetString(data));
 
-                helloTcs.TrySetResult();
-            }
-            catch (Exception ex)
-            {
-                // This shouldn't fail
-                helloTcs.TrySetException(ex);
-            }
+                        helloTcs.TrySetResult();
+                    }
+                    catch (Exception ex)
+                    {
+                        // This shouldn't fail
+                        helloTcs.TrySetException(ex);
+                    }
 
-            try
-            {
-                var task = context.Request.Body.ReadAsync(data, 0, data.Length, cts.Token);
-                readTcs.TrySetResult();
-                await task;
+                    try
+                    {
+                        var task = context.Request.Body.ReadAsync(data, 0, data.Length, cts.Token);
+                        readTcs.TrySetResult();
+                        await task;
 
-                context.Response.ContentLength = 12;
-                await context.Response.WriteAsync("Read success");
-            }
-            catch (OperationCanceledException)
-            {
-                context.Response.ContentLength = 14;
-                await context.Response.WriteAsync("Read cancelled");
-            }
-
-        }, new TestServiceContext(LoggerFactory)))
+                        context.Response.ContentLength = 12;
+                        await context.Response.WriteAsync("Read success");
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        context.Response.ContentLength = 14;
+                        await context.Response.WriteAsync("Read cancelled");
+                    }
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -129,7 +157,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: keep-alive",
                     "Content-Length: 11",
                     "",
-                    "");
+                    ""
+                );
 
                 await connection.Send("Hello ");
 
@@ -139,11 +168,13 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                 // Cancel the body after hello is read
                 cts.Cancel();
 
-                await connection.Receive($"HTTP/1.1 200 OK",
-                       "Content-Length: 14",
-                       $"Date: {server.Context.DateHeaderValue}",
-                       "",
-                       "Read cancelled");
+                await connection.Receive(
+                    $"HTTP/1.1 200 OK",
+                    "Content-Length: 14",
+                    $"Date: {server.Context.DateHeaderValue}",
+                    "",
+                    "Read cancelled"
+                );
             }
         }
     }
@@ -153,15 +184,20 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     {
         var dataRead = false;
 
-        await using (var server = new TestServer(async context =>
-        {
-            var stream = await context.Features.Get<IHttpUpgradeFeature>().UpgradeAsync();
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    var stream = await context.Features.Get<IHttpUpgradeFeature>().UpgradeAsync();
 
-            var data = new byte[3];
-            await stream.FillEntireBufferAsync(data).DefaultTimeout();
+                    var data = new byte[3];
+                    await stream.FillEntireBufferAsync(data).DefaultTimeout();
 
-            dataRead = Encoding.ASCII.GetString(data) == "abc";
-        }, new TestServiceContext(LoggerFactory)))
+                    dataRead = Encoding.ASCII.GetString(data) == "abc";
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -169,14 +205,16 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "GET / HTTP/1.1",
                     "Host:\r\nConnection: keep-alive, upgrade",
                     "",
-                    "abc");
+                    "abc"
+                );
 
                 await connection.ReceiveEnd(
                     "HTTP/1.1 101 Switching Protocols",
                     "Connection: Upgrade",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
 
@@ -200,19 +238,36 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     [InlineData("http://localhost/?q=123&w=xyz", "/", "123")]
     [InlineData("http://localhost/path?q=123&w=xyz", "/path", "123")]
     [InlineData("http://localhost/path%20with%20space?q=abc%20123", "/path with space", "abc 123")]
-    public async Task CanHandleRequestsWithUrlInAbsoluteForm(string requestUrl, string expectedPath, string queryValue)
+    public async Task CanHandleRequestsWithUrlInAbsoluteForm(
+        string requestUrl,
+        string expectedPath,
+        string queryValue
+    )
     {
-        var pathTcs = new TaskCompletionSource<PathString>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var rawTargetTcs = new TaskCompletionSource<string>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var queryTcs = new TaskCompletionSource<IQueryCollection>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var pathTcs = new TaskCompletionSource<PathString>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var rawTargetTcs = new TaskCompletionSource<string>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var queryTcs = new TaskCompletionSource<IQueryCollection>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
-        await using (var server = new TestServer(async context =>
-        {
-            pathTcs.TrySetResult(context.Request.Path);
-            queryTcs.TrySetResult(context.Request.Query);
-            rawTargetTcs.TrySetResult(context.Features.Get<IHttpRequestFeature>().RawTarget);
-            await context.Response.WriteAsync("Done");
-        }, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    pathTcs.TrySetResult(context.Request.Path);
+                    queryTcs.TrySetResult(context.Request.Query);
+                    rawTargetTcs.TrySetResult(
+                        context.Features.Get<IHttpRequestFeature>().RawTarget
+                    );
+                    await context.Response.WriteAsync("Done");
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -228,14 +283,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Content-Length: 0",
                     $"Host: {host}",
                     "",
-                    "");
+                    ""
+                );
 
-                await connection.Receive($"HTTP/1.1 200 OK",
+                await connection.Receive(
+                    $"HTTP/1.1 200 OK",
                     $"Date: {server.Context.DateHeaderValue}",
                     "Transfer-Encoding: chunked",
                     "",
                     "4",
-                    "Done");
+                    "Done"
+                );
 
                 await Task.WhenAll(pathTcs.Task, rawTargetTcs.Task, queryTcs.Task).DefaultTimeout();
                 Assert.Equal(new PathString(expectedPath), pathTcs.Task.Result);
@@ -269,7 +327,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "GET http://localhost/ HTTP/1.1",
                     "Host: localhost",
                     "",
-                    "");
+                    ""
+                );
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
@@ -279,7 +338,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Content-Length: 0",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -511,48 +571,52 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         await TestAsyncLocalValues(testContext, server);
     }
 
-    private static async Task TestAsyncLocalValues(TestServiceContext testContext, TestServer server)
+    private static async Task TestAsyncLocalValues(
+        TestServiceContext testContext,
+        TestServer server
+    )
     {
         using var connection = server.CreateConnection();
 
-        await connection.Send(
-            "GET / HTTP/1.1",
-            "Host:",
-            "",
-            "");
+        await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
         await connection.Receive(
             "HTTP/1.1 200 OK",
             "Content-Length: 1",
             $"Date: {testContext.DateHeaderValue}",
             "",
-            "0");
+            "0"
+        );
 
-        await connection.Send(
-            "GET / HTTP/1.1",
-            "Host:",
-            "",
-            "");
+        await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
         await connection.Receive(
             "HTTP/1.1 200 OK",
             "Content-Length: 1",
             $"Date: {testContext.DateHeaderValue}",
             "",
-            "0");
+            "0"
+        );
     }
 
     [Fact]
     public async Task AppCanSetTraceIdentifier()
     {
         const string knownId = "xyz123";
-        await using (var server = new TestServer(async context =>
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    context.TraceIdentifier = knownId;
+                    await context.Response.WriteAsync(context.TraceIdentifier);
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
-            context.TraceIdentifier = knownId;
-            await context.Response.WriteAsync(context.TraceIdentifier);
-        }, new TestServiceContext(LoggerFactory)))
-        {
-            var requestId = await server.HttpClientSlim.GetStringAsync($"http://localhost:{server.Port}/");
+            var requestId = await server.HttpClientSlim.GetStringAsync(
+                $"http://localhost:{server.Port}/"
+            );
             Assert.Equal(knownId, requestId);
         }
     }
@@ -563,22 +627,36 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         const int identifierLength = 22;
         const int iterations = 10;
 
-        await using (var server = new TestServer(async context =>
-        {
-            Assert.Equal(identifierLength, Encoding.ASCII.GetByteCount(context.TraceIdentifier));
-            context.Response.ContentLength = identifierLength;
-            await context.Response.WriteAsync(context.TraceIdentifier);
-        }, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    Assert.Equal(
+                        identifierLength,
+                        Encoding.ASCII.GetByteCount(context.TraceIdentifier)
+                    );
+                    context.Response.ContentLength = identifierLength;
+                    await context.Response.WriteAsync(context.TraceIdentifier);
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             var usedIds = new ConcurrentBag<string>();
 
             // requests on separate connections in parallel
-            Parallel.For(0, iterations, async i =>
-            {
-                var id = await server.HttpClientSlim.GetStringAsync($"http://localhost:{server.Port}/");
-                Assert.DoesNotContain(id, usedIds.ToArray());
-                usedIds.Add(id);
-            });
+            Parallel.For(
+                0,
+                iterations,
+                async i =>
+                {
+                    var id = await server.HttpClientSlim.GetStringAsync(
+                        $"http://localhost:{server.Port}/"
+                    );
+                    Assert.DoesNotContain(id, usedIds.ToArray());
+                    usedIds.Add(id);
+                }
+            );
 
             // requests on same connection
             using (var connection = server.CreateConnection())
@@ -588,17 +666,23 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                 {
                     await connection.SendEmptyGet();
 
-                    await connection.Receive($"HTTP/1.1 200 OK",
-                       $"Content-Length: {identifierLength}",
-                       $"Date: {server.Context.DateHeaderValue}",
-                       "",
-                       "");
+                    await connection.Receive(
+                        $"HTTP/1.1 200 OK",
+                        $"Content-Length: {identifierLength}",
+                        $"Date: {server.Context.DateHeaderValue}",
+                        "",
+                        ""
+                    );
 
                     var offset = 0;
 
                     while (offset < identifierLength)
                     {
-                        var read = await connection.Reader.ReadAsync(buffer, offset, identifierLength - offset);
+                        var read = await connection.Reader.ReadAsync(
+                            buffer,
+                            offset,
+                            identifierLength - offset
+                        );
                         offset += read;
 
                         Assert.NotEqual(0, read);
@@ -631,7 +715,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: close",
                     "Content-Length: 7",
                     "",
-                    "Goodbye");
+                    "Goodbye"
+                );
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
@@ -642,7 +727,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Goodbye");
+                    "Goodbye"
+                );
             }
         }
     }
@@ -656,32 +742,27 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.0",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.0", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
 
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.0",
-                    "Content-Length: 11",
-                    "",
-                    "Hello World");
+                await connection.Send("POST / HTTP/1.0", "Content-Length: 11", "", "Hello World");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Hello World");
+                    "Hello World"
+                );
             }
         }
     }
@@ -702,20 +783,23 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "POST / HTTP/1.0",
                     "Content-Length: 7",
                     "",
-                    "Goodbye");
+                    "Goodbye"
+                );
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: keep-alive",
                     $"Date: {testContext.DateHeaderValue}",
-                    "\r\n");
+                    "\r\n"
+                );
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 7",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Goodbye");
+                    "Goodbye"
+                );
             }
         }
     }
@@ -729,32 +813,31 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.0",
-                    "Connection: keep-alive",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.0", "Connection: keep-alive", "", "");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: keep-alive",
                     $"Date: {testContext.DateHeaderValue}",
-                    "\r\n");
+                    "\r\n"
+                );
 
                 await connection.Send(
                     "POST / HTTP/1.0",
                     "Connection: keep-alive",
                     "Content-Length: 7",
                     "",
-                    "Goodbye");
+                    "Goodbye"
+                );
 
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Goodbye");
+                    "Goodbye"
+                );
             }
         }
     }
@@ -773,7 +856,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Content-Length: 11",
                     "Connection: keep-alive",
                     "",
-                    "Hello World");
+                    "Hello World"
+                );
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
@@ -781,14 +865,16 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: keep-alive",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Hello World");
+                    "Hello World"
+                );
 
                 await connection.Send(
                     "POST / HTTP/1.0",
                     "Connection: keep-alive",
                     "Content-Length: 11",
                     "",
-                    "Hello Again");
+                    "Hello Again"
+                );
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
@@ -796,13 +882,10 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: keep-alive",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Hello Again");
+                    "Hello Again"
+                );
 
-                await connection.Send(
-                    "POST / HTTP/1.0",
-                    "Content-Length: 7",
-                    "",
-                    "Goodbye");
+                await connection.Send("POST / HTTP/1.0", "Content-Length: 7", "", "Goodbye");
 
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
@@ -810,7 +893,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Goodbye");
+                    "Goodbye"
+                );
             }
         }
     }
@@ -830,11 +914,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Expect: 100-continue",
                     "Connection: close",
                     "Content-Length: 11",
-                    "\r\n");
-                await connection.Receive(
-                    "HTTP/1.1 100 Continue",
-                    "",
-                    "");
+                    "\r\n"
+                );
+                await connection.Receive("HTTP/1.1 100 Continue", "", "");
                 await connection.Send("Hello World");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
@@ -842,7 +924,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Hello World");
+                    "Hello World"
+                );
             }
         }
     }
@@ -866,11 +949,9 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Expect: 100-continue",
                     "Connection: close",
                     "Content-Length: 11",
-                    "\r\n");
-                await connection.Receive(
-                    "HTTP/1.1 100 Continue",
-                    "",
-                    "");
+                    "\r\n"
+                );
+                await connection.Receive("HTTP/1.1 100 Continue", "", "");
                 await connection.Send("Hello World");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
@@ -878,7 +959,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Hello World");
+                    "Hello World"
+                );
             }
         }
     }
@@ -888,43 +970,44 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            // This will hang if 0 content length is not assumed by the server
-            Assert.Equal(0, await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1).DefaultTimeout());
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    // This will hang if 0 content length is not assumed by the server
+                    Assert.Equal(
+                        0,
+                        await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1).DefaultTimeout()
+                    );
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "Connection: close",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "Connection: close", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
 
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.0",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.0", "Host:", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -934,44 +1017,45 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var readResult = await httpContext.Request.BodyReader.ReadAsync().AsTask().DefaultTimeout();
-            // This will hang if 0 content length is not assumed by the server
-            Assert.True(readResult.IsCompleted);
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var readResult = await httpContext.Request.BodyReader
+                        .ReadAsync()
+                        .AsTask()
+                        .DefaultTimeout();
+                    // This will hang if 0 content length is not assumed by the server
+                    Assert.True(readResult.IsCompleted);
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "Connection: close",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "Connection: close", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
 
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.0",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.0", "Host:", "", "");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -981,13 +1065,18 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var readResult = await httpContext.Request.BodyReader.ReadAsync();
-            // This will hang if 0 content length is not assumed by the server
-            Assert.Equal(5, readResult.Buffer.Length);
-            httpContext.Request.BodyReader.AdvanceTo(readResult.Buffer.End);
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var readResult = await httpContext.Request.BodyReader.ReadAsync();
+                    // This will hang if 0 content length is not assumed by the server
+                    Assert.Equal(5, readResult.Buffer.Length);
+                    httpContext.Request.BodyReader.AdvanceTo(readResult.Buffer.End);
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -996,14 +1085,16 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Host:",
                     "Content-Length: 5",
                     "",
-                    "hello");
+                    "hello"
+                );
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1013,16 +1104,23 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var readResult = await httpContext.Request.BodyReader.ReadAsync();
-            // This will hang if 0 content length is not assumed by the server
-            Assert.Equal(5, readResult.Buffer.Length);
-            httpContext.Request.BodyReader.AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
-            readResult = await httpContext.Request.BodyReader.ReadAsync();
-            Assert.Equal(5, readResult.Buffer.Length);
-
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var readResult = await httpContext.Request.BodyReader.ReadAsync();
+                    // This will hang if 0 content length is not assumed by the server
+                    Assert.Equal(5, readResult.Buffer.Length);
+                    httpContext.Request.BodyReader.AdvanceTo(
+                        readResult.Buffer.Start,
+                        readResult.Buffer.End
+                    );
+                    readResult = await httpContext.Request.BodyReader.ReadAsync();
+                    Assert.Equal(5, readResult.Buffer.Length);
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1031,14 +1129,16 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Host:",
                     "Content-Length: 5",
                     "",
-                    "hello");
+                    "hello"
+                );
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1048,20 +1148,31 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var readResult = await httpContext.Request.BodyReader.ReadAsync();
-            // This will hang if 0 content length is not assumed by the server
-            Assert.Equal(5, readResult.Buffer.Length);
-            httpContext.Request.BodyReader.AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var readResult = await httpContext.Request.BodyReader.ReadAsync();
+                    // This will hang if 0 content length is not assumed by the server
+                    Assert.Equal(5, readResult.Buffer.Length);
+                    httpContext.Request.BodyReader.AdvanceTo(
+                        readResult.Buffer.Start,
+                        readResult.Buffer.End
+                    );
 
-            for (var i = 0; i < 2; i++)
-            {
-                readResult = await httpContext.Request.BodyReader.ReadAsync();
-                Assert.Equal(5, readResult.Buffer.Length);
-                httpContext.Request.BodyReader.AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
-            }
-        }, testContext))
+                    for (var i = 0; i < 2; i++)
+                    {
+                        readResult = await httpContext.Request.BodyReader.ReadAsync();
+                        Assert.Equal(5, readResult.Buffer.Length);
+                        httpContext.Request.BodyReader.AdvanceTo(
+                            readResult.Buffer.Start,
+                            readResult.Buffer.End
+                        );
+                    }
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1070,14 +1181,16 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Host:",
                     "Content-Length: 5",
                     "",
-                    "hello");
+                    "hello"
+                );
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1087,18 +1200,23 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            using var ms1 = new MemoryStream();
-            using var ms2 = new MemoryStream();
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    using var ms1 = new MemoryStream();
+                    using var ms2 = new MemoryStream();
 
-            // Read the body completely, and ensure the second read doesn't fail
-            await httpContext.Request.BodyReader.CopyToAsync(ms1);
-            await httpContext.Request.BodyReader.CopyToAsync(ms2);
+                    // Read the body completely, and ensure the second read doesn't fail
+                    await httpContext.Request.BodyReader.CopyToAsync(ms1);
+                    await httpContext.Request.BodyReader.CopyToAsync(ms2);
 
-            Assert.Equal(22, ms1.ToArray().Length);
-            Assert.Empty(ms2.ToArray());
-        }, testContext))
+                    Assert.Equal(22, ms1.ToArray().Length);
+                    Assert.Empty(ms2.ToArray());
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1107,14 +1225,16 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Host:",
                     "Content-Length: 22",
                     "",
-                    "MyVariableOne=ValueOne");
+                    "MyVariableOne=ValueOne"
+                );
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1144,51 +1264,62 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             return result;
         }
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            // Buffer 3 bytes.
-            var readResult = await ReadAtLeastAsync(httpContext.Request.BodyReader, numBytes: 3);
-            Assert.Equal(3, readResult.Buffer.Length);
-            tcs.SetResult();
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    // Buffer 3 bytes.
+                    var readResult = await ReadAtLeastAsync(
+                        httpContext.Request.BodyReader,
+                        numBytes: 3
+                    );
+                    Assert.Equal(3, readResult.Buffer.Length);
+                    tcs.SetResult();
 
-            httpContext.Request.BodyReader.AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
+                    httpContext.Request.BodyReader.AdvanceTo(
+                        readResult.Buffer.Start,
+                        readResult.Buffer.End
+                    );
 
-            // Buffer 1 more byte.
-            readResult = await httpContext.Request.BodyReader.ReadAsync();
-            httpContext.Request.BodyReader.AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
-            tcs2.SetResult();
+                    // Buffer 1 more byte.
+                    readResult = await httpContext.Request.BodyReader.ReadAsync();
+                    httpContext.Request.BodyReader.AdvanceTo(
+                        readResult.Buffer.Start,
+                        readResult.Buffer.End
+                    );
+                    tcs2.SetResult();
 
-            // Buffer 1 last byte.
-            readResult = await httpContext.Request.BodyReader.ReadAsync();
-            Assert.Equal(5, readResult.Buffer.Length);
+                    // Buffer 1 last byte.
+                    readResult = await httpContext.Request.BodyReader.ReadAsync();
+                    Assert.Equal(5, readResult.Buffer.Length);
 
-            // Do one more read to ensure completion is always observed.
-            httpContext.Request.BodyReader.AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
-            readResult = await httpContext.Request.BodyReader.ReadAsync();
-            Assert.True(readResult.IsCompleted);
-        }, testContext))
+                    // Do one more read to ensure completion is always observed.
+                    httpContext.Request.BodyReader.AdvanceTo(
+                        readResult.Buffer.Start,
+                        readResult.Buffer.End
+                    );
+                    readResult = await httpContext.Request.BodyReader.ReadAsync();
+                    Assert.True(readResult.IsCompleted);
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.0",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "fun");
+                await connection.Send("POST / HTTP/1.0", "Host:", "Content-Length: 5", "", "fun");
                 await tcs.Task.DefaultTimeout();
-                await connection.Send(
-                    "n");
+                await connection.Send("n");
                 await tcs2.Task.DefaultTimeout();
-                await connection.Send(
-                    "y");
+                await connection.Send("y");
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1197,15 +1328,26 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     public async Task ContentLengthDoesNotConsumeEntireBufferDoesNotThrow()
     {
         var testContext = new TestServiceContext(LoggerFactory);
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var readResult = await httpContext.Request.BodyReader.ReadAsync();
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var readResult = await httpContext.Request.BodyReader.ReadAsync();
 
-            httpContext.Request.BodyReader.AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
+                    httpContext.Request.BodyReader.AdvanceTo(
+                        readResult.Buffer.Start,
+                        readResult.Buffer.End
+                    );
 
-            readResult = await httpContext.Request.BodyReader.ReadAsync();
-            httpContext.Request.BodyReader.AdvanceTo(readResult.Buffer.Slice(1).Start, readResult.Buffer.End);
-        }, testContext))
+                    readResult = await httpContext.Request.BodyReader.ReadAsync();
+                    httpContext.Request.BodyReader.AdvanceTo(
+                        readResult.Buffer.Slice(1).Start,
+                        readResult.Buffer.End
+                    );
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1214,7 +1356,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Host:",
                     "Content-Length: 5",
                     "",
-                    "funny");
+                    "funny"
+                );
 
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
@@ -1222,7 +1365,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1239,8 +1383,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1");
+                await connection.Send("POST / HTTP/1.1");
                 connection.ShutdownSend();
                 await connection.TransportConnection.WaitForCloseTask;
                 await connection.ReceiveEnd();
@@ -1248,10 +1391,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 7");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 7");
                 connection.ShutdownSend();
                 await connection.TransportConnection.WaitForCloseTask;
                 await connection.ReceiveEnd();
@@ -1267,23 +1407,28 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         IHeaderDictionary originalRequestHeaders = null;
         var firstRequest = true;
 
-        await using (var server = new TestServer(httpContext =>
-        {
-            var requestFeature = httpContext.Features.Get<IHttpRequestFeature>();
+        await using (
+            var server = new TestServer(
+                httpContext =>
+                {
+                    var requestFeature = httpContext.Features.Get<IHttpRequestFeature>();
 
-            if (firstRequest)
-            {
-                originalRequestHeaders = requestFeature.Headers;
-                requestFeature.Headers = new HttpRequestHeaders();
-                firstRequest = false;
-            }
-            else
-            {
-                Assert.Same(originalRequestHeaders, requestFeature.Headers);
-            }
+                    if (firstRequest)
+                    {
+                        originalRequestHeaders = requestFeature.Headers;
+                        requestFeature.Headers = new HttpRequestHeaders();
+                        firstRequest = false;
+                    }
+                    else
+                    {
+                        Assert.Same(originalRequestHeaders, requestFeature.Headers);
+                    }
 
-            return Task.CompletedTask;
-        }, testContext))
+                    return Task.CompletedTask;
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1294,7 +1439,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "GET / HTTP/1.1",
                     "Host:",
                     "",
-                    "");
+                    ""
+                );
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
@@ -1304,7 +1450,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Content-Length: 0",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1316,16 +1463,21 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async context =>
-        {
-            var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
-            var duplexStream = await upgradeFeature.UpgradeAsync();
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
+                    var duplexStream = await upgradeFeature.UpgradeAsync();
 
-            var data = new byte[message.Length];
-            await duplexStream.FillEntireBufferAsync(data).DefaultTimeout();
+                    var data = new byte[message.Length];
+                    await duplexStream.FillEntireBufferAsync(data).DefaultTimeout();
 
-            await duplexStream.WriteAsync(data, 0, data.Length);
-        }, testContext))
+                    await duplexStream.WriteAsync(data, 0, data.Length);
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1334,13 +1486,15 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Host:",
                     "Connection: Upgrade",
                     "",
-                    message);
+                    message
+                );
                 await connection.ReceiveEnd(
                     "HTTP/1.1 101 Switching Protocols",
                     "Connection: Upgrade",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    message);
+                    message
+                );
             }
         }
     }
@@ -1357,58 +1511,76 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         IHeaderDictionary lastRequestHeaders = null;
         IHeaderDictionary lastResponseHeaders = null;
 
-        await using (var server = new TestServer(async context =>
-        {
-            if (context.Request.Body != lastStream)
-            {
-                lastStream = context.Request.Body;
-                streamCount++;
-            }
-            if (context.Request.Headers != lastRequestHeaders)
-            {
-                lastRequestHeaders = context.Request.Headers;
-                requestHeadersCount++;
-            }
-            if (context.Response.Headers != lastResponseHeaders)
-            {
-                lastResponseHeaders = context.Response.Headers;
-                responseHeadersCount++;
-            }
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    if (context.Request.Body != lastStream)
+                    {
+                        lastStream = context.Request.Body;
+                        streamCount++;
+                    }
+                    if (context.Request.Headers != lastRequestHeaders)
+                    {
+                        lastRequestHeaders = context.Request.Headers;
+                        requestHeadersCount++;
+                    }
+                    if (context.Response.Headers != lastResponseHeaders)
+                    {
+                        lastResponseHeaders = context.Response.Headers;
+                        responseHeadersCount++;
+                    }
 
-            var ms = new MemoryStream();
-            await context.Request.Body.CopyToAsync(ms);
-            var request = ms.ToArray();
+                    var ms = new MemoryStream();
+                    await context.Request.Body.CopyToAsync(ms);
+                    var request = ms.ToArray();
 
-            context.Response.ContentLength = request.Length;
+                    context.Response.ContentLength = request.Length;
 
-            await context.Response.Body.WriteAsync(request, 0, request.Length);
-        }, testContext))
+                    await context.Response.Body.WriteAsync(request, 0, request.Length);
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                var requestData =
-                    Enumerable.Repeat("GET / HTTP/1.1\r\nHost:\r\n", loopCount)
-                        .Concat(new[] { "GET / HTTP/1.1\r\nHost:\r\nContent-Length: 7\r\nConnection: close\r\n\r\nGoodbye" });
+                var requestData = Enumerable
+                    .Repeat("GET / HTTP/1.1\r\nHost:\r\n", loopCount)
+                    .Concat(
+                        new[]
+                        {
+                            "GET / HTTP/1.1\r\nHost:\r\nContent-Length: 7\r\nConnection: close\r\n\r\nGoodbye"
+                        }
+                    );
 
-                var response = string.Join("\r\n", new string[] {
+                var response = string.Join(
+                    "\r\n",
+                    new string[]
+                    {
                         "HTTP/1.1 200 OK",
                         "Content-Length: 0",
                         $"Date: {testContext.DateHeaderValue}",
-                        ""});
+                        ""
+                    }
+                );
 
-                var lastResponse = string.Join("\r\n", new string[]
-                {
+                var lastResponse = string.Join(
+                    "\r\n",
+                    new string[]
+                    {
                         "HTTP/1.1 200 OK",
                         "Content-Length: 7",
                         "Connection: close",
                         $"Date: {testContext.DateHeaderValue}",
                         "",
                         "Goodbye"
-                });
+                    }
+                );
 
-                var responseData =
-                    Enumerable.Repeat(response, loopCount)
-                        .Concat(new[] { lastResponse });
+                var responseData = Enumerable
+                    .Repeat(response, loopCount)
+                    .Concat(new[] { lastResponse });
 
                 await connection.Send(requestData.ToArray());
 
@@ -1425,14 +1597,16 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     [MemberData(nameof(HostHeaderData))]
     public async Task MatchesValidRequestTargetAndHostHeader(string request, string hostHeader)
     {
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send($"{request} HTTP/1.1",
-                    $"Host: {hostHeader}",
-                    "",
-                    "");
+                await connection.Send($"{request} HTTP/1.1", $"Host: {hostHeader}", "", "");
 
                 await connection.Receive("HTTP/1.1 200 OK");
             }
@@ -1443,39 +1617,36 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     public async Task ServerConsumesKeepAliveContentLengthRequest()
     {
         // The app doesn't read the request body, so it should be consumed by the server
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "hello");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "hello");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
 
                 // If the server consumed the previous request properly, the
                 // next request should be successful
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "world");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "world");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1484,7 +1655,12 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     public async Task ServerConsumesKeepAliveChunkedRequest()
     {
         // The app doesn't read the request body, so it should be consumed by the server
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1500,30 +1676,28 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "0",
                     "Trailer: value",
                     "",
-                    "");
+                    ""
+                );
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
 
                 // If the server consumed the previous request properly, the
                 // next request should be successful
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "world");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "world");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1532,7 +1706,12 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     public async Task NonKeepAliveRequestNotConsumedByAppCompletes()
     {
         // The app doesn't read the request body, so it should be consumed by the server
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1541,7 +1720,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Host:",
                     "Content-Length: 5",
                     "",
-                    "hello");
+                    "hello"
+                );
 
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
@@ -1549,7 +1729,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: close",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1558,14 +1739,19 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     public async Task UpgradedRequestNotConsumedByAppCompletes()
     {
         // The app doesn't read the request body, so it should be consumed by the server
-        await using (var server = new TestServer(async context =>
-        {
-            var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
-            var duplexStream = await upgradeFeature.UpgradeAsync();
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
+                    var duplexStream = await upgradeFeature.UpgradeAsync();
 
-            var response = Encoding.ASCII.GetBytes("goodbye");
-            await duplexStream.WriteAsync(response, 0, response.Length);
-        }, new TestServiceContext(LoggerFactory)))
+                    var response = Encoding.ASCII.GetBytes("goodbye");
+                    await duplexStream.WriteAsync(response, 0, response.Length);
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1574,14 +1760,16 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Host:",
                     "Connection: upgrade",
                     "",
-                    "hello");
+                    "hello"
+                );
 
                 await connection.ReceiveEnd(
                     "HTTP/1.1 101 Switching Protocols",
                     "Connection: Upgrade",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "goodbye");
+                    "goodbye"
+                );
             }
         }
     }
@@ -1590,41 +1778,50 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     public async Task DoesNotEnforceRequestBodyMinimumDataRateOnUpgradedRequest()
     {
         var appEvent = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var delayEvent = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var delayEvent = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var serviceContext = new TestServiceContext(LoggerFactory);
         var heartbeatManager = new HeartbeatManager(serviceContext.ConnectionManager);
 
-        await using (var server = new TestServer(async context =>
-        {
-            context.Features.Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate =
-                new MinDataRate(bytesPerSecond: double.MaxValue, gracePeriod: Heartbeat.Interval + TimeSpan.FromTicks(1));
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    context.Features.Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate =
+                        new MinDataRate(
+                            bytesPerSecond: double.MaxValue,
+                            gracePeriod: Heartbeat.Interval + TimeSpan.FromTicks(1)
+                        );
 
-            using (var stream = await context.Features.Get<IHttpUpgradeFeature>().UpgradeAsync())
-            {
-                appEvent.SetResult();
+                    using (
+                        var stream = await context.Features
+                            .Get<IHttpUpgradeFeature>()
+                            .UpgradeAsync()
+                    )
+                    {
+                        appEvent.SetResult();
 
-                // Read once to go through one set of TryPauseTimingReads()/TryResumeTimingReads() calls
-                await stream.ReadAsync(new byte[1], 0, 1);
+                        // Read once to go through one set of TryPauseTimingReads()/TryResumeTimingReads() calls
+                        await stream.ReadAsync(new byte[1], 0, 1);
 
-                await delayEvent.Task.DefaultTimeout();
+                        await delayEvent.Task.DefaultTimeout();
 
-                // Read again to check that the connection is still alive
-                await stream.ReadAsync(new byte[1], 0, 1);
+                        // Read again to check that the connection is still alive
+                        await stream.ReadAsync(new byte[1], 0, 1);
 
-                // Send a response to distinguish from the timeout case where the 101 is still received, but without any content
-                var response = Encoding.ASCII.GetBytes("hello");
-                await stream.WriteAsync(response, 0, response.Length);
-            }
-        }, serviceContext))
+                        // Send a response to distinguish from the timeout case where the 101 is still received, but without any content
+                        var response = Encoding.ASCII.GetBytes("hello");
+                        await stream.WriteAsync(response, 0, response.Length);
+                    }
+                },
+                serviceContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "Connection: upgrade",
-                    "",
-                    "a");
+                await connection.Send("GET / HTTP/1.1", "Host:", "Connection: upgrade", "", "a");
 
                 await appEvent.Task.DefaultTimeout();
 
@@ -1640,7 +1837,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: Upgrade",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "hello");
+                    "hello"
+                );
             }
         }
     }
@@ -1648,50 +1846,55 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     [Fact]
     public async Task SynchronousReadsDisallowedByDefault()
     {
-        await using (var server = new TestServer(async context =>
-        {
-            var bodyControlFeature = context.Features.Get<IHttpBodyControlFeature>();
-            Assert.False(bodyControlFeature.AllowSynchronousIO);
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    var bodyControlFeature = context.Features.Get<IHttpBodyControlFeature>();
+                    Assert.False(bodyControlFeature.AllowSynchronousIO);
 
-            var buffer = new byte[6];
-            var offset = 0;
+                    var buffer = new byte[6];
+                    var offset = 0;
 
-            // The request body is 5 bytes long. The 6th byte (buffer[5]) is only used for writing the response body.
-            buffer[5] = (byte)'1';
+                    // The request body is 5 bytes long. The 6th byte (buffer[5]) is only used for writing the response body.
+                    buffer[5] = (byte)'1';
 
-            // Synchronous reads throw.
-            var ioEx = Assert.Throws<InvalidOperationException>(() => context.Request.Body.Read(new byte[1], 0, 1));
-            Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx.Message);
+                    // Synchronous reads throw.
+                    var ioEx = Assert.Throws<InvalidOperationException>(
+                        () => context.Request.Body.Read(new byte[1], 0, 1)
+                    );
+                    Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx.Message);
 
-            var ioEx2 = Assert.Throws<InvalidOperationException>(() => context.Request.Body.CopyTo(Stream.Null));
-            Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx2.Message);
+                    var ioEx2 = Assert.Throws<InvalidOperationException>(
+                        () => context.Request.Body.CopyTo(Stream.Null)
+                    );
+                    Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx2.Message);
 
-            while (offset < 5)
-            {
-                offset += await context.Request.Body.ReadAsync(buffer, offset, 5 - offset);
-            }
+                    while (offset < 5)
+                    {
+                        offset += await context.Request.Body.ReadAsync(buffer, offset, 5 - offset);
+                    }
 
-            Assert.Equal(0, await context.Request.Body.ReadAsync(new byte[1], 0, 1));
-            Assert.Equal("Hello", Encoding.ASCII.GetString(buffer, 0, 5));
+                    Assert.Equal(0, await context.Request.Body.ReadAsync(new byte[1], 0, 1));
+                    Assert.Equal("Hello", Encoding.ASCII.GetString(buffer, 0, 5));
 
-            context.Response.ContentLength = 6;
-            await context.Response.Body.WriteAsync(buffer, 0, 6);
-        }, new TestServiceContext(LoggerFactory)))
+                    context.Response.ContentLength = 6;
+                    await context.Response.Body.WriteAsync(buffer, 0, 6);
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "Hello");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "Hello");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 6",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "Hello1");
+                    "Hello1"
+                );
             }
         }
     }
@@ -1699,42 +1902,43 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     [Fact]
     public async Task SynchronousReadsAllowedByOptIn()
     {
-        await using (var server = new TestServer(async context =>
-        {
-            var bodyControlFeature = context.Features.Get<IHttpBodyControlFeature>();
-            Assert.False(bodyControlFeature.AllowSynchronousIO);
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    var bodyControlFeature = context.Features.Get<IHttpBodyControlFeature>();
+                    Assert.False(bodyControlFeature.AllowSynchronousIO);
 
-            var buffer = new byte[5];
-            var offset = 0;
+                    var buffer = new byte[5];
+                    var offset = 0;
 
-            bodyControlFeature.AllowSynchronousIO = true;
+                    bodyControlFeature.AllowSynchronousIO = true;
 
-            while (offset < 5)
-            {
-                offset += context.Request.Body.Read(buffer, offset, 5 - offset);
-            }
+                    while (offset < 5)
+                    {
+                        offset += context.Request.Body.Read(buffer, offset, 5 - offset);
+                    }
 
-            Assert.Equal(0, await context.Request.Body.ReadAsync(new byte[1], 0, 1));
-            Assert.Equal("Hello", Encoding.ASCII.GetString(buffer, 0, 5));
+                    Assert.Equal(0, await context.Request.Body.ReadAsync(new byte[1], 0, 1));
+                    Assert.Equal("Hello", Encoding.ASCII.GetString(buffer, 0, 5));
 
-            context.Response.ContentLength = 5;
-            await context.Response.Body.WriteAsync(buffer, 0, 5);
-        }, new TestServiceContext(LoggerFactory)))
+                    context.Response.ContentLength = 5;
+                    await context.Response.Body.WriteAsync(buffer, 0, 5);
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "Hello");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "Hello");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 5",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "Hello");
+                    "Hello"
+                );
             }
         }
     }
@@ -1747,39 +1951,46 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             ServerOptions = { AllowSynchronousIO = false }
         };
 
-        await using (var server = new TestServer(async context =>
-        {
-            var bodyControlFeature = context.Features.Get<IHttpBodyControlFeature>();
-            Assert.False(bodyControlFeature.AllowSynchronousIO);
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    var bodyControlFeature = context.Features.Get<IHttpBodyControlFeature>();
+                    Assert.False(bodyControlFeature.AllowSynchronousIO);
 
-            // Synchronous reads now throw.
-            var ioEx = Assert.Throws<InvalidOperationException>(() => context.Request.Body.Read(new byte[1], 0, 1));
-            Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx.Message);
+                    // Synchronous reads now throw.
+                    var ioEx = Assert.Throws<InvalidOperationException>(
+                        () => context.Request.Body.Read(new byte[1], 0, 1)
+                    );
+                    Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx.Message);
 
-            var ioEx2 = Assert.Throws<InvalidOperationException>(() => context.Request.Body.CopyTo(Stream.Null));
-            Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx2.Message);
+                    var ioEx2 = Assert.Throws<InvalidOperationException>(
+                        () => context.Request.Body.CopyTo(Stream.Null)
+                    );
+                    Assert.Equal(CoreStrings.SynchronousReadsDisallowed, ioEx2.Message);
 
-            var buffer = new byte[5];
-            var length = await context.Request.Body.FillBufferUntilEndAsync(buffer).DefaultTimeout();
+                    var buffer = new byte[5];
+                    var length = await context.Request.Body
+                        .FillBufferUntilEndAsync(buffer)
+                        .DefaultTimeout();
 
-            Assert.Equal(5, length);
-            Assert.Equal("Hello", Encoding.ASCII.GetString(buffer));
-        }, testContext))
+                    Assert.Equal(5, length);
+                    Assert.Equal("Hello", Encoding.ASCII.GetString(buffer));
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "Hello");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "Hello");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1792,36 +2003,37 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             ServerOptions = { AllowSynchronousIO = true }
         };
 
-        await using (var server = new TestServer(async context =>
-        {
-            var bodyControlFeature = context.Features.Get<IHttpBodyControlFeature>();
-            Assert.True(bodyControlFeature.AllowSynchronousIO);
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    var bodyControlFeature = context.Features.Get<IHttpBodyControlFeature>();
+                    Assert.True(bodyControlFeature.AllowSynchronousIO);
 
-            int offset = 0;
-            var buffer = new byte[5];
-            while (offset < 5)
-            {
-                offset += context.Request.Body.Read(buffer, offset, 5 - offset);
-            }
+                    int offset = 0;
+                    var buffer = new byte[5];
+                    while (offset < 5)
+                    {
+                        offset += context.Request.Body.Read(buffer, offset, 5 - offset);
+                    }
 
-            Assert.Equal(0, await context.Request.Body.ReadAsync(new byte[1], 0, 1));
-            Assert.Equal("Hello", Encoding.ASCII.GetString(buffer, 0, 5));
-        }, testContext))
+                    Assert.Equal(0, await context.Request.Body.ReadAsync(new byte[1], 0, 1));
+                    Assert.Equal("Hello", Encoding.ASCII.GetString(buffer, 0, 5));
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "Hello");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "Hello");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -1831,25 +2043,23 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            try
-            {
-                await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1);
-            }
-            catch
-            {
-            }
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    try
+                    {
+                        await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1);
+                    }
+                    catch { }
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "");
                 connection.ShutdownSend();
 
                 await connection.ReceiveEnd();
@@ -1865,47 +2075,48 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            var request = httpContext.Request;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    var request = httpContext.Request;
 
-            Assert.Equal("POST", request.Method);
+                    Assert.Equal("POST", request.Method);
 
-            var readResult = await request.BodyReader.ReadAsync();
-            request.BodyReader.AdvanceTo(readResult.Buffer.End);
+                    var readResult = await request.BodyReader.ReadAsync();
+                    request.BodyReader.AdvanceTo(readResult.Buffer.End);
 
-            var requestTask = httpContext.Request.BodyReader.ReadAsync();
+                    var requestTask = httpContext.Request.BodyReader.ReadAsync();
 
-            httpContext.Request.BodyReader.CancelPendingRead();
+                    httpContext.Request.BodyReader.CancelPendingRead();
 
-            Assert.True((await requestTask).IsCanceled);
+                    Assert.True((await requestTask).IsCanceled);
 
-            tcs.SetResult();
+                    tcs.SetResult();
 
-            response.Headers["Content-Length"] = new[] { "11" };
+                    response.Headers["Content-Length"] = new[] { "11" };
 
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11));
-
-        }, testContext))
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                    );
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "H");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "H");
                 await tcs.Task;
-                await connection.Send(
-                    "ello");
+                await connection.Send("ello");
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 11",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Hello World");
+                    "Hello World"
+                );
             }
         }
     }
@@ -1915,41 +2126,45 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            var request = httpContext.Request;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    var request = httpContext.Request;
 
-            Assert.Equal("POST", request.Method);
+                    Assert.Equal("POST", request.Method);
 
-            var readResult = await request.BodyReader.ReadAsync();
-            request.BodyReader.AdvanceTo(readResult.Buffer.End);
+                    var readResult = await request.BodyReader.ReadAsync();
+                    request.BodyReader.AdvanceTo(readResult.Buffer.End);
 
-            httpContext.Request.BodyReader.Complete();
+                    httpContext.Request.BodyReader.Complete();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await request.BodyReader.ReadAsync());
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        async () => await request.BodyReader.ReadAsync()
+                    );
 
-            response.Headers["Content-Length"] = new[] { "11" };
+                    response.Headers["Content-Length"] = new[] { "11" };
 
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11));
-
-        }, testContext))
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                    );
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "Hello");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "Hello");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 11",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Hello World");
+                    "Hello World"
+                );
             }
         }
     }
@@ -1960,27 +2175,26 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         var testContext = new TestServiceContext(LoggerFactory);
 
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var request = httpContext.Request;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var request = httpContext.Request;
 
-            var readResult = await request.BodyReader.ReadAsync();
-            request.BodyReader.AdvanceTo(readResult.Buffer.End);
+                    var readResult = await request.BodyReader.ReadAsync();
+                    request.BodyReader.AdvanceTo(readResult.Buffer.End);
 
-            httpContext.Request.BodyReader.Complete();
+                    httpContext.Request.BodyReader.Complete();
 
-            tcs.SetResult();
-
-        }, testContext))
+                    tcs.SetResult();
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "He");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "He");
                 await tcs.Task;
                 await connection.Send("llo");
                 await connection.Receive(
@@ -1988,11 +2202,15 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Content-Length: 0",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
 
-        Assert.All(TestSink.Writes, w => Assert.InRange(w.LogLevel, LogLevel.Trace, LogLevel.Information));
+        Assert.All(
+            TestSink.Writes,
+            w => Assert.InRange(w.LogLevel, LogLevel.Trace, LogLevel.Information)
+        );
     }
 
     [Fact]
@@ -2000,39 +2218,41 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory);
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            var response = httpContext.Response;
-            var request = httpContext.Request;
+        await using (
+            var server = new TestServer(
+                async httpContext =>
+                {
+                    var response = httpContext.Response;
+                    var request = httpContext.Request;
 
-            Assert.Equal("POST", request.Method);
-            Assert.True(request.CanHaveBody());
-            var readResult = await request.BodyReader.ReadAsync();
-            request.BodyReader.AdvanceTo(readResult.Buffer.End);
+                    Assert.Equal("POST", request.Method);
+                    Assert.True(request.CanHaveBody());
+                    var readResult = await request.BodyReader.ReadAsync();
+                    request.BodyReader.AdvanceTo(readResult.Buffer.End);
 
-            httpContext.Request.BodyReader.Complete(new Exception());
+                    httpContext.Request.BodyReader.Complete(new Exception());
 
-            response.Headers["Content-Length"] = new[] { "11" };
+                    response.Headers["Content-Length"] = new[] { "11" };
 
-            await response.BodyWriter.WriteAsync(new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11));
-
-        }, testContext))
+                    await response.BodyWriter.WriteAsync(
+                        new Memory<byte>(Encoding.ASCII.GetBytes("Hello World"), 0, 11)
+                    );
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "Hello");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "Hello");
 
                 await connection.Receive(
                     "HTTP/1.1 500 Internal Server Error",
                     "Content-Length: 0",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -2044,12 +2264,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         string customHeaderValue = null;
         string contentTypeHeaderValue = null;
 
-        await using (var server = new TestServer(context =>
-        {
-            customHeaderValue = context.Request.Headers["X-CustomHeader"];
-            contentTypeHeaderValue = context.Request.ContentType;
-            return Task.CompletedTask;
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    customHeaderValue = context.Request.Headers["X-CustomHeader"];
+                    contentTypeHeaderValue = context.Request.ContentType;
+                    return Task.CompletedTask;
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -2060,13 +2285,15 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Content-Type: application/test",
                     "X-CustomHeader: customvalue",
                     "",
-                    "");
+                    ""
+                );
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
 
                 var initialCustomHeaderValue = customHeaderValue;
                 var initialContentTypeValue = contentTypeHeaderValue;
@@ -2078,13 +2305,15 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Content-Type: application/test",
                     "X-CustomHeader: customvalue",
                     "",
-                    "");
+                    ""
+                );
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
 
                 Assert.NotSame(initialCustomHeaderValue, customHeaderValue);
                 Assert.Same(initialContentTypeValue, contentTypeHeaderValue);
@@ -2099,17 +2328,24 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
         object persistedState = null;
         var requestCount = 0;
 
-        await using (var server = new TestServer(context =>
-        {
-            requestCount++;
-            var persistentStateCollection = context.Features.Get<IPersistentStateFeature>().State;
-            if (persistentStateCollection.TryGetValue("Counter", out var value))
-            {
-                persistedState = value;
-            }
-            persistentStateCollection["Counter"] = requestCount;
-            return Task.CompletedTask;
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    requestCount++;
+                    var persistentStateCollection = context.Features
+                        .Get<IPersistentStateFeature>()
+                        .State;
+                    if (persistentStateCollection.TryGetValue("Counter", out var value))
+                    {
+                        persistedState = value;
+                    }
+                    persistentStateCollection["Counter"] = requestCount;
+                    return Task.CompletedTask;
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -2120,13 +2356,15 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Content-Type: application/test",
                     "X-CustomHeader: customvalue",
                     "",
-                    "");
+                    ""
+                );
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
                 var firstRequestState = persistedState;
 
                 // Second request
@@ -2136,13 +2374,15 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Content-Type: application/test",
                     "X-CustomHeader: customvalue",
                     "",
-                    "");
+                    ""
+                );
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
                 var secondRequestState = persistedState;
 
                 // First request has no persisted state
@@ -2161,29 +2401,30 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
         testContext.ServerOptions.RequestHeaderEncodingSelector = _ => Encoding.Latin1;
 
-        await using (var server = new TestServer(context =>
-        {
-            Assert.Equal("£", context.Request.Headers["X-Test"]);
-            return Task.CompletedTask;
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    Assert.Equal("£", context.Request.Headers["X-Test"]);
+                    return Task.CompletedTask;
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
                 // The StreamBackedTestConnection will encode £ using the "iso-8859-1" aka Latin1 encoding.
                 // It will be encoded as 0xA3 which isn't valid UTF-8.
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "X-Test: £",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "X-Test: £", "", "");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -2199,12 +2440,7 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             {
                 // The StreamBackedTestConnection will encode £ using the "iso-8859-1" aka Latin1 encoding.
                 // It will be encoded as 0xA3 which isn't valid UTF-8.
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "X-Test: £",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "X-Test: £", "", "");
 
                 await connection.ReceiveEnd(
                     "HTTP/1.1 400 Bad Request",
@@ -2212,7 +2448,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
                     "Connection: close",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -2224,31 +2461,32 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
 
         testContext.ServerOptions.RequestHeaderEncodingSelector = _ => Encoding.UTF32;
 
-        await using (var server = new TestServer(context =>
-        {
-            Assert.Equal("£", context.Request.Headers["X-Test"]);
-            return Task.CompletedTask;
-        }, testContext))
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    Assert.Equal("£", context.Request.Headers["X-Test"]);
+                    return Task.CompletedTask;
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "X-Test: ");
+                await connection.Send("GET / HTTP/1.1", "Host:", "X-Test: ");
 
                 await connection.Stream.WriteAsync(Encoding.UTF32.GetBytes("£")).DefaultTimeout();
 
-                await connection.Send("",
-                    "",
-                    "");
+                await connection.Send("", "", "");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }

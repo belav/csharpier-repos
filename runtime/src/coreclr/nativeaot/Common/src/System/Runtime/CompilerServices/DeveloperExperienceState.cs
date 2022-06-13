@@ -12,7 +12,7 @@ namespace System.Runtime.CompilerServices
         {
             get
             {
-                return true;  // ILC will rewrite to this "return false" if run with "/buildType:ret"
+                return true; // ILC will rewrite to this "return false" if run with "/buildType:ret"
             }
         }
     }

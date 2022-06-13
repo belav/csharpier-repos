@@ -115,11 +115,19 @@ namespace System.Linq.Expressions.Compiler
                 Expression newBody = body.Node;
                 if (_tm.Temps.Count > 0)
                 {
-                    newBody = Expression.Block(_tm.Temps, new TrueReadOnlyCollection<Expression>(newBody));
+                    newBody = Expression.Block(
+                        _tm.Temps,
+                        new TrueReadOnlyCollection<Expression>(newBody)
+                    );
                 }
 
                 // Clone the lambda, replacing the body & variables.
-                return Expression<T>.Create(newBody, lambda.Name, lambda.TailCall, new ParameterList(lambda));
+                return Expression<T>.Create(
+                    newBody,
+                    lambda.Name,
+                    lambda.TailCall,
+                    new ParameterList(lambda)
+                );
             }
 
             return lambda;
@@ -133,14 +141,22 @@ namespace System.Linq.Expressions.Compiler
             Debug.Assert(result.Node != null);
 
             // (result.Action == RewriteAction.None) if and only if (node == result.Node)
-            Debug.Assert((result.Action == RewriteAction.None) ^ (node != result.Node), "rewrite action does not match node object identity");
+            Debug.Assert(
+                (result.Action == RewriteAction.None) ^ (node != result.Node),
+                "rewrite action does not match node object identity"
+            );
 
             // if the original node is an extension node, it should have been rewritten
-            Debug.Assert(result.Node.NodeType != ExpressionType.Extension, "extension nodes must be rewritten");
+            Debug.Assert(
+                result.Node.NodeType != ExpressionType.Extension,
+                "extension nodes must be rewritten"
+            );
 
             // if we have Copy, then node type must match
             Debug.Assert(
-                result.Action != RewriteAction.Copy || node.NodeType == result.Node.NodeType || node.CanReduce,
+                result.Action != RewriteAction.Copy
+                    || node.NodeType == result.Node.NodeType
+                    || node.CanReduce,
                 "rewrite action does not match node object kind"
             );
 
@@ -197,11 +213,11 @@ namespace System.Linq.Expressions.Compiler
             {
                 node = new AssignBinaryExpression(
                     new IndexExpression(
-                        cr[0],                              // Object
+                        cr[0], // Object
                         index.Indexer,
-                        cr[1, -2]!                           // arguments
+                        cr[1, -2]! // arguments
                     ),
-                    cr[-1]!                                  // value
+                    cr[-1]! // value
                 );
             }
 
@@ -266,15 +282,18 @@ namespace System.Linq.Expressions.Compiler
                 RequireNoRefArgs(node.Method);
             }
 
-            return cr.Finish(cr.Rewrite ?
-                                    BinaryExpression.Create(
-                                            node.NodeType,
-                                            cr[0]!,
-                                            cr[1]!,
-                                            node.Type,
-                                            node.Method,
-                                            (LambdaExpression?)cr[2]) :
-                                    expr);
+            return cr.Finish(
+                cr.Rewrite
+                    ? BinaryExpression.Create(
+                        node.NodeType,
+                        cr[0]!,
+                        cr[1]!,
+                        node.Type,
+                        node.Method,
+                        (LambdaExpression?)cr[2]
+                    )
+                    : expr
+            );
         }
 
         private Result RewriteVariableAssignment(BinaryExpression node, Stack stack)
@@ -369,10 +388,7 @@ namespace System.Linq.Expressions.Compiler
             if (cr.Rewrite)
             {
                 return cr.Finish(
-                    new AssignBinaryExpression(
-                        MemberExpression.Make(cr[0], lvalue.Member),
-                        cr[1]!
-                    )
+                    new AssignBinaryExpression(MemberExpression.Make(cr[0], lvalue.Member), cr[1]!)
                 );
             }
 
@@ -388,8 +404,7 @@ namespace System.Linq.Expressions.Compiler
 
             if (expression.Action != RewriteAction.None)
             {
-                if (expression.Action == RewriteAction.SpillStack &&
-                    node.Member is PropertyInfo)
+                if (expression.Action == RewriteAction.SpillStack && node.Member is PropertyInfo)
                 {
                     // Only need to validate properties because reading a field
                     // is always side-effect free.
@@ -419,11 +434,7 @@ namespace System.Linq.Expressions.Compiler
 
             if (cr.Rewrite)
             {
-                expr = new IndexExpression(
-                    cr[0],
-                    node.Indexer,
-                    cr[1, -1]!
-                );
+                expr = new IndexExpression(cr[0], node.Indexer, cr[1, -1]!);
             }
 
             return cr.Finish(expr);
@@ -484,7 +495,11 @@ namespace System.Linq.Expressions.Compiler
 
             if (cr.Rewrite)
             {
-                expr = NewArrayExpression.Make(node.NodeType, node.Type, new TrueReadOnlyCollection<Expression>(cr[0, -1]!));
+                expr = NewArrayExpression.Make(
+                    node.NodeType,
+                    node.Type,
+                    new TrueReadOnlyCollection<Expression>(cr[0, -1]!)
+                );
             }
 
             return cr.Finish(expr);
@@ -535,7 +550,9 @@ namespace System.Linq.Expressions.Compiler
                 cr.MarkRefArgs(Expression.GetInvokeMethod(node.Expression), startIndex: 1);
             }
 
-            return cr.Finish(cr.Rewrite ? new InvocationExpressionN(cr[0]!, cr[1, -1]!, node.Type) : expr);
+            return cr.Finish(
+                cr.Rewrite ? new InvocationExpressionN(cr[0]!, cr[1, -1]!, node.Type) : expr
+            );
         }
 
         private Result RewriteNewExpression(Expression expr, Stack stack)
@@ -552,7 +569,9 @@ namespace System.Linq.Expressions.Compiler
                 cr.MarkRefArgs(node.Constructor!, startIndex: 0);
             }
 
-            return cr.Finish(cr.Rewrite ? new NewExpression(node.Constructor, cr[0, -1]!, node.Members) : expr);
+            return cr.Finish(
+                cr.Rewrite ? new NewExpression(node.Constructor, cr[0, -1]!, node.Members) : expr
+            );
         }
 
         private Result RewriteTypeBinaryExpression(Expression expr, Stack stack)
@@ -660,10 +679,16 @@ namespace System.Linq.Expressions.Compiler
                         }
                         else
                         {
-                            newInits[i] = new ElementInit(inits[i].AddMethod, new TrueReadOnlyCollection<Expression>(cr[0, -1]!));
+                            newInits[i] = new ElementInit(
+                                inits[i].AddMethod,
+                                new TrueReadOnlyCollection<Expression>(cr[0, -1]!)
+                            );
                         }
                     }
-                    expr = new ListInitExpression((NewExpression)rewrittenNew, new TrueReadOnlyCollection<ElementInit>(newInits));
+                    expr = new ListInitExpression(
+                        (NewExpression)rewrittenNew,
+                        new TrueReadOnlyCollection<ElementInit>(newInits)
+                    );
                     break;
                 case RewriteAction.SpillStack:
                     bool isRefNew = IsRefInstance(node.NewExpression);
@@ -682,7 +707,13 @@ namespace System.Linq.Expressions.Compiler
                     for (int i = 0; i < count; i++)
                     {
                         ChildRewriter cr = cloneCrs[i];
-                        Result add = cr.Finish(new InstanceMethodCallExpressionN(inits[i].AddMethod, refTempNew, cr[0, -1]!));
+                        Result add = cr.Finish(
+                            new InstanceMethodCallExpressionN(
+                                inits[i].AddMethod,
+                                refTempNew,
+                                cr[0, -1]!
+                            )
+                        );
                         comma.UncheckedAdd(add.Node);
                     }
 
@@ -732,7 +763,10 @@ namespace System.Linq.Expressions.Compiler
                     {
                         newBindings[i] = bindingRewriters[i].AsBinding();
                     }
-                    expr = new MemberInitExpression((NewExpression)rewrittenNew, new TrueReadOnlyCollection<MemberBinding>(newBindings));
+                    expr = new MemberInitExpression(
+                        (NewExpression)rewrittenNew,
+                        new TrueReadOnlyCollection<MemberBinding>(newBindings)
+                    );
                     break;
                 case RewriteAction.SpillStack:
                     bool isRefNew = IsRefInstance(node.NewExpression);
@@ -943,7 +977,13 @@ namespace System.Linq.Expressions.Compiler
                     cases = new ReadOnlyCollection<SwitchCase>(clone);
                 }
 
-                expr = new SwitchExpression(node.Type, switchValue.Node, defaultBody.Node, node.Comparison, cases);
+                expr = new SwitchExpression(
+                    node.Type,
+                    switchValue.Node,
+                    defaultBody.Node,
+                    node.Comparison,
+                    cases
+                );
             }
 
             return new Result(action, expr);
@@ -985,7 +1025,12 @@ namespace System.Linq.Expressions.Compiler
 
                     if (curAction != RewriteAction.None)
                     {
-                        handler = Expression.MakeCatchBlock(handler.Test, handler.Variable, rbody.Node, filter);
+                        handler = Expression.MakeCatchBlock(
+                            handler.Test,
+                            handler.Variable,
+                            rbody.Node,
+                            filter
+                        );
 
                         if (clone == null)
                         {
@@ -1020,7 +1065,13 @@ namespace System.Linq.Expressions.Compiler
                     handlers = new ReadOnlyCollection<CatchBlock>(clone);
                 }
 
-                expr = new TryExpression(node.Type, body.Node, @finally.Node, fault.Node, handlers!);
+                expr = new TryExpression(
+                    node.Type,
+                    body.Node,
+                    @finally.Node,
+                    fault.Node,
+                    handlers!
+                );
             }
 
             return new Result(action, expr);
@@ -1102,7 +1153,9 @@ namespace System.Linq.Expressions.Compiler
             // Primitive value types are okay because they are all read-only,
             // but we can't rely on this for non-primitive types. So we have
             // to either throw NotSupported or use ref locals.
-            return instance != null && instance.Type.IsValueType && instance.Type.GetTypeCode() == TypeCode.Object;
+            return instance != null
+                && instance.Type.IsValueType
+                && instance.Type.GetTypeCode() == TypeCode.Object;
         }
     }
 }

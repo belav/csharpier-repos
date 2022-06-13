@@ -11,7 +11,11 @@ namespace Internal.Reflection.Execution.FieldAccessors
 {
     internal abstract class InstanceFieldAccessor : FieldAccessor
     {
-        public InstanceFieldAccessor(RuntimeTypeHandle declaringTypeHandle, RuntimeTypeHandle fieldTypeHandle, int offsetPlusHeader)
+        public InstanceFieldAccessor(
+            RuntimeTypeHandle declaringTypeHandle,
+            RuntimeTypeHandle fieldTypeHandle,
+            int offsetPlusHeader
+        )
         {
             this.DeclaringTypeHandle = declaringTypeHandle;
             this.FieldTypeHandle = fieldTypeHandle;
@@ -49,7 +53,9 @@ namespace Internal.Reflection.Execution.FieldAccessors
             }
         }
 
-        protected abstract object UncheckedGetFieldDirectFromValueType(TypedReference typedReference);
+        protected abstract object UncheckedGetFieldDirectFromValueType(
+            TypedReference typedReference
+        );
 
         public sealed override void SetField(object obj, object value, BinderBundle binderBundle)
         {
@@ -71,7 +77,10 @@ namespace Internal.Reflection.Execution.FieldAccessors
                 Type targetType = TypedReference.GetTargetType(typedReference);
                 if (!(targetType.TypeHandle.Equals(this.DeclaringTypeHandle)))
                     throw new ArgumentException();
-                value = RuntimeAugments.CheckArgumentForDirectFieldAccess(value, this.FieldTypeHandle);
+                value = RuntimeAugments.CheckArgumentForDirectFieldAccess(
+                    value,
+                    this.FieldTypeHandle
+                );
                 UncheckedSetFieldDirectIntoValueType(typedReference, value);
             }
             else
@@ -83,12 +92,18 @@ namespace Internal.Reflection.Execution.FieldAccessors
                     throw new TargetException(SR.RFLCT_Targ_StatFldReqTarg);
                 if (!RuntimeAugments.IsAssignable(obj, this.DeclaringTypeHandle))
                     throw new ArgumentException();
-                value = RuntimeAugments.CheckArgumentForDirectFieldAccess(value, this.FieldTypeHandle);
+                value = RuntimeAugments.CheckArgumentForDirectFieldAccess(
+                    value,
+                    this.FieldTypeHandle
+                );
                 UncheckedSetField(obj, value);
             }
         }
 
-        protected abstract void UncheckedSetFieldDirectIntoValueType(TypedReference typedReference, object value);
+        protected abstract void UncheckedSetFieldDirectIntoValueType(
+            TypedReference typedReference,
+            object value
+        );
 
         protected abstract object UncheckedGetField(object obj);
         protected abstract void UncheckedSetField(object obj, object value);

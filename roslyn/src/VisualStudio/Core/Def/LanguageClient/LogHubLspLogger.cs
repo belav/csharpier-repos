@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
         public LogHubLspLogger(TraceConfiguration configuration, TraceSource traceSource)
         {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _configuration =
+                configuration ?? throw new ArgumentNullException(nameof(configuration));
             _traceSource = traceSource ?? throw new ArgumentNullException(nameof(traceSource));
         }
 
@@ -45,19 +46,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             _traceSource.TraceEvent(TraceEventType.Information, id: 0, message);
         }
 
-        public void TraceWarning(string message)
-            => _traceSource.TraceEvent(TraceEventType.Warning, id: 0, message);
+        public void TraceWarning(string message) =>
+            _traceSource.TraceEvent(TraceEventType.Warning, id: 0, message);
 
-        public void TraceError(string message)
-            => _traceSource.TraceEvent(TraceEventType.Error, id: 0, message);
+        public void TraceError(string message) =>
+            _traceSource.TraceEvent(TraceEventType.Error, id: 0, message);
 
-        public void TraceException(Exception exception)
-            => _traceSource.TraceEvent(TraceEventType.Error, id: 0, "Exception: {0}", exception);
+        public void TraceException(Exception exception) =>
+            _traceSource.TraceEvent(TraceEventType.Error, id: 0, "Exception: {0}", exception);
 
-        public void TraceStart(string message)
-            => _traceSource.TraceEvent(TraceEventType.Start, id: 0, message);
+        public void TraceStart(string message) =>
+            _traceSource.TraceEvent(TraceEventType.Start, id: 0, message);
 
-        public void TraceStop(string message)
-            => _traceSource.TraceEvent(TraceEventType.Stop, id: 0, message);
+        public void TraceStop(string message) =>
+            _traceSource.TraceEvent(TraceEventType.Stop, id: 0, message);
     }
 }

@@ -18,7 +18,11 @@ namespace System.Formats.Tar
         /// <param name="sourceDirectoryName">The path of the directory to archive.</param>
         /// <param name="destination">The destination stream the archive.</param>
         /// <param name="includeBaseDirectory"><see langword="true"/> to include the base directory name as the first segment in all the names of the archive entries. <see langword="false"/> to exclude the base directory name from the archive entry names.</param>
-        public static void CreateFromDirectory(string sourceDirectoryName, Stream destination, bool includeBaseDirectory)
+        public static void CreateFromDirectory(
+            string sourceDirectoryName,
+            Stream destination,
+            bool includeBaseDirectory
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(sourceDirectoryName);
             ArgumentNullException.ThrowIfNull(destination);
@@ -30,13 +34,20 @@ namespace System.Formats.Tar
 
             if (!Directory.Exists(sourceDirectoryName))
             {
-                throw new DirectoryNotFoundException(string.Format(SR.IO_PathNotFound_Path, sourceDirectoryName));
+                throw new DirectoryNotFoundException(
+                    string.Format(SR.IO_PathNotFound_Path, sourceDirectoryName)
+                );
             }
 
             // Rely on Path.GetFullPath for validation of paths
             sourceDirectoryName = Path.GetFullPath(sourceDirectoryName);
 
-            CreateFromDirectoryInternal(sourceDirectoryName, destination, includeBaseDirectory, leaveOpen: true);
+            CreateFromDirectoryInternal(
+                sourceDirectoryName,
+                destination,
+                includeBaseDirectory,
+                leaveOpen: true
+            );
         }
 
         // /// <summary>
@@ -58,7 +69,11 @@ namespace System.Formats.Tar
         /// <param name="sourceDirectoryName">The path of the directory to archive.</param>
         /// <param name="destinationFileName">The path of the destination archive file.</param>
         /// <param name="includeBaseDirectory"><see langword="true"/> to include the base directory name as the first path segment in all the names of the archive entries. <see langword="false"/> to exclude the base directory name from the entry name paths.</param>
-        public static void CreateFromDirectory(string sourceDirectoryName, string destinationFileName, bool includeBaseDirectory)
+        public static void CreateFromDirectory(
+            string sourceDirectoryName,
+            string destinationFileName,
+            bool includeBaseDirectory
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(sourceDirectoryName);
             ArgumentException.ThrowIfNullOrEmpty(destinationFileName);
@@ -69,7 +84,9 @@ namespace System.Formats.Tar
 
             if (!Directory.Exists(sourceDirectoryName))
             {
-                throw new DirectoryNotFoundException(string.Format(SR.IO_PathNotFound_Path, sourceDirectoryName));
+                throw new DirectoryNotFoundException(
+                    string.Format(SR.IO_PathNotFound_Path, sourceDirectoryName)
+                );
             }
 
             if (Path.Exists(destinationFileName))
@@ -77,9 +94,18 @@ namespace System.Formats.Tar
                 throw new IOException(string.Format(SR.IO_FileExists_Name, destinationFileName));
             }
 
-            using FileStream fs = File.Create(destinationFileName, bufferSize: 0x1000, FileOptions.None);
+            using FileStream fs = File.Create(
+                destinationFileName,
+                bufferSize: 0x1000,
+                FileOptions.None
+            );
 
-            CreateFromDirectoryInternal(sourceDirectoryName, fs, includeBaseDirectory, leaveOpen: false);
+            CreateFromDirectoryInternal(
+                sourceDirectoryName,
+                fs,
+                includeBaseDirectory,
+                leaveOpen: false
+            );
         }
 
         // /// <summary>
@@ -105,7 +131,11 @@ namespace System.Formats.Tar
         /// <para>Elevation is required to extract a <see cref="TarEntryType.BlockDevice"/> or <see cref="TarEntryType.CharacterDevice"/> to disk.</para></remarks>
         /// <exception cref="UnauthorizedAccessException">Operation not permitted due to insufficient permissions.</exception>
         /// <exception cref="IOException">Extracting tar entry would have resulted in a file outside the specified destination directory.</exception>
-        public static void ExtractToDirectory(Stream source, string destinationDirectoryName, bool overwriteFiles)
+        public static void ExtractToDirectory(
+            Stream source,
+            string destinationDirectoryName,
+            bool overwriteFiles
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
             ArgumentException.ThrowIfNullOrEmpty(destinationDirectoryName);
@@ -117,13 +147,20 @@ namespace System.Formats.Tar
 
             if (!Directory.Exists(destinationDirectoryName))
             {
-                throw new DirectoryNotFoundException(string.Format(SR.IO_PathNotFound_Path, destinationDirectoryName));
+                throw new DirectoryNotFoundException(
+                    string.Format(SR.IO_PathNotFound_Path, destinationDirectoryName)
+                );
             }
 
             // Rely on Path.GetFullPath for validation of paths
             destinationDirectoryName = Path.GetFullPath(destinationDirectoryName);
 
-            ExtractToDirectoryInternal(source, destinationDirectoryName, overwriteFiles, leaveOpen: true);
+            ExtractToDirectoryInternal(
+                source,
+                destinationDirectoryName,
+                overwriteFiles,
+                leaveOpen: true
+            );
         }
 
         // /// <summary>
@@ -151,7 +188,11 @@ namespace System.Formats.Tar
         /// <remarks><para>Files of type <see cref="TarEntryType.BlockDevice"/>, <see cref="TarEntryType.CharacterDevice"/> or <see cref="TarEntryType.Fifo"/> can only be extracted in Unix platforms.</para>
         /// <para>Elevation is required to extract a <see cref="TarEntryType.BlockDevice"/> or <see cref="TarEntryType.CharacterDevice"/> to disk.</para></remarks>
         /// <exception cref="UnauthorizedAccessException">Operation not permitted due to insufficient permissions.</exception>
-        public static void ExtractToDirectory(string sourceFileName, string destinationDirectoryName, bool overwriteFiles)
+        public static void ExtractToDirectory(
+            string sourceFileName,
+            string destinationDirectoryName,
+            bool overwriteFiles
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(sourceFileName);
             ArgumentException.ThrowIfNullOrEmpty(destinationDirectoryName);
@@ -167,20 +208,28 @@ namespace System.Formats.Tar
 
             if (!Directory.Exists(destinationDirectoryName))
             {
-                throw new DirectoryNotFoundException(string.Format(SR.IO_PathNotFound_Path, destinationDirectoryName));
+                throw new DirectoryNotFoundException(
+                    string.Format(SR.IO_PathNotFound_Path, destinationDirectoryName)
+                );
             }
 
-            FileStreamOptions fileStreamOptions = new()
-            {
-                Access = FileAccess.Read,
-                BufferSize = 0x1000,
-                Mode = FileMode.Open,
-                Share = FileShare.Read
-            };
+            FileStreamOptions fileStreamOptions =
+                new()
+                {
+                    Access = FileAccess.Read,
+                    BufferSize = 0x1000,
+                    Mode = FileMode.Open,
+                    Share = FileShare.Read
+                };
 
             using FileStream archive = File.Open(sourceFileName, fileStreamOptions);
 
-            ExtractToDirectoryInternal(archive, destinationDirectoryName, overwriteFiles, leaveOpen: false);
+            ExtractToDirectoryInternal(
+                archive,
+                destinationDirectoryName,
+                overwriteFiles,
+                leaveOpen: false
+            );
         }
 
         // /// <summary>
@@ -201,7 +250,12 @@ namespace System.Formats.Tar
 
         // Creates an archive from the contents of a directory.
         // It assumes the sourceDirectoryName is a fully qualified path, and allows choosing if the archive stream should be left open or not.
-        private static void CreateFromDirectoryInternal(string sourceDirectoryName, Stream destination, bool includeBaseDirectory, bool leaveOpen)
+        private static void CreateFromDirectoryInternal(
+            string sourceDirectoryName,
+            Stream destination,
+            bool includeBaseDirectory,
+            bool leaveOpen
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(sourceDirectoryName));
             Debug.Assert(destination != null);
@@ -227,7 +281,12 @@ namespace System.Formats.Tar
 
                 try
                 {
-                    foreach (FileSystemInfo file in di.EnumerateFileSystemInfos("*", SearchOption.AllDirectories))
+                    foreach (
+                        FileSystemInfo file in di.EnumerateFileSystemInfos(
+                            "*",
+                            SearchOption.AllDirectories
+                        )
+                    )
                     {
                         baseDirectoryIsEmpty = false;
 
@@ -235,13 +294,25 @@ namespace System.Formats.Tar
                         Debug.Assert(entryNameLength > 0);
 
                         bool isDirectory = file.Attributes.HasFlag(FileAttributes.Directory);
-                        string entryName = ArchivingUtils.EntryFromPath(file.FullName, basePath.Length, entryNameLength, ref entryNameBuffer, appendPathSeparator: isDirectory);
+                        string entryName = ArchivingUtils.EntryFromPath(
+                            file.FullName,
+                            basePath.Length,
+                            entryNameLength,
+                            ref entryNameBuffer,
+                            appendPathSeparator: isDirectory
+                        );
                         writer.WriteEntry(file.FullName, entryName);
                     }
 
                     if (includeBaseDirectory && baseDirectoryIsEmpty)
                     {
-                        string entryName = ArchivingUtils.EntryFromPath(di.Name, 0, di.Name.Length, ref entryNameBuffer, appendPathSeparator: true);
+                        string entryName = ArchivingUtils.EntryFromPath(
+                            di.Name,
+                            0,
+                            di.Name.Length,
+                            ref entryNameBuffer,
+                            appendPathSeparator: true
+                        );
                         PaxTarEntry entry = new PaxTarEntry(TarEntryType.Directory, entryName);
                         writer.WriteEntry(entry);
                     }
@@ -255,7 +326,12 @@ namespace System.Formats.Tar
 
         // Extracts an archive into the specified directory.
         // It assumes the destinationDirectoryName is a fully qualified path, and allows choosing if the archive stream should be left open or not.
-        private static void ExtractToDirectoryInternal(Stream source, string destinationDirectoryPath, bool overwriteFiles, bool leaveOpen)
+        private static void ExtractToDirectoryInternal(
+            Stream source,
+            string destinationDirectoryPath,
+            bool overwriteFiles,
+            bool leaveOpen
+        )
         {
             Debug.Assert(source != null);
             Debug.Assert(!string.IsNullOrEmpty(destinationDirectoryPath));

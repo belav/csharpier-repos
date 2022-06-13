@@ -41,8 +41,10 @@ public class NativeLibraryTests : IDisposable
     public void LoadLibraryOnInvalidFile_NameOnly()
     {
         string libName = Path.Combine(testBinDir, "NativeLibrary.cpp");
-        EXPECT(LoadLibrary_NameOnly(libName),
-                OperatingSystem.IsWindows() ? TestResult.BadImage : TestResult.DllNotFound);
+        EXPECT(
+            LoadLibrary_NameOnly(libName),
+            OperatingSystem.IsWindows() ? TestResult.BadImage : TestResult.DllNotFound
+        );
         EXPECT(TryLoadLibrary_NameOnly(libName), TestResult.ReturnFailure);
     }
 
@@ -66,8 +68,10 @@ public class NativeLibraryTests : IDisposable
     public void LoadLibraryOnInvalidFile_WithAssembly()
     {
         string libName = Path.Combine(testBinDir, "NativeLibrary.cpp");
-        EXPECT(LoadLibrary_WithAssembly(libName, assembly, null),
-                OperatingSystem.IsWindows() ? TestResult.BadImage : TestResult.DllNotFound);
+        EXPECT(
+            LoadLibrary_WithAssembly(libName, assembly, null),
+            OperatingSystem.IsWindows() ? TestResult.BadImage : TestResult.DllNotFound
+        );
         EXPECT(TryLoadLibrary_WithAssembly(libName, assembly, null), TestResult.ReturnFailure);
     }
 
@@ -122,8 +126,18 @@ public class NativeLibraryTests : IDisposable
         EXPECT(TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.System32));
 
         // Calls on a valid library from application directory
-        EXPECT(LoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.ApplicationDirectory), TestResult.DllNotFound);
-        EXPECT(TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.ApplicationDirectory), TestResult.ReturnFailure);
+        EXPECT(
+            LoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.ApplicationDirectory),
+            TestResult.DllNotFound
+        );
+        EXPECT(
+            TryLoadLibrary_WithAssembly(
+                libName,
+                assembly,
+                DllImportSearchPath.ApplicationDirectory
+            ),
+            TestResult.ReturnFailure
+        );
     }
 
     [Fact]
@@ -145,8 +159,14 @@ public class NativeLibraryTests : IDisposable
     public void LoadLibrary_UsesFullPath_EvenWhen_AssemblyDirectory_Specified()
     {
         string libName = Path.Combine(testBinDir, Path.Combine("lib", NativeLibraryToLoad.Name));
-        EXPECT(LoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory), TestResult.DllNotFound);
-        EXPECT(TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory), TestResult.ReturnFailure);
+        EXPECT(
+            LoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory),
+            TestResult.DllNotFound
+        );
+        EXPECT(
+            TryLoadLibrary_WithAssembly(libName, assembly, DllImportSearchPath.AssemblyDirectory),
+            TestResult.ReturnFailure
+        );
     }
 
     [Fact]
@@ -171,13 +191,14 @@ public class NativeLibraryTests : IDisposable
         EXPECT(FreeLibrary(IntPtr.Zero));
     }
 
-    public void Dispose() {}
+    public void Dispose() { }
 
     static TestResult LoadLibrary_NameOnly(string libPath)
     {
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(() => {
+        TestResult result = Run(() =>
+        {
             handle = NativeLibrary.Load(libPath);
             if (handle == IntPtr.Zero)
                 return TestResult.ReturnNull;
@@ -193,7 +214,8 @@ public class NativeLibraryTests : IDisposable
     {
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(() => {
+        TestResult result = Run(() =>
+        {
             bool success = NativeLibrary.TryLoad(libPath, out handle);
             if (!success)
                 return TestResult.ReturnFailure;
@@ -207,12 +229,16 @@ public class NativeLibraryTests : IDisposable
         return result;
     }
 
-
-    static TestResult LoadLibrary_WithAssembly(string libName, Assembly assembly, DllImportSearchPath? searchPath)
+    static TestResult LoadLibrary_WithAssembly(
+        string libName,
+        Assembly assembly,
+        DllImportSearchPath? searchPath
+    )
     {
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(() => {
+        TestResult result = Run(() =>
+        {
             handle = NativeLibrary.Load(libName, assembly, searchPath);
             if (handle == IntPtr.Zero)
                 return TestResult.ReturnNull;
@@ -224,11 +250,16 @@ public class NativeLibraryTests : IDisposable
         return result;
     }
 
-    static TestResult TryLoadLibrary_WithAssembly(string libName, Assembly assembly, DllImportSearchPath? searchPath)
+    static TestResult TryLoadLibrary_WithAssembly(
+        string libName,
+        Assembly assembly,
+        DllImportSearchPath? searchPath
+    )
     {
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(() => {
+        TestResult result = Run(() =>
+        {
             bool success = NativeLibrary.TryLoad(libName, assembly, searchPath, out handle);
             if (!success)
                 return TestResult.ReturnFailure;
@@ -244,7 +275,8 @@ public class NativeLibraryTests : IDisposable
 
     static TestResult FreeLibrary(IntPtr handle)
     {
-        return Run(() => {
+        return Run(() =>
+        {
             NativeLibrary.Free(handle);
             return TestResult.Success;
         });

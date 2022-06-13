@@ -19,11 +19,13 @@ namespace AutoMapper.UnitTests
             public int ShouldBeMapped { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.AddGlobalIgnore("ShouldBeMapped");
-            cfg.CreateMap<Source, Destination>().ForMember(d => d.ShouldBeMapped, o => o.MapFrom(src => 12));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.AddGlobalIgnore("ShouldBeMapped");
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(d => d.ShouldBeMapped, o => o.MapFrom(src => 12));
+            });
 
         protected override void Because_of()
         {
@@ -62,7 +64,10 @@ namespace AutoMapper.UnitTests
             public FooProfile()
             {
                 CreateMap<Source, Destination>()
-                    .ForMember(dest => dest.AnotherString_ShouldBeNullAfterwards, opt => opt.Ignore());
+                    .ForMember(
+                        dest => dest.AnotherString_ShouldBeNullAfterwards,
+                        opt => opt.Ignore()
+                    );
             }
         }
 
@@ -73,10 +78,13 @@ namespace AutoMapper.UnitTests
             {
                 cfg.AddGlobalIgnore("StartingWith");
                 cfg.CreateMap<Source, Destination>()
-                    .ForMember(dest => dest.AnotherString_ShouldBeNullAfterwards, opt => opt.Ignore());
+                    .ForMember(
+                        dest => dest.AnotherString_ShouldBeNullAfterwards,
+                        opt => opt.Ignore()
+                    );
             });
-            
-            config.CreateMapper().Map<Source, Destination>(new Source{ShouldBeMapped = "true"});
+
+            config.CreateMapper().Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
             config.AssertConfigurationIsValid();
         }
 
@@ -88,8 +96,8 @@ namespace AutoMapper.UnitTests
                 cfg.AddGlobalIgnore("StartingWith");
                 cfg.AddProfile<FooProfile>();
             });
-            
-            config.CreateMapper().Map<Source, Destination>(new Source{ShouldBeMapped = "true"});
+
+            config.CreateMapper().Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
             config.AssertConfigurationIsValid();
         }
 
@@ -102,7 +110,9 @@ namespace AutoMapper.UnitTests
                 cfg.CreateMap<Source, DestinationWrongType>();
             });
 
-            config.CreateMapper().Map<Source, DestinationWrongType>(new Source { ShouldBeMapped = "true" });
+            config
+                .CreateMapper()
+                .Map<Source, DestinationWrongType>(new Source { ShouldBeMapped = "true" });
             config.AssertConfigurationIsValid();
         }
 
@@ -113,10 +123,15 @@ namespace AutoMapper.UnitTests
             {
                 cfg.AddGlobalIgnore("StartingWith");
                 cfg.CreateMap<Source, Destination>()
-                    .ForMember(dest => dest.AnotherString_ShouldBeNullAfterwards, opt => opt.Ignore());
+                    .ForMember(
+                        dest => dest.AnotherString_ShouldBeNullAfterwards,
+                        opt => opt.Ignore()
+                    );
             });
 
-            Destination destination = config.CreateMapper().Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
+            Destination destination = config
+                .CreateMapper()
+                .Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
             destination.StartingWith_ShouldBeNullAfterwards.ShouldBe(null);
             destination.StartingWith_ShouldNotBeMapped.ShouldBe(null);
         }
@@ -131,11 +146,14 @@ namespace AutoMapper.UnitTests
                 cfg.CreateMap<Source, Destination>();
             });
 
-            Destination destination = config.CreateMapper().Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
+            Destination destination = config
+                .CreateMapper()
+                .Map<Source, Destination>(new Source { ShouldBeMapped = "true" });
             destination.AnotherString_ShouldBeNullAfterwards.ShouldBe(null);
             destination.StartingWith_ShouldNotBeMapped.ShouldBe(null);
         }
     }
+
     public class IgnoreAttributeTests
     {
         public class Source
@@ -147,6 +165,7 @@ namespace AutoMapper.UnitTests
         public class Destination
         {
             public string ShouldBeMapped { get; set; }
+
             [IgnoreMap]
             public string ShouldNotBeMapped { get; set; }
         }
@@ -161,11 +180,7 @@ namespace AutoMapper.UnitTests
             });
             config.AssertConfigurationIsValid();
 
-            Source source = new Source
-            {
-                ShouldBeMapped = "Value1",
-                ShouldNotBeMapped = "Value2"
-            };
+            Source source = new Source { ShouldBeMapped = "Value1", ShouldNotBeMapped = "Value2" };
 
             Destination destination = config.CreateMapper().Map<Source, Destination>(source);
             destination.ShouldNotBeMapped.ShouldBe(null);
@@ -183,6 +198,7 @@ namespace AutoMapper.UnitTests
         public class Destination
         {
             public string ShouldBeMapped { get; set; }
+
             [IgnoreMap]
             public string ShouldNotBeMapped { get; set; }
         }
@@ -205,12 +221,9 @@ namespace AutoMapper.UnitTests
 
             Source destination = config.CreateMapper().Map<Destination, Source>(source);
             destination.ShouldNotBeMapped.ShouldBe(null);
-
         }
 
-        public class Source2
-        {
-        }
+        public class Source2 { }
 
         public class Destination2
         {
@@ -221,8 +234,12 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Sould_not_throw_exception_when_reverse_property_does_not_exist()
         {
-            typeof(ArgumentOutOfRangeException).ShouldNotBeThrownBy(() => new MapperConfiguration(cfg => cfg.CreateMap<Source2, Destination2>()
-                 .ReverseMap()));
+            typeof(ArgumentOutOfRangeException).ShouldNotBeThrownBy(
+                () =>
+                    new MapperConfiguration(
+                        cfg => cfg.CreateMap<Source2, Destination2>().ReverseMap()
+                    )
+            );
         }
     }
 }

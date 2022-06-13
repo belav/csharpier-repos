@@ -9,14 +9,20 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal static class NodeAssert
 {
-    public static HtmlAttributeIntermediateNode Attribute(IntermediateNode node, string attributeName, string attributeValue)
+    public static HtmlAttributeIntermediateNode Attribute(
+        IntermediateNode node,
+        string attributeName,
+        string attributeValue
+    )
     {
         Assert.NotNull(node);
 
         var attributeNode = Assert.IsType<HtmlAttributeIntermediateNode>(node);
         Assert.Equal(attributeName, attributeNode.AttributeName);
 
-        var attributeValueNode = Assert.IsType<HtmlAttributeValueIntermediateNode>(Assert.Single(attributeNode.Children));
+        var attributeValueNode = Assert.IsType<HtmlAttributeValueIntermediateNode>(
+            Assert.Single(attributeNode.Children)
+        );
         var actual = new StringBuilder();
         for (var i = 0; i < attributeValueNode.Children.Count; i++)
         {
@@ -30,13 +36,21 @@ internal static class NodeAssert
         return attributeNode;
     }
 
-    public static HtmlAttributeIntermediateNode Attribute(IntermediateNodeCollection nodes, string attributeName, string attributeValue)
+    public static HtmlAttributeIntermediateNode Attribute(
+        IntermediateNodeCollection nodes,
+        string attributeName,
+        string attributeValue
+    )
     {
         Assert.NotNull(nodes);
         return Attribute(Assert.Single(nodes), attributeName, attributeValue);
     }
 
-    public static HtmlContentIntermediateNode Content(IntermediateNode node, string content, bool trim = true)
+    public static HtmlContentIntermediateNode Content(
+        IntermediateNode node,
+        string content,
+        bool trim = true
+    )
     {
         Assert.NotNull(node);
 
@@ -54,20 +68,30 @@ internal static class NodeAssert
         return contentNode;
     }
 
-    public static HtmlContentIntermediateNode Content(IntermediateNodeCollection nodes, string content, bool trim = true)
+    public static HtmlContentIntermediateNode Content(
+        IntermediateNodeCollection nodes,
+        string content,
+        bool trim = true
+    )
     {
         Assert.NotNull(nodes);
         return Content(Assert.Single(nodes), content, trim);
     }
 
-    public static HtmlAttributeIntermediateNode CSharpAttribute(IntermediateNode node, string attributeName, string attributeValue)
+    public static HtmlAttributeIntermediateNode CSharpAttribute(
+        IntermediateNode node,
+        string attributeName,
+        string attributeValue
+    )
     {
         Assert.NotNull(node);
 
         var attributeNode = Assert.IsType<HtmlAttributeIntermediateNode>(node);
         Assert.Equal(attributeName, attributeNode.AttributeName);
 
-        var attributeValueNode = Assert.IsType<CSharpExpressionAttributeValueIntermediateNode>(Assert.Single(attributeNode.Children));
+        var attributeValueNode = Assert.IsType<CSharpExpressionAttributeValueIntermediateNode>(
+            Assert.Single(attributeNode.Children)
+        );
         var actual = new StringBuilder();
         for (var i = 0; i < attributeValueNode.Children.Count; i++)
         {
@@ -81,7 +105,11 @@ internal static class NodeAssert
         return attributeNode;
     }
 
-    public static HtmlAttributeIntermediateNode CSharpAttribute(IntermediateNodeCollection nodes, string attributeName, string attributeValue)
+    public static HtmlAttributeIntermediateNode CSharpAttribute(
+        IntermediateNodeCollection nodes,
+        string attributeName,
+        string attributeValue
+    )
     {
         Assert.NotNull(nodes);
         return Attribute(Assert.Single(nodes), attributeName, attributeValue);
@@ -96,7 +124,10 @@ internal static class NodeAssert
         return elementNode;
     }
 
-    public static MarkupElementIntermediateNode Element(IntermediateNodeCollection nodes, string tagName)
+    public static MarkupElementIntermediateNode Element(
+        IntermediateNodeCollection nodes,
+        string tagName
+    )
     {
         Assert.NotNull(nodes);
         return Element(Assert.Single(nodes), tagName);

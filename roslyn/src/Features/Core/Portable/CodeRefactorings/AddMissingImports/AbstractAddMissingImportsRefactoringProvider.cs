@@ -21,8 +21,9 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
         private readonly IPasteTrackingService _pasteTrackingService;
         protected abstract string CodeActionTitle { get; }
 
-        public AbstractAddMissingImportsRefactoringProvider(IPasteTrackingService pasteTrackingService)
-            => _pasteTrackingService = pasteTrackingService;
+        public AbstractAddMissingImportsRefactoringProvider(
+            IPasteTrackingService pasteTrackingService
+        ) => _pasteTrackingService = pasteTrackingService;
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -35,14 +36,20 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
             }
 
             // Check pasted text span for missing imports
-            var addMissingImportsService = document.GetLanguageService<IAddMissingImportsFeatureService>();
+            var addMissingImportsService =
+                document.GetLanguageService<IAddMissingImportsFeatureService>();
 
-            var cleanupOptions = await document.GetCodeCleanupOptionsAsync(context.Options, cancellationToken).ConfigureAwait(false);
+            var cleanupOptions = await document
+                .GetCodeCleanupOptionsAsync(context.Options, cancellationToken)
+                .ConfigureAwait(false);
             var options = new AddMissingImportsOptions(
                 cleanupOptions,
-                context.Options.GetOptions(document.Project.LanguageServices).HideAdvancedMembers);
+                context.Options.GetOptions(document.Project.LanguageServices).HideAdvancedMembers
+            );
 
-            var analysis = await addMissingImportsService.AnalyzeAsync(document, textSpan, options, cancellationToken).ConfigureAwait(false);
+            var analysis = await addMissingImportsService
+                .AnalyzeAsync(document, textSpan, options, cancellationToken)
+                .ConfigureAwait(false);
             if (!analysis.CanAddMissingImports)
             {
                 return;
@@ -50,15 +57,31 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
 
             var addImportsCodeAction = CodeAction.Create(
                 CodeActionTitle,
-                cancellationToken => AddMissingImportsAsync(document, addMissingImportsService, analysis, options.CleanupOptions.FormattingOptions, cancellationToken),
-                CodeActionTitle);
+                cancellationToken =>
+                    AddMissingImportsAsync(
+                        document,
+                        addMissingImportsService,
+                        analysis,
+                        options.CleanupOptions.FormattingOptions,
+                        cancellationToken
+                    ),
+                CodeActionTitle
+            );
 
             context.RegisterRefactoring(addImportsCodeAction, textSpan);
         }
 
-        private static async Task<Solution> AddMissingImportsAsync(Document document, IAddMissingImportsFeatureService addMissingImportsService, AddMissingImportsAnalysisResult analysis, SyntaxFormattingOptions formattingOptions, CancellationToken cancellationToken)
+        private static async Task<Solution> AddMissingImportsAsync(
+            Document document,
+            IAddMissingImportsFeatureService addMissingImportsService,
+            AddMissingImportsAnalysisResult analysis,
+            SyntaxFormattingOptions formattingOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var modifiedDocument = await addMissingImportsService.AddMissingImportsAsync(document, analysis, formattingOptions, cancellationToken).ConfigureAwait(false);
+            var modifiedDocument = await addMissingImportsService
+                .AddMissingImportsAsync(document, analysis, formattingOptions, cancellationToken)
+                .ConfigureAwait(false);
             return modifiedDocument.Project.Solution;
         }
     }

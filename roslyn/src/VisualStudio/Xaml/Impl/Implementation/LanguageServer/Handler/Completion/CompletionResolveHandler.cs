@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
     /// </summary>
     [ExportStatelessXamlLspService(typeof(CompletionResolveHandler)), Shared]
     [Method(LSP.Methods.TextDocumentCompletionResolveName)]
-    internal class CompletionResolveHandler : IRequestHandler<LSP.CompletionItem, LSP.CompletionItem>
+    internal class CompletionResolveHandler
+        : IRequestHandler<LSP.CompletionItem, LSP.CompletionItem>
     {
         private readonly IGlobalOptionService _globalOptions;
 
@@ -45,7 +46,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
         public TextDocumentIdentifier? GetTextDocumentIdentifier(CompletionItem request) => null;
 
-        public async Task<LSP.CompletionItem> HandleRequestAsync(LSP.CompletionItem completionItem, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.CompletionItem> HandleRequestAsync(
+            LSP.CompletionItem completionItem,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(context.Solution);
 
@@ -65,25 +70,48 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return completionItem;
             }
 
-            var documentId = DocumentId.CreateFromSerialized(ProjectId.CreateFromSerialized(data.ProjectGuid), data.DocumentGuid);
-            var document = context.Solution.GetDocument(documentId) ?? context.Solution.GetAdditionalDocument(documentId);
+            var documentId = DocumentId.CreateFromSerialized(
+                ProjectId.CreateFromSerialized(data.ProjectGuid),
+                data.DocumentGuid
+            );
+            var document =
+                context.Solution.GetDocument(documentId)
+                ?? context.Solution.GetAdditionalDocument(documentId);
             if (document == null)
             {
                 return completionItem;
             }
 
-            var offset = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(data.Position), cancellationToken).ConfigureAwait(false);
-            var completionService = document.Project.LanguageServices.GetRequiredService<IXamlCompletionService>();
-            var symbol = await completionService.GetSymbolAsync(new XamlCompletionContext(document, offset), completionItem.Label, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var offset = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(data.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var completionService =
+                document.Project.LanguageServices.GetRequiredService<IXamlCompletionService>();
+            var symbol = await completionService
+                .GetSymbolAsync(
+                    new XamlCompletionContext(document, offset),
+                    completionItem.Label,
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
             if (symbol == null)
             {
                 return completionItem;
             }
 
             var options = _globalOptions.GetSymbolDescriptionOptions(document.Project.Language);
-            var description = await symbol.GetDescriptionAsync(document, options, cancellationToken).ConfigureAwait(false);
+            var description = await symbol
+                .GetDescriptionAsync(document, options, cancellationToken)
+                .ConfigureAwait(false);
 
-            vsCompletionItem.Description = new ClassifiedTextElement(description.Select(tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)));
+            vsCompletionItem.Description = new ClassifiedTextElement(
+                description.Select(
+                    tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)
+                )
+            );
             return vsCompletionItem;
         }
     }

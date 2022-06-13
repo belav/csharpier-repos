@@ -3,8 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-internal abstract class TestContext<TEntity> : DbContext
-    where TEntity : class
+internal abstract class TestContext<TEntity> : DbContext where TEntity : class
 {
     private static readonly InMemoryDatabaseRoot _dbRoot = new();
 
@@ -20,13 +19,13 @@ internal abstract class TestContext<TEntity> : DbContext
         bool useLazyLoading = false,
         bool useChangeDetection = false,
         bool checkEquality = true,
-        ChangeTrackingStrategy? changeTrackingStrategy = null)
+        ChangeTrackingStrategy? changeTrackingStrategy = null
+    )
     {
-        _internalServiceProvider
-            = new ServiceCollection()
-                .AddEntityFrameworkInMemoryDatabase()
-                .AddEntityFrameworkProxies()
-                .BuildServiceProvider(validateScopes: true);
+        _internalServiceProvider = new ServiceCollection()
+            .AddEntityFrameworkInMemoryDatabase()
+            .AddEntityFrameworkProxies()
+            .BuildServiceProvider(validateScopes: true);
 
         _dbName = dbName;
         _useLazyLoadingProxies = useLazyLoading;

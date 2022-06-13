@@ -15,7 +15,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 {
     /// <summary>
     /// Options settable by integration tests.
-    /// 
+    ///
     /// TODO: Options are currently explicitly listed since <see cref="OptionKey"/> is not serializable.
     /// https://github.com/dotnet/roslyn/issues/59267
     /// </summary>
@@ -38,25 +38,37 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
     public static class WellKnownGlobalOptions
     {
-        public static IOption GetOption(this WellKnownGlobalOption option)
-            => option switch
+        public static IOption GetOption(this WellKnownGlobalOption option) =>
+            option switch
             {
-                WellKnownGlobalOption.CompletionOptions_ShowItemsFromUnimportedNamespaces => CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces,
-                WellKnownGlobalOption.CompletionOptions_TriggerInArgumentLists => CompletionOptionsStorage.TriggerInArgumentLists,
-                WellKnownGlobalOption.CompletionViewOptions_EnableArgumentCompletionSnippets => CompletionViewOptions.EnableArgumentCompletionSnippets,
-                WellKnownGlobalOption.InlineRenameSessionOptions_RenameInComments => InlineRenameSessionOptionsStorage.RenameInComments,
-                WellKnownGlobalOption.InlineRenameSessionOptions_RenameInStrings => InlineRenameSessionOptionsStorage.RenameInStrings,
-                WellKnownGlobalOption.InlineRenameSessionOptions_RenameOverloads => InlineRenameSessionOptionsStorage.RenameOverloads,
-                WellKnownGlobalOption.InlineRenameSessionOptions_RenameFile => InlineRenameSessionOptionsStorage.RenameFile,
-                WellKnownGlobalOption.InlineRenameSessionOptions_PreviewChanges => InlineRenameSessionOptionsStorage.PreviewChanges,
-                WellKnownGlobalOption.MetadataAsSourceOptions_NavigateToDecompiledSources => MetadataAsSourceOptionsStorage.NavigateToDecompiledSources,
-                WellKnownGlobalOption.WorkspaceConfigurationOptions_EnableOpeningSourceGeneratedFilesInWorkspace => WorkspaceConfigurationOptionsStorage.EnableOpeningSourceGeneratedFilesInWorkspace,
-                WellKnownGlobalOption.SolutionCrawlerOptions_BackgroundAnalysisScopeOption => SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
-                WellKnownGlobalOption.SolutionCrawlerOptions_CompilerDiagnosticsScopeOption => SolutionCrawlerOptionsStorage.CompilerDiagnosticsScopeOption,
+                WellKnownGlobalOption.CompletionOptions_ShowItemsFromUnimportedNamespaces
+                    => CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces,
+                WellKnownGlobalOption.CompletionOptions_TriggerInArgumentLists
+                    => CompletionOptionsStorage.TriggerInArgumentLists,
+                WellKnownGlobalOption.CompletionViewOptions_EnableArgumentCompletionSnippets
+                    => CompletionViewOptions.EnableArgumentCompletionSnippets,
+                WellKnownGlobalOption.InlineRenameSessionOptions_RenameInComments
+                    => InlineRenameSessionOptionsStorage.RenameInComments,
+                WellKnownGlobalOption.InlineRenameSessionOptions_RenameInStrings
+                    => InlineRenameSessionOptionsStorage.RenameInStrings,
+                WellKnownGlobalOption.InlineRenameSessionOptions_RenameOverloads
+                    => InlineRenameSessionOptionsStorage.RenameOverloads,
+                WellKnownGlobalOption.InlineRenameSessionOptions_RenameFile
+                    => InlineRenameSessionOptionsStorage.RenameFile,
+                WellKnownGlobalOption.InlineRenameSessionOptions_PreviewChanges
+                    => InlineRenameSessionOptionsStorage.PreviewChanges,
+                WellKnownGlobalOption.MetadataAsSourceOptions_NavigateToDecompiledSources
+                    => MetadataAsSourceOptionsStorage.NavigateToDecompiledSources,
+                WellKnownGlobalOption.WorkspaceConfigurationOptions_EnableOpeningSourceGeneratedFilesInWorkspace
+                    => WorkspaceConfigurationOptionsStorage.EnableOpeningSourceGeneratedFilesInWorkspace,
+                WellKnownGlobalOption.SolutionCrawlerOptions_BackgroundAnalysisScopeOption
+                    => SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
+                WellKnownGlobalOption.SolutionCrawlerOptions_CompilerDiagnosticsScopeOption
+                    => SolutionCrawlerOptionsStorage.CompilerDiagnosticsScopeOption,
                 _ => throw ExceptionUtilities.Unreachable
             };
 
-        public static OptionKey GetKey(this WellKnownGlobalOption option, string? language)
-            => new OptionKey(GetOption(option), language);
+        public static OptionKey GetKey(this WellKnownGlobalOption option, string? language) =>
+            new OptionKey(GetOption(option), language);
     }
 }

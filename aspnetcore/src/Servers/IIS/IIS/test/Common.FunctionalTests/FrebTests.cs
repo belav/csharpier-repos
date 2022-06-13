@@ -20,22 +20,24 @@ using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]
 public class FrebTests : IISFunctionalTestBase
 {
-    public FrebTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public FrebTests(PublishedSitesFixture fixture) : base(fixture) { }
 
     public static IList<FrebLogItem> FrebChecks()
     {
@@ -74,7 +76,11 @@ public class FrebTests : IISFunctionalTestBase
 
         StopServer();
 
-        AssertFrebLogs(result, new FrebLogItem("ANCM_HRESULT_FAILED"), new FrebLogItem("ANCM_EXCEPTION_CAUGHT"));
+        AssertFrebLogs(
+            result,
+            new FrebLogItem("ANCM_HRESULT_FAILED"),
+            new FrebLogItem("ANCM_EXCEPTION_CAUGHT")
+        );
     }
 
     [ConditionalFact]
@@ -103,15 +109,23 @@ public class FrebTests : IISFunctionalTestBase
                 "Host: localhost",
                 "Connection: close",
                 "",
-                "");
-            await result.HttpClient.RetryRequestAsync("/WaitingRequestCount", async message => await message.Content.ReadAsStringAsync() == "1");
+                ""
+            );
+            await result.HttpClient.RetryRequestAsync(
+                "/WaitingRequestCount",
+                async message => await message.Content.ReadAsStringAsync() == "1"
+            );
         }
 
         StopServer();
 
         // The order of freb logs is based on when the requests are complete.
         // This is non-deterministic here, so we need to check both freb files for a request that was disconnected.
-        AssertFrebLogs(result, new FrebLogItem("ANCM_INPROC_REQUEST_DISCONNECT"), new FrebLogItem("ANCM_INPROC_MANAGED_REQUEST_COMPLETION"));
+        AssertFrebLogs(
+            result,
+            new FrebLogItem("ANCM_INPROC_REQUEST_DISCONNECT"),
+            new FrebLogItem("ANCM_INPROC_MANAGED_REQUEST_COMPLETION")
+        );
     }
 
     private async Task<IISDeploymentResult> SetupFrebApp(IISDeploymentParameters parameters = null)
@@ -129,7 +143,10 @@ public class FrebTests : IISFunctionalTestBase
         AssertFrebLogs(result, (IEnumerable<FrebLogItem>)expectedFrebEvents);
     }
 
-    private void AssertFrebLogs(IISDeploymentResult result, IEnumerable<FrebLogItem> expectedFrebEvents)
+    private void AssertFrebLogs(
+        IISDeploymentResult result,
+        IEnumerable<FrebLogItem> expectedFrebEvents
+    )
     {
         var frebEvent = GetFrebLogItems(result);
         foreach (var expectedEvent in expectedFrebEvents)
@@ -142,7 +159,10 @@ public class FrebTests : IISFunctionalTestBase
     private IEnumerable<FrebLogItem> GetFrebLogItems(IISDeploymentResult result)
     {
         var folderPath = Helpers.GetFrebFolder(LogFolderPath, result);
-        var xmlFiles = Directory.GetFiles(folderPath).Where(f => f.EndsWith("xml", StringComparison.Ordinal)).ToList();
+        var xmlFiles = Directory
+            .GetFiles(folderPath)
+            .Where(f => f.EndsWith("xml", StringComparison.Ordinal))
+            .ToList();
         var frebEvents = new List<FrebLogItem>();
 
         result.Logger.LogInformation($"Number of freb files available {xmlFiles.Count}.");
@@ -153,8 +173,16 @@ public class FrebTests : IISFunctionalTestBase
             var eventElements = xDocument.Descendants(nameSpace + "Event");
             foreach (var eventElement in eventElements)
             {
-                var eventElementWithOpCode = eventElement.Descendants(nameSpace + "RenderingInfo").Single().Descendants(nameSpace + "Opcode").Single();
-                var requestStatus = eventElement.Element(nameSpace + "EventData").Descendants().Where(el => el.Attribute("Name").Value == "requestStatus").SingleOrDefault();
+                var eventElementWithOpCode = eventElement
+                    .Descendants(nameSpace + "RenderingInfo")
+                    .Single()
+                    .Descendants(nameSpace + "Opcode")
+                    .Single();
+                var requestStatus = eventElement
+                    .Element(nameSpace + "EventData")
+                    .Descendants()
+                    .Where(el => el.Attribute("Name").Value == "requestStatus")
+                    .SingleOrDefault();
                 frebEvents.Add(new FrebLogItem(eventElementWithOpCode.Value, requestStatus?.Value));
             }
         }
@@ -181,9 +209,7 @@ public class FrebTests : IISFunctionalTestBase
         public override bool Equals(object obj)
         {
             var item = obj as FrebLogItem;
-            return item != null &&
-                    _opCode == item._opCode &&
-                    _requestStatus == item._requestStatus;
+            return item != null && _opCode == item._opCode && _requestStatus == item._requestStatus;
         }
 
         public override int GetHashCode()

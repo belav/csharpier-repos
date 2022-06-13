@@ -15,7 +15,10 @@ namespace Internal.TypeSystem
     /// </summary>
     public class RuntimeDeterminedFieldLayoutAlgorithm : FieldLayoutAlgorithm
     {
-        public override ComputedInstanceFieldLayout ComputeInstanceLayout(DefType defType, InstanceLayoutKind layoutKind)
+        public override ComputedInstanceFieldLayout ComputeInstanceLayout(
+            DefType defType,
+            InstanceLayoutKind layoutKind
+        )
         {
             // Individual field offset layout for a RuntimeDeterminedType is not a supported operation
             if (layoutKind != InstanceLayoutKind.TypeOnly)
@@ -37,7 +40,10 @@ namespace Internal.TypeSystem
             return result;
         }
 
-        public unsafe override ComputedStaticFieldLayout ComputeStaticFieldLayout(DefType defType, StaticLayoutKind layoutKind)
+        public unsafe override ComputedStaticFieldLayout ComputeStaticFieldLayout(
+            DefType defType,
+            StaticLayoutKind layoutKind
+        )
         {
             // Static field layout for a RuntimeDeterminedType is not a supported operation
             throw new NotSupportedException();
@@ -51,7 +57,9 @@ namespace Internal.TypeSystem
             return canonicalType.ContainsGCPointers;
         }
 
-        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(DefType type)
+        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
+            DefType type
+        )
         {
             RuntimeDeterminedType runtimeDeterminedType = (RuntimeDeterminedType)type;
             DefType canonicalType = runtimeDeterminedType.CanonicalType;

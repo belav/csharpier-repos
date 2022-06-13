@@ -64,7 +64,8 @@ namespace System.Threading
             _lazyEvent?.Dispose();
         }
 
-        private static IntPtr CurrentNativeThreadId => (IntPtr)RuntimeImports.RhCurrentNativeThreadId();
+        private static IntPtr CurrentNativeThreadId =>
+            (IntPtr)RuntimeImports.RhCurrentNativeThreadId();
 
         // On platforms where CurrentNativeThreadId redirects to ManagedThreadId.Current the inlined
         // version of Lock.Acquire has the ManagedThreadId.Current call not inlined, while the non-inlined
@@ -101,7 +102,10 @@ namespace System.Threading
         public bool TryAcquire(int millisecondsTimeout, bool trackContentions = false)
         {
             if (millisecondsTimeout < -1)
-                throw new ArgumentOutOfRangeException(nameof(millisecondsTimeout), SR.ArgumentOutOfRange_NeedNonNegOrNegative1);
+                throw new ArgumentOutOfRangeException(
+                    nameof(millisecondsTimeout),
+                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1
+                );
 
             IntPtr currentThreadId = CurrentNativeThreadId;
 
@@ -122,14 +126,21 @@ namespace System.Threading
             return TryAcquireContended(currentThreadId, millisecondsTimeout, trackContentions);
         }
 
-        private bool TryAcquireContended(IntPtr currentThreadId, int millisecondsTimeout, bool trackContentions = false)
+        private bool TryAcquireContended(
+            IntPtr currentThreadId,
+            int millisecondsTimeout,
+            bool trackContentions = false
+        )
         {
             //
             // If we already own the lock, just increment the recursion count.
             //
             if (_owningThreadId == currentThreadId)
             {
-                checked { _recursionCount++; }
+                checked
+                {
+                    _recursionCount++;
+                }
                 return true;
             }
 
@@ -144,7 +155,10 @@ namespace System.Threading
             if (s_maxSpinCount == SpinningNotInitialized)
             {
                 // Use RhGetProcessCpuCount directly to avoid Environment.ProcessorCount->ClassConstructorRunner->Lock->Environment.ProcessorCount cycle
-                s_maxSpinCount = (RuntimeImports.RhGetProcessCpuCount() > 1) ? MaxSpinningValue : SpinningDisabled;
+                s_maxSpinCount =
+                    (RuntimeImports.RhGetProcessCpuCount() > 1)
+                        ? MaxSpinningValue
+                        : SpinningDisabled;
             }
 
             while (true)
@@ -156,7 +170,11 @@ namespace System.Threading
                 // the event, after we release the lock.  Eventually waiters will be boosted high enough to preempt this thread.
                 //
                 int oldState = _state;
-                if ((oldState & Locked) == 0 && Interlocked.CompareExchange(ref _state, oldState | Locked, oldState) == oldState)
+                if (
+                    (oldState & Locked) == 0
+                    && Interlocked.CompareExchange(ref _state, oldState | Locked, oldState)
+                        == oldState
+                )
                     goto GotTheLock;
 
                 //
@@ -233,7 +251,7 @@ namespace System.Threading
                 }
             }
 
-        GotTheLock:
+            GotTheLock:
             Debug.Assert((_state | Locked) != 0);
             Debug.Assert(_owningThreadId == IntPtr.Zero);
             Debug.Assert(_recursionCount == 0);

@@ -23,14 +23,21 @@ namespace Internal.Runtime.TypeLoader
     public partial class TypeLoaderTypeSystemContext : TypeSystemContext
     {
 #if SUPPORTS_NATIVE_METADATA_TYPE_LOADING
-        private static readonly MetadataFieldLayoutAlgorithm s_metadataFieldLayoutAlgorithm = new MetadataFieldLayoutAlgorithm();
-        private static readonly MetadataVirtualMethodAlgorithm s_metadataVirtualMethodAlgorithm = new MetadataVirtualMethodAlgorithm();
-        private static readonly MetadataRuntimeInterfacesAlgorithm s_metadataRuntimeInterfacesAlgorithm = new MetadataRuntimeInterfacesAlgorithm();
+        private static readonly MetadataFieldLayoutAlgorithm s_metadataFieldLayoutAlgorithm =
+            new MetadataFieldLayoutAlgorithm();
+        private static readonly MetadataVirtualMethodAlgorithm s_metadataVirtualMethodAlgorithm =
+            new MetadataVirtualMethodAlgorithm();
+        private static readonly MetadataRuntimeInterfacesAlgorithm s_metadataRuntimeInterfacesAlgorithm =
+            new MetadataRuntimeInterfacesAlgorithm();
 #endif
-        private static readonly NoMetadataFieldLayoutAlgorithm s_noMetadataFieldLayoutAlgorithm = new NoMetadataFieldLayoutAlgorithm();
-        private static readonly NoMetadataRuntimeInterfacesAlgorithm s_noMetadataRuntimeInterfacesAlgorithm = new NoMetadataRuntimeInterfacesAlgorithm();
-        private static readonly NativeLayoutFieldAlgorithm s_nativeLayoutFieldAlgorithm = new NativeLayoutFieldAlgorithm();
-        private static readonly NativeLayoutInterfacesAlgorithm s_nativeLayoutInterfacesAlgorithm = new NativeLayoutInterfacesAlgorithm();
+        private static readonly NoMetadataFieldLayoutAlgorithm s_noMetadataFieldLayoutAlgorithm =
+            new NoMetadataFieldLayoutAlgorithm();
+        private static readonly NoMetadataRuntimeInterfacesAlgorithm s_noMetadataRuntimeInterfacesAlgorithm =
+            new NoMetadataRuntimeInterfacesAlgorithm();
+        private static readonly NativeLayoutFieldAlgorithm s_nativeLayoutFieldAlgorithm =
+            new NativeLayoutFieldAlgorithm();
+        private static readonly NativeLayoutInterfacesAlgorithm s_nativeLayoutInterfacesAlgorithm =
+            new NativeLayoutInterfacesAlgorithm();
 
         public TypeLoaderTypeSystemContext(TargetDetails targetDetails) : base(targetDetails)
         {
@@ -47,9 +54,13 @@ namespace Internal.Runtime.TypeLoader
         {
             if ((type == UniversalCanonType)
 #if SUPPORT_DYNAMIC_CODE
-                || (type.IsRuntimeDeterminedType && (((RuntimeDeterminedType)type).CanonicalType == UniversalCanonType)))
-#else
+                || (
+                    type.IsRuntimeDeterminedType
+                    && (((RuntimeDeterminedType)type).CanonicalType == UniversalCanonType)
                 )
+            )
+#else
+            )
 #endif
             {
                 return UniversalCanonLayoutAlgorithm.Instance;
@@ -79,7 +90,9 @@ namespace Internal.Runtime.TypeLoader
             }
         }
 
-        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(DefType type)
+        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(
+            DefType type
+        )
         {
             if (type.RetrieveRuntimeTypeHandleIfPossible() && !type.IsGenericDefinition)
             {
@@ -113,14 +126,19 @@ namespace Internal.Runtime.TypeLoader
             throw new NotImplementedException();
         }
 
-        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(ArrayType type)
+        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(
+            ArrayType type
+        )
         {
             // At runtime, we're instantiating an Array<T> instantiation as the template, so we know we'll always have
             // a NativeLayoutInterfacesAlgorithm to work with
             return s_nativeLayoutInterfacesAlgorithm;
         }
 
-        public override DefType GetWellKnownType(WellKnownType wellKnownType, bool throwIfNotFound = true)
+        public override DefType GetWellKnownType(
+            WellKnownType wellKnownType,
+            bool throwIfNotFound = true
+        )
         {
             switch (wellKnownType)
             {
@@ -194,7 +212,9 @@ namespace Internal.Runtime.TypeLoader
                     return (DefType)ResolveRuntimeTypeHandle(typeof(RuntimeTypeHandle).TypeHandle);
 
                 case WellKnownType.RuntimeMethodHandle:
-                    return (DefType)ResolveRuntimeTypeHandle(typeof(RuntimeMethodHandle).TypeHandle);
+                    return (DefType)ResolveRuntimeTypeHandle(
+                        typeof(RuntimeMethodHandle).TypeHandle
+                    );
 
                 case WellKnownType.RuntimeFieldHandle:
                     return (DefType)ResolveRuntimeTypeHandle(typeof(RuntimeFieldHandle).TypeHandle);
@@ -215,7 +235,14 @@ namespace Internal.Runtime.TypeLoader
 #if SUPPORTS_NATIVE_METADATA_TYPE_LOADING
             AssemblyBindResult bindResult;
             Exception failureException;
-            if (!AssemblyBinderImplementation.Instance.Bind(name.ToRuntimeAssemblyName(), cacheMissedLookups: true, out bindResult, out failureException))
+            if (
+                !AssemblyBinderImplementation.Instance.Bind(
+                    name.ToRuntimeAssemblyName(),
+                    cacheMissedLookups: true,
+                    out bindResult,
+                    out failureException
+                )
+            )
             {
                 if (throwErrorIfNotFound)
                     throw failureException;
@@ -226,7 +253,9 @@ namespace Internal.Runtime.TypeLoader
 
             if (bindResult.Reader != null)
             {
-                NativeFormatModuleInfo primaryModule = moduleList.GetModuleInfoForMetadataReader(bindResult.Reader);
+                NativeFormatModuleInfo primaryModule = moduleList.GetModuleInfoForMetadataReader(
+                    bindResult.Reader
+                );
                 NativeFormatMetadataUnit metadataUnit = ResolveMetadataUnit(primaryModule);
                 return metadataUnit.GetModule(bindResult.ScopeDefinitionHandle);
             }
@@ -259,12 +288,23 @@ namespace Internal.Runtime.TypeLoader
 #endif
         }
 
-        protected internal override Instantiation ConvertInstantiationToCanonForm(Instantiation instantiation, CanonicalFormKind kind, out bool changed)
+        protected internal override Instantiation ConvertInstantiationToCanonForm(
+            Instantiation instantiation,
+            CanonicalFormKind kind,
+            out bool changed
+        )
         {
-            return StandardCanonicalizationAlgorithm.ConvertInstantiationToCanonForm(instantiation, kind, out changed);
+            return StandardCanonicalizationAlgorithm.ConvertInstantiationToCanonForm(
+                instantiation,
+                kind,
+                out changed
+            );
         }
 
-        protected internal override TypeDesc ConvertToCanon(TypeDesc typeToConvert, CanonicalFormKind kind)
+        protected internal override TypeDesc ConvertToCanon(
+            TypeDesc typeToConvert,
+            CanonicalFormKind kind
+        )
         {
             return StandardCanonicalizationAlgorithm.ConvertToCanon(typeToConvert, kind);
         }
@@ -275,7 +315,8 @@ namespace Internal.Runtime.TypeLoader
 
             if (field is NativeLayoutFieldDesc)
             {
-                return ((NativeLayoutFieldDesc)field).FieldStorage == Internal.NativeFormat.FieldStorage.GCStatic;
+                return ((NativeLayoutFieldDesc)field).FieldStorage
+                    == Internal.NativeFormat.FieldStorage.GCStatic;
             }
 
             TypeDesc fieldType = field.FieldType;

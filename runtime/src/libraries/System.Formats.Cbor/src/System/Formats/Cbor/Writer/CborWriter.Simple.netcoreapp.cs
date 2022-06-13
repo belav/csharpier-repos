@@ -20,7 +20,9 @@ namespace System.Formats.Cbor
         public void WriteHalf(Half value)
         {
             EnsureWriteCapacity(1 + sizeof(short));
-            WriteInitialByte(new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional16BitData));
+            WriteInitialByte(
+                new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional16BitData)
+            );
             BinaryPrimitives.WriteHalfBigEndian(_buffer.AsSpan(_offset), value);
             _offset += sizeof(short);
             AdvanceDataItemCounters();
@@ -30,7 +32,8 @@ namespace System.Formats.Cbor
         internal static bool TryConvertSingleToHalf(float value, out Half result)
         {
             result = (Half)value;
-            return BitConverter.SingleToInt32Bits((float)result) == BitConverter.SingleToInt32Bits(value);
+            return BitConverter.SingleToInt32Bits((float)result)
+                == BitConverter.SingleToInt32Bits(value);
         }
     }
 }

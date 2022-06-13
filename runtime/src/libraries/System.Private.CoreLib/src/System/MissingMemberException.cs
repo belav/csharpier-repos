@@ -6,23 +6,22 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class MissingMemberException : MemberAccessException
     {
-        public MissingMemberException()
-            : base(SR.Arg_MissingMemberException)
+        public MissingMemberException() : base(SR.Arg_MissingMemberException)
         {
             HResult = HResults.COR_E_MISSINGMEMBER;
         }
 
-        public MissingMemberException(string? message)
-            : base(message)
+        public MissingMemberException(string? message) : base(message)
         {
             HResult = HResults.COR_E_MISSINGMEMBER;
         }
 
-        public MissingMemberException(string? message, Exception? inner)
-            : base(message, inner)
+        public MissingMemberException(string? message, Exception? inner) : base(message, inner)
         {
             HResult = HResults.COR_E_MISSINGMEMBER;
         }

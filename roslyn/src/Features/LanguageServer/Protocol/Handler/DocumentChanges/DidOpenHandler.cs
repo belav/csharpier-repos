@@ -19,16 +19,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.DocumentChanges
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DidOpenHandler()
-        {
-        }
+        public DidOpenHandler() { }
 
         public bool MutatesSolutionState => true;
         public bool RequiresLSPSolution => false;
 
-        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.DidOpenTextDocumentParams request) => new() { Uri = request.TextDocument.Uri };
+        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
+            LSP.DidOpenTextDocumentParams request
+        ) => new() { Uri = request.TextDocument.Uri };
 
-        public Task<object?> HandleRequestAsync(LSP.DidOpenTextDocumentParams request, RequestContext context, CancellationToken cancellationToken)
+        public Task<object?> HandleRequestAsync(
+            LSP.DidOpenTextDocumentParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             // GetTextDocumentIdentifier returns null to avoid creating the solution, so the queue is not able to log the uri.
             context.TraceInformation($"didOpen for {request.TextDocument.Uri}");

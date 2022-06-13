@@ -5,22 +5,36 @@
 using System;
 
 public struct ValX0 { }
-public struct ValY0 { }
-public struct ValX1<T> { }
-public struct ValY1<T> { }
-public struct ValX2<T, U> { }
-public struct ValY2<T, U> { }
-public struct ValX3<T, U, V> { }
-public struct ValY3<T, U, V> { }
-public class RefX0 { }
-public class RefY0 { }
-public class RefX1<T> { }
-public class RefY1<T> { }
-public class RefX2<T, U> { }
-public class RefY2<T, U> { }
-public class RefX3<T, U, V> { }
-public class RefY3<T, U, V> { }
 
+public struct ValY0 { }
+
+public struct ValX1<T> { }
+
+public struct ValY1<T> { }
+
+public struct ValX2<T, U> { }
+
+public struct ValY2<T, U> { }
+
+public struct ValX3<T, U, V> { }
+
+public struct ValY3<T, U, V> { }
+
+public class RefX0 { }
+
+public class RefY0 { }
+
+public class RefX1<T> { }
+
+public class RefY1<T> { }
+
+public class RefX2<T, U> { }
+
+public class RefY2<T, U> { }
+
+public class RefX3<T, U, V> { }
+
+public class RefY3<T, U, V> { }
 
 public class GenBase<T>
 {
@@ -28,7 +42,6 @@ public class GenBase<T>
     {
         return typeof(GenBase<T>);
     }
-
 }
 
 public class GenInt : GenBase<int>
@@ -117,6 +130,7 @@ public class Test_NonGenToGen01
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -125,7 +139,6 @@ public class Test_NonGenToGen01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -138,7 +151,6 @@ public class Test_NonGenToGen01
         Eval(new Converter<string>().ToGenString(new GenString(), false, typeof(GenString)));
         Eval(new Converter<string>().ToGenString(new GenBase<string>(), true, null));
 
-
         if (result)
         {
             Console.WriteLine("Test Passed");
@@ -150,5 +162,4 @@ public class Test_NonGenToGen01
             return 1;
         }
     }
-
 }

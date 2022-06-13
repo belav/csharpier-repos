@@ -7,9 +7,15 @@ using Microsoft.CodeAnalysis.LanguageServices;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis;
+
 internal class SnippetUtilities
 {
-    public static bool TryGetWordOnLeft(int position, SourceText currentText, ISyntaxFactsService syntaxFactsService, [NotNullWhen(true)] out TextSpan? wordSpan)
+    public static bool TryGetWordOnLeft(
+        int position,
+        SourceText currentText,
+        ISyntaxFactsService syntaxFactsService,
+        [NotNullWhen(true)] out TextSpan? wordSpan
+    )
     {
         var endPosition = position;
         var startPosition = endPosition;

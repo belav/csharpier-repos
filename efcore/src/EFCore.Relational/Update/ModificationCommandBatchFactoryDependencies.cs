@@ -50,7 +50,8 @@ public sealed record ModificationCommandBatchFactoryDependencies
         ISqlGenerationHelper sqlGenerationHelper,
         IUpdateSqlGenerator updateSqlGenerator,
         ICurrentDbContext currentContext,
-        IRelationalCommandDiagnosticsLogger logger)
+        IRelationalCommandDiagnosticsLogger logger
+    )
     {
         CommandBuilderFactory = commandBuilderFactory;
         SqlGenerationHelper = sqlGenerationHelper;

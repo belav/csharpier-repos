@@ -121,7 +121,9 @@ namespace Internal.Runtime.TypeLoader
             MetadataReader reader;
 
             // Try to get the name from metadata
-            if (TypeLoaderEnvironment.Instance.TryGetMetadataForNamedType(rtth, out qTypeDefinition))
+            if (
+                TypeLoaderEnvironment.Instance.TryGetMetadataForNamedType(rtth, out qTypeDefinition)
+            )
             {
 #if ECMA_METADATA_SUPPORT
                 string result = EcmaMetadataFullName(qTypeDefinition);
@@ -135,7 +137,13 @@ namespace Internal.Runtime.TypeLoader
             }
 
             // Try to get the name from diagnostic metadata
-            if (TypeLoaderEnvironment.TryGetTypeReferenceForNamedType(rtth, out reader, out typeRefHandle))
+            if (
+                TypeLoaderEnvironment.TryGetTypeReferenceForNamedType(
+                    rtth,
+                    out reader,
+                    out typeRefHandle
+                )
+            )
             {
                 return typeRefHandle.GetFullName(reader);
             }

@@ -119,7 +119,8 @@ namespace System.Data.SqlTypes
         /// <summary>
         /// Returns a string describing a <see cref='SqlBinary'/> object.
         /// </summary>
-        public override string ToString() => _value is null ? SQLResource.NullString : $"SqlBinary({_value.Length})";
+        public override string ToString() =>
+            _value is null ? SQLResource.NullString : $"SqlBinary({_value.Length})";
 
         // Unary operators
 
@@ -141,7 +142,6 @@ namespace System.Data.SqlTypes
 
             return new SqlBinary(rgbResult);
         }
-
 
         // Comparisons
 
@@ -356,8 +356,10 @@ namespace System.Data.SqlTypes
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -369,8 +371,7 @@ namespace System.Data.SqlTypes
         /// <param name="other">An instance to compare with this instance.</param>
         /// <returns>true if the current instance is equal to the other instance; otherwise, false.</returns>
         public bool Equals(SqlBinary other) =>
-            other.IsNull || IsNull ? other.IsNull && IsNull :
-            (this == other).Value;
+            other.IsNull || IsNull ? other.IsNull && IsNull : (this == other).Value;
 
         // Hash a byte array.
         // Trailing zeroes/spaces would affect the hash value, so caller needs to
@@ -401,6 +402,7 @@ namespace System.Data.SqlTypes
 
             return ulValue;
         }
+
         // For hashing purpose
         public override int GetHashCode()
         {
@@ -415,7 +417,10 @@ namespace System.Data.SqlTypes
             return HashByteArray(_value, cbLen);
         }
 
-        XmlSchema? IXmlSerializable.GetSchema() { return null; }
+        XmlSchema? IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {

@@ -21,8 +21,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
 {
     internal partial class RawStringLiteralCommandHandler : ICommandHandler<ReturnKeyCommandArgs>
     {
-        public CommandState GetCommandState(ReturnKeyCommandArgs args)
-            => CommandState.Unspecified;
+        public CommandState GetCommandState(ReturnKeyCommandArgs args) => CommandState.Unspecified;
 
         /// <summary>
         /// Checks to see if the user is typing <c>return</c> in <c>"""$$"""</c> and then properly indents the end
@@ -78,32 +77,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
             if (quotesAfter < 3)
                 return false;
 
-            return SplitRawString(textView, subjectBuffer, span.Start.Position, CancellationToken.None);
+            return SplitRawString(
+                textView,
+                subjectBuffer,
+                span.Start.Position,
+                CancellationToken.None
+            );
         }
 
-        private bool SplitRawString(ITextView textView, ITextBuffer subjectBuffer, int position, CancellationToken cancellationToken)
+        private bool SplitRawString(
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return false;
 
             var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
             var token = root.FindToken(position);
-            if (token.Kind() is not (SyntaxKind.SingleLineRawStringLiteralToken or
-                                     SyntaxKind.MultiLineRawStringLiteralToken or
-                                     SyntaxKind.InterpolatedSingleLineRawStringStartToken or
-                                     SyntaxKind.InterpolatedMultiLineRawStringStartToken))
+            if (
+                token.Kind()
+                is not (
+                    SyntaxKind.SingleLineRawStringLiteralToken
+                    or SyntaxKind.MultiLineRawStringLiteralToken
+                    or SyntaxKind.InterpolatedSingleLineRawStringStartToken
+                    or SyntaxKind.InterpolatedMultiLineRawStringStartToken
+                )
+            )
             {
                 return false;
             }
 
-            var indentationOptions = document.GetIndentationOptionsAsync(_globalOptions, cancellationToken).WaitAndGetResult(cancellationToken);
-            var indentation = token.GetPreferredIndentation(document, indentationOptions, cancellationToken);
+            var indentationOptions = document
+                .GetIndentationOptionsAsync(_globalOptions, cancellationToken)
+                .WaitAndGetResult(cancellationToken);
+            var indentation = token.GetPreferredIndentation(
+                document,
+                indentationOptions,
+                cancellationToken
+            );
 
             var newLine = indentationOptions.FormattingOptions.NewLine;
 
             using var transaction = CaretPreservingEditTransaction.TryCreate(
-                CSharpEditorResources.Split_string, textView, _undoHistoryRegistry, _editorOperationsFactoryService);
+                CSharpEditorResources.Split_string,
+                textView,
+                _undoHistoryRegistry,
+                _editorOperationsFactoryService
+            );
 
             var edit = subjectBuffer.CreateEdit();
 

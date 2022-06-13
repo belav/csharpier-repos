@@ -16,7 +16,10 @@ public class PageApplicationModelProviderContext
     /// </summary>
     /// <param name="descriptor">The <see cref="PageActionDescriptor"/>.</param>
     /// <param name="pageTypeInfo">The type of the page.</param>
-    public PageApplicationModelProviderContext(PageActionDescriptor descriptor, TypeInfo pageTypeInfo)
+    public PageApplicationModelProviderContext(
+        PageActionDescriptor descriptor,
+        TypeInfo pageTypeInfo
+    )
     {
         ActionDescriptor = descriptor;
         PageType = pageTypeInfo;

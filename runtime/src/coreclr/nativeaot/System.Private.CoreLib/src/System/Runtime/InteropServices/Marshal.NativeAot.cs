@@ -36,7 +36,11 @@ namespace System.Runtime.InteropServices
             return new IntPtr(RuntimeInteropData.GetStructFieldOffset(t.TypeHandle, fieldName));
         }
 
-        private static void PtrToStructureHelper(IntPtr ptr, object structure, bool allowValueClasses)
+        private static void PtrToStructureHelper(
+            IntPtr ptr,
+            object structure,
+            bool allowValueClasses
+        )
         {
             if (ptr == IntPtr.Zero)
                 throw new ArgumentNullException(nameof(ptr));
@@ -46,7 +50,10 @@ namespace System.Runtime.InteropServices
 
             if (!allowValueClasses && structure.GetEETypePtr().IsValueType)
             {
-                throw new ArgumentException(nameof(structure), SR.Argument_StructMustNotBeValueClass);
+                throw new ArgumentException(
+                    nameof(structure),
+                    SR.Argument_StructMustNotBeValueClass
+                );
             }
 
             PtrToStructureImpl(ptr, structure);
@@ -59,7 +66,12 @@ namespace System.Runtime.InteropServices
             IntPtr unmarshalStub;
             if (structureTypeHandle.IsBlittable())
             {
-                if (!RuntimeInteropData.TryGetStructUnmarshalStub(structureTypeHandle, out unmarshalStub))
+                if (
+                    !RuntimeInteropData.TryGetStructUnmarshalStub(
+                        structureTypeHandle,
+                        out unmarshalStub
+                    )
+                )
                 {
                     unmarshalStub = IntPtr.Zero;
                 }
@@ -73,22 +85,28 @@ namespace System.Runtime.InteropServices
             {
                 if (structureTypeHandle.IsValueType())
                 {
-                    ((delegate*<ref byte, ref byte, void>)unmarshalStub)(ref *(byte*)ptr, ref structure.GetRawData());
+                    ((delegate* <ref byte, ref byte, void>)unmarshalStub)(
+                        ref *(byte*)ptr,
+                        ref structure.GetRawData()
+                    );
                 }
                 else
                 {
-                    ((delegate*<ref byte, object, void>)unmarshalStub)(ref *(byte*)ptr, structure);
+                    ((delegate* <ref byte, object, void>)unmarshalStub)(ref *(byte*)ptr, structure);
                 }
             }
             else
             {
-                nuint size = (nuint)RuntimeInteropData.GetStructUnsafeStructSize(structureTypeHandle);
+                nuint size = (nuint)
+                    RuntimeInteropData.GetStructUnsafeStructSize(structureTypeHandle);
 
                 Buffer.Memmove(ref structure.GetRawData(), ref *(byte*)ptr, size);
             }
         }
 
-        [RequiresDynamicCode("Marshalling code for the object might not be available. Use the DestroyStructure<T> overload instead.")]
+        [RequiresDynamicCode(
+            "Marshalling code for the object might not be available. Use the DestroyStructure<T> overload instead."
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static unsafe void DestroyStructure(IntPtr ptr, Type structuretype)
         {
@@ -100,14 +118,26 @@ namespace System.Runtime.InteropServices
 
             RuntimeTypeHandle structureTypeHandle = structuretype.TypeHandle;
 
-            if (structureTypeHandle.IsGenericType() || structureTypeHandle.IsGenericTypeDefinition())
+            if (
+                structureTypeHandle.IsGenericType() || structureTypeHandle.IsGenericTypeDefinition()
+            )
                 throw new ArgumentException(SR.Argument_NeedNonGenericType, nameof(structuretype));
 
-            if (structureTypeHandle.IsEnum() ||
-                structureTypeHandle.IsInterface() ||
-                InteropExtensions.AreTypesAssignable(typeof(Delegate).TypeHandle, structureTypeHandle))
+            if (
+                structureTypeHandle.IsEnum()
+                || structureTypeHandle.IsInterface()
+                || InteropExtensions.AreTypesAssignable(
+                    typeof(Delegate).TypeHandle,
+                    structureTypeHandle
+                )
+            )
             {
-                throw new ArgumentException(SR.Format(SR.Argument_MustHaveLayoutOrBeBlittable, structureTypeHandle.LastResortToString));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_MustHaveLayoutOrBeBlittable,
+                        structureTypeHandle.LastResortToString
+                    )
+                );
             }
 
             if (structureTypeHandle.IsBlittable())
@@ -116,17 +146,27 @@ namespace System.Runtime.InteropServices
                 return;
             }
 
-            IntPtr destroyStructureStub = RuntimeInteropData.GetDestroyStructureStub(structureTypeHandle, out bool hasInvalidLayout);
+            IntPtr destroyStructureStub = RuntimeInteropData.GetDestroyStructureStub(
+                structureTypeHandle,
+                out bool hasInvalidLayout
+            );
             if (hasInvalidLayout)
-                throw new ArgumentException(SR.Format(SR.Argument_MustHaveLayoutOrBeBlittable, structureTypeHandle.LastResortToString));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_MustHaveLayoutOrBeBlittable,
+                        structureTypeHandle.LastResortToString
+                    )
+                );
             // DestroyStructureStub == IntPtr.Zero means its fields don't need to be destroyed
             if (destroyStructureStub != IntPtr.Zero)
             {
-                ((delegate*<ref byte, void>)destroyStructureStub)(ref *(byte*)ptr);
+                ((delegate* <ref byte, void>)destroyStructureStub)(ref *(byte*)ptr);
             }
         }
 
-        [RequiresDynamicCode("Marshalling code for the object might not be available. Use the StructureToPtr<T> overload instead.")]
+        [RequiresDynamicCode(
+            "Marshalling code for the object might not be available. Use the StructureToPtr<T> overload instead."
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static unsafe void StructureToPtr(object structure, IntPtr ptr, bool fDeleteOld)
         {
@@ -143,7 +183,9 @@ namespace System.Runtime.InteropServices
 
             RuntimeTypeHandle structureTypeHandle = structure.GetType().TypeHandle;
 
-            if (structureTypeHandle.IsGenericType() || structureTypeHandle.IsGenericTypeDefinition())
+            if (
+                structureTypeHandle.IsGenericType() || structureTypeHandle.IsGenericTypeDefinition()
+            )
             {
                 throw new ArgumentException(SR.Argument_NeedNonGenericObject, nameof(structure));
             }
@@ -151,7 +193,12 @@ namespace System.Runtime.InteropServices
             IntPtr marshalStub;
             if (structureTypeHandle.IsBlittable())
             {
-                if (!RuntimeInteropData.TryGetStructMarshalStub(structureTypeHandle, out marshalStub))
+                if (
+                    !RuntimeInteropData.TryGetStructMarshalStub(
+                        structureTypeHandle,
+                        out marshalStub
+                    )
+                )
                 {
                     marshalStub = IntPtr.Zero;
                 }
@@ -165,16 +212,20 @@ namespace System.Runtime.InteropServices
             {
                 if (structureTypeHandle.IsValueType())
                 {
-                    ((delegate*<ref byte, ref byte, void>)marshalStub)(ref structure.GetRawData(), ref *(byte*)ptr);
+                    ((delegate* <ref byte, ref byte, void>)marshalStub)(
+                        ref structure.GetRawData(),
+                        ref *(byte*)ptr
+                    );
                 }
                 else
                 {
-                    ((delegate*<object, ref byte, void>)marshalStub)(structure, ref *(byte*)ptr);
+                    ((delegate* <object, ref byte, void>)marshalStub)(structure, ref *(byte*)ptr);
                 }
             }
             else
             {
-                nuint size = (nuint)RuntimeInteropData.GetStructUnsafeStructSize(structureTypeHandle);
+                nuint size = (nuint)
+                    RuntimeInteropData.GetStructUnsafeStructSize(structureTypeHandle);
 
                 Buffer.Memmove(ref *(byte*)ptr, ref structure.GetRawData(), size);
             }
@@ -262,7 +313,11 @@ namespace System.Runtime.InteropServices
         // People should instead use the IntPtr overloads
         //====================================================================
         [RequiresDynamicCode("Marshalling code for the object might not be available")]
-        private static unsafe T ReadValueSlow<T>(object ptr, int ofs, delegate*<IntPtr, int, T> readValueHelper)
+        private static unsafe T ReadValueSlow<T>(
+            object ptr,
+            int ofs,
+            delegate* <IntPtr, int, T> readValueHelper
+        )
         {
             // Consumers of this method are documented to throw AccessViolationException on any AV
             if (ptr is null)
@@ -270,9 +325,7 @@ namespace System.Runtime.InteropServices
                 throw new AccessViolationException();
             }
 
-            if (ptr.GetEETypePtr().IsArray ||
-                ptr is string ||
-                ptr is StringBuilder)
+            if (ptr.GetEETypePtr().IsArray || ptr is string || ptr is StringBuilder)
             {
                 // We could implement these if really needed.
                 throw new PlatformNotSupportedException();
@@ -341,7 +394,12 @@ namespace System.Runtime.InteropServices
         }
 
         [RequiresDynamicCode("Marshalling code for the object might not be available")]
-        private static unsafe void WriteValueSlow<T>(object ptr, int ofs, T val, delegate*<IntPtr, int, T, void> writeValueHelper)
+        private static unsafe void WriteValueSlow<T>(
+            object ptr,
+            int ofs,
+            T val,
+            delegate* <IntPtr, int, T, void> writeValueHelper
+        )
         {
             // Consumers of this method are documented to throw AccessViolationException on any AV
             if (ptr is null)
@@ -349,9 +407,7 @@ namespace System.Runtime.InteropServices
                 throw new AccessViolationException();
             }
 
-            if (ptr.GetEETypePtr().IsArray ||
-                ptr is string ||
-                ptr is StringBuilder)
+            if (ptr.GetEETypePtr().IsArray || ptr is string || ptr is StringBuilder)
             {
                 // We could implement these if really needed.
                 throw new PlatformNotSupportedException();

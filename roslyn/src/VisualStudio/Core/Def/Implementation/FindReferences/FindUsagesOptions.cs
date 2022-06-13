@@ -16,12 +16,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FindUsagesOptions()
-        {
-        }
+        public FindUsagesOptions() { }
 
-        ImmutableArray<IOption> IOptionProvider.Options { get; } = ImmutableArray.Create<IOption>(
-            DefinitionGroupingPriority);
+        ImmutableArray<IOption> IOptionProvider.Options { get; } =
+            ImmutableArray.Create<IOption>(DefinitionGroupingPriority);
 
         private const string LocalRegistryPath = @"Roslyn\Internal\FindUsages\";
 
@@ -31,8 +29,14 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
         /// and we want to restore the value back to its original state when the user does the
         /// next FindReferences call.
         /// </summary>
-        public static readonly Option<int> DefinitionGroupingPriority = new(
-            nameof(FindUsagesOptions), nameof(DefinitionGroupingPriority), defaultValue: -1,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(DefinitionGroupingPriority)));
+        public static readonly Option<int> DefinitionGroupingPriority =
+            new(
+                nameof(FindUsagesOptions),
+                nameof(DefinitionGroupingPriority),
+                defaultValue: -1,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + nameof(DefinitionGroupingPriority)
+                )
+            );
     }
 }

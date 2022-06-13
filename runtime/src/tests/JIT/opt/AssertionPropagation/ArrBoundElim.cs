@@ -28,10 +28,7 @@ class Program
             Console.WriteLine("failed " + action.Method.Name);
             returnCode--;
         }
-        catch (Exception)
-        {
-
-        }
+        catch (Exception) { }
     }
 
     private static void RunTestNoThrow(Action action)
@@ -52,60 +49,59 @@ public static class Tests
 {
     private static byte[] smallArr => new byte[10];
 
-    // RangeCheck analysis should eliminate the bounds check on 
+    // RangeCheck analysis should eliminate the bounds check on
     // smallArr.
     public static void MulInsideRange()
     {
         for (int i = 0; i < 3; i++)
         {
-            smallArr[i*3] = 17;
+            smallArr[i * 3] = 17;
         }
     }
 
-    // RangeCheck analysis should keep the bounds check on 
+    // RangeCheck analysis should keep the bounds check on
     // smallArr.
     public static void MulOutsideRange()
     {
         for (int i = 0; i < 3; i++)
         {
-            smallArr[i*5] = 17;
+            smallArr[i * 5] = 17;
         }
     }
 
-    private static byte[] bigArr => new byte[268435460]; 
+    private static byte[] bigArr => new byte[268435460];
 
     // RangeCheck analysis should detect that the multiplcation
     // overflows and keep all range checks for bigArr. bigArr
-    // size, and the bounds on the loop were carefully chosen to to 
-    // potentially spoof the RangeCheck analysis to eliminate a bound 
-    // check IF overflow detection on GT_MUL for RangeCheck is implemented 
+    // size, and the bounds on the loop were carefully chosen to to
+    // potentially spoof the RangeCheck analysis to eliminate a bound
+    // check IF overflow detection on GT_MUL for RangeCheck is implemented
     // incorrectly.
     public static void MulOverflow()
     {
         for (int i = 0; i < 39768215; i++)
         {
-            bigArr[i*402653184] = 17;
+            bigArr[i * 402653184] = 17;
         }
     }
 
-    // RangeCheck analysis should eliminate the bounds check on 
+    // RangeCheck analysis should eliminate the bounds check on
     // smallArr.
     public static void LshInsideRange()
     {
         for (int i = 0; i < 3; i++)
         {
-            smallArr[i<<1] = 17;
+            smallArr[i << 1] = 17;
         }
     }
 
-    // RangeCheck analysis should keep the bounds check on 
+    // RangeCheck analysis should keep the bounds check on
     // smallArr.
     public static void LshOutsideRange()
     {
         for (int i = 0; i < 3; i++)
         {
-            smallArr[i<<3] = 17;
+            smallArr[i << 3] = 17;
         }
     }
-
 }

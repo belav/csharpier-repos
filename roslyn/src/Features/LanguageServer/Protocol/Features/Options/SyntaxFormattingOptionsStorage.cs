@@ -21,18 +21,37 @@ internal interface ISyntaxFormattingOptionsStorage : ILanguageService
 
 internal static class SyntaxFormattingOptionsStorage
 {
-    public static SyntaxFormattingOptions.CommonOptions GetCommonSyntaxFormattingOptions(this IGlobalOptionService globalOptions, string language)
-        => new()
+    public static SyntaxFormattingOptions.CommonOptions GetCommonSyntaxFormattingOptions(
+        this IGlobalOptionService globalOptions,
+        string language
+    ) =>
+        new()
         {
             LineFormatting = globalOptions.GetLineFormattingOptions(language),
-            SeparateImportDirectiveGroups = globalOptions.GetOption(GenerationOptions.SeparateImportDirectiveGroups, language),
-            AccessibilityModifiersRequired = globalOptions.GetOption(CodeStyleOptions2.AccessibilityModifiersRequired, language).Value
+            SeparateImportDirectiveGroups = globalOptions.GetOption(
+                GenerationOptions.SeparateImportDirectiveGroups,
+                language
+            ),
+            AccessibilityModifiersRequired = globalOptions
+                .GetOption(CodeStyleOptions2.AccessibilityModifiersRequired, language)
+                .Value
         };
 
-    public static ValueTask<SyntaxFormattingOptions> GetSyntaxFormattingOptionsAsync(this Document document, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
-        => document.GetSyntaxFormattingOptionsAsync(globalOptions.GetSyntaxFormattingOptions(document.Project.LanguageServices), cancellationToken);
+    public static ValueTask<SyntaxFormattingOptions> GetSyntaxFormattingOptionsAsync(
+        this Document document,
+        IGlobalOptionService globalOptions,
+        CancellationToken cancellationToken
+    ) =>
+        document.GetSyntaxFormattingOptionsAsync(
+            globalOptions.GetSyntaxFormattingOptions(document.Project.LanguageServices),
+            cancellationToken
+        );
 
-    public static SyntaxFormattingOptions GetSyntaxFormattingOptions(this IGlobalOptionService globalOptions, HostLanguageServices languageServices)
-        => languageServices.GetRequiredService<ISyntaxFormattingOptionsStorage>().GetOptions(globalOptions);
+    public static SyntaxFormattingOptions GetSyntaxFormattingOptions(
+        this IGlobalOptionService globalOptions,
+        HostLanguageServices languageServices
+    ) =>
+        languageServices
+            .GetRequiredService<ISyntaxFormattingOptionsStorage>()
+            .GetOptions(globalOptions);
 }
-

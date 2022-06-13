@@ -17,11 +17,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod;
 [DataContract]
 internal readonly record struct ExtractMethodOptions
 {
-    [DataMember] public bool DontPutOutOrRefOnStruct { get; init; } = true;
+    [DataMember]
+    public bool DontPutOutOrRefOnStruct { get; init; } = true;
 
-    public ExtractMethodOptions()
-    {
-    }
+    public ExtractMethodOptions() { }
 
     public static readonly ExtractMethodOptions Default = new();
 }
@@ -32,26 +31,56 @@ internal readonly record struct ExtractMethodOptions
 /// </summary>
 [DataContract]
 internal readonly record struct ExtractMethodGenerationOptions(
-    [property: DataMember] CodeGenerationOptions CodeGenerationOptions)
+    [property: DataMember] CodeGenerationOptions CodeGenerationOptions
+)
 {
-    [DataMember] public ExtractMethodOptions ExtractOptions { get; init; } = ExtractMethodOptions.Default;
-    [DataMember] public AddImportPlacementOptions AddImportOptions { get; init; } = AddImportPlacementOptions.Default;
-    [DataMember] public LineFormattingOptions LineFormattingOptions { get; init; } = LineFormattingOptions.Default;
+    [DataMember]
+    public ExtractMethodOptions ExtractOptions { get; init; } = ExtractMethodOptions.Default;
 
-    public static ExtractMethodGenerationOptions GetDefault(HostLanguageServices languageServices)
-        => new(CodeGenerationOptions.GetDefault(languageServices));
+    [DataMember]
+    public AddImportPlacementOptions AddImportOptions { get; init; } =
+        AddImportPlacementOptions.Default;
+
+    [DataMember]
+    public LineFormattingOptions LineFormattingOptions { get; init; } =
+        LineFormattingOptions.Default;
+
+    public static ExtractMethodGenerationOptions GetDefault(
+        HostLanguageServices languageServices
+    ) => new(CodeGenerationOptions.GetDefault(languageServices));
 }
 
 internal static class ExtractMethodGenerationOptionsProviders
 {
-    public static async ValueTask<ExtractMethodGenerationOptions> GetExtractMethodGenerationOptionsAsync(this Document document, ExtractMethodGenerationOptions? fallbackOptions, CancellationToken cancellationToken)
+    public static async ValueTask<ExtractMethodGenerationOptions> GetExtractMethodGenerationOptionsAsync(
+        this Document document,
+        ExtractMethodGenerationOptions? fallbackOptions,
+        CancellationToken cancellationToken
+    )
     {
-        fallbackOptions ??= ExtractMethodGenerationOptions.GetDefault(document.Project.LanguageServices);
+        fallbackOptions ??= ExtractMethodGenerationOptions.GetDefault(
+            document.Project.LanguageServices
+        );
 
         var extractOptions = fallbackOptions.Value.ExtractOptions;
-        var codeGenerationOptions = await document.GetCodeGenerationOptionsAsync(fallbackOptions.Value.CodeGenerationOptions, cancellationToken).ConfigureAwait(false);
-        var addImportOptions = await document.GetAddImportPlacementOptionsAsync(fallbackOptions.Value.AddImportOptions, cancellationToken).ConfigureAwait(false);
-        var lineFormattingOptions = await document.GetLineFormattingOptionsAsync(fallbackOptions.Value.LineFormattingOptions, cancellationToken).ConfigureAwait(false);
+        var codeGenerationOptions = await document
+            .GetCodeGenerationOptionsAsync(
+                fallbackOptions.Value.CodeGenerationOptions,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        var addImportOptions = await document
+            .GetAddImportPlacementOptionsAsync(
+                fallbackOptions.Value.AddImportOptions,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        var lineFormattingOptions = await document
+            .GetLineFormattingOptionsAsync(
+                fallbackOptions.Value.LineFormattingOptions,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         return new ExtractMethodGenerationOptions(codeGenerationOptions)
         {
@@ -61,6 +90,13 @@ internal static class ExtractMethodGenerationOptionsProviders
         };
     }
 
-    public static ValueTask<ExtractMethodGenerationOptions> GetExtractMethodGenerationOptionsAsync(this Document document, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
-        => document.GetExtractMethodGenerationOptionsAsync(fallbackOptions.GetExtractMethodGenerationOptions(document.Project.LanguageServices), cancellationToken);
+    public static ValueTask<ExtractMethodGenerationOptions> GetExtractMethodGenerationOptionsAsync(
+        this Document document,
+        CodeActionOptionsProvider fallbackOptions,
+        CancellationToken cancellationToken
+    ) =>
+        document.GetExtractMethodGenerationOptionsAsync(
+            fallbackOptions.GetExtractMethodGenerationOptions(document.Project.LanguageServices),
+            cancellationToken
+        );
 }

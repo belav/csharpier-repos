@@ -21,16 +21,22 @@ namespace ILCompiler
             return null;
         }
 
-        public override void AddDependenciesDueToPInvoke(ref DependencyList dependencies, NodeFactory factory, MethodDesc method)
-        {
-        }
+        public override void AddDependenciesDueToPInvoke(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method
+        ) { }
 
-        public override void AddInterestingInteropConstructedTypeDependencies(ref DependencyList dependencies, NodeFactory factory, TypeDesc type)
-        {
-        }
+        public override void AddInterestingInteropConstructedTypeDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            TypeDesc type
+        ) { }
 
-        public override void AddMarshalAPIsGenericDependencies(ref DependencyList dependencies, NodeFactory factory, MethodDesc method)
-        {
-        }
+        public override void AddMarshalAPIsGenericDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method
+        ) { }
     }
 }

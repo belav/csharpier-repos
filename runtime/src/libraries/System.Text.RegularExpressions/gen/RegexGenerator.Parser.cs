@@ -19,20 +19,34 @@ namespace System.Text.RegularExpressions.Generator
     public partial class RegexGenerator
     {
         private const string RegexName = "System.Text.RegularExpressions.Regex";
-        private const string RegexGeneratorAttributeName = "System.Text.RegularExpressions.RegexGeneratorAttribute";
+        private const string RegexGeneratorAttributeName =
+            "System.Text.RegularExpressions.RegexGeneratorAttribute";
 
-        private static bool IsSyntaxTargetForGeneration(SyntaxNode node, CancellationToken cancellationToken) =>
+        private static bool IsSyntaxTargetForGeneration(
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        ) =>
             // We don't have a semantic model here, so the best we can do is say whether there are any attributes.
             node is MethodDeclarationSyntax { AttributeLists: { Count: > 0 } };
 
-        private static bool IsSemanticTargetForGeneration(SemanticModel semanticModel, MethodDeclarationSyntax methodDeclarationSyntax, CancellationToken cancellationToken)
+        private static bool IsSemanticTargetForGeneration(
+            SemanticModel semanticModel,
+            MethodDeclarationSyntax methodDeclarationSyntax,
+            CancellationToken cancellationToken
+        )
         {
-            foreach (AttributeListSyntax attributeListSyntax in methodDeclarationSyntax.AttributeLists)
+            foreach (
+                AttributeListSyntax attributeListSyntax in methodDeclarationSyntax.AttributeLists
+            )
             {
                 foreach (AttributeSyntax attributeSyntax in attributeListSyntax.Attributes)
                 {
-                    if (semanticModel.GetSymbolInfo(attributeSyntax, cancellationToken).Symbol is IMethodSymbol attributeSymbol &&
-                        attributeSymbol.ContainingType.ToDisplayString() == RegexGeneratorAttributeName)
+                    if (
+                        semanticModel.GetSymbolInfo(attributeSyntax, cancellationToken).Symbol
+                            is IMethodSymbol attributeSymbol
+                        && attributeSymbol.ContainingType.ToDisplayString()
+                            == RegexGeneratorAttributeName
+                    )
                     {
                         return true;
                     }
@@ -43,7 +57,10 @@ namespace System.Text.RegularExpressions.Generator
         }
 
         // Returns null if nothing to do, Diagnostic if there's an error to report, or RegexType if the type was analyzed successfully.
-        private static object? GetSemanticTargetForGeneration(GeneratorSyntaxContext context, CancellationToken cancellationToken)
+        private static object? GetSemanticTargetForGeneration(
+            GeneratorSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var methodSyntax = (MethodDeclarationSyntax)context.Node;
             SemanticModel sm = context.SemanticModel;
@@ -55,7 +72,9 @@ namespace System.Text.RegularExpressions.Generator
 
             Compilation compilation = sm.Compilation;
             INamedTypeSymbol? regexSymbol = compilation.GetBestTypeByMetadataName(RegexName);
-            INamedTypeSymbol? regexGeneratorAttributeSymbol = compilation.GetBestTypeByMetadataName(RegexGeneratorAttributeName);
+            INamedTypeSymbol? regexGeneratorAttributeSymbol = compilation.GetBestTypeByMetadataName(
+                RegexGeneratorAttributeName
+            );
 
             if (regexSymbol is null || regexGeneratorAttributeSymbol is null)
             {
@@ -69,7 +88,8 @@ namespace System.Text.RegularExpressions.Generator
                 return null;
             }
 
-            IMethodSymbol? regexMethodSymbol = sm.GetDeclaredSymbol(methodSyntax, cancellationToken) as IMethodSymbol;
+            IMethodSymbol? regexMethodSymbol =
+                sm.GetDeclaredSymbol(methodSyntax, cancellationToken) as IMethodSymbol;
             if (regexMethodSymbol is null)
             {
                 return null;
@@ -87,25 +107,41 @@ namespace System.Text.RegularExpressions.Generator
             int? matchTimeout = null;
             foreach (AttributeData attributeData in boundAttributes)
             {
-                if (!SymbolEqualityComparer.Default.Equals(attributeData.AttributeClass, regexGeneratorAttributeSymbol))
+                if (
+                    !SymbolEqualityComparer.Default.Equals(
+                        attributeData.AttributeClass,
+                        regexGeneratorAttributeSymbol
+                    )
+                )
                 {
                     continue;
                 }
 
-                if (attributeData.ConstructorArguments.Any(ca => ca.Kind == TypedConstantKind.Error))
+                if (
+                    attributeData.ConstructorArguments.Any(ca => ca.Kind == TypedConstantKind.Error)
+                )
                 {
-                    return Diagnostic.Create(DiagnosticDescriptors.InvalidRegexGeneratorAttribute, methodSyntax.GetLocation());
+                    return Diagnostic.Create(
+                        DiagnosticDescriptors.InvalidRegexGeneratorAttribute,
+                        methodSyntax.GetLocation()
+                    );
                 }
 
                 if (pattern is not null)
                 {
-                    return Diagnostic.Create(DiagnosticDescriptors.MultipleRegexGeneratorAttributes, methodSyntax.GetLocation());
+                    return Diagnostic.Create(
+                        DiagnosticDescriptors.MultipleRegexGeneratorAttributes,
+                        methodSyntax.GetLocation()
+                    );
                 }
 
                 ImmutableArray<TypedConstant> items = attributeData.ConstructorArguments;
                 if (items.Length == 0 || items.Length > 3)
                 {
-                    return Diagnostic.Create(DiagnosticDescriptors.InvalidRegexGeneratorAttribute, methodSyntax.GetLocation());
+                    return Diagnostic.Create(
+                        DiagnosticDescriptors.InvalidRegexGeneratorAttribute,
+                        methodSyntax.GetLocation()
+                    );
                 }
 
                 attributeFound = true;
@@ -127,24 +163,43 @@ namespace System.Text.RegularExpressions.Generator
 
             if (pattern is null)
             {
-                return Diagnostic.Create(DiagnosticDescriptors.InvalidRegexArguments, methodSyntax.GetLocation(), "(null)");
+                return Diagnostic.Create(
+                    DiagnosticDescriptors.InvalidRegexArguments,
+                    methodSyntax.GetLocation(),
+                    "(null)"
+                );
             }
 
-            if (!regexMethodSymbol.IsPartialDefinition ||
-                regexMethodSymbol.IsAbstract ||
-                regexMethodSymbol.Parameters.Length != 0 ||
-                regexMethodSymbol.Arity != 0 ||
-                !SymbolEqualityComparer.Default.Equals(regexMethodSymbol.ReturnType, regexSymbol))
+            if (
+                !regexMethodSymbol.IsPartialDefinition
+                || regexMethodSymbol.IsAbstract
+                || regexMethodSymbol.Parameters.Length != 0
+                || regexMethodSymbol.Arity != 0
+                || !SymbolEqualityComparer.Default.Equals(regexMethodSymbol.ReturnType, regexSymbol)
+            )
             {
-                return Diagnostic.Create(DiagnosticDescriptors.RegexMethodMustHaveValidSignature, methodSyntax.GetLocation());
+                return Diagnostic.Create(
+                    DiagnosticDescriptors.RegexMethodMustHaveValidSignature,
+                    methodSyntax.GetLocation()
+                );
             }
 
-            if (typeDec.SyntaxTree.Options is CSharpParseOptions { LanguageVersion: <= LanguageVersion.CSharp10 })
+            if (
+                typeDec.SyntaxTree.Options is CSharpParseOptions
+                {
+                    LanguageVersion: <= LanguageVersion.CSharp10
+                }
+            )
             {
-                return Diagnostic.Create(DiagnosticDescriptors.InvalidLangVersion, methodSyntax.GetLocation());
+                return Diagnostic.Create(
+                    DiagnosticDescriptors.InvalidLangVersion,
+                    methodSyntax.GetLocation()
+                );
             }
 
-            RegexOptions regexOptions = options is not null ? (RegexOptions)options : RegexOptions.None;
+            RegexOptions regexOptions = options is not null
+                ? (RegexOptions)options
+                : RegexOptions.None;
 
             // TODO: This is going to include the culture that's current at the time of compilation.
             // What should we do about that?  We could:
@@ -153,29 +208,40 @@ namespace System.Text.RegularExpressions.Generator
             // - just use whatever culture is present at build time
             // - devise a new way of not using the culture present at build time
             // - ...
-            CultureInfo culture = (regexOptions & RegexOptions.CultureInvariant) != 0 ? CultureInfo.InvariantCulture : CultureInfo.CurrentCulture;
+            CultureInfo culture =
+                (regexOptions & RegexOptions.CultureInvariant) != 0
+                    ? CultureInfo.InvariantCulture
+                    : CultureInfo.CurrentCulture;
 
             // Validate the options
             const RegexOptions SupportedOptions =
-                RegexOptions.Compiled |
-                RegexOptions.CultureInvariant |
-                RegexOptions.ECMAScript |
-                RegexOptions.ExplicitCapture |
-                RegexOptions.IgnoreCase |
-                RegexOptions.IgnorePatternWhitespace |
-                RegexOptions.Multiline |
-                RegexOptions.NonBacktracking |
-                RegexOptions.RightToLeft |
-                RegexOptions.Singleline;
+                RegexOptions.Compiled
+                | RegexOptions.CultureInvariant
+                | RegexOptions.ECMAScript
+                | RegexOptions.ExplicitCapture
+                | RegexOptions.IgnoreCase
+                | RegexOptions.IgnorePatternWhitespace
+                | RegexOptions.Multiline
+                | RegexOptions.NonBacktracking
+                | RegexOptions.RightToLeft
+                | RegexOptions.Singleline;
             if ((regexOptions & ~SupportedOptions) != 0)
             {
-                return Diagnostic.Create(DiagnosticDescriptors.InvalidRegexArguments, methodSyntax.GetLocation(), "options");
+                return Diagnostic.Create(
+                    DiagnosticDescriptors.InvalidRegexArguments,
+                    methodSyntax.GetLocation(),
+                    "options"
+                );
             }
 
             // Validate the timeout
             if (matchTimeout is 0 or < -1)
             {
-                return Diagnostic.Create(DiagnosticDescriptors.InvalidRegexArguments, methodSyntax.GetLocation(), "matchTimeout");
+                return Diagnostic.Create(
+                    DiagnosticDescriptors.InvalidRegexArguments,
+                    methodSyntax.GetLocation(),
+                    "matchTimeout"
+                );
             }
 
             // Parse the input pattern
@@ -183,22 +249,36 @@ namespace System.Text.RegularExpressions.Generator
             AnalysisResults analysis;
             try
             {
-                regexTree = RegexParser.Parse(pattern, regexOptions | RegexOptions.Compiled, culture); // make sure Compiled is included to get all optimizations applied to it
+                regexTree = RegexParser.Parse(
+                    pattern,
+                    regexOptions | RegexOptions.Compiled,
+                    culture
+                ); // make sure Compiled is included to get all optimizations applied to it
                 analysis = RegexTreeAnalyzer.Analyze(regexTree);
             }
             catch (Exception e)
             {
-                return Diagnostic.Create(DiagnosticDescriptors.InvalidRegexArguments, methodSyntax.GetLocation(), e.Message);
+                return Diagnostic.Create(
+                    DiagnosticDescriptors.InvalidRegexArguments,
+                    methodSyntax.GetLocation(),
+                    e.Message
+                );
             }
 
             // Determine the namespace the class is declared in, if any
             string? ns = regexMethodSymbol.ContainingType?.ContainingNamespace?.ToDisplayString(
-                SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted));
+                SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
+                    SymbolDisplayGlobalNamespaceStyle.Omitted
+                )
+            );
 
             var regexType = new RegexType(
-                typeDec is RecordDeclarationSyntax rds ? $"{typeDec.Keyword.ValueText} {rds.ClassOrStructKeyword}" : typeDec.Keyword.ValueText,
+                typeDec is RecordDeclarationSyntax rds
+                    ? $"{typeDec.Keyword.ValueText} {rds.ClassOrStructKeyword}"
+                    : typeDec.Keyword.ValueText,
                 ns ?? string.Empty,
-                $"{typeDec.Identifier}{typeDec.TypeParameterList}");
+                $"{typeDec.Identifier}{typeDec.TypeParameterList}"
+            );
 
             var regexMethod = new RegexMethod(
                 regexType,
@@ -209,7 +289,8 @@ namespace System.Text.RegularExpressions.Generator
                 regexOptions,
                 matchTimeout,
                 regexTree,
-                analysis);
+                analysis
+            );
 
             RegexType current = regexType;
             var parent = typeDec.Parent as TypeDeclarationSyntax;
@@ -217,9 +298,12 @@ namespace System.Text.RegularExpressions.Generator
             while (parent is not null && IsAllowedKind(parent.Kind()))
             {
                 current.Parent = new RegexType(
-                    parent is RecordDeclarationSyntax rds2 ? $"{parent.Keyword.ValueText} {rds2.ClassOrStructKeyword}" : parent.Keyword.ValueText,
+                    parent is RecordDeclarationSyntax rds2
+                        ? $"{parent.Keyword.ValueText} {rds2.ClassOrStructKeyword}"
+                        : parent.Keyword.ValueText,
                     ns ?? string.Empty,
-                    $"{parent.Identifier}{parent.TypeParameterList}");
+                    $"{parent.Identifier}{parent.TypeParameterList}"
+                );
 
                 current = current.Parent;
                 parent = parent.Parent as TypeDeclarationSyntax;
@@ -228,15 +312,25 @@ namespace System.Text.RegularExpressions.Generator
             return regexMethod;
 
             static bool IsAllowedKind(SyntaxKind kind) =>
-                kind == SyntaxKind.ClassDeclaration ||
-                kind == SyntaxKind.StructDeclaration ||
-                kind == SyntaxKind.RecordDeclaration ||
-                kind == SyntaxKind.RecordStructDeclaration ||
-                kind == SyntaxKind.InterfaceDeclaration;
+                kind == SyntaxKind.ClassDeclaration
+                || kind == SyntaxKind.StructDeclaration
+                || kind == SyntaxKind.RecordDeclaration
+                || kind == SyntaxKind.RecordStructDeclaration
+                || kind == SyntaxKind.InterfaceDeclaration;
         }
 
         /// <summary>A regex method.</summary>
-        internal sealed record RegexMethod(RegexType DeclaringType, MethodDeclarationSyntax MethodSyntax, string MethodName, string Modifiers, string Pattern, RegexOptions Options, int? MatchTimeout, RegexTree Tree, AnalysisResults Analysis)
+        internal sealed record RegexMethod(
+            RegexType DeclaringType,
+            MethodDeclarationSyntax MethodSyntax,
+            string MethodName,
+            string Modifiers,
+            string Pattern,
+            RegexOptions Options,
+            int? MatchTimeout,
+            RegexTree Tree,
+            AnalysisResults Analysis
+        )
         {
             public string? GeneratedName { get; set; }
             public bool IsDuplicate { get; set; }

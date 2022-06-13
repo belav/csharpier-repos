@@ -26,9 +26,7 @@ public class HtmlFormattableString : IHtmlContent
     /// <param name="format">A composite format string.</param>
     /// <param name="args">An array that contains objects to format.</param>
     public HtmlFormattableString(string format, params object?[] args)
-        : this(formatProvider: null, format: format, args: args)
-    {
-    }
+        : this(formatProvider: null, format: format, args: args) { }
 
     /// <summary>
     /// Creates a new <see cref="HtmlFormattableString"/> with the given <paramref name="formatProvider"/>,
@@ -37,7 +35,11 @@ public class HtmlFormattableString : IHtmlContent
     /// <param name="formatProvider">An object that provides culture-specific formatting information.</param>
     /// <param name="format">A composite format string.</param>
     /// <param name="args">An array that contains objects to format.</param>
-    public HtmlFormattableString(IFormatProvider? formatProvider, string format, params object?[] args)
+    public HtmlFormattableString(
+        IFormatProvider? formatProvider,
+        string format,
+        params object?[] args
+    )
     {
         if (format == null)
         {
@@ -129,7 +131,8 @@ public class HtmlFormattableString : IHtmlContent
             //
             // First check for an ICustomFormatter - if the IFormatProvider is a CultureInfo, then it's likely
             // that ICustomFormatter will be null.
-            var customFormatter = (ICustomFormatter?)_formatProvider.GetFormat(typeof(ICustomFormatter));
+            var customFormatter = (ICustomFormatter?)
+                _formatProvider.GetFormat(typeof(ICustomFormatter));
             if (customFormatter != null)
             {
                 var result = customFormatter.Format(format, arg, _formatProvider);

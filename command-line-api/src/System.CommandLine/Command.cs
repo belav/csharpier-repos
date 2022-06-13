@@ -30,9 +30,7 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="name">The name of the command.</param>
         /// <param name="description">The description of the command, shown in help.</param>
-        public Command(string name, string? description = null) : base(name, description)
-        {
-        }
+        public Command(string name, string? description = null) : base(name, description) { }
 
         /// <summary>
         /// Gets the child symbols.
@@ -55,22 +53,27 @@ namespace System.CommandLine
         /// <summary>
         /// Represents all of the arguments for the command.
         /// </summary>
-        public IReadOnlyList<Argument> Arguments => _arguments is not null ? _arguments : Array.Empty<Argument>();
+        public IReadOnlyList<Argument> Arguments =>
+            _arguments is not null ? _arguments : Array.Empty<Argument>();
 
         internal bool HasArguments => _arguments is not null;
 
         /// <summary>
         /// Represents all of the options for the command, including global options that have been applied to any of the command's ancestors.
         /// </summary>
-        public IReadOnlyList<Option> Options => _options is not null ? _options : Array.Empty<Option>();
+        public IReadOnlyList<Option> Options =>
+            _options is not null ? _options : Array.Empty<Option>();
 
         /// <summary>
         /// Represents all of the subcommands for the command.
         /// </summary>
-        public IReadOnlyList<Command> Subcommands => _subcommands is not null ? _subcommands : Array.Empty<Command>();
+        public IReadOnlyList<Command> Subcommands =>
+            _subcommands is not null ? _subcommands : Array.Empty<Command>();
 
-        internal IReadOnlyList<ValidateSymbolResult<CommandResult>> Validators
-            => _validators is not null ? _validators : Array.Empty<ValidateSymbolResult<CommandResult>>();
+        internal IReadOnlyList<ValidateSymbolResult<CommandResult>> Validators =>
+            _validators is not null
+                ? _validators
+                : Array.Empty<ValidateSymbolResult<CommandResult>>();
 
         internal bool HasValidators => _validators is not null; // initialized by Add method, so when it's not null the Count is always > 0
 
@@ -116,6 +119,7 @@ namespace System.CommandLine
             option.IsGlobal = true;
             AddOption(option);
         }
+
         /// <summary>
         /// Adds an <see cref="Option"/> to the command.
         /// </summary>
@@ -142,7 +146,8 @@ namespace System.CommandLine
         /// to create custom validation logic.
         /// </summary>
         /// <param name="validate">The delegate to validate the symbols during parsing.</param>
-        public void AddValidator(ValidateSymbolResult<CommandResult> validate) => (_validators ??= new()).Add(validate);
+        public void AddValidator(ValidateSymbolResult<CommandResult> validate) =>
+            (_validators ??= new()).Add(validate);
 
         /// <summary>
         /// Gets or sets a value that indicates whether unmatched tokens should be treated as errors. For example,
@@ -222,8 +227,8 @@ namespace System.CommandLine
             }
 
             return completions
-                   .OrderBy(item => item.SortText.IndexOfCaseInsensitive(context.WordToComplete))
-                   .ThenBy(symbol => symbol.Label, StringComparer.OrdinalIgnoreCase);
+                .OrderBy(item => item.SortText.IndexOfCaseInsensitive(context.WordToComplete))
+                .ThenBy(symbol => symbol.Label, StringComparer.OrdinalIgnoreCase);
 
             void AddCompletionsFor(IdentifierSymbol identifier)
             {
@@ -231,10 +236,15 @@ namespace System.CommandLine
                 {
                     foreach (var alias in identifier.Aliases)
                     {
-                        if (alias is { } &&
-                            alias.ContainsCaseInsensitive(textToMatch))
+                        if (alias is { } && alias.ContainsCaseInsensitive(textToMatch))
                         {
-                            completions.Add(new CompletionItem(alias, CompletionItemKind.Keyword, detail: identifier.Description));
+                            completions.Add(
+                                new CompletionItem(
+                                    alias,
+                                    CompletionItemKind.Keyword,
+                                    detail: identifier.Description
+                                )
+                            );
                         }
                     }
                 }

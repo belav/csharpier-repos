@@ -16,7 +16,11 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_Sysctl", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_Sysctl",
+            SetLastError = true
+        )]
         private static unsafe partial int Sysctl(int* name, int namelen, void* value, size_t* len);
 
         // This is 'raw' sysctl call, only wrapped to allocate memory if needed
@@ -42,7 +46,9 @@ internal static partial class Interop
                 ret = Sysctl(name, name_len, value, &bytesLength);
                 if (ret != 0)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.InvalidSysctl, *name, Marshal.GetLastWin32Error()));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.InvalidSysctl, *name, Marshal.GetLastWin32Error())
+                    );
                 }
                 value = (byte*)Marshal.AllocHGlobal((int)bytesLength);
             }
@@ -75,7 +81,9 @@ internal static partial class Interop
                 {
                     Marshal.FreeHGlobal((IntPtr)value);
                 }
-                throw new InvalidOperationException(SR.Format(SR.InvalidSysctl, *name, Marshal.GetLastWin32Error()));
+                throw new InvalidOperationException(
+                    SR.Format(SR.InvalidSysctl, *name, Marshal.GetLastWin32Error())
+                );
             }
 
             len = (int)bytesLength;

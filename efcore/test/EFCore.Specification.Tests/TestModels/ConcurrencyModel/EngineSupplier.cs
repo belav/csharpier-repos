@@ -8,9 +8,7 @@ public class EngineSupplier
     private readonly ILazyLoader _loader;
     private ICollection<Engine> _engines;
 
-    public EngineSupplier()
-    {
-    }
+    public EngineSupplier() { }
 
     private EngineSupplier(ILazyLoader loader, string name)
     {

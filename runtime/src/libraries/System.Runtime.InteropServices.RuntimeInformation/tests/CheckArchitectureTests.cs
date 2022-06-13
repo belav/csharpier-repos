@@ -29,7 +29,10 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
                     break;
 
                 case Architecture.Arm64:
-                    Assert.Equal(IntPtr.Size == 4 ? Architecture.Arm : Architecture.Arm64, processArch);
+                    Assert.Equal(
+                        IntPtr.Size == 4 ? Architecture.Arm : Architecture.Arm64,
+                        processArch
+                    );
                     break;
 
                 case Architecture.Wasm:

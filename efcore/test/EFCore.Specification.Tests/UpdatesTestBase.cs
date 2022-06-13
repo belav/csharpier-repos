@@ -29,7 +29,8 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             {
                 context.AFewBytes.AddRange(
                     new AFewBytes { Id = id1, Bytes = bytes },
-                    new AFewBytes { Id = id2, Bytes = bytes });
+                    new AFewBytes { Id = id2, Bytes = bytes }
+                );
 
                 context.SaveChanges();
             },
@@ -57,7 +58,8 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
 
                 Assert.Equal(222, fromStore1.Bytes[1]);
                 Assert.Equal(2, fromStore2.Bytes[1]);
-            });
+            }
+        );
     }
 
     [ConditionalFact]
@@ -68,8 +70,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                var entry = context.Products.Attach(
-                    new Product { Id = productId, Price = 1.49M });
+                var entry = context.Products.Attach(new Product { Id = productId, Price = 1.49M });
 
                 entry.Property(c => c.Price).CurrentValue = 1.99M;
                 entry.Property(p => p.Price).IsModified = true;
@@ -85,48 +86,53 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
 
                 Assert.Equal(1.99M, product.Price);
                 Assert.Equal("Apple Cider", product.Name);
-            });
+            }
+        );
     }
 
     [ConditionalFact]
-    public virtual void Save_partial_update_on_missing_record_throws()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var entry = context.Products.Attach(
-                    new Product { Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10"), Name = "Apple Fritter" });
+    public virtual void Save_partial_update_on_missing_record_throws() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var entry = context.Products.Attach(
+                new Product
+                {
+                    Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10"),
+                    Name = "Apple Fritter"
+                }
+            );
 
-                entry.Property(c => c.Name).IsModified = true;
+            entry.Property(c => c.Name).IsModified = true;
 
-                Assert.Equal(
-                    UpdateConcurrencyMessage,
-                    Assert.Throws<DbUpdateConcurrencyException>(
-                        () => context.SaveChanges()).Message);
-            });
+            Assert.Equal(
+                UpdateConcurrencyMessage,
+                Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges()).Message
+            );
+        });
 
     [ConditionalFact]
     public virtual void Save_partial_update_on_concurrency_token_original_value_mismatch_throws()
     {
         var productId = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146");
 
-        ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var entry = context.Products.Attach(
-                    new Product
-                    {
-                        Id = productId,
-                        Name = "Apple Fritter",
-                        Price = 3.49M // Not the same as the value stored in the database
-                    });
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var entry = context.Products.Attach(
+                new Product
+                {
+                    Id = productId,
+                    Name = "Apple Fritter",
+                    Price = 3.49M // Not the same as the value stored in the database
+                }
+            );
 
-                entry.Property(c => c.Name).IsModified = true;
+            entry.Property(c => c.Name).IsModified = true;
 
-                Assert.Equal(
-                    UpdateConcurrencyTokenMessage,
-                    Assert.Throws<DbUpdateConcurrencyException>(
-                        () => context.SaveChanges()).Message);
-            });
+            Assert.Equal(
+                UpdateConcurrencyTokenMessage,
+                Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges()).Message
+            );
+        });
     }
 
     [ConditionalFact]
@@ -143,7 +149,8 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
                         Id = productId,
                         Name = "MegaChips",
                         Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }
-                    });
+                    }
+                );
 
                 context.SaveChanges();
             },
@@ -155,14 +162,15 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
                         Id = productId,
                         Name = "MegaChips",
                         Bytes = new byte[] { 8, 7, 6, 5, 4, 3, 2, 1 }
-                    });
+                    }
+                );
 
                 entry.Entity.Name = "GigaChips";
 
-                Assert.Throws<DbUpdateConcurrencyException>(
-                    () => context.SaveChanges());
+                Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges());
             },
-            context => Assert.Equal("MegaChips", context.ProductWithBytes.Find(productId).Name));
+            context => Assert.Equal("MegaChips", context.ProductWithBytes.Find(productId).Name)
+        );
     }
 
     [ConditionalFact]
@@ -179,7 +187,8 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
                         Id = productId,
                         Name = "MegaChips",
                         Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }
-                    });
+                    }
+                );
 
                 context.SaveChanges();
             },
@@ -191,13 +200,15 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
                         Id = productId,
                         Name = "MegaChips",
                         Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }
-                    });
+                    }
+                );
 
                 entry.Entity.Name = "GigaChips";
 
                 Assert.Equal(1, context.SaveChanges());
             },
-            context => Assert.Equal("GigaChips", context.ProductWithBytes.Find(productId).Name));
+            context => Assert.Equal("GigaChips", context.ProductWithBytes.Find(productId).Name)
+        );
     }
 
     [ConditionalFact]
@@ -214,7 +225,8 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
                         Id = productId,
                         Name = "MegaChips",
                         Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }
-                    });
+                    }
+                );
 
                 context.SaveChanges();
             },
@@ -226,14 +238,15 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
                         Id = productId,
                         Name = "MegaChips",
                         Bytes = new byte[] { 8, 7, 6, 5, 4, 3, 2, 1 }
-                    });
+                    }
+                );
 
                 entry.State = EntityState.Deleted;
 
-                Assert.Throws<DbUpdateConcurrencyException>(
-                    () => context.SaveChanges());
+                Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges());
             },
-            context => Assert.Equal("MegaChips", context.ProductWithBytes.Find(productId).Name));
+            context => Assert.Equal("MegaChips", context.ProductWithBytes.Find(productId).Name)
+        );
     }
 
     [ConditionalFact]
@@ -250,7 +263,8 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
                         Id = productId,
                         Name = "MegaChips",
                         Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }
-                    });
+                    }
+                );
 
                 context.SaveChanges();
             },
@@ -262,18 +276,20 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
                         Id = productId,
                         Name = "MegaChips",
                         Bytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 }
-                    });
+                    }
+                );
 
                 entry.State = EntityState.Deleted;
 
                 Assert.Equal(1, context.SaveChanges());
             },
-            context => Assert.Null(context.ProductWithBytes.Find(productId)));
+            context => Assert.Null(context.ProductWithBytes.Find(productId))
+        );
     }
 
     [ConditionalFact]
-    public virtual void Can_add_and_remove_self_refs()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Can_add_and_remove_self_refs() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var parent = new Person("1", null);
@@ -322,12 +338,16 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             },
             context =>
             {
-                var people = context.Set<Person>()
-                    .Include(p => p.Parent).ThenInclude(c => c.Parent).ThenInclude(c => c.Parent)
+                var people = context
+                    .Set<Person>()
+                    .Include(p => p.Parent)
+                    .ThenInclude(c => c.Parent)
+                    .ThenInclude(c => c.Parent)
                     .ToList();
                 Assert.Equal(7, people.Count);
                 Assert.Equal("1", people.Single(p => p.Parent == null).Name);
-            });
+            }
+        );
 
     [ConditionalFact]
     public virtual void Can_remove_partial()
@@ -337,8 +357,7 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.Products.Remove(
-                    new Product { Id = productId, Price = 1.49M });
+                context.Products.Remove(new Product { Id = productId, Price = 1.49M });
 
                 context.SaveChanges();
             },
@@ -347,51 +366,55 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
                 var product = context.Products.FirstOrDefault(f => f.Id == productId);
 
                 Assert.Null(product);
-            });
+            }
+        );
     }
 
     [ConditionalFact]
-    public virtual void Remove_partial_on_missing_record_throws()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                context.Products.Remove(
-                    new Product { Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10") });
+    public virtual void Remove_partial_on_missing_record_throws() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            context.Products.Remove(
+                new Product { Id = new Guid("3d1302c5-4cf8-4043-9758-de9398f6fe10") }
+            );
 
-                Assert.Equal(
-                    UpdateConcurrencyMessage,
-                    Assert.Throws<DbUpdateConcurrencyException>(
-                        () => context.SaveChanges()).Message);
-            });
+            Assert.Equal(
+                UpdateConcurrencyMessage,
+                Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges()).Message
+            );
+        });
 
     [ConditionalFact]
     public virtual void Remove_partial_on_concurrency_token_original_value_mismatch_throws()
     {
         var productId = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146");
 
-        ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                context.Products.Remove(
-                    new Product
-                    {
-                        Id = productId, Price = 3.49M // Not the same as the value stored in the database
-                    });
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            context.Products.Remove(
+                new Product
+                {
+                    Id = productId,
+                    Price = 3.49M // Not the same as the value stored in the database
+                }
+            );
 
-                Assert.Equal(
-                    UpdateConcurrencyTokenMessage,
-                    Assert.Throws<DbUpdateConcurrencyException>(
-                        () => context.SaveChanges()).Message);
-            });
+            Assert.Equal(
+                UpdateConcurrencyTokenMessage,
+                Assert.Throws<DbUpdateConcurrencyException>(() => context.SaveChanges()).Message
+            );
+        });
     }
 
     [ConditionalFact]
-    public virtual void Save_replaced_principal()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Save_replaced_principal() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var category = context.Categories.Single();
-                var products = context.Products.Where(p => p.DependentId == category.PrincipalId).ToList();
+                var products = context.Products
+                    .Where(p => p.DependentId == category.PrincipalId)
+                    .ToList();
 
                 Assert.Equal(2, products.Count);
 
@@ -409,163 +432,154 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
             context =>
             {
                 var category = context.Categories.Single();
-                var products = context.Products.Where(p => p.DependentId == category.PrincipalId).ToList();
+                var products = context.Products
+                    .Where(p => p.DependentId == category.PrincipalId)
+                    .ToList();
 
                 Assert.Equal("New Category", category.Name);
                 Assert.Equal(2, products.Count);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual void SaveChanges_processes_all_tracked_entities()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var stateManager = context.GetService<IStateManager>();
+    public virtual void SaveChanges_processes_all_tracked_entities() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var stateManager = context.GetService<IStateManager>();
 
-                var productId1 = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146");
-                var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
+            var productId1 = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146");
+            var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
-                var entry1 = stateManager.GetOrCreateEntry(
-                    new Category { Id = 77, PrincipalId = 777 });
-                var entry2 = stateManager.GetOrCreateEntry(
-                    new Category { Id = 78, PrincipalId = 778 });
-                var entry3 = stateManager.GetOrCreateEntry(
-                    new Product { Id = productId1 });
-                var entry4 = stateManager.GetOrCreateEntry(
-                    new Product { Id = productId2, Price = 2.49M });
+            var entry1 = stateManager.GetOrCreateEntry(new Category { Id = 77, PrincipalId = 777 });
+            var entry2 = stateManager.GetOrCreateEntry(new Category { Id = 78, PrincipalId = 778 });
+            var entry3 = stateManager.GetOrCreateEntry(new Product { Id = productId1 });
+            var entry4 = stateManager.GetOrCreateEntry(
+                new Product { Id = productId2, Price = 2.49M }
+            );
 
-                entry1.SetEntityState(EntityState.Added);
-                entry2.SetEntityState(EntityState.Modified);
-                entry3.SetEntityState(EntityState.Unchanged);
-                entry4.SetEntityState(EntityState.Deleted);
+            entry1.SetEntityState(EntityState.Added);
+            entry2.SetEntityState(EntityState.Modified);
+            entry3.SetEntityState(EntityState.Unchanged);
+            entry4.SetEntityState(EntityState.Deleted);
 
-                var processedEntities = stateManager.SaveChanges(true);
+            var processedEntities = stateManager.SaveChanges(true);
 
-                Assert.Equal(3, processedEntities);
-                Assert.Equal(3, stateManager.Entries.Count());
-                Assert.Contains(entry1, stateManager.Entries);
-                Assert.Contains(entry2, stateManager.Entries);
-                Assert.Contains(entry3, stateManager.Entries);
+            Assert.Equal(3, processedEntities);
+            Assert.Equal(3, stateManager.Entries.Count());
+            Assert.Contains(entry1, stateManager.Entries);
+            Assert.Contains(entry2, stateManager.Entries);
+            Assert.Contains(entry3, stateManager.Entries);
 
-                Assert.Equal(EntityState.Unchanged, entry1.EntityState);
-                Assert.Equal(EntityState.Unchanged, entry2.EntityState);
-                Assert.Equal(EntityState.Unchanged, entry3.EntityState);
-            });
+            Assert.Equal(EntityState.Unchanged, entry1.EntityState);
+            Assert.Equal(EntityState.Unchanged, entry2.EntityState);
+            Assert.Equal(EntityState.Unchanged, entry3.EntityState);
+        });
 
     [ConditionalFact]
-    public virtual void SaveChanges_false_processes_all_tracked_entities_without_calling_AcceptAllChanges()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var stateManager = context.GetService<IStateManager>();
+    public virtual void SaveChanges_false_processes_all_tracked_entities_without_calling_AcceptAllChanges() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var stateManager = context.GetService<IStateManager>();
 
-                var productId1 = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146");
-                var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
+            var productId1 = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146");
+            var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
-                var entry1 = stateManager.GetOrCreateEntry(
-                    new Category { Id = 77, PrincipalId = 777 });
-                var entry2 = stateManager.GetOrCreateEntry(
-                    new Category { Id = 78, PrincipalId = 778 });
-                var entry3 = stateManager.GetOrCreateEntry(
-                    new Product { Id = productId1 });
-                var entry4 = stateManager.GetOrCreateEntry(
-                    new Product { Id = productId2, Price = 2.49M });
+            var entry1 = stateManager.GetOrCreateEntry(new Category { Id = 77, PrincipalId = 777 });
+            var entry2 = stateManager.GetOrCreateEntry(new Category { Id = 78, PrincipalId = 778 });
+            var entry3 = stateManager.GetOrCreateEntry(new Product { Id = productId1 });
+            var entry4 = stateManager.GetOrCreateEntry(
+                new Product { Id = productId2, Price = 2.49M }
+            );
 
-                entry1.SetEntityState(EntityState.Added);
-                entry2.SetEntityState(EntityState.Modified);
-                entry3.SetEntityState(EntityState.Unchanged);
-                entry4.SetEntityState(EntityState.Deleted);
+            entry1.SetEntityState(EntityState.Added);
+            entry2.SetEntityState(EntityState.Modified);
+            entry3.SetEntityState(EntityState.Unchanged);
+            entry4.SetEntityState(EntityState.Deleted);
 
-                var processedEntities = stateManager.SaveChanges(false);
+            var processedEntities = stateManager.SaveChanges(false);
 
-                Assert.Equal(3, processedEntities);
-                Assert.Equal(4, stateManager.Entries.Count());
-                Assert.Contains(entry1, stateManager.Entries);
-                Assert.Contains(entry2, stateManager.Entries);
-                Assert.Contains(entry3, stateManager.Entries);
-                Assert.Contains(entry4, stateManager.Entries);
+            Assert.Equal(3, processedEntities);
+            Assert.Equal(4, stateManager.Entries.Count());
+            Assert.Contains(entry1, stateManager.Entries);
+            Assert.Contains(entry2, stateManager.Entries);
+            Assert.Contains(entry3, stateManager.Entries);
+            Assert.Contains(entry4, stateManager.Entries);
 
-                Assert.Equal(EntityState.Added, entry1.EntityState);
-                Assert.Equal(EntityState.Modified, entry2.EntityState);
-                Assert.Equal(EntityState.Unchanged, entry3.EntityState);
-                Assert.Equal(EntityState.Deleted, entry4.EntityState);
-            });
+            Assert.Equal(EntityState.Added, entry1.EntityState);
+            Assert.Equal(EntityState.Modified, entry2.EntityState);
+            Assert.Equal(EntityState.Unchanged, entry3.EntityState);
+            Assert.Equal(EntityState.Deleted, entry4.EntityState);
+        });
 
     [ConditionalFact]
-    public Task SaveChangesAsync_processes_all_tracked_entities()
-        => ExecuteWithStrategyInTransactionAsync(
-            async context =>
-            {
-                var stateManager = context.GetService<IStateManager>();
+    public Task SaveChangesAsync_processes_all_tracked_entities() =>
+        ExecuteWithStrategyInTransactionAsync(async context =>
+        {
+            var stateManager = context.GetService<IStateManager>();
 
-                var productId1 = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146");
-                var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
+            var productId1 = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146");
+            var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
-                var entry1 = stateManager.GetOrCreateEntry(
-                    new Category { Id = 77, PrincipalId = 777 });
-                var entry2 = stateManager.GetOrCreateEntry(
-                    new Category { Id = 78, PrincipalId = 778 });
-                var entry3 = stateManager.GetOrCreateEntry(
-                    new Product { Id = productId1 });
-                var entry4 = stateManager.GetOrCreateEntry(
-                    new Product { Id = productId2, Price = 2.49M });
+            var entry1 = stateManager.GetOrCreateEntry(new Category { Id = 77, PrincipalId = 777 });
+            var entry2 = stateManager.GetOrCreateEntry(new Category { Id = 78, PrincipalId = 778 });
+            var entry3 = stateManager.GetOrCreateEntry(new Product { Id = productId1 });
+            var entry4 = stateManager.GetOrCreateEntry(
+                new Product { Id = productId2, Price = 2.49M }
+            );
 
-                entry1.SetEntityState(EntityState.Added);
-                entry2.SetEntityState(EntityState.Modified);
-                entry3.SetEntityState(EntityState.Unchanged);
-                entry4.SetEntityState(EntityState.Deleted);
+            entry1.SetEntityState(EntityState.Added);
+            entry2.SetEntityState(EntityState.Modified);
+            entry3.SetEntityState(EntityState.Unchanged);
+            entry4.SetEntityState(EntityState.Deleted);
 
-                var processedEntities = await stateManager.SaveChangesAsync(true);
+            var processedEntities = await stateManager.SaveChangesAsync(true);
 
-                Assert.Equal(3, processedEntities);
-                Assert.Equal(3, stateManager.Entries.Count());
-                Assert.Contains(entry1, stateManager.Entries);
-                Assert.Contains(entry2, stateManager.Entries);
-                Assert.Contains(entry3, stateManager.Entries);
+            Assert.Equal(3, processedEntities);
+            Assert.Equal(3, stateManager.Entries.Count());
+            Assert.Contains(entry1, stateManager.Entries);
+            Assert.Contains(entry2, stateManager.Entries);
+            Assert.Contains(entry3, stateManager.Entries);
 
-                Assert.Equal(EntityState.Unchanged, entry1.EntityState);
-                Assert.Equal(EntityState.Unchanged, entry2.EntityState);
-                Assert.Equal(EntityState.Unchanged, entry3.EntityState);
-            });
+            Assert.Equal(EntityState.Unchanged, entry1.EntityState);
+            Assert.Equal(EntityState.Unchanged, entry2.EntityState);
+            Assert.Equal(EntityState.Unchanged, entry3.EntityState);
+        });
 
     [ConditionalFact]
-    public Task SaveChangesAsync_false_processes_all_tracked_entities_without_calling_AcceptAllChanges()
-        => ExecuteWithStrategyInTransactionAsync(
-            async context =>
-            {
-                var stateManager = context.GetService<IStateManager>();
+    public Task SaveChangesAsync_false_processes_all_tracked_entities_without_calling_AcceptAllChanges() =>
+        ExecuteWithStrategyInTransactionAsync(async context =>
+        {
+            var stateManager = context.GetService<IStateManager>();
 
-                var productId1 = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146");
-                var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
+            var productId1 = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146");
+            var productId2 = new Guid("0edc9136-7eed-463b-9b97-bdb9648ab877");
 
-                var entry1 = stateManager.GetOrCreateEntry(
-                    new Category { Id = 77, PrincipalId = 777 });
-                var entry2 = stateManager.GetOrCreateEntry(
-                    new Category { Id = 78, PrincipalId = 778 });
-                var entry3 = stateManager.GetOrCreateEntry(
-                    new Product { Id = productId1 });
-                var entry4 = stateManager.GetOrCreateEntry(
-                    new Product { Id = productId2, Price = 2.49M });
+            var entry1 = stateManager.GetOrCreateEntry(new Category { Id = 77, PrincipalId = 777 });
+            var entry2 = stateManager.GetOrCreateEntry(new Category { Id = 78, PrincipalId = 778 });
+            var entry3 = stateManager.GetOrCreateEntry(new Product { Id = productId1 });
+            var entry4 = stateManager.GetOrCreateEntry(
+                new Product { Id = productId2, Price = 2.49M }
+            );
 
-                entry1.SetEntityState(EntityState.Added);
-                entry2.SetEntityState(EntityState.Modified);
-                entry3.SetEntityState(EntityState.Unchanged);
-                entry4.SetEntityState(EntityState.Deleted);
+            entry1.SetEntityState(EntityState.Added);
+            entry2.SetEntityState(EntityState.Modified);
+            entry3.SetEntityState(EntityState.Unchanged);
+            entry4.SetEntityState(EntityState.Deleted);
 
-                var processedEntities = await stateManager.SaveChangesAsync(false);
+            var processedEntities = await stateManager.SaveChangesAsync(false);
 
-                Assert.Equal(3, processedEntities);
-                Assert.Equal(4, stateManager.Entries.Count());
-                Assert.Contains(entry1, stateManager.Entries);
-                Assert.Contains(entry2, stateManager.Entries);
-                Assert.Contains(entry3, stateManager.Entries);
-                Assert.Contains(entry4, stateManager.Entries);
+            Assert.Equal(3, processedEntities);
+            Assert.Equal(4, stateManager.Entries.Count());
+            Assert.Contains(entry1, stateManager.Entries);
+            Assert.Contains(entry2, stateManager.Entries);
+            Assert.Contains(entry3, stateManager.Entries);
+            Assert.Contains(entry4, stateManager.Entries);
 
-                Assert.Equal(EntityState.Added, entry1.EntityState);
-                Assert.Equal(EntityState.Modified, entry2.EntityState);
-                Assert.Equal(EntityState.Unchanged, entry3.EntityState);
-                Assert.Equal(EntityState.Deleted, entry4.EntityState);
-            });
+            Assert.Equal(EntityState.Added, entry1.EntityState);
+            Assert.Equal(EntityState.Modified, entry2.EntityState);
+            Assert.Equal(EntityState.Unchanged, entry3.EntityState);
+            Assert.Equal(EntityState.Deleted, entry4.EntityState);
+        });
 
     protected abstract string UpdateConcurrencyMessage { get; }
 
@@ -574,23 +588,33 @@ public abstract class UpdatesTestBase<TFixture> : IClassFixture<TFixture>
     protected virtual void ExecuteWithStrategyInTransaction(
         Action<UpdatesContext> testOperation,
         Action<UpdatesContext> nestedTestOperation1 = null,
-        Action<UpdatesContext> nestedTestOperation2 = null)
-        => TestHelpers.ExecuteWithStrategyInTransaction(
-            CreateContext, UseTransaction,
-            testOperation, nestedTestOperation1, nestedTestOperation2);
+        Action<UpdatesContext> nestedTestOperation2 = null
+    ) =>
+        TestHelpers.ExecuteWithStrategyInTransaction(
+            CreateContext,
+            UseTransaction,
+            testOperation,
+            nestedTestOperation1,
+            nestedTestOperation2
+        );
 
     protected virtual Task ExecuteWithStrategyInTransactionAsync(
         Func<UpdatesContext, Task> testOperation,
         Func<UpdatesContext, Task> nestedTestOperation1 = null,
-        Func<UpdatesContext, Task> nestedTestOperation2 = null)
-        => TestHelpers.ExecuteWithStrategyInTransactionAsync(
-            CreateContext, UseTransaction,
-            testOperation, nestedTestOperation1, nestedTestOperation2);
+        Func<UpdatesContext, Task> nestedTestOperation2 = null
+    ) =>
+        TestHelpers.ExecuteWithStrategyInTransactionAsync(
+            CreateContext,
+            UseTransaction,
+            testOperation,
+            nestedTestOperation1,
+            nestedTestOperation2
+        );
 
-    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-    {
-    }
+    protected virtual void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) { }
 
-    protected UpdatesContext CreateContext()
-        => Fixture.CreateContext();
+    protected UpdatesContext CreateContext() => Fixture.CreateContext();
 }

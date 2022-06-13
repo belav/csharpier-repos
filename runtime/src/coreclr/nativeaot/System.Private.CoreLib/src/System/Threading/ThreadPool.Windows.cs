@@ -28,8 +28,12 @@ namespace System.Threading
         // Pointer to the TP_WAIT structure
         private IntPtr _tpWait;
 
-        internal unsafe RegisteredWaitHandle(SafeWaitHandle waitHandle, _ThreadPoolWaitOrTimerCallback callbackHelper,
-            uint millisecondsTimeout, bool repeating)
+        internal unsafe RegisteredWaitHandle(
+            SafeWaitHandle waitHandle,
+            _ThreadPoolWaitOrTimerCallback callbackHelper,
+            uint millisecondsTimeout,
+            bool repeating
+        )
         {
             _lock = new Lock();
 
@@ -44,7 +48,11 @@ namespace System.Threading
             // Allocate _gcHandle and _tpWait as the last step and make sure they are never leaked
             _gcHandle = GCHandle.Alloc(this);
 
-            _tpWait = Interop.Kernel32.CreateThreadpoolWait(&RegisteredWaitCallback, (IntPtr)_gcHandle, IntPtr.Zero);
+            _tpWait = Interop.Kernel32.CreateThreadpoolWait(
+                &RegisteredWaitCallback,
+                (IntPtr)_gcHandle,
+                IntPtr.Zero
+            );
 
             if (_tpWait == IntPtr.Zero)
             {
@@ -54,12 +62,19 @@ namespace System.Threading
         }
 
         [UnmanagedCallersOnly]
-        internal static void RegisteredWaitCallback(IntPtr instance, IntPtr context, IntPtr wait, uint waitResult)
+        internal static void RegisteredWaitCallback(
+            IntPtr instance,
+            IntPtr context,
+            IntPtr wait,
+            uint waitResult
+        )
         {
             var wrapper = ThreadPoolCallbackWrapper.Enter();
             GCHandle handle = (GCHandle)context;
             RegisteredWaitHandle registeredWaitHandle = (RegisteredWaitHandle)handle.Target!;
-            Debug.Assert((handle == registeredWaitHandle._gcHandle) && (wait == registeredWaitHandle._tpWait));
+            Debug.Assert(
+                (handle == registeredWaitHandle._gcHandle) && (wait == registeredWaitHandle._tpWait)
+            );
 
             bool timedOut = (waitResult == (uint)Interop.Kernel32.WAIT_TIMEOUT);
             registeredWaitHandle.PerformCallback(timedOut);
@@ -111,7 +126,7 @@ namespace System.Threading
         internal unsafe void RestartWait()
         {
             long timeout;
-            long* pTimeout = null;  // Null indicates infinite timeout
+            long* pTimeout = null; // Null indicates infinite timeout
 
             if (_millisecondsTimeout != Timeout.UnsignedInfinite)
             {
@@ -120,7 +135,11 @@ namespace System.Threading
             }
 
             // We can use DangerousGetHandle because of DangerousAddRef in the constructor
-            Interop.Kernel32.SetThreadpoolWait(_tpWait, _waitHandle.DangerousGetHandle(), (IntPtr)pTimeout);
+            Interop.Kernel32.SetThreadpoolWait(
+                _tpWait,
+                _waitHandle.DangerousGetHandle(),
+                (IntPtr)pTimeout
+            );
         }
 
         public bool Unregister(WaitHandle waitObject)
@@ -138,7 +157,10 @@ namespace System.Threading
 
                     // Should we wait for callbacks synchronously? Note that we treat the zero handle as the asynchronous case.
                     SafeWaitHandle? safeWaitHandle = waitObject?.SafeWaitHandle;
-                    bool blocking = ((safeWaitHandle != null) && (safeWaitHandle.DangerousGetHandle() == new IntPtr(-1)));
+                    bool blocking = (
+                        (safeWaitHandle != null)
+                        && (safeWaitHandle.DangerousGetHandle() == new IntPtr(-1))
+                    );
 
                     if (blocking)
                     {
@@ -256,6 +278,7 @@ namespace System.Threading
         private class ThreadCountHolder
         {
             internal ThreadCountHolder() => Interlocked.Increment(ref s_threadCount);
+
             ~ThreadCountHolder() => Interlocked.Decrement(ref s_threadCount);
         }
 
@@ -276,15 +299,18 @@ namespace System.Threading
         // The number of threads executing work items in the Dispatch method
         private static WorkingThreadCounter s_workingThreadCounter;
 
-        private static readonly ThreadInt64PersistentCounter s_completedWorkItemCounter = new ThreadInt64PersistentCounter();
+        private static readonly ThreadInt64PersistentCounter s_completedWorkItemCounter =
+            new ThreadInt64PersistentCounter();
 
         [ThreadStatic]
         private static object? t_completionCountObject;
 
-        internal static void InitializeForThreadPoolThread() => t_threadCountHolder = new ThreadCountHolder();
+        internal static void InitializeForThreadPoolThread() =>
+            t_threadCountHolder = new ThreadCountHolder();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static void IncrementCompletedWorkItemCount() => ThreadInt64PersistentCounter.Increment(GetOrCreateThreadLocalCompletionCountObject());
+        internal static void IncrementCompletedWorkItemCount() =>
+            ThreadInt64PersistentCounter.Increment(GetOrCreateThreadLocalCompletionCountObject());
 
         internal static object GetOrCreateThreadLocalCompletionCountObject() =>
             t_completionCountObject ?? CreateThreadLocalCompletionCountObject();
@@ -294,7 +320,8 @@ namespace System.Threading
         {
             Debug.Assert(t_completionCountObject == null);
 
-            object threadLocalCompletionCountObject = s_completedWorkItemCounter.CreateThreadLocalCountObject();
+            object threadLocalCompletionCountObject =
+                s_completedWorkItemCounter.CreateThreadLocalCountObject();
             t_completionCountObject = threadLocalCompletionCountObject;
             return threadLocalCompletionCountObject;
         }
@@ -354,13 +381,20 @@ namespace System.Threading
         internal static void NotifyWorkItemProgress() => IncrementCompletedWorkItemCount();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool NotifyWorkItemComplete(object? threadLocalCompletionCountObject, int currentTimeMs)
+        internal static bool NotifyWorkItemComplete(
+            object? threadLocalCompletionCountObject,
+            int currentTimeMs
+        )
         {
             ThreadInt64PersistentCounter.Increment(threadLocalCompletionCountObject);
             return true;
         }
 
-        internal static bool NotifyThreadBlocked() { return false; }
+        internal static bool NotifyThreadBlocked()
+        {
+            return false;
+        }
+
         internal static void NotifyThreadUnblocked() { }
 
         [UnmanagedCallersOnly]
@@ -379,7 +413,11 @@ namespace System.Threading
         {
             if (s_work == IntPtr.Zero)
             {
-                IntPtr work = Interop.Kernel32.CreateThreadpoolWork(&DispatchCallback, IntPtr.Zero, IntPtr.Zero);
+                IntPtr work = Interop.Kernel32.CreateThreadpoolWork(
+                    &DispatchCallback,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
                 if (work == IntPtr.Zero)
                     throw new OutOfMemoryException();
 
@@ -391,12 +429,13 @@ namespace System.Threading
         }
 
         private static RegisteredWaitHandle RegisterWaitForSingleObject(
-             WaitHandle waitObject,
-             WaitOrTimerCallback callBack,
-             object state,
-             uint millisecondsTimeOutInterval,
-             bool executeOnlyOnce,
-             bool flowExecutionContext)
+            WaitHandle waitObject,
+            WaitOrTimerCallback callBack,
+            object state,
+            uint millisecondsTimeOutInterval,
+            bool executeOnlyOnce,
+            bool flowExecutionContext
+        )
         {
             if (waitObject == null)
                 throw new ArgumentNullException(nameof(waitObject));
@@ -404,15 +443,28 @@ namespace System.Threading
             if (callBack == null)
                 throw new ArgumentNullException(nameof(callBack));
 
-            var callbackHelper = new _ThreadPoolWaitOrTimerCallback(callBack, state, flowExecutionContext);
-            var registeredWaitHandle = new RegisteredWaitHandle(waitObject.SafeWaitHandle, callbackHelper, millisecondsTimeOutInterval, !executeOnlyOnce);
+            var callbackHelper = new _ThreadPoolWaitOrTimerCallback(
+                callBack,
+                state,
+                flowExecutionContext
+            );
+            var registeredWaitHandle = new RegisteredWaitHandle(
+                waitObject.SafeWaitHandle,
+                callbackHelper,
+                millisecondsTimeOutInterval,
+                !executeOnlyOnce
+            );
 
             registeredWaitHandle.RestartWait();
             return registeredWaitHandle;
         }
 
         private static unsafe void NativeOverlappedCallback(nint overlappedPtr) =>
-            _IOCompletionCallback.PerformSingleIOCompletionCallback(0, 0, (NativeOverlapped*)overlappedPtr);
+            _IOCompletionCallback.PerformSingleIOCompletionCallback(
+                0,
+                0,
+                (NativeOverlapped*)overlappedPtr
+            );
 
         [CLSCompliant(false)]
         [SupportedOSPlatform("windows")]
@@ -426,10 +478,16 @@ namespace System.Threading
             // OS doesn't signal handle, so do it here (CoreCLR does this assignment in ThreadPoolNative::CorPostQueuedCompletionStatus)
             overlapped->InternalLow = (IntPtr)0;
             // Both types of callbacks are executed on the same thread pool
-            return UnsafeQueueUserWorkItem(NativeOverlappedCallback, (nint)overlapped, preferLocal: false);
+            return UnsafeQueueUserWorkItem(
+                NativeOverlappedCallback,
+                (nint)overlapped,
+                preferLocal: false
+            );
         }
 
-        [Obsolete("ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead.")]
+        [Obsolete(
+            "ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead."
+        )]
         [SupportedOSPlatform("windows")]
         public static bool BindHandle(IntPtr osHandle)
         {

@@ -19,27 +19,47 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             string searchPattern,
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var solution = project.Solution;
-            var client = await RemoteHostClient.TryGetClientAsync(project, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(project, cancellationToken)
+                .ConfigureAwait(false);
             var onItemFound = GetOnItemFoundCallback(solution, onResultFound, cancellationToken);
 
             if (client != null)
             {
                 var callback = new NavigateToSearchServiceCallback(onItemFound);
 
-                await client.TryInvokeAsync<IRemoteNavigateToSearchService>(
-                    solution,
-                    (service, solutionInfo, callbackId, cancellationToken) =>
-                        service.SearchGeneratedDocumentsAsync(solutionInfo, project.Id, searchPattern, kinds.ToImmutableArray(), callbackId, cancellationToken),
-                    callback, cancellationToken).ConfigureAwait(false);
+                await client
+                    .TryInvokeAsync<IRemoteNavigateToSearchService>(
+                        solution,
+                        (service, solutionInfo, callbackId, cancellationToken) =>
+                            service.SearchGeneratedDocumentsAsync(
+                                solutionInfo,
+                                project.Id,
+                                searchPattern,
+                                kinds.ToImmutableArray(),
+                                callbackId,
+                                cancellationToken
+                            ),
+                        callback,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return;
             }
 
             await SearchGeneratedDocumentsInCurrentProcessAsync(
-                project, searchPattern, kinds, onItemFound, cancellationToken).ConfigureAwait(false);
+                    project,
+                    searchPattern,
+                    kinds,
+                    onItemFound,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         public static async Task SearchGeneratedDocumentsInCurrentProcessAsync(
@@ -47,16 +67,28 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             string pattern,
             IImmutableSet<string> kinds,
             Func<RoslynNavigateToItem, Task> onResultFound,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // If the user created a dotted pattern then we'll grab the last part of the name
             var (patternName, patternContainerOpt) = PatternMatcher.GetNameAndContainer(pattern);
 
             var declaredSymbolInfoKindsSet = new DeclaredSymbolInfoKindSet(kinds);
 
-            // First generate all the source-gen docs.  Then handoff to the standard search routine to find matches in them.  
-            var generatedDocs = await project.GetSourceGeneratedDocumentsAsync(cancellationToken).ConfigureAwait(false);
-            await ProcessDocumentsAsync(searchDocument: null, patternName, patternContainerOpt, declaredSymbolInfoKindsSet, onResultFound, generatedDocs.ToSet<Document>(), cancellationToken).ConfigureAwait(false);
+            // First generate all the source-gen docs.  Then handoff to the standard search routine to find matches in them.
+            var generatedDocs = await project
+                .GetSourceGeneratedDocumentsAsync(cancellationToken)
+                .ConfigureAwait(false);
+            await ProcessDocumentsAsync(
+                    searchDocument: null,
+                    patternName,
+                    patternContainerOpt,
+                    declaredSymbolInfoKindsSet,
+                    onResultFound,
+                    generatedDocs.ToSet<Document>(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
     }
 }

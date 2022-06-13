@@ -10,17 +10,17 @@ namespace EndToEndTestApp
     {
         static async Task Main(string[] args)
         {
-            var appleOption = new Option<string>("--apple" );
+            var appleOption = new Option<string>("--apple");
             var bananaOption = new Option<string>("--banana");
             var cherryOption = new Option<string>("--cherry");
             var durianOption = new Option<string>("--durian");
 
             var rootCommand = new RootCommand
             {
-                appleOption,          
-                bananaOption,          
-                cherryOption,          
-                durianOption,          
+                appleOption,
+                bananaOption,
+                cherryOption,
+                durianOption,
             };
 
             rootCommand.SetHandler(
@@ -28,11 +28,10 @@ namespace EndToEndTestApp
                 appleOption,
                 bananaOption,
                 cherryOption,
-                durianOption);
+                durianOption
+            );
 
-            var commandLine = new CommandLineBuilder(rootCommand)
-                .UseDefaults()
-                .Build();
+            var commandLine = new CommandLineBuilder(rootCommand).UseDefaults().Build();
 
             await commandLine.InvokeAsync(args);
         }

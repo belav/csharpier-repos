@@ -23,8 +23,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public IdeAnalyzerOptions IdeOptions { get; }
 
-        public WorkspaceAnalyzerOptions(AnalyzerOptions options, Solution solution, IdeAnalyzerOptions ideOptions)
-            : base(options.AdditionalFiles, options.AnalyzerConfigOptionsProvider)
+        public WorkspaceAnalyzerOptions(
+            AnalyzerOptions options,
+            Solution solution,
+            IdeAnalyzerOptions ideOptions
+        ) : base(options.AdditionalFiles, options.AnalyzerConfigOptionsProvider)
         {
             _solution = solution;
             IdeOptions = ideOptions;
@@ -39,14 +42,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return true;
             }
 
-            return obj is WorkspaceAnalyzerOptions other &&
-                _solution.WorkspaceVersion == other._solution.WorkspaceVersion &&
-                _solution.Workspace == other._solution.Workspace &&
-                base.Equals(other);
+            return obj is WorkspaceAnalyzerOptions other
+                && _solution.WorkspaceVersion == other._solution.WorkspaceVersion
+                && _solution.Workspace == other._solution.Workspace
+                && base.Equals(other);
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(_solution.Workspace,
-               Hash.Combine(_solution.WorkspaceVersion, base.GetHashCode()));
+        public override int GetHashCode() =>
+            Hash.Combine(
+                _solution.Workspace,
+                Hash.Combine(_solution.WorkspaceVersion, base.GetHashCode())
+            );
     }
 }

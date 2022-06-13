@@ -23,11 +23,18 @@ public static class ModelBindingTestHelper
         Action<MvcOptions> updateOptions = null,
         ControllerActionDescriptor actionDescriptor = null,
         IModelMetadataProvider metadataProvider = null,
-        MvcOptions mvcOptions = null)
+        MvcOptions mvcOptions = null
+    )
     {
-        var httpContext = GetHttpContext(metadataProvider, updateRequest, updateOptions, mvcOptions);
+        var httpContext = GetHttpContext(
+            metadataProvider,
+            updateRequest,
+            updateOptions,
+            mvcOptions
+        );
         var services = httpContext.RequestServices;
-        metadataProvider = metadataProvider ?? services.GetRequiredService<IModelMetadataProvider>();
+        metadataProvider =
+            metadataProvider ?? services.GetRequiredService<IModelMetadataProvider>();
         var options = services.GetRequiredService<IOptions<MvcOptions>>();
 
         var context = new ModelBindingTestContext
@@ -37,7 +44,9 @@ public static class ModelBindingTestHelper
             MetadataProvider = metadataProvider,
             MvcOptions = options.Value,
             RouteData = new RouteData(),
-            ValueProviderFactories = new List<IValueProviderFactory>(options.Value.ValueProviderFactories),
+            ValueProviderFactories = new List<IValueProviderFactory>(
+                options.Value.ValueProviderFactories
+            ),
         };
 
         return context;
@@ -45,7 +54,8 @@ public static class ModelBindingTestHelper
 
     public static ParameterBinder GetParameterBinder(
         MvcOptions options = null,
-        IModelBinderProvider binderProvider = null)
+        IModelBinderProvider binderProvider = null
+    )
     {
         if (options == null)
         {
@@ -54,7 +64,9 @@ public static class ModelBindingTestHelper
         }
         else
         {
-            var metadataProvider = TestModelMetadataProvider.CreateProvider(options.ModelMetadataDetailsProviders);
+            var metadataProvider = TestModelMetadataProvider.CreateProvider(
+                options.ModelMetadataDetailsProviders
+            );
             return GetParameterBinder(metadataProvider, binderProvider, options);
         }
     }
@@ -75,16 +87,19 @@ public static class ModelBindingTestHelper
             new DefaultObjectValidator(
                 metadataProvider,
                 new[] { new CompositeModelValidatorProvider(GetModelValidatorProviders(options)) },
-                options.Value),
+                options.Value
+            ),
             options,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
     }
 
     public static ParameterBinder GetParameterBinder(
         IModelMetadataProvider metadataProvider,
         IModelBinderProvider binderProvider = null,
         MvcOptions mvcOptions = null,
-        ObjectModelValidator validator = null)
+        ObjectModelValidator validator = null
+    )
     {
         var services = GetServices(metadataProvider, mvcOptions: mvcOptions);
         var options = services.GetRequiredService<IOptions<MvcOptions>>();
@@ -97,19 +112,22 @@ public static class ModelBindingTestHelper
         validator ??= new DefaultObjectValidator(
             metadataProvider,
             new[] { new CompositeModelValidatorProvider(GetModelValidatorProviders(options)) },
-            options.Value);
+            options.Value
+        );
 
         return new ParameterBinder(
             metadataProvider,
             new ModelBinderFactory(metadataProvider, options, services),
             validator,
             options,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
     }
 
     public static IModelBinderFactory GetModelBinderFactory(
         IModelMetadataProvider metadataProvider,
-        IServiceProvider services = null)
+        IServiceProvider services = null
+    )
     {
         if (services == null)
         {
@@ -123,15 +141,19 @@ public static class ModelBindingTestHelper
 
     public static IObjectModelValidator GetObjectValidator(
         IModelMetadataProvider metadataProvider,
-        IOptions<MvcOptions> options = null)
+        IOptions<MvcOptions> options = null
+    )
     {
         return new DefaultObjectValidator(
             metadataProvider,
             GetModelValidatorProviders(options),
-            options?.Value ?? new MvcOptions());
+            options?.Value ?? new MvcOptions()
+        );
     }
 
-    private static IList<IModelValidatorProvider> GetModelValidatorProviders(IOptions<MvcOptions> options)
+    private static IList<IModelValidatorProvider> GetModelValidatorProviders(
+        IOptions<MvcOptions> options
+    )
     {
         if (options == null)
         {
@@ -147,11 +169,16 @@ public static class ModelBindingTestHelper
         IModelMetadataProvider metadataProvider,
         Action<HttpRequest> updateRequest = null,
         Action<MvcOptions> updateOptions = null,
-        MvcOptions mvcOptions = null)
+        MvcOptions mvcOptions = null
+    )
     {
         var httpContext = new DefaultHttpContext();
-        httpContext.Features.Set<IHttpRequestLifetimeFeature>(new CancellableRequestLifetimeFeature());
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new NonZeroContentLengthRequestBodyDetectionFeature(httpContext));
+        httpContext.Features.Set<IHttpRequestLifetimeFeature>(
+            new CancellableRequestLifetimeFeature()
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new NonZeroContentLengthRequestBodyDetectionFeature(httpContext)
+        );
 
         updateRequest?.Invoke(httpContext.Request);
 
@@ -162,7 +189,8 @@ public static class ModelBindingTestHelper
     public static IServiceProvider GetServices(
         IModelMetadataProvider metadataProvider,
         Action<MvcOptions> updateOptions = null,
-        MvcOptions mvcOptions = null)
+        MvcOptions mvcOptions = null
+    )
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton(new ApplicationPartManager());
@@ -175,7 +203,9 @@ public static class ModelBindingTestHelper
             serviceCollection.AddSingleton(services =>
             {
                 var optionsAccessor = services.GetRequiredService<IOptions<MvcOptions>>();
-                return TestModelMetadataProvider.CreateProvider(optionsAccessor.Value.ModelMetadataDetailsProviders);
+                return TestModelMetadataProvider.CreateProvider(
+                    optionsAccessor.Value.ModelMetadataDetailsProviders
+                );
             });
         }
         else
@@ -191,11 +221,13 @@ public static class ModelBindingTestHelper
             serviceCollection.AddSingleton(Options.Create(mvcOptions));
         }
 
-        serviceCollection.AddMvc()
-            .AddNewtonsoftJson();
+        serviceCollection.AddMvc().AddNewtonsoftJson();
         serviceCollection
             .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
-            .AddTransient<ILogger<DefaultAuthorizationService>, Logger<DefaultAuthorizationService>>();
+            .AddTransient<
+                ILogger<DefaultAuthorizationService>,
+                Logger<DefaultAuthorizationService>
+            >();
 
         if (updateOptions != null)
         {
@@ -209,7 +241,11 @@ public static class ModelBindingTestHelper
     {
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
 
-        public CancellationToken RequestAborted { get => _cts.Token; set => throw new NotImplementedException(); }
+        public CancellationToken RequestAborted
+        {
+            get => _cts.Token;
+            set => throw new NotImplementedException();
+        }
 
         public void Abort()
         {

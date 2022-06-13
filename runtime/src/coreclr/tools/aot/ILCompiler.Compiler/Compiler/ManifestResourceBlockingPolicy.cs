@@ -34,12 +34,15 @@ namespace ILCompiler
         /// </summary>
         public virtual bool IsManifestResourceBlocked(ModuleDesc module, string resourceName)
         {
-            return module is EcmaModule ecmaModule &&
-                (_hashtable.GetOrCreateValue(ecmaModule).BlockedResources.Contains(resourceName)
-                || (resourceName.StartsWith("ILLink.") && resourceName.EndsWith(".xml")));
+            return module is EcmaModule ecmaModule
+                && (
+                    _hashtable.GetOrCreateValue(ecmaModule).BlockedResources.Contains(resourceName)
+                    || (resourceName.StartsWith("ILLink.") && resourceName.EndsWith(".xml"))
+                );
         }
 
-        private class FeatureSwitchHashtable : LockFreeReaderHashtable<EcmaModule, AssemblyFeatureInfo>
+        private class FeatureSwitchHashtable
+            : LockFreeReaderHashtable<EcmaModule, AssemblyFeatureInfo>
         {
             private readonly Dictionary<string, bool> _switchValues;
 
@@ -48,10 +51,18 @@ namespace ILCompiler
                 _switchValues = switchValues;
             }
 
-            protected override bool CompareKeyToValue(EcmaModule key, AssemblyFeatureInfo value) => key == value.Module;
-            protected override bool CompareValueToValue(AssemblyFeatureInfo value1, AssemblyFeatureInfo value2) => value1.Module == value2.Module;
+            protected override bool CompareKeyToValue(EcmaModule key, AssemblyFeatureInfo value) =>
+                key == value.Module;
+
+            protected override bool CompareValueToValue(
+                AssemblyFeatureInfo value1,
+                AssemblyFeatureInfo value2
+            ) => value1.Module == value2.Module;
+
             protected override int GetKeyHashCode(EcmaModule key) => key.GetHashCode();
-            protected override int GetValueHashCode(AssemblyFeatureInfo value) => value.Module.GetHashCode();
+
+            protected override int GetValueHashCode(AssemblyFeatureInfo value) =>
+                value.Module.GetHashCode();
 
             protected override AssemblyFeatureInfo CreateValueFromKey(EcmaModule key)
             {
@@ -65,16 +76,23 @@ namespace ILCompiler
 
             public HashSet<string> BlockedResources { get; }
 
-            public AssemblyFeatureInfo(EcmaModule module, IReadOnlyDictionary<string, bool> featureSwitchValues)
+            public AssemblyFeatureInfo(
+                EcmaModule module,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            )
             {
                 Module = module;
                 BlockedResources = new HashSet<string>();
 
-                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress);
+                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(
+                    module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
+                );
 
                 foreach (var resourceHandle in module.MetadataReader.ManifestResources)
                 {
-                    ManifestResource resource = module.MetadataReader.GetManifestResource(resourceHandle);
+                    ManifestResource resource = module.MetadataReader.GetManifestResource(
+                        resourceHandle
+                    );
 
                     // Don't try to process linked resources or resources in other assemblies
                     if (!resource.Implementation.IsNil)
@@ -85,7 +103,10 @@ namespace ILCompiler
                     string resourceName = module.MetadataReader.GetString(resource.Name);
                     if (resourceName == "ILLink.Substitutions.xml")
                     {
-                        BlobReader reader = resourceDirectory.GetReader((int)resource.Offset, resourceDirectory.Length - (int)resource.Offset);
+                        BlobReader reader = resourceDirectory.GetReader(
+                            (int)resource.Offset,
+                            resourceDirectory.Length - (int)resource.Offset
+                        );
                         int length = (int)reader.ReadUInt32();
 
                         UnmanagedMemoryStream ms;
@@ -94,7 +115,12 @@ namespace ILCompiler
                             ms = new UnmanagedMemoryStream(reader.CurrentPointer, length);
                         }
 
-                        BlockedResources = SubstitutionsReader.GetSubstitutions(module.Context, XmlReader.Create(ms), module, featureSwitchValues);
+                        BlockedResources = SubstitutionsReader.GetSubstitutions(
+                            module.Context,
+                            XmlReader.Create(ms),
+                            module,
+                            featureSwitchValues
+                        );
                     }
                 }
             }
@@ -104,12 +130,19 @@ namespace ILCompiler
         {
             private readonly HashSet<string> _substitutions = new HashSet<string>();
 
-            private SubstitutionsReader(TypeSystemContext context, XmlReader reader, ModuleDesc module, IReadOnlyDictionary<string, bool> featureSwitchValues)
-                : base(context, reader, module, featureSwitchValues)
-            {
-            }
+            private SubstitutionsReader(
+                TypeSystemContext context,
+                XmlReader reader,
+                ModuleDesc module,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            ) : base(context, reader, module, featureSwitchValues) { }
 
-            public static HashSet<string> GetSubstitutions(TypeSystemContext context, XmlReader reader, ModuleDesc module, IReadOnlyDictionary<string, bool> featureSwitchValues)
+            public static HashSet<string> GetSubstitutions(
+                TypeSystemContext context,
+                XmlReader reader,
+                ModuleDesc module,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            )
             {
                 var rdr = new SubstitutionsReader(context, reader, module, featureSwitchValues);
                 rdr.ProcessXml();

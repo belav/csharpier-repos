@@ -18,9 +18,7 @@ public sealed partial class ContentHttpResult : IResult
     /// <param name="content">The value to format in the entity body.</param>
     /// <param name="contentType">The Content-Type header for the response</param>
     internal ContentHttpResult(string? content, string? contentType)
-        : this(content, contentType, statusCode: null)
-    {
-    }
+        : this(content, contentType, statusCode: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ContentHttpResult"/> class with the values
@@ -73,6 +71,7 @@ public sealed partial class ContentHttpResult : IResult
             httpContext,
             logger,
             ResponseContent,
-            ContentType);
+            ContentType
+        );
     }
 }

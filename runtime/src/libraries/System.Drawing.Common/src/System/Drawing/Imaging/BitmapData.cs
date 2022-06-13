@@ -84,7 +84,11 @@ namespace System.Drawing.Imaging
                     case PixelFormat.Format64bppArgb:
                         break;
                     default:
-                        throw new System.ComponentModel.InvalidEnumArgumentException(nameof(value), unchecked((int)value), typeof(PixelFormat));
+                        throw new System.ComponentModel.InvalidEnumArgumentException(
+                            nameof(value),
+                            unchecked((int)value),
+                            typeof(PixelFormat)
+                        );
                 }
 
                 _pixelFormat = value;
@@ -112,16 +116,26 @@ namespace System.Drawing.Imaging
         internal ref int GetPinnableReference() => ref _width;
 
 #if NET7_0_OR_GREATER
-        [CustomTypeMarshaller(typeof(BitmapData), Direction = CustomTypeMarshallerDirection.In, Features = CustomTypeMarshallerFeatures.TwoStageMarshalling)]
+        [CustomTypeMarshaller(
+            typeof(BitmapData),
+            Direction = CustomTypeMarshallerDirection.In,
+            Features = CustomTypeMarshallerFeatures.TwoStageMarshalling
+        )]
         internal unsafe struct PinningMarshaller
         {
             private readonly BitmapData _managed;
+
             public PinningMarshaller(BitmapData managed)
             {
                 _managed = managed;
             }
 
-            public ref int GetPinnableReference() => ref (_managed is null ? ref Unsafe.NullRef<int>() : ref _managed.GetPinnableReference());
+            public ref int GetPinnableReference() =>
+                ref (
+                    _managed is null
+                        ? ref Unsafe.NullRef<int>()
+                        : ref _managed.GetPinnableReference()
+                );
 
             public void* ToNativeValue() => Unsafe.AsPointer(ref GetPinnableReference());
         }

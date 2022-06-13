@@ -21,7 +21,8 @@ internal static partial class HttpResultsHelper
         ILogger logger,
         T? value,
         string? contentType = null,
-        JsonSerializerOptions? jsonSerializerOptions = null)
+        JsonSerializerOptions? jsonSerializerOptions = null
+    )
     {
         if (value is null)
         {
@@ -33,14 +34,16 @@ internal static partial class HttpResultsHelper
         return httpContext.Response.WriteAsJsonAsync(
             value,
             options: jsonSerializerOptions,
-            contentType: contentType);
+            contentType: contentType
+        );
     }
 
     public static Task WriteResultAsContentAsync(
         HttpContext httpContext,
         ILogger logger,
         string? content,
-        string? contentType = null)
+        string? contentType = null
+    )
     {
         var response = httpContext.Response;
         ResponseContentTypeHelper.ResolveContentTypeAndEncoding(
@@ -49,7 +52,8 @@ internal static partial class HttpResultsHelper
             (DefaultContentType, DefaultEncoding),
             ResponseContentTypeHelper.GetEncoding,
             out var resolvedContentType,
-            out var resolvedContentTypeEncoding);
+            out var resolvedContentTypeEncoding
+        );
 
         response.ContentType = resolvedContentType;
 
@@ -72,7 +76,8 @@ internal static partial class HttpResultsHelper
         string contentType,
         bool enableRangeProcessing,
         DateTimeOffset? lastModified,
-        EntityTagHeaderValue? entityTag)
+        EntityTagHeaderValue? entityTag
+    )
     {
         var completed = false;
         fileDownloadName ??= string.Empty;
@@ -95,7 +100,8 @@ internal static partial class HttpResultsHelper
             enableRangeProcessing,
             lastModified,
             entityTag,
-            logger);
+            logger
+        );
 
         if (range != null)
         {
@@ -136,13 +142,19 @@ internal static partial class HttpResultsHelper
             }
             else
             {
-                problemDetails.Status = problemDetails is HttpValidationProblemDetails ?
-                    StatusCodes.Status400BadRequest :
-                    StatusCodes.Status500InternalServerError;
+                problemDetails.Status =
+                    problemDetails is HttpValidationProblemDetails
+                        ? StatusCodes.Status400BadRequest
+                        : StatusCodes.Status500InternalServerError;
             }
         }
 
-        if (ProblemDetailsDefaults.Defaults.TryGetValue(problemDetails.Status.Value, out var defaults))
+        if (
+            ProblemDetailsDefaults.Defaults.TryGetValue(
+                problemDetails.Status.Value,
+                out var defaults
+            )
+        )
         {
             problemDetails.Title ??= defaults.Title;
             problemDetails.Type ??= defaults.Type;
@@ -151,23 +163,36 @@ internal static partial class HttpResultsHelper
 
     internal static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information,
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
             "Setting HTTP status code {StatusCode}.",
-            EventName = "WritingResultAsStatusCode")]
+            EventName = "WritingResultAsStatusCode"
+        )]
         public static partial void WritingResultAsStatusCode(ILogger logger, int statusCode);
 
-        [LoggerMessage(2, LogLevel.Information,
+        [LoggerMessage(
+            2,
+            LogLevel.Information,
             "Write content with HTTP Response ContentType of {ContentType}",
-            EventName = "WritingResultAsContent")]
+            EventName = "WritingResultAsContent"
+        )]
         public static partial void WritingResultAsContent(ILogger logger, string contentType);
 
-        [LoggerMessage(3, LogLevel.Information, "Writing value of type '{Type}' as Json.",
-            EventName = "WritingResultAsJson")]
+        [LoggerMessage(
+            3,
+            LogLevel.Information,
+            "Writing value of type '{Type}' as Json.",
+            EventName = "WritingResultAsJson"
+        )]
         public static partial void WritingResultAsJson(ILogger logger, string type);
 
-        [LoggerMessage(5, LogLevel.Information,
+        [LoggerMessage(
+            5,
+            LogLevel.Information,
             "Sending file with download name '{FileDownloadName}'.",
-            EventName = "WritingResultAsFileWithNoFileName")]
+            EventName = "WritingResultAsFileWithNoFileName"
+        )]
         public static partial void WritingResultAsFile(ILogger logger, string fileDownloadName);
     }
 }

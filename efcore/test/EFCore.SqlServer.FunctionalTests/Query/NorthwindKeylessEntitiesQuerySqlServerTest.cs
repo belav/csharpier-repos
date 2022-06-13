@@ -5,31 +5,33 @@ using Microsoft.Data.SqlClient;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindKeylessEntitiesQuerySqlServerTest : NorthwindKeylessEntitiesQueryRelationalTestBase<
-    NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+public class NorthwindKeylessEntitiesQuerySqlServerTest
+    : NorthwindKeylessEntitiesQueryRelationalTestBase<
+        NorthwindQuerySqlServerFixture<NoopModelCustomizer>
+    >
 {
     public NorthwindKeylessEntitiesQuerySqlServerTest(
         NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture,
-        ITestOutputHelper testOutputHelper)
-        : base(fixture)
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture)
     {
         ClearLog();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
     }
 
-    protected override bool CanExecuteQueryString
-        => true;
+    protected override bool CanExecuteQueryString => true;
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task KeylessEntity_simple(bool async)
     {
         await base.KeylessEntity_simple(async);
 
         AssertSql(
-            @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]");
+            @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]"
+        );
     }
 
     public override async Task KeylessEntity_where_simple(bool async)
@@ -41,7 +43,8 @@ public class NorthwindKeylessEntitiesQuerySqlServerTest : NorthwindKeylessEntiti
 FROM (
     SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
 ) AS [m]
-WHERE [m].[City] = N'London'");
+WHERE [m].[City] = N'London'"
+        );
     }
 
     public override async Task KeylessEntity_by_database_view(bool async)
@@ -50,18 +53,22 @@ WHERE [m].[City] = N'London'");
 
         AssertSql(
             @"SELECT [a].[CategoryName], [a].[ProductID], [a].[ProductName]
-FROM [Alphabetical list of products] AS [a]");
+FROM [Alphabetical list of products] AS [a]"
+        );
     }
 
     public override async Task KeylessEntity_with_nav_defining_query(bool async)
     {
         // FromSql mapping. Issue #21627.
-        await Assert.ThrowsAsync<SqlException>(() => base.KeylessEntity_with_nav_defining_query(async));
+        await Assert.ThrowsAsync<SqlException>(
+            () => base.KeylessEntity_with_nav_defining_query(async)
+        );
 
         AssertSql(
             @"SELECT [c].[CompanyName], [c].[OrderCount], [c].[SearchTerm]
 FROM [CustomerQueryWithQueryFilter] AS [c]
-WHERE [c].[OrderCount] > 0");
+WHERE [c].[OrderCount] > 0"
+        );
     }
 
     public override async Task KeylessEntity_with_mixed_tracking(bool async)
@@ -73,7 +80,8 @@ WHERE [c].[OrderCount] > 0");
 FROM [Customers] AS [c]
 INNER JOIN (
     select * from ""Orders""
-) AS [m] ON [c].[CustomerID] = [m].[CustomerID]");
+) AS [m] ON [c].[CustomerID] = [m].[CustomerID]"
+        );
     }
 
     public override async Task KeylessEntity_with_defining_query(bool async)
@@ -85,7 +93,8 @@ INNER JOIN (
 FROM (
     select * from ""Orders""
 ) AS [m]
-WHERE [m].[CustomerID] = N'ALFKI'");
+WHERE [m].[CustomerID] = N'ALFKI'"
+        );
     }
 
     public override async Task KeylessEntity_select_where_navigation(bool async)
@@ -98,7 +107,8 @@ FROM (
     select * from ""Orders""
 ) AS [m]
 LEFT JOIN [Customers] AS [c] ON [m].[CustomerID] = [c].[CustomerID]
-WHERE [c].[City] = N'Seattle'");
+WHERE [c].[City] = N'Seattle'"
+        );
     }
 
     public override async Task KeylessEntity_select_where_navigation_multi_level(bool async)
@@ -114,7 +124,8 @@ LEFT JOIN [Customers] AS [c] ON [m].[CustomerID] = [c].[CustomerID]
 WHERE EXISTS (
     SELECT 1
     FROM [Orders] AS [o]
-    WHERE [c].[CustomerID] IS NOT NULL AND [c].[CustomerID] = [o].[CustomerID])");
+    WHERE [c].[CustomerID] IS NOT NULL AND [c].[CustomerID] = [o].[CustomerID])"
+        );
     }
 
     public override async Task Auto_initialized_view_set(bool async)
@@ -122,7 +133,8 @@ WHERE EXISTS (
         await base.Auto_initialized_view_set(async);
 
         AssertSql(
-            @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]");
+            @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]"
+        );
     }
 
     public override async Task KeylessEntity_groupby(bool async)
@@ -134,7 +146,8 @@ WHERE EXISTS (
 FROM (
     SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region] FROM [Customers] AS [c]
 ) AS [m]
-GROUP BY [m].[City]");
+GROUP BY [m].[City]"
+        );
     }
 
     public override async Task Entity_mapped_to_view_on_right_side_of_join(bool async)
@@ -144,10 +157,13 @@ GROUP BY [m].[City]");
         AssertSql(
             @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], [a].[CategoryName], [a].[ProductID], [a].[ProductName]
 FROM [Orders] AS [o]
-LEFT JOIN [Alphabetical list of products] AS [a] ON [o].[CustomerID] = [a].[CategoryName]");
+LEFT JOIN [Alphabetical list of products] AS [a] ON [o].[CustomerID] = [a].[CategoryName]"
+        );
     }
 
-    public override async Task Collection_correlated_with_keyless_entity_in_predicate_works(bool async)
+    public override async Task Collection_correlated_with_keyless_entity_in_predicate_works(
+        bool async
+    )
     {
         await base.Collection_correlated_with_keyless_entity_in_predicate_works(async);
 
@@ -162,19 +178,26 @@ WHERE EXISTS (
     SELECT 1
     FROM [Customers] AS [c]
     WHERE [c].[City] = [m].[City] OR ([c].[City] IS NULL AND [m].[City] IS NULL))
-ORDER BY [m].[ContactName]");
+ORDER BY [m].[ContactName]"
+        );
     }
 
-    public override async Task Projecting_collection_correlated_with_keyless_entity_throws(bool async)
+    public override async Task Projecting_collection_correlated_with_keyless_entity_throws(
+        bool async
+    )
     {
         await base.Projecting_collection_correlated_with_keyless_entity_throws(async);
 
         AssertSql();
     }
 
-    public override async Task Collection_of_entities_projecting_correlated_collection_of_keyless_entities(bool async)
+    public override async Task Collection_of_entities_projecting_correlated_collection_of_keyless_entities(
+        bool async
+    )
     {
-        await base.Collection_of_entities_projecting_correlated_collection_of_keyless_entities(async);
+        await base.Collection_of_entities_projecting_correlated_collection_of_keyless_entities(
+            async
+        );
 
         AssertSql();
     }
@@ -186,7 +209,9 @@ ORDER BY [m].[ContactName]");
         AssertSql();
     }
 
-    public override async Task KeylessEntity_with_defining_query_and_correlated_collection(bool async)
+    public override async Task KeylessEntity_with_defining_query_and_correlated_collection(
+        bool async
+    )
     {
         await base.KeylessEntity_with_defining_query_and_correlated_collection(async);
 
@@ -203,12 +228,12 @@ FROM (
     select * from ""Orders""
 ) AS [m]
 LEFT JOIN [Customers] AS [c] ON [m].[CustomerID] = [c].[CustomerID]
-WHERE [m].[CustomerID] = N'ALFKI'");
+WHERE [m].[CustomerID] = N'ALFKI'"
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 }

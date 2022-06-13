@@ -20,14 +20,16 @@ public class RowForeignKeyValueFactoryFactory : IRowForeignKeyValueFactoryFactor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IRowForeignKeyValueFactory Create(IForeignKeyConstraint foreignKey)
-        => foreignKey.Columns.Count == 1
-            ? (IRowForeignKeyValueFactory)_createMethod
-                .MakeGenericMethod(foreignKey.Columns.First().ProviderClrType)
-                .Invoke(null, new object[] { foreignKey })!
+    public virtual IRowForeignKeyValueFactory Create(IForeignKeyConstraint foreignKey) =>
+        foreignKey.Columns.Count == 1
+            ? (IRowForeignKeyValueFactory)
+                _createMethod
+                    .MakeGenericMethod(foreignKey.Columns.First().ProviderClrType)
+                    .Invoke(null, new object[] { foreignKey })!
             : new CompositeRowForeignKeyValueFactory(foreignKey);
 
-    private readonly static MethodInfo _createMethod = typeof(RowForeignKeyValueFactoryFactory).GetTypeInfo()
+    private readonly static MethodInfo _createMethod = typeof(RowForeignKeyValueFactoryFactory)
+        .GetTypeInfo()
         .GetDeclaredMethod(nameof(CreateSimple))!;
 
     [UsedImplicitly]
@@ -39,23 +41,41 @@ public class RowForeignKeyValueFactoryFactory : IRowForeignKeyValueFactoryFactor
         var principalType = foreignKey.PrincipalColumns.Single().ProviderClrType;
         var columnAccessors = ((Column)dependentColumn).Accessors;
 
-        if (dependentType.IsNullableType()
-            && principalType.IsNullableType())
+        if (dependentType.IsNullableType() && principalType.IsNullableType())
         {
-            return new SimpleFullyNullableRowForeignKeyValueFactory<TKey>(foreignKey, dependentColumn, columnAccessors);
+            return new SimpleFullyNullableRowForeignKeyValueFactory<TKey>(
+                foreignKey,
+                dependentColumn,
+                columnAccessors
+            );
         }
 
         if (dependentType.IsNullableType())
         {
-            return (IRowForeignKeyValueFactory<TKey>)Activator.CreateInstance(
-                typeof(SimpleNullableRowForeignKeyValueFactory<>).MakeGenericType(
-                    typeof(TKey)), foreignKey, dependentColumn, columnAccessors)!;
+            return (IRowForeignKeyValueFactory<TKey>)
+                Activator.CreateInstance(
+                    typeof(SimpleNullableRowForeignKeyValueFactory<>).MakeGenericType(typeof(TKey)),
+                    foreignKey,
+                    dependentColumn,
+                    columnAccessors
+                )!;
         }
 
         return principalType.IsNullableType()
-            ? (IRowForeignKeyValueFactory<TKey>)Activator.CreateInstance(
-                typeof(SimpleNullablePrincipalRowForeignKeyValueFactory<,>).MakeGenericType(
-                    typeof(TKey), typeof(TKey).UnwrapNullableType()), foreignKey, dependentColumn, columnAccessors)!
-            : new SimpleNonNullableRowForeignKeyValueFactory<TKey>(foreignKey, dependentColumn, columnAccessors);
+            ? (IRowForeignKeyValueFactory<TKey>)
+                Activator.CreateInstance(
+                    typeof(SimpleNullablePrincipalRowForeignKeyValueFactory<,>).MakeGenericType(
+                        typeof(TKey),
+                        typeof(TKey).UnwrapNullableType()
+                    ),
+                    foreignKey,
+                    dependentColumn,
+                    columnAccessors
+                )!
+            : new SimpleNonNullableRowForeignKeyValueFactory<TKey>(
+                foreignKey,
+                dependentColumn,
+                columnAccessors
+            );
     }
 }

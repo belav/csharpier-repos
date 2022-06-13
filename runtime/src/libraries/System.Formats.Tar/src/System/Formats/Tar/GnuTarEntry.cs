@@ -11,9 +11,7 @@ namespace System.Formats.Tar
     {
         // Constructor used when reading an existing archive.
         internal GnuTarEntry(TarHeader header, TarReader readerOfOrigin)
-            : base(header, readerOfOrigin)
-        {
-        }
+            : base(header, readerOfOrigin) { }
 
         /// <summary>
         /// Initializes a new <see cref="GnuTarEntry"/> instance with the specified entry type and entry name.
@@ -29,9 +27,7 @@ namespace System.Formats.Tar
         /// </list>
         /// </remarks>
         public GnuTarEntry(TarEntryType entryType, string entryName)
-            : base(entryType, entryName, TarFormat.Gnu)
-        {
-        }
+            : base(entryType, entryName, TarFormat.Gnu) { }
 
         /// <summary>
         /// A timestamp that represents the last time the file represented by this entry was accessed.
@@ -68,6 +64,7 @@ namespace System.Formats.Tar
         }
 
         // Determines if the current instance's entry type supports setting a data stream.
-        internal override bool IsDataStreamSetterSupported() => EntryType is TarEntryType.RegularFile;
+        internal override bool IsDataStreamSetterSupported() =>
+            EntryType is TarEntryType.RegularFile;
     }
 }

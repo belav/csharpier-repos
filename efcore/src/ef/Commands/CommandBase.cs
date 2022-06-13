@@ -16,24 +16,20 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
 
             command.HandleResponseFiles = true;
 
-            command.OnExecute(
-                args =>
-                {
-                    Reporter.IsVerbose = verbose.HasValue();
-                    Reporter.NoColor = noColor.HasValue();
-                    Reporter.PrefixOutput = prefixOutput.HasValue();
+            command.OnExecute(args =>
+            {
+                Reporter.IsVerbose = verbose.HasValue();
+                Reporter.NoColor = noColor.HasValue();
+                Reporter.PrefixOutput = prefixOutput.HasValue();
 
-                    Validate();
+                Validate();
 
-                    return Execute(args);
-                });
+                return Execute(args);
+            });
         }
 
-        protected virtual void Validate()
-        {
-        }
+        protected virtual void Validate() { }
 
-        protected virtual int Execute(string[] args)
-            => 0;
+        protected virtual int Execute(string[] args) => 0;
     }
 }

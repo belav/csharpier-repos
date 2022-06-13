@@ -23,10 +23,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonTrivia()
         {
-            var code = @"[|
+            var code =
+                @"[|
         ::: Console.WriteLine("")|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine("")";
 
             await VerifyAsync(CreateMethod(code), CreateMethod(expected));
@@ -36,12 +38,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonTrivia_EndOfLine()
         {
-            var code = @"[|
+            var code =
+                @"[|
         ::: 
 
         Console.WriteLine("")|]";
 
-            var expected = @"
+            var expected =
+                @"
 
 
         Console.WriteLine("")";
@@ -53,13 +57,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonTrivia_LineContinuation()
         {
-            var code = @"[|
+            var code =
+                @"[|
         ::: _
         _
         _
         Console.WriteLine("")|]";
 
-            var expected = @"
+            var expected =
+                @"
 
 
 
@@ -72,13 +78,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonTrivia_LineContinuation2()
         {
-            var code = @"[|
+            var code =
+                @"[|
         ::: 
         _
         _
         Console.WriteLine("")|]";
 
-            var expected = @"
+            var expected =
+                @"
 
 
 
@@ -91,13 +99,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonTrivia_LineContinuation3()
         {
-            var code = @"[|
+            var code =
+                @"[|
         ::: 
         _
         
         Console.WriteLine("")|]";
 
-            var expected = @"
+            var expected =
+                @"
 
 
 
@@ -110,13 +120,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonTrivia_LineContinuation_Comment()
         {
-            var code = @"[|
+            var code =
+                @"[|
         ::: 
         _
         ' test
         Console.WriteLine("")|]";
 
-            var expected = @"
+            var expected =
+                @"
 
                        _
         ' test
@@ -129,12 +141,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuation()
         {
-            var code = @"[|
+            var code =
+                @"[|
         Console.WriteLine("""") _
 
         Console.WriteLine("""")|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine("""")
 
         Console.WriteLine("""")";
@@ -146,13 +160,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuation_MultipleLines()
         {
-            var code = @"[|
+            var code =
+                @"[|
         Console.WriteLine("""") _
         _
         _
         Console.WriteLine("""")|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine("""") _
         _
         _
@@ -165,14 +181,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuation_MultipleLines2()
         {
-            var code = @"[|
+            var code =
+                @"[|
         Console.WriteLine("""") _
         _
         _
 
         Console.WriteLine("""")|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine("""")
 
 
@@ -186,14 +204,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuation_Invalid()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() _             _ 
         ' test 
         : ' test
         _
         Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine() _             _ 
         ' test 
          ' test
@@ -207,10 +227,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_SingleLine()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() : Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine() : Console.WriteLine()";
 
             await VerifyAsync(CreateMethod(code), CreateMethod(expected));
@@ -220,10 +242,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_SingleLine_MultipleColon()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() :::: Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine() : Console.WriteLine()";
 
             await VerifyAsync(CreateMethod(code), CreateMethod(expected));
@@ -233,10 +257,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_SingleLine_SkippedTokens()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() _ : Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine() _ : Console.WriteLine()";
 
             await VerifyAsync(CreateMethod(code), CreateMethod(expected));
@@ -246,11 +272,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_LineContinuation_BeforeColonToken()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() _ 
          : Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine()
         Console.WriteLine()";
 
@@ -261,11 +289,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_LineContinuation_BeforeColonToken2()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() _  _
          : Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine() _  _
           Console.WriteLine()";
 
@@ -276,39 +306,53 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_LineContinuation_Comment_BeforeColonToken()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() _ ' test
          : Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine() _ ' test
         Console.WriteLine()";
-            await VerifyAsync(CreateMethod(code), CreateMethod(expected), LanguageVersion.VisualBasic15);
+            await VerifyAsync(
+                CreateMethod(code),
+                CreateMethod(expected),
+                LanguageVersion.VisualBasic15
+            );
         }
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_LineContinuation_Comment_BeforeColonTokenV16()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() _ ' test
          : Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine() _ ' test
         Console.WriteLine()";
-            await VerifyAsync(CreateMethod(code), CreateMethod(expected), LanguageVersion.VisualBasic16);
+            await VerifyAsync(
+                CreateMethod(code),
+                CreateMethod(expected),
+                LanguageVersion.VisualBasic16
+            );
         }
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_MultipleLine()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() : 
          Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine()
         Console.WriteLine()";
 
@@ -319,11 +363,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_LineContinuation_AfterColonToken()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() : _
          Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine()
         Console.WriteLine()";
 
@@ -334,12 +380,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_LineContinuation_AfterColonToken2()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() : _
          _
          Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine()
 
         Console.WriteLine()";
@@ -351,12 +399,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_LineContinuation_AfterColonToken_MultipleLine()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() : _
          _
          _|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine()
 
 ";
@@ -368,14 +418,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_LineContinuation_AfterColonToken_Mixed()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() : _
          _
          :
          _
          Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine()
 
 
@@ -389,14 +441,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_LineContinuation_AfterColonToken_Colon_Comment()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() : _
          _
          : ' test
          _
          Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine() _
                             _
         ' test
@@ -410,14 +464,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_LineContinuation_Mix()
         {
-            var code = @"[|
+            var code =
+                @"[|
          Console.WriteLine() _ : _
          _
          : ' test
          _
          Console.WriteLine()|]";
 
-            var expected = @"
+            var expected =
+                @"
         Console.WriteLine() _  _
          _
           ' test
@@ -431,11 +487,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonToken_If()
         {
-            var code = @"[|
+            var code =
+                @"[|
         If True Then :
         End If|]";
 
-            var expected = @"
+            var expected =
+                @"
         If True Then
         End If";
 
@@ -446,12 +504,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ImplicitLineContinuation()
         {
-            var code = @"[|
+            var code =
+                @"[|
         Dim i = _
                 1 + _
                 2|]";
 
-            var expected = @"
+            var expected =
+                @"
         Dim i =
                 1 +
                 2";
@@ -463,13 +523,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ImplicitLineContinuation_Multiple()
         {
-            var code = @"[|
+            var code =
+                @"[|
         Dim i = _
                 _
                 1 + _
                 2|]";
 
-            var expected = @"
+            var expected =
+                @"
         Dim i = _
                 _
                 1 +
@@ -482,7 +544,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuation_Mix()
         {
-            var code = @"[|Class _
+            var code =
+                @"[|Class _
  A
     Inherits _
         System _
@@ -529,7 +592,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
 End _
     Class|]";
 
-            var expected = @"Class _
+            var expected =
+                @"Class _
  A
     Inherits _
         System _
@@ -583,13 +647,15 @@ End _
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ImplicitLineContinuation_Invalid()
         {
-            var code = @"[|
+            var code =
+                @"[|
         Dim i = _ _
                 _ _
                 1 + _ _
                 2|]";
 
-            var expected = @"
+            var expected =
+                @"
         Dim i = _ _
                 _ _
                 1 + _ _
@@ -603,10 +669,12 @@ End _
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task AttributeTargetColon()
         {
-            var code = @"[|<Assembly: _
+            var code =
+                @"[|<Assembly: _
 CLSCompliant>|]";
 
-            var expected = @"<Assembly: _
+            var expected =
+                @"<Assembly: _
 CLSCompliant>";
 
             await VerifyAsync(code, expected);
@@ -617,11 +685,13 @@ CLSCompliant>";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuationInImport()
         {
-            var code = @"[|Imports System _
+            var code =
+                @"[|Imports System _
 
 |]";
 
-            var expected = @"Imports System
+            var expected =
+                @"Imports System
 
 ";
 
@@ -645,7 +715,8 @@ CLSCompliant>";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuationInNamedFieldInitializer()
         {
-            var code = @"[|Class C
+            var code =
+                @"[|Class C
     Sub S()
         Dim o = New With
             {
@@ -655,7 +726,8 @@ CLSCompliant>";
     End Sub
 End Class|]";
 
-            var expected = @"Class C
+            var expected =
+                @"Class C
     Sub S()
         Dim o = New With
             {
@@ -673,14 +745,16 @@ End Class";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task IfPart_Colon1()
         {
-            var code = @"[|Module M
+            var code =
+                @"[|Module M
     Sub S()
         If True Then
             : Return : End If
     End Sub
 End Module|]";
 
-            var expected = @"Module M
+            var expected =
+                @"Module M
     Sub S()
         If True Then
             Return : End If
@@ -695,14 +769,16 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task IfPart_Colon2()
         {
-            var code = @"[|Module M
+            var code =
+                @"[|Module M
     Sub S()
         If True Then : 
             Return : End If
     End Sub
 End Module|]";
 
-            var expected = @"Module M
+            var expected =
+                @"Module M
     Sub S()
         If True Then
             Return : End If
@@ -717,14 +793,16 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task IfPart_Colon3()
         {
-            var code = @"[|Module M
+            var code =
+                @"[|Module M
     Sub S()
         If True Then : Return
         : End If
     End Sub
 End Module|]";
 
-            var expected = @"Module M
+            var expected =
+                @"Module M
     Sub S()
         If True Then : Return
         End If
@@ -739,14 +817,16 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task IfPart_Colon4()
         {
-            var code = @"[|Module M
+            var code =
+                @"[|Module M
     Sub S()
         If True Then : Return : 
         End If
     End Sub
 End Module|]";
 
-            var expected = @"Module M
+            var expected =
+                @"Module M
     Sub S()
         If True Then : Return
         End If
@@ -761,13 +841,15 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LabelColon()
         {
-            var code = @"[|Module Program
+            var code =
+                @"[|Module Program
     Sub S()
         L: 
     End Sub
 End Module|]";
 
-            var expected = @"Module Program
+            var expected =
+                @"Module Program
     Sub S()
 L:
     End Sub
@@ -781,13 +863,15 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LabelColon_ColonTrivia()
         {
-            var code = @"[|Module Program
+            var code =
+                @"[|Module Program
     Sub S()
         L:::::::::  
     End Sub
 End Module|]";
 
-            var expected = @"Module Program
+            var expected =
+                @"Module Program
     Sub S()
 L:
     End Sub
@@ -801,7 +885,8 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuation_MixedWithImplicitLineContinuation()
         {
-            var code = @"[|Module Program
+            var code =
+                @"[|Module Program
     Sub Main(
  _
         args _
@@ -809,7 +894,8 @@ End Module";
     End Sub
 End Module|]";
 
-            var expected = @"Module Program
+            var expected =
+                @"Module Program
     Sub Main(
              _
         args _
@@ -825,10 +911,12 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonTrivia_EndOfFile()
         {
-            var code = @"[|:::::::
+            var code =
+                @"[|:::::::
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 ";
 
             await VerifyAsync(code, expected);
@@ -839,13 +927,15 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task ColonTriviaBeforeCommentTrivia()
         {
-            var code = @"[|Module M
+            var code =
+                @"[|Module M
     Sub Main()
         Dim b = <x/>.@x : '
     End Sub
 End Module|]";
 
-            var expected = @"Module M
+            var expected =
+                @"Module M
     Sub Main()
         Dim b = <x/>.@x  '
     End Sub
@@ -859,7 +949,8 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task InsideWithStatementWithMemberCall()
         {
-            var code = @"[|Module Program
+            var code =
+                @"[|Module Program
     Sub Main()
         With ""
             Dim y = From x In "" Distinct
@@ -868,7 +959,8 @@ End Module";
     End Sub
 End Module|]";
 
-            var expected = @"Module Program
+            var expected =
+                @"Module Program
     Sub Main()
         With ""
             Dim y = From x In "" Distinct
@@ -885,7 +977,8 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task InsideWithStatementWithMemberCall2()
         {
-            var code = @"[|Module Program
+            var code =
+                @"[|Module Program
     Sub Main()
         With ""
             Dim y = From x In """" Distinct :
@@ -894,7 +987,8 @@ End Module";
     End Sub
 End Module|]";
 
-            var expected = @"Module Program
+            var expected =
+                @"Module Program
     Sub Main()
         With ""
             Dim y = From x In """" Distinct :
@@ -911,7 +1005,8 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task InsideWithStatementWithMemberCall3()
         {
-            var code = @"[|Module Program
+            var code =
+                @"[|Module Program
     Sub Main()
         With ""
             .ToLower()
@@ -920,7 +1015,8 @@ End Module";
     End Sub
 End Module|]";
 
-            var expected = @"Module Program
+            var expected =
+                @"Module Program
     Sub Main()
         With ""
             .ToLower()
@@ -937,7 +1033,8 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task InsideWithStatementWithMemberCall4()
         {
-            var code = @"[|Module Program
+            var code =
+                @"[|Module Program
     Sub Main()
         With """"
             .ToLower() :
@@ -946,7 +1043,8 @@ End Module";
     End Sub
 End Module|]";
 
-            var expected = @"Module Program
+            var expected =
+                @"Module Program
     Sub Main()
         With """"
             .ToLower()
@@ -963,7 +1061,8 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task InsideWithStatementWithDictionaryAccess()
         {
-            var code = @"[|Imports System.Collections
+            var code =
+                @"[|Imports System.Collections
 Module Program
     Sub Main()
         With New Hashtable
@@ -974,7 +1073,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"Imports System.Collections
+            var expected =
+                @"Imports System.Collections
 Module Program
     Sub Main()
         With New Hashtable
@@ -993,7 +1093,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task InsideWithStatementWithDictionaryAccess2()
         {
-            var code = @"[|Imports System.Collections
+            var code =
+                @"[|Imports System.Collections
 Module Program
     Sub Main()
         With New Hashtable
@@ -1003,7 +1104,8 @@ Module Program
     End Sub
 End Module|]";
 
-            var expected = @"Imports System.Collections
+            var expected =
+                @"Imports System.Collections
 Module Program
     Sub Main()
         With New Hashtable
@@ -1021,7 +1123,8 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task InsideObjectInitializer()
         {
-            var code = @"[|Imports System.Runtime.CompilerServices
+            var code =
+                @"[|Imports System.Runtime.CompilerServices
  
 Module Program
     Sub Main()
@@ -1033,7 +1136,8 @@ Module Program
     End Sub
 End Module|]";
 
-            var expected = @"Imports System.Runtime.CompilerServices
+            var expected =
+                @"Imports System.Runtime.CompilerServices
 
 Module Program
     Sub Main()
@@ -1053,14 +1157,16 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuationBetweenXmlAndDot()
         {
-            var code = @"[|Module Program
+            var code =
+                @"[|Module Program
     Sub Main()
         Dim y = <?xml version=""1.0""?><root/> _
         .ToString()
     End Sub
 End Module|]";
 
-            var expected = @"Module Program
+            var expected =
+                @"Module Program
     Sub Main()
         Dim y = <?xml version=""1.0""?><root/> _
         .ToString()
@@ -1075,14 +1181,16 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuationBetweenXmlAndDot1()
         {
-            var code = @"[|Module Program
+            var code =
+                @"[|Module Program
     Sub Main()
         Dim x = <x/>.. _
             .<x>
     End Sub
 End Module|]";
 
-            var expected = @"Module Program
+            var expected =
+                @"Module Program
     Sub Main()
         Dim x = <x/>.. _
             .<x>
@@ -1097,14 +1205,16 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuationBeforeFromQueryExpression()
         {
-            var code = @"[|Class C
+            var code =
+                @"[|Class C
     Sub Main()
         Call _
         From x In """" Distinct.ToString()
     End Sub
 End Class|]";
 
-            var expected = @"Class C
+            var expected =
+                @"Class C
     Sub Main()
         Call _
         From x In """" Distinct.ToString()
@@ -1119,14 +1229,16 @@ End Class";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuationBeforeFromAggregateExpression()
         {
-            var code = @"[|Class C
+            var code =
+                @"[|Class C
     Sub Main()
         Call _
             Aggregate x In {1} Into Count().ToString()
     End Sub
 End Class|]";
 
-            var expected = @"Class C
+            var expected =
+                @"Class C
     Sub Main()
         Call _
             Aggregate x In {1} Into Count().ToString()
@@ -1141,7 +1253,8 @@ End Class";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuationAtEndOfLambdaExpression1()
         {
-            var code = @"[|Interface I
+            var code =
+                @"[|Interface I
     Property A As Action
 End Interface
  
@@ -1151,7 +1264,8 @@ Class C
     Implements I.A
 End Class|]";
 
-            var expected = @"Interface I
+            var expected =
+                @"Interface I
     Property A As Action
 End Interface
 
@@ -1169,7 +1283,8 @@ End Class";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuationAtEndOfLambdaExpression2()
         {
-            var code = @"[|Interface I
+            var code =
+                @"[|Interface I
     Property A As Action
 End Interface
  
@@ -1181,7 +1296,8 @@ Class C
     Implements I.A
 End Class|]";
 
-            var expected = @"Interface I
+            var expected =
+                @"Interface I
     Property A As Action
 End Interface
 
@@ -1201,11 +1317,13 @@ End Class";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task LineContinuationAfterDot()
         {
-            var code = @"[|
+            var code =
+                @"[|
         System.Diagnostics. _
             Debug.Assert(True)|]";
 
-            var expected = @"
+            var expected =
+                @"
         System.Diagnostics.
             Debug.Assert(True)";
 
@@ -1218,12 +1336,14 @@ End Class";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task DontRemoveLineContinuationAfterColonInSingleLineIfStatement()
         {
-            var code = @"[|Module Program
+            var code =
+                @"[|Module Program
     Dim x = Sub() If True Then Dim y : _
                                Exit Sub
 End Module|]";
 
-            var expected = @"Module Program
+            var expected =
+                @"Module Program
     Dim x = Sub() If True Then Dim y : _
                                Exit Sub
 End Module";
@@ -1237,7 +1357,8 @@ End Module";
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task DontRemoveLineContinuationInSingleLineIfStatement()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main()
         ' Single Line If with explicit line continuations
@@ -1249,7 +1370,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main()
         ' Single Line If with explicit line continuations
@@ -1269,7 +1391,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task DontRemoveLineContinuationInNestedSingleLineIfStatement()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Sub Main()
         ' Nested Single Line If with explicit line continuations
@@ -1295,7 +1418,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Sub Main()
         ' Nested Single Line If with explicit line continuations
@@ -1328,14 +1452,16 @@ End Module
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task DontRemoveLineContinuationInStringInterpolation1()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Dim x = $""{ _
             1}""
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Dim x = $""{ _
             1}""
@@ -1349,14 +1475,16 @@ End Module
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task DontRemoveLineContinuationInStringInterpolation2()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Dim x = $""{1 _
                }""
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Dim x = $""{1 _
                }""
@@ -1370,7 +1498,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task DontRemoveLineContinuationInStringInterpolation3()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Dim x = $""{ _
 
@@ -1380,7 +1509,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Dim x = $""{ _
 
@@ -1397,7 +1527,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task DontRemoveLineContinuationInVisualBasic9()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Function Add( _
         i As Integer, _
@@ -1409,7 +1540,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Function Add( _
         i As Integer, _
@@ -1428,7 +1560,8 @@ End Module
         [Trait(Traits.Feature, Traits.Features.RemoveUnnecessaryLineContinuation)]
         public async Task RemoveLineContinuationInVisualBasic10_11_12_And_14()
         {
-            var code = @"[|
+            var code =
+                @"[|
 Module Program
     Function Add( _
         i As Integer, _
@@ -1440,7 +1573,8 @@ Module Program
 End Module
 |]";
 
-            var expected = @"
+            var expected =
+                @"
 Module Program
     Function Add(
         i As Integer,
@@ -1462,26 +1596,55 @@ End Module
         {
             return @"Imports System
 Class C
-    Public Sub Method()" + body + @"
+    Public Sub Method()"
+                + body
+                + @"
     End Sub
 End Class";
         }
 
-        private static async Task VerifyAsync(string codeWithMarker, string expectedResult, LanguageVersion langVersion = LanguageVersion.VisualBasic14)
+        private static async Task VerifyAsync(
+            string codeWithMarker,
+            string expectedResult,
+            LanguageVersion langVersion = LanguageVersion.VisualBasic14
+        )
         {
-            MarkupTestFile.GetSpans(codeWithMarker,
-                out var codeWithoutMarker, out ImmutableArray<TextSpan> textSpans);
+            MarkupTestFile.GetSpans(
+                codeWithMarker,
+                out var codeWithoutMarker,
+                out ImmutableArray<TextSpan> textSpans
+            );
 
-            var document = CreateDocument(codeWithoutMarker, LanguageNames.VisualBasic, langVersion);
-            var codeCleanups = CodeCleaner.GetDefaultProviders(document).WhereAsArray(p => p.Name is PredefinedCodeCleanupProviderNames.RemoveUnnecessaryLineContinuation or PredefinedCodeCleanupProviderNames.Format);
+            var document = CreateDocument(
+                codeWithoutMarker,
+                LanguageNames.VisualBasic,
+                langVersion
+            );
+            var codeCleanups = CodeCleaner
+                .GetDefaultProviders(document)
+                .WhereAsArray(
+                    p =>
+                        p.Name
+                            is PredefinedCodeCleanupProviderNames.RemoveUnnecessaryLineContinuation
+                                or PredefinedCodeCleanupProviderNames.Format
+                );
 
-            var cleanDocument = await CodeCleaner.CleanupAsync(document, textSpans[0], CodeCleanupOptions.GetDefault(document.Project.LanguageServices), codeCleanups);
+            var cleanDocument = await CodeCleaner.CleanupAsync(
+                document,
+                textSpans[0],
+                CodeCleanupOptions.GetDefault(document.Project.LanguageServices),
+                codeCleanups
+            );
 
             var actualResult = (await cleanDocument.GetSyntaxRootAsync()).ToFullString();
             Assert.Equal(expectedResult, actualResult);
         }
 
-        private static Document CreateDocument(string code, string language, LanguageVersion langVersion)
+        private static Document CreateDocument(
+            string code,
+            string language,
+            LanguageVersion langVersion
+        )
         {
             var solution = new AdhocWorkspace().CurrentSolution;
             var projectId = ProjectId.CreateNewId();

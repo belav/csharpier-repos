@@ -16,16 +16,20 @@ namespace System.Linq
         // We must ensure that if a LabelTarget is rewritten that it is always rewritten to the same new target
         // or otherwise expressions using it won't match correctly.
         private Dictionary<LabelTarget, LabelTarget>? _targetCache;
+
         // Finding equivalent types can be relatively expensive, and hitting with the same types repeatedly is quite likely.
         private Dictionary<Type, Type>? _equivalentTypeCache;
 
-        [RequiresUnreferencedCode(Queryable.InMemoryQueryableExtensionMethodsRequiresUnreferencedCode)]
-        public EnumerableRewriter()
-        {
-        }
+        [RequiresUnreferencedCode(
+            Queryable.InMemoryQueryableExtensionMethodsRequiresUnreferencedCode
+        )]
+        public EnumerableRewriter() { }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This class's ctor is annotated as RequiresUnreferencedCode.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This class's ctor is annotated as RequiresUnreferencedCode."
+        )]
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
             Expression? obj = Visit(m.Object);
@@ -37,8 +41,10 @@ namespace System.Linq
                 MethodInfo mInfo = m.Method;
                 Type[]? typeArgs = (mInfo.IsGenericMethod) ? mInfo.GetGenericArguments() : null;
 
-                if ((mInfo.IsStatic || mInfo.DeclaringType!.IsAssignableFrom(obj!.Type))
-                    && ArgsMatch(mInfo, args, typeArgs))
+                if (
+                    (mInfo.IsStatic || mInfo.DeclaringType!.IsAssignableFrom(obj!.Type))
+                    && ArgsMatch(mInfo, args, typeArgs)
+                )
                 {
                     // current method is still valid
                     return Expression.Call(obj, mInfo, args);
@@ -46,14 +52,23 @@ namespace System.Linq
                 else if (mInfo.DeclaringType == typeof(Queryable))
                 {
                     // convert Queryable method to Enumerable method
-                    MethodInfo seqMethod = FindEnumerableMethodForQueryable(mInfo.Name, args, typeArgs);
+                    MethodInfo seqMethod = FindEnumerableMethodForQueryable(
+                        mInfo.Name,
+                        args,
+                        typeArgs
+                    );
                     args = FixupQuotedArgs(seqMethod, args);
                     return Expression.Call(obj, seqMethod, args);
                 }
                 else
                 {
                     // rebind to new method
-                    MethodInfo method = FindMethod(mInfo.DeclaringType!, mInfo.Name, args, typeArgs);
+                    MethodInfo method = FindMethod(
+                        mInfo.DeclaringType!,
+                        mInfo.Name,
+                        args,
+                        typeArgs
+                    );
                     args = FixupQuotedArgs(method, args);
                     return Expression.Call(obj, method, args);
                 }
@@ -61,7 +76,10 @@ namespace System.Linq
             return m;
         }
 
-        private ReadOnlyCollection<Expression> FixupQuotedArgs(MethodInfo mi, ReadOnlyCollection<Expression> argList)
+        private ReadOnlyCollection<Expression> FixupQuotedArgs(
+            MethodInfo mi,
+            ReadOnlyCollection<Expression> argList
+        )
         {
             ParameterInfo[] pis = mi.GetParameters();
             if (pis.Length > 0)
@@ -100,7 +118,11 @@ namespace System.Linq
                     break;
                 expr = ((UnaryExpression)expr).Operand;
             }
-            if (!type.IsAssignableFrom(expr.Type) && type.IsArray && expr.NodeType == ExpressionType.NewArrayInit)
+            if (
+                !type.IsAssignableFrom(expr.Type)
+                && type.IsArray
+                && expr.NodeType == ExpressionType.NewArrayInit
+            )
             {
                 Type strippedType = StripExpression(expr.Type);
                 if (type.IsAssignableFrom(strippedType))
@@ -137,26 +159,38 @@ namespace System.Linq
                 return typeof(IEnumerable);
             return t;
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-                Justification = "The IGrouping<,> is kept since it's directly referenced here" +
-                    "and so it will also be preserved in all places where it's implemented." +
-                    "The GetInterfaces may return less after trimming but it will include" +
-                    "the IGrouping<,> if it was there before trimming, which is enough for this" +
-                    "method to work.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2075:UnrecognizedReflectionPattern",
+                Justification = "The IGrouping<,> is kept since it's directly referenced here"
+                    + "and so it will also be preserved in all places where it's implemented."
+                    + "The GetInterfaces may return less after trimming but it will include"
+                    + "the IGrouping<,> if it was there before trimming, which is enough for this"
+                    + "method to work."
+            )]
             static bool ImplementsIGrouping(Type type) =>
                 type.GetGenericTypeDefinition().GetInterfaces().Contains(typeof(IGrouping<,>));
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-                Justification = "The IEnumerable<> is kept since it's directly referenced here" +
-                    "and so it will also be preserved in all places where it's implemented." +
-                    "The GetInterfaces may return less after trimming but it will include" +
-                    "the IEnumerable<> if it was there before trimming, which is enough for this" +
-                    "method to work.")]
-            static bool TryGetImplementedIEnumerable(Type type, [NotNullWhen(true)] out Type? interfaceType)
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2070:UnrecognizedReflectionPattern",
+                Justification = "The IEnumerable<> is kept since it's directly referenced here"
+                    + "and so it will also be preserved in all places where it's implemented."
+                    + "The GetInterfaces may return less after trimming but it will include"
+                    + "the IEnumerable<> if it was there before trimming, which is enough for this"
+                    + "method to work."
+            )]
+            static bool TryGetImplementedIEnumerable(
+                Type type,
+                [NotNullWhen(true)] out Type? interfaceType
+            )
             {
                 foreach (Type iType in type.GetInterfaces())
                 {
-                    if (iType.IsGenericType && iType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                    if (
+                        iType.IsGenericType
+                        && iType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                    )
                     {
                         interfaceType = iType;
                         return true;
@@ -177,10 +211,10 @@ namespace System.Linq
                 // without any reflection-based introspection, but also means the slightly different
                 // code needed to catch this case can be omitted safely.
                 _equivalentTypeCache = new Dictionary<Type, Type>
-                    {
-                        { typeof(IQueryable), typeof(IEnumerable) },
-                        { typeof(IEnumerable), typeof(IEnumerable) }
-                    };
+                {
+                    { typeof(IQueryable), typeof(IEnumerable) },
+                    { typeof(IEnumerable), typeof(IEnumerable) }
+                };
             }
             if (!_equivalentTypeCache.TryGetValue(type, out equiv))
             {
@@ -191,23 +225,30 @@ namespace System.Linq
                     if (genericType == typeof(IOrderedEnumerable<>))
                         equiv = pubType;
                     else if (genericType == typeof(IOrderedQueryable<>))
-                        equiv = typeof(IOrderedEnumerable<>).MakeGenericType(pubType.GenericTypeArguments[0]);
+                        equiv = typeof(IOrderedEnumerable<>).MakeGenericType(
+                            pubType.GenericTypeArguments[0]
+                        );
                     else if (genericType == typeof(IEnumerable<>))
                         equiv = pubType;
                     else if (genericType == typeof(IQueryable<>))
-                        equiv = typeof(IEnumerable<>).MakeGenericType(pubType.GenericTypeArguments[0]);
+                        equiv = typeof(IEnumerable<>).MakeGenericType(
+                            pubType.GenericTypeArguments[0]
+                        );
                 }
                 if (equiv == null)
                 {
                     equiv = GetEquivalentTypeToEnumerables(pubType);
 
-                    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-                        Justification = "The enumerable interface type (IOrderedQueryable<>, IOrderedEnumerable<>, IQueryable<> and IEnumerable<>) " +
-                            "is kept since it's directly referenced here" +
-                            "and so it will also be preserved in all places where it's implemented." +
-                            "The GetInterfaces may return less after trimming but it will include" +
-                            "the enumerable interface type if it was there before trimming, which is enough for this" +
-                            "method to work.")]
+                    [UnconditionalSuppressMessage(
+                        "ReflectionAnalysis",
+                        "IL2070:UnrecognizedReflectionPattern",
+                        Justification = "The enumerable interface type (IOrderedQueryable<>, IOrderedEnumerable<>, IQueryable<> and IEnumerable<>) "
+                            + "is kept since it's directly referenced here"
+                            + "and so it will also be preserved in all places where it's implemented."
+                            + "The GetInterfaces may return less after trimming but it will include"
+                            + "the enumerable interface type if it was there before trimming, which is enough for this"
+                            + "method to work."
+                    )]
                     static Type GetEquivalentTypeToEnumerables(Type sourceType)
                     {
                         var interfacesWithInfo = sourceType.GetInterfaces();
@@ -216,7 +257,11 @@ namespace System.Linq
                             .Select(i => new { Info = i, GenType = i.GetGenericTypeDefinition() })
                             .ToArray();
                         Type? typeArg = singleTypeGenInterfacesWithGetType
-                            .Where(i => i.GenType == typeof(IOrderedQueryable<>) || i.GenType == typeof(IOrderedEnumerable<>))
+                            .Where(
+                                i =>
+                                    i.GenType == typeof(IOrderedQueryable<>)
+                                    || i.GenType == typeof(IOrderedEnumerable<>)
+                            )
                             .Select(i => i.Info.GenericTypeArguments[0])
                             .Distinct()
                             .SingleOrDefault();
@@ -225,7 +270,11 @@ namespace System.Linq
                         else
                         {
                             typeArg = singleTypeGenInterfacesWithGetType
-                                .Where(i => i.GenType == typeof(IQueryable<>) || i.GenType == typeof(IEnumerable<>))
+                                .Where(
+                                    i =>
+                                        i.GenType == typeof(IQueryable<>)
+                                        || i.GenType == typeof(IEnumerable<>)
+                                )
                                 .Select(i => i.Info.GenericTypeArguments[0])
                                 .Distinct()
                                 .Single();
@@ -255,7 +304,12 @@ namespace System.Linq
         }
 
         private static ILookup<string, MethodInfo>? s_seqMethods;
-        private static MethodInfo FindEnumerableMethodForQueryable(string name, ReadOnlyCollection<Expression> args, params Type[]? typeArgs)
+
+        private static MethodInfo FindEnumerableMethodForQueryable(
+            string name,
+            ReadOnlyCollection<Expression> args,
+            params Type[]? typeArgs
+        )
         {
             s_seqMethods ??= GetEnumerableStaticMethods(typeof(Enumerable)).ToLookup(m => m.Name);
 
@@ -264,7 +318,10 @@ namespace System.Linq
                 .Select(ApplyTypeArgs)
                 .ToArray();
 
-            Debug.Assert(matchingMethods.Length > 0, "All static methods with arguments on Queryable have equivalents on Enumerable.");
+            Debug.Assert(
+                matchingMethods.Length > 0,
+                "All static methods with arguments on Queryable have equivalents on Enumerable."
+            );
 
             if (matchingMethods.Length > 1)
             {
@@ -273,15 +330,22 @@ namespace System.Linq
 
             return matchingMethods[0];
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-                Justification = "This method is intentionally hiding the Enumerable type from the trimmer so it doesn't preserve all Enumerable's methods. " +
-                "This is safe because all Queryable methods have a DynamicDependency to the corresponding Enumerable method.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2070:UnrecognizedReflectionPattern",
+                Justification = "This method is intentionally hiding the Enumerable type from the trimmer so it doesn't preserve all Enumerable's methods. "
+                    + "This is safe because all Queryable methods have a DynamicDependency to the corresponding Enumerable method."
+            )]
             static MethodInfo[] GetEnumerableStaticMethods(Type type) =>
                 type.GetMethods(BindingFlags.Public | BindingFlags.Static);
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2060:MakeGenericMethod",
-                Justification = "Enumerable methods don't have trim annotations.")]
-            MethodInfo ApplyTypeArgs(MethodInfo methodInfo) => typeArgs == null ? methodInfo : methodInfo.MakeGenericMethod(typeArgs);
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2060:MakeGenericMethod",
+                Justification = "Enumerable methods don't have trim annotations."
+            )]
+            MethodInfo ApplyTypeArgs(MethodInfo methodInfo) =>
+                typeArgs == null ? methodInfo : methodInfo.MakeGenericMethod(typeArgs);
 
             // In certain cases, there might be ambiguities when resolving matching overloads, for example between
             //   1. FirstOrDefault<object>(IEnumerable<object> source, Func<object, bool> predicate) and
@@ -290,7 +354,9 @@ namespace System.Linq
             static MethodInfo DisambiguateMatches(MethodInfo[] matchingMethods)
             {
                 Debug.Assert(matchingMethods.Length > 1);
-                ParameterInfo[][] parameters = matchingMethods.Select(m => m.GetParameters()).ToArray();
+                ParameterInfo[][] parameters = matchingMethods
+                    .Select(m => m.GetParameters())
+                    .ToArray();
 
                 // `AreAssignableFrom[Strict]` defines a partial order on method signatures; pick a maximal element using that order.
                 // It is assumed that `matchingMethods` is a small array, so a naive quadratic search is probably better than
@@ -329,7 +395,8 @@ namespace System.Linq
                         Type leftParam = left[i].ParameterType;
                         Type rightParam = right[i].ParameterType;
                         areEqual = areEqual && leftParam == rightParam;
-                        areAssignableFrom = areAssignableFrom && leftParam.IsAssignableFrom(rightParam);
+                        areAssignableFrom =
+                            areAssignableFrom && leftParam.IsAssignableFrom(rightParam);
                     }
 
                     return !areEqual && areAssignableFrom;
@@ -337,10 +404,23 @@ namespace System.Linq
             }
         }
 
-        [RequiresUnreferencedCode(Queryable.InMemoryQueryableExtensionMethodsRequiresUnreferencedCode)]
-        private static MethodInfo FindMethod(Type type, string name, ReadOnlyCollection<Expression> args, Type[]? typeArgs)
+        [RequiresUnreferencedCode(
+            Queryable.InMemoryQueryableExtensionMethodsRequiresUnreferencedCode
+        )]
+        private static MethodInfo FindMethod(
+            Type type,
+            string name,
+            ReadOnlyCollection<Expression> args,
+            Type[]? typeArgs
+        )
         {
-            using (IEnumerator<MethodInfo> en = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static).Where(m => m.Name == name).GetEnumerator())
+            using (
+                IEnumerator<MethodInfo> en = type.GetMethods(
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+                    )
+                    .Where(m => m.Name == name)
+                    .GetEnumerator()
+            )
             {
                 if (!en.MoveNext())
                     throw Error.NoMethodOnType(name, type);
@@ -354,7 +434,11 @@ namespace System.Linq
             throw Error.NoMethodOnTypeMatchingArguments(name, type);
         }
 
-        private static bool ArgsMatch(MethodInfo m, ReadOnlyCollection<Expression> args, Type[]? typeArgs)
+        private static bool ArgsMatch(
+            MethodInfo m,
+            ReadOnlyCollection<Expression> args,
+            Type[]? typeArgs
+        )
         {
             ParameterInfo[] mParams = m.GetParameters();
             if (mParams.Length != args.Count)
@@ -376,10 +460,15 @@ namespace System.Linq
 
                 mParams = GetConstrutedGenericParameters(m, typeArgs);
 
-                [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2060:MakeGenericMethod",
-                    Justification = "MakeGenericMethod is only called to get the parameter types, which are only used to make a 'match' decision. The generic method is not invoked.")]
-                static ParameterInfo[] GetConstrutedGenericParameters(MethodInfo method, Type[] genericTypes) =>
-                    method.MakeGenericMethod(genericTypes).GetParameters();
+                [UnconditionalSuppressMessage(
+                    "ReflectionAnalysis",
+                    "IL2060:MakeGenericMethod",
+                    Justification = "MakeGenericMethod is only called to get the parameter types, which are only used to make a 'match' decision. The generic method is not invoked."
+                )]
+                static ParameterInfo[] GetConstrutedGenericParameters(
+                    MethodInfo method,
+                    Type[] genericTypes
+                ) => method.MakeGenericMethod(genericTypes).GetParameters();
             }
             for (int i = 0, n = args.Count; i < n; i++)
             {
@@ -395,8 +484,10 @@ namespace System.Linq
                     {
                         arg = ((UnaryExpression)arg).Operand;
                     }
-                    if (!parameterType.IsAssignableFrom(arg.Type) &&
-                        !parameterType.IsAssignableFrom(StripExpression(arg.Type)))
+                    if (
+                        !parameterType.IsAssignableFrom(arg.Type)
+                        && !parameterType.IsAssignableFrom(StripExpression(arg.Type))
+                    )
                     {
                         return false;
                     }
@@ -443,7 +534,10 @@ namespace System.Linq
             if (!typeof(IQueryable).IsAssignableFrom(type))
                 return base.VisitBlock(node);
             ReadOnlyCollection<Expression> nodes = Visit(node.Expressions);
-            ReadOnlyCollection<ParameterExpression> variables = VisitAndConvert(node.Variables, "EnumerableRewriter.VisitBlock");
+            ReadOnlyCollection<ParameterExpression> variables = VisitAndConvert(
+                node.Variables,
+                "EnumerableRewriter.VisitBlock"
+            );
             if (type == node.Expressions.Last().Type)
                 return Expression.Block(variables, nodes);
             return Expression.Block(GetEquivalentType(type), variables, nodes);
@@ -456,7 +550,14 @@ namespace System.Linq
                 return base.VisitGoto(node);
             LabelTarget target = VisitLabelTarget(node.Target);
             Expression value = Visit(node.Value);
-            return Expression.MakeGoto(node.Kind, target, value, GetEquivalentType(typeof(EnumerableQuery).IsAssignableFrom(type) ? value.Type : type));
+            return Expression.MakeGoto(
+                node.Kind,
+                target,
+                value,
+                GetEquivalentType(
+                    typeof(EnumerableQuery).IsAssignableFrom(type) ? value.Type : type
+                )
+            );
         }
 
         protected override LabelTarget VisitLabelTarget(LabelTarget? node)

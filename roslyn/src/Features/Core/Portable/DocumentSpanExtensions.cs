@@ -11,14 +11,24 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class DocumentSpanExtensions
     {
-        public static Task<bool> CanNavigateToAsync(this DocumentSpan documentSpan, CancellationToken cancellationToken)
+        public static Task<bool> CanNavigateToAsync(
+            this DocumentSpan documentSpan,
+            CancellationToken cancellationToken
+        )
         {
             var workspace = documentSpan.Document.Project.Solution.Workspace;
             var service = workspace.Services.GetRequiredService<IDocumentNavigationService>();
-            return service.CanNavigateToSpanAsync(workspace, documentSpan.Document.Id, documentSpan.SourceSpan, cancellationToken);
+            return service.CanNavigateToSpanAsync(
+                workspace,
+                documentSpan.Document.Id,
+                documentSpan.SourceSpan,
+                cancellationToken
+            );
         }
 
-        private static (Workspace workspace, IDocumentNavigationService service) GetNavigationParts(DocumentSpan documentSpan)
+        private static (Workspace workspace, IDocumentNavigationService service) GetNavigationParts(
+            DocumentSpan documentSpan
+        )
         {
             var solution = documentSpan.Document.Project.Solution;
             var workspace = solution.Workspace;
@@ -26,19 +36,32 @@ namespace Microsoft.CodeAnalysis
             return (workspace, service);
         }
 
-        public static Task<INavigableLocation?> GetNavigableLocationAsync(this DocumentSpan documentSpan, CancellationToken cancellationToken)
+        public static Task<INavigableLocation?> GetNavigableLocationAsync(
+            this DocumentSpan documentSpan,
+            CancellationToken cancellationToken
+        )
         {
             var (workspace, service) = GetNavigationParts(documentSpan);
-            return service.GetLocationForSpanAsync(workspace, documentSpan.Document.Id, documentSpan.SourceSpan, allowInvalidSpan: false, cancellationToken);
+            return service.GetLocationForSpanAsync(
+                workspace,
+                documentSpan.Document.Id,
+                documentSpan.SourceSpan,
+                allowInvalidSpan: false,
+                cancellationToken
+            );
         }
 
         public static async Task<bool> IsHiddenAsync(
-            this DocumentSpan documentSpan, CancellationToken cancellationToken)
+            this DocumentSpan documentSpan,
+            CancellationToken cancellationToken
+        )
         {
             var document = documentSpan.Document;
             if (document.SupportsSyntaxTree)
             {
-                var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var tree = await document
+                    .GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 return tree.IsHiddenPosition(documentSpan.SourceSpan.Start, cancellationToken);
             }
 

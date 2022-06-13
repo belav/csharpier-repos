@@ -62,6 +62,7 @@ unsafe struct CommandBytes : IEquatable<CommandBytes>
             return Encoding.ASCII.GetString(bPtr + 1, bPtr[0]);
         }
     }
+
     public int Length
     {
         get
@@ -81,7 +82,8 @@ unsafe struct CommandBytes : IEquatable<CommandBytes>
             {
                 byte* bPtr = (byte*)lPtr;
                 int len = bPtr[0];
-                if (index < 0 || index >= len) throw new IndexOutOfRangeException();
+                if (index < 0 || index >= len)
+                    throw new IndexOutOfRangeException();
                 return bPtr[index + 1];
             }
         }
@@ -91,7 +93,8 @@ unsafe struct CommandBytes : IEquatable<CommandBytes>
     {
         value = value.ToLowerInvariant();
         var len = Encoding.ASCII.GetByteCount(value);
-        if (len > MaxLength) throw new ArgumentOutOfRangeException("Maximum command length exceeed");
+        if (len > MaxLength)
+            throw new ArgumentOutOfRangeException("Maximum command length exceeed");
 
         fixed (long* lPtr = _chunks)
         {
@@ -104,6 +107,7 @@ unsafe struct CommandBytes : IEquatable<CommandBytes>
             }
         }
     }
+
     public override bool Equals(object obj) => obj is CommandBytes cb && Equals(cb);
 
     public string ToInnerString()
@@ -114,12 +118,14 @@ unsafe struct CommandBytes : IEquatable<CommandBytes>
             var sb = new StringBuilder();
             for (int i = 0; i < ChunkLength; i++)
             {
-                if (sb.Length != 0) sb.Append(',');
+                if (sb.Length != 0)
+                    sb.Append(',');
                 sb.Append(*x++);
             }
             return sb.ToString();
         }
     }
+
     public bool Equals(CommandBytes value)
     {
         fixed (long* lPtr = _chunks)
@@ -128,11 +134,13 @@ unsafe struct CommandBytes : IEquatable<CommandBytes>
             long* y = value._chunks;
             for (int i = 0; i < ChunkLength; i++)
             {
-                if (*x++ != *y++) return false;
+                if (*x++ != *y++)
+                    return false;
             }
             return true;
         }
     }
+
     private static void Clear(long* ptr)
     {
         for (int i = 0; i < ChunkLength; i++)
@@ -221,8 +229,11 @@ static class Program
                     var key = pair.Key;
                     void Compare<T>(string caption, Func<CommandBytes, T> func)
                     {
-                        T x = func(hunt), y = func(key);
-                        Console.WriteLine($"{caption}: {EqualityComparer<T>.Default.Equals(x, y)}, '{x}' vs '{y}'");
+                        T x = func(hunt),
+                            y = func(key);
+                        Console.WriteLine(
+                            $"{caption}: {EqualityComparer<T>.Default.Equals(x, y)}, '{x}' vs '{y}'"
+                        );
                     }
                     Compare("GetHashCode", _ => _.GetHashCode());
                     Compare("ToString", _ => _.ToString());
@@ -231,7 +242,9 @@ static class Program
                     Console.WriteLine($"Equals: {key.Equals(hunt)}, {hunt.Equals(key)}");
                     var eq = EqualityComparer<CommandBytes>.Default;
 
-                    Console.WriteLine($"EqualityComparer: {eq.Equals(key, hunt)}, {eq.Equals(hunt, key)}");
+                    Console.WriteLine(
+                        $"EqualityComparer: {eq.Equals(key, hunt)}, {eq.Equals(hunt, key)}"
+                    );
                     Compare("eq GetHashCode", _ => eq.GetHashCode(_));
                 }
             }

@@ -33,15 +33,19 @@ namespace System.Net.Security
                     SafeDeleteContext? securityContext = context.GetContext(out status);
                     if (status.ErrorCode != SecurityStatusPalErrorCode.OK)
                     {
-                        throw new Win32Exception((int)SecurityStatusAdapterPal.GetInteropFromSecurityStatusPal(status));
+                        throw new Win32Exception(
+                            (int)SecurityStatusAdapterPal.GetInteropFromSecurityStatusPal(status)
+                        );
                     }
 
                     // This will return a client token when conducted authentication on server side.
                     // This token can be used for impersonation. We use it to create a WindowsIdentity and hand it out to the server app.
-                    Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)SSPIWrapper.QuerySecurityContextToken(
-                        GlobalSSPI.SSPIAuth,
-                        securityContext!,
-                        out token);
+                    Interop.SECURITY_STATUS winStatus = (Interop.SECURITY_STATUS)
+                        SSPIWrapper.QuerySecurityContextToken(
+                            GlobalSSPI.SSPIAuth,
+                            securityContext!,
+                            out token
+                        );
                     if (winStatus != Interop.SECURITY_STATUS.OK)
                     {
                         throw new Win32Exception((int)winStatus);
@@ -70,16 +74,26 @@ namespace System.Net.Security
 
         internal static string? QueryContextAssociatedName(SafeDeleteContext securityContext)
         {
-            return SSPIWrapper.QueryStringContextAttributes(GlobalSSPI.SSPIAuth, securityContext, Interop.SspiCli.ContextAttribute.SECPKG_ATTR_NAMES);
+            return SSPIWrapper.QueryStringContextAttributes(
+                GlobalSSPI.SSPIAuth,
+                securityContext,
+                Interop.SspiCli.ContextAttribute.SECPKG_ATTR_NAMES
+            );
         }
 
         internal static void ValidateImpersonationLevel(TokenImpersonationLevel impersonationLevel)
         {
-            if (impersonationLevel != TokenImpersonationLevel.Identification &&
-                impersonationLevel != TokenImpersonationLevel.Impersonation &&
-                impersonationLevel != TokenImpersonationLevel.Delegation)
+            if (
+                impersonationLevel != TokenImpersonationLevel.Identification
+                && impersonationLevel != TokenImpersonationLevel.Impersonation
+                && impersonationLevel != TokenImpersonationLevel.Delegation
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(impersonationLevel), impersonationLevel.ToString(), SR.net_auth_supported_impl_levels);
+                throw new ArgumentOutOfRangeException(
+                    nameof(impersonationLevel),
+                    impersonationLevel.ToString(),
+                    SR.net_auth_supported_impl_levels
+                );
             }
         }
 
@@ -89,16 +103,25 @@ namespace System.Net.Security
             bool isConfidential,
             bool isNtlm,
             [NotNull] ref byte[]? output,
-            uint sequenceNumber)
+            uint sequenceNumber
+        )
         {
             SecPkgContext_Sizes sizes = default;
-            bool success = SSPIWrapper.QueryBlittableContextAttributes(GlobalSSPI.SSPIAuth, securityContext, Interop.SspiCli.ContextAttribute.SECPKG_ATTR_SIZES, ref sizes);
+            bool success = SSPIWrapper.QueryBlittableContextAttributes(
+                GlobalSSPI.SSPIAuth,
+                securityContext,
+                Interop.SspiCli.ContextAttribute.SECPKG_ATTR_SIZES,
+                ref sizes
+            );
             Debug.Assert(success);
 
             int maxCount = checked(int.MaxValue - 4 - sizes.cbBlockSize - sizes.cbSecurityTrailer);
             if (buffer.Length > maxCount)
             {
-                throw new ArgumentOutOfRangeException(nameof(buffer.Length), SR.Format(SR.net_io_out_range, maxCount));
+                throw new ArgumentOutOfRangeException(
+                    nameof(buffer.Length),
+                    SR.Format(SR.net_io_out_range, maxCount)
+                );
             }
 
             int resultSize = buffer.Length + sizes.cbSecurityTrailer + sizes.cbBlockSize;
@@ -113,14 +136,34 @@ namespace System.Net.Security
             // Prepare buffers TOKEN(signature), DATA and Padding.
             ThreeSecurityBuffers buffers = default;
             var securityBuffer = MemoryMarshal.CreateSpan(ref buffers._item0, 3);
-            securityBuffer[0] = new SecurityBuffer(output, 4, sizes.cbSecurityTrailer, SecurityBufferType.SECBUFFER_TOKEN);
-            securityBuffer[1] = new SecurityBuffer(output, 4 + sizes.cbSecurityTrailer, buffer.Length, SecurityBufferType.SECBUFFER_DATA);
-            securityBuffer[2] = new SecurityBuffer(output, 4 + sizes.cbSecurityTrailer + buffer.Length, sizes.cbBlockSize, SecurityBufferType.SECBUFFER_PADDING);
+            securityBuffer[0] = new SecurityBuffer(
+                output,
+                4,
+                sizes.cbSecurityTrailer,
+                SecurityBufferType.SECBUFFER_TOKEN
+            );
+            securityBuffer[1] = new SecurityBuffer(
+                output,
+                4 + sizes.cbSecurityTrailer,
+                buffer.Length,
+                SecurityBufferType.SECBUFFER_DATA
+            );
+            securityBuffer[2] = new SecurityBuffer(
+                output,
+                4 + sizes.cbSecurityTrailer + buffer.Length,
+                sizes.cbBlockSize,
+                SecurityBufferType.SECBUFFER_PADDING
+            );
 
             int errorCode;
             if (isConfidential)
             {
-                errorCode = SSPIWrapper.EncryptMessage(GlobalSSPI.SSPIAuth, securityContext, securityBuffer, sequenceNumber);
+                errorCode = SSPIWrapper.EncryptMessage(
+                    GlobalSSPI.SSPIAuth,
+                    securityContext,
+                    securityBuffer,
+                    sequenceNumber
+                );
             }
             else
             {
@@ -129,13 +172,19 @@ namespace System.Net.Security
                     securityBuffer[1].type |= SecurityBufferType.SECBUFFER_READONLY;
                 }
 
-                errorCode = SSPIWrapper.MakeSignature(GlobalSSPI.SSPIAuth, securityContext, securityBuffer, 0);
+                errorCode = SSPIWrapper.MakeSignature(
+                    GlobalSSPI.SSPIAuth,
+                    securityContext,
+                    securityBuffer,
+                    0
+                );
             }
 
             if (errorCode != 0)
             {
                 Exception e = new Win32Exception(errorCode);
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(null, e);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(null, e);
                 throw e;
             }
 
@@ -145,13 +194,28 @@ namespace System.Net.Security
             if (resultSize != sizes.cbSecurityTrailer)
             {
                 forceCopy = true;
-                Buffer.BlockCopy(output, securityBuffer[1].offset, output, 4 + resultSize, securityBuffer[1].size);
+                Buffer.BlockCopy(
+                    output,
+                    securityBuffer[1].offset,
+                    output,
+                    4 + resultSize,
+                    securityBuffer[1].size
+                );
             }
 
             resultSize += securityBuffer[1].size;
-            if (securityBuffer[2].size != 0 && (forceCopy || resultSize != (buffer.Length + sizes.cbSecurityTrailer)))
+            if (
+                securityBuffer[2].size != 0
+                && (forceCopy || resultSize != (buffer.Length + sizes.cbSecurityTrailer))
+            )
             {
-                Buffer.BlockCopy(output, securityBuffer[2].offset, output, 4 + resultSize, securityBuffer[2].size);
+                Buffer.BlockCopy(
+                    output,
+                    securityBuffer[2].offset,
+                    output,
+                    4 + resultSize,
+                    securityBuffer[2].size
+                );
             }
 
             resultSize += securityBuffer[2].size;
@@ -174,7 +238,8 @@ namespace System.Net.Security
             bool isConfidential,
             bool isNtlm,
             out int newOffset,
-            uint sequenceNumber)
+            uint sequenceNumber
+        )
         {
             if (offset < 0 || offset > (buffer == null ? 0 : buffer.Length))
             {
@@ -190,7 +255,15 @@ namespace System.Net.Security
 
             if (isNtlm)
             {
-                return DecryptNtlm(securityContext, buffer, offset, count, isConfidential, out newOffset, sequenceNumber);
+                return DecryptNtlm(
+                    securityContext,
+                    buffer,
+                    offset,
+                    count,
+                    isConfidential,
+                    out newOffset,
+                    sequenceNumber
+                );
             }
 
             //
@@ -198,23 +271,39 @@ namespace System.Net.Security
             //
             TwoSecurityBuffers buffers = default;
             var securityBuffer = MemoryMarshal.CreateSpan(ref buffers._item0, 2);
-            securityBuffer[0] = new SecurityBuffer(buffer, offset, count, SecurityBufferType.SECBUFFER_STREAM);
+            securityBuffer[0] = new SecurityBuffer(
+                buffer,
+                offset,
+                count,
+                SecurityBufferType.SECBUFFER_STREAM
+            );
             securityBuffer[1] = new SecurityBuffer(0, SecurityBufferType.SECBUFFER_DATA);
 
             int errorCode;
             if (isConfidential)
             {
-                errorCode = SSPIWrapper.DecryptMessage(GlobalSSPI.SSPIAuth, securityContext, securityBuffer, sequenceNumber);
+                errorCode = SSPIWrapper.DecryptMessage(
+                    GlobalSSPI.SSPIAuth,
+                    securityContext,
+                    securityBuffer,
+                    sequenceNumber
+                );
             }
             else
             {
-                errorCode = SSPIWrapper.VerifySignature(GlobalSSPI.SSPIAuth, securityContext, securityBuffer, sequenceNumber);
+                errorCode = SSPIWrapper.VerifySignature(
+                    GlobalSSPI.SSPIAuth,
+                    securityContext,
+                    securityBuffer,
+                    sequenceNumber
+                );
             }
 
             if (errorCode != 0)
             {
                 Exception e = new Win32Exception(errorCode);
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(null, e);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(null, e);
                 throw e;
             }
 
@@ -234,7 +323,8 @@ namespace System.Net.Security
             int count,
             bool isConfidential,
             out int newOffset,
-            uint sequenceNumber)
+            uint sequenceNumber
+        )
         {
             const int ntlmSignatureLength = 16;
             // For the most part the arguments are verified in Decrypt().
@@ -246,27 +336,48 @@ namespace System.Net.Security
 
             TwoSecurityBuffers buffers = default;
             var securityBuffer = MemoryMarshal.CreateSpan(ref buffers._item0, 2);
-            securityBuffer[0] = new SecurityBuffer(buffer, offset, ntlmSignatureLength, SecurityBufferType.SECBUFFER_TOKEN);
-            securityBuffer[1] = new SecurityBuffer(buffer, offset + ntlmSignatureLength, count - ntlmSignatureLength, SecurityBufferType.SECBUFFER_DATA);
+            securityBuffer[0] = new SecurityBuffer(
+                buffer,
+                offset,
+                ntlmSignatureLength,
+                SecurityBufferType.SECBUFFER_TOKEN
+            );
+            securityBuffer[1] = new SecurityBuffer(
+                buffer,
+                offset + ntlmSignatureLength,
+                count - ntlmSignatureLength,
+                SecurityBufferType.SECBUFFER_DATA
+            );
 
             int errorCode;
             SecurityBufferType realDataType = SecurityBufferType.SECBUFFER_DATA;
 
             if (isConfidential)
             {
-                errorCode = SSPIWrapper.DecryptMessage(GlobalSSPI.SSPIAuth, securityContext, securityBuffer, sequenceNumber);
+                errorCode = SSPIWrapper.DecryptMessage(
+                    GlobalSSPI.SSPIAuth,
+                    securityContext,
+                    securityBuffer,
+                    sequenceNumber
+                );
             }
             else
             {
                 realDataType |= SecurityBufferType.SECBUFFER_READONLY;
                 securityBuffer[1].type = realDataType;
-                errorCode = SSPIWrapper.VerifySignature(GlobalSSPI.SSPIAuth, securityContext, securityBuffer, sequenceNumber);
+                errorCode = SSPIWrapper.VerifySignature(
+                    GlobalSSPI.SSPIAuth,
+                    securityContext,
+                    securityBuffer,
+                    sequenceNumber
+                );
             }
 
             if (errorCode != 0)
             {
                 Exception e = new Win32Exception(errorCode);
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(null, e);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(null, e);
                 throw new Win32Exception(errorCode);
             }
 

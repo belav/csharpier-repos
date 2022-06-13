@@ -37,7 +37,8 @@ public static class MvcCorsMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     public static IMvcCoreBuilder AddCors(
         this IMvcCoreBuilder builder,
-        Action<CorsOptions> setupAction)
+        Action<CorsOptions> setupAction
+    )
     {
         if (builder == null)
         {
@@ -63,7 +64,8 @@ public static class MvcCorsMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     public static IMvcCoreBuilder ConfigureCors(
         this IMvcCoreBuilder builder,
-        Action<CorsOptions> setupAction)
+        Action<CorsOptions> setupAction
+    )
     {
         if (builder == null)
         {
@@ -85,7 +87,8 @@ public static class MvcCorsMvcCoreBuilderExtensions
         services.AddCors();
 
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IApplicationModelProvider, CorsApplicationModelProvider>());
+            ServiceDescriptor.Transient<IApplicationModelProvider, CorsApplicationModelProvider>()
+        );
         services.TryAddTransient<CorsAuthorizationFilter, CorsAuthorizationFilter>();
     }
 }

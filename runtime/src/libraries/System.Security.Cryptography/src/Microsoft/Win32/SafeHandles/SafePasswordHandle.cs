@@ -16,8 +16,7 @@ namespace Microsoft.Win32.SafeHandles
     {
         internal int Length { get; private set; }
 
-        public SafePasswordHandle(string? password)
-            : base(ownsHandle: true)
+        public SafePasswordHandle(string? password) : base(ownsHandle: true)
         {
             if (password != null)
             {
@@ -26,20 +25,17 @@ namespace Microsoft.Win32.SafeHandles
             }
         }
 
-        public SafePasswordHandle(ReadOnlySpan<char> password)
-            : base(ownsHandle: true)
+        public SafePasswordHandle(ReadOnlySpan<char> password) : base(ownsHandle: true)
         {
             // "".AsSpan() is not default, so this is compat for "null tries NULL first".
             if (password != default)
             {
                 int spanLen;
-
                 checked
                 {
                     spanLen = password.Length + 1;
                     handle = Marshal.AllocHGlobal(spanLen * sizeof(char));
                 }
-
                 unsafe
                 {
                     Span<char> dest = new Span<char>((void*)handle, spanLen);
@@ -51,8 +47,7 @@ namespace Microsoft.Win32.SafeHandles
             }
         }
 
-        public SafePasswordHandle(SecureString? password)
-            : base(ownsHandle: true)
+        public SafePasswordHandle(SecureString? password) : base(ownsHandle: true)
         {
             if (password != null)
             {
@@ -85,7 +80,6 @@ namespace Microsoft.Win32.SafeHandles
             {
                 return default;
             }
-
             unsafe
             {
                 return new ReadOnlySpan<char>((char*)handle, Length);
@@ -93,12 +87,11 @@ namespace Microsoft.Win32.SafeHandles
         }
 
         public static SafePasswordHandle InvalidHandle =>
-            SafeHandleCache<SafePasswordHandle>.GetInvalidHandle(
-                () =>
-                {
-                    var handle = new SafePasswordHandle((string?)null);
-                    handle.handle = (IntPtr)(-1);
-                    return handle;
-                });
+            SafeHandleCache<SafePasswordHandle>.GetInvalidHandle(() =>
+            {
+                var handle = new SafePasswordHandle((string?)null);
+                handle.handle = (IntPtr)(-1);
+                return handle;
+            });
     }
 }

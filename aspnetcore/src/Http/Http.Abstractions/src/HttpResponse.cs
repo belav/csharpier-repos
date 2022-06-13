@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Http;
 /// </summary>
 public abstract class HttpResponse
 {
-    private static readonly Func<object, Task> _callbackDelegate = callback => ((Func<Task>)callback)();
+    private static readonly Func<object, Task> _callbackDelegate = callback =>
+        ((Func<Task>)callback)();
     private static readonly Func<object, Task> _disposeDelegate = state =>
     {
         // Prefer async dispose over dispose
@@ -49,7 +50,10 @@ public abstract class HttpResponse
     /// Gets the response body <see cref="PipeWriter"/>
     /// </summary>
     /// <value>The response body <see cref="PipeWriter"/>.</value>
-    public virtual PipeWriter BodyWriter { get => throw new NotImplementedException(); }
+    public virtual PipeWriter BodyWriter
+    {
+        get => throw new NotImplementedException();
+    }
 
     /// <summary>
     /// Gets or sets the value for the <c>Content-Length</c> response header.
@@ -107,19 +111,22 @@ public abstract class HttpResponse
     /// Registers an object for disposal by the host once the request has finished processing.
     /// </summary>
     /// <param name="disposable">The object to be disposed.</param>
-    public virtual void RegisterForDispose(IDisposable disposable) => OnCompleted(_disposeDelegate, disposable);
+    public virtual void RegisterForDispose(IDisposable disposable) =>
+        OnCompleted(_disposeDelegate, disposable);
 
     /// <summary>
     /// Registers an object for asynchronous disposal by the host once the request has finished processing.
     /// </summary>
     /// <param name="disposable">The object to be disposed asynchronously.</param>
-    public virtual void RegisterForDisposeAsync(IAsyncDisposable disposable) => OnCompleted(_disposeDelegate, disposable);
+    public virtual void RegisterForDisposeAsync(IAsyncDisposable disposable) =>
+        OnCompleted(_disposeDelegate, disposable);
 
     /// <summary>
     /// Adds a delegate to be invoked after the response has finished being sent to the client.
     /// </summary>
     /// <param name="callback">The delegate to invoke.</param>
-    public virtual void OnCompleted(Func<Task> callback) => OnCompleted(_callbackDelegate, callback);
+    public virtual void OnCompleted(Func<Task> callback) =>
+        OnCompleted(_callbackDelegate, callback);
 
     /// <summary>
     /// Returns a temporary redirect response (HTTP 302) to the client.
@@ -140,12 +147,18 @@ public abstract class HttpResponse
     /// Starts the response by calling OnStarting() and making headers unmodifiable.
     /// </summary>
     /// <param name="cancellationToken"></param>
-    public virtual Task StartAsync(CancellationToken cancellationToken = default) { throw new NotImplementedException(); }
+    public virtual Task StartAsync(CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
 
     /// <summary>
     /// Flush any remaining response headers, data, or trailers.
     /// This may throw if the response is in an invalid state such as a Content-Length mismatch.
     /// </summary>
     /// <returns></returns>
-    public virtual Task CompleteAsync() { throw new NotImplementedException(); }
+    public virtual Task CompleteAsync()
+    {
+        throw new NotImplementedException();
+    }
 }

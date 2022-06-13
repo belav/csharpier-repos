@@ -7,13 +7,12 @@ public class ManyToManyTrackingProxySqlServerTest
     : ManyToManyTrackingSqlServerTestBase<ManyToManyTrackingProxySqlServerTest.ManyToManyTrackingProxySqlServerFixture>
 {
     public ManyToManyTrackingProxySqlServerTest(ManyToManyTrackingProxySqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public override Task Can_insert_many_to_many_shared_with_payload(bool async)
         // Mutable properties aren't proxyable on Dictionary
-        => Task.CompletedTask;
+        =>
+        Task.CompletedTask;
 
     public override void Can_update_many_to_many_shared_with_payload()
     {
@@ -25,18 +24,17 @@ public class ManyToManyTrackingProxySqlServerTest
         // Mutable properties aren't proxyable on Dictionary
     }
 
-    protected override bool RequiresDetectChanges
-        => false;
+    protected override bool RequiresDetectChanges => false;
 
     public class ManyToManyTrackingProxySqlServerFixture : ManyToManyTrackingSqlServerFixtureBase
     {
         protected override string StoreName { get; } = "ManyToManyTrackingProxies";
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).UseChangeTrackingProxies();
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder).UseChangeTrackingProxies();
 
-        protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-            => base.AddServices(serviceCollection.AddEntityFrameworkProxies());
+        protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+            base.AddServices(serviceCollection.AddEntityFrameworkProxies());
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

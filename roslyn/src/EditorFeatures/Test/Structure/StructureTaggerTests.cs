@@ -30,10 +30,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
         public async Task CSharpOutliningTagger(
             bool collapseRegionsWhenCollapsingToDefinitions,
             bool showBlockStructureGuidesForDeclarationLevelConstructs,
-            bool showBlockStructureGuidesForCodeLevelConstructs)
+            bool showBlockStructureGuidesForCodeLevelConstructs
+        )
         {
             var code =
-@"using System;
+                @"using System;
 namespace MyNamespace
 {
 #region MyRegion
@@ -52,26 +53,56 @@ namespace MyNamespace
 #endregion
 }";
 
-            using var workspace = TestWorkspace.CreateCSharp(code, composition: EditorTestCompositions.EditorFeaturesWpf);
+            using var workspace = TestWorkspace.CreateCSharp(
+                code,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             var globalOptions = workspace.GlobalOptions;
 
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.CollapseRegionsWhenCollapsingToDefinitions, LanguageNames.CSharp), collapseRegionsWhenCollapsingToDefinitions);
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.ShowBlockStructureGuidesForDeclarationLevelConstructs, LanguageNames.CSharp), showBlockStructureGuidesForDeclarationLevelConstructs);
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.ShowBlockStructureGuidesForCodeLevelConstructs, LanguageNames.CSharp), showBlockStructureGuidesForCodeLevelConstructs);
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.CollapseRegionsWhenCollapsingToDefinitions,
+                    LanguageNames.CSharp
+                ),
+                collapseRegionsWhenCollapsingToDefinitions
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                    LanguageNames.CSharp
+                ),
+                showBlockStructureGuidesForDeclarationLevelConstructs
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.ShowBlockStructureGuidesForCodeLevelConstructs,
+                    LanguageNames.CSharp
+                ),
+                showBlockStructureGuidesForCodeLevelConstructs
+            );
 
             var tags = await GetTagsFromWorkspaceAsync(workspace);
 
-            Assert.Collection(tags,
+            Assert.Collection(
+                tags,
                 namespaceTag =>
                 {
                     Assert.False(namespaceTag.IsImplementation);
                     Assert.Equal(17, GetCollapsedHintLineCount(namespaceTag));
-                    Assert.Equal(showBlockStructureGuidesForDeclarationLevelConstructs ? PredefinedStructureTagTypes.Namespace : PredefinedStructureTagTypes.Nonstructural, namespaceTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForDeclarationLevelConstructs
+                            ? PredefinedStructureTagTypes.Namespace
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        namespaceTag.Type
+                    );
                     Assert.Equal("namespace MyNamespace", GetHeaderText(namespaceTag));
                 },
                 regionTag =>
                 {
-                    Assert.Equal(collapseRegionsWhenCollapsingToDefinitions, regionTag.IsImplementation);
+                    Assert.Equal(
+                        collapseRegionsWhenCollapsingToDefinitions,
+                        regionTag.IsImplementation
+                    );
                     Assert.Equal(14, GetCollapsedHintLineCount(regionTag));
                     Assert.Equal(PredefinedStructureTagTypes.Nonstructural, regionTag.Type);
                     Assert.Equal("#region MyRegion", GetHeaderText(regionTag));
@@ -80,23 +111,39 @@ namespace MyNamespace
                 {
                     Assert.False(classTag.IsImplementation);
                     Assert.Equal(12, GetCollapsedHintLineCount(classTag));
-                    Assert.Equal(showBlockStructureGuidesForDeclarationLevelConstructs ? PredefinedStructureTagTypes.Type : PredefinedStructureTagTypes.Nonstructural, classTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForDeclarationLevelConstructs
+                            ? PredefinedStructureTagTypes.Type
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        classTag.Type
+                    );
                     Assert.Equal("public class MyClass", GetHeaderText(classTag));
                 },
                 methodTag =>
                 {
                     Assert.True(methodTag.IsImplementation);
                     Assert.Equal(9, GetCollapsedHintLineCount(methodTag));
-                    Assert.Equal(showBlockStructureGuidesForDeclarationLevelConstructs ? PredefinedStructureTagTypes.Member : PredefinedStructureTagTypes.Nonstructural, methodTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForDeclarationLevelConstructs
+                            ? PredefinedStructureTagTypes.Member
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        methodTag.Type
+                    );
                     Assert.Equal("static void Main(string[] args)", GetHeaderText(methodTag));
                 },
                 ifTag =>
                 {
                     Assert.False(ifTag.IsImplementation);
                     Assert.Equal(4, GetCollapsedHintLineCount(ifTag));
-                    Assert.Equal(showBlockStructureGuidesForCodeLevelConstructs ? PredefinedStructureTagTypes.Conditional : PredefinedStructureTagTypes.Nonstructural, ifTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForCodeLevelConstructs
+                            ? PredefinedStructureTagTypes.Conditional
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        ifTag.Type
+                    );
                     Assert.Equal("if (false)", GetHeaderText(ifTag));
-                });
+                }
+            );
         }
 
         [WpfTheory, Trait(Traits.Feature, Traits.Features.Outlining)]
@@ -104,10 +151,11 @@ namespace MyNamespace
         public async Task CSharpImportsFileScopedNamespaceTest(
             bool collapseRegionsWhenCollapsingToDefinitions,
             bool showBlockStructureGuidesForDeclarationLevelConstructs,
-            bool showBlockStructureGuidesForCodeLevelConstructs)
+            bool showBlockStructureGuidesForCodeLevelConstructs
+        )
         {
             var code =
-@"
+                @"
 namespace Foo;
 
 using System;
@@ -118,28 +166,61 @@ public class Bar
 }
 ";
 
-            using var workspace = TestWorkspace.CreateCSharp(code, composition: EditorTestCompositions.EditorFeaturesWpf);
+            using var workspace = TestWorkspace.CreateCSharp(
+                code,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             var globalOptions = workspace.GlobalOptions;
 
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.CollapseRegionsWhenCollapsingToDefinitions, LanguageNames.CSharp), collapseRegionsWhenCollapsingToDefinitions);
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.ShowBlockStructureGuidesForDeclarationLevelConstructs, LanguageNames.CSharp), showBlockStructureGuidesForDeclarationLevelConstructs);
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.ShowBlockStructureGuidesForCodeLevelConstructs, LanguageNames.CSharp), showBlockStructureGuidesForCodeLevelConstructs);
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.CollapseRegionsWhenCollapsingToDefinitions,
+                    LanguageNames.CSharp
+                ),
+                collapseRegionsWhenCollapsingToDefinitions
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                    LanguageNames.CSharp
+                ),
+                showBlockStructureGuidesForDeclarationLevelConstructs
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.ShowBlockStructureGuidesForCodeLevelConstructs,
+                    LanguageNames.CSharp
+                ),
+                showBlockStructureGuidesForCodeLevelConstructs
+            );
 
             var tags = await GetTagsFromWorkspaceAsync(workspace);
 
-            Assert.Collection(tags,
+            Assert.Collection(
+                tags,
                 importsTag =>
                 {
                     Assert.Equal(2, GetCollapsedHintLineCount(importsTag));
-                    Assert.Equal(showBlockStructureGuidesForDeclarationLevelConstructs ? PredefinedStructureTagTypes.Imports : PredefinedStructureTagTypes.Nonstructural, importsTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForDeclarationLevelConstructs
+                            ? PredefinedStructureTagTypes.Imports
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        importsTag.Type
+                    );
                     Assert.Equal("using ", GetHeaderText(importsTag));
                 },
                 classTag =>
                 {
                     Assert.Equal(4, GetCollapsedHintLineCount(classTag));
-                    Assert.Equal(showBlockStructureGuidesForDeclarationLevelConstructs ? PredefinedStructureTagTypes.Type : PredefinedStructureTagTypes.Nonstructural, classTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForDeclarationLevelConstructs
+                            ? PredefinedStructureTagTypes.Type
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        classTag.Type
+                    );
                     Assert.Equal("public class Bar", GetHeaderText(classTag));
-                });
+                }
+            );
         }
 
         [WpfTheory, Trait(Traits.Feature, Traits.Features.Outlining)]
@@ -148,10 +229,11 @@ public class Bar
             bool collapseRegionsWhenCollapsingToDefinitions,
             bool showBlockStructureGuidesForDeclarationLevelConstructs,
             bool showBlockStructureGuidesForCodeLevelConstructs,
-            bool showBlockStructureGuidesForCommentsAndPreprocessorRegions)
+            bool showBlockStructureGuidesForCommentsAndPreprocessorRegions
+        )
         {
             var code =
-@"
+                @"
 namespace Foo;
 /// <summary>
 /// 
@@ -163,29 +245,68 @@ public class Bar
 }
 ";
 
-            using var workspace = TestWorkspace.CreateCSharp(code, composition: EditorTestCompositions.EditorFeaturesWpf);
+            using var workspace = TestWorkspace.CreateCSharp(
+                code,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             var globalOptions = workspace.GlobalOptions;
 
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.CollapseRegionsWhenCollapsingToDefinitions, LanguageNames.CSharp), collapseRegionsWhenCollapsingToDefinitions);
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.ShowBlockStructureGuidesForDeclarationLevelConstructs, LanguageNames.CSharp), showBlockStructureGuidesForDeclarationLevelConstructs);
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.ShowBlockStructureGuidesForCodeLevelConstructs, LanguageNames.CSharp), showBlockStructureGuidesForCodeLevelConstructs);
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions, LanguageNames.CSharp), showBlockStructureGuidesForCommentsAndPreprocessorRegions);
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.CollapseRegionsWhenCollapsingToDefinitions,
+                    LanguageNames.CSharp
+                ),
+                collapseRegionsWhenCollapsingToDefinitions
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                    LanguageNames.CSharp
+                ),
+                showBlockStructureGuidesForDeclarationLevelConstructs
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.ShowBlockStructureGuidesForCodeLevelConstructs,
+                    LanguageNames.CSharp
+                ),
+                showBlockStructureGuidesForCodeLevelConstructs
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.ShowBlockStructureGuidesForCommentsAndPreprocessorRegions,
+                    LanguageNames.CSharp
+                ),
+                showBlockStructureGuidesForCommentsAndPreprocessorRegions
+            );
 
             var tags = await GetTagsFromWorkspaceAsync(workspace);
 
-            Assert.Collection(tags,
+            Assert.Collection(
+                tags,
                 commentsTag =>
                 {
                     Assert.Equal(3, GetCollapsedHintLineCount(commentsTag));
-                    Assert.Equal(showBlockStructureGuidesForCommentsAndPreprocessorRegions ? PredefinedStructureTagTypes.Comment : PredefinedStructureTagTypes.Nonstructural, commentsTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForCommentsAndPreprocessorRegions
+                            ? PredefinedStructureTagTypes.Comment
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        commentsTag.Type
+                    );
                     Assert.Equal("/// <summary>", GetHeaderText(commentsTag));
                 },
                 classTag =>
                 {
                     Assert.Equal(4, GetCollapsedHintLineCount(classTag));
-                    Assert.Equal(showBlockStructureGuidesForDeclarationLevelConstructs ? PredefinedStructureTagTypes.Type : PredefinedStructureTagTypes.Nonstructural, classTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForDeclarationLevelConstructs
+                            ? PredefinedStructureTagTypes.Type
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        classTag.Type
+                    );
                     Assert.Equal("public class Bar", GetHeaderText(classTag));
-                });
+                }
+            );
         }
 
         [WpfTheory, Trait(Traits.Feature, Traits.Features.Outlining)]
@@ -193,10 +314,11 @@ public class Bar
         public async Task CSharpImportsNormalNamespaceTest(
             bool collapseRegionsWhenCollapsingToDefinitions,
             bool showBlockStructureGuidesForDeclarationLevelConstructs,
-            bool showBlockStructureGuidesForCodeLevelConstructs)
+            bool showBlockStructureGuidesForCodeLevelConstructs
+        )
         {
             var code =
-@"
+                @"
 namespace Foo
 {
     using System;
@@ -208,34 +330,72 @@ namespace Foo
 }
 ";
 
-            using var workspace = TestWorkspace.CreateCSharp(code, composition: EditorTestCompositions.EditorFeaturesWpf);
+            using var workspace = TestWorkspace.CreateCSharp(
+                code,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             var globalOptions = workspace.GlobalOptions;
 
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.CollapseRegionsWhenCollapsingToDefinitions, LanguageNames.CSharp), collapseRegionsWhenCollapsingToDefinitions);
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.ShowBlockStructureGuidesForDeclarationLevelConstructs, LanguageNames.CSharp), showBlockStructureGuidesForDeclarationLevelConstructs);
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.ShowBlockStructureGuidesForCodeLevelConstructs, LanguageNames.CSharp), showBlockStructureGuidesForCodeLevelConstructs);
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.CollapseRegionsWhenCollapsingToDefinitions,
+                    LanguageNames.CSharp
+                ),
+                collapseRegionsWhenCollapsingToDefinitions
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                    LanguageNames.CSharp
+                ),
+                showBlockStructureGuidesForDeclarationLevelConstructs
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.ShowBlockStructureGuidesForCodeLevelConstructs,
+                    LanguageNames.CSharp
+                ),
+                showBlockStructureGuidesForCodeLevelConstructs
+            );
 
             var tags = await GetTagsFromWorkspaceAsync(workspace);
 
-            Assert.Collection(tags,
+            Assert.Collection(
+                tags,
                 namespaceTag =>
                 {
                     Assert.Equal(9, GetCollapsedHintLineCount(namespaceTag));
-                    Assert.Equal(showBlockStructureGuidesForDeclarationLevelConstructs ? PredefinedStructureTagTypes.Namespace : PredefinedStructureTagTypes.Nonstructural, namespaceTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForDeclarationLevelConstructs
+                            ? PredefinedStructureTagTypes.Namespace
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        namespaceTag.Type
+                    );
                     Assert.Equal("namespace Foo", GetHeaderText(namespaceTag));
                 },
                 importsTag =>
                 {
                     Assert.Equal(2, GetCollapsedHintLineCount(importsTag));
-                    Assert.Equal(showBlockStructureGuidesForDeclarationLevelConstructs ? PredefinedStructureTagTypes.Imports : PredefinedStructureTagTypes.Nonstructural, importsTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForDeclarationLevelConstructs
+                            ? PredefinedStructureTagTypes.Imports
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        importsTag.Type
+                    );
                     Assert.Equal("using ", GetHeaderText(importsTag));
                 },
                 classTag =>
                 {
                     Assert.Equal(4, GetCollapsedHintLineCount(classTag));
-                    Assert.Equal(showBlockStructureGuidesForDeclarationLevelConstructs ? PredefinedStructureTagTypes.Type : PredefinedStructureTagTypes.Nonstructural, classTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForDeclarationLevelConstructs
+                            ? PredefinedStructureTagTypes.Type
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        classTag.Type
+                    );
                     Assert.Equal("public class Bar", GetHeaderText(classTag));
-                });
+                }
+            );
         }
 
         [WpfTheory, Trait(Traits.Feature, Traits.Features.Outlining)]
@@ -243,9 +403,11 @@ namespace Foo
         public async Task VisualBasicOutliningTagger(
             bool collapseRegionsWhenCollapsingToDefinitions,
             bool showBlockStructureGuidesForDeclarationLevelConstructs,
-            bool showBlockStructureGuidesForCodeLevelConstructs)
+            bool showBlockStructureGuidesForCodeLevelConstructs
+        )
         {
-            var code = @"Imports System
+            var code =
+                @"Imports System
 Namespace MyNamespace
 #Region ""MyRegion""
     Module M
@@ -260,26 +422,56 @@ Namespace MyNamespace
 #End Region
 End Namespace";
 
-            using var workspace = TestWorkspace.CreateVisualBasic(code, composition: EditorTestCompositions.EditorFeaturesWpf);
+            using var workspace = TestWorkspace.CreateVisualBasic(
+                code,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             var globalOptions = workspace.GlobalOptions;
 
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.CollapseRegionsWhenCollapsingToDefinitions, LanguageNames.VisualBasic), collapseRegionsWhenCollapsingToDefinitions);
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.ShowBlockStructureGuidesForDeclarationLevelConstructs, LanguageNames.VisualBasic), showBlockStructureGuidesForDeclarationLevelConstructs);
-            globalOptions.SetGlobalOption(new OptionKey(BlockStructureOptionsStorage.ShowBlockStructureGuidesForCodeLevelConstructs, LanguageNames.VisualBasic), showBlockStructureGuidesForCodeLevelConstructs);
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.CollapseRegionsWhenCollapsingToDefinitions,
+                    LanguageNames.VisualBasic
+                ),
+                collapseRegionsWhenCollapsingToDefinitions
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.ShowBlockStructureGuidesForDeclarationLevelConstructs,
+                    LanguageNames.VisualBasic
+                ),
+                showBlockStructureGuidesForDeclarationLevelConstructs
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    BlockStructureOptionsStorage.ShowBlockStructureGuidesForCodeLevelConstructs,
+                    LanguageNames.VisualBasic
+                ),
+                showBlockStructureGuidesForCodeLevelConstructs
+            );
 
             var tags = await GetTagsFromWorkspaceAsync(workspace);
 
-            Assert.Collection(tags,
+            Assert.Collection(
+                tags,
                 namespaceTag =>
                 {
                     Assert.False(namespaceTag.IsImplementation);
                     Assert.Equal(13, GetCollapsedHintLineCount(namespaceTag));
-                    Assert.Equal(showBlockStructureGuidesForDeclarationLevelConstructs ? PredefinedStructureTagTypes.Namespace : PredefinedStructureTagTypes.Nonstructural, namespaceTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForDeclarationLevelConstructs
+                            ? PredefinedStructureTagTypes.Namespace
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        namespaceTag.Type
+                    );
                     Assert.Equal("Namespace MyNamespace", GetHeaderText(namespaceTag));
                 },
                 regionTag =>
                 {
-                    Assert.Equal(collapseRegionsWhenCollapsingToDefinitions, regionTag.IsImplementation);
+                    Assert.Equal(
+                        collapseRegionsWhenCollapsingToDefinitions,
+                        regionTag.IsImplementation
+                    );
                     Assert.Equal(11, GetCollapsedHintLineCount(regionTag));
                     Assert.Equal(PredefinedStructureTagTypes.Nonstructural, regionTag.Type);
                     Assert.Equal(@"#Region ""MyRegion""", GetHeaderText(regionTag));
@@ -288,54 +480,81 @@ End Namespace";
                 {
                     Assert.False(moduleTag.IsImplementation);
                     Assert.Equal(9, GetCollapsedHintLineCount(moduleTag));
-                    Assert.Equal(showBlockStructureGuidesForDeclarationLevelConstructs ? PredefinedStructureTagTypes.Type : PredefinedStructureTagTypes.Nonstructural, moduleTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForDeclarationLevelConstructs
+                            ? PredefinedStructureTagTypes.Type
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        moduleTag.Type
+                    );
                     Assert.Equal("Module M", GetHeaderText(moduleTag));
                 },
                 methodTag =>
                 {
                     Assert.True(methodTag.IsImplementation);
                     Assert.Equal(7, GetCollapsedHintLineCount(methodTag));
-                    Assert.Equal(showBlockStructureGuidesForDeclarationLevelConstructs ? PredefinedStructureTagTypes.Member : PredefinedStructureTagTypes.Nonstructural, methodTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForDeclarationLevelConstructs
+                            ? PredefinedStructureTagTypes.Member
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        methodTag.Type
+                    );
                     Assert.Equal("Sub Main(args As String())", GetHeaderText(methodTag));
                 },
                 ifTag =>
                 {
                     Assert.False(ifTag.IsImplementation);
                     Assert.Equal(3, GetCollapsedHintLineCount(ifTag));
-                    Assert.Equal(showBlockStructureGuidesForCodeLevelConstructs ? PredefinedStructureTagTypes.Conditional : PredefinedStructureTagTypes.Nonstructural, ifTag.Type);
+                    Assert.Equal(
+                        showBlockStructureGuidesForCodeLevelConstructs
+                            ? PredefinedStructureTagTypes.Conditional
+                            : PredefinedStructureTagTypes.Nonstructural,
+                        ifTag.Type
+                    );
                     Assert.Equal("If False Then", GetHeaderText(ifTag));
-                });
-
+                }
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task OutliningTaggerTooltipText()
         {
-            var code = @"Module Module1
+            var code =
+                @"Module Module1
     Sub Main(args As String())
     End Sub
 End Module";
 
-            using var workspace = TestWorkspace.CreateVisualBasic(code, composition: EditorTestCompositions.EditorFeaturesWpf);
+            using var workspace = TestWorkspace.CreateVisualBasic(
+                code,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             var tags = await GetTagsFromWorkspaceAsync(workspace);
 
-            var hints = tags.Select(x => x.GetCollapsedHintForm()).Cast<ViewHostingControl>().ToArray();
+            var hints = tags.Select(x => x.GetCollapsedHintForm())
+                .Cast<ViewHostingControl>()
+                .ToArray();
             Assert.Equal("Sub Main(args As String())\r\nEnd Sub", hints[1].GetText_TestOnly()); // method
             hints.Do(v => v.TextView_TestOnly.Close());
         }
 
-        private static async Task<List<IStructureTag>> GetTagsFromWorkspaceAsync(TestWorkspace workspace)
+        private static async Task<List<IStructureTag>> GetTagsFromWorkspaceAsync(
+            TestWorkspace workspace
+        )
         {
             var hostdoc = workspace.Documents.First();
             var view = hostdoc.GetTextView();
 
-            var provider = workspace.ExportProvider.GetExportedValue<AbstractStructureTaggerProvider>();
+            var provider =
+                workspace.ExportProvider.GetExportedValue<AbstractStructureTaggerProvider>();
 
             var document = workspace.CurrentSolution.GetDocument(hostdoc.Id);
             var context = new TaggerContext<IStructureTag>(document, view.TextSnapshot);
             await provider.GetTestAccessor().ProduceTagsAsync(context);
 
-            return context.tagSpans.Select(x => x.Tag).OrderBy(t => t.OutliningSpan.Value.Start).ToList();
+            return context.tagSpans
+                .Select(x => x.Tag)
+                .OrderBy(t => t.OutliningSpan.Value.Start)
+                .ToList();
         }
 
         private static string GetHeaderText(IStructureTag namespaceTag)

@@ -22,47 +22,57 @@ namespace DebuggerTests;
 
 internal class ChromeProvider : WasmHostProvider
 {
-    static readonly Regex s_parseConnection = new (@"listening on (ws?s://[^\s]*)");
+    static readonly Regex s_parseConnection = new(@"listening on (ws?s://[^\s]*)");
     private WebSocket? _ideWebSocket;
     private DebuggerProxy? _debuggerProxy;
-    private static readonly Lazy<string> s_browserPath = new(() =>
-    {
-        string artifactsBinDir = Path.Combine(Path.GetDirectoryName(typeof(ChromeProvider).Assembly.Location)!, "..", "..", "..");
-        return BrowserLocator.FindChrome(artifactsBinDir, "BROWSER_PATH_FOR_TESTS");
-    });
+    private static readonly Lazy<string> s_browserPath =
+        new(() =>
+        {
+            string artifactsBinDir = Path.Combine(
+                Path.GetDirectoryName(typeof(ChromeProvider).Assembly.Location)!,
+                "..",
+                "..",
+                ".."
+            );
+            return BrowserLocator.FindChrome(artifactsBinDir, "BROWSER_PATH_FOR_TESTS");
+        });
 
-    public ChromeProvider(string id, ILogger logger) : base(id, logger)
-    {
-    }
+    public ChromeProvider(string id, ILogger logger) : base(id, logger) { }
 
-    public async Task StartBrowserAndProxyAsync(HttpContext context,
-                                                string targetUrl,
-                                                int remoteDebuggingPort,
-                                                string messagePrefix,
-                                                ILoggerFactory loggerFactory,
-                                                CancellationTokenSource cts,
-                                                int browserReadyTimeoutMs = 20000)
+    public async Task StartBrowserAndProxyAsync(
+        HttpContext context,
+        string targetUrl,
+        int remoteDebuggingPort,
+        string messagePrefix,
+        ILoggerFactory loggerFactory,
+        CancellationTokenSource cts,
+        int browserReadyTimeoutMs = 20000
+    )
     {
         string? line;
         try
         {
-            ProcessStartInfo psi = GetProcessStartInfo(s_browserPath.Value, GetInitParms(remoteDebuggingPort), targetUrl);
+            ProcessStartInfo psi = GetProcessStartInfo(
+                s_browserPath.Value,
+                GetInitParms(remoteDebuggingPort),
+                targetUrl
+            );
             line = await LaunchHostAsync(
-                                    psi,
-                                    context,
-                                    str =>
-                                    {
-                                        if (string.IsNullOrEmpty(str))
-                                            return null;
+                    psi,
+                    context,
+                    str =>
+                    {
+                        if (string.IsNullOrEmpty(str))
+                            return null;
 
-                                        Match match = s_parseConnection.Match(str);
-                                        return match.Success
-                                                    ? match.Groups[1].Captures[0].Value
-                                                    : null;
-                                    },
-                                    messagePrefix,
-                                    browserReadyTimeoutMs,
-                                    cts.Token).ConfigureAwait(false);
+                        Match match = s_parseConnection.Match(str);
+                        return match.Success ? match.Groups[1].Captures[0].Value : null;
+                    },
+                    messagePrefix,
+                    browserReadyTimeoutMs,
+                    cts.Token
+                )
+                .ConfigureAwait(false);
 
             if (_process is null || line is null)
                 throw new Exception($"Failed to launch chrome");
@@ -80,7 +90,9 @@ internal class ChromeProvider : WasmHostProvider
         _debuggerProxy = new DebuggerProxy(loggerFactory, null, loggerId: Id);
         TestHarnessProxy.RegisterNewProxy(Id, _debuggerProxy);
         var browserUri = new Uri(con_str);
-        WebSocket? ideSocket = await context.WebSockets.AcceptWebSocketAsync().ConfigureAwait(false);
+        WebSocket? ideSocket = await context.WebSockets
+            .AcceptWebSocketAsync()
+            .ConfigureAwait(false);
         await _debuggerProxy.Run(browserUri, ideSocket, cts).ConfigureAwait(false);
     }
 
@@ -104,7 +116,7 @@ internal class ChromeProvider : WasmHostProvider
         _isDisposing = false;
     }
 
-    private async Task<string> ExtractConnUrl (string str, ILogger logger)
+    private async Task<string> ExtractConnUrl(string str, ILogger logger)
     {
         var client = new HttpClient();
         var start = DateTime.Now;
@@ -132,7 +144,8 @@ internal class ChromeProvider : WasmHostProvider
             var elapsed = DateTime.Now - start;
             if (elapsed.Milliseconds > 5000)
             {
-                string message = $"Unable to get DevTools /json/list response in {elapsed.Seconds} seconds, stopping";
+                string message =
+                    $"Unable to get DevTools /json/list response in {elapsed.Seconds} seconds, stopping";
                 logger.LogError(message);
                 throw new Exception(message);
             }
@@ -149,14 +162,13 @@ internal class ChromeProvider : WasmHostProvider
 
     private static string GetInitParms(int port)
     {
-        string str = $"--headless --disable-gpu --lang=en-US --incognito --remote-debugging-port={port}";
+        string str =
+            $"--headless --disable-gpu --lang=en-US --incognito --remote-debugging-port={port}";
         if (File.Exists("/.dockerenv"))
         {
-            Console.WriteLine ("Detected a container, disabling sandboxing for debugger tests.");
+            Console.WriteLine("Detected a container, disabling sandboxing for debugger tests.");
             str = "--no-sandbox " + str;
         }
         return str;
     }
-
-
 }

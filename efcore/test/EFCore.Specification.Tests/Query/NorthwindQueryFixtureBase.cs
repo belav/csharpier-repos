@@ -5,16 +5,15 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreFixtureBase<NorthwindContext>, IFilteredQueryFixtureBase
-    where TModelCustomizer : IModelCustomizer, new()
+public abstract class NorthwindQueryFixtureBase<TModelCustomizer>
+    : SharedStoreFixtureBase<NorthwindContext>,
+        IFilteredQueryFixtureBase where TModelCustomizer : IModelCustomizer, new()
 {
-    public Func<DbContext> GetContextCreator()
-        => () => CreateContext();
+    public Func<DbContext> GetContextCreator() => () => CreateContext();
 
     private readonly Dictionary<(bool, string, string), ISetSource> _expectedDataCache = new();
 
-    public virtual ISetSource GetExpectedData()
-        => new NorthwindData();
+    public virtual ISetSource GetExpectedData() => new NorthwindData();
 
     public virtual ISetSource GetFilteredExpectedData(DbContext context)
     {
@@ -22,7 +21,12 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
         var tenantPrefix = applyFilters ? ((NorthwindContext)context).TenantPrefix : null;
         var searchTerm = applyFilters ? ((NorthwindContext)context).SearchTerm : null;
 
-        if (_expectedDataCache.TryGetValue((applyFilters, tenantPrefix, searchTerm), out var cachedResult))
+        if (
+            _expectedDataCache.TryGetValue(
+                (applyFilters, tenantPrefix, searchTerm),
+                out var cachedResult
+            )
+        )
         {
             return cachedResult;
         }
@@ -30,14 +34,22 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
         var expectedData = new NorthwindData();
         if (applyFilters)
         {
-            var customers = expectedData.Customers.Where(c => c.CompanyName.StartsWith(tenantPrefix)).ToArray();
+            var customers = expectedData.Customers
+                .Where(c => c.CompanyName.StartsWith(tenantPrefix))
+                .ToArray();
             var customerQueriesWithQueryFilter = expectedData.CustomerQueriesWithQueryFilter
-                .Where(cq => cq.CompanyName.StartsWith(searchTerm)).ToArray();
+                .Where(cq => cq.CompanyName.StartsWith(searchTerm))
+                .ToArray();
             var employees = expectedData.Employees.Where(e => e.Address.StartsWith("A")).ToArray();
             var products = expectedData.Products.Where(p => p.Discontinued).ToArray();
-            var orders = expectedData.Orders.Where(o => o.Customer.CompanyName.StartsWith(tenantPrefix)).ToArray();
+            var orders = expectedData.Orders
+                .Where(o => o.Customer.CompanyName.StartsWith(tenantPrefix))
+                .ToArray();
             var orderDetails = expectedData.OrderDetails
-                .Where(od => od.Order.Customer.CompanyName.StartsWith(tenantPrefix) && od.Quantity > 50).ToArray();
+                .Where(
+                    od => od.Order.Customer.CompanyName.StartsWith(tenantPrefix) && od.Quantity > 50
+                )
+                .ToArray();
 
             foreach (var product in products)
             {
@@ -51,7 +63,9 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
 
             foreach (var orderDetail in orderDetails)
             {
-                orderDetail.Order = orderDetail.Order.Customer.CompanyName.StartsWith(tenantPrefix) ? orderDetail.Order : null;
+                orderDetail.Order = orderDetail.Order.Customer.CompanyName.StartsWith(tenantPrefix)
+                    ? orderDetail.Order
+                    : null;
                 orderDetail.Product = orderDetail.Product.Discontinued ? orderDetail.Product : null;
             }
 
@@ -63,7 +77,8 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
                 products,
                 expectedData.ProductQueries,
                 orders,
-                orderDetails);
+                orderDetails
+            );
         }
 
         _expectedDataCache[(applyFilters, tenantPrefix, searchTerm)] = expectedData;
@@ -71,26 +86,33 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
         return expectedData;
     }
 
-    public IReadOnlyDictionary<Type, object> GetEntitySorters()
-        => new Dictionary<Type, Func<object, object>>
+    public IReadOnlyDictionary<Type, object> GetEntitySorters() =>
+        new Dictionary<Type, Func<object, object>>
         {
             { typeof(Customer), e => ((Customer)e)?.CustomerID },
             { typeof(CustomerQuery), e => ((CustomerQuery)e)?.CompanyName },
-            { typeof(CustomerQueryWithQueryFilter), e => ((CustomerQueryWithQueryFilter)e)?.CompanyName },
+            {
+                typeof(CustomerQueryWithQueryFilter),
+                e => ((CustomerQueryWithQueryFilter)e)?.CompanyName
+            },
             { typeof(Order), e => ((Order)e)?.OrderID },
             { typeof(OrderQuery), e => ((OrderQuery)e)?.CustomerID },
             { typeof(Employee), e => ((Employee)e)?.EmployeeID },
             { typeof(Product), e => ((Product)e)?.ProductID },
             { typeof(ProductQuery), e => ((ProductQuery)e)?.ProductID },
             { typeof(ProductView), e => ((ProductView)e)?.ProductID },
-            { typeof(OrderDetail), e => (((OrderDetail)e)?.OrderID.ToString(), ((OrderDetail)e)?.ProductID.ToString()) }
+            {
+                typeof(OrderDetail),
+                e => (((OrderDetail)e)?.OrderID.ToString(), ((OrderDetail)e)?.ProductID.ToString())
+            }
         }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-    public IReadOnlyDictionary<Type, object> GetEntityAsserters()
-        => new Dictionary<Type, Action<object, object>>
+    public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
+        new Dictionary<Type, Action<object, object>>
         {
             {
-                typeof(Customer), (e, a) =>
+                typeof(Customer),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -112,7 +134,8 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
                 }
             },
             {
-                typeof(CustomerQuery), (e, a) =>
+                typeof(CustomerQuery),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -130,7 +153,8 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
                 }
             },
             {
-                typeof(CustomerQueryWithQueryFilter), (e, a) =>
+                typeof(CustomerQueryWithQueryFilter),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -146,7 +170,8 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
                 }
             },
             {
-                typeof(Order), (e, a) =>
+                typeof(Order),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -163,7 +188,8 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
                 }
             },
             {
-                typeof(OrderQuery), (e, a) =>
+                typeof(OrderQuery),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -177,7 +203,8 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
                 }
             },
             {
-                typeof(Employee), (e, a) =>
+                typeof(Employee),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -195,7 +222,8 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
                 }
             },
             {
-                typeof(Product), (e, a) =>
+                typeof(Product),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -213,7 +241,8 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
                 }
             },
             {
-                typeof(ProductQuery), (e, a) =>
+                typeof(ProductQuery),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -229,7 +258,8 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
                 }
             },
             {
-                typeof(ProductView), (e, a) =>
+                typeof(ProductView),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -245,7 +275,8 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
                 }
             },
             {
-                typeof(OrderDetail), (e, a) =>
+                typeof(OrderDetail),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -266,24 +297,25 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer> : SharedStoreF
 
     protected override string StoreName { get; } = "Northwind";
 
-    protected override bool UsePooling
-        => typeof(TModelCustomizer) == typeof(NoopModelCustomizer);
+    protected override bool UsePooling => typeof(TModelCustomizer) == typeof(NoopModelCustomizer);
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
-        => new TModelCustomizer().Customize(modelBuilder, context);
+    protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context) =>
+        new TModelCustomizer().Customize(modelBuilder, context);
 
-    protected override void Seed(NorthwindContext context)
-        => NorthwindData.Seed(context);
+    protected override void Seed(NorthwindContext context) => NorthwindData.Seed(context);
 
-    protected override Task SeedAsync(NorthwindContext context)
-        => NorthwindData.SeedAsync(context);
+    protected override Task SeedAsync(NorthwindContext context) => NorthwindData.SeedAsync(context);
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(
-            c => c
-                .Log(CoreEventId.RowLimitingOperationWithoutOrderByWarning)
-                .Log(CoreEventId.FirstWithoutOrderByAndFilterWarning)
-                .Log(CoreEventId.DistinctAfterOrderByWithoutRowLimitingOperatorWarning)
-                .Log(CoreEventId.PossibleUnintendedCollectionNavigationNullComparisonWarning)
-                .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning));
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(
+                c =>
+                    c.Log(CoreEventId.RowLimitingOperationWithoutOrderByWarning)
+                        .Log(CoreEventId.FirstWithoutOrderByAndFilterWarning)
+                        .Log(CoreEventId.DistinctAfterOrderByWithoutRowLimitingOperatorWarning)
+                        .Log(
+                            CoreEventId.PossibleUnintendedCollectionNavigationNullComparisonWarning
+                        )
+                        .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning)
+            );
 }

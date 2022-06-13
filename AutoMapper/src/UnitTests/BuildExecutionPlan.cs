@@ -31,10 +31,11 @@ namespace AutoMapper.UnitTests
             public string CompanyName { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(c =>
-        {
-            c.CreateMap<Model, Dto>().ForMember(d => d.CompanyName, o => o.Ignore());
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(c =>
+            {
+                c.CreateMap<Model, Dto>().ForMember(d => d.CompanyName, o => o.Ignore());
+            });
 
         protected override void Because_of()
         {
@@ -48,7 +49,11 @@ namespace AutoMapper.UnitTests
                 IntValue = 13,
             };
             var plan = Configuration.BuildExecutionPlan(typeof(Model), typeof(Dto));
-            _destination = ((Func<Model, Dto, ResolutionContext, Dto>)plan.Compile())(_source, null, null);
+            _destination = ((Func<Model, Dto, ResolutionContext, Dto>)plan.Compile())(
+                _source,
+                null,
+                null
+            );
         }
 
         [Fact]

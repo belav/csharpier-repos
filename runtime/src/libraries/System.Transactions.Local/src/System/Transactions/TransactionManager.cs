@@ -34,24 +34,27 @@ namespace System.Transactions
             {
                 lock (ClassSyncObject)
                 {
-                    s_distributedTransactionStartedDelegate = (TransactionStartedEventHandler?)System.Delegate.Combine(s_distributedTransactionStartedDelegate, value);
+                    s_distributedTransactionStartedDelegate = (TransactionStartedEventHandler?)
+                        System.Delegate.Combine(s_distributedTransactionStartedDelegate, value);
                     if (value != null)
                     {
                         ProcessExistingTransactions(value);
                     }
                 }
             }
-
             remove
             {
                 lock (ClassSyncObject)
                 {
-                    s_distributedTransactionStartedDelegate = (TransactionStartedEventHandler?)System.Delegate.Remove(s_distributedTransactionStartedDelegate, value);
+                    s_distributedTransactionStartedDelegate = (TransactionStartedEventHandler?)
+                        System.Delegate.Remove(s_distributedTransactionStartedDelegate, value);
                 }
             }
         }
 
-        internal static void ProcessExistingTransactions(TransactionStartedEventHandler eventHandler)
+        internal static void ProcessExistingTransactions(
+            TransactionStartedEventHandler eventHandler
+        )
         {
             lock (PromotedTransactionTable)
             {
@@ -128,11 +131,15 @@ namespace System.Transactions
         public static Enlistment Reenlist(
             Guid resourceManagerIdentifier,
             byte[] recoveryInformation,
-            IEnlistmentNotification enlistmentNotification)
+            IEnlistmentNotification enlistmentNotification
+        )
         {
             if (resourceManagerIdentifier == Guid.Empty)
             {
-                throw new ArgumentException(SR.BadResourceManagerId, nameof(resourceManagerIdentifier));
+                throw new ArgumentException(
+                    SR.BadResourceManagerId,
+                    nameof(resourceManagerIdentifier)
+                );
             }
 
             ArgumentNullException.ThrowIfNull(recoveryInformation);
@@ -161,33 +168,61 @@ namespace System.Transactions
                 {
                     nodeName = reader.ReadString();
 
-                    resourceManagerRecoveryInformation = reader.ReadBytes(recoveryInformation.Length - checked((int)stream.Position));
+                    resourceManagerRecoveryInformation = reader.ReadBytes(
+                        recoveryInformation.Length - checked((int)stream.Position)
+                    );
                 }
                 else
                 {
                     if (etwLog.IsEnabled())
                     {
-                        etwLog.TransactionExceptionTrace(TraceSourceType.TraceSourceBase, TransactionExceptionType.UnrecognizedRecoveryInformation, nameof(recoveryInformation), string.Empty);
+                        etwLog.TransactionExceptionTrace(
+                            TraceSourceType.TraceSourceBase,
+                            TransactionExceptionType.UnrecognizedRecoveryInformation,
+                            nameof(recoveryInformation),
+                            string.Empty
+                        );
                     }
 
-                    throw new ArgumentException(SR.UnrecognizedRecoveryInformation, nameof(recoveryInformation));
+                    throw new ArgumentException(
+                        SR.UnrecognizedRecoveryInformation,
+                        nameof(recoveryInformation)
+                    );
                 }
             }
             catch (EndOfStreamException e)
             {
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.TransactionExceptionTrace(TraceSourceType.TraceSourceBase, TransactionExceptionType.UnrecognizedRecoveryInformation, nameof(recoveryInformation), e.ToString());
+                    etwLog.TransactionExceptionTrace(
+                        TraceSourceType.TraceSourceBase,
+                        TransactionExceptionType.UnrecognizedRecoveryInformation,
+                        nameof(recoveryInformation),
+                        e.ToString()
+                    );
                 }
-                throw new ArgumentException(SR.UnrecognizedRecoveryInformation, nameof(recoveryInformation), e);
+                throw new ArgumentException(
+                    SR.UnrecognizedRecoveryInformation,
+                    nameof(recoveryInformation),
+                    e
+                );
             }
             catch (FormatException e)
             {
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.TransactionExceptionTrace(TraceSourceType.TraceSourceBase, TransactionExceptionType.UnrecognizedRecoveryInformation, nameof(recoveryInformation), e.ToString());
+                    etwLog.TransactionExceptionTrace(
+                        TraceSourceType.TraceSourceBase,
+                        TransactionExceptionType.UnrecognizedRecoveryInformation,
+                        nameof(recoveryInformation),
+                        e.ToString()
+                    );
                 }
-                throw new ArgumentException(SR.UnrecognizedRecoveryInformation, nameof(recoveryInformation), e);
+                throw new ArgumentException(
+                    SR.UnrecognizedRecoveryInformation,
+                    nameof(recoveryInformation),
+                    e
+                );
             }
             finally
             {
@@ -204,7 +239,7 @@ namespace System.Transactions
                     resourceManagerIdentifier,
                     resourceManagerRecoveryInformation,
                     (RecoveringInternalEnlistment)returnValue.InternalEnlistment
-                    );
+                );
 
             if (etwLog.IsEnabled())
             {
@@ -214,12 +249,15 @@ namespace System.Transactions
             return returnValue;
         }
 
-
         private static DistributedTransactionManager CheckTransactionManager(string? nodeName)
         {
             DistributedTransactionManager tm = DistributedTransactionManager;
-            if (!((tm.NodeName == null && (nodeName == null || nodeName.Length == 0)) ||
-                  (tm.NodeName != null && tm.NodeName.Equals(nodeName))))
+            if (
+                !(
+                    (tm.NodeName == null && (nodeName == null || nodeName.Length == 0))
+                    || (tm.NodeName != null && tm.NodeName.Equals(nodeName))
+                )
+            )
             {
                 throw new ArgumentException(SR.InvalidRecoveryInformation, "recoveryInformation");
             }
@@ -230,30 +268,41 @@ namespace System.Transactions
         {
             if (resourceManagerIdentifier == Guid.Empty)
             {
-                throw new ArgumentException(SR.BadResourceManagerId, nameof(resourceManagerIdentifier));
+                throw new ArgumentException(
+                    SR.BadResourceManagerId,
+                    nameof(resourceManagerIdentifier)
+                );
             }
 
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodEnter(TraceSourceType.TraceSourceBase, "TransactionManager.RecoveryComplete");
+                etwLog.MethodEnter(
+                    TraceSourceType.TraceSourceBase,
+                    "TransactionManager.RecoveryComplete"
+                );
                 etwLog.TransactionManagerRecoveryComplete(resourceManagerIdentifier);
             }
 
-            DistributedTransactionManager.ResourceManagerRecoveryComplete(resourceManagerIdentifier);
+            DistributedTransactionManager.ResourceManagerRecoveryComplete(
+                resourceManagerIdentifier
+            );
 
             if (etwLog.IsEnabled())
             {
-                etwLog.MethodExit(TraceSourceType.TraceSourceBase, "TransactionManager.RecoveryComplete");
+                etwLog.MethodExit(
+                    TraceSourceType.TraceSourceBase,
+                    "TransactionManager.RecoveryComplete"
+                );
             }
         }
-
 
         // Object for synchronizing access to the entire class( avoiding lock( typeof( ... )) )
         private static object? s_classSyncObject;
 
         // Helper object for static synchronization
-        private static object ClassSyncObject => LazyInitializer.EnsureInitialized(ref s_classSyncObject);
+        private static object ClassSyncObject =>
+            LazyInitializer.EnsureInitialized(ref s_classSyncObject);
 
         internal static IsolationLevel DefaultIsolationLevel
         {
@@ -262,14 +311,19 @@ namespace System.Transactions
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodEnter(TraceSourceType.TraceSourceBase, "TransactionManager.get_DefaultIsolationLevel");
-                    etwLog.MethodExit(TraceSourceType.TraceSourceBase, "TransactionManager.get_DefaultIsolationLevel");
+                    etwLog.MethodEnter(
+                        TraceSourceType.TraceSourceBase,
+                        "TransactionManager.get_DefaultIsolationLevel"
+                    );
+                    etwLog.MethodExit(
+                        TraceSourceType.TraceSourceBase,
+                        "TransactionManager.get_DefaultIsolationLevel"
+                    );
                 }
 
                 return IsolationLevel.Serializable;
             }
         }
-
 
         private static DefaultSettingsSection? s_defaultSettings;
         private static DefaultSettingsSection DefaultSettings
@@ -284,7 +338,6 @@ namespace System.Transactions
                 return s_defaultSettings;
             }
         }
-
 
         private static MachineSettingsSection? s_machineSettings;
         private static MachineSettingsSection MachineSettings
@@ -309,7 +362,10 @@ namespace System.Transactions
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodEnter(TraceSourceType.TraceSourceBase, "TransactionManager.get_DefaultTimeout");
+                    etwLog.MethodEnter(
+                        TraceSourceType.TraceSourceBase,
+                        "TransactionManager.get_DefaultTimeout"
+                    );
                 }
 
                 if (!s_defaultTimeoutValidated)
@@ -328,12 +384,14 @@ namespace System.Transactions
 
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodExit(TraceSourceType.TraceSourceBase, "TransactionManager.get_DefaultTimeout");
+                    etwLog.MethodExit(
+                        TraceSourceType.TraceSourceBase,
+                        "TransactionManager.get_DefaultTimeout"
+                    );
                 }
                 return s_defaultTimeout;
             }
         }
-
 
         private static bool s_cachedMaxTimeout;
         private static TimeSpan s_maximumTimeout;
@@ -344,14 +402,25 @@ namespace System.Transactions
                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodEnter(TraceSourceType.TraceSourceBase, "TransactionManager.get_DefaultMaximumTimeout");
+                    etwLog.MethodEnter(
+                        TraceSourceType.TraceSourceBase,
+                        "TransactionManager.get_DefaultMaximumTimeout"
+                    );
                 }
 
-                LazyInitializer.EnsureInitialized(ref s_maximumTimeout, ref s_cachedMaxTimeout, ref s_classSyncObject, () => DefaultSettingsSection.Timeout);
+                LazyInitializer.EnsureInitialized(
+                    ref s_maximumTimeout,
+                    ref s_cachedMaxTimeout,
+                    ref s_classSyncObject,
+                    () => DefaultSettingsSection.Timeout
+                );
 
                 if (etwLog.IsEnabled())
                 {
-                    etwLog.MethodExit(TraceSourceType.TraceSourceBase, "TransactionManager.get_DefaultMaximumTimeout");
+                    etwLog.MethodExit(
+                        TraceSourceType.TraceSourceBase,
+                        "TransactionManager.get_DefaultMaximumTimeout"
+                    );
                 }
 
                 return s_maximumTimeout;
@@ -382,7 +451,6 @@ namespace System.Transactions
             }
         }
 
-
         /// <summary>
         /// This static function throws an ArgumentOutOfRange if the specified TimeSpan does not meet
         /// requirements of a valid transaction timeout.  Timeout values must be positive.
@@ -411,14 +479,15 @@ namespace System.Transactions
         internal static Transaction? FindPromotedTransaction(Guid transactionIdentifier)
         {
             Hashtable promotedTransactionTable = PromotedTransactionTable;
-            WeakReference? weakRef = (WeakReference?)promotedTransactionTable[transactionIdentifier];
+            WeakReference? weakRef = (WeakReference?)
+                promotedTransactionTable[transactionIdentifier];
             if (null != weakRef)
             {
                 if (weakRef.Target is Transaction tx)
                 {
                     return tx.InternalClone();
                 }
-                else  // an old, moldy weak reference.  Let's get rid of it.
+                else // an old, moldy weak reference.  Let's get rid of it.
                 {
                     lock (promotedTransactionTable)
                     {
@@ -430,13 +499,17 @@ namespace System.Transactions
             return null;
         }
 
-        internal static Transaction FindOrCreatePromotedTransaction(Guid transactionIdentifier, DistributedTransaction dtx)
+        internal static Transaction FindOrCreatePromotedTransaction(
+            Guid transactionIdentifier,
+            DistributedTransaction dtx
+        )
         {
             Transaction? tx = null;
             Hashtable promotedTransactionTable = PromotedTransactionTable;
             lock (promotedTransactionTable)
             {
-                WeakReference? weakRef = (WeakReference?)promotedTransactionTable[transactionIdentifier];
+                WeakReference? weakRef = (WeakReference?)
+                    promotedTransactionTable[transactionIdentifier];
                 if (null != weakRef)
                 {
                     tx = weakRef.Target as Transaction;
@@ -458,7 +531,10 @@ namespace System.Transactions
                 tx = new Transaction(dtx);
 
                 // Since we are adding this reference to the table create an object that will clean that entry up.
-                tx._internalTransaction._finalizedObject = new FinalizedObject(tx._internalTransaction, dtx.Identifier);
+                tx._internalTransaction._finalizedObject = new FinalizedObject(
+                    tx._internalTransaction,
+                    dtx.Identifier
+                );
 
                 weakRef = new WeakReference(tx, false);
                 promotedTransactionTable[dtx.Identifier] = weakRef;
@@ -472,16 +548,28 @@ namespace System.Transactions
 
         // Table for promoted transactions
         internal static Hashtable PromotedTransactionTable =>
-            LazyInitializer.EnsureInitialized(ref s_promotedTransactionTable, ref s_classSyncObject, () => new Hashtable(100));
+            LazyInitializer.EnsureInitialized(
+                ref s_promotedTransactionTable,
+                ref s_classSyncObject,
+                () => new Hashtable(100)
+            );
 
         // Table for transaction timeouts
         internal static TransactionTable TransactionTable =>
-            LazyInitializer.EnsureInitialized(ref s_transactionTable, ref s_classSyncObject, () => new TransactionTable());
+            LazyInitializer.EnsureInitialized(
+                ref s_transactionTable,
+                ref s_classSyncObject,
+                () => new TransactionTable()
+            );
 
         // Fault in a DistributedTransactionManager if one has not already been created.
         internal static DistributedTransactionManager? distributedTransactionManager;
         internal static DistributedTransactionManager DistributedTransactionManager =>
             // If the distributed transaction manager is not configured, throw an exception
-            LazyInitializer.EnsureInitialized(ref distributedTransactionManager, ref s_classSyncObject, () => new DistributedTransactionManager());
+            LazyInitializer.EnsureInitialized(
+                ref distributedTransactionManager,
+                ref s_classSyncObject,
+                () => new DistributedTransactionManager()
+            );
     }
 }

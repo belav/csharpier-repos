@@ -39,7 +39,9 @@ namespace Internal.Cryptography
                     _hashSizeInBytes = 64;
                     break;
                 default:
-                    throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId));
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
+                    );
             }
         }
 
@@ -68,13 +70,18 @@ namespace Internal.Cryptography
                 srcArray = _buffer.GetBuffer();
                 srcLength = (int)_buffer.Length;
             }
-
             unsafe
             {
                 fixed (byte* src = srcArray)
                 fixed (byte* dest = destination)
                 {
-                    int res = Interop.BrowserCrypto.SimpleDigestHash(_impl, src, srcLength, dest, destination.Length);
+                    int res = Interop.BrowserCrypto.SimpleDigestHash(
+                        _impl,
+                        src,
+                        srcLength,
+                        dest,
+                        destination.Length
+                    );
                     Debug.Assert(res != 0);
                 }
             }
@@ -84,9 +91,7 @@ namespace Internal.Cryptography
 
         public override int HashSizeInBytes => _hashSizeInBytes;
 
-        public override void Dispose(bool disposing)
-        {
-        }
+        public override void Dispose(bool disposing) { }
 
         public override void Reset()
         {

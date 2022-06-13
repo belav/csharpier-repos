@@ -48,52 +48,77 @@ namespace Internal.TypeSystem.Interop
             return !MarshalUtils.IsBlittableType(type);
         }
 
-        internal static TypeDesc GetNativeMethodParameterType(TypeDesc type, MarshalAsDescriptor marshalAs, InteropStateManager interopStateManager, bool isReturn, bool isAnsi)
+        internal static TypeDesc GetNativeMethodParameterType(
+            TypeDesc type,
+            MarshalAsDescriptor marshalAs,
+            InteropStateManager interopStateManager,
+            bool isReturn,
+            bool isAnsi
+        )
         {
             MarshallerKind elementMarshallerKind;
-            MarshallerKind marshallerKind = MarshalHelpers.GetMarshallerKind(type,
-                                                null,   /* parameterIndex */
-                                                null,   /* customModifierData */
-                                                marshalAs,
-                                                isReturn,
-                                                isAnsi,
-                                                MarshallerType.Argument,
-                                                out elementMarshallerKind);
+            MarshallerKind marshallerKind = MarshalHelpers.GetMarshallerKind(
+                type,
+                null, /* parameterIndex */
+                null, /* customModifierData */
+                marshalAs,
+                isReturn,
+                isAnsi,
+                MarshallerType.Argument,
+                out elementMarshallerKind
+            );
 
-            return GetNativeTypeFromMarshallerKind(type,
+            return GetNativeTypeFromMarshallerKind(
+                type,
                 marshallerKind,
                 elementMarshallerKind,
                 interopStateManager,
-                marshalAs);
+                marshalAs
+            );
         }
 
-        internal static TypeDesc GetNativeStructFieldType(TypeDesc type, MarshalAsDescriptor marshalAs, InteropStateManager interopStateManager, bool isAnsi)
+        internal static TypeDesc GetNativeStructFieldType(
+            TypeDesc type,
+            MarshalAsDescriptor marshalAs,
+            InteropStateManager interopStateManager,
+            bool isAnsi
+        )
         {
             MarshallerKind elementMarshallerKind;
-            MarshallerKind marshallerKind = MarshalHelpers.GetMarshallerKind(type,
-                                                null,   /* parameterIndex */
-                                                null,   /* customModifierData */
-                                                marshalAs,
-                                                false,  /*  isReturn */
-                                                isAnsi, /*    isAnsi */
-                                                MarshallerType.Field,
-                                                out elementMarshallerKind);
+            MarshallerKind marshallerKind = MarshalHelpers.GetMarshallerKind(
+                type,
+                null, /* parameterIndex */
+                null, /* customModifierData */
+                marshalAs,
+                false, /*  isReturn */
+                isAnsi, /*    isAnsi */
+                MarshallerType.Field,
+                out elementMarshallerKind
+            );
 
-            return GetNativeTypeFromMarshallerKind(type,
+            return GetNativeTypeFromMarshallerKind(
+                type,
                 marshallerKind,
                 elementMarshallerKind,
                 interopStateManager,
-                marshalAs);
+                marshalAs
+            );
         }
 
-        internal static InlineArrayCandidate GetInlineArrayCandidate(TypeDesc managedElementType, MarshallerKind elementMarshallerKind, InteropStateManager interopStateManager, MarshalAsDescriptor marshalAs)
+        internal static InlineArrayCandidate GetInlineArrayCandidate(
+            TypeDesc managedElementType,
+            MarshallerKind elementMarshallerKind,
+            InteropStateManager interopStateManager,
+            MarshalAsDescriptor marshalAs
+        )
         {
             TypeDesc nativeType = GetNativeTypeFromMarshallerKind(
-                                                managedElementType,
-                                                elementMarshallerKind,
-                                                MarshallerKind.Unknown,
-                                                interopStateManager,
-                                                null);
+                managedElementType,
+                elementMarshallerKind,
+                MarshallerKind.Unknown,
+                interopStateManager,
+                null
+            );
 
             var elementNativeType = nativeType as MetadataType;
             if (elementNativeType == null)
@@ -101,7 +126,8 @@ namespace Internal.TypeSystem.Interop
                 Debug.Assert(nativeType.IsPointer || nativeType.IsFunctionPointer);
 
                 // If it is a pointer type we will create InlineArray for IntPtr
-                elementNativeType = (MetadataType)managedElementType.Context.GetWellKnownType(WellKnownType.IntPtr);
+                elementNativeType = (MetadataType)
+                    managedElementType.Context.GetWellKnownType(WellKnownType.IntPtr);
             }
             Debug.Assert(marshalAs != null && marshalAs.SizeConst.HasValue);
 
@@ -113,7 +139,6 @@ namespace Internal.TypeSystem.Interop
                 size = marshalAs.SizeConst.Value;
             }
             return new InlineArrayCandidate(elementNativeType, size);
-
         }
 
         //TODO: https://github.com/dotnet/corert/issues/2675
@@ -124,16 +149,25 @@ namespace Internal.TypeSystem.Interop
             ILEmitter emitter = new ILEmitter();
 
             TypeSystemContext context = method.Context;
-            MethodSignature ctorSignature = new MethodSignature(0, 0, context.GetWellKnownType(WellKnownType.Void),
-                new TypeDesc[] { context.GetWellKnownType(WellKnownType.String) });
-            MethodDesc exceptionCtor = InteropTypes.GetMarshalDirectiveException(context).GetKnownMethod(".ctor", ctorSignature);
+            MethodSignature ctorSignature = new MethodSignature(
+                0,
+                0,
+                context.GetWellKnownType(WellKnownType.Void),
+                new TypeDesc[] { context.GetWellKnownType(WellKnownType.String) }
+            );
+            MethodDesc exceptionCtor = InteropTypes
+                .GetMarshalDirectiveException(context)
+                .GetKnownMethod(".ctor", ctorSignature);
 
             ILCodeStream codeStream = emitter.NewCodeStream();
             codeStream.Emit(ILOpcode.ldstr, emitter.NewToken(message));
             codeStream.Emit(ILOpcode.newobj, emitter.NewToken(exceptionCtor));
             codeStream.Emit(ILOpcode.throw_);
 
-            return new PInvokeILStubMethodIL((ILStubMethodIL)emitter.Link(method), isStubRequired: true);
+            return new PInvokeILStubMethodIL(
+                (ILStubMethodIL)emitter.Link(method),
+                isStubRequired: true
+            );
         }
     }
 }

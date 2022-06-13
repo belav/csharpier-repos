@@ -6,9 +6,7 @@ using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler.Dataflow
 {
-    internal abstract class Origin
-    {
-    }
+    internal abstract class Origin { }
 
     class MethodReturnOrigin : Origin
     {

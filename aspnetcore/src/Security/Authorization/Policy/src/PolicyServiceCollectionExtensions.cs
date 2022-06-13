@@ -17,7 +17,9 @@ public static class PolicyServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-    public static IServiceCollection AddAuthorizationPolicyEvaluator(this IServiceCollection services)
+    public static IServiceCollection AddAuthorizationPolicyEvaluator(
+        this IServiceCollection services
+    )
     {
         if (services == null)
         {
@@ -26,7 +28,10 @@ public static class PolicyServiceCollectionExtensions
 
         services.TryAddSingleton<AuthorizationPolicyMarkerService>();
         services.TryAddTransient<IPolicyEvaluator, PolicyEvaluator>();
-        services.TryAddTransient<IAuthorizationMiddlewareResultHandler, AuthorizationMiddlewareResultHandler>();
+        services.TryAddTransient<
+            IAuthorizationMiddlewareResultHandler,
+            AuthorizationMiddlewareResultHandler
+        >();
         return services;
     }
 
@@ -53,7 +58,10 @@ public static class PolicyServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <param name="configure">An action delegate to configure the provided <see cref="AuthorizationOptions"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-    public static IServiceCollection AddAuthorization(this IServiceCollection services, Action<AuthorizationOptions> configure)
+    public static IServiceCollection AddAuthorization(
+        this IServiceCollection services,
+        Action<AuthorizationOptions> configure
+    )
     {
         if (services == null)
         {

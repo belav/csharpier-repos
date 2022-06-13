@@ -25,11 +25,13 @@ namespace System.Collections.Generic
             // This body serves as a fallback when instantiation-specific implementation is unavailable.
             // If that happens, the compiler ensures we generate data structures to make the fallback work
             // when this method is compiled.
-            Interlocked.CompareExchange(ref s_default,
+            Interlocked.CompareExchange(
+                ref s_default,
                 SupportsGenericIComparableInterfaces
-                ? Unsafe.As<Comparer<T>>(ComparerHelpers.GetComparer(typeof(T).TypeHandle))
-                : new ObjectComparer<T>(),
-                null);
+                    ? Unsafe.As<Comparer<T>>(ComparerHelpers.GetComparer(typeof(T).TypeHandle))
+                    : new ObjectComparer<T>(),
+                null
+            );
             return s_default;
         }
 

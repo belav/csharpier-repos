@@ -17,7 +17,10 @@ public class IISApplicationDeployerFactory
     /// <param name="deploymentParameters"></param>
     /// <param name="loggerFactory"></param>
     /// <returns></returns>
-    public static ApplicationDeployer Create(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
+    public static ApplicationDeployer Create(
+        DeploymentParameters deploymentParameters,
+        ILoggerFactory loggerFactory
+    )
     {
         if (deploymentParameters == null)
         {

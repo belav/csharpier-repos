@@ -46,18 +46,15 @@ public class TextTemplatingModelGeneratorTest
 
         var contextTemplate = Path.Combine(projectDir, "CodeTemplates", "EFCore", "DbContext.t4");
         Directory.CreateDirectory(Path.GetDirectoryName(contextTemplate));
-        File.WriteAllText(
-            contextTemplate,
-            "My DbContext template");
+        File.WriteAllText(contextTemplate, "My DbContext template");
 
         File.WriteAllText(
             Path.Combine(projectDir, "CodeTemplates", "EFCore", "EntityType.t4"),
-            "My entity type template");
+            "My entity type template"
+        );
 
         var generator = CreateGenerator();
-        var model = new ModelBuilder()
-            .Entity("Entity1", b => { })
-            .FinalizeModel();
+        var model = new ModelBuilder().Entity("Entity1", b => { }).FinalizeModel();
 
         var result = generator.GenerateModel(
             model,
@@ -66,7 +63,8 @@ public class TextTemplatingModelGeneratorTest
                 ContextName = "Context",
                 ConnectionString = @"Name=DefaultConnection",
                 ProjectDir = projectDir
-            });
+            }
+        );
 
         Assert.Equal("Context.cs", result.ContextFile.Path);
         Assert.Equal("My DbContext template", result.ContextFile.Code);
@@ -83,14 +81,10 @@ public class TextTemplatingModelGeneratorTest
 
         var contextTemplate = Path.Combine(projectDir, "CodeTemplates", "EFCore", "DbContext.t4");
         Directory.CreateDirectory(Path.GetDirectoryName(contextTemplate));
-        File.WriteAllText(
-            contextTemplate,
-            "My DbContext template");
+        File.WriteAllText(contextTemplate, "My DbContext template");
 
         var generator = CreateGenerator();
-        var model = new ModelBuilder()
-            .Entity("Entity1", b => { })
-            .FinalizeModel();
+        var model = new ModelBuilder().Entity("Entity1", b => { }).FinalizeModel();
 
         var result = generator.GenerateModel(
             model,
@@ -99,7 +93,8 @@ public class TextTemplatingModelGeneratorTest
                 ContextName = "Context",
                 ConnectionString = @"Name=DefaultConnection",
                 ProjectDir = projectDir
-            });
+            }
+        );
 
         Assert.Equal("Context.cs", result.ContextFile.Path);
         Assert.Equal("My DbContext template", result.ContextFile.Code);
@@ -119,19 +114,19 @@ public class TextTemplatingModelGeneratorTest
             @"Model not null: <#= Session[""Model""] != null #>
 Options not null: <#= Session[""Options""] != null #>
 NamespaceHint: <#= Session[""NamespaceHint""] #>
-ProjectDefaultNamespace: <#= Session[""ProjectDefaultNamespace""] #>");
+ProjectDefaultNamespace: <#= Session[""ProjectDefaultNamespace""] #>"
+        );
 
         File.WriteAllText(
             Path.Combine(projectDir, "CodeTemplates", "EFCore", "EntityType.t4"),
             @"EntityType not null: <#= Session[""EntityType""] != null #>
 Options not null: <#= Session[""Options""] != null #>
 NamespaceHint: <#= Session[""NamespaceHint""] #>
-ProjectDefaultNamespace: <#= Session[""ProjectDefaultNamespace""] #>");
+ProjectDefaultNamespace: <#= Session[""ProjectDefaultNamespace""] #>"
+        );
 
         var generator = CreateGenerator();
-        var model = new ModelBuilder()
-            .Entity("Entity1", b => { })
-            .FinalizeModel();
+        var model = new ModelBuilder().Entity("Entity1", b => { }).FinalizeModel();
 
         var result = generator.GenerateModel(
             model,
@@ -143,14 +138,16 @@ ProjectDefaultNamespace: <#= Session[""ProjectDefaultNamespace""] #>");
                 ModelNamespace = "ModelNamespace",
                 RootNamespace = "RootNamespace",
                 ProjectDir = projectDir
-            });
+            }
+        );
 
         Assert.Equal(
             @"Model not null: True
 Options not null: True
 NamespaceHint: ContextNamespace
 ProjectDefaultNamespace: RootNamespace",
-            result.ContextFile.Code);
+            result.ContextFile.Code
+        );
 
         var entityType = Assert.Single(result.AdditionalFiles);
         Assert.Equal(
@@ -158,7 +155,8 @@ ProjectDefaultNamespace: RootNamespace",
 Options not null: True
 NamespaceHint: ModelNamespace
 ProjectDefaultNamespace: RootNamespace",
-            entityType.Code);
+            entityType.Code
+        );
     }
 
     [ConditionalFact]
@@ -168,13 +166,10 @@ ProjectDefaultNamespace: RootNamespace",
 
         var contextTemplate = Path.Combine(projectDir, "CodeTemplates", "EFCore", "DbContext.t4");
         Directory.CreateDirectory(Path.GetDirectoryName(contextTemplate));
-        File.WriteAllText(
-            contextTemplate,
-            @"<#= Session[""NamespaceHint""] #>");
+        File.WriteAllText(contextTemplate, @"<#= Session[""NamespaceHint""] #>");
 
         var generator = CreateGenerator();
-        var model = new ModelBuilder()
-            .FinalizeModel();
+        var model = new ModelBuilder().FinalizeModel();
 
         var result = generator.GenerateModel(
             model,
@@ -184,11 +179,10 @@ ProjectDefaultNamespace: RootNamespace",
                 ConnectionString = @"Name=DefaultConnection",
                 ModelNamespace = "ModelNamespace",
                 ProjectDir = projectDir
-            });
+            }
+        );
 
-        Assert.Equal(
-            "ModelNamespace",
-            result.ContextFile.Code);
+        Assert.Equal("ModelNamespace", result.ContextFile.Code);
     }
 
     [ConditionalFact]
@@ -198,19 +192,16 @@ ProjectDefaultNamespace: RootNamespace",
 
         var contextTemplate = Path.Combine(projectDir, "CodeTemplates", "EFCore", "DbContext.t4");
         Directory.CreateDirectory(Path.GetDirectoryName(contextTemplate));
-        File.WriteAllText(
-            contextTemplate,
-            @"<#@ output extension="".vb"" #>");
+        File.WriteAllText(contextTemplate, @"<#@ output extension="".vb"" #>");
 
         File.WriteAllText(
             Path.Combine(projectDir, "CodeTemplates", "EFCore", "EntityType.t4"),
             @"<#@ output extension="".fs"" #>
-My entity type template");
+My entity type template"
+        );
 
         var generator = CreateGenerator();
-        var model = new ModelBuilder()
-            .Entity("Entity1", b => { })
-            .FinalizeModel();
+        var model = new ModelBuilder().Entity("Entity1", b => { }).FinalizeModel();
 
         var result = generator.GenerateModel(
             model,
@@ -219,7 +210,8 @@ My entity type template");
                 ContextName = "Context",
                 ConnectionString = @"Name=DefaultConnection",
                 ProjectDir = projectDir
-            });
+            }
+        );
 
         Assert.Equal("Context.vb", result.ContextFile.Path);
 
@@ -234,14 +226,11 @@ My entity type template");
 
         var contextTemplate = Path.Combine(projectDir, "CodeTemplates", "EFCore", "DbContext.t4");
         Directory.CreateDirectory(Path.GetDirectoryName(contextTemplate));
-        File.WriteAllText(
-            contextTemplate,
-            @"<#@ output encoding=""us-ascii"" #>");
+        File.WriteAllText(contextTemplate, @"<#@ output encoding=""us-ascii"" #>");
 
         var reporter = new TestOperationReporter();
         var generator = CreateGenerator(reporter);
-        var model = new ModelBuilder()
-            .FinalizeModel();
+        var model = new ModelBuilder().FinalizeModel();
 
         var result = generator.GenerateModel(
             model,
@@ -250,7 +239,8 @@ My entity type template");
                 ContextName = "Context",
                 ConnectionString = @"Name=DefaultConnection",
                 ProjectDir = projectDir
-            });
+            }
+        );
 
         Assert.Collection(
             reporter.Messages,
@@ -258,7 +248,8 @@ My entity type template");
             {
                 Assert.Equal(LogLevel.Warning, x.Level);
                 Assert.Equal(DesignStrings.EncodingIgnored("us-ascii"), x.Message);
-            });
+            }
+        );
     }
 
     [ConditionalFact]
@@ -271,12 +262,12 @@ My entity type template");
         File.WriteAllText(
             contextTemplate,
             @"<# Warning(""This is a warning"");
-Error(""This is an error""); #>");
+Error(""This is an error""); #>"
+        );
 
         var reporter = new TestOperationReporter();
         var generator = CreateGenerator(reporter);
-        var model = new ModelBuilder()
-            .FinalizeModel();
+        var model = new ModelBuilder().FinalizeModel();
 
         var result = generator.GenerateModel(
             model,
@@ -285,7 +276,8 @@ Error(""This is an error""); #>");
                 ContextName = "Context",
                 ConnectionString = @"Name=DefaultConnection",
                 ProjectDir = projectDir
-            });
+            }
+        );
 
         Assert.Collection(
             reporter.Messages,
@@ -298,13 +290,15 @@ Error(""This is an error""); #>");
             {
                 Assert.Equal(LogLevel.Error, x.Level);
                 Assert.Contains("This is an error", x.Message);
-            });
+            }
+        );
     }
 
     private static TemplatedModelGenerator CreateGenerator(IOperationReporter reporter = null)
     {
-        var serviceCollection = new ServiceCollection()
-            .AddEntityFrameworkDesignTimeServices(reporter);
+        var serviceCollection = new ServiceCollection().AddEntityFrameworkDesignTimeServices(
+            reporter
+        );
         new SqlServerDesignTimeServices().ConfigureDesignTimeServices(serviceCollection);
 
         return serviceCollection

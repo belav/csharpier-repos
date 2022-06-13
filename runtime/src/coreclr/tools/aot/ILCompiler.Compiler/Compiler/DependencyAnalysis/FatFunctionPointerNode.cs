@@ -22,7 +22,10 @@ namespace ILCompiler.DependencyAnalysis
         public FatFunctionPointerNode(MethodDesc methodRepresented, bool isUnboxingStub)
         {
             // We should not create these for methods that don't have a canonical method body
-            Debug.Assert(methodRepresented.GetCanonMethodTarget(CanonicalFormKind.Specific) != methodRepresented);
+            Debug.Assert(
+                methodRepresented.GetCanonMethodTarget(CanonicalFormKind.Specific)
+                    != methodRepresented
+            );
 
             Method = methodRepresented;
             _isUnboxingStub = isUnboxingStub;
@@ -35,7 +38,8 @@ namespace ILCompiler.DependencyAnalysis
         }
 
         int ISymbolDefinitionNode.Offset => 0;
-        int ISymbolNode.Offset => Method.Context.Target.Architecture == TargetArchitecture.Wasm32 ? 1 << 31 : 2;
+        int ISymbolNode.Offset =>
+            Method.Context.Target.Architecture == TargetArchitecture.Wasm32 ? 1 << 31 : 2;
 
         public override bool IsShareable => true;
 
@@ -54,7 +58,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool StaticDependenciesAreComputed => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
@@ -86,7 +91,7 @@ namespace ILCompiler.DependencyAnalysis
 
             // The next entry is a pointer to the context to be used for the canonical method
             builder.EmitPointerReloc(contextParameter);
-            
+
             return builder.ToObjectData();
         }
 
@@ -94,7 +99,9 @@ namespace ILCompiler.DependencyAnalysis
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
-            var compare = _isUnboxingStub.CompareTo(((FatFunctionPointerNode)other)._isUnboxingStub);
+            var compare = _isUnboxingStub.CompareTo(
+                ((FatFunctionPointerNode)other)._isUnboxingStub
+            );
             if (compare != 0)
                 return compare;
 

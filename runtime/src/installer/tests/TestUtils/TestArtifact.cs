@@ -15,17 +15,29 @@ namespace Microsoft.DotNet.CoreSetup.Test
         private static readonly Lazy<RepoDirectoriesProvider> _repoDirectoriesProvider =
             new Lazy<RepoDirectoriesProvider>(() => new RepoDirectoriesProvider());
 
-        private static readonly Lazy<bool> _preserveTestRuns = new Lazy<bool>(() =>
-            _repoDirectoriesProvider.Value.GetTestContextVariableOrNull("PRESERVE_TEST_RUNS") == "1");
+        private static readonly Lazy<bool> _preserveTestRuns = new Lazy<bool>(
+            () =>
+                _repoDirectoriesProvider.Value.GetTestContextVariableOrNull("PRESERVE_TEST_RUNS")
+                == "1"
+        );
 
         private static readonly string TestArtifactDirectoryEnvironmentVariable = "TEST_ARTIFACTS";
-        private static readonly Lazy<string> _testArtifactsPath = new Lazy<string>(() =>
-        {
-            return _repoDirectoriesProvider.Value.GetTestContextVariable(TestArtifactDirectoryEnvironmentVariable)
-                   ?? Path.Combine(AppContext.BaseDirectory, TestArtifactDirectoryEnvironmentVariable);
-        }, isThreadSafe: true);
+        private static readonly Lazy<string> _testArtifactsPath = new Lazy<string>(
+            () =>
+            {
+                return _repoDirectoriesProvider.Value.GetTestContextVariable(
+                        TestArtifactDirectoryEnvironmentVariable
+                    )
+                    ?? Path.Combine(
+                        AppContext.BaseDirectory,
+                        TestArtifactDirectoryEnvironmentVariable
+                    );
+            },
+            isThreadSafe: true
+        );
 
         public static bool PreserveTestRuns() => _preserveTestRuns.Value;
+
         public static string TestArtifactsPath => _testArtifactsPath.Value;
 
         public string Location { get; }
@@ -66,7 +78,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
                     Debug.Assert(!Directory.Exists(Location));
                     var lockPath = Directory.GetParent(Location) + ".lock";
                     File.Delete(lockPath);
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     Console.WriteLine("delete failed" + e);
                 }
@@ -106,13 +119,21 @@ namespace Microsoft.DotNet.CoreSetup.Test
             throw lastException;
         }
 
-        protected static void CopyRecursive(string sourceDirectory, string destinationDirectory, bool overwrite = false)
+        protected static void CopyRecursive(
+            string sourceDirectory,
+            string destinationDirectory,
+            bool overwrite = false
+        )
         {
             FileUtils.EnsureDirectoryExists(destinationDirectory);
 
             foreach (var dir in Directory.EnumerateDirectories(sourceDirectory))
             {
-                CopyRecursive(dir, Path.Combine(destinationDirectory, Path.GetFileName(dir)), overwrite);
+                CopyRecursive(
+                    dir,
+                    Path.Combine(destinationDirectory, Path.GetFileName(dir)),
+                    overwrite
+                );
             }
 
             foreach (var file in Directory.EnumerateFiles(sourceDirectory))

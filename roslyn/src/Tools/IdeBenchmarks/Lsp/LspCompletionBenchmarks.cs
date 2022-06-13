@@ -18,16 +18,15 @@ namespace IdeBenchmarks.Lsp
     [MemoryDiagnoser]
     public class LspCompletionBenchmarks : AbstractLanguageServerProtocolTests
     {
-        private readonly UseExportProviderAttribute _useExportProviderAttribute = new UseExportProviderAttribute();
+        private readonly UseExportProviderAttribute _useExportProviderAttribute =
+            new UseExportProviderAttribute();
 
         private TestLspServer? _testServer;
         private IGlobalOptionService? _globalOptionService;
         private LSP.CompletionParams? _completionParams;
 
         [GlobalSetup]
-        public void GlobalSetup()
-        {
-        }
+        public void GlobalSetup() { }
 
         [IterationSetup]
         public void IterationSetup() => LoadSolutionAsync().Wait();
@@ -37,7 +36,7 @@ namespace IdeBenchmarks.Lsp
             _useExportProviderAttribute.Before(null);
 
             var markup =
-@"using System;
+                @"using System;
 using System.Buffers;
 using System.Buffers.Binary;
 using System.Buffers.Text;
@@ -70,25 +69,30 @@ class A
         T{|caret:|}
     }
 }";
-            _testServer = await CreateTestLspServerAsync(markup, new LSP.VSInternalClientCapabilities
-            {
-                TextDocument = new LSP.TextDocumentClientCapabilities
-                {
-                    Completion = new LSP.CompletionSetting
+            _testServer = await CreateTestLspServerAsync(
+                    markup,
+                    new LSP.VSInternalClientCapabilities
                     {
-                        CompletionListSetting = new LSP.CompletionListSetting
+                        TextDocument = new LSP.TextDocumentClientCapabilities
                         {
-                            ItemDefaults = new string[] { "editRange" },
+                            Completion = new LSP.CompletionSetting
+                            {
+                                CompletionListSetting = new LSP.CompletionListSetting
+                                {
+                                    ItemDefaults = new string[] { "editRange" },
+                                }
+                            }
                         }
                     }
-                }
-            }).ConfigureAwait(false);
+                )
+                .ConfigureAwait(false);
 
             _completionParams = CreateCompletionParams(
                 _testServer.GetLocations("caret").Single(),
                 invokeKind: LSP.VSInternalCompletionInvokeKind.Typing,
                 triggerCharacter: "T",
-                triggerKind: LSP.CompletionTriggerKind.Invoked);
+                triggerKind: LSP.CompletionTriggerKind.Invoked
+            );
 
             _globalOptionService = _testServer.TestWorkspace.GetService<IGlobalOptionService>();
         }
@@ -96,7 +100,9 @@ class A
         [Benchmark]
         public void GetCompletionsWithTextEdits()
         {
-            var results = CompletionTests.RunGetCompletionsAsync(_testServer!, _completionParams!).Result;
+            var results = CompletionTests
+                .RunGetCompletionsAsync(_testServer!, _completionParams!)
+                .Result;
             Assert.Equal(1000, results.Items.Length);
             Assert.True(results.IsIncomplete);
             Assert.NotNull(results.ItemDefaults?.EditRange);

@@ -13,10 +13,7 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
     {
         private readonly SyntaxListBuilder? _builder;
 
-        public SeparatedSyntaxListBuilder(int size)
-            : this(new SyntaxListBuilder(size))
-        {
-        }
+        public SeparatedSyntaxListBuilder(int size) : this(new SyntaxListBuilder(size)) { }
 
         public static SeparatedSyntaxListBuilder<TNode> Create()
         {
@@ -30,31 +27,18 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 
         public bool IsNull
         {
-            get
-            {
-                return _builder == null;
-            }
+            get { return _builder == null; }
         }
 
         public int Count
         {
-            get
-            {
-                return _builder!.Count;
-            }
+            get { return _builder!.Count; }
         }
 
         public GreenNode? this[int index]
         {
-            get
-            {
-                return _builder![index];
-            }
-
-            set
-            {
-                _builder![index] = value;
-            }
+            get { return _builder![index]; }
+            set { _builder![index] = value; }
         }
 
         public void Clear()
@@ -120,12 +104,16 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             get { return _builder; }
         }
 
-        public static implicit operator SeparatedSyntaxList<TNode>(in SeparatedSyntaxListBuilder<TNode> builder)
+        public static implicit operator SeparatedSyntaxList<TNode>(
+            in SeparatedSyntaxListBuilder<TNode> builder
+        )
         {
             return builder.ToList();
         }
 
-        public static implicit operator SyntaxListBuilder?(in SeparatedSyntaxListBuilder<TNode> builder)
+        public static implicit operator SyntaxListBuilder?(
+            in SeparatedSyntaxListBuilder<TNode> builder
+        )
         {
             return builder._builder;
         }

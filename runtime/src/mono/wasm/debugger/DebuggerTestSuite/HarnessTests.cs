@@ -18,7 +18,15 @@ namespace DebuggerTests
         {
             await SetBreakpoint("dotnet://debugger-test.dll/debugger-test.cs", 100, 0);
             var tce = await Assert.ThrowsAsync<TaskCanceledException>(
-                         async () => await EvaluateAndCheck("window.setTimeout(function() { invoke_add(); }, 1);", null, -1, -1, null));
+                async () =>
+                    await EvaluateAndCheck(
+                        "window.setTimeout(function() { invoke_add(); }, 1);",
+                        null,
+                        -1,
+                        -1,
+                        null
+                    )
+            );
             Assert.Contains("timed out", tce.Message);
         }
 
@@ -26,7 +34,15 @@ namespace DebuggerTests
         public async Task ExceptionThrown()
         {
             var ae = await Assert.ThrowsAsync<ArgumentException>(
-                        async () => await EvaluateAndCheck("window.setTimeout(function() { non_existant_fn(); }, 3000);", null, -1, -1, null));
+                async () =>
+                    await EvaluateAndCheck(
+                        "window.setTimeout(function() { non_existant_fn(); }, 3000);",
+                        null,
+                        -1,
+                        -1,
+                        null
+                    )
+            );
             Assert.Contains("non_existant_fn is not defined", ae.Message);
         }
 
@@ -46,7 +62,9 @@ namespace DebuggerTests
                     Assert.Fail($"Proxy did not stop, as expected");
                 RunLoopExitState? state = await clientRunLoopStopped.Task;
                 if (state.reason != RunLoopStopReason.ConnectionClosed)
-                    Assert.Fail($"Client runloop did not stop with ConnectionClosed. state: {state}.{Environment.NewLine}SendCommand had failed with {ex}");
+                    Assert.Fail(
+                        $"Client runloop did not stop with ConnectionClosed. state: {state}.{Environment.NewLine}SendCommand had failed with {ex}"
+                    );
             }
         }
 
@@ -58,8 +76,11 @@ namespace DebuggerTests
 
             res = await cli.SendCommand(
                 "Runtime.evaluate",
-                JObject.FromObject(new { expression = "window.setTimeout(function() { invoke_add(); }, 0);" }),
-                token);
+                JObject.FromObject(
+                    new { expression = "window.setTimeout(function() { invoke_add(); }, 0);" }
+                ),
+                token
+            );
             Assert.True(res.IsOk, $"evaluating the function failed with {res}");
 
             // delay, so that we can get the Debugger.pause event
@@ -71,7 +92,9 @@ namespace DebuggerTests
         [ConditionalFact(nameof(RunningOnChrome))]
         public async Task InspectorWaitForMessageThatNeverArrives()
         {
-            var tce = await Assert.ThrowsAsync<TaskCanceledException>(async () => await insp.WaitFor("Message.that.never.arrives"));
+            var tce = await Assert.ThrowsAsync<TaskCanceledException>(
+                async () => await insp.WaitFor("Message.that.never.arrives")
+            );
             Assert.Contains("timed out", tce.Message);
         }
     }

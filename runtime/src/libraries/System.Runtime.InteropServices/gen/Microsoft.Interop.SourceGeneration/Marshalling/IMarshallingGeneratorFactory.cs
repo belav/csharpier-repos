@@ -15,9 +15,7 @@ namespace Microsoft.Interop
         /// <param name="info">Type details</param>
         /// <param name="context">Metadata about the stub the type is associated with</param>
         /// <returns>A <see cref="IMarshallingGenerator"/> instance.</returns>
-        public IMarshallingGenerator Create(
-            TypePositionInfo info,
-            StubCodeContext context);
+        public IMarshallingGenerator Create(TypePositionInfo info, StubCodeContext context);
     }
 
     /// <summary>
@@ -35,20 +33,20 @@ namespace Microsoft.Interop
 
         public bool Equals(MarshallingGeneratorFactoryKey<T> other) => Key.Equals(other.Key);
 
-        public override bool Equals(object obj) => obj is MarshallingGeneratorFactoryKey<T> other && Equals(other);
+        public override bool Equals(object obj) =>
+            obj is MarshallingGeneratorFactoryKey<T> other && Equals(other);
 
         public override int GetHashCode() => Key.GetHashCode();
     }
 
     public static class MarshallingGeneratorFactoryKey
     {
-        public static MarshallingGeneratorFactoryKey<T> Create<T>(T key, IMarshallingGeneratorFactory factory) where T : IEquatable<T>
+        public static MarshallingGeneratorFactoryKey<T> Create<T>(
+            T key,
+            IMarshallingGeneratorFactory factory
+        ) where T : IEquatable<T>
         {
-            return new MarshallingGeneratorFactoryKey<T>
-            {
-                Key = key,
-                GeneratorFactory = factory
-            };
+            return new MarshallingGeneratorFactoryKey<T> { Key = key, GeneratorFactory = factory };
         }
     }
 }

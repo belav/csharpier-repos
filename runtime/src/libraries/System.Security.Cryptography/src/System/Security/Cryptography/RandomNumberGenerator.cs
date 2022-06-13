@@ -11,7 +11,8 @@ namespace System.Security.Cryptography
     {
         protected RandomNumberGenerator() { }
 
-        public static RandomNumberGenerator Create() => RandomNumberGeneratorImplementation.s_singleton;
+        public static RandomNumberGenerator Create() =>
+            RandomNumberGeneratorImplementation.s_singleton;
 
         [RequiresUnreferencedCode(CryptoConfig.CreateFromNameUnreferencedCodeMessage)]
         public static RandomNumberGenerator? Create(string rngName)
@@ -129,8 +130,7 @@ namespace System.Security.Cryptography
             {
                 RandomNumberGeneratorImplementation.FillSpan(MemoryMarshal.AsBytes(resultSpan));
                 result = mask & resultSpan[0];
-            }
-            while (result > range);
+            } while (result > range);
 
             return (int)result + fromInclusive;
         }
@@ -138,7 +138,10 @@ namespace System.Security.Cryptography
         public static int GetInt32(int toExclusive)
         {
             if (toExclusive <= 0)
-                throw new ArgumentOutOfRangeException(nameof(toExclusive), SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(toExclusive),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
 
             return GetInt32(0, toExclusive);
         }
@@ -156,7 +159,10 @@ namespace System.Security.Cryptography
         public static byte[] GetBytes(int count)
         {
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             byte[] ret = new byte[count];
             RandomNumberGeneratorImplementation.FillSpan(ret);
@@ -168,9 +174,15 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(data);
 
             if (offset < 0)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (count > data.Length - offset)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
         }

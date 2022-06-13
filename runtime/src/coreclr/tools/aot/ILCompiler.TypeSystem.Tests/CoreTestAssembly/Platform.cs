@@ -23,39 +23,62 @@ namespace System
             return 0;
         }
 
-        public virtual string ToString() { return null; }
-
-        ~Object()
+        public virtual string ToString()
         {
+            return null;
         }
+
+        ~Object() { }
     }
 
     public struct Void { }
+
     public struct Boolean { }
+
     public struct Char { }
+
     public struct SByte { }
+
     public struct Byte { }
+
     public struct Int16 { }
+
     public struct UInt16 { }
+
     public struct Int32 { }
+
     public struct UInt32 { }
+
     public struct Int64 { }
+
     public struct UInt64 { }
+
     public struct IntPtr { }
+
     public struct UIntPtr { }
+
     public struct Single { }
+
     public struct Double { }
+
     public abstract class ValueType { }
+
     public abstract class Enum : ValueType { }
+
     public struct Nullable<T> where T : struct { }
-    
+
     public sealed class String { }
+
     public abstract class Array : System.Collections.IList { }
+
     public abstract class Delegate { }
+
     public abstract class MulticastDelegate : Delegate { }
 
     public struct RuntimeTypeHandle { }
+
     public struct RuntimeMethodHandle { }
+
     public struct RuntimeFieldHandle { }
 
     public class Attribute { }
@@ -111,7 +134,10 @@ namespace System.Runtime.InteropServices
             _val = layoutKind;
         }
 
-        public LayoutKind Value { get { return _val; } }
+        public LayoutKind Value
+        {
+            get { return _val; }
+        }
         public int Pack;
         public int Size;
     }
@@ -119,19 +145,22 @@ namespace System.Runtime.InteropServices
     public sealed class FieldOffsetAttribute : Attribute
     {
         private int _val;
+
         public FieldOffsetAttribute(int offset)
         {
             _val = offset;
         }
-        public int Value { get { return _val; } }
+
+        public int Value
+        {
+            get { return _val; }
+        }
     }
 }
 
 namespace System.Runtime.CompilerServices
 {
-    public sealed class IsByRefLikeAttribute : Attribute
-    {
-    }
+    public sealed class IsByRefLikeAttribute : Attribute { }
 
     public static class RuntimeFeature
     {

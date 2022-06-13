@@ -28,8 +28,8 @@ namespace System.Data.SqlTypes
         // ULONG    m_rgulData [x_culNumeMax];
 
         // NOTE: If any instance fields change, update SqlTypeWorkarounds type in System.Data.SqlClient.
-        internal byte _bStatus;      // bit 0: fNotNull, bit 1: fNegative
-        internal byte _bLen;         // number of uints used, = (CSsNumeric.m_cbLen - 1) / 4.
+        internal byte _bStatus; // bit 0: fNotNull, bit 1: fNegative
+        internal byte _bLen; // number of uints used, = (CSsNumeric.m_cbLen - 1) / 4.
         internal byte _bPrec;
         internal byte _bScale;
         internal uint _data1;
@@ -37,41 +37,42 @@ namespace System.Data.SqlTypes
         internal uint _data3;
         internal uint _data4;
 
-        private const byte s_NUMERIC_MAX_PRECISION = 38;            // Maximum precision of numeric
-        public static readonly byte MaxPrecision = s_NUMERIC_MAX_PRECISION;  // max SS precision
-        public static readonly byte MaxScale = s_NUMERIC_MAX_PRECISION;      // max SS scale
+        private const byte s_NUMERIC_MAX_PRECISION = 38; // Maximum precision of numeric
+        public static readonly byte MaxPrecision = s_NUMERIC_MAX_PRECISION; // max SS precision
+        public static readonly byte MaxScale = s_NUMERIC_MAX_PRECISION; // max SS scale
 
-        private const byte s_bNullMask = 1;    // bit mask for null bit in m_bStatus
-        private const byte s_bIsNull = 0;    // is null
-        private const byte s_bNotNull = 1;    // is not null
+        private const byte s_bNullMask = 1; // bit mask for null bit in m_bStatus
+        private const byte s_bIsNull = 0; // is null
+        private const byte s_bNotNull = 1; // is not null
         private const byte s_bReverseNullMask = unchecked((byte)~s_bNullMask);
 
-        private const byte s_bSignMask = 2;    // bit mask for sign bit in m_bStatus
-        private const byte s_bPositive = 0;    // is positive
-        private const byte s_bNegative = 2;    // is negative
+        private const byte s_bSignMask = 2; // bit mask for sign bit in m_bStatus
+        private const byte s_bPositive = 0; // is positive
+        private const byte s_bNegative = 2; // is negative
         private const byte s_bReverseSignMask = unchecked((byte)~s_bSignMask);
 
         private const uint s_uiZero = 0;
 
         private const int s_cNumeMax = 4;
-        private const long s_lInt32Base = ((long)1) << 32;      // 2**32
-        private const ulong s_ulInt32Base = ((ulong)1) << 32;     // 2**32
-        private const ulong s_ulInt32BaseForMod = s_ulInt32Base - 1;    // 2**32 - 1 (0xFFF...FF)
+        private const long s_lInt32Base = ((long)1) << 32; // 2**32
+        private const ulong s_ulInt32Base = ((ulong)1) << 32; // 2**32
+        private const ulong s_ulInt32BaseForMod = s_ulInt32Base - 1; // 2**32 - 1 (0xFFF...FF)
 
-        internal const ulong s_llMax = long.MaxValue;   // Max of Int64
+        internal const ulong s_llMax = long.MaxValue; // Max of Int64
 
         private const uint s_ulBase10 = 10;
 
-        private const double s_DUINT_BASE = s_lInt32Base;     // 2**32
-        private const double s_DUINT_BASE2 = s_DUINT_BASE * s_DUINT_BASE;  // 2**64
+        private const double s_DUINT_BASE = s_lInt32Base; // 2**32
+        private const double s_DUINT_BASE2 = s_DUINT_BASE * s_DUINT_BASE; // 2**64
         private const double s_DUINT_BASE3 = s_DUINT_BASE2 * s_DUINT_BASE; // 2**96
-        private const double s_DMAX_NUME = 1.0e+38;                  // Max value of numeric
-        private const uint s_DBL_DIG = 17;                       // Max decimal digits of double
+        private const double s_DMAX_NUME = 1.0e+38; // Max value of numeric
+        private const uint s_DBL_DIG = 17; // Max decimal digits of double
 
-        private const byte s_cNumeDivScaleMin = 6;     // Minimum result scale of numeric division
+        private const byte s_cNumeDivScaleMin = 6; // Minimum result scale of numeric division
 
         // Array of multipliers for lAdjust and Ceiling/Floor.
-        private static readonly uint[] s_rgulShiftBase = new uint[9] {
+        private static readonly uint[] s_rgulShiftBase = new uint[9]
+        {
             10,
             10 * 10,
             10 * 10 * 10,
@@ -130,7 +131,8 @@ namespace System.Data.SqlTypes
         #endregion
 
         #region DecimalHelperTable
-        private static readonly uint[] s_decimalHelpersLo = {
+        private static readonly uint[] s_decimalHelpersLo =
+        {
             0x0000000a, // precision:2, value:10
             0x00000064, // precision:3, value:100
             0x000003e8, // precision:4, value:1000
@@ -171,7 +173,8 @@ namespace System.Data.SqlTypes
             0x00000000, // precision:38+1, value:99999999999999999999999999999999999999+1
         };
 
-        private static readonly uint[] s_decimalHelpersMid = {
+        private static readonly uint[] s_decimalHelpersMid =
+        {
             0x00000000, // precision:2, value:10
             0x00000000, // precision:3, value:100
             0x00000000, // precision:4, value:1000
@@ -212,7 +215,8 @@ namespace System.Data.SqlTypes
             0x098a2240, // precision:38+1, value:99999999999999999999999999999999999999+1
         };
 
-        private static readonly uint[] s_decimalHelpersHi = {
+        private static readonly uint[] s_decimalHelpersHi =
+        {
             0x00000000, // precision:2, value:10
             0x00000000, // precision:3, value:100
             0x00000000, // precision:4, value:1000
@@ -253,7 +257,8 @@ namespace System.Data.SqlTypes
             0x5a86c47a, // precision:38+1, value:99999999999999999999999999999999999999+1
         };
 
-        private static readonly uint[] s_decimalHelpersHiHi = {
+        private static readonly uint[] s_decimalHelpersHiHi =
+        {
             0x00000000, // precision:2, value:10
             0x00000000, // precision:3, value:100
             0x00000000, // precision:4, value:1000
@@ -341,7 +346,6 @@ namespace System.Data.SqlTypes
                 decimalPart = _data1;
             }
 
-
             // this code will move the index no more than -2 -2 -1 (-5) or +2 +1 +1 (+4)
             // from the initial position
             //
@@ -401,19 +405,28 @@ namespace System.Data.SqlTypes
                     precision -= 1;
                 }
             }
-            Debug.Assert((precision == MaxPrecision + 1) || VerifyPrecision(precision), "Calcualted precision too low?");
-            Debug.Assert((precision == 1) || !VerifyPrecision((byte)(precision - 1)), "Calculated precision too high?");
+            Debug.Assert(
+                (precision == MaxPrecision + 1) || VerifyPrecision(precision),
+                "Calcualted precision too low?"
+            );
+            Debug.Assert(
+                (precision == 1) || !VerifyPrecision((byte)(precision - 1)),
+                "Calculated precision too high?"
+            );
 
             // adjust the precision
             // This might not be correct but is to our best knowledge
             precision = Math.Max(precision, _bScale);
 #if DEBUG
-            byte bPrec = _bPrec;   // store current value
+            byte bPrec = _bPrec; // store current value
             _bPrec = MaxPrecision; // BActualPrec does not work if m_bPrec uninitialized!
             byte bActualPrecision = BActualPrec();
-            _bPrec = bPrec;  // restore current value
+            _bPrec = bPrec; // restore current value
 
-            Debug.Assert(precision == bActualPrecision, $"CalculatePrecision={precision}, BActualPrec={bActualPrecision}. Results must be equal!");
+            Debug.Assert(
+                precision == bActualPrecision,
+                $"CalculatePrecision={precision}, BActualPrec={bActualPrecision}. Results must be equal!"
+            );
 #endif
             return precision;
         }
@@ -457,20 +470,13 @@ namespace System.Data.SqlTypes
             return false;
         }
 
-
-
         // constructor
         // construct a Null
         private SqlDecimal(bool fNull)
         {
-            _bLen =
-            _bPrec =
-            _bScale = 0;
+            _bLen = _bPrec = _bScale = 0;
             _bStatus = 0;
-            _data1 =
-            _data2 =
-            _data3 =
-            _data4 = s_uiZero;
+            _data1 = _data2 = _data3 = _data4 = s_uiZero;
         }
 
         public SqlDecimal(decimal value)
@@ -489,7 +495,6 @@ namespace System.Data.SqlTypes
             Span<int> bits = stackalloc int[4];
             decimal.GetBits(value, bits);
             uint sgnscl;
-
             unchecked
             {
                 sgnscl = (uint)bits[3];
@@ -514,7 +519,6 @@ namespace System.Data.SqlTypes
 
             // initialize precision
             _bPrec = 0; // The this object cannot be used before all of its fields are assigned to
-
 
             _bPrec = CalculatePrecision();
             // CalculatePrecision adjusts!
@@ -618,7 +622,15 @@ namespace System.Data.SqlTypes
                 throw new OverflowException(SQLResource.ArithOverflowMessage);
         }
 
-        public SqlDecimal(byte bPrecision, byte bScale, bool fPositive, int data1, int data2, int data3, int data4)
+        public SqlDecimal(
+            byte bPrecision,
+            byte bScale,
+            bool fPositive,
+            int data1,
+            int data2,
+            int data3,
+            int data4
+        )
         {
             CheckValidPrecScale(bPrecision, bScale);
             _bPrec = bPrecision;
@@ -709,7 +721,8 @@ namespace System.Data.SqlTypes
                 }
             }
 
-            uint ulLen, ulLenDelta;
+            uint ulLen,
+                ulLenDelta;
             uint ulTemp;
 
             // Get size of the integer part
@@ -725,8 +738,7 @@ namespace System.Data.SqlTypes
                 {
                     ulTemp = DivByULong(10);
                     ulWrk--;
-                }
-                while (ulWrk > 0);
+                } while (ulWrk > 0);
                 ulWrk = ulLen - s_DBL_DIG;
 
                 // Round, if necessary. # of digits can change. Cannot be overflow.
@@ -741,8 +753,7 @@ namespace System.Data.SqlTypes
                 {
                     MultByULong(10);
                     ulWrk--;
-                }
-                while (ulWrk > 0);
+                } while (ulWrk > 0);
             }
 
             _bScale = (byte)(ulLen < s_DBL_DIG ? s_DBL_DIG - ulLen : 0);
@@ -761,8 +772,7 @@ namespace System.Data.SqlTypes
                     MultByULong(s_rgulShiftBase[(int)ulLenDelta - 1]);
                     AddULong((uint)dFrac);
                     dFrac -= Math.Floor(dFrac);
-                }
-                while (ulLen > 0);
+                } while (ulLen > 0);
             }
 
             // Round, if necessary
@@ -777,7 +787,13 @@ namespace System.Data.SqlTypes
             AssertValid();
         }
 
-        private SqlDecimal(ReadOnlySpan<uint> rglData, byte bLen, byte bPrec, byte bScale, bool fPositive)
+        private SqlDecimal(
+            ReadOnlySpan<uint> rglData,
+            byte bLen,
+            byte bPrec,
+            byte bScale,
+            bool fPositive
+        )
         {
             CheckValidPrecScale(bPrec, bScale);
             Debug.Assert(rglData.Length >= 4);
@@ -803,7 +819,6 @@ namespace System.Data.SqlTypes
             if (FZero())
                 SetPositive();
         }
-
 
         // INullable
         public bool IsNull
@@ -835,7 +850,9 @@ namespace System.Data.SqlTypes
         private void SetSignBit(bool fPositive)
         {
             Debug.Assert(!IsNull);
-            _bStatus = (byte)(fPositive ? (_bStatus & s_bReverseSignMask) : (_bStatus | s_bNegative));
+            _bStatus = (byte)(
+                fPositive ? (_bStatus & s_bReverseSignMask) : (_bStatus | s_bNegative)
+            );
         }
 
         public byte Precision
@@ -864,7 +881,6 @@ namespace System.Data.SqlTypes
             {
                 if (IsNull)
                     throw new SqlNullValueException();
-
                 unchecked
                 {
                     return new int[4] { (int)_data1, (int)_data2, (int)_data3, (int)_data4 };
@@ -926,9 +942,9 @@ namespace System.Data.SqlTypes
             // Make local copy of data to avoid modifying input.
             Span<uint> rgulNumeric = stackalloc uint[4] { _data1, _data2, _data3, _data4 };
             int culLen = _bLen;
-            Span<char> pszTmp = stackalloc char[s_NUMERIC_MAX_PRECISION + 1];   //Local Character buffer to hold
-            pszTmp.Clear();                                                     //the decimal digits, from the
-                                                                                //lowest significant to highest significant
+            Span<char> pszTmp = stackalloc char[s_NUMERIC_MAX_PRECISION + 1]; //Local Character buffer to hold
+            pszTmp.Clear(); //the decimal digits, from the
+            //lowest significant to highest significant
 
             int iDigits = 0; //Number of significant digits
             uint ulRem; //Remainder of a division by x_ulBase10, i.e.,least significant digit
@@ -950,7 +966,6 @@ namespace System.Data.SqlTypes
             {
                 pszTmp[iDigits++] = ChFromDigit(0);
             }
-
 
             int uiResultLen = 0;
             int iCurChar = 0;
@@ -999,9 +1014,9 @@ namespace System.Data.SqlTypes
             char[] rgwchStr = s.ToCharArray();
             int cwchStr = rgwchStr.Length;
 
-            int iData;            //index to string
-            char usChar;            //current value in string
-            int lDecPnt = -1;    //position of decimal point in string
+            int iData; //index to string
+            char usChar; //current value in string
+            int lDecPnt = -1; //position of decimal point in string
             int iCurChar = 0;
 
             //Must initialize precision and scale to valid values
@@ -1145,7 +1160,6 @@ namespace System.Data.SqlTypes
 
             if ((int)_data4 != 0 || _bScale > 28)
                 throw new OverflowException(SQLResource.ConversionOverflowMessage);
-
             unchecked
             {
                 return new decimal((int)_data1, (int)_data2, (int)_data3, !IsPositive, _bScale);
@@ -1176,7 +1190,6 @@ namespace System.Data.SqlTypes
             return x.Value;
         }
 
-
         // Unary operators
         public static SqlDecimal operator -(SqlDecimal x)
         {
@@ -1193,7 +1206,6 @@ namespace System.Data.SqlTypes
             }
         }
 
-
         // Binary operators
 
         // Arithmetic operators
@@ -1202,20 +1214,19 @@ namespace System.Data.SqlTypes
             if (x.IsNull || y.IsNull)
                 return Null;
 
-            ulong dwlAccum;           //accumulated sum
-            bool fMySignPos;         //sign of x was positive at start
-            bool fOpSignPos;         // sign of y positive at start
+            ulong dwlAccum; //accumulated sum
+            bool fMySignPos; //sign of x was positive at start
+            bool fOpSignPos; // sign of y positive at start
             bool fResSignPos = true; //sign of result should be positive
-            int MyScale;    //scale of x
-            int OpScale;    //scale of y
-            int ResScale;   //scale of result
-            int ResPrec;    //precision of result
+            int MyScale; //scale of x
+            int OpScale; //scale of y
+            int ResScale; //scale of result
+            int ResPrec; //precision of result
             int ResInteger; //number of digits for the integer part of result
-            int culOp1;     //# of UI4s in x
-            int culOp2;     //# of UI4s in y
-            int iulData;    //which UI4 we are operating on in x, y
-            byte bLen;       // length for the result
-
+            int culOp1; //# of UI4s in x
+            int culOp2; //# of UI4s in y
+            int iulData; //which UI4 we are operating on in x, y
+            byte bLen; // length for the result
 
             x.AssertValid();
             y.AssertValid();
@@ -1341,7 +1352,13 @@ namespace System.Data.SqlTypes
                 bLen = (byte)(iulLastNonZero + 1);
             }
 
-            SqlDecimal ret = new SqlDecimal(rglData1, bLen, (byte)ResPrec, (byte)ResScale, fResSignPos);
+            SqlDecimal ret = new SqlDecimal(
+                rglData1,
+                bLen,
+                (byte)ResPrec,
+                (byte)ResScale,
+                fResSignPos
+            );
 
             if (ret.FGt10_38() || ret.CalculatePrecision() > s_NUMERIC_MAX_PRECISION)
                 throw new OverflowException(SQLResource.ArithOverflowMessage);
@@ -1406,22 +1423,21 @@ namespace System.Data.SqlTypes
             //        III) Adjust product to result scale,prec
 
             // Local variables for actual multiplication
-            int iulPlier;           //index of UI4 in the Multiplier
-            uint ulPlier;            //current mutiplier UI4
-            ulong dwlAccum;           //accumulated sum
-            ulong dwlNextAccum;       //overflow of accumulated sum
+            int iulPlier; //index of UI4 in the Multiplier
+            uint ulPlier; //current mutiplier UI4
+            ulong dwlAccum; //accumulated sum
+            ulong dwlNextAccum; //overflow of accumulated sum
             int culCand = y._bLen; //length of multiplicand in UI4s
 
             //Local variables to track scale,precision
-            int ActualScale;                    // Scale after mult done
-            int ResScale;                       // Final scale we will force result to
-            int ResPrec;                        // Final precision we will force result to
-            int ResInteger;                     // # of digits in integer part of result (prec-scale)
-            int lScaleAdjust;   //How much result scale will be adjusted
-            bool fResPositive;  // Result sign
+            int ActualScale; // Scale after mult done
+            int ResScale; // Final scale we will force result to
+            int ResPrec; // Final precision we will force result to
+            int ResInteger; // # of digits in integer part of result (prec-scale)
+            int lScaleAdjust; //How much result scale will be adjusted
+            bool fResPositive; // Result sign
 
             SqlDecimal ret;
-
 
             //I) Figure result prec,scale
             ActualScale = x._bScale + y._bScale;
@@ -1453,15 +1469,17 @@ namespace System.Data.SqlTypes
 
             // II) Perform multiplication
 
-            ReadOnlySpan<uint> rglData1 = stackalloc uint[4] { x._data1, x._data2, x._data3, x._data4 };
-            ReadOnlySpan<uint> rglData2 = stackalloc uint[4] { y._data1, y._data2, y._data3, y._data4 };
+            ReadOnlySpan<uint> rglData1 =
+                stackalloc uint[4] { x._data1, x._data2, x._data3, x._data4 };
+            ReadOnlySpan<uint> rglData2 =
+                stackalloc uint[4] { y._data1, y._data2, y._data3, y._data4 };
 
             //Local buffer to hold the result of multiplication.
             //Longer than CReNumeBuf because full precision of multiplication is carried out
-            const int x_culNumeMultRes = 9;       // Maximum # UI4s in result buffer in multiplication
+            const int x_culNumeMultRes = 9; // Maximum # UI4s in result buffer in multiplication
             Span<uint> rgulRes = stackalloc uint[x_culNumeMultRes]; //new [] are already initialized to zero
             rgulRes.Clear(); // but spans in core libraries are not for performance reasons so clear it
-            int culRes;             // # of UI4s in result
+            int culRes; // # of UI4s in result
             int idRes = 0;
 
             //Iterate over the bytes of multiplier
@@ -1518,8 +1536,8 @@ namespace System.Data.SqlTypes
                     // Cannot call AdjustScale - number cannot fit in a numeric, so
                     // have to duplicate code here
 
-                    uint ulRem;          //Remainder when downshifting
-                    uint ulShiftBase;    //What to multiply by to effect scale adjust
+                    uint ulRem; //Remainder when downshifting
+                    uint ulShiftBase; //What to multiply by to effect scale adjust
 
                     do
                     {
@@ -1534,8 +1552,7 @@ namespace System.Data.SqlTypes
                             lScaleAdjust = 0;
                         }
                         MpDiv1(rgulRes, ref culRes, ulShiftBase, out ulRem);
-                    }
-                    while (lScaleAdjust != 0);
+                    } while (lScaleAdjust != 0);
 
                     // Still do not fit?
                     if (culRes > s_cNumeMax)
@@ -1543,7 +1560,13 @@ namespace System.Data.SqlTypes
 
                     for (idRes = culRes; idRes < s_cNumeMax; idRes++)
                         rgulRes[idRes] = 0;
-                    ret = new SqlDecimal(rgulRes, (byte)culRes, (byte)ResPrec, (byte)ResScale, fResPositive);
+                    ret = new SqlDecimal(
+                        rgulRes,
+                        (byte)culRes,
+                        (byte)ResPrec,
+                        (byte)ResScale,
+                        fResPositive
+                    );
 
                     // Is it greater than 10**38?
                     if (ret.FGt10_38())
@@ -1563,7 +1586,7 @@ namespace System.Data.SqlTypes
                 }
 
                 // Otherwise call AdjustScale
-                if (culRes > s_cNumeMax)    // Do not fit now, so will not fit after asjustement
+                if (culRes > s_cNumeMax) // Do not fit now, so will not fit after asjustement
                     throw new OverflowException(SQLResource.ArithOverflowMessage);
                 // NOTE: Have not check for value in the range (10**38..2**128),
                 // as we'll call AdjustScale with positive argument, and it'll
@@ -1571,7 +1594,13 @@ namespace System.Data.SqlTypes
 
                 for (idRes = culRes; idRes < s_cNumeMax; idRes++)
                     rgulRes[idRes] = 0;
-                ret = new SqlDecimal(rgulRes, (byte)culRes, (byte)ResPrec, (byte)ActualScale, fResPositive);
+                ret = new SqlDecimal(
+                    rgulRes,
+                    (byte)culRes,
+                    (byte)ResPrec,
+                    (byte)ActualScale,
+                    fResPositive
+                );
 
                 if (ret.FZero())
                     ret.SetPositive();
@@ -1589,7 +1618,13 @@ namespace System.Data.SqlTypes
 
                 for (idRes = culRes; idRes < s_cNumeMax; idRes++)
                     rgulRes[idRes] = 0;
-                ret = new SqlDecimal(rgulRes, (byte)culRes, (byte)ResPrec, (byte)ResScale, fResPositive);
+                ret = new SqlDecimal(
+                    rgulRes,
+                    (byte)culRes,
+                    (byte)ResPrec,
+                    (byte)ResScale,
+                    fResPositive
+                );
 
                 // Is it greater than 10**38?
                 if (ret.FGt10_38())
@@ -1640,14 +1675,14 @@ namespace System.Data.SqlTypes
             y.AssertValid();
 
             // Variables for figuring prec,scale
-            int bScaleD;            // Input Scale of dividend (output scale of remainder)
-            int bPrecD;             // Input Prec of dividend (output prec of remainder)
-            int ResScale;           // Final scale we will force quotient to
-            int ResPrec;            // Final precision we will force quotient to
-            int ResInteger;         // # of digits in integer part of result (prec-scale)
-            int MinScale;           // Temp to help compute ResScale
-            int lScaleAdjust;       // How much result scale will be adjusted
-            bool fResSignPos;       // sign of result
+            int bScaleD; // Input Scale of dividend (output scale of remainder)
+            int bPrecD; // Input Prec of dividend (output prec of remainder)
+            int ResScale; // Final scale we will force quotient to
+            int ResPrec; // Final precision we will force quotient to
+            int ResInteger; // # of digits in integer part of result (prec-scale)
+            int MinScale; // Temp to help compute ResScale
+            int lScaleAdjust; // How much result scale will be adjusted
+            bool fResSignPos; // sign of result
 
             // Steps:
             //    1) Figure result prec,scale; adjust scale of dividend
@@ -1696,7 +1731,8 @@ namespace System.Data.SqlTypes
             rgulR.Clear();
             rgulQ.Clear();
             // # of ULONGs in result
-            int culQ, culR;
+            int culQ,
+                culR;
 
             // Divide mantissas. V is not zero - already checked.
             // Cannot overflow, as Q <= U, R <= V. (and both are positive)
@@ -1704,7 +1740,13 @@ namespace System.Data.SqlTypes
 
             // Construct the result from Q
             ZeroToMaxLen(rgulQ, culQ);
-            SqlDecimal ret = new SqlDecimal(rgulQ, (byte)culQ, (byte)ResPrec, (byte)ResScale, fResSignPos);
+            SqlDecimal ret = new SqlDecimal(
+                rgulQ,
+                (byte)culQ,
+                (byte)ResPrec,
+                (byte)ResScale,
+                fResSignPos
+            );
 
             if (ret.FZero())
                 ret.SetPositive();
@@ -1713,8 +1755,6 @@ namespace System.Data.SqlTypes
 
             return ret;
         }
-
-
 
         // Implicit conversions
 
@@ -1754,7 +1794,6 @@ namespace System.Data.SqlTypes
             return x.IsNull ? Null : new SqlDecimal(x.ToDecimal());
         }
 
-
         // Explicit conversions
 
         // Explicit conversion from SqlSingle to SqlDecimal
@@ -1787,12 +1826,20 @@ namespace System.Data.SqlTypes
                 return;
 
             // Scale,Prec in range
-            Debug.Assert(_bScale <= s_NUMERIC_MAX_PRECISION, "m_bScale <= NUMERIC_MAX_PRECISION", "In AssertValid");
+            Debug.Assert(
+                _bScale <= s_NUMERIC_MAX_PRECISION,
+                "m_bScale <= NUMERIC_MAX_PRECISION",
+                "In AssertValid"
+            );
             Debug.Assert(_bScale <= _bPrec, "m_bScale <= m_bPrec", "In AssertValid");
             Debug.Assert(_bScale >= 0, "m_bScale >= 0", "In AssertValid");
             Debug.Assert(_bPrec > 0, "m_bPrec > 0", "In AssertValid");
 
-            Debug.Assert(CLenFromPrec(_bPrec) >= _bLen, "CLenFromPrec(m_bPrec) >= m_bLen", "In AssertValid");
+            Debug.Assert(
+                CLenFromPrec(_bPrec) >= _bLen,
+                "CLenFromPrec(m_bPrec) >= m_bLen",
+                "In AssertValid"
+            );
             Debug.Assert(_bLen <= s_cNumeMax, "m_bLen <= x_cNumeMax", "In AssertValid");
 
             ReadOnlySpan<uint> rglData = stackalloc uint[4] { _data1, _data2, _data3, _data4 };
@@ -1807,6 +1854,7 @@ namespace System.Data.SqlTypes
             for (int iulData = _bLen; iulData < s_cNumeMax; iulData++)
                 Debug.Assert(rglData[iulData] == 0, "rglData[iulData] == 0", "In AssertValid");
         }
+
         /*
                 // print the data members
                 [System.Diagnostics.Conditional("DEBUG")]
@@ -1837,7 +1885,11 @@ namespace System.Data.SqlTypes
         // Set all extra uints to zero
         private static void ZeroToMaxLen(Span<uint> rgulData, int cUI4sCur)
         {
-            Debug.Assert(rgulData.Length == s_cNumeMax, "rgulData.Length == x_cNumeMax", "Invalid array length");
+            Debug.Assert(
+                rgulData.Length == s_cNumeMax,
+                "rgulData.Length == x_cNumeMax",
+                "Invalid array length"
+            );
 
             switch (cUI4sCur)
             {
@@ -1884,17 +1936,56 @@ namespace System.Data.SqlTypes
         // The array in Shiloh. Listed here for comparison.
         //private static readonly byte[] rgCLenFromPrec = new byte[] {5,5,5,5,5,5,5,5,5,9,9,9,9,9,
         //    9,9,9,9,9,13,13,13,13,13,13,13,13,13,17,17,17,17,17,17,17,17,17,17};
-        private static ReadOnlySpan<byte> RgCLenFromPrec => new byte[] // rely on C# compiler optimization to eliminate allocation
-        {
-            1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2,
-            2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4,
-            4, 4, 4, 4, 4, 4
-        };
+        private static ReadOnlySpan<byte> RgCLenFromPrec =>
+            new byte[] // rely on C# compiler optimization to eliminate allocation
+            {
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                4,
+                4,
+                4,
+                4,
+                4,
+                4,
+                4,
+                4,
+                4,
+                4
+            };
 
         private static byte CLenFromPrec(byte bPrec)
         {
-            Debug.Assert(bPrec <= MaxPrecision && bPrec > 0, "bPrec <= MaxPrecision && bPrec > 0",
-                           "Invalid numeric precision");
+            Debug.Assert(
+                bPrec <= MaxPrecision && bPrec > 0,
+                "bPrec <= MaxPrecision && bPrec > 0",
+                "Invalid numeric precision"
+            );
             return RgCLenFromPrec[bPrec - 1];
         }
 
@@ -1907,20 +1998,30 @@ namespace System.Data.SqlTypes
         // Find the case where we overflowed 10**38, but not 2**128
         private bool FGt10_38()
         {
-            return _data4 >= 0x4b3b4ca8L && _bLen == 4 &&
-            ((_data4 > 0x4b3b4ca8L) || (_data3 > 0x5a86c47aL) ||
-             (_data3 == 0x5a86c47aL) && (_data2 >= 0x098a2240L));
+            return _data4 >= 0x4b3b4ca8L
+                && _bLen == 4
+                && (
+                    (_data4 > 0x4b3b4ca8L)
+                    || (_data3 > 0x5a86c47aL)
+                    || (_data3 == 0x5a86c47aL) && (_data2 >= 0x098a2240L)
+                );
         }
 
         private static bool FGt10_38(Span<uint> rglData)
         {
-            Debug.Assert(rglData.Length == 4, "rglData.Length == 4", $"Wrong array length: {rglData.Length}");
+            Debug.Assert(
+                rglData.Length == 4,
+                "rglData.Length == 4",
+                $"Wrong array length: {rglData.Length}"
+            );
 
-            return rglData[3] >= 0x4b3b4ca8L &&
-            ((rglData[3] > 0x4b3b4ca8L) || (rglData[2] > 0x5a86c47aL) ||
-             (rglData[2] == 0x5a86c47aL) && (rglData[1] >= 0x098a2240L));
+            return rglData[3] >= 0x4b3b4ca8L
+                && (
+                    (rglData[3] > 0x4b3b4ca8L)
+                    || (rglData[2] > 0x5a86c47aL)
+                    || (rglData[2] == 0x5a86c47aL) && (rglData[1] >= 0x098a2240L)
+                );
         }
-
 
         // Powers of ten (used by BGetPrecI4,BGetPrecI8)
         private const uint s_ulT1 = 10;
@@ -2075,8 +2176,7 @@ namespace System.Data.SqlTypes
                 {
                     MpDiv1(rgulU, ref ciulU, 1000000000, out ulRem);
                     Prec += 9;
-                }
-                while (ciulU > 2);
+                } while (ciulU > 2);
                 Debug.Assert(Prec == 9 || Prec == 18 || Prec == 27);
                 Prec += BGetPrecUI8(rgulU[0], rgulU[1]);
             }
@@ -2097,7 +2197,7 @@ namespace System.Data.SqlTypes
         private void AddULong(uint ulAdd)
         {
             ulong dwlAccum = ulAdd;
-            int iData;                  // which UI4 in this we are on
+            int iData; // which UI4 in this we are on
             int iDataMax = _bLen; // # of UI4s in this
 
             Span<uint> rguiData = stackalloc uint[4] { _data1, _data2, _data3, _data4 };
@@ -2107,16 +2207,15 @@ namespace System.Data.SqlTypes
             do
             {
                 dwlAccum += rguiData[iData];
-                rguiData[iData] = (uint)dwlAccum;       // equivalent to mod x_dwlBaseUI4
-                dwlAccum >>= 32;                        // equivalent to dwlAccum /= x_dwlBaseUI4;
+                rguiData[iData] = (uint)dwlAccum; // equivalent to mod x_dwlBaseUI4
+                dwlAccum >>= 32; // equivalent to dwlAccum /= x_dwlBaseUI4;
                 if (0 == dwlAccum)
                 {
                     StoreFromWorkingArray(rguiData);
                     return;
                 }
                 iData++;
-            }
-            while (iData < iDataMax);
+            } while (iData < iDataMax);
 
             // There is carry at the end
 
@@ -2141,9 +2240,9 @@ namespace System.Data.SqlTypes
         {
             int iDataMax = _bLen; // How many UI4s currently in *this
 
-            ulong dwlAccum = 0;       // accumulated sum
-            ulong dwlNextAccum = 0;   // accumulation past dwlAccum
-            int iData;              // which UI4 in *This we are on.
+            ulong dwlAccum = 0; // accumulated sum
+            ulong dwlNextAccum = 0; // accumulation past dwlAccum
+            int iData; // which UI4 in *This we are on.
 
             Span<uint> rguiData = stackalloc uint[4] { _data1, _data2, _data3, _data4 };
 
@@ -2154,19 +2253,23 @@ namespace System.Data.SqlTypes
                 ulong ulTemp = rguiData[iData];
                 dwlNextAccum = ulTemp * uiMultiplier;
                 dwlAccum += dwlNextAccum;
-                if (dwlAccum < dwlNextAccum)        // Overflow of int64 add
-                    dwlNextAccum = s_ulInt32Base;   // how much to add to dwlAccum after div x_dwlBaseUI4
+                if (dwlAccum < dwlNextAccum) // Overflow of int64 add
+                    dwlNextAccum = s_ulInt32Base; // how much to add to dwlAccum after div x_dwlBaseUI4
                 else
                     dwlNextAccum = 0;
                 rguiData[iData] = unchecked((uint)dwlAccum); // equivalent to mod x_dwlBaseUI4
-                dwlAccum = (dwlAccum >> 32) + dwlNextAccum;  // equivalent to div x_dwlBaseUI4
+                dwlAccum = (dwlAccum >> 32) + dwlNextAccum; // equivalent to div x_dwlBaseUI4
             }
 
             // If any carry,
             if (dwlAccum != 0)
             {
                 // Either overflowed
-                Debug.Assert(dwlAccum < s_ulInt32Base, "dwlAccum < x_dwlBaseUI4", "Integer overflow");
+                Debug.Assert(
+                    dwlAccum < s_ulInt32Base,
+                    "dwlAccum < x_dwlBaseUI4",
+                    "Integer overflow"
+                );
                 if (iDataMax == s_cNumeMax)
                     throw new OverflowException(SQLResource.ArithOverflowMessage);
 
@@ -2181,7 +2284,6 @@ namespace System.Data.SqlTypes
             StoreFromWorkingArray(rguiData);
         }
 
-
         //    DivByULong()
         //
         //    Divide numeric value by a ULONG.  The result will be returned
@@ -2195,10 +2297,10 @@ namespace System.Data.SqlTypes
         private uint DivByULong(uint iDivisor)
         {
             ulong dwlDivisor = iDivisor;
-            ulong dwlAccum = 0;           //Accumulated sum
-            uint ulQuotientCur = 0;      // Value of the current UI4 of the quotient
-            bool fAllZero = true;    // All of the quotient (so far) has been 0
-            int iData;              //Which UI4 currently on
+            ulong dwlAccum = 0; //Accumulated sum
+            uint ulQuotientCur = 0; // Value of the current UI4 of the quotient
+            bool fAllZero = true; // All of the quotient (so far) has been 0
+            int iData; //Which UI4 currently on
 
             // Check for zero divisor.
             if (dwlDivisor == 0)
@@ -2263,10 +2365,11 @@ namespace System.Data.SqlTypes
         {
             Debug.Assert(!IsNull, "!IsNull", "In AdjustScale");
 
-            uint ulRem;                  //Remainder when downshifting
-            uint ulShiftBase;            //What to multiply by to effect scale adjust
-            bool fNeedRound = false;     //Do we really need to round?
-            byte bNewScale, bNewPrec;
+            uint ulRem; //Remainder when downshifting
+            uint ulShiftBase; //What to multiply by to effect scale adjust
+            bool fNeedRound = false; //Do we really need to round?
+            byte bNewScale,
+                bNewPrec;
             int lAdjust = digits;
 
             //If downshifting causes truncation of data
@@ -2316,8 +2419,7 @@ namespace System.Data.SqlTypes
                         lAdjust = 0;
                     }
                     ulRem = DivByULong(ulShiftBase);
-                }
-                while (lAdjust < 0);
+                } while (lAdjust < 0);
 
                 // Do we really need to round?
                 fNeedRound = (ulRem >= ulShiftBase / 2);
@@ -2405,8 +2507,8 @@ namespace System.Data.SqlTypes
         //
         private int LAbsCmp(SqlDecimal snumOp)
         {
-            int iData;  //which UI4 we are operating on
-            int culOp;  //#of UI4s on operand
+            int iData; //which UI4 we are operating on
+            int culOp; //#of UI4s on operand
             int culThis; //# of UI4s in this
 
             // If one longer, it is larger
@@ -2416,7 +2518,8 @@ namespace System.Data.SqlTypes
                 return (culThis > culOp) ? 1 : -1;
 
             ReadOnlySpan<uint> rglData1 = stackalloc uint[4] { _data1, _data2, _data3, _data4 };
-            ReadOnlySpan<uint> rglData2 = stackalloc uint[4] { snumOp._data1, snumOp._data2, snumOp._data3, snumOp._data4 };
+            ReadOnlySpan<uint> rglData2 =
+                stackalloc uint[4] { snumOp._data1, snumOp._data2, snumOp._data3, snumOp._data4 };
 
             // Loop through numeric value checking each byte for differences.
             iData = culOp - 1;
@@ -2427,20 +2530,18 @@ namespace System.Data.SqlTypes
                 if (rglData1[iData] != rglData2[iData])
                     return ((rglData1[iData] > rglData2[iData]) ? 1 : -1);
                 iData--;
-            }
-            while (iData >= 0);
+            } while (iData >= 0);
 
             // All UI4s the same, return 0.
             return 0;
         }
 
         // Move multi-precision number
-        private static void MpMove
-        (
-        ReadOnlySpan<uint> rgulS,      // In    | Source number
-        int ciulS,      // In    | # of digits in S
-        Span<uint> rgulD,      // Out    | Destination number
-        out int ciulD       // Out    | # of digits in D
+        private static void MpMove(
+            ReadOnlySpan<uint> rgulS, // In    | Source number
+            int ciulS, // In    | # of digits in S
+            Span<uint> rgulD, // Out    | Destination number
+            out int ciulD // Out    | # of digits in D
         )
         {
             ciulD = ciulS;
@@ -2453,11 +2554,10 @@ namespace System.Data.SqlTypes
         }
 
         // Set multi-precision number to one super-digit
-        private static void MpSet
-        (
-        Span<uint> rgulD,      // Out    | Number
-        out int ciulD,      // Out    | # of digits in D
-        uint iulN        // In    | ULONG to set
+        private static void MpSet(
+            Span<uint> rgulD, // Out    | Number
+            out int ciulD, // Out    | # of digits in D
+            uint iulN // In    | ULONG to set
         )
         {
             ciulD = 1;
@@ -2465,10 +2565,9 @@ namespace System.Data.SqlTypes
         }
 
         // Normalize multi-precision number - remove leading zeroes
-        private static void MpNormalize
-        (
-        ReadOnlySpan<uint> rgulU,      // In   | Number
-        ref int ciulU       // InOut| # of digits
+        private static void MpNormalize(
+            ReadOnlySpan<uint> rgulU, // In   | Number
+            ref int ciulU // InOut| # of digits
         )
         {
             while (ciulU > 1 && rgulU[ciulU - 1] == 0)
@@ -2478,11 +2577,10 @@ namespace System.Data.SqlTypes
         // Multi-precision one super-digit multiply in place.
         // D = D * X
         // Length can increase
-        private static void MpMul1
-        (
-        Span<uint> piulD,      // InOut| D
-        ref int ciulD,      // InOut| # of digits in D
-        uint iulX        // In    | X
+        private static void MpMul1(
+            Span<uint> piulD, // InOut| D
+            ref int ciulD, // InOut| # of digits in D
+            uint iulX // In    | X
         )
         {
             Debug.Assert(iulX > s_uiZero);
@@ -2510,12 +2608,11 @@ namespace System.Data.SqlTypes
         // U = U / D,
         // R = U % D
         // Length of U can decrease
-        private static void MpDiv1
-        (
-        Span<uint> rgulU,      // InOut| U
-        ref int ciulU,      // InOut| # of digits in U
-        uint iulD,       // In    | D
-        out uint iulR        // Out    | R
+        private static void MpDiv1(
+            Span<uint> rgulU, // InOut| U
+            ref int ciulU, // InOut| # of digits in U
+            uint iulD, // In    | D
+            out uint iulR // Out    | R
         )
         {
             Debug.Assert(rgulU.Length == s_cNumeMax);
@@ -2534,7 +2631,7 @@ namespace System.Data.SqlTypes
                 idU--;
                 dwlAccum = (((ulong)ulCarry) << 32) + rgulU[idU];
                 rgulU[idU] = (uint)(dwlAccum / ulD);
-                ulCarry = (uint)(dwlAccum - rgulU[idU] * ulD);  // (ULONG) (dwlAccum % iulD)
+                ulCarry = (uint)(dwlAccum - rgulU[idU] * ulD); // (ULONG) (dwlAccum % iulD)
             }
             iulR = ulCarry;
             MpNormalize(rgulU, ref ciulU);
@@ -2572,16 +2669,15 @@ namespace System.Data.SqlTypes
         // then we'll use alloca() or there will be limit on the upper size of numbers
         // (maybe not a problem in SQL Server).
         //
-        private static void MpDiv
-        (
-        ReadOnlySpan<uint> rgulU,      // In    | U
-        int ciulU,      // In    | # of digits in U
-        Span<uint> rgulD,      // InOut    | D
-        int ciulD,      // In    | # of digits in D
-        Span<uint> rgulQ,      // Out    | Q
-        out int ciulQ,      // Out    | # of digits in Q
-        Span<uint> rgulR,      // Out    | R
-        out int ciulR       // Out    | # of digits in R
+        private static void MpDiv(
+            ReadOnlySpan<uint> rgulU, // In    | U
+            int ciulU, // In    | # of digits in U
+            Span<uint> rgulD, // InOut    | D
+            int ciulD, // In    | # of digits in D
+            Span<uint> rgulQ, // Out    | Q
+            out int ciulQ, // Out    | # of digits in Q
+            Span<uint> rgulR, // Out    | R
+            out int ciulR // Out    | # of digits in R
         )
         {
             Debug.Assert(ciulU > 0, "ciulU > 0", "In method MpDiv");
@@ -2594,25 +2690,24 @@ namespace System.Data.SqlTypes
             {
                 ciulQ = ciulR = 0;
             }
-
             // Check for simplest case, so it'll be fast
             else if (ciulU == 1 && ciulD == 1)
             {
                 MpSet(rgulQ, out ciulQ, rgulU[0] / rgulD[0]);
                 MpSet(rgulR, out ciulR, rgulU[0] % rgulD[0]);
             }
-
             // If D > U then do not divide at all
             else if (ciulD > ciulU)
             {
-                MpMove(rgulU, ciulU, rgulR, out ciulR);        // R = U
-                MpSet(rgulQ, out ciulQ, 0);                    // Q = 0
+                MpMove(rgulU, ciulU, rgulR, out ciulR); // R = U
+                MpSet(rgulQ, out ciulQ, 0); // Q = 0
             }
-
             // Try to divide faster - check for remaining good sizes (8 / 4, 8 / 8)
             else if (ciulU <= 2)
             {
-                ulong dwlU, dwlD, dwlT;
+                ulong dwlU,
+                    dwlD,
+                    dwlT;
 
                 dwlU = DWL(rgulU[0], rgulU[1]);
                 dwlD = rgulD[0];
@@ -2627,27 +2722,27 @@ namespace System.Data.SqlTypes
                 rgulR[1] = HI(dwlT);
                 ciulR = (HI(dwlT) != 0) ? 2 : 1;
             }
-
             // If we are dividing by one digit - use simpler routine
             else if (ciulD == 1)
             {
-                MpMove(rgulU, ciulU, rgulQ, out ciulQ);        // Q = U
+                MpMove(rgulU, ciulU, rgulQ, out ciulQ); // Q = U
                 uint remainder;
-                MpDiv1(rgulQ, ref ciulQ, rgulD[0], out remainder);     // Q = Q / D, R = Q % D
+                MpDiv1(rgulQ, ref ciulQ, rgulD[0], out remainder); // Q = Q / D, R = Q % D
                 rgulR[0] = remainder;
                 ciulR = 1;
             }
-
             // Worst case. Knuth, "The Art of Computer Programming", 3rd edition, vol.II, Alg.D, pg 272
             else
             {
                 ciulQ = ciulR = 0;
 
-                uint D1, ulDHigh, ulDSecond;
+                uint D1,
+                    ulDHigh,
+                    ulDSecond;
                 int iulRindex;
 
                 if (rgulU != rgulR)
-                    MpMove(rgulU, ciulU, rgulR, out ciulR);        // R = U
+                    MpMove(rgulU, ciulU, rgulR, out ciulR); // R = U
 
                 ciulQ = ciulU - ciulD + 1;
                 ulDHigh = rgulD[ciulD - 1];
@@ -2668,9 +2763,12 @@ namespace System.Data.SqlTypes
                 // D3-D7. Loop on iulRindex - obtaining digits one-by-one, as "in paper"
                 do
                 {
-                    uint QH, RH;
-                    int iulDindex, iulRwork;
-                    ulong dwlAccum, dwlMulAccum;
+                    uint QH,
+                        RH;
+                    int iulDindex,
+                        iulRwork;
+                    ulong dwlAccum,
+                        dwlMulAccum;
 
                     // D3. Calculate Q hat - estimation of the next digit
                     dwlAccum = DWL(rgulR[iulRindex - 1], rgulR[iulRindex]);
@@ -2691,8 +2789,12 @@ namespace System.Data.SqlTypes
                     }
 
                     // D4. Multiply and subtract: (some digits of) R -= D * QH
-                    for (dwlAccum = s_ulInt32Base, dwlMulAccum = 0, iulDindex = 0, iulRwork = iulRindex - ciulD;
-                        iulDindex < ciulD; iulDindex++, iulRwork++)
+                    for (
+                        dwlAccum = s_ulInt32Base, dwlMulAccum = 0, iulDindex = 0, iulRwork =
+                            iulRindex - ciulD;
+                        iulDindex < ciulD;
+                        iulDindex++, iulRwork++
+                    )
                     {
                         ulong ulTemp2 = rgulD[iulDindex];
                         dwlMulAccum += QH * ulTemp2;
@@ -2712,8 +2814,11 @@ namespace System.Data.SqlTypes
                         uint ulCarry;
 
                         rgulQ[iulRindex - ciulD] = QH - 1;
-                        for (ulCarry = 0, iulDindex = 0, iulRwork = iulRindex - ciulD;
-                            iulDindex < ciulD; iulDindex++, iulRwork++)
+                        for (
+                            ulCarry = 0, iulDindex = 0, iulRwork = iulRindex - ciulD;
+                            iulDindex < ciulD;
+                            iulDindex++, iulRwork++
+                        )
                         {
                             dwlAccum = rgulD[iulDindex] + (ulong)rgulR[iulRwork] + ulCarry;
                             ulCarry = HI(dwlAccum);
@@ -2723,8 +2828,7 @@ namespace System.Data.SqlTypes
                     }
                     // D7. Loop on iulRindex
                     iulRindex--;
-                }
-                while (iulRindex >= ciulD);
+                } while (iulRindex >= ciulD);
                 // Normalize results
                 MpNormalize(rgulQ, ref ciulQ);
                 ciulR = ciulD;
@@ -2753,10 +2857,7 @@ namespace System.Data.SqlTypes
         //        EComparison.EQ        - this = snumOp
         //        EComparison.GT    - this > snumOp
         //
-        private EComparison CompareNm
-        (
-        SqlDecimal snumOp
-        )
+        private EComparison CompareNm(SqlDecimal snumOp)
         {
             AssertValid();
             snumOp.AssertValid();
@@ -2765,8 +2866,8 @@ namespace System.Data.SqlTypes
             int Sign1;
             int Sign2;
 
-            int iFinalResult;   //Final result of comparision: positive = greater
-                                //than, 0 = equal, negative = less than
+            int iFinalResult; //Final result of comparision: positive = greater
+            //than, 0 = equal, negative = less than
 
             //Initialize the sign values to be 1(positive) or -1(negative)
             Sign1 = IsPositive ? 1 : -1;
@@ -2774,7 +2875,6 @@ namespace System.Data.SqlTypes
 
             if (Sign1 != Sign2) //If different sign, the positive one is greater
                 return Sign1 == 1 ? EComparison.GT : EComparison.LT;
-
             else
             { //same sign, have to compare absolute values
                 //Temporary memory to hold the operand since it is const
@@ -2833,20 +2933,34 @@ namespace System.Data.SqlTypes
 
         private static void CheckValidPrecScale(byte bPrec, byte bScale)
         {
-            if (bPrec < 1 || bPrec > MaxPrecision || bScale < 0 || bScale > MaxScale || bScale > bPrec)
+            if (
+                bPrec < 1
+                || bPrec > MaxPrecision
+                || bScale < 0
+                || bScale > MaxScale
+                || bScale > bPrec
+            )
                 throw new SqlTypeException(SQLResource.InvalidPrecScaleMessage);
         }
 
         private static void CheckValidPrecScale(int iPrec, int iScale)
         {
-            if (iPrec < 1 || iPrec > MaxPrecision || iScale < 0 || iScale > MaxScale || iScale > iPrec)
+            if (
+                iPrec < 1
+                || iPrec > MaxPrecision
+                || iScale < 0
+                || iScale > MaxScale
+                || iScale > iPrec
+            )
                 throw new SqlTypeException(SQLResource.InvalidPrecScaleMessage);
         }
 
         // Overloading comparison operators
         public static SqlBoolean operator ==(SqlDecimal x, SqlDecimal y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.CompareNm(y) == EComparison.EQ);
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.CompareNm(y) == EComparison.EQ);
         }
 
         public static SqlBoolean operator !=(SqlDecimal x, SqlDecimal y)
@@ -2856,12 +2970,16 @@ namespace System.Data.SqlTypes
 
         public static SqlBoolean operator <(SqlDecimal x, SqlDecimal y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.CompareNm(y) == EComparison.LT);
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.CompareNm(y) == EComparison.LT);
         }
 
         public static SqlBoolean operator >(SqlDecimal x, SqlDecimal y)
         {
-            return (x.IsNull || y.IsNull) ? SqlBoolean.Null : new SqlBoolean(x.CompareNm(y) == EComparison.GT);
+            return (x.IsNull || y.IsNull)
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.CompareNm(y) == EComparison.GT);
         }
 
         public static SqlBoolean operator <=(SqlDecimal x, SqlDecimal y)
@@ -2886,7 +3004,6 @@ namespace System.Data.SqlTypes
             }
         }
 
-
         //--------------------------------------------------
         // Alternative methods for overloaded operators
         //--------------------------------------------------
@@ -2896,6 +3013,7 @@ namespace System.Data.SqlTypes
         {
             return x + y;
         }
+
         // Alternative method for operator -
         public static SqlDecimal Subtract(SqlDecimal x, SqlDecimal y)
         {
@@ -3017,10 +3135,7 @@ namespace System.Data.SqlTypes
         {
             Debug.Assert(_bPrec >= 1);
             _bLen = 1;
-            _data1 =
-            _data2 =
-            _data3 =
-            _data4 = 0;
+            _data1 = _data2 = _data3 = _data4 = 0;
             _bStatus = (byte)(s_bNotNull | s_bPositive);
             AssertValid();
         }
@@ -3081,7 +3196,7 @@ namespace System.Data.SqlTypes
             if (n._bScale == 0)
                 return n;
 
-            bool fFraction;    //Fractional flag
+            bool fFraction; //Fractional flag
 
             n.MakeInteger(out fFraction);
 
@@ -3092,7 +3207,7 @@ namespace System.Data.SqlTypes
                 n.AddULong(1);
             }
 
-            if (n.FZero())//if result is zero, sign should be positive
+            if (n.FZero()) //if result is zero, sign should be positive
                 n.SetPositive();
             n.AssertValid();
             return n;
@@ -3109,7 +3224,7 @@ namespace System.Data.SqlTypes
             if (n._bScale == 0)
                 return n;
 
-            bool fFraction;    //Fractional flag
+            bool fFraction; //Fractional flag
 
             n.MakeInteger(out fFraction);
 
@@ -3120,7 +3235,7 @@ namespace System.Data.SqlTypes
                 n.AddULong(1);
             }
 
-            if (n.FZero())//if result is zero, sign should be positive
+            if (n.FZero()) //if result is zero, sign should be positive
                 n.SetPositive();
             n.AssertValid();
             return n;
@@ -3137,8 +3252,9 @@ namespace System.Data.SqlTypes
             if (n == new SqlDecimal(0))
                 return SqlInt32.Zero;
             else
-                return n.IsNull ? SqlInt32.Null :
-                    (n.IsPositive ? new SqlInt32(1) : new SqlInt32(-1));
+                return n.IsNull
+                    ? SqlInt32.Null
+                    : (n.IsPositive ? new SqlInt32(1) : new SqlInt32(-1));
         }
 
         private static SqlDecimal Round(SqlDecimal n, int lPosition, bool fTruncate)
@@ -3151,7 +3267,7 @@ namespace System.Data.SqlTypes
                 //If round to the right of decimal number
                 lPosition = Math.Min(s_NUMERIC_MAX_PRECISION, lPosition);
                 if (lPosition >= n._bScale)
-                    return n;   //No need to round
+                    return n; //No need to round
             }
             else
             {
@@ -3166,9 +3282,9 @@ namespace System.Data.SqlTypes
                 }
             }
 
-            uint ulRem = 0;                                         // Remainder: the highest significant digit to be truncated
-            int lAdjust = Math.Abs(lPosition - n._bScale);    // Precision adjustment
-            uint ulLastDivBase = 1;                                 //
+            uint ulRem = 0; // Remainder: the highest significant digit to be truncated
+            int lAdjust = Math.Abs(lPosition - n._bScale); // Precision adjustment
+            uint ulLastDivBase = 1; //
 
             //Compute the integral part of the numeric
             while (lAdjust > 0)
@@ -3250,7 +3366,6 @@ namespace System.Data.SqlTypes
             return n;
         }
 
-
         // IComparable
         // Compares this object to another object, returning an integer that
         // indicates the relationship.
@@ -3276,8 +3391,10 @@ namespace System.Data.SqlTypes
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -3289,8 +3406,7 @@ namespace System.Data.SqlTypes
         /// <param name="other">An instance to compare with this instance.</param>
         /// <returns>true if the current instance is equal to the other instance; otherwise, false.</returns>
         public bool Equals(SqlDecimal other) =>
-            other.IsNull || IsNull ? other.IsNull && IsNull :
-            (this == other).Value;
+            other.IsNull || IsNull ? other.IsNull && IsNull : (this == other).Value;
 
         // For hashing purpose
         public override int GetHashCode()
@@ -3328,7 +3444,10 @@ namespace System.Data.SqlTypes
             return ulValue;
         }
 
-        XmlSchema? IXmlSerializable.GetSchema() { return null; }
+        XmlSchema? IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
@@ -3375,7 +3494,11 @@ namespace System.Data.SqlTypes
 
         public static readonly SqlDecimal Null = new SqlDecimal(true);
 
-        public static readonly SqlDecimal MinValue = SqlDecimal.Parse("-99999999999999999999999999999999999999");
-        public static readonly SqlDecimal MaxValue = SqlDecimal.Parse("99999999999999999999999999999999999999");
+        public static readonly SqlDecimal MinValue = SqlDecimal.Parse(
+            "-99999999999999999999999999999999999999"
+        );
+        public static readonly SqlDecimal MaxValue = SqlDecimal.Parse(
+            "99999999999999999999999999999999999999"
+        );
     } // SqlDecimal
 } // namespace System.Data.SqlTypes

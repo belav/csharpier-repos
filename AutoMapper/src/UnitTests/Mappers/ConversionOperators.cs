@@ -9,21 +9,30 @@ namespace AutoMapper.UnitTests
         public class QueryableValue<T>
         {
             public T Value { get; set; }
+
             public static implicit operator QueryableValue<T>(T obj) => new() { Value = obj };
+
             public static implicit operator T(QueryableValue<T> obj) => obj.Value;
         }
+
         class Destination
         {
             public QueryableValue<int?> MyProperty { get; set; } = null!;
         }
+
         class Source
         {
             public int? MyProperty { get; set; }
         }
-        protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap<Source, Destination>());
+
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(c => c.CreateMap<Source, Destination>());
+
         [Fact]
-        public void Should_work() => Map<Destination>(new Source { MyProperty = 42 }).MyProperty.Value.ShouldBe(42);
+        public void Should_work() =>
+            Map<Destination>(new Source { MyProperty = 42 }).MyProperty.Value.ShouldBe(42);
     }
+
     public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_destination
     {
         private Bar _bar;
@@ -39,12 +48,8 @@ namespace AutoMapper.UnitTests
 
             public static implicit operator Bar(Foo other)
             {
-                return new Bar
-                {
-                    OtherValue = other.Value
-                };
+                return new Bar { OtherValue = other.Value };
             }
-
         }
 
         [Fact]
@@ -58,7 +63,7 @@ namespace AutoMapper.UnitTests
             _bar.OtherValue.ShouldBe("Hello");
         }
     }
-        
+
     public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_source
     {
         private Bar _bar;
@@ -69,21 +74,16 @@ namespace AutoMapper.UnitTests
 
             public static implicit operator Bar(Foo other)
             {
-                return new Bar
-                {
-                    OtherValue = other.Value
-                };
+                return new Bar { OtherValue = other.Value };
             }
 
             public static implicit operator string(Foo other)
             {
                 return other.Value;
             }
-
         }
 
-        public class InheritedFoo : Foo
-        { }
+        public class InheritedFoo : Foo { }
 
         public class Bar
         {
@@ -128,10 +128,7 @@ namespace AutoMapper.UnitTests
 
             public static explicit operator Bar(Foo other)
             {
-                return new Bar
-                {
-                    OtherValue = other.Value
-                };
+                return new Bar { OtherValue = other.Value };
             }
         }
 
@@ -154,15 +151,11 @@ namespace AutoMapper.UnitTests
 
             public static explicit operator Bar(Foo other)
             {
-                return new Bar
-                {
-                    OtherValue = other.Value
-                };
+                return new Bar { OtherValue = other.Value };
             }
         }
 
-        public class InheritedFoo : Foo
-        { }
+        public class InheritedFoo : Foo { }
 
         public class Bar
         {

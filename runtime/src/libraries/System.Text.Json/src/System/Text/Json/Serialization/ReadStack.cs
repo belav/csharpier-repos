@@ -13,7 +13,27 @@ namespace System.Text.Json
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     internal struct ReadStack
     {
-        internal static readonly char[] SpecialCharacters = { '.', ' ', '\'', '/', '"', '[', ']', '(', ')', '\t', '\n', '\r', '\f', '\b', '\\', '\u0085', '\u2028', '\u2029' };
+        internal static readonly char[] SpecialCharacters =
+        {
+            '.',
+            ' ',
+            '\'',
+            '/',
+            '"',
+            '[',
+            ']',
+            '(',
+            ')',
+            '\t',
+            '\n',
+            '\r',
+            '\f',
+            '\b',
+            '\\',
+            '\u0085',
+            '\u2028',
+            '\u2029'
+        };
 
         /// <summary>
         /// Exposes the stackframe that is currently active.
@@ -110,7 +130,9 @@ namespace System.Text.Json
             Current.JsonTypeInfo = jsonTypeInfo;
             Current.JsonPropertyInfo = jsonTypeInfo.PropertyInfoForTypeInfo;
             Current.NumberHandling = Current.JsonPropertyInfo.EffectiveNumberHandling;
-            Current.CanContainMetadata = PreserveReferences || jsonTypeInfo.PolymorphicTypeResolver?.UsesTypeDiscriminators == true;
+            Current.CanContainMetadata =
+                PreserveReferences
+                || jsonTypeInfo.PolymorphicTypeResolver?.UsesTypeDiscriminators == true;
         }
 
         public void Push()
@@ -126,7 +148,9 @@ namespace System.Text.Json
                 }
                 else
                 {
-                    JsonTypeInfo jsonTypeInfo = Current.JsonPropertyInfo?.JsonTypeInfo ?? Current.CtorArgumentState!.JsonParameterInfo!.JsonTypeInfo;
+                    JsonTypeInfo jsonTypeInfo =
+                        Current.JsonPropertyInfo?.JsonTypeInfo
+                        ?? Current.CtorArgumentState!.JsonParameterInfo!.JsonTypeInfo;
                     JsonNumberHandling? numberHandling = Current.NumberHandling;
 
                     EnsurePushCapacity();
@@ -137,8 +161,11 @@ namespace System.Text.Json
                     Current.JsonTypeInfo = jsonTypeInfo;
                     Current.JsonPropertyInfo = jsonTypeInfo.PropertyInfoForTypeInfo;
                     // Allow number handling on property to win over handling on type.
-                    Current.NumberHandling = numberHandling ?? Current.JsonPropertyInfo.EffectiveNumberHandling;
-                    Current.CanContainMetadata = PreserveReferences || jsonTypeInfo.PolymorphicTypeResolver?.UsesTypeDiscriminators == true;
+                    Current.NumberHandling =
+                        numberHandling ?? Current.JsonPropertyInfo.EffectiveNumberHandling;
+                    Current.CanContainMetadata =
+                        PreserveReferences
+                        || jsonTypeInfo.PolymorphicTypeResolver?.UsesTypeDiscriminators == true;
                 }
             }
             else
@@ -217,18 +244,20 @@ namespace System.Text.Json
         {
             Debug.Assert(!IsContinuation);
             Debug.Assert(Current.PolymorphicJsonTypeInfo == null);
-            Debug.Assert(Current.PolymorphicSerializationState == PolymorphicSerializationState.None);
+            Debug.Assert(
+                Current.PolymorphicSerializationState == PolymorphicSerializationState.None
+            );
 
             Current.PolymorphicJsonTypeInfo = Current.JsonTypeInfo;
             Current.JsonTypeInfo = derivedJsonTypeInfo.PropertyInfoForTypeInfo.JsonTypeInfo;
             Current.JsonPropertyInfo = Current.JsonTypeInfo.PropertyInfoForTypeInfo;
             Current.NumberHandling ??= Current.JsonPropertyInfo.NumberHandling;
-            Current.PolymorphicSerializationState = PolymorphicSerializationState.PolymorphicReEntryStarted;
+            Current.PolymorphicSerializationState =
+                PolymorphicSerializationState.PolymorphicReEntryStarted;
             SetConstructorArgumentState();
 
             return derivedJsonTypeInfo.PropertyInfoForTypeInfo.ConverterBase;
         }
-
 
         /// <summary>
         /// Configures the current frame for a continuation of a polymorphic converter.
@@ -236,11 +265,18 @@ namespace System.Text.Json
         public JsonConverter ResumePolymorphicReEntry()
         {
             Debug.Assert(Current.PolymorphicJsonTypeInfo != null);
-            Debug.Assert(Current.PolymorphicSerializationState == PolymorphicSerializationState.PolymorphicReEntrySuspended);
+            Debug.Assert(
+                Current.PolymorphicSerializationState
+                    == PolymorphicSerializationState.PolymorphicReEntrySuspended
+            );
 
             // Swap out the two values as we resume the polymorphic converter
-            (Current.JsonTypeInfo, Current.PolymorphicJsonTypeInfo) = (Current.PolymorphicJsonTypeInfo, Current.JsonTypeInfo);
-            Current.PolymorphicSerializationState = PolymorphicSerializationState.PolymorphicReEntryStarted;
+            (Current.JsonTypeInfo, Current.PolymorphicJsonTypeInfo) = (
+                Current.PolymorphicJsonTypeInfo,
+                Current.JsonTypeInfo
+            );
+            Current.PolymorphicSerializationState =
+                PolymorphicSerializationState.PolymorphicReEntryStarted;
             return Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterBase;
         }
 
@@ -250,11 +286,19 @@ namespace System.Text.Json
         public void ExitPolymorphicConverter(bool success)
         {
             Debug.Assert(Current.PolymorphicJsonTypeInfo != null);
-            Debug.Assert(Current.PolymorphicSerializationState == PolymorphicSerializationState.PolymorphicReEntryStarted);
+            Debug.Assert(
+                Current.PolymorphicSerializationState
+                    == PolymorphicSerializationState.PolymorphicReEntryStarted
+            );
 
             // Swap out the two values as we exit the polymorphic converter
-            (Current.JsonTypeInfo, Current.PolymorphicJsonTypeInfo) = (Current.PolymorphicJsonTypeInfo, Current.JsonTypeInfo);
-            Current.PolymorphicSerializationState = success ? PolymorphicSerializationState.None : PolymorphicSerializationState.PolymorphicReEntrySuspended;
+            (Current.JsonTypeInfo, Current.PolymorphicJsonTypeInfo) = (
+                Current.PolymorphicJsonTypeInfo,
+                Current.JsonTypeInfo
+            );
+            Current.PolymorphicSerializationState = success
+                ? PolymorphicSerializationState.None
+                : PolymorphicSerializationState.PolymorphicReEntrySuspended;
         }
 
         // Return a JSONPath using simple dot-notation when possible. When special characters are present, bracket-notation is used:
@@ -297,9 +341,11 @@ namespace System.Text.Json
                     }
 
                     // For continuation scenarios only, before or after all elements are read, the exception is not within the array.
-                    if (frame.ObjectState == StackFrameObjectState.None ||
-                        frame.ObjectState == StackFrameObjectState.CreatedObject ||
-                        frame.ObjectState == StackFrameObjectState.ReadElements)
+                    if (
+                        frame.ObjectState == StackFrameObjectState.None
+                        || frame.ObjectState == StackFrameObjectState.CreatedObject
+                        || frame.ObjectState == StackFrameObjectState.ReadElements
+                    )
                     {
                         sb.Append('[');
                         sb.Append(GetCount(enumerable));
@@ -360,8 +406,9 @@ namespace System.Text.Json
                     else
                     {
                         // Attempt to get the JSON property name from the JsonPropertyInfo or JsonParameterInfo.
-                        utf8PropertyName = frame.JsonPropertyInfo?.NameAsUtf8Bytes ??
-                            frame.CtorArgumentState?.JsonParameterInfo?.NameAsUtf8Bytes;
+                        utf8PropertyName =
+                            frame.JsonPropertyInfo?.NameAsUtf8Bytes
+                            ?? frame.CtorArgumentState?.JsonParameterInfo?.NameAsUtf8Bytes;
                     }
                 }
 
@@ -382,20 +429,38 @@ namespace System.Text.Json
 
             for (int i = 0; i < _count - 1; i++)
             {
-                if (_stack[i].JsonTypeInfo.PropertyInfoForTypeInfo.ConverterBase.ConstructorIsParameterized)
+                if (
+                    _stack[i]
+                        .JsonTypeInfo
+                        .PropertyInfoForTypeInfo
+                        .ConverterBase
+                        .ConstructorIsParameterized
+                )
                 {
                     return _stack[i].JsonTypeInfo;
                 }
             }
 
-            Debug.Assert(Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterBase.ConstructorIsParameterized);
+            Debug.Assert(
+                Current
+                    .JsonTypeInfo
+                    .PropertyInfoForTypeInfo
+                    .ConverterBase
+                    .ConstructorIsParameterized
+            );
             return Current.JsonTypeInfo;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void SetConstructorArgumentState()
         {
-            if (Current.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterBase.ConstructorIsParameterized)
+            if (
+                Current
+                    .JsonTypeInfo
+                    .PropertyInfoForTypeInfo
+                    .ConverterBase
+                    .ConstructorIsParameterized
+            )
             {
                 // A zero index indicates a new stack frame.
                 if (Current.CtorArgumentStateIndex == 0)
@@ -405,16 +470,22 @@ namespace System.Text.Json
                     var newState = new ArgumentState();
                     _ctorArgStateCache.Add(newState);
 
-                    (Current.CtorArgumentStateIndex, Current.CtorArgumentState) = (_ctorArgStateCache.Count, newState);
+                    (Current.CtorArgumentStateIndex, Current.CtorArgumentState) = (
+                        _ctorArgStateCache.Count,
+                        newState
+                    );
                 }
                 else
                 {
-                    Current.CtorArgumentState = _ctorArgStateCache![Current.CtorArgumentStateIndex - 1];
+                    Current.CtorArgumentState = _ctorArgStateCache![
+                        Current.CtorArgumentStateIndex - 1
+                    ];
                 }
             }
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => $"Path:{JsonPath()} Current: ConverterStrategy.{Current.JsonTypeInfo?.PropertyInfoForTypeInfo.ConverterStrategy}, {Current.JsonTypeInfo?.Type.Name}";
+        private string DebuggerDisplay =>
+            $"Path:{JsonPath()} Current: ConverterStrategy.{Current.JsonTypeInfo?.PropertyInfoForTypeInfo.ConverterStrategy}, {Current.JsonTypeInfo?.Type.Name}";
     }
 }

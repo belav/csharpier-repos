@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
 
         public OrganizeUsingsSet OrganizeUsings { get; }
 
-        public EnabledDiagnosticOptions(bool formatDocument, ImmutableArray<DiagnosticSet> diagnostics, OrganizeUsingsSet organizeUsings)
+        public EnabledDiagnosticOptions(
+            bool formatDocument,
+            ImmutableArray<DiagnosticSet> diagnostics,
+            OrganizeUsingsSet organizeUsings
+        )
         {
             FormatDocument = formatDocument;
             Diagnostics = diagnostics;

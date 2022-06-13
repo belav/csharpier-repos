@@ -21,9 +21,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             public SafeHandle? SafeHandle => null;
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void Add(ICertificatePal cert)
             {
@@ -46,10 +44,13 @@ namespace System.Security.Cryptography.X509Certificates
                     bool success = Interop.AndroidCrypto.X509StoreEnumerateTrustedCertificates(
                         (byte)(systemOnly ? 1 : 0),
                         &EnumCertificatesCallback,
-                        Unsafe.AsPointer(ref context));
+                        Unsafe.AsPointer(ref context)
+                    );
                     if (!success)
                     {
-                        throw new CryptographicException(SR.Cryptography_X509_StoreEnumerateFailure);
+                        throw new CryptographicException(
+                            SR.Cryptography_X509_StoreEnumerateFailure
+                        );
                     }
                 }
 
@@ -67,7 +68,10 @@ namespace System.Security.Cryptography.X509Certificates
             [UnmanagedCallersOnly]
             private static unsafe void EnumCertificatesCallback(void* certPtr, void* context)
             {
-                ref EnumCertificatesContext callbackContext = ref Unsafe.As<byte, EnumCertificatesContext>(ref *(byte*)context);
+                ref EnumCertificatesContext callbackContext = ref Unsafe.As<
+                    byte,
+                    EnumCertificatesContext
+                >(ref *(byte*)context);
                 var handle = new SafeX509Handle((IntPtr)certPtr);
                 var cert = new X509Certificate2(new AndroidCertificatePal(handle));
                 if (!callbackContext.Results.Add(cert))

@@ -57,7 +57,11 @@ namespace System.Security.Cryptography
         {
             ArgumentNullException.ThrowIfNull(oidValue);
 
-            string? friendlyName = OidLookup.ToFriendlyName(oidValue, group, fallBackToAllGroups: false);
+            string? friendlyName = OidLookup.ToFriendlyName(
+                oidValue,
+                group,
+                fallBackToAllGroups: false
+            );
             if (friendlyName == null)
                 throw new CryptographicException(SR.Cryptography_Oid_InvalidValue);
 
@@ -86,7 +90,11 @@ namespace System.Security.Cryptography
             {
                 if (!_hasInitializedFriendlyName && _value != null)
                 {
-                    _friendlyName = OidLookup.ToFriendlyName(_value, _group, fallBackToAllGroups: true);
+                    _friendlyName = OidLookup.ToFriendlyName(
+                        _value,
+                        _group,
+                        fallBackToAllGroups: true
+                    );
                     _hasInitializedFriendlyName = true;
                 }
 
@@ -98,10 +106,16 @@ namespace System.Security.Cryptography
                 // the same value for "initialize once" behavior.
                 if (_hasInitializedFriendlyName)
                 {
-                    if ((_friendlyName != null && !_friendlyName.Equals(value, StringComparison.Ordinal)) ||
-                        (_friendlyName is null && value != null))
+                    if (
+                        (
+                            _friendlyName != null
+                            && !_friendlyName.Equals(value, StringComparison.Ordinal)
+                        ) || (_friendlyName is null && value != null)
+                    )
                     {
-                        throw new PlatformNotSupportedException(SR.Cryptography_Oid_SetOnceFriendlyName);
+                        throw new PlatformNotSupportedException(
+                            SR.Cryptography_Oid_SetOnceFriendlyName
+                        );
                     }
 
                     // Already initialized, no meaningful mutation, we so we can exit early.
@@ -122,13 +136,14 @@ namespace System.Security.Cryptography
                         {
                             _value = oidValue;
                         }
-
                         // The friendly name resolves to an OID value other than the
                         // current one, which is not permitted under "initialize once"
                         // behavior.
                         else if (!_value.Equals(oidValue, StringComparison.Ordinal))
                         {
-                            throw new PlatformNotSupportedException(SR.Cryptography_Oid_SetOnceValue);
+                            throw new PlatformNotSupportedException(
+                                SR.Cryptography_Oid_SetOnceValue
+                            );
                         }
                     }
                 }

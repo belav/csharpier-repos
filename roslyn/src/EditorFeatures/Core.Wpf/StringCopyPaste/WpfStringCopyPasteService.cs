@@ -17,12 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.StringCopyPaste
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WpfStringCopyPasteService()
-        {
-        }
+        public WpfStringCopyPasteService() { }
 
-        private static string GetFormat(string key)
-            => $"{RoslynFormat}-{key}";
+        private static string GetFormat(string key) => $"{RoslynFormat}-{key}";
 
         public bool TrySetClipboardData(string key, string data)
         {
@@ -43,9 +40,7 @@ namespace Microsoft.CodeAnalysis.Editor.StringCopyPaste
                 Clipboard.SetDataObject(copy);
                 return true;
             }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
-            {
-            }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical)) { }
 
             return false;
         }
@@ -61,9 +56,7 @@ namespace Microsoft.CodeAnalysis.Editor.StringCopyPaste
                     return dataObject.GetData(format) as string;
                 }
             }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
-            {
-            }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical)) { }
 
             return null;
         }

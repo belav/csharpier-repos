@@ -21,21 +21,23 @@ public class TableValuedFunctionExpression : TableExpressionBase, ITableBasedExp
     /// </summary>
     /// <param name="storeFunction">The <see cref="IStoreFunction" /> associated this function.</param>
     /// <param name="arguments">The arguments of the function.</param>
-    public TableValuedFunctionExpression(IStoreFunction storeFunction, IReadOnlyList<SqlExpression> arguments)
+    public TableValuedFunctionExpression(
+        IStoreFunction storeFunction,
+        IReadOnlyList<SqlExpression> arguments
+    )
         : this(
             storeFunction.Name[..1].ToLowerInvariant(),
             storeFunction,
             arguments,
-            annotations: null)
-    {
-    }
+            annotations: null
+        ) { }
 
     private TableValuedFunctionExpression(
         string alias,
         IStoreFunction storeFunction,
         IReadOnlyList<SqlExpression> arguments,
-        IEnumerable<IAnnotation>? annotations)
-        : base(alias, annotations)
+        IEnumerable<IAnnotation>? annotations
+    ) : base(alias, annotations)
     {
         StoreFunction = storeFunction;
         Arguments = arguments;
@@ -86,8 +88,8 @@ public class TableValuedFunctionExpression : TableExpressionBase, ITableBasedExp
     /// </summary>
     /// <param name="arguments">The <see cref="Arguments" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual TableValuedFunctionExpression Update(IReadOnlyList<SqlExpression> arguments)
-        => !arguments.SequenceEqual(Arguments)
+    public virtual TableValuedFunctionExpression Update(IReadOnlyList<SqlExpression> arguments) =>
+        !arguments.SequenceEqual(Arguments)
             ? new TableValuedFunctionExpression(Alias, StoreFunction, arguments, GetAnnotations())
             : this;
 
@@ -109,16 +111,18 @@ public class TableValuedFunctionExpression : TableExpressionBase, ITableBasedExp
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is TableValuedFunctionExpression tableValuedFunctionExpression
-                && Equals(tableValuedFunctionExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is TableValuedFunctionExpression tableValuedFunctionExpression
+                && Equals(tableValuedFunctionExpression)
+        );
 
-    private bool Equals(TableValuedFunctionExpression tableValuedFunctionExpression)
-        => base.Equals(tableValuedFunctionExpression)
-            && StoreFunction == tableValuedFunctionExpression.StoreFunction
-            && Arguments.SequenceEqual(tableValuedFunctionExpression.Arguments);
+    private bool Equals(TableValuedFunctionExpression tableValuedFunctionExpression) =>
+        base.Equals(tableValuedFunctionExpression)
+        && StoreFunction == tableValuedFunctionExpression.StoreFunction
+        && Arguments.SequenceEqual(tableValuedFunctionExpression.Arguments);
 
     /// <inheritdoc />
     public override int GetHashCode()

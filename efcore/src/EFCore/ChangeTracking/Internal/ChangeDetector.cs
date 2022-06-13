@@ -26,7 +26,8 @@ public class ChangeDetector : IChangeDetector
     /// </summary>
     public ChangeDetector(
         IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
-        ILoggingOptions loggingOptions)
+        ILoggingOptions loggingOptions
+    )
     {
         _logger = logger;
         _loggingOptions = loggingOptions;
@@ -38,10 +39,13 @@ public class ChangeDetector : IChangeDetector
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void PropertyChanged(InternalEntityEntry entry, IPropertyBase propertyBase, bool setModified)
+    public virtual void PropertyChanged(
+        InternalEntityEntry entry,
+        IPropertyBase propertyBase,
+        bool setModified
+    )
     {
-        if (entry.EntityState == EntityState.Detached
-            || propertyBase is IServiceProperty)
+        if (entry.EntityState == EntityState.Detached || propertyBase is IServiceProperty)
         {
             return;
         }
@@ -59,8 +63,9 @@ public class ChangeDetector : IChangeDetector
 
             DetectKeyChange(entry, property);
         }
-        else if (propertyBase.GetRelationshipIndex() != -1
-                 && propertyBase is INavigationBase navigation)
+        else if (
+            propertyBase.GetRelationshipIndex() != -1 && propertyBase is INavigationBase navigation
+        )
         {
             DetectNavigationChange(entry, navigation);
         }
@@ -68,10 +73,11 @@ public class ChangeDetector : IChangeDetector
 
     private static void ThrowIfKeyChanged(InternalEntityEntry entry, IProperty property)
     {
-        if (property.IsKey()
-            && property.GetAfterSaveBehavior() == PropertySaveBehavior.Throw)
+        if (property.IsKey() && property.GetAfterSaveBehavior() == PropertySaveBehavior.Throw)
         {
-            throw new InvalidOperationException(CoreStrings.KeyReadOnly(property.Name, entry.EntityType.DisplayName()));
+            throw new InvalidOperationException(
+                CoreStrings.KeyReadOnly(property.Name, entry.EntityType.DisplayName())
+            );
         }
     }
 
@@ -83,16 +89,14 @@ public class ChangeDetector : IChangeDetector
     /// </summary>
     public virtual void PropertyChanging(InternalEntityEntry entry, IPropertyBase propertyBase)
     {
-        if (entry.EntityState == EntityState.Detached
-            || propertyBase is IServiceProperty)
+        if (entry.EntityState == EntityState.Detached || propertyBase is IServiceProperty)
         {
             return;
         }
 
         if (!entry.EntityType.UseEagerSnapshots())
         {
-            if (propertyBase is IProperty asProperty
-                && asProperty.GetOriginalValueIndex() != -1)
+            if (propertyBase is IProperty asProperty && asProperty.GetOriginalValueIndex() != -1)
             {
                 entry.EnsureOriginalValues();
             }
@@ -143,8 +147,8 @@ public class ChangeDetector : IChangeDetector
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void DetectChanges(InternalEntityEntry entry)
-        => DetectChanges(entry, new HashSet<InternalEntityEntry> { entry });
+    public virtual void DetectChanges(InternalEntityEntry entry) =>
+        DetectChanges(entry, new HashSet<InternalEntityEntry> { entry });
 
     private void DetectChanges(InternalEntityEntry entry, HashSet<InternalEntityEntry> visited)
     {
@@ -154,8 +158,7 @@ public class ChangeDetector : IChangeDetector
             {
                 var principalEntry = entry.StateManager.FindPrincipal(entry, foreignKey);
 
-                if (principalEntry != null
-                    && !visited.Contains(principalEntry))
+                if (principalEntry != null && !visited.Contains(principalEntry))
                 {
                     visited.Add(principalEntry);
                     DetectChanges(principalEntry, visited);
@@ -177,9 +180,11 @@ public class ChangeDetector : IChangeDetector
 
         foreach (var property in entityType.GetProperties())
         {
-            if (property.GetOriginalValueIndex() >= 0
+            if (
+                property.GetOriginalValueIndex() >= 0
                 && !entry.IsModified(property)
-                && !entry.IsConceptualNull(property))
+                && !entry.IsConceptualNull(property)
+            )
             {
                 DetectValueChange(entry, property);
             }
@@ -226,7 +231,12 @@ public class ChangeDetector : IChangeDetector
         }
     }
 
-    private void LogChangeDetected(InternalEntityEntry entry, IProperty property, object? original, object? current)
+    private void LogChangeDetected(
+        InternalEntityEntry entry,
+        IProperty property,
+        object? original,
+        object? current
+    )
     {
         if (_loggingOptions.IsSensitiveDataLoggingEnabled)
         {
@@ -255,12 +265,18 @@ public class ChangeDetector : IChangeDetector
         if (!comparer.Equals(currentValue, snapshotValue))
         {
             var keys = property.GetContainingKeys();
-            var foreignKeys = property.GetContainingForeignKeys()
+            var foreignKeys = property
+                .GetContainingForeignKeys()
                 .Where(fk => fk.DeclaringEntityType.IsAssignableFrom(entry.EntityType));
 
             if (_loggingOptions.IsSensitiveDataLoggingEnabled)
             {
-                _logger.ForeignKeyChangeDetectedSensitive(entry, property, snapshotValue, currentValue);
+                _logger.ForeignKeyChangeDetectedSensitive(
+                    entry,
+                    property,
+                    snapshotValue,
+                    currentValue
+                );
             }
             else
             {
@@ -268,7 +284,13 @@ public class ChangeDetector : IChangeDetector
             }
 
             entry.StateManager.InternalEntityEntryNotifier.KeyPropertyChanged(
-                entry, property, keys, foreignKeys, snapshotValue, currentValue);
+                entry,
+                property,
+                keys,
+                foreignKeys,
+                snapshotValue,
+                currentValue
+            );
         }
     }
 
@@ -310,18 +332,27 @@ public class ChangeDetector : IChangeDetector
                 }
             }
 
-            if (added.Count > 0
-                || removed.Count > 0)
+            if (added.Count > 0 || removed.Count > 0)
             {
                 if (_loggingOptions.IsSensitiveDataLoggingEnabled)
                 {
                     if (navigationBase is INavigation navigation)
                     {
-                        _logger.CollectionChangeDetectedSensitive(entry, navigation, added, removed);
+                        _logger.CollectionChangeDetectedSensitive(
+                            entry,
+                            navigation,
+                            added,
+                            removed
+                        );
                     }
                     else if (navigationBase is ISkipNavigation skipNavigation)
                     {
-                        _logger.SkipCollectionChangeDetectedSensitive(entry, skipNavigation, added, removed);
+                        _logger.SkipCollectionChangeDetectedSensitive(
+                            entry,
+                            skipNavigation,
+                            added,
+                            removed
+                        );
                     }
                 }
                 else
@@ -336,24 +367,42 @@ public class ChangeDetector : IChangeDetector
                     }
                 }
 
-                stateManager.InternalEntityEntryNotifier.NavigationCollectionChanged(entry, navigationBase, added, removed);
+                stateManager.InternalEntityEntryNotifier.NavigationCollectionChanged(
+                    entry,
+                    navigationBase,
+                    added,
+                    removed
+                );
             }
         }
         else if (!ReferenceEquals(currentValue, snapshotValue))
         {
-            Check.DebugAssert(navigationBase is INavigation, "Issue #21673. Non-collection skip navigations not supported.");
+            Check.DebugAssert(
+                navigationBase is INavigation,
+                "Issue #21673. Non-collection skip navigations not supported."
+            );
 
             var navigation = (INavigation)navigationBase;
             if (_loggingOptions.IsSensitiveDataLoggingEnabled)
             {
-                _logger.ReferenceChangeDetectedSensitive(entry, navigation, snapshotValue, currentValue);
+                _logger.ReferenceChangeDetectedSensitive(
+                    entry,
+                    navigation,
+                    snapshotValue,
+                    currentValue
+                );
             }
             else
             {
                 _logger.ReferenceChangeDetected(entry, navigation, snapshotValue, currentValue);
             }
 
-            stateManager.InternalEntityEntryNotifier.NavigationReferenceChanged(entry, navigation, snapshotValue, currentValue);
+            stateManager.InternalEntityEntryNotifier.NavigationReferenceChanged(
+                entry,
+                navigation,
+                snapshotValue,
+                currentValue
+            );
         }
     }
 }

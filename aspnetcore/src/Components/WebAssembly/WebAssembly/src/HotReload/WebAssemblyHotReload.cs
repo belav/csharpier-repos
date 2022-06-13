@@ -19,10 +19,7 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload;
 public static class WebAssemblyHotReload
 {
     private static HotReloadAgent? _hotReloadAgent;
-    private static readonly UpdateDelta[] _updateDeltas = new[]
-    {
-        new UpdateDelta(),
-    };
+    private static readonly UpdateDelta[] _updateDeltas = new[] { new UpdateDelta(), };
 
     internal static async Task InitializeAsync()
     {
@@ -34,7 +31,12 @@ public static class WebAssemblyHotReload
             // The agent is injected in to the hosted app and can serve this script that can provide results from local-storage .
             // See https://github.com/dotnet/aspnetcore/issues/37357#issuecomment-941237000
 
-            var jsObjectReference = (IJSUnmarshalledObjectReference)(await DefaultWebAssemblyJSRuntime.Instance.InvokeAsync<IJSObjectReference>("import", "/_framework/blazor-hotreload.js"));
+            var jsObjectReference = (IJSUnmarshalledObjectReference)(
+                await DefaultWebAssemblyJSRuntime.Instance.InvokeAsync<IJSObjectReference>(
+                    "import",
+                    "/_framework/blazor-hotreload.js"
+                )
+            );
             await jsObjectReference.InvokeUnmarshalled<Task<int>>("receiveHotReload");
         }
     }
@@ -43,7 +45,12 @@ public static class WebAssemblyHotReload
     /// For framework use only.
     /// </summary>
     [JSInvokable(nameof(ApplyHotReloadDelta))]
-    public static void ApplyHotReloadDelta(string moduleIdString, byte[] metadataDelta, byte[] ilDelta, byte[] pdbBytes)
+    public static void ApplyHotReloadDelta(
+        string moduleIdString,
+        byte[] metadataDelta,
+        byte[] ilDelta,
+        byte[] pdbBytes
+    )
     {
         var moduleId = Guid.Parse(moduleIdString, CultureInfo.InvariantCulture);
 
@@ -61,7 +68,11 @@ public static class WebAssemblyHotReload
     [JSInvokable(nameof(GetApplyUpdateCapabilities))]
     public static string GetApplyUpdateCapabilities()
     {
-        var method = typeof(System.Reflection.Metadata.MetadataUpdater).GetMethod("GetCapabilities", BindingFlags.NonPublic | BindingFlags.Static, Type.EmptyTypes);
+        var method = typeof(System.Reflection.Metadata.MetadataUpdater).GetMethod(
+            "GetCapabilities",
+            BindingFlags.NonPublic | BindingFlags.Static,
+            Type.EmptyTypes
+        );
         if (method is null)
         {
             return string.Empty;

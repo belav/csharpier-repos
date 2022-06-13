@@ -27,7 +27,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         public async Task CurrentLineTextAsync(
             string expectedText,
             bool assertCaretPosition = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (assertCaretPosition)
             {
@@ -42,12 +43,16 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         private async Task CurrentLineTextAndAssertCaretPositionAsync(
             string expectedText,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var expectedCaretIndex = expectedText.IndexOf("$$");
             if (expectedCaretIndex < 0)
             {
-                throw new ArgumentException("Expected caret position to be specified with $$", nameof(expectedText));
+                throw new ArgumentException(
+                    "Expected caret position to be specified with $$",
+                    nameof(expectedText)
+                );
             }
 
             var expectedCaretMarkupEndIndex = expectedCaretIndex + "$$".Length;
@@ -56,18 +61,26 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             var expectedTextAfterCaret = expectedText.Substring(expectedCaretMarkupEndIndex);
 
             var lineText = await TestServices.Editor.GetCurrentLineTextAsync(cancellationToken);
-            var lineTextBeforeCaret = await TestServices.Editor.GetLineTextBeforeCaretAsync(cancellationToken);
-            var lineTextAfterCaret = await TestServices.Editor.GetLineTextAfterCaretAsync(cancellationToken);
+            var lineTextBeforeCaret = await TestServices.Editor.GetLineTextBeforeCaretAsync(
+                cancellationToken
+            );
+            var lineTextAfterCaret = await TestServices.Editor.GetLineTextAfterCaretAsync(
+                cancellationToken
+            );
 
             Assert.Equal(expectedTextBeforeCaret, lineTextBeforeCaret);
             Assert.Equal(expectedTextAfterCaret, lineTextAfterCaret);
-            Assert.Equal(expectedTextBeforeCaret.Length + expectedTextAfterCaret.Length, lineText.Length);
+            Assert.Equal(
+                expectedTextBeforeCaret.Length + expectedTextAfterCaret.Length,
+                lineText.Length
+            );
         }
 
         public async Task TextContainsAsync(
             string expectedText,
             bool assertCaretPosition = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (assertCaretPosition)
             {
@@ -83,12 +96,16 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         private async Task TextContainsAndAssertCaretPositionAsync(
             string expectedText,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var caretStartIndex = expectedText.IndexOf("$$");
             if (caretStartIndex < 0)
             {
-                throw new ArgumentException("Expected caret position to be specified with $$", nameof(expectedText));
+                throw new ArgumentException(
+                    "Expected caret position to be specified with $$",
+                    nameof(expectedText)
+                );
             }
 
             var caretEndIndex = caretStartIndex + "$$".Length;
@@ -115,7 +132,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             bool ensureExpectedItemsAreOrdered = false,
             FixAllScope? fixAllScope = null,
             bool blockUntilComplete = true,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var expectedItems = new[] { expectedItem };
 
@@ -124,8 +142,15 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                applied = await CodeActionsAsync(expectedItems, applyFix ? expectedItem : null, verifyNotShowing,
-                    ensureExpectedItemsAreOrdered, fixAllScope, blockUntilComplete, cancellationToken);
+                applied = await CodeActionsAsync(
+                    expectedItems,
+                    applyFix ? expectedItem : null,
+                    verifyNotShowing,
+                    ensureExpectedItemsAreOrdered,
+                    fixAllScope,
+                    blockUntilComplete,
+                    cancellationToken
+                );
             } while (applied is false);
         }
 
@@ -143,13 +168,21 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             bool ensureExpectedItemsAreOrdered = false,
             FixAllScope? fixAllScope = null,
             bool blockUntilComplete = true,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var events = new List<WorkspaceChangeEventArgs>();
-            void WorkspaceChangedHandler(object sender, WorkspaceChangeEventArgs e) => events.Add(e);
+            void WorkspaceChangedHandler(object sender, WorkspaceChangeEventArgs e) =>
+                events.Add(e);
 
-            var workspace = await TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(cancellationToken);
-            using var workspaceEventRestorer = WithWorkspaceChangedHandler(workspace, WorkspaceChangedHandler);
+            var workspace =
+                await TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(
+                    cancellationToken
+                );
+            using var workspaceEventRestorer = WithWorkspaceChangedHandler(
+                workspace,
+                WorkspaceChangedHandler
+            );
 
             await TestServices.Editor.ShowLightBulbAsync(cancellationToken);
 
@@ -165,15 +198,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             {
                 if (ensureExpectedItemsAreOrdered)
                 {
-                    TestUtilities.ThrowIfExpectedItemNotFoundInOrder(
-                        actions,
-                        expectedItems);
+                    TestUtilities.ThrowIfExpectedItemNotFoundInOrder(actions, expectedItems);
                 }
                 else
                 {
-                    TestUtilities.ThrowIfExpectedItemNotFound(
-                        actions,
-                        expectedItems);
+                    TestUtilities.ThrowIfExpectedItemNotFound(actions, expectedItems);
                 }
             }
 
@@ -185,32 +214,43 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             if (!RoslynString.IsNullOrEmpty(applyFix))
             {
                 var codeActionLogger = new CodeActionLogger();
-                using var loggerRestorer = WithLogger(AggregateLogger.AddOrReplace(codeActionLogger, Logger.GetLogger(), logger => logger is CodeActionLogger));
+                using var loggerRestorer = WithLogger(
+                    AggregateLogger.AddOrReplace(
+                        codeActionLogger,
+                        Logger.GetLogger(),
+                        logger => logger is CodeActionLogger
+                    )
+                );
 
-                var result = await TestServices.Editor.ApplyLightBulbActionAsync(applyFix, fixAllScope, blockUntilComplete, cancellationToken);
+                var result = await TestServices.Editor.ApplyLightBulbActionAsync(
+                    applyFix,
+                    fixAllScope,
+                    blockUntilComplete,
+                    cancellationToken
+                );
 
                 if (blockUntilComplete)
                 {
                     // wait for action to complete
                     await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                        new[]
-                        {
-                            FeatureAttribute.Workspace,
-                            FeatureAttribute.LightBulb,
-                        },
-                        cancellationToken);
+                        new[] { FeatureAttribute.Workspace, FeatureAttribute.LightBulb, },
+                        cancellationToken
+                    );
 
                     if (codeActionLogger.Messages.Any())
                     {
                         foreach (var e in events)
                         {
-                            codeActionLogger.Messages.Add($"{e.OldSolution.WorkspaceVersion} to {e.NewSolution.WorkspaceVersion}: {e.Kind} {e.DocumentId}");
+                            codeActionLogger.Messages.Add(
+                                $"{e.OldSolution.WorkspaceVersion} to {e.NewSolution.WorkspaceVersion}: {e.Kind} {e.DocumentId}"
+                            );
                         }
                     }
 
                     AssertEx.EqualOrDiff(
                         "",
-                        string.Join(Environment.NewLine, codeActionLogger.Messages));
+                        string.Join(Environment.NewLine, codeActionLogger.Messages)
+                    );
                 }
 
                 return result;
@@ -223,28 +263,47 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             if (await TestServices.Editor.IsLightBulbSessionExpandedAsync(cancellationToken))
             {
-                throw new InvalidOperationException("Expected no light bulb session, but one was found.");
+                throw new InvalidOperationException(
+                    "Expected no light bulb session, but one was found."
+                );
             }
         }
 
-        public async Task CaretPositionAsync(int expectedCaretPosition, CancellationToken cancellationToken)
+        public async Task CaretPositionAsync(
+            int expectedCaretPosition,
+            CancellationToken cancellationToken
+        )
         {
-            Assert.Equal(expectedCaretPosition, await TestServices.Editor.GetCaretPositionAsync(cancellationToken));
+            Assert.Equal(
+                expectedCaretPosition,
+                await TestServices.Editor.GetCaretPositionAsync(cancellationToken)
+            );
         }
 
         public async Task ErrorTagsAsync(string[] expectedTags, CancellationToken cancellationToken)
         {
             await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                new[] { FeatureAttribute.Workspace, FeatureAttribute.SolutionCrawler, FeatureAttribute.DiagnosticService, FeatureAttribute.ErrorSquiggles },
-                cancellationToken);
+                new[]
+                {
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawler,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.ErrorSquiggles
+                },
+                cancellationToken
+            );
 
             var actualTags = await TestServices.Editor.GetErrorTagsAsync(cancellationToken);
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedTags),
-                string.Join(Environment.NewLine, actualTags));
+                string.Join(Environment.NewLine, actualTags)
+            );
         }
 
-        private static WorkspaceEventRestorer WithWorkspaceChangedHandler(Workspace workspace, EventHandler<WorkspaceChangeEventArgs> eventHandler)
+        private static WorkspaceEventRestorer WithWorkspaceChangedHandler(
+            Workspace workspace,
+            EventHandler<WorkspaceChangeEventArgs> eventHandler
+        )
         {
             workspace.WorkspaceChanged += eventHandler;
             return new WorkspaceEventRestorer(workspace, eventHandler);
@@ -275,13 +334,20 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 }
             }
 
-            public void LogBlockEnd(FunctionId functionId, LogMessage logMessage, int uniquePairId, int delta, CancellationToken cancellationToken)
-            {
-            }
+            public void LogBlockEnd(
+                FunctionId functionId,
+                LogMessage logMessage,
+                int uniquePairId,
+                int delta,
+                CancellationToken cancellationToken
+            ) { }
 
-            public void LogBlockStart(FunctionId functionId, LogMessage logMessage, int uniquePairId, CancellationToken cancellationToken)
-            {
-            }
+            public void LogBlockStart(
+                FunctionId functionId,
+                LogMessage logMessage,
+                int uniquePairId,
+                CancellationToken cancellationToken
+            ) { }
         }
 
         private readonly struct WorkspaceEventRestorer : IDisposable
@@ -289,7 +355,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             private readonly Workspace _workspace;
             private readonly EventHandler<WorkspaceChangeEventArgs> _eventHandler;
 
-            public WorkspaceEventRestorer(Workspace workspace, EventHandler<WorkspaceChangeEventArgs> eventHandler)
+            public WorkspaceEventRestorer(
+                Workspace workspace,
+                EventHandler<WorkspaceChangeEventArgs> eventHandler
+            )
             {
                 _workspace = workspace;
                 _eventHandler = eventHandler;

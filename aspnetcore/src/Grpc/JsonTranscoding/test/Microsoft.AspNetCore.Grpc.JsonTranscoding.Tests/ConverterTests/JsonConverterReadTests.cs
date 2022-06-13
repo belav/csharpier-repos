@@ -23,7 +23,8 @@ public class JsonConverterReadTests
     [Fact]
     public void ReadObjectProperties()
     {
-        var json = @"{
+        var json =
+            @"{
   ""name"": ""test"",
   ""age"": 1
 }";
@@ -34,7 +35,8 @@ public class JsonConverterReadTests
     [Fact]
     public void RepeatedStrings()
     {
-        var json = @"{
+        var json =
+            @"{
   ""name"": ""test"",
   ""repeatedStrings"": [
     ""One"",
@@ -49,7 +51,8 @@ public class JsonConverterReadTests
     [Fact]
     public void DataTypes_DefaultValues()
     {
-        var json = @"{
+        var json =
+            @"{
   ""singleInt32"": 0,
   ""singleInt64"": ""0"",
   ""singleUint32"": 0,
@@ -101,7 +104,8 @@ public class JsonConverterReadTests
     [Fact]
     public void Value_Nested()
     {
-        var json = @"{
+        var json =
+            @"{
   ""valueValue"": {
     ""enabled"": true,
     ""metadata"": [
@@ -117,7 +121,8 @@ public class JsonConverterReadTests
     [Fact]
     public void Value_Root()
     {
-        var json = @"{
+        var json =
+            @"{
   ""enabled"": true,
   ""metadata"": [
     ""value1"",
@@ -131,7 +136,8 @@ public class JsonConverterReadTests
     [Fact]
     public void Struct_Nested()
     {
-        var json = @"{
+        var json =
+            @"{
   ""structValue"": {
     ""enabled"": true,
     ""metadata"": [
@@ -147,7 +153,8 @@ public class JsonConverterReadTests
     [Fact]
     public void Struct_Root()
     {
-        var json = @"{
+        var json =
+            @"{
   ""enabled"": true,
   ""metadata"": [
     ""value1"",
@@ -161,7 +168,8 @@ public class JsonConverterReadTests
     [Fact]
     public void ListValue_Nested()
     {
-        var json = @"{
+        var json =
+            @"{
   ""listValue"": [
     true,
     ""value1"",
@@ -175,7 +183,8 @@ public class JsonConverterReadTests
     [Fact]
     public void ListValue_Root()
     {
-        var json = @"[
+        var json =
+            @"[
   true,
   ""value1"",
   ""value2""
@@ -187,7 +196,8 @@ public class JsonConverterReadTests
     [Fact]
     public void Int64_ReadNumber()
     {
-        var json = @"{
+        var json =
+            @"{
   ""singleInt64"": 1,
   ""singleUint64"": 2,
   ""singleSint64"": 3,
@@ -201,7 +211,8 @@ public class JsonConverterReadTests
     [Fact]
     public void RepeatedDoubleValues()
     {
-        var json = @"{
+        var json =
+            @"{
   ""repeatedDoubleValues"": [
     1,
     1.1
@@ -214,7 +225,8 @@ public class JsonConverterReadTests
     [Fact]
     public void Any()
     {
-        var json = @"{
+        var json =
+            @"{
   ""@type"": ""type.googleapis.com/transcoding.HelloRequest"",
   ""name"": ""In any!""
 }";
@@ -227,7 +239,8 @@ public class JsonConverterReadTests
     [Fact]
     public void Any_WellKnownType_Timestamp()
     {
-        var json = @"{
+        var json =
+            @"{
   ""@type"": ""type.googleapis.com/google.protobuf.Timestamp"",
   ""value"": ""1970-01-01T00:00:00Z""
 }";
@@ -240,7 +253,8 @@ public class JsonConverterReadTests
     [Fact]
     public void Any_WellKnownType_Int32()
     {
-        var json = @"{
+        var json =
+            @"{
   ""@type"": ""type.googleapis.com/google.protobuf.Int32Value"",
   ""value"": 2147483647
 }";
@@ -253,7 +267,8 @@ public class JsonConverterReadTests
     [Fact]
     public void MapMessages()
     {
-        var json = @"{
+        var json =
+            @"{
   ""mapMessage"": {
     ""name1"": {
       ""subfield"": ""value1""
@@ -270,7 +285,8 @@ public class JsonConverterReadTests
     [Fact]
     public void MapKeyBool()
     {
-        var json = @"{
+        var json =
+            @"{
   ""mapKeybool"": {
     ""true"": ""value1"",
     ""false"": ""value2""
@@ -283,7 +299,8 @@ public class JsonConverterReadTests
     [Fact]
     public void MapKeyInt()
     {
-        var json = @"{
+        var json =
+            @"{
   ""mapKeyint"": {
     ""-1"": ""value1"",
     ""0"": ""value3""
@@ -296,7 +313,8 @@ public class JsonConverterReadTests
     [Fact]
     public void OneOf_Success()
     {
-        var json = @"{
+        var json =
+            @"{
   ""oneofName1"": ""test""
 }";
 
@@ -306,18 +324,27 @@ public class JsonConverterReadTests
     [Fact]
     public void OneOf_Failure()
     {
-        var json = @"{
+        var json =
+            @"{
   ""oneofName1"": ""test"",
   ""oneofName2"": ""test""
 }";
 
-        AssertReadJsonError<HelloRequest>(json, ex => Assert.Equal("Multiple values specified for oneof oneof_test", ex.Message.TrimEnd('.')));
+        AssertReadJsonError<HelloRequest>(
+            json,
+            ex =>
+                Assert.Equal(
+                    "Multiple values specified for oneof oneof_test",
+                    ex.Message.TrimEnd('.')
+                )
+        );
     }
 
     [Fact]
     public void NullableWrappers_NaN()
     {
-        var json = @"{
+        var json =
+            @"{
   ""doubleValue"": ""NaN""
 }";
 
@@ -327,7 +354,8 @@ public class JsonConverterReadTests
     [Fact]
     public void NullableWrappers_Null()
     {
-        var json = @"{
+        var json =
+            @"{
   ""stringValue"": null,
   ""int32Value"": null,
   ""int64Value"": null,
@@ -345,7 +373,8 @@ public class JsonConverterReadTests
     [Fact]
     public void NullableWrappers()
     {
-        var json = @"{
+        var json =
+            @"{
   ""stringValue"": ""A string"",
   ""int32Value"": 1,
   ""int64Value"": ""2"",
@@ -389,7 +418,14 @@ public class JsonConverterReadTests
     {
         var json = @"{ ""nullValue"": ""MONKEY"" }";
 
-        AssertReadJsonError<NullValueContainer>(json, ex => Assert.Equal("Invalid enum value: MONKEY for enum type: google.protobuf.NullValue", ex.Message));
+        AssertReadJsonError<NullValueContainer>(
+            json,
+            ex =>
+                Assert.Equal(
+                    "Invalid enum value: MONKEY for enum type: google.protobuf.NullValue",
+                    ex.Message
+                )
+        );
     }
 
     [Fact]
@@ -424,15 +460,17 @@ public class JsonConverterReadTests
         AssertReadJson<Int64Value>(json);
     }
 
-    private TValue AssertReadJson<TValue>(string value, GrpcJsonSettings? settings = null) where TValue : IMessage, new()
+    private TValue AssertReadJson<TValue>(string value, GrpcJsonSettings? settings = null)
+        where TValue : IMessage, new()
     {
         var typeRegistery = TypeRegistry.FromFiles(
             HelloRequest.Descriptor.File,
-            Timestamp.Descriptor.File);
+            Timestamp.Descriptor.File
+        );
 
-        var formatter = new JsonParser(new JsonParser.Settings(
-            recursionLimit: int.MaxValue,
-            typeRegistery));
+        var formatter = new JsonParser(
+            new JsonParser.Settings(recursionLimit: int.MaxValue, typeRegistery)
+        );
 
         var objectOld = formatter.Parse<TValue>(value);
 
@@ -451,28 +489,41 @@ public class JsonConverterReadTests
         return objectNew;
     }
 
-    private void AssertReadJsonError<TValue>(string value, Action<Exception> assertException, GrpcJsonSettings? settings = null) where TValue : IMessage, new()
+    private void AssertReadJsonError<TValue>(
+        string value,
+        Action<Exception> assertException,
+        GrpcJsonSettings? settings = null
+    ) where TValue : IMessage, new()
     {
         var typeRegistery = TypeRegistry.FromFiles(
             HelloRequest.Descriptor.File,
-            Timestamp.Descriptor.File);
+            Timestamp.Descriptor.File
+        );
 
         var jsonSerializerOptions = CreateSerializerOptions(settings, typeRegistery);
 
-        var ex = Assert.ThrowsAny<Exception>(() => JsonSerializer.Deserialize<TValue>(value, jsonSerializerOptions));
+        var ex = Assert.ThrowsAny<Exception>(
+            () => JsonSerializer.Deserialize<TValue>(value, jsonSerializerOptions)
+        );
         assertException(ex);
 
-        var formatter = new JsonParser(new JsonParser.Settings(
-            recursionLimit: int.MaxValue,
-            typeRegistery));
+        var formatter = new JsonParser(
+            new JsonParser.Settings(recursionLimit: int.MaxValue, typeRegistery)
+        );
 
         ex = Assert.ThrowsAny<Exception>(() => formatter.Parse<TValue>(value));
         assertException(ex);
     }
 
-    internal static JsonSerializerOptions CreateSerializerOptions(GrpcJsonSettings? settings, TypeRegistry? typeRegistery)
+    internal static JsonSerializerOptions CreateSerializerOptions(
+        GrpcJsonSettings? settings,
+        TypeRegistry? typeRegistery
+    )
     {
-        var context = new JsonContext(settings ?? new GrpcJsonSettings(), typeRegistery ?? TypeRegistry.Empty);
+        var context = new JsonContext(
+            settings ?? new GrpcJsonSettings(),
+            typeRegistery ?? TypeRegistry.Empty
+        );
 
         return JsonConverterHelper.CreateSerializerOptions(context);
     }

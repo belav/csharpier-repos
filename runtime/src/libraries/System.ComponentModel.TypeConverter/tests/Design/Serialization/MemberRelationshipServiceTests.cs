@@ -16,7 +16,10 @@ namespace System.ComponentModel.Design.Serialization.Tests
             MemberDescriptor member = TypeDescriptor.GetProperties(typeof(TestClass))[0];
 
             MemberRelationship source = new MemberRelationship(owner, member);
-            MemberRelationship memberRelationship = new MemberRelationship(new object(), TypeDescriptor.GetProperties(typeof(TestClass))[1]);
+            MemberRelationship memberRelationship = new MemberRelationship(
+                new object(),
+                TypeDescriptor.GetProperties(typeof(TestClass))[1]
+            );
 
             var service = new TestMemberRelationshipService();
             service[source] = memberRelationship;
@@ -29,7 +32,10 @@ namespace System.ComponentModel.Design.Serialization.Tests
             var owner = new object();
             MemberDescriptor member = TypeDescriptor.GetProperties(typeof(TestClass))[0];
 
-            MemberRelationship memberRelationship = new MemberRelationship(new object(), TypeDescriptor.GetProperties(typeof(TestClass))[1]);
+            MemberRelationship memberRelationship = new MemberRelationship(
+                new object(),
+                TypeDescriptor.GetProperties(typeof(TestClass))[1]
+            );
 
             var service = new TestMemberRelationshipService();
             service[owner, member] = memberRelationship;
@@ -53,10 +59,16 @@ namespace System.ComponentModel.Design.Serialization.Tests
 
             var service = new TestMemberRelationshipService();
             Assert.Throws<ArgumentNullException>("sourceOwner", () => service[null, member]);
-            Assert.Throws<ArgumentNullException>("sourceOwner", () => service[null, member] = new MemberRelationship());
+            Assert.Throws<ArgumentNullException>(
+                "sourceOwner",
+                () => service[null, member] = new MemberRelationship()
+            );
 
             Assert.Throws<ArgumentException>("source", () => service[new MemberRelationship()]);
-            Assert.Throws<ArgumentException>("source", () => service[new MemberRelationship()] = new MemberRelationship());
+            Assert.Throws<ArgumentException>(
+                "source",
+                () => service[new MemberRelationship()] = new MemberRelationship()
+            );
         }
 
         [Fact]
@@ -64,7 +76,10 @@ namespace System.ComponentModel.Design.Serialization.Tests
         {
             var service = new TestMemberRelationshipService();
             Assert.Throws<ArgumentNullException>("sourceMember", () => service[new object(), null]);
-            Assert.Throws<ArgumentNullException>("sourceMember", () => service[new object(), null] = new MemberRelationship());
+            Assert.Throws<ArgumentNullException>(
+                "sourceMember",
+                () => service[new object(), null] = new MemberRelationship()
+            );
         }
 
         public static IEnumerable<object[]> IndexerSource_TestData()
@@ -95,12 +110,18 @@ namespace System.ComponentModel.Design.Serialization.Tests
 
         private class NotSupportingMemberRelationshipService : MemberRelationshipService
         {
-            public override bool SupportsRelationship(MemberRelationship source, MemberRelationship relationship) => false;
+            public override bool SupportsRelationship(
+                MemberRelationship source,
+                MemberRelationship relationship
+            ) => false;
         }
 
         private class TestMemberRelationshipService : MemberRelationshipService
         {
-            public override bool SupportsRelationship(MemberRelationship source, MemberRelationship relationship) => true;
+            public override bool SupportsRelationship(
+                MemberRelationship source,
+                MemberRelationship relationship
+            ) => true;
         }
     }
 }

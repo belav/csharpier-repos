@@ -23,21 +23,33 @@ namespace System.Runtime
 
         [RuntimeImport(RuntimeLibrary, "RhpGetModuleSection")]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern IntPtr RhGetModuleSection(ref TypeManagerHandle module, ReadyToRunSectionType section, out int length);
+        private static extern IntPtr RhGetModuleSection(
+            ref TypeManagerHandle module,
+            ReadyToRunSectionType section,
+            out int length
+        );
 
-        internal static IntPtr RhGetModuleSection(TypeManagerHandle module, ReadyToRunSectionType section, out int length)
+        internal static IntPtr RhGetModuleSection(
+            TypeManagerHandle module,
+            ReadyToRunSectionType section,
+            out int length
+        )
         {
             return RhGetModuleSection(ref module, section, out length);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpCreateTypeManager")]
-        internal static extern unsafe TypeManagerHandle RhpCreateTypeManager(IntPtr osModule, IntPtr moduleHeader, IntPtr* pClasslibFunctions, int nClasslibFunctions);
+        internal static extern unsafe TypeManagerHandle RhpCreateTypeManager(
+            IntPtr osModule,
+            IntPtr moduleHeader,
+            IntPtr* pClasslibFunctions,
+            int nClasslibFunctions
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpRegisterOsModule")]
         internal static extern unsafe IntPtr RhpRegisterOsModule(IntPtr osModule);
-
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhNewObject")]
@@ -45,8 +57,11 @@ namespace System.Runtime
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhBulkMoveWithWriteBarrier")]
-        internal static extern unsafe void RhBulkMoveWithWriteBarrier(ref byte dmem, ref byte smem, uint size);
-
+        internal static extern unsafe void RhBulkMoveWithWriteBarrier(
+            ref byte dmem,
+            ref byte smem,
+            uint size
+        );
 
         // Allocate handle.
         [MethodImpl(MethodImplOptions.InternalCall)]

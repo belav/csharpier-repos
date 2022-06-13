@@ -57,8 +57,8 @@ public static class SqliteServiceCollectionExtensions
         this IServiceCollection serviceCollection,
         string connectionString,
         Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null,
-        Action<DbContextOptionsBuilder>? optionsAction = null)
-        where TContext : DbContext
+        Action<DbContextOptionsBuilder>? optionsAction = null
+    ) where TContext : DbContext
     {
         Check.NotEmpty(connectionString, nameof(connectionString));
 
@@ -67,7 +67,8 @@ public static class SqliteServiceCollectionExtensions
             {
                 optionsAction?.Invoke(options);
                 options.UseSqlite(connectionString, sqliteOptionsAction);
-            });
+            }
+        );
     }
 
     /// <summary>
@@ -92,7 +93,9 @@ public static class SqliteServiceCollectionExtensions
     ///     The same service collection so that multiple calls can be chained.
     /// </returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public static IServiceCollection AddEntityFrameworkSqlite(this IServiceCollection serviceCollection)
+    public static IServiceCollection AddEntityFrameworkSqlite(
+        this IServiceCollection serviceCollection
+    )
     {
         var builder = new EntityFrameworkRelationalServicesBuilder(serviceCollection)
             .TryAdd<LoggingDefinitions, SqliteLoggingDefinitions>()
@@ -109,17 +112,29 @@ public static class SqliteServiceCollectionExtensions
             .TryAdd<IRelationalDatabaseCreator, SqliteDatabaseCreator>()
             .TryAdd<IHistoryRepository, SqliteHistoryRepository>()
             .TryAdd<IRelationalQueryStringFactory, SqliteQueryStringFactory>()
-
             // New Query Pipeline
             .TryAdd<IMethodCallTranslatorProvider, SqliteMethodCallTranslatorProvider>()
-            .TryAdd<IAggregateMethodCallTranslatorProvider, SqliteAggregateMethodCallTranslatorProvider>()
+            .TryAdd<
+                IAggregateMethodCallTranslatorProvider,
+                SqliteAggregateMethodCallTranslatorProvider
+            >()
             .TryAdd<IMemberTranslatorProvider, SqliteMemberTranslatorProvider>()
             .TryAdd<IQuerySqlGeneratorFactory, SqliteQuerySqlGeneratorFactory>()
-            .TryAdd<IQueryableMethodTranslatingExpressionVisitorFactory, SqliteQueryableMethodTranslatingExpressionVisitorFactory>()
-            .TryAdd<IRelationalSqlTranslatingExpressionVisitorFactory, SqliteSqlTranslatingExpressionVisitorFactory>()
-            .TryAdd<IQueryTranslationPostprocessorFactory, SqliteQueryTranslationPostprocessorFactory>()
+            .TryAdd<
+                IQueryableMethodTranslatingExpressionVisitorFactory,
+                SqliteQueryableMethodTranslatingExpressionVisitorFactory
+            >()
+            .TryAdd<
+                IRelationalSqlTranslatingExpressionVisitorFactory,
+                SqliteSqlTranslatingExpressionVisitorFactory
+            >()
+            .TryAdd<
+                IQueryTranslationPostprocessorFactory,
+                SqliteQueryTranslationPostprocessorFactory
+            >()
             .TryAddProviderSpecificServices(
-                b => b.TryAddScoped<ISqliteRelationalConnection, SqliteRelationalConnection>());
+                b => b.TryAddScoped<ISqliteRelationalConnection, SqliteRelationalConnection>()
+            );
 
         builder.TryAddCoreServices();
 

@@ -10,7 +10,7 @@ namespace ILCompiler
     {
         /// <summary>
         /// A weighted directed graph abstraction. For our purposes, we only use two weights, so our "weight" is a boolean: "Flagged" or "Not Flagged".
-        /// 
+        ///
         /// The generic type "P" denotes the type that holds the payload data of graph vertices. Its overload of Object.Equals() is used
         /// to determine whether two "P"'s represent the same vertex.
         /// </summary>
@@ -30,12 +30,8 @@ namespace ILCompiler
 
             public IEnumerable<P> Vertices
             {
-                get
-                {
-                    return this._vertexMap.Keys.ToArray();
-                }
+                get { return this._vertexMap.Keys.ToArray(); }
             }
         }
     }
 }
-

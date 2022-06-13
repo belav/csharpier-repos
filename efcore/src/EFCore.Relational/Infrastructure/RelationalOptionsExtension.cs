@@ -38,9 +38,7 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <summary>
     ///     Creates a new set of options with everything set to default values.
     /// </summary>
-    protected RelationalOptionsExtension()
-    {
-    }
+    protected RelationalOptionsExtension() { }
 
     /// <summary>
     ///     Called by a derived class constructor when implementing the <see cref="Clone" /> method.
@@ -76,8 +74,7 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     ///     The connection string, or <see langword="null" /> if a <see cref="DbConnection" /> was used instead of
     ///     a connection string.
     /// </summary>
-    public virtual string? ConnectionString
-        => _connectionString;
+    public virtual string? ConnectionString => _connectionString;
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -98,8 +95,7 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     ///     The <see cref="DbConnection" />, or <see langword="null" /> if a connection string was used instead of
     ///     the full connection object.
     /// </summary>
-    public virtual DbConnection? Connection
-        => _connection;
+    public virtual DbConnection? Connection => _connection;
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -119,8 +115,7 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <summary>
     ///     The command timeout, or <see langword="null" /> if none has been set.
     /// </summary>
-    public virtual int? CommandTimeout
-        => _commandTimeout;
+    public virtual int? CommandTimeout => _commandTimeout;
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -130,10 +125,11 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <returns>A new instance with the option changed.</returns>
     public virtual RelationalOptionsExtension WithCommandTimeout(int? commandTimeout)
     {
-        if (commandTimeout.HasValue
-            && commandTimeout <= 0)
+        if (commandTimeout.HasValue && commandTimeout <= 0)
         {
-            throw new InvalidOperationException(RelationalStrings.InvalidCommandTimeout(commandTimeout));
+            throw new InvalidOperationException(
+                RelationalStrings.InvalidCommandTimeout(commandTimeout)
+            );
         }
 
         var clone = Clone();
@@ -147,8 +143,7 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     ///     The maximum number of statements that will be included in commands sent to the database
     ///     during <see cref="DbContext.SaveChanges()" /> or <see langword="null" /> if none has been set.
     /// </summary>
-    public virtual int? MaxBatchSize
-        => _maxBatchSize;
+    public virtual int? MaxBatchSize => _maxBatchSize;
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -158,10 +153,11 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <returns>A new instance with the option changed.</returns>
     public virtual RelationalOptionsExtension WithMaxBatchSize(int? maxBatchSize)
     {
-        if (maxBatchSize.HasValue
-            && maxBatchSize <= 0)
+        if (maxBatchSize.HasValue && maxBatchSize <= 0)
         {
-            throw new InvalidOperationException(RelationalStrings.InvalidMaxBatchSize(maxBatchSize));
+            throw new InvalidOperationException(
+                RelationalStrings.InvalidMaxBatchSize(maxBatchSize)
+            );
         }
 
         var clone = Clone();
@@ -175,8 +171,7 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     ///     The minimum number of statements that are needed for a multi-statement command sent to the database
     ///     during <see cref="DbContext.SaveChanges()" /> or <see langword="null" /> if none has been set.
     /// </summary>
-    public virtual int? MinBatchSize
-        => _minBatchSize;
+    public virtual int? MinBatchSize => _minBatchSize;
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -186,10 +181,11 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <returns>A new instance with the option changed.</returns>
     public virtual RelationalOptionsExtension WithMinBatchSize(int? minBatchSize)
     {
-        if (minBatchSize.HasValue
-            && minBatchSize <= 0)
+        if (minBatchSize.HasValue && minBatchSize <= 0)
         {
-            throw new InvalidOperationException(RelationalStrings.InvalidMinBatchSize(minBatchSize));
+            throw new InvalidOperationException(
+                RelationalStrings.InvalidMinBatchSize(minBatchSize)
+            );
         }
 
         var clone = Clone();
@@ -204,8 +200,7 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     ///     Entity Framework will use C# semantics for null values, and generate SQL to compensate for differences
     ///     in how the database handles nulls.
     /// </summary>
-    public virtual bool UseRelationalNulls
-        => _useRelationalNulls;
+    public virtual bool UseRelationalNulls => _useRelationalNulls;
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -225,8 +220,7 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <summary>
     ///     The <see cref="QuerySplittingBehavior" /> to use when loading related collections in a query.
     /// </summary>
-    public virtual QuerySplittingBehavior? QuerySplittingBehavior
-        => _querySplittingBehavior;
+    public virtual QuerySplittingBehavior? QuerySplittingBehavior => _querySplittingBehavior;
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -234,7 +228,9 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     /// <param name="querySplittingBehavior">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
-    public virtual RelationalOptionsExtension WithUseQuerySplittingBehavior(QuerySplittingBehavior querySplittingBehavior)
+    public virtual RelationalOptionsExtension WithUseQuerySplittingBehavior(
+        QuerySplittingBehavior querySplittingBehavior
+    )
     {
         var clone = Clone();
 
@@ -246,8 +242,7 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <summary>
     ///     The name of the assembly that contains migrations, or <see langword="null" /> if none has been set.
     /// </summary>
-    public virtual string? MigrationsAssembly
-        => _migrationsAssembly;
+    public virtual string? MigrationsAssembly => _migrationsAssembly;
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -267,8 +262,7 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <summary>
     ///     The table name to use for the migrations history table, or <see langword="null" /> if none has been set.
     /// </summary>
-    public virtual string? MigrationsHistoryTableName
-        => _migrationsHistoryTableName;
+    public virtual string? MigrationsHistoryTableName => _migrationsHistoryTableName;
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -276,7 +270,9 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     /// <param name="migrationsHistoryTableName">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
-    public virtual RelationalOptionsExtension WithMigrationsHistoryTableName(string? migrationsHistoryTableName)
+    public virtual RelationalOptionsExtension WithMigrationsHistoryTableName(
+        string? migrationsHistoryTableName
+    )
     {
         var clone = Clone();
 
@@ -288,8 +284,7 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <summary>
     ///     The schema to use for the migrations history table, or <see langword="null" /> if none has been set.
     /// </summary>
-    public virtual string? MigrationsHistoryTableSchema
-        => _migrationsHistoryTableSchema;
+    public virtual string? MigrationsHistoryTableSchema => _migrationsHistoryTableSchema;
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -297,7 +292,9 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     /// <param name="migrationsHistoryTableSchema">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
-    public virtual RelationalOptionsExtension WithMigrationsHistoryTableSchema(string? migrationsHistoryTableSchema)
+    public virtual RelationalOptionsExtension WithMigrationsHistoryTableSchema(
+        string? migrationsHistoryTableSchema
+    )
     {
         var clone = Clone();
 
@@ -310,8 +307,10 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     ///     A factory for creating the default <see cref="IExecutionStrategy" />, or <see langword="null" /> if none has been
     ///     configured.
     /// </summary>
-    public virtual Func<ExecutionStrategyDependencies, IExecutionStrategy>? ExecutionStrategyFactory
-        => _executionStrategyFactory;
+    public virtual Func<
+        ExecutionStrategyDependencies,
+        IExecutionStrategy
+    >? ExecutionStrategyFactory => _executionStrategyFactory;
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -320,7 +319,8 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <param name="executionStrategyFactory">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
     public virtual RelationalOptionsExtension WithExecutionStrategyFactory(
-        Func<ExecutionStrategyDependencies, IExecutionStrategy>? executionStrategyFactory)
+        Func<ExecutionStrategyDependencies, IExecutionStrategy>? executionStrategyFactory
+    )
     {
         var clone = Clone();
 
@@ -338,10 +338,9 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     /// <returns>The extension.</returns>
     public static RelationalOptionsExtension Extract(IDbContextOptions options)
     {
-        var relationalOptionsExtensions
-            = options.Extensions
-                .OfType<RelationalOptionsExtension>()
-                .ToList();
+        var relationalOptionsExtensions = options.Extensions
+            .OfType<RelationalOptionsExtension>()
+            .ToList();
 
         if (relationalOptionsExtensions.Count == 0)
         {
@@ -371,22 +370,32 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
     ///     If options are invalid, then an exception should be thrown.
     /// </summary>
     /// <param name="options">The options being validated.</param>
-    public virtual void Validate(IDbContextOptions options)
-    {
-    }
+    public virtual void Validate(IDbContextOptions options) { }
 
     /// <summary>
     ///     Adds default <see cref="WarningBehavior" /> for relational events.
     /// </summary>
     /// <param name="coreOptionsExtension">The core options extension.</param>
     /// <returns>The new core options extension.</returns>
-    public static CoreOptionsExtension WithDefaultWarningConfiguration(CoreOptionsExtension coreOptionsExtension)
-        => coreOptionsExtension.WithWarningsConfiguration(
+    public static CoreOptionsExtension WithDefaultWarningConfiguration(
+        CoreOptionsExtension coreOptionsExtension
+    ) =>
+        coreOptionsExtension.WithWarningsConfiguration(
             coreOptionsExtension.WarningsConfiguration
                 .TryWithExplicit(RelationalEventId.AmbientTransactionWarning, WarningBehavior.Throw)
-                .TryWithExplicit(RelationalEventId.IndexPropertiesBothMappedAndNotMappedToTable, WarningBehavior.Throw)
-                .TryWithExplicit(RelationalEventId.IndexPropertiesMappedToNonOverlappingTables, WarningBehavior.Throw)
-                .TryWithExplicit(RelationalEventId.ForeignKeyPropertiesMappedToUnrelatedTables, WarningBehavior.Throw));
+                .TryWithExplicit(
+                    RelationalEventId.IndexPropertiesBothMappedAndNotMappedToTable,
+                    WarningBehavior.Throw
+                )
+                .TryWithExplicit(
+                    RelationalEventId.IndexPropertiesMappedToNonOverlappingTables,
+                    WarningBehavior.Throw
+                )
+                .TryWithExplicit(
+                    RelationalEventId.ForeignKeyPropertiesMappedToUnrelatedTables,
+                    WarningBehavior.Throw
+                )
+        );
 
     /// <summary>
     ///     Information/metadata for a <see cref="RelationalOptionsExtension" />.
@@ -400,22 +409,19 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
         ///     info/metadata for the given extension.
         /// </summary>
         /// <param name="extension">The extension.</param>
-        protected RelationalExtensionInfo(IDbContextOptionsExtension extension)
-            : base(extension)
-        {
-        }
+        protected RelationalExtensionInfo(IDbContextOptionsExtension extension) : base(extension)
+        { }
 
         /// <summary>
         ///     The extension for which this instance contains metadata.
         /// </summary>
-        public new virtual RelationalOptionsExtension Extension
-            => (RelationalOptionsExtension)base.Extension;
+        public new virtual RelationalOptionsExtension Extension =>
+            (RelationalOptionsExtension)base.Extension;
 
         /// <summary>
         ///     True, since this is a database provider base class.
         /// </summary>
-        public override bool IsDatabaseProvider
-            => true;
+        public override bool IsDatabaseProvider => true;
 
         /// <summary>
         ///     Returns a hash code created from any options that would cause a new <see cref="IServiceProvider" />
@@ -423,8 +429,7 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
         ///     have any such options and should return zero.
         /// </summary>
         /// <returns>A hash over options that require a new service provider when changed.</returns>
-        public override int GetServiceProviderHashCode()
-            => 0;
+        public override int GetServiceProviderHashCode() => 0;
 
         /// <summary>
         ///     Returns a value indicating whether all of the options used in <see cref="GetServiceProviderHashCode" />
@@ -432,8 +437,8 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
         /// </summary>
         /// <param name="other">The other extension.</param>
         /// <returns>A value indicating whether all of the options that require a new service provider are the same.</returns>
-        public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
-            => other is RelationalExtensionInfo;
+        public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other) =>
+            other is RelationalExtensionInfo;
 
         /// <summary>
         ///     A message fragment for logging typically containing information about
@@ -449,7 +454,10 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
 
                     if (Extension._commandTimeout != null)
                     {
-                        builder.Append("CommandTimeout=").Append(Extension._commandTimeout).Append(' ');
+                        builder
+                            .Append("CommandTimeout=")
+                            .Append(Extension._commandTimeout)
+                            .Append(' ');
                     }
 
                     if (Extension._maxBatchSize != null)
@@ -464,16 +472,24 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
 
                     if (Extension._querySplittingBehavior != null)
                     {
-                        builder.Append("QuerySplittingBehavior=").Append(Extension._querySplittingBehavior).Append(' ');
+                        builder
+                            .Append("QuerySplittingBehavior=")
+                            .Append(Extension._querySplittingBehavior)
+                            .Append(' ');
                     }
 
                     if (Extension._migrationsAssembly != null)
                     {
-                        builder.Append("MigrationsAssembly=").Append(Extension._migrationsAssembly).Append(' ');
+                        builder
+                            .Append("MigrationsAssembly=")
+                            .Append(Extension._migrationsAssembly)
+                            .Append(' ');
                     }
 
-                    if (Extension._migrationsHistoryTableName != null
-                        || Extension._migrationsHistoryTableSchema != null)
+                    if (
+                        Extension._migrationsHistoryTableName != null
+                        || Extension._migrationsHistoryTableSchema != null
+                    )
                     {
                         builder.Append("MigrationsHistoryTable=");
 
@@ -482,7 +498,12 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
                             builder.Append(Extension._migrationsHistoryTableSchema).Append('.');
                         }
 
-                        builder.Append(Extension._migrationsHistoryTableName ?? HistoryRepository.DefaultTableName).Append(' ');
+                        builder
+                            .Append(
+                                Extension._migrationsHistoryTableName
+                                    ?? HistoryRepository.DefaultTableName
+                            )
+                            .Append(' ');
                     }
 
                     _logFragment = builder.ToString();

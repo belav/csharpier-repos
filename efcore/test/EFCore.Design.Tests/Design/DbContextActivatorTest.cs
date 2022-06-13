@@ -20,15 +20,16 @@ public class DbContextActivatorTest
             typeof(TestContext),
             null,
             null,
-            new[] { "A", "B" });
+            new[] { "A", "B" }
+        );
 
         Assert.IsType<TestContext>(result);
     }
 
     private class TestContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options
+        protected override void OnConfiguring(DbContextOptionsBuilder options) =>
+            options
                 .EnableServiceProviderCaching(false)
                 .UseInMemoryDatabase(nameof(DbContextActivatorTest));
     }

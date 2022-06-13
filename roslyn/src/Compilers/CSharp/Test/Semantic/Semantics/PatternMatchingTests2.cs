@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void Patterns2_00()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -35,8 +35,7 @@ class Program
 }
 ";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"1");
         }
 
@@ -44,7 +43,7 @@ class Program
         public void Patterns2_01()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -77,8 +76,7 @@ public class Point
 }
 ";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: "");
         }
 
@@ -86,7 +84,7 @@ public class Point
         public void Patterns2_02()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -122,9 +120,12 @@ public static class PointExtensions
 }
 ";
             // We use a compilation profile that provides System.Runtime.CompilerServices.ExtensionAttribute needed for this test
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.DebugExe, parseOptions: TestOptions.RegularWithRecursivePatterns);
-            compilation.VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularWithRecursivePatterns
+            );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: "");
         }
 
@@ -132,7 +133,7 @@ public static class PointExtensions
         public void Patterns2_03()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -158,27 +159,37 @@ class Program
             compilation.VerifyDiagnostics(
                 // (9,22): error CS8415: An expression of type '(int x, int y)' can never match the provided pattern.
                 //         Check(false, p is (1, 4) { x: 3 });
-                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "p is (1, 4) { x: 3 }").WithArguments("(int x, int y)").WithLocation(9, 22),
+                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "p is (1, 4) { x: 3 }")
+                    .WithArguments("(int x, int y)")
+                    .WithLocation(9, 22),
                 // (10,22): error CS8415: An expression of type '(int x, int y)' can never match the provided pattern.
                 //         Check(false, p is (3, 1) { y: 4 });
-                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "p is (3, 1) { y: 4 }").WithArguments("(int x, int y)").WithLocation(10, 22),
+                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "p is (3, 1) { y: 4 }")
+                    .WithArguments("(int x, int y)")
+                    .WithLocation(10, 22),
                 // (11,22): error CS8415: An expression of type '(int x, int y)' can never match the provided pattern.
                 //         Check(false, p is (3, 4) { x: 1 });
-                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "p is (3, 4) { x: 1 }").WithArguments("(int x, int y)").WithLocation(11, 22),
+                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "p is (3, 4) { x: 1 }")
+                    .WithArguments("(int x, int y)")
+                    .WithLocation(11, 22),
                 // (13,22): error CS8415: An expression of type '(int x, int y)' can never match the provided pattern.
                 //         Check(false, p is (1, 4) { x: 3 });
-                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "p is (1, 4) { x: 3 }").WithArguments("(int x, int y)").WithLocation(13, 22),
+                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "p is (1, 4) { x: 3 }")
+                    .WithArguments("(int x, int y)")
+                    .WithLocation(13, 22),
                 // (15,22): error CS8415: An expression of type '(int x, int y)' can never match the provided pattern.
                 //         Check(false, p is (3, 4) { x: 1 });
-                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "p is (3, 4) { x: 1 }").WithArguments("(int x, int y)").WithLocation(15, 22)
-                );
+                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "p is (3, 4) { x: 1 }")
+                    .WithArguments("(int x, int y)")
+                    .WithLocation(15, 22)
+            );
         }
 
         [Fact]
         public void Patterns2_04b()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -196,8 +207,7 @@ class Program
     }
 }";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: "");
         }
 
@@ -205,7 +215,7 @@ class Program
         public void Patterns2_DiscardPattern_01()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -238,8 +248,7 @@ public class Point
 }
 ";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: "");
         }
 
@@ -247,7 +256,7 @@ public class Point
         public void Patterns2_Switch01()
         {
             var sourceTemplate =
-@"
+                @"
 class Program
 {{
     public static void Main()
@@ -271,14 +280,13 @@ class Program
                     // (12,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                     //             case (_, _): // error - subsumed
                     Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "(_, _)").WithLocation(12, 18)
-                    );
+                );
             }
             void testGoodCase(string s1, string s2)
             {
                 var source = string.Format(sourceTemplate, s1, s2, string.Empty);
                 var compilation = CreatePatternCompilation(source);
-                compilation.VerifyDiagnostics(
-                    );
+                compilation.VerifyDiagnostics();
             }
             var c1 = "case (true, _):";
             var c2 = "case (false, false):";
@@ -301,7 +309,7 @@ class Program
         public void Patterns2_Switch02()
         {
             var source =
-@"
+                @"
 class Program
 {
     public static void Main()
@@ -329,8 +337,7 @@ public class Point
 }
 ";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: "True");
         }
 
@@ -338,7 +345,7 @@ public class Point
         public void DefaultPattern()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -439,7 +446,8 @@ public class Point
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "(default)!").WithLocation(22, 21),
                 // (22,22): error CS8715: Duplicate null suppression operator ('!')
                 //         if (i is < ((default)!!)) {} // error 15
-                Diagnostic(ErrorCode.ERR_DuplicateNullSuppression, "default").WithLocation(22, 22),
+                Diagnostic(ErrorCode.ERR_DuplicateNullSuppression, "default")
+                    .WithLocation(22, 22),
                 // (22,22): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //         if (i is < ((default)!!)) {} // error 15
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(22, 22),
@@ -451,7 +459,9 @@ public class Point
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "!").WithLocation(25, 27),
                 // (25,28): error CS1525: Invalid expression term ')'
                 //         if (i is (default)!) {} // error 16
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(25, 28),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(25, 28),
                 // (25,28): error CS1002: ; expected
                 //         if (i is (default)!) {} // error 16
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(25, 28),
@@ -460,17 +470,23 @@ public class Point
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(25, 28),
                 // (26,18): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'int', with 2 out parameters and a void return type.
                 //         if (i is ((default)!)) {} // error 17
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "((default)!)").WithArguments("int", "2").WithLocation(26, 18),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "((default)!)")
+                    .WithArguments("int", "2")
+                    .WithLocation(26, 18),
                 // (26,20): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //         if (i is ((default)!)) {} // error 17
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(26, 20),
                 // (26,28): error CS1003: Syntax error, ',' expected
                 //         if (i is ((default)!)) {} // error 17
-                Diagnostic(ErrorCode.ERR_SyntaxError, "!").WithArguments(",").WithLocation(26, 28),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "!")
+                    .WithArguments(",")
+                    .WithLocation(26, 28),
                 // (26,29): error CS1525: Invalid expression term ')'
                 //         if (i is ((default)!)) {} // error 17
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(26, 29)
-                );
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(26, 29)
+            );
         }
 
         [Fact]
@@ -478,20 +494,35 @@ public class Point
         {
             // test appropriate language version or feature flag
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
         var r = 1 switch { _ => 0, };
     }
 }";
-            CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.RegularWithoutRecursivePatterns).VerifyDiagnostics(
-                // (5,17): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         var r = 1 switch { _ => 0, };
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "1 switch { _ => 0, }").WithArguments("recursive patterns", "8.0").WithLocation(5, 17)
+            CreateCompilation(
+                    source,
+                    options: TestOptions.DebugExe,
+                    parseOptions: TestOptions.RegularWithoutRecursivePatterns
+                )
+                .VerifyDiagnostics(
+                    // (5,17): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         var r = 1 switch { _ => 0, };
+                    Diagnostic(
+                            ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                            "1 switch { _ => 0, }"
+                        )
+                        .WithArguments("recursive patterns", "8.0")
+                        .WithLocation(5, 17)
                 );
 
-            CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular8).VerifyDiagnostics();
+            CreateCompilation(
+                    source,
+                    options: TestOptions.DebugExe,
+                    parseOptions: TestOptions.Regular8
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
@@ -500,7 +531,7 @@ public class Point
             // test switch expression's governing expression has no type
             // test switch expression's governing expression has type void
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -508,13 +539,18 @@ public class Point
         var r2 = System.Console.Write(1) switch { _ => 0 };
     }
 }";
-            CreatePatternCompilation(source).VerifyDiagnostics(
-                // (5,18): error CS8117: Invalid operand for pattern match; value required, but found '(int, <null>)'.
-                //         var r1 = (1, null) switch ( _ => 0 );
-                Diagnostic(ErrorCode.ERR_BadPatternExpression, "(1, null)").WithArguments("(int, <null>)").WithLocation(5, 18),
-                // (6,18): error CS8117: Invalid operand for pattern match; value required, but found 'void'.
-                //         var r2 = System.Console.Write(1) switch ( _ => 0 );
-                Diagnostic(ErrorCode.ERR_BadPatternExpression, "System.Console.Write(1)").WithArguments("void").WithLocation(6, 18)
+            CreatePatternCompilation(source)
+                .VerifyDiagnostics(
+                    // (5,18): error CS8117: Invalid operand for pattern match; value required, but found '(int, <null>)'.
+                    //         var r1 = (1, null) switch ( _ => 0 );
+                    Diagnostic(ErrorCode.ERR_BadPatternExpression, "(1, null)")
+                        .WithArguments("(int, <null>)")
+                        .WithLocation(5, 18),
+                    // (6,18): error CS8117: Invalid operand for pattern match; value required, but found 'void'.
+                    //         var r2 = System.Console.Write(1) switch ( _ => 0 );
+                    Diagnostic(ErrorCode.ERR_BadPatternExpression, "System.Console.Write(1)")
+                        .WithArguments("void")
+                        .WithLocation(6, 18)
                 );
         }
 
@@ -524,7 +560,7 @@ public class Point
             // test that a ternary expression is not at an appropriate precedence
             // for the constant expression of a constant pattern in a switch expression arm.
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -535,19 +571,26 @@ public class Point
 }";
             // This is admittedly poor syntax error recovery (for the line declaring r2),
             // but this test demonstrates that it is a syntax error.
-            CreatePatternCompilation(source).VerifyDiagnostics(
-                // (6,34): error CS1003: Syntax error, '=>' expected
-                //         var r1 = b switch { true ? true : true => true, false => false };
-                Diagnostic(ErrorCode.ERR_SyntaxError, "?").WithArguments("=>").WithLocation(6, 34),
-                // (6,34): error CS1525: Invalid expression term '?'
-                //         var r1 = b switch { true ? true : true => true, false => false };
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?").WithArguments("?").WithLocation(6, 34),
-                // (6,48): error CS1003: Syntax error, ',' expected
-                //         var r1 = b switch { true ? true : true => true, false => false };
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(6, 48),
-                // (6,48): error CS8504: Pattern missing
-                //         var r1 = b switch { true ? true : true => true, false => false };
-                Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(6, 48)
+            CreatePatternCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,34): error CS1003: Syntax error, '=>' expected
+                    //         var r1 = b switch { true ? true : true => true, false => false };
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "?")
+                        .WithArguments("=>")
+                        .WithLocation(6, 34),
+                    // (6,34): error CS1525: Invalid expression term '?'
+                    //         var r1 = b switch { true ? true : true => true, false => false };
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?")
+                        .WithArguments("?")
+                        .WithLocation(6, 34),
+                    // (6,48): error CS1003: Syntax error, ',' expected
+                    //         var r1 = b switch { true ? true : true => true, false => false };
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
+                        .WithArguments(",")
+                        .WithLocation(6, 48),
+                    // (6,48): error CS8504: Pattern missing
+                    //         var r1 = b switch { true ? true : true => true, false => false };
+                    Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(6, 48)
                 );
         }
 
@@ -556,7 +599,7 @@ public class Point
         {
             // test that a ternary expression is permitted as a constant pattern in recursive contexts and the case expression.
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -566,8 +609,7 @@ public class Point
         switch (b.Item1) { case true ? true : true: break; }
     }
 }";
-            CreatePatternCompilation(source).VerifyDiagnostics(
-                );
+            CreatePatternCompilation(source).VerifyDiagnostics();
         }
 
         [Fact]
@@ -575,35 +617,39 @@ public class Point
         {
             // test throw expression in match arm.
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
         var x = 1 switch { 1 => 1, _ => throw null };
     }
 }";
-            CreatePatternCompilation(source).VerifyDiagnostics(
-                );
+            CreatePatternCompilation(source).VerifyDiagnostics();
         }
 
         [Fact]
         public void EmptySwitchExpression()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
         var r = 1 switch { };
     }
 }";
-            CreatePatternCompilation(source).VerifyDiagnostics(
-                // (5,19): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
-                //         var r = 1 switch { };
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch").WithArguments("_").WithLocation(5, 19),
-                // (5,19): error CS8506: No best type was found for the switch expression.
-                //         var r = 1 switch { };
-                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(5, 19));
+            CreatePatternCompilation(source)
+                .VerifyDiagnostics(
+                    // (5,19): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
+                    //         var r = 1 switch { };
+                    Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                        .WithArguments("_")
+                        .WithLocation(5, 19),
+                    // (5,19): error CS8506: No best type was found for the switch expression.
+                    //         var r = 1 switch { };
+                    Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch")
+                        .WithLocation(5, 19)
+                );
         }
 
         [Fact]
@@ -611,7 +657,7 @@ public class Point
         {
             // test common type vs delegate in match expression
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -621,10 +667,13 @@ public class Point
     public static void M() {}
     public delegate void D();
 }";
-            CreatePatternCompilation(source).VerifyDiagnostics(
-                // (5,19): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '3' is not covered.
-                //         var x = 1 switch { 0 => M, 1 => new D(M), 2 => M };
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch").WithArguments("3").WithLocation(5, 19)
+            CreatePatternCompilation(source)
+                .VerifyDiagnostics(
+                    // (5,19): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '3' is not covered.
+                    //         var x = 1 switch { 0 => M, 1 => new D(M), 2 => M };
+                    Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                        .WithArguments("3")
+                        .WithLocation(5, 19)
                 );
         }
 
@@ -633,7 +682,7 @@ public class Point
         {
             // test flow analysis of the switch expression
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -643,8 +692,7 @@ public class Point
         System.Console.WriteLine(u);
     }
 }";
-            CreatePatternCompilation(source).VerifyDiagnostics(
-                );
+            CreatePatternCompilation(source).VerifyDiagnostics();
         }
 
         [Fact]
@@ -652,7 +700,7 @@ public class Point
         {
             // test flow analysis of the switch expression
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -663,10 +711,13 @@ public class Point
     }
     static int M(int i) => i;
 }";
-            CreatePatternCompilation(source).VerifyDiagnostics(
-                // (8,34): error CS0165: Use of unassigned local variable 'u'
-                //         System.Console.WriteLine(u);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "u").WithArguments("u").WithLocation(8, 34)
+            CreatePatternCompilation(source)
+                .VerifyDiagnostics(
+                    // (8,34): error CS0165: Use of unassigned local variable 'u'
+                    //         System.Console.WriteLine(u);
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "u")
+                        .WithArguments("u")
+                        .WithLocation(8, 34)
                 );
         }
 
@@ -675,7 +726,7 @@ public class Point
         {
             // test flow analysis of the switch expression
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -686,10 +737,13 @@ public class Point
     }
     static int M(int i) => i;
 }";
-            CreatePatternCompilation(source).VerifyDiagnostics(
-                // (7,47): error CS0165: Use of unassigned local variable 'u'
-                //         var x = q switch { 0 => u=0, 1 => u=M(u), _ => u=2 };
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "u").WithArguments("u").WithLocation(7, 47)
+            CreatePatternCompilation(source)
+                .VerifyDiagnostics(
+                    // (7,47): error CS0165: Use of unassigned local variable 'u'
+                    //         var x = q switch { 0 => u=0, 1 => u=M(u), _ => u=2 };
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "u")
+                        .WithArguments("u")
+                        .WithLocation(7, 47)
                 );
         }
 
@@ -700,7 +754,7 @@ public class Point
             // test lazily inferring variables in the when clause
             // test lazily inferring variables in the arrow expression
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -715,11 +769,17 @@ public class Point
             compilation.VerifyDiagnostics(
                 // (7,19): warning CS8846: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered. However, a pattern with a 'when' clause might successfully match this value.
                 //         var c = a switch { var x2 when x2 is var x3 => x3 };
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen, "switch").WithArguments("_").WithLocation(7, 19)
-                );
+                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen, "switch")
+                    .WithArguments("_")
+                    .WithLocation(7, 19)
+            );
             var names = new[] { "x1", "x2", "x3", "x4", "x5" };
             var tree = compilation.SyntaxTrees[0];
-            foreach (var designation in tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>())
+            foreach (
+                var designation in tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<SingleVariableDesignationSyntax>()
+            )
             {
                 var model = compilation.GetSemanticModel(tree);
                 var symbol = model.GetDeclaredSymbol(designation);
@@ -739,7 +799,7 @@ public class Point
         {
             // test that we forbid a short discard at the top level of an is-pattern expression
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -751,8 +811,10 @@ public class Point
             compilation.VerifyDiagnostics(
                 // (6,18): error CS0246: The type or namespace name '_' could not be found (are you missing a using directive or an assembly reference?)
                 //         if (a is _) { }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "_").WithArguments("_").WithLocation(6, 18)
-                );
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "_")
+                    .WithArguments("_")
+                    .WithLocation(6, 18)
+            );
         }
 
         [Fact]
@@ -760,7 +822,7 @@ public class Point
         {
             // Test that a single-element deconstruct pattern is an error if no further elements disambiguate.
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -776,24 +838,38 @@ class Program
         if (t is ValueTuple<int>(int z4)) { }           // ok
     }
 }";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular8);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular8
+            );
             compilation.VerifyDiagnostics(
                 // (8,18): error CS8400: Feature 'parenthesized pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //         if (t is (int x)) { }                           // error 1
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int x)").WithArguments("parenthesized pattern", "9.0").WithLocation(8, 18),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int x)")
+                    .WithArguments("parenthesized pattern", "9.0")
+                    .WithLocation(8, 18),
                 // (8,19): error CS8121: An expression of type 'ValueTuple<int>' cannot be handled by a pattern of type 'int'.
                 //         if (t is (int x)) { }                           // error 1
-                Diagnostic(ErrorCode.ERR_PatternWrongType, "int").WithArguments("System.ValueTuple<int>", "int").WithLocation(8, 19),
+                Diagnostic(ErrorCode.ERR_PatternWrongType, "int")
+                    .WithArguments("System.ValueTuple<int>", "int")
+                    .WithLocation(8, 19),
                 // (9,27): error CS8400: Feature 'parenthesized pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //         switch (t) { case (_): break; }                 // error 2
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(_)").WithArguments("parenthesized pattern", "9.0").WithLocation(9, 27),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(_)")
+                    .WithArguments("parenthesized pattern", "9.0")
+                    .WithLocation(9, 27),
                 // (10,28): error CS8400: Feature 'parenthesized pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //         var u = t switch { (int y) => y, _ => 2 };      // error 3
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int y)").WithArguments("parenthesized pattern", "9.0").WithLocation(10, 28),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int y)")
+                    .WithArguments("parenthesized pattern", "9.0")
+                    .WithLocation(10, 28),
                 // (10,29): error CS8121: An expression of type 'ValueTuple<int>' cannot be handled by a pattern of type 'int'.
                 //         var u = t switch { (int y) => y, _ => 2 };      // error 3
-                Diagnostic(ErrorCode.ERR_PatternWrongType, "int").WithArguments("System.ValueTuple<int>", "int").WithLocation(10, 29)
-                );
+                Diagnostic(ErrorCode.ERR_PatternWrongType, "int")
+                    .WithArguments("System.ValueTuple<int>", "int")
+                    .WithLocation(10, 29)
+            );
         }
 
         [Fact]
@@ -803,7 +879,7 @@ class Program
             // Test binding the var pattern
             // Test lowering the var pattern for the is-expression
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -819,8 +895,7 @@ class Program
     }
 }";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"");
         }
 
@@ -829,7 +904,7 @@ class Program
         {
             // Test that 'var' does not bind to a type
             var source =
-@"
+                @"
 using System;
 namespace N
 {
@@ -853,36 +928,52 @@ namespace N
             compilation.VerifyDiagnostics(
                 // (9,21): error CS0029: Cannot implicitly convert type '(int, int)' to 'N.var'
                 //             var t = (1, 2);
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "(1, 2)").WithArguments("(int, int)", "N.var").WithLocation(9, 21),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "(1, 2)")
+                    .WithArguments("(int, int)", "N.var")
+                    .WithLocation(9, 21),
                 // (10,32): error CS8508: The syntax 'var' for a pattern is not permitted to refer to a type, but 'N.var' is in scope here.
                 //             { Check(true, t is var (x, y) && x == 1 && y == 2); }  // error 1
-                Diagnostic(ErrorCode.ERR_VarMayNotBindToType, "var").WithArguments("N.var").WithLocation(10, 32),
+                Diagnostic(ErrorCode.ERR_VarMayNotBindToType, "var")
+                    .WithArguments("N.var")
+                    .WithLocation(10, 32),
                 // (10,36): error CS1061: 'var' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'var' could be found (are you missing a using directive or an assembly reference?)
                 //             { Check(true, t is var (x, y) && x == 1 && y == 2); }  // error 1
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(x, y)").WithArguments("N.var", "Deconstruct").WithLocation(10, 36),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(x, y)")
+                    .WithArguments("N.var", "Deconstruct")
+                    .WithLocation(10, 36),
                 // (10,36): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'var', with 2 out parameters and a void return type.
                 //             { Check(true, t is var (x, y) && x == 1 && y == 2); }  // error 1
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(x, y)").WithArguments("N.var", "2").WithLocation(10, 36),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(x, y)")
+                    .WithArguments("N.var", "2")
+                    .WithLocation(10, 36),
                 // (11,33): error CS8508: The syntax 'var' for a pattern is not permitted to refer to a type, but 'N.var' is in scope here.
                 //             { Check(false, t is var (x, y) && x == 1 && y == 3); } // error 2
-                Diagnostic(ErrorCode.ERR_VarMayNotBindToType, "var").WithArguments("N.var").WithLocation(11, 33),
+                Diagnostic(ErrorCode.ERR_VarMayNotBindToType, "var")
+                    .WithArguments("N.var")
+                    .WithLocation(11, 33),
                 // (11,37): error CS1061: 'var' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'var' could be found (are you missing a using directive or an assembly reference?)
                 //             { Check(false, t is var (x, y) && x == 1 && y == 3); } // error 2
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(x, y)").WithArguments("N.var", "Deconstruct").WithLocation(11, 37),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(x, y)")
+                    .WithArguments("N.var", "Deconstruct")
+                    .WithLocation(11, 37),
                 // (11,37): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'var', with 2 out parameters and a void return type.
                 //             { Check(false, t is var (x, y) && x == 1 && y == 3); } // error 2
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(x, y)").WithArguments("N.var", "2").WithLocation(11, 37),
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(x, y)")
+                    .WithArguments("N.var", "2")
+                    .WithLocation(11, 37),
                 // (12,32): error CS8508: The syntax 'var' for a pattern is not permitted to refer to a type, but 'N.var' is in scope here.
                 //             { Check(true, t is var x); }                           // error 3
-                Diagnostic(ErrorCode.ERR_VarMayNotBindToType, "var").WithArguments("N.var").WithLocation(12, 32)
-                );
+                Diagnostic(ErrorCode.ERR_VarMayNotBindToType, "var")
+                    .WithArguments("N.var")
+                    .WithLocation(12, 32)
+            );
         }
 
         [Fact]
         public void Patterns2_10()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -920,8 +1011,7 @@ namespace System
     }
 }";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"0123");
         }
 
@@ -929,7 +1019,7 @@ namespace System
         public void Patterns2_11()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -972,14 +1062,14 @@ namespace System
                 // (20,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                 //             case var _: return 4;
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "var _").WithLocation(20, 18)
-                );
+            );
         }
 
         [Fact]
         public void Patterns2_12()
         {
             var source =
-@"
+                @"
 using System;
 class Program
 {
@@ -1016,8 +1106,7 @@ namespace System
     }
 }";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"0123");
         }
 
@@ -1025,7 +1114,7 @@ namespace System
         public void SwitchArmSubsumed()
         {
             var source =
-@"public class X
+                @"public class X
 {
     public static void Main()
     {
@@ -1038,14 +1127,14 @@ namespace System
                 // (6,61): error CS8410: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
                 //         string s2 = s switch { null => null, string t => t, "foo" => null };
                 Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, @"""foo""").WithLocation(6, 61)
-                );
+            );
         }
 
         [Fact]
         public void LongTuples()
         {
             var source =
-@"using System;
+                @"using System;
 
 public class X
 {
@@ -1065,18 +1154,20 @@ public class X
     }
 }";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
-            var comp = CompileAndVerify(compilation, expectedOutput: @"9
+            compilation.VerifyDiagnostics();
+            var comp = CompileAndVerify(
+                compilation,
+                expectedOutput: @"9
 9
-9");
+9"
+            );
         }
 
         [Fact]
         public void TypeCheckInPropertyPattern()
         {
             var source =
-@"using System;
+                @"using System;
 
 class Program2
 {
@@ -1128,8 +1219,7 @@ class Frog
 }
 ";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"12345678");
         }
 
@@ -1137,7 +1227,7 @@ class Frog
         public void OvereagerSubsumption()
         {
             var source =
-@"class Program2
+                @"class Program2
 {
     public static int Main() => 0;
     public static void M(object o)
@@ -1157,18 +1247,22 @@ class Frog
             compilation.VerifyDiagnostics(
                 // (8,18): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //             case (1, 2):
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(1, 2)").WithArguments("object", "Deconstruct").WithLocation(8, 18),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(1, 2)")
+                    .WithArguments("object", "Deconstruct")
+                    .WithLocation(8, 18),
                 // (8,18): error CS8129: No suitable Deconstruct instance or extension method was found for type 'object', with 2 out parameters and a void return type.
                 //             case (1, 2):
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(1, 2)").WithArguments("object", "2").WithLocation(8, 18)
-                );
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(1, 2)")
+                    .WithArguments("object", "2")
+                    .WithLocation(8, 18)
+            );
         }
 
         [Fact]
         public void UnderscoreDeclaredAndDiscardPattern_01()
         {
             var source =
-@"class Program0
+                @"class Program0
 {
     static int Main() => 0;
     private const int _ = 1;
@@ -1186,10 +1280,14 @@ class Program1
             {
                 // (5,31): error CS0246: The type or namespace name '_' could not be found (are you missing a using directive or an assembly reference?)
                 //     bool M1(object o) => o is _;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "_").WithArguments("_").WithLocation(5, 31),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "_")
+                    .WithArguments("_")
+                    .WithLocation(5, 31),
                 // (11,31): warning CS8513: The name '_' refers to the type 'Program1._', not the discard pattern. Use '@_' for the type, or 'var _' to discard.
                 //     bool M3(object o) => o is _;
-                Diagnostic(ErrorCode.WRN_IsTypeNamedUnderscore, "_").WithArguments("Program1._").WithLocation(11, 31)
+                Diagnostic(ErrorCode.WRN_IsTypeNamedUnderscore, "_")
+                    .WithArguments("Program1._")
+                    .WithLocation(11, 31)
             };
 
             var compilation = CreatePatternCompilation(source);
@@ -1202,13 +1300,25 @@ class Program1
             {
                 // (5,31): error CS0246: The type or namespace name '_' could not be found (are you missing a using directive or an assembly reference?)
                 //     bool M1(object o) => o is _;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "_").WithArguments("_").WithLocation(5, 31),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "_")
+                    .WithArguments("_")
+                    .WithLocation(5, 31),
                 // (6,26): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 //     bool M2(object o) => o switch { 1 => true, _ => false };
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "o switch { 1 => true, _ => false }").WithArguments("recursive patterns", "8.0").WithLocation(6, 26),
+                Diagnostic(
+                        ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                        "o switch { 1 => true, _ => false }"
+                    )
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(6, 26),
                 // (12,26): error CS8652: The feature 'recursive patterns' is not available in C# 7.3. Please use language version 8.0 or greater.
                 //     bool M4(object o) => o switch { 1 => true, _ => false };
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "o switch { 1 => true, _ => false }").WithArguments("recursive patterns", "8.0").WithLocation(12, 26)
+                Diagnostic(
+                        ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
+                        "o switch { 1 => true, _ => false }"
+                    )
+                    .WithArguments("recursive patterns", "8.0")
+                    .WithLocation(12, 26)
             };
 
             compilation = CreateCompilation(source, parseOptions: TestOptions.Regular7_3);
@@ -1219,7 +1329,7 @@ class Program1
         public void UnderscoreDeclaredAndDiscardPattern_02()
         {
             var source =
-@"class Program0
+                @"class Program0
 {
     static int Main() => 0;
     private const int _ = 1;
@@ -1230,15 +1340,14 @@ class Program1 : Program0
 }
 ";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
         }
 
         [Fact]
         public void UnderscoreDeclaredAndDiscardPattern_03()
         {
             var source =
-@"class Program0
+                @"class Program0
 {
     static int Main() => 0;
     protected const int _ = 1;
@@ -1254,15 +1363,14 @@ class Program2
 }
 ";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
         }
 
         [Fact]
         public void UnderscoreDeclaredAndDiscardPattern_04()
         {
             var source =
-@"using _ = System.Int32;
+                @"using _ = System.Int32;
 class Program
 {
     static int Main() => 0;
@@ -1273,15 +1381,16 @@ class Program
             compilation.VerifyDiagnostics(
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using _ = System.Int32;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using _ = System.Int32;").WithLocation(1, 1)
-                );
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using _ = System.Int32;")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
         public void EscapingUnderscoreDeclaredAndDiscardPattern_04()
         {
             var source =
-@"class Program0
+                @"class Program0
 {
     static int Main() => 0;
     private const int _ = 2;
@@ -1295,8 +1404,7 @@ class Program1
 }
 ";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
         }
 
         [Fact]
@@ -1304,7 +1412,7 @@ class Program1
         {
             // When a switch expression arm is erroneous, ensure that the expression is treated as unreachable (e.g. for definite assignment purposes).
             var source =
-@"class Program2
+                @"class Program2
 {
     public static int Main() => 0;
     public static void M(string s)
@@ -1318,15 +1426,17 @@ class Program1
             compilation.VerifyDiagnostics(
                 // (7,41): error CS0029: Cannot implicitly convert type 'int' to 'string'
                 //         int j = s switch { "frog" => 1, 0 => i, _ => 2 };
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "0").WithArguments("int", "string").WithLocation(7, 41)
-                );
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "0")
+                    .WithArguments("int", "string")
+                    .WithLocation(7, 41)
+            );
         }
 
         [Fact, WorkItem(9154, "https://github.com/dotnet/roslyn/issues/9154")]
         public void ErroneousIsPatternDefiniteAssignment()
         {
             var source =
-@"class Program2
+                @"class Program2
 {
     public static int Main() => 0;
     void Dummy(object o) {}
@@ -1341,16 +1451,18 @@ class Program1
             var compilation = CreatePatternCompilation(source);
             compilation.VerifyDiagnostics(
                 // (8,74): error CS0128: A local variable or function named 'x5' is already defined in this scope
-                //                                                                o2 is int x5 && 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(8, 74)
-                );
+                //                                                                o2 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(8, 74)
+            );
         }
 
         [Fact]
         public void ERR_IsPatternImpossible()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -1362,15 +1474,20 @@ class Program1
             compilation.VerifyDiagnostics(
                 // (5,34): error CS8415: An expression of type 'string' can never match the provided pattern.
                 //         System.Console.WriteLine("frog" is string { Length: 4, Length: 5 });
-                Diagnostic(ErrorCode.ERR_IsPatternImpossible, @"""frog"" is string { Length: 4, Length: 5 }").WithArguments("string").WithLocation(5, 34)
-                );
+                Diagnostic(
+                        ErrorCode.ERR_IsPatternImpossible,
+                        @"""frog"" is string { Length: 4, Length: 5 }"
+                    )
+                    .WithArguments("string")
+                    .WithLocation(5, 34)
+            );
         }
 
         [Fact]
         public void WRN_GivenExpressionNeverMatchesPattern01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -1382,15 +1499,16 @@ class Program1
             compilation.VerifyDiagnostics(
                 // (5,34): warning CS8416: The given expression never matches the provided pattern.
                 //         System.Console.WriteLine(3 is 4);
-                Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "3 is 4").WithLocation(5, 34)
-                );
+                Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "3 is 4")
+                    .WithLocation(5, 34)
+            );
         }
 
         [Fact]
         public void WRN_GivenExpressionNeverMatchesPattern02()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -1403,15 +1521,19 @@ class Program1
             compilation.VerifyDiagnostics(
                 // (6,34): warning CS8416: The given expression never matches the provided pattern.
                 //         System.Console.WriteLine(s is string { Length: 3 });
-                Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "s is string { Length: 3 }").WithLocation(6, 34)
-                );
+                Diagnostic(
+                        ErrorCode.WRN_GivenExpressionNeverMatchesPattern,
+                        "s is string { Length: 3 }"
+                    )
+                    .WithLocation(6, 34)
+            );
         }
 
         [Fact]
         public void DefiniteAssignmentForIsPattern01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -1425,15 +1547,17 @@ class Program1
             compilation.VerifyDiagnostics(
                 // (7,34): error CS0165: Use of unassigned local variable 'j'
                 //         System.Console.WriteLine(j);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "j").WithArguments("j").WithLocation(7, 34)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "j")
+                    .WithArguments("j")
+                    .WithLocation(7, 34)
+            );
         }
 
         [Fact]
         public void DefiniteAssignmentForIsPattern02()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -1443,9 +1567,14 @@ class Program1
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.RegularWithRecursivePatterns);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularWithRecursivePatterns
+            );
             compilation.VerifyDiagnostics();
-            var expectedOutput = @"True
+            var expectedOutput =
+                @"True
 3";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
@@ -1454,7 +1583,7 @@ class Program1
         public void DefiniteAssignmentForIsPattern03()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -1471,15 +1600,19 @@ class Program1
             compilation.VerifyDiagnostics(
                 // (7,13): warning CS8416: The given expression never matches the provided pattern.
                 //         if (s is string { Length: 3 })
-                Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "s is string { Length: 3 }").WithLocation(7, 13)
-                );
+                Diagnostic(
+                        ErrorCode.WRN_GivenExpressionNeverMatchesPattern,
+                        "s is string { Length: 3 }"
+                    )
+                    .WithLocation(7, 13)
+            );
         }
 
         [Fact]
         public void RefutableConstantPattern01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -1500,15 +1633,16 @@ class Program1
             compilation.VerifyDiagnostics(
                 // (8,13): warning CS8417: The given expression always matches the provided constant.
                 //         if (N is M)
-                Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesConstant, "N is M").WithLocation(8, 13)
-                );
+                Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesConstant, "N is M")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact, WorkItem(25591, "https://github.com/dotnet/roslyn/issues/25591")]
         public void TupleSubsumptionError()
         {
             var source =
-@"class Program2
+                @"class Program2
 {
     public static void Main()
     {
@@ -1533,8 +1667,7 @@ class Fox {}
 class Cat {}
 ";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"Fox Cat");
         }
 
@@ -1542,7 +1675,7 @@ class Cat {}
         public void NamesInPositionalPatterns01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1558,18 +1691,22 @@ class Cat {}
             compilation.VerifyDiagnostics(
                 // (7,19): error CS8416: The name 'c' does not identify tuple element 'Item1'.
                 //             case (c: 2, d: 3): // error: c and d not defined
-                Diagnostic(ErrorCode.ERR_TupleElementNameMismatch, "c").WithArguments("c", "Item1").WithLocation(7, 19),
+                Diagnostic(ErrorCode.ERR_TupleElementNameMismatch, "c")
+                    .WithArguments("c", "Item1")
+                    .WithLocation(7, 19),
                 // (7,25): error CS8416: The name 'd' does not identify tuple element 'Item2'.
                 //             case (c: 2, d: 3): // error: c and d not defined
-                Diagnostic(ErrorCode.ERR_TupleElementNameMismatch, "d").WithArguments("d", "Item2").WithLocation(7, 25)
-                );
+                Diagnostic(ErrorCode.ERR_TupleElementNameMismatch, "d")
+                    .WithArguments("d", "Item2")
+                    .WithLocation(7, 25)
+            );
         }
 
         [Fact, WorkItem(25934, "https://github.com/dotnet/roslyn/issues/25934")]
         public void NamesInPositionalPatterns02()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1585,15 +1722,17 @@ class Cat {}
             compilation.VerifyDiagnostics(
                 // (7,25): error CS8416: The name 'a' does not identify tuple element 'Item2'.
                 //             case (a: 2, a: 3):
-                Diagnostic(ErrorCode.ERR_TupleElementNameMismatch, "a").WithArguments("a", "Item2").WithLocation(7, 25)
-                );
+                Diagnostic(ErrorCode.ERR_TupleElementNameMismatch, "a")
+                    .WithArguments("a", "Item2")
+                    .WithLocation(7, 25)
+            );
         }
 
         [Fact, WorkItem(25934, "https://github.com/dotnet/roslyn/issues/25934")]
         public void NamesInPositionalPatterns03()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1610,8 +1749,7 @@ class Cat {}
 }
 ";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"111");
         }
 
@@ -1619,7 +1757,7 @@ class Cat {}
         public void NamesInPositionalPatterns04()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1642,18 +1780,22 @@ class T
             compilation.VerifyDiagnostics(
                 // (7,19): error CS8417: The name 'c' does not match the corresponding 'Deconstruct' parameter 'a'.
                 //             case (c: 2, d: 3):
-                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "c").WithArguments("c", "a").WithLocation(7, 19),
+                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "c")
+                    .WithArguments("c", "a")
+                    .WithLocation(7, 19),
                 // (7,25): error CS8417: The name 'd' does not match the corresponding 'Deconstruct' parameter 'b'.
                 //             case (c: 2, d: 3):
-                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "d").WithArguments("d", "b").WithLocation(7, 25)
-                );
+                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "d")
+                    .WithArguments("d", "b")
+                    .WithLocation(7, 25)
+            );
         }
 
         [Fact, WorkItem(25934, "https://github.com/dotnet/roslyn/issues/25934")]
         public void NamesInPositionalPatterns05()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1679,18 +1821,22 @@ static class Extensions
             compilation.VerifyDiagnostics(
                 // (7,19): error CS8417: The name 'c' does not match the corresponding 'Deconstruct' parameter 'a'.
                 //             case (c: 2, d: 3):
-                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "c").WithArguments("c", "a").WithLocation(7, 19),
+                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "c")
+                    .WithArguments("c", "a")
+                    .WithLocation(7, 19),
                 // (7,25): error CS8417: The name 'd' does not match the corresponding 'Deconstruct' parameter 'b'.
                 //             case (c: 2, d: 3):
-                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "d").WithArguments("d", "b").WithLocation(7, 25)
-                );
+                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "d")
+                    .WithArguments("d", "b")
+                    .WithLocation(7, 25)
+            );
         }
 
         [Fact, WorkItem(25934, "https://github.com/dotnet/roslyn/issues/25934")]
         public void NamesInPositionalPatterns06()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1713,15 +1859,17 @@ class T
             compilation.VerifyDiagnostics(
                 // (7,25): error CS8417: The name 'a' does not match the corresponding 'Deconstruct' parameter 'b'.
                 //             case (a: 2, a: 3):
-                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "a").WithArguments("a", "b").WithLocation(7, 25)
-                );
+                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "a")
+                    .WithArguments("a", "b")
+                    .WithLocation(7, 25)
+            );
         }
 
         [Fact, WorkItem(25934, "https://github.com/dotnet/roslyn/issues/25934")]
         public void NamesInPositionalPatterns07()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1747,15 +1895,17 @@ static class Extensions
             compilation.VerifyDiagnostics(
                 // (7,25): error CS8417: The name 'a' does not match the corresponding 'Deconstruct' parameter 'b'.
                 //             case (a: 2, a: 3):
-                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "a").WithArguments("a", "b").WithLocation(7, 25)
-                );
+                Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "a")
+                    .WithArguments("a", "b")
+                    .WithLocation(7, 25)
+            );
         }
 
         [Fact, WorkItem(25934, "https://github.com/dotnet/roslyn/issues/25934")]
         public void NamesInPositionalPatterns08()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1779,8 +1929,7 @@ class T
 }
 ";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"111");
         }
 
@@ -1788,7 +1937,7 @@ class T
         public void NamesInPositionalPatterns09()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1815,8 +1964,7 @@ static class Extensions
 }
 ";
             var compilation = CreatePatternCompilation(source);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"111");
         }
 
@@ -1824,7 +1972,7 @@ static class Extensions
         public void NamesInPositionalPatterns10()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1840,15 +1988,17 @@ static class Extensions
             compilation.VerifyDiagnostics(
                 // (7,19): error CS8416: The name 'Item2' does not identify tuple element 'Item1'.
                 //             case (Item2: 1, 2):
-                Diagnostic(ErrorCode.ERR_TupleElementNameMismatch, "Item2").WithArguments("Item2", "Item1").WithLocation(7, 19)
-                );
+                Diagnostic(ErrorCode.ERR_TupleElementNameMismatch, "Item2")
+                    .WithArguments("Item2", "Item1")
+                    .WithLocation(7, 19)
+            );
         }
 
         [Fact]
         public void PropertyPatternMemberMissing01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1866,15 +2016,17 @@ class Blah
             compilation.VerifyDiagnostics(
                 // (6,25): error CS0117: 'Blah' does not contain a definition for 'X'
                 //         if (b is Blah { X: int i })
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "X").WithArguments("Blah", "X").WithLocation(6, 25)
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "X")
+                    .WithArguments("Blah", "X")
+                    .WithLocation(6, 25)
+            );
         }
 
         [Fact]
         public void PropertyPatternMemberMissing02()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1893,15 +2045,17 @@ class Blah
             compilation.VerifyDiagnostics(
                 // (6,25): error CS0154: The property or indexer 'Blah.X' cannot be used in this context because it lacks the get accessor
                 //         if (b is Blah { X: int i })
-                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "X:").WithArguments("Blah.X").WithLocation(6, 25)
-                );
+                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "X:")
+                    .WithArguments("Blah.X")
+                    .WithLocation(6, 25)
+            );
         }
 
         [Fact]
         public void PropertyPatternMemberMissing03()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1921,15 +2075,17 @@ class Blah
             compilation.VerifyDiagnostics(
                 // (8,25): error CS0117: 'Blah' does not contain a definition for 'X'
                 //             case Blah { X: int i }:
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "X").WithArguments("Blah", "X").WithLocation(8, 25)
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "X")
+                    .WithArguments("Blah", "X")
+                    .WithLocation(8, 25)
+            );
         }
 
         [Fact]
         public void PropertyPatternMemberMissing04()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1950,8 +2106,10 @@ class Blah
             compilation.VerifyDiagnostics(
                 // (8,25): error CS0154: The property or indexer 'Blah.X' cannot be used in this context because it lacks the get accessor
                 //             case Blah { X: int i }:
-                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "X:").WithArguments("Blah.X").WithLocation(8, 25)
-                );
+                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "X:")
+                    .WithArguments("Blah.X")
+                    .WithLocation(8, 25)
+            );
         }
 
         [Fact]
@@ -1960,7 +2118,7 @@ class Blah
         public void ConstantPatternVsUnconstrainedTypeParameter03()
         {
             var source =
-@"class C<T>
+                @"class C<T>
 {
     internal struct S { }
     static bool Test(S s)
@@ -1972,8 +2130,10 @@ class Blah
             compilation.VerifyDiagnostics(
                 // (6,21): error CS0037: Cannot convert null to 'C<T>.S' because it is a non-nullable value type
                 //         return s is null;
-                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null").WithArguments("C<T>.S").WithLocation(6, 21)
-                );
+                Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
+                    .WithArguments("C<T>.S")
+                    .WithLocation(6, 21)
+            );
         }
 
         [Fact]
@@ -1982,7 +2142,7 @@ class Blah
         public void ConstantPatternVsUnconstrainedTypeParameter04()
         {
             var source =
-@"class C<T>
+                @"class C<T>
 {
     static bool Test(C<T> x)
     {
@@ -1993,8 +2153,10 @@ class Blah
             compilation.VerifyDiagnostics(
                 // (5,21): error CS8121: An expression of type 'C<T>' cannot be handled by a pattern of type 'int'.
                 //         return x is 1;
-                Diagnostic(ErrorCode.ERR_PatternWrongType, "1").WithArguments("C<T>", "int").WithLocation(5, 21)
-                );
+                Diagnostic(ErrorCode.ERR_PatternWrongType, "1")
+                    .WithArguments("C<T>", "int")
+                    .WithLocation(5, 21)
+            );
         }
 
         [Fact]
@@ -2002,7 +2164,7 @@ class Blah
         public void SpeculateWithNameConflict01()
         {
             var source =
-@"public class Class1
+                @"public class Class1
     {
         int i = 1;
 
@@ -2014,15 +2176,28 @@ class Blah
     }
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = (CSharpSemanticModel)compilation.GetSemanticModel(tree);
-            var returnStatement = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single();
-            Assert.Equal("return obj is global::Class1 @class && this.i == @class.i;", returnStatement.ToString());
-            var modifiedReturnStatement = (ReturnStatementSyntax)new RemoveAliasQualifiers().Visit(returnStatement);
-            Assert.Equal("return obj is Class1 @class && this.i == @class.i;", modifiedReturnStatement.ToString());
-            var gotModel = model.TryGetSpeculativeSemanticModel(returnStatement.Location.SourceSpan.Start, modifiedReturnStatement, out var speculativeModel);
+            var returnStatement = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ReturnStatementSyntax>()
+                .Single();
+            Assert.Equal(
+                "return obj is global::Class1 @class && this.i == @class.i;",
+                returnStatement.ToString()
+            );
+            var modifiedReturnStatement = (ReturnStatementSyntax)
+                new RemoveAliasQualifiers().Visit(returnStatement);
+            Assert.Equal(
+                "return obj is Class1 @class && this.i == @class.i;",
+                modifiedReturnStatement.ToString()
+            );
+            var gotModel = model.TryGetSpeculativeSemanticModel(
+                returnStatement.Location.SourceSpan.Start,
+                modifiedReturnStatement,
+                out var speculativeModel
+            );
             Assert.True(gotModel);
             Assert.NotNull(speculativeModel);
             var typeInfo = speculativeModel.GetTypeInfo(modifiedReturnStatement.Expression);
@@ -2045,7 +2220,7 @@ class Blah
         public void SpeculateWithNameConflict02()
         {
             var source =
-@"public class Class1
+                @"public class Class1
     {
         public override int GetHashCode() => 1;
         public override bool Equals(object obj)
@@ -2055,15 +2230,22 @@ class Blah
     }
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
-            compilation.VerifyDiagnostics(
-                );
+            compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = (CSharpSemanticModel)compilation.GetSemanticModel(tree);
-            var returnStatement = tree.GetRoot().DescendantNodes().OfType<ReturnStatementSyntax>().Single();
+            var returnStatement = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<ReturnStatementSyntax>()
+                .Single();
             Assert.Equal("return obj is global::Class1 @class;", returnStatement.ToString());
-            var modifiedReturnStatement = (ReturnStatementSyntax)new RemoveAliasQualifiers().Visit(returnStatement);
+            var modifiedReturnStatement = (ReturnStatementSyntax)
+                new RemoveAliasQualifiers().Visit(returnStatement);
             Assert.Equal("return obj is Class1 @class;", modifiedReturnStatement.ToString());
-            var gotModel = model.TryGetSpeculativeSemanticModel(returnStatement.Location.SourceSpan.Start, modifiedReturnStatement, out var speculativeModel);
+            var gotModel = model.TryGetSpeculativeSemanticModel(
+                returnStatement.Location.SourceSpan.Start,
+                modifiedReturnStatement,
+                out var speculativeModel
+            );
             Assert.True(gotModel);
             Assert.NotNull(speculativeModel);
             var typeInfo = speculativeModel.GetTypeInfo(modifiedReturnStatement.Expression);
@@ -2074,7 +2256,7 @@ class Blah
         public void WrongArity()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2095,18 +2277,22 @@ class Point
             compilation.VerifyDiagnostics(
                 // (6,23): error CS7036: There is no argument given that corresponds to the required formal parameter 'X' of 'Point.Deconstruct(out int, out int)'
                 //         if (p is Point())
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "()").WithArguments("X", "Point.Deconstruct(out int, out int)").WithLocation(6, 23),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "()")
+                    .WithArguments("X", "Point.Deconstruct(out int, out int)")
+                    .WithLocation(6, 23),
                 // (6,23): error CS8129: No suitable Deconstruct instance or extension method was found for type 'Point', with 0 out parameters and a void return type.
                 //         if (p is Point())
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "()").WithArguments("Point", "0").WithLocation(6, 23)
-                );
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "()")
+                    .WithArguments("Point", "0")
+                    .WithLocation(6, 23)
+            );
         }
 
         [Fact]
         public void GetTypeInfo_01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2128,9 +2314,19 @@ class Point
 ";
             var expected = new[]
             {
-                new { Source = "Point(3, string { Length: 2 })", Type = "System.Object", ConvertedType = "Point" },
+                new
+                {
+                    Source = "Point(3, string { Length: 2 })",
+                    Type = "System.Object",
+                    ConvertedType = "Point"
+                },
                 new { Source = "3", Type = "System.Object", ConvertedType = "System.Int32" },
-                new { Source = "string { Length: 2 }", Type = "System.Object", ConvertedType = "System.String" },
+                new
+                {
+                    Source = "string { Length: 2 }",
+                    Type = "System.Object",
+                    ConvertedType = "System.String"
+                },
                 new { Source = "2", Type = "System.Int32", ConvertedType = "System.Int32" },
                 new { Source = "(_, { })", Type = "Point", ConvertedType = "Point" },
                 new { Source = "_", Type = "System.Object", ConvertedType = "System.Object" },
@@ -2150,11 +2346,15 @@ class Point
                 Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(10, 24),
                 // (9,23): error CS1501: No overload for method 'Deconstruct' takes 3 arguments
                 //         if (p is Point({ }, { }, { })) { }
-                Diagnostic(ErrorCode.ERR_BadArgCount, "({ }, { }, { })").WithArguments("Deconstruct", "3").WithLocation(9, 23),
+                Diagnostic(ErrorCode.ERR_BadArgCount, "({ }, { }, { })")
+                    .WithArguments("Deconstruct", "3")
+                    .WithLocation(9, 23),
                 // (9,23): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'Point', with 3 out parameters and a void return type.
                 //         if (p is Point({ }, { }, { })) { }
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "({ }, { }, { })").WithArguments("Point", "3").WithLocation(9, 23)
-                );
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "({ }, { }, { })")
+                    .WithArguments("Point", "3")
+                    .WithLocation(9, 23)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
             int i = 0;
@@ -2173,7 +2373,7 @@ class Point
         public void MissingDeconstruct_01()
         {
             var source =
-@"using System;
+                @"using System;
 public class C {
     public void M() {
         _ = this is (a: 1);
@@ -2184,18 +2384,22 @@ public class C {
             compilation.VerifyDiagnostics(
                 // (4,21): error CS1061: 'C' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'C' could be found (are you missing a using directive or an assembly reference?)
                 //         _ = this is (a: 1);
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(a: 1)").WithArguments("C", "Deconstruct").WithLocation(4, 21),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(a: 1)")
+                    .WithArguments("C", "Deconstruct")
+                    .WithLocation(4, 21),
                 // (4,21): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'C', with 1 out parameters and a void return type.
                 //         _ = this is (a: 1);
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(a: 1)").WithArguments("C", "1").WithLocation(4, 21)
-                );
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(a: 1)")
+                    .WithArguments("C", "1")
+                    .WithLocation(4, 21)
+            );
         }
 
         [Fact, WorkItem(26613, "https://github.com/dotnet/roslyn/issues/26613")]
         public void MissingDeconstruct_02()
         {
             var source =
-@"using System;
+                @"using System;
 public class C {
     public void M() {
         _ = this is C(a: 1);
@@ -2206,17 +2410,22 @@ public class C {
             compilation.VerifyDiagnostics(
                 // (4,22): error CS1061: 'C' does not contain a definition for 'Deconstruct' and no extension method 'Deconstruct' accepting a first argument of type 'C' could be found (are you missing a using directive or an assembly reference?)
                 //         _ = this is C(a: 1);
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(a: 1)").WithArguments("C", "Deconstruct").WithLocation(4, 22),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(a: 1)")
+                    .WithArguments("C", "Deconstruct")
+                    .WithLocation(4, 22),
                 // (4,22): error CS8129: No suitable Deconstruct instance or extension method was found for type 'C', with 1 out parameters and a void return type.
                 //         _ = this is C(a: 1);
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(a: 1)").WithArguments("C", "1").WithLocation(4, 22)
-                );
+                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(a: 1)")
+                    .WithArguments("C", "1")
+                    .WithLocation(4, 22)
+            );
         }
 
         [Fact]
         public void PatternTypeInfo_01()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     void M(T1 t1)
@@ -2249,7 +2458,10 @@ class T6 : T5
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var patterns = tree.GetRoot().DescendantNodesAndSelf().OfType<PatternSyntax>().ToArray();
+            var patterns = tree.GetRoot()
+                .DescendantNodesAndSelf()
+                .OfType<PatternSyntax>()
+                .ToArray();
             Assert.Equal(4, patterns.Length);
 
             Assert.Equal("T2 (var t3, t4: T4 t4) { V5 : T6 t5 }", patterns[0].ToString());
@@ -2276,7 +2488,8 @@ class T6 : T5
         [Fact]
         public void PatternTypeInfo_02()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     void M(object o)
@@ -2293,7 +2506,10 @@ class Point
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var patterns = tree.GetRoot().DescendantNodesAndSelf().OfType<PatternSyntax>().ToArray();
+            var patterns = tree.GetRoot()
+                .DescendantNodesAndSelf()
+                .OfType<PatternSyntax>()
+                .ToArray();
             Assert.Equal(3, patterns.Length);
 
             Assert.Equal("Point(3, 4.0)", patterns[0].ToString());
@@ -2315,7 +2531,8 @@ class Point
         [Fact]
         public void PatternTypeInfo_03()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     void M(object o)
@@ -2329,17 +2546,26 @@ public class C
             compilation.VerifyDiagnostics(
                 // (6,18): error CS0246: The type or namespace name 'Point' could not be found (are you missing a using directive or an assembly reference?)
                 //         if (o is Point(3, 4.0) { Missing: Xyzzy }) {}
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Point").WithArguments("Point").WithLocation(6, 18),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Point")
+                    .WithArguments("Point")
+                    .WithLocation(6, 18),
                 // (6,43): error CS0103: The name 'Xyzzy' does not exist in the current context
                 //         if (o is Point(3, 4.0) { Missing: Xyzzy }) {}
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "Xyzzy").WithArguments("Xyzzy").WithLocation(6, 43),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Xyzzy")
+                    .WithArguments("Xyzzy")
+                    .WithLocation(6, 43),
                 // (7,18): error CS0246: The type or namespace name 'Q7' could not be found (are you missing a using directive or an assembly reference?)
                 //         if (o is Q7 t) {}
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Q7").WithArguments("Q7").WithLocation(7, 18)
-                );
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Q7")
+                    .WithArguments("Q7")
+                    .WithLocation(7, 18)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var patterns = tree.GetRoot().DescendantNodesAndSelf().OfType<PatternSyntax>().ToArray();
+            var patterns = tree.GetRoot()
+                .DescendantNodesAndSelf()
+                .OfType<PatternSyntax>()
+                .ToArray();
             Assert.Equal(5, patterns.Length);
 
             Assert.Equal("Point(3, 4.0) { Missing: Xyzzy }", patterns[0].ToString());
@@ -2378,7 +2604,7 @@ public class C
         public void ConstantPatternVsUnconstrainedTypeParameter05()
         {
             var source =
-@"class C<T>
+                @"class C<T>
 {
     static bool Test1(T t)
     {
@@ -2398,16 +2624,28 @@ public class C
     }
 }";
             CreateCompilation(source, options: TestOptions.ReleaseDll).VerifyDiagnostics();
-            CreateCompilation(source, options: TestOptions.ReleaseDll, parseOptions: TestOptions.Regular7_3).VerifyDiagnostics(
-                // (5,21): error CS8511: An expression of type 'T' cannot be handled by a pattern of type '<null>'. Please use language version '8.0' or greater to match an open type with a constant pattern.
-                //         return t is null; // 1
-                Diagnostic(ErrorCode.ERR_ConstantPatternVsOpenType, "null").WithArguments("T", "<null>", "8.0").WithLocation(5, 21),
-                // (13,21): error CS8511: An expression of type 'T' cannot be handled by a pattern of type 'int'. Please use language version '8.0' or greater to match an open type with a constant pattern.
-                //         return t is 1; // 2
-                Diagnostic(ErrorCode.ERR_ConstantPatternVsOpenType, "1").WithArguments("T", "int", "8.0").WithLocation(13, 21),
-                // (17,21): error CS8511: An expression of type 'T' cannot be handled by a pattern of type 'string'. Please use language version '8.0' or greater to match an open type with a constant pattern.
-                //         return t is "frog"; // 3
-                Diagnostic(ErrorCode.ERR_ConstantPatternVsOpenType, @"""frog""").WithArguments("T", "string", "8.0").WithLocation(17, 21));
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
+                .VerifyDiagnostics(
+                    // (5,21): error CS8511: An expression of type 'T' cannot be handled by a pattern of type '<null>'. Please use language version '8.0' or greater to match an open type with a constant pattern.
+                    //         return t is null; // 1
+                    Diagnostic(ErrorCode.ERR_ConstantPatternVsOpenType, "null")
+                        .WithArguments("T", "<null>", "8.0")
+                        .WithLocation(5, 21),
+                    // (13,21): error CS8511: An expression of type 'T' cannot be handled by a pattern of type 'int'. Please use language version '8.0' or greater to match an open type with a constant pattern.
+                    //         return t is 1; // 2
+                    Diagnostic(ErrorCode.ERR_ConstantPatternVsOpenType, "1")
+                        .WithArguments("T", "int", "8.0")
+                        .WithLocation(13, 21),
+                    // (17,21): error CS8511: An expression of type 'T' cannot be handled by a pattern of type 'string'. Please use language version '8.0' or greater to match an open type with a constant pattern.
+                    //         return t is "frog"; // 3
+                    Diagnostic(ErrorCode.ERR_ConstantPatternVsOpenType, @"""frog""")
+                        .WithArguments("T", "string", "8.0")
+                        .WithLocation(17, 21)
+                );
         }
 
         [Fact]
@@ -2415,7 +2653,7 @@ public class C
         public void ConstantPatternVsUnconstrainedTypeParameter06()
         {
             var source =
-@"public class C<T>
+                @"public class C<T>
 {
     public enum E
     {
@@ -2433,14 +2671,19 @@ public class C
 }
 ";
             CreateCompilation(source, options: TestOptions.ReleaseDll).VerifyDiagnostics();
-            CreateCompilation(source, options: TestOptions.ReleaseDll, parseOptions: TestOptions.Regular7_3).VerifyDiagnostics();
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll,
+                    parseOptions: TestOptions.Regular7_3
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void WarnUnmatchedIsRelationalPattern()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public void M()
     {
@@ -2459,43 +2702,60 @@ public class C
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseDll, parseOptions: TestOptions.RegularWithPatternCombinators).VerifyDiagnostics(
-                // (5,13): warning CS8519: The given expression never matches the provided pattern.
-                //         _ = 1 is < 0; // 1
-                Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "1 is < 0").WithLocation(5, 13),
-                // (6,13): warning CS8519: The given expression never matches the provided pattern.
-                //         _ = 1 is < 1; // 2
-                Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "1 is < 1").WithLocation(6, 13),
-                // (7,13): error CS8793: The given expression always matches the provided pattern.
-                //         _ = 1 is < 2; // 3
-                Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesPattern, "1 is < 2").WithLocation(7, 13),
-                // (8,13): warning CS8519: The given expression never matches the provided pattern.
-                //         _ = 1 is <= 0; // 4
-                Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "1 is <= 0").WithLocation(8, 13),
-                // (9,13): error CS8793: The given expression always matches the provided pattern.
-                //         _ = 1 is <= 1; // 5
-                Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesPattern, "1 is <= 1").WithLocation(9, 13),
-                // (10,13): error CS8793: The given expression always matches the provided pattern.
-                //         _ = 1 is <= 2; // 6
-                Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesPattern, "1 is <= 2").WithLocation(10, 13),
-                // (11,13): error CS8793: The given expression always matches the provided pattern.
-                //         _ = 1 is > 0; // 7
-                Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesPattern, "1 is > 0").WithLocation(11, 13),
-                // (12,13): warning CS8519: The given expression never matches the provided pattern.
-                //         _ = 1 is > 1; // 8
-                Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "1 is > 1").WithLocation(12, 13),
-                // (13,13): warning CS8519: The given expression never matches the provided pattern.
-                //         _ = 1 is > 2; // 9
-                Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "1 is > 2").WithLocation(13, 13),
-                // (14,13): error CS8793: The given expression always matches the provided pattern.
-                //         _ = 1 is >= 0; // 10
-                Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesPattern, "1 is >= 0").WithLocation(14, 13),
-                // (15,13): error CS8793: The given expression always matches the provided pattern.
-                //         _ = 1 is >= 1; // 11
-                Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesPattern, "1 is >= 1").WithLocation(15, 13),
-                // (16,13): warning CS8519: The given expression never matches the provided pattern.
-                //         _ = 1 is >= 2; // 12
-                Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "1 is >= 2").WithLocation(16, 13)
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll,
+                    parseOptions: TestOptions.RegularWithPatternCombinators
+                )
+                .VerifyDiagnostics(
+                    // (5,13): warning CS8519: The given expression never matches the provided pattern.
+                    //         _ = 1 is < 0; // 1
+                    Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "1 is < 0")
+                        .WithLocation(5, 13),
+                    // (6,13): warning CS8519: The given expression never matches the provided pattern.
+                    //         _ = 1 is < 1; // 2
+                    Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "1 is < 1")
+                        .WithLocation(6, 13),
+                    // (7,13): error CS8793: The given expression always matches the provided pattern.
+                    //         _ = 1 is < 2; // 3
+                    Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesPattern, "1 is < 2")
+                        .WithLocation(7, 13),
+                    // (8,13): warning CS8519: The given expression never matches the provided pattern.
+                    //         _ = 1 is <= 0; // 4
+                    Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "1 is <= 0")
+                        .WithLocation(8, 13),
+                    // (9,13): error CS8793: The given expression always matches the provided pattern.
+                    //         _ = 1 is <= 1; // 5
+                    Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesPattern, "1 is <= 1")
+                        .WithLocation(9, 13),
+                    // (10,13): error CS8793: The given expression always matches the provided pattern.
+                    //         _ = 1 is <= 2; // 6
+                    Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesPattern, "1 is <= 2")
+                        .WithLocation(10, 13),
+                    // (11,13): error CS8793: The given expression always matches the provided pattern.
+                    //         _ = 1 is > 0; // 7
+                    Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesPattern, "1 is > 0")
+                        .WithLocation(11, 13),
+                    // (12,13): warning CS8519: The given expression never matches the provided pattern.
+                    //         _ = 1 is > 1; // 8
+                    Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "1 is > 1")
+                        .WithLocation(12, 13),
+                    // (13,13): warning CS8519: The given expression never matches the provided pattern.
+                    //         _ = 1 is > 2; // 9
+                    Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "1 is > 2")
+                        .WithLocation(13, 13),
+                    // (14,13): error CS8793: The given expression always matches the provided pattern.
+                    //         _ = 1 is >= 0; // 10
+                    Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesPattern, "1 is >= 0")
+                        .WithLocation(14, 13),
+                    // (15,13): error CS8793: The given expression always matches the provided pattern.
+                    //         _ = 1 is >= 1; // 11
+                    Diagnostic(ErrorCode.WRN_GivenExpressionAlwaysMatchesPattern, "1 is >= 1")
+                        .WithLocation(15, 13),
+                    // (16,13): warning CS8519: The given expression never matches the provided pattern.
+                    //         _ = 1 is >= 2; // 12
+                    Diagnostic(ErrorCode.WRN_GivenExpressionNeverMatchesPattern, "1 is >= 2")
+                        .WithLocation(16, 13)
                 );
         }
 
@@ -2503,7 +2763,7 @@ public class C
         public void RelationalPatternInSwitchWithConstantControllingExpression()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public void M()
     {
@@ -2517,16 +2777,21 @@ public class C
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseDll, parseOptions: TestOptions.RegularWithPatternCombinators).VerifyDiagnostics(
-                // (7,23): warning CS0162: Unreachable code detected
-                //             case < 0: break; // 1
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(7, 23),
-                // (8,23): warning CS0162: Unreachable code detected
-                //             case < 1: break; // 2
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(8, 23),
-                // (10,23): warning CS0162: Unreachable code detected
-                //             case < 3: break; // 3
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(10, 23)
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll,
+                    parseOptions: TestOptions.RegularWithPatternCombinators
+                )
+                .VerifyDiagnostics(
+                    // (7,23): warning CS0162: Unreachable code detected
+                    //             case < 0: break; // 1
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(7, 23),
+                    // (8,23): warning CS0162: Unreachable code detected
+                    //             case < 1: break; // 2
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(8, 23),
+                    // (10,23): warning CS0162: Unreachable code detected
+                    //             case < 3: break; // 3
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "break").WithLocation(10, 23)
                 );
         }
 
@@ -2534,7 +2799,7 @@ public class C
         public void RelationalPatternInSwitchWithOutOfRangeComparand()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public void M(int i)
     {
@@ -2558,19 +2823,27 @@ public class C
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseDll, parseOptions: TestOptions.RegularWithPatternCombinators).VerifyDiagnostics(
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll,
+                    parseOptions: TestOptions.RegularWithPatternCombinators
+                )
+                .VerifyDiagnostics(
                     // (7,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                     //             case < int.MinValue: break; // 1
-                    Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "< int.MinValue").WithLocation(7, 18),
+                    Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "< int.MinValue")
+                        .WithLocation(7, 18),
                     // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                     //             case > int.MaxValue: break; // 2
-                    Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "> int.MaxValue").WithLocation(9, 18),
+                    Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "> int.MaxValue")
+                        .WithLocation(9, 18),
                     // (17,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                     //             case < 0: break; // 3
                     Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "< 0").WithLocation(17, 18),
                     // (19,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
                     //             case > uint.MaxValue: break; // 4
-                    Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "> uint.MaxValue").WithLocation(19, 18)
+                    Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "> uint.MaxValue")
+                        .WithLocation(19, 18)
                 );
         }
 
@@ -2578,7 +2851,7 @@ public class C
         public void IsRelationalPatternWithOutOfRangeComparand()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public void M(int i)
     {
@@ -2596,19 +2869,32 @@ public class C
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseDll, parseOptions: TestOptions.RegularWithPatternCombinators).VerifyDiagnostics(
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll,
+                    parseOptions: TestOptions.RegularWithPatternCombinators
+                )
+                .VerifyDiagnostics(
                     // (5,13): error CS8518: An expression of type 'int' can never match the provided pattern.
                     //         _ = i is < int.MinValue; // 1
-                    Diagnostic(ErrorCode.ERR_IsPatternImpossible, "i is < int.MinValue").WithArguments("int").WithLocation(5, 13),
+                    Diagnostic(ErrorCode.ERR_IsPatternImpossible, "i is < int.MinValue")
+                        .WithArguments("int")
+                        .WithLocation(5, 13),
                     // (7,13): error CS8518: An expression of type 'int' can never match the provided pattern.
                     //         _ = i is > int.MaxValue; // 2
-                    Diagnostic(ErrorCode.ERR_IsPatternImpossible, "i is > int.MaxValue").WithArguments("int").WithLocation(7, 13),
+                    Diagnostic(ErrorCode.ERR_IsPatternImpossible, "i is > int.MaxValue")
+                        .WithArguments("int")
+                        .WithLocation(7, 13),
                     // (12,13): error CS8518: An expression of type 'uint' can never match the provided pattern.
                     //         _ = i is < 0; // 3
-                    Diagnostic(ErrorCode.ERR_IsPatternImpossible, "i is < 0").WithArguments("uint").WithLocation(12, 13),
+                    Diagnostic(ErrorCode.ERR_IsPatternImpossible, "i is < 0")
+                        .WithArguments("uint")
+                        .WithLocation(12, 13),
                     // (14,13): error CS8518: An expression of type 'uint' can never match the provided pattern.
                     //         _ = i is > uint.MaxValue; // 4
-                    Diagnostic(ErrorCode.ERR_IsPatternImpossible, "i is > uint.MaxValue").WithArguments("uint").WithLocation(14, 13)
+                    Diagnostic(ErrorCode.ERR_IsPatternImpossible, "i is > uint.MaxValue")
+                        .WithArguments("uint")
+                        .WithLocation(14, 13)
                 );
         }
 
@@ -2616,7 +2902,7 @@ public class C
         public void IsRelationalPatternWithAlwaysMatchingRange()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public void M(int i)
     {
@@ -2634,19 +2920,32 @@ public class C
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseDll, parseOptions: TestOptions.RegularWithPatternCombinators).VerifyDiagnostics(
-                // (6,13): warning CS8794: An expression of type 'int' always matches the provided pattern.
-                //         _ = i is >= int.MinValue; // 1
-                Diagnostic(ErrorCode.WRN_IsPatternAlways, "i is >= int.MinValue").WithArguments("int").WithLocation(6, 13),
-                // (8,13): warning CS8794: An expression of type 'int' always matches the provided pattern.
-                //         _ = i is <= int.MaxValue; // 2
-                Diagnostic(ErrorCode.WRN_IsPatternAlways, "i is <= int.MaxValue").WithArguments("int").WithLocation(8, 13),
-                // (13,13): warning CS8794: An expression of type 'uint' always matches the provided pattern.
-                //         _ = i is >= 0; // 3
-                Diagnostic(ErrorCode.WRN_IsPatternAlways, "i is >= 0").WithArguments("uint").WithLocation(13, 13),
-                // (15,13): warning CS8794: An expression of type 'uint' always matches the provided pattern.
-                //         _ = i is <= uint.MaxValue; // 4
-                Diagnostic(ErrorCode.WRN_IsPatternAlways, "i is <= uint.MaxValue").WithArguments("uint").WithLocation(15, 13)
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll,
+                    parseOptions: TestOptions.RegularWithPatternCombinators
+                )
+                .VerifyDiagnostics(
+                    // (6,13): warning CS8794: An expression of type 'int' always matches the provided pattern.
+                    //         _ = i is >= int.MinValue; // 1
+                    Diagnostic(ErrorCode.WRN_IsPatternAlways, "i is >= int.MinValue")
+                        .WithArguments("int")
+                        .WithLocation(6, 13),
+                    // (8,13): warning CS8794: An expression of type 'int' always matches the provided pattern.
+                    //         _ = i is <= int.MaxValue; // 2
+                    Diagnostic(ErrorCode.WRN_IsPatternAlways, "i is <= int.MaxValue")
+                        .WithArguments("int")
+                        .WithLocation(8, 13),
+                    // (13,13): warning CS8794: An expression of type 'uint' always matches the provided pattern.
+                    //         _ = i is >= 0; // 3
+                    Diagnostic(ErrorCode.WRN_IsPatternAlways, "i is >= 0")
+                        .WithArguments("uint")
+                        .WithLocation(13, 13),
+                    // (15,13): warning CS8794: An expression of type 'uint' always matches the provided pattern.
+                    //         _ = i is <= uint.MaxValue; // 4
+                    Diagnostic(ErrorCode.WRN_IsPatternAlways, "i is <= uint.MaxValue")
+                        .WithArguments("uint")
+                        .WithLocation(15, 13)
                 );
         }
 
@@ -2654,7 +2953,7 @@ public class C
         public void IsImpossiblePatternKinds()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public void M(string s)
     {
@@ -2664,16 +2963,27 @@ public class C
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseDll, parseOptions: TestOptions.RegularWithPatternCombinators).VerifyDiagnostics(
-                // (5,19): error CS8121: An expression of type 'string' cannot be handled by a pattern of type 'Delegate'.
-                //         _ = s is (System.Delegate); // impossible parenthesized type pattern
-                Diagnostic(ErrorCode.ERR_PatternWrongType, "System.Delegate").WithArguments("string", "System.Delegate").WithLocation(5, 19),
-                // (6,13): error CS8518: An expression of type 'string' can never match the provided pattern.
-                //         _ = s is not _;             // impossible negated pattern
-                Diagnostic(ErrorCode.ERR_IsPatternImpossible, "s is not _").WithArguments("string").WithLocation(6, 13),
-                // (7,13): error CS8518: An expression of type 'string' can never match the provided pattern.
-                //         _ = s is "a" and "b";   // impossible conjunctive pattern
-                Diagnostic(ErrorCode.ERR_IsPatternImpossible, @"s is ""a"" and ""b""").WithArguments("string").WithLocation(7, 13)
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll,
+                    parseOptions: TestOptions.RegularWithPatternCombinators
+                )
+                .VerifyDiagnostics(
+                    // (5,19): error CS8121: An expression of type 'string' cannot be handled by a pattern of type 'Delegate'.
+                    //         _ = s is (System.Delegate); // impossible parenthesized type pattern
+                    Diagnostic(ErrorCode.ERR_PatternWrongType, "System.Delegate")
+                        .WithArguments("string", "System.Delegate")
+                        .WithLocation(5, 19),
+                    // (6,13): error CS8518: An expression of type 'string' can never match the provided pattern.
+                    //         _ = s is not _;             // impossible negated pattern
+                    Diagnostic(ErrorCode.ERR_IsPatternImpossible, "s is not _")
+                        .WithArguments("string")
+                        .WithLocation(6, 13),
+                    // (7,13): error CS8518: An expression of type 'string' can never match the provided pattern.
+                    //         _ = s is "a" and "b";   // impossible conjunctive pattern
+                    Diagnostic(ErrorCode.ERR_IsPatternImpossible, @"s is ""a"" and ""b""")
+                        .WithArguments("string")
+                        .WithLocation(7, 13)
                 );
         }
 
@@ -2681,7 +2991,7 @@ public class C
         public void IsNullableReferenceType_01()
         {
             var source =
-@"#nullable enable
+                @"#nullable enable
 public class C {
     public void M1(object o) {
         var t = o is string? { };
@@ -2699,34 +3009,53 @@ public class C {
         var t = o is (string? _);
     }
 }";
-            CreateCompilation(source, parseOptions: TestOptions.RegularWithPatternCombinators).VerifyDiagnostics(
-                // (4,22): error CS8116: It is not legal to use nullable type 'string?' in a pattern; use the underlying type 'string' instead.
-                //         var t = o is string? { };
-                Diagnostic(ErrorCode.ERR_PatternNullableType, "string?").WithArguments("string").WithLocation(4, 22),
-                // (7,23): error CS8116: It is not legal to use nullable type 'string?' in a pattern; use the underlying type 'string' instead.
-                //         var t = o is (string? { });
-                Diagnostic(ErrorCode.ERR_PatternNullableType, "string?").WithArguments("string").WithLocation(7, 23),
-                // (10,22): error CS8650: It is not legal to use nullable reference type 'string?' in an is-type expression; use the underlying type 'string' instead.
-                //         var t = o is string?;
-                Diagnostic(ErrorCode.ERR_IsNullableType, "string?").WithArguments("string").WithLocation(10, 22),
-                // (13,30): error CS0103: The name '_' does not exist in the current context
-                //         var t = o is string? _;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "_").WithArguments("_").WithLocation(13, 30),
-                // (13,31): error CS1003: Syntax error, ':' expected
-                //         var t = o is string? _;
-                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(":").WithLocation(13, 31),
-                // (13,31): error CS1525: Invalid expression term ';'
-                //         var t = o is string? _;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(13, 31),
-                // (16,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
-                //         var t = o is (string? _);
-                Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(string? _)").WithArguments("object", "2").WithLocation(16, 22),
-                // (16,29): error CS1003: Syntax error, ',' expected
-                //         var t = o is (string? _);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "?").WithArguments(",").WithLocation(16, 29),
-                // (16,31): error CS1003: Syntax error, ',' expected
-                //         var t = o is (string? _);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "_").WithArguments(",").WithLocation(16, 31)
+            CreateCompilation(source, parseOptions: TestOptions.RegularWithPatternCombinators)
+                .VerifyDiagnostics(
+                    // (4,22): error CS8116: It is not legal to use nullable type 'string?' in a pattern; use the underlying type 'string' instead.
+                    //         var t = o is string? { };
+                    Diagnostic(ErrorCode.ERR_PatternNullableType, "string?")
+                        .WithArguments("string")
+                        .WithLocation(4, 22),
+                    // (7,23): error CS8116: It is not legal to use nullable type 'string?' in a pattern; use the underlying type 'string' instead.
+                    //         var t = o is (string? { });
+                    Diagnostic(ErrorCode.ERR_PatternNullableType, "string?")
+                        .WithArguments("string")
+                        .WithLocation(7, 23),
+                    // (10,22): error CS8650: It is not legal to use nullable reference type 'string?' in an is-type expression; use the underlying type 'string' instead.
+                    //         var t = o is string?;
+                    Diagnostic(ErrorCode.ERR_IsNullableType, "string?")
+                        .WithArguments("string")
+                        .WithLocation(10, 22),
+                    // (13,30): error CS0103: The name '_' does not exist in the current context
+                    //         var t = o is string? _;
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "_")
+                        .WithArguments("_")
+                        .WithLocation(13, 30),
+                    // (13,31): error CS1003: Syntax error, ':' expected
+                    //         var t = o is string? _;
+                    Diagnostic(ErrorCode.ERR_SyntaxError, ";")
+                        .WithArguments(":")
+                        .WithLocation(13, 31),
+                    // (13,31): error CS1525: Invalid expression term ';'
+                    //         var t = o is string? _;
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                        .WithArguments(";")
+                        .WithLocation(13, 31),
+                    // (16,22): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
+                    //         var t = o is (string? _);
+                    Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(string? _)")
+                        .WithArguments("object", "2")
+                        .WithLocation(16, 22),
+                    // (16,29): error CS1003: Syntax error, ',' expected
+                    //         var t = o is (string? _);
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "?")
+                        .WithArguments(",")
+                        .WithLocation(16, 29),
+                    // (16,31): error CS1003: Syntax error, ',' expected
+                    //         var t = o is (string? _);
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "_")
+                        .WithArguments(",")
+                        .WithLocation(16, 31)
                 );
         }
 
@@ -2734,7 +3063,7 @@ public class C {
         public void IsAlwaysPatternKinds()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public void M(string s)
     {
@@ -2744,13 +3073,22 @@ public class C {
     }
 }
 ";
-            CreateCompilation(source, options: TestOptions.ReleaseDll, parseOptions: TestOptions.RegularWithPatternCombinators).VerifyDiagnostics(
-                // (6,22): error CS8121: An expression of type 'string' cannot be handled by a pattern of type 'Delegate'.
-                //         _ = s is not System.Delegate;   // always negated type pattern
-                Diagnostic(ErrorCode.ERR_PatternWrongType, "System.Delegate").WithArguments("string", "System.Delegate").WithLocation(6, 22),
-                // (7,13): warning CS8794: An expression of type 'string' always matches the provided pattern.
-                //         _ = s is string or null;        // always disjunctive pattern
-                Diagnostic(ErrorCode.WRN_IsPatternAlways, "s is string or null").WithArguments("string").WithLocation(7, 13)
+            CreateCompilation(
+                    source,
+                    options: TestOptions.ReleaseDll,
+                    parseOptions: TestOptions.RegularWithPatternCombinators
+                )
+                .VerifyDiagnostics(
+                    // (6,22): error CS8121: An expression of type 'string' cannot be handled by a pattern of type 'Delegate'.
+                    //         _ = s is not System.Delegate;   // always negated type pattern
+                    Diagnostic(ErrorCode.ERR_PatternWrongType, "System.Delegate")
+                        .WithArguments("string", "System.Delegate")
+                        .WithLocation(6, 22),
+                    // (7,13): warning CS8794: An expression of type 'string' always matches the provided pattern.
+                    //         _ = s is string or null;        // always disjunctive pattern
+                    Diagnostic(ErrorCode.WRN_IsPatternAlways, "s is string or null")
+                        .WithArguments("string")
+                        .WithLocation(7, 13)
                 );
         }
 
@@ -2758,7 +3096,7 @@ public class C {
         public void SemanticModelForSwitchExpression()
         {
             var source =
-@"public class C
+                @"public class C
 {
     void M(int i)
     {
@@ -2863,27 +3201,45 @@ class F
     public static implicit operator C(F c) => throw null;
 }
 ";
-            var comp = CreateCompilation(source, parseOptions: TestOptions.RegularWithPatternCombinators).VerifyDiagnostics(
-                // (11,15): error CS8506: No best type was found for the switch expression.
-                //         _ = i switch // 1
-                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(11, 15),
-                // (25,18): error CS0029: Cannot implicitly convert type 'E' to 'D'
-                //             0 => new E(), // 3.1
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new E()").WithArguments("E", "D").WithLocation(25, 18),
-                // (26,18): error CS0029: Cannot implicitly convert type 'F' to 'D'
-                //             1 => new F(), // 3.2
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new F()").WithArguments("F", "D").WithLocation(26, 18),
-                // (63,18): error CS0029: Cannot implicitly convert type 'E' to 'D'
-                //             0 => new E(), // 9.1
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new E()").WithArguments("E", "D").WithLocation(63, 18),
-                // (64,18): error CS0029: Cannot implicitly convert type 'F' to 'D'
-                //             1 => new F(), // 9.2
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new F()").WithArguments("F", "D").WithLocation(64, 18)
+            var comp = CreateCompilation(
+                    source,
+                    parseOptions: TestOptions.RegularWithPatternCombinators
+                )
+                .VerifyDiagnostics(
+                    // (11,15): error CS8506: No best type was found for the switch expression.
+                    //         _ = i switch // 1
+                    Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch")
+                        .WithLocation(11, 15),
+                    // (25,18): error CS0029: Cannot implicitly convert type 'E' to 'D'
+                    //             0 => new E(), // 3.1
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "new E()")
+                        .WithArguments("E", "D")
+                        .WithLocation(25, 18),
+                    // (26,18): error CS0029: Cannot implicitly convert type 'F' to 'D'
+                    //             1 => new F(), // 3.2
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "new F()")
+                        .WithArguments("F", "D")
+                        .WithLocation(26, 18),
+                    // (63,18): error CS0029: Cannot implicitly convert type 'E' to 'D'
+                    //             0 => new E(), // 9.1
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "new E()")
+                        .WithArguments("E", "D")
+                        .WithLocation(63, 18),
+                    // (64,18): error CS0029: Cannot implicitly convert type 'F' to 'D'
+                    //             1 => new F(), // 9.2
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "new F()")
+                        .WithArguments("F", "D")
+                        .WithLocation(64, 18)
                 );
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
 
-            void checkType(ExpressionSyntax expr, string expectedNaturalType, string expectedConvertedType, ConversionKind expectedConversionKind)
+            void checkType(
+                ExpressionSyntax expr,
+                string expectedNaturalType,
+                string expectedConvertedType,
+                ConversionKind expectedConversionKind
+            )
             {
                 var typeInfo = model.GetTypeInfo(expr);
                 var conversion = model.GetConversion(expr);
@@ -2892,7 +3248,10 @@ class F
                 Assert.Equal(expectedConversionKind, conversion.Kind);
             }
 
-            var switches = tree.GetRoot().DescendantNodes().OfType<SwitchExpressionSyntax>().ToArray();
+            var switches = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SwitchExpressionSyntax>()
+                .ToArray();
             for (int i = 0; i < switches.Length; i++)
             {
                 var expr = switches[i];
@@ -2900,8 +3259,18 @@ class F
                 {
                     case 0:
                         checkType(expr, null, "C", ConversionKind.SwitchExpression);
-                        checkType(expr.Arms[0].Expression, "A", "C", ConversionKind.ImplicitReference);
-                        checkType(expr.Arms[1].Expression, "B", "C", ConversionKind.ImplicitReference);
+                        checkType(
+                            expr.Arms[0].Expression,
+                            "A",
+                            "C",
+                            ConversionKind.ImplicitReference
+                        );
+                        checkType(
+                            expr.Arms[1].Expression,
+                            "B",
+                            "C",
+                            ConversionKind.ImplicitReference
+                        );
                         checkType(expr.Arms[2].Expression, null, "C", ConversionKind.ImplicitThrow);
                         break;
                     case 1:
@@ -2912,8 +3281,18 @@ class F
                         break;
                     case 2:
                         checkType(expr, null, "D", ConversionKind.SwitchExpression);
-                        checkType(expr.Arms[0].Expression, "A", "D", ConversionKind.ImplicitUserDefined);
-                        checkType(expr.Arms[1].Expression, "B", "D", ConversionKind.ImplicitUserDefined);
+                        checkType(
+                            expr.Arms[0].Expression,
+                            "A",
+                            "D",
+                            ConversionKind.ImplicitUserDefined
+                        );
+                        checkType(
+                            expr.Arms[1].Expression,
+                            "B",
+                            "D",
+                            ConversionKind.ImplicitUserDefined
+                        );
                         checkType(expr.Arms[2].Expression, null, "D", ConversionKind.ImplicitThrow);
                         break;
                     case 3:
@@ -2925,58 +3304,148 @@ class F
                     case 4:
                     case 10:
                         checkType(expr, "C", "C", ConversionKind.Identity);
-                        checkType(expr.Arms[0].Expression, "A", "C", ConversionKind.ImplicitReference);
-                        checkType(expr.Arms[1].Expression, "B", "C", ConversionKind.ImplicitReference);
+                        checkType(
+                            expr.Arms[0].Expression,
+                            "A",
+                            "C",
+                            ConversionKind.ImplicitReference
+                        );
+                        checkType(
+                            expr.Arms[1].Expression,
+                            "B",
+                            "C",
+                            ConversionKind.ImplicitReference
+                        );
                         checkType(expr.Arms[2].Expression, "C", "C", ConversionKind.Identity);
                         checkType(expr.Arms[3].Expression, null, "C", ConversionKind.ImplicitThrow);
                         break;
                     case 5:
                         checkType(expr, "C", "D", ConversionKind.ImplicitUserDefined);
-                        checkType(expr.Arms[0].Expression, "A", "C", ConversionKind.ImplicitReference);
-                        checkType(expr.Arms[1].Expression, "B", "C", ConversionKind.ImplicitReference);
+                        checkType(
+                            expr.Arms[0].Expression,
+                            "A",
+                            "C",
+                            ConversionKind.ImplicitReference
+                        );
+                        checkType(
+                            expr.Arms[1].Expression,
+                            "B",
+                            "C",
+                            ConversionKind.ImplicitReference
+                        );
                         checkType(expr.Arms[2].Expression, "C", "C", ConversionKind.Identity);
                         checkType(expr.Arms[3].Expression, null, "C", ConversionKind.ImplicitThrow);
                         break;
                     case 11:
                         checkType(expr, "C", "C", ConversionKind.Identity);
-                        checkType(expr.Arms[0].Expression, "A", "C", ConversionKind.ImplicitReference);
-                        checkType(expr.Arms[1].Expression, "B", "C", ConversionKind.ImplicitReference);
+                        checkType(
+                            expr.Arms[0].Expression,
+                            "A",
+                            "C",
+                            ConversionKind.ImplicitReference
+                        );
+                        checkType(
+                            expr.Arms[1].Expression,
+                            "B",
+                            "C",
+                            ConversionKind.ImplicitReference
+                        );
                         checkType(expr.Arms[2].Expression, "C", "C", ConversionKind.Identity);
                         checkType(expr.Arms[3].Expression, null, "C", ConversionKind.ImplicitThrow);
                         break;
                     case 6:
                         checkType(expr, "System.Int32", "D", ConversionKind.SwitchExpression);
-                        checkType(expr.Arms[0].Expression, "System.Int32", "D", ConversionKind.ImplicitUserDefined);
-                        checkType(expr.Arms[1].Expression, "System.Int32", "D", ConversionKind.ImplicitUserDefined);
+                        checkType(
+                            expr.Arms[0].Expression,
+                            "System.Int32",
+                            "D",
+                            ConversionKind.ImplicitUserDefined
+                        );
+                        checkType(
+                            expr.Arms[1].Expression,
+                            "System.Int32",
+                            "D",
+                            ConversionKind.ImplicitUserDefined
+                        );
                         checkType(expr.Arms[2].Expression, null, "D", ConversionKind.ImplicitThrow);
                         break;
                     case 7:
                         checkType(expr, null, null, ConversionKind.Identity);
-                        checkType(expr.Arms[0].Expression, "A", "C", ConversionKind.ImplicitReference);
-                        checkType(expr.Arms[1].Expression, "B", "C", ConversionKind.ImplicitReference);
+                        checkType(
+                            expr.Arms[0].Expression,
+                            "A",
+                            "C",
+                            ConversionKind.ImplicitReference
+                        );
+                        checkType(
+                            expr.Arms[1].Expression,
+                            "B",
+                            "C",
+                            ConversionKind.ImplicitReference
+                        );
                         checkType(expr.Arms[2].Expression, null, "C", ConversionKind.ImplicitThrow);
-                        checkType((CastExpressionSyntax)expr.Parent.Parent, "C", "C", ConversionKind.Identity);
+                        checkType(
+                            (CastExpressionSyntax)expr.Parent.Parent,
+                            "C",
+                            "C",
+                            ConversionKind.Identity
+                        );
                         break;
                     case 8:
                         checkType(expr, null, null, ConversionKind.Identity);
-                        checkType(expr.Arms[0].Expression, "A", "D", ConversionKind.ImplicitUserDefined);
-                        checkType(expr.Arms[1].Expression, "B", "D", ConversionKind.ImplicitUserDefined);
+                        checkType(
+                            expr.Arms[0].Expression,
+                            "A",
+                            "D",
+                            ConversionKind.ImplicitUserDefined
+                        );
+                        checkType(
+                            expr.Arms[1].Expression,
+                            "B",
+                            "D",
+                            ConversionKind.ImplicitUserDefined
+                        );
                         checkType(expr.Arms[2].Expression, null, "D", ConversionKind.ImplicitThrow);
-                        checkType((CastExpressionSyntax)expr.Parent.Parent, "D", "D", ConversionKind.Identity);
+                        checkType(
+                            (CastExpressionSyntax)expr.Parent.Parent,
+                            "D",
+                            "D",
+                            ConversionKind.Identity
+                        );
                         break;
                     case 9:
                         checkType(expr, "?", "?", ConversionKind.Identity);
                         checkType(expr.Arms[0].Expression, "E", "?", ConversionKind.NoConversion);
                         checkType(expr.Arms[1].Expression, "F", "?", ConversionKind.NoConversion);
                         checkType(expr.Arms[2].Expression, null, "?", ConversionKind.ImplicitThrow);
-                        checkType((CastExpressionSyntax)expr.Parent.Parent, "D", "D", ConversionKind.Identity);
+                        checkType(
+                            (CastExpressionSyntax)expr.Parent.Parent,
+                            "D",
+                            "D",
+                            ConversionKind.Identity
+                        );
                         break;
                     case 12:
                         checkType(expr, "System.Int32", "System.Int32", ConversionKind.Identity);
-                        checkType(expr.Arms[0].Expression, "System.Int32", "D", ConversionKind.ImplicitUserDefined);
-                        checkType(expr.Arms[1].Expression, "System.Int32", "D", ConversionKind.ImplicitUserDefined);
+                        checkType(
+                            expr.Arms[0].Expression,
+                            "System.Int32",
+                            "D",
+                            ConversionKind.ImplicitUserDefined
+                        );
+                        checkType(
+                            expr.Arms[1].Expression,
+                            "System.Int32",
+                            "D",
+                            ConversionKind.ImplicitUserDefined
+                        );
                         checkType(expr.Arms[2].Expression, null, "D", ConversionKind.ImplicitThrow);
-                        checkType((CastExpressionSyntax)expr.Parent.Parent, "D", "D", ConversionKind.Identity);
+                        checkType(
+                            (CastExpressionSyntax)expr.Parent.Parent,
+                            "D",
+                            "D",
+                            ConversionKind.Identity
+                        );
                         break;
                     default:
                         Assert.False(true);
@@ -2988,7 +3457,8 @@ class F
         [Fact, WorkItem(45946, "https://github.com/dotnet/roslyn/issues/45946")]
         public void VoidPattern_01()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(object o)
@@ -2996,17 +3466,21 @@ class C
         _ = is this.F(1);
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,13): error CS1525: Invalid expression term 'is'
-                //         _ = is this.F(1);
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "is").WithArguments("is").WithLocation(6, 13)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,13): error CS1525: Invalid expression term 'is'
+                    //         _ = is this.F(1);
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "is")
+                        .WithArguments("is")
+                        .WithLocation(6, 13)
                 );
         }
 
         [Fact, WorkItem(45946, "https://github.com/dotnet/roslyn/issues/45946")]
         public void VoidPattern_02()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(object o)
@@ -3014,20 +3488,26 @@ class C
         _ = switch { this.F(1) => 1 };
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,13): error CS1525: Invalid expression term 'switch'
-                //         _ = switch { this.F(1) => 1 };
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "switch").WithArguments("switch").WithLocation(6, 13),
-                // (6,13): warning CS8848: Operator 'switch' cannot be used here due to precedence. Use parentheses to disambiguate.
-                //         _ = switch { this.F(1) => 1 };
-                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "switch").WithArguments("switch").WithLocation(6, 13)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,13): error CS1525: Invalid expression term 'switch'
+                    //         _ = switch { this.F(1) => 1 };
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "switch")
+                        .WithArguments("switch")
+                        .WithLocation(6, 13),
+                    // (6,13): warning CS8848: Operator 'switch' cannot be used here due to precedence. Use parentheses to disambiguate.
+                    //         _ = switch { this.F(1) => 1 };
+                    Diagnostic(ErrorCode.WRN_PrecedenceInversion, "switch")
+                        .WithArguments("switch")
+                        .WithLocation(6, 13)
                 );
         }
 
         [Fact, WorkItem(48112, "https://github.com/dotnet/roslyn/issues/48112")]
         public void NullableTypePattern()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(object o)
@@ -3036,20 +3516,26 @@ class C
         _ = o switch { int? => 1, _ => 0 };
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,25): error CS8116: It is not legal to use nullable type 'int?' in a pattern; use the underlying type 'int' instead.
-                //         _ = o switch { (int?) => 1, _ => 0 };
-                Diagnostic(ErrorCode.ERR_PatternNullableType, "int?").WithArguments("int").WithLocation(6, 25),
-                // (7,24): error CS8116: It is not legal to use nullable type 'int?' in a pattern; use the underlying type 'int' instead.
-                //         _ = o switch { int? => 1, _ => 0 };
-                Diagnostic(ErrorCode.ERR_PatternNullableType, "int?").WithArguments("int").WithLocation(7, 24)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,25): error CS8116: It is not legal to use nullable type 'int?' in a pattern; use the underlying type 'int' instead.
+                    //         _ = o switch { (int?) => 1, _ => 0 };
+                    Diagnostic(ErrorCode.ERR_PatternNullableType, "int?")
+                        .WithArguments("int")
+                        .WithLocation(6, 25),
+                    // (7,24): error CS8116: It is not legal to use nullable type 'int?' in a pattern; use the underlying type 'int' instead.
+                    //         _ = o switch { int? => 1, _ => 0 };
+                    Diagnostic(ErrorCode.ERR_PatternNullableType, "int?")
+                        .WithArguments("int")
+                        .WithLocation(7, 24)
                 );
         }
 
         [Fact, WorkItem(55668, "https://github.com/dotnet/roslyn/issues/55668")]
         public void SharedWhenExpression_SwitchExpression()
         {
-            var source = @"
+            var source =
+                @"
 int count = 0;
 foreach (var position in new[] { Position.First, Position.Last })
 {
@@ -3107,7 +3593,8 @@ class Wrap
         [Fact, WorkItem(55668, "https://github.com/dotnet/roslyn/issues/55668")]
         public void SharedWhenExpression_SwitchStatement()
         {
-            var source = @"
+            var source =
+                @"
 M(Position.Last, new Wrap { Sub = new Zero() });
 M(Position.Last, new Wrap { Sub = new One() });
 M(Position.Last, new Wrap { Sub = new Two() });
@@ -3144,18 +3631,22 @@ class Wrap
 }
 ";
 
-            CompileAndVerify(source, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
 (Last, Zero, Not First and Zero)
 (Last, One, One or Two)
 (Last, Two, One or Two)
 (First, Zero, First)
-(Last, System.Object, Other)");
+(Last, System.Object, Other)"
+            );
         }
 
         [Fact, WorkItem(55668, "https://github.com/dotnet/roslyn/issues/55668")]
         public void SharedWhenExpression_SequencePoints()
         {
-            var source = @"
+            var source =
+                @"
 C.M(0, false, false);
 C.M(0, true, false);
 C.M(0, false, true);
@@ -3189,16 +3680,21 @@ public class C
 }
 ";
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 (0, False, False, default)
 (0, True, False, b1)
 (0, False, True, b2)
 (1, False, False, 1)
 (1, False, True, b2)
 (2, False, False, default)
-");
+"
+            );
 
-            verifier.VerifyIL("C.M", @"
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       73 (0x49)
   .maxstack  4
@@ -3256,13 +3752,17 @@ public class C
   // sequence point: }
   IL_0048:  ret
 }
-", source: source, sequencePoints: "C.M");
+",
+                source: source,
+                sequencePoints: "C.M"
+            );
         }
 
         [Fact, WorkItem(55668, "https://github.com/dotnet/roslyn/issues/55668")]
         public void SharedWhenExpression_MissingInt32Type()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void M(string s, bool b1, bool b2)
@@ -3286,7 +3786,9 @@ class C
             comp.VerifyEmitDiagnostics(
                 // (6,9): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         switch (s)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"switch (s)
+                Diagnostic(
+                        ErrorCode.ERR_PredefinedTypeNotFound,
+                        @"switch (s)
         {
             case not ""one"" when b1:
                 break;
@@ -3296,10 +3798,15 @@ class C
                 break;
             default:
                 break;
-        }").WithArguments("System.Int32").WithLocation(6, 9),
+        }"
+                    )
+                    .WithArguments("System.Int32")
+                    .WithLocation(6, 9),
                 // (6,9): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         switch (s)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"switch (s)
+                Diagnostic(
+                        ErrorCode.ERR_PredefinedTypeNotFound,
+                        @"switch (s)
         {
             case not ""one"" when b1:
                 break;
@@ -3309,17 +3816,23 @@ class C
                 break;
             default:
                 break;
-        }").WithArguments("System.Int32").WithLocation(6, 9),
+        }"
+                    )
+                    .WithArguments("System.Int32")
+                    .WithLocation(6, 9),
                 // (8,13): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //             case not "one" when b1:
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"case not ""one"" when b1:").WithArguments("System.Int32").WithLocation(8, 13)
-                );
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"case not ""one"" when b1:")
+                    .WithArguments("System.Int32")
+                    .WithLocation(8, 13)
+            );
         }
 
         [Fact, WorkItem(55668, "https://github.com/dotnet/roslyn/issues/55668")]
         public void SharedWhenExpression_WithBindings()
         {
-            var source = @"
+            var source =
+                @"
 C.M(""Alice"", false, true);
 C.M(""Bob"", false, true);
 
@@ -3343,12 +3856,17 @@ public class C
 }
 ";
 
-            var verifier = CompileAndVerify(source, expectedOutput: @"
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: @"
 (Alice, False, True, 5)
 (Bob, False, True, 3)
-");
+"
+            );
 
-            verifier.VerifyIL("C.M", @"
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       95 (0x5f)
   .maxstack  4
@@ -3420,7 +3938,10 @@ public class C
   IL_005d:  ldnull
   IL_005e:  throw
 }
-", source: source, sequencePoints: "C.M");
+",
+                source: source,
+                sequencePoints: "C.M"
+            );
         }
 
         [Fact, WorkItem(55668, "https://github.com/dotnet/roslyn/issues/55668")]
@@ -3428,7 +3949,8 @@ public class C
         {
             // The `b3` condition ends up in the `when` clause on four leaves in the DAG
             // and `b1` ends up in two leaves
-            var source = @"
+            var source =
+                @"
 int count = 0;
 
 foreach (int i1 in new[] { 0, 1 })
@@ -3499,7 +4021,8 @@ static bool f(int i1, int i2, int i3) => false;
         [Fact, WorkItem(55668, "https://github.com/dotnet/roslyn/issues/55668")]
         public void SharedWhenExpression_Multiples_LabelInSharedWhenExpression()
         {
-            var source = @"
+            var source =
+                @"
 int count = 0;
 var wrap = new Wrap { value = null };
 
@@ -3575,7 +4098,8 @@ public class Wrap
         [InlineData("string.Empty", "False")]
         public void ObviousTestAfterTypeTest(string value, string expected)
         {
-            var source = $@"
+            var source =
+                $@"
 System.Console.Write(Extenders.F({value}));
 
 static class Extenders
@@ -3604,7 +4128,8 @@ static class Extenders
         [InlineData("(uint)0", "8")]
         public void ObviousTestAfterTypeTest2(string value, string expected)
         {
-            var source = $@"
+            var source =
+                $@"
 System.Console.Write(Extenders.F({value}));
 
 public static class Extenders
@@ -3633,9 +4158,13 @@ public static class Extenders
         [InlineData("-1", "1")]
         [InlineData("(object)null", "1")]
         [InlineData("string.Empty", "1")]
-        public void ObviousTestAfterTypeTest_UnsignedIntegerNonNegative(string value, string expected)
+        public void ObviousTestAfterTypeTest_UnsignedIntegerNonNegative(
+            string value,
+            string expected
+        )
         {
-            var source = $@"
+            var source =
+                $@"
 System.Console.Write(M({value}));
 
 int M<T>(T o)
@@ -3652,7 +4181,8 @@ int M<T>(T o)
         [Fact, WorkItem(57148, "https://github.com/dotnet/roslyn/issues/57148")]
         public void ObviousTestAfterTypeTest_UnsignedIntegerNegative()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public void M<T>(T o)
@@ -3664,10 +4194,11 @@ public class C
         };
     }
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (8,12): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
-                //            < (uint)0 => 0,
-                Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "< (uint)0").WithLocation(8, 12)
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (8,12): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+                    //            < (uint)0 => 0,
+                    Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "< (uint)0").WithLocation(8, 12)
                 );
         }
     }

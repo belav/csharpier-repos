@@ -15,7 +15,8 @@ internal sealed class CallHandlerDescriptorInfo
         MessageDescriptor? bodyDescriptor,
         bool bodyDescriptorRepeated,
         List<FieldDescriptor>? bodyFieldDescriptors,
-        Dictionary<string, List<FieldDescriptor>> routeParameterDescriptors)
+        Dictionary<string, List<FieldDescriptor>> routeParameterDescriptors
+    )
     {
         ResponseBodyDescriptor = responseBodyDescriptor;
         BodyDescriptor = bodyDescriptor;
@@ -31,6 +32,7 @@ internal sealed class CallHandlerDescriptorInfo
 
     public FieldDescriptor? ResponseBodyDescriptor { get; }
     public MessageDescriptor? BodyDescriptor { get; }
+
     [MemberNotNullWhen(true, nameof(BodyFieldDescriptors), nameof(BodyFieldDescriptorsPath))]
     public bool BodyDescriptorRepeated { get; }
     public List<FieldDescriptor>? BodyFieldDescriptors { get; }

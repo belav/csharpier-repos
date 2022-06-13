@@ -14,7 +14,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(3, 3))
             using (Graphics targetGraphics = Graphics.FromImage(image))
             {
-                BufferedGraphics graphics = context.Allocate(targetGraphics, new Rectangle(0, 0, 1, 1));
+                BufferedGraphics graphics = context.Allocate(
+                    targetGraphics,
+                    new Rectangle(0, 0, 1, 1)
+                );
                 Assert.NotNull(graphics.Graphics);
 
                 graphics.Dispose();
@@ -31,7 +34,15 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(3, 3))
             using (Graphics targetGraphics = Graphics.FromImage(image))
             {
-                BufferedGraphics graphics = context.Allocate(targetGraphics, new Rectangle(0, 0, context.MaximumBuffer.Width + 1, context.MaximumBuffer.Height + 1));
+                BufferedGraphics graphics = context.Allocate(
+                    targetGraphics,
+                    new Rectangle(
+                        0,
+                        0,
+                        context.MaximumBuffer.Width + 1,
+                        context.MaximumBuffer.Height + 1
+                    )
+                );
                 Assert.NotNull(graphics.Graphics);
 
                 graphics.Dispose();
@@ -53,16 +64,24 @@ namespace System.Drawing.Tests
             {
                 graphics.FillRectangle(brush, new Rectangle(0, 0, 3, 3));
 
-                using (BufferedGraphics bufferedGraphics = context.Allocate(graphics, new Rectangle(0, 0, 3, 3)))
+                using (
+                    BufferedGraphics bufferedGraphics = context.Allocate(
+                        graphics,
+                        new Rectangle(0, 0, 3, 3)
+                    )
+                )
                 {
                     bufferedGraphics.Render();
 
-                    Helpers.VerifyBitmap(image, new Color[][]
-                    {
-                        new Color[] { color, color, color },
-                        new Color[] { color, color, color },
-                        new Color[] { color, color, color }
-                    });
+                    Helpers.VerifyBitmap(
+                        image,
+                        new Color[][]
+                        {
+                            new Color[] { color, color, color },
+                            new Color[] { color, color, color },
+                            new Color[] { color, color, color }
+                        }
+                    );
                 }
             }
         }
@@ -80,7 +99,12 @@ namespace System.Drawing.Tests
                 {
                     IntPtr hdc = graphics.GetHdc();
 
-                    using (BufferedGraphics bufferedGraphics = context.Allocate(hdc, new Rectangle(0, 0, 3, 3)))
+                    using (
+                        BufferedGraphics bufferedGraphics = context.Allocate(
+                            hdc,
+                            new Rectangle(0, 0, 3, 3)
+                        )
+                    )
                     {
                         bufferedGraphics.Render();
                     }
@@ -106,16 +130,24 @@ namespace System.Drawing.Tests
             {
                 originalGraphics.FillRectangle(brush, new Rectangle(0, 0, 3, 3));
 
-                using (BufferedGraphics graphics = context.Allocate(originalGraphics, new Rectangle(0, 0, 3, 3)))
+                using (
+                    BufferedGraphics graphics = context.Allocate(
+                        originalGraphics,
+                        new Rectangle(0, 0, 3, 3)
+                    )
+                )
                 {
                     graphics.Render(targetGraphics);
 
-                    Helpers.VerifyBitmap(targetImage, new Color[][]
-                    {
-                        new Color[] { color, color, color },
-                        new Color[] { color, color, color },
-                        new Color[] { color, color, color }
-                    });
+                    Helpers.VerifyBitmap(
+                        targetImage,
+                        new Color[][]
+                        {
+                            new Color[] { color, color, color },
+                            new Color[] { color, color, color },
+                            new Color[] { color, color, color }
+                        }
+                    );
                 }
             }
         }
@@ -126,7 +158,12 @@ namespace System.Drawing.Tests
             using (var context = new BufferedGraphicsContext())
             using (var image = new Bitmap(3, 3))
             using (Graphics graphics = Graphics.FromImage(image))
-            using (BufferedGraphics bufferedGraphics = context.Allocate(graphics, new Rectangle(0, 0, 1, 1)))
+            using (
+                BufferedGraphics bufferedGraphics = context.Allocate(
+                    graphics,
+                    new Rectangle(0, 0, 1, 1)
+                )
+            )
             {
                 bufferedGraphics.Render(null);
             }

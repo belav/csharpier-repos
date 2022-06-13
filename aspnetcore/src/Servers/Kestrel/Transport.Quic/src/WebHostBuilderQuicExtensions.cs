@@ -24,7 +24,10 @@ public static class WebHostBuilderQuicExtensions
         {
             return hostBuilder.ConfigureServices(services =>
             {
-                services.AddSingleton<IMultiplexedConnectionListenerFactory, QuicTransportFactory>();
+                services.AddSingleton<
+                    IMultiplexedConnectionListenerFactory,
+                    QuicTransportFactory
+                >();
             });
         }
 
@@ -37,11 +40,16 @@ public static class WebHostBuilderQuicExtensions
     /// <param name="hostBuilder">The <see cref="IWebHostBuilder"/> to configure.</param>
     /// <param name="configureOptions">A callback to configure transport options.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
-    public static IWebHostBuilder UseQuic(this IWebHostBuilder hostBuilder, Action<QuicTransportOptions> configureOptions)
+    public static IWebHostBuilder UseQuic(
+        this IWebHostBuilder hostBuilder,
+        Action<QuicTransportOptions> configureOptions
+    )
     {
-        return hostBuilder.UseQuic().ConfigureServices(services =>
-        {
-            services.Configure(configureOptions);
-        });
+        return hostBuilder
+            .UseQuic()
+            .ConfigureServices(services =>
+            {
+                services.Configure(configureOptions);
+            });
     }
 }

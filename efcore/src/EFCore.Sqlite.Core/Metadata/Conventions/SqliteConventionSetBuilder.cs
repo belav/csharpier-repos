@@ -31,10 +31,8 @@ public class SqliteConventionSetBuilder : RelationalConventionSetBuilder
     /// <param name="relationalDependencies">The relational dependencies for this service.</param>
     public SqliteConventionSetBuilder(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
-        : base(dependencies, relationalDependencies)
-    {
-    }
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    ) : base(dependencies, relationalDependencies) { }
 
     /// <summary>
     ///     Builds and returns the convention set for the current database provider.
@@ -46,11 +44,15 @@ public class SqliteConventionSetBuilder : RelationalConventionSetBuilder
 
         ReplaceConvention(
             conventionSet.ModelFinalizingConventions,
-            (SharedTableConvention)new SqliteSharedTableConvention(Dependencies, RelationalDependencies));
+            (SharedTableConvention)
+                new SqliteSharedTableConvention(Dependencies, RelationalDependencies)
+        );
 
         ReplaceConvention(
             conventionSet.ModelFinalizedConventions,
-            (RuntimeModelConvention)new SqliteRuntimeModelConvention(Dependencies, RelationalDependencies));
+            (RuntimeModelConvention)
+                new SqliteRuntimeModelConvention(Dependencies, RelationalDependencies)
+        );
 
         return conventionSet;
     }
@@ -83,7 +85,10 @@ public class SqliteConventionSetBuilder : RelationalConventionSetBuilder
     {
         using var serviceScope = CreateServiceScope();
         using var context = serviceScope.ServiceProvider.GetRequiredService<DbContext>();
-        return new ModelBuilder(ConventionSet.CreateConventionSet(context), context.GetService<ModelDependencies>());
+        return new ModelBuilder(
+            ConventionSet.CreateConventionSet(context),
+            context.GetService<ModelDependencies>()
+        );
     }
 
     private static IServiceScope CreateServiceScope()
@@ -91,9 +96,8 @@ public class SqliteConventionSetBuilder : RelationalConventionSetBuilder
         var serviceProvider = new ServiceCollection()
             .AddEntityFrameworkSqlite()
             .AddDbContext<DbContext>(
-                (p, o) =>
-                    o.UseSqlite("Filename=_.db")
-                        .UseInternalServiceProvider(p))
+                (p, o) => o.UseSqlite("Filename=_.db").UseInternalServiceProvider(p)
+            )
             .BuildServiceProvider();
         return serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
     }

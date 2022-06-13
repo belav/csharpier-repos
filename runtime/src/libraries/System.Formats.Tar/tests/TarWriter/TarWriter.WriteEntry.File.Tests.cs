@@ -16,7 +16,9 @@ namespace System.Formats.Tar.Tests
             TarWriter writer = new TarWriter(archiveStream);
             writer.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() => writer.WriteEntry("fileName", "entryName"));
+            Assert.Throws<ObjectDisposedException>(
+                () => writer.WriteEntry("fileName", "entryName")
+            );
         }
 
         [Fact]
@@ -96,7 +98,8 @@ namespace System.Formats.Tar.Tests
                 Assert.NotNull(entry);
                 Assert.Equal(format, reader.Format);
                 Assert.Equal(fileName, entry.Name);
-                TarEntryType expectedEntryType = format is TarFormat.V7 ? TarEntryType.V7RegularFile : TarEntryType.RegularFile;
+                TarEntryType expectedEntryType =
+                    format is TarFormat.V7 ? TarEntryType.V7RegularFile : TarEntryType.RegularFile;
                 Assert.Equal(expectedEntryType, entry.EntryType);
                 Assert.True(entry.Length > 0);
                 Assert.NotNull(entry.DataStream);
@@ -224,9 +227,9 @@ namespace System.Formats.Tar.Tests
                 globalExtendedAttributes.Add("hello", "world");
             }
 
-            using (TarWriter writer = new TarWriter(archive, globalExtendedAttributes, leaveOpen: true))
-            {
-            } // Dispose with no entries
+            using (
+                TarWriter writer = new TarWriter(archive, globalExtendedAttributes, leaveOpen: true)
+            ) { } // Dispose with no entries
 
             archive.Seek(0, SeekOrigin.Begin);
             using (TarReader reader = new TarReader(archive))

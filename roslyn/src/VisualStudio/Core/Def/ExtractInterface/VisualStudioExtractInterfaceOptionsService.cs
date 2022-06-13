@@ -33,7 +33,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioExtractInterfaceOptionsService(IGlyphService glyphService, IThreadingContext threadingContext)
+        public VisualStudioExtractInterfaceOptionsService(
+            IGlyphService glyphService,
+            IThreadingContext threadingContext
+        )
         {
             _glyphService = glyphService;
             _threadingContext = threadingContext;
@@ -49,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
             string generatedNameTypeParameterSuffix,
             string languageName,
             CleanCodeGenerationOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -62,14 +66,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
                 allTypeNames,
                 defaultNamespace,
                 generatedNameTypeParameterSuffix,
-                languageName);
+                languageName
+            );
 
             var dialog = new ExtractInterfaceDialog(viewModel);
             var result = dialog.ShowModal();
 
             if (result.HasValue && result.Value)
             {
-                var includedMembers = viewModel.MemberContainers.Where(c => c.IsChecked).Select(c => c.Symbol);
+                var includedMembers = viewModel.MemberContainers
+                    .Where(c => c.IsChecked)
+                    .Select(c => c.Symbol);
 
                 return new ExtractInterfaceOptionsResult(
                     isCancelled: false,
@@ -77,7 +84,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
                     interfaceName: viewModel.DestinationViewModel.TypeName.Trim(),
                     fileName: viewModel.DestinationViewModel.FileName.Trim(),
                     location: GetLocation(viewModel.DestinationViewModel.Destination),
-                    fallbackOptions);
+                    fallbackOptions
+                );
             }
             else
             {
@@ -85,13 +93,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
             }
         }
 
-        private static ExtractInterfaceOptionsResult.ExtractLocation GetLocation(NewTypeDestination destination)
+        private static ExtractInterfaceOptionsResult.ExtractLocation GetLocation(
+            NewTypeDestination destination
+        )
         {
             switch (destination)
             {
-                case NewTypeDestination.CurrentFile: return ExtractInterfaceOptionsResult.ExtractLocation.SameFile;
-                case NewTypeDestination.NewFile: return ExtractInterfaceOptionsResult.ExtractLocation.NewFile;
-                default: throw ExceptionUtilities.UnexpectedValue(destination);
+                case NewTypeDestination.CurrentFile:
+                    return ExtractInterfaceOptionsResult.ExtractLocation.SameFile;
+                case NewTypeDestination.NewFile:
+                    return ExtractInterfaceOptionsResult.ExtractLocation.NewFile;
+                default:
+                    throw ExceptionUtilities.UnexpectedValue(destination);
             }
         }
     }

@@ -109,21 +109,22 @@ public class SqliteDbContextOptionsBuilderExtensionsTest
             dbContextOption =>
             {
                 dbContextOption.EnableDetailedErrors();
-            });
+            }
+        );
 
         var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
-        using (var serviceScope = services
-                   .GetRequiredService<IServiceScopeFactory>()
-                   .CreateScope())
+        using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
             var coreOptions = serviceScope.ServiceProvider
-                .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<CoreOptionsExtension>();
+                .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
+                .GetExtension<CoreOptionsExtension>();
 
             Assert.True(coreOptions.DetailedErrorsEnabled);
 
             var sqliteOptions = serviceScope.ServiceProvider
-                .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<SqliteOptionsExtension>();
+                .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
+                .GetExtension<SqliteOptionsExtension>();
 
             Assert.Equal(123, sqliteOptions.MaxBatchSize);
             Assert.Equal(30, sqliteOptions.CommandTimeout);
@@ -133,9 +134,7 @@ public class SqliteDbContextOptionsBuilderExtensionsTest
 
     private class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        { }
     }
 }

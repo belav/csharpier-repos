@@ -18,12 +18,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {
-            return SyntaxFactory.ParseSyntaxTree(text, options: (options ?? TestOptions.Regular).WithLanguageVersion(LanguageVersion.CSharp5));
+            return SyntaxFactory.ParseSyntaxTree(
+                text,
+                options: (options ?? TestOptions.Regular).WithLanguageVersion(
+                    LanguageVersion.CSharp5
+                )
+            );
         }
 
-        protected override CSharpSyntaxNode ParseNode(string text, CSharpParseOptions options = null)
+        protected override CSharpSyntaxNode ParseNode(
+            string text,
+            CSharpParseOptions options = null
+        )
         {
-            return SyntaxFactory.ParseExpression(text, options: (options ?? TestOptions.Regular).WithLanguageVersion(LanguageVersion.CSharp5));
+            return SyntaxFactory.ParseExpression(
+                text,
+                options: (options ?? TestOptions.Regular).WithLanguageVersion(
+                    LanguageVersion.CSharp5
+                )
+            );
         }
 
         private void TestVersions(Action<CSharpParseOptions> test)
@@ -37,12 +50,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SimpleAsyncMethod()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M() { }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -78,12 +93,14 @@ class C
         [Fact]
         public void MethodCalledAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void async() { }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -118,12 +135,14 @@ class C
         [Fact]
         public void MethodReturningAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async M() { }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -158,12 +177,14 @@ class C
         [Fact]
         public void MethodAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async() { }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -198,12 +219,14 @@ class C
         [Fact]
         public void MethodAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async() { }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -239,12 +262,14 @@ class C
         [Fact]
         public void MethodAsyncAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async async() { }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -283,13 +308,14 @@ class C
         public void MethodAsyncVarAsync()
         {
             UsingTree(
-@"class C
+                @"class C
 {
     static async void M(object async)
     {
         async.F();
     }
-}");
+}"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -350,11 +376,13 @@ class C
         [Fact]
         public void IncompleteAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -378,11 +406,13 @@ class C
         [Fact]
         public void IncompleteAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -408,11 +438,13 @@ class C
         [Fact]
         public void CompleteAsyncAsync1()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async;
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -445,11 +477,13 @@ class C
         [Fact]
         public void CompleteAsyncAsync2()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async = 1;
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -490,11 +524,13 @@ class C
         [Fact]
         public void IncompleteAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -521,11 +557,13 @@ class C
         [Fact]
         public void CompleteAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async;
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -559,11 +597,13 @@ class C
         [Fact]
         public void IncompleteAsyncAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async async
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -591,11 +631,13 @@ class C
         [Fact]
         public void CompleteAsyncAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async async;
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -632,11 +674,13 @@ class C
         public void IncompleteAsyncMember01()
         {
             // when parsing an incomplete member, treat 'async' as a modifier if it makes sense
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async Task<
-}");
+}"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -672,11 +716,13 @@ class C
         public void IncompleteAsyncMember02()
         {
             // when parsing an incomplete member, treat 'async' as a modifier if it makes sense
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async Tasks.Task<
-}");
+}"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -720,11 +766,13 @@ class C
         public void IncompleteAsyncMember03()
         {
             // when parsing an incomplete member, treat 'async' as a modifier if it makes sense
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     static async Tasks.Task<
-}");
+}"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -770,11 +818,13 @@ class C
         {
             // when parsing an incomplete member, treat 'async' as a modifier if it makes sense
             // negative case
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async operator+
-}");
+}"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -809,11 +859,13 @@ class C
         {
             // when parsing an incomplete member, treat 'async' as a modifier if it makes sense
             // negative case
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async Task<T>
-}");
+}"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -850,11 +902,13 @@ class C
         {
             // when parsing an incomplete member, treat 'async' as a modifier if it makes sense
             // negative case
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async Task<T> f
-}");
+}"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -896,12 +950,14 @@ class C
         [Fact]
         public void PropertyAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async { get; set; }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -941,12 +997,14 @@ class C
         [Fact]
         public void PropertyAsyncAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async async async { get; set; }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -987,12 +1045,14 @@ class C
         [Fact]
         public void EventAsyncAsync()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     event async async;
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1025,12 +1085,14 @@ class C
         [Fact]
         public void EventAsyncAsyncAsync1()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     event async async async;
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1070,12 +1132,14 @@ class C
         [Fact]
         public void EventAsyncAsyncAsync2()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async event async async;
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1109,12 +1173,14 @@ class C
         [Fact]
         public void AsyncModifierOnDelegateDeclaration()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     public async delegate void Goo();
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1344,11 +1410,13 @@ class C
         public void AsyncInterface()
         {
             // ... 'async' <typedecl> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async interface
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1375,11 +1443,13 @@ class C
         public void AsyncPartialClass()
         {
             // ... 'async' 'partial' <typedecl> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async partial class
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1407,11 +1477,13 @@ class C
         public void AsyncEvent()
         {
             // ... 'async' <event> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async event
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1445,11 +1517,13 @@ class C
         public void AsyncPartialEvent()
         {
             // ... 'async' 'partial' <event> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async partial event
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1490,11 +1564,13 @@ class C
         public void AsyncImplicitOperator()
         {
             // ... 'async' <implicit> <operator> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async implicit operator
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1529,11 +1605,13 @@ class C
         public void AsyncPartialImplicitOperator()
         {
             // ... 'async' 'partial' <implicit> <operator> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async partial implicit operator
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1568,11 +1646,13 @@ class C
         public void AsyncExplicitOperator()
         {
             // ... 'async' <explicit> <operator> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async explicit operator
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1607,11 +1687,13 @@ class C
         public void AsyncPartialExplicitOperator()
         {
             // ... 'async' 'partial' <explicit> <operator> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async partial explicit operator
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1646,11 +1728,13 @@ class C
         public void AsyncTypeOperator()
         {
             // ... 'async' <typename> <operator> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async C operator
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1685,11 +1769,13 @@ class C
         public void AsyncPartialTypeOperator()
         {
             // ... 'async' 'partial' <typename> <operator> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async partial int operator
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1731,11 +1817,13 @@ class C
         public void AsyncField()
         {
             // ... 'async' <typename> <membername> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async C C
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1770,11 +1858,13 @@ class C
         public void AsyncPartialIndexer()
         {
             // ... 'async' 'partial' <typename> <membername> ...
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async partial C this
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -1867,9 +1957,10 @@ class C
         public void AsyncTypePredefinedType()
         {
             UsingTree(
-@"class C {
+                @"class C {
     async T
-    int");
+    int"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1904,9 +1995,10 @@ class C
         public void AsyncTypeModifier()
         {
             UsingTree(
-@"class C {
+                @"class C {
     async T
-    public");
+    public"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1938,9 +2030,10 @@ class C
         public void AsyncTypeFollowedByTypeDecl()
         {
             UsingTree(
-@"class C {
+                @"class C {
     async T
-class");
+class"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1975,9 +2068,10 @@ class");
         public void AsyncTypeFollowedByNamespaceDecl()
         {
             UsingTree(
-@"class C {
+                @"class C {
     async T
-namespace");
+namespace"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2015,10 +2109,11 @@ namespace");
         public void AsyncGenericType()
         {
             UsingTree(
-@"class Program
+                @"class Program
 {
     public async Task<IReadOnlyCollection<ProjectConfiguration>>
-}");
+}"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -2065,10 +2160,14 @@ namespace");
         [WorkItem(16044, "https://github.com/dotnet/roslyn/issues/16044")]
         public void AsyncAsType_Property_ExpressionBody()
         {
-            UsingTree("class async { async async => null; }").GetDiagnostics().Verify(
-                // (1,27): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
-                // class async { async async => null; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=> null").WithArguments("expression-bodied property", "6").WithLocation(1, 27)
+            UsingTree("class async { async async => null; }")
+                .GetDiagnostics()
+                .Verify(
+                    // (1,27): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
+                    // class async { async async => null; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=> null")
+                        .WithArguments("expression-bodied property", "6")
+                        .WithLocation(1, 27)
                 );
 
             N(SyntaxKind.CompilationUnit);
@@ -2143,10 +2242,14 @@ namespace");
         [WorkItem(16044, "https://github.com/dotnet/roslyn/issues/16044")]
         public void AsyncAsType_Indexer_ExpressionBody_ErrorCase()
         {
-            UsingTree("interface async { async this[async i] => null; }").GetDiagnostics().Verify(
-                // (1,39): error CS8026: Feature 'expression-bodied indexer' is not available in C# 5. Please use language version 6 or greater.
-                // interface async { async this[async i] => null; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=> null").WithArguments("expression-bodied indexer", "6").WithLocation(1, 39)
+            UsingTree("interface async { async this[async i] => null; }")
+                .GetDiagnostics()
+                .Verify(
+                    // (1,39): error CS8026: Feature 'expression-bodied indexer' is not available in C# 5. Please use language version 6 or greater.
+                    // interface async { async this[async i] => null; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=> null")
+                        .WithArguments("expression-bodied indexer", "6")
+                        .WithLocation(1, 39)
                 );
 
             N(SyntaxKind.CompilationUnit);
@@ -2247,10 +2350,14 @@ namespace");
         [WorkItem(16044, "https://github.com/dotnet/roslyn/issues/16044")]
         public void AsyncAsType_Property_ExplicitInterface()
         {
-            UsingTree("class async : async { async async.async => null; }").GetDiagnostics().Verify(
-                // (1,41): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
-                // class async : async { async async.async => null; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=> null").WithArguments("expression-bodied property", "6").WithLocation(1, 41)
+            UsingTree("class async : async { async async.async => null; }")
+                .GetDiagnostics()
+                .Verify(
+                    // (1,41): error CS8026: Feature 'expression-bodied property' is not available in C# 5. Please use language version 6 or greater.
+                    // class async : async { async async.async => null; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "=> null")
+                        .WithArguments("expression-bodied property", "6")
+                        .WithLocation(1, 41)
                 );
             N(SyntaxKind.CompilationUnit);
             {

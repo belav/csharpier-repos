@@ -27,12 +27,18 @@ public abstract class SerializationTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(true, true, true)]
     [InlineData(true, false, false)]
     [InlineData(true, false, true)]
-    public virtual void Can_round_trip_through_JSON(bool useNewtonsoft, bool ignoreLoops, bool writeIndented)
+    public virtual void Can_round_trip_through_JSON(
+        bool useNewtonsoft,
+        bool ignoreLoops,
+        bool writeIndented
+    )
     {
         using var context = Fixture.CreateContext();
 
-        var teams = context.Teams.Include(e => e.Drivers)
-            .Include(e => e.Engine).ThenInclude(e => e.EngineSupplier)
+        var teams = context.Teams
+            .Include(e => e.Drivers)
+            .Include(e => e.Engine)
+            .ThenInclude(e => e.EngineSupplier)
             .ToList();
 
         Assert.Equal(12, teams.Count);
@@ -81,7 +87,11 @@ public abstract class SerializationTestBase<TFixture> : IClassFixture<TFixture>
         }
     }
 
-    private static void VerifyEngine(F1Context context, Engine engine, IDictionary<int, Engine> enginesMap)
+    private static void VerifyEngine(
+        F1Context context,
+        Engine engine,
+        IDictionary<int, Engine> enginesMap
+    )
     {
         var trackedEngine = context.Engines.Find(engine.Id);
         Assert.Equal(trackedEngine.StorageLocation.Latitude, engine.StorageLocation.Latitude);
@@ -102,7 +112,8 @@ public abstract class SerializationTestBase<TFixture> : IClassFixture<TFixture>
     private static void VerifyEngineSupplier(
         F1Context context,
         EngineSupplier engineSupplier,
-        IDictionary<string, EngineSupplier> engineSupplierMap)
+        IDictionary<string, EngineSupplier> engineSupplierMap
+    )
     {
         var trackedEngineSupplier = context.EngineSuppliers.Find(engineSupplier.Name);
         Assert.Equal(trackedEngineSupplier.Name, engineSupplier.Name);
@@ -118,7 +129,12 @@ public abstract class SerializationTestBase<TFixture> : IClassFixture<TFixture>
         }
     }
 
-    private static T RoundtripThroughBclJson<T>(T collection, bool ignoreLoops, bool writeIndented, int maxDepth = 64)
+    private static T RoundtripThroughBclJson<T>(
+        T collection,
+        bool ignoreLoops,
+        bool writeIndented,
+        int maxDepth = 64
+    )
     {
         Assert.False(ignoreLoops, "BCL doesn't support ignoring loops.");
 
@@ -129,10 +145,17 @@ public abstract class SerializationTestBase<TFixture> : IClassFixture<TFixture>
             MaxDepth = maxDepth
         };
 
-        return JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(collection, options), options);
+        return JsonSerializer.Deserialize<T>(
+            JsonSerializer.Serialize(collection, options),
+            options
+        );
     }
 
-    private static T RoundtripThroughNewtonsoftJson<T>(T collection, bool ignoreLoops, bool writeIndented)
+    private static T RoundtripThroughNewtonsoftJson<T>(
+        T collection,
+        bool ignoreLoops,
+        bool writeIndented
+    )
     {
         var options = new JsonSerializerSettings
         {
@@ -143,9 +166,7 @@ public abstract class SerializationTestBase<TFixture> : IClassFixture<TFixture>
                 ? ReferenceLoopHandling.Ignore
                 : ReferenceLoopHandling.Error,
             EqualityComparer = LegacyReferenceEqualityComparer.Instance,
-            Formatting = writeIndented
-                ? Formatting.Indented
-                : Formatting.None
+            Formatting = writeIndented ? Formatting.Indented : Formatting.None
         };
 
         var serializeObject = JsonConvert.SerializeObject(collection, options);

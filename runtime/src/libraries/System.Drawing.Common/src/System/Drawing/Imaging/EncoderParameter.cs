@@ -9,10 +9,10 @@ namespace System.Drawing.Imaging
     [StructLayout(LayoutKind.Sequential)]
     public sealed unsafe class EncoderParameter : IDisposable
     {
-        private Guid _parameterGuid;                    // GUID of the parameter
-        private readonly int _numberOfValues;                    // Number of the parameter values
-        private readonly EncoderParameterValueType _parameterValueType;   // Value type, like ValueTypeLONG  etc.
-        private IntPtr _parameterValue;                 // A pointer to the parameter values
+        private Guid _parameterGuid; // GUID of the parameter
+        private readonly int _numberOfValues; // Number of the parameter values
+        private readonly EncoderParameterValueType _parameterValueType; // Value type, like ValueTypeLONG  etc.
+        private IntPtr _parameterValue; // A pointer to the parameter values
 
         ~EncoderParameter()
         {
@@ -24,14 +24,8 @@ namespace System.Drawing.Imaging
         /// </summary>
         public Encoder Encoder
         {
-            get
-            {
-                return new Encoder(_parameterGuid);
-            }
-            set
-            {
-                _parameterGuid = value.Guid;
-            }
+            get { return new Encoder(_parameterGuid); }
+            set { _parameterGuid = value.Guid; }
         }
 
         /// <summary>
@@ -39,10 +33,7 @@ namespace System.Drawing.Imaging
         /// </summary>
         public EncoderParameterValueType Type
         {
-            get
-            {
-                return _parameterValueType;
-            }
+            get { return _parameterValueType; }
         }
 
         /// <summary>
@@ -50,10 +41,7 @@ namespace System.Drawing.Imaging
         /// </summary>
         public EncoderParameterValueType ValueType
         {
-            get
-            {
-                return _parameterValueType;
-            }
+            get { return _parameterValueType; }
         }
 
         /// <summary>
@@ -61,10 +49,7 @@ namespace System.Drawing.Imaging
         /// </summary>
         public int NumberOfValues
         {
-            get
-            {
-                return _numberOfValues;
-            }
+            get { return _numberOfValues; }
         }
 
         public void Dispose()
@@ -158,9 +143,13 @@ namespace System.Drawing.Imaging
             GC.KeepAlive(this);
         }
 
-        public EncoderParameter(Encoder encoder,
-                                int numerator1, int demoninator1,
-                                int numerator2, int demoninator2)
+        public EncoderParameter(
+            Encoder encoder,
+            int numerator1,
+            int demoninator1,
+            int numerator2,
+            int demoninator2
+        )
         {
             _parameterGuid = encoder.Guid;
 
@@ -283,15 +272,21 @@ namespace System.Drawing.Imaging
             GC.KeepAlive(this);
         }
 
-        public EncoderParameter(Encoder encoder,
-                                int[] numerator1, int[] denominator1,
-                                int[] numerator2, int[] denominator2)
+        public EncoderParameter(
+            Encoder encoder,
+            int[] numerator1,
+            int[] denominator1,
+            int[] numerator2,
+            int[] denominator2
+        )
         {
             _parameterGuid = encoder.Guid;
 
-            if (numerator1.Length != denominator1.Length ||
-                numerator1.Length != denominator2.Length ||
-                denominator1.Length != denominator2.Length)
+            if (
+                numerator1.Length != denominator1.Length
+                || numerator1.Length != denominator2.Length
+                || denominator1.Length != denominator2.Length
+            )
                 throw Gdip.StatusException(Gdip.InvalidParameter);
 
             _parameterValueType = EncoderParameterValueType.ValueTypeRationalRange;
@@ -308,7 +303,9 @@ namespace System.Drawing.Imaging
             GC.KeepAlive(this);
         }
 
-        [Obsolete("This constructor has been deprecated. Use EncoderParameter(Encoder encoder, int numberValues, EncoderParameterValueType type, IntPtr value) instead.")]
+        [Obsolete(
+            "This constructor has been deprecated. Use EncoderParameter(Encoder encoder, int numberValues, EncoderParameterValueType type, IntPtr value) instead."
+        )]
         public EncoderParameter(Encoder encoder, int NumberOfValues, int Type, int Value)
         {
             int size;
@@ -343,7 +340,9 @@ namespace System.Drawing.Imaging
 
             _parameterValue = Marshal.AllocHGlobal(bytes);
 
-            new ReadOnlySpan<byte>((void*)Value, bytes).CopyTo(new Span<byte>((void*)_parameterValue, bytes));
+            new ReadOnlySpan<byte>((void*)Value, bytes).CopyTo(
+                new Span<byte>((void*)_parameterValue, bytes)
+            );
 
             _parameterValueType = (EncoderParameterValueType)Type;
             _numberOfValues = NumberOfValues;
@@ -351,7 +350,12 @@ namespace System.Drawing.Imaging
             GC.KeepAlive(this);
         }
 
-        public EncoderParameter(Encoder encoder, int numberValues, EncoderParameterValueType type, IntPtr value)
+        public EncoderParameter(
+            Encoder encoder,
+            int numberValues,
+            EncoderParameterValueType type,
+            IntPtr value
+        )
         {
             int size;
 
@@ -388,7 +392,9 @@ namespace System.Drawing.Imaging
 
             _parameterValue = Marshal.AllocHGlobal(bytes);
 
-            new ReadOnlySpan<byte>((void*)value, bytes).CopyTo(new Span<byte>((void*)_parameterValue, bytes));
+            new ReadOnlySpan<byte>((void*)value, bytes).CopyTo(
+                new Span<byte>((void*)_parameterValue, bytes)
+            );
 
             _parameterValueType = type;
             _numberOfValues = numberValues;

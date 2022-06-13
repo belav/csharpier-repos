@@ -21,55 +21,100 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAutoPropertyToFu
 {
     public partial class ConvertAutoPropertyToFullPropertyTests : AbstractCSharpCodeActionTest
     {
-        private OptionsCollection PreferExpressionBodiedAccessorsWhenPossible
-            => new OptionsCollection(GetLanguage()) { { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement } };
-
-        private OptionsCollection PreferExpressionBodiedAccessorsWhenOnSingleLine
-            => new OptionsCollection(GetLanguage()) { { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement } };
-
-        private OptionsCollection DoNotPreferExpressionBodiedAccessors
-            => new OptionsCollection(GetLanguage()) { { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement } };
-
-        private OptionsCollection DoNotPreferExpressionBodiedAccessorsAndPropertyOpenBraceOnSameLine
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection PreferExpressionBodiedAccessorsWhenPossible =>
+            new OptionsCollection(GetLanguage())
             {
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                }
+            };
+
+        private OptionsCollection PreferExpressionBodiedAccessorsWhenOnSingleLine =>
+            new OptionsCollection(GetLanguage())
+            {
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement
+                }
+            };
+
+        private OptionsCollection DoNotPreferExpressionBodiedAccessors =>
+            new OptionsCollection(GetLanguage())
+            {
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                }
+            };
+
+        private OptionsCollection DoNotPreferExpressionBodiedAccessorsAndPropertyOpenBraceOnSameLine =>
+            new OptionsCollection(GetLanguage())
+            {
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
                 { CSharpFormattingOptions2.NewLinesForBracesInProperties, false },
             };
 
-        private OptionsCollection DoNotPreferExpressionBodiedAccessorsAndAccessorOpenBraceOnSameLine
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection DoNotPreferExpressionBodiedAccessorsAndAccessorOpenBraceOnSameLine =>
+            new OptionsCollection(GetLanguage())
             {
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
                 { CSharpFormattingOptions2.NewLinesForBracesInAccessors, false },
             };
 
-        private OptionsCollection PreferExpressionBodiesOnAccessorsAndMethods
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection PreferExpressionBodiesOnAccessorsAndMethods =>
+            new OptionsCollection(GetLanguage())
             {
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                },
             };
 
-        private OptionsCollection UseCustomFieldName
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection UseCustomFieldName =>
+            new OptionsCollection(GetLanguage())
             {
                 { NamingStyleOptions.NamingPreferences, CreateCustomFieldNamingStylePreference() },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
-        private OptionsCollection UseUnderscorePrefixedFieldName
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection UseUnderscorePrefixedFieldName =>
+            new OptionsCollection(GetLanguage())
             {
-                { NamingStyleOptions.NamingPreferences, CreateUnderscorePrefixedFieldNamingStylePreference() },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    CreateUnderscorePrefixedFieldNamingStylePreference()
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
-        private OptionsCollection UseCustomStaticFieldName
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection UseCustomStaticFieldName =>
+            new OptionsCollection(GetLanguage())
             {
-                { NamingStyleOptions.NamingPreferences, CreateCustomStaticFieldNamingStylePreference() },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    NamingStyleOptions.NamingPreferences,
+                    CreateCustomStaticFieldNamingStylePreference()
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
         private static NamingStylePreferences CreateCustomFieldNamingStylePreference()
@@ -77,9 +122,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAutoPropertyToFu
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Field)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Field)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -87,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAutoPropertyToFu
                 name: "CustomFieldTest",
                 prefix: "testing",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -99,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAutoPropertyToFu
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -111,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAutoPropertyToFu
                 "Name",
                 ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Field)),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -119,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAutoPropertyToFu
                 name: "CustomFieldTest",
                 prefix: "_",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -131,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAutoPropertyToFu
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }
@@ -143,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAutoPropertyToFu
                 "Name",
                 ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Field)),
                 accessibilityList: default,
-                ImmutableArray.Create(new ModifierKind(DeclarationModifiers.Static)));
+                ImmutableArray.Create(new ModifierKind(DeclarationModifiers.Static))
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -151,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAutoPropertyToFu
                 name: "CustomStaticFieldTest",
                 prefix: "staticfieldtest",
                 suffix: "",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
@@ -163,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAutoPropertyToFu
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             return info;
         }

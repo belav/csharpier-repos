@@ -15,7 +15,7 @@ namespace System.CommandLine.Help
         public VersionOption(CommandLineBuilder builder) : base("--version")
         {
             _builder = builder;
-            
+
             DisallowBinding = true;
 
             AddValidators();
@@ -34,11 +34,15 @@ namespace System.CommandLine.Help
         {
             AddValidator(result =>
             {
-                if (result.Parent is { } parent &&
-                    parent.Children.Where(r => r.Symbol is not VersionOption)
-                          .Any(IsNotImplicit))
+                if (
+                    result.Parent is { } parent
+                    && parent.Children.Where(r => r.Symbol is not VersionOption).Any(IsNotImplicit)
+                )
                 {
-                    result.ErrorMessage =  result.LocalizationResources.VersionOptionCannotBeCombinedWithOtherArguments(result.Token?.Value ?? result.Symbol.Name);
+                    result.ErrorMessage =
+                        result.LocalizationResources.VersionOptionCannotBeCombinedWithOtherArguments(
+                            result.Token?.Value ?? result.Symbol.Name
+                        );
                 }
             });
         }

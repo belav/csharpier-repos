@@ -198,8 +198,7 @@ namespace System.Formats.Asn1
                 unencoded >>= 7;
                 dest[idx] = curByte;
                 idx++;
-            }
-            while (unencoded != BigInteger.Zero);
+            } while (unencoded != BigInteger.Zero);
 
             Reverse(dest.Slice(0, idx));
             return idx;

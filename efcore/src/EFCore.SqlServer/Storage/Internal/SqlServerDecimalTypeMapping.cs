@@ -24,16 +24,16 @@ public class SqlServerDecimalTypeMapping : DecimalTypeMapping
         DbType? dbType = System.Data.DbType.Decimal,
         int? precision = null,
         int? scale = null,
-        StoreTypePostfix storeTypePostfix = StoreTypePostfix.PrecisionAndScale)
+        StoreTypePostfix storeTypePostfix = StoreTypePostfix.PrecisionAndScale
+    )
         : base(
             new RelationalTypeMappingParameters(
-                    new CoreTypeMappingParameters(typeof(decimal)),
-                    storeType,
-                    storeTypePostfix,
-                    dbType)
-                .WithPrecisionAndScale(precision, scale))
-    {
-    }
+                new CoreTypeMappingParameters(typeof(decimal)),
+                storeType,
+                storeTypePostfix,
+                dbType
+            ).WithPrecisionAndScale(precision, scale)
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,9 +42,7 @@ public class SqlServerDecimalTypeMapping : DecimalTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerDecimalTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,8 +50,8 @@ public class SqlServerDecimalTypeMapping : DecimalTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqlServerDecimalTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqlServerDecimalTypeMapping(parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -65,8 +63,7 @@ public class SqlServerDecimalTypeMapping : DecimalTypeMapping
     {
         base.ConfigureParameter(parameter);
 
-        if (Size.HasValue
-            && Size.Value != -1)
+        if (Size.HasValue && Size.Value != -1)
         {
             parameter.Size = Size.Value;
         }

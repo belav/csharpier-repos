@@ -28,11 +28,11 @@ namespace Microsoft.CodeAnalysis.Completion
         public TextSpan DefaultSpan { get; }
 
         /// <summary>
-        /// The span of the syntax element at the caret position when the <see cref="CompletionList"/> 
+        /// The span of the syntax element at the caret position when the <see cref="CompletionList"/>
         /// was created.
-        /// 
-        /// The span identifies the text in the document that is used to filter the initial list 
-        /// presented to the user, and typically represents the region of the document that will 
+        ///
+        /// The span identifies the text in the document that is used to filter the initial list
+        /// presented to the user, and typically represents the region of the document that will
         /// be changed if this item is committed.
         /// </summary>
         public TextSpan Span { get; }
@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<CompletionItem> items,
             CompletionRules? rules,
             CompletionItem? suggestionModeItem,
-            bool isExclusive)
+            bool isExclusive
+        )
         {
             Span = defaultSpan;
 
@@ -83,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Completion
             TextSpan defaultSpan,
             ImmutableArray<CompletionItem> items,
             CompletionRules? rules = null,
-            CompletionItem? suggestionModeItem = null)
+            CompletionItem? suggestionModeItem = null
+        )
         {
             return Create(defaultSpan, items, rules, suggestionModeItem, isExclusive: false);
         }
@@ -93,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Completion
             ImmutableArray<CompletionItem> items,
             CompletionRules? rules,
             CompletionItem? suggestionModeItem,
-            bool isExclusive)
+            bool isExclusive
+        )
         {
             return new CompletionList(defaultSpan, items, rules, suggestionModeItem, isExclusive);
         }
@@ -102,17 +105,22 @@ namespace Microsoft.CodeAnalysis.Completion
             Optional<TextSpan> span = default,
             Optional<ImmutableArray<CompletionItem>> items = default,
             Optional<CompletionRules> rules = default,
-            Optional<CompletionItem> suggestionModeItem = default)
+            Optional<CompletionItem> suggestionModeItem = default
+        )
         {
             var newSpan = span.HasValue ? span.Value : Span;
             var newItems = items.HasValue ? items.Value : Items;
             var newRules = rules.HasValue ? rules.Value : Rules;
-            var newSuggestionModeItem = suggestionModeItem.HasValue ? suggestionModeItem.Value : SuggestionModeItem;
+            var newSuggestionModeItem = suggestionModeItem.HasValue
+                ? suggestionModeItem.Value
+                : SuggestionModeItem;
 
-            if (newSpan == Span &&
-                newItems == Items &&
-                newRules == Rules &&
-                newSuggestionModeItem == SuggestionModeItem)
+            if (
+                newSpan == Span
+                && newItems == Items
+                && newRules == Rules
+                && newSuggestionModeItem == SuggestionModeItem
+            )
             {
                 return this;
             }
@@ -126,48 +134,47 @@ namespace Microsoft.CodeAnalysis.Completion
         /// Creates a copy of this <see cref="CompletionList"/> with the <see cref="DefaultSpan"/> property changed.
         /// </summary>
         [Obsolete("Not used anymore.  Use WithSpan instead.", error: true)]
-        public CompletionList WithDefaultSpan(TextSpan span)
-            => With(span: span);
+        public CompletionList WithDefaultSpan(TextSpan span) => With(span: span);
 
-        public CompletionList WithSpan(TextSpan span)
-            => With(span: span);
+        public CompletionList WithSpan(TextSpan span) => With(span: span);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionList"/> with the <see cref="Items"/> property changed.
         /// </summary>
-        public CompletionList WithItems(ImmutableArray<CompletionItem> items)
-            => With(items: items);
+        public CompletionList WithItems(ImmutableArray<CompletionItem> items) => With(items: items);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionList"/> with the <see cref="Rules"/> property changed.
         /// </summary>
-        public CompletionList WithRules(CompletionRules rules)
-            => With(rules: rules);
+        public CompletionList WithRules(CompletionRules rules) => With(rules: rules);
 
         /// <summary>
         /// Creates a copy of this <see cref="CompletionList"/> with the <see cref="SuggestionModeItem"/> property changed.
         /// </summary>
-        public CompletionList WithSuggestionModeItem(CompletionItem suggestionModeItem)
-            => With(suggestionModeItem: suggestionModeItem);
+        public CompletionList WithSuggestionModeItem(CompletionItem suggestionModeItem) =>
+            With(suggestionModeItem: suggestionModeItem);
 
         /// <summary>
         /// The default <see cref="CompletionList"/> returned when no items are found to populate the list.
         /// </summary>
-        public static readonly CompletionList Empty = new(
-            default, default, CompletionRules.Default,
-            suggestionModeItem: null, isExclusive: false);
+        public static readonly CompletionList Empty =
+            new(
+                default,
+                default,
+                CompletionRules.Default,
+                suggestionModeItem: null,
+                isExclusive: false
+            );
 
         internal bool IsEmpty => Items.IsEmpty && SuggestionModeItem is null;
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly CompletionList _completionList;
 
-            public TestAccessor(CompletionList completionList)
-                => _completionList = completionList;
+            public TestAccessor(CompletionList completionList) => _completionList = completionList;
 
             internal bool IsExclusive => _completionList._isExclusive;
         }

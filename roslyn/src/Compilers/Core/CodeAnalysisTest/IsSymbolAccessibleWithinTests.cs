@@ -20,13 +20,24 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var csharpTree = CSharpSyntaxTree.ParseText("class A { }");
             var vbTree = VisualBasicSyntaxTree.ParseText(
-@"Class A
+                @"Class A
 End Class
-");
-            var csc = CSharpCompilation.Create("CS", new[] { csharpTree }, new MetadataReference[] { TestBase.MscorlibRef }) as Compilation;
+"
+            );
+            var csc =
+                CSharpCompilation.Create(
+                    "CS",
+                    new[] { csharpTree },
+                    new MetadataReference[] { TestBase.MscorlibRef }
+                ) as Compilation;
             var Ac = csc.GlobalNamespace.GetMembers("A").First() as INamedTypeSymbol;
 
-            var vbc = VisualBasicCompilation.Create("VB", new[] { vbTree }, new MetadataReference[] { TestBase.MscorlibRef }) as Compilation;
+            var vbc =
+                VisualBasicCompilation.Create(
+                    "VB",
+                    new[] { vbTree },
+                    new MetadataReference[] { TestBase.MscorlibRef }
+                ) as Compilation;
             var Av = vbc.GlobalNamespace.GetMembers("A").First() as INamedTypeSymbol;
 
             Assert.Throws<ArgumentException>(() => csc.IsSymbolAccessibleWithin(Av, Av));

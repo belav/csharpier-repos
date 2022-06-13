@@ -9,8 +9,13 @@ namespace System.Runtime.InteropServices.Marshalling
     /// Marshaller for ANSI strings
     /// </summary>
     [CLSCompliant(false)]
-    [CustomTypeMarshaller(typeof(string), BufferSize = 0x100,
-        Features = CustomTypeMarshallerFeatures.UnmanagedResources | CustomTypeMarshallerFeatures.TwoStageMarshalling | CustomTypeMarshallerFeatures.CallerAllocatedBuffer)]
+    [CustomTypeMarshaller(
+        typeof(string),
+        BufferSize = 0x100,
+        Features = CustomTypeMarshallerFeatures.UnmanagedResources
+            | CustomTypeMarshallerFeatures.TwoStageMarshalling
+            | CustomTypeMarshallerFeatures.CallerAllocatedBuffer
+    )]
     public unsafe ref struct AnsiStringMarshaller
     {
         private byte* _nativeValue;
@@ -20,9 +25,7 @@ namespace System.Runtime.InteropServices.Marshalling
         /// Initializes a new instance of the <see cref="AnsiStringMarshaller"/>.
         /// </summary>
         /// <param name="str">The string to marshal.</param>
-        public AnsiStringMarshaller(string? str)
-            : this(str, default)
-        { }
+        public AnsiStringMarshaller(string? str) : this(str, default) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AnsiStringMarshaller"/>.
@@ -52,7 +55,10 @@ namespace System.Runtime.InteropServices.Marshalling
                 int exactByteCount = Marshal.GetAnsiStringByteCount(str); // Includes null terminator
                 if (exactByteCount > buffer.Length)
                 {
-                    buffer = new Span<byte>((byte*)Marshal.AllocCoTaskMem(exactByteCount), exactByteCount);
+                    buffer = new Span<byte>(
+                        (byte*)Marshal.AllocCoTaskMem(exactByteCount),
+                        exactByteCount
+                    );
                     _allocated = true;
                 }
             }

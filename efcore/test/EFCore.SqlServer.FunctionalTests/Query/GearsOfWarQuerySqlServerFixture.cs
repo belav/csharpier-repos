@@ -7,8 +7,7 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class GearsOfWarQuerySqlServerFixture : GearsOfWarQueryRelationalFixture
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
@@ -16,21 +15,19 @@ public class GearsOfWarQuerySqlServerFixture : GearsOfWarQueryRelationalFixture
 
         modelBuilder.Entity<City>().Property(g => g.Location).HasColumnType("varchar(100)");
 
-        modelBuilder.Entity<Mission>(
-            b =>
-            {
-                // Full-text binary search
-                b.Property<byte[]>("BriefingDocument");
-                b.Property<string>("BriefingDocumentFileExtension").HasColumnType("nvarchar(16)");
-            });
+        modelBuilder.Entity<Mission>(b =>
+        {
+            // Full-text binary search
+            b.Property<byte[]>("BriefingDocument");
+            b.Property<string>("BriefingDocumentFileExtension").HasColumnType("nvarchar(16)");
+        });
 
         // No support yet for DateOnly/TimeOnly (#24507)
-        modelBuilder.Entity<Mission>(
-            b =>
-            {
-                b.Ignore(m => m.Date);
-                b.Ignore(m => m.Time);
-            });
+        modelBuilder.Entity<Mission>(b =>
+        {
+            b.Ignore(m => m.Date);
+            b.Ignore(m => m.Time);
+        });
     }
 
     protected override void Seed(GearsOfWarContext context)
@@ -63,6 +60,7 @@ BEGIN
     CREATE FULLTEXT INDEX ON Missions (BriefingDocument TYPE COLUMN BriefingDocumentFileExtension) KEY INDEX PK_Missions;
 
     WAITFOR DELAY '00:00:03';
-END");
+END"
+        );
     }
 }

@@ -13,25 +13,27 @@ namespace HostingPlayground
 {
     class Program
     {
-        static async Task Main(string[] args) => await BuildCommandLine()
-            .UseHost(_ => Host.CreateDefaultBuilder(),
-                host =>
-                {
-                    host.ConfigureServices(services =>
+        static async Task Main(string[] args) =>
+            await BuildCommandLine()
+                .UseHost(
+                    _ => Host.CreateDefaultBuilder(),
+                    host =>
                     {
-                        services.AddSingleton<IGreeter, Greeter>();
-                    });
-                })
-            .UseDefaults()
-            .Build()
-            .InvokeAsync(args);
+                        host.ConfigureServices(services =>
+                        {
+                            services.AddSingleton<IGreeter, Greeter>();
+                        });
+                    }
+                )
+                .UseDefaults()
+                .Build()
+                .InvokeAsync(args);
 
         private static CommandLineBuilder BuildCommandLine()
         {
-            var root = new RootCommand(@"$ dotnet run --name 'Joe'"){
-                new Option<string>("--name"){
-                    IsRequired = true
-                }
+            var root = new RootCommand(@"$ dotnet run --name 'Joe'")
+            {
+                new Option<string>("--name") { IsRequired = true }
             };
             root.Handler = CommandHandler.Create<GreeterOptions, IHost>(Run);
             return new CommandLineBuilder(root);

@@ -5,7 +5,6 @@
 using System.Runtime.InteropServices;
 using System;
 
-
 namespace NStruct
 {
     public static class FinalizeCount
@@ -27,7 +26,7 @@ namespace NStruct
         internal char[] c; //2KB
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]
-        internal short[] s;//2KB
+        internal short[] s; //2KB
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]
         internal int[] i; //4KB

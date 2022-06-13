@@ -19,11 +19,15 @@ namespace ILCompiler.DependencyAnalysis
 
         public ThreadStaticsNode(MetadataType type, NodeFactory factory)
         {
-            Debug.Assert(factory.Target.Abi == TargetAbi.NativeAot || factory.Target.Abi == TargetAbi.CppCodegen);
+            Debug.Assert(
+                factory.Target.Abi == TargetAbi.NativeAot
+                    || factory.Target.Abi == TargetAbi.CppCodegen
+            );
             _type = type;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         protected override void OnMarked(NodeFactory factory)
         {
@@ -38,7 +42,7 @@ namespace ILCompiler.DependencyAnalysis
         int ISymbolNode.Offset => 0;
 
         int ISymbolDefinitionNode.Offset => OffsetFromBeginningOfArray;
- 
+
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append(GetMangledName(_type, nameMangler));
@@ -54,16 +58,26 @@ namespace ILCompiler.DependencyAnalysis
         {
             DependencyList result = new DependencyList();
 
-            result.Add(new DependencyListEntry(GetGCStaticEETypeNode(factory), "ThreadStatic MethodTable"));
+            result.Add(
+                new DependencyListEntry(GetGCStaticEETypeNode(factory), "ThreadStatic MethodTable")
+            );
 
             if (factory.PreinitializationManager.HasEagerStaticConstructor(_type))
             {
-                result.Add(new DependencyListEntry(factory.EagerCctorIndirection(_type.GetStaticConstructor()), "Eager .cctor"));
+                result.Add(
+                    new DependencyListEntry(
+                        factory.EagerCctorIndirection(_type.GetStaticConstructor()),
+                        "Eager .cctor"
+                    )
+                );
             }
 
             if (_type.Module.GetGlobalModuleType().GetStaticConstructor() is MethodDesc moduleCctor)
             {
-                result.Add(factory.MethodEntrypoint(moduleCctor), "Static base in a module with initializer");
+                result.Add(
+                    factory.MethodEntrypoint(moduleCctor),
+                    "Static base in a module with initializer"
+                );
             }
 
             EETypeNode.AddDependenciesForStaticsNode(factory, _type, ref result);
@@ -72,7 +86,11 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool StaticDependenciesAreComputed => true;
 
-        public override void EncodeData(ref ObjectDataBuilder builder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder builder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             // At runtime, an instance of the GCStaticEEType will be created and a GCHandle to it
             // will be written in this location.

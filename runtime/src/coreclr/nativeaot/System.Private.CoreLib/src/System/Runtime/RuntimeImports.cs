@@ -37,7 +37,11 @@ namespace System.Runtime
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpInitiateThreadAbort")]
-        internal static extern void RhpInitiateThreadAbort(IntPtr thread, Exception exception, bool doRudeAbort);
+        internal static extern void RhpInitiateThreadAbort(
+            IntPtr thread,
+            Exception exception,
+            bool doRudeAbort
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpCancelThreadAbort")]
@@ -149,7 +153,10 @@ namespace System.Runtime
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhRegisterForFullGCNotification")]
-        internal static extern bool RhRegisterForFullGCNotification(int maxGenerationThreshold, int largeObjectHeapThreshold);
+        internal static extern bool RhRegisterForFullGCNotification(
+            int maxGenerationThreshold,
+            int largeObjectHeapThreshold
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhWaitForFullGCApproach")]
@@ -165,7 +172,12 @@ namespace System.Runtime
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhStartNoGCRegion")]
-        internal static extern int RhStartNoGCRegion(long totalSize, bool hasLohSize, long lohSize, bool disallowFullBlockingGC);
+        internal static extern int RhStartNoGCRegion(
+            long totalSize,
+            bool hasLohSize,
+            long lohSize,
+            bool disallowFullBlockingGC
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhEndNoGCRegion")]
@@ -196,10 +208,19 @@ namespace System.Runtime
         internal static extern void RhGetMemoryInfo(ref byte info, GCKind kind);
 
         [LibraryImport(RuntimeLibrary)]
-        internal static unsafe partial void RhAllocateNewArray(IntPtr pArrayEEType, uint numElements, uint flags, void* pResult);
+        internal static unsafe partial void RhAllocateNewArray(
+            IntPtr pArrayEEType,
+            uint numElements,
+            uint flags,
+            void* pResult
+        );
 
         [LibraryImport(RuntimeLibrary)]
-        internal static unsafe partial void RhAllocateNewObject(IntPtr pEEType, uint flags, void* pResult);
+        internal static unsafe partial void RhAllocateNewObject(
+            IntPtr pEEType,
+            uint flags,
+            void* pResult
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhGetTotalPauseDuration")]
@@ -285,17 +306,25 @@ namespace System.Runtime
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhTypeCast_AreTypesEquivalent")]
-        private static unsafe extern bool AreTypesEquivalent(MethodTable* pType1, MethodTable* pType2);
+        private static unsafe extern bool AreTypesEquivalent(
+            MethodTable* pType1,
+            MethodTable* pType2
+        );
 
-        internal static unsafe bool AreTypesEquivalent(EETypePtr pType1, EETypePtr pType2)
-            => AreTypesEquivalent(pType1.ToPointer(), pType2.ToPointer());
+        internal static unsafe bool AreTypesEquivalent(EETypePtr pType1, EETypePtr pType2) =>
+            AreTypesEquivalent(pType1.ToPointer(), pType2.ToPointer());
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhTypeCast_AreTypesAssignable")]
-        private static unsafe extern bool AreTypesAssignable(MethodTable* pSourceType, MethodTable* pTargetType);
+        private static unsafe extern bool AreTypesAssignable(
+            MethodTable* pSourceType,
+            MethodTable* pTargetType
+        );
 
-        internal static unsafe bool AreTypesAssignable(EETypePtr pSourceType, EETypePtr pTargetType)
-            => AreTypesAssignable(pSourceType.ToPointer(), pTargetType.ToPointer());
+        internal static unsafe bool AreTypesAssignable(
+            EETypePtr pSourceType,
+            EETypePtr pTargetType
+        ) => AreTypesAssignable(pSourceType.ToPointer(), pTargetType.ToPointer());
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhTypeCast_CheckArrayStore")]
@@ -305,19 +334,22 @@ namespace System.Runtime
         [RuntimeImport(RuntimeLibrary, "RhTypeCast_IsInstanceOf")]
         private static unsafe extern object IsInstanceOf(MethodTable* pTargetType, object obj);
 
-        internal static unsafe object IsInstanceOf(EETypePtr pTargetType, object obj)
-            => IsInstanceOf(pTargetType.ToPointer(), obj);
+        internal static unsafe object IsInstanceOf(EETypePtr pTargetType, object obj) =>
+            IsInstanceOf(pTargetType.ToPointer(), obj);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhTypeCast_IsInstanceOfClass")]
-        private  static unsafe extern object IsInstanceOfClass(MethodTable* pTargetType, object obj);
+        private static unsafe extern object IsInstanceOfClass(MethodTable* pTargetType, object obj);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhTypeCast_IsInstanceOfInterface")]
-        internal static unsafe extern object IsInstanceOfInterface(MethodTable* pTargetType, object obj);
+        internal static unsafe extern object IsInstanceOfInterface(
+            MethodTable* pTargetType,
+            object obj
+        );
 
-        internal static unsafe object IsInstanceOfInterface(EETypePtr pTargetType, object obj)
-            => IsInstanceOfInterface(pTargetType.ToPointer(), obj);
+        internal static unsafe object IsInstanceOfInterface(EETypePtr pTargetType, object obj) =>
+            IsInstanceOfInterface(pTargetType.ToPointer(), obj);
 
         //
         // calls to runtime for allocation
@@ -329,43 +361,47 @@ namespace System.Runtime
         [RuntimeImport(RuntimeLibrary, "RhBoxAny")]
         private static unsafe extern object RhBoxAny(ref byte pData, MethodTable* pEEType);
 
-        internal static unsafe object RhBoxAny(ref byte pData, EETypePtr pEEType)
-            => RhBoxAny(ref pData, pEEType.ToPointer());
+        internal static unsafe object RhBoxAny(ref byte pData, EETypePtr pEEType) =>
+            RhBoxAny(ref pData, pEEType.ToPointer());
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhNewObject")]
         private static unsafe extern object RhNewObject(MethodTable* pEEType);
 
-        internal static unsafe object RhNewObject(EETypePtr pEEType)
-            => RhNewObject(pEEType.ToPointer());
+        internal static unsafe object RhNewObject(EETypePtr pEEType) =>
+            RhNewObject(pEEType.ToPointer());
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhNewArray")]
         private static unsafe extern Array RhNewArray(MethodTable* pEEType, int length);
 
-        internal static unsafe Array RhNewArray(EETypePtr pEEType, int length)
-            => RhNewArray(pEEType.ToPointer(), length);
+        internal static unsafe Array RhNewArray(EETypePtr pEEType, int length) =>
+            RhNewArray(pEEType.ToPointer(), length);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhNewString")]
         internal static unsafe extern string RhNewString(MethodTable* pEEType, int length);
 
-        internal static unsafe string RhNewString(EETypePtr pEEType, int length)
-            => RhNewString(pEEType.ToPointer(), length);
+        internal static unsafe string RhNewString(EETypePtr pEEType, int length) =>
+            RhNewString(pEEType.ToPointer(), length);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhBox")]
         private static extern unsafe object RhBox(MethodTable* pEEType, ref byte data);
 
-        internal static unsafe object RhBox(EETypePtr pEEType, ref byte data)
-            => RhBox(pEEType.ToPointer(), ref data);
+        internal static unsafe object RhBox(EETypePtr pEEType, ref byte data) =>
+            RhBox(pEEType.ToPointer(), ref data);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhUnbox")]
-        private static extern unsafe void RhUnbox(object? obj, ref byte data, MethodTable* pUnboxToEEType);
+        private static extern unsafe void RhUnbox(
+            object? obj,
+            ref byte data,
+            MethodTable* pUnboxToEEType
+        );
 
-        internal static unsafe void RhUnbox(object? obj, ref byte data, EETypePtr pUnboxToEEType)
-            => RhUnbox(obj, ref data, pUnboxToEEType.ToPointer());
+        internal static unsafe void RhUnbox(object? obj, ref byte data, EETypePtr pUnboxToEEType) =>
+            RhUnbox(obj, ref data, pUnboxToEEType.ToPointer());
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhMemberwiseClone")]
@@ -381,7 +417,11 @@ namespace System.Runtime
         [LibraryImport(RuntimeLibrary, EntryPoint = "RhYield")]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
         private static partial int _RhYield();
-        internal static bool RhYield() { return (_RhYield() != 0); }
+
+        internal static bool RhYield()
+        {
+            return (_RhYield() != 0);
+        }
 
         [LibraryImport(RuntimeLibrary, EntryPoint = "RhFlushProcessWriteBuffers")]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
@@ -391,14 +431,24 @@ namespace System.Runtime
         // Wait for any object to be signalled, in a way that's compatible with the CLR's behavior in an STA.
         // ExactSpelling = 'true' to force MCG to resolve it to default
         [LibraryImport(RuntimeLibrary)]
-        private static unsafe partial int RhCompatibleReentrantWaitAny(int alertable, int timeout, int count, IntPtr* handles);
+        private static unsafe partial int RhCompatibleReentrantWaitAny(
+            int alertable,
+            int timeout,
+            int count,
+            IntPtr* handles
+        );
 
         // Temporary workaround to unblock shareable assembly bring-up - without shared interop,
         // we must prevent RhCompatibleReentrantWaitAny from using marshaling because it would
         // rewrite System.Private.CoreLib to reference the non-shareable interop assembly. With shared interop,
         // we will be able to remove this helper method and change the DllImport above
         // to directly accept a boolean parameter and use the SetLastError = true modifier.
-        internal static unsafe int RhCompatibleReentrantWaitAny(bool alertable, int timeout, int count, IntPtr* handles)
+        internal static unsafe int RhCompatibleReentrantWaitAny(
+            bool alertable,
+            int timeout,
+            int count,
+            IntPtr* handles
+        )
         {
             return RhCompatibleReentrantWaitAny(alertable ? 1 : 0, timeout, count, handles);
         }
@@ -414,11 +464,18 @@ namespace System.Runtime
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhNewInterfaceDispatchCell")]
-        internal static extern unsafe IntPtr RhNewInterfaceDispatchCell(EETypePtr pEEType, int slotNumber);
+        internal static extern unsafe IntPtr RhNewInterfaceDispatchCell(
+            EETypePtr pEEType,
+            int slotNumber
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhResolveDispatch")]
-        internal static extern IntPtr RhResolveDispatch(object pObject, EETypePtr pInterfaceType, ushort slot);
+        internal static extern IntPtr RhResolveDispatch(
+            object pObject,
+            EETypePtr pInterfaceType,
+            ushort slot
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpResolveInterfaceMethod")]
@@ -438,11 +495,21 @@ namespace System.Runtime
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhSetThunkData")]
-        internal static extern void RhSetThunkData(object thunksHeap, IntPtr thunkAddress, IntPtr context, IntPtr target);
+        internal static extern void RhSetThunkData(
+            object thunksHeap,
+            IntPtr thunkAddress,
+            IntPtr context,
+            IntPtr target
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhTryGetThunkData")]
-        internal static extern bool RhTryGetThunkData(object thunksHeap, IntPtr thunkAddress, out IntPtr context, out IntPtr target);
+        internal static extern bool RhTryGetThunkData(
+            object thunksHeap,
+            IntPtr thunkAddress,
+            out IntPtr context,
+            out IntPtr target
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhGetThunkSize")]
@@ -450,15 +517,26 @@ namespace System.Runtime
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhGetThreadLocalStorageForDynamicType")]
-        internal static extern IntPtr RhGetThreadLocalStorageForDynamicType(int index, int tlsStorageSize, int numTlsCells);
+        internal static extern IntPtr RhGetThreadLocalStorageForDynamicType(
+            int index,
+            int tlsStorageSize,
+            int numTlsCells
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhResolveDispatchOnType")]
-        internal static extern IntPtr RhResolveDispatchOnType(EETypePtr instanceType, EETypePtr interfaceType, ushort slot);
+        internal static extern IntPtr RhResolveDispatchOnType(
+            EETypePtr instanceType,
+            EETypePtr interfaceType,
+            ushort slot
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhGetRuntimeHelperForType")]
-        internal static extern unsafe IntPtr RhGetRuntimeHelperForType(EETypePtr pEEType, RuntimeHelperKind kind);
+        internal static extern unsafe IntPtr RhGetRuntimeHelperForType(
+            EETypePtr pEEType,
+            RuntimeHelperKind kind
+        );
 
         //
         // Support for GC and HandleTable callouts.
@@ -469,40 +547,67 @@ namespace System.Runtime
             StartCollection = 0, // Collection is about to begin
             EndCollection = 1, // Collection has completed
             AfterMarkPhase = 2, // All live objects are marked (not including ready for finalization objects),
-                                // no handles have been cleared
+            // no handles have been cleared
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhRegisterGcCallout")]
-        internal static extern bool RhRegisterGcCallout(GcRestrictedCalloutKind eKind, IntPtr pCalloutMethod);
+        internal static extern bool RhRegisterGcCallout(
+            GcRestrictedCalloutKind eKind,
+            IntPtr pCalloutMethod
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhUnregisterGcCallout")]
-        internal static extern void RhUnregisterGcCallout(GcRestrictedCalloutKind eKind, IntPtr pCalloutMethod);
+        internal static extern void RhUnregisterGcCallout(
+            GcRestrictedCalloutKind eKind,
+            IntPtr pCalloutMethod
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhRegisterRefCountedHandleCallback")]
-        internal static extern bool RhRegisterRefCountedHandleCallback(IntPtr pCalloutMethod, EETypePtr pTypeFilter);
+        internal static extern bool RhRegisterRefCountedHandleCallback(
+            IntPtr pCalloutMethod,
+            EETypePtr pTypeFilter
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhUnregisterRefCountedHandleCallback")]
-        internal static extern void RhUnregisterRefCountedHandleCallback(IntPtr pCalloutMethod, EETypePtr pTypeFilter);
+        internal static extern void RhUnregisterRefCountedHandleCallback(
+            IntPtr pCalloutMethod,
+            EETypePtr pTypeFilter
+        );
 
         //
         // Blob support
         //
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhFindBlob")]
-        private static extern unsafe bool RhFindBlob(ref TypeManagerHandle typeManagerHandle, uint blobId, byte** ppbBlob, uint* pcbBlob);
+        private static extern unsafe bool RhFindBlob(
+            ref TypeManagerHandle typeManagerHandle,
+            uint blobId,
+            byte** ppbBlob,
+            uint* pcbBlob
+        );
 
-        internal static unsafe bool RhFindBlob(TypeManagerHandle typeManagerHandle, uint blobId, byte** ppbBlob, uint* pcbBlob)
+        internal static unsafe bool RhFindBlob(
+            TypeManagerHandle typeManagerHandle,
+            uint blobId,
+            byte** ppbBlob,
+            uint* pcbBlob
+        )
         {
             return RhFindBlob(ref typeManagerHandle, blobId, ppbBlob, pcbBlob);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpCreateTypeManager")]
-        internal static extern unsafe TypeManagerHandle RhpCreateTypeManager(IntPtr osModule, IntPtr moduleHeader, IntPtr* pClasslibFunctions, int nClasslibFunctions);
+        internal static extern unsafe TypeManagerHandle RhpCreateTypeManager(
+            IntPtr osModule,
+            IntPtr moduleHeader,
+            IntPtr* pClasslibFunctions,
+            int nClasslibFunctions
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpRegisterOsModule")]
@@ -510,9 +615,17 @@ namespace System.Runtime
 
         [RuntimeImport(RuntimeLibrary, "RhpGetModuleSection")]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern IntPtr RhGetModuleSection(ref TypeManagerHandle module, ReadyToRunSectionType section, out int length);
+        private static extern IntPtr RhGetModuleSection(
+            ref TypeManagerHandle module,
+            ReadyToRunSectionType section,
+            out int length
+        );
 
-        internal static IntPtr RhGetModuleSection(TypeManagerHandle module, ReadyToRunSectionType section, out int length)
+        internal static IntPtr RhGetModuleSection(
+            TypeManagerHandle module,
+            ReadyToRunSectionType section,
+            out int length
+        )
         {
             return RhGetModuleSection(ref module, section, out length);
         }
@@ -539,7 +652,10 @@ namespace System.Runtime
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhSetThreadStaticStorageForModule")]
-        internal static unsafe extern bool RhSetThreadStaticStorageForModule(object[] storage, int moduleIndex);
+        internal static unsafe extern bool RhSetThreadStaticStorageForModule(
+            object[] storage,
+            int moduleIndex
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhCurrentNativeThreadId")]
@@ -571,14 +687,23 @@ namespace System.Runtime
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhGetModuleFileName")]
 #if TARGET_UNIX
-        internal static extern unsafe int RhGetModuleFileName(IntPtr moduleHandle, out byte* moduleName);
+        internal static extern unsafe int RhGetModuleFileName(
+            IntPtr moduleHandle,
+            out byte* moduleName
+        );
 #else
-        internal static extern unsafe int RhGetModuleFileName(IntPtr moduleHandle, out char* moduleName);
+        internal static extern unsafe int RhGetModuleFileName(
+            IntPtr moduleHandle,
+            out char* moduleName
+        );
 #endif
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhGetExceptionsForCurrentThread")]
-        internal static extern unsafe bool RhGetExceptionsForCurrentThread(Exception[] outputArray, out int writtenCountOut);
+        internal static extern unsafe bool RhGetExceptionsForCurrentThread(
+            Exception[] outputArray,
+            out int writtenCountOut
+        );
 
         // returns the previous value.
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -603,11 +728,16 @@ namespace System.Runtime
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhGetCurrentThreadStackBounds")]
-        internal static extern void RhGetCurrentThreadStackBounds(out IntPtr pStackLow, out IntPtr pStackHigh);
+        internal static extern void RhGetCurrentThreadStackBounds(
+            out IntPtr pStackLow,
+            out IntPtr pStackHigh
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhSetThreadExitCallback")]
-        internal static extern unsafe void RhSetThreadExitCallback(delegate* unmanaged<void> pCallback);
+        internal static extern unsafe void RhSetThreadExitCallback(
+            delegate* unmanaged<void> pCallback
+        );
 
         // Functions involved in thunks from managed to managed functions (Universal transition transitions
         // from an arbitrary method call into a defined function, and CallDescrWorker goes the other way.
@@ -629,7 +759,11 @@ namespace System.Runtime
         // heap memory
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhBulkMoveWithWriteBarrier")]
-        internal static extern unsafe void RhBulkMoveWithWriteBarrier(ref byte dmem, ref byte smem, nuint size);
+        internal static extern unsafe void RhBulkMoveWithWriteBarrier(
+            ref byte dmem,
+            ref byte smem,
+            nuint size
+        );
 
         // The GC conservative reporting descriptor is a special structure of data that the GC
         // parses to determine whether there are specific regions of memory that it should not
@@ -653,37 +787,63 @@ namespace System.Runtime
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhInitializeConservativeReportingRegion")]
-        internal static extern unsafe void RhInitializeConservativeReportingRegion(ConservativelyReportedRegionDesc* regionDesc, void* bufferBegin, int cbBuffer);
+        internal static extern unsafe void RhInitializeConservativeReportingRegion(
+            ConservativelyReportedRegionDesc* regionDesc,
+            void* bufferBegin,
+            int cbBuffer
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhDisableConservativeReportingRegion")]
-        internal static extern unsafe void RhDisableConservativeReportingRegion(ConservativelyReportedRegionDesc* regionDesc);
+        internal static extern unsafe void RhDisableConservativeReportingRegion(
+            ConservativelyReportedRegionDesc* regionDesc
+        );
 
         //
         // ETW helpers.
         //
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpEtwExceptionThrown")]
-        internal static extern unsafe void RhpEtwExceptionThrown(char* exceptionTypeName, char* exceptionMessage, IntPtr faultingIP, long hresult);
+        internal static extern unsafe void RhpEtwExceptionThrown(
+            char* exceptionTypeName,
+            char* exceptionMessage,
+            IntPtr faultingIP,
+            long hresult
+        );
 
         //
         // Interlocked helpers
         //
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpLockCmpXchg32")]
-        internal static extern int InterlockedCompareExchange(ref int location1, int value, int comparand);
+        internal static extern int InterlockedCompareExchange(
+            ref int location1,
+            int value,
+            int comparand
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpLockCmpXchg64")]
-        internal static extern long InterlockedCompareExchange(ref long location1, long value, long comparand);
+        internal static extern long InterlockedCompareExchange(
+            ref long location1,
+            long value,
+            long comparand
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpCheckedLockCmpXchg")]
-        internal static extern object InterlockedCompareExchange(ref object? location1, object? value, object? comparand);
+        internal static extern object InterlockedCompareExchange(
+            ref object? location1,
+            object? value,
+            object? comparand
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpCheckedXchg")]
-        internal static extern object InterlockedExchange([NotNullIfNotNull("value")] ref object? location1, object? value);
+        internal static extern object InterlockedExchange(
+            [NotNullIfNotNull("value")] ref object? location1,
+            object? value
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpMemoryBarrier")]
@@ -948,7 +1108,11 @@ namespace System.Runtime
 #if TARGET_X86 || TARGET_AMD64
         [LibraryImport(RuntimeLibrary)]
         [UnmanagedCallConv(CallConvs = new Type[] { typeof(CallConvCdecl) })]
-        internal static unsafe partial void RhCpuIdEx(int* cpuInfo, int functionId, int subFunctionId);
+        internal static unsafe partial void RhCpuIdEx(
+            int* cpuInfo,
+            int functionId,
+            int subFunctionId
+        );
 #endif
 
         internal static RhCorElementTypeInfo GetRhCorElementTypeInfo(CorElementType elementType)
@@ -969,18 +1133,12 @@ namespace System.Runtime
 
             public bool IsPrimitive
             {
-                get
-                {
-                    return 0 != (_flags & RhCorElementTypeInfoFlags.IsPrimitive);
-                }
+                get { return 0 != (_flags & RhCorElementTypeInfoFlags.IsPrimitive); }
             }
 
             public bool IsFloat
             {
-                get
-                {
-                    return 0 != (_flags & RhCorElementTypeInfoFlags.IsFloat);
-                }
+                get { return 0 != (_flags & RhCorElementTypeInfoFlags.IsFloat); }
             }
 
             //
@@ -996,7 +1154,7 @@ namespace System.Runtime
                 // Once we've asserted that the target is a primitive, we can also assert that it is >= ET_BOOLEAN.
                 Debug.Assert(targetElementType >= CorElementType.ELEMENT_TYPE_BOOLEAN);
                 byte targetElementTypeAsByte = (byte)targetElementType;
-                ushort mask = (ushort)(1 << targetElementTypeAsByte);  // This is expected to overflow on larger ET_I and ET_U - this is ok and anticipated.
+                ushort mask = (ushort)(1 << targetElementTypeAsByte); // This is expected to overflow on larger ET_I and ET_U - this is ok and anticipated.
                 if (0 != (_widenMask & mask))
                     return true;
                 return false;
@@ -1012,15 +1170,14 @@ namespace System.Runtime
                 return s_lookupTable[(int)elementType];
             }
 
-
             private RhCorElementTypeInfoFlags _flags;
 
             [Flags]
             private enum RhCorElementTypeInfoFlags : byte
             {
-                IsValid = 0x01,       // Set for all valid CorElementTypeInfo's
-                IsPrimitive = 0x02,   // Is it a primitive type (as defined by TypeInfo.IsPrimitive)
-                IsFloat = 0x04,       // Is it a floating point type
+                IsValid = 0x01, // Set for all valid CorElementTypeInfo's
+                IsPrimitive = 0x02, // Is it a primitive type (as defined by TypeInfo.IsPrimitive)
+                IsFloat = 0x04, // Is it a floating point type
             }
 
             private ushort _widenMask;
@@ -1032,29 +1189,93 @@ namespace System.Runtime
                 // index = 0x1
                 new RhCorElementTypeInfo { _widenMask = 0x0000, _flags = 0 },
                 // index = 0x2 = ELEMENT_TYPE_BOOLEAN   (W = BOOL)
-                new RhCorElementTypeInfo { _widenMask = 0x0004, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x0004,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid | RhCorElementTypeInfoFlags.IsPrimitive
+                },
                 // index = 0x3 = ELEMENT_TYPE_CHAR      (W = U2, CHAR, I4, U4, I8, U8, R4, R8) (U2 == Char)
-                new RhCorElementTypeInfo { _widenMask = 0x3f88, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x3f88,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid | RhCorElementTypeInfoFlags.IsPrimitive
+                },
                 // index = 0x4 = ELEMENT_TYPE_I1        (W = I1, I2, I4, I8, R4, R8)
-                new RhCorElementTypeInfo { _widenMask = 0x3550, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x3550,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid | RhCorElementTypeInfoFlags.IsPrimitive
+                },
                 // index = 0x5 = ELEMENT_TYPE_U1        (W = CHAR, U1, I2, U2, I4, U4, I8, U8, R4, R8)
-                new RhCorElementTypeInfo { _widenMask = 0x3FE8, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x3FE8,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid | RhCorElementTypeInfoFlags.IsPrimitive
+                },
                 // index = 0x6 = ELEMENT_TYPE_I2        (W = I2, I4, I8, R4, R8)
-                new RhCorElementTypeInfo { _widenMask = 0x3540, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x3540,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid | RhCorElementTypeInfoFlags.IsPrimitive
+                },
                 // index = 0x7 = ELEMENT_TYPE_U2        (W = U2, CHAR, I4, U4, I8, U8, R4, R8)
-                new RhCorElementTypeInfo { _widenMask = 0x3F88, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x3F88,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid | RhCorElementTypeInfoFlags.IsPrimitive
+                },
                 // index = 0x8 = ELEMENT_TYPE_I4        (W = I4, I8, R4, R8)
-                new RhCorElementTypeInfo { _widenMask = 0x3500, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x3500,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid | RhCorElementTypeInfoFlags.IsPrimitive
+                },
                 // index = 0x9 = ELEMENT_TYPE_U4        (W = U4, I8, R4, R8)
-                new RhCorElementTypeInfo { _widenMask = 0x3E00, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x3E00,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid | RhCorElementTypeInfoFlags.IsPrimitive
+                },
                 // index = 0xa = ELEMENT_TYPE_I8        (W = I8, R4, R8)
-                new RhCorElementTypeInfo { _widenMask = 0x3400, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x3400,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid | RhCorElementTypeInfoFlags.IsPrimitive
+                },
                 // index = 0xb = ELEMENT_TYPE_U8        (W = U8, R4, R8)
-                new RhCorElementTypeInfo { _widenMask = 0x3800, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x3800,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid | RhCorElementTypeInfoFlags.IsPrimitive
+                },
                 // index = 0xc = ELEMENT_TYPE_R4        (W = R4, R8)
-                new RhCorElementTypeInfo { _widenMask = 0x3000, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive|RhCorElementTypeInfoFlags.IsFloat },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x3000,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid
+                        | RhCorElementTypeInfoFlags.IsPrimitive
+                        | RhCorElementTypeInfoFlags.IsFloat
+                },
                 // index = 0xd = ELEMENT_TYPE_R8        (W = R8)
-                new RhCorElementTypeInfo { _widenMask = 0x2000, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive|RhCorElementTypeInfoFlags.IsFloat },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x2000,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid
+                        | RhCorElementTypeInfoFlags.IsPrimitive
+                        | RhCorElementTypeInfoFlags.IsFloat
+                },
                 // index = 0xe
                 new RhCorElementTypeInfo { _widenMask = 0x0000, _flags = 0 },
                 // index = 0xf
@@ -1076,9 +1297,19 @@ namespace System.Runtime
                 // index = 0x17
                 new RhCorElementTypeInfo { _widenMask = 0x0000, _flags = 0 },
                 // index = 0x18 = ELEMENT_TYPE_I
-                new RhCorElementTypeInfo { _widenMask = 0x0000, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x0000,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid | RhCorElementTypeInfoFlags.IsPrimitive
+                },
                 // index = 0x19 = ELEMENT_TYPE_U
-                new RhCorElementTypeInfo { _widenMask = 0x0000, _flags = RhCorElementTypeInfoFlags.IsValid|RhCorElementTypeInfoFlags.IsPrimitive },
+                new RhCorElementTypeInfo
+                {
+                    _widenMask = 0x0000,
+                    _flags =
+                        RhCorElementTypeInfoFlags.IsValid | RhCorElementTypeInfoFlags.IsPrimitive
+                },
             };
         }
     }

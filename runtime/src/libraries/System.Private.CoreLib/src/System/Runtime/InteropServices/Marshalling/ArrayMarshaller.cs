@@ -11,9 +11,14 @@ namespace System.Runtime.InteropServices.Marshalling
     /// </summary>
     /// <typeparam name="T">Array element type</typeparam>
     [CLSCompliant(false)]
-    [CustomTypeMarshaller(typeof(CustomTypeMarshallerAttribute.GenericPlaceholder[]),
-        CustomTypeMarshallerKind.LinearCollection, BufferSize = 0x200,
-        Features = CustomTypeMarshallerFeatures.UnmanagedResources | CustomTypeMarshallerFeatures.CallerAllocatedBuffer | CustomTypeMarshallerFeatures.TwoStageMarshalling)]
+    [CustomTypeMarshaller(
+        typeof(CustomTypeMarshallerAttribute.GenericPlaceholder[]),
+        CustomTypeMarshallerKind.LinearCollection,
+        BufferSize = 0x200,
+        Features = CustomTypeMarshallerFeatures.UnmanagedResources
+            | CustomTypeMarshallerFeatures.CallerAllocatedBuffer
+            | CustomTypeMarshallerFeatures.TwoStageMarshalling
+    )]
     public unsafe ref struct ArrayMarshaller<T>
     {
         private readonly int _sizeOfNativeElement;
@@ -26,8 +31,7 @@ namespace System.Runtime.InteropServices.Marshalling
         /// Initializes a new instance of the <see cref="ArrayMarshaller{T}"/>.
         /// </summary>
         /// <param name="sizeOfNativeElement">Size of the native element in bytes.</param>
-        public ArrayMarshaller(int sizeOfNativeElement)
-            : this()
+        public ArrayMarshaller(int sizeOfNativeElement) : this()
         {
             _sizeOfNativeElement = sizeOfNativeElement;
         }
@@ -38,8 +42,7 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <param name="array">Array to be marshalled.</param>
         /// <param name="sizeOfNativeElement">Size of the native element in bytes.</param>
         public ArrayMarshaller(T[]? array, int sizeOfNativeElement)
-            : this(array, Span<byte>.Empty, sizeOfNativeElement)
-        { }
+            : this(array, Span<byte>.Empty, sizeOfNativeElement) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ArrayMarshaller{T}"/>.
@@ -96,7 +99,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <remarks>
         /// <seealso cref="CustomTypeMarshallerDirection.Out"/>
         /// </remarks>
-        public Span<T> GetManagedValuesDestination(int length) => _allocatedMemory == IntPtr.Zero ? null : _managedArray = new T[length];
+        public Span<T> GetManagedValuesDestination(int length) =>
+            _allocatedMemory == IntPtr.Zero ? null : _managedArray = new T[length];
 
         /// <summary>
         /// Returns a span that points to the memory where the native values of the array are stored after the native call.

@@ -33,8 +33,10 @@ public class RazorLineFormattingOptionsTests
 
     private class TestRazorDocumentServiceProvider : IDocumentServiceProvider
     {
-        public TService? GetService<TService>() where TService : class, IDocumentService
-            => typeof(TService) == typeof(DocumentPropertiesService) ? (TService?)(object)new PropertiesService() : null;
+        public TService? GetService<TService>() where TService : class, IDocumentService =>
+            typeof(TService) == typeof(DocumentPropertiesService)
+                ? (TService?)(object)new PropertiesService()
+                : null;
 
         internal sealed class PropertiesService : DocumentPropertiesService
         {
@@ -49,13 +51,19 @@ public class RazorLineFormattingOptionsTests
 
         using var workspace = new AdhocWorkspace(hostServices);
 
-        var globalOptions = ((IMefHostExportProvider)hostServices).GetExportedValue<IGlobalOptionService>();
-        globalOptions.SetGlobalOption(new OptionKey(RazorLineFormattingOptionsStorage.UseTabs), true);
+        var globalOptions = (
+            (IMefHostExportProvider)hostServices
+        ).GetExportedValue<IGlobalOptionService>();
+        globalOptions.SetGlobalOption(
+            new OptionKey(RazorLineFormattingOptionsStorage.UseTabs),
+            true
+        );
         globalOptions.SetGlobalOption(new OptionKey(RazorLineFormattingOptionsStorage.TabSize), 10);
 
         var project = workspace.AddProject("Test", LanguageNames.CSharp);
 
-        var source = @"
+        var source =
+            @"
 class C
    {
 void F   () {}
@@ -67,26 +75,43 @@ void F   () {}
             name: "file.razor.g.cs",
             folders: Array.Empty<string>(),
             sourceCodeKind: SourceCodeKind.Regular,
-            loader: TextLoader.From(TextAndVersion.Create(SourceText.From(source), VersionStamp.Create(), "file.razor.g.cs")),
+            loader: TextLoader.From(
+                TextAndVersion.Create(
+                    SourceText.From(source),
+                    VersionStamp.Create(),
+                    "file.razor.g.cs"
+                )
+            ),
             filePath: "file.razor.g.cs",
             isGenerated: false,
             designTimeOnly: true,
-            documentServiceProvider: new TestRazorDocumentServiceProvider());
+            documentServiceProvider: new TestRazorDocumentServiceProvider()
+        );
 
         var document = workspace.AddDocument(documentInfo);
 
 #pragma warning disable RS0030 // Do not used banned APIs
-        var formattedDocument = await Formatter.FormatAsync(document, spans: null, options: null, CancellationToken.None);
+        var formattedDocument = await Formatter.FormatAsync(
+            document,
+            spans: null,
+            options: null,
+            CancellationToken.None
+        );
 #pragma warning restore RS0030 // Do not used banned APIs
 
         var formattedText = await formattedDocument.GetTextAsync();
 
         // document options override solution options:
-        AssertEx.Equal(@"
+        AssertEx.Equal(
+            @"
 class C
 {
-" + "\t" + @"void F() { }
+"
+                + "\t"
+                + @"void F() { }
 }
-", formattedText.ToString());
+",
+            formattedText.ToString()
+        );
     }
 }

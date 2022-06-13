@@ -38,10 +38,14 @@ using Xunit;
 
 namespace MonoTests.System.Drawing.Imaging
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34591",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class MetafileTest
     {
-
         public const string Bitmap = "non-inverted.bmp";
         public const string WmfPlaceable = "telescope_01.wmf";
         public const string Emf = "milkmateya01.emf";
@@ -51,9 +55,7 @@ namespace MonoTests.System.Drawing.Imaging
         {
             string filename = Helpers.GetTestBitmapPath(WmfPlaceable);
             using (Metafile mf = new Metafile(filename))
-            using (Metafile clone = (Metafile)mf.Clone())
-            {
-            }
+            using (Metafile clone = (Metafile)mf.Clone()) { }
         }
 
         private static void Check_MetaHeader_WmfPlaceable(MetaHeader mh)
@@ -204,7 +206,12 @@ namespace MonoTests.System.Drawing.Imaging
         }
     }
 
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34591", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34591",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class MetafileFulltrustTest
     {
         private void CheckEmptyHeader(Metafile mf, EmfType type)
@@ -311,7 +318,9 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Metafile_StreamIntPtrEmfType_Null()
         {
-            Assert.Throws<NullReferenceException>(() => Metafile_StreamEmfType(null, EmfType.EmfOnly));
+            Assert.Throws<NullReferenceException>(
+                () => Metafile_StreamEmfType(null, EmfType.EmfOnly)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -328,7 +337,9 @@ namespace MonoTests.System.Drawing.Imaging
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                Assert.Throws<ArgumentException>(() => Metafile_StreamEmfType(ms, (EmfType)int.MinValue));
+                Assert.Throws<ArgumentException>(
+                    () => Metafile_StreamEmfType(ms, (EmfType)int.MinValue)
+                );
             }
         }
 

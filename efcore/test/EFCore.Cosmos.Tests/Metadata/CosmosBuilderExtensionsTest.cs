@@ -13,8 +13,7 @@ public class CosmosBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>();
+        var entityType = modelBuilder.Entity<Customer>();
 
         Assert.Equal(nameof(DbContext), entityType.Metadata.GetContainer());
 
@@ -40,19 +39,23 @@ public class CosmosBuilderExtensionsTest
         Assert.Equal("pk", entityType.GetPartitionKeyPropertyName());
         Assert.Equal(
             ConfigurationSource.Convention,
-            ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource());
+            ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource()
+        );
 
         entityTypeBuilder.HasPartitionKey("pk");
         Assert.Equal("pk", entityType.GetPartitionKeyPropertyName());
         Assert.Equal(
             ConfigurationSource.Explicit,
-            ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource());
+            ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource()
+        );
 
         Assert.False(((IConventionEntityType)entityType).Builder.CanSetPartitionKey("partition"));
 
         entityTypeBuilder.HasPartitionKey(null);
         Assert.Null(entityType.GetPartitionKeyPropertyName());
-        Assert.Null(((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource());
+        Assert.Null(
+            ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource()
+        );
     }
 
     [ConditionalFact]
@@ -60,8 +63,7 @@ public class CosmosBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>();
+        modelBuilder.Entity<Customer>();
 
         var entityType = modelBuilder.Model.FindEntityType(typeof(Customer));
         modelBuilder.HasDefaultContainer(null);
@@ -74,9 +76,7 @@ public class CosmosBuilderExtensionsTest
         Assert.Equal("db0", entityType.GetContainer());
         Assert.Equal("db0", modelBuilder.Model.GetDefaultContainer());
 
-        modelBuilder
-            .Entity<Customer>()
-            .ToContainer("db1");
+        modelBuilder.Entity<Customer>().ToContainer("db1");
 
         Assert.Equal("db1", entityType.GetContainer());
     }
@@ -135,8 +135,8 @@ public class CosmosBuilderExtensionsTest
         Assert.Equal("_etag", etagProperty.GetJsonPropertyName());
     }
 
-    protected virtual ModelBuilder CreateConventionModelBuilder()
-        => CosmosTestHelpers.Instance.CreateConventionBuilder();
+    protected virtual ModelBuilder CreateConventionModelBuilder() =>
+        CosmosTestHelpers.Instance.CreateConventionBuilder();
 
     private class Customer
     {

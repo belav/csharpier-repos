@@ -17,7 +17,8 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> Create<TKey>(
             TKey partitionKey,
-            Func<TKey, RateLimiter> factory)
+            Func<TKey, RateLimiter> factory
+        )
         {
             return new RateLimitPartition<TKey>(partitionKey, factory);
         }
@@ -31,7 +32,8 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> CreateConcurrencyLimiter<TKey>(
             TKey partitionKey,
-            Func<TKey, ConcurrencyLimiterOptions> factory)
+            Func<TKey, ConcurrencyLimiterOptions> factory
+        )
         {
             return Create(partitionKey, key => new ConcurrencyLimiter(factory(key)));
         }
@@ -60,19 +62,29 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> CreateTokenBucketLimiter<TKey>(
             TKey partitionKey,
-            Func<TKey, TokenBucketRateLimiterOptions> factory)
+            Func<TKey, TokenBucketRateLimiterOptions> factory
+        )
         {
-            return Create(partitionKey, key =>
-            {
-                TokenBucketRateLimiterOptions options = factory(key);
-                // We don't want individual TokenBucketRateLimiters to have timers. We will instead have our own internal Timer handling all of them
-                if (options.AutoReplenishment is true)
+            return Create(
+                partitionKey,
+                key =>
                 {
-                    options = new TokenBucketRateLimiterOptions(options.TokenLimit, options.QueueProcessingOrder, options.QueueLimit,
-                        options.ReplenishmentPeriod, options.TokensPerPeriod, autoReplenishment: false);
+                    TokenBucketRateLimiterOptions options = factory(key);
+                    // We don't want individual TokenBucketRateLimiters to have timers. We will instead have our own internal Timer handling all of them
+                    if (options.AutoReplenishment is true)
+                    {
+                        options = new TokenBucketRateLimiterOptions(
+                            options.TokenLimit,
+                            options.QueueProcessingOrder,
+                            options.QueueLimit,
+                            options.ReplenishmentPeriod,
+                            options.TokensPerPeriod,
+                            autoReplenishment: false
+                        );
+                    }
+                    return new TokenBucketRateLimiter(options);
                 }
-                return new TokenBucketRateLimiter(options);
-            });
+            );
         }
     }
 }

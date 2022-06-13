@@ -126,9 +126,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestInterpolatedMultiLineRawString1()
         {
-            UsingExpression(@"$""""""
+            UsingExpression(
+                @"$""""""
     {1 + 1}
-    """"""");
+    """""""
+            );
             N(SyntaxKind.InterpolatedStringExpression);
             {
                 N(SyntaxKind.InterpolatedMultiLineRawStringStartToken);
@@ -161,9 +163,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestInterpolatedMultiLineRawString2()
         {
-            UsingExpression(@"$$""""""
+            UsingExpression(
+                @"$$""""""
     {{{1 + 1}}}
-    """"""");
+    """""""
+            );
             N(SyntaxKind.InterpolatedStringExpression);
             {
                 N(SyntaxKind.InterpolatedMultiLineRawStringStartToken);
@@ -201,17 +205,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestAltInterpolatedVerbatimString_CSharp73()
         {
             var text = @"@$""hello""";
-            CreateCompilation($@"
+            CreateCompilation(
+                    $@"
 class C
 {{
     void M()
     {{
         var v = {text};
     }}
-}}", parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_3)).VerifyDiagnostics(
-                // (6,17): error CS8370: Feature 'alternative interpolated verbatim strings' is not available in C# 7.3. Please use language version 8.0 or greater.
-                //         var v = @$"hello";
-                Diagnostic(ErrorCode.ERR_AltInterpolatedVerbatimStringsNotAvailable, @"@$""").WithArguments("8.0").WithLocation(6, 17));
+}}",
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    )
+                )
+                .VerifyDiagnostics(
+                    // (6,17): error CS8370: Feature 'alternative interpolated verbatim strings' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    //         var v = @$"hello";
+                    Diagnostic(ErrorCode.ERR_AltInterpolatedVerbatimStringsNotAvailable, @"@$""")
+                        .WithArguments("8.0")
+                        .WithLocation(6, 17)
+                );
 
             UsingExpression(text, TestOptions.Regular7_3);
 
@@ -231,14 +244,20 @@ class C
         public void TestAltInterpolatedVerbatimString_CSharp8()
         {
             var text = @"@$""hello""";
-            CreateCompilation($@"
+            CreateCompilation(
+                    $@"
 class C
 {{
     void M()
     {{
         var v = {text};
     }}
-}}", parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)).VerifyDiagnostics();
+}}",
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp8
+                    )
+                )
+                .VerifyDiagnostics();
 
             UsingExpression(text, TestOptions.Regular8);
             N(SyntaxKind.InterpolatedStringExpression);
@@ -257,17 +276,26 @@ class C
         public void TestNestedAltInterpolatedVerbatimString_CSharp73()
         {
             var text = "$@\"aaa{@$\"bbb\nccc\"}ddd\"";
-            CreateCompilation($@"
+            CreateCompilation(
+                    $@"
 class C
 {{
     void M()
     {{
         var v = {text};
     }}
-}}", parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_3)).VerifyDiagnostics(
-                // (6, 24): error CS8401: To use '@$' instead of '$@' for an interpolated verbatim string, please use language version '8.0' or greater.
-                // $@"aaa{@$"bbb
-                Diagnostic(ErrorCode.ERR_AltInterpolatedVerbatimStringsNotAvailable, @"@$""").WithArguments("8.0").WithLocation(6, 24));
+}}",
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp7_3
+                    )
+                )
+                .VerifyDiagnostics(
+                    // (6, 24): error CS8401: To use '@$' instead of '$@' for an interpolated verbatim string, please use language version '8.0' or greater.
+                    // $@"aaa{@$"bbb
+                    Diagnostic(ErrorCode.ERR_AltInterpolatedVerbatimStringsNotAvailable, @"@$""")
+                        .WithArguments("8.0")
+                        .WithLocation(6, 24)
+                );
 
             UsingExpression(text, TestOptions.Regular7_3);
 
@@ -306,14 +334,20 @@ class C
         {
             var text = "$@\"aaa{@$\"bbb\nccc\"}ddd\"";
 
-            CreateCompilation($@"
+            CreateCompilation(
+                    $@"
 class C
 {{
     void M()
     {{
         var v = {text};
     }}
-}}", parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)).VerifyDiagnostics();
+}}",
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp8
+                    )
+                )
+                .VerifyDiagnostics();
 
             UsingExpression(text, TestOptions.Regular8);
 
@@ -350,7 +384,8 @@ class C
         [Fact]
         public void TestInterpolatedStringWithNewLinesInExpression()
         {
-            var text = @"$""Text with {
+            var text =
+                @"$""Text with {
     new[] {
         1, 2, 3
     }[2]
@@ -358,7 +393,9 @@ class C
 
             UsingExpression(text, TestOptions.RegularPreview);
 
-            var expr = (InterpolatedStringExpressionSyntax)N(SyntaxKind.InterpolatedStringExpression);
+            var expr = (InterpolatedStringExpressionSyntax)N(
+                SyntaxKind.InterpolatedStringExpression
+            );
             {
                 N(SyntaxKind.InterpolatedStringStartToken);
                 N(SyntaxKind.InterpolatedStringText);
@@ -728,7 +765,10 @@ class C
         public void TestConditionalAccessNotVersion5()
         {
             var text = "a.b?.c.d?[1]?.e()?.f";
-            var expr = this.ParseExpression(text, options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5));
+            var expr = this.ParseExpression(
+                text,
+                options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)
+            );
 
             Assert.NotNull(expr);
             Assert.Equal(text, expr.ToString());
@@ -743,7 +783,10 @@ class C
         public void TestConditionalAccess()
         {
             var text = "a.b?.c.d?[1]?.e()?.f";
-            var expr = this.ParseExpression(text, options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6));
+            var expr = this.ParseExpression(
+                text,
+                options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)
+            );
 
             Assert.NotNull(expr);
             Assert.Equal(text, expr.ToString());
@@ -780,7 +823,11 @@ class C
             Assert.Equal(kind, keyword.Kind());
         }
 
-        private void TestParenthesizedArgument(SyntaxToken openParen, CSharpSyntaxNode arg, SyntaxToken closeParen)
+        private void TestParenthesizedArgument(
+            SyntaxToken openParen,
+            CSharpSyntaxNode arg,
+            SyntaxToken closeParen
+        )
         {
             Assert.NotEqual(default, openParen);
             Assert.False(openParen.IsMissing);
@@ -804,38 +851,62 @@ class C
                 case SyntaxKind.MakeRefExpression:
                     var makeRefSyntax = (MakeRefExpressionSyntax)expr;
                     TestFunctionKeyword(kind, makeRefSyntax.Keyword);
-                    TestParenthesizedArgument(makeRefSyntax.OpenParenToken, makeRefSyntax.Expression, makeRefSyntax.CloseParenToken);
+                    TestParenthesizedArgument(
+                        makeRefSyntax.OpenParenToken,
+                        makeRefSyntax.Expression,
+                        makeRefSyntax.CloseParenToken
+                    );
                     break;
 
                 case SyntaxKind.RefTypeExpression:
                     var refTypeSyntax = (RefTypeExpressionSyntax)expr;
                     TestFunctionKeyword(kind, refTypeSyntax.Keyword);
-                    TestParenthesizedArgument(refTypeSyntax.OpenParenToken, refTypeSyntax.Expression, refTypeSyntax.CloseParenToken);
+                    TestParenthesizedArgument(
+                        refTypeSyntax.OpenParenToken,
+                        refTypeSyntax.Expression,
+                        refTypeSyntax.CloseParenToken
+                    );
                     break;
 
                 case SyntaxKind.CheckedExpression:
                 case SyntaxKind.UncheckedExpression:
                     var checkedSyntax = (CheckedExpressionSyntax)expr;
                     TestFunctionKeyword(kind, checkedSyntax.Keyword);
-                    TestParenthesizedArgument(checkedSyntax.OpenParenToken, checkedSyntax.Expression, checkedSyntax.CloseParenToken);
+                    TestParenthesizedArgument(
+                        checkedSyntax.OpenParenToken,
+                        checkedSyntax.Expression,
+                        checkedSyntax.CloseParenToken
+                    );
                     break;
 
                 case SyntaxKind.TypeOfExpression:
                     var typeOfSyntax = (TypeOfExpressionSyntax)expr;
                     TestFunctionKeyword(kind, typeOfSyntax.Keyword);
-                    TestParenthesizedArgument(typeOfSyntax.OpenParenToken, typeOfSyntax.Type, typeOfSyntax.CloseParenToken);
+                    TestParenthesizedArgument(
+                        typeOfSyntax.OpenParenToken,
+                        typeOfSyntax.Type,
+                        typeOfSyntax.CloseParenToken
+                    );
                     break;
 
                 case SyntaxKind.SizeOfExpression:
                     var sizeOfSyntax = (SizeOfExpressionSyntax)expr;
                     TestFunctionKeyword(kind, sizeOfSyntax.Keyword);
-                    TestParenthesizedArgument(sizeOfSyntax.OpenParenToken, sizeOfSyntax.Type, sizeOfSyntax.CloseParenToken);
+                    TestParenthesizedArgument(
+                        sizeOfSyntax.OpenParenToken,
+                        sizeOfSyntax.Type,
+                        sizeOfSyntax.CloseParenToken
+                    );
                     break;
 
                 case SyntaxKind.DefaultExpression:
                     var defaultSyntax = (DefaultExpressionSyntax)expr;
                     TestFunctionKeyword(kind, defaultSyntax.Keyword);
-                    TestParenthesizedArgument(defaultSyntax.OpenParenToken, defaultSyntax.Type, defaultSyntax.CloseParenToken);
+                    TestParenthesizedArgument(
+                        defaultSyntax.OpenParenToken,
+                        defaultSyntax.Type,
+                        defaultSyntax.CloseParenToken
+                    );
                     break;
             }
         }
@@ -965,7 +1036,10 @@ class C
             Assert.Equal("a", cs.Expression.ToString());
             Assert.Equal("ref b", cs.ArgumentList.Arguments[0].ToString());
             Assert.NotEqual(default, cs.ArgumentList.Arguments[0].RefOrOutKeyword);
-            Assert.Equal(SyntaxKind.RefKeyword, cs.ArgumentList.Arguments[0].RefOrOutKeyword.Kind());
+            Assert.Equal(
+                SyntaxKind.RefKeyword,
+                cs.ArgumentList.Arguments[0].RefOrOutKeyword.Kind()
+            );
             Assert.NotNull(cs.ArgumentList.Arguments[0].Expression);
             Assert.Equal("b", cs.ArgumentList.Arguments[0].Expression.ToString());
         }
@@ -990,7 +1064,10 @@ class C
             Assert.Equal("a", cs.Expression.ToString());
             Assert.Equal("out b", cs.ArgumentList.Arguments[0].ToString());
             Assert.NotEqual(default, cs.ArgumentList.Arguments[0].RefOrOutKeyword);
-            Assert.Equal(SyntaxKind.OutKeyword, cs.ArgumentList.Arguments[0].RefOrOutKeyword.Kind());
+            Assert.Equal(
+                SyntaxKind.OutKeyword,
+                cs.ArgumentList.Arguments[0].RefOrOutKeyword.Kind()
+            );
             Assert.NotNull(cs.ArgumentList.Arguments[0].Expression);
             Assert.Equal("b", cs.ArgumentList.Arguments[0].Expression.ToString());
         }
@@ -1061,7 +1138,10 @@ class C
             Assert.Equal("a", ea.Expression.ToString());
             Assert.Equal("ref b", ea.ArgumentList.Arguments[0].ToString());
             Assert.NotEqual(default, ea.ArgumentList.Arguments[0].RefOrOutKeyword);
-            Assert.Equal(SyntaxKind.RefKeyword, ea.ArgumentList.Arguments[0].RefOrOutKeyword.Kind());
+            Assert.Equal(
+                SyntaxKind.RefKeyword,
+                ea.ArgumentList.Arguments[0].RefOrOutKeyword.Kind()
+            );
             Assert.NotNull(ea.ArgumentList.Arguments[0].Expression);
             Assert.Equal("b", ea.ArgumentList.Arguments[0].Expression.ToString());
         }
@@ -1086,7 +1166,10 @@ class C
             Assert.Equal("a", ea.Expression.ToString());
             Assert.Equal("out b", ea.ArgumentList.Arguments[0].ToString());
             Assert.NotEqual(default, ea.ArgumentList.Arguments[0].RefOrOutKeyword);
-            Assert.Equal(SyntaxKind.OutKeyword, ea.ArgumentList.Arguments[0].RefOrOutKeyword.Kind());
+            Assert.Equal(
+                SyntaxKind.OutKeyword,
+                ea.ArgumentList.Arguments[0].RefOrOutKeyword.Kind()
+            );
             Assert.NotNull(ea.ArgumentList.Arguments[0].Expression);
             Assert.Equal("b", ea.ArgumentList.Arguments[0].Expression.ToString());
         }
@@ -1327,7 +1410,10 @@ class C
             Assert.False(oc.Initializer.CloseBraceToken.IsMissing);
             Assert.Equal(1, oc.Initializer.Expressions.Count);
             Assert.Equal("B = { X = x }", oc.Initializer.Expressions[0].ToString());
-            Assert.Equal(SyntaxKind.SimpleAssignmentExpression, oc.Initializer.Expressions[0].Kind());
+            Assert.Equal(
+                SyntaxKind.SimpleAssignmentExpression,
+                oc.Initializer.Expressions[0].Kind()
+            );
             var b = (AssignmentExpressionSyntax)oc.Initializer.Expressions[0];
             Assert.Equal("B", b.Left.ToString());
             Assert.Equal(SyntaxKind.ObjectInitializerExpression, b.Right.Kind());
@@ -2180,7 +2266,10 @@ class C
             Assert.NotEqual(default, os.AscendingOrDescendingKeyword);
             Assert.Equal(SyntaxKind.AscendingKeyword, os.AscendingOrDescendingKeyword.Kind());
             Assert.False(os.AscendingOrDescendingKeyword.IsMissing);
-            Assert.Equal(SyntaxKind.AscendingKeyword, os.AscendingOrDescendingKeyword.ContextualKind());
+            Assert.Equal(
+                SyntaxKind.AscendingKeyword,
+                os.AscendingOrDescendingKeyword.ContextualKind()
+            );
 
             Assert.NotNull(os.Expression);
             Assert.Equal("b", os.Expression.ToString());
@@ -2228,7 +2317,10 @@ class C
             Assert.NotEqual(default, os.AscendingOrDescendingKeyword);
             Assert.Equal(SyntaxKind.DescendingKeyword, os.AscendingOrDescendingKeyword.Kind());
             Assert.False(os.AscendingOrDescendingKeyword.IsMissing);
-            Assert.Equal(SyntaxKind.DescendingKeyword, os.AscendingOrDescendingKeyword.ContextualKind());
+            Assert.Equal(
+                SyntaxKind.DescendingKeyword,
+                os.AscendingOrDescendingKeyword.ContextualKind()
+            );
 
             Assert.NotNull(os.Expression);
             Assert.Equal("b", os.Expression.ToString());
@@ -2581,12 +2673,14 @@ class C
         [Fact]
         public void ShiftOperator()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     int x = 1 << 2 << 3;
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -2599,7 +2693,8 @@ class C
                     {
                         N(SyntaxKind.VariableDeclaration);
                         {
-                            N(SyntaxKind.PredefinedType); N(SyntaxKind.IntKeyword);
+                            N(SyntaxKind.PredefinedType);
+                            N(SyntaxKind.IntKeyword);
                             N(SyntaxKind.VariableDeclarator);
                             {
                                 N(SyntaxKind.IdentifierToken);
@@ -2611,12 +2706,15 @@ class C
                                     {
                                         N(SyntaxKind.LeftShiftExpression);
                                         {
-                                            N(SyntaxKind.NumericLiteralExpression); N(SyntaxKind.NumericLiteralToken);
+                                            N(SyntaxKind.NumericLiteralExpression);
+                                            N(SyntaxKind.NumericLiteralToken);
                                             N(SyntaxKind.LessThanLessThanToken);
-                                            N(SyntaxKind.NumericLiteralExpression); N(SyntaxKind.NumericLiteralToken);
+                                            N(SyntaxKind.NumericLiteralExpression);
+                                            N(SyntaxKind.NumericLiteralToken);
                                         }
                                         N(SyntaxKind.LessThanLessThanToken);
-                                        N(SyntaxKind.NumericLiteralExpression); N(SyntaxKind.NumericLiteralToken);
+                                        N(SyntaxKind.NumericLiteralExpression);
+                                        N(SyntaxKind.NumericLiteralToken);
                                     }
                                 }
                             }
@@ -2634,7 +2732,8 @@ class C
         [Fact]
         public void ParseBigExpression()
         {
-            var text = @"
+            var text =
+                @"
 
 using System;
 using System.Collections.Generic;
@@ -2661,7 +2760,8 @@ namespace WB.Core.SharedKernels.DataCollection.Generated
         [Fact, WorkItem(15885, "https://github.com/dotnet/roslyn/pull/15885")]
         public void InProgressLocalDeclaration1()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     async void M()
@@ -2671,13 +2771,15 @@ class C
     }
 }
 ";
-            ParseAndValidate(text,
+            ParseAndValidate(
+                text,
                 // (6,14): error CS1001: Identifier expected
                 //         Task.
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(6, 14),
                 // (6,14): error CS1002: ; expected
                 //         Task.
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 14));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 14)
+            );
 
             UsingTree(text);
             N(SyntaxKind.CompilationUnit);
@@ -2760,7 +2862,8 @@ class C
         [Fact, WorkItem(15885, "https://github.com/dotnet/roslyn/pull/15885")]
         public void InProgressLocalDeclaration2()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     async void M()
@@ -2769,7 +2872,8 @@ class C
     }
 }
 ";
-            ParseAndValidate(text,
+            ParseAndValidate(
+                text,
                 // (6,14): error CS4003: 'await' cannot be used as an identifier within an async method or lambda expression
                 //         Task.await Task.Delay();
                 Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(6, 14),
@@ -2778,7 +2882,8 @@ class C
                 Diagnostic(ErrorCode.ERR_SyntaxError, ".").WithArguments(",").WithLocation(6, 24),
                 // (6,25): error CS1002: ; expected
                 //         Task.await Task.Delay();
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "Delay").WithLocation(6, 25));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "Delay").WithLocation(6, 25)
+            );
 
             UsingTree(text);
             N(SyntaxKind.CompilationUnit);
@@ -2856,7 +2961,8 @@ class C
         [Fact, WorkItem(15885, "https://github.com/dotnet/roslyn/pull/15885")]
         public void InProgressLocalDeclaration3()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     async void M()
@@ -2866,10 +2972,12 @@ class C
     }
 }
 ";
-            ParseAndValidate(text,
+            ParseAndValidate(
+                text,
                 // (7,9): error CS4003: 'await' cannot be used as an identifier within an async method or lambda expression
                 //         await Task;
-                Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(7, 9));
+                Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(7, 9)
+            );
 
             UsingTree(text);
             N(SyntaxKind.CompilationUnit);
@@ -2931,7 +3039,8 @@ class C
         [Fact, WorkItem(15885, "https://github.com/dotnet/roslyn/pull/15885")]
         public void InProgressLocalDeclaration4()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     async void M()
@@ -2941,10 +3050,12 @@ class C
     }
 }
 ";
-            ParseAndValidate(text,
+            ParseAndValidate(
+                text,
                 // (7,9): error CS4003: 'await' cannot be used as an identifier within an async method or lambda expression
                 //         await Task = 1;
-                Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(7, 9));
+                Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(7, 9)
+            );
 
             UsingTree(text);
             N(SyntaxKind.CompilationUnit);
@@ -3014,7 +3125,8 @@ class C
         [Fact, WorkItem(15885, "https://github.com/dotnet/roslyn/pull/15885")]
         public void InProgressLocalDeclaration5()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     async void M()
@@ -3024,10 +3136,12 @@ class C
     }
 }
 ";
-            ParseAndValidate(text,
+            ParseAndValidate(
+                text,
                 // (7,9): error CS4003: 'await' cannot be used as an identifier within an async method or lambda expression
                 //         await Task, Task2;
-                Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(7, 9));
+                Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(7, 9)
+            );
 
             UsingTree(text);
             N(SyntaxKind.CompilationUnit);
@@ -3094,7 +3208,8 @@ class C
         [Fact, WorkItem(15885, "https://github.com/dotnet/roslyn/pull/15885")]
         public void InProgressLocalDeclaration6()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     async void M()
@@ -3104,10 +3219,12 @@ class C
     }
 }
 ";
-            ParseAndValidate(text,
+            ParseAndValidate(
+                text,
                 // (7,9): error CS4003: 'await' cannot be used as an identifier within an async method or lambda expression
                 //         await Task();
-                Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(7, 9));
+                Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(7, 9)
+            );
 
             UsingTree(text);
             N(SyntaxKind.CompilationUnit);
@@ -3168,7 +3285,8 @@ class C
         [Fact, WorkItem(15885, "https://github.com/dotnet/roslyn/pull/15885")]
         public void InProgressLocalDeclaration7()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     async void M()
@@ -3178,10 +3296,12 @@ class C
     }
 }
 ";
-            ParseAndValidate(text,
+            ParseAndValidate(
+                text,
                 // (7,9): error CS4003: 'await' cannot be used as an identifier within an async method or lambda expression
                 //         await Task<T>();
-                Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(7, 9));
+                Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(7, 9)
+            );
 
             UsingTree(text);
             N(SyntaxKind.CompilationUnit);
@@ -3251,7 +3371,8 @@ class C
         [Fact, WorkItem(15885, "https://github.com/dotnet/roslyn/pull/15885")]
         public void InProgressLocalDeclaration8()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     async void M()
@@ -3261,13 +3382,15 @@ class C
     }
 }
 ";
-            ParseAndValidate(text,
+            ParseAndValidate(
+                text,
                 // (6,14): error CS1001: Identifier expected
                 //         Task.
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(6, 14),
                 // (6,14): error CS1002: ; expected
                 //         Task.
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 14));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 14)
+            );
 
             UsingTree(text);
             N(SyntaxKind.CompilationUnit);
@@ -3346,10 +3469,17 @@ class C
             EOF();
         }
 
-        [Fact, WorkItem(377556, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556")]
+        [
+            Fact,
+            WorkItem(
+                377556,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556"
+            )
+        ]
         public void TypeArgumentShiftAmbiguity_01()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     void M()
@@ -3433,10 +3563,17 @@ class C
             EOF();
         }
 
-        [Fact, WorkItem(377556, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556")]
+        [
+            Fact,
+            WorkItem(
+                377556,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556"
+            )
+        ]
         public void TypeArgumentShiftAmbiguity_02()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     void M()
@@ -3529,10 +3666,17 @@ class C
             EOF();
         }
 
-        [Fact, WorkItem(377556, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556")]
+        [
+            Fact,
+            WorkItem(
+                377556,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556"
+            )
+        ]
         public void TypeArgumentShiftAmbiguity_03()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     void M()
@@ -3615,10 +3759,17 @@ class C
             EOF();
         }
 
-        [Fact, WorkItem(377556, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556")]
+        [
+            Fact,
+            WorkItem(
+                377556,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556"
+            )
+        ]
         public void TypeArgumentShiftAmbiguity_04()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     void M()
@@ -3710,10 +3861,17 @@ class C
             EOF();
         }
 
-        [Fact, WorkItem(377556, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556")]
+        [
+            Fact,
+            WorkItem(
+                377556,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556"
+            )
+        ]
         public void TypeArgumentShiftAmbiguity_05()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     void M()
@@ -3781,7 +3939,9 @@ class C
                                                     {
                                                         N(SyntaxKind.IdentifierToken, "i");
                                                     }
-                                                    N(SyntaxKind.GreaterThanGreaterThanGreaterThanToken);
+                                                    N(
+                                                        SyntaxKind.GreaterThanGreaterThanGreaterThanToken
+                                                    );
                                                     N(SyntaxKind.NumericLiteralExpression);
                                                     {
                                                         N(SyntaxKind.NumericLiteralToken, "2");
@@ -3803,10 +3963,17 @@ class C
             EOF();
         }
 
-        [Fact, WorkItem(377556, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556")]
+        [
+            Fact,
+            WorkItem(
+                377556,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556"
+            )
+        ]
         public void TypeArgumentShiftAmbiguity_06()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     void M()
@@ -3817,10 +3984,13 @@ class C
 }
 ";
             var tree = UsingTree(text);
-            tree.GetDiagnostics().Verify(
-                // (7,30): error CS1525: Invalid expression term '<<'
-                //         var j = e is a < i > << 2;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<<").WithArguments("<<").WithLocation(7, 30)
+            tree.GetDiagnostics()
+                .Verify(
+                    // (7,30): error CS1525: Invalid expression term '<<'
+                    //         var j = e is a < i > << 2;
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "<<")
+                        .WithArguments("<<")
+                        .WithLocation(7, 30)
                 );
             N(SyntaxKind.CompilationUnit);
             {
@@ -3909,10 +4079,17 @@ class C
             EOF();
         }
 
-        [Fact, WorkItem(377556, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556")]
+        [
+            Fact,
+            WorkItem(
+                377556,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556"
+            )
+        ]
         public void TypeArgumentShiftAmbiguity_07()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     void M()
@@ -3923,10 +4100,13 @@ class C
 }
 ";
             var tree = UsingTree(text);
-            tree.GetDiagnostics().Verify(
-                // (7,31): error CS1525: Invalid expression term '>'
-                //         var j = e is a < i >>>> 2;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">").WithArguments(">").WithLocation(7, 31)
+            tree.GetDiagnostics()
+                .Verify(
+                    // (7,31): error CS1525: Invalid expression term '>'
+                    //         var j = e is a < i >>>> 2;
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">")
+                        .WithArguments(">")
+                        .WithLocation(7, 31)
                 );
             N(SyntaxKind.CompilationUnit);
             {
@@ -3987,7 +4167,9 @@ class C
                                                         {
                                                             N(SyntaxKind.IdentifierToken, "i");
                                                         }
-                                                        N(SyntaxKind.GreaterThanGreaterThanGreaterThanToken);
+                                                        N(
+                                                            SyntaxKind.GreaterThanGreaterThanGreaterThanToken
+                                                        );
                                                         M(SyntaxKind.IdentifierName);
                                                         {
                                                             M(SyntaxKind.IdentifierToken);
@@ -4015,10 +4197,17 @@ class C
             EOF();
         }
 
-        [Fact, WorkItem(377556, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556")]
+        [
+            Fact,
+            WorkItem(
+                377556,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556"
+            )
+        ]
         public void TypeArgumentShiftAmbiguity_08()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     void M()
@@ -4078,7 +4267,9 @@ class C
                                                     {
                                                         N(SyntaxKind.IdentifierToken, "i");
                                                     }
-                                                    N(SyntaxKind.GreaterThanGreaterThanGreaterThanToken);
+                                                    N(
+                                                        SyntaxKind.GreaterThanGreaterThanGreaterThanToken
+                                                    );
                                                     N(SyntaxKind.NumericLiteralExpression);
                                                     {
                                                         N(SyntaxKind.NumericLiteralToken, "2");
@@ -4101,10 +4292,17 @@ class C
             EOF();
         }
 
-        [Fact, WorkItem(377556, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556")]
+        [
+            Fact,
+            WorkItem(
+                377556,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556"
+            )
+        ]
         public void TypeArgumentShiftAmbiguity_09()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     void M()
@@ -4170,7 +4368,9 @@ class C
                                                 {
                                                     N(SyntaxKind.IdentifierToken, "i");
                                                 }
-                                                N(SyntaxKind.GreaterThanGreaterThanGreaterThanToken);
+                                                N(
+                                                    SyntaxKind.GreaterThanGreaterThanGreaterThanToken
+                                                );
                                                 N(SyntaxKind.NumericLiteralExpression);
                                                 {
                                                     N(SyntaxKind.NumericLiteralToken, "2");
@@ -4197,10 +4397,17 @@ class C
             EOF();
         }
 
-        [Fact, WorkItem(377556, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556")]
+        [
+            Fact,
+            WorkItem(
+                377556,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=377556"
+            )
+        ]
         public void TypeArgumentShiftAmbiguity_10()
         {
-            const string text = @"
+            const string text =
+                @"
 class C
 {
     void M()
@@ -4262,7 +4469,9 @@ class C
                                                     {
                                                         N(SyntaxKind.IdentifierToken, "i");
                                                     }
-                                                    N(SyntaxKind.GreaterThanGreaterThanGreaterThanToken);
+                                                    N(
+                                                        SyntaxKind.GreaterThanGreaterThanGreaterThanToken
+                                                    );
                                                     N(SyntaxKind.NumericLiteralExpression);
                                                     {
                                                         N(SyntaxKind.NumericLiteralToken, "2");
@@ -4288,7 +4497,10 @@ class C
         public void TestTargetTypedDefaultWithCSharp7_1()
         {
             var text = "default";
-            var expr = this.ParseExpression(text, TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_1));
+            var expr = this.ParseExpression(
+                text,
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_1)
+            );
 
             Assert.NotNull(expr);
             Assert.Equal(SyntaxKind.DefaultLiteralExpression, expr.Kind());
@@ -4300,7 +4512,7 @@ class C
         public void Bug17683a()
         {
             var source =
-@"from t in e
+                @"from t in e
 where
 t == Int32.
 MinValue
@@ -4361,7 +4573,7 @@ select t";
         public void Bug17683b()
         {
             var source =
-@"switch (e)
+                @"switch (e)
 {
     case Int32.
                MaxValue when true:
@@ -4558,11 +4770,12 @@ select t";
         [Fact, WorkItem(12214, "https://github.com/dotnet/roslyn/issues/12214")]
         public void ConditionalExpressionInInterpolation()
         {
-            UsingExpression("$\"{a ? b : d}\"",
+            UsingExpression(
+                "$\"{a ? b : d}\"",
                 // (1,4): error CS8361: A conditional expression cannot be used directly in a string interpolation because the ':' ends the interpolation. Parenthesize the conditional expression.
                 // $"{a ? b : d}"
                 Diagnostic(ErrorCode.ERR_ConditionalInInterpolation, "a ? b ").WithLocation(1, 4)
-                );
+            );
             N(SyntaxKind.InterpolatedStringExpression);
             {
                 N(SyntaxKind.InterpolatedStringStartToken);
@@ -4764,10 +4977,15 @@ select t";
         [Fact]
         public void NullCoalescingAssignmentCSharp7_3()
         {
-            UsingExpression("a ??= b", TestOptions.Regular7_3,
+            UsingExpression(
+                "a ??= b",
+                TestOptions.Regular7_3,
                 // (1,3): error CS8652: The feature 'coalescing assignment' is not available in C# 7.3. Please use language version 8.0 or greater.
                 // a ??= b
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "??=").WithArguments("coalescing assignment", "8.0").WithLocation(1, 3));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "??=")
+                    .WithArguments("coalescing assignment", "8.0")
+                    .WithLocation(1, 3)
+            );
 
             N(SyntaxKind.CoalesceAssignmentExpression);
             {
@@ -4802,10 +5020,12 @@ select t";
         [Fact]
         public void RangeExpression_ThreeDots()
         {
-            UsingExpression("1...2",
+            UsingExpression(
+                "1...2",
                 // (1,2): error CS8401: Unexpected character sequence '...'
                 // 1...2
-                Diagnostic(ErrorCode.ERR_TripleDotNotAllowed, "").WithLocation(1, 2));
+                Diagnostic(ErrorCode.ERR_TripleDotNotAllowed, "").WithLocation(1, 2)
+            );
 
             N(SyntaxKind.RangeExpression);
             {
@@ -5360,13 +5580,17 @@ select t";
         [Fact]
         public void RangeExpression_DotSpaceDot()
         {
-            UsingExpression("1. .2",
+            UsingExpression(
+                "1. .2",
                 // (1,1): error CS1073: Unexpected token '.2'
                 // 1. .2
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "1. ").WithArguments(".2").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "1. ")
+                    .WithArguments(".2")
+                    .WithLocation(1, 1),
                 // (1,4): error CS1001: Identifier expected
                 // 1. .2
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ".2").WithLocation(1, 4));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ".2").WithLocation(1, 4)
+            );
 
             N(SyntaxKind.SimpleMemberAccessExpression);
             {
@@ -5386,10 +5610,14 @@ select t";
         [Fact]
         public void RangeExpression_MethodInvocation_NoOperands()
         {
-            UsingExpression(".. .ToString()",
+            UsingExpression(
+                ".. .ToString()",
                 // (1,1): error CS1073: Unexpected token '.'
                 // .. .ToString()
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "..").WithArguments(".").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "..")
+                    .WithArguments(".")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.RangeExpression);
             {
@@ -5401,10 +5629,14 @@ select t";
         [Fact]
         public void RangeExpression_MethodInvocation_LeftOperand()
         {
-            UsingExpression("1.. .ToString()",
+            UsingExpression(
+                "1.. .ToString()",
                 // (1,1): error CS1073: Unexpected token '.'
                 // 1.. .ToString()
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "1..").WithArguments(".").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "1..")
+                    .WithArguments(".")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.RangeExpression);
             {
@@ -5486,13 +5718,15 @@ select t";
         [Fact]
         public void RangeExpression_ConditionalAccessExpression()
         {
-            UsingExpression("c?..b",
+            UsingExpression(
+                "c?..b",
                 // (1,6): error CS1003: Syntax error, ':' expected
                 // c?..b
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 6),
                 // (1,6): error CS1733: Expected expression
                 // c?..b
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 6));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 6)
+            );
 
             N(SyntaxKind.ConditionalExpression);
             {
@@ -5533,13 +5767,19 @@ select t";
         [WorkItem(39072, "https://github.com/dotnet/roslyn/issues/39072")]
         public void ArrayCreation_BadRef()
         {
-            UsingExpression("new[] { ref }",
+            UsingExpression(
+                "new[] { ref }",
                 // (1,9): error CS1525: Invalid expression term 'ref'
                 // new[] { ref }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ").WithArguments("ref").WithLocation(1, 9),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ")
+                    .WithArguments("ref")
+                    .WithLocation(1, 9),
                 // (1,13): error CS1525: Invalid expression term '}'
                 // new[] { ref }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "}").WithArguments("}").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "}")
+                    .WithArguments("}")
+                    .WithLocation(1, 13)
+            );
 
             N(SyntaxKind.ImplicitArrayCreationExpression);
             {
@@ -5567,10 +5807,14 @@ select t";
         [WorkItem(39072, "https://github.com/dotnet/roslyn/issues/39072")]
         public void ArrayCreation_BadRefExpression()
         {
-            UsingExpression("new[] { ref obj }",
+            UsingExpression(
+                "new[] { ref obj }",
                 // (1,9): error CS1525: Invalid expression term 'ref'
                 // new[] { ref obj }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref obj").WithArguments("ref").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref obj")
+                    .WithArguments("ref")
+                    .WithLocation(1, 9)
+            );
 
             N(SyntaxKind.ImplicitArrayCreationExpression);
             {
@@ -5598,16 +5842,22 @@ select t";
         [WorkItem(39072, "https://github.com/dotnet/roslyn/issues/39072")]
         public void ArrayCreation_BadRefElementAccess()
         {
-            UsingExpression("new[] { ref[] }",
+            UsingExpression(
+                "new[] { ref[] }",
                 // (1,9): error CS1525: Invalid expression term 'ref'
                 // new[] { ref[] }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref[]").WithArguments("ref").WithLocation(1, 9),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref[]")
+                    .WithArguments("ref")
+                    .WithLocation(1, 9),
                 // (1,12): error CS1525: Invalid expression term '['
                 // new[] { ref[] }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "[").WithArguments("[").WithLocation(1, 12),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "[")
+                    .WithArguments("[")
+                    .WithLocation(1, 12),
                 // (1,13): error CS0443: Syntax error; value expected
                 // new[] { ref[] }
-                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(1, 13)
+            );
 
             N(SyntaxKind.ImplicitArrayCreationExpression);
             {
@@ -5650,13 +5900,19 @@ select t";
         [WorkItem(39072, "https://github.com/dotnet/roslyn/issues/39072")]
         public void AnonymousObjectCreation_BadRef()
         {
-            UsingExpression("new { ref }",
+            UsingExpression(
+                "new { ref }",
                 // (1,7): error CS1525: Invalid expression term 'ref'
                 // new { ref }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ").WithArguments("ref").WithLocation(1, 7),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ")
+                    .WithArguments("ref")
+                    .WithLocation(1, 7),
                 // (1,11): error CS1525: Invalid expression term '}'
                 // new { ref }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "}").WithArguments("}").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "}")
+                    .WithArguments("}")
+                    .WithLocation(1, 11)
+            );
 
             N(SyntaxKind.AnonymousObjectCreationExpression);
             {
@@ -5682,13 +5938,19 @@ select t";
         [WorkItem(39072, "https://github.com/dotnet/roslyn/issues/39072")]
         public void ObjectInitializer_BadRef()
         {
-            UsingExpression("new C { P = ref }",
+            UsingExpression(
+                "new C { P = ref }",
                 // (1,13): error CS1525: Invalid expression term 'ref'
                 // new C { P = ref }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ").WithArguments("ref").WithLocation(1, 13),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ")
+                    .WithArguments("ref")
+                    .WithLocation(1, 13),
                 // (1,17): error CS1525: Invalid expression term '}'
                 // new C { P = ref }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "}").WithArguments("}").WithLocation(1, 17));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "}")
+                    .WithArguments("}")
+                    .WithLocation(1, 17)
+            );
 
             N(SyntaxKind.ObjectCreationExpression);
             {
@@ -5726,13 +5988,19 @@ select t";
         [WorkItem(39072, "https://github.com/dotnet/roslyn/issues/39072")]
         public void CollectionInitializer_BadRef_01()
         {
-            UsingExpression("new C { ref }",
+            UsingExpression(
+                "new C { ref }",
                 // (1,9): error CS1525: Invalid expression term 'ref'
                 // new C { ref }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ").WithArguments("ref").WithLocation(1, 9),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ")
+                    .WithArguments("ref")
+                    .WithLocation(1, 9),
                 // (1,13): error CS1525: Invalid expression term '}'
                 // new C { ref }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "}").WithArguments("}").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "}")
+                    .WithArguments("}")
+                    .WithLocation(1, 13)
+            );
 
             N(SyntaxKind.ObjectCreationExpression);
             {
@@ -5762,13 +6030,19 @@ select t";
         [WorkItem(39072, "https://github.com/dotnet/roslyn/issues/39072")]
         public void CollectionInitializer_BadRef_02()
         {
-            UsingExpression("new C { { 0, ref } }",
+            UsingExpression(
+                "new C { { 0, ref } }",
                 // (1,14): error CS1525: Invalid expression term 'ref'
                 // new C { { 0, ref } }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ").WithArguments("ref").WithLocation(1, 14),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref ")
+                    .WithArguments("ref")
+                    .WithLocation(1, 14),
                 // (1,18): error CS1525: Invalid expression term '}'
                 // new C { { 0, ref } }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "}").WithArguments("}").WithLocation(1, 18));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "}")
+                    .WithArguments("}")
+                    .WithLocation(1, 18)
+            );
 
             N(SyntaxKind.ObjectCreationExpression);
             {
@@ -5808,13 +6082,20 @@ select t";
         [WorkItem(39072, "https://github.com/dotnet/roslyn/issues/39072")]
         public void AttributeArgument_BadRef()
         {
-            UsingTree("class C { [Attr(ref)] void M() { } }").GetDiagnostics().Verify(
-                // (1,17): error CS1525: Invalid expression term 'ref'
-                // class C { [Attr(ref)] void M() { } }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref").WithArguments("ref").WithLocation(1, 17),
-                // (1,20): error CS1525: Invalid expression term ')'
-                // class C { [Attr(ref)] void M() { } }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(1, 20));
+            UsingTree("class C { [Attr(ref)] void M() { } }")
+                .GetDiagnostics()
+                .Verify(
+                    // (1,17): error CS1525: Invalid expression term 'ref'
+                    // class C { [Attr(ref)] void M() { } }
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref")
+                        .WithArguments("ref")
+                        .WithLocation(1, 17),
+                    // (1,20): error CS1525: Invalid expression term ')'
+                    // class C { [Attr(ref)] void M() { } }
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                        .WithArguments(")")
+                        .WithLocation(1, 20)
+                );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -5880,13 +6161,19 @@ select t";
         [WorkItem(39072, "https://github.com/dotnet/roslyn/issues/39072")]
         public void ForLoop_BadRefCondition()
         {
-            UsingStatement("for (int i = 0; ref; i++) { }",
+            UsingStatement(
+                "for (int i = 0; ref; i++) { }",
                 // (1,17): error CS1525: Invalid expression term 'ref'
                 // for (int i = 0; ref; i++) { }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref").WithArguments("ref").WithLocation(1, 17),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "ref")
+                    .WithArguments("ref")
+                    .WithLocation(1, 17),
                 // (1,20): error CS1525: Invalid expression term ';'
                 // for (int i = 0; ref; i++) { }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(1, 20));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
+                    .WithArguments(";")
+                    .WithLocation(1, 20)
+            );
 
             N(SyntaxKind.ForStatement);
             {
@@ -5943,10 +6230,12 @@ select t";
         [WorkItem(39072, "https://github.com/dotnet/roslyn/issues/39072")]
         public void ArrayCreation_BadInElementAccess()
         {
-            UsingExpression("new[] { in[] }",
+            UsingExpression(
+                "new[] { in[] }",
                 // (1,9): error CS1003: Syntax error, ',' expected
                 // new[] { in[] }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "in").WithArguments(",").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "in").WithArguments(",").WithLocation(1, 9)
+            );
 
             N(SyntaxKind.ImplicitArrayCreationExpression);
             {
@@ -5966,10 +6255,12 @@ select t";
         [WorkItem(39072, "https://github.com/dotnet/roslyn/issues/39072")]
         public void ArrayCreation_BadOutElementAccess()
         {
-            UsingExpression("new[] { out[] }",
-                    // (1,9): error CS1003: Syntax error, ',' expected
-                    // new[] { out[] }
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(1, 9));
+            UsingExpression(
+                "new[] { out[] }",
+                // (1,9): error CS1003: Syntax error, ',' expected
+                // new[] { out[] }
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(1, 9)
+            );
 
             N(SyntaxKind.ImplicitArrayCreationExpression);
             {
@@ -5989,10 +6280,12 @@ select t";
         [WorkItem(39072, "https://github.com/dotnet/roslyn/issues/39072")]
         public void ArrayCreation_ElementAccess()
         {
-            UsingExpression("new[] { obj[] }",
+            UsingExpression(
+                "new[] { obj[] }",
                 // (1,13): error CS0443: Syntax error; value expected
                 // new[] { obj[] }
-                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(1, 13)
+            );
 
             N(SyntaxKind.ImplicitArrayCreationExpression);
             {
@@ -6031,7 +6324,7 @@ select t";
         public void MismatchedInterpolatedStringContents_01()
         {
             var text =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -6048,19 +6341,24 @@ select t";
 }";
             var tree = ParseTree(text, TestOptions.Regular);
             // Note that the parser eventually syncs back up and stops producing diagnostics.
-            tree.GetDiagnostics().Verify(
-                // (7,31): error CS1001: Identifier expected
-                //             A B = new C($@"{D(.E}");
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ".").WithLocation(7, 31),
-                // (7,33): error CS1003: Syntax error, ')' expected
-                //             A B = new C($@"{D(.E}");
-                Diagnostic(ErrorCode.ERR_SyntaxError, "}").WithArguments(")").WithLocation(7, 33),
-                // (7,33): error CS1003: Syntax error, ',' expected
-                //             A B = new C($@"{D(.E}");
-                Diagnostic(ErrorCode.ERR_SyntaxError, "}").WithArguments(",").WithLocation(7, 33),
-                // (7,34): error CS1026: ) expected
-                //             A B = new C($@"{D(.E}");
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(7, 34)
+            tree.GetDiagnostics()
+                .Verify(
+                    // (7,31): error CS1001: Identifier expected
+                    //             A B = new C($@"{D(.E}");
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, ".").WithLocation(7, 31),
+                    // (7,33): error CS1003: Syntax error, ')' expected
+                    //             A B = new C($@"{D(.E}");
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "}")
+                        .WithArguments(")")
+                        .WithLocation(7, 33),
+                    // (7,33): error CS1003: Syntax error, ',' expected
+                    //             A B = new C($@"{D(.E}");
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "}")
+                        .WithArguments(",")
+                        .WithLocation(7, 33),
+                    // (7,34): error CS1026: ) expected
+                    //             A B = new C($@"{D(.E}");
+                    Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(7, 34)
                 );
         }
 
@@ -6068,7 +6366,7 @@ select t";
         public void MismatchedInterpolatedStringContents_02()
         {
             var text =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -6085,46 +6383,71 @@ select t";
 }";
             var tree = ParseTree(text, TestOptions.Regular);
             // Note that the parser eventually syncs back up and stops producing diagnostics.
-            tree.GetDiagnostics().Verify(
+            tree.GetDiagnostics()
+                .Verify(
                     // (7,31): error CS1001: Identifier expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
                     Diagnostic(ErrorCode.ERR_IdentifierExpected, ".").WithLocation(7, 31),
                     // (7,33): error CS1003: Syntax error, ')' expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "}").WithArguments(")").WithLocation(7, 33),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "}")
+                        .WithArguments(")")
+                        .WithLocation(7, 33),
                     // (7,33): error CS1003: Syntax error, ',' expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "}").WithArguments(",").WithLocation(7, 33),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "}")
+                        .WithArguments(",")
+                        .WithLocation(7, 33),
                     // (7,34): error CS1056: Unexpected character '\'
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "").WithArguments("\\").WithLocation(7, 34),
+                    Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "")
+                        .WithArguments("\\")
+                        .WithLocation(7, 34),
                     // (7,35): error CS1003: Syntax error, ',' expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "F").WithArguments(",").WithLocation(7, 35),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "F")
+                        .WithArguments(",")
+                        .WithLocation(7, 35),
                     // (7,36): error CS1056: Unexpected character '\'
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "").WithArguments("\\").WithLocation(7, 36),
+                    Diagnostic(ErrorCode.ERR_UnexpectedCharacter, "")
+                        .WithArguments("\\")
+                        .WithLocation(7, 36),
                     // (7,37): error CS1003: Syntax error, ',' expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "G").WithArguments(",").WithLocation(7, 37),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "G")
+                        .WithArguments(",")
+                        .WithLocation(7, 37),
                     // (7,38): error CS1003: Syntax error, ',' expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(",").WithLocation(7, 38),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "{")
+                        .WithArguments(",")
+                        .WithLocation(7, 38),
                     // (7,39): error CS1003: Syntax error, ',' expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "H").WithArguments(",").WithLocation(7, 39),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "H")
+                        .WithArguments(",")
+                        .WithLocation(7, 39),
                     // (7,40): error CS1003: Syntax error, ',' expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "}").WithArguments(",").WithLocation(7, 40),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "}")
+                        .WithArguments(",")
+                        .WithLocation(7, 40),
                     // (7,41): error CS1003: Syntax error, ',' expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "_").WithArguments(",").WithLocation(7, 41),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "_")
+                        .WithArguments(",")
+                        .WithLocation(7, 41),
                     // (7,42): error CS1003: Syntax error, ',' expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(",").WithLocation(7, 42),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "{")
+                        .WithArguments(",")
+                        .WithLocation(7, 42),
                     // (7,43): error CS1003: Syntax error, ',' expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "I").WithArguments(",").WithLocation(7, 43),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "I")
+                        .WithArguments(",")
+                        .WithLocation(7, 43),
                     // (7,49): error CS1026: ) expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
                     Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(7, 49),
@@ -6133,17 +6456,28 @@ select t";
                     Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(7, 49),
                     // (7,50): error CS1003: Syntax error, ',' expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "L").WithArguments(",").WithLocation(7, 50),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "L")
+                        .WithArguments(",")
+                        .WithLocation(7, 50),
                     // (7,51): error CS1003: Syntax error, ',' expected
                     //             A B = new C($@"{D(.E}\F\G{H}_{I.J.K("L")}.M");
-                    Diagnostic(ErrorCode.ERR_SyntaxError, @""")}.M""").WithArguments(",").WithLocation(7, 51)
+                    Diagnostic(ErrorCode.ERR_SyntaxError, @""")}.M""")
+                        .WithArguments(",")
+                        .WithLocation(7, 51)
                 );
         }
 
         [Fact]
         public void UnsignedRightShift_01()
         {
-            foreach (var options in new[] { TestOptions.RegularPreview, TestOptions.Regular10, TestOptions.RegularNext })
+            foreach (
+                var options in new[]
+                {
+                    TestOptions.RegularPreview,
+                    TestOptions.Regular10,
+                    TestOptions.RegularNext
+                }
+            )
             {
                 UsingExpression("x >>> y", options);
 
@@ -6166,13 +6500,24 @@ select t";
         [Fact]
         public void UnsignedRightShift_02()
         {
-            foreach (var options in new[] { TestOptions.RegularPreview, TestOptions.Regular10, TestOptions.RegularNext })
+            foreach (
+                var options in new[]
+                {
+                    TestOptions.RegularPreview,
+                    TestOptions.Regular10,
+                    TestOptions.RegularNext
+                }
+            )
             {
-                UsingExpression("x > >> y", options,
+                UsingExpression(
+                    "x > >> y",
+                    options,
                     // (1,5): error CS1525: Invalid expression term '>'
                     // x > >> y
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">").WithArguments(">").WithLocation(1, 5)
-                    );
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">")
+                        .WithArguments(">")
+                        .WithLocation(1, 5)
+                );
 
                 N(SyntaxKind.GreaterThanExpression);
                 {
@@ -6201,13 +6546,24 @@ select t";
         [Fact]
         public void UnsignedRightShift_03()
         {
-            foreach (var options in new[] { TestOptions.RegularPreview, TestOptions.Regular10, TestOptions.RegularNext })
+            foreach (
+                var options in new[]
+                {
+                    TestOptions.RegularPreview,
+                    TestOptions.Regular10,
+                    TestOptions.RegularNext
+                }
+            )
             {
-                UsingExpression("x >> > y", options,
+                UsingExpression(
+                    "x >> > y",
+                    options,
                     // (1,6): error CS1525: Invalid expression term '>'
                     // x >> > y
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">").WithArguments(">").WithLocation(1, 6)
-                    );
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">")
+                        .WithArguments(">")
+                        .WithLocation(1, 6)
+                );
 
                 N(SyntaxKind.GreaterThanExpression);
                 {
@@ -6236,7 +6592,14 @@ select t";
         [Fact]
         public void UnsignedRightShiftAssignment_01()
         {
-            foreach (var options in new[] { TestOptions.RegularPreview, TestOptions.Regular10, TestOptions.RegularNext })
+            foreach (
+                var options in new[]
+                {
+                    TestOptions.RegularPreview,
+                    TestOptions.Regular10,
+                    TestOptions.RegularNext
+                }
+            )
             {
                 UsingExpression("x >>>= y", options);
 
@@ -6259,13 +6622,24 @@ select t";
         [Fact]
         public void UnsignedRightShiftAssignment_02()
         {
-            foreach (var options in new[] { TestOptions.RegularPreview, TestOptions.Regular10, TestOptions.RegularNext })
+            foreach (
+                var options in new[]
+                {
+                    TestOptions.RegularPreview,
+                    TestOptions.Regular10,
+                    TestOptions.RegularNext
+                }
+            )
             {
-                UsingExpression("x > >>= y", options,
+                UsingExpression(
+                    "x > >>= y",
+                    options,
                     // (1,5): error CS1525: Invalid expression term '>'
                     // x > >>= y
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">").WithArguments(">").WithLocation(1, 5)
-                    );
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">")
+                        .WithArguments(">")
+                        .WithLocation(1, 5)
+                );
 
                 N(SyntaxKind.RightShiftAssignmentExpression);
                 {
@@ -6294,13 +6668,24 @@ select t";
         [Fact]
         public void UnsignedRightShiftAssignment_03()
         {
-            foreach (var options in new[] { TestOptions.RegularPreview, TestOptions.Regular10, TestOptions.RegularNext })
+            foreach (
+                var options in new[]
+                {
+                    TestOptions.RegularPreview,
+                    TestOptions.Regular10,
+                    TestOptions.RegularNext
+                }
+            )
             {
-                UsingExpression("x >> >= y", options,
+                UsingExpression(
+                    "x >> >= y",
+                    options,
                     // (1,6): error CS1525: Invalid expression term '>='
                     // x >> >= y
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">=").WithArguments(">=").WithLocation(1, 6)
-                    );
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ">=")
+                        .WithArguments(">=")
+                        .WithLocation(1, 6)
+                );
 
                 N(SyntaxKind.GreaterThanOrEqualExpression);
                 {
@@ -6329,13 +6714,24 @@ select t";
         [Fact]
         public void UnsignedRightShiftAssignment_04()
         {
-            foreach (var options in new[] { TestOptions.RegularPreview, TestOptions.Regular10, TestOptions.RegularNext })
+            foreach (
+                var options in new[]
+                {
+                    TestOptions.RegularPreview,
+                    TestOptions.Regular10,
+                    TestOptions.RegularNext
+                }
+            )
             {
-                UsingExpression("x >>> = y", options,
+                UsingExpression(
+                    "x >>> = y",
+                    options,
                     // (1,7): error CS1525: Invalid expression term '='
                     // x >>> = y
-                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=").WithArguments("=").WithLocation(1, 7)
-                    );
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "=")
+                        .WithArguments("=")
+                        .WithLocation(1, 7)
+                );
 
                 N(SyntaxKind.SimpleAssignmentExpression);
                 {

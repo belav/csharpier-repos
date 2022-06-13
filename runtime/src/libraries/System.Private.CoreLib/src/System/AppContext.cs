@@ -22,13 +22,16 @@ namespace System
         public static string BaseDirectory =>
             // The value of APP_CONTEXT_BASE_DIRECTORY key has to be a string and it is not allowed to be any other type.
             // Otherwise the caller will get invalid cast exception
-            GetData("APP_CONTEXT_BASE_DIRECTORY") as string ??
-            (s_defaultBaseDirectory ??= GetBaseDirectoryCore());
+            GetData("APP_CONTEXT_BASE_DIRECTORY") as string
+            ?? (s_defaultBaseDirectory ??= GetBaseDirectoryCore());
 
         public static string? TargetFrameworkName =>
             // The Target framework is not the framework that the process is actually running on.
             // It is the value read from the TargetFrameworkAttribute on the .exe that started the process.
-            Assembly.GetEntryAssembly()?.GetCustomAttribute<TargetFrameworkAttribute>()?.FrameworkName;
+            Assembly
+                .GetEntryAssembly()
+                ?.GetCustomAttribute<TargetFrameworkAttribute>()
+                ?.FrameworkName;
 
         public static object? GetData(string name)
         {
@@ -57,7 +60,11 @@ namespace System
 
             if (s_dataStore == null)
             {
-                Interlocked.CompareExchange(ref s_dataStore, new Dictionary<string, object?>(), null);
+                Interlocked.CompareExchange(
+                    ref s_dataStore,
+                    new Dictionary<string, object?>(),
+                    null
+                );
             }
 
             lock (s_dataStore)
@@ -67,10 +74,16 @@ namespace System
         }
 
 #pragma warning disable CS0067 // events raised by the VM
-        [field: DynamicDependency(DynamicallyAccessedMemberTypes.PublicConstructors, typeof(UnhandledExceptionEventArgs))]
+        [field: DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicConstructors,
+            typeof(UnhandledExceptionEventArgs)
+        )]
         public static event UnhandledExceptionEventHandler? UnhandledException;
 
-        [field: DynamicDependency(DynamicallyAccessedMemberTypes.PublicConstructors, typeof(FirstChanceExceptionEventArgs))]
+        [field: DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicConstructors,
+            typeof(FirstChanceExceptionEventArgs)
+        )]
         public static event EventHandler<FirstChanceExceptionEventArgs>? FirstChanceException;
 #pragma warning restore CS0067
 
@@ -139,7 +152,10 @@ namespace System
 #if !NATIVEAOT
         internal static unsafe void Setup(char** pNames, char** pValues, int count)
         {
-            Debug.Assert(s_dataStore == null, "s_dataStore is not expected to be inited before Setup is called");
+            Debug.Assert(
+                s_dataStore == null,
+                "s_dataStore is not expected to be inited before Setup is called"
+            );
             s_dataStore = new Dictionary<string, object?>(count);
             for (int i = 0; i < count; i++)
             {

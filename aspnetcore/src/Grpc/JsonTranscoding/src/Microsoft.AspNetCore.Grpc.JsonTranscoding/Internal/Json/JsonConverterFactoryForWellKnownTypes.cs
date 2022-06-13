@@ -35,23 +35,27 @@ internal sealed class JsonConverterFactoryForWellKnownTypes : JsonConverterFacto
         return WellKnownTypeNames.ContainsKey(descriptor.FullName);
     }
 
-    public override JsonConverter CreateConverter(
-        Type typeToConvert, JsonSerializerOptions options)
+    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
         var descriptor = JsonConverterHelper.GetMessageDescriptor(typeToConvert)!;
         var converterType = WellKnownTypeNames[descriptor.FullName];
 
-        var converter = (JsonConverter)Activator.CreateInstance(
-            converterType.MakeGenericType(new Type[] { typeToConvert }),
-            BindingFlags.Instance | BindingFlags.Public,
-            binder: null,
-            args: new object[] { _context },
-            culture: null)!;
+        var converter = (JsonConverter)
+            Activator.CreateInstance(
+                converterType.MakeGenericType(new Type[] { typeToConvert }),
+                BindingFlags.Instance | BindingFlags.Public,
+                binder: null,
+                args: new object[] { _context },
+                culture: null
+            )!;
 
         return converter;
     }
 
-    private static readonly Dictionary<string, Type> WellKnownTypeNames = new Dictionary<string, Type>
+    private static readonly Dictionary<string, Type> WellKnownTypeNames = new Dictionary<
+        string,
+        Type
+    >
     {
         [Any.Descriptor.FullName] = typeof(AnyConverter<>),
         [Duration.Descriptor.FullName] = typeof(DurationConverter<>),

@@ -17,7 +17,9 @@ namespace System.Collections
     ///    will be smaller and faster than a Hashtable if the number of elements is 10 or less.
     ///    This should not be used if performance is important for large numbers of elements.
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     // Needs to be public to support binary serialization compatibility
     public class ListDictionaryInternal : IDictionary
     {
@@ -25,9 +27,7 @@ namespace System.Collections
         private int version; // Do not rename (binary serialization)
         private int count; // Do not rename (binary serialization)
 
-        public ListDictionaryInternal()
-        {
-        }
+        public ListDictionaryInternal() { }
 
         public object? this[object key]
         {
@@ -108,7 +108,9 @@ namespace System.Collections
             {
                 if (node.key.Equals(key))
                 {
-                    throw new ArgumentException(SR.Format(SR.Argument_AddingDuplicate__, node.key, key));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_AddingDuplicate__, node.key, key)
+                    );
                 }
                 last = node;
             }
@@ -157,10 +159,16 @@ namespace System.Collections
                 throw new ArgumentException(SR.Arg_RankMultiDimNotSupported);
 
             if (index < 0)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (array.Length - index < this.Count)
-                throw new ArgumentException(SR.ArgumentOutOfRange_IndexMustBeLessOrEqual, nameof(index));
+                throw new ArgumentException(
+                    SR.ArgumentOutOfRange_IndexMustBeLessOrEqual,
+                    nameof(index)
+                );
 
             for (DictionaryNode? node = head; node != null; node = node.next)
             {
@@ -312,9 +320,15 @@ namespace System.Collections
                 if (array.Rank != 1)
                     throw new ArgumentException(SR.Arg_RankMultiDimNotSupported);
                 if (index < 0)
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_NeedNonNegNum
+                    );
                 if (array.Length - index < list.Count)
-                    throw new ArgumentException(SR.ArgumentOutOfRange_IndexMustBeLessOrEqual, nameof(index));
+                    throw new ArgumentException(
+                        SR.ArgumentOutOfRange_IndexMustBeLessOrEqual,
+                        nameof(index)
+                    );
                 for (DictionaryNode? node = list.head; node != null; node = node.next)
                 {
                     array.SetValue(isKeys ? node.key : node.value, index);
@@ -367,7 +381,9 @@ namespace System.Collections
                     {
                         if (current == null)
                         {
-                            throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
+                            throw new InvalidOperationException(
+                                SR.InvalidOperation_EnumOpCantHappen
+                            );
                         }
                         return isKeys ? current.key : current.value;
                     }

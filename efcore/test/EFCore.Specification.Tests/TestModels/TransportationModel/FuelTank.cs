@@ -12,12 +12,11 @@ public class FuelTank
     public PoweredVehicle Vehicle { get; set; }
     public CombustionEngine Engine { get; set; }
 
-    public override bool Equals(object obj)
-        => obj is FuelTank other
-            && VehicleName == other.VehicleName
-            && FuelType == other.FuelType
-            && Capacity == other.Capacity;
+    public override bool Equals(object obj) =>
+        obj is FuelTank other
+        && VehicleName == other.VehicleName
+        && FuelType == other.FuelType
+        && Capacity == other.Capacity;
 
-    public override int GetHashCode()
-        => HashCode.Combine(VehicleName, FuelType, Capacity);
+    public override int GetHashCode() => HashCode.Combine(VehicleName, FuelType, Capacity);
 }

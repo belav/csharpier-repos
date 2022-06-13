@@ -10,17 +10,21 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLanguages
 {
-    [ExportEmbeddedLanguageClassifierInternal(
-        nameof(AspNetCoreEmbeddedLanguageClassifier), LanguageNames.CSharp, supportsUnannotatedAPIs: false,
-        // Add more syntax names here in the future if there are additional cases ASP.Net would like to light up on.
-        identifiers: new[] { "Route" }), Shared]
+    [
+        ExportEmbeddedLanguageClassifierInternal(
+            nameof(AspNetCoreEmbeddedLanguageClassifier),
+            LanguageNames.CSharp,
+            supportsUnannotatedAPIs: false,
+            // Add more syntax names here in the future if there are additional cases ASP.Net would like to light up on.
+            identifiers: new[] { "Route" }
+        ),
+        Shared
+    ]
     internal class AspNetCoreEmbeddedLanguageClassifier : IEmbeddedLanguageClassifier
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AspNetCoreEmbeddedLanguageClassifier()
-        {
-        }
+        public AspNetCoreEmbeddedLanguageClassifier() { }
 
         public void RegisterClassifications(EmbeddedLanguageClassificationContext context)
         {
@@ -31,12 +35,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLang
             if (classifiers.Length == 0)
                 return;
 
-            var virtualChars = context.VirtualCharService.TryConvertToVirtualChars(context.SyntaxToken);
+            var virtualChars = context.VirtualCharService.TryConvertToVirtualChars(
+                context.SyntaxToken
+            );
             if (virtualChars.IsDefaultOrEmpty)
                 return;
 
             var aspContext = new AspNetCoreEmbeddedLanguageClassificationContext(
-                context, new AspNetCoreVirtualCharSequence(virtualChars));
+                context,
+                new AspNetCoreVirtualCharSequence(virtualChars)
+            );
             foreach (var classifier in classifiers)
                 classifier.RegisterClassifications(aspContext);
         }

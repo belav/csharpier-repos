@@ -29,7 +29,10 @@ unsafe partial class Int128Native
     public static extern Int128 AddInt128s(Int128* pValues, int count);
 
     [DllImport(nameof(Int128Native))]
-    public static extern Int128 AddInt128s([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Int128[] pValues, int count);
+    public static extern Int128 AddInt128s(
+        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Int128[] pValues,
+        int count
+    );
 
     [DllImport(nameof(Int128Native))]
     public static extern Int128 AddInt128s(in Int128 pValues, int count);
@@ -58,7 +61,8 @@ unsafe partial class Int128Native
         Int128 value6 = Int128Native.AddInt128(new Int128(11, 12), new Int128(13, 14));
         Assert.Equal(new Int128(24, 26), value6);
 
-        Int128[] values = new Int128[] {
+        Int128[] values = new Int128[]
+        {
             new Int128(15, 16),
             new Int128(17, 18),
             new Int128(19, 20),

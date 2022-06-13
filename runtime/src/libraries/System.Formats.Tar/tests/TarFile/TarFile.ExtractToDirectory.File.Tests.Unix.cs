@@ -9,11 +9,14 @@ namespace System.Formats.Tar.Tests
 {
     public partial class TarFile_ExtractToDirectory_File_Tests : TarTestsBase
     {
-
         [Fact]
         public void Extract_SpecialFiles_Unix_Unelevated_ThrowsUnauthorizedAccess()
         {
-            string originalFileName = GetTarFilePath(CompressionMethod.Uncompressed, TestTarFormat.ustar, "specialfiles");
+            string originalFileName = GetTarFilePath(
+                CompressionMethod.Uncompressed,
+                TestTarFormat.ustar,
+                "specialfiles"
+            );
             using TempDirectory root = new TempDirectory();
 
             string archive = Path.Join(root.Path, "input.tar");
@@ -24,7 +27,9 @@ namespace System.Formats.Tar.Tests
 
             Directory.CreateDirectory(destination);
 
-            Assert.Throws<UnauthorizedAccessException>(() => TarFile.ExtractToDirectory(archive, destination, overwriteFiles: false));
+            Assert.Throws<UnauthorizedAccessException>(
+                () => TarFile.ExtractToDirectory(archive, destination, overwriteFiles: false)
+            );
 
             Assert.Equal(0, Directory.GetFileSystemEntries(destination).Count());
         }

@@ -11,9 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 /// </summary>
 public class EntityQueryProvider : IAsyncQueryProvider
 {
-    private static readonly MethodInfo GenericCreateQueryMethod
-        = typeof(EntityQueryProvider).GetRuntimeMethods()
-            .Single(m => (m.Name == "CreateQuery") && m.IsGenericMethod);
+    private static readonly MethodInfo GenericCreateQueryMethod = typeof(EntityQueryProvider)
+        .GetRuntimeMethods()
+        .Single(m => (m.Name == "CreateQuery") && m.IsGenericMethod);
 
     private readonly MethodInfo _genericExecuteMethod;
 
@@ -28,7 +28,8 @@ public class EntityQueryProvider : IAsyncQueryProvider
     public EntityQueryProvider(IQueryCompiler queryCompiler)
     {
         _queryCompiler = queryCompiler;
-        _genericExecuteMethod = queryCompiler.GetType()
+        _genericExecuteMethod = queryCompiler
+            .GetType()
             .GetRuntimeMethods()
             .Single(m => (m.Name == "Execute") && m.IsGenericMethod);
     }
@@ -39,8 +40,8 @@ public class EntityQueryProvider : IAsyncQueryProvider
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IQueryable<TElement> CreateQuery<TElement>(Expression expression)
-        => new EntityQueryable<TElement>(this, expression);
+    public virtual IQueryable<TElement> CreateQuery<TElement>(Expression expression) =>
+        new EntityQueryable<TElement>(this, expression);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,10 +49,11 @@ public class EntityQueryProvider : IAsyncQueryProvider
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IQueryable CreateQuery(Expression expression)
-        => (IQueryable)GenericCreateQueryMethod
-            .MakeGenericMethod(expression.Type.GetSequenceType())
-            .Invoke(this, new object[] { expression })!;
+    public virtual IQueryable CreateQuery(Expression expression) =>
+        (IQueryable)
+            GenericCreateQueryMethod
+                .MakeGenericMethod(expression.Type.GetSequenceType())
+                .Invoke(this, new object[] { expression })!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -59,8 +61,8 @@ public class EntityQueryProvider : IAsyncQueryProvider
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual TResult Execute<TResult>(Expression expression)
-        => _queryCompiler.Execute<TResult>(expression);
+    public virtual TResult Execute<TResult>(Expression expression) =>
+        _queryCompiler.Execute<TResult>(expression);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -68,8 +70,9 @@ public class EntityQueryProvider : IAsyncQueryProvider
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object Execute(Expression expression)
-        => _genericExecuteMethod.MakeGenericMethod(expression.Type)
+    public virtual object Execute(Expression expression) =>
+        _genericExecuteMethod
+            .MakeGenericMethod(expression.Type)
             .Invoke(_queryCompiler, new object[] { expression })!;
 
     /// <summary>
@@ -78,6 +81,8 @@ public class EntityQueryProvider : IAsyncQueryProvider
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken = default)
-        => _queryCompiler.ExecuteAsync<TResult>(expression, cancellationToken);
+    public virtual TResult ExecuteAsync<TResult>(
+        Expression expression,
+        CancellationToken cancellationToken = default
+    ) => _queryCompiler.ExecuteAsync<TResult>(expression, cancellationToken);
 }

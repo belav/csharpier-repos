@@ -10,7 +10,10 @@ namespace System.Formats.Tar
     public sealed partial class TarWriter : IDisposable
     {
         // Unix specific implementation of the method that reads an entry from disk and writes it into the archive stream.
-        partial void ReadFileFromDiskAndWriteToArchiveStreamAsEntry(string fullPath, string entryName)
+        partial void ReadFileFromDiskAndWriteToArchiveStreamAsEntry(
+            string fullPath,
+            string entryName
+        )
         {
             Interop.Sys.FileStatus status = default;
             status.Mode = default;
@@ -21,16 +24,23 @@ namespace System.Formats.Tar
             {
                 // Hard links are treated as regular files.
                 // Unix socket files do not get added to tar files.
-                Interop.Sys.FileTypes.S_IFBLK => TarEntryType.BlockDevice,
+                Interop.Sys.FileTypes.S_IFBLK
+                    => TarEntryType.BlockDevice,
                 Interop.Sys.FileTypes.S_IFCHR => TarEntryType.CharacterDevice,
                 Interop.Sys.FileTypes.S_IFIFO => TarEntryType.Fifo,
                 Interop.Sys.FileTypes.S_IFLNK => TarEntryType.SymbolicLink,
-                Interop.Sys.FileTypes.S_IFREG => Format is TarFormat.V7 ? TarEntryType.V7RegularFile : TarEntryType.RegularFile,
+                Interop.Sys.FileTypes.S_IFREG
+                    => Format is TarFormat.V7
+                        ? TarEntryType.V7RegularFile
+                        : TarEntryType.RegularFile,
                 Interop.Sys.FileTypes.S_IFDIR => TarEntryType.Directory,
                 _ => throw new IOException(string.Format(SR.TarUnsupportedFile, fullPath)),
             };
 
-            FileSystemInfo info = entryType is TarEntryType.Directory ? new DirectoryInfo(fullPath) : new FileInfo(fullPath);
+            FileSystemInfo info =
+                entryType is TarEntryType.Directory
+                    ? new DirectoryInfo(fullPath)
+                    : new FileInfo(fullPath);
 
             TarEntry entry = Format switch
             {
@@ -41,13 +51,18 @@ namespace System.Formats.Tar
                 _ => throw new FormatException(string.Format(SR.TarInvalidFormat, Format)),
             };
 
-            if ((entryType is TarEntryType.BlockDevice or TarEntryType.CharacterDevice) && status.Dev > 0)
+            if (
+                (entryType is TarEntryType.BlockDevice or TarEntryType.CharacterDevice)
+                && status.Dev > 0
+            )
             {
                 uint major;
                 uint minor;
                 unsafe
                 {
-                    Interop.CheckIo(Interop.Sys.GetDeviceIdentifiers((ulong)status.Dev, &major, &minor));
+                    Interop.CheckIo(
+                        Interop.Sys.GetDeviceIdentifiers((ulong)status.Dev, &major, &minor)
+                    );
                 }
 
                 entry._header._devMajor = (int)major;
@@ -64,8 +79,8 @@ namespace System.Formats.Tar
             entry.Gid = (int)status.Gid;
 
             // TODO: Add these p/invokes https://github.com/dotnet/runtime/issues/68230
-            entry._header._uName = "";// Interop.Sys.GetUName();
-            entry._header._gName = "";// Interop.Sys.GetGName();
+            entry._header._uName = ""; // Interop.Sys.GetUName();
+            entry._header._gName = ""; // Interop.Sys.GetGName();
 
             if (entry.EntryType == TarEntryType.SymbolicLink)
             {
@@ -74,13 +89,14 @@ namespace System.Formats.Tar
 
             if (entry.EntryType is TarEntryType.RegularFile or TarEntryType.V7RegularFile)
             {
-                FileStreamOptions options = new()
-                {
-                    Mode = FileMode.Open,
-                    Access = FileAccess.Read,
-                    Share = FileShare.Read,
-                    Options = FileOptions.None
-                };
+                FileStreamOptions options =
+                    new()
+                    {
+                        Mode = FileMode.Open,
+                        Access = FileAccess.Read,
+                        Share = FileShare.Read,
+                        Options = FileOptions.None
+                    };
 
                 Debug.Assert(entry._header._dataStream == null);
                 entry._header._dataStream = File.Open(fullPath, options);

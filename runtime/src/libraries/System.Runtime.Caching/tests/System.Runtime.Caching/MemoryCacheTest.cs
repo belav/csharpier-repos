@@ -59,7 +59,13 @@ namespace MonoTests.System.Runtime.Caching
                 }
 
                 // On non-windows, we only support .Net 5.0 and higher
-                if (Environment.Version.Major >= 5 || RuntimeInformation.FrameworkDescription.StartsWith(".NET Core", StringComparison.OrdinalIgnoreCase))
+                if (
+                    Environment.Version.Major >= 5
+                    || RuntimeInformation.FrameworkDescription.StartsWith(
+                        ".NET Core",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }
@@ -69,7 +75,10 @@ namespace MonoTests.System.Runtime.Caching
         }
         public static bool DoesNotSupportPhysicalMemoryMonitor => !SupportsPhysicalMemoryMonitor;
 
-        private bool IsFullFramework = RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase);
+        private bool IsFullFramework = RuntimeInformation.FrameworkDescription.StartsWith(
+            ".NET Framework",
+            StringComparison.OrdinalIgnoreCase
+        );
 
         private PokerMemoryCache CreatePokerMemoryCache(string name, string throwOnDisposed)
         {
@@ -202,13 +211,14 @@ namespace MonoTests.System.Runtime.Caching
             Assert.Equal("MyCache", mc.Name);
             Assert.Equal(TimeSpan.FromMinutes(2), mc.PollingInterval);
             Assert.Equal(
-                DefaultCacheCapabilities.InMemoryProvider |
-                DefaultCacheCapabilities.CacheEntryChangeMonitors |
-                DefaultCacheCapabilities.AbsoluteExpirations |
-                DefaultCacheCapabilities.SlidingExpirations |
-                DefaultCacheCapabilities.CacheEntryRemovedCallback |
-                DefaultCacheCapabilities.CacheEntryUpdateCallback,
-                mc.DefaultCacheCapabilities);
+                DefaultCacheCapabilities.InMemoryProvider
+                    | DefaultCacheCapabilities.CacheEntryChangeMonitors
+                    | DefaultCacheCapabilities.AbsoluteExpirations
+                    | DefaultCacheCapabilities.SlidingExpirations
+                    | DefaultCacheCapabilities.CacheEntryRemovedCallback
+                    | DefaultCacheCapabilities.CacheEntryUpdateCallback,
+                mc.DefaultCacheCapabilities
+            );
 
             // throwOnDisposed is false
             mc.Dispose();
@@ -222,13 +232,14 @@ namespace MonoTests.System.Runtime.Caching
             Assert.Equal("Default", mc.Name);
             Assert.Equal(TimeSpan.FromMinutes(2), mc.PollingInterval);
             Assert.Equal(
-                DefaultCacheCapabilities.InMemoryProvider |
-                DefaultCacheCapabilities.CacheEntryChangeMonitors |
-                DefaultCacheCapabilities.AbsoluteExpirations |
-                DefaultCacheCapabilities.SlidingExpirations |
-                DefaultCacheCapabilities.CacheEntryRemovedCallback |
-                DefaultCacheCapabilities.CacheEntryUpdateCallback,
-                mc.DefaultCacheCapabilities);
+                DefaultCacheCapabilities.InMemoryProvider
+                    | DefaultCacheCapabilities.CacheEntryChangeMonitors
+                    | DefaultCacheCapabilities.AbsoluteExpirations
+                    | DefaultCacheCapabilities.SlidingExpirations
+                    | DefaultCacheCapabilities.CacheEntryRemovedCallback
+                    | DefaultCacheCapabilities.CacheEntryUpdateCallback,
+                mc.DefaultCacheCapabilities
+            );
 
             // throwOnDisposed is false
             mc.Dispose();
@@ -281,8 +292,14 @@ namespace MonoTests.System.Runtime.Caching
             mc["key"] = "value";
             Assert.Equal(3, mc.Calls.Count);
             Assert.Equal("set_this [string key]", mc.Calls[0]);
-            Assert.Equal("Set (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)", mc.Calls[1]);
-            Assert.Equal("Set (string key, object value, CacheItemPolicy policy, string regionName = null)", mc.Calls[2]);
+            Assert.Equal(
+                "Set (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)",
+                mc.Calls[1]
+            );
+            Assert.Equal(
+                "Set (string key, object value, CacheItemPolicy policy, string regionName = null)",
+                mc.Calls[2]
+            );
             Assert.True(mc.Contains("key"));
 
             mc.Calls.Clear();
@@ -292,9 +309,12 @@ namespace MonoTests.System.Runtime.Caching
             Assert.Equal("value", value);
 
             mc.Dispose();
-            if (throwOnDisposed == "true" && !IsFullFramework)  // Noisy when disposed is a Core-only feature.
+            if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
-                Assert.Throws<ObjectDisposedException>(() => { var val = mc["key"]; });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    var val = mc["key"];
+                });
             }
             else
             {
@@ -335,9 +355,12 @@ namespace MonoTests.System.Runtime.Caching
 
             // Contains throws when disposed
             mc.Dispose();
-            if (throwOnDisposed == "true" && !IsFullFramework)  // Noisy when disposed is a Core-only feature.
+            if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
-                Assert.Throws<ObjectDisposedException>(() => { mc.Contains("key"); });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    mc.Contains("key");
+                });
             }
             else
             {
@@ -374,9 +397,14 @@ namespace MonoTests.System.Runtime.Caching
             mc.Set("key2", "value2", ObjectCache.InfiniteAbsoluteExpiration);
             mc.Set("key3", "value3", ObjectCache.InfiniteAbsoluteExpiration);
 
-            CacheEntryChangeMonitor monitor = mc.CreateCacheEntryChangeMonitor(new string[] { "key1", "key2" });
+            CacheEntryChangeMonitor monitor = mc.CreateCacheEntryChangeMonitor(
+                new string[] { "key1", "key2" }
+            );
             Assert.NotNull(monitor);
-            Assert.Equal("System.Runtime.Caching.MemoryCacheEntryChangeMonitor", monitor.GetType().ToString());
+            Assert.Equal(
+                "System.Runtime.Caching.MemoryCacheEntryChangeMonitor",
+                monitor.GetType().ToString()
+            );
             Assert.Equal(2, monitor.CacheKeys.Count);
             Assert.Equal("key1", monitor.CacheKeys[0]);
             Assert.Equal("key2", monitor.CacheKeys[1]);
@@ -386,13 +414,16 @@ namespace MonoTests.System.Runtime.Caching
             // The actual unique id is constructed from key names followed by the hex value of ticks of their last modifed time
             Assert.False(string.IsNullOrEmpty(monitor.UniqueId));
 
-            monitor = mc.CreateCacheEntryChangeMonitor (new string [] { "key1", "doesnotexist" });
-            Assert.NotNull (monitor);
-            Assert.Equal ("System.Runtime.Caching.MemoryCacheEntryChangeMonitor", monitor.GetType ().ToString ());
-            Assert.Equal (2, monitor.CacheKeys.Count);
-            Assert.Equal ("key1", monitor.CacheKeys [0]);
-            Assert.Null (monitor.RegionName);
-            Assert.True (monitor.HasChanged);
+            monitor = mc.CreateCacheEntryChangeMonitor(new string[] { "key1", "doesnotexist" });
+            Assert.NotNull(monitor);
+            Assert.Equal(
+                "System.Runtime.Caching.MemoryCacheEntryChangeMonitor",
+                monitor.GetType().ToString()
+            );
+            Assert.Equal(2, monitor.CacheKeys.Count);
+            Assert.Equal("key1", monitor.CacheKeys[0]);
+            Assert.Null(monitor.RegionName);
+            Assert.True(monitor.HasChanged);
         }
 
         [Theory, InlineData("true"), InlineData("false"), InlineData(null)]
@@ -415,7 +446,11 @@ namespace MonoTests.System.Runtime.Caching
                 mc.AddOrGetExisting("key", "value", DateTimeOffset.Now, "region");
             });
 
-            object value = mc.AddOrGetExisting("key3_A2-1", "value", DateTimeOffset.Now.AddMinutes(1));
+            object value = mc.AddOrGetExisting(
+                "key3_A2-1",
+                "value",
+                DateTimeOffset.Now.AddMinutes(1)
+            );
             Assert.True(mc.Contains("key3_A2-1"));
             Assert.Null(value);
 
@@ -425,7 +460,10 @@ namespace MonoTests.System.Runtime.Caching
             Assert.NotNull(value);
             Assert.Equal("value", value);
             Assert.Equal(2, mc.Calls.Count);
-            Assert.Equal("AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)", mc.Calls[0]);
+            Assert.Equal(
+                "AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)",
+                mc.Calls[0]
+            );
 
             value = mc.AddOrGetExisting("key_expired", "value", DateTimeOffset.MinValue);
             Assert.False(mc.Contains("key_expired"));
@@ -433,19 +471,33 @@ namespace MonoTests.System.Runtime.Caching
 
             // Throws when disposed
             mc.Dispose();
-            if (throwOnDisposed == "true" && !IsFullFramework)  // Noisy when disposed is a Core-only feature.
+            if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
-                Assert.Throws<ObjectDisposedException>(() => {
-                    value = mc.AddOrGetExisting("key3_A2-1", "value3", DateTimeOffset.Now.AddMinutes(1));
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    value = mc.AddOrGetExisting(
+                        "key3_A2-1",
+                        "value3",
+                        DateTimeOffset.Now.AddMinutes(1)
+                    );
                 });
-                Assert.Throws<ObjectDisposedException>(() => {
-                    value = mc.AddOrGetExisting("not-key3_A2-1", "value4", DateTimeOffset.Now.AddMinutes(1));
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    value = mc.AddOrGetExisting(
+                        "not-key3_A2-1",
+                        "value4",
+                        DateTimeOffset.Now.AddMinutes(1)
+                    );
                 });
             }
             else
             {
-                Assert.Null(mc.AddOrGetExisting("key3_A2-1", "value3", DateTimeOffset.Now.AddMinutes(1)));
-                Assert.Null(mc.AddOrGetExisting("not-key3_A2-1", "value4", DateTimeOffset.Now.AddMinutes(1)));
+                Assert.Null(
+                    mc.AddOrGetExisting("key3_A2-1", "value3", DateTimeOffset.Now.AddMinutes(1))
+                );
+                Assert.Null(
+                    mc.AddOrGetExisting("not-key3_A2-1", "value4", DateTimeOffset.Now.AddMinutes(1))
+                );
             }
         }
 
@@ -521,7 +573,10 @@ namespace MonoTests.System.Runtime.Caching
             Assert.NotNull(value);
             Assert.Equal("value", value);
             Assert.Equal(2, mc.Calls.Count);
-            Assert.Equal("AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)", mc.Calls[0]);
+            Assert.Equal(
+                "AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)",
+                mc.Calls[0]
+            );
 
             cip = new CacheItemPolicy();
             cip.AbsoluteExpiration = DateTimeOffset.MinValue;
@@ -534,7 +589,8 @@ namespace MonoTests.System.Runtime.Caching
         public void AddOrGetExisting_CacheItem_CacheItemPolicy()
         {
             var mc = new PokerMemoryCache("MyCache");
-            CacheItem ci, ci2;
+            CacheItem ci,
+                ci2;
 
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -749,15 +805,21 @@ namespace MonoTests.System.Runtime.Caching
             mc.Set("key_A5", "value_A5", cip);
             Assert.True(mc.Contains("key_A5"));
             Assert.Equal(2, mc.Calls.Count);
-            Assert.Equal("Set (string key, object value, CacheItemPolicy policy, string regionName = null)", mc.Calls[0]);
+            Assert.Equal(
+                "Set (string key, object value, CacheItemPolicy policy, string regionName = null)",
+                mc.Calls[0]
+            );
 
             // Throws when disposed
             mc.Dispose();
-            if (throwOnDisposed == "true" && !IsFullFramework)  // Noisy when disposed is a Core-only feature.
+            if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
                 cip = new CacheItemPolicy();
                 cip.AbsoluteExpiration = DateTimeOffset.MaxValue;
-                Assert.Throws<ObjectDisposedException>(() => { mc.Set("key_A6", "value_A6", cip); });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    mc.Set("key_A6", "value_A6", cip);
+                });
             }
             else
             {
@@ -796,8 +858,14 @@ namespace MonoTests.System.Runtime.Caching
             mc.Set("key", "value", DateTimeOffset.MaxValue);
 
             Assert.Equal(2, mc.Calls.Count);
-            Assert.Equal("Set (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)", mc.Calls[0]);
-            Assert.Equal("Set (string key, object value, CacheItemPolicy policy, string regionName = null)", mc.Calls[1]);
+            Assert.Equal(
+                "Set (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)",
+                mc.Calls[0]
+            );
+            Assert.Equal(
+                "Set (string key, object value, CacheItemPolicy policy, string regionName = null)",
+                mc.Calls[1]
+            );
         }
 
         [Fact]
@@ -892,7 +960,10 @@ namespace MonoTests.System.Runtime.Caching
 
             Assert.Equal(2, mc.Calls.Count);
             Assert.Equal("Set (CacheItem item, CacheItemPolicy policy)", mc.Calls[0]);
-            Assert.Equal("Set (string key, object value, CacheItemPolicy policy, string regionName = null)", mc.Calls[1]);
+            Assert.Equal(
+                "Set (string key, object value, CacheItemPolicy policy, string regionName = null)",
+                mc.Calls[1]
+            );
         }
 
         [Theory, InlineData("true"), InlineData("false"), InlineData(null)]
@@ -992,9 +1063,12 @@ namespace MonoTests.System.Runtime.Caching
             callbackInvoked = false;
             reason = (CacheEntryRemovedReason)1000;
             mc.Dispose();
-            if (throwOnDisposed == "true" && !IsFullFramework)  // Noisy when disposed is a Core-only feature.
+            if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
-                Assert.Throws<ObjectDisposedException>(() => { value = mc.Remove("key"); });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    value = mc.Remove("key");
+                });
             }
             else
             {
@@ -1054,9 +1128,12 @@ namespace MonoTests.System.Runtime.Caching
 
             // Throws when disposed
             mc.Dispose();
-            if (throwOnDisposed == "true" && !IsFullFramework)  // Noisy when disposed is a Core-only feature.
+            if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
-                Assert.Throws<ObjectDisposedException>(() => { mc.GetValues(new string[] { "key1", "key3" }); });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    mc.GetValues(new string[] { "key1", "key3" });
+                });
             }
             else
             {
@@ -1086,10 +1163,12 @@ namespace MonoTests.System.Runtime.Caching
 
             bool onChangedCalled = false;
             monitor = new PokerChangeMonitor();
-            monitor.NotifyOnChanged((object state) =>
-            {
-                onChangedCalled = true;
-            });
+            monitor.NotifyOnChanged(
+                (object state) =>
+                {
+                    onChangedCalled = true;
+                }
+            );
 
             cip = new CacheItemPolicy();
             cip.ChangeMonitors.Add(monitor);
@@ -1118,9 +1197,9 @@ namespace MonoTests.System.Runtime.Caching
             var numCpuCores = Environment.ProcessorCount;
             var numItems = numCpuCores > 1 ? numCpuCores / 2 : 1;
 
-            for (int i = 0; i < numItems;)
+            for (int i = 0; i < numItems; )
             {
-                var key = "key" + i*i*i + "key" + ++i;
+                var key = "key" + i * i * i + "key" + ++i;
                 mc.Set(key, "value" + i.ToString(), null);
             }
 
@@ -1146,9 +1225,12 @@ namespace MonoTests.System.Runtime.Caching
             // Trim should throw if the cache is disposed
             // Throws when disposed
             mc.Dispose();
-            if (throwOnDisposed == "true" && !IsFullFramework)  // Noisy when disposed is a Core-only feature.
+            if (throwOnDisposed == "true" && !IsFullFramework) // Noisy when disposed is a Core-only feature.
             {
-                Assert.Throws<ObjectDisposedException>(() => { mc.Trim(50); });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    mc.Trim(50);
+                });
             }
             else
             {
@@ -1501,7 +1583,8 @@ namespace MonoTests.System.Runtime.Caching
 
     public class MemoryCacheTestExpires4
     {
-        public static bool SupportsPhysicalMemoryMonitor => MemoryCacheTest.SupportsPhysicalMemoryMonitor;
+        public static bool SupportsPhysicalMemoryMonitor =>
+            MemoryCacheTest.SupportsPhysicalMemoryMonitor;
 
         [ConditionalFact(nameof(SupportsPhysicalMemoryMonitor))]
         public async Task TestCacheShrink()
@@ -1560,7 +1643,8 @@ namespace MonoTests.System.Runtime.Caching
 
     public class MemoryCacheTestExpires5
     {
-        public static bool SupportsPhysicalMemoryMonitor => MemoryCacheTest.SupportsPhysicalMemoryMonitor;
+        public static bool SupportsPhysicalMemoryMonitor =>
+            MemoryCacheTest.SupportsPhysicalMemoryMonitor;
 
         [ConditionalFact(nameof(SupportsPhysicalMemoryMonitor))]
         public async Task TestCacheExpiryOrdering()

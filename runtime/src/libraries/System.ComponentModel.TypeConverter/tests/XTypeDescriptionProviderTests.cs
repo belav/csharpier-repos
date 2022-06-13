@@ -31,10 +31,13 @@ namespace System.Xml.Linq.Tests
             Assert.Equal(xatt.Value, xattrPD.GetValue(xatt));
 
             bool valueChanged = false;
-            xattrPD.AddValueChanged(xatt, (o, e) =>
-            {
-                valueChanged = true;
-            });
+            xattrPD.AddValueChanged(
+                xatt,
+                (o, e) =>
+                {
+                    valueChanged = true;
+                }
+            );
             var newValue = "SomeNewValue";
             xattrPD.SetValue(xatt, newValue);
 
@@ -58,10 +61,13 @@ namespace System.Xml.Linq.Tests
             Assert.False(xelAttPD.ShouldSerializeValue(xel));
 
             bool valueChanged = false;
-            xelAttPD.AddValueChanged(xel, (o, e) =>
-            {
-                valueChanged = true;
-            });
+            xelAttPD.AddValueChanged(
+                xel,
+                (o, e) =>
+                {
+                    valueChanged = true;
+                }
+            );
 
             var attr1 = new XAttribute("attr1", "value");
             xel.Add(attr1);
@@ -75,8 +81,14 @@ namespace System.Xml.Linq.Tests
             object value = xelAttPD.GetValue(xel);
 
             // not exposed, must use reflection to get at it?!
-            var getItemMethod = value.GetType().GetMethod("get_Item", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            Func<string, XAttribute> getAttribute = (name) => (XAttribute)getItemMethod.Invoke(value, new string[] { name });
+            var getItemMethod = value
+                .GetType()
+                .GetMethod(
+                    "get_Item",
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
+                );
+            Func<string, XAttribute> getAttribute = (name) =>
+                (XAttribute)getItemMethod.Invoke(value, new string[] { name });
 
             Assert.Equal(attr1, getAttribute(attr1.Name.ToString()));
 
@@ -91,7 +103,7 @@ namespace System.Xml.Linq.Tests
             Assert.Null(getAttribute(attr2.Name.ToString()));
             Assert.False(valueChanged);
             xel.Add(attr2);
-            Assert.False(valueChanged);  // value is bound to attr1
+            Assert.False(valueChanged); // value is bound to attr1
             xel.Add(attr1);
             Assert.True(valueChanged);
 
@@ -136,12 +148,18 @@ namespace System.Xml.Linq.Tests
             var dess = (IEnumerable<XElement>)xelDesPD.GetValue(xel);
 
             bool valueChanged = false;
-            xelDesPD.AddValueChanged(xel, (o, e) =>
-            {
-                valueChanged = true;
-            });
+            xelDesPD.AddValueChanged(
+                xel,
+                (o, e) =>
+                {
+                    valueChanged = true;
+                }
+            );
 
-            xel.Add(new XElement("c1", new XElement("gc1", new XElement("ggc1"))), new XElement("c2"));
+            xel.Add(
+                new XElement("c1", new XElement("gc1", new XElement("ggc1"))),
+                new XElement("c2")
+            );
             Assert.True(valueChanged);
 
             Assert.Equal(dess, xel.Descendants());
@@ -166,10 +184,13 @@ namespace System.Xml.Linq.Tests
             Assert.False(xelElPD.ShouldSerializeValue(xel));
 
             bool valueChanged = false;
-            xelElPD.AddValueChanged(xel, (o, e) =>
-            {
-                valueChanged = true;
-            });
+            xelElPD.AddValueChanged(
+                xel,
+                (o, e) =>
+                {
+                    valueChanged = true;
+                }
+            );
 
             var el1 = new XElement("el1");
             xel.Add(el1);
@@ -183,8 +204,14 @@ namespace System.Xml.Linq.Tests
             object value = xelElPD.GetValue(xel);
 
             // not exposed, must use reflection to get at it?!
-            var getItemMethod = value.GetType().GetMethod("get_Item", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            Func<string, XElement> getElement = (name) => (XElement)getItemMethod.Invoke(value, new string[] { name });
+            var getItemMethod = value
+                .GetType()
+                .GetMethod(
+                    "get_Item",
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
+                );
+            Func<string, XElement> getElement = (name) =>
+                (XElement)getItemMethod.Invoke(value, new string[] { name });
 
             Assert.Equal(el1, getElement(el1.Name.ToString()));
 
@@ -199,7 +226,7 @@ namespace System.Xml.Linq.Tests
             Assert.Null(getElement(el2.Name.ToString()));
             Assert.False(valueChanged);
             xel.Add(el2);
-            Assert.False(valueChanged);  // value is bound to attr1
+            Assert.False(valueChanged); // value is bound to attr1
             xel.Add(el1);
             Assert.True(valueChanged);
 
@@ -244,10 +271,13 @@ namespace System.Xml.Linq.Tests
             var els = (IEnumerable<XElement>)xelElsPD.GetValue(xel);
 
             bool valueChanged = false;
-            xelElsPD.AddValueChanged(xel, (o, e) =>
-            {
-                valueChanged = true;
-            });
+            xelElsPD.AddValueChanged(
+                xel,
+                (o, e) =>
+                {
+                    valueChanged = true;
+                }
+            );
 
             xel.Add(new XElement("c1"), new XElement("c2"));
             Assert.True(valueChanged);
@@ -277,10 +307,13 @@ namespace System.Xml.Linq.Tests
             Assert.Equal(xel.Value, xelValPD.GetValue(xel));
 
             bool valueChanged = false;
-            xelValPD.AddValueChanged(xel, (o, e) =>
-            {
-                valueChanged = true;
-            });
+            xelValPD.AddValueChanged(
+                xel,
+                (o, e) =>
+                {
+                    valueChanged = true;
+                }
+            );
             var newValue = "SomeNewValue";
             xelValPD.SetValue(xel, newValue);
 
@@ -311,10 +344,13 @@ namespace System.Xml.Linq.Tests
             Assert.Equal(xel.ToString(), xelXmlPD.GetValue(xel));
 
             bool valueChanged = false;
-            xelXmlPD.AddValueChanged(xel, (o, e) =>
-            {
-                valueChanged = true;
-            });
+            xelXmlPD.AddValueChanged(
+                xel,
+                (o, e) =>
+                {
+                    valueChanged = true;
+                }
+            );
             xel.Value = "abc123";
             Assert.True(valueChanged);
             Assert.Equal(xel.ToString(), xelXmlPD.GetValue(xel));

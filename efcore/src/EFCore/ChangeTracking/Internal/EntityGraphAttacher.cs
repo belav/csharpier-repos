@@ -19,8 +19,7 @@ public class EntityGraphAttacher : IEntityGraphAttacher
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public EntityGraphAttacher(
-        IEntityEntryGraphIterator graphIterator)
+    public EntityGraphAttacher(IEntityEntryGraphIterator graphIterator)
     {
         _graphIterator = graphIterator;
     }
@@ -35,7 +34,8 @@ public class EntityGraphAttacher : IEntityGraphAttacher
         InternalEntityEntry rootEntry,
         EntityState targetState,
         EntityState storeGeneratedWithKeySetTargetState,
-        bool forceStateWhenUnknownKey)
+        bool forceStateWhenUnknownKey
+    )
     {
         try
         {
@@ -46,8 +46,10 @@ public class EntityGraphAttacher : IEntityGraphAttacher
                     rootEntry,
                     (targetState, storeGeneratedWithKeySetTargetState, forceStateWhenUnknownKey),
                     null,
-                    null),
-                PaintAction);
+                    null
+                ),
+                PaintAction
+            );
 
             rootEntry.StateManager.CompleteAttachGraph();
         }
@@ -69,20 +71,29 @@ public class EntityGraphAttacher : IEntityGraphAttacher
         EntityState targetState,
         EntityState storeGeneratedWithKeySetTargetState,
         bool forceStateWhenUnknownKey,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         try
         {
             rootEntry.StateManager.BeginAttachGraph();
 
-            await _graphIterator.TraverseGraphAsync(
-                new EntityEntryGraphNode<(EntityState TargetState, EntityState StoreGenTargetState, bool Force)>(
-                    rootEntry,
-                    (targetState, storeGeneratedWithKeySetTargetState, forceStateWhenUnknownKey),
-                    null,
-                    null),
-                PaintActionAsync,
-                cancellationToken).ConfigureAwait(false);
+            await _graphIterator
+                .TraverseGraphAsync(
+                    new EntityEntryGraphNode<(EntityState TargetState, EntityState StoreGenTargetState, bool Force)>(
+                        rootEntry,
+                        (
+                            targetState,
+                            storeGeneratedWithKeySetTargetState,
+                            forceStateWhenUnknownKey
+                        ),
+                        null,
+                        null
+                    ),
+                    PaintActionAsync,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             rootEntry.StateManager.CompleteAttachGraph();
         }
@@ -94,7 +105,8 @@ public class EntityGraphAttacher : IEntityGraphAttacher
     }
 
     private static bool PaintAction(
-        EntityEntryGraphNode<(EntityState TargetState, EntityState StoreGenTargetState, bool Force)> node)
+        EntityEntryGraphNode<(EntityState TargetState, EntityState StoreGenTargetState, bool Force)> node
+    )
     {
         SetReferenceLoaded(node);
 
@@ -109,18 +121,18 @@ public class EntityGraphAttacher : IEntityGraphAttacher
         var (isGenerated, isSet) = internalEntityEntry.IsKeySet;
 
         internalEntityEntry.SetEntityState(
-            isSet
-                ? (isGenerated ? storeGenTargetState : targetState)
-                : EntityState.Added, // Key can only be not-set if it is store-generated
+            isSet ? (isGenerated ? storeGenTargetState : targetState) : EntityState.Added, // Key can only be not-set if it is store-generated
             acceptChanges: true,
-            forceStateWhenUnknownKey: force ? targetState : null);
+            forceStateWhenUnknownKey: force ? targetState : null
+        );
 
         return true;
     }
 
     private static async Task<bool> PaintActionAsync(
         EntityEntryGraphNode<(EntityState TargetState, EntityState StoreGenTargetState, bool Force)> node,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         SetReferenceLoaded(node);
 
@@ -134,24 +146,24 @@ public class EntityGraphAttacher : IEntityGraphAttacher
 
         var (isGenerated, isSet) = internalEntityEntry.IsKeySet;
 
-        await internalEntityEntry.SetEntityStateAsync(
-                isSet
-                    ? (isGenerated ? storeGenTargetState : targetState)
-                    : EntityState.Added, // Key can only be not-set if it is store-generated
+        await internalEntityEntry
+            .SetEntityStateAsync(
+                isSet ? (isGenerated ? storeGenTargetState : targetState) : EntityState.Added, // Key can only be not-set if it is store-generated
                 acceptChanges: true,
                 forceStateWhenUnknownKey: force ? targetState : null,
-                cancellationToken: cancellationToken)
+                cancellationToken: cancellationToken
+            )
             .ConfigureAwait(false);
 
         return true;
     }
 
     private static void SetReferenceLoaded(
-        EntityEntryGraphNode<(EntityState TargetState, EntityState StoreGenTargetState, bool Force)> node)
+        EntityEntryGraphNode<(EntityState TargetState, EntityState StoreGenTargetState, bool Force)> node
+    )
     {
         var inboundNavigation = node.InboundNavigation;
-        if (inboundNavigation != null
-            && !inboundNavigation.IsCollection)
+        if (inboundNavigation != null && !inboundNavigation.IsCollection)
         {
             node.SourceEntry!.GetInfrastructure().SetIsLoaded(inboundNavigation);
         }

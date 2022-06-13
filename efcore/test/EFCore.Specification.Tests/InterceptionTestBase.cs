@@ -32,10 +32,7 @@ public abstract class InterceptionTestBase
 
     public class UniverseContext : PoolableDbContext
     {
-        public UniverseContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public UniverseContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,13 +40,15 @@ public abstract class InterceptionTestBase
                 .Entity<Singularity>()
                 .HasData(
                     new Singularity { Id = 77, Type = "Black Hole" },
-                    new Singularity { Id = 88, Type = "Bing Bang" });
+                    new Singularity { Id = 88, Type = "Bing Bang" }
+                );
 
             modelBuilder
                 .Entity<Brane>()
                 .HasData(
                     new Brane { Id = 77, Type = "Black Hole?" },
-                    new Brane { Id = 88, Type = "Bing Bang?" });
+                    new Brane { Id = 88, Type = "Bing Bang?" }
+                );
         }
     }
 
@@ -63,15 +62,21 @@ public abstract class InterceptionTestBase
         return (context, interceptor);
     }
 
-    public UniverseContext CreateContext(IInterceptor appInterceptor, params IInterceptor[] injectedInterceptors)
-        => new(
-            Fixture.CreateOptions(
-                new[] { appInterceptor }, injectedInterceptors));
+    public UniverseContext CreateContext(
+        IInterceptor appInterceptor,
+        params IInterceptor[] injectedInterceptors
+    ) => new(Fixture.CreateOptions(new[] { appInterceptor }, injectedInterceptors));
 
     public UniverseContext CreateContext(
         IEnumerable<IInterceptor> appInterceptors,
-        IEnumerable<IInterceptor> injectedInterceptors = null)
-        => new(Fixture.CreateOptions(appInterceptors, injectedInterceptors ?? Enumerable.Empty<IInterceptor>()));
+        IEnumerable<IInterceptor> injectedInterceptors = null
+    ) =>
+        new(
+            Fixture.CreateOptions(
+                appInterceptors,
+                injectedInterceptors ?? Enumerable.Empty<IInterceptor>()
+            )
+        );
 
     public interface ITestDiagnosticListener : IDisposable
     {
@@ -80,18 +85,15 @@ public abstract class InterceptionTestBase
 
     public class NullDiagnosticListener : ITestDiagnosticListener
     {
-        public void AssertEventsInOrder(params string[] eventNames)
-        {
-        }
+        public void AssertEventsInOrder(params string[] eventNames) { }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
-    public class TestDiagnosticListener : ITestDiagnosticListener,
-        IObserver<DiagnosticListener>,
-        IObserver<KeyValuePair<string, object>>
+    public class TestDiagnosticListener
+        : ITestDiagnosticListener,
+            IObserver<DiagnosticListener>,
+            IObserver<KeyValuePair<string, object>>
     {
         private readonly DbContextId _contextId;
         private readonly IDisposable _subscription;
@@ -103,13 +105,9 @@ public abstract class InterceptionTestBase
             _subscription = DiagnosticListener.AllListeners.Subscribe(this);
         }
 
-        public void OnCompleted()
-        {
-        }
+        public void OnCompleted() { }
 
-        public void OnError(Exception error)
-        {
-        }
+        public void OnError(Exception error) { }
 
         public void AssertEventsInOrder(params string[] eventNames)
         {
@@ -151,36 +149,41 @@ public abstract class InterceptionTestBase
             }
         }
 
-        public void Dispose()
-            => _subscription.Dispose();
+        public void Dispose() => _subscription.Dispose();
     }
 
     public abstract class InterceptionFixtureBase : SharedStoreFixtureBase<UniverseContext>
     {
         protected abstract bool ShouldSubscribeToDiagnosticListener { get; }
 
-        public virtual ITestDiagnosticListener SubscribeToDiagnosticListener(DbContextId contextId)
-            => ShouldSubscribeToDiagnosticListener
+        public virtual ITestDiagnosticListener SubscribeToDiagnosticListener(
+            DbContextId contextId
+        ) =>
+            ShouldSubscribeToDiagnosticListener
                 ? new TestDiagnosticListener(contextId)
                 : new NullDiagnosticListener();
 
         public virtual DbContextOptions CreateOptions(
             IEnumerable<IInterceptor> appInterceptors,
-            IEnumerable<IInterceptor> injectedInterceptors)
-            => AddOptions(
-                    TestStore
-                        .AddProviderOptions(
-                            new DbContextOptionsBuilder<DbContext>()
-                                .AddInterceptors(appInterceptors)
-                                .UseInternalServiceProvider(
-                                    InjectInterceptors(new ServiceCollection(), injectedInterceptors)
-                                        .BuildServiceProvider(validateScopes: true))))
+            IEnumerable<IInterceptor> injectedInterceptors
+        ) =>
+            AddOptions(
+                    TestStore.AddProviderOptions(
+                        new DbContextOptionsBuilder<DbContext>()
+                            .AddInterceptors(appInterceptors)
+                            .UseInternalServiceProvider(
+                                InjectInterceptors(new ServiceCollection(), injectedInterceptors)
+                                    .BuildServiceProvider(validateScopes: true)
+                            )
+                    )
+                )
                 .EnableDetailedErrors()
                 .Options;
 
         protected virtual IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<IInterceptor> injectedInterceptors)
+            IEnumerable<IInterceptor> injectedInterceptors
+        )
         {
             foreach (var interceptor in injectedInterceptors)
             {

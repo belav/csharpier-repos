@@ -21,17 +21,21 @@ namespace System.Text.Json.SourceGeneration.Tests
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/63802", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/63802",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public static void Converters_AndTypeInfoCreator_NotRooted_WhenMetadataNotPresent()
         {
-            RemoteExecutor.Invoke(
-                static () =>
+            RemoteExecutor
+                .Invoke(static () =>
                 {
                     object[] objArr = new object[] { new MyStruct() };
 
                     // Metadata not generated for MyStruct without JsonSerializableAttribute.
                     NotSupportedException ex = Assert.Throws<NotSupportedException>(
-                        () => JsonSerializer.Serialize(objArr, MetadataContext.Default.ObjectArray));
+                        () => JsonSerializer.Serialize(objArr, MetadataContext.Default.ObjectArray)
+                    );
                     string exAsStr = ex.ToString();
                     Assert.Contains(typeof(MyStruct).ToString(), exAsStr);
                     Assert.Contains("JsonSerializerOptions", exAsStr);
@@ -50,14 +54,27 @@ namespace System.Text.Json.SourceGeneration.Tests
                     // Confirm type info dynamic creator not set.
                     AssertFieldNull("s_typeInfoCreationFunc", optionsInstance: null);
 
-                    static void AssertFieldNull(string fieldName, JsonSerializerOptions? optionsInstance)
+                    static void AssertFieldNull(
+                        string fieldName,
+                        JsonSerializerOptions? optionsInstance
+                    )
                     {
-                        BindingFlags bindingFlags = BindingFlags.NonPublic | (optionsInstance == null ? BindingFlags.Static : BindingFlags.Instance);
-                        FieldInfo fieldInfo = typeof(JsonSerializerOptions).GetField(fieldName, bindingFlags);
+                        BindingFlags bindingFlags =
+                            BindingFlags.NonPublic
+                            | (
+                                optionsInstance == null
+                                    ? BindingFlags.Static
+                                    : BindingFlags.Instance
+                            );
+                        FieldInfo fieldInfo = typeof(JsonSerializerOptions).GetField(
+                            fieldName,
+                            bindingFlags
+                        );
                         Assert.NotNull(fieldInfo);
                         Assert.Null(fieldInfo.GetValue(optionsInstance));
                     }
-                }).Dispose();
+                })
+                .Dispose();
         }
 
         [Fact]
@@ -65,7 +82,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         {
             Person person = new(FirstName: "Jane", LastName: "Doe");
 
-            byte[] utf8Json = JsonSerializer.SerializeToUtf8Bytes(person, PersonJsonContext.Default.Person);
+            byte[] utf8Json = JsonSerializer.SerializeToUtf8Bytes(
+                person,
+                PersonJsonContext.Default.Person
+            );
 
             person = JsonSerializer.Deserialize<Person>(utf8Json, PersonJsonContext.Default.Person);
             Assert.Equal("Jane", person.FirstName);
@@ -79,24 +99,30 @@ namespace System.Text.Json.SourceGeneration.Tests
         public partial class NestedPublicContext : JsonSerializerContext
         {
             [JsonSerializable(typeof(JsonMessage))]
-            protected internal partial class NestedProtectedInternalClass : JsonSerializerContext { }
+            protected internal partial class NestedProtectedInternalClass
+                : JsonSerializerContext { }
         }
 
         internal record Person(string FirstName, string LastName);
 
-        [JsonSourceGenerationOptions(
-            PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
+        [JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
         [JsonSerializable(typeof(Person))]
-        internal partial class PersonJsonContext : JsonSerializerContext
-        {
-        }
+        internal partial class PersonJsonContext : JsonSerializerContext { }
 
         // Regression test for https://github.com/dotnet/runtime/issues/62079
         [Fact]
         public static void SupportsPropertiesWithCustomConverterFactory()
         {
-            var value = new ClassWithCustomConverterFactoryProperty { MyEnum = Serialization.Tests.SampleEnum.MinZero };
-            string json = JsonSerializer.Serialize(value, SingleClassWithCustomConverterFactoryPropertyContext.Default.ClassWithCustomConverterFactoryProperty);
+            var value = new ClassWithCustomConverterFactoryProperty
+            {
+                MyEnum = Serialization.Tests.SampleEnum.MinZero
+            };
+            string json = JsonSerializer.Serialize(
+                value,
+                SingleClassWithCustomConverterFactoryPropertyContext
+                    .Default
+                    .ClassWithCustomConverterFactoryProperty
+            );
             Assert.Equal(@"{""MyEnum"":""MinZero""}", json);
         }
 
@@ -106,28 +132,31 @@ namespace System.Text.Json.SourceGeneration.Tests
         }
 
         [JsonSerializable(typeof(ParentClass))]
-        internal partial class SingleClassWithCustomConverterFactoryPropertyContext : JsonSerializerContext
-        {
-        }
+        internal partial class SingleClassWithCustomConverterFactoryPropertyContext
+            : JsonSerializerContext { }
 
         // Regression test for https://github.com/dotnet/runtime/issues/61860
         [Fact]
         public static void SupportsGenericParameterWithCustomConverterFactory()
         {
             var value = new List<TestEnum> { TestEnum.Cee };
-            string json = JsonSerializer.Serialize(value, GenericParameterWithCustomConverterFactoryContext.Default.ListTestEnum);
+            string json = JsonSerializer.Serialize(
+                value,
+                GenericParameterWithCustomConverterFactoryContext.Default.ListTestEnum
+            );
             Assert.Equal(@"[""Cee""]", json);
         }
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public enum TestEnum
         {
-            Aye, Bee, Cee
+            Aye,
+            Bee,
+            Cee
         }
 
         [JsonSerializable(typeof(List<TestEnum>))]
-        internal partial class GenericParameterWithCustomConverterFactoryContext : JsonSerializerContext
-        {
-        }
+        internal partial class GenericParameterWithCustomConverterFactoryContext
+            : JsonSerializerContext { }
     }
 }

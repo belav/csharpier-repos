@@ -20,7 +20,11 @@ public class ClrICollectionAccessor<TEntity, TCollection, TElement> : IClrCollec
     private readonly Func<TEntity, TCollection> _getCollection;
     private readonly Action<TEntity, TCollection>? _setCollection;
     private readonly Action<TEntity, TCollection>? _setCollectionForMaterialization;
-    private readonly Func<TEntity, Action<TEntity, TCollection>, TCollection>? _createAndSetCollection;
+    private readonly Func<
+        TEntity,
+        Action<TEntity, TCollection>,
+        TCollection
+    >? _createAndSetCollection;
     private readonly Func<TCollection>? _createCollection;
 
     /// <summary>
@@ -29,8 +33,7 @@ public class ClrICollectionAccessor<TEntity, TCollection, TElement> : IClrCollec
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Type CollectionType
-        => typeof(TCollection);
+    public virtual Type CollectionType => typeof(TCollection);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,7 +47,8 @@ public class ClrICollectionAccessor<TEntity, TCollection, TElement> : IClrCollec
         Action<TEntity, TCollection>? setCollection,
         Action<TEntity, TCollection>? setCollectionForMaterialization,
         Func<TEntity, Action<TEntity, TCollection>, TCollection>? createAndSetCollection,
-        Func<TCollection>? createCollection)
+        Func<TCollection>? createCollection
+    )
     {
         _propertyName = propertyName;
         _getCollection = getCollection;
@@ -87,7 +91,11 @@ public class ClrICollectionAccessor<TEntity, TCollection, TElement> : IClrCollec
         {
             throw new InvalidOperationException(
                 CoreStrings.NavigationCannotCreateType(
-                    _propertyName, typeof(TEntity).ShortDisplayName(), typeof(TCollection).ShortDisplayName()));
+                    _propertyName,
+                    typeof(TEntity).ShortDisplayName(),
+                    typeof(TCollection).ShortDisplayName()
+                )
+            );
         }
 
         return _createCollection();
@@ -99,8 +107,8 @@ public class ClrICollectionAccessor<TEntity, TCollection, TElement> : IClrCollec
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object GetOrCreate(object entity, bool forMaterialization)
-        => GetOrCreateCollection(entity, forMaterialization);
+    public virtual object GetOrCreate(object entity, bool forMaterialization) =>
+        GetOrCreateCollection(entity, forMaterialization);
 
     private ICollection<TElement> GetOrCreateCollection(object instance, bool forMaterialization)
     {
@@ -113,17 +121,27 @@ public class ClrICollectionAccessor<TEntity, TCollection, TElement> : IClrCollec
 
             if (setCollection == null)
             {
-                throw new InvalidOperationException(CoreStrings.NavigationNoSetter(_propertyName, typeof(TEntity).ShortDisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.NavigationNoSetter(
+                        _propertyName,
+                        typeof(TEntity).ShortDisplayName()
+                    )
+                );
             }
 
             if (_createAndSetCollection == null)
             {
                 throw new InvalidOperationException(
                     CoreStrings.NavigationCannotCreateType(
-                        _propertyName, typeof(TEntity).ShortDisplayName(), typeof(TCollection).ShortDisplayName()));
+                        _propertyName,
+                        typeof(TEntity).ShortDisplayName(),
+                        typeof(TCollection).ShortDisplayName()
+                    )
+                );
             }
 
-            collection = (ICollection<TElement>)_createAndSetCollection((TEntity)instance, setCollection);
+            collection =
+                (ICollection<TElement>)_createAndSetCollection((TEntity)instance, setCollection);
         }
 
         return collection;
@@ -134,15 +152,16 @@ public class ClrICollectionAccessor<TEntity, TCollection, TElement> : IClrCollec
         var enumerable = _getCollection((TEntity)instance);
         var collection = enumerable as ICollection<TElement>;
 
-        if (enumerable != null
-            && collection == null)
+        if (enumerable != null && collection == null)
         {
             throw new InvalidOperationException(
                 CoreStrings.NavigationBadType(
                     _propertyName,
                     typeof(TEntity).ShortDisplayName(),
                     enumerable.GetType().ShortDisplayName(),
-                    typeof(TElement).ShortDisplayName()));
+                    typeof(TElement).ShortDisplayName()
+                )
+            );
         }
 
         return collection;
@@ -154,8 +173,8 @@ public class ClrICollectionAccessor<TEntity, TCollection, TElement> : IClrCollec
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool Contains(object entity, object value)
-        => Contains(GetCollection((TEntity)entity), value);
+    public virtual bool Contains(object entity, object value) =>
+        Contains(GetCollection((TEntity)entity), value);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -12,6 +12,7 @@ namespace System.Threading.RateLimiting
         /// Lease the oldest queued <see cref="RateLimiter.WaitAsync"/>.
         /// </summary>
         OldestFirst,
+
         /// <summary>
         /// Lease the newest queued <see cref="RateLimiter.WaitAsync"/>.
         /// </summary>

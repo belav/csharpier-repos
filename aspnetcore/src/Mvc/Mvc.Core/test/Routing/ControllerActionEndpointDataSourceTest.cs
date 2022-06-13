@@ -16,25 +16,26 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
     {
         // Arrange
         var actions = new List<ActionDescriptor>
+        {
+            new ActionDescriptor
             {
-                new ActionDescriptor
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test", },
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/test",
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "action", "Test" },
-                        { "controller", "Test" },
-                    },
+                    { "action", "Test" },
+                    { "controller", "Test" },
                 },
-            };
+            },
+        };
 
         var mockDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>();
-        mockDescriptorProvider.Setup(m => m.ActionDescriptors).Returns(new ActionDescriptorCollection(actions, 0));
+        mockDescriptorProvider
+            .Setup(m => m.ActionDescriptors)
+            .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(mockDescriptorProvider.Object);
+        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(
+            mockDescriptorProvider.Object
+        );
 
         // Act
         var endpoints = dataSource.Endpoints;
@@ -48,36 +49,38 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
     {
         // Arrange
         var actions = new List<ActionDescriptor>
+        {
+            new ControllerActionDescriptor
             {
-                new ControllerActionDescriptor
+                AttributeRouteInfo = new AttributeRouteInfo()
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/test",
-                        Name = "Test",
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "action", "Test" },
-                        { "controller", "Test" },
-                    },
+                    Template = "/test",
+                    Name = "Test",
                 },
-                new ControllerActionDescriptor
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "action", "Index" },
-                        { "controller", "Home" },
-                    },
-                }
-            };
+                    { "action", "Test" },
+                    { "controller", "Test" },
+                },
+            },
+            new ControllerActionDescriptor
+            {
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "action", "Index" },
+                    { "controller", "Home" },
+                },
+            }
+        };
 
         var mockDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>();
         mockDescriptorProvider
             .Setup(m => m.ActionDescriptors)
             .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(mockDescriptorProvider.Object);
+        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(
+            mockDescriptorProvider.Object
+        );
         dataSource.AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null);
         dataSource.AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null);
 
@@ -86,7 +89,10 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
 
         // Assert
         Assert.Collection(
-            endpoints.OfType<RouteEndpoint>().Where(e => !SupportsLinkGeneration(e)).OrderBy(e => e.RoutePattern.RawText),
+            endpoints
+                .OfType<RouteEndpoint>()
+                .Where(e => !SupportsLinkGeneration(e))
+                .OrderBy(e => e.RoutePattern.RawText),
             e =>
             {
                 Assert.Equal("/1/{controller}/{action}/{id?}", e.RoutePattern.RawText);
@@ -96,10 +102,14 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
             {
                 Assert.Equal("/2/{controller}/{action}/{id?}", e.RoutePattern.RawText);
                 Assert.Same(actions[1], e.Metadata.GetMetadata<ActionDescriptor>());
-            });
+            }
+        );
 
         Assert.Collection(
-            endpoints.OfType<RouteEndpoint>().Where(e => SupportsLinkGeneration(e)).OrderBy(e => e.RoutePattern.RawText),
+            endpoints
+                .OfType<RouteEndpoint>()
+                .Where(e => SupportsLinkGeneration(e))
+                .OrderBy(e => e.RoutePattern.RawText),
             e =>
             {
                 Assert.Equal("/1/{controller}/{action}/{id?}", e.RoutePattern.RawText);
@@ -120,7 +130,8 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
                 Assert.Same(actions[0], e.Metadata.GetMetadata<ActionDescriptor>());
                 Assert.Equal("Test", e.Metadata.GetMetadata<IRouteNameMetadata>().RouteName);
                 Assert.Equal("Test", e.Metadata.GetMetadata<IEndpointNameMetadata>().EndpointName);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -128,47 +139,53 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
     {
         // Arrange
         var actions = new List<ActionDescriptor>
+        {
+            new ControllerActionDescriptor
             {
-                new ControllerActionDescriptor
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test", },
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/test",
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "action", "Test" },
-                        { "controller", "Test" },
-                    },
+                    { "action", "Test" },
+                    { "controller", "Test" },
                 },
-                new ControllerActionDescriptor
+            },
+            new ControllerActionDescriptor
+            {
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "action", "Index" },
-                        { "controller", "Home" },
-                    },
-                }
-            };
+                    { "action", "Index" },
+                    { "controller", "Home" },
+                },
+            }
+        };
 
         var mockDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>();
-        mockDescriptorProvider.Setup(m => m.ActionDescriptors).Returns(new ActionDescriptorCollection(actions, 0));
+        mockDescriptorProvider
+            .Setup(m => m.ActionDescriptors)
+            .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(mockDescriptorProvider.Object);
+        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(
+            mockDescriptorProvider.Object
+        );
         dataSource.AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null);
         dataSource.AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null);
 
-        dataSource.DefaultBuilder.Add((b) =>
-        {
-            b.Metadata.Add("Hi there");
-        });
+        dataSource.DefaultBuilder.Add(
+            (b) =>
+            {
+                b.Metadata.Add("Hi there");
+            }
+        );
 
         // Act
         var endpoints = dataSource.Endpoints;
 
         // Assert
         Assert.Collection(
-            endpoints.OfType<RouteEndpoint>().Where(e => !SupportsLinkGeneration(e)).OrderBy(e => e.RoutePattern.RawText),
+            endpoints
+                .OfType<RouteEndpoint>()
+                .Where(e => !SupportsLinkGeneration(e))
+                .OrderBy(e => e.RoutePattern.RawText),
             e =>
             {
                 Assert.Equal("/1/{controller}/{action}/{id?}", e.RoutePattern.RawText);
@@ -180,10 +197,14 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
                 Assert.Equal("/2/{controller}/{action}/{id?}", e.RoutePattern.RawText);
                 Assert.Same(actions[1], e.Metadata.GetMetadata<ActionDescriptor>());
                 Assert.Equal("Hi there", e.Metadata.GetMetadata<string>());
-            });
+            }
+        );
 
         Assert.Collection(
-            endpoints.OfType<RouteEndpoint>().Where(e => SupportsLinkGeneration(e)).OrderBy(e => e.RoutePattern.RawText),
+            endpoints
+                .OfType<RouteEndpoint>()
+                .Where(e => SupportsLinkGeneration(e))
+                .OrderBy(e => e.RoutePattern.RawText),
             e =>
             {
                 Assert.Equal("/1/{controller}/{action}/{id?}", e.RoutePattern.RawText);
@@ -201,7 +222,8 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
                 Assert.Equal("/test", e.RoutePattern.RawText);
                 Assert.Same(actions[0], e.Metadata.GetMetadata<ActionDescriptor>());
                 Assert.Equal("Hi there", e.Metadata.GetMetadata<string>());
-            });
+            }
+        );
     }
 
     [Fact]
@@ -209,36 +231,38 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
     {
         // Arrange
         var actions = new List<ActionDescriptor>
+        {
+            new ControllerActionDescriptor
             {
-                new ControllerActionDescriptor
+                AttributeRouteInfo = new AttributeRouteInfo()
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/test",
-                        Name = "Test",
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "action", "Test" },
-                        { "controller", "Test" },
-                    },
+                    Template = "/test",
+                    Name = "Test",
                 },
-                new ControllerActionDescriptor
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "action", "Index" },
-                        { "controller", "Home" },
-                    },
-                }
-            };
+                    { "action", "Test" },
+                    { "controller", "Test" },
+                },
+            },
+            new ControllerActionDescriptor
+            {
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "action", "Index" },
+                    { "controller", "Home" },
+                },
+            }
+        };
 
         var mockDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>();
         mockDescriptorProvider
             .Setup(m => m.ActionDescriptors)
             .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(mockDescriptorProvider.Object);
+        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(
+            mockDescriptorProvider.Object
+        );
         dataSource.AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null);
         dataSource.AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null);
 
@@ -255,7 +279,10 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
 
         // Assert
         Assert.Collection(
-            endpoints.OfType<RouteEndpoint>().Where(e => !SupportsLinkGeneration(e)).OrderBy(e => e.RoutePattern.RawText),
+            endpoints
+                .OfType<RouteEndpoint>()
+                .Where(e => !SupportsLinkGeneration(e))
+                .OrderBy(e => e.RoutePattern.RawText),
             e =>
             {
                 Assert.Equal("/1/{controller}/{action}/{id?}", e.RoutePattern.RawText);
@@ -265,10 +292,14 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
             {
                 Assert.Equal("/2/{controller}/{action}/{id?}", e.RoutePattern.RawText);
                 Assert.Same(actions[1], e.Metadata.GetMetadata<ActionDescriptor>());
-            });
+            }
+        );
 
         Assert.Collection(
-            endpoints.OfType<RouteEndpoint>().Where(e => SupportsLinkGeneration(e)).OrderBy(e => e.RoutePattern.RawText),
+            endpoints
+                .OfType<RouteEndpoint>()
+                .Where(e => SupportsLinkGeneration(e))
+                .OrderBy(e => e.RoutePattern.RawText),
             e =>
             {
                 Assert.Equal("/1/{controller}/{action}/{id?}", e.RoutePattern.RawText);
@@ -288,8 +319,12 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
                 Assert.Equal("/test", e.RoutePattern.RawText);
                 Assert.Same(actions[0], e.Metadata.GetMetadata<ActionDescriptor>());
                 Assert.Equal("Test", e.Metadata.GetMetadata<IRouteNameMetadata>().RouteName);
-                Assert.Equal("NewName", e.Metadata.GetMetadata<IEndpointNameMetadata>().EndpointName);
-            });
+                Assert.Equal(
+                    "NewName",
+                    e.Metadata.GetMetadata<IEndpointNameMetadata>().EndpointName
+                );
+            }
+        );
     }
 
     [Fact]
@@ -297,47 +332,57 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
     {
         // Arrange
         var actions = new List<ActionDescriptor>
+        {
+            new ControllerActionDescriptor
             {
-                new ControllerActionDescriptor
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test", },
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/test",
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "action", "Test" },
-                        { "controller", "Test" },
-                    },
+                    { "action", "Test" },
+                    { "controller", "Test" },
                 },
-                new ControllerActionDescriptor
+            },
+            new ControllerActionDescriptor
+            {
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "action", "Index" },
-                        { "controller", "Home" },
-                    },
-                }
-            };
+                    { "action", "Index" },
+                    { "controller", "Home" },
+                },
+            }
+        };
 
         var mockDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>();
-        mockDescriptorProvider.Setup(m => m.ActionDescriptors).Returns(new ActionDescriptorCollection(actions, 0));
+        mockDescriptorProvider
+            .Setup(m => m.ActionDescriptors)
+            .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(mockDescriptorProvider.Object);
-        dataSource.AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null).Add(b => b.Metadata.Add("A"));
-        dataSource.AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null).Add(b => b.Metadata.Add("B"));
+        var dataSource = (ControllerActionEndpointDataSource)CreateDataSource(
+            mockDescriptorProvider.Object
+        );
+        dataSource
+            .AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null)
+            .Add(b => b.Metadata.Add("A"));
+        dataSource
+            .AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null)
+            .Add(b => b.Metadata.Add("B"));
 
-        dataSource.DefaultBuilder.Add((b) =>
-        {
-            b.Metadata.Add("Hi there");
-        });
+        dataSource.DefaultBuilder.Add(
+            (b) =>
+            {
+                b.Metadata.Add("Hi there");
+            }
+        );
 
         // Act
         var endpoints = dataSource.Endpoints;
 
         // Assert
         Assert.Collection(
-            endpoints.OfType<RouteEndpoint>().Where(e => !SupportsLinkGeneration(e)).OrderBy(e => e.RoutePattern.RawText),
+            endpoints
+                .OfType<RouteEndpoint>()
+                .Where(e => !SupportsLinkGeneration(e))
+                .OrderBy(e => e.RoutePattern.RawText),
             e =>
             {
                 Assert.Equal("/1/{controller}/{action}/{id?}", e.RoutePattern.RawText);
@@ -349,10 +394,14 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
                 Assert.Equal("/2/{controller}/{action}/{id?}", e.RoutePattern.RawText);
                 Assert.Same(actions[1], e.Metadata.GetMetadata<ActionDescriptor>());
                 Assert.Equal(new[] { "Hi there", "B" }, e.Metadata.GetOrderedMetadata<string>());
-            });
+            }
+        );
 
         Assert.Collection(
-            endpoints.OfType<RouteEndpoint>().Where(e => SupportsLinkGeneration(e)).OrderBy(e => e.RoutePattern.RawText),
+            endpoints
+                .OfType<RouteEndpoint>()
+                .Where(e => SupportsLinkGeneration(e))
+                .OrderBy(e => e.RoutePattern.RawText),
             e =>
             {
                 Assert.Equal("/1/{controller}/{action}/{id?}", e.RoutePattern.RawText);
@@ -370,27 +419,36 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
                 Assert.Equal("/test", e.RoutePattern.RawText);
                 Assert.Same(actions[0], e.Metadata.GetMetadata<ActionDescriptor>());
                 Assert.Equal("Hi there", e.Metadata.GetMetadata<string>());
-            });
+            }
+        );
     }
 
     private static bool SupportsLinkGeneration(RouteEndpoint endpoint)
     {
-        return !(endpoint.Metadata.GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration == true);
+        return !(
+            endpoint.Metadata.GetMetadata<ISuppressLinkGenerationMetadata>()?.SuppressLinkGeneration
+            == true
+        );
     }
 
-    private protected override ActionEndpointDataSourceBase CreateDataSource(IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory)
+    private protected override ActionEndpointDataSourceBase CreateDataSource(
+        IActionDescriptorCollectionProvider actions,
+        ActionEndpointFactory endpointFactory
+    )
     {
         return new ControllerActionEndpointDataSource(
             new ControllerActionEndpointDataSourceIdProvider(),
             actions,
             endpointFactory,
-            new OrderedEndpointsSequenceProvider());
+            new OrderedEndpointsSequenceProvider()
+        );
     }
 
     protected override ActionDescriptor CreateActionDescriptor(
         object values,
         string pattern = null,
-        IList<object> metadata = null)
+        IList<object> metadata = null
+    )
     {
         var action = new ControllerActionDescriptor();
 

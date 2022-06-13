@@ -5,9 +5,7 @@ namespace System.Numerics
 {
     /// <summary>Defines a number that is represented in a base-2 format.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
-    public interface IBinaryNumber<TSelf>
-        : IBitwiseOperators<TSelf, TSelf, TSelf>,
-          INumber<TSelf>
+    public interface IBinaryNumber<TSelf> : IBitwiseOperators<TSelf, TSelf, TSelf>, INumber<TSelf>
         where TSelf : IBinaryNumber<TSelf>
     {
         /// <summary>Determines if a value is a power of two.</summary>

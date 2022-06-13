@@ -42,12 +42,16 @@ public class PooledDbContextFactory<TContext> : IDbContextFactory<TContext>
     /// </summary>
     /// <param name="options">The options to use for contexts produced by this factory.</param>
     /// <param name="poolSize">Sets the maximum number of instances retained by the pool. Defaults to 1024.</param>
-    public PooledDbContextFactory(DbContextOptions<TContext> options, int poolSize = DbContextPool<DbContext>.DefaultPoolSize)
+    public PooledDbContextFactory(
+        DbContextOptions<TContext> options,
+        int poolSize = DbContextPool<DbContext>.DefaultPoolSize
+    )
     {
         var optionsBuilder = new DbContextOptionsBuilder<TContext>(options);
 
-        var extension = (options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension())
-            .WithMaxPoolSize(poolSize);
+        var extension = (
+            options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension()
+        ).WithMaxPoolSize(poolSize);
 
         ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(extension);
 
@@ -64,7 +68,9 @@ public class PooledDbContextFactory<TContext> : IDbContextFactory<TContext>
     }
 
     /// <inheritdoc />
-    public virtual async Task<TContext> CreateDbContextAsync(CancellationToken cancellationToken = default)
+    public virtual async Task<TContext> CreateDbContextAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         var lease = new DbContextLease(_pool, standalone: true);
         await lease.Context.SetLeaseAsync(lease, cancellationToken).ConfigureAwait(false);

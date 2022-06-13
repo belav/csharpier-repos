@@ -20,15 +20,16 @@ namespace System
     // the contract of the method.  Ideally it should give a meaningful error
     // message describing what was wrong and which parameter is incorrect.
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ArgumentException : SystemException
     {
         private readonly string? _paramName;
 
         // Creates a new ArgumentException with its message
         // string set to the empty string.
-        public ArgumentException()
-            : base(SR.Arg_ArgumentException)
+        public ArgumentException() : base(SR.Arg_ArgumentException)
         {
             HResult = HResults.COR_E_ARGUMENT;
         }
@@ -36,8 +37,7 @@ namespace System
         // Creates a new ArgumentException with its message
         // string set to message.
         //
-        public ArgumentException(string? message)
-            : base(message)
+        public ArgumentException(string? message) : base(message)
         {
             HResult = HResults.COR_E_ARGUMENT;
         }
@@ -55,8 +55,7 @@ namespace System
             HResult = HResults.COR_E_ARGUMENT;
         }
 
-        public ArgumentException(string? message, string? paramName)
-            : base(message)
+        public ArgumentException(string? message, string? paramName) : base(message)
         {
             _paramName = paramName;
             HResult = HResults.COR_E_ARGUMENT;
@@ -105,7 +104,10 @@ namespace System
         /// <param name="paramName">The name of the parameter with which <paramref name="argument"/> corresponds.</param>
         /// <exception cref="ArgumentNullException"><paramref name="argument"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="argument"/> is empty.</exception>
-        public static void ThrowIfNullOrEmpty([NotNull] string? argument, [CallerArgumentExpression("argument")] string? paramName = null)
+        public static void ThrowIfNullOrEmpty(
+            [NotNull] string? argument,
+            [CallerArgumentExpression("argument")] string? paramName = null
+        )
         {
             if (string.IsNullOrEmpty(argument))
             {

@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 /// managed <see cref="System.Security.Cryptography.SymmetricAlgorithm"/> and
 /// <see cref="System.Security.Cryptography.KeyedHashAlgorithm"/> types.
 /// </summary>
-public sealed class ManagedAuthenticatedEncryptorConfiguration : AlgorithmConfiguration, IInternalAlgorithmConfiguration
+public sealed class ManagedAuthenticatedEncryptorConfiguration
+    : AlgorithmConfiguration,
+        IInternalAlgorithmConfiguration
 {
     /// <summary>
     /// The type of the algorithm to use for symmetric encryption.
@@ -56,7 +58,9 @@ public sealed class ManagedAuthenticatedEncryptorConfiguration : AlgorithmConfig
         return internalConfiguration.CreateDescriptorFromSecret(Secret.Random(KDK_SIZE_IN_BYTES));
     }
 
-    IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(ISecret secret)
+    IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(
+        ISecret secret
+    )
     {
         return new ManagedAuthenticatedEncryptorDescriptor(this, secret);
     }
@@ -70,7 +74,12 @@ public sealed class ManagedAuthenticatedEncryptorConfiguration : AlgorithmConfig
     {
         var factory = new ManagedAuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
         // Run a sample payload through an encrypt -> decrypt operation to make sure data round-trips properly.
-        using (var encryptor = factory.CreateAuthenticatedEncryptorInstance(Secret.Random(512 / 8), this))
+        using (
+            var encryptor = factory.CreateAuthenticatedEncryptorInstance(
+                Secret.Random(512 / 8),
+                this
+            )
+        )
         {
             encryptor.PerformSelfTest();
         }

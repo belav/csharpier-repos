@@ -11,18 +11,29 @@ namespace System.Text.RegularExpressions
     {
         /// <summary>Find logic to use to find the next possible location for a match.</summary>
         public readonly RegexFindOptimizations FindOptimizations;
+
         /// <summary>The options associated with the regex.</summary>
         public readonly RegexOptions Options;
+
         /// <summary>RegexOpcodes and arguments written by <see cref="RegexWriter"/>.</summary>
         public readonly int[] Codes;
+
         /// <summary>The string / set table. <see cref="Codes"/> includes offsets into this table, for string and set arguments.</summary>
         public readonly string[] Strings;
+
         /// <summary>ASCII lookup table optimization for sets in <see cref="Strings"/>.</summary>
         public readonly uint[]?[] StringsAsciiLookup;
+
         /// <summary>How many instructions in <see cref="Codes"/> use backtracking.</summary>
         public readonly int TrackCount;
 
-        public RegexInterpreterCode(RegexFindOptimizations findOptimizations, RegexOptions options, int[] codes, string[] strings, int trackcount)
+        public RegexInterpreterCode(
+            RegexFindOptimizations findOptimizations,
+            RegexOptions options,
+            int[] codes,
+            string[] strings,
+            int trackcount
+        )
         {
             FindOptimizations = findOptimizations;
             Options = options;
@@ -141,7 +152,9 @@ namespace System.Text.RegularExpressions
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine($"Direction: {((Options & RegexOptions.RightToLeft) != 0 ? "right-to-left" : "left-to-right")}");
+            sb.AppendLine(
+                $"Direction: {((Options & RegexOptions.RightToLeft) != 0 ? "right-to-left" : "left-to-right")}"
+            );
             sb.AppendLine();
             for (int i = 0; i < Codes.Length; i += OpcodeSize((RegexOpcode)Codes[i]))
             {
@@ -160,10 +173,14 @@ namespace System.Text.RegularExpressions
             sb.Append($"{opcodeOffset:D6} ");
             sb.Append(OpcodeBacktracks(opcode & RegexOpcode.OperatorMask) ? '~' : ' ');
             sb.Append(opcode & RegexOpcode.OperatorMask);
-            if ((opcode & RegexOpcode.CaseInsensitive) != 0) sb.Append("-Ci");
-            if ((opcode & RegexOpcode.RightToLeft) != 0) sb.Append("-Rtl");
-            if ((opcode & RegexOpcode.Backtracking) != 0) sb.Append("-Back");
-            if ((opcode & RegexOpcode.BacktrackingSecond) != 0) sb.Append("-Back2");
+            if ((opcode & RegexOpcode.CaseInsensitive) != 0)
+                sb.Append("-Ci");
+            if ((opcode & RegexOpcode.RightToLeft) != 0)
+                sb.Append("-Rtl");
+            if ((opcode & RegexOpcode.Backtracking) != 0)
+                sb.Append("-Back");
+            if ((opcode & RegexOpcode.BacktrackingSecond) != 0)
+                sb.Append("-Back2");
 
             opcode &= RegexOpcode.OperatorMask;
 
@@ -179,7 +196,10 @@ namespace System.Text.RegularExpressions
                 case RegexOpcode.Notoneloop:
                 case RegexOpcode.Notoneloopatomic:
                 case RegexOpcode.Notonelazy:
-                    sb.Append(Indent()).Append('\'').Append(RegexCharClass.DescribeChar((char)Codes[opcodeOffset + 1])).Append('\'');
+                    sb.Append(Indent())
+                        .Append('\'')
+                        .Append(RegexCharClass.DescribeChar((char)Codes[opcodeOffset + 1]))
+                        .Append('\'');
                     break;
 
                 case RegexOpcode.Set:
@@ -187,11 +207,15 @@ namespace System.Text.RegularExpressions
                 case RegexOpcode.Setloop:
                 case RegexOpcode.Setloopatomic:
                 case RegexOpcode.Setlazy:
-                    sb.Append(Indent()).Append(RegexCharClass.DescribeSet(Strings[Codes[opcodeOffset + 1]]));
+                    sb.Append(Indent())
+                        .Append(RegexCharClass.DescribeSet(Strings[Codes[opcodeOffset + 1]]));
                     break;
 
                 case RegexOpcode.Multi:
-                    sb.Append(Indent()).Append('"').Append(Strings[Codes[opcodeOffset + 1]]).Append('"');
+                    sb.Append(Indent())
+                        .Append('"')
+                        .Append(Strings[Codes[opcodeOffset + 1]])
+                        .Append('"');
                     break;
 
                 case RegexOpcode.Backreference:
@@ -236,12 +260,22 @@ namespace System.Text.RegularExpressions
                 case RegexOpcode.Setloop:
                 case RegexOpcode.Setloopatomic:
                 case RegexOpcode.Setlazy:
-                    sb.Append(", rep = ").Append(Codes[opcodeOffset + 2] == int.MaxValue ? "inf" : Codes[opcodeOffset + 2]);
+                    sb.Append(", rep = ")
+                        .Append(
+                            Codes[opcodeOffset + 2] == int.MaxValue
+                                ? "inf"
+                                : Codes[opcodeOffset + 2]
+                        );
                     break;
 
                 case RegexOpcode.Branchcount:
                 case RegexOpcode.Lazybranchcount:
-                    sb.Append(", limit = ").Append(Codes[opcodeOffset + 2] == int.MaxValue ? "inf" : Codes[opcodeOffset + 2]);
+                    sb.Append(", limit = ")
+                        .Append(
+                            Codes[opcodeOffset + 2] == int.MaxValue
+                                ? "inf"
+                                : Codes[opcodeOffset + 2]
+                        );
                     break;
             }
 

@@ -29,12 +29,22 @@ public class GearsOfWarData : ISetSource
         Factions = CreateFactions();
         LocustHighCommands = CreateHighCommands();
 
-        WireUp(Squads, Missions, SquadMissions, Cities, Weapons, Tags, Gears, LocustLeaders, Factions, LocustHighCommands);
+        WireUp(
+            Squads,
+            Missions,
+            SquadMissions,
+            Cities,
+            Weapons,
+            Tags,
+            Gears,
+            LocustLeaders,
+            Factions,
+            LocustHighCommands
+        );
         WireUp2(LocustLeaders, Factions);
     }
 
-    public virtual IQueryable<TEntity> Set<TEntity>()
-        where TEntity : class
+    public virtual IQueryable<TEntity> Set<TEntity>() where TEntity : class
     {
         if (typeof(TEntity) == typeof(City))
         {
@@ -99,8 +109,8 @@ public class GearsOfWarData : ISetSource
         throw new InvalidOperationException("Invalid entity type: " + typeof(TEntity));
     }
 
-    public static IReadOnlyList<Squad> CreateSquads()
-        => new List<Squad>
+    public static IReadOnlyList<Squad> CreateSquads() =>
+        new List<Squad>
         {
             new()
             {
@@ -118,8 +128,8 @@ public class GearsOfWarData : ISetSource
             }
         };
 
-    public static IReadOnlyList<Mission> CreateMissions()
-        => new List<Mission>
+    public static IReadOnlyList<Mission> CreateMissions() =>
+        new List<Mission>
         {
             new()
             {
@@ -153,13 +163,8 @@ public class GearsOfWarData : ISetSource
             }
         };
 
-    public static IReadOnlyList<SquadMission> CreateSquadMissions()
-        => new List<SquadMission>
-        {
-            new(),
-            new(),
-            new()
-        };
+    public static IReadOnlyList<SquadMission> CreateSquadMissions() =>
+        new List<SquadMission> { new(), new(), new() };
 
     public static IReadOnlyList<City> CreateCities()
     {
@@ -181,18 +186,12 @@ public class GearsOfWarData : ISetSource
 
         var unknown = new City { Location = "Unknown", Name = "Unknown" };
 
-        var cities = new List<City>
-        {
-            jacinto,
-            ephyra,
-            hanover,
-            unknown
-        };
+        var cities = new List<City> { jacinto, ephyra, hanover, unknown };
         return cities;
     }
 
-    public static IReadOnlyList<Weapon> CreateWeapons()
-        => new List<Weapon>
+    public static IReadOnlyList<Weapon> CreateWeapons() =>
+        new List<Weapon>
         {
             new()
             {
@@ -265,8 +264,8 @@ public class GearsOfWarData : ISetSource
             }
         };
 
-    public static IReadOnlyList<CogTag> CreateTags()
-        => new List<CogTag>
+    public static IReadOnlyList<CogTag> CreateTags() =>
+        new List<CogTag>
         {
             new()
             {
@@ -306,8 +305,8 @@ public class GearsOfWarData : ISetSource
             }
         };
 
-    public static IReadOnlyList<Gear> CreateGears()
-        => new List<Gear>
+    public static IReadOnlyList<Gear> CreateGears() =>
+        new List<Gear>
         {
             new()
             {
@@ -364,8 +363,8 @@ public class GearsOfWarData : ISetSource
             }
         };
 
-    public static IReadOnlyList<LocustLeader> CreateLocustLeaders()
-        => new List<LocustLeader>
+    public static IReadOnlyList<LocustLeader> CreateLocustLeaders() =>
+        new List<LocustLeader>
         {
             new()
             {
@@ -411,8 +410,8 @@ public class GearsOfWarData : ISetSource
             }
         };
 
-    public static IReadOnlyList<Faction> CreateFactions()
-        => new List<Faction>
+    public static IReadOnlyList<Faction> CreateFactions() =>
+        new List<Faction>
         {
             new LocustHorde
             {
@@ -430,8 +429,8 @@ public class GearsOfWarData : ISetSource
             }
         };
 
-    public static IReadOnlyList<LocustHighCommand> CreateHighCommands()
-        => new List<LocustHighCommand>
+    public static IReadOnlyList<LocustHighCommand> CreateHighCommands() =>
+        new List<LocustHighCommand>
         {
             new()
             {
@@ -451,7 +450,8 @@ public class GearsOfWarData : ISetSource
         IReadOnlyList<Gear> gears,
         IReadOnlyList<LocustLeader> locustLeaders,
         IReadOnlyList<Faction> factions,
-        IReadOnlyList<LocustHighCommand> locustHighCommands)
+        IReadOnlyList<LocustHighCommand> locustHighCommands
+    )
     {
         squadMissions[0].Mission = missions[0];
         squadMissions[0].MissionId = missions[0].Id;
@@ -472,13 +472,7 @@ public class GearsOfWarData : ISetSource
         squads[0].Missions = new List<SquadMission> { squadMissions[0], squadMissions[1] };
         squads[1].Missions = new List<SquadMission> { squadMissions[2] };
 
-        squads[0].Members = new List<Gear>
-        {
-            gears[0],
-            gears[1],
-            gears[3],
-            gears[4]
-        };
+        squads[0].Members = new List<Gear> { gears[0], gears[1], gears[3], gears[4] };
         squads[1].Members = new List<Gear> { gears[2] };
 
         weapons[1].SynergyWith = weapons[0];
@@ -523,12 +517,7 @@ public class GearsOfWarData : ISetSource
         gears[4].Squad = squads[0];
         gears[4].Tag = tags[4];
         gears[4].Weapons = new List<Weapon> { weapons[0], weapons[1] };
-        ((Officer)gears[4]).Reports = new List<Gear>
-        {
-            gears[0],
-            gears[1],
-            gears[3]
-        };
+        ((Officer)gears[4]).Reports = new List<Gear> { gears[0], gears[1], gears[3] };
 
         cities[0].BornGears = new List<Gear> { gears[4] };
         cities[1].BornGears = new List<Gear> { gears[0] };
@@ -586,7 +575,8 @@ public class GearsOfWarData : ISetSource
 
         locustHighCommands[0].Commanders = new List<LocustCommander>
         {
-            (LocustCommander)locustLeaders[3], (LocustCommander)locustLeaders[5]
+            (LocustCommander)locustLeaders[3],
+            (LocustCommander)locustLeaders[5]
         };
 
         ((LocustCommander)locustLeaders[3]).HighCommand = locustHighCommands[0];
@@ -598,7 +588,8 @@ public class GearsOfWarData : ISetSource
 
     public static void WireUp2(
         IReadOnlyList<LocustLeader> locustLeaders,
-        IReadOnlyList<Faction> factions)
+        IReadOnlyList<Faction> factions
+    )
     {
         ((LocustHorde)factions[0]).Leaders = new List<LocustLeader>
         {
@@ -607,6 +598,10 @@ public class GearsOfWarData : ISetSource
             locustLeaders[2],
             locustLeaders[3]
         };
-        ((LocustHorde)factions[1]).Leaders = new List<LocustLeader> { locustLeaders[4], locustLeaders[5] };
+        ((LocustHorde)factions[1]).Leaders = new List<LocustLeader>
+        {
+            locustLeaders[4],
+            locustLeaders[5]
+        };
     }
 }

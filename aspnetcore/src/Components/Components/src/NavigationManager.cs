@@ -91,7 +91,10 @@ public abstract class NavigationManager
     /// <param name="uri">The destination URI. This can be absolute, or relative to the base URI
     /// (as returned by <see cref="BaseUri"/>).</param>
     /// <param name="forceLoad">If true, bypasses client-side routing and forces the browser to load the new page from the server, whether or not the URI would normally be handled by the client-side router.</param>
-    public void NavigateTo(string uri, bool forceLoad) // This overload is for binary back-compat with < 6.0
+    public void NavigateTo(
+        string uri,
+        bool forceLoad
+    ) // This overload is for binary back-compat with < 6.0
         => NavigateTo(uri, forceLoad, replace: false);
 
     /// <summary>
@@ -107,11 +110,10 @@ public abstract class NavigationManager
 
         if (replace)
         {
-            NavigateToCore(uri, new NavigationOptions
-            {
-                ForceLoad = forceLoad,
-                ReplaceHistoryEntry = replace,
-            });
+            NavigateToCore(
+                uri,
+                new NavigationOptions { ForceLoad = forceLoad, ReplaceHistoryEntry = replace, }
+            );
         }
         else
         {
@@ -143,8 +145,8 @@ public abstract class NavigationManager
     // already override this, so the framework needs to keep using it for the cases when only pre-6.0 options are used.
     // However, for anyone implementing a new NavigationManager post-6.0, we don't want them to have to override this
     // overload any more, so there's now a default implementation that calls the updated overload.
-    protected virtual void NavigateToCore(string uri, bool forceLoad)
-        => NavigateToCore(uri, new NavigationOptions { ForceLoad = forceLoad });
+    protected virtual void NavigateToCore(string uri, bool forceLoad) =>
+        NavigateToCore(uri, new NavigationOptions { ForceLoad = forceLoad });
 
     /// <summary>
     /// Navigates to the specified URI.
@@ -153,7 +155,9 @@ public abstract class NavigationManager
     /// (as returned by <see cref="BaseUri"/>).</param>
     /// <param name="options">Provides additional <see cref="NavigationOptions"/>.</param>
     protected virtual void NavigateToCore(string uri, NavigationOptions options) =>
-        throw new NotImplementedException($"The type {GetType().FullName} does not support supplying {nameof(NavigationOptions)}. To add support, that type should override {nameof(NavigateToCore)}(string uri, {nameof(NavigationOptions)} options).");
+        throw new NotImplementedException(
+            $"The type {GetType().FullName} does not support supplying {nameof(NavigationOptions)}. To add support, that type should override {nameof(NavigateToCore)}(string uri, {nameof(NavigationOptions)} options)."
+        );
 
     /// <summary>
     /// Called to initialize BaseURI and current URI before these values are used for the first time.
@@ -188,9 +192,7 @@ public abstract class NavigationManager
     /// Allows derived classes to lazily self-initialize. Implementations that support lazy-initialization should override
     /// this method and call <see cref="Initialize(string, string)" />.
     /// </summary>
-    protected virtual void EnsureInitialized()
-    {
-    }
+    protected virtual void EnsureInitialized() { }
 
     /// <summary>
     /// Converts a relative URI into an absolute one (by resolving it
@@ -258,7 +260,10 @@ public abstract class NavigationManager
         }
         catch (Exception ex)
         {
-            throw new LocationChangeException("An exception occurred while dispatching a location changed event.", ex);
+            throw new LocationChangeException(
+                "An exception occurred while dispatching a location changed event.",
+                ex
+            );
         }
     }
 

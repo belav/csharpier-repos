@@ -26,11 +26,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
 {
     [Export(typeof(IVsTypeScriptTodoCommentService))]
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
-    internal class VisualStudioTodoCommentsService :
-        ITodoListProvider,
-        IVsTypeScriptTodoCommentService,
-        IEventListener<object>,
-        IDisposable
+    internal class VisualStudioTodoCommentsService
+        : ITodoListProvider,
+            IVsTypeScriptTodoCommentService,
+            IEventListener<object>,
+            IDisposable
     {
         private readonly IThreadingContext _threadingContext;
         private readonly VisualStudioWorkspaceImpl _workspace;
@@ -46,11 +46,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
             VisualStudioWorkspaceImpl workspace,
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
-            [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners)
+            [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners
+        )
         {
             _threadingContext = threadingContext;
             _workspace = workspace;
-            _eventListenerTracker = new EventListenerTracker<ITodoListProvider>(eventListeners, WellKnownEventListeners.TodoListProvider);
+            _eventListenerTracker = new EventListenerTracker<ITodoListProvider>(
+                eventListeners,
+                WellKnownEventListeners.TodoListProvider
+            );
 
             _listener = new TodoCommentsListener(
                 globalOptions,
@@ -59,9 +63,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
                 onTodoCommentsUpdated: (documentId, oldComments, newComments) =>
                 {
                     if (TodoListUpdated != null && !oldComments.SequenceEqual(newComments))
-                        TodoListUpdated?.Invoke(this, new TodoItemsUpdatedArgs(documentId, _workspace.CurrentSolution, documentId, newComments));
+                        TodoListUpdated?.Invoke(
+                            this,
+                            new TodoItemsUpdatedArgs(
+                                documentId,
+                                _workspace.CurrentSolution,
+                                documentId,
+                                newComments
+                            )
+                        );
                 },
-                threadingContext.DisposalToken);
+                threadingContext.DisposalToken
+            );
         }
 
         public void Dispose()
@@ -83,8 +96,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
             {
                 // Don't bother doing anything until the workspace has actually loaded.  We don't want to add to any
                 // startup costs by doing work too early.
-                var workspaceStatus = workspace.Services.GetRequiredService<IWorkspaceStatusService>();
-                await workspaceStatus.WaitUntilFullyLoadedAsync(_threadingContext.DisposalToken).ConfigureAwait(false);
+                var workspaceStatus =
+                    workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+                await workspaceStatus
+                    .WaitUntilFullyLoadedAsync(_threadingContext.DisposalToken)
+                    .ConfigureAwait(false);
 
                 // Now that we've started, let the VS todo list know to start listening to us
                 _eventListenerTracker.EnsureEventListener(_workspace, this);
@@ -104,19 +120,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
 
         /// <inheritdoc cref="IVsTypeScriptTodoCommentService.ReportTodoCommentsAsync(Document, ImmutableArray{TodoComment}, CancellationToken)"/>
         async Task IVsTypeScriptTodoCommentService.ReportTodoCommentsAsync(
-            Document document, ImmutableArray<TodoComment> todoComments, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<TodoComment> todoComments,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<TodoCommentData>.GetInstance(out var converted);
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
-            await TodoComment.ConvertAsync(document, todoComments, converted, cancellationToken).ConfigureAwait(false);
+            await TodoComment
+                .ConvertAsync(document, todoComments, converted, cancellationToken)
+                .ConfigureAwait(false);
 
-            await _listener.ReportTodoCommentDataAsync(
-                document.Id, converted.ToImmutable(), cancellationToken).ConfigureAwait(false);
+            await _listener
+                .ReportTodoCommentDataAsync(document.Id, converted.ToImmutable(), cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        public ImmutableArray<TodoCommentData> GetTodoItems(Workspace workspace, DocumentId documentId, CancellationToken cancellationToken)
-            => _listener.GetTodoItems(documentId);
+        public ImmutableArray<TodoCommentData> GetTodoItems(
+            Workspace workspace,
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        ) => _listener.GetTodoItems(documentId);
     }
 }

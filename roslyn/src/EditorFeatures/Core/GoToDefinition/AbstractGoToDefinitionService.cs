@@ -18,68 +18,111 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.GoToDefinition
 {
-    internal abstract class AbstractAsyncGoToDefinitionService : AbstractFindDefinitionService, IAsyncGoToDefinitionService
+    internal abstract class AbstractAsyncGoToDefinitionService
+        : AbstractFindDefinitionService,
+            IAsyncGoToDefinitionService
     {
         private readonly IThreadingContext _threadingContext;
         private readonly IStreamingFindUsagesPresenter _streamingPresenter;
 
         protected AbstractAsyncGoToDefinitionService(
             IThreadingContext threadingContext,
-            IStreamingFindUsagesPresenter streamingPresenter)
+            IStreamingFindUsagesPresenter streamingPresenter
+        )
         {
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;
         }
 
         private static Task<INavigableLocation?> GetNavigableLocationAsync(
-            Document document, int position, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var solution = document.Project.Solution;
             var workspace = solution.Workspace;
             var service = workspace.Services.GetRequiredService<IDocumentNavigationService>();
 
             return service.GetLocationForPositionAsync(
-                workspace, document.Id, position, virtualSpace: 0, cancellationToken);
+                workspace,
+                document.Id,
+                position,
+                virtualSpace: 0,
+                cancellationToken
+            );
         }
 
-        public async Task<INavigableLocation?> FindDefinitionLocationAsync(Document document, int position, CancellationToken cancellationToken)
+        public async Task<INavigableLocation?> FindDefinitionLocationAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var symbolService = document.GetRequiredLanguageService<IGoToDefinitionSymbolService>();
-            var targetPositionOfControlFlow = await symbolService.GetTargetIfControlFlowAsync(
-                document, position, cancellationToken).ConfigureAwait(false);
+            var targetPositionOfControlFlow = await symbolService
+                .GetTargetIfControlFlowAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             if (targetPositionOfControlFlow is not null)
             {
                 return await GetNavigableLocationAsync(
-                    document, targetPositionOfControlFlow.Value, cancellationToken).ConfigureAwait(false);
+                        document,
+                        targetPositionOfControlFlow.Value,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             // Try to compute the referenced symbol and attempt to go to definition for the symbol.
-            var (symbol, _) = await symbolService.GetSymbolAndBoundSpanAsync(
-                document, position, includeType: true, cancellationToken).ConfigureAwait(false);
+            var (symbol, _) = await symbolService
+                .GetSymbolAndBoundSpanAsync(
+                    document,
+                    position,
+                    includeType: true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (symbol is null)
                 return null;
 
             // if the symbol only has a single source location, and we're already on it,
             // try to see if there's a better symbol we could navigate to.
             var remappedLocation = await GetAlternativeLocationIfAlreadyOnDefinitionAsync(
-                document, position, symbol, cancellationToken).ConfigureAwait(false);
+                    document,
+                    position,
+                    symbol,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (remappedLocation != null)
                 return remappedLocation;
 
             var isThirdPartyNavigationAllowed = await IsThirdPartyNavigationAllowedAsync(
-                symbol, position, document, cancellationToken).ConfigureAwait(false);
+                    symbol,
+                    position,
+                    document,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            return await GoToDefinitionHelpers.GetDefinitionLocationAsync(
-                symbol,
-                document.Project.Solution,
-                _threadingContext,
-                _streamingPresenter,
-                thirdPartyNavigationAllowed: isThirdPartyNavigationAllowed,
-                cancellationToken: cancellationToken).ConfigureAwait(false);
+            return await GoToDefinitionHelpers
+                .GetDefinitionLocationAsync(
+                    symbol,
+                    document.Project.Solution,
+                    _threadingContext,
+                    _streamingPresenter,
+                    thirdPartyNavigationAllowed: isThirdPartyNavigationAllowed,
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private async Task<INavigableLocation?> GetAlternativeLocationIfAlreadyOnDefinitionAsync(
-            Document document, int position, ISymbol symbol, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             var project = document.Project;
             var solution = project.Solution;
@@ -106,43 +149,73 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             if (interfaceImpls.Length == 0)
                 return null;
 
-            var title = string.Format(EditorFeaturesResources._0_implemented_members,
-                FindUsagesHelpers.GetDisplayName(symbol));
+            var title = string.Format(
+                EditorFeaturesResources._0_implemented_members,
+                FindUsagesHelpers.GetDisplayName(symbol)
+            );
 
             using var _ = ArrayBuilder<DefinitionItem>.GetInstance(out var builder);
             foreach (var impl in interfaceImpls)
             {
-                builder.AddRange(await GoToDefinitionHelpers.GetDefinitionsAsync(
-                    impl, solution, thirdPartyNavigationAllowed: false, cancellationToken).ConfigureAwait(false));
+                builder.AddRange(
+                    await GoToDefinitionHelpers
+                        .GetDefinitionsAsync(
+                            impl,
+                            solution,
+                            thirdPartyNavigationAllowed: false,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                );
             }
 
             var definitions = builder.ToImmutable();
 
-            return await _streamingPresenter.GetStreamingLocationAsync(
-                _threadingContext, solution.Workspace, title, definitions, cancellationToken).ConfigureAwait(false);
+            return await _streamingPresenter
+                .GetStreamingLocationAsync(
+                    _threadingContext,
+                    solution.Workspace,
+                    title,
+                    definitions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private static async Task<bool> IsThirdPartyNavigationAllowedAsync(
-            ISymbol symbolToNavigateTo, int caretPosition, Document document, CancellationToken cancellationToken)
+            ISymbol symbolToNavigateTo,
+            int caretPosition,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxRoot = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var containingTypeDeclaration = syntaxFactsService.GetContainingTypeDeclaration(syntaxRoot, caretPosition);
+            var containingTypeDeclaration = syntaxFactsService.GetContainingTypeDeclaration(
+                syntaxRoot,
+                caretPosition
+            );
 
             if (containingTypeDeclaration != null)
             {
-                var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document
+                    .GetSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 Debug.Assert(semanticModel != null);
 
                 // Allow third parties to navigate to all symbols except types/constructors
                 // if we are navigating from the corresponding type.
 
-                if (semanticModel.GetDeclaredSymbol(containingTypeDeclaration, cancellationToken) is ITypeSymbol containingTypeSymbol &&
-                    (symbolToNavigateTo is ITypeSymbol || symbolToNavigateTo.IsConstructor()))
+                if (
+                    semanticModel.GetDeclaredSymbol(containingTypeDeclaration, cancellationToken)
+                        is ITypeSymbol containingTypeSymbol
+                    && (symbolToNavigateTo is ITypeSymbol || symbolToNavigateTo.IsConstructor())
+                )
                 {
-                    var candidateTypeSymbol = symbolToNavigateTo is ITypeSymbol
-                        ? symbolToNavigateTo
-                        : symbolToNavigateTo.ContainingType;
+                    var candidateTypeSymbol =
+                        symbolToNavigateTo is ITypeSymbol
+                            ? symbolToNavigateTo
+                            : symbolToNavigateTo.ContainingType;
 
                     if (Equals(containingTypeSymbol, candidateTypeSymbol))
                     {

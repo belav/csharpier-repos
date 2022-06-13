@@ -13,16 +13,18 @@ namespace AutoMapper.UnitTests.Bug
         {
             internal int Number { get; set; }
         }
+
         class Destination
         {
             internal int Number { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.ShouldMapProperty = p => true;
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.ShouldMapProperty = p => true;
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {

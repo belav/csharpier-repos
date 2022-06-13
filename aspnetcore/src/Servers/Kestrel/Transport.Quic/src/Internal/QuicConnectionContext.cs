@@ -17,6 +17,7 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
     internal PooledStreamStack<QuicStreamContext> StreamPool;
 
     private bool _streamPoolHeartbeatInitialized;
+
     // Ticks updated once per-second in heartbeat event.
     private long _heartbeatTicks;
     private readonly object _poolLock = new object();
@@ -25,7 +26,8 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
     private readonly QuicConnection _connection;
     private readonly QuicTransportContext _context;
     private readonly ILogger _log;
-    private readonly CancellationTokenSource _connectionClosedTokenSource = new CancellationTokenSource();
+    private readonly CancellationTokenSource _connectionClosedTokenSource =
+        new CancellationTokenSource();
 
     private Task? _closeTask;
     private ExceptionDispatchInfo? _abortReason;
@@ -68,7 +70,12 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
         _connection.Dispose();
     }
 
-    public override void Abort() => Abort(new ConnectionAbortedException("The connection was aborted by the application via MultiplexedConnectionContext.Abort()."));
+    public override void Abort() =>
+        Abort(
+            new ConnectionAbortedException(
+                "The connection was aborted by the application via MultiplexedConnectionContext.Abort()."
+            )
+        );
 
     public override void Abort(ConnectionAbortedException abortReason)
     {
@@ -87,7 +94,9 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
         }
     }
 
-    public override async ValueTask<ConnectionContext?> AcceptAsync(CancellationToken cancellationToken = default)
+    public override async ValueTask<ConnectionContext?> AcceptAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         try
         {
@@ -128,12 +137,14 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
             _error = ex.ErrorCode;
             QuicLog.ConnectionAborted(_log, this, ex.ErrorCode, ex);
 
-            ThreadPool.UnsafeQueueUserWorkItem(state =>
-            {
-                state.CancelConnectionClosedToken();
-            },
-            this,
-            preferLocal: false);
+            ThreadPool.UnsafeQueueUserWorkItem(
+                state =>
+                {
+                    state.CancelConnectionClosedToken();
+                },
+                this,
+                preferLocal: false
+            );
 
             // Throw error so consumer sees the connection is aborted by peer.
             throw new ConnectionResetException(ex.Message, ex);
@@ -147,7 +158,12 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
                 // unexpected state. Abort connection and throw reason error.
                 if (_abortReason == null)
                 {
-                    Abort(new ConnectionAbortedException("Unexpected error when accepting stream.", ex));
+                    Abort(
+                        new ConnectionAbortedException(
+                            "Unexpected error when accepting stream.",
+                            ex
+                        )
+                    );
                 }
 
                 _abortReason!.Throw();
@@ -155,7 +171,10 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
         }
         catch (OperationCanceledException)
         {
-            Debug.Assert(cancellationToken.IsCancellationRequested, "Error requires cancellation is requested.");
+            Debug.Assert(
+                cancellationToken.IsCancellationRequested,
+                "Error requires cancellation is requested."
+            );
 
             lock (_shutdownLock)
             {
@@ -165,7 +184,9 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
         }
         catch (Exception ex)
         {
-            Debug.Fail($"Unexpected exception in {nameof(QuicConnectionContext)}.{nameof(AcceptAsync)}: {ex}");
+            Debug.Fail(
+                $"Unexpected exception in {nameof(QuicConnectionContext)}.{nameof(AcceptAsync)}: {ex}"
+            );
             throw;
         }
 
@@ -181,11 +202,18 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
         }
         catch (Exception ex)
         {
-            _log.LogError(0, ex, $"Unexpected exception in {nameof(QuicConnectionContext)}.{nameof(CancelConnectionClosedToken)}.");
+            _log.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(QuicConnectionContext)}.{nameof(CancelConnectionClosedToken)}."
+            );
         }
     }
 
-    public override async ValueTask<ConnectionContext> ConnectAsync(IFeatureCollection? features = null, CancellationToken cancellationToken = default)
+    public override async ValueTask<ConnectionContext> ConnectAsync(
+        IFeatureCollection? features = null,
+        CancellationToken cancellationToken = default
+    )
     {
         QuicStream quicStream;
 
@@ -230,10 +258,15 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
                 var heartbeatFeature = Features.Get<IConnectionHeartbeatFeature>();
                 if (heartbeatFeature == null)
                 {
-                    throw new InvalidOperationException($"Required {nameof(IConnectionHeartbeatFeature)} not found in connection features.");
+                    throw new InvalidOperationException(
+                        $"Required {nameof(IConnectionHeartbeatFeature)} not found in connection features."
+                    );
                 }
 
-                heartbeatFeature.OnHeartbeat(static state => ((QuicConnectionContext)state).RemoveExpiredStreams(), this);
+                heartbeatFeature.OnHeartbeat(
+                    static state => ((QuicConnectionContext)state).RemoveExpiredStreams(),
+                    this
+                );
 
                 // Set ticks for the first time. Ticks are then updated in heartbeat.
                 var now = _context.Options.SystemClock.UtcNow.Ticks;
@@ -244,7 +277,8 @@ internal partial class QuicConnectionContext : TransportMultiplexedConnection
 
             if (stream.CanReuse && StreamPool.Count < MaxStreamPoolSize)
             {
-                stream.PoolExpirationTicks = Volatile.Read(ref _heartbeatTicks) + StreamPoolExpiryTicks;
+                stream.PoolExpirationTicks =
+                    Volatile.Read(ref _heartbeatTicks) + StreamPoolExpiryTicks;
                 StreamPool.Push(stream);
                 return true;
             }

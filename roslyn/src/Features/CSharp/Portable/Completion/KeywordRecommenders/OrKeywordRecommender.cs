@@ -11,12 +11,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class OrKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public OrKeywordRecommender()
-            : base(SyntaxKind.OrKeyword)
-        {
-        }
+        public OrKeywordRecommender() : base(SyntaxKind.OrKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             return context.IsAtEndOfPattern;
         }

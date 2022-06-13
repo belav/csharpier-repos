@@ -26,7 +26,8 @@ namespace System.Threading.RateLimiting
             QueueProcessingOrder queueProcessingOrder,
             int queueLimit,
             TimeSpan window,
-            bool autoReplenishment = true)
+            bool autoReplenishment = true
+        )
         {
             if (permitLimit < 0)
             {

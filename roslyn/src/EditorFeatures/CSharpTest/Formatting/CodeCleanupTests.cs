@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task RemoveUsings()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 class Program
 {
@@ -50,7 +51,8 @@ class Program
 }
 ";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 internal class Program
 {
@@ -67,7 +69,8 @@ internal class Program
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task SortUsings()
         {
-            var code = @"using System.Collections.Generic;
+            var code =
+                @"using System.Collections.Generic;
 using System;
 class Program
 {
@@ -79,7 +82,8 @@ class Program
 }
 ";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 
 internal class Program
@@ -98,7 +102,8 @@ internal class Program
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task SortGlobalUsings()
         {
-            var code = @"using System.Threading.Tasks;
+            var code =
+                @"using System.Threading.Tasks;
 using System.Threading;
 global using System.Collections.Generic;
 global using System;
@@ -114,7 +119,8 @@ class Program
 }
 ";
 
-            var expected = @"global using System;
+            var expected =
+                @"global using System;
 global using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -137,7 +143,8 @@ internal class Program
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task GroupUsings()
         {
-            var code = @"using M;
+            var code =
+                @"using M;
 using System;
 
 internal class Program
@@ -156,7 +163,8 @@ namespace M
 }
 ";
 
-            var expected = @"using M;
+            var expected =
+                @"using M;
 
 using System;
 
@@ -175,14 +183,20 @@ namespace M
     public class Goo { }
 }
 ";
-            return AssertCodeCleanupResult(expected, code, systemUsingsFirst: false, separateUsingGroups: true);
+            return AssertCodeCleanupResult(
+                expected,
+                code,
+                systemUsingsFirst: false,
+                separateUsingGroups: true
+            );
         }
 
         [Fact, WorkItem(36984, "https://github.com/dotnet/roslyn/issues/36984")]
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task SortAndGroupUsings()
         {
-            var code = @"using M;
+            var code =
+                @"using M;
 using System;
 
 internal class Program
@@ -201,7 +215,8 @@ namespace M
 }
 ";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 using M;
 
@@ -220,14 +235,20 @@ namespace M
     public class Goo { }
 }
 ";
-            return AssertCodeCleanupResult(expected, code, systemUsingsFirst: true, separateUsingGroups: true);
+            return AssertCodeCleanupResult(
+                expected,
+                code,
+                systemUsingsFirst: true,
+                separateUsingGroups: true
+            );
         }
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task FixAddRemoveBraces()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     int Method()
     {
@@ -239,7 +260,8 @@ namespace M
     }
 }
 ";
-            var expected = @"internal class Program
+            var expected =
+                @"internal class Program
 {
     private int Method()
     {
@@ -260,7 +282,8 @@ namespace M
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task RemoveUnusedVariable()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     void Method()
     {
@@ -268,7 +291,8 @@ namespace M
     }
 }
 ";
-            var expected = @"internal class Program
+            var expected =
+                @"internal class Program
 {
     private void Method()
     {
@@ -282,7 +306,8 @@ namespace M
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task FixAccessibilityModifiers()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     void Method()
     {
@@ -290,7 +315,8 @@ namespace M
     }
 }
 ";
-            var expected = @"internal class Program
+            var expected =
+                @"internal class Program
 {
     private void Method()
     {
@@ -304,7 +330,8 @@ namespace M
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task FixUsingPlacementPreferOutside()
         {
-            var code = @"namespace A
+            var code =
+                @"namespace A
 {
     using System;
 
@@ -318,7 +345,8 @@ namespace M
 }
 ";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 namespace A
 {
@@ -339,7 +367,8 @@ namespace A
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task FixUsingPlacementPreferInside()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 namespace A
 {
@@ -353,7 +382,8 @@ namespace A
 }
 ";
 
-            var expected = @"namespace A
+            var expected =
+                @"namespace A
 {
     using System;
 
@@ -374,7 +404,8 @@ namespace A
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task FixUsingPlacementPreferInsidePreserve()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 namespace A
 {
@@ -397,7 +428,8 @@ namespace A
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task FixUsingPlacementPreferOutsidePreserve()
         {
-            var code = @"namespace A
+            var code =
+                @"namespace A
 {
     using System;
 
@@ -420,7 +452,8 @@ namespace A
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task FixUsingPlacementMixedPreferOutside()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 namespace A
 {
@@ -438,7 +471,8 @@ namespace A
 }
 ";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 
 namespace A
@@ -462,7 +496,8 @@ namespace A
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task FixUsingPlacementMixedPreferInside()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 namespace A
 {
@@ -480,7 +515,8 @@ namespace A
 }
 ";
 
-            var expected = @"namespace A
+            var expected =
+                @"namespace A
 {
     using System;
     using System.Collections.Generic;
@@ -505,7 +541,8 @@ namespace A
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task FixUsingPlacementMixedPreferInsidePreserve()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 namespace A
 {
@@ -532,7 +569,8 @@ namespace A
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         public Task FixUsingPlacementMixedPreferOutsidePreserve()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 namespace A
 {
@@ -559,7 +597,10 @@ namespace A
         [Trait(Traits.Feature, Traits.Features.CodeCleanup)]
         [InlineData(LanguageNames.CSharp, 35)]
         [InlineData(LanguageNames.VisualBasic, 70)]
-        public void VerifyAllCodeStyleFixersAreSupportedByCodeCleanup(string language, int expectedNumberOfUnsupportedDiagnosticIds)
+        public void VerifyAllCodeStyleFixersAreSupportedByCodeCleanup(
+            string language,
+            int expectedNumberOfUnsupportedDiagnosticIds
+        )
         {
             var supportedDiagnostics = GetSupportedDiagnosticIdsForCodeCleanupService(language);
 
@@ -567,7 +608,10 @@ namespace A
             Assert.Equal(supportedDiagnostics, supportedDiagnostics.Distinct());
 
             // Exact Number of Unsupported Diagnostic Ids
-            var ideDiagnosticIds = typeof(IDEDiagnosticIds).GetFields().Select(f => f.GetValue(f) as string).ToArray();
+            var ideDiagnosticIds = typeof(IDEDiagnosticIds)
+                .GetFields()
+                .Select(f => f.GetValue(f) as string)
+                .ToArray();
             var unsupportedDiagnosticIds = ideDiagnosticIds.Except(supportedDiagnostics).ToArray();
             Assert.Equal(expectedNumberOfUnsupportedDiagnosticIds, unsupportedDiagnosticIds.Length);
         }
@@ -581,19 +625,27 @@ namespace A
             var codeCleanupService = document.GetLanguageService<ICodeCleanupService>();
 
             var enabledDiagnostics = codeCleanupService.GetAllDiagnostics();
-            var supportedDiagnostics = enabledDiagnostics.Diagnostics.SelectMany(x => x.DiagnosticIds).ToArray();
+            var supportedDiagnostics = enabledDiagnostics.Diagnostics
+                .SelectMany(x => x.DiagnosticIds)
+                .ToArray();
             return supportedDiagnostics;
 
             TestWorkspace GetTestWorkspaceForLanguage(string language)
             {
                 if (language == LanguageNames.CSharp)
                 {
-                    return TestWorkspace.CreateCSharp(string.Empty, composition: EditorTestCompositions.EditorFeaturesWpf);
+                    return TestWorkspace.CreateCSharp(
+                        string.Empty,
+                        composition: EditorTestCompositions.EditorFeaturesWpf
+                    );
                 }
 
                 if (language == LanguageNames.VisualBasic)
                 {
-                    return TestWorkspace.CreateVisualBasic(string.Empty, composition: EditorTestCompositions.EditorFeaturesWpf);
+                    return TestWorkspace.CreateVisualBasic(
+                        string.Empty,
+                        composition: EditorTestCompositions.EditorFeaturesWpf
+                    );
                 }
 
                 return null;
@@ -608,8 +660,19 @@ namespace A
         /// <param name="systemUsingsFirst">Indicates whether <c><see cref="System"/>.*</c> '<c>using</c>' directives should preceed others. Default is <c>true</c>.</param>
         /// <param name="separateUsingGroups">Indicates whether '<c>using</c>' directives should be organized into separated groups. Default is <c>true</c>.</param>
         /// <returns>The <see cref="Task"/> to test code cleanup.</returns>
-        private protected static Task AssertCodeCleanupResult(string expected, string code, bool systemUsingsFirst = true, bool separateUsingGroups = false)
-            => AssertCodeCleanupResult(expected, code, new(AddImportPlacement.OutsideNamespace, NotificationOption2.Silent), systemUsingsFirst, separateUsingGroups);
+        private protected static Task AssertCodeCleanupResult(
+            string expected,
+            string code,
+            bool systemUsingsFirst = true,
+            bool separateUsingGroups = false
+        ) =>
+            AssertCodeCleanupResult(
+                expected,
+                code,
+                new(AddImportPlacement.OutsideNamespace, NotificationOption2.Silent),
+                systemUsingsFirst,
+                separateUsingGroups
+            );
 
         /// <summary>
         /// Assert the expected code value equals the actual processed input <paramref name="code"/>.
@@ -620,26 +683,57 @@ namespace A
         /// <param name="systemUsingsFirst">Indicates whether <c><see cref="System"/>.*</c> '<c>using</c>' directives should preceed others. Default is <c>true</c>.</param>
         /// <param name="separateUsingGroups">Indicates whether '<c>using</c>' directives should be organized into separated groups. Default is <c>true</c>.</param>
         /// <returns>The <see cref="Task"/> to test code cleanup.</returns>
-        private protected static async Task AssertCodeCleanupResult(string expected, string code, CodeStyleOption2<AddImportPlacement> preferredImportPlacement, bool systemUsingsFirst = true, bool separateUsingGroups = false)
+        private protected static async Task AssertCodeCleanupResult(
+            string expected,
+            string code,
+            CodeStyleOption2<AddImportPlacement> preferredImportPlacement,
+            bool systemUsingsFirst = true,
+            bool separateUsingGroups = false
+        )
         {
-            using var workspace = TestWorkspace.CreateCSharp(code, composition: EditorTestCompositions.EditorFeaturesWpf);
+            using var workspace = TestWorkspace.CreateCSharp(
+                code,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
 
             // must set global options since incremental analyzer infra reads from global options
             var globalOptions = workspace.GlobalOptions;
-            globalOptions.SetGlobalOption(new OptionKey(GenerationOptions.SeparateImportDirectiveGroups, LanguageNames.CSharp), separateUsingGroups);
-            globalOptions.SetGlobalOption(new OptionKey(GenerationOptions.PlaceSystemNamespaceFirst, LanguageNames.CSharp), systemUsingsFirst);
-            globalOptions.SetGlobalOption(new OptionKey(CSharpCodeStyleOptions.PreferredUsingDirectivePlacement), preferredImportPlacement);
+            globalOptions.SetGlobalOption(
+                new OptionKey(
+                    GenerationOptions.SeparateImportDirectiveGroups,
+                    LanguageNames.CSharp
+                ),
+                separateUsingGroups
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(GenerationOptions.PlaceSystemNamespaceFirst, LanguageNames.CSharp),
+                systemUsingsFirst
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(CSharpCodeStyleOptions.PreferredUsingDirectivePlacement),
+                preferredImportPlacement
+            );
 
-            var solution = workspace.CurrentSolution.WithAnalyzerReferences(new[]
-            {
-                new AnalyzerFileReference(typeof(CSharpCompilerDiagnosticAnalyzer).Assembly.Location, TestAnalyzerAssemblyLoader.LoadFromFile),
-                new AnalyzerFileReference(typeof(UseExpressionBodyDiagnosticAnalyzer).Assembly.Location, TestAnalyzerAssemblyLoader.LoadFromFile)
-            });
+            var solution = workspace.CurrentSolution.WithAnalyzerReferences(
+                new[]
+                {
+                    new AnalyzerFileReference(
+                        typeof(CSharpCompilerDiagnosticAnalyzer).Assembly.Location,
+                        TestAnalyzerAssemblyLoader.LoadFromFile
+                    ),
+                    new AnalyzerFileReference(
+                        typeof(UseExpressionBodyDiagnosticAnalyzer).Assembly.Location,
+                        TestAnalyzerAssemblyLoader.LoadFromFile
+                    )
+                }
+            );
 
             workspace.TryApplyChanges(solution);
 
             // register this workspace to solution crawler so that analyzer service associate itself with given workspace
-            var incrementalAnalyzerProvider = workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>() as IIncrementalAnalyzerProvider;
+            var incrementalAnalyzerProvider =
+                workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
+                as IIncrementalAnalyzerProvider;
             incrementalAnalyzerProvider.CreateIncrementalAnalyzer(workspace);
 
             var hostdoc = workspace.Documents.Single();
@@ -650,7 +744,12 @@ namespace A
             var enabledDiagnostics = codeCleanupService.GetAllDiagnostics();
 
             var newDoc = await codeCleanupService.CleanupAsync(
-                document, enabledDiagnostics, new ProgressTracker(), globalOptions.CreateProvider(), CancellationToken.None);
+                document,
+                enabledDiagnostics,
+                new ProgressTracker(),
+                globalOptions.CreateProvider(),
+                CancellationToken.None
+            );
 
             var actual = await newDoc.GetTextAsync();
 
@@ -658,15 +757,27 @@ namespace A
         }
 
         private static readonly CodeStyleOption2<AddImportPlacement> InsideNamespaceOption =
-            new CodeStyleOption2<AddImportPlacement>(AddImportPlacement.InsideNamespace, NotificationOption2.Error);
+            new CodeStyleOption2<AddImportPlacement>(
+                AddImportPlacement.InsideNamespace,
+                NotificationOption2.Error
+            );
 
         private static readonly CodeStyleOption2<AddImportPlacement> OutsideNamespaceOption =
-            new CodeStyleOption2<AddImportPlacement>(AddImportPlacement.OutsideNamespace, NotificationOption2.Error);
+            new CodeStyleOption2<AddImportPlacement>(
+                AddImportPlacement.OutsideNamespace,
+                NotificationOption2.Error
+            );
 
         private static readonly CodeStyleOption2<AddImportPlacement> InsidePreferPreservationOption =
-            new CodeStyleOption2<AddImportPlacement>(AddImportPlacement.InsideNamespace, NotificationOption2.None);
+            new CodeStyleOption2<AddImportPlacement>(
+                AddImportPlacement.InsideNamespace,
+                NotificationOption2.None
+            );
 
         private static readonly CodeStyleOption2<AddImportPlacement> OutsidePreferPreservationOption =
-            new CodeStyleOption2<AddImportPlacement>(AddImportPlacement.OutsideNamespace, NotificationOption2.None);
+            new CodeStyleOption2<AddImportPlacement>(
+                AddImportPlacement.OutsideNamespace,
+                NotificationOption2.None
+            );
     }
 }

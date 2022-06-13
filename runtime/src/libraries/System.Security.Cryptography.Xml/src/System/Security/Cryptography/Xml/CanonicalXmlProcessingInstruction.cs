@@ -7,12 +7,18 @@ using System.Text;
 namespace System.Security.Cryptography.Xml
 {
     // the class that provides node subset state and canonicalization function to XmlProcessingInstruction
-    internal sealed class CanonicalXmlProcessingInstruction : XmlProcessingInstruction, ICanonicalizableNode
+    internal sealed class CanonicalXmlProcessingInstruction
+        : XmlProcessingInstruction,
+            ICanonicalizableNode
     {
         private bool _isInNodeSet;
 
-        public CanonicalXmlProcessingInstruction(string target, string data, XmlDocument doc, bool defaultNodeSetInclusionState)
-            : base(target, data, doc)
+        public CanonicalXmlProcessingInstruction(
+            string target,
+            string data,
+            XmlDocument doc,
+            bool defaultNodeSetInclusionState
+        ) : base(target, data, doc)
         {
             _isInNodeSet = defaultNodeSetInclusionState;
         }
@@ -23,7 +29,11 @@ namespace System.Security.Cryptography.Xml
             set { _isInNodeSet = value; }
         }
 
-        public void Write(StringBuilder strBuilder, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void Write(
+            StringBuilder strBuilder,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             if (!IsInNodeSet)
                 return;
@@ -39,7 +49,11 @@ namespace System.Security.Cryptography.Xml
                 strBuilder.Append((char)10);
         }
 
-        public void WriteHash(HashAlgorithm hash, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void WriteHash(
+            HashAlgorithm hash,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             if (!IsInNodeSet)
                 return;

@@ -10,6 +10,7 @@ namespace System.Collections.Generic
 
     internal partial class ArraySortHelper<TKey, TValue>
     {
-        public static ArraySortHelper<TKey, TValue> Default { get; } = new ArraySortHelper<TKey, TValue>();
+        public static ArraySortHelper<TKey, TValue> Default { get; } =
+            new ArraySortHelper<TKey, TValue>();
     }
 }

@@ -22,8 +22,7 @@ public sealed class RoutePatternException : Exception
     /// </summary>
     /// <param name="pattern">The route pattern as raw text.</param>
     /// <param name="message">The exception message.</param>
-    public RoutePatternException(string pattern, string message)
-        : base(message)
+    public RoutePatternException(string pattern, string message) : base(message)
     {
         if (pattern == null)
         {

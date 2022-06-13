@@ -17,29 +17,55 @@ namespace System.Net
         private Dictionary<CredentialHostKey, NetworkCredential>? _cacheForHosts;
         private int _version;
 
-        public CredentialCache()
-        {
-        }
+        public CredentialCache() { }
 
         public void Add(Uri uriPrefix, string authType, NetworkCredential cred)
         {
             ArgumentNullException.ThrowIfNull(uriPrefix);
             ArgumentNullException.ThrowIfNull(authType);
 
-            if ((cred is SystemNetworkCredential)
-                && !((string.Equals(authType, NegotiationInfoClass.NTLM, StringComparison.OrdinalIgnoreCase))
-                     || (string.Equals(authType, NegotiationInfoClass.Kerberos, StringComparison.OrdinalIgnoreCase))
-                     || (string.Equals(authType, NegotiationInfoClass.Negotiate, StringComparison.OrdinalIgnoreCase)))
+            if (
+                (cred is SystemNetworkCredential)
+                && !(
+                    (
+                        string.Equals(
+                            authType,
+                            NegotiationInfoClass.NTLM,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    || (
+                        string.Equals(
+                            authType,
+                            NegotiationInfoClass.Kerberos,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    || (
+                        string.Equals(
+                            authType,
+                            NegotiationInfoClass.Negotiate,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                 )
+            )
             {
-                throw new ArgumentException(SR.Format(SR.net_nodefaultcreds, authType), nameof(authType));
+                throw new ArgumentException(
+                    SR.Format(SR.net_nodefaultcreds, authType),
+                    nameof(authType)
+                );
             }
 
             ++_version;
 
             var key = new CredentialKey(uriPrefix, authType);
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Adding key:[{key}], cred:[{cred.Domain}],[{cred.UserName}]");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"Adding key:[{key}], cred:[{cred.Domain}],[{cred.UserName}]"
+                );
 
             if (_cache == null)
             {
@@ -49,7 +75,12 @@ namespace System.Net
             _cache.Add(key, cred);
         }
 
-        public void Add(string host, int port, string authenticationType, NetworkCredential credential)
+        public void Add(
+            string host,
+            int port,
+            string authenticationType,
+            NetworkCredential credential
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(host);
             ArgumentNullException.ThrowIfNull(authenticationType);
@@ -59,20 +90,48 @@ namespace System.Net
                 throw new ArgumentOutOfRangeException(nameof(port));
             }
 
-            if ((credential is SystemNetworkCredential)
-                && !((string.Equals(authenticationType, NegotiationInfoClass.NTLM, StringComparison.OrdinalIgnoreCase))
-                     || (string.Equals(authenticationType, NegotiationInfoClass.Kerberos, StringComparison.OrdinalIgnoreCase))
-                     || (string.Equals(authenticationType, NegotiationInfoClass.Negotiate, StringComparison.OrdinalIgnoreCase)))
+            if (
+                (credential is SystemNetworkCredential)
+                && !(
+                    (
+                        string.Equals(
+                            authenticationType,
+                            NegotiationInfoClass.NTLM,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    || (
+                        string.Equals(
+                            authenticationType,
+                            NegotiationInfoClass.Kerberos,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    || (
+                        string.Equals(
+                            authenticationType,
+                            NegotiationInfoClass.Negotiate,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                 )
+            )
             {
-                throw new ArgumentException(SR.Format(SR.net_nodefaultcreds, authenticationType), nameof(authenticationType));
+                throw new ArgumentException(
+                    SR.Format(SR.net_nodefaultcreds, authenticationType),
+                    nameof(authenticationType)
+                );
             }
 
             ++_version;
 
             var key = new CredentialHostKey(host, port, authenticationType);
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Adding key:[{key}], cred:[{credential.Domain}],[{credential.UserName}]");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"Adding key:[{key}], cred:[{credential.Domain}],[{credential.UserName}]"
+                );
 
             if (_cacheForHosts == null)
             {
@@ -93,7 +152,8 @@ namespace System.Net
 
             if (_cache == null)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "Short-circuiting because the dictionary is null.");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, "Short-circuiting because the dictionary is null.");
                 return;
             }
 
@@ -101,7 +161,8 @@ namespace System.Net
 
             var key = new CredentialKey(uriPrefix, authType);
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Removing key:[{key}]");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"Removing key:[{key}]");
 
             _cache.Remove(key);
         }
@@ -122,7 +183,8 @@ namespace System.Net
 
             if (_cacheForHosts == null)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "Short-circuiting because the dictionary is null.");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, "Short-circuiting because the dictionary is null.");
                 return;
             }
 
@@ -130,7 +192,8 @@ namespace System.Net
 
             var key = new CredentialHostKey(host, port, authenticationType);
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Removing key:[{key}]");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"Removing key:[{key}]");
 
             _cacheForHosts.Remove(key);
         }
@@ -142,7 +205,11 @@ namespace System.Net
 
             if (_cache == null)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "CredentialCache::GetCredential short-circuiting because the dictionary is null.");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        this,
+                        "CredentialCache::GetCredential short-circuiting because the dictionary is null."
+                    );
                 return null;
             }
 
@@ -169,7 +236,11 @@ namespace System.Net
                 }
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Returning {(mostSpecificMatch == null ? "null" : "(" + mostSpecificMatch.UserName + ":" + mostSpecificMatch.Domain + ")")}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"Returning {(mostSpecificMatch == null ? "null" : "(" + mostSpecificMatch.UserName + ":" + mostSpecificMatch.Domain + ")")}"
+                );
 
             return mostSpecificMatch;
         }
@@ -185,7 +256,11 @@ namespace System.Net
 
             if (_cacheForHosts == null)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "CredentialCache::GetCredential short-circuiting because the dictionary is null.");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        this,
+                        "CredentialCache::GetCredential short-circuiting because the dictionary is null."
+                    );
                 return null;
             }
 
@@ -194,16 +269,22 @@ namespace System.Net
             NetworkCredential? match;
             _cacheForHosts.TryGetValue(key, out match);
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Returning {((match == null) ? "null" : "(" + match.UserName + ":" + match.Domain + ")")}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"Returning {((match == null) ? "null" : "(" + match.UserName + ":" + match.Domain + ")")}"
+                );
 
             return match;
         }
 
         public IEnumerator GetEnumerator() => CredentialEnumerator.Create(this);
 
-        public static ICredentials DefaultCredentials => SystemNetworkCredential.s_defaultCredential;
+        public static ICredentials DefaultCredentials =>
+            SystemNetworkCredential.s_defaultCredential;
 
-        public static NetworkCredential DefaultNetworkCredentials => SystemNetworkCredential.s_defaultCredential;
+        public static NetworkCredential DefaultNetworkCredentials =>
+            SystemNetworkCredential.s_defaultCredential;
 
         private class CredentialEnumerator : IEnumerator
         {
@@ -213,15 +294,18 @@ namespace System.Net
 
                 if (cache._cache != null)
                 {
-                    return cache._cacheForHosts != null ?
-                        new DoubleTableCredentialEnumerator(cache) :
-                        new SingleTableCredentialEnumerator<CredentialKey>(cache, cache._cache);
+                    return cache._cacheForHosts != null
+                        ? new DoubleTableCredentialEnumerator(cache)
+                        : new SingleTableCredentialEnumerator<CredentialKey>(cache, cache._cache);
                 }
                 else
                 {
-                    return cache._cacheForHosts != null ?
-                        new SingleTableCredentialEnumerator<CredentialHostKey>(cache, cache._cacheForHosts) :
-                        new CredentialEnumerator(cache);
+                    return cache._cacheForHosts != null
+                        ? new SingleTableCredentialEnumerator<CredentialHostKey>(
+                            cache,
+                            cache._cacheForHosts
+                        )
+                        : new CredentialEnumerator(cache);
                 }
             }
 
@@ -276,11 +360,15 @@ namespace System.Net
                 _enumerating = false;
             }
 
-            private class SingleTableCredentialEnumerator<TKey> : CredentialEnumerator where TKey : notnull
+            private class SingleTableCredentialEnumerator<TKey> : CredentialEnumerator
+                where TKey : notnull
             {
                 private Dictionary<TKey, NetworkCredential>.ValueCollection.Enumerator _enumerator; // mutable struct field deliberately not readonly.
 
-                public SingleTableCredentialEnumerator(CredentialCache cache, Dictionary<TKey, NetworkCredential> table) : base(cache)
+                public SingleTableCredentialEnumerator(
+                    CredentialCache cache,
+                    Dictionary<TKey, NetworkCredential> table
+                ) : base(cache)
                 {
                     Debug.Assert(table != null);
 
@@ -300,12 +388,17 @@ namespace System.Net
                 }
             }
 
-            private sealed class DoubleTableCredentialEnumerator : SingleTableCredentialEnumerator<CredentialKey>
+            private sealed class DoubleTableCredentialEnumerator
+                : SingleTableCredentialEnumerator<CredentialKey>
             {
-                private Dictionary<CredentialHostKey, NetworkCredential>.ValueCollection.Enumerator _enumerator; // mutable struct field deliberately not readonly.
+                private Dictionary<
+                    CredentialHostKey,
+                    NetworkCredential
+                >.ValueCollection.Enumerator _enumerator; // mutable struct field deliberately not readonly.
                 private bool _onThisEnumerator;
 
-                public DoubleTableCredentialEnumerator(CredentialCache cache) : base(cache, cache._cache!)
+                public DoubleTableCredentialEnumerator(CredentialCache cache)
+                    : base(cache, cache._cache!)
                 {
                     Debug.Assert(cache._cacheForHosts != null);
 
@@ -342,7 +435,10 @@ namespace System.Net
 
             private static class DictionaryEnumeratorHelper
             {
-                internal static bool MoveNext<TKey, TValue>(ref Dictionary<TKey, TValue>.ValueCollection.Enumerator enumerator, out TValue current) where TKey : notnull
+                internal static bool MoveNext<TKey, TValue>(
+                    ref Dictionary<TKey, TValue>.ValueCollection.Enumerator enumerator,
+                    out TValue current
+                ) where TKey : notnull
                 {
                     bool result = enumerator.MoveNext();
                     current = enumerator.Current;
@@ -350,11 +446,16 @@ namespace System.Net
                 }
 
                 // Allows calling Reset on Dictionary's struct enumerator without a box allocation.
-                internal static void Reset<TEnumerator>(ref TEnumerator enumerator) where TEnumerator : IEnumerator
+                internal static void Reset<TEnumerator>(ref TEnumerator enumerator)
+                    where TEnumerator : IEnumerator
                 {
                     // The Dictionary enumerator's Reset method throws if the Dictionary has changed, but
                     // CredentialCache.Reset should not throw, so we catch and swallow the exception.
-                    try { enumerator.Reset(); } catch (InvalidOperationException) { }
+                    try
+                    {
+                        enumerator.Reset();
+                    }
+                    catch (InvalidOperationException) { }
                 }
             }
         }
@@ -371,13 +472,11 @@ namespace System.Net
     // authenticate, as in HTTP/1.1 digest.
     internal sealed class SystemNetworkCredential : NetworkCredential
     {
-        internal static readonly SystemNetworkCredential s_defaultCredential = new SystemNetworkCredential();
+        internal static readonly SystemNetworkCredential s_defaultCredential =
+            new SystemNetworkCredential();
 
         // We want reference equality to work. Making this private is a good way to guarantee that.
-        private SystemNetworkCredential() :
-            base(string.Empty, string.Empty, string.Empty)
-        {
-        }
+        private SystemNetworkCredential() : base(string.Empty, string.Empty, string.Empty) { }
     }
 
     internal readonly struct CredentialHostKey : IEquatable<CredentialHostKey>
@@ -398,18 +497,23 @@ namespace System.Net
         }
 
         public override int GetHashCode() =>
-            StringComparer.OrdinalIgnoreCase.GetHashCode(AuthenticationType) ^
-            StringComparer.OrdinalIgnoreCase.GetHashCode(Host) ^
-            Port.GetHashCode();
+            StringComparer.OrdinalIgnoreCase.GetHashCode(AuthenticationType)
+            ^ StringComparer.OrdinalIgnoreCase.GetHashCode(Host)
+            ^ Port.GetHashCode();
 
         public bool Equals(CredentialHostKey other)
         {
             bool equals =
-                string.Equals(AuthenticationType, other.AuthenticationType, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals(Host, other.Host, StringComparison.OrdinalIgnoreCase) &&
-                Port == other.Port;
+                string.Equals(
+                    AuthenticationType,
+                    other.AuthenticationType,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && string.Equals(Host, other.Host, StringComparison.OrdinalIgnoreCase)
+                && Port == other.Port;
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Equals({this},{other}) returns {equals}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"Equals({this},{other}) returns {equals}");
 
             return equals;
         }
@@ -445,12 +549,19 @@ namespace System.Net
             }
 
             // If the protocols don't match, this credential is not applicable for the given Uri.
-            if (!string.Equals(authenticationType, AuthenticationType, StringComparison.OrdinalIgnoreCase))
+            if (
+                !string.Equals(
+                    authenticationType,
+                    AuthenticationType,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return false;
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Match({UriPrefix} & {uri})");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"Match({UriPrefix} & {uri})");
 
             return IsPrefix(uri, UriPrefix);
         }
@@ -472,7 +583,11 @@ namespace System.Net
             Debug.Assert(uri != null);
             Debug.Assert(prefixUri != null);
 
-            if (prefixUri.Scheme != uri.Scheme || prefixUri.Host != uri.Host || prefixUri.Port != uri.Port)
+            if (
+                prefixUri.Scheme != uri.Scheme
+                || prefixUri.Host != uri.Host
+                || prefixUri.Port != uri.Port
+            )
             {
                 return false;
             }
@@ -483,12 +598,19 @@ namespace System.Net
                 return false;
             }
 
-            return string.Compare(uri.AbsolutePath, 0, prefixUri.AbsolutePath, 0, prefixLen, StringComparison.OrdinalIgnoreCase) == 0;
+            return string.Compare(
+                    uri.AbsolutePath,
+                    0,
+                    prefixUri.AbsolutePath,
+                    0,
+                    prefixLen,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0;
         }
 
         public override int GetHashCode() =>
-            StringComparer.OrdinalIgnoreCase.GetHashCode(AuthenticationType) ^
-            UriPrefix.GetHashCode();
+            StringComparer.OrdinalIgnoreCase.GetHashCode(AuthenticationType)
+            ^ UriPrefix.GetHashCode();
 
         public bool Equals([NotNullWhen(true)] CredentialKey? other)
         {
@@ -498,17 +620,25 @@ namespace System.Net
             }
 
             bool equals =
-                string.Equals(AuthenticationType, other.AuthenticationType, StringComparison.OrdinalIgnoreCase) &&
-                UriPrefix.Equals(other.UriPrefix);
+                string.Equals(
+                    AuthenticationType,
+                    other.AuthenticationType,
+                    StringComparison.OrdinalIgnoreCase
+                ) && UriPrefix.Equals(other.UriPrefix);
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Equals({this},{other}) returns {equals}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"Equals({this},{other}) returns {equals}");
 
             return equals;
         }
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => Equals(obj as CredentialKey);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            Equals(obj as CredentialKey);
 
         public override string ToString() =>
-            string.Create(CultureInfo.InvariantCulture, $"[{UriPrefixLength}]:{UriPrefix}:{AuthenticationType}");
+            string.Create(
+                CultureInfo.InvariantCulture,
+                $"[{UriPrefixLength}]:{UriPrefix}:{AuthenticationType}"
+            );
     }
 }

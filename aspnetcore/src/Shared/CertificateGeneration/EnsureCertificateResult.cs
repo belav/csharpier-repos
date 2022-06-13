@@ -14,4 +14,3 @@ internal enum EnsureCertificateResult
     UserCancelledTrustStep,
     FailedToMakeKeyAccessible,
 }
-

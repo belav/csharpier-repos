@@ -13,26 +13,27 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteObjectToStringTranslator : IMethodCallTranslator
 {
-    private static readonly HashSet<Type> TypeMapping = new()
-    {
-        typeof(bool),
-        typeof(byte),
-        typeof(byte[]),
-        typeof(char),
-        typeof(DateTime),
-        typeof(DateTimeOffset),
-        typeof(decimal),
-        typeof(double),
-        typeof(float),
-        typeof(Guid),
-        typeof(int),
-        typeof(long),
-        typeof(sbyte),
-        typeof(short),
-        typeof(TimeSpan),
-        typeof(uint),
-        typeof(ushort)
-    };
+    private static readonly HashSet<Type> TypeMapping =
+        new()
+        {
+            typeof(bool),
+            typeof(byte),
+            typeof(byte[]),
+            typeof(char),
+            typeof(DateTime),
+            typeof(DateTimeOffset),
+            typeof(decimal),
+            typeof(double),
+            typeof(float),
+            typeof(Guid),
+            typeof(int),
+            typeof(long),
+            typeof(sbyte),
+            typeof(short),
+            typeof(TimeSpan),
+            typeof(uint),
+            typeof(ushort)
+        };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -57,7 +58,8 @@ public class SqliteObjectToStringTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (instance == null || method.Name != nameof(ToString) || arguments.Count != 0)
         {
@@ -72,23 +74,37 @@ public class SqliteObjectToStringTranslator : IMethodCallTranslator
                     new[]
                     {
                         new CaseWhenClause(
-                            _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(false)),
-                            _sqlExpressionFactory.Constant(false.ToString())),
+                            _sqlExpressionFactory.Equal(
+                                instance,
+                                _sqlExpressionFactory.Constant(false)
+                            ),
+                            _sqlExpressionFactory.Constant(false.ToString())
+                        ),
                         new CaseWhenClause(
-                            _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(true)),
-                            _sqlExpressionFactory.Constant(true.ToString()))
+                            _sqlExpressionFactory.Equal(
+                                instance,
+                                _sqlExpressionFactory.Constant(true)
+                            ),
+                            _sqlExpressionFactory.Constant(true.ToString())
+                        )
                     },
-                    _sqlExpressionFactory.Constant(null));
+                    _sqlExpressionFactory.Constant(null)
+                );
             }
 
             return _sqlExpressionFactory.Case(
                 new[]
                 {
                     new CaseWhenClause(
-                        _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(false)),
-                        _sqlExpressionFactory.Constant(false.ToString()))
+                        _sqlExpressionFactory.Equal(
+                            instance,
+                            _sqlExpressionFactory.Constant(false)
+                        ),
+                        _sqlExpressionFactory.Constant(false.ToString())
+                    )
                 },
-                _sqlExpressionFactory.Constant(true.ToString()));
+                _sqlExpressionFactory.Constant(true.ToString())
+            );
         }
 
         return TypeMapping.Contains(instance.Type)

@@ -33,7 +33,11 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Callback to actually perform the processing of the next batch of work.
         /// </summary>
-        private readonly Func<ImmutableSegmentedList<TItem>, CancellationToken, ValueTask<TResult>> _processBatchAsync;
+        private readonly Func<
+            ImmutableSegmentedList<TItem>,
+            CancellationToken,
+            ValueTask<TResult>
+        > _processBatchAsync;
         private readonly IAsynchronousOperationListener _asyncListener;
         private readonly CancellationToken _cancellationToken;
 
@@ -50,7 +54,8 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Data added that we want to process in our next update task.
         /// </summary>
-        private readonly ImmutableSegmentedList<TItem>.Builder _nextBatch = ImmutableSegmentedList.CreateBuilder<TItem>();
+        private readonly ImmutableSegmentedList<TItem>.Builder _nextBatch =
+            ImmutableSegmentedList.CreateBuilder<TItem>();
 
         /// <summary>
         /// Used if <see cref="_equalityComparer"/> is present to ensure only unique items are added to <see
@@ -75,10 +80,15 @@ namespace Roslyn.Utilities
 
         public AsyncBatchingWorkQueue(
             TimeSpan delay,
-            Func<ImmutableSegmentedList<TItem>, CancellationToken, ValueTask<TResult>> processBatchAsync,
+            Func<
+                ImmutableSegmentedList<TItem>,
+                CancellationToken,
+                ValueTask<TResult>
+            > processBatchAsync,
             IEqualityComparer<TItem>? equalityComparer,
             IAsynchronousOperationListener asyncListener,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             _delay = delay;
             _processBatchAsync = processBatchAsync;

@@ -28,9 +28,8 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
     /// </summary>
     public SqlServerModificationCommandBatch(
         ModificationCommandBatchFactoryDependencies dependencies,
-        int maxBatchSize)
-        : base(dependencies)
-        => MaxBatchSize = maxBatchSize;
+        int maxBatchSize
+    ) : base(dependencies) => MaxBatchSize = maxBatchSize;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -38,8 +37,8 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected new virtual ISqlServerUpdateSqlGenerator UpdateSqlGenerator
-        => (ISqlServerUpdateSqlGenerator)base.UpdateSqlGenerator;
+    protected new virtual ISqlServerUpdateSqlGenerator UpdateSqlGenerator =>
+        (ISqlServerUpdateSqlGenerator)base.UpdateSqlGenerator;
 
     /// <summary>
     ///     The maximum number of <see cref="ModificationCommand"/> instances that can be added to a single batch.
@@ -72,10 +71,10 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override bool IsValid()
-        => SqlBuilder.Length < MaxScriptLength
-            // A single implicit parameter for the command text itself
-            && ParameterValues.Count + 1 < MaxParameterCount;
+    protected override bool IsValid() =>
+        SqlBuilder.Length < MaxScriptLength
+        // A single implicit parameter for the command text itself
+        && ParameterValues.Count + 1 < MaxParameterCount;
 
     private void ApplyPendingBulkInsertCommands()
     {
@@ -89,8 +88,12 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
         var wasCachedCommandTextEmpty = IsCommandTextEmpty;
 
         var resultSetMapping = UpdateSqlGenerator.AppendBulkInsertOperation(
-            SqlBuilder, _pendingBulkInsertCommands, commandPosition, out var resultsContainPositionMapping,
-            out var requiresTransaction);
+            SqlBuilder,
+            _pendingBulkInsertCommands,
+            commandPosition,
+            out var resultsContainPositionMapping,
+            out var requiresTransaction
+        );
 
         SetRequiresTransaction(!wasCachedCommandTextEmpty || requiresTransaction);
 
@@ -98,14 +101,21 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
         {
             if (ResultsPositionalMappingEnabled is null)
             {
-                ResultsPositionalMappingEnabled = new BitArray(CommandResultSet.Count + _pendingBulkInsertCommands.Count);
+                ResultsPositionalMappingEnabled = new BitArray(
+                    CommandResultSet.Count + _pendingBulkInsertCommands.Count
+                );
             }
             else
             {
-                ResultsPositionalMappingEnabled.Length = CommandResultSet.Count + _pendingBulkInsertCommands.Count;
+                ResultsPositionalMappingEnabled.Length =
+                    CommandResultSet.Count + _pendingBulkInsertCommands.Count;
             }
 
-            for (var i = commandPosition; i < commandPosition + _pendingBulkInsertCommands.Count; i++)
+            for (
+                var i = commandPosition;
+                i < commandPosition + _pendingBulkInsertCommands.Count;
+                i++
+            )
             {
                 ResultsPositionalMappingEnabled![i] = true;
             }
@@ -134,8 +144,10 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
     {
         if (modificationCommand.EntityState == EntityState.Added)
         {
-            if (_pendingBulkInsertCommands.Count > 0
-                && !CanBeInsertedInSameStatement(_pendingBulkInsertCommands[0], modificationCommand))
+            if (
+                _pendingBulkInsertCommands.Count > 0
+                && !CanBeInsertedInSameStatement(_pendingBulkInsertCommands[0], modificationCommand)
+            )
             {
                 // The new Add command cannot be added to the pending bulk insert commands (e.g. different table).
                 // Write out the pending commands before starting a new pending chain.
@@ -162,13 +174,22 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
 
     private static bool CanBeInsertedInSameStatement(
         IReadOnlyModificationCommand firstCommand,
-        IReadOnlyModificationCommand secondCommand)
-        => firstCommand.TableName == secondCommand.TableName
-            && firstCommand.Schema == secondCommand.Schema
-            && firstCommand.ColumnModifications.Where(o => o.IsWrite).Select(o => o.ColumnName).SequenceEqual(
-                secondCommand.ColumnModifications.Where(o => o.IsWrite).Select(o => o.ColumnName))
-            && firstCommand.ColumnModifications.Where(o => o.IsRead).Select(o => o.ColumnName).SequenceEqual(
-                secondCommand.ColumnModifications.Where(o => o.IsRead).Select(o => o.ColumnName));
+        IReadOnlyModificationCommand secondCommand
+    ) =>
+        firstCommand.TableName == secondCommand.TableName
+        && firstCommand.Schema == secondCommand.Schema
+        && firstCommand.ColumnModifications
+            .Where(o => o.IsWrite)
+            .Select(o => o.ColumnName)
+            .SequenceEqual(
+                secondCommand.ColumnModifications.Where(o => o.IsWrite).Select(o => o.ColumnName)
+            )
+        && firstCommand.ColumnModifications
+            .Where(o => o.IsRead)
+            .Select(o => o.ColumnName)
+            .SequenceEqual(
+                secondCommand.ColumnModifications.Where(o => o.IsRead).Select(o => o.ColumnName)
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -195,7 +216,7 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
         {
             base.Execute(connection);
         }
-        catch (DbUpdateException e) when (e.InnerException is SqlException { Number: 334 } )
+        catch (DbUpdateException e) when (e.InnerException is SqlException { Number: 334 })
         {
             // SQL Server error: The target table '%.*ls' of the DML statement cannot have any enabled triggers if the statement contains an
             // OUTPUT clause without INTO clause.
@@ -204,9 +225,10 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
             throw new DbUpdateException(
                 SqlServerStrings.SaveChangesFailedBecauseOfTriggers,
                 e.InnerException,
-                e.Entries);
+                e.Entries
+            );
         }
-        catch (DbUpdateException e) when (e.InnerException is SqlException { Number: 4186 } )
+        catch (DbUpdateException e) when (e.InnerException is SqlException { Number: 4186 })
         {
             // SQL Server error: Column '%ls.%.*ls' cannot be referenced in the OUTPUT clause because the column definition contains a
             // subquery or references a function that performs user or system data access [...]
@@ -214,7 +236,8 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
             throw new DbUpdateException(
                 SqlServerStrings.SaveChangesFailedBecauseOfComputedColumnWithFunction,
                 e.InnerException,
-                e.Entries);
+                e.Entries
+            );
         }
     }
 
@@ -226,13 +249,14 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
     /// </summary>
     public override async Task ExecuteAsync(
         IRelationalConnection connection,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         try
         {
             await base.ExecuteAsync(connection, cancellationToken).ConfigureAwait(false);
         }
-        catch (DbUpdateException e) when (e.InnerException is SqlException { Number: 334 } )
+        catch (DbUpdateException e) when (e.InnerException is SqlException { Number: 334 })
         {
             // SQL Server error: The target table '%.*ls' of the DML statement cannot have any enabled triggers if the statement contains an
             // OUTPUT clause without INTO clause.
@@ -241,9 +265,10 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
             throw new DbUpdateException(
                 SqlServerStrings.SaveChangesFailedBecauseOfTriggers,
                 e.InnerException,
-                e.Entries);
+                e.Entries
+            );
         }
-        catch (DbUpdateException e) when (e.InnerException is SqlException { Number: 4186 } )
+        catch (DbUpdateException e) when (e.InnerException is SqlException { Number: 4186 })
         {
             // SQL Server error: Column '%ls.%.*ls' cannot be referenced in the OUTPUT clause because the column definition contains a
             // subquery or references a function that performs user or system data access [...]
@@ -251,7 +276,8 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
             throw new DbUpdateException(
                 SqlServerStrings.SaveChangesFailedBecauseOfComputedColumnWithFunction,
                 e.InnerException,
-                e.Entries);
+                e.Entries
+            );
         }
     }
 }

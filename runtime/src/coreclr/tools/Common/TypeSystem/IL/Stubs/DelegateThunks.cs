@@ -21,82 +21,52 @@ namespace Internal.IL.Stubs
 
         public sealed override TypeSystemContext Context
         {
-            get
-            {
-                return _delegateInfo.Type.Context;
-            }
+            get { return _delegateInfo.Type.Context; }
         }
 
         public sealed override TypeDesc OwningType
         {
-            get
-            {
-                return _delegateInfo.Type;
-            }
+            get { return _delegateInfo.Type; }
         }
 
         public sealed override MethodSignature Signature
         {
-            get
-            {
-                return _delegateInfo.Signature;
-            }
+            get { return _delegateInfo.Signature; }
         }
 
         public sealed override Instantiation Instantiation
         {
-            get
-            {
-                return Instantiation.Empty;
-            }
+            get { return Instantiation.Empty; }
         }
 
         protected TypeDesc SystemDelegateType
         {
-            get
-            {
-                return Context.GetWellKnownType(WellKnownType.MulticastDelegate).BaseType;
-            }
+            get { return Context.GetWellKnownType(WellKnownType.MulticastDelegate).BaseType; }
         }
 
         protected FieldDesc ExtraFunctionPointerOrDataField
         {
-            get
-            {
-                return SystemDelegateType.GetKnownField("m_extraFunctionPointerOrData");
-            }
+            get { return SystemDelegateType.GetKnownField("m_extraFunctionPointerOrData"); }
         }
 
         protected FieldDesc HelperObjectField
         {
-            get
-            {
-                return SystemDelegateType.GetKnownField("m_helperObject");
-            }
+            get { return SystemDelegateType.GetKnownField("m_helperObject"); }
         }
 
         protected FieldDesc FirstParameterField
         {
-            get
-            {
-                return SystemDelegateType.GetKnownField("m_firstParameter");
-            }
+            get { return SystemDelegateType.GetKnownField("m_firstParameter"); }
         }
 
         protected FieldDesc FunctionPointerField
         {
-            get
-            {
-                return SystemDelegateType.GetKnownField("m_functionPointer");
-            }
+            get { return SystemDelegateType.GetKnownField("m_functionPointer"); }
         }
 
         public sealed override string DiagnosticName
         {
-            get
-            {
-                return Name;
-            }
+            get { return Name; }
         }
     }
 
@@ -107,10 +77,7 @@ namespace Internal.IL.Stubs
     /// </summary>
     public sealed partial class DelegateInvokeOpenStaticThunk : DelegateThunk
     {
-        internal DelegateInvokeOpenStaticThunk(DelegateInfo delegateInfo)
-            : base(delegateInfo)
-        {
-        }
+        internal DelegateInvokeOpenStaticThunk(DelegateInfo delegateInfo) : base(delegateInfo) { }
 
         public override MethodIL EmitIL()
         {
@@ -140,10 +107,7 @@ namespace Internal.IL.Stubs
 
         public override string Name
         {
-            get
-            {
-                return "InvokeOpenStaticThunk";
-            }
+            get { return "InvokeOpenStaticThunk"; }
         }
     }
 
@@ -156,10 +120,7 @@ namespace Internal.IL.Stubs
     /// </summary>
     public sealed partial class DelegateInvokeOpenInstanceThunk : DelegateThunk
     {
-        internal DelegateInvokeOpenInstanceThunk(DelegateInfo delegateInfo)
-            : base(delegateInfo)
-        {
-        }
+        internal DelegateInvokeOpenInstanceThunk(DelegateInfo delegateInfo) : base(delegateInfo) { }
 
         public override MethodIL EmitIL()
         {
@@ -207,10 +168,20 @@ namespace Internal.IL.Stubs
                     codeStream.Emit(ILOpcode.box, emitter.NewToken(boxThisType));
                 }
             }
-            
-            codeStream.Emit(ILOpcode.call, emitter.NewToken(SystemDelegateType.GetKnownMethod("GetActualTargetFunctionPointer", null)));
 
-            MethodSignature targetSignature = new MethodSignature(0, 0, Signature.ReturnType, parameters);
+            codeStream.Emit(
+                ILOpcode.call,
+                emitter.NewToken(
+                    SystemDelegateType.GetKnownMethod("GetActualTargetFunctionPointer", null)
+                )
+            );
+
+            MethodSignature targetSignature = new MethodSignature(
+                0,
+                0,
+                Signature.ReturnType,
+                parameters
+            );
             codeStream.Emit(ILOpcode.calli, emitter.NewToken(targetSignature));
             codeStream.Emit(ILOpcode.ret);
 
@@ -219,10 +190,7 @@ namespace Internal.IL.Stubs
 
         public override string Name
         {
-            get
-            {
-                return "InvokeOpenInstanceThunk";
-            }
+            get { return "InvokeOpenInstanceThunk"; }
         }
     }
 
@@ -235,10 +203,7 @@ namespace Internal.IL.Stubs
     /// </summary>
     public sealed partial class DelegateInvokeClosedStaticThunk : DelegateThunk
     {
-        internal DelegateInvokeClosedStaticThunk(DelegateInfo delegateInfo)
-            : base(delegateInfo)
-        {
-        }
+        internal DelegateInvokeClosedStaticThunk(DelegateInfo delegateInfo) : base(delegateInfo) { }
 
         public override MethodIL EmitIL()
         {
@@ -251,7 +216,11 @@ namespace Internal.IL.Stubs
             }
 
             var targetMethodSignature = new MethodSignature(
-                Signature.Flags | MethodSignatureFlags.Static, 0, Signature.ReturnType, targetMethodParameters);
+                Signature.Flags | MethodSignatureFlags.Static,
+                0,
+                Signature.ReturnType,
+                targetMethodParameters
+            );
 
             var emitter = new ILEmitter();
             ILCodeStream codeStream = emitter.NewCodeStream();
@@ -279,10 +248,7 @@ namespace Internal.IL.Stubs
 
         public override string Name
         {
-            get
-            {
-                return "InvokeClosedStaticThunk";
-            }
+            get { return "InvokeClosedStaticThunk"; }
         }
     }
 
@@ -294,10 +260,7 @@ namespace Internal.IL.Stubs
     /// </summary>
     public sealed partial class DelegateInvokeMulticastThunk : DelegateThunk
     {
-        internal DelegateInvokeMulticastThunk(DelegateInfo delegateInfo)
-            : base(delegateInfo)
-        {
-        }
+        internal DelegateInvokeMulticastThunk(DelegateInfo delegateInfo) : base(delegateInfo) { }
 
         public override MethodIL EmitIL()
         {
@@ -307,8 +270,12 @@ namespace Internal.IL.Stubs
             ArrayType invocationListArrayType = SystemDelegateType.MakeArrayType();
 
             ILLocalVariable delegateArrayLocal = emitter.NewLocal(invocationListArrayType);
-            ILLocalVariable invocationCountLocal = emitter.NewLocal(Context.GetWellKnownType(WellKnownType.Int32));
-            ILLocalVariable iteratorLocal = emitter.NewLocal(Context.GetWellKnownType(WellKnownType.Int32));
+            ILLocalVariable invocationCountLocal = emitter.NewLocal(
+                Context.GetWellKnownType(WellKnownType.Int32)
+            );
+            ILLocalVariable iteratorLocal = emitter.NewLocal(
+                Context.GetWellKnownType(WellKnownType.Int32)
+            );
             ILLocalVariable delegateToCallLocal = emitter.NewLocal(SystemDelegateType);
 
             ILLocalVariable returnValueLocal = 0;
@@ -346,7 +313,7 @@ namespace Internal.IL.Stubs
             codeStream.EmitLdc(0);
             codeStream.EmitStLoc(iteratorLocal);
 
-            // Loop across every element of the array. 
+            // Loop across every element of the array.
             ILCodeLabel startOfLoopLabel = emitter.NewCodeLabel();
             codeStream.EmitLabel(startOfLoopLabel);
 
@@ -423,10 +390,7 @@ namespace Internal.IL.Stubs
 
         public override string Name
         {
-            get
-            {
-                return "InvokeMulticastThunk";
-            }
+            get { return "InvokeMulticastThunk"; }
         }
     }
 
@@ -439,9 +403,7 @@ namespace Internal.IL.Stubs
     public sealed partial class DelegateInvokeInstanceClosedOverGenericMethodThunk : DelegateThunk
     {
         internal DelegateInvokeInstanceClosedOverGenericMethodThunk(DelegateInfo delegateInfo)
-            : base(delegateInfo)
-        {
-        }
+            : base(delegateInfo) { }
 
         public override MethodIL EmitIL()
         {
@@ -471,10 +433,7 @@ namespace Internal.IL.Stubs
 
         public override string Name
         {
-            get
-            {
-                return "InvokeInstanceClosedOverGenericMethodThunk";
-            }
+            get { return "InvokeInstanceClosedOverGenericMethodThunk"; }
         }
     }
 
@@ -486,15 +445,12 @@ namespace Internal.IL.Stubs
     /// </summary>
     public sealed partial class DelegateInvokeObjectArrayThunk : DelegateThunk
     {
-        internal DelegateInvokeObjectArrayThunk(DelegateInfo delegateInfo)
-            : base(delegateInfo)
-        {
-        }
+        internal DelegateInvokeObjectArrayThunk(DelegateInfo delegateInfo) : base(delegateInfo) { }
 
         public override MethodIL EmitIL()
         {
             // We will generate the following code:
-            //  
+            //
             // object ret;
             // object[] args = new object[parameterCount];
             // args[0] = param0;
@@ -554,7 +510,10 @@ namespace Internal.IL.Stubs
             }
             else
             {
-                MethodDesc emptyObjectArrayMethod = Context.GetHelperEntryPoint("DelegateHelpers", "GetEmptyObjectArray");
+                MethodDesc emptyObjectArrayMethod = Context.GetHelperEntryPoint(
+                    "DelegateHelpers",
+                    "GetEmptyObjectArray"
+                );
                 codeStream.Emit(ILOpcode.call, emitter.NewToken(emptyObjectArrayMethod));
                 codeStream.EmitStLoc(argsLocal);
             }
@@ -634,10 +593,7 @@ namespace Internal.IL.Stubs
 
         public override string Name
         {
-            get
-            {
-                return "InvokeObjectArrayThunk";
-            }
+            get { return "InvokeObjectArrayThunk"; }
         }
     }
 
@@ -658,18 +614,12 @@ namespace Internal.IL.Stubs
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _delegateInfo.Type.Context;
-            }
+            get { return _delegateInfo.Type.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _delegateInfo.Type;
-            }
+            get { return _delegateInfo.Type; }
         }
 
         public override MethodSignature Signature
@@ -697,15 +647,18 @@ namespace Internal.IL.Stubs
 
             ILCodeLabel returnNullLabel = emitter.NewCodeLabel();
 
-            bool hasDynamicInvokeThunk = (_delegateInfo.SupportedFeatures & DelegateFeature.DynamicInvoke) != 0 &&
-                DynamicInvokeMethodThunk.SupportsSignature(_delegateInfo.Signature);
+            bool hasDynamicInvokeThunk =
+                (_delegateInfo.SupportedFeatures & DelegateFeature.DynamicInvoke) != 0
+                && DynamicInvokeMethodThunk.SupportsSignature(_delegateInfo.Signature);
 
             ILCodeLabel[] labels = new ILCodeLabel[(int)DelegateThunkCollection.MaxThunkKind];
             for (DelegateThunkKind i = 0; i < DelegateThunkCollection.MaxThunkKind; i++)
             {
                 MethodDesc thunk = _delegateInfo.Thunks[i];
-                if (thunk != null || 
-                    (i == DelegateThunkKind.DelegateInvokeThunk && hasDynamicInvokeThunk))
+                if (
+                    thunk != null
+                    || (i == DelegateThunkKind.DelegateInvokeThunk && hasDynamicInvokeThunk)
+                )
                     labels[(int)i] = emitter.NewCodeLabel();
                 else
                     labels[(int)i] = returnNullLabel;
@@ -727,12 +680,19 @@ namespace Internal.IL.Stubs
 
                     var sig = new DynamicInvokeMethodSignature(_delegateInfo.Signature);
                     // TODO: layering violation. Should move delegate thunk stuff to ILCompiler.Compiler.
-                    MethodDesc thunk = ((ILCompiler.CompilerTypeSystemContext)Context).GetDynamicInvokeThunk(sig);
+                    MethodDesc thunk = (
+                        (ILCompiler.CompilerTypeSystemContext)Context
+                    ).GetDynamicInvokeThunk(sig);
 
                     if (thunk.HasInstantiation)
                     {
-                        TypeDesc[] inst = DynamicInvokeMethodThunk.GetThunkInstantiationForMethod(_delegateInfo.Type.InstantiateAsOpen().GetMethod("Invoke", null));
-                        targetMethod = Context.GetInstantiatedMethod(thunk, new Instantiation(inst));
+                        TypeDesc[] inst = DynamicInvokeMethodThunk.GetThunkInstantiationForMethod(
+                            _delegateInfo.Type.InstantiateAsOpen().GetMethod("Invoke", null)
+                        );
+                        targetMethod = Context.GetInstantiatedMethod(
+                            thunk,
+                            new Instantiation(inst)
+                        );
                     }
                     else
                     {
@@ -767,34 +727,22 @@ namespace Internal.IL.Stubs
 
         public override Instantiation Instantiation
         {
-            get
-            {
-                return Instantiation.Empty;
-            }
+            get { return Instantiation.Empty; }
         }
 
         public override bool IsVirtual
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override string Name
         {
-            get
-            {
-                return "GetThunk";
-            }
+            get { return "GetThunk"; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return "GetThunk";
-            }
+            get { return "GetThunk"; }
         }
     }
 }

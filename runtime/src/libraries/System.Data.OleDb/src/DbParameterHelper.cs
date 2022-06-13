@@ -38,14 +38,8 @@ namespace System.Data.OleDb
 
         private object? CoercedValue
         { // V1.2.3300
-            get
-            {
-                return _coercedValue;
-            }
-            set
-            {
-                _coercedValue = value;
-            }
+            get { return _coercedValue; }
+            set { _coercedValue = value; }
         }
 
         [RefreshProperties(RefreshProperties.All)]
@@ -78,14 +72,8 @@ namespace System.Data.OleDb
 
         public override bool IsNullable
         { // V1.2.3300, XXXParameter V1.0.3300
-            get
-            {
-                return _isNullable;
-            }
-            set
-            {
-                _isNullable = value;
-            }
+            get { return _isNullable; }
+            set { _isNullable = value; }
         }
 
         internal const int Offset = 0;
@@ -137,22 +125,13 @@ namespace System.Data.OleDb
                 string? sourceColumn = _sourceColumn;
                 return ((null != sourceColumn) ? sourceColumn : string.Empty);
             }
-            set
-            {
-                _sourceColumn = value;
-            }
+            set { _sourceColumn = value; }
         }
 
         public override bool SourceColumnNullMapping
         {
-            get
-            {
-                return _sourceColumnNullMapping;
-            }
-            set
-            {
-                _sourceColumnNullMapping = value;
-            }
+            get { return _sourceColumnNullMapping; }
+            set { _sourceColumnNullMapping = value; }
         }
 
         public override DataRowVersion SourceVersion

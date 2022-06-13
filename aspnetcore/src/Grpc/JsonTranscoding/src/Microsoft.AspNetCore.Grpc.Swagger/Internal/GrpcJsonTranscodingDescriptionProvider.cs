@@ -44,9 +44,21 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
                     var httpRule = grpcMetadata.HttpRule;
                     var methodDescriptor = grpcMetadata.MethodDescriptor;
 
-                    if (ServiceDescriptorHelpers.TryResolvePattern(grpcMetadata.HttpRule, out var pattern, out var verb))
+                    if (
+                        ServiceDescriptorHelpers.TryResolvePattern(
+                            grpcMetadata.HttpRule,
+                            out var pattern,
+                            out var verb
+                        )
+                    )
                     {
-                        var apiDescription = CreateApiDescription(routeEndpoint, httpRule, methodDescriptor, pattern, verb);
+                        var apiDescription = CreateApiDescription(
+                            routeEndpoint,
+                            httpRule,
+                            methodDescriptor,
+                            pattern,
+                            verb
+                        );
 
                         context.Results.Add(apiDescription);
                     }
@@ -55,7 +67,13 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
         }
     }
 
-    private static ApiDescription CreateApiDescription(RouteEndpoint routeEndpoint, HttpRule httpRule, MethodDescriptor methodDescriptor, string pattern, string verb)
+    private static ApiDescription CreateApiDescription(
+        RouteEndpoint routeEndpoint,
+        HttpRule httpRule,
+        MethodDescriptor methodDescriptor,
+        string pattern,
+        string verb
+    )
     {
         var apiDescription = new ApiDescription();
         apiDescription.HttpMethod = verb;
@@ -70,13 +88,19 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
             EndpointMetadata = routeEndpoint.Metadata.ToList()
         };
         apiDescription.RelativePath = pattern.TrimStart('/');
-        apiDescription.SupportedRequestFormats.Add(new ApiRequestFormat { MediaType = "application/json" });
-        apiDescription.SupportedResponseTypes.Add(new ApiResponseType
-        {
-            ApiResponseFormats = { new ApiResponseFormat { MediaType = "application/json" } },
-            ModelMetadata = new GrpcModelMetadata(ModelMetadataIdentity.ForType(methodDescriptor.OutputType.ClrType)),
-            StatusCode = 200
-        });
+        apiDescription.SupportedRequestFormats.Add(
+            new ApiRequestFormat { MediaType = "application/json" }
+        );
+        apiDescription.SupportedResponseTypes.Add(
+            new ApiResponseType
+            {
+                ApiResponseFormats = { new ApiResponseFormat { MediaType = "application/json" } },
+                ModelMetadata = new GrpcModelMetadata(
+                    ModelMetadataIdentity.ForType(methodDescriptor.OutputType.ClrType)
+                ),
+                StatusCode = 200
+            }
+        );
         var explorerSettings = routeEndpoint.Metadata.GetMetadata<ApiExplorerSettingsAttribute>();
         if (explorerSettings != null)
         {
@@ -84,48 +108,79 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
         }
 
         var methodMetadata = routeEndpoint.Metadata.GetMetadata<GrpcMethodMetadata>()!;
-        var routeParameters = ServiceDescriptorHelpers.ResolveRouteParameterDescriptors(routeEndpoint.RoutePattern, methodDescriptor.InputType);
+        var routeParameters = ServiceDescriptorHelpers.ResolveRouteParameterDescriptors(
+            routeEndpoint.RoutePattern,
+            methodDescriptor.InputType
+        );
 
         foreach (var routeParameter in routeParameters)
         {
             var field = routeParameter.Value.Last();
-            var parameterName = ServiceDescriptorHelpers.FormatUnderscoreName(field.Name, pascalCase: true, preservePeriod: false);
+            var parameterName = ServiceDescriptorHelpers.FormatUnderscoreName(
+                field.Name,
+                pascalCase: true,
+                preservePeriod: false
+            );
             var propertyInfo = field.ContainingType.ClrType.GetProperty(parameterName);
 
             // If from a property, create model as property to get its XML comments.
-            var identity = propertyInfo != null
-                ? ModelMetadataIdentity.ForProperty(propertyInfo, MessageDescriptorHelpers.ResolveFieldType(field), field.ContainingType.ClrType)
-                : ModelMetadataIdentity.ForType(MessageDescriptorHelpers.ResolveFieldType(field));
+            var identity =
+                propertyInfo != null
+                    ? ModelMetadataIdentity.ForProperty(
+                        propertyInfo,
+                        MessageDescriptorHelpers.ResolveFieldType(field),
+                        field.ContainingType.ClrType
+                    )
+                    : ModelMetadataIdentity.ForType(
+                        MessageDescriptorHelpers.ResolveFieldType(field)
+                    );
 
-            apiDescription.ParameterDescriptions.Add(new ApiParameterDescription
-            {
-                Name = routeParameter.Key,
-                ModelMetadata = new GrpcModelMetadata(identity),
-                Source = BindingSource.Path,
-                DefaultValue = string.Empty
-            });
+            apiDescription.ParameterDescriptions.Add(
+                new ApiParameterDescription
+                {
+                    Name = routeParameter.Key,
+                    ModelMetadata = new GrpcModelMetadata(identity),
+                    Source = BindingSource.Path,
+                    DefaultValue = string.Empty
+                }
+            );
         }
 
-        var bodyDescriptor = ServiceDescriptorHelpers.ResolveBodyDescriptor(httpRule.Body, methodMetadata.ServiceType, methodDescriptor);
+        var bodyDescriptor = ServiceDescriptorHelpers.ResolveBodyDescriptor(
+            httpRule.Body,
+            methodMetadata.ServiceType,
+            methodDescriptor
+        );
         if (bodyDescriptor != null)
         {
             // If from a property, create model as property to get its XML comments.
-            var identity = bodyDescriptor.PropertyInfo != null
-                ? ModelMetadataIdentity.ForProperty(bodyDescriptor.PropertyInfo, bodyDescriptor.Descriptor.ClrType, bodyDescriptor.PropertyInfo.DeclaringType!)
-                : ModelMetadataIdentity.ForType(bodyDescriptor.Descriptor.ClrType);
+            var identity =
+                bodyDescriptor.PropertyInfo != null
+                    ? ModelMetadataIdentity.ForProperty(
+                        bodyDescriptor.PropertyInfo,
+                        bodyDescriptor.Descriptor.ClrType,
+                        bodyDescriptor.PropertyInfo.DeclaringType!
+                    )
+                    : ModelMetadataIdentity.ForType(bodyDescriptor.Descriptor.ClrType);
 
             // Or if from a parameter, create model as parameter to get its XML comments.
-            var parameterDescriptor = bodyDescriptor.ParameterInfo != null
-                ? new ControllerParameterDescriptor { ParameterInfo = bodyDescriptor.ParameterInfo }
-                : null;
+            var parameterDescriptor =
+                bodyDescriptor.ParameterInfo != null
+                    ? new ControllerParameterDescriptor
+                    {
+                        ParameterInfo = bodyDescriptor.ParameterInfo
+                    }
+                    : null;
 
-            apiDescription.ParameterDescriptions.Add(new ApiParameterDescription
-            {
-                Name = "Input",
-                ModelMetadata = new GrpcModelMetadata(identity),
-                Source = BindingSource.Body,
-                ParameterDescriptor = parameterDescriptor!
-            });
+            apiDescription.ParameterDescriptions.Add(
+                new ApiParameterDescription
+                {
+                    Name = "Input",
+                    ModelMetadata = new GrpcModelMetadata(identity),
+                    Source = BindingSource.Body,
+                    ParameterDescriptor = parameterDescriptor!
+                }
+            );
         }
 
         return apiDescription;

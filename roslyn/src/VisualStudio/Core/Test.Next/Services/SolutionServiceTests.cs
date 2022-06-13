@@ -32,8 +32,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
     [Trait(Traits.Feature, Traits.Features.RemoteHost)]
     public class SolutionServiceTests
     {
-        private static RemoteWorkspace CreateRemoteWorkspace()
-            => new RemoteWorkspace(FeaturesTestCompositions.RemoteHost.GetHostServices(), WorkspaceKind.RemoteWorkspace);
+        private static RemoteWorkspace CreateRemoteWorkspace() =>
+            new RemoteWorkspace(
+                FeaturesTestCompositions.RemoteHost.GetHostServices(),
+                WorkspaceKind.RemoteWorkspace
+            );
 
         [Fact]
         public async Task TestCreation()
@@ -47,9 +50,20 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, solution);
 
             var solutionChecksum = await solution.State.GetChecksumAsync(CancellationToken.None);
-            var synched = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var synched = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
 
-            Assert.Equal(solutionChecksum, await synched.State.GetChecksumAsync(CancellationToken.None));
+            Assert.Equal(
+                solutionChecksum,
+                await synched.State.GetChecksumAsync(CancellationToken.None)
+            );
         }
 
         [Theory]
@@ -65,8 +79,19 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var solutionChecksum = await solution.State.GetChecksumAsync(CancellationToken.None);
             var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, solution);
 
-            var synched = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch, solution.WorkspaceVersion, cancellationToken: CancellationToken.None);
-            Assert.Equal(solutionChecksum, await synched.State.GetChecksumAsync(CancellationToken.None));
+            var synched = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch,
+                    solution.WorkspaceVersion,
+                    cancellationToken: CancellationToken.None
+                );
+            Assert.Equal(
+                solutionChecksum,
+                await synched.State.GetChecksumAsync(CancellationToken.None)
+            );
 
             Assert.IsType<RemoteWorkspace>(synched.Workspace);
         }
@@ -81,13 +106,34 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             workspace.AddProject(
                 ProjectInfo.Create(
-                    ProjectId.CreateNewId(), VersionStamp.Create(), "test", "test.dll", LanguageNames.CSharp,
-                    filePath: filePath, outputFilePath: filePath));
+                    ProjectId.CreateNewId(),
+                    VersionStamp.Create(),
+                    "test",
+                    "test.dll",
+                    LanguageNames.CSharp,
+                    filePath: filePath,
+                    outputFilePath: filePath
+                )
+            );
 
-            var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, workspace.CurrentSolution);
+            var assetProvider = await GetAssetProviderAsync(
+                workspace,
+                remoteWorkspace,
+                workspace.CurrentSolution
+            );
 
-            var solutionChecksum = await workspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None);
-            var solution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var solutionChecksum = await workspace.CurrentSolution.State.GetChecksumAsync(
+                CancellationToken.None
+            );
+            var solution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
 
             var compilationOptions = solution.Projects.First().CompilationOptions;
 
@@ -96,8 +142,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             var dirName = PathUtilities.GetDirectoryName(filePath);
             var array = new[] { dirName, dirName };
-            Assert.Equal(Hash.CombineValues(array, StringComparer.Ordinal), compilationOptions.StrongNameProvider.GetHashCode());
-            Assert.Equal(((XmlFileResolver)compilationOptions.XmlReferenceResolver).BaseDirectory, dirName);
+            Assert.Equal(
+                Hash.CombineValues(array, StringComparer.Ordinal),
+                compilationOptions.StrongNameProvider.GetHashCode()
+            );
+            Assert.Equal(
+                ((XmlFileResolver)compilationOptions.XmlReferenceResolver).BaseDirectory,
+                dirName
+            );
         }
 
         [Fact]
@@ -110,13 +162,34 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             workspace.AddProject(
                 ProjectInfo.Create(
-                    ProjectId.CreateNewId(), VersionStamp.Create(), "test", "test.dll", LanguageNames.CSharp,
-                    filePath: filePath, outputFilePath: filePath));
+                    ProjectId.CreateNewId(),
+                    VersionStamp.Create(),
+                    "test",
+                    "test.dll",
+                    LanguageNames.CSharp,
+                    filePath: filePath,
+                    outputFilePath: filePath
+                )
+            );
 
-            var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, workspace.CurrentSolution);
+            var assetProvider = await GetAssetProviderAsync(
+                workspace,
+                remoteWorkspace,
+                workspace.CurrentSolution
+            );
 
-            var solutionChecksum = await workspace.CurrentSolution.State.GetChecksumAsync(CancellationToken.None);
-            var solution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var solutionChecksum = await workspace.CurrentSolution.State.GetChecksumAsync(
+                CancellationToken.None
+            );
+            var solution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
 
             var compilationOptions = solution.Projects.First().CompilationOptions;
 
@@ -124,7 +197,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Assert.True(compilationOptions.XmlReferenceResolver is XmlFileResolver);
 
             var array = new string[] { };
-            Assert.Equal(Hash.CombineValues(array, StringComparer.Ordinal), compilationOptions.StrongNameProvider.GetHashCode());
+            Assert.Equal(
+                Hash.CombineValues(array, StringComparer.Ordinal),
+                compilationOptions.StrongNameProvider.GetHashCode()
+            );
             Assert.Null(((XmlFileResolver)compilationOptions.XmlReferenceResolver).BaseDirectory);
         }
 
@@ -140,8 +216,24 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, solution);
             var solutionChecksum = await solution.State.GetChecksumAsync(CancellationToken.None);
 
-            var first = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
-            var second = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var first = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
+            var second = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
 
             // same instance from cache
             Assert.True(object.ReferenceEquals(first, second));
@@ -153,7 +245,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         {
             var code = @"class Test { void Method() { } }";
 
-            await VerifySolutionUpdate(code, s => s.WithDocumentText(s.Projects.First().DocumentIds.First(), SourceText.From(code + " ")));
+            await VerifySolutionUpdate(
+                code,
+                s =>
+                    s.WithDocumentText(
+                        s.Projects.First().DocumentIds.First(),
+                        SourceText.From(code + " ")
+                    )
+            );
         }
 
         [Fact]
@@ -170,7 +269,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                     .WithProjectFilePath(projectId, "FilePath" + version)
                     .WithProjectOutputFilePath(projectId, "OutputFilePath" + version)
                     .WithProjectOutputRefFilePath(projectId, "OutputRefFilePath" + version)
-                    .WithProjectCompilationOutputInfo(projectId, new CompilationOutputInfo("AssemblyPath" + version))
+                    .WithProjectCompilationOutputInfo(
+                        projectId,
+                        new CompilationOutputInfo("AssemblyPath" + version)
+                    )
                     .WithProjectDefaultNamespace(projectId, "DefaultNamespace" + version)
                     .WithHasAllInformation(projectId, (version % 2) != 0)
                     .WithRunAnalyzers(projectId, (version % 2) != 0);
@@ -190,12 +292,20 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 Assert.Equal((version % 2) != 0, project.State.RunAnalyzers);
             }
 
-            Assert.True(workspace.SetCurrentSolution(s => SetProjectProperties(s, version: 0), WorkspaceChangeKind.SolutionChanged));
+            Assert.True(
+                workspace.SetCurrentSolution(
+                    s => SetProjectProperties(s, version: 0),
+                    WorkspaceChangeKind.SolutionChanged
+                )
+            );
 
-            await VerifySolutionUpdate(workspace,
-                newSolutionGetter: s => SetProjectProperties(s, version: 1),
-                oldSolutionValidator: s => ValidateProperties(s, version: 0),
-                newSolutionValidator: s => ValidateProperties(s, version: 1)).ConfigureAwait(false);
+            await VerifySolutionUpdate(
+                    workspace,
+                    newSolutionGetter: s => SetProjectProperties(s, version: 1),
+                    oldSolutionValidator: s => ValidateProperties(s, version: 0),
+                    newSolutionValidator: s => ValidateProperties(s, version: 1)
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
@@ -203,7 +313,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         {
             var code = @"class Test { void Method() { } }";
 
-            await VerifySolutionUpdate(code, s => s.WithDocumentFolders(s.Projects.First().Documents.First().Id, new[] { "test" }));
+            await VerifySolutionUpdate(
+                code,
+                s =>
+                    s.WithDocumentFolders(s.Projects.First().Documents.First().Id, new[] { "test" })
+            );
         }
 
         [Fact]
@@ -211,25 +325,32 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         {
             var code = @"class Test { void Method() { } }";
 
-            await VerifySolutionUpdate(code, s =>
-            {
-                var existingProjectId = s.ProjectIds.First();
+            await VerifySolutionUpdate(
+                code,
+                s =>
+                {
+                    var existingProjectId = s.ProjectIds.First();
 
-                s = s.AddProject("newProject", "newProject", LanguageNames.CSharp).Solution;
+                    s = s.AddProject("newProject", "newProject", LanguageNames.CSharp).Solution;
 
-                var project = s.GetProject(existingProjectId);
-                project = project.WithCompilationOptions(project.CompilationOptions.WithModuleName("modified"));
+                    var project = s.GetProject(existingProjectId);
+                    project = project.WithCompilationOptions(
+                        project.CompilationOptions.WithModuleName("modified")
+                    );
 
-                var existingDocumentId = project.DocumentIds.First();
+                    var existingDocumentId = project.DocumentIds.First();
 
-                project = project.AddDocument("newDocument", SourceText.From("// new text")).Project;
+                    project = project
+                        .AddDocument("newDocument", SourceText.From("// new text"))
+                        .Project;
 
-                var document = project.GetDocument(existingDocumentId);
+                    var document = project.GetDocument(existingDocumentId);
 
-                document = document.WithSourceCodeKind(SourceCodeKind.Script);
+                    document = document.WithSourceCodeKind(SourceCodeKind.Script);
 
-                return document.Project.Solution;
-            });
+                    return document.Project.Solution;
+                }
+            );
         }
 
         [Fact]
@@ -241,25 +362,41 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var projectId = workspace.CurrentSolution.ProjectIds.First();
             var additionalDocumentId = DocumentId.CreateNewId(projectId);
             var additionalDocumentInfo = DocumentInfo.Create(
-                additionalDocumentId, "additionalFile",
-                loader: TextLoader.From(TextAndVersion.Create(SourceText.From("test"), VersionStamp.Create())));
+                additionalDocumentId,
+                "additionalFile",
+                loader: TextLoader.From(
+                    TextAndVersion.Create(SourceText.From("test"), VersionStamp.Create())
+                )
+            );
 
-            await VerifySolutionUpdate(workspace, s =>
-            {
-                return s.AddAdditionalDocument(additionalDocumentInfo);
-            });
+            await VerifySolutionUpdate(
+                workspace,
+                s =>
+                {
+                    return s.AddAdditionalDocument(additionalDocumentInfo);
+                }
+            );
 
             workspace.OnAdditionalDocumentAdded(additionalDocumentInfo);
 
-            await VerifySolutionUpdate(workspace, s =>
-            {
-                return s.WithAdditionalDocumentText(additionalDocumentId, SourceText.From("changed"));
-            });
+            await VerifySolutionUpdate(
+                workspace,
+                s =>
+                {
+                    return s.WithAdditionalDocumentText(
+                        additionalDocumentId,
+                        SourceText.From("changed")
+                    );
+                }
+            );
 
-            await VerifySolutionUpdate(workspace, s =>
-            {
-                return s.RemoveAdditionalDocument(additionalDocumentId);
-            });
+            await VerifySolutionUpdate(
+                workspace,
+                s =>
+                {
+                    return s.RemoveAdditionalDocument(additionalDocumentId);
+                }
+            );
         }
 
         [Fact]
@@ -274,25 +411,46 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var analyzerConfigDocumentInfo = DocumentInfo.Create(
                 analyzerConfigDocumentId,
                 name: ".editorconfig",
-                loader: TextLoader.From(TextAndVersion.Create(SourceText.From("root = true"), VersionStamp.Create(), filePath: configPath)),
-                filePath: configPath);
+                loader: TextLoader.From(
+                    TextAndVersion.Create(
+                        SourceText.From("root = true"),
+                        VersionStamp.Create(),
+                        filePath: configPath
+                    )
+                ),
+                filePath: configPath
+            );
 
-            await VerifySolutionUpdate(workspace, s =>
-            {
-                return s.AddAnalyzerConfigDocuments(ImmutableArray.Create(analyzerConfigDocumentInfo));
-            });
+            await VerifySolutionUpdate(
+                workspace,
+                s =>
+                {
+                    return s.AddAnalyzerConfigDocuments(
+                        ImmutableArray.Create(analyzerConfigDocumentInfo)
+                    );
+                }
+            );
 
             workspace.OnAnalyzerConfigDocumentAdded(analyzerConfigDocumentInfo);
 
-            await VerifySolutionUpdate(workspace, s =>
-            {
-                return s.WithAnalyzerConfigDocumentText(analyzerConfigDocumentId, SourceText.From("root = false"));
-            });
+            await VerifySolutionUpdate(
+                workspace,
+                s =>
+                {
+                    return s.WithAnalyzerConfigDocumentText(
+                        analyzerConfigDocumentId,
+                        SourceText.From("root = false")
+                    );
+                }
+            );
 
-            await VerifySolutionUpdate(workspace, s =>
-            {
-                return s.RemoveAnalyzerConfigDocument(analyzerConfigDocumentId);
-            });
+            await VerifySolutionUpdate(
+                workspace,
+                s =>
+                {
+                    return s.RemoveAnalyzerConfigDocument(analyzerConfigDocumentId);
+                }
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.RemoteHost)]
@@ -305,25 +463,38 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var projectId = workspace.CurrentSolution.ProjectIds.First();
             var documentId = DocumentId.CreateNewId(projectId);
             var documentInfo = DocumentInfo.Create(
-                documentId, "sourceFile",
-                loader: TextLoader.From(TextAndVersion.Create(SourceText.From("class A { }"), VersionStamp.Create())));
+                documentId,
+                "sourceFile",
+                loader: TextLoader.From(
+                    TextAndVersion.Create(SourceText.From("class A { }"), VersionStamp.Create())
+                )
+            );
 
-            await VerifySolutionUpdate(workspace, s =>
-            {
-                return s.AddDocument(documentInfo);
-            });
+            await VerifySolutionUpdate(
+                workspace,
+                s =>
+                {
+                    return s.AddDocument(documentInfo);
+                }
+            );
 
             workspace.OnDocumentAdded(documentInfo);
 
-            await VerifySolutionUpdate(workspace, s =>
-            {
-                return s.WithDocumentText(documentId, SourceText.From("class Changed { }"));
-            });
+            await VerifySolutionUpdate(
+                workspace,
+                s =>
+                {
+                    return s.WithDocumentText(documentId, SourceText.From("class Changed { }"));
+                }
+            );
 
-            await VerifySolutionUpdate(workspace, s =>
-            {
-                return s.RemoveDocument(documentId);
-            });
+            await VerifySolutionUpdate(
+                workspace,
+                s =>
+                {
+                    return s.RemoveDocument(documentId);
+                }
+            );
         }
 
         [Fact]
@@ -336,7 +507,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             using var remoteWorkspace = CreateRemoteWorkspace();
 
             // Start solution crawler in the remote workspace:
-            remoteWorkspace.Services.GetRequiredService<ISolutionCrawlerRegistrationService>().Register(remoteWorkspace);
+            remoteWorkspace.Services
+                .GetRequiredService<ISolutionCrawlerRegistrationService>()
+                .Register(remoteWorkspace);
 
             // create solution service
             var solution = workspace.CurrentSolution;
@@ -344,20 +517,40 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // update primary workspace
             var solutionChecksum = await solution.State.GetChecksumAsync(CancellationToken.None);
-            await remoteWorkspace.UpdatePrimaryBranchSolutionAsync(assetProvider, solutionChecksum, solution.WorkspaceVersion, CancellationToken.None);
+            await remoteWorkspace.UpdatePrimaryBranchSolutionAsync(
+                assetProvider,
+                solutionChecksum,
+                solution.WorkspaceVersion,
+                CancellationToken.None
+            );
 
             // get solution in remote host
-            var remoteSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var remoteSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
 
             // get solution cralwer in remote host
-            var solutionCrawlerService = remoteSolution.Workspace.Services.GetService<ISolutionCrawlerRegistrationService>() as SolutionCrawlerRegistrationService;
+            var solutionCrawlerService =
+                remoteSolution.Workspace.Services.GetService<ISolutionCrawlerRegistrationService>()
+                as SolutionCrawlerRegistrationService;
             Assert.NotNull(solutionCrawlerService);
 
             // check remote workspace has enabled solution crawler in remote host
             var testAnalyzerProvider = new TestAnalyzerProvider();
             solutionCrawlerService.AddAnalyzerProvider(
                 testAnalyzerProvider,
-                new IncrementalAnalyzerProviderMetadata("Test", highPriorityForActiveFile: false, workspaceKinds: WorkspaceKind.RemoteWorkspace));
+                new IncrementalAnalyzerProviderMetadata(
+                    "Test",
+                    highPriorityForActiveFile: false,
+                    workspaceKinds: WorkspaceKind.RemoteWorkspace
+                )
+            );
 
             // check our solution crawler has ran
             Assert.True(await testAnalyzerProvider.Analyzer.Called);
@@ -365,8 +558,16 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             testAnalyzerProvider.Analyzer.Reset();
 
             // update remote workspace
-            remoteSolution = remoteSolution.WithDocumentText(remoteSolution.Projects.First().Documents.First().Id, SourceText.From(code + " class Test2 { }"));
-            await remoteWorkspace.GetTestAccessor().TryUpdateWorkspaceCurrentSolutionAsync(remoteSolution, solution.WorkspaceVersion + 1);
+            remoteSolution = remoteSolution.WithDocumentText(
+                remoteSolution.Projects.First().Documents.First().Id,
+                SourceText.From(code + " class Test2 { }")
+            );
+            await remoteWorkspace
+                .GetTestAccessor()
+                .TryUpdateWorkspaceCurrentSolutionAsync(
+                    remoteSolution,
+                    solution.WorkspaceVersion + 1
+                );
 
             // check solution update correctly ran solution crawler
             Assert.True(await testAnalyzerProvider.Analyzer.Called);
@@ -385,56 +586,126 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var solution1 = workspace.CurrentSolution;
             var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, solution1);
 
-            var remoteSolution1 = await GetInitialOOPSolutionAsync(remoteWorkspace, assetProvider, solution1);
+            var remoteSolution1 = await GetInitialOOPSolutionAsync(
+                remoteWorkspace,
+                assetProvider,
+                solution1
+            );
 
             await Verify(solution1, remoteSolution1, expectRemoteSolutionToCurrent: true);
             var version = solution1.WorkspaceVersion;
 
             // update remote workspace
-            var currentSolution = remoteSolution1.WithDocumentText(remoteSolution1.Projects.First().Documents.First().Id, SourceText.From(code + " class Test2 { }"));
-            var (oopSolution2, _) = await remoteWorkspace.GetTestAccessor().TryUpdateWorkspaceCurrentSolutionAsync(currentSolution, ++version);
+            var currentSolution = remoteSolution1.WithDocumentText(
+                remoteSolution1.Projects.First().Documents.First().Id,
+                SourceText.From(code + " class Test2 { }")
+            );
+            var (oopSolution2, _) = await remoteWorkspace
+                .GetTestAccessor()
+                .TryUpdateWorkspaceCurrentSolutionAsync(currentSolution, ++version);
 
             await Verify(currentSolution, oopSolution2, expectRemoteSolutionToCurrent: true);
 
             // move backward
-            await Verify(remoteSolution1, (await remoteWorkspace.GetTestAccessor().TryUpdateWorkspaceCurrentSolutionAsync(remoteSolution1, solution1.WorkspaceVersion)).solution, expectRemoteSolutionToCurrent: false);
+            await Verify(
+                remoteSolution1,
+                (
+                    await remoteWorkspace
+                        .GetTestAccessor()
+                        .TryUpdateWorkspaceCurrentSolutionAsync(
+                            remoteSolution1,
+                            solution1.WorkspaceVersion
+                        )
+                ).solution,
+                expectRemoteSolutionToCurrent: false
+            );
 
             // move forward
-            currentSolution = oopSolution2.WithDocumentText(oopSolution2.Projects.First().Documents.First().Id, SourceText.From(code + " class Test3 { }"));
-            var remoteSolution3 = (await remoteWorkspace.GetTestAccessor().TryUpdateWorkspaceCurrentSolutionAsync(currentSolution, ++version)).solution;
+            currentSolution = oopSolution2.WithDocumentText(
+                oopSolution2.Projects.First().Documents.First().Id,
+                SourceText.From(code + " class Test3 { }")
+            );
+            var remoteSolution3 = (
+                await remoteWorkspace
+                    .GetTestAccessor()
+                    .TryUpdateWorkspaceCurrentSolutionAsync(currentSolution, ++version)
+            ).solution;
 
             await Verify(currentSolution, remoteSolution3, expectRemoteSolutionToCurrent: true);
 
             // move to new solution backward
-            var (solutionInfo2, options) = await assetProvider.CreateSolutionInfoAndOptionsAsync(await solution1.State.GetChecksumAsync(CancellationToken.None), CancellationToken.None);
-            var solution2 = remoteWorkspace.GetTestAccessor().CreateSolutionFromInfoAndOptions(solutionInfo2, options);
-            Assert.False((await remoteWorkspace.GetTestAccessor().TryUpdateWorkspaceCurrentSolutionAsync(
-                solution2, solution1.WorkspaceVersion)).updated);
+            var (solutionInfo2, options) = await assetProvider.CreateSolutionInfoAndOptionsAsync(
+                await solution1.State.GetChecksumAsync(CancellationToken.None),
+                CancellationToken.None
+            );
+            var solution2 = remoteWorkspace
+                .GetTestAccessor()
+                .CreateSolutionFromInfoAndOptions(solutionInfo2, options);
+            Assert.False(
+                (
+                    await remoteWorkspace
+                        .GetTestAccessor()
+                        .TryUpdateWorkspaceCurrentSolutionAsync(
+                            solution2,
+                            solution1.WorkspaceVersion
+                        )
+                ).updated
+            );
 
             // move to new solution forward
-            var (solution3, updated3) = await remoteWorkspace.GetTestAccessor().TryUpdateWorkspaceCurrentSolutionAsync(
-                solution2, ++version);
+            var (solution3, updated3) = await remoteWorkspace
+                .GetTestAccessor()
+                .TryUpdateWorkspaceCurrentSolutionAsync(solution2, ++version);
             Assert.NotNull(solution3);
             Assert.True(updated3);
             await Verify(solution1, solution3, expectRemoteSolutionToCurrent: true);
 
-            static async Task<Solution> GetInitialOOPSolutionAsync(RemoteWorkspace remoteWorkspace, AssetProvider assetProvider, Solution solution)
+            static async Task<Solution> GetInitialOOPSolutionAsync(
+                RemoteWorkspace remoteWorkspace,
+                AssetProvider assetProvider,
+                Solution solution
+            )
             {
                 // set up initial solution
-                var solutionChecksum = await solution.State.GetChecksumAsync(CancellationToken.None);
-                await remoteWorkspace.UpdatePrimaryBranchSolutionAsync(assetProvider, solutionChecksum, solution.WorkspaceVersion, CancellationToken.None);
+                var solutionChecksum = await solution.State.GetChecksumAsync(
+                    CancellationToken.None
+                );
+                await remoteWorkspace.UpdatePrimaryBranchSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    solution.WorkspaceVersion,
+                    CancellationToken.None
+                );
 
                 // get solution in remote host
-                return await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+                return await remoteWorkspace
+                    .GetTestAccessor()
+                    .GetSolutionAsync(
+                        assetProvider,
+                        solutionChecksum,
+                        fromPrimaryBranch: false,
+                        workspaceVersion: -1,
+                        CancellationToken.None
+                    );
             }
 
-            static async Task Verify(Solution givenSolution, Solution remoteSolution, bool expectRemoteSolutionToCurrent)
+            static async Task Verify(
+                Solution givenSolution,
+                Solution remoteSolution,
+                bool expectRemoteSolutionToCurrent
+            )
             {
                 // verify we got solution expected
-                Assert.Equal(await givenSolution.State.GetChecksumAsync(CancellationToken.None), await remoteSolution.State.GetChecksumAsync(CancellationToken.None));
+                Assert.Equal(
+                    await givenSolution.State.GetChecksumAsync(CancellationToken.None),
+                    await remoteSolution.State.GetChecksumAsync(CancellationToken.None)
+                );
 
                 // verify remote workspace got updated
-                Assert.True(expectRemoteSolutionToCurrent == (remoteSolution == remoteSolution.Workspace.CurrentSolution));
+                Assert.True(
+                    expectRemoteSolutionToCurrent
+                        == (remoteSolution == remoteSolution.Workspace.CurrentSolution)
+                );
             }
         }
 
@@ -450,30 +721,72 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             solution = solution.RemoveProject(solution.ProjectIds.Single());
             var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, solution);
             var solutionChecksum = await solution.State.GetChecksumAsync(CancellationToken.None);
-            var synched = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: true, workspaceVersion: 0, CancellationToken.None);
-            Assert.Equal(solutionChecksum, await synched.State.GetChecksumAsync(CancellationToken.None));
+            var synched = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: true,
+                    workspaceVersion: 0,
+                    CancellationToken.None
+                );
+            Assert.Equal(
+                solutionChecksum,
+                await synched.State.GetChecksumAsync(CancellationToken.None)
+            );
 
             // Add a C# project and a VB project, set some options, and check again
             var csharpDocument = new TestHostDocument("public class C { }");
-            var csharpProject = new TestHostProject(workspace, csharpDocument, language: LanguageNames.CSharp, name: "project2");
+            var csharpProject = new TestHostProject(
+                workspace,
+                csharpDocument,
+                language: LanguageNames.CSharp,
+                name: "project2"
+            );
             var csharpProjectInfo = csharpProject.ToProjectInfo();
 
             var vbDocument = new TestHostDocument("Public Class D \r\n  Inherits C\r\nEnd Class");
-            var vbProject = new TestHostProject(workspace, vbDocument, language: LanguageNames.VisualBasic, name: "project3");
+            var vbProject = new TestHostProject(
+                workspace,
+                vbDocument,
+                language: LanguageNames.VisualBasic,
+                name: "project3"
+            );
             var vbProjectInfo = vbProject.ToProjectInfo();
 
             solution = solution.AddProject(csharpProjectInfo).AddProject(vbProjectInfo);
             var newOptionValue = useDefaultOptionValue
                 ? FormattingOptions2.NewLine.DefaultValue
                 : FormattingOptions2.NewLine.DefaultValue + FormattingOptions2.NewLine.DefaultValue;
-            solution = solution.WithOptions(solution.Options
-                .WithChangedOption(FormattingOptions2.NewLine, LanguageNames.CSharp, newOptionValue)
-                .WithChangedOption(FormattingOptions2.NewLine, LanguageNames.VisualBasic, newOptionValue));
+            solution = solution.WithOptions(
+                solution.Options
+                    .WithChangedOption(
+                        FormattingOptions2.NewLine,
+                        LanguageNames.CSharp,
+                        newOptionValue
+                    )
+                    .WithChangedOption(
+                        FormattingOptions2.NewLine,
+                        LanguageNames.VisualBasic,
+                        newOptionValue
+                    )
+            );
 
             assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, solution);
             solutionChecksum = await solution.State.GetChecksumAsync(CancellationToken.None);
-            synched = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: true, workspaceVersion: 2, CancellationToken.None);
-            Assert.Equal(solutionChecksum, await synched.State.GetChecksumAsync(CancellationToken.None));
+            synched = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: true,
+                    workspaceVersion: 2,
+                    CancellationToken.None
+                );
+            Assert.Equal(
+                solutionChecksum,
+                await synched.State.GetChecksumAsync(CancellationToken.None)
+            );
         }
 
         [Fact]
@@ -482,35 +795,91 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             using var workspace = TestWorkspace.CreateCSharp(@"");
             using var remoteWorkspace = CreateRemoteWorkspace();
 
-            var solution = workspace.CurrentSolution
-                .Projects.Single()
-                .AddAnalyzerReference(new AnalyzerFileReference(typeof(Microsoft.CodeAnalysis.TestSourceGenerator.HelloWorldGenerator).Assembly.Location, new TestAnalyzerAssemblyLoader()))
+            var solution = workspace.CurrentSolution.Projects
+                .Single()
+                .AddAnalyzerReference(
+                    new AnalyzerFileReference(
+                        typeof(Microsoft.CodeAnalysis.TestSourceGenerator.HelloWorldGenerator)
+                            .Assembly
+                            .Location,
+                        new TestAnalyzerAssemblyLoader()
+                    )
+                )
                 .Solution;
 
             // First sync the solution over that has a generator
             var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, solution);
             var solutionChecksum = await solution.State.GetChecksumAsync(CancellationToken.None);
-            var synched = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: true, workspaceVersion: 0, CancellationToken.None);
-            Assert.Equal(solutionChecksum, await synched.State.GetChecksumAsync(CancellationToken.None));
+            var synched = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: true,
+                    workspaceVersion: 0,
+                    CancellationToken.None
+                );
+            Assert.Equal(
+                solutionChecksum,
+                await synched.State.GetChecksumAsync(CancellationToken.None)
+            );
 
             // Now freeze with some content
-            var documentIdentity = (await solution.Projects.Single().GetSourceGeneratedDocumentsAsync()).First().Identity;
+            var documentIdentity = (
+                await solution.Projects.Single().GetSourceGeneratedDocumentsAsync()
+            )
+                .First()
+                .Identity;
             var frozenText1 = SourceText.From("// Hello, World!");
-            var frozenSolution1 = solution.WithFrozenSourceGeneratedDocument(documentIdentity, frozenText1).Project.Solution;
+            var frozenSolution1 = solution
+                .WithFrozenSourceGeneratedDocument(documentIdentity, frozenText1)
+                .Project.Solution;
 
-            assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, frozenSolution1);
+            assetProvider = await GetAssetProviderAsync(
+                workspace,
+                remoteWorkspace,
+                frozenSolution1
+            );
             solutionChecksum = await frozenSolution1.State.GetChecksumAsync(CancellationToken.None);
-            synched = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: true, workspaceVersion: 1, CancellationToken.None);
-            Assert.Equal(solutionChecksum, await synched.State.GetChecksumAsync(CancellationToken.None));
+            synched = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: true,
+                    workspaceVersion: 1,
+                    CancellationToken.None
+                );
+            Assert.Equal(
+                solutionChecksum,
+                await synched.State.GetChecksumAsync(CancellationToken.None)
+            );
 
             // Try freezing with some different content from the original solution
             var frozenText2 = SourceText.From("// Hello, World! A second time!");
-            var frozenSolution2 = solution.WithFrozenSourceGeneratedDocument(documentIdentity, frozenText2).Project.Solution;
+            var frozenSolution2 = solution
+                .WithFrozenSourceGeneratedDocument(documentIdentity, frozenText2)
+                .Project.Solution;
 
-            assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, frozenSolution2);
+            assetProvider = await GetAssetProviderAsync(
+                workspace,
+                remoteWorkspace,
+                frozenSolution2
+            );
             solutionChecksum = await frozenSolution2.State.GetChecksumAsync(CancellationToken.None);
-            synched = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: true, workspaceVersion: 2, CancellationToken.None);
-            Assert.Equal(solutionChecksum, await synched.State.GetChecksumAsync(CancellationToken.None));
+            synched = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: true,
+                    workspaceVersion: 2,
+                    CancellationToken.None
+                );
+            Assert.Equal(
+                solutionChecksum,
+                await synched.State.GetChecksumAsync(CancellationToken.None)
+            );
         }
 
         [Fact]
@@ -531,19 +900,52 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, solution);
 
             var solutionChecksum = await solution.State.GetChecksumAsync(CancellationToken.None);
-            var syncedFullSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var syncedFullSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
 
-            Assert.Equal(solutionChecksum, await syncedFullSolution.State.GetChecksumAsync(CancellationToken.None));
+            Assert.Equal(
+                solutionChecksum,
+                await syncedFullSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
             Assert.Equal(2, syncedFullSolution.Projects.Count());
 
             // Syncing project1 should do nothing as syncing the solution already synced it over.
-            var project1Checksum = await solution.State.GetChecksumAsync(project1.Id, CancellationToken.None);
-            var project1SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project1Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project1Checksum = await solution.State.GetChecksumAsync(
+                project1.Id,
+                CancellationToken.None
+            );
+            var project1SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project1Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(2, project1SyncedSolution.Projects.Count());
 
             // Syncing project2 should do nothing as syncing the solution already synced it over.
-            var project2Checksum = await solution.State.GetChecksumAsync(project2.Id, CancellationToken.None);
-            var project2SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project2Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project2Checksum = await solution.State.GetChecksumAsync(
+                project2.Id,
+                CancellationToken.None
+            );
+            var project2SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project2Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(2, project2SyncedSolution.Projects.Count());
         }
 
@@ -564,27 +966,64 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             var map = new Dictionary<Checksum, object>();
             var assetProvider = new AssetProvider(
-                Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())), new SolutionAssetCache(), new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map), remoteWorkspace.Services.GetService<ISerializerService>());
+                Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())),
+                new SolutionAssetCache(),
+                new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map),
+                remoteWorkspace.Services.GetService<ISerializerService>()
+            );
 
             // Syncing project 1 should just since it over.
             await solution.AppendAssetMapAsync(map, project1.Id, CancellationToken.None);
-            var project1Checksum = await solution.State.GetChecksumAsync(project1.Id, CancellationToken.None);
-            var project1SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project1Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project1Checksum = await solution.State.GetChecksumAsync(
+                project1.Id,
+                CancellationToken.None
+            );
+            var project1SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project1Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(1, project1SyncedSolution.Projects.Count());
             Assert.Equal(project1.Name, project1SyncedSolution.Projects.Single().Name);
 
             // Syncing project 2 should end up with p1 and p2 synced over.
             await solution.AppendAssetMapAsync(map, project2.Id, CancellationToken.None);
-            var project2Checksum = await solution.State.GetChecksumAsync(project2.Id, CancellationToken.None);
-            var project2SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project2Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project2Checksum = await solution.State.GetChecksumAsync(
+                project2.Id,
+                CancellationToken.None
+            );
+            var project2SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project2Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(2, project2SyncedSolution.Projects.Count());
 
             // then syncing the whole project should have no effect.
             await solution.AppendAssetMapAsync(map, CancellationToken.None);
             var solutionChecksum = await solution.State.GetChecksumAsync(CancellationToken.None);
-            var syncedFullSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var syncedFullSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
 
-            Assert.Equal(solutionChecksum, await syncedFullSolution.State.GetChecksumAsync(CancellationToken.None));
+            Assert.Equal(
+                solutionChecksum,
+                await syncedFullSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
             Assert.Equal(2, syncedFullSolution.Projects.Count());
         }
 
@@ -602,22 +1041,51 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var project2 = solution.AddProject("P2", "P2", LanguageNames.CSharp);
             var project3 = project2.Solution.AddProject("P3", "P3", LanguageNames.CSharp);
 
-            solution = project3.Solution.AddProjectReference(project3.Id, new(project3.Solution.Projects.Single(p => p.Name == "P2").Id));
+            solution = project3.Solution.AddProjectReference(
+                project3.Id,
+                new(project3.Solution.Projects.Single(p => p.Name == "P2").Id)
+            );
 
             var map = new Dictionary<Checksum, object>();
             var assetProvider = new AssetProvider(
-                Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())), new SolutionAssetCache(), new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map), remoteWorkspace.Services.GetService<ISerializerService>());
+                Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())),
+                new SolutionAssetCache(),
+                new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map),
+                remoteWorkspace.Services.GetService<ISerializerService>()
+            );
 
             await solution.AppendAssetMapAsync(map, project2.Id, CancellationToken.None);
-            var project2Checksum = await solution.State.GetChecksumAsync(project2.Id, CancellationToken.None);
-            var project2SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project2Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project2Checksum = await solution.State.GetChecksumAsync(
+                project2.Id,
+                CancellationToken.None
+            );
+            var project2SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project2Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(1, project2SyncedSolution.Projects.Count());
             Assert.Equal(project2.Name, project2SyncedSolution.Projects.Single().Name);
 
             // syncing project 3 should sync project 2 as well because of the p2p ref
             await solution.AppendAssetMapAsync(map, project3.Id, CancellationToken.None);
-            var project3Checksum = await solution.State.GetChecksumAsync(project3.Id, CancellationToken.None);
-            var project3SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project3Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project3Checksum = await solution.State.GetChecksumAsync(
+                project3.Id,
+                CancellationToken.None
+            );
+            var project3SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project3Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(2, project3SyncedSolution.Projects.Count());
         }
 
@@ -635,31 +1103,77 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var project2 = solution.AddProject("P2", "P2", LanguageNames.CSharp);
             var project3 = project2.Solution.AddProject("P3", "P3", LanguageNames.CSharp);
 
-            solution = project3.Solution.AddProjectReference(project3.Id, new(project3.Solution.Projects.Single(p => p.Name == "P2").Id));
+            solution = project3.Solution.AddProjectReference(
+                project3.Id,
+                new(project3.Solution.Projects.Single(p => p.Name == "P2").Id)
+            );
 
             var map = new Dictionary<Checksum, object>();
             var assetProvider = new AssetProvider(
-                Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())), new SolutionAssetCache(), new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map), remoteWorkspace.Services.GetService<ISerializerService>());
+                Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())),
+                new SolutionAssetCache(),
+                new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map),
+                remoteWorkspace.Services.GetService<ISerializerService>()
+            );
 
             // syncing P3 should since project P2 as well because of the p2p ref
             await solution.AppendAssetMapAsync(map, project3.Id, CancellationToken.None);
-            var project3Checksum = await solution.State.GetChecksumAsync(project3.Id, CancellationToken.None);
-            var project3SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project3Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project3Checksum = await solution.State.GetChecksumAsync(
+                project3.Id,
+                CancellationToken.None
+            );
+            var project3SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project3Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(2, project3SyncedSolution.Projects.Count());
 
             // if we then sync just P2, we should still have P2 and P3 from the prior sync
             await solution.AppendAssetMapAsync(map, project2.Id, CancellationToken.None);
-            var project2Checksum = await solution.State.GetChecksumAsync(project2.Id, CancellationToken.None);
-            var project2SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project2Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project2Checksum = await solution.State.GetChecksumAsync(
+                project2.Id,
+                CancellationToken.None
+            );
+            var project2SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project2Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(2, project2SyncedSolution.Projects.Count());
-            AssertEx.SetEqual(new[] { project2.Name, project3.Name }, project2SyncedSolution.Projects.Select(p => p.Name));
+            AssertEx.SetEqual(
+                new[] { project2.Name, project3.Name },
+                project2SyncedSolution.Projects.Select(p => p.Name)
+            );
 
             // if we then sync just P1, we should have 3 projects synved over now.
             await solution.AppendAssetMapAsync(map, project1.Id, CancellationToken.None);
-            var project1Checksum = await solution.State.GetChecksumAsync(project1.Id, CancellationToken.None);
-            var project1SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project1Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project1Checksum = await solution.State.GetChecksumAsync(
+                project1.Id,
+                CancellationToken.None
+            );
+            var project1SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project1Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(3, project1SyncedSolution.Projects.Count());
-            AssertEx.SetEqual(new[] { project1.Name, project2.Name, project3.Name }, project1SyncedSolution.Projects.Select(p => p.Name));
+            AssertEx.SetEqual(
+                new[] { project1.Name, project2.Name, project3.Name },
+                project1SyncedSolution.Projects.Select(p => p.Name)
+            );
         }
 
         [Fact]
@@ -676,27 +1190,65 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var project2 = solution.AddProject("P2", "P2", LanguageNames.CSharp);
             var project3 = project2.Solution.AddProject("P3", "P3", LanguageNames.CSharp);
 
-            solution = project3.Solution.AddProjectReference(project3.Id, new(project2.Id))
-                                        .AddProjectReference(project2.Id, new(project1.Id));
+            solution = project3.Solution
+                .AddProjectReference(project3.Id, new(project2.Id))
+                .AddProjectReference(project2.Id, new(project1.Id));
 
             var map = new Dictionary<Checksum, object>();
             var assetProvider = new AssetProvider(
-                Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())), new SolutionAssetCache(), new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map), remoteWorkspace.Services.GetService<ISerializerService>());
+                Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())),
+                new SolutionAssetCache(),
+                new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map),
+                remoteWorkspace.Services.GetService<ISerializerService>()
+            );
 
             // syncing project3 should since project2 and project1 as well because of the p2p ref
             await solution.AppendAssetMapAsync(map, project3.Id, CancellationToken.None);
-            var project3Checksum = await solution.State.GetChecksumAsync(project3.Id, CancellationToken.None);
-            var project3SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project3Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project3Checksum = await solution.State.GetChecksumAsync(
+                project3.Id,
+                CancellationToken.None
+            );
+            var project3SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project3Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(3, project3SyncedSolution.Projects.Count());
 
             // syncing project2 should do nothing as everything is already synced
-            var project2Checksum = await solution.State.GetChecksumAsync(project2.Id, CancellationToken.None);
-            var project2SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project2Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project2Checksum = await solution.State.GetChecksumAsync(
+                project2.Id,
+                CancellationToken.None
+            );
+            var project2SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project2Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(3, project2SyncedSolution.Projects.Count());
 
             // syncing project1 should do nothing as everything is already synced
-            var project1Checksum = await solution.State.GetChecksumAsync(project1.Id, CancellationToken.None);
-            var project1SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project1Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project1Checksum = await solution.State.GetChecksumAsync(
+                project1.Id,
+                CancellationToken.None
+            );
+            var project1SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project1Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(3, project1SyncedSolution.Projects.Count());
         }
 
@@ -714,27 +1266,65 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var project2 = solution.AddProject("P2", "P2", LanguageNames.CSharp);
             var project3 = project2.Solution.AddProject("P3", "P3", LanguageNames.CSharp);
 
-            solution = project3.Solution.AddProjectReference(project3.Id, new(project2.Id))
-                                        .AddProjectReference(project3.Id, new(project1.Id));
+            solution = project3.Solution
+                .AddProjectReference(project3.Id, new(project2.Id))
+                .AddProjectReference(project3.Id, new(project1.Id));
 
             var map = new Dictionary<Checksum, object>();
             var assetProvider = new AssetProvider(
-                Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())), new SolutionAssetCache(), new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map), remoteWorkspace.Services.GetService<ISerializerService>());
+                Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())),
+                new SolutionAssetCache(),
+                new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map),
+                remoteWorkspace.Services.GetService<ISerializerService>()
+            );
 
             // syncing project3 should since project2 and project1 as well because of the p2p ref
             await solution.AppendAssetMapAsync(map, project3.Id, CancellationToken.None);
-            var project3Checksum = await solution.State.GetChecksumAsync(project3.Id, CancellationToken.None);
-            var project3SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project3Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project3Checksum = await solution.State.GetChecksumAsync(
+                project3.Id,
+                CancellationToken.None
+            );
+            var project3SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project3Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(3, project3SyncedSolution.Projects.Count());
 
             // Syncing project2 should do nothing as it's already synced
-            var project2Checksum = await solution.State.GetChecksumAsync(project2.Id, CancellationToken.None);
-            var project2SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project2Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project2Checksum = await solution.State.GetChecksumAsync(
+                project2.Id,
+                CancellationToken.None
+            );
+            var project2SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project2Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(3, project2SyncedSolution.Projects.Count());
 
             // Syncing project1 should do nothing as it's already synced
-            var project1Checksum = await solution.State.GetChecksumAsync(project1.Id, CancellationToken.None);
-            var project1SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project1Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project1Checksum = await solution.State.GetChecksumAsync(
+                project1.Id,
+                CancellationToken.None
+            );
+            var project1SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project1Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(3, project1SyncedSolution.Projects.Count());
         }
 
@@ -755,12 +1345,27 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             var map = new Dictionary<Checksum, object>();
             var assetProvider = new AssetProvider(
-                Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())), new SolutionAssetCache(), new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map), remoteWorkspace.Services.GetService<ISerializerService>());
+                Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())),
+                new SolutionAssetCache(),
+                new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map),
+                remoteWorkspace.Services.GetService<ISerializerService>()
+            );
 
             // Syncing over project1 should give us 1 set of options on the OOP side.
             await solution.AppendAssetMapAsync(map, project1.Id, CancellationToken.None);
-            var project1Checksum = await solution.State.GetChecksumAsync(project1.Id, CancellationToken.None);
-            var project1SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project1Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project1Checksum = await solution.State.GetChecksumAsync(
+                project1.Id,
+                CancellationToken.None
+            );
+            var project1SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project1Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(1, project1SyncedSolution.Projects.Count());
             Assert.Equal(project1.Name, project1SyncedSolution.Projects.Single().Name);
             var project1Options = (SerializableOptionSet)project1SyncedSolution.Options;
@@ -769,8 +1374,19 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             // Syncing over project2 should now give two sets of options.
             await solution.AppendAssetMapAsync(map, project2.Id, CancellationToken.None);
-            var project2Checksum = await solution.State.GetChecksumAsync(project2.Id, CancellationToken.None);
-            var project2SyncedSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, project2Checksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var project2Checksum = await solution.State.GetChecksumAsync(
+                project2.Id,
+                CancellationToken.None
+            );
+            var project2SyncedSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    project2Checksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             Assert.Equal(2, project2SyncedSolution.Projects.Count());
             var project2Options = (SerializableOptionSet)project2SyncedSolution.Options;
             Assert.Equal(2, project2Options.GetTestAccessor().Languages.Count);
@@ -798,10 +1414,16 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
 
             var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, solution);
 
-            var project1Checksum = await solution.State.GetChecksumAsync(project1.Id, CancellationToken.None);
+            var project1Checksum = await solution.State.GetChecksumAsync(
+                project1.Id,
+                CancellationToken.None
+            );
         }
 
-        private static async Task VerifySolutionUpdate(string code, Func<Solution, Solution> newSolutionGetter)
+        private static async Task VerifySolutionUpdate(
+            string code,
+            Func<Solution, Solution> newSolutionGetter
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(code);
             await VerifySolutionUpdate(workspace, newSolutionGetter);
@@ -811,7 +1433,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             TestWorkspace workspace,
             Func<Solution, Solution> newSolutionGetter,
             Action<Solution> oldSolutionValidator = null,
-            Action<Solution> newSolutionValidator = null)
+            Action<Solution> newSolutionValidator = null
+        )
         {
             var solution = workspace.CurrentSolution;
             oldSolutionValidator?.Invoke(solution);
@@ -819,41 +1442,96 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             var map = new Dictionary<Checksum, object>();
 
             using var remoteWorkspace = CreateRemoteWorkspace();
-            var assetProvider = await GetAssetProviderAsync(workspace, remoteWorkspace, solution, map);
+            var assetProvider = await GetAssetProviderAsync(
+                workspace,
+                remoteWorkspace,
+                solution,
+                map
+            );
             var solutionChecksum = await solution.State.GetChecksumAsync(CancellationToken.None);
 
             // update primary workspace
-            await remoteWorkspace.UpdatePrimaryBranchSolutionAsync(assetProvider, solutionChecksum, solution.WorkspaceVersion, CancellationToken.None);
-            var recoveredSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, solutionChecksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            await remoteWorkspace.UpdatePrimaryBranchSolutionAsync(
+                assetProvider,
+                solutionChecksum,
+                solution.WorkspaceVersion,
+                CancellationToken.None
+            );
+            var recoveredSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
             oldSolutionValidator?.Invoke(recoveredSolution);
 
             Assert.IsAssignableFrom<RemoteWorkspace>(recoveredSolution.Workspace);
             var primaryWorkspace = recoveredSolution.Workspace;
-            Assert.Equal(solutionChecksum, await recoveredSolution.State.GetChecksumAsync(CancellationToken.None));
+            Assert.Equal(
+                solutionChecksum,
+                await recoveredSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
             Assert.Same(primaryWorkspace.PrimaryBranchId, recoveredSolution.BranchId);
 
             // get new solution
             var newSolution = newSolutionGetter(solution);
-            var newSolutionChecksum = await newSolution.State.GetChecksumAsync(CancellationToken.None);
+            var newSolutionChecksum = await newSolution.State.GetChecksumAsync(
+                CancellationToken.None
+            );
             await newSolution.AppendAssetMapAsync(map, CancellationToken.None);
 
             // get solution without updating primary workspace
-            var recoveredNewSolution = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, newSolutionChecksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            var recoveredNewSolution = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    newSolutionChecksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
 
-            Assert.Equal(newSolutionChecksum, await recoveredNewSolution.State.GetChecksumAsync(CancellationToken.None));
+            Assert.Equal(
+                newSolutionChecksum,
+                await recoveredNewSolution.State.GetChecksumAsync(CancellationToken.None)
+            );
             Assert.NotSame(primaryWorkspace.PrimaryBranchId, recoveredNewSolution.BranchId);
 
             // do same once updating primary workspace
-            await remoteWorkspace.UpdatePrimaryBranchSolutionAsync(assetProvider, newSolutionChecksum, solution.WorkspaceVersion + 1, CancellationToken.None);
-            var third = await remoteWorkspace.GetTestAccessor().GetSolutionAsync(assetProvider, newSolutionChecksum, fromPrimaryBranch: false, workspaceVersion: -1, CancellationToken.None);
+            await remoteWorkspace.UpdatePrimaryBranchSolutionAsync(
+                assetProvider,
+                newSolutionChecksum,
+                solution.WorkspaceVersion + 1,
+                CancellationToken.None
+            );
+            var third = await remoteWorkspace
+                .GetTestAccessor()
+                .GetSolutionAsync(
+                    assetProvider,
+                    newSolutionChecksum,
+                    fromPrimaryBranch: false,
+                    workspaceVersion: -1,
+                    CancellationToken.None
+                );
 
-            Assert.Equal(newSolutionChecksum, await third.State.GetChecksumAsync(CancellationToken.None));
+            Assert.Equal(
+                newSolutionChecksum,
+                await third.State.GetChecksumAsync(CancellationToken.None)
+            );
             Assert.Same(primaryWorkspace.PrimaryBranchId, third.BranchId);
 
             newSolutionValidator?.Invoke(recoveredNewSolution);
         }
 
-        private static async Task<AssetProvider> GetAssetProviderAsync(Workspace workspace, RemoteWorkspace remoteWorkspace, Solution solution, Dictionary<Checksum, object> map = null)
+        private static async Task<AssetProvider> GetAssetProviderAsync(
+            Workspace workspace,
+            RemoteWorkspace remoteWorkspace,
+            Solution solution,
+            Dictionary<Checksum, object> map = null
+        )
         {
             // make sure checksum is calculated
             await solution.State.GetChecksumAsync(CancellationToken.None);
@@ -861,11 +1539,21 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             map ??= new Dictionary<Checksum, object>();
             await solution.AppendAssetMapAsync(map, CancellationToken.None);
 
-            var sessionId = Checksum.Create(ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray()));
+            var sessionId = Checksum.Create(
+                ImmutableArray.CreateRange(Guid.NewGuid().ToByteArray())
+            );
             var storage = new SolutionAssetCache();
-            var assetSource = new SimpleAssetSource(workspace.Services.GetService<ISerializerService>(), map);
+            var assetSource = new SimpleAssetSource(
+                workspace.Services.GetService<ISerializerService>(),
+                map
+            );
 
-            return new AssetProvider(sessionId, storage, assetSource, remoteWorkspace.Services.GetService<ISerializerService>());
+            return new AssetProvider(
+                sessionId,
+                storage,
+                assetSource,
+                remoteWorkspace.Services.GetService<ISerializerService>()
+            );
         }
 
         private class TestAnalyzerProvider : IIncrementalAnalyzerProvider
@@ -881,7 +1569,12 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             {
                 private TaskCompletionSource<bool> _source = new TaskCompletionSource<bool>();
 
-                public override Task AnalyzeDocumentAsync(Document document, SyntaxNode bodyOpt, InvocationReasons reasons, CancellationToken cancellationToken)
+                public override Task AnalyzeDocumentAsync(
+                    Document document,
+                    SyntaxNode bodyOpt,
+                    InvocationReasons reasons,
+                    CancellationToken cancellationToken
+                )
                 {
                     _source.SetResult(true);
                     return Task.CompletedTask;

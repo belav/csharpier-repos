@@ -23,7 +23,8 @@ namespace AutoMapper.UnitTests.Bug
             public Int32 Type { get; private set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<SourceClass, DestinationClass>());
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg => cfg.CreateMap<SourceClass, DestinationClass>());
 
         [Fact]
         public void Should_pick_a_ctor_which_best_matches()
@@ -33,6 +34,7 @@ namespace AutoMapper.UnitTests.Bug
             Mapper.Map<DestinationClass>(source);
         }
     }
+
     public class MemberNamedTypeWrong : AutoMapperSpecBase
     {
         public class SourceClass
@@ -48,15 +50,13 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void Should_map_correctly()
         {
-            var source = new SourceClass
-            {
-                Type = "Hello"
-            };
+            var source = new SourceClass { Type = "Hello" };
 
             var result = Mapper.Map<DestinationClass>(source);
             result.Type.ShouldBe(source.Type);
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<SourceClass, DestinationClass>());
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg => cfg.CreateMap<SourceClass, DestinationClass>());
     }
 }

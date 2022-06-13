@@ -125,7 +125,9 @@ class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<int> AdvSimd_CompareEqual_Vector128_Int32_CreateZeroZeroZeroZero(Vector128<int> left)
+    static Vector128<int> AdvSimd_CompareEqual_Vector128_Int32_CreateZeroZeroZeroZero(
+        Vector128<int> left
+    )
     {
         return AdvSimd.CompareEqual(left, Vector128.Create(0, 0, 0, 0));
     }
@@ -137,20 +139,26 @@ class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<float> AdvSimd_CompareEqual_Vector128_Single_CreateZeroZeroZeroZero(Vector128<float> left)
+    static Vector128<float> AdvSimd_CompareEqual_Vector128_Single_CreateZeroZeroZeroZero(
+        Vector128<float> left
+    )
     {
         return AdvSimd.CompareEqual(left, Vector128.Create(0f, 0f, 0f, 0f));
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<float> AdvSimd_CompareEqual_Vector128_Single_CreateZeroZeroZeroZero_AsVariable(Vector128<float> left)
+    static Vector128<float> AdvSimd_CompareEqual_Vector128_Single_CreateZeroZeroZeroZero_AsVariable(
+        Vector128<float> left
+    )
     {
         var asVar = Vector128.Create(0f, 0f, 0f, 0f);
         return AdvSimd.CompareEqual(left, asVar);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<float> AdvSimd_CompareEqual_Vector128_Single_CreateZeroZeroZeroZero_AsVariableLoop(Vector128<float> left)
+    static Vector128<float> AdvSimd_CompareEqual_Vector128_Single_CreateZeroZeroZeroZero_AsVariableLoop(
+        Vector128<float> left
+    )
     {
         Vector128<float> result = default;
         var asVar = Vector128.Create(0f, 0f, 0f, 0f);
@@ -172,7 +180,9 @@ class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static unsafe Vector128<long> AdvSimd_Arm64_CompareEqual_Vector128_Long_AsVariableLoop(Vector128<long> left)
+    static unsafe Vector128<long> AdvSimd_Arm64_CompareEqual_Vector128_Long_AsVariableLoop(
+        Vector128<long> left
+    )
     {
         Vector128<long> result = default;
         Vector128<long> asVar = Vector128.Create((long)0);
@@ -190,7 +200,9 @@ class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<double> AdvSimd_Arm64_CompareEqual_Vector128_Double_Zero(Vector128<double> left)
+    static Vector128<double> AdvSimd_Arm64_CompareEqual_Vector128_Double_Zero(
+        Vector128<double> left
+    )
     {
         return AdvSimd.Arm64.CompareEqual(left, Vector128<double>.Zero);
     }
@@ -208,19 +220,25 @@ class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<float> AdvSimd_Arm64_CompareEqualScalar_Vector64_Single_Zero(Vector64<float> left)
+    static Vector64<float> AdvSimd_Arm64_CompareEqualScalar_Vector64_Single_Zero(
+        Vector64<float> left
+    )
     {
         return AdvSimd.Arm64.CompareEqualScalar(left, Vector64<float>.Zero);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<double> AdvSimd_Arm64_CompareEqualScalar_Vector64_Double_Zero(Vector64<double> left)
+    static Vector64<double> AdvSimd_Arm64_CompareEqualScalar_Vector64_Double_Zero(
+        Vector64<double> left
+    )
     {
         return AdvSimd.Arm64.CompareEqualScalar(left, Vector64<double>.Zero);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<ulong> AdvSimd_Arm64_CompareEqualScalar_Vector64_UInt64_Zero(Vector64<ulong> left)
+    static Vector64<ulong> AdvSimd_Arm64_CompareEqualScalar_Vector64_UInt64_Zero(
+        Vector64<ulong> left
+    )
     {
         return AdvSimd.Arm64.CompareEqualScalar(left, Vector64<ulong>.Zero);
     }
@@ -246,7 +264,9 @@ class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<ushort> AdvSimd_CompareEqual_Vector64_UInt16_Zero_Swapped(Vector64<ushort> right)
+    static Vector64<ushort> AdvSimd_CompareEqual_Vector64_UInt16_Zero_Swapped(
+        Vector64<ushort> right
+    )
     {
         return AdvSimd.CompareEqual(Vector64<ushort>.Zero, right);
     }
@@ -282,19 +302,25 @@ class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<sbyte> AdvSimd_CompareEqual_Vector128_SByte_Zero_Swapped(Vector128<sbyte> right)
+    static Vector128<sbyte> AdvSimd_CompareEqual_Vector128_SByte_Zero_Swapped(
+        Vector128<sbyte> right
+    )
     {
         return AdvSimd.CompareEqual(Vector128<sbyte>.Zero, right);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<ushort> AdvSimd_CompareEqual_Vector128_UInt16_Zero_Swapped(Vector128<ushort> right)
+    static Vector128<ushort> AdvSimd_CompareEqual_Vector128_UInt16_Zero_Swapped(
+        Vector128<ushort> right
+    )
     {
         return AdvSimd.CompareEqual(Vector128<ushort>.Zero, right);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<short> AdvSimd_CompareEqual_Vector128_Int16_Zero_Swapped(Vector128<short> right)
+    static Vector128<short> AdvSimd_CompareEqual_Vector128_Int16_Zero_Swapped(
+        Vector128<short> right
+    )
     {
         return AdvSimd.CompareEqual(Vector128<short>.Zero, right);
     }
@@ -312,49 +338,65 @@ class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<float> AdvSimd_CompareEqual_Vector128_Single_Zero_Swapped(Vector128<float> right)
+    static Vector128<float> AdvSimd_CompareEqual_Vector128_Single_Zero_Swapped(
+        Vector128<float> right
+    )
     {
         return AdvSimd.CompareEqual(Vector128<float>.Zero, right);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<double> AdvSimd_Arm64_CompareEqual_Vector128_Double_Zero_Swapped(Vector128<double> right)
+    static Vector128<double> AdvSimd_Arm64_CompareEqual_Vector128_Double_Zero_Swapped(
+        Vector128<double> right
+    )
     {
         return AdvSimd.Arm64.CompareEqual(Vector128<double>.Zero, right);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<ulong> AdvSimd_Arm64_CompareEqual_Vector128_UInt64_Zero_Swapped(Vector128<ulong> right)
+    static Vector128<ulong> AdvSimd_Arm64_CompareEqual_Vector128_UInt64_Zero_Swapped(
+        Vector128<ulong> right
+    )
     {
         return AdvSimd.Arm64.CompareEqual(Vector128<ulong>.Zero, right);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<long> AdvSimd_Arm64_CompareEqual_Vector128_Int64_Zero_Swapped(Vector128<long> right)
+    static Vector128<long> AdvSimd_Arm64_CompareEqual_Vector128_Int64_Zero_Swapped(
+        Vector128<long> right
+    )
     {
         return AdvSimd.Arm64.CompareEqual(Vector128<long>.Zero, right);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<float> AdvSimd_Arm64_CompareEqualScalar_Vector64_Single_Zero_Swapped(Vector64<float> right)
+    static Vector64<float> AdvSimd_Arm64_CompareEqualScalar_Vector64_Single_Zero_Swapped(
+        Vector64<float> right
+    )
     {
         return AdvSimd.Arm64.CompareEqualScalar(Vector64<float>.Zero, right);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<double> AdvSimd_Arm64_CompareEqualScalar_Vector64_Double_Zero_Swapped(Vector64<double> right)
+    static Vector64<double> AdvSimd_Arm64_CompareEqualScalar_Vector64_Double_Zero_Swapped(
+        Vector64<double> right
+    )
     {
         return AdvSimd.Arm64.CompareEqualScalar(Vector64<double>.Zero, right);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<ulong> AdvSimd_Arm64_CompareEqualScalar_Vector64_UInt64_Zero_Swapped(Vector64<ulong> right)
+    static Vector64<ulong> AdvSimd_Arm64_CompareEqualScalar_Vector64_UInt64_Zero_Swapped(
+        Vector64<ulong> right
+    )
     {
         return AdvSimd.Arm64.CompareEqualScalar(Vector64<ulong>.Zero, right);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<long> AdvSimd_Arm64_CompareEqualScalar_Vector64_Int64_Zero_Swapped(Vector64<long> right)
+    static Vector64<long> AdvSimd_Arm64_CompareEqualScalar_Vector64_Int64_Zero_Swapped(
+        Vector64<long> right
+    )
     {
         return AdvSimd.Arm64.CompareEqualScalar(Vector64<long>.Zero, right);
     }
@@ -386,25 +428,33 @@ class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<double> AdvSimd_Arm64_CompareGreaterThan_Vector128_Double_Zero(Vector128<double> left)
+    static Vector128<double> AdvSimd_Arm64_CompareGreaterThan_Vector128_Double_Zero(
+        Vector128<double> left
+    )
     {
         return AdvSimd.Arm64.CompareGreaterThan(left, Vector128<double>.Zero);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<long> AdvSimd_Arm64_CompareGreaterThan_Vector128_Int64_Zero(Vector128<long> left)
+    static Vector128<long> AdvSimd_Arm64_CompareGreaterThan_Vector128_Int64_Zero(
+        Vector128<long> left
+    )
     {
         return AdvSimd.Arm64.CompareGreaterThan(left, Vector128<long>.Zero);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<double> AdvSimd_Arm64_CompareGreaterThanScalar_Vector64_Double_Zero(Vector64<double> left)
+    static Vector64<double> AdvSimd_Arm64_CompareGreaterThanScalar_Vector64_Double_Zero(
+        Vector64<double> left
+    )
     {
         return AdvSimd.Arm64.CompareGreaterThanScalar(left, Vector64<double>.Zero);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<long> AdvSimd_Arm64_CompareGreaterThanScalar_Vector64_Int64_Zero(Vector64<long> left)
+    static Vector64<long> AdvSimd_Arm64_CompareGreaterThanScalar_Vector64_Int64_Zero(
+        Vector64<long> left
+    )
     {
         return AdvSimd.Arm64.CompareGreaterThanScalar(left, Vector64<long>.Zero);
     }
@@ -418,50 +468,65 @@ class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<float> AdvSimd_CompareGreaterThanOrEqual_Vector64_Single_Zero(Vector64<float> left)
+    static Vector64<float> AdvSimd_CompareGreaterThanOrEqual_Vector64_Single_Zero(
+        Vector64<float> left
+    )
     {
         return AdvSimd.CompareGreaterThanOrEqual(left, Vector64<float>.Zero);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<byte> AdvSimd_CompareGreaterThanOrEqual_Vector128_Byte_Zero(Vector128<byte> left)
+    static Vector128<byte> AdvSimd_CompareGreaterThanOrEqual_Vector128_Byte_Zero(
+        Vector128<byte> left
+    )
     {
         return AdvSimd.CompareGreaterThanOrEqual(left, Vector128<byte>.Zero);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<float> AdvSimd_CompareGreaterThanOrEqual_Vector128_Single_Zero(Vector128<float> left)
+    static Vector128<float> AdvSimd_CompareGreaterThanOrEqual_Vector128_Single_Zero(
+        Vector128<float> left
+    )
     {
         return AdvSimd.CompareGreaterThanOrEqual(left, Vector128<float>.Zero);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<double> AdvSimd_Arm64_CompareGreaterThanOrEqual_Vector128_Double_Zero(Vector128<double> left)
+    static Vector128<double> AdvSimd_Arm64_CompareGreaterThanOrEqual_Vector128_Double_Zero(
+        Vector128<double> left
+    )
     {
         return AdvSimd.Arm64.CompareGreaterThanOrEqual(left, Vector128<double>.Zero);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector128<long> AdvSimd_Arm64_CompareGreaterThanOrEqual_Vector128_Int64_Zero(Vector128<long> left)
+    static Vector128<long> AdvSimd_Arm64_CompareGreaterThanOrEqual_Vector128_Int64_Zero(
+        Vector128<long> left
+    )
     {
         return AdvSimd.Arm64.CompareGreaterThanOrEqual(left, Vector128<long>.Zero);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<double> AdvSimd_Arm64_CompareGreaterThanOrEqualScalar_Vector64_Double_Zero(Vector64<double> left)
+    static Vector64<double> AdvSimd_Arm64_CompareGreaterThanOrEqualScalar_Vector64_Double_Zero(
+        Vector64<double> left
+    )
     {
         return AdvSimd.Arm64.CompareGreaterThanOrEqualScalar(left, Vector64<double>.Zero);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector64<long> AdvSimd_Arm64_CompareGreaterThanOrEqualScalar_Vector64_Int64_Zero(Vector64<long> left)
+    static Vector64<long> AdvSimd_Arm64_CompareGreaterThanOrEqualScalar_Vector64_Int64_Zero(
+        Vector64<long> left
+    )
     {
         return AdvSimd.Arm64.CompareGreaterThanOrEqualScalar(left, Vector64<long>.Zero);
     }
 
     // Validation
 
-    unsafe static bool ValidateResult_Vector64<T>(Vector64<T> result, T expectedElementValue) where T : unmanaged
+    unsafe static bool ValidateResult_Vector64<T>(Vector64<T> result, T expectedElementValue)
+        where T : unmanaged
     {
         var succeeded = true;
 
@@ -476,7 +541,10 @@ class Program
         return succeeded;
     }
 
-    unsafe static bool ValidateResult_Vector64<T>(Vector64<T> result, Vector64<T> expectedElementValue) where T : unmanaged
+    unsafe static bool ValidateResult_Vector64<T>(
+        Vector64<T> result,
+        Vector64<T> expectedElementValue
+    ) where T : unmanaged
     {
         var succeeded = true;
 
@@ -491,7 +559,8 @@ class Program
         return succeeded;
     }
 
-    unsafe static bool ValidateResult_Vector128<T>(Vector128<T> result, T expectedElementValue) where T : unmanaged
+    unsafe static bool ValidateResult_Vector128<T>(Vector128<T> result, T expectedElementValue)
+        where T : unmanaged
     {
         var succeeded = true;
 
@@ -506,7 +575,10 @@ class Program
         return succeeded;
     }
 
-    unsafe static bool ValidateResult_Vector128<T>(Vector128<T> result, Vector128<T> expectedElementValue) where T : unmanaged
+    unsafe static bool ValidateResult_Vector128<T>(
+        Vector128<T> result,
+        Vector128<T> expectedElementValue
+    ) where T : unmanaged
     {
         var succeeded = true;
 
@@ -529,186 +601,482 @@ class Program
 
         // Vector64
 
-        if (!ValidateResult_Vector64<byte>(AdvSimd_CompareEqual_Vector64_Byte_Zero(Vector64<byte>.Zero), Byte.MaxValue))
+        if (
+            !ValidateResult_Vector64<byte>(
+                AdvSimd_CompareEqual_Vector64_Byte_Zero(Vector64<byte>.Zero),
+                Byte.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<sbyte>(AdvSimd_CompareEqual_Vector64_SByte_Zero(Vector64<sbyte>.Zero), -1))
+        if (
+            !ValidateResult_Vector64<sbyte>(
+                AdvSimd_CompareEqual_Vector64_SByte_Zero(Vector64<sbyte>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<ushort>(AdvSimd_CompareEqual_Vector64_UInt16_Zero(Vector64<ushort>.Zero), UInt16.MaxValue))
+        if (
+            !ValidateResult_Vector64<ushort>(
+                AdvSimd_CompareEqual_Vector64_UInt16_Zero(Vector64<ushort>.Zero),
+                UInt16.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<short>(AdvSimd_CompareEqual_Vector64_Int16_Zero(Vector64<short>.Zero), -1))
+        if (
+            !ValidateResult_Vector64<short>(
+                AdvSimd_CompareEqual_Vector64_Int16_Zero(Vector64<short>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<uint>(AdvSimd_CompareEqual_Vector64_UInt32_Zero(Vector64<uint>.Zero), UInt32.MaxValue))
+        if (
+            !ValidateResult_Vector64<uint>(
+                AdvSimd_CompareEqual_Vector64_UInt32_Zero(Vector64<uint>.Zero),
+                UInt32.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<int>(AdvSimd_CompareEqual_Vector64_Int32_Zero(Vector64<int>.Zero), -1))
+        if (
+            !ValidateResult_Vector64<int>(
+                AdvSimd_CompareEqual_Vector64_Int32_Zero(Vector64<int>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<float>(AdvSimd_CompareEqual_Vector64_Single_Zero(Vector64<float>.Zero), Single.NaN))
+        if (
+            !ValidateResult_Vector64<float>(
+                AdvSimd_CompareEqual_Vector64_Single_Zero(Vector64<float>.Zero),
+                Single.NaN
+            )
+        )
             result = -1;
 
         // Vector64.Create
 
-        if (!ValidateResult_Vector64<int>(AdvSimd_CompareEqual_Vector64_Int32_CreateZero(Vector64<int>.Zero), -1))
+        if (
+            !ValidateResult_Vector64<int>(
+                AdvSimd_CompareEqual_Vector64_Int32_CreateZero(Vector64<int>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<float>(AdvSimd_CompareEqual_Vector64_Single_CreateZero(Vector64<float>.Zero), Single.NaN))
+        if (
+            !ValidateResult_Vector64<float>(
+                AdvSimd_CompareEqual_Vector64_Single_CreateZero(Vector64<float>.Zero),
+                Single.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<int>(AdvSimd_CompareEqual_Vector64_Int32_CreateZeroZero(Vector64<int>.Zero), -1))
+        if (
+            !ValidateResult_Vector64<int>(
+                AdvSimd_CompareEqual_Vector64_Int32_CreateZeroZero(Vector64<int>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<float>(AdvSimd_CompareEqual_Vector64_Single_CreateZeroZero(Vector64<float>.Zero), Single.NaN))
+        if (
+            !ValidateResult_Vector64<float>(
+                AdvSimd_CompareEqual_Vector64_Single_CreateZeroZero(Vector64<float>.Zero),
+                Single.NaN
+            )
+        )
             result = -1;
 
         // Vector128
 
-        if (!ValidateResult_Vector128<byte>(AdvSimd_CompareEqual_Vector128_Byte_Zero(Vector128<byte>.Zero), Byte.MaxValue))
+        if (
+            !ValidateResult_Vector128<byte>(
+                AdvSimd_CompareEqual_Vector128_Byte_Zero(Vector128<byte>.Zero),
+                Byte.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<sbyte>(AdvSimd_CompareEqual_Vector128_SByte_Zero(Vector128<sbyte>.Zero), -1))
+        if (
+            !ValidateResult_Vector128<sbyte>(
+                AdvSimd_CompareEqual_Vector128_SByte_Zero(Vector128<sbyte>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<ushort>(AdvSimd_CompareEqual_Vector128_UInt16_Zero(Vector128<ushort>.Zero), UInt16.MaxValue))
+        if (
+            !ValidateResult_Vector128<ushort>(
+                AdvSimd_CompareEqual_Vector128_UInt16_Zero(Vector128<ushort>.Zero),
+                UInt16.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<short>(AdvSimd_CompareEqual_Vector128_Int16_Zero(Vector128<short>.Zero), -1))
+        if (
+            !ValidateResult_Vector128<short>(
+                AdvSimd_CompareEqual_Vector128_Int16_Zero(Vector128<short>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<uint>(AdvSimd_CompareEqual_Vector128_UInt32_Zero(Vector128<uint>.Zero), UInt32.MaxValue))
+        if (
+            !ValidateResult_Vector128<uint>(
+                AdvSimd_CompareEqual_Vector128_UInt32_Zero(Vector128<uint>.Zero),
+                UInt32.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<int>(AdvSimd_CompareEqual_Vector128_Int32_Zero(Vector128<int>.Zero), -1))
+        if (
+            !ValidateResult_Vector128<int>(
+                AdvSimd_CompareEqual_Vector128_Int32_Zero(Vector128<int>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<float>(AdvSimd_CompareEqual_Vector128_Single_Zero(Vector128<float>.Zero), Single.NaN))
+        if (
+            !ValidateResult_Vector128<float>(
+                AdvSimd_CompareEqual_Vector128_Single_Zero(Vector128<float>.Zero),
+                Single.NaN
+            )
+        )
             result = -1;
 
         // Vector128.Create
 
-        if (!ValidateResult_Vector128<int>(AdvSimd_CompareEqual_Vector128_Int32_CreateZero(Vector128<int>.Zero), -1))
+        if (
+            !ValidateResult_Vector128<int>(
+                AdvSimd_CompareEqual_Vector128_Int32_CreateZero(Vector128<int>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<float>(AdvSimd_CompareEqual_Vector128_Single_CreateZero(Vector128<float>.Zero), Single.NaN))
+        if (
+            !ValidateResult_Vector128<float>(
+                AdvSimd_CompareEqual_Vector128_Single_CreateZero(Vector128<float>.Zero),
+                Single.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<int>(AdvSimd_CompareEqual_Vector128_Int32_CreateZeroZeroZeroZero(Vector128<int>.Zero), -1))
+        if (
+            !ValidateResult_Vector128<int>(
+                AdvSimd_CompareEqual_Vector128_Int32_CreateZeroZeroZeroZero(Vector128<int>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<float>(AdvSimd_CompareEqual_Vector128_Single_CreateZeroZeroZeroZero(Vector128<float>.Zero), Single.NaN))
+        if (
+            !ValidateResult_Vector128<float>(
+                AdvSimd_CompareEqual_Vector128_Single_CreateZeroZeroZeroZero(Vector128<float>.Zero),
+                Single.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<float>(AdvSimd_CompareEqual_Vector128_Single_CreateZeroZeroZeroZero_AsVariable(Vector128<float>.Zero), Single.NaN))
+        if (
+            !ValidateResult_Vector128<float>(
+                AdvSimd_CompareEqual_Vector128_Single_CreateZeroZeroZeroZero_AsVariable(
+                    Vector128<float>.Zero
+                ),
+                Single.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<float>(AdvSimd_CompareEqual_Vector128_Single_CreateZeroZeroZeroZero_AsVariableLoop(Vector128<float>.Zero), Single.NaN))
+        if (
+            !ValidateResult_Vector128<float>(
+                AdvSimd_CompareEqual_Vector128_Single_CreateZeroZeroZeroZero_AsVariableLoop(
+                    Vector128<float>.Zero
+                ),
+                Single.NaN
+            )
+        )
             result = -1;
 
         // End CompareEqual Tests
 
         // Begin CompareGreaterThan Tests
 
-        if (!ValidateResult_Vector64<byte>(AdvSimd_CompareGreaterThan_Vector64_Byte_Zero(Vector64.Create((byte)1)), Byte.MaxValue))
+        if (
+            !ValidateResult_Vector64<byte>(
+                AdvSimd_CompareGreaterThan_Vector64_Byte_Zero(Vector64.Create((byte)1)),
+                Byte.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<float>(AdvSimd_CompareGreaterThan_Vector64_Single_Zero(Vector64.Create(1.0f)), Single.NaN))
+        if (
+            !ValidateResult_Vector64<float>(
+                AdvSimd_CompareGreaterThan_Vector64_Single_Zero(Vector64.Create(1.0f)),
+                Single.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<byte>(AdvSimd_CompareGreaterThan_Vector128_Byte_Zero(Vector128.Create((byte)1)), Byte.MaxValue))
+        if (
+            !ValidateResult_Vector128<byte>(
+                AdvSimd_CompareGreaterThan_Vector128_Byte_Zero(Vector128.Create((byte)1)),
+                Byte.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<float>(AdvSimd_CompareGreaterThan_Vector128_Single_Zero(Vector128.Create(1.0f)), Single.NaN))
+        if (
+            !ValidateResult_Vector128<float>(
+                AdvSimd_CompareGreaterThan_Vector128_Single_Zero(Vector128.Create(1.0f)),
+                Single.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<double>(AdvSimd_Arm64_CompareGreaterThan_Vector128_Double_Zero(Vector128.Create(1.0)), Double.NaN))
+        if (
+            !ValidateResult_Vector128<double>(
+                AdvSimd_Arm64_CompareGreaterThan_Vector128_Double_Zero(Vector128.Create(1.0)),
+                Double.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<long>(AdvSimd_Arm64_CompareGreaterThan_Vector128_Int64_Zero(Vector128.Create(1L)), -1))
+        if (
+            !ValidateResult_Vector128<long>(
+                AdvSimd_Arm64_CompareGreaterThan_Vector128_Int64_Zero(Vector128.Create(1L)),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<double>(AdvSimd_Arm64_CompareGreaterThanScalar_Vector64_Double_Zero(Vector64.Create(1.0)), Double.NaN))
+        if (
+            !ValidateResult_Vector64<double>(
+                AdvSimd_Arm64_CompareGreaterThanScalar_Vector64_Double_Zero(Vector64.Create(1.0)),
+                Double.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<long>(AdvSimd_Arm64_CompareGreaterThanScalar_Vector64_Int64_Zero(Vector64.Create(1L)), -1))
+        if (
+            !ValidateResult_Vector64<long>(
+                AdvSimd_Arm64_CompareGreaterThanScalar_Vector64_Int64_Zero(Vector64.Create(1L)),
+                -1
+            )
+        )
             result = -1;
 
-        if (ValidateResult_Vector64<byte>(AdvSimd_CompareGreaterThan_Vector64_Byte_Zero(Vector64<byte>.Zero), Byte.MaxValue))
+        if (
+            ValidateResult_Vector64<byte>(
+                AdvSimd_CompareGreaterThan_Vector64_Byte_Zero(Vector64<byte>.Zero),
+                Byte.MaxValue
+            )
+        )
             result = -1;
 
-        if (ValidateResult_Vector64<float>(AdvSimd_CompareGreaterThan_Vector64_Single_Zero(Vector64<float>.Zero), Single.NaN))
+        if (
+            ValidateResult_Vector64<float>(
+                AdvSimd_CompareGreaterThan_Vector64_Single_Zero(Vector64<float>.Zero),
+                Single.NaN
+            )
+        )
             result = -1;
 
-        if (ValidateResult_Vector128<byte>(AdvSimd_CompareGreaterThan_Vector128_Byte_Zero(Vector128<byte>.Zero), Byte.MaxValue))
+        if (
+            ValidateResult_Vector128<byte>(
+                AdvSimd_CompareGreaterThan_Vector128_Byte_Zero(Vector128<byte>.Zero),
+                Byte.MaxValue
+            )
+        )
             result = -1;
 
-        if (ValidateResult_Vector128<float>(AdvSimd_CompareGreaterThan_Vector128_Single_Zero(Vector128<float>.Zero), Single.NaN))
+        if (
+            ValidateResult_Vector128<float>(
+                AdvSimd_CompareGreaterThan_Vector128_Single_Zero(Vector128<float>.Zero),
+                Single.NaN
+            )
+        )
             result = -1;
 
-        if (ValidateResult_Vector128<double>(AdvSimd_Arm64_CompareGreaterThan_Vector128_Double_Zero(Vector128<double>.Zero), Double.NaN))
+        if (
+            ValidateResult_Vector128<double>(
+                AdvSimd_Arm64_CompareGreaterThan_Vector128_Double_Zero(Vector128<double>.Zero),
+                Double.NaN
+            )
+        )
             result = -1;
 
-        if (ValidateResult_Vector128<long>(AdvSimd_Arm64_CompareGreaterThan_Vector128_Int64_Zero(Vector128<long>.Zero), -1))
+        if (
+            ValidateResult_Vector128<long>(
+                AdvSimd_Arm64_CompareGreaterThan_Vector128_Int64_Zero(Vector128<long>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (ValidateResult_Vector64<double>(AdvSimd_Arm64_CompareGreaterThanScalar_Vector64_Double_Zero(Vector64<double>.Zero), Double.NaN))
+        if (
+            ValidateResult_Vector64<double>(
+                AdvSimd_Arm64_CompareGreaterThanScalar_Vector64_Double_Zero(Vector64<double>.Zero),
+                Double.NaN
+            )
+        )
             result = -1;
 
-        if (ValidateResult_Vector64<long>(AdvSimd_Arm64_CompareGreaterThanScalar_Vector64_Int64_Zero(Vector64<long>.Zero), -1))
+        if (
+            ValidateResult_Vector64<long>(
+                AdvSimd_Arm64_CompareGreaterThanScalar_Vector64_Int64_Zero(Vector64<long>.Zero),
+                -1
+            )
+        )
             result = -1;
 
         // End CompareGreaterThan Tests
 
         // Begin CompareGreaterThanOrEqual Tests
 
-        if (!ValidateResult_Vector64<byte>(AdvSimd_CompareGreaterThanOrEqual_Vector64_Byte_Zero(Vector64.Create((byte)1)), Byte.MaxValue))
+        if (
+            !ValidateResult_Vector64<byte>(
+                AdvSimd_CompareGreaterThanOrEqual_Vector64_Byte_Zero(Vector64.Create((byte)1)),
+                Byte.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<float>(AdvSimd_CompareGreaterThanOrEqual_Vector64_Single_Zero(Vector64.Create(1.0f)), Single.NaN))
+        if (
+            !ValidateResult_Vector64<float>(
+                AdvSimd_CompareGreaterThanOrEqual_Vector64_Single_Zero(Vector64.Create(1.0f)),
+                Single.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<byte>(AdvSimd_CompareGreaterThanOrEqual_Vector128_Byte_Zero(Vector128.Create((byte)1)), Byte.MaxValue))
+        if (
+            !ValidateResult_Vector128<byte>(
+                AdvSimd_CompareGreaterThanOrEqual_Vector128_Byte_Zero(Vector128.Create((byte)1)),
+                Byte.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<float>(AdvSimd_CompareGreaterThanOrEqual_Vector128_Single_Zero(Vector128.Create(1.0f)), Single.NaN))
+        if (
+            !ValidateResult_Vector128<float>(
+                AdvSimd_CompareGreaterThanOrEqual_Vector128_Single_Zero(Vector128.Create(1.0f)),
+                Single.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<double>(AdvSimd_Arm64_CompareGreaterThanOrEqual_Vector128_Double_Zero(Vector128.Create(1.0)), Double.NaN))
+        if (
+            !ValidateResult_Vector128<double>(
+                AdvSimd_Arm64_CompareGreaterThanOrEqual_Vector128_Double_Zero(
+                    Vector128.Create(1.0)
+                ),
+                Double.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<long>(AdvSimd_Arm64_CompareGreaterThanOrEqual_Vector128_Int64_Zero(Vector128.Create(1L)), -1))
+        if (
+            !ValidateResult_Vector128<long>(
+                AdvSimd_Arm64_CompareGreaterThanOrEqual_Vector128_Int64_Zero(Vector128.Create(1L)),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<double>(AdvSimd_Arm64_CompareGreaterThanOrEqualScalar_Vector64_Double_Zero(Vector64.Create(1.0)), Double.NaN))
+        if (
+            !ValidateResult_Vector64<double>(
+                AdvSimd_Arm64_CompareGreaterThanOrEqualScalar_Vector64_Double_Zero(
+                    Vector64.Create(1.0)
+                ),
+                Double.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<long>(AdvSimd_Arm64_CompareGreaterThanOrEqualScalar_Vector64_Int64_Zero(Vector64.Create(1L)), -1))
+        if (
+            !ValidateResult_Vector64<long>(
+                AdvSimd_Arm64_CompareGreaterThanOrEqualScalar_Vector64_Int64_Zero(
+                    Vector64.Create(1L)
+                ),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<byte>(AdvSimd_CompareGreaterThanOrEqual_Vector64_Byte_Zero(Vector64<byte>.Zero), Byte.MaxValue))
+        if (
+            !ValidateResult_Vector64<byte>(
+                AdvSimd_CompareGreaterThanOrEqual_Vector64_Byte_Zero(Vector64<byte>.Zero),
+                Byte.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<float>(AdvSimd_CompareGreaterThanOrEqual_Vector64_Single_Zero(Vector64<float>.Zero), Single.NaN))
+        if (
+            !ValidateResult_Vector64<float>(
+                AdvSimd_CompareGreaterThanOrEqual_Vector64_Single_Zero(Vector64<float>.Zero),
+                Single.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<byte>(AdvSimd_CompareGreaterThanOrEqual_Vector128_Byte_Zero(Vector128<byte>.Zero), Byte.MaxValue))
+        if (
+            !ValidateResult_Vector128<byte>(
+                AdvSimd_CompareGreaterThanOrEqual_Vector128_Byte_Zero(Vector128<byte>.Zero),
+                Byte.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<float>(AdvSimd_CompareGreaterThanOrEqual_Vector128_Single_Zero(Vector128<float>.Zero), Single.NaN))
+        if (
+            !ValidateResult_Vector128<float>(
+                AdvSimd_CompareGreaterThanOrEqual_Vector128_Single_Zero(Vector128<float>.Zero),
+                Single.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<double>(AdvSimd_Arm64_CompareGreaterThanOrEqual_Vector128_Double_Zero(Vector128<double>.Zero), Double.NaN))
+        if (
+            !ValidateResult_Vector128<double>(
+                AdvSimd_Arm64_CompareGreaterThanOrEqual_Vector128_Double_Zero(
+                    Vector128<double>.Zero
+                ),
+                Double.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<long>(AdvSimd_Arm64_CompareGreaterThanOrEqual_Vector128_Int64_Zero(Vector128<long>.Zero), -1))
+        if (
+            !ValidateResult_Vector128<long>(
+                AdvSimd_Arm64_CompareGreaterThanOrEqual_Vector128_Int64_Zero(Vector128<long>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<double>(AdvSimd_Arm64_CompareGreaterThanOrEqualScalar_Vector64_Double_Zero(Vector64<double>.Zero), Double.NaN))
+        if (
+            !ValidateResult_Vector64<double>(
+                AdvSimd_Arm64_CompareGreaterThanOrEqualScalar_Vector64_Double_Zero(
+                    Vector64<double>.Zero
+                ),
+                Double.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<long>(AdvSimd_Arm64_CompareGreaterThanOrEqualScalar_Vector64_Int64_Zero(Vector64<long>.Zero), -1))
+        if (
+            !ValidateResult_Vector64<long>(
+                AdvSimd_Arm64_CompareGreaterThanOrEqualScalar_Vector64_Int64_Zero(
+                    Vector64<long>.Zero
+                ),
+                -1
+            )
+        )
             result = -1;
 
         // End CompareGreaterThanOrEqual Tests
@@ -724,48 +1092,118 @@ class Program
 
         // Vector64
 
-        if (!ValidateResult_Vector64<byte>(AdvSimd_CompareEqual_Vector64_Byte_Zero_Swapped(Vector64<byte>.Zero), Byte.MaxValue))
+        if (
+            !ValidateResult_Vector64<byte>(
+                AdvSimd_CompareEqual_Vector64_Byte_Zero_Swapped(Vector64<byte>.Zero),
+                Byte.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<sbyte>(AdvSimd_CompareEqual_Vector64_SByte_Zero_Swapped(Vector64<sbyte>.Zero), -1))
+        if (
+            !ValidateResult_Vector64<sbyte>(
+                AdvSimd_CompareEqual_Vector64_SByte_Zero_Swapped(Vector64<sbyte>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<ushort>(AdvSimd_CompareEqual_Vector64_UInt16_Zero_Swapped(Vector64<ushort>.Zero), UInt16.MaxValue))
+        if (
+            !ValidateResult_Vector64<ushort>(
+                AdvSimd_CompareEqual_Vector64_UInt16_Zero_Swapped(Vector64<ushort>.Zero),
+                UInt16.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<short>(AdvSimd_CompareEqual_Vector64_Int16_Zero_Swapped(Vector64<short>.Zero), -1))
+        if (
+            !ValidateResult_Vector64<short>(
+                AdvSimd_CompareEqual_Vector64_Int16_Zero_Swapped(Vector64<short>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<uint>(AdvSimd_CompareEqual_Vector64_UInt32_Zero_Swapped(Vector64<uint>.Zero), UInt32.MaxValue))
+        if (
+            !ValidateResult_Vector64<uint>(
+                AdvSimd_CompareEqual_Vector64_UInt32_Zero_Swapped(Vector64<uint>.Zero),
+                UInt32.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<int>(AdvSimd_CompareEqual_Vector64_Int32_Zero_Swapped(Vector64<int>.Zero), -1))
+        if (
+            !ValidateResult_Vector64<int>(
+                AdvSimd_CompareEqual_Vector64_Int32_Zero_Swapped(Vector64<int>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<float>(AdvSimd_CompareEqual_Vector64_Single_Zero_Swapped(Vector64<float>.Zero), Single.NaN))
+        if (
+            !ValidateResult_Vector64<float>(
+                AdvSimd_CompareEqual_Vector64_Single_Zero_Swapped(Vector64<float>.Zero),
+                Single.NaN
+            )
+        )
             result = -1;
 
         // Vector128
 
-        if (!ValidateResult_Vector128<byte>(AdvSimd_CompareEqual_Vector128_Byte_Zero_Swapped(Vector128<byte>.Zero), Byte.MaxValue))
+        if (
+            !ValidateResult_Vector128<byte>(
+                AdvSimd_CompareEqual_Vector128_Byte_Zero_Swapped(Vector128<byte>.Zero),
+                Byte.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<sbyte>(AdvSimd_CompareEqual_Vector128_SByte_Zero_Swapped(Vector128<sbyte>.Zero), -1))
+        if (
+            !ValidateResult_Vector128<sbyte>(
+                AdvSimd_CompareEqual_Vector128_SByte_Zero_Swapped(Vector128<sbyte>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<ushort>(AdvSimd_CompareEqual_Vector128_UInt16_Zero_Swapped(Vector128<ushort>.Zero), UInt16.MaxValue))
+        if (
+            !ValidateResult_Vector128<ushort>(
+                AdvSimd_CompareEqual_Vector128_UInt16_Zero_Swapped(Vector128<ushort>.Zero),
+                UInt16.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<short>(AdvSimd_CompareEqual_Vector128_Int16_Zero_Swapped(Vector128<short>.Zero), -1))
+        if (
+            !ValidateResult_Vector128<short>(
+                AdvSimd_CompareEqual_Vector128_Int16_Zero_Swapped(Vector128<short>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<uint>(AdvSimd_CompareEqual_Vector128_UInt32_Zero_Swapped(Vector128<uint>.Zero), UInt32.MaxValue))
+        if (
+            !ValidateResult_Vector128<uint>(
+                AdvSimd_CompareEqual_Vector128_UInt32_Zero_Swapped(Vector128<uint>.Zero),
+                UInt32.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<int>(AdvSimd_CompareEqual_Vector128_Int32_Zero_Swapped(Vector128<int>.Zero), -1))
+        if (
+            !ValidateResult_Vector128<int>(
+                AdvSimd_CompareEqual_Vector128_Int32_Zero_Swapped(Vector128<int>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<float>(AdvSimd_CompareEqual_Vector128_Single_Zero_Swapped(Vector128<float>.Zero), Single.NaN))
+        if (
+            !ValidateResult_Vector128<float>(
+                AdvSimd_CompareEqual_Vector128_Single_Zero_Swapped(Vector128<float>.Zero),
+                Single.NaN
+            )
+        )
             result = -1;
 
         // End CompareEqual Tests
@@ -781,30 +1219,70 @@ class Program
 
         // Vector128
 
-        if (!ValidateResult_Vector128<double>(AdvSimd_Arm64_CompareEqual_Vector128_Double_Zero(Vector128<double>.Zero), Double.NaN))
+        if (
+            !ValidateResult_Vector128<double>(
+                AdvSimd_Arm64_CompareEqual_Vector128_Double_Zero(Vector128<double>.Zero),
+                Double.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<ulong>(AdvSimd_Arm64_CompareEqual_Vector128_UInt64_Zero(Vector128<ulong>.Zero), UInt64.MaxValue))
+        if (
+            !ValidateResult_Vector128<ulong>(
+                AdvSimd_Arm64_CompareEqual_Vector128_UInt64_Zero(Vector128<ulong>.Zero),
+                UInt64.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<long>(AdvSimd_Arm64_CompareEqual_Vector128_Int64_Zero(Vector128<long>.Zero), -1))
+        if (
+            !ValidateResult_Vector128<long>(
+                AdvSimd_Arm64_CompareEqual_Vector128_Int64_Zero(Vector128<long>.Zero),
+                -1
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<long>(AdvSimd_Arm64_CompareEqual_Vector128_Long_AsVariableLoop(Vector128<long>.Zero), -1))
+        if (
+            !ValidateResult_Vector128<long>(
+                AdvSimd_Arm64_CompareEqual_Vector128_Long_AsVariableLoop(Vector128<long>.Zero),
+                -1
+            )
+        )
             result = -1;
 
         // Vector64
 
-        if (!ValidateResult_Vector64<float>(AdvSimd_Arm64_CompareEqualScalar_Vector64_Single_Zero(Vector64<float>.Zero), Vector64.CreateScalar(Single.NaN)))
+        if (
+            !ValidateResult_Vector64<float>(
+                AdvSimd_Arm64_CompareEqualScalar_Vector64_Single_Zero(Vector64<float>.Zero),
+                Vector64.CreateScalar(Single.NaN)
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<double>(AdvSimd_Arm64_CompareEqualScalar_Vector64_Double_Zero(Vector64<double>.Zero), Vector64.CreateScalar(Double.NaN)))
+        if (
+            !ValidateResult_Vector64<double>(
+                AdvSimd_Arm64_CompareEqualScalar_Vector64_Double_Zero(Vector64<double>.Zero),
+                Vector64.CreateScalar(Double.NaN)
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<ulong>(AdvSimd_Arm64_CompareEqualScalar_Vector64_UInt64_Zero(Vector64<ulong>.Zero), Vector64.CreateScalar(UInt64.MaxValue)))
+        if (
+            !ValidateResult_Vector64<ulong>(
+                AdvSimd_Arm64_CompareEqualScalar_Vector64_UInt64_Zero(Vector64<ulong>.Zero),
+                Vector64.CreateScalar(UInt64.MaxValue)
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<long>(AdvSimd_Arm64_CompareEqualScalar_Vector64_Int64_Zero(Vector64<long>.Zero), Vector64.CreateScalar(-1L)))
+        if (
+            !ValidateResult_Vector64<long>(
+                AdvSimd_Arm64_CompareEqualScalar_Vector64_Int64_Zero(Vector64<long>.Zero),
+                Vector64.CreateScalar(-1L)
+            )
+        )
             result = -1;
 
         // End CompareEqual Tests
@@ -820,27 +1298,64 @@ class Program
 
         // Vector128
 
-        if (!ValidateResult_Vector128<double>(AdvSimd_Arm64_CompareEqual_Vector128_Double_Zero_Swapped(Vector128<double>.Zero), Double.NaN))
+        if (
+            !ValidateResult_Vector128<double>(
+                AdvSimd_Arm64_CompareEqual_Vector128_Double_Zero_Swapped(Vector128<double>.Zero),
+                Double.NaN
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<ulong>(AdvSimd_Arm64_CompareEqual_Vector128_UInt64_Zero_Swapped(Vector128<ulong>.Zero), UInt64.MaxValue))
+        if (
+            !ValidateResult_Vector128<ulong>(
+                AdvSimd_Arm64_CompareEqual_Vector128_UInt64_Zero_Swapped(Vector128<ulong>.Zero),
+                UInt64.MaxValue
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector128<long>(AdvSimd_Arm64_CompareEqual_Vector128_Int64_Zero_Swapped(Vector128<long>.Zero), -1))
+        if (
+            !ValidateResult_Vector128<long>(
+                AdvSimd_Arm64_CompareEqual_Vector128_Int64_Zero_Swapped(Vector128<long>.Zero),
+                -1
+            )
+        )
             result = -1;
 
         // Vector64
 
-        if (!ValidateResult_Vector64<float>(AdvSimd_Arm64_CompareEqualScalar_Vector64_Single_Zero_Swapped(Vector64<float>.Zero), Vector64.CreateScalar(Single.NaN)))
+        if (
+            !ValidateResult_Vector64<float>(
+                AdvSimd_Arm64_CompareEqualScalar_Vector64_Single_Zero_Swapped(Vector64<float>.Zero),
+                Vector64.CreateScalar(Single.NaN)
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<double>(AdvSimd_Arm64_CompareEqualScalar_Vector64_Double_Zero_Swapped(Vector64<double>.Zero), Vector64.CreateScalar(Double.NaN)))
+        if (
+            !ValidateResult_Vector64<double>(
+                AdvSimd_Arm64_CompareEqualScalar_Vector64_Double_Zero_Swapped(
+                    Vector64<double>.Zero
+                ),
+                Vector64.CreateScalar(Double.NaN)
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<ulong>(AdvSimd_Arm64_CompareEqualScalar_Vector64_UInt64_Zero_Swapped(Vector64<ulong>.Zero), Vector64.CreateScalar(UInt64.MaxValue)))
+        if (
+            !ValidateResult_Vector64<ulong>(
+                AdvSimd_Arm64_CompareEqualScalar_Vector64_UInt64_Zero_Swapped(Vector64<ulong>.Zero),
+                Vector64.CreateScalar(UInt64.MaxValue)
+            )
+        )
             result = -1;
 
-        if (!ValidateResult_Vector64<long>(AdvSimd_Arm64_CompareEqualScalar_Vector64_Int64_Zero_Swapped(Vector64<long>.Zero), Vector64.CreateScalar(-1L)))
+        if (
+            !ValidateResult_Vector64<long>(
+                AdvSimd_Arm64_CompareEqualScalar_Vector64_Int64_Zero_Swapped(Vector64<long>.Zero),
+                Vector64.CreateScalar(-1L)
+            )
+        )
             result = -1;
 
         // End CompareEqual Tests

@@ -17,28 +17,33 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     [ExportCSharpVisualBasicStatelessLspService(typeof(ValidateBreakableRangeHandler)), Shared]
     [Method(LSP.VSInternalMethods.TextDocumentValidateBreakableRangeName)]
-    internal sealed class ValidateBreakableRangeHandler : IRequestHandler<LSP.VSInternalValidateBreakableRangeParams, LSP.Range?>
+    internal sealed class ValidateBreakableRangeHandler
+        : IRequestHandler<LSP.VSInternalValidateBreakableRangeParams, LSP.Range?>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ValidateBreakableRangeHandler()
-        {
-        }
+        public ValidateBreakableRangeHandler() { }
 
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.VSInternalValidateBreakableRangeParams request)
-            => request.TextDocument;
+        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
+            LSP.VSInternalValidateBreakableRangeParams request
+        ) => request.TextDocument;
 
-        public async Task<LSP.Range?> HandleRequestAsync(LSP.VSInternalValidateBreakableRangeParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.Range?> HandleRequestAsync(
+            LSP.VSInternalValidateBreakableRangeParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             Contract.ThrowIfNull(document);
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var span = ProtocolConversions.RangeToTextSpan(request.Range, text);
-            var breakpointService = document.Project.LanguageServices.GetRequiredService<IBreakpointResolutionService>();
+            var breakpointService =
+                document.Project.LanguageServices.GetRequiredService<IBreakpointResolutionService>();
 
             if (span.Length > 0)
             {
@@ -61,9 +66,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 // adjusted.
                 if (document.SupportsSyntaxTree)
                 {
-                    var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                    var tree = await document
+                        .GetSyntaxTreeAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     Contract.ThrowIfNull(tree);
-                    if (tree.GetDiagnostics(cancellationToken).Any(d => d.Severity == DiagnosticSeverity.Error))
+                    if (
+                        tree.GetDiagnostics(cancellationToken)
+                            .Any(d => d.Severity == DiagnosticSeverity.Error)
+                    )
                     {
                         // Keep the span as is.
                         return request.Range;
@@ -71,14 +81,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 }
             }
 
-            var result = await breakpointService.ResolveBreakpointAsync(document, span, cancellationToken).ConfigureAwait(false);
+            var result = await breakpointService
+                .ResolveBreakpointAsync(document, span, cancellationToken)
+                .ConfigureAwait(false);
             if (result == null)
             {
                 return null;
             }
 
             // zero-width range means line breakpoint:
-            var breakpointSpan = result.IsLineBreakpoint ? new TextSpan(span.Start, length: 0) : result.TextSpan;
+            var breakpointSpan = result.IsLineBreakpoint
+                ? new TextSpan(span.Start, length: 0)
+                : result.TextSpan;
 
             return ProtocolConversions.TextSpanToRange(breakpointSpan, text);
         }

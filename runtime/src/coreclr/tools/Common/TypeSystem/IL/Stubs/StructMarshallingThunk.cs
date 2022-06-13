@@ -34,10 +34,15 @@ namespace Internal.IL.Stubs
         internal readonly MetadataType ManagedType;
         internal readonly NativeStructType NativeType;
         internal readonly StructMarshallingThunkType ThunkType;
-        private  InteropStateManager _interopStateManager;
+        private InteropStateManager _interopStateManager;
         private TypeDesc _owningType;
 
-        public StructMarshallingThunk(TypeDesc owningType, MetadataType managedType, StructMarshallingThunkType thunkType, InteropStateManager interopStateManager)
+        public StructMarshallingThunk(
+            TypeDesc owningType,
+            MetadataType managedType,
+            StructMarshallingThunkType thunkType,
+            InteropStateManager interopStateManager
+        )
         {
             _owningType = owningType;
             ManagedType = managedType;
@@ -48,18 +53,12 @@ namespace Internal.IL.Stubs
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return ManagedType.Context;
-            }
+            get { return ManagedType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         private MethodSignature _signature;
@@ -73,27 +72,38 @@ namespace Internal.IL.Stubs
                     switch (ThunkType)
                     {
                         case StructMarshallingThunkType.ManagedToNative:
-                            parameters = new TypeDesc[] {
-                                ManagedType.IsValueType ? (TypeDesc)ManagedType.MakeByRefType() : ManagedType,
+                            parameters = new TypeDesc[]
+                            {
+                                ManagedType.IsValueType
+                                    ? (TypeDesc)ManagedType.MakeByRefType()
+                                    : ManagedType,
                                 NativeType.MakeByRefType()
                             };
                             break;
                         case StructMarshallingThunkType.NativeToManaged:
-                            parameters = new TypeDesc[] {
+                            parameters = new TypeDesc[]
+                            {
                                 NativeType.MakeByRefType(),
-                                ManagedType.IsValueType ? (TypeDesc)ManagedType.MakeByRefType() : ManagedType
+                                ManagedType.IsValueType
+                                    ? (TypeDesc)ManagedType.MakeByRefType()
+                                    : ManagedType
                             };
                             break;
                         case StructMarshallingThunkType.Cleanup:
-                            parameters = new TypeDesc[] {
-                                NativeType.MakeByRefType()
-                            };
+                            parameters = new TypeDesc[] { NativeType.MakeByRefType() };
                             break;
                         default:
-                            System.Diagnostics.Debug.Fail("Unexpected Struct marshalling thunk type");
+                            System.Diagnostics.Debug.Fail(
+                                "Unexpected Struct marshalling thunk type"
+                            );
                             break;
                     }
-                    _signature = new MethodSignature(MethodSignatureFlags.Static, 0, Context.GetWellKnownType(WellKnownType.Void), parameters);
+                    _signature = new MethodSignature(
+                        MethodSignatureFlags.Static,
+                        0,
+                        Context.GetWellKnownType(WellKnownType.Void),
+                        parameters
+                    );
                 }
                 return _signature;
             }
@@ -120,18 +130,12 @@ namespace Internal.IL.Stubs
 
         public override string Name
         {
-            get
-            {
-                return NamePrefix + "__" + ((MetadataType)ManagedType).Name;
-            }
+            get { return NamePrefix + "__" + ((MetadataType)ManagedType).Name; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return NamePrefix + "__" + ManagedType.DiagnosticName;
-            }
+            get { return NamePrefix + "__" + ManagedType.DiagnosticName; }
         }
 
         private Marshaller[] InitializeMarshallers()
@@ -149,7 +153,10 @@ namespace Internal.IL.Stubs
             Marshaller[] marshallers = new Marshaller[numInstanceFields];
 
             PInvokeFlags flags = new PInvokeFlags();
-            if (ManagedType.PInvokeStringFormat == PInvokeStringFormat.UnicodeClass || ManagedType.PInvokeStringFormat == PInvokeStringFormat.AutoClass)
+            if (
+                ManagedType.PInvokeStringFormat == PInvokeStringFormat.UnicodeClass
+                || ManagedType.PInvokeStringFormat == PInvokeStringFormat.AutoClass
+            )
             {
                 flags.CharSet = CharSet.Unicode;
             }
@@ -167,19 +174,23 @@ namespace Internal.IL.Stubs
                     continue;
                 }
 
-                marshallers[index] = Marshaller.CreateMarshaller(field.FieldType,
-                                                                    null,   /* parameterIndex */
-                                                                    null,   /* customModifierData */
-                                                                    MarshallerType.Field,
-                                                                    field.GetMarshalAsDescriptor(),
-                                                                    (ThunkType == StructMarshallingThunkType.NativeToManaged) ? MarshalDirection.Reverse : MarshalDirection.Forward,
-                                                                    marshallers,
-                                                                    _interopStateManager,
-                                                                    index,
-                                                                    flags,
-                                                                    isIn: true,     /* Struct fields are considered as IN within the helper*/
-                                                                    isOut: false,
-                                                                    isReturn: false);
+                marshallers[index] = Marshaller.CreateMarshaller(
+                    field.FieldType,
+                    null, /* parameterIndex */
+                    null, /* customModifierData */
+                    MarshallerType.Field,
+                    field.GetMarshalAsDescriptor(),
+                    (ThunkType == StructMarshallingThunkType.NativeToManaged)
+                        ? MarshalDirection.Reverse
+                        : MarshalDirection.Forward,
+                    marshallers,
+                    _interopStateManager,
+                    index,
+                    flags,
+                    isIn: true, /* Struct fields are considered as IN within the helper*/
+                    isOut: false,
+                    isReturn: false
+                );
                 index++;
             }
 
@@ -209,11 +220,11 @@ namespace Internal.IL.Stubs
                 Debug.Assert(nativeField != null);
                 bool isInlineArray = nativeField.FieldType is InlineArrayType;
                 //
-                // Field marshallers expects the value of the fields to be 
+                // Field marshallers expects the value of the fields to be
                 // loaded on the stack. We load the value on the stack
                 // before calling the marshallers.
                 // Only exception is ByValArray marshallers. Since they can
-                // only be used for field marshalling, they load/store values 
+                // only be used for field marshalling, they load/store values
                 // directly from arguments.
                 //
 
@@ -223,7 +234,11 @@ namespace Internal.IL.Stubs
 
                     Debug.Assert(byValMarshaller != null);
 
-                    byValMarshaller.EmitMarshallingIL(pInvokeILCodeStreams, managedField, nativeField);
+                    byValMarshaller.EmitMarshallingIL(
+                        pInvokeILCodeStreams,
+                        managedField,
+                        nativeField
+                    );
                 }
                 else
                 {
@@ -304,8 +319,10 @@ namespace Internal.IL.Stubs
             }
             catch (NotSupportedException)
             {
-                string message = "Struct '" + ((MetadataType)ManagedType).Name +
-                    "' requires marshalling that is not yet supported by this compiler.";
+                string message =
+                    "Struct '"
+                    + ((MetadataType)ManagedType).Name
+                    + "' requires marshalling that is not yet supported by this compiler.";
                 return MarshalHelpers.EmitExceptionBody(message, this);
             }
             catch (InvalidProgramException ex)
@@ -318,7 +335,11 @@ namespace Internal.IL.Stubs
         /// <summary>
         /// Loads the value of field of a struct at argument index argIndex to stack
         /// </summary>
-        private void LoadFieldValueFromArg(int argIndex, FieldDesc field, PInvokeILCodeStreams pInvokeILCodeStreams)
+        private void LoadFieldValueFromArg(
+            int argIndex,
+            FieldDesc field,
+            PInvokeILCodeStreams pInvokeILCodeStreams
+        )
         {
             ILCodeStream stream = pInvokeILCodeStreams.MarshallingCodeStream;
             ILEmitter emitter = pInvokeILCodeStreams.Emitter;
@@ -326,7 +347,11 @@ namespace Internal.IL.Stubs
             stream.Emit(ILOpcode.ldfld, emitter.NewToken(field));
         }
 
-        private void StoreFieldValueFromArg(int argIndex, FieldDesc field, PInvokeILCodeStreams pInvokeILCodeStreams)
+        private void StoreFieldValueFromArg(
+            int argIndex,
+            FieldDesc field,
+            PInvokeILCodeStreams pInvokeILCodeStreams
+        )
         {
             ILCodeStream stream = pInvokeILCodeStreams.MarshallingCodeStream;
             ILEmitter emitter = pInvokeILCodeStreams.Emitter;

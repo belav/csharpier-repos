@@ -50,7 +50,10 @@ public class HandleRequestResult : AuthenticateResult
     /// <param name="failure">The failure exception.</param>
     /// <param name="properties">Additional state values for the authentication session.</param>
     /// <returns>The result.</returns>
-    public static new HandleRequestResult Fail(Exception failure, AuthenticationProperties? properties)
+    public static new HandleRequestResult Fail(
+        Exception failure,
+        AuthenticationProperties? properties
+    )
     {
         return new HandleRequestResult() { Failure = failure, Properties = properties };
     }
@@ -60,8 +63,8 @@ public class HandleRequestResult : AuthenticateResult
     /// </summary>
     /// <param name="failureMessage">The failure message.</param>
     /// <returns>The result.</returns>
-    public static new HandleRequestResult Fail(string failureMessage)
-        => Fail(new Exception(failureMessage));
+    public static new HandleRequestResult Fail(string failureMessage) =>
+        Fail(new Exception(failureMessage));
 
     /// <summary>
     /// Indicates that there was a failure during authentication.
@@ -69,8 +72,10 @@ public class HandleRequestResult : AuthenticateResult
     /// <param name="failureMessage">The failure message.</param>
     /// <param name="properties">Additional state values for the authentication session.</param>
     /// <returns>The result.</returns>
-    public static new HandleRequestResult Fail(string failureMessage, AuthenticationProperties? properties)
-        => Fail(new Exception(failureMessage), properties);
+    public static new HandleRequestResult Fail(
+        string failureMessage,
+        AuthenticationProperties? properties
+    ) => Fail(new Exception(failureMessage), properties);
 
     /// <summary>
     /// Discontinue all processing for this request and return to the client.

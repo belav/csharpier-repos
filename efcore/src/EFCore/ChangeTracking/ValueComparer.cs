@@ -25,26 +25,42 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 /// </remarks>
 public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<object>
 {
-    private static readonly MethodInfo DoubleEqualsMethodInfo
-        = typeof(double).GetRuntimeMethod(nameof(double.Equals), new[] { typeof(double) })!;
+    private static readonly MethodInfo DoubleEqualsMethodInfo = typeof(double).GetRuntimeMethod(
+        nameof(double.Equals),
+        new[] { typeof(double) }
+    )!;
 
-    private static readonly MethodInfo FloatEqualsMethodInfo
-        = typeof(float).GetRuntimeMethod(nameof(float.Equals), new[] { typeof(float) })!;
+    private static readonly MethodInfo FloatEqualsMethodInfo = typeof(float).GetRuntimeMethod(
+        nameof(float.Equals),
+        new[] { typeof(float) }
+    )!;
 
-    internal static readonly MethodInfo ArrayCopyMethod
-        = typeof(Array).GetRuntimeMethod(nameof(Array.Copy), new[] { typeof(Array), typeof(Array), typeof(int) })!;
+    internal static readonly MethodInfo ArrayCopyMethod = typeof(Array).GetRuntimeMethod(
+        nameof(Array.Copy),
+        new[] { typeof(Array), typeof(Array), typeof(int) }
+    )!;
 
-    internal static readonly MethodInfo EqualityComparerHashCodeMethod
-        = typeof(IEqualityComparer).GetRuntimeMethod(nameof(IEqualityComparer.GetHashCode), new[] { typeof(object) })!;
+    internal static readonly MethodInfo EqualityComparerHashCodeMethod =
+        typeof(IEqualityComparer).GetRuntimeMethod(
+            nameof(IEqualityComparer.GetHashCode),
+            new[] { typeof(object) }
+        )!;
 
-    internal static readonly MethodInfo EqualityComparerEqualsMethod
-        = typeof(IEqualityComparer).GetRuntimeMethod(nameof(IEqualityComparer.Equals), new[] { typeof(object), typeof(object) })!;
+    internal static readonly MethodInfo EqualityComparerEqualsMethod =
+        typeof(IEqualityComparer).GetRuntimeMethod(
+            nameof(IEqualityComparer.Equals),
+            new[] { typeof(object), typeof(object) }
+        )!;
 
-    internal static readonly MethodInfo ObjectEqualsMethod
-        = typeof(object).GetRuntimeMethod(nameof(object.Equals), new[] { typeof(object), typeof(object) })!;
+    internal static readonly MethodInfo ObjectEqualsMethod = typeof(object).GetRuntimeMethod(
+        nameof(object.Equals),
+        new[] { typeof(object), typeof(object) }
+    )!;
 
-    internal static readonly MethodInfo ObjectGetHashCodeMethod
-        = typeof(object).GetRuntimeMethod(nameof(object.GetHashCode), Type.EmptyTypes)!;
+    internal static readonly MethodInfo ObjectGetHashCodeMethod = typeof(object).GetRuntimeMethod(
+        nameof(object.GetHashCode),
+        Type.EmptyTypes
+    )!;
 
     /// <summary>
     ///     Creates a new <see cref="ValueComparer" /> with the given comparison and
@@ -56,7 +72,8 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     protected ValueComparer(
         LambdaExpression equalsExpression,
         LambdaExpression hashCodeExpression,
-        LambdaExpression snapshotExpression)
+        LambdaExpression snapshotExpression
+    )
     {
         Check.NotNull(equalsExpression, nameof(equalsExpression));
         Check.NotNull(hashCodeExpression, nameof(hashCodeExpression));
@@ -131,7 +148,8 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     /// <returns>The body of the lambda with left and right parameters replaced.</returns>
     public virtual Expression ExtractEqualsBody(
         Expression leftExpression,
-        Expression rightExpression)
+        Expression rightExpression
+    )
     {
         Check.NotNull(leftExpression, nameof(leftExpression));
         Check.NotNull(rightExpression, nameof(rightExpression));
@@ -140,8 +158,9 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
         var original2 = EqualsExpression.Parameters[1];
 
         return new ReplacingExpressionVisitor(
-                new Expression[] { original1, original2 }, new[] { leftExpression, rightExpression })
-            .Visit(EqualsExpression.Body);
+            new Expression[] { original1, original2 },
+            new[] { leftExpression, rightExpression }
+        ).Visit(EqualsExpression.Body);
     }
 
     /// <summary>
@@ -157,7 +176,8 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
         return ReplacingExpressionVisitor.Replace(
             HashCodeExpression.Parameters[0],
             expression,
-            HashCodeExpression.Body);
+            HashCodeExpression.Body
+        );
     }
 
     /// <summary>
@@ -173,7 +193,8 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
         return ReplacingExpressionVisitor.Replace(
             SnapshotExpression.Parameters[0],
             expression,
-            SnapshotExpression.Body);
+            SnapshotExpression.Body
+        );
     }
 
     /// <summary>
@@ -205,7 +226,8 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
             return new DefaultDateTimeOffsetValueComparer(favorStructuralComparisons);
         }
 
-        var comparerType = nonNullableType.IsInteger()
+        var comparerType =
+            nonNullableType.IsInteger()
             || nonNullableType == typeof(decimal)
             || nonNullableType == typeof(bool)
             || nonNullableType == typeof(string)
@@ -215,74 +237,78 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
                 ? typeof(DefaultValueComparer<>)
                 : typeof(ValueComparer<>);
 
-        return (ValueComparer)Activator.CreateInstance(
-            comparerType.MakeGenericType(type),
-            new object[] { favorStructuralComparisons })!;
+        return (ValueComparer)
+            Activator.CreateInstance(
+                comparerType.MakeGenericType(type),
+                new object[] { favorStructuralComparisons }
+            )!;
     }
 
     internal class DefaultValueComparer<T> : ValueComparer<T>
     {
         public DefaultValueComparer(bool favorStructuralComparisons)
-            : base(favorStructuralComparisons)
-        {
-        }
+            : base(favorStructuralComparisons) { }
 
-        public DefaultValueComparer(Expression<Func<T?, T?, bool>> equalsExpression, bool favorStructuralComparisons)
+        public DefaultValueComparer(
+            Expression<Func<T?, T?, bool>> equalsExpression,
+            bool favorStructuralComparisons
+        )
             : base(
                 equalsExpression,
                 CreateDefaultHashCodeExpression(favorStructuralComparisons),
-                CreateDefaultSnapshotExpression(favorStructuralComparisons))
-        {
-        }
+                CreateDefaultSnapshotExpression(favorStructuralComparisons)
+            ) { }
 
-        public override Expression ExtractEqualsBody(Expression leftExpression, Expression rightExpression)
-            => Expression.Equal(leftExpression, rightExpression);
+        public override Expression ExtractEqualsBody(
+            Expression leftExpression,
+            Expression rightExpression
+        ) => Expression.Equal(leftExpression, rightExpression);
 
-        public override Expression ExtractSnapshotBody(Expression expression)
-            => expression;
+        public override Expression ExtractSnapshotBody(Expression expression) => expression;
 
-        public override object? Snapshot(object? instance)
-            => instance;
+        public override object? Snapshot(object? instance) => instance;
 
-        public override T Snapshot(T instance)
-            => instance;
+        public override T Snapshot(T instance) => instance;
     }
 
     internal sealed class DefaultDoubleValueComparer : DefaultValueComparer<double>
     {
         public DefaultDoubleValueComparer(bool favorStructuralComparisons)
-            : base((v1, v2) => v1.Equals(v2), favorStructuralComparisons)
-        {
-        }
+            : base((v1, v2) => v1.Equals(v2), favorStructuralComparisons) { }
 
-        public override Expression ExtractEqualsBody(Expression leftExpression, Expression rightExpression)
-            => Expression.Call(leftExpression, DoubleEqualsMethodInfo, rightExpression);
+        public override Expression ExtractEqualsBody(
+            Expression leftExpression,
+            Expression rightExpression
+        ) => Expression.Call(leftExpression, DoubleEqualsMethodInfo, rightExpression);
     }
 
     internal sealed class DefaultFloatValueComparer : DefaultValueComparer<float>
     {
         public DefaultFloatValueComparer(bool favorStructuralComparisons)
-            : base((v1, v2) => v1.Equals(v2), favorStructuralComparisons)
-        {
-        }
+            : base((v1, v2) => v1.Equals(v2), favorStructuralComparisons) { }
 
-        public override Expression ExtractEqualsBody(Expression leftExpression, Expression rightExpression)
-            => Expression.Call(leftExpression, FloatEqualsMethodInfo, rightExpression);
+        public override Expression ExtractEqualsBody(
+            Expression leftExpression,
+            Expression rightExpression
+        ) => Expression.Call(leftExpression, FloatEqualsMethodInfo, rightExpression);
     }
 
     internal sealed class DefaultDateTimeOffsetValueComparer : DefaultValueComparer<DateTimeOffset>
     {
-        private static readonly MethodInfo EqualsExactMethodInfo
-            = typeof(DateTimeOffset).GetRuntimeMethod(nameof(DateTimeOffset.EqualsExact), new[] { typeof(DateTimeOffset) })!;
+        private static readonly MethodInfo EqualsExactMethodInfo =
+            typeof(DateTimeOffset).GetRuntimeMethod(
+                nameof(DateTimeOffset.EqualsExact),
+                new[] { typeof(DateTimeOffset) }
+            )!;
 
         // In .NET, two DateTimeOffset instances are considered equal if they represent the same point in time but with different
         // time zone offsets. This comparer uses EqualsExact, which considers such DateTimeOffset as non-equal.
         public DefaultDateTimeOffsetValueComparer(bool favorStructuralComparisons)
-            : base((v1, v2) => v1.EqualsExact(v2), favorStructuralComparisons)
-        {
-        }
+            : base((v1, v2) => v1.EqualsExact(v2), favorStructuralComparisons) { }
 
-        public override Expression ExtractEqualsBody(Expression leftExpression, Expression rightExpression)
-            => Expression.Call(leftExpression, EqualsExactMethodInfo, rightExpression);
+        public override Expression ExtractEqualsBody(
+            Expression leftExpression,
+            Expression rightExpression
+        ) => Expression.Call(leftExpression, EqualsExactMethodInfo, rightExpression);
     }
 }

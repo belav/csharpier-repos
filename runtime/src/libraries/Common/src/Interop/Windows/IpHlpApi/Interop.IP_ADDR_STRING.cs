@@ -12,8 +12,10 @@ internal static partial class Interop
         public struct IP_ADDR_STRING
         {
             public IntPtr Next; // struct _IpAddressList*
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
             public string IpAddress;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
             public string IpMask;
             public uint Context;

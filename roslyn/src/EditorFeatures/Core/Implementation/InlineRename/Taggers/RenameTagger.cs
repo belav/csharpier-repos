@@ -12,11 +12,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
     internal sealed partial class RenameTagger : AbstractRenameTagger<ITextMarkerTag>
     {
         public RenameTagger(ITextBuffer buffer, InlineRenameService renameService)
-            : base(buffer, renameService)
-        {
-        }
+            : base(buffer, renameService) { }
 
-        protected override bool TryCreateTagSpan(SnapshotSpan span, RenameSpanKind type, out TagSpan<ITextMarkerTag> tagSpan)
+        protected override bool TryCreateTagSpan(
+            SnapshotSpan span,
+            RenameSpanKind type,
+            out TagSpan<ITextMarkerTag> tagSpan
+        )
         {
             ITextMarkerTag tagKind;
             switch (type)

@@ -9,14 +9,12 @@ public abstract class TPTGearsOfWarQueryRelationalFixture : GearsOfWarQueryFixtu
 {
     protected override string StoreName { get; } = "TPTGearsOfWarQueryTest";
 
-    public new RelationalTestStore TestStore
-        => (RelationalTestStore)base.TestStore;
+    public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
 
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-    protected override bool ShouldLogCategory(string logCategory)
-        => logCategory == DbLoggerCategory.Query.Name;
+    protected override bool ShouldLogCategory(string logCategory) =>
+        logCategory == DbLoggerCategory.Query.Name;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {

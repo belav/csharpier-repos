@@ -15,21 +15,20 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAnonymousTypeMemberName
 {
-    public class AddAnonymousTypeMemberNameTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class AddAnonymousTypeMemberNameTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddAnonymousTypeMemberNameTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public AddAnonymousTypeMemberNameTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpAddAnonymousTypeMemberNameCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpAddAnonymousTypeMemberNameCodeFixProvider());
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddAnonymousTypeMemberName)]
         public async Task Test1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -37,21 +36,22 @@ class C
         var v = new { [||]this.GetType() };
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var v = new { {|Rename:Type|} = this.GetType() };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddAnonymousTypeMemberName)]
         public async Task TestExistingName()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -59,21 +59,22 @@ class C
         var v = new { Type = 1, [||]this.GetType() };
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var v = new { Type = 1, {|Rename:Type1|} = this.GetType() };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddAnonymousTypeMemberName)]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -81,21 +82,22 @@ class C
         var v = new { {|FixAllInDocument:|}new { this.GetType(), this.ToString() } };
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var v = new { Value = new { Type = this.GetType(), V = this.ToString() } };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddAnonymousTypeMemberName)]
         public async Task TestFixAll2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -103,21 +105,22 @@ class C
         var v = new { new { {|FixAllInDocument:|}this.GetType(), this.ToString() } };
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var v = new { Value = new { Type = this.GetType(), V = this.ToString() } };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddAnonymousTypeMemberName)]
         public async Task TestFixAll3()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -125,14 +128,15 @@ class C
         var v = new { {|FixAllInDocument:|}new { this.GetType(), this.GetType() } };
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var v = new { Value = new { Type = this.GetType(), Type1 = this.GetType() } };
     }
-}");
+}"
+            );
         }
     }
 }

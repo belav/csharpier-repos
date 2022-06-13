@@ -10,9 +10,7 @@ namespace System.Formats.Tar
     {
         // Constructor used when reading an existing archive.
         internal UstarTarEntry(TarHeader header, TarReader readerOfOrigin)
-            : base(header, readerOfOrigin)
-        {
-        }
+            : base(header, readerOfOrigin) { }
 
         /// <summary>
         /// Initializes a new <see cref="UstarTarEntry"/> instance with the specified entry type and entry name.
@@ -28,11 +26,10 @@ namespace System.Formats.Tar
         /// </list>
         /// </remarks>
         public UstarTarEntry(TarEntryType entryType, string entryName)
-            : base(entryType, entryName, TarFormat.Ustar)
-        {
-        }
+            : base(entryType, entryName, TarFormat.Ustar) { }
 
         // Determines if the current instance's entry type supports setting a data stream.
-        internal override bool IsDataStreamSetterSupported() => EntryType == TarEntryType.RegularFile;
+        internal override bool IsDataStreamSetterSupported() =>
+            EntryType == TarEntryType.RegularFile;
     }
 }

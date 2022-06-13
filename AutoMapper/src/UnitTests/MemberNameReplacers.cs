@@ -49,5 +49,4 @@ namespace AutoMapper.UnitTests
             Assert.Equal(source.SubAirlinaFlight, destination.SubAirlineFlight);
         }
     }
-
 }

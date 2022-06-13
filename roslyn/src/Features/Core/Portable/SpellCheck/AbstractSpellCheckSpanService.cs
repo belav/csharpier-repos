@@ -16,14 +16,23 @@ namespace Microsoft.CodeAnalysis.SpellCheck
 {
     internal abstract class AbstractSpellCheckSpanService : ISpellCheckSpanService
     {
-        public async Task<ImmutableArray<SpellCheckSpan>> GetSpansAsync(Document document, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<SpellCheckSpan>> GetSpansAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             return GetSpans(document, root, cancellationToken);
         }
 
-        private static ImmutableArray<SpellCheckSpan> GetSpans(Document document, SyntaxNode root, CancellationToken cancellationToken)
+        private static ImmutableArray<SpellCheckSpan> GetSpans(
+            Document document,
+            SyntaxNode root,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var classifier = document.GetRequiredLanguageService<ISyntaxClassificationService>();
@@ -42,7 +51,11 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             private readonly ISyntaxClassificationService _classifier;
             private readonly ArrayBuilder<SpellCheckSpan> _spans;
 
-            public Worker(ISyntaxFactsService syntaxFacts, ISyntaxClassificationService classifier, ArrayBuilder<SpellCheckSpan> spans)
+            public Worker(
+                ISyntaxFactsService syntaxFacts,
+                ISyntaxClassificationService classifier,
+                ArrayBuilder<SpellCheckSpan> spans
+            )
             {
                 _syntaxFacts = syntaxFacts;
                 _syntaxKinds = syntaxFacts.SyntaxKinds;
@@ -72,20 +85,22 @@ namespace Microsoft.CodeAnalysis.SpellCheck
                 }
             }
 
-            private void ProcessToken(
-                SyntaxToken token,
-                CancellationToken cancellationToken)
+            private void ProcessToken(SyntaxToken token, CancellationToken cancellationToken)
             {
                 ProcessTriviaList(token.LeadingTrivia, cancellationToken);
 
-                if (_syntaxFacts.IsStringLiteral(token) ||
-                    token.RawKind == _syntaxKinds.SingleLineRawStringLiteralToken ||
-                    token.RawKind == _syntaxKinds.MultiLineRawStringLiteralToken)
+                if (
+                    _syntaxFacts.IsStringLiteral(token)
+                    || token.RawKind == _syntaxKinds.SingleLineRawStringLiteralToken
+                    || token.RawKind == _syntaxKinds.MultiLineRawStringLiteralToken
+                )
                 {
                     AddSpan(new SpellCheckSpan(token.Span, SpellCheckKind.String));
                 }
-                else if (token.RawKind == _syntaxKinds.InterpolatedStringTextToken &&
-                         token.Parent?.RawKind == _syntaxKinds.InterpolatedStringText)
+                else if (
+                    token.RawKind == _syntaxKinds.InterpolatedStringTextToken
+                    && token.Parent?.RawKind == _syntaxKinds.InterpolatedStringText
+                )
                 {
                     AddSpan(new SpellCheckSpan(token.Span, SpellCheckKind.String));
                 }
@@ -129,7 +144,10 @@ namespace Microsoft.CodeAnalysis.SpellCheck
                 }
             }
 
-            private void ProcessTriviaList(SyntaxTriviaList triviaList, CancellationToken cancellationToken)
+            private void ProcessTriviaList(
+                SyntaxTriviaList triviaList,
+                CancellationToken cancellationToken
+            )
             {
                 foreach (var trivia in triviaList)
                     ProcessTrivia(trivia, cancellationToken);

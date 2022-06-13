@@ -24,19 +24,30 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.InlineTemporary), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.InlineTemporary
+        ),
+        Shared
+    ]
     internal partial class CSharpInlineTemporaryCodeRefactoringProvider
-        : AbstractInlineTemporaryCodeRefactoringProvider<IdentifierNameSyntax, VariableDeclaratorSyntax>
+        : AbstractInlineTemporaryCodeRefactoringProvider<
+            IdentifierNameSyntax,
+            VariableDeclaratorSyntax
+        >
     {
         private static readonly SyntaxAnnotation DefinitionAnnotation = new();
         private static readonly SyntaxAnnotation ReferenceAnnotation = new();
         private static readonly SyntaxAnnotation ExpressionAnnotation = new();
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpInlineTemporaryCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpInlineTemporaryCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -48,21 +59,30 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
-            var variableDeclarator = await context.TryGetRelevantNodeAsync<VariableDeclaratorSyntax>().ConfigureAwait(false);
+            var variableDeclarator = await context
+                .TryGetRelevantNodeAsync<VariableDeclaratorSyntax>()
+                .ConfigureAwait(false);
             if (variableDeclarator == null)
             {
                 return;
             }
 
-            if (variableDeclarator.Parent is not VariableDeclarationSyntax variableDeclaration ||
-                variableDeclaration.Parent is not LocalDeclarationStatementSyntax localDeclarationStatement)
+            if (
+                variableDeclarator.Parent is not VariableDeclarationSyntax variableDeclaration
+                || variableDeclaration.Parent
+                    is not LocalDeclarationStatementSyntax localDeclarationStatement
+            )
             {
                 return;
             }
 
-            if (variableDeclarator.Initializer == null ||
-                variableDeclarator.Initializer.Value.IsMissing ||
-                variableDeclarator.Initializer.Value.IsKind(SyntaxKind.StackAllocArrayCreationExpression))
+            if (
+                variableDeclarator.Initializer == null
+                || variableDeclarator.Initializer.Value.IsMissing
+                || variableDeclarator.Initializer.Value.IsKind(
+                    SyntaxKind.StackAllocArrayCreationExpression
+                )
+            )
             {
                 return;
             }
@@ -74,13 +94,20 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 return;
             }
 
-            if (localDeclarationStatement.ContainsDiagnostics ||
-                localDeclarationStatement.UsingKeyword != default)
+            if (
+                localDeclarationStatement.ContainsDiagnostics
+                || localDeclarationStatement.UsingKeyword != default
+            )
             {
                 return;
             }
 
-            var references = await GetReferenceLocationsAsync(document, variableDeclarator, cancellationToken).ConfigureAwait(false);
+            var references = await GetReferenceLocationsAsync(
+                    document,
+                    variableDeclarator,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (!references.Any())
                 return;
 
@@ -94,11 +121,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 CodeAction.Create(
                     CSharpFeaturesResources.Inline_temporary_variable,
                     c => InlineTemporaryAsync(document, variableDeclarator, c),
-                    nameof(CSharpFeaturesResources.Inline_temporary_variable)),
-                variableDeclarator.Span);
+                    nameof(CSharpFeaturesResources.Inline_temporary_variable)
+                ),
+                variableDeclarator.Span
+            );
         }
 
-        private static bool HasConflict(IdentifierNameSyntax identifier, VariableDeclaratorSyntax variableDeclarator)
+        private static bool HasConflict(
+            IdentifierNameSyntax identifier,
+            VariableDeclaratorSyntax variableDeclarator
+        )
         {
             // TODO: Check for more conflict types.
             if (identifier.SpanStart < variableDeclarator.SpanStart)
@@ -113,17 +145,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 if (argument.RefOrOutKeyword.Kind() != SyntaxKind.None)
                     return true;
             }
-            else if (identifierNode.Parent.IsKind(
-                SyntaxKind.PreDecrementExpression,
-                SyntaxKind.PreIncrementExpression,
-                SyntaxKind.PostDecrementExpression,
-                SyntaxKind.PostIncrementExpression,
-                SyntaxKind.AddressOfExpression))
+            else if (
+                identifierNode.Parent.IsKind(
+                    SyntaxKind.PreDecrementExpression,
+                    SyntaxKind.PreIncrementExpression,
+                    SyntaxKind.PostDecrementExpression,
+                    SyntaxKind.PostIncrementExpression,
+                    SyntaxKind.AddressOfExpression
+                )
+            )
             {
                 return true;
             }
-            else if (identifierNode.Parent is AssignmentExpressionSyntax binaryExpression &&
-                     binaryExpression.Left == identifierNode)
+            else if (
+                identifierNode.Parent is AssignmentExpressionSyntax binaryExpression
+                && binaryExpression.Left == identifierNode
+            )
             {
                 return true;
             }
@@ -131,61 +168,117 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             return false;
         }
 
-        private static SyntaxAnnotation CreateConflictAnnotation()
-            => ConflictAnnotation.Create(CSharpFeaturesResources.Conflict_s_detected);
+        private static SyntaxAnnotation CreateConflictAnnotation() =>
+            ConflictAnnotation.Create(CSharpFeaturesResources.Conflict_s_detected);
 
-        private static async Task<Document> InlineTemporaryAsync(Document document, VariableDeclaratorSyntax declarator, CancellationToken cancellationToken)
+        private static async Task<Document> InlineTemporaryAsync(
+            Document document,
+            VariableDeclaratorSyntax declarator,
+            CancellationToken cancellationToken
+        )
         {
             var workspace = document.Project.Solution.Workspace;
 
             // Create the expression that we're actually going to inline.
-            var expressionToInline = await CreateExpressionToInlineAsync(document, declarator, cancellationToken).ConfigureAwait(false);
-            expressionToInline = expressionToInline.Parenthesize().WithAdditionalAnnotations(Formatter.Annotation, Simplifier.Annotation, ExpressionAnnotation);
+            var expressionToInline = await CreateExpressionToInlineAsync(
+                    document,
+                    declarator,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            expressionToInline = expressionToInline
+                .Parenthesize()
+                .WithAdditionalAnnotations(
+                    Formatter.Annotation,
+                    Simplifier.Annotation,
+                    ExpressionAnnotation
+                );
 
             // Annotate the variable declarator so that we can get back to it later.
-            document = await document.ReplaceNodeAsync(declarator, declarator.WithAdditionalAnnotations(DefinitionAnnotation), cancellationToken).ConfigureAwait(false);
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            document = await document
+                .ReplaceNodeAsync(
+                    declarator,
+                    declarator.WithAdditionalAnnotations(DefinitionAnnotation),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            declarator = await FindDeclaratorAsync(document, cancellationToken).ConfigureAwait(false);
+            declarator = await FindDeclaratorAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
             // Collect the identifier names for each reference.
-            var allReferences = await GetReferenceLocationsAsync(document, declarator, cancellationToken).ConfigureAwait(false);
+            var allReferences = await GetReferenceLocationsAsync(
+                    document,
+                    declarator,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Add referenceAnnotations to identifier nodes being replaced.
-            document = await document.ReplaceNodesAsync(
-                allReferences,
-                (o, n) => n.WithAdditionalAnnotations(ReferenceAnnotation),
-                cancellationToken).ConfigureAwait(false);
+            document = await document
+                .ReplaceNodesAsync(
+                    allReferences,
+                    (o, n) => n.WithAdditionalAnnotations(ReferenceAnnotation),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            declarator = await FindDeclaratorAsync(document, cancellationToken).ConfigureAwait(false);
+            semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            declarator = await FindDeclaratorAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
-            allReferences = await FindReferenceAnnotatedNodesAsync(document, cancellationToken).ConfigureAwait(false);
+            allReferences = await FindReferenceAnnotatedNodesAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
             var conflictReferences = allReferences.Where(n => HasConflict(n, declarator)).ToSet();
-            var nonConflictReferences = allReferences.Where(n => !conflictReferences.Contains(n)).ToSet();
+            var nonConflictReferences = allReferences
+                .Where(n => !conflictReferences.Contains(n))
+                .ToSet();
 
             // Checks to see if inlining the temporary variable may change the code's meaning. This can only apply if the variable has two or more
             // references. We later use this heuristic to determine whether or not to display a warning message to the user.
-            var mayContainSideEffects = allReferences.Count() > 1 &&
-                MayContainSideEffects(declarator.Initializer.Value);
+            var mayContainSideEffects =
+                allReferences.Count() > 1 && MayContainSideEffects(declarator.Initializer.Value);
 
             var scope = GetScope(declarator);
-            var newScope = ReferenceRewriter.Visit(scope, conflictReferences, nonConflictReferences, expressionToInline, cancellationToken);
+            var newScope = ReferenceRewriter.Visit(
+                scope,
+                conflictReferences,
+                nonConflictReferences,
+                expressionToInline,
+                cancellationToken
+            );
 
-            document = await document.ReplaceNodeAsync(scope, newScope, cancellationToken).ConfigureAwait(false);
-            semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            document = await document
+                .ReplaceNodeAsync(scope, newScope, cancellationToken)
+                .ConfigureAwait(false);
+            semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            declarator = await FindDeclaratorAsync(document, cancellationToken).ConfigureAwait(false);
+            declarator = await FindDeclaratorAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             newScope = GetScope(declarator);
 
             // Note that we only remove the local declaration if there weren't any conflicts,
             if (conflictReferences.Count == 0)
             {
                 // No semantic conflicts, we can remove the definition.
-                document = await document.ReplaceNodeAsync(
-                    newScope, RemoveDeclaratorFromScope(declarator, newScope), cancellationToken).ConfigureAwait(false);
-                semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                document = await document
+                    .ReplaceNodeAsync(
+                        newScope,
+                        RemoveDeclaratorFromScope(declarator, newScope),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                semanticModel = await document
+                    .GetSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             // Finally, check all the places we inlined an expression and add some final warnings there if appropriate.
@@ -195,33 +288,48 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 .Select(e => GetTopMostParentingExpression(e));
 
             // Make each topmost parenting statement or Equals Clause Expressions semantically explicit.
-            document = await document.ReplaceNodesAsync(topmostParentingExpressions, (o, n) =>
-            {
-                // warn when inlining into a conditional expression, as the inlined expression will not be executed.
-                if (semanticModel.GetSymbolInfo(o, cancellationToken).Symbol is IMethodSymbol { IsConditional: true })
-                {
-                    n = n.WithAdditionalAnnotations(
-                        WarningAnnotation.Create(CSharpFeaturesResources.Warning_Inlining_temporary_into_conditional_method_call));
-                }
+            document = await document
+                .ReplaceNodesAsync(
+                    topmostParentingExpressions,
+                    (o, n) =>
+                    {
+                        // warn when inlining into a conditional expression, as the inlined expression will not be executed.
+                        if (
+                            semanticModel.GetSymbolInfo(o, cancellationToken).Symbol
+                            is IMethodSymbol { IsConditional: true }
+                        )
+                        {
+                            n = n.WithAdditionalAnnotations(
+                                WarningAnnotation.Create(
+                                    CSharpFeaturesResources.Warning_Inlining_temporary_into_conditional_method_call
+                                )
+                            );
+                        }
 
-                // If the refactoring may potentially change the code's semantics, display a warning message to the user.
-                // on the first inlined location.
-                if (mayContainSideEffects)
-                {
-                    n = n.WithAdditionalAnnotations(
-                        WarningAnnotation.Create(CSharpFeaturesResources.Warning_Inlining_temporary_variable_may_change_code_meaning));
-                    mayContainSideEffects = false;
-                }
+                        // If the refactoring may potentially change the code's semantics, display a warning message to the user.
+                        // on the first inlined location.
+                        if (mayContainSideEffects)
+                        {
+                            n = n.WithAdditionalAnnotations(
+                                WarningAnnotation.Create(
+                                    CSharpFeaturesResources.Warning_Inlining_temporary_variable_may_change_code_meaning
+                                )
+                            );
+                            mayContainSideEffects = false;
+                        }
 
-                return n;
-            }, cancellationToken).ConfigureAwait(false);
+                        return n;
+                    },
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return document;
         }
 
         private static bool MayContainSideEffects(SyntaxNode expression)
         {
-            // Checks to see if inlining the temporary variable may change the code's semantics. 
+            // Checks to see if inlining the temporary variable may change the code's semantics.
             // This is not meant to be an exhaustive check; it's more like a heuristic for obvious cases we know may cause side effects.
 
             var descendantNodesAndSelf = expression.DescendantNodesAndSelf();
@@ -243,7 +351,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             // After refactoring:
             //     M().P = 0;
             //     var x = M();
-            if (descendantNodesAndSelf.Any(n => n.IsKind(SyntaxKind.ObjectCreationExpression, SyntaxKind.InvocationExpression)))
+            if (
+                descendantNodesAndSelf.Any(
+                    n =>
+                        n.IsKind(
+                            SyntaxKind.ObjectCreationExpression,
+                            SyntaxKind.InvocationExpression
+                        )
+                )
+            )
             {
                 return true;
             }
@@ -252,23 +368,35 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             return false;
         }
 
-        private static async Task<VariableDeclaratorSyntax> FindDeclaratorAsync(Document document, CancellationToken cancellationToken)
-            => await FindNodeWithAnnotationAsync<VariableDeclaratorSyntax>(document, DefinitionAnnotation, cancellationToken).ConfigureAwait(false);
+        private static async Task<VariableDeclaratorSyntax> FindDeclaratorAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) =>
+            await FindNodeWithAnnotationAsync<VariableDeclaratorSyntax>(
+                    document,
+                    DefinitionAnnotation,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-        private static async Task<T> FindNodeWithAnnotationAsync<T>(Document document, SyntaxAnnotation annotation, CancellationToken cancellationToken)
-            where T : SyntaxNode
+        private static async Task<T> FindNodeWithAnnotationAsync<T>(
+            Document document,
+            SyntaxAnnotation annotation,
+            CancellationToken cancellationToken
+        ) where T : SyntaxNode
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            return root
-                .GetAnnotatedNodesAndTokens(annotation)
-                .Single()
-                .AsNode() as T;
+            return root.GetAnnotatedNodesAndTokens(annotation).Single().AsNode() as T;
         }
 
-        private static async Task<ImmutableArray<IdentifierNameSyntax>> FindReferenceAnnotatedNodesAsync(Document document, CancellationToken cancellationToken)
+        private static async Task<
+            ImmutableArray<IdentifierNameSyntax>
+        > FindReferenceAnnotatedNodesAsync(Document document, CancellationToken cancellationToken)
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            return root.GetAnnotatedNodesAndTokens(ReferenceAnnotation).Select(n => (IdentifierNameSyntax)n.AsNode()).ToImmutableArray();
+            return root.GetAnnotatedNodesAndTokens(ReferenceAnnotation)
+                .Select(n => (IdentifierNameSyntax)n.AsNode())
+                .ToImmutableArray();
         }
 
         private static SyntaxNode GetScope(VariableDeclaratorSyntax variableDeclarator)
@@ -291,13 +419,20 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
         private static VariableDeclaratorSyntax FindDeclarator(SyntaxNode node)
         {
-            var annotatedNodesOrTokens = node.GetAnnotatedNodesAndTokens(DefinitionAnnotation).ToList();
-            Debug.Assert(annotatedNodesOrTokens.Count == 1, "Only a single variable declarator should have been annotated.");
+            var annotatedNodesOrTokens = node.GetAnnotatedNodesAndTokens(DefinitionAnnotation)
+                .ToList();
+            Debug.Assert(
+                annotatedNodesOrTokens.Count == 1,
+                "Only a single variable declarator should have been annotated."
+            );
 
             return (VariableDeclaratorSyntax)annotatedNodesOrTokens.First().AsNode();
         }
 
-        private static SyntaxNode RemoveDeclaratorFromVariableList(VariableDeclaratorSyntax variableDeclarator, VariableDeclarationSyntax variableDeclaration)
+        private static SyntaxNode RemoveDeclaratorFromVariableList(
+            VariableDeclaratorSyntax variableDeclarator,
+            VariableDeclarationSyntax variableDeclaration
+        )
         {
             Debug.Assert(variableDeclaration.Variables.Count > 1);
             Debug.Assert(variableDeclaration.Variables.Contains(variableDeclarator));
@@ -306,15 +441,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             var scope = GetScope(variableDeclarator);
 
             var newLocalDeclaration = variableDeclarator.GetLeadingTrivia().Any(t => t.IsDirective)
-                ? localDeclaration.RemoveNode(variableDeclarator, SyntaxRemoveOptions.KeepExteriorTrivia)
+                ? localDeclaration.RemoveNode(
+                    variableDeclarator,
+                    SyntaxRemoveOptions.KeepExteriorTrivia
+                )
                 : localDeclaration.RemoveNode(variableDeclarator, SyntaxRemoveOptions.KeepNoTrivia);
 
             return scope.ReplaceNode(
                 localDeclaration,
-                newLocalDeclaration.WithAdditionalAnnotations(Formatter.Annotation));
+                newLocalDeclaration.WithAdditionalAnnotations(Formatter.Annotation)
+            );
         }
 
-        private static SyntaxNode RemoveDeclaratorFromScope(VariableDeclaratorSyntax variableDeclarator, SyntaxNode scope)
+        private static SyntaxNode RemoveDeclaratorFromScope(
+            VariableDeclaratorSyntax variableDeclarator,
+            SyntaxNode scope
+        )
         {
             var variableDeclaration = (VariableDeclarationSyntax)variableDeclarator.Parent;
 
@@ -336,29 +478,46 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
             var trailingTrivia = localDeclaration
                 .GetTrailingTrivia()
-                .SkipWhile(t => t.MatchesKind(SyntaxKind.WhitespaceTrivia, SyntaxKind.EndOfLineTrivia))
+                .SkipWhile(
+                    t => t.MatchesKind(SyntaxKind.WhitespaceTrivia, SyntaxKind.EndOfLineTrivia)
+                )
                 .ToSyntaxTriviaList();
 
             var newLeadingTrivia = leadingTrivia.Concat(trailingTrivia);
 
             var nextToken = localDeclaration.GetLastToken().GetNextTokenOrEndOfFile();
-            var newNextToken = nextToken.WithPrependedLeadingTrivia(newLeadingTrivia)
-                                        .WithAdditionalAnnotations(Formatter.Annotation);
+            var newNextToken = nextToken
+                .WithPrependedLeadingTrivia(newLeadingTrivia)
+                .WithAdditionalAnnotations(Formatter.Annotation);
 
             var newScope = scope.ReplaceToken(nextToken, newNextToken);
 
-            var newLocalDeclaration = (LocalDeclarationStatementSyntax)FindDeclarator(newScope).Parent.Parent;
+            var newLocalDeclaration = (LocalDeclarationStatementSyntax)
+                FindDeclarator(newScope).Parent.Parent;
 
             // If the local is parented by a label statement, we can't remove this statement. Instead,
             // we'll replace the local declaration with an empty expression statement.
-            if (newLocalDeclaration.IsParentKind(SyntaxKind.LabeledStatement, out LabeledStatementSyntax labeledStatement))
+            if (
+                newLocalDeclaration.IsParentKind(
+                    SyntaxKind.LabeledStatement,
+                    out LabeledStatementSyntax labeledStatement
+                )
+            )
             {
-                var newLabeledStatement = labeledStatement.ReplaceNode(newLocalDeclaration, SyntaxFactory.ParseStatement(""));
+                var newLabeledStatement = labeledStatement.ReplaceNode(
+                    newLocalDeclaration,
+                    SyntaxFactory.ParseStatement("")
+                );
                 return newScope.ReplaceNode(labeledStatement, newLabeledStatement);
             }
 
             // If the local is parented by a global statement, we need to remove the parent global statement.
-            if (newLocalDeclaration.IsParentKind(SyntaxKind.GlobalStatement, out GlobalStatementSyntax globalStatement))
+            if (
+                newLocalDeclaration.IsParentKind(
+                    SyntaxKind.GlobalStatement,
+                    out GlobalStatementSyntax globalStatement
+                )
+            )
             {
                 return newScope.RemoveNode(globalStatement, SyntaxRemoveOptions.KeepNoTrivia);
             }
@@ -369,13 +528,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
         private static async Task<ExpressionSyntax> CreateExpressionToInlineAsync(
             Document document,
             VariableDeclaratorSyntax variableDeclarator,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var isVar = ((VariableDeclarationSyntax)variableDeclarator.Parent).Type.IsVar;
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var expression = variableDeclarator.Initializer.Value.WalkDownParentheses();
 
-            var localSymbol = (ILocalSymbol)semanticModel.GetDeclaredSymbol(variableDeclarator, cancellationToken);
+            var localSymbol = (ILocalSymbol)
+                semanticModel.GetDeclaredSymbol(variableDeclarator, cancellationToken);
 
             if (expression is ImplicitObjectCreationExpressionSyntax implicitCreation)
             {
@@ -384,9 +547,19 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 // This condition converts implicit object creation expression to normal object creation expression.
 
                 var type = localSymbol.Type.GenerateTypeSyntax();
-                return SyntaxFactory.ObjectCreationExpression(implicitCreation.NewKeyword, type, implicitCreation.ArgumentList, implicitCreation.Initializer);
+                return SyntaxFactory.ObjectCreationExpression(
+                    implicitCreation.NewKeyword,
+                    type,
+                    implicitCreation.ArgumentList,
+                    implicitCreation.Initializer
+                );
             }
-            else if (expression.IsKind(SyntaxKind.ArrayInitializerExpression, out InitializerExpressionSyntax arrayInitializer))
+            else if (
+                expression.IsKind(
+                    SyntaxKind.ArrayInitializerExpression,
+                    out InitializerExpressionSyntax arrayInitializer
+                )
+            )
             {
                 // If this is an array initializer, we need to transform it into an array creation
                 // expression for inlining.
@@ -404,7 +577,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
 
                 return SyntaxFactory.ArrayCreationExpression(arrayType, arrayInitializer);
             }
-            else if (isVar && expression is ObjectCreationExpressionSyntax or ArrayCreationExpressionSyntax or CastExpressionSyntax)
+            else if (
+                isVar
+                && expression
+                    is ObjectCreationExpressionSyntax
+                        or ArrayCreationExpressionSyntax
+                        or CastExpressionSyntax
+            )
             {
                 // if we have `var x = new Y();` there's no need to do any casting as the type is indicated
                 // directly in the existing code.  The same holds for `new Y[]` or `(Y)...`
@@ -412,15 +591,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             }
             else
             {
-                if (localSymbol.Type.ContainsAnonymousType() || localSymbol.Type is IErrorTypeSymbol { Name: null or "" })
+                if (
+                    localSymbol.Type.ContainsAnonymousType()
+                    || localSymbol.Type is IErrorTypeSymbol { Name: null or "" }
+                )
                     return expression;
 
                 return expression.Cast(localSymbol.Type);
             }
         }
 
-        private static SyntaxNode GetTopMostParentingExpression(ExpressionSyntax expression)
-            => expression.AncestorsAndSelf().OfType<ExpressionSyntax>().Last();
+        private static SyntaxNode GetTopMostParentingExpression(ExpressionSyntax expression) =>
+            expression.AncestorsAndSelf().OfType<ExpressionSyntax>().Last();
 
         private static bool IsInDeconstructionAssignmentLeft(ExpressionSyntax node)
         {
@@ -435,7 +617,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 {
                     return false;
                 }
-                else if (parent.IsParentKind(SyntaxKind.SimpleAssignmentExpression, out AssignmentExpressionSyntax assignment))
+                else if (
+                    parent.IsParentKind(
+                        SyntaxKind.SimpleAssignmentExpression,
+                        out AssignmentExpressionSyntax assignment
+                    )
+                )
                 {
                     return assignment.Left == parent;
                 }

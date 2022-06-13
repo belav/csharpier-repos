@@ -5,38 +5,30 @@ using Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
-public class CosmosApiConsistencyTest : ApiConsistencyTestBase<CosmosApiConsistencyTest.CosmosApiConsistencyFixture>
+public class CosmosApiConsistencyTest
+    : ApiConsistencyTestBase<CosmosApiConsistencyTest.CosmosApiConsistencyFixture>
 {
-    public CosmosApiConsistencyTest(CosmosApiConsistencyFixture fixture)
-        : base(fixture)
-    {
-    }
+    public CosmosApiConsistencyTest(CosmosApiConsistencyFixture fixture) : base(fixture) { }
 
-    protected override void AddServices(ServiceCollection serviceCollection)
-        => serviceCollection.AddEntityFrameworkCosmos();
+    protected override void AddServices(ServiceCollection serviceCollection) =>
+        serviceCollection.AddEntityFrameworkCosmos();
 
-    protected override Assembly TargetAssembly
-        => typeof(CosmosDatabaseWrapper).Assembly;
+    protected override Assembly TargetAssembly => typeof(CosmosDatabaseWrapper).Assembly;
 
     public class CosmosApiConsistencyFixture : ApiConsistencyFixtureBase
     {
-        public override HashSet<Type> FluentApiTypes { get; } = new()
-        {
-            typeof(CosmosModelBuilderExtensions),
-            typeof(CosmosPropertyBuilderExtensions),
-            typeof(CosmosServiceCollectionExtensions),
-            typeof(CosmosDbContextOptionsExtensions),
-            typeof(CosmosDbContextOptionsBuilder)
-        };
+        public override HashSet<Type> FluentApiTypes { get; } =
+            new()
+            {
+                typeof(CosmosModelBuilderExtensions),
+                typeof(CosmosPropertyBuilderExtensions),
+                typeof(CosmosServiceCollectionExtensions),
+                typeof(CosmosDbContextOptionsExtensions),
+                typeof(CosmosDbContextOptionsBuilder)
+            };
 
-        public override
-            List<(Type Type,
-                Type ReadonlyExtensions,
-                Type MutableExtensions,
-                Type ConventionExtensions,
-                Type ConventionBuilderExtensions,
-                Type RuntimeExtensions)> MetadataExtensionTypes { get; }
-            = new()
+        public override List<(Type Type, Type ReadonlyExtensions, Type MutableExtensions, Type ConventionExtensions, Type ConventionBuilderExtensions, Type RuntimeExtensions)> MetadataExtensionTypes { get; } =
+            new()
             {
                 (
                     typeof(IReadOnlyModel),

@@ -19,46 +19,62 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
 {
     /// <summary>
     /// Looks for code of the form:
-    /// 
+    ///
     ///     int i;
     ///     if (int.TryParse(s, out i)) { }
-    ///     
+    ///
     /// And offers to convert it to:
-    /// 
+    ///
     ///     if (int.TryParse(s, out var i)) { }   or
     ///     if (int.TryParse(s, out int i)) { }   or
-    /// 
+    ///
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpInlineDeclarationDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal class CSharpInlineDeclarationDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         private const string CS0165 = nameof(CS0165); // Use of unassigned local variable 's'
 
         public CSharpInlineDeclarationDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.InlineDeclarationDiagnosticId,
-                   EnforceOnBuildValues.InlineDeclaration,
-                   CSharpCodeStyleOptions.PreferInlinedVariableDeclaration,
-                   LanguageNames.CSharp,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Inline_variable_declaration), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Variable_declaration_can_be_inlined), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.InlineDeclarationDiagnosticId,
+                EnforceOnBuildValues.InlineDeclaration,
+                CSharpCodeStyleOptions.PreferInlinedVariableDeclaration,
+                LanguageNames.CSharp,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Inline_variable_declaration),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Variable_declaration_can_be_inlined),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
             context.RegisterCompilationStartAction(compilationContext =>
             {
                 var compilation = compilationContext.Compilation;
-                var expressionType = compilation.GetTypeByMetadataName(typeof(Expression<>).FullName!);
+                var expressionType = compilation.GetTypeByMetadataName(
+                    typeof(Expression<>).FullName!
+                );
                 compilationContext.RegisterSyntaxNodeAction(
-                    syntaxContext => AnalyzeSyntaxNode(syntaxContext, expressionType), SyntaxKind.Argument);
+                    syntaxContext => AnalyzeSyntaxNode(syntaxContext, expressionType),
+                    SyntaxKind.Argument
+                );
             });
         }
 
-        private void AnalyzeSyntaxNode(SyntaxNodeAnalysisContext context, INamedTypeSymbol? expressionType)
+        private void AnalyzeSyntaxNode(
+            SyntaxNodeAnalysisContext context,
+            INamedTypeSymbol? expressionType
+        )
         {
             var syntaxTree = context.Node.SyntaxTree;
             var csOptions = (CSharpParseOptions)syntaxTree.Options;
@@ -84,7 +100,12 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             }
 
             var argumentExpression = argumentNode.Expression;
-            if (!argumentExpression.IsKind(SyntaxKind.IdentifierName, out IdentifierNameSyntax? identifierName))
+            if (
+                !argumentExpression.IsKind(
+                    SyntaxKind.IdentifierName,
+                    out IdentifierNameSyntax? identifierName
+                )
+            )
             {
                 // has to be exactly the form "out i".  i.e. "out this.i" or "out v[i]" are legal
                 // cases for out-arguments, but could not be converted to an out-variable-declaration.
@@ -97,12 +118,14 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             }
 
             var invocationOrCreation = argumentList.Parent;
-            if (!invocationOrCreation.IsKind(SyntaxKind.InvocationExpression) &&
-                !invocationOrCreation.IsKind(SyntaxKind.ObjectCreationExpression))
+            if (
+                !invocationOrCreation.IsKind(SyntaxKind.InvocationExpression)
+                && !invocationOrCreation.IsKind(SyntaxKind.ObjectCreationExpression)
+            )
             {
                 // Out-variables are only legal with invocations and object creations.
                 // If we don't have one of those bail.  Note: we need hte parent to be
-                // one of these forms so we can accurately verify that inlining the 
+                // one of these forms so we can accurately verify that inlining the
                 // variable doesn't change semantics.
                 return;
             }
@@ -123,7 +146,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             var cancellationToken = context.CancellationToken;
 
             var semanticModel = context.SemanticModel;
-            if (semanticModel.GetSymbolInfo(argumentExpression, cancellationToken).Symbol is not ILocalSymbol outLocalSymbol)
+            if (
+                semanticModel.GetSymbolInfo(argumentExpression, cancellationToken).Symbol
+                is not ILocalSymbol outLocalSymbol
+            )
             {
                 // The out-argument wasn't referencing a local.  So we don't have an local
                 // declaration that we can attempt to inline here.
@@ -131,11 +157,14 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             }
 
             // Ensure that the local-symbol actually belongs to LocalDeclarationStatement.
-            // Trying to do things like inline a var-decl in a for-statement is just too 
+            // Trying to do things like inline a var-decl in a for-statement is just too
             // esoteric and would make us have to write a lot more complex code to support
             // that scenario.
             var localReference = outLocalSymbol.DeclaringSyntaxReferences.FirstOrDefault();
-            if (localReference?.GetSyntax(cancellationToken) is not VariableDeclaratorSyntax localDeclarator)
+            if (
+                localReference?.GetSyntax(cancellationToken)
+                is not VariableDeclaratorSyntax localDeclarator
+            )
             {
                 return;
             }
@@ -148,7 +177,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
 
             if (localDeclarator.SpanStart >= argumentNode.SpanStart)
             {
-                // We have an error situation where the local was declared after the out-var.  
+                // We have an error situation where the local was declared after the out-var.
                 // Don't even bother offering anything here.
                 return;
             }
@@ -159,8 +188,11 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             // "var v = M()" should not be inlined as that could break program semantics.
             if (localDeclarator.Initializer != null)
             {
-                if (localDeclarator.Initializer.Value is not LiteralExpressionSyntax and
-                    not DefaultExpressionSyntax)
+                if (
+                    localDeclarator.Initializer.Value
+                    is not LiteralExpressionSyntax
+                        and not DefaultExpressionSyntax
+                )
                 {
                     return;
                 }
@@ -175,7 +207,13 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                 return;
             }
 
-            if (argumentExpression.IsInExpressionTree(semanticModel, expressionType, cancellationToken))
+            if (
+                argumentExpression.IsInExpressionTree(
+                    semanticModel,
+                    expressionType,
+                    cancellationToken
+                )
+            )
             {
                 // out-vars are not allowed inside expression-trees.  So don't offer to
                 // fix if we're inside one.
@@ -188,14 +226,22 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             if (outArgumentScope == null)
                 return;
 
-            if (!outLocalSymbol.CanSafelyMoveLocalToBlock(enclosingBlockOfLocalStatement, outArgumentScope))
+            if (
+                !outLocalSymbol.CanSafelyMoveLocalToBlock(
+                    enclosingBlockOfLocalStatement,
+                    outArgumentScope
+                )
+            )
             {
                 return;
             }
 
             // Make sure that variable is not accessed outside of that scope.
             var dataFlow = semanticModel.AnalyzeDataFlow(outArgumentScope);
-            if (dataFlow.ReadOutside.Contains(outLocalSymbol) || dataFlow.WrittenOutside.Contains(outLocalSymbol))
+            if (
+                dataFlow.ReadOutside.Contains(outLocalSymbol)
+                || dataFlow.WrittenOutside.Contains(outLocalSymbol)
+            )
             {
                 // The variable is read or written from outside the block that the new variable
                 // would be scoped in.  This would cause a break.
@@ -206,16 +252,30 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             }
 
             // Make sure the variable isn't ever accessed before the usage in this out-var.
-            if (IsAccessed(semanticModel, outLocalSymbol, enclosingBlockOfLocalStatement,
-                           localStatement, argumentNode, cancellationToken))
+            if (
+                IsAccessed(
+                    semanticModel,
+                    outLocalSymbol,
+                    enclosingBlockOfLocalStatement,
+                    localStatement,
+                    argumentNode,
+                    cancellationToken
+                )
+            )
             {
                 return;
             }
 
             // See if inlining this variable would make it so that some variables were no
             // longer definitely assigned.
-            if (WouldCauseDefiniteAssignmentErrors(semanticModel, localStatement,
-                                                   enclosingBlockOfLocalStatement, outLocalSymbol))
+            if (
+                WouldCauseDefiniteAssignmentErrors(
+                    semanticModel,
+                    localStatement,
+                    enclosingBlockOfLocalStatement,
+                    outLocalSymbol
+                )
+            )
             {
                 return;
             }
@@ -225,27 +285,33 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             var allLocations = ImmutableArray.Create(
                 localDeclarator.GetLocation(),
                 identifierName.GetLocation(),
-                invocationOrCreation.GetLocation());
+                invocationOrCreation.GetLocation()
+            );
 
             // If the local variable only has one declarator, then report the suggestion on the whole
             // declaration.  Otherwise, return the suggestion only on the single declarator.
-            var reportNode = localDeclaration.Variables.Count == 1
-                ? (SyntaxNode)localDeclaration
-                : localDeclarator;
+            var reportNode =
+                localDeclaration.Variables.Count == 1
+                    ? (SyntaxNode)localDeclaration
+                    : localDeclarator;
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                reportNode.GetLocation(),
-                option.Notification.Severity,
-                additionalLocations: allLocations,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    reportNode.GetLocation(),
+                    option.Notification.Severity,
+                    additionalLocations: allLocations,
+                    properties: null
+                )
+            );
         }
 
         private static bool WouldCauseDefiniteAssignmentErrors(
             SemanticModel semanticModel,
             LocalDeclarationStatementSyntax localStatement,
             BlockSyntax enclosingBlock,
-            ILocalSymbol outLocalSymbol)
+            ILocalSymbol outLocalSymbol
+        )
         {
             // See if we have something like:
             //
@@ -262,7 +328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
 
             var dataFlow = semanticModel.AnalyzeDataFlow(
                 nextStatement,
-                enclosingBlock.Statements.Last());
+                enclosingBlock.Statements.Last()
+            );
             Contract.ThrowIfNull(dataFlow);
             return dataFlow.DataFlowsIn.Contains(outLocalSymbol);
         }
@@ -271,10 +338,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
         {
             for (var current = argumentExpression; current != null; current = current.Parent)
             {
-                if (current.Parent is LambdaExpressionSyntax lambda &&
-                    current == lambda.Body)
+                if (current.Parent is LambdaExpressionSyntax lambda && current == lambda.Body)
                 {
-                    // We were in a lambda.  The lambda body will be the new scope of the 
+                    // We were in a lambda.  The lambda body will be the new scope of the
                     // out var.
                     return current;
                 }
@@ -297,8 +363,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
 
                 if (current is StatementSyntax)
                 {
-                    // We hit a statement containing the out-argument.  Statements can have one of 
-                    // two forms.  They're either parented by a block, or by another statement 
+                    // We hit a statement containing the out-argument.  Statements can have one of
+                    // two forms.  They're either parented by a block, or by another statement
                     // (i.e. they're an embedded statement).  If we're parented by a block, then
                     // that block will be the scope of the new out-var.
                     //
@@ -310,9 +376,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                     //
                     // In this case, there is a 'virtual' block scope surrounding the embedded 'if'
                     // statement, and that will be the scope the out-var goes into.
-                    return current.IsParentKind(SyntaxKind.Block)
-                        ? current.Parent
-                        : current;
+                    return current.IsParentKind(SyntaxKind.Block) ? current.Parent : current;
                 }
             }
 
@@ -325,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
             BlockSyntax enclosingBlockOfLocalStatement,
             LocalDeclarationStatementSyntax localStatement,
             ArgumentSyntax argumentNode,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var localStatementStart = localStatement.Span.Start;
             var argumentNodeStart = argumentNode.Span.Start;
@@ -350,16 +415,23 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                     break;
                 }
 
-                if (descendentNode.IsKind(SyntaxKind.IdentifierName, out IdentifierNameSyntax? identifierName))
+                if (
+                    descendentNode.IsKind(
+                        SyntaxKind.IdentifierName,
+                        out IdentifierNameSyntax? identifierName
+                    )
+                )
                 {
                     // See if this looks like an accessor to the local variable syntactically.
                     if (identifierName.Identifier.ValueText == variableName)
                     {
                         // Confirm that it is a access of the local.
-                        var symbol = semanticModel.GetSymbolInfo(identifierName, cancellationToken).Symbol;
+                        var symbol = semanticModel
+                            .GetSymbolInfo(identifierName, cancellationToken)
+                            .Symbol;
                         if (outSymbol.Equals(symbol))
                         {
-                            // We definitely accessed the local before the out-argument.  We 
+                            // We definitely accessed the local before the out-argument.  We
                             // can't inline this local.
                             return true;
                         }

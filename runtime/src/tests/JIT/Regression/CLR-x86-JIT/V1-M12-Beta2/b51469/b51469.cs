@@ -15,6 +15,7 @@ namespace Test
             (new AA[137])[101].Method1();
             throw new DivideByZeroException();
         }
+
         static int Main()
         {
             try

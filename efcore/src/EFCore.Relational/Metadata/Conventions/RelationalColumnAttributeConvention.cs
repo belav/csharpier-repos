@@ -20,8 +20,8 @@ public class RelationalColumnAttributeConvention : PropertyAttributeConventionBa
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public RelationalColumnAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
-        : base(dependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    ) : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }
@@ -42,7 +42,8 @@ public class RelationalColumnAttributeConvention : PropertyAttributeConventionBa
         IConventionPropertyBuilder propertyBuilder,
         ColumnAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         if (!string.IsNullOrWhiteSpace(attribute.Name))
         {

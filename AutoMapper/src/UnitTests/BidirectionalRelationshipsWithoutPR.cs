@@ -13,48 +13,60 @@ namespace AutoMapper.UnitTests
         {
             public FlowNode[] Nodes;
         }
-        class FlowNode
-        {
-        }
+
+        class FlowNode { }
+
         class FlowStep : FlowNode
         {
             public FlowNode Next;
         }
+
         class FlowDecision : FlowNode
         {
             public FlowNode True;
             public FlowNode False;
         }
+
         class FlowSwitch<T> : FlowNode
         {
             public IDictionary<T, object> Connections;
         }
+
         class FlowChartModel
         {
             public FlowNodeModel[] Nodes;
         }
+
         class FlowNodeModel
         {
             public Connection[] Connections;
         }
+
         class Connection
         {
             public FlowNodeModel Node;
         }
-        protected override MapperConfiguration CreateConfiguration() => new(cfg=>
-        {
-            cfg.CreateMap<FlowChart, FlowChartModel>();
-            cfg.CreateMap<FlowNode, FlowNodeModel>()
-                .Include<FlowStep, FlowNodeModel>()
-                .Include<FlowDecision, FlowNodeModel>()
-                .Include(typeof(FlowSwitch<>), typeof(FlowNodeModel))
-                .ForMember(d=>d.Connections, o=>o.Ignore());
-            cfg.CreateMap<FlowStep, FlowNodeModel>().ForMember(d => d.Connections, o => o.MapFrom(s => new[] { s.Next }));
-            cfg.CreateMap<FlowDecision, FlowNodeModel>().ForMember(d => d.Connections, o => o.MapFrom(s => new[] { s.True, s.False }));
-            cfg.CreateMap(typeof(FlowSwitch<>), typeof(FlowNodeModel));
-            cfg.CreateMap<FlowNode, Connection>().ForMember(d => d.Node, o => o.MapFrom(s => s));
-            cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Connection)).ForMember("Node", o => o.MapFrom("Key"));
-        });
+
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<FlowChart, FlowChartModel>();
+                cfg.CreateMap<FlowNode, FlowNodeModel>()
+                    .Include<FlowStep, FlowNodeModel>()
+                    .Include<FlowDecision, FlowNodeModel>()
+                    .Include(typeof(FlowSwitch<>), typeof(FlowNodeModel))
+                    .ForMember(d => d.Connections, o => o.Ignore());
+                cfg.CreateMap<FlowStep, FlowNodeModel>()
+                    .ForMember(d => d.Connections, o => o.MapFrom(s => new[] { s.Next }));
+                cfg.CreateMap<FlowDecision, FlowNodeModel>()
+                    .ForMember(d => d.Connections, o => o.MapFrom(s => new[] { s.True, s.False }));
+                cfg.CreateMap(typeof(FlowSwitch<>), typeof(FlowNodeModel));
+                cfg.CreateMap<FlowNode, Connection>()
+                    .ForMember(d => d.Node, o => o.MapFrom(s => s));
+                cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Connection))
+                    .ForMember("Node", o => o.MapFrom("Key"));
+            });
+
         [Fact]
         public void Should_map_ok()
         {
@@ -65,6 +77,7 @@ namespace AutoMapper.UnitTests
             var dest = Map<FlowChartModel>(source);
         }
     }
+
     public class When_the_source_has_cyclical_references_with_dynamic_map : AutoMapperSpecBase
     {
         public class CDataTypeModel<T>
@@ -72,47 +85,68 @@ namespace AutoMapper.UnitTests
             public string Name { get; set; }
             public List<CFieldDefinitionModel<T>> FieldDefinitionList { get; set; }
         }
+
         public class CDataTypeDTO<T>
         {
             public string Name { get; set; }
             public List<CFieldDefinitionDTO<T>> FieldDefinitionList { get; set; }
         }
+
         public class CFieldDefinitionModel<T>
         {
             public string Name { get; set; }
             public CDataTypeModel<T> DataType { get; set; }
             public CComponentDefinitionModel<T> ComponentDefinition { get; set; }
         }
+
         public class CFieldDefinitionDTO<T>
         {
             public string Name { get; set; }
             public CDataTypeDTO<T> DataType { get; set; }
             public CComponentDefinitionDTO<T> ComponentDefinition { get; set; }
         }
+
         public class CComponentDefinitionModel<T>
         {
             public string Name { get; set; }
             public List<CFieldDefinitionModel<T>> FieldDefinitionList { get; set; }
         }
+
         public class CComponentDefinitionDTO<T>
         {
             public string Name { get; set; }
             public List<CFieldDefinitionDTO<T>> FieldDefinitionList { get; set; }
         }
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap(typeof(CDataTypeModel<>), typeof(CDataTypeDTO<>)).ReverseMap();
-            cfg.CreateMap(typeof(CFieldDefinitionModel<>), typeof(CFieldDefinitionDTO<>)).ReverseMap();
-            cfg.CreateMap(typeof(CComponentDefinitionModel<>), typeof(CComponentDefinitionDTO<>)).ReverseMap();
-        });
+
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap(typeof(CDataTypeModel<>), typeof(CDataTypeDTO<>)).ReverseMap();
+                cfg.CreateMap(typeof(CFieldDefinitionModel<>), typeof(CFieldDefinitionDTO<>))
+                    .ReverseMap();
+                cfg.CreateMap(
+                        typeof(CComponentDefinitionModel<>),
+                        typeof(CComponentDefinitionDTO<>)
+                    )
+                    .ReverseMap();
+            });
 
         [Fact]
         public void Should_map_ok()
         {
             var component = new CComponentDefinitionDTO<int>();
             var type = new CDataTypeDTO<int>();
-            var field = new CFieldDefinitionDTO<int> { ComponentDefinition = component, DataType = type };
-            type.FieldDefinitionList = component.FieldDefinitionList = new List<CFieldDefinitionDTO<int>> { field };
+            var field = new CFieldDefinitionDTO<int>
+            {
+                ComponentDefinition = component,
+                DataType = type
+            };
+            type.FieldDefinitionList = component.FieldDefinitionList = new List<
+                CFieldDefinitionDTO<int>
+            >
+            {
+                field
+            };
             var fieldModel = Mapper.Map<CFieldDefinitionModel<int>>(field);
             fieldModel.ShouldBeSameAs(fieldModel.ComponentDefinition.FieldDefinitionList[0]);
             fieldModel.ShouldBeSameAs(fieldModel.DataType.FieldDefinitionList[0]);
@@ -162,18 +196,21 @@ namespace AutoMapper.UnitTests
             public int Value;
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg=>
-        {
-            cfg.CreateMap<Source, Destination>();
-            cfg.CreateMap<InnerSource, InnerDestination>();
-            cfg.CreateMap<OtherInnerSource, OtherInnerDestination>();
-            cfg.CreateMap<Item, Item>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<InnerSource, InnerDestination>();
+                cfg.CreateMap<OtherInnerSource, OtherInnerDestination>();
+                cfg.CreateMap<Item, Item>();
+            });
 
         [Fact]
         public void Should_not_set_preserve_references()
         {
-            Configuration.ResolveTypeMap(typeof(Item), typeof(Item)).PreserveReferences.ShouldBeFalse();
+            Configuration
+                .ResolveTypeMap(typeof(Item), typeof(Item))
+                .PreserveReferences.ShouldBeFalse();
         }
     }
 
@@ -212,7 +249,6 @@ namespace AutoMapper.UnitTests
             public int Id { get; set; }
 
             public List<ContactViewModel> Contacts { get; set; }
-
         }
 
         public class ContactViewModel
@@ -222,18 +258,22 @@ namespace AutoMapper.UnitTests
             public List<SupplierViewModel> Suppliers { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Article, ArticleViewModel>();
-            cfg.CreateMap<Supplier, SupplierViewModel>();
-            cfg.CreateMap<Contact, ContactViewModel>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Article, ArticleViewModel>();
+                cfg.CreateMap<Supplier, SupplierViewModel>();
+                cfg.CreateMap<Contact, ContactViewModel>();
+            });
 
         [Fact]
         public void Should_map_ok()
         {
             var article = new Article { Supplier = new Supplier() };
-            article.Supplier.Contacts = new List<Contact> { new Contact { Suppliers = new List<Supplier> { article.Supplier } } };
+            article.Supplier.Contacts = new List<Contact>
+            {
+                new Contact { Suppliers = new List<Supplier> { article.Supplier } }
+            };
             var supplier = Mapper.Map<ArticleViewModel>(article).Supplier;
             supplier.ShouldBe(supplier.Contacts[0].Suppliers[0]);
         }
@@ -274,7 +314,6 @@ namespace AutoMapper.UnitTests
             public int Id { get; set; }
 
             public List<ContactViewModel> Contacts { get; set; }
-
         }
 
         public class ContactViewModel
@@ -284,18 +323,23 @@ namespace AutoMapper.UnitTests
             public List<SupplierViewModel> Suppliers1 { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Article, ArticleViewModel>();
-            cfg.CreateMap<Supplier, SupplierViewModel>();
-            cfg.CreateMap<Contact, ContactViewModel>().ForPath(d=>d.Suppliers1, o=>o.MapFrom(s=>s.Suppliers));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Article, ArticleViewModel>();
+                cfg.CreateMap<Supplier, SupplierViewModel>();
+                cfg.CreateMap<Contact, ContactViewModel>()
+                    .ForPath(d => d.Suppliers1, o => o.MapFrom(s => s.Suppliers));
+            });
 
         [Fact]
         public void Should_map_ok()
         {
             var article = new Article { Supplier = new Supplier() };
-            article.Supplier.Contacts = new List<Contact> { new Contact { Suppliers = new List<Supplier> { article.Supplier } } };
+            article.Supplier.Contacts = new List<Contact>
+            {
+                new Contact { Suppliers = new List<Supplier> { article.Supplier } }
+            };
             var supplier = Mapper.Map<ArticleViewModel>(article).Supplier;
             supplier.ShouldBe(supplier.Contacts[0].Suppliers1[0]);
         }
@@ -322,7 +366,6 @@ namespace AutoMapper.UnitTests
             public int Id { get; set; }
 
             public ContactViewModel Contact { get; set; }
-
         }
 
         public class ContactViewModel
@@ -332,14 +375,19 @@ namespace AutoMapper.UnitTests
             public SupplierViewModel Supplier1 { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Supplier, SupplierViewModel>().ForPath(d=>d.Contact.Supplier1, o=>
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
             {
-                o.MapFrom(s => s.Contact.Supplier);
-                o.Ignore();
+                cfg.CreateMap<Supplier, SupplierViewModel>()
+                    .ForPath(
+                        d => d.Contact.Supplier1,
+                        o =>
+                        {
+                            o.MapFrom(s => s.Contact.Supplier);
+                            o.Ignore();
+                        }
+                    );
             });
-        });
 
         [Fact]
         public void Should_map_ok()
@@ -351,15 +399,17 @@ namespace AutoMapper.UnitTests
         }
     }
 
-    public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_many_child_relationship : AutoMapperSpecBase
+    public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_many_child_relationship
+        : AutoMapperSpecBase
     {
         private ParentDto _dto;
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<ParentModel, ParentDto>();
-            cfg.CreateMap<ChildModel, ChildDto>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<ParentModel, ParentDto>();
+                cfg.CreateMap<ChildModel, ChildDto>();
+            });
 
         protected override void Because_of()
         {
@@ -415,7 +465,6 @@ namespace AutoMapper.UnitTests
             public ParentDto Parent { get; set; }
         }
     }
-
 
     //public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_many_child_relationship_using_CustomMapper_StackOverflow : AutoMapperSpecBase
     //{
@@ -519,25 +568,21 @@ namespace AutoMapper.UnitTests
     //    }
     //}
 
-    public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_one_child_relationship : AutoMapperSpecBase
+    public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_one_child_relationship
+        : AutoMapperSpecBase
     {
         private FooDto _dto;
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Foo, FooDto>();
-            cfg.CreateMap<Bar, BarDto>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Foo, FooDto>();
+                cfg.CreateMap<Bar, BarDto>();
+            });
 
         protected override void Because_of()
         {
-            var foo = new Foo
-                {
-                    Bar = new Bar
-                        {
-                            Value = "something"
-                        }
-                };
+            var foo = new Foo { Bar = new Bar { Value = "something" } };
             foo.Bar.Foo = foo;
             _dto = Mapper.Map<Foo, FooDto>(foo);
         }
@@ -571,18 +616,20 @@ namespace AutoMapper.UnitTests
         }
     }
 
-    public class When_mapping_to_a_destination_containing_two_dtos_mapped_from_the_same_source : AutoMapperSpecBase
+    public class When_mapping_to_a_destination_containing_two_dtos_mapped_from_the_same_source
+        : AutoMapperSpecBase
     {
         private FooContainerModel _dto;
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<FooModel, FooScreenModel>();
-            cfg.CreateMap<FooModel, FooInputModel>();
-            cfg.CreateMap<FooModel, FooContainerModel>()
-                .ForMember(dest => dest.Input, opt => opt.MapFrom(src => src))
-                .ForMember(dest => dest.Screen, opt => opt.MapFrom(src => src));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<FooModel, FooScreenModel>();
+                cfg.CreateMap<FooModel, FooInputModel>();
+                cfg.CreateMap<FooModel, FooContainerModel>()
+                    .ForMember(dest => dest.Input, opt => opt.MapFrom(src => src))
+                    .ForMember(dest => dest.Screen, opt => opt.MapFrom(src => src));
+            });
 
         protected override void Because_of()
         {
@@ -622,17 +669,17 @@ namespace AutoMapper.UnitTests
         }
     }
 
-    public class When_mapping_with_a_bidirectional_relationship_that_includes_arrays : AutoMapperSpecBase
-
+    public class When_mapping_with_a_bidirectional_relationship_that_includes_arrays
+        : AutoMapperSpecBase
     {
         private ParentDto _dtoParent;
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Parent, ParentDto>();
-            cfg.CreateMap<Child, ChildDto>();
-
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Parent, ParentDto>();
+                cfg.CreateMap<Child, ChildDto>();
+            });
 
         protected override void Because_of()
         {
@@ -667,17 +714,22 @@ namespace AutoMapper.UnitTests
 
             public bool Equals(Parent other)
             {
-                if (ReferenceEquals(null, other)) return false;
-                if (ReferenceEquals(this, other)) return true;
+                if (ReferenceEquals(null, other))
+                    return false;
+                if (ReferenceEquals(this, other))
+                    return true;
                 return other.Id.Equals(Id);
             }
 
             public override bool Equals(object obj)
             {
-                if (ReferenceEquals(null, obj)) return false;
-                if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != typeof (Parent)) return false;
-                return Equals((Parent) obj);
+                if (ReferenceEquals(null, obj))
+                    return false;
+                if (ReferenceEquals(this, obj))
+                    return true;
+                if (obj.GetType() != typeof(Parent))
+                    return false;
+                return Equals((Parent)obj);
             }
 
             public override int GetHashCode()
@@ -702,17 +754,22 @@ namespace AutoMapper.UnitTests
 
             public bool Equals(Child other)
             {
-                if (ReferenceEquals(null, other)) return false;
-                if (ReferenceEquals(this, other)) return true;
+                if (ReferenceEquals(null, other))
+                    return false;
+                if (ReferenceEquals(this, other))
+                    return true;
                 return other.Id.Equals(Id);
             }
 
             public override bool Equals(object obj)
             {
-                if (ReferenceEquals(null, obj)) return false;
-                if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != typeof (Child)) return false;
-                return Equals((Child) obj);
+                if (ReferenceEquals(null, obj))
+                    return false;
+                if (ReferenceEquals(this, obj))
+                    return true;
+                if (obj.GetType() != typeof(Child))
+                    return false;
+                return Equals((Child)obj);
             }
 
             public override int GetHashCode()

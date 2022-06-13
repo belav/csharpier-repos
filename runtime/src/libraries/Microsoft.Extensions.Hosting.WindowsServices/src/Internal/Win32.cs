@@ -17,17 +17,23 @@ namespace Microsoft.Extensions.Hosting.WindowsServices.Internal
             try
             {
                 // Get a list of all processes
-                snapshotHandle = Interop.Kernel32.CreateToolhelp32Snapshot(Interop.Kernel32.SnapshotFlags.Process, 0);
+                snapshotHandle = Interop.Kernel32.CreateToolhelp32Snapshot(
+                    Interop.Kernel32.SnapshotFlags.Process,
+                    0
+                );
 
-                Interop.Kernel32.PROCESSENTRY32 procEntry = default(Interop.Kernel32.PROCESSENTRY32);
+                Interop.Kernel32.PROCESSENTRY32 procEntry =
+                    default(Interop.Kernel32.PROCESSENTRY32);
                 procEntry.dwSize = Marshal.SizeOf(typeof(Interop.Kernel32.PROCESSENTRY32));
                 if (Interop.Kernel32.Process32First(snapshotHandle, ref procEntry))
                 {
                     int currentProcessId =
 #if NET
-                        Environment.ProcessId;
+                    Environment.ProcessId;
 #else
-                        Process.GetCurrentProcess().Id;
+                    Process
+                        .GetCurrentProcess()
+                        .Id;
 #endif
                     do
                     {
@@ -35,13 +41,10 @@ namespace Microsoft.Extensions.Hosting.WindowsServices.Internal
                         {
                             return Process.GetProcessById((int)procEntry.th32ParentProcessID);
                         }
-                    }
-                    while (Interop.Kernel32.Process32Next(snapshotHandle, ref procEntry));
+                    } while (Interop.Kernel32.Process32Next(snapshotHandle, ref procEntry));
                 }
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
             finally
             {
                 Interop.Kernel32.CloseHandle(snapshotHandle);

@@ -7,9 +7,12 @@ using Microsoft.CodeAnalysis.LanguageServices;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal sealed class LocalSymbolReferenceFinder : AbstractMemberScopedReferenceFinder<ILocalSymbol>
+    internal sealed class LocalSymbolReferenceFinder
+        : AbstractMemberScopedReferenceFinder<ILocalSymbol>
     {
-        protected override Func<SyntaxToken, bool> GetTokensMatchFunction(ISyntaxFactsService syntaxFacts, string name)
-            => t => IdentifiersMatch(syntaxFacts, name, t);
+        protected override Func<SyntaxToken, bool> GetTokensMatchFunction(
+            ISyntaxFactsService syntaxFacts,
+            string name
+        ) => t => IdentifiersMatch(syntaxFacts, name, t);
     }
 }

@@ -23,15 +23,9 @@ namespace Microsoft.CodeAnalysis
             _span = span;
         }
 
-        public SourceLocation(SyntaxNode node)
-            : this(node.SyntaxTree, node.Span)
-        {
-        }
+        public SourceLocation(SyntaxNode node) : this(node.SyntaxTree, node.Span) { }
 
-        public SourceLocation(in SyntaxToken token)
-            : this(token.SyntaxTree!, token.Span)
-        {
-        }
+        public SourceLocation(in SyntaxToken token) : this(token.SyntaxTree!, token.Span) { }
 
         public SourceLocation(in SyntaxNodeOrToken nodeOrToken)
             : this(nodeOrToken.SyntaxTree!, nodeOrToken.Span)
@@ -39,8 +33,7 @@ namespace Microsoft.CodeAnalysis
             Debug.Assert(nodeOrToken.SyntaxTree is object);
         }
 
-        public SourceLocation(in SyntaxTrivia trivia)
-            : this(trivia.SyntaxTree!, trivia.Span)
+        public SourceLocation(in SyntaxTrivia trivia) : this(trivia.SyntaxTree!, trivia.Span)
         {
             Debug.Assert(trivia.SyntaxTree is object);
         }
@@ -55,26 +48,17 @@ namespace Microsoft.CodeAnalysis
 
         public override LocationKind Kind
         {
-            get
-            {
-                return LocationKind.SourceFile;
-            }
+            get { return LocationKind.SourceFile; }
         }
 
         public override TextSpan SourceSpan
         {
-            get
-            {
-                return _span;
-            }
+            get { return _span; }
         }
 
         public override SyntaxTree SourceTree
         {
-            get
-            {
-                return _syntaxTree;
-            }
+            get { return _syntaxTree; }
         }
 
         public override FileLinePositionSpan GetLineSpan()
@@ -127,7 +111,10 @@ namespace Microsoft.CodeAnalysis
 
         protected override string GetDebuggerDisplay()
         {
-            return base.GetDebuggerDisplay() + "\"" + _syntaxTree.ToString().Substring(_span.Start, _span.Length) + "\"";
+            return base.GetDebuggerDisplay()
+                + "\""
+                + _syntaxTree.ToString().Substring(_span.Start, _span.Length)
+                + "\"";
         }
     }
 }

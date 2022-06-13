@@ -13,7 +13,10 @@ namespace System.Text
     {
         private static unsafe void ReadCodePageIndex(Stream stream, Span<byte> codePageIndex)
         {
-            Debug.Assert(stream is UnmanagedMemoryStream, "UnmanagedMemoryStream will read a full buffer on one call to Read.");
+            Debug.Assert(
+                stream is UnmanagedMemoryStream,
+                "UnmanagedMemoryStream will read a full buffer on one call to Read."
+            );
             int bytesRead = stream.Read(codePageIndex);
             Debug.Assert(bytesRead == codePageIndex.Length);
 
@@ -22,10 +25,11 @@ namespace System.Text
                 fixed (byte* pBytes = &codePageIndex[0])
                 {
                     CodePageIndex* p = (CodePageIndex*)pBytes;
-                    char *pCodePageName = &p->CodePageName;
+                    char* pCodePageName = &p->CodePageName;
                     for (int i = 0; i < 16; i++)
                     {
-                        pCodePageName[i] = (char)BinaryPrimitives.ReverseEndianness((ushort)pCodePageName[i]);
+                        pCodePageName[i] = (char)
+                            BinaryPrimitives.ReverseEndianness((ushort)pCodePageName[i]);
                     }
                     p->CodePage = BinaryPrimitives.ReverseEndianness(p->CodePage);
                     p->ByteCount = BinaryPrimitives.ReverseEndianness(p->ByteCount);
@@ -34,11 +38,14 @@ namespace System.Text
             }
         }
 
-        internal static unsafe EncodingInfo [] GetEncodings(CodePagesEncodingProvider provider)
+        internal static unsafe EncodingInfo[] GetEncodings(CodePagesEncodingProvider provider)
         {
             lock (s_streamLock)
             {
-                s_codePagesEncodingDataStream.Seek(CODEPAGE_DATA_FILE_HEADER_SIZE, SeekOrigin.Begin);
+                s_codePagesEncodingDataStream.Seek(
+                    CODEPAGE_DATA_FILE_HEADER_SIZE,
+                    SeekOrigin.Begin
+                );
 
                 int codePagesCount;
                 fixed (byte* pBytes = &s_codePagesDataHeader[0])
@@ -47,10 +54,13 @@ namespace System.Text
                     codePagesCount = pDataHeader->CodePageCount;
                 }
 
-                EncodingInfo [] encodingInfoList = new EncodingInfo[codePagesCount];
+                EncodingInfo[] encodingInfoList = new EncodingInfo[codePagesCount];
 
                 CodePageIndex codePageIndex = default;
-                Span<byte> pCodePageIndex = new Span<byte>(&codePageIndex, Unsafe.SizeOf<CodePageIndex>());
+                Span<byte> pCodePageIndex = new Span<byte>(
+                    &codePageIndex,
+                    Unsafe.SizeOf<CodePageIndex>()
+                );
 
                 for (int i = 0; i < codePagesCount; i++)
                 {
@@ -60,21 +70,42 @@ namespace System.Text
                     switch (codePageIndex.CodePage)
                     {
                         // Fixup some encoding names.
-                        case 950:   codePageName = "big5"; break;
-                        case 10002: codePageName = "x-mac-chinesetrad"; break;
-                        case 20833: codePageName = "x-ebcdic-koreanextended"; break;
-                        default:    codePageName = new string(&codePageIndex.CodePageName); break;
+                        case 950:
+                            codePageName = "big5";
+                            break;
+                        case 10002:
+                            codePageName = "x-mac-chinesetrad";
+                            break;
+                        case 20833:
+                            codePageName = "x-ebcdic-koreanextended";
+                            break;
+                        default:
+                            codePageName = new string(&codePageIndex.CodePageName);
+                            break;
                     }
 
-                    string? resourceName = EncodingNLS.GetLocalizedEncodingNameResource(codePageIndex.CodePage);
+                    string? resourceName = EncodingNLS.GetLocalizedEncodingNameResource(
+                        codePageIndex.CodePage
+                    );
                     string? displayName = null;
 
-                    if (resourceName != null && resourceName.StartsWith("Globalization_cp_", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        resourceName != null
+                        && resourceName.StartsWith(
+                            "Globalization_cp_",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         displayName = SR.GetResourceString(resourceName);
                     }
 
-                    encodingInfoList[i] = new EncodingInfo(provider, codePageIndex.CodePage, codePageName, displayName ?? codePageName);
+                    encodingInfoList[i] = new EncodingInfo(
+                        provider,
+                        codePageIndex.CodePage,
+                        codePageName,
+                        displayName ?? codePageName
+                    );
                 }
 
                 return encodingInfoList;

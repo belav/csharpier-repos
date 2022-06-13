@@ -38,11 +38,13 @@ namespace System.Security.Cryptography
             {
                 includePrivate = false;
 
-                if (parameters.P != null ||
-                    parameters.DP != null ||
-                    parameters.Q != null ||
-                    parameters.DQ != null ||
-                    parameters.InverseQ != null)
+                if (
+                    parameters.P != null
+                    || parameters.DP != null
+                    || parameters.Q != null
+                    || parameters.DQ != null
+                    || parameters.InverseQ != null
+                )
                 {
                     throw new CryptographicException(SR.Cryptography_InvalidRsaParameters);
                 }
@@ -51,11 +53,13 @@ namespace System.Security.Cryptography
             {
                 includePrivate = true;
 
-                if (parameters.P == null ||
-                    parameters.DP == null ||
-                    parameters.Q == null ||
-                    parameters.DQ == null ||
-                    parameters.InverseQ == null)
+                if (
+                    parameters.P == null
+                    || parameters.DP == null
+                    || parameters.Q == null
+                    || parameters.DQ == null
+                    || parameters.InverseQ == null
+                )
                 {
                     throw new CryptographicException(SR.Cryptography_InvalidRsaParameters);
                 }
@@ -69,12 +73,14 @@ namespace System.Security.Cryptography
                 //
                 // Doing the check here prevents the state in RS1 where the Import succeeds, but corrupts the key,
                 // and makes for a friendlier exception message.
-                if (parameters.D.Length != parameters.Modulus.Length ||
-                    parameters.P.Length != halfModulusLength ||
-                    parameters.Q.Length != halfModulusLength ||
-                    parameters.DP.Length != halfModulusLength ||
-                    parameters.DQ.Length != halfModulusLength ||
-                    parameters.InverseQ.Length != halfModulusLength)
+                if (
+                    parameters.D.Length != parameters.Modulus.Length
+                    || parameters.P.Length != halfModulusLength
+                    || parameters.Q.Length != halfModulusLength
+                    || parameters.DP.Length != halfModulusLength
+                    || parameters.DQ.Length != halfModulusLength
+                    || parameters.InverseQ.Length != halfModulusLength
+                )
                 {
                     throw new CryptographicException(SR.Cryptography_InvalidRsaParameters);
                 }
@@ -92,13 +98,11 @@ namespace System.Security.Cryptography
             //     ------------------
             //
 
-            int blobSize = sizeof(BCRYPT_RSAKEY_BLOB) +
-                            parameters.Exponent.Length +
-                            parameters.Modulus.Length;
+            int blobSize =
+                sizeof(BCRYPT_RSAKEY_BLOB) + parameters.Exponent.Length + parameters.Modulus.Length;
             if (includePrivate)
             {
-                blobSize += parameters.P!.Length +
-                            parameters.Q!.Length;
+                blobSize += parameters.P!.Length + parameters.Q!.Length;
             }
 
             byte[] rsaBlob = new byte[blobSize];
@@ -106,7 +110,9 @@ namespace System.Security.Cryptography
             {
                 // Build the header
                 BCRYPT_RSAKEY_BLOB* pBcryptBlob = (BCRYPT_RSAKEY_BLOB*)pRsaBlob;
-                pBcryptBlob->Magic = includePrivate ? KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC : KeyBlobMagicNumber.BCRYPT_RSAPUBLIC_MAGIC;
+                pBcryptBlob->Magic = includePrivate
+                    ? KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC
+                    : KeyBlobMagicNumber.BCRYPT_RSAPUBLIC_MAGIC;
                 pBcryptBlob->BitLength = parameters.Modulus.Length * 8;
                 pBcryptBlob->cbPublicExp = parameters.Exponent.Length;
                 pBcryptBlob->cbModulus = parameters.Modulus.Length;
@@ -135,149 +141,160 @@ namespace System.Security.Cryptography
             ImportKeyBlob(rsaBlob, includePrivate);
         }
 
-            public override void ImportPkcs8PrivateKey(ReadOnlySpan<byte> source, out int bytesRead)
+        public override void ImportPkcs8PrivateKey(ReadOnlySpan<byte> source, out int bytesRead)
+        {
+            ThrowIfDisposed();
+
+            CngPkcs8.Pkcs8Response response = CngPkcs8.ImportPkcs8PrivateKey(
+                source,
+                out int localRead
+            );
+
+            ProcessPkcs8Response(response);
+            bytesRead = localRead;
+        }
+
+        public override void ImportEncryptedPkcs8PrivateKey(
+            ReadOnlySpan<byte> passwordBytes,
+            ReadOnlySpan<byte> source,
+            out int bytesRead
+        )
+        {
+            ThrowIfDisposed();
+
+            CngPkcs8.Pkcs8Response response = CngPkcs8.ImportEncryptedPkcs8PrivateKey(
+                passwordBytes,
+                source,
+                out int localRead
+            );
+
+            ProcessPkcs8Response(response);
+            bytesRead = localRead;
+        }
+
+        public override void ImportEncryptedPkcs8PrivateKey(
+            ReadOnlySpan<char> password,
+            ReadOnlySpan<byte> source,
+            out int bytesRead
+        )
+        {
+            ThrowIfDisposed();
+
+            CngPkcs8.Pkcs8Response response = CngPkcs8.ImportEncryptedPkcs8PrivateKey(
+                password,
+                source,
+                out int localRead
+            );
+
+            ProcessPkcs8Response(response);
+            bytesRead = localRead;
+        }
+
+        private void ProcessPkcs8Response(CngPkcs8.Pkcs8Response response)
+        {
+            // Wrong algorithm?
+            if (response.GetAlgorithmGroup() != BCryptNative.AlgorithmName.RSA)
             {
-                ThrowIfDisposed();
-
-                CngPkcs8.Pkcs8Response response = CngPkcs8.ImportPkcs8PrivateKey(source, out int localRead);
-
-                ProcessPkcs8Response(response);
-                bytesRead = localRead;
+                response.FreeKey();
+                throw new CryptographicException(SR.Cryptography_NotValidPublicOrPrivateKey);
             }
 
-            public override void ImportEncryptedPkcs8PrivateKey(
-                ReadOnlySpan<byte> passwordBytes,
-                ReadOnlySpan<byte> source,
-                out int bytesRead)
+            AcceptImport(response);
+        }
+
+        public override byte[] ExportEncryptedPkcs8PrivateKey(
+            ReadOnlySpan<byte> passwordBytes,
+            PbeParameters pbeParameters
+        )
+        {
+            ArgumentNullException.ThrowIfNull(pbeParameters);
+
+            return CngPkcs8.ExportEncryptedPkcs8PrivateKey(this, passwordBytes, pbeParameters);
+        }
+
+        public override byte[] ExportEncryptedPkcs8PrivateKey(
+            ReadOnlySpan<char> password,
+            PbeParameters pbeParameters
+        )
+        {
+            ArgumentNullException.ThrowIfNull(pbeParameters);
+
+            PasswordBasedEncryption.ValidatePbeParameters(
+                pbeParameters,
+                password,
+                ReadOnlySpan<byte>.Empty
+            );
+
+            if (CngPkcs8.IsPlatformScheme(pbeParameters))
             {
-                ThrowIfDisposed();
-
-                CngPkcs8.Pkcs8Response response = CngPkcs8.ImportEncryptedPkcs8PrivateKey(
-                    passwordBytes,
-                    source,
-                    out int localRead);
-
-                ProcessPkcs8Response(response);
-                bytesRead = localRead;
+                return ExportEncryptedPkcs8(password, pbeParameters.IterationCount);
             }
 
-            public override void ImportEncryptedPkcs8PrivateKey(
-                ReadOnlySpan<char> password,
-                ReadOnlySpan<byte> source,
-                out int bytesRead)
-            {
-                ThrowIfDisposed();
+            return CngPkcs8.ExportEncryptedPkcs8PrivateKey(this, password, pbeParameters);
+        }
 
-                CngPkcs8.Pkcs8Response response = CngPkcs8.ImportEncryptedPkcs8PrivateKey(
+        public override bool TryExportEncryptedPkcs8PrivateKey(
+            ReadOnlySpan<byte> passwordBytes,
+            PbeParameters pbeParameters,
+            Span<byte> destination,
+            out int bytesWritten
+        )
+        {
+            ArgumentNullException.ThrowIfNull(pbeParameters);
+
+            PasswordBasedEncryption.ValidatePbeParameters(
+                pbeParameters,
+                ReadOnlySpan<char>.Empty,
+                passwordBytes
+            );
+
+            return CngPkcs8.TryExportEncryptedPkcs8PrivateKey(
+                this,
+                passwordBytes,
+                pbeParameters,
+                destination,
+                out bytesWritten
+            );
+        }
+
+        public override bool TryExportEncryptedPkcs8PrivateKey(
+            ReadOnlySpan<char> password,
+            PbeParameters pbeParameters,
+            Span<byte> destination,
+            out int bytesWritten
+        )
+        {
+            ArgumentNullException.ThrowIfNull(pbeParameters);
+
+            PasswordBasedEncryption.ValidatePbeParameters(
+                pbeParameters,
+                password,
+                ReadOnlySpan<byte>.Empty
+            );
+
+            if (CngPkcs8.IsPlatformScheme(pbeParameters))
+            {
+                return TryExportEncryptedPkcs8(
                     password,
-                    source,
-                    out int localRead);
-
-                ProcessPkcs8Response(response);
-                bytesRead = localRead;
-            }
-
-            private void ProcessPkcs8Response(CngPkcs8.Pkcs8Response response)
-            {
-                // Wrong algorithm?
-                if (response.GetAlgorithmGroup() != BCryptNative.AlgorithmName.RSA)
-                {
-                    response.FreeKey();
-                    throw new CryptographicException(SR.Cryptography_NotValidPublicOrPrivateKey);
-                }
-
-                AcceptImport(response);
-            }
-
-            public override byte[] ExportEncryptedPkcs8PrivateKey(
-                ReadOnlySpan<byte> passwordBytes,
-                PbeParameters pbeParameters)
-            {
-                ArgumentNullException.ThrowIfNull(pbeParameters);
-
-                return CngPkcs8.ExportEncryptedPkcs8PrivateKey(
-                    this,
-                    passwordBytes,
-                    pbeParameters);
-            }
-
-            public override byte[] ExportEncryptedPkcs8PrivateKey(
-                ReadOnlySpan<char> password,
-                PbeParameters pbeParameters)
-            {
-                ArgumentNullException.ThrowIfNull(pbeParameters);
-
-                PasswordBasedEncryption.ValidatePbeParameters(
-                    pbeParameters,
-                    password,
-                    ReadOnlySpan<byte>.Empty);
-
-                if (CngPkcs8.IsPlatformScheme(pbeParameters))
-                {
-                    return ExportEncryptedPkcs8(password, pbeParameters.IterationCount);
-                }
-
-                return CngPkcs8.ExportEncryptedPkcs8PrivateKey(
-                    this,
-                    password,
-                    pbeParameters);
-            }
-
-            public override bool TryExportEncryptedPkcs8PrivateKey(
-                ReadOnlySpan<byte> passwordBytes,
-                PbeParameters pbeParameters,
-                Span<byte> destination,
-                out int bytesWritten)
-            {
-                ArgumentNullException.ThrowIfNull(pbeParameters);
-
-                PasswordBasedEncryption.ValidatePbeParameters(
-                    pbeParameters,
-                    ReadOnlySpan<char>.Empty,
-                    passwordBytes);
-
-                return CngPkcs8.TryExportEncryptedPkcs8PrivateKey(
-                    this,
-                    passwordBytes,
-                    pbeParameters,
+                    pbeParameters.IterationCount,
                     destination,
-                    out bytesWritten);
+                    out bytesWritten
+                );
             }
 
-            public override bool TryExportEncryptedPkcs8PrivateKey(
-                ReadOnlySpan<char> password,
-                PbeParameters pbeParameters,
-                Span<byte> destination,
-                out int bytesWritten)
-            {
-                ArgumentNullException.ThrowIfNull(pbeParameters);
+            return CngPkcs8.TryExportEncryptedPkcs8PrivateKey(
+                this,
+                password,
+                pbeParameters,
+                destination,
+                out bytesWritten
+            );
+        }
 
-                PasswordBasedEncryption.ValidatePbeParameters(
-                    pbeParameters,
-                    password,
-                    ReadOnlySpan<byte>.Empty);
-
-                if (CngPkcs8.IsPlatformScheme(pbeParameters))
-                {
-                    return TryExportEncryptedPkcs8(
-                        password,
-                        pbeParameters.IterationCount,
-                        destination,
-                        out bytesWritten);
-                }
-
-                return CngPkcs8.TryExportEncryptedPkcs8PrivateKey(
-                    this,
-                    password,
-                    pbeParameters,
-                    destination,
-                    out bytesWritten);
-            }
-
-            /// <summary>
-            ///     Exports the key used by the RSA object into an RSAParameters object.
-            /// </summary>
-            public override RSAParameters ExportParameters(bool includePrivateParameters)
+        /// <summary>
+        ///     Exports the key used by the RSA object into an RSAParameters object.
+        /// </summary>
+        public override RSAParameters ExportParameters(bool includePrivateParameters)
         {
             byte[] rsaBlob = ExportKeyBlob(includePrivateParameters);
             RSAParameters rsaParams = default;
@@ -285,7 +302,11 @@ namespace System.Security.Cryptography
             return rsaParams;
         }
 
-        private static void ExportParameters(ref RSAParameters rsaParams, byte[] rsaBlob, bool includePrivateParameters)
+        private static void ExportParameters(
+            ref RSAParameters rsaParams,
+            byte[] rsaBlob,
+            bool includePrivateParameters
+        )
         {
             //
             // We now have a buffer laid out as follows:
@@ -305,7 +326,6 @@ namespace System.Security.Cryptography
             // Check the magic value in the key blob header. If the blob does not have the required magic,
             // then throw a CryptographicException.
             CheckMagicValueOfKey(magic, includePrivateParameters);
-
             unsafe
             {
                 // Fail-fast if a rogue provider gave us a blob that isn't even the size of the blob header.
@@ -319,17 +339,49 @@ namespace System.Security.Cryptography
                     int offset = sizeof(BCRYPT_RSAKEY_BLOB);
 
                     // Read out the exponent
-                    rsaParams.Exponent = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbPublicExp);
-                    rsaParams.Modulus = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbModulus);
+                    rsaParams.Exponent = Interop.BCrypt.Consume(
+                        rsaBlob,
+                        ref offset,
+                        pBcryptBlob->cbPublicExp
+                    );
+                    rsaParams.Modulus = Interop.BCrypt.Consume(
+                        rsaBlob,
+                        ref offset,
+                        pBcryptBlob->cbModulus
+                    );
 
                     if (includePrivateParameters)
                     {
-                        rsaParams.P = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime1);
-                        rsaParams.Q = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime2);
-                        rsaParams.DP = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime1);
-                        rsaParams.DQ = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime2);
-                        rsaParams.InverseQ = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbPrime1);
-                        rsaParams.D = Interop.BCrypt.Consume(rsaBlob, ref offset, pBcryptBlob->cbModulus);
+                        rsaParams.P = Interop.BCrypt.Consume(
+                            rsaBlob,
+                            ref offset,
+                            pBcryptBlob->cbPrime1
+                        );
+                        rsaParams.Q = Interop.BCrypt.Consume(
+                            rsaBlob,
+                            ref offset,
+                            pBcryptBlob->cbPrime2
+                        );
+                        rsaParams.DP = Interop.BCrypt.Consume(
+                            rsaBlob,
+                            ref offset,
+                            pBcryptBlob->cbPrime1
+                        );
+                        rsaParams.DQ = Interop.BCrypt.Consume(
+                            rsaBlob,
+                            ref offset,
+                            pBcryptBlob->cbPrime2
+                        );
+                        rsaParams.InverseQ = Interop.BCrypt.Consume(
+                            rsaBlob,
+                            ref offset,
+                            pBcryptBlob->cbPrime1
+                        );
+                        rsaParams.D = Interop.BCrypt.Consume(
+                            rsaBlob,
+                            ref offset,
+                            pBcryptBlob->cbModulus
+                        );
                     }
                 }
             }
@@ -340,11 +392,17 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="magic">The expected magic number.</param>
         /// <param name="includePrivateParameters">Private blob if true else public key blob</param>
-        private static void CheckMagicValueOfKey(KeyBlobMagicNumber magic, bool includePrivateParameters)
+        private static void CheckMagicValueOfKey(
+            KeyBlobMagicNumber magic,
+            bool includePrivateParameters
+        )
         {
             if (includePrivateParameters)
             {
-                if (magic != KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC && magic != KeyBlobMagicNumber.BCRYPT_RSAFULLPRIVATE_MAGIC)
+                if (
+                    magic != KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC
+                    && magic != KeyBlobMagicNumber.BCRYPT_RSAFULLPRIVATE_MAGIC
+                )
                 {
                     throw new CryptographicException(SR.Cryptography_NotValidPrivateKey);
                 }
@@ -354,9 +412,14 @@ namespace System.Security.Cryptography
                 if (magic != KeyBlobMagicNumber.BCRYPT_RSAPUBLIC_MAGIC)
                 {
                     // Private key magic is permissible too since the public key can be derived from the private key blob.
-                    if (magic != KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC && magic != KeyBlobMagicNumber.BCRYPT_RSAFULLPRIVATE_MAGIC)
+                    if (
+                        magic != KeyBlobMagicNumber.BCRYPT_RSAPRIVATE_MAGIC
+                        && magic != KeyBlobMagicNumber.BCRYPT_RSAFULLPRIVATE_MAGIC
+                    )
                     {
-                        throw new CryptographicException(SR.Cryptography_NotValidPublicOrPrivateKey);
+                        throw new CryptographicException(
+                            SR.Cryptography_NotValidPublicOrPrivateKey
+                        );
                     }
                 }
             }

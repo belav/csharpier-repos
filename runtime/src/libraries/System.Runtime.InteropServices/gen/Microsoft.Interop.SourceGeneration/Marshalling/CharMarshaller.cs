@@ -14,15 +14,18 @@ namespace Microsoft.Interop
 {
     public sealed class Utf16CharMarshaller : IMarshallingGenerator
     {
-        private static readonly PredefinedTypeSyntax s_nativeType = PredefinedType(Token(SyntaxKind.UShortKeyword));
+        private static readonly PredefinedTypeSyntax s_nativeType = PredefinedType(
+            Token(SyntaxKind.UShortKeyword)
+        );
 
-        public Utf16CharMarshaller()
-        {
-        }
+        public Utf16CharMarshaller() { }
 
         public bool IsSupported(TargetFramework target, Version version) => true;
 
-        public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context)
+        public ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             if (!info.IsByRef)
             {
@@ -44,7 +47,9 @@ namespace Microsoft.Interop
 
         public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info)
         {
-            return info.IsByRef ? SignatureBehavior.PointerToNativeType : SignatureBehavior.NativeType;
+            return info.IsByRef
+                ? SignatureBehavior.PointerToNativeType
+                : SignatureBehavior.NativeType;
         }
 
         public IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
@@ -60,23 +65,38 @@ namespace Microsoft.Interop
                         VariableDeclaration(
                             PointerType(PredefinedType(Token(SyntaxKind.CharKeyword))),
                             SingletonSeparatedList(
-                                VariableDeclarator(Identifier(PinnedIdentifier(info.InstanceIdentifier)))
-                                    .WithInitializer(EqualsValueClause(
-                                        PrefixUnaryExpression(
-                                            SyntaxKind.AddressOfExpression,
-                                            IdentifierName(Identifier(managedIdentifier)))
-                                    ))
+                                VariableDeclarator(
+                                        Identifier(PinnedIdentifier(info.InstanceIdentifier))
+                                    )
+                                    .WithInitializer(
+                                        EqualsValueClause(
+                                            PrefixUnaryExpression(
+                                                SyntaxKind.AddressOfExpression,
+                                                IdentifierName(Identifier(managedIdentifier))
+                                            )
+                                        )
+                                    )
                             )
                         ),
                         // ushort* <native> = (ushort*)<pinned>;
                         LocalDeclarationStatement(
-                            VariableDeclaration(PointerType(AsNativeType(info)),
+                            VariableDeclaration(
+                                PointerType(AsNativeType(info)),
                                 SingletonSeparatedList(
                                     VariableDeclarator(nativeIdentifier)
-                                        .WithInitializer(EqualsValueClause(
-                                            CastExpression(
-                                                PointerType(AsNativeType(info)),
-                                                IdentifierName(PinnedIdentifier(info.InstanceIdentifier))))))))
+                                        .WithInitializer(
+                                            EqualsValueClause(
+                                                CastExpression(
+                                                    PointerType(AsNativeType(info)),
+                                                    IdentifierName(
+                                                        PinnedIdentifier(info.InstanceIdentifier)
+                                                    )
+                                                )
+                                            )
+                                        )
+                                )
+                            )
+                        )
                     );
                 }
                 yield break;
@@ -87,27 +107,36 @@ namespace Microsoft.Interop
                 case StubCodeContext.Stage.Setup:
                     break;
                 case StubCodeContext.Stage.Marshal:
-                    if ((info.IsByRef && info.RefKind != RefKind.Out) || !context.SingleFrameSpansNativeContext)
+                    if (
+                        (info.IsByRef && info.RefKind != RefKind.Out)
+                        || !context.SingleFrameSpansNativeContext
+                    )
                     {
                         yield return ExpressionStatement(
                             AssignmentExpression(
                                 SyntaxKind.SimpleAssignmentExpression,
                                 IdentifierName(nativeIdentifier),
-                                IdentifierName(managedIdentifier)));
+                                IdentifierName(managedIdentifier)
+                            )
+                        );
                     }
 
                     break;
                 case StubCodeContext.Stage.Unmarshal:
-                    if (info.IsManagedReturnPosition || (info.IsByRef && info.RefKind != RefKind.In))
+                    if (
+                        info.IsManagedReturnPosition || (info.IsByRef && info.RefKind != RefKind.In)
+                    )
                     {
                         yield return ExpressionStatement(
                             AssignmentExpression(
                                 SyntaxKind.SimpleAssignmentExpression,
                                 IdentifierName(managedIdentifier),
                                 CastExpression(
-                                    PredefinedType(
-                                        Token(SyntaxKind.CharKeyword)),
-                                    IdentifierName(nativeIdentifier))));
+                                    PredefinedType(Token(SyntaxKind.CharKeyword)),
+                                    IdentifierName(nativeIdentifier)
+                                )
+                            )
+                        );
                     }
 
                     break;
@@ -118,10 +147,14 @@ namespace Microsoft.Interop
 
         public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context)
         {
-            return info.IsManagedReturnPosition || (info.IsByRef && !context.SingleFrameSpansNativeContext);
+            return info.IsManagedReturnPosition
+                || (info.IsByRef && !context.SingleFrameSpansNativeContext);
         }
 
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context) => false;
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        ) => false;
 
         private static bool IsPinningPathSupported(TypePositionInfo info, StubCodeContext context)
         {

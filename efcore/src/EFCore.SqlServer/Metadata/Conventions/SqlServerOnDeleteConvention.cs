@@ -15,7 +15,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
 ///     for more information and examples.
 /// </remarks>
-public class SqlServerOnDeleteConvention : CascadeDeleteConvention, ISkipNavigationForeignKeyChangedConvention
+public class SqlServerOnDeleteConvention
+    : CascadeDeleteConvention,
+        ISkipNavigationForeignKeyChangedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerOnDeleteConvention" />.
@@ -24,8 +26,8 @@ public class SqlServerOnDeleteConvention : CascadeDeleteConvention, ISkipNavigat
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public SqlServerOnDeleteConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
-        : base(dependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    ) : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }
@@ -40,7 +42,8 @@ public class SqlServerOnDeleteConvention : CascadeDeleteConvention, ISkipNavigat
         IConventionSkipNavigationBuilder skipNavigationBuilder,
         IConventionForeignKey? foreignKey,
         IConventionForeignKey? oldForeignKey,
-        IConventionContext<IConventionForeignKey> context)
+        IConventionContext<IConventionForeignKey> context
+    )
     {
         if (foreignKey is not null && foreignKey.IsInModel)
         {
@@ -62,20 +65,29 @@ public class SqlServerOnDeleteConvention : CascadeDeleteConvention, ISkipNavigat
             return DeleteBehavior.ClientCascade;
         }
 
-        var selfReferencingSkipNavigation = foreignKey.GetReferencingSkipNavigations()
+        var selfReferencingSkipNavigation = foreignKey
+            .GetReferencingSkipNavigations()
             .FirstOrDefault(s => s.Inverse != null && s.TargetEntityType == s.DeclaringEntityType);
         if (selfReferencingSkipNavigation == null)
         {
             return deleteBehavior;
         }
 
-        if (selfReferencingSkipNavigation
-            == selfReferencingSkipNavigation.DeclaringEntityType.GetDeclaredSkipNavigations()
-                .First(s => s == selfReferencingSkipNavigation || s == selfReferencingSkipNavigation.Inverse)
-            && selfReferencingSkipNavigation != selfReferencingSkipNavigation.Inverse)
+        if (
+            selfReferencingSkipNavigation
+                == selfReferencingSkipNavigation.DeclaringEntityType
+                    .GetDeclaredSkipNavigations()
+                    .First(
+                        s =>
+                            s == selfReferencingSkipNavigation
+                            || s == selfReferencingSkipNavigation.Inverse
+                    )
+            && selfReferencingSkipNavigation != selfReferencingSkipNavigation.Inverse
+        )
         {
             selfReferencingSkipNavigation.Inverse!.ForeignKey?.Builder.OnDelete(
-                GetTargetDeleteBehavior(selfReferencingSkipNavigation.Inverse.ForeignKey));
+                GetTargetDeleteBehavior(selfReferencingSkipNavigation.Inverse.ForeignKey)
+            );
             return DeleteBehavior.ClientCascade;
         }
 

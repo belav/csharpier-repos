@@ -19,12 +19,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {
-            return SyntaxFactory.ParseSyntaxTree(text, options: (options ?? TestOptions.Regular).WithLanguageVersion(LanguageVersion.CSharp8));
+            return SyntaxFactory.ParseSyntaxTree(
+                text,
+                options: (options ?? TestOptions.Regular).WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
-        protected override CSharpSyntaxNode ParseNode(string text, CSharpParseOptions options = null)
+        protected override CSharpSyntaxNode ParseNode(
+            string text,
+            CSharpParseOptions options = null
+        )
         {
-            return SyntaxFactory.ParseExpression(text, options: (options ?? TestOptions.Regular).WithLanguageVersion(LanguageVersion.CSharp8));
+            return SyntaxFactory.ParseExpression(
+                text,
+                options: (options ?? TestOptions.Regular).WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
         [Theory, WorkItem(32318, "https://github.com/dotnet/roslyn/issues/32318")]
@@ -32,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [InlineData(false)]
         public void AwaitUsingDeclaration(bool useCSharp8)
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -42,7 +56,9 @@ class C
         }
     }
 }
-", options: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular7_3);
+",
+                options: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular7_3
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -110,7 +126,8 @@ class C
         [Fact]
         public void AwaitUsingWithExpression()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -120,7 +137,8 @@ class C
         }
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -173,7 +191,8 @@ class C
         [Fact, WorkItem(30565, "https://github.com/dotnet/roslyn/issues/30565")]
         public void AwaitUsingWithExpression_Reversed()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -183,7 +202,8 @@ class C
         }
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -255,7 +275,8 @@ class C
         [InlineData(false)]
         public void AwaitForeach(bool useCSharp8)
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -265,7 +286,9 @@ class C
         }
     }
 }
-", options: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular7_3);
+",
+                options: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular7_3
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -324,7 +347,8 @@ class C
         [Fact, WorkItem(30565, "https://github.com/dotnet/roslyn/issues/30565")]
         public void AwaitForeach_Reversed()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -334,7 +358,8 @@ class C
         }
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -418,7 +443,8 @@ class C
         [InlineData(false)]
         public void DeconstructionAwaitForeach(bool useCSharp8)
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -428,7 +454,9 @@ class C
         }
     }
 }
-", options: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular7_3);
+",
+                options: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular7_3
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);

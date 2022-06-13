@@ -26,7 +26,9 @@ public static class HealthCheckServiceCollectionExtensions
     public static IHealthChecksBuilder AddHealthChecks(this IServiceCollection services)
     {
         services.TryAddSingleton<HealthCheckService, DefaultHealthCheckService>();
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IHostedService, HealthCheckPublisherHostedService>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<IHostedService, HealthCheckPublisherHostedService>()
+        );
         return new HealthChecksBuilder(services);
     }
 }

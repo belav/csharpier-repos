@@ -9,7 +9,11 @@ internal sealed class HubConnectionBinder<THub> : IInvocationBinder where THub :
     private readonly HubConnectionContext _connection;
     private readonly HubLifetimeManager<THub> _hubLifetimeManager;
 
-    public HubConnectionBinder(HubDispatcher<THub> dispatcher, HubLifetimeManager<THub> lifetimeManager, HubConnectionContext connection)
+    public HubConnectionBinder(
+        HubDispatcher<THub> dispatcher,
+        HubLifetimeManager<THub> lifetimeManager,
+        HubConnectionContext connection
+    )
     {
         _dispatcher = dispatcher;
         _connection = connection;

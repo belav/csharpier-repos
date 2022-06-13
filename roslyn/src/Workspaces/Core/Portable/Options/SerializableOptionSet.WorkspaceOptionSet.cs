@@ -22,19 +22,23 @@ namespace Microsoft.CodeAnalysis.Options
             private ImmutableDictionary<OptionKey, object?> _values;
 
             internal WorkspaceOptionSet(IOptionService service)
-                : this(service, ImmutableDictionary<OptionKey, object?>.Empty)
-            {
-            }
+                : this(service, ImmutableDictionary<OptionKey, object?>.Empty) { }
 
             public IOptionService OptionService { get; }
 
-            private WorkspaceOptionSet(IOptionService service, ImmutableDictionary<OptionKey, object?> values)
+            private WorkspaceOptionSet(
+                IOptionService service,
+                ImmutableDictionary<OptionKey, object?> values
+            )
             {
                 OptionService = service;
                 _values = values;
             }
 
-            [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/30819", AllowLocks = false)]
+            [PerformanceSensitive(
+                "https://github.com/dotnet/roslyn/issues/30819",
+                AllowLocks = false
+            )]
             private protected override object? GetOptionCore(OptionKey optionKey)
             {
                 if (_values.TryGetValue(optionKey, out var value))
@@ -51,7 +55,10 @@ namespace Microsoft.CodeAnalysis.Options
                 // make sure we first load this in current optionset
                 this.GetOption(optionAndLanguage);
 
-                return new WorkspaceOptionSet(OptionService, _values.SetItem(optionAndLanguage, value));
+                return new WorkspaceOptionSet(
+                    OptionService,
+                    _values.SetItem(optionAndLanguage, value)
+                );
             }
 
             /// <summary>

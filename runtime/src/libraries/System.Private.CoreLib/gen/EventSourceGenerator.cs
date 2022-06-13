@@ -35,14 +35,18 @@ namespace Generators
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            IncrementalValuesProvider<EventSourceClass> eventSourceClasses =
-                context.SyntaxProvider
+            IncrementalValuesProvider<EventSourceClass> eventSourceClasses = context.SyntaxProvider
                 .CreateSyntaxProvider(IsSyntaxTargetForGeneration, GetSemanticTargetForGeneration)
                 .Where(x => x is not null);
 
             context.RegisterSourceOutput(eventSourceClasses, EmitSourceFile);
         }
 
-        private sealed record EventSourceClass(string Namespace, string ClassName, string SourceName, Guid Guid);
+        private sealed record EventSourceClass(
+            string Namespace,
+            string ClassName,
+            string SourceName,
+            Guid Guid
+        );
     }
 }

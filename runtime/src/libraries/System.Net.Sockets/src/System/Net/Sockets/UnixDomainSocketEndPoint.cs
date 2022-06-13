@@ -18,9 +18,7 @@ namespace System.Net.Sockets
         // Tracks the file Socket should delete on Dispose.
         internal string? BoundFileName { get; }
 
-        public UnixDomainSocketEndPoint(string path)
-            : this(path, null)
-        { }
+        public UnixDomainSocketEndPoint(string path) : this(path, null) { }
 
         private UnixDomainSocketEndPoint(string path, string? boundFileName)
         {
@@ -41,8 +39,10 @@ namespace System.Net.Sockets
             if (path.Length == 0 || bufferLength > s_nativePathLength)
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(path), path,
-                    SR.Format(SR.ArgumentOutOfRange_PathLengthInvalid, path, s_nativePathLength));
+                    nameof(path),
+                    path,
+                    SR.Format(SR.ArgumentOutOfRange_PathLengthInvalid, path, s_nativePathLength)
+                );
             }
 
             _path = path;
@@ -62,8 +62,10 @@ namespace System.Net.Sockets
         {
             ArgumentNullException.ThrowIfNull(socketAddress);
 
-            if (socketAddress.Family != EndPointAddressFamily ||
-                socketAddress.Size > s_nativeAddressSize)
+            if (
+                socketAddress.Family != EndPointAddressFamily
+                || socketAddress.Size > s_nativeAddressSize
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(socketAddress));
             }
@@ -107,7 +109,8 @@ namespace System.Net.Sockets
             return result;
         }
 
-        public override EndPoint Create(SocketAddress socketAddress) => new UnixDomainSocketEndPoint(socketAddress);
+        public override EndPoint Create(SocketAddress socketAddress) =>
+            new UnixDomainSocketEndPoint(socketAddress);
 
         public override AddressFamily AddressFamily => EndPointAddressFamily;
 
@@ -144,6 +147,7 @@ namespace System.Net.Sockets
 
         private static bool IsAbstract(string path) => path.Length > 0 && path[0] == '\0';
 
-        private static bool IsAbstract(byte[] encodedPath) => encodedPath.Length > 0 && encodedPath[0] == 0;
+        private static bool IsAbstract(byte[] encodedPath) =>
+            encodedPath.Length > 0 && encodedPath[0] == 0;
     }
 }

@@ -23,22 +23,34 @@ public class ConnectionLimitTests : LoggedTest
     [Fact]
     public async Task ResetsCountWhenConnectionClosed()
     {
-        var requestTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var releasedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var lockedTcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var releasedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var lockedTcs = new TaskCompletionSource<bool>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var counter = new EventRaisingResourceCounter(ResourceCounter.Quota(1));
         counter.OnLock += (s, e) => lockedTcs.TrySetResult(e);
         counter.OnRelease += (s, e) => releasedTcs.TrySetResult();
 
-        await using (var server = CreateServerWithMaxConnections(async context =>
-        {
-            await context.Response.WriteAsync("Hello");
-            await requestTcs.Task;
-        }, counter))
+        await using (
+            var server = CreateServerWithMaxConnections(
+                async context =>
+                {
+                    await context.Response.WriteAsync("Hello");
+                    await requestTcs.Task;
+                },
+                counter
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.SendEmptyGetAsKeepAlive(); ;
+                await connection.SendEmptyGetAsKeepAlive();
+                ;
                 await connection.Receive("HTTP/1.1 200 OK");
                 Assert.True(await lockedTcs.Task.DefaultTimeout());
                 requestTcs.TrySetResult();
@@ -51,19 +63,24 @@ public class ConnectionLimitTests : LoggedTest
     [Fact]
     public async Task UpgradedConnectionsCountsAgainstDifferentLimit()
     {
-        await using (var server = CreateServerWithMaxConnections(async context =>
-        {
-            var feature = context.Features.Get<IHttpUpgradeFeature>();
-            if (feature.IsUpgradableRequest)
-            {
-                var stream = await feature.UpgradeAsync();
-                // keep it running until aborted
-                while (!context.RequestAborted.IsCancellationRequested)
+        await using (
+            var server = CreateServerWithMaxConnections(
+                async context =>
                 {
-                    await Task.Delay(100);
-                }
-            }
-        }, max: 1))
+                    var feature = context.Features.Get<IHttpUpgradeFeature>();
+                    if (feature.IsUpgradableRequest)
+                    {
+                        var stream = await feature.UpgradeAsync();
+                        // keep it running until aborted
+                        while (!context.RequestAborted.IsCancellationRequested)
+                        {
+                            await Task.Delay(100);
+                        }
+                    }
+                },
+                max: 1
+            )
+        )
         {
             using (var disposables = new DisposableStack<InMemoryConnection>())
             {
@@ -100,13 +117,20 @@ public class ConnectionLimitTests : LoggedTest
     public async Task RejectsConnectionsWhenLimitReached()
     {
         const int max = 10;
-        var requestTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
-        await using (var server = CreateServerWithMaxConnections(async context =>
-        {
-            await context.Response.WriteAsync("Hello");
-            await requestTcs.Task;
-        }, max))
+        await using (
+            var server = CreateServerWithMaxConnections(
+                async context =>
+                {
+                    await context.Response.WriteAsync("Hello");
+                    await requestTcs.Task;
+                },
+                max
+            )
+        )
         {
             using (var disposables = new DisposableStack<InMemoryConnection>())
             {
@@ -147,8 +171,12 @@ public class ConnectionLimitTests : LoggedTest
         const int count = 100;
         var opened = 0;
         var closed = 0;
-        var openedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var closedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var openedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var closedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         var counter = new EventRaisingResourceCounter(ResourceCounter.Quota(uint.MaxValue));
 
@@ -171,21 +199,25 @@ public class ConnectionLimitTests : LoggedTest
         await using (var server = CreateServerWithMaxConnections(_ => Task.CompletedTask, counter))
         {
             // open a bunch of connections in parallel
-            Parallel.For(0, count, async i =>
-            {
-                try
+            Parallel.For(
+                0,
+                count,
+                async i =>
                 {
-                    using (var connection = server.CreateConnection())
+                    try
                     {
-                        await connection.SendEmptyGetAsKeepAlive();
-                        await connection.Receive("HTTP/1.1 200");
+                        using (var connection = server.CreateConnection())
+                        {
+                            await connection.SendEmptyGetAsKeepAlive();
+                            await connection.Receive("HTTP/1.1 200");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        openedTcs.TrySetException(ex);
                     }
                 }
-                catch (Exception ex)
-                {
-                    openedTcs.TrySetException(ex);
-                }
-            });
+            );
 
             // wait until resource counter has called lock for each connection
             await openedTcs.Task.TimeoutAfter(TimeSpan.FromSeconds(120));
@@ -203,14 +235,21 @@ public class ConnectionLimitTests : LoggedTest
         return new TestServer(app, serviceContext);
     }
 
-    private TestServer CreateServerWithMaxConnections(RequestDelegate app, ResourceCounter concurrentConnectionCounter)
+    private TestServer CreateServerWithMaxConnections(
+        RequestDelegate app,
+        ResourceCounter concurrentConnectionCounter
+    )
     {
         var serviceContext = new TestServiceContext(LoggerFactory);
 
         var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
         listenOptions.Use(next =>
         {
-            var middleware = new ConnectionLimitMiddleware<ConnectionContext>(c => next(c), concurrentConnectionCounter, serviceContext.Log);
+            var middleware = new ConnectionLimitMiddleware<ConnectionContext>(
+                c => next(c),
+                concurrentConnectionCounter,
+                serviceContext.Log
+            );
             return middleware.OnConnectionAsync;
         });
 

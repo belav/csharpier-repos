@@ -31,7 +31,10 @@ public interface IConventionSkipNavigationBuilder : IConventionPropertyBaseBuild
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionSkipNavigationBuilder? HasField(string? fieldName, bool fromDataAnnotation = false);
+    new IConventionSkipNavigationBuilder? HasField(
+        string? fieldName,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the backing field to use for this navigation.
@@ -42,7 +45,10 @@ public interface IConventionSkipNavigationBuilder : IConventionPropertyBaseBuild
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionSkipNavigationBuilder? HasField(FieldInfo? fieldInfo, bool fromDataAnnotation = false);
+    new IConventionSkipNavigationBuilder? HasField(
+        FieldInfo? fieldInfo,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the <see cref="PropertyAccessMode" /> to use for this navigation.
@@ -55,7 +61,8 @@ public interface IConventionSkipNavigationBuilder : IConventionPropertyBaseBuild
     /// </returns>
     new IConventionSkipNavigationBuilder? UsePropertyAccessMode(
         PropertyAccessMode? propertyAccessMode,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the foreign key.
@@ -68,7 +75,10 @@ public interface IConventionSkipNavigationBuilder : IConventionPropertyBaseBuild
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionSkipNavigationBuilder? HasForeignKey(IConventionForeignKey? foreignKey, bool fromDataAnnotation = false);
+    IConventionSkipNavigationBuilder? HasForeignKey(
+        IConventionForeignKey? foreignKey,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="IConventionSkipNavigation.ForeignKey" /> can be set for this navigation
@@ -92,7 +102,10 @@ public interface IConventionSkipNavigationBuilder : IConventionPropertyBaseBuild
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionSkipNavigationBuilder? HasInverse(IConventionSkipNavigation? inverse, bool fromDataAnnotation = false);
+    IConventionSkipNavigationBuilder? HasInverse(
+        IConventionSkipNavigation? inverse,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="IConventionSkipNavigation.Inverse" /> can be set for this navigation
@@ -123,5 +136,8 @@ public interface IConventionSkipNavigationBuilder : IConventionPropertyBaseBuild
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionSkipNavigationBuilder? AutoInclude(bool? autoInclude, bool fromDataAnnotation = false);
+    IConventionSkipNavigationBuilder? AutoInclude(
+        bool? autoInclude,
+        bool fromDataAnnotation = false
+    );
 }

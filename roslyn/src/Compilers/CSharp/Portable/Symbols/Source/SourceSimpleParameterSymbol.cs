@@ -14,15 +14,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal sealed class SourceSimpleParameterSymbol : SourceParameterSymbol
     {
         public SourceSimpleParameterSymbol(
-           Symbol owner,
-           TypeWithAnnotations parameterType,
-           int ordinal,
-           RefKind refKind,
-           string name,
-           ImmutableArray<Location> locations)
-           : base(owner, parameterType, ordinal, refKind, name, locations)
-        {
-        }
+            Symbol owner,
+            TypeWithAnnotations parameterType,
+            int ordinal,
+            RefKind refKind,
+            string name,
+            ImmutableArray<Location> locations
+        ) : base(owner, parameterType, ordinal, refKind, name, locations) { }
 
         public override bool IsDiscard => false;
 
@@ -91,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return -1; }
         }
 
-        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes => ImmutableArray<int>.Empty;
+        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes =>
+            ImmutableArray<int>.Empty;
 
         internal override bool HasInterpolatedStringHandlerArgumentError => false;
 
@@ -100,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return FlowAnalysisAnnotations.None; }
         }
 
-        internal override ImmutableHashSet<string> NotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        internal override ImmutableHashSet<string> NotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
         internal override MarshalPseudoCustomAttributeData? MarshallingInformation
         {

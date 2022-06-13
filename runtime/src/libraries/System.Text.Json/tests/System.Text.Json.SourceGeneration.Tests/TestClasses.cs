@@ -108,9 +108,7 @@ namespace System.Text.Json.SourceGeneration.Tests
 
     public record HighLowTempsRecord(int High, int Low);
 
-    public class EmptyPoco
-    {
-    }
+    public class EmptyPoco { }
 
     public class MyType
     {
@@ -132,6 +130,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         public string MyProperty { get; set; }
 
         public void OnSerializing() => MyProperty = "Before";
+
         void IJsonOnSerialized.OnSerialized() => MyProperty = "After";
     }
 
@@ -164,7 +163,10 @@ namespace System.Text.Json.SourceGeneration.Tests
     public class TypeWithValidationAttributes
     {
         [ComponentModel.DataAnnotations.Required(ErrorMessage = "Name is required")]
-        [ComponentModel.DataAnnotations.StringLength(100, ErrorMessage = "Name must not be longer than 100 characters")]
+        [ComponentModel.DataAnnotations.StringLength(
+            100,
+            ErrorMessage = "Name must not be longer than 100 characters"
+        )]
         public string Name { get; set; }
 
         [ComponentModel.DataAnnotations.Required]
@@ -176,12 +178,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         public string TestProperty { get; set; }
     }
 
-    public class DerivedAttribute : BaseAttribute
-    { }
+    public class DerivedAttribute : BaseAttribute { }
 
     [Derived(TestProperty = "Test")]
-    public class TypeWithDerivedAttribute
-    { }
+    public class TypeWithDerivedAttribute { }
 
     [JsonDerivedType(typeof(DerivedClass), "derivedClass")]
     public class PolymorphicClass

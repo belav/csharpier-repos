@@ -5,8 +5,7 @@ namespace System.Numerics
 {
     /// <summary>Defines support for root functions.</summary>
     /// <typeparam name="TSelf">The type that implements this interface.</typeparam>
-    public interface IRootFunctions<TSelf>
-        where TSelf : IRootFunctions<TSelf>
+    public interface IRootFunctions<TSelf> where TSelf : IRootFunctions<TSelf>
     {
         /// <summary>Computes the cube-root of a value.</summary>
         /// <param name="x">The value whose cube-root is to be computed.</param>

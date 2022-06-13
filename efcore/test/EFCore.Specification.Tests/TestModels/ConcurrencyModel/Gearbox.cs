@@ -5,9 +5,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
 public class Gearbox
 {
-    public Gearbox()
-    {
-    }
+    public Gearbox() { }
 
     private Gearbox(int id, string name)
     {

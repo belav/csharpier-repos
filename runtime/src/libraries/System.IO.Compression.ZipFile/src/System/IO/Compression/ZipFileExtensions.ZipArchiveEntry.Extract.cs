@@ -60,7 +60,11 @@ namespace System.IO.Compression
         /// The path is permitted to specify relative or absolute path information.
         /// Relative path information is interpreted as relative to the current working directory.</param>
         /// <param name="overwrite">True to indicate overwrite.</param>
-        public static void ExtractToFile(this ZipArchiveEntry source, string destinationFileName, bool overwrite)
+        public static void ExtractToFile(
+            this ZipArchiveEntry source,
+            string destinationFileName,
+            bool overwrite
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(destinationFileName);
@@ -68,7 +72,16 @@ namespace System.IO.Compression
             // Rely on FileStream's ctor for further checking destinationFileName parameter
             FileMode fMode = overwrite ? FileMode.Create : FileMode.CreateNew;
 
-            using (FileStream fs = new FileStream(destinationFileName, fMode, FileAccess.Write, FileShare.None, bufferSize: 0x1000, useAsync: false))
+            using (
+                FileStream fs = new FileStream(
+                    destinationFileName,
+                    fMode,
+                    FileAccess.Write,
+                    FileShare.None,
+                    bufferSize: 0x1000,
+                    useAsync: false
+                )
+            )
             {
                 using (Stream es = source.Open())
                     es.CopyTo(fs);
@@ -81,10 +94,16 @@ namespace System.IO.Compression
 
         static partial void ExtractExternalAttributes(FileStream fs, ZipArchiveEntry entry);
 
-        internal static void ExtractRelativeToDirectory(this ZipArchiveEntry source, string destinationDirectoryName) =>
-            ExtractRelativeToDirectory(source, destinationDirectoryName, overwrite: false);
+        internal static void ExtractRelativeToDirectory(
+            this ZipArchiveEntry source,
+            string destinationDirectoryName
+        ) => ExtractRelativeToDirectory(source, destinationDirectoryName, overwrite: false);
 
-        internal static void ExtractRelativeToDirectory(this ZipArchiveEntry source, string destinationDirectoryName, bool overwrite)
+        internal static void ExtractRelativeToDirectory(
+            this ZipArchiveEntry source,
+            string destinationDirectoryName,
+            bool overwrite
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(destinationDirectoryName);
@@ -95,9 +114,19 @@ namespace System.IO.Compression
             if (!destinationDirectoryFullPath.EndsWith(Path.DirectorySeparatorChar))
                 destinationDirectoryFullPath += Path.DirectorySeparatorChar;
 
-            string fileDestinationPath = Path.GetFullPath(Path.Combine(destinationDirectoryFullPath, ArchivingUtils.SanitizeEntryFilePath(source.FullName)));
+            string fileDestinationPath = Path.GetFullPath(
+                Path.Combine(
+                    destinationDirectoryFullPath,
+                    ArchivingUtils.SanitizeEntryFilePath(source.FullName)
+                )
+            );
 
-            if (!fileDestinationPath.StartsWith(destinationDirectoryFullPath, PathInternal.StringComparison))
+            if (
+                !fileDestinationPath.StartsWith(
+                    destinationDirectoryFullPath,
+                    PathInternal.StringComparison
+                )
+            )
                 throw new IOException(SR.IO_ExtractingResultsInOutside);
 
             if (Path.GetFileName(fileDestinationPath).Length == 0)

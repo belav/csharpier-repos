@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 
-
 class MyTypeClass
 {
     private int a;
@@ -21,9 +20,7 @@ class MyTypeClass
         {
             c = cc / zero;
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) { }
     }
 }
 
@@ -70,7 +67,9 @@ public class TypeGetType1
     public bool PosTest1()
     {
         bool retVal = true;
-        TestLibrary.TestFramework.BeginScenario("Verify GetType method return correct system instance type...");
+        TestLibrary.TestFramework.BeginScenario(
+            "Verify GetType method return correct system instance type..."
+        );
 
         try
         {
@@ -79,13 +78,13 @@ public class TypeGetType1
 
             if (instanceType.FullName != "System.Int32")
             {
-                TestLibrary.TestFramework.LogError("001","Fetch the wrong Type of instance!");
+                TestLibrary.TestFramework.LogError("001", "Fetch the wrong Type of instance!");
                 retVal = true;
             }
         }
         catch (Exception e)
         {
-            TestLibrary.TestFramework.LogError("002","Unexpected exception occurs: " + e);
+            TestLibrary.TestFramework.LogError("002", "Unexpected exception occurs: " + e);
             retVal = false;
         }
 
@@ -95,22 +94,27 @@ public class TypeGetType1
     public bool PosTest2()
     {
         bool retVal = true;
-        TestLibrary.TestFramework.BeginScenario("Verify GetType method return correct customer instance type...");
+        TestLibrary.TestFramework.BeginScenario(
+            "Verify GetType method return correct customer instance type..."
+        );
 
         try
         {
-            Type instanceType = new MyTypeClass(TestLibrary.Generator.GetInt32(-55),
-                TestLibrary.Generator.GetInt32(-55), TestLibrary.Generator.GetInt32(-55)).GetType();
+            Type instanceType = new MyTypeClass(
+                TestLibrary.Generator.GetInt32(-55),
+                TestLibrary.Generator.GetInt32(-55),
+                TestLibrary.Generator.GetInt32(-55)
+            ).GetType();
 
             if (instanceType.FullName != "MyTypeClass")
             {
-                TestLibrary.TestFramework.LogError("001","fetch the wrong customer type!");
+                TestLibrary.TestFramework.LogError("001", "fetch the wrong customer type!");
                 return retVal;
             }
         }
         catch (Exception e)
         {
-            TestLibrary.TestFramework.LogError("002","Unexpected exception occurs: " + e);
+            TestLibrary.TestFramework.LogError("002", "Unexpected exception occurs: " + e);
             return retVal;
         }
 

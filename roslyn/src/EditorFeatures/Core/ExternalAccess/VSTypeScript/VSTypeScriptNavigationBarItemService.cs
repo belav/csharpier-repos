@@ -19,7 +19,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 {
-    [ExportLanguageService(typeof(INavigationBarItemService), InternalLanguageNames.TypeScript), Shared]
+    [
+        ExportLanguageService(typeof(INavigationBarItemService), InternalLanguageNames.TypeScript),
+        Shared
+    ]
     internal class VSTypeScriptNavigationBarItemService : INavigationBarItemService
     {
         private readonly IThreadingContext _threadingContext;
@@ -29,38 +32,74 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VSTypeScriptNavigationBarItemService(
             IThreadingContext threadingContext,
-            IVSTypeScriptNavigationBarItemService service)
+            IVSTypeScriptNavigationBarItemService service
+        )
         {
             _threadingContext = threadingContext;
             _service = service;
         }
 
         public Task<ImmutableArray<NavigationBarItem>> GetItemsAsync(
-            Document document, ITextVersion textVersion, CancellationToken cancellationToken)
+            Document document,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        )
         {
-            return ((INavigationBarItemService)this).GetItemsAsync(document, forceFrozenPartialSemanticsForCrossProcessOperations: false, textVersion, cancellationToken);
+            return ((INavigationBarItemService)this).GetItemsAsync(
+                document,
+                forceFrozenPartialSemanticsForCrossProcessOperations: false,
+                textVersion,
+                cancellationToken
+            );
         }
 
         async Task<ImmutableArray<NavigationBarItem>> INavigationBarItemService.GetItemsAsync(
-            Document document, bool forceFrozenPartialSemanticsForCrossProcessOperations, ITextVersion textVersion, CancellationToken cancellationToken)
+            Document document,
+            bool forceFrozenPartialSemanticsForCrossProcessOperations,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        )
         {
-            var items = await _service.GetItemsAsync(document, cancellationToken).ConfigureAwait(false);
+            var items = await _service
+                .GetItemsAsync(document, cancellationToken)
+                .ConfigureAwait(false);
             return ConvertItems(items, textVersion);
         }
 
-        private static ImmutableArray<NavigationBarItem> ConvertItems(ImmutableArray<VSTypescriptNavigationBarItem> items, ITextVersion textVersion)
-            => items.SelectAsArray(x => !x.Spans.IsEmpty, x => ConvertToNavigationBarItem(x, textVersion));
+        private static ImmutableArray<NavigationBarItem> ConvertItems(
+            ImmutableArray<VSTypescriptNavigationBarItem> items,
+            ITextVersion textVersion
+        ) =>
+            items.SelectAsArray(
+                x => !x.Spans.IsEmpty,
+                x => ConvertToNavigationBarItem(x, textVersion)
+            );
 
         public async Task<bool> TryNavigateToItemAsync(
-            Document document, NavigationBarItem item, ITextView view, ITextVersion textVersion, CancellationToken cancellationToken)
+            Document document,
+            NavigationBarItem item,
+            ITextView view,
+            ITextVersion textVersion,
+            CancellationToken cancellationToken
+        )
         {
             // Spans.First() is safe here as we filtered out any items with no spans above in ConvertItems.
             var navigationSpan = item.GetCurrentItemSpan(textVersion, item.Spans.First());
 
             var workspace = document.Project.Solution.Workspace;
-            var navigationService = workspace.Services.GetRequiredService<IDocumentNavigationService>();
-            return await navigationService.TryNavigateToPositionAsync(
-                _threadingContext, workspace, document.Id, navigationSpan.Start, virtualSpace: 0, NavigationOptions.Default, cancellationToken).ConfigureAwait(false);
+            var navigationService =
+                workspace.Services.GetRequiredService<IDocumentNavigationService>();
+            return await navigationService
+                .TryNavigateToPositionAsync(
+                    _threadingContext,
+                    workspace,
+                    document.Id,
+                    navigationSpan.Start,
+                    virtualSpace: 0,
+                    NavigationOptions.Default,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         public bool ShowItemGrayedIfNear(NavigationBarItem item)
@@ -68,7 +107,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             return true;
         }
 
-        private static NavigationBarItem ConvertToNavigationBarItem(VSTypescriptNavigationBarItem item, ITextVersion textVersion)
+        private static NavigationBarItem ConvertToNavigationBarItem(
+            VSTypescriptNavigationBarItem item,
+            ITextVersion textVersion
+        )
         {
             Contract.ThrowIfTrue(item.Spans.IsEmpty);
             return new SimpleNavigationBarItem(
@@ -79,7 +121,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
                 ConvertItems(item.ChildItems, textVersion),
                 item.Indent,
                 item.Bolded,
-                item.Grayed);
+                item.Grayed
+            );
         }
     }
 }

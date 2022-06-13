@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
         internal override string GetExpectedOutputForNoDiagnostics(CommonCompiler cmd)
         {
             string expectedOutput =
-@"{{
+                @"{{
   ""$schema"": ""http://json.schemastore.org/sarif-2.1.0"",
   ""version"": ""2.1.0"",
   ""runs"": [
@@ -45,16 +45,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             return FormatOutputText(expectedOutput, cmd);
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = "https://github.com/dotnet/roslyn/issues/30289")]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30289"
+        )]
         public void NoDiagnostics()
         {
             NoDiagnosticsImpl();
         }
 
-        internal override string GetExpectedOutputForSimpleCompilerDiagnostics(CommonCompiler cmd, string sourceFile)
+        internal override string GetExpectedOutputForSimpleCompilerDiagnostics(
+            CommonCompiler cmd,
+            string sourceFile
+        )
         {
             string expectedOutput =
-@"{{
+                @"{{
   ""$schema"": ""http://json.schemastore.org/sarif-2.1.0"",
   ""version"": ""2.1.0"",
   ""runs"": [
@@ -141,22 +147,28 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
 }}";
 
             return FormatOutputText(
-              expectedOutput,
-              cmd,
-              AnalyzerForErrorLogTest.GetUriForPath(sourceFile));
-
+                expectedOutput,
+                cmd,
+                AnalyzerForErrorLogTest.GetUriForPath(sourceFile)
+            );
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = "https://github.com/dotnet/roslyn/issues/30289")]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30289"
+        )]
         public void SimpleCompilerDiagnostics()
         {
             SimpleCompilerDiagnosticsImpl();
         }
 
-        internal override string GetExpectedOutputForSimpleCompilerDiagnosticsSuppressed(CommonCompiler cmd, string sourceFile)
+        internal override string GetExpectedOutputForSimpleCompilerDiagnosticsSuppressed(
+            CommonCompiler cmd,
+            string sourceFile
+        )
         {
             string expectedOutput =
-@"{{
+                @"{{
   ""$schema"": ""http://json.schemastore.org/sarif-2.1.0"",
   ""version"": ""2.1.0"",
   ""runs"": [
@@ -250,19 +262,25 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             return FormatOutputText(
                 expectedOutput,
                 cmd,
-                AnalyzerForErrorLogTest.GetUriForPath(sourceFile));
+                AnalyzerForErrorLogTest.GetUriForPath(sourceFile)
+            );
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = "https://github.com/dotnet/roslyn/issues/30289")]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30289"
+        )]
         public void SimpleCompilerDiagnosticsSuppressed()
         {
             SimpleCompilerDiagnosticsSuppressedImpl();
         }
 
-        internal override string GetExpectedOutputForAnalyzerDiagnosticsWithAndWithoutLocation(MockCSharpCompiler cmd)
+        internal override string GetExpectedOutputForAnalyzerDiagnosticsWithAndWithoutLocation(
+            MockCSharpCompiler cmd
+        )
         {
             string expectedOutput =
-@"{{
+                @"{{
   ""$schema"": ""http://json.schemastore.org/sarif-2.1.0"",
   ""version"": ""2.1.0"",
   ""runs"": [
@@ -286,13 +304,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
                 expectedOutput,
                 cmd,
                 AnalyzerForErrorLogTest.GetExpectedV2ErrorLogResultsText(cmd.Compilation),
-                AnalyzerForErrorLogTest.GetExpectedV2ErrorLogRulesText());
+                AnalyzerForErrorLogTest.GetExpectedV2ErrorLogRulesText()
+            );
         }
 
-        internal override string GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(MockCSharpCompiler cmd, string justification)
+        internal override string GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(
+            MockCSharpCompiler cmd,
+            string justification
+        )
         {
             string expectedOutput =
-@"{{
+                @"{{
   ""$schema"": ""http://json.schemastore.org/sarif-2.1.0"",
   ""version"": ""2.1.0"",
   ""runs"": [
@@ -315,11 +337,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             return FormatOutputText(
                 expectedOutput,
                 cmd,
-                AnalyzerForErrorLogTest.GetExpectedV2ErrorLogWithSuppressionResultsText(cmd.Compilation, justification),
-                AnalyzerForErrorLogTest.GetExpectedV2ErrorLogRulesText());
+                AnalyzerForErrorLogTest.GetExpectedV2ErrorLogWithSuppressionResultsText(
+                    cmd.Compilation,
+                    justification
+                ),
+                AnalyzerForErrorLogTest.GetExpectedV2ErrorLogRulesText()
+            );
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = "https://github.com/dotnet/roslyn/issues/30289")]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30289"
+        )]
         public void AnalyzerDiagnosticsWithAndWithoutLocation()
         {
             AnalyzerDiagnosticsWithAndWithoutLocationImpl();
@@ -350,17 +379,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
         }
 
         private string FormatOutputText(
-          string s,
-          CommonCompiler compiler,
-          params object[] additionalArguments)
+            string s,
+            CommonCompiler compiler,
+            params object[] additionalArguments
+        )
         {
-            var arguments = new object[] {
+            var arguments = new object[]
+            {
                 compiler.GetToolName(),
                 compiler.GetCompilerVersion(),
                 compiler.GetAssemblyVersion(),
                 compiler.GetAssemblyVersion().ToString(fieldCount: 3),
                 compiler.GetCultureName()
-            }.Concat(additionalArguments).ToArray();
+            }
+                .Concat(additionalArguments)
+                .ToArray();
 
             return string.Format(CultureInfo.InvariantCulture, s, arguments);
         }

@@ -20,20 +20,10 @@ public class InMemoryTypeMapping : CoreTypeMapping
     public InMemoryTypeMapping(
         Type clrType,
         ValueComparer? comparer = null,
-        ValueComparer? keyComparer = null)
-        : base(
-            new CoreTypeMappingParameters(
-                clrType,
-                converter: null,
-                comparer,
-                keyComparer))
-    {
-    }
+        ValueComparer? keyComparer = null
+    ) : base(new CoreTypeMappingParameters(clrType, converter: null, comparer, keyComparer)) { }
 
-    private InMemoryTypeMapping(CoreTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+    private InMemoryTypeMapping(CoreTypeMappingParameters parameters) : base(parameters) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -41,6 +31,6 @@ public class InMemoryTypeMapping : CoreTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override CoreTypeMapping Clone(ValueConverter? converter)
-        => new InMemoryTypeMapping(Parameters.WithComposedConverter(converter));
+    public override CoreTypeMapping Clone(ValueConverter? converter) =>
+        new InMemoryTypeMapping(Parameters.WithComposedConverter(converter));
 }

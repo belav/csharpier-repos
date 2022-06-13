@@ -56,24 +56,35 @@ namespace Internal.Runtime.TypeLoader
                     _dictionarySlots[i] = IntPtr.Zero;
                 }
             }
-            public void AddMapping(int vtableSlotInTemplateType, int vtableSlotInTargetType, IntPtr dictionaryValueInSlot)
+
+            public void AddMapping(
+                int vtableSlotInTemplateType,
+                int vtableSlotInTargetType,
+                IntPtr dictionaryValueInSlot
+            )
             {
                 Debug.Assert(_numMappingsAssigned < _slotMap.Length);
                 _slotMap[vtableSlotInTemplateType] = vtableSlotInTargetType;
                 _dictionarySlots[vtableSlotInTemplateType] = dictionaryValueInSlot;
                 _numMappingsAssigned++;
             }
+
             public int GetVTableSlotInTargetType(int vtableSlotInTemplateType)
             {
                 Debug.Assert((uint)vtableSlotInTemplateType < (uint)_slotMap.Length);
                 return _slotMap[vtableSlotInTemplateType];
             }
-            public bool IsDictionarySlot(int vtableSlotInTemplateType, out IntPtr dictionaryPtrValue)
+
+            public bool IsDictionarySlot(
+                int vtableSlotInTemplateType,
+                out IntPtr dictionaryPtrValue
+            )
             {
                 Debug.Assert((uint)vtableSlotInTemplateType < (uint)_dictionarySlots.Length);
                 dictionaryPtrValue = _dictionarySlots[vtableSlotInTemplateType];
                 return _dictionarySlots[vtableSlotInTemplateType] != IntPtr.Zero;
             }
+
             public int NumSlotMappings
             {
                 get { return _numMappingsAssigned; }
@@ -116,22 +127,41 @@ namespace Internal.Runtime.TypeLoader
                 {
                     // Multidimensional arrays and szarrays of pointers don't implement generic interfaces and are special cases. They use
                     // typeof(object[,]) as their template.
-                    if (TypeBeingBuilt.IsMdArray || (TypeBeingBuilt.IsSzArray && ((ArrayType)TypeBeingBuilt).ElementType.IsPointer))
+                    if (
+                        TypeBeingBuilt.IsMdArray
+                        || (
+                            TypeBeingBuilt.IsSzArray
+                            && ((ArrayType)TypeBeingBuilt).ElementType.IsPointer
+                        )
+                    )
                     {
-                        _templateType = TypeBeingBuilt.Context.ResolveRuntimeTypeHandle(typeof(object[,]).TypeHandle);
+                        _templateType = TypeBeingBuilt.Context.ResolveRuntimeTypeHandle(
+                            typeof(object[,]).TypeHandle
+                        );
                         _templateTypeLoaderNativeLayout = false;
-                        _nativeLayoutComputed = _nativeLayoutTokenComputed = _templateComputed = true;
+                        _nativeLayoutComputed =
+                            _nativeLayoutTokenComputed =
+                            _templateComputed =
+                                true;
 
                         return _templateType;
                     }
 
                     // Locate the template type and native layout info
-                    _templateType = TemplateLocator.TryGetTypeTemplate(TypeBeingBuilt, ref _nativeLayoutInfo);
-                    Debug.Assert(_templateType == null || !_templateType.RuntimeTypeHandle.IsNull());
+                    _templateType = TemplateLocator.TryGetTypeTemplate(
+                        TypeBeingBuilt,
+                        ref _nativeLayoutInfo
+                    );
+                    Debug.Assert(
+                        _templateType == null || !_templateType.RuntimeTypeHandle.IsNull()
+                    );
 
                     _templateTypeLoaderNativeLayout = true;
                     _templateComputed = true;
-                    if ((_templateType != null) && !_templateType.IsCanonicalSubtype(CanonicalFormKind.Universal))
+                    if (
+                        (_templateType != null)
+                        && !_templateType.IsCanonicalSubtype(CanonicalFormKind.Universal)
+                    )
                         _nativeLayoutTokenComputed = true;
                 }
 
@@ -159,7 +189,11 @@ namespace Internal.Runtime.TypeLoader
                     }
                     if (!_nativeLayoutTokenComputed)
                     {
-                        TemplateLocator.TryGetMetadataNativeLayout(TypeBeingBuilt, out _r2rnativeLayoutInfo.Module, out _r2rnativeLayoutInfo.Offset);
+                        TemplateLocator.TryGetMetadataNativeLayout(
+                            TypeBeingBuilt,
+                            out _r2rnativeLayoutInfo.Module,
+                            out _r2rnativeLayoutInfo.Offset
+                        );
 
                         if (_r2rnativeLayoutInfo.Module != null)
                             _readyToRunNativeLayout = true;
@@ -186,7 +220,10 @@ namespace Internal.Runtime.TypeLoader
         /// </summary>
         /// <param name="type"></param>
         /// <param name="nativeLayoutInfo"></param>
-        private static void FinishInitNativeLayoutInfo(TypeDesc type, ref NativeLayoutInfo nativeLayoutInfo)
+        private static void FinishInitNativeLayoutInfo(
+            TypeDesc type,
+            ref NativeLayoutInfo nativeLayoutInfo
+        )
         {
             var nativeLayoutInfoLoadContext = new NativeLayoutInfoLoadContext();
 
@@ -199,7 +236,9 @@ namespace Internal.Runtime.TypeLoader
             }
             else if (type is ArrayType)
             {
-                nativeLayoutInfoLoadContext._typeArgumentHandles = new Instantiation(new TypeDesc[] { ((ArrayType)type).ElementType });
+                nativeLayoutInfoLoadContext._typeArgumentHandles = new Instantiation(
+                    new TypeDesc[] { ((ArrayType)type).ElementType }
+                );
             }
             else
             {
@@ -208,7 +247,9 @@ namespace Internal.Runtime.TypeLoader
 
             nativeLayoutInfoLoadContext._methodArgumentHandles = new Instantiation(null);
 
-            nativeLayoutInfo.Reader = TypeLoaderEnvironment.GetNativeLayoutInfoReader(nativeLayoutInfo.Module.Handle);
+            nativeLayoutInfo.Reader = TypeLoaderEnvironment.GetNativeLayoutInfoReader(
+                nativeLayoutInfo.Module.Handle
+            );
             nativeLayoutInfo.LoadContext = nativeLayoutInfoLoadContext;
         }
 
@@ -248,11 +289,17 @@ namespace Internal.Runtime.TypeLoader
                 return default(NativeParser);
         }
 
-        public NativeParser GetParserForUniversalNativeLayoutInfo(out NativeLayoutInfoLoadContext universalLayoutLoadContext, out NativeLayoutInfo universalLayoutInfo)
+        public NativeParser GetParserForUniversalNativeLayoutInfo(
+            out NativeLayoutInfoLoadContext universalLayoutLoadContext,
+            out NativeLayoutInfo universalLayoutInfo
+        )
         {
             universalLayoutInfo = new NativeLayoutInfo();
             universalLayoutLoadContext = null;
-            TypeDesc universalTemplate = TemplateLocator.TryGetUniversalTypeTemplate(TypeBeingBuilt, ref universalLayoutInfo);
+            TypeDesc universalTemplate = TemplateLocator.TryGetUniversalTypeTemplate(
+                TypeBeingBuilt,
+                ref universalLayoutInfo
+            );
             if (universalTemplate == null)
                 return new NativeParser();
 
@@ -276,6 +323,7 @@ namespace Internal.Runtime.TypeLoader
         }
 
         private bool? _hasDictionarySlotInVTable;
+
         private bool ComputeHasDictionarySlotInVTable()
         {
             if (!TypeBeingBuilt.IsGeneric() && !(TypeBeingBuilt is ArrayType))
@@ -301,6 +349,7 @@ namespace Internal.Runtime.TypeLoader
         }
 
         private bool? _hasDictionaryInVTable;
+
         private bool ComputeHasDictionaryInVTable()
         {
             if (!HasDictionarySlotInVTable)
@@ -319,20 +368,35 @@ namespace Internal.Runtime.TypeLoader
                     NativeParser parser = GetParserForNativeLayoutInfo();
                     // Template type loader case
 #if GENERICS_FORCE_USG
-                    bool isTemplateUniversalCanon = state.TemplateType.IsCanonicalSubtype(CanonicalFormKind.UniversalCanonLookup);
+                    bool isTemplateUniversalCanon = state.TemplateType.IsCanonicalSubtype(
+                        CanonicalFormKind.UniversalCanonLookup
+                    );
                     if (isTemplateUniversalCanon && type.CanShareNormalGenericCode())
                     {
                         TypeBuilderState tempState = new TypeBuilderState();
                         tempState.NativeLayoutInfo = new NativeLayoutInfo();
-                        tempState.TemplateType = type.Context.TemplateLookup.TryGetNonUniversalTypeTemplate(type, ref tempState.NativeLayoutInfo);
+                        tempState.TemplateType =
+                            type.Context.TemplateLookup.TryGetNonUniversalTypeTemplate(
+                                type,
+                                ref tempState.NativeLayoutInfo
+                            );
                         if (tempState.TemplateType != null)
                         {
-                            Debug.Assert(!tempState.TemplateType.IsCanonicalSubtype(CanonicalFormKind.UniversalCanonLookup));
-                            parser = GetNativeLayoutInfoParser(type, ref tempState.NativeLayoutInfo);
+                            Debug.Assert(
+                                !tempState.TemplateType.IsCanonicalSubtype(
+                                    CanonicalFormKind.UniversalCanonLookup
+                                )
+                            );
+                            parser = GetNativeLayoutInfoParser(
+                                type,
+                                ref tempState.NativeLayoutInfo
+                            );
                         }
                     }
 #endif
-                    var dictionaryLayoutParser = parser.GetParserForBagElementKind(BagElementKind.DictionaryLayout);
+                    var dictionaryLayoutParser = parser.GetParserForBagElementKind(
+                        BagElementKind.DictionaryLayout
+                    );
 
                     return !dictionaryLayoutParser.IsNull;
                 }
@@ -361,6 +425,7 @@ namespace Internal.Runtime.TypeLoader
         }
 
         private ushort? _numVTableSlots;
+
         private ushort ComputeNumVTableSlots()
         {
             if (TypeBeingBuilt.RetrieveRuntimeTypeHandleIfPossible())
@@ -384,11 +449,20 @@ namespace Internal.Runtime.TypeLoader
                     {
                         unsafe
                         {
-                            if (TypeBeingBuilt.IsMdArray || (TypeBeingBuilt.IsSzArray && ((ArrayType)TypeBeingBuilt).ElementType.IsPointer))
+                            if (
+                                TypeBeingBuilt.IsMdArray
+                                || (
+                                    TypeBeingBuilt.IsSzArray
+                                    && ((ArrayType)TypeBeingBuilt).ElementType.IsPointer
+                                )
+                            )
                             {
                                 // MDArray types and pointer arrays have the same vtable as the System.Array type they "derive" from.
                                 // They do not implement the generic interfaces that make this interesting for normal arrays.
-                                return TypeBeingBuilt.BaseType.GetRuntimeTypeHandle().ToEETypePtr()->NumVtableSlots;
+                                return TypeBeingBuilt.BaseType
+                                    .GetRuntimeTypeHandle()
+                                    .ToEETypePtr()
+                                    ->NumVtableSlots;
                             }
                             else
                             {
@@ -396,7 +470,10 @@ namespace Internal.Runtime.TypeLoader
                                 Debug.Assert(TypeBeingBuilt.IsTemplateCanonical());
 
                                 // Canonical template type loader case
-                                return templateType.GetRuntimeTypeHandle().ToEETypePtr()->NumVtableSlots;
+                                return templateType
+                                    .GetRuntimeTypeHandle()
+                                    .ToEETypePtr()
+                                    ->NumVtableSlots;
                             }
                         }
                     }
@@ -416,7 +493,9 @@ namespace Internal.Runtime.TypeLoader
                     {
                         if (TypeBeingBuilt.BaseType != null)
                         {
-                            numVTableSlots = TypeBeingBuilt.BaseType.GetOrCreateTypeBuilderState().NumVTableSlots;
+                            numVTableSlots = TypeBeingBuilt.BaseType
+                                .GetOrCreateTypeBuilderState()
+                                .NumVTableSlots;
                         }
                         else
                         {
@@ -459,7 +538,6 @@ namespace Internal.Runtime.TypeLoader
             }
         }
 
-
         public GenericTypeDictionary Dictionary;
 
         public int NonGcDataSize
@@ -474,7 +552,8 @@ namespace Internal.Runtime.TypeLoader
 
                 if (defType != null)
                 {
-                    return defType.NonGCStaticFieldSize.AsInt - (HasStaticConstructor ? TypeBuilder.ClassConstructorOffset : 0);
+                    return defType.NonGCStaticFieldSize.AsInt
+                        - (HasStaticConstructor ? TypeBuilder.ClassConstructorOffset : 0);
                 }
                 else
                 {
@@ -564,7 +643,9 @@ namespace Internal.Runtime.TypeLoader
                         if (!IsArrayOfReferenceTypes)
                         {
                             ArrayType arrayType = (ArrayType)TypeBeingBuilt;
-                            TypeBuilder.GCLayout elementGcLayout = GetFieldGCLayout(arrayType.ElementType);
+                            TypeBuilder.GCLayout elementGcLayout = GetFieldGCLayout(
+                                arrayType.ElementType
+                            );
                             if (!elementGcLayout.IsNone)
                             {
                                 instanceGCLayout = new LowLevelList<bool>();
@@ -578,10 +659,12 @@ namespace Internal.Runtime.TypeLoader
                             _instanceGCLayout = s_emptyLayout;
                         }
                     }
-                    else if (TypeBeingBuilt.RetrieveRuntimeTypeHandleIfPossible() ||
-                             TypeBeingBuilt.IsTemplateCanonical() ||
-                             (TypeBeingBuilt is PointerType) ||
-                             (TypeBeingBuilt is ByRefType))
+                    else if (
+                        TypeBeingBuilt.RetrieveRuntimeTypeHandleIfPossible()
+                        || TypeBeingBuilt.IsTemplateCanonical()
+                        || (TypeBeingBuilt is PointerType)
+                        || (TypeBeingBuilt is ByRefType)
+                    )
                     {
                         _instanceGCLayout = s_emptyLayout;
                     }
@@ -600,7 +683,10 @@ namespace Internal.Runtime.TypeLoader
                                 if (!baseTypeLayout.IsNone)
                                 {
                                     instanceGCLayout = new LowLevelList<bool>();
-                                    baseTypeLayout.WriteToBitfield(instanceGCLayout, IntPtr.Size /* account for the MethodTable pointer */);
+                                    baseTypeLayout.WriteToBitfield(
+                                        instanceGCLayout,
+                                        IntPtr.Size /* account for the MethodTable pointer */
+                                    );
                                 }
                             }
 
@@ -612,13 +698,18 @@ namespace Internal.Runtime.TypeLoader
                                 if (field.IsLiteral)
                                     continue;
 
-                                TypeBuilder.GCLayout fieldGcLayout = GetFieldGCLayout(field.FieldType);
+                                TypeBuilder.GCLayout fieldGcLayout = GetFieldGCLayout(
+                                    field.FieldType
+                                );
                                 if (!fieldGcLayout.IsNone)
                                 {
                                     if (instanceGCLayout == null)
                                         instanceGCLayout = new LowLevelList<bool>();
 
-                                    fieldGcLayout.WriteToBitfield(instanceGCLayout, field.Offset.AsInt);
+                                    fieldGcLayout.WriteToBitfield(
+                                        instanceGCLayout,
+                                        field.Offset.AsInt
+                                    );
                                 }
                             }
 
@@ -630,11 +721,21 @@ namespace Internal.Runtime.TypeLoader
                                 // necessary, expand the bitfield to ensure that this invariant holds.
 
                                 // Valuetypes with gc fields must be aligned on at least pointer boundaries
-                                Debug.Assert(!TypeBeingBuilt.IsValueType || (FieldAlignment.Value >= TypeBeingBuilt.Context.Target.PointerSize));
+                                Debug.Assert(
+                                    !TypeBeingBuilt.IsValueType
+                                        || (
+                                            FieldAlignment.Value
+                                            >= TypeBeingBuilt.Context.Target.PointerSize
+                                        )
+                                );
                                 // Valuetypes with gc fields must have a type size which is aligned on an IntPtr boundary.
-                                Debug.Assert(!TypeBeingBuilt.IsValueType || ((TypeSize.Value & (IntPtr.Size - 1)) == 0));
+                                Debug.Assert(
+                                    !TypeBeingBuilt.IsValueType
+                                        || ((TypeSize.Value & (IntPtr.Size - 1)) == 0)
+                                );
 
-                                int impliedBitCount = (TypeSize.Value + IntPtr.Size - 1) / IntPtr.Size;
+                                int impliedBitCount =
+                                    (TypeSize.Value + IntPtr.Size - 1) / IntPtr.Size;
                                 Debug.Assert(instanceGCLayout.Count <= impliedBitCount);
                                 instanceGCLayout.Expand(impliedBitCount);
                                 Debug.Assert(instanceGCLayout.Count == impliedBitCount);
@@ -654,7 +755,6 @@ namespace Internal.Runtime.TypeLoader
                     return _instanceGCLayout;
             }
         }
-
 
         public LowLevelList<bool> StaticGCLayout;
         public LowLevelList<bool> ThreadStaticGCLayout;
@@ -690,15 +790,21 @@ namespace Internal.Runtime.TypeLoader
                         switch (kind)
                         {
                             case BagElementKind.GcStaticDesc:
-                                GcStaticDesc = NativeLayoutInfo.LoadContext.GetGCStaticInfo(typeInfoParser.GetUnsigned());
+                                GcStaticDesc = NativeLayoutInfo.LoadContext.GetGCStaticInfo(
+                                    typeInfoParser.GetUnsigned()
+                                );
                                 break;
 
                             case BagElementKind.ThreadStaticDesc:
-                                ThreadStaticDesc = NativeLayoutInfo.LoadContext.GetGCStaticInfo(typeInfoParser.GetUnsigned());
+                                ThreadStaticDesc = NativeLayoutInfo.LoadContext.GetGCStaticInfo(
+                                    typeInfoParser.GetUnsigned()
+                                );
                                 break;
 
                             case BagElementKind.GcStaticEEType:
-                                GcStaticEEType = NativeLayoutInfo.LoadContext.GetGCStaticInfo(typeInfoParser.GetUnsigned());
+                                GcStaticEEType = NativeLayoutInfo.LoadContext.GetGCStaticInfo(
+                                    typeInfoParser.GetUnsigned()
+                                );
                                 break;
 
                             default:
@@ -854,11 +960,13 @@ namespace Internal.Runtime.TypeLoader
                 if (instanceGCLayout == null)
                     return TypeBuilder.GCLayout.None;
 
-                return new TypeBuilder.GCLayout(instanceGCLayout, false /* Always represents a valuetype as the reference type case
-                                                                           is handled above with the GCLayout.SingleReference return */);
+                return new TypeBuilder.GCLayout(
+                    instanceGCLayout,
+                    false /* Always represents a valuetype as the reference type case
+                                                                           is handled above with the GCLayout.SingleReference return */
+                );
             }
         }
-
 
         public bool IsArrayOfReferenceTypes
         {
@@ -866,7 +974,8 @@ namespace Internal.Runtime.TypeLoader
             {
                 ArrayType typeAsArrayType = TypeBeingBuilt as ArrayType;
                 if (typeAsArrayType != null)
-                    return !typeAsArrayType.ParameterType.IsValueType && !typeAsArrayType.ParameterType.IsPointer;
+                    return !typeAsArrayType.ParameterType.IsValueType
+                        && !typeAsArrayType.ParameterType.IsPointer;
                 else
                     return false;
             }
@@ -979,7 +1088,9 @@ namespace Internal.Runtime.TypeLoader
 
                     if (arrayType.ElementType is DefType)
                     {
-                        return checked((ushort)((DefType)arrayType.ElementType).InstanceFieldAlignment.AsInt);
+                        return checked(
+                            (ushort)((DefType)arrayType.ElementType).InstanceFieldAlignment.AsInt
+                        );
                     }
                     else
                     {
@@ -1008,8 +1119,14 @@ namespace Internal.Runtime.TypeLoader
                     {
                         uint size = (uint)((DefType)arrayType.ElementType).InstanceFieldSize.AsInt;
 
-                        if (size > ArrayTypesConstants.MaxSizeForValueClassInArray && arrayType.ElementType.IsValueType)
-                            ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadValueClassTooLarge, arrayType.ElementType);
+                        if (
+                            size > ArrayTypesConstants.MaxSizeForValueClassInArray
+                            && arrayType.ElementType.IsValueType
+                        )
+                            ThrowHelper.ThrowTypeLoadException(
+                                ExceptionStringID.ClassLoadValueClassTooLarge,
+                                arrayType.ElementType
+                            );
 
                         return checked((ushort)size);
                     }

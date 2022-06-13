@@ -9,10 +9,7 @@ public class ValueComparerTest
 {
     protected class FakeValueComparer : ValueComparer<double>
     {
-        public FakeValueComparer()
-            : base(false)
-        {
-        }
+        public FakeValueComparer() : base(false) { }
     }
 
     private class Foo
@@ -28,16 +25,20 @@ public class ValueComparerTest
 
         Assert.Equal(
             CoreStrings.ComparerPropertyMismatch("double", nameof(Foo), nameof(Foo.Bar), "int"),
-            Assert.Throws<InvalidOperationException>(() => context.Model).Message);
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
-    
+
     private class InvalidDbContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Foo>().Property(e => e.Bar).HasConversion<string>(new FakeValueComparer());
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder
+                .Entity<Foo>()
+                .Property(e => e.Bar)
+                .HasConversion<string>(new FakeValueComparer());
     }
 
     [ConditionalFact]
@@ -47,16 +48,20 @@ public class ValueComparerTest
 
         Assert.Equal(
             CoreStrings.ComparerPropertyMismatch("double", nameof(Foo), nameof(Foo.Bar), "string"),
-            Assert.Throws<InvalidOperationException>(() => context.Model).Message);
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
 
     private class InvalidProviderDbContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Foo>().Property(e => e.Bar).HasConversion<string>((ValueComparer)null, new FakeValueComparer());
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder
+                .Entity<Foo>()
+                .Property(e => e.Bar)
+                .HasConversion<string>((ValueComparer)null, new FakeValueComparer());
     }
 
     [ConditionalTheory]
@@ -76,15 +81,33 @@ public class ValueComparerTest
     [InlineData(typeof(double), (double)1, (double)2, null)]
     [InlineData(typeof(JustAnEnum), JustAnEnum.A, JustAnEnum.B, null)]
     [InlineData(typeof(int[]), new[] { 1, 2 }, new[] { 3, 4 }, null)]
-    public ValueComparer Default_comparer_works_for_normal_types(Type type, object value1, object value2, int? hashCode)
-        => CompareTest(type, value1, value2, hashCode);
+    public ValueComparer Default_comparer_works_for_normal_types(
+        Type type,
+        object value1,
+        object value2,
+        int? hashCode
+    ) => CompareTest(type, value1, value2, hashCode);
 
-    private static ValueComparer CompareTest(Type type, object value1, object value2, int? hashCode = null)
-        => CompareTest(type, value1, value2, hashCode, false);
+    private static ValueComparer CompareTest(
+        Type type,
+        object value1,
+        object value2,
+        int? hashCode = null
+    ) => CompareTest(type, value1, value2, hashCode, false);
 
-    private static ValueComparer CompareTest(Type type, object value1, object value2, int? hashCode, bool toNullable)
+    private static ValueComparer CompareTest(
+        Type type,
+        object value1,
+        object value2,
+        int? hashCode,
+        bool toNullable
+    )
     {
-        var comparer = (ValueComparer)Activator.CreateInstance(typeof(ValueComparer<>).MakeGenericType(type), new object[] { false });
+        var comparer = (ValueComparer)
+            Activator.CreateInstance(
+                typeof(ValueComparer<>).MakeGenericType(type),
+                new object[] { false }
+            );
         if (toNullable)
         {
             comparer = ToNonNullNullableComparer(comparer);
@@ -100,7 +123,11 @@ public class ValueComparerTest
 
         Assert.Equal(hashCode ?? value1.GetHashCode(), comparer.GetHashCode(value1));
 
-        var keyComparer = (ValueComparer)Activator.CreateInstance(typeof(ValueComparer<>).MakeGenericType(type), new object[] { true });
+        var keyComparer = (ValueComparer)
+            Activator.CreateInstance(
+                typeof(ValueComparer<>).MakeGenericType(type),
+                new object[] { true }
+            );
         if (toNullable)
         {
             keyComparer = ToNonNullNullableComparer(keyComparer);
@@ -127,23 +154,29 @@ public class ValueComparerTest
         var newHashCodeParam = Expression.Parameter(nullableType, "v");
         var newSnapshotParam = Expression.Parameter(nullableType, "v");
 
-        return (ValueComparer)Activator.CreateInstance(
-            typeof(NonNullNullableValueComparer<>).MakeGenericType(nullableType),
-            Expression.Lambda(
-                comparer.ExtractEqualsBody(
-                    Expression.Convert(newEqualsParam1, type),
-                    Expression.Convert(newEqualsParam2, type)),
-                newEqualsParam1, newEqualsParam2),
-            Expression.Lambda(
-                comparer.ExtractHashCodeBody(
-                    Expression.Convert(newHashCodeParam, type)),
-                newHashCodeParam),
-            Expression.Lambda(
-                Expression.Convert(
-                    comparer.ExtractSnapshotBody(
-                        Expression.Convert(newSnapshotParam, type)),
-                    nullableType),
-                newSnapshotParam))!;
+        return (ValueComparer)
+            Activator.CreateInstance(
+                typeof(NonNullNullableValueComparer<>).MakeGenericType(nullableType),
+                Expression.Lambda(
+                    comparer.ExtractEqualsBody(
+                        Expression.Convert(newEqualsParam1, type),
+                        Expression.Convert(newEqualsParam2, type)
+                    ),
+                    newEqualsParam1,
+                    newEqualsParam2
+                ),
+                Expression.Lambda(
+                    comparer.ExtractHashCodeBody(Expression.Convert(newHashCodeParam, type)),
+                    newHashCodeParam
+                ),
+                Expression.Lambda(
+                    Expression.Convert(
+                        comparer.ExtractSnapshotBody(Expression.Convert(newSnapshotParam, type)),
+                        nullableType
+                    ),
+                    newSnapshotParam
+                )
+            )!;
     }
 
     private sealed class NonNullNullableValueComparer<T> : ValueComparer<T>
@@ -151,13 +184,13 @@ public class ValueComparerTest
         public NonNullNullableValueComparer(
             LambdaExpression equalsExpression,
             LambdaExpression hashCodeExpression,
-            LambdaExpression snapshotExpression)
+            LambdaExpression snapshotExpression
+        )
             : base(
                 (Expression<Func<T, T, bool>>)equalsExpression,
                 (Expression<Func<T, int>>)hashCodeExpression,
-                (Expression<Func<T, T>>)snapshotExpression)
-        {
-        }
+                (Expression<Func<T, T>>)snapshotExpression
+            ) { }
     }
 
     private enum JustAnEnum : ushort
@@ -167,8 +200,8 @@ public class ValueComparerTest
     }
 
     [ConditionalFact]
-    public void Default_comparer_works_for_decimals()
-        => CompareTest(typeof(decimal), (decimal)1, (decimal)2);
+    public void Default_comparer_works_for_decimals() =>
+        CompareTest(typeof(decimal), (decimal)1, (decimal)2);
 
     [ConditionalFact]
     public void Default_comparer_works_for_structs()
@@ -176,12 +209,14 @@ public class ValueComparerTest
         CompareTest(
             typeof(JustAStruct),
             new JustAStruct { A = 1, B = "B1" },
-            new JustAStruct { A = 1, B = "B2" });
+            new JustAStruct { A = 1, B = "B2" }
+        );
 
         CompareTest(
             typeof(JustAStruct),
             new JustAStruct { A = 1, B = "B" },
-            new JustAStruct { A = 2, B = "B" });
+            new JustAStruct { A = 2, B = "B" }
+        );
     }
 
     private struct JustAStruct
@@ -191,33 +226,32 @@ public class ValueComparerTest
     }
 
     [ConditionalFact]
-    public void Default_comparer_works_for_structs_with_equality()
-        => CompareTest(
+    public void Default_comparer_works_for_structs_with_equality() =>
+        CompareTest(
             typeof(JustAStructWithEquality),
             new JustAStructWithEquality { A = 1, B = "B" },
-            new JustAStructWithEquality { A = 2, B = "B" });
+            new JustAStructWithEquality { A = 2, B = "B" }
+        );
 
     private struct JustAStructWithEquality
     {
         public int A { get; set; }
         public string B { get; set; }
 
-        private bool Equals(JustAStructWithEquality other)
-            => A == other.A;
+        private bool Equals(JustAStructWithEquality other) => A == other.A;
 
-        public override bool Equals(object obj)
-            => obj is JustAStructWithEquality o && Equals(o);
+        public override bool Equals(object obj) => obj is JustAStructWithEquality o && Equals(o);
 
-        public override int GetHashCode()
-            => A;
+        public override int GetHashCode() => A;
     }
 
     [ConditionalFact]
-    public void Default_comparer_works_for_structs_with_equality_operators()
-        => CompareTest(
+    public void Default_comparer_works_for_structs_with_equality_operators() =>
+        CompareTest(
             typeof(JustAStructWithEqualityOperators),
             new JustAStructWithEqualityOperators { A = 1, B = "B" },
-            new JustAStructWithEqualityOperators { A = 2, B = "B" });
+            new JustAStructWithEqualityOperators { A = 2, B = "B" }
+        );
 
 #pragma warning disable 660,661
     private struct JustAStructWithEqualityOperators
@@ -226,20 +260,24 @@ public class ValueComparerTest
         public int A { get; set; }
         public string B { get; set; }
 
-        public static bool operator ==(JustAStructWithEqualityOperators left, JustAStructWithEqualityOperators right)
-            => left.A == right.A
-                && left.B == right.B;
+        public static bool operator ==(
+            JustAStructWithEqualityOperators left,
+            JustAStructWithEqualityOperators right
+        ) => left.A == right.A && left.B == right.B;
 
-        public static bool operator !=(JustAStructWithEqualityOperators left, JustAStructWithEqualityOperators right)
-            => !(left == right);
+        public static bool operator !=(
+            JustAStructWithEqualityOperators left,
+            JustAStructWithEqualityOperators right
+        ) => !(left == right);
     }
 
     [ConditionalFact]
-    public void Default_comparer_works_for_classes()
-        => CompareTest(
+    public void Default_comparer_works_for_classes() =>
+        CompareTest(
             typeof(JustAClass), // Reference equality
             new JustAClass { A = 1 },
-            new JustAClass { A = 1 });
+            new JustAClass { A = 1 }
+        );
 
     private class JustAClass
     {
@@ -252,29 +290,28 @@ public class ValueComparerTest
         var comparer = CompareTest(
             typeof(JustAClassWithEquality),
             new JustAClassWithEquality { A = 1 },
-            new JustAClassWithEquality { A = 2 });
+            new JustAClassWithEquality { A = 2 }
+        );
 
         Assert.True(
             comparer.Equals(
                 new JustAClassWithEquality { A = 1 },
-                new JustAClassWithEquality { A = 1 }));
+                new JustAClassWithEquality { A = 1 }
+            )
+        );
     }
 
     private sealed class JustAClassWithEquality
     {
         public int A { get; set; }
 
-        private bool Equals(JustAClassWithEquality other)
-            => A == other.A;
+        private bool Equals(JustAClassWithEquality other) => A == other.A;
 
-        public override bool Equals(object obj)
-            => !(obj is null)
-                && (ReferenceEquals(this, obj)
-                    || obj is JustAClassWithEquality o
-                    && Equals(o));
+        public override bool Equals(object obj) =>
+            !(obj is null)
+            && (ReferenceEquals(this, obj) || obj is JustAClassWithEquality o && Equals(o));
 
-        public override int GetHashCode()
-            => A;
+        public override int GetHashCode() => A;
     }
 
     [ConditionalFact]
@@ -283,12 +320,15 @@ public class ValueComparerTest
         var comparer = CompareTest(
             typeof(JustAClassWithEqualityOperators),
             new JustAClassWithEqualityOperators { A = 1 },
-            new JustAClassWithEqualityOperators { A = 2 });
+            new JustAClassWithEqualityOperators { A = 2 }
+        );
 
         Assert.True(
             comparer.Equals(
                 new JustAClassWithEqualityOperators { A = 1 },
-                new JustAClassWithEqualityOperators { A = 1 }));
+                new JustAClassWithEqualityOperators { A = 1 }
+            )
+        );
     }
 
 #pragma warning disable 660,661
@@ -297,17 +337,20 @@ public class ValueComparerTest
     {
         public int A { get; set; }
 
-        private static bool InternalEquals(JustAClassWithEqualityOperators left, JustAClassWithEqualityOperators right)
-            => left is null
-                || right is null
-                    ? left is null && right is null
-                    : left.A == right.A;
+        private static bool InternalEquals(
+            JustAClassWithEqualityOperators left,
+            JustAClassWithEqualityOperators right
+        ) => left is null || right is null ? left is null && right is null : left.A == right.A;
 
-        public static bool operator ==(JustAClassWithEqualityOperators left, JustAClassWithEqualityOperators right)
-            => InternalEquals(left, right);
+        public static bool operator ==(
+            JustAClassWithEqualityOperators left,
+            JustAClassWithEqualityOperators right
+        ) => InternalEquals(left, right);
 
-        public static bool operator !=(JustAClassWithEqualityOperators left, JustAClassWithEqualityOperators right)
-            => !InternalEquals(left, right);
+        public static bool operator !=(
+            JustAClassWithEqualityOperators left,
+            JustAClassWithEqualityOperators right
+        ) => !InternalEquals(left, right);
     }
 
     private void GenericCompareTest<T>(T value1, T value2, int? hashCode = null)
@@ -383,8 +426,14 @@ public class ValueComparerTest
         GenericCompareTest("A", "B");
         GenericCompareTest(JustAnEnum.A, JustAnEnum.B);
         GenericCompareTest(new JustAStruct { A = 1 }, new JustAStruct { A = 2 });
-        GenericCompareTest(new JustAStructWithEquality { A = 1 }, new JustAStructWithEquality { A = 2 });
-        GenericCompareTest(new JustAStructWithEqualityOperators { A = 1 }, new JustAStructWithEqualityOperators { A = 2 });
+        GenericCompareTest(
+            new JustAStructWithEquality { A = 1 },
+            new JustAStructWithEquality { A = 2 }
+        );
+        GenericCompareTest(
+            new JustAStructWithEqualityOperators { A = 1 },
+            new JustAStructWithEqualityOperators { A = 2 }
+        );
     }
 
     [ConditionalFact]
@@ -392,8 +441,14 @@ public class ValueComparerTest
     {
         GenericCompareTestWithNulls<object>(1, "A");
         GenericCompareTestWithNulls(new JustAClass { A = 1 }, new JustAClass { A = 2 });
-        GenericCompareTestWithNulls(new JustAClassWithEquality { A = 1 }, new JustAClassWithEquality { A = 2 });
-        GenericCompareTestWithNulls(new JustAClassWithEqualityOperators { A = 1 }, new JustAClassWithEqualityOperators { A = 2 });
+        GenericCompareTestWithNulls(
+            new JustAClassWithEquality { A = 1 },
+            new JustAClassWithEquality { A = 2 }
+        );
+        GenericCompareTestWithNulls(
+            new JustAClassWithEqualityOperators { A = 1 },
+            new JustAClassWithEqualityOperators { A = 2 }
+        );
     }
 
     [ConditionalFact]
@@ -416,17 +471,20 @@ public class ValueComparerTest
         CompareTest(
             typeof(JustAStruct),
             (JustAStruct?)new JustAStruct { A = 1 },
-            new JustAStruct { A = 2 });
+            new JustAStruct { A = 2 }
+        );
 
         CompareTest(
             typeof(JustAStructWithEquality),
             (JustAStructWithEquality?)new JustAStructWithEquality { A = 1 },
-            new JustAStructWithEquality { A = 2 });
+            new JustAStructWithEquality { A = 2 }
+        );
 
         CompareTest(
             typeof(JustAStructWithEqualityOperators),
             (JustAStructWithEqualityOperators?)new JustAStructWithEqualityOperators { A = 1 },
-            new JustAStructWithEqualityOperators { A = 2 });
+            new JustAStructWithEqualityOperators { A = 2 }
+        );
     }
 
     [ConditionalFact]
@@ -449,17 +507,20 @@ public class ValueComparerTest
         CompareTest(
             typeof(JustAStruct?),
             (JustAStruct?)new JustAStruct { A = 1 },
-            new JustAStruct { A = 2 });
+            new JustAStruct { A = 2 }
+        );
 
         CompareTest(
             typeof(JustAStructWithEquality?),
             (JustAStructWithEquality?)new JustAStructWithEquality { A = 1 },
-            new JustAStructWithEquality { A = 2 });
+            new JustAStructWithEquality { A = 2 }
+        );
 
         CompareTest(
             typeof(JustAStructWithEqualityOperators?),
             (JustAStructWithEqualityOperators?)new JustAStructWithEqualityOperators { A = 1 },
-            new JustAStructWithEqualityOperators { A = 2 });
+            new JustAStructWithEqualityOperators { A = 2 }
+        );
     }
 
     [ConditionalFact]
@@ -484,21 +545,24 @@ public class ValueComparerTest
             (JustAStruct?)new JustAStruct { A = 1 },
             new JustAStruct { A = 2 },
             null,
-            true);
+            true
+        );
 
         CompareTest(
             typeof(JustAStructWithEquality),
             (JustAStructWithEquality?)new JustAStructWithEquality { A = 1 },
             new JustAStructWithEquality { A = 2 },
             null,
-            true);
+            true
+        );
 
         CompareTest(
             typeof(JustAStructWithEqualityOperators),
             (JustAStructWithEqualityOperators?)new JustAStructWithEqualityOperators { A = 1 },
             new JustAStructWithEqualityOperators { A = 2 },
             null,
-            true);
+            true
+        );
     }
 
     [ConditionalFact]
@@ -553,13 +617,12 @@ public class ValueComparerTest
     [ConditionalFact]
     public void Can_define_different_custom_equals_for_key_and_non_key()
     {
-        var comparer = new ValueComparer<Binary>(
-            (v1, v2) => v1.Equals(v2),
-            v => v.GetHashCode());
+        var comparer = new ValueComparer<Binary>((v1, v2) => v1.Equals(v2), v => v.GetHashCode());
 
         var keyComparer = new ValueComparer<Binary>(
             (v1, v2) => v1.Value0 == v2.Value0 && v1.Value1 == v2.Value1,
-            v => v.Value0 << 8 | v.Value1);
+            v => v.Value0 << 8 | v.Value1
+        );
 
         var equals = comparer.EqualsExpression.Compile();
         var keyEquals = keyComparer.EqualsExpression.Compile();
@@ -594,11 +657,13 @@ public class ValueComparerTest
         public byte[] Value1 { get; }
     }
 
-    private static readonly MethodInfo _getValue0Method
-        = typeof(DeepBinary).GetProperty(nameof(DeepBinary.Value0)).GetMethod;
+    private static readonly MethodInfo _getValue0Method = typeof(DeepBinary)
+        .GetProperty(nameof(DeepBinary.Value0))
+        .GetMethod;
 
-    private static readonly MethodInfo _getValue1Method
-        = typeof(DeepBinary).GetProperty(nameof(DeepBinary.Value1)).GetMethod;
+    private static readonly MethodInfo _getValue1Method = typeof(DeepBinary)
+        .GetProperty(nameof(DeepBinary.Value1))
+        .GetMethod;
 
     [ConditionalFact]
     public void Can_create_new_comparer_composing_existing_comparers()
@@ -608,11 +673,13 @@ public class ValueComparerTest
 
         var comparer = new ValueComparer<DeepBinary>(
             (Expression<Func<DeepBinary, DeepBinary, bool>>)CreateAndExpression(bytesComparer),
-            (Expression<Func<DeepBinary, int>>)CreateHashCodeExpression(bytesComparer));
+            (Expression<Func<DeepBinary, int>>)CreateHashCodeExpression(bytesComparer)
+        );
 
         var keyComparer = new ValueComparer<DeepBinary>(
             (Expression<Func<DeepBinary, DeepBinary, bool>>)CreateAndExpression(bytesKeyComparer),
-            (Expression<Func<DeepBinary, int>>)CreateHashCodeExpression(bytesKeyComparer));
+            (Expression<Func<DeepBinary, int>>)CreateHashCodeExpression(bytesKeyComparer)
+        );
 
         var equals = comparer.EqualsExpression.Compile();
         var keyEquals = keyComparer.EqualsExpression.Compile();
@@ -655,15 +722,15 @@ public class ValueComparerTest
 
         var firstEquals = comparer.ExtractEqualsBody(
             Expression.Call(param1, _getValue0Method),
-            Expression.Call(param2, _getValue0Method));
+            Expression.Call(param2, _getValue0Method)
+        );
 
         var secondEquals = comparer.ExtractEqualsBody(
             Expression.Call(param1, _getValue1Method),
-            Expression.Call(param2, _getValue1Method));
+            Expression.Call(param2, _getValue1Method)
+        );
 
-        return Expression.Lambda(
-            Expression.AndAlso(firstEquals, secondEquals),
-            param1, param2);
+        return Expression.Lambda(Expression.AndAlso(firstEquals, secondEquals), param1, param2);
     }
 
     private static LambdaExpression CreateHashCodeExpression(ValueComparer comparer)
@@ -675,10 +742,10 @@ public class ValueComparerTest
 
         return Expression.Lambda(
             Expression.ExclusiveOr(
-                Expression.Multiply(
-                    firstHashCode,
-                    Expression.Constant(397, typeof(int))),
-                secondHashCode),
-            param);
+                Expression.Multiply(firstHashCode, Expression.Constant(397, typeof(int))),
+                secondHashCode
+            ),
+            param
+        );
     }
 }

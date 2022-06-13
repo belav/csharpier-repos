@@ -59,12 +59,14 @@ namespace System.Data.Common
             TraceExceptionAsReturnValue(e);
             return e;
         }
+
         internal static InvalidOperationException InvalidOperation(string error, Exception? inner)
         {
             InvalidOperationException e = new InvalidOperationException(error, inner);
             TraceExceptionAsReturnValue(e);
             return e;
         }
+
         internal static InvalidCastException InvalidCast()
         {
             InvalidCastException e = new InvalidCastException();
@@ -138,7 +140,9 @@ namespace System.Data.Common
         }
 
         // DBDataPermissionAttribute.KeyRestrictionBehavior
-        internal static ArgumentOutOfRangeException InvalidKeyRestrictionBehavior(KeyRestrictionBehavior value)
+        internal static ArgumentOutOfRangeException InvalidKeyRestrictionBehavior(
+            KeyRestrictionBehavior value
+        )
         {
 #if DEBUG
             switch (value)
@@ -153,7 +157,9 @@ namespace System.Data.Common
         }
 
         // IDataParameter.Direction
-        internal static ArgumentOutOfRangeException InvalidParameterDirection(ParameterDirection value)
+        internal static ArgumentOutOfRangeException InvalidParameterDirection(
+            ParameterDirection value
+        )
         {
 #if DEBUG
             switch (value)
@@ -193,10 +199,12 @@ namespace System.Data.Common
         {
             return ADP.InvalidOperation(SR.GetString(SR.ADP_InvalidDataDirectory));
         }
+
         internal static ArgumentException InvalidKeyname(string? parameterName)
         {
             return Argument(SR.GetString(SR.ADP_InvalidKey), parameterName);
         }
+
         internal static ArgumentException InvalidValue(string parameterName)
         {
             return Argument(SR.GetString(SR.ADP_InvalidValue), parameterName);
@@ -244,6 +252,7 @@ namespace System.Data.Common
         {
             return Provider(SR.GetString(SR.ADP_TransactionConnectionMismatch));
         }
+
         internal static InvalidOperationException TransactionRequired(string method)
         {
             return Provider(SR.GetString(SR.ADP_TransactionRequired, method));
@@ -261,11 +270,16 @@ namespace System.Data.Common
         {
             return InvalidOperation(SR.GetString(SR.ADP_ConnectionRequired, method));
         }
-        internal static InvalidOperationException OpenConnectionRequired(string method, ConnectionState state)
-        {
-            return InvalidOperation(SR.GetString(SR.ADP_OpenConnectionRequired, method, ADP.ConnectionStateMsg(state)));
-        }
 
+        internal static InvalidOperationException OpenConnectionRequired(
+            string method,
+            ConnectionState state
+        )
+        {
+            return InvalidOperation(
+                SR.GetString(SR.ADP_OpenConnectionRequired, method, ADP.ConnectionStateMsg(state))
+            );
+        }
 
         internal static Exception OpenReaderExists()
         {
@@ -282,7 +296,14 @@ namespace System.Data.Common
         //
         internal static Exception NonSeqByteAccess(long badIndex, long currIndex, string method)
         {
-            return InvalidOperation(SR.GetString(SR.ADP_NonSeqByteAccess, badIndex.ToString(CultureInfo.InvariantCulture), currIndex.ToString(CultureInfo.InvariantCulture), method));
+            return InvalidOperation(
+                SR.GetString(
+                    SR.ADP_NonSeqByteAccess,
+                    badIndex.ToString(CultureInfo.InvariantCulture),
+                    currIndex.ToString(CultureInfo.InvariantCulture),
+                    method
+                )
+            );
         }
 
         internal static Exception NumericToDecimalOverflow()
@@ -295,16 +316,37 @@ namespace System.Data.Common
         //
         internal static Exception InvalidCommandTimeout(int value)
         {
-            return Argument(SR.GetString(SR.ADP_InvalidCommandTimeout, value.ToString(CultureInfo.InvariantCulture)), ADP.CommandTimeout);
+            return Argument(
+                SR.GetString(
+                    SR.ADP_InvalidCommandTimeout,
+                    value.ToString(CultureInfo.InvariantCulture)
+                ),
+                ADP.CommandTimeout
+            );
         }
+
         internal static Exception DeriveParametersNotSupported(IDbCommand value)
         {
-            return DataAdapter(SR.GetString(SR.ADP_DeriveParametersNotSupported, value.GetType().Name, value.CommandType.ToString()));
+            return DataAdapter(
+                SR.GetString(
+                    SR.ADP_DeriveParametersNotSupported,
+                    value.GetType().Name,
+                    value.CommandType.ToString()
+                )
+            );
         }
+
         internal static Exception UninitializedParameterSize(int index, Type dataType)
         {
-            return InvalidOperation(SR.GetString(SR.ADP_UninitializedParameterSize, index.ToString(CultureInfo.InvariantCulture), dataType.Name));
+            return InvalidOperation(
+                SR.GetString(
+                    SR.ADP_UninitializedParameterSize,
+                    index.ToString(CultureInfo.InvariantCulture),
+                    dataType.Name
+                )
+            );
         }
+
         internal static InvalidOperationException QuotePrefixNotSet(string method)
         {
             return InvalidOperation(SR.GetString(SR.ADP_QuotePrefixNotSet, method));
@@ -317,22 +359,35 @@ namespace System.Data.Common
         {
             return InvalidOperation(SR.GetString(SR.ADP_ConnectionIsDisabled), InnerException);
         }
+
         internal static Exception ClosedConnectionError()
         {
             return InvalidOperation(SR.GetString(SR.ADP_ClosedConnectionError));
         }
+
         internal static Exception ConnectionAlreadyOpen(ConnectionState state)
         {
-            return InvalidOperation(SR.GetString(SR.ADP_ConnectionAlreadyOpen, ADP.ConnectionStateMsg(state)));
+            return InvalidOperation(
+                SR.GetString(SR.ADP_ConnectionAlreadyOpen, ADP.ConnectionStateMsg(state))
+            );
         }
+
         internal static Exception OpenConnectionPropertySet(string property, ConnectionState state)
         {
-            return InvalidOperation(SR.GetString(SR.ADP_OpenConnectionPropertySet, property, ADP.ConnectionStateMsg(state)));
+            return InvalidOperation(
+                SR.GetString(
+                    SR.ADP_OpenConnectionPropertySet,
+                    property,
+                    ADP.ConnectionStateMsg(state)
+                )
+            );
         }
+
         internal static Exception EmptyDatabaseName()
         {
             return Argument(SR.GetString(SR.ADP_EmptyDatabaseName));
         }
+
         internal static Exception DatabaseNameTooLong()
         {
             return Argument(SR.GetString(SR.ADP_DatabaseNameTooLong));
@@ -345,9 +400,12 @@ namespace System.Data.Common
             ConnectionOptionsMissing,
             CouldNotSwitchToClosedPreviouslyOpenedState,
         }
+
         internal static Exception InternalConnectionError(ConnectionError internalError)
         {
-            return InvalidOperation(SR.GetString(SR.ADP_InternalConnectionError, (int)internalError));
+            return InvalidOperation(
+                SR.GetString(SR.ADP_InternalConnectionError, (int)internalError)
+            );
         }
 
         //
@@ -365,34 +423,62 @@ namespace System.Data.Common
         {
             return Argument(SR.GetString(SR.ADP_InvalidDataType, typecode.ToString()));
         }
+
         internal static ArgumentException UnknownDataType(Type dataType)
         {
             return Argument(SR.GetString(SR.ADP_UnknownDataType, dataType.FullName!));
         }
+
         internal static ArgumentException DbTypeNotSupported(System.Data.DbType type, Type enumtype)
         {
-            return Argument(SR.GetString(SR.ADP_DbTypeNotSupported, type.ToString(), enumtype.Name));
-        }
-        internal static ArgumentException UnknownDataTypeCode(Type dataType, TypeCode typeCode)
-        {
-            return Argument(SR.GetString(SR.ADP_UnknownDataTypeCode, ((int)typeCode).ToString(CultureInfo.InvariantCulture), dataType.FullName!));
-        }
-        internal static ArgumentException InvalidOffsetValue(int value)
-        {
-            return Argument(SR.GetString(SR.ADP_InvalidOffsetValue, value.ToString(CultureInfo.InvariantCulture)));
-        }
-        internal static ArgumentException InvalidSizeValue(int value)
-        {
-            return Argument(SR.GetString(SR.ADP_InvalidSizeValue, value.ToString(CultureInfo.InvariantCulture)));
+            return Argument(
+                SR.GetString(SR.ADP_DbTypeNotSupported, type.ToString(), enumtype.Name)
+            );
         }
 
-        internal static Exception ParameterConversionFailed(object value, Type destType, Exception inner)
+        internal static ArgumentException UnknownDataTypeCode(Type dataType, TypeCode typeCode)
+        {
+            return Argument(
+                SR.GetString(
+                    SR.ADP_UnknownDataTypeCode,
+                    ((int)typeCode).ToString(CultureInfo.InvariantCulture),
+                    dataType.FullName!
+                )
+            );
+        }
+
+        internal static ArgumentException InvalidOffsetValue(int value)
+        {
+            return Argument(
+                SR.GetString(
+                    SR.ADP_InvalidOffsetValue,
+                    value.ToString(CultureInfo.InvariantCulture)
+                )
+            );
+        }
+
+        internal static ArgumentException InvalidSizeValue(int value)
+        {
+            return Argument(
+                SR.GetString(SR.ADP_InvalidSizeValue, value.ToString(CultureInfo.InvariantCulture))
+            );
+        }
+
+        internal static Exception ParameterConversionFailed(
+            object value,
+            Type destType,
+            Exception inner
+        )
         { // WebData 75433
             Debug.Assert(null != value, "null value on conversion failure");
             Debug.Assert(null != inner, "null inner on conversion failure");
 
             Exception e;
-            string message = SR.GetString(SR.ADP_ParameterConversionFailed, value.GetType().Name, destType.Name);
+            string message = SR.GetString(
+                SR.ADP_ParameterConversionFailed,
+                value.GetType().Name,
+                destType.Name
+            );
             if (inner is ArgumentException)
             {
                 e = new ArgumentException(message, inner);
@@ -420,19 +506,42 @@ namespace System.Data.Common
         //
         // : IDataParameterCollection
         //
-        internal static Exception ParametersMappingIndex(int index, IDataParameterCollection collection)
+        internal static Exception ParametersMappingIndex(
+            int index,
+            IDataParameterCollection collection
+        )
         {
             return CollectionIndexInt32(index, collection.GetType(), collection.Count);
         }
-        internal static Exception ParametersSourceIndex(string parameterName, IDataParameterCollection collection, Type parameterType)
+
+        internal static Exception ParametersSourceIndex(
+            string parameterName,
+            IDataParameterCollection collection,
+            Type parameterType
+        )
         {
-            return CollectionIndexString(parameterType, ADP.ParameterName, parameterName, collection.GetType());
+            return CollectionIndexString(
+                parameterType,
+                ADP.ParameterName,
+                parameterName,
+                collection.GetType()
+            );
         }
-        internal static Exception ParameterNull(string parameter, IDataParameterCollection collection, Type parameterType)
+
+        internal static Exception ParameterNull(
+            string parameter,
+            IDataParameterCollection collection,
+            Type parameterType
+        )
         {
             return CollectionNullValue(parameter, collection.GetType(), parameterType);
         }
-        internal static Exception InvalidParameterType(IDataParameterCollection collection, Type parameterType, object invalidValue)
+
+        internal static Exception InvalidParameterType(
+            IDataParameterCollection collection,
+            Type parameterType,
+            object invalidValue
+        )
         {
             return CollectionInvalidType(collection.GetType(), parameterType, invalidValue);
         }
@@ -442,12 +551,16 @@ namespace System.Data.Common
         //
         internal static Exception ParallelTransactionsNotSupported(IDbConnection obj)
         {
-            return InvalidOperation(SR.GetString(SR.ADP_ParallelTransactionsNotSupported, obj.GetType().Name));
+            return InvalidOperation(
+                SR.GetString(SR.ADP_ParallelTransactionsNotSupported, obj.GetType().Name)
+            );
         }
+
         internal static Exception TransactionZombied(IDbTransaction obj)
         {
             return InvalidOperation(SR.GetString(SR.ADP_TransactionZombied, obj.GetType().Name));
         }
+
         internal static Exception OffsetOutOfRangeException()
         {
             return InvalidOperation(SR.GetString(SR.ADP_OffsetOutOfRangeException));
@@ -477,9 +590,20 @@ namespace System.Data.Common
             return Argument(SR.GetString(SR.MDF_IncorrectNumberOfDataSourceInformationRows));
         }
 
-        internal static ArgumentException InvalidRestrictionValue(string collectionName, string restrictionName, string? restrictionValue)
+        internal static ArgumentException InvalidRestrictionValue(
+            string collectionName,
+            string restrictionName,
+            string? restrictionValue
+        )
         {
-            return ADP.Argument(SR.GetString(SR.MDF_InvalidRestrictionValue, collectionName, restrictionName, restrictionValue));
+            return ADP.Argument(
+                SR.GetString(
+                    SR.MDF_InvalidRestrictionValue,
+                    collectionName,
+                    restrictionName,
+                    restrictionValue
+                )
+            );
         }
 
         internal static Exception InvalidXml()
@@ -489,12 +613,16 @@ namespace System.Data.Common
 
         internal static Exception InvalidXmlMissingColumn(string collectionName, string columnName)
         {
-            return Argument(SR.GetString(SR.MDF_InvalidXmlMissingColumn, collectionName, columnName));
+            return Argument(
+                SR.GetString(SR.MDF_InvalidXmlMissingColumn, collectionName, columnName)
+            );
         }
 
         internal static Exception InvalidXmlInvalidValue(string collectionName, string columnName)
         {
-            return Argument(SR.GetString(SR.MDF_InvalidXmlInvalidValue, collectionName, columnName));
+            return Argument(
+                SR.GetString(SR.MDF_InvalidXmlInvalidValue, collectionName, columnName)
+            );
         }
 
         internal static Exception MissingDataSourceInformationColumn()
@@ -566,7 +694,7 @@ namespace System.Data.Common
         internal const string UnquoteIdentifier = "UnquoteIdentifier";
 
         internal const int DecimalMaxPrecision = 29;
-        internal const int DecimalMaxPrecision28 = 28;  // there are some cases in Odbc where we need that ...
+        internal const int DecimalMaxPrecision28 = 28; // there are some cases in Odbc where we need that ...
         internal const int DefaultCommandTimeout = 30;
 
         internal static readonly IntPtr PtrZero = new IntPtr(0); // IntPtr.Zero
@@ -628,7 +756,10 @@ namespace System.Data.Common
             return result;
         }
 
-        internal static void EscapeSpecialCharacters(string unescapedString, StringBuilder escapedString)
+        internal static void EscapeSpecialCharacters(
+            string unescapedString,
+            StringBuilder escapedString
+        )
         {
             // note special characters list is from character escapes
             // in the MSDN regular expression language elements documentation
@@ -644,7 +775,6 @@ namespace System.Data.Common
                 escapedString.Append(currentChar);
             }
         }
-
 
         internal static string GetFullPath(string filename)
         { // MDAC 77686

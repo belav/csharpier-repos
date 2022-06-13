@@ -11,16 +11,25 @@ namespace ILCompiler.DependencyAnalysis
     public class ArrayOfFrozenObjectsNode<TEmbedded> : ArrayOfEmbeddedDataNode<TEmbedded>
         where TEmbedded : EmbeddedObjectNode
     {
-        public ArrayOfFrozenObjectsNode(string startSymbolMangledName, string endSymbolMangledName, IComparer<TEmbedded> nodeSorter) : base(startSymbolMangledName, endSymbolMangledName, nodeSorter)
-        {
-        }
+        public ArrayOfFrozenObjectsNode(
+            string startSymbolMangledName,
+            string endSymbolMangledName,
+            IComparer<TEmbedded> nodeSorter
+        ) : base(startSymbolMangledName, endSymbolMangledName, nodeSorter) { }
 
         private void AlignNextObject(ref ObjectDataBuilder builder, NodeFactory factory)
         {
-            builder.EmitZeros(AlignmentHelper.AlignUp(builder.CountBytes, factory.Target.PointerSize) - builder.CountBytes);
+            builder.EmitZeros(
+                AlignmentHelper.AlignUp(builder.CountBytes, factory.Target.PointerSize)
+                    - builder.CountBytes
+            );
         }
 
-        protected override void GetElementDataForNodes(ref ObjectDataBuilder builder, NodeFactory factory, bool relocsOnly)
+        protected override void GetElementDataForNodes(
+            ref ObjectDataBuilder builder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             foreach (EmbeddedObjectNode node in NodesList)
             {

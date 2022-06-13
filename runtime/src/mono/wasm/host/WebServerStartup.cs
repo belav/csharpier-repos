@@ -17,7 +17,8 @@ internal sealed class WebServerStartup
 {
     private readonly IWebHostEnvironment _hostingEnvironment;
 
-    public WebServerStartup(IWebHostEnvironment hostingEnvironment) => _hostingEnvironment = hostingEnvironment;
+    public WebServerStartup(IWebHostEnvironment hostingEnvironment) =>
+        _hostingEnvironment = hostingEnvironment;
 
     public void Configure(IApplicationBuilder app, IOptions<WebServerOptions> optionsContainer)
     {
@@ -34,20 +35,24 @@ internal sealed class WebServerStartup
         WebServerOptions options = optionsContainer.Value;
         if (options.WebServerUseCrossOriginPolicy)
         {
-            app.Use((context, next) =>
-            {
-                context.Response.Headers.Add("Cross-Origin-Embedder-Policy", "require-corp");
-                context.Response.Headers.Add("Cross-Origin-Opener-Policy", "same-origin");
-                return next();
-            });
+            app.Use(
+                (context, next) =>
+                {
+                    context.Response.Headers.Add("Cross-Origin-Embedder-Policy", "require-corp");
+                    context.Response.Headers.Add("Cross-Origin-Opener-Policy", "same-origin");
+                    return next();
+                }
+            );
         }
 
-        app.UseStaticFiles(new StaticFileOptions
-        {
-            FileProvider = new PhysicalFileProvider(_hostingEnvironment.ContentRootPath),
-            ContentTypeProvider = provider,
-            ServeUnknownFileTypes = true
-        });
+        app.UseStaticFiles(
+            new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(_hostingEnvironment.ContentRootPath),
+                ContentTypeProvider = provider,
+                ServeUnknownFileTypes = true
+            }
+        );
 
         if (options.WebServerUseCors)
         {
@@ -59,17 +64,20 @@ internal sealed class WebServerStartup
         {
             app.UseRouter(router =>
             {
-                router.MapGet("/console", async context =>
-                {
-                    if (!context.WebSockets.IsWebSocketRequest)
+                router.MapGet(
+                    "/console",
+                    async context =>
                     {
-                        context.Response.StatusCode = 400;
-                        return;
-                    }
+                        if (!context.WebSockets.IsWebSocketRequest)
+                        {
+                            context.Response.StatusCode = 400;
+                            return;
+                        }
 
-                    using WebSocket socket = await context.WebSockets.AcceptWebSocketAsync();
-                    await options.OnConsoleConnected(socket);
-                });
+                        using WebSocket socket = await context.WebSockets.AcceptWebSocketAsync();
+                        await options.OnConsoleConnected(socket);
+                    }
+                );
             });
         }
 

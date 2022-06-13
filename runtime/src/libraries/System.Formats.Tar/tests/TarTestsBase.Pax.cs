@@ -86,15 +86,23 @@ namespace System.Formats.Tar.Tests
 
         protected DateTimeOffset ConvertDoubleToDateTimeOffset(double value)
         {
-            return new DateTimeOffset((long)(value * TimeSpan.TicksPerSecond) + DateTime.UnixEpoch.Ticks, TimeSpan.Zero);
+            return new DateTimeOffset(
+                (long)(value * TimeSpan.TicksPerSecond) + DateTime.UnixEpoch.Ticks,
+                TimeSpan.Zero
+            );
         }
 
         protected double ConvertDateTimeOffsetToDouble(DateTimeOffset value)
         {
-            return ((double)(value.UtcDateTime - DateTime.UnixEpoch).Ticks)/TimeSpan.TicksPerSecond;
+            return ((double)(value.UtcDateTime - DateTime.UnixEpoch).Ticks)
+                / TimeSpan.TicksPerSecond;
         }
 
-        protected void VerifyExtendedAttributeTimestamp(PaxTarEntry entry, string name, DateTimeOffset expected = default)
+        protected void VerifyExtendedAttributeTimestamp(
+            PaxTarEntry entry,
+            string name,
+            DateTimeOffset expected = default
+        )
         {
             Assert.Contains(name, entry.ExtendedAttributes);
 
@@ -102,7 +110,14 @@ namespace System.Formats.Tar.Tests
             // But as extended attributes, they should always be saved as doubles with decimal precision
             Assert.Contains(".", entry.ExtendedAttributes[name]);
 
-            Assert.True(double.TryParse(entry.ExtendedAttributes[name], NumberStyles.Any, CultureInfo.InvariantCulture, out double doubleTime)); // Force the parsing to use '.' as decimal separator
+            Assert.True(
+                double.TryParse(
+                    entry.ExtendedAttributes[name],
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture,
+                    out double doubleTime
+                )
+            ); // Force the parsing to use '.' as decimal separator
             DateTimeOffset timestamp = ConvertDoubleToDateTimeOffset(doubleTime);
 
             if (expected != default)

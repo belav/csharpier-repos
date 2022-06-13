@@ -8,6 +8,7 @@ namespace System.Numerics.Tests
     public static class Util
     {
         private static Random s_random = new Random();
+
         public static void SetRandomSeed(int seed)
         {
             s_random = new Random(seed);
@@ -73,7 +74,8 @@ namespace System.Numerics.Tests
             return values;
         }
 
-        public static T[] GenerateRandomValues<T>(int numValues, int min = 1, int max = 100) where T : struct
+        public static T[] GenerateRandomValues<T>(int numValues, int min = 1, int max = 100)
+            where T : struct
         {
             T[] values = new T[numValues];
             for (int g = 0; g < numValues; g++)
@@ -105,8 +107,7 @@ namespace System.Numerics.Tests
 
         private static TResult CreateChecked<TOther, TResult>(TOther value)
             where TOther : INumber<TOther>
-            where TResult : INumber<TResult>
-            => TResult.CreateChecked<TOther>(value);
+            where TResult : INumber<TResult> => TResult.CreateChecked<TOther>(value);
 
         public static T Multiply<T>(T left, T right) where T : INumber<T>
         {
@@ -135,7 +136,7 @@ namespace System.Numerics.Tests
 
         public static T AndNot<T>(T left, T right) where T : IBitwiseOperators<T, T, T>
         {
-            return left & ~ right;
+            return left & ~right;
         }
 
         public static T OnesComplement<T>(T left) where T : IBitwiseOperators<T, T, T>
@@ -145,7 +146,11 @@ namespace System.Numerics.Tests
 
         public static float Clamp(float value, float min, float max)
         {
-            return value > max ? max : value < min ? min : value;
+            return value > max
+                ? max
+                : value < min
+                    ? min
+                    : value;
         }
 
         public static T Zero<T>() where T : struct, INumber<T>
@@ -182,7 +187,7 @@ namespace System.Numerics.Tests
         {
             for (int g = 0; g < left.Length; g++)
             {
-                if(left[g] == right[g])
+                if (left[g] == right[g])
                 {
                     return true;
                 }

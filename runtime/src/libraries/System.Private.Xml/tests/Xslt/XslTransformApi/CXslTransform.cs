@@ -14,6 +14,7 @@ namespace System.Xml.Tests
     public class CNullArgumentTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CNullArgumentTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -180,7 +181,11 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform((IXPathNavigable)null, (XsltArgumentList)null, (XmlResolver)null);
+                new XslTransform().Transform(
+                    (IXPathNavigable)null,
+                    (XsltArgumentList)null,
+                    (XmlResolver)null
+                );
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -202,7 +207,11 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform((IXPathNavigable)null, (XsltArgumentList)null, (TextWriter)null);
+                new XslTransform().Transform(
+                    (IXPathNavigable)null,
+                    (XsltArgumentList)null,
+                    (TextWriter)null
+                );
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -224,7 +233,12 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform((IXPathNavigable)null, (XsltArgumentList)null, (TextWriter)null, (XmlResolver)null);
+                new XslTransform().Transform(
+                    (IXPathNavigable)null,
+                    (XsltArgumentList)null,
+                    (TextWriter)null,
+                    (XmlResolver)null
+                );
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -246,7 +260,11 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform((IXPathNavigable)null, (XsltArgumentList)null, (Stream)null);
+                new XslTransform().Transform(
+                    (IXPathNavigable)null,
+                    (XsltArgumentList)null,
+                    (Stream)null
+                );
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -268,7 +286,12 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform((IXPathNavigable)null, (XsltArgumentList)null, (Stream)null, (XmlResolver)null);
+                new XslTransform().Transform(
+                    (IXPathNavigable)null,
+                    (XsltArgumentList)null,
+                    (Stream)null,
+                    (XmlResolver)null
+                );
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -290,7 +313,11 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform((IXPathNavigable)null, (XsltArgumentList)null, (XmlWriter)null);
+                new XslTransform().Transform(
+                    (IXPathNavigable)null,
+                    (XsltArgumentList)null,
+                    (XmlWriter)null
+                );
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -312,7 +339,12 @@ namespace System.Xml.Tests
             try
             {
 #pragma warning disable 0618
-                new XslTransform().Transform((IXPathNavigable)null, (XsltArgumentList)null, (XmlWriter)null, (XmlResolver)null);
+                new XslTransform().Transform(
+                    (IXPathNavigable)null,
+                    (XsltArgumentList)null,
+                    (XmlWriter)null,
+                    (XmlResolver)null
+                );
 #pragma warning restore 0618
             }
             catch (ArgumentNullException)
@@ -347,30 +379,97 @@ namespace System.Xml.Tests
     public class CXmlResolverTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CXmlResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
         }
 
         //[Variation("Set XmlResolver property to null, load style sheet with import/include, should not affect transform")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void XmlResolver1(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void XmlResolver1(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             using (new AllowDefaultResolverContext())
             {
-                string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
+                string expected =
+                    @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
 
                 try
                 {
@@ -388,7 +487,9 @@ namespace System.Xml.Tests
                 }
                 catch (Exception e)
                 {
-                    _output.WriteLine("Should not throw error loading stylesheet with include/import when resolver property is set to NULL!");
+                    _output.WriteLine(
+                        "Should not throw error loading stylesheet with include/import when resolver property is set to NULL!"
+                    );
                     _output.WriteLine(e.ToString());
                     Assert.True(false);
                 }
@@ -397,20 +498,85 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Set XmlResolver property to null, load style sheet with document function, should not resolve during transform")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void XmlResolver2(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void XmlResolver2(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result></result>";
 
@@ -428,27 +594,94 @@ namespace System.Xml.Tests
             }
             else
             {
-                _output.WriteLine("Problem loading stylesheet with document function and resolver set to NULL!");
+                _output.WriteLine(
+                    "Problem loading stylesheet with document function and resolver set to NULL!"
+                );
                 Assert.True(false);
             }
             Assert.True(false);
         }
 
         //[Variation("Default XmlResolver, load style sheet with document function, should resolve during transform")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void TC_Xslt_Document_Function_Use_XmlUrlResolver(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void TC_Xslt_Document_Function_Use_XmlUrlResolver(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             // "xmlResolver_document_function.xsl" contains
             // <xsl:for-each select="document('xmlResolver_document_function.xml')//elem">
@@ -460,20 +693,85 @@ namespace System.Xml.Tests
         }
 
         //[Variation("document() has absolute URI")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void TC_AbsolutePath_Transform(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void TC_AbsolutePath_Transform(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             TestUsingTemporaryCopyOfResolverDocument(() =>
             {
@@ -504,6 +802,7 @@ namespace System.Xml.Tests
     public class CLoadTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -530,20 +829,85 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Load with valid, then invalid, then valid again")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void LoadGeneric2(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void LoadGeneric2(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             if (LoadXSL("showParam.xsl", inputType, readerType) == 1)
             {
@@ -559,7 +923,12 @@ namespace System.Xml.Tests
                     }
                     catch (System.InvalidOperationException e)
                     {
-                        CheckExpectedError(e, "System.Xml", "Xslt_NoStylesheetLoaded", new string[] { "" });
+                        CheckExpectedError(
+                            e,
+                            "System.Xml",
+                            "Xslt_NoStylesheetLoaded",
+                            new string[] { "" }
+                        );
                         return;
                     }
                 }
@@ -573,22 +942,88 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Load an invalid, then a valid and transform")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void LoadGeneric3(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void LoadGeneric3(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -602,7 +1037,10 @@ namespace System.Xml.Tests
             }
             catch (System.IO.FileNotFoundException)
             {
-                if ((LoadXSL("showParam.xsl", inputType, readerType) == 1) && (Transform("fruits.xml", transformType, docType) == 1))
+                if (
+                    (LoadXSL("showParam.xsl", inputType, readerType) == 1)
+                    && (Transform("fruits.xml", transformType, docType) == 1)
+                )
                 {
                     VerifyResult(expected);
                     return;
@@ -613,22 +1051,88 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Call several overloaded functions")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void LoadGeneric4(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void LoadGeneric4(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -643,7 +1147,10 @@ namespace System.Xml.Tests
             if (inputType != InputType.Navigator)
                 LoadXSL("showParamLongName.xsl", InputType.Navigator, readerType);
 
-            if ((LoadXSL("showParam.xsl", inputType, readerType) == 0) || (Transform("fruits.xml", transformType, docType) == 0))
+            if (
+                (LoadXSL("showParam.xsl", inputType, readerType) == 0)
+                || (Transform("fruits.xml", transformType, docType) == 0)
+            )
                 Assert.True(false);
 
             VerifyResult(expected);
@@ -655,7 +1162,10 @@ namespace System.Xml.Tests
             if (inputType != InputType.Reader)
                 LoadXSL("showParamLongName.xsl", InputType.Reader, readerType);
 
-            if ((LoadXSL("showParam.xsl", inputType, readerType) == 1) && (Transform("fruits.xml", transformType, docType) == 1))
+            if (
+                (LoadXSL("showParam.xsl", inputType, readerType) == 1)
+                && (Transform("fruits.xml", transformType, docType) == 1)
+            )
             {
                 VerifyResult(expected);
                 return;
@@ -665,22 +1175,88 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Call same overloaded Load() many times then transform")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void LoadGeneric5(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void LoadGeneric5(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -692,11 +1268,17 @@ namespace System.Xml.Tests
             {
                 if (LoadXSL("showParam.xsl", inputType, readerType) != 1)
                 {
-                    _output.WriteLine("Failed to load stylesheet showParam.xsl on the {0} attempt", i);
+                    _output.WriteLine(
+                        "Failed to load stylesheet showParam.xsl on the {0} attempt",
+                        i
+                    );
                     Assert.True(false);
                 }
             }
-            if ((LoadXSL("showParam.xsl", inputType, readerType) == 1) && (Transform("fruits.xml", transformType, docType) == 1))
+            if (
+                (LoadXSL("showParam.xsl", inputType, readerType) == 1)
+                && (Transform("fruits.xml", transformType, docType) == 1)
+            )
             {
                 VerifyResult(expected);
                 return;
@@ -724,36 +1306,112 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Verify that style sheet is closed properly after Load - Shared Read Access")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void LoadGeneric7(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void LoadGeneric7(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             using (new AllowDefaultResolverContext())
             {
-                string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
+                string expected =
+                    @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
 
                 FileStream s2;
 
                 // check immediately after load and after transform
                 if (LoadXSL("XmlResolver_Main.xsl", inputType, readerType) == 1)
                 {
-                    s2 = new FileStream(FullFilePath("XmlResolver_Main.xsl"), FileMode.Open, FileAccess.Read, FileShare.Read);
+                    s2 = new FileStream(
+                        FullFilePath("XmlResolver_Main.xsl"),
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read
+                    );
                     s2.Dispose();
                     if (Transform("fruits.xml", transformType, docType) == 1)
                     {
                         VerifyResult(expected);
-                        s2 = new FileStream(FullFilePath("XmlResolver_Main.xsl"), FileMode.Open, FileAccess.Read, FileShare.Read);
+                        s2 = new FileStream(
+                            FullFilePath("XmlResolver_Main.xsl"),
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Read
+                        );
                         s2.Dispose();
                         return;
                     }
@@ -763,36 +1421,111 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Verify that included files are closed properly after Load - Read Access")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void LoadGeneric9(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void LoadGeneric9(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             using (new AllowDefaultResolverContext())
             {
-                string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
+                string expected =
+                    @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
 
                 FileStream s2;
 
                 // check immediately after load and after transform
                 if (LoadXSL("XmlResolver_Main.xsl", inputType, readerType) == 1)
                 {
-                    s2 = new FileStream(FullFilePath("XmlResolver_Sub.xsl"), FileMode.Open, FileAccess.Read);
+                    s2 = new FileStream(
+                        FullFilePath("XmlResolver_Sub.xsl"),
+                        FileMode.Open,
+                        FileAccess.Read
+                    );
                     s2.Dispose();
                     if (Transform("fruits.xml", transformType, docType) == 1)
                     {
                         VerifyResult(expected);
-                        s2 = new FileStream(FullFilePath("XmlResolver_Include.xsl"), FileMode.Open, FileAccess.Read, FileShare.Read);
+                        s2 = new FileStream(
+                            FullFilePath("XmlResolver_Include.xsl"),
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Read
+                        );
                         s2.Dispose();
                         return;
                     }
@@ -802,22 +1535,88 @@ namespace System.Xml.Tests
             }
         }
 
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void LoadGeneric11(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void LoadGeneric11(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><Book>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><Book>
 			Name
 		</Book>";
 
@@ -831,7 +1630,10 @@ namespace System.Xml.Tests
                     _output.WriteLine("Failed to load stylesheet books_entity_ref.xsl");
                     Assert.True(false);
                 }
-                if ((LoadXSL("books_entity_ref.xsl", inputType, readerType) == 1) && (Transform("books_entity_ref.xml", transformType, docType) == 1))
+                if (
+                    (LoadXSL("books_entity_ref.xsl", inputType, readerType) == 1)
+                    && (Transform("books_entity_ref.xml", transformType, docType) == 1)
+                )
                 {
                     VerifyResult(expected);
                     return;
@@ -858,7 +1660,11 @@ namespace System.Xml.Tests
                 // Try to open the xsl file
                 try
                 {
-                    strmTemp = new FileStream(FullFilePath("xslt_error.xsl"), FileMode.Open, FileAccess.Read);
+                    strmTemp = new FileStream(
+                        FullFilePath("xslt_error.xsl"),
+                        FileMode.Open,
+                        FileAccess.Read
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -876,7 +1682,7 @@ namespace System.Xml.Tests
         public void XslTransformThrowsPNSEWhenUsingScripts()
         {
             using StringReader xslFile = new StringReader(
-        @"<xsl:stylesheet version=""1.0"" xmlns:xsl=""http://www.w3.org/1999/XSL/Transform""
+                @"<xsl:stylesheet version=""1.0"" xmlns:xsl=""http://www.w3.org/1999/XSL/Transform""
   xmlns:msxsl=""urn:schemas-microsoft-com:xslt""
   xmlns:user=""urn:my-scripts"">
   <msxsl:script language=""C#"" implements-prefix=""user"">
@@ -892,12 +1698,18 @@ namespace System.Xml.Tests
       <Price><xsl:value-of select=""user:modifyPrice(Price)""/></Price>
     </Root>
   </xsl:template>
-</xsl:stylesheet>");
+</xsl:stylesheet>"
+            );
 
-            using XmlReader reader = XmlReader.Create(xslFile); 
+            using XmlReader reader = XmlReader.Create(xslFile);
             XslTransform xslt = new XslTransform();
-            XsltCompileException compilationException = Assert.Throws<XsltCompileException>(() => xslt.Load(reader));
-            Assert.True(compilationException.InnerException != null && compilationException.InnerException is PlatformNotSupportedException);
+            XsltCompileException compilationException = Assert.Throws<XsltCompileException>(
+                () => xslt.Load(reader)
+            );
+            Assert.True(
+                compilationException.InnerException != null
+                    && compilationException.InnerException is PlatformNotSupportedException
+            );
         }
     }
 
@@ -920,6 +1732,7 @@ namespace System.Xml.Tests
     public class CLoadXmlResolverTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadXmlResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -966,22 +1779,88 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Call Load with null XmlResolver, style sheet does not have include/import, should not error")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void LoadGeneric3(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void LoadGeneric3(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -1019,7 +1898,12 @@ namespace System.Xml.Tests
             }
             catch (System.Xml.Xsl.XsltCompileException e)
             {
-                CheckExpectedError(e.InnerException, "System.Xml", "Xml_NullResolver", new string[] { "" });
+                CheckExpectedError(
+                    e.InnerException,
+                    "System.Xml",
+                    "Xml_NullResolver",
+                    new string[] { "" }
+                );
                 return;
             }
             _output.WriteLine("Exception not thrown for null resolver");
@@ -1027,22 +1911,88 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Call Load with null custom resolver and style sheet has no import/include, should not error")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void TC_Resolver_Null_Should_Not_Break_Transform(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void TC_Resolver_Null_Should_Not_Break_Transform(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -1056,40 +2006,124 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Style sheet has import/include, call Load first with custom null resolver and then default resolver, should not fail")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void TC_CustomNullResover_Then_XmlUrlResolver(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void TC_CustomNullResover_Then_XmlUrlResolver(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             CustomNullResolver myResolver = new CustomNullResolver(_output);
             if (inputType == InputType.URI)
             {
-                var e = Assert.Throws<XmlException>(() => LoadXSL_Resolver("XmlResolver_Main.xsl", myResolver, inputType, readerType));
-                var absoluteUri = new Uri(Path.Combine(Environment.CurrentDirectory, FullFilePath("XmlResolver_Main.xsl"))).AbsoluteUri;
+                var e = Assert.Throws<XmlException>(
+                    () =>
+                        LoadXSL_Resolver("XmlResolver_Main.xsl", myResolver, inputType, readerType)
+                );
+                var absoluteUri = new Uri(
+                    Path.Combine(Environment.CurrentDirectory, FullFilePath("XmlResolver_Main.xsl"))
+                ).AbsoluteUri;
                 CheckExpectedError(e, "System.Xml", "Xml_CannotResolveUrl", new[] { absoluteUri });
             }
             else
             {
-                var e = Assert.Throws<XsltCompileException>(() => LoadXSL_Resolver("XmlResolver_Main.xsl", myResolver, inputType, readerType));
+                var e = Assert.Throws<XsltCompileException>(
+                    () =>
+                        LoadXSL_Resolver("XmlResolver_Main.xsl", myResolver, inputType, readerType)
+                );
                 var xsltException = Assert.IsType<XsltException>(e.InnerException);
-                var absoluteUri = new Uri(Path.Combine(Environment.CurrentDirectory, FullFilePath("XmlResolver_Include.xsl"))).AbsoluteUri;
+                var absoluteUri = new Uri(
+                    Path.Combine(
+                        Environment.CurrentDirectory,
+                        FullFilePath("XmlResolver_Include.xsl")
+                    )
+                ).AbsoluteUri;
                 var exceptionSourceAssembly = "System.Xml";
-                CheckExpectedError(xsltException, exceptionSourceAssembly, "Xslt_CantResolve", new[] { absoluteUri });
+                CheckExpectedError(
+                    xsltException,
+                    exceptionSourceAssembly,
+                    "Xslt_CantResolve",
+                    new[] { absoluteUri }
+                );
             }
 
             LoadXSL_Resolver("XmlResolver_Main.xsl", new XmlUrlResolver(), inputType, readerType);
             Transform("fruits.xml", transformType, docType);
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
             VerifyResult(expected);
         }
 
@@ -1098,38 +2132,126 @@ namespace System.Xml.Tests
         [InlineData(InputType.URI, ReaderType.XmlValidatingReader)]
         [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader)]
         [Theory]
-        public void TC_No_Explicit_Resolver_Prohibits_External_Url(InputType inputType, ReaderType readerType)
+        public void TC_No_Explicit_Resolver_Prohibits_External_Url(
+            InputType inputType,
+            ReaderType readerType
+        )
         {
             AppContext.TryGetSwitch("Switch.System.Xml.AllowDefaultResolver", out bool isEnabled);
             Assert.False(isEnabled);
-            var e = Assert.Throws<XsltCompileException>(() => LoadXSL("XmlResolver_Main.xsl", inputType, readerType));
+            var e = Assert.Throws<XsltCompileException>(
+                () => LoadXSL("XmlResolver_Main.xsl", inputType, readerType)
+            );
             var xmlException = Assert.IsType<XmlException>(e.InnerException);
-            CheckExpectedError(xmlException, "System.Xml", "Xml_NullResolver", Array.Empty<string>());
+            CheckExpectedError(
+                xmlException,
+                "System.Xml",
+                "Xml_NullResolver",
+                Array.Empty<string>()
+            );
         }
 
         //[Variation("Load with resolver with credentials, then load XSL that does not need cred.")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void LoadGeneric9(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void LoadGeneric9(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             using (new AllowDefaultResolverContext())
             {
-                string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
+                string expected =
+                    @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
 
-                if ((LoadXSL_Resolver("XmlResolver_Main.xsl", GetDefaultCredResolver(), inputType, readerType) == 1))
+                if (
+                    (
+                        LoadXSL_Resolver(
+                            "XmlResolver_Main.xsl",
+                            GetDefaultCredResolver(),
+                            inputType,
+                            readerType
+                        ) == 1
+                    )
+                )
                 {
-                    if ((LoadXSL("XmlResolver_Main.xsl", inputType, readerType) == 1) && (Transform("fruits.xml", transformType, docType) == 1))
+                    if (
+                        (LoadXSL("XmlResolver_Main.xsl", inputType, readerType) == 1)
+                        && (Transform("fruits.xml", transformType, docType) == 1)
+                    )
                     {
                         VerifyResult(expected);
                         return;
@@ -1145,22 +2267,88 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Call Load() many times with null resolver then perform a transform")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void LoadGeneric10(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void LoadGeneric10(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -1172,11 +2360,17 @@ namespace System.Xml.Tests
             {
                 if (LoadXSL_Resolver("showParam.xsl", null, inputType, readerType) != 1)
                 {
-                    _output.WriteLine("Failed to load stylesheet showParam.xsl on the {0} attempt", i);
+                    _output.WriteLine(
+                        "Failed to load stylesheet showParam.xsl on the {0} attempt",
+                        i
+                    );
                     Assert.True(false);
                 }
             }
-            if ((LoadXSL_Resolver("showParam.xsl", null, inputType, readerType) == 1) && (Transform("fruits.xml", transformType, docType) == 1))
+            if (
+                (LoadXSL_Resolver("showParam.xsl", null, inputType, readerType) == 1)
+                && (Transform("fruits.xml", transformType, docType) == 1)
+            )
             {
                 VerifyResult(expected);
                 return;
@@ -1204,20 +2398,85 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Load non existing stylesheet with null resolver and try to transform")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void LoadGeneric12(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void LoadGeneric12(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             if (LoadXSL_Resolver("showParam.xsl", null, inputType, readerType) == 1)
             {
@@ -1234,7 +2493,12 @@ namespace System.Xml.Tests
                     }
                     catch (System.InvalidOperationException e2)
                     {
-                        CheckExpectedError(e2, "system.xml", "Xslt_NoStylesheetLoaded", new string[] { "" });
+                        CheckExpectedError(
+                            e2,
+                            "system.xml",
+                            "Xslt_NoStylesheetLoaded",
+                            new string[] { "" }
+                        );
                         return;
                     }
                 }
@@ -1260,25 +2524,59 @@ namespace System.Xml.Tests
     public class CLoadUrlResolverTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadUrlResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
         }
 
         //[Variation("Basic check for usage of credentials on resolver, load XSL that needs cred. with correct resolver")]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void LoadUrlResolver1(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void LoadUrlResolver1(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><out>Red50Orange25</out>";
 
             // XsltResolverTestMain.xsl is placed in IIS virtual directory
             // which requires integrated Windows NT authentication
-            if ((LoadXSL_Resolver(("XmlResolver/XsltResolverTestMain.xsl"), GetDefaultCredResolver(), inputType, readerType) == 1) &&
-                (Transform("fruits.xml", transformType, docType) == 1))
+            if (
+                (
+                    LoadXSL_Resolver(
+                        ("XmlResolver/XsltResolverTestMain.xsl"),
+                        GetDefaultCredResolver(),
+                        inputType,
+                        readerType
+                    ) == 1
+                ) && (Transform("fruits.xml", transformType, docType) == 1)
+            )
             {
                 VerifyResult(expected);
                 return;
@@ -1294,14 +2592,21 @@ namespace System.Xml.Tests
         {
             try
             {
-                LoadXSL_Resolver(("XmlResolver/XsltResolverTestMain.xsl"), null, inputType, readerType);
+                LoadXSL_Resolver(
+                    ("XmlResolver/XsltResolverTestMain.xsl"),
+                    null,
+                    inputType,
+                    readerType
+                );
             }
             catch (System.Xml.Xsl.XsltException)
             {
                 //return CheckExpectedError(e, "system.xml", "Xml_NullResolver");
                 return;
             }
-            _output.WriteLine("Should not have been able to retrieve and resolve style sheet with null resolver");
+            _output.WriteLine(
+                "Should not have been able to retrieve and resolve style sheet with null resolver"
+            );
             Assert.True(false);
         }
 
@@ -1332,6 +2637,7 @@ namespace System.Xml.Tests
     public class CLoadStringTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadStringTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -1434,6 +2740,7 @@ namespace System.Xml.Tests
     public class CLoadXPathNavigableTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadXPathNavigableTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -1444,7 +2751,8 @@ namespace System.Xml.Tests
         [Theory]
         public void LoadNavigator1(TransformType transformType, DocType docType)
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -1480,7 +2788,8 @@ namespace System.Xml.Tests
         [Theory]
         public void LoadNavigator2(TransformType transformType, DocType docType)
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -1490,7 +2799,9 @@ namespace System.Xml.Tests
 
 #pragma warning disable 0618
             xslt = new XslTransform();
-            XmlValidatingReader xrLoad = new XmlValidatingReader(new XmlTextReader(FullFilePath("showParam.xsl")));
+            XmlValidatingReader xrLoad = new XmlValidatingReader(
+                new XmlTextReader(FullFilePath("showParam.xsl"))
+            );
 #pragma warning restore 0618
             XPathDocument xdTemp = new XPathDocument(xrLoad, XmlSpace.Preserve);
             xrLoad.Dispose();
@@ -1516,7 +2827,9 @@ namespace System.Xml.Tests
 
 #pragma warning disable 0618
             xslt = new XslTransform();
-            XmlValidatingReader xrLoad = new XmlValidatingReader(new XmlTextReader(FullFilePath("XmlResolver/XsltResolverTestMain.xsl")));
+            XmlValidatingReader xrLoad = new XmlValidatingReader(
+                new XmlTextReader(FullFilePath("XmlResolver/XsltResolverTestMain.xsl"))
+            );
 #pragma warning restore 0618
             xrLoad.XmlResolver = GetDefaultCredResolver();
 
@@ -1542,6 +2855,7 @@ namespace System.Xml.Tests
     public class CLoadReaderTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CLoadReaderTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -1552,7 +2866,8 @@ namespace System.Xml.Tests
         [Theory]
         public void LoadXmlReader1(TransformType transformType, DocType docType)
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -1564,7 +2879,9 @@ namespace System.Xml.Tests
 #pragma warning disable 0618
             xslt = new XslTransform();
 
-            XmlValidatingReader xrTemp = new XmlValidatingReader(new XmlTextReader(FullFilePath("showParam.xsl")));
+            XmlValidatingReader xrTemp = new XmlValidatingReader(
+                new XmlTextReader(FullFilePath("showParam.xsl"))
+            );
 #pragma warning restore 0618
             xrTemp.ValidationType = ValidationType.None;
             xrTemp.EntityHandling = EntityHandling.ExpandEntities;
@@ -1598,7 +2915,9 @@ namespace System.Xml.Tests
 #pragma warning disable 0618
             xslt = new XslTransform();
 
-            XmlValidatingReader xrTemp = new XmlValidatingReader(new XmlTextReader(FullFilePath("showParam.xsl")));
+            XmlValidatingReader xrTemp = new XmlValidatingReader(
+                new XmlTextReader(FullFilePath("showParam.xsl"))
+            );
 #pragma warning restore 0618
             xrTemp.ValidationType = ValidationType.None;
             xrTemp.EntityHandling = EntityHandling.ExpandEntities;
@@ -1610,7 +2929,12 @@ namespace System.Xml.Tests
             }
             catch (System.Xml.Xsl.XsltCompileException e)
             {
-                CheckExpectedError(e.InnerException, "system.xml", "Xslt_WrongStylesheetElement", new string[] { "" });
+                CheckExpectedError(
+                    e.InnerException,
+                    "system.xml",
+                    "Xslt_WrongStylesheetElement",
+                    new string[] { "" }
+                );
                 return;
             }
             _output.WriteLine("No exception thrown for a loading a closed reader!");
@@ -1625,7 +2949,9 @@ namespace System.Xml.Tests
 #pragma warning disable 0618
             xslt = new XslTransform();
 
-            XmlValidatingReader xrTemp = new XmlValidatingReader(new XmlTextReader(FullFilePath("showParam.xsl")));
+            XmlValidatingReader xrTemp = new XmlValidatingReader(
+                new XmlTextReader(FullFilePath("showParam.xsl"))
+            );
 #pragma warning restore 0618
             xrTemp.ValidationType = ValidationType.None;
             xrTemp.EntityHandling = EntityHandling.ExpandEntities;
@@ -1660,7 +2986,9 @@ namespace System.Xml.Tests
 #pragma warning disable 0618
             xslt = new XslTransform();
 
-            XmlValidatingReader xrTemp = new XmlValidatingReader(new XmlTextReader(FullFilePath("showParam.xsl")));
+            XmlValidatingReader xrTemp = new XmlValidatingReader(
+                new XmlTextReader(FullFilePath("showParam.xsl"))
+            );
 #pragma warning restore 0618
             xrTemp.ValidationType = ValidationType.None;
             xrTemp.EntityHandling = EntityHandling.ExpandEntities;
@@ -1695,19 +3023,26 @@ namespace System.Xml.Tests
 #pragma warning disable 0618
             xslt = new XslTransform();
 
-            XmlValidatingReader xrTemp = new XmlValidatingReader(new XmlTextReader(FullFilePath("showParam.xsl")));
+            XmlValidatingReader xrTemp = new XmlValidatingReader(
+                new XmlTextReader(FullFilePath("showParam.xsl"))
+            );
 #pragma warning restore 0618
             xrTemp.ValidationType = ValidationType.None;
             xrTemp.EntityHandling = EntityHandling.ExpandEntities;
             xslt.Load(xrTemp);
             try
             {
-                xslt.Load(xrTemp);  // should now be at end and should give exception
+                xslt.Load(xrTemp); // should now be at end and should give exception
                 fTEST_FAIL = true;
             }
             catch (System.Xml.Xsl.XsltCompileException e)
             {
-                CheckExpectedError(e.InnerException, "system.xml", "Xslt_WrongStylesheetElement", new string[] { "" });
+                CheckExpectedError(
+                    e.InnerException,
+                    "system.xml",
+                    "Xslt_WrongStylesheetElement",
+                    new string[] { "" }
+                );
             }
             finally
             {
@@ -1730,7 +3065,7 @@ namespace System.Xml.Tests
 
             try
             {
-                xslt.Load(xrTemp);  // should now be at end and should give exception
+                xslt.Load(xrTemp); // should now be at end and should give exception
             }
             catch (System.ArgumentNullException)
             {
@@ -1749,7 +3084,9 @@ namespace System.Xml.Tests
 
 #pragma warning disable 0618
             xslt = new XslTransform();
-            XmlValidatingReader xrLoad = new XmlValidatingReader(new XmlTextReader(FullFilePath("XmlResolver/XsltResolverTestMain.xsl")));
+            XmlValidatingReader xrLoad = new XmlValidatingReader(
+                new XmlTextReader(FullFilePath("XmlResolver/XsltResolverTestMain.xsl"))
+            );
 #pragma warning restore 0618
             xrLoad.XmlResolver = GetDefaultCredResolver();
             xslt.Load(xrLoad, GetDefaultCredResolver());
@@ -1784,28 +3121,95 @@ namespace System.Xml.Tests
     public class CTransformTestGeneric : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CTransformTestGeneric(ITestOutputHelper output) : base(output)
         {
             _output = output;
         }
 
         //[Variation("Basic Verification Test")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void TransformGeneric1(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void TransformGeneric1(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -1813,7 +3217,10 @@ namespace System.Xml.Tests
 		5.No Value Specified
 		6.No Value Specified</result>";
 
-            if ((LoadXSL("showParam.xsl", inputType, readerType) == 1) && (Transform("fruits.xml", transformType, docType) == 1))
+            if (
+                (LoadXSL("showParam.xsl", inputType, readerType) == 1)
+                && (Transform("fruits.xml", transformType, docType) == 1)
+            )
             {
                 VerifyResult(expected);
                 return;
@@ -1823,22 +3230,88 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Load and Transform multiple times")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void TransformGeneric2(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void TransformGeneric2(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -1848,7 +3321,10 @@ namespace System.Xml.Tests
 
             for (int i = 0; i < 5; i++)
             {
-                if ((LoadXSL("showParam.xsl", inputType, readerType) != 1) || (Transform("fruits.xml", transformType, docType) != 1))
+                if (
+                    (LoadXSL("showParam.xsl", inputType, readerType) != 1)
+                    || (Transform("fruits.xml", transformType, docType) != 1)
+                )
                     Assert.True(false);
                 VerifyResult(expected);
             }
@@ -1856,22 +3332,88 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Load once, Transform many times")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void TransformGeneric3(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void TransformGeneric3(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -1915,29 +3457,99 @@ namespace System.Xml.Tests
                 CheckExpectedError(e, "system.xml", "Xslt_NoStylesheetLoaded", new string[] { "" });
                 return;
             }
-            _output.WriteLine("Exception not given for a transform that didn't have a Load method instantiated");
+            _output.WriteLine(
+                "Exception not given for a transform that didn't have a Load method instantiated"
+            );
             Assert.True(false);
         }
 
         //[Variation("Closing XSL and XML files used in transform, Read access")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void TransformGeneric5(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void TransformGeneric5(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             FileStream s2;
 
-            if ((LoadXSL("showParam.xsl", inputType, readerType) == 1) && (Transform("fruits.xml", transformType, docType) == 1))
+            if (
+                (LoadXSL("showParam.xsl", inputType, readerType) == 1)
+                && (Transform("fruits.xml", transformType, docType) == 1)
+            )
             {
                 s2 = new FileStream(FullFilePath("showParam.xsl"), FileMode.Open, FileAccess.Read);
                 s2.Dispose();
@@ -1947,25 +3559,92 @@ namespace System.Xml.Tests
 
                 return;
             }
-            _output.WriteLine("Encountered errors performing transform and could not verify if files were closed");
+            _output.WriteLine(
+                "Encountered errors performing transform and could not verify if files were closed"
+            );
             Assert.True(false);
         }
 
         //[Variation("Bug358103 - ArgumentOutOfRangeException in forwards-compatible mode for <foo bar='{+1}'/>")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void TransformGeneric7(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void TransformGeneric7(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             try
             {
@@ -2002,30 +3681,97 @@ namespace System.Xml.Tests
     public class CTransformResolverTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CTransformResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
         }
 
         //[Variation("Pass null XmlResolver, load style sheet with import/include, should not affect transform")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void XmlResolver1(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void XmlResolver1(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             using (new AllowDefaultResolverContext())
             {
-                string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
+                string expected =
+                    @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
 
                 try
                 {
@@ -2050,20 +3796,85 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Pass null XmlResolver, load style sheet with document function, should not resolve during transform")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void XmlResolver2(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void XmlResolver2(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result></result>";
 
@@ -2087,20 +3898,85 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Default XmlResolver, load style sheet with document function, should resolve during transform")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void TC_Xslt_Document_Function_Use_XmlUrlResolver(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void TC_Xslt_Document_Function_Use_XmlUrlResolver(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             // "xmlResolver_document_function.xsl" contains
             // <xsl:for-each select="document('xmlResolver_document_function.xml')//elem">
@@ -2111,20 +3987,85 @@ namespace System.Xml.Tests
         }
 
         //[Variation("document() has absolute URI")]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Reader, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Reader, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Writer, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Reader,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Reader,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Writer,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void TC_AbsolutePath_Transform(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void TC_AbsolutePath_Transform(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             TestUsingTemporaryCopyOfResolverDocument(() =>
             {
@@ -2145,6 +4086,7 @@ namespace System.Xml.Tests
     public class CTransformStrStrTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CTransformStrStrTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -2157,7 +4099,8 @@ namespace System.Xml.Tests
         [Theory]
         public void TransformStrStr1(InputType inputType, ReaderType readerType)
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -2190,7 +4133,9 @@ namespace System.Xml.Tests
                     CallTransform(xslt, null, _strOutFile);
                 }
                 catch (System.ArgumentException)
-                { return; }
+                {
+                    return;
+                }
             }
             _output.WriteLine("Exception not generated for null input filename");
             Assert.True(false);
@@ -2320,7 +4265,8 @@ namespace System.Xml.Tests
         [Theory]
         public void TransformStrStr8(InputType inputType, ReaderType readerType)
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><result>
 		1.No Value Specified
 		2.No Value Specified
 		3.No Value Specified
@@ -2380,7 +4326,10 @@ namespace System.Xml.Tests
             {
                 try
                 {
-                    xslt.Transform(FullFilePath("fruits.xml"), "http://www.IdontExist.com/index.xml");
+                    xslt.Transform(
+                        FullFilePath("fruits.xml"),
+                        "http://www.IdontExist.com/index.xml"
+                    );
                 }
                 catch (System.Exception e)
                 {
@@ -2465,7 +4414,6 @@ namespace System.Xml.Tests
                 {
                     iCount++;
                 }
-
             }
 
             if (iCount.Equals(2))
@@ -2475,7 +4423,7 @@ namespace System.Xml.Tests
         }
 
         //[Variation("Output filename is \'\\\\\'")]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Invalid path specific to Windows
+        [PlatformSpecific(TestPlatforms.Windows)] // Invalid path specific to Windows
         [InlineData(InputType.Reader, ReaderType.XmlValidatingReader)]
         [InlineData(InputType.URI, ReaderType.XmlValidatingReader)]
         [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader)]
@@ -2486,7 +4434,9 @@ namespace System.Xml.Tests
 
             if (LoadXSL("showParam.xsl", inputType, readerType) == 1)
             {
-                Assert.Throws<System.ArgumentException>(() => xslt.Transform(szFullFilename, "    "));
+                Assert.Throws<System.ArgumentException>(
+                    () => xslt.Transform(szFullFilename, "    ")
+                );
                 return;
             }
 
@@ -2536,6 +4486,7 @@ namespace System.Xml.Tests
     public class CTransformStrStrResolverTest : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CTransformStrStrResolverTest(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -2550,7 +4501,8 @@ namespace System.Xml.Tests
         {
             using (new AllowDefaultResolverContext())
             {
-                string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
+                string expected =
+                    @"<?xml version=""1.0"" encoding=""utf-8""?><result><fruit>Apple</fruit><fruit>orange</fruit></result>";
                 string szFullFilename = FullFilePath("fruits.xml");
 
                 try
@@ -2602,7 +4554,10 @@ namespace System.Xml.Tests
         [InlineData(InputType.URI, ReaderType.XmlValidatingReader)]
         [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader)]
         [Theory]
-        public void TC_Xslt_Document_Function_Use_XmlUrlResolver(InputType inputType, ReaderType readerType)
+        public void TC_Xslt_Document_Function_Use_XmlUrlResolver(
+            InputType inputType,
+            ReaderType readerType
+        )
         {
             // "xmlResolver_document_function.xsl" contains
             // <xsl:for-each select="document('xmlResolver_document_function.xml')//elem">
@@ -2619,18 +4574,35 @@ namespace System.Xml.Tests
     public class CNDP1_1SP1Test : XsltApiTestCaseBase
     {
         private ITestOutputHelper _output;
+
         public CNDP1_1SP1Test(ITestOutputHelper output) : base(output)
         {
             _output = output;
         }
 
         //[Variation("Local parameter gets overwritten with global param value", Pri = 1)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void var1(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void var1(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><out>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><out>
 param1 (correct answer is 'local-param1-arg'): local-param1-arg
 param2 (correct answer is 'local-param2-arg'): local-param2-arg
 </out>";
@@ -2638,7 +4610,10 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             m_xsltArg = new XsltArgumentList();
             m_xsltArg.AddParam("param1", string.Empty, "global-param1-arg");
 
-            if ((LoadXSL("paramScope.xsl", inputType, readerType) == 1) && (Transform_ArgList("fruits.xml", transformType, docType) == 1))
+            if (
+                (LoadXSL("paramScope.xsl", inputType, readerType) == 1)
+                && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
+            )
             {
                 VerifyResult(expected);
                 return;
@@ -2648,12 +4623,28 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
         }
 
         //[Variation("Local parameter gets overwritten with global variable value", Pri = 1)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void var2(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void var2(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><out>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><out>
 param1 (correct answer is 'local-param1-arg'): local-param1-arg
 param2 (correct answer is 'local-param2-arg'): local-param2-arg
 </out>";
@@ -2661,7 +4652,10 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
             m_xsltArg = new XsltArgumentList();
             m_xsltArg.AddParam("param1", string.Empty, "global-param1-arg");
 
-            if ((LoadXSL("varScope.xsl", inputType, readerType) == 1) && (Transform_ArgList("fruits.xml", transformType, docType) == 1))
+            if (
+                (LoadXSL("varScope.xsl", inputType, readerType) == 1)
+                && (Transform_ArgList("fruits.xml", transformType, docType) == 1)
+            )
             {
                 VerifyResult(expected);
                 return;
@@ -2671,34 +4665,69 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
         }
 
         //[Variation("Subclassed XPathNodeIterator returned from an extension object or XsltFunction is not accepted by XPath", Pri = 1)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void TC_XPathNodeIterator_From_ExtensionObject(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void TC_XPathNodeIterator_From_ExtensionObject(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
             m_xsltArg = new XsltArgumentList();
             m_xsltArg.AddExtensionObject("http://foo.com", new MyXsltExtension());
             LoadXSL("Bug111075.xsl", inputType, readerType);
             Transform_ArgList("Bug111075.xml", transformType, docType);
 
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?><distinct-countries>Austria, France, Germany, Spain</distinct-countries>";
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?><distinct-countries>Austria, France, Germany, Spain</distinct-countries>";
             VerifyResult(expected);
         }
 
         //[Variation("Iterator using for-each over a variable is not reset correctly while using msxsl:node-set()", Pri = 1)]
-        [InlineData(InputType.URI, ReaderType.XmlValidatingReader, TransformType.Stream, DocType.XPathDocument)]
-        [InlineData(InputType.Navigator, ReaderType.XmlValidatingReader, TransformType.TextWriter, DocType.XPathDocument)]
+        [InlineData(
+            InputType.URI,
+            ReaderType.XmlValidatingReader,
+            TransformType.Stream,
+            DocType.XPathDocument
+        )]
+        [InlineData(
+            InputType.Navigator,
+            ReaderType.XmlValidatingReader,
+            TransformType.TextWriter,
+            DocType.XPathDocument
+        )]
         [Theory]
-        public void var4(InputType inputType, ReaderType readerType, TransformType transformType, DocType docType)
+        public void var4(
+            InputType inputType,
+            ReaderType readerType,
+            TransformType transformType,
+            DocType docType
+        )
         {
-            string expected = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string expected =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 		Node Count: {3}
 
 		
 		Correct Output: (1)(2)(3)
 		Incorrect Output: [1][2][3]";
 
-            if ((LoadXSL("Bug109644.xsl", inputType, readerType) == 1) && (Transform("foo.xml", transformType, docType) == 1))
+            if (
+                (LoadXSL("Bug109644.xsl", inputType, readerType) == 1)
+                && (Transform("foo.xml", transformType, docType) == 1)
+            )
             {
                 Assert.Equal(expected, File.ReadAllText(_strOutFile));
                 return;
@@ -2711,7 +4740,9 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
     internal sealed class AllowDefaultResolverContext : IDisposable
     {
         private const string SwitchName = "Switch.System.Xml.AllowDefaultResolver";
+
         public AllowDefaultResolverContext() => AppContext.SetSwitch(SwitchName, isEnabled: true);
+
         public void Dispose() => AppContext.SetSwitch(SwitchName, isEnabled: false);
     }
 
@@ -2749,26 +4780,17 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
 
         public override XPathNavigator Current
         {
-            get
-            {
-                return (index > 0) ? (XPathNavigator)array[index - 1] : null;
-            }
+            get { return (index > 0) ? (XPathNavigator)array[index - 1] : null; }
         }
 
         public override int CurrentPosition
         {
-            get
-            {
-                return index;
-            }
+            get { return index; }
         }
 
         public override int Count
         {
-            get
-            {
-                return array.Count;
-            }
+            get { return array.Count; }
         }
 
         public void Reset()

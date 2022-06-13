@@ -80,6 +80,7 @@ public static class RelationalEventId
         // Query events
         QueryClientEvaluationWarning = CoreEventId.RelationalBaseId + 500,
         QueryPossibleUnintendedUseOfEqualsWarning,
+
         // ReSharper disable twice InconsistentNaming
         Obsolete_QueryPossibleExceptionWithAggregateOperatorWarning,
         Obsolete_ValueConversionSqlLiteralWarning,
@@ -105,10 +106,10 @@ public static class RelationalEventId
         OptionalDependentWithAllNullPropertiesWarning
     }
 
-    private static readonly string _connectionPrefix = DbLoggerCategory.Database.Connection.Name + ".";
+    private static readonly string _connectionPrefix =
+        DbLoggerCategory.Database.Connection.Name + ".";
 
-    private static EventId MakeConnectionId(Id id)
-        => new((int)id, _connectionPrefix + id);
+    private static EventId MakeConnectionId(Id id) => new((int)id, _connectionPrefix + id);
 
     /// <summary>
     ///     A database connection is opening.
@@ -228,11 +229,10 @@ public static class RelationalEventId
     ///     </para>
     /// </remarks>
     public static readonly EventId ConnectionCreated = MakeConnectionId(Id.ConnectionCreated);
-    
+
     private static readonly string _sqlPrefix = DbLoggerCategory.Database.Command.Name + ".";
 
-    private static EventId MakeCommandId(Id id)
-        => new((int)id, _sqlPrefix + id);
+    private static EventId MakeCommandId(Id id) => new((int)id, _sqlPrefix + id);
 
     /// <summary>
     ///     A <see cref="DbCommand" /> has been canceled.
@@ -325,10 +325,10 @@ public static class RelationalEventId
     /// </remarks>
     public static readonly EventId CommandError = MakeCommandId(Id.CommandError);
 
-    private static readonly string _transactionPrefix = DbLoggerCategory.Database.Transaction.Name + ".";
+    private static readonly string _transactionPrefix =
+        DbLoggerCategory.Database.Transaction.Name + ".";
 
-    private static EventId MakeTransactionId(Id id)
-        => new((int)id, _transactionPrefix + id);
+    private static EventId MakeTransactionId(Id id) => new((int)id, _transactionPrefix + id);
 
     /// <summary>
     ///     A database transaction has been started.
@@ -380,7 +380,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId TransactionCommitting = MakeTransactionId(Id.TransactionCommitting);
+    public static readonly EventId TransactionCommitting = MakeTransactionId(
+        Id.TransactionCommitting
+    );
 
     /// <summary>
     ///     A database transaction has been committed.
@@ -393,7 +395,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId TransactionCommitted = MakeTransactionId(Id.TransactionCommitted);
+    public static readonly EventId TransactionCommitted = MakeTransactionId(
+        Id.TransactionCommitted
+    );
 
     /// <summary>
     ///     A database transaction is being rolled back.
@@ -406,7 +410,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId TransactionRollingBack = MakeTransactionId(Id.TransactionRollingBack);
+    public static readonly EventId TransactionRollingBack = MakeTransactionId(
+        Id.TransactionRollingBack
+    );
 
     /// <summary>
     ///     A database transaction has been rolled back.
@@ -419,7 +425,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId TransactionRolledBack = MakeTransactionId(Id.TransactionRolledBack);
+    public static readonly EventId TransactionRolledBack = MakeTransactionId(
+        Id.TransactionRolledBack
+    );
 
     /// <summary>
     ///     A database transaction savepoint is being created.
@@ -432,7 +440,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId CreatingTransactionSavepoint = MakeTransactionId(Id.CreatingTransactionSavepoint);
+    public static readonly EventId CreatingTransactionSavepoint = MakeTransactionId(
+        Id.CreatingTransactionSavepoint
+    );
 
     /// <summary>
     ///     A database transaction savepoint has been created.
@@ -445,7 +455,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId CreatedTransactionSavepoint = MakeTransactionId(Id.CreatedTransactionSavepoint);
+    public static readonly EventId CreatedTransactionSavepoint = MakeTransactionId(
+        Id.CreatedTransactionSavepoint
+    );
 
     /// <summary>
     ///     A database transaction is being rolled back to a savepoint.
@@ -458,7 +470,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId RollingBackToTransactionSavepoint = MakeTransactionId(Id.RollingBackToTransactionSavepoint);
+    public static readonly EventId RollingBackToTransactionSavepoint = MakeTransactionId(
+        Id.RollingBackToTransactionSavepoint
+    );
 
     /// <summary>
     ///     A database transaction has been rolled back to a savepoint.
@@ -471,7 +485,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId RolledBackToTransactionSavepoint = MakeTransactionId(Id.RolledBackToTransactionSavepoint);
+    public static readonly EventId RolledBackToTransactionSavepoint = MakeTransactionId(
+        Id.RolledBackToTransactionSavepoint
+    );
 
     /// <summary>
     ///     A database transaction savepoint is being released.
@@ -484,7 +500,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ReleasingTransactionSavepoint = MakeTransactionId(Id.ReleasingTransactionSavepoint);
+    public static readonly EventId ReleasingTransactionSavepoint = MakeTransactionId(
+        Id.ReleasingTransactionSavepoint
+    );
 
     /// <summary>
     ///     A database transaction savepoint has been released.
@@ -497,7 +515,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ReleasedTransactionSavepoint = MakeTransactionId(Id.ReleasedTransactionSavepoint);
+    public static readonly EventId ReleasedTransactionSavepoint = MakeTransactionId(
+        Id.ReleasedTransactionSavepoint
+    );
 
     /// <summary>
     ///     A database transaction has been disposed.
@@ -536,7 +556,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="ConnectionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId AmbientTransactionWarning = MakeTransactionId(Id.AmbientTransactionWarning);
+    public static readonly EventId AmbientTransactionWarning = MakeTransactionId(
+        Id.AmbientTransactionWarning
+    );
 
     /// <summary>
     ///     Entity Framework enlisted the connection in an ambient transaction.
@@ -549,7 +571,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TransactionEnlistedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId AmbientTransactionEnlisted = MakeTransactionId(Id.AmbientTransactionEnlisted);
+    public static readonly EventId AmbientTransactionEnlisted = MakeTransactionId(
+        Id.AmbientTransactionEnlisted
+    );
 
     /// <summary>
     ///     The connection was explicitly enlisted in a transaction.
@@ -562,7 +586,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TransactionEnlistedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ExplicitTransactionEnlisted = MakeTransactionId(Id.ExplicitTransactionEnlisted);
+    public static readonly EventId ExplicitTransactionEnlisted = MakeTransactionId(
+        Id.ExplicitTransactionEnlisted
+    );
 
     /// <summary>
     ///     A database data reader has been disposed.
@@ -579,8 +605,7 @@ public static class RelationalEventId
 
     private static readonly string _migrationsPrefix = DbLoggerCategory.Migrations.Name + ".";
 
-    private static EventId MakeMigrationsId(Id id)
-        => new((int)id, _migrationsPrefix + id);
+    private static EventId MakeMigrationsId(Id id) => new((int)id, _migrationsPrefix + id);
 
     /// <summary>
     ///     Migrations is using a database connection.
@@ -593,7 +618,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="MigratorConnectionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId MigrateUsingConnection = MakeMigrationsId(Id.MigrateUsingConnection);
+    public static readonly EventId MigrateUsingConnection = MakeMigrationsId(
+        Id.MigrateUsingConnection
+    );
 
     /// <summary>
     ///     A migration is being reverted.
@@ -632,7 +659,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="MigrationScriptingEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId MigrationGeneratingDownScript = MakeMigrationsId(Id.MigrationGeneratingDownScript);
+    public static readonly EventId MigrationGeneratingDownScript = MakeMigrationsId(
+        Id.MigrationGeneratingDownScript
+    );
 
     /// <summary>
     ///     Migrations is generating an "up" script.
@@ -645,7 +674,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="MigrationScriptingEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId MigrationGeneratingUpScript = MakeMigrationsId(Id.MigrationGeneratingUpScript);
+    public static readonly EventId MigrationGeneratingUpScript = MakeMigrationsId(
+        Id.MigrationGeneratingUpScript
+    );
 
     /// <summary>
     ///     Migrations weren't applied.
@@ -684,7 +715,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="MigrationTypeEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId MigrationAttributeMissingWarning = MakeMigrationsId(Id.MigrationAttributeMissingWarning);
+    public static readonly EventId MigrationAttributeMissingWarning = MakeMigrationsId(
+        Id.MigrationAttributeMissingWarning
+    );
 
     /// <summary>
     ///     Column order was ignored.
@@ -697,12 +730,13 @@ public static class RelationalEventId
     ///         This event uses the <see cref="MigrationColumnOperationEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ColumnOrderIgnoredWarning = MakeMigrationsId(Id.ColumnOrderIgnoredWarning);
+    public static readonly EventId ColumnOrderIgnoredWarning = MakeMigrationsId(
+        Id.ColumnOrderIgnoredWarning
+    );
 
     private static readonly string _queryPrefix = DbLoggerCategory.Query.Name + ".";
 
-    private static EventId MakeQueryId(Id id)
-        => new((int)id, _queryPrefix + id);
+    private static EventId MakeQueryId(Id id) => new((int)id, _queryPrefix + id);
 
     /// <summary>
     ///     A query is using equals comparisons in a possibly unintended way.
@@ -715,8 +749,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="TwoSqlExpressionsEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId QueryPossibleUnintendedUseOfEqualsWarning =
-        MakeQueryId(Id.QueryPossibleUnintendedUseOfEqualsWarning);
+    public static readonly EventId QueryPossibleUnintendedUseOfEqualsWarning = MakeQueryId(
+        Id.QueryPossibleUnintendedUseOfEqualsWarning
+    );
 
     /// <summary>
     ///     A query is loading multiple related collections without configuring a <see cref="QuerySplittingBehavior" />.
@@ -724,12 +759,13 @@ public static class RelationalEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Query" /> category.
     /// </remarks>
-    public static readonly EventId MultipleCollectionIncludeWarning = MakeQueryId(Id.MultipleCollectionIncludeWarning);
+    public static readonly EventId MultipleCollectionIncludeWarning = MakeQueryId(
+        Id.MultipleCollectionIncludeWarning
+    );
 
     private static readonly string _validationPrefix = DbLoggerCategory.Model.Validation.Name + ".";
 
-    private static EventId MakeValidationId(Id id)
-        => new((int)id, _validationPrefix + id);
+    private static EventId MakeValidationId(Id id) => new((int)id, _validationPrefix + id);
 
     /// <summary>
     ///     A single database default column value has been set on a key column.
@@ -742,7 +778,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ModelValidationKeyDefaultValueWarning = MakeValidationId(Id.ModelValidationKeyDefaultValueWarning);
+    public static readonly EventId ModelValidationKeyDefaultValueWarning = MakeValidationId(
+        Id.ModelValidationKeyDefaultValueWarning
+    );
 
     /// <summary>
     ///     A bool property is configured with a store-generated default.
@@ -755,7 +793,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId BoolWithDefaultWarning = MakeValidationId(Id.BoolWithDefaultWarning);
+    public static readonly EventId BoolWithDefaultWarning = MakeValidationId(
+        Id.BoolWithDefaultWarning
+    );
 
     /// <summary>
     ///     An index specifies properties all of which are not mapped to a column in any table.
@@ -768,8 +808,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="IndexEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId AllIndexPropertiesNotToMappedToAnyTable =
-        MakeValidationId(Id.AllIndexPropertiesNotToMappedToAnyTable);
+    public static readonly EventId AllIndexPropertiesNotToMappedToAnyTable = MakeValidationId(
+        Id.AllIndexPropertiesNotToMappedToAnyTable
+    );
 
     /// <summary>
     ///     An index specifies properties some of which are mapped and some of which are not mapped to a column in a table.
@@ -782,8 +823,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="IndexWithPropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId IndexPropertiesBothMappedAndNotMappedToTable =
-        MakeValidationId(Id.IndexPropertiesBothMappedAndNotMappedToTable);
+    public static readonly EventId IndexPropertiesBothMappedAndNotMappedToTable = MakeValidationId(
+        Id.IndexPropertiesBothMappedAndNotMappedToTable
+    );
 
     /// <summary>
     ///     An index specifies properties which map to columns on non-overlapping tables.
@@ -796,8 +838,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="IndexWithPropertiesEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId IndexPropertiesMappedToNonOverlappingTables =
-        MakeValidationId(Id.IndexPropertiesMappedToNonOverlappingTables);
+    public static readonly EventId IndexPropertiesMappedToNonOverlappingTables = MakeValidationId(
+        Id.IndexPropertiesMappedToNonOverlappingTables
+    );
 
     /// <summary>
     ///     A foreign key specifies properties which don't map to the related tables.
@@ -810,8 +853,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="ForeignKeyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ForeignKeyPropertiesMappedToUnrelatedTables =
-        MakeValidationId(Id.ForeignKeyPropertiesMappedToUnrelatedTables);
+    public static readonly EventId ForeignKeyPropertiesMappedToUnrelatedTables = MakeValidationId(
+        Id.ForeignKeyPropertiesMappedToUnrelatedTables
+    );
 
     /// <summary>
     ///     A foreign key specifies properties which don't map to the related tables.
@@ -824,8 +868,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="ForeignKeyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ForeignKeyTpcPrincipalWarning =
-        MakeValidationId(Id.ForeignKeyTpcPrincipalWarning);
+    public static readonly EventId ForeignKeyTpcPrincipalWarning = MakeValidationId(
+        Id.ForeignKeyTpcPrincipalWarning
+    );
 
     /// <summary>
     ///     The PK is using store-generated values in TPC.
@@ -838,8 +883,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId TpcStoreGeneratedIdentityWarning =
-        MakeValidationId(Id.TpcStoreGeneratedIdentityWarning);
+    public static readonly EventId TpcStoreGeneratedIdentityWarning = MakeValidationId(
+        Id.TpcStoreGeneratedIdentityWarning
+    );
 
     /// <summary>
     ///     The entity does not have any property with a non-default value to identify whether the entity exists.
@@ -852,8 +898,8 @@ public static class RelationalEventId
     ///         This event uses the <see cref="EntityTypeEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId OptionalDependentWithoutIdentifyingPropertyWarning
-        = MakeValidationId(Id.OptionalDependentWithoutIdentifyingPropertyWarning);
+    public static readonly EventId OptionalDependentWithoutIdentifyingPropertyWarning =
+        MakeValidationId(Id.OptionalDependentWithoutIdentifyingPropertyWarning);
 
     /// <summary>
     ///     The configured column orders for a table contains duplicates.
@@ -866,12 +912,13 @@ public static class RelationalEventId
     ///         This event uses the <see cref="ColumnsEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId DuplicateColumnOrders = MakeValidationId(Id.DuplicateColumnOrders);
+    public static readonly EventId DuplicateColumnOrders = MakeValidationId(
+        Id.DuplicateColumnOrders
+    );
 
     private static readonly string _updatePrefix = DbLoggerCategory.Update.Name + ".";
 
-    private static EventId MakeUpdateId(Id id)
-        => new((int)id, _updatePrefix + id);
+    private static EventId MakeUpdateId(Id id) => new((int)id, _updatePrefix + id);
 
     /// <summary>
     ///     Update commands were batched and are now ready for execution
@@ -899,7 +946,9 @@ public static class RelationalEventId
     ///         This event uses the <see cref="MinBatchSizeEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId BatchSmallerThanMinBatchSize = MakeUpdateId(Id.BatchSmallerThanMinBatchSize);
+    public static readonly EventId BatchSmallerThanMinBatchSize = MakeUpdateId(
+        Id.BatchSmallerThanMinBatchSize
+    );
 
     /// <summary>
     ///     An error occurred while the batch executor was rolling back the transaction to a savepoint, after an exception occured.
@@ -907,7 +956,9 @@ public static class RelationalEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Update" /> category.
     /// </remarks>
-    public static readonly EventId BatchExecutorFailedToRollbackToSavepoint = MakeUpdateId(Id.BatchExecutorFailedToRollbackToSavepoint);
+    public static readonly EventId BatchExecutorFailedToRollbackToSavepoint = MakeUpdateId(
+        Id.BatchExecutorFailedToRollbackToSavepoint
+    );
 
     /// <summary>
     ///     An error occurred while the batch executor was releasing a transaction savepoint.
@@ -915,7 +966,9 @@ public static class RelationalEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Update" /> category.
     /// </remarks>
-    public static readonly EventId BatchExecutorFailedToReleaseSavepoint = MakeUpdateId(Id.BatchExecutorFailedToReleaseSavepoint);
+    public static readonly EventId BatchExecutorFailedToReleaseSavepoint = MakeUpdateId(
+        Id.BatchExecutorFailedToReleaseSavepoint
+    );
 
     /// <summary>
     ///     The entity does not have any property with a non-default value to identify whether the entity exists.
@@ -928,6 +981,7 @@ public static class RelationalEventId
     ///         This event uses the <see cref="UpdateEntryEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId OptionalDependentWithAllNullPropertiesWarning
-        = MakeUpdateId(Id.OptionalDependentWithAllNullPropertiesWarning);
+    public static readonly EventId OptionalDependentWithAllNullPropertiesWarning = MakeUpdateId(
+        Id.OptionalDependentWithAllNullPropertiesWarning
+    );
 }

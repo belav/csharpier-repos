@@ -14,7 +14,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///         not used in application code.
 ///     </para>
 /// </summary>
-public class FromSqlExpression : TableExpressionBase, IClonableTableExpressionBase, ITableBasedExpression
+public class FromSqlExpression
+    : TableExpressionBase,
+        IClonableTableExpressionBase,
+        ITableBasedExpression
 {
     private readonly ITableBase _table;
 
@@ -25,9 +28,13 @@ public class FromSqlExpression : TableExpressionBase, IClonableTableExpressionBa
     /// <param name="sql">A user-provided custom SQL for the table source.</param>
     /// <param name="arguments">A user-provided parameters to pass to the custom SQL.</param>
     public FromSqlExpression(ITableBase defaultTableBase, string sql, Expression arguments)
-        : this(defaultTableBase.Name[..1].ToLowerInvariant(), defaultTableBase, sql, arguments, annotations: null)
-    {
-    }
+        : this(
+            defaultTableBase.Name[..1].ToLowerInvariant(),
+            defaultTableBase,
+            sql,
+            arguments,
+            annotations: null
+        ) { }
 
     // See issue#21660/21627
     ///// <summary>
@@ -44,8 +51,8 @@ public class FromSqlExpression : TableExpressionBase, IClonableTableExpressionBa
         ITableBase tableBase,
         string sql,
         Expression arguments,
-        IEnumerable<IAnnotation>? annotations)
-        : base(alias, annotations)
+        IEnumerable<IAnnotation>? annotations
+    ) : base(alias, annotations)
     {
         _table = tableBase;
         Sql = sql;
@@ -78,8 +85,8 @@ public class FromSqlExpression : TableExpressionBase, IClonableTableExpressionBa
     /// </summary>
     /// <param name="arguments">The <see cref="Arguments" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual FromSqlExpression Update(Expression arguments)
-        => arguments != Arguments
+    public virtual FromSqlExpression Update(Expression arguments) =>
+        arguments != Arguments
             ? new FromSqlExpression(Alias, _table, Sql, arguments, GetAnnotations())
             : this;
 
@@ -87,12 +94,11 @@ public class FromSqlExpression : TableExpressionBase, IClonableTableExpressionBa
     ITableBase ITableBasedExpression.Table => _table;
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => this;
+    protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
     /// <inheritdoc />
-    public virtual TableExpressionBase Clone()
-        => new FromSqlExpression(Alias, _table, Sql, Arguments, GetAnnotations());
+    public virtual TableExpressionBase Clone() =>
+        new FromSqlExpression(Alias, _table, Sql, Arguments, GetAnnotations());
 
     /// <inheritdoc />
     protected override void Print(ExpressionPrinter expressionPrinter)
@@ -102,19 +108,19 @@ public class FromSqlExpression : TableExpressionBase, IClonableTableExpressionBa
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is FromSqlExpression fromSqlExpression
-                && Equals(fromSqlExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is FromSqlExpression fromSqlExpression && Equals(fromSqlExpression)
+        );
 
-    private bool Equals(FromSqlExpression fromSqlExpression)
-        => base.Equals(fromSqlExpression)
-            && _table == fromSqlExpression._table
-            && Sql == fromSqlExpression.Sql
-            && ExpressionEqualityComparer.Instance.Equals(Arguments, fromSqlExpression.Arguments);
+    private bool Equals(FromSqlExpression fromSqlExpression) =>
+        base.Equals(fromSqlExpression)
+        && _table == fromSqlExpression._table
+        && Sql == fromSqlExpression.Sql
+        && ExpressionEqualityComparer.Instance.Equals(Arguments, fromSqlExpression.Arguments);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Sql);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Sql);
 }

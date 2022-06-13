@@ -19,12 +19,16 @@ public class SqlServerNetTopologySuiteMethodCallTranslatorPlugin : IMethodCallTr
     /// </summary>
     public SqlServerNetTopologySuiteMethodCallTranslatorPlugin(
         IRelationalTypeMappingSource typeMappingSource,
-        ISqlExpressionFactory sqlExpressionFactory)
+        ISqlExpressionFactory sqlExpressionFactory
+    )
     {
         Translators = new IMethodCallTranslator[]
         {
             new SqlServerGeometryMethodTranslator(typeMappingSource, sqlExpressionFactory),
-            new SqlServerGeometryCollectionMethodTranslator(typeMappingSource, sqlExpressionFactory),
+            new SqlServerGeometryCollectionMethodTranslator(
+                typeMappingSource,
+                sqlExpressionFactory
+            ),
             new SqlServerLineStringMethodTranslator(typeMappingSource, sqlExpressionFactory),
             new SqlServerPolygonMethodTranslator(typeMappingSource, sqlExpressionFactory)
         };

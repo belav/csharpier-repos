@@ -8,6 +8,8 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate;
 // For testing
 internal interface INegotiateStateFactory
 {
-    [RequiresUnreferencedCode("Negotiate authentication uses types that cannot be statically analyzed.")]
+    [RequiresUnreferencedCode(
+        "Negotiate authentication uses types that cannot be statically analyzed."
+    )]
     INegotiateState CreateInstance();
 }

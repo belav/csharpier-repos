@@ -14,10 +14,15 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [LibraryImport(Libraries.Advapi32, EntryPoint = "RegConnectRegistryW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegConnectRegistryW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int RegConnectRegistry(
             string machineName,
             SafeRegistryHandle key,
-            out SafeRegistryHandle result);
+            out SafeRegistryHandle result
+        );
     }
 }

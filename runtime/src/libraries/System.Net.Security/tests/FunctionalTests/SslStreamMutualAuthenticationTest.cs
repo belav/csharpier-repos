@@ -29,23 +29,34 @@ namespace System.Net.Security.Tests
         [InlineData(true, false)]
         [InlineData(true, true)]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/68206", TestPlatforms.Android)]
-        public async Task SslStream_RequireClientCert_IsMutuallyAuthenticated_ReturnsTrue(bool clientCertificateRequired, bool useClientSelectionCallback)
+        public async Task SslStream_RequireClientCert_IsMutuallyAuthenticated_ReturnsTrue(
+            bool clientCertificateRequired,
+            bool useClientSelectionCallback
+        )
         {
             (Stream stream1, Stream stream2) = TestHelper.GetConnectedStreams();
             using (var client = new SslStream(stream1, false, AllowAnyCertificate))
             using (var server = new SslStream(stream2, false, AllowAnyCertificate))
             {
-                Task t2 = client.AuthenticateAsClientAsync(new SslClientAuthenticationOptions
-                {
-                    ClientCertificates = useClientSelectionCallback ? null : new X509CertificateCollection() { _clientCertificate },
-                    LocalCertificateSelectionCallback = useClientSelectionCallback ? ClientCertSelectionCallback : null,
-                    TargetHost = Guid.NewGuid().ToString("N")
-                });
-                Task t1 = server.AuthenticateAsServerAsync(new SslServerAuthenticationOptions
-                {
-                    ServerCertificate = _serverCertificate,
-                    ClientCertificateRequired = clientCertificateRequired
-                });
+                Task t2 = client.AuthenticateAsClientAsync(
+                    new SslClientAuthenticationOptions
+                    {
+                        ClientCertificates = useClientSelectionCallback
+                            ? null
+                            : new X509CertificateCollection() { _clientCertificate },
+                        LocalCertificateSelectionCallback = useClientSelectionCallback
+                            ? ClientCertSelectionCallback
+                            : null,
+                        TargetHost = Guid.NewGuid().ToString("N")
+                    }
+                );
+                Task t1 = server.AuthenticateAsServerAsync(
+                    new SslServerAuthenticationOptions
+                    {
+                        ServerCertificate = _serverCertificate,
+                        ClientCertificateRequired = clientCertificateRequired
+                    }
+                );
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
 
@@ -61,15 +72,27 @@ namespace System.Net.Security.Tests
 
                     if (clientCertificateRequired)
                     {
-                        Assert.True(client.IsMutuallyAuthenticated, "client.IsMutuallyAuthenticated");
-                        Assert.True(server.IsMutuallyAuthenticated, "server.IsMutuallyAuthenticated");
+                        Assert.True(
+                            client.IsMutuallyAuthenticated,
+                            "client.IsMutuallyAuthenticated"
+                        );
+                        Assert.True(
+                            server.IsMutuallyAuthenticated,
+                            "server.IsMutuallyAuthenticated"
+                        );
                     }
                     else
                     {
                         // Even though the certificate was provided, it was not requested by the server and thus the client
                         // was not authenticated.
-                        Assert.False(client.IsMutuallyAuthenticated, "client.IsMutuallyAuthenticated");
-                        Assert.False(server.IsMutuallyAuthenticated, "server.IsMutuallyAuthenticated");
+                        Assert.False(
+                            client.IsMutuallyAuthenticated,
+                            "client.IsMutuallyAuthenticated"
+                        );
+                        Assert.False(
+                            server.IsMutuallyAuthenticated,
+                            "server.IsMutuallyAuthenticated"
+                        );
                     }
                 }
             }
@@ -79,16 +102,19 @@ namespace System.Net.Security.Tests
             object sender,
             X509Certificate certificate,
             X509Chain chain,
-            SslPolicyErrors sslPolicyErrors)
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             return true;
         }
+
         private X509Certificate ClientCertSelectionCallback(
             object sender,
             string targetHost,
             X509CertificateCollection localCertificates,
             X509Certificate remoteCertificate,
-            string[] acceptableIssuers)
+            string[] acceptableIssuers
+        )
         {
             return _clientCertificate;
         }

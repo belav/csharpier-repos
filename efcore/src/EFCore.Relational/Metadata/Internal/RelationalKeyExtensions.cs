@@ -21,12 +21,12 @@ public static class RelationalKeyExtensions
         this IReadOnlyKey key,
         IReadOnlyKey duplicateKey,
         in StoreObjectIdentifier storeObject,
-        bool shouldThrow)
+        bool shouldThrow
+    )
     {
         var columnNames = key.Properties.GetColumnNames(storeObject);
         var duplicateColumnNames = duplicateKey.Properties.GetColumnNames(storeObject);
-        if (columnNames == null
-            || duplicateColumnNames == null)
+        if (columnNames == null || duplicateColumnNames == null)
         {
             if (shouldThrow)
             {
@@ -38,7 +38,9 @@ public static class RelationalKeyExtensions
                         duplicateKey.DeclaringEntityType.DisplayName(),
                         key.GetName(storeObject),
                         key.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                        duplicateKey.DeclaringEntityType.GetSchemaQualifiedTableName()));
+                        duplicateKey.DeclaringEntityType.GetSchemaQualifiedTableName()
+                    )
+                );
             }
 
             return false;
@@ -57,7 +59,9 @@ public static class RelationalKeyExtensions
                         key.DeclaringEntityType.GetSchemaQualifiedTableName(),
                         key.GetName(storeObject),
                         key.Properties.FormatColumns(storeObject),
-                        duplicateKey.Properties.FormatColumns(storeObject)));
+                        duplicateKey.Properties.FormatColumns(storeObject)
+                    )
+                );
             }
 
             return false;

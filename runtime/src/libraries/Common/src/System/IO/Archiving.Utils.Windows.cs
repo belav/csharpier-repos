@@ -12,11 +12,16 @@ namespace System.IO
             StringBuilder builder = new StringBuilder(entryPath);
             for (int i = 0; i < entryPath.Length; i++)
             {
-                if (((int)builder[i] >= 0 && (int)builder[i] < 32) ||
-                   builder[i] == '?' || builder[i] == ':' ||
-                   builder[i] == '*' || builder[i] == '"' ||
-                   builder[i] == '<' || builder[i] == '>' ||
-                   builder[i] == '|')
+                if (
+                    ((int)builder[i] >= 0 && (int)builder[i] < 32)
+                    || builder[i] == '?'
+                    || builder[i] == ':'
+                    || builder[i] == '*'
+                    || builder[i] == '"'
+                    || builder[i] == '<'
+                    || builder[i] == '>'
+                    || builder[i] == '|'
+                )
                 {
                     builder[i] = '_';
                 }

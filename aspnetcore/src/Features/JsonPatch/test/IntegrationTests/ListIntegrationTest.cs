@@ -45,9 +45,14 @@ public class ListIntegrationTest
         patchDocument.Test(o => o.SimpleObject.IntegerList, 4, -1);
 
         // Act & Assert
-        var exception = Assert.Throws<JsonPatchException>(() => { patchDocument.ApplyTo(targetObject); });
-        Assert.Equal("The index value provided by path segment '-1' is out of bounds of the array size.",
-            exception.Message);
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
+        Assert.Equal(
+            "The index value provided by path segment '-1' is out of bounds of the array size.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -79,16 +84,10 @@ public class ListIntegrationTest
         var targetObject = new SimpleObjectWithNestedObject()
         {
             SimpleObjectList = new List<SimpleObject>()
-                {
-                    new SimpleObject
-                    {
-                        StringProperty = "String1"
-                    },
-                    new SimpleObject
-                    {
-                        StringProperty = "String2"
-                    }
-                }
+            {
+                new SimpleObject { StringProperty = "String1" },
+                new SimpleObject { StringProperty = "String2" }
+            }
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -163,7 +162,10 @@ public class ListIntegrationTest
         });
 
         // Assert
-        Assert.Equal($"The index value provided by path segment '{position}' is out of bounds of the array size.", exception.Message);
+        Assert.Equal(
+            $"The index value provided by path segment '{position}' is out of bounds of the array size.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -245,10 +247,16 @@ public class ListIntegrationTest
         patchDocument.Replace(o => o.SimpleObject.IntegerList, 5, -1);
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(() => { patchDocument.ApplyTo(targetObject); });
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
-        Assert.Equal("The index value provided by path segment '-1' is out of bounds of the array size.", exception.Message);
+        Assert.Equal(
+            "The index value provided by path segment '-1' is out of bounds of the array size.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -319,11 +327,12 @@ public class ListIntegrationTest
         var simpleObject3 = new SimpleObject() { IntegerValue = 3 };
         var targetObject = new SimpleObjectWithNestedObject()
         {
-            SimpleObjectList = new List<SimpleObject>() {
-                    simpleObject1,
-                    simpleObject2,
-                    simpleObject3
-                }
+            SimpleObjectList = new List<SimpleObject>()
+            {
+                simpleObject1,
+                simpleObject2,
+                simpleObject3
+            }
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -333,7 +342,10 @@ public class ListIntegrationTest
         patchDocument.ApplyTo(targetObject);
 
         // Assert
-        Assert.Equal(new List<SimpleObject>() { simpleObject2, simpleObject1, simpleObject3 }, targetObject.SimpleObjectList);
+        Assert.Equal(
+            new List<SimpleObject>() { simpleObject2, simpleObject1, simpleObject3 },
+            targetObject.SimpleObjectList
+        );
         Assert.Equal(2, targetObject.SimpleObjectList[0].IntegerValue);
         Assert.Equal(1, targetObject.SimpleObjectList[1].IntegerValue);
         Assert.Same(simpleObject2, targetObject.SimpleObjectList[0]);

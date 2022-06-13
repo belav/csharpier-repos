@@ -29,8 +29,18 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitStringLiteral
                 IndentationOptions options,
                 bool useTabs,
                 int tabSize,
-                CancellationToken cancellationToken)
-                : base(document, position, root, sourceText, options, useTabs, tabSize, cancellationToken)
+                CancellationToken cancellationToken
+            )
+                : base(
+                    document,
+                    position,
+                    root,
+                    sourceText,
+                    options,
+                    useTabs,
+                    tabSize,
+                    cancellationToken
+                )
             {
                 _interpolatedStringExpression = interpolatedStringExpression;
             }
@@ -38,8 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitStringLiteral
             protected override SyntaxNode GetNodeToReplace() => _interpolatedStringExpression;
 
             // Don't offer on $@"" strings and raw string literals.  They support newlines directly in their content.
-            protected override bool CheckToken()
-                => _interpolatedStringExpression.StringStartToken.Kind() == SyntaxKind.InterpolatedStringStartToken;
+            protected override bool CheckToken() =>
+                _interpolatedStringExpression.StringStartToken.Kind()
+                == SyntaxKind.InterpolatedStringStartToken;
 
             protected override BinaryExpressionSyntax CreateSplitString()
             {
@@ -63,27 +74,36 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitStringLiteral
                     else
                     {
                         // Content crosses the cursor.  Need to split it.
-                        beforeSplitContents.Add(CreateInterpolatedStringText(content.SpanStart, CursorPosition));
-                        afterSplitContents.Insert(0, CreateInterpolatedStringText(CursorPosition, content.Span.End));
+                        beforeSplitContents.Add(
+                            CreateInterpolatedStringText(content.SpanStart, CursorPosition)
+                        );
+                        afterSplitContents.Insert(
+                            0,
+                            CreateInterpolatedStringText(CursorPosition, content.Span.End)
+                        );
                     }
                 }
 
                 var leftExpression = SyntaxFactory.InterpolatedStringExpression(
                     _interpolatedStringExpression.StringStartToken,
                     SyntaxFactory.List(beforeSplitContents),
-                    SyntaxFactory.Token(SyntaxKind.InterpolatedStringEndToken)
-                                 .WithTrailingTrivia(SyntaxFactory.ElasticSpace));
+                    SyntaxFactory
+                        .Token(SyntaxKind.InterpolatedStringEndToken)
+                        .WithTrailingTrivia(SyntaxFactory.ElasticSpace)
+                );
 
                 var rightExpression = SyntaxFactory.InterpolatedStringExpression(
                     SyntaxFactory.Token(SyntaxKind.InterpolatedStringStartToken),
                     SyntaxFactory.List(afterSplitContents),
-                    _interpolatedStringExpression.StringEndToken);
+                    _interpolatedStringExpression.StringEndToken
+                );
 
                 return SyntaxFactory.BinaryExpression(
                     SyntaxKind.AddExpression,
                     leftExpression,
                     PlusNewLineToken,
-                    rightExpression.WithAdditionalAnnotations(RightNodeAnnotation));
+                    rightExpression.WithAdditionalAnnotations(RightNodeAnnotation)
+                );
             }
 
             private InterpolatedStringTextSyntax CreateInterpolatedStringText(int start, int end)
@@ -95,7 +115,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitStringLiteral
                         kind: SyntaxKind.InterpolatedStringTextToken,
                         text: content,
                         valueText: "",
-                        trailing: default));
+                        trailing: default
+                    )
+                );
             }
 
             protected override int StringOpenQuoteLength() => "$\"".Length;

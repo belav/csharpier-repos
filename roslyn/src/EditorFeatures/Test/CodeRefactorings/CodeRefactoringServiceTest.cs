@@ -29,40 +29,61 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
     public class CodeRefactoringServiceTest
     {
         [Fact]
-        public async Task TestExceptionInComputeRefactorings()
-            => await VerifyRefactoringDisabledAsync<ErrorCases.ExceptionInCodeActions>();
+        public async Task TestExceptionInComputeRefactorings() =>
+            await VerifyRefactoringDisabledAsync<ErrorCases.ExceptionInCodeActions>();
 
         [Fact]
-        public async Task TestExceptionInComputeRefactoringsAsync()
-            => await VerifyRefactoringDisabledAsync<ErrorCases.ExceptionInComputeRefactoringsAsync>();
+        public async Task TestExceptionInComputeRefactoringsAsync() =>
+            await VerifyRefactoringDisabledAsync<ErrorCases.ExceptionInComputeRefactoringsAsync>();
 
         [Fact]
         public async Task TestProjectRefactoringAsync()
         {
-            var code = @"
+            var code =
+                @"
     a
 ";
 
-            using var workspace = TestWorkspace.CreateCSharp(code, composition: FeaturesTestCompositions.Features);
+            using var workspace = TestWorkspace.CreateCSharp(
+                code,
+                composition: FeaturesTestCompositions.Features
+            );
             var refactoringService = workspace.GetService<ICodeRefactoringService>();
 
             var reference = new StubAnalyzerReference();
-            var project = workspace.CurrentSolution.Projects.Single().AddAnalyzerReference(reference);
+            var project = workspace.CurrentSolution.Projects
+                .Single()
+                .AddAnalyzerReference(reference);
             var document = project.Documents.Single();
-            var refactorings = await refactoringService.GetRefactoringsAsync(document, TextSpan.FromBounds(0, 0), CodeActionOptions.DefaultProvider, isBlocking: false, CancellationToken.None);
+            var refactorings = await refactoringService.GetRefactoringsAsync(
+                document,
+                TextSpan.FromBounds(0, 0),
+                CodeActionOptions.DefaultProvider,
+                isBlocking: false,
+                CancellationToken.None
+            );
 
-            var stubRefactoringAction = refactorings.Single(refactoring => refactoring.CodeActions.FirstOrDefault().action?.Title == nameof(StubRefactoring));
+            var stubRefactoringAction = refactorings.Single(
+                refactoring =>
+                    refactoring.CodeActions.FirstOrDefault().action?.Title
+                    == nameof(StubRefactoring)
+            );
             Assert.True(stubRefactoringAction is object);
         }
 
-        [ExportCodeRefactoringProvider(InternalLanguageNames.TypeScript, Name = "TypeScript CodeRefactoring Provider"), Shared, PartNotDiscoverable]
+        [
+            ExportCodeRefactoringProvider(
+                InternalLanguageNames.TypeScript,
+                Name = "TypeScript CodeRefactoring Provider"
+            ),
+            Shared,
+            PartNotDiscoverable
+        ]
         internal sealed class TypeScriptCodeRefactoringProvider : CodeRefactoringProvider
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TypeScriptCodeRefactoringProvider()
-            {
-            }
+            public TypeScriptCodeRefactoringProvider() { }
 
             public override Task ComputeRefactoringsAsync(CodeRefactoringContext context)
             {
@@ -70,7 +91,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
                 var isBlocking = ((ITypeScriptCodeRefactoringContext)context).IsBlocking;
 #pragma warning restore
 
-                context.RegisterRefactoring(CodeAction.Create($"Blocking={isBlocking}", _ => Task.FromResult<Document>(null)));
+                context.RegisterRefactoring(
+                    CodeAction.Create(
+                        $"Blocking={isBlocking}",
+                        _ => Task.FromResult<Document>(null)
+                    )
+                );
 
                 return Task.CompletedTask;
             }
@@ -80,41 +106,68 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
         [CombinatorialData]
         public async Task TestTypeScriptRefactorings(bool isBlocking)
         {
-            var composition = FeaturesTestCompositions.Features.AddParts(typeof(TypeScriptCodeRefactoringProvider));
+            var composition = FeaturesTestCompositions.Features.AddParts(
+                typeof(TypeScriptCodeRefactoringProvider)
+            );
 
-            using var workspace = TestWorkspace.Create(@"
+            using var workspace = TestWorkspace.Create(
+                @"
 <Workspace>
     <Project Language=""TypeScript"">
         <Document FilePath=""Test"">abc</Document>
     </Project>
-</Workspace>", composition: composition);
+</Workspace>",
+                composition: composition
+            );
 
             var refactoringService = workspace.GetService<ICodeRefactoringService>();
 
             var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
             var optionsProvider = workspace.GlobalOptions.GetCodeActionOptionsProvider();
-            var refactorings = await refactoringService.GetRefactoringsAsync(document, TextSpan.FromBounds(0, 0), optionsProvider, isBlocking, CancellationToken.None);
-            Assert.Equal($"Blocking={isBlocking}", refactorings.Single().CodeActions.Single().action.Title);
+            var refactorings = await refactoringService.GetRefactoringsAsync(
+                document,
+                TextSpan.FromBounds(0, 0),
+                optionsProvider,
+                isBlocking,
+                CancellationToken.None
+            );
+            Assert.Equal(
+                $"Blocking={isBlocking}",
+                refactorings.Single().CodeActions.Single().action.Title
+            );
         }
 
         private static async Task VerifyRefactoringDisabledAsync<T>()
             where T : CodeRefactoringProvider
         {
-            using var workspace = TestWorkspace.CreateCSharp(@"class Program {}",
-                composition: EditorTestCompositions.EditorFeatures.AddParts(typeof(T)));
+            using var workspace = TestWorkspace.CreateCSharp(
+                @"class Program {}",
+                composition: EditorTestCompositions.EditorFeatures.AddParts(typeof(T))
+            );
 
-            var errorReportingService = (TestErrorReportingService)workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService = (TestErrorReportingService)
+                workspace.Services.GetRequiredService<IErrorReportingService>();
 
             var errorReported = false;
             errorReportingService.OnError = message => errorReported = true;
 
             var refactoringService = workspace.GetService<ICodeRefactoringService>();
-            var codeRefactoring = workspace.ExportProvider.GetExportedValues<CodeRefactoringProvider>().OfType<T>().Single();
+            var codeRefactoring = workspace.ExportProvider
+                .GetExportedValues<CodeRefactoringProvider>()
+                .OfType<T>()
+                .Single();
 
             var project = workspace.CurrentSolution.Projects.Single();
             var document = project.Documents.Single();
-            var extensionManager = (EditorLayerExtensionManager.ExtensionManager)document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
-            var result = await refactoringService.GetRefactoringsAsync(document, TextSpan.FromBounds(0, 0), CodeActionOptions.DefaultProvider, isBlocking: false, CancellationToken.None);
+            var extensionManager = (EditorLayerExtensionManager.ExtensionManager)
+                document.Project.Solution.Workspace.Services.GetRequiredService<IExtensionManager>();
+            var result = await refactoringService.GetRefactoringsAsync(
+                document,
+                TextSpan.FromBounds(0, 0),
+                CodeActionOptions.DefaultProvider,
+                isBlocking: false,
+                CancellationToken.None
+            );
             Assert.True(extensionManager.IsDisabled(codeRefactoring));
             Assert.False(extensionManager.IsIgnored(codeRefactoring));
 
@@ -125,10 +178,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
         {
             public override Task ComputeRefactoringsAsync(CodeRefactoringContext context)
             {
-                context.RegisterRefactoring(CodeAction.Create(
-                    nameof(StubRefactoring),
-                    cancellationToken => Task.FromResult(context.Document),
-                    equivalenceKey: nameof(StubRefactoring)));
+                context.RegisterRefactoring(
+                    CodeAction.Create(
+                        nameof(StubRefactoring),
+                        cancellationToken => Task.FromResult(context.Document),
+                        equivalenceKey: nameof(StubRefactoring)
+                    )
+                );
 
                 return Task.CompletedTask;
             }
@@ -138,11 +194,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
         {
             public readonly CodeRefactoringProvider Refactoring;
 
-            public StubAnalyzerReference()
-                => Refactoring = new StubRefactoring();
+            public StubAnalyzerReference() => Refactoring = new StubRefactoring();
 
-            public StubAnalyzerReference(CodeRefactoringProvider codeRefactoring)
-                => Refactoring = codeRefactoring;
+            public StubAnalyzerReference(CodeRefactoringProvider codeRefactoring) =>
+                Refactoring = codeRefactoring;
 
             public override string Display => nameof(StubAnalyzerReference);
 
@@ -150,14 +205,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
 
             public override object Id => nameof(StubAnalyzerReference);
 
-            public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language)
-                => ImmutableArray<DiagnosticAnalyzer>.Empty;
+            public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzers(string language) =>
+                ImmutableArray<DiagnosticAnalyzer>.Empty;
 
-            public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages()
-                => ImmutableArray<DiagnosticAnalyzer>.Empty;
+            public override ImmutableArray<DiagnosticAnalyzer> GetAnalyzersForAllLanguages() =>
+                ImmutableArray<DiagnosticAnalyzer>.Empty;
 
-            public ImmutableArray<CodeRefactoringProvider> GetRefactorings()
-                => ImmutableArray.Create(Refactoring);
+            public ImmutableArray<CodeRefactoringProvider> GetRefactorings() =>
+                ImmutableArray.Create(Refactoring);
         }
     }
 }

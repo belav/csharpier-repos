@@ -23,9 +23,14 @@ namespace System.Security.Cryptography.X509Certificates
                 throw new ArgumentNullException(nameof(chainContext));
             }
 
-            SafeX509ChainHandle certChainHandle = Interop.Crypt32.CertDuplicateCertificateChain(chainContext);
+            SafeX509ChainHandle certChainHandle = Interop.Crypt32.CertDuplicateCertificateChain(
+                chainContext
+            );
             if (certChainHandle == null || certChainHandle.IsInvalid)
-                throw new CryptographicException(SR.Cryptography_InvalidContextHandle, nameof(chainContext));
+                throw new CryptographicException(
+                    SR.Cryptography_InvalidContextHandle,
+                    nameof(chainContext)
+                );
 
             var pal = new ChainPal(certChainHandle);
             return pal;
@@ -37,7 +42,6 @@ namespace System.Security.Cryptography.X509Certificates
         public bool? Verify(X509VerificationFlags flags, out Exception? exception)
         {
             exception = null;
-
             unsafe
             {
                 Interop.Crypt32.CERT_CHAIN_POLICY_PARA para = default;
@@ -47,7 +51,14 @@ namespace System.Security.Cryptography.X509Certificates
                 Interop.Crypt32.CERT_CHAIN_POLICY_STATUS status = default;
                 status.cbSize = (uint)sizeof(Interop.Crypt32.CERT_CHAIN_POLICY_STATUS);
 
-                if (!Interop.crypt32.CertVerifyCertificateChainPolicy(ChainPolicy.CERT_CHAIN_POLICY_BASE, _chain, ref para, ref status))
+                if (
+                    !Interop.crypt32.CertVerifyCertificateChainPolicy(
+                        ChainPolicy.CERT_CHAIN_POLICY_BASE,
+                        _chain,
+                        ref para,
+                        ref status
+                    )
+                )
                 {
                     int errorCode = Marshal.GetLastWin32Error();
                     exception = errorCode.ToCryptographicException();
@@ -63,19 +74,33 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 unsafe
                 {
-                    CERT_CHAIN_CONTEXT* pCertChainContext = (CERT_CHAIN_CONTEXT*)(_chain.DangerousGetHandle());
+                    CERT_CHAIN_CONTEXT* pCertChainContext = (CERT_CHAIN_CONTEXT*)(
+                        _chain.DangerousGetHandle()
+                    );
                     CERT_SIMPLE_CHAIN* pCertSimpleChain = pCertChainContext->rgpChain[0];
 
-                    X509ChainElement[] chainElements = new X509ChainElement[pCertSimpleChain->cElement];
+                    X509ChainElement[] chainElements = new X509ChainElement[
+                        pCertSimpleChain->cElement
+                    ];
                     for (int i = 0; i < pCertSimpleChain->cElement; i++)
                     {
                         CERT_CHAIN_ELEMENT* pChainElement = pCertSimpleChain->rgpElement[i];
 
-                        X509Certificate2 certificate = new X509Certificate2((IntPtr)(pChainElement->pCertContext));
-                        X509ChainStatus[] chainElementStatus = GetChainStatusInformation(pChainElement->TrustStatus.dwErrorStatus);
-                        string information = Marshal.PtrToStringUni(pChainElement->pwszExtendedErrorInfo)!;
+                        X509Certificate2 certificate = new X509Certificate2(
+                            (IntPtr)(pChainElement->pCertContext)
+                        );
+                        X509ChainStatus[] chainElementStatus = GetChainStatusInformation(
+                            pChainElement->TrustStatus.dwErrorStatus
+                        );
+                        string information = Marshal.PtrToStringUni(
+                            pChainElement->pwszExtendedErrorInfo
+                        )!;
 
-                        X509ChainElement chainElement = new X509ChainElement(certificate, chainElementStatus, information);
+                        X509ChainElement chainElement = new X509ChainElement(
+                            certificate,
+                            chainElementStatus,
+                            information
+                        );
                         chainElements[i] = chainElement;
                     }
 
@@ -91,8 +116,12 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 unsafe
                 {
-                    CERT_CHAIN_CONTEXT* pCertChainContext = (CERT_CHAIN_CONTEXT*)(_chain.DangerousGetHandle());
-                    X509ChainStatus[] chainStatus = GetChainStatusInformation(pCertChainContext->TrustStatus.dwErrorStatus);
+                    CERT_CHAIN_CONTEXT* pCertChainContext = (CERT_CHAIN_CONTEXT*)(
+                        _chain.DangerousGetHandle()
+                    );
+                    X509ChainStatus[] chainStatus = GetChainStatusInformation(
+                        pCertChainContext->TrustStatus.dwErrorStatus
+                    );
                     GC.KeepAlive(this);
                     return chainStatus;
                 }
@@ -101,10 +130,7 @@ namespace System.Security.Cryptography.X509Certificates
 
         public SafeX509ChainHandle SafeHandle
         {
-            get
-            {
-                return _chain;
-            }
+            get { return _chain; }
         }
 
         internal static partial bool ReleaseSafeX509ChainHandle(IntPtr handle)

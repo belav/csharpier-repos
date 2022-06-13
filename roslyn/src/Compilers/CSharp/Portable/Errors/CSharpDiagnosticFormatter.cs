@@ -6,10 +6,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public class CSharpDiagnosticFormatter : DiagnosticFormatter
     {
-        internal CSharpDiagnosticFormatter()
-        {
-        }
+        internal CSharpDiagnosticFormatter() { }
 
-        public static new CSharpDiagnosticFormatter Instance { get; } = new CSharpDiagnosticFormatter();
+        public static new CSharpDiagnosticFormatter Instance { get; } =
+            new CSharpDiagnosticFormatter();
     }
 }

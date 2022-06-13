@@ -31,7 +31,8 @@ public class RedirectToRouteResultTest
             {
                 await result.ExecuteAsync(httpContext);
             },
-            "No route matches the supplied values.");
+            "No route matches the supplied values."
+        );
     }
 
     [Fact]
@@ -49,7 +50,10 @@ public class RedirectToRouteResultTest
         await result.ExecuteAsync(httpContext);
 
         // Assert
-        Assert.True(httpContext.Response.Headers.ContainsKey("Location"), "Location header not found");
+        Assert.True(
+            httpContext.Response.Headers.ContainsKey("Location"),
+            "Location header not found"
+        );
         Assert.Equal(locationUrl, httpContext.Response.Headers["Location"]);
     }
 

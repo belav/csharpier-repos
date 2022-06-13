@@ -18,7 +18,11 @@ namespace System.IO.Tests
             string parentPath = GetTestFilePath();
             var parent = Directory.CreateDirectory(parentPath);
             var ac = parent.GetAccessControl();
-            var rule = new FileSystemAccessRule(WindowsIdentity.GetCurrent().User, FileSystemRights.ListDirectory, AccessControlType.Deny);
+            var rule = new FileSystemAccessRule(
+                WindowsIdentity.GetCurrent().User,
+                FileSystemRights.ListDirectory,
+                AccessControlType.Deny
+            );
             ac.SetAccessRule(rule);
             parent.SetAccessControl(ac);
 

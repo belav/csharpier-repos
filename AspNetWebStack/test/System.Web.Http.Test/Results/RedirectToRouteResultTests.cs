@@ -25,10 +25,13 @@ namespace System.Web.Http.Results
             using (HttpRequestMessage request = CreateRequest())
             {
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() =>
-                {
-                    CreateProductUnderTest(routeName, routeValues, urlFactory, request);
-                }, "routeName");
+                Assert.ThrowsArgumentNull(
+                    () =>
+                    {
+                        CreateProductUnderTest(routeName, routeValues, urlFactory, request);
+                    },
+                    "routeName"
+                );
             }
         }
 
@@ -43,10 +46,13 @@ namespace System.Web.Http.Results
             using (HttpRequestMessage request = CreateRequest())
             {
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() =>
-                {
-                    CreateProductUnderTest(routeName, routeValues, urlFactory, request);
-                }, "urlFactory");
+                Assert.ThrowsArgumentNull(
+                    () =>
+                    {
+                        CreateProductUnderTest(routeName, routeValues, urlFactory, request);
+                    },
+                    "urlFactory"
+                );
             }
         }
 
@@ -60,10 +66,13 @@ namespace System.Web.Http.Results
             HttpRequestMessage request = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() =>
-            {
-                CreateProductUnderTest(routeName, routeValues, urlFactory, request);
-            }, "request");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(routeName, routeValues, urlFactory, request);
+                },
+                "request"
+            );
         }
 
         [Fact]
@@ -76,8 +85,12 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                RedirectToRouteResult result = CreateProductUnderTest(expectedRouteName, routeValues, urlFactory,
-                    request);
+                RedirectToRouteResult result = CreateProductUnderTest(
+                    expectedRouteName,
+                    routeValues,
+                    urlFactory,
+                    request
+                );
 
                 // Act
                 string routeName = result.RouteName;
@@ -97,8 +110,12 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                RedirectToRouteResult result = CreateProductUnderTest(routeName, expectedRouteValues, urlFactory,
-                    request);
+                RedirectToRouteResult result = CreateProductUnderTest(
+                    routeName,
+                    expectedRouteValues,
+                    urlFactory,
+                    request
+                );
 
                 // Act
                 IDictionary<string, object> routeValues = result.RouteValues;
@@ -118,8 +135,12 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage request = CreateRequest())
             {
-                RedirectToRouteResult result = CreateProductUnderTest(routeName, routeValues, expectedUrlFactory,
-                    request);
+                RedirectToRouteResult result = CreateProductUnderTest(
+                    routeName,
+                    routeValues,
+                    expectedUrlFactory,
+                    request
+                );
 
                 // Act
                 UrlHelper urlFactory = result.UrlFactory;
@@ -139,8 +160,12 @@ namespace System.Web.Http.Results
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                RedirectToRouteResult result = CreateProductUnderTest(routeName, routeValues, urlFactory,
-                    expectedRequest);
+                RedirectToRouteResult result = CreateProductUnderTest(
+                    routeName,
+                    routeValues,
+                    urlFactory,
+                    expectedRequest
+                );
 
                 // Act
                 HttpRequestMessage request = result.Request;
@@ -158,13 +183,19 @@ namespace System.Web.Http.Results
             IDictionary<string, object> expectedRouteValues = CreateRouteValues();
             Mock<UrlHelper> spyUrlFactory = new Mock<UrlHelper>(MockBehavior.Strict);
             string expectedLocation = CreateLocation().AbsoluteUri;
-            spyUrlFactory.Setup(f => f.Link(expectedRouteName, expectedRouteValues)).Returns(expectedLocation);
+            spyUrlFactory
+                .Setup(f => f.Link(expectedRouteName, expectedRouteValues))
+                .Returns(expectedLocation);
             UrlHelper urlFactory = spyUrlFactory.Object;
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                IHttpActionResult result = CreateProductUnderTest(expectedRouteName, expectedRouteValues, urlFactory,
-                    expectedRequest);
+                IHttpActionResult result = CreateProductUnderTest(
+                    expectedRouteName,
+                    expectedRouteValues,
+                    urlFactory,
+                    expectedRequest
+                );
 
                 // Act
                 Task<HttpResponseMessage> task = result.ExecuteAsync(CancellationToken.None);
@@ -189,17 +220,25 @@ namespace System.Web.Http.Results
             string expectedRouteName = CreateRouteName();
             IDictionary<string, object> expectedRouteValues = CreateRouteValues();
             Mock<UrlHelper> stubUrlFactory = new Mock<UrlHelper>(MockBehavior.Strict);
-            stubUrlFactory.Setup(f => f.Link(expectedRouteName, expectedRouteValues)).Returns((string)null);
+            stubUrlFactory
+                .Setup(f => f.Link(expectedRouteName, expectedRouteValues))
+                .Returns((string)null);
             UrlHelper urlFactory = stubUrlFactory.Object;
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                IHttpActionResult result = CreateProductUnderTest(expectedRouteName, expectedRouteValues, urlFactory,
-                    expectedRequest);
+                IHttpActionResult result = CreateProductUnderTest(
+                    expectedRouteName,
+                    expectedRouteValues,
+                    urlFactory,
+                    expectedRequest
+                );
 
                 // Act & Assert
-                InvalidOperationException exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => result.ExecuteAsync(CancellationToken.None));
+                InvalidOperationException exception =
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => result.ExecuteAsync(CancellationToken.None)
+                    );
                 Assert.Equal("UrlHelper.Link must not return null.", exception.Message);
             }
         }
@@ -213,10 +252,13 @@ namespace System.Web.Http.Results
             ApiController controller = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() =>
-            {
-                CreateProductUnderTest(routeName, routeValues, controller);
-            }, "controller");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(routeName, routeValues, controller);
+                },
+                "controller"
+            );
         }
 
         [Fact]
@@ -227,7 +269,9 @@ namespace System.Web.Http.Results
             IDictionary<string, object> expectedRouteValues = CreateRouteValues();
             Mock<UrlHelper> spyUrlFactory = new Mock<UrlHelper>(MockBehavior.Strict);
             string expectedLocation = CreateLocation().AbsoluteUri;
-            spyUrlFactory.Setup(f => f.Link(expectedRouteName, expectedRouteValues)).Returns(expectedLocation);
+            spyUrlFactory
+                .Setup(f => f.Link(expectedRouteName, expectedRouteValues))
+                .Returns(expectedLocation);
             UrlHelper urlFactory = spyUrlFactory.Object;
             ApiController controller = CreateController();
 
@@ -236,7 +280,11 @@ namespace System.Web.Http.Results
                 controller.Request = expectedRequest;
                 controller.Url = urlFactory;
 
-                IHttpActionResult result = CreateProductUnderTest(expectedRouteName, expectedRouteValues, controller);
+                IHttpActionResult result = CreateProductUnderTest(
+                    expectedRouteName,
+                    expectedRouteValues,
+                    controller
+                );
 
                 // Act
                 Task<HttpResponseMessage> task = result.ExecuteAsync(CancellationToken.None);
@@ -267,7 +315,11 @@ namespace System.Web.Http.Results
                 controller.Request = request;
                 controller.Url = CreateDummyUrlFactory();
 
-                RedirectToRouteResult result = CreateProductUnderTest(routeName, routeValues, controller);
+                RedirectToRouteResult result = CreateProductUnderTest(
+                    routeName,
+                    routeValues,
+                    controller
+                );
 
                 UrlHelper expectedUrlFactory = CreateDummyUrlFactory();
                 controller.Url = expectedUrlFactory;
@@ -287,7 +339,11 @@ namespace System.Web.Http.Results
             string routeName = CreateRouteName();
             IDictionary<string, object> routeValues = CreateRouteValues();
             ApiController controller = CreateController();
-            RedirectToRouteResult result = CreateProductUnderTest(routeName, routeValues, controller);
+            RedirectToRouteResult result = CreateProductUnderTest(
+                routeName,
+                routeValues,
+                controller
+            );
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
@@ -315,7 +371,11 @@ namespace System.Web.Http.Results
                 UrlHelper expectedUrlFactory = CreateDummyUrlFactory();
                 controller.Url = expectedUrlFactory;
 
-                RedirectToRouteResult result = CreateProductUnderTest(routeName, routeValues, controller);
+                RedirectToRouteResult result = CreateProductUnderTest(
+                    routeName,
+                    routeValues,
+                    controller
+                );
 
                 UrlHelper ignore = result.UrlFactory;
 
@@ -337,7 +397,11 @@ namespace System.Web.Http.Results
             IDictionary<string, object> routeValues = CreateRouteValues();
             ApiController controller = CreateController();
 
-            RedirectToRouteResult result = CreateProductUnderTest(routeName, routeValues, controller);
+            RedirectToRouteResult result = CreateProductUnderTest(
+                routeName,
+                routeValues,
+                controller
+            );
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
@@ -366,11 +430,20 @@ namespace System.Web.Http.Results
             ApiController controller = CreateController();
             Assert.Null(controller.Request);
 
-            RedirectToRouteResult result = CreateProductUnderTest(routeName, routeValues, controller);
+            RedirectToRouteResult result = CreateProductUnderTest(
+                routeName,
+                routeValues,
+                controller
+            );
 
             // Act & Assert
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
-                { HttpRequestMessage ignore = result.Request; }, "ApiController.Request must not be null.");
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    HttpRequestMessage ignore = result.Request;
+                },
+                "ApiController.Request must not be null."
+            );
         }
 
         [Fact]
@@ -382,7 +455,10 @@ namespace System.Web.Http.Results
             ApiController controller = CreateController();
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToRoute(expectedRouteName, expectedRouteValues);
+            RedirectToRouteResult result = controller.RedirectToRoute(
+                expectedRouteName,
+                expectedRouteValues
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -405,7 +481,10 @@ namespace System.Web.Http.Results
             ApiController controller = CreateController();
 
             // Act
-            RedirectToRouteResult result = controller.RedirectToRoute(expectedRouteName, routeValues);
+            RedirectToRouteResult result = controller.RedirectToRoute(
+                expectedRouteName,
+                routeValues
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -436,14 +515,21 @@ namespace System.Web.Http.Results
             return new Uri("aa://b");
         }
 
-        private static RedirectToRouteResult CreateProductUnderTest(string routeName,
-            IDictionary<string, object> routeValues, UrlHelper urlFactory, HttpRequestMessage request)
+        private static RedirectToRouteResult CreateProductUnderTest(
+            string routeName,
+            IDictionary<string, object> routeValues,
+            UrlHelper urlFactory,
+            HttpRequestMessage request
+        )
         {
             return new RedirectToRouteResult(routeName, routeValues, urlFactory, request);
         }
 
-        private static RedirectToRouteResult CreateProductUnderTest(string routeName,
-            IDictionary<string, object> routeValues, ApiController controller)
+        private static RedirectToRouteResult CreateProductUnderTest(
+            string routeName,
+            IDictionary<string, object> routeValues,
+            ApiController controller
+        )
         {
             return new RedirectToRouteResult(routeName, routeValues, controller);
         }
@@ -463,8 +549,6 @@ namespace System.Web.Http.Results
             return new Dictionary<string, object>();
         }
 
-        private class FakeController : ApiController
-        {
-        }
+        private class FakeController : ApiController { }
     }
 }

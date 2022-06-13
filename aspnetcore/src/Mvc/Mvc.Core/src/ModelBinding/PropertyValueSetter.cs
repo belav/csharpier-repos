@@ -10,12 +10,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 internal static class PropertyValueSetter
 {
     private static readonly MethodInfo CallPropertyAddRangeOpenGenericMethod =
-        typeof(PropertyValueSetter).GetMethod(nameof(CallPropertyAddRange), BindingFlags.NonPublic | BindingFlags.Static)!;
+        typeof(PropertyValueSetter).GetMethod(
+            nameof(CallPropertyAddRange),
+            BindingFlags.NonPublic | BindingFlags.Static
+        )!;
 
-    public static void SetValue(
-        ModelMetadata metadata,
-        object instance,
-        object? value)
+    public static void SetValue(ModelMetadata metadata, object instance, object? value)
     {
         if (!metadata.IsReadOnly)
         {
@@ -50,7 +50,8 @@ internal static class PropertyValueSetter
 
         // Handle a read-only collection property.
         var propertyAddRange = CallPropertyAddRangeOpenGenericMethod.MakeGenericMethod(
-            metadata.ElementMetadata!.ModelType);
+            metadata.ElementMetadata!.ModelType
+        );
         propertyAddRange.Invoke(obj: null, parameters: new[] { target, value });
     }
 

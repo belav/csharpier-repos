@@ -18,9 +18,7 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExportProvider"/> class.
         /// </summary>
-        protected ExportProvider()
-        {
-        }
+        protected ExportProvider() { }
 
         /// <summary>
         ///     Occurs when the exports in the <see cref="ExportProvider"/> have changed.
@@ -94,24 +92,35 @@ namespace System.ComponentModel.Composition.Hosting
         ///         objects that match the conditions of the specified <see cref="ImportDefinition"/>.
         ///     </para>
         /// </exception>
-        public IEnumerable<Export> GetExports(ImportDefinition definition, AtomicComposition? atomicComposition)
+        public IEnumerable<Export> GetExports(
+            ImportDefinition definition,
+            AtomicComposition? atomicComposition
+        )
         {
             Requires.NotNull(definition, nameof(definition));
 
-            ExportCardinalityCheckResult result = TryGetExportsCore(definition, atomicComposition, out IEnumerable<Export>? exports);
+            ExportCardinalityCheckResult result = TryGetExportsCore(
+                definition,
+                atomicComposition,
+                out IEnumerable<Export>? exports
+            );
             switch (result)
             {
                 case ExportCardinalityCheckResult.Match:
                     Debug.Assert(exports != null);
                     return exports;
                 case ExportCardinalityCheckResult.NoExports:
-                    throw new ImportCardinalityMismatchException(SR.Format(SR.CardinalityMismatch_NoExports, definition));
+                    throw new ImportCardinalityMismatchException(
+                        SR.Format(SR.CardinalityMismatch_NoExports, definition)
+                    );
                 default:
                     if (result != ExportCardinalityCheckResult.TooManyExports)
                     {
                         throw new Exception(SR.Diagnostic_InternalExceptionMessage);
                     }
-                    throw new ImportCardinalityMismatchException(SR.Format(SR.CardinalityMismatch_TooManyExports_Constraint, definition));
+                    throw new ImportCardinalityMismatchException(
+                        SR.Format(SR.CardinalityMismatch_TooManyExports_Constraint, definition)
+                    );
             }
         }
 
@@ -141,11 +150,19 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="ArgumentNullException">
         ///     <paramref name="definition"/> is <see langword="null"/>.
         /// </exception>
-        public bool TryGetExports(ImportDefinition definition, AtomicComposition? atomicComposition, out IEnumerable<Export>? exports)
+        public bool TryGetExports(
+            ImportDefinition definition,
+            AtomicComposition? atomicComposition,
+            out IEnumerable<Export>? exports
+        )
         {
             Requires.NotNull(definition, nameof(definition));
 
-            ExportCardinalityCheckResult result = TryGetExportsCore(definition, atomicComposition, out exports);
+            ExportCardinalityCheckResult result = TryGetExportsCore(
+                definition,
+                atomicComposition,
+                out exports
+            );
             return (result == ExportCardinalityCheckResult.Match);
         }
 
@@ -171,7 +188,10 @@ namespace System.ComponentModel.Composition.Hosting
         ///         specified <see cref="ImportDefinition"/>, an <see cref="IEnumerable{T}"/> should be returned.
         ///     </note>
         /// </remarks>
-        protected abstract IEnumerable<Export>? GetExportsCore(ImportDefinition definition, AtomicComposition? atomicComposition);
+        protected abstract IEnumerable<Export>? GetExportsCore(
+            ImportDefinition definition,
+            AtomicComposition? atomicComposition
+        );
 
         /// <summary>
         ///     Raises the <see cref="ExportsChanged"/> event.
@@ -205,7 +225,11 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private ExportCardinalityCheckResult TryGetExportsCore(ImportDefinition definition, AtomicComposition? atomicComposition, out IEnumerable<Export>? exports)
+        private ExportCardinalityCheckResult TryGetExportsCore(
+            ImportDefinition definition,
+            AtomicComposition? atomicComposition,
+            out IEnumerable<Export>? exports
+        )
         {
             ArgumentNullException.ThrowIfNull(definition);
 
@@ -217,8 +241,10 @@ namespace System.ComponentModel.Composition.Hosting
             // If this policy is moved we need to revisit the assumption that the
             // ImportEngine made during previewing the only required imports to
             // now also preview optional imports.
-            if (checkResult == ExportCardinalityCheckResult.TooManyExports &&
-                definition.Cardinality == ImportCardinality.ZeroOrOne)
+            if (
+                checkResult == ExportCardinalityCheckResult.TooManyExports
+                && definition.Cardinality == ImportCardinality.ZeroOrOne
+            )
             {
                 checkResult = ExportCardinalityCheckResult.Match;
                 exports = null;

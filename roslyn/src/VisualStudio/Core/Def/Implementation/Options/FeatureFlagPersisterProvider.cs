@@ -24,12 +24,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FeatureFlagPersisterProvider(
-            [Import(typeof(SAsyncServiceProvider))] IAsyncServiceProvider serviceProvider)
+            [Import(typeof(SAsyncServiceProvider))] IAsyncServiceProvider serviceProvider
+        )
         {
             _serviceProvider = serviceProvider;
         }
 
-        public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(CancellationToken cancellationToken)
+        public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(
+            CancellationToken cancellationToken
+        )
         {
             if (_lazyPersister != null)
             {
@@ -39,7 +42,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             IVsFeatureFlags? service;
             try
             {
-                service = (IVsFeatureFlags?)await _serviceProvider.GetServiceAsync(typeof(SVsFeatureFlags)).ConfigureAwait(false);
+                service = (IVsFeatureFlags?)
+                    await _serviceProvider
+                        .GetServiceAsync(typeof(SVsFeatureFlags))
+                        .ConfigureAwait(false);
             }
             catch (Exception e) when (FatalError.ReportAndCatch(e))
             {

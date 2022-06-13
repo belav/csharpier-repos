@@ -23,7 +23,8 @@ namespace Microsoft.Interop
         public ContiguousCollectionElementMarshallingCodeContext(
             Stage currentStage,
             string nativeSpanIdentifier,
-            StubCodeContext parentContext)
+            StubCodeContext parentContext
+        )
         {
             CurrentStage = currentStage;
             IndexerIdentifier = CalculateIndexerIdentifierBasedOnParentContext(parentContext);
@@ -50,7 +51,9 @@ namespace Microsoft.Interop
             return $"{_nativeSpanIdentifier}__{IndexerIdentifier}__{name}";
         }
 
-        private static string CalculateIndexerIdentifierBasedOnParentContext(StubCodeContext? parentContext)
+        private static string CalculateIndexerIdentifierBasedOnParentContext(
+            StubCodeContext? parentContext
+        )
         {
             int i = 0;
             while (parentContext is StubCodeContext context)

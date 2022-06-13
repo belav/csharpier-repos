@@ -9,7 +9,7 @@ namespace System.IO.Enumeration
     /// Lower level view of FileSystemInfo used for processing and filtering find results.
     /// </summary>
     public unsafe ref partial struct FileSystemEntry
-   {
+    {
         private Interop.Sys.DirectoryEntry _directoryEntry;
         private bool _isDirectory;
         private FileStatus _status;
@@ -24,7 +24,8 @@ namespace System.IO.Enumeration
             ReadOnlySpan<char> directory,
             ReadOnlySpan<char> rootDirectory,
             ReadOnlySpan<char> originalRootDirectory,
-            Span<char> pathBuffer)
+            Span<char> pathBuffer
+        )
         {
             entry._directoryEntry = directoryEntry;
             entry.Directory = directory;
@@ -37,8 +38,8 @@ namespace System.IO.Enumeration
             entry._status.InvalidateCaches();
 
             bool isDirectory = directoryEntry.InodeType == Interop.Sys.NodeType.DT_DIR;
-            bool isSymlink   = directoryEntry.InodeType == Interop.Sys.NodeType.DT_LNK;
-            bool isUnknown   = directoryEntry.InodeType == Interop.Sys.NodeType.DT_UNKNOWN;
+            bool isSymlink = directoryEntry.InodeType == Interop.Sys.NodeType.DT_LNK;
+            bool isUnknown = directoryEntry.InodeType == Interop.Sys.NodeType.DT_UNKNOWN;
 
             if (isDirectory)
             {
@@ -46,11 +47,17 @@ namespace System.IO.Enumeration
             }
             else if (isSymlink)
             {
-                entry._isDirectory = entry._status.IsDirectory(entry.FullPath, continueOnError: true);
+                entry._isDirectory = entry._status.IsDirectory(
+                    entry.FullPath,
+                    continueOnError: true
+                );
             }
             else if (isUnknown)
             {
-                entry._isDirectory = entry._status.IsDirectory(entry.FullPath, continueOnError: true);
+                entry._isDirectory = entry._status.IsDirectory(
+                    entry.FullPath,
+                    continueOnError: true
+                );
                 if (entry._status.IsSymbolicLink(entry.FullPath, continueOnError: true))
                 {
                     entry._directoryEntry.InodeType = Interop.Sys.NodeType.DT_LNK;
@@ -72,8 +79,10 @@ namespace System.IO.Enumeration
             {
                 if (_fullPath.Length == 0)
                 {
-                    Debug.Assert(Directory.Length + FileName.Length < _pathBuffer.Length,
-                        $"directory ({Directory.Length} chars) & name ({Directory.Length} chars) too long for buffer ({_pathBuffer.Length} chars)");
+                    Debug.Assert(
+                        Directory.Length + FileName.Length < _pathBuffer.Length,
+                        $"directory ({Directory.Length} chars) & name ({Directory.Length} chars) too long for buffer ({_pathBuffer.Length} chars)"
+                    );
                     Path.TryJoin(Directory, FileName, _pathBuffer, out int charsWritten);
                     Debug.Assert(charsWritten > 0, "didn't write any chars to buffer");
                     _fullPath = _pathBuffer.Slice(0, charsWritten);
@@ -90,7 +99,10 @@ namespace System.IO.Enumeration
                 {
                     fixed (char* c = _fileNameBuffer)
                     {
-                        Span<char> buffer = new Span<char>(c, Interop.Sys.DirectoryEntry.NameBufferSize);
+                        Span<char> buffer = new Span<char>(
+                            c,
+                            Interop.Sys.DirectoryEntry.NameBufferSize
+                        );
                         _fileName = _directoryEntry.GetName(buffer);
                     }
                 }
@@ -120,7 +132,11 @@ namespace System.IO.Enumeration
         {
             get
             {
-                FileAttributes attributes = _status.GetAttributes(FullPath, FileName, continueOnError: true);
+                FileAttributes attributes = _status.GetAttributes(
+                    FullPath,
+                    FileName,
+                    continueOnError: true
+                );
                 if (attributes != (FileAttributes)(-1))
                 {
                     return attributes;
@@ -143,9 +159,12 @@ namespace System.IO.Enumeration
             }
         }
         public long Length => _status.GetLength(FullPath, continueOnError: true);
-        public DateTimeOffset CreationTimeUtc => _status.GetCreationTime(FullPath, continueOnError: true);
-        public DateTimeOffset LastAccessTimeUtc => _status.GetLastAccessTime(FullPath, continueOnError: true);
-        public DateTimeOffset LastWriteTimeUtc => _status.GetLastWriteTime(FullPath, continueOnError: true);
+        public DateTimeOffset CreationTimeUtc =>
+            _status.GetCreationTime(FullPath, continueOnError: true);
+        public DateTimeOffset LastAccessTimeUtc =>
+            _status.GetLastAccessTime(FullPath, continueOnError: true);
+        public DateTimeOffset LastWriteTimeUtc =>
+            _status.GetLastWriteTime(FullPath, continueOnError: true);
 
         public bool IsHidden => _status.IsFileSystemEntryHidden(FullPath, FileName);
         internal bool IsReadOnly => _status.IsReadOnly(FullPath, continueOnError: true);
@@ -162,7 +181,6 @@ namespace System.IO.Enumeration
         /// <summary>
         /// Returns the full path of the find result.
         /// </summary>
-        public string ToFullPath() =>
-            new string(FullPath);
+        public string ToFullPath() => new string(FullPath);
     }
 }

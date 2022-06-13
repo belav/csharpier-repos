@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new BoundSequencePoint(node.Syntax, node);
         }
 
-        internal static BoundStatement AddSequencePoint(VariableDeclaratorSyntax declaratorSyntax, BoundStatement rewrittenStatement)
+        internal static BoundStatement AddSequencePoint(
+            VariableDeclaratorSyntax declaratorSyntax,
+            BoundStatement rewrittenStatement
+        )
         {
             SyntaxNode node;
             TextSpan? part;
@@ -30,7 +33,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return result;
         }
 
-        internal static BoundStatement AddSequencePoint(PropertyDeclarationSyntax declarationSyntax, BoundStatement rewrittenStatement)
+        internal static BoundStatement AddSequencePoint(
+            PropertyDeclarationSyntax declarationSyntax,
+            BoundStatement rewrittenStatement
+        )
         {
             Debug.Assert(declarationSyntax.Initializer != null);
             int start = declarationSyntax.Initializer.Value.SpanStart;
@@ -42,7 +48,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return result;
         }
 
-        internal static BoundStatement AddSequencePoint(UsingStatementSyntax usingSyntax, BoundStatement rewrittenStatement)
+        internal static BoundStatement AddSequencePoint(
+            UsingStatementSyntax usingSyntax,
+            BoundStatement rewrittenStatement
+        )
         {
             int start = usingSyntax.Span.Start;
             int end = usingSyntax.CloseParenToken.Span.End;
@@ -50,7 +59,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new BoundSequencePointWithSpan(usingSyntax, rewrittenStatement, span);
         }
 
-        private static TextSpan CreateSpanForConstructorInitializer(ConstructorDeclarationSyntax constructorSyntax)
+        private static TextSpan CreateSpanForConstructorInitializer(
+            ConstructorDeclarationSyntax constructorSyntax
+        )
         {
             if (constructorSyntax.Initializer != null)
             {
@@ -69,12 +80,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             //  [SomeAttribute] [|public MyCtorName(params int[] values)|] { ... }
-            return CreateSpan(constructorSyntax.Modifiers, constructorSyntax.Identifier, constructorSyntax.ParameterList.CloseParenToken);
+            return CreateSpan(
+                constructorSyntax.Modifiers,
+                constructorSyntax.Identifier,
+                constructorSyntax.ParameterList.CloseParenToken
+            );
         }
 
-        private static TextSpan CreateSpan(SyntaxTokenList startOpt, SyntaxNodeOrToken startFallbackOpt, SyntaxNodeOrToken endOpt)
+        private static TextSpan CreateSpan(
+            SyntaxTokenList startOpt,
+            SyntaxNodeOrToken startFallbackOpt,
+            SyntaxNodeOrToken endOpt
+        )
         {
-            Debug.Assert(startFallbackOpt != default(SyntaxNodeOrToken) || endOpt != default(SyntaxNodeOrToken));
+            Debug.Assert(
+                startFallbackOpt != default(SyntaxNodeOrToken)
+                    || endOpt != default(SyntaxNodeOrToken)
+            );
 
             int startPos;
             if (startOpt.Count > 0)
@@ -115,7 +137,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        internal static void GetBreakpointSpan(VariableDeclaratorSyntax declaratorSyntax, out SyntaxNode node, out TextSpan? part)
+        internal static void GetBreakpointSpan(
+            VariableDeclaratorSyntax declaratorSyntax,
+            out SyntaxNode node,
+            out TextSpan? part
+        )
         {
             var declarationSyntax = (VariableDeclarationSyntax)declaratorSyntax.Parent;
 
@@ -125,8 +151,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     case SyntaxKind.EventFieldDeclaration:
                     case SyntaxKind.FieldDeclaration:
-                        var modifiers = ((BaseFieldDeclarationSyntax)declarationSyntax.Parent).Modifiers;
-                        GetFirstLocalOrFieldBreakpointSpan(modifiers.Any() ? modifiers[0] : (SyntaxToken?)null, declaratorSyntax, out node, out part);
+                        var modifiers = (
+                            (BaseFieldDeclarationSyntax)declarationSyntax.Parent
+                        ).Modifiers;
+                        GetFirstLocalOrFieldBreakpointSpan(
+                            modifiers.Any() ? modifiers[0] : (SyntaxToken?)null,
+                            declaratorSyntax,
+                            out node,
+                            out part
+                        );
                         break;
 
                     case SyntaxKind.LocalDeclarationStatement:
@@ -134,10 +167,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                         var parent = (LocalDeclarationStatementSyntax)declarationSyntax.Parent;
                         Debug.Assert(!parent.Modifiers.Any());
                         var firstToken =
-                            parent.UsingKeyword == default ? (SyntaxToken?)null :
-                            parent.AwaitKeyword == default ? parent.UsingKeyword :
-                            parent.AwaitKeyword;
-                        GetFirstLocalOrFieldBreakpointSpan(firstToken, declaratorSyntax, out node, out part);
+                            parent.UsingKeyword == default
+                                ? (SyntaxToken?)null
+                                : parent.AwaitKeyword == default
+                                    ? parent.UsingKeyword
+                                    : parent.AwaitKeyword;
+                        GetFirstLocalOrFieldBreakpointSpan(
+                            firstToken,
+                            declaratorSyntax,
+                            out node,
+                            out part
+                        );
                         break;
 
                     case SyntaxKind.UsingStatement:
@@ -146,7 +186,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // for ([|int i = 1|]; i < 10; i++)
                         // for ([|int i = 1|], j = 0; i < 10; i++)
                         node = declarationSyntax;
-                        part = TextSpan.FromBounds(declarationSyntax.SpanStart, declaratorSyntax.Span.End);
+                        part = TextSpan.FromBounds(
+                            declarationSyntax.SpanStart,
+                            declaratorSyntax.Span.End
+                        );
                         break;
 
                     default:
@@ -163,7 +206,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        internal static void GetFirstLocalOrFieldBreakpointSpan(SyntaxToken? firstToken, VariableDeclaratorSyntax declaratorSyntax, out SyntaxNode node, out TextSpan? part)
+        internal static void GetFirstLocalOrFieldBreakpointSpan(
+            SyntaxToken? firstToken,
+            VariableDeclaratorSyntax declaratorSyntax,
+            out SyntaxNode node,
+            out TextSpan? part
+        )
         {
             var declarationSyntax = (VariableDeclarationSyntax)declaratorSyntax.Parent;
 
@@ -188,7 +236,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             node = declarationSyntax.Parent;
         }
 
-        private static BoundExpression AddConditionSequencePoint(BoundExpression condition, SyntaxNode synthesizedVariableSyntax, SyntheticBoundNodeFactory factory)
+        private static BoundExpression AddConditionSequencePoint(
+            BoundExpression condition,
+            SyntaxNode synthesizedVariableSyntax,
+            SyntheticBoundNodeFactory factory
+        )
         {
             if (!factory.Compilation.Options.EnableEditAndContinue)
             {
@@ -197,20 +249,32 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // The local has to be associated with a syntax that is tracked by EnC source mapping.
             // At most one ConditionalBranchDiscriminator variable shall be associated with any given EnC tracked syntax node.
-            var local = factory.SynthesizedLocal(condition.Type, synthesizedVariableSyntax, kind: SynthesizedLocalKind.ConditionalBranchDiscriminator);
+            var local = factory.SynthesizedLocal(
+                condition.Type,
+                synthesizedVariableSyntax,
+                kind: SynthesizedLocalKind.ConditionalBranchDiscriminator
+            );
 
             // Add hidden sequence point unless the condition is a constant expression.
             // Constant expression must stay a const to not invalidate results of control flow analysis.
-            var valueExpression = (condition.ConstantValue == null) ?
-                new BoundSequencePointExpression(syntax: null, expression: factory.Local(local), type: condition.Type) :
-                condition;
+            var valueExpression =
+                (condition.ConstantValue == null)
+                    ? new BoundSequencePointExpression(
+                        syntax: null,
+                        expression: factory.Local(local),
+                        type: condition.Type
+                    )
+                    : condition;
 
             return new BoundSequence(
                 condition.Syntax,
                 ImmutableArray.Create(local),
-                ImmutableArray.Create<BoundExpression>(factory.AssignmentExpression(factory.Local(local), condition)),
+                ImmutableArray.Create<BoundExpression>(
+                    factory.AssignmentExpression(factory.Local(local), condition)
+                ),
                 valueExpression,
-                condition.Type);
+                condition.Type
+            );
         }
     }
 }

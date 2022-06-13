@@ -57,7 +57,9 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
             CheckDisposed();
             if (_transport == null)
             {
-                throw new InvalidOperationException($"Cannot access the {nameof(Transport)} pipe before the connection has started.");
+                throw new InvalidOperationException(
+                    $"Cannot access the {nameof(Transport)} pipe before the connection has started."
+                );
             }
             return _transport;
         }
@@ -80,7 +82,10 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
 #pragma warning disable CS8764 // Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
         get => _connectionId;
 #pragma warning restore CS8764 // Nullability of return type doesn't match overridden member (possibly because of nullability attributes).
-        set => throw new InvalidOperationException("The ConnectionId is set internally and should not be set by user code.");
+        set =>
+            throw new InvalidOperationException(
+                "The ConnectionId is set internally and should not be set by user code."
+            );
     }
 
     /// <inheritdoc />
@@ -93,9 +98,7 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
     /// Initializes a new instance of the <see cref="HttpConnection"/> class.
     /// </summary>
     /// <param name="url">The URL to connect to.</param>
-    public HttpConnection(Uri url)
-        : this(url, HttpTransports.All)
-    { }
+    public HttpConnection(Uri url) : this(url, HttpTransports.All) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="HttpConnection"/> class.
@@ -103,9 +106,7 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
     /// <param name="url">The URL to connect to.</param>
     /// <param name="transports">A bitmask combining one or more <see cref="HttpTransportType"/> values that specify what transports the client should use.</param>
     public HttpConnection(Uri url, HttpTransportType transports)
-        : this(url, transports, loggerFactory: null)
-    {
-    }
+        : this(url, transports, loggerFactory: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="HttpConnection"/> class.
@@ -114,9 +115,7 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
     /// <param name="transports">A bitmask combining one or more <see cref="HttpTransportType"/> values that specify what transports the client should use.</param>
     /// <param name="loggerFactory">The logger factory.</param>
     public HttpConnection(Uri url, HttpTransportType transports, ILoggerFactory? loggerFactory)
-        : this(CreateHttpOptions(url, transports), loggerFactory)
-    {
-    }
+        : this(CreateHttpOptions(url, transports), loggerFactory) { }
 
     private static HttpConnectionOptions CreateHttpOptions(Uri url, HttpTransportType transports)
     {
@@ -132,7 +131,10 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
     /// </summary>
     /// <param name="httpConnectionOptions">The connection options to use.</param>
     /// <param name="loggerFactory">The logger factory.</param>
-    public HttpConnection(HttpConnectionOptions httpConnectionOptions, ILoggerFactory? loggerFactory)
+    public HttpConnection(
+        HttpConnectionOptions httpConnectionOptions,
+        ILoggerFactory? loggerFactory
+    )
     {
         if (httpConnectionOptions == null)
         {
@@ -141,7 +143,10 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
 
         if (httpConnectionOptions.Url == null)
         {
-            throw new ArgumentException("Options does not have a URL specified.", nameof(httpConnectionOptions));
+            throw new ArgumentException(
+                "Options does not have a URL specified.",
+                nameof(httpConnectionOptions)
+            );
         }
 
         _loggerFactory = loggerFactory ?? NullLoggerFactory.Instance;
@@ -151,25 +156,43 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
 
         _url = _httpConnectionOptions.Url;
 
-        if (!httpConnectionOptions.SkipNegotiation || httpConnectionOptions.Transports != HttpTransportType.WebSockets)
+        if (
+            !httpConnectionOptions.SkipNegotiation
+            || httpConnectionOptions.Transports != HttpTransportType.WebSockets
+        )
         {
             _httpClient = CreateHttpClient();
         }
 
-        if (httpConnectionOptions.Transports == HttpTransportType.ServerSentEvents && OperatingSystem.IsBrowser())
+        if (
+            httpConnectionOptions.Transports == HttpTransportType.ServerSentEvents
+            && OperatingSystem.IsBrowser()
+        )
         {
-            throw new ArgumentException("ServerSentEvents can not be the only transport specified when running in the browser.", nameof(httpConnectionOptions));
+            throw new ArgumentException(
+                "ServerSentEvents can not be the only transport specified when running in the browser.",
+                nameof(httpConnectionOptions)
+            );
         }
 
-        _transportFactory = new DefaultTransportFactory(httpConnectionOptions.Transports, _loggerFactory, _httpClient, httpConnectionOptions, GetAccessTokenAsync);
+        _transportFactory = new DefaultTransportFactory(
+            httpConnectionOptions.Transports,
+            _loggerFactory,
+            _httpClient,
+            httpConnectionOptions,
+            GetAccessTokenAsync
+        );
         _logScope = new ConnectionLogScope();
 
         Features.Set<IConnectionInherentKeepAliveFeature>(this);
     }
 
     // Used by unit tests
-    internal HttpConnection(HttpConnectionOptions httpConnectionOptions, ILoggerFactory loggerFactory, ITransportFactory transportFactory)
-        : this(httpConnectionOptions, loggerFactory)
+    internal HttpConnection(
+        HttpConnectionOptions httpConnectionOptions,
+        ILoggerFactory loggerFactory,
+        ITransportFactory transportFactory
+    ) : this(httpConnectionOptions, loggerFactory)
     {
         _transportFactory = transportFactory;
     }
@@ -183,7 +206,11 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
     /// A connection cannot be restarted after it has stopped. To restart a connection
     /// a new instance should be created using the same options.
     /// </remarks>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public Task StartAsync(CancellationToken cancellationToken = default)
     {
         return StartAsync(_httpConnectionOptions.DefaultTransferFormat, cancellationToken);
@@ -199,8 +226,15 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
     /// A connection cannot be restarted after it has stopped. To restart a connection
     /// a new instance should be created using the same options.
     /// </remarks>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public async Task StartAsync(TransferFormat transferFormat, CancellationToken cancellationToken = default)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public async Task StartAsync(
+        TransferFormat transferFormat,
+        CancellationToken cancellationToken = default
+    )
     {
         using (_logger.BeginScope(_logScope))
         {
@@ -208,7 +242,10 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
         }
     }
 
-    private async Task StartAsyncCore(TransferFormat transferFormat, CancellationToken cancellationToken)
+    private async Task StartAsyncCore(
+        TransferFormat transferFormat,
+        CancellationToken cancellationToken
+    )
     {
         CheckDisposed();
 
@@ -304,7 +341,10 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
         }
     }
 
-    private async Task SelectAndStartTransport(TransferFormat transferFormat, CancellationToken cancellationToken)
+    private async Task SelectAndStartTransport(
+        TransferFormat transferFormat,
+        CancellationToken cancellationToken
+    )
     {
         var uri = _url;
         // Set the initial access token provider back to the original one from options
@@ -317,11 +357,19 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
             if (_httpConnectionOptions.Transports == HttpTransportType.WebSockets)
             {
                 Log.StartingTransport(_logger, _httpConnectionOptions.Transports, uri);
-                await StartTransport(uri, _httpConnectionOptions.Transports, transferFormat, cancellationToken).ConfigureAwait(false);
+                await StartTransport(
+                        uri,
+                        _httpConnectionOptions.Transports,
+                        transferFormat,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             else
             {
-                throw new InvalidOperationException("Negotiation can only be skipped when using the WebSocket transport directly.");
+                throw new InvalidOperationException(
+                    "Negotiation can only be skipped when using the WebSocket transport directly."
+                );
             }
         }
         else
@@ -331,7 +379,8 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
 
             do
             {
-                negotiationResponse = await GetNegotiationResponseAsync(uri, cancellationToken).ConfigureAwait(false);
+                negotiationResponse = await GetNegotiationResponseAsync(uri, cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (negotiationResponse.Url != null)
                 {
@@ -346,8 +395,7 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
                 }
 
                 redirects++;
-            }
-            while (negotiationResponse.Url != null && redirects < _maxRedirects);
+            } while (negotiationResponse.Url != null && redirects < _maxRedirects);
 
             if (redirects == _maxRedirects && negotiationResponse.Url != null)
             {
@@ -367,21 +415,39 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
                 if (!Enum.TryParse<HttpTransportType>(transport.Transport, out var transportType))
                 {
                     Log.TransportNotSupported(_logger, transport.Transport!);
-                    transportExceptions.Add(new TransportFailedException(transport.Transport!, "The transport is not supported by the client."));
+                    transportExceptions.Add(
+                        new TransportFailedException(
+                            transport.Transport!,
+                            "The transport is not supported by the client."
+                        )
+                    );
                     continue;
                 }
 
                 if (transportType == HttpTransportType.WebSockets && !IsWebSocketsSupported())
                 {
                     Log.WebSocketsNotSupportedByOperatingSystem(_logger);
-                    transportExceptions.Add(new TransportFailedException("WebSockets", "The transport is not supported on this operating system."));
+                    transportExceptions.Add(
+                        new TransportFailedException(
+                            "WebSockets",
+                            "The transport is not supported on this operating system."
+                        )
+                    );
                     continue;
                 }
 
-                if (transportType == HttpTransportType.ServerSentEvents && OperatingSystem.IsBrowser())
+                if (
+                    transportType == HttpTransportType.ServerSentEvents
+                    && OperatingSystem.IsBrowser()
+                )
                 {
                     Log.ServerSentEventsNotSupportedByBrowser(_logger);
-                    transportExceptions.Add(new TransportFailedException("ServerSentEvents", "The transport is not supported in the browser."));
+                    transportExceptions.Add(
+                        new TransportFailedException(
+                            "ServerSentEvents",
+                            "The transport is not supported in the browser."
+                        )
+                    );
                     continue;
                 }
 
@@ -390,24 +456,53 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
                     if ((transportType & _httpConnectionOptions.Transports) == 0)
                     {
                         Log.TransportDisabledByClient(_logger, transportType);
-                        transportExceptions.Add(new TransportFailedException(transportType.ToString(), "The transport is disabled by the client."));
+                        transportExceptions.Add(
+                            new TransportFailedException(
+                                transportType.ToString(),
+                                "The transport is disabled by the client."
+                            )
+                        );
                     }
-                    else if (!transport.TransferFormats!.Contains(transferFormatString, StringComparer.Ordinal))
+                    else if (
+                        !transport.TransferFormats!.Contains(
+                            transferFormatString,
+                            StringComparer.Ordinal
+                        )
+                    )
                     {
-                        Log.TransportDoesNotSupportTransferFormat(_logger, transportType, transferFormat);
-                        transportExceptions.Add(new TransportFailedException(transportType.ToString(), $"The transport does not support the '{transferFormat}' transfer format."));
+                        Log.TransportDoesNotSupportTransferFormat(
+                            _logger,
+                            transportType,
+                            transferFormat
+                        );
+                        transportExceptions.Add(
+                            new TransportFailedException(
+                                transportType.ToString(),
+                                $"The transport does not support the '{transferFormat}' transfer format."
+                            )
+                        );
                     }
                     else
                     {
                         // The negotiation response gets cleared in the fallback scenario.
                         if (negotiationResponse == null)
                         {
-                            negotiationResponse = await GetNegotiationResponseAsync(uri, cancellationToken).ConfigureAwait(false);
+                            negotiationResponse = await GetNegotiationResponseAsync(
+                                    uri,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                             connectUrl = CreateConnectUrl(uri, negotiationResponse.ConnectionToken);
                         }
 
                         Log.StartingTransport(_logger, transportType, uri);
-                        await StartTransport(connectUrl, transportType, transferFormat, cancellationToken).ConfigureAwait(false);
+                        await StartTransport(
+                                connectUrl,
+                                transportType,
+                                transferFormat,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         break;
                     }
                 }
@@ -415,7 +510,9 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
                 {
                     Log.TransportFailed(_logger, transportType, ex);
 
-                    transportExceptions.Add(new TransportFailedException(transportType.ToString(), ex.Message, ex));
+                    transportExceptions.Add(
+                        new TransportFailedException(transportType.ToString(), ex.Message, ex)
+                    );
 
                     // Try the next transport
                     // Clear the negotiation response so we know to re-negotiate.
@@ -428,16 +525,26 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
         {
             if (transportExceptions.Count > 0)
             {
-                throw new AggregateException("Unable to connect to the server with any of the available transports.", transportExceptions);
+                throw new AggregateException(
+                    "Unable to connect to the server with any of the available transports.",
+                    transportExceptions
+                );
             }
             else
             {
-                throw new NoTransportSupportedException("None of the transports supported by the client are supported by the server.");
+                throw new NoTransportSupportedException(
+                    "None of the transports supported by the client are supported by the server."
+                );
             }
         }
     }
 
-    private async Task<NegotiationResponse> NegotiateAsync(Uri url, HttpClient httpClient, ILogger logger, CancellationToken cancellationToken)
+    private async Task<NegotiationResponse> NegotiateAsync(
+        Uri url,
+        HttpClient httpClient,
+        ILogger logger,
+        CancellationToken cancellationToken
+    )
     {
         try
         {
@@ -456,7 +563,10 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
             }
             else
             {
-                uri = Utils.AppendQueryString(urlBuilder.Uri, $"negotiateVersion={_protocolVersionNumber}");
+                uri = Utils.AppendQueryString(
+                    urlBuilder.Uri,
+                    $"negotiateVersion={_protocolVersionNumber}"
+                );
             }
 
             using (var request = new HttpRequestMessage(HttpMethod.Post, uri))
@@ -468,11 +578,21 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
                 // rather than buffer the entire response. This gives a small perf boost.
                 // Note that it is important to dispose of the response when doing this to
                 // avoid leaving the connection open.
-                using (var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
+                using (
+                    var response = await httpClient
+                        .SendAsync(
+                            request,
+                            HttpCompletionOption.ResponseHeadersRead,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                )
                 {
                     response.EnsureSuccessStatusCode();
 #pragma warning disable CA2016 // Forward the 'CancellationToken' parameter to methods
-                    var responseBuffer = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+                    var responseBuffer = await response.Content
+                        .ReadAsByteArrayAsync()
+                        .ConfigureAwait(false);
 #pragma warning restore CA2016 // Forward the 'CancellationToken' parameter to methods
                     var negotiateResponse = NegotiateProtocol.ParseResponse(responseBuffer);
                     if (!string.IsNullOrEmpty(negotiateResponse.Error))
@@ -501,7 +621,12 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
         return Utils.AppendQueryString(url, $"id={connectionId}");
     }
 
-    private async Task StartTransport(Uri connectUrl, HttpTransportType transportType, TransferFormat transferFormat, CancellationToken cancellationToken)
+    private async Task StartTransport(
+        Uri connectUrl,
+        HttpTransportType transportType,
+        TransferFormat transferFormat,
+        CancellationToken cancellationToken
+    )
     {
         // Construct the transport
         var transport = _transportFactory.CreateTransport(transportType);
@@ -509,7 +634,9 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
         // Start the transport, giving it one end of the pipe
         try
         {
-            await transport.StartAsync(connectUrl, transferFormat, cancellationToken).ConfigureAwait(false);
+            await transport
+                .StartAsync(connectUrl, transferFormat, cancellationToken)
+                .ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -553,7 +680,8 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
                 }
                 // Some variants of Mono do not support client certs or cookies and will throw NotImplementedException or NotSupportedException
                 // Also WASM doesn't support some settings in the browser
-                catch (Exception ex) when (ex is NotSupportedException || ex is NotImplementedException)
+                catch (Exception ex)
+                    when (ex is NotSupportedException || ex is NotImplementedException)
                 {
                     Log.CookiesNotSupported(_logger);
                 }
@@ -570,7 +698,9 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
 
                 if (_httpConnectionOptions.UseDefaultCredentials != null)
                 {
-                    httpClientHandler.UseDefaultCredentials = _httpConnectionOptions.UseDefaultCredentials.Value;
+                    httpClientHandler.UseDefaultCredentials = _httpConnectionOptions
+                        .UseDefaultCredentials
+                        .Value;
                 }
 
                 if (_httpConnectionOptions.Credentials != null)
@@ -582,10 +712,14 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
             httpMessageHandler = httpClientHandler;
             if (_httpConnectionOptions.HttpMessageHandlerFactory != null)
             {
-                httpMessageHandler = _httpConnectionOptions.HttpMessageHandlerFactory(httpClientHandler);
+                httpMessageHandler = _httpConnectionOptions.HttpMessageHandlerFactory(
+                    httpClientHandler
+                );
                 if (httpMessageHandler == null)
                 {
-                    throw new InvalidOperationException("Configured HttpMessageHandlerFactory did not return a value.");
+                    throw new InvalidOperationException(
+                        "Configured HttpMessageHandlerFactory did not return a value."
+                    );
                 }
             }
 
@@ -607,7 +741,13 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
             foreach (var header in _httpConnectionOptions.Headers)
             {
                 // Check if the key is User-Agent and remove if empty string then replace if it exists.
-                if (string.Equals(header.Key, Constants.UserAgent, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        header.Key,
+                        Constants.UserAgent,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     userSetUserAgent = true;
                     if (string.IsNullOrEmpty(header.Value))
@@ -681,9 +821,18 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
 #endif
     }
 
-    private async Task<NegotiationResponse> GetNegotiationResponseAsync(Uri uri, CancellationToken cancellationToken)
+    private async Task<NegotiationResponse> GetNegotiationResponseAsync(
+        Uri uri,
+        CancellationToken cancellationToken
+    )
     {
-        var negotiationResponse = await NegotiateAsync(uri, _httpClient!, _logger, cancellationToken).ConfigureAwait(false);
+        var negotiationResponse = await NegotiateAsync(
+                uri,
+                _httpClient!,
+                _logger,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
         // If the negotiationVersion is greater than zero then we know that the negotiation response contains a
         // connectionToken that will be required to conenct. Otherwise we just set the connectionId and the
         // connectionToken on the client to the same value.

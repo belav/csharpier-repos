@@ -11,17 +11,19 @@ namespace Microsoft.CodeAnalysis
 {
     internal readonly struct GeneratorDriverState
     {
-        internal GeneratorDriverState(ParseOptions parseOptions,
-                                      AnalyzerConfigOptionsProvider optionsProvider,
-                                      ImmutableArray<ISourceGenerator> sourceGenerators,
-                                      ImmutableArray<IIncrementalGenerator> incrementalGenerators,
-                                      ImmutableArray<AdditionalText> additionalTexts,
-                                      ImmutableArray<GeneratorState> generatorStates,
-                                      DriverStateTable stateTable,
-                                      SyntaxStore syntaxStore,
-                                      IncrementalGeneratorOutputKind disabledOutputs,
-                                      TimeSpan runtime,
-                                      bool trackIncrementalGeneratorSteps)
+        internal GeneratorDriverState(
+            ParseOptions parseOptions,
+            AnalyzerConfigOptionsProvider optionsProvider,
+            ImmutableArray<ISourceGenerator> sourceGenerators,
+            ImmutableArray<IIncrementalGenerator> incrementalGenerators,
+            ImmutableArray<AdditionalText> additionalTexts,
+            ImmutableArray<GeneratorState> generatorStates,
+            DriverStateTable stateTable,
+            SyntaxStore syntaxStore,
+            IncrementalGeneratorOutputKind disabledOutputs,
+            TimeSpan runtime,
+            bool trackIncrementalGeneratorSteps
+        )
         {
             Generators = sourceGenerators;
             IncrementalGenerators = incrementalGenerators;
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis
             ParseOptions? parseOptions = null,
             AnalyzerConfigOptionsProvider? optionsProvider = null,
             IncrementalGeneratorOutputKind? disabledOutputs = null,
-            TimeSpan? runTime = null)
+            TimeSpan? runTime = null
+        )
         {
             return new GeneratorDriverState(
                 parseOptions ?? this.ParseOptions,
@@ -117,7 +120,7 @@ namespace Microsoft.CodeAnalysis
                 disabledOutputs ?? this.DisabledOutputs,
                 runTime ?? this.RunTime,
                 this.TrackIncrementalSteps
-                );
+            );
         }
     }
 }

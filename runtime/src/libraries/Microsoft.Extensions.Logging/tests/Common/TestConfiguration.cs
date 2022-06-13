@@ -12,8 +12,8 @@ namespace Microsoft.Extensions.Logging.Test
     internal class TestConfiguration : JsonConfigurationProvider
     {
         private Func<string> _json;
-        public TestConfiguration(JsonConfigurationSource source, Func<string> json)
-            : base(source)
+
+        public TestConfiguration(JsonConfigurationSource source, Func<string> json) : base(source)
         {
             _json = json;
         }
@@ -30,7 +30,10 @@ namespace Microsoft.Extensions.Logging.Test
 
         public static ConfigurationRoot Create(Func<string> getJson)
         {
-            var provider = new TestConfiguration(new JsonConfigurationSource { Optional = true }, getJson);
+            var provider = new TestConfiguration(
+                new JsonConfigurationSource { Optional = true },
+                getJson
+            );
             return new ConfigurationRoot(new List<IConfigurationProvider> { provider });
         }
     }

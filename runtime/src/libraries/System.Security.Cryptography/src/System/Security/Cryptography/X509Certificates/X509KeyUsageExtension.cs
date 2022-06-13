@@ -5,21 +5,20 @@ namespace System.Security.Cryptography.X509Certificates
 {
     public sealed class X509KeyUsageExtension : X509Extension
     {
-        public X509KeyUsageExtension()
-            : base(Oids.KeyUsageOid)
+        public X509KeyUsageExtension() : base(Oids.KeyUsageOid)
         {
             _decoded = true;
         }
 
         public X509KeyUsageExtension(AsnEncodedData encodedKeyUsage, bool critical)
-            : base(Oids.KeyUsageOid, encodedKeyUsage.RawData, critical)
-        {
-        }
+            : base(Oids.KeyUsageOid, encodedKeyUsage.RawData, critical) { }
 
         public X509KeyUsageExtension(X509KeyUsageFlags keyUsages, bool critical)
-            : base(Oids.KeyUsageOid, X509Pal.Instance.EncodeX509KeyUsageExtension(keyUsages), critical)
-        {
-        }
+            : base(
+                Oids.KeyUsageOid,
+                X509Pal.Instance.EncodeX509KeyUsageExtension(keyUsages),
+                critical
+            ) { }
 
         public X509KeyUsageFlags KeyUsages
         {

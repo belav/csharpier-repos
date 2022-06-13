@@ -62,15 +62,21 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 caps |= capability switch
                 {
                     "Baseline" => EditAndContinueCapabilities.Baseline,
-                    "AddMethodToExistingType" => EditAndContinueCapabilities.AddMethodToExistingType,
-                    "AddStaticFieldToExistingType" => EditAndContinueCapabilities.AddStaticFieldToExistingType,
-                    "AddInstanceFieldToExistingType" => EditAndContinueCapabilities.AddInstanceFieldToExistingType,
+                    "AddMethodToExistingType"
+                        => EditAndContinueCapabilities.AddMethodToExistingType,
+                    "AddStaticFieldToExistingType"
+                        => EditAndContinueCapabilities.AddStaticFieldToExistingType,
+                    "AddInstanceFieldToExistingType"
+                        => EditAndContinueCapabilities.AddInstanceFieldToExistingType,
                     "NewTypeDefinition" => EditAndContinueCapabilities.NewTypeDefinition,
                     "ChangeCustomAttributes" => EditAndContinueCapabilities.ChangeCustomAttributes,
                     "UpdateParameters" => EditAndContinueCapabilities.UpdateParameters,
 
                     // To make it eaiser for  runtimes to specify more broad capabilities
-                    "AddDefinitionToExistingType" => EditAndContinueCapabilities.AddMethodToExistingType | EditAndContinueCapabilities.AddStaticFieldToExistingType | EditAndContinueCapabilities.AddInstanceFieldToExistingType,
+                    "AddDefinitionToExistingType"
+                        => EditAndContinueCapabilities.AddMethodToExistingType
+                            | EditAndContinueCapabilities.AddStaticFieldToExistingType
+                            | EditAndContinueCapabilities.AddInstanceFieldToExistingType,
 
                     _ => EditAndContinueCapabilities.None
                 };

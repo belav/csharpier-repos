@@ -18,9 +18,11 @@ namespace System.Net.Http.Functional.Tests
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 #endif
 
-    public abstract class HttpClientHandler_MaxResponseHeadersLength_Test : HttpClientHandlerTestBase
+    public abstract class HttpClientHandler_MaxResponseHeadersLength_Test
+        : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_MaxResponseHeadersLength_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_MaxResponseHeadersLength_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [InlineData(0)]
@@ -29,7 +31,10 @@ namespace System.Net.Http.Functional.Tests
         {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => handler.MaxResponseHeadersLength = invalidValue);
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "value",
+                    () => handler.MaxResponseHeadersLength = invalidValue
+                );
             }
         }
 
@@ -54,103 +59,144 @@ namespace System.Net.Http.Functional.Tests
                 return;
             }
 
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpClientHandler handler = CreateHttpClientHandler();
-                using HttpClient client = CreateHttpClient(handler);
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
+                {
+                    using HttpClientHandler handler = CreateHttpClientHandler();
+                    using HttpClient client = CreateHttpClient(handler);
 
-                handler.MaxResponseHeadersLength = 1;
-                (await client.GetStreamAsync(uri)).Dispose();
-                Assert.Throws<InvalidOperationException>(() => handler.MaxResponseHeadersLength = 1);
-            },
-            server => server.AcceptConnectionSendResponseAndCloseAsync());
+                    handler.MaxResponseHeadersLength = 1;
+                    (await client.GetStreamAsync(uri)).Dispose();
+                    Assert.Throws<InvalidOperationException>(
+                        () => handler.MaxResponseHeadersLength = 1
+                    );
+                },
+                server => server.AcceptConnectionSendResponseAndCloseAsync()
+            );
         }
 
         [OuterLoop]
         [Fact]
         public async Task InfiniteSingleHeader_ThrowsException()
         {
-            await LoopbackServer.CreateServerAsync(async (server, url) =>
-            {
-                using (HttpClientHandler handler = CreateHttpClientHandler())
-                using (HttpClient client = CreateHttpClient(handler))
+            await LoopbackServer.CreateServerAsync(
+                async (server, url) =>
                 {
-                    Task<HttpResponseMessage> getAsync = client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-                    await server.AcceptConnectionAsync(async connection =>
+                    using (HttpClientHandler handler = CreateHttpClientHandler())
+                    using (HttpClient client = CreateHttpClient(handler))
                     {
-                        var cts = new CancellationTokenSource();
-                        Task serverTask = Task.Run(async delegate
+                        Task<HttpResponseMessage> getAsync = client.GetAsync(
+                            url,
+                            HttpCompletionOption.ResponseHeadersRead
+                        );
+                        await server.AcceptConnectionAsync(async connection =>
                         {
-                            await connection.ReadRequestHeaderAndSendCustomResponseAsync("HTTP/1.1 200 OK\r\nContent-Length: 0\r\nMyInfiniteHeader: ");
-                            try
-                            {
-                                while (!cts.IsCancellationRequested)
+                            var cts = new CancellationTokenSource();
+                            Task serverTask = Task.Run(
+                                async delegate
                                 {
-                                    await connection.WriteStringAsync(new string('s', 16000));
-                                    await Task.Delay(1);
+                                    await connection.ReadRequestHeaderAndSendCustomResponseAsync(
+                                        "HTTP/1.1 200 OK\r\nContent-Length: 0\r\nMyInfiniteHeader: "
+                                    );
+                                    try
+                                    {
+                                        while (!cts.IsCancellationRequested)
+                                        {
+                                            await connection.WriteStringAsync(
+                                                new string('s', 16000)
+                                            );
+                                            await Task.Delay(1);
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        _output.WriteLine(
+                                            $"Ignored exception:{Environment.NewLine}{ex}"
+                                        );
+                                    }
                                 }
-                            }
-                            catch (Exception ex)
-                            {
-                                _output.WriteLine($"Ignored exception:{Environment.NewLine}{ex}");
-                            }
-                        });
+                            );
 
-                        Exception e = await Assert.ThrowsAsync<HttpRequestException>(() => getAsync);
-                        cts.Cancel();
-                        if (!IsWinHttpHandler)
-                        {
-                            Assert.Contains((handler.MaxResponseHeadersLength * 1024).ToString(), e.ToString());
-                        }
-                        await serverTask;
-                    });
+                            Exception e = await Assert.ThrowsAsync<HttpRequestException>(
+                                () => getAsync
+                            );
+                            cts.Cancel();
+                            if (!IsWinHttpHandler)
+                            {
+                                Assert.Contains(
+                                    (handler.MaxResponseHeadersLength * 1024).ToString(),
+                                    e.ToString()
+                                );
+                            }
+                            await serverTask;
+                        });
+                    }
                 }
-            });
+            );
         }
 
         [OuterLoop]
         [Theory, MemberData(nameof(ResponseWithManyHeadersData))]
-        public async Task ThresholdExceeded_ThrowsException(string responseHeaders, int? maxResponseHeadersLength, bool shouldSucceed)
+        public async Task ThresholdExceeded_ThrowsException(
+            string responseHeaders,
+            int? maxResponseHeadersLength,
+            bool shouldSucceed
+        )
         {
-            await LoopbackServer.CreateServerAsync(async (server, url) =>
-            {
-                using (HttpClientHandler handler = CreateHttpClientHandler())
-                using (HttpClient client = CreateHttpClient(handler))
+            await LoopbackServer.CreateServerAsync(
+                async (server, url) =>
                 {
-                    if (maxResponseHeadersLength.HasValue)
+                    using (HttpClientHandler handler = CreateHttpClientHandler())
+                    using (HttpClient client = CreateHttpClient(handler))
                     {
-                        handler.MaxResponseHeadersLength = maxResponseHeadersLength.Value;
-                    }
-                    Task<HttpResponseMessage> getAsync = client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-
-                    await server.AcceptConnectionAsync(async connection =>
-                    {
-                        Task serverTask = connection.ReadRequestHeaderAndSendCustomResponseAsync(responseHeaders);
-
-                        if (shouldSucceed)
+                        if (maxResponseHeadersLength.HasValue)
                         {
-                            (await getAsync).Dispose();
-                            await serverTask;
+                            handler.MaxResponseHeadersLength = maxResponseHeadersLength.Value;
                         }
-                        else
+                        Task<HttpResponseMessage> getAsync = client.GetAsync(
+                            url,
+                            HttpCompletionOption.ResponseHeadersRead
+                        );
+
+                        await server.AcceptConnectionAsync(async connection =>
                         {
-                            Exception e = await Assert.ThrowsAsync<HttpRequestException>(() => getAsync);
-                            if (!IsWinHttpHandler)
+                            Task serverTask =
+                                connection.ReadRequestHeaderAndSendCustomResponseAsync(
+                                    responseHeaders
+                                );
+
+                            if (shouldSucceed)
                             {
-                                Assert.Contains((handler.MaxResponseHeadersLength * 1024).ToString(), e.ToString());
-                            }
-                            try
-                            {
+                                (await getAsync).Dispose();
                                 await serverTask;
                             }
-                            catch (Exception ex)
+                            else
                             {
-                                _output.WriteLine($"Ignored exception:{Environment.NewLine}{ex}");
+                                Exception e = await Assert.ThrowsAsync<HttpRequestException>(
+                                    () => getAsync
+                                );
+                                if (!IsWinHttpHandler)
+                                {
+                                    Assert.Contains(
+                                        (handler.MaxResponseHeadersLength * 1024).ToString(),
+                                        e.ToString()
+                                    );
+                                }
+                                try
+                                {
+                                    await serverTask;
+                                }
+                                catch (Exception ex)
+                                {
+                                    _output.WriteLine(
+                                        $"Ignored exception:{Environment.NewLine}{ex}"
+                                    );
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-            });
+            );
         }
 
         public static IEnumerable<object[]> ResponseWithManyHeadersData
@@ -161,9 +207,24 @@ namespace System.Net.Http.Functional.Tests
                 {
                     int actualSize = max.HasValue ? max.Value : 64;
 
-                    yield return new object[] { GenerateLargeResponseHeaders(actualSize * 1024 - 1), max, true }; // Small enough
-                    yield return new object[] { GenerateLargeResponseHeaders(actualSize * 1024), max, true }; // Just right
-                    yield return new object[] { GenerateLargeResponseHeaders(actualSize * 1024 + 1), max, false }; // Too big
+                    yield return new object[]
+                    {
+                        GenerateLargeResponseHeaders(actualSize * 1024 - 1),
+                        max,
+                        true
+                    }; // Small enough
+                    yield return new object[]
+                    {
+                        GenerateLargeResponseHeaders(actualSize * 1024),
+                        max,
+                        true
+                    }; // Just right
+                    yield return new object[]
+                    {
+                        GenerateLargeResponseHeaders(actualSize * 1024 + 1),
+                        max,
+                        false
+                    }; // Too big
                 }
             }
         }

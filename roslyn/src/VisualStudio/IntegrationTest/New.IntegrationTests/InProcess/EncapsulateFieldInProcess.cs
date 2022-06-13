@@ -19,7 +19,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             // Cancellation is not currently supported by SendAsync
             _ = cancellationToken;
 
-            return TestServices.Input.SendAsync(new KeyPress(VirtualKey.R, ShiftState.Ctrl), new KeyPress(VirtualKey.E, ShiftState.Ctrl));
+            return TestServices.Input.SendAsync(
+                new KeyPress(VirtualKey.R, ShiftState.Ctrl),
+                new KeyPress(VirtualKey.E, ShiftState.Ctrl)
+            );
         }
     }
 }

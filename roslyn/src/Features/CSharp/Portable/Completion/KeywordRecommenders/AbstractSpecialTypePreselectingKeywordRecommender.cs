@@ -8,23 +8,32 @@ using Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
-    internal abstract class AbstractSpecialTypePreselectingKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
+    internal abstract class AbstractSpecialTypePreselectingKeywordRecommender
+        : AbstractSyntacticSingleKeywordRecommender
     {
         public AbstractSpecialTypePreselectingKeywordRecommender(
             SyntaxKind keywordKind,
             bool isValidInPreprocessorContext = false,
-            bool shouldFormatOnCommit = false)
-            : base(keywordKind, isValidInPreprocessorContext, shouldFormatOnCommit)
-        {
-        }
+            bool shouldFormatOnCommit = false
+        ) : base(keywordKind, isValidInPreprocessorContext, shouldFormatOnCommit) { }
 
         protected abstract SpecialType SpecialType { get; }
-        protected abstract bool IsValidContextWorker(int position, CSharpSyntaxContext context, CancellationToken cancellationToken);
+        protected abstract bool IsValidContextWorker(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        );
 
-        protected override bool ShouldPreselect(CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => context.InferredTypes.Any(t => t.SpecialType == SpecialType);
+        protected override bool ShouldPreselect(
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) => context.InferredTypes.Any(t => t.SpecialType == SpecialType);
 
-        protected sealed override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected sealed override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             // Filter out all special-types from locations where we think we only want something task-like.
             if (context.IsInTaskLikeTypeContext)

@@ -19,12 +19,16 @@ namespace Internal.Cryptography.Pal
         {
             public ECDsa DecodeECDsaPublicKey(ICertificatePal? certificatePal)
             {
-                return new ECDsaImplementation.ECDsaSecurityTransforms(DecodeECPublicKey(certificatePal));
+                return new ECDsaImplementation.ECDsaSecurityTransforms(
+                    DecodeECPublicKey(certificatePal)
+                );
             }
 
             public ECDiffieHellman DecodeECDiffieHellmanPublicKey(ICertificatePal? certificatePal)
             {
-                return new ECDiffieHellmanImplementation.ECDiffieHellmanSecurityTransforms(DecodeECPublicKey(certificatePal));
+                return new ECDiffieHellmanImplementation.ECDiffieHellmanSecurityTransforms(
+                    DecodeECPublicKey(certificatePal)
+                );
             }
 
             private static SafeSecKeyRefHandle DecodeECPublicKey(ICertificatePal? certificatePal)
@@ -36,7 +40,9 @@ namespace Internal.Cryptography.Pal
                     throw new NotSupportedException(SR.NotSupported_KeyAlgorithm);
 
                 AppleCertificatePal applePal = (AppleCertificatePal)certificatePal;
-                SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(applePal.CertificateHandle);
+                SafeSecKeyRefHandle key = Interop.AppleCrypto.X509GetPublicKey(
+                    applePal.CertificateHandle
+                );
 
                 // If X509GetPublicKey uses the new SecCertificateCopyKey API it can return an invalid
                 // key reference for unsupported algorithms. This currently happens for the BrainpoolP160r1

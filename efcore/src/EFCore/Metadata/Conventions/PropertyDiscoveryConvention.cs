@@ -11,9 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class PropertyDiscoveryConvention :
-    IEntityTypeAddedConvention,
-    IEntityTypeBaseTypeChangedConvention
+public class PropertyDiscoveryConvention
+    : IEntityTypeAddedConvention,
+        IEntityTypeBaseTypeChangedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="PropertyDiscoveryConvention" />.
@@ -36,8 +36,8 @@ public class PropertyDiscoveryConvention :
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
-        => Process(entityTypeBuilder);
+        IConventionContext<IConventionEntityTypeBuilder> context
+    ) => Process(entityTypeBuilder);
 
     /// <summary>
     ///     Called after the base type of an entity type changes.
@@ -50,11 +50,13 @@ public class PropertyDiscoveryConvention :
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionEntityType? newBaseType,
         IConventionEntityType? oldBaseType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
-        if ((newBaseType == null
-                || oldBaseType != null)
-            && entityTypeBuilder.Metadata.BaseType == newBaseType)
+        if (
+            (newBaseType == null || oldBaseType != null)
+            && entityTypeBuilder.Metadata.BaseType == newBaseType
+        )
         {
             Process(entityTypeBuilder);
         }

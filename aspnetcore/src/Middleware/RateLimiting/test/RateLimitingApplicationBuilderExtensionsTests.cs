@@ -10,11 +10,12 @@ namespace Microsoft.AspNetCore.RateLimiting;
 
 public class RateLimitingApplicationBuilderExtensionsTests : LoggedTest
 {
-
     [Fact]
     public void UseRateLimiter_ThrowsOnNullAppBuilder()
     {
-        Assert.Throws<ArgumentNullException>(() => RateLimitingApplicationBuilderExtensions.UseRateLimiter(null));
+        Assert.Throws<ArgumentNullException>(
+            () => RateLimitingApplicationBuilderExtensions.UseRateLimiter(null)
+        );
     }
 
     [Fact]
@@ -36,7 +37,9 @@ public class RateLimitingApplicationBuilderExtensionsTests : LoggedTest
         var services = new ServiceCollection();
         services.Configure<RateLimiterOptions>(options =>
         {
-            options.Limiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(false));
+            options.Limiter = new TestPartitionedRateLimiter<HttpContext>(
+                new TestRateLimiter(false)
+            );
             options.DefaultRejectionStatusCode = 404;
         });
         services.AddLogging();

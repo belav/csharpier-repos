@@ -9,18 +9,16 @@ namespace ILCompiler.DependencyAnalysis
 
         public ISymbolNode Target
         {
-            get
-            {
-                return _target;
-            }
+            get { return _target; }
         }
-        
+
         public JumpStubNode(ISymbolNode target)
         {
             _target = target;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override int ClassCode => 737788182;
     }

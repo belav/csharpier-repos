@@ -19,7 +19,8 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
     internal static readonly object StreamPersistentStateKey = new object();
 
     // Internal for unit testing
-    internal readonly Dictionary<long, IHttp3Stream> _streams = new Dictionary<long, IHttp3Stream>();
+    internal readonly Dictionary<long, IHttp3Stream> _streams =
+        new Dictionary<long, IHttp3Stream>();
     internal IHttp3StreamLifetimeHandler _streamLifetimeHandler;
 
     // The highest opened request stream ID is sent with GOAWAY. The GOAWAY
@@ -50,12 +51,14 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
         _context = context;
         _streamLifetimeHandler = this;
 
-        _errorCodeFeature = context.ConnectionFeatures.GetRequiredFeature<IProtocolErrorCodeFeature>();
+        _errorCodeFeature =
+            context.ConnectionFeatures.GetRequiredFeature<IProtocolErrorCodeFeature>();
 
         var httpLimits = context.ServiceContext.ServerOptions.Limits;
 
         _serverSettings.HeaderTableSize = (uint)httpLimits.Http3.HeaderTableSize;
-        _serverSettings.MaxRequestHeaderFieldSectionSize = (uint)httpLimits.MaxRequestHeadersTotalSize;
+        _serverSettings.MaxRequestHeaderFieldSectionSize = (uint)
+            httpLimits.MaxRequestHeadersTotalSize;
     }
 
     private void UpdateHighestOpenedRequestStreamId(long streamId)
@@ -73,7 +76,8 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
     }
 
     // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-5.2-2
-    private long GetCurrentGoAwayStreamId() => Interlocked.Read(ref _highestOpenedRequestStreamId) + 4;
+    private long GetCurrentGoAwayStreamId() =>
+        Interlocked.Read(ref _highestOpenedRequestStreamId) + 4;
 
     private KestrelTrace Log => _context.ServiceContext.Log;
     public KestrelServerLimits Limits => _context.ServiceContext.ServerOptions.Limits;
@@ -83,8 +87,7 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
     public Http3ControlStream? DecoderStream { get; set; }
     public string ConnectionId => _context.ConnectionId;
 
-    public void StopProcessingNextRequest()
-        => StopProcessingNextRequest(serverInitiated: true);
+    public void StopProcessingNextRequest() => StopProcessingNextRequest(serverInitiated: true);
 
     public void StopProcessingNextRequest(bool serverInitiated)
     {
@@ -96,9 +99,17 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
 
         if (!previousState)
         {
-            var initiator = serverInitiated ? GracefulCloseInitiator.Server : GracefulCloseInitiator.Client;
+            var initiator = serverInitiated
+                ? GracefulCloseInitiator.Server
+                : GracefulCloseInitiator.Client;
 
-            if (Interlocked.CompareExchange(ref _gracefulCloseInitiator, initiator, GracefulCloseInitiator.None) == GracefulCloseInitiator.None)
+            if (
+                Interlocked.CompareExchange(
+                    ref _gracefulCloseInitiator,
+                    initiator,
+                    GracefulCloseInitiator.None
+                ) == GracefulCloseInitiator.None
+            )
             {
                 // Break out of AcceptStreams so connection state can be updated.
                 _acceptStreamsCts.Cancel();
@@ -117,7 +128,9 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
         if (!previousState)
         {
             TryStopAcceptingStreams();
-            _multiplexedContext.Abort(new ConnectionAbortedException(CoreStrings.ConnectionAbortedByClient));
+            _multiplexedContext.Abort(
+                new ConnectionAbortedException(CoreStrings.ConnectionAbortedByClient)
+            );
         }
     }
 
@@ -190,25 +203,47 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
                     if (stream.StreamTimeoutTicks == default)
                     {
                         // On expiration overflow, use max value.
-                        var expirationTicks = ticks + _context.ServiceContext.ServerOptions.Limits.RequestHeadersTimeout.Ticks;
-                        stream.StreamTimeoutTicks = expirationTicks >= 0 ? expirationTicks : long.MaxValue;
+                        var expirationTicks =
+                            ticks
+                            + _context
+                                .ServiceContext
+                                .ServerOptions
+                                .Limits
+                                .RequestHeadersTimeout
+                                .Ticks;
+                        stream.StreamTimeoutTicks =
+                            expirationTicks >= 0 ? expirationTicks : long.MaxValue;
                     }
 
                     if (stream.StreamTimeoutTicks < ticks)
                     {
                         if (stream.IsRequestStream)
                         {
-                            stream.Abort(new ConnectionAbortedException(CoreStrings.BadRequest_RequestHeadersTimeout), Http3ErrorCode.RequestRejected);
+                            stream.Abort(
+                                new ConnectionAbortedException(
+                                    CoreStrings.BadRequest_RequestHeadersTimeout
+                                ),
+                                Http3ErrorCode.RequestRejected
+                            );
                         }
                         else
                         {
-                            stream.Abort(new ConnectionAbortedException(CoreStrings.Http3ControlStreamHeaderTimeout), Http3ErrorCode.StreamCreationError);
+                            stream.Abort(
+                                new ConnectionAbortedException(
+                                    CoreStrings.Http3ControlStreamHeaderTimeout
+                                ),
+                                Http3ErrorCode.StreamCreationError
+                            );
                         }
                     }
                 }
                 else if (stream.IsDraining)
                 {
-                    var minDataRate = _context.ServiceContext.ServerOptions.Limits.MinResponseDataRate;
+                    var minDataRate = _context
+                        .ServiceContext
+                        .ServerOptions
+                        .Limits
+                        .MinResponseDataRate;
                     if (minDataRate == null)
                     {
                         continue;
@@ -216,21 +251,31 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
 
                     if (stream.StreamTimeoutTicks == default)
                     {
-                        stream.StreamTimeoutTicks = _context.TimeoutControl.GetResponseDrainDeadline(ticks, minDataRate);
+                        stream.StreamTimeoutTicks =
+                            _context.TimeoutControl.GetResponseDrainDeadline(ticks, minDataRate);
                     }
 
                     if (stream.StreamTimeoutTicks < ticks)
                     {
                         // Cancel connection to be consistent with other data rate limits.
-                        Log.ResponseMinimumDataRateNotSatisfied(_context.ConnectionId, stream.TraceIdentifier);
-                        Abort(new ConnectionAbortedException(CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied), Http3ErrorCode.InternalError);
+                        Log.ResponseMinimumDataRateNotSatisfied(
+                            _context.ConnectionId,
+                            stream.TraceIdentifier
+                        );
+                        Abort(
+                            new ConnectionAbortedException(
+                                CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
+                            ),
+                            Http3ErrorCode.InternalError
+                        );
                     }
                 }
             }
         }
     }
 
-    public async Task ProcessRequestsAsync<TContext>(IHttpApplication<TContext> application) where TContext : notnull
+    public async Task ProcessRequestsAsync<TContext>(IHttpApplication<TContext> application)
+        where TContext : notnull
     {
         // An endpoint MAY avoid creating an encoder stream if it's not going to
         // be used(for example if its encoder doesn't wish to use the dynamic
@@ -278,7 +323,8 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
                         continue;
                     }
 
-                    var streamDirectionFeature = streamContext.Features.Get<IStreamDirectionFeature>();
+                    var streamDirectionFeature =
+                        streamContext.Features.Get<IStreamDirectionFeature>();
                     var streamIdFeature = streamContext.Features.Get<IStreamIdFeature>();
 
                     Debug.Assert(streamDirectionFeature != null);
@@ -287,7 +333,10 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
                     if (!streamDirectionFeature.CanWrite)
                     {
                         // Unidirectional stream
-                        var stream = new Http3ControlStream<TContext>(application, CreateHttpStreamContext(streamContext));
+                        var stream = new Http3ControlStream<TContext>(
+                            application,
+                            CreateHttpStreamContext(streamContext)
+                        );
                         _streamLifetimeHandler.OnStreamCreated(stream);
 
                         ThreadPool.UnsafeQueueUserWorkItem(stream, preferLocal: false);
@@ -300,8 +349,14 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
                         if (_gracefulCloseStarted)
                         {
                             // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-4.1.2-3
-                            streamContext.Features.GetRequiredFeature<IProtocolErrorCodeFeature>().Error = (long)Http3ErrorCode.RequestRejected;
-                            streamContext.Abort(new ConnectionAbortedException("HTTP/3 connection is closing and no longer accepts new requests."));
+                            streamContext.Features
+                                .GetRequiredFeature<IProtocolErrorCodeFeature>()
+                                .Error = (long)Http3ErrorCode.RequestRejected;
+                            streamContext.Abort(
+                                new ConnectionAbortedException(
+                                    "HTTP/3 connection is closing and no longer accepts new requests."
+                                )
+                            );
                             await streamContext.DisposeAsync();
 
                             continue;
@@ -310,16 +365,28 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
                         // Request stream IDs are tracked.
                         UpdateHighestOpenedRequestStreamId(streamIdFeature.StreamId);
 
-                        var persistentStateFeature = streamContext.Features.Get<IPersistentStateFeature>();
-                        Debug.Assert(persistentStateFeature != null, $"Required {nameof(IPersistentStateFeature)} not on stream context.");
+                        var persistentStateFeature =
+                            streamContext.Features.Get<IPersistentStateFeature>();
+                        Debug.Assert(
+                            persistentStateFeature != null,
+                            $"Required {nameof(IPersistentStateFeature)} not on stream context."
+                        );
 
                         Http3Stream<TContext> stream;
 
                         // Check whether there is an existing HTTP/3 stream on the transport stream.
                         // A stream will only be cached if the transport stream itself is reused.
-                        if (!persistentStateFeature.State.TryGetValue(StreamPersistentStateKey, out var s))
+                        if (
+                            !persistentStateFeature.State.TryGetValue(
+                                StreamPersistentStateKey,
+                                out var s
+                            )
+                        )
                         {
-                            stream = new Http3Stream<TContext>(application, CreateHttpStreamContext(streamContext));
+                            stream = new Http3Stream<TContext>(
+                                application,
+                                CreateHttpStreamContext(streamContext)
+                            );
                             persistentStateFeature.State.Add(StreamPersistentStateKey, stream);
                         }
                         else
@@ -330,7 +397,10 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
 
                         _streamLifetimeHandler.OnStreamCreated(stream);
 
-                        KestrelEventSource.Log.RequestQueuedStart(stream, AspNetCore.Http.HttpProtocol.Http3);
+                        KestrelEventSource.Log.RequestQueuedStart(
+                            stream,
+                            AspNetCore.Http.HttpProtocol.Http3
+                        );
                         ThreadPool.UnsafeQueueUserWorkItem(stream, preferLocal: false);
                     }
                 }
@@ -389,7 +459,10 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
                 {
                     foreach (var stream in _streams.Values)
                     {
-                        stream.Abort(CreateConnectionAbortError(error, clientAbort), (Http3ErrorCode)_errorCodeFeature.Error);
+                        stream.Abort(
+                            CreateConnectionAbortError(error, clientAbort),
+                            (Http3ErrorCode)_errorCodeFeature.Error
+                        );
                     }
                 }
 
@@ -403,7 +476,10 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
                 }
 
                 // Complete
-                Abort(CreateConnectionAbortError(error, clientAbort), (Http3ErrorCode)_errorCodeFeature.Error);
+                Abort(
+                    CreateConnectionAbortError(error, clientAbort),
+                    (Http3ErrorCode)_errorCodeFeature.Error
+                );
 
                 // Wait for active requests to complete.
                 while (_activeRequestCount > 0)
@@ -421,16 +497,20 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
             finally
             {
                 // Connection can close without processing any request streams.
-                var streamId = _highestOpenedRequestStreamId != DefaultHighestOpenedRequestStreamId
-                    ? _highestOpenedRequestStreamId
-                    : (long?)null;
+                var streamId =
+                    _highestOpenedRequestStreamId != DefaultHighestOpenedRequestStreamId
+                        ? _highestOpenedRequestStreamId
+                        : (long?)null;
 
                 Log.Http3ConnectionClosed(_context.ConnectionId, streamId);
             }
         }
     }
 
-    private static ConnectionAbortedException CreateConnectionAbortError(Exception? error, bool clientAbort)
+    private static ConnectionAbortedException CreateConnectionAbortError(
+        Exception? error,
+        bool clientAbort
+    )
     {
         if (error is ConnectionAbortedException abortedException)
         {
@@ -460,7 +540,8 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
             _streamLifetimeHandler,
             streamContext,
             _clientSettings,
-            _serverSettings);
+            _serverSettings
+        );
         httpConnectionContext.TimeoutControl = _context.TimeoutControl;
         httpConnectionContext.Transport = streamContext.Transport;
 
@@ -489,7 +570,10 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
                 _errorCodeFeature.Error = (long)Http3ErrorCode.NoError;
                 Log.Http3ConnectionClosing(_context.ConnectionId);
 
-                if (_gracefulCloseInitiator == GracefulCloseInitiator.Server && activeRequestCount > 0)
+                if (
+                    _gracefulCloseInitiator == GracefulCloseInitiator.Server
+                    && activeRequestCount > 0
+                )
                 {
                     // Go away with largest streamid to initiate graceful shutdown.
                     SendGoAwayAsync(VariableLengthIntegerHelper.EightByteLimit).Preserve();
@@ -514,18 +598,28 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
         {
             Log.Http3OutboundControlStreamError(ConnectionId, ex);
 
-            var connectionError = new Http3ConnectionErrorException(CoreStrings.Http3ControlStreamErrorInitializingOutbound, Http3ErrorCode.ClosedCriticalStream);
+            var connectionError = new Http3ConnectionErrorException(
+                CoreStrings.Http3ControlStreamErrorInitializingOutbound,
+                Http3ErrorCode.ClosedCriticalStream
+            );
             Log.Http3ConnectionError(ConnectionId, connectionError);
 
             // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-6.2.1
-            Abort(new ConnectionAbortedException(connectionError.Message, connectionError), connectionError.ErrorCode);
+            Abort(
+                new ConnectionAbortedException(connectionError.Message, connectionError),
+                connectionError.ErrorCode
+            );
         }
     }
 
-    private async ValueTask<Http3ControlStream> CreateNewUnidirectionalStreamAsync<TContext>(IHttpApplication<TContext> application) where TContext : notnull
+    private async ValueTask<Http3ControlStream> CreateNewUnidirectionalStreamAsync<TContext>(
+        IHttpApplication<TContext> application
+    ) where TContext : notnull
     {
         var features = new FeatureCollection();
-        features.Set<IStreamDirectionFeature>(new DefaultStreamDirectionFeature(canRead: false, canWrite: true));
+        features.Set<IStreamDirectionFeature>(
+            new DefaultStreamDirectionFeature(canRead: false, canWrite: true)
+        );
         var streamContext = await _multiplexedContext.ConnectAsync(features);
         var httpConnectionContext = new Http3StreamContext(
             _multiplexedContext.ConnectionId,
@@ -540,7 +634,8 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
             _streamLifetimeHandler,
             streamContext,
             _clientSettings,
-            _serverSettings);
+            _serverSettings
+        );
         httpConnectionContext.TimeoutControl = _context.TimeoutControl;
         httpConnectionContext.Transport = streamContext.Transport;
 
@@ -645,7 +740,10 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
         Abort(new ConnectionAbortedException(ex.Message, ex), ex.ErrorCode);
     }
 
-    void IHttp3StreamLifetimeHandler.OnInboundControlStreamSetting(Http3SettingType type, long value)
+    void IHttp3StreamLifetimeHandler.OnInboundControlStreamSetting(
+        Http3SettingType type,
+        long value
+    )
     {
         switch (type)
         {
@@ -668,7 +766,12 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
 
     public void HandleRequestHeadersTimeout()
     {
-        Log.ConnectionBadRequest(ConnectionId, KestrelBadHttpRequestException.GetException(RequestRejectionReason.RequestHeadersTimeout));
+        Log.ConnectionBadRequest(
+            ConnectionId,
+            KestrelBadHttpRequestException.GetException(
+                RequestRejectionReason.RequestHeadersTimeout
+            )
+        );
         Abort(new ConnectionAbortedException(CoreStrings.BadRequest_RequestHeadersTimeout));
     }
 
@@ -676,7 +779,11 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
     {
         Debug.Assert(Limits.MinRequestBodyDataRate != null);
 
-        Log.RequestBodyMinimumDataRateNotSatisfied(ConnectionId, null, Limits.MinRequestBodyDataRate.BytesPerSecond);
+        Log.RequestBodyMinimumDataRateNotSatisfied(
+            ConnectionId,
+            null,
+            Limits.MinRequestBodyDataRate.BytesPerSecond
+        );
         Abort(new ConnectionAbortedException(CoreStrings.BadRequest_RequestBodyTimeout));
     }
 
@@ -685,7 +792,10 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
         TryStopAcceptingStreams();
 
         // Abort the connection using the error code the client used. For a graceful close, this should be H3_NO_ERROR.
-        Abort(new ConnectionAbortedException(CoreStrings.ConnectionAbortedByClient), (Http3ErrorCode)_errorCodeFeature.Error);
+        Abort(
+            new ConnectionAbortedException(CoreStrings.ConnectionAbortedByClient),
+            (Http3ErrorCode)_errorCodeFeature.Error
+        );
     }
 
     private static class GracefulCloseInitiator

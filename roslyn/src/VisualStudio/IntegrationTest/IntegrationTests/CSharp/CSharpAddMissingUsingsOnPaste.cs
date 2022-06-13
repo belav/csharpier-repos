@@ -16,22 +16,28 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpAddMissingUsingsOnPaste : AbstractEditorTest
     {
         public CSharpAddMissingUsingsOnPaste(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpAddMissingUsingsOnPaste))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpAddMissingUsingsOnPaste)) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.AddMissingImports)]
         public void VerifyDisabled()
         {
-            var project = new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddFile(project, "Example.cs", contents: @"
+            var project =
+                new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(
+                    ProjectName
+                );
+            VisualStudio.SolutionExplorer.AddFile(
+                project,
+                "Example.cs",
+                contents: @"
 public class Example
 {
 }
-");
-            SetUpEditor(@"
+"
+            );
+            SetUpEditor(
+                @"
 using System;
 
 class Program
@@ -41,12 +47,19 @@ class Program
     }
 
     $$
-}");
-            VisualStudio.Workspace.SetFeatureOption(FeatureOnOffOptions.AddImportsOnPaste.Feature, FeatureOnOffOptions.AddImportsOnPaste.Name, LanguageNames.CSharp, "False");
+}"
+            );
+            VisualStudio.Workspace.SetFeatureOption(
+                FeatureOnOffOptions.AddImportsOnPaste.Feature,
+                FeatureOnOffOptions.AddImportsOnPaste.Name,
+                LanguageNames.CSharp,
+                "False"
+            );
 
             VisualStudio.Editor.Paste(@"Task DoThingAsync() => Task.CompletedTask;");
 
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 using System;
 
 class Program
@@ -56,19 +69,28 @@ class Program
     }
 
     Task DoThingAsync() => Task.CompletedTask;
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.AddMissingImports)]
         public void VerifyDisabledWithNull()
         {
-            var project = new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddFile(project, "Example.cs", contents: @"
+            var project =
+                new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(
+                    ProjectName
+                );
+            VisualStudio.SolutionExplorer.AddFile(
+                project,
+                "Example.cs",
+                contents: @"
 public class Example
 {
 }
-");
-            SetUpEditor(@"
+"
+            );
+            SetUpEditor(
+                @"
 using System;
 
 class Program
@@ -78,12 +100,19 @@ class Program
     }
 
     $$
-}");
-            VisualStudio.Workspace.SetFeatureOption(FeatureOnOffOptions.AddImportsOnPaste.Feature, FeatureOnOffOptions.AddImportsOnPaste.Name, LanguageNames.CSharp, valueString: null);
+}"
+            );
+            VisualStudio.Workspace.SetFeatureOption(
+                FeatureOnOffOptions.AddImportsOnPaste.Feature,
+                FeatureOnOffOptions.AddImportsOnPaste.Name,
+                LanguageNames.CSharp,
+                valueString: null
+            );
 
             VisualStudio.Editor.Paste(@"Task DoThingAsync() => Task.CompletedTask;");
 
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 using System;
 
 class Program
@@ -93,19 +122,28 @@ class Program
     }
 
     Task DoThingAsync() => Task.CompletedTask;
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.AddMissingImports)]
         public void VerifyAddImportsOnPaste()
         {
-            var project = new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddFile(project, "Example.cs", contents: @"
+            var project =
+                new Microsoft.VisualStudio.IntegrationTest.Utilities.Common.ProjectUtils.Project(
+                    ProjectName
+                );
+            VisualStudio.SolutionExplorer.AddFile(
+                project,
+                "Example.cs",
+                contents: @"
 public class Example
 {
 }
-");
-            SetUpEditor(@"
+"
+            );
+            SetUpEditor(
+                @"
 using System;
 
 class Program
@@ -115,15 +153,22 @@ class Program
     }
 
     $$
-}");
+}"
+            );
 
             using var telemetry = VisualStudio.EnableTestTelemetryChannel();
 
-            VisualStudio.Workspace.SetFeatureOption(FeatureOnOffOptions.AddImportsOnPaste.Feature, FeatureOnOffOptions.AddImportsOnPaste.Name, LanguageNames.CSharp, "True");
+            VisualStudio.Workspace.SetFeatureOption(
+                FeatureOnOffOptions.AddImportsOnPaste.Feature,
+                FeatureOnOffOptions.AddImportsOnPaste.Name,
+                LanguageNames.CSharp,
+                "True"
+            );
 
             VisualStudio.Editor.Paste(@"Task DoThingAsync() => Task.CompletedTask;");
 
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -134,7 +179,8 @@ class Program
     }
 
     Task DoThingAsync() => Task.CompletedTask;
-}");
+}"
+            );
             telemetry.VerifyFired("vs/ide/vbcs/commandhandler/paste/importsonpaste");
         }
     }

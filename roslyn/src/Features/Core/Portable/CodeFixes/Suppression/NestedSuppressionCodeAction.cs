@@ -10,8 +10,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 {
     internal abstract class NestedSuppressionCodeAction : CodeAction
     {
-        protected NestedSuppressionCodeAction(string title)
-            => Title = title;
+        protected NestedSuppressionCodeAction(string title) => Title = title;
 
         // Put suppressions at the end of everything.
         internal override CodeActionPriority Priority => CodeActionPriority.Lowest;
@@ -24,10 +23,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
         public static bool IsEquivalenceKeyForGlobalSuppression(string equivalenceKey) =>
             equivalenceKey.StartsWith(FeaturesResources.in_Suppression_File);
+
         public static bool IsEquivalenceKeyForPragmaWarning(string equivalenceKey) =>
             equivalenceKey.StartsWith(FeaturesResources.in_Source);
+
         public static bool IsEquivalenceKeyForRemoveSuppression(string equivalenceKey) =>
             equivalenceKey.StartsWith(FeaturesResources.Remove_Suppression);
+
         public static bool IsEquivalenceKeyForLocalSuppression(string equivalenceKey) =>
             equivalenceKey.StartsWith(FeaturesResources.in_Source_attribute);
     }

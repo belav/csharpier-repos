@@ -24,26 +24,33 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             IReadOnlyList<int> oldSemanticTokens,
             int oldIndex,
             IReadOnlyList<int> newSemanticTokens,
-            int newIndex)
+            int newIndex
+        )
         {
             return oldSemanticTokens[oldIndex] == newSemanticTokens[newIndex];
         }
 
         public static async Task<IReadOnlyList<DiffEdit>> ComputeSemanticTokensEditsAsync(
             int[] oldTokens,
-            int[] newTokens)
+            int[] newTokens
+        )
         {
             using var _1 = ArrayBuilder<DiffEdit>.GetInstance(out var edits);
             using var _2 = ArrayBuilder<Task<ImmutableArray<DiffEdit>>>.GetInstance(out var tasks);
 
             // Partition the token sets into smaller pieces so we can do more processing concurrently.
-            var numSets = Math.Max(oldTokens.Length / MaxArraySize, newTokens.Length / MaxArraySize) + 1;
+            var numSets =
+                Math.Max(oldTokens.Length / MaxArraySize, newTokens.Length / MaxArraySize) + 1;
             for (var i = 0; i < numSets; i++)
             {
                 var setNum = i;
                 var task = Task.Run(() =>
                 {
-                    var (oldTokensSubset, newTokensSubset) = GetTokenSubsets(oldTokens, newTokens, setNum);
+                    var (oldTokensSubset, newTokensSubset) = GetTokenSubsets(
+                        oldTokens,
+                        newTokens,
+                        setNum
+                    );
                     var currentEditSet = s_instance.ComputeDiff(oldTokensSubset, newTokensSubset);
 
                     // Adjust the indices of our results since we partitioned them earlier into smaller sets.
@@ -67,7 +74,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             static (ArraySegment<int> oldTokensSubset, ArraySegment<int> newTokensSubset) GetTokenSubsets(
                 int[] oldTokens,
                 int[] newTokens,
-                int setIndex)
+                int setIndex
+            )
             {
                 var oldTokensSubset = new ArraySegment<int>();
                 var newTokensSubset = new ArraySegment<int>();
@@ -92,7 +100,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             static ImmutableArray<DiffEdit> AdjustEditPositions(
                 int[] oldTokens,
                 int setNum,
-                IReadOnlyList<DiffEdit> currentEditSet)
+                IReadOnlyList<DiffEdit> currentEditSet
+            )
             {
                 var adjustedEdits = currentEditSet.SelectAsArray(edit =>
                 {
@@ -109,7 +118,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
                     return edit.Operation switch
                     {
-                        DiffEdit.Type.Insert => new DiffEdit(DiffEdit.Type.Insert, position, newTextPosition: edit.NewTextPosition + (setNum * MaxArraySize)),
+                        DiffEdit.Type.Insert
+                            => new DiffEdit(
+                                DiffEdit.Type.Insert,
+                                position,
+                                newTextPosition: edit.NewTextPosition + (setNum * MaxArraySize)
+                            ),
                         DiffEdit.Type.Delete => new DiffEdit(DiffEdit.Type.Delete, position, null),
                         _ => throw ExceptionUtilities.UnexpectedValue(edit.Operation),
                     };

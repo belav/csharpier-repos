@@ -93,26 +93,91 @@ namespace System.Tests
                 foreach (string defaultSpecifier in new[] { "G", "G\0", "\0N222", "\0", "", "R" })
                 {
                     yield return new object[] { (uint)0, defaultSpecifier, defaultFormat, "0" };
-                    yield return new object[] { (uint)4567, defaultSpecifier, defaultFormat, "4567" };
-                    yield return new object[] { uint.MaxValue, defaultSpecifier, defaultFormat, "4294967295" };
+                    yield return new object[]
+                    {
+                        (uint)4567,
+                        defaultSpecifier,
+                        defaultFormat,
+                        "4567"
+                    };
+                    yield return new object[]
+                    {
+                        uint.MaxValue,
+                        defaultSpecifier,
+                        defaultFormat,
+                        "4294967295"
+                    };
                 }
 
                 yield return new object[] { (uint)4567, "D", defaultFormat, "4567" };
-                yield return new object[] { (uint)4567, "D18", defaultFormat, "000000000000004567" };
+                yield return new object[]
+                {
+                    (uint)4567,
+                    "D18",
+                    defaultFormat,
+                    "000000000000004567"
+                };
 
                 yield return new object[] { (uint)0x2468, "x", defaultFormat, "2468" };
-                yield return new object[] { (uint)2468, "N", defaultFormat, string.Format("{0:N}", 2468.00) };
-
+                yield return new object[]
+                {
+                    (uint)2468,
+                    "N",
+                    defaultFormat,
+                    string.Format("{0:N}", 2468.00)
+                };
             }
 
             NumberFormatInfo invariantFormat = NumberFormatInfo.InvariantInfo;
-            yield return new object[] { (uint)32, "C100", invariantFormat, "¤32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { (uint)32, "P100", invariantFormat, "3,200.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %" };
-            yield return new object[] { (uint)32, "D100", invariantFormat, "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000032" };
-            yield return new object[] { (uint)32, "E100", invariantFormat, "3.2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001" };
-            yield return new object[] { (uint)32, "F100", invariantFormat, "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { (uint)32, "N100", invariantFormat, "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { (uint)32, "X100", invariantFormat, "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020" };
+            yield return new object[]
+            {
+                (uint)32,
+                "C100",
+                invariantFormat,
+                "¤32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            };
+            yield return new object[]
+            {
+                (uint)32,
+                "P100",
+                invariantFormat,
+                "3,200.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %"
+            };
+            yield return new object[]
+            {
+                (uint)32,
+                "D100",
+                invariantFormat,
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000032"
+            };
+            yield return new object[]
+            {
+                (uint)32,
+                "E100",
+                invariantFormat,
+                "3.2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001"
+            };
+            yield return new object[]
+            {
+                (uint)32,
+                "F100",
+                invariantFormat,
+                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            };
+            yield return new object[]
+            {
+                (uint)32,
+                "N100",
+                invariantFormat,
+                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            };
+            yield return new object[]
+            {
+                (uint)32,
+                "X100",
+                invariantFormat,
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020"
+            };
 
             var customFormat = new NumberFormatInfo()
             {
@@ -134,7 +199,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(ToString_TestData))]
-        public static void ToStringTest(uint i, string format, IFormatProvider provider, string expected)
+        public static void ToStringTest(
+            uint i,
+            string format,
+            IFormatProvider provider,
+            string expected
+        )
         {
             // Format is case insensitive
             string upperFormat = format.ToUpperInvariant();
@@ -177,7 +247,8 @@ namespace System.Tests
             // Reuse all Int32 test data that's relevant
             foreach (object[] objs in Int32Tests.Parse_Valid_TestData())
             {
-                if ((int)objs[3] < 0) continue;
+                if ((int)objs[3] < 0)
+                    continue;
                 yield return new object[] { objs[0], objs[1], objs[2], (uint)(int)objs[3] };
             }
 
@@ -208,14 +279,31 @@ namespace System.Tests
             // And test boundary conditions for UInt32
             yield return new object[] { "4294967295", NumberStyles.Integer, null, uint.MaxValue };
             yield return new object[] { "+4294967295", NumberStyles.Integer, null, uint.MaxValue };
-            yield return new object[] { "  +4294967295  ", NumberStyles.Integer, null, uint.MaxValue };
+            yield return new object[]
+            {
+                "  +4294967295  ",
+                NumberStyles.Integer,
+                null,
+                uint.MaxValue
+            };
             yield return new object[] { "FFFFFFFF", NumberStyles.HexNumber, null, uint.MaxValue };
-            yield return new object[] { "  FFFFFFFF  ", NumberStyles.HexNumber, null, uint.MaxValue };
+            yield return new object[]
+            {
+                "  FFFFFFFF  ",
+                NumberStyles.HexNumber,
+                null,
+                uint.MaxValue
+            };
         }
 
         [Theory]
         [MemberData(nameof(Parse_Valid_TestData))]
-        public static void Parse_Valid(string value, NumberStyles style, IFormatProvider provider, uint expected)
+        public static void Parse_Valid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            uint expected
+        )
         {
             uint result;
 
@@ -259,14 +347,30 @@ namespace System.Tests
             }
 
             // > max value
-            yield return new object[] { "4294967296", NumberStyles.Integer, null, typeof(OverflowException) };
-            yield return new object[] { "100000000", NumberStyles.HexNumber, null, typeof(OverflowException) };
-
+            yield return new object[]
+            {
+                "4294967296",
+                NumberStyles.Integer,
+                null,
+                typeof(OverflowException)
+            };
+            yield return new object[]
+            {
+                "100000000",
+                NumberStyles.HexNumber,
+                null,
+                typeof(OverflowException)
+            };
         }
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void Parse_Invalid(string value, NumberStyles style, IFormatProvider provider, Type exceptionType)
+        public static void Parse_Invalid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            Type exceptionType
+        )
         {
             uint result;
 
@@ -286,7 +390,10 @@ namespace System.Tests
                 // Substitute default NumberFormatInfo
                 Assert.False(uint.TryParse(value, style, new NumberFormatInfo(), out result));
                 Assert.Equal(default, result);
-                Assert.Throws(exceptionType, () => uint.Parse(value, style, new NumberFormatInfo()));
+                Assert.Throws(
+                    exceptionType,
+                    () => uint.Parse(value, style, new NumberFormatInfo())
+                );
             }
 
             // Default style
@@ -304,21 +411,38 @@ namespace System.Tests
         [Theory]
         [InlineData(NumberStyles.HexNumber | NumberStyles.AllowParentheses, null)]
         [InlineData(unchecked((NumberStyles)0xFFFFFC00), "style")]
-        public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(NumberStyles style, string paramName)
+        public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(
+            NumberStyles style,
+            string paramName
+        )
         {
             uint result = 0;
-            AssertExtensions.Throws<ArgumentException>(paramName, () => uint.TryParse("1", style, null, out result));
+            AssertExtensions.Throws<ArgumentException>(
+                paramName,
+                () => uint.TryParse("1", style, null, out result)
+            );
             Assert.Equal(default(uint), result);
 
             AssertExtensions.Throws<ArgumentException>(paramName, () => uint.Parse("1", style));
-            AssertExtensions.Throws<ArgumentException>(paramName, () => uint.Parse("1", style, null));
+            AssertExtensions.Throws<ArgumentException>(
+                paramName,
+                () => uint.Parse("1", style, null)
+            );
         }
 
         public static IEnumerable<object[]> Parse_ValidWithOffsetCount_TestData()
         {
             foreach (object[] inputs in Parse_Valid_TestData())
             {
-                yield return new object[] { inputs[0], 0, ((string)inputs[0]).Length, inputs[1], inputs[2], inputs[3] };
+                yield return new object[]
+                {
+                    inputs[0],
+                    0,
+                    ((string)inputs[0]).Length,
+                    inputs[1],
+                    inputs[2],
+                    inputs[3]
+                };
             }
 
             yield return new object[] { "123", 0, 2, NumberStyles.Integer, null, (uint)12 };
@@ -327,12 +451,27 @@ namespace System.Tests
             yield return new object[] { "4294967295", 9, 1, NumberStyles.Integer, null, 5 };
             yield return new object[] { "12", 0, 1, NumberStyles.HexNumber, null, (uint)0x1 };
             yield return new object[] { "12", 1, 1, NumberStyles.HexNumber, null, (uint)0x2 };
-            yield return new object[] { "$1,000", 1, 3, NumberStyles.Currency, new NumberFormatInfo() { CurrencySymbol = "$" }, (uint)10 };
+            yield return new object[]
+            {
+                "$1,000",
+                1,
+                3,
+                NumberStyles.Currency,
+                new NumberFormatInfo() { CurrencySymbol = "$" },
+                (uint)10
+            };
         }
 
         [Theory]
         [MemberData(nameof(Parse_ValidWithOffsetCount_TestData))]
-        public static void Parse_Span_Valid(string value, int offset, int count, NumberStyles style, IFormatProvider provider, uint expected)
+        public static void Parse_Span_Valid(
+            string value,
+            int offset,
+            int count,
+            NumberStyles style,
+            IFormatProvider provider,
+            uint expected
+        )
         {
             uint result;
 
@@ -351,7 +490,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void Parse_Span_Invalid(string value, NumberStyles style, IFormatProvider provider, Type exceptionType)
+        public static void Parse_Span_Invalid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            Type exceptionType
+        )
         {
             if (value != null)
             {
@@ -373,7 +517,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(ToString_TestData))]
-        public static void TryFormat(uint i, string format, IFormatProvider provider, string expected)
+        public static void TryFormat(
+            uint i,
+            string format,
+            IFormatProvider provider,
+            string expected
+        )
         {
             char[] actual;
             int charsWritten;
@@ -402,13 +551,27 @@ namespace System.Tests
             {
                 // Upper format
                 actual = new char[expected.Length];
-                Assert.True(i.TryFormat(actual.AsSpan(), out charsWritten, format.ToUpperInvariant(), provider));
+                Assert.True(
+                    i.TryFormat(
+                        actual.AsSpan(),
+                        out charsWritten,
+                        format.ToUpperInvariant(),
+                        provider
+                    )
+                );
                 Assert.Equal(expected.Length, charsWritten);
                 Assert.Equal(expected.ToUpperInvariant(), new string(actual));
 
                 // Lower format
                 actual = new char[expected.Length];
-                Assert.True(i.TryFormat(actual.AsSpan(), out charsWritten, format.ToLowerInvariant(), provider));
+                Assert.True(
+                    i.TryFormat(
+                        actual.AsSpan(),
+                        out charsWritten,
+                        format.ToLowerInvariant(),
+                        provider
+                    )
+                );
                 Assert.Equal(expected.Length, charsWritten);
                 Assert.Equal(expected.ToLowerInvariant(), new string(actual));
             }

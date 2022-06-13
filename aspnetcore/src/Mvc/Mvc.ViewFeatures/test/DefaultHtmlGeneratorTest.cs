@@ -36,7 +36,8 @@ public class DefaultHtmlGeneratorTest
             viewContext,
             modelExplorer: null,
             expression: nameof(Model.Name),
-            allowMultiple: allowMultiple);
+            allowMultiple: allowMultiple
+        );
 
         // Assert
         Assert.Null(result);
@@ -58,7 +59,8 @@ public class DefaultHtmlGeneratorTest
             viewContext,
             modelExplorer,
             expression: nameof(Model.Name),
-            allowMultiple: allowMultiple);
+            allowMultiple: allowMultiple
+        );
 
         // Assert
         Assert.Null(result);
@@ -74,7 +76,12 @@ public class DefaultHtmlGeneratorTest
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(string), model: null);
 
         // Act and Assert (does not throw).
-        htmlGenerator.GetCurrentValues(viewContext, modelExplorer, expression: null, allowMultiple: true);
+        htmlGenerator.GetCurrentValues(
+            viewContext,
+            modelExplorer,
+            expression: null,
+            allowMultiple: true
+        );
     }
 
     [Fact]
@@ -86,22 +93,26 @@ public class DefaultHtmlGeneratorTest
         var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(string), model: null);
 
-        var expected = "The name of an HTML field cannot be null or empty. Instead use methods " +
-            "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering." +
-            "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
+        var expected =
+            "The name of an HTML field cannot be null or empty. Instead use methods "
+            + "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering."
+            + "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
 
         // Act and Assert
         ExceptionAssert.ThrowsArgument(
-            () => htmlGenerator.GenerateSelect(
-                viewContext,
-                modelExplorer,
-                "label",
-                expression: null,
-                selectList: new List<SelectListItem>(),
-                allowMultiple: true,
-                htmlAttributes: null),
+            () =>
+                htmlGenerator.GenerateSelect(
+                    viewContext,
+                    modelExplorer,
+                    "label",
+                    expression: null,
+                    selectList: new List<SelectListItem>(),
+                    allowMultiple: true,
+                    htmlAttributes: null
+                ),
             "expression",
-            expected);
+            expected
+        );
     }
 
     [Fact]
@@ -113,10 +124,7 @@ public class DefaultHtmlGeneratorTest
         var htmlGenerator = GetGenerator(metadataProvider);
         var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(string), model: null);
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "name", expected },
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "name", expected }, };
 
         // Act
         var tagBuilder = htmlGenerator.GenerateSelect(
@@ -126,7 +134,8 @@ public class DefaultHtmlGeneratorTest
             expression: null,
             selectList: new List<SelectListItem>(),
             allowMultiple: true,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
 
         // Assert
         var attribute = Assert.Single(tagBuilder.Attributes, a => a.Key == "name");
@@ -142,21 +151,25 @@ public class DefaultHtmlGeneratorTest
         var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(string), model: null);
 
-        var expected = "The name of an HTML field cannot be null or empty. Instead use methods " +
-            "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering." +
-            "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
+        var expected =
+            "The name of an HTML field cannot be null or empty. Instead use methods "
+            + "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering."
+            + "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
 
         // Act and Assert
         ExceptionAssert.ThrowsArgument(
-            () => htmlGenerator.GenerateTextArea(
-                viewContext,
-                modelExplorer,
-                expression: null,
-                rows: 1,
-                columns: 1,
-                htmlAttributes: null),
+            () =>
+                htmlGenerator.GenerateTextArea(
+                    viewContext,
+                    modelExplorer,
+                    expression: null,
+                    rows: 1,
+                    columns: 1,
+                    htmlAttributes: null
+                ),
             "expression",
-            expected);
+            expected
+        );
     }
 
     [Fact]
@@ -168,10 +181,7 @@ public class DefaultHtmlGeneratorTest
         var htmlGenerator = GetGenerator(metadataProvider);
         var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(string), model: null);
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "name", expected },
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "name", expected }, };
 
         // Act
         var tagBuilder = htmlGenerator.GenerateTextArea(
@@ -180,7 +190,8 @@ public class DefaultHtmlGeneratorTest
             expression: null,
             rows: 1,
             columns: 1,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
 
         // Assert
         var attribute = Assert.Single(tagBuilder.Attributes, a => a.Key == "name");
@@ -188,23 +199,39 @@ public class DefaultHtmlGeneratorTest
     }
 
     [Theory]
-    [InlineData(nameof(ModelWithMaxLengthMetadata.FieldWithMaxLength), ModelWithMaxLengthMetadata.MaxLengthAttributeValue)]
-    [InlineData(nameof(ModelWithMaxLengthMetadata.FieldWithStringLength), ModelWithMaxLengthMetadata.StringLengthAttributeValue)]
+    [InlineData(
+        nameof(ModelWithMaxLengthMetadata.FieldWithMaxLength),
+        ModelWithMaxLengthMetadata.MaxLengthAttributeValue
+    )]
+    [InlineData(
+        nameof(ModelWithMaxLengthMetadata.FieldWithStringLength),
+        ModelWithMaxLengthMetadata.StringLengthAttributeValue
+    )]
     public void GenerateTextArea_RendersMaxLength(string expression, int expectedValue)
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
         var htmlGenerator = GetGenerator(metadataProvider);
-        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(model: null, metadataProvider: metadataProvider);
-        var modelMetadata = metadataProvider.GetMetadataForProperty(typeof(ModelWithMaxLengthMetadata), expression);
+        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(
+            model: null,
+            metadataProvider: metadataProvider
+        );
+        var modelMetadata = metadataProvider.GetMetadataForProperty(
+            typeof(ModelWithMaxLengthMetadata),
+            expression
+        );
         var modelExplorer = new ModelExplorer(metadataProvider, modelMetadata, null);
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "name", "testElement" },
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "name", "testElement" }, };
 
         // Act
-        var tagBuilder = htmlGenerator.GenerateTextArea(viewContext, modelExplorer, expression, rows: 1, columns: 1, htmlAttributes);
+        var tagBuilder = htmlGenerator.GenerateTextArea(
+            viewContext,
+            modelExplorer,
+            expression,
+            rows: 1,
+            columns: 1,
+            htmlAttributes
+        );
 
         // Assert
         var attribute = Assert.Single(tagBuilder.Attributes, a => a.Key == "maxlength");
@@ -212,23 +239,38 @@ public class DefaultHtmlGeneratorTest
     }
 
     [Theory]
-    [InlineData(nameof(ModelWithMaxLengthMetadata.FieldWithMaxLength), ModelWithMaxLengthMetadata.MaxLengthAttributeValue)]
-    [InlineData(nameof(ModelWithMaxLengthMetadata.FieldWithStringLength), ModelWithMaxLengthMetadata.StringLengthAttributeValue)]
+    [InlineData(
+        nameof(ModelWithMaxLengthMetadata.FieldWithMaxLength),
+        ModelWithMaxLengthMetadata.MaxLengthAttributeValue
+    )]
+    [InlineData(
+        nameof(ModelWithMaxLengthMetadata.FieldWithStringLength),
+        ModelWithMaxLengthMetadata.StringLengthAttributeValue
+    )]
     public void GeneratePassword_RendersMaxLength(string expression, int expectedValue)
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
         var htmlGenerator = GetGenerator(metadataProvider);
-        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(model: null, metadataProvider: metadataProvider);
-        var modelMetadata = metadataProvider.GetMetadataForProperty(typeof(ModelWithMaxLengthMetadata), expression);
+        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(
+            model: null,
+            metadataProvider: metadataProvider
+        );
+        var modelMetadata = metadataProvider.GetMetadataForProperty(
+            typeof(ModelWithMaxLengthMetadata),
+            expression
+        );
         var modelExplorer = new ModelExplorer(metadataProvider, modelMetadata, null);
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "name", "testElement" },
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "name", "testElement" }, };
 
         // Act
-        var tagBuilder = htmlGenerator.GeneratePassword(viewContext, modelExplorer, expression, null, htmlAttributes);
+        var tagBuilder = htmlGenerator.GeneratePassword(
+            viewContext,
+            modelExplorer,
+            expression,
+            null,
+            htmlAttributes
+        );
 
         // Assert
         var attribute = Assert.Single(tagBuilder.Attributes, a => a.Key == "maxlength");
@@ -236,23 +278,39 @@ public class DefaultHtmlGeneratorTest
     }
 
     [Theory]
-    [InlineData(nameof(ModelWithMaxLengthMetadata.FieldWithMaxLength), ModelWithMaxLengthMetadata.MaxLengthAttributeValue)]
-    [InlineData(nameof(ModelWithMaxLengthMetadata.FieldWithStringLength), ModelWithMaxLengthMetadata.StringLengthAttributeValue)]
+    [InlineData(
+        nameof(ModelWithMaxLengthMetadata.FieldWithMaxLength),
+        ModelWithMaxLengthMetadata.MaxLengthAttributeValue
+    )]
+    [InlineData(
+        nameof(ModelWithMaxLengthMetadata.FieldWithStringLength),
+        ModelWithMaxLengthMetadata.StringLengthAttributeValue
+    )]
     public void GenerateTextBox_RendersMaxLength(string expression, int expectedValue)
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
         var htmlGenerator = GetGenerator(metadataProvider);
-        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(model: null, metadataProvider: metadataProvider);
-        var modelMetadata = metadataProvider.GetMetadataForProperty(typeof(ModelWithMaxLengthMetadata), expression);
+        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(
+            model: null,
+            metadataProvider: metadataProvider
+        );
+        var modelMetadata = metadataProvider.GetMetadataForProperty(
+            typeof(ModelWithMaxLengthMetadata),
+            expression
+        );
         var modelExplorer = new ModelExplorer(metadataProvider, modelMetadata, null);
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "name", "testElement" },
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "name", "testElement" }, };
 
         // Act
-        var tagBuilder = htmlGenerator.GenerateTextBox(viewContext, modelExplorer, expression, null, null, htmlAttributes);
+        var tagBuilder = htmlGenerator.GenerateTextBox(
+            viewContext,
+            modelExplorer,
+            expression,
+            null,
+            null,
+            htmlAttributes
+        );
 
         // Assert
         var attribute = Assert.Single(tagBuilder.Attributes, a => a.Key == "maxlength");
@@ -265,20 +323,36 @@ public class DefaultHtmlGeneratorTest
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
         var htmlGenerator = GetGenerator(metadataProvider);
-        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(model: null, metadataProvider: metadataProvider);
-        var modelMetadata = metadataProvider.GetMetadataForProperty(typeof(ModelWithMaxLengthMetadata), nameof(ModelWithMaxLengthMetadata.FieldWithBothAttributes));
+        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(
+            model: null,
+            metadataProvider: metadataProvider
+        );
+        var modelMetadata = metadataProvider.GetMetadataForProperty(
+            typeof(ModelWithMaxLengthMetadata),
+            nameof(ModelWithMaxLengthMetadata.FieldWithBothAttributes)
+        );
         var modelExplorer = new ModelExplorer(metadataProvider, modelMetadata, null);
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "name", "testElement" },
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "name", "testElement" }, };
 
         // Act
-        var tagBuilder = htmlGenerator.GenerateTextBox(viewContext, modelExplorer, nameof(ModelWithMaxLengthMetadata.FieldWithBothAttributes), null, null, htmlAttributes);
+        var tagBuilder = htmlGenerator.GenerateTextBox(
+            viewContext,
+            modelExplorer,
+            nameof(ModelWithMaxLengthMetadata.FieldWithBothAttributes),
+            null,
+            null,
+            htmlAttributes
+        );
 
         // Assert
         var attribute = Assert.Single(tagBuilder.Attributes, a => a.Key == "maxlength");
-        Assert.Equal(Math.Min(ModelWithMaxLengthMetadata.MaxLengthAttributeValue, ModelWithMaxLengthMetadata.StringLengthAttributeValue), int.Parse(attribute.Value, CultureInfo.InvariantCulture));
+        Assert.Equal(
+            Math.Min(
+                ModelWithMaxLengthMetadata.MaxLengthAttributeValue,
+                ModelWithMaxLengthMetadata.StringLengthAttributeValue
+            ),
+            int.Parse(attribute.Value, CultureInfo.InvariantCulture)
+        );
     }
 
     [Fact]
@@ -287,40 +361,69 @@ public class DefaultHtmlGeneratorTest
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
         var htmlGenerator = GetGenerator(metadataProvider);
-        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(model: null, metadataProvider: metadataProvider);
-        var modelMetadata = metadataProvider.GetMetadataForProperty(typeof(ModelWithMaxLengthMetadata), nameof(ModelWithMaxLengthMetadata.FieldWithoutAttributes));
+        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(
+            model: null,
+            metadataProvider: metadataProvider
+        );
+        var modelMetadata = metadataProvider.GetMetadataForProperty(
+            typeof(ModelWithMaxLengthMetadata),
+            nameof(ModelWithMaxLengthMetadata.FieldWithoutAttributes)
+        );
         var modelExplorer = new ModelExplorer(metadataProvider, modelMetadata, null);
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "name", "testElement" },
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "name", "testElement" }, };
 
         // Act
-        var tagBuilder = htmlGenerator.GenerateTextBox(viewContext, modelExplorer, nameof(ModelWithMaxLengthMetadata.FieldWithoutAttributes), null, null, htmlAttributes);
+        var tagBuilder = htmlGenerator.GenerateTextBox(
+            viewContext,
+            modelExplorer,
+            nameof(ModelWithMaxLengthMetadata.FieldWithoutAttributes),
+            null,
+            null,
+            htmlAttributes
+        );
 
         // Assert
         Assert.DoesNotContain(tagBuilder.Attributes, a => a.Key == "maxlength");
     }
 
     [Theory]
-    [InlineData(nameof(ModelWithMaxLengthMetadata.FieldWithMaxLength), ModelWithMaxLengthMetadata.MaxLengthAttributeValue)]
-    [InlineData(nameof(ModelWithMaxLengthMetadata.FieldWithStringLength), ModelWithMaxLengthMetadata.StringLengthAttributeValue)]
+    [InlineData(
+        nameof(ModelWithMaxLengthMetadata.FieldWithMaxLength),
+        ModelWithMaxLengthMetadata.MaxLengthAttributeValue
+    )]
+    [InlineData(
+        nameof(ModelWithMaxLengthMetadata.FieldWithStringLength),
+        ModelWithMaxLengthMetadata.StringLengthAttributeValue
+    )]
     public void GenerateTextBox_SearchType_RendersMaxLength(string expression, int expectedValue)
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
         var htmlGenerator = GetGenerator(metadataProvider);
-        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(model: null, metadataProvider: metadataProvider);
-        var modelMetadata = metadataProvider.GetMetadataForProperty(typeof(ModelWithMaxLengthMetadata), expression);
+        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(
+            model: null,
+            metadataProvider: metadataProvider
+        );
+        var modelMetadata = metadataProvider.GetMetadataForProperty(
+            typeof(ModelWithMaxLengthMetadata),
+            expression
+        );
         var modelExplorer = new ModelExplorer(metadataProvider, modelMetadata, null);
         var htmlAttributes = new Dictionary<string, object>
-            {
-                { "name", "testElement" },
-                { "type", "search"}
-            };
+        {
+            { "name", "testElement" },
+            { "type", "search" }
+        };
 
         // Act
-        var tagBuilder = htmlGenerator.GenerateTextBox(viewContext, modelExplorer, expression, null, null, htmlAttributes);
+        var tagBuilder = htmlGenerator.GenerateTextBox(
+            viewContext,
+            modelExplorer,
+            expression,
+            null,
+            null,
+            htmlAttributes
+        );
 
         // Assert
         var attribute = Assert.Single(tagBuilder.Attributes, a => a.Key == "maxlength");
@@ -335,16 +438,26 @@ public class DefaultHtmlGeneratorTest
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
         var htmlGenerator = GetGenerator(metadataProvider);
-        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(model: null, metadataProvider: metadataProvider);
-        var modelMetadata = metadataProvider.GetMetadataForProperty(typeof(ModelWithMaxLengthMetadata), expression);
+        var viewContext = GetViewContext<ModelWithMaxLengthMetadata>(
+            model: null,
+            metadataProvider: metadataProvider
+        );
+        var modelMetadata = metadataProvider.GetMetadataForProperty(
+            typeof(ModelWithMaxLengthMetadata),
+            expression
+        );
         var modelExplorer = new ModelExplorer(metadataProvider, modelMetadata, null);
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "name", "testElement" },
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "name", "testElement" }, };
 
         // Act
-        var tagBuilder = htmlGenerator.GenerateHidden(viewContext, modelExplorer, expression, null, false, htmlAttributes);
+        var tagBuilder = htmlGenerator.GenerateHidden(
+            viewContext,
+            modelExplorer,
+            expression,
+            null,
+            false,
+            htmlAttributes
+        );
 
         // Assert
         Assert.DoesNotContain(tagBuilder.Attributes, a => a.Key == "maxlength");
@@ -359,21 +472,25 @@ public class DefaultHtmlGeneratorTest
         var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(string), model: null);
 
-        var expected = "The name of an HTML field cannot be null or empty. Instead use methods " +
-            "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering." +
-            "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
+        var expected =
+            "The name of an HTML field cannot be null or empty. Instead use methods "
+            + "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering."
+            + "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
 
         // Act and Assert
         ExceptionAssert.ThrowsArgument(
-            () => htmlGenerator.GenerateValidationMessage(
-                viewContext,
-                modelExplorer: null,
-                expression: null,
-                message: "Message",
-                tag: "tag",
-                htmlAttributes: null),
+            () =>
+                htmlGenerator.GenerateValidationMessage(
+                    viewContext,
+                    modelExplorer: null,
+                    expression: null,
+                    message: "Message",
+                    tag: "tag",
+                    htmlAttributes: null
+                ),
             "expression",
-            expected);
+            expected
+        );
     }
 
     [Fact]
@@ -385,10 +502,7 @@ public class DefaultHtmlGeneratorTest
         var htmlGenerator = GetGenerator(metadataProvider);
         var viewContext = GetViewContext<Model>(model: null, metadataProvider: metadataProvider);
         var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(string), model: null);
-        var htmlAttributes = new Dictionary<string, object>
-            {
-                { "data-valmsg-for", expected },
-            };
+        var htmlAttributes = new Dictionary<string, object> { { "data-valmsg-for", expected }, };
 
         // Act
         var tagBuilder = htmlGenerator.GenerateValidationMessage(
@@ -397,7 +511,8 @@ public class DefaultHtmlGeneratorTest
             expression: null,
             message: "Message",
             tag: "tag",
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
 
         // Assert
         var attribute = Assert.Single(tagBuilder.Attributes, a => a.Key == "data-valmsg-for");
@@ -420,7 +535,8 @@ public class DefaultHtmlGeneratorTest
             viewContext,
             modelExplorer: null,
             expression: nameof(Model.Name),
-            allowMultiple: allowMultiple);
+            allowMultiple: allowMultiple
+        );
 
         // Assert
         Assert.Null(result);
@@ -439,54 +555,79 @@ public class DefaultHtmlGeneratorTest
         viewContext.ViewData[nameof(Model.Name)] = value;
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => htmlGenerator.GetCurrentValues(
-            viewContext,
-            modelExplorer: null,
-            expression: nameof(Model.Name),
-            allowMultiple: true));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () =>
+                htmlGenerator.GetCurrentValues(
+                    viewContext,
+                    modelExplorer: null,
+                    expression: nameof(Model.Name),
+                    allowMultiple: true
+                )
+        );
         Assert.Equal(
             "The parameter 'expression' must evaluate to an IEnumerable when multiple selection is allowed.",
-            exception.Message);
+            exception.Message
+        );
     }
 
     // rawValue, allowMultiple -> expected current values
-    public static TheoryData<string[], bool, IReadOnlyCollection<string>> GetCurrentValues_CollectionData
+    public static TheoryData<
+        string[],
+        bool,
+        IReadOnlyCollection<string>
+    > GetCurrentValues_CollectionData
     {
         get
         {
             return new TheoryData<string[], bool, IReadOnlyCollection<string>>
+            {
+                // ModelStateDictionary converts arrays to single values if needed.
+                { new[] { "some string" }, false, new[] { "some string" } },
+                { new[] { "some string" }, true, new[] { "some string" } },
+                { new[] { "some string", "some other string" }, false, new[] { "some string" } },
                 {
-                    // ModelStateDictionary converts arrays to single values if needed.
-                    { new [] { "some string" }, false, new [] { "some string" } },
-                    { new [] { "some string" }, true, new [] { "some string" } },
-                    { new [] { "some string", "some other string" }, false, new [] { "some string" } },
+                    new[] { "some string", "some other string" },
+                    true,
+                    new[] { "some string", "some other string" }
+                },
+                // { new string[] { null }, false, null } would fall back to other sources.
+                { new string[] { null }, true, new[] { string.Empty } },
+                { new[] { string.Empty }, false, new[] { string.Empty } },
+                { new[] { string.Empty }, true, new[] { string.Empty } },
+                {
+                    new[] { null, "some string", "some other string" },
+                    true,
+                    new[] { string.Empty, "some string", "some other string" }
+                },
+                // ignores duplicates
+                {
+                    new[]
                     {
-                        new [] { "some string", "some other string" },
-                        true,
-                        new [] { "some string", "some other string" }
+                        null,
+                        "some string",
+                        null,
+                        "some other string",
+                        null,
+                        "some string",
+                        null
                     },
-                    // { new string[] { null }, false, null } would fall back to other sources.
-                    { new string[] { null }, true, new [] { string.Empty } },
-                    { new [] { string.Empty }, false, new [] { string.Empty } },
-                    { new [] { string.Empty }, true, new [] { string.Empty } },
+                    true,
+                    new[] { string.Empty, "some string", "some other string" }
+                },
+                // ignores case of duplicates
+                {
+                    new[]
                     {
-                        new [] { null, "some string", "some other string" },
-                        true,
-                        new [] { string.Empty, "some string", "some other string" }
+                        "some string",
+                        "SoMe StriNg",
+                        "Some String",
+                        "soME STRing",
+                        "SOME STRING"
                     },
-                    // ignores duplicates
-                    {
-                        new [] { null, "some string", null, "some other string", null, "some string", null },
-                        true,
-                        new [] { string.Empty, "some string", "some other string" }
-                    },
-                    // ignores case of duplicates
-                    {
-                        new [] { "some string", "SoMe StriNg", "Some String", "soME STRing", "SOME STRING" },
-                        true,
-                        new [] { "some string" }
-                    },
-                };
+                    true,
+                    new[] { "some string" }
+                },
+            };
         }
     }
 
@@ -495,7 +636,8 @@ public class DefaultHtmlGeneratorTest
     public void GetCurrentValues_WithModelStateEntryAndViewData_ReturnsModelStateEntry(
         string[] rawValue,
         bool allowMultiple,
-        IReadOnlyCollection<string> expected)
+        IReadOnlyCollection<string> expected
+    )
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
@@ -511,7 +653,8 @@ public class DefaultHtmlGeneratorTest
             viewContext,
             modelExplorer: null,
             expression: nameof(Model.Name),
-            allowMultiple: allowMultiple);
+            allowMultiple: allowMultiple
+        );
 
         // Assert
         Assert.NotNull(result);
@@ -523,7 +666,8 @@ public class DefaultHtmlGeneratorTest
     public void GetCurrentValues_WithModelStateEntryModelExplorerAndViewData_ReturnsModelStateEntry(
         string[] rawValue,
         bool allowMultiple,
-        IReadOnlyCollection<string> expected)
+        IReadOnlyCollection<string> expected
+    )
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
@@ -534,14 +678,18 @@ public class DefaultHtmlGeneratorTest
         viewContext.ViewData[nameof(Model.Name)] = "ignored ViewData value";
         viewContext.ModelState.SetModelValue(nameof(Model.Name), rawValue, attemptedValue: null);
 
-        var modelExplorer = metadataProvider.GetModelExplorerForType(typeof(string), "ignored model value");
+        var modelExplorer = metadataProvider.GetModelExplorerForType(
+            typeof(string),
+            "ignored model value"
+        );
 
         // Act
         var result = htmlGenerator.GetCurrentValues(
             viewContext,
             modelExplorer,
             expression: nameof(Model.Name),
-            allowMultiple: allowMultiple);
+            allowMultiple: allowMultiple
+        );
 
         // Assert
         Assert.NotNull(result);
@@ -554,16 +702,16 @@ public class DefaultHtmlGeneratorTest
         get
         {
             return new TheoryData<string[], string[]>
-                {
-                    // 1. If given a ModelExplorer, GetCurrentValues does not use ViewData even if expression result is
-                    // null.
-                    // 2. Otherwise if ViewData entry exists, GetCurrentValue does not fall back to ViewData.Model even
-                    // if entry is null.
-                    // 3. Otherwise, GetCurrentValue does not fall back anywhere else even if ViewData.Model is null.
-                    { null, null },
-                    { new string[] { string.Empty }, new [] { string.Empty } },
-                    { new string[] { "some string" }, new [] { "some string" } },
-                };
+            {
+                // 1. If given a ModelExplorer, GetCurrentValues does not use ViewData even if expression result is
+                // null.
+                // 2. Otherwise if ViewData entry exists, GetCurrentValue does not fall back to ViewData.Model even
+                // if entry is null.
+                // 3. Otherwise, GetCurrentValue does not fall back anywhere else even if ViewData.Model is null.
+                { null, null },
+                { new string[] { string.Empty }, new[] { string.Empty } },
+                { new string[] { "some string" }, new[] { "some string" } },
+            };
         }
     }
 
@@ -571,7 +719,8 @@ public class DefaultHtmlGeneratorTest
     [MemberData(nameof(GetCurrentValues_StringData))]
     public void GetCurrentValues_WithModelExplorerAndViewData_ReturnsExpressionResult(
         string[] rawValue,
-        IReadOnlyCollection<string> expected)
+        IReadOnlyCollection<string> expected
+    )
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
@@ -589,7 +738,8 @@ public class DefaultHtmlGeneratorTest
             viewContext,
             modelExplorer,
             expression: nameof(Model.Name),
-            allowMultiple: false);
+            allowMultiple: false
+        );
 
         // Assert
         Assert.Equal<string>(expected, result);
@@ -599,7 +749,8 @@ public class DefaultHtmlGeneratorTest
     [MemberData(nameof(GetCurrentValues_StringData))]
     public void GetCurrentValues_WithViewData_ReturnsViewDataEntry(
         string[] rawValue,
-        IReadOnlyCollection<string> expected)
+        IReadOnlyCollection<string> expected
+    )
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
@@ -615,7 +766,8 @@ public class DefaultHtmlGeneratorTest
             viewContext,
             modelExplorer: null,
             expression: nameof(Model.Name),
-            allowMultiple: false);
+            allowMultiple: false
+        );
 
         // Assert
         Assert.Equal<string>(expected, result);
@@ -623,7 +775,10 @@ public class DefaultHtmlGeneratorTest
 
     [Theory]
     [MemberData(nameof(GetCurrentValues_StringData))]
-    public void GetCurrentValues_WithModel_ReturnsModel(string[] rawValue, IReadOnlyCollection<string> expected)
+    public void GetCurrentValues_WithModel_ReturnsModel(
+        string[] rawValue,
+        IReadOnlyCollection<string> expected
+    )
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
@@ -638,7 +793,8 @@ public class DefaultHtmlGeneratorTest
             viewContext,
             modelExplorer: null,
             expression: nameof(Model.Name),
-            allowMultiple: false);
+            allowMultiple: false
+        );
 
         // Assert
         Assert.Equal<string>(expected, result);
@@ -650,26 +806,45 @@ public class DefaultHtmlGeneratorTest
         get
         {
             return new TheoryData<string[], string[]>
+            {
+                { new string[] { null }, new[] { string.Empty } },
+                { new[] { string.Empty }, new[] { string.Empty } },
+                { new[] { "some string" }, new[] { "some string" } },
                 {
-                    { new string[] { null }, new [] { string.Empty } },
-                    { new [] { string.Empty }, new [] { string.Empty } },
-                    { new [] { "some string" }, new [] { "some string" } },
-                    { new [] { "some string", "some other string" }, new [] { "some string", "some other string" } },
+                    new[] { "some string", "some other string" },
+                    new[] { "some string", "some other string" }
+                },
+                {
+                    new[] { null, "some string", "some other string" },
+                    new[] { string.Empty, "some string", "some other string" }
+                },
+                // ignores duplicates
+                {
+                    new[]
                     {
-                        new [] { null, "some string", "some other string" },
-                        new [] { string.Empty, "some string", "some other string" }
+                        null,
+                        "some string",
+                        null,
+                        "some other string",
+                        null,
+                        "some string",
+                        null
                     },
-                    // ignores duplicates
+                    new[] { string.Empty, "some string", "some other string" }
+                },
+                // ignores case of duplicates
+                {
+                    new[]
                     {
-                        new [] { null, "some string", null, "some other string", null, "some string", null },
-                        new [] { string.Empty, "some string", "some other string" }
+                        "some string",
+                        "SoMe StriNg",
+                        "Some String",
+                        "soME STRing",
+                        "SOME STRING"
                     },
-                    // ignores case of duplicates
-                    {
-                        new [] { "some string", "SoMe StriNg", "Some String", "soME STRing", "SOME STRING" },
-                        new [] { "some string" }
-                    },
-                };
+                    new[] { "some string" }
+                },
+            };
         }
     }
 
@@ -677,7 +852,8 @@ public class DefaultHtmlGeneratorTest
     [MemberData(nameof(GetCurrentValues_StringCollectionData))]
     public void GetCurrentValues_CollectionWithModelExplorerAndViewData_ReturnsExpressionResult(
         string[] rawValue,
-        IReadOnlyCollection<string> expected)
+        IReadOnlyCollection<string> expected
+    )
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
@@ -686,17 +862,24 @@ public class DefaultHtmlGeneratorTest
 
         var viewContext = GetViewContext<Model>(model, metadataProvider);
         viewContext.ViewData[nameof(Model.Collection)] = new[] { "ignored ViewData value" };
-        viewContext.ModelState.SetModelValue(nameof(Model.Collection), rawValue, attemptedValue: null);
+        viewContext.ModelState.SetModelValue(
+            nameof(Model.Collection),
+            rawValue,
+            attemptedValue: null
+        );
 
-        var modelExplorer =
-            metadataProvider.GetModelExplorerForType(typeof(List<string>), new List<string>(rawValue));
+        var modelExplorer = metadataProvider.GetModelExplorerForType(
+            typeof(List<string>),
+            new List<string>(rawValue)
+        );
 
         // Act
         var result = htmlGenerator.GetCurrentValues(
             viewContext,
             modelExplorer,
             expression: nameof(Model.Collection),
-            allowMultiple: true);
+            allowMultiple: true
+        );
 
         // Assert
         Assert.Equal<string>(expected, result);
@@ -706,7 +889,8 @@ public class DefaultHtmlGeneratorTest
     [MemberData(nameof(GetCurrentValues_StringCollectionData))]
     public void GetCurrentValues_CollectionWithViewData_ReturnsViewDataEntry(
         string[] rawValue,
-        IReadOnlyCollection<string> expected)
+        IReadOnlyCollection<string> expected
+    )
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
@@ -715,14 +899,19 @@ public class DefaultHtmlGeneratorTest
 
         var viewContext = GetViewContext<Model>(model, metadataProvider);
         viewContext.ViewData[nameof(Model.Collection)] = rawValue;
-        viewContext.ModelState.SetModelValue(nameof(Model.Collection), rawValue, attemptedValue: null);
+        viewContext.ModelState.SetModelValue(
+            nameof(Model.Collection),
+            rawValue,
+            attemptedValue: null
+        );
 
         // Act
         var result = htmlGenerator.GetCurrentValues(
             viewContext,
             modelExplorer: null,
             expression: nameof(Model.Collection),
-            allowMultiple: true);
+            allowMultiple: true
+        );
 
         // Assert
         Assert.Equal<string>(expected, result);
@@ -732,7 +921,8 @@ public class DefaultHtmlGeneratorTest
     [MemberData(nameof(GetCurrentValues_StringCollectionData))]
     public void GetCurrentValues_CollectionWithModel_ReturnsModel(
         string[] rawValue,
-        IReadOnlyCollection<string> expected)
+        IReadOnlyCollection<string> expected
+    )
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
@@ -744,14 +934,16 @@ public class DefaultHtmlGeneratorTest
         viewContext.ModelState.SetModelValue(
             nameof(Model.Collection),
             rawValue,
-            attemptedValue: null);
+            attemptedValue: null
+        );
 
         // Act
         var result = htmlGenerator.GetCurrentValues(
             viewContext,
             modelExplorer: null,
             expression: nameof(Model.Collection),
-            allowMultiple: true);
+            allowMultiple: true
+        );
 
         // Assert
         Assert.Equal<string>(expected, result);
@@ -763,82 +955,79 @@ public class DefaultHtmlGeneratorTest
         get
         {
             return new TheoryData<string, object, string[]>
-                {
-                    { nameof(Model.FlagsEnum), FlagsEnum.All, new [] { "-1", "All" } },
-                    { nameof(Model.FlagsEnum), FlagsEnum.FortyTwo, new [] { "42", "FortyTwo" } },
-                    { nameof(Model.FlagsEnum), FlagsEnum.None, new [] { "0", "None" } },
-                    { nameof(Model.FlagsEnum), FlagsEnum.Two, new [] { "2", "Two" } },
-                    { nameof(Model.FlagsEnum), string.Empty, new [] { string.Empty } },
-                    { nameof(Model.FlagsEnum), "All", new [] { "-1", "All" } },
-                    { nameof(Model.FlagsEnum), "FortyTwo", new [] { "42", "FortyTwo" } },
-                    { nameof(Model.FlagsEnum), "None", new [] { "0", "None" } },
-                    { nameof(Model.FlagsEnum), "Two", new [] { "2", "Two" } },
-                    { nameof(Model.FlagsEnum), "Two, Four", new [] { "Two, Four", "6" } },
-                    { nameof(Model.FlagsEnum), "garbage", new [] { "garbage" } },
-                    { nameof(Model.FlagsEnum), "0", new [] { "0", "None" } },
-                    { nameof(Model.FlagsEnum), "   43", new [] { "   43", "43" } },
-                    { nameof(Model.FlagsEnum), "-5   ", new [] { "-5   ", "-5" } },
-                    { nameof(Model.FlagsEnum), 0, new [] { "0", "None" } },
-                    { nameof(Model.FlagsEnum), 1, new [] { "1", "One" } },
-                    { nameof(Model.FlagsEnum), 43, new [] { "43" } },
-                    { nameof(Model.FlagsEnum), -5, new [] { "-5" } },
-                    { nameof(Model.FlagsEnum), int.MaxValue, new [] { "2147483647" } },
-                    { nameof(Model.FlagsEnum), (uint)int.MaxValue + 1, new [] { "2147483648" } },
-                    { nameof(Model.FlagsEnum), uint.MaxValue, new [] { "4294967295" } },  // converted to string & used
-
-                    { nameof(Model.Id), string.Empty, new [] { string.Empty } },
-                    { nameof(Model.Id), "garbage", new [] { "garbage" } },                  // no compatibility checks
-                    { nameof(Model.Id), "0", new [] { "0" } },
-                    { nameof(Model.Id), "  43", new [] { "  43" } },
-                    { nameof(Model.Id), "-5  ", new [] { "-5  " } },
-                    { nameof(Model.Id), 0, new [] { "0" } },
-                    { nameof(Model.Id), 1, new [] { "1" } },
-                    { nameof(Model.Id), 43, new [] { "43" } },
-                    { nameof(Model.Id), -5, new [] { "-5" } },
-                    { nameof(Model.Id), int.MaxValue, new [] { "2147483647" } },
-                    { nameof(Model.Id), (uint)int.MaxValue + 1, new [] { "2147483648" } },  // no limit checks
-                    { nameof(Model.Id), uint.MaxValue, new [] { "4294967295" } },           // no limit checks
-
-                    { nameof(Model.NullableEnum), RegularEnum.Zero, new [] { "0", "Zero" } },
-                    { nameof(Model.NullableEnum), RegularEnum.One, new [] { "1", "One" } },
-                    { nameof(Model.NullableEnum), RegularEnum.Two, new [] { "2", "Two" } },
-                    { nameof(Model.NullableEnum), RegularEnum.Three, new [] { "3", "Three" } },
-                    { nameof(Model.NullableEnum), string.Empty, new [] { string.Empty } },
-                    { nameof(Model.NullableEnum), "Zero", new [] { "0", "Zero" } },
-                    { nameof(Model.NullableEnum), "Two", new [] { "2", "Two" } },
-                    { nameof(Model.NullableEnum), "One, Two", new [] { "One, Two", "3", "Three" } },
-                    { nameof(Model.NullableEnum), "garbage", new [] { "garbage" } },
-                    { nameof(Model.NullableEnum), "0", new [] { "0", "Zero" } },
-                    { nameof(Model.NullableEnum), "   43", new [] { "   43", "43" } },
-                    { nameof(Model.NullableEnum), "-5   ", new [] { "-5   ", "-5" } },
-                    { nameof(Model.NullableEnum), 0, new [] { "0", "Zero" } },
-                    { nameof(Model.NullableEnum), 1, new [] { "1", "One" } },
-                    { nameof(Model.NullableEnum), 43, new [] { "43" } },
-                    { nameof(Model.NullableEnum), -5, new [] { "-5" } },
-                    { nameof(Model.NullableEnum), int.MaxValue, new [] { "2147483647" } },
-                    { nameof(Model.NullableEnum), (uint)int.MaxValue + 1, new [] { "2147483648" } },
-                    { nameof(Model.NullableEnum), uint.MaxValue, new [] { "4294967295" } },
-
-                    { nameof(Model.RegularEnum), RegularEnum.Zero, new [] { "0", "Zero" } },
-                    { nameof(Model.RegularEnum), RegularEnum.One, new [] { "1", "One" } },
-                    { nameof(Model.RegularEnum), RegularEnum.Two, new [] { "2", "Two" } },
-                    { nameof(Model.RegularEnum), RegularEnum.Three, new [] { "3", "Three" } },
-                    { nameof(Model.RegularEnum), string.Empty, new [] { string.Empty } },
-                    { nameof(Model.RegularEnum), "Zero", new [] { "0", "Zero" } },
-                    { nameof(Model.RegularEnum), "Two", new [] { "2", "Two" } },
-                    { nameof(Model.RegularEnum), "One, Two", new [] { "One, Two", "3", "Three" } },
-                    { nameof(Model.RegularEnum), "garbage", new [] { "garbage" } },
-                    { nameof(Model.RegularEnum), "0", new [] { "0", "Zero" } },
-                    { nameof(Model.RegularEnum), "   43", new [] { "   43", "43" } },
-                    { nameof(Model.RegularEnum), "-5   ", new [] { "-5   ", "-5" } },
-                    { nameof(Model.RegularEnum), 0, new [] { "0", "Zero" } },
-                    { nameof(Model.RegularEnum), 1, new [] { "1", "One" } },
-                    { nameof(Model.RegularEnum), 43, new [] { "43" } },
-                    { nameof(Model.RegularEnum), -5, new [] { "-5" } },
-                    { nameof(Model.RegularEnum), int.MaxValue, new [] { "2147483647" } },
-                    { nameof(Model.RegularEnum), (uint)int.MaxValue + 1, new [] { "2147483648" } },
-                    { nameof(Model.RegularEnum), uint.MaxValue, new [] { "4294967295" } },
-                };
+            {
+                { nameof(Model.FlagsEnum), FlagsEnum.All, new[] { "-1", "All" } },
+                { nameof(Model.FlagsEnum), FlagsEnum.FortyTwo, new[] { "42", "FortyTwo" } },
+                { nameof(Model.FlagsEnum), FlagsEnum.None, new[] { "0", "None" } },
+                { nameof(Model.FlagsEnum), FlagsEnum.Two, new[] { "2", "Two" } },
+                { nameof(Model.FlagsEnum), string.Empty, new[] { string.Empty } },
+                { nameof(Model.FlagsEnum), "All", new[] { "-1", "All" } },
+                { nameof(Model.FlagsEnum), "FortyTwo", new[] { "42", "FortyTwo" } },
+                { nameof(Model.FlagsEnum), "None", new[] { "0", "None" } },
+                { nameof(Model.FlagsEnum), "Two", new[] { "2", "Two" } },
+                { nameof(Model.FlagsEnum), "Two, Four", new[] { "Two, Four", "6" } },
+                { nameof(Model.FlagsEnum), "garbage", new[] { "garbage" } },
+                { nameof(Model.FlagsEnum), "0", new[] { "0", "None" } },
+                { nameof(Model.FlagsEnum), "   43", new[] { "   43", "43" } },
+                { nameof(Model.FlagsEnum), "-5   ", new[] { "-5   ", "-5" } },
+                { nameof(Model.FlagsEnum), 0, new[] { "0", "None" } },
+                { nameof(Model.FlagsEnum), 1, new[] { "1", "One" } },
+                { nameof(Model.FlagsEnum), 43, new[] { "43" } },
+                { nameof(Model.FlagsEnum), -5, new[] { "-5" } },
+                { nameof(Model.FlagsEnum), int.MaxValue, new[] { "2147483647" } },
+                { nameof(Model.FlagsEnum), (uint)int.MaxValue + 1, new[] { "2147483648" } },
+                { nameof(Model.FlagsEnum), uint.MaxValue, new[] { "4294967295" } }, // converted to string & used
+                { nameof(Model.Id), string.Empty, new[] { string.Empty } },
+                { nameof(Model.Id), "garbage", new[] { "garbage" } }, // no compatibility checks
+                { nameof(Model.Id), "0", new[] { "0" } },
+                { nameof(Model.Id), "  43", new[] { "  43" } },
+                { nameof(Model.Id), "-5  ", new[] { "-5  " } },
+                { nameof(Model.Id), 0, new[] { "0" } },
+                { nameof(Model.Id), 1, new[] { "1" } },
+                { nameof(Model.Id), 43, new[] { "43" } },
+                { nameof(Model.Id), -5, new[] { "-5" } },
+                { nameof(Model.Id), int.MaxValue, new[] { "2147483647" } },
+                { nameof(Model.Id), (uint)int.MaxValue + 1, new[] { "2147483648" } }, // no limit checks
+                { nameof(Model.Id), uint.MaxValue, new[] { "4294967295" } }, // no limit checks
+                { nameof(Model.NullableEnum), RegularEnum.Zero, new[] { "0", "Zero" } },
+                { nameof(Model.NullableEnum), RegularEnum.One, new[] { "1", "One" } },
+                { nameof(Model.NullableEnum), RegularEnum.Two, new[] { "2", "Two" } },
+                { nameof(Model.NullableEnum), RegularEnum.Three, new[] { "3", "Three" } },
+                { nameof(Model.NullableEnum), string.Empty, new[] { string.Empty } },
+                { nameof(Model.NullableEnum), "Zero", new[] { "0", "Zero" } },
+                { nameof(Model.NullableEnum), "Two", new[] { "2", "Two" } },
+                { nameof(Model.NullableEnum), "One, Two", new[] { "One, Two", "3", "Three" } },
+                { nameof(Model.NullableEnum), "garbage", new[] { "garbage" } },
+                { nameof(Model.NullableEnum), "0", new[] { "0", "Zero" } },
+                { nameof(Model.NullableEnum), "   43", new[] { "   43", "43" } },
+                { nameof(Model.NullableEnum), "-5   ", new[] { "-5   ", "-5" } },
+                { nameof(Model.NullableEnum), 0, new[] { "0", "Zero" } },
+                { nameof(Model.NullableEnum), 1, new[] { "1", "One" } },
+                { nameof(Model.NullableEnum), 43, new[] { "43" } },
+                { nameof(Model.NullableEnum), -5, new[] { "-5" } },
+                { nameof(Model.NullableEnum), int.MaxValue, new[] { "2147483647" } },
+                { nameof(Model.NullableEnum), (uint)int.MaxValue + 1, new[] { "2147483648" } },
+                { nameof(Model.NullableEnum), uint.MaxValue, new[] { "4294967295" } },
+                { nameof(Model.RegularEnum), RegularEnum.Zero, new[] { "0", "Zero" } },
+                { nameof(Model.RegularEnum), RegularEnum.One, new[] { "1", "One" } },
+                { nameof(Model.RegularEnum), RegularEnum.Two, new[] { "2", "Two" } },
+                { nameof(Model.RegularEnum), RegularEnum.Three, new[] { "3", "Three" } },
+                { nameof(Model.RegularEnum), string.Empty, new[] { string.Empty } },
+                { nameof(Model.RegularEnum), "Zero", new[] { "0", "Zero" } },
+                { nameof(Model.RegularEnum), "Two", new[] { "2", "Two" } },
+                { nameof(Model.RegularEnum), "One, Two", new[] { "One, Two", "3", "Three" } },
+                { nameof(Model.RegularEnum), "garbage", new[] { "garbage" } },
+                { nameof(Model.RegularEnum), "0", new[] { "0", "Zero" } },
+                { nameof(Model.RegularEnum), "   43", new[] { "   43", "43" } },
+                { nameof(Model.RegularEnum), "-5   ", new[] { "-5   ", "-5" } },
+                { nameof(Model.RegularEnum), 0, new[] { "0", "Zero" } },
+                { nameof(Model.RegularEnum), 1, new[] { "1", "One" } },
+                { nameof(Model.RegularEnum), 43, new[] { "43" } },
+                { nameof(Model.RegularEnum), -5, new[] { "-5" } },
+                { nameof(Model.RegularEnum), int.MaxValue, new[] { "2147483647" } },
+                { nameof(Model.RegularEnum), (uint)int.MaxValue + 1, new[] { "2147483648" } },
+                { nameof(Model.RegularEnum), uint.MaxValue, new[] { "4294967295" } },
+            };
         }
     }
 
@@ -847,7 +1036,8 @@ public class DefaultHtmlGeneratorTest
     public void GetCurrentValues_ValueConvertedAsExpected(
         string propertyName,
         object rawValue,
-        IReadOnlyCollection<string> expected)
+        IReadOnlyCollection<string> expected
+    )
     {
         // Arrange
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -856,14 +1046,16 @@ public class DefaultHtmlGeneratorTest
         viewContext.ModelState.SetModelValue(
             propertyName,
             new string[] { rawValue.ToString() },
-            attemptedValue: null);
+            attemptedValue: null
+        );
 
         // Act
         var result = htmlGenerator.GetCurrentValues(
             viewContext,
             modelExplorer: null,
             expression: propertyName,
-            allowMultiple: false);
+            allowMultiple: false
+        );
 
         // Assert
         Assert.Equal<string>(expected, result);
@@ -874,7 +1066,8 @@ public class DefaultHtmlGeneratorTest
     [InlineData(false, "<input name=\"formFieldName\" type=\"hidden\" value=\"requestToken\" />")]
     public void GenerateAntiforgery_GeneratesAntiforgeryFieldsOnlyIfRequired(
         bool hasAntiforgeryToken,
-        string expectedAntiforgeryHtmlField)
+        string expectedAntiforgeryHtmlField
+    )
     {
         // Arrange
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -887,7 +1080,10 @@ public class DefaultHtmlGeneratorTest
         var result = htmlGenerator.GenerateAntiforgery(viewContext);
 
         // Assert
-        var antiforgeryField = HtmlContentUtilities.HtmlContentToString(result, HtmlEncoder.Default);
+        var antiforgeryField = HtmlContentUtilities.HtmlContentToString(
+            result,
+            HtmlEncoder.Default
+        );
         Assert.Equal(expectedAntiforgeryHtmlField, antiforgeryField);
     }
 
@@ -898,7 +1094,9 @@ public class DefaultHtmlGeneratorTest
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public void GenerateAntiforgery_AlwaysGeneratesAntiforgeryToken_IfCannotRenderAtEnd(bool hasAntiforgeryToken)
+    public void GenerateAntiforgery_AlwaysGeneratesAntiforgeryToken_IfCannotRenderAtEnd(
+        bool hasAntiforgeryToken
+    )
     {
         // Arrange
         var expected = "<input name=\"formFieldName\" type=\"hidden\" value=\"requestToken\" />";
@@ -911,7 +1109,10 @@ public class DefaultHtmlGeneratorTest
         var result = htmlGenerator.GenerateAntiforgery(viewContext);
 
         // Assert
-        var antiforgeryField = HtmlContentUtilities.HtmlContentToString(result, HtmlEncoder.Default);
+        var antiforgeryField = HtmlContentUtilities.HtmlContentToString(
+            result,
+            HtmlEncoder.Default
+        );
         Assert.Equal(expected, antiforgeryField);
     }
 
@@ -927,13 +1128,19 @@ public class DefaultHtmlGeneratorTest
             .Setup(mock => mock.GetAndStoreTokens(It.IsAny<DefaultHttpContext>()))
             .Returns(() =>
             {
-                return new AntiforgeryTokenSet("requestToken", "cookieToken", "formFieldName", "headerName");
+                return new AntiforgeryTokenSet(
+                    "requestToken",
+                    "cookieToken",
+                    "formFieldName",
+                    "headerName"
+                );
             });
 
         var attributeProvider = new DefaultValidationHtmlAttributeProvider(
             mvcViewOptionsAccessor.Object,
             metadataProvider,
-            new ClientValidatorCache());
+            new ClientValidatorCache()
+        );
 
         return new DefaultHtmlGenerator(
             antiforgery.Object,
@@ -941,13 +1148,21 @@ public class DefaultHtmlGeneratorTest
             metadataProvider,
             new UrlHelperFactory(),
             htmlEncoder,
-            attributeProvider);
+            attributeProvider
+        );
     }
 
     // GetCurrentValues uses only the ModelStateDictionary and ViewDataDictionary from the passed ViewContext.
-    private static ViewContext GetViewContext<TModel>(TModel model, IModelMetadataProvider metadataProvider)
+    private static ViewContext GetViewContext<TModel>(
+        TModel model,
+        IModelMetadataProvider metadataProvider
+    )
     {
-        var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+        var actionContext = new ActionContext(
+            new DefaultHttpContext(),
+            new RouteData(),
+            new ActionDescriptor()
+        );
         var viewData = new ViewDataDictionary<TModel>(metadataProvider, actionContext.ModelState)
         {
             Model = model,
@@ -959,7 +1174,8 @@ public class DefaultHtmlGeneratorTest
             viewData,
             Mock.Of<ITempDataDictionary>(),
             TextWriter.Null,
-            new HtmlHelperOptions());
+            new HtmlHelperOptions()
+        );
     }
 
     public enum RegularEnum

@@ -10,14 +10,14 @@ class ThreadStartString
     public static int Main(string[] args)
     {
         // check args
-        if(args.Length != 1)
+        if (args.Length != 1)
         {
             Console.WriteLine("USAGE: ThreadStartString <string>|null\n");
             return -1;
         }
 
         string sToPass = string.Empty;
-        if(args[0].ToLower() == "null")
+        if (args[0].ToLower() == "null")
             sToPass = null;
         else
             sToPass = args[0];

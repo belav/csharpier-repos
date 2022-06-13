@@ -50,29 +50,49 @@ namespace ILCompiler
         private readonly IReadOnlyDictionary<string, bool> _featureSwitchValues;
         protected readonly TypeSystemContext _context;
 
-        protected ProcessLinkerXmlBase(TypeSystemContext context, UnmanagedMemoryStream documentStream, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
+        protected ProcessLinkerXmlBase(
+            TypeSystemContext context,
+            UnmanagedMemoryStream documentStream,
+            string xmlDocumentLocation,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        )
         {
             _context = context;
             using (documentStream)
             {
-                _document = XDocument.Load(documentStream, LoadOptions.SetLineInfo).CreateNavigator();
+                _document = XDocument
+                    .Load(documentStream, LoadOptions.SetLineInfo)
+                    .CreateNavigator();
             }
             _xmlDocumentLocation = xmlDocumentLocation;
             _featureSwitchValues = featureSwitchValues;
         }
 
-        protected ProcessLinkerXmlBase(TypeSystemContext context, UnmanagedMemoryStream documentStream, ManifestResource resource, ModuleDesc resourceAssembly, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
-            : this(context, documentStream, xmlDocumentLocation, featureSwitchValues)
+        protected ProcessLinkerXmlBase(
+            TypeSystemContext context,
+            UnmanagedMemoryStream documentStream,
+            ManifestResource resource,
+            ModuleDesc resourceAssembly,
+            string xmlDocumentLocation,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        ) : this(context, documentStream, xmlDocumentLocation, featureSwitchValues)
         {
-            _owningModule = resourceAssembly ?? throw new ArgumentNullException(nameof(resourceAssembly));
+            _owningModule =
+                resourceAssembly ?? throw new ArgumentNullException(nameof(resourceAssembly));
         }
 
-        protected virtual bool ShouldProcessElement(XPathNavigator nav) => FeatureSettings.ShouldProcessElement(nav, _featureSwitchValues);
+        protected virtual bool ShouldProcessElement(XPathNavigator nav) =>
+            FeatureSettings.ShouldProcessElement(nav, _featureSwitchValues);
 
         protected virtual void ProcessXml(bool ignoreResource)
         {
-            if (!AllowedAssemblySelector.HasFlag(AllowedAssemblies.AnyAssembly) && _owningModule == null)
-                throw new InvalidOperationException("The containing assembly must be specified for XML which is restricted to modifying that assembly only.");
+            if (
+                !AllowedAssemblySelector.HasFlag(AllowedAssemblies.AnyAssembly)
+                && _owningModule == null
+            )
+                throw new InvalidOperationException(
+                    "The containing assembly must be specified for XML which is restricted to modifying that assembly only."
+                );
 
             try
             {
@@ -96,7 +116,6 @@ namespace ILCompiler
                 // For embedded XML, allow not specifying the assembly explicitly in XML.
                 if (_owningModule != null)
                     ProcessAssembly(_owningModule, nav, warnOnUnresolvedTypes: true);
-
             }
             catch (Exception ex)
             {
@@ -105,9 +124,18 @@ namespace ILCompiler
             }
         }
 
-        protected virtual AllowedAssemblies AllowedAssemblySelector { get => _owningModule != null ? AllowedAssemblies.ContainingAssembly : AllowedAssemblies.AnyAssembly; }
+        protected virtual AllowedAssemblies AllowedAssemblySelector
+        {
+            get =>
+                _owningModule != null
+                    ? AllowedAssemblies.ContainingAssembly
+                    : AllowedAssemblies.AnyAssembly;
+        }
 
-        bool ShouldProcessAllAssemblies(XPathNavigator nav, [NotNullWhen(false)] out AssemblyName? assemblyName)
+        bool ShouldProcessAllAssemblies(
+            XPathNavigator nav,
+            [NotNullWhen(false)] out AssemblyName? assemblyName
+        )
         {
             assemblyName = null;
             if (GetFullName(nav) == AllAssembliesFullName)
@@ -123,8 +151,14 @@ namespace ILCompiler
             {
                 // Errors for invalid assembly names should show up even if this element will be
                 // skipped due to feature conditions.
-                bool processAllAssemblies = ShouldProcessAllAssemblies(assemblyNav, out AssemblyName? name);
-                if (processAllAssemblies && AllowedAssemblySelector != AllowedAssemblies.AllAssemblies)
+                bool processAllAssemblies = ShouldProcessAllAssemblies(
+                    assemblyNav,
+                    out AssemblyName? name
+                );
+                if (
+                    processAllAssemblies
+                    && AllowedAssemblySelector != AllowedAssemblies.AllAssemblies
+                )
                 {
                     //LogWarning(assemblyNav, DiagnosticId.XmlUnsuportedWildcard);
                     continue;
@@ -169,14 +203,20 @@ namespace ILCompiler
             }
         }
 
+        protected abstract void ProcessAssembly(
+            ModuleDesc assembly,
+            XPathNavigator nav,
+            bool warnOnUnresolvedTypes
+        );
 
-        protected abstract void ProcessAssembly(ModuleDesc assembly, XPathNavigator nav, bool warnOnUnresolvedTypes);
-
-        protected virtual void ProcessTypes(ModuleDesc assembly, XPathNavigator nav, bool warnOnUnresolvedTypes)
+        protected virtual void ProcessTypes(
+            ModuleDesc assembly,
+            XPathNavigator nav,
+            bool warnOnUnresolvedTypes
+        )
         {
             foreach (XPathNavigator typeNav in nav.SelectChildren(TypeElementName, XmlNamespace))
             {
-
                 if (!ShouldProcessElement(typeNav))
                     continue;
 
@@ -191,7 +231,11 @@ namespace ILCompiler
                 // TODO: Process exported types
 
                 // TODO: Semantics differ and xml format is cecil specific, therefore they are discrepancies on things like nested types
-                TypeDesc type = CustomAttributeTypeNameParser.GetTypeByCustomAttributeTypeName(assembly, fullname, throwIfNotFound: false);
+                TypeDesc type = CustomAttributeTypeNameParser.GetTypeByCustomAttributeTypeName(
+                    assembly,
+                    fullname,
+                    throwIfNotFound: false
+                );
 
                 if (type == null)
                 {
@@ -212,7 +256,11 @@ namespace ILCompiler
                 ProcessType(type, nav);
         }
 
-        protected virtual bool ProcessTypePattern(string fullname, ModuleDesc assembly, XPathNavigator nav)
+        protected virtual bool ProcessTypePattern(
+            string fullname,
+            ModuleDesc assembly,
+            XPathNavigator nav
+        )
         {
             Regex regex = new Regex(fullname.Replace(".", @"\.").Replace("*", "(.*)"));
 
@@ -224,7 +272,11 @@ namespace ILCompiler
 
         protected abstract void ProcessType(TypeDesc type, XPathNavigator nav);
 
-        protected void ProcessTypeChildren(TypeDesc type, XPathNavigator nav, object? customData = null)
+        protected void ProcessTypeChildren(
+            TypeDesc type,
+            XPathNavigator nav,
+            object? customData = null
+        )
         {
             if (nav.HasChildren)
             {
@@ -272,7 +324,6 @@ namespace ILCompiler
                     }
                 }
 
-
                 if (!foundMatch)
                 {
                     // LogWarning(nav, DiagnosticId.XmlCouldNotFindFieldOnType, name, type.GetDisplayName());
@@ -298,7 +349,9 @@ namespace ILCompiler
 
         void ProcessSelectedMethods(XPathNavigator nav, TypeDesc type, object? customData)
         {
-            foreach (XPathNavigator methodNav in nav.SelectChildren(MethodElementName, XmlNamespace))
+            foreach (
+                XPathNavigator methodNav in nav.SelectChildren(MethodElementName, XmlNamespace)
+            )
             {
                 if (!ShouldProcessElement(methodNav))
                     continue;
@@ -342,7 +395,12 @@ namespace ILCompiler
 
         protected virtual MethodDesc? GetMethod(TypeDesc type, string signature) => null;
 
-        protected virtual void ProcessMethod(TypeDesc type, MethodDesc method, XPathNavigator nav, object? customData) { }
+        protected virtual void ProcessMethod(
+            TypeDesc type,
+            MethodDesc method,
+            XPathNavigator nav,
+            object? customData
+        ) { }
 
 #if false
         void ProcessSelectedEvents(XPathNavigator nav, TypeDefinition type, object? customData)
@@ -519,6 +577,7 @@ namespace ILCompiler
                     sb.Append(new string(',', type.Rank - 1));
                 sb.Append(']');
             }
+
             public override void AppendName(StringBuilder sb, ByRefType type)
             {
                 AppendName(sb, type.ParameterType);
@@ -555,12 +614,11 @@ namespace ILCompiler
             {
                 sb.Append(type.Name);
             }
-            public override void AppendName(StringBuilder sb, SignatureMethodVariable type)
-            {
-            }
-            public override void AppendName(StringBuilder sb, SignatureTypeVariable type)
-            {
-            }
+
+            public override void AppendName(StringBuilder sb, SignatureMethodVariable type) { }
+
+            public override void AppendName(StringBuilder sb, SignatureTypeVariable type) { }
+
             protected override void AppendNameForInstantiatedType(StringBuilder sb, DefType type)
             {
                 AppendName(sb, type.GetTypeDefinition());
@@ -577,6 +635,7 @@ namespace ILCompiler
 
                 sb.Append('>');
             }
+
             protected override void AppendNameForNamespaceType(StringBuilder sb, DefType type)
             {
                 if (!String.IsNullOrEmpty(type.Namespace))
@@ -588,7 +647,11 @@ namespace ILCompiler
                 sb.Append(type.Name);
             }
 
-            protected override void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType)
+            protected override void AppendNameForNestedType(
+                StringBuilder sb,
+                DefType nestedType,
+                DefType containingType
+            )
             {
                 AppendName(sb, containingType);
                 sb.Append('/');

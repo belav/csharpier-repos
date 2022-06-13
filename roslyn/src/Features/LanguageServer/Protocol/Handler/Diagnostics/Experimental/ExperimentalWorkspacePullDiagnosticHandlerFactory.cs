@@ -12,7 +12,10 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics.Experimental;
 
-[ExportCSharpVisualBasicLspServiceFactory(typeof(ExperimentalWorkspacePullDiagnosticsHandler)), Shared]
+[
+    ExportCSharpVisualBasicLspServiceFactory(typeof(ExperimentalWorkspacePullDiagnosticsHandler)),
+    Shared
+]
 internal class ExperimentalWorkspacePullDiagnosticHandlerFactory : ILspServiceFactory
 {
     private readonly IDiagnosticService _diagnosticService;
@@ -26,7 +29,8 @@ internal class ExperimentalWorkspacePullDiagnosticHandlerFactory : ILspServiceFa
         IDiagnosticService diagnosticService,
         IDiagnosticAnalyzerService analyzerService,
         EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
-        IGlobalOptionService globalOptions)
+        IGlobalOptionService globalOptions
+    )
     {
         _diagnosticService = diagnosticService;
         _analyzerService = analyzerService;
@@ -34,6 +38,14 @@ internal class ExperimentalWorkspacePullDiagnosticHandlerFactory : ILspServiceFa
         _globalOptions = globalOptions;
     }
 
-    public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
-        => new ExperimentalWorkspacePullDiagnosticsHandler(_diagnosticService, _analyzerService, _editAndContinueDiagnosticUpdateSource, _globalOptions);
+    public ILspService CreateILspService(
+        LspServices lspServices,
+        WellKnownLspServerKinds serverKind
+    ) =>
+        new ExperimentalWorkspacePullDiagnosticsHandler(
+            _diagnosticService,
+            _analyzerService,
+            _editAndContinueDiagnosticUpdateSource,
+            _globalOptions
+        );
 }

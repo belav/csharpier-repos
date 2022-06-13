@@ -29,17 +29,15 @@ namespace AutoMapper.UnitTests.Bug
             SecondNameEnum = 2
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<FirstClass, SecondClass>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<FirstClass, SecondClass>();
+            });
 
         protected override void Because_of()
         {
-            var source = new FirstClass
-            {
-                EnumValue = FirstEnum.NamedEnum
-            };
+            var source = new FirstClass { EnumValue = FirstEnum.NamedEnum };
             _result = Mapper.Map<FirstClass, SecondClass>(source);
         }
 
@@ -49,5 +47,4 @@ namespace AutoMapper.UnitTests.Bug
             _result.EnumValue.ShouldBe(SecondEnum.DifferentNamedEnum);
         }
     }
-
 }

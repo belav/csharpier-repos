@@ -10,23 +10,28 @@ namespace ShiftTest
     {
         public byte clm_data = 0xFF;
     }
+
     public struct VT
     {
         public byte vtm_data;
     }
+
     public class byte32Test
     {
         private static byte s_data = 0xFF;
+
         public static byte f1(byte arg_data)
         {
             arg_data >>= 4;
             return arg_data;
         }
+
         public static byte f2(byte arg_data)
         {
             arg_data <<= 4;
             return arg_data;
         }
+
         public static int Main()
         {
             byte loc_data = 0xFF;

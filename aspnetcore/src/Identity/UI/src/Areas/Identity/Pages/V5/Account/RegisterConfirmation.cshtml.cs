@@ -40,10 +40,12 @@ public class RegisterConfirmationModel : PageModel
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnGetAsync(string email, string? returnUrl = null) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnGetAsync(string email, string? returnUrl = null) =>
+        throw new NotImplementedException();
 }
 
-internal sealed class RegisterConfirmationModel<TUser> : RegisterConfirmationModel where TUser : class
+internal sealed class RegisterConfirmationModel<TUser> : RegisterConfirmationModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
     private readonly IEmailSender _sender;
@@ -79,8 +81,15 @@ internal sealed class RegisterConfirmationModel<TUser> : RegisterConfirmationMod
             EmailConfirmationUrl = Url.Page(
                 "/Account/ConfirmEmail",
                 pageHandler: null,
-                values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                protocol: Request.Scheme);
+                values: new
+                {
+                    area = "Identity",
+                    userId = userId,
+                    code = code,
+                    returnUrl = returnUrl
+                },
+                protocol: Request.Scheme
+            );
         }
 
         return Page();

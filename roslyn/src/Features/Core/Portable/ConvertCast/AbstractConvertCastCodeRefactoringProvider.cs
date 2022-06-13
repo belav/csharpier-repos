@@ -21,8 +21,11 @@ namespace Microsoft.CodeAnalysis.ConvertCast
     ///
     /// Or vice versa.
     /// </summary>
-    internal abstract class AbstractConvertCastCodeRefactoringProvider<TTypeNode, TFromExpression, TToExpression>
-        : CodeRefactoringProvider
+    internal abstract class AbstractConvertCastCodeRefactoringProvider<
+        TTypeNode,
+        TFromExpression,
+        TToExpression
+    > : CodeRefactoringProvider
         where TTypeNode : SyntaxNode
         where TFromExpression : SyntaxNode
         where TToExpression : SyntaxNode
@@ -35,7 +38,9 @@ namespace Microsoft.CodeAnalysis.ConvertCast
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
-            var fromNodes = await context.GetRelevantNodesAsync<TFromExpression>().ConfigureAwait(false);
+            var fromNodes = await context
+                .GetRelevantNodesAsync<TFromExpression>()
+                .ConfigureAwait(false);
             var from = fromNodes.FirstOrDefault(n => n.RawKind == FromKind);
             if (from == null)
                 return;
@@ -46,7 +51,9 @@ namespace Microsoft.CodeAnalysis.ConvertCast
             var (document, _, cancellationToken) = context;
 
             var typeNode = GetTypeNode(from);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var type = semanticModel.GetTypeInfo(typeNode, cancellationToken).Type;
             if (type is { TypeKind: not TypeKind.Error, IsReferenceType: true })
             {
@@ -55,17 +62,22 @@ namespace Microsoft.CodeAnalysis.ConvertCast
                     CodeAction.Create(
                         title,
                         c => ConvertAsync(document, from, cancellationToken),
-                        title),
-                    from.Span);
+                        title
+                    ),
+                    from.Span
+                );
             }
         }
 
         protected async Task<Document> ConvertAsync(
             Document document,
             TFromExpression from,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var newRoot = root.ReplaceNode(from, ConvertExpression(from));
             return document.WithSyntaxRoot(newRoot);
         }

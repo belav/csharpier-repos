@@ -19,9 +19,7 @@ public sealed class Snapshot : ISnapshot
     /// </summary>
     public const int MaxGenericTypes = 30;
 
-    private Snapshot()
-    {
-    }
+    private Snapshot() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,8 +47,7 @@ public sealed class Snapshot : ISnapshot
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => throw new IndexOutOfRangeException();
+    public T GetValue<T>(int index) => throw new IndexOutOfRangeException();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,9 +64,12 @@ public sealed class Snapshot : ISnapshot
         {
             var snapshotParameter = Expression.Parameter(typeof(TSnapshot), "snapshot");
 
-            delegates[i] = Expression.Lambda(
+            delegates[i] = Expression
+                .Lambda(
                     typeof(Func<,>).MakeGenericType(typeof(TSnapshot), genericArguments[i]),
-                    Expression.Field(snapshotParameter, "_value" + i), snapshotParameter)
+                    Expression.Field(snapshotParameter, "_value" + i),
+                    snapshotParameter
+                )
                 .Compile();
         }
 
@@ -82,8 +82,8 @@ public sealed class Snapshot : ISnapshot
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static Type CreateSnapshotType(Type[] types)
-        => types.Length switch
+    public static Type CreateSnapshotType(Type[] types) =>
+        types.Length switch
         {
             1 => typeof(Snapshot<>).MakeGenericType(types),
             2 => typeof(Snapshot<,>).MakeGenericType(types),
@@ -125,14 +125,73 @@ public sealed class Snapshot : ISnapshot
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22,
-        T23, T24, T25, T26, T27, T28, T29>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17,
+    T18,
+    T19,
+    T20,
+    T21,
+    T22,
+    T23,
+    T24,
+    T25,
+    T26,
+    T27,
+    T28,
+    T29
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot
-            .CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21,
-                T22, T23, T24, T25, T26, T27, T28, T29>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<
+            T0,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            T17,
+            T18,
+            T19,
+            T20,
+            T21,
+            T22,
+            T23,
+            T24,
+            T25,
+            T26,
+            T27,
+            T28,
+            T29
+        >
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -170,7 +229,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T26 value26,
         T27 value27,
         T28 value28,
-        T29 value29)
+        T29 value29
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -241,9 +301,45 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23,
-            T24, T25, T26, T27, T28, T29>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17,
+                    T18,
+                    T19,
+                    T20,
+                    T21,
+                    T22,
+                    T23,
+                    T24,
+                    T25,
+                    T26,
+                    T27,
+                    T28,
+                    T29
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -253,40 +349,41 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            18 => _value18,
-            19 => _value19,
-            20 => _value20,
-            21 => _value21,
-            22 => _value22,
-            23 => _value23,
-            24 => _value24,
-            25 => _value25,
-            26 => _value26,
-            27 => _value27,
-            28 => _value28,
-            29 => _value29,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                18 => _value18,
+                19 => _value19,
+                20 => _value20,
+                21 => _value21,
+                22 => _value22,
+                23 => _value23,
+                24 => _value24,
+                25 => _value25,
+                26 => _value26,
+                27 => _value27,
+                28 => _value28,
+                29 => _value29,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -394,14 +491,71 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22,
-        T23, T24, T25, T26, T27, T28>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17,
+    T18,
+    T19,
+    T20,
+    T21,
+    T22,
+    T23,
+    T24,
+    T25,
+    T26,
+    T27,
+    T28
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot
-            .CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21,
-                T22, T23, T24, T25, T26, T27, T28>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<
+            T0,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            T17,
+            T18,
+            T19,
+            T20,
+            T21,
+            T22,
+            T23,
+            T24,
+            T25,
+            T26,
+            T27,
+            T28
+        >
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -438,7 +592,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T25 value25,
         T26 value26,
         T27 value27,
-        T28 value28)
+        T28 value28
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -507,9 +662,44 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23,
-            T24, T25, T26, T27, T28>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17,
+                    T18,
+                    T19,
+                    T20,
+                    T21,
+                    T22,
+                    T23,
+                    T24,
+                    T25,
+                    T26,
+                    T27,
+                    T28
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -519,39 +709,40 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            18 => _value18,
-            19 => _value19,
-            20 => _value20,
-            21 => _value21,
-            22 => _value22,
-            23 => _value23,
-            24 => _value24,
-            25 => _value25,
-            26 => _value26,
-            27 => _value27,
-            28 => _value28,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                18 => _value18,
+                19 => _value19,
+                20 => _value20,
+                21 => _value21,
+                22 => _value22,
+                23 => _value23,
+                24 => _value24,
+                25 => _value25,
+                26 => _value26,
+                27 => _value27,
+                28 => _value28,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -656,14 +847,69 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22,
-        T23, T24, T25, T26, T27>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17,
+    T18,
+    T19,
+    T20,
+    T21,
+    T22,
+    T23,
+    T24,
+    T25,
+    T26,
+    T27
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot
-            .CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21,
-                T22, T23, T24, T25, T26, T27>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<
+            T0,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            T17,
+            T18,
+            T19,
+            T20,
+            T21,
+            T22,
+            T23,
+            T24,
+            T25,
+            T26,
+            T27
+        >
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -699,7 +945,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T24 value24,
         T25 value25,
         T26 value26,
-        T27 value27)
+        T27 value27
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -766,9 +1013,43 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23,
-            T24, T25, T26, T27>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17,
+                    T18,
+                    T19,
+                    T20,
+                    T21,
+                    T22,
+                    T23,
+                    T24,
+                    T25,
+                    T26,
+                    T27
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -778,38 +1059,39 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            18 => _value18,
-            19 => _value19,
-            20 => _value20,
-            21 => _value21,
-            22 => _value22,
-            23 => _value23,
-            24 => _value24,
-            25 => _value25,
-            26 => _value26,
-            27 => _value27,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                18 => _value18,
+                19 => _value19,
+                20 => _value20,
+                21 => _value21,
+                22 => _value22,
+                23 => _value23,
+                24 => _value24,
+                25 => _value25,
+                26 => _value26,
+                27 => _value27,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -911,14 +1193,67 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22,
-        T23, T24, T25, T26>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17,
+    T18,
+    T19,
+    T20,
+    T21,
+    T22,
+    T23,
+    T24,
+    T25,
+    T26
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot
-            .CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21,
-                T22, T23, T24, T25, T26>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<
+            T0,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            T17,
+            T18,
+            T19,
+            T20,
+            T21,
+            T22,
+            T23,
+            T24,
+            T25,
+            T26
+        >
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -953,7 +1288,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T23 value23,
         T24 value24,
         T25 value25,
-        T26 value26)
+        T26 value26
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -1018,9 +1354,42 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23,
-            T24, T25, T26>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17,
+                    T18,
+                    T19,
+                    T20,
+                    T21,
+                    T22,
+                    T23,
+                    T24,
+                    T25,
+                    T26
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1030,37 +1399,38 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            18 => _value18,
-            19 => _value19,
-            20 => _value20,
-            21 => _value21,
-            22 => _value22,
-            23 => _value23,
-            24 => _value24,
-            25 => _value25,
-            26 => _value26,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                18 => _value18,
+                19 => _value19,
+                20 => _value20,
+                21 => _value21,
+                22 => _value22,
+                23 => _value23,
+                24 => _value24,
+                25 => _value25,
+                26 => _value26,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -1159,14 +1529,65 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22,
-        T23, T24, T25>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17,
+    T18,
+    T19,
+    T20,
+    T21,
+    T22,
+    T23,
+    T24,
+    T25
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot
-            .CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21,
-                T22, T23, T24, T25>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<
+            T0,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            T17,
+            T18,
+            T19,
+            T20,
+            T21,
+            T22,
+            T23,
+            T24,
+            T25
+        >
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1200,7 +1621,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T22 value22,
         T23 value23,
         T24 value24,
-        T25 value25)
+        T25 value25
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -1263,9 +1685,41 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23,
-            T24, T25>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17,
+                    T18,
+                    T19,
+                    T20,
+                    T21,
+                    T22,
+                    T23,
+                    T24,
+                    T25
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1275,36 +1729,37 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            18 => _value18,
-            19 => _value19,
-            20 => _value20,
-            21 => _value21,
-            22 => _value22,
-            23 => _value23,
-            24 => _value24,
-            25 => _value25,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                18 => _value18,
+                19 => _value19,
+                20 => _value20,
+                21 => _value21,
+                22 => _value22,
+                23 => _value23,
+                24 => _value24,
+                25 => _value25,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -1400,14 +1855,63 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22,
-        T23, T24>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17,
+    T18,
+    T19,
+    T20,
+    T21,
+    T22,
+    T23,
+    T24
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot
-            .CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21,
-                T22, T23, T24>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<
+            T0,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            T17,
+            T18,
+            T19,
+            T20,
+            T21,
+            T22,
+            T23,
+            T24
+        >
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1440,7 +1944,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T21 value21,
         T22 value22,
         T23 value23,
-        T24 value24)
+        T24 value24
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -1501,9 +2006,40 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23,
-            T24>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17,
+                    T18,
+                    T19,
+                    T20,
+                    T21,
+                    T22,
+                    T23,
+                    T24
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1513,35 +2049,36 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            18 => _value18,
-            19 => _value19,
-            20 => _value20,
-            21 => _value21,
-            22 => _value22,
-            23 => _value23,
-            24 => _value24,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                18 => _value18,
+                19 => _value19,
+                20 => _value20,
+                21 => _value21,
+                22 => _value22,
+                23 => _value23,
+                24 => _value24,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -1634,14 +2171,61 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22,
-        T23>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17,
+    T18,
+    T19,
+    T20,
+    T21,
+    T22,
+    T23
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot
-            .CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21,
-                T22, T23>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<
+            T0,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            T17,
+            T18,
+            T19,
+            T20,
+            T21,
+            T22,
+            T23
+        >
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1673,7 +2257,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T20 value20,
         T21 value21,
         T22 value22,
-        T23 value23)
+        T23 value23
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -1732,9 +2317,39 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23>
-            , T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17,
+                    T18,
+                    T19,
+                    T20,
+                    T21,
+                    T22,
+                    T23
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1744,34 +2359,35 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            18 => _value18,
-            19 => _value19,
-            20 => _value20,
-            21 => _value21,
-            22 => _value22,
-            23 => _value23,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                18 => _value18,
+                19 => _value19,
+                20 => _value20,
+                21 => _value21,
+                22 => _value22,
+                23 => _value23,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -1861,13 +2477,59 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17,
+    T18,
+    T19,
+    T20,
+    T21,
+    T22
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot
-            .CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21,
-                T22>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<
+            T0,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            T17,
+            T18,
+            T19,
+            T20,
+            T21,
+            T22
+        >
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1898,7 +2560,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T19 value19,
         T20 value20,
         T21 value21,
-        T22 value22)
+        T22 value22
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -1955,9 +2618,38 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22>, T>)
-            ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17,
+                    T18,
+                    T19,
+                    T20,
+                    T21,
+                    T22
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1967,33 +2659,34 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            18 => _value18,
-            19 => _value19,
-            20 => _value20,
-            21 => _value21,
-            22 => _value22,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                18 => _value18,
+                19 => _value19,
+                20 => _value20,
+                21 => _value21,
+                22 => _value22,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -2080,13 +2773,57 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17,
+    T18,
+    T19,
+    T20,
+    T21
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot
-            .CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>
-            >();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<
+            T0,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            T17,
+            T18,
+            T19,
+            T20,
+            T21
+        >
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2116,7 +2853,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T18 value18,
         T19 value19,
         T20 value20,
-        T21 value21)
+        T21 value21
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -2171,9 +2909,37 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>, T>)
-            ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17,
+                    T18,
+                    T19,
+                    T20,
+                    T21
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2183,32 +2949,33 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            18 => _value18,
-            19 => _value19,
-            20 => _value20,
-            21 => _value21,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                18 => _value18,
+                19 => _value19,
+                20 => _value20,
+                21 => _value21,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -2292,12 +3059,55 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17,
+    T18,
+    T19,
+    T20
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot
-            .CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<
+            T0,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            T17,
+            T18,
+            T19,
+            T20
+        >
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2326,7 +3136,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T17 value17,
         T18 value18,
         T19 value19,
-        T20 value20)
+        T20 value20
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -2379,9 +3190,36 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>, T>)
-            ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17,
+                    T18,
+                    T19,
+                    T20
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2391,31 +3229,32 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            18 => _value18,
-            19 => _value19,
-            20 => _value20,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                18 => _value18,
+                19 => _value19,
+                20 => _value20,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -2496,11 +3335,53 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17,
+    T18,
+    T19
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<
+            T0,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            T17,
+            T18,
+            T19
+        >
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2528,7 +3409,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T16 value16,
         T17 value17,
         T18 value18,
-        T19 value19)
+        T19 value19
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -2579,9 +3461,35 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>, T>)ValueReaders
-            [index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17,
+                    T18,
+                    T19
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2591,30 +3499,31 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            18 => _value18,
-            19 => _value19,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                18 => _value18,
+                19 => _value19,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -2692,11 +3601,51 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17,
+    T18
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<
+            T0,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            T17,
+            T18
+        >
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2723,7 +3672,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T15 value15,
         T16 value16,
         T17 value17,
-        T18 value18)
+        T18 value18
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -2772,9 +3722,34 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>, T>)ValueReaders[index]
-            )(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17,
+                    T18
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2784,29 +3759,30 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            18 => _value18,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                18 => _value18,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -2881,11 +3857,30 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16,
+    T17
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2911,7 +3906,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T14 value14,
         T15 value15,
         T16 value16,
-        T17 value17)
+        T17 value17
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -2958,9 +3954,33 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>, T>)ValueReaders[index])(
-            this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<
+                    T0,
+                    T1,
+                    T2,
+                    T3,
+                    T4,
+                    T5,
+                    T6,
+                    T7,
+                    T8,
+                    T9,
+                    T10,
+                    T11,
+                    T12,
+                    T13,
+                    T14,
+                    T15,
+                    T16,
+                    T17
+                >,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2970,28 +3990,29 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            17 => _value17,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                17 => _value17,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -3063,11 +4084,29 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>
-    : ISnapshot
+public sealed class Snapshot<
+    T0,
+    T1,
+    T2,
+    T3,
+    T4,
+    T5,
+    T6,
+    T7,
+    T8,
+    T9,
+    T10,
+    T11,
+    T12,
+    T13,
+    T14,
+    T15,
+    T16
+> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3092,7 +4131,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T13 value13,
         T14 value14,
         T15 value15,
-        T16 value16)
+        T16 value16
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -3137,8 +4177,14 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3148,27 +4194,28 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            16 => _value16,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                16 => _value16,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -3240,8 +4287,9 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
     : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3265,7 +4313,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T12 value12,
         T13 value13,
         T14 value14,
-        T15 value15)
+        T15 value15
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -3308,8 +4357,14 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<
+                Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>,
+                T
+            >)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3319,26 +4374,27 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            15 => _value15,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                15 => _value15,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -3407,8 +4463,9 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
     : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3431,7 +4488,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T11 value11,
         T12 value12,
         T13 value13,
-        T14 value14)
+        T14 value14
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -3472,8 +4530,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>, T>)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3483,25 +4544,26 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            14 => _value14,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                14 => _value14,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -3564,11 +4626,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
-    : ISnapshot
+public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3590,7 +4652,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T10 value10,
         T11 value11,
         T12 value12,
-        T13 value13)
+        T13 value13
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -3629,8 +4692,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>, T>)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3640,24 +4706,25 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            13 => _value13,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                13 => _value13,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -3717,11 +4784,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
-    : ISnapshot
+public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3742,7 +4809,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         T9 value9,
         T10 value10,
         T11 value11,
-        T12 value12)
+        T12 value12
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -3779,8 +4847,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        (
+            (Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>, T>)
+                ValueReaders[index]
+        )(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3790,23 +4861,24 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            12 => _value12,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                12 => _value12,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -3863,11 +4935,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
-    : ISnapshot
+public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3887,7 +4959,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
         T8 value8,
         T9 value9,
         T10 value10,
-        T11 value11)
+        T11 value11
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -3922,8 +4995,10 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>, T>)ValueReaders[index])(
+            this
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3933,22 +5008,23 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            11 => _value11,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                11 => _value11,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -4002,11 +5078,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
-    : ISnapshot
+public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4025,7 +5101,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
         T7 value7,
         T8 value8,
         T9 value9,
-        T10 value10)
+        T10 value10
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -4058,8 +5135,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>, T>)ValueReaders[index])(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4069,21 +5146,22 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            10 => _value10,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                10 => _value10,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -4134,11 +5212,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>
-    : ISnapshot
+public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4156,7 +5234,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>
         T6 value6,
         T7 value7,
         T8 value8,
-        T9 value9)
+        T9 value9
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -4187,8 +5266,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>, T>)ValueReaders[index])(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4198,20 +5277,21 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            9 => _value9,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                9 => _value9,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -4259,11 +5339,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8>
-    : ISnapshot
+public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4280,7 +5360,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8>
         T5 value5,
         T6 value6,
         T7 value7,
-        T8 value8)
+        T8 value8
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -4309,8 +5390,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8>, T>)ValueReaders[index])(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4320,19 +5401,20 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8>
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            8 => _value8,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                8 => _value8,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -4377,11 +5459,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8>
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7>
-    : ISnapshot
+public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5, T6, T7>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4397,7 +5479,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7>
         T4 value4,
         T5 value5,
         T6 value6,
-        T7 value7)
+        T7 value7
+    )
     {
         _value0 = value0;
         _value1 = value1;
@@ -4424,8 +5507,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6, T7>, T>)ValueReaders[index])(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4435,18 +5518,19 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7>
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            7 => _value7,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                7 => _value7,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -4488,11 +5572,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7>
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6>
-    : ISnapshot
+public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5, T6>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5, T6>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4500,14 +5584,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public Snapshot(
-        T0 value0,
-        T1 value1,
-        T2 value2,
-        T3 value3,
-        T4 value4,
-        T5 value5,
-        T6 value6)
+    public Snapshot(T0 value0, T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6)
     {
         _value0 = value0;
         _value1 = value1;
@@ -4532,8 +5609,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        ((Func<Snapshot<T0, T1, T2, T3, T4, T5, T6>, T>)ValueReaders[index])(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4543,17 +5620,18 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6>
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            6 => _value6,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                6 => _value6,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -4592,11 +5670,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6>
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4, T5>
-    : ISnapshot
+public sealed class Snapshot<T0, T1, T2, T3, T4, T5> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4, T5>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4, T5>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4604,13 +5682,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public Snapshot(
-        T0 value0,
-        T1 value1,
-        T2 value2,
-        T3 value3,
-        T4 value4,
-        T5 value5)
+    public Snapshot(T0 value0, T1 value1, T2 value2, T3 value3, T4 value4, T5 value5)
     {
         _value0 = value0;
         _value1 = value1;
@@ -4633,8 +5705,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4, T5>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        ((Func<Snapshot<T0, T1, T2, T3, T4, T5>, T>)ValueReaders[index])(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4644,16 +5716,17 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5>
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            5 => _value5,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                5 => _value5,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -4689,11 +5762,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5>
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3, T4>
-    : ISnapshot
+public sealed class Snapshot<T0, T1, T2, T3, T4> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3, T4>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3, T4>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4701,12 +5774,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public Snapshot(
-        T0 value0,
-        T1 value1,
-        T2 value2,
-        T3 value3,
-        T4 value4)
+    public Snapshot(T0 value0, T1 value1, T2 value2, T3 value3, T4 value4)
     {
         _value0 = value0;
         _value1 = value1;
@@ -4727,8 +5795,8 @@ public sealed class Snapshot<T0, T1, T2, T3, T4>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3, T4>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        ((Func<Snapshot<T0, T1, T2, T3, T4>, T>)ValueReaders[index])(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4738,15 +5806,16 @@ public sealed class Snapshot<T0, T1, T2, T3, T4>
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            4 => _value4,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                4 => _value4,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -4779,11 +5848,11 @@ public sealed class Snapshot<T0, T1, T2, T3, T4>
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2, T3>
-    : ISnapshot
+public sealed class Snapshot<T0, T1, T2, T3> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2, T3>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2, T3>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4791,11 +5860,7 @@ public sealed class Snapshot<T0, T1, T2, T3>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public Snapshot(
-        T0 value0,
-        T1 value1,
-        T2 value2,
-        T3 value3)
+    public Snapshot(T0 value0, T1 value1, T2 value2, T3 value3)
     {
         _value0 = value0;
         _value1 = value1;
@@ -4814,8 +5879,8 @@ public sealed class Snapshot<T0, T1, T2, T3>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2, T3>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) =>
+        ((Func<Snapshot<T0, T1, T2, T3>, T>)ValueReaders[index])(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4825,14 +5890,15 @@ public sealed class Snapshot<T0, T1, T2, T3>
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            3 => _value3,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                3 => _value3,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -4862,11 +5928,11 @@ public sealed class Snapshot<T0, T1, T2, T3>
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1, T2>
-    : ISnapshot
+public sealed class Snapshot<T0, T1, T2> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1, T2>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<
+        Snapshot<T0, T1, T2>
+    >();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4874,10 +5940,7 @@ public sealed class Snapshot<T0, T1, T2>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public Snapshot(
-        T0 value0,
-        T1 value1,
-        T2 value2)
+    public Snapshot(T0 value0, T1 value1, T2 value2)
     {
         _value0 = value0;
         _value1 = value1;
@@ -4894,8 +5957,7 @@ public sealed class Snapshot<T0, T1, T2>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1, T2>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) => ((Func<Snapshot<T0, T1, T2>, T>)ValueReaders[index])(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4905,13 +5967,14 @@ public sealed class Snapshot<T0, T1, T2>
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            2 => _value2,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                2 => _value2,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -4938,11 +6001,9 @@ public sealed class Snapshot<T0, T1, T2>
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0, T1>
-    : ISnapshot
+public sealed class Snapshot<T0, T1> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0, T1>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<Snapshot<T0, T1>>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4950,9 +6011,7 @@ public sealed class Snapshot<T0, T1>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public Snapshot(
-        T0 value0,
-        T1 value1)
+    public Snapshot(T0 value0, T1 value1)
     {
         _value0 = value0;
         _value1 = value1;
@@ -4967,8 +6026,7 @@ public sealed class Snapshot<T0, T1>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0, T1>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) => ((Func<Snapshot<T0, T1>, T>)ValueReaders[index])(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -4978,12 +6036,13 @@ public sealed class Snapshot<T0, T1>
     /// </summary>
     public object? this[int index]
     {
-        get => index switch
-        {
-            0 => _value0,
-            1 => _value1,
-            _ => throw new IndexOutOfRangeException()
-        };
+        get =>
+            index switch
+            {
+                0 => _value0,
+                1 => _value1,
+                _ => throw new IndexOutOfRangeException()
+            };
         set
         {
             switch (index)
@@ -5007,11 +6066,9 @@ public sealed class Snapshot<T0, T1>
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public sealed class Snapshot<T0>
-    : ISnapshot
+public sealed class Snapshot<T0> : ISnapshot
 {
-    private static readonly Delegate[] ValueReaders
-        = Snapshot.CreateReaders<Snapshot<T0>>();
+    private static readonly Delegate[] ValueReaders = Snapshot.CreateReaders<Snapshot<T0>>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -5019,8 +6076,7 @@ public sealed class Snapshot<T0>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public Snapshot(
-        T0 value0)
+    public Snapshot(T0 value0)
     {
         _value0 = value0;
     }
@@ -5033,8 +6089,7 @@ public sealed class Snapshot<T0>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public T GetValue<T>(int index)
-        => ((Func<Snapshot<T0>, T>)ValueReaders[index])(this);
+    public T GetValue<T>(int index) => ((Func<Snapshot<T0>, T>)ValueReaders[index])(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -5045,10 +6100,11 @@ public sealed class Snapshot<T0>
     public object? this[int index]
     {
         get => index == 0 ? _value0 : throw new IndexOutOfRangeException();
-        set => _value0 = index switch
-        {
-            0 => (T0)value!,
-            _ => throw new IndexOutOfRangeException()
-        };
+        set =>
+            _value0 = index switch
+            {
+                0 => (T0)value!,
+                _ => throw new IndexOutOfRangeException()
+            };
     }
 }

@@ -27,12 +27,22 @@ internal sealed class HubCallerClients : IHubCallerClients
             _proxy = hubClients;
         }
 
-        public Task<T> InvokeCoreAsync<T>(string method, object?[] args, CancellationToken cancellationToken = default)
+        public Task<T> InvokeCoreAsync<T>(
+            string method,
+            object?[] args,
+            CancellationToken cancellationToken = default
+        )
         {
-            throw new InvalidOperationException("Client results inside a Hub method requires HubOptions.MaximumParallelInvocationsPerClient to be greater than 1.");
+            throw new InvalidOperationException(
+                "Client results inside a Hub method requires HubOptions.MaximumParallelInvocationsPerClient to be greater than 1."
+            );
         }
 
-        public Task SendCoreAsync(string method, object?[] args, CancellationToken cancellationToken = default)
+        public Task SendCoreAsync(
+            string method,
+            object?[] args,
+            CancellationToken cancellationToken = default
+        )
         {
             return _proxy.SendCoreAsync(method, args, cancellationToken);
         }

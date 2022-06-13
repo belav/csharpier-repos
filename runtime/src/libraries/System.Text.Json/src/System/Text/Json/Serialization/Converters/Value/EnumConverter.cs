@@ -10,8 +10,7 @@ using System.Text.Encodings.Web;
 
 namespace System.Text.Json.Serialization.Converters
 {
-    internal sealed class EnumConverter<T> : JsonConverter<T>
-        where T : struct, Enum
+    internal sealed class EnumConverter<T> : JsonConverter<T> where T : struct, Enum
     {
         private static readonly TypeCode s_enumTypeCode = Type.GetTypeCode(typeof(T));
 
@@ -37,12 +36,16 @@ namespace System.Text.Json.Serialization.Converters
             return type.IsEnum;
         }
 
-        public EnumConverter(EnumConverterOptions converterOptions, JsonSerializerOptions serializerOptions)
-            : this(converterOptions, namingPolicy: null, serializerOptions)
-        {
-        }
+        public EnumConverter(
+            EnumConverterOptions converterOptions,
+            JsonSerializerOptions serializerOptions
+        ) : this(converterOptions, namingPolicy: null, serializerOptions) { }
 
-        public EnumConverter(EnumConverterOptions converterOptions, JsonNamingPolicy? namingPolicy, JsonSerializerOptions serializerOptions)
+        public EnumConverter(
+            EnumConverterOptions converterOptions,
+            JsonNamingPolicy? namingPolicy,
+            JsonSerializerOptions serializerOptions
+        )
         {
             _converterOptions = converterOptions;
             _namingPolicy = namingPolicy;
@@ -78,11 +81,16 @@ namespace System.Text.Json.Serialization.Converters
                     key,
                     namingPolicy == null
                         ? JsonEncodedText.Encode(name, encoder)
-                        : FormatEnumValue(name, encoder));
+                        : FormatEnumValue(name, encoder)
+                );
             }
         }
 
-        public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override T Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             JsonTokenType token = reader.TokenType;
 
@@ -97,7 +105,10 @@ namespace System.Text.Json.Serialization.Converters
                 return ReadAsPropertyNameCore(ref reader, typeToConvert, options);
             }
 
-            if (token != JsonTokenType.Number || !_converterOptions.HasFlag(EnumConverterOptions.AllowNumbers))
+            if (
+                token != JsonTokenType.Number
+                || !_converterOptions.HasFlag(EnumConverterOptions.AllowNumbers)
+            )
             {
                 ThrowHelper.ThrowJsonException();
                 return default;
@@ -185,9 +196,10 @@ namespace System.Text.Json.Serialization.Converters
 
                     if (_nameCache.Count < NameCacheSizeSoftLimit)
                     {
-                        formatted = _namingPolicy == null
-                            ? JsonEncodedText.Encode(original, encoder)
-                            : FormatEnumValue(original, encoder);
+                        formatted =
+                            _namingPolicy == null
+                                ? JsonEncodedText.Encode(original, encoder)
+                                : FormatEnumValue(original, encoder);
 
                         writer.WriteStringValue(formatted);
 
@@ -199,8 +211,9 @@ namespace System.Text.Json.Serialization.Converters
                         // directly to the writer is cheaper than creating one and not caching it for reuse.
                         writer.WriteStringValue(
                             _namingPolicy == null
-                            ? original
-                            : FormatEnumValueToString(original, encoder));
+                                ? original
+                                : FormatEnumValueToString(original, encoder)
+                        );
                     }
 
                     return;
@@ -274,8 +287,10 @@ namespace System.Text.Json.Serialization.Converters
             // preceded by a negative sign. Identifiers have to start with a letter
             // so we'll just pick the first valid one and check for a negative sign
             // if needed.
-            return (value[0] >= 'A' &&
-                (!s_isSignedEnum || !value.StartsWith(NumberFormatInfo.CurrentInfo.NegativeSign)));
+            return (
+                value[0] >= 'A'
+                && (!s_isSignedEnum || !value.StartsWith(NumberFormatInfo.CurrentInfo.NegativeSign))
+            );
         }
 
         private JsonEncodedText FormatEnumValue(string value, JavaScriptEncoder? encoder)
@@ -301,9 +316,13 @@ namespace System.Text.Json.Serialization.Converters
 #if BUILDING_INBOX_LIBRARY
                     ValueSeparator
 #else
-                    new string[] { ValueSeparator }, StringSplitOptions.None
+                    new string[]
+                    {
+                        ValueSeparator
+                    },
+                    StringSplitOptions.None
 #endif
-                    );
+                );
 
                 for (int i = 0; i < enumValues.Length; i++)
                 {
@@ -316,21 +335,28 @@ namespace System.Text.Json.Serialization.Converters
             return converted;
         }
 
-        internal override T ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal override T ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
 #if NETCOREAPP
             char[]? rentedBuffer = null;
             int bufferLength = reader.ValueLength;
 
-            Span<char> charBuffer = bufferLength <= JsonConstants.StackallocCharThreshold
-                ? stackalloc char[JsonConstants.StackallocCharThreshold]
-                : (rentedBuffer = ArrayPool<char>.Shared.Rent(bufferLength));
+            Span<char> charBuffer =
+                bufferLength <= JsonConstants.StackallocCharThreshold
+                    ? stackalloc char[JsonConstants.StackallocCharThreshold]
+                    : (rentedBuffer = ArrayPool<char>.Shared.Rent(bufferLength));
 
             int charsWritten = reader.CopyString(charBuffer);
             ReadOnlySpan<char> source = charBuffer.Slice(0, charsWritten);
 
             // Try parsing case sensitive first
-            bool success = Enum.TryParse(source, out T value) || Enum.TryParse(source, ignoreCase: true, out value);
+            bool success =
+                Enum.TryParse(source, out T value)
+                || Enum.TryParse(source, ignoreCase: true, out value);
 
             if (rentedBuffer != null)
             {
@@ -340,7 +366,9 @@ namespace System.Text.Json.Serialization.Converters
 #else
             string? enumString = reader.GetString();
             // Try parsing case sensitive first
-            bool success = Enum.TryParse(enumString, out T value) || Enum.TryParse(enumString, ignoreCase: true, out value);
+            bool success =
+                Enum.TryParse(enumString, out T value)
+                || Enum.TryParse(enumString, ignoreCase: true, out value);
 #endif
             if (!success)
             {
@@ -350,7 +378,12 @@ namespace System.Text.Json.Serialization.Converters
             return value;
         }
 
-        internal override void WriteAsPropertyNameCore(Utf8JsonWriter writer, T value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            T value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
             // An EnumConverter that invokes this method
             // can only be created by JsonSerializerOptions.GetDictionaryKeyConverter
@@ -364,7 +397,10 @@ namespace System.Text.Json.Serialization.Converters
             {
                 Debug.Assert(!isWritingExtensionDataProperty);
 
-                if (_dictionaryKeyPolicyCache != null && _dictionaryKeyPolicyCache.TryGetValue(key, out JsonEncodedText formatted))
+                if (
+                    _dictionaryKeyPolicyCache != null
+                    && _dictionaryKeyPolicyCache.TryGetValue(key, out JsonEncodedText formatted)
+                )
                 {
                     writer.WritePropertyName(formatted);
                     return;
@@ -388,10 +424,13 @@ namespace System.Text.Json.Serialization.Converters
 
                     if (original == null)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_NamingPolicyReturnNull(options.DictionaryKeyPolicy);
+                        ThrowHelper.ThrowInvalidOperationException_NamingPolicyReturnNull(
+                            options.DictionaryKeyPolicy
+                        );
                     }
 
-                    _dictionaryKeyPolicyCache ??= new ConcurrentDictionary<ulong, JsonEncodedText>();
+                    _dictionaryKeyPolicyCache ??=
+                        new ConcurrentDictionary<ulong, JsonEncodedText>();
 
                     if (_dictionaryKeyPolicyCache.Count < NameCacheSizeSoftLimit)
                     {

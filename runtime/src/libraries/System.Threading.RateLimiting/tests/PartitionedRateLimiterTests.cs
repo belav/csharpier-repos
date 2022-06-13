@@ -21,7 +21,9 @@ namespace System.Threading.RateLimiting.Tests
         public async Task ThrowsWhenWaitingForLessThanZero()
         {
             using var limiter = new NotImplementedPartitionedRateLimiter<string>();
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await limiter.WaitAsync(string.Empty, -1));
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
+                async () => await limiter.WaitAsync(string.Empty, -1)
+            );
         }
 
         [Fact]
@@ -29,7 +31,8 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter = new NotImplementedPartitionedRateLimiter<string>();
             await Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await limiter.WaitAsync(string.Empty, 1, new CancellationToken(true)));
+                async () => await limiter.WaitAsync(string.Empty, 1, new CancellationToken(true))
+            );
         }
 
         // Create
@@ -134,8 +137,10 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     return RateLimitPartition.Create(1, key => limiterFactory.GetLimiter(key));
                 }
-                return RateLimitPartition.CreateConcurrencyLimiter(2,
-                    _ => new ConcurrencyLimiterOptions(1, QueueProcessingOrder.OldestFirst, 2));
+                return RateLimitPartition.CreateConcurrencyLimiter(
+                    2,
+                    _ => new ConcurrencyLimiterOptions(1, QueueProcessingOrder.OldestFirst, 2)
+                );
             });
 
             var lease = await limiter.WaitAsync("2");
@@ -158,22 +163,28 @@ namespace System.Threading.RateLimiting.Tests
         public async Task Create_BlockingFactoryDoesNotBlockOtherPartitions()
         {
             var limiterFactory = new TrackingRateLimiterFactory<int>();
-            var tcs = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var startedTcs = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var tcs = new TaskCompletionSource<object?>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var startedTcs = new TaskCompletionSource<object?>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.Create(1, key =>
-                    {
-                        startedTcs.SetResult(null);
-                        // block the factory method
-                        Assert.True(tcs.Task.Wait(TimeSpan.FromSeconds(10)));
-                        return limiterFactory.GetLimiter(key);
-                    });
+                    return RateLimitPartition.Create(
+                        1,
+                        key =>
+                        {
+                            startedTcs.SetResult(null);
+                            // block the factory method
+                            Assert.True(tcs.Task.Wait(TimeSpan.FromSeconds(10)));
+                            return limiterFactory.GetLimiter(key);
+                        }
+                    );
                 }
-                return RateLimitPartition.Create(2,
-                    key => limiterFactory.GetLimiter(key));
+                return RateLimitPartition.Create(2, key => limiterFactory.GetLimiter(key));
             });
 
             var lease = await limiter.WaitAsync("2");
@@ -209,14 +220,17 @@ namespace System.Threading.RateLimiting.Tests
         {
             var limiterFactory = new TrackingRateLimiterFactory<int>();
             var equality = new TestEquality();
-            using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
-            {
-                if (resource == "1")
+            using var limiter = PartitionedRateLimiter.Create<string, int>(
+                resource =>
                 {
-                    return RateLimitPartition.Create(1, key => limiterFactory.GetLimiter(key));
-                }
-                return RateLimitPartition.Create(2, key => limiterFactory.GetLimiter(key));
-            }, equality);
+                    if (resource == "1")
+                    {
+                        return RateLimitPartition.Create(1, key => limiterFactory.GetLimiter(key));
+                    }
+                    return RateLimitPartition.Create(2, key => limiterFactory.GetLimiter(key));
+                },
+                equality
+            );
 
             limiter.Acquire("1");
             // GetHashCode to add item to dictionary (skips TryGet for empty dictionary)
@@ -325,8 +339,18 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.CreateTokenBucketLimiter(1,
-                    _ => new TokenBucketRateLimiterOptions(1, QueueProcessingOrder.NewestFirst, 1, TimeSpan.FromMilliseconds(100), 1, false));
+                return RateLimitPartition.CreateTokenBucketLimiter(
+                    1,
+                    _ =>
+                        new TokenBucketRateLimiterOptions(
+                            1,
+                            QueueProcessingOrder.NewestFirst,
+                            1,
+                            TimeSpan.FromMilliseconds(100),
+                            1,
+                            false
+                        )
+                );
             });
 
             var lease = limiter.Acquire("");
@@ -342,8 +366,20 @@ namespace System.Threading.RateLimiting.Tests
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 // Use the non-specific Create method to make sure ReplenishingRateLimiters are still handled properly
-                return RateLimitPartition.Create(1,
-                    _ => new TokenBucketRateLimiter(new TokenBucketRateLimiterOptions(1, QueueProcessingOrder.NewestFirst, 1, TimeSpan.FromMilliseconds(100), 1, false)));
+                return RateLimitPartition.Create(
+                    1,
+                    _ =>
+                        new TokenBucketRateLimiter(
+                            new TokenBucketRateLimiterOptions(
+                                1,
+                                QueueProcessingOrder.NewestFirst,
+                                1,
+                                TimeSpan.FromMilliseconds(100),
+                                1,
+                                false
+                            )
+                        )
+                );
             });
 
             var lease = limiter.Acquire("");
@@ -360,11 +396,31 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.CreateTokenBucketLimiter(1,
-                        _ => new TokenBucketRateLimiterOptions(1, QueueProcessingOrder.NewestFirst, 1, TimeSpan.FromMilliseconds(100), 1, false));
+                    return RateLimitPartition.CreateTokenBucketLimiter(
+                        1,
+                        _ =>
+                            new TokenBucketRateLimiterOptions(
+                                1,
+                                QueueProcessingOrder.NewestFirst,
+                                1,
+                                TimeSpan.FromMilliseconds(100),
+                                1,
+                                false
+                            )
+                    );
                 }
-                return RateLimitPartition.CreateTokenBucketLimiter(2,
-                    _ => new TokenBucketRateLimiterOptions(1, QueueProcessingOrder.NewestFirst, 1, TimeSpan.FromMilliseconds(100), 1, false));
+                return RateLimitPartition.CreateTokenBucketLimiter(
+                    2,
+                    _ =>
+                        new TokenBucketRateLimiterOptions(
+                            1,
+                            QueueProcessingOrder.NewestFirst,
+                            1,
+                            TimeSpan.FromMilliseconds(100),
+                            1,
+                            false
+                        )
+                );
             });
 
             var lease = limiter.Acquire("1");
@@ -389,8 +445,10 @@ namespace System.Threading.RateLimiting.Tests
         {
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.CreateConcurrencyLimiter(1,
-                    _ => new ConcurrencyLimiterOptions(1, QueueProcessingOrder.NewestFirst, 1));
+                return RateLimitPartition.CreateConcurrencyLimiter(
+                    1,
+                    _ => new ConcurrencyLimiterOptions(1, QueueProcessingOrder.NewestFirst, 1)
+                );
             });
 
             var lease = limiter.Acquire("");
@@ -405,9 +463,17 @@ namespace System.Threading.RateLimiting.Tests
 
         internal sealed class NotImplementedPartitionedRateLimiter<T> : PartitionedRateLimiter<T>
         {
-            public override int GetAvailablePermits(T resourceID) => throw new NotImplementedException();
-            protected override RateLimitLease AcquireCore(T resourceID, int permitCount) => throw new NotImplementedException();
-            protected override ValueTask<RateLimitLease> WaitAsyncCore(T resourceID, int permitCount, CancellationToken cancellationToken) => throw new NotImplementedException();
+            public override int GetAvailablePermits(T resourceID) =>
+                throw new NotImplementedException();
+
+            protected override RateLimitLease AcquireCore(T resourceID, int permitCount) =>
+                throw new NotImplementedException();
+
+            protected override ValueTask<RateLimitLease> WaitAsyncCore(
+                T resourceID,
+                int permitCount,
+                CancellationToken cancellationToken
+            ) => throw new NotImplementedException();
         }
 
         internal sealed class TrackingRateLimiter : RateLimiter
@@ -438,7 +504,10 @@ namespace System.Threading.RateLimiting.Tests
                 return new Lease();
             }
 
-            protected override ValueTask<RateLimitLease> WaitAsyncCore(int permitCount, CancellationToken cancellationToken)
+            protected override ValueTask<RateLimitLease> WaitAsyncCore(
+                int permitCount,
+                CancellationToken cancellationToken
+            )
             {
                 Interlocked.Increment(ref _waitAsyncCallCount);
                 return new ValueTask<RateLimitLease>(new Lease());
@@ -459,9 +528,11 @@ namespace System.Threading.RateLimiting.Tests
             {
                 public override bool IsAcquired => throw new NotImplementedException();
 
-                public override IEnumerable<string> MetadataNames => throw new NotImplementedException();
+                public override IEnumerable<string> MetadataNames =>
+                    throw new NotImplementedException();
 
-                public override bool TryGetMetadata(string metadataName, out object? metadata) => throw new NotImplementedException();
+                public override bool TryGetMetadata(string metadataName, out object? metadata) =>
+                    throw new NotImplementedException();
             }
         }
 
@@ -494,6 +565,7 @@ namespace System.Threading.RateLimiting.Tests
                 Interlocked.Increment(ref _equalsCallCount);
                 return x == y;
             }
+
             public int GetHashCode([DisallowNull] int obj)
             {
                 Interlocked.Increment(ref _getHashCodeCallCount);

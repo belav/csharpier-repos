@@ -17,7 +17,8 @@ public class ProjectUsingWithNullables : AutoMapperSpecBase, IAsyncLifetime
         {
             CreateProjection<MyTable, MyTableModel>();
             CreateProjection<int, MyEnum>().ConvertUsing(x => (MyEnum)x);
-            CreateProjection<int?, MyEnum>().ConvertUsing(x => x.HasValue ? (MyEnum)x.Value : MyEnum.Value1);
+            CreateProjection<int?, MyEnum>()
+                .ConvertUsing(x => x.HasValue ? (MyEnum)x.Value : MyEnum.Value1);
         }
     }
 
@@ -45,10 +46,13 @@ public class ProjectUsingWithNullables : AutoMapperSpecBase, IAsyncLifetime
     {
         protected override void Seed(TestContext context)
         {
-            context.MyTable.AddRange(new[]{
-                new MyTable { EnumValue = (int)MyEnum.Value2 },
-                new MyTable { EnumValueNullable = (int?)MyEnum.Value1 },
-            });
+            context.MyTable.AddRange(
+                new[]
+                {
+                    new MyTable { EnumValue = (int)MyEnum.Value2 },
+                    new MyTable { EnumValueNullable = (int?)MyEnum.Value1 },
+                }
+            );
             base.Seed(context);
         }
     }
@@ -57,12 +61,14 @@ public class ProjectUsingWithNullables : AutoMapperSpecBase, IAsyncLifetime
     {
         public DbSet<MyTable> MyTable { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.AddProfile<MyProfile>());
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg => cfg.AddProfile<MyProfile>());
 
     [Fact]
     public void Should_project_ok()
     {
-        using(var context = new TestContext())
+        using (var context = new TestContext())
         {
             var results = ProjectTo<MyTableModel>(context.MyTable).ToList();
             results[0].Id.ShouldBe(1);
@@ -113,20 +119,19 @@ public class ProjectUsingBug : AutoMapperSpecBase, IAsyncLifetime
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Parent>()
-                .HasMany(x => x.Children);
+            modelBuilder.Entity<Parent>().HasMany(x => x.Children);
         }
 
         public DbSet<Parent> Parents { get; set; }
         public DbSet<Children> Children { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Parent, ParentVM>();
-        cfg.CreateProjection<Children, int>()
-            .ConvertUsing(c => c.ID);
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Parent, ParentVM>();
+            cfg.CreateProjection<Children, int>().ConvertUsing(c => c.ID);
+        });
 
     [Fact]
     public void can_map_with_projection()

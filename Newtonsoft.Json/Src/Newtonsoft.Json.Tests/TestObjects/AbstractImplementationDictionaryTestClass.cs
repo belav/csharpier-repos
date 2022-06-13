@@ -25,7 +25,6 @@
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class AbstractImplementationDictionaryTestClass<TKey, TValue> : AbstractDictionaryTestClass<TKey, TValue>
-    {
-    }
+    public class AbstractImplementationDictionaryTestClass<TKey, TValue>
+        : AbstractDictionaryTestClass<TKey, TValue> { }
 }

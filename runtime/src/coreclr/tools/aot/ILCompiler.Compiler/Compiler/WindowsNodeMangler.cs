@@ -9,7 +9,7 @@ namespace ILCompiler
 {
     //
     // The naming format of these names is known to the debugger
-    // 
+    //
     public class WindowsNodeMangler : NodeMangler
     {
         public const string NonGCStaticMemberName = "__NONGCSTATICS";
@@ -56,7 +56,10 @@ namespace ILCompiler
 
         public sealed override string ThreadStatics(TypeDesc type)
         {
-            return CreateStaticFieldName(type, NameMangler.CompilationUnitPrefix + ThreadStaticMemberName);
+            return CreateStaticFieldName(
+                type,
+                NameMangler.CompilationUnitPrefix + ThreadStaticMemberName
+            );
         }
 
         public sealed override string ThreadStaticsIndex(TypeDesc type)

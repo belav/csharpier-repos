@@ -22,63 +22,111 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
 
         internal static MissingMetadataException Create(TypeInfo pertainant)
         {
-            return CreateFromMetadataObject(SR.Reflection_InsufficientMetadata_EdbNeeded, pertainant);
+            return CreateFromMetadataObject(
+                SR.Reflection_InsufficientMetadata_EdbNeeded,
+                pertainant
+            );
         }
 
         internal static MissingMetadataException Create(TypeInfo pertainant, string nestedTypeName)
         {
             if (pertainant == null)
-                return new MissingMetadataException(SR.Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, "<unavailable>"));
+                return new MissingMetadataException(
+                    SR.Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, "<unavailable>")
+                );
 
             string usefulPertainant = ComputeUsefulPertainantIfPossible(pertainant);
             if (usefulPertainant == null)
-                return new MissingMetadataException(Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, pertainant.ToString()));
+                return new MissingMetadataException(
+                    Format(
+                        SR.Reflection_InsufficientMetadata_NoHelpAvailable,
+                        pertainant.ToString()
+                    )
+                );
             else
             {
-                usefulPertainant = usefulPertainant + "." + DiagnosticMappingTables.ConvertBackTickNameToNameWithReducerInputFormat(nestedTypeName, null);
-                return new MissingMetadataException(Format(SR.Reflection_InsufficientMetadata_EdbNeeded, usefulPertainant));
+                usefulPertainant =
+                    usefulPertainant
+                    + "."
+                    + DiagnosticMappingTables.ConvertBackTickNameToNameWithReducerInputFormat(
+                        nestedTypeName,
+                        null
+                    );
+                return new MissingMetadataException(
+                    Format(SR.Reflection_InsufficientMetadata_EdbNeeded, usefulPertainant)
+                );
             }
         }
 
         internal static MissingMetadataException Create(Type pertainant)
         {
-            return CreateFromMetadataObject(SR.Reflection_InsufficientMetadata_EdbNeeded, pertainant);
+            return CreateFromMetadataObject(
+                SR.Reflection_InsufficientMetadata_EdbNeeded,
+                pertainant
+            );
         }
 
         internal static MissingMetadataException Create(RuntimeTypeHandle pertainant)
         {
-            return CreateFromMetadataObject(SR.Reflection_InsufficientMetadata_EdbNeeded, pertainant);
+            return CreateFromMetadataObject(
+                SR.Reflection_InsufficientMetadata_EdbNeeded,
+                pertainant
+            );
         }
 
         private static MissingMetadataException CreateFromString(string pertainant)
         {
             if (pertainant == null)
-                return new MissingMetadataException(SR.Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, "<unavailable>"));
+                return new MissingMetadataException(
+                    SR.Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, "<unavailable>")
+                );
             else
-                return new MissingMetadataException(Format(SR.Reflection_InsufficientMetadata_EdbNeeded, pertainant));
+                return new MissingMetadataException(
+                    Format(SR.Reflection_InsufficientMetadata_EdbNeeded, pertainant)
+                );
         }
 
-        internal static MissingMetadataException CreateMissingArrayTypeException(Type elementType, bool isMultiDim, int rank)
+        internal static MissingMetadataException CreateMissingArrayTypeException(
+            Type elementType,
+            bool isMultiDim,
+            int rank
+        )
         {
             Debug.Assert(rank == 1 || isMultiDim);
             string s = CreateArrayTypeStringIfAvailable(elementType, rank);
             return CreateFromString(s);
         }
 
-        internal static MissingMetadataException CreateMissingConstructedGenericTypeException(Type genericTypeDefinition, Type[] genericTypeArguments)
+        internal static MissingMetadataException CreateMissingConstructedGenericTypeException(
+            Type genericTypeDefinition,
+            Type[] genericTypeArguments
+        )
         {
-            string s = CreateConstructedGenericTypeStringIfAvailable(genericTypeDefinition, genericTypeArguments);
+            string s = CreateConstructedGenericTypeStringIfAvailable(
+                genericTypeDefinition,
+                genericTypeArguments
+            );
             return CreateFromString(s);
         }
 
-        internal static MissingMetadataException CreateFromMetadataObject(string resourceId, object pertainant)
+        internal static MissingMetadataException CreateFromMetadataObject(
+            string resourceId,
+            object pertainant
+        )
         {
             if (pertainant == null)
-                return new MissingMetadataException(SR.Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, "<unavailable>"));
+                return new MissingMetadataException(
+                    SR.Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, "<unavailable>")
+                );
 
             string usefulPertainant = ComputeUsefulPertainantIfPossible(pertainant);
             if (usefulPertainant == null)
-                return new MissingMetadataException(Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, pertainant.ToString()));
+                return new MissingMetadataException(
+                    Format(
+                        SR.Reflection_InsufficientMetadata_NoHelpAvailable,
+                        pertainant.ToString()
+                    )
+                );
             else
                 return new MissingMetadataException(Format(resourceId, usefulPertainant));
         }
@@ -103,7 +151,9 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
             {
                 MemberInfo memberInfo = (MemberInfo)pertainant;
 
-                StringBuilder friendlyName = new StringBuilder(memberInfo.DeclaringType.ToDisplayStringIfAvailable(null));
+                StringBuilder friendlyName = new StringBuilder(
+                    memberInfo.DeclaringType.ToDisplayStringIfAvailable(null)
+                );
                 friendlyName.Append('.');
                 friendlyName.Append(memberInfo.Name);
                 if (pertainant is MethodBase)
@@ -151,7 +201,9 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
                             parameterType = parameterType.GetElementType();
                         }
 
-                        friendlyName.Append(parameter.ParameterType.ToDisplayStringIfAvailable(null));
+                        friendlyName.Append(
+                            parameter.ParameterType.ToDisplayStringIfAvailable(null)
+                        );
                     }
                     friendlyName.Append(')');
                 }
@@ -159,12 +211,16 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
                 return friendlyName.ToString();
             }
 
-            return null;  //Give up
+            return null; //Give up
         }
 
-        internal static string ToDisplayStringIfAvailable(this Type type, List<int> genericParameterOffsets)
+        internal static string ToDisplayStringIfAvailable(
+            this Type type,
+            List<int> genericParameterOffsets
+        )
         {
-            RuntimeTypeHandle runtimeTypeHandle = ReflectionCoreExecution.ExecutionDomain.GetTypeHandleIfAvailable(type);
+            RuntimeTypeHandle runtimeTypeHandle =
+                ReflectionCoreExecution.ExecutionDomain.GetTypeHandleIfAvailable(type);
             bool hasRuntimeTypeHandle = !runtimeTypeHandle.Equals(default(RuntimeTypeHandle));
 
             if (type.HasElementType)
@@ -187,7 +243,12 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
                     return s + (type.IsPointer ? "*" : "&");
                 }
             }
-            else if (((hasRuntimeTypeHandle && RuntimeAugments.IsGenericType(runtimeTypeHandle)) || type.IsConstructedGenericType))
+            else if (
+                (
+                    (hasRuntimeTypeHandle && RuntimeAugments.IsGenericType(runtimeTypeHandle))
+                    || type.IsConstructedGenericType
+                )
+            )
             {
                 Type genericTypeDefinition;
                 Type[] genericTypeArguments;
@@ -196,11 +257,16 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
                     RuntimeTypeHandle genericTypeDefinitionHandle;
                     RuntimeTypeHandle[] genericTypeArgumentHandles;
 
-                    genericTypeDefinitionHandle = RuntimeAugments.GetGenericInstantiation(runtimeTypeHandle, out genericTypeArgumentHandles);
+                    genericTypeDefinitionHandle = RuntimeAugments.GetGenericInstantiation(
+                        runtimeTypeHandle,
+                        out genericTypeArgumentHandles
+                    );
                     genericTypeDefinition = Type.GetTypeFromHandle(genericTypeDefinitionHandle);
                     genericTypeArguments = new Type[genericTypeArgumentHandles.Length];
                     for (int i = 0; i < genericTypeArguments.Length; i++)
-                        genericTypeArguments[i] = Type.GetTypeFromHandle(genericTypeArgumentHandles[i]);
+                        genericTypeArguments[i] = Type.GetTypeFromHandle(
+                            genericTypeArgumentHandles[i]
+                        );
                 }
                 else
                 {
@@ -208,7 +274,10 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
                     genericTypeArguments = type.GenericTypeArguments;
                 }
 
-                return CreateConstructedGenericTypeStringIfAvailable(genericTypeDefinition, genericTypeArguments);
+                return CreateConstructedGenericTypeStringIfAvailable(
+                    genericTypeDefinition,
+                    genericTypeArguments
+                );
             }
             else if (type.IsGenericParameter)
             {
@@ -217,7 +286,13 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
             else if (hasRuntimeTypeHandle)
             {
                 string s;
-                if (!DiagnosticMappingTables.TryGetDiagnosticStringForNamedType(runtimeTypeHandle, out s, genericParameterOffsets))
+                if (
+                    !DiagnosticMappingTables.TryGetDiagnosticStringForNamedType(
+                        runtimeTypeHandle,
+                        out s,
+                        genericParameterOffsets
+                    )
+                )
                     return null;
 
                 return s;
@@ -234,9 +309,7 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
                 {
                     s = type.FullName;
                 }
-                catch (MissingMetadataException)
-                {
-                }
+                catch (MissingMetadataException) { }
 
                 // Insert commas so that CreateConstructedGenericTypeStringIfAvailable can fill the blanks.
                 // This is not strictly correct for types nested under generic types, but at this point we're doing
@@ -264,13 +337,18 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
             if (s == null)
                 return null;
 
-            return s + "[" + new string(',', rank - 1) + "]";  // This does not bother to display multidims of rank 1 correctly since we bail on that case in the prior statement.
+            return s + "[" + new string(',', rank - 1) + "]"; // This does not bother to display multidims of rank 1 correctly since we bail on that case in the prior statement.
         }
 
-        private static string CreateConstructedGenericTypeStringIfAvailable(Type genericTypeDefinition, Type[] genericTypeArguments)
+        private static string CreateConstructedGenericTypeStringIfAvailable(
+            Type genericTypeDefinition,
+            Type[] genericTypeArguments
+        )
         {
             List<int> genericParameterOffsets = new List<int>();
-            string genericTypeDefinitionString = genericTypeDefinition.ToDisplayStringIfAvailable(genericParameterOffsets);
+            string genericTypeDefinitionString = genericTypeDefinition.ToDisplayStringIfAvailable(
+                genericParameterOffsets
+            );
 
             if (genericTypeDefinitionString == null)
                 return null;
@@ -278,7 +356,10 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
             // If we found too many generic arguments to insert things, strip out the excess. This is wrong, but also, nothing is right.
             if (genericTypeArguments.Length < genericParameterOffsets.Count)
             {
-                genericParameterOffsets.RemoveRange(genericTypeArguments.Length, genericParameterOffsets.Count - genericTypeArguments.Length);
+                genericParameterOffsets.RemoveRange(
+                    genericTypeArguments.Length,
+                    genericParameterOffsets.Count - genericTypeArguments.Length
+                );
             }
             // Similarly, if we found too few, add them at the end.
             while (genericTypeArguments.Length > genericParameterOffsets.Count)
@@ -296,7 +377,10 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
             StringBuilder genericTypeName = new StringBuilder(genericTypeDefinitionString);
             for (int i = genericParameterOffsets.Count - 1; i >= 0; --i)
             {
-                genericTypeName.Insert(genericParameterOffsets[i], genericTypeArguments[i].ToDisplayStringIfAvailable(null));
+                genericTypeName.Insert(
+                    genericParameterOffsets[i],
+                    genericTypeArguments[i].ToDisplayStringIfAvailable(null)
+                );
             }
 
             return genericTypeName.ToString();
@@ -317,7 +401,10 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
             // to the restricted message by the transform, but the pattern here is not recognized by the rewriter.
             // At this point we know the message doesn't come from resources (because message == resource key), so
             // we can't do much to make this localizable.
-            return resourceMessage + ": " + parameter + ". For more information, visit http://go.microsoft.com/fwlink/?LinkId=623485";
+            return resourceMessage
+                + ": "
+                + parameter
+                + ". For more information, visit http://go.microsoft.com/fwlink/?LinkId=623485";
         }
     }
 }

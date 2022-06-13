@@ -28,11 +28,11 @@ public class ValidationProblemDetails : HttpValidationProblemDetails
     /// </summary>
     /// <param name="modelState"><see cref="ModelStateDictionary"/> containing the validation errors.</param>
     public ValidationProblemDetails(ModelStateDictionary modelState)
-        : base(CreateErrorDictionary(modelState))
-    {
-    }
+        : base(CreateErrorDictionary(modelState)) { }
 
-    private static IDictionary<string, string[]> CreateErrorDictionary(ModelStateDictionary modelState)
+    private static IDictionary<string, string[]> CreateErrorDictionary(
+        ModelStateDictionary modelState
+    )
     {
         if (modelState == null)
         {
@@ -69,9 +69,9 @@ public class ValidationProblemDetails : HttpValidationProblemDetails
 
         static string GetErrorMessage(ModelError error)
         {
-            return string.IsNullOrEmpty(error.ErrorMessage) ?
-                Resources.SerializableError_DefaultError :
-                error.ErrorMessage;
+            return string.IsNullOrEmpty(error.ErrorMessage)
+                ? Resources.SerializableError_DefaultError
+                : error.ErrorMessage;
         }
     }
 
@@ -79,10 +79,7 @@ public class ValidationProblemDetails : HttpValidationProblemDetails
     /// Initializes a new instance of <see cref="ValidationProblemDetails"/> using the specified <paramref name="errors"/>.
     /// </summary>
     /// <param name="errors">The validation errors.</param>
-    public ValidationProblemDetails(IDictionary<string, string[]> errors)
-        : base(errors)
-    {
-    }
+    public ValidationProblemDetails(IDictionary<string, string[]> errors) : base(errors) { }
 
     /// <summary>
     /// Gets the validation errors associated with this instance of <see cref="HttpValidationProblemDetails"/>.

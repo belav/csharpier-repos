@@ -19,9 +19,12 @@ public sealed partial class JsonHttpResult<TValue> : IResult
     /// <param name="value">The value to format in the entity body.</param>
     /// <param name="jsonSerializerOptions">The serializer settings.</param>
     internal JsonHttpResult(TValue? value, JsonSerializerOptions? jsonSerializerOptions)
-        : this(value, statusCode: null, contentType: null, jsonSerializerOptions: jsonSerializerOptions)
-    {
-    }
+        : this(
+            value,
+            statusCode: null,
+            contentType: null,
+            jsonSerializerOptions: jsonSerializerOptions
+        ) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Json"/> class with the values.
@@ -29,10 +32,17 @@ public sealed partial class JsonHttpResult<TValue> : IResult
     /// <param name="value">The value to format in the entity body.</param>
     /// <param name="statusCode">The HTTP status code of the response.</param>
     /// <param name="jsonSerializerOptions">The serializer settings.</param>
-    internal JsonHttpResult(TValue? value, int? statusCode, JsonSerializerOptions? jsonSerializerOptions)
-        : this(value, statusCode: statusCode, contentType: null, jsonSerializerOptions: jsonSerializerOptions)
-    {
-    }
+    internal JsonHttpResult(
+        TValue? value,
+        int? statusCode,
+        JsonSerializerOptions? jsonSerializerOptions
+    )
+        : this(
+            value,
+            statusCode: statusCode,
+            contentType: null,
+            jsonSerializerOptions: jsonSerializerOptions
+        ) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Json"/> class with the values.
@@ -41,7 +51,12 @@ public sealed partial class JsonHttpResult<TValue> : IResult
     /// <param name="statusCode">The HTTP status code of the response.</param>
     /// <param name="jsonSerializerOptions">The serializer settings.</param>
     /// <param name="contentType">The value for the <c>Content-Type</c> header</param>
-    internal JsonHttpResult(TValue? value, int? statusCode, string? contentType, JsonSerializerOptions? jsonSerializerOptions)
+    internal JsonHttpResult(
+        TValue? value,
+        int? statusCode,
+        string? contentType,
+        JsonSerializerOptions? jsonSerializerOptions
+    )
     {
         Value = value;
         JsonSerializerOptions = jsonSerializerOptions;
@@ -96,6 +111,7 @@ public sealed partial class JsonHttpResult<TValue> : IResult
             logger,
             Value,
             ContentType,
-            JsonSerializerOptions);
+            JsonSerializerOptions
+        );
     }
 }

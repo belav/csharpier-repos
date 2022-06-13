@@ -12,27 +12,19 @@ namespace Microsoft.EntityFrameworkCore.Internal;
 
 internal sealed class LegacyReferenceEqualityComparer : IEqualityComparer<object>, IEqualityComparer
 {
-    private LegacyReferenceEqualityComparer()
-    {
-    }
+    private LegacyReferenceEqualityComparer() { }
 
     public static LegacyReferenceEqualityComparer Instance { get; } = new();
 
-    public new bool Equals(object? x, object? y)
-        => ReferenceEquals(x, y);
+    public new bool Equals(object? x, object? y) => ReferenceEquals(x, y);
 
-    public int GetHashCode(object obj)
-        => RuntimeHelpers.GetHashCode(obj);
+    public int GetHashCode(object obj) => RuntimeHelpers.GetHashCode(obj);
 
-    bool IEqualityComparer<object>.Equals(object? x, object? y)
-        => ReferenceEquals(x, y);
+    bool IEqualityComparer<object>.Equals(object? x, object? y) => ReferenceEquals(x, y);
 
-    int IEqualityComparer.GetHashCode(object obj)
-        => RuntimeHelpers.GetHashCode(obj);
+    int IEqualityComparer.GetHashCode(object obj) => RuntimeHelpers.GetHashCode(obj);
 
-    bool IEqualityComparer.Equals(object? x, object? y)
-        => ReferenceEquals(x, y);
+    bool IEqualityComparer.Equals(object? x, object? y) => ReferenceEquals(x, y);
 
-    int IEqualityComparer<object>.GetHashCode(object obj)
-        => RuntimeHelpers.GetHashCode(obj);
+    int IEqualityComparer<object>.GetHashCode(object obj) => RuntimeHelpers.GetHashCode(obj);
 }

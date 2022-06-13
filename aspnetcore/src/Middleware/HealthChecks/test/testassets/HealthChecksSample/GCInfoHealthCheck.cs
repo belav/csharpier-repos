@@ -19,7 +19,8 @@ public static class GCInfoHealthCheckBuilderExtensions
         string name,
         HealthStatus? failureStatus = null,
         IEnumerable<string> tags = null,
-        long? thresholdInBytes = null)
+        long? thresholdInBytes = null
+    )
     {
         // Register a check of type GCInfo
         builder.AddCheck<GCInfoHealthCheck>(name, failureStatus ?? HealthStatus.Degraded, tags);
@@ -27,10 +28,13 @@ public static class GCInfoHealthCheckBuilderExtensions
         // Configure named options to pass the threshold into the check.
         if (thresholdInBytes.HasValue)
         {
-            builder.Services.Configure<GCInfoOptions>(name, options =>
-            {
-                options.Threshold = thresholdInBytes.Value;
-            });
+            builder.Services.Configure<GCInfoOptions>(
+                name,
+                options =>
+                {
+                    options.Threshold = thresholdInBytes.Value;
+                }
+            );
         }
 
         return builder;
@@ -46,7 +50,10 @@ public class GCInfoHealthCheck : IHealthCheck
         _options = options;
     }
 
-    public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default(CancellationToken))
+    public Task<HealthCheckResult> CheckHealthAsync(
+        HealthCheckContext context,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         var options = _options.Get(context.Registration.Name);
 
@@ -56,23 +63,29 @@ public class GCInfoHealthCheck : IHealthCheck
         // Additionally we include some GC info in the reported diagnostics.
         var allocated = GC.GetTotalMemory(forceFullCollection: false);
         var data = new Dictionary<string, object>()
-            {
-                { "Allocated", allocated },
-                { "Gen0Collections", GC.CollectionCount(0) },
-                { "Gen1Collections", GC.CollectionCount(1) },
-                { "Gen2Collections", GC.CollectionCount(2) },
-            };
+        {
+            { "Allocated", allocated },
+            { "Gen0Collections", GC.CollectionCount(0) },
+            { "Gen1Collections", GC.CollectionCount(1) },
+            { "Gen2Collections", GC.CollectionCount(2) },
+        };
 
         // Report failure if the allocated memory is >= the threshold.
         //
         // Using context.Registration.FailureStatus means that the application developer can configure
         // how they want failures to appear.
-        var result = allocated >= options.Threshold ? context.Registration.FailureStatus : HealthStatus.Healthy;
+        var result =
+            allocated >= options.Threshold
+                ? context.Registration.FailureStatus
+                : HealthStatus.Healthy;
 
-        return Task.FromResult(new HealthCheckResult(
-            result,
-            description: "reports degraded status if allocated bytes >= 1gb",
-            data: data));
+        return Task.FromResult(
+            new HealthCheckResult(
+                result,
+                description: "reports degraded status if allocated bytes >= 1gb",
+                data: data
+            )
+        );
     }
 }
 

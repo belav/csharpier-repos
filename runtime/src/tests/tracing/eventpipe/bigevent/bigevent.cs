@@ -15,15 +15,12 @@ using Microsoft.Diagnostics.NETCore.Client;
 
 namespace Tracing.Tests.BigEventsValidation
 {
-
     public sealed class BigEventSource : EventSource
     {
         private static string bigString = new String('a', 100 * 1024);
         private static string smallString = new String('a', 10);
 
-        private BigEventSource()
-        {
-        }
+        private BigEventSource() { }
 
         public static BigEventSource Log = new BigEventSource();
 
@@ -38,7 +35,6 @@ namespace Tracing.Tests.BigEventsValidation
         }
     }
 
-
     public class BigEventsValidation
     {
         public static int Main(string[] args)
@@ -50,10 +46,19 @@ namespace Tracing.Tests.BigEventsValidation
                 new EventPipeProvider("BigEventSource", EventLevel.Verbose)
             };
 
-            return IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, providers, 1024, _Verify);
+            return IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                providers,
+                1024,
+                _Verify
+            );
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<string, ExpectedEventCount>()
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<
+            string,
+            ExpectedEventCount
+        >()
         {
             { "BigEventSource", -1 }
         };

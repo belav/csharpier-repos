@@ -17,6 +17,7 @@ namespace Internal.Cryptography.Pal
     {
         OtherName = 0,
         Rfc822Name = 1,
+
         // RFC 822: Standard for the format of ARPA Internet Text Messages.
         // That means "email", and an RFC 822 Name: "Email address"
         Email = Rfc822Name,
@@ -56,61 +57,68 @@ namespace Internal.Cryptography.Pal
 
         internal byte[] SerialNumber => certificate.TbsCertificate.SerialNumber.ToArray();
 
-        internal DateTime NotBefore => certificate.TbsCertificate.Validity.NotBefore.GetValue().UtcDateTime;
+        internal DateTime NotBefore =>
+            certificate.TbsCertificate.Validity.NotBefore.GetValue().UtcDateTime;
 
-        internal DateTime NotAfter => certificate.TbsCertificate.Validity.NotAfter.GetValue().UtcDateTime;
+        internal DateTime NotAfter =>
+            certificate.TbsCertificate.Validity.NotAfter.GetValue().UtcDateTime;
 
-        internal AlgorithmIdentifier PublicKeyAlgorithm => new AlgorithmIdentifier(certificate.TbsCertificate.SubjectPublicKeyInfo.Algorithm);
+        internal AlgorithmIdentifier PublicKeyAlgorithm =>
+            new AlgorithmIdentifier(certificate.TbsCertificate.SubjectPublicKeyInfo.Algorithm);
 
-        internal byte[] PublicKey => certificate.TbsCertificate.SubjectPublicKeyInfo.SubjectPublicKey.ToArray();
+        internal byte[] PublicKey =>
+            certificate.TbsCertificate.SubjectPublicKeyInfo.SubjectPublicKey.ToArray();
 
         internal byte[]? IssuerUniqueId => certificate.TbsCertificate.IssuerUniqueId?.ToArray();
 
         internal byte[]? SubjectUniqueId => certificate.TbsCertificate.SubjectUniqueId?.ToArray();
 
-        internal AlgorithmIdentifier SignatureAlgorithm => new AlgorithmIdentifier(certificate.SignatureAlgorithm);
+        internal AlgorithmIdentifier SignatureAlgorithm =>
+            new AlgorithmIdentifier(certificate.SignatureAlgorithm);
 
         internal byte[] SignatureValue => certificate.SignatureValue.ToArray();
 
         internal CertificateData(byte[] rawData)
         {
 #if DEBUG
-        try
-        {
-#endif
-            RawData = rawData;
-            certificate = CertificateAsn.Decode(rawData, AsnEncodingRules.DER);
-            certificate.TbsCertificate.ValidateVersion();
-            Issuer = new X500DistinguishedName(certificate.TbsCertificate.Issuer.ToArray());
-            Subject = new X500DistinguishedName(certificate.TbsCertificate.Subject.ToArray());
-            IssuerName = Issuer.Name;
-            SubjectName = Subject.Name;
-
-            AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
-            certificate.TbsCertificate.SubjectPublicKeyInfo.Encode(writer);
-            SubjectPublicKeyInfo = writer.Encode();
-
-            Extensions = new List<X509Extension>();
-            if (certificate.TbsCertificate.Extensions != null)
+            try
             {
-                foreach (X509ExtensionAsn rawExtension in certificate.TbsCertificate.Extensions)
-                {
-                    X509Extension extension = new X509Extension(
-                        rawExtension.ExtnId,
-                        rawExtension.ExtnValue.ToArray(),
-                        rawExtension.Critical);
+#endif
+                RawData = rawData;
+                certificate = CertificateAsn.Decode(rawData, AsnEncodingRules.DER);
+                certificate.TbsCertificate.ValidateVersion();
+                Issuer = new X500DistinguishedName(certificate.TbsCertificate.Issuer.ToArray());
+                Subject = new X500DistinguishedName(certificate.TbsCertificate.Subject.ToArray());
+                IssuerName = Issuer.Name;
+                SubjectName = Subject.Name;
 
-                    Extensions.Add(extension);
+                AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
+                certificate.TbsCertificate.SubjectPublicKeyInfo.Encode(writer);
+                SubjectPublicKeyInfo = writer.Encode();
+
+                Extensions = new List<X509Extension>();
+                if (certificate.TbsCertificate.Extensions != null)
+                {
+                    foreach (X509ExtensionAsn rawExtension in certificate.TbsCertificate.Extensions)
+                    {
+                        X509Extension extension = new X509Extension(
+                            rawExtension.ExtnId,
+                            rawExtension.ExtnValue.ToArray(),
+                            rawExtension.Critical
+                        );
+
+                        Extensions.Add(extension);
+                    }
                 }
-            }
 #if DEBUG
-        }
-        catch (Exception e)
-        {
-            throw new CryptographicException(
-                $"Error in reading certificate:{Environment.NewLine}{PemPrintCert(rawData)}",
-                e);
-        }
+            }
+            catch (Exception e)
+            {
+                throw new CryptographicException(
+                    $"Error in reading certificate:{Environment.NewLine}{PemPrintCert(rawData)}",
+                    e
+                );
+            }
 #endif
         }
 
@@ -171,7 +179,11 @@ namespace Internal.Cryptography.Pal
                     {
                         if (extension.Oid!.Value == extensionId)
                         {
-                            string? candidate = FindAltNameMatch(extension.RawData, matchType.Value, otherOid);
+                            string? candidate = FindAltNameMatch(
+                                extension.RawData,
+                                matchType.Value,
+                                otherOid
+                            );
 
                             if (candidate != null)
                             {
@@ -259,23 +271,30 @@ namespace Internal.Cryptography.Pal
             return ou ?? o ?? e ?? firstRdn;
         }
 
-        private static string? FindAltNameMatch(byte[] extensionBytes, GeneralNameType matchType, string? otherOid)
+        private static string? FindAltNameMatch(
+            byte[] extensionBytes,
+            GeneralNameType matchType,
+            string? otherOid
+        )
         {
             // If Other, have OID, else, no OID.
             Debug.Assert(
                 (otherOid == null) == (matchType != GeneralNameType.OtherName),
-                $"otherOid has incorrect nullarity for matchType {matchType}");
+                $"otherOid has incorrect nullarity for matchType {matchType}"
+            );
 
             Debug.Assert(
-                matchType == GeneralNameType.UniformResourceIdentifier ||
-                matchType == GeneralNameType.DnsName ||
-                matchType == GeneralNameType.Email ||
-                matchType == GeneralNameType.OtherName,
-                $"matchType ({matchType}) is not currently supported");
+                matchType == GeneralNameType.UniformResourceIdentifier
+                    || matchType == GeneralNameType.DnsName
+                    || matchType == GeneralNameType.Email
+                    || matchType == GeneralNameType.OtherName,
+                $"matchType ({matchType}) is not currently supported"
+            );
 
             Debug.Assert(
                 otherOid == null || otherOid == Oids.UserPrincipalName,
-                $"otherOid ({otherOid}) is not supported");
+                $"otherOid ({otherOid}) is not supported"
+            );
 
             try
             {
@@ -285,21 +304,31 @@ namespace Internal.Cryptography.Pal
 
                 while (sequenceReader.HasData)
                 {
-                    GeneralNameAsn.Decode(ref sequenceReader, extensionBytes, out GeneralNameAsn generalName);
+                    GeneralNameAsn.Decode(
+                        ref sequenceReader,
+                        extensionBytes,
+                        out GeneralNameAsn generalName
+                    );
 
                     switch (matchType)
                     {
                         case GeneralNameType.OtherName:
                             // If the OtherName OID didn't match, move to the next entry.
-                            if (generalName.OtherName.HasValue && generalName.OtherName.Value.TypeId == otherOid)
+                            if (
+                                generalName.OtherName.HasValue
+                                && generalName.OtherName.Value.TypeId == otherOid
+                            )
                             {
                                 // Currently only UPN is supported, which is a UTF8 string per
                                 // https://msdn.microsoft.com/en-us/library/ff842518.aspx
                                 AsnValueReader nameReader = new AsnValueReader(
                                     generalName.OtherName.Value.Value.Span,
-                                    AsnEncodingRules.DER);
+                                    AsnEncodingRules.DER
+                                );
 
-                                string udnName = nameReader.ReadCharacterString(UniversalTagNumber.UTF8String);
+                                string udnName = nameReader.ReadCharacterString(
+                                    UniversalTagNumber.UTF8String
+                                );
                                 nameReader.ThrowIfNotEmpty();
                                 return udnName;
                             }
@@ -337,7 +366,9 @@ namespace Internal.Cryptography.Pal
             return null;
         }
 
-        private static IEnumerable<KeyValuePair<string, string>> ReadReverseRdns(X500DistinguishedName name)
+        private static IEnumerable<KeyValuePair<string, string>> ReadReverseRdns(
+            X500DistinguishedName name
+        )
         {
             Stack<AsnReader> rdnReaders;
 
@@ -389,11 +420,15 @@ namespace Internal.Cryptography.Pal
             const string PemHeader = "-----BEGIN CERTIFICATE-----";
             const string PemFooter = "-----END CERTIFICATE-----";
 
-            StringBuilder builder = new StringBuilder(PemHeader.Length + PemFooter.Length + rawData.Length * 2);
+            StringBuilder builder = new StringBuilder(
+                PemHeader.Length + PemFooter.Length + rawData.Length * 2
+            );
             builder.Append(PemHeader);
             builder.AppendLine();
 
-            builder.Append(Convert.ToBase64String(rawData, Base64FormattingOptions.InsertLineBreaks));
+            builder.Append(
+                Convert.ToBase64String(rawData, Base64FormattingOptions.InsertLineBreaks)
+            );
             builder.AppendLine();
 
             builder.Append(PemFooter);

@@ -36,7 +36,8 @@ namespace System.Security.Cryptography
         public static new SHA256 Create() => new Implementation();
 
         [RequiresUnreferencedCode(CryptoConfig.CreateFromNameUnreferencedCodeMessage)]
-        public static new SHA256? Create(string hashName) => (SHA256?)CryptoConfig.CreateFromName(hashName);
+        public static new SHA256? Create(string hashName) =>
+            (SHA256?)CryptoConfig.CreateFromName(hashName);
 
         /// <summary>
         /// Computes the hash of data using the SHA256 algorithm.
@@ -86,7 +87,6 @@ namespace System.Security.Cryptography
             return bytesWritten;
         }
 
-
         /// <summary>
         /// Attempts to compute the hash of data using the SHA256 algorithm.
         /// </summary>
@@ -99,7 +99,11 @@ namespace System.Security.Cryptography
         /// <see langword="false"/> if <paramref name="destination"/> is too small to hold the
         /// calculated hash, <see langword="true"/> otherwise.
         /// </returns>
-        public static bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        public static bool TryHashData(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length < HashSizeInBytes)
             {
@@ -107,7 +111,11 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(HashAlgorithmNames.SHA256, source, destination);
+            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(
+                HashAlgorithmNames.SHA256,
+                source,
+                destination
+            );
             Debug.Assert(bytesWritten == HashSizeInBytes);
 
             return true;
@@ -142,7 +150,12 @@ namespace System.Security.Cryptography
             if (!source.CanRead)
                 throw new ArgumentException(SR.Argument_StreamNotReadable, nameof(source));
 
-            return LiteHashProvider.HashStream(HashAlgorithmNames.SHA256, HashSizeInBytes, source, destination);
+            return LiteHashProvider.HashStream(
+                HashAlgorithmNames.SHA256,
+                HashSizeInBytes,
+                source,
+                destination
+            );
         }
 
         /// <summary>
@@ -181,14 +194,22 @@ namespace System.Security.Cryptography
         /// <exception cref="ArgumentException">
         ///   <paramref name="source" /> does not support reading.
         /// </exception>
-        public static ValueTask<byte[]> HashDataAsync(Stream source, CancellationToken cancellationToken = default)
+        public static ValueTask<byte[]> HashDataAsync(
+            Stream source,
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
             if (!source.CanRead)
                 throw new ArgumentException(SR.Argument_StreamNotReadable, nameof(source));
 
-            return LiteHashProvider.HashStreamAsync(HashAlgorithmNames.SHA256, HashSizeInBytes, source, cancellationToken);
+            return LiteHashProvider.HashStreamAsync(
+                HashAlgorithmNames.SHA256,
+                HashSizeInBytes,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -217,7 +238,8 @@ namespace System.Security.Cryptography
         public static ValueTask<int> HashDataAsync(
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -232,7 +254,8 @@ namespace System.Security.Cryptography
                 HashSizeInBytes,
                 source,
                 destination,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         private sealed class Implementation : SHA256
@@ -251,11 +274,12 @@ namespace System.Security.Cryptography
             protected sealed override void HashCore(ReadOnlySpan<byte> source) =>
                 _hashProvider.AppendHashData(source);
 
-            protected sealed override byte[] HashFinal() =>
-                _hashProvider.FinalizeHashAndReset();
+            protected sealed override byte[] HashFinal() => _hashProvider.FinalizeHashAndReset();
 
-            protected sealed override bool TryHashFinal(Span<byte> destination, out int bytesWritten) =>
-                _hashProvider.TryFinalizeHashAndReset(destination, out bytesWritten);
+            protected sealed override bool TryHashFinal(
+                Span<byte> destination,
+                out int bytesWritten
+            ) => _hashProvider.TryFinalizeHashAndReset(destination, out bytesWritten);
 
             public sealed override void Initialize() => _hashProvider.Reset();
 

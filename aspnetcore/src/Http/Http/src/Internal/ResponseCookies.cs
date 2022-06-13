@@ -14,8 +14,10 @@ namespace Microsoft.AspNetCore.Http;
 /// </summary>
 internal sealed partial class ResponseCookies : IResponseCookies
 {
-    internal const string EnableCookieNameEncoding = "Microsoft.AspNetCore.Http.EnableCookieNameEncoding";
-    internal bool _enableCookieNameEncoding = AppContext.TryGetSwitch(EnableCookieNameEncoding, out var enabled) && enabled;
+    internal const string EnableCookieNameEncoding =
+        "Microsoft.AspNetCore.Http.EnableCookieNameEncoding";
+    internal bool _enableCookieNameEncoding =
+        AppContext.TryGetSwitch(EnableCookieNameEncoding, out var enabled) && enabled;
 
     private readonly IFeatureCollection _features;
     private ILogger? _logger;
@@ -36,7 +38,8 @@ internal sealed partial class ResponseCookies : IResponseCookies
     {
         var setCookieHeaderValue = new SetCookieHeaderValue(
             _enableCookieNameEncoding ? Uri.EscapeDataString(key) : key,
-            Uri.EscapeDataString(value))
+            Uri.EscapeDataString(value)
+        )
         {
             Path = "/"
         };
@@ -70,7 +73,8 @@ internal sealed partial class ResponseCookies : IResponseCookies
 
         var setCookieHeaderValue = new SetCookieHeaderValue(
             _enableCookieNameEncoding ? Uri.EscapeDataString(key) : key,
-            Uri.EscapeDataString(value))
+            Uri.EscapeDataString(value)
+        )
         {
             Domain = options.Domain,
             Path = options.Path,
@@ -87,7 +91,10 @@ internal sealed partial class ResponseCookies : IResponseCookies
     }
 
     /// <inheritdoc />
-    public void Append(ReadOnlySpan<KeyValuePair<string, string>> keyValuePairs, CookieOptions options)
+    public void Append(
+        ReadOnlySpan<KeyValuePair<string, string>> keyValuePairs,
+        CookieOptions options
+    )
     {
         if (options == null)
         {
@@ -129,8 +136,15 @@ internal sealed partial class ResponseCookies : IResponseCookies
 
         foreach (var keyValuePair in keyValuePairs)
         {
-            var key = _enableCookieNameEncoding ? Uri.EscapeDataString(keyValuePair.Key) : keyValuePair.Key;
-            cookies[position] = string.Concat(key, "=", Uri.EscapeDataString(keyValuePair.Value), cookierHeaderValue);
+            var key = _enableCookieNameEncoding
+                ? Uri.EscapeDataString(keyValuePair.Key)
+                : keyValuePair.Key;
+            cookies[position] = string.Concat(
+                key,
+                "=",
+                Uri.EscapeDataString(keyValuePair.Value),
+                cookierHeaderValue
+            );
             position++;
         }
 
@@ -153,7 +167,8 @@ internal sealed partial class ResponseCookies : IResponseCookies
             throw new ArgumentNullException(nameof(options));
         }
 
-        var encodedKeyPlusEquals = (_enableCookieNameEncoding ? Uri.EscapeDataString(key) : key) + "=";
+        var encodedKeyPlusEquals =
+            (_enableCookieNameEncoding ? Uri.EscapeDataString(key) : key) + "=";
         var domainHasValue = !string.IsNullOrEmpty(options.Domain);
         var pathHasValue = !string.IsNullOrEmpty(options.Path);
 
@@ -161,25 +176,26 @@ internal sealed partial class ResponseCookies : IResponseCookies
         if (domainHasValue && pathHasValue)
         {
             rejectPredicate = (value, encKeyPlusEquals, opts) =>
-                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase) &&
-                    value.IndexOf($"domain={opts.Domain}", StringComparison.OrdinalIgnoreCase) != -1 &&
-                    value.IndexOf($"path={opts.Path}", StringComparison.OrdinalIgnoreCase) != -1;
+                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase)
+                && value.IndexOf($"domain={opts.Domain}", StringComparison.OrdinalIgnoreCase) != -1
+                && value.IndexOf($"path={opts.Path}", StringComparison.OrdinalIgnoreCase) != -1;
         }
         else if (domainHasValue)
         {
             rejectPredicate = (value, encKeyPlusEquals, opts) =>
-                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase) &&
-                    value.IndexOf($"domain={opts.Domain}", StringComparison.OrdinalIgnoreCase) != -1;
+                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase)
+                && value.IndexOf($"domain={opts.Domain}", StringComparison.OrdinalIgnoreCase) != -1;
         }
         else if (pathHasValue)
         {
             rejectPredicate = (value, encKeyPlusEquals, opts) =>
-                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase) &&
-                    value.IndexOf($"path={opts.Path}", StringComparison.OrdinalIgnoreCase) != -1;
+                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase)
+                && value.IndexOf($"path={opts.Path}", StringComparison.OrdinalIgnoreCase) != -1;
         }
         else
         {
-            rejectPredicate = (value, encKeyPlusEquals, opts) => value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase);
+            rejectPredicate = (value, encKeyPlusEquals, opts) =>
+                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase);
         }
 
         var existingValues = Headers.SetCookie;
@@ -200,20 +216,29 @@ internal sealed partial class ResponseCookies : IResponseCookies
             Headers.SetCookie = new StringValues(newValues.ToArray());
         }
 
-        Append(key, string.Empty, new CookieOptions
-        {
-            Path = options.Path,
-            Domain = options.Domain,
-            Expires = DateTimeOffset.UnixEpoch,
-            Secure = options.Secure,
-            HttpOnly = options.HttpOnly,
-            SameSite = options.SameSite
-        });
+        Append(
+            key,
+            string.Empty,
+            new CookieOptions
+            {
+                Path = options.Path,
+                Domain = options.Domain,
+                Expires = DateTimeOffset.UnixEpoch,
+                Secure = options.Secure,
+                HttpOnly = options.HttpOnly,
+                SameSite = options.SameSite
+            }
+        );
     }
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Warning, "The cookie '{name}' has set 'SameSite=None' and must also set 'Secure'.", EventName = "SameSiteNotSecure")]
+        [LoggerMessage(
+            1,
+            LogLevel.Warning,
+            "The cookie '{name}' has set 'SameSite=None' and must also set 'Secure'.",
+            EventName = "SameSiteNotSecure"
+        )]
         public static partial void SameSiteCookieNotSecure(ILogger logger, string name);
     }
 }

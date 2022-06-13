@@ -15,20 +15,31 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 {
-    internal abstract class AbstractFormatDocumentHandlerBase<RequestType, ResponseType> : IRequestHandler<RequestType, ResponseType>
+    internal abstract class AbstractFormatDocumentHandlerBase<RequestType, ResponseType>
+        : IRequestHandler<RequestType, ResponseType>
     {
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
         public abstract TextDocumentIdentifier? GetTextDocumentIdentifier(RequestType request);
-        public abstract Task<ResponseType> HandleRequestAsync(RequestType request, RequestContext context, CancellationToken cancellationToken);
+        public abstract Task<ResponseType> HandleRequestAsync(
+            RequestType request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        );
 
-        protected async Task<LSP.TextEdit[]> GetTextEditsAsync(LSP.FormattingOptions formattingOptions, RequestContext context, CancellationToken cancellationToken, LSP.Range? range = null)
+        protected async Task<LSP.TextEdit[]> GetTextEditsAsync(
+            LSP.FormattingOptions formattingOptions,
+            RequestContext context,
+            CancellationToken cancellationToken,
+            LSP.Range? range = null
+        )
         {
             using var _ = ArrayBuilder<LSP.TextEdit>.GetInstance(out var edits);
 
             var document = context.Document;
-            var formattingService = document?.Project.LanguageServices.GetService<IXamlFormattingService>();
+            var formattingService =
+                document?.Project.LanguageServices.GetService<IXamlFormattingService>();
 
             if (document != null && formattingService != null)
             {
@@ -39,9 +50,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                     textSpan = ProtocolConversions.RangeToTextSpan(range, text);
                 }
 
-                var options = new XamlFormattingOptions { InsertSpaces = formattingOptions.InsertSpaces, TabSize = formattingOptions.TabSize, OtherOptions = formattingOptions.OtherOptions };
-                var textChanges = await formattingService.GetFormattingChangesAsync(document, options, textSpan, cancellationToken).ConfigureAwait(false);
-                edits.AddRange(textChanges.Select(change => ProtocolConversions.TextChangeToTextEdit(change, text)));
+                var options = new XamlFormattingOptions
+                {
+                    InsertSpaces = formattingOptions.InsertSpaces,
+                    TabSize = formattingOptions.TabSize,
+                    OtherOptions = formattingOptions.OtherOptions
+                };
+                var textChanges = await formattingService
+                    .GetFormattingChangesAsync(document, options, textSpan, cancellationToken)
+                    .ConfigureAwait(false);
+                edits.AddRange(
+                    textChanges.Select(
+                        change => ProtocolConversions.TextChangeToTextEdit(change, text)
+                    )
+                );
             }
 
             return edits.ToArray();

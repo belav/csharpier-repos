@@ -11,10 +11,10 @@ namespace ILCompiler
 {
     public class ProfileDataManager
     {
-        private readonly Dictionary<MethodDesc, MethodProfileData> _mergedProfileData = new Dictionary<MethodDesc, MethodProfileData>();
-        
-        public ProfileDataManager(IEnumerable<string> mibcFiles,
-                                  CompilerTypeSystemContext context)
+        private readonly Dictionary<MethodDesc, MethodProfileData> _mergedProfileData =
+            new Dictionary<MethodDesc, MethodProfileData>();
+
+        public ProfileDataManager(IEnumerable<string> mibcFiles, CompilerTypeSystemContext context)
         {
             List<ProfileData> _inputData = new List<ProfileData>();
 

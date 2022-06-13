@@ -28,9 +28,10 @@ public static class UpdateEntryExtensions
     {
         var value = updateEntry.GetCurrentValue(property);
         var typeMapping = property.GetTypeMapping();
-        value = value?.GetType().IsInteger() == true && typeMapping.ClrType.UnwrapNullableType().IsEnum
-            ? Enum.ToObject(typeMapping.ClrType.UnwrapNullableType(), value)
-            : value;
+        value =
+            value?.GetType().IsInteger() == true && typeMapping.ClrType.UnwrapNullableType().IsEnum
+                ? Enum.ToObject(typeMapping.ClrType.UnwrapNullableType(), value)
+                : value;
 
         var converter = typeMapping.Converter;
         if (converter != null)
@@ -47,13 +48,17 @@ public static class UpdateEntryExtensions
     /// <param name="updateEntry">The entry.</param>
     /// <param name="property">The property to get the value for.</param>
     /// <returns>The value for the property.</returns>
-    public static object? GetOriginalProviderValue(this IUpdateEntry updateEntry, IProperty property)
+    public static object? GetOriginalProviderValue(
+        this IUpdateEntry updateEntry,
+        IProperty property
+    )
     {
         var value = updateEntry.GetOriginalValue(property);
         var typeMapping = property.GetTypeMapping();
-        value = value?.GetType().IsInteger() == true && typeMapping.ClrType.UnwrapNullableType().IsEnum
-            ? Enum.ToObject(typeMapping.ClrType.UnwrapNullableType(), value)
-            : value;
+        value =
+            value?.GetType().IsInteger() == true && typeMapping.ClrType.UnwrapNullableType().IsEnum
+                ? Enum.ToObject(typeMapping.ClrType.UnwrapNullableType(), value)
+                : value;
 
         var converter = typeMapping.Converter;
         if (converter != null)
@@ -83,14 +88,17 @@ public static class UpdateEntryExtensions
     public static string ToDebugString(
         this IUpdateEntry updateEntry,
         ChangeTrackerDebugStringOptions options = ChangeTrackerDebugStringOptions.LongDefault,
-        int indent = 0)
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
 
         var entry = (InternalEntityEntry)updateEntry;
 
-        var keyString = entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties);
+        var keyString = entry.BuildCurrentValuesString(
+            entry.EntityType.FindPrimaryKey()!.Properties
+        );
 
         builder
             .Append(entry.EntityType.DisplayName())
@@ -107,10 +115,7 @@ public static class UpdateEntryExtensions
                 builder.AppendLine().Append(indentString);
 
                 var currentValue = entry.GetCurrentValue(property);
-                builder
-                    .Append("  ")
-                    .Append(property.Name)
-                    .Append(": ");
+                builder.Append("  ").Append(property.Name).Append(": ");
 
                 AppendValue(currentValue);
 
@@ -143,8 +148,7 @@ public static class UpdateEntryExtensions
                     builder.Append(" Unknown");
                 }
 
-                if (entry.HasOriginalValuesSnapshot
-                    && property.GetOriginalValueIndex() != -1)
+                if (entry.HasOriginalValuesSnapshot && property.GetOriginalValueIndex() != -1)
                 {
                     var originalValue = entry.GetOriginalValue(property);
                     if (!Equals(originalValue, currentValue))
@@ -174,18 +178,18 @@ public static class UpdateEntryExtensions
 
         if ((options & ChangeTrackerDebugStringOptions.IncludeNavigations) != 0)
         {
-            foreach (var navigation in entry.EntityType.GetNavigations()
-                         .Concat<INavigationBase>(entry.EntityType.GetSkipNavigations()))
+            foreach (
+                var navigation in entry.EntityType
+                    .GetNavigations()
+                    .Concat<INavigationBase>(entry.EntityType.GetSkipNavigations())
+            )
             {
                 builder.AppendLine().Append(indentString);
 
                 var currentValue = entry.GetCurrentValue(navigation);
                 var targetType = navigation.TargetEntityType;
 
-                builder
-                    .Append("  ")
-                    .Append(navigation.Name)
-                    .Append(": ");
+                builder.Append("  ").Append(navigation.Name).Append(": ");
 
                 if (currentValue == null)
                 {
@@ -196,7 +200,10 @@ public static class UpdateEntryExtensions
                     builder.Append('[');
 
                     const int maxRelatedToShow = 32;
-                    var relatedEntities = ((IEnumerable)currentValue).Cast<object>().Take(maxRelatedToShow + 1).ToList();
+                    var relatedEntities = ((IEnumerable)currentValue)
+                        .Cast<object>()
+                        .Take(maxRelatedToShow + 1)
+                        .ToList();
 
                     for (var i = 0; i < relatedEntities.Count; i++)
                     {
@@ -248,21 +255,23 @@ public static class UpdateEntryExtensions
                     stringValue = string.Concat(stringValue.AsSpan(0, 60), "...");
                 }
 
-                builder
-                    .Append('\'')
-                    .Append(stringValue)
-                    .Append('\'');
+                builder.Append('\'').Append(stringValue).Append('\'');
             }
         }
 
         void AppendRelatedKey(IEntityType targetType, object value)
         {
-            var otherEntry = entry.StateManager.TryGetEntry(value, targetType, throwOnTypeMismatch: false);
+            var otherEntry = entry.StateManager.TryGetEntry(
+                value,
+                targetType,
+                throwOnTypeMismatch: false
+            );
 
             builder.Append(
                 otherEntry == null
                     ? "<not found>"
-                    : otherEntry.BuildCurrentValuesString(targetType.FindPrimaryKey()!.Properties));
+                    : otherEntry.BuildCurrentValuesString(targetType.FindPrimaryKey()!.Properties)
+            );
         }
     }
 
@@ -276,20 +285,24 @@ public static class UpdateEntryExtensions
     /// <returns>The string representation.</returns>
     public static string BuildCurrentValuesString(
         this IUpdateEntry entry,
-        IEnumerable<IPropertyBase> properties)
-        => "{"
-            + string.Join(
-                ", ", properties.Select(
-                    p =>
-                    {
-                        var currentValue = entry.GetCurrentValue(p);
-                        return p.Name
-                            + ": "
-                            + (currentValue == null
-                                ? "<null>"
-                                : Convert.ToString(currentValue, CultureInfo.InvariantCulture));
-                    }))
-            + "}";
+        IEnumerable<IPropertyBase> properties
+    ) =>
+        "{"
+        + string.Join(
+            ", ",
+            properties.Select(p =>
+            {
+                var currentValue = entry.GetCurrentValue(p);
+                return p.Name
+                    + ": "
+                    + (
+                        currentValue == null
+                            ? "<null>"
+                            : Convert.ToString(currentValue, CultureInfo.InvariantCulture)
+                    );
+            })
+        )
+        + "}";
 
     /// <summary>
     ///     Creates a formatted string representation of the given properties and their original
@@ -301,18 +314,22 @@ public static class UpdateEntryExtensions
     /// <returns>The string representation.</returns>
     public static string BuildOriginalValuesString(
         this IUpdateEntry entry,
-        IEnumerable<IPropertyBase> properties)
-        => "{"
-            + string.Join(
-                ", ", properties.Select(
-                    p =>
-                    {
-                        var originalValue = entry.GetOriginalValue(p);
-                        return p.Name
-                            + ": "
-                            + (originalValue == null
-                                ? "<null>"
-                                : Convert.ToString(originalValue, CultureInfo.InvariantCulture));
-                    }))
-            + "}";
+        IEnumerable<IPropertyBase> properties
+    ) =>
+        "{"
+        + string.Join(
+            ", ",
+            properties.Select(p =>
+            {
+                var originalValue = entry.GetOriginalValue(p);
+                return p.Name
+                    + ": "
+                    + (
+                        originalValue == null
+                            ? "<null>"
+                            : Convert.ToString(originalValue, CultureInfo.InvariantCulture)
+                    );
+            })
+        )
+        + "}";
 }

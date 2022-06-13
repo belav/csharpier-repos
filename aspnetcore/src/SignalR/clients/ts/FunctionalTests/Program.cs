@@ -22,10 +22,9 @@ public class Program
             }
         }
 
-        var hostBuilder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
+        var hostBuilder = new HostBuilder().ConfigureWebHost(webHostBuilder =>
+        {
+            webHostBuilder
                 .ConfigureLogging(factory =>
                 {
                     factory.AddSimpleConsole(options =>
@@ -37,52 +36,68 @@ public class Program
                     factory.AddDebug();
                     factory.SetMinimumLevel(LogLevel.Debug);
                 })
-                .UseKestrel((builderContext, options) =>
-                {
-                    options.ConfigureHttpsDefaults(httpsOptions =>
+                .UseKestrel(
+                    (builderContext, options) =>
                     {
-                        bool useRSA = false;
-                        if (OperatingSystem.IsWindows())
+                        options.ConfigureHttpsDefaults(httpsOptions =>
                         {
-                            // Detect Win10+
-                            var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
-                            var major = key.GetValue("CurrentMajorVersionNumber") as int?;
-                            var minor = key.GetValue("CurrentMinorVersionNumber") as int?;
+                            bool useRSA = false;
+                            if (OperatingSystem.IsWindows())
+                            {
+                                // Detect Win10+
+                                var key = Registry.LocalMachine.OpenSubKey(
+                                    @"SOFTWARE\Microsoft\Windows NT\CurrentVersion"
+                                );
+                                var major = key.GetValue("CurrentMajorVersionNumber") as int?;
+                                var minor = key.GetValue("CurrentMinorVersionNumber") as int?;
 
-                            if (major.HasValue && minor.HasValue)
+                                if (major.HasValue && minor.HasValue)
+                                {
+                                    useRSA = true;
+                                }
+                            }
+                            else
                             {
                                 useRSA = true;
                             }
-                        }
-                        else
-                        {
-                            useRSA = true;
-                        }
 
-                        if (useRSA)
-                        {
-                            // RSA cert, won't work on Windows 8.1 & Windows 2012 R2 using HTTP2, and ECC won't work in some Node environments
-                            var certPath = Path.Combine(Directory.GetCurrentDirectory(), "testCert.pfx");
-                            httpsOptions.ServerCertificate = new X509Certificate2(certPath, "testPassword");
-                        }
-                        else
-                        {
-                            // ECC cert, works on Windows 8.1 & Windows 2012 R2 using HTTP2
-                            var certPath = Path.Combine(Directory.GetCurrentDirectory(), "testCertECC.pfx");
-                            httpsOptions.ServerCertificate = new X509Certificate2(certPath, "testPassword");
-                        }
-                    });
-                })
+                            if (useRSA)
+                            {
+                                // RSA cert, won't work on Windows 8.1 & Windows 2012 R2 using HTTP2, and ECC won't work in some Node environments
+                                var certPath = Path.Combine(
+                                    Directory.GetCurrentDirectory(),
+                                    "testCert.pfx"
+                                );
+                                httpsOptions.ServerCertificate = new X509Certificate2(
+                                    certPath,
+                                    "testPassword"
+                                );
+                            }
+                            else
+                            {
+                                // ECC cert, works on Windows 8.1 & Windows 2012 R2 using HTTP2
+                                var certPath = Path.Combine(
+                                    Directory.GetCurrentDirectory(),
+                                    "testCertECC.pfx"
+                                );
+                                httpsOptions.ServerCertificate = new X509Certificate2(
+                                    certPath,
+                                    "testPassword"
+                                );
+                            }
+                        });
+                    }
+                )
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>();
 
-                if (!string.IsNullOrEmpty(url))
-                {
-                    Console.WriteLine($"Forcing URL to: {url}");
-                    webHostBuilder.UseUrls(url);
-                }
-            });
+            if (!string.IsNullOrEmpty(url))
+            {
+                Console.WriteLine($"Forcing URL to: {url}");
+                webHostBuilder.UseUrls(url);
+            }
+        });
 
         return hostBuilder.Build().RunAsync();
     }

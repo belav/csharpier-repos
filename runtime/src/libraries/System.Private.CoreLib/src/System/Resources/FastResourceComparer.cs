@@ -20,7 +20,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Resources
 {
-    internal sealed class FastResourceComparer : IComparer, IEqualityComparer, IComparer<string?>, IEqualityComparer<string?>
+    internal sealed class FastResourceComparer
+        : IComparer,
+            IEqualityComparer,
+            IComparer<string?>,
+            IEqualityComparer<string?>
     {
         internal static readonly FastResourceComparer Default = new FastResourceComparer();
 
@@ -53,7 +57,8 @@ namespace System.Resources
         // Compares Strings quickly in a case-sensitive way
         public int Compare(object? a, object? b)
         {
-            if (a == b) return 0;
+            if (a == b)
+                return 0;
             string? sa = (string?)a;
             string? sb = (string?)b;
             return string.CompareOrdinal(sa, sb);
@@ -71,7 +76,8 @@ namespace System.Resources
 
         public new bool Equals(object? a, object? b)
         {
-            if (a == b) return true;
+            if (a == b)
+                return true;
             string? sa = (string?)a;
             string? sb = (string?)b;
             return string.Equals(sa, sb);
@@ -81,8 +87,14 @@ namespace System.Resources
         // little endian unicode.  Pass in the number of valid chars.
         public static unsafe int CompareOrdinal(string a, byte[] bytes, int bCharLength)
         {
-            Debug.Assert(a != null && bytes != null, "FastResourceComparer::CompareOrdinal must have non-null params");
-            Debug.Assert(bCharLength * 2 <= bytes.Length, "FastResourceComparer::CompareOrdinal - numChars is too big!");
+            Debug.Assert(
+                a != null && bytes != null,
+                "FastResourceComparer::CompareOrdinal must have non-null params"
+            );
+            Debug.Assert(
+                bCharLength * 2 <= bytes.Length,
+                "FastResourceComparer::CompareOrdinal - numChars is too big!"
+            );
             // This is a managed version of strcmp, but I can't take advantage
             // of a terminating 0, unlike strcmp in C.
             int i = 0;
@@ -91,7 +103,7 @@ namespace System.Resources
             int numChars = a.Length;
             if (numChars > bCharLength)
                 numChars = bCharLength;
-            if (bCharLength == 0)   // Can't use fixed on a 0-element array.
+            if (bCharLength == 0) // Can't use fixed on a 0-element array.
                 return (a.Length == 0) ? 0 : -1;
             fixed (byte* pb = bytes)
             {
@@ -104,7 +116,8 @@ namespace System.Resources
                     pChar += sizeof(char);
                 }
             }
-            if (r != 0) return r;
+            if (r != 0)
+                return r;
             return a.Length - bCharLength;
         }
 
@@ -117,7 +130,10 @@ namespace System.Resources
         // The byte* must point to little endian Unicode characters.
         internal static unsafe int CompareOrdinal(byte* a, int byteLen, string b)
         {
-            Debug.Assert((byteLen & 1) == 0, "CompareOrdinal is expecting a UTF-16 string length, which must be even!");
+            Debug.Assert(
+                (byteLen & 1) == 0,
+                "CompareOrdinal is expecting a UTF-16 string length, which must be even!"
+            );
             Debug.Assert(a != null && b != null, "Null args not allowed.");
             Debug.Assert(byteLen >= 0, "byteLen must be non-negative.");
 
@@ -133,7 +149,8 @@ namespace System.Resources
                 char aCh = (char)(*a++ | (*a++ << 8));
                 r = aCh - b[i++];
             }
-            if (r != 0) return r;
+            if (r != 0)
+                return r;
             return byteLen - b.Length * 2;
         }
     }

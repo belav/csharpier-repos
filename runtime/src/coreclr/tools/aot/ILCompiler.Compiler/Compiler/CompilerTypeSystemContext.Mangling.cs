@@ -13,18 +13,12 @@ namespace ILCompiler
         {
             TypeDesc IPrefixMangledType.BaseType
             {
-                get
-                {
-                    return ValueTypeRepresented;
-                }
+                get { return ValueTypeRepresented; }
             }
 
             string IPrefixMangledType.Prefix
             {
-                get
-                {
-                    return "Boxed";
-                }
+                get { return "Boxed"; }
             }
         }
 
@@ -32,18 +26,12 @@ namespace ILCompiler
         {
             MethodDesc IPrefixMangledMethod.BaseMethod
             {
-                get
-                {
-                    return _targetMethod;
-                }
+                get { return _targetMethod; }
             }
 
             string IPrefixMangledMethod.Prefix
             {
-                get
-                {
-                    return "unbox";
-                }
+                get { return "unbox"; }
             }
         }
 
@@ -51,18 +39,12 @@ namespace ILCompiler
         {
             MethodDesc IPrefixMangledMethod.BaseMethod
             {
-                get
-                {
-                    return _targetMethod;
-                }
+                get { return _targetMethod; }
             }
 
             string IPrefixMangledMethod.Prefix
             {
-                get
-                {
-                    return "unbox";
-                }
+                get { return "unbox"; }
             }
         }
     }

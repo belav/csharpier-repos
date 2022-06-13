@@ -20,7 +20,12 @@ namespace ILCompiler
 
         void ICompilationRootProvider.AddCompilationRoots(IRootingServiceProvider rootProvider)
         {
-            rootProvider.RootReadOnlyDataBlob(GetRuntimeOptionsBlob(), 4, "Runtime configuration information", "g_compilerEmbeddedSettingsBlob");
+            rootProvider.RootReadOnlyDataBlob(
+                GetRuntimeOptionsBlob(),
+                4,
+                "Runtime configuration information",
+                "g_compilerEmbeddedSettingsBlob"
+            );
         }
 
         protected byte[] GetRuntimeOptionsBlob()

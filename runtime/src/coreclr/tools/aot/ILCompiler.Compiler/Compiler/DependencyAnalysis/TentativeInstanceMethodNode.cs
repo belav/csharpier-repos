@@ -26,8 +26,7 @@ namespace ILCompiler.DependencyAnalysis
     /// we can get the generic dictionary out of it, etc.).
     public class TentativeInstanceMethodNode : TentativeMethodNode
     {
-        public TentativeInstanceMethodNode(IMethodBodyNode methodNode)
-            : base(methodNode)
+        public TentativeInstanceMethodNode(IMethodBodyNode methodNode) : base(methodNode)
         {
             Debug.Assert(!methodNode.Method.Signature.IsStatic);
             Debug.Assert(!methodNode.Method.OwningType.IsValueType);
@@ -39,10 +38,12 @@ namespace ILCompiler.DependencyAnalysis
         {
             // If the class library doesn't provide this helper, the optimization is disabled.
             MethodDesc helper = factory.InstanceMethodRemovedHelper;
-            return helper == null ? RealBody: factory.MethodEntrypoint(helper);
+            return helper == null ? RealBody : factory.MethodEntrypoint(helper);
         }
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory)
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        )
         {
             // Convert methods on Array<T> into T[]
             TypeDesc owningType = Method.OwningType;
@@ -58,7 +59,8 @@ namespace ILCompiler.DependencyAnalysis
                 new CombinedDependencyListEntry(
                     RealBody,
                     factory.ConstructedTypeSymbol(owningType),
-                    "Instance method on a constructed type"),
+                    "Instance method on a constructed type"
+                ),
             };
         }
 

@@ -18,10 +18,7 @@ internal sealed class PageLoaderMatcherPolicy : MatcherPolicy, IEndpointSelector
     /// service will not be registered. Since Razor Pages is not a pre-req for runtime compilation, we'll defer reading the service
     /// until we need to load a page in the body of <see cref="ApplyAsync(HttpContext, CandidateSet)"/>.
     /// </remarks>
-    public PageLoaderMatcherPolicy()
-        : this(loader: null)
-    {
-    }
+    public PageLoaderMatcherPolicy() : this(loader: null) { }
 
     public PageLoaderMatcherPolicy(PageLoader? loader)
     {
@@ -102,7 +99,12 @@ internal sealed class PageLoaderMatcherPolicy : MatcherPolicy, IEndpointSelector
         return Task.CompletedTask;
     }
 
-    private static async Task ApplyAsyncAwaited(PageLoader pageLoader, CandidateSet candidates, Task<CompiledPageActionDescriptor> actionDescriptorTask, int index)
+    private static async Task ApplyAsyncAwaited(
+        PageLoader pageLoader,
+        CandidateSet candidates,
+        Task<CompiledPageActionDescriptor> actionDescriptorTask,
+        int index
+    )
     {
         var compiled = await actionDescriptorTask;
 

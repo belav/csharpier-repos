@@ -49,8 +49,7 @@ public class ColumnBase<TColumnMappingBase> : Annotatable, IColumnBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => Table.Model.IsReadOnly;
+    public override bool IsReadOnly => Table.Model.IsReadOnly;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -96,8 +95,7 @@ public class ColumnBase<TColumnMappingBase> : Annotatable, IColumnBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual List<TColumnMappingBase> PropertyMappings { get; }
-        = new();
+    protected virtual List<TColumnMappingBase> PropertyMappings { get; } = new();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -124,12 +122,8 @@ public class ColumnBase<TColumnMappingBase> : Annotatable, IColumnBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static string Format(IEnumerable<IColumnBase> columns)
-        => "{"
-            + string.Join(
-                ", ",
-                columns.Select(p => "'" + p.Name + "'"))
-            + "}";
+    public static string Format(IEnumerable<IColumnBase> columns) =>
+        "{" + string.Join(", ", columns.Select(p => "'" + p.Name + "'")) + "}";
 
     /// <inheritdoc />
     IReadOnlyList<IColumnMappingBase> IColumnBase.PropertyMappings

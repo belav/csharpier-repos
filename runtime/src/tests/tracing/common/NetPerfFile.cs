@@ -30,7 +30,10 @@ namespace Tracing.Tests.Common
             if (args.Length >= 1)
                 return new NetPerfFile(args[0], true);
 
-            return new NetPerfFile(System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".netperf", false);
+            return new NetPerfFile(
+                System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".netperf",
+                false
+            );
         }
     }
 }
