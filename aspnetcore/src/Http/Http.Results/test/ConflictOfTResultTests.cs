@@ -43,10 +43,7 @@ public class ConflictOfTResultTests
     {
         // Arrange
         var result = new Conflict<string>("Hello");
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -64,10 +61,7 @@ public class ConflictOfTResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -81,15 +75,24 @@ public class ConflictOfTResultTests
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        Conflict<Todo> MyApi() { throw new NotImplementedException(); }
+        Conflict<Todo> MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var context = new EndpointMetadataContext(((Delegate)MyApi).GetMethodInfo(), metadata, null);
+        var context = new EndpointMetadataContext(
+            ((Delegate)MyApi).GetMethodInfo(),
+            metadata,
+            null
+        );
 
         // Act
         PopulateMetadata<Conflict<Todo>>(context);
 
         // Assert
-        var producesResponseTypeMetadata = context.EndpointMetadata.OfType<ProducesResponseTypeMetadata>().Last();
+        var producesResponseTypeMetadata = context.EndpointMetadata
+            .OfType<ProducesResponseTypeMetadata>()
+            .Last();
         Assert.Equal(StatusCodes.Status409Conflict, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(Todo), producesResponseTypeMetadata.Type);
         Assert.Single(producesResponseTypeMetadata.ContentTypes, "application/json");
@@ -103,14 +106,20 @@ public class ConflictOfTResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenContextIsNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("context", () => PopulateMetadata<Conflict<object>>(null));
+        Assert.Throws<ArgumentNullException>(
+            "context",
+            () => PopulateMetadata<Conflict<object>>(null)
+        );
     }
 
     private static void PopulateMetadata<TResult>(EndpointMetadataContext context)

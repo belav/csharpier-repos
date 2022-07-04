@@ -12,8 +12,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     {
         internal readonly GoToSymbolContext UnderlyingObject;
 
-        internal VSTypeScriptGoToSymbolContext(GoToSymbolContext underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        internal VSTypeScriptGoToSymbolContext(GoToSymbolContext underlyingObject) =>
+            UnderlyingObject = underlyingObject;
 
         public Document Document => UnderlyingObject.Document;
         public int Position => UnderlyingObject.Position;
@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             set => UnderlyingObject.Span = value;
         }
 
-        public void AddItem(string key, VSTypeScriptDefinitionItem item)
-            => UnderlyingObject.AddItem(key, item.UnderlyingObject);
+        public void AddItem(string key, VSTypeScriptDefinitionItem item) =>
+            UnderlyingObject.AddItem(key, item.UnderlyingObject);
     }
 }

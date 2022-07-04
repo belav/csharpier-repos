@@ -39,7 +39,6 @@ namespace System.Configuration
 
             foreach (XmlNode child in section.ChildNodes)
             {
-
                 // skip whitespace and comments, throws if non-element
                 if (HandlerBase.IsIgnorableAlsoCheckForNonElement(child))
                     continue;
@@ -105,5 +104,4 @@ namespace System.Configuration
             get { return false; }
         }
     }
-
 }

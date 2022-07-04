@@ -5,7 +5,6 @@ using System;
 
 class Program
 {
-
     private static TestUtil.TestLog testLog;
 
     static Program()
@@ -30,12 +29,13 @@ class Program
         {
             try
             {
-                for (;;)
+                for (; ; )
                 {
                     try
                     {
                         Console.WriteLine("  in try");
-                        if (count-- == 0) break;
+                        if (count-- == 0)
+                            break;
                     }
                     finally
                     {

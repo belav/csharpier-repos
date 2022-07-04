@@ -28,13 +28,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 bool selectionInExpression,
                 SemanticDocument document,
                 SyntaxAnnotation firstTokenAnnotation,
-                SyntaxAnnotation lastTokenAnnotation)
-                : base(status, originalSpan, finalSpan, options, selectionInExpression, document, firstTokenAnnotation, lastTokenAnnotation)
-            {
-            }
+                SyntaxAnnotation lastTokenAnnotation
+            )
+                : base(
+                    status,
+                    originalSpan,
+                    finalSpan,
+                    options,
+                    selectionInExpression,
+                    document,
+                    firstTokenAnnotation,
+                    lastTokenAnnotation
+                ) { }
 
-            public override bool ContainingScopeHasAsyncKeyword()
-                => false;
+            public override bool ContainingScopeHasAsyncKeyword() => false;
 
             public override SyntaxNode? GetContainingScope()
             {
@@ -43,7 +50,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 var firstToken = GetFirstTokenInSelection();
                 var lastToken = GetLastTokenInSelection();
-                var scope = firstToken.GetCommonRoot(lastToken).GetAncestorOrThis<ExpressionSyntax>();
+                var scope = firstToken
+                    .GetCommonRoot(lastToken)
+                    .GetAncestorOrThis<ExpressionSyntax>();
                 if (scope == null)
                     return null;
 
@@ -62,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 // special case for array initializer and explicit cast
                 if (node.IsArrayInitializer())
                 {
-                    var variableDeclExpression = node.GetAncestorOrThis<VariableDeclarationSyntax>();
+                    var variableDeclExpression =
+                        node.GetAncestorOrThis<VariableDeclarationSyntax>();
                     if (variableDeclExpression != null)
                     {
                         return model.GetTypeInfo(variableDeclExpression.Type).Type;
@@ -74,7 +84,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     // bug # 12774 and # 4780
                     // if the expression is under cast, we use the heuristic below
                     // 1. if regular binding returns a meaningful type, we use it as it is
-                    // 2. if it doesn't, even if the cast itself wasn't included in the selection, we will treat it 
+                    // 2. if it doesn't, even if the cast itself wasn't included in the selection, we will treat it
                     //    as it was in the selection
                     var regularType = GetRegularExpressionType(model, node);
                     if (regularType != null)
@@ -91,7 +101,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return GetRegularExpressionType(model, node);
             }
 
-            private static ITypeSymbol? GetRegularExpressionType(SemanticModel semanticModel, ExpressionSyntax node)
+            private static ITypeSymbol? GetRegularExpressionType(
+                SemanticModel semanticModel,
+                ExpressionSyntax node
+            )
             {
                 // regular case. always use ConvertedType to get implicit conversion right.
                 var expression = node.GetUnparenthesizedExpression();
@@ -106,8 +119,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 }
 
                 // always use converted type if method group
-                if ((!node.IsKind(SyntaxKind.ObjectCreationExpression) && semanticModel.GetMemberGroup(expression).Length > 0) ||
-                    IsCoClassImplicitConversion(info, conv, semanticModel.Compilation.CoClassType()))
+                if (
+                    (
+                        !node.IsKind(SyntaxKind.ObjectCreationExpression)
+                        && semanticModel.GetMemberGroup(expression).Length > 0
+                    )
+                    || IsCoClassImplicitConversion(
+                        info,
+                        conv,
+                        semanticModel.Compilation.CoClassType()
+                    )
+                )
                 {
                     return info.GetConvertedTypeWithAnnotatedNullability();
                 }
@@ -119,28 +141,40 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 }
 
                 // use FormattableString if conversion between String and FormattableString
-                if (info.Type?.SpecialType == SpecialType.System_String &&
-                    info.ConvertedType?.IsFormattableStringOrIFormattable() == true)
+                if (
+                    info.Type?.SpecialType == SpecialType.System_String
+                    && info.ConvertedType?.IsFormattableStringOrIFormattable() == true
+                )
                 {
                     return info.GetConvertedTypeWithAnnotatedNullability();
                 }
 
                 // always try to use type that is more specific than object type if possible.
-                return !info.Type.IsObjectType() ? info.GetTypeWithAnnotatedNullability() : info.GetConvertedTypeWithAnnotatedNullability();
+                return !info.Type.IsObjectType()
+                    ? info.GetTypeWithAnnotatedNullability()
+                    : info.GetConvertedTypeWithAnnotatedNullability();
             }
         }
 
-        private static bool IsCoClassImplicitConversion(TypeInfo info, Conversion conversion, ISymbol? coclassSymbol)
+        private static bool IsCoClassImplicitConversion(
+            TypeInfo info,
+            Conversion conversion,
+            ISymbol? coclassSymbol
+        )
         {
-            if (!conversion.IsImplicit ||
-                 info.ConvertedType == null ||
-                 info.ConvertedType.TypeKind != TypeKind.Interface)
+            if (
+                !conversion.IsImplicit
+                || info.ConvertedType == null
+                || info.ConvertedType.TypeKind != TypeKind.Interface
+            )
             {
                 return false;
             }
 
             // let's see whether this interface has coclass attribute
-            return info.ConvertedType.GetAttributes().Any(c => c.AttributeClass?.Equals(coclassSymbol) == true);
+            return info.ConvertedType
+                .GetAttributes()
+                .Any(c => c.AttributeClass?.Equals(coclassSymbol) == true);
         }
     }
 }

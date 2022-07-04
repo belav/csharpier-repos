@@ -16,32 +16,50 @@ namespace Microsoft.CodeAnalysis.LanguageServer;
 
 internal class LspServices : IDisposable
 {
-    private readonly ImmutableDictionary<Type, Lazy<ILspService, LspServiceMetadataView>> _lazyLspServices;
+    private readonly ImmutableDictionary<
+        Type,
+        Lazy<ILspService, LspServiceMetadataView>
+    > _lazyLspServices;
 
     /// <summary>
     /// Gates access to <see cref="_servicesToDispose"/>.
     /// </summary>
     private readonly object _gate = new();
-    private readonly HashSet<IDisposable> _servicesToDispose = new(ReferenceEqualityComparer.Instance);
+    private readonly HashSet<IDisposable> _servicesToDispose =
+        new(ReferenceEqualityComparer.Instance);
 
     public LspServices(
         ImmutableArray<Lazy<ILspService, LspServiceMetadataView>> mefLspServices,
         ImmutableArray<Lazy<ILspServiceFactory, LspServiceMetadataView>> mefLspServiceFactories,
         WellKnownLspServerKinds serverKind,
-        ImmutableArray<Lazy<ILspService, LspServiceMetadataView>> baseServices)
+        ImmutableArray<Lazy<ILspService, LspServiceMetadataView>> baseServices
+    )
     {
         // Convert MEF exported service factories to the lazy LSP services that they create.
-        var servicesFromFactories = mefLspServiceFactories.Select(lz => new Lazy<ILspService, LspServiceMetadataView>(() => lz.Value.CreateILspService(this, serverKind), lz.Metadata));
+        var servicesFromFactories = mefLspServiceFactories.Select(
+            lz =>
+                new Lazy<ILspService, LspServiceMetadataView>(
+                    () => lz.Value.CreateILspService(this, serverKind),
+                    lz.Metadata
+                )
+        );
 
         var services = mefLspServices.Concat(servicesFromFactories);
 
         // Make sure that we only include services exported for the specified server kind (or NotSpecified).
-        services = services.Where(lazyService => lazyService.Metadata.ServerKind == serverKind || lazyService.Metadata.ServerKind == WellKnownLspServerKinds.Any);
+        services = services.Where(
+            lazyService =>
+                lazyService.Metadata.ServerKind == serverKind
+                || lazyService.Metadata.ServerKind == WellKnownLspServerKinds.Any
+        );
 
         // Include the base level services that were passed in.
         services = services.Concat(baseServices);
 
-        _lazyLspServices = services.ToImmutableDictionary(lazyService => lazyService.Metadata.Type, lazyService => lazyService);
+        _lazyLspServices = services.ToImmutableDictionary(
+            lazyService => lazyService.Metadata.Type,
+            lazyService => lazyService
+        );
     }
 
     public T GetRequiredService<T>() where T : class, ILspService
@@ -99,9 +117,7 @@ internal class LspServices : IDisposable
             {
                 disposableService.Dispose();
             }
-            catch (Exception ex) when (FatalError.ReportAndCatch(ex))
-            {
-            }
+            catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
         }
     }
 }

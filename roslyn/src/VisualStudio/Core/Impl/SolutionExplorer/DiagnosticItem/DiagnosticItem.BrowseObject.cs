@@ -25,10 +25,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.ID))]
             public string Id
             {
-                get
-                {
-                    return _diagnosticItem.Descriptor.Id;
-                }
+                get { return _diagnosticItem.Descriptor.Id; }
             }
 
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.Title))]
@@ -45,26 +42,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             {
                 get
                 {
-                    return _diagnosticItem.Descriptor.Description.ToString(CultureInfo.CurrentUICulture);
+                    return _diagnosticItem.Descriptor.Description.ToString(
+                        CultureInfo.CurrentUICulture
+                    );
                 }
             }
 
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.Help_link))]
             public string? HelpLink
             {
-                get
-                {
-                    return _diagnosticItem.Descriptor.GetValidHelpLinkUri()?.AbsoluteUri;
-                }
+                get { return _diagnosticItem.Descriptor.GetValidHelpLinkUri()?.AbsoluteUri; }
             }
 
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.Category))]
             public string Category
             {
-                get
-                {
-                    return _diagnosticItem.Descriptor.Category;
-                }
+                get { return _diagnosticItem.Descriptor.Category; }
             }
 
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.Default_severity))]
@@ -79,10 +72,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.Enabled_by_default))]
             public bool EnabledByDefault
             {
-                get
-                {
-                    return _diagnosticItem.Descriptor.IsEnabledByDefault;
-                }
+                get { return _diagnosticItem.Descriptor.IsEnabledByDefault; }
             }
 
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.Message))]
@@ -90,26 +80,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             {
                 get
                 {
-                    return _diagnosticItem.Descriptor.MessageFormat.ToString(CultureInfo.CurrentUICulture);
+                    return _diagnosticItem.Descriptor.MessageFormat.ToString(
+                        CultureInfo.CurrentUICulture
+                    );
                 }
             }
 
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.Tags))]
             public string Tags
             {
-                get
-                {
-                    return string.Join(" ", _diagnosticItem.Descriptor.CustomTags);
-                }
+                get { return string.Join(" ", _diagnosticItem.Descriptor.CustomTags); }
             }
 
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.Effective_severity))]
             public string EffectiveSeverity
             {
-                get
-                {
-                    return MapReportDiagnosticToText(_diagnosticItem.EffectiveSeverity);
-                }
+                get { return MapReportDiagnosticToText(_diagnosticItem.EffectiveSeverity); }
             }
 
             public override string GetClassName()
@@ -128,8 +114,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 get { return _diagnosticItem; }
             }
 
-            private static string MapDiagnosticSeverityToText(DiagnosticSeverity severity)
-                => severity switch
+            private static string MapDiagnosticSeverityToText(DiagnosticSeverity severity) =>
+                severity switch
                 {
                     DiagnosticSeverity.Hidden => SolutionExplorerShim.Hidden,
                     DiagnosticSeverity.Info => SolutionExplorerShim.Info,
@@ -138,8 +124,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     _ => throw ExceptionUtilities.UnexpectedValue(severity),
                 };
 
-            private static string MapReportDiagnosticToText(ReportDiagnostic report)
-                => report switch
+            private static string MapReportDiagnosticToText(ReportDiagnostic report) =>
+                report switch
                 {
                     ReportDiagnostic.Default => SolutionExplorerShim.Default_,
                     ReportDiagnostic.Error => SolutionExplorerShim.Error_,

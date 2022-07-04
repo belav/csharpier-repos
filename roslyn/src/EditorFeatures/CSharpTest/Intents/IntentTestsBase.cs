@@ -32,9 +32,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             string expectedText,
             OptionsCollection? options = null,
             string? intentData = null,
-            string? priorText = null)
+            string? priorText = null
+        )
         {
-            return VerifyExpectedTextAsync(intentName, markup, new string[] { }, new string[] { expectedText }, options, intentData, priorText);
+            return VerifyExpectedTextAsync(
+                intentName,
+                markup,
+                new string[] { },
+                new string[] { expectedText },
+                options,
+                intentData,
+                priorText
+            );
         }
 
         internal static async Task VerifyExpectedTextAsync(
@@ -44,10 +53,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             string[] expectedTexts,
             OptionsCollection? options = null,
             string? intentData = null,
-            string? priorText = null)
+            string? priorText = null
+        )
         {
             var documentSet = additionalDocuments.Prepend(activeDocument).ToArray();
-            using var workspace = TestWorkspace.CreateCSharp(documentSet, exportProvider: EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider());
+            using var workspace = TestWorkspace.CreateCSharp(
+                documentSet,
+                exportProvider: EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider()
+            );
             if (options != null)
             {
                 workspace.ApplyOptions(options!);
@@ -60,12 +73,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             var textBuffer = document.GetTextBuffer();
 
             // Get the text change to rewind the document to the correct pre-intent location.
-            var rewindTextChange = new TextChange(document.AnnotatedSpans["typed"].Single(), priorText ?? string.Empty);
+            var rewindTextChange = new TextChange(
+                document.AnnotatedSpans["typed"].Single(),
+                priorText ?? string.Empty
+            );
 
             // Get the current snapshot span to pass in.
-            var currentSnapshot = new SnapshotSpan(textBuffer.CurrentSnapshot, new Span(0, textBuffer.CurrentSnapshot.Length));
+            var currentSnapshot = new SnapshotSpan(
+                textBuffer.CurrentSnapshot,
+                new Span(0, textBuffer.CurrentSnapshot.Length)
+            );
 
-            var priorSelection = TextSpan.FromBounds(rewindTextChange.Span.Start, rewindTextChange.Span.Start);
+            var priorSelection = TextSpan.FromBounds(
+                rewindTextChange.Span.Start,
+                rewindTextChange.Span.Start
+            );
             if (document.AnnotatedSpans.ContainsKey("priorSelection"))
             {
                 priorSelection = document.AnnotatedSpans["priorSelection"].Single();
@@ -76,8 +98,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 currentSnapshot,
                 ImmutableArray.Create(rewindTextChange),
                 priorSelection,
-                intentData: intentData);
-            var results = await intentSource.ComputeIntentsAsync(intentContext, CancellationToken.None).ConfigureAwait(false);
+                intentData: intentData
+            );
+            var results = await intentSource
+                .ComputeIntentsAsync(intentContext, CancellationToken.None)
+                .ConfigureAwait(false);
 
             // For now, we're just taking the first result to match intellicode behavior.
             var result = results.First();

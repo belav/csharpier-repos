@@ -242,8 +242,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.InsertAfter(new BasicIntermediateNode("_")));
-        Assert.Equal("The reference is invalid. References initialized with the default constructor cannot modify nodes.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.InsertAfter(new BasicIntermediateNode("_"))
+        );
+        Assert.Equal(
+            "The reference is invalid. References initialized with the default constructor cannot modify nodes.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -253,8 +258,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.InsertAfter(new[] { new BasicIntermediateNode("_") }));
-        Assert.Equal("The reference is invalid. References initialized with the default constructor cannot modify nodes.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.InsertAfter(new[] { new BasicIntermediateNode("_") })
+        );
+        Assert.Equal(
+            "The reference is invalid. References initialized with the default constructor cannot modify nodes.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -264,8 +274,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.InsertBefore(new BasicIntermediateNode("_")));
-        Assert.Equal("The reference is invalid. References initialized with the default constructor cannot modify nodes.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.InsertBefore(new BasicIntermediateNode("_"))
+        );
+        Assert.Equal(
+            "The reference is invalid. References initialized with the default constructor cannot modify nodes.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -275,8 +290,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.InsertBefore(new[] { new BasicIntermediateNode("_") }));
-        Assert.Equal("The reference is invalid. References initialized with the default constructor cannot modify nodes.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.InsertBefore(new[] { new BasicIntermediateNode("_") })
+        );
+        Assert.Equal(
+            "The reference is invalid. References initialized with the default constructor cannot modify nodes.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -287,7 +307,10 @@ public class IntermediateNodeReferenceTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() => reference.Remove());
-        Assert.Equal("The reference is invalid. References initialized with the default constructor cannot modify nodes.", exception.Message);
+        Assert.Equal(
+            "The reference is invalid. References initialized with the default constructor cannot modify nodes.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -297,8 +320,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.Replace(new BasicIntermediateNode("_")));
-        Assert.Equal("The reference is invalid. References initialized with the default constructor cannot modify nodes.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.Replace(new BasicIntermediateNode("_"))
+        );
+        Assert.Equal(
+            "The reference is invalid. References initialized with the default constructor cannot modify nodes.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -312,8 +340,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference(parent, node1);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.InsertAfter(new BasicIntermediateNode("_")));
-        Assert.Equal("The node 'Parent' has a read-only child collection and cannot be modified.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.InsertAfter(new BasicIntermediateNode("_"))
+        );
+        Assert.Equal(
+            "The node 'Parent' has a read-only child collection and cannot be modified.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -327,8 +360,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference(parent, node1);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.InsertAfter(new[] { new BasicIntermediateNode("_") }));
-        Assert.Equal("The node 'Parent' has a read-only child collection and cannot be modified.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.InsertAfter(new[] { new BasicIntermediateNode("_") })
+        );
+        Assert.Equal(
+            "The node 'Parent' has a read-only child collection and cannot be modified.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -342,8 +380,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference(parent, node1);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.InsertBefore(new BasicIntermediateNode("_")));
-        Assert.Equal("The node 'Parent' has a read-only child collection and cannot be modified.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.InsertBefore(new BasicIntermediateNode("_"))
+        );
+        Assert.Equal(
+            "The node 'Parent' has a read-only child collection and cannot be modified.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -357,8 +400,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference(parent, node1);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.InsertBefore(new[] { new BasicIntermediateNode("_") }));
-        Assert.Equal("The node 'Parent' has a read-only child collection and cannot be modified.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.InsertBefore(new[] { new BasicIntermediateNode("_") })
+        );
+        Assert.Equal(
+            "The node 'Parent' has a read-only child collection and cannot be modified.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -373,7 +421,10 @@ public class IntermediateNodeReferenceTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() => reference.Remove());
-        Assert.Equal("The node 'Parent' has a read-only child collection and cannot be modified.", exception.Message);
+        Assert.Equal(
+            "The node 'Parent' has a read-only child collection and cannot be modified.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -387,8 +438,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference(parent, node1);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.Replace(new BasicIntermediateNode("_")));
-        Assert.Equal("The node 'Parent' has a read-only child collection and cannot be modified.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.Replace(new BasicIntermediateNode("_"))
+        );
+        Assert.Equal(
+            "The node 'Parent' has a read-only child collection and cannot be modified.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -402,8 +458,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference(parent, node1);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.InsertAfter(new BasicIntermediateNode("_")));
-        Assert.Equal("The reference is invalid. The node 'Node1' could not be found as a child of 'Parent'.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.InsertAfter(new BasicIntermediateNode("_"))
+        );
+        Assert.Equal(
+            "The reference is invalid. The node 'Node1' could not be found as a child of 'Parent'.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -417,8 +478,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference(parent, node1);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.InsertAfter(new[] { new BasicIntermediateNode("_") }));
-        Assert.Equal("The reference is invalid. The node 'Node1' could not be found as a child of 'Parent'.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.InsertAfter(new[] { new BasicIntermediateNode("_") })
+        );
+        Assert.Equal(
+            "The reference is invalid. The node 'Node1' could not be found as a child of 'Parent'.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -432,8 +498,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference(parent, node1);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.InsertBefore(new BasicIntermediateNode("_")));
-        Assert.Equal("The reference is invalid. The node 'Node1' could not be found as a child of 'Parent'.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.InsertBefore(new BasicIntermediateNode("_"))
+        );
+        Assert.Equal(
+            "The reference is invalid. The node 'Node1' could not be found as a child of 'Parent'.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -447,8 +518,13 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference(parent, node1);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.InsertBefore(new[] { new BasicIntermediateNode("_") }));
-        Assert.Equal("The reference is invalid. The node 'Node1' could not be found as a child of 'Parent'.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.InsertBefore(new[] { new BasicIntermediateNode("_") })
+        );
+        Assert.Equal(
+            "The reference is invalid. The node 'Node1' could not be found as a child of 'Parent'.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -463,7 +539,10 @@ public class IntermediateNodeReferenceTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() => reference.Remove());
-        Assert.Equal("The reference is invalid. The node 'Node1' could not be found as a child of 'Parent'.", exception.Message);
+        Assert.Equal(
+            "The reference is invalid. The node 'Node1' could not be found as a child of 'Parent'.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -477,14 +556,18 @@ public class IntermediateNodeReferenceTest
         var reference = new IntermediateNodeReference(parent, node1);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => reference.Replace(new BasicIntermediateNode("_")));
-        Assert.Equal("The reference is invalid. The node 'Node1' could not be found as a child of 'Parent'.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => reference.Replace(new BasicIntermediateNode("_"))
+        );
+        Assert.Equal(
+            "The reference is invalid. The node 'Node1' could not be found as a child of 'Parent'.",
+            exception.Message
+        );
     }
 
     private class BasicIntermediateNode : IntermediateNode
     {
-        public BasicIntermediateNode(string name)
-            : this(name, new IntermediateNodeCollection())
+        public BasicIntermediateNode(string name) : this(name, new IntermediateNodeCollection())
         {
             Name = name;
         }

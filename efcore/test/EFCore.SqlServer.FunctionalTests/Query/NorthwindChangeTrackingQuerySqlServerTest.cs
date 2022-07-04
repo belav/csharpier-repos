@@ -5,18 +5,19 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindChangeTrackingQuerySqlServerTest : NorthwindChangeTrackingQueryTestBase<
-    NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+public class NorthwindChangeTrackingQuerySqlServerTest
+    : NorthwindChangeTrackingQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
 {
-    public NorthwindChangeTrackingQuerySqlServerTest(NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture)
-        : base(fixture)
+    public NorthwindChangeTrackingQuerySqlServerTest(
+        NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture
+    ) : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override void Entity_reverts_when_state_set_to_unchanged()
     {
@@ -24,7 +25,8 @@ public class NorthwindChangeTrackingQuerySqlServerTest : NorthwindChangeTracking
 
         AssertSql(
             @"SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]");
+FROM [Customers] AS [c]"
+        );
     }
 
     public override void Entity_does_not_revert_when_attached_on_DbSet()
@@ -33,7 +35,8 @@ FROM [Customers] AS [c]");
 
         AssertSql(
             @"SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]");
+FROM [Customers] AS [c]"
+        );
     }
 
     public override void AsTracking_switches_tracking_on_when_off_in_options()
@@ -42,7 +45,8 @@ FROM [Customers] AS [c]");
 
         AssertSql(
             @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
-FROM [Employees] AS [e]");
+FROM [Employees] AS [e]"
+        );
     }
 
     public override void Can_disable_and_reenable_query_result_tracking_query_caching_using_options()
@@ -54,7 +58,8 @@ FROM [Employees] AS [e]");
 FROM [Employees] AS [e]",
             //
             @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
-FROM [Employees] AS [e]");
+FROM [Employees] AS [e]"
+        );
     }
 
     public override void Can_disable_and_reenable_query_result_tracking()
@@ -77,7 +82,8 @@ OFFSET @__p_0 ROWS FETCH NEXT @__p_0 ROWS ONLY",
             //
             @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
 FROM [Employees] AS [e]
-ORDER BY [e].[EmployeeID]");
+ORDER BY [e].[EmployeeID]"
+        );
     }
 
     public override void Entity_range_does_not_revert_when_attached_dbSet()
@@ -111,7 +117,8 @@ OFFSET @__p_1 ROWS FETCH NEXT 1 ROWS ONLY",
 
 SELECT TOP(@__p_0) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-ORDER BY [c].[CustomerID]");
+ORDER BY [c].[CustomerID]"
+        );
     }
 
     public override void Precedence_of_tracking_modifiers5()
@@ -122,7 +129,8 @@ ORDER BY [c].[CustomerID]");
             @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Customers] AS [c]
 INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-WHERE [c].[CustomerID] = N'ALFKI'");
+WHERE [c].[CustomerID] = N'ALFKI'"
+        );
     }
 
     public override void Precedence_of_tracking_modifiers2()
@@ -131,7 +139,8 @@ WHERE [c].[CustomerID] = N'ALFKI'");
 
         AssertSql(
             @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
-FROM [Employees] AS [e]");
+FROM [Employees] AS [e]"
+        );
     }
 
     public override void Can_disable_and_reenable_query_result_tracking_query_caching()
@@ -143,7 +152,8 @@ FROM [Employees] AS [e]");
 FROM [Employees] AS [e]",
             //
             @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
-FROM [Employees] AS [e]");
+FROM [Employees] AS [e]"
+        );
     }
 
     public override void Entity_range_does_not_revert_when_attached_dbContext()
@@ -177,7 +187,8 @@ OFFSET @__p_1 ROWS FETCH NEXT 1 ROWS ONLY",
 
 SELECT TOP(@__p_0) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-ORDER BY [c].[CustomerID]");
+ORDER BY [c].[CustomerID]"
+        );
     }
 
     public override void Precedence_of_tracking_modifiers()
@@ -186,7 +197,8 @@ ORDER BY [c].[CustomerID]");
 
         AssertSql(
             @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
-FROM [Employees] AS [e]");
+FROM [Employees] AS [e]"
+        );
     }
 
     public override void Precedence_of_tracking_modifiers3()
@@ -197,7 +209,8 @@ FROM [Employees] AS [e]");
             @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Customers] AS [c]
 INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-WHERE [c].[CustomerID] = N'ALFKI'");
+WHERE [c].[CustomerID] = N'ALFKI'"
+        );
     }
 
     public override void Can_disable_and_reenable_query_result_tracking_starting_with_NoTracking()
@@ -216,7 +229,8 @@ ORDER BY [e].[EmployeeID]",
 SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
 FROM [Employees] AS [e]
 ORDER BY [e].[EmployeeID]
-OFFSET @__p_0 ROWS FETCH NEXT @__p_0 ROWS ONLY");
+OFFSET @__p_0 ROWS FETCH NEXT @__p_0 ROWS ONLY"
+        );
     }
 
     public override void Entity_does_not_revert_when_attached_on_DbContext()
@@ -225,7 +239,8 @@ OFFSET @__p_0 ROWS FETCH NEXT @__p_0 ROWS ONLY");
 
         AssertSql(
             @"SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]");
+FROM [Customers] AS [c]"
+        );
     }
 
     public override void Can_disable_and_reenable_query_result_tracking_query_caching_single_context()
@@ -237,7 +252,8 @@ FROM [Customers] AS [c]");
 FROM [Employees] AS [e]",
             //
             @"SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
-FROM [Employees] AS [e]");
+FROM [Employees] AS [e]"
+        );
     }
 
     public override void Multiple_entities_can_revert()
@@ -264,7 +280,8 @@ FROM [Customers] AS [c]",
 FROM [Customers] AS [c]",
             //
             @"SELECT [c].[Region]
-FROM [Customers] AS [c]");
+FROM [Customers] AS [c]"
+        );
     }
 
     public override void Precedence_of_tracking_modifiers4()
@@ -275,14 +292,17 @@ FROM [Customers] AS [c]");
             @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Customers] AS [c]
 INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-WHERE [c].[CustomerID] = N'ALFKI'");
+WHERE [c].[CustomerID] = N'ALFKI'"
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected override NorthwindContext CreateNoTrackingContext()
-        => new NorthwindRelationalContext(
+    protected override NorthwindContext CreateNoTrackingContext() =>
+        new NorthwindRelationalContext(
             new DbContextOptionsBuilder(Fixture.CreateOptions())
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking).Options);
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                .Options
+        );
 }

@@ -75,7 +75,9 @@ namespace System.Collections.Immutable.Tests
             var builder = ImmutableSortedSet<int>.Empty.ToBuilder();
             Assert.Equal(~0, builder.IndexOf(5));
 
-            builder = ImmutableSortedSet<int>.Empty.Union(Enumerable.Range(1, 10).Select(n => n * 10)).ToBuilder();
+            builder = ImmutableSortedSet<int>.Empty
+                .Union(Enumerable.Range(1, 10).Select(n => n * 10))
+                .ToBuilder();
             Assert.Equal(0, builder.IndexOf(10));
             Assert.Equal(1, builder.IndexOf(20));
             Assert.Equal(4, builder.IndexOf(50));
@@ -134,7 +136,10 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void GetEnumeratorTest()
         {
-            var builder = ImmutableSortedSet.Create("a", "B").WithComparer(StringComparer.Ordinal).ToBuilder();
+            var builder = ImmutableSortedSet
+                .Create("a", "B")
+                .WithComparer(StringComparer.Ordinal)
+                .ToBuilder();
             IEnumerable<string> enumerable = builder;
             using (var enumerator = enumerable.GetEnumerator())
             {
@@ -228,7 +233,10 @@ namespace System.Collections.Immutable.Tests
         public void SymmetricExceptWith()
         {
             var builder = ImmutableSortedSet.Create(1, 2, 3).ToBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("other", () => builder.SymmetricExceptWith(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "other",
+                () => builder.SymmetricExceptWith(null)
+            );
             builder.SymmetricExceptWith(new[] { 2, 3, 4 });
             Assert.Equal(new[] { 1, 4 }, builder);
         }
@@ -237,7 +245,10 @@ namespace System.Collections.Immutable.Tests
         public void IntersectWith()
         {
             var builder = ImmutableSortedSet.Create(1, 2, 3).ToBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("other", () => builder.IntersectWith(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "other",
+                () => builder.IntersectWith(null)
+            );
             builder.IntersectWith(new[] { 2, 3, 4 });
             Assert.Equal(new[] { 2, 3 }, builder);
         }
@@ -246,7 +257,10 @@ namespace System.Collections.Immutable.Tests
         public void IsProperSubsetOf()
         {
             var builder = ImmutableSortedSet.CreateRange(Enumerable.Range(1, 3)).ToBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("other", () => builder.IsProperSubsetOf(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "other",
+                () => builder.IsProperSubsetOf(null)
+            );
             Assert.False(builder.IsProperSubsetOf(Enumerable.Range(1, 3)));
             Assert.True(builder.IsProperSubsetOf(Enumerable.Range(1, 5)));
         }
@@ -255,7 +269,10 @@ namespace System.Collections.Immutable.Tests
         public void IsProperSupersetOf()
         {
             var builder = ImmutableSortedSet.CreateRange(Enumerable.Range(1, 3)).ToBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("other", () => builder.IsProperSupersetOf(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "other",
+                () => builder.IsProperSupersetOf(null)
+            );
             Assert.False(builder.IsProperSupersetOf(Enumerable.Range(1, 3)));
             Assert.True(builder.IsProperSupersetOf(Enumerable.Range(1, 2)));
         }
@@ -274,7 +291,10 @@ namespace System.Collections.Immutable.Tests
         public void IsSupersetOf()
         {
             var builder = ImmutableSortedSet.CreateRange(Enumerable.Range(1, 3)).ToBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("other", () => builder.IsSupersetOf(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "other",
+                () => builder.IsSupersetOf(null)
+            );
             Assert.False(builder.IsSupersetOf(Enumerable.Range(1, 4)));
             Assert.True(builder.IsSupersetOf(Enumerable.Range(1, 3)));
             Assert.True(builder.IsSupersetOf(Enumerable.Range(1, 2)));
@@ -381,14 +401,24 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void DebuggerAttributesValid()
         {
-            DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableSortedSet.CreateBuilder<string>());
-            DebuggerAttributes.ValidateDebuggerTypeProxyProperties(ImmutableSortedSet.CreateBuilder<int>());
+            DebuggerAttributes.ValidateDebuggerDisplayReferences(
+                ImmutableSortedSet.CreateBuilder<string>()
+            );
+            DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                ImmutableSortedSet.CreateBuilder<int>()
+            );
             ImmutableSortedSet<int>.Builder builder = ImmutableSortedSet.CreateBuilder<int>();
             builder.Add(1);
             builder.Add(2);
             builder.Add(3);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(builder);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                builder
+            );
+            PropertyInfo itemProperty = info.Properties.Single(
+                pr =>
+                    pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                    == DebuggerBrowsableState.RootHidden
+            );
             int[] items = itemProperty.GetValue(info.Instance) as int[];
             Assert.Equal(builder, items);
         }
@@ -396,8 +426,12 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public static void TestDebuggerAttributes_Null()
         {
-            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableSortedSet.CreateBuilder<int>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null));
+            Type proxyType = DebuggerAttributes.GetProxyType(
+                ImmutableSortedSet.CreateBuilder<int>()
+            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
@@ -423,7 +457,10 @@ namespace System.Collections.Immutable.Tests
             Assert.False(set.IsEmpty);
 
             ImmutableSortedSet<int>.Builder nullBuilder = null;
-            AssertExtensions.Throws<ArgumentNullException>("builder", () => nullBuilder.ToImmutableSortedSet());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "builder",
+                () => nullBuilder.ToImmutableSortedSet()
+            );
         }
 
         [Fact]
@@ -440,16 +477,16 @@ namespace System.Collections.Immutable.Tests
 
         private class CustomComparer : IComparer<int>
         {
-            private CustomComparer()
-            {
-            }
+            private CustomComparer() { }
 
             public static CustomComparer Instance { get; } = new CustomComparer();
 
             public int Compare(int x, int y) =>
-                x >> 1 == y >> 1 ? 0 :
-                x < y ? -1 :
-                1;
+                x >> 1 == y >> 1
+                    ? 0
+                    : x < y
+                        ? -1
+                        : 1;
         }
     }
 }

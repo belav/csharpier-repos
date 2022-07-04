@@ -11,8 +11,10 @@ namespace System.Reflection.Internal
     {
         internal static Lazy<Type> FileStreamType = new Lazy<Type>(() =>
         {
-            const string systemIOFileSystem = "System.IO.FileSystem, Version=4.0.0.0, Culture=neutral, PublicKeyToken = b03f5f7f11d50a3a";
-            const string mscorlib = "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+            const string systemIOFileSystem =
+                "System.IO.FileSystem, Version=4.0.0.0, Culture=neutral, PublicKeyToken = b03f5f7f11d50a3a";
+            const string mscorlib =
+                "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
 
             return LightUpHelper.GetType("System.IO.FileStream", systemIOFileSystem, mscorlib);
         });
@@ -34,12 +36,17 @@ namespace System.Reflection.Internal
             }
 
             var type = stream.GetType();
-            return type == FileStreamType.Value || type.GetTypeInfo().IsSubclassOf(FileStreamType.Value);
+            return type == FileStreamType.Value
+                || type.GetTypeInfo().IsSubclassOf(FileStreamType.Value);
         }
 
         internal static SafeHandle GetSafeFileHandle(Stream stream)
         {
-            Debug.Assert(FileStreamType.IsValueCreated && FileStreamType.Value != null && IsFileStream(stream));
+            Debug.Assert(
+                FileStreamType.IsValueCreated
+                    && FileStreamType.Value != null
+                    && IsFileStream(stream)
+            );
 
             if (safeFileHandleNotAvailable)
             {
@@ -101,7 +108,13 @@ namespace System.Reflection.Internal
 
             try
             {
-                int result = Interop.Kernel32.ReadFile(handle, buffer, size, out int bytesRead, IntPtr.Zero);
+                int result = Interop.Kernel32.ReadFile(
+                    handle,
+                    buffer,
+                    size,
+                    out int bytesRead,
+                    IntPtr.Zero
+                );
                 return result == 0 ? 0 : bytesRead;
             }
             catch

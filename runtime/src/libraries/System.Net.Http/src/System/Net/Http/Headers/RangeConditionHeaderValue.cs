@@ -34,9 +34,7 @@ namespace System.Net.Http.Headers
         }
 
         public RangeConditionHeaderValue(string entityTag)
-            : this(new EntityTagHeaderValue(entityTag))
-        {
-        }
+            : this(new EntityTagHeaderValue(entityTag)) { }
 
         private RangeConditionHeaderValue(RangeConditionHeaderValue source)
         {
@@ -88,16 +86,26 @@ namespace System.Net.Http.Headers
         public static RangeConditionHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (RangeConditionHeaderValue)GenericHeaderParser.RangeConditionParser.ParseValue(
-                input, null, ref index);
+            return (RangeConditionHeaderValue)
+                GenericHeaderParser.RangeConditionParser.ParseValue(input, null, ref index);
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out RangeConditionHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out RangeConditionHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (GenericHeaderParser.RangeConditionParser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                GenericHeaderParser.RangeConditionParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (RangeConditionHeaderValue)output!;
                 return true;
@@ -105,7 +113,11 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        internal static int GetRangeConditionLength(string? input, int startIndex, out object? parsedValue)
+        internal static int GetRangeConditionLength(
+            string? input,
+            int startIndex,
+            out object? parsedValue
+        )
         {
             Debug.Assert(startIndex >= 0);
 
@@ -128,10 +140,17 @@ namespace System.Net.Http.Headers
             char firstChar = input[current];
             char secondChar = input[current + 1];
 
-            if ((firstChar == '\"') || (((firstChar == 'w') || (firstChar == 'W')) && (secondChar == '/')))
+            if (
+                (firstChar == '\"')
+                || (((firstChar == 'w') || (firstChar == 'W')) && (secondChar == '/'))
+            )
             {
                 // trailing whitespace is removed by GetEntityTagLength()
-                int entityTagLength = EntityTagHeaderValue.GetEntityTagLength(input, current, out entityTag);
+                int entityTagLength = EntityTagHeaderValue.GetEntityTagLength(
+                    input,
+                    current,
+                    out entityTag
+                );
 
                 if (entityTagLength == 0)
                 {

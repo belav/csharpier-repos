@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             IUIThreadOperationExecutor operationExecutor,
             IAsynchronousOperationListenerProvider listenerProvider,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             _threadingContext = threadingContext;
             _operationExecutor = operationExecutor;
@@ -51,7 +52,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 return null;
 
             return new QuickInfoSource(
-                textBuffer, _threadingContext, _operationExecutor, _listener, _streamingPresenter, _globalOptions);
+                textBuffer,
+                _threadingContext,
+                _operationExecutor,
+                _listener,
+                _streamingPresenter,
+                _globalOptions
+            );
         }
     }
 }

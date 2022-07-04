@@ -21,9 +21,10 @@ namespace System.CommandLine.Tests.Parsing
         [InlineData(" one\r\ntwo\r\nthree\r\nfour\r\n")]
         public void It_splits_strings_based_on_whitespace(string commandLine)
         {
-            _splitter.Split(commandLine)
-                     .Should()
-                     .BeEquivalentSequenceTo("one", "two", "three", "four");
+            _splitter
+                .Split(commandLine)
+                .Should()
+                .BeEquivalentSequenceTo("one", "two", "three", "four");
         }
 
         [Fact]
@@ -31,9 +32,10 @@ namespace System.CommandLine.Tests.Parsing
         {
             var commandLine = @"rm -r ""c:\temp files\""";
 
-            _splitter.Split(commandLine)
-                     .Should()
-                     .BeEquivalentSequenceTo("rm", "-r", @"c:\temp files\");
+            _splitter
+                .Split(commandLine)
+                .Should()
+                .BeEquivalentSequenceTo("rm", "-r", @"c:\temp files\");
         }
 
         [Theory]
@@ -45,15 +47,17 @@ namespace System.CommandLine.Tests.Parsing
         [InlineData("/", ':')]
         public void It_does_not_split_double_quote_delimited_values_when_a_non_whitespace_argument_delimiter_is_used(
             string prefix,
-            char delimiter)
+            char delimiter
+        )
         {
             var optionAndArgument = $@"{prefix}the-option{delimiter}""c:\temp files\""";
 
             var commandLine = $"the-command {optionAndArgument}";
 
-            _splitter.Split(commandLine)
-                     .Should()
-                     .BeEquivalentSequenceTo("the-command", optionAndArgument.Replace("\"", ""));
+            _splitter
+                .Split(commandLine)
+                .Should()
+                .BeEquivalentSequenceTo("the-command", optionAndArgument.Replace("\"", ""));
         }
 
         [Fact]
@@ -66,14 +70,9 @@ namespace System.CommandLine.Tests.Parsing
 
             var tokenized = _splitter.Split(commandLine);
 
-            tokenized.Should()
-                     .BeEquivalentSequenceTo(
-                         "move",
-                         "--from",
-                         source,
-                         "--to",
-                         destination,
-                         "--verbose");
+            tokenized
+                .Should()
+                .BeEquivalentSequenceTo("move", "--from", source, "--to", destination, "--verbose");
         }
 
         [Fact]
@@ -81,9 +80,10 @@ namespace System.CommandLine.Tests.Parsing
         {
             var commandLine = @"POST --raw='{""Id"":1,""Name"":""Alice""}'";
 
-            _splitter.Split(commandLine)
-                     .Should()
-                     .BeEquivalentTo("POST", "--raw='{Id:1,Name:Alice}'");
+            _splitter
+                .Split(commandLine)
+                .Should()
+                .BeEquivalentTo("POST", "--raw='{Id:1,Name:Alice}'");
         }
 
         [Fact]
@@ -91,9 +91,10 @@ namespace System.CommandLine.Tests.Parsing
         {
             var commandLine = @"command --raw='{""Id"":1,""Movie Name"":""The Three Musketeers""}'";
 
-            _splitter.Split(commandLine)
-                     .Should()
-                     .BeEquivalentTo("command", "--raw='{Id:1,Movie Name:The Three Musketeers}'");
+            _splitter
+                .Split(commandLine)
+                .Should()
+                .BeEquivalentTo("command", "--raw='{Id:1,Movie Name:The Three Musketeers}'");
         }
     }
 }

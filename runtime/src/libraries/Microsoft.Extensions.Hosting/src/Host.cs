@@ -28,8 +28,7 @@ namespace Microsoft.Extensions.Hosting
         ///   </list>
         /// </remarks>
         /// <returns>The initialized <see cref="IHostBuilder"/>.</returns>
-        public static IHostBuilder CreateDefaultBuilder() =>
-            CreateDefaultBuilder(args: null);
+        public static IHostBuilder CreateDefaultBuilder() => CreateDefaultBuilder(args: null);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostBuilder"/> class with pre-configured defaults.
@@ -73,7 +72,8 @@ namespace Microsoft.Extensions.Hosting
         ///     <item><description>enables scope validation on the dependency injection container when <see cref="IHostEnvironment.EnvironmentName"/> is 'Development'</description></item>
         ///   </list>
         /// </remarks>
-        public static HostApplicationBuilder CreateApplicationBuilder() => new HostApplicationBuilder();
+        public static HostApplicationBuilder CreateApplicationBuilder() =>
+            new HostApplicationBuilder();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostApplicationBuilder"/> class with pre-configured defaults.
@@ -93,6 +93,7 @@ namespace Microsoft.Extensions.Hosting
         ///   </list>
         /// </remarks>
         /// <param name="args">The command line args.</param>
-        public static HostApplicationBuilder CreateApplicationBuilder(string[]? args) => new HostApplicationBuilder(args);
+        public static HostApplicationBuilder CreateApplicationBuilder(string[]? args) =>
+            new HostApplicationBuilder(args);
     }
 }

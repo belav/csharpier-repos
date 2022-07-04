@@ -24,6 +24,7 @@ namespace System.Net.Http.Headers
 
         /// <summary>null, a T, or a T[].</summary>
         internal object? _items;
+
         /// <summary>Number of elements stored in the collection.</summary>
         internal int _size;
 
@@ -88,9 +89,11 @@ namespace System.Net.Http.Headers
         }
 
         public bool Contains(T item) =>
-            _size <= 0 ? false :
-            _items is T o ? o.Equals(item) :
-            _items is T[] items && Array.IndexOf(items, item, 0, _size) != -1;
+            _size <= 0
+                ? false
+                : _items is T o
+                    ? o.Equals(item)
+                    : _items is T[] items && Array.IndexOf(items, item, 0, _size) != -1;
 
         public void CopyTo(T[] array, int arrayIndex)
         {
@@ -144,7 +147,9 @@ namespace System.Net.Http.Headers
         }
 
         public Enumerator GetEnumerator() => new Enumerator(this);
+
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public struct Enumerator : IEnumerator<T>

@@ -59,7 +59,11 @@ namespace System
 
         [DoesNotReturn]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        public static extern void FailFast(string? message, Exception? exception, string? errorMessage);
+        public static extern void FailFast(
+            string? message,
+            Exception? exception,
+            string? errorMessage
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern string[] GetCommandLineArgsNative();
@@ -79,9 +83,9 @@ namespace System
             // So our best bet is to simply use the commandLine that was used to invoke the process.
             // in case it is present.
 
-            return s_commandLineArgs != null ?
-                (string[])s_commandLineArgs.Clone() :
-                GetCommandLineArgsNative();
+            return s_commandLineArgs != null
+                ? (string[])s_commandLineArgs.Clone()
+                : GetCommandLineArgsNative();
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Environment_GetProcessorCount")]

@@ -26,7 +26,9 @@ namespace ILCompiler
             else
                 mangledJustTypeName = NameMangler.GetMangledTypeName(type);
 
-            return "_ZTV" + mangledJustTypeName.Length.ToString(CultureInfo.InvariantCulture) + mangledJustTypeName;
+            return "_ZTV"
+                + mangledJustTypeName.Length.ToString(CultureInfo.InvariantCulture)
+                + mangledJustTypeName;
         }
 
         public sealed override string GCStatics(TypeDesc type)
@@ -41,7 +43,9 @@ namespace ILCompiler
 
         public sealed override string ThreadStatics(TypeDesc type)
         {
-            return NameMangler.CompilationUnitPrefix + "__THREADSTATICS" + NameMangler.GetMangledTypeName(type);
+            return NameMangler.CompilationUnitPrefix
+                + "__THREADSTATICS"
+                + NameMangler.GetMangledTypeName(type);
         }
 
         public sealed override string ThreadStaticsIndex(TypeDesc type)

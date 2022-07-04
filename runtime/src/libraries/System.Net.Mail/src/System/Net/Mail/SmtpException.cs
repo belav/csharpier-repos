@@ -6,14 +6,18 @@ using System.Runtime.Serialization;
 namespace System.Net.Mail
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class SmtpException : Exception, ISerializable
     {
         private SmtpStatusCode _statusCode = SmtpStatusCode.GeneralFailure;
 
         private static string GetMessageForStatus(SmtpStatusCode statusCode, string? serverResponse)
         {
-            return GetMessageForStatus(statusCode) + " " + SR.Format(SR.MailServerResponse, serverResponse);
+            return GetMessageForStatus(statusCode)
+                + " "
+                + SR.Format(SR.MailServerResponse, serverResponse);
         }
 
         private static string GetMessageForStatus(SmtpStatusCode statusCode)
@@ -80,38 +84,45 @@ namespace System.Net.Mail
             _statusCode = statusCode;
         }
 
-        public SmtpException() : this(SmtpStatusCode.GeneralFailure)
-        {
-        }
+        public SmtpException() : this(SmtpStatusCode.GeneralFailure) { }
 
-        public SmtpException(string? message) : base(message)
-        {
-        }
+        public SmtpException(string? message) : base(message) { }
 
-        public SmtpException(string? message, Exception? innerException) : base(message, innerException)
-        {
-        }
+        public SmtpException(string? message, Exception? innerException)
+            : base(message, innerException) { }
 
-        protected SmtpException(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
+        protected SmtpException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) : base(serializationInfo, streamingContext)
         {
             _statusCode = (SmtpStatusCode)serializationInfo.GetInt32("Status");
         }
 
-        internal SmtpException(SmtpStatusCode statusCode, string? serverMessage, bool serverResponse) : base(GetMessageForStatus(statusCode, serverMessage))
+        internal SmtpException(
+            SmtpStatusCode statusCode,
+            string? serverMessage,
+            bool serverResponse
+        ) : base(GetMessageForStatus(statusCode, serverMessage))
         {
             _statusCode = statusCode;
         }
 
-        internal SmtpException(string message, string? serverResponse) : base(message + " " + SR.Format(SR.MailServerResponse, serverResponse))
-        {
-        }
+        internal SmtpException(string message, string? serverResponse)
+            : base(message + " " + SR.Format(SR.MailServerResponse, serverResponse)) { }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             GetObjectData(serializationInfo, streamingContext);
         }
 
-        public override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             base.GetObjectData(serializationInfo, streamingContext);
             serializationInfo.AddValue("Status", (int)_statusCode, typeof(int));
@@ -119,14 +130,8 @@ namespace System.Net.Mail
 
         public SmtpStatusCode StatusCode
         {
-            get
-            {
-                return _statusCode;
-            }
-            set
-            {
-                _statusCode = value;
-            }
+            get { return _statusCode; }
+            set { _statusCode = value; }
         }
     }
 }

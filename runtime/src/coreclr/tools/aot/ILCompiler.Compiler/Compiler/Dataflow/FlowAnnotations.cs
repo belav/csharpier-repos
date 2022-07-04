@@ -72,11 +72,17 @@ namespace ILCompiler.Dataflow
         /// Retrieves the annotations for the given parameter.
         /// </summary>
         /// <param name="parameterIndex">Parameter index in the IL sense. Parameter 0 on instance methods is `this`.</param>
-        public DynamicallyAccessedMemberTypes GetParameterAnnotation(MethodDesc method, int parameterIndex)
+        public DynamicallyAccessedMemberTypes GetParameterAnnotation(
+            MethodDesc method,
+            int parameterIndex
+        )
         {
             method = method.GetTypicalMethodDefinition();
 
-            if (GetAnnotations(method.OwningType).TryGetAnnotation(method, out var annotation) && annotation.ParameterAnnotations != null)
+            if (
+                GetAnnotations(method.OwningType).TryGetAnnotation(method, out var annotation)
+                && annotation.ParameterAnnotations != null
+            )
             {
                 return annotation.ParameterAnnotations[parameterIndex];
             }
@@ -113,17 +119,24 @@ namespace ILCompiler.Dataflow
             return GetAnnotations(type.GetTypeDefinition()).TypeAnnotation;
         }
 
-        public DynamicallyAccessedMemberTypes GetGenericParameterAnnotation(GenericParameterDesc genericParameter)
+        public DynamicallyAccessedMemberTypes GetGenericParameterAnnotation(
+            GenericParameterDesc genericParameter
+        )
         {
             if (genericParameter is not EcmaGenericParameter ecmaGenericParameter)
                 return DynamicallyAccessedMemberTypes.None;
 
-            GenericParameter paramDef = ecmaGenericParameter.MetadataReader.GetGenericParameter(ecmaGenericParameter.Handle);
+            GenericParameter paramDef = ecmaGenericParameter.MetadataReader.GetGenericParameter(
+                ecmaGenericParameter.Handle
+            );
 
             if (ecmaGenericParameter.Kind == GenericParameterKind.Type)
             {
                 TypeDesc parent = ecmaGenericParameter.Module.GetType(paramDef.Parent);
-                if (GetAnnotations(parent).TryGetAnnotation(ecmaGenericParameter, out var annotation))
+                if (
+                    GetAnnotations(parent)
+                        .TryGetAnnotation(ecmaGenericParameter, out var annotation)
+                )
                 {
                     return annotation;
                 }
@@ -132,8 +145,11 @@ namespace ILCompiler.Dataflow
             {
                 Debug.Assert(ecmaGenericParameter.Kind == GenericParameterKind.Method);
                 MethodDesc parent = ecmaGenericParameter.Module.GetMethod(paramDef.Parent);
-                if (GetAnnotations(parent.OwningType).TryGetAnnotation(parent, out var methodAnnotation)
-                    && methodAnnotation.TryGetAnnotation(genericParameter, out var annotation))
+                if (
+                    GetAnnotations(parent.OwningType)
+                        .TryGetAnnotation(parent, out var methodAnnotation)
+                    && methodAnnotation.TryGetAnnotation(genericParameter, out var annotation)
+                )
                 {
                     return annotation;
                 }
@@ -145,11 +161,14 @@ namespace ILCompiler.Dataflow
         public bool ShouldWarnWhenAccessedForReflection(MethodDesc method)
         {
             method = method.GetTypicalMethodDefinition();
-            
+
             if (!GetAnnotations(method.OwningType).TryGetAnnotation(method, out var annotation))
                 return false;
 
-            if (annotation.ParameterAnnotations == null && annotation.ReturnParameterAnnotation == DynamicallyAccessedMemberTypes.None)
+            if (
+                annotation.ParameterAnnotations == null
+                && annotation.ReturnParameterAnnotation == DynamicallyAccessedMemberTypes.None
+            )
                 return false;
 
             // If the method only has annotation on the return value and it's not virtual avoid warning.
@@ -210,11 +229,19 @@ namespace ILCompiler.Dataflow
             private readonly ILProvider _ilProvider;
             private readonly Logger _logger;
 
-            public TypeAnnotationsHashtable(Logger logger, ILProvider ilProvider) => (_logger, _ilProvider) = (logger, ilProvider);
+            public TypeAnnotationsHashtable(Logger logger, ILProvider ilProvider) =>
+                (_logger, _ilProvider) = (logger, ilProvider);
 
-            private static DynamicallyAccessedMemberTypes GetMemberTypesForDynamicallyAccessedMembersAttribute(MetadataReader reader, CustomAttributeHandleCollection customAttributeHandles)
+            private static DynamicallyAccessedMemberTypes GetMemberTypesForDynamicallyAccessedMembersAttribute(
+                MetadataReader reader,
+                CustomAttributeHandleCollection customAttributeHandles
+            )
             {
-                CustomAttributeHandle ca = reader.GetCustomAttributeHandle(customAttributeHandles, "System.Diagnostics.CodeAnalysis", "DynamicallyAccessedMembersAttribute");
+                CustomAttributeHandle ca = reader.GetCustomAttributeHandle(
+                    customAttributeHandles,
+                    "System.Diagnostics.CodeAnalysis",
+                    "DynamicallyAccessedMembersAttribute"
+                );
                 if (ca.IsNil)
                     return DynamicallyAccessedMemberTypes.None;
 
@@ -227,10 +254,18 @@ namespace ILCompiler.Dataflow
                 return (DynamicallyAccessedMemberTypes)blobReader.ReadUInt32();
             }
 
-            protected override bool CompareKeyToValue(TypeDesc key, TypeAnnotations value) => key == value.Type;
-            protected override bool CompareValueToValue(TypeAnnotations value1, TypeAnnotations value2) => value1.Type == value2.Type;
+            protected override bool CompareKeyToValue(TypeDesc key, TypeAnnotations value) =>
+                key == value.Type;
+
+            protected override bool CompareValueToValue(
+                TypeAnnotations value1,
+                TypeAnnotations value2
+            ) => value1.Type == value2.Type;
+
             protected override int GetKeyHashCode(TypeDesc key) => key.GetHashCode();
-            protected override int GetValueHashCode(TypeAnnotations value) => value.Type.GetHashCode();
+
+            protected override int GetValueHashCode(TypeAnnotations value) =>
+                value.Type.GetHashCode();
 
             protected override TypeAnnotations CreateValueFromKey(TypeDesc key)
             {
@@ -242,30 +277,50 @@ namespace ILCompiler.Dataflow
 
                 Debug.Assert(key.IsTypeDefinition);
                 if (key is not EcmaType ecmaType)
-                    return new TypeAnnotations(key, DynamicallyAccessedMemberTypes.None, null, null, null);
+                    return new TypeAnnotations(
+                        key,
+                        DynamicallyAccessedMemberTypes.None,
+                        null,
+                        null,
+                        null
+                    );
 
                 MetadataReader reader = ecmaType.MetadataReader;
 
                 // class, interface, struct can have annotations
                 TypeDefinition typeDef = reader.GetTypeDefinition(ecmaType.Handle);
-                DynamicallyAccessedMemberTypes typeAnnotation = GetMemberTypesForDynamicallyAccessedMembersAttribute(reader, typeDef.GetCustomAttributes());
-                
+                DynamicallyAccessedMemberTypes typeAnnotation =
+                    GetMemberTypesForDynamicallyAccessedMembersAttribute(
+                        reader,
+                        typeDef.GetCustomAttributes()
+                    );
+
                 try
                 {
                     // Also inherit annotation from bases
                     TypeDesc baseType = key.BaseType;
                     while (baseType != null)
                     {
-                        TypeDefinition baseTypeDef = reader.GetTypeDefinition(((EcmaType)baseType.GetTypeDefinition()).Handle);
-                        typeAnnotation |= GetMemberTypesForDynamicallyAccessedMembersAttribute(reader, baseTypeDef.GetCustomAttributes());
+                        TypeDefinition baseTypeDef = reader.GetTypeDefinition(
+                            ((EcmaType)baseType.GetTypeDefinition()).Handle
+                        );
+                        typeAnnotation |= GetMemberTypesForDynamicallyAccessedMembersAttribute(
+                            reader,
+                            baseTypeDef.GetCustomAttributes()
+                        );
                         baseType = baseType.BaseType;
                     }
 
                     // And inherit them from interfaces
                     foreach (DefType runtimeInterface in key.RuntimeInterfaces)
                     {
-                        TypeDefinition interfaceTypeDef = reader.GetTypeDefinition(((EcmaType)runtimeInterface.GetTypeDefinition()).Handle);
-                        typeAnnotation |= GetMemberTypesForDynamicallyAccessedMembersAttribute(reader, interfaceTypeDef.GetCustomAttributes());
+                        TypeDefinition interfaceTypeDef = reader.GetTypeDefinition(
+                            ((EcmaType)runtimeInterface.GetTypeDefinition()).Handle
+                        );
+                        typeAnnotation |= GetMemberTypesForDynamicallyAccessedMembersAttribute(
+                            reader,
+                            interfaceTypeDef.GetCustomAttributes()
+                        );
                     }
                 }
                 catch (TypeSystemException)
@@ -280,7 +335,10 @@ namespace ILCompiler.Dataflow
                 {
                     FieldDefinition fieldDef = reader.GetFieldDefinition(field.Handle);
                     DynamicallyAccessedMemberTypes annotation =
-                        GetMemberTypesForDynamicallyAccessedMembersAttribute(reader, fieldDef.GetCustomAttributes());
+                        GetMemberTypesForDynamicallyAccessedMembersAttribute(
+                            reader,
+                            fieldDef.GetCustomAttributes()
+                        );
                     if (annotation == DynamicallyAccessedMemberTypes.None)
                     {
                         continue;
@@ -289,7 +347,11 @@ namespace ILCompiler.Dataflow
                     if (!IsTypeInterestingForDataflow(field.FieldType))
                     {
                         // Already know that there's a non-empty annotation on a field which is not System.Type/String and we're about to ignore it
-                        _logger.LogWarning(field, DiagnosticId.DynamicallyAccessedMembersOnFieldCanOnlyApplyToTypesOrStrings, field.GetDisplayName());
+                        _logger.LogWarning(
+                            field,
+                            DiagnosticId.DynamicallyAccessedMembersOnFieldCanOnlyApplyToTypesOrStrings,
+                            field.GetDisplayName()
+                        );
                         continue;
                     }
 
@@ -307,8 +369,11 @@ namespace ILCompiler.Dataflow
                     // IL space assigns index 0 to the `this` parameter on instance methods.
 
                     DynamicallyAccessedMemberTypes methodMemberTypes =
-                        GetMemberTypesForDynamicallyAccessedMembersAttribute(reader, reader.GetMethodDefinition(method.Handle).GetCustomAttributes());
-                    
+                        GetMemberTypesForDynamicallyAccessedMembersAttribute(
+                            reader,
+                            reader.GetMethodDefinition(method.Handle).GetCustomAttributes()
+                        );
+
                     MethodSignature signature;
                     try
                     {
@@ -336,19 +401,25 @@ namespace ILCompiler.Dataflow
                     {
                         if (IsTypeInterestingForDataflow(method.OwningType) && !signature.IsStatic)
                         {
-                            paramAnnotations = new DynamicallyAccessedMemberTypes[signature.Length + offset];
+                            paramAnnotations = new DynamicallyAccessedMemberTypes[
+                                signature.Length + offset
+                            ];
                             paramAnnotations[0] = methodMemberTypes;
                         }
                         else
                         {
-                            _logger.LogWarning(method, DiagnosticId.DynamicallyAccessedMembersIsNotAllowedOnMethods);
+                            _logger.LogWarning(
+                                method,
+                                DiagnosticId.DynamicallyAccessedMembersIsNotAllowedOnMethods
+                            );
                         }
                     }
 
                     MethodDefinition methodDef = reader.GetMethodDefinition(method.Handle);
                     ParameterHandleCollection parameterHandles = methodDef.GetParameters();
 
-                    DynamicallyAccessedMemberTypes returnAnnotation = DynamicallyAccessedMemberTypes.None;
+                    DynamicallyAccessedMemberTypes returnAnnotation =
+                        DynamicallyAccessedMemberTypes.None;
 
                     foreach (ParameterHandle parameterHandle in parameterHandles)
                     {
@@ -357,27 +428,52 @@ namespace ILCompiler.Dataflow
                         if (parameter.SequenceNumber == 0)
                         {
                             // this is the return parameter
-                            returnAnnotation = GetMemberTypesForDynamicallyAccessedMembersAttribute(reader, parameter.GetCustomAttributes());
-                            if (returnAnnotation != DynamicallyAccessedMemberTypes.None && !IsTypeInterestingForDataflow(signature.ReturnType))
+                            returnAnnotation = GetMemberTypesForDynamicallyAccessedMembersAttribute(
+                                reader,
+                                parameter.GetCustomAttributes()
+                            );
+                            if (
+                                returnAnnotation != DynamicallyAccessedMemberTypes.None
+                                && !IsTypeInterestingForDataflow(signature.ReturnType)
+                            )
                             {
-                                _logger.LogWarning(method, DiagnosticId.DynamicallyAccessedMembersOnMethodReturnValueCanOnlyApplyToTypesOrStrings, method.GetDisplayName());
+                                _logger.LogWarning(
+                                    method,
+                                    DiagnosticId.DynamicallyAccessedMembersOnMethodReturnValueCanOnlyApplyToTypesOrStrings,
+                                    method.GetDisplayName()
+                                );
                             }
                         }
                         else
                         {
-                            DynamicallyAccessedMemberTypes pa = GetMemberTypesForDynamicallyAccessedMembersAttribute(reader, parameter.GetCustomAttributes());
+                            DynamicallyAccessedMemberTypes pa =
+                                GetMemberTypesForDynamicallyAccessedMembersAttribute(
+                                    reader,
+                                    parameter.GetCustomAttributes()
+                                );
                             if (pa == DynamicallyAccessedMemberTypes.None)
                                 continue;
 
-                            if (!IsTypeInterestingForDataflow(signature[parameter.SequenceNumber - 1]))
+                            if (
+                                !IsTypeInterestingForDataflow(
+                                    signature[parameter.SequenceNumber - 1]
+                                )
+                            )
                             {
-                                _logger.LogWarning(method, DiagnosticId.DynamicallyAccessedMembersOnMethodParameterCanOnlyApplyToTypesOrStrings, $"#{parameter.SequenceNumber}", method.GetDisplayName());
+                                _logger.LogWarning(
+                                    method,
+                                    DiagnosticId.DynamicallyAccessedMembersOnMethodParameterCanOnlyApplyToTypesOrStrings,
+                                    $"#{parameter.SequenceNumber}",
+                                    method.GetDisplayName()
+                                );
                                 continue;
                             }
 
                             if (paramAnnotations == null)
                             {
-                                paramAnnotations = new DynamicallyAccessedMemberTypes[signature.Length + offset];
+                                paramAnnotations = new DynamicallyAccessedMemberTypes[
+                                    signature.Length + offset
+                                ];
                             }
                             paramAnnotations[parameter.SequenceNumber - 1 + offset] = pa;
                         }
@@ -386,19 +482,37 @@ namespace ILCompiler.Dataflow
                     DynamicallyAccessedMemberTypes[] genericParameterAnnotations = null;
                     foreach (EcmaGenericParameter genericParameter in method.Instantiation)
                     {
-                        GenericParameter genericParameterDef = reader.GetGenericParameter(genericParameter.Handle);
-                        var annotation = GetMemberTypesForDynamicallyAccessedMembersAttribute(reader, genericParameterDef.GetCustomAttributes());
+                        GenericParameter genericParameterDef = reader.GetGenericParameter(
+                            genericParameter.Handle
+                        );
+                        var annotation = GetMemberTypesForDynamicallyAccessedMembersAttribute(
+                            reader,
+                            genericParameterDef.GetCustomAttributes()
+                        );
                         if (annotation != DynamicallyAccessedMemberTypes.None)
                         {
                             if (genericParameterAnnotations == null)
-                                genericParameterAnnotations = new DynamicallyAccessedMemberTypes[method.Instantiation.Length];
+                                genericParameterAnnotations = new DynamicallyAccessedMemberTypes[
+                                    method.Instantiation.Length
+                                ];
                             genericParameterAnnotations[genericParameter.Index] = annotation;
                         }
                     }
 
-                    if (returnAnnotation != DynamicallyAccessedMemberTypes.None || paramAnnotations != null || genericParameterAnnotations != null)
+                    if (
+                        returnAnnotation != DynamicallyAccessedMemberTypes.None
+                        || paramAnnotations != null
+                        || genericParameterAnnotations != null
+                    )
                     {
-                        annotatedMethods.Add(new MethodAnnotations(method, paramAnnotations, returnAnnotation, genericParameterAnnotations));
+                        annotatedMethods.Add(
+                            new MethodAnnotations(
+                                method,
+                                paramAnnotations,
+                                returnAnnotation,
+                                genericParameterAnnotations
+                            )
+                        );
                     }
                 }
 
@@ -416,10 +530,17 @@ namespace ILCompiler.Dataflow
                 //     set;
                 //  }
 
-                foreach (PropertyDefinitionHandle propertyHandle in reader.GetTypeDefinition(ecmaType.Handle).GetProperties())
+                foreach (
+                    PropertyDefinitionHandle propertyHandle in reader
+                        .GetTypeDefinition(ecmaType.Handle)
+                        .GetProperties()
+                )
                 {
-                    DynamicallyAccessedMemberTypes annotation = GetMemberTypesForDynamicallyAccessedMembersAttribute(
-                        reader, reader.GetPropertyDefinition(propertyHandle).GetCustomAttributes());
+                    DynamicallyAccessedMemberTypes annotation =
+                        GetMemberTypesForDynamicallyAccessedMembersAttribute(
+                            reader,
+                            reader.GetPropertyDefinition(propertyHandle).GetCustomAttributes()
+                        );
                     if (annotation == DynamicallyAccessedMemberTypes.None)
                         continue;
 
@@ -427,7 +548,11 @@ namespace ILCompiler.Dataflow
 
                     if (!IsTypeInterestingForDataflow(property.Signature.ReturnType))
                     {
-                        _logger.LogWarning(property, DiagnosticId.DynamicallyAccessedMembersOnPropertyCanOnlyApplyToTypesOrStrings, property.GetDisplayName());
+                        _logger.LogWarning(
+                            property,
+                            DiagnosticId.DynamicallyAccessedMembersOnPropertyCanOnlyApplyToTypesOrStrings,
+                            property.GetDisplayName()
+                        );
                         continue;
                     }
 
@@ -437,7 +562,6 @@ namespace ILCompiler.Dataflow
                     MethodDesc setMethod = property.SetMethod;
                     if (setMethod != null)
                     {
-
                         // Abstract property backing field propagation doesn't make sense, and any derived property will be validated
                         // to have the exact same annotations on getter/setter, and thus if it has a detectable backing field that will be validated as well.
                         MethodIL methodBody = _ilProvider.GetMethodIL(setMethod);
@@ -446,22 +570,40 @@ namespace ILCompiler.Dataflow
                             // Look for the compiler generated backing field. If it doesn't work out simply move on. In such case we would still
                             // propagate the annotation to the setter/getter and later on when analyzing the setter/getter we will warn
                             // that the field (which ever it is) must be annotated as well.
-                            ScanMethodBodyForFieldAccess(methodBody, write: true, out backingFieldFromSetter);
+                            ScanMethodBodyForFieldAccess(
+                                methodBody,
+                                write: true,
+                                out backingFieldFromSetter
+                            );
                         }
 
                         if (annotatedMethods.Any(a => a.Method == setMethod))
                         {
-                            
-                            _logger.LogWarning(setMethod, DiagnosticId.DynamicallyAccessedMembersConflictsBetweenPropertyAndAccessor, property.GetDisplayName(), setMethod.GetDisplayName());
+                            _logger.LogWarning(
+                                setMethod,
+                                DiagnosticId.DynamicallyAccessedMembersConflictsBetweenPropertyAndAccessor,
+                                property.GetDisplayName(),
+                                setMethod.GetDisplayName()
+                            );
                         }
                         else
                         {
                             int offset = setMethod.Signature.IsStatic ? 0 : 1;
                             if (setMethod.Signature.Length > 0)
                             {
-                                DynamicallyAccessedMemberTypes[] paramAnnotations = new DynamicallyAccessedMemberTypes[setMethod.Signature.Length + offset];
+                                DynamicallyAccessedMemberTypes[] paramAnnotations =
+                                    new DynamicallyAccessedMemberTypes[
+                                        setMethod.Signature.Length + offset
+                                    ];
                                 paramAnnotations[paramAnnotations.Length - 1] = annotation;
-                                annotatedMethods.Add(new MethodAnnotations(setMethod, paramAnnotations, DynamicallyAccessedMemberTypes.None, null));
+                                annotatedMethods.Add(
+                                    new MethodAnnotations(
+                                        setMethod,
+                                        paramAnnotations,
+                                        DynamicallyAccessedMemberTypes.None,
+                                        null
+                                    )
+                                );
                             }
                         }
                     }
@@ -472,7 +614,6 @@ namespace ILCompiler.Dataflow
                     MethodDesc getMethod = property.GetMethod;
                     if (getMethod != null)
                     {
-
                         // Abstract property backing field propagation doesn't make sense, and any derived property will be validated
                         // to have the exact same annotations on getter/setter, and thus if it has a detectable backing field that will be validated as well.
                         MethodIL methodBody = _ilProvider.GetMethodIL(getMethod);
@@ -481,24 +622,42 @@ namespace ILCompiler.Dataflow
                             // Look for the compiler generated backing field. If it doesn't work out simply move on. In such case we would still
                             // propagate the annotation to the setter/getter and later on when analyzing the setter/getter we will warn
                             // that the field (which ever it is) must be annotated as well.
-                            ScanMethodBodyForFieldAccess(methodBody, write: false, out backingFieldFromGetter);
+                            ScanMethodBodyForFieldAccess(
+                                methodBody,
+                                write: false,
+                                out backingFieldFromGetter
+                            );
                         }
 
                         if (annotatedMethods.Any(a => a.Method == getMethod))
                         {
-                            _logger.LogWarning(getMethod, DiagnosticId.DynamicallyAccessedMembersConflictsBetweenPropertyAndAccessor, property.GetDisplayName(), getMethod.GetDisplayName());
+                            _logger.LogWarning(
+                                getMethod,
+                                DiagnosticId.DynamicallyAccessedMembersConflictsBetweenPropertyAndAccessor,
+                                property.GetDisplayName(),
+                                getMethod.GetDisplayName()
+                            );
                         }
                         else
                         {
-                            annotatedMethods.Add(new MethodAnnotations(getMethod, null, annotation, null));
+                            annotatedMethods.Add(
+                                new MethodAnnotations(getMethod, null, annotation, null)
+                            );
                         }
                     }
 
                     FieldDesc backingField;
-                    if (backingFieldFromGetter != null && backingFieldFromSetter != null &&
-                        backingFieldFromGetter != backingFieldFromSetter)
+                    if (
+                        backingFieldFromGetter != null
+                        && backingFieldFromSetter != null
+                        && backingFieldFromGetter != backingFieldFromSetter
+                    )
                     {
-                        _logger.LogWarning(property, DiagnosticId.DynamicallyAccessedMembersCouldNotFindBackingField, property.GetDisplayName());
+                        _logger.LogWarning(
+                            property,
+                            DiagnosticId.DynamicallyAccessedMembersCouldNotFindBackingField,
+                            property.GetDisplayName()
+                        );
                         backingField = null;
                     }
                     else
@@ -510,7 +669,12 @@ namespace ILCompiler.Dataflow
                     {
                         if (annotatedFields.Any(a => a.Field == backingField))
                         {
-                            _logger.LogWarning(backingField, DiagnosticId.DynamicallyAccessedMembersOnPropertyConflictsWithBackingField, property.GetDisplayName(), backingField.GetDisplayName());
+                            _logger.LogWarning(
+                                backingField,
+                                DiagnosticId.DynamicallyAccessedMembersOnPropertyConflictsWithBackingField,
+                                property.GetDisplayName(),
+                                backingField.GetDisplayName()
+                            );
                         }
                         else
                         {
@@ -522,21 +686,38 @@ namespace ILCompiler.Dataflow
                 DynamicallyAccessedMemberTypes[] typeGenericParameterAnnotations = null;
                 foreach (EcmaGenericParameter genericParameter in ecmaType.Instantiation)
                 {
-                    GenericParameter genericParameterDef = reader.GetGenericParameter(genericParameter.Handle);
+                    GenericParameter genericParameterDef = reader.GetGenericParameter(
+                        genericParameter.Handle
+                    );
 
-                    var annotation = GetMemberTypesForDynamicallyAccessedMembersAttribute(reader, genericParameterDef.GetCustomAttributes());
+                    var annotation = GetMemberTypesForDynamicallyAccessedMembersAttribute(
+                        reader,
+                        genericParameterDef.GetCustomAttributes()
+                    );
                     if (annotation != DynamicallyAccessedMemberTypes.None)
                     {
                         if (typeGenericParameterAnnotations == null)
-                            typeGenericParameterAnnotations = new DynamicallyAccessedMemberTypes[ecmaType.Instantiation.Length];
+                            typeGenericParameterAnnotations = new DynamicallyAccessedMemberTypes[
+                                ecmaType.Instantiation.Length
+                            ];
                         typeGenericParameterAnnotations[genericParameter.Index] = annotation;
                     }
                 }
 
-                return new TypeAnnotations(ecmaType, typeAnnotation, annotatedMethods.ToArray(), annotatedFields.ToArray(), typeGenericParameterAnnotations);
+                return new TypeAnnotations(
+                    ecmaType,
+                    typeAnnotation,
+                    annotatedMethods.ToArray(),
+                    annotatedFields.ToArray(),
+                    typeGenericParameterAnnotations
+                );
             }
 
-            private static bool ScanMethodBodyForFieldAccess(MethodIL body, bool write, out FieldDesc found)
+            private static bool ScanMethodBodyForFieldAccess(
+                MethodIL body,
+                bool write,
+                out FieldDesc found
+            )
             {
                 // Tries to find the backing field for a property getter/setter.
                 // Returns true if this is a method body that we can unambiguously analyze.
@@ -554,6 +735,7 @@ namespace ILCompiler.Dataflow
                         case ILOpcode.ldfld when !write:
                         case ILOpcode.stsfld when write:
                         case ILOpcode.stfld when write:
+
                             {
                                 // This writes/reads multiple fields - can't guess which one is the backing store.
                                 // Return failure.
@@ -578,9 +760,14 @@ namespace ILCompiler.Dataflow
                     return true;
                 }
 
-                if (found.OwningType != body.OwningMethod.OwningType ||
-                    found.IsStatic != body.OwningMethod.Signature.IsStatic ||
-                    !found.HasCustomAttribute("System.Runtime.CompilerServices", "CompilerGeneratedAttribute"))
+                if (
+                    found.OwningType != body.OwningMethod.OwningType
+                    || found.IsStatic != body.OwningMethod.Signature.IsStatic
+                    || !found.HasCustomAttribute(
+                        "System.Runtime.CompilerServices",
+                        "CompilerGeneratedAttribute"
+                    )
+                )
                 {
                     // A couple heuristics to make sure we got the right field.
                     // Return failure.
@@ -610,7 +797,9 @@ namespace ILCompiler.Dataflow
                         return true;
                 }
 
-                if (metadataType.Name == "IReflect" && metadataType.Namespace == "System.Reflection")
+                if (
+                    metadataType.Name == "IReflect" && metadataType.Namespace == "System.Reflection"
+                )
                     return true;
 
                 do
@@ -629,81 +818,161 @@ namespace ILCompiler.Dataflow
             baseMethod = baseMethod.GetTypicalMethodDefinition();
 
             GetAnnotations(method.OwningType).TryGetAnnotation(method, out var methodAnnotations);
-            GetAnnotations(baseMethod.OwningType).TryGetAnnotation(baseMethod, out var baseMethodAnnotations);
+            GetAnnotations(baseMethod.OwningType)
+                .TryGetAnnotation(baseMethod, out var baseMethodAnnotations);
 
-            if (methodAnnotations.ReturnParameterAnnotation != baseMethodAnnotations.ReturnParameterAnnotation)
+            if (
+                methodAnnotations.ReturnParameterAnnotation
+                != baseMethodAnnotations.ReturnParameterAnnotation
+            )
                 LogValidationWarning(method.Signature.ReturnType, baseMethod, method);
 
-            if (methodAnnotations.ParameterAnnotations != null || baseMethodAnnotations.ParameterAnnotations != null)
+            if (
+                methodAnnotations.ParameterAnnotations != null
+                || baseMethodAnnotations.ParameterAnnotations != null
+            )
             {
                 if (methodAnnotations.ParameterAnnotations == null)
-                    ValidateMethodParametersHaveNoAnnotations(baseMethodAnnotations.ParameterAnnotations, method, baseMethod, method);
+                    ValidateMethodParametersHaveNoAnnotations(
+                        baseMethodAnnotations.ParameterAnnotations,
+                        method,
+                        baseMethod,
+                        method
+                    );
                 else if (baseMethodAnnotations.ParameterAnnotations == null)
-                    ValidateMethodParametersHaveNoAnnotations(methodAnnotations.ParameterAnnotations, method, baseMethod, method);
+                    ValidateMethodParametersHaveNoAnnotations(
+                        methodAnnotations.ParameterAnnotations,
+                        method,
+                        baseMethod,
+                        method
+                    );
                 else
                 {
-                    if (methodAnnotations.ParameterAnnotations.Length != baseMethodAnnotations.ParameterAnnotations.Length)
+                    if (
+                        methodAnnotations.ParameterAnnotations.Length
+                        != baseMethodAnnotations.ParameterAnnotations.Length
+                    )
                         return;
 
-                    for (int parameterIndex = 0; parameterIndex < methodAnnotations.ParameterAnnotations.Length; parameterIndex++)
+                    for (
+                        int parameterIndex = 0;
+                        parameterIndex < methodAnnotations.ParameterAnnotations.Length;
+                        parameterIndex++
+                    )
                     {
-                        if (methodAnnotations.ParameterAnnotations[parameterIndex] != baseMethodAnnotations.ParameterAnnotations[parameterIndex])
+                        if (
+                            methodAnnotations.ParameterAnnotations[parameterIndex]
+                            != baseMethodAnnotations.ParameterAnnotations[parameterIndex]
+                        )
                             LogValidationWarning(
-                                DiagnosticUtilities.GetMethodParameterFromIndex(method, parameterIndex),
-                                DiagnosticUtilities.GetMethodParameterFromIndex(baseMethod, parameterIndex),
-                                method);
+                                DiagnosticUtilities.GetMethodParameterFromIndex(
+                                    method,
+                                    parameterIndex
+                                ),
+                                DiagnosticUtilities.GetMethodParameterFromIndex(
+                                    baseMethod,
+                                    parameterIndex
+                                ),
+                                method
+                            );
                     }
                 }
             }
 
-            if (methodAnnotations.GenericParameterAnnotations != null || baseMethodAnnotations.GenericParameterAnnotations != null)
+            if (
+                methodAnnotations.GenericParameterAnnotations != null
+                || baseMethodAnnotations.GenericParameterAnnotations != null
+            )
             {
                 if (methodAnnotations.GenericParameterAnnotations == null)
-                    ValidateMethodGenericParametersHaveNoAnnotations(baseMethodAnnotations.GenericParameterAnnotations, method, baseMethod, method);
+                    ValidateMethodGenericParametersHaveNoAnnotations(
+                        baseMethodAnnotations.GenericParameterAnnotations,
+                        method,
+                        baseMethod,
+                        method
+                    );
                 else if (baseMethodAnnotations.GenericParameterAnnotations == null)
-                    ValidateMethodGenericParametersHaveNoAnnotations(methodAnnotations.GenericParameterAnnotations, method, baseMethod, method);
+                    ValidateMethodGenericParametersHaveNoAnnotations(
+                        methodAnnotations.GenericParameterAnnotations,
+                        method,
+                        baseMethod,
+                        method
+                    );
                 else
                 {
-                    if (methodAnnotations.GenericParameterAnnotations.Length != baseMethodAnnotations.GenericParameterAnnotations.Length)
+                    if (
+                        methodAnnotations.GenericParameterAnnotations.Length
+                        != baseMethodAnnotations.GenericParameterAnnotations.Length
+                    )
                         return;
 
-                    for (int genericParameterIndex = 0; genericParameterIndex < methodAnnotations.GenericParameterAnnotations.Length; genericParameterIndex++)
+                    for (
+                        int genericParameterIndex = 0;
+                        genericParameterIndex
+                            < methodAnnotations.GenericParameterAnnotations.Length;
+                        genericParameterIndex++
+                    )
                     {
-                        if (methodAnnotations.GenericParameterAnnotations[genericParameterIndex] != baseMethodAnnotations.GenericParameterAnnotations[genericParameterIndex])
+                        if (
+                            methodAnnotations.GenericParameterAnnotations[genericParameterIndex]
+                            != baseMethodAnnotations.GenericParameterAnnotations[
+                                genericParameterIndex
+                            ]
+                        )
                         {
                             LogValidationWarning(
                                 method.Instantiation[genericParameterIndex],
                                 baseMethod.Instantiation[genericParameterIndex],
-                                method);
+                                method
+                            );
                         }
                     }
                 }
             }
         }
 
-        void ValidateMethodParametersHaveNoAnnotations(DynamicallyAccessedMemberTypes[] parameterAnnotations, MethodDesc method, MethodDesc baseMethod, MethodDesc origin)
+        void ValidateMethodParametersHaveNoAnnotations(
+            DynamicallyAccessedMemberTypes[] parameterAnnotations,
+            MethodDesc method,
+            MethodDesc baseMethod,
+            MethodDesc origin
+        )
         {
-            for (int parameterIndex = 0; parameterIndex < parameterAnnotations.Length; parameterIndex++)
+            for (
+                int parameterIndex = 0;
+                parameterIndex < parameterAnnotations.Length;
+                parameterIndex++
+            )
             {
                 var annotation = parameterAnnotations[parameterIndex];
                 if (annotation != DynamicallyAccessedMemberTypes.None)
-                    LogValidationWarning(
-                        parameterIndex,
-                        baseMethod,
-                        origin);
+                    LogValidationWarning(parameterIndex, baseMethod, origin);
             }
         }
 
-        void ValidateMethodGenericParametersHaveNoAnnotations(DynamicallyAccessedMemberTypes[] genericParameterAnnotations, MethodDesc method, MethodDesc baseMethod, MethodDesc origin)
+        void ValidateMethodGenericParametersHaveNoAnnotations(
+            DynamicallyAccessedMemberTypes[] genericParameterAnnotations,
+            MethodDesc method,
+            MethodDesc baseMethod,
+            MethodDesc origin
+        )
         {
-            for (int genericParameterIndex = 0; genericParameterIndex < genericParameterAnnotations.Length; genericParameterIndex++)
+            for (
+                int genericParameterIndex = 0;
+                genericParameterIndex < genericParameterAnnotations.Length;
+                genericParameterIndex++
+            )
             {
-                if (genericParameterAnnotations[genericParameterIndex] != DynamicallyAccessedMemberTypes.None)
+                if (
+                    genericParameterAnnotations[genericParameterIndex]
+                    != DynamicallyAccessedMemberTypes.None
+                )
                 {
                     LogValidationWarning(
                         method.Instantiation[genericParameterIndex],
                         baseMethod.Instantiation[genericParameterIndex],
-                        origin);
+                        origin
+                    );
                 }
             }
         }
@@ -713,26 +982,50 @@ namespace ILCompiler.Dataflow
             switch (provider)
             {
                 case int parameterNumber:
-                    _logger.LogWarning(origin, DiagnosticId.DynamicallyAccessedMembersMismatchOnMethodParameterBetweenOverrides,
-                        $"#{parameterNumber}", DiagnosticUtilities.GetMethodSignatureDisplayName(origin),
-                        $"#{parameterNumber}", DiagnosticUtilities.GetMethodSignatureDisplayName((MethodDesc)baseProvider));
+                    _logger.LogWarning(
+                        origin,
+                        DiagnosticId.DynamicallyAccessedMembersMismatchOnMethodParameterBetweenOverrides,
+                        $"#{parameterNumber}",
+                        DiagnosticUtilities.GetMethodSignatureDisplayName(origin),
+                        $"#{parameterNumber}",
+                        DiagnosticUtilities.GetMethodSignatureDisplayName((MethodDesc)baseProvider)
+                    );
                     break;
                 case GenericParameterDesc genericParameterOverride:
-                    _logger.LogWarning(origin, DiagnosticId.DynamicallyAccessedMembersMismatchOnGenericParameterBetweenOverrides,
-                        genericParameterOverride.Name, DiagnosticUtilities.GetGenericParameterDeclaringMemberDisplayName(new GenericParameterOrigin(genericParameterOverride)),
-                        ((GenericParameterDesc)baseProvider).Name, DiagnosticUtilities.GetGenericParameterDeclaringMemberDisplayName(new GenericParameterOrigin((GenericParameterDesc)baseProvider)));
+                    _logger.LogWarning(
+                        origin,
+                        DiagnosticId.DynamicallyAccessedMembersMismatchOnGenericParameterBetweenOverrides,
+                        genericParameterOverride.Name,
+                        DiagnosticUtilities.GetGenericParameterDeclaringMemberDisplayName(
+                            new GenericParameterOrigin(genericParameterOverride)
+                        ),
+                        ((GenericParameterDesc)baseProvider).Name,
+                        DiagnosticUtilities.GetGenericParameterDeclaringMemberDisplayName(
+                            new GenericParameterOrigin((GenericParameterDesc)baseProvider)
+                        )
+                    );
                     break;
                 case TypeDesc methodReturnType:
-                    _logger.LogWarning(origin, DiagnosticId.DynamicallyAccessedMembersMismatchOnMethodReturnValueBetweenOverrides,
-                        DiagnosticUtilities.GetMethodSignatureDisplayName(origin), DiagnosticUtilities.GetMethodSignatureDisplayName((MethodDesc)baseProvider));
+                    _logger.LogWarning(
+                        origin,
+                        DiagnosticId.DynamicallyAccessedMembersMismatchOnMethodReturnValueBetweenOverrides,
+                        DiagnosticUtilities.GetMethodSignatureDisplayName(origin),
+                        DiagnosticUtilities.GetMethodSignatureDisplayName((MethodDesc)baseProvider)
+                    );
                     break;
                 // No fields - it's not possible to have a virtual field and override it
                 case MethodDesc methodDefinition:
-                    _logger.LogWarning(origin, DiagnosticId.DynamicallyAccessedMembersMismatchOnImplicitThisBetweenOverrides,
-                        DiagnosticUtilities.GetMethodSignatureDisplayName(methodDefinition), DiagnosticUtilities.GetMethodSignatureDisplayName((MethodDesc)baseProvider));
+                    _logger.LogWarning(
+                        origin,
+                        DiagnosticId.DynamicallyAccessedMembersMismatchOnImplicitThisBetweenOverrides,
+                        DiagnosticUtilities.GetMethodSignatureDisplayName(methodDefinition),
+                        DiagnosticUtilities.GetMethodSignatureDisplayName((MethodDesc)baseProvider)
+                    );
                     break;
                 default:
-                    throw new NotImplementedException($"Unsupported provider type {provider.GetType()}");
+                    throw new NotImplementedException(
+                        $"Unsupported provider type {provider.GetType()}"
+                    );
             }
         }
 
@@ -744,16 +1037,31 @@ namespace ILCompiler.Dataflow
             private readonly FieldAnnotation[] _annotatedFields;
             private readonly DynamicallyAccessedMemberTypes[] _genericParameterAnnotations;
 
-            public bool IsDefault => _annotatedMethods == null && _annotatedFields == null && _genericParameterAnnotations == null;
+            public bool IsDefault =>
+                _annotatedMethods == null
+                && _annotatedFields == null
+                && _genericParameterAnnotations == null;
 
             public TypeAnnotations(
                 TypeDesc type,
                 DynamicallyAccessedMemberTypes typeAnnotations,
                 MethodAnnotations[] annotatedMethods,
                 FieldAnnotation[] annotatedFields,
-                DynamicallyAccessedMemberTypes[] genericParameterAnnotations)
-                => (Type, TypeAnnotation, _annotatedMethods, _annotatedFields, _genericParameterAnnotations)
-                 = (type, typeAnnotations, annotatedMethods, annotatedFields, genericParameterAnnotations);
+                DynamicallyAccessedMemberTypes[] genericParameterAnnotations
+            ) =>
+                (
+                    Type,
+                    TypeAnnotation,
+                    _annotatedMethods,
+                    _annotatedFields,
+                    _genericParameterAnnotations
+                ) = (
+                    type,
+                    typeAnnotations,
+                    annotatedMethods,
+                    annotatedFields,
+                    genericParameterAnnotations
+                );
 
             public bool TryGetAnnotation(MethodDesc method, out MethodAnnotations annotations)
             {
@@ -797,14 +1105,21 @@ namespace ILCompiler.Dataflow
                 return false;
             }
 
-            public bool TryGetAnnotation(GenericParameterDesc genericParameter, out DynamicallyAccessedMemberTypes annotation)
+            public bool TryGetAnnotation(
+                GenericParameterDesc genericParameter,
+                out DynamicallyAccessedMemberTypes annotation
+            )
             {
                 annotation = default;
 
                 if (_genericParameterAnnotations == null)
                     return false;
 
-                for (int genericParameterIndex = 0; genericParameterIndex < _genericParameterAnnotations.Length; genericParameterIndex++)
+                for (
+                    int genericParameterIndex = 0;
+                    genericParameterIndex < _genericParameterAnnotations.Length;
+                    genericParameterIndex++
+                )
                 {
                     if (Type.Instantiation[genericParameterIndex] == genericParameter)
                     {
@@ -828,18 +1143,30 @@ namespace ILCompiler.Dataflow
                 MethodDesc method,
                 DynamicallyAccessedMemberTypes[] paramAnnotations,
                 DynamicallyAccessedMemberTypes returnParamAnnotations,
-                DynamicallyAccessedMemberTypes[] genericParameterAnnotations)
-                => (Method, ParameterAnnotations, ReturnParameterAnnotation, GenericParameterAnnotations) =
-                    (method, paramAnnotations, returnParamAnnotations, genericParameterAnnotations);
+                DynamicallyAccessedMemberTypes[] genericParameterAnnotations
+            ) =>
+                (
+                    Method,
+                    ParameterAnnotations,
+                    ReturnParameterAnnotation,
+                    GenericParameterAnnotations
+                ) = (method, paramAnnotations, returnParamAnnotations, genericParameterAnnotations);
 
-            public bool TryGetAnnotation(GenericParameterDesc genericParameter, out DynamicallyAccessedMemberTypes annotation)
+            public bool TryGetAnnotation(
+                GenericParameterDesc genericParameter,
+                out DynamicallyAccessedMemberTypes annotation
+            )
             {
                 annotation = default;
 
                 if (GenericParameterAnnotations == null)
                     return false;
 
-                for (int genericParameterIndex = 0; genericParameterIndex < GenericParameterAnnotations.Length; genericParameterIndex++)
+                for (
+                    int genericParameterIndex = 0;
+                    genericParameterIndex < GenericParameterAnnotations.Length;
+                    genericParameterIndex++
+                )
                 {
                     if (Method.Instantiation[genericParameterIndex] == genericParameter)
                     {
@@ -857,8 +1184,8 @@ namespace ILCompiler.Dataflow
             public readonly FieldDesc Field;
             public readonly DynamicallyAccessedMemberTypes Annotation;
 
-            public FieldAnnotation(FieldDesc field, DynamicallyAccessedMemberTypes annotation)
-                => (Field, Annotation) = (field, annotation);
+            public FieldAnnotation(FieldDesc field, DynamicallyAccessedMemberTypes annotation) =>
+                (Field, Annotation) = (field, annotation);
         }
     }
 }

@@ -21,6 +21,7 @@ internal static partial class Interop
             byte[] lpBuffer,
             int nNumberOfBytesRead,
             out int pnBytesRead,
-            out int pnMinNumberOfBytesNeeded);
+            out int pnMinNumberOfBytesNeeded
+        );
     }
 }

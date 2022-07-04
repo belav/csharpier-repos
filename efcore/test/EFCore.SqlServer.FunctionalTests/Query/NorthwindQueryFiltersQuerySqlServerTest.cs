@@ -4,21 +4,23 @@
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindQueryFiltersQuerySqlServerTest : NorthwindQueryFiltersQueryTestBase<
-    NorthwindQuerySqlServerFixture<NorthwindQueryFiltersCustomizer>>
+public class NorthwindQueryFiltersQuerySqlServerTest
+    : NorthwindQueryFiltersQueryTestBase<
+        NorthwindQuerySqlServerFixture<NorthwindQueryFiltersCustomizer>
+    >
 {
     public NorthwindQueryFiltersQuerySqlServerTest(
         NorthwindQuerySqlServerFixture<NorthwindQueryFiltersCustomizer> fixture,
-        ITestOutputHelper testOutputHelper)
-        : base(fixture)
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
         //fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Count_query(bool async)
     {
@@ -29,7 +31,8 @@ public class NorthwindQueryFiltersQuerySqlServerTest : NorthwindQueryFiltersQuer
 
 SELECT COUNT(*)
 FROM [Customers] AS [c]
-WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)");
+WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)"
+        );
     }
 
     public override async Task Materialized_query(bool async)
@@ -41,7 +44,8 @@ WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND L
 
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)");
+WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)"
+        );
     }
 
     public override async Task Find(bool async)
@@ -54,7 +58,8 @@ WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND L
 
 SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE (@__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)) AND [c].[CustomerID] = @__p_0");
+WHERE (@__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)) AND [c].[CustomerID] = @__p_0"
+        );
     }
 
     public override async Task Materialized_query_parameter(bool async)
@@ -66,7 +71,8 @@ WHERE (@__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND 
 
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)");
+WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)"
+        );
     }
 
     public override async Task Materialized_query_parameter_new_context(bool async)
@@ -84,7 +90,8 @@ WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND L
 
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)");
+WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)"
+        );
     }
 
     public override async Task Projection_query_parameter(bool async)
@@ -96,7 +103,8 @@ WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND L
 
 SELECT [c].[CustomerID]
 FROM [Customers] AS [c]
-WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)");
+WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)"
+        );
     }
 
     public override async Task Projection_query(bool async)
@@ -108,7 +116,8 @@ WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND L
 
 SELECT [c].[CustomerID]
 FROM [Customers] AS [c]
-WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)");
+WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)"
+        );
     }
 
     public override async Task Include_query(bool async)
@@ -131,7 +140,8 @@ LEFT JOIN (
     WHERE [t].[CustomerID] IS NOT NULL AND [t].[CompanyName] IS NOT NULL
 ) AS [t0] ON [c].[CustomerID] = [t0].[CustomerID]
 WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)
-ORDER BY [c].[CustomerID], [t0].[OrderID]");
+ORDER BY [c].[CustomerID], [t0].[OrderID]"
+        );
     }
 
     public override async Task Include_query_opt_out(bool async)
@@ -142,7 +152,8 @@ ORDER BY [c].[CustomerID], [t0].[OrderID]");
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Customers] AS [c]
 LEFT JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
-ORDER BY [c].[CustomerID]");
+ORDER BY [c].[CustomerID]"
+        );
     }
 
     public override async Task Included_many_to_one_query(bool async)
@@ -159,10 +170,13 @@ LEFT JOIN (
     FROM [Customers] AS [c]
     WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)
 ) AS [t] ON [o].[CustomerID] = [t].[CustomerID]
-WHERE [t].[CustomerID] IS NOT NULL AND [t].[CompanyName] IS NOT NULL");
+WHERE [t].[CustomerID] IS NOT NULL AND [t].[CompanyName] IS NOT NULL"
+        );
     }
 
-    public override async Task Project_reference_that_itself_has_query_filter_with_another_reference(bool async)
+    public override async Task Project_reference_that_itself_has_query_filter_with_another_reference(
+        bool async
+    )
     {
         await base.Project_reference_that_itself_has_query_filter_with_another_reference(async);
 
@@ -182,7 +196,8 @@ INNER JOIN (
     ) AS [t] ON [o0].[CustomerID] = [t].[CustomerID]
     WHERE [t].[CustomerID] IS NOT NULL AND [t].[CompanyName] IS NOT NULL
 ) AS [t0] ON [o].[OrderID] = [t0].[OrderID]
-WHERE [o].[Quantity] > @__ef_filter___quantity_0");
+WHERE [o].[Quantity] > @__ef_filter___quantity_0"
+        );
     }
 
     public override async Task Navs_query(bool async)
@@ -220,7 +235,8 @@ INNER JOIN (
     ) AS [t2] ON [o0].[OrderID] = [t2].[OrderID]
     WHERE [o0].[Quantity] > @__ef_filter___quantity_1
 ) AS [t1] ON [t0].[OrderID] = [t1].[OrderID]
-WHERE (@__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)) AND [t1].[Discount] < CAST(10 AS real)");
+WHERE (@__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)) AND [t1].[Discount] < CAST(10 AS real)"
+        );
     }
 
     [ConditionalFact]
@@ -240,7 +256,8 @@ SELECT [m].[CustomerID], [m].[Address], [m].[City], [m].[CompanyName], [m].[Cont
 FROM (
     select * from Customers
 ) AS [m]
-WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([m].[CompanyName] IS NOT NULL AND LEFT([m].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)");
+WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([m].[CompanyName] IS NOT NULL AND LEFT([m].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)"
+        );
     }
 
     [ConditionalFact]
@@ -265,7 +282,8 @@ LEFT JOIN (
     FROM [Customers] AS [c]
     WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)
 ) AS [t] ON [m].[CustomerID] = [t].[CustomerID]
-WHERE [t].[CustomerID] IS NOT NULL AND [t].[CompanyName] IS NOT NULL");
+WHERE [t].[CustomerID] IS NOT NULL AND [t].[CompanyName] IS NOT NULL"
+        );
     }
 
     public override void Compiled_query()
@@ -285,7 +303,8 @@ WHERE (@__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND 
 
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE (@__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)) AND [c].[CustomerID] = @__customerID");
+WHERE (@__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)) AND [c].[CustomerID] = @__customerID"
+        );
     }
 
     public override async Task Entity_Equality(bool async)
@@ -302,7 +321,8 @@ LEFT JOIN (
     FROM [Customers] AS [c]
     WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)
 ) AS [t] ON [o].[CustomerID] = [t].[CustomerID]
-WHERE [t].[CustomerID] IS NOT NULL AND [t].[CompanyName] IS NOT NULL");
+WHERE [t].[CustomerID] IS NOT NULL AND [t].[CompanyName] IS NOT NULL"
+        );
     }
 
     public override async Task Client_eval(bool async)
@@ -326,7 +346,8 @@ LEFT JOIN (
     FROM [Customers] AS [c]
     WHERE @__ef_filter__TenantPrefix_0 = N'' OR ([c].[CompanyName] IS NOT NULL AND LEFT([c].[CompanyName], LEN(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0)
 ) AS [t] ON [o].[CustomerID] = [t].[CustomerID]
-WHERE [t].[CustomerID] IS NOT NULL AND [t].[CompanyName] IS NOT NULL");
+WHERE [t].[CustomerID] IS NOT NULL AND [t].[CompanyName] IS NOT NULL"
+        );
     }
 
     public override async Task Included_one_to_many_query_with_client_eval(bool async)
@@ -336,6 +357,6 @@ WHERE [t].[CustomerID] IS NOT NULL AND [t].[CompanyName] IS NOT NULL");
         AssertSql();
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

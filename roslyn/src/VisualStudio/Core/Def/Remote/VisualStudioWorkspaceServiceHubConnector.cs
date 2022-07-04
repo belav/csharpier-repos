@@ -22,7 +22,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
     /// Launches ServiceHub if it is not running yet and starts services that push information from <see cref="VisualStudioWorkspace"/> to the ServiceHub process.
     /// </summary>
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
-    internal sealed class VisualStudioWorkspaceServiceHubConnector : IEventListener<object>, IEventListenerStoppable
+    internal sealed class VisualStudioWorkspaceServiceHubConnector
+        : IEventListener<object>,
+            IEventListenerStoppable
     {
         private readonly IAsynchronousOperationListenerProvider _listenerProvider;
         private readonly IThreadingContext _threadingContext;
@@ -40,7 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
         public VisualStudioWorkspaceServiceHubConnector(
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider listenerProvider,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _listenerProvider = listenerProvider;
             _threadingContext = threadingContext;
@@ -49,24 +52,40 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
 
         public void StartListening(Workspace workspace, object serviceOpt)
         {
-            if (workspace is not VisualStudioWorkspace || IVsShellExtensions.IsInCommandLineMode(_threadingContext.JoinableTaskFactory))
+            if (
+                workspace is not VisualStudioWorkspace
+                || IVsShellExtensions.IsInCommandLineMode(_threadingContext.JoinableTaskFactory)
+            )
             {
                 return;
             }
 
             // only push solution snapshot from primary (VS) workspace:
-            _checksumUpdater = new SolutionChecksumUpdater(workspace, _globalOptions, _listenerProvider, _disposalCancellationSource.Token);
+            _checksumUpdater = new SolutionChecksumUpdater(
+                workspace,
+                _globalOptions,
+                _listenerProvider,
+                _disposalCancellationSource.Token
+            );
 
-            _globalNotificationDelivery = new GlobalNotificationRemoteDeliveryService(workspace.Services, _disposalCancellationSource.Token);
+            _globalNotificationDelivery = new GlobalNotificationRemoteDeliveryService(
+                workspace.Services,
+                _disposalCancellationSource.Token
+            );
 
             // start launching remote process, so that the first service that needs it doesn't need to wait for it:
             var service = workspace.Services.GetRequiredService<IRemoteHostClientProvider>();
-            _remoteClientInitializationTask = service.TryGetRemoteHostClientAsync(_disposalCancellationSource.Token);
+            _remoteClientInitializationTask = service.TryGetRemoteHostClientAsync(
+                _disposalCancellationSource.Token
+            );
         }
 
         public void StopListening(Workspace workspace)
         {
-            if (!(workspace is VisualStudioWorkspace) || IVsShellExtensions.IsInCommandLineMode(_threadingContext.JoinableTaskFactory))
+            if (
+                !(workspace is VisualStudioWorkspace)
+                || IVsShellExtensions.IsInCommandLineMode(_threadingContext.JoinableTaskFactory)
+            )
             {
                 return;
             }
@@ -82,7 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
                 previousTask => previousTask.Result?.Dispose(),
                 CancellationToken.None,
                 TaskContinuationOptions.OnlyOnRanToCompletion,
-                TaskScheduler.Default);
+                TaskScheduler.Default
+            );
         }
     }
 }

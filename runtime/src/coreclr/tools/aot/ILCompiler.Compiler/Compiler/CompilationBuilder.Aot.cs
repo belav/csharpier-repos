@@ -16,10 +16,13 @@ namespace ILCompiler
         protected MetadataManager _metadataManager;
         protected InteropStubManager _interopStubManager = new EmptyInteropStubManager();
         protected VTableSliceProvider _vtableSliceProvider = new LazyVTableSliceProvider();
-        protected DictionaryLayoutProvider _dictionaryLayoutProvider = new LazyDictionaryLayoutProvider();
-        protected DebugInformationProvider _debugInformationProvider = new DebugInformationProvider();
+        protected DictionaryLayoutProvider _dictionaryLayoutProvider =
+            new LazyDictionaryLayoutProvider();
+        protected DebugInformationProvider _debugInformationProvider =
+            new DebugInformationProvider();
         protected DevirtualizationManager _devirtualizationManager = new DevirtualizationManager();
-        protected MethodImportationErrorProvider _methodImportationErrorProvider = new MethodImportationErrorProvider();
+        protected MethodImportationErrorProvider _methodImportationErrorProvider =
+            new MethodImportationErrorProvider();
         protected IInliningPolicy _inliningPolicy;
         protected bool _methodBodyFolding;
         protected InstructionSetSupport _instructionSetSupport;
@@ -29,7 +32,11 @@ namespace ILCompiler
         partial void InitializePartial()
         {
             _metadataManager = new AnalysisBasedMetadataManager(_context);
-            _instructionSetSupport = new InstructionSetSupport(default, default, _context.Target.Architecture);
+            _instructionSetSupport = new InstructionSetSupport(
+                default,
+                default,
+                _context.Target.Architecture
+            );
         }
 
         public CompilationBuilder UseInstructionSetSupport(InstructionSetSupport support)
@@ -62,7 +69,9 @@ namespace ILCompiler
             return this;
         }
 
-        public CompilationBuilder UseGenericDictionaryLayoutProvider(DictionaryLayoutProvider provider)
+        public CompilationBuilder UseGenericDictionaryLayoutProvider(
+            DictionaryLayoutProvider provider
+        )
         {
             _dictionaryLayoutProvider = provider;
             return this;
@@ -98,7 +107,9 @@ namespace ILCompiler
             return this;
         }
 
-        public CompilationBuilder UseMethodImportationErrorProvider(MethodImportationErrorProvider errorProvider)
+        public CompilationBuilder UseMethodImportationErrorProvider(
+            MethodImportationErrorProvider errorProvider
+        )
         {
             _methodImportationErrorProvider = errorProvider;
             return this;
@@ -113,13 +124,24 @@ namespace ILCompiler
         protected PreinitializationManager GetPreinitializationManager()
         {
             if (_preinitializationManager == null)
-                return new PreinitializationManager(_context, _compilationGroup, GetILProvider(), enableInterpreter: false);
+                return new PreinitializationManager(
+                    _context,
+                    _compilationGroup,
+                    GetILProvider(),
+                    enableInterpreter: false
+                );
             return _preinitializationManager;
         }
 
         public ILScannerBuilder GetILScannerBuilder(CompilationModuleGroup compilationGroup = null)
         {
-            return new ILScannerBuilder(_context, compilationGroup ?? _compilationGroup, _nameMangler, GetILProvider(), GetPreinitializationManager());
+            return new ILScannerBuilder(
+                _context,
+                compilationGroup ?? _compilationGroup,
+                _nameMangler,
+                GetILProvider(),
+                GetPreinitializationManager()
+            );
         }
     }
 

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net;
@@ -26,7 +26,10 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     protected override string DefaultScheme => CookieAuthenticationDefaults.AuthenticationScheme;
     protected override Type HandlerType => typeof(CookieAuthenticationHandler);
 
-    protected override void RegisterAuth(AuthenticationBuilder services, Action<CookieAuthenticationOptions> configure)
+    protected override void RegisterAuth(
+        AuthenticationBuilder services,
+        Action<CookieAuthenticationOptions> configure
+    )
     {
         services.AddCookie(configure);
     }
@@ -45,7 +48,10 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     {
         using var host = await CreateHost(o => o.LoginPath = "/login");
         using var server = host.GetTestServer();
-        var transaction = await SendAsync(server, "http://example.com/challenge?X-Requested-With=XMLHttpRequest");
+        var transaction = await SendAsync(
+            server,
+            "http://example.com/challenge?X-Requested-With=XMLHttpRequest"
+        );
         Assert.Equal(HttpStatusCode.Unauthorized, transaction.Response.StatusCode);
         var responded = transaction.Response.Headers.GetValues("Location");
         Assert.Single(responded);
@@ -57,7 +63,10 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     {
         using var host = await CreateHost(o => o.AccessDeniedPath = "/denied");
         using var server = host.GetTestServer();
-        var transaction = await SendAsync(server, "http://example.com/forbid?X-Requested-With=XMLHttpRequest");
+        var transaction = await SendAsync(
+            server,
+            "http://example.com/forbid?X-Requested-With=XMLHttpRequest"
+        );
         Assert.Equal(HttpStatusCode.Forbidden, transaction.Response.StatusCode);
         var responded = transaction.Response.Headers.GetValues("Location");
         Assert.Single(responded);
@@ -69,7 +78,10 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     {
         using var host = await CreateHost(o => o.LogoutPath = "/signout");
         using var server = host.GetTestServer();
-        var transaction = await SendAsync(server, "http://example.com/signout?X-Requested-With=XMLHttpRequest&ReturnUrl=/");
+        var transaction = await SendAsync(
+            server,
+            "http://example.com/signout?X-Requested-With=XMLHttpRequest&ReturnUrl=/"
+        );
         Assert.Equal(HttpStatusCode.OK, transaction.Response.StatusCode);
         var responded = transaction.Response.Headers.GetValues("Location");
         Assert.Single(responded);
@@ -81,7 +93,10 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     {
         using var host = await CreateHost(s => { });
         using var server = host.GetTestServer();
-        var transaction = await SendAsync(server, "http://example.com/challenge?X-Requested-With=XMLHttpRequest&ReturnUrl=/");
+        var transaction = await SendAsync(
+            server,
+            "http://example.com/challenge?X-Requested-With=XMLHttpRequest&ReturnUrl=/"
+        );
         Assert.Equal(HttpStatusCode.Unauthorized, transaction.Response.StatusCode);
         var responded = transaction.Response.Headers.GetValues("Location");
         Assert.Single(responded);
@@ -98,23 +113,30 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
 
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
         var location = transaction.Response.Headers.Location;
-        Assert.Equal("http://example.com/Account/Login?ReturnUrl=%2FCustomRedirect", location.ToString());
+        Assert.Equal(
+            "http://example.com/Account/Login?ReturnUrl=%2FCustomRedirect",
+            location.ToString()
+        );
     }
 
     private Task SignInAsAlice(HttpContext context)
     {
         var user = new ClaimsIdentity(new GenericIdentity("Alice", "Cookies"));
         user.AddClaim(new Claim("marker", "true"));
-        return context.SignInAsync("Cookies",
+        return context.SignInAsync(
+            "Cookies",
             new ClaimsPrincipal(user),
-            new AuthenticationProperties());
+            new AuthenticationProperties()
+        );
     }
 
     private Task SignInAsWrong(HttpContext context)
     {
-        return context.SignInAsync("Oops",
+        return context.SignInAsync(
+            "Oops",
             new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies"))),
-            new AuthenticationProperties());
+            new AuthenticationProperties()
+        );
     }
 
     private Task SignOutAsWrong(HttpContext context)
@@ -125,11 +147,16 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task SignInCausesDefaultCookieToBeCreated()
     {
-        using var host = await CreateHostWithServices(s => s.AddAuthentication().AddCookie(o =>
-        {
-            o.LoginPath = new PathString("/login");
-            o.Cookie.Name = "TestCookie";
-        }), SignInAsAlice);
+        using var host = await CreateHostWithServices(
+            s =>
+                s.AddAuthentication()
+                    .AddCookie(o =>
+                    {
+                        o.LoginPath = new PathString("/login");
+                        o.Cookie.Name = "TestCookie";
+                    }),
+            SignInAsAlice
+        );
 
         using var server = host.GetTestServer();
         var transaction = await SendAsync(server, "http://example.com/testpath");
@@ -151,17 +178,27 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task CustomAuthSchemeEncodesCookieName()
     {
         var schemeName = "With spaces and 界";
-        using var host = await CreateHostWithServices(s => s.AddAuthentication(schemeName).AddCookie(schemeName, o =>
-        {
-            o.LoginPath = new PathString("/login");
-        }), context =>
-        {
-            var user = new ClaimsIdentity(new GenericIdentity("Alice", "Cookies"));
-            user.AddClaim(new Claim("marker", "true"));
-            return context.SignInAsync(schemeName,
-                new ClaimsPrincipal(user),
-                new AuthenticationProperties());
-        });
+        using var host = await CreateHostWithServices(
+            s =>
+                s.AddAuthentication(schemeName)
+                    .AddCookie(
+                        schemeName,
+                        o =>
+                        {
+                            o.LoginPath = new PathString("/login");
+                        }
+                    ),
+            context =>
+            {
+                var user = new ClaimsIdentity(new GenericIdentity("Alice", "Cookies"));
+                user.AddClaim(new Claim("marker", "true"));
+                return context.SignInAsync(
+                    schemeName,
+                    new ClaimsPrincipal(user),
+                    new AuthenticationProperties()
+                );
+            }
+        );
 
         using var server = host.GetTestServer();
         var transaction = await SendAsync(server, "http://example.com/testpath");
@@ -183,38 +220,54 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public void SettingCookieExpirationOptionThrows()
     {
         var services = new ServiceCollection();
-        services.AddAuthentication().AddCookie(o =>
-        {
-            o.Cookie.Expiration = TimeSpan.FromDays(10);
-        });
-        var options = services.BuildServiceProvider().GetRequiredService<IOptionsMonitor<CookieAuthenticationOptions>>();
-        Assert.Throws<OptionsValidationException>(() => options.Get(CookieAuthenticationDefaults.AuthenticationScheme));
+        services
+            .AddAuthentication()
+            .AddCookie(o =>
+            {
+                o.Cookie.Expiration = TimeSpan.FromDays(10);
+            });
+        var options = services
+            .BuildServiceProvider()
+            .GetRequiredService<IOptionsMonitor<CookieAuthenticationOptions>>();
+        Assert.Throws<OptionsValidationException>(
+            () => options.Get(CookieAuthenticationDefaults.AuthenticationScheme)
+        );
     }
 
     [Fact]
     public async Task SignInWrongAuthTypeThrows()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.LoginPath = new PathString("/login");
-            o.Cookie.Name = "TestCookie";
-        }, SignInAsWrong);
+        using var host = await CreateHost(
+            o =>
+            {
+                o.LoginPath = new PathString("/login");
+                o.Cookie.Name = "TestCookie";
+            },
+            SignInAsWrong
+        );
         using var server = host.GetTestServer();
 
-        await Assert.ThrowsAsync<InvalidOperationException>(async () => await SendAsync(server, "http://example.com/testpath"));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await SendAsync(server, "http://example.com/testpath")
+        );
     }
 
     [Fact]
     public async Task SignOutWrongAuthTypeThrows()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.LoginPath = new PathString("/login");
-            o.Cookie.Name = "TestCookie";
-        }, SignOutAsWrong);
+        using var host = await CreateHost(
+            o =>
+            {
+                o.LoginPath = new PathString("/login");
+                o.Cookie.Name = "TestCookie";
+            },
+            SignOutAsWrong
+        );
 
         using var server = host.GetTestServer();
-        await Assert.ThrowsAsync<InvalidOperationException>(async () => await SendAsync(server, "http://example.com/testpath"));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await SendAsync(server, "http://example.com/testpath")
+        );
     }
 
     [Theory]
@@ -227,14 +280,18 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task SecureSignInCausesSecureOnlyCookieByDefault(
         CookieSecurePolicy cookieSecurePolicy,
         string requestUri,
-        bool shouldBeSecureOnly)
+        bool shouldBeSecureOnly
+    )
     {
-        using var host = await CreateHost(o =>
-        {
-            o.LoginPath = new PathString("/login");
-            o.Cookie.Name = "TestCookie";
-            o.Cookie.SecurePolicy = cookieSecurePolicy;
-        }, SignInAsAlice);
+        using var host = await CreateHost(
+            o =>
+            {
+                o.LoginPath = new PathString("/login");
+                o.Cookie.Name = "TestCookie";
+                o.Cookie.SecurePolicy = cookieSecurePolicy;
+            },
+            SignInAsAlice
+        );
 
         using var server = host.GetTestServer();
         var transaction = await SendAsync(server, requestUri);
@@ -253,15 +310,19 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieOptionsAlterSetCookieHeader()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.Cookie.Name = "TestCookie";
-            o.Cookie.Path = "/foo";
-            o.Cookie.Domain = "another.com";
-            o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-            o.Cookie.SameSite = SameSiteMode.None;
-            o.Cookie.HttpOnly = true;
-        }, SignInAsAlice, baseAddress: new Uri("http://example.com/base"));
+        using var host = await CreateHost(
+            o =>
+            {
+                o.Cookie.Name = "TestCookie";
+                o.Cookie.Path = "/foo";
+                o.Cookie.Domain = "another.com";
+                o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                o.Cookie.SameSite = SameSiteMode.None;
+                o.Cookie.HttpOnly = true;
+            },
+            SignInAsAlice,
+            baseAddress: new Uri("http://example.com/base")
+        );
 
         using var server1 = host.GetTestServer();
         var transaction1 = await SendAsync(server1, "http://example.com/base/testpath");
@@ -275,13 +336,17 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         Assert.Contains(" samesite=none", setCookie1);
         Assert.Contains(" httponly", setCookie1);
 
-        using var host2 = await CreateHost(o =>
-        {
-            o.Cookie.Name = "SecondCookie";
-            o.Cookie.SecurePolicy = CookieSecurePolicy.None;
-            o.Cookie.SameSite = SameSiteMode.Strict;
-            o.Cookie.HttpOnly = false;
-        }, SignInAsAlice, baseAddress: new Uri("http://example.com/base"));
+        using var host2 = await CreateHost(
+            o =>
+            {
+                o.Cookie.Name = "SecondCookie";
+                o.Cookie.SecurePolicy = CookieSecurePolicy.None;
+                o.Cookie.SameSite = SameSiteMode.Strict;
+                o.Cookie.HttpOnly = false;
+            },
+            SignInAsAlice,
+            baseAddress: new Uri("http://example.com/base")
+        );
 
         using var server2 = host2.GetTestServer();
         var transaction2 = await SendAsync(server2, "http://example.com/base/testpath");
@@ -304,7 +369,11 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
 
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
 
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
     }
@@ -312,15 +381,21 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieAppliesClaimsTransform()
     {
-        using var host = await CreateHost(o => { },
-        SignInAsAlice,
-        baseAddress: null,
-        claimsTransform: true);
+        using var host = await CreateHost(
+            o => { },
+            SignInAsAlice,
+            baseAddress: null,
+            claimsTransform: true
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
 
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
         Assert.Equal("yup", FindClaimValue(transaction2, "xform"));
@@ -330,24 +405,39 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieStopsWorkingAfterExpiration()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.SlidingExpiration = false;
-        }, SignInAsAlice);
+        using var host = await CreateHost(
+            o =>
+            {
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.SlidingExpiration = false;
+            },
+            SignInAsAlice
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
 
         _clock.Add(TimeSpan.FromMinutes(7));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
 
         _clock.Add(TimeSpan.FromMinutes(7));
 
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
 
         Assert.Null(transaction2.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
@@ -360,28 +450,49 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieExpirationCanBeOverridenInSignin()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.SlidingExpiration = false;
-        },
-        context =>
-            context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies"))),
-                new AuthenticationProperties() { ExpiresUtc = _clock.UtcNow.Add(TimeSpan.FromMinutes(5)) }));
+        using var host = await CreateHost(
+            o =>
+            {
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.SlidingExpiration = false;
+            },
+            context =>
+                context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(
+                        new ClaimsIdentity(new GenericIdentity("Alice", "Cookies"))
+                    ),
+                    new AuthenticationProperties()
+                    {
+                        ExpiresUtc = _clock.UtcNow.Add(TimeSpan.FromMinutes(5))
+                    }
+                )
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
 
         _clock.Add(TimeSpan.FromMinutes(3));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
 
         _clock.Add(TimeSpan.FromMinutes(3));
 
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
 
         Assert.Null(transaction2.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
@@ -394,28 +505,36 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task ExpiredCookieWithValidatorStillExpired()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.Events = new CookieAuthenticationEvents
+        using var host = await CreateHost(
+            o =>
             {
-                OnValidatePrincipal = ctx =>
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.Events = new CookieAuthenticationEvents
                 {
-                    ctx.ShouldRenew = true;
-                    return Task.FromResult(0);
-                }
-            };
-        },
-        context =>
-            context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))));
+                    OnValidatePrincipal = ctx =>
+                    {
+                        ctx.ShouldRenew = true;
+                        return Task.FromResult(0);
+                    }
+                };
+            },
+            context =>
+                context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))
+                )
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
         _clock.Add(TimeSpan.FromMinutes(11));
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction2.SetCookie);
         Assert.Null(FindClaimValue(transaction2, ClaimTypes.Name));
     }
@@ -423,28 +542,36 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieCanBeRejectedAndSignedOutByValidator()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.SlidingExpiration = false;
-            o.Events = new CookieAuthenticationEvents
+        using var host = await CreateHost(
+            o =>
             {
-                OnValidatePrincipal = ctx =>
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.SlidingExpiration = false;
+                o.Events = new CookieAuthenticationEvents
                 {
-                    ctx.RejectPrincipal();
-                    ctx.HttpContext.SignOutAsync("Cookies");
-                    return Task.FromResult(0);
-                }
-            };
-        },
-        context =>
-            context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))));
+                    OnValidatePrincipal = ctx =>
+                    {
+                        ctx.RejectPrincipal();
+                        ctx.HttpContext.SignOutAsync("Cookies");
+                        return Task.FromResult(0);
+                    }
+                };
+            },
+            context =>
+                context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))
+                )
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Contains(".AspNetCore.Cookies=; expires=", transaction2.SetCookie);
         Assert.Null(FindClaimValue(transaction2, ClaimTypes.Name));
     }
@@ -452,36 +579,50 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieNotRenewedAfterSignOut()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.SlidingExpiration = false;
-            o.Events = new CookieAuthenticationEvents
+        using var host = await CreateHost(
+            o =>
             {
-                OnValidatePrincipal = ctx =>
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.SlidingExpiration = false;
+                o.Events = new CookieAuthenticationEvents
                 {
-                    ctx.ShouldRenew = true;
-                    return Task.FromResult(0);
-                }
-            };
-        },
-        context =>
-            context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))));
+                    OnValidatePrincipal = ctx =>
+                    {
+                        ctx.ShouldRenew = true;
+                        return Task.FromResult(0);
+                    }
+                };
+            },
+            context =>
+                context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))
+                )
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
         // renews on every request
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction2.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
 
-        var transaction3 = await server.SendAsync("http://example.com/normal", transaction1.CookieNameValue);
+        var transaction3 = await server.SendAsync(
+            "http://example.com/normal",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction3.SetCookie[0]);
 
         // signout wins over renew
-        var transaction4 = await server.SendAsync("http://example.com/signout", transaction3.SetCookie[0]);
+        var transaction4 = await server.SendAsync(
+            "http://example.com/signout",
+            transaction3.SetCookie[0]
+        );
         Assert.Single(transaction4.SetCookie);
         Assert.Contains(".AspNetCore.Cookies=; expires=", transaction4.SetCookie[0]);
     }
@@ -489,45 +630,65 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieCanBeRenewedByValidator()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.SlidingExpiration = false;
-            o.Events = new CookieAuthenticationEvents
+        using var host = await CreateHost(
+            o =>
             {
-                OnValidatePrincipal = ctx =>
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.SlidingExpiration = false;
+                o.Events = new CookieAuthenticationEvents
                 {
-                    ctx.ShouldRenew = true;
-                    return Task.FromResult(0);
-                }
-            };
-        },
-        context =>
-            context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))));
+                    OnValidatePrincipal = ctx =>
+                    {
+                        ctx.ShouldRenew = true;
+                        return Task.FromResult(0);
+                    }
+                };
+            },
+            context =>
+                context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))
+                )
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction2.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(5));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies", transaction2.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction2.CookieNameValue
+        );
         Assert.NotNull(transaction3.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction3, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(6));
 
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction4.SetCookie);
         Assert.Null(FindClaimValue(transaction4, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(5));
 
-        var transaction5 = await SendAsync(server, "http://example.com/me/Cookies", transaction2.CookieNameValue);
+        var transaction5 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction2.CookieNameValue
+        );
         Assert.Null(transaction5.SetCookie);
         Assert.Null(FindClaimValue(transaction5, ClaimTypes.Name));
     }
@@ -535,26 +696,38 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieCanBeReplacedByValidator()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.Events = new CookieAuthenticationEvents
+        using var host = await CreateHost(
+            o =>
             {
-                OnValidatePrincipal = ctx =>
+                o.Events = new CookieAuthenticationEvents
                 {
-                    ctx.ShouldRenew = true;
-                    ctx.ReplacePrincipal(new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice2", "Cookies2"))));
-                    return Task.FromResult(0);
-                }
-            };
-        },
-        context =>
-            context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))));
+                    OnValidatePrincipal = ctx =>
+                    {
+                        ctx.ShouldRenew = true;
+                        ctx.ReplacePrincipal(
+                            new ClaimsPrincipal(
+                                new ClaimsIdentity(new GenericIdentity("Alice2", "Cookies2"))
+                            )
+                        );
+                        return Task.FromResult(0);
+                    }
+                };
+            },
+            context =>
+                context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))
+                )
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction2.SetCookie);
         Assert.Equal("Alice2", FindClaimValue(transaction2, ClaimTypes.Name));
     }
@@ -563,47 +736,71 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task CookieCanBeUpdatedByValidatorDuringRefresh()
     {
         var replace = false;
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.Events = new CookieAuthenticationEvents
+        using var host = await CreateHost(
+            o =>
             {
-                OnValidatePrincipal = ctx =>
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.Events = new CookieAuthenticationEvents
                 {
-                    if (replace)
+                    OnValidatePrincipal = ctx =>
                     {
-                        ctx.ShouldRenew = true;
-                        ctx.ReplacePrincipal(new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice2", "Cookies2"))));
-                        ctx.Properties.Items["updated"] = "yes";
+                        if (replace)
+                        {
+                            ctx.ShouldRenew = true;
+                            ctx.ReplacePrincipal(
+                                new ClaimsPrincipal(
+                                    new ClaimsIdentity(new GenericIdentity("Alice2", "Cookies2"))
+                                )
+                            );
+                            ctx.Properties.Items["updated"] = "yes";
+                        }
+                        return Task.FromResult(0);
                     }
-                    return Task.FromResult(0);
-                }
-            };
-        },
-        context =>
-            context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))));
+                };
+            },
+            context =>
+                context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))
+                )
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
         Assert.Null(FindPropertiesValue(transaction3, "updated"));
 
         replace = true;
 
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction4.SetCookie);
         Assert.Equal("Alice2", FindClaimValue(transaction4, ClaimTypes.Name));
         Assert.Equal("yes", FindPropertiesValue(transaction4, "updated"));
 
         replace = false;
 
-        var transaction5 = await SendAsync(server, "http://example.com/me/Cookies", transaction4.CookieNameValue);
+        var transaction5 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction4.CookieNameValue
+        );
         Assert.Equal("Alice2", FindClaimValue(transaction5, ClaimTypes.Name));
         Assert.Equal("yes", FindPropertiesValue(transaction4, "updated"));
     }
@@ -611,44 +808,64 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieCanBeRenewedByValidatorWithSlidingExpiry()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.Events = new CookieAuthenticationEvents
+        using var host = await CreateHost(
+            o =>
             {
-                OnValidatePrincipal = ctx =>
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.Events = new CookieAuthenticationEvents
                 {
-                    ctx.ShouldRenew = true;
-                    return Task.FromResult(0);
-                }
-            };
-        },
-        context =>
-            context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))));
+                    OnValidatePrincipal = ctx =>
+                    {
+                        ctx.ShouldRenew = true;
+                        return Task.FromResult(0);
+                    }
+                };
+            },
+            context =>
+                context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))
+                )
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction2.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(5));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies", transaction2.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction2.CookieNameValue
+        );
         Assert.NotNull(transaction3.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction3, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(6));
 
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies", transaction3.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction3.CookieNameValue
+        );
         Assert.NotNull(transaction4.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction4, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(11));
 
-        var transaction5 = await SendAsync(server, "http://example.com/me/Cookies", transaction4.CookieNameValue);
+        var transaction5 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction4.CookieNameValue
+        );
         Assert.Null(transaction5.SetCookie);
         Assert.Null(FindClaimValue(transaction5, ClaimTypes.Name));
     }
@@ -656,55 +873,75 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieCanBeRenewedByValidatorWithModifiedProperties()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.Events = new CookieAuthenticationEvents
+        using var host = await CreateHost(
+            o =>
             {
-                OnValidatePrincipal = ctx =>
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.Events = new CookieAuthenticationEvents
                 {
-                    ctx.ShouldRenew = true;
-                    var id = ctx.Principal.Identities.First();
-                    var claim = id.FindFirst("counter");
-                    if (claim == null)
+                    OnValidatePrincipal = ctx =>
                     {
-                        id.AddClaim(new Claim("counter", "1"));
+                        ctx.ShouldRenew = true;
+                        var id = ctx.Principal.Identities.First();
+                        var claim = id.FindFirst("counter");
+                        if (claim == null)
+                        {
+                            id.AddClaim(new Claim("counter", "1"));
+                        }
+                        else
+                        {
+                            id.RemoveClaim(claim);
+                            id.AddClaim(new Claim("counter", claim.Value + "1"));
+                        }
+                        return Task.FromResult(0);
                     }
-                    else
-                    {
-                        id.RemoveClaim(claim);
-                        id.AddClaim(new Claim("counter", claim.Value + "1"));
-                    }
-                    return Task.FromResult(0);
-                }
-            };
-        },
-        context =>
-            context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))));
+                };
+            },
+            context =>
+                context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))
+                )
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction2.SetCookie);
         Assert.Equal("1", FindClaimValue(transaction2, "counter"));
 
         _clock.Add(TimeSpan.FromMinutes(5));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies", transaction2.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction2.CookieNameValue
+        );
         Assert.NotNull(transaction3.SetCookie);
         Assert.Equal("11", FindClaimValue(transaction3, "counter"));
 
         _clock.Add(TimeSpan.FromMinutes(6));
 
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies", transaction3.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction3.CookieNameValue
+        );
         Assert.NotNull(transaction4.SetCookie);
         Assert.Equal("111", FindClaimValue(transaction4, "counter"));
 
         _clock.Add(TimeSpan.FromMinutes(11));
 
-        var transaction5 = await SendAsync(server, "http://example.com/me/Cookies", transaction4.CookieNameValue);
+        var transaction5 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction4.CookieNameValue
+        );
         Assert.Null(transaction5.SetCookie);
         Assert.Null(FindClaimValue(transaction5, "counter"));
     }
@@ -712,58 +949,78 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieCanBeRenewedByValidatorWithModifiedLifetime()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.Events = new CookieAuthenticationEvents
+        using var host = await CreateHost(
+            o =>
             {
-                OnValidatePrincipal = ctx =>
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.Events = new CookieAuthenticationEvents
                 {
-                    ctx.ShouldRenew = true;
-                    var id = ctx.Principal.Identities.First();
-                    var claim = id.FindFirst("counter");
-                    if (claim == null)
+                    OnValidatePrincipal = ctx =>
                     {
-                        id.AddClaim(new Claim("counter", "1"));
+                        ctx.ShouldRenew = true;
+                        var id = ctx.Principal.Identities.First();
+                        var claim = id.FindFirst("counter");
+                        if (claim == null)
+                        {
+                            id.AddClaim(new Claim("counter", "1"));
+                        }
+                        else
+                        {
+                            id.RemoveClaim(claim);
+                            id.AddClaim(new Claim("counter", claim.Value + "1"));
+                        }
+                        // Causes the expiry time to not be extended because the lifetime is
+                        // calculated relative to the issue time.
+                        ctx.Properties.IssuedUtc = _clock.UtcNow;
+                        return Task.FromResult(0);
                     }
-                    else
-                    {
-                        id.RemoveClaim(claim);
-                        id.AddClaim(new Claim("counter", claim.Value + "1"));
-                    }
-                    // Causes the expiry time to not be extended because the lifetime is
-                    // calculated relative to the issue time.
-                    ctx.Properties.IssuedUtc = _clock.UtcNow;
-                    return Task.FromResult(0);
-                }
-            };
-        },
-        context =>
-            context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))));
+                };
+            },
+            context =>
+                context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))
+                )
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction2.SetCookie);
         Assert.Equal("1", FindClaimValue(transaction2, "counter"));
 
         _clock.Add(TimeSpan.FromMinutes(1));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies", transaction2.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction2.CookieNameValue
+        );
         Assert.NotNull(transaction3.SetCookie);
         Assert.Equal("11", FindClaimValue(transaction3, "counter"));
 
         _clock.Add(TimeSpan.FromMinutes(1));
 
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies", transaction3.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction3.CookieNameValue
+        );
         Assert.NotNull(transaction4.SetCookie);
         Assert.Equal("111", FindClaimValue(transaction4, "counter"));
 
         _clock.Add(TimeSpan.FromMinutes(9));
 
-        var transaction5 = await SendAsync(server, "http://example.com/me/Cookies", transaction4.CookieNameValue);
+        var transaction5 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction4.CookieNameValue
+        );
         Assert.Null(transaction5.SetCookie);
         Assert.Null(FindClaimValue(transaction5, "counter"));
     }
@@ -771,45 +1028,65 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieValidatorOnlyCalledOnce()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.SlidingExpiration = false;
-            o.Events = new CookieAuthenticationEvents
+        using var host = await CreateHost(
+            o =>
             {
-                OnValidatePrincipal = ctx =>
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.SlidingExpiration = false;
+                o.Events = new CookieAuthenticationEvents
                 {
-                    ctx.ShouldRenew = true;
-                    return Task.FromResult(0);
-                }
-            };
-        },
-        context =>
-            context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))));
+                    OnValidatePrincipal = ctx =>
+                    {
+                        ctx.ShouldRenew = true;
+                        return Task.FromResult(0);
+                    }
+                };
+            },
+            context =>
+                context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))
+                )
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction2.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(5));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies", transaction2.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction2.CookieNameValue
+        );
         Assert.NotNull(transaction3.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction3, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(6));
 
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction4.SetCookie);
         Assert.Null(FindClaimValue(transaction4, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(5));
 
-        var transaction5 = await SendAsync(server, "http://example.com/me/Cookies", transaction2.CookieNameValue);
+        var transaction5 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction2.CookieNameValue
+        );
         Assert.Null(transaction5.SetCookie);
         Assert.Null(FindClaimValue(transaction5, ClaimTypes.Name));
     }
@@ -821,29 +1098,37 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     {
         DateTimeOffset? lastValidateIssuedDate = null;
         DateTimeOffset? lastExpiresDate = null;
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.SlidingExpiration = sliding;
-            o.Events = new CookieAuthenticationEvents
+        using var host = await CreateHost(
+            o =>
             {
-                OnValidatePrincipal = ctx =>
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.SlidingExpiration = sliding;
+                o.Events = new CookieAuthenticationEvents
                 {
-                    lastValidateIssuedDate = ctx.Properties.IssuedUtc;
-                    lastExpiresDate = ctx.Properties.ExpiresUtc;
-                    ctx.ShouldRenew = true;
-                    return Task.FromResult(0);
-                }
-            };
-        },
-        context =>
-            context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))));
+                    OnValidatePrincipal = ctx =>
+                    {
+                        lastValidateIssuedDate = ctx.Properties.IssuedUtc;
+                        lastExpiresDate = ctx.Properties.ExpiresUtc;
+                        ctx.ShouldRenew = true;
+                        return Task.FromResult(0);
+                    }
+                };
+            },
+            context =>
+                context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))
+                )
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction2.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
 
@@ -855,13 +1140,21 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
 
         _clock.Add(TimeSpan.FromMinutes(1));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies", transaction2.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction2.CookieNameValue
+        );
         Assert.NotNull(transaction3.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction3, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(2));
 
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies", transaction3.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction3.CookieNameValue
+        );
         Assert.NotNull(transaction4.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction4, ClaimTypes.Name));
 
@@ -872,37 +1165,51 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieExpirationCanBeOverridenInEvent()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.SlidingExpiration = false;
-            o.Events = new CookieAuthenticationEvents()
+        using var host = await CreateHost(
+            o =>
             {
-                OnSigningIn = context =>
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.SlidingExpiration = false;
+                o.Events = new CookieAuthenticationEvents()
                 {
-                    context.Properties.ExpiresUtc = _clock.UtcNow.Add(TimeSpan.FromMinutes(5));
-                    return Task.FromResult(0);
-                }
-            };
-        },
-        SignInAsAlice);
+                    OnSigningIn = context =>
+                    {
+                        context.Properties.ExpiresUtc = _clock.UtcNow.Add(TimeSpan.FromMinutes(5));
+                        return Task.FromResult(0);
+                    }
+                };
+            },
+            SignInAsAlice
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction2.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(3));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction3.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction3, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(3));
 
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction4.SetCookie);
         Assert.Null(FindClaimValue(transaction4, ClaimTypes.Name));
     }
@@ -910,36 +1217,54 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieIsRenewedWithSlidingExpiration()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.SlidingExpiration = true;
-        },
-        SignInAsAlice);
+        using var host = await CreateHost(
+            o =>
+            {
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.SlidingExpiration = true;
+            },
+            SignInAsAlice
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction2.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(4));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction3.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction3, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(4));
 
         // transaction4 should arrive with a new SetCookie value
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction4.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction4, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(4));
 
-        var transaction5 = await SendAsync(server, "http://example.com/me/Cookies", transaction4.CookieNameValue);
+        var transaction5 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction4.CookieNameValue
+        );
         Assert.Null(transaction5.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction5, ClaimTypes.Name));
     }
@@ -947,45 +1272,63 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieIsRenewedWithSlidingExpirationWithoutTransformations()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.SlidingExpiration = true;
-            o.Events.OnValidatePrincipal = c =>
+        using var host = await CreateHost(
+            o =>
             {
-                // https://github.com/aspnet/Security/issues/1607
-                // On sliding refresh the transformed principal should not be serialized into the cookie, only the original principal.
-                Assert.Single(c.Principal.Identities);
-                Assert.True(c.Principal.Identities.First().HasClaim("marker", "true"));
-                return Task.CompletedTask;
-            };
-        },
-        SignInAsAlice,
-        claimsTransform: true);
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.SlidingExpiration = true;
+                o.Events.OnValidatePrincipal = c =>
+                {
+                    // https://github.com/aspnet/Security/issues/1607
+                    // On sliding refresh the transformed principal should not be serialized into the cookie, only the original principal.
+                    Assert.Single(c.Principal.Identities);
+                    Assert.True(c.Principal.Identities.First().HasClaim("marker", "true"));
+                    return Task.CompletedTask;
+                };
+            },
+            SignInAsAlice,
+            claimsTransform: true
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction2.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(4));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction3.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction3, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(4));
 
         // transaction4 should arrive with a new SetCookie value
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies", transaction1.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction4.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction4, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(4));
 
-        var transaction5 = await SendAsync(server, "http://example.com/me/Cookies", transaction4.CookieNameValue);
+        var transaction5 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies",
+            transaction4.CookieNameValue
+        );
         Assert.Null(transaction5.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction5, ClaimTypes.Name));
     }
@@ -993,51 +1336,73 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieIsRenewedWithSlidingExpirationEvent()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            o.SlidingExpiration = true;
-            o.Events = new CookieAuthenticationEvents()
+        using var host = await CreateHost(
+            o =>
             {
-                OnCheckSlidingExpiration = context =>
+                o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                o.SlidingExpiration = true;
+                o.Events = new CookieAuthenticationEvents()
                 {
-                    var expectRenew = string.Equals("1", context.Request.Query["expectrenew"]);
-                    var renew = string.Equals("1", context.Request.Query["renew"]);
-                    Assert.Equal(expectRenew, context.ShouldRenew);
-                    context.ShouldRenew = renew;
-                    return Task.CompletedTask;
-                }
-            };
-        },
-        SignInAsAlice);
+                    OnCheckSlidingExpiration = context =>
+                    {
+                        var expectRenew = string.Equals("1", context.Request.Query["expectrenew"]);
+                        var renew = string.Equals("1", context.Request.Query["renew"]);
+                        Assert.Equal(expectRenew, context.ShouldRenew);
+                        context.ShouldRenew = renew;
+                        return Task.CompletedTask;
+                    }
+                };
+            },
+            SignInAsAlice
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/me/Cookies?expectrenew=0&renew=0", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies?expectrenew=0&renew=0",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction2.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(4));
 
-        var transaction3 = await SendAsync(server, "http://example.com/me/Cookies?expectrenew=0&renew=0", transaction1.CookieNameValue);
+        var transaction3 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies?expectrenew=0&renew=0",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction3.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction3, ClaimTypes.Name));
 
         _clock.Add(TimeSpan.FromMinutes(4));
 
         // A renewal is now expected, but we've suppressed it
-        var transaction4 = await SendAsync(server, "http://example.com/me/Cookies?expectrenew=1&renew=0", transaction1.CookieNameValue);
+        var transaction4 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies?expectrenew=1&renew=0",
+            transaction1.CookieNameValue
+        );
         Assert.Null(transaction4.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction4, ClaimTypes.Name));
 
         // Allow the default renewal to happen
-        var transaction5 = await SendAsync(server, "http://example.com/me/Cookies?expectrenew=1&renew=1", transaction1.CookieNameValue);
+        var transaction5 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies?expectrenew=1&renew=1",
+            transaction1.CookieNameValue
+        );
         Assert.NotNull(transaction5.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction5, ClaimTypes.Name));
 
         // Force a renewal on an un-expired new cookie
-        var transaction6 = await SendAsync(server, "http://example.com/me/Cookies?expectrenew=0&renew=1", transaction5.CookieNameValue);
+        var transaction6 = await SendAsync(
+            server,
+            "http://example.com/me/Cookies?expectrenew=0&renew=1",
+            transaction5.CookieNameValue
+        );
         Assert.NotNull(transaction5.SetCookie);
         Assert.Equal("Alice", FindClaimValue(transaction6, ClaimTypes.Name));
     }
@@ -1045,14 +1410,18 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieUsesPathBaseByDefault()
     {
-        using var host = await CreateHost(o => { },
-        context =>
-        {
-            Assert.Equal(new PathString("/base"), context.Request.PathBase);
-            return context.SignInAsync("Cookies",
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies"))));
-        },
-        new Uri("http://example.com/base"));
+        using var host = await CreateHost(
+            o => { },
+            context =>
+            {
+                Assert.Equal(new PathString("/base"), context.Request.PathBase);
+                return context.SignInAsync(
+                    "Cookies",
+                    new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies")))
+                );
+            },
+            new Uri("http://example.com/base")
+        );
 
         using var server = host.GetTestServer();
         var transaction1 = await SendAsync(server, "http://example.com/base/testpath");
@@ -1098,7 +1467,11 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
 
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/challenge", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/challenge",
+            transaction1.CookieNameValue
+        );
 
         Assert.Equal(HttpStatusCode.Redirect, transaction2.Response.StatusCode);
     }
@@ -1114,7 +1487,11 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
 
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
 
-        var transaction2 = await SendAsync(server, "http://example.com/unauthorized", transaction1.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server,
+            "http://example.com/unauthorized",
+            transaction1.CookieNameValue
+        );
 
         Assert.Equal(HttpStatusCode.Redirect, transaction2.Response.StatusCode);
     }
@@ -1125,17 +1502,34 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task MapWillAffectChallengeOnlyWithUseAuth(bool useAuth)
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                    {
-                        if (useAuth)
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
                         {
-                            app.UseAuthentication();
-                        }
-                        app.Map("/login", signoutApp => signoutApp.Run(context => context.ChallengeAsync("Cookies", new AuthenticationProperties() { RedirectUri = "/" })));
-                    })
-                    .ConfigureServices(s => s.AddAuthentication().AddCookie(o => o.LoginPath = new PathString("/page"))))
+                            if (useAuth)
+                            {
+                                app.UseAuthentication();
+                            }
+                            app.Map(
+                                "/login",
+                                signoutApp =>
+                                    signoutApp.Run(
+                                        context =>
+                                            context.ChallengeAsync(
+                                                "Cookies",
+                                                new AuthenticationProperties() { RedirectUri = "/" }
+                                            )
+                                    )
+                            );
+                        })
+                        .ConfigureServices(
+                            s =>
+                                s.AddAuthentication()
+                                    .AddCookie(o => o.LoginPath = new PathString("/page"))
+                        )
+            )
             .Build();
         await host.StartAsync();
         using var server = host.GetTestServer();
@@ -1160,17 +1554,25 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task ChallengeDoesNotSet401OnUnauthorized()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseAuthentication();
-                    app.Run(async context =>
-                    {
-                        await Assert.ThrowsAsync<InvalidOperationException>(() => context.ChallengeAsync(CookieAuthenticationDefaults.AuthenticationScheme));
-                    });
-                })
-                .ConfigureServices(services => services.AddAuthentication().AddCookie()))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Run(async context =>
+                            {
+                                await Assert.ThrowsAsync<InvalidOperationException>(
+                                    () =>
+                                        context.ChallengeAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme
+                                        )
+                                );
+                            });
+                        })
+                        .ConfigureServices(services => services.AddAuthentication().AddCookie())
+            )
             .Build();
 
         await host.StartAsync();
@@ -1184,19 +1586,30 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task CanConfigureDefaultCookieInstance()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                    {
-                        app.UseAuthentication();
-                        app.Run(context => context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(new ClaimsIdentity("whatever"))));
-                    })
-                    .ConfigureServices(services =>
-                    {
-                        services.AddAuthentication().AddCookie();
-                        services.Configure<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme,
-                            o => o.Cookie.Name = "One");
-                    }))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Run(
+                                context =>
+                                    context.SignInAsync(
+                                        CookieAuthenticationDefaults.AuthenticationScheme,
+                                        new ClaimsPrincipal(new ClaimsIdentity("whatever"))
+                                    )
+                            );
+                        })
+                        .ConfigureServices(services =>
+                        {
+                            services.AddAuthentication().AddCookie();
+                            services.Configure<CookieAuthenticationOptions>(
+                                CookieAuthenticationDefaults.AuthenticationScheme,
+                                o => o.Cookie.Name = "One"
+                            );
+                        })
+            )
             .Build();
 
         await host.StartAsync();
@@ -1212,19 +1625,30 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task CanConfigureNamedCookieInstance()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                    {
-                        app.UseAuthentication();
-                        app.Run(context => context.SignInAsync("Cookie1", new ClaimsPrincipal(new ClaimsIdentity("whatever"))));
-                    })
-                    .ConfigureServices(services =>
-                    {
-                        services.AddAuthentication().AddCookie("Cookie1");
-                        services.Configure<CookieAuthenticationOptions>("Cookie1",
-                            o => o.Cookie.Name = "One");
-                    }))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Run(
+                                context =>
+                                    context.SignInAsync(
+                                        "Cookie1",
+                                        new ClaimsPrincipal(new ClaimsIdentity("whatever"))
+                                    )
+                            );
+                        })
+                        .ConfigureServices(services =>
+                        {
+                            services.AddAuthentication().AddCookie("Cookie1");
+                            services.Configure<CookieAuthenticationOptions>(
+                                "Cookie1",
+                                o => o.Cookie.Name = "One"
+                            );
+                        })
+            )
             .Build();
 
         await host.StartAsync();
@@ -1240,15 +1664,32 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task MapWithSignInOnlyRedirectToReturnUrlOnLoginPath()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                    {
-                        app.UseAuthentication();
-                        app.Map("/notlogin", signoutApp => signoutApp.Run(context => context.SignInAsync("Cookies",
-                            new ClaimsPrincipal(new ClaimsIdentity("whatever")))));
-                    })
-                    .ConfigureServices(services => services.AddAuthentication().AddCookie(o => o.LoginPath = new PathString("/login"))))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Map(
+                                "/notlogin",
+                                signoutApp =>
+                                    signoutApp.Run(
+                                        context =>
+                                            context.SignInAsync(
+                                                "Cookies",
+                                                new ClaimsPrincipal(new ClaimsIdentity("whatever"))
+                                            )
+                                    )
+                            );
+                        })
+                        .ConfigureServices(
+                            services =>
+                                services
+                                    .AddAuthentication()
+                                    .AddCookie(o => o.LoginPath = new PathString("/login"))
+                        )
+            )
             .Build();
 
         await host.StartAsync();
@@ -1263,14 +1704,32 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task MapWillNotAffectSignInRedirectToReturnUrl()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                    {
-                        app.UseAuthentication();
-                        app.Map("/login", signoutApp => signoutApp.Run(context => context.SignInAsync("Cookies", new ClaimsPrincipal(new ClaimsIdentity("whatever")))));
-                    })
-                    .ConfigureServices(services => services.AddAuthentication().AddCookie(o => o.LoginPath = new PathString("/login"))))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Map(
+                                "/login",
+                                signoutApp =>
+                                    signoutApp.Run(
+                                        context =>
+                                            context.SignInAsync(
+                                                "Cookies",
+                                                new ClaimsPrincipal(new ClaimsIdentity("whatever"))
+                                            )
+                                    )
+                            );
+                        })
+                        .ConfigureServices(
+                            services =>
+                                services
+                                    .AddAuthentication()
+                                    .AddCookie(o => o.LoginPath = new PathString("/login"))
+                        )
+            )
             .Build();
 
         await host.StartAsync();
@@ -1289,14 +1748,26 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task MapWithSignOutOnlyRedirectToReturnUrlOnLogoutPath()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                    {
-                        app.UseAuthentication();
-                        app.Map("/notlogout", signoutApp => signoutApp.Run(context => context.SignOutAsync("Cookies")));
-                    })
-                    .ConfigureServices(services => services.AddAuthentication().AddCookie(o => o.LogoutPath = new PathString("/logout"))))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Map(
+                                "/notlogout",
+                                signoutApp =>
+                                    signoutApp.Run(context => context.SignOutAsync("Cookies"))
+                            );
+                        })
+                        .ConfigureServices(
+                            services =>
+                                services
+                                    .AddAuthentication()
+                                    .AddCookie(o => o.LogoutPath = new PathString("/logout"))
+                        )
+            )
             .Build();
 
         await host.StartAsync();
@@ -1311,14 +1782,26 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task MapWillNotAffectSignOutRedirectToReturnUrl()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                    {
-                        app.UseAuthentication();
-                        app.Map("/logout", signoutApp => signoutApp.Run(context => context.SignOutAsync("Cookies")));
-                    })
-                    .ConfigureServices(services => services.AddAuthentication().AddCookie(o => o.LogoutPath = new PathString("/logout"))))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Map(
+                                "/logout",
+                                signoutApp =>
+                                    signoutApp.Run(context => context.SignOutAsync("Cookies"))
+                            );
+                        })
+                        .ConfigureServices(
+                            services =>
+                                services
+                                    .AddAuthentication()
+                                    .AddCookie(o => o.LogoutPath = new PathString("/logout"))
+                        )
+            )
             .Build();
 
         await host.StartAsync();
@@ -1337,14 +1820,26 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task MapWillNotAffectAccessDenied()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                    {
-                        app.UseAuthentication();
-                        app.Map("/forbid", signoutApp => signoutApp.Run(context => context.ForbidAsync("Cookies")));
-                    })
-                    .ConfigureServices(services => services.AddAuthentication().AddCookie(o => o.AccessDeniedPath = new PathString("/denied"))))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Map(
+                                "/forbid",
+                                signoutApp =>
+                                    signoutApp.Run(context => context.ForbidAsync("Cookies"))
+                            );
+                        })
+                        .ConfigureServices(
+                            services =>
+                                services
+                                    .AddAuthentication()
+                                    .AddCookie(o => o.AccessDeniedPath = new PathString("/denied"))
+                        )
+            )
             .Build();
 
         await host.StartAsync();
@@ -1361,15 +1856,41 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task NestedMapWillNotAffectLogin()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                        app.Map("/base", map =>
-                        {
-                            map.UseAuthentication();
-                            map.Map("/login", signoutApp => signoutApp.Run(context => context.ChallengeAsync("Cookies", new AuthenticationProperties() { RedirectUri = "/" })));
-                        }))
-                    .ConfigureServices(services => services.AddAuthentication().AddCookie(o => o.LoginPath = new PathString("/page"))))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                                app.Map(
+                                    "/base",
+                                    map =>
+                                    {
+                                        map.UseAuthentication();
+                                        map.Map(
+                                            "/login",
+                                            signoutApp =>
+                                                signoutApp.Run(
+                                                    context =>
+                                                        context.ChallengeAsync(
+                                                            "Cookies",
+                                                            new AuthenticationProperties()
+                                                            {
+                                                                RedirectUri = "/"
+                                                            }
+                                                        )
+                                                )
+                                        );
+                                    }
+                                )
+                        )
+                        .ConfigureServices(
+                            services =>
+                                services
+                                    .AddAuthentication()
+                                    .AddCookie(o => o.LoginPath = new PathString("/page"))
+                        )
+            )
             .Build();
 
         await host.StartAsync();
@@ -1388,16 +1909,25 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [InlineData("http://example.com/redirect_to")]
     public async Task RedirectUriIsHoneredAfterSignin(string redirectUrl)
     {
-        using var host = await CreateHost(o =>
-        {
-            o.LoginPath = "/testpath";
-            o.Cookie.Name = "TestCookie";
-        },
-        async context =>
-            await context.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", CookieAuthenticationDefaults.AuthenticationScheme))),
-                new AuthenticationProperties { RedirectUri = redirectUrl })
+        using var host = await CreateHost(
+            o =>
+            {
+                o.LoginPath = "/testpath";
+                o.Cookie.Name = "TestCookie";
+            },
+            async context =>
+                await context.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(
+                        new ClaimsIdentity(
+                            new GenericIdentity(
+                                "Alice",
+                                CookieAuthenticationDefaults.AuthenticationScheme
+                            )
+                        )
+                    ),
+                    new AuthenticationProperties { RedirectUri = redirectUrl }
+                )
         );
         using var server = host.GetTestServer();
         var transaction = await SendAsync(server, "http://example.com/testpath");
@@ -1410,20 +1940,33 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task RedirectUriInQueryIsHoneredAfterSignin()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.LoginPath = "/testpath";
-            o.ReturnUrlParameter = "return";
-            o.Cookie.Name = "TestCookie";
-        },
-        async context =>
-        {
-            await context.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", CookieAuthenticationDefaults.AuthenticationScheme))));
-        });
+        using var host = await CreateHost(
+            o =>
+            {
+                o.LoginPath = "/testpath";
+                o.ReturnUrlParameter = "return";
+                o.Cookie.Name = "TestCookie";
+            },
+            async context =>
+            {
+                await context.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(
+                        new ClaimsIdentity(
+                            new GenericIdentity(
+                                "Alice",
+                                CookieAuthenticationDefaults.AuthenticationScheme
+                            )
+                        )
+                    )
+                );
+            }
+        );
         using var server = host.GetTestServer();
-        var transaction = await SendAsync(server, "http://example.com/testpath?return=%2Fret_path_2");
+        var transaction = await SendAsync(
+            server,
+            "http://example.com/testpath?return=%2Fret_path_2"
+        );
 
         Assert.NotEmpty(transaction.SetCookie);
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
@@ -1433,20 +1976,33 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task AbsoluteRedirectUriInQueryStringIsRejected()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.LoginPath = "/testpath";
-            o.ReturnUrlParameter = "return";
-            o.Cookie.Name = "TestCookie";
-        },
-        async context =>
-        {
-            await context.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", CookieAuthenticationDefaults.AuthenticationScheme))));
-        });
+        using var host = await CreateHost(
+            o =>
+            {
+                o.LoginPath = "/testpath";
+                o.ReturnUrlParameter = "return";
+                o.Cookie.Name = "TestCookie";
+            },
+            async context =>
+            {
+                await context.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(
+                        new ClaimsIdentity(
+                            new GenericIdentity(
+                                "Alice",
+                                CookieAuthenticationDefaults.AuthenticationScheme
+                            )
+                        )
+                    )
+                );
+            }
+        );
         using var server = host.GetTestServer();
-        var transaction = await SendAsync(server, "http://example.com/testpath?return=http%3A%2F%2Fexample.com%2Fredirect_to");
+        var transaction = await SendAsync(
+            server,
+            "http://example.com/testpath?return=http%3A%2F%2Fexample.com%2Fredirect_to"
+        );
 
         Assert.NotEmpty(transaction.SetCookie);
         Assert.Equal(HttpStatusCode.OK, transaction.Response.StatusCode);
@@ -1455,21 +2011,34 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task EnsurePrecedenceOfRedirectUriAfterSignin()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.LoginPath = "/testpath";
-            o.ReturnUrlParameter = "return";
-            o.Cookie.Name = "TestCookie";
-        },
-        async context =>
-        {
-            await context.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", CookieAuthenticationDefaults.AuthenticationScheme))),
-                new AuthenticationProperties { RedirectUri = "/redirect_test" });
-        });
+        using var host = await CreateHost(
+            o =>
+            {
+                o.LoginPath = "/testpath";
+                o.ReturnUrlParameter = "return";
+                o.Cookie.Name = "TestCookie";
+            },
+            async context =>
+            {
+                await context.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(
+                        new ClaimsIdentity(
+                            new GenericIdentity(
+                                "Alice",
+                                CookieAuthenticationDefaults.AuthenticationScheme
+                            )
+                        )
+                    ),
+                    new AuthenticationProperties { RedirectUri = "/redirect_test" }
+                );
+            }
+        );
         using var server = host.GetTestServer();
-        var transaction = await SendAsync(server, "http://example.com/testpath?return=%2Fret_path_2");
+        var transaction = await SendAsync(
+            server,
+            "http://example.com/testpath?return=%2Fret_path_2"
+        );
 
         Assert.NotEmpty(transaction.SetCookie);
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
@@ -1480,15 +2049,34 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task NestedMapWillNotAffectAccessDenied()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                        app.Map("/base", map =>
-                        {
-                            map.UseAuthentication();
-                            map.Map("/forbid", signoutApp => signoutApp.Run(context => context.ForbidAsync("Cookies")));
-                        }))
-                        .ConfigureServices(services => services.AddAuthentication().AddCookie(o => o.AccessDeniedPath = new PathString("/denied"))))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                                app.Map(
+                                    "/base",
+                                    map =>
+                                    {
+                                        map.UseAuthentication();
+                                        map.Map(
+                                            "/forbid",
+                                            signoutApp =>
+                                                signoutApp.Run(
+                                                    context => context.ForbidAsync("Cookies")
+                                                )
+                                        );
+                                    }
+                                )
+                        )
+                        .ConfigureServices(
+                            services =>
+                                services
+                                    .AddAuthentication()
+                                    .AddCookie(o => o.AccessDeniedPath = new PathString("/denied"))
+                        )
+            )
             .Build();
         await host.StartAsync();
         using var server = host.GetTestServer();
@@ -1505,49 +2093,83 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     {
         var dp = new NoOpDataProtector();
         using var host1 = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                    {
-                        app.UseAuthentication();
-                        app.Run((context) =>
-                            context.SignInAsync("Cookies",
-                                            new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies"))),
-                                            new AuthenticationProperties()));
-                    })
-                    .ConfigureServices(services => services.AddAuthentication().AddCookie(o =>
-                    {
-                        o.TicketDataFormat = new TicketDataFormat(dp);
-                        o.Cookie.Name = "Cookie";
-                    })))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Run(
+                                (context) =>
+                                    context.SignInAsync(
+                                        "Cookies",
+                                        new ClaimsPrincipal(
+                                            new ClaimsIdentity(
+                                                new GenericIdentity("Alice", "Cookies")
+                                            )
+                                        ),
+                                        new AuthenticationProperties()
+                                    )
+                            );
+                        })
+                        .ConfigureServices(
+                            services =>
+                                services
+                                    .AddAuthentication()
+                                    .AddCookie(o =>
+                                    {
+                                        o.TicketDataFormat = new TicketDataFormat(dp);
+                                        o.Cookie.Name = "Cookie";
+                                    })
+                        )
+            )
             .Build();
         await host1.StartAsync();
-        using var server1 = host1.GetTestServer(); ;
+        using var server1 = host1.GetTestServer();
+        ;
 
         var transaction = await SendAsync(server1, "http://example.com/stuff");
         Assert.NotNull(transaction.SetCookie);
 
         using var host2 = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseAuthentication();
-                    app.Run(async (context) =>
-                    {
-                        var result = await context.AuthenticateAsync("Cookies");
-                        await DescribeAsync(context.Response, result);
-                    });
-                })
-                .ConfigureServices(services => services.AddAuthentication().AddCookie("Cookies", o =>
-                {
-                    o.Cookie.Name = "Cookie";
-                    o.TicketDataFormat = new TicketDataFormat(dp);
-                })))
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Run(
+                                async (context) =>
+                                {
+                                    var result = await context.AuthenticateAsync("Cookies");
+                                    await DescribeAsync(context.Response, result);
+                                }
+                            );
+                        })
+                        .ConfigureServices(
+                            services =>
+                                services
+                                    .AddAuthentication()
+                                    .AddCookie(
+                                        "Cookies",
+                                        o =>
+                                        {
+                                            o.Cookie.Name = "Cookie";
+                                            o.TicketDataFormat = new TicketDataFormat(dp);
+                                        }
+                                    )
+                        )
+            )
             .Build();
         await host2.StartAsync();
         using var server2 = host2.GetTestServer();
-        var transaction2 = await SendAsync(server2, "http://example.com/stuff", transaction.CookieNameValue);
+        var transaction2 = await SendAsync(
+            server2,
+            "http://example.com/stuff",
+            transaction.CookieNameValue
+        );
         Assert.Equal("Alice", FindClaimValue(transaction2, ClaimTypes.Name));
     }
 
@@ -1556,44 +2178,59 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     public async Task NullExpiresUtcPropertyIsGuarded()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                .ConfigureServices(services => services.AddAuthentication().AddCookie(o =>
-                {
-                    o.Events = new CookieAuthenticationEvents
-                    {
-                        OnValidatePrincipal = context =>
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .ConfigureServices(
+                            services =>
+                                services
+                                    .AddAuthentication()
+                                    .AddCookie(o =>
+                                    {
+                                        o.Events = new CookieAuthenticationEvents
+                                        {
+                                            OnValidatePrincipal = context =>
+                                            {
+                                                context.Properties.ExpiresUtc = null;
+                                                context.ShouldRenew = true;
+                                                return Task.FromResult(0);
+                                            }
+                                        };
+                                    })
+                        )
+                        .Configure(app =>
                         {
-                            context.Properties.ExpiresUtc = null;
-                            context.ShouldRenew = true;
-                            return Task.FromResult(0);
-                        }
-                    };
-                }))
-                .Configure(app =>
-                {
-                    app.UseAuthentication();
+                            app.UseAuthentication();
 
-                    app.Run(async context =>
-                    {
-                        if (context.Request.Path == "/signin")
-                        {
-                            await context.SignInAsync(
-                                CookieAuthenticationDefaults.AuthenticationScheme,
-                                new ClaimsPrincipal(new ClaimsIdentity(new GenericIdentity("Alice", "Cookies"))));
-                        }
-                        else
-                        {
-                            await context.Response.WriteAsync("ha+1");
-                        }
-                    });
-                }))
+                            app.Run(async context =>
+                            {
+                                if (context.Request.Path == "/signin")
+                                {
+                                    await context.SignInAsync(
+                                        CookieAuthenticationDefaults.AuthenticationScheme,
+                                        new ClaimsPrincipal(
+                                            new ClaimsIdentity(
+                                                new GenericIdentity("Alice", "Cookies")
+                                            )
+                                        )
+                                    );
+                                }
+                                else
+                                {
+                                    await context.Response.WriteAsync("ha+1");
+                                }
+                            });
+                        })
+            )
             .Build();
 
         await host.StartAsync();
         using var server = host.GetTestServer();
 
-        var cookie = (await server.SendAsync("http://www.example.com/signin")).SetCookie.FirstOrDefault();
+        var cookie = (
+            await server.SendAsync("http://www.example.com/signin")
+        ).SetCookie.FirstOrDefault();
         Assert.NotNull(cookie);
 
         var transaction = await server.SendAsync("http://www.example.com/", cookie);
@@ -1620,7 +2257,9 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
 
     private static string FindClaimValue(Transaction transaction, string claimType)
     {
-        var claim = transaction.ResponseElement.Elements("claim").SingleOrDefault(elt => elt.Attribute("type").Value == claimType);
+        var claim = transaction.ResponseElement
+            .Elements("claim")
+            .SingleOrDefault(elt => elt.Attribute("type").Value == claimType);
         if (claim == null)
         {
             return null;
@@ -1630,7 +2269,9 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
 
     private static string FindPropertiesValue(Transaction transaction, string key)
     {
-        var property = transaction.ResponseElement.Elements("extra").SingleOrDefault(elt => elt.Attribute("type").Value == key);
+        var property = transaction.ResponseElement
+            .Elements("extra")
+            .SingleOrDefault(elt => elt.Attribute("type").Value == key);
         if (property == null)
         {
             return null;
@@ -1670,83 +2311,142 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         }
     }
 
-    private Task<IHost> CreateHost(Action<CookieAuthenticationOptions> configureOptions, Func<HttpContext, Task> testpath = null, Uri baseAddress = null, bool claimsTransform = false)
-        => CreateHostWithServices(s =>
-        {
-            s.AddSingleton<ISystemClock>(_clock);
-            s.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(configureOptions);
-            if (claimsTransform)
+    private Task<IHost> CreateHost(
+        Action<CookieAuthenticationOptions> configureOptions,
+        Func<HttpContext, Task> testpath = null,
+        Uri baseAddress = null,
+        bool claimsTransform = false
+    ) =>
+        CreateHostWithServices(
+            s =>
             {
-                s.AddSingleton<IClaimsTransformation, ClaimsTransformer>();
-            }
-        }, testpath, baseAddress);
+                s.AddSingleton<ISystemClock>(_clock);
+                s.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie(configureOptions);
+                if (claimsTransform)
+                {
+                    s.AddSingleton<IClaimsTransformation, ClaimsTransformer>();
+                }
+            },
+            testpath,
+            baseAddress
+        );
 
-    private static async Task<IHost> CreateHostWithServices(Action<IServiceCollection> configureServices, Func<HttpContext, Task> testpath = null, Uri baseAddress = null)
+    private static async Task<IHost> CreateHostWithServices(
+        Action<IServiceCollection> configureServices,
+        Func<HttpContext, Task> testpath = null,
+        Uri baseAddress = null
+    )
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                    .Configure(app =>
-                    {
-                        app.UseAuthentication();
-                        app.Use(async (context, next) =>
+            .ConfigureWebHost(
+                builder =>
+                    builder
+                        .UseTestServer()
+                        .Configure(app =>
                         {
-                            var req = context.Request;
-                            var res = context.Response;
-                            PathString remainder;
-                            if (req.Path == new PathString("/normal"))
-                            {
-                                res.StatusCode = 200;
-                            }
-                            else if (req.Path == new PathString("/forbid")) // Simulate forbidden
-                            {
-                                await context.ForbidAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                            }
-                            else if (req.Path == new PathString("/challenge"))
-                            {
-                                await context.ChallengeAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                            }
-                            else if (req.Path == new PathString("/signout"))
-                            {
-                                await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                            }
-                            else if (req.Path == new PathString("/unauthorized"))
-                            {
-                                await context.ChallengeAsync(CookieAuthenticationDefaults.AuthenticationScheme, new AuthenticationProperties());
-                            }
-                            else if (req.Path == new PathString("/protected/CustomRedirect"))
-                            {
-                                await context.ChallengeAsync(CookieAuthenticationDefaults.AuthenticationScheme, new AuthenticationProperties() { RedirectUri = "/CustomRedirect" });
-                            }
-                            else if (req.Path == new PathString("/me"))
-                            {
-                                await DescribeAsync(res, AuthenticateResult.Success(new AuthenticationTicket(context.User, new AuthenticationProperties(), CookieAuthenticationDefaults.AuthenticationScheme)));
-                            }
-                            else if (req.Path.StartsWithSegments(new PathString("/me"), out remainder))
-                            {
-                                var ticket = await context.AuthenticateAsync(remainder.Value.Substring(1));
-                                await DescribeAsync(res, ticket);
-                            }
-                            else if (req.Path == new PathString("/testpath") && testpath != null)
-                            {
-                                await testpath(context);
-                            }
-                            else if (req.Path == new PathString("/checkforerrors"))
-                            {
-                                var result = await context.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme); // this used to be "Automatic"
-                                if (result.Failure != null)
+                            app.UseAuthentication();
+                            app.Use(
+                                async (context, next) =>
                                 {
-                                    throw new Exception("Failed to authenticate", result.Failure);
+                                    var req = context.Request;
+                                    var res = context.Response;
+                                    PathString remainder;
+                                    if (req.Path == new PathString("/normal"))
+                                    {
+                                        res.StatusCode = 200;
+                                    }
+                                    else if (req.Path == new PathString("/forbid")) // Simulate forbidden
+                                    {
+                                        await context.ForbidAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/challenge"))
+                                    {
+                                        await context.ChallengeAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/signout"))
+                                    {
+                                        await context.SignOutAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/unauthorized"))
+                                    {
+                                        await context.ChallengeAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme,
+                                            new AuthenticationProperties()
+                                        );
+                                    }
+                                    else if (
+                                        req.Path == new PathString("/protected/CustomRedirect")
+                                    )
+                                    {
+                                        await context.ChallengeAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme,
+                                            new AuthenticationProperties()
+                                            {
+                                                RedirectUri = "/CustomRedirect"
+                                            }
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/me"))
+                                    {
+                                        await DescribeAsync(
+                                            res,
+                                            AuthenticateResult.Success(
+                                                new AuthenticationTicket(
+                                                    context.User,
+                                                    new AuthenticationProperties(),
+                                                    CookieAuthenticationDefaults.AuthenticationScheme
+                                                )
+                                            )
+                                        );
+                                    }
+                                    else if (
+                                        req.Path.StartsWithSegments(
+                                            new PathString("/me"),
+                                            out remainder
+                                        )
+                                    )
+                                    {
+                                        var ticket = await context.AuthenticateAsync(
+                                            remainder.Value.Substring(1)
+                                        );
+                                        await DescribeAsync(res, ticket);
+                                    }
+                                    else if (
+                                        req.Path == new PathString("/testpath") && testpath != null
+                                    )
+                                    {
+                                        await testpath(context);
+                                    }
+                                    else if (req.Path == new PathString("/checkforerrors"))
+                                    {
+                                        var result = await context.AuthenticateAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme
+                                        ); // this used to be "Automatic"
+                                        if (result.Failure != null)
+                                        {
+                                            throw new Exception(
+                                                "Failed to authenticate",
+                                                result.Failure
+                                            );
+                                        }
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        await next(context);
+                                    }
                                 }
-                                return;
-                            }
-                            else
-                            {
-                                await next(context);
-                            }
-                        });
-                    })
-                    .ConfigureServices(configureServices))
+                            );
+                        })
+                        .ConfigureServices(configureServices)
+            )
             .Build();
 
         await host.StartAsync();
@@ -1763,17 +2463,39 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         var xml = new XElement("xml");
         if (result?.Ticket?.Principal != null)
         {
-            xml.Add(result.Ticket.Principal.Claims.Select(claim => new XElement("claim", new XAttribute("type", claim.Type), new XAttribute("value", claim.Value))));
+            xml.Add(
+                result.Ticket.Principal.Claims.Select(
+                    claim =>
+                        new XElement(
+                            "claim",
+                            new XAttribute("type", claim.Type),
+                            new XAttribute("value", claim.Value)
+                        )
+                )
+            );
         }
         if (result?.Ticket?.Properties != null)
         {
-            xml.Add(result.Ticket.Properties.Items.Select(extra => new XElement("extra", new XAttribute("type", extra.Key), new XAttribute("value", extra.Value))));
+            xml.Add(
+                result.Ticket.Properties.Items.Select(
+                    extra =>
+                        new XElement(
+                            "extra",
+                            new XAttribute("type", extra.Key),
+                            new XAttribute("value", extra.Value)
+                        )
+                )
+            );
         }
         var xmlBytes = Encoding.UTF8.GetBytes(xml.ToString());
         return res.Body.WriteAsync(xmlBytes, 0, xmlBytes.Length);
     }
 
-    private static async Task<Transaction> SendAsync(TestServer server, string uri, string cookieHeader = null)
+    private static async Task<Transaction> SendAsync(
+        TestServer server,
+        string uri,
+        string cookieHeader = null
+    )
     {
         var request = new HttpRequestMessage(HttpMethod.Get, uri);
         if (!string.IsNullOrEmpty(cookieHeader))
@@ -1787,7 +2509,9 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         };
         if (transaction.Response.Headers.Contains("Set-Cookie"))
         {
-            transaction.SetCookie = transaction.Response.Headers.GetValues("Set-Cookie").SingleOrDefault();
+            transaction.SetCookie = transaction.Response.Headers
+                .GetValues("Set-Cookie")
+                .SingleOrDefault();
         }
         if (!string.IsNullOrEmpty(transaction.SetCookie))
         {
@@ -1795,9 +2519,11 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         }
         transaction.ResponseText = await transaction.Response.Content.ReadAsStringAsync();
 
-        if (transaction.Response.Content != null &&
-            transaction.Response.Content.Headers.ContentType != null &&
-            transaction.Response.Content.Headers.ContentType.MediaType == "text/xml")
+        if (
+            transaction.Response.Content != null
+            && transaction.Response.Content.Headers.ContentType != null
+            && transaction.Response.Content.Headers.ContentType.MediaType == "text/xml"
+        )
         {
             transaction.ResponseElement = XElement.Parse(transaction.ResponseText);
         }

@@ -26,7 +26,8 @@ namespace System.Text.RegularExpressions.Symbolic
             _ignoreCase = new Unicode.IgnoreCaseTransformer(this);
         }
 
-        public BDD ApplyIgnoreCase(BDD set, string? culture = null) => _ignoreCase.Apply(set, culture);
+        public BDD ApplyIgnoreCase(BDD set, string? culture = null) =>
+            _ignoreCase.Apply(set, culture);
 
         /// <summary>
         /// Make a character predicate for the given character c.
@@ -41,9 +42,9 @@ namespace System.Text.RegularExpressions.Symbolic
             {
                 //individual character BDDs are always fixed
                 BDD[] charPredTable = _charPredTable;
-                return c < charPredTable.Length ?
-                    charPredTable[c] ??= CreateBDDFromChar(c) :
-                    CreateBDDFromChar(c);
+                return c < charPredTable.Length
+                    ? charPredTable[c] ??= CreateBDDFromChar(c)
+                    : CreateBDDFromChar(c);
             }
         }
 
@@ -52,7 +53,10 @@ namespace System.Text.RegularExpressions.Symbolic
             BDD bdd = BDD.True;
             for (int k = 0; k < 16; k++)
             {
-                bdd = (c & (1 << k)) == 0 ? GetOrCreateBDD(k, BDD.False, bdd) : GetOrCreateBDD(k, bdd, BDD.False);
+                bdd =
+                    (c & (1 << k)) == 0
+                        ? GetOrCreateBDD(k, BDD.False, bdd)
+                        : GetOrCreateBDD(k, bdd, BDD.False);
             }
             return bdd;
         }
@@ -62,8 +66,7 @@ namespace System.Text.RegularExpressions.Symbolic
         /// Returns the empty set if n is less than m
         /// </summary>
         public BDD CreateCharSetFromRange(char m, char n) =>
-            m == n ? CharConstraint(m) :
-            CreateSetFromRange(m, n, 15);
+            m == n ? CharConstraint(m) : CreateSetFromRange(m, n, 15);
 
         /// <summary>
         /// Make a character set that is the union of the character sets of the given ranges.
@@ -131,7 +134,8 @@ namespace System.Text.RegularExpressions.Symbolic
             }
         }
 
-        public IEnumerable<char> GenerateAllCharacters(BDD set) => GenerateAllCharacters(set, false);
+        public IEnumerable<char> GenerateAllCharacters(BDD set) =>
+            GenerateAllCharacters(set, false);
 
         /// <summary>Calculate the number of elements in the set.</summary>
         /// <param name="set">the given set</param>
@@ -193,9 +197,11 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <param name="inReverseOrder">if true the members are generated in reverse alphabetical order with the largest first, otherwise in alphabetical order</param>
         /// <returns>enumeration of all characters in the set, the enumeration is empty if the set is empty</returns>
         private IEnumerable<uint> GenerateAllElements(BDD set, bool inReverseOrder) =>
-            set == False ? Array.Empty<uint>() :
-            inReverseOrder ? GenerateAllCharactersInReverseOrder(set) :
-            GenerateAllCharactersInOrder(set);
+            set == False
+                ? Array.Empty<uint>()
+                : inReverseOrder
+                    ? GenerateAllCharactersInReverseOrder(set)
+                    : GenerateAllCharactersInOrder(set);
 
         public BDD ConvertToCharSet(ICharAlgebra<BDD> _, BDD pred) => pred;
 
@@ -298,9 +304,9 @@ namespace System.Text.RegularExpressions.Symbolic
                 if (Or(s_or_d, pred) == s_or_d)
                 {
                     //check first if this is purely ascii range for digits
-                    return And(pred, s).Equals(s) && And(pred, nonasciiDigit).IsEmpty ?
-                        $"[\\s{RepresentRanges(ToRanges(And(pred, asciiDigit)), checkSingletonComlement: false)}]" :
-                        $"[\\s\\d-[{RepresentSet(And(s_or_d, Not(pred)))}]]";
+                    return And(pred, s).Equals(s) && And(pred, nonasciiDigit).IsEmpty
+                        ? $"[\\s{RepresentRanges(ToRanges(And(pred, asciiDigit)), checkSingletonComlement: false)}]"
+                        : $"[\\s\\d-[{RepresentSet(And(s_or_d, Not(pred)))}]]";
                 }
                 //---
                 // s|wD
@@ -345,19 +351,26 @@ namespace System.Text.RegularExpressions.Symbolic
 
             // Represent either the ranges or its complement, if the complement representation is more compact.
             string ranges_repr = $"[{RepresentRanges(ranges, checkSingletonComlement: false)}]";
-            string ranges_compl_repr = $"[^{RepresentRanges(ToRanges(Not(pred)), checkSingletonComlement: false)}]";
+            string ranges_compl_repr =
+                $"[^{RepresentRanges(ToRanges(Not(pred)), checkSingletonComlement: false)}]";
             return ranges_repr.Length <= ranges_compl_repr.Length ? ranges_repr : ranges_compl_repr;
         }
 
-        private string RepresentSet(BDD set) =>
-            set.IsEmpty ? "" : RepresentRanges(ToRanges(set));
+        private string RepresentSet(BDD set) => set.IsEmpty ? "" : RepresentRanges(ToRanges(set));
 
-        private static string RepresentRanges((uint, uint)[] ranges, bool checkSingletonComlement = true)
+        private static string RepresentRanges(
+            (uint, uint)[] ranges,
+            bool checkSingletonComlement = true
+        )
         {
             //check if ranges represents a complement of a singleton
-            if (checkSingletonComlement && ranges.Length == 2 &&
-                ranges[0].Item1 == 0 && ranges[1].Item2 == 0xFFFF &&
-                ranges[0].Item2 + 2 == ranges[1].Item1)
+            if (
+                checkSingletonComlement
+                && ranges.Length == 2
+                && ranges[0].Item1 == 0
+                && ranges[1].Item2 == 0xFFFF
+                && ranges[0].Item2 + 2 == ranges[1].Item1
+            )
             {
                 return "^" + Escape((char)(ranges[0].Item2 + 1));
             }
@@ -420,8 +433,10 @@ namespace System.Text.RegularExpressions.Symbolic
             };
         }
 
-        private static bool IsSingletonRange((uint, uint)[] ranges) => ranges.Length == 1 && ranges[0].Item1 == ranges[0].Item2;
+        private static bool IsSingletonRange((uint, uint)[] ranges) =>
+            ranges.Length == 1 && ranges[0].Item1 == ranges[0].Item2;
 
-        public override int CombineTerminals(BoolOp op, int terminal1, int terminal2) => throw new NotSupportedException();
+        public override int CombineTerminals(BoolOp op, int terminal1, int terminal2) =>
+            throw new NotSupportedException();
     }
 }

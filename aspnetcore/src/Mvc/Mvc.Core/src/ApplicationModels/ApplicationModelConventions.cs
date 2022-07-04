@@ -17,7 +17,8 @@ internal static class ApplicationModelConventions
     /// <param name="conventions">The set of conventions.</param>
     public static void ApplyConventions(
         ApplicationModel applicationModel,
-        IEnumerable<IApplicationModelConvention> conventions)
+        IEnumerable<IApplicationModelConvention> conventions
+    )
     {
         if (applicationModel == null)
         {
@@ -42,10 +43,9 @@ internal static class ApplicationModelConventions
         {
             // ToArray is needed here to prevent issues with modifying the attributes collection
             // while iterating it.
-            var controllerConventions =
-                controller.Attributes
-                    .OfType<IControllerModelConvention>()
-                    .ToArray();
+            var controllerConventions = controller.Attributes
+                .OfType<IControllerModelConvention>()
+                .ToArray();
 
             foreach (var controllerConvention in controllerConventions)
             {
@@ -57,10 +57,9 @@ internal static class ApplicationModelConventions
             {
                 // ToArray is needed here to prevent issues with modifying the attributes collection
                 // while iterating it.
-                var actionConventions =
-                    action.Attributes
-                        .OfType<IActionModelConvention>()
-                        .ToArray();
+                var actionConventions = action.Attributes
+                    .OfType<IActionModelConvention>()
+                    .ToArray();
 
                 foreach (var actionConvention in actionConventions)
                 {
@@ -72,17 +71,19 @@ internal static class ApplicationModelConventions
                 {
                     // ToArray is needed here to prevent issues with modifying the attributes collection
                     // while iterating it.
-                    var parameterConventions =
-                        parameter.Attributes
-                            .OfType<IParameterModelConvention>()
-                            .ToArray();
+                    var parameterConventions = parameter.Attributes
+                        .OfType<IParameterModelConvention>()
+                        .ToArray();
 
                     foreach (var parameterConvention in parameterConventions)
                     {
                         parameterConvention.Apply(parameter);
                     }
 
-                    var parameterBaseConventions = GetConventions<IParameterModelBaseConvention>(conventions, parameter.Attributes);
+                    var parameterBaseConventions = GetConventions<IParameterModelBaseConvention>(
+                        conventions,
+                        parameter.Attributes
+                    );
                     foreach (var parameterConvention in parameterBaseConventions)
                     {
                         parameterConvention.Apply(parameter);
@@ -93,7 +94,10 @@ internal static class ApplicationModelConventions
             var properties = controller.ControllerProperties.ToArray();
             foreach (var property in properties)
             {
-                var parameterBaseConventions = GetConventions<IParameterModelBaseConvention>(conventions, property.Attributes);
+                var parameterBaseConventions = GetConventions<IParameterModelBaseConvention>(
+                    conventions,
+                    property.Attributes
+                );
 
                 foreach (var parameterConvention in parameterBaseConventions)
                 {
@@ -105,10 +109,12 @@ internal static class ApplicationModelConventions
 
     private static IEnumerable<TConvention> GetConventions<TConvention>(
         IEnumerable<IApplicationModelConvention> conventions,
-        IReadOnlyList<object> attributes)
+        IReadOnlyList<object> attributes
+    )
     {
         return Enumerable.Concat(
             conventions.OfType<TConvention>(),
-            attributes.OfType<TConvention>());
+            attributes.OfType<TConvention>()
+        );
     }
 }

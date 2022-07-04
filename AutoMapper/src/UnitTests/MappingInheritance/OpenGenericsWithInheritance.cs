@@ -25,11 +25,12 @@ namespace AutoMapper.UnitTests
             public T Value { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg=>
-        {
-            cfg.CreateMap(typeof(Source), typeof(Target<>));
-            cfg.CreateMap(typeof(Source), typeof(ITarget<>)).As(typeof(Target<>));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap(typeof(Source), typeof(Target<>));
+                cfg.CreateMap(typeof(Source), typeof(ITarget<>)).As(typeof(Target<>));
+            });
 
         [Fact]
         public void Should_use_the_redirected_map()
@@ -76,20 +77,30 @@ namespace AutoMapper.UnitTests
             public string DerivedMember { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<BarBase, BarModelBase>()
-                .ForMember(d=>d.Ignored, o=>o.Ignore())
-                .ForMember(d=>d.MappedFrom, o=>o.MapFrom(_=>"mappedFrom"))
-                .Include(typeof(Bar<>), typeof(BarModel<>));
-            cfg.CreateMap<Person, PersonModel>();
-            cfg.CreateMap(typeof(Bar<>), typeof(BarModel<>)).ForMember("DerivedMember", o=>o.MapFrom("Id"));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<BarBase, BarModelBase>()
+                    .ForMember(d => d.Ignored, o => o.Ignore())
+                    .ForMember(d => d.MappedFrom, o => o.MapFrom(_ => "mappedFrom"))
+                    .Include(typeof(Bar<>), typeof(BarModel<>));
+                cfg.CreateMap<Person, PersonModel>();
+                cfg.CreateMap(typeof(Bar<>), typeof(BarModel<>))
+                    .ForMember("DerivedMember", o => o.MapFrom("Id"));
+            });
 
         [Fact]
         public void Should_work()
         {
-            var person = new Person { Name = "Jack", BarList = { new Bar<string>{ Id = 1, Value = "One" }, new Bar<string>{ Id = 2, Value = "Two" } } };
+            var person = new Person
+            {
+                Name = "Jack",
+                BarList =
+                {
+                    new Bar<string> { Id = 1, Value = "One" },
+                    new Bar<string> { Id = 2, Value = "Two" }
+                }
+            };
 
             var personMapped = Mapper.Map<PersonModel>(person);
 
@@ -141,21 +152,30 @@ namespace AutoMapper.UnitTests
             public string DerivedMember { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap(typeof(BarBase), typeof(BarModelBase))
-                .ForMember("Ignored", o => o.Ignore())
-                .ForMember("MappedFrom", o => o.MapFrom(_=>"mappedFrom"));
-            cfg.CreateMap<Person, PersonModel>();
-            cfg.CreateMap(typeof(Bar<>), typeof(BarModel<>))
-                .ForMember("DerivedMember", o => o.MapFrom("Id"))
-                .IncludeBase(typeof(BarBase), typeof(BarModelBase));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap(typeof(BarBase), typeof(BarModelBase))
+                    .ForMember("Ignored", o => o.Ignore())
+                    .ForMember("MappedFrom", o => o.MapFrom(_ => "mappedFrom"));
+                cfg.CreateMap<Person, PersonModel>();
+                cfg.CreateMap(typeof(Bar<>), typeof(BarModel<>))
+                    .ForMember("DerivedMember", o => o.MapFrom("Id"))
+                    .IncludeBase(typeof(BarBase), typeof(BarModelBase));
+            });
 
         [Fact]
         public void Should_work()
         {
-            var person = new Person { Name = "Jack", BarList = { new Bar<string> { Id = 1, Value = "One" }, new Bar<string> { Id = 2, Value = "Two" } } };
+            var person = new Person
+            {
+                Name = "Jack",
+                BarList =
+                {
+                    new Bar<string> { Id = 1, Value = "One" },
+                    new Bar<string> { Id = 2, Value = "Two" }
+                }
+            };
 
             var personMapped = Mapper.Map<PersonModel>(person);
 
@@ -202,23 +222,28 @@ namespace AutoMapper.UnitTests
             public string SubMember { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Entity, Model>();
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Entity, Model>();
 
-            cfg.CreateMap(typeof(Entity<>), typeof(Model<>))
-                .IncludeBase(typeof(Entity), typeof(Model));
+                cfg.CreateMap(typeof(Entity<>), typeof(Model<>))
+                    .IncludeBase(typeof(Entity), typeof(Model));
 
-
-            cfg.CreateMap<SubEntity, SubModel>()
-                .IncludeBase<Entity<int>, Model<int>>()
-                .IncludeBase<Entity, Model>();
-        });
+                cfg.CreateMap<SubEntity, SubModel>()
+                    .IncludeBase<Entity<int>, Model<int>>()
+                    .IncludeBase<Entity, Model>();
+            });
 
         [Fact]
         public void Should_work()
         {
-            var entity = new SubEntity { BaseMember = "foo", Id = 695, SubMember = "bar" };
+            var entity = new SubEntity
+            {
+                BaseMember = "foo",
+                Id = 695,
+                SubMember = "bar"
+            };
 
             var model = this.Mapper.Map<SubModel>(entity);
 

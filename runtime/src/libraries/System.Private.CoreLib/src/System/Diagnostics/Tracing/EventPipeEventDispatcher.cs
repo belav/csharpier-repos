@@ -34,24 +34,36 @@ namespace System.Diagnostics.Tracing
         private bool m_stopDispatchTask;
         private Task? m_dispatchTask;
         private readonly object m_dispatchControlLock = new object();
-        private readonly Dictionary<EventListener, EventListenerSubscription> m_subscriptions = new Dictionary<EventListener, EventListenerSubscription>();
+        private readonly Dictionary<EventListener, EventListenerSubscription> m_subscriptions =
+            new Dictionary<EventListener, EventListenerSubscription>();
 
         private const uint DefaultEventListenerCircularMBSize = 10;
 
         private EventPipeEventDispatcher()
         {
             // Get the ID of the runtime provider so that it can be used as a filter when processing events.
-            m_RuntimeProviderID = EventPipeInternal.GetProvider(NativeRuntimeEventSource.EventSourceName);
+            m_RuntimeProviderID = EventPipeInternal.GetProvider(
+                NativeRuntimeEventSource.EventSourceName
+            );
         }
 
-        internal void SendCommand(EventListener eventListener, EventCommand command, bool enable, EventLevel level, EventKeywords matchAnyKeywords)
+        internal void SendCommand(
+            EventListener eventListener,
+            EventCommand command,
+            bool enable,
+            EventLevel level,
+            EventKeywords matchAnyKeywords
+        )
         {
             if (command == EventCommand.Update && enable)
             {
                 lock (m_dispatchControlLock)
                 {
                     // Add the new subscription.  This will overwrite an existing subscription for the listener if one exists.
-                    m_subscriptions[eventListener] = new EventListenerSubscription(matchAnyKeywords, level);
+                    m_subscriptions[eventListener] = new EventListenerSubscription(
+                        matchAnyKeywords,
+                        level
+                    );
 
                     // Commit the configuration change.
                     CommitDispatchConfiguration();
@@ -100,16 +112,28 @@ namespace System.Diagnostics.Tracing
             foreach (EventListenerSubscription subscription in m_subscriptions.Values)
             {
                 aggregatedKeywords |= subscription.MatchAnyKeywords;
-                highestLevel = (subscription.Level > highestLevel) ? subscription.Level : highestLevel;
+                highestLevel =
+                    (subscription.Level > highestLevel) ? subscription.Level : highestLevel;
             }
 
             // Enable the EventPipe session.
-            EventPipeProviderConfiguration[] providerConfiguration = new EventPipeProviderConfiguration[]
-            {
-                new EventPipeProviderConfiguration(NativeRuntimeEventSource.EventSourceName, (ulong)aggregatedKeywords, (uint)highestLevel, null)
-            };
+            EventPipeProviderConfiguration[] providerConfiguration =
+                new EventPipeProviderConfiguration[]
+                {
+                    new EventPipeProviderConfiguration(
+                        NativeRuntimeEventSource.EventSourceName,
+                        (ulong)aggregatedKeywords,
+                        (uint)highestLevel,
+                        null
+                    )
+                };
 
-            m_sessionID = EventPipeInternal.Enable(null, EventPipeSerializationFormat.NetTrace, DefaultEventListenerCircularMBSize, providerConfiguration);
+            m_sessionID = EventPipeInternal.Enable(
+                null,
+                EventPipeSerializationFormat.NetTrace,
+                DefaultEventListenerCircularMBSize,
+                providerConfiguration
+            );
             Debug.Assert(m_sessionID != 0);
 
             // Get the session information that is required to properly dispatch events.
@@ -137,7 +161,12 @@ namespace System.Diagnostics.Tracing
             if (m_dispatchTask == null)
             {
                 m_stopDispatchTask = false;
-                m_dispatchTask = Task.Factory.StartNew(DispatchEventsToEventListeners, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+                m_dispatchTask = Task.Factory.StartNew(
+                    DispatchEventsToEventListeners,
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default
+                );
             }
         }
 
@@ -163,7 +192,10 @@ namespace System.Diagnostics.Tracing
             {
                 bool eventsReceived = false;
                 // Get the next event.
-                while (!m_stopDispatchTask && EventPipeInternal.GetNextEvent(m_sessionID, &instanceData))
+                while (
+                    !m_stopDispatchTask
+                    && EventPipeInternal.GetNextEvent(m_sessionID, &instanceData)
+                )
                 {
                     eventsReceived = true;
 
@@ -171,9 +203,19 @@ namespace System.Diagnostics.Tracing
                     if (instanceData.ProviderID == m_RuntimeProviderID)
                     {
                         // Dispatch the event.
-                        ReadOnlySpan<byte> payload = new ReadOnlySpan<byte>((void*)instanceData.Payload, (int)instanceData.PayloadLength);
+                        ReadOnlySpan<byte> payload = new ReadOnlySpan<byte>(
+                            (void*)instanceData.Payload,
+                            (int)instanceData.PayloadLength
+                        );
                         DateTime dateTimeStamp = TimeStampToDateTime(instanceData.TimeStamp);
-                        NativeRuntimeEventSource.Log.ProcessEvent(instanceData.EventID, instanceData.ThreadID, dateTimeStamp, instanceData.ActivityId, instanceData.ChildActivityId, payload);
+                        NativeRuntimeEventSource.Log.ProcessEvent(
+                            instanceData.EventID,
+                            instanceData.ThreadID,
+                            dateTimeStamp,
+                            instanceData.ActivityId,
+                            instanceData.ChildActivityId,
+                            payload
+                        );
                     }
                 }
 
@@ -200,8 +242,12 @@ namespace System.Diagnostics.Tracing
                 return DateTime.MaxValue;
             }
 
-            Debug.Assert((m_syncTimeUtc.Ticks != 0) && (m_syncTimeQPC != 0) && (m_timeQPCFrequency != 0));
-            long inTicks = (long)((timeStamp - m_syncTimeQPC) * 10000000.0 / m_timeQPCFrequency) + m_syncTimeUtc.Ticks;
+            Debug.Assert(
+                (m_syncTimeUtc.Ticks != 0) && (m_syncTimeQPC != 0) && (m_timeQPCFrequency != 0)
+            );
+            long inTicks =
+                (long)((timeStamp - m_syncTimeQPC) * 10000000.0 / m_timeQPCFrequency)
+                + m_syncTimeUtc.Ticks;
             if ((inTicks < 0) || (DateTime.MaxTicks < inTicks))
             {
                 inTicks = DateTime.MaxTicks;

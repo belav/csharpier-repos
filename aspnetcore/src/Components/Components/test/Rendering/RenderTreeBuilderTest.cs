@@ -36,10 +36,12 @@ public class RenderTreeBuilderTest
 
         // Assert
         var frames = builder.GetFrames();
-        Assert.Collection(frames.AsEnumerable(),
+        Assert.Collection(
+            frames.AsEnumerable(),
             frame => AssertFrame.Text(frame, "First item"),
             frame => AssertFrame.Text(frame, string.Empty),
-            frame => AssertFrame.Text(frame, "Second item"));
+            frame => AssertFrame.Text(frame, "Second item")
+        );
     }
 
     [Fact]
@@ -56,10 +58,12 @@ public class RenderTreeBuilderTest
 
         // Assert
         var frames = builder.GetFrames();
-        Assert.Collection(frames.AsEnumerable(),
+        Assert.Collection(
+            frames.AsEnumerable(),
             frame => AssertFrame.Element(frame, "some elem", 3),
             frame => AssertFrame.Markup(frame, "Blah"),
-            frame => AssertFrame.Markup(frame, string.Empty));
+            frame => AssertFrame.Markup(frame, string.Empty)
+        );
     }
 
     [Fact]
@@ -77,9 +81,11 @@ public class RenderTreeBuilderTest
 
         // Assert
         var frames = builder.GetFrames();
-        Assert.Collection(frames.AsEnumerable(),
+        Assert.Collection(
+            frames.AsEnumerable(),
             frame => AssertFrame.Markup(frame, "Some markup"),
-            frame => AssertFrame.Markup(frame, string.Empty));
+            frame => AssertFrame.Markup(frame, string.Empty)
+        );
     }
 
     [Fact]
@@ -99,9 +105,11 @@ public class RenderTreeBuilderTest
 
         // Assert
         var frames = builder.GetFrames();
-        Assert.Collection(frames.AsEnumerable(),
+        Assert.Collection(
+            frames.AsEnumerable(),
             frame => AssertFrame.Markup(frame, "Test nullable Markup"),
-            frame => AssertFrame.Markup(frame, string.Empty));
+            frame => AssertFrame.Markup(frame, string.Empty)
+        );
     }
 
     [Fact]
@@ -115,8 +123,7 @@ public class RenderTreeBuilderTest
 
         // Assert
         var frames = builder.GetFrames();
-        Assert.Collection(frames.AsEnumerable(),
-            frame => AssertFrame.Markup(frame, string.Empty));
+        Assert.Collection(frames.AsEnumerable(), frame => AssertFrame.Markup(frame, string.Empty));
     }
 
     [Fact]
@@ -132,9 +139,11 @@ public class RenderTreeBuilderTest
 
         // Assert
         var frames = builder.GetFrames();
-        Assert.Collection(frames.AsEnumerable(),
+        Assert.Collection(
+            frames.AsEnumerable(),
             frame => AssertFrame.Text(frame, "1234"),
-            frame => AssertFrame.Text(frame, string.Empty));
+            frame => AssertFrame.Text(frame, string.Empty)
+        );
     }
 
     [Fact]
@@ -195,24 +204,25 @@ public class RenderTreeBuilderTest
 
         // Act
         builder.AddContent(0, "standalone text 1"); //  0: standalone text 1
-        builder.OpenElement(0, "root");             //  1: <root>
-        builder.AddContent(0, "root text 1");       //  2:     root text 1
-        builder.AddContent(0, "root text 2");       //  3:     root text 2
-        builder.OpenElement(0, "child");            //  4:     <child>
-        builder.AddContent(0, "child text");        //  5:         child text
-        builder.OpenElement(0, "grandchild");       //  6:         <grandchild>
+        builder.OpenElement(0, "root"); //  1: <root>
+        builder.AddContent(0, "root text 1"); //  2:     root text 1
+        builder.AddContent(0, "root text 2"); //  3:     root text 2
+        builder.OpenElement(0, "child"); //  4:     <child>
+        builder.AddContent(0, "child text"); //  5:         child text
+        builder.OpenElement(0, "grandchild"); //  6:         <grandchild>
         builder.AddContent(0, "grandchild text 1"); //  7:             grandchild text 1
         builder.AddContent(0, "grandchild text 2"); //  8:             grandchild text 2
-        builder.CloseElement();                     //             </grandchild>
-        builder.CloseElement();                     //         </child>
-        builder.AddContent(0, "root text 3");       //  9:     root text 3
-        builder.OpenElement(0, "child 2");          // 10:     <child 2>
-        builder.CloseElement();                     //         </child 2>
-        builder.CloseElement();                     //      </root>
+        builder.CloseElement(); //             </grandchild>
+        builder.CloseElement(); //         </child>
+        builder.AddContent(0, "root text 3"); //  9:     root text 3
+        builder.OpenElement(0, "child 2"); // 10:     <child 2>
+        builder.CloseElement(); //         </child 2>
+        builder.CloseElement(); //      </root>
         builder.AddContent(0, "standalone text 2"); // 11:  standalone text 2
 
         // Assert
-        Assert.Collection(builder.GetFrames().AsEnumerable(),
+        Assert.Collection(
+            builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Text(frame, "standalone text 1"),
             frame => AssertFrame.Element(frame, "root", 10),
             frame => AssertFrame.Text(frame, "root text 1"),
@@ -224,7 +234,8 @@ public class RenderTreeBuilderTest
             frame => AssertFrame.Text(frame, "grandchild text 2"),
             frame => AssertFrame.Text(frame, "root text 3"),
             frame => AssertFrame.Element(frame, "child 2", 1),
-            frame => AssertFrame.Text(frame, "standalone text 2"));
+            frame => AssertFrame.Text(frame, "standalone text 2")
+        );
     }
 
     [Fact]
@@ -235,23 +246,25 @@ public class RenderTreeBuilderTest
         Action<EventArgs> eventHandler = eventInfo => { };
 
         // Act
-        builder.OpenElement(0, "myelement");                    //  0: <myelement
-        builder.AddAttribute(0, "attribute1", "value 1");       //  1:     attribute1="value 1"
-        builder.AddAttribute(0, "attribute2", 123);             //  2:     attribute2=intExpression123>
-        builder.OpenElement(0, "child");                        //  3:   <child
-        builder.AddAttribute(0, "childevent", eventHandler);    //  4:       childevent=eventHandler>
-        builder.AddContent(0, "some text");                     //  5:     some text
-        builder.CloseElement();                                 //       </child>
-        builder.CloseElement();                                 //     </myelement>
+        builder.OpenElement(0, "myelement"); //  0: <myelement
+        builder.AddAttribute(0, "attribute1", "value 1"); //  1:     attribute1="value 1"
+        builder.AddAttribute(0, "attribute2", 123); //  2:     attribute2=intExpression123>
+        builder.OpenElement(0, "child"); //  3:   <child
+        builder.AddAttribute(0, "childevent", eventHandler); //  4:       childevent=eventHandler>
+        builder.AddContent(0, "some text"); //  5:     some text
+        builder.CloseElement(); //       </child>
+        builder.CloseElement(); //     </myelement>
 
         // Assert
-        Assert.Collection(builder.GetFrames().AsEnumerable(),
+        Assert.Collection(
+            builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "myelement", 6),
             frame => AssertFrame.Attribute(frame, "attribute1", "value 1"),
             frame => AssertFrame.Attribute(frame, "attribute2", "123"),
             frame => AssertFrame.Element(frame, "child", 3),
             frame => AssertFrame.Attribute(frame, "childevent", eventHandler),
-            frame => AssertFrame.Text(frame, "some text"));
+            frame => AssertFrame.Text(frame, "some text")
+        );
     }
 
     [Fact]
@@ -267,9 +280,7 @@ public class RenderTreeBuilderTest
 
         // Assert
         var frames = builder.GetFrames().AsEnumerable().ToArray();
-        Assert.Collection(
-            frames,
-            frame => AssertFrame.Element(frame, "myelement", 1));
+        Assert.Collection(frames, frame => AssertFrame.Element(frame, "myelement", 1));
     }
 
     [Fact]
@@ -282,19 +293,25 @@ public class RenderTreeBuilderTest
         // Act
         builder.OpenElement(0, "myelement");
         builder.AddAttribute(0, "attribute1", "value 1");
-        builder.AddMultipleAttributes(0, new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+        builder.AddMultipleAttributes(
+            0,
+            new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
             {
                 { "attribute1", "test1" },
                 { "attribute2", true },
                 { "attribute3", eventHandler },
-            });
+            }
+        );
         builder.AddAttribute(0, "ATTRIBUTE2", true);
-        builder.AddMultipleAttributes(0, new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+        builder.AddMultipleAttributes(
+            0,
+            new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
             {
                 { "attribute4", "test4" },
                 { "attribute5", false },
                 { "attribute6", eventHandler },
-            });
+            }
+        );
 
         // Null or false values don't create frames of their own, but they can
         // "knock out" earlier values.
@@ -312,7 +329,8 @@ public class RenderTreeBuilderTest
             frame => AssertFrame.Attribute(frame, "attribute1", "test1"),
             frame => AssertFrame.Attribute(frame, "attribute3", eventHandler),
             frame => AssertFrame.Attribute(frame, "ATTRIBUTE2", true),
-            frame => AssertFrame.Attribute(frame, "attribute7", "the end"));
+            frame => AssertFrame.Attribute(frame, "attribute7", "the end")
+        );
     }
 
     [Fact]
@@ -328,10 +346,10 @@ public class RenderTreeBuilderTest
         // Act
         builder.OpenElement(0, "myelement");
         builder.AddAttribute(0, "attribute1", "value1");
-        builder.AddMultipleAttributes(1, new Dictionary<string, object>()
-            {
-                { "attribute1", "value2" },
-            });
+        builder.AddMultipleAttributes(
+            1,
+            new Dictionary<string, object>() { { "attribute1", "value2" }, }
+        );
         builder.OpenRegion(2);
         builder.OpenElement(3, "child");
         builder.CloseElement();
@@ -345,18 +363,19 @@ public class RenderTreeBuilderTest
             frame => AssertFrame.Element(frame, "myelement", 4),
             frame => AssertFrame.Attribute(frame, "attribute1", "value2"),
             frame => AssertFrame.Region(frame, 2, 2),
-            frame => AssertFrame.Element(frame, "child", 1, 3));
+            frame => AssertFrame.Element(frame, "child", 1, 3)
+        );
     }
 
     [Fact]
     public void CanAddMultipleAttributes_DictionaryObject()
     {
         var attributes = new Dictionary<string, object>
-            {
-                { "attribute1", "test1" },
-                { "attribute2", "123" },
-                { "attribute3", true },
-            };
+        {
+            { "attribute1", "test1" },
+            { "attribute2", "123" },
+            { "attribute3", true },
+        };
 
         // Act & Assert
         CanAddMultipleAttributesTest(attributes);
@@ -366,11 +385,11 @@ public class RenderTreeBuilderTest
     public void CanAddMultipleAttributes_IReadOnlyDictionaryObject()
     {
         var attributes = new Dictionary<string, object>
-            {
-                { "attribute1", "test1" },
-                { "attribute2", "123" },
-                { "attribute3", true },
-            };
+        {
+            { "attribute1", "test1" },
+            { "attribute2", "123" },
+            { "attribute3", true },
+        };
 
         // Act & Assert
         CanAddMultipleAttributesTest((IReadOnlyDictionary<string, object>)attributes);
@@ -380,11 +399,11 @@ public class RenderTreeBuilderTest
     public void CanAddMultipleAttributes_ListKvpObject()
     {
         var attributes = new List<KeyValuePair<string, object>>()
-            {
-                new KeyValuePair<string, object>("attribute1", "test1"),
-                new KeyValuePair<string, object>("attribute2", "123"),
-                new KeyValuePair<string, object>("attribute3", true),
-            };
+        {
+            new KeyValuePair<string, object>("attribute1", "test1"),
+            new KeyValuePair<string, object>("attribute2", "123"),
+            new KeyValuePair<string, object>("attribute3", true),
+        };
 
         // Act & Assert
         CanAddMultipleAttributesTest(attributes);
@@ -395,9 +414,9 @@ public class RenderTreeBuilderTest
     {
         var attributes = new KeyValuePair<string, object>[]
         {
-                new KeyValuePair<string, object>("attribute1", "test1"),
-                new KeyValuePair<string, object>("attribute2", "123"),
-                new KeyValuePair<string, object>("attribute3", true),
+            new KeyValuePair<string, object>("attribute1", "test1"),
+            new KeyValuePair<string, object>("attribute2", "123"),
+            new KeyValuePair<string, object>("attribute3", true),
         };
 
         // Act & Assert
@@ -532,24 +551,26 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act
-        builder.OpenElement(10, "parent");                   //  0: <parent>
-        builder.OpenComponent<TestComponent>(11);            //  1:     <testcomponent
-        builder.AddAttribute(12, "child1attribute1", "A");   //  2:       child1attribute1="A"
-        builder.AddAttribute(13, "child1attribute2", "B");   //  3:       child1attribute2="B">
-        builder.CloseComponent();                            //         </testcomponent>
-        builder.OpenComponent<TestComponent>(14);            //  4:     <testcomponent
-        builder.AddAttribute(15, "child2attribute", "C");    //  5:       child2attribute="C">
-        builder.CloseComponent();                            //         </testcomponent>
-        builder.CloseElement();                              //     </parent>
+        builder.OpenElement(10, "parent"); //  0: <parent>
+        builder.OpenComponent<TestComponent>(11); //  1:     <testcomponent
+        builder.AddAttribute(12, "child1attribute1", "A"); //  2:       child1attribute1="A"
+        builder.AddAttribute(13, "child1attribute2", "B"); //  3:       child1attribute2="B">
+        builder.CloseComponent(); //         </testcomponent>
+        builder.OpenComponent<TestComponent>(14); //  4:     <testcomponent
+        builder.AddAttribute(15, "child2attribute", "C"); //  5:       child2attribute="C">
+        builder.CloseComponent(); //         </testcomponent>
+        builder.CloseElement(); //     </parent>
 
         // Assert
-        Assert.Collection(builder.GetFrames().AsEnumerable(),
+        Assert.Collection(
+            builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "parent", 6),
             frame => AssertFrame.Component<TestComponent>(frame),
             frame => AssertFrame.Attribute(frame, "child1attribute1", "A"),
             frame => AssertFrame.Attribute(frame, "child1attribute2", "B"),
             frame => AssertFrame.Component<TestComponent>(frame),
-            frame => AssertFrame.Attribute(frame, "child2attribute", "C"));
+            frame => AssertFrame.Attribute(frame, "child2attribute", "C")
+        );
     }
 
     [Fact]
@@ -560,24 +581,26 @@ public class RenderTreeBuilderTest
 
         // Act
         var componentType = typeof(TestComponent);
-        builder.OpenElement(10, "parent");                   //  0: <parent>
-        builder.OpenComponent(11, componentType);            //  1:     <testcomponent
-        builder.AddAttribute(12, "child1attribute1", "A");   //  2:       child1attribute1="A"
-        builder.AddAttribute(13, "child1attribute2", "B");   //  3:       child1attribute2="B">
-        builder.CloseComponent();                            //         </testcomponent>
-        builder.OpenComponent(14, componentType);            //  4:     <testcomponent
-        builder.AddAttribute(15, "child2attribute", "C");    //  5:       child2attribute="C">
-        builder.CloseComponent();                            //         </testcomponent>
-        builder.CloseElement();                              //     </parent>
+        builder.OpenElement(10, "parent"); //  0: <parent>
+        builder.OpenComponent(11, componentType); //  1:     <testcomponent
+        builder.AddAttribute(12, "child1attribute1", "A"); //  2:       child1attribute1="A"
+        builder.AddAttribute(13, "child1attribute2", "B"); //  3:       child1attribute2="B">
+        builder.CloseComponent(); //         </testcomponent>
+        builder.OpenComponent(14, componentType); //  4:     <testcomponent
+        builder.AddAttribute(15, "child2attribute", "C"); //  5:       child2attribute="C">
+        builder.CloseComponent(); //         </testcomponent>
+        builder.CloseElement(); //     </parent>
 
         // Assert
-        Assert.Collection(builder.GetFrames().AsEnumerable(),
+        Assert.Collection(
+            builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "parent", 6),
             frame => AssertFrame.Component<TestComponent>(frame),
             frame => AssertFrame.Attribute(frame, "child1attribute1", "A"),
             frame => AssertFrame.Attribute(frame, "child1attribute2", "B"),
             frame => AssertFrame.Component<TestComponent>(frame),
-            frame => AssertFrame.Attribute(frame, "child2attribute", "C"));
+            frame => AssertFrame.Attribute(frame, "child2attribute", "C")
+        );
     }
 
     [Fact]
@@ -587,25 +610,27 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act
-        builder.OpenElement(10, "parent");                      //  0: <parent>
-        builder.OpenRegion(11);                                 //  1:     [region
-        builder.AddContent(3, "Hello");                         //  2:         Hello
-        builder.OpenRegion(4);                                  //  3:         [region
-        builder.OpenElement(3, "another");                      //  4:             <another>
-        builder.CloseElement();                                 //                 </another>
-        builder.CloseRegion();                                  //             ]
-        builder.AddContent(6, "Goodbye");                       //  5:         Goodbye
-        builder.CloseRegion();                                  //         ]
-        builder.CloseElement();                                 //     </parent>
+        builder.OpenElement(10, "parent"); //  0: <parent>
+        builder.OpenRegion(11); //  1:     [region
+        builder.AddContent(3, "Hello"); //  2:         Hello
+        builder.OpenRegion(4); //  3:         [region
+        builder.OpenElement(3, "another"); //  4:             <another>
+        builder.CloseElement(); //                 </another>
+        builder.CloseRegion(); //             ]
+        builder.AddContent(6, "Goodbye"); //  5:         Goodbye
+        builder.CloseRegion(); //         ]
+        builder.CloseElement(); //     </parent>
 
         // Assert
-        Assert.Collection(builder.GetFrames().AsEnumerable(),
+        Assert.Collection(
+            builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "parent", 6, 10),
             frame => AssertFrame.Region(frame, 5, 11),
             frame => AssertFrame.Text(frame, "Hello", 3),
             frame => AssertFrame.Region(frame, 2, 4),
             frame => AssertFrame.Element(frame, "another", 1, 3),
-            frame => AssertFrame.Text(frame, "Goodbye", 6));
+            frame => AssertFrame.Text(frame, "Goodbye", 6)
+        );
     }
 
     [Fact]
@@ -627,12 +652,14 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(builder.GetFrames().AsEnumerable(),
+        Assert.Collection(
+            builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "parent", 5, 10),
             frame => AssertFrame.Region(frame, 4, 11),
             frame => AssertFrame.Text(frame, "Hello from the fragment", 0),
             frame => AssertFrame.Element(frame, "Fragment element", 2, 1),
-            frame => AssertFrame.Text(frame, "Some text", 2));
+            frame => AssertFrame.Text(frame, "Some text", 2)
+        );
     }
 
     [Fact]
@@ -643,18 +670,20 @@ public class RenderTreeBuilderTest
         Action<ElementReference> referenceCaptureAction = elementReference => { };
 
         // Act
-        builder.OpenElement(0, "myelement");                    //  0: <myelement
-        builder.AddAttribute(1, "attribute2", 123);             //  1:     attribute2=intExpression123>
+        builder.OpenElement(0, "myelement"); //  0: <myelement
+        builder.AddAttribute(1, "attribute2", 123); //  1:     attribute2=intExpression123>
         builder.AddElementReferenceCapture(2, referenceCaptureAction); //  2:     # capture: referenceCaptureAction
-        builder.AddContent(3, "some text");                     //  3:     some text
-        builder.CloseElement();                                 //     </myelement>
+        builder.AddContent(3, "some text"); //  3:     some text
+        builder.CloseElement(); //     </myelement>
 
         // Assert
-        Assert.Collection(builder.GetFrames().AsEnumerable(),
+        Assert.Collection(
+            builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "myelement", 4, 0),
             frame => AssertFrame.Attribute(frame, "attribute2", "123", 1),
             frame => AssertFrame.ElementReferenceCapture(frame, referenceCaptureAction, 2),
-            frame => AssertFrame.Text(frame, "some text", 3));
+            frame => AssertFrame.Text(frame, "some text", 3)
+        );
     }
 
     [Fact]
@@ -718,10 +747,12 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(builder.GetFrames().AsEnumerable(),
+        Assert.Collection(
+            builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "myelement", 3),
             frame => AssertFrame.ElementReferenceCapture(frame, referenceCaptureAction1),
-            frame => AssertFrame.ElementReferenceCapture(frame, referenceCaptureAction2));
+            frame => AssertFrame.ElementReferenceCapture(frame, referenceCaptureAction2)
+        );
     }
 
     [Fact]
@@ -732,18 +763,20 @@ public class RenderTreeBuilderTest
         Action<object> myAction = elementReference => { };
 
         // Act
-        builder.OpenComponent<TestComponent>(0);                //  0: <TestComponent
-        builder.AddAttribute(1, "attribute2", 123);             //  1:     attribute2=intExpression123>
-        builder.AddComponentReferenceCapture(2, myAction);      //  2:     # capture: myAction
-        builder.AddContent(3, "some text");                     //  3:     some text
-        builder.CloseComponent();                               //     </TestComponent>
+        builder.OpenComponent<TestComponent>(0); //  0: <TestComponent
+        builder.AddAttribute(1, "attribute2", 123); //  1:     attribute2=intExpression123>
+        builder.AddComponentReferenceCapture(2, myAction); //  2:     # capture: myAction
+        builder.AddContent(3, "some text"); //  3:     some text
+        builder.CloseComponent(); //     </TestComponent>
 
         // Assert
-        Assert.Collection(builder.GetFrames().AsEnumerable(),
+        Assert.Collection(
+            builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Component<TestComponent>(frame, 4, 0),
             frame => AssertFrame.Attribute(frame, "attribute2", 123, 1),
             frame => AssertFrame.ComponentReferenceCapture(frame, myAction, 2),
-            frame => AssertFrame.Text(frame, "some text", 3));
+            frame => AssertFrame.Text(frame, "some text", 3)
+        );
     }
 
     [Fact]
@@ -807,10 +840,12 @@ public class RenderTreeBuilderTest
         builder.CloseComponent();
 
         // Assert
-        Assert.Collection(builder.GetFrames().AsEnumerable(),
+        Assert.Collection(
+            builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Component<TestComponent>(frame, 3),
             frame => AssertFrame.ComponentReferenceCapture(frame, referenceCaptureAction1),
-            frame => AssertFrame.ComponentReferenceCapture(frame, referenceCaptureAction2));
+            frame => AssertFrame.ComponentReferenceCapture(frame, referenceCaptureAction2)
+        );
     }
 
     [Fact]
@@ -845,7 +880,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", true, 1));
+            frame => AssertFrame.Attribute(frame, "attr", true, 1)
+        );
     }
 
     [Fact]
@@ -862,7 +898,8 @@ public class RenderTreeBuilderTest
         // Assert
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0));
+            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        );
     }
 
     [Theory]
@@ -882,7 +919,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Component<TestComponent>(frame, 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", value, 1));
+            frame => AssertFrame.Attribute(frame, "attr", value, 1)
+        );
     }
 
     [Fact]
@@ -900,7 +938,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", "hi", 1));
+            frame => AssertFrame.Attribute(frame, "attr", "hi", 1)
+        );
     }
 
     [Fact]
@@ -917,7 +956,8 @@ public class RenderTreeBuilderTest
         // Assert
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0));
+            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        );
     }
 
     [Theory]
@@ -937,7 +977,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Component<TestComponent>(frame, 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", value, 1));
+            frame => AssertFrame.Attribute(frame, "attr", value, 1)
+        );
     }
 
     [Fact]
@@ -957,7 +998,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", value, 1));
+            frame => AssertFrame.Attribute(frame, "attr", value, 1)
+        );
     }
 
     [Fact]
@@ -974,7 +1016,8 @@ public class RenderTreeBuilderTest
         // Assert
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0));
+            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        );
     }
 
     [Fact]
@@ -994,7 +1037,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", value, 1));
+            frame => AssertFrame.Attribute(frame, "attr", value, 1)
+        );
     }
 
     [Fact]
@@ -1011,14 +1055,12 @@ public class RenderTreeBuilderTest
         // Assert
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0));
+            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        );
     }
 
-    public static TheoryData<Action<EventArgs>> EventHandlerValues => new TheoryData<Action<EventArgs>>
-        {
-            null,
-            (e) => { },
-        };
+    public static TheoryData<Action<EventArgs>> EventHandlerValues =>
+        new TheoryData<Action<EventArgs>> { null, (e) => { }, };
 
     [Theory]
     [MemberData(nameof(EventHandlerValues))]
@@ -1036,7 +1078,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Component<TestComponent>(frame, 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", value, 1));
+            frame => AssertFrame.Attribute(frame, "attr", value, 1)
+        );
     }
 
     [Fact]
@@ -1055,7 +1098,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", callback.Delegate, 1));
+            frame => AssertFrame.Attribute(frame, "attr", callback.Delegate, 1)
+        );
     }
 
     [Fact]
@@ -1073,7 +1117,8 @@ public class RenderTreeBuilderTest
         // Assert
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0));
+            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        );
     }
 
     [Fact]
@@ -1093,7 +1138,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", callback, 1));
+            frame => AssertFrame.Attribute(frame, "attr", callback, 1)
+        );
     }
 
     [Fact]
@@ -1113,7 +1159,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Component<TestComponent>(frame, 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", callback, 1));
+            frame => AssertFrame.Attribute(frame, "attr", callback, 1)
+        );
     }
 
     [Fact]
@@ -1132,7 +1179,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", callback.Delegate, 1));
+            frame => AssertFrame.Attribute(frame, "attr", callback.Delegate, 1)
+        );
     }
 
     [Fact]
@@ -1150,7 +1198,8 @@ public class RenderTreeBuilderTest
         // Assert
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0));
+            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        );
     }
 
     [Fact]
@@ -1170,7 +1219,14 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", new EventCallback(callback.Receiver, callback.Delegate), 1));
+            frame =>
+                AssertFrame.Attribute(
+                    frame,
+                    "attr",
+                    new EventCallback(callback.Receiver, callback.Delegate),
+                    1
+                )
+        );
     }
 
     [Fact]
@@ -1190,7 +1246,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Component<TestComponent>(frame, 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", callback, 1));
+            frame => AssertFrame.Attribute(frame, "attr", callback, 1)
+        );
     }
 
     [Fact]
@@ -1208,7 +1265,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", true, 1));
+            frame => AssertFrame.Attribute(frame, "attr", true, 1)
+        );
     }
 
     [Fact]
@@ -1225,7 +1283,8 @@ public class RenderTreeBuilderTest
         // Assert
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0));
+            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        );
     }
 
     [Theory]
@@ -1245,7 +1304,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Component<TestComponent>(frame, 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", value, 1));
+            frame => AssertFrame.Attribute(frame, "attr", value, 1)
+        );
     }
 
     [Fact]
@@ -1263,7 +1323,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", "hi", 1));
+            frame => AssertFrame.Attribute(frame, "attr", "hi", 1)
+        );
     }
 
     [Fact]
@@ -1281,7 +1342,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Component<TestComponent>(frame, 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", "hi", 1));
+            frame => AssertFrame.Attribute(frame, "attr", "hi", 1)
+        );
     }
 
     [Fact]
@@ -1301,7 +1363,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", value, 1));
+            frame => AssertFrame.Attribute(frame, "attr", value, 1)
+        );
     }
 
     [Fact]
@@ -1321,7 +1384,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Component<TestComponent>(frame, 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", value, 1));
+            frame => AssertFrame.Attribute(frame, "attr", value, 1)
+        );
     }
 
     [Fact]
@@ -1341,7 +1405,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", value, 1));
+            frame => AssertFrame.Attribute(frame, "attr", value, 1)
+        );
     }
 
     [Fact]
@@ -1361,7 +1426,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Component<TestComponent>(frame, 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", value, 1));
+            frame => AssertFrame.Attribute(frame, "attr", value, 1)
+        );
     }
 
     [Fact]
@@ -1380,7 +1446,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", callback.Delegate, 1));
+            frame => AssertFrame.Attribute(frame, "attr", callback.Delegate, 1)
+        );
     }
 
     [Fact]
@@ -1398,7 +1465,8 @@ public class RenderTreeBuilderTest
         // Assert
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0));
+            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        );
     }
 
     [Fact]
@@ -1418,7 +1486,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", callback, 1));
+            frame => AssertFrame.Attribute(frame, "attr", callback, 1)
+        );
     }
 
     [Fact]
@@ -1438,7 +1507,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Component<TestComponent>(frame, 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", callback, 1));
+            frame => AssertFrame.Attribute(frame, "attr", callback, 1)
+        );
     }
 
     [Fact]
@@ -1457,7 +1527,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", callback.Delegate, 1));
+            frame => AssertFrame.Attribute(frame, "attr", callback.Delegate, 1)
+        );
     }
 
     [Fact]
@@ -1475,7 +1546,8 @@ public class RenderTreeBuilderTest
         // Assert
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0));
+            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        );
     }
 
     [Fact]
@@ -1495,7 +1567,14 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "attr", new EventCallback(callback.Receiver, callback.Delegate), 1));
+            frame =>
+                AssertFrame.Attribute(
+                    frame,
+                    "attr",
+                    new EventCallback(callback.Receiver, callback.Delegate),
+                    1
+                )
+        );
     }
 
     [Fact]
@@ -1512,7 +1591,8 @@ public class RenderTreeBuilderTest
         // Assert
         Assert.Collection(
             builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0));
+            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        );
     }
 
     [Fact]
@@ -1538,7 +1618,8 @@ public class RenderTreeBuilderTest
                 Assert.Same(keyValue, frame.ElementKey);
             },
             frame => AssertFrame.Attribute(frame, "attribute before", "before value", 1),
-            frame => AssertFrame.Attribute(frame, "attribute after", "after value", 2));
+            frame => AssertFrame.Attribute(frame, "attribute after", "after value", 2)
+        );
     }
 
     [Fact]
@@ -1564,7 +1645,8 @@ public class RenderTreeBuilderTest
                 Assert.Same(keyValue, frame.ComponentKey);
             },
             frame => AssertFrame.Attribute(frame, "param before", 123, 1),
-            frame => AssertFrame.Attribute(frame, "param after", 456, 2));
+            frame => AssertFrame.Attribute(frame, "param after", 456, 2)
+        );
     }
 
     [Fact]
@@ -1594,7 +1676,10 @@ public class RenderTreeBuilderTest
         {
             builder.SetKey(new object());
         });
-        Assert.Equal($"Cannot set a key on a frame of type {RenderTreeFrameType.Region}.", ex.Message);
+        Assert.Equal(
+            $"Cannot set a key on a frame of type {RenderTreeFrameType.Region}.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -1615,7 +1700,8 @@ public class RenderTreeBuilderTest
             {
                 AssertFrame.Element(frame, "elem", 1, 0);
                 Assert.Null(frame.ElementKey);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -1636,7 +1722,8 @@ public class RenderTreeBuilderTest
             {
                 AssertFrame.Component<TestComponent>(frame, 1, 0);
                 Assert.Null(frame.ComponentKey);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -1657,7 +1744,8 @@ public class RenderTreeBuilderTest
             frames,
             f => AssertFrame.Element(f, "div", 3, 0),
             f => AssertFrame.Attribute(f, "id", "hi"),
-            f => AssertFrame.Attribute(f, "id", "bye"));
+            f => AssertFrame.Attribute(f, "id", "bye")
+        );
     }
 
     [Fact]
@@ -1669,10 +1757,10 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
         builder.OpenElement(0, "div");
         builder.AddAttribute(0, "id", "hi");
-        builder.AddMultipleAttributes(0, new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "id", "bye" },
-            });
+        builder.AddMultipleAttributes(
+            0,
+            new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) { { "id", "bye" }, }
+        );
         builder.AddElementReferenceCapture(0, capture);
         builder.CloseElement();
 
@@ -1684,7 +1772,8 @@ public class RenderTreeBuilderTest
             frames,
             f => AssertFrame.Element(f, "div", 3, 0),
             f => AssertFrame.Attribute(f, "id", "bye"),
-            f => AssertFrame.ElementReferenceCapture(f, capture));
+            f => AssertFrame.ElementReferenceCapture(f, capture)
+        );
     }
 
     [Fact]
@@ -1694,10 +1783,10 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
         builder.OpenElement(0, "div");
         builder.AddAttribute(0, "id", "hi");
-        builder.AddMultipleAttributes(0, new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "id", "bye" },
-            });
+        builder.AddMultipleAttributes(
+            0,
+            new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) { { "id", "bye" }, }
+        );
         builder.AddContent(0, "hey");
         builder.CloseElement();
 
@@ -1709,7 +1798,8 @@ public class RenderTreeBuilderTest
             frames,
             f => AssertFrame.Element(f, "div", 3, 0),
             f => AssertFrame.Attribute(f, "id", "bye"),
-            f => AssertFrame.Text(f, "hey"));
+            f => AssertFrame.Text(f, "hey")
+        );
     }
 
     [Fact]
@@ -1719,10 +1809,10 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
         builder.OpenElement(0, "div");
         builder.AddAttribute(0, "id", "hi");
-        builder.AddMultipleAttributes(0, new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "id", "bye" },
-            });
+        builder.AddMultipleAttributes(
+            0,
+            new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) { { "id", "bye" }, }
+        );
         builder.CloseElement();
 
         // Act
@@ -1732,7 +1822,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             frames,
             f => AssertFrame.Element(f, "div", 2, 0),
-            f => AssertFrame.Attribute(f, "id", "bye"));
+            f => AssertFrame.Attribute(f, "id", "bye")
+        );
     }
 
     [Fact]
@@ -1742,10 +1833,10 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
         builder.OpenComponent<TestComponent>(0);
         builder.AddAttribute(0, "id", "hi");
-        builder.AddMultipleAttributes(0, new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "id", "bye" },
-            });
+        builder.AddMultipleAttributes(
+            0,
+            new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) { { "id", "bye" }, }
+        );
         builder.CloseComponent();
 
         // Act
@@ -1755,7 +1846,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             frames,
             f => AssertFrame.Component<TestComponent>(f, 2, 0),
-            f => AssertFrame.Attribute(f, "id", "bye"));
+            f => AssertFrame.Attribute(f, "id", "bye")
+        );
     }
 
     // This covers a special case we have to handle explicitly in the RTB logic.
@@ -1766,10 +1858,10 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
         builder.OpenComponent<TestComponent>(0);
         builder.AddAttribute(0, "id", (string)null);
-        builder.AddMultipleAttributes(0, new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "id", "bye" },
-            });
+        builder.AddMultipleAttributes(
+            0,
+            new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) { { "id", "bye" }, }
+        );
         builder.CloseComponent();
 
         // Act
@@ -1779,7 +1871,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             frames,
             f => AssertFrame.Component<TestComponent>(f, 2, 0),
-            f => AssertFrame.Attribute(f, "id", "bye"));
+            f => AssertFrame.Attribute(f, "id", "bye")
+        );
     }
 
     [Fact]
@@ -1789,10 +1882,10 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
         builder.OpenElement(0, "div");
         builder.AddAttribute(0, "id", "hi");
-        builder.AddMultipleAttributes(0, new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "id", "bye" },
-            });
+        builder.AddMultipleAttributes(
+            0,
+            new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) { { "id", "bye" }, }
+        );
         builder.OpenElement(0, "strong");
         builder.AddAttribute(0, "id", "hi");
         builder.AddAttribute(0, "id", "bye");
@@ -1809,7 +1902,8 @@ public class RenderTreeBuilderTest
             f => AssertFrame.Attribute(f, "id", "bye"),
             f => AssertFrame.Element(f, "strong", 3),
             f => AssertFrame.Attribute(f, "id", "hi"),
-            f => AssertFrame.Attribute(f, "id", "bye"));
+            f => AssertFrame.Attribute(f, "id", "bye")
+        );
     }
 
     [Fact]
@@ -1820,20 +1914,26 @@ public class RenderTreeBuilderTest
         builder.OpenElement(0, "div");
         builder.AddAttribute(0, "A", "hi");
         builder.AddAttribute(0, "2", new EventCallback(null, (Action)(() => { })));
-        builder.AddMultipleAttributes(0, new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+        builder.AddMultipleAttributes(
+            0,
+            new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
             {
                 { "a", null }, // Replace with null value (case-insensitive)
                 { "2", false }, // Replace with 'false'
                 { "3", "hey there" }, // Add a new value
-            });
+            }
+        );
         builder.AddAttribute(0, "3", "see ya"); // Overwrite value added by splat
         builder.AddAttribute(0, "4", false); // Add a false value
         builder.AddAttribute(0, "5", "another one");
-        builder.AddMultipleAttributes(0, new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+        builder.AddMultipleAttributes(
+            0,
+            new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
             {
                 { "5", null }, // overwrite value with null
-                { "6", new EventCallback(null, (Action)(() =>{ })) },
-            });
+                { "6", new EventCallback(null, (Action)(() => { })) },
+            }
+        );
         builder.AddAttribute(0, "6", default(EventCallback<string>)); // Replace with a 'silent' EventCallback<string>
         builder.CloseElement();
 
@@ -1844,7 +1944,8 @@ public class RenderTreeBuilderTest
         Assert.Collection(
             frames,
             f => AssertFrame.Element(f, "div", 2, 0),
-            f => AssertFrame.Attribute(f, "3", "see ya"));
+            f => AssertFrame.Attribute(f, "3", "see ya")
+        );
     }
 
     [Fact]
@@ -1876,8 +1977,13 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => builder.AssertTreeIsValid(component));
-        Assert.StartsWith($"Render output is invalid for component of type '{typeof(TestComponent).FullName}'. A frame of type 'Element' was left unclosed.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => builder.AssertTreeIsValid(component)
+        );
+        Assert.StartsWith(
+            $"Render output is invalid for component of type '{typeof(TestComponent).FullName}'. A frame of type 'Element' was left unclosed.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -1891,8 +1997,13 @@ public class RenderTreeBuilderTest
         builder.CloseComponent();
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => builder.AssertTreeIsValid(component));
-        Assert.StartsWith($"Render output is invalid for component of type '{typeof(TestComponent).FullName}'. A frame of type 'Component' was left unclosed.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => builder.AssertTreeIsValid(component)
+        );
+        Assert.StartsWith(
+            $"Render output is invalid for component of type '{typeof(TestComponent).FullName}'. A frame of type 'Component' was left unclosed.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -1906,34 +2017,35 @@ public class RenderTreeBuilderTest
         builder.CloseRegion();
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => builder.AssertTreeIsValid(component));
-        Assert.StartsWith($"Render output is invalid for component of type '{typeof(TestComponent).FullName}'. A frame of type 'Region' was left unclosed.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => builder.AssertTreeIsValid(component)
+        );
+        Assert.StartsWith(
+            $"Render output is invalid for component of type '{typeof(TestComponent).FullName}'. A frame of type 'Region' was left unclosed.",
+            ex.Message
+        );
     }
 
     private class TestComponent : IComponent
     {
         public void Attach(RenderHandle renderHandle) { }
 
-        public Task SetParametersAsync(ParameterView parameters)
-            => throw new NotImplementedException();
+        public Task SetParametersAsync(ParameterView parameters) =>
+            throw new NotImplementedException();
     }
 
-    private class OtherComponent : TestComponent
-    {
-    }
+    private class OtherComponent : TestComponent { }
 
     private class TestRenderer : Renderer
     {
-        public TestRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance)
-        {
-        }
+        public TestRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 
-        protected override void HandleException(Exception exception)
-            => throw new NotImplementedException();
+        protected override void HandleException(Exception exception) =>
+            throw new NotImplementedException();
 
-        protected override Task UpdateDisplayAsync(in RenderBatch renderBatch)
-            => throw new NotImplementedException();
+        protected override Task UpdateDisplayAsync(in RenderBatch renderBatch) =>
+            throw new NotImplementedException();
     }
 }

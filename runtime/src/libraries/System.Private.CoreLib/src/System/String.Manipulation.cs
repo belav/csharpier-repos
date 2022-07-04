@@ -30,11 +30,11 @@ namespace System
             Buffer.Memmove(
                 destination: ref Unsafe.Add(ref dest._firstChar, destPos),
                 source: ref src._firstChar,
-                elementCount: (uint)src.Length);
+                elementCount: (uint)src.Length
+            );
         }
 
-        public static string Concat(object? arg0) =>
-            arg0?.ToString() ?? Empty;
+        public static string Concat(object? arg0) => arg0?.ToString() ?? Empty;
 
         public static string Concat(object? arg0, object? arg1) =>
             Concat(arg0?.ToString(), arg1?.ToString());
@@ -48,9 +48,7 @@ namespace System
 
             if (args.Length <= 1)
             {
-                return args.Length == 0 ?
-                    string.Empty :
-                    args[0]?.ToString() ?? string.Empty;
+                return args.Length == 0 ? string.Empty : args[0]?.ToString() ?? string.Empty;
             }
 
             // We need to get an intermediary string array
@@ -95,7 +93,10 @@ namespace System
                 string s = strings[i];
 
                 Debug.Assert(s != null);
-                Debug.Assert(position <= totalLength - s.Length, "We didn't allocate enough space for the result string!");
+                Debug.Assert(
+                    position <= totalLength - s.Length,
+                    "We didn't allocate enough space for the result string!"
+                );
 
                 FillStringChecked(result, position, s);
                 position += s.Length;
@@ -137,8 +138,7 @@ namespace System
                     {
                         c = en.Current;
                         result.Append(c);
-                    }
-                    while (en.MoveNext());
+                    } while (en.MoveNext());
                     return result.ToString();
                 }
             }
@@ -179,8 +179,7 @@ namespace System
                         {
                             result.Append(currentValue.ToString());
                         }
-                    }
-                    while (en.MoveNext());
+                    } while (en.MoveNext());
 
                     return result.ToString();
                 }
@@ -210,8 +209,7 @@ namespace System
                 do
                 {
                     result.Append(en.Current);
-                }
-                while (en.MoveNext());
+                } while (en.MoveNext());
 
                 return result.ToString();
             }
@@ -320,7 +318,11 @@ namespace System
             return result;
         }
 
-        public static string Concat(ReadOnlySpan<char> str0, ReadOnlySpan<char> str1, ReadOnlySpan<char> str2)
+        public static string Concat(
+            ReadOnlySpan<char> str0,
+            ReadOnlySpan<char> str1,
+            ReadOnlySpan<char> str2
+        )
         {
             int length = checked(str0.Length + str1.Length + str2.Length);
             if (length == 0)
@@ -342,7 +344,12 @@ namespace System
             return result;
         }
 
-        public static string Concat(ReadOnlySpan<char> str0, ReadOnlySpan<char> str1, ReadOnlySpan<char> str2, ReadOnlySpan<char> str3)
+        public static string Concat(
+            ReadOnlySpan<char> str0,
+            ReadOnlySpan<char> str1,
+            ReadOnlySpan<char> str2,
+            ReadOnlySpan<char> str3
+        )
         {
             int length = checked(str0.Length + str1.Length + str2.Length + str3.Length);
             if (length == 0)
@@ -373,9 +380,7 @@ namespace System
 
             if (values.Length <= 1)
             {
-                return values.Length == 0 ?
-                    string.Empty :
-                    values[0] ?? string.Empty;
+                return values.Length == 0 ? string.Empty : values[0] ?? string.Empty;
             }
 
             // It's possible that the input values array could be changed concurrently on another
@@ -434,22 +439,37 @@ namespace System
             return copiedLength == totalLength ? result : Concat((string?[])values.Clone());
         }
 
-        public static string Format([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0)
+        public static string Format(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0
+        )
         {
             return FormatHelper(null, format, new ParamsArray(arg0));
         }
 
-        public static string Format([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1)
+        public static string Format(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1
+        )
         {
             return FormatHelper(null, format, new ParamsArray(arg0, arg1));
         }
 
-        public static string Format([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1, object? arg2)
+        public static string Format(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1,
+            object? arg2
+        )
         {
             return FormatHelper(null, format, new ParamsArray(arg0, arg1, arg2));
         }
 
-        public static string Format([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] args)
+        public static string Format(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            params object?[] args
+        )
         {
             if (args is null)
             {
@@ -461,22 +481,41 @@ namespace System
             return FormatHelper(null, format, new ParamsArray(args));
         }
 
-        public static string Format(IFormatProvider? provider, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0)
+        public static string Format(
+            IFormatProvider? provider,
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0
+        )
         {
             return FormatHelper(provider, format, new ParamsArray(arg0));
         }
 
-        public static string Format(IFormatProvider? provider, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1)
+        public static string Format(
+            IFormatProvider? provider,
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1
+        )
         {
             return FormatHelper(provider, format, new ParamsArray(arg0, arg1));
         }
 
-        public static string Format(IFormatProvider? provider, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1, object? arg2)
+        public static string Format(
+            IFormatProvider? provider,
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1,
+            object? arg2
+        )
         {
             return FormatHelper(provider, format, new ParamsArray(arg0, arg1, arg2));
         }
 
-        public static string Format(IFormatProvider? provider, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] args)
+        public static string Format(
+            IFormatProvider? provider,
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            params object?[] args
+        )
         {
             if (args is null)
             {
@@ -488,7 +527,11 @@ namespace System
             return FormatHelper(provider, format, new ParamsArray(args));
         }
 
-        private static string FormatHelper(IFormatProvider? provider, string format, ParamsArray args)
+        private static string FormatHelper(
+            IFormatProvider? provider,
+            string format,
+            ParamsArray args
+        )
         {
             ArgumentNullException.ThrowIfNull(format);
 
@@ -518,8 +561,16 @@ namespace System
             string result = FastAllocateString(newLength);
 
             Buffer.Memmove(ref result._firstChar, ref _firstChar, (nuint)startIndex);
-            Buffer.Memmove(ref Unsafe.Add(ref result._firstChar, startIndex), ref value._firstChar, (nuint)insertLength);
-            Buffer.Memmove(ref Unsafe.Add(ref result._firstChar, startIndex + insertLength), ref Unsafe.Add(ref _firstChar, startIndex), (nuint)(oldLength - startIndex));
+            Buffer.Memmove(
+                ref Unsafe.Add(ref result._firstChar, startIndex),
+                ref value._firstChar,
+                (nuint)insertLength
+            );
+            Buffer.Memmove(
+                ref Unsafe.Add(ref result._firstChar, startIndex + insertLength),
+                ref Unsafe.Add(ref _firstChar, startIndex),
+                (nuint)(oldLength - startIndex)
+            );
 
             return result;
         }
@@ -550,21 +601,35 @@ namespace System
         public static string Join(string? separator, string?[] value, int startIndex, int count) =>
             JoinCore(separator.AsSpan(), value, startIndex, count);
 
-        private static string JoinCore(ReadOnlySpan<char> separator, string?[] value, int startIndex, int count)
+        private static string JoinCore(
+            ReadOnlySpan<char> separator,
+            string?[] value,
+            int startIndex,
+            int count
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
 
             if (startIndex < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_StartIndex);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.ArgumentOutOfRange_StartIndex
+                );
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NegativeCount);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NegativeCount
+                );
             }
             if (startIndex > value.Length - count)
             {
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
             }
 
             return JoinCore(separator, new ReadOnlySpan<string?>(value, startIndex, count));
@@ -611,8 +676,7 @@ namespace System
                 {
                     result.Append(separator);
                     result.Append(en.Current);
-                }
-                while (en.MoveNext());
+                } while (en.MoveNext());
 
                 return result.ToString();
             }
@@ -724,8 +788,7 @@ namespace System
                     {
                         result.Append(currentValue.ToString());
                     }
-                }
-                while (en.MoveNext());
+                } while (en.MoveNext());
 
                 return result.ToString();
             }
@@ -735,9 +798,7 @@ namespace System
         {
             if (values.Length <= 1)
             {
-                return values.IsEmpty ?
-                    Empty :
-                    values[0] ?? Empty;
+                return values.IsEmpty ? Empty : values[0] ?? Empty;
             }
 
             long totalSeparatorsLength = (long)(values.Length - 1) * separator.Length;
@@ -811,9 +872,9 @@ namespace System
             // something changed concurrently to mutate the input array: fall back to
             // doing the concatenation again, but this time with a defensive copy. This
             // fall back should be extremely rare.
-            return copiedLength == totalLength ?
-                result :
-                JoinCore(separator, values.ToArray().AsSpan());
+            return copiedLength == totalLength
+                ? result
+                : JoinCore(separator, values.ToArray().AsSpan());
         }
 
         public string PadLeft(int totalWidth) => PadLeft(totalWidth, ' ');
@@ -821,7 +882,10 @@ namespace System
         public string PadLeft(int totalWidth, char paddingChar)
         {
             if (totalWidth < 0)
-                throw new ArgumentOutOfRangeException(nameof(totalWidth), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(totalWidth),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             int oldLength = Length;
             int count = totalWidth - oldLength;
             if (count <= 0)
@@ -830,7 +894,11 @@ namespace System
             string result = FastAllocateString(totalWidth);
 
             new Span<char>(ref result._firstChar, count).Fill(paddingChar);
-            Buffer.Memmove(ref Unsafe.Add(ref result._firstChar, count), ref _firstChar, (nuint)oldLength);
+            Buffer.Memmove(
+                ref Unsafe.Add(ref result._firstChar, count),
+                ref _firstChar,
+                (nuint)oldLength
+            );
 
             return result;
         }
@@ -840,7 +908,10 @@ namespace System
         public string PadRight(int totalWidth, char paddingChar)
         {
             if (totalWidth < 0)
-                throw new ArgumentOutOfRangeException(nameof(totalWidth), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(totalWidth),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             int oldLength = Length;
             int count = totalWidth - oldLength;
             if (count <= 0)
@@ -849,7 +920,9 @@ namespace System
             string result = FastAllocateString(totalWidth);
 
             Buffer.Memmove(ref result._firstChar, ref _firstChar, (nuint)oldLength);
-            new Span<char>(ref Unsafe.Add(ref result._firstChar, oldLength), count).Fill(paddingChar);
+            new Span<char>(ref Unsafe.Add(ref result._firstChar, oldLength), count).Fill(
+                paddingChar
+            );
 
             return result;
         }
@@ -857,12 +930,21 @@ namespace System
         public string Remove(int startIndex, int count)
         {
             if (startIndex < 0)
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_StartIndex);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.ArgumentOutOfRange_StartIndex
+                );
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NegativeCount);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NegativeCount
+                );
             int oldLength = this.Length;
             if (count > oldLength - startIndex)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_IndexCount);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_IndexCount
+                );
 
             if (count == 0)
                 return this;
@@ -873,7 +955,11 @@ namespace System
             string result = FastAllocateString(newLength);
 
             Buffer.Memmove(ref result._firstChar, ref _firstChar, (nuint)startIndex);
-            Buffer.Memmove(ref Unsafe.Add(ref result._firstChar, startIndex), ref Unsafe.Add(ref _firstChar, startIndex + count), (nuint)(newLength - startIndex));
+            Buffer.Memmove(
+                ref Unsafe.Add(ref result._firstChar, startIndex),
+                ref Unsafe.Add(ref _firstChar, startIndex + count),
+                (nuint)(newLength - startIndex)
+            );
 
             return result;
         }
@@ -882,14 +968,29 @@ namespace System
         public string Remove(int startIndex)
         {
             if ((uint)startIndex > Length)
-                throw new ArgumentOutOfRangeException(nameof(startIndex), startIndex < 0 ? SR.ArgumentOutOfRange_StartIndex : SR.ArgumentOutOfRange_StartIndexLargerThanLength);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    startIndex < 0
+                        ? SR.ArgumentOutOfRange_StartIndex
+                        : SR.ArgumentOutOfRange_StartIndexLargerThanLength
+                );
 
             return Substring(0, startIndex);
         }
 
-        public string Replace(string oldValue, string? newValue, bool ignoreCase, CultureInfo? culture)
+        public string Replace(
+            string oldValue,
+            string? newValue,
+            bool ignoreCase,
+            CultureInfo? culture
+        )
         {
-            return ReplaceCore(oldValue, newValue, culture?.CompareInfo, ignoreCase ? CompareOptions.IgnoreCase : CompareOptions.None);
+            return ReplaceCore(
+                oldValue,
+                newValue,
+                culture?.CompareInfo,
+                ignoreCase ? CompareOptions.IgnoreCase : CompareOptions.None
+            );
         }
 
         public string Replace(string oldValue, string? newValue, StringComparison comparisonType)
@@ -898,24 +999,47 @@ namespace System
             {
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
-                    return ReplaceCore(oldValue, newValue, CultureInfo.CurrentCulture.CompareInfo, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return ReplaceCore(
+                        oldValue,
+                        newValue,
+                        CultureInfo.CurrentCulture.CompareInfo,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
-                    return ReplaceCore(oldValue, newValue, CompareInfo.Invariant, GetCaseCompareOfComparisonCulture(comparisonType));
+                    return ReplaceCore(
+                        oldValue,
+                        newValue,
+                        CompareInfo.Invariant,
+                        GetCaseCompareOfComparisonCulture(comparisonType)
+                    );
 
                 case StringComparison.Ordinal:
                     return Replace(oldValue, newValue);
 
                 case StringComparison.OrdinalIgnoreCase:
-                    return ReplaceCore(oldValue, newValue, CompareInfo.Invariant, CompareOptions.OrdinalIgnoreCase);
+                    return ReplaceCore(
+                        oldValue,
+                        newValue,
+                        CompareInfo.Invariant,
+                        CompareOptions.OrdinalIgnoreCase
+                    );
 
                 default:
-                    throw new ArgumentException(SR.NotSupported_StringComparison, nameof(comparisonType));
+                    throw new ArgumentException(
+                        SR.NotSupported_StringComparison,
+                        nameof(comparisonType)
+                    );
             }
         }
 
-        private string ReplaceCore(string oldValue, string? newValue, CompareInfo? ci, CompareOptions options)
+        private string ReplaceCore(
+            string oldValue,
+            string? newValue,
+            CompareInfo? ci,
+            CompareOptions options
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(oldValue);
 
@@ -925,11 +1049,22 @@ namespace System
             // If inner ReplaceCore method returns null, it means no substitutions were
             // performed, so as an optimization we'll return the original string.
 
-            return ReplaceCore(this, oldValue.AsSpan(), newValue.AsSpan(), ci ?? CultureInfo.CurrentCulture.CompareInfo, options)
-                ?? this;
+            return ReplaceCore(
+                    this,
+                    oldValue.AsSpan(),
+                    newValue.AsSpan(),
+                    ci ?? CultureInfo.CurrentCulture.CompareInfo,
+                    options
+                ) ?? this;
         }
 
-        private static string? ReplaceCore(ReadOnlySpan<char> searchSpace, ReadOnlySpan<char> oldValue, ReadOnlySpan<char> newValue, CompareInfo compareInfo, CompareOptions options)
+        private static string? ReplaceCore(
+            ReadOnlySpan<char> searchSpace,
+            ReadOnlySpan<char> oldValue,
+            ReadOnlySpan<char> newValue,
+            CompareInfo compareInfo,
+            CompareOptions options
+        )
         {
             Debug.Assert(!oldValue.IsEmpty);
             Debug.Assert(compareInfo != null);
@@ -941,7 +1076,12 @@ namespace System
 
             while (true)
             {
-                int index = compareInfo.IndexOf(searchSpace, oldValue, options, out int matchLength);
+                int index = compareInfo.IndexOf(
+                    searchSpace,
+                    oldValue,
+                    options,
+                    out int matchLength
+                );
 
                 // There's the possibility that 'oldValue' has zero collation weight (empty string equivalent).
                 // If this is the case, we behave as if there are no more substitutions to be made.
@@ -1002,8 +1142,14 @@ namespace System
             }
 
             // Copy the remaining characters, doing the replacement as we go.
-            ref ushort pSrc = ref Unsafe.Add(ref Unsafe.As<char, ushort>(ref _firstChar), copyLength);
-            ref ushort pDst = ref Unsafe.Add(ref Unsafe.As<char, ushort>(ref result._firstChar), copyLength);
+            ref ushort pSrc = ref Unsafe.Add(
+                ref Unsafe.As<char, ushort>(ref _firstChar),
+                copyLength
+            );
+            ref ushort pDst = ref Unsafe.Add(
+                ref Unsafe.As<char, ushort>(ref result._firstChar),
+                copyLength
+            );
 
             if (Vector.IsHardwareAccelerated && remainingLength >= Vector<ushort>.Count)
             {
@@ -1012,7 +1158,9 @@ namespace System
 
                 do
                 {
-                    Vector<ushort> original = Unsafe.ReadUnaligned<Vector<ushort>>(ref Unsafe.As<ushort, byte>(ref pSrc));
+                    Vector<ushort> original = Unsafe.ReadUnaligned<Vector<ushort>>(
+                        ref Unsafe.As<ushort, byte>(ref pSrc)
+                    );
                     Vector<ushort> equals = Vector.Equals(original, oldChars);
                     Vector<ushort> results = Vector.ConditionalSelect(equals, newChars, original);
                     Unsafe.WriteUnaligned(ref Unsafe.As<ushort, byte>(ref pDst), results);
@@ -1020,8 +1168,7 @@ namespace System
                     pSrc = ref Unsafe.Add(ref pSrc, Vector<ushort>.Count);
                     pDst = ref Unsafe.Add(ref pDst, Vector<ushort>.Count);
                     remainingLength -= Vector<ushort>.Count;
-                }
-                while (remainingLength >= Vector<ushort>.Count);
+                } while (remainingLength >= Vector<ushort>.Count);
             }
 
             for (; remainingLength > 0; remainingLength--)
@@ -1044,7 +1191,9 @@ namespace System
             newValue ??= Empty;
 
             // Track the locations of oldValue to be replaced.
-            var replacementIndices = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+            var replacementIndices = new ValueListBuilder<int>(
+                stackalloc int[StackallocIntBufferSizeLimit]
+            );
 
             if (oldValue.Length == 1)
             {
@@ -1078,7 +1227,12 @@ namespace System
                 int i = 0;
                 while (true)
                 {
-                    int pos = SpanHelpers.IndexOf(ref Unsafe.Add(ref _firstChar, i), Length - i, ref oldValue._firstChar, oldValue.Length);
+                    int pos = SpanHelpers.IndexOf(
+                        ref Unsafe.Add(ref _firstChar, i),
+                        Length - i,
+                        ref oldValue._firstChar,
+                        oldValue.Length
+                    );
                     if (pos < 0)
                     {
                         break;
@@ -1107,7 +1261,8 @@ namespace System
         {
             Debug.Assert(indices.Length > 0);
 
-            long dstLength = this.Length + ((long)(newValue.Length - oldValueLength)) * indices.Length;
+            long dstLength =
+                this.Length + ((long)(newValue.Length - oldValueLength)) * indices.Length;
             if (dstLength > int.MaxValue)
                 throw new OutOfMemoryException();
             string dst = FastAllocateString((int)dstLength);
@@ -1219,7 +1374,10 @@ namespace System
             while (true)
             {
                 int idx = IndexOfNewlineChar(remaining, out stride);
-                if (idx < 0) { break; } // no more newline chars
+                if (idx < 0)
+                {
+                    break;
+                } // no more newline chars
                 builder.Append(replacementText);
                 builder.Append(remaining.Slice(0, idx));
                 remaining = remaining.Slice(idx + stride);
@@ -1277,7 +1435,11 @@ namespace System
             return SplitInternal(new ReadOnlySpan<char>(in separator), int.MaxValue, options);
         }
 
-        public string[] Split(char separator, int count, StringSplitOptions options = StringSplitOptions.None)
+        public string[] Split(
+            char separator,
+            int count,
+            StringSplitOptions options = StringSplitOptions.None
+        )
         {
             return SplitInternal(new ReadOnlySpan<char>(in separator), count, options);
         }
@@ -1322,15 +1484,21 @@ namespace System
             return SplitInternal(separator, count, options);
         }
 
-        private string[] SplitInternal(ReadOnlySpan<char> separators, int count, StringSplitOptions options)
+        private string[] SplitInternal(
+            ReadOnlySpan<char> separators,
+            int count,
+            StringSplitOptions options
+        )
         {
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count),
-                    SR.ArgumentOutOfRange_NegativeCount);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NegativeCount
+                );
 
             CheckStringSplitOptions(options);
 
-        ShortCircuit:
+            ShortCircuit:
             if (count <= 1 || Length == 0)
             {
                 // Per the method's documentation, we'll short-circuit the search for separators.
@@ -1341,7 +1509,10 @@ namespace System
                 {
                     candidate = candidate.Trim();
                 }
-                if (((options & StringSplitOptions.RemoveEmptyEntries) != 0) && (candidate.Length == 0))
+                if (
+                    ((options & StringSplitOptions.RemoveEmptyEntries) != 0)
+                    && (candidate.Length == 0)
+                )
                 {
                     count = 0;
                 }
@@ -1354,7 +1525,9 @@ namespace System
                 options &= ~StringSplitOptions.TrimEntries;
             }
 
-            var sepListBuilder = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+            var sepListBuilder = new ValueListBuilder<int>(
+                stackalloc int[StackallocIntBufferSizeLimit]
+            );
 
             MakeSeparatorList(separators, ref sepListBuilder);
             ReadOnlySpan<int> sepList = sepListBuilder.AsSpan();
@@ -1366,21 +1539,29 @@ namespace System
                 goto ShortCircuit;
             }
 
-            string[] result = (options != StringSplitOptions.None)
-                ? SplitWithPostProcessing(sepList, default, 1, count, options)
-                : SplitWithoutPostProcessing(sepList, default, 1, count);
+            string[] result =
+                (options != StringSplitOptions.None)
+                    ? SplitWithPostProcessing(sepList, default, 1, count, options)
+                    : SplitWithoutPostProcessing(sepList, default, 1, count);
 
             sepListBuilder.Dispose();
 
             return result;
         }
 
-        public string[] Split(string? separator, StringSplitOptions options = StringSplitOptions.None)
+        public string[] Split(
+            string? separator,
+            StringSplitOptions options = StringSplitOptions.None
+        )
         {
             return SplitInternal(separator ?? string.Empty, null, int.MaxValue, options);
         }
 
-        public string[] Split(string? separator, int count, StringSplitOptions options = StringSplitOptions.None)
+        public string[] Split(
+            string? separator,
+            int count,
+            StringSplitOptions options = StringSplitOptions.None
+        )
         {
             return SplitInternal(separator ?? string.Empty, null, count, options);
         }
@@ -1395,12 +1576,19 @@ namespace System
             return SplitInternal(null, separator, count, options);
         }
 
-        private string[] SplitInternal(string? separator, string?[]? separators, int count, StringSplitOptions options)
+        private string[] SplitInternal(
+            string? separator,
+            string?[]? separators,
+            int count,
+            StringSplitOptions options
+        )
         {
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count),
-                    SR.ArgumentOutOfRange_NegativeCount);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NegativeCount
+                );
             }
 
             CheckStringSplitOptions(options);
@@ -1413,7 +1601,7 @@ namespace System
                 return SplitInternal(default(ReadOnlySpan<char>), count, options);
             }
 
-        ShortCircuit:
+            ShortCircuit:
             if (count <= 1 || Length == 0)
             {
                 // Per the method's documentation, we'll short-circuit the search for separators.
@@ -1424,7 +1612,10 @@ namespace System
                 {
                     candidate = candidate.Trim();
                 }
-                if (((options & StringSplitOptions.RemoveEmptyEntries) != 0) && (candidate.Length == 0))
+                if (
+                    ((options & StringSplitOptions.RemoveEmptyEntries) != 0)
+                    && (candidate.Length == 0)
+                )
                 {
                     count = 0;
                 }
@@ -1444,8 +1635,12 @@ namespace System
                 }
             }
 
-            var sepListBuilder = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
-            var lengthListBuilder = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+            var sepListBuilder = new ValueListBuilder<int>(
+                stackalloc int[StackallocIntBufferSizeLimit]
+            );
+            var lengthListBuilder = new ValueListBuilder<int>(
+                stackalloc int[StackallocIntBufferSizeLimit]
+            );
 
             MakeSeparatorList(separators!, ref sepListBuilder, ref lengthListBuilder);
             ReadOnlySpan<int> sepList = sepListBuilder.AsSpan();
@@ -1457,9 +1652,10 @@ namespace System
                 return new string[] { this };
             }
 
-            string[] result = (options != StringSplitOptions.None)
-                ? SplitWithPostProcessing(sepList, lengthList, 0, count, options)
-                : SplitWithoutPostProcessing(sepList, lengthList, 0, count);
+            string[] result =
+                (options != StringSplitOptions.None)
+                    ? SplitWithPostProcessing(sepList, lengthList, 0, count, options)
+                    : SplitWithoutPostProcessing(sepList, lengthList, 0, count);
 
             sepListBuilder.Dispose();
             lengthListBuilder.Dispose();
@@ -1469,7 +1665,9 @@ namespace System
 
         private string[] SplitInternal(string separator, int count, StringSplitOptions options)
         {
-            var sepListBuilder = new ValueListBuilder<int>(stackalloc int[StackallocIntBufferSizeLimit]);
+            var sepListBuilder = new ValueListBuilder<int>(
+                stackalloc int[StackallocIntBufferSizeLimit]
+            );
 
             MakeSeparatorList(separator, ref sepListBuilder);
             ReadOnlySpan<int> sepList = sepListBuilder.AsSpan();
@@ -1481,14 +1679,18 @@ namespace System
                 {
                     candidate = candidate.Trim();
                 }
-                return ((candidate.Length == 0) && ((options & StringSplitOptions.RemoveEmptyEntries) != 0))
+                return (
+                    (candidate.Length == 0)
+                    && ((options & StringSplitOptions.RemoveEmptyEntries) != 0)
+                )
                     ? Array.Empty<string>()
                     : new string[] { candidate };
             }
 
-            string[] result = (options != StringSplitOptions.None)
-                ? SplitWithPostProcessing(sepList, default, separator.Length, count, options)
-                : SplitWithoutPostProcessing(sepList, default, separator.Length, count);
+            string[] result =
+                (options != StringSplitOptions.None)
+                    ? SplitWithPostProcessing(sepList, default, separator.Length, count, options)
+                    : SplitWithoutPostProcessing(sepList, default, separator.Length, count);
 
             sepListBuilder.Dispose();
 
@@ -1496,7 +1698,12 @@ namespace System
         }
 
         // This function will not trim entries or special-case empty entries
-        private string[] SplitWithoutPostProcessing(ReadOnlySpan<int> sepList, ReadOnlySpan<int> lengthList, int defaultLength, int count)
+        private string[] SplitWithoutPostProcessing(
+            ReadOnlySpan<int> sepList,
+            ReadOnlySpan<int> lengthList,
+            int defaultLength,
+            int count
+        )
         {
             Debug.Assert(count >= 2);
 
@@ -1531,9 +1738,14 @@ namespace System
             return splitStrings;
         }
 
-
         // This function may trim entries or omit empty entries
-        private string[] SplitWithPostProcessing(ReadOnlySpan<int> sepList, ReadOnlySpan<int> lengthList, int defaultLength, int count, StringSplitOptions options)
+        private string[] SplitWithPostProcessing(
+            ReadOnlySpan<int> sepList,
+            ReadOnlySpan<int> lengthList,
+            int defaultLength,
+            int count,
+            StringSplitOptions options
+        )
         {
             Debug.Assert(count >= 2);
 
@@ -1580,7 +1792,8 @@ namespace System
                             {
                                 break; // there's useful data here
                             }
-                            currIndex = sepList[i] + (lengthList.IsEmpty ? defaultLength : lengthList[i]);
+                            currIndex =
+                                sepList[i] + (lengthList.IsEmpty ? defaultLength : lengthList[i]);
                         }
                     }
                     break;
@@ -1611,7 +1824,10 @@ namespace System
         /// </summary>
         /// <param name="separators"><see cref="ReadOnlySpan{T}"/> of separator chars</param>
         /// <param name="sepListBuilder"><see cref="ValueListBuilder{T}"/> to store indexes</param>
-        private void MakeSeparatorList(ReadOnlySpan<char> separators, ref ValueListBuilder<int> sepListBuilder)
+        private void MakeSeparatorList(
+            ReadOnlySpan<char> separators,
+            ref ValueListBuilder<int> sepListBuilder
+        )
         {
             // Special-case no separators to mean any whitespace is a separator.
             if (separators.Length == 0)
@@ -1624,11 +1840,12 @@ namespace System
                     }
                 }
             }
-
             // Special-case the common cases of 1, 2, and 3 separators, with manual comparisons against each separator.
             else if (separators.Length <= 3)
             {
-                char sep0, sep1, sep2;
+                char sep0,
+                    sep1,
+                    sep2;
                 sep0 = separators[0];
                 sep1 = separators.Length > 1 ? separators[1] : sep0;
                 sep2 = separators.Length > 2 ? separators[2] : sep1;
@@ -1647,7 +1864,6 @@ namespace System
                     }
                 }
             }
-
             // Handle > 3 separators with a probabilistic map, ala IndexOfAny.
             // This optimizes for chars being unlikely to match a separator.
             else
@@ -1661,9 +1877,11 @@ namespace System
                     for (int i = 0; i < Length; i++)
                     {
                         char c = this[i];
-                        if (ProbabilisticMap.IsCharBitSet(charMap, (byte)c) &&
-                            ProbabilisticMap.IsCharBitSet(charMap, (byte)(c >> 8)) &&
-                            separators.Contains(c))
+                        if (
+                            ProbabilisticMap.IsCharBitSet(charMap, (byte)c)
+                            && ProbabilisticMap.IsCharBitSet(charMap, (byte)(c >> 8))
+                            && separators.Contains(c)
+                        )
                         {
                             sepListBuilder.Append(i);
                         }
@@ -1672,7 +1890,12 @@ namespace System
             }
         }
 
-        private void MakeSeparatorListVectorized(ref ValueListBuilder<int> sepListBuilder, char c, char c2, char c3)
+        private void MakeSeparatorListVectorized(
+            ref ValueListBuilder<int> sepListBuilder,
+            char c,
+            char c2,
+            char c3
+        )
         {
             // Redundant test so we won't prejit remainder of this method
             // on platforms where it is not supported
@@ -1741,8 +1964,10 @@ namespace System
             {
                 if (this[i] == separator[0] && currentSepLength <= Length - i)
                 {
-                    if (currentSepLength == 1
-                        || this.AsSpan(i, currentSepLength).SequenceEqual(separator))
+                    if (
+                        currentSepLength == 1
+                        || this.AsSpan(i, currentSepLength).SequenceEqual(separator)
+                    )
                     {
                         sepListBuilder.Append(i);
                         i += currentSepLength - 1;
@@ -1757,9 +1982,16 @@ namespace System
         /// <param name="separators">separator strngs</param>
         /// <param name="sepListBuilder"><see cref="ValueListBuilder{T}"/> for separator indexes</param>
         /// <param name="lengthListBuilder"><see cref="ValueListBuilder{T}"/> for separator length values</param>
-        private void MakeSeparatorList(string?[] separators, ref ValueListBuilder<int> sepListBuilder, ref ValueListBuilder<int> lengthListBuilder)
+        private void MakeSeparatorList(
+            string?[] separators,
+            ref ValueListBuilder<int> sepListBuilder,
+            ref ValueListBuilder<int> lengthListBuilder
+        )
         {
-            Debug.Assert(separators != null && separators.Length > 0, "separators != null && separators.Length > 0");
+            Debug.Assert(
+                separators != null && separators.Length > 0,
+                "separators != null && separators.Length > 0"
+            );
 
             for (int i = 0; i < Length; i++)
             {
@@ -1773,8 +2005,10 @@ namespace System
                     int currentSepLength = separator.Length;
                     if (this[i] == separator[0] && currentSepLength <= Length - i)
                     {
-                        if (currentSepLength == 1
-                            || this.AsSpan(i, currentSepLength).SequenceEqual(separator))
+                        if (
+                            currentSepLength == 1
+                            || this.AsSpan(i, currentSepLength).SequenceEqual(separator)
+                        )
                         {
                             sepListBuilder.Append(i);
                             lengthListBuilder.Append(currentSepLength);
@@ -1788,12 +2022,16 @@ namespace System
 
         private static void CheckStringSplitOptions(StringSplitOptions options)
         {
-            const StringSplitOptions AllValidFlags = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
+            const StringSplitOptions AllValidFlags =
+                StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
 
             if ((options & ~AllValidFlags) != 0)
             {
                 // at least one invalid flag was set
-                ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidFlag, ExceptionArgument.options);
+                ThrowHelper.ThrowArgumentException(
+                    ExceptionResource.Argument_InvalidFlag,
+                    ExceptionArgument.options
+                );
             }
         }
 
@@ -1805,22 +2043,34 @@ namespace System
         {
             if (startIndex < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_StartIndex);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.ArgumentOutOfRange_StartIndex
+                );
             }
 
             if (startIndex > Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(startIndex), SR.ArgumentOutOfRange_StartIndexLargerThanLength);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startIndex),
+                    SR.ArgumentOutOfRange_StartIndexLargerThanLength
+                );
             }
 
             if (length < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(length), SR.ArgumentOutOfRange_NegativeLength);
+                throw new ArgumentOutOfRangeException(
+                    nameof(length),
+                    SR.ArgumentOutOfRange_NegativeLength
+                );
             }
 
             if (startIndex > Length - length)
             {
-                throw new ArgumentOutOfRangeException(nameof(length), SR.ArgumentOutOfRange_IndexLength);
+                throw new ArgumentOutOfRangeException(
+                    nameof(length),
+                    SR.ArgumentOutOfRange_IndexLength
+                );
             }
 
             if (length == 0)
@@ -1838,15 +2088,25 @@ namespace System
 
         private string InternalSubString(int startIndex, int length)
         {
-            Debug.Assert(startIndex >= 0 && startIndex <= this.Length, "StartIndex is out of range!");
-            Debug.Assert(length >= 0 && startIndex <= this.Length - length, "length is out of range!");
+            Debug.Assert(
+                startIndex >= 0 && startIndex <= this.Length,
+                "StartIndex is out of range!"
+            );
+            Debug.Assert(
+                length >= 0 && startIndex <= this.Length - length,
+                "length is out of range!"
+            );
 
             string result = FastAllocateString(length);
 
             Buffer.Memmove(
                 elementCount: (uint)result.Length, // derefing Length now allows JIT to prove 'result' not null below
                 destination: ref result._firstChar,
-                source: ref Unsafe.Add(ref _firstChar, (nint)(uint)startIndex /* force zero-extension */));
+                source: ref Unsafe.Add(
+                    ref _firstChar,
+                    (nint)(uint)startIndex /* force zero-extension */
+                )
+            );
 
             return result;
         }
@@ -2033,10 +2293,11 @@ namespace System
         private string CreateTrimmedString(int start, int end)
         {
             int len = end - start + 1;
-            return
-                len == Length ? this :
-                len == 0 ? string.Empty :
-                InternalSubString(start, len);
+            return len == Length
+                ? this
+                : len == 0
+                    ? string.Empty
+                    : InternalSubString(start, len);
         }
     }
 }

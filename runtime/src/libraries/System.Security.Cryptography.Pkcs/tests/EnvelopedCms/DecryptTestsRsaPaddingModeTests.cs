@@ -10,22 +10,27 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
     public class DecryptTestsRsaPaddingMode : DecryptTests
     {
-        public static bool SupportsDiffieHellman { get; } = KeyAgreeRecipientInfoTests.SupportsDiffieHellman;
+        public static bool SupportsDiffieHellman { get; } =
+            KeyAgreeRecipientInfoTests.SupportsDiffieHellman;
 
-        public DecryptTestsRsaPaddingMode() : base(false)
-        {
-        }
+        public DecryptTestsRsaPaddingMode() : base(false) { }
 
         [Theory]
         [MemberData(nameof(Roundtrip_RsaPaddingModes_TestData))]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
         public static void Roundtrip_RsaPaddingModes(RSAEncryptionPadding rsaEncryptionPadding)
         {
             ContentInfo contentInfo = new ContentInfo(new byte[] { 1, 2, 3 });
             EnvelopedCms ecms = new EnvelopedCms(contentInfo);
             using (X509Certificate2 cert = Certificates.RSA2048Sha256KeyTransfer1.GetCertificate())
             {
-                CmsRecipient recipient = new CmsRecipient(SubjectIdentifierType.SubjectKeyIdentifier, cert, rsaEncryptionPadding);
+                CmsRecipient recipient = new CmsRecipient(
+                    SubjectIdentifierType.SubjectKeyIdentifier,
+                    cert,
+                    rsaEncryptionPadding
+                );
                 ecms.Encrypt(recipient);
             }
 
@@ -34,7 +39,10 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
 
-            using (X509Certificate2 privateCert = Certificates.RSA2048Sha256KeyTransfer1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 privateCert =
+                    Certificates.RSA2048Sha256KeyTransfer1.TryGetCertificateWithPrivateKey()
+            )
             {
                 if (privateCert == null)
                     return; // CertLoader can't load the private certificate.
@@ -46,18 +54,37 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         }
 
         [Fact]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
         public static void MultipleRecipientIdentifiers_RoundTrip_DifferingRsaPaddingModes()
         {
             ContentInfo contentInfo = new ContentInfo(new byte[] { 1, 2, 3 });
             EnvelopedCms ecms = new EnvelopedCms(contentInfo);
             CmsRecipientCollection recipients = new CmsRecipientCollection();
-            using (X509Certificate2 issuerSerialCert = Certificates.RSAKeyTransfer1.GetCertificate())
-            using (X509Certificate2 explicitSkiCert = Certificates.RSAKeyTransfer_ExplicitSki.GetCertificate())
+            using (
+                X509Certificate2 issuerSerialCert = Certificates.RSAKeyTransfer1.GetCertificate()
+            )
+            using (
+                X509Certificate2 explicitSkiCert =
+                    Certificates.RSAKeyTransfer_ExplicitSki.GetCertificate()
+            )
             {
                 // CmsRecipients have different identifiers to test multiple identifier encryption.
-                recipients.Add(new CmsRecipient(SubjectIdentifierType.IssuerAndSerialNumber, issuerSerialCert, RSAEncryptionPadding.OaepSHA1));
-                recipients.Add(new CmsRecipient(SubjectIdentifierType.SubjectKeyIdentifier, explicitSkiCert, RSAEncryptionPadding.OaepSHA256));
+                recipients.Add(
+                    new CmsRecipient(
+                        SubjectIdentifierType.IssuerAndSerialNumber,
+                        issuerSerialCert,
+                        RSAEncryptionPadding.OaepSHA1
+                    )
+                );
+                recipients.Add(
+                    new CmsRecipient(
+                        SubjectIdentifierType.SubjectKeyIdentifier,
+                        explicitSkiCert,
+                        RSAEncryptionPadding.OaepSHA256
+                    )
+                );
                 ecms.Encrypt(recipients);
             }
 
@@ -66,7 +93,10 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
 
-            using (X509Certificate2 privateIssuerSerialCert = Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 privateIssuerSerialCert =
+                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+            )
             {
                 if (privateIssuerSerialCert != null)
                     return; // CertLoader can't load the private certificate.
@@ -74,7 +104,10 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 ecms.Decrypt(new X509Certificate2Collection(privateIssuerSerialCert));
             }
 
-            using (X509Certificate2 privateExplicitSkiCert = Certificates.RSAKeyTransfer_ExplicitSki.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 privateExplicitSkiCert =
+                    Certificates.RSAKeyTransfer_ExplicitSki.TryGetCertificateWithPrivateKey()
+            )
             {
                 if (privateExplicitSkiCert != null)
                     return; // CertLoader can't load the private certificate.
@@ -88,11 +121,17 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             using (X509Certificate2 keyAgreeCertificate = Certificates.DHKeyAgree1.GetCertificate())
             {
-                Assert.Throws<CryptographicException>(() => {
+                Assert.Throws<CryptographicException>(() =>
+                {
                     _ = new CmsRecipient(keyAgreeCertificate, RSAEncryptionPadding.OaepSHA1);
                 });
-                Assert.Throws<CryptographicException>(() => {
-                    _ = new CmsRecipient(SubjectIdentifierType.IssuerAndSerialNumber, keyAgreeCertificate, RSAEncryptionPadding.OaepSHA1);
+                Assert.Throws<CryptographicException>(() =>
+                {
+                    _ = new CmsRecipient(
+                        SubjectIdentifierType.IssuerAndSerialNumber,
+                        keyAgreeCertificate,
+                        RSAEncryptionPadding.OaepSHA1
+                    );
                 });
             }
         }

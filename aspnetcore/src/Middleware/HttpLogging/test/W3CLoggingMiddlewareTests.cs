@@ -17,24 +17,38 @@ public class W3CLoggingMiddlewareTests
     public void Ctor_ThrowsExceptionsWhenNullArgs()
     {
         var options = CreateOptionsAccessor();
-        Assert.Throws<ArgumentNullException>(() => new W3CLoggingMiddleware(
-            null,
-            options,
-            new TestW3CLogger(options, new HostingEnvironment(), NullLoggerFactory.Instance)));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new W3CLoggingMiddleware(
+                    null,
+                    options,
+                    new TestW3CLogger(options, new HostingEnvironment(), NullLoggerFactory.Instance)
+                )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new W3CLoggingMiddleware(c =>
-            {
-                return Task.CompletedTask;
-            },
-            null,
-            new TestW3CLogger(options, new HostingEnvironment(), NullLoggerFactory.Instance)));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new W3CLoggingMiddleware(
+                    c =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    null,
+                    new TestW3CLogger(options, new HostingEnvironment(), NullLoggerFactory.Instance)
+                )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new W3CLoggingMiddleware(c =>
-            {
-                return Task.CompletedTask;
-            },
-            options,
-            null));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new W3CLoggingMiddleware(
+                    c =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    options,
+                    null
+                )
+        );
     }
 
     [Fact]
@@ -42,7 +56,11 @@ public class W3CLoggingMiddlewareTests
     {
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = W3CLoggingFields.None;
-        var logger = new TestW3CLogger(options, new HostingEnvironment(), NullLoggerFactory.Instance);
+        var logger = new TestW3CLogger(
+            options,
+            new HostingEnvironment(),
+            NullLoggerFactory.Instance
+        );
 
         var middleware = new W3CLoggingMiddleware(
             c =>
@@ -51,7 +69,8 @@ public class W3CLoggingMiddlewareTests
                 return Task.CompletedTask;
             },
             options,
-            logger);
+            logger
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
@@ -69,7 +88,11 @@ public class W3CLoggingMiddlewareTests
     public async Task DefaultDoesNotLogOptionalFields()
     {
         var options = CreateOptionsAccessor();
-        var logger = new TestW3CLogger(options, new HostingEnvironment(), NullLoggerFactory.Instance);
+        var logger = new TestW3CLogger(
+            options,
+            new HostingEnvironment(),
+            NullLoggerFactory.Instance
+        );
 
         var middleware = new W3CLoggingMiddleware(
             c =>
@@ -78,7 +101,8 @@ public class W3CLoggingMiddlewareTests
                 return Task.CompletedTask;
             },
             options,
-            logger);
+            logger
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
@@ -99,7 +123,10 @@ public class W3CLoggingMiddlewareTests
         var delta = startDate.Subtract(now).TotalSeconds;
         Assert.InRange(delta, -1, 10);
 
-        Assert.Equal("#Fields: date time c-ip s-computername s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs-version cs-host cs(User-Agent) cs(Referer)", lines[2]);
+        Assert.Equal(
+            "#Fields: date time c-ip s-computername s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs-version cs-host cs(User-Agent) cs(Referer)",
+            lines[2]
+        );
         Assert.DoesNotContain(lines[3], "Snickerdoodle");
     }
 
@@ -108,7 +135,11 @@ public class W3CLoggingMiddlewareTests
     {
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = W3CLoggingFields.TimeTaken;
-        var logger = new TestW3CLogger(options, new HostingEnvironment(), NullLoggerFactory.Instance);
+        var logger = new TestW3CLogger(
+            options,
+            new HostingEnvironment(),
+            NullLoggerFactory.Instance
+        );
 
         var middleware = new W3CLoggingMiddleware(
             c =>
@@ -117,7 +148,8 @@ public class W3CLoggingMiddlewareTests
                 return Task.CompletedTask;
             },
             options,
-            logger);
+            logger
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -137,13 +169,17 @@ public class W3CLoggingMiddlewareTests
 
         Assert.Equal("#Fields: time-taken", lines[2]);
         double num;
-        Assert.True(Double.TryParse(lines[3], NumberStyles.Number, CultureInfo.InvariantCulture, out num));
+        Assert.True(
+            Double.TryParse(lines[3], NumberStyles.Number, CultureInfo.InvariantCulture, out num)
+        );
     }
 
     private IOptionsMonitor<W3CLoggerOptions> CreateOptionsAccessor()
     {
         var options = new W3CLoggerOptions();
-        var optionsAccessor = Mock.Of<IOptionsMonitor<W3CLoggerOptions>>(o => o.CurrentValue == options);
+        var optionsAccessor = Mock.Of<IOptionsMonitor<W3CLoggerOptions>>(
+            o => o.CurrentValue == options
+        );
         return optionsAccessor;
     }
 }

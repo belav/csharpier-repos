@@ -16,14 +16,22 @@ namespace System.IO.Packaging
         private readonly FileMode _packageFileMode;
         private bool _disposed;
 
-        public ZipStreamManager(ZipArchive zipArchive, FileMode packageFileMode, FileAccess packageFileAccess)
+        public ZipStreamManager(
+            ZipArchive zipArchive,
+            FileMode packageFileMode,
+            FileAccess packageFileAccess
+        )
         {
             _zipArchive = zipArchive;
             _packageFileMode = packageFileMode;
             _packageFileAccess = packageFileAccess;
         }
 
-        public Stream Open(ZipArchiveEntry zipArchiveEntry, FileMode streamFileMode, FileAccess streamFileAccess)
+        public Stream Open(
+            ZipArchiveEntry zipArchiveEntry,
+            FileMode streamFileMode,
+            FileAccess streamFileAccess
+        )
         {
             bool canRead = true;
             bool canWrite = true;
@@ -83,7 +91,14 @@ namespace System.IO.Packaging
             }
 
             Stream ns = zipArchiveEntry.Open();
-            return new ZipWrappingStream(zipArchiveEntry, ns, _packageFileMode, _packageFileAccess, canRead, canWrite);
+            return new ZipWrappingStream(
+                zipArchiveEntry,
+                ns,
+                _packageFileMode,
+                _packageFileAccess,
+                canRead,
+                canWrite
+            );
         }
 
         //
@@ -101,9 +116,7 @@ namespace System.IO.Packaging
             if (_disposed)
                 return;
 
-            if (disposing)
-            {
-            }
+            if (disposing) { }
 
             _disposed = true;
         }

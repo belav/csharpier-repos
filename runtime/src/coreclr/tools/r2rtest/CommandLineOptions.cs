@@ -12,15 +12,22 @@ namespace R2RTest
 {
     public class R2RTestRootCommand : RootCommand
     {
-        void CreateCommand(string name, string description, Option[] options, Func<BuildOptions, int> action)
+        void CreateCommand(
+            string name,
+            string description,
+            Option[] options,
+            Func<BuildOptions, int> action
+        )
         {
             Command command = new Command(name, description);
             foreach (var option in GetCommonOptions())
                 command.AddOption(option);
             foreach (var option in options)
                 command.AddOption(option);
-            command.SetHandler<InvocationContext>((InvocationContext context) =>
-                context.ExitCode = action(new BuildOptions(this, context.ParseResult)));
+            command.SetHandler<InvocationContext>(
+                (InvocationContext context) =>
+                    context.ExitCode = action(new BuildOptions(this, context.ParseResult))
+            );
             AddCommand(command);
         }
 
@@ -28,7 +35,9 @@ namespace R2RTest
 
         R2RTestRootCommand()
         {
-            CreateCommand("compile-directory", "Compile all assemblies in directory",
+            CreateCommand(
+                "compile-directory",
+                "Compile all assemblies in directory",
                 new Option[]
                 {
                     InputDirectory,
@@ -65,9 +74,12 @@ namespace R2RTest
                     InputFileSearchString,
                     MibcPath,
                 },
-                CompileDirectoryCommand.CompileDirectory);
+                CompileDirectoryCommand.CompileDirectory
+            );
 
-            CreateCommand("compile-subtree", "Build each directory in a given subtree containing any managed assemblies as a separate app",
+            CreateCommand(
+                "compile-subtree",
+                "Build each directory in a given subtree containing any managed assemblies as a separate app",
                 new Option[]
                 {
                     InputDirectory,
@@ -103,9 +115,12 @@ namespace R2RTest
                     GCStress,
                     MibcPath,
                 },
-                CompileSubtreeCommand.CompileSubtree);
+                CompileSubtreeCommand.CompileSubtree
+            );
 
-            CreateCommand("compile-framework", "Compile managed framework assemblies in Core_Root",
+            CreateCommand(
+                "compile-framework",
+                "Compile managed framework assemblies in Core_Root",
                 new Option[]
                 {
                     Crossgen2Path,
@@ -134,9 +149,12 @@ namespace R2RTest
                     OutputDirectory,
                     MibcPath,
                 },
-                CompileFrameworkCommand.CompileFramework);
+                CompileFrameworkCommand.CompileFramework
+            );
 
-            CreateCommand("compile-nuget", "Restore a list of Nuget packages into an empty console app, publish, and optimize with Crossgen / CPAOT",
+            CreateCommand(
+                "compile-nuget",
+                "Restore a list of Nuget packages into an empty console app, publish, and optimize with Crossgen / CPAOT",
                 new Option[]
                 {
                     R2RDumpPath,
@@ -153,9 +171,12 @@ namespace R2RTest
                     ExecutionTimeoutMinutes,
                     MibcPath,
                 },
-                CompileNugetCommand.CompileNuget);
+                CompileNugetCommand.CompileNuget
+            );
 
-            CreateCommand("compile-serp", "Compile existing application",
+            CreateCommand(
+                "compile-serp",
+                "Compile existing application",
                 new Option[]
                 {
                     InputDirectory,
@@ -174,34 +195,62 @@ namespace R2RTest
                 {
                     var compileSerp = new CompileSerpCommand(options);
                     return compileSerp.CompileSerpAssemblies();
-                });
+                }
+            );
         }
 
         // Todo: Input / Output directories should be required arguments to the command when they're made available to handlers
         // https://github.com/dotnet/command-line-api/issues/297
         public Option<DirectoryInfo> InputDirectory { get; } =
-            new Option<DirectoryInfo>(new[] { "--input-directory", "-in" }, "Folder containing assemblies to optimize").ExistingOnly();
+            new Option<DirectoryInfo>(
+                new[] { "--input-directory", "-in" },
+                "Folder containing assemblies to optimize"
+            ).ExistingOnly();
 
         public Option<DirectoryInfo> OutputDirectory { get; } =
-            new Option<DirectoryInfo>(new[] { "--output-directory", "-out" }, "Folder to emit compiled assemblies").LegalFilePathsOnly();
+            new Option<DirectoryInfo>(
+                new[] { "--output-directory", "-out" },
+                "Folder to emit compiled assemblies"
+            ).LegalFilePathsOnly();
 
         public Option<DirectoryInfo> CoreRootDirectory { get; } =
-            new Option<DirectoryInfo>(new[] { "--core-root-directory", "-cr" }, "Location of the CoreCLR CORE_ROOT folder")
-            { Arity = ArgumentArity.ExactlyOne }.ExistingOnly();
+            new Option<DirectoryInfo>(
+                new[] { "--core-root-directory", "-cr" },
+                "Location of the CoreCLR CORE_ROOT folder"
+            )
+            {
+                Arity = ArgumentArity.ExactlyOne
+            }.ExistingOnly();
 
         public Option<DirectoryInfo[]> ReferencePath { get; } =
-            new Option<DirectoryInfo[]>(new[] { "--reference-path", "-r" }, "Folder containing assemblies to reference during compilation")
-            { Arity = ArgumentArity.ZeroOrMore }.ExistingOnly();
+            new Option<DirectoryInfo[]>(
+                new[] { "--reference-path", "-r" },
+                "Folder containing assemblies to reference during compilation"
+            )
+            {
+                Arity = ArgumentArity.ZeroOrMore
+            }.ExistingOnly();
 
         public Option<FileInfo[]> MibcPath { get; } =
-            new Option<FileInfo[]>(new[] { "--mibc-path", "-m" }, "Mibc files to use in compilation")
-            { Arity = ArgumentArity.ZeroOrMore }.ExistingOnly();
+            new Option<FileInfo[]>(
+                new[] { "--mibc-path", "-m" },
+                "Mibc files to use in compilation"
+            )
+            {
+                Arity = ArgumentArity.ZeroOrMore
+            }.ExistingOnly();
 
         public Option<FileInfo> Crossgen2Path { get; } =
-            new Option<FileInfo>(new[] { "--crossgen2-path", "-c2p" }, "Explicit Crossgen2 path (useful for cross-targeting)").ExistingOnly();
+            new Option<FileInfo>(
+                new[] { "--crossgen2-path", "-c2p" },
+                "Explicit Crossgen2 path (useful for cross-targeting)"
+            ).ExistingOnly();
 
         public Option<bool> VerifyTypeAndFieldLayout { get; } =
-            new(new[] { "--verify-type-and-field-layout" }, "Verify that struct type layout and field offsets match between compile time and runtime. Use only for diagnostic purposes.");
+            new(
+                new[] { "--verify-type-and-field-layout" },
+                "Verify that struct type layout and field offsets match between compile time and runtime. Use only for diagnostic purposes."
+            );
 
         public Option<bool> NoJit { get; } =
             new(new[] { "--nojit" }, "Don't run tests in JITted mode");
@@ -231,10 +280,17 @@ namespace R2RTest
             new(new[] { "--perfmap" }, "Generate perfmap symbol information");
 
         public Option<int> PerfmapFormatVersion { get; } =
-            new(new[] { "--perfmap-format-version" }, () => 1, "Perfmap format version to generate");
+            new(
+                new[] { "--perfmap-format-version" },
+                () => 1,
+                "Perfmap format version to generate"
+            );
 
         public Option<int> DegreeOfParallelism { get; } =
-            new(new[] { "--degree-of-parallelism", "-dop" }, "Override default compilation / execution DOP (default = logical processor count)");
+            new(
+                new[] { "--degree-of-parallelism", "-dop" },
+                "Override default compilation / execution DOP (default = logical processor count)"
+            );
 
         public Option<bool> Sequential { get; } =
             new(new[] { "--sequential" }, "Run tests sequentially");
@@ -246,7 +302,10 @@ namespace R2RTest
             new(new[] { "--framework" }, "Precompile and use native framework");
 
         public Option<bool> UseFramework { get; } =
-            new(new[] { "--use-framework" }, "Use native framework (don't precompile, assume previously compiled)");
+            new(
+                new[] { "--use-framework" },
+                "Use native framework (don't precompile, assume previously compiled)"
+            );
 
         public Option<bool> Release { get; } =
             new(new[] { "--release" }, "Build the tests in release mode");
@@ -258,14 +317,19 @@ namespace R2RTest
             new(new[] { "--composite" }, "Compile tests in composite R2R mode");
 
         public Option<int> Crossgen2Parallelism { get; } =
-            new(new[] { "--crossgen2-parallelism" }, "Max number of threads to use in Crossgen2 (default = logical processor count)");
+            new(
+                new[] { "--crossgen2-parallelism" },
+                "Max number of threads to use in Crossgen2 (default = logical processor count)"
+            );
 
         public Option<FileInfo> Crossgen2JitPath { get; } =
             new(new[] { "--crossgen2-jitpath" }, "Jit path to use for crossgen2");
 
         public Option<FileInfo[]> IssuesPath { get; } =
             new Option<FileInfo[]>(new[] { "--issues-path", "-ip" }, "Path to issues.targets")
-                { Arity = ArgumentArity.ZeroOrMore };
+            {
+                Arity = ArgumentArity.ZeroOrMore
+            };
 
         public Option<int> CompilationTimeoutMinutes { get; } =
             new(new[] { "--compilation-timeout-minutes", "-ct" }, "Compilation timeout (minutes)");
@@ -274,19 +338,31 @@ namespace R2RTest
             new(new[] { "--execution-timeout-minutes", "-et" }, "Execution timeout (minutes)");
 
         public Option<FileInfo> R2RDumpPath { get; } =
-            new Option<FileInfo>(new[] { "--r2r-dump-path" }, "Path to R2RDump.exe/dll").ExistingOnly();
+            new Option<FileInfo>(
+                new[] { "--r2r-dump-path" },
+                "Path to R2RDump.exe/dll"
+            ).ExistingOnly();
 
         public Option<bool> MeasurePerf { get; } =
             new(new[] { "--measure-perf" }, "Print out compilation time");
 
         public Option<string> InputFileSearchString { get; } =
-            new(new[] { "--input-file-search-string", "-input-file" }, "Search string for input files in the input directory");
+            new(
+                new[] { "--input-file-search-string", "-input-file" },
+                "Search string for input files in the input directory"
+            );
 
         public Option<string> GCStress { get; } =
-            new(new[] { "--gcstress" }, "Run tests with the specified GC stress level enabled (the argument value is in hex)");
+            new(
+                new[] { "--gcstress" },
+                "Run tests with the specified GC stress level enabled (the argument value is in hex)"
+            );
 
         public Option<string> DotNetCli { get; } =
-            new(new [] { "--dotnet-cli", "-cli" }, "For dev box testing, point at .NET 5 dotnet.exe or <repo>/dotnet.cmd.");
+            new(
+                new[] { "--dotnet-cli", "-cli" },
+                "For dev box testing, point at .NET 5 dotnet.exe or <repo>/dotnet.cmd."
+            );
 
         public Option<string> TargetArch { get; } =
             new(new[] { "--target-arch" }, "Target architecture for crossgen2");
@@ -295,13 +371,19 @@ namespace R2RTest
         // compile-nuget specific options
         //
         public Option<FileInfo> PackageList { get; } =
-            new Option<FileInfo>(new[] { "--package-list", "-pl" }, "Text file containing a package name on each line").ExistingOnly();
+            new Option<FileInfo>(
+                new[] { "--package-list", "-pl" },
+                "Text file containing a package name on each line"
+            ).ExistingOnly();
 
         //
         // compile-serp specific options
         //
         public Option<DirectoryInfo> AspNetPath { get; } =
-            new Option<DirectoryInfo>(new[] { "--asp-net-path", "-asp" }, "Path to SERP's ASP.NET Core folder").ExistingOnly();
+            new Option<DirectoryInfo>(
+                new[] { "--asp-net-path", "-asp" },
+                "Path to SERP's ASP.NET Core folder"
+            ).ExistingOnly();
 
         static int Main(string[] args)
         {

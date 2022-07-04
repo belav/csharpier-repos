@@ -23,7 +23,13 @@ namespace AutoMapper.UnitTests
 
             public class ContextResolver : IMemberValueResolver<Source, Dest, int, int>
             {
-                public int Resolve(Source src, Dest d, int source, int dest, ResolutionContext context)
+                public int Resolve(
+                    Source src,
+                    Dest d,
+                    int source,
+                    int dest,
+                    ResolutionContext context
+                )
                 {
                     return source + (int)context.Options.Items["Item"];
                 }
@@ -35,10 +41,21 @@ namespace AutoMapper.UnitTests
                 var config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<Source, Dest>()
-                        .ForMember(d => d.Value, opt => opt.MapFrom<ContextResolver, int>(src => src.Value));
+                        .ForMember(
+                            d => d.Value,
+                            opt => opt.MapFrom<ContextResolver, int>(src => src.Value)
+                        );
                 });
 
-                var dest = config.CreateMapper().Map<Source, Dest>(new Source { Value = 5 }, opt => { opt.Items["Item"] = 10; });
+                var dest = config
+                    .CreateMapper()
+                    .Map<Source, Dest>(
+                        new Source { Value = 5 },
+                        opt =>
+                        {
+                            opt.Items["Item"] = 10;
+                        }
+                    );
 
                 dest.Value.ShouldBe(15);
             }
@@ -56,20 +73,35 @@ namespace AutoMapper.UnitTests
                 public int Value { get; set; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateMap<Source, Dest>()
-                    .ForMember(d => d.Value, opt => opt.MapFrom((src, d, member, ctxt) => { ctxt.Items["Item"] = 2; return -1; }));
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(
+                            d => d.Value,
+                            opt =>
+                                opt.MapFrom(
+                                    (src, d, member, ctxt) =>
+                                    {
+                                        ctxt.Items["Item"] = 2;
+                                        return -1;
+                                    }
+                                )
+                        );
+                });
 
             [Fact]
             public void Should_report_error()
             {
-                new Action(() => Mapper.Map<Source, Dest>(new Source { Value = 5 })).ShouldThrowException<AutoMapperMappingException>(ex =>
+                new Action(
+                    () => Mapper.Map<Source, Dest>(new Source { Value = 5 })
+                ).ShouldThrowException<AutoMapperMappingException>(ex =>
                 {
                     var inner = ex.InnerException;
                     inner.ShouldBeOfType<InvalidOperationException>();
-                    inner.Message.ShouldBe("You must use a Map overload that takes Action<IMappingOperationOptions>!");
+                    inner.Message.ShouldBe(
+                        "You must use a Map overload that takes Action<IMappingOperationOptions>!"
+                    );
                 });
             }
         }
@@ -92,10 +124,16 @@ namespace AutoMapper.UnitTests
                 var config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<Source, Dest>()
-                        .ForMember(d => d.Value, opt => opt.MapFrom((src, d, member, ctxt) => (int)ctxt.Items["Item"] + 5));
+                        .ForMember(
+                            d => d.Value,
+                            opt =>
+                                opt.MapFrom((src, d, member, ctxt) => (int)ctxt.Items["Item"] + 5)
+                        );
                 });
 
-                var dest = config.CreateMapper().Map<Source, Dest>(new Source { Value = 5 }, opt => opt.Items["Item"] = 10);
+                var dest = config
+                    .CreateMapper()
+                    .Map<Source, Dest>(new Source { Value = 5 }, opt => opt.Items["Item"] = 10);
 
                 dest.Value.ShouldBe(15);
             }
@@ -119,10 +157,25 @@ namespace AutoMapper.UnitTests
                 var config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<Source, Dest>()
-                        .ForMember(d => d.Value1, opt => opt.MapFrom((source, d, dMember, context) => (int)context.Options.Items["Item"] + source.Value1));
+                        .ForMember(
+                            d => d.Value1,
+                            opt =>
+                                opt.MapFrom(
+                                    (source, d, dMember, context) =>
+                                        (int)context.Options.Items["Item"] + source.Value1
+                                )
+                        );
                 });
 
-                var dest = config.CreateMapper().Map<Source, Dest>(new Source { Value1 = 5 }, opt => { opt.Items["Item"] = 10; });
+                var dest = config
+                    .CreateMapper()
+                    .Map<Source, Dest>(
+                        new Source { Value1 = 5 },
+                        opt =>
+                        {
+                            opt.Items["Item"] = 10;
+                        }
+                    );
 
                 dest.Value1.ShouldBe(15);
             }
@@ -156,45 +209,54 @@ namespace AutoMapper.UnitTests
                 public Door Door { get; set; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateMap<FromGarage, ToGarage>()
-                    .ForMember(dest => dest.ToCars, opts => opts.MapFrom((src, dest, destVal, ctx) =>
-                    {
-                        var toCars = new List<ToCar>();
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<FromGarage, ToGarage>()
+                        .ForMember(
+                            dest => dest.ToCars,
+                            opts =>
+                                opts.MapFrom(
+                                    (src, dest, destVal, ctx) =>
+                                    {
+                                        var toCars = new List<ToCar>();
 
-                        ToCar toCar;
-                        foreach (var fromCar in src.FromCars)
-                        {
-                            toCar = ctx.Mapper.Map<ToCar>(fromCar);
-                            if (toCar == null)
-                                continue;
+                                        ToCar toCar;
+                                        foreach (var fromCar in src.FromCars)
+                                        {
+                                            toCar = ctx.Mapper.Map<ToCar>(fromCar);
+                                            if (toCar == null)
+                                                continue;
 
-                            toCars.Add(toCar);
-                        }
+                                            toCars.Add(toCar);
+                                        }
 
-                        return toCars;
-                    }));
+                                        return toCars;
+                                    }
+                                )
+                        );
 
-                cfg.CreateMap<FromCar, ToCar>()
-                    .ConvertUsing((src, dest, ctx) =>
-                    {
-                        ToCar toCar = null;
-                        FromCar fromCar = src;
-
-                        if (fromCar.Name != null)
-                        {
-                            toCar = new ToCar
+                    cfg.CreateMap<FromCar, ToCar>()
+                        .ConvertUsing(
+                            (src, dest, ctx) =>
                             {
-                                Id = fromCar.Id,
-                                Name = fromCar.Name,
-                                Door = (Door) ctx.Items["Door"]
-                            };
-                        }
+                                ToCar toCar = null;
+                                FromCar fromCar = src;
 
-                        return toCar;
-                    });
-            });
+                                if (fromCar.Name != null)
+                                {
+                                    toCar = new ToCar
+                                    {
+                                        Id = fromCar.Id,
+                                        Name = fromCar.Name,
+                                        Door = (Door)ctx.Items["Door"]
+                                    };
+                                }
+
+                                return toCar;
+                            }
+                        );
+                });
 
             [Fact]
             public void Should_flow_context_items_to_nested_mappings()
@@ -204,15 +266,28 @@ namespace AutoMapper.UnitTests
                 {
                     FromCars = new List<FromCar>
                     {
-                        new FromCar {Door = door, Id = 2, Name = "Volvo"},
-                        new FromCar {Door = door, Id = 3, Name = "Hyundai"},
+                        new FromCar
+                        {
+                            Door = door,
+                            Id = 2,
+                            Name = "Volvo"
+                        },
+                        new FromCar
+                        {
+                            Door = door,
+                            Id = 3,
+                            Name = "Hyundai"
+                        },
                     }
                 };
 
-                var toGarage = Mapper.Map<ToGarage>(fromGarage, opts =>
-                {
-                    opts.Items.Add("Door", door);
-                });
+                var toGarage = Mapper.Map<ToGarage>(
+                    fromGarage,
+                    opts =>
+                    {
+                        opts.Items.Add("Door", door);
+                    }
+                );
 
                 foreach (var d in toGarage.ToCars.Select(c => c.Door))
                 {

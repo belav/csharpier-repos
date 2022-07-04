@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // The test came from https://github.com/dotnet/runtime/issues/21860.
-// It tries to access field from a promoted struct with an offset that 
+// It tries to access field from a promoted struct with an offset that
 // is not valid for the promoted struct type.
 
 using System.Runtime.CompilerServices;
@@ -12,17 +12,17 @@ using System;
 
 class TestStructAccessThroughRef
 {
-
     [StructLayout(LayoutKind.Explicit)]
     struct NotPromotedStruct
     {
-
         [FieldOffset(0)]
         public long anotherField;
+
         [FieldOffset(4)] // Offset doesn't correspond to a valid offset in PromotedStructSize.
         public long overlappingField;
 
-        public static ref PromotedStruct AsPromotedStructSize20(ref NotPromotedStruct d) => ref Unsafe.As<NotPromotedStruct, PromotedStruct>(ref d);
+        public static ref PromotedStruct AsPromotedStructSize20(ref NotPromotedStruct d) =>
+            ref Unsafe.As<NotPromotedStruct, PromotedStruct>(ref d);
     }
 
     [StructLayout(LayoutKind.Explicit)]
@@ -30,10 +30,12 @@ class TestStructAccessThroughRef
     {
         [FieldOffset(0)]
         public long anotherField;
+
         [FieldOffset(8)]
         public int smallField;
 
-        public static ref NotPromotedStruct AsNotPromotedStruct(ref PromotedStruct d) => ref Unsafe.As<PromotedStruct, NotPromotedStruct>(ref d);
+        public static ref NotPromotedStruct AsNotPromotedStruct(ref PromotedStruct d) =>
+            ref Unsafe.As<PromotedStruct, NotPromotedStruct>(ref d);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -58,5 +60,4 @@ class TestStructAccessThroughRef
         TestStructCasts();
         return 100;
     }
-
 }

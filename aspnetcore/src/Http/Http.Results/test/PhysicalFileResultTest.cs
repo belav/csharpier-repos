@@ -14,7 +14,8 @@ public class PhysicalFileResultTest : PhysicalFileResultTestBase
         string contentType,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue entityTag = null,
-        bool enableRangeProcessing = false)
+        bool enableRangeProcessing = false
+    )
     {
         var fileResult = new PhysicalFileHttpResult(path, contentType)
         {
@@ -28,7 +29,15 @@ public class PhysicalFileResultTest : PhysicalFileResultTestBase
                 {
                     Exists = true,
                     Length = 34,
-                    LastWriteTimeUtc = new DateTimeOffset(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second, TimeSpan.FromSeconds(0))
+                    LastWriteTimeUtc = new DateTimeOffset(
+                        lastModified.Year,
+                        lastModified.Month,
+                        lastModified.Day,
+                        lastModified.Hour,
+                        lastModified.Minute,
+                        lastModified.Second,
+                        TimeSpan.FromSeconds(0)
+                    )
                 };
             }
         };

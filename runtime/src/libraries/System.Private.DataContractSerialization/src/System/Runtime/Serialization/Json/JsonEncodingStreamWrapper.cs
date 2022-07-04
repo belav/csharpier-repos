@@ -14,9 +14,17 @@ namespace System.Runtime.Serialization.Json
     // ASSUMPTION (Microsoft): This class will only be used for EITHER reading OR writing.  It can be done, it would just mean more buffers.
     internal sealed class JsonEncodingStreamWrapper : Stream
     {
-        private static readonly UnicodeEncoding s_validatingBEUTF16 = new UnicodeEncoding(true, false, true);
+        private static readonly UnicodeEncoding s_validatingBEUTF16 = new UnicodeEncoding(
+            true,
+            false,
+            true
+        );
 
-        private static readonly UnicodeEncoding s_validatingUTF16 = new UnicodeEncoding(false, false, true);
+        private static readonly UnicodeEncoding s_validatingUTF16 = new UnicodeEncoding(
+            false,
+            false,
+            true
+        );
 
         private static readonly UTF8Encoding s_validatingUTF8 = new UTF8Encoding(false, true);
         private const int BufferLength = 128;
@@ -103,7 +111,6 @@ namespace System.Runtime.Serialization.Json
             get { return _stream.Length; }
         }
 
-
         // The encoding conversion and buffering breaks seeking.
         public override long Position
         {
@@ -127,7 +134,12 @@ namespace System.Runtime.Serialization.Json
             set { _stream.WriteTimeout = value; }
         }
 
-        public static ArraySegment<byte> ProcessBuffer(byte[] buffer, int offset, int count, Encoding? encoding)
+        public static ArraySegment<byte> ProcessBuffer(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding? encoding
+        )
         {
             try
             {
@@ -153,8 +165,9 @@ namespace System.Runtime.Serialization.Json
                 }
 
                 // Convert to UTF-8
-                return
-                    new ArraySegment<byte>(s_validatingUTF8.GetBytes(GetEncoding(dataEnc).GetChars(buffer, offset, count)));
+                return new ArraySegment<byte>(
+                    s_validatingUTF8.GetBytes(GetEncoding(dataEnc).GetChars(buffer, offset, count))
+                );
             }
             catch (DecoderFallbackException e)
             {
@@ -347,9 +360,18 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        private static void ThrowExpectedEncodingMismatch(SupportedEncoding expEnc, SupportedEncoding actualEnc)
+        private static void ThrowExpectedEncodingMismatch(
+            SupportedEncoding expEnc,
+            SupportedEncoding actualEnc
+        )
         {
-            throw new XmlException(SR.Format(SR.JsonExpectedEncoding, GetEncodingName(expEnc), GetEncodingName(actualEnc)));
+            throw new XmlException(
+                SR.Format(
+                    SR.JsonExpectedEncoding,
+                    GetEncodingName(expEnc),
+                    GetEncodingName(actualEnc)
+                )
+            );
         }
 
         private void CleanupCharBreak()
@@ -426,7 +448,11 @@ namespace System.Runtime.Serialization.Json
             count -= _byteCount;
             if (count > 0)
             {
-                _byteCount += _stream.ReadAtLeast(_bytes.AsSpan(_byteOffset + _byteCount, count), count, throwOnEndOfStream: false);
+                _byteCount += _stream.ReadAtLeast(
+                    _bytes.AsSpan(_byteOffset + _byteCount, count),
+                    count,
+                    throwOnEndOfStream: false
+                );
             }
         }
 

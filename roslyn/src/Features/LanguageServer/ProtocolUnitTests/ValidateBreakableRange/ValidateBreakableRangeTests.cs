@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ValidateBreakableRange
         public async Task SimpleStatement()
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -40,7 +40,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ValidateBreakableRange
         public async Task LineBreakpoint()
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -63,7 +63,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ValidateBreakableRange
         public async Task NoBreakpointSpan()
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -82,7 +82,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ValidateBreakableRange
         public async Task SplitBreakpoint()
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -104,7 +104,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ValidateBreakableRange
         public async Task InvalidExistingBreakpoint1()
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -126,7 +126,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ValidateBreakableRange
         public async Task InvalidExistingBreakpoint2()
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -144,16 +144,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.ValidateBreakableRange
             AssertJsonEquals(expected, result);
         }
 
-        private static async Task<LSP.Range?> RunAsync(TestLspServer testLspServer, LSP.Location caret)
+        private static async Task<LSP.Range?> RunAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret
+        )
         {
-            return await testLspServer.ExecuteRequestAsync<LSP.VSInternalValidateBreakableRangeParams, LSP.Range?>(
+            return await testLspServer.ExecuteRequestAsync<
+                LSP.VSInternalValidateBreakableRangeParams,
+                LSP.Range?
+            >(
                 LSP.VSInternalMethods.TextDocumentValidateBreakableRangeName,
                 new LSP.VSInternalValidateBreakableRangeParams()
                 {
                     TextDocument = new LSP.TextDocumentIdentifier { Uri = caret.Uri },
                     Range = caret.Range
                 },
-                CancellationToken.None);
+                CancellationToken.None
+            );
         }
     }
 }

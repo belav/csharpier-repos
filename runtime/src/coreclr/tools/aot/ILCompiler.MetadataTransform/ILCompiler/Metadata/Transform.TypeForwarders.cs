@@ -19,7 +19,10 @@ namespace ILCompiler.Metadata
 {
     partial class Transform<TPolicy>
     {
-        private EntityMap<ForwarderKey, TypeForwarder> _forwarders = new EntityMap<ForwarderKey, TypeForwarder>(EqualityComparer<ForwarderKey>.Default);
+        private EntityMap<ForwarderKey, TypeForwarder> _forwarders = new EntityMap<
+            ForwarderKey,
+            TypeForwarder
+        >(EqualityComparer<ForwarderKey>.Default);
 
         private Action<ForwarderKey, TypeForwarder> _initForwarder;
 
@@ -32,8 +35,13 @@ namespace ILCompiler.Metadata
                     continue;
                 }
 
-                Ecma.ExportedType exportedType = module.MetadataReader.GetExportedType(exportedTypeHandle);
-                if (exportedType.IsForwarder || exportedType.Implementation.Kind == Ecma.HandleKind.ExportedType)
+                Ecma.ExportedType exportedType = module.MetadataReader.GetExportedType(
+                    exportedTypeHandle
+                );
+                if (
+                    exportedType.IsForwarder
+                    || exportedType.Implementation.Kind == Ecma.HandleKind.ExportedType
+                )
                 {
                     HandleTypeForwarder(module, exportedTypeHandle);
                 }
@@ -44,9 +52,15 @@ namespace ILCompiler.Metadata
             }
         }
 
-        private TypeForwarder HandleTypeForwarder(Cts.Ecma.EcmaModule module, Ecma.ExportedTypeHandle handle)
+        private TypeForwarder HandleTypeForwarder(
+            Cts.Ecma.EcmaModule module,
+            Ecma.ExportedTypeHandle handle
+        )
         {
-            return _forwarders.GetOrCreate(new ForwarderKey(module, handle), _initForwarder ?? (_initForwarder = InitializeTypeForwarder));
+            return _forwarders.GetOrCreate(
+                new ForwarderKey(module, handle),
+                _initForwarder ?? (_initForwarder = InitializeTypeForwarder)
+            );
         }
 
         private void InitializeTypeForwarder(ForwarderKey key, TypeForwarder record)
@@ -54,21 +68,31 @@ namespace ILCompiler.Metadata
             Cts.Ecma.EcmaModule module = key.Module;
             Ecma.MetadataReader reader = module.MetadataReader;
             Ecma.ExportedType exportedType = reader.GetExportedType(key.ExportedType);
-            
+
             record.Name = HandleString(reader.GetString(exportedType.Name));
 
             switch (exportedType.Implementation.Kind)
             {
                 case Ecma.HandleKind.AssemblyReference:
+
                     {
                         string ns = reader.GetString(exportedType.Namespace);
-                        NamespaceDefinition namespaceDefinition = HandleNamespaceDefinition(module, ns);
+                        NamespaceDefinition namespaceDefinition = HandleNamespaceDefinition(
+                            module,
+                            ns
+                        );
 
-                        Ecma.AssemblyReference assemblyRef = reader.GetAssemblyReference((Ecma.AssemblyReferenceHandle)exportedType.Implementation);
+                        Ecma.AssemblyReference assemblyRef = reader.GetAssemblyReference(
+                            (Ecma.AssemblyReferenceHandle)exportedType.Implementation
+                        );
                         AssemblyName refName = new AssemblyName
                         {
-                            ContentType = (AssemblyContentType)((int)(assemblyRef.Flags & AssemblyFlags.ContentTypeMask) >> 9),
-                            Flags = (AssemblyNameFlags)(assemblyRef.Flags & ~AssemblyFlags.ContentTypeMask),
+                            ContentType = (AssemblyContentType)(
+                                (int)(assemblyRef.Flags & AssemblyFlags.ContentTypeMask) >> 9
+                            ),
+                            Flags = (AssemblyNameFlags)(
+                                assemblyRef.Flags & ~AssemblyFlags.ContentTypeMask
+                            ),
                             CultureName = reader.GetString(assemblyRef.Culture),
                             Name = reader.GetString(assemblyRef.Name),
                             Version = assemblyRef.Version,
@@ -77,7 +101,9 @@ namespace ILCompiler.Metadata
                         if ((assemblyRef.Flags & AssemblyFlags.PublicKey) != 0)
                             refName.SetPublicKey(reader.GetBlobBytes(assemblyRef.PublicKeyOrToken));
                         else
-                            refName.SetPublicKeyToken(reader.GetBlobBytes(assemblyRef.PublicKeyOrToken));
+                            refName.SetPublicKeyToken(
+                                reader.GetBlobBytes(assemblyRef.PublicKeyOrToken)
+                            );
 
                         record.Scope = HandleScopeReference(refName);
 
@@ -86,8 +112,12 @@ namespace ILCompiler.Metadata
                     break;
 
                 case Ecma.HandleKind.ExportedType:
+
                     {
-                        TypeForwarder scope = HandleTypeForwarder(module, (Ecma.ExportedTypeHandle)exportedType.Implementation);
+                        TypeForwarder scope = HandleTypeForwarder(
+                            module,
+                            (Ecma.ExportedTypeHandle)exportedType.Implementation
+                        );
 
                         record.Scope = scope.Scope;
 
@@ -104,11 +134,15 @@ namespace ILCompiler.Metadata
         {
             public readonly Cts.Ecma.EcmaModule Module;
             public readonly Ecma.ExportedTypeHandle ExportedType;
-            public ForwarderKey(Cts.Ecma.EcmaModule module, Ecma.ExportedTypeHandle exportedType)
-                => (Module, ExportedType) = (module, exportedType);
 
-            public bool Equals(ForwarderKey other) => Module == other.Module && ExportedType == other.ExportedType;
-            public override int GetHashCode() => HashCode.Combine(Module.GetHashCode(), ExportedType.GetHashCode());
+            public ForwarderKey(Cts.Ecma.EcmaModule module, Ecma.ExportedTypeHandle exportedType) =>
+                (Module, ExportedType) = (module, exportedType);
+
+            public bool Equals(ForwarderKey other) =>
+                Module == other.Module && ExportedType == other.ExportedType;
+
+            public override int GetHashCode() =>
+                HashCode.Combine(Module.GetHashCode(), ExportedType.GetHashCode());
         }
     }
 }

@@ -7,11 +7,22 @@ namespace AutoMapper.UnitTests.Bug
 {
     public abstract class TypeMapIncludeBaseTypes
     {
-        public abstract class Source { public int? A { get; set; } }
+        public abstract class Source
+        {
+            public int? A { get; set; }
+        }
+
         public class SourceA : Source { }
+
         public class SourceB : Source { }
-        public abstract class Target { public int? A { get; set; } }
+
+        public abstract class Target
+        {
+            public int? A { get; set; }
+        }
+
         public class TargetA : Target { }
+
         public class TargetB : Target { }
 
         public class IncludeFromBase : TypeMapIncludeBaseTypes
@@ -21,8 +32,8 @@ namespace AutoMapper.UnitTests.Bug
                 return new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<Source, Target>()
-                    .Include<SourceA, TargetA>()
-                    .Include<SourceB, TargetB>();
+                        .Include<SourceA, TargetA>()
+                        .Include<SourceB, TargetB>();
 
                     cfg.CreateMap<SourceA, TargetA>();
 
@@ -39,11 +50,9 @@ namespace AutoMapper.UnitTests.Bug
                 {
                     cfg.CreateMap<Source, Target>();
 
-                    cfg.CreateMap<SourceA, TargetA>()
-                    .IncludeBase<Source, Target>();
+                    cfg.CreateMap<SourceA, TargetA>().IncludeBase<Source, Target>();
 
-                    cfg.CreateMap<SourceB, TargetB>()
-                    .IncludeBase<Source, Target>();
+                    cfg.CreateMap<SourceB, TargetB>().IncludeBase<Source, Target>();
                 });
             }
         }
@@ -54,7 +63,8 @@ namespace AutoMapper.UnitTests.Bug
             var config = CreateConfigurationProvider();
             var typeMap = config.ResolveTypeMap(typeof(Source), typeof(Target));
 
-            var typePairs = new[]{
+            var typePairs = new[]
+            {
                 new TypePair(typeof(SourceA), typeof(TargetA)),
                 new TypePair(typeof(SourceB), typeof(TargetB)),
             };
@@ -68,9 +78,7 @@ namespace AutoMapper.UnitTests.Bug
             var config = CreateConfigurationProvider();
             var typeMap = config.ResolveTypeMap(typeof(SourceA), typeof(TargetA));
 
-            var typePairs = new[]{
-                new TypePair(typeof(Source), typeof(Target))
-            };
+            var typePairs = new[] { new TypePair(typeof(Source), typeof(Target)) };
 
             typeMap.IncludedBaseTypes.SequenceEqual(typePairs).ShouldBeTrue();
         }

@@ -10,8 +10,7 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
     {
         public readonly int Rank;
 
-        public RQArrayType(int rank, RQType elementType)
-            : base(elementType)
+        public RQArrayType(int rank, RQType elementType) : base(elementType)
         {
             Rank = rank;
         }

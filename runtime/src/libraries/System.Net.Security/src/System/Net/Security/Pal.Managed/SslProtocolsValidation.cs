@@ -7,7 +7,10 @@ namespace System.Net
 {
     internal static class SslProtocolsValidation
     {
-        public static (int MinIndex, int MaxIndex) ValidateContiguous(this SslProtocols protocols, SslProtocols[] orderedSslProtocols)
+        public static (int MinIndex, int MaxIndex) ValidateContiguous(
+            this SslProtocols protocols,
+            SslProtocols[] orderedSslProtocols
+        )
         {
             // A contiguous range of protocols is required.  Find the min and max of the range,
             // or throw if it's non-contiguous or if no protocols are specified.
@@ -41,11 +44,17 @@ namespace System.Net
 
                             // Finally, verify that nothing beyond this one is set, as that would be
                             // a discontiguous set of protocols.
-                            for (int verifyNotSet = max + 1; verifyNotSet < protocolSet.Length; verifyNotSet++)
+                            for (
+                                int verifyNotSet = max + 1;
+                                verifyNotSet < protocolSet.Length;
+                                verifyNotSet++
+                            )
                             {
                                 if (protocolSet[verifyNotSet])
                                 {
-                                    throw new PlatformNotSupportedException(SR.Format(SR.net_security_sslprotocol_contiguous, protocols));
+                                    throw new PlatformNotSupportedException(
+                                        SR.Format(SR.net_security_sslprotocol_contiguous, protocols)
+                                    );
                                 }
                             }
 

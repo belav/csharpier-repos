@@ -32,32 +32,56 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService,
             ITextStructureNavigatorSelectorService navigatorSelectorService,
-            IGlobalOptionService globalOptions)
-            : base(undoHistoryRegistry, editorOperationsFactoryService, navigatorSelectorService, globalOptions)
-        {
-        }
+            IGlobalOptionService globalOptions
+        )
+            : base(
+                undoHistoryRegistry,
+                editorOperationsFactoryService,
+                navigatorSelectorService,
+                globalOptions
+            ) { }
 
         /// <summary>
         /// Gets block comments by parsing the text for comment markers.
         /// </summary>
-        protected override Task<ImmutableArray<TextSpan>> GetBlockCommentsInDocumentAsync(Document document, ITextSnapshot snapshot,
-            TextSpan linesContainingSelections, CommentSelectionInfo commentInfo, CancellationToken cancellationToken)
+        protected override Task<ImmutableArray<TextSpan>> GetBlockCommentsInDocumentAsync(
+            Document document,
+            ITextSnapshot snapshot,
+            TextSpan linesContainingSelections,
+            CommentSelectionInfo commentInfo,
+            CancellationToken cancellationToken
+        )
         {
             var allText = snapshot.AsText();
             var commentedSpans = ArrayBuilder<TextSpan>.GetInstance();
 
             var openIdx = 0;
-            while ((openIdx = allText.IndexOf(commentInfo.BlockCommentStartString, openIdx, caseSensitive: true)) >= 0)
+            while (
+                (
+                    openIdx = allText.IndexOf(
+                        commentInfo.BlockCommentStartString,
+                        openIdx,
+                        caseSensitive: true
+                    )
+                ) >= 0
+            )
             {
                 // Retrieve the first closing marker located after the open index.
-                var closeIdx = allText.IndexOf(commentInfo.BlockCommentEndString, openIdx + commentInfo.BlockCommentStartString.Length, caseSensitive: true);
+                var closeIdx = allText.IndexOf(
+                    commentInfo.BlockCommentEndString,
+                    openIdx + commentInfo.BlockCommentStartString.Length,
+                    caseSensitive: true
+                );
                 // If an open marker is found without a close marker, it's an unclosed comment.
                 if (closeIdx < 0)
                 {
                     closeIdx = allText.Length - commentInfo.BlockCommentEndString.Length;
                 }
 
-                var blockCommentSpan = new TextSpan(openIdx, closeIdx + commentInfo.BlockCommentEndString.Length - openIdx);
+                var blockCommentSpan = new TextSpan(
+                    openIdx,
+                    closeIdx + commentInfo.BlockCommentEndString.Length - openIdx
+                );
                 commentedSpans.Add(blockCommentSpan);
                 openIdx = closeIdx;
             }

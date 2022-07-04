@@ -36,10 +36,12 @@ namespace System.Xml
             get { return _name.HashCode; }
         }
 
-        protected internal XmlAttribute(string? prefix, string localName, string? namespaceURI, XmlDocument doc)
-        : this(doc.AddAttrXmlName(prefix, localName, namespaceURI, null), doc)
-        {
-        }
+        protected internal XmlAttribute(
+            string? prefix,
+            string localName,
+            string? namespaceURI,
+            XmlDocument doc
+        ) : this(doc.AddAttrXmlName(prefix, localName, namespaceURI, null), doc) { }
 
         internal XmlName XmlName
         {
@@ -86,7 +88,15 @@ namespace System.Xml
         public override string Prefix
         {
             get { return _name.Prefix; }
-            set { _name = _name.OwnerDocument.AddAttrXmlName(value, LocalName, NamespaceURI, SchemaInfo); }
+            set
+            {
+                _name = _name.OwnerDocument.AddAttrXmlName(
+                    value,
+                    LocalName,
+                    NamespaceURI,
+                    SchemaInfo
+                );
+            }
         }
 
         // Gets the type of the current node.
@@ -98,10 +108,7 @@ namespace System.Xml
         // Gets the XmlDocument that contains this node.
         public override XmlDocument OwnerDocument
         {
-            get
-            {
-                return _name.OwnerDocument;
-            }
+            get { return _name.OwnerDocument; }
         }
 
         // Gets or sets the value of the node.
@@ -114,10 +121,7 @@ namespace System.Xml
 
         public override IXmlSchemaInfo SchemaInfo
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         public override string InnerText
@@ -145,7 +149,10 @@ namespace System.Xml
                 XmlElement? ownerElement = OwnerElement;
                 if (ownerElement != null)
                 {
-                    return ownerElement.Attributes.PrepareParentInElementIdAttrMap(Prefix, LocalName);
+                    return ownerElement.Attributes.PrepareParentInElementIdAttrMap(
+                        Prefix,
+                        LocalName
+                    );
                 }
             }
 
@@ -188,8 +195,7 @@ namespace System.Xml
                 newNode.next = refNode.next;
                 refNode.next = newNode;
                 _lastChild = newNode; // LastNode = newNode;
-                if (refNode.IsText
-                    && newNode.IsText)
+                if (refNode.IsText && newNode.IsText)
                 {
                     NestTextNodes(refNode, newNode);
                 }
@@ -327,10 +333,7 @@ namespace System.Xml
         // Gets the XmlElement node that contains this attribute.
         public virtual XmlElement? OwnerElement
         {
-            get
-            {
-                return parentNode as XmlElement;
-            }
+            get { return parentNode as XmlElement; }
         }
 
         // Gets or sets the markup representing just the children of this node.
@@ -411,17 +414,15 @@ namespace System.Xml
         {
             get
             {
-                if (_name.Prefix.Length == 0 && _name.LocalName == "xmlns") return string.Empty;
+                if (_name.Prefix.Length == 0 && _name.LocalName == "xmlns")
+                    return string.Empty;
                 return _name.LocalName;
             }
         }
 
         internal bool IsNamespace
         {
-            get
-            {
-                return Ref.Equal(_name.NamespaceURI, _name.OwnerDocument.strReservedXmlns);
-            }
+            get { return Ref.Equal(_name.NamespaceURI, _name.OwnerDocument.strReservedXmlns); }
         }
     }
 }

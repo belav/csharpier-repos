@@ -5,14 +5,15 @@ using Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsOfWarContext>, IQueryFixtureBase
+public abstract class GearsOfWarQueryFixtureBase
+    : SharedStoreFixtureBase<GearsOfWarContext>,
+        IQueryFixtureBase
 {
     private GearsOfWarData _expectedData;
 
     protected override string StoreName { get; } = "GearsOfWarQueryTest";
 
-    public Func<DbContext> GetContextCreator()
-        => () => CreateContext();
+    public Func<DbContext> GetContextCreator() => () => CreateContext();
 
     public virtual ISetSource GetExpectedData()
     {
@@ -24,18 +25,22 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
         return _expectedData;
     }
 
-    public virtual Dictionary<(Type, string), Func<object, object>> GetShadowPropertyMappings()
-        => new()
+    public virtual Dictionary<(Type, string), Func<object, object>> GetShadowPropertyMappings() =>
+        new()
         {
             {
-                (typeof(Gear), "AssignedCityName"), e => GetExpectedData().Set<Gear>().AsEnumerable()
-                    .SingleOrDefault(g => g.Nickname == ((Gear)e)?.Nickname)?.AssignedCity
-                    ?.Name
+                (typeof(Gear), "AssignedCityName"),
+                e =>
+                    GetExpectedData()
+                        .Set<Gear>()
+                        .AsEnumerable()
+                        .SingleOrDefault(g => g.Nickname == ((Gear)e)?.Nickname)
+                        ?.AssignedCity?.Name
             },
         };
 
-    public IReadOnlyDictionary<Type, object> GetEntitySorters()
-        => new Dictionary<Type, Func<object, object>>
+    public IReadOnlyDictionary<Type, object> GetEntitySorters() =>
+        new Dictionary<Type, Func<object, object>>
         {
             { typeof(City), e => ((City)e)?.Name },
             { typeof(CogTag), e => ((CogTag)e)?.Id },
@@ -47,16 +52,20 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
             { typeof(LocustCommander), e => ((LocustCommander)e)?.Name },
             { typeof(Mission), e => ((Mission)e)?.Id },
             { typeof(Squad), e => ((Squad)e)?.Id },
-            { typeof(SquadMission), e => (((SquadMission)e)?.SquadId, ((SquadMission)e)?.MissionId) },
+            {
+                typeof(SquadMission),
+                e => (((SquadMission)e)?.SquadId, ((SquadMission)e)?.MissionId)
+            },
             { typeof(Weapon), e => ((Weapon)e)?.Id },
             { typeof(LocustHighCommand), e => ((LocustHighCommand)e)?.Id }
         }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-    public IReadOnlyDictionary<Type, object> GetEntityAsserters()
-        => new Dictionary<Type, Action<object, object>>
+    public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
+        new Dictionary<Type, Action<object, object>>
         {
             {
-                typeof(City), (e, a) =>
+                typeof(City),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -72,7 +81,8 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
                 }
             },
             {
-                typeof(CogTag), (e, a) =>
+                typeof(CogTag),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -89,7 +99,8 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
                 }
             },
             {
-                typeof(Faction), (e, a) =>
+                typeof(Faction),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -104,14 +115,18 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
                         if (ee is LocustHorde locustHorde)
                         {
                             var actualLocustHorde = (LocustHorde)aa;
-                            Assert.Equal(locustHorde.CommanderName, actualLocustHorde.CommanderName);
+                            Assert.Equal(
+                                locustHorde.CommanderName,
+                                actualLocustHorde.CommanderName
+                            );
                             Assert.Equal(locustHorde.Eradicated, actualLocustHorde.Eradicated);
                         }
                     }
                 }
             },
             {
-                typeof(LocustHorde), (e, a) =>
+                typeof(LocustHorde),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -129,7 +144,8 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
                 }
             },
             {
-                typeof(Gear), (e, a) =>
+                typeof(Gear),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -150,7 +166,8 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
                 }
             },
             {
-                typeof(Officer), (e, a) =>
+                typeof(Officer),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -171,7 +188,8 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
                 }
             },
             {
-                typeof(LocustLeader), (e, a) =>
+                typeof(LocustLeader),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -188,14 +206,21 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
                         if (e is LocustCommander locustCommander)
                         {
                             var actualLocustCommander = (LocustCommander)aa;
-                            Assert.Equal(locustCommander.DefeatedByNickname, actualLocustCommander.DefeatedByNickname);
-                            Assert.Equal(locustCommander.DefeatedBySquadId, actualLocustCommander.DefeatedBySquadId);
+                            Assert.Equal(
+                                locustCommander.DefeatedByNickname,
+                                actualLocustCommander.DefeatedByNickname
+                            );
+                            Assert.Equal(
+                                locustCommander.DefeatedBySquadId,
+                                actualLocustCommander.DefeatedBySquadId
+                            );
                         }
                     }
                 }
             },
             {
-                typeof(LocustCommander), (e, a) =>
+                typeof(LocustCommander),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -214,7 +239,8 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
                 }
             },
             {
-                typeof(Mission), (e, a) =>
+                typeof(Mission),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -231,7 +257,8 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
                 }
             },
             {
-                typeof(Squad), (e, a) =>
+                typeof(Squad),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -257,7 +284,8 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
                 }
             },
             {
-                typeof(SquadMission), (e, a) =>
+                typeof(SquadMission),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -272,7 +300,8 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
                 }
             },
             {
-                typeof(Weapon), (e, a) =>
+                typeof(Weapon),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -290,7 +319,8 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
                 }
             },
             {
-                typeof(LocustHighCommand), (e, a) =>
+                typeof(LocustHighCommand),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -309,54 +339,59 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
-        modelBuilder.Entity<City>(
-            b =>
-            {
-                b.HasKey(c => c.Name);
-            });
+        modelBuilder.Entity<City>(b =>
+        {
+            b.HasKey(c => c.Name);
+        });
 
-        modelBuilder.Entity<Gear>(
-            b =>
-            {
-                b.HasKey(
-                    g => new { g.Nickname, g.SquadId });
+        modelBuilder.Entity<Gear>(b =>
+        {
+            b.HasKey(g => new { g.Nickname, g.SquadId });
 
-                b.HasOne(g => g.CityOfBirth).WithMany(c => c.BornGears).HasForeignKey(g => g.CityOfBirthName).IsRequired();
-                b.HasOne(g => g.Tag).WithOne(t => t.Gear).HasForeignKey<CogTag>(
-                    t => new { t.GearNickName, t.GearSquadId });
-                b.HasOne(g => g.AssignedCity).WithMany(c => c.StationedGears).IsRequired(false);
-            });
+            b.HasOne(g => g.CityOfBirth)
+                .WithMany(c => c.BornGears)
+                .HasForeignKey(g => g.CityOfBirthName)
+                .IsRequired();
+            b.HasOne(g => g.Tag)
+                .WithOne(t => t.Gear)
+                .HasForeignKey<CogTag>(t => new { t.GearNickName, t.GearSquadId });
+            b.HasOne(g => g.AssignedCity).WithMany(c => c.StationedGears).IsRequired(false);
+        });
 
-        modelBuilder.Entity<Officer>().HasMany(o => o.Reports).WithOne().HasForeignKey(
-            o => new { o.LeaderNickname, o.LeaderSquadId });
+        modelBuilder
+            .Entity<Officer>()
+            .HasMany(o => o.Reports)
+            .WithOne()
+            .HasForeignKey(o => new { o.LeaderNickname, o.LeaderSquadId });
 
-        modelBuilder.Entity<Squad>(
-            b =>
-            {
-                b.HasKey(s => s.Id);
-                b.Property(s => s.Id).ValueGeneratedNever();
-                b.Property(s => s.Banner5).HasMaxLength(5);
-                b.HasMany(s => s.Members).WithOne(g => g.Squad).HasForeignKey(g => g.SquadId);
-            });
+        modelBuilder.Entity<Squad>(b =>
+        {
+            b.HasKey(s => s.Id);
+            b.Property(s => s.Id).ValueGeneratedNever();
+            b.Property(s => s.Banner5).HasMaxLength(5);
+            b.HasMany(s => s.Members).WithOne(g => g.Squad).HasForeignKey(g => g.SquadId);
+        });
 
-        modelBuilder.Entity<Weapon>(
-            b =>
-            {
-                b.Property(w => w.Id).ValueGeneratedNever();
-                b.HasOne(w => w.SynergyWith).WithOne().HasForeignKey<Weapon>(w => w.SynergyWithId);
-                b.HasOne(w => w.Owner).WithMany(g => g.Weapons).HasForeignKey(w => w.OwnerFullName).HasPrincipalKey(g => g.FullName);
-            });
+        modelBuilder.Entity<Weapon>(b =>
+        {
+            b.Property(w => w.Id).ValueGeneratedNever();
+            b.HasOne(w => w.SynergyWith).WithOne().HasForeignKey<Weapon>(w => w.SynergyWithId);
+            b.HasOne(w => w.Owner)
+                .WithMany(g => g.Weapons)
+                .HasForeignKey(w => w.OwnerFullName)
+                .HasPrincipalKey(g => g.FullName);
+        });
 
         modelBuilder.Entity<Mission>().Property(m => m.Id).ValueGeneratedNever();
 
-        modelBuilder.Entity<SquadMission>(
-            b =>
-            {
-                b.HasKey(
-                    sm => new { sm.SquadId, sm.MissionId });
-                b.HasOne(sm => sm.Mission).WithMany(m => m.ParticipatingSquads).HasForeignKey(sm => sm.MissionId);
-                b.HasOne(sm => sm.Squad).WithMany(s => s.Missions).HasForeignKey(sm => sm.SquadId);
-            });
+        modelBuilder.Entity<SquadMission>(b =>
+        {
+            b.HasKey(sm => new { sm.SquadId, sm.MissionId });
+            b.HasOne(sm => sm.Mission)
+                .WithMany(m => m.ParticipatingSquads)
+                .HasForeignKey(sm => sm.MissionId);
+            b.HasOne(sm => sm.Squad).WithMany(s => s.Missions).HasForeignKey(sm => sm.SquadId);
+        });
 
         modelBuilder.Entity<Faction>().HasKey(f => f.Id);
         modelBuilder.Entity<Faction>().Property(f => f.Id).ValueGeneratedNever();
@@ -364,24 +399,28 @@ public abstract class GearsOfWarQueryFixtureBase : SharedStoreFixtureBase<GearsO
         modelBuilder.Entity<LocustHorde>().HasBaseType<Faction>();
         modelBuilder.Entity<LocustHorde>().HasMany(h => h.Leaders).WithOne();
 
-        modelBuilder.Entity<LocustHorde>().HasOne(h => h.Commander).WithOne(c => c.CommandingFaction);
+        modelBuilder
+            .Entity<LocustHorde>()
+            .HasOne(h => h.Commander)
+            .WithOne(c => c.CommandingFaction);
 
         modelBuilder.Entity<LocustLeader>().HasKey(l => l.Name);
         modelBuilder.Entity<LocustCommander>().HasBaseType<LocustLeader>();
-        modelBuilder.Entity<LocustCommander>().HasOne(c => c.DefeatedBy).WithOne().HasForeignKey<LocustCommander>(
-            c => new { c.DefeatedByNickname, c.DefeatedBySquadId });
+        modelBuilder
+            .Entity<LocustCommander>()
+            .HasOne(c => c.DefeatedBy)
+            .WithOne()
+            .HasForeignKey<LocustCommander>(c => new { c.DefeatedByNickname, c.DefeatedBySquadId });
 
         modelBuilder.Entity<LocustHighCommand>().HasKey(l => l.Id);
         modelBuilder.Entity<LocustHighCommand>().Property(l => l.Id).ValueGeneratedNever();
     }
 
-    protected override void Seed(GearsOfWarContext context)
-        => GearsOfWarContext.Seed(context);
+    protected override void Seed(GearsOfWarContext context) => GearsOfWarContext.Seed(context);
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(
-            w =>
-                w.Log(CoreEventId.RowLimitingOperationWithoutOrderByWarning));
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(w => w.Log(CoreEventId.RowLimitingOperationWithoutOrderByWarning));
 
     public override GearsOfWarContext CreateContext()
     {

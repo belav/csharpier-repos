@@ -106,15 +106,26 @@ namespace System.Xml.Tests
             if (pstate == TestState.Pass)
                 return;
 
-            CError.Compare(pstate, TestState.CreateSuccess, "Invalid State after Create: " + pstate);
+            CError.Compare(
+                pstate,
+                TestState.CreateSuccess,
+                "Invalid State after Create: " + pstate
+            );
 
             //By this time the factory Reader is already set up correctly. So we must go Consume it now.
-            CError.Compare(pstate != TestState.Pass && pstate == TestState.CreateSuccess, "Invalid state before Consuming Reader: " + pstate);
+            CError.Compare(
+                pstate != TestState.Pass && pstate == TestState.CreateSuccess,
+                "Invalid state before Consuming Reader: " + pstate
+            );
 
             //Call TestWriter to Consume Reader;
             TestWriter();
-            if (pstate == TestState.Pass) return;
-            CError.Compare(pstate != TestState.Pass && pstate == TestState.Consume, "Invalid state after Consuming Reader: " + pstate);
+            if (pstate == TestState.Pass)
+                return;
+            CError.Compare(
+                pstate != TestState.Pass && pstate == TestState.Consume,
+                "Invalid state after Consuming Reader: " + pstate
+            );
         }
 
         protected void TestWriter()
@@ -162,7 +173,11 @@ namespace System.Xml.Tests
             }
             finally
             {
-                if (_factoryWriter != null && _factoryWriter.WriteState != WriteState.Closed && _factoryWriter.WriteState != WriteState.Error)
+                if (
+                    _factoryWriter != null
+                    && _factoryWriter.WriteState != WriteState.Closed
+                    && _factoryWriter.WriteState != WriteState.Error
+                )
                 {
                     if (_textWriter == null)
                     {
@@ -176,7 +191,11 @@ namespace System.Xml.Tests
                         _textWriter.Dispose();
                     }
                 }
-                if (_underlyingWriter != null && _underlyingWriter.WriteState != WriteState.Closed && _underlyingWriter.WriteState != WriteState.Error)
+                if (
+                    _underlyingWriter != null
+                    && _underlyingWriter.WriteState != WriteState.Closed
+                    && _underlyingWriter.WriteState != WriteState.Error
+                )
                 {
                     _underlyingWriter.Flush();
                     _underlyingWriter.Dispose();
@@ -196,15 +215,27 @@ namespace System.Xml.Tests
 
             //This actually checks Conformance Level DCR to some extent.
             if (_settings.ConformanceLevel != ConformanceLevel.Auto)
-                CError.Compare(actual.ConformanceLevel, _settings.ConformanceLevel, "ConformanceLevel");
+                CError.Compare(
+                    actual.ConformanceLevel,
+                    _settings.ConformanceLevel,
+                    "ConformanceLevel"
+                );
 
             CError.Compare(actual.Encoding, _settings.Encoding, "Encoding");
             CError.Compare(actual.Indent, _settings.Indent, "Indent");
             CError.Compare(actual.IndentChars, _settings.IndentChars, "IndentChars");
             CError.Compare(actual.NewLineChars, _settings.NewLineChars, "NewLineChars");
-            CError.Compare(actual.NewLineOnAttributes, _settings.NewLineOnAttributes, "NewLineOnAttributes");
+            CError.Compare(
+                actual.NewLineOnAttributes,
+                _settings.NewLineOnAttributes,
+                "NewLineOnAttributes"
+            );
             CError.Compare(actual.NewLineHandling, _settings.NewLineHandling, "NormalizeNewLines");
-            CError.Compare(actual.OmitXmlDeclaration, _settings.OmitXmlDeclaration, "OmitXmlDeclaration");
+            CError.Compare(
+                actual.OmitXmlDeclaration,
+                _settings.OmitXmlDeclaration,
+                "OmitXmlDeclaration"
+            );
         }
 
         protected void CreateWriter(WriteThru writeThru)
@@ -245,20 +276,22 @@ namespace System.Xml.Tests
                         pstate = TestState.Error;
                         DumpVariationInfo();
                         throw new CTestFailedException(
-                                "Exception Thrown in CreateMethod, is your variation data correct?");
+                            "Exception Thrown in CreateMethod, is your variation data correct?"
+                        );
                     }
                     else
                     {
                         //This means that the Exception was checked and everything is fine.
                         pstate = TestState.Pass;
                     }
-                }//Else valid variation threw exception
+                } //Else valid variation threw exception
                 else
                 {
                     pstate = TestState.Error;
                     DumpVariationInfo();
                     throw new CTestFailedException(
-                            "Exception Thrown in CreateMethod, is your variation data correct?");
+                        "Exception Thrown in CreateMethod, is your variation data correct?"
+                    );
                 }
             }
         }
@@ -270,20 +303,31 @@ namespace System.Xml.Tests
 
         protected void SetupSettings()
         {
-            _settings.ConformanceLevel = (ConformanceLevel)Enum.Parse(typeof(ConformanceLevel), ReadFilterCriteria("ConformanceLevel", true));
+            _settings.ConformanceLevel = (ConformanceLevel)
+                Enum.Parse(typeof(ConformanceLevel), ReadFilterCriteria("ConformanceLevel", true));
             _settings.CheckCharacters = bool.Parse(ReadFilterCriteria("CheckCharacters", true));
             _settings.CloseOutput = false;
 
             _settings.Indent = bool.Parse(ReadFilterCriteria("Indent", true));
-            _settings.IndentChars = new string(Convert.ToChar(int.Parse(ReadFilterCriteria("IndentChars", true))), 1);
-            _settings.NewLineChars = new string(Convert.ToChar(int.Parse(ReadFilterCriteria("NewLineChars", true))), 1);
-            _settings.NewLineOnAttributes = bool.Parse(ReadFilterCriteria("NewLineOnAttributes", true));
+            _settings.IndentChars = new string(
+                Convert.ToChar(int.Parse(ReadFilterCriteria("IndentChars", true))),
+                1
+            );
+            _settings.NewLineChars = new string(
+                Convert.ToChar(int.Parse(ReadFilterCriteria("NewLineChars", true))),
+                1
+            );
+            _settings.NewLineOnAttributes = bool.Parse(
+                ReadFilterCriteria("NewLineOnAttributes", true)
+            );
             if (bool.Parse(ReadFilterCriteria("NormalizeNewlines", true)))
                 _settings.NewLineHandling = NewLineHandling.Replace;
             else
                 _settings.NewLineHandling = NewLineHandling.None;
 
-            _settings.OmitXmlDeclaration = bool.Parse(ReadFilterCriteria("OmitXmlDeclaration", true));
+            _settings.OmitXmlDeclaration = bool.Parse(
+                ReadFilterCriteria("OmitXmlDeclaration", true)
+            );
 
             //Reading Writer Type to determine encoding and if the writer type is binary writer.
             string wt = ReadFilterCriteria("WriterType", true);
@@ -311,7 +355,6 @@ namespace System.Xml.Tests
             }
             _overload = (WriterOverload)Enum.Parse(typeof(WriterOverload), ol); //ReadFilterCriteria("Load", true));
         }
-
 
         /// <summary>
         /// This function writes the test nodes on the factoryWriter.

@@ -30,8 +30,13 @@ public class MethodCallCodeFragment
         if (arguments.Length > parameterLength)
         {
             throw new ArgumentException(
-                CoreStrings.IncorrectNumberOfArguments(methodInfo.Name, arguments.Length, parameterLength),
-                nameof(arguments));
+                CoreStrings.IncorrectNumberOfArguments(
+                    methodInfo.Name,
+                    arguments.Length,
+                    parameterLength
+                ),
+                nameof(arguments)
+            );
         }
 
         MethodInfo = methodInfo;
@@ -41,8 +46,8 @@ public class MethodCallCodeFragment
     private MethodCallCodeFragment(
         MethodInfo methodInfo,
         MethodCallCodeFragment chainedCall,
-        object?[] arguments)
-        : this(methodInfo, arguments)
+        object?[] arguments
+    ) : this(methodInfo, arguments)
     {
         ChainedCall = chainedCall;
     }
@@ -57,29 +62,25 @@ public class MethodCallCodeFragment
     ///     Gets the namespace of the method's declaring type.
     /// </summary>
     /// <value> The declaring type's name. </value>
-    public virtual string? Namespace
-        => MethodInfo.DeclaringType?.Namespace;
+    public virtual string? Namespace => MethodInfo.DeclaringType?.Namespace;
 
     /// <summary>
     ///     Gets the name of the method's declaring type.
     /// </summary>
     /// <value> The declaring type's name. </value>
-    public virtual string? DeclaringType
-        => MethodInfo.DeclaringType?.Name;
+    public virtual string? DeclaringType => MethodInfo.DeclaringType?.Name;
 
     /// <summary>
     ///     Gets the method's name.
     /// </summary>
     /// <value> The method's name. </value>
-    public virtual string Method
-        => MethodInfo.Name;
+    public virtual string Method => MethodInfo.Name;
 
     /// <summary>
     ///     Gets the method call's arguments.
     /// </summary>
     /// <value> The method call's arguments. </value>
-    public virtual IReadOnlyList<object?> Arguments
-        => _arguments;
+    public virtual IReadOnlyList<object?> Arguments => _arguments;
 
     /// <summary>
     ///     Gets the next method call to chain after this.
@@ -93,14 +94,14 @@ public class MethodCallCodeFragment
     /// <param name="methodInfo">The method's <see cref="MethodInfo" />.</param>
     /// <param name="arguments">The next method call's arguments.</param>
     /// <returns>A new fragment representing the method chain.</returns>
-    public virtual MethodCallCodeFragment Chain(MethodInfo methodInfo, params object[] arguments)
-        => Chain(new MethodCallCodeFragment(methodInfo, arguments));
+    public virtual MethodCallCodeFragment Chain(MethodInfo methodInfo, params object[] arguments) =>
+        Chain(new MethodCallCodeFragment(methodInfo, arguments));
 
     /// <summary>
     ///     Creates a method chain from this method to another.
     /// </summary>
     /// <param name="call">The next method.</param>
     /// <returns>A new fragment representing the method chain.</returns>
-    public virtual MethodCallCodeFragment Chain(MethodCallCodeFragment call)
-        => new(MethodInfo, ChainedCall?.Chain(call) ?? call, _arguments.ToArray());
+    public virtual MethodCallCodeFragment Chain(MethodCallCodeFragment call) =>
+        new(MethodInfo, ChainedCall?.Chain(call) ?? call, _arguments.ToArray());
 }

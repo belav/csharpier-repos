@@ -20,9 +20,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Formatting
             CleanupOptions = cleanupOptions;
         }
 
-        public static async ValueTask<OmniSharpSyntaxFormattingOptionsWrapper> FromDocumentAsync(Document document, CancellationToken cancellationToken)
+        public static async ValueTask<OmniSharpSyntaxFormattingOptionsWrapper> FromDocumentAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var cleanupOptions = await document.GetCodeCleanupOptionsAsync(CodeActionOptions.DefaultProvider, cancellationToken).ConfigureAwait(false);
+            var cleanupOptions = await document
+                .GetCodeCleanupOptionsAsync(CodeActionOptions.DefaultProvider, cancellationToken)
+                .ConfigureAwait(false);
             return new OmniSharpSyntaxFormattingOptionsWrapper(cleanupOptions);
         }
     }

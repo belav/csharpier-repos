@@ -13,8 +13,10 @@ public class ProxyTests : IAsyncLifetime
     [Fact]
     public void Test()
     {
-        var config = new MapperConfiguration(cfg => {
-            cfg.CreateMap<TrainingCourse, TrainingCourseDto>().Include<TrainingCourse, ParentTrainingCourseDto>();
+        var config = new MapperConfiguration(cfg =>
+        {
+            cfg.CreateMap<TrainingCourse, TrainingCourseDto>()
+                .Include<TrainingCourse, ParentTrainingCourseDto>();
             cfg.CreateMap<TrainingCourse, ParentTrainingCourseDto>();
             cfg.CreateMap<TrainingContent, TrainingContentDto>();
         });
@@ -40,9 +42,7 @@ public class ProxyTests : IAsyncLifetime
 
     class ClientContext : LocalDbContext
     {
-        public ClientContext()
-        {
-        }
+        public ClientContext() { }
 
         public DbSet<TrainingCourse> TrainingCourses { get; set; }
         public DbSet<TrainingContent> TrainingContents { get; set; }
@@ -70,9 +70,7 @@ public class ProxyTests : IAsyncLifetime
 
     public class TrainingContent
     {
-        public TrainingContent()
-        {
-        }
+        public TrainingContent() { }
 
         [Key]
         public int ContentId { get; set; }
@@ -82,7 +80,6 @@ public class ProxyTests : IAsyncLifetime
         public virtual TrainingCourse Course { get; set; }
 
         //  public int CourseId { get; set; }
-
     }
 
     public class TrainingCourseDto

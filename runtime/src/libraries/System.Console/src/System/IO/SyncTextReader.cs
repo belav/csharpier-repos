@@ -18,8 +18,7 @@ namespace System.IO
         public static SyncTextReader GetSynchronizedTextReader(TextReader reader)
         {
             Debug.Assert(reader != null);
-            return reader as SyncTextReader ??
-                new SyncTextReader(reader);
+            return reader as SyncTextReader ?? new SyncTextReader(reader);
         }
 
         internal SyncTextReader(TextReader t)
@@ -98,9 +97,9 @@ namespace System.IO
 
         public override ValueTask<string?> ReadLineAsync(CancellationToken cancellationToken)
         {
-            return cancellationToken.IsCancellationRequested ?
-                ValueTask.FromCanceled<string?>(cancellationToken) :
-                new ValueTask<string?>(ReadLine());
+            return cancellationToken.IsCancellationRequested
+                ? ValueTask.FromCanceled<string?>(cancellationToken)
+                : new ValueTask<string?>(ReadLine());
         }
 
         public override Task<string> ReadToEndAsync()
@@ -110,9 +109,9 @@ namespace System.IO
 
         public override Task<string> ReadToEndAsync(CancellationToken cancellationToken)
         {
-            return cancellationToken.IsCancellationRequested ?
-                Task.FromCanceled<string>(cancellationToken) :
-                Task.FromResult(ReadToEnd());
+            return cancellationToken.IsCancellationRequested
+                ? Task.FromCanceled<string>(cancellationToken)
+                : Task.FromResult(ReadToEnd());
         }
 
         public override Task<int> ReadBlockAsync(char[] buffer, int index, int count)
@@ -120,7 +119,10 @@ namespace System.IO
             ArgumentNullException.ThrowIfNull(buffer);
 
             if (index < 0 || count < 0)
-                throw new ArgumentOutOfRangeException(index < 0 ? nameof(index) : nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    index < 0 ? nameof(index) : nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (buffer.Length - index < count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 
@@ -132,7 +134,10 @@ namespace System.IO
             ArgumentNullException.ThrowIfNull(buffer);
 
             if (index < 0 || count < 0)
-                throw new ArgumentOutOfRangeException(index < 0 ? nameof(index) : nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    index < 0 ? nameof(index) : nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (buffer.Length - index < count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 

@@ -26,11 +26,15 @@ namespace System.ComponentModel.Composition
             batch.AddPart(importer);
             batch.AddPart(exporter42);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ReflectionModel_ImportNotAssignableFromExport, RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -46,7 +50,6 @@ namespace System.ComponentModel.Composition
             container.Compose(batch);
 
             Assert.Equal(42, importer.Value);
-
         }
 
         [Fact]
@@ -119,12 +122,15 @@ namespace System.ComponentModel.Composition
             CompositionBatch batch = new CompositionBatch();
             batch.AddPart(importer = new Importer());
 
-            CompositionAssert.ThrowsChangeRejectedError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ImportEngine_ImportCardinalityMismatch,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsChangeRejectedError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ImportEngine_ImportCardinalityMismatch,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -140,11 +146,14 @@ namespace System.ComponentModel.Composition
             batch.AddPart(exporter42);
             batch.AddPart(exporter6);
 
-            CompositionAssert.ThrowsChangeRejectedError(ErrorId.ImportEngine_PartCannotSetImport,
-                RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsChangeRejectedError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -158,27 +167,40 @@ namespace System.ComponentModel.Composition
             batch.AddPart(importer);
             batch.AddPart(exporter42);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotActivate,
-                                          ErrorId.ReflectionModel_ImportThrewException,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotActivate,
+                ErrorId.ReflectionModel_ImportThrewException,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
         public void ImportValueExceptionLazily()
         {
-            var catalog = new AssemblyCatalog(typeof(ImportImporterInvalidSetterExceptionLazily).Assembly);
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(ImportImporterInvalidSetterExceptionLazily), typeof(ImporterInvalidSetterException));
-            var invalidLazy = container.GetExportedValue<ImportImporterInvalidSetterExceptionLazily>();
+            var catalog = new AssemblyCatalog(
+                typeof(ImportImporterInvalidSetterExceptionLazily).Assembly
+            );
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(ImportImporterInvalidSetterExceptionLazily),
+                typeof(ImporterInvalidSetterException)
+            );
+            var invalidLazy =
+                container.GetExportedValue<ImportImporterInvalidSetterExceptionLazily>();
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue,
-                                          ErrorId.ImportEngine_PartCannotActivate,
-                                          ErrorId.ReflectionModel_ImportThrewException, RetryMode.DoNotRetry, () =>
-            {
-                var value = invalidLazy.Value.Value;
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotGetExportedValue,
+                ErrorId.ImportEngine_PartCannotActivate,
+                ErrorId.ReflectionModel_ImportThrewException,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    var value = invalidLazy.Value.Value;
+                }
+            );
         }
 
         [ConditionalFact(Helpers.ComImportAvailable)]
@@ -554,21 +576,13 @@ namespace System.ComponentModel.Composition
         private class DelayDuckImporter
         {
             [Import("Duck")]
-            public Lazy<IDuck> Duck
-            {
-                get;
-                set;
-            }
+            public Lazy<IDuck> Duck { get; set; }
         }
 
         private class DuckImporter
         {
             [Import("Duck")]
-            public IDuck Duck
-            {
-                get;
-                set;
-            }
+            public IDuck Duck { get; set; }
         }
 
         public class QuackLikeADuck
@@ -587,7 +601,7 @@ namespace System.ComponentModel.Composition
         [ComImport]
         [Guid("148BD52A-A2AB-11CE-B11F-00AA00530503")]
         private class CTaskScheduler
-        {   // This interface doesn't implement
+        { // This interface doesn't implement
             // ITaskScheduler deliberately
         }
 
@@ -601,28 +615,18 @@ namespace System.ComponentModel.Composition
         private class ImportComComponent
         {
             [Import("TaskScheduler")]
-            public ITaskScheduler TaskScheduler
-            {
-                get;
-                set;
-            }
+            public ITaskScheduler TaskScheduler { get; set; }
         }
 
         private class DelayImportComComponent
         {
             [Import("TaskScheduler")]
-            public Lazy<ITaskScheduler> TaskScheduler
-            {
-                get;
-                set;
-            }
+            public Lazy<ITaskScheduler> TaskScheduler { get; set; }
         }
 
         public class Importer
         {
-            public Importer()
-            {
-            }
+            public Importer() { }
 
             [Import("Value")]
             public int ValueReadWrite { get; set; }
@@ -635,22 +639,17 @@ namespace System.ComponentModel.Composition
 
             [ImportMany("CollectionValue", typeof(IList<int>))]
             public IList<int> ValueCollection { get; set; }
-
         }
 
         public class ImporterNameless
         {
-
-            public ImporterNameless()
-            {
-            }
+            public ImporterNameless() { }
 
             [Import]
             public int ValueReadWrite { get; set; }
 
             [Import]
             public Lazy<int> MetadataReadWrite { get; set; }
-
         }
 
         public class ImporterInvalidWrongType
@@ -663,7 +662,11 @@ namespace System.ComponentModel.Composition
         public class ImporterInvalidSetterException
         {
             [ImportMany("Value")]
-            public IEnumerable<int> ValueReadWrite { get { return null; } set { throw new InvalidOperationException(); } }
+            public IEnumerable<int> ValueReadWrite
+            {
+                get { return null; }
+                set { throw new InvalidOperationException(); }
+            }
         }
 
         [Export]
@@ -687,13 +690,14 @@ namespace System.ComponentModel.Composition
             public int Value { get; set; }
 
             [Export("CollectionValue")]
-            public IList<int> CollectionValue { get { return collectionValue; } }
-
+            public IList<int> CollectionValue
+            {
+                get { return collectionValue; }
+            }
         }
 
         public class ExporterNameless
         {
-
             public ExporterNameless(int value)
             {
                 Value = value;
@@ -701,7 +705,6 @@ namespace System.ComponentModel.Composition
 
             [Export]
             public int Value { get; set; }
-
         }
 
         public class ExportsString
@@ -732,28 +735,45 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ImportListOfExportWithOnlySingleElementsAvailable_ShouldNotFindExport()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(ExportsString), typeof(ImportsListOfExportOfString));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(ExportsString),
+                typeof(ImportsListOfExportOfString)
+            );
             var importer = container.GetExportedValue<ImportsListOfExportOfString>();
             Assert.Null(importer.ExportedList);
 
-            var part = AttributedModelServices.CreatePartDefinition(typeof(ImportsListOfExportOfString), null);
+            var part = AttributedModelServices.CreatePartDefinition(
+                typeof(ImportsListOfExportOfString),
+                null
+            );
             var contract = AttributedModelServices.GetContractName(typeof(List<Lazy<string>>));
-            Assert.Equal(contract, ((ContractBasedImportDefinition)part.ImportDefinitions.First()).ContractName);
+            Assert.Equal(
+                contract,
+                ((ContractBasedImportDefinition)part.ImportDefinitions.First()).ContractName
+            );
         }
 
         [Fact]
         public void ImportListOfExportWithInvalidCollectionAvailable_ShouldThrowMismatch()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(ExportsInvalidListOfExportOfString), typeof(ImportsListOfExportOfString));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(ExportsInvalidListOfExportOfString),
+                typeof(ImportsListOfExportOfString)
+            );
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
-                container.GetExportedValue<ImportsListOfExportOfString>());
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotGetExportedValue,
+                () => container.GetExportedValue<ImportsListOfExportOfString>()
+            );
         }
 
         [Fact]
         public void ImportListOfExportWithValidCollectionAvailable_ShouldSatisfyImport()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(ExportsValidListOfExportOfString), typeof(ImportsListOfExportOfString));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(ExportsValidListOfExportOfString),
+                typeof(ImportsListOfExportOfString)
+            );
             var importer = container.GetExportedValue<ImportsListOfExportOfString>();
             Assert.Equal(0, importer.ExportedList.Count);
         }

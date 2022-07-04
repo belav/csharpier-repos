@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Update;
 
 #nullable enable
 
-public abstract class StoreValueGenerationFixtureBase : SharedStoreFixtureBase<StoreValueGenerationContext>
+public abstract class StoreValueGenerationFixtureBase
+    : SharedStoreFixtureBase<StoreValueGenerationContext>
 {
     protected override string StoreName { get; } = "StoreValueGenerationTest";
 
@@ -15,11 +16,13 @@ public abstract class StoreValueGenerationFixtureBase : SharedStoreFixtureBase<S
     {
         var sqlGenerationHelper = context.GetService<ISqlGenerationHelper>();
 
-        foreach (var name in new[]
-                 {
-                     nameof(StoreValueGenerationContext.WithNoDatabaseGenerated),
-                     nameof(StoreValueGenerationContext.WithNoDatabaseGenerated2)
-                 })
+        foreach (
+            var name in new[]
+            {
+                nameof(StoreValueGenerationContext.WithNoDatabaseGenerated),
+                nameof(StoreValueGenerationContext.WithNoDatabaseGenerated2)
+            }
+        )
         {
             modelBuilder
                 .SharedTypeEntity<StoreValueGenerationData>(name)
@@ -27,23 +30,30 @@ public abstract class StoreValueGenerationFixtureBase : SharedStoreFixtureBase<S
                 .ValueGeneratedNever();
         }
 
-        foreach (var name in new[]
-                 {
-                     nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated),
-                     nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated2)
-                 })
+        foreach (
+            var name in new[]
+            {
+                nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated),
+                nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated2)
+            }
+        )
         {
             modelBuilder
                 .SharedTypeEntity<StoreValueGenerationData>(name)
                 .Property(w => w.Data1)
-                .HasComputedColumnSql(sqlGenerationHelper.DelimitIdentifier(nameof(StoreValueGenerationData.Data2)) + " + 1");
+                .HasComputedColumnSql(
+                    sqlGenerationHelper.DelimitIdentifier(nameof(StoreValueGenerationData.Data2))
+                        + " + 1"
+                );
         }
 
-        foreach (var name in new[]
-                 {
-                     nameof(StoreValueGenerationContext.WithAllDatabaseGenerated),
-                     nameof(StoreValueGenerationContext.WithAllDatabaseGenerated2)
-                 })
+        foreach (
+            var name in new[]
+            {
+                nameof(StoreValueGenerationContext.WithAllDatabaseGenerated),
+                nameof(StoreValueGenerationContext.WithAllDatabaseGenerated2)
+            }
+        )
         {
             modelBuilder
                 .SharedTypeEntity<StoreValueGenerationData>(name)
@@ -62,8 +72,34 @@ public abstract class StoreValueGenerationFixtureBase : SharedStoreFixtureBase<S
         context.WithSomeDatabaseGenerated.AddRange(new() { Data2 = 1 }, new() { Data2 = 2 });
         context.WithSomeDatabaseGenerated2.AddRange(new() { Data2 = 1 }, new() { Data2 = 2 });
 
-        context.WithNoDatabaseGenerated.AddRange(new() { Id = 1, Data1 = 10, Data2 = 20 }, new() { Id = 2, Data1 = 11, Data2 = 21 });
-        context.WithNoDatabaseGenerated2.AddRange(new() { Id = 1, Data1 = 10, Data2 = 20 }, new() { Id = 2, Data1 = 11, Data2 = 21 });
+        context.WithNoDatabaseGenerated.AddRange(
+            new()
+            {
+                Id = 1,
+                Data1 = 10,
+                Data2 = 20
+            },
+            new()
+            {
+                Id = 2,
+                Data1 = 11,
+                Data2 = 21
+            }
+        );
+        context.WithNoDatabaseGenerated2.AddRange(
+            new()
+            {
+                Id = 1,
+                Data1 = 10,
+                Data2 = 20
+            },
+            new()
+            {
+                Id = 2,
+                Data1 = 11,
+                Data2 = 21
+            }
+        );
 
         context.WithAllDatabaseGenerated.AddRange(new(), new());
         context.WithAllDatabaseGenerated2.AddRange(new(), new());
@@ -75,22 +111,33 @@ public abstract class StoreValueGenerationFixtureBase : SharedStoreFixtureBase<S
     {
         var storeValueGenerationContext = CreateContext();
 
-        storeValueGenerationContext.WithSomeDatabaseGenerated.RemoveRange(storeValueGenerationContext.WithSomeDatabaseGenerated);
-        storeValueGenerationContext.WithSomeDatabaseGenerated2.RemoveRange(storeValueGenerationContext.WithSomeDatabaseGenerated2);
+        storeValueGenerationContext.WithSomeDatabaseGenerated.RemoveRange(
+            storeValueGenerationContext.WithSomeDatabaseGenerated
+        );
+        storeValueGenerationContext.WithSomeDatabaseGenerated2.RemoveRange(
+            storeValueGenerationContext.WithSomeDatabaseGenerated2
+        );
 
-        storeValueGenerationContext.WithNoDatabaseGenerated.RemoveRange(storeValueGenerationContext.WithNoDatabaseGenerated);
-        storeValueGenerationContext.WithNoDatabaseGenerated2.RemoveRange(storeValueGenerationContext.WithNoDatabaseGenerated2);
+        storeValueGenerationContext.WithNoDatabaseGenerated.RemoveRange(
+            storeValueGenerationContext.WithNoDatabaseGenerated
+        );
+        storeValueGenerationContext.WithNoDatabaseGenerated2.RemoveRange(
+            storeValueGenerationContext.WithNoDatabaseGenerated2
+        );
 
-        storeValueGenerationContext.WithAllDatabaseGenerated.RemoveRange(storeValueGenerationContext.WithAllDatabaseGenerated);
-        storeValueGenerationContext.WithAllDatabaseGenerated2.RemoveRange(storeValueGenerationContext.WithAllDatabaseGenerated2);
+        storeValueGenerationContext.WithAllDatabaseGenerated.RemoveRange(
+            storeValueGenerationContext.WithAllDatabaseGenerated
+        );
+        storeValueGenerationContext.WithAllDatabaseGenerated2.RemoveRange(
+            storeValueGenerationContext.WithAllDatabaseGenerated2
+        );
 
         storeValueGenerationContext.SaveChanges();
     }
 
-    protected override bool ShouldLogCategory(string logCategory)
-        => logCategory == DbLoggerCategory.Database.Transaction.Name
-            || logCategory == DbLoggerCategory.Database.Command.Name;
+    protected override bool ShouldLogCategory(string logCategory) =>
+        logCategory == DbLoggerCategory.Database.Transaction.Name
+        || logCategory == DbLoggerCategory.Database.Command.Name;
 
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 }

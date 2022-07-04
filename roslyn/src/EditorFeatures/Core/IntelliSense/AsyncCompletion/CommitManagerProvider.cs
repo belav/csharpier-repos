@@ -28,21 +28,29 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         public CommitManagerProvider(
             IThreadingContext threadingContext,
             RecentItemsManager recentItemsManager,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             _threadingContext = threadingContext;
             _recentItemsManager = recentItemsManager;
             _globalOptions = globalOptions;
         }
 
-        IAsyncCompletionCommitManager? IAsyncCompletionCommitManagerProvider.GetOrCreate(ITextView textView)
+        IAsyncCompletionCommitManager? IAsyncCompletionCommitManagerProvider.GetOrCreate(
+            ITextView textView
+        )
         {
             if (textView.IsInLspEditorContext())
             {
                 return null;
             }
 
-            return new CommitManager(textView, _recentItemsManager, _globalOptions, _threadingContext);
+            return new CommitManager(
+                textView,
+                _recentItemsManager,
+                _globalOptions,
+                _threadingContext
+            );
         }
     }
 }

@@ -23,15 +23,15 @@ namespace Internal.Cryptography.Pal
                 _readonly = (openFlags & (OpenFlags.ReadWrite | OpenFlags.MaxAllowed)) == 0;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void CloneTo(X509Certificate2Collection collection)
             {
                 HashSet<X509Certificate2> dedupedCerts = new HashSet<X509Certificate2>();
 
-                using (SafeCFArrayHandle identities = Interop.AppleCrypto.KeychainEnumerateIdentities())
+                using (
+                    SafeCFArrayHandle identities = Interop.AppleCrypto.KeychainEnumerateIdentities()
+                )
                 {
                     ReadCollection(identities, dedupedCerts);
                 }

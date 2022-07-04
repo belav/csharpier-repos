@@ -20,17 +20,13 @@ public class InnerJoinExpression : PredicateJoinExpressionBase
     /// <param name="table">A table source to INNER JOIN with.</param>
     /// <param name="joinPredicate">A predicate to use for the join.</param>
     public InnerJoinExpression(TableExpressionBase table, SqlExpression joinPredicate)
-        : this(table, joinPredicate, annotations: null)
-    {
-    }
+        : this(table, joinPredicate, annotations: null) { }
 
     private InnerJoinExpression(
         TableExpressionBase table,
         SqlExpression joinPredicate,
-        IEnumerable<IAnnotation>? annotations)
-        : base(table, joinPredicate, annotations)
-    {
-    }
+        IEnumerable<IAnnotation>? annotations
+    ) : base(table, joinPredicate, annotations) { }
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -48,8 +44,11 @@ public class InnerJoinExpression : PredicateJoinExpressionBase
     /// <param name="table">The <see cref="JoinExpressionBase.Table" /> property of the result.</param>
     /// <param name="joinPredicate">The <see cref="PredicateJoinExpressionBase.JoinPredicate" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual InnerJoinExpression Update(TableExpressionBase table, SqlExpression joinPredicate)
-        => table != Table || joinPredicate != JoinPredicate
+    public virtual InnerJoinExpression Update(
+        TableExpressionBase table,
+        SqlExpression joinPredicate
+    ) =>
+        table != Table || joinPredicate != JoinPredicate
             ? new InnerJoinExpression(table, joinPredicate, GetAnnotations())
             : this;
 
@@ -64,16 +63,16 @@ public class InnerJoinExpression : PredicateJoinExpressionBase
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is InnerJoinExpression innerJoinExpression
-                && Equals(innerJoinExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is InnerJoinExpression innerJoinExpression && Equals(innerJoinExpression)
+        );
 
-    private bool Equals(InnerJoinExpression innerJoinExpression)
-        => base.Equals(innerJoinExpression);
+    private bool Equals(InnerJoinExpression innerJoinExpression) =>
+        base.Equals(innerJoinExpression);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 }

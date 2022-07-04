@@ -27,8 +27,8 @@ public class IndexWithPropertyEventData : EventData
         IEntityType entityType,
         string? indexName,
         List<string> indexPropertyNames,
-        string invalidPropertyName)
-        : base(eventDefinition, messageGenerator)
+        string invalidPropertyName
+    ) : base(eventDefinition, messageGenerator)
     {
         EntityType = entityType;
         Name = indexName;

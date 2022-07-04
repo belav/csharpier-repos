@@ -108,17 +108,27 @@ namespace Internal.Runtime
                     int offs = defType.IsValueType ? builder.TargetPointerSize : 0;
 
                     // Include syncblock
-                    int objectSize = defType.InstanceByteCount.AsInt + offs + builder.TargetPointerSize;
+                    int objectSize =
+                        defType.InstanceByteCount.AsInt + offs + builder.TargetPointerSize;
 
-                    EncodeStandardGCDesc(ref builder, GCPointerMap.FromInstanceLayout(defType), objectSize, offs);
+                    EncodeStandardGCDesc(
+                        ref builder,
+                        GCPointerMap.FromInstanceLayout(defType),
+                        objectSize,
+                        offs
+                    );
                 }
             }
 
             Debug.Assert(initialBuilderPosition + GetGCDescSize(type) == builder.CountBytes);
         }
 
-        public static void EncodeStandardGCDesc<T>(ref T builder, GCPointerMap map, int size, int delta)
-            where T : struct, ITargetBinaryWriter
+        public static void EncodeStandardGCDesc<T>(
+            ref T builder,
+            GCPointerMap map,
+            int size,
+            int delta
+        ) where T : struct, ITargetBinaryWriter
         {
             Debug.Assert(size >= map.Size);
 
@@ -154,7 +164,7 @@ namespace Internal.Runtime
             where T : struct, ITargetBinaryWriter
         {
             // Construct the gc info as if this array contains exactly one pointer
-            // - the encoding trick where the size of the series is measured as a difference from 
+            // - the encoding trick where the size of the series is measured as a difference from
             // total object size will make this work for arbitrary array lengths
 
             // Series size

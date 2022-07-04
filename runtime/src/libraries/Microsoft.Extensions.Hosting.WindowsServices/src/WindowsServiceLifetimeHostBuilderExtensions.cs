@@ -42,34 +42,44 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="hostBuilder">The <see cref="IHostBuilder"/> to operate on.</param>
         /// <param name="configure"></param>
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
-        public static IHostBuilder UseWindowsService(this IHostBuilder hostBuilder, Action<WindowsServiceLifetimeOptions> configure)
+        public static IHostBuilder UseWindowsService(
+            this IHostBuilder hostBuilder,
+            Action<WindowsServiceLifetimeOptions> configure
+        )
         {
             if (WindowsServiceHelpers.IsWindowsService())
             {
                 // Host.CreateDefaultBuilder uses CurrentDirectory for VS scenarios, but CurrentDirectory for services is c:\Windows\System32.
                 hostBuilder.UseContentRoot(AppContext.BaseDirectory);
-                hostBuilder.ConfigureLogging((hostingContext, logging) =>
-                {
-                    Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
-
-                    logging.AddEventLog();
-                })
-                .ConfigureServices((hostContext, services) =>
-                {
-                    Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
-
-                    services.AddSingleton<IHostLifetime, WindowsServiceLifetime>();
-                    services.Configure<EventLogSettings>(settings =>
-                    {
-                        Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
-
-                        if (string.IsNullOrEmpty(settings.SourceName))
+                hostBuilder
+                    .ConfigureLogging(
+                        (hostingContext, logging) =>
                         {
-                            settings.SourceName = hostContext.HostingEnvironment.ApplicationName;
+                            Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
+
+                            logging.AddEventLog();
                         }
-                    });
-                    services.Configure(configure);
-                });
+                    )
+                    .ConfigureServices(
+                        (hostContext, services) =>
+                        {
+                            Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
+
+                            services.AddSingleton<IHostLifetime, WindowsServiceLifetime>();
+                            services.Configure<EventLogSettings>(settings =>
+                            {
+                                Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
+
+                                if (string.IsNullOrEmpty(settings.SourceName))
+                                {
+                                    settings.SourceName = hostContext
+                                        .HostingEnvironment
+                                        .ApplicationName;
+                                }
+                            });
+                            services.Configure(configure);
+                        }
+                    );
             }
 
             return hostBuilder;

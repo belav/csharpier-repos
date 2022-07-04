@@ -23,7 +23,8 @@ public class BatchExecutor : IBatchExecutor
     /// </summary>
     public BatchExecutor(
         ICurrentDbContext currentContext,
-        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger)
+        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
+    )
     {
         CurrentContext = currentContext;
         UpdateLogger = updateLogger;
@@ -50,7 +51,8 @@ public class BatchExecutor : IBatchExecutor
     /// </summary>
     public virtual int Execute(
         IEnumerable<(ModificationCommandBatch Batch, bool HasMore)> commandBatches,
-        IRelationalConnection connection)
+        IRelationalConnection connection
+    )
     {
         using var batchEnumerator = commandBatches.GetEnumerator();
 
@@ -68,12 +70,14 @@ public class BatchExecutor : IBatchExecutor
         try
         {
             var transactionEnlistManager = connection as ITransactionEnlistmentManager;
-            if (transaction == null
+            if (
+                transaction == null
                 && transactionEnlistManager?.EnlistedTransaction is null
                 && transactionEnlistManager?.CurrentAmbientTransaction is null
                 && CurrentContext.Context.Database.AutoTransactionsEnabled
                 // Don't start a transaction if we have a single batch which doesn't require a transaction (single command), for perf.
-                && (hasMoreBatches || batch.RequiresTransaction))
+                && (hasMoreBatches || batch.RequiresTransaction)
+            )
             {
                 transaction = connection.BeginTransaction();
                 beganTransaction = true;
@@ -82,8 +86,10 @@ public class BatchExecutor : IBatchExecutor
             {
                 connection.Open();
 
-                if (transaction?.SupportsSavepoints == true
-                    && CurrentContext.Context.Database.AutoSavepointsEnabled)
+                if (
+                    transaction?.SupportsSavepoints == true
+                    && CurrentContext.Context.Database.AutoSavepointsEnabled
+                )
                 {
                     transaction.CreateSavepoint(SavepointName);
                     createdSavepoint = true;
@@ -95,8 +101,7 @@ public class BatchExecutor : IBatchExecutor
                 batch = batchEnumerator.Current.Batch;
                 batch.Execute(connection);
                 rowsAffected += batch.ModificationCommands.Count;
-            }
-            while (batchEnumerator.MoveNext());
+            } while (batchEnumerator.MoveNext());
 
             if (beganTransaction)
             {
@@ -113,7 +118,10 @@ public class BatchExecutor : IBatchExecutor
                 }
                 catch (Exception e)
                 {
-                    UpdateLogger.BatchExecutorFailedToRollbackToSavepoint(CurrentContext.GetType(), e);
+                    UpdateLogger.BatchExecutorFailedToRollbackToSavepoint(
+                        CurrentContext.GetType(),
+                        e
+                    );
                 }
             }
 
@@ -137,7 +145,10 @@ public class BatchExecutor : IBatchExecutor
                         }
                         catch (Exception e)
                         {
-                            UpdateLogger.BatchExecutorFailedToReleaseSavepoint(CurrentContext.GetType(), e);
+                            UpdateLogger.BatchExecutorFailedToReleaseSavepoint(
+                                CurrentContext.GetType(),
+                                e
+                            );
                         }
                     }
                 }
@@ -158,7 +169,8 @@ public class BatchExecutor : IBatchExecutor
     public virtual async Task<int> ExecuteAsync(
         IEnumerable<(ModificationCommandBatch Batch, bool HasMore)> commandBatches,
         IRelationalConnection connection,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         using var batchEnumerator = commandBatches.GetEnumerator();
 
@@ -176,24 +188,32 @@ public class BatchExecutor : IBatchExecutor
         try
         {
             var transactionEnlistManager = connection as ITransactionEnlistmentManager;
-            if (transaction == null
+            if (
+                transaction == null
                 && transactionEnlistManager?.EnlistedTransaction is null
                 && transactionEnlistManager?.CurrentAmbientTransaction is null
                 && CurrentContext.Context.Database.AutoTransactionsEnabled
                 // Don't start a transaction if we have a single batch which doesn't require a transaction (single command), for perf.
-                && (hasMoreBatches || batch.RequiresTransaction))
+                && (hasMoreBatches || batch.RequiresTransaction)
+            )
             {
-                transaction = await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+                transaction = await connection
+                    .BeginTransactionAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 beganTransaction = true;
             }
             else
             {
                 await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
 
-                if (transaction?.SupportsSavepoints == true
-                    && CurrentContext.Context.Database.AutoSavepointsEnabled)
+                if (
+                    transaction?.SupportsSavepoints == true
+                    && CurrentContext.Context.Database.AutoSavepointsEnabled
+                )
                 {
-                    await transaction.CreateSavepointAsync(SavepointName, cancellationToken).ConfigureAwait(false);
+                    await transaction
+                        .CreateSavepointAsync(SavepointName, cancellationToken)
+                        .ConfigureAwait(false);
                     createdSavepoint = true;
                 }
             }
@@ -203,8 +223,7 @@ public class BatchExecutor : IBatchExecutor
                 batch = batchEnumerator.Current.Batch;
                 await batch.ExecuteAsync(connection, cancellationToken).ConfigureAwait(false);
                 rowsAffected += batch.ModificationCommands.Count;
-            }
-            while (batchEnumerator.MoveNext());
+            } while (batchEnumerator.MoveNext());
 
             if (beganTransaction)
             {
@@ -217,11 +236,16 @@ public class BatchExecutor : IBatchExecutor
             {
                 try
                 {
-                    await transaction!.RollbackToSavepointAsync(SavepointName, cancellationToken).ConfigureAwait(false);
+                    await transaction!
+                        .RollbackToSavepointAsync(SavepointName, cancellationToken)
+                        .ConfigureAwait(false);
                 }
                 catch (Exception e)
                 {
-                    UpdateLogger.BatchExecutorFailedToRollbackToSavepoint(CurrentContext.GetType(), e);
+                    UpdateLogger.BatchExecutorFailedToRollbackToSavepoint(
+                        CurrentContext.GetType(),
+                        e
+                    );
                 }
             }
 
@@ -241,11 +265,16 @@ public class BatchExecutor : IBatchExecutor
                     {
                         try
                         {
-                            await transaction!.ReleaseSavepointAsync(SavepointName, cancellationToken).ConfigureAwait(false);
+                            await transaction!
+                                .ReleaseSavepointAsync(SavepointName, cancellationToken)
+                                .ConfigureAwait(false);
                         }
                         catch (Exception e)
                         {
-                            UpdateLogger.BatchExecutorFailedToReleaseSavepoint(CurrentContext.GetType(), e);
+                            UpdateLogger.BatchExecutorFailedToReleaseSavepoint(
+                                CurrentContext.GetType(),
+                                e
+                            );
                         }
                     }
                 }

@@ -45,7 +45,8 @@ namespace System.Text.Json
             return _cachingContext.TryGetJsonTypeInfo(type, out typeInfo);
         }
 
-        internal bool IsJsonTypeInfoCached(Type type) => _cachingContext?.IsJsonTypeInfoCached(type) == true;
+        internal bool IsJsonTypeInfoCached(Type type) =>
+            _cachingContext?.IsJsonTypeInfoCached(type) == true;
 
         /// <summary>
         /// Return the TypeInfo for root API calls.
@@ -97,12 +98,22 @@ namespace System.Text.Json
             }
 
             public JsonSerializerOptions Options { get; }
+
             // Property only accessed by reflection in testing -- do not remove.
             // If changing please ensure that src/ILLink.Descriptors.LibraryBuild.xml is up-to-date.
             public int Count => _converterCache.Count + _jsonTypeInfoCache.Count;
-            public JsonConverter GetOrAddConverter(Type type) => _converterCache.GetOrAdd(type, Options.GetConverterFromType);
-            public JsonTypeInfo GetOrAddJsonTypeInfo(Type type) => _jsonTypeInfoCache.GetOrAdd(type, Options.GetJsonTypeInfoFromContextOrCreate);
-            public bool TryGetJsonTypeInfo(Type type, [NotNullWhen(true)] out JsonTypeInfo? typeInfo) => _jsonTypeInfoCache.TryGetValue(type, out typeInfo);
+
+            public JsonConverter GetOrAddConverter(Type type) =>
+                _converterCache.GetOrAdd(type, Options.GetConverterFromType);
+
+            public JsonTypeInfo GetOrAddJsonTypeInfo(Type type) =>
+                _jsonTypeInfoCache.GetOrAdd(type, Options.GetJsonTypeInfoFromContextOrCreate);
+
+            public bool TryGetJsonTypeInfo(
+                Type type,
+                [NotNullWhen(true)] out JsonTypeInfo? typeInfo
+            ) => _jsonTypeInfoCache.TryGetValue(type, out typeInfo);
+
             public bool IsJsonTypeInfoCached(Type type) => _jsonTypeInfoCache.ContainsKey(type);
 
             public void Clear()
@@ -120,7 +131,10 @@ namespace System.Text.Json
         internal static class TrackedCachingContexts
         {
             private const int MaxTrackedContexts = 64;
-            private static readonly ConcurrentDictionary<JsonSerializerOptions, WeakReference<CachingContext>> s_cache =
+            private static readonly ConcurrentDictionary<
+                JsonSerializerOptions,
+                WeakReference<CachingContext>
+            > s_cache =
                 new(concurrencyLevel: 1, capacity: MaxTrackedContexts, new EqualityComparer());
 
             private const int EvictionCountHistory = 16;
@@ -129,9 +143,13 @@ namespace System.Text.Json
 
             public static CachingContext GetOrCreate(JsonSerializerOptions options)
             {
-                ConcurrentDictionary<JsonSerializerOptions, WeakReference<CachingContext>> cache = s_cache;
+                ConcurrentDictionary<JsonSerializerOptions, WeakReference<CachingContext>> cache =
+                    s_cache;
 
-                if (cache.TryGetValue(options, out WeakReference<CachingContext>? wr) && wr.TryGetTarget(out CachingContext? ctx))
+                if (
+                    cache.TryGetValue(options, out WeakReference<CachingContext>? wr)
+                    && wr.TryGetTarget(out CachingContext? ctx)
+                )
                 {
                     return ctx;
                 }
@@ -207,7 +225,12 @@ namespace System.Text.Json
                 }
 
                 int currentEvictions = 0;
-                foreach (KeyValuePair<JsonSerializerOptions, WeakReference<CachingContext>> kvp in s_cache)
+                foreach (
+                    KeyValuePair<
+                        JsonSerializerOptions,
+                        WeakReference<CachingContext>
+                    > kvp in s_cache
+                )
                 {
                     if (!kvp.Value.TryGetTarget(out _))
                     {
@@ -250,10 +273,16 @@ namespace System.Text.Json
                     }
 
                     int evictionRunsToSkip =
-                        totalEvictions >= EvictionCountHistory ? 0 :
-                        (int)Math.Round((double)EvictionCountHistory / Math.Max(totalEvictions, 1));
+                        totalEvictions >= EvictionCountHistory
+                            ? 0
+                            : (int)
+                                Math.Round(
+                                    (double)EvictionCountHistory / Math.Max(totalEvictions, 1)
+                                );
 
-                    Debug.Assert(0 <= evictionRunsToSkip && evictionRunsToSkip <= EvictionCountHistory);
+                    Debug.Assert(
+                        0 <= evictionRunsToSkip && evictionRunsToSkip <= EvictionCountHistory
+                    );
                     return evictionRunsToSkip;
                 }
             }
@@ -269,31 +298,37 @@ namespace System.Text.Json
             public bool Equals(JsonSerializerOptions? left, JsonSerializerOptions? right)
             {
                 Debug.Assert(left != null && right != null);
-                return
-                    left._dictionaryKeyPolicy == right._dictionaryKeyPolicy &&
-                    left._jsonPropertyNamingPolicy == right._jsonPropertyNamingPolicy &&
-                    left._readCommentHandling == right._readCommentHandling &&
-                    left._referenceHandler == right._referenceHandler &&
-                    left._encoder == right._encoder &&
-                    left._defaultIgnoreCondition == right._defaultIgnoreCondition &&
-                    left._numberHandling == right._numberHandling &&
-                    left._unknownTypeHandling == right._unknownTypeHandling &&
-                    left._defaultBufferSize == right._defaultBufferSize &&
-                    left._maxDepth == right._maxDepth &&
-                    left._allowTrailingCommas == right._allowTrailingCommas &&
-                    left._ignoreNullValues == right._ignoreNullValues &&
-                    left._ignoreReadOnlyProperties == right._ignoreReadOnlyProperties &&
-                    left._ignoreReadonlyFields == right._ignoreReadonlyFields &&
-                    left._includeFields == right._includeFields &&
-                    left._propertyNameCaseInsensitive == right._propertyNameCaseInsensitive &&
-                    left._writeIndented == right._writeIndented &&
-                    left._serializerContext == right._serializerContext &&
-                    CompareLists(left._converters, right._converters) &&
+                return left._dictionaryKeyPolicy == right._dictionaryKeyPolicy
+                    && left._jsonPropertyNamingPolicy == right._jsonPropertyNamingPolicy
+                    && left._readCommentHandling == right._readCommentHandling
+                    && left._referenceHandler == right._referenceHandler
+                    && left._encoder == right._encoder
+                    && left._defaultIgnoreCondition == right._defaultIgnoreCondition
+                    && left._numberHandling == right._numberHandling
+                    && left._unknownTypeHandling == right._unknownTypeHandling
+                    && left._defaultBufferSize == right._defaultBufferSize
+                    && left._maxDepth == right._maxDepth
+                    && left._allowTrailingCommas == right._allowTrailingCommas
+                    && left._ignoreNullValues == right._ignoreNullValues
+                    && left._ignoreReadOnlyProperties == right._ignoreReadOnlyProperties
+                    && left._ignoreReadonlyFields == right._ignoreReadonlyFields
+                    && left._includeFields == right._includeFields
+                    && left._propertyNameCaseInsensitive == right._propertyNameCaseInsensitive
+                    && left._writeIndented == right._writeIndented
+                    && left._serializerContext == right._serializerContext
+                    && CompareLists(left._converters, right._converters)
+                    &&
 #pragma warning disable CA2252 // This API requires opting into preview features
-                    CompareLists(left._polymorphicTypeConfigurations, right._polymorphicTypeConfigurations);
+                    CompareLists(
+                        left._polymorphicTypeConfigurations,
+                        right._polymorphicTypeConfigurations
+                    );
 #pragma warning restore CA2252 // This API requires opting into preview features
 
-                static bool CompareLists<TValue>(ConfigurationList<TValue> left, ConfigurationList<TValue> right)
+                static bool CompareLists<TValue>(
+                    ConfigurationList<TValue> left,
+                    ConfigurationList<TValue> right
+                )
                 {
                     int n;
                     if ((n = left.Count) != right.Count)
@@ -358,7 +393,9 @@ namespace System.Text.Json
             private struct HashCode
             {
                 private int _hashCode;
+
                 public void Add<T>(T? value) => _hashCode = (_hashCode, value).GetHashCode();
+
                 public int ToHashCode() => _hashCode;
             }
 #endif

@@ -23,7 +23,9 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 {
     [Method(Methods.TextDocumentSemanticTokensRangeName)]
-    internal class SemanticTokensRangeHandler : IRequestHandler<LSP.SemanticTokensRangeParams, LSP.SemanticTokens>, IDisposable
+    internal class SemanticTokensRangeHandler
+        : IRequestHandler<LSP.SemanticTokensRangeParams, LSP.SemanticTokens>,
+            IDisposable
     {
         private readonly IGlobalOptionService _globalOptions;
         private readonly IAsynchronousOperationListener _asyncListener;
@@ -43,7 +45,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         /// <summary>
         /// Mapping from project id to the workqueue for producing the corresponding compilation for it on the OOP server.
         /// </summary>
-        private readonly Dictionary<ProjectId, CompilationAvailableEventSource> _projectIdToEventSource = new();
+        private readonly Dictionary<
+            ProjectId,
+            CompilationAvailableEventSource
+        > _projectIdToEventSource = new();
 
         /// <summary>
         /// Mapping from project id to the project-cone-checksum for it we were at when the project for it had its
@@ -55,7 +60,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
 
         /// <summary>
         /// Debouncing queue so that we don't attempt to issue a semantic tokens refresh notification too often.
-        /// 
+        ///
         /// Null when the client does not support sending refresh notifications.
         /// </summary>
         private readonly AsyncBatchingWorkQueue? _semanticTokenRefreshQueue;
@@ -67,10 +72,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             ILanguageServerNotificationManager notificationManager,
-            ClientCapabilities clientCapabilities)
+            ClientCapabilities clientCapabilities
+        )
         {
             _globalOptions = globalOptions;
-            _asyncListener = asynchronousOperationListenerProvider.GetListener(FeatureAttribute.Classification);
+            _asyncListener = asynchronousOperationListenerProvider.GetListener(
+                FeatureAttribute.Classification
+            );
 
             _lspWorkspaceRegistrationService = lspWorkspaceRegistrationService;
 
@@ -84,15 +92,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 // an enormous amount of time.
                 _semanticTokenRefreshQueue = new AsyncBatchingWorkQueue(
                     delay: TimeSpan.FromMilliseconds(500),
-                    processBatchAsync: c => notificationManager.SendNotificationAsync(Methods.WorkspaceSemanticTokensRefreshName, c),
+                    processBatchAsync: c =>
+                        notificationManager.SendNotificationAsync(
+                            Methods.WorkspaceSemanticTokensRefreshName,
+                            c
+                        ),
                     asyncListener: _asyncListener,
-                    _disposalTokenSource.Token);
+                    _disposalTokenSource.Token
+                );
 
                 _lspWorkspaceRegistrationService.LspSolutionChanged += OnLspSolutionChanged;
             }
         }
 
-        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.SemanticTokensRangeParams request)
+        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
+            LSP.SemanticTokensRangeParams request
+        )
         {
             Contract.ThrowIfNull(request.TextDocument);
             return request.TextDocument;
@@ -116,8 +131,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             _disposalTokenSource.Dispose();
         }
 
-        private void OnLspSolutionChanged(object? sender, WorkspaceChangeEventArgs e)
-            => EnqueueSemanticTokenRefreshNotification();
+        private void OnLspSolutionChanged(object? sender, WorkspaceChangeEventArgs e) =>
+            EnqueueSemanticTokenRefreshNotification();
 
         private void EnqueueSemanticTokenRefreshNotification()
         {
@@ -129,7 +144,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         public async Task<LSP.SemanticTokens> HandleRequestAsync(
             SemanticTokensRangeParams request,
             RequestContext context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(request.TextDocument, "TextDocument is null.");
             Contract.ThrowIfNull(context.Document, "Document is null.");
@@ -138,35 +154,47 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             // results but will speed up how quickly we can respond to the client's request.
             var document = context.Document.WithFrozenPartialSemantics(cancellationToken);
             var project = document.Project;
-            var options = _globalOptions.GetClassificationOptions(project.Language) with { ForceFrozenPartialSemanticsForCrossProcessOperations = true };
+            var options = _globalOptions.GetClassificationOptions(project.Language) with
+            {
+                ForceFrozenPartialSemanticsForCrossProcessOperations = true
+            };
 
             // The results from the range handler should not be cached since we don't want to cache
             // partial token results. In addition, a range request is only ever called with a whole
             // document request, so caching range results is unnecessary since the whole document
             // handler will cache the results anyway.
-            var tokensData = await SemanticTokensHelpers.ComputeSemanticTokensDataAsync(
-                document,
-                SemanticTokensHelpers.TokenTypeToIndex,
-                request.Range,
-                options,
-                includeSyntacticClassifications: context.Document.IsRazorDocument(),
-                cancellationToken).ConfigureAwait(false);
+            var tokensData = await SemanticTokensHelpers
+                .ComputeSemanticTokensDataAsync(
+                    document,
+                    SemanticTokensHelpers.TokenTypeToIndex,
+                    request.Range,
+                    options,
+                    includeSyntacticClassifications: context.Document.IsRazorDocument(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // The above call to get semantic tokens may be inaccurate (because we use frozen partial semantics).  Kick
             // off a request to ensure that the OOP side gets a fully up to compilation for this project.  Once it does
             // we can optionally choose to notify our caller to do a refresh if we computed a compilation for a new
             // solution snapshot.
             if (_semanticTokenRefreshQueue != null)
-                await TryEnqueueRefreshComputationAsync(project, cancellationToken).ConfigureAwait(false);
+                await TryEnqueueRefreshComputationAsync(project, cancellationToken)
+                    .ConfigureAwait(false);
 
             return new LSP.SemanticTokens { Data = tokensData };
         }
 
-        private async Task TryEnqueueRefreshComputationAsync(Project project, CancellationToken cancellationToken)
+        private async Task TryEnqueueRefreshComputationAsync(
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             // Determine the checksum for this project cone.  Note: this should be fast in practice because this is
             // the same project-cone-checksum we used to even call into OOp above when we computed semantic tokens.
-            var projectChecksum = await project.Solution.State.GetChecksumAsync(project.Id, cancellationToken).ConfigureAwait(false);
+            var projectChecksum = await project.Solution.State
+                .GetChecksumAsync(project.Id, cancellationToken)
+                .ConfigureAwait(false);
 
             lock (_gate)
             {
@@ -181,7 +209,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                     _projectIdToEventSource.Add(project.Id, eventSource);
                 }
 
-                eventSource.EnsureCompilationAvailability(project, () => OnCompilationAvailable(project, projectChecksum));
+                eventSource.EnsureCompilationAvailability(
+                    project,
+                    () => OnCompilationAvailable(project, projectChecksum)
+                );
             }
         }
 
@@ -208,7 +239,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             EnqueueSemanticTokenRefreshNotification();
         }
 
-        private bool ChecksumIsUnchanged_NoLock(Project project, Checksum projectChecksum)
-            => _projectIdToLastComputedChecksum.TryGetValue(project.Id, out var lastChecksum) && lastChecksum == projectChecksum;
+        private bool ChecksumIsUnchanged_NoLock(Project project, Checksum projectChecksum) =>
+            _projectIdToLastComputedChecksum.TryGetValue(project.Id, out var lastChecksum)
+            && lastChecksum == projectChecksum;
     }
 }

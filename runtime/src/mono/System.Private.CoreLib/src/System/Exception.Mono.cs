@@ -15,7 +15,10 @@ namespace System
     {
         internal static uint GetExceptionCount()
         {
-            return (uint)EventPipeInternal.GetRuntimeCounterValue(EventPipeInternal.RuntimeCounters.EXCEPTION_COUNT);
+            return (uint)
+                EventPipeInternal.GetRuntimeCounterValue(
+                    EventPipeInternal.RuntimeCounters.EXCEPTION_COUNT
+                );
         }
 
         internal readonly struct DispatchState
@@ -74,9 +77,23 @@ namespace System
 
                 if (foreignExceptionsFrames != null)
                 {
-                    var combinedStackFrames = new MonoStackFrame[stackFrames.Length + foreignExceptionsFrames.Length];
-                    Array.Copy(foreignExceptionsFrames, 0, combinedStackFrames, 0, foreignExceptionsFrames.Length);
-                    Array.Copy(stackFrames, 0, combinedStackFrames, foreignExceptionsFrames.Length, stackFrames.Length);
+                    var combinedStackFrames = new MonoStackFrame[
+                        stackFrames.Length + foreignExceptionsFrames.Length
+                    ];
+                    Array.Copy(
+                        foreignExceptionsFrames,
+                        0,
+                        combinedStackFrames,
+                        0,
+                        foreignExceptionsFrames.Length
+                    );
+                    Array.Copy(
+                        stackFrames,
+                        0,
+                        combinedStackFrames,
+                        foreignExceptionsFrames.Length,
+                        stackFrames.Length
+                    );
 
                     stackFrames = combinedStackFrames;
                 }

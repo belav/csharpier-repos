@@ -8,13 +8,14 @@
         private static Source _source;
         private Destination _destination;
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.AllowNullCollections = false;
-            cfg.CreateMap<Source, Destination>();
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.AllowNullCollections = false;
+                cfg.CreateMap<Source, Destination>();
 
-            _source = new Source {Name = null, Data = null};
-        });
+                _source = new Source { Name = null, Data = null };
+            });
 
         protected override void Because_of()
         {

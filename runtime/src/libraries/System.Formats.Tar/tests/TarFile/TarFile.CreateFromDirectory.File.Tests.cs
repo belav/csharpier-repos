@@ -13,10 +13,38 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void InvalidPaths_Throw()
         {
-            Assert.Throws<ArgumentNullException>(() => TarFile.CreateFromDirectory(sourceDirectoryName: null,destinationFileName: "path", includeBaseDirectory: false));
-            Assert.Throws<ArgumentException>(() => TarFile.CreateFromDirectory(sourceDirectoryName: string.Empty,destinationFileName: "path", includeBaseDirectory: false));
-            Assert.Throws<ArgumentNullException>(() => TarFile.CreateFromDirectory(sourceDirectoryName: "path",destinationFileName: null, includeBaseDirectory: false));
-            Assert.Throws<ArgumentException>(() => TarFile.CreateFromDirectory(sourceDirectoryName: "path",destinationFileName: string.Empty, includeBaseDirectory: false));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    TarFile.CreateFromDirectory(
+                        sourceDirectoryName: null,
+                        destinationFileName: "path",
+                        includeBaseDirectory: false
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    TarFile.CreateFromDirectory(
+                        sourceDirectoryName: string.Empty,
+                        destinationFileName: "path",
+                        includeBaseDirectory: false
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    TarFile.CreateFromDirectory(
+                        sourceDirectoryName: "path",
+                        destinationFileName: null,
+                        includeBaseDirectory: false
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    TarFile.CreateFromDirectory(
+                        sourceDirectoryName: "path",
+                        destinationFileName: string.Empty,
+                        includeBaseDirectory: false
+                    )
+            );
         }
 
         [Fact]
@@ -27,7 +55,14 @@ namespace System.Formats.Tar.Tests
             string dirPath = Path.Join(root.Path, "dir");
             string filePath = Path.Join(root.Path, "file.tar");
 
-            Assert.Throws<DirectoryNotFoundException>(() => TarFile.CreateFromDirectory(sourceDirectoryName: "IDontExist", destinationFileName: filePath, includeBaseDirectory: false));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    TarFile.CreateFromDirectory(
+                        sourceDirectoryName: "IDontExist",
+                        destinationFileName: filePath,
+                        includeBaseDirectory: false
+                    )
+            );
         }
 
         [Fact]
@@ -41,7 +76,14 @@ namespace System.Formats.Tar.Tests
             string filePath = Path.Join(root.Path, "file.tar");
             File.Create(filePath).Dispose();
 
-            Assert.Throws<IOException>(() => TarFile.CreateFromDirectory(sourceDirectoryName: dirPath, destinationFileName: filePath, includeBaseDirectory: false));
+            Assert.Throws<IOException>(
+                () =>
+                    TarFile.CreateFromDirectory(
+                        sourceDirectoryName: dirPath,
+                        destinationFileName: filePath,
+                        includeBaseDirectory: false
+                    )
+            );
         }
 
         [Theory]
@@ -65,7 +107,11 @@ namespace System.Formats.Tar.Tests
             File.Create(filePath2).Dispose();
 
             string destinationArchiveFileName = Path.Join(destination.Path, "output.tar");
-            TarFile.CreateFromDirectory(source.Path, destinationArchiveFileName, includeBaseDirectory);
+            TarFile.CreateFromDirectory(
+                source.Path,
+                destinationArchiveFileName,
+                includeBaseDirectory
+            );
 
             using FileStream fileStream = File.OpenRead(destinationArchiveFileName);
             using TarReader reader = new TarReader(fileStream);
@@ -80,22 +126,24 @@ namespace System.Formats.Tar.Tests
 
             Assert.Equal(3, entries.Count);
 
-            string prefix = includeBaseDirectory ? Path.GetFileName(source.Path) + '/' : string.Empty;
+            string prefix = includeBaseDirectory
+                ? Path.GetFileName(source.Path) + '/'
+                : string.Empty;
 
-            TarEntry entry1 = entries.FirstOrDefault(x =>
-                x.EntryType == TarEntryType.RegularFile &&
-                x.Name == prefix + fileName1);
+            TarEntry entry1 = entries.FirstOrDefault(
+                x => x.EntryType == TarEntryType.RegularFile && x.Name == prefix + fileName1
+            );
             Assert.NotNull(entry1);
 
-            TarEntry directory = entries.FirstOrDefault(x =>
-                x.EntryType == TarEntryType.Directory &&
-                x.Name == prefix + subDirectoryName);
+            TarEntry directory = entries.FirstOrDefault(
+                x => x.EntryType == TarEntryType.Directory && x.Name == prefix + subDirectoryName
+            );
             Assert.NotNull(directory);
 
             string actualFileName2 = subDirectoryName + fileName2; // Notice the trailing separator in subDirectoryName
-            TarEntry entry2 = entries.FirstOrDefault(x =>
-                x.EntryType == TarEntryType.RegularFile &&
-                x.Name == prefix + actualFileName2);
+            TarEntry entry2 = entries.FirstOrDefault(
+                x => x.EntryType == TarEntryType.RegularFile && x.Name == prefix + actualFileName2
+            );
             Assert.NotNull(entry2);
         }
 
@@ -106,7 +154,11 @@ namespace System.Formats.Tar.Tests
             using TempDirectory destination = new TempDirectory();
 
             string destinationArchiveFileName = Path.Join(destination.Path, "output.tar");
-            TarFile.CreateFromDirectory(source.Path, destinationArchiveFileName, includeBaseDirectory: true);
+            TarFile.CreateFromDirectory(
+                source.Path,
+                destinationArchiveFileName,
+                includeBaseDirectory: true
+            );
 
             using FileStream fileStream = File.OpenRead(destinationArchiveFileName);
             using (TarReader reader = new TarReader(fileStream))
@@ -137,12 +189,18 @@ namespace System.Formats.Tar.Tests
 
             string destinationArchiveFileName = Path.Join(destination.Path, "output.tar");
 
-            TarFile.CreateFromDirectory(source.Path, destinationArchiveFileName, includeBaseDirectory);
+            TarFile.CreateFromDirectory(
+                source.Path,
+                destinationArchiveFileName,
+                includeBaseDirectory
+            );
 
             using FileStream fileStream = File.OpenRead(destinationArchiveFileName);
             using TarReader reader = new TarReader(fileStream);
 
-            string prefix = includeBaseDirectory ? Path.GetFileName(source.Path) + '/' : string.Empty;
+            string prefix = includeBaseDirectory
+                ? Path.GetFileName(source.Path) + '/'
+                : string.Empty;
 
             TarEntry entry = reader.GetNextEntry();
             Assert.NotNull(entry);

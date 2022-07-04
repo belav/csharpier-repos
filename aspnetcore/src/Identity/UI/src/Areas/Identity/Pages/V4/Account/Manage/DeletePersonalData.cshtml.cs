@@ -65,7 +65,8 @@ internal sealed class DeletePersonalDataModel<TUser> : DeletePersonalDataModel w
     public DeletePersonalDataModel(
         UserManager<TUser> userManager,
         SignInManager<TUser> signInManager,
-        ILogger<DeletePersonalDataModel> logger)
+        ILogger<DeletePersonalDataModel> logger
+    )
     {
         _userManager = userManager;
         _signInManager = signInManager;

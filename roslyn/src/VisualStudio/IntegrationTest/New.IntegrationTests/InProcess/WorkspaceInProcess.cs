@@ -24,24 +24,49 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             AsynchronousOperationListenerProvider.Enable(true);
         }
 
-        public async Task<bool> IsPrettyListingOnAsync(string languageName, CancellationToken cancellationToken)
+        public async Task<bool> IsPrettyListingOnAsync(
+            string languageName,
+            CancellationToken cancellationToken
+        )
         {
-            var globalOptions = await GetComponentModelServiceAsync<IGlobalOptionService>(cancellationToken);
+            var globalOptions = await GetComponentModelServiceAsync<IGlobalOptionService>(
+                cancellationToken
+            );
             return globalOptions.GetOption(FeatureOnOffOptions.PrettyListing, languageName);
         }
 
-        public async Task SetPrettyListingAsync(string languageName, bool value, CancellationToken cancellationToken)
+        public async Task SetPrettyListingAsync(
+            string languageName,
+            bool value,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var globalOptions = await GetComponentModelServiceAsync<IGlobalOptionService>(cancellationToken);
-            globalOptions.SetGlobalOption(new OptionKey(FeatureOnOffOptions.PrettyListing, languageName), value);
+            var globalOptions = await GetComponentModelServiceAsync<IGlobalOptionService>(
+                cancellationToken
+            );
+            globalOptions.SetGlobalOption(
+                new OptionKey(FeatureOnOffOptions.PrettyListing, languageName),
+                value
+            );
         }
 
-        public Task WaitForAsyncOperationsAsync(string featuresToWaitFor, CancellationToken cancellationToken)
-            => WaitForAsyncOperationsAsync(featuresToWaitFor, waitForWorkspaceFirst: true, cancellationToken);
+        public Task WaitForAsyncOperationsAsync(
+            string featuresToWaitFor,
+            CancellationToken cancellationToken
+        ) =>
+            WaitForAsyncOperationsAsync(
+                featuresToWaitFor,
+                waitForWorkspaceFirst: true,
+                cancellationToken
+            );
 
-        public async Task WaitForAsyncOperationsAsync(string featuresToWaitFor, bool waitForWorkspaceFirst, CancellationToken cancellationToken)
+        public async Task WaitForAsyncOperationsAsync(
+            string featuresToWaitFor,
+            bool waitForWorkspaceFirst,
+            CancellationToken cancellationToken
+        )
         {
             if (waitForWorkspaceFirst || featuresToWaitFor == FeatureAttribute.Workspace)
             {
@@ -50,7 +75,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 await TestServices.Editor.WaitForEditorOperationsAsync(cancellationToken);
             }
 
-            var listenerProvider = await GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(cancellationToken);
+            var listenerProvider =
+                await GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(
+                    cancellationToken
+                );
 
             if (waitForWorkspaceFirst)
             {
@@ -62,7 +90,10 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             await featureWaiter.ExpeditedWaitAsync().WithCancellation(cancellationToken);
         }
 
-        public async Task WaitForAllAsyncOperationsAsync(string[] featureNames, CancellationToken cancellationToken)
+        public async Task WaitForAllAsyncOperationsAsync(
+            string[] featureNames,
+            CancellationToken cancellationToken
+        )
         {
             if (featureNames.Contains(FeatureAttribute.Workspace))
             {
@@ -71,18 +102,30 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 await TestServices.Editor.WaitForEditorOperationsAsync(cancellationToken);
             }
 
-            var listenerProvider = await GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(cancellationToken);
-            var workspace = await GetComponentModelServiceAsync<VisualStudioWorkspace>(cancellationToken);
+            var listenerProvider =
+                await GetComponentModelServiceAsync<AsynchronousOperationListenerProvider>(
+                    cancellationToken
+                );
+            var workspace = await GetComponentModelServiceAsync<VisualStudioWorkspace>(
+                cancellationToken
+            );
 
             if (featureNames.Contains(FeatureAttribute.NavigateTo))
             {
-                var statusService = workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+                var statusService =
+                    workspace.Services.GetRequiredService<IWorkspaceStatusService>();
                 Contract.ThrowIfFalse(await statusService.IsFullyLoadedAsync(cancellationToken));
 
                 // Make sure the "priming" operation has started for Nav To
-                var threadingContext = await GetComponentModelServiceAsync<IThreadingContext>(cancellationToken);
+                var threadingContext = await GetComponentModelServiceAsync<IThreadingContext>(
+                    cancellationToken
+                );
                 var asyncListener = listenerProvider.GetListener(FeatureAttribute.NavigateTo);
-                var searchHost = new DefaultNavigateToSearchHost(workspace.CurrentSolution, asyncListener, threadingContext.DisposalToken);
+                var searchHost = new DefaultNavigateToSearchHost(
+                    workspace.CurrentSolution,
+                    asyncListener,
+                    threadingContext.DisposalToken
+                );
 
                 // Calling DefaultNavigateToSearchHost.IsFullyLoadedAsync starts the fire-and-forget asynchronous
                 // operation to populate the remote host. The call to WaitAllAsync below will wait for that operation to
@@ -90,7 +133,9 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 await searchHost.IsFullyLoadedAsync(cancellationToken);
             }
 
-            await listenerProvider.WaitAllAsync(workspace, featureNames).WithCancellation(cancellationToken);
+            await listenerProvider
+                .WaitAllAsync(workspace, featureNames)
+                .WithCancellation(cancellationToken);
         }
     }
 }

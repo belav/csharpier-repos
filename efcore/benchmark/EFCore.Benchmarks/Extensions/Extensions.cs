@@ -7,12 +7,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks
 {
     public static class Extensions
     {
-        public static IQueryable<TEntity> ApplyTracking<TEntity>(this IQueryable<TEntity> query, bool tracking)
-            where TEntity : class
+        public static IQueryable<TEntity> ApplyTracking<TEntity>(
+            this IQueryable<TEntity> query,
+            bool tracking
+        ) where TEntity : class
         {
-            return tracking
-                ? query
-                : query.AsNoTracking();
+            return tracking ? query : query.AsNoTracking();
         }
     }
 }

@@ -33,9 +33,11 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Info,
                 isEnabledByDefault: false,
-                description: GetResourceString(nameof(SR.ConvertToLibraryImportDescription)));
+                description: GetResourceString(nameof(SR.ConvertToLibraryImportDescription))
+            );
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(ConvertToLibraryImport);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(ConvertToLibraryImport);
 
         public const string CharSet = nameof(CharSet);
         public const string ExactSpelling = nameof(ExactSpelling);
@@ -45,31 +47,45 @@ namespace Microsoft.Interop.Analyzers
             // Don't analyze generated code
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.EnableConcurrentExecution();
-            context.RegisterCompilationStartAction(
-                compilationContext =>
+            context.RegisterCompilationStartAction(compilationContext =>
+            {
+                // Nothing to do if the LibraryImportAttribute is not in the compilation
+                INamedTypeSymbol? libraryImportAttrType =
+                    compilationContext.Compilation.GetTypeByMetadataName(
+                        TypeNames.LibraryImportAttribute
+                    );
+                if (libraryImportAttrType == null)
+                    return;
+
+                INamedTypeSymbol? marshalAsAttrType =
+                    compilationContext.Compilation.GetTypeByMetadataName(
+                        TypeNames.System_Runtime_InteropServices_MarshalAsAttribute
+                    );
+
+                var knownUnsupportedTypes = new List<ITypeSymbol>(s_unsupportedTypeNames.Length);
+                foreach (string typeName in s_unsupportedTypeNames)
                 {
-                    // Nothing to do if the LibraryImportAttribute is not in the compilation
-                    INamedTypeSymbol? libraryImportAttrType = compilationContext.Compilation.GetTypeByMetadataName(TypeNames.LibraryImportAttribute);
-                    if (libraryImportAttrType == null)
-                        return;
-
-                    INamedTypeSymbol? marshalAsAttrType = compilationContext.Compilation.GetTypeByMetadataName(TypeNames.System_Runtime_InteropServices_MarshalAsAttribute);
-
-                    var knownUnsupportedTypes = new List<ITypeSymbol>(s_unsupportedTypeNames.Length);
-                    foreach (string typeName in s_unsupportedTypeNames)
+                    INamedTypeSymbol? unsupportedType =
+                        compilationContext.Compilation.GetTypeByMetadataName(typeName);
+                    if (unsupportedType != null)
                     {
-                        INamedTypeSymbol? unsupportedType = compilationContext.Compilation.GetTypeByMetadataName(typeName);
-                        if (unsupportedType != null)
-                        {
-                            knownUnsupportedTypes.Add(unsupportedType);
-                        }
+                        knownUnsupportedTypes.Add(unsupportedType);
                     }
+                }
 
-                    compilationContext.RegisterSymbolAction(symbolContext => AnalyzeSymbol(symbolContext, knownUnsupportedTypes, marshalAsAttrType), SymbolKind.Method);
-                });
+                compilationContext.RegisterSymbolAction(
+                    symbolContext =>
+                        AnalyzeSymbol(symbolContext, knownUnsupportedTypes, marshalAsAttrType),
+                    SymbolKind.Method
+                );
+            });
         }
 
-        private static void AnalyzeSymbol(SymbolAnalysisContext context, List<ITypeSymbol> knownUnsupportedTypes, INamedTypeSymbol? marshalAsAttrType)
+        private static void AnalyzeSymbol(
+            SymbolAnalysisContext context,
+            List<ITypeSymbol> knownUnsupportedTypes,
+            INamedTypeSymbol? marshalAsAttrType
+        )
         {
             var method = (IMethodSymbol)context.Symbol;
 
@@ -91,8 +107,13 @@ namespace Microsoft.Interop.Analyzers
             // Ignore methods with unsupported parameters
             foreach (IParameterSymbol parameter in method.Parameters)
             {
-                if (knownUnsupportedTypes.Contains(parameter.Type)
-                    || HasUnsupportedUnmanagedTypeValue(parameter.GetAttributes(), marshalAsAttrType))
+                if (
+                    knownUnsupportedTypes.Contains(parameter.Type)
+                    || HasUnsupportedUnmanagedTypeValue(
+                        parameter.GetAttributes(),
+                        marshalAsAttrType
+                    )
+                )
                 {
                     return;
                 }
@@ -102,18 +123,34 @@ namespace Microsoft.Interop.Analyzers
             if (method.ReturnsByRef || method.ReturnsByRefReadonly)
                 return;
 
-            if (knownUnsupportedTypes.Contains(method.ReturnType) || HasUnsupportedUnmanagedTypeValue(method.GetReturnTypeAttributes(), marshalAsAttrType))
+            if (
+                knownUnsupportedTypes.Contains(method.ReturnType)
+                || HasUnsupportedUnmanagedTypeValue(
+                    method.GetReturnTypeAttributes(),
+                    marshalAsAttrType
+                )
+            )
                 return;
 
-            ImmutableDictionary<string, string>.Builder properties = ImmutableDictionary.CreateBuilder<string, string>();
+            ImmutableDictionary<string, string>.Builder properties =
+                ImmutableDictionary.CreateBuilder<string, string>();
 
             properties.Add(CharSet, dllImportData.CharacterSet.ToString());
             properties.Add(ExactSpelling, dllImportData.ExactSpelling.ToString());
 
-            context.ReportDiagnostic(method.CreateDiagnostic(ConvertToLibraryImport, properties.ToImmutable(), method.Name));
+            context.ReportDiagnostic(
+                method.CreateDiagnostic(
+                    ConvertToLibraryImport,
+                    properties.ToImmutable(),
+                    method.Name
+                )
+            );
         }
 
-        private static bool HasUnsupportedUnmanagedTypeValue(ImmutableArray<AttributeData> attributes, INamedTypeSymbol? marshalAsAttrType)
+        private static bool HasUnsupportedUnmanagedTypeValue(
+            ImmutableArray<AttributeData> attributes,
+            INamedTypeSymbol? marshalAsAttrType
+        )
         {
             if (marshalAsAttrType == null)
                 return false;

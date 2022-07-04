@@ -19,13 +19,13 @@ namespace Microsoft.CodeAnalysis
             // For targeted type completion
             SessionHasTargetTypeFilterEnabled,
 
-            // TargetTypeFilterChosenInSession / SessionContainsTargetTypeFilter indicates % of the time 
+            // TargetTypeFilterChosenInSession / SessionContainsTargetTypeFilter indicates % of the time
             // the Target Type Completion Filter is chosen of the sessions offering it.
             SessionContainsTargetTypeFilter,
             TargetTypeFilterChosenInSession,
 
-            // CommitItemWithTargetTypeFilter / CommitWithTargetTypeCompletionExperimentEnabled indicates 
-            // % of the time a completion item is committed that could have been picked via the Target Type 
+            // CommitItemWithTargetTypeFilter / CommitWithTargetTypeCompletionExperimentEnabled indicates
+            // % of the time a completion item is committed that could have been picked via the Target Type
             // Completion Filter.
             CommitWithTargetTypeCompletionExperimentEnabled,
             CommitItemWithTargetTypeFilter,
@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis
             s_logAggregator.IncreaseCount((int)ActionInfo.CommitWithTypeImportCompletionEnabled);
 
         internal static void LogCommitWithTargetTypeCompletionExperimentEnabled() =>
-            s_logAggregator.IncreaseCount((int)ActionInfo.CommitWithTargetTypeCompletionExperimentEnabled);
+            s_logAggregator.IncreaseCount(
+                (int)ActionInfo.CommitWithTargetTypeCompletionExperimentEnabled
+            );
 
         internal static void LogCommitItemWithTargetTypeFilter() =>
             s_logAggregator.IncreaseCount((int)ActionInfo.CommitItemWithTargetTypeFilter);
@@ -54,14 +56,17 @@ namespace Microsoft.CodeAnalysis
 
         internal static void ReportTelemetry()
         {
-            Logger.Log(FunctionId.Intellisense_AsyncCompletion_Data, KeyValueLogMessage.Create(m =>
-            {
-                foreach (var kv in s_logAggregator)
+            Logger.Log(
+                FunctionId.Intellisense_AsyncCompletion_Data,
+                KeyValueLogMessage.Create(m =>
                 {
-                    var mergeInfo = ((ActionInfo)kv.Key).ToString("f");
-                    m[mergeInfo] = kv.Value.GetCount();
-                }
-            }));
+                    foreach (var kv in s_logAggregator)
+                    {
+                        var mergeInfo = ((ActionInfo)kv.Key).ToString("f");
+                        m[mergeInfo] = kv.Value.GetCount();
+                    }
+                })
+            );
         }
     }
 }

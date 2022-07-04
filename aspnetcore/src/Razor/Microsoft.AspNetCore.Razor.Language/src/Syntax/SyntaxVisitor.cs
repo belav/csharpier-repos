@@ -63,7 +63,5 @@ internal abstract partial class SyntaxVisitor
         DefaultVisit(trivia);
     }
 
-    public virtual void DefaultVisit(SyntaxNode node)
-    {
-    }
+    public virtual void DefaultVisit(SyntaxNode node) { }
 }

@@ -20,8 +20,17 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
 {
     private readonly ILogger _logger;
 
-    public WebAssemblyRenderer(IServiceProvider serviceProvider, ILoggerFactory loggerFactory, JSComponentInterop jsComponentInterop)
-        : base(serviceProvider, loggerFactory, DefaultWebAssemblyJSRuntime.Instance.ReadJsonSerializerOptions(), jsComponentInterop)
+    public WebAssemblyRenderer(
+        IServiceProvider serviceProvider,
+        ILoggerFactory loggerFactory,
+        JSComponentInterop jsComponentInterop
+    )
+        : base(
+            serviceProvider,
+            loggerFactory,
+            DefaultWebAssemblyJSRuntime.Instance.ReadJsonSerializerOptions(),
+            jsComponentInterop
+        )
     {
         // The WebAssembly renderer registers and unregisters itself with the static registry
         RendererId = RendererRegistry.Add(this);
@@ -32,7 +41,11 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
 
     public override Dispatcher Dispatcher => NullDispatcher.Instance;
 
-    public Task AddComponentAsync([DynamicallyAccessedMembers(Component)] Type componentType, ParameterView parameters, string domElementSelector)
+    public Task AddComponentAsync(
+        [DynamicallyAccessedMembers(Component)] Type componentType,
+        ParameterView parameters,
+        string domElementSelector
+    )
     {
         var componentId = AddRootComponent(componentType, domElementSelector);
         return RenderRootComponentAsync(componentId, parameters);
@@ -44,7 +57,8 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
             "Blazor._internal.attachRootComponentToElement",
             domElementSelector,
             componentId,
-            RendererId);
+            RendererId
+        );
     }
 
     /// <inheritdoc />
@@ -74,7 +88,10 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
         }
         else
         {
-            WebAssemblyCallQueue.Schedule(this, static @this => @this.CallBaseProcessPendingRender());
+            WebAssemblyCallQueue.Schedule(
+                this,
+                static @this => @this.CallBaseProcessPendingRender()
+            );
         }
     }
 
@@ -86,7 +103,8 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
         DefaultWebAssemblyJSRuntime.Instance.InvokeUnmarshalled<int, RenderBatch, object>(
             "Blazor._internal.renderBatch",
             RendererId,
-            batch);
+            batch
+        );
 
         if (WebAssemblyCallQueue.HasUnstartedWork)
         {
@@ -113,7 +131,11 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
         {
             foreach (var innerException in aggregateException.Flatten().InnerExceptions)
             {
-                Log.UnhandledExceptionRenderingComponent(_logger, innerException.Message, innerException);
+                Log.UnhandledExceptionRenderingComponent(
+                    _logger,
+                    innerException.Message,
+                    innerException
+                );
             }
         }
         else
@@ -124,7 +146,16 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
 
     private static partial class Log
     {
-        [LoggerMessage(100, LogLevel.Critical, "Unhandled exception rendering component: {Message}", EventName = "ExceptionRenderingComponent")]
-        public static partial void UnhandledExceptionRenderingComponent(ILogger logger, string message, Exception exception);
+        [LoggerMessage(
+            100,
+            LogLevel.Critical,
+            "Unhandled exception rendering component: {Message}",
+            EventName = "ExceptionRenderingComponent"
+        )]
+        public static partial void UnhandledExceptionRenderingComponent(
+            ILogger logger,
+            string message,
+            Exception exception
+        );
     }
 }

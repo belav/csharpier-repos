@@ -7,15 +7,15 @@ using System.Diagnostics;
 
 using Internal.TypeSystem;
 
-// The GCRef map is used to encode GC type of arguments for callsites. Logically, it is sequence <pos, token> where pos is 
+// The GCRef map is used to encode GC type of arguments for callsites. Logically, it is sequence <pos, token> where pos is
 // position of the reference in the stack frame and token is type of GC reference (one of GCREFMAP_XXX values).
 //
-// - The encoding always starts at the byte boundary. The high order bit of each byte is used to signal end of the encoding 
+// - The encoding always starts at the byte boundary. The high order bit of each byte is used to signal end of the encoding
 // stream. The last byte has the high order bit zero. It means that there are 7 useful bits in each byte.
 // - "pos" is always encoded as delta from previous pos.
-// - The basic encoding unit is two bits. Values 0, 1 and 2 are the common constructs (skip single slot, GC reference, interior 
-// pointer). Value 3 means that extended encoding follows. 
-// - The extended information is integer encoded in one or more four bit blocks. The high order bit of the four bit block is 
+// - The basic encoding unit is two bits. Values 0, 1 and 2 are the common constructs (skip single slot, GC reference, interior
+// pointer). Value 3 means that extended encoding follows.
+// - The extended information is integer encoded in one or more four bit blocks. The high order bit of the four bit block is
 // used to signal the end.
 // - For x86, the encoding starts by size of the callee poped stack. The size is encoded using the same mechanism as above (two bit
 // basic encoding, with extended encoding for large values).
@@ -35,7 +35,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private int _pendingByte;
 
         /// <summary>
-        /// Number of bits in pending byte. Note that the trailing zero bits are not written out, 
+        /// Number of bits in pending byte. Note that the trailing zero bits are not written out,
         /// so this can be more than 7.
         /// </summary>
         private int _bits;
@@ -74,7 +74,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             bool hasThis = (signature.Flags & MethodSignatureFlags.Static) == 0;
 
             // This pointer is omitted for string constructors
-            bool fCtorOfVariableSizedObject = hasThis && method.OwningType.IsString && method.IsConstructor;
+            bool fCtorOfVariableSizedObject =
+                hasThis && method.OwningType.IsString && method.IsConstructor;
             if (fCtorOfVariableSizedObject)
                 hasThis = false;
 
@@ -85,12 +86,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 parameterTypes[parameterIndex] = new TypeHandle(signature[parameterIndex]);
             }
-            CallingConventions callingConventions = (hasThis ? CallingConventions.ManagedInstance : CallingConventions.ManagedStatic);
+            CallingConventions callingConventions = (
+                hasThis ? CallingConventions.ManagedInstance : CallingConventions.ManagedStatic
+            );
             bool hasParamType = method.RequiresInstArg() && !isUnboxingStub;
 
             // On X86 the Array address method doesn't use IL stubs, and instead has a custom calling convention
-            if ((method.Context.Target.Architecture == TargetArchitecture.X86) &&
-                method.IsArrayAddressMethod())
+            if (
+                (method.Context.Target.Architecture == TargetArchitecture.X86)
+                && method.IsArrayAddressMethod()
+            )
             {
                 hasParamType = true;
             }
@@ -99,7 +104,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             bool[] forcedByRefParams = new bool[parameterTypes.Length];
             bool skipFirstArg = false;
             bool extraObjectFirstArg = false;
-            ArgIteratorData argIteratorData = new ArgIteratorData(hasThis, isVarArg, parameterTypes, returnType);
+            ArgIteratorData argIteratorData = new ArgIteratorData(
+                hasThis,
+                isVarArg,
+                parameterTypes,
+                returnType
+            );
 
             ArgIterator argit = new ArgIterator(
                 method.Context,
@@ -109,12 +119,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 extraFunctionPointerArg,
                 forcedByRefParams,
                 skipFirstArg,
-                extraObjectFirstArg);
+                extraObjectFirstArg
+            );
 
             int nStackBytes = argit.SizeOfFrameArgumentArray();
 
             // Allocate a fake stack
-            CORCOMPILE_GCREFMAP_TOKENS[] fakeStack = new CORCOMPILE_GCREFMAP_TOKENS[transitionBlock.SizeOfTransitionBlock + nStackBytes];
+            CORCOMPILE_GCREFMAP_TOKENS[] fakeStack = new CORCOMPILE_GCREFMAP_TOKENS[
+                transitionBlock.SizeOfTransitionBlock + nStackBytes
+            ];
 
             // Fill it in
             FakeGcScanRoots(method, argit, fakeStack, isUnboxingStub);
@@ -126,11 +139,19 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 uint cbStackPop = argit.CbStackPop();
                 WriteStackPop(cbStackPop / (uint)_target.PointerSize);
 
-                nStackSlots = (uint)(nStackBytes / _target.PointerSize + _transitionBlock.NumArgumentRegisters);
+                nStackSlots = (uint)(
+                    nStackBytes / _target.PointerSize + _transitionBlock.NumArgumentRegisters
+                );
             }
             else
             {
-                nStackSlots = (uint)((transitionBlock.SizeOfTransitionBlock + nStackBytes - _transitionBlock.OffsetOfFirstGCRefMapSlot) / _target.PointerSize);
+                nStackSlots = (uint)(
+                    (
+                        transitionBlock.SizeOfTransitionBlock
+                        + nStackBytes
+                        - _transitionBlock.OffsetOfFirstGCRefMapSlot
+                    ) / _target.PointerSize
+                );
             }
 
             for (uint pos = 0; pos < nStackSlots; pos++)
@@ -150,18 +171,25 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         /// <summary>
         /// Fill in the GC-relevant stack frame locations.
         /// </summary>
-        private void FakeGcScanRoots(MethodDesc method, ArgIterator argit, CORCOMPILE_GCREFMAP_TOKENS[] frame, bool isUnboxingStub)
+        private void FakeGcScanRoots(
+            MethodDesc method,
+            ArgIterator argit,
+            CORCOMPILE_GCREFMAP_TOKENS[] frame,
+            bool isUnboxingStub
+        )
         {
             // Encode generic instantiation arg
             if (argit.HasParamType)
             {
                 if (method.RequiresInstMethodDescArg())
                 {
-                    frame[argit.GetParamTypeArgOffset()] = CORCOMPILE_GCREFMAP_TOKENS.GCREFMAP_METHOD_PARAM;
+                    frame[argit.GetParamTypeArgOffset()] =
+                        CORCOMPILE_GCREFMAP_TOKENS.GCREFMAP_METHOD_PARAM;
                 }
                 else if (method.RequiresInstMethodTableArg())
                 {
-                    frame[argit.GetParamTypeArgOffset()] = CORCOMPILE_GCREFMAP_TOKENS.GCREFMAP_TYPE_PARAM;
+                    frame[argit.GetParamTypeArgOffset()] =
+                        CORCOMPILE_GCREFMAP_TOKENS.GCREFMAP_TYPE_PARAM;
                 }
             }
 
@@ -170,12 +198,17 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 bool interior = method.OwningType.IsValueType && !isUnboxingStub;
 
-                frame[_transitionBlock.ThisOffset] = (interior ? CORCOMPILE_GCREFMAP_TOKENS.GCREFMAP_INTERIOR : CORCOMPILE_GCREFMAP_TOKENS.GCREFMAP_REF);
+                frame[_transitionBlock.ThisOffset] = (
+                    interior
+                        ? CORCOMPILE_GCREFMAP_TOKENS.GCREFMAP_INTERIOR
+                        : CORCOMPILE_GCREFMAP_TOKENS.GCREFMAP_REF
+                );
             }
 
             if (argit.IsVarArg)
             {
-                frame[argit.GetVASigCookieOffset()] = CORCOMPILE_GCREFMAP_TOKENS.GCREFMAP_VASIG_COOKIE;
+                frame[argit.GetVASigCookieOffset()] =
+                    CORCOMPILE_GCREFMAP_TOKENS.GCREFMAP_VASIG_COOKIE;
 
                 // We are done for varargs - the remaining arguments are reported via vasig cookie
                 return;
@@ -185,7 +218,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // so always promote it.
             if (argit.HasRetBuffArg())
             {
-                frame[_transitionBlock.GetRetBuffArgOffset(argit.HasThis)] = CORCOMPILE_GCREFMAP_TOKENS.GCREFMAP_INTERIOR;
+                frame[_transitionBlock.GetRetBuffArgOffset(argit.HasThis)] =
+                    CORCOMPILE_GCREFMAP_TOKENS.GCREFMAP_INTERIOR;
             }
 
             //
@@ -198,7 +232,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             while ((argOffset = argit.GetNextOffset()) != TransitionBlock.InvalidOffset)
             {
                 ArgLocDesc? argLocDescForStructInRegs = argit.GetArgLoc(argOffset);
-                ArgDestination argDest = new ArgDestination(_transitionBlock, argOffset, argLocDescForStructInRegs);
+                ArgDestination argDest = new ArgDestination(
+                    _transitionBlock,
+                    argOffset,
+                    argLocDescForStructInRegs
+                );
                 GcScanRoots(method.Signature[argIndex], in argDest, delta: 0, frame);
                 argIndex++;
             }
@@ -211,7 +249,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         /// <param name="type">Parameter type</param>
         /// <param name="argDest">Location of the parameter</param>
         /// <param name="frame">Frame map to update by marking GC locations</param>
-        private void GcScanRoots(TypeDesc type, in ArgDestination argDest, int delta, CORCOMPILE_GCREFMAP_TOKENS[] frame)
+        private void GcScanRoots(
+            TypeDesc type,
+            in ArgDestination argDest,
+            int delta,
+            CORCOMPILE_GCREFMAP_TOKENS[] frame
+        )
         {
             switch (type.Category)
             {
@@ -260,7 +303,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
         }
 
-        private void GcScanValueType(TypeDesc type, ArgDestination argDest, int delta, CORCOMPILE_GCREFMAP_TOKENS[] frame)
+        private void GcScanValueType(
+            TypeDesc type,
+            ArgDestination argDest,
+            int delta,
+            CORCOMPILE_GCREFMAP_TOKENS[] frame
+        )
         {
             if (_transitionBlock.IsArgPassedByRef(new TypeHandle(type)))
             {
@@ -291,7 +339,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
         }
 
-        private void FindByRefPointerOffsetsInByRefLikeObject(TypeDesc type, ArgDestination argDest, int delta, CORCOMPILE_GCREFMAP_TOKENS[] frame)
+        private void FindByRefPointerOffsetsInByRefLikeObject(
+            TypeDesc type,
+            ArgDestination argDest,
+            int delta,
+            CORCOMPILE_GCREFMAP_TOKENS[] frame
+        )
         {
             if (type.IsByReferenceOfT || type.IsByRef)
             {
@@ -304,7 +357,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (!field.IsStatic && field.FieldType.IsByRefLike)
                 {
                     Debug.Assert(field.FieldType.IsValueType);
-                    FindByRefPointerOffsetsInByRefLikeObject(field.FieldType, argDest, delta + field.Offset.AsInt, frame);
+                    FindByRefPointerOffsetsInByRefLikeObject(
+                        field.FieldType,
+                        argDest,
+                        delta + field.Offset.AsInt,
+                        frame
+                    );
                 }
             }
         }
@@ -347,8 +405,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 val >>= 3;
 
                 AppendBit((val != 0) ? 1u : 0u);
-            }
-            while (val != 0);
+            } while (val != 0);
         }
 
         /// <summary>

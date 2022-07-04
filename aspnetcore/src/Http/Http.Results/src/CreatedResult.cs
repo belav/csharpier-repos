@@ -13,8 +13,7 @@ internal sealed class CreatedResult : ObjectResult
     /// </summary>
     /// <param name="location">The location at which the content has been created.</param>
     /// <param name="value">The value to format in the entity body.</param>
-    public CreatedResult(string location, object? value)
-        : base(value, StatusCodes.Status201Created)
+    public CreatedResult(string location, object? value) : base(value, StatusCodes.Status201Created)
     {
         Location = location;
     }
@@ -25,8 +24,7 @@ internal sealed class CreatedResult : ObjectResult
     /// </summary>
     /// <param name="location">The location at which the content has been created.</param>
     /// <param name="value">The value to format in the entity body.</param>
-    public CreatedResult(Uri location, object? value)
-        : base(value, StatusCodes.Status201Created)
+    public CreatedResult(Uri location, object? value) : base(value, StatusCodes.Status201Created)
     {
         if (location == null)
         {
@@ -39,7 +37,10 @@ internal sealed class CreatedResult : ObjectResult
         }
         else
         {
-            Location = location.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+            Location = location.GetComponents(
+                UriComponents.SerializationInfoString,
+                UriFormat.UriEscaped
+            );
         }
     }
 

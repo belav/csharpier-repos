@@ -67,7 +67,8 @@ public interface IIdentityMap
     /// </summary>
     InternalEntityEntry? TryGetEntryUsingPreStoreGeneratedValues(
         IForeignKey foreignKey,
-        InternalEntityEntry dependentEntry);
+        InternalEntityEntry dependentEntry
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -77,7 +78,8 @@ public interface IIdentityMap
     /// </summary>
     InternalEntityEntry? TryGetEntryUsingRelationshipSnapshot(
         IForeignKey foreignKey,
-        InternalEntityEntry dependentEntry);
+        InternalEntityEntry dependentEntry
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

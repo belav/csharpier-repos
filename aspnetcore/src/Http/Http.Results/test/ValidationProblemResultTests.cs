@@ -24,10 +24,7 @@ public class ValidationProblemResultTests
         var httpContext = new DefaultHttpContext
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -52,23 +49,40 @@ public class ValidationProblemResultTests
     [Fact]
     public void ExecuteAsync_ThrowsArgumentException_ForNon400StatusCodeFromProblemDetails()
     {
-        Assert.Throws<ArgumentException>("problemDetails", () => new ValidationProblem(
-            new HttpValidationProblemDetails { Status = StatusCodes.Status413RequestEntityTooLarge, }));
+        Assert.Throws<ArgumentException>(
+            "problemDetails",
+            () =>
+                new ValidationProblem(
+                    new HttpValidationProblemDetails
+                    {
+                        Status = StatusCodes.Status413RequestEntityTooLarge,
+                    }
+                )
+        );
     }
 
     [Fact]
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        ValidationProblem MyApi() { throw new NotImplementedException(); }
+        ValidationProblem MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var context = new EndpointMetadataContext(((Delegate)MyApi).GetMethodInfo(), metadata, null);
+        var context = new EndpointMetadataContext(
+            ((Delegate)MyApi).GetMethodInfo(),
+            metadata,
+            null
+        );
 
         // Act
         PopulateMetadata<ValidationProblem>(context);
 
         // Assert
-        var producesResponseTypeMetadata = context.EndpointMetadata.OfType<ProducesResponseTypeMetadata>().Last();
+        var producesResponseTypeMetadata = context.EndpointMetadata
+            .OfType<ProducesResponseTypeMetadata>()
+            .Last();
         Assert.Equal(StatusCodes.Status400BadRequest, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(HttpValidationProblemDetails), producesResponseTypeMetadata.Type);
         Assert.Single(producesResponseTypeMetadata.ContentTypes, "application/problem+json");
@@ -82,14 +96,20 @@ public class ValidationProblemResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenContextIsNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("context", () => PopulateMetadata<ValidationProblem>(null));
+        Assert.Throws<ArgumentNullException>(
+            "context",
+            () => PopulateMetadata<ValidationProblem>(null)
+        );
     }
 
     private static void PopulateMetadata<TResult>(EndpointMetadataContext context)

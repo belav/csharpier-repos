@@ -17,15 +17,20 @@ using MethodOptions = global::Grpc.Shared.Server.MethodOptions;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Binding;
 
-internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : ServiceBinderBase where TService : class
+internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : ServiceBinderBase
+    where TService : class
 {
-    private delegate (RequestDelegate RequestDelegate, List<object> Metadata) CreateRequestDelegate<TRequest, TResponse>(
+    private delegate (RequestDelegate RequestDelegate, List<object> Metadata) CreateRequestDelegate<
+        TRequest,
+        TResponse
+    >(
         Method<TRequest, TResponse> method,
         string httpVerb,
         HttpRule httpRule,
         MethodDescriptor methodDescriptor,
         CallHandlerDescriptorInfo descriptorInfo,
-        MethodOptions methodOptions);
+        MethodOptions methodOptions
+    );
 
     private readonly ServiceMethodProviderContext<TService> _context;
     private readonly IServiceInvokerResolver<TService> _invokerResolver;
@@ -45,7 +50,8 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
         GrpcServiceOptions<TService> serviceOptions,
         ILoggerFactory loggerFactory,
         IGrpcServiceActivator<TService> serviceActivator,
-        GrpcJsonTranscodingOptions JsonTranscodingOptions)
+        GrpcJsonTranscodingOptions JsonTranscodingOptions
+    )
     {
         _context = context;
         _invokerResolver = invokerResolver;
@@ -58,32 +64,50 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
         _logger = loggerFactory.CreateLogger<JsonTranscodingProviderServiceBinder<TService>>();
     }
 
-    public override void AddMethod<TRequest, TResponse>(Method<TRequest, TResponse> method, ClientStreamingServerMethod<TRequest, TResponse> handler)
+    public override void AddMethod<TRequest, TResponse>(
+        Method<TRequest, TResponse> method,
+        ClientStreamingServerMethod<TRequest, TResponse> handler
+    )
     {
-        if (TryGetMethodDescriptor(method.Name, out var methodDescriptor) &&
-            ServiceDescriptorHelpers.TryGetHttpRule(methodDescriptor, out _))
+        if (
+            TryGetMethodDescriptor(method.Name, out var methodDescriptor)
+            && ServiceDescriptorHelpers.TryGetHttpRule(methodDescriptor, out _)
+        )
         {
             Log.StreamingMethodNotSupported(_logger, method.Name, method.ServiceName);
         }
     }
 
-    public override void AddMethod<TRequest, TResponse>(Method<TRequest, TResponse> method, DuplexStreamingServerMethod<TRequest, TResponse> handler)
+    public override void AddMethod<TRequest, TResponse>(
+        Method<TRequest, TResponse> method,
+        DuplexStreamingServerMethod<TRequest, TResponse> handler
+    )
     {
-        if (TryGetMethodDescriptor(method.Name, out var methodDescriptor) &&
-            ServiceDescriptorHelpers.TryGetHttpRule(methodDescriptor, out _))
+        if (
+            TryGetMethodDescriptor(method.Name, out var methodDescriptor)
+            && ServiceDescriptorHelpers.TryGetHttpRule(methodDescriptor, out _)
+        )
         {
             Log.StreamingMethodNotSupported(_logger, method.Name, method.ServiceName);
         }
     }
 
-    public override void AddMethod<TRequest, TResponse>(Method<TRequest, TResponse> method, ServerStreamingServerMethod<TRequest, TResponse> handler)
+    public override void AddMethod<TRequest, TResponse>(
+        Method<TRequest, TResponse> method,
+        ServerStreamingServerMethod<TRequest, TResponse> handler
+    )
     {
         if (TryGetMethodDescriptor(method.Name, out var methodDescriptor))
         {
             if (ServiceDescriptorHelpers.TryGetHttpRule(methodDescriptor, out var httpRule))
             {
                 LogMethodHttpRule(method, httpRule);
-                ProcessHttpRule(method, methodDescriptor, httpRule, CreateServerStreamingRequestDelegate);
+                ProcessHttpRule(
+                    method,
+                    methodDescriptor,
+                    httpRule,
+                    CreateServerStreamingRequestDelegate
+                );
             }
             else
             {
@@ -97,7 +121,10 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
         }
     }
 
-    public override void AddMethod<TRequest, TResponse>(Method<TRequest, TResponse> method, UnaryServerMethod<TRequest, TResponse> handler)
+    public override void AddMethod<TRequest, TResponse>(
+        Method<TRequest, TResponse> method,
+        UnaryServerMethod<TRequest, TResponse> handler
+    )
     {
         if (TryGetMethodDescriptor(method.Name, out var methodDescriptor))
         {
@@ -130,13 +157,23 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
         Method<TRequest, TResponse> method,
         MethodDescriptor methodDescriptor,
         HttpRule httpRule,
-        CreateRequestDelegate<TRequest, TResponse> createRequestDelegate)
+        CreateRequestDelegate<TRequest, TResponse> createRequestDelegate
+    )
         where TRequest : class
         where TResponse : class
     {
         if (ServiceDescriptorHelpers.TryResolvePattern(httpRule, out var pattern, out var httpVerb))
         {
-            AddMethodCore(method, httpRule, pattern, httpVerb, httpRule.Body, httpRule.ResponseBody, methodDescriptor, createRequestDelegate);
+            AddMethodCore(
+                method,
+                httpRule,
+                pattern,
+                httpVerb,
+                httpRule.Body,
+                httpRule.ResponseBody,
+                methodDescriptor,
+                createRequestDelegate
+            );
         }
 
         foreach (var additionalRule in httpRule.AdditionalBindings)
@@ -145,56 +182,87 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
         }
     }
 
-    private (RequestDelegate RequestDelegate, List<object> Metadata) CreateUnaryRequestDelegate<TRequest, TResponse>(
+    private (RequestDelegate RequestDelegate, List<object> Metadata) CreateUnaryRequestDelegate<
+        TRequest,
+        TResponse
+    >(
         Method<TRequest, TResponse> method,
         string httpVerb,
         HttpRule httpRule,
         MethodDescriptor methodDescriptor,
         CallHandlerDescriptorInfo descriptorInfo,
-        MethodOptions methodOptions)
+        MethodOptions methodOptions
+    )
         where TRequest : class
         where TResponse : class
     {
-        var (invoker, metadata) = _invokerResolver.CreateModelCore<UnaryServerMethod<TService, TRequest, TResponse>>(
+        var (invoker, metadata) = _invokerResolver.CreateModelCore<
+            UnaryServerMethod<TService, TRequest, TResponse>
+        >(
             method.Name,
             new[] { typeof(TRequest), typeof(ServerCallContext) },
             httpVerb,
             httpRule,
-            methodDescriptor);
+            methodDescriptor
+        );
 
-        var methodInvoker = new UnaryServerMethodInvoker<TService, TRequest, TResponse>(invoker, method, methodOptions, _serviceActivator);
+        var methodInvoker = new UnaryServerMethodInvoker<TService, TRequest, TResponse>(
+            invoker,
+            method,
+            methodOptions,
+            _serviceActivator
+        );
         var callHandler = new UnaryServerCallHandler<TService, TRequest, TResponse>(
             methodInvoker,
             _loggerFactory,
             descriptorInfo,
-            _JsonTranscodingOptions.UnarySerializerOptions);
+            _JsonTranscodingOptions.UnarySerializerOptions
+        );
 
         return (callHandler.HandleCallAsync, metadata);
     }
 
-    private (RequestDelegate RequestDelegate, List<object> Metadata) CreateServerStreamingRequestDelegate<TRequest, TResponse>(
+    private (RequestDelegate RequestDelegate, List<object> Metadata) CreateServerStreamingRequestDelegate<
+        TRequest,
+        TResponse
+    >(
         Method<TRequest, TResponse> method,
         string httpVerb,
         HttpRule httpRule,
         MethodDescriptor methodDescriptor,
         CallHandlerDescriptorInfo descriptorInfo,
-        MethodOptions methodOptions)
+        MethodOptions methodOptions
+    )
         where TRequest : class
         where TResponse : class
     {
-        var (invoker, metadata) = _invokerResolver.CreateModelCore<ServerStreamingServerMethod<TService, TRequest, TResponse>>(
+        var (invoker, metadata) = _invokerResolver.CreateModelCore<
+            ServerStreamingServerMethod<TService, TRequest, TResponse>
+        >(
             method.Name,
-            new[] { typeof(TRequest), typeof(IServerStreamWriter<TResponse>), typeof(ServerCallContext) },
+            new[]
+            {
+                typeof(TRequest),
+                typeof(IServerStreamWriter<TResponse>),
+                typeof(ServerCallContext)
+            },
             httpVerb,
             httpRule,
-            methodDescriptor);
+            methodDescriptor
+        );
 
-        var methodInvoker = new ServerStreamingServerMethodInvoker<TService, TRequest, TResponse>(invoker, method, methodOptions, _serviceActivator);
+        var methodInvoker = new ServerStreamingServerMethodInvoker<TService, TRequest, TResponse>(
+            invoker,
+            method,
+            methodOptions,
+            _serviceActivator
+        );
         var callHandler = new ServerStreamingServerCallHandler<TService, TRequest, TResponse>(
             methodInvoker,
             _loggerFactory,
             descriptorInfo,
-            _JsonTranscodingOptions.ServerStreamingSerializerOptions);
+            _JsonTranscodingOptions.ServerStreamingSerializerOptions
+        );
 
         return (callHandler.HandleCallAsync, metadata);
     }
@@ -207,43 +275,86 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
         string body,
         string responseBody,
         MethodDescriptor methodDescriptor,
-        CreateRequestDelegate<TRequest, TResponse> createRequestDelegate)
+        CreateRequestDelegate<TRequest, TResponse> createRequestDelegate
+    )
         where TRequest : class
         where TResponse : class
     {
         try
         {
-            var (routePattern, descriptorInfo) = ParseRoute(pattern, body, responseBody, methodDescriptor);
+            var (routePattern, descriptorInfo) = ParseRoute(
+                pattern,
+                body,
+                responseBody,
+                methodDescriptor
+            );
             var methodOptions = MethodOptions.Create(new[] { _globalOptions, _serviceOptions });
 
-            var (requestDelegate, metadata) = createRequestDelegate(method, httpVerb, httpRule, methodDescriptor, descriptorInfo, methodOptions);
+            var (requestDelegate, metadata) = createRequestDelegate(
+                method,
+                httpVerb,
+                httpRule,
+                methodDescriptor,
+                descriptorInfo,
+                methodOptions
+            );
 
-            _context.AddMethod<TRequest, TResponse>(method, routePattern, metadata, requestDelegate);
+            _context.AddMethod<TRequest, TResponse>(
+                method,
+                routePattern,
+                metadata,
+                requestDelegate
+            );
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException($"Error binding {method.Name} on {typeof(TService).Name} to HTTP API.", ex);
+            throw new InvalidOperationException(
+                $"Error binding {method.Name} on {typeof(TService).Name} to HTTP API.",
+                ex
+            );
         }
     }
 
-    private static (RoutePattern routePattern, CallHandlerDescriptorInfo descriptorInfo) ParseRoute(string pattern, string body, string responseBody, MethodDescriptor methodDescriptor)
+    private static (RoutePattern routePattern, CallHandlerDescriptorInfo descriptorInfo) ParseRoute(
+        string pattern,
+        string body,
+        string responseBody,
+        MethodDescriptor methodDescriptor
+    )
     {
         if (!pattern.StartsWith('/'))
         {
             // This validation is consistent with grpc-gateway code generation.
             // We should match their validation to be a good member of the eco-system.
-            throw new InvalidOperationException($"Path template '{pattern}' must start with a '/'.");
+            throw new InvalidOperationException(
+                $"Path template '{pattern}' must start with a '/'."
+            );
         }
 
         var routePattern = RoutePatternFactory.Parse(pattern);
-        return (RoutePatternFactory.Parse(pattern), CreateDescriptorInfo(body, responseBody, methodDescriptor, routePattern));
+        return (
+            RoutePatternFactory.Parse(pattern),
+            CreateDescriptorInfo(body, responseBody, methodDescriptor, routePattern)
+        );
     }
 
-    private static CallHandlerDescriptorInfo CreateDescriptorInfo(string body, string responseBody, MethodDescriptor methodDescriptor, RoutePattern routePattern)
+    private static CallHandlerDescriptorInfo CreateDescriptorInfo(
+        string body,
+        string responseBody,
+        MethodDescriptor methodDescriptor,
+        RoutePattern routePattern
+    )
     {
-        var routeParameterDescriptors = ServiceDescriptorHelpers.ResolveRouteParameterDescriptors(routePattern, methodDescriptor.InputType);
+        var routeParameterDescriptors = ServiceDescriptorHelpers.ResolveRouteParameterDescriptors(
+            routePattern,
+            methodDescriptor.InputType
+        );
 
-        var bodyDescriptor = ServiceDescriptorHelpers.ResolveBodyDescriptor(body, typeof(TService), methodDescriptor);
+        var bodyDescriptor = ServiceDescriptorHelpers.ResolveBodyDescriptor(
+            body,
+            typeof(TService),
+            methodDescriptor
+        );
 
         FieldDescriptor? responseBodyDescriptor = null;
         if (!string.IsNullOrEmpty(responseBody))
@@ -251,7 +362,9 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
             responseBodyDescriptor = methodDescriptor.OutputType.FindFieldByName(responseBody);
             if (responseBodyDescriptor == null)
             {
-                throw new InvalidOperationException($"Couldn't find matching field for response body '{responseBody}' on {methodDescriptor.OutputType.Name}.");
+                throw new InvalidOperationException(
+                    $"Couldn't find matching field for response body '{responseBody}' on {methodDescriptor.OutputType.Name}."
+                );
             }
         }
 
@@ -260,11 +373,15 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
             bodyDescriptor?.Descriptor,
             bodyDescriptor?.IsDescriptorRepeated ?? false,
             bodyDescriptor?.FieldDescriptors,
-            routeParameterDescriptors);
+            routeParameterDescriptors
+        );
         return descriptorInfo;
     }
 
-    private bool TryGetMethodDescriptor(string methodName, [NotNullWhen(true)]out MethodDescriptor? methodDescriptor)
+    private bool TryGetMethodDescriptor(
+        string methodName,
+        [NotNullWhen(true)] out MethodDescriptor? methodDescriptor
+    )
     {
         for (var i = 0; i < _serviceDescriptor.Methods.Count; i++)
         {
@@ -282,13 +399,42 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Warning, "Unable to find method descriptor for {MethodName} on {ServiceType}.", EventName = "MethodDescriptorNotFound")]
-        public static partial void MethodDescriptorNotFound(ILogger logger, string methodName, Type serviceType);
+        [LoggerMessage(
+            1,
+            LogLevel.Warning,
+            "Unable to find method descriptor for {MethodName} on {ServiceType}.",
+            EventName = "MethodDescriptorNotFound"
+        )]
+        public static partial void MethodDescriptorNotFound(
+            ILogger logger,
+            string methodName,
+            Type serviceType
+        );
 
-        [LoggerMessage(2, LogLevel.Warning, "Unable to bind {MethodName} on {ServiceName} to gRPC JSON transcoding. Client and bidirectional streaming methods are not supported.", EventName = "StreamingMethodNotSupported")]
-        public static partial void StreamingMethodNotSupported(ILogger logger, string methodName, string serviceName);
+        [LoggerMessage(
+            2,
+            LogLevel.Warning,
+            "Unable to bind {MethodName} on {ServiceName} to gRPC JSON transcoding. Client and bidirectional streaming methods are not supported.",
+            EventName = "StreamingMethodNotSupported"
+        )]
+        public static partial void StreamingMethodNotSupported(
+            ILogger logger,
+            string methodName,
+            string serviceName
+        );
 
-        [LoggerMessage(3, LogLevel.Trace, "Found HttpRule mapping. Method {MethodName} on {ServiceName}. HttpRule payload: {HttpRulePayload}", EventName = "HttpRuleFound", SkipEnabledCheck = true)]
-        public static partial void HttpRuleFound(ILogger logger, string methodName, string serviceName, string httpRulePayload);
+        [LoggerMessage(
+            3,
+            LogLevel.Trace,
+            "Found HttpRule mapping. Method {MethodName} on {ServiceName}. HttpRule payload: {HttpRulePayload}",
+            EventName = "HttpRuleFound",
+            SkipEnabledCheck = true
+        )]
+        public static partial void HttpRuleFound(
+            ILogger logger,
+            string methodName,
+            string serviceName,
+            string httpRulePayload
+        );
     }
 }

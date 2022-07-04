@@ -14,7 +14,8 @@ internal sealed partial class LoggingHttpMessageHandler : DelegatingHandler
 {
     private readonly ILogger<LoggingHttpMessageHandler> _logger;
 
-    public LoggingHttpMessageHandler(HttpMessageHandler inner, ILoggerFactory loggerFactory) : base(inner)
+    public LoggingHttpMessageHandler(HttpMessageHandler inner, ILoggerFactory loggerFactory)
+        : base(inner)
     {
         if (loggerFactory == null)
         {
@@ -24,7 +25,10 @@ internal sealed partial class LoggingHttpMessageHandler : DelegatingHandler
         _logger = loggerFactory.CreateLogger<LoggingHttpMessageHandler>();
     }
 
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         Log.SendingHttpRequest(_logger, request.Method, request.RequestUri!);
 
@@ -32,7 +36,12 @@ internal sealed partial class LoggingHttpMessageHandler : DelegatingHandler
 
         if (!response.IsSuccessStatusCode)
         {
-            Log.UnsuccessfulHttpResponse(_logger, response.StatusCode, request.Method, request.RequestUri!);
+            Log.UnsuccessfulHttpResponse(
+                _logger,
+                response.StatusCode,
+                request.Method,
+                request.RequestUri!
+            );
         }
 
         return response;
@@ -40,10 +49,29 @@ internal sealed partial class LoggingHttpMessageHandler : DelegatingHandler
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Trace, "Sending HTTP request {RequestMethod} '{RequestUrl}'.", EventName = "SendingHttpRequest")]
-        public static partial void SendingHttpRequest(ILogger logger, HttpMethod requestMethod, Uri requestUrl);
+        [LoggerMessage(
+            1,
+            LogLevel.Trace,
+            "Sending HTTP request {RequestMethod} '{RequestUrl}'.",
+            EventName = "SendingHttpRequest"
+        )]
+        public static partial void SendingHttpRequest(
+            ILogger logger,
+            HttpMethod requestMethod,
+            Uri requestUrl
+        );
 
-        [LoggerMessage(2, LogLevel.Warning, "Unsuccessful HTTP response {StatusCode} return from {RequestMethod} '{RequestUrl}'.", EventName = "UnsuccessfulHttpResponse")]
-        public static partial void UnsuccessfulHttpResponse(ILogger logger, HttpStatusCode statusCode, HttpMethod requestMethod, Uri requestUrl);
+        [LoggerMessage(
+            2,
+            LogLevel.Warning,
+            "Unsuccessful HTTP response {StatusCode} return from {RequestMethod} '{RequestUrl}'.",
+            EventName = "UnsuccessfulHttpResponse"
+        )]
+        public static partial void UnsuccessfulHttpResponse(
+            ILogger logger,
+            HttpStatusCode statusCode,
+            HttpMethod requestMethod,
+            Uri requestUrl
+        );
     }
 }

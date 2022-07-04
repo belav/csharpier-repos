@@ -79,7 +79,7 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
         TokenRestrictedSids,
 
         /// <summary>
-        /// The buffer receives a DWORD value that indicates the Terminal Services session identifier that is associated with the token. 
+        /// The buffer receives a DWORD value that indicates the Terminal Services session identifier that is associated with the token.
         /// </summary>
         TokenSessionId,
 
@@ -104,7 +104,7 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
         TokenAuditPolicy,
 
         /// <summary>
-        /// The buffer receives a TOKEN_ORIGIN value. 
+        /// The buffer receives a TOKEN_ORIGIN value.
         /// </summary>
         TokenOrigin,
 
@@ -144,7 +144,7 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
         TokenVirtualizationEnabled,
 
         /// <summary>
-        /// The buffer receives a TOKEN_MANDATORY_LABEL structure that specifies the token's integrity level. 
+        /// The buffer receives a TOKEN_MANDATORY_LABEL structure that specifies the token's integrity level.
         /// </summary>
         TokenIntegrityLevel,
 
@@ -192,16 +192,16 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
         TOKEN_ADJUST_SESSIONID = 0x0100,
         TOKEN_READ = STANDARD_RIGHTS_READ | TOKEN_QUERY,
         TOKEN_ALL_ACCESS =
-            STANDARD_RIGHTS_REQUIRED |
-            TOKEN_ASSIGN_PRIMARY |
-            TOKEN_DUPLICATE |
-            TOKEN_IMPERSONATE |
-            TOKEN_QUERY |
-            TOKEN_QUERY_SOURCE |
-            TOKEN_ADJUST_PRIVILEGES |
-            TOKEN_ADJUST_GROUPS |
-            TOKEN_ADJUST_DEFAULT |
-            TOKEN_ADJUST_SESSIONID
+            STANDARD_RIGHTS_REQUIRED
+            | TOKEN_ASSIGN_PRIMARY
+            | TOKEN_DUPLICATE
+            | TOKEN_IMPERSONATE
+            | TOKEN_QUERY
+            | TOKEN_QUERY_SOURCE
+            | TOKEN_ADJUST_PRIVILEGES
+            | TOKEN_ADJUST_GROUPS
+            | TOKEN_ADJUST_DEFAULT
+            | TOKEN_ADJUST_SESSIONID
     }
 
     internal static class NativeMethods
@@ -220,18 +220,14 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
         internal const int KEY_ENUMERATE_SUB_KEYS = 0x0008;
         internal const int KEY_NOTIFY = 0x0010;
 
-        internal const int KEY_READ = ((STANDARD_RIGHTS_READ |
-                                        KEY_QUERY_VALUE |
-                                        KEY_ENUMERATE_SUB_KEYS |
-                                        KEY_NOTIFY)
-                                        &
-                                        (~SYNCHRONIZE));
+        internal const int KEY_READ = (
+            (STANDARD_RIGHTS_READ | KEY_QUERY_VALUE | KEY_ENUMERATE_SUB_KEYS | KEY_NOTIFY)
+            & (~SYNCHRONIZE)
+        );
 
-        internal const int KEY_WRITE = ((STANDARD_RIGHTS_WRITE |
-                                        KEY_SET_VALUE |
-                                        KEY_CREATE_SUB_KEY)
-                                        &
-                                        (~SYNCHRONIZE));
+        internal const int KEY_WRITE = (
+            (STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) & (~SYNCHRONIZE)
+        );
 
         internal const int KEY_WOW64_64KEY = 0x0100;
         internal const int KEY_WOW64_32KEY = 0x0200;
@@ -239,34 +235,34 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
         internal const int ERROR_MORE_DATA = 0xEA;
         internal const int ERROR_ACCESS_DENIED = 0x5;
 
-        internal const int REG_OPTION_NON_VOLATILE = 0x0000;     // (default) keys are persisted beyond reboot/unload
-        internal const int REG_OPTION_VOLATILE = 0x0001;     // All keys created by the function are volatile
-        internal const int REG_OPTION_CREATE_LINK = 0x0002;     // They key is a symbolic link
-        internal const int REG_OPTION_BACKUP_RESTORE = 0x0004;  // Use SE_BACKUP_NAME process special privileges
-        internal const int REG_NONE = 0;     // No value type
-        internal const int REG_SZ = 1;     // Unicode nul terminated string
-        internal const int REG_EXPAND_SZ = 2;     // Unicode nul terminated string
-        internal const int REG_BINARY = 3;     // Free form binary
-        internal const int REG_DWORD = 4;     // 32-bit number
-        internal const int REG_DWORD_LITTLE_ENDIAN = 4;     // 32-bit number (same as REG_DWORD)
-        internal const int REG_DWORD_BIG_ENDIAN = 5;     // 32-bit number
-        internal const int REG_LINK = 6;     // Symbolic Link (unicode)
-        internal const int REG_MULTI_SZ = 7;     // Multiple Unicode strings
-        internal const int REG_RESOURCE_LIST = 8;     // Resource list in the resource map
-        internal const int REG_FULL_RESOURCE_DESCRIPTOR = 9;   // Resource list in the hardware description
+        internal const int REG_OPTION_NON_VOLATILE = 0x0000; // (default) keys are persisted beyond reboot/unload
+        internal const int REG_OPTION_VOLATILE = 0x0001; // All keys created by the function are volatile
+        internal const int REG_OPTION_CREATE_LINK = 0x0002; // They key is a symbolic link
+        internal const int REG_OPTION_BACKUP_RESTORE = 0x0004; // Use SE_BACKUP_NAME process special privileges
+        internal const int REG_NONE = 0; // No value type
+        internal const int REG_SZ = 1; // Unicode nul terminated string
+        internal const int REG_EXPAND_SZ = 2; // Unicode nul terminated string
+        internal const int REG_BINARY = 3; // Free form binary
+        internal const int REG_DWORD = 4; // 32-bit number
+        internal const int REG_DWORD_LITTLE_ENDIAN = 4; // 32-bit number (same as REG_DWORD)
+        internal const int REG_DWORD_BIG_ENDIAN = 5; // 32-bit number
+        internal const int REG_LINK = 6; // Symbolic Link (unicode)
+        internal const int REG_MULTI_SZ = 7; // Multiple Unicode strings
+        internal const int REG_RESOURCE_LIST = 8; // Resource list in the resource map
+        internal const int REG_FULL_RESOURCE_DESCRIPTOR = 9; // Resource list in the hardware description
         internal const int REG_RESOURCE_REQUIREMENTS_LIST = 10;
-        internal const int REG_QWORD = 11;    // 64-bit number
+        internal const int REG_QWORD = 11; // 64-bit number
 
         [DllImport("advapi32.dll", ExactSpelling = true, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool AdjustTokenPrivileges(
             SafeHandleZeroIsInvalid TokenHandle,
-            [MarshalAs(UnmanagedType.Bool)]
-            bool DisableAllPrivileges,
+            [MarshalAs(UnmanagedType.Bool)] bool DisableAllPrivileges,
             ref TOKEN_PRIVILEGES NewState,
             int len,
             IntPtr prev,
-            IntPtr relen);
+            IntPtr relen
+        );
 
         [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -279,49 +275,83 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
             TOKEN_INFORMATION_CLASS TokenInformationClass,
             HGlobalBuffer TokenInformation,
             int TokenInformationLength,
-            out int ReturnLength);
+            out int ReturnLength
+        );
 
         [DllImport("advapi32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool OpenProcessToken(
             SafeHandleZeroIsInvalid ProcessHandle,
             AccessTokenRights DesiredAccess,
-            out SafeHandleZeroIsInvalid TokenHandle);
+            out SafeHandleZeroIsInvalid TokenHandle
+        );
 
-        [DllImport("ADVAPI32.DLL"),
-         SuppressUnmanagedCodeSecurity,
-         ResourceExposure(ResourceScope.None),
-         ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [
+            DllImport("ADVAPI32.DLL"),
+            SuppressUnmanagedCodeSecurity,
+            ResourceExposure(ResourceScope.None),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+        ]
         internal static extern int RegCloseKey(IntPtr hKey);
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, BestFitMapping = false)]
-        internal static extern int RegOpenKeyEx(SafeRegistryHandle hKey, String lpSubKey,
-                    int ulOptions, int samDesired, out SafeRegistryHandle hkResult);
+        internal static extern int RegOpenKeyEx(
+            SafeRegistryHandle hKey,
+            String lpSubKey,
+            int ulOptions,
+            int samDesired,
+            out SafeRegistryHandle hkResult
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, BestFitMapping = false)]
-        internal static extern int RegQueryValueEx(SafeRegistryHandle hKey, String lpValueName,
-                    int[] lpReserved, ref int lpType, [Out] byte[] lpData,
-                    ref int lpcbData);
+        internal static extern int RegQueryValueEx(
+            SafeRegistryHandle hKey,
+            String lpValueName,
+            int[] lpReserved,
+            ref int lpType,
+            [Out] byte[] lpData,
+            ref int lpcbData
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, BestFitMapping = false)]
-        internal static extern int RegQueryValueEx(SafeRegistryHandle hKey, String lpValueName,
-                    int[] lpReserved, ref int lpType, ref int lpData,
-                    ref int lpcbData);
+        internal static extern int RegQueryValueEx(
+            SafeRegistryHandle hKey,
+            String lpValueName,
+            int[] lpReserved,
+            ref int lpType,
+            ref int lpData,
+            ref int lpcbData
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, BestFitMapping = false)]
-        internal static extern int RegQueryValueEx(SafeRegistryHandle hKey, String lpValueName,
-                    int[] lpReserved, ref int lpType, ref long lpData,
-                    ref int lpcbData);
+        internal static extern int RegQueryValueEx(
+            SafeRegistryHandle hKey,
+            String lpValueName,
+            int[] lpReserved,
+            ref int lpType,
+            ref long lpData,
+            ref int lpcbData
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, BestFitMapping = false)]
-        internal static extern int RegQueryValueEx(SafeRegistryHandle hKey, String lpValueName,
-                     int[] lpReserved, ref int lpType, [Out] char[] lpData,
-                     ref int lpcbData);
+        internal static extern int RegQueryValueEx(
+            SafeRegistryHandle hKey,
+            String lpValueName,
+            int[] lpReserved,
+            ref int lpType,
+            [Out] char[] lpData,
+            ref int lpcbData
+        );
 
         [DllImport(ADVAPI32, CharSet = CharSet.Auto, BestFitMapping = false)]
-        internal static extern int RegQueryValueEx(SafeRegistryHandle hKey, String lpValueName,
-                    int[] lpReserved, ref int lpType, StringBuilder lpData,
-                    ref int lpcbData);
+        internal static extern int RegQueryValueEx(
+            SafeRegistryHandle hKey,
+            String lpValueName,
+            int[] lpReserved,
+            ref int lpType,
+            StringBuilder lpData,
+            ref int lpcbData
+        );
 
         public static void EnableShutdownPrivilege()
         {
@@ -334,7 +364,11 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
             {
                 TOKEN_PRIVILEGES tp;
                 SafeHandleZeroIsInvalid htok;
-                retVal = OpenProcessToken(hproc, AccessTokenRights.TOKEN_ADJUST_PRIVILEGES | AccessTokenRights.TOKEN_QUERY, out htok);
+                retVal = OpenProcessToken(
+                    hproc,
+                    AccessTokenRights.TOKEN_ADJUST_PRIVILEGES | AccessTokenRights.TOKEN_QUERY,
+                    out htok
+                );
                 if (!retVal)
                 {
                     throw new Win32Exception(Marshal.GetLastWin32Error());
@@ -351,7 +385,14 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
                         throw new Win32Exception(Marshal.GetLastWin32Error());
                     }
 
-                    retVal = AdjustTokenPrivileges(htok, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero);
+                    retVal = AdjustTokenPrivileges(
+                        htok,
+                        false,
+                        ref tp,
+                        0,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    );
                     if (!retVal)
                     {
                         throw new Win32Exception(Marshal.GetLastWin32Error());
@@ -365,14 +406,10 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
     internal sealed class SafeRegistryHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         [SecurityCritical]
-        internal SafeRegistryHandle()
-            : base(true)
-        {
-        }
+        internal SafeRegistryHandle() : base(true) { }
 
         [SecurityCritical]
-        public SafeRegistryHandle(IntPtr preexistingHandle, bool ownsHandle)
-            : base(ownsHandle)
+        public SafeRegistryHandle(IntPtr preexistingHandle, bool ownsHandle) : base(ownsHandle)
         {
             SetHandle(preexistingHandle);
         }
@@ -380,7 +417,9 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
         [SecurityCritical]
         override protected bool ReleaseHandle()
         {
-            return (Microsoft.Web.Management.PInvoke.AdvApi32.NativeMethods.RegCloseKey(handle) == 0);
+            return (
+                Microsoft.Web.Management.PInvoke.AdvApi32.NativeMethods.RegCloseKey(handle) == 0
+            );
         }
     }
 }

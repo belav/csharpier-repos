@@ -27,18 +27,40 @@ namespace System.Net.Security.Tests
             {
                 // Values used to populate client options
                 bool clientAllowRenegotiation = false;
-                List<SslApplicationProtocol> clientAppProtocols = new List<SslApplicationProtocol> { SslApplicationProtocol.Http11 };
+                List<SslApplicationProtocol> clientAppProtocols = new List<SslApplicationProtocol>
+                {
+                    SslApplicationProtocol.Http11
+                };
                 X509RevocationMode clientRevocation = X509RevocationMode.NoCheck;
-                X509CertificateCollection clientCertificates = new X509CertificateCollection() { clientCert };
+                X509CertificateCollection clientCertificates = new X509CertificateCollection()
+                {
+                    clientCert
+                };
                 SslProtocols clientSslProtocols = SslProtocols.Tls12;
                 EncryptionPolicy clientEncryption = EncryptionPolicy.RequireEncryption;
-                LocalCertificateSelectionCallback clientLocalCallback = new LocalCertificateSelectionCallback(delegate { return null; });
-                RemoteCertificateValidationCallback clientRemoteCallback = new RemoteCertificateValidationCallback(delegate { return true; });
+                LocalCertificateSelectionCallback clientLocalCallback =
+                    new LocalCertificateSelectionCallback(
+                        delegate
+                        {
+                            return null;
+                        }
+                    );
+                RemoteCertificateValidationCallback clientRemoteCallback =
+                    new RemoteCertificateValidationCallback(
+                        delegate
+                        {
+                            return true;
+                        }
+                    );
                 string clientHost = serverCert.GetNameInfo(X509NameType.SimpleName, false);
 
                 // Values used to populate server options
                 bool serverAllowRenegotiation = true;
-                List<SslApplicationProtocol> serverAppProtocols = new List<SslApplicationProtocol> { SslApplicationProtocol.Http11, SslApplicationProtocol.Http2 };
+                List<SslApplicationProtocol> serverAppProtocols = new List<SslApplicationProtocol>
+                {
+                    SslApplicationProtocol.Http11,
+                    SslApplicationProtocol.Http2
+                };
                 X509RevocationMode serverRevocation = X509RevocationMode.NoCheck;
                 bool serverCertRequired = false;
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
@@ -47,8 +69,18 @@ namespace System.Net.Security.Tests
 #pragma warning disable SYSLIB0040 // NoEncryption and AllowNoEncryption are obsolete
                 EncryptionPolicy serverEncryption = EncryptionPolicy.AllowNoEncryption;
 #pragma warning restore SYSLIB0040
-                RemoteCertificateValidationCallback serverRemoteCallback = new RemoteCertificateValidationCallback(delegate { return true; });
-                SslStreamCertificateContext certificateContext = SslStreamCertificateContext.Create(serverCert, null, false);
+                RemoteCertificateValidationCallback serverRemoteCallback =
+                    new RemoteCertificateValidationCallback(
+                        delegate
+                        {
+                            return true;
+                        }
+                    );
+                SslStreamCertificateContext certificateContext = SslStreamCertificateContext.Create(
+                    serverCert,
+                    null,
+                    false
+                );
 
                 (Stream stream1, Stream stream2) = TestHelper.GetConnectedStreams();
                 using (var client = new SslStream(stream1))
@@ -83,8 +115,14 @@ namespace System.Net.Security.Tests
                     };
 
                     // Authenticate
-                    Task clientTask = client.AuthenticateAsClientAsync(TestAuthenticateAsync, clientOptions);
-                    Task serverTask = server.AuthenticateAsServerAsync(TestAuthenticateAsync, serverOptions);
+                    Task clientTask = client.AuthenticateAsClientAsync(
+                        TestAuthenticateAsync,
+                        clientOptions
+                    );
+                    Task serverTask = server.AuthenticateAsServerAsync(
+                        TestAuthenticateAsync,
+                        serverOptions
+                    );
                     await new[] { clientTask, serverTask }.WhenAllOrAnyFailed();
 
                     // Validate that client options are unchanged
@@ -93,11 +131,20 @@ namespace System.Net.Security.Tests
                     Assert.Equal(1, clientOptions.ApplicationProtocols.Count);
                     Assert.Equal(clientRevocation, clientOptions.CertificateRevocationCheckMode);
                     Assert.Same(clientCertificates, clientOptions.ClientCertificates);
-                    Assert.Contains(clientCert, clientOptions.ClientCertificates.Cast<X509Certificate2>());
+                    Assert.Contains(
+                        clientCert,
+                        clientOptions.ClientCertificates.Cast<X509Certificate2>()
+                    );
                     Assert.Equal(clientSslProtocols, clientOptions.EnabledSslProtocols);
                     Assert.Equal(clientEncryption, clientOptions.EncryptionPolicy);
-                    Assert.Same(clientLocalCallback, clientOptions.LocalCertificateSelectionCallback);
-                    Assert.Same(clientRemoteCallback, clientOptions.RemoteCertificateValidationCallback);
+                    Assert.Same(
+                        clientLocalCallback,
+                        clientOptions.LocalCertificateSelectionCallback
+                    );
+                    Assert.Same(
+                        clientRemoteCallback,
+                        clientOptions.RemoteCertificateValidationCallback
+                    );
                     Assert.Same(clientHost, clientOptions.TargetHost);
 
                     // Validate that server options are unchanged
@@ -108,7 +155,10 @@ namespace System.Net.Security.Tests
                     Assert.Equal(serverCertRequired, serverOptions.ClientCertificateRequired);
                     Assert.Equal(serverSslProtocols, serverOptions.EnabledSslProtocols);
                     Assert.Equal(serverEncryption, serverOptions.EncryptionPolicy);
-                    Assert.Same(serverRemoteCallback, serverOptions.RemoteCertificateValidationCallback);
+                    Assert.Same(
+                        serverRemoteCallback,
+                        serverOptions.RemoteCertificateValidationCallback
+                    );
                     Assert.Same(serverCert, serverOptions.ServerCertificate);
                     Assert.Same(certificateContext, serverOptions.ServerCertificateContext);
                 }
@@ -116,12 +166,14 @@ namespace System.Net.Security.Tests
         }
     }
 
-    public sealed class SslClientAuthenticationOptionsTestBase_Sync : SslClientAuthenticationOptionsTestBase
+    public sealed class SslClientAuthenticationOptionsTestBase_Sync
+        : SslClientAuthenticationOptionsTestBase
     {
         protected override bool TestAuthenticateAsync => false;
     }
 
-    public sealed class SslClientAuthenticationOptionsTestBase_Async : SslClientAuthenticationOptionsTestBase
+    public sealed class SslClientAuthenticationOptionsTestBase_Async
+        : SslClientAuthenticationOptionsTestBase
     {
         protected override bool TestAuthenticateAsync => true;
     }

@@ -8,7 +8,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal static class RazorSyntaxTreeExtensions
 {
-    public static IReadOnlyList<ClassifiedSpanInternal> GetClassifiedSpans(this RazorSyntaxTree syntaxTree)
+    public static IReadOnlyList<ClassifiedSpanInternal> GetClassifiedSpans(
+        this RazorSyntaxTree syntaxTree
+    )
     {
         if (syntaxTree == null)
         {
@@ -21,7 +23,9 @@ internal static class RazorSyntaxTreeExtensions
         return visitor.ClassifiedSpans;
     }
 
-    public static IReadOnlyList<TagHelperSpanInternal> GetTagHelperSpans(this RazorSyntaxTree syntaxTree)
+    public static IReadOnlyList<TagHelperSpanInternal> GetTagHelperSpans(
+        this RazorSyntaxTree syntaxTree
+    )
     {
         if (syntaxTree == null)
         {

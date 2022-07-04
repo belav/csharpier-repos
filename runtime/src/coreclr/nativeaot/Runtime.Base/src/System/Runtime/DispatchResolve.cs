@@ -10,16 +10,19 @@ namespace System.Runtime
 {
     internal static unsafe class DispatchResolve
     {
-        public static IntPtr FindInterfaceMethodImplementationTarget(MethodTable* pTgtType,
-                                                                 MethodTable* pItfType,
-                                                                 ushort itfSlotNumber)
+        public static IntPtr FindInterfaceMethodImplementationTarget(
+            MethodTable* pTgtType,
+            MethodTable* pItfType,
+            ushort itfSlotNumber
+        )
         {
             DynamicModule* dynamicModule = pTgtType->DynamicModule;
 
             // Use the dynamic module resolver if it's present
             if (dynamicModule != null)
             {
-                delegate*<MethodTable*, MethodTable*, ushort, IntPtr> resolver = dynamicModule->DynamicTypeSlotDispatchResolve;
+                delegate* <MethodTable*, MethodTable*, ushort, IntPtr> resolver =
+                    dynamicModule->DynamicTypeSlotDispatchResolve;
                 if (resolver != null)
                     return resolver(pTgtType, pItfType, itfSlotNumber);
             }
@@ -34,12 +37,19 @@ namespace System.Runtime
             // if the "old algorithm" didn't come up with an answer.
             bool fDoDefaultImplementationLookup = false;
 
-        again:
+            again:
             while (pCur != null)
             {
                 ushort implSlotNumber;
-                if (FindImplSlotForCurrentType(
-                        pCur, pItfType, itfSlotNumber, fDoDefaultImplementationLookup, &implSlotNumber))
+                if (
+                    FindImplSlotForCurrentType(
+                        pCur,
+                        pItfType,
+                        itfSlotNumber,
+                        fDoDefaultImplementationLookup,
+                        &implSlotNumber
+                    )
+                )
                 {
                     IntPtr targetMethod;
                     if (implSlotNumber < pCur->NumVtableSlots)
@@ -59,7 +69,9 @@ namespace System.Runtime
                     {
                         // sealed virtual - need to get the slot form the implementing type, because
                         // it's not present on the target type
-                        targetMethod = pCur->GetSealedVirtualSlot((ushort)(implSlotNumber - pCur->NumVtableSlots));
+                        targetMethod = pCur->GetSealedVirtualSlot(
+                            (ushort)(implSlotNumber - pCur->NumVtableSlots)
+                        );
                     }
                     return targetMethod;
                 }
@@ -80,12 +92,13 @@ namespace System.Runtime
             return IntPtr.Zero;
         }
 
-
-        private static bool FindImplSlotForCurrentType(MethodTable* pTgtType,
-                                        MethodTable* pItfType,
-                                        ushort itfSlotNumber,
-                                        bool fDoDefaultImplementationLookup,
-                                        ushort* pImplSlotNumber)
+        private static bool FindImplSlotForCurrentType(
+            MethodTable* pTgtType,
+            MethodTable* pItfType,
+            ushort itfSlotNumber,
+            bool fDoDefaultImplementationLookup,
+            ushort* pImplSlotNumber
+        )
         {
             bool fRes = false;
 
@@ -110,25 +123,39 @@ namespace System.Runtime
                 bool fDoVariantLookup = false; // do not check variance for first scan of dispatch map
 
                 fRes = FindImplSlotInSimpleMap(
-                    pTgtType, pItfType, itfSlotNumber, pImplSlotNumber, fDoVariantLookup, fDoDefaultImplementationLookup);
+                    pTgtType,
+                    pItfType,
+                    itfSlotNumber,
+                    pImplSlotNumber,
+                    fDoVariantLookup,
+                    fDoDefaultImplementationLookup
+                );
 
                 if (!fRes)
                 {
                     fDoVariantLookup = true; // check variance for second scan of dispatch map
                     fRes = FindImplSlotInSimpleMap(
-                     pTgtType, pItfType, itfSlotNumber, pImplSlotNumber, fDoVariantLookup, fDoDefaultImplementationLookup);
+                        pTgtType,
+                        pItfType,
+                        itfSlotNumber,
+                        pImplSlotNumber,
+                        fDoVariantLookup,
+                        fDoDefaultImplementationLookup
+                    );
                 }
             }
 
             return fRes;
         }
 
-        private static bool FindImplSlotInSimpleMap(MethodTable* pTgtType,
-                                     MethodTable* pItfType,
-                                     uint itfSlotNumber,
-                                     ushort* pImplSlotNumber,
-                                     bool actuallyCheckVariance,
-                                     bool checkDefaultImplementations)
+        private static bool FindImplSlotInSimpleMap(
+            MethodTable* pTgtType,
+            MethodTable* pItfType,
+            uint itfSlotNumber,
+            ushort* pImplSlotNumber,
+            bool actuallyCheckVariance,
+            bool checkDefaultImplementations
+        )
         {
             Debug.Assert(pTgtType->HasDispatchMap, "Missing dispatch map");
 
@@ -155,7 +182,10 @@ namespace System.Runtime
                     int tgtEntryArity = (int)pTgtType->GenericArity;
                     GenericVariance* pTgtVarianceInfo = pTgtType->GenericVariance;
 
-                    if ((tgtEntryArity == 1) && pTgtVarianceInfo[0] == GenericVariance.ArrayCovariant)
+                    if (
+                        (tgtEntryArity == 1)
+                        && pTgtVarianceInfo[0] == GenericVariance.ArrayCovariant
+                    )
                     {
                         fArrayCovariance = true;
                     }
@@ -177,14 +207,21 @@ namespace System.Runtime
             }
 
             DispatchMap* pMap = pTgtType->DispatchMap;
-            DispatchMap.DispatchMapEntry* i = (*pMap)[checkDefaultImplementations ? (int)pMap->NumStandardEntries : 0];
-            DispatchMap.DispatchMapEntry* iEnd = (*pMap)[checkDefaultImplementations ? (int)(pMap->NumStandardEntries + pMap->NumDefaultEntries) : (int)pMap->NumStandardEntries];
+            DispatchMap.DispatchMapEntry* i = (*pMap)[
+                checkDefaultImplementations ? (int)pMap->NumStandardEntries : 0
+            ];
+            DispatchMap.DispatchMapEntry* iEnd = (*pMap)[
+                checkDefaultImplementations
+                    ? (int)(pMap->NumStandardEntries + pMap->NumDefaultEntries)
+                    : (int)pMap->NumStandardEntries
+            ];
             for (; i != iEnd; ++i)
             {
                 if (i->_usInterfaceMethodSlot == itfSlotNumber)
                 {
-                    MethodTable* pCurEntryType =
-                        pTgtType->InterfaceMap[i->_usInterfaceIndex].InterfaceType;
+                    MethodTable* pCurEntryType = pTgtType->InterfaceMap[
+                        i->_usInterfaceIndex
+                    ].InterfaceType;
 
                     if (pCurEntryType->IsCloned)
                         pCurEntryType = pCurEntryType->CanonicalEEType;
@@ -194,7 +231,13 @@ namespace System.Runtime
                         *pImplSlotNumber = i->_usImplMethodSlot;
                         return true;
                     }
-                    else if (fCheckVariance && ((fArrayCovariance && pCurEntryType->IsGeneric) || pCurEntryType->HasGenericVariance))
+                    else if (
+                        fCheckVariance
+                        && (
+                            (fArrayCovariance && pCurEntryType->IsGeneric)
+                            || pCurEntryType->HasGenericVariance
+                        )
+                    )
                     {
                         // Interface types don't match exactly but both the target interface and the current interface
                         // in the map are marked as being generic with at least one co- or contra- variant type
@@ -222,9 +265,21 @@ namespace System.Runtime
 
                         // The types represent different instantiations of the same generic type. The
                         // arity of both had better be the same.
-                        Debug.Assert(itfArity == (int)pCurEntryType->GenericArity, "arity mismatch betweeen generic instantiations");
+                        Debug.Assert(
+                            itfArity == (int)pCurEntryType->GenericArity,
+                            "arity mismatch betweeen generic instantiations"
+                        );
 
-                        if (TypeCast.TypeParametersAreCompatible(itfArity, pCurEntryInstantiation, pItfInstantiation, pItfVarianceInfo, fArrayCovariance, null))
+                        if (
+                            TypeCast.TypeParametersAreCompatible(
+                                itfArity,
+                                pCurEntryInstantiation,
+                                pItfInstantiation,
+                                pItfVarianceInfo,
+                                fArrayCovariance,
+                                null
+                            )
+                        )
                         {
                             *pImplSlotNumber = i->_usImplMethodSlot;
                             return true;

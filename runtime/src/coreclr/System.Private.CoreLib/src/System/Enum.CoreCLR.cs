@@ -11,7 +11,12 @@ namespace System
     public abstract partial class Enum
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Enum_GetValuesAndNames")]
-        private static partial void GetEnumValuesAndNames(QCallTypeHandle enumType, ObjectHandleOnStack values, ObjectHandleOnStack names, Interop.BOOL getNames);
+        private static partial void GetEnumValuesAndNames(
+            QCallTypeHandle enumType,
+            ObjectHandleOnStack values,
+            ObjectHandleOnStack names,
+            Interop.BOOL getNames
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern object InternalBoxEnum(RuntimeType enumType, long value);
@@ -35,7 +40,8 @@ namespace System
                     new QCallTypeHandle(ref enumTypeHandle),
                     ObjectHandleOnStack.Create(ref values),
                     ObjectHandleOnStack.Create(ref names),
-                    getNames ? Interop.BOOL.TRUE : Interop.BOOL.FALSE);
+                    getNames ? Interop.BOOL.TRUE : Interop.BOOL.FALSE
+                );
                 bool hasFlagsAttribute = enumType.IsDefined(typeof(FlagsAttribute), inherit: false);
 
                 entry = new EnumInfo(hasFlagsAttribute, values!, names!);

@@ -16,23 +16,40 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
 {
     [Method(VSInternalMethods.WorkspaceSpellCheckableRangesName)]
-    internal class WorkspaceSpellCheckHandler : AbstractSpellCheckHandler<VSInternalWorkspaceSpellCheckableParams, VSInternalWorkspaceSpellCheckableReport>
+    internal class WorkspaceSpellCheckHandler
+        : AbstractSpellCheckHandler<
+            VSInternalWorkspaceSpellCheckableParams,
+            VSInternalWorkspaceSpellCheckableReport
+        >
     {
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(VSInternalWorkspaceSpellCheckableParams request)
-            => null;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            VSInternalWorkspaceSpellCheckableParams request
+        ) => null;
 
-        protected override VSInternalWorkspaceSpellCheckableReport CreateReport(TextDocumentIdentifier identifier, VSInternalSpellCheckableRange[]? ranges, string? resultId)
-            => new()
+        protected override VSInternalWorkspaceSpellCheckableReport CreateReport(
+            TextDocumentIdentifier identifier,
+            VSInternalSpellCheckableRange[]? ranges,
+            string? resultId
+        ) =>
+            new()
             {
                 TextDocument = identifier,
                 Ranges = ranges!,
                 ResultId = resultId,
             };
 
-        protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(VSInternalWorkspaceSpellCheckableParams requestParams)
-            => requestParams.PreviousResults?.Where(d => d.PreviousResultId != null).Select(d => new PreviousPullResult(d.PreviousResultId!, d.TextDocument!)).ToImmutableArray();
+        protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(
+            VSInternalWorkspaceSpellCheckableParams requestParams
+        ) =>
+            requestParams.PreviousResults
+                ?.Where(d => d.PreviousResultId != null)
+                .Select(d => new PreviousPullResult(d.PreviousResultId!, d.TextDocument!))
+                .ToImmutableArray();
 
-        protected override ImmutableArray<Document> GetOrderedDocuments(RequestContext context, CancellationToken cancellationToken)
+        protected override ImmutableArray<Document> GetOrderedDocuments(
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(context.Solution);
 
@@ -40,7 +57,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
 
             var solution = context.Solution;
 
-            var documentTrackingService = solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
+            var documentTrackingService =
+                solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
 
             // Collect all the documents from the solution in the order we'd like to get spans for.  This will
             // prioritize the files from currently active projects, but then also include all other docs in all
@@ -62,7 +80,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
             result.RemoveDuplicates();
             return result.ToImmutable();
 
-            void AddDocumentsFromProject(Project? project, ImmutableArray<string> supportedLanguages)
+            void AddDocumentsFromProject(
+                Project? project,
+                ImmutableArray<string> supportedLanguages
+            )
             {
                 if (project == null)
                     return;

@@ -16,31 +16,39 @@ namespace System.Text.Json.Serialization.Tests
         #region Polymorphic Class
         [Theory]
         [MemberData(nameof(Get_PolymorphicClass_TestData_Serialization))]
-        public Task PolymorphicClass_TestData_Serialization(PolymorphicClass.TestData testData)
-            => TestMultiContextSerialization(testData.Value, testData.ExpectedJson, testData.ExpectedSerializationException);
+        public Task PolymorphicClass_TestData_Serialization(PolymorphicClass.TestData testData) =>
+            TestMultiContextSerialization(
+                testData.Value,
+                testData.ExpectedJson,
+                testData.ExpectedSerializationException
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicClass_TestData_Serialization()
-            => PolymorphicClass.GetSerializeTestData().Select(entry => new object[] { entry });
+        public static IEnumerable<object[]> Get_PolymorphicClass_TestData_Serialization() =>
+            PolymorphicClass.GetSerializeTestData().Select(entry => new object[] { entry });
 
         [Theory]
         [MemberData(nameof(Get_PolymorphicClass_TestData_Deserialization))]
-        public Task PolymorphicClass_TestData_Deserialization(PolymorphicClass.TestData testData)
-            => TestMultiContextDeserialization<PolymorphicClass>(
+        public Task PolymorphicClass_TestData_Deserialization(PolymorphicClass.TestData testData) =>
+            TestMultiContextDeserialization<PolymorphicClass>(
                 testData.ExpectedJson,
                 testData.ExpectedRoundtripValue,
                 testData.ExpectedDeserializationException,
-                equalityComparer: PolymorphicEqualityComparer<PolymorphicClass>.Instance);
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicClass>.Instance
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicClass_TestData_Deserialization()
-            => PolymorphicClass.GetSerializeTestData().Where(entry => entry.ExpectedJson != null).Select(entry => new object[] { entry });
+        public static IEnumerable<object[]> Get_PolymorphicClass_TestData_Deserialization() =>
+            PolymorphicClass
+                .GetSerializeTestData()
+                .Where(entry => entry.ExpectedJson != null)
+                .Select(entry => new object[] { entry });
 
         [Fact]
         public async Task PolymorphicClass_TestDataArray_Serialization()
         {
-            IEnumerable<(PolymorphicClass Value, string ExpectedJson)> inputs =
-                PolymorphicClass.GetSerializeTestData()
-                    .Where(entry => entry.ExpectedSerializationException is null)
-                    .Select(entry => (entry.Value, entry.ExpectedJson));
+            IEnumerable<(PolymorphicClass Value, string ExpectedJson)> inputs = PolymorphicClass
+                .GetSerializeTestData()
+                .Where(entry => entry.ExpectedSerializationException is null)
+                .Select(entry => (entry.Value, entry.ExpectedJson));
 
             await TestMultiContextSerialization(inputs);
         }
@@ -49,18 +57,34 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicClass_TestDataArray_Deserialization()
         {
             IEnumerable<(string ExpectedJson, PolymorphicClass ExpectedRoundtripValue)> inputs =
-                PolymorphicClass.GetSerializeTestData()
+                PolymorphicClass
+                    .GetSerializeTestData()
                     .Where(entry => entry.ExpectedRoundtripValue is not null)
                     .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
 
-            await TestMultiContextDeserialization(inputs, equalityComparer: PolymorphicEqualityComparer<PolymorphicClass>.Instance);
+            await TestMultiContextDeserialization(
+                inputs,
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicClass>.Instance
+            );
         }
 
         [Theory]
-        [InlineData("$.$type", @"{ ""$type"" : ""derivedClass1"", ""$type"" : ""derivedClass1"", ""Number"" : 42 }")]
-        [InlineData("$.$type", @"{ ""$type"" : ""derivedClass1"", ""Number"" : 42, ""$type"" : ""derivedClass1""}")]
-        [InlineData("$.$id", @"{ ""$type"" : ""derivedClass1"", ""Number"" : 42, ""$id"" : ""referenceId""}")]
-        [InlineData("$.$id", @"{ ""$type"" : ""derivedClass1"", """" : 42, ""$id"" : ""referenceId""}")]
+        [InlineData(
+            "$.$type",
+            @"{ ""$type"" : ""derivedClass1"", ""$type"" : ""derivedClass1"", ""Number"" : 42 }"
+        )]
+        [InlineData(
+            "$.$type",
+            @"{ ""$type"" : ""derivedClass1"", ""Number"" : 42, ""$type"" : ""derivedClass1""}"
+        )]
+        [InlineData(
+            "$.$id",
+            @"{ ""$type"" : ""derivedClass1"", ""Number"" : 42, ""$id"" : ""referenceId""}"
+        )]
+        [InlineData(
+            "$.$id",
+            @"{ ""$type"" : ""derivedClass1"", """" : 42, ""$id"" : ""referenceId""}"
+        )]
         [InlineData("$.$values", @"{ ""Number"" : 42, ""$values"" : [] }")]
         [InlineData("$.$type", @"{ ""Number"" : 42, ""$type"" : ""derivedClass"" }")]
         [InlineData("$", @"{ ""$type"" : ""invalidDiscriminator"", ""Number"" : 42 }")]
@@ -70,74 +94,115 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData("$.$type", @"{ ""$type"" : [], ""Number"" : 42 }")]
         [InlineData("$.$id", @"{ ""$id"" : ""1"", ""Number"" : 42 }")]
         [InlineData("$.$ref", @"{ ""$ref"" : ""1"" }")]
-        public async Task PolymorphicClass_InvalidTypeDiscriminatorMetadata_ShouldThrowJsonException(string expectedJsonPath, string json)
+        public async Task PolymorphicClass_InvalidTypeDiscriminatorMetadata_ShouldThrowJsonException(
+            string expectedJsonPath,
+            string json
+        )
         {
-            JsonException exception = await Assert.ThrowsAsync<JsonException>(() => Serializer.DeserializeWrapper<PolymorphicClass>(json));
+            JsonException exception = await Assert.ThrowsAsync<JsonException>(
+                () => Serializer.DeserializeWrapper<PolymorphicClass>(json)
+            );
             Assert.Equal(expectedJsonPath, exception.Path);
         }
 
         //--
 
         [Theory]
-        [MemberData(nameof(Get_PolymorphicClass_CustomConfigWithBaseTypeFallback_TestData_Serialization))]
-        public Task PolymorphicClass_CustomConfigWithBaseTypeFallback_TestData_Serialization(PolymorphicClass.TestData testData)
-            => TestMultiContextSerialization(
+        [MemberData(
+            nameof(Get_PolymorphicClass_CustomConfigWithBaseTypeFallback_TestData_Serialization)
+        )]
+        public Task PolymorphicClass_CustomConfigWithBaseTypeFallback_TestData_Serialization(
+            PolymorphicClass.TestData testData
+        ) =>
+            TestMultiContextSerialization(
                 testData.Value,
                 testData.ExpectedJson,
                 testData.ExpectedSerializationException,
-                options: PolymorphicClass.CustomConfigWithBaseTypeFallback);
+                options: PolymorphicClass.CustomConfigWithBaseTypeFallback
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicClass_CustomConfigWithBaseTypeFallback_TestData_Serialization()
-            => PolymorphicClass.GetSerializeTestData_CustomConfigWithBaseTypeFallback().Select(entry => new object[] { entry });
+        public static IEnumerable<object[]> Get_PolymorphicClass_CustomConfigWithBaseTypeFallback_TestData_Serialization() =>
+            PolymorphicClass
+                .GetSerializeTestData_CustomConfigWithBaseTypeFallback()
+                .Select(entry => new object[] { entry });
 
         [Theory]
-        [MemberData(nameof(Get_PolymorphicClass_CustomConfigWithBaseTypeFallback_TestData_Deserialization))]
-        public Task PolymorphicClass_CustomConfigWithBaseTypeFallback_TestData_Deserialization(PolymorphicClass.TestData testData)
-            => TestMultiContextDeserialization<PolymorphicClass>(
+        [MemberData(
+            nameof(Get_PolymorphicClass_CustomConfigWithBaseTypeFallback_TestData_Deserialization)
+        )]
+        public Task PolymorphicClass_CustomConfigWithBaseTypeFallback_TestData_Deserialization(
+            PolymorphicClass.TestData testData
+        ) =>
+            TestMultiContextDeserialization<PolymorphicClass>(
                 testData.ExpectedJson,
                 testData.ExpectedRoundtripValue,
                 testData.ExpectedSerializationException,
                 equalityComparer: PolymorphicEqualityComparer<PolymorphicClass>.Instance,
-                options: PolymorphicClass.CustomConfigWithBaseTypeFallback);
+                options: PolymorphicClass.CustomConfigWithBaseTypeFallback
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicClass_CustomConfigWithBaseTypeFallback_TestData_Deserialization()
-            => PolymorphicClass.GetSerializeTestData_CustomConfigWithBaseTypeFallback()
+        public static IEnumerable<object[]> Get_PolymorphicClass_CustomConfigWithBaseTypeFallback_TestData_Deserialization() =>
+            PolymorphicClass
+                .GetSerializeTestData_CustomConfigWithBaseTypeFallback()
                 .Where(entry => entry.ExpectedJson != null)
                 .Select(entry => new object[] { entry });
 
         [Fact]
         public async Task PolymorphicClass_CustomConfigWithBaseTypeFallback_TestDataArray_Serialization()
         {
-            IEnumerable<(PolymorphicClass Value, string ExpectedJson)> inputs =
-                PolymorphicClass.GetSerializeTestData_CustomConfigWithBaseTypeFallback()
-                    .Where(entry => entry.ExpectedSerializationException is null)
-                    .Select(entry => (entry.Value, entry.ExpectedJson));
+            IEnumerable<(PolymorphicClass Value, string ExpectedJson)> inputs = PolymorphicClass
+                .GetSerializeTestData_CustomConfigWithBaseTypeFallback()
+                .Where(entry => entry.ExpectedSerializationException is null)
+                .Select(entry => (entry.Value, entry.ExpectedJson));
 
-            await TestMultiContextSerialization(inputs, options: PolymorphicClass.CustomConfigWithBaseTypeFallback);
+            await TestMultiContextSerialization(
+                inputs,
+                options: PolymorphicClass.CustomConfigWithBaseTypeFallback
+            );
         }
 
         [Fact]
         public async Task PolymorphicClass_CustomConfigWithBaseTypeFallbacks_TestDataArray_Deserialization()
         {
             IEnumerable<(string ExpectedJson, PolymorphicClass ExpectedRoundtripValue)> inputs =
-                PolymorphicClass.GetSerializeTestData_CustomConfigWithBaseTypeFallback()
-                .Where(entry => entry.ExpectedRoundtripValue is not null)
-                .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
+                PolymorphicClass
+                    .GetSerializeTestData_CustomConfigWithBaseTypeFallback()
+                    .Where(entry => entry.ExpectedRoundtripValue is not null)
+                    .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
 
             await TestMultiContextDeserialization(
                 inputs,
                 equalityComparer: PolymorphicEqualityComparer<PolymorphicClass>.Instance,
-                options: PolymorphicClass.CustomConfigWithBaseTypeFallback);
+                options: PolymorphicClass.CustomConfigWithBaseTypeFallback
+            );
         }
 
         [Theory]
         [InlineData("$.$type", @"{ ""$type"" : ""derivedClass1"", ""Number"" : 42 }")]
-        [InlineData("$._case", @"{ ""_case"" : ""derivedClass1"", ""_case"" : ""derivedClass1"", ""Number"" : 42 }")]
-        [InlineData("$._case", @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""_case"" : ""derivedClass1""}")]
-        [InlineData("$.$type", @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""$type"" : ""derivedClass1""}")]
-        [InlineData("$.$id", @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""$id"" : ""referenceId""}")]
-        [InlineData("$.$id", @"{ ""_case"" : ""derivedClass1"", """" : 42, ""$id"" : ""referenceId""}")]
-        [InlineData("$.$values", @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""$values"" : [] }")]
+        [InlineData(
+            "$._case",
+            @"{ ""_case"" : ""derivedClass1"", ""_case"" : ""derivedClass1"", ""Number"" : 42 }"
+        )]
+        [InlineData(
+            "$._case",
+            @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""_case"" : ""derivedClass1""}"
+        )]
+        [InlineData(
+            "$.$type",
+            @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""$type"" : ""derivedClass1""}"
+        )]
+        [InlineData(
+            "$.$id",
+            @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""$id"" : ""referenceId""}"
+        )]
+        [InlineData(
+            "$.$id",
+            @"{ ""_case"" : ""derivedClass1"", """" : 42, ""$id"" : ""referenceId""}"
+        )]
+        [InlineData(
+            "$.$values",
+            @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""$values"" : [] }"
+        )]
         [InlineData("$._case", @"{ ""Number"" : 42, ""_case"" : ""derivedClass1"" }")]
         [InlineData("$", @"{ ""_case"" : ""invalidDiscriminator"", ""Number"" : 42 }")]
         [InlineData("$", @"{ ""_case"" : 0, ""Number"" : 42 }")]
@@ -146,74 +211,123 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData("$._case", @"{ ""_case"" : [], ""Number"" : 42 }")]
         [InlineData("$.$id", @"{ ""$id"" : ""1"", ""Number"" : 42 }")]
         [InlineData("$.$ref", @"{ ""$ref"" : ""1"" }")]
-        public async Task PolymorphicClass_CustomConfigWithBaseTypeFallback_InvalidTypeDiscriminatorMetadata_ShouldThrowJsonException(string expectedJsonPath, string json)
+        public async Task PolymorphicClass_CustomConfigWithBaseTypeFallback_InvalidTypeDiscriminatorMetadata_ShouldThrowJsonException(
+            string expectedJsonPath,
+            string json
+        )
         {
-            JsonException exception = await Assert.ThrowsAsync<JsonException>(() => Serializer.DeserializeWrapper<PolymorphicClass>(json, PolymorphicClass.CustomConfigWithBaseTypeFallback));
+            JsonException exception = await Assert.ThrowsAsync<JsonException>(
+                () =>
+                    Serializer.DeserializeWrapper<PolymorphicClass>(
+                        json,
+                        PolymorphicClass.CustomConfigWithBaseTypeFallback
+                    )
+            );
             Assert.Equal(expectedJsonPath, exception.Path);
         }
 
         //---
 
         [Theory]
-        [MemberData(nameof(Get_PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestData_Serialization))]
-        public Task PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestData_Serialization(PolymorphicClass.TestData testData)
-            => TestMultiContextSerialization(
+        [MemberData(
+            nameof(
+                Get_PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestData_Serialization
+            )
+        )]
+        public Task PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestData_Serialization(
+            PolymorphicClass.TestData testData
+        ) =>
+            TestMultiContextSerialization(
                 testData.Value,
                 testData.ExpectedJson,
                 testData.ExpectedSerializationException,
-                options: PolymorphicClass.CustomConfigWithNearestAncestorFallback);
+                options: PolymorphicClass.CustomConfigWithNearestAncestorFallback
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestData_Serialization()
-            => PolymorphicClass.GetSerializeTestData_CustomConfigWithNearestAncestorFallback().Select(entry => new object[] { entry });
+        public static IEnumerable<object[]> Get_PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestData_Serialization() =>
+            PolymorphicClass
+                .GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
+                .Select(entry => new object[] { entry });
 
         [Theory]
-        [MemberData(nameof(Get_PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestData_Deserialization))]
-        public Task PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestData_Deserialization(PolymorphicClass.TestData testData)
-            => TestMultiContextDeserialization<PolymorphicClass>(
+        [MemberData(
+            nameof(
+                Get_PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestData_Deserialization
+            )
+        )]
+        public Task PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestData_Deserialization(
+            PolymorphicClass.TestData testData
+        ) =>
+            TestMultiContextDeserialization<PolymorphicClass>(
                 testData.ExpectedJson,
                 testData.ExpectedRoundtripValue,
                 testData.ExpectedDeserializationException,
                 equalityComparer: PolymorphicEqualityComparer<PolymorphicClass>.Instance,
-                options: PolymorphicClass.CustomConfigWithNearestAncestorFallback);
+                options: PolymorphicClass.CustomConfigWithNearestAncestorFallback
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestData_Deserialization()
-            => PolymorphicClass.GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
-                    .Where(entry => entry.ExpectedJson != null)
-                    .Select(entry => new object[] { entry });
+        public static IEnumerable<object[]> Get_PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestData_Deserialization() =>
+            PolymorphicClass
+                .GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
+                .Where(entry => entry.ExpectedJson != null)
+                .Select(entry => new object[] { entry });
 
         [Fact]
         public async Task PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestDataArray_Serialization()
         {
-            IEnumerable<(PolymorphicClass Value, string ExpectedJson)> inputs =
-                PolymorphicClass.GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
-                    .Where(entry => entry.ExpectedSerializationException is null)
-                    .Select(entry => (entry.Value, entry.ExpectedJson));
+            IEnumerable<(PolymorphicClass Value, string ExpectedJson)> inputs = PolymorphicClass
+                .GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
+                .Where(entry => entry.ExpectedSerializationException is null)
+                .Select(entry => (entry.Value, entry.ExpectedJson));
 
-            await TestMultiContextSerialization(inputs, options: PolymorphicClass.CustomConfigWithNearestAncestorFallback);
+            await TestMultiContextSerialization(
+                inputs,
+                options: PolymorphicClass.CustomConfigWithNearestAncestorFallback
+            );
         }
 
         [Fact]
         public async Task PolymorphicClass_CustomConfigWithNearestAncestorFallback_TestDataArray_Deserialization()
         {
             IEnumerable<(string ExpectedJson, PolymorphicClass ExpectedRoundtripValue)> inputs =
-                PolymorphicClass.GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
-                .Where(entry => entry.ExpectedRoundtripValue is not null)
-                .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
+                PolymorphicClass
+                    .GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
+                    .Where(entry => entry.ExpectedRoundtripValue is not null)
+                    .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
 
             await TestMultiContextDeserialization(
                 inputs,
                 equalityComparer: PolymorphicEqualityComparer<PolymorphicClass>.Instance,
-                options: PolymorphicClass.CustomConfigWithNearestAncestorFallback);
+                options: PolymorphicClass.CustomConfigWithNearestAncestorFallback
+            );
         }
 
         [Theory]
         [InlineData("$.$type", @"{ ""$type"" : ""derivedClass1"", ""Number"" : 42 }")]
-        [InlineData("$._case", @"{ ""_case"" : ""derivedClass1"", ""_case"" : ""derivedClass1"", ""Number"" : 42 }")]
-        [InlineData("$._case", @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""_case"" : ""derivedClass1""}")]
-        [InlineData("$.$type", @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""$type"" : ""derivedClass1""}")]
-        [InlineData("$.$id", @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""$id"" : ""referenceId""}")]
-        [InlineData("$.$id", @"{ ""_case"" : ""derivedClass1"", """" : 42, ""$id"" : ""referenceId""}")]
-        [InlineData("$.$values", @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""$values"" : [] }")]
+        [InlineData(
+            "$._case",
+            @"{ ""_case"" : ""derivedClass1"", ""_case"" : ""derivedClass1"", ""Number"" : 42 }"
+        )]
+        [InlineData(
+            "$._case",
+            @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""_case"" : ""derivedClass1""}"
+        )]
+        [InlineData(
+            "$.$type",
+            @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""$type"" : ""derivedClass1""}"
+        )]
+        [InlineData(
+            "$.$id",
+            @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""$id"" : ""referenceId""}"
+        )]
+        [InlineData(
+            "$.$id",
+            @"{ ""_case"" : ""derivedClass1"", """" : 42, ""$id"" : ""referenceId""}"
+        )]
+        [InlineData(
+            "$.$values",
+            @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""$values"" : [] }"
+        )]
         [InlineData("$._case", @"{ ""Number"" : 42, ""_case"" : ""derivedClass1"" }")]
         [InlineData("$", @"{ ""_case"" : ""invalidDiscriminator"", ""Number"" : 42 }")]
         [InlineData("$", @"{ ""_case"" : 0, ""Number"" : 42 }")]
@@ -222,47 +336,80 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData("$._case", @"{ ""_case"" : [], ""Number"" : 42 }")]
         [InlineData("$.$id", @"{ ""$id"" : ""1"", ""Number"" : 42 }")]
         [InlineData("$.$ref", @"{ ""$ref"" : ""1"" }")]
-        public async Task PolymorphicClass_CustomConfigWithNearestAncestorFallback_InvalidTypeDiscriminatorMetadata_ShouldThrowJsonException(string expectedJsonPath, string json)
+        public async Task PolymorphicClass_CustomConfigWithNearestAncestorFallback_InvalidTypeDiscriminatorMetadata_ShouldThrowJsonException(
+            string expectedJsonPath,
+            string json
+        )
         {
-            JsonException exception = await Assert.ThrowsAsync<JsonException>(() => Serializer.DeserializeWrapper<PolymorphicClass>(json, PolymorphicClass.CustomConfigWithBaseTypeFallback));
+            JsonException exception = await Assert.ThrowsAsync<JsonException>(
+                () =>
+                    Serializer.DeserializeWrapper<PolymorphicClass>(
+                        json,
+                        PolymorphicClass.CustomConfigWithBaseTypeFallback
+                    )
+            );
             Assert.Equal(expectedJsonPath, exception.Path);
         }
 
         [Theory]
         [InlineData(JsonUnknownDerivedTypeHandling.FailSerialization)]
         [InlineData(JsonUnknownDerivedTypeHandling.FallBackToBaseType)]
-        public async Task PolymorphicClass_ConfigWithAbstractClass_ShouldThrowNotSupportedException(JsonUnknownDerivedTypeHandling jsonUnknownDerivedTypeHandling)
+        public async Task PolymorphicClass_ConfigWithAbstractClass_ShouldThrowNotSupportedException(
+            JsonUnknownDerivedTypeHandling jsonUnknownDerivedTypeHandling
+        )
         {
             var options = new JsonSerializerOptions
             {
                 PolymorphicTypeConfigurations =
                 {
-                    new JsonPolymorphicTypeConfiguration<PolymorphicClass> { UnknownDerivedTypeHandling = jsonUnknownDerivedTypeHandling }
-                        .WithDerivedType<PolymorphicClass.DerivedAbstractClass>()
+                    new JsonPolymorphicTypeConfiguration<PolymorphicClass>
+                    {
+                        UnknownDerivedTypeHandling = jsonUnknownDerivedTypeHandling
+                    }.WithDerivedType<PolymorphicClass.DerivedAbstractClass>()
                 }
             };
 
             PolymorphicClass value = new PolymorphicClass.DerivedAbstractClass.DerivedClass();
-            await Assert.ThrowsAsync<NotSupportedException>(() => Serializer.SerializeWrapper(value));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(DerivedClass1_NoTypeDiscriminator))]
         [JsonDerivedType(typeof(DerivedClass1_NoTypeDiscriminator.DerivedClass))]
         [JsonDerivedType(typeof(DerivedClass1_TypeDiscriminator), "derivedClass1")]
-        [JsonDerivedType(typeof(DerivedClass1_TypeDiscriminator.DerivedClass), "derivedClassOfDerivedClass1")]
+        [JsonDerivedType(
+            typeof(DerivedClass1_TypeDiscriminator.DerivedClass),
+            "derivedClassOfDerivedClass1"
+        )]
         [JsonDerivedType(typeof(DerivedClass2_NoTypeDiscriminator))]
         [JsonDerivedType(typeof(DerivedClass2_TypeDiscriminator), "derivedClass2")]
         [JsonDerivedType(typeof(DerivedClass_IntegerTypeDiscriminator), typeDiscriminator: -1)]
         [JsonDerivedType(typeof(DerivedCollection_NoTypeDiscriminator))]
         [JsonDerivedType(typeof(DerivedCollection_TypeDiscriminator), "derivedCollection")]
-        [JsonDerivedType(typeof(DerivedCollection_TypeDiscriminator.DerivedClass), "derivedCollectionOfDerivedCollection")]
+        [JsonDerivedType(
+            typeof(DerivedCollection_TypeDiscriminator.DerivedClass),
+            "derivedCollectionOfDerivedCollection"
+        )]
         [JsonDerivedType(typeof(DerivedDictionary_NoTypeDiscriminator))]
         [JsonDerivedType(typeof(DerivedDictionary_TypeDiscriminator), "derivedDictionary")]
-        [JsonDerivedType(typeof(DerivedDictionary_TypeDiscriminator.DerivedClass), "derivedDictionaryOfDerivedDictionary")]
-        [JsonDerivedType(typeof(DerivedClassWithConstructor_TypeDiscriminator), "derivedClassWithCtor")]
-        [JsonDerivedType(typeof(DerivedClassWithConstructor_TypeDiscriminator.DerivedClass), "derivedClassOfDerivedClassWithCtor")]
+        [JsonDerivedType(
+            typeof(DerivedDictionary_TypeDiscriminator.DerivedClass),
+            "derivedDictionaryOfDerivedDictionary"
+        )]
+        [JsonDerivedType(
+            typeof(DerivedClassWithConstructor_TypeDiscriminator),
+            "derivedClassWithCtor"
+        )]
+        [JsonDerivedType(
+            typeof(DerivedClassWithConstructor_TypeDiscriminator.DerivedClass),
+            "derivedClassOfDerivedClassWithCtor"
+        )]
         [JsonDerivedType(typeof(DerivedClassWithCustomConverter_NoTypeDiscriminator))]
-        [JsonDerivedType(typeof(DerivedClassWithCustomConverter_TypeDiscriminator), "derivedClassWithCustomConverter")]
+        [JsonDerivedType(
+            typeof(DerivedClassWithCustomConverter_TypeDiscriminator),
+            "derivedClassWithCustomConverter"
+        )]
         public class PolymorphicClass
         {
             public int Number { get; set; }
@@ -332,14 +479,23 @@ namespace System.Text.Json.Serialization.Tests
             {
                 // Minimal ICollection implementation meant to enable collection deserialization
                 bool ICollection<int>.IsReadOnly => false;
+
                 void ICollection<int>.Add(int item) => Number = item;
-                public IEnumerator<int> GetEnumerator() => Enumerable.Repeat(Number, 3).GetEnumerator();
+
+                public IEnumerator<int> GetEnumerator() =>
+                    Enumerable.Repeat(Number, 3).GetEnumerator();
 
                 int ICollection<int>.Count => throw new NotImplementedException();
+
                 void ICollection<int>.Clear() => throw new NotImplementedException();
+
                 bool ICollection<int>.Contains(int item) => throw new NotImplementedException();
-                void ICollection<int>.CopyTo(int[] array, int arrayIndex) => throw new NotImplementedException();
+
+                void ICollection<int>.CopyTo(int[] array, int arrayIndex) =>
+                    throw new NotImplementedException();
+
                 IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
                 bool ICollection<int>.Remove(int item) => throw new NotImplementedException();
 
                 public class DerivedClass : DerivedCollection_NoTypeDiscriminator
@@ -352,14 +508,23 @@ namespace System.Text.Json.Serialization.Tests
             {
                 // Minimal ICollection implementation meant to enable collection deserialization
                 bool ICollection<int>.IsReadOnly => false;
+
                 void ICollection<int>.Add(int item) => Number = item;
-                public IEnumerator<int> GetEnumerator() => Enumerable.Repeat(Number, 3).GetEnumerator();
+
+                public IEnumerator<int> GetEnumerator() =>
+                    Enumerable.Repeat(Number, 3).GetEnumerator();
 
                 int ICollection<int>.Count => throw new NotImplementedException();
+
                 void ICollection<int>.Clear() => throw new NotImplementedException();
+
                 bool ICollection<int>.Contains(int item) => throw new NotImplementedException();
-                void ICollection<int>.CopyTo(int[] array, int arrayIndex) => throw new NotImplementedException();
+
+                void ICollection<int>.CopyTo(int[] array, int arrayIndex) =>
+                    throw new NotImplementedException();
+
                 IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
                 bool ICollection<int>.Remove(int item) => throw new NotImplementedException();
 
                 public class DerivedClass : DerivedCollection_TypeDiscriminator
@@ -368,26 +533,67 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }
 
-            public class DerivedDictionary_NoTypeDiscriminator : PolymorphicClass, IDictionary<string, int>
+            public class DerivedDictionary_NoTypeDiscriminator
+                : PolymorphicClass,
+                    IDictionary<string, int>
             {
                 // Minimal IDictionary implementation meant to enable serialization
                 bool ICollection<KeyValuePair<string, int>>.IsReadOnly => false;
-                public IEnumerator<KeyValuePair<string, int>> GetEnumerator() => Enumerable.Repeat(new KeyValuePair<string, int>("dictionaryKey", Number), 1).GetEnumerator();
-                int IDictionary<string, int>.this[string key] { get => throw new NotImplementedException(); set { if (key == "dictionaryKey") Number = value; } }
 
-                void IDictionary<string, int>.Add(string key, int value) => throw new NotImplementedException();
-                ICollection<string> IDictionary<string, int>.Keys => throw new NotImplementedException();
-                ICollection<int> IDictionary<string, int>.Values => throw new NotImplementedException();
-                int ICollection<KeyValuePair<string, int>>.Count => throw new NotImplementedException();
-                void ICollection<KeyValuePair<string, int>>.Add(KeyValuePair<string, int> item) => throw new NotImplementedException();
-                void ICollection<KeyValuePair<string, int>>.Clear() => throw new NotImplementedException();
-                bool ICollection<KeyValuePair<string, int>>.Contains(KeyValuePair<string, int> item) => throw new NotImplementedException();
-                bool IDictionary<string, int>.ContainsKey(string key) => throw new NotImplementedException();
-                void ICollection<KeyValuePair<string, int>>.CopyTo(KeyValuePair<string, int>[] array, int arrayIndex) => throw new NotImplementedException();
+                public IEnumerator<KeyValuePair<string, int>> GetEnumerator() =>
+                    Enumerable
+                        .Repeat(new KeyValuePair<string, int>("dictionaryKey", Number), 1)
+                        .GetEnumerator();
+
+                int IDictionary<string, int>.this[string key]
+                {
+                    get => throw new NotImplementedException();
+                    set
+                    {
+                        if (key == "dictionaryKey")
+                            Number = value;
+                    }
+                }
+
+                void IDictionary<string, int>.Add(string key, int value) =>
+                    throw new NotImplementedException();
+
+                ICollection<string> IDictionary<string, int>.Keys =>
+                    throw new NotImplementedException();
+                ICollection<int> IDictionary<string, int>.Values =>
+                    throw new NotImplementedException();
+                int ICollection<KeyValuePair<string, int>>.Count =>
+                    throw new NotImplementedException();
+
+                void ICollection<KeyValuePair<string, int>>.Add(KeyValuePair<string, int> item) =>
+                    throw new NotImplementedException();
+
+                void ICollection<KeyValuePair<string, int>>.Clear() =>
+                    throw new NotImplementedException();
+
+                bool ICollection<KeyValuePair<string, int>>.Contains(
+                    KeyValuePair<string, int> item
+                ) => throw new NotImplementedException();
+
+                bool IDictionary<string, int>.ContainsKey(string key) =>
+                    throw new NotImplementedException();
+
+                void ICollection<KeyValuePair<string, int>>.CopyTo(
+                    KeyValuePair<string, int>[] array,
+                    int arrayIndex
+                ) => throw new NotImplementedException();
+
                 IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
-                bool IDictionary<string, int>.Remove(string key) => throw new NotImplementedException();
-                bool ICollection<KeyValuePair<string, int>>.Remove(KeyValuePair<string, int> item) => throw new NotImplementedException();
-                bool IDictionary<string, int>.TryGetValue(string key, out int value) => throw new NotImplementedException();
+
+                bool IDictionary<string, int>.Remove(string key) =>
+                    throw new NotImplementedException();
+
+                bool ICollection<KeyValuePair<string, int>>.Remove(
+                    KeyValuePair<string, int> item
+                ) => throw new NotImplementedException();
+
+                bool IDictionary<string, int>.TryGetValue(string key, out int value) =>
+                    throw new NotImplementedException();
 
                 public class DerivedClass : DerivedDictionary_NoTypeDiscriminator
                 {
@@ -395,26 +601,67 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }
 
-            public class DerivedDictionary_TypeDiscriminator : PolymorphicClass, IDictionary<string, int>
+            public class DerivedDictionary_TypeDiscriminator
+                : PolymorphicClass,
+                    IDictionary<string, int>
             {
                 // Minimal IDictionary implementation meant to enable serialization
                 bool ICollection<KeyValuePair<string, int>>.IsReadOnly => false;
-                public IEnumerator<KeyValuePair<string, int>> GetEnumerator() => Enumerable.Repeat(new KeyValuePair<string, int>("dictionaryKey", Number), 1).GetEnumerator();
-                IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-                int IDictionary<string, int>.this[string key] { get => throw new NotImplementedException(); set { if (key == "dictionaryKey") Number = value; } }
 
-                void IDictionary<string, int>.Add(string key, int value) => throw new NotImplementedException();
-                ICollection<string> IDictionary<string, int>.Keys => throw new NotImplementedException();
-                ICollection<int> IDictionary<string, int>.Values => throw new NotImplementedException();
-                int ICollection<KeyValuePair<string, int>>.Count => throw new NotImplementedException();
-                void ICollection<KeyValuePair<string, int>>.Add(KeyValuePair<string, int> item) => throw new NotImplementedException();
-                void ICollection<KeyValuePair<string, int>>.Clear() => throw new NotImplementedException();
-                bool ICollection<KeyValuePair<string, int>>.Contains(KeyValuePair<string, int> item) => throw new NotImplementedException();
-                bool IDictionary<string, int>.ContainsKey(string key) => throw new NotImplementedException();
-                void ICollection<KeyValuePair<string, int>>.CopyTo(KeyValuePair<string, int>[] array, int arrayIndex) => throw new NotImplementedException();
-                bool IDictionary<string, int>.Remove(string key) => throw new NotImplementedException();
-                bool ICollection<KeyValuePair<string, int>>.Remove(KeyValuePair<string, int> item) => throw new NotImplementedException();
-                bool IDictionary<string, int>.TryGetValue(string key, out int value) => throw new NotImplementedException();
+                public IEnumerator<KeyValuePair<string, int>> GetEnumerator() =>
+                    Enumerable
+                        .Repeat(new KeyValuePair<string, int>("dictionaryKey", Number), 1)
+                        .GetEnumerator();
+
+                IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+                int IDictionary<string, int>.this[string key]
+                {
+                    get => throw new NotImplementedException();
+                    set
+                    {
+                        if (key == "dictionaryKey")
+                            Number = value;
+                    }
+                }
+
+                void IDictionary<string, int>.Add(string key, int value) =>
+                    throw new NotImplementedException();
+
+                ICollection<string> IDictionary<string, int>.Keys =>
+                    throw new NotImplementedException();
+                ICollection<int> IDictionary<string, int>.Values =>
+                    throw new NotImplementedException();
+                int ICollection<KeyValuePair<string, int>>.Count =>
+                    throw new NotImplementedException();
+
+                void ICollection<KeyValuePair<string, int>>.Add(KeyValuePair<string, int> item) =>
+                    throw new NotImplementedException();
+
+                void ICollection<KeyValuePair<string, int>>.Clear() =>
+                    throw new NotImplementedException();
+
+                bool ICollection<KeyValuePair<string, int>>.Contains(
+                    KeyValuePair<string, int> item
+                ) => throw new NotImplementedException();
+
+                bool IDictionary<string, int>.ContainsKey(string key) =>
+                    throw new NotImplementedException();
+
+                void ICollection<KeyValuePair<string, int>>.CopyTo(
+                    KeyValuePair<string, int>[] array,
+                    int arrayIndex
+                ) => throw new NotImplementedException();
+
+                bool IDictionary<string, int>.Remove(string key) =>
+                    throw new NotImplementedException();
+
+                bool ICollection<KeyValuePair<string, int>>.Remove(
+                    KeyValuePair<string, int> item
+                ) => throw new NotImplementedException();
+
+                bool IDictionary<string, int>.TryGetValue(string key, out int value) =>
+                    throw new NotImplementedException();
 
                 public class DerivedClass : DerivedDictionary_TypeDiscriminator
                 {
@@ -433,8 +680,7 @@ namespace System.Text.Json.Serialization.Tests
                 public class DerivedClass : DerivedClassWithConstructor_TypeDiscriminator
                 {
                     [JsonConstructor]
-                    public DerivedClass(int number, string extraProperty)
-                        : base(number)
+                    public DerivedClass(int number, string extraProperty) : base(number)
                     {
                         ExtraProperty = extraProperty;
                     }
@@ -446,13 +692,20 @@ namespace System.Text.Json.Serialization.Tests
             [JsonConverter(typeof(CustomConverter))]
             public class DerivedClassWithCustomConverter_NoTypeDiscriminator : PolymorphicClass
             {
-                public class CustomConverter : JsonConverter<DerivedClassWithCustomConverter_NoTypeDiscriminator>
+                public class CustomConverter
+                    : JsonConverter<DerivedClassWithCustomConverter_NoTypeDiscriminator>
                 {
-                    public override DerivedClassWithCustomConverter_NoTypeDiscriminator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-                        => throw new NotSupportedException();
+                    public override DerivedClassWithCustomConverter_NoTypeDiscriminator Read(
+                        ref Utf8JsonReader reader,
+                        Type typeToConvert,
+                        JsonSerializerOptions options
+                    ) => throw new NotSupportedException();
 
-                    public override void Write(Utf8JsonWriter writer, DerivedClassWithCustomConverter_NoTypeDiscriminator value, JsonSerializerOptions options)
-                        => writer.WriteNumberValue(value.Number);
+                    public override void Write(
+                        Utf8JsonWriter writer,
+                        DerivedClassWithCustomConverter_NoTypeDiscriminator value,
+                        JsonSerializerOptions options
+                    ) => writer.WriteNumberValue(value.Number);
                 }
 
                 public class DerivedClass : DerivedClassWithCustomConverter_NoTypeDiscriminator
@@ -464,13 +717,20 @@ namespace System.Text.Json.Serialization.Tests
             [JsonConverter(typeof(CustomConverter))]
             public class DerivedClassWithCustomConverter_TypeDiscriminator : PolymorphicClass
             {
-                public class CustomConverter : JsonConverter<DerivedClassWithCustomConverter_TypeDiscriminator>
+                public class CustomConverter
+                    : JsonConverter<DerivedClassWithCustomConverter_TypeDiscriminator>
                 {
-                    public override DerivedClassWithCustomConverter_TypeDiscriminator Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-                        => throw new NotSupportedException();
+                    public override DerivedClassWithCustomConverter_TypeDiscriminator Read(
+                        ref Utf8JsonReader reader,
+                        Type typeToConvert,
+                        JsonSerializerOptions options
+                    ) => throw new NotSupportedException();
 
-                    public override void Write(Utf8JsonWriter writer, DerivedClassWithCustomConverter_TypeDiscriminator value, JsonSerializerOptions options)
-                        => writer.WriteNumberValue(value.Number);
+                    public override void Write(
+                        Utf8JsonWriter writer,
+                        DerivedClassWithCustomConverter_TypeDiscriminator value,
+                        JsonSerializerOptions options
+                    ) => writer.WriteNumberValue(value.Number);
                 }
 
                 public class DerivedClass : DerivedClassWithCustomConverter_TypeDiscriminator
@@ -484,111 +744,185 @@ namespace System.Text.Json.Serialization.Tests
                 yield return new TestData(
                     Value: new PolymorphicClass { Number = 42 },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass1_NoTypeDiscriminator { Number = 42, String = "str" },
                     ExpectedJson: @"{ ""Number"" : 42, ""String"" : ""str"" }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass2_NoTypeDiscriminator.DerivedClass(),
-                    ExpectedSerializationException: typeof(NotSupportedException));
+                    ExpectedSerializationException: typeof(NotSupportedException)
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClass1_NoTypeDiscriminator.DerivedClass { Number = 42, String = "str", ExtraProperty = "extra" },
+                    Value: new DerivedClass1_NoTypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        String = "str",
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""Number"" : 42, ""String"" : ""str"", ""ExtraProperty"" : ""extra"" }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass1_TypeDiscriminator { Number = 42, String = "str" },
                     ExpectedJson: @"{ ""$type"" : ""derivedClass1"", ""Number"" : 42, ""String"" : ""str"" }",
-                    ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator { Number = 42, String = "str" });
+                    ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator
+                    {
+                        Number = 42,
+                        String = "str"
+                    }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClass1_TypeDiscriminator.DerivedClass { Number = 42, String = "str", ExtraProperty = "extra" },
+                    Value: new DerivedClass1_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        String = "str",
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""$type"" : ""derivedClassOfDerivedClass1"", ""Number"" : 42, ""String"" : ""str"", ""ExtraProperty"" : ""extra"" }",
-                    ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator.DerivedClass { Number = 42, String = "str", ExtraProperty = "extra" });
+                    ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        String = "str",
+                        ExtraProperty = "extra"
+                    }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass2_NoTypeDiscriminator { Number = 42, Boolean = true },
                     ExpectedJson: @"{ ""Number"" : 42, ""Boolean"" : true }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass2_TypeDiscriminator.DerivedClass(),
-                    ExpectedSerializationException: typeof(NotSupportedException));
+                    ExpectedSerializationException: typeof(NotSupportedException)
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass2_TypeDiscriminator { Number = 42, Boolean = true },
                     ExpectedJson: @"{ ""$type"" : ""derivedClass2"", ""Number"" : 42, ""Boolean"" : true }",
-                    ExpectedRoundtripValue: new DerivedClass2_TypeDiscriminator { Number = 42, Boolean = true });
+                    ExpectedRoundtripValue: new DerivedClass2_TypeDiscriminator
+                    {
+                        Number = 42,
+                        Boolean = true
+                    }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClass_IntegerTypeDiscriminator { Number = 42, String = "str" },
+                    Value: new DerivedClass_IntegerTypeDiscriminator
+                    {
+                        Number = 42,
+                        String = "str"
+                    },
                     ExpectedJson: @"{ ""$type"" : -1, ""Number"" : 42, ""String"" : ""str"" }",
-                    ExpectedRoundtripValue: new DerivedClass_IntegerTypeDiscriminator { Number = 42, String = "str" });
+                    ExpectedRoundtripValue: new DerivedClass_IntegerTypeDiscriminator
+                    {
+                        Number = 42,
+                        String = "str"
+                    }
+                );
 
                 yield return new TestData(
                     Value: new DerivedCollection_NoTypeDiscriminator { Number = 42 },
                     ExpectedJson: @"[42,42,42]",
-                    ExpectedDeserializationException: typeof(JsonException));
+                    ExpectedDeserializationException: typeof(JsonException)
+                );
 
                 yield return new TestData(
                     Value: new DerivedCollection_NoTypeDiscriminator.DerivedClass(),
-                    ExpectedSerializationException: typeof(NotSupportedException));
+                    ExpectedSerializationException: typeof(NotSupportedException)
+                );
 
                 yield return new TestData(
                     Value: new DerivedCollection_TypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""$type"" : ""derivedCollection"", ""$values"" : [42,42,42] }",
-                    ExpectedRoundtripValue: new DerivedCollection_TypeDiscriminator { Number = 42 });
+                    ExpectedRoundtripValue: new DerivedCollection_TypeDiscriminator { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedCollection_TypeDiscriminator.DerivedClass { Number = 42, ExtraProperty = "extra" },
+                    Value: new DerivedCollection_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""$type"" : ""derivedCollectionOfDerivedCollection"", ""$values"" : [42,42,42] }",
-                    ExpectedRoundtripValue: new DerivedCollection_TypeDiscriminator.DerivedClass { Number = 42 });
+                    ExpectedRoundtripValue: new DerivedCollection_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42
+                    }
+                );
 
                 yield return new TestData(
                     Value: new DerivedDictionary_NoTypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""dictionaryKey"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass());
+                    ExpectedRoundtripValue: new PolymorphicClass()
+                );
 
                 yield return new TestData(
                     Value: new DerivedDictionary_TypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""$type"":""derivedDictionary"", ""dictionaryKey"" : 42 }",
-                    ExpectedRoundtripValue: new DerivedDictionary_TypeDiscriminator { Number = 42 });
+                    ExpectedRoundtripValue: new DerivedDictionary_TypeDiscriminator { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedDictionary_TypeDiscriminator.DerivedClass { Number = 42, ExtraProperty = "extra" },
+                    Value: new DerivedDictionary_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""$type"" : ""derivedDictionaryOfDerivedDictionary"", ""dictionaryKey"" : 42 }",
-                    ExpectedRoundtripValue: new DerivedDictionary_TypeDiscriminator.DerivedClass { Number = 42 });
+                    ExpectedRoundtripValue: new DerivedDictionary_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42
+                    }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithConstructor_TypeDiscriminator(42),
                     ExpectedJson: @"{ ""$type"" : ""derivedClassWithCtor"", ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new DerivedClassWithConstructor_TypeDiscriminator(42));
+                    ExpectedRoundtripValue: new DerivedClassWithConstructor_TypeDiscriminator(42)
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClassWithConstructor_TypeDiscriminator.DerivedClass(42, "extra"),
+                    Value: new DerivedClassWithConstructor_TypeDiscriminator.DerivedClass(
+                        42,
+                        "extra"
+                    ),
                     ExpectedJson: @"{ ""$type"" : ""derivedClassOfDerivedClassWithCtor"", ""Number"" : 42, ""ExtraProperty"" : ""extra"" }",
-                    ExpectedRoundtripValue: new DerivedClassWithConstructor_TypeDiscriminator.DerivedClass(42, "extra"));
+                    ExpectedRoundtripValue: new DerivedClassWithConstructor_TypeDiscriminator.DerivedClass(
+                        42,
+                        "extra"
+                    )
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithCustomConverter_NoTypeDiscriminator { Number = 42 },
                     ExpectedJson: "42",
-                    ExpectedDeserializationException: typeof(JsonException));
+                    ExpectedDeserializationException: typeof(JsonException)
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithCustomConverter_NoTypeDiscriminator.DerivedClass(),
-                    ExpectedSerializationException: typeof(NotSupportedException));
+                    ExpectedSerializationException: typeof(NotSupportedException)
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithCustomConverter_TypeDiscriminator(), // TODO special unit test for type discriminators with custom converters
-                    ExpectedSerializationException: typeof(NotSupportedException));
+                    ExpectedSerializationException: typeof(NotSupportedException)
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithCustomConverter_TypeDiscriminator.DerivedClass(),
-                    ExpectedSerializationException: typeof(NotSupportedException));
+                    ExpectedSerializationException: typeof(NotSupportedException)
+                );
             }
 
             public static JsonSerializerOptions CustomConfigWithBaseTypeFallback { get; } =
@@ -599,17 +933,28 @@ namespace System.Text.Json.Serialization.Tests
                         new JsonPolymorphicTypeConfiguration<PolymorphicClass>
                         {
                             TypeDiscriminatorPropertyName = "_case",
-                            UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToBaseType
+                            UnknownDerivedTypeHandling =
+                                JsonUnknownDerivedTypeHandling.FallBackToBaseType
                         }
-                        .WithDerivedType<DerivedClass1_NoTypeDiscriminator>()
-                        .WithDerivedType<DerivedClass1_TypeDiscriminator>("derivedClass1")
-                        .WithDerivedType<DerivedClass1_TypeDiscriminator.DerivedClass>("derivedClassOfDerivedClass1")
-                        .WithDerivedType<DerivedClass2_TypeDiscriminator>("derivedClass2")
-                        .WithDerivedType<DerivedCollection_TypeDiscriminator>("derivedCollection")
-                        .WithDerivedType<DerivedDictionary_NoTypeDiscriminator>()
-                        .WithDerivedType<DerivedDictionary_TypeDiscriminator.DerivedClass>("derivedDictionaryOfDerivedDictionary")
-                        .WithDerivedType<DerivedClassWithConstructor_TypeDiscriminator.DerivedClass>("derivedClassOfDerivedClassWithCtor")
-                        .WithDerivedType<DerivedClassWithCustomConverter_TypeDiscriminator>("derivedClassWithCustomConverter")
+                            .WithDerivedType<DerivedClass1_NoTypeDiscriminator>()
+                            .WithDerivedType<DerivedClass1_TypeDiscriminator>("derivedClass1")
+                            .WithDerivedType<DerivedClass1_TypeDiscriminator.DerivedClass>(
+                                "derivedClassOfDerivedClass1"
+                            )
+                            .WithDerivedType<DerivedClass2_TypeDiscriminator>("derivedClass2")
+                            .WithDerivedType<DerivedCollection_TypeDiscriminator>(
+                                "derivedCollection"
+                            )
+                            .WithDerivedType<DerivedDictionary_NoTypeDiscriminator>()
+                            .WithDerivedType<DerivedDictionary_TypeDiscriminator.DerivedClass>(
+                                "derivedDictionaryOfDerivedDictionary"
+                            )
+                            .WithDerivedType<DerivedClassWithConstructor_TypeDiscriminator.DerivedClass>(
+                                "derivedClassOfDerivedClassWithCtor"
+                            )
+                            .WithDerivedType<DerivedClassWithCustomConverter_TypeDiscriminator>(
+                                "derivedClassWithCustomConverter"
+                            )
                     }
                 };
 
@@ -618,101 +963,174 @@ namespace System.Text.Json.Serialization.Tests
                 yield return new TestData(
                     Value: new PolymorphicClass { Number = 42 },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass1_NoTypeDiscriminator { Number = 42, String = "str" },
                     ExpectedJson: @"{ ""Number"" : 42, ""String"" : ""str"" }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClass1_NoTypeDiscriminator.DerivedClass { Number = 42, String = "str", ExtraProperty = "extra" },
+                    Value: new DerivedClass1_NoTypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        String = "str",
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass1_TypeDiscriminator { Number = 42, String = "str" },
                     ExpectedJson: @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""String"" : ""str"" }",
-                    ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator { Number = 42, String = "str" });
+                    ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator
+                    {
+                        Number = 42,
+                        String = "str"
+                    }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClass1_TypeDiscriminator.DerivedClass { Number = 42, String = "str", ExtraProperty = "extra" },
+                    Value: new DerivedClass1_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        String = "str",
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""_case"" : ""derivedClassOfDerivedClass1"", ""Number"" : 42, ""String"" : ""str"", ""ExtraProperty"" : ""extra"" }",
-                    ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator.DerivedClass { Number = 42, String = "str", ExtraProperty = "extra" });
+                    ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        String = "str",
+                        ExtraProperty = "extra"
+                    }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass2_NoTypeDiscriminator { Number = 42, Boolean = true },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClass2_NoTypeDiscriminator.DerivedClass { Number = 42, Boolean = true },
+                    Value: new DerivedClass2_NoTypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        Boolean = true
+                    },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass2_TypeDiscriminator { Number = 42, Boolean = true },
                     ExpectedJson: @"{ ""_case"" : ""derivedClass2"", ""Number"" : 42, ""Boolean"" : true }",
-                    ExpectedRoundtripValue: new DerivedClass2_TypeDiscriminator { Number = 42, Boolean = true });
+                    ExpectedRoundtripValue: new DerivedClass2_TypeDiscriminator
+                    {
+                        Number = 42,
+                        Boolean = true
+                    }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClass2_TypeDiscriminator.DerivedClass { Number = 42, Boolean = true, ExtraProperty = "extra" },
+                    Value: new DerivedClass2_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        Boolean = true,
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedCollection_NoTypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedCollection_TypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""_case"" : ""derivedCollection"", ""$values"" : [42,42,42] }",
-                    ExpectedRoundtripValue: new DerivedCollection_TypeDiscriminator { Number = 42 });
+                    ExpectedRoundtripValue: new DerivedCollection_TypeDiscriminator { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedCollection_TypeDiscriminator.DerivedClass { Number = 42, ExtraProperty = "extra" },
+                    Value: new DerivedCollection_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedDictionary_NoTypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""dictionaryKey"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass());
+                    ExpectedRoundtripValue: new PolymorphicClass()
+                );
 
                 yield return new TestData(
                     Value: new DerivedDictionary_TypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedDictionary_TypeDiscriminator.DerivedClass { Number = 42, ExtraProperty = "extra" },
+                    Value: new DerivedDictionary_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""_case"" : ""derivedDictionaryOfDerivedDictionary"", ""dictionaryKey"" : 42 }",
-                    ExpectedRoundtripValue: new DerivedDictionary_TypeDiscriminator.DerivedClass { Number = 42 });
+                    ExpectedRoundtripValue: new DerivedDictionary_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42
+                    }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithConstructor_TypeDiscriminator(42),
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClassWithConstructor_TypeDiscriminator.DerivedClass(42, "extra"),
+                    Value: new DerivedClassWithConstructor_TypeDiscriminator.DerivedClass(
+                        42,
+                        "extra"
+                    ),
                     ExpectedJson: @"{ ""_case"" : ""derivedClassOfDerivedClassWithCtor"", ""Number"" : 42, ""ExtraProperty"" : ""extra"" }",
-                    ExpectedRoundtripValue: new DerivedClassWithConstructor_TypeDiscriminator.DerivedClass(42, "extra"));
+                    ExpectedRoundtripValue: new DerivedClassWithConstructor_TypeDiscriminator.DerivedClass(
+                        42,
+                        "extra"
+                    )
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithCustomConverter_NoTypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClassWithCustomConverter_TypeDiscriminator.DerivedClass { Number = 42, ExtraProperty = "extra" },
+                    Value: new DerivedClassWithCustomConverter_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithCustomConverter_TypeDiscriminator(),
-                    ExpectedSerializationException: typeof(NotSupportedException));
+                    ExpectedSerializationException: typeof(NotSupportedException)
+                );
             }
 
             public static JsonSerializerOptions CustomConfigWithNearestAncestorFallback { get; } =
@@ -723,18 +1141,29 @@ namespace System.Text.Json.Serialization.Tests
                         new JsonPolymorphicTypeConfiguration<PolymorphicClass>
                         {
                             TypeDiscriminatorPropertyName = "_case",
-                            UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                            UnknownDerivedTypeHandling =
+                                JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
                         }
-                        .WithDerivedType<DerivedClass1_NoTypeDiscriminator>()
-                        .WithDerivedType<DerivedClass1_TypeDiscriminator>("derivedClass1")
-                        .WithDerivedType<DerivedClass1_TypeDiscriminator.DerivedClass>("derivedClassOfDerivedClass1")
-                        .WithDerivedType<DerivedClass2_TypeDiscriminator>("derivedClass2")
-                        .WithDerivedType<DerivedAbstractClass>("derivedAbstractClass")
-                        .WithDerivedType<DerivedCollection_TypeDiscriminator>("derivedCollection")
-                        .WithDerivedType<DerivedDictionary_NoTypeDiscriminator>()
-                        .WithDerivedType<DerivedDictionary_TypeDiscriminator.DerivedClass>("derivedDictionaryOfDerivedDictionary")
-                        .WithDerivedType<DerivedClassWithConstructor_TypeDiscriminator.DerivedClass>("derivedClassOfDerivedClassWithCtor")
-                        .WithDerivedType<DerivedClassWithCustomConverter_TypeDiscriminator>("derivedClassWithCustomConverter")
+                            .WithDerivedType<DerivedClass1_NoTypeDiscriminator>()
+                            .WithDerivedType<DerivedClass1_TypeDiscriminator>("derivedClass1")
+                            .WithDerivedType<DerivedClass1_TypeDiscriminator.DerivedClass>(
+                                "derivedClassOfDerivedClass1"
+                            )
+                            .WithDerivedType<DerivedClass2_TypeDiscriminator>("derivedClass2")
+                            .WithDerivedType<DerivedAbstractClass>("derivedAbstractClass")
+                            .WithDerivedType<DerivedCollection_TypeDiscriminator>(
+                                "derivedCollection"
+                            )
+                            .WithDerivedType<DerivedDictionary_NoTypeDiscriminator>()
+                            .WithDerivedType<DerivedDictionary_TypeDiscriminator.DerivedClass>(
+                                "derivedDictionaryOfDerivedDictionary"
+                            )
+                            .WithDerivedType<DerivedClassWithConstructor_TypeDiscriminator.DerivedClass>(
+                                "derivedClassOfDerivedClassWithCtor"
+                            )
+                            .WithDerivedType<DerivedClassWithCustomConverter_TypeDiscriminator>(
+                                "derivedClassWithCustomConverter"
+                            )
                     }
                 };
 
@@ -743,105 +1172,179 @@ namespace System.Text.Json.Serialization.Tests
                 yield return new TestData(
                     Value: new PolymorphicClass { Number = 42 },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass1_NoTypeDiscriminator { Number = 42, String = "str" },
                     ExpectedJson: @"{ ""Number"" : 42, ""String"" : ""str"" }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClass1_NoTypeDiscriminator.DerivedClass { Number = 42, String = "str", ExtraProperty = "extra" },
+                    Value: new DerivedClass1_NoTypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        String = "str",
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""Number"" : 42, ""String"" : ""str"" }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass1_TypeDiscriminator { Number = 42, String = "str" },
                     ExpectedJson: @"{ ""_case"" : ""derivedClass1"", ""Number"" : 42, ""String"" : ""str"" }",
-                    ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator { Number = 42, String = "str" });
+                    ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator
+                    {
+                        Number = 42,
+                        String = "str"
+                    }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClass1_TypeDiscriminator.DerivedClass { Number = 42, String = "str", ExtraProperty = "extra" },
+                    Value: new DerivedClass1_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        String = "str",
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""_case"" : ""derivedClassOfDerivedClass1"", ""Number"" : 42, ""String"" : ""str"", ""ExtraProperty"" : ""extra"" }",
-                    ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator.DerivedClass { Number = 42, String = "str", ExtraProperty = "extra" });
+                    ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        String = "str",
+                        ExtraProperty = "extra"
+                    }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass2_NoTypeDiscriminator { Number = 42, Boolean = true },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClass2_NoTypeDiscriminator.DerivedClass { Number = 42, Boolean = true },
+                    Value: new DerivedClass2_NoTypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        Boolean = true
+                    },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass2_TypeDiscriminator { Number = 42, Boolean = true },
                     ExpectedJson: @"{ ""_case"" : ""derivedClass2"", ""Number"" : 42, ""Boolean"" : true }",
-                    ExpectedRoundtripValue: new DerivedClass2_TypeDiscriminator { Number = 42, Boolean = true });
+                    ExpectedRoundtripValue: new DerivedClass2_TypeDiscriminator
+                    {
+                        Number = 42,
+                        Boolean = true
+                    }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClass2_TypeDiscriminator.DerivedClass { Number = 42, Boolean = true, ExtraProperty = "extra" },
+                    Value: new DerivedClass2_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        Boolean = true,
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""_case"" : ""derivedClass2"", ""Number"" : 42, ""Boolean"" : true }",
-                    ExpectedRoundtripValue: new DerivedClass2_TypeDiscriminator { Number = 42, Boolean = true });
+                    ExpectedRoundtripValue: new DerivedClass2_TypeDiscriminator
+                    {
+                        Number = 42,
+                        Boolean = true
+                    }
+                );
 
                 yield return new TestData(
                     Value: new DerivedAbstractClass.DerivedClass { Number = 42, Boolean = true },
                     ExpectedJson: @"{ ""_case"" : ""derivedAbstractClass"", ""Number"" : 42, ""Boolean"" : true }",
-                    ExpectedDeserializationException: typeof(NotSupportedException));
+                    ExpectedDeserializationException: typeof(NotSupportedException)
+                );
 
                 yield return new TestData(
                     Value: new DerivedCollection_NoTypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedCollection_TypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""_case"" : ""derivedCollection"", ""$values"" : [42,42,42] }",
-                    ExpectedRoundtripValue: new DerivedCollection_TypeDiscriminator { Number = 42 });
+                    ExpectedRoundtripValue: new DerivedCollection_TypeDiscriminator { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedCollection_TypeDiscriminator.DerivedClass { Number = 42, ExtraProperty = "extra" },
+                    Value: new DerivedCollection_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""_case"" : ""derivedCollection"", ""$values"" : [42,42,42] }",
-                    ExpectedRoundtripValue: new DerivedCollection_TypeDiscriminator { Number = 42 });
+                    ExpectedRoundtripValue: new DerivedCollection_TypeDiscriminator { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedDictionary_NoTypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""dictionaryKey"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass());
+                    ExpectedRoundtripValue: new PolymorphicClass()
+                );
 
                 yield return new TestData(
                     Value: new DerivedDictionary_TypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedDictionary_TypeDiscriminator.DerivedClass { Number = 42, ExtraProperty = "extra" },
+                    Value: new DerivedDictionary_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42,
+                        ExtraProperty = "extra"
+                    },
                     ExpectedJson: @"{ ""_case"" : ""derivedDictionaryOfDerivedDictionary"", ""dictionaryKey"" : 42 }",
-                    ExpectedRoundtripValue: new DerivedDictionary_TypeDiscriminator.DerivedClass { Number = 42 });
+                    ExpectedRoundtripValue: new DerivedDictionary_TypeDiscriminator.DerivedClass
+                    {
+                        Number = 42
+                    }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithConstructor_TypeDiscriminator(42),
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
-                    Value: new DerivedClassWithConstructor_TypeDiscriminator.DerivedClass(42, "extra"),
+                    Value: new DerivedClassWithConstructor_TypeDiscriminator.DerivedClass(
+                        42,
+                        "extra"
+                    ),
                     ExpectedJson: @"{ ""_case"" : ""derivedClassOfDerivedClassWithCtor"", ""Number"" : 42, ""ExtraProperty"" : ""extra"" }",
-                    ExpectedRoundtripValue: new DerivedClassWithConstructor_TypeDiscriminator.DerivedClass(42, "extra"));
+                    ExpectedRoundtripValue: new DerivedClassWithConstructor_TypeDiscriminator.DerivedClass(
+                        42,
+                        "extra"
+                    )
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithCustomConverter_NoTypeDiscriminator { Number = 42 },
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 });
+                    ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithCustomConverter_TypeDiscriminator(),
-                    ExpectedSerializationException: typeof(NotSupportedException));
+                    ExpectedSerializationException: typeof(NotSupportedException)
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithCustomConverter_TypeDiscriminator.DerivedClass(),
-                    ExpectedSerializationException: typeof(NotSupportedException));
+                    ExpectedSerializationException: typeof(NotSupportedException)
+                );
             }
 
             public record TestData(
@@ -849,14 +1352,16 @@ namespace System.Text.Json.Serialization.Tests
                 string? ExpectedJson = null,
                 Type? ExpectedSerializationException = null,
                 PolymorphicClass? ExpectedRoundtripValue = null,
-                Type? ExpectedDeserializationException = null);
+                Type? ExpectedDeserializationException = null
+            );
         }
 
         [Fact]
         public async Task PolymorphicClass_NoTypeDiscriminators_Deserialization_IgnoresTypeMetadata()
         {
             string json = @"{""$type"" : ""derivedClass""}";
-            PolymorphicClass_NoTypeDiscriminators result = await Serializer.DeserializeWrapper<PolymorphicClass_NoTypeDiscriminators>(json);
+            PolymorphicClass_NoTypeDiscriminators result =
+                await Serializer.DeserializeWrapper<PolymorphicClass_NoTypeDiscriminators>(json);
             Assert.IsType<PolymorphicClass_NoTypeDiscriminators>(result);
             Assert.True(result.ExtensionData?.ContainsKey("$type") == true);
         }
@@ -869,6 +1374,7 @@ namespace System.Text.Json.Serialization.Tests
             public Dictionary<string, object?>? ExtensionData { get; set; }
 
             public class DerivedClass1 : PolymorphicClass_NoTypeDiscriminators { }
+
             public class DerivedClass2 : PolymorphicClass_NoTypeDiscriminators { }
         }
 
@@ -876,7 +1382,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicClass_WithDerivedPolymorphicClass_Serialization_ShouldUseBaseTypeContract()
         {
             string expectedJson = @"{""$type"":""derivedClass""}";
-            PolymorphicClass_WithDerivedPolymorphicClass value = new PolymorphicClass_WithDerivedPolymorphicClass.DerivedClass();
+            PolymorphicClass_WithDerivedPolymorphicClass value =
+                new PolymorphicClass_WithDerivedPolymorphicClass.DerivedClass();
             await TestMultiContextSerialization(value, expectedJson);
         }
 
@@ -885,17 +1392,21 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = @"{""$type"":""derivedClass""}";
 
-            var expectedValueUsingBaseContract = new PolymorphicClass_WithDerivedPolymorphicClass.DerivedClass();
+            var expectedValueUsingBaseContract =
+                new PolymorphicClass_WithDerivedPolymorphicClass.DerivedClass();
             await TestMultiContextDeserialization<PolymorphicClass_WithDerivedPolymorphicClass>(
                 json,
                 expectedValueUsingBaseContract,
-                equalityComparer: PolymorphicEqualityComparer<PolymorphicClass_WithDerivedPolymorphicClass>.Instance);
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicClass_WithDerivedPolymorphicClass>.Instance
+            );
 
-            var expectedValueUsingDerivedContract = new PolymorphicClass_WithDerivedPolymorphicClass.DerivedClass.DerivedClass2();
+            var expectedValueUsingDerivedContract =
+                new PolymorphicClass_WithDerivedPolymorphicClass.DerivedClass.DerivedClass2();
             await TestMultiContextDeserialization<PolymorphicClass_WithDerivedPolymorphicClass.DerivedClass>(
                 json,
                 expectedValueUsingDerivedContract,
-                equalityComparer: PolymorphicEqualityComparer<PolymorphicClass_WithDerivedPolymorphicClass.DerivedClass>.Instance);
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicClass_WithDerivedPolymorphicClass.DerivedClass>.Instance
+            );
         }
 
         [JsonDerivedType(typeof(DerivedClass), "derivedClass")]
@@ -907,16 +1418,20 @@ namespace System.Text.Json.Serialization.Tests
             [JsonDerivedType(typeof(DerivedClass.DerivedClass2), "derivedClass")]
             public class DerivedClass : PolymorphicClass_WithDerivedPolymorphicClass
             {
-                public class DerivedClass2 : DerivedClass
-                {
-                }
+                public class DerivedClass2 : DerivedClass { }
             }
         }
 
         [Theory]
         [ActiveIssue("Need to refactor root-level polymorphic JsonTypeInfo handling.")]
-        [MemberData(nameof(PolymorphicClass_WithBaseTypeDiscriminator.GetTestData), MemberType = typeof(PolymorphicClass_WithBaseTypeDiscriminator))]
-        public async Task PolymorphicClass_BoxedSerialization_DoesNotUseTypeDiscriminators(PolymorphicClass_WithBaseTypeDiscriminator value, string expectedJson)
+        [MemberData(
+            nameof(PolymorphicClass_WithBaseTypeDiscriminator.GetTestData),
+            MemberType = typeof(PolymorphicClass_WithBaseTypeDiscriminator)
+        )]
+        public async Task PolymorphicClass_BoxedSerialization_DoesNotUseTypeDiscriminators(
+            PolymorphicClass_WithBaseTypeDiscriminator value,
+            string expectedJson
+        )
         {
             await TestMultiContextSerialization<object>(value, expectedJson);
         }
@@ -934,11 +1449,19 @@ namespace System.Text.Json.Serialization.Tests
 
             public static IEnumerable<object[]> GetTestData()
             {
-                yield return WrapArgs(new PolymorphicClass_WithBaseTypeDiscriminator { Number = 42 }, @"{""Number"" : 42 }");
-                yield return WrapArgs(new DerivedClass { Number = 42, String = "str" }, @"{""Number"" : 42, ""String"" : str }");
+                yield return WrapArgs(
+                    new PolymorphicClass_WithBaseTypeDiscriminator { Number = 42 },
+                    @"{""Number"" : 42 }"
+                );
+                yield return WrapArgs(
+                    new DerivedClass { Number = 42, String = "str" },
+                    @"{""Number"" : 42, ""String"" : str }"
+                );
 
-                static object[] WrapArgs(PolymorphicClass_WithBaseTypeDiscriminator value, string expectedJson)
-                    => new object[] { value, expectedJson };
+                static object[] WrapArgs(
+                    PolymorphicClass_WithBaseTypeDiscriminator value,
+                    string expectedJson
+                ) => new object[] { value, expectedJson };
             }
         }
         #endregion
@@ -947,22 +1470,29 @@ namespace System.Text.Json.Serialization.Tests
 
         [Theory]
         [MemberData(nameof(Get_PolymorphicClassWithConstructor_TestData_Serialization))]
-        public Task PolymorphicClassWithConstructor_TestData_Serialization(PolymorphicClassWithConstructor.TestData testData)
-            => TestMultiContextSerialization(testData.Value, testData.ExpectedJson);
+        public Task PolymorphicClassWithConstructor_TestData_Serialization(
+            PolymorphicClassWithConstructor.TestData testData
+        ) => TestMultiContextSerialization(testData.Value, testData.ExpectedJson);
 
-        public static IEnumerable<object[]> Get_PolymorphicClassWithConstructor_TestData_Serialization()
-            => PolymorphicClassWithConstructor.GetSerializeTestData().Select(entry => new object[] { entry });
+        public static IEnumerable<object[]> Get_PolymorphicClassWithConstructor_TestData_Serialization() =>
+            PolymorphicClassWithConstructor
+                .GetSerializeTestData()
+                .Select(entry => new object[] { entry });
 
         [Theory]
         [MemberData(nameof(Get_PolymorphicClassWithConstructor_TestData_Deserialization))]
-        public Task PolymorphicClassWithConstructor_TestData_Deserialization(PolymorphicClassWithConstructor.TestData testData)
-            => TestMultiContextDeserialization<PolymorphicClassWithConstructor>(
+        public Task PolymorphicClassWithConstructor_TestData_Deserialization(
+            PolymorphicClassWithConstructor.TestData testData
+        ) =>
+            TestMultiContextDeserialization<PolymorphicClassWithConstructor>(
                 testData.ExpectedJson,
                 testData.ExpectedRoundtripValue,
-                equalityComparer: PolymorphicEqualityComparer<PolymorphicClassWithConstructor>.Instance);
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicClassWithConstructor>.Instance
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicClassWithConstructor_TestData_Deserialization()
-            => PolymorphicClassWithConstructor.GetSerializeTestData()
+        public static IEnumerable<object[]> Get_PolymorphicClassWithConstructor_TestData_Deserialization() =>
+            PolymorphicClassWithConstructor
+                .GetSerializeTestData()
                 .Where(entry => entry.ExpectedJson != null)
                 .Select(entry => new object[] { entry });
 
@@ -970,7 +1500,9 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicClassWithConstructor_TestDataArray_Serialization()
         {
             IEnumerable<(PolymorphicClassWithConstructor Value, string ExpectedJson)> inputs =
-                PolymorphicClassWithConstructor.GetSerializeTestData().Select(entry => (entry.Value, entry.ExpectedJson));
+                PolymorphicClassWithConstructor
+                    .GetSerializeTestData()
+                    .Select(entry => (entry.Value, entry.ExpectedJson));
 
             await TestMultiContextSerialization(inputs);
         }
@@ -979,9 +1511,14 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicClassWithConstructor_TestDataArray_Deserialization()
         {
             IEnumerable<(string ExpectedJson, PolymorphicClassWithConstructor ExpectedRoundtripValue)> inputs =
-                PolymorphicClassWithConstructor.GetSerializeTestData().Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
+                PolymorphicClassWithConstructor
+                    .GetSerializeTestData()
+                    .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
 
-            await TestMultiContextDeserialization(inputs, equalityComparer: PolymorphicEqualityComparer<PolymorphicClassWithConstructor>.Instance);
+            await TestMultiContextDeserialization(
+                inputs,
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicClassWithConstructor>.Instance
+            );
         }
 
         [JsonPolymorphic]
@@ -999,14 +1536,14 @@ namespace System.Text.Json.Serialization.Tests
             public class DerivedClass : PolymorphicClassWithConstructor
             {
                 public DerivedClass() : base(0) { }
+
                 public string String { get; set; }
             }
 
             public class DerivedClassWithConstructor : PolymorphicClassWithConstructor
             {
                 [JsonConstructor]
-                public DerivedClassWithConstructor(int number, bool boolean)
-                    : base(number)
+                public DerivedClassWithConstructor(int number, bool boolean) : base(number)
                 {
                     Boolean = boolean;
                 }
@@ -1018,47 +1555,86 @@ namespace System.Text.Json.Serialization.Tests
             {
                 private List<int> _list = new();
 
-                public DerivedCollection() : base(0)
-                {
-                }
+                public DerivedCollection() : base(0) { }
 
                 bool ICollection<int>.IsReadOnly => false;
+
                 public void Add(int item) => _list.Add(item);
+
                 IEnumerator<int> IEnumerable<int>.GetEnumerator() => _list.GetEnumerator();
+
                 IEnumerator IEnumerable.GetEnumerator() => _list.GetEnumerator();
+
                 int ICollection<int>.Count => _list.Count;
+
                 void ICollection<int>.Clear() => throw new NotImplementedException();
+
                 bool ICollection<int>.Contains(int item) => throw new NotImplementedException();
-                void ICollection<int>.CopyTo(int[] array, int arrayIndex) => throw new NotImplementedException();
+
+                void ICollection<int>.CopyTo(int[] array, int arrayIndex) =>
+                    throw new NotImplementedException();
+
                 bool ICollection<int>.Remove(int item) => throw new NotImplementedException();
             }
 
-            public class DerivedDictionary : PolymorphicClassWithConstructor, IDictionary<string, int>
+            public class DerivedDictionary
+                : PolymorphicClassWithConstructor,
+                    IDictionary<string, int>
             {
                 private Dictionary<string, int> _dict = new();
 
-                public DerivedDictionary() : base(0)
-                {
-                }
+                public DerivedDictionary() : base(0) { }
 
-                public int this[string key] { get => _dict[key]; set => _dict[key] = value; }
+                public int this[string key]
+                {
+                    get => _dict[key];
+                    set => _dict[key] = value;
+                }
                 bool ICollection<KeyValuePair<string, int>>.IsReadOnly => false;
-                IEnumerator<KeyValuePair<string, int>> IEnumerable<KeyValuePair<string, int>>.GetEnumerator() => _dict.GetEnumerator();
+
+                IEnumerator<KeyValuePair<string, int>> IEnumerable<
+                    KeyValuePair<string, int>
+                >.GetEnumerator() => _dict.GetEnumerator();
+
                 IEnumerator IEnumerable.GetEnumerator() => _dict.GetEnumerator();
 
+                ICollection<string> IDictionary<string, int>.Keys =>
+                    throw new NotImplementedException();
+                ICollection<int> IDictionary<string, int>.Values =>
+                    throw new NotImplementedException();
+                int ICollection<KeyValuePair<string, int>>.Count =>
+                    throw new NotImplementedException();
 
-                ICollection<string> IDictionary<string, int>.Keys => throw new NotImplementedException();
-                ICollection<int> IDictionary<string, int>.Values => throw new NotImplementedException();
-                int ICollection<KeyValuePair<string, int>>.Count => throw new NotImplementedException();
-                void IDictionary<string, int>.Add(string key, int value) => throw new NotImplementedException();
-                void ICollection<KeyValuePair<string, int>>.Add(KeyValuePair<string, int> item) => throw new NotImplementedException();
-                void ICollection<KeyValuePair<string, int>>.Clear() => throw new NotImplementedException();
-                bool ICollection<KeyValuePair<string, int>>.Contains(KeyValuePair<string, int> item) => throw new NotImplementedException();
-                bool IDictionary<string, int>.ContainsKey(string key) => throw new NotImplementedException();
-                void ICollection<KeyValuePair<string, int>>.CopyTo(KeyValuePair<string, int>[] array, int arrayIndex) => throw new NotImplementedException();
-                bool IDictionary<string, int>.Remove(string key) => throw new NotImplementedException();
-                bool ICollection<KeyValuePair<string, int>>.Remove(KeyValuePair<string, int> item) => throw new NotImplementedException();
-                bool IDictionary<string, int>.TryGetValue(string key, out int value) => throw new NotImplementedException();
+                void IDictionary<string, int>.Add(string key, int value) =>
+                    throw new NotImplementedException();
+
+                void ICollection<KeyValuePair<string, int>>.Add(KeyValuePair<string, int> item) =>
+                    throw new NotImplementedException();
+
+                void ICollection<KeyValuePair<string, int>>.Clear() =>
+                    throw new NotImplementedException();
+
+                bool ICollection<KeyValuePair<string, int>>.Contains(
+                    KeyValuePair<string, int> item
+                ) => throw new NotImplementedException();
+
+                bool IDictionary<string, int>.ContainsKey(string key) =>
+                    throw new NotImplementedException();
+
+                void ICollection<KeyValuePair<string, int>>.CopyTo(
+                    KeyValuePair<string, int>[] array,
+                    int arrayIndex
+                ) => throw new NotImplementedException();
+
+                bool IDictionary<string, int>.Remove(string key) =>
+                    throw new NotImplementedException();
+
+                bool ICollection<KeyValuePair<string, int>>.Remove(
+                    KeyValuePair<string, int> item
+                ) => throw new NotImplementedException();
+
+                bool IDictionary<string, int>.TryGetValue(string key, out int value) =>
+                    throw new NotImplementedException();
             }
 
             public static IEnumerable<TestData> GetSerializeTestData()
@@ -1066,30 +1642,39 @@ namespace System.Text.Json.Serialization.Tests
                 yield return new TestData(
                     Value: new PolymorphicClassWithConstructor(42),
                     ExpectedJson: @"{ ""Number"" : 42 }",
-                    ExpectedRoundtripValue: new PolymorphicClassWithConstructor(42));
+                    ExpectedRoundtripValue: new PolymorphicClassWithConstructor(42)
+                );
 
                 yield return new TestData(
                     Value: new DerivedClass { String = "str" },
                     ExpectedJson: @"{ ""$type"" : ""derivedClass"", ""Number"" : 0, ""String"" : ""str"" }",
-                    ExpectedRoundtripValue: new DerivedClass { String = "str" });
+                    ExpectedRoundtripValue: new DerivedClass { String = "str" }
+                );
 
                 yield return new TestData(
                     Value: new DerivedClassWithConstructor(42, true),
                     ExpectedJson: @"{ ""$type"" : ""derivedClassWithCtor"", ""Number"" : 42, ""Boolean"" : true }",
-                    ExpectedRoundtripValue: new DerivedClassWithConstructor(42, true));
+                    ExpectedRoundtripValue: new DerivedClassWithConstructor(42, true)
+                );
 
                 yield return new TestData(
                     Value: new DerivedCollection { 1, 2, 3 },
                     ExpectedJson: @"{ ""$type"" : ""derivedCollection"", ""$values"" : [1,2,3]}",
-                    ExpectedRoundtripValue: new DerivedCollection { 1, 2, 3 });
+                    ExpectedRoundtripValue: new DerivedCollection { 1, 2, 3 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedDictionary { ["key1"] = 42, ["key2"] = -1 },
                     ExpectedJson: @"{ ""$type"" : ""derivedDictionary"", ""key1"" : 42, ""key2"" : -1 }",
-                    ExpectedRoundtripValue: new DerivedDictionary { ["key1"] = 42, ["key2"] = -1 });
+                    ExpectedRoundtripValue: new DerivedDictionary { ["key1"] = 42, ["key2"] = -1 }
+                );
             }
 
-            public record TestData(PolymorphicClassWithConstructor Value, string ExpectedJson, PolymorphicClassWithConstructor ExpectedRoundtripValue);
+            public record TestData(
+                PolymorphicClassWithConstructor Value,
+                string ExpectedJson,
+                PolymorphicClassWithConstructor ExpectedRoundtripValue
+            );
         }
 
         #endregion
@@ -1097,23 +1682,35 @@ namespace System.Text.Json.Serialization.Tests
         #region Polymorphic Interface
         [Theory]
         [MemberData(nameof(Get_PolymorphicInterface_TestData_Serialization))]
-        public Task PolymorphicInterface_TestData_Serialization(PolymorphicInterface.TestData testData)
-            => TestMultiContextSerialization(testData.Value, testData.ExpectedJson, testData.ExpectedSerializationException);
+        public Task PolymorphicInterface_TestData_Serialization(
+            PolymorphicInterface.TestData testData
+        ) =>
+            TestMultiContextSerialization(
+                testData.Value,
+                testData.ExpectedJson,
+                testData.ExpectedSerializationException
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicInterface_TestData_Serialization()
-            => PolymorphicInterface.Helpers.GetSerializeTestData().Select(entry => new object[] { entry });
+        public static IEnumerable<object[]> Get_PolymorphicInterface_TestData_Serialization() =>
+            PolymorphicInterface.Helpers
+                .GetSerializeTestData()
+                .Select(entry => new object[] { entry });
 
         [Theory]
         [MemberData(nameof(Get_PolymorphicInterface_TestData_Deserialization))]
-        public Task PolymorphicInterface_TestData_Deserialization(PolymorphicInterface.TestData testData)
-            => TestMultiContextDeserialization<PolymorphicInterface>(
+        public Task PolymorphicInterface_TestData_Deserialization(
+            PolymorphicInterface.TestData testData
+        ) =>
+            TestMultiContextDeserialization<PolymorphicInterface>(
                 testData.ExpectedJson,
                 testData.ExpectedRoundtripValue,
                 testData.ExpectedDeserializationException,
-                equalityComparer: PolymorphicEqualityComparer<PolymorphicInterface>.Instance);
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicInterface>.Instance
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicInterface_TestData_Deserialization()
-            => PolymorphicInterface.Helpers.GetSerializeTestData()
+        public static IEnumerable<object[]> Get_PolymorphicInterface_TestData_Deserialization() =>
+            PolymorphicInterface.Helpers
+                .GetSerializeTestData()
                 .Where(entry => entry.ExpectedJson != null)
                 .Select(entry => new object[] { entry });
 
@@ -1121,7 +1718,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicInterface_TestDataArray_Serialization()
         {
             IEnumerable<(PolymorphicInterface Value, string ExpectedJson)> inputs =
-                PolymorphicInterface.Helpers.GetSerializeTestData()
+                PolymorphicInterface.Helpers
+                    .GetSerializeTestData()
                     .Where(entry => entry.ExpectedSerializationException is null)
                     .Select(entry => (entry.Value, entry.ExpectedJson));
 
@@ -1132,18 +1730,34 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicInterface_TestDataArray_Deserialization()
         {
             IEnumerable<(string ExpectedJson, PolymorphicInterface ExpectedRoundtripValue)> inputs =
-                PolymorphicInterface.Helpers.GetSerializeTestData()
-                .Where(entry => entry.ExpectedRoundtripValue is not null)
-                .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
+                PolymorphicInterface.Helpers
+                    .GetSerializeTestData()
+                    .Where(entry => entry.ExpectedRoundtripValue is not null)
+                    .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
 
-            await TestMultiContextDeserialization(inputs, equalityComparer: PolymorphicEqualityComparer<PolymorphicInterface>.Instance);
+            await TestMultiContextDeserialization(
+                inputs,
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicInterface>.Instance
+            );
         }
 
         [Theory]
-        [InlineData("$.$type", @"{ ""$type"" : ""derivedClass"", ""$type"" : ""derivedClass"", ""Number"" : 42 }")]
-        [InlineData("$.$type", @"{ ""$type"" : ""derivedClass"", ""Number"" : 42, ""$type"" : ""derivedClass""}")]
-        [InlineData("$.$id", @"{ ""$type"" : ""derivedClass"", ""Number"" : 42, ""$id"" : ""referenceId""}")]
-        [InlineData("$.$values", @"{ ""$type"" : ""derivedClass"", ""Number"" : 42, ""$values"" : [] }")]
+        [InlineData(
+            "$.$type",
+            @"{ ""$type"" : ""derivedClass"", ""$type"" : ""derivedClass"", ""Number"" : 42 }"
+        )]
+        [InlineData(
+            "$.$type",
+            @"{ ""$type"" : ""derivedClass"", ""Number"" : 42, ""$type"" : ""derivedClass""}"
+        )]
+        [InlineData(
+            "$.$id",
+            @"{ ""$type"" : ""derivedClass"", ""Number"" : 42, ""$id"" : ""referenceId""}"
+        )]
+        [InlineData(
+            "$.$values",
+            @"{ ""$type"" : ""derivedClass"", ""Number"" : 42, ""$values"" : [] }"
+        )]
         [InlineData("$", @"{ ""$type"" : ""invalidDiscriminator"", ""Number"" : 42 }")]
         [InlineData("$", @"{ ""$type"" : 0, ""Number"" : 42 }")]
         [InlineData("$.$type", @"{ ""$type"" : false, ""Number"" : 42 }")]
@@ -1151,38 +1765,64 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData("$.$type", @"{ ""$type"" : [], ""Number"" : 42 }")]
         [InlineData("$.$id", @"{ ""$id"" : ""1"", ""Number"" : 42 }")]
         [InlineData("$.$ref", @"{ ""$ref"" : ""1"" }")]
-        public async Task PolymorphicInterface_InvalidTypeDiscriminatorMetadata_ShouldThrowJsonException(string expectedJsonPath, string json)
+        public async Task PolymorphicInterface_InvalidTypeDiscriminatorMetadata_ShouldThrowJsonException(
+            string expectedJsonPath,
+            string json
+        )
         {
-            JsonException exception = await Assert.ThrowsAsync<JsonException>(() => Serializer.DeserializeWrapper<PolymorphicInterface>(json, PolymorphicClass.CustomConfigWithBaseTypeFallback));
+            JsonException exception = await Assert.ThrowsAsync<JsonException>(
+                () =>
+                    Serializer.DeserializeWrapper<PolymorphicInterface>(
+                        json,
+                        PolymorphicClass.CustomConfigWithBaseTypeFallback
+                    )
+            );
             Assert.Equal(expectedJsonPath, exception.Path);
         }
 
         // --
 
         [Theory]
-        [MemberData(nameof(Get_PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Serialization))]
-        public Task PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Serialization(PolymorphicInterface.TestData testData)
-            => TestMultiContextSerialization(
+        [MemberData(
+            nameof(
+                Get_PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Serialization
+            )
+        )]
+        public Task PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Serialization(
+            PolymorphicInterface.TestData testData
+        ) =>
+            TestMultiContextSerialization(
                 testData.Value,
                 testData.ExpectedJson,
                 testData.ExpectedSerializationException,
-                options: PolymorphicInterface.Helpers.CustomConfigWithNearestAncestorFallback);
+                options: PolymorphicInterface.Helpers.CustomConfigWithNearestAncestorFallback
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Serialization()
-            => PolymorphicInterface.Helpers.GetSerializeTestData_CustomConfigWithNearestAncestorFallback().Select(entry => new object[] { entry });
+        public static IEnumerable<object[]> Get_PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Serialization() =>
+            PolymorphicInterface.Helpers
+                .GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
+                .Select(entry => new object[] { entry });
 
         [Theory]
-        [MemberData(nameof(Get_PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Deserialization))]
-        public Task PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Deserialization(PolymorphicInterface.TestData testData)
-            => TestMultiContextDeserialization<PolymorphicInterface>(
+        [MemberData(
+            nameof(
+                Get_PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Deserialization
+            )
+        )]
+        public Task PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Deserialization(
+            PolymorphicInterface.TestData testData
+        ) =>
+            TestMultiContextDeserialization<PolymorphicInterface>(
                 testData.ExpectedJson,
                 testData.ExpectedRoundtripValue,
                 testData.ExpectedDeserializationException,
                 options: PolymorphicInterface.Helpers.CustomConfigWithNearestAncestorFallback,
-                equalityComparer: PolymorphicEqualityComparer<PolymorphicInterface>.Instance);
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicInterface>.Instance
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Deserialization()
-            => PolymorphicInterface.Helpers.GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
+        public static IEnumerable<object[]> Get_PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestData_Deserialization() =>
+            PolymorphicInterface.Helpers
+                .GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
                 .Where(entry => entry.ExpectedJson != null)
                 .Select(entry => new object[] { entry });
 
@@ -1190,46 +1830,68 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestDataArray_Serialization()
         {
             IEnumerable<(PolymorphicInterface Value, string ExpectedJson)> inputs =
-                PolymorphicInterface.Helpers.GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
+                PolymorphicInterface.Helpers
+                    .GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
                     .Where(entry => entry.ExpectedSerializationException is null)
                     .Select(entry => (entry.Value, entry.ExpectedJson));
 
-            await TestMultiContextSerialization(inputs, options: PolymorphicInterface.Helpers.CustomConfigWithNearestAncestorFallback);
+            await TestMultiContextSerialization(
+                inputs,
+                options: PolymorphicInterface.Helpers.CustomConfigWithNearestAncestorFallback
+            );
         }
 
         [Fact]
         public async Task PolymorphicInterface_CustomConfigWithNearestAncestorFallback_TestDataArray_Deserialization()
         {
             IEnumerable<(string ExpectedJson, PolymorphicInterface ExpectedRoundtripValue)> inputs =
-                PolymorphicInterface.Helpers.GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
-                .Where(entry => entry.ExpectedRoundtripValue is not null)
-                .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
+                PolymorphicInterface.Helpers
+                    .GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
+                    .Where(entry => entry.ExpectedRoundtripValue is not null)
+                    .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
 
             await TestMultiContextDeserialization(
                 inputs,
                 options: PolymorphicInterface.Helpers.CustomConfigWithNearestAncestorFallback,
-                equalityComparer: PolymorphicEqualityComparer<PolymorphicInterface>.Instance);
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicInterface>.Instance
+            );
         }
 
         // --
 
         [Theory]
-        [MemberData(nameof(Get_PolymorphicInterface_DiamondInducingConfigurations_ShouldThrowNotSupportedException))]
-        public async Task PolymorphicInterface_DiamondInducingConfigurations_ShouldThrowNotSupportedException(PolymorphicInterface value, JsonPolymorphicTypeConfiguration configuration)
+        [MemberData(
+            nameof(
+                Get_PolymorphicInterface_DiamondInducingConfigurations_ShouldThrowNotSupportedException
+            )
+        )]
+        public async Task PolymorphicInterface_DiamondInducingConfigurations_ShouldThrowNotSupportedException(
+            PolymorphicInterface value,
+            JsonPolymorphicTypeConfiguration configuration
+        )
         {
-            var options = new JsonSerializerOptions { PolymorphicTypeConfigurations = { configuration } };
-            await Assert.ThrowsAsync<NotSupportedException>(() => Serializer.SerializeWrapper(value, options));
+            var options = new JsonSerializerOptions
+            {
+                PolymorphicTypeConfigurations = { configuration }
+            };
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => Serializer.SerializeWrapper(value, options)
+            );
         }
 
-        public static IEnumerable<object[]> Get_PolymorphicInterface_DiamondInducingConfigurations_ShouldThrowNotSupportedException()
-            => PolymorphicInterface.Helpers.GetDiamondInducingConfigurations().Select(entry => new object[] { entry.diamondValue, entry.configuration });
-
+        public static IEnumerable<object[]> Get_PolymorphicInterface_DiamondInducingConfigurations_ShouldThrowNotSupportedException() =>
+            PolymorphicInterface.Helpers
+                .GetDiamondInducingConfigurations()
+                .Select(entry => new object[] { entry.diamondValue, entry.configuration });
 
         [JsonDerivedType(typeof(DerivedClass_NoTypeDiscriminator))]
         [JsonDerivedType(typeof(DerivedClass_TypeDiscriminator), "derivedClass")]
         [JsonDerivedType(typeof(DerivedStruct_NoTypeDiscriminator))]
         [JsonDerivedType(typeof(DerivedStruct_TypeDiscriminator), "derivedStruct")]
-        [JsonDerivedType(typeof(DerivedInterface1.ImplementingClass), "implementingClassOfDerivedInterface")]
+        [JsonDerivedType(
+            typeof(DerivedInterface1.ImplementingClass),
+            "implementingClassOfDerivedInterface"
+        )]
         public interface PolymorphicInterface
         {
             public int Number { get; set; }
@@ -1303,30 +1965,48 @@ namespace System.Text.Json.Serialization.Tests
                     yield return new TestData(
                         Value: new DerivedClass_NoTypeDiscriminator { Number = 42, String = "str" },
                         ExpectedJson: @"{ ""Number"" : 42, ""String"" : ""str"" }",
-                        ExpectedDeserializationException: typeof(NotSupportedException));
+                        ExpectedDeserializationException: typeof(NotSupportedException)
+                    );
 
                     yield return new TestData(
                         new DerivedClass_NoTypeDiscriminator.DerivedClass(),
-                        ExpectedSerializationException: typeof(NotSupportedException));
+                        ExpectedSerializationException: typeof(NotSupportedException)
+                    );
 
                     yield return new TestData(
                         Value: new DerivedClass_TypeDiscriminator { Number = 42, String = "str" },
                         ExpectedJson: @"{ ""$type"" : ""derivedClass"", ""Number"" : 42, ""String"" : ""str"" }",
-                        ExpectedRoundtripValue: new DerivedClass_TypeDiscriminator { Number = 42, String = "str" });
+                        ExpectedRoundtripValue: new DerivedClass_TypeDiscriminator
+                        {
+                            Number = 42,
+                            String = "str"
+                        }
+                    );
 
                     yield return new TestData(
                         new DerivedClass_TypeDiscriminator.DerivedClass(),
-                        ExpectedSerializationException: typeof(NotSupportedException));
+                        ExpectedSerializationException: typeof(NotSupportedException)
+                    );
 
                     yield return new TestData(
-                        Value: new DerivedStruct_NoTypeDiscriminator { Number = 42, String = "str" },
+                        Value: new DerivedStruct_NoTypeDiscriminator
+                        {
+                            Number = 42,
+                            String = "str"
+                        },
                         ExpectedJson: @"{ ""Number"" : 42, ""String"" : ""str"" }",
-                        ExpectedDeserializationException: typeof(NotSupportedException));
+                        ExpectedDeserializationException: typeof(NotSupportedException)
+                    );
 
                     yield return new TestData(
                         Value: new DerivedStruct_TypeDiscriminator { Number = 42, String = "str" },
                         ExpectedJson: @"{ ""$type"" : ""derivedStruct"", ""Number"" : 42, ""String"" : ""str"" }",
-                        ExpectedRoundtripValue: new DerivedStruct_TypeDiscriminator { Number = 42, String = "str" });
+                        ExpectedRoundtripValue: new DerivedStruct_TypeDiscriminator
+                        {
+                            Number = 42,
+                            String = "str"
+                        }
+                    );
                 }
 
                 public static JsonSerializerOptions CustomConfigWithNearestAncestorFallback { get; } =
@@ -1336,12 +2016,13 @@ namespace System.Text.Json.Serialization.Tests
                         {
                             new JsonPolymorphicTypeConfiguration<PolymorphicInterface>
                             {
-                                UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                                UnknownDerivedTypeHandling =
+                                    JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
                             }
-                            .WithDerivedType<DerivedClass_TypeDiscriminator>("derivedClass")
-                            .WithDerivedType<DerivedStruct_NoTypeDiscriminator>()
-                            .WithDerivedType<DerivedInterface1>()
-                            .WithDerivedType<DerivedInterface2>()
+                                .WithDerivedType<DerivedClass_TypeDiscriminator>("derivedClass")
+                                .WithDerivedType<DerivedStruct_NoTypeDiscriminator>()
+                                .WithDerivedType<DerivedInterface1>()
+                                .WithDerivedType<DerivedInterface2>()
                         }
                     };
 
@@ -1350,56 +2031,90 @@ namespace System.Text.Json.Serialization.Tests
                     yield return new TestData(
                         Value: new DerivedClass_NoTypeDiscriminator { Number = 42, String = "str" },
                         ExpectedJson: @"{ ""Number"" : 42 }",
-                        ExpectedDeserializationException: typeof(NotSupportedException));
+                        ExpectedDeserializationException: typeof(NotSupportedException)
+                    );
 
                     yield return new TestData(
                         new DerivedClass_NoTypeDiscriminator.DerivedClass { Number = 42 },
                         ExpectedJson: @"{ ""Number"" : 42 }",
-                        ExpectedDeserializationException: typeof(NotSupportedException));
+                        ExpectedDeserializationException: typeof(NotSupportedException)
+                    );
 
                     yield return new TestData(
                         Value: new DerivedClass_TypeDiscriminator { Number = 42, String = "str" },
                         ExpectedJson: @"{ ""$type"" : ""derivedClass"", ""Number"" : 42, ""String"" : ""str"" }",
-                        ExpectedRoundtripValue: new DerivedClass_TypeDiscriminator { Number = 42, String = "str" });
+                        ExpectedRoundtripValue: new DerivedClass_TypeDiscriminator
+                        {
+                            Number = 42,
+                            String = "str"
+                        }
+                    );
 
                     yield return new TestData(
-                        new DerivedClass_TypeDiscriminator.DerivedClass { Number = 42, String = "str", ExtraProperty = "extra" },
+                        new DerivedClass_TypeDiscriminator.DerivedClass
+                        {
+                            Number = 42,
+                            String = "str",
+                            ExtraProperty = "extra"
+                        },
                         ExpectedJson: @"{ ""$type"" : ""derivedClass"", ""Number"" : 42, ""String"" : ""str"" }",
-                        ExpectedRoundtripValue: new DerivedClass_TypeDiscriminator { Number = 42, String = "str" });
+                        ExpectedRoundtripValue: new DerivedClass_TypeDiscriminator
+                        {
+                            Number = 42,
+                            String = "str"
+                        }
+                    );
 
                     yield return new TestData(
-                        Value: new DerivedStruct_NoTypeDiscriminator { Number = 42, String = "str" },
+                        Value: new DerivedStruct_NoTypeDiscriminator
+                        {
+                            Number = 42,
+                            String = "str"
+                        },
                         ExpectedJson: @"{ ""Number"" : 42, ""String"" : ""str"" }",
-                        ExpectedDeserializationException: typeof(NotSupportedException));
+                        ExpectedDeserializationException: typeof(NotSupportedException)
+                    );
 
                     yield return new TestData(
                         Value: new DerivedStruct_TypeDiscriminator { Number = 42, String = "str" },
                         ExpectedJson: @"{ ""Number"" : 42 }",
-                        ExpectedDeserializationException: typeof(NotSupportedException));
+                        ExpectedDeserializationException: typeof(NotSupportedException)
+                    );
 
                     yield return new TestData(
                         Value: new DiamondKind1(),
-                        ExpectedSerializationException: typeof(NotSupportedException));
+                        ExpectedSerializationException: typeof(NotSupportedException)
+                    );
 
                     yield return new TestData(
                         Value: new DiamondKind2(),
-                        ExpectedSerializationException: typeof(NotSupportedException));
-
+                        ExpectedSerializationException: typeof(NotSupportedException)
+                    );
                 }
 
                 public static IEnumerable<(PolymorphicInterface diamondValue, JsonPolymorphicTypeConfiguration configuration)> GetDiamondInducingConfigurations()
                 {
                     yield return (
                         new DiamondKind1(),
-                        new JsonPolymorphicTypeConfiguration<PolymorphicInterface> { UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor }
+                        new JsonPolymorphicTypeConfiguration<PolymorphicInterface>
+                        {
+                            UnknownDerivedTypeHandling =
+                                JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                        }
                             .WithDerivedType<DerivedInterface1>()
-                            .WithDerivedType<DerivedInterface2>());
+                            .WithDerivedType<DerivedInterface2>()
+                    );
 
                     yield return (
                         new DiamondKind2(),
-                        new JsonPolymorphicTypeConfiguration<PolymorphicInterface> { UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor }
+                        new JsonPolymorphicTypeConfiguration<PolymorphicInterface>
+                        {
+                            UnknownDerivedTypeHandling =
+                                JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                        }
                             .WithDerivedType<DerivedInterface1>()
-                            .WithDerivedType<DerivedClass_TypeDiscriminator>());
+                            .WithDerivedType<DerivedClass_TypeDiscriminator>()
+                    );
                 }
             }
 
@@ -1408,7 +2123,8 @@ namespace System.Text.Json.Serialization.Tests
                 string? ExpectedJson = null,
                 PolymorphicInterface? ExpectedRoundtripValue = null,
                 Type? ExpectedSerializationException = null,
-                Type? ExpectedDeserializationException = null);
+                Type? ExpectedDeserializationException = null
+            );
         }
         #endregion
 
@@ -1416,28 +2132,30 @@ namespace System.Text.Json.Serialization.Tests
 
         [Theory]
         [MemberData(nameof(Get_PolymorphicList_TestData_Serialization))]
-        public Task PolymorphicList_TestData_Serialization(PolymorphicList.TestData testData)
-            => TestMultiContextSerialization(testData.Value, testData.ExpectedJson);
+        public Task PolymorphicList_TestData_Serialization(PolymorphicList.TestData testData) =>
+            TestMultiContextSerialization(testData.Value, testData.ExpectedJson);
 
-        public static IEnumerable<object[]> Get_PolymorphicList_TestData_Serialization()
-            => PolymorphicList.GetSerializeTestData().Select(entry => new object[] { entry });
+        public static IEnumerable<object[]> Get_PolymorphicList_TestData_Serialization() =>
+            PolymorphicList.GetSerializeTestData().Select(entry => new object[] { entry });
 
         [Theory]
         [MemberData(nameof(Get_PolymorphicList_TestData_Serialization))]
-        public Task PolymorphicList_TestData_Deserialization(PolymorphicList.TestData testData)
-            => TestMultiContextDeserialization(
+        public Task PolymorphicList_TestData_Deserialization(PolymorphicList.TestData testData) =>
+            TestMultiContextDeserialization(
                 testData.ExpectedJson,
                 testData.ExpectedRoundtripValue,
-                equalityComparer: PolymorphicEqualityComparer<PolymorphicList>.Instance);
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicList>.Instance
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicList_TestData_Deserialization()
-            => PolymorphicList.GetSerializeTestData().Select(entry => new object[] { entry });
+        public static IEnumerable<object[]> Get_PolymorphicList_TestData_Deserialization() =>
+            PolymorphicList.GetSerializeTestData().Select(entry => new object[] { entry });
 
         [Fact]
         public async Task PolymorphicList_TestDataArray_Serialization()
         {
-            IEnumerable<(PolymorphicList Value, string ExpectedJson)> inputs =
-                PolymorphicList.GetSerializeTestData().Select(entry => (entry.Value, entry.ExpectedJson));
+            IEnumerable<(PolymorphicList Value, string ExpectedJson)> inputs = PolymorphicList
+                .GetSerializeTestData()
+                .Select(entry => (entry.Value, entry.ExpectedJson));
 
             await TestMultiContextSerialization(inputs);
         }
@@ -1446,9 +2164,14 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicList_TestDataArray_Deserialization()
         {
             IEnumerable<(string ExpectedJson, PolymorphicList ExpectedRoundtripValue)> inputs =
-                PolymorphicList.GetSerializeTestData().Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
+                PolymorphicList
+                    .GetSerializeTestData()
+                    .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
 
-            await TestMultiContextDeserialization(inputs, equalityComparer: PolymorphicEqualityComparer<PolymorphicList>.Instance);
+            await TestMultiContextDeserialization(
+                inputs,
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicList>.Instance
+            );
         }
 
         [Fact]
@@ -1461,48 +2184,65 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Theory]
-        [InlineData("$.UnsupportedProperty", @"{ ""$type"" : ""derivedList"", ""UnsupportedProperty"" : 42 }")]
-        [InlineData("$.UnsupportedProperty", @"{ ""$type"" : ""derivedList"", ""$values"" : [], ""UnsupportedProperty"" : 42 }")]
+        [InlineData(
+            "$.UnsupportedProperty",
+            @"{ ""$type"" : ""derivedList"", ""UnsupportedProperty"" : 42 }"
+        )]
+        [InlineData(
+            "$.UnsupportedProperty",
+            @"{ ""$type"" : ""derivedList"", ""$values"" : [], ""UnsupportedProperty"" : 42 }"
+        )]
         [InlineData("$.$id", @"{ ""$id"" : 42, ""$values"" : [] }")]
         [InlineData("$.$ref", @"{ ""$ref"" : 42 }")]
-        public async Task PolymorphicList_InvalidTypeDiscriminatorMetadata_ShouldThrowJsonException(string expectedJsonPath, string json)
+        public async Task PolymorphicList_InvalidTypeDiscriminatorMetadata_ShouldThrowJsonException(
+            string expectedJsonPath,
+            string json
+        )
         {
-            JsonException exception = await Assert.ThrowsAsync<JsonException>(() => Serializer.DeserializeWrapper<PolymorphicList>(json));
+            JsonException exception = await Assert.ThrowsAsync<JsonException>(
+                () => Serializer.DeserializeWrapper<PolymorphicList>(json)
+            );
             Assert.Equal(expectedJsonPath, exception.Path);
         }
 
-        [JsonPolymorphic(UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor, IgnoreUnrecognizedTypeDiscriminators = true)]
+        [JsonPolymorphic(
+            UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor,
+            IgnoreUnrecognizedTypeDiscriminators = true
+        )]
         [JsonDerivedType(typeof(PolymorphicList), "baseList")]
         [JsonDerivedType(typeof(DerivedList1), "derivedList")]
         public class PolymorphicList : List<int>
         {
-            public class DerivedList1 : PolymorphicList
-            {
-            }
+            public class DerivedList1 : PolymorphicList { }
 
-            public class DerivedList2 : PolymorphicList
-            {
-            }
+            public class DerivedList2 : PolymorphicList { }
 
             public static IEnumerable<TestData> GetSerializeTestData()
             {
                 yield return new TestData(
                     Value: new PolymorphicList { 42 },
                     ExpectedJson: @"{ ""$type"" : ""baseList"", ""$values"" : [42]}",
-                    ExpectedRoundtripValue:  new PolymorphicList { 42 });
+                    ExpectedRoundtripValue: new PolymorphicList { 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedList1 { 42 },
                     ExpectedJson: @"{ ""$type"" : ""derivedList"", ""$values"" : [42]}",
-                    ExpectedRoundtripValue: new DerivedList1 { 42 });
+                    ExpectedRoundtripValue: new DerivedList1 { 42 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedList2 { 42 },
                     ExpectedJson: @"{ ""$type"" : ""baseList"", ""$values"" : [42]}",
-                    ExpectedRoundtripValue: new PolymorphicList { 42 });
+                    ExpectedRoundtripValue: new PolymorphicList { 42 }
+                );
             }
 
-            public record TestData(PolymorphicList Value, string ExpectedJson, PolymorphicList ExpectedRoundtripValue);
+            public record TestData(
+                PolymorphicList Value,
+                string ExpectedJson,
+                PolymorphicList ExpectedRoundtripValue
+            );
         }
 
         [Fact]
@@ -1523,7 +2263,10 @@ namespace System.Text.Json.Serialization.Tests
                     { ""$type"":""queue"", ""$values"":[1,2,3] },
                     { ""$type"":""set""  , ""$values"":[1,2,3] }]";
 
-            string actualJson = await Serializer.SerializeWrapper(values, s_optionsWithPolymorphicCollectionInterface);
+            string actualJson = await Serializer.SerializeWrapper(
+                values,
+                s_optionsWithPolymorphicCollectionInterface
+            );
 
             JsonTestHelper.AssertJsonEqual(expectedJson, actualJson);
         }
@@ -1546,7 +2289,10 @@ namespace System.Text.Json.Serialization.Tests
                     { ""$type"":""queue"", ""$values"":[1,2,3] },
                     { ""$type"":""set""  , ""$values"":[1,2,3] }]";
 
-            var actualValues = await Serializer.DeserializeWrapper<IEnumerable<int>[]>(json, s_optionsWithPolymorphicCollectionInterface);
+            var actualValues = await Serializer.DeserializeWrapper<IEnumerable<int>[]>(
+                json,
+                s_optionsWithPolymorphicCollectionInterface
+            );
             Assert.Equal(expectedValues.Length, actualValues.Length);
             for (int i = 0; i < expectedValues.Length; i++)
             {
@@ -1555,46 +2301,54 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        private readonly static JsonSerializerOptions s_optionsWithPolymorphicCollectionInterface = new JsonSerializerOptions
-        {
-            PolymorphicTypeConfigurations =
+        private readonly static JsonSerializerOptions s_optionsWithPolymorphicCollectionInterface =
+            new JsonSerializerOptions
+            {
+                PolymorphicTypeConfigurations =
                 {
                     new JsonPolymorphicTypeConfiguration<IEnumerable<int>>
                     {
-                        UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                        UnknownDerivedTypeHandling =
+                            JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
                     }
-                    .WithDerivedType<List<int>>("list")
-                    .WithDerivedType<Queue<int>>("queue")
-                    .WithDerivedType<ISet<int>>("set")
+                        .WithDerivedType<List<int>>("list")
+                        .WithDerivedType<Queue<int>>("queue")
+                        .WithDerivedType<ISet<int>>("set")
                 }
-        };
+            };
         #endregion
 
         #region Polymorphic Dictionary
         [Theory]
         [MemberData(nameof(Get_PolymorphicDictionary_TestData_Serialization))]
-        public Task PolymorphicDictionary_TestData_Serialization(PolymorphicDictionary.TestData testData)
-            => TestMultiContextSerialization(testData.Value, testData.ExpectedJson);
+        public Task PolymorphicDictionary_TestData_Serialization(
+            PolymorphicDictionary.TestData testData
+        ) => TestMultiContextSerialization(testData.Value, testData.ExpectedJson);
 
-        public static IEnumerable<object[]> Get_PolymorphicDictionary_TestData_Serialization()
-            => PolymorphicDictionary.GetSerializeTestData().Select(entry => new object[] { entry });
+        public static IEnumerable<object[]> Get_PolymorphicDictionary_TestData_Serialization() =>
+            PolymorphicDictionary.GetSerializeTestData().Select(entry => new object[] { entry });
 
         [Theory]
         [MemberData(nameof(Get_PolymorphicDictionary_TestData_Serialization))]
-        public Task PolymorphicDictionary_TestData_Deserialization(PolymorphicDictionary.TestData testData)
-            => TestMultiContextDeserialization(
+        public Task PolymorphicDictionary_TestData_Deserialization(
+            PolymorphicDictionary.TestData testData
+        ) =>
+            TestMultiContextDeserialization(
                 testData.ExpectedJson,
                 testData.ExpectedRoundtripValue,
-                equalityComparer: PolymorphicEqualityComparer<PolymorphicDictionary>.Instance);
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicDictionary>.Instance
+            );
 
-        public static IEnumerable<object[]> Get_PolymorphicDictionary_TestData_Deserialization()
-            => PolymorphicDictionary.GetSerializeTestData().Select(entry => new object[] { entry });
+        public static IEnumerable<object[]> Get_PolymorphicDictionary_TestData_Deserialization() =>
+            PolymorphicDictionary.GetSerializeTestData().Select(entry => new object[] { entry });
 
         [Fact]
         public async Task PolymorphicDictionary_TestDataArray_Serialization()
         {
             IEnumerable<(PolymorphicDictionary Value, string ExpectedJson)> inputs =
-                PolymorphicDictionary.GetSerializeTestData().Select(entry => (entry.Value, entry.ExpectedJson));
+                PolymorphicDictionary
+                    .GetSerializeTestData()
+                    .Select(entry => (entry.Value, entry.ExpectedJson));
 
             await TestMultiContextSerialization(inputs);
         }
@@ -1603,65 +2357,96 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicDictionary_TestDataArray_Deserialization()
         {
             IEnumerable<(string ExpectedJson, PolymorphicDictionary ExpectedRoundtripValue)> inputs =
-                PolymorphicDictionary.GetSerializeTestData().Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
+                PolymorphicDictionary
+                    .GetSerializeTestData()
+                    .Select(entry => (entry.ExpectedJson, entry.ExpectedRoundtripValue));
 
-            await TestMultiContextDeserialization(inputs, equalityComparer: PolymorphicEqualityComparer<PolymorphicDictionary>.Instance);
+            await TestMultiContextDeserialization(
+                inputs,
+                equalityComparer: PolymorphicEqualityComparer<PolymorphicDictionary>.Instance
+            );
         }
 
         [Fact]
         public async Task PolymorphicDictionary_UnrecognizedTypeDiscriminators_ShouldSucceedDeserialization()
         {
             string json = @"{ ""$type"" : ""invalidTypeDiscriminator"", ""key"" : 42 }";
-            PolymorphicDictionary result = await Serializer.DeserializeWrapper<PolymorphicDictionary>(json);
+            PolymorphicDictionary result =
+                await Serializer.DeserializeWrapper<PolymorphicDictionary>(json);
             Assert.IsType<PolymorphicDictionary>(result);
             Assert.Equal(new PolymorphicDictionary { ["key"] = 42 }, result);
         }
 
         [Theory]
-        [InlineData("$.$ref", @"{ ""$type"" : ""derivedList"", ""UserProperty"" : 42, ""$ref"" : ""42"" }")]
-        [InlineData("$.$type", @"{ ""$type"" : ""derivedList"", ""UserProperty"" : 42, ""$type"" : ""derivedDictionary"" }")]
+        [InlineData(
+            "$.$ref",
+            @"{ ""$type"" : ""derivedList"", ""UserProperty"" : 42, ""$ref"" : ""42"" }"
+        )]
+        [InlineData(
+            "$.$type",
+            @"{ ""$type"" : ""derivedList"", ""UserProperty"" : 42, ""$type"" : ""derivedDictionary"" }"
+        )]
         [InlineData("$.$type", @"{ ""UserProperty"" : 42, ""$type"" : ""derivedDictionary"" }")]
         [InlineData("$.$values", @"{ ""$type"" : ""derivedDictionary"", ""$values"" : [] }")]
         [InlineData("$.$id", @"{ ""$id"" : 42, ""UserProperty"" : 42 }")]
         [InlineData("$.$ref", @"{ ""$ref"" : 42 }")]
-        public async Task PolymorphicDictionary_InvalidTypeDiscriminatorMetadata_ShouldThrowJsonException(string expectedJsonPath, string json)
+        public async Task PolymorphicDictionary_InvalidTypeDiscriminatorMetadata_ShouldThrowJsonException(
+            string expectedJsonPath,
+            string json
+        )
         {
-            JsonException exception = await Assert.ThrowsAsync<JsonException>(() => Serializer.DeserializeWrapper<PolymorphicDictionary>(json));
+            JsonException exception = await Assert.ThrowsAsync<JsonException>(
+                () => Serializer.DeserializeWrapper<PolymorphicDictionary>(json)
+            );
             Assert.Equal(expectedJsonPath, exception.Path);
         }
 
-        [JsonPolymorphic(UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor, IgnoreUnrecognizedTypeDiscriminators = true)]
+        [JsonPolymorphic(
+            UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor,
+            IgnoreUnrecognizedTypeDiscriminators = true
+        )]
         [JsonDerivedType(typeof(PolymorphicDictionary), "baseDictionary")]
         [JsonDerivedType(typeof(DerivedDictionary1), "derivedDictionary")]
         public class PolymorphicDictionary : Dictionary<string, int>
         {
-            public class DerivedDictionary1 : PolymorphicDictionary
-            {
-            }
+            public class DerivedDictionary1 : PolymorphicDictionary { }
 
-            public class DerivedDictionary2 : PolymorphicDictionary
-            {
-            }
+            public class DerivedDictionary2 : PolymorphicDictionary { }
 
             public static IEnumerable<TestData> GetSerializeTestData()
             {
                 yield return new TestData(
-                    Value: new PolymorphicDictionary { ["key1"] = 42 , ["key2"] = -1 },
+                    Value: new PolymorphicDictionary { ["key1"] = 42, ["key2"] = -1 },
                     ExpectedJson: @"{ ""$type"" : ""baseDictionary"", ""key1"" : 42, ""key2"" : -1 }",
-                    ExpectedRoundtripValue: new PolymorphicDictionary { ["key1"] = 42, ["key2"] = -1 });
+                    ExpectedRoundtripValue: new PolymorphicDictionary
+                    {
+                        ["key1"] = 42,
+                        ["key2"] = -1
+                    }
+                );
 
                 yield return new TestData(
                     Value: new DerivedDictionary1 { ["key1"] = 42, ["key2"] = -1 },
                     ExpectedJson: @"{ ""$type"" : ""derivedDictionary"", ""key1"" : 42, ""key2"" : -1 }",
-                    ExpectedRoundtripValue: new DerivedDictionary1 { ["key1"] = 42, ["key2"] = -1 });
+                    ExpectedRoundtripValue: new DerivedDictionary1 { ["key1"] = 42, ["key2"] = -1 }
+                );
 
                 yield return new TestData(
                     Value: new DerivedDictionary2 { ["key1"] = 42, ["key2"] = -1 },
                     ExpectedJson: @"{ ""$type"" : ""baseDictionary"", ""key1"" : 42, ""key2"" : -1 }",
-                    ExpectedRoundtripValue: new PolymorphicDictionary { ["key1"] = 42, ["key2"] = -1 });
+                    ExpectedRoundtripValue: new PolymorphicDictionary
+                    {
+                        ["key1"] = 42,
+                        ["key2"] = -1
+                    }
+                );
             }
 
-            public record TestData(PolymorphicDictionary Value, string ExpectedJson, PolymorphicDictionary ExpectedRoundtripValue);
+            public record TestData(
+                PolymorphicDictionary Value,
+                string ExpectedJson,
+                PolymorphicDictionary ExpectedRoundtripValue
+            );
         }
 
         [Fact]
@@ -1681,7 +2466,10 @@ namespace System.Text.Json.Serialization.Tests
                     { ""$type"" : ""sortedDictionary"", ""0"" : 1, ""1"" : 42 },
                     { ""$type"" : ""readOnlyDictionary"" } ]";
 
-            string actualJson = await Serializer.SerializeWrapper(values, s_optionsWithPolymorphicDictionaryInterface);
+            string actualJson = await Serializer.SerializeWrapper(
+                values,
+                s_optionsWithPolymorphicDictionaryInterface
+            );
 
             JsonTestHelper.AssertJsonEqual(expectedJson, actualJson);
         }
@@ -1703,37 +2491,50 @@ namespace System.Text.Json.Serialization.Tests
                 new Dictionary<int, object>()
             };
 
-            var actualValues = await Serializer.DeserializeWrapper<IEnumerable<KeyValuePair<int, object>>[]>(json, s_optionsWithPolymorphicDictionaryInterface);
+            var actualValues = await Serializer.DeserializeWrapper<IEnumerable<
+                    KeyValuePair<int, object>
+                >[]>(json, s_optionsWithPolymorphicDictionaryInterface);
 
             Assert.Equal(expectedValues.Length, actualValues.Length);
             for (int i = 0; i < expectedValues.Length; i++)
             {
-                Assert.Equal(expectedValues[i].Select(x => x.Key), actualValues[i].Select(x => x.Key));
-                Assert.Equal(expectedValues[i].Select(x => x.Value.ToString()), actualValues[i].Select(x => x.Value.ToString()));
+                Assert.Equal(
+                    expectedValues[i].Select(x => x.Key),
+                    actualValues[i].Select(x => x.Key)
+                );
+                Assert.Equal(
+                    expectedValues[i].Select(x => x.Value.ToString()),
+                    actualValues[i].Select(x => x.Value.ToString())
+                );
                 Assert.IsType(expectedValues[i].GetType(), actualValues[i]);
             }
         }
 
-        private readonly static JsonSerializerOptions s_optionsWithPolymorphicDictionaryInterface = new JsonSerializerOptions
-        {
-            PolymorphicTypeConfigurations =
+        private readonly static JsonSerializerOptions s_optionsWithPolymorphicDictionaryInterface =
+            new JsonSerializerOptions
+            {
+                PolymorphicTypeConfigurations =
                 {
                     new JsonPolymorphicTypeConfiguration<IEnumerable<KeyValuePair<int, object>>>
                     {
-                        UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                        UnknownDerivedTypeHandling =
+                            JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
                     }
-                    .WithDerivedType<Dictionary<int, object>>("dictionary")
-                    .WithDerivedType<SortedDictionary<int, object>>("sortedDictionary")
-                    .WithDerivedType<IReadOnlyDictionary<int, object>>("readOnlyDictionary")
+                        .WithDerivedType<Dictionary<int, object>>("dictionary")
+                        .WithDerivedType<SortedDictionary<int, object>>("sortedDictionary")
+                        .WithDerivedType<IReadOnlyDictionary<int, object>>("readOnlyDictionary")
                 }
-        };
+            };
         #endregion
 
         #region Polymorphic Record Types
         [Theory]
         [InlineData(0, @"{""$type"":""zero""}")]
         [InlineData(1, @"{""$type"":""succ"", ""value"":{""$type"":""zero""}}")]
-        [InlineData(3, @"{""$type"":""succ"", ""value"":{""$type"":""succ"",""value"":{""$type"":""succ"",""value"":{""$type"":""zero""}}}}")]
+        [InlineData(
+            3,
+            @"{""$type"":""succ"", ""value"":{""$type"":""succ"",""value"":{""$type"":""succ"",""value"":{""$type"":""zero""}}}}"
+        )]
         public async Task Peano_Serialization(int size, string expectedJson)
         {
             Peano peano = Peano.FromInteger(size);
@@ -1743,7 +2544,10 @@ namespace System.Text.Json.Serialization.Tests
         [Theory]
         [InlineData(0, @"{""$type"":""zero""}")]
         [InlineData(1, @"{""$type"":""succ"", ""value"":{""$type"":""zero""}}")]
-        [InlineData(3, @"{""$type"":""succ"", ""value"":{""$type"":""succ"",""value"":{""$type"":""succ"",""value"":{""$type"":""zero""}}}}")]
+        [InlineData(
+            3,
+            @"{""$type"":""succ"", ""value"":{""$type"":""succ"",""value"":{""$type"":""succ"",""value"":{""$type"":""zero""}}}}"
+        )]
         public async Task Peano_Deserialization(int expectedSize, string json)
         {
             Peano expected = Peano.FromInteger(expectedSize);
@@ -1755,8 +2559,11 @@ namespace System.Text.Json.Serialization.Tests
         [JsonDerivedType(typeof(Succ), "succ")]
         public abstract record Peano
         {
-            public static Peano FromInteger(int value) => value == 0 ? new Zero() : new Succ(FromInteger(value - 1));
+            public static Peano FromInteger(int value) =>
+                value == 0 ? new Zero() : new Succ(FromInteger(value - 1));
+
             public record Zero : Peano;
+
             public record Succ(Peano value) : Peano;
         }
 
@@ -1781,30 +2588,28 @@ namespace System.Text.Json.Serialization.Tests
         public abstract record BinaryTree
         {
             public record Leaf : BinaryTree;
+
             public record Node(int value, BinaryTree left, BinaryTree right) : BinaryTree;
 
             public static IEnumerable<object[]> GetTestData()
             {
                 yield return WrapArgs(new Leaf(), @"{""$type"":""leaf""}");
                 yield return WrapArgs(
-                    new Node(-1,
-                        new Leaf(),
-                        new Leaf()),
-                    @"{""$type"":""node"",""value"":-1,""left"":{""$type"":""leaf""},""right"":{""$type"":""leaf""}}");
+                    new Node(-1, new Leaf(), new Leaf()),
+                    @"{""$type"":""node"",""value"":-1,""left"":{""$type"":""leaf""},""right"":{""$type"":""leaf""}}"
+                );
 
                 yield return WrapArgs(
-                    new Node(12,
-                        new Leaf(),
-                        new Node(24,
-                            new Leaf(),
-                            new Leaf())),
+                    new Node(12, new Leaf(), new Node(24, new Leaf(), new Leaf())),
                     @"{""$type"":""node"", ""value"":12,
                             ""left"":{""$type"":""leaf""},
                             ""right"":{""$type"":""node"", ""value"":24,
                                       ""left"":{""$type"":""leaf""},
-                                      ""right"":{""$type"":""leaf""}}}");
+                                      ""right"":{""$type"":""leaf""}}}"
+                );
 
-                static object[] WrapArgs(BinaryTree value, string expectedJson) => new object[] { value, expectedJson };
+                static object[] WrapArgs(BinaryTree value, string expectedJson) =>
+                    new object[] { value, expectedJson };
             }
         }
 
@@ -1814,25 +2619,44 @@ namespace System.Text.Json.Serialization.Tests
 
         [Theory]
         [MemberData(nameof(Get_ReferencePreservation_TestData_Boxed))]
-        public async Task ReferencePreservation_SingleValue_Serialization(PolymorphicClass value, Func<string, string> jsonTemplate)
+        public async Task ReferencePreservation_SingleValue_Serialization(
+            PolymorphicClass value,
+            Func<string, string> jsonTemplate
+        )
         {
             string expectedJson = jsonTemplate("1"); // root values have reference id "1"
-            string actualJson = await Serializer.SerializeWrapper(value, s_jsonSerializerOptionsPreserveRefs);
+            string actualJson = await Serializer.SerializeWrapper(
+                value,
+                s_jsonSerializerOptionsPreserveRefs
+            );
             JsonTestHelper.AssertJsonEqual(expectedJson, actualJson);
         }
 
         [Theory]
         [MemberData(nameof(Get_ReferencePreservation_TestData_Boxed))]
-        public async Task ReferencePreservation_SingleValue_Deserialization(PolymorphicClass expectedValue, Func<string, string> jsonTemplate)
+        public async Task ReferencePreservation_SingleValue_Deserialization(
+            PolymorphicClass expectedValue,
+            Func<string, string> jsonTemplate
+        )
         {
             string json = jsonTemplate("1"); // root values have reference id "1"
-            PolymorphicClass actualValue = await Serializer.DeserializeWrapper<PolymorphicClass>(json, s_jsonSerializerOptionsPreserveRefs);
-            Assert.Equal(expectedValue, actualValue, PolymorphicEqualityComparer<PolymorphicClass>.Instance);
+            PolymorphicClass actualValue = await Serializer.DeserializeWrapper<PolymorphicClass>(
+                json,
+                s_jsonSerializerOptionsPreserveRefs
+            );
+            Assert.Equal(
+                expectedValue,
+                actualValue,
+                PolymorphicEqualityComparer<PolymorphicClass>.Instance
+            );
         }
 
         [Theory]
         [MemberData(nameof(Get_ReferencePreservation_TestData_Boxed))]
-        public async Task ReferencePreservation_RepeatingValue_Serialization(PolymorphicClass value, Func<string, string> jsonTemplate)
+        public async Task ReferencePreservation_RepeatingValue_Serialization(
+            PolymorphicClass value,
+            Func<string, string> jsonTemplate
+        )
         {
             List<PolymorphicClass> input = new() { value, value };
             string expectedJson =
@@ -1842,13 +2666,19 @@ namespace System.Text.Json.Serialization.Tests
                           {{""$ref"":""2""}} ]
                 }}";
 
-            string actualJson = await Serializer.SerializeWrapper(input, s_jsonSerializerOptionsPreserveRefs);
+            string actualJson = await Serializer.SerializeWrapper(
+                input,
+                s_jsonSerializerOptionsPreserveRefs
+            );
             JsonTestHelper.AssertJsonEqual(expectedJson, actualJson);
         }
 
         [Theory]
         [MemberData(nameof(Get_ReferencePreservation_TestData_Boxed))]
-        public async Task ReferencePreservation_RepeatingValue_Deserialization(PolymorphicClass expectedValue, Func<string, string> jsonTemplate)
+        public async Task ReferencePreservation_RepeatingValue_Deserialization(
+            PolymorphicClass expectedValue,
+            Func<string, string> jsonTemplate
+        )
         {
             string json =
                 $@"{{""$id"":""1"",
@@ -1857,84 +2687,160 @@ namespace System.Text.Json.Serialization.Tests
                           {{""$ref"":""2""}} ]
                 }}";
 
-            var result = await Serializer.DeserializeWrapper<List<PolymorphicClass>>(json, s_jsonSerializerOptionsPreserveRefs);
+            var result = await Serializer.DeserializeWrapper<List<PolymorphicClass>>(
+                json,
+                s_jsonSerializerOptionsPreserveRefs
+            );
 
             Assert.Equal(2, result.Count);
-            Assert.Equal(expectedValue, result[0], PolymorphicEqualityComparer<PolymorphicClass>.Instance);
+            Assert.Equal(
+                expectedValue,
+                result[0],
+                PolymorphicEqualityComparer<PolymorphicClass>.Instance
+            );
             Assert.Same(result[0], result[1]);
         }
 
         [Fact]
         public async Task ReferencePreservation_MultipleRepeatingValues_Serialization()
         {
-            (PolymorphicClass Value, Func<string, string> JsonTemplate)[] data = Get_ReferencePreservation_TestData().ToArray();
-            PolymorphicClass[] values = data.Select(entry => entry.Value).Concat(data.Select(entry => entry.Value)).ToArray();
+            (PolymorphicClass Value, Func<string, string> JsonTemplate)[] data =
+                Get_ReferencePreservation_TestData().ToArray();
+            PolymorphicClass[] values = data.Select(entry => entry.Value)
+                .Concat(data.Select(entry => entry.Value))
+                .ToArray();
 
-            IEnumerable<string> idValues = data.Select((entry, i) => entry.JsonTemplate((i + 1).ToString()));
-            IEnumerable<string> refValues = Enumerable.Range(1, data.Length).Select(x => $@"{{ ""$ref"" : ""{x}""}}");
+            IEnumerable<string> idValues = data.Select(
+                (entry, i) => entry.JsonTemplate((i + 1).ToString())
+            );
+            IEnumerable<string> refValues = Enumerable
+                .Range(1, data.Length)
+                .Select(x => $@"{{ ""$ref"" : ""{x}""}}");
             string expectedJson = "[" + string.Join(", ", idValues.Concat(refValues)) + "]";
 
-            string actualJson = await Serializer.SerializeWrapper(values, s_jsonSerializerOptionsPreserveRefs);
+            string actualJson = await Serializer.SerializeWrapper(
+                values,
+                s_jsonSerializerOptionsPreserveRefs
+            );
             JsonTestHelper.AssertJsonEqual(expectedJson, actualJson);
         }
 
         [Fact]
         public async Task ReferencePreservation_MultipleRepeatingValues_Deserialization()
         {
-            (PolymorphicClass Value, Func<string, string> JsonTemplate)[] data = Get_ReferencePreservation_TestData().ToArray();
-            PolymorphicClass[] expectedValues = data.Select(entry => entry.Value).Concat(data.Select(entry => entry.Value)).ToArray();
+            (PolymorphicClass Value, Func<string, string> JsonTemplate)[] data =
+                Get_ReferencePreservation_TestData().ToArray();
+            PolymorphicClass[] expectedValues = data.Select(entry => entry.Value)
+                .Concat(data.Select(entry => entry.Value))
+                .ToArray();
 
-            IEnumerable<string> idValues = data.Select((entry, i) => entry.JsonTemplate((i + 1).ToString()));
-            IEnumerable<string> refValues = Enumerable.Range(1, data.Length).Select(x => $@"{{ ""$ref"" : ""{x}""}}");
+            IEnumerable<string> idValues = data.Select(
+                (entry, i) => entry.JsonTemplate((i + 1).ToString())
+            );
+            IEnumerable<string> refValues = Enumerable
+                .Range(1, data.Length)
+                .Select(x => $@"{{ ""$ref"" : ""{x}""}}");
             string json = "[" + string.Join(", ", idValues.Concat(refValues)) + "]";
 
-            PolymorphicClass[] result = await Serializer.DeserializeWrapper<PolymorphicClass[]>(json, s_jsonSerializerOptionsPreserveRefs);
-            Assert.Equal(expectedValues, result, PolymorphicEqualityComparer<PolymorphicClass>.Instance);
+            PolymorphicClass[] result = await Serializer.DeserializeWrapper<PolymorphicClass[]>(
+                json,
+                s_jsonSerializerOptionsPreserveRefs
+            );
+            Assert.Equal(
+                expectedValues,
+                result,
+                PolymorphicEqualityComparer<PolymorphicClass>.Instance
+            );
         }
 
-        public static IEnumerable<(PolymorphicClass Value, Func<string, string> JsonTemplate)> Get_ReferencePreservation_TestData()
+        public static IEnumerable<(PolymorphicClass Value, Func<
+                string,
+                string
+            > JsonTemplate)> Get_ReferencePreservation_TestData()
         {
             yield return (
-                Value: new PolymorphicClass.DerivedClass1_TypeDiscriminator { Number = 42, String = "str" },
-                JsonTemplate: id => $@"{{""$id"":""{id}"",""$type"":""derivedClass1"",""Number"":42,""String"":""str""}}");
+                Value: new PolymorphicClass.DerivedClass1_TypeDiscriminator
+                {
+                    Number = 42,
+                    String = "str"
+                },
+                JsonTemplate: id =>
+                    $@"{{""$id"":""{id}"",""$type"":""derivedClass1"",""Number"":42,""String"":""str""}}"
+            );
 
             yield return (
                 Value: new PolymorphicClass.DerivedClassWithConstructor_TypeDiscriminator(42),
-                JsonTemplate: id => $@"{{""$id"":""{id}"",""$type"":""derivedClassWithCtor"",""Number"":42}}");
+                JsonTemplate: id =>
+                    $@"{{""$id"":""{id}"",""$type"":""derivedClassWithCtor"",""Number"":42}}"
+            );
 
             yield return (
                 Value: new PolymorphicClass.DerivedCollection_TypeDiscriminator { Number = 42 },
-                JsonTemplate: id => $@"{{""$id"":""{id}"",""$type"":""derivedCollection"",""$values"":[42,42,42]}}");
+                JsonTemplate: id =>
+                    $@"{{""$id"":""{id}"",""$type"":""derivedCollection"",""$values"":[42,42,42]}}"
+            );
 
             yield return (
                 Value: new PolymorphicClass.DerivedDictionary_TypeDiscriminator { Number = 42 },
-                JsonTemplate: id => $@"{{""$id"":""{id}"",""$type"":""derivedDictionary"",""dictionaryKey"":42}}");
+                JsonTemplate: id =>
+                    $@"{{""$id"":""{id}"",""$type"":""derivedDictionary"",""dictionaryKey"":42}}"
+            );
         }
 
-        public static IEnumerable<object[]> Get_ReferencePreservation_TestData_Boxed()
-            => Get_ReferencePreservation_TestData().Select(entry => new object[] { entry.Value, entry.JsonTemplate });
+        public static IEnumerable<object[]> Get_ReferencePreservation_TestData_Boxed() =>
+            Get_ReferencePreservation_TestData()
+                .Select(entry => new object[] { entry.Value, entry.JsonTemplate });
 
         [Theory]
-        [MemberData(nameof(PolymorphicClassWithCustomTypeDiscriminator.GetTestData_Boxed), MemberType = typeof(PolymorphicClassWithCustomTypeDiscriminator))]
-        public async Task ReferencePreservation_CustomTypeDiscriminator_SingleValue_Serialization(PolymorphicClassWithCustomTypeDiscriminator value, Func<string, string> jsonTemplate)
+        [MemberData(
+            nameof(PolymorphicClassWithCustomTypeDiscriminator.GetTestData_Boxed),
+            MemberType = typeof(PolymorphicClassWithCustomTypeDiscriminator)
+        )]
+        public async Task ReferencePreservation_CustomTypeDiscriminator_SingleValue_Serialization(
+            PolymorphicClassWithCustomTypeDiscriminator value,
+            Func<string, string> jsonTemplate
+        )
         {
             string expectedJson = jsonTemplate("1"); // root values have reference id "1"
-            string actualJson = await Serializer.SerializeWrapper(value, s_jsonSerializerOptionsPreserveRefs);
+            string actualJson = await Serializer.SerializeWrapper(
+                value,
+                s_jsonSerializerOptionsPreserveRefs
+            );
             JsonTestHelper.AssertJsonEqual(expectedJson, actualJson);
         }
 
         [Theory]
-        [MemberData(nameof(PolymorphicClassWithCustomTypeDiscriminator.GetTestData_Boxed), MemberType = typeof(PolymorphicClassWithCustomTypeDiscriminator))]
-        public async Task ReferencePreservation_CustomTypeDiscriminator_SingleValue_Deserialization(PolymorphicClassWithCustomTypeDiscriminator expectedValue, Func<string, string> jsonTemplate)
+        [MemberData(
+            nameof(PolymorphicClassWithCustomTypeDiscriminator.GetTestData_Boxed),
+            MemberType = typeof(PolymorphicClassWithCustomTypeDiscriminator)
+        )]
+        public async Task ReferencePreservation_CustomTypeDiscriminator_SingleValue_Deserialization(
+            PolymorphicClassWithCustomTypeDiscriminator expectedValue,
+            Func<string, string> jsonTemplate
+        )
         {
             string json = jsonTemplate("1"); // root values have reference id "1"
-            PolymorphicClassWithCustomTypeDiscriminator actualValue = await Serializer.DeserializeWrapper<PolymorphicClassWithCustomTypeDiscriminator>(json, s_jsonSerializerOptionsPreserveRefs);
-            Assert.Equal(expectedValue, actualValue, PolymorphicEqualityComparer<PolymorphicClassWithCustomTypeDiscriminator>.Instance);
+            PolymorphicClassWithCustomTypeDiscriminator actualValue =
+                await Serializer.DeserializeWrapper<PolymorphicClassWithCustomTypeDiscriminator>(
+                    json,
+                    s_jsonSerializerOptionsPreserveRefs
+                );
+            Assert.Equal(
+                expectedValue,
+                actualValue,
+                PolymorphicEqualityComparer<PolymorphicClassWithCustomTypeDiscriminator>.Instance
+            );
         }
 
         [Theory]
-        [MemberData(nameof(PolymorphicClassWithCustomTypeDiscriminator.GetTestData_Boxed), MemberType = typeof(PolymorphicClassWithCustomTypeDiscriminator))]
-        public async Task ReferencePreservation_CustomTypeDiscriminator_RepeatingValue_Serialization(PolymorphicClassWithCustomTypeDiscriminator value, Func<string, string> jsonTemplate)
+        [MemberData(
+            nameof(PolymorphicClassWithCustomTypeDiscriminator.GetTestData_Boxed),
+            MemberType = typeof(PolymorphicClassWithCustomTypeDiscriminator)
+        )]
+        public async Task ReferencePreservation_CustomTypeDiscriminator_RepeatingValue_Serialization(
+            PolymorphicClassWithCustomTypeDiscriminator value,
+            Func<string, string> jsonTemplate
+        )
         {
             List<PolymorphicClassWithCustomTypeDiscriminator> input = new() { value, value };
             string expectedJson =
@@ -1944,13 +2850,22 @@ namespace System.Text.Json.Serialization.Tests
                           {{""$ref"":""2""}} ]
                 }}";
 
-            string actualJson = await Serializer.SerializeWrapper(input, s_jsonSerializerOptionsPreserveRefs);
+            string actualJson = await Serializer.SerializeWrapper(
+                input,
+                s_jsonSerializerOptionsPreserveRefs
+            );
             JsonTestHelper.AssertJsonEqual(expectedJson, actualJson);
         }
 
         [Theory]
-        [MemberData(nameof(PolymorphicClassWithCustomTypeDiscriminator.GetTestData_Boxed), MemberType = typeof(PolymorphicClassWithCustomTypeDiscriminator))]
-        public async Task ReferencePreservation_CustomTypeDiscriminator_RepeatingValue_Deserialization(PolymorphicClassWithCustomTypeDiscriminator expectedValue, Func<string, string> jsonTemplate)
+        [MemberData(
+            nameof(PolymorphicClassWithCustomTypeDiscriminator.GetTestData_Boxed),
+            MemberType = typeof(PolymorphicClassWithCustomTypeDiscriminator)
+        )]
+        public async Task ReferencePreservation_CustomTypeDiscriminator_RepeatingValue_Deserialization(
+            PolymorphicClassWithCustomTypeDiscriminator expectedValue,
+            Func<string, string> jsonTemplate
+        )
         {
             string json =
                 $@"{{""$id"":""1"",
@@ -1959,39 +2874,80 @@ namespace System.Text.Json.Serialization.Tests
                           {{""$ref"":""2""}} ]
                 }}";
 
-            var result = await Serializer.DeserializeWrapper<List<PolymorphicClassWithCustomTypeDiscriminator>>(json, s_jsonSerializerOptionsPreserveRefs);
+            var result = await Serializer.DeserializeWrapper<
+                List<PolymorphicClassWithCustomTypeDiscriminator>
+            >(json, s_jsonSerializerOptionsPreserveRefs);
 
             Assert.Equal(2, result.Count);
-            Assert.Equal(expectedValue, result[0], PolymorphicEqualityComparer<PolymorphicClassWithCustomTypeDiscriminator>.Instance);
+            Assert.Equal(
+                expectedValue,
+                result[0],
+                PolymorphicEqualityComparer<PolymorphicClassWithCustomTypeDiscriminator>.Instance
+            );
             Assert.Same(result[0], result[1]);
         }
 
         [Fact]
         public async Task ReferencePreservation_CustomTypeDiscriminator_MultipleRepeatingValues_Serialization()
         {
-            (PolymorphicClassWithCustomTypeDiscriminator Value, Func<string, string> JsonTemplate)[] data = PolymorphicClassWithCustomTypeDiscriminator.GetTestData().ToArray();
-            PolymorphicClassWithCustomTypeDiscriminator[] values = data.Select(entry => entry.Value).Concat(data.Select(entry => entry.Value)).ToArray();
+            (PolymorphicClassWithCustomTypeDiscriminator Value, Func<
+                string,
+                string
+            > JsonTemplate)[] data = PolymorphicClassWithCustomTypeDiscriminator
+                .GetTestData()
+                .ToArray();
+            PolymorphicClassWithCustomTypeDiscriminator[] values = data.Select(entry => entry.Value)
+                .Concat(data.Select(entry => entry.Value))
+                .ToArray();
 
-            IEnumerable<string> idValues = data.Select((entry, i) => entry.JsonTemplate((i + 1).ToString()));
-            IEnumerable<string> refValues = Enumerable.Range(1, data.Length).Select(x => $@"{{ ""$ref"" : ""{x}""}}");
+            IEnumerable<string> idValues = data.Select(
+                (entry, i) => entry.JsonTemplate((i + 1).ToString())
+            );
+            IEnumerable<string> refValues = Enumerable
+                .Range(1, data.Length)
+                .Select(x => $@"{{ ""$ref"" : ""{x}""}}");
             string expectedJson = "[" + string.Join(", ", idValues.Concat(refValues)) + "]";
 
-            string actualJson = await Serializer.SerializeWrapper(values, s_jsonSerializerOptionsPreserveRefs);
+            string actualJson = await Serializer.SerializeWrapper(
+                values,
+                s_jsonSerializerOptionsPreserveRefs
+            );
             JsonTestHelper.AssertJsonEqual(expectedJson, actualJson);
         }
 
         [Fact]
         public async Task ReferencePreservation_CustomTypeDiscriminator_MultipleRepeatingValues_Deserialization()
         {
-            (PolymorphicClassWithCustomTypeDiscriminator Value, Func<string, string> JsonTemplate)[] data = PolymorphicClassWithCustomTypeDiscriminator.GetTestData().ToArray();
-            PolymorphicClassWithCustomTypeDiscriminator[] expectedValues = data.Select(entry => entry.Value).Concat(data.Select(entry => entry.Value)).ToArray();
+            (PolymorphicClassWithCustomTypeDiscriminator Value, Func<
+                string,
+                string
+            > JsonTemplate)[] data = PolymorphicClassWithCustomTypeDiscriminator
+                .GetTestData()
+                .ToArray();
+            PolymorphicClassWithCustomTypeDiscriminator[] expectedValues = data.Select(
+                    entry => entry.Value
+                )
+                .Concat(data.Select(entry => entry.Value))
+                .ToArray();
 
-            IEnumerable<string> idValues = data.Select((entry, i) => entry.JsonTemplate((i + 1).ToString()));
-            IEnumerable<string> refValues = Enumerable.Range(1, data.Length).Select(x => $@"{{ ""$ref"" : ""{x}""}}");
+            IEnumerable<string> idValues = data.Select(
+                (entry, i) => entry.JsonTemplate((i + 1).ToString())
+            );
+            IEnumerable<string> refValues = Enumerable
+                .Range(1, data.Length)
+                .Select(x => $@"{{ ""$ref"" : ""{x}""}}");
             string json = "[" + string.Join(", ", idValues.Concat(refValues)) + "]";
 
-            PolymorphicClassWithCustomTypeDiscriminator[] result = await Serializer.DeserializeWrapper<PolymorphicClassWithCustomTypeDiscriminator[]>(json, s_jsonSerializerOptionsPreserveRefs);
-            Assert.Equal(expectedValues, result, PolymorphicEqualityComparer<PolymorphicClassWithCustomTypeDiscriminator>.Instance);
+            PolymorphicClassWithCustomTypeDiscriminator[] result =
+                await Serializer.DeserializeWrapper<PolymorphicClassWithCustomTypeDiscriminator[]>(
+                    json,
+                    s_jsonSerializerOptionsPreserveRefs
+                );
+            Assert.Equal(
+                expectedValues,
+                result,
+                PolymorphicEqualityComparer<PolymorphicClassWithCustomTypeDiscriminator>.Instance
+            );
         }
 
         [JsonPolymorphic(TypeDiscriminatorPropertyName = "case")]
@@ -2007,43 +2963,61 @@ namespace System.Text.Json.Serialization.Tests
                 public string String { get; set; }
             }
 
-            public class DerivedCollection : PolymorphicClassWithCustomTypeDiscriminator, ICollection<int>
+            public class DerivedCollection
+                : PolymorphicClassWithCustomTypeDiscriminator,
+                    ICollection<int>
             {
                 public bool IsReadOnly => false;
+
                 public void Add(int item) => Number = item;
-                public IEnumerator<int> GetEnumerator() => Enumerable.Repeat(Number, 3).GetEnumerator();
+
+                public IEnumerator<int> GetEnumerator() =>
+                    Enumerable.Repeat(Number, 3).GetEnumerator();
+
                 IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
                 public int Count => throw new NotImplementedException();
+
                 public void Clear() => throw new NotImplementedException();
+
                 public bool Contains(int item) => throw new NotImplementedException();
-                public void CopyTo(int[] array, int arrayIndex) => throw new NotImplementedException();
+
+                public void CopyTo(int[] array, int arrayIndex) =>
+                    throw new NotImplementedException();
+
                 public bool Remove(int item) => throw new NotImplementedException();
             }
 
-            public static IEnumerable<(PolymorphicClassWithCustomTypeDiscriminator Value, Func<string, string> JsonTemplate)> GetTestData()
+            public static IEnumerable<(PolymorphicClassWithCustomTypeDiscriminator Value, Func<
+                    string,
+                    string
+                > JsonTemplate)> GetTestData()
             {
                 yield return (
                     Value: new PolymorphicClassWithCustomTypeDiscriminator { Number = 42 },
-                    JsonTemplate: id => $@"{{""$id"":""{id}"",""case"":""baseClass"",""Number"":42}}");
+                    JsonTemplate: id =>
+                        $@"{{""$id"":""{id}"",""case"":""baseClass"",""Number"":42}}"
+                );
 
                 yield return (
                     Value: new DerivedClass { Number = 42, String = "str" },
-                    JsonTemplate: id => $@"{{""case"":""derivedClass"",""$id"":""{id}"",""Number"":42,""String"":""str""}}");
+                    JsonTemplate: id =>
+                        $@"{{""case"":""derivedClass"",""$id"":""{id}"",""Number"":42,""String"":""str""}}"
+                );
 
                 yield return (
                     Value: new DerivedCollection { 42 },
-                    JsonTemplate: id => $@"{{""case"":""derivedCollection"",""$id"":""{id}"",""$values"":[42,42,42]}}");
+                    JsonTemplate: id =>
+                        $@"{{""case"":""derivedCollection"",""$id"":""{id}"",""$values"":[42,42,42]}}"
+                );
             }
 
-            public static IEnumerable<object[]> GetTestData_Boxed()
-                => GetTestData().Select(entry => new object[] { entry.Value, entry.JsonTemplate });
+            public static IEnumerable<object[]> GetTestData_Boxed() =>
+                GetTestData().Select(entry => new object[] { entry.Value, entry.JsonTemplate });
         }
 
-        private readonly static JsonSerializerOptions s_jsonSerializerOptionsPreserveRefs = new JsonSerializerOptions
-        {
-            ReferenceHandler = ReferenceHandler.Preserve
-        };
+        private readonly static JsonSerializerOptions s_jsonSerializerOptionsPreserveRefs =
+            new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve };
         #endregion
 
         #region Attribute Negative Tests
@@ -2052,83 +3026,94 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicClassWithoutDerivedTypeAttribute_ThrowsInvalidOperationException()
         {
             var value = new PolymorphicClassWithoutDerivedTypeAttribute();
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(value));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonPolymorphic]
-        public class PolymorphicClassWithoutDerivedTypeAttribute
-        {
-        }
+        public class PolymorphicClassWithoutDerivedTypeAttribute { }
 
         [Fact]
         public async Task PolymorphicClassWithNullDerivedTypeAttribute_ThrowsInvalidOperationException()
         {
             var value = new PolymorphicClassWithNullDerivedTypeAttribute();
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(value));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(derivedType: null)]
-        public class PolymorphicClassWithNullDerivedTypeAttribute
-        {
-        }
+        public class PolymorphicClassWithNullDerivedTypeAttribute { }
 
         [Fact]
         public async Task PolymorphicClassWithStructDerivedTypeAttribute_ThrowsInvalidOperationException()
         {
             var value = new PolymorphicClassWithStructDerivedTypeAttribute();
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(value));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(Guid))]
-        public class PolymorphicClassWithStructDerivedTypeAttribute
-        {
-        }
+        public class PolymorphicClassWithStructDerivedTypeAttribute { }
 
         [Fact]
         public async Task PolymorphicClassWithObjectDerivedTypeAttribute_ThrowsInvalidOperationException()
         {
             var value = new PolymorphicClassWithObjectDerivedTypeAttribute();
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(value));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(object), "object")]
-        public class PolymorphicClassWithObjectDerivedTypeAttribute
-        {
-        }
+        public class PolymorphicClassWithObjectDerivedTypeAttribute { }
 
         [Fact]
         public async Task PolymorphicClassWithNonAssignableDerivedTypeAttribute_ThrowsInvalidOperationException()
         {
             var value = new PolymorphicClassWithNonAssignableDerivedTypeAttribute();
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(value));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(object))]
-        public class PolymorphicClassWithNonAssignableDerivedTypeAttribute
-        {
-        }
-
+        public class PolymorphicClassWithNonAssignableDerivedTypeAttribute { }
 
         [Fact]
         public async Task PolymorphicInterfaceWithInterfaceDerivedType_Serialization_ThrowsInvalidOperationException()
         {
-            PolymorphicInterfaceWithInterfaceDerivedType value = new PolymorphicInterfaceWithInterfaceDerivedType.DerivedClass();
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(value));
+            PolymorphicInterfaceWithInterfaceDerivedType value =
+                new PolymorphicInterfaceWithInterfaceDerivedType.DerivedClass();
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [Fact]
         public async Task PolymorphicInterfaceWithInterfaceDerivedType_Deserialization_ThrowsInvalidOperationException()
         {
             string json = @"{""$type"":""derivedInterface""}";
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.DeserializeWrapper<PolymorphicInterfaceWithInterfaceDerivedType>(json));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    Serializer.DeserializeWrapper<PolymorphicInterfaceWithInterfaceDerivedType>(
+                        json
+                    )
+            );
         }
 
         [Fact]
         public async Task PolymorphicInterfaceWithInterfaceDerivedType_FallbackToNearestAncestor_Serialization()
         {
-            PolymorphicInterfaceWithInterfaceDerivedType value = new PolymorphicInterfaceWithInterfaceDerivedType.DerivedInterface.ImplementingClass();
+            PolymorphicInterfaceWithInterfaceDerivedType value =
+                new PolymorphicInterfaceWithInterfaceDerivedType.DerivedInterface.ImplementingClass();
             string expectedJson = @"{""$type"":""derivedInterface""}";
-            string actualJson = await Serializer.SerializeWrapper(value, PolymorphicInterfaceWithInterfaceDerivedType_OptionsWithFallbackToNearestAncestor);
+            string actualJson = await Serializer.SerializeWrapper(
+                value,
+                PolymorphicInterfaceWithInterfaceDerivedType_OptionsWithFallbackToNearestAncestor
+            );
             JsonTestHelper.AssertJsonEqual(expectedJson, actualJson);
         }
 
@@ -2136,9 +3121,13 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicInterfaceWithInterfaceDerivedType_FallbackToNearestAncestor_Deserialization_ThrowsNotSupportedException()
         {
             string json = @"{""$type"":""derivedInterface""}";
-            await Assert.ThrowsAsync<NotSupportedException>(() =>
-                Serializer.DeserializeWrapper<PolymorphicInterfaceWithInterfaceDerivedType>(json,
-                    PolymorphicInterfaceWithInterfaceDerivedType_OptionsWithFallbackToNearestAncestor));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () =>
+                    Serializer.DeserializeWrapper<PolymorphicInterfaceWithInterfaceDerivedType>(
+                        json,
+                        PolymorphicInterfaceWithInterfaceDerivedType_OptionsWithFallbackToNearestAncestor
+                    )
+            );
         }
 
         [JsonDerivedType(typeof(DerivedInterface), "derivedInterface")]
@@ -2147,15 +3136,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             public interface DerivedInterface : PolymorphicInterfaceWithInterfaceDerivedType
             {
-                public class ImplementingClass : DerivedInterface
-                {
-                }
+                public class ImplementingClass : DerivedInterface { }
             }
 
-            public class DerivedClass : PolymorphicInterfaceWithInterfaceDerivedType
-            {
-            }
-
+            public class DerivedClass : PolymorphicInterfaceWithInterfaceDerivedType { }
         }
 
         public static JsonSerializerOptions PolymorphicInterfaceWithInterfaceDerivedType_OptionsWithFallbackToNearestAncestor { get; } =
@@ -2165,54 +3149,62 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     new JsonPolymorphicTypeConfiguration<PolymorphicInterfaceWithInterfaceDerivedType>()
                     {
-                        UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                        UnknownDerivedTypeHandling =
+                            JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
                     }
-                    .WithDerivedType<PolymorphicInterfaceWithInterfaceDerivedType.DerivedInterface>("derivedInterface")
-                    .WithDerivedType<PolymorphicInterfaceWithInterfaceDerivedType.DerivedClass>("derivedClass")
+                        .WithDerivedType<PolymorphicInterfaceWithInterfaceDerivedType.DerivedInterface>(
+                            "derivedInterface"
+                        )
+                        .WithDerivedType<PolymorphicInterfaceWithInterfaceDerivedType.DerivedClass>(
+                            "derivedClass"
+                        )
                 }
             };
 
         [Fact]
         public async Task PolymorphicAbstractClassWithAbstractClassDerivedType_ThrowsInvalidOperationException()
         {
-            PolymorphicAbstractClassWithAbstractClassDerivedType value = new PolymorphicAbstractClassWithAbstractClassDerivedType.DerivedClass();
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(value));
+            PolymorphicAbstractClassWithAbstractClassDerivedType value =
+                new PolymorphicAbstractClassWithAbstractClassDerivedType.DerivedClass();
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(DerivedAbstractClass))]
         [JsonDerivedType(typeof(DerivedClass))]
         public abstract class PolymorphicAbstractClassWithAbstractClassDerivedType
         {
-            public abstract class DerivedAbstractClass : PolymorphicAbstractClassWithAbstractClassDerivedType
-            {
-            }
+            public abstract class DerivedAbstractClass
+                : PolymorphicAbstractClassWithAbstractClassDerivedType { }
 
-            public class DerivedClass : PolymorphicAbstractClassWithAbstractClassDerivedType
-            {
-            }
+            public class DerivedClass : PolymorphicAbstractClassWithAbstractClassDerivedType { }
         }
 
         [Fact]
         public async Task PolymorphicClassWithDuplicateDerivedTypeRegistrations_ThrowsInvalidOperationException()
         {
-            PolymorphicClassWithDuplicateDerivedTypeRegistrations value = new PolymorphicClassWithDuplicateDerivedTypeRegistrations.DerivedClass();
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(value));
+            PolymorphicClassWithDuplicateDerivedTypeRegistrations value =
+                new PolymorphicClassWithDuplicateDerivedTypeRegistrations.DerivedClass();
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(DerivedClass))]
         [JsonDerivedType(typeof(DerivedClass), "id")]
         public class PolymorphicClassWithDuplicateDerivedTypeRegistrations
         {
-            public class DerivedClass : PolymorphicClassWithDuplicateDerivedTypeRegistrations
-            {
-            }
+            public class DerivedClass : PolymorphicClassWithDuplicateDerivedTypeRegistrations { }
         }
 
         [Fact]
         public async Task PolymorphicClasWithDuplicateTypeDiscriminators_ThrowsInvalidOperationException()
         {
             var value = new PolymorphicClasWithDuplicateTypeDiscriminators();
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(value));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(A), "duplicateId")]
@@ -2220,6 +3212,7 @@ namespace System.Text.Json.Serialization.Tests
         public class PolymorphicClasWithDuplicateTypeDiscriminators
         {
             public class A : PolymorphicClasWithDuplicateTypeDiscriminators { }
+
             public class B : PolymorphicClasWithDuplicateTypeDiscriminators { }
         }
 
@@ -2227,71 +3220,89 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicGenericClass_ThrowsInvalidOperationException()
         {
             PolymorphicGenericClass<int> value = new PolymorphicGenericClass<int>.DerivedClass();
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(value));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(PolymorphicGenericClass<>.DerivedClass))]
         public class PolymorphicGenericClass<T>
         {
-            public class DerivedClass : PolymorphicGenericClass<T>
-            {
-            }
+            public class DerivedClass : PolymorphicGenericClass<T> { }
         }
 
         [Fact]
         public async Task PolymorphicDerivedGenericClass_ThrowsInvalidOperationException()
         {
-            PolymorphicDerivedGenericClass value = new PolymorphicDerivedGenericClass.DerivedClass<int>();
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(value));
+            PolymorphicDerivedGenericClass value =
+                new PolymorphicDerivedGenericClass.DerivedClass<int>();
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [JsonDerivedType(typeof(DerivedClass<>))]
         public class PolymorphicDerivedGenericClass
         {
-            public class DerivedClass<T> : PolymorphicDerivedGenericClass
-            {
-            }
+            public class DerivedClass<T> : PolymorphicDerivedGenericClass { }
         }
 
         [Fact]
         public async Task PolymorphicClass_CustomConverter_TypeDiscriminator_Serialization_ThrowsNotSupportedException()
         {
-            PolymorphicClass_CustomConverter_TypeDiscriminator value = new PolymorphicClass_CustomConverter_TypeDiscriminator.DerivedClass();
-            await Assert.ThrowsAsync<NotSupportedException>(() => Serializer.SerializeWrapper(value));
+            PolymorphicClass_CustomConverter_TypeDiscriminator value =
+                new PolymorphicClass_CustomConverter_TypeDiscriminator.DerivedClass();
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => Serializer.SerializeWrapper(value)
+            );
         }
 
         [Fact]
         public async Task PolymorphicClass_CustomConverter_TypeDiscriminator_Deserialization_ThrowsNotSupportedException()
         {
             string json = @"{ ""$type"" : ""derivedClass"" }";
-            await Assert.ThrowsAsync<NotSupportedException>(() => Serializer.DeserializeWrapper<PolymorphicClass_CustomConverter_TypeDiscriminator>(json));
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () =>
+                    Serializer.DeserializeWrapper<PolymorphicClass_CustomConverter_TypeDiscriminator>(
+                        json
+                    )
+            );
         }
 
         [JsonConverter(typeof(CustomConverter))]
         [JsonDerivedType(typeof(DerivedClass), "derivedClass")]
         public class PolymorphicClass_CustomConverter_TypeDiscriminator
         {
-            public class DerivedClass : PolymorphicClass_CustomConverter_TypeDiscriminator
-            {
-            }
+            public class DerivedClass : PolymorphicClass_CustomConverter_TypeDiscriminator { }
 
-            public class CustomConverter : JsonConverter<PolymorphicClass_CustomConverter_TypeDiscriminator>
+            public class CustomConverter
+                : JsonConverter<PolymorphicClass_CustomConverter_TypeDiscriminator>
             {
-                public override PolymorphicClass_CustomConverter_TypeDiscriminator? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+                public override PolymorphicClass_CustomConverter_TypeDiscriminator? Read(
+                    ref Utf8JsonReader reader,
+                    Type typeToConvert,
+                    JsonSerializerOptions options
+                )
                 {
                     reader.TrySkip();
                     return null;
                 }
 
-                public override void Write(Utf8JsonWriter writer, PolymorphicClass_CustomConverter_TypeDiscriminator value, JsonSerializerOptions options)
-                    => writer.WriteNullValue();
+                public override void Write(
+                    Utf8JsonWriter writer,
+                    PolymorphicClass_CustomConverter_TypeDiscriminator value,
+                    JsonSerializerOptions options
+                ) => writer.WriteNullValue();
             }
         }
 
         [Fact]
         public async Task PolymorphicClass_CustomConverter_NoTypeDiscriminator_Serialization()
         {
-            var value = new PolymorphicClass_CustomConverter_NoTypeDiscriminator.DerivedClass { Number = 42 };
+            var value = new PolymorphicClass_CustomConverter_NoTypeDiscriminator.DerivedClass
+            {
+                Number = 42
+            };
             string expectedJson = @"{ ""Number"" : 42 }";
             string actualJson = await Serializer.SerializeWrapper(value);
             JsonTestHelper.AssertJsonEqual(expectedJson, actualJson);
@@ -2301,7 +3312,10 @@ namespace System.Text.Json.Serialization.Tests
         public async Task PolymorphicClass_CustomConverter_NoTypeDiscriminator_Deserialization()
         {
             string json = @"{ ""Number"" : 42 }";
-            PolymorphicClass_CustomConverter_NoTypeDiscriminator result = await Serializer.DeserializeWrapper<PolymorphicClass_CustomConverter_NoTypeDiscriminator>(json);
+            PolymorphicClass_CustomConverter_NoTypeDiscriminator result =
+                await Serializer.DeserializeWrapper<PolymorphicClass_CustomConverter_NoTypeDiscriminator>(
+                    json
+                );
             Assert.Null(result);
         }
 
@@ -2314,16 +3328,24 @@ namespace System.Text.Json.Serialization.Tests
                 public int Number { get; set; }
             }
 
-            public class CustomConverter : JsonConverter<PolymorphicClass_CustomConverter_NoTypeDiscriminator>
+            public class CustomConverter
+                : JsonConverter<PolymorphicClass_CustomConverter_NoTypeDiscriminator>
             {
-                public override PolymorphicClass_CustomConverter_NoTypeDiscriminator? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+                public override PolymorphicClass_CustomConverter_NoTypeDiscriminator? Read(
+                    ref Utf8JsonReader reader,
+                    Type typeToConvert,
+                    JsonSerializerOptions options
+                )
                 {
                     reader.TrySkip();
                     return null;
                 }
 
-                public override void Write(Utf8JsonWriter writer, PolymorphicClass_CustomConverter_NoTypeDiscriminator value, JsonSerializerOptions options)
-                    => writer.WriteNullValue();
+                public override void Write(
+                    Utf8JsonWriter writer,
+                    PolymorphicClass_CustomConverter_NoTypeDiscriminator value,
+                    JsonSerializerOptions options
+                ) => writer.WriteNullValue();
             }
         }
 
@@ -2331,18 +3353,33 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData("$id")]
         [InlineData("$ref")]
         [InlineData("$values")]
-        public async Task PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName_ThrowsInvalidOperationException(string invalidPropertyName)
+        public async Task PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName_ThrowsInvalidOperationException(
+            string invalidPropertyName
+        )
         {
-            JsonSerializerOptions? options = PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.CreatePolymorphicConfigurationWithCustomPropertyName(invalidPropertyName);
-            PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName value = new PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.DerivedClass();
-            await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(value, options));
+            JsonSerializerOptions? options =
+                PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.CreatePolymorphicConfigurationWithCustomPropertyName(
+                    invalidPropertyName
+                );
+            PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName value =
+                new PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.DerivedClass();
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => Serializer.SerializeWrapper(value, options)
+            );
         }
 
         [Fact]
         public async Task PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName_PassingDefaultPropertyNameAsCustomParameter_ShouldSucceed()
         {
-            JsonSerializerOptions? options = PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.CreatePolymorphicConfigurationWithCustomPropertyName("$type");
-            PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName value = new PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.DerivedClass { Number = 42 };
+            JsonSerializerOptions? options =
+                PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.CreatePolymorphicConfigurationWithCustomPropertyName(
+                    "$type"
+                );
+            PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName value =
+                new PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.DerivedClass
+                {
+                    Number = 42
+                };
 
             string expectedJson = @"{ ""$type"" : ""derivedClass"", ""Number"" : 42 }";
             string actualJson = await Serializer.SerializeWrapper(value, options);
@@ -2355,17 +3392,33 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(@"\t")]
         [InlineData(@"\r\n")]
         [InlineData(@"{ ""lol"" : true }")]
-        public async Task PolymorphicClass_DegenerateCustomPropertyNames_ShouldSucceed(string propertyName)
+        public async Task PolymorphicClass_DegenerateCustomPropertyNames_ShouldSucceed(
+            string propertyName
+        )
         {
-            JsonSerializerOptions? options = PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.CreatePolymorphicConfigurationWithCustomPropertyName(propertyName);
-            PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName value = new PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.DerivedClass { Number = 42 };
+            JsonSerializerOptions? options =
+                PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.CreatePolymorphicConfigurationWithCustomPropertyName(
+                    propertyName
+                );
+            PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName value =
+                new PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.DerivedClass
+                {
+                    Number = 42
+                };
 
-            string expectedJson = @$"{{ ""{JavaScriptEncoder.Default.Encode(propertyName)}"" : ""derivedClass"", ""Number"" : 42 }}";
+            string expectedJson =
+                @$"{{ ""{JavaScriptEncoder.Default.Encode(propertyName)}"" : ""derivedClass"", ""Number"" : 42 }}";
             string actualJson = await Serializer.SerializeWrapper(value, options);
             JsonTestHelper.AssertJsonEqual(expectedJson, actualJson);
 
-            PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName deserializeResult = await Serializer.DeserializeWrapper<PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName>(actualJson, options);
-            Assert.IsType<PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.DerivedClass>(deserializeResult);
+            PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName deserializeResult =
+                await Serializer.DeserializeWrapper<PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName>(
+                    actualJson,
+                    options
+                );
+            Assert.IsType<PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.DerivedClass>(
+                deserializeResult
+            );
         }
 
         [JsonPolymorphic(TypeDiscriminatorPropertyName = "$id")]
@@ -2374,11 +3427,12 @@ namespace System.Text.Json.Serialization.Tests
         {
             public int Number { get; set; }
 
-            public class DerivedClass : PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName
-            {
-            }
+            public class DerivedClass
+                : PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName { }
 
-            public static JsonSerializerOptions? CreatePolymorphicConfigurationWithCustomPropertyName(string customPropertyName)
+            public static JsonSerializerOptions? CreatePolymorphicConfigurationWithCustomPropertyName(
+                string customPropertyName
+            )
             {
                 if (customPropertyName == "$id")
                 {
@@ -2393,8 +3447,7 @@ namespace System.Text.Json.Serialization.Tests
                         new JsonPolymorphicTypeConfiguration<PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName>
                         {
                             TypeDiscriminatorPropertyName = customPropertyName
-                        }
-                        .WithDerivedType<DerivedClass>("derivedClass")
+                        }.WithDerivedType<DerivedClass>("derivedClass")
                     }
                 };
             }
@@ -2427,7 +3480,9 @@ namespace System.Text.Json.Serialization.Tests
                 if (left is IEnumerable leftColl)
                 {
                     IEnumerable rightColl = (IEnumerable)right;
-                    return leftColl.Cast<object>().SequenceEqual(rightColl.Cast<object>(), objComparer);
+                    return leftColl
+                        .Cast<object>()
+                        .SequenceEqual(rightColl.Cast<object>(), objComparer);
                 }
 
                 // Runtime is regular POCO; use property structural comparison

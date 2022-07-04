@@ -49,8 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
             IEditorOptionsFactoryService editorOptionsFactoryService,
             Func<string, string> createReference,
             Func<string, string> createImport,
-            bool buildSucceeds)
-            : base(editorOptionsFactoryService, createReference, createImport)
+            bool buildSucceeds
+        ) : base(editorOptionsFactoryService, createReference, createImport)
         {
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
             _buildSucceeds = buildSucceeds;
@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
             out ImmutableArray<string> sourceSearchPaths,
             out ImmutableArray<string> projectNamespaces,
             out string projectDirectory,
-            out InteractiveHostPlatform? platform)
+            out InteractiveHostPlatform? platform
+        )
         {
             references = References;
             referenceSearchPaths = ReferenceSearchPaths;
@@ -89,7 +90,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
             return _uiThreadOperationExecutor;
         }
 
-        protected override Task<IEnumerable<string>> GetNamespacesToImportAsync(IEnumerable<string> namespacesToImport, IInteractiveWindow interactiveWindow)
+        protected override Task<IEnumerable<string>> GetNamespacesToImportAsync(
+            IEnumerable<string> namespacesToImport,
+            IInteractiveWindow interactiveWindow
+        )
         {
             return Task.FromResult((IEnumerable<string>)NamespacesToImport);
         }

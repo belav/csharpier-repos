@@ -7,11 +7,19 @@ using System.Reflection;
 
 namespace System.Text.Json.Serialization.Converters
 {
-    internal sealed class KeyValuePairConverter<TKey, TValue> :
-        SmallObjectWithParameterizedConstructorConverter<KeyValuePair<TKey, TValue>, TKey, TValue, object, object>
+    internal sealed class KeyValuePairConverter<TKey, TValue>
+        : SmallObjectWithParameterizedConstructorConverter<
+            KeyValuePair<TKey, TValue>,
+            TKey,
+            TValue,
+            object,
+            object
+        >
     {
-        private static readonly ConstructorInfo s_constructorInfo =
-            typeof(KeyValuePair<TKey, TValue>).GetConstructor(new[] { typeof(TKey), typeof(TValue) })!;
+        private static readonly ConstructorInfo s_constructorInfo = typeof(KeyValuePair<
+            TKey,
+            TValue
+        >).GetConstructor(new[] { typeof(TKey), typeof(TValue) })!;
 
         public KeyValuePairConverter()
         {

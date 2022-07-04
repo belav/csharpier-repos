@@ -5,14 +5,10 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class GrpcSqliteTest : GrpcTestBase<GrpcSqliteTest.GrpcSqliteFixture>
 {
-    public GrpcSqliteTest(GrpcSqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+    public GrpcSqliteTest(GrpcSqliteFixture fixture) : base(fixture) { }
 
     public class GrpcSqliteFixture : GrpcFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
     }
 }

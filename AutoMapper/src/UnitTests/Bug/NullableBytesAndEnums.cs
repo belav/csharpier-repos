@@ -23,14 +23,15 @@ namespace AutoMapper.UnitTests.Bug
             public Foo? Value { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Source, Destination>(new Source {Value = 2});
+            _destination = Mapper.Map<Source, Destination>(new Source { Value = 2 });
         }
 
         [Fact]
@@ -54,10 +55,11 @@ namespace AutoMapper.UnitTests.Bug
             public long? Value { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -83,15 +85,17 @@ namespace AutoMapper.UnitTests.Bug
             public short? Value { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>()
-                .ForMember(t => t.Value, opts => opts.MapFrom(s => s.Value > 0 ? s.Value : default(short?)));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(
+                        t => t.Value,
+                        opts => opts.MapFrom(s => s.Value > 0 ? s.Value : default(short?))
+                    );
+            });
 
-        protected override void Because_of()
-        {
-        }
+        protected override void Because_of() { }
 
         [Fact]
         public void Should_map_the_value()

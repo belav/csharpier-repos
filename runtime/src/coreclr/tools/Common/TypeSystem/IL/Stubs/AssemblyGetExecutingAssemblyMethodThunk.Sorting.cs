@@ -14,7 +14,10 @@ namespace Internal.IL.Stubs
         protected override int CompareToImpl(MethodDesc other, TypeSystemComparer comparer)
         {
             var otherMethod = (AssemblyGetExecutingAssemblyMethodThunk)other;
-            return StringComparer.Ordinal.Compare(ExecutingAssembly.GetName().Name, otherMethod.ExecutingAssembly.GetName().Name);
+            return StringComparer.Ordinal.Compare(
+                ExecutingAssembly.GetName().Name,
+                otherMethod.ExecutingAssembly.GetName().Name
+            );
         }
     }
 }

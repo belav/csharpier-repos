@@ -20,9 +20,11 @@ namespace Microsoft.CodeAnalysis
 
         public void VisitWithModel(Lazy<SemanticModel>? model, SyntaxNode node)
         {
-            Debug.Assert(_semanticModel is null
-                         && model is not null
-                         && model.Value.SyntaxTree == node.SyntaxTree);
+            Debug.Assert(
+                _semanticModel is null
+                    && model is not null
+                    && model.Value.SyntaxTree == node.SyntaxTree
+            );
 
             _semanticModel = model;
             Visit(node);
@@ -31,7 +33,9 @@ namespace Microsoft.CodeAnalysis
 
         public override void Visit(SyntaxNode node)
         {
-            Debug.Assert(_semanticModel is object && _semanticModel.Value.SyntaxTree == node.SyntaxTree);
+            Debug.Assert(
+                _semanticModel is object && _semanticModel.Value.SyntaxTree == node.SyntaxTree
+            );
             _syntaxReceiver.OnVisitSyntaxNode(new GeneratorSyntaxContext(node, _semanticModel));
             base.Visit(node);
         }

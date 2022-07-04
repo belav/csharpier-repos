@@ -11,7 +11,9 @@ namespace AutoMapper.UnitTests
         {
             new Action(() =>
             {
-                var c = new MapperConfiguration(cfg => cfg.CreateMap<string, string>().IncludeBase<int, int>());
+                var c = new MapperConfiguration(
+                    cfg => cfg.CreateMap<string, string>().IncludeBase<int, int>()
+                );
             }).ShouldThrowException<ArgumentOutOfRangeException>(ex =>
             {
                 ex.Message.ShouldStartWith($"{typeof(string)} is not derived from {typeof(int)}.");

@@ -15,24 +15,32 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal abstract class AbstractDiagnosticsAdornmentTaggerProvider<TTag> :
-        AbstractDiagnosticsTaggerProvider<TTag>
-        where TTag : class, ITag
+    internal abstract class AbstractDiagnosticsAdornmentTaggerProvider<TTag>
+        : AbstractDiagnosticsTaggerProvider<TTag> where TTag : class, ITag
     {
         protected AbstractDiagnosticsAdornmentTaggerProvider(
             IThreadingContext threadingContext,
             IDiagnosticService diagnosticService,
             IGlobalOptionService globalOptions,
             ITextBufferVisibilityTracker? visibilityTracker,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, diagnosticService, globalOptions, visibilityTracker, listenerProvider.GetListener(FeatureAttribute.ErrorSquiggles))
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                diagnosticService,
+                globalOptions,
+                visibilityTracker,
+                listenerProvider.GetListener(FeatureAttribute.ErrorSquiggles)
+            ) { }
 
         protected internal sealed override bool IsEnabled => true;
 
         protected internal sealed override ITagSpan<TTag>? CreateTagSpan(
-            Workspace workspace, bool isLiveUpdate, SnapshotSpan span, DiagnosticData data)
+            Workspace workspace,
+            bool isLiveUpdate,
+            SnapshotSpan span,
+            DiagnosticData data
+        )
         {
             var errorTag = CreateTag(workspace, data);
             if (errorTag == null)
@@ -60,14 +68,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 var helpLinkUri = diagnostic.GetValidHelpLinkUri();
                 if (helpLinkUri != null)
                 {
-                    navigationAction = new QuickInfoHyperLink(workspace, helpLinkUri).NavigationAction;
+                    navigationAction = new QuickInfoHyperLink(
+                        workspace,
+                        helpLinkUri
+                    ).NavigationAction;
                     tooltip = diagnostic.HelpLink;
                 }
             }
 
             var diagnosticIdTextRun = navigationAction is null
                 ? new ClassifiedTextRun(ClassificationTypeNames.Text, diagnostic.Id)
-                : new ClassifiedTextRun(ClassificationTypeNames.Text, diagnostic.Id, navigationAction, tooltip);
+                : new ClassifiedTextRun(
+                    ClassificationTypeNames.Text,
+                    diagnostic.Id,
+                    navigationAction,
+                    tooltip
+                );
 
             return new ContainerElement(
                 ContainerElementStyle.Wrapped,
@@ -75,13 +91,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     diagnosticIdTextRun,
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
                     new ClassifiedTextRun(ClassificationTypeNames.WhiteSpace, " "),
-                    new ClassifiedTextRun(ClassificationTypeNames.Text, diagnostic.Message)));
+                    new ClassifiedTextRun(ClassificationTypeNames.Text, diagnostic.Message)
+                )
+            );
         }
 
-        protected virtual SnapshotSpan AdjustSnapshotSpan(SnapshotSpan span, int minimumLength)
-            => AdjustSnapshotSpan(span, minimumLength, int.MaxValue);
+        protected virtual SnapshotSpan AdjustSnapshotSpan(SnapshotSpan span, int minimumLength) =>
+            AdjustSnapshotSpan(span, minimumLength, int.MaxValue);
 
-        protected static SnapshotSpan AdjustSnapshotSpan(SnapshotSpan span, int minimumLength, int maximumLength)
+        protected static SnapshotSpan AdjustSnapshotSpan(
+            SnapshotSpan span,
+            int minimumLength,
+            int maximumLength
+        )
         {
             var snapshot = span.Snapshot;
 
@@ -92,7 +114,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var start = Math.Max(0, Math.Min(span.Start, snapshot.Length - length));
 
             // make sure length is smaller than snapshot.Length which can happen if start == 0
-            return new SnapshotSpan(snapshot, start, Math.Min(start + length, snapshot.Length) - start);
+            return new SnapshotSpan(
+                snapshot,
+                start,
+                Math.Min(start + length, snapshot.Length) - start
+            );
         }
 
         protected abstract TTag? CreateTag(Workspace workspace, DiagnosticData diagnostic);

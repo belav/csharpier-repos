@@ -27,10 +27,10 @@ namespace System
 
     public enum GCNotificationStatus
     {
-        Succeeded     = 0,
-        Failed        = 1,
-        Canceled      = 2,
-        Timeout       = 3,
+        Succeeded = 0,
+        Failed = 1,
+        Canceled = 2,
+        Timeout = 3,
         NotApplicable = 4
     }
 
@@ -117,11 +117,19 @@ namespace System
             Collect(generation, mode, blocking, false);
         }
 
-        public static void Collect(int generation, GCCollectionMode mode, bool blocking, bool compacting)
+        public static void Collect(
+            int generation,
+            GCCollectionMode mode,
+            bool blocking,
+            bool compacting
+        )
         {
             if (generation < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(generation), SR.ArgumentOutOfRange_GenericPositive);
+                throw new ArgumentOutOfRangeException(
+                    nameof(generation),
+                    SR.ArgumentOutOfRange_GenericPositive
+                );
             }
 
             if ((mode < GCCollectionMode.Default) || (mode > GCCollectionMode.Optimized))
@@ -163,25 +171,35 @@ namespace System
         /// should be raised based on the objects allocated in the large object heap.</param>
         /// <exception cref="ArgumentOutOfRangeException">If either of the two arguments are not between 1 and 99</exception>
         /// <exception cref="InvalidOperationException">If Concurrent GC is enabled</exception>"
-        public static void RegisterForFullGCNotification(int maxGenerationThreshold, int largeObjectHeapThreshold)
+        public static void RegisterForFullGCNotification(
+            int maxGenerationThreshold,
+            int largeObjectHeapThreshold
+        )
         {
             if (maxGenerationThreshold < 1 || maxGenerationThreshold > 99)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(maxGenerationThreshold),
-                    string.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 1, 99));
+                    string.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 1, 99)
+                );
             }
 
             if (largeObjectHeapThreshold < 1 || largeObjectHeapThreshold > 99)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(largeObjectHeapThreshold),
-                    string.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 1, 99));
+                    string.Format(SR.ArgumentOutOfRange_Bounds_Lower_Upper, 1, 99)
+                );
             }
 
             // This is not documented on MSDN, but CoreCLR throws when the GC's
             // RegisterForFullGCNotification returns false
-            if (!RuntimeImports.RhRegisterForFullGCNotification(maxGenerationThreshold, largeObjectHeapThreshold))
+            if (
+                !RuntimeImports.RhRegisterForFullGCNotification(
+                    maxGenerationThreshold,
+                    largeObjectHeapThreshold
+                )
+            )
             {
                 throw new InvalidOperationException(SR.InvalidOperation_NotWithConcurrentGC);
             }
@@ -209,10 +227,12 @@ namespace System
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(millisecondsTimeout),
-                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1);
+                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1
+                );
             }
 
-            return (GCNotificationStatus)RuntimeImports.RhWaitForFullGCApproach(millisecondsTimeout);
+            return (GCNotificationStatus)
+                RuntimeImports.RhWaitForFullGCApproach(millisecondsTimeout);
         }
 
         /// <summary>
@@ -237,10 +257,12 @@ namespace System
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(millisecondsTimeout),
-                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1);
+                    SR.ArgumentOutOfRange_NeedNonNegOrNegative1
+                );
             }
 
-            return (GCNotificationStatus)RuntimeImports.RhWaitForFullGCComplete(millisecondsTimeout);
+            return (GCNotificationStatus)
+                RuntimeImports.RhWaitForFullGCComplete(millisecondsTimeout);
         }
 
         /// <summary>
@@ -315,18 +337,28 @@ namespace System
         /// <exception cref="ArgumentOutOfRangeException">If the amount of memory requested
         /// is too large for the GC to accomodate</exception>
         /// <exception cref="InvalidOperationException">If the GC is already in a NoGCRegion</exception>
-        public static bool TryStartNoGCRegion(long totalSize, long lohSize, bool disallowFullBlockingGC)
+        public static bool TryStartNoGCRegion(
+            long totalSize,
+            long lohSize,
+            bool disallowFullBlockingGC
+        )
         {
             return StartNoGCRegionWorker(totalSize, true, lohSize, disallowFullBlockingGC);
         }
 
-        private static bool StartNoGCRegionWorker(long totalSize, bool hasLohSize, long lohSize, bool disallowFullBlockingGC)
+        private static bool StartNoGCRegionWorker(
+            long totalSize,
+            bool hasLohSize,
+            long lohSize,
+            bool disallowFullBlockingGC
+        )
         {
             if (totalSize <= 0)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(totalSize),
-                    SR.Format(SR.ArgumentOutOfRange_MustBePositive, nameof(totalSize)));
+                    SR.Format(SR.ArgumentOutOfRange_MustBePositive, nameof(totalSize))
+                );
             }
 
             if (hasLohSize)
@@ -335,25 +367,39 @@ namespace System
                 {
                     throw new ArgumentOutOfRangeException(
                         nameof(lohSize),
-                        SR.Format(SR.ArgumentOutOfRange_MustBePositive, nameof(lohSize)));
+                        SR.Format(SR.ArgumentOutOfRange_MustBePositive, nameof(lohSize))
+                    );
                 }
 
                 if (lohSize > totalSize)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(lohSize), SR.ArgumentOutOfRange_NoGCLohSizeGreaterTotalSize);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(lohSize),
+                        SR.ArgumentOutOfRange_NoGCLohSizeGreaterTotalSize
+                    );
                 }
             }
 
-            StartNoGCRegionStatus status =
-                (StartNoGCRegionStatus)RuntimeImports.RhStartNoGCRegion(totalSize, hasLohSize, lohSize, disallowFullBlockingGC);
+            StartNoGCRegionStatus status = (StartNoGCRegionStatus)
+                RuntimeImports.RhStartNoGCRegion(
+                    totalSize,
+                    hasLohSize,
+                    lohSize,
+                    disallowFullBlockingGC
+                );
             switch (status)
             {
                 case StartNoGCRegionStatus.NotEnoughMemory:
                     return false;
                 case StartNoGCRegionStatus.AlreadyInProgress:
-                    throw new InvalidOperationException(SR.InvalidOperationException_AlreadyInNoGCRegion);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperationException_AlreadyInNoGCRegion
+                    );
                 case StartNoGCRegionStatus.AmountTooLarge:
-                    throw new ArgumentOutOfRangeException(nameof(totalSize), SR.ArgumentOutOfRangeException_NoGCRegionSizeTooLarge);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(totalSize),
+                        SR.ArgumentOutOfRangeException_NoGCRegionSizeTooLarge
+                    );
             }
 
             Debug.Assert(status == StartNoGCRegionStatus.Succeeded);
@@ -373,17 +419,18 @@ namespace System
             if (status == EndNoGCRegionStatus.NotInProgress)
             {
                 throw new InvalidOperationException(
-                    SR.InvalidOperationException_NoGCRegionNotInProgress);
+                    SR.InvalidOperationException_NoGCRegionNotInProgress
+                );
             }
             else if (status == EndNoGCRegionStatus.GCInduced)
             {
-                throw new InvalidOperationException(
-                    SR.InvalidOperationException_NoGCRegionInduced);
+                throw new InvalidOperationException(SR.InvalidOperationException_NoGCRegionInduced);
             }
             else if (status == EndNoGCRegionStatus.AllocationExceeded)
             {
                 throw new InvalidOperationException(
-                    SR.InvalidOperationException_NoGCRegionAllocationExceeded);
+                    SR.InvalidOperationException_NoGCRegionAllocationExceeded
+                );
             }
         }
 
@@ -413,9 +460,7 @@ namespace System
 
         [Intrinsic]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // disable optimizations
-        public static void KeepAlive(object? obj)
-        {
-        }
+        public static void KeepAlive(object? obj) { }
 
         // Returns the maximum GC generation.  Currently assumes only 1 heap.
         //
@@ -427,7 +472,10 @@ namespace System
         public static int CollectionCount(int generation)
         {
             if (generation < 0)
-                throw new ArgumentOutOfRangeException(nameof(generation), SR.ArgumentOutOfRange_GenericPositive);
+                throw new ArgumentOutOfRangeException(
+                    nameof(generation),
+                    SR.ArgumentOutOfRange_GenericPositive
+                );
 
             return RuntimeImports.RhGetGcCollectionCount(generation, false);
         }
@@ -484,7 +532,9 @@ namespace System
                 {
                     newMemValue = long.MaxValue;
                 }
-            } while (Interlocked.CompareExchange(ref pAugend, newMemValue, oldMemValue) != oldMemValue);
+            } while (
+                Interlocked.CompareExchange(ref pAugend, newMemValue, oldMemValue) != oldMemValue
+            );
 
             return newMemValue;
         }
@@ -510,15 +560,19 @@ namespace System
         {
             if (bytesAllocated <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bytesAllocated),
-                        SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytesAllocated),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             }
 
 #if !TARGET_64BIT
             if (bytesAllocated > int.MaxValue)
             {
-                throw new ArgumentOutOfRangeException(nameof(bytesAllocated),
-                        SR.ArgumentOutOfRange_MustBeNonNegInt32);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytesAllocated),
+                    SR.ArgumentOutOfRange_MustBeNonNegInt32
+                );
             }
 #endif
 
@@ -526,16 +580,29 @@ namespace System
             uint p = s_iteration % PressureCount;
             long newMemValue = InterlockedAddMemoryPressure(ref s_addPressure[p], bytesAllocated);
 
-            Debug.Assert(PressureCount == 4, "GC.AddMemoryPressure contains unrolled loops which depend on the PressureCount");
+            Debug.Assert(
+                PressureCount == 4,
+                "GC.AddMemoryPressure contains unrolled loops which depend on the PressureCount"
+            );
 
             if (newMemValue >= MinGCMemoryPressureBudget)
             {
-                long add = s_addPressure[0] + s_addPressure[1] + s_addPressure[2] + s_addPressure[3] - s_addPressure[p];
-                long rem = s_removePressure[0] + s_removePressure[1] + s_removePressure[2] + s_removePressure[3] - s_removePressure[p];
+                long add =
+                    s_addPressure[0]
+                    + s_addPressure[1]
+                    + s_addPressure[2]
+                    + s_addPressure[3]
+                    - s_addPressure[p];
+                long rem =
+                    s_removePressure[0]
+                    + s_removePressure[1]
+                    + s_removePressure[2]
+                    + s_removePressure[3]
+                    - s_removePressure[p];
 
                 long budget = MinGCMemoryPressureBudget;
 
-                if (s_iteration >= PressureCount)  // wait until we have enough data points
+                if (s_iteration >= PressureCount) // wait until we have enough data points
                 {
                     // Adjust according to effectiveness of GC
                     // Scale budget according to past m_addPressure / m_remPressure ratio
@@ -557,7 +624,7 @@ namespace System
                 {
                     long heapOver3 = RuntimeImports.RhGetCurrentObjSize() / 3;
 
-                    if (budget < heapOver3)  //Max
+                    if (budget < heapOver3) //Max
                     {
                         budget = heapOver3;
                     }
@@ -565,7 +632,10 @@ namespace System
                     if (newMemValue >= budget)
                     {
                         // last check - if we would exceed 20% of GC "duty cycle", do not trigger GC at this time
-                        if ((RuntimeImports.RhGetGCNow() - RuntimeImports.RhGetLastGCStartTime(2)) > (RuntimeImports.RhGetLastGCDuration(2) * 5))
+                        if (
+                            (RuntimeImports.RhGetGCNow() - RuntimeImports.RhGetLastGCStartTime(2))
+                            > (RuntimeImports.RhGetLastGCDuration(2) * 5)
+                        )
                         {
                             RuntimeImports.RhCollect(2, InternalGCCollectionMode.NonBlocking);
                             CheckCollectionCount();
@@ -579,15 +649,19 @@ namespace System
         {
             if (bytesAllocated <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bytesAllocated),
-                        SR.ArgumentOutOfRange_NeedPosNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytesAllocated),
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             }
 
 #if !TARGET_64BIT
             if (bytesAllocated > int.MaxValue)
             {
-                throw new ArgumentOutOfRangeException(nameof(bytesAllocated),
-                        SR.ArgumentOutOfRange_MustBeNonNegInt32);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytesAllocated),
+                    SR.ArgumentOutOfRange_MustBeNonNegInt32
+                );
             }
 #endif
 
@@ -607,7 +681,7 @@ namespace System
                 // The value is "stable" when either the value is within 5% of the
                 // previous call to GetTotalMemory, or if we have been sitting
                 // here for more than x times (we don't want to loop forever here).
-                int reps = 20;  // Number of iterations
+                int reps = 20; // Number of iterations
 
                 long diff;
 
@@ -619,8 +693,7 @@ namespace System
                     long newSize = RuntimeImports.RhGetGcTotalMemory();
                     diff = (newSize - size) * 100 / size;
                     size = newSize;
-                }
-                while (reps-- > 0 && !(-5 < diff && diff < 5));
+                } while (reps-- > 0 && !(-5 < diff && diff < 5));
             }
 
             return size;
@@ -643,7 +716,9 @@ namespace System
 
         public static long GetTotalAllocatedBytes(bool precise = false)
         {
-            return precise ? RuntimeImports.RhGetTotalAllocatedBytesPrecise() : RuntimeImports.RhGetTotalAllocatedBytes();
+            return precise
+                ? RuntimeImports.RhGetTotalAllocatedBytesPrecise()
+                : RuntimeImports.RhGetTotalAllocatedBytes();
         }
 
         /// <summary>Gets garbage collection memory information.</summary>
@@ -657,11 +732,14 @@ namespace System
         {
             if ((kind < GCKind.Any) || (kind > GCKind.Background))
             {
-                throw new ArgumentOutOfRangeException(nameof(kind),
-                                      SR.Format(
-                                          SR.ArgumentOutOfRange_Bounds_Lower_Upper,
-                                          GCKind.Any,
-                                          GCKind.Background));
+                throw new ArgumentOutOfRangeException(
+                    nameof(kind),
+                    SR.Format(
+                        SR.ArgumentOutOfRange_Bounds_Lower_Upper,
+                        GCKind.Any,
+                        GCKind.Background
+                    )
+                );
             }
 
             var data = new GCMemoryInfoData();
@@ -720,7 +798,12 @@ namespace System
                     throw new OverflowException();
 
                 T[]? array = null;
-                RuntimeImports.RhAllocateNewArray(EETypePtr.EETypePtrOf<T[]>().RawValue, (uint)length, (uint)flags, Unsafe.AsPointer(ref array));
+                RuntimeImports.RhAllocateNewArray(
+                    EETypePtr.EETypePtrOf<T[]>().RawValue,
+                    (uint)length,
+                    (uint)flags,
+                    Unsafe.AsPointer(ref array)
+                );
                 if (array == null)
                     throw new OutOfMemoryException();
 
@@ -753,7 +836,12 @@ namespace System
                 throw new OverflowException();
 
             T[]? array = null;
-            RuntimeImports.RhAllocateNewArray(EETypePtr.EETypePtrOf<T[]>().RawValue, (uint)length, (uint)flags, Unsafe.AsPointer(ref array));
+            RuntimeImports.RhAllocateNewArray(
+                EETypePtr.EETypePtrOf<T[]>().RawValue,
+                (uint)length,
+                (uint)flags,
+                Unsafe.AsPointer(ref array)
+            );
             if (array == null)
                 throw new OutOfMemoryException();
 

@@ -55,8 +55,14 @@ namespace System.Net.WebSockets.Compression
 
             while (true)
             {
-                DeflatePrivate(payload, _buffer.AsSpan(position), endOfMessage,
-                    out int consumed, out int written, out bool needsMoreOutput);
+                DeflatePrivate(
+                    payload,
+                    _buffer.AsSpan(position),
+                    endOfMessage,
+                    out int consumed,
+                    out int written,
+                    out bool needsMoreOutput
+                );
                 position += written;
 
                 if (!needsMoreOutput)
@@ -80,8 +86,14 @@ namespace System.Net.WebSockets.Compression
             return new ReadOnlySpan<byte>(_buffer, 0, position);
         }
 
-        private void DeflatePrivate(ReadOnlySpan<byte> payload, Span<byte> output, bool endOfMessage,
-            out int consumed, out int written, out bool needsMoreOutput)
+        private void DeflatePrivate(
+            ReadOnlySpan<byte> payload,
+            Span<byte> output,
+            bool endOfMessage,
+            out int consumed,
+            out int written,
+            out bool needsMoreOutput
+        )
         {
             _stream ??= CreateDeflater();
 
@@ -107,8 +119,15 @@ namespace System.Net.WebSockets.Compression
             {
                 return;
             }
-            Debug.Assert(output.Slice(written - WebSocketInflater.FlushMarkerLength, WebSocketInflater.FlushMarkerLength)
-                               .EndsWith(WebSocketInflater.FlushMarker), "The deflated block must always end with a flush marker.");
+            Debug.Assert(
+                output
+                    .Slice(
+                        written - WebSocketInflater.FlushMarkerLength,
+                        WebSocketInflater.FlushMarkerLength
+                    )
+                    .EndsWith(WebSocketInflater.FlushMarker),
+                "The deflated block must always end with a flush marker."
+            );
 
             if (endOfMessage)
             {
@@ -123,7 +142,13 @@ namespace System.Net.WebSockets.Compression
             }
         }
 
-        private unsafe void UnsafeDeflate(ReadOnlySpan<byte> input, Span<byte> output, out int consumed, out int written, out bool needsMoreBuffer)
+        private unsafe void UnsafeDeflate(
+            ReadOnlySpan<byte> input,
+            Span<byte> output,
+            out int consumed,
+            out int written,
+            out bool needsMoreBuffer
+        )
         {
             Debug.Assert(_stream is not null);
 
@@ -148,7 +173,8 @@ namespace System.Net.WebSockets.Compression
                 // exhausted the output buffer because after deflating we're
                 // always going to issue a flush and a flush with empty output
                 // is going to throw.
-                needsMoreBuffer = errorCode == ErrorCode.BufError
+                needsMoreBuffer =
+                    errorCode == ErrorCode.BufError
                     || _stream.AvailIn > 0
                     || written == output.Length;
             }
@@ -202,9 +228,10 @@ namespace System.Net.WebSockets.Compression
                 return errorCode;
             }
 
-            string message = errorCode == ErrorCode.StreamError
-                ? SR.ZLibErrorInconsistentStream
-                : string.Format(SR.ZLibErrorUnexpected, (int)errorCode);
+            string message =
+                errorCode == ErrorCode.StreamError
+                    ? SR.ZLibErrorInconsistentStream
+                    : string.Format(SR.ZLibErrorUnexpected, (int)errorCode);
             throw new WebSocketException(message);
         }
 
@@ -214,11 +241,13 @@ namespace System.Net.WebSockets.Compression
             ErrorCode errorCode;
             try
             {
-                errorCode = CreateZLibStreamForDeflate(out stream,
+                errorCode = CreateZLibStreamForDeflate(
+                    out stream,
                     level: CompressionLevel.DefaultCompression,
                     windowBits: _windowBits,
                     memLevel: Deflate_DefaultMemLevel,
-                    strategy: CompressionStrategy.DefaultStrategy);
+                    strategy: CompressionStrategy.DefaultStrategy
+                );
             }
             catch (Exception cause)
             {
@@ -232,9 +261,10 @@ namespace System.Net.WebSockets.Compression
 
             stream.Dispose();
 
-            string message = errorCode == ErrorCode.MemError
-                ? SR.ZLibErrorNotEnoughMemory
-                : string.Format(SR.ZLibErrorUnexpected, (int)errorCode);
+            string message =
+                errorCode == ErrorCode.MemError
+                    ? SR.ZLibErrorNotEnoughMemory
+                    : string.Format(SR.ZLibErrorUnexpected, (int)errorCode);
             throw new WebSocketException(message);
         }
     }

@@ -86,7 +86,8 @@ public class FilterCollection : Collection<IFilterMetadata>
         {
             var message = Resources.FormatTypeMustDeriveFromType(
                 filterType.FullName,
-                typeof(IFilterMetadata).FullName);
+                typeof(IFilterMetadata).FullName
+            );
             throw new ArgumentException(message, nameof(filterType));
         }
 
@@ -170,7 +171,8 @@ public class FilterCollection : Collection<IFilterMetadata>
         {
             var message = Resources.FormatTypeMustDeriveFromType(
                 filterType.FullName,
-                typeof(IFilterMetadata).FullName);
+                typeof(IFilterMetadata).FullName
+            );
             throw new ArgumentException(message, nameof(filterType));
         }
 

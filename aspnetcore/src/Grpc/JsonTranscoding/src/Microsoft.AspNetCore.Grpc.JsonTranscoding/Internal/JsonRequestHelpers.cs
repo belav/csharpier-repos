@@ -57,14 +57,22 @@ internal static class JsonRequestHelpers
         return false;
     }
 
-    public static (Stream stream, bool usesTranscodingStream) GetStream(Stream innerStream, Encoding? encoding)
+    public static (Stream stream, bool usesTranscodingStream) GetStream(
+        Stream innerStream,
+        Encoding? encoding
+    )
     {
         if (encoding == null || encoding.CodePage == Encoding.UTF8.CodePage)
         {
             return (innerStream, false);
         }
 
-        var stream = Encoding.CreateTranscodingStream(innerStream, encoding, Encoding.UTF8, leaveOpen: true);
+        var stream = Encoding.CreateTranscodingStream(
+            innerStream,
+            encoding,
+            Encoding.UTF8,
+            leaveOpen: true
+        );
         return (stream, true);
     }
 
@@ -84,11 +92,19 @@ internal static class JsonRequestHelpers
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException($"Unable to read the request as JSON because the request content type charset '{charset}' is not a known encoding.", ex);
+            throw new InvalidOperationException(
+                $"Unable to read the request as JSON because the request content type charset '{charset}' is not a known encoding.",
+                ex
+            );
         }
     }
 
-    public static async ValueTask SendErrorResponse(HttpResponse response, Encoding encoding, Status status, JsonSerializerOptions options)
+    public static async ValueTask SendErrorResponse(
+        HttpResponse response,
+        Encoding encoding,
+        Status status,
+        JsonSerializerOptions options
+    )
     {
         if (!response.HasStarted)
         {
@@ -150,7 +166,13 @@ internal static class JsonRequestHelpers
         return StatusCodes.Status500InternalServerError;
     }
 
-    public static async ValueTask WriteResponseMessage(HttpResponse response, Encoding encoding, object responseBody, JsonSerializerOptions options, CancellationToken cancellationToken)
+    public static async ValueTask WriteResponseMessage(
+        HttpResponse response,
+        Encoding encoding,
+        object responseBody,
+        JsonSerializerOptions options,
+        CancellationToken cancellationToken
+    )
     {
         var (stream, usesTranscodingStream) = GetStream(response.Body, encoding);
 
@@ -167,7 +189,10 @@ internal static class JsonRequestHelpers
         }
     }
 
-    public static async ValueTask<TRequest> ReadMessage<TRequest>(JsonTranscodingServerCallContext serverCallContext, JsonSerializerOptions serializerOptions) where TRequest : class
+    public static async ValueTask<TRequest> ReadMessage<TRequest>(
+        JsonTranscodingServerCallContext serverCallContext,
+        JsonSerializerOptions serializerOptions
+    ) where TRequest : class
     {
         try
         {
@@ -179,7 +204,10 @@ internal static class JsonRequestHelpers
                 Type type;
                 object bodyContent;
 
-                if (serverCallContext.DescriptorInfo.BodyDescriptor.FullName == HttpBody.Descriptor.FullName)
+                if (
+                    serverCallContext.DescriptorInfo.BodyDescriptor.FullName
+                    == HttpBody.Descriptor.FullName
+                )
                 {
                     type = typeof(HttpBody);
 
@@ -189,11 +217,19 @@ internal static class JsonRequestHelpers
                 {
                     if (!serverCallContext.IsJsonRequestContent)
                     {
-                        GrpcServerLog.UnsupportedRequestContentType(serverCallContext.Logger, serverCallContext.HttpContext.Request.ContentType);
-                        throw new InvalidOperationException($"Unable to read the request as JSON because the request content type '{serverCallContext.HttpContext.Request.ContentType}' is not a known JSON content type.");
+                        GrpcServerLog.UnsupportedRequestContentType(
+                            serverCallContext.Logger,
+                            serverCallContext.HttpContext.Request.ContentType
+                        );
+                        throw new InvalidOperationException(
+                            $"Unable to read the request as JSON because the request content type '{serverCallContext.HttpContext.Request.ContentType}' is not a known JSON content type."
+                        );
                     }
 
-                    var (stream, usesTranscodingStream) = GetStream(serverCallContext.HttpContext.Request.Body, serverCallContext.RequestEncoding);
+                    var (stream, usesTranscodingStream) = GetStream(
+                        serverCallContext.HttpContext.Request.Body,
+                        serverCallContext.RequestEncoding
+                    );
 
                     try
                     {
@@ -203,16 +239,26 @@ internal static class JsonRequestHelpers
 
                             // TODO: JsonSerializer currently doesn't support deserializing values onto an existing object or collection.
                             // Either update this to use new functionality in JsonSerializer or improve work-around perf.
-                            type = JsonConverterHelper.GetFieldType(serverCallContext.DescriptorInfo.BodyFieldDescriptors.Last());
+                            type = JsonConverterHelper.GetFieldType(
+                                serverCallContext.DescriptorInfo.BodyFieldDescriptors.Last()
+                            );
                             type = typeof(List<>).MakeGenericType(type);
 
                             GrpcServerLog.DeserializingMessage(serverCallContext.Logger, type);
 
-                            bodyContent = (await JsonSerializer.DeserializeAsync(stream, type, serializerOptions))!;
+                            bodyContent = (
+                                await JsonSerializer.DeserializeAsync(
+                                    stream,
+                                    type,
+                                    serializerOptions
+                                )
+                            )!;
 
                             if (bodyContent == null)
                             {
-                                throw new InvalidOperationException($"Unable to deserialize null to {type.Name}.");
+                                throw new InvalidOperationException(
+                                    $"Unable to deserialize null to {type.Name}."
+                                );
                             }
                         }
                         else
@@ -220,7 +266,14 @@ internal static class JsonRequestHelpers
                             type = serverCallContext.DescriptorInfo.BodyDescriptor.ClrType;
 
                             GrpcServerLog.DeserializingMessage(serverCallContext.Logger, type);
-                            bodyContent = (IMessage)(await JsonSerializer.DeserializeAsync(stream, serverCallContext.DescriptorInfo.BodyDescriptor.ClrType, serializerOptions))!;
+                            bodyContent = (IMessage)
+                                (
+                                    await JsonSerializer.DeserializeAsync(
+                                        stream,
+                                        serverCallContext.DescriptorInfo.BodyDescriptor.ClrType,
+                                        serializerOptions
+                                    )
+                                )!;
                         }
                     }
                     finally
@@ -235,13 +288,19 @@ internal static class JsonRequestHelpers
                 if (serverCallContext.DescriptorInfo.BodyFieldDescriptors != null)
                 {
                     requestMessage = (IMessage)Activator.CreateInstance<TRequest>();
-                    ServiceDescriptorHelpers.RecursiveSetValue(requestMessage, serverCallContext.DescriptorInfo.BodyFieldDescriptors, bodyContent); // TODO - check nullability
+                    ServiceDescriptorHelpers.RecursiveSetValue(
+                        requestMessage,
+                        serverCallContext.DescriptorInfo.BodyFieldDescriptors,
+                        bodyContent
+                    ); // TODO - check nullability
                 }
                 else
                 {
                     if (bodyContent == null)
                     {
-                        throw new InvalidOperationException($"Unable to deserialize null to {type.Name}.");
+                        throw new InvalidOperationException(
+                            $"Unable to deserialize null to {type.Name}."
+                        );
                     }
 
                     requestMessage = (IMessage)bodyContent;
@@ -252,12 +311,22 @@ internal static class JsonRequestHelpers
                 requestMessage = (IMessage)Activator.CreateInstance<TRequest>();
             }
 
-            foreach (var parameterDescriptor in serverCallContext.DescriptorInfo.RouteParameterDescriptors)
+            foreach (
+                var parameterDescriptor in serverCallContext
+                    .DescriptorInfo
+                    .RouteParameterDescriptors
+            )
             {
-                var routeValue = serverCallContext.HttpContext.Request.RouteValues[parameterDescriptor.Key];
+                var routeValue = serverCallContext.HttpContext.Request.RouteValues[
+                    parameterDescriptor.Key
+                ];
                 if (routeValue != null)
                 {
-                    ServiceDescriptorHelpers.RecursiveSetValue(requestMessage, parameterDescriptor.Value, routeValue);
+                    ServiceDescriptorHelpers.RecursiveSetValue(
+                        requestMessage,
+                        parameterDescriptor.Value,
+                        routeValue
+                    );
                 }
             }
 
@@ -265,12 +334,20 @@ internal static class JsonRequestHelpers
             {
                 if (CanBindQueryStringVariable(serverCallContext, item.Key))
                 {
-                    var pathDescriptors = GetPathDescriptors(serverCallContext, requestMessage, item.Key);
+                    var pathDescriptors = GetPathDescriptors(
+                        serverCallContext,
+                        requestMessage,
+                        item.Key
+                    );
 
                     if (pathDescriptors != null)
                     {
                         var value = item.Value.Count == 1 ? (object?)item.Value[0] : item.Value;
-                        ServiceDescriptorHelpers.RecursiveSetValue(requestMessage, pathDescriptors, value);
+                        ServiceDescriptorHelpers.RecursiveSetValue(
+                            requestMessage,
+                            pathDescriptors,
+                            value
+                        );
                     }
                 }
             }
@@ -281,7 +358,13 @@ internal static class JsonRequestHelpers
         catch (JsonException ex)
         {
             GrpcServerLog.ErrorReadingMessage(serverCallContext.Logger, ex);
-            throw new RpcException(new Status(StatusCode.InvalidArgument, "Request JSON payload is not correctly formatted.", ex));
+            throw new RpcException(
+                new Status(
+                    StatusCode.InvalidArgument,
+                    "Request JSON payload is not correctly formatted.",
+                    ex
+                )
+            );
         }
         catch (Exception ex)
         {
@@ -290,23 +373,34 @@ internal static class JsonRequestHelpers
         }
     }
 
-    private static async ValueTask<IMessage> ReadHttpBodyAsync(JsonTranscodingServerCallContext serverCallContext)
+    private static async ValueTask<IMessage> ReadHttpBodyAsync(
+        JsonTranscodingServerCallContext serverCallContext
+    )
     {
-        var httpBody = (IMessage)Activator.CreateInstance(serverCallContext.DescriptorInfo.BodyDescriptor!.ClrType)!;
+        var httpBody = (IMessage)
+            Activator.CreateInstance(serverCallContext.DescriptorInfo.BodyDescriptor!.ClrType)!;
 
         var contentType = serverCallContext.HttpContext.Request.ContentType;
         if (contentType != null)
         {
-            httpBody.Descriptor.Fields[HttpBody.ContentTypeFieldNumber].Accessor.SetValue(httpBody, contentType);
+            httpBody.Descriptor.Fields[HttpBody.ContentTypeFieldNumber].Accessor.SetValue(
+                httpBody,
+                contentType
+            );
         }
 
         var data = await ReadDataAsync(serverCallContext);
-        httpBody.Descriptor.Fields[HttpBody.DataFieldNumber].Accessor.SetValue(httpBody, UnsafeByteOperations.UnsafeWrap(data));
+        httpBody.Descriptor.Fields[HttpBody.DataFieldNumber].Accessor.SetValue(
+            httpBody,
+            UnsafeByteOperations.UnsafeWrap(data)
+        );
 
         return httpBody;
     }
 
-    private static async ValueTask<byte[]> ReadDataAsync(JsonTranscodingServerCallContext serverCallContext)
+    private static async ValueTask<byte[]> ReadDataAsync(
+        JsonTranscodingServerCallContext serverCallContext
+    )
     {
         // Buffer to disk if content is larger than 30Kb.
         // Based on value in XmlSerializer and NewtonsoftJson input formatters.
@@ -320,7 +414,10 @@ internal static class JsonRequestHelpers
             memoryThreshold = (int)contentLength;
         }
 
-        using var fs = new FileBufferingReadStream(serverCallContext.HttpContext.Request.Body, memoryThreshold);
+        using var fs = new FileBufferingReadStream(
+            serverCallContext.HttpContext.Request.Body,
+            memoryThreshold
+        );
 
         // Read the request body into buffer.
         // No explicit cancellation token. Request body uses underlying request aborted token.
@@ -334,16 +431,32 @@ internal static class JsonRequestHelpers
         return data;
     }
 
-    private static List<FieldDescriptor>? GetPathDescriptors(JsonTranscodingServerCallContext serverCallContext, IMessage requestMessage, string path)
+    private static List<FieldDescriptor>? GetPathDescriptors(
+        JsonTranscodingServerCallContext serverCallContext,
+        IMessage requestMessage,
+        string path
+    )
     {
-        return serverCallContext.DescriptorInfo.PathDescriptorsCache.GetOrAdd(path, p =>
-        {
-            ServiceDescriptorHelpers.TryResolveDescriptors(requestMessage.Descriptor, p, out var pathDescriptors);
-            return pathDescriptors;
-        });
+        return serverCallContext.DescriptorInfo.PathDescriptorsCache.GetOrAdd(
+            path,
+            p =>
+            {
+                ServiceDescriptorHelpers.TryResolveDescriptors(
+                    requestMessage.Descriptor,
+                    p,
+                    out var pathDescriptors
+                );
+                return pathDescriptors;
+            }
+        );
     }
 
-    public static async ValueTask SendMessage<TResponse>(JsonTranscodingServerCallContext serverCallContext, JsonSerializerOptions serializerOptions, TResponse message, CancellationToken cancellationToken) where TResponse : class
+    public static async ValueTask SendMessage<TResponse>(
+        JsonTranscodingServerCallContext serverCallContext,
+        JsonSerializerOptions serializerOptions,
+        TResponse message,
+        CancellationToken cancellationToken
+    ) where TResponse : class
     {
         var response = serverCallContext.HttpContext.Response;
 
@@ -357,8 +470,13 @@ internal static class JsonRequestHelpers
             if (serverCallContext.DescriptorInfo.ResponseBodyDescriptor != null)
             {
                 // TODO: Support recursive response body?
-                responseBody = serverCallContext.DescriptorInfo.ResponseBodyDescriptor.Accessor.GetValue((IMessage)message);
-                responseType = JsonConverterHelper.GetFieldType(serverCallContext.DescriptorInfo.ResponseBodyDescriptor);
+                responseBody =
+                    serverCallContext.DescriptorInfo.ResponseBodyDescriptor.Accessor.GetValue(
+                        (IMessage)message
+                    );
+                responseType = JsonConverterHelper.GetFieldType(
+                    serverCallContext.DescriptorInfo.ResponseBodyDescriptor
+                );
             }
             else
             {
@@ -366,7 +484,13 @@ internal static class JsonRequestHelpers
                 responseType = message.GetType();
             }
 
-            await JsonRequestHelpers.WriteResponseMessage(response, serverCallContext.RequestEncoding, responseBody, serializerOptions, cancellationToken);
+            await JsonRequestHelpers.WriteResponseMessage(
+                response,
+                serverCallContext.RequestEncoding,
+                responseBody,
+                serializerOptions,
+                cancellationToken
+            );
 
             GrpcServerLog.SerializedMessage(serverCallContext.Logger, responseType);
             GrpcServerLog.MessageSent(serverCallContext.Logger);
@@ -378,11 +502,17 @@ internal static class JsonRequestHelpers
         }
     }
 
-    private static bool CanBindQueryStringVariable(JsonTranscodingServerCallContext serverCallContext, string variable)
+    private static bool CanBindQueryStringVariable(
+        JsonTranscodingServerCallContext serverCallContext,
+        string variable
+    )
     {
         if (serverCallContext.DescriptorInfo.BodyDescriptor != null)
         {
-            if (serverCallContext.DescriptorInfo.BodyFieldDescriptors == null || serverCallContext.DescriptorInfo.BodyFieldDescriptors.Count == 0)
+            if (
+                serverCallContext.DescriptorInfo.BodyFieldDescriptors == null
+                || serverCallContext.DescriptorInfo.BodyFieldDescriptors.Count == 0
+            )
             {
                 return false;
             }
@@ -392,7 +522,12 @@ internal static class JsonRequestHelpers
                 return false;
             }
 
-            if (variable.StartsWith(serverCallContext.DescriptorInfo.BodyFieldDescriptorsPath!, StringComparison.Ordinal))
+            if (
+                variable.StartsWith(
+                    serverCallContext.DescriptorInfo.BodyFieldDescriptorsPath!,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 return false;
             }

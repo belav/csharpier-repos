@@ -3,32 +3,29 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class TwoDatabasesSqliteTest : TwoDatabasesTestBase, IClassFixture<TwoDatabasesSqliteTest.TwoDatabasesFixture>
+public class TwoDatabasesSqliteTest
+    : TwoDatabasesTestBase,
+        IClassFixture<TwoDatabasesSqliteTest.TwoDatabasesFixture>
 {
-    public TwoDatabasesSqliteTest(TwoDatabasesFixture fixture)
-        : base(fixture)
-    {
-    }
+    public TwoDatabasesSqliteTest(TwoDatabasesFixture fixture) : base(fixture) { }
 
-    protected new TwoDatabasesFixture Fixture
-        => (TwoDatabasesFixture)base.Fixture;
+    protected new TwoDatabasesFixture Fixture => (TwoDatabasesFixture)base.Fixture;
 
     protected override DbContextOptionsBuilder CreateTestOptions(
         DbContextOptionsBuilder optionsBuilder,
-        bool withConnectionString = false)
-        => withConnectionString
+        bool withConnectionString = false
+    ) =>
+        withConnectionString
             ? optionsBuilder.UseSqlite(DummyConnectionString)
             : optionsBuilder.UseSqlite();
 
-    protected override TwoDatabasesWithDataContext CreateBackingContext(string databaseName)
-        => new(Fixture.CreateOptions(SqliteTestStore.Create(databaseName)));
+    protected override TwoDatabasesWithDataContext CreateBackingContext(string databaseName) =>
+        new(Fixture.CreateOptions(SqliteTestStore.Create(databaseName)));
 
-    protected override string DummyConnectionString
-        => "DataSource=DummyDatabase";
+    protected override string DummyConnectionString => "DataSource=DummyDatabase";
 
     public class TwoDatabasesFixture : ServiceProviderFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
     }
 }

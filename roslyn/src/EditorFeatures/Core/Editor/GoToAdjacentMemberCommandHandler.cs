@@ -27,9 +27,9 @@ namespace Microsoft.CodeAnalysis.Editor
     [Export(typeof(ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(PredefinedCommandHandlerNames.GoToAdjacentMember)]
-    internal class GoToAdjacentMemberCommandHandler :
-        ICommandHandler<GoToNextMemberCommandArgs>,
-        ICommandHandler<GoToPreviousMemberCommandArgs>
+    internal class GoToAdjacentMemberCommandHandler
+        : ICommandHandler<GoToNextMemberCommandArgs>,
+            ICommandHandler<GoToPreviousMemberCommandArgs>
     {
         private readonly IOutliningManagerService _outliningManagerService;
 
@@ -37,20 +37,24 @@ namespace Microsoft.CodeAnalysis.Editor
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GoToAdjacentMemberCommandHandler(IOutliningManagerService outliningManagerService)
-            => _outliningManagerService = outliningManagerService;
+        public GoToAdjacentMemberCommandHandler(IOutliningManagerService outliningManagerService) =>
+            _outliningManagerService = outliningManagerService;
 
-        public CommandState GetCommandState(GoToNextMemberCommandArgs args)
-            => GetCommandStateImpl(args);
+        public CommandState GetCommandState(GoToNextMemberCommandArgs args) =>
+            GetCommandStateImpl(args);
 
-        public bool ExecuteCommand(GoToNextMemberCommandArgs args, CommandExecutionContext context)
-            => ExecuteCommandImpl(args, gotoNextMember: true, context);
+        public bool ExecuteCommand(
+            GoToNextMemberCommandArgs args,
+            CommandExecutionContext context
+        ) => ExecuteCommandImpl(args, gotoNextMember: true, context);
 
-        public CommandState GetCommandState(GoToPreviousMemberCommandArgs args)
-            => GetCommandStateImpl(args);
+        public CommandState GetCommandState(GoToPreviousMemberCommandArgs args) =>
+            GetCommandStateImpl(args);
 
-        public bool ExecuteCommand(GoToPreviousMemberCommandArgs args, CommandExecutionContext context)
-            => ExecuteCommandImpl(args, gotoNextMember: false, context);
+        public bool ExecuteCommand(
+            GoToPreviousMemberCommandArgs args,
+            CommandExecutionContext context
+        ) => ExecuteCommandImpl(args, gotoNextMember: false, context);
 
         private static CommandState GetCommandStateImpl(EditorCommandArgs args)
         {
@@ -61,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor
                 return CommandState.Unspecified;
             }
 
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document?.SupportsSyntaxTree != true)
             {
                 return CommandState.Unspecified;
@@ -70,7 +75,11 @@ namespace Microsoft.CodeAnalysis.Editor
             return CommandState.Available;
         }
 
-        private bool ExecuteCommandImpl(EditorCommandArgs args, bool gotoNextMember, CommandExecutionContext context)
+        private bool ExecuteCommandImpl(
+            EditorCommandArgs args,
+            bool gotoNextMember,
+            CommandExecutionContext context
+        )
         {
             var subjectBuffer = args.SubjectBuffer;
             var caretPoint = args.TextView.GetCaretPoint(subjectBuffer);
@@ -79,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor
                 return false;
             }
 
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document?.SupportsSyntaxTree != true)
             {
                 return false;
@@ -87,15 +97,30 @@ namespace Microsoft.CodeAnalysis.Editor
 
             int? targetPosition = null;
 
-            using (context.OperationContext.AddScope(allowCancellation: true, description: EditorFeaturesResources.Navigating))
+            using (
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    description: EditorFeaturesResources.Navigating
+                )
+            )
             {
-                var task = GetTargetPositionAsync(document, caretPoint.Value.Position, gotoNextMember, context.OperationContext.UserCancellationToken);
-                targetPosition = task.WaitAndGetResult(context.OperationContext.UserCancellationToken);
+                var task = GetTargetPositionAsync(
+                    document,
+                    caretPoint.Value.Position,
+                    gotoNextMember,
+                    context.OperationContext.UserCancellationToken
+                );
+                targetPosition = task.WaitAndGetResult(
+                    context.OperationContext.UserCancellationToken
+                );
             }
 
             if (targetPosition != null)
             {
-                args.TextView.TryMoveCaretToAndEnsureVisible(new SnapshotPoint(subjectBuffer.CurrentSnapshot, targetPosition.Value), _outliningManagerService);
+                args.TextView.TryMoveCaretToAndEnsureVisible(
+                    new SnapshotPoint(subjectBuffer.CurrentSnapshot, targetPosition.Value),
+                    _outliningManagerService
+                );
             }
 
             return true;
@@ -104,7 +129,12 @@ namespace Microsoft.CodeAnalysis.Editor
         /// <summary>
         /// Internal for testing purposes.
         /// </summary>
-        internal static async Task<int?> GetTargetPositionAsync(Document document, int caretPosition, bool next, CancellationToken cancellationToken)
+        internal static async Task<int?> GetTargetPositionAsync(
+            Document document,
+            int caretPosition,
+            bool next,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
             if (syntaxFactsService == null)

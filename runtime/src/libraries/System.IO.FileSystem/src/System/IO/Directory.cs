@@ -79,7 +79,11 @@ namespace System.IO
         public static void SetCreationTimeUtc(string path, DateTime creationTimeUtc)
         {
             string fullPath = Path.GetFullPath(path);
-            FileSystem.SetCreationTime(fullPath, File.GetUtcDateTimeOffset(creationTimeUtc), asDirectory: true);
+            FileSystem.SetCreationTime(
+                fullPath,
+                File.GetUtcDateTimeOffset(creationTimeUtc),
+                asDirectory: true
+            );
         }
 
         public static DateTime GetCreationTime(string path)
@@ -101,7 +105,11 @@ namespace System.IO
         public static void SetLastWriteTimeUtc(string path, DateTime lastWriteTimeUtc)
         {
             string fullPath = Path.GetFullPath(path);
-            FileSystem.SetLastWriteTime(fullPath, File.GetUtcDateTimeOffset(lastWriteTimeUtc), asDirectory: true);
+            FileSystem.SetLastWriteTime(
+                fullPath,
+                File.GetUtcDateTimeOffset(lastWriteTimeUtc),
+                asDirectory: true
+            );
         }
 
         public static DateTime GetLastWriteTime(string path)
@@ -123,7 +131,11 @@ namespace System.IO
         public static void SetLastAccessTimeUtc(string path, DateTime lastAccessTimeUtc)
         {
             string fullPath = Path.GetFullPath(path);
-            FileSystem.SetLastAccessTime(fullPath, File.GetUtcDateTimeOffset(lastAccessTimeUtc), asDirectory: true);
+            FileSystem.SetLastAccessTime(
+                fullPath,
+                File.GetUtcDateTimeOffset(lastAccessTimeUtc),
+                asDirectory: true
+            );
         }
 
         public static DateTime GetLastAccessTime(string path)
@@ -136,90 +148,194 @@ namespace System.IO
             return File.GetLastAccessTimeUtc(path);
         }
 
-        public static string[] GetFiles(string path) => GetFiles(path, "*", enumerationOptions: EnumerationOptions.Compatible);
+        public static string[] GetFiles(string path) =>
+            GetFiles(path, "*", enumerationOptions: EnumerationOptions.Compatible);
 
-        public static string[] GetFiles(string path, string searchPattern) => GetFiles(path, searchPattern, enumerationOptions: EnumerationOptions.Compatible);
+        public static string[] GetFiles(string path, string searchPattern) =>
+            GetFiles(path, searchPattern, enumerationOptions: EnumerationOptions.Compatible);
 
-        public static string[] GetFiles(string path, string searchPattern, SearchOption searchOption)
-            => GetFiles(path, searchPattern, EnumerationOptions.FromSearchOption(searchOption));
+        public static string[] GetFiles(
+            string path,
+            string searchPattern,
+            SearchOption searchOption
+        ) => GetFiles(path, searchPattern, EnumerationOptions.FromSearchOption(searchOption));
 
-        public static string[] GetFiles(string path, string searchPattern, EnumerationOptions enumerationOptions)
-            => InternalEnumeratePaths(path, searchPattern, SearchTarget.Files, enumerationOptions).ToArray();
+        public static string[] GetFiles(
+            string path,
+            string searchPattern,
+            EnumerationOptions enumerationOptions
+        ) =>
+            InternalEnumeratePaths(path, searchPattern, SearchTarget.Files, enumerationOptions)
+                .ToArray();
 
-        public static string[] GetDirectories(string path) => GetDirectories(path, "*", enumerationOptions: EnumerationOptions.Compatible);
+        public static string[] GetDirectories(string path) =>
+            GetDirectories(path, "*", enumerationOptions: EnumerationOptions.Compatible);
 
-        public static string[] GetDirectories(string path, string searchPattern) => GetDirectories(path, searchPattern, enumerationOptions: EnumerationOptions.Compatible);
+        public static string[] GetDirectories(string path, string searchPattern) =>
+            GetDirectories(path, searchPattern, enumerationOptions: EnumerationOptions.Compatible);
 
-        public static string[] GetDirectories(string path, string searchPattern, SearchOption searchOption)
-            => GetDirectories(path, searchPattern, EnumerationOptions.FromSearchOption(searchOption));
+        public static string[] GetDirectories(
+            string path,
+            string searchPattern,
+            SearchOption searchOption
+        ) => GetDirectories(path, searchPattern, EnumerationOptions.FromSearchOption(searchOption));
 
-        public static string[] GetDirectories(string path, string searchPattern, EnumerationOptions enumerationOptions)
-            => InternalEnumeratePaths(path, searchPattern, SearchTarget.Directories, enumerationOptions).ToArray();
+        public static string[] GetDirectories(
+            string path,
+            string searchPattern,
+            EnumerationOptions enumerationOptions
+        ) =>
+            InternalEnumeratePaths(
+                    path,
+                    searchPattern,
+                    SearchTarget.Directories,
+                    enumerationOptions
+                )
+                .ToArray();
 
-        public static string[] GetFileSystemEntries(string path) => GetFileSystemEntries(path, "*", enumerationOptions: EnumerationOptions.Compatible);
+        public static string[] GetFileSystemEntries(string path) =>
+            GetFileSystemEntries(path, "*", enumerationOptions: EnumerationOptions.Compatible);
 
-        public static string[] GetFileSystemEntries(string path, string searchPattern) => GetFileSystemEntries(path, searchPattern, enumerationOptions: EnumerationOptions.Compatible);
+        public static string[] GetFileSystemEntries(string path, string searchPattern) =>
+            GetFileSystemEntries(
+                path,
+                searchPattern,
+                enumerationOptions: EnumerationOptions.Compatible
+            );
 
-        public static string[] GetFileSystemEntries(string path, string searchPattern, SearchOption searchOption)
-            => GetFileSystemEntries(path, searchPattern, EnumerationOptions.FromSearchOption(searchOption));
+        public static string[] GetFileSystemEntries(
+            string path,
+            string searchPattern,
+            SearchOption searchOption
+        ) =>
+            GetFileSystemEntries(
+                path,
+                searchPattern,
+                EnumerationOptions.FromSearchOption(searchOption)
+            );
 
-        public static string[] GetFileSystemEntries(string path, string searchPattern, EnumerationOptions enumerationOptions)
-            => InternalEnumeratePaths(path, searchPattern, SearchTarget.Both, enumerationOptions).ToArray();
+        public static string[] GetFileSystemEntries(
+            string path,
+            string searchPattern,
+            EnumerationOptions enumerationOptions
+        ) =>
+            InternalEnumeratePaths(path, searchPattern, SearchTarget.Both, enumerationOptions)
+                .ToArray();
 
         internal static IEnumerable<string> InternalEnumeratePaths(
             string path,
             string searchPattern,
             SearchTarget searchTarget,
-            EnumerationOptions options)
+            EnumerationOptions options
+        )
         {
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             if (searchPattern == null)
                 throw new ArgumentNullException(nameof(searchPattern));
 
-            FileSystemEnumerableFactory.NormalizeInputs(ref path, ref searchPattern, options.MatchType);
+            FileSystemEnumerableFactory.NormalizeInputs(
+                ref path,
+                ref searchPattern,
+                options.MatchType
+            );
 
             return searchTarget switch
             {
-                SearchTarget.Files => FileSystemEnumerableFactory.UserFiles(path, searchPattern, options),
-                SearchTarget.Directories => FileSystemEnumerableFactory.UserDirectories(path, searchPattern, options),
-                SearchTarget.Both => FileSystemEnumerableFactory.UserEntries(path, searchPattern, options),
+                SearchTarget.Files
+                    => FileSystemEnumerableFactory.UserFiles(path, searchPattern, options),
+                SearchTarget.Directories
+                    => FileSystemEnumerableFactory.UserDirectories(path, searchPattern, options),
+                SearchTarget.Both
+                    => FileSystemEnumerableFactory.UserEntries(path, searchPattern, options),
                 _ => throw new ArgumentOutOfRangeException(nameof(searchTarget)),
             };
         }
 
-        public static IEnumerable<string> EnumerateDirectories(string path) => EnumerateDirectories(path, "*", enumerationOptions: EnumerationOptions.Compatible);
+        public static IEnumerable<string> EnumerateDirectories(string path) =>
+            EnumerateDirectories(path, "*", enumerationOptions: EnumerationOptions.Compatible);
 
-        public static IEnumerable<string> EnumerateDirectories(string path, string searchPattern) => EnumerateDirectories(path, searchPattern, enumerationOptions: EnumerationOptions.Compatible);
+        public static IEnumerable<string> EnumerateDirectories(string path, string searchPattern) =>
+            EnumerateDirectories(
+                path,
+                searchPattern,
+                enumerationOptions: EnumerationOptions.Compatible
+            );
 
-        public static IEnumerable<string> EnumerateDirectories(string path, string searchPattern, SearchOption searchOption)
-            => EnumerateDirectories(path, searchPattern, EnumerationOptions.FromSearchOption(searchOption));
+        public static IEnumerable<string> EnumerateDirectories(
+            string path,
+            string searchPattern,
+            SearchOption searchOption
+        ) =>
+            EnumerateDirectories(
+                path,
+                searchPattern,
+                EnumerationOptions.FromSearchOption(searchOption)
+            );
 
-        public static IEnumerable<string> EnumerateDirectories(string path, string searchPattern, EnumerationOptions enumerationOptions)
-            => InternalEnumeratePaths(path, searchPattern, SearchTarget.Directories, enumerationOptions);
+        public static IEnumerable<string> EnumerateDirectories(
+            string path,
+            string searchPattern,
+            EnumerationOptions enumerationOptions
+        ) =>
+            InternalEnumeratePaths(
+                path,
+                searchPattern,
+                SearchTarget.Directories,
+                enumerationOptions
+            );
 
-        public static IEnumerable<string> EnumerateFiles(string path) => EnumerateFiles(path, "*", enumerationOptions: EnumerationOptions.Compatible);
+        public static IEnumerable<string> EnumerateFiles(string path) =>
+            EnumerateFiles(path, "*", enumerationOptions: EnumerationOptions.Compatible);
 
-        public static IEnumerable<string> EnumerateFiles(string path, string searchPattern)
-            => EnumerateFiles(path, searchPattern, enumerationOptions: EnumerationOptions.Compatible);
+        public static IEnumerable<string> EnumerateFiles(string path, string searchPattern) =>
+            EnumerateFiles(path, searchPattern, enumerationOptions: EnumerationOptions.Compatible);
 
-        public static IEnumerable<string> EnumerateFiles(string path, string searchPattern, SearchOption searchOption)
-            => EnumerateFiles(path, searchPattern, EnumerationOptions.FromSearchOption(searchOption));
+        public static IEnumerable<string> EnumerateFiles(
+            string path,
+            string searchPattern,
+            SearchOption searchOption
+        ) => EnumerateFiles(path, searchPattern, EnumerationOptions.FromSearchOption(searchOption));
 
-        public static IEnumerable<string> EnumerateFiles(string path, string searchPattern, EnumerationOptions enumerationOptions)
-            => InternalEnumeratePaths(path, searchPattern, SearchTarget.Files, enumerationOptions);
+        public static IEnumerable<string> EnumerateFiles(
+            string path,
+            string searchPattern,
+            EnumerationOptions enumerationOptions
+        ) => InternalEnumeratePaths(path, searchPattern, SearchTarget.Files, enumerationOptions);
 
-        public static IEnumerable<string> EnumerateFileSystemEntries(string path)
-            => EnumerateFileSystemEntries(path, "*", enumerationOptions: EnumerationOptions.Compatible);
+        public static IEnumerable<string> EnumerateFileSystemEntries(string path) =>
+            EnumerateFileSystemEntries(
+                path,
+                "*",
+                enumerationOptions: EnumerationOptions.Compatible
+            );
 
-        public static IEnumerable<string> EnumerateFileSystemEntries(string path, string searchPattern)
-            => EnumerateFileSystemEntries(path, searchPattern, enumerationOptions: EnumerationOptions.Compatible);
+        public static IEnumerable<string> EnumerateFileSystemEntries(
+            string path,
+            string searchPattern
+        ) =>
+            EnumerateFileSystemEntries(
+                path,
+                searchPattern,
+                enumerationOptions: EnumerationOptions.Compatible
+            );
 
-        public static IEnumerable<string> EnumerateFileSystemEntries(string path, string searchPattern, SearchOption searchOption)
-            => EnumerateFileSystemEntries(path, searchPattern, EnumerationOptions.FromSearchOption(searchOption));
+        public static IEnumerable<string> EnumerateFileSystemEntries(
+            string path,
+            string searchPattern,
+            SearchOption searchOption
+        ) =>
+            EnumerateFileSystemEntries(
+                path,
+                searchPattern,
+                EnumerationOptions.FromSearchOption(searchOption)
+            );
 
-        public static IEnumerable<string> EnumerateFileSystemEntries(string path, string searchPattern, EnumerationOptions enumerationOptions)
-            => InternalEnumeratePaths(path, searchPattern, SearchTarget.Both, enumerationOptions);
+        public static IEnumerable<string> EnumerateFileSystemEntries(
+            string path,
+            string searchPattern,
+            EnumerationOptions enumerationOptions
+        ) => InternalEnumeratePaths(path, searchPattern, SearchTarget.Both, enumerationOptions);
 
         public static string GetDirectoryRoot(string path)
         {
@@ -262,19 +378,27 @@ namespace System.IO
             string fulldestDirName = Path.GetFullPath(destDirName);
             string destPath = PathInternal.EnsureTrailingSeparator(fulldestDirName);
 
-            ReadOnlySpan<char> sourceDirNameFromFullPath = Path.GetFileName(fullsourceDirName.AsSpan());
+            ReadOnlySpan<char> sourceDirNameFromFullPath = Path.GetFileName(
+                fullsourceDirName.AsSpan()
+            );
             ReadOnlySpan<char> destDirNameFromFullPath = Path.GetFileName(fulldestDirName.AsSpan());
 
             StringComparison fileSystemSensitivity = PathInternal.StringComparison;
             bool directoriesAreCaseVariants =
-                !sourceDirNameFromFullPath.SequenceEqual(destDirNameFromFullPath) &&
-                sourceDirNameFromFullPath.Equals(destDirNameFromFullPath, StringComparison.OrdinalIgnoreCase);
+                !sourceDirNameFromFullPath.SequenceEqual(destDirNameFromFullPath)
+                && sourceDirNameFromFullPath.Equals(
+                    destDirNameFromFullPath,
+                    StringComparison.OrdinalIgnoreCase
+                );
             bool sameDirectoryDifferentCase =
-                directoriesAreCaseVariants &&
-                destDirNameFromFullPath.Equals(sourceDirNameFromFullPath, fileSystemSensitivity);
+                directoriesAreCaseVariants
+                && destDirNameFromFullPath.Equals(sourceDirNameFromFullPath, fileSystemSensitivity);
 
             // If the destination directories are the exact same name
-            if (!sameDirectoryDifferentCase && string.Equals(sourcePath, destPath, fileSystemSensitivity))
+            if (
+                !sameDirectoryDifferentCase
+                && string.Equals(sourcePath, destPath, fileSystemSensitivity)
+            )
                 throw new IOException(SR.IO_SourceDestMustBeDifferent);
 
             ReadOnlySpan<char> sourceRoot = Path.GetPathRoot(sourcePath.AsSpan());
@@ -286,11 +410,18 @@ namespace System.IO
 
             // Windows will throw if the source file/directory doesn't exist, we preemptively check
             // to make sure our cross platform behavior matches .NET Framework behavior.
-            if (!FileSystem.DirectoryExists(fullsourceDirName) && !FileSystem.FileExists(fullsourceDirName))
-                throw new DirectoryNotFoundException(SR.Format(SR.IO_PathNotFound_Path, fullsourceDirName));
+            if (
+                !FileSystem.DirectoryExists(fullsourceDirName)
+                && !FileSystem.FileExists(fullsourceDirName)
+            )
+                throw new DirectoryNotFoundException(
+                    SR.Format(SR.IO_PathNotFound_Path, fullsourceDirName)
+                );
 
-            if (!sameDirectoryDifferentCase // This check is to allowing renaming of directories
-                && FileSystem.DirectoryExists(fulldestDirName))
+            if (
+                !sameDirectoryDifferentCase // This check is to allowing renaming of directories
+                && FileSystem.DirectoryExists(fulldestDirName)
+            )
                 throw new IOException(SR.Format(SR.IO_AlreadyExists_Name, fulldestDirName));
 
             // If the directories aren't the same and the OS says the directory exists already, fail.

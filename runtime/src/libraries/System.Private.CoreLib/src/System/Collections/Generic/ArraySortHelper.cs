@@ -31,7 +31,10 @@ namespace System.Collections.Generic
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
             }
         }
 
@@ -44,7 +47,10 @@ namespace System.Collections.Generic
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
                 return 0;
             }
         }
@@ -66,14 +72,26 @@ namespace System.Collections.Generic
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
             }
         }
 
-        internal static int InternalBinarySearch(T[] array, int index, int length, T value, IComparer<T> comparer)
+        internal static int InternalBinarySearch(
+            T[] array,
+            int index,
+            int length,
+            T value,
+            IComparer<T> comparer
+        )
         {
             Debug.Assert(array != null, "Check the arguments in the caller!");
-            Debug.Assert(index >= 0 && length >= 0 && (array.Length - index >= length), "Check the arguments in the caller!");
+            Debug.Assert(
+                index >= 0 && length >= 0 && (array.Length - index >= length),
+                "Check the arguments in the caller!"
+            );
 
             int lo = index;
             int hi = index + length - 1;
@@ -82,7 +100,8 @@ namespace System.Collections.Generic
                 int i = lo + ((hi - lo) >> 1);
                 int order = comparer.Compare(array[i], value);
 
-                if (order == 0) return i;
+                if (order == 0)
+                    return i;
                 if (order < 0)
                 {
                     lo = i + 1;
@@ -139,7 +158,6 @@ namespace System.Collections.Generic
             {
                 if (partitionSize <= Array.IntrosortSizeThreshold)
                 {
-
                     if (partitionSize == 2)
                     {
                         SwapIfGreater(keys, comparer, 0, 1);
@@ -168,7 +186,7 @@ namespace System.Collections.Generic
                 int p = PickPivotAndPartition(keys.Slice(0, partitionSize), comparer);
 
                 // Note we've already partitioned around the pivot and do not have to move the pivot again.
-                IntroSort(keys[(p+1)..partitionSize], depthLimit, comparer);
+                IntroSort(keys[(p + 1)..partitionSize], depthLimit, comparer);
                 partitionSize = p;
             }
         }
@@ -184,18 +202,21 @@ namespace System.Collections.Generic
             int middle = hi >> 1;
 
             // Sort lo, mid and hi appropriately, then pick mid as the pivot.
-            SwapIfGreater(keys, comparer, 0, middle);  // swap the low with the mid point
-            SwapIfGreater(keys, comparer, 0, hi);   // swap the low with the high
+            SwapIfGreater(keys, comparer, 0, middle); // swap the low with the mid point
+            SwapIfGreater(keys, comparer, 0, hi); // swap the low with the high
             SwapIfGreater(keys, comparer, middle, hi); // swap the middle with the high
 
             T pivot = keys[middle];
             Swap(keys, middle, hi - 1);
-            int left = 0, right = hi - 1;  // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
+            int left = 0,
+                right = hi - 1; // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
 
             while (left < right)
             {
-                while (comparer(keys[++left], pivot) < 0) ;
-                while (comparer(pivot, keys[--right]) < 0) ;
+                while (comparer(keys[++left], pivot) < 0)
+                    ;
+                while (comparer(pivot, keys[--right]) < 0)
+                    ;
 
                 if (left >= right)
                     break;
@@ -270,8 +291,7 @@ namespace System.Collections.Generic
         }
     }
 
-    internal sealed partial class GenericArraySortHelper<T>
-        where T : IComparable<T>
+    internal sealed partial class GenericArraySortHelper<T> where T : IComparable<T>
     {
         // Do not add a constructor to this class because ArraySortHelper<T>.CreateSortHelper will not execute it
 
@@ -288,9 +308,11 @@ namespace System.Collections.Generic
                         // For floating-point, do a pre-pass to move all NaNs to the beginning
                         // so that we can do an optimized comparison as part of the actual sort
                         // on the remainder of the values.
-                        if (typeof(T) == typeof(double) ||
-                            typeof(T) == typeof(float) ||
-                            typeof(T) == typeof(Half))
+                        if (
+                            typeof(T) == typeof(double)
+                            || typeof(T) == typeof(float)
+                            || typeof(T) == typeof(Half)
+                        )
                         {
                             int nanLeft = SortUtils.MoveNansToFront(keys, default(Span<byte>));
                             if (nanLeft == keys.Length)
@@ -314,14 +336,20 @@ namespace System.Collections.Generic
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
             }
         }
 
         public int BinarySearch(T[] array, int index, int length, T value, IComparer<T>? comparer)
         {
             Debug.Assert(array != null, "Check the arguments in the caller!");
-            Debug.Assert(index >= 0 && length >= 0 && (array.Length - index >= length), "Check the arguments in the caller!");
+            Debug.Assert(
+                index >= 0 && length >= 0 && (array.Length - index >= length),
+                "Check the arguments in the caller!"
+            );
 
             try
             {
@@ -331,12 +359,21 @@ namespace System.Collections.Generic
                 }
                 else
                 {
-                    return ArraySortHelper<T>.InternalBinarySearch(array, index, length, value, comparer);
+                    return ArraySortHelper<T>.InternalBinarySearch(
+                        array,
+                        index,
+                        length,
+                        value,
+                        comparer
+                    );
                 }
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
                 return 0;
             }
         }
@@ -444,7 +481,7 @@ namespace System.Collections.Generic
                 int p = PickPivotAndPartition(keys.Slice(0, partitionSize));
 
                 // Note we've already partitioned around the pivot and do not have to move the pivot again.
-                IntroSort(keys[(p+1)..partitionSize], depthLimit);
+                IntroSort(keys[(p + 1)..partitionSize], depthLimit);
                 partitionSize = p;
             }
         }
@@ -467,18 +504,35 @@ namespace System.Collections.Generic
             Swap(ref middleRef, ref nextToLastRef);
 
             // Walk the left and right pointers, swapping elements as necessary, until they cross.
-            ref T leftRef = ref zeroRef, rightRef = ref nextToLastRef;
+            ref T leftRef = ref zeroRef,
+                rightRef = ref nextToLastRef;
             while (Unsafe.IsAddressLessThan(ref leftRef, ref rightRef))
             {
                 if (pivot == null)
                 {
-                    while (Unsafe.IsAddressLessThan(ref leftRef, ref nextToLastRef) && (leftRef = ref Unsafe.Add(ref leftRef, 1)) == null) ;
-                    while (Unsafe.IsAddressGreaterThan(ref rightRef, ref zeroRef) && (rightRef = ref Unsafe.Add(ref rightRef, -1)) != null) ;
+                    while (
+                        Unsafe.IsAddressLessThan(ref leftRef, ref nextToLastRef)
+                        && (leftRef = ref Unsafe.Add(ref leftRef, 1)) == null
+                    )
+                        ;
+                    while (
+                        Unsafe.IsAddressGreaterThan(ref rightRef, ref zeroRef)
+                        && (rightRef = ref Unsafe.Add(ref rightRef, -1)) != null
+                    )
+                        ;
                 }
                 else
                 {
-                    while (Unsafe.IsAddressLessThan(ref leftRef, ref nextToLastRef) && GreaterThan(ref pivot, ref leftRef = ref Unsafe.Add(ref leftRef, 1))) ;
-                    while (Unsafe.IsAddressGreaterThan(ref rightRef, ref zeroRef) && LessThan(ref pivot, ref rightRef = ref Unsafe.Add(ref rightRef, -1))) ;
+                    while (
+                        Unsafe.IsAddressLessThan(ref leftRef, ref nextToLastRef)
+                        && GreaterThan(ref pivot, ref leftRef = ref Unsafe.Add(ref leftRef, 1))
+                    )
+                        ;
+                    while (
+                        Unsafe.IsAddressGreaterThan(ref rightRef, ref zeroRef)
+                        && LessThan(ref pivot, ref rightRef = ref Unsafe.Add(ref rightRef, -1))
+                    )
+                        ;
                 }
 
                 if (!Unsafe.IsAddressLessThan(ref leftRef, ref rightRef))
@@ -520,7 +574,10 @@ namespace System.Collections.Generic
             while (i <= n >> 1)
             {
                 int child = 2 * i;
-                if (child < n && (keys[child - 1] == null || LessThan(ref keys[child - 1], ref keys[child])))
+                if (
+                    child < n
+                    && (keys[child - 1] == null || LessThan(ref keys[child - 1], ref keys[child]))
+                )
                 {
                     child++;
                 }
@@ -542,9 +599,18 @@ namespace System.Collections.Generic
                 T t = Unsafe.Add(ref MemoryMarshal.GetReference(keys), i + 1);
 
                 int j = i;
-                while (j >= 0 && (t == null || LessThan(ref t, ref Unsafe.Add(ref MemoryMarshal.GetReference(keys), j))))
+                while (
+                    j >= 0
+                    && (
+                        t == null
+                        || LessThan(ref t, ref Unsafe.Add(ref MemoryMarshal.GetReference(keys), j))
+                    )
+                )
                 {
-                    Unsafe.Add(ref MemoryMarshal.GetReference(keys), j + 1) = Unsafe.Add(ref MemoryMarshal.GetReference(keys), j);
+                    Unsafe.Add(ref MemoryMarshal.GetReference(keys), j + 1) = Unsafe.Add(
+                        ref MemoryMarshal.GetReference(keys),
+                        j
+                    );
                     j--;
                 }
 
@@ -564,38 +630,64 @@ namespace System.Collections.Generic
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // compiles to a single comparison or method call
         private static bool LessThan(ref T left, ref T right)
         {
-            if (typeof(T) == typeof(byte)) return (byte)(object)left < (byte)(object)right ? true : false;
-            if (typeof(T) == typeof(sbyte)) return (sbyte)(object)left < (sbyte)(object)right ? true : false;
-            if (typeof(T) == typeof(ushort)) return (ushort)(object)left < (ushort)(object)right ? true : false;
-            if (typeof(T) == typeof(short)) return (short)(object)left < (short)(object)right ? true : false;
-            if (typeof(T) == typeof(uint)) return (uint)(object)left < (uint)(object)right ? true : false;
-            if (typeof(T) == typeof(int)) return (int)(object)left < (int)(object)right ? true : false;
-            if (typeof(T) == typeof(ulong)) return (ulong)(object)left < (ulong)(object)right ? true : false;
-            if (typeof(T) == typeof(long)) return (long)(object)left < (long)(object)right ? true : false;
-            if (typeof(T) == typeof(nuint)) return (nuint)(object)left < (nuint)(object)right ? true : false;
-            if (typeof(T) == typeof(nint)) return (nint)(object)left < (nint)(object)right ? true : false;
-            if (typeof(T) == typeof(float)) return (float)(object)left < (float)(object)right ? true : false;
-            if (typeof(T) == typeof(double)) return (double)(object)left < (double)(object)right ? true : false;
-            if (typeof(T) == typeof(Half)) return (Half)(object)left < (Half)(object)right ? true : false;
+            if (typeof(T) == typeof(byte))
+                return (byte)(object)left < (byte)(object)right ? true : false;
+            if (typeof(T) == typeof(sbyte))
+                return (sbyte)(object)left < (sbyte)(object)right ? true : false;
+            if (typeof(T) == typeof(ushort))
+                return (ushort)(object)left < (ushort)(object)right ? true : false;
+            if (typeof(T) == typeof(short))
+                return (short)(object)left < (short)(object)right ? true : false;
+            if (typeof(T) == typeof(uint))
+                return (uint)(object)left < (uint)(object)right ? true : false;
+            if (typeof(T) == typeof(int))
+                return (int)(object)left < (int)(object)right ? true : false;
+            if (typeof(T) == typeof(ulong))
+                return (ulong)(object)left < (ulong)(object)right ? true : false;
+            if (typeof(T) == typeof(long))
+                return (long)(object)left < (long)(object)right ? true : false;
+            if (typeof(T) == typeof(nuint))
+                return (nuint)(object)left < (nuint)(object)right ? true : false;
+            if (typeof(T) == typeof(nint))
+                return (nint)(object)left < (nint)(object)right ? true : false;
+            if (typeof(T) == typeof(float))
+                return (float)(object)left < (float)(object)right ? true : false;
+            if (typeof(T) == typeof(double))
+                return (double)(object)left < (double)(object)right ? true : false;
+            if (typeof(T) == typeof(Half))
+                return (Half)(object)left < (Half)(object)right ? true : false;
             return left.CompareTo(right) < 0 ? true : false;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // compiles to a single comparison or method call
         private static bool GreaterThan(ref T left, ref T right)
         {
-            if (typeof(T) == typeof(byte)) return (byte)(object)left > (byte)(object)right ? true : false;
-            if (typeof(T) == typeof(sbyte)) return (sbyte)(object)left > (sbyte)(object)right ? true : false;
-            if (typeof(T) == typeof(ushort)) return (ushort)(object)left > (ushort)(object)right ? true : false;
-            if (typeof(T) == typeof(short)) return (short)(object)left > (short)(object)right ? true : false;
-            if (typeof(T) == typeof(uint)) return (uint)(object)left > (uint)(object)right ? true : false;
-            if (typeof(T) == typeof(int)) return (int)(object)left > (int)(object)right ? true : false;
-            if (typeof(T) == typeof(ulong)) return (ulong)(object)left > (ulong)(object)right ? true : false;
-            if (typeof(T) == typeof(long)) return (long)(object)left > (long)(object)right ? true : false;
-            if (typeof(T) == typeof(nuint)) return (nuint)(object)left > (nuint)(object)right ? true : false;
-            if (typeof(T) == typeof(nint)) return (nint)(object)left > (nint)(object)right ? true : false;
-            if (typeof(T) == typeof(float)) return (float)(object)left > (float)(object)right ? true : false;
-            if (typeof(T) == typeof(double)) return (double)(object)left > (double)(object)right ? true : false;
-            if (typeof(T) == typeof(Half)) return (Half)(object)left > (Half)(object)right ? true : false;
+            if (typeof(T) == typeof(byte))
+                return (byte)(object)left > (byte)(object)right ? true : false;
+            if (typeof(T) == typeof(sbyte))
+                return (sbyte)(object)left > (sbyte)(object)right ? true : false;
+            if (typeof(T) == typeof(ushort))
+                return (ushort)(object)left > (ushort)(object)right ? true : false;
+            if (typeof(T) == typeof(short))
+                return (short)(object)left > (short)(object)right ? true : false;
+            if (typeof(T) == typeof(uint))
+                return (uint)(object)left > (uint)(object)right ? true : false;
+            if (typeof(T) == typeof(int))
+                return (int)(object)left > (int)(object)right ? true : false;
+            if (typeof(T) == typeof(ulong))
+                return (ulong)(object)left > (ulong)(object)right ? true : false;
+            if (typeof(T) == typeof(long))
+                return (long)(object)left > (long)(object)right ? true : false;
+            if (typeof(T) == typeof(nuint))
+                return (nuint)(object)left > (nuint)(object)right ? true : false;
+            if (typeof(T) == typeof(nint))
+                return (nint)(object)left > (nint)(object)right ? true : false;
+            if (typeof(T) == typeof(float))
+                return (float)(object)left > (float)(object)right ? true : false;
+            if (typeof(T) == typeof(double))
+                return (double)(object)left > (double)(object)right ? true : false;
+            if (typeof(T) == typeof(Half))
+                return (Half)(object)left > (Half)(object)right ? true : false;
             return left.CompareTo(right) > 0 ? true : false;
         }
     }
@@ -620,11 +712,20 @@ namespace System.Collections.Generic
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
             }
         }
 
-        private static void SwapIfGreaterWithValues(Span<TKey> keys, Span<TValue> values, IComparer<TKey> comparer, int i, int j)
+        private static void SwapIfGreaterWithValues(
+            Span<TKey> keys,
+            Span<TValue> values,
+            IComparer<TKey> comparer,
+            int i,
+            int j
+        )
         {
             Debug.Assert(comparer != null);
             Debug.Assert(0 <= i && i < keys.Length && i < values.Length);
@@ -657,7 +758,11 @@ namespace System.Collections.Generic
             values[j] = v;
         }
 
-        internal static void IntrospectiveSort(Span<TKey> keys, Span<TValue> values, IComparer<TKey> comparer)
+        internal static void IntrospectiveSort(
+            Span<TKey> keys,
+            Span<TValue> values,
+            IComparer<TKey> comparer
+        )
         {
             Debug.Assert(comparer != null);
             Debug.Assert(keys.Length == values.Length);
@@ -668,7 +773,12 @@ namespace System.Collections.Generic
             }
         }
 
-        private static void IntroSort(Span<TKey> keys, Span<TValue> values, int depthLimit, IComparer<TKey> comparer)
+        private static void IntroSort(
+            Span<TKey> keys,
+            Span<TValue> values,
+            int depthLimit,
+            IComparer<TKey> comparer
+        )
         {
             Debug.Assert(!keys.IsEmpty);
             Debug.Assert(values.Length == keys.Length);
@@ -680,7 +790,6 @@ namespace System.Collections.Generic
             {
                 if (partitionSize <= Array.IntrosortSizeThreshold)
                 {
-
                     if (partitionSize == 2)
                     {
                         SwapIfGreaterWithValues(keys, values, comparer, 0, 1);
@@ -695,26 +804,47 @@ namespace System.Collections.Generic
                         return;
                     }
 
-                    InsertionSort(keys.Slice(0, partitionSize), values.Slice(0, partitionSize), comparer);
+                    InsertionSort(
+                        keys.Slice(0, partitionSize),
+                        values.Slice(0, partitionSize),
+                        comparer
+                    );
                     return;
                 }
 
                 if (depthLimit == 0)
                 {
-                    HeapSort(keys.Slice(0, partitionSize), values.Slice(0, partitionSize), comparer);
+                    HeapSort(
+                        keys.Slice(0, partitionSize),
+                        values.Slice(0, partitionSize),
+                        comparer
+                    );
                     return;
                 }
                 depthLimit--;
 
-                int p = PickPivotAndPartition(keys.Slice(0, partitionSize), values.Slice(0, partitionSize), comparer);
+                int p = PickPivotAndPartition(
+                    keys.Slice(0, partitionSize),
+                    values.Slice(0, partitionSize),
+                    comparer
+                );
 
                 // Note we've already partitioned around the pivot and do not have to move the pivot again.
-                IntroSort(keys[(p+1)..partitionSize], values[(p+1)..partitionSize], depthLimit, comparer);
+                IntroSort(
+                    keys[(p + 1)..partitionSize],
+                    values[(p + 1)..partitionSize],
+                    depthLimit,
+                    comparer
+                );
                 partitionSize = p;
             }
         }
 
-        private static int PickPivotAndPartition(Span<TKey> keys, Span<TValue> values, IComparer<TKey> comparer)
+        private static int PickPivotAndPartition(
+            Span<TKey> keys,
+            Span<TValue> values,
+            IComparer<TKey> comparer
+        )
         {
             Debug.Assert(keys.Length >= Array.IntrosortSizeThreshold);
             Debug.Assert(comparer != null);
@@ -725,18 +855,21 @@ namespace System.Collections.Generic
             int middle = hi >> 1;
 
             // Sort lo, mid and hi appropriately, then pick mid as the pivot.
-            SwapIfGreaterWithValues(keys, values, comparer, 0, middle);  // swap the low with the mid point
-            SwapIfGreaterWithValues(keys, values, comparer, 0, hi);   // swap the low with the high
+            SwapIfGreaterWithValues(keys, values, comparer, 0, middle); // swap the low with the mid point
+            SwapIfGreaterWithValues(keys, values, comparer, 0, hi); // swap the low with the high
             SwapIfGreaterWithValues(keys, values, comparer, middle, hi); // swap the middle with the high
 
             TKey pivot = keys[middle];
             Swap(keys, values, middle, hi - 1);
-            int left = 0, right = hi - 1;  // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
+            int left = 0,
+                right = hi - 1; // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
 
             while (left < right)
             {
-                while (comparer.Compare(keys[++left], pivot) < 0) ;
-                while (comparer.Compare(pivot, keys[--right]) < 0) ;
+                while (comparer.Compare(keys[++left], pivot) < 0)
+                    ;
+                while (comparer.Compare(pivot, keys[--right]) < 0)
+                    ;
 
                 if (left >= right)
                     break;
@@ -770,7 +903,13 @@ namespace System.Collections.Generic
             }
         }
 
-        private static void DownHeap(Span<TKey> keys, Span<TValue> values, int i, int n, IComparer<TKey> comparer)
+        private static void DownHeap(
+            Span<TKey> keys,
+            Span<TValue> values,
+            int i,
+            int n,
+            IComparer<TKey> comparer
+        )
         {
             Debug.Assert(comparer != null);
 
@@ -797,7 +936,11 @@ namespace System.Collections.Generic
             values[i - 1] = dValue;
         }
 
-        private static void InsertionSort(Span<TKey> keys, Span<TValue> values, IComparer<TKey> comparer)
+        private static void InsertionSort(
+            Span<TKey> keys,
+            Span<TValue> values,
+            IComparer<TKey> comparer
+        )
         {
             Debug.Assert(comparer != null);
 
@@ -836,9 +979,11 @@ namespace System.Collections.Generic
                         // For floating-point, do a pre-pass to move all NaNs to the beginning
                         // so that we can do an optimized comparison as part of the actual sort
                         // on the remainder of the values.
-                        if (typeof(TKey) == typeof(double) ||
-                            typeof(TKey) == typeof(float) ||
-                            typeof(TKey) == typeof(Half))
+                        if (
+                            typeof(TKey) == typeof(double)
+                            || typeof(TKey) == typeof(float)
+                            || typeof(TKey) == typeof(Half)
+                        )
                         {
                             int nanLeft = SortUtils.MoveNansToFront(keys, values);
                             if (nanLeft == keys.Length)
@@ -863,11 +1008,19 @@ namespace System.Collections.Generic
             }
             catch (Exception e)
             {
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_IComparerFailed,
+                    e
+                );
             }
         }
 
-        private static void SwapIfGreaterWithValues(Span<TKey> keys, Span<TValue> values, int i, int j)
+        private static void SwapIfGreaterWithValues(
+            Span<TKey> keys,
+            Span<TValue> values,
+            int i,
+            int j
+        )
         {
             Debug.Assert(i != j);
 
@@ -909,7 +1062,6 @@ namespace System.Collections.Generic
             {
                 if (partitionSize <= Array.IntrosortSizeThreshold)
                 {
-
                     if (partitionSize == 2)
                     {
                         SwapIfGreaterWithValues(keys, values, 0, 1);
@@ -935,10 +1087,13 @@ namespace System.Collections.Generic
                 }
                 depthLimit--;
 
-                int p = PickPivotAndPartition(keys.Slice(0, partitionSize), values.Slice(0, partitionSize));
+                int p = PickPivotAndPartition(
+                    keys.Slice(0, partitionSize),
+                    values.Slice(0, partitionSize)
+                );
 
                 // Note we've already partitioned around the pivot and do not have to move the pivot again.
-                IntroSort(keys[(p+1)..partitionSize], values[(p+1)..partitionSize], depthLimit);
+                IntroSort(keys[(p + 1)..partitionSize], values[(p + 1)..partitionSize], depthLimit);
                 partitionSize = p;
             }
         }
@@ -953,25 +1108,30 @@ namespace System.Collections.Generic
             int middle = hi >> 1;
 
             // Sort lo, mid and hi appropriately, then pick mid as the pivot.
-            SwapIfGreaterWithValues(keys, values, 0, middle);  // swap the low with the mid point
-            SwapIfGreaterWithValues(keys, values, 0, hi);   // swap the low with the high
+            SwapIfGreaterWithValues(keys, values, 0, middle); // swap the low with the mid point
+            SwapIfGreaterWithValues(keys, values, 0, hi); // swap the low with the high
             SwapIfGreaterWithValues(keys, values, middle, hi); // swap the middle with the high
 
             TKey pivot = keys[middle];
             Swap(keys, values, middle, hi - 1);
-            int left = 0, right = hi - 1;  // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
+            int left = 0,
+                right = hi - 1; // We already partitioned lo and hi and put the pivot in hi - 1.  And we pre-increment & decrement below.
 
             while (left < right)
             {
                 if (pivot == null)
                 {
-                    while (left < (hi - 1) && keys[++left] == null) ;
-                    while (right > 0 && keys[--right] != null) ;
+                    while (left < (hi - 1) && keys[++left] == null)
+                        ;
+                    while (right > 0 && keys[--right] != null)
+                        ;
                 }
                 else
                 {
-                    while (GreaterThan(ref pivot, ref keys[++left])) ;
-                    while (LessThan(ref pivot, ref keys[--right])) ;
+                    while (GreaterThan(ref pivot, ref keys[++left]))
+                        ;
+                    while (LessThan(ref pivot, ref keys[--right]))
+                        ;
                 }
 
                 if (left >= right)
@@ -1013,7 +1173,10 @@ namespace System.Collections.Generic
             while (i <= n >> 1)
             {
                 int child = 2 * i;
-                if (child < n && (keys[child - 1] == null || LessThan(ref keys[child - 1], ref keys[child])))
+                if (
+                    child < n
+                    && (keys[child - 1] == null || LessThan(ref keys[child - 1], ref keys[child]))
+                )
                 {
                     child++;
                 }
@@ -1062,38 +1225,64 @@ namespace System.Collections.Generic
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // compiles to a single comparison or method call
         private static bool LessThan(ref TKey left, ref TKey right)
         {
-            if (typeof(TKey) == typeof(byte)) return (byte)(object)left < (byte)(object)right ? true : false;
-            if (typeof(TKey) == typeof(sbyte)) return (sbyte)(object)left < (sbyte)(object)right ? true : false;
-            if (typeof(TKey) == typeof(ushort)) return (ushort)(object)left < (ushort)(object)right ? true : false;
-            if (typeof(TKey) == typeof(short)) return (short)(object)left < (short)(object)right ? true : false;
-            if (typeof(TKey) == typeof(uint)) return (uint)(object)left < (uint)(object)right ? true : false;
-            if (typeof(TKey) == typeof(int)) return (int)(object)left < (int)(object)right ? true : false;
-            if (typeof(TKey) == typeof(ulong)) return (ulong)(object)left < (ulong)(object)right ? true : false;
-            if (typeof(TKey) == typeof(long)) return (long)(object)left < (long)(object)right ? true : false;
-            if (typeof(TKey) == typeof(nuint)) return (nuint)(object)left < (nuint)(object)right ? true : false;
-            if (typeof(TKey) == typeof(nint)) return (nint)(object)left < (nint)(object)right ? true : false;
-            if (typeof(TKey) == typeof(float)) return (float)(object)left < (float)(object)right ? true : false;
-            if (typeof(TKey) == typeof(double)) return (double)(object)left < (double)(object)right ? true : false;
-            if (typeof(TKey) == typeof(Half)) return (Half)(object)left < (Half)(object)right ? true : false;
+            if (typeof(TKey) == typeof(byte))
+                return (byte)(object)left < (byte)(object)right ? true : false;
+            if (typeof(TKey) == typeof(sbyte))
+                return (sbyte)(object)left < (sbyte)(object)right ? true : false;
+            if (typeof(TKey) == typeof(ushort))
+                return (ushort)(object)left < (ushort)(object)right ? true : false;
+            if (typeof(TKey) == typeof(short))
+                return (short)(object)left < (short)(object)right ? true : false;
+            if (typeof(TKey) == typeof(uint))
+                return (uint)(object)left < (uint)(object)right ? true : false;
+            if (typeof(TKey) == typeof(int))
+                return (int)(object)left < (int)(object)right ? true : false;
+            if (typeof(TKey) == typeof(ulong))
+                return (ulong)(object)left < (ulong)(object)right ? true : false;
+            if (typeof(TKey) == typeof(long))
+                return (long)(object)left < (long)(object)right ? true : false;
+            if (typeof(TKey) == typeof(nuint))
+                return (nuint)(object)left < (nuint)(object)right ? true : false;
+            if (typeof(TKey) == typeof(nint))
+                return (nint)(object)left < (nint)(object)right ? true : false;
+            if (typeof(TKey) == typeof(float))
+                return (float)(object)left < (float)(object)right ? true : false;
+            if (typeof(TKey) == typeof(double))
+                return (double)(object)left < (double)(object)right ? true : false;
+            if (typeof(TKey) == typeof(Half))
+                return (Half)(object)left < (Half)(object)right ? true : false;
             return left.CompareTo(right) < 0 ? true : false;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // compiles to a single comparison or method call
         private static bool GreaterThan(ref TKey left, ref TKey right)
         {
-            if (typeof(TKey) == typeof(byte)) return (byte)(object)left > (byte)(object)right ? true : false;
-            if (typeof(TKey) == typeof(sbyte)) return (sbyte)(object)left > (sbyte)(object)right ? true : false;
-            if (typeof(TKey) == typeof(ushort)) return (ushort)(object)left > (ushort)(object)right ? true : false;
-            if (typeof(TKey) == typeof(short)) return (short)(object)left > (short)(object)right ? true : false;
-            if (typeof(TKey) == typeof(uint)) return (uint)(object)left > (uint)(object)right ? true : false;
-            if (typeof(TKey) == typeof(int)) return (int)(object)left > (int)(object)right ? true : false;
-            if (typeof(TKey) == typeof(ulong)) return (ulong)(object)left > (ulong)(object)right ? true : false;
-            if (typeof(TKey) == typeof(long)) return (long)(object)left > (long)(object)right ? true : false;
-            if (typeof(TKey) == typeof(nuint)) return (nuint)(object)left > (nuint)(object)right ? true : false;
-            if (typeof(TKey) == typeof(nint)) return (nint)(object)left > (nint)(object)right ? true : false;
-            if (typeof(TKey) == typeof(float)) return (float)(object)left > (float)(object)right ? true : false;
-            if (typeof(TKey) == typeof(double)) return (double)(object)left > (double)(object)right ? true : false;
-            if (typeof(TKey) == typeof(Half)) return (Half)(object)left > (Half)(object)right ? true : false;
+            if (typeof(TKey) == typeof(byte))
+                return (byte)(object)left > (byte)(object)right ? true : false;
+            if (typeof(TKey) == typeof(sbyte))
+                return (sbyte)(object)left > (sbyte)(object)right ? true : false;
+            if (typeof(TKey) == typeof(ushort))
+                return (ushort)(object)left > (ushort)(object)right ? true : false;
+            if (typeof(TKey) == typeof(short))
+                return (short)(object)left > (short)(object)right ? true : false;
+            if (typeof(TKey) == typeof(uint))
+                return (uint)(object)left > (uint)(object)right ? true : false;
+            if (typeof(TKey) == typeof(int))
+                return (int)(object)left > (int)(object)right ? true : false;
+            if (typeof(TKey) == typeof(ulong))
+                return (ulong)(object)left > (ulong)(object)right ? true : false;
+            if (typeof(TKey) == typeof(long))
+                return (long)(object)left > (long)(object)right ? true : false;
+            if (typeof(TKey) == typeof(nuint))
+                return (nuint)(object)left > (nuint)(object)right ? true : false;
+            if (typeof(TKey) == typeof(nint))
+                return (nint)(object)left > (nint)(object)right ? true : false;
+            if (typeof(TKey) == typeof(float))
+                return (float)(object)left > (float)(object)right ? true : false;
+            if (typeof(TKey) == typeof(double))
+                return (double)(object)left > (double)(object)right ? true : false;
+            if (typeof(TKey) == typeof(Half))
+                return (Half)(object)left > (Half)(object)right ? true : false;
             return left.CompareTo(right) > 0 ? true : false;
         }
     }
@@ -1103,7 +1292,8 @@ namespace System.Collections.Generic
     /// <summary>Helper methods for use in array/span sorting routines.</summary>
     internal static class SortUtils
     {
-        public static int MoveNansToFront<TKey, TValue>(Span<TKey> keys, Span<TValue> values) where TKey : notnull
+        public static int MoveNansToFront<TKey, TValue>(Span<TKey> keys, Span<TValue> values)
+            where TKey : notnull
         {
             Debug.Assert(typeof(TKey) == typeof(double) || typeof(TKey) == typeof(float));
 
@@ -1111,9 +1301,11 @@ namespace System.Collections.Generic
 
             for (int i = 0; i < keys.Length; i++)
             {
-                if ((typeof(TKey) == typeof(double) && double.IsNaN((double)(object)keys[i])) ||
-                    (typeof(TKey) == typeof(float) && float.IsNaN((float)(object)keys[i])) ||
-                    (typeof(TKey) == typeof(Half) && Half.IsNaN((Half)(object)keys[i])))
+                if (
+                    (typeof(TKey) == typeof(double) && double.IsNaN((double)(object)keys[i]))
+                    || (typeof(TKey) == typeof(float) && float.IsNaN((float)(object)keys[i]))
+                    || (typeof(TKey) == typeof(Half) && Half.IsNaN((Half)(object)keys[i]))
+                )
                 {
                     TKey temp = keys[left];
                     keys[left] = keys[i];

@@ -44,13 +44,22 @@ namespace ILCompiler
                 {
                     string runtimeExportName = ecmaMethod.GetRuntimeExportName();
                     if (runtimeExportName != null)
-                        rootProvider.AddCompilationRoot((MethodDesc)ecmaMethod, "Runtime export", runtimeExportName);
+                        rootProvider.AddCompilationRoot(
+                            (MethodDesc)ecmaMethod,
+                            "Runtime export",
+                            runtimeExportName
+                        );
                 }
                 else if (ecmaMethod.IsUnmanagedCallersOnly)
                 {
-                    string unmanagedCallersOnlyExportName = ecmaMethod.GetUnmanagedCallersOnlyExportName();
+                    string unmanagedCallersOnlyExportName =
+                        ecmaMethod.GetUnmanagedCallersOnlyExportName();
                     if (unmanagedCallersOnlyExportName != null)
-                        rootProvider.AddCompilationRoot((MethodDesc)ecmaMethod, "Native callable", unmanagedCallersOnlyExportName);
+                        rootProvider.AddCompilationRoot(
+                            (MethodDesc)ecmaMethod,
+                            "Native callable",
+                            unmanagedCallersOnlyExportName
+                        );
                 }
             }
         }

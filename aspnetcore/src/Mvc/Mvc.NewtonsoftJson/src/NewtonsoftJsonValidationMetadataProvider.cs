@@ -12,16 +12,16 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 /// An implementation of <see cref="IDisplayMetadataProvider"/> and <see cref="IValidationMetadataProvider"/> for
 /// the Newtonsoft.Json attribute classes.
 /// </summary>
-public sealed class NewtonsoftJsonValidationMetadataProvider : IDisplayMetadataProvider, IValidationMetadataProvider
+public sealed class NewtonsoftJsonValidationMetadataProvider
+    : IDisplayMetadataProvider,
+        IValidationMetadataProvider
 {
     private readonly NamingStrategy _jsonNamingPolicy;
 
     /// <summary>
     /// Creates a new <see cref="NewtonsoftJsonValidationMetadataProvider"/> with the default <see cref="CamelCaseNamingStrategy"/>
     /// </summary>
-    public NewtonsoftJsonValidationMetadataProvider()
-        : this(new CamelCaseNamingStrategy())
-    { }
+    public NewtonsoftJsonValidationMetadataProvider() : this(new CamelCaseNamingStrategy()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="NewtonsoftJsonValidationMetadataProvider"/> with an optional <see cref="NamingStrategy"/>
@@ -71,6 +71,6 @@ public sealed class NewtonsoftJsonValidationMetadataProvider : IDisplayMetadataP
         context.ValidationMetadata.ValidationModelName = propertyName!;
     }
 
-    private static string? ReadPropertyNameFrom(IReadOnlyList<object> attributes)
-        => attributes?.OfType<JsonPropertyAttribute>().FirstOrDefault()?.PropertyName;
+    private static string? ReadPropertyNameFrom(IReadOnlyList<object> attributes) =>
+        attributes?.OfType<JsonPropertyAttribute>().FirstOrDefault()?.PropertyName;
 }

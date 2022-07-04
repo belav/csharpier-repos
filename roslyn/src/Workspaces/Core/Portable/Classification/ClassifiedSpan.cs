@@ -14,9 +14,7 @@ namespace Microsoft.CodeAnalysis.Classification
         public TextSpan TextSpan { get; }
 
         public ClassifiedSpan(string classificationType, TextSpan textSpan)
-            : this(textSpan, classificationType)
-        {
-        }
+            : this(textSpan, classificationType) { }
 
         public ClassifiedSpan(TextSpan textSpan, string classificationType)
         {
@@ -24,16 +22,15 @@ namespace Microsoft.CodeAnalysis.Classification
             this.TextSpan = textSpan;
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(this.ClassificationType, this.TextSpan.GetHashCode());
+        public override int GetHashCode() =>
+            Hash.Combine(this.ClassificationType, this.TextSpan.GetHashCode());
 
         public override bool Equals(object? obj)
         {
-            return obj is ClassifiedSpan &&
-                Equals((ClassifiedSpan)obj);
+            return obj is ClassifiedSpan && Equals((ClassifiedSpan)obj);
         }
 
-        public bool Equals(ClassifiedSpan other)
-            => this.ClassificationType == other.ClassificationType && this.TextSpan == other.TextSpan;
+        public bool Equals(ClassifiedSpan other) =>
+            this.ClassificationType == other.ClassificationType && this.TextSpan == other.TextSpan;
     }
 }

@@ -14,7 +14,12 @@ public class ProducesResponseTypeAttributeTests
         // Arrange
         var mediaType1 = new StringSegment("application/json");
         var mediaType2 = new StringSegment("text/json;charset=utf-8");
-        var producesContentAttribute = new ProducesResponseTypeAttribute(typeof(void), StatusCodes.Status200OK, "application/json", "text/json;charset=utf-8");
+        var producesContentAttribute = new ProducesResponseTypeAttribute(
+            typeof(void),
+            StatusCodes.Status200OK,
+            "application/json",
+            "text/json;charset=utf-8"
+        );
 
         // Assert
         Assert.Equal(2, producesContentAttribute.ContentTypes.Count);
@@ -26,31 +31,44 @@ public class ProducesResponseTypeAttributeTests
     [InlineData("application/*", "application/*")]
     [InlineData("application/xml, application/*, application/json", "application/*")]
     [InlineData("application/*, application/json", "application/*")]
-
     [InlineData("*/*", "*/*")]
     [InlineData("application/xml, */*, application/json", "*/*")]
     [InlineData("*/*, application/json", "*/*")]
     [InlineData("application/*+json", "application/*+json")]
     [InlineData("application/json;v=1;*", "application/json;v=1;*")]
-    public void ProducesResponseTypeAttribute_InvalidContentType_Throws(string content, string invalidContentType)
+    public void ProducesResponseTypeAttribute_InvalidContentType_Throws(
+        string content,
+        string invalidContentType
+    )
     {
         // Act
         var contentTypes = content.Split(',').Select(contentType => contentType.Trim()).ToArray();
 
         // Assert
         var ex = Assert.Throws<InvalidOperationException>(
-                   () => new ProducesResponseTypeAttribute(typeof(void), StatusCodes.Status200OK, contentTypes[0], contentTypes.Skip(1).ToArray()));
+            () =>
+                new ProducesResponseTypeAttribute(
+                    typeof(void),
+                    StatusCodes.Status200OK,
+                    contentTypes[0],
+                    contentTypes.Skip(1).ToArray()
+                )
+        );
 
         Assert.Equal(
             $"Could not parse '{invalidContentType}'. Content types with wildcards are not supported.",
-            ex.Message);
+            ex.Message
+        );
     }
 
     [Fact]
     public void ProducesResponseTypeAttribute_WithTypeOnly_SetsTypeProperty()
     {
         // Arrange
-        var producesResponseTypeAttribute = new ProducesResponseTypeAttribute(typeof(Person), StatusCodes.Status200OK);
+        var producesResponseTypeAttribute = new ProducesResponseTypeAttribute(
+            typeof(Person),
+            StatusCodes.Status200OK
+        );
 
         // Act and Assert
         Assert.NotNull(producesResponseTypeAttribute.Type);
@@ -61,7 +79,10 @@ public class ProducesResponseTypeAttributeTests
     public void ProducesResponseTypeAttribute_WithTypeOnly_DoesNotSetContentTypes()
     {
         // Arrange
-        var producesResponseTypeAttribute = new ProducesResponseTypeAttribute(typeof(Person), StatusCodes.Status200OK);
+        var producesResponseTypeAttribute = new ProducesResponseTypeAttribute(
+            typeof(Person),
+            StatusCodes.Status200OK
+        );
 
         // Act and Assert
         Assert.Null(producesResponseTypeAttribute.ContentTypes);

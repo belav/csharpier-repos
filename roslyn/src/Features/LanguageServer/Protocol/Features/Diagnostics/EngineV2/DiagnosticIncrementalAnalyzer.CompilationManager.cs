@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         /// <summary>
         /// Return CompilationWithAnalyzer for given project with given stateSets
         /// </summary>
-        private async Task<CompilationWithAnalyzers?> GetOrCreateCompilationWithAnalyzersAsync(Project project, ImmutableArray<StateSet> stateSets, CancellationToken cancellationToken)
+        private async Task<CompilationWithAnalyzers?> GetOrCreateCompilationWithAnalyzersAsync(
+            Project project,
+            ImmutableArray<StateSet> stateSets,
+            CancellationToken cancellationToken
+        )
         {
             if (!project.SupportsCompilation)
             {
@@ -27,8 +31,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             var ideOptions = AnalyzerService.GlobalOptions.GetIdeAnalyzerOptions(project);
 
-            if (_projectCompilationsWithAnalyzers.TryGetValue(project, out var compilationWithAnalyzers) &&
-                ((WorkspaceAnalyzerOptions)compilationWithAnalyzers!.AnalysisOptions.Options!).IdeOptions == ideOptions)
+            if (
+                _projectCompilationsWithAnalyzers.TryGetValue(
+                    project,
+                    out var compilationWithAnalyzers
+                )
+                && (
+                    (WorkspaceAnalyzerOptions)compilationWithAnalyzers!.AnalysisOptions.Options!
+                ).IdeOptions == ideOptions
+            )
             {
                 // we have cached one, return that.
                 AssertAnalyzers(compilationWithAnalyzers, stateSets);
@@ -36,10 +47,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             }
 
             // Create driver that holds onto compilation and associated analyzers
-            var newCompilationWithAnalyzers = await CreateCompilationWithAnalyzersAsync(project, ideOptions, stateSets, includeSuppressedDiagnostics: true, cancellationToken).ConfigureAwait(false);
+            var newCompilationWithAnalyzers = await CreateCompilationWithAnalyzersAsync(
+                    project,
+                    ideOptions,
+                    stateSets,
+                    includeSuppressedDiagnostics: true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Add new analyzer driver to the map
-            compilationWithAnalyzers = _projectCompilationsWithAnalyzers.GetValue(project, _ => newCompilationWithAnalyzers);
+            compilationWithAnalyzers = _projectCompilationsWithAnalyzers.GetValue(
+                project,
+                _ => newCompilationWithAnalyzers
+            );
 
             // if somebody has beat us, make sure analyzers are good.
             if (compilationWithAnalyzers != newCompilationWithAnalyzers)
@@ -50,25 +71,41 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             return compilationWithAnalyzers;
         }
 
-        private static Task<CompilationWithAnalyzers?> CreateCompilationWithAnalyzersAsync(Project project, IdeAnalyzerOptions ideOptions, IEnumerable<StateSet> stateSets, bool includeSuppressedDiagnostics, CancellationToken cancellationToken)
-            => DocumentAnalysisExecutor.CreateCompilationWithAnalyzersAsync(project, ideOptions, stateSets.Select(s => s.Analyzer), includeSuppressedDiagnostics, cancellationToken);
+        private static Task<CompilationWithAnalyzers?> CreateCompilationWithAnalyzersAsync(
+            Project project,
+            IdeAnalyzerOptions ideOptions,
+            IEnumerable<StateSet> stateSets,
+            bool includeSuppressedDiagnostics,
+            CancellationToken cancellationToken
+        ) =>
+            DocumentAnalysisExecutor.CreateCompilationWithAnalyzersAsync(
+                project,
+                ideOptions,
+                stateSets.Select(s => s.Analyzer),
+                includeSuppressedDiagnostics,
+                cancellationToken
+            );
 
-        private void ClearCompilationsWithAnalyzersCache(Project project)
-            => _projectCompilationsWithAnalyzers.Remove(project);
+        private void ClearCompilationsWithAnalyzersCache(Project project) =>
+            _projectCompilationsWithAnalyzers.Remove(project);
 
         private void ClearCompilationsWithAnalyzersCache()
         {
             // we basically eagarly clear the cache on some known changes
             // to let CompilationWithAnalyzer go.
 
-            // we create new conditional weak table every time, it turns out 
+            // we create new conditional weak table every time, it turns out
             // only way to clear ConditionalWeakTable is re-creating it.
             // also, conditional weak table has a leak - https://github.com/dotnet/coreclr/issues/665
-            _projectCompilationsWithAnalyzers = new ConditionalWeakTable<Project, CompilationWithAnalyzers?>();
+            _projectCompilationsWithAnalyzers =
+                new ConditionalWeakTable<Project, CompilationWithAnalyzers?>();
         }
 
         [Conditional("DEBUG")]
-        private static void AssertAnalyzers(CompilationWithAnalyzers? compilation, IEnumerable<StateSet> stateSets)
+        private static void AssertAnalyzers(
+            CompilationWithAnalyzers? compilation,
+            IEnumerable<StateSet> stateSets
+        )
         {
             if (compilation == null)
             {
@@ -77,7 +114,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             }
 
             // make sure analyzers are same.
-            Contract.ThrowIfFalse(compilation.Analyzers.SetEquals(stateSets.Select(s => s.Analyzer).Where(a => !a.IsWorkspaceDiagnosticAnalyzer())));
+            Contract.ThrowIfFalse(
+                compilation.Analyzers.SetEquals(
+                    stateSets.Select(s => s.Analyzer).Where(a => !a.IsWorkspaceDiagnosticAnalyzer())
+                )
+            );
         }
     }
 }

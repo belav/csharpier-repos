@@ -20,8 +20,7 @@ public class SelectListItem
     /// </summary>
     /// <param name="text">The display text of this <see cref="SelectListItem"/>.</param>
     /// <param name="value">The value of this <see cref="SelectListItem"/>.</param>
-    public SelectListItem(string text, string value)
-        : this()
+    public SelectListItem(string text, string value) : this()
     {
         Text = text;
         Value = value;
@@ -33,8 +32,7 @@ public class SelectListItem
     /// <param name="text">The display text of this <see cref="SelectListItem"/>.</param>
     /// <param name="value">The value of this <see cref="SelectListItem"/>.</param>
     /// <param name="selected">Value that indicates whether this <see cref="SelectListItem"/> is selected.</param>
-    public SelectListItem(string text, string value, bool selected)
-        : this(text, value)
+    public SelectListItem(string text, string value, bool selected) : this(text, value)
     {
         Selected = selected;
     }

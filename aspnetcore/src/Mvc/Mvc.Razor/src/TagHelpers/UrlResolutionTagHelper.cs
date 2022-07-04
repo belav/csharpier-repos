@@ -33,7 +33,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 [HtmlTargetElement("img", Attributes = "[src^='~/']", TagStructure = TagStructure.WithoutEndTag)]
 [HtmlTargetElement("img", Attributes = "[srcset^='~/']", TagStructure = TagStructure.WithoutEndTag)]
 [HtmlTargetElement("input", Attributes = "[src^='~/']", TagStructure = TagStructure.WithoutEndTag)]
-[HtmlTargetElement("input", Attributes = "[formaction^='~/']", TagStructure = TagStructure.WithoutEndTag)]
+[HtmlTargetElement(
+    "input",
+    Attributes = "[formaction^='~/']",
+    TagStructure = TagStructure.WithoutEndTag
+)]
 [HtmlTargetElement("ins", Attributes = "[cite^='~/']")]
 [HtmlTargetElement("link", Attributes = "[href^='~/']", TagStructure = TagStructure.WithoutEndTag)]
 [HtmlTargetElement("menuitem", Attributes = "[icon^='~/']")]
@@ -42,15 +46,25 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 [HtmlTargetElement("q", Attributes = "[cite^='~/']")]
 [HtmlTargetElement("script", Attributes = "[src^='~/']")]
 [HtmlTargetElement("source", Attributes = "[src^='~/']", TagStructure = TagStructure.WithoutEndTag)]
-[HtmlTargetElement("source", Attributes = "[srcset^='~/']", TagStructure = TagStructure.WithoutEndTag)]
+[HtmlTargetElement(
+    "source",
+    Attributes = "[srcset^='~/']",
+    TagStructure = TagStructure.WithoutEndTag
+)]
 [HtmlTargetElement("track", Attributes = "[src^='~/']", TagStructure = TagStructure.WithoutEndTag)]
 [HtmlTargetElement("video", Attributes = "[src^='~/']")]
 [HtmlTargetElement("video", Attributes = "[poster^='~/']")]
 public class UrlResolutionTagHelper : TagHelper
 {
     // Valid whitespace characters defined by the HTML5 spec.
-    private static readonly char[] ValidAttributeWhitespaceChars =
-        new[] { '\t', '\n', '\u000C', '\r', ' ' };
+    private static readonly char[] ValidAttributeWhitespaceChars = new[]
+    {
+        '\t',
+        '\n',
+        '\u000C',
+        '\r',
+        ' '
+    };
     private static readonly Dictionary<string, string[]> ElementAttributeLookups =
         new(StringComparer.OrdinalIgnoreCase)
         {
@@ -163,7 +177,8 @@ public class UrlResolutionTagHelper : TagHelper
                     attributes[i] = new TagHelperAttribute(
                         attribute.Name,
                         resolvedUrl,
-                        attribute.ValueStyle);
+                        attribute.ValueStyle
+                    );
                 }
             }
             else
@@ -190,7 +205,8 @@ public class UrlResolutionTagHelper : TagHelper
                         attributes[i] = new TagHelperAttribute(
                             attribute.Name,
                             resolvedUrl,
-                            attribute.ValueStyle);
+                            attribute.ValueStyle
+                        );
                     }
                     else if (htmlString == null)
                     {
@@ -198,7 +214,8 @@ public class UrlResolutionTagHelper : TagHelper
                         attributes[i] = new TagHelperAttribute(
                             attribute.Name,
                             new HtmlString(stringValue),
-                            attribute.ValueStyle);
+                            attribute.ValueStyle
+                        );
                     }
                 }
             }
@@ -262,13 +279,16 @@ public class UrlResolutionTagHelper : TagHelper
                     nameof(IUrlHelper.Content),
                     "removeTagHelper",
                     typeof(UrlResolutionTagHelper).FullName,
-                    typeof(UrlResolutionTagHelper).Assembly.GetName().Name));
+                    typeof(UrlResolutionTagHelper).Assembly.GetName().Name
+                )
+            );
         }
 
         resolvedUrl = new EncodeFirstSegmentContent(
             appRelativeUrl,
             appRelativeUrl.Length - postTildeSlashUrlValue.Length,
-            postTildeSlashUrlValue);
+            postTildeSlashUrlValue
+        );
 
         return true;
     }
@@ -333,7 +353,11 @@ public class UrlResolutionTagHelper : TagHelper
         private readonly int _firstSegmentLength;
         private readonly string _secondSegment;
 
-        public EncodeFirstSegmentContent(string firstSegment, int firstSegmentLength, string secondSegment)
+        public EncodeFirstSegmentContent(
+            string firstSegment,
+            int firstSegmentLength,
+            string secondSegment
+        )
         {
             _firstSegment = firstSegment;
             _firstSegmentLength = firstSegmentLength;

@@ -21,11 +21,6 @@ public class PropertyDescriptorTests
 
         var modelDescriptor = ModelDescriptor.FromType(type);
 
-        modelDescriptor
-            .PropertyDescriptors
-            .Single()
-            .GetDefaultValue()
-            .Should()
-            .Be(defaultValue);
+        modelDescriptor.PropertyDescriptors.Single().GetDefaultValue().Should().Be(defaultValue);
     }
 }

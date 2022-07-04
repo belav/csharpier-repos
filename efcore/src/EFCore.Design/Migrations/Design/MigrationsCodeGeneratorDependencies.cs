@@ -39,7 +39,8 @@ public sealed record MigrationsCodeGeneratorDependencies
     [EntityFrameworkInternal]
     public MigrationsCodeGeneratorDependencies(
         IRelationalTypeMappingSource relationalTypeMappingSource,
-        IAnnotationCodeGenerator annotationCodeGenerator)
+        IAnnotationCodeGenerator annotationCodeGenerator
+    )
     {
         RelationalTypeMappingSource = relationalTypeMappingSource;
         AnnotationCodeGenerator = annotationCodeGenerator;

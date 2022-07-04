@@ -52,7 +52,8 @@ namespace DependencyLogViewer
 
         private void help_Click(object sender, EventArgs e)
         {
-            string helpMessage = @"
+            string helpMessage =
+                @"
 Dependency Graph Viewer
 This application allows viewing the dependency graph produced by the AOT compilation.
 

@@ -5,7 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Numerics;
 
-public class X<K> 
+public class X<K>
 {
     public X(K k1)
     {
@@ -27,7 +27,7 @@ class B
     {
         X<Vector3> a = null;
         bool result = false;
-        try 
+        try
         {
             X<Vector3>.Test(a);
         }

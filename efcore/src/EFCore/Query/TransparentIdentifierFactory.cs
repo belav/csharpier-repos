@@ -28,8 +28,8 @@ public static class TransparentIdentifierFactory
     /// <param name="outerType">The outer type of the transparent identifier.</param>
     /// <param name="innerType">The inner type of the transparent identifier.</param>
     /// <returns>The created transparent identifier type.</returns>
-    public static Type Create(Type outerType, Type innerType)
-        => typeof(TransparentIdentifier<,>).MakeGenericType(outerType, innerType);
+    public static Type Create(Type outerType, Type innerType) =>
+        typeof(TransparentIdentifier<,>).MakeGenericType(outerType, innerType);
 
     private readonly struct TransparentIdentifier<TOuter, TInner>
     {

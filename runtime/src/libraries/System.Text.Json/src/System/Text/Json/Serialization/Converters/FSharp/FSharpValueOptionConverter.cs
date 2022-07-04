@@ -8,17 +8,21 @@ namespace System.Text.Json.Serialization.Converters
 {
     // Converter for F# struct optional values: https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpvalueoption-1.html
     // Serializes `ValueSome(value)` using the format of `value` and `ValueNone` values as `null`.
-    internal sealed class FSharpValueOptionConverter<TValueOption, TElement> : JsonConverter<TValueOption>
-        where TValueOption : struct, IEquatable<TValueOption>
+    internal sealed class FSharpValueOptionConverter<TValueOption, TElement>
+        : JsonConverter<TValueOption> where TValueOption : struct, IEquatable<TValueOption>
     {
         // Reflect the converter strategy of the element type, since we use the identical contract for ValueSome(_) values.
         internal override ConverterStrategy ConverterStrategy => _converterStrategy;
         internal override Type? ElementType => typeof(TElement);
+
         // 'ValueNone' is encoded using 'default' at runtime and serialized as 'null' in JSON.
         public override bool HandleNull => true;
 
         private readonly JsonConverter<TElement> _elementConverter;
-        private readonly FSharpCoreReflectionProxy.StructGetter<TValueOption, TElement> _optionValueGetter;
+        private readonly FSharpCoreReflectionProxy.StructGetter<
+            TValueOption,
+            TElement
+        > _optionValueGetter;
         private readonly Func<TElement?, TValueOption> _optionConstructor;
         private readonly ConverterStrategy _converterStrategy;
 
@@ -27,8 +31,16 @@ namespace System.Text.Json.Serialization.Converters
         public FSharpValueOptionConverter(JsonConverter<TElement> elementConverter)
         {
             _elementConverter = elementConverter;
-            _optionValueGetter = FSharpCoreReflectionProxy.Instance.CreateFSharpValueOptionValueGetter<TValueOption, TElement>();
-            _optionConstructor = FSharpCoreReflectionProxy.Instance.CreateFSharpValueOptionSomeConstructor<TValueOption, TElement>();
+            _optionValueGetter =
+                FSharpCoreReflectionProxy.Instance.CreateFSharpValueOptionValueGetter<
+                    TValueOption,
+                    TElement
+                >();
+            _optionConstructor =
+                FSharpCoreReflectionProxy.Instance.CreateFSharpValueOptionSomeConstructor<
+                    TValueOption,
+                    TElement
+                >();
 
             // Workaround for the base constructor depending on the (still unset) ConverterStrategy
             // to derive the CanUseDirectReadOrWrite and RequiresReadAhead values.
@@ -37,7 +49,13 @@ namespace System.Text.Json.Serialization.Converters
             RequiresReadAhead = elementConverter.RequiresReadAhead;
         }
 
-        internal override bool OnTryRead(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options, ref ReadStack state, out TValueOption value)
+        internal override bool OnTryRead(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options,
+            ref ReadStack state,
+            out TValueOption value
+        )
         {
             // `null` values deserialize as `ValueNone`
             if (!state.IsContinuation && reader.TokenType == JsonTokenType.Null)
@@ -46,8 +64,20 @@ namespace System.Text.Json.Serialization.Converters
                 return true;
             }
 
-            state.Current.JsonPropertyInfo = state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
-            if (_elementConverter.TryRead(ref reader, typeof(TElement), options, ref state, out TElement? element))
+            state.Current.JsonPropertyInfo = state
+                .Current
+                .JsonTypeInfo
+                .ElementTypeInfo!
+                .PropertyInfoForTypeInfo;
+            if (
+                _elementConverter.TryRead(
+                    ref reader,
+                    typeof(TElement),
+                    options,
+                    ref state,
+                    out TElement? element
+                )
+            )
             {
                 value = _optionConstructor(element);
                 return true;
@@ -57,7 +87,12 @@ namespace System.Text.Json.Serialization.Converters
             return false;
         }
 
-        internal override bool OnTryWrite(Utf8JsonWriter writer, TValueOption value, JsonSerializerOptions options, ref WriteStack state)
+        internal override bool OnTryWrite(
+            Utf8JsonWriter writer,
+            TValueOption value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             if (value.Equals(default))
             {
@@ -68,14 +103,22 @@ namespace System.Text.Json.Serialization.Converters
 
             TElement element = _optionValueGetter(ref value);
 
-            state.Current.JsonPropertyInfo = state.Current.JsonTypeInfo.ElementTypeInfo!.PropertyInfoForTypeInfo;
+            state.Current.JsonPropertyInfo = state
+                .Current
+                .JsonTypeInfo
+                .ElementTypeInfo!
+                .PropertyInfoForTypeInfo;
             return _elementConverter.TryWrite(writer, element, options, ref state);
         }
 
         // Since this is a hybrid converter (ConverterStrategy depends on the element converter),
         // we need to override the value converter Write and Read methods too.
 
-        public override void Write(Utf8JsonWriter writer, TValueOption value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            TValueOption value,
+            JsonSerializerOptions options
+        )
         {
             if (value.Equals(default))
             {
@@ -89,7 +132,11 @@ namespace System.Text.Json.Serialization.Converters
             }
         }
 
-        public override TValueOption Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override TValueOption Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType == JsonTokenType.Null)
             {

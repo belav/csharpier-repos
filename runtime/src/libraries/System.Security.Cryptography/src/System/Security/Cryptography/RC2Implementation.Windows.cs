@@ -16,12 +16,24 @@ namespace System.Security.Cryptography
             int blockSize,
             int feedbackSize,
             int paddingSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
-            using (SafeAlgorithmHandle algorithm = RC2BCryptModes.GetHandle(cipherMode, key.Length * 8))
+            using (
+                SafeAlgorithmHandle algorithm = RC2BCryptModes.GetHandle(cipherMode, key.Length * 8)
+            )
             {
                 // The BasicSymmetricCipherBCrypt ctor will increase algorithm reference count and take ownership.
-                BasicSymmetricCipher cipher = new BasicSymmetricCipherBCrypt(algorithm, cipherMode, blockSize, paddingSize, key, true, iv, encrypting);
+                BasicSymmetricCipher cipher = new BasicSymmetricCipherBCrypt(
+                    algorithm,
+                    cipherMode,
+                    blockSize,
+                    paddingSize,
+                    key,
+                    true,
+                    iv,
+                    encrypting
+                );
                 return UniversalCryptoTransform.Create(paddingMode, cipher, encrypting);
             }
         }
@@ -34,9 +46,12 @@ namespace System.Security.Cryptography
             int blockSize,
             int feedbackSizeInBytes,
             int paddingSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
-            using (SafeAlgorithmHandle algorithm = RC2BCryptModes.GetHandle(cipherMode, key.Length * 8))
+            using (
+                SafeAlgorithmHandle algorithm = RC2BCryptModes.GetHandle(cipherMode, key.Length * 8)
+            )
             {
                 // The BasicSymmetricCipherBCrypt ctor will increase algorithm reference count and take ownership.
                 return new BasicSymmetricCipherLiteBCrypt(
@@ -47,7 +62,8 @@ namespace System.Security.Cryptography
                     key,
                     ownsParentHandle: true,
                     iv,
-                    encrypting);
+                    encrypting
+                );
             }
         }
     }

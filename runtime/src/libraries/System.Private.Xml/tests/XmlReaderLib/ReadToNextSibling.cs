@@ -15,7 +15,8 @@ namespace System.Xml.Tests
     public abstract partial class TCReadToNextSibling : TCXMLReaderBaseGeneral
     {
         #region XMLSTR
-        private string _xmlStr = @"<?xml version='1.0'?>
+        private string _xmlStr =
+            @"<?xml version='1.0'?>
                                                     <root><!--Comment-->
                                                         <elem>
                                                             <child1 att='1'>
@@ -96,7 +97,11 @@ namespace System.Xml.Tests
 
                     if (DataReader.HasAttributes)
                     {
-                        CError.Compare(DataReader.GetAttribute("att"), "1", "Not the expected attribute");
+                        CError.Compare(
+                            DataReader.GetAttribute("att"),
+                            "1",
+                            "Not the expected attribute"
+                        );
                     }
                     else
                     {
@@ -104,7 +109,8 @@ namespace System.Xml.Tests
                         DumpStat();
                         return TEST_FAIL;
                     }
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
                     return TEST_PASS;
 
@@ -125,7 +131,8 @@ namespace System.Xml.Tests
                         DumpStat();
                         return TEST_FAIL;
                     }
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
                     return TEST_PASS;
 
@@ -148,7 +155,8 @@ namespace System.Xml.Tests
                         return TEST_FAIL;
                     }
 
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
                     return TEST_PASS;
                 default:
@@ -172,7 +180,6 @@ namespace System.Xml.Tests
             mnw.Finish();
             CError.WriteIgnore(mnw.GetNodes() + "\n");
 
-
             ReloadSource(new StringReader(mnw.GetNodes()));
             DataReader.PositionOnElement("ELEMENT_1");
 
@@ -183,7 +190,8 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.Depth, depth, "Depth is not correct");
             CError.Compare(DataReader.NodeType, XmlNodeType.Element, "Nodetype is not correct");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -214,11 +222,11 @@ namespace System.Xml.Tests
 
             CError.Compare(DataReader.ReadToNextSibling("b"), "Couldn't go to NextSibling");
 
-
             CError.Compare(DataReader.Depth, depth, "Depth is not correct");
             CError.Compare(DataReader.NodeType, XmlNodeType.Element, "Nodetype is not correct");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -248,7 +256,8 @@ namespace System.Xml.Tests
                     DataReader.ReadToNextSibling("a");
                     CError.Compare(DataReader.GetAttribute("att"), "3", "Wrong node");
 
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
 
                     return TEST_PASS;
@@ -259,7 +268,8 @@ namespace System.Xml.Tests
                     DataReader.ReadToNextSibling("a", "a");
                     CError.Compare(DataReader.GetAttribute("att"), "3", "Wrong node");
 
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
 
                     return TEST_PASS;
@@ -270,7 +280,8 @@ namespace System.Xml.Tests
                     DataReader.ReadToNextSibling("a:a");
                     CError.Compare(DataReader.GetAttribute("att"), "3", "Wrong node");
 
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Close();
 
                     return TEST_PASS;
@@ -287,31 +298,52 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement("elem");
             int depth = DataReader.Depth;
 
-            CError.Compare(DataReader.ReadToNextSibling("abc"), false, "Reader returned true for an invalid name");
+            CError.Compare(
+                DataReader.ReadToNextSibling("abc"),
+                false,
+                "Reader returned true for an invalid name"
+            );
             CError.Compare(DataReader.NodeType, XmlNodeType.EndElement, "Wrong node type");
             CError.Compare(DataReader.Depth, depth - 1, "Wrong Depth");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
         }
 
-        [Variation("Positioning on a level and try to find the name which is on a level higher", Pri = 1)]
+        [Variation(
+            "Positioning on a level and try to find the name which is on a level higher",
+            Pri = 1
+        )]
         public int v5()
         {
             ReloadSource(new StringReader(_xmlStr));
             DataReader.PositionOnElement("child3");
 
-            CError.Compare(DataReader.ReadToNextSibling("child1"), false, "Reader returned true for an invalid name");
+            CError.Compare(
+                DataReader.ReadToNextSibling("child1"),
+                false,
+                "Reader returned true for an invalid name"
+            );
             CError.Compare(DataReader.NodeType, XmlNodeType.EndElement, "Wrong node type");
 
             DataReader.PositionOnElement("child3");
 
-            CError.Compare(DataReader.ReadToNextSibling("child2", "child2"), false, "Reader returned true for an invalid name,ns");
-            CError.Compare(DataReader.NodeType, XmlNodeType.EndElement, "Wrong node type for name,ns");
+            CError.Compare(
+                DataReader.ReadToNextSibling("child2", "child2"),
+                false,
+                "Reader returned true for an invalid name,ns"
+            );
+            CError.Compare(
+                DataReader.NodeType,
+                XmlNodeType.EndElement,
+                "Wrong node type for name,ns"
+            );
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -324,10 +356,15 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement("root");
 
             CError.Compare(DataReader.ReadToDescendant("elem"), true, "Cant find elem");
-            CError.Compare(DataReader.ReadToNextSibling("elem", "elem"), true, "Cant find elem,elem");
+            CError.Compare(
+                DataReader.ReadToNextSibling("elem", "elem"),
+                true,
+                "Cant find elem,elem"
+            );
             CError.Compare(DataReader.ReadToNextSibling("e:elem"), true, "Cant find e:elem");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -351,7 +388,11 @@ namespace System.Xml.Tests
                     {
                         while (DataReader.MoveToNextAttribute())
                         {
-                            CError.Compare(DataReader.ReadToNextSibling("abc"), false, "Fails on attribute node");
+                            CError.Compare(
+                                DataReader.ReadToNextSibling("abc"),
+                                false,
+                                "Fails on attribute node"
+                            );
                         }
                     }
                 }
@@ -385,7 +426,8 @@ namespace System.Xml.Tests
                 CError.WriteLine("Caught for single param");
             }
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;
@@ -394,14 +436,19 @@ namespace System.Xml.Tests
         [Variation("Different names, same uri works correctly", Pri = 2)]
         public int v17()
         {
-            ReloadSource(new StringReader("<root><child1 xmlns='foo'/>blah<child1 xmlns='bar'>blah</child1></root>"));
+            ReloadSource(
+                new StringReader(
+                    "<root><child1 xmlns='foo'/>blah<child1 xmlns='bar'>blah</child1></root>"
+                )
+            );
             DataReader.Read();
 
             DataReader.ReadToDescendant("child1", "foo");
             DataReader.ReadToNextSibling("child1", "bar");
             CError.Compare(DataReader.IsEmptyElement, false, "Not on the correct node");
 
-            while (DataReader.Read()) ;
+            while (DataReader.Read())
+                ;
             DataReader.Close();
 
             return TEST_PASS;

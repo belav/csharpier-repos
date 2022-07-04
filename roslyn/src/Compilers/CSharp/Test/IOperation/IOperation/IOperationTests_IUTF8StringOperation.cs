@@ -12,12 +12,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class IOperationTests_IUTF8StringOperation : SemanticModelTestBase
     {
-
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void UTF8String_01()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static System.ReadOnlySpan<byte> Test()
@@ -26,21 +26,28 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return ""Abc""u8;')
   ReturnedValue:
     IUTF8StringOperation (Abc) (OperationKind.UTF8String, Type: System.ReadOnlySpan<System.Byte>) (Syntax: '""Abc""u8')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: Roslyn.Test.Utilities.TargetFramework.NetCoreApp);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: Roslyn.Test.Utilities.TargetFramework.NetCoreApp
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void UTF8StringFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(System.ReadOnlySpan<byte> b)
@@ -51,7 +58,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -71,7 +79,12 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, targetFramework: Roslyn.Test.Utilities.TargetFramework.NetCoreApp);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                targetFramework: Roslyn.Test.Utilities.TargetFramework.NetCoreApp
+            );
         }
     }
 }

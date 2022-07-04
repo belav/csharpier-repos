@@ -42,7 +42,8 @@ public class RuntimeSequence : AnnotatableBase, ISequence
         int incrementBy = Sequence.DefaultIncrementBy,
         bool cyclic = false,
         long? minValue = null,
-        long? maxValue = null)
+        long? maxValue = null
+    )
     {
         Model = model;
         Name = name;
@@ -68,15 +69,14 @@ public class RuntimeSequence : AnnotatableBase, ISequence
     /// <summary>
     ///     Gets the database schema that contains the sequence.
     /// </summary>
-    public virtual string? Schema
-        => _schema;
+    public virtual string? Schema => _schema;
 
     /// <summary>
     ///     Returns a string that represents the current object.
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
-    public override string ToString()
-        => ((ISequence)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((ISequence)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -85,10 +85,11 @@ public class RuntimeSequence : AnnotatableBase, ISequence
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((ISequence)this).ToDebugString(),
-            () => ((ISequence)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((ISequence)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <inheritdoc />
     IReadOnlyModel IReadOnlySequence.Model

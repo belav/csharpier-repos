@@ -16,5 +16,8 @@ public interface IRouteHandlerFilter
     /// <param name="next">The next filter in the pipeline.</param>
     /// <returns>An awaitable result of calling the handler and apply
     /// any modifications made by filters in the pipeline.</returns>
-    ValueTask<object?> InvokeAsync(RouteHandlerInvocationContext context, RouteHandlerFilterDelegate next);
+    ValueTask<object?> InvokeAsync(
+        RouteHandlerInvocationContext context,
+        RouteHandlerFilterDelegate next
+    );
 }

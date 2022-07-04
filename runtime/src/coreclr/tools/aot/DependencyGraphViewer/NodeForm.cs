@@ -25,7 +25,8 @@ namespace DependencyLogViewer
 
             InitializeComponent();
 
-            this.Text = "Graph Pid:" + _graph.PID + " Id:" + _graph.ID + " Node:" + _node.ToString();
+            this.Text =
+                "Graph Pid:" + _graph.PID + " Id:" + _graph.ID + " Node:" + _node.ToString();
             this.nodeTitle.Text = _node.ToString();
 
             lock (GraphCollection.Singleton)

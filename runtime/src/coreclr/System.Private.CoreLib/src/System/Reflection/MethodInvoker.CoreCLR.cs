@@ -27,7 +27,12 @@ namespace System.Reflection
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe object? InterpretedInvoke(object? obj, IntPtr* arguments)
         {
-            return RuntimeMethodHandle.InvokeMethod(obj, (void**)arguments, _signature, isConstructor: false);
+            return RuntimeMethodHandle.InvokeMethod(
+                obj,
+                (void**)arguments,
+                _signature,
+                isConstructor: false
+            );
         }
     }
 }

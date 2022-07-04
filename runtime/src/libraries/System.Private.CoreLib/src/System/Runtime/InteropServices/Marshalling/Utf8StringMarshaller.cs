@@ -10,8 +10,13 @@ namespace System.Runtime.InteropServices.Marshalling
     /// Marshaller for UTF-8 strings
     /// </summary>
     [CLSCompliant(false)]
-    [CustomTypeMarshaller(typeof(string), BufferSize = 0x100,
-        Features = CustomTypeMarshallerFeatures.UnmanagedResources | CustomTypeMarshallerFeatures.TwoStageMarshalling | CustomTypeMarshallerFeatures.CallerAllocatedBuffer)]
+    [CustomTypeMarshaller(
+        typeof(string),
+        BufferSize = 0x100,
+        Features = CustomTypeMarshallerFeatures.UnmanagedResources
+            | CustomTypeMarshallerFeatures.TwoStageMarshalling
+            | CustomTypeMarshallerFeatures.CallerAllocatedBuffer
+    )]
     public unsafe ref struct Utf8StringMarshaller
     {
         private byte* _nativeValue;
@@ -21,9 +26,7 @@ namespace System.Runtime.InteropServices.Marshalling
         /// Initializes a new instance of the <see cref="Utf8StringMarshaller"/>.
         /// </summary>
         /// <param name="str">The string to marshal.</param>
-        public Utf8StringMarshaller(string? str)
-            : this(str, default)
-        { }
+        public Utf8StringMarshaller(string? str) : this(str, default) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Utf8StringMarshaller"/>.
@@ -55,7 +58,10 @@ namespace System.Runtime.InteropServices.Marshalling
                 int exactByteCount = checked(Encoding.UTF8.GetByteCount(str) + 1); // + 1 for null terminator
                 if (exactByteCount > buffer.Length)
                 {
-                    buffer = new Span<byte>((byte*)Marshal.AllocCoTaskMem(exactByteCount), exactByteCount);
+                    buffer = new Span<byte>(
+                        (byte*)Marshal.AllocCoTaskMem(exactByteCount),
+                        exactByteCount
+                    );
                     _allocated = true;
                 }
             }

@@ -16,7 +16,13 @@ internal static unsafe class MemoryProtection
 
     public static void CryptProtectMemory(SafeHandle pBuffer, uint byteCount)
     {
-        if (!UnsafeNativeMethods.CryptProtectMemory(pBuffer, byteCount, CRYPTPROTECTMEMORY_SAME_PROCESS))
+        if (
+            !UnsafeNativeMethods.CryptProtectMemory(
+                pBuffer,
+                byteCount,
+                CRYPTPROTECTMEMORY_SAME_PROCESS
+            )
+        )
         {
             UnsafeNativeMethods.ThrowExceptionForLastCrypt32Error();
         }
@@ -24,7 +30,13 @@ internal static unsafe class MemoryProtection
 
     public static void CryptUnprotectMemory(byte* pBuffer, uint byteCount)
     {
-        if (!UnsafeNativeMethods.CryptUnprotectMemory(pBuffer, byteCount, CRYPTPROTECTMEMORY_SAME_PROCESS))
+        if (
+            !UnsafeNativeMethods.CryptUnprotectMemory(
+                pBuffer,
+                byteCount,
+                CRYPTPROTECTMEMORY_SAME_PROCESS
+            )
+        )
         {
             UnsafeNativeMethods.ThrowExceptionForLastCrypt32Error();
         }
@@ -32,7 +44,13 @@ internal static unsafe class MemoryProtection
 
     public static void CryptUnprotectMemory(SafeHandle pBuffer, uint byteCount)
     {
-        if (!UnsafeNativeMethods.CryptUnprotectMemory(pBuffer, byteCount, CRYPTPROTECTMEMORY_SAME_PROCESS))
+        if (
+            !UnsafeNativeMethods.CryptUnprotectMemory(
+                pBuffer,
+                byteCount,
+                CRYPTPROTECTMEMORY_SAME_PROCESS
+            )
+        )
         {
             UnsafeNativeMethods.ThrowExceptionForLastCrypt32Error();
         }

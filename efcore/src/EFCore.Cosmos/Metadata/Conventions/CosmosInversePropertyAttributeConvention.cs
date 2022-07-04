@@ -22,10 +22,9 @@ public class CosmosInversePropertyAttributeConvention : InversePropertyAttribute
     ///     Creates a new instance of <see cref="InversePropertyAttributeConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    public CosmosInversePropertyAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public CosmosInversePropertyAttributeConvention(
+        ProviderConventionSetBuilderDependencies dependencies
+    ) : base(dependencies) { }
 
     /// <summary>
     ///     Finds or tries to create an entity type target for the given navigation member.
@@ -39,13 +38,18 @@ public class CosmosInversePropertyAttributeConvention : InversePropertyAttribute
         IConventionEntityTypeBuilder entityTypeBuilder,
         Type targetClrType,
         MemberInfo navigationMemberInfo,
-        bool shouldCreate = true)
-        => ((InternalEntityTypeBuilder)entityTypeBuilder)
+        bool shouldCreate = true
+    ) =>
+        ((InternalEntityTypeBuilder)entityTypeBuilder)
 #pragma warning disable EF1001 // Internal EF Core API usage.
-            .GetTargetEntityTypeBuilder(
+        .GetTargetEntityTypeBuilder(
+            targetClrType,
+            navigationMemberInfo,
+            shouldCreate ? ConfigurationSource.DataAnnotation : null,
+            CosmosRelationshipDiscoveryConvention.ShouldBeOwnedType(
                 targetClrType,
-                navigationMemberInfo,
-                shouldCreate ? ConfigurationSource.DataAnnotation : null,
-                CosmosRelationshipDiscoveryConvention.ShouldBeOwnedType(targetClrType, entityTypeBuilder.Metadata.Model));
+                entityTypeBuilder.Metadata.Model
+            )
+        );
 #pragma warning restore EF1001 // Internal EF Core API usage.
 }

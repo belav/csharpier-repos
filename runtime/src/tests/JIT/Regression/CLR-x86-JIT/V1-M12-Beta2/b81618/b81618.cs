@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 public class test
 {
     public static int Main(String[] args)
@@ -14,11 +15,13 @@ public class test
 
         if (flag)
         {
-            Console.WriteLine("FAIL"); return 101;
+            Console.WriteLine("FAIL");
+            return 101;
         }
         else
         {
-            Console.WriteLine("PASS"); return 100;
+            Console.WriteLine("PASS");
+            return 100;
         }
     }
 }

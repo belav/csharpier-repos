@@ -19,12 +19,8 @@ public class SqliteGuidTypeMapping : GuidTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqliteGuidTypeMapping(
-        string storeType,
-        DbType? dbType = System.Data.DbType.Guid)
-        : base(storeType, dbType)
-    {
-    }
+    public SqliteGuidTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Guid)
+        : base(storeType, dbType) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -32,18 +28,16 @@ public class SqliteGuidTypeMapping : GuidTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected SqliteGuidTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+    protected SqliteGuidTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters)
+    { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqliteGuidTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqliteGuidTypeMapping(parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -51,6 +45,6 @@ public class SqliteGuidTypeMapping : GuidTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override string GenerateNonNullSqlLiteral(object value)
-        => "'" + ((Guid)value).ToString().ToUpperInvariant() + "'";
+    protected override string GenerateNonNullSqlLiteral(object value) =>
+        "'" + ((Guid)value).ToString().ToUpperInvariant() + "'";
 }

@@ -17,8 +17,10 @@ namespace ILCompiler.Metadata
         {
             var result = new GenericParameter
             {
-                Kind = genParam.Kind == Cts.GenericParameterKind.Type ?
-                    GenericParameterKind.GenericTypeParameter : GenericParameterKind.GenericMethodParameter,
+                Kind =
+                    genParam.Kind == Cts.GenericParameterKind.Type
+                        ? GenericParameterKind.GenericTypeParameter
+                        : GenericParameterKind.GenericMethodParameter,
                 Number = checked((ushort)genParam.Index),
             };
 
@@ -36,10 +38,14 @@ namespace ILCompiler.Metadata
                 result.Flags = genParamDef.Attributes;
                 result.Name = HandleString(reader.GetString(genParamDef.Name));
 
-                Ecma.CustomAttributeHandleCollection customAttributes = genParamDef.GetCustomAttributes();
+                Ecma.CustomAttributeHandleCollection customAttributes =
+                    genParamDef.GetCustomAttributes();
                 if (customAttributes.Count > 0)
                 {
-                    result.CustomAttributes = HandleCustomAttributes(ecmaGenParam.Module, customAttributes);
+                    result.CustomAttributes = HandleCustomAttributes(
+                        ecmaGenParam.Module,
+                        customAttributes
+                    );
                 }
             }
             else

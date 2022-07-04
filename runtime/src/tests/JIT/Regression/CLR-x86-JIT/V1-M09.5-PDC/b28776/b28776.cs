@@ -43,7 +43,7 @@ namespace Test
 }
 /*
 ---------------------------
-Assert Failure (PID 1204, Thread 1056/420)        
+Assert Failure (PID 1204, Thread 1056/420)
 ---------------------------
 pPrevNestedInfo
 .\excep.cpp, Line: 2322

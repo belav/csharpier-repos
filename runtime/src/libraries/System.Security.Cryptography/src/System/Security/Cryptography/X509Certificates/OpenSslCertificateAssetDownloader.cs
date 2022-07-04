@@ -12,7 +12,8 @@ namespace System.Security.Cryptography.X509Certificates
 {
     internal static class OpenSslCertificateAssetDownloader
     {
-        private static readonly Func<string, CancellationToken, byte[]?>? s_downloadBytes = CreateDownloadBytesFunc();
+        private static readonly Func<string, CancellationToken, byte[]?>? s_downloadBytes =
+            CreateDownloadBytesFunc();
 
         internal static X509Certificate2? DownloadCertificate(string uri, TimeSpan downloadTimeout)
         {
@@ -83,7 +84,10 @@ namespace System.Security.Cryptography.X509Certificates
             return null;
         }
 
-        internal static SafeOcspResponseHandle? DownloadOcspGet(string uri, TimeSpan downloadTimeout)
+        internal static SafeOcspResponseHandle? DownloadOcspGet(
+            string uri,
+            TimeSpan downloadTimeout
+        )
         {
             byte[]? data = DownloadAsset(uri, downloadTimeout);
 
@@ -140,7 +144,8 @@ namespace System.Security.Cryptography.X509Certificates
                 OpenSslX509ChainEventSource.Log.AssetDownloadStart(totalMillis, uri);
             }
 
-            CancellationTokenSource? cts = totalMillis > int.MaxValue ? null : new CancellationTokenSource((int)totalMillis);
+            CancellationTokenSource? cts =
+                totalMillis > int.MaxValue ? null : new CancellationTokenSource((int)totalMillis);
             byte[]? ret = null;
 
             try
@@ -171,37 +176,96 @@ namespace System.Security.Cryptography.X509Certificates
                 // the latter can't in turn have an explicit dependency on the former.
 
                 // Get the relevant types needed.
-                Type? socketsHttpHandlerType = Type.GetType("System.Net.Http.SocketsHttpHandler, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", throwOnError: false);
-                Type? httpMessageHandlerType = Type.GetType("System.Net.Http.HttpMessageHandler, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", throwOnError: false);
-                Type? httpClientType = Type.GetType("System.Net.Http.HttpClient, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", throwOnError: false);
-                Type? httpRequestMessageType = Type.GetType("System.Net.Http.HttpRequestMessage, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", throwOnError: false);
-                Type? httpResponseMessageType = Type.GetType("System.Net.Http.HttpResponseMessage, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", throwOnError: false);
-                Type? httpResponseHeadersType = Type.GetType("System.Net.Http.Headers.HttpResponseHeaders, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", throwOnError: false);
-                Type? httpContentType = Type.GetType("System.Net.Http.HttpContent, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", throwOnError: false);
-                if (socketsHttpHandlerType == null || httpMessageHandlerType == null || httpClientType == null || httpRequestMessageType == null ||
-                    httpResponseMessageType == null || httpResponseHeadersType == null || httpContentType == null)
+                Type? socketsHttpHandlerType = Type.GetType(
+                    "System.Net.Http.SocketsHttpHandler, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                    throwOnError: false
+                );
+                Type? httpMessageHandlerType = Type.GetType(
+                    "System.Net.Http.HttpMessageHandler, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                    throwOnError: false
+                );
+                Type? httpClientType = Type.GetType(
+                    "System.Net.Http.HttpClient, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                    throwOnError: false
+                );
+                Type? httpRequestMessageType = Type.GetType(
+                    "System.Net.Http.HttpRequestMessage, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                    throwOnError: false
+                );
+                Type? httpResponseMessageType = Type.GetType(
+                    "System.Net.Http.HttpResponseMessage, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                    throwOnError: false
+                );
+                Type? httpResponseHeadersType = Type.GetType(
+                    "System.Net.Http.Headers.HttpResponseHeaders, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                    throwOnError: false
+                );
+                Type? httpContentType = Type.GetType(
+                    "System.Net.Http.HttpContent, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                    throwOnError: false
+                );
+                if (
+                    socketsHttpHandlerType == null
+                    || httpMessageHandlerType == null
+                    || httpClientType == null
+                    || httpRequestMessageType == null
+                    || httpResponseMessageType == null
+                    || httpResponseHeadersType == null
+                    || httpContentType == null
+                )
                 {
                     Debug.Fail("Unable to load required type.");
                     return null;
                 }
 
                 // Get the methods on those types.
-                ConstructorInfo? socketsHttpHandlerCtor = socketsHttpHandlerType.GetConstructor(Type.EmptyTypes);
-                PropertyInfo? pooledConnectionIdleTimeoutProp = socketsHttpHandlerType.GetProperty("PooledConnectionIdleTimeout");
-                PropertyInfo? allowAutoRedirectProp = socketsHttpHandlerType.GetProperty("AllowAutoRedirect");
-                ConstructorInfo? httpClientCtor = httpClientType.GetConstructor(new Type[] { httpMessageHandlerType });
+                ConstructorInfo? socketsHttpHandlerCtor = socketsHttpHandlerType.GetConstructor(
+                    Type.EmptyTypes
+                );
+                PropertyInfo? pooledConnectionIdleTimeoutProp = socketsHttpHandlerType.GetProperty(
+                    "PooledConnectionIdleTimeout"
+                );
+                PropertyInfo? allowAutoRedirectProp = socketsHttpHandlerType.GetProperty(
+                    "AllowAutoRedirect"
+                );
+                ConstructorInfo? httpClientCtor = httpClientType.GetConstructor(
+                    new Type[] { httpMessageHandlerType }
+                );
                 PropertyInfo? requestUriProp = httpRequestMessageType.GetProperty("RequestUri");
-                ConstructorInfo? httpRequestMessageCtor = httpRequestMessageType.GetConstructor(Type.EmptyTypes);
-                MethodInfo? sendMethod = httpClientType.GetMethod("Send", new Type[] { httpRequestMessageType, typeof(CancellationToken) });
+                ConstructorInfo? httpRequestMessageCtor = httpRequestMessageType.GetConstructor(
+                    Type.EmptyTypes
+                );
+                MethodInfo? sendMethod = httpClientType.GetMethod(
+                    "Send",
+                    new Type[] { httpRequestMessageType, typeof(CancellationToken) }
+                );
                 PropertyInfo? responseContentProp = httpResponseMessageType.GetProperty("Content");
-                PropertyInfo? responseStatusCodeProp = httpResponseMessageType.GetProperty("StatusCode");
+                PropertyInfo? responseStatusCodeProp = httpResponseMessageType.GetProperty(
+                    "StatusCode"
+                );
                 PropertyInfo? responseHeadersProp = httpResponseMessageType.GetProperty("Headers");
-                PropertyInfo? responseHeadersLocationProp = httpResponseHeadersType.GetProperty("Location");
-                MethodInfo? readAsStreamMethod = httpContentType.GetMethod("ReadAsStream", Type.EmptyTypes);
+                PropertyInfo? responseHeadersLocationProp = httpResponseHeadersType.GetProperty(
+                    "Location"
+                );
+                MethodInfo? readAsStreamMethod = httpContentType.GetMethod(
+                    "ReadAsStream",
+                    Type.EmptyTypes
+                );
 
-                if (socketsHttpHandlerCtor == null || pooledConnectionIdleTimeoutProp == null || allowAutoRedirectProp == null || httpClientCtor == null ||
-                    requestUriProp == null || httpRequestMessageCtor == null || sendMethod == null || responseContentProp == null || responseStatusCodeProp == null ||
-                    responseHeadersProp == null || responseHeadersLocationProp == null || readAsStreamMethod == null)
+                if (
+                    socketsHttpHandlerCtor == null
+                    || pooledConnectionIdleTimeoutProp == null
+                    || allowAutoRedirectProp == null
+                    || httpClientCtor == null
+                    || requestUriProp == null
+                    || httpRequestMessageCtor == null
+                    || sendMethod == null
+                    || responseContentProp == null
+                    || responseStatusCodeProp == null
+                    || responseHeadersProp == null
+                    || responseHeadersLocationProp == null
+                    || readAsStreamMethod == null
+                )
                 {
                     Debug.Fail("Unable to load required member.");
                     return null;
@@ -219,7 +283,10 @@ namespace System.Security.Cryptography.X509Certificates
                 // var httpClient = new HttpClient(socketsHttpHandler);
                 // Note: using a ConstructorInfo instead of Activator.CreateInstance, so the ILLinker can see the usage through the lambda method.
                 object? socketsHttpHandler = socketsHttpHandlerCtor.Invoke(null);
-                pooledConnectionIdleTimeoutProp.SetValue(socketsHttpHandler, TimeSpan.FromSeconds(PooledConnectionIdleTimeoutSeconds));
+                pooledConnectionIdleTimeoutProp.SetValue(
+                    socketsHttpHandler,
+                    TimeSpan.FromSeconds(PooledConnectionIdleTimeoutSeconds)
+                );
                 allowAutoRedirectProp.SetValue(socketsHttpHandler, false);
                 object? httpClient = httpClientCtor.Invoke(new object?[] { socketsHttpHandler });
 
@@ -238,7 +305,10 @@ namespace System.Security.Cryptography.X509Certificates
                     // Note: using a ConstructorInfo instead of Activator.CreateInstance, so the ILLinker can see the usage through the lambda method.
                     object requestMessage = httpRequestMessageCtor.Invoke(null);
                     requestUriProp.SetValue(requestMessage, uri);
-                    object responseMessage = sendMethod.Invoke(httpClient, new object[] { requestMessage, cancellationToken })!;
+                    object responseMessage = sendMethod.Invoke(
+                        httpClient,
+                        new object[] { requestMessage, cancellationToken }
+                    )!;
 
                     int redirections = 0;
                     Uri? redirectUri;
@@ -248,7 +318,12 @@ namespace System.Security.Cryptography.X509Certificates
                         int statusCode = (int)responseStatusCodeProp.GetValue(responseMessage)!;
                         object responseHeaders = responseHeadersProp.GetValue(responseMessage)!;
                         Uri? location = (Uri?)responseHeadersLocationProp.GetValue(responseHeaders);
-                        redirectUri = GetUriForRedirect((Uri)requestUriProp.GetValue(requestMessage)!, statusCode, location, out hasRedirect);
+                        redirectUri = GetUriForRedirect(
+                            (Uri)requestUriProp.GetValue(requestMessage)!,
+                            statusCode,
+                            location,
+                            out hasRedirect
+                        );
                         if (redirectUri == null)
                         {
                             break;
@@ -278,7 +353,10 @@ namespace System.Security.Cryptography.X509Certificates
                         // responseMessage = httpClient.Send(requestMessage, cancellationToken);
                         requestMessage = httpRequestMessageCtor.Invoke(null);
                         requestUriProp.SetValue(requestMessage, redirectUri);
-                        responseMessage = sendMethod.Invoke(httpClient, new object[] { requestMessage, cancellationToken })!;
+                        responseMessage = sendMethod.Invoke(
+                            httpClient,
+                            new object[] { requestMessage, cancellationToken }
+                        )!;
                     }
 
                     if (hasRedirect && redirectUri == null)
@@ -304,7 +382,12 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        private static Uri? GetUriForRedirect(Uri requestUri, int statusCode, Uri? location, out bool hasRedirect)
+        private static Uri? GetUriForRedirect(
+            Uri requestUri,
+            int statusCode,
+            Uri? location,
+            out bool hasRedirect
+        )
         {
             if (!IsRedirectStatusCode(statusCode))
             {
@@ -353,7 +436,9 @@ namespace System.Security.Cryptography.X509Certificates
         private static bool IsRedirectStatusCode(int statusCode)
         {
             // MultipleChoices (300), Moved (301), Found (302), SeeOther (303), TemporaryRedirect (307), PermanentRedirect (308)
-            return (statusCode >= 300 && statusCode <= 303) || statusCode == 307 || statusCode == 308;
+            return (statusCode >= 300 && statusCode <= 303)
+                || statusCode == 307
+                || statusCode == 308;
         }
 
         private static bool IsAllowedScheme(string scheme)

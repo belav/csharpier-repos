@@ -13,22 +13,22 @@ namespace AutoMapper.UnitTests.Bug
         {
             public Guid Value { get; set; }
         }
+
         class Destination
         {
             public string Value { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().ForMember(d => d.Value, o => o.MapFrom(s => s.Value));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(d => d.Value, o => o.MapFrom(s => s.Value));
+            });
 
         protected override void Because_of()
         {
-            var source = new Source
-            {
-                Value = _value
-            };
+            var source = new Source { Value = _value };
             _destination = Mapper.Map<Source, Destination>(source);
         }
 

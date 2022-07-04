@@ -18,19 +18,14 @@ public class CrossApplyExpression : JoinExpressionBase
     ///     Creates a new instance of the <see cref="CrossApplyExpression" /> class.
     /// </summary>
     /// <param name="table">A table source to CROSS APPLY with.</param>
-    public CrossApplyExpression(TableExpressionBase table)
-        : this(table, annotations: null)
-    {
-    }
+    public CrossApplyExpression(TableExpressionBase table) : this(table, annotations: null) { }
 
     private CrossApplyExpression(TableExpressionBase table, IEnumerable<IAnnotation>? annotations)
-        : base(table, annotations)
-    {
-    }
+        : base(table, annotations) { }
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => Update((TableExpressionBase)visitor.Visit(Table));
+    protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+        Update((TableExpressionBase)visitor.Visit(Table));
 
     /// <summary>
     ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -38,10 +33,8 @@ public class CrossApplyExpression : JoinExpressionBase
     /// </summary>
     /// <param name="table">The <see cref="JoinExpressionBase.Table" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual CrossApplyExpression Update(TableExpressionBase table)
-        => table != Table
-            ? new CrossApplyExpression(table, GetAnnotations())
-            : this;
+    public virtual CrossApplyExpression Update(TableExpressionBase table) =>
+        table != Table ? new CrossApplyExpression(table, GetAnnotations()) : this;
 
     /// <inheritdoc />
     protected override void Print(ExpressionPrinter expressionPrinter)
@@ -52,16 +45,16 @@ public class CrossApplyExpression : JoinExpressionBase
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is CrossApplyExpression crossApplyExpression
-                && Equals(crossApplyExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is CrossApplyExpression crossApplyExpression && Equals(crossApplyExpression)
+        );
 
-    private bool Equals(CrossApplyExpression crossApplyExpression)
-        => base.Equals(crossApplyExpression);
+    private bool Equals(CrossApplyExpression crossApplyExpression) =>
+        base.Equals(crossApplyExpression);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 }

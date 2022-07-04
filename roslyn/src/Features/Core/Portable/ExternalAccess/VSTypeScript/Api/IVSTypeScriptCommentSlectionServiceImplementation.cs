@@ -12,8 +12,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal interface IVSTypeScriptCommentSelectionServiceImplementation : ILanguageService
     {
-        Task<VSTypeScriptCommentSelectionInfo> GetInfoAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken);
+        Task<VSTypeScriptCommentSelectionInfo> GetInfoAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        );
 
-        Task<Document> FormatAsync(Document document, ImmutableArray<TextSpan> changes, CancellationToken cancellationToken);
+        Task<Document> FormatAsync(
+            Document document,
+            ImmutableArray<TextSpan> changes,
+            CancellationToken cancellationToken
+        );
     }
 }

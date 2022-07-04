@@ -18,7 +18,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> associatedData,
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
-            Span<byte> tag)
+            Span<byte> tag
+        )
         {
             // bcrypt sometimes misbehaves when given nullptr buffers; ensure non-nullptr
             fixed (byte* plaintextBytes = &GetNonNullPinnableReference(plaintext))
@@ -27,7 +28,8 @@ namespace System.Security.Cryptography
             fixed (byte* tagBytes = &GetNonNullPinnableReference(tag))
             fixed (byte* associatedDataBytes = &GetNonNullPinnableReference(associatedData))
             {
-                BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO authInfo = BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Create();
+                BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO authInfo =
+                    BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Create();
                 authInfo.pbNonce = nonceBytes;
                 authInfo.cbNonce = nonce.Length;
                 authInfo.pbTag = tagBytes;
@@ -45,7 +47,8 @@ namespace System.Security.Cryptography
                     ciphertextBytes,
                     ciphertext.Length,
                     out int ciphertextBytesWritten,
-                    0);
+                    0
+                );
 
                 Debug.Assert(plaintext.Length == ciphertextBytesWritten);
 
@@ -63,7 +66,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            bool clearPlaintextOnFailure)
+            bool clearPlaintextOnFailure
+        )
         {
             // bcrypt sometimes misbehaves when given nullptr buffers; ensure non-nullptr
             fixed (byte* plaintextBytes = &GetNonNullPinnableReference(plaintext))
@@ -72,7 +76,8 @@ namespace System.Security.Cryptography
             fixed (byte* tagBytes = &GetNonNullPinnableReference(tag))
             fixed (byte* associatedDataBytes = &GetNonNullPinnableReference(associatedData))
             {
-                BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO authInfo = BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Create();
+                BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO authInfo =
+                    BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Create();
                 authInfo.pbNonce = nonceBytes;
                 authInfo.cbNonce = nonce.Length;
                 authInfo.pbTag = tagBytes;
@@ -90,7 +95,8 @@ namespace System.Security.Cryptography
                     plaintextBytes,
                     plaintext.Length,
                     out int plaintextBytesWritten,
-                    0);
+                    0
+                );
 
                 Debug.Assert(ciphertext.Length == plaintextBytesWritten);
 
@@ -114,11 +120,17 @@ namespace System.Security.Cryptography
         // Implementations below based on internal MemoryMarshal.GetNonNullPinnableReference methods.
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe ref readonly byte GetNonNullPinnableReference(ReadOnlySpan<byte> buffer)
-            => ref buffer.Length != 0 ? ref MemoryMarshal.GetReference(buffer) : ref Unsafe.AsRef<byte>((void*)1);
+        private static unsafe ref readonly byte GetNonNullPinnableReference(
+            ReadOnlySpan<byte> buffer
+        ) =>
+            ref buffer.Length != 0
+                ? ref MemoryMarshal.GetReference(buffer)
+                : ref Unsafe.AsRef<byte>((void*)1);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe ref byte GetNonNullPinnableReference(Span<byte> buffer)
-            => ref buffer.Length != 0 ? ref MemoryMarshal.GetReference(buffer) : ref Unsafe.AsRef<byte>((void*)1);
+        private static unsafe ref byte GetNonNullPinnableReference(Span<byte> buffer) =>
+            ref buffer.Length != 0
+                ? ref MemoryMarshal.GetReference(buffer)
+                : ref Unsafe.AsRef<byte>((void*)1);
     }
 }

@@ -11,15 +11,18 @@ namespace System.Net.Security
     //
     internal static class SSPIHandleCache
     {
-        private const int c_MaxCacheSize = 0x1F;  // must a (power of 2) - 1
-        private static readonly SafeCredentialReference?[] s_cacheSlots = new SafeCredentialReference[c_MaxCacheSize + 1];
+        private const int c_MaxCacheSize = 0x1F; // must a (power of 2) - 1
+        private static readonly SafeCredentialReference?[] s_cacheSlots =
+            new SafeCredentialReference[c_MaxCacheSize + 1];
         private static int s_current = -1;
 
         internal static void CacheCredential(SafeFreeCredentials newHandle)
         {
             try
             {
-                SafeCredentialReference? newRef = SafeCredentialReference.CreateReference(newHandle);
+                SafeCredentialReference? newRef = SafeCredentialReference.CreateReference(
+                    newHandle
+                );
                 if (newRef == null)
                 {
                     return;
@@ -27,7 +30,10 @@ namespace System.Net.Security
 
                 int index = Interlocked.Increment(ref s_current) & c_MaxCacheSize;
 #pragma warning disable CS8601 // Possible null reference assignment.
-                newRef = Interlocked.Exchange<SafeCredentialReference>(ref s_cacheSlots[index], newRef);
+                newRef = Interlocked.Exchange<SafeCredentialReference>(
+                    ref s_cacheSlots[index],
+                    newRef
+                );
 #pragma warning restore CS8601 // Possible null reference assignment.
 
                 newRef?.Dispose();

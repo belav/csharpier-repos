@@ -26,11 +26,13 @@ namespace ILCompiler
         }
 
         private MetadataType _arrayOfTType;
+
         private MetadataType InitializeArrayOfTType(TypeSystemEntity contextEntity)
         {
             _arrayOfTType = contextEntity.Context.SystemModule.GetType("System", "Array`1");
             return _arrayOfTType;
         }
+
         private MetadataType GetArrayOfTType(TypeSystemEntity contextEntity)
         {
             if (_arrayOfTType != null)

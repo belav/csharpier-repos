@@ -15,8 +15,6 @@ namespace Microsoft.CodeAnalysis.CSharp.SpellCheck
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSpellCheckSpanService()
-        {
-        }
+        public CSharpSpellCheckSpanService() { }
     }
 }

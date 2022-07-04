@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Wrapping
         /// Class responsible for actually computing the entire set of code actions to offer the
         /// user.  Contains lots of helper functionality used by all the different Wrapper
         /// implementations.
-        /// 
+        ///
         /// Specifically subclasses of this type can simply provide a list of code-actions to
         /// perform.  This type will then take those code actions and will ensure there aren't
         /// multiple code actions that end up having the same effect on the document.  For example,
@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
                 Document document,
                 SourceText originalSourceText,
                 SyntaxWrappingOptions options,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 Wrapper = service;
                 OriginalDocument = document;
@@ -77,60 +78,93 @@ namespace Microsoft.CodeAnalysis.Wrapping
                 Options = options;
 
                 var generator = SyntaxGenerator.GetGenerator(document);
-                var generatorInternal = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
-                NewLineTrivia = new SyntaxTriviaList(generatorInternal.EndOfLine(options.FormattingOptions.NewLine));
+                var generatorInternal =
+                    document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
+                NewLineTrivia = new SyntaxTriviaList(
+                    generatorInternal.EndOfLine(options.FormattingOptions.NewLine)
+                );
                 SingleWhitespaceTrivia = new SyntaxTriviaList(generator.Whitespace(" "));
             }
 
             protected abstract Task<ImmutableArray<WrappingGroup>> ComputeWrappingGroupsAsync();
 
-            protected string GetSmartIndentationAfter(SyntaxNodeOrToken nodeOrToken)
-                => GetIndentationAfter(nodeOrToken, FormattingOptions2.IndentStyle.Smart);
+            protected string GetSmartIndentationAfter(SyntaxNodeOrToken nodeOrToken) =>
+                GetIndentationAfter(nodeOrToken, FormattingOptions2.IndentStyle.Smart);
 
-            protected string GetIndentationAfter(SyntaxNodeOrToken nodeOrToken, FormattingOptions2.IndentStyle indentStyle)
+            protected string GetIndentationAfter(
+                SyntaxNodeOrToken nodeOrToken,
+                FormattingOptions2.IndentStyle indentStyle
+            )
             {
                 var newLine = Options.FormattingOptions.NewLine;
-                var newSourceText = OriginalSourceText.WithChanges(new TextChange(new TextSpan(nodeOrToken.Span.End, 0), newLine));
+                var newSourceText = OriginalSourceText.WithChanges(
+                    new TextChange(new TextSpan(nodeOrToken.Span.End, 0), newLine)
+                );
                 newSourceText = newSourceText.WithChanges(
-                    new TextChange(TextSpan.FromBounds(nodeOrToken.Span.End + newLine.Length, newSourceText.Length), ""));
+                    new TextChange(
+                        TextSpan.FromBounds(
+                            nodeOrToken.Span.End + newLine.Length,
+                            newSourceText.Length
+                        ),
+                        ""
+                    )
+                );
                 var newDocument = OriginalDocument.WithText(newSourceText);
 
                 // The only auto-formatting option that's relevant is indent style. Others only control behavior on typing.
-                var indentationOptions = new IndentationOptions(Options.FormattingOptions) { IndentStyle = indentStyle };
+                var indentationOptions = new IndentationOptions(Options.FormattingOptions)
+                {
+                    IndentStyle = indentStyle
+                };
 
                 var indentationService = Wrapper.IndentationService;
-                var originalLineNumber = newSourceText.Lines.GetLineFromPosition(nodeOrToken.Span.End).LineNumber;
+                var originalLineNumber = newSourceText.Lines
+                    .GetLineFromPosition(nodeOrToken.Span.End)
+                    .LineNumber;
                 var desiredIndentation = indentationService.GetIndentation(
-                    newDocument, originalLineNumber + 1,
+                    newDocument,
+                    originalLineNumber + 1,
                     indentationOptions,
-                    CancellationToken);
+                    CancellationToken
+                );
 
-                return desiredIndentation.GetIndentationString(newSourceText, Options.FormattingOptions.UseTabs, Options.FormattingOptions.TabSize);
+                return desiredIndentation.GetIndentationString(
+                    newSourceText,
+                    Options.FormattingOptions.UseTabs,
+                    Options.FormattingOptions.TabSize
+                );
             }
 
             /// <summary>
-            /// Try to create a CodeAction representing these edits.  Can return <see langword="null"/> in several 
+            /// Try to create a CodeAction representing these edits.  Can return <see langword="null"/> in several
             /// cases, including:
-            /// 
+            ///
             ///     1. No edits.
             ///     2. Edits would change more than whitespace.
             ///     3. A previous code action was created that already had the same effect.
             /// </summary>
             protected async Task<WrapItemsAction> TryCreateCodeActionAsync(
-                ImmutableArray<Edit> edits, string parentTitle, string title)
+                ImmutableArray<Edit> edits,
+                string parentTitle,
+                string title
+            )
             {
                 // First, rewrite the tree with the edits provided.
-                var (root, rewrittenRoot, spanToFormat) = await RewriteTreeAsync(edits).ConfigureAwait(false);
+                var (root, rewrittenRoot, spanToFormat) = await RewriteTreeAsync(edits)
+                    .ConfigureAwait(false);
                 if (rewrittenRoot == null)
                 {
                     // Couldn't rewrite for some reason.  No code action to create.
                     return null;
                 }
 
-                // Now, format the part of the tree that we edited.  This will ensure we properly 
+                // Now, format the part of the tree that we edited.  This will ensure we properly
                 // respect the user preferences around things like comma/operator spacing.
-                var formattedDocument = await FormatDocumentAsync(rewrittenRoot, spanToFormat).ConfigureAwait(false);
-                var formattedRoot = await formattedDocument.GetSyntaxRootAsync(CancellationToken).ConfigureAwait(false);
+                var formattedDocument = await FormatDocumentAsync(rewrittenRoot, spanToFormat)
+                    .ConfigureAwait(false);
+                var formattedRoot = await formattedDocument
+                    .GetSyntaxRootAsync(CancellationToken)
+                    .ConfigureAwait(false);
 
                 // Now, check if this new formatted tree matches our starting tree, or any of the
                 // trees we've already created for our other code actions.  If so, we don't want to
@@ -156,21 +190,40 @@ namespace Microsoft.CodeAnalysis.Wrapping
                 // Store the root so we don't just end up creating this code action again.
                 _seenDocumentRoots.Add(formattedRoot);
 
-                return new WrapItemsAction(title, parentTitle, _ => Task.FromResult(formattedDocument));
+                return new WrapItemsAction(
+                    title,
+                    parentTitle,
+                    _ => Task.FromResult(formattedDocument)
+                );
             }
 
-            private async Task<Document> FormatDocumentAsync(SyntaxNode rewrittenRoot, TextSpan spanToFormat)
+            private async Task<Document> FormatDocumentAsync(
+                SyntaxNode rewrittenRoot,
+                TextSpan spanToFormat
+            )
             {
                 var newDocument = OriginalDocument.WithSyntaxRoot(rewrittenRoot);
-                var formattedDocument = await Formatter.FormatAsync(
-                    newDocument, spanToFormat, Options.FormattingOptions, CancellationToken).ConfigureAwait(false);
+                var formattedDocument = await Formatter
+                    .FormatAsync(
+                        newDocument,
+                        spanToFormat,
+                        Options.FormattingOptions,
+                        CancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return formattedDocument;
             }
 
-            private async Task<(SyntaxNode root, SyntaxNode rewrittenRoot, TextSpan spanToFormat)> RewriteTreeAsync(ImmutableArray<Edit> edits)
+            private async Task<(SyntaxNode root, SyntaxNode rewrittenRoot, TextSpan spanToFormat)> RewriteTreeAsync(
+                ImmutableArray<Edit> edits
+            )
             {
-                using var _1 = PooledDictionary<SyntaxToken, SyntaxTriviaList>.GetInstance(out var leftTokenToTrailingTrivia);
-                using var _2 = PooledDictionary<SyntaxToken, SyntaxTriviaList>.GetInstance(out var rightTokenToLeadingTrivia);
+                using var _1 = PooledDictionary<SyntaxToken, SyntaxTriviaList>.GetInstance(
+                    out var leftTokenToTrailingTrivia
+                );
+                using var _2 = PooledDictionary<SyntaxToken, SyntaxTriviaList>.GetInstance(
+                    out var rightTokenToLeadingTrivia
+                );
 
                 foreach (var edit in edits)
                 {
@@ -197,8 +250,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     return default;
                 }
 
-                return await RewriteTreeAsync(
-                    leftTokenToTrailingTrivia, rightTokenToLeadingTrivia).ConfigureAwait(false);
+                return await RewriteTreeAsync(leftTokenToTrailingTrivia, rightTokenToLeadingTrivia)
+                    .ConfigureAwait(false);
             }
 
             private static bool IsSafeToRemove(string text)
@@ -217,15 +270,23 @@ namespace Microsoft.CodeAnalysis.Wrapping
 
             private async Task<(SyntaxNode root, SyntaxNode rewrittenRoot, TextSpan spanToFormat)> RewriteTreeAsync(
                 Dictionary<SyntaxToken, SyntaxTriviaList> leftTokenToTrailingTrivia,
-                Dictionary<SyntaxToken, SyntaxTriviaList> rightTokenToLeadingTrivia)
+                Dictionary<SyntaxToken, SyntaxTriviaList> rightTokenToLeadingTrivia
+            )
             {
-                var root = await OriginalDocument.GetSyntaxRootAsync(CancellationToken).ConfigureAwait(false);
-                var tokens = leftTokenToTrailingTrivia.Keys.Concat(rightTokenToLeadingTrivia.Keys).Distinct().ToImmutableArray();
+                var root = await OriginalDocument
+                    .GetSyntaxRootAsync(CancellationToken)
+                    .ConfigureAwait(false);
+                var tokens = leftTokenToTrailingTrivia.Keys
+                    .Concat(rightTokenToLeadingTrivia.Keys)
+                    .Distinct()
+                    .ToImmutableArray();
 
                 // Find the closest node that contains all the tokens we're editing.  That's the
                 // node we'll format at the end.  This will ensure that all formattin respects
                 // user settings for things like spacing around commas/operators/etc.
-                var nodeToFormat = tokens.SelectAsArray(t => t.Parent).FindInnermostCommonNode<SyntaxNode>();
+                var nodeToFormat = tokens
+                    .SelectAsArray(t => t.Parent)
+                    .FindInnermostCommonNode<SyntaxNode>();
 
                 // Rewrite the tree performing the following actions:
                 //
@@ -237,9 +298,11 @@ namespace Microsoft.CodeAnalysis.Wrapping
 
                 var rewrittenRoot = root.ReplaceSyntax(
                     nodes: new[] { nodeToFormat },
-                    computeReplacementNode: (oldNode, newNode) => newNode.WithAdditionalAnnotations(s_toFormatAnnotation),
-
-                    tokens: leftTokenToTrailingTrivia.Keys.Concat(rightTokenToLeadingTrivia.Keys).Distinct(),
+                    computeReplacementNode: (oldNode, newNode) =>
+                        newNode.WithAdditionalAnnotations(s_toFormatAnnotation),
+                    tokens: leftTokenToTrailingTrivia.Keys
+                        .Concat(rightTokenToLeadingTrivia.Keys)
+                        .Distinct(),
                     computeReplacementToken: (oldToken, newToken) =>
                     {
                         if (leftTokenToTrailingTrivia.TryGetValue(oldToken, out var trailingTrivia))
@@ -255,7 +318,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
                         return newToken;
                     },
                     trivia: null,
-                    computeReplacementTrivia: null);
+                    computeReplacementTrivia: null
+                );
 
                 var trackedNode = rewrittenRoot.GetAnnotatedNodes(s_toFormatAnnotation).Single();
 
@@ -286,14 +350,21 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     }
 
                     // Otherwise, sort items and add to the resultant list
-                    var sorted = WrapItemsAction.SortActionsByMostRecentlyUsed(ImmutableArray<CodeAction>.CastUp(wrappingActions));
+                    var sorted = WrapItemsAction.SortActionsByMostRecentlyUsed(
+                        ImmutableArray<CodeAction>.CastUp(wrappingActions)
+                    );
 
-                    // Make our code action low priority.  This option will be offered *a lot*, and 
-                    // much of  the time will not be something the user particularly wants to do.  
+                    // Make our code action low priority.  This option will be offered *a lot*, and
+                    // much of  the time will not be something the user particularly wants to do.
                     // It should be offered after all other normal refactorings.
-                    result.Add(CodeActionWithNestedActions.Create(
-                        wrappingActions[0].ParentTitle, sorted,
-                        group.IsInlinable, CodeActionPriority.Low));
+                    result.Add(
+                        CodeActionWithNestedActions.Create(
+                            wrappingActions[0].ParentTitle,
+                            sorted,
+                            group.IsInlinable,
+                            CodeActionPriority.Low
+                        )
+                    );
                 }
 
                 // Finally, sort the topmost list we're building and return that.  This ensures that

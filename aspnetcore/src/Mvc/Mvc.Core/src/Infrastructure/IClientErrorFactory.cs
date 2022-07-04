@@ -17,5 +17,8 @@ public interface IClientErrorFactory
     /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
     /// <param name="clientError">The <see cref="IClientErrorActionResult"/>.</param>
     /// <returns>The <see cref="IActionResult"/> that would be returned to the client.</returns>
-    IActionResult? GetClientError(ActionContext actionContext, IClientErrorActionResult clientError);
+    IActionResult? GetClientError(
+        ActionContext actionContext,
+        IClientErrorActionResult clientError
+    );
 }

@@ -10,13 +10,16 @@ public class TestClass_65988
     {
         public decimal decimal_0;
     }
+
     public struct S2
     {
         public S1 s1_2;
     }
+
     static int s_int_9 = 1;
     decimal decimal_22 = 0.08m;
     S1 s1_33 = new S1();
+
     public decimal LeafMethod3() => 67.1m;
 
     public void Method0()
@@ -40,6 +43,7 @@ public class TestClass_65988
             return;
         }
     }
+
     public static int Main(string[] args)
     {
         new TestClass_65988().Method0();

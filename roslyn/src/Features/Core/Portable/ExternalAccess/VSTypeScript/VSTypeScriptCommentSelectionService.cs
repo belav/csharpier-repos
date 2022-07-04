@@ -16,7 +16,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 {
-    [ExportLanguageService(typeof(ICommentSelectionService), InternalLanguageNames.TypeScript), Shared]
+    [
+        ExportLanguageService(typeof(ICommentSelectionService), InternalLanguageNames.TypeScript),
+        Shared
+    ]
     internal sealed class VSTypeScriptCommentSelectionService : ICommentSelectionService
     {
         private readonly IVSTypeScriptCommentSelectionServiceImplementation? _impl;
@@ -25,21 +28,34 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VSTypeScriptCommentSelectionService(
             // Optional to work around test issue: https://github.com/dotnet/roslyn/issues/60690
-            [Import(AllowDefault = true)] IVSTypeScriptCommentSelectionServiceImplementation? impl)
+            [Import(AllowDefault = true)]
+                IVSTypeScriptCommentSelectionServiceImplementation? impl
+        )
         {
             _impl = impl;
         }
 
-        public async Task<CommentSelectionInfo> GetInfoAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken)
+        public async Task<CommentSelectionInfo> GetInfoAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        )
         {
             // Will never be null in product.
             Contract.ThrowIfNull(_impl);
 
-            var info = await _impl.GetInfoAsync(document, textSpan, cancellationToken).ConfigureAwait(false);
+            var info = await _impl
+                .GetInfoAsync(document, textSpan, cancellationToken)
+                .ConfigureAwait(false);
             return info.UnderlyingObject;
         }
 
-        public Task<Document> FormatAsync(Document document, ImmutableArray<TextSpan> changes, SyntaxFormattingOptions formattingOptions, CancellationToken cancellationToken)
+        public Task<Document> FormatAsync(
+            Document document,
+            ImmutableArray<TextSpan> changes,
+            SyntaxFormattingOptions formattingOptions,
+            CancellationToken cancellationToken
+        )
         {
             // Will never be null in product.
             Contract.ThrowIfNull(_impl);

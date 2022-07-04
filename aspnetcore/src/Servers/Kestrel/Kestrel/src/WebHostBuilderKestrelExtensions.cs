@@ -34,7 +34,10 @@ public static class WebHostBuilderKestrelExtensions
             // Don't override an already-configured transport
             services.TryAddSingleton<IConnectionListenerFactory, SocketTransportFactory>();
 
-            services.AddTransient<IConfigureOptions<KestrelServerOptions>, KestrelServerOptionsSetup>();
+            services.AddTransient<
+                IConfigureOptions<KestrelServerOptions>,
+                KestrelServerOptionsSetup
+            >();
             services.AddSingleton<IServer, KestrelServerImpl>();
         });
     }
@@ -51,7 +54,10 @@ public static class WebHostBuilderKestrelExtensions
     /// <returns>
     /// The Microsoft.AspNetCore.Hosting.IWebHostBuilder.
     /// </returns>
-    public static IWebHostBuilder UseKestrel(this IWebHostBuilder hostBuilder, Action<KestrelServerOptions> options)
+    public static IWebHostBuilder UseKestrel(
+        this IWebHostBuilder hostBuilder,
+        Action<KestrelServerOptions> options
+    )
     {
         return hostBuilder.UseKestrel().ConfigureKestrel(options);
     }
@@ -68,11 +74,19 @@ public static class WebHostBuilderKestrelExtensions
     /// <returns>
     /// The Microsoft.AspNetCore.Hosting.IWebHostBuilder.
     /// </returns>
-    public static IWebHostBuilder ConfigureKestrel(this IWebHostBuilder hostBuilder, Action<KestrelServerOptions> options)
+    public static IWebHostBuilder ConfigureKestrel(
+        this IWebHostBuilder hostBuilder,
+        Action<KestrelServerOptions> options
+    )
     {
         return hostBuilder.ConfigureServices(services =>
         {
-            services.TryAddEnumerable(ServiceDescriptor.Transient<IConfigureOptions<KestrelServerOptions>, KestrelServerOptionsSetup>());
+            services.TryAddEnumerable(
+                ServiceDescriptor.Transient<
+                    IConfigureOptions<KestrelServerOptions>,
+                    KestrelServerOptionsSetup
+                >()
+            );
             services.Configure(options);
         });
     }
@@ -87,7 +101,10 @@ public static class WebHostBuilderKestrelExtensions
     /// <returns>
     /// The Microsoft.AspNetCore.Hosting.IWebHostBuilder.
     /// </returns>
-    public static IWebHostBuilder UseKestrel(this IWebHostBuilder hostBuilder, Action<WebHostBuilderContext, KestrelServerOptions> configureOptions)
+    public static IWebHostBuilder UseKestrel(
+        this IWebHostBuilder hostBuilder,
+        Action<WebHostBuilderContext, KestrelServerOptions> configureOptions
+    )
     {
         return hostBuilder.UseKestrel().ConfigureKestrel(configureOptions);
     }
@@ -102,20 +119,30 @@ public static class WebHostBuilderKestrelExtensions
     /// <returns>
     /// The Microsoft.AspNetCore.Hosting.IWebHostBuilder.
     /// </returns>
-    public static IWebHostBuilder ConfigureKestrel(this IWebHostBuilder hostBuilder, Action<WebHostBuilderContext, KestrelServerOptions> configureOptions)
+    public static IWebHostBuilder ConfigureKestrel(
+        this IWebHostBuilder hostBuilder,
+        Action<WebHostBuilderContext, KestrelServerOptions> configureOptions
+    )
     {
         if (configureOptions == null)
         {
             throw new ArgumentNullException(nameof(configureOptions));
         }
 
-        return hostBuilder.ConfigureServices((context, services) =>
-        {
-            services.TryAddEnumerable(ServiceDescriptor.Transient<IConfigureOptions<KestrelServerOptions>, KestrelServerOptionsSetup>());
-            services.Configure<KestrelServerOptions>(options =>
+        return hostBuilder.ConfigureServices(
+            (context, services) =>
             {
-                configureOptions(context, options);
-            });
-        });
+                services.TryAddEnumerable(
+                    ServiceDescriptor.Transient<
+                        IConfigureOptions<KestrelServerOptions>,
+                        KestrelServerOptionsSetup
+                    >()
+                );
+                services.Configure<KestrelServerOptions>(options =>
+                {
+                    configureOptions(context, options);
+                });
+            }
+        );
     }
 }

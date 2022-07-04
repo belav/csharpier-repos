@@ -69,8 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             INavigationBarPresenter presenter,
             ITextBuffer subjectBuffer,
             IUIThreadOperationExecutor uiThreadOperationExecutor,
-            IAsynchronousOperationListener asyncListener)
-            : base(threadingContext)
+            IAsynchronousOperationListener asyncListener
+        ) : base(threadingContext)
         {
             _presenter = presenter;
             _subjectBuffer = subjectBuffer;
@@ -82,13 +82,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 ComputeModelAndSelectItemAsync,
                 EqualityComparer<bool>.Default,
                 asyncListener,
-                _cancellationTokenSource.Token);
+                _cancellationTokenSource.Token
+            );
 
             _selectItemQueue = new AsyncBatchingWorkQueue(
                 TimeSpan.FromMilliseconds(TaggerConstants.NearImmediateDelay),
                 SelectItemAsync,
                 asyncListener,
-                _cancellationTokenSource.Token);
+                _cancellationTokenSource.Token
+            );
 
             presenter.CaretMoved += OnCaretMoved;
             presenter.ViewFocused += OnViewFocused;
@@ -107,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 // Many workspace changes may need us to change the items (like options changing, or project renaming).
                 TaggerEventSources.OnWorkspaceChanged(subjectBuffer, asyncListener),
                 // Once we hook this buffer up to the workspace, then we can start computing the nav bar items.
-                TaggerEventSources.OnWorkspaceRegistrationChanged(subjectBuffer));
+                TaggerEventSources.OnWorkspaceRegistrationChanged(subjectBuffer)
+            );
             _eventSource.Changed += OnEventSourceChanged;
             _eventSource.Connect();
 
@@ -162,7 +165,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             StartSelectedItemUpdateTask();
         }
 
-        private void GetProjectItems(out ImmutableArray<NavigationBarProjectItem> projectItems, out NavigationBarProjectItem? selectedProjectItem)
+        private void GetProjectItems(
+            out ImmutableArray<NavigationBarProjectItem> projectItems,
+            out NavigationBarProjectItem? selectedProjectItem
+        )
         {
             var documents = _subjectBuffer.CurrentSnapshot.GetRelatedDocumentsWithChanges();
             if (!documents.Any())
@@ -172,18 +178,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 return;
             }
 
-            projectItems = documents.Select(d =>
-                new NavigationBarProjectItem(
-                    d.Project.Name,
-                    d.Project.GetGlyph(),
-                    workspace: d.Project.Solution.Workspace,
-                    documentId: d.Id,
-                    language: d.Project.Language)).OrderBy(projectItem => projectItem.Text).ToImmutableArray();
+            projectItems = documents
+                .Select(
+                    d =>
+                        new NavigationBarProjectItem(
+                            d.Project.Name,
+                            d.Project.GetGlyph(),
+                            workspace: d.Project.Solution.Workspace,
+                            documentId: d.Id,
+                            language: d.Project.Language
+                        )
+                )
+                .OrderBy(projectItem => projectItem.Text)
+                .ToImmutableArray();
 
             var document = _subjectBuffer.AsTextContainer().GetOpenDocumentInCurrentContext();
-            selectedProjectItem = document != null
-                ? projectItems.FirstOrDefault(p => p.Text == document.Project.Name) ?? projectItems.First()
-                : projectItems.First();
+            selectedProjectItem =
+                document != null
+                    ? projectItems.FirstOrDefault(p => p.Text == document.Project.Name)
+                        ?? projectItems.First()
+                    : projectItems.First();
         }
 
         private void OnItemSelected(object? sender, NavigationBarItemSelectedEventArgs e)
@@ -201,21 +215,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 EditorFeaturesResources.Navigation_Bars,
                 EditorFeaturesResources.Refreshing_navigation_bars,
                 allowCancellation: true,
-                showProgress: false);
+                showProgress: false
+            );
 
             try
             {
-                await ProcessItemSelectionAsync(item, waitContext.UserCancellationToken).ConfigureAwait(false);
+                await ProcessItemSelectionAsync(item, waitContext.UserCancellationToken)
+                    .ConfigureAwait(false);
             }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception e) when (FatalError.ReportAndCatch(e))
-            {
-            }
+            catch (OperationCanceledException) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
         }
 
-        private async Task ProcessItemSelectionAsync(NavigationBarItem item, CancellationToken cancellationToken)
+        private async Task ProcessItemSelectionAsync(
+            NavigationBarItem item,
+            CancellationToken cancellationToken
+        )
         {
             AssertIsForeground();
 
@@ -228,10 +243,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                 // When navigating, just use the partial semantics workspace.  Navigation doesn't need the fully bound
                 // compilations to be created, and it can save us a lot of costly time building skeleton assemblies.
                 var textSnapshot = _subjectBuffer.CurrentSnapshot;
-                var document = textSnapshot.AsText().GetDocumentWithFrozenPartialSemantics(cancellationToken);
+                var document = textSnapshot
+                    .AsText()
+                    .GetDocumentWithFrozenPartialSemantics(cancellationToken);
                 if (document != null)
                 {
-                    var navBarService = document.GetRequiredLanguageService<INavigationBarItemService>();
+                    var navBarService =
+                        document.GetRequiredLanguageService<INavigationBarItemService>();
                     var view = _presenter.TryGetCurrentView();
 
                     // ConfigureAwait(true) as we have to come back to UI thread in order to kick of the refresh task
@@ -240,8 +258,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
                     // exist in the type list that are only there to show a set a particular set of items in the member
                     // list.  So selecting such an item should only update the member list, and we do not want a refresh
                     // to wipe that out.
-                    if (!await navBarService.TryNavigateToItemAsync(
-                            document, item, view, textSnapshot.Version, cancellationToken).ConfigureAwait(true))
+                    if (
+                        !await navBarService
+                            .TryNavigateToItemAsync(
+                                document,
+                                item,
+                                view,
+                                textSnapshot.Version,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(true)
+                    )
                     {
                         return;
                     }

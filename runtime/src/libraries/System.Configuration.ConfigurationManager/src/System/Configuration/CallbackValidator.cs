@@ -10,7 +10,8 @@ namespace System.Configuration
 
         public CallbackValidator(Type type, ValidatorCallback callback) : this(callback)
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
             _type = type;
         }
 

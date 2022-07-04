@@ -33,10 +33,22 @@ namespace Microsoft.CodeAnalysis.Remote
         // hold the async token from WaitAsync so ExecuteAsync can complete it
         private IAsyncToken _currentToken;
 
-        public SolutionChecksumUpdater(Workspace workspace, IGlobalOptionService globalOptions, IAsynchronousOperationListenerProvider listenerProvider, CancellationToken shutdownToken)
-            : base(listenerProvider.GetListener(FeatureAttribute.SolutionChecksumUpdater),
-                   workspace.Services.GetService<IGlobalOperationNotificationService>(),
-                   TimeSpan.FromMilliseconds(globalOptions.GetOption(RemoteHostOptions.SolutionChecksumMonitorBackOffTimeSpanInMS)), shutdownToken)
+        public SolutionChecksumUpdater(
+            Workspace workspace,
+            IGlobalOptionService globalOptions,
+            IAsynchronousOperationListenerProvider listenerProvider,
+            CancellationToken shutdownToken
+        )
+            : base(
+                listenerProvider.GetListener(FeatureAttribute.SolutionChecksumUpdater),
+                workspace.Services.GetService<IGlobalOperationNotificationService>(),
+                TimeSpan.FromMilliseconds(
+                    globalOptions.GetOption(
+                        RemoteHostOptions.SolutionChecksumMonitorBackOffTimeSpanInMS
+                    )
+                ),
+                shutdownToken
+            )
         {
             _workspace = workspace;
             _textChangeQueue = new TaskQueue(Listener, TaskScheduler.Default);
@@ -45,7 +57,9 @@ namespace Microsoft.CodeAnalysis.Remote
             _workspace.WorkspaceChanged += OnWorkspaceChanged;
 
             // create its own cancellation token source
-            _globalOperationCancellationSource = CancellationTokenSource.CreateLinkedTokenSource(shutdownToken);
+            _globalOperationCancellationSource = CancellationTokenSource.CreateLinkedTokenSource(
+                shutdownToken
+            );
 
             Start();
         }
@@ -60,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             // update primary solution in remote host
-            await SynchronizePrimaryWorkspaceAsync(_globalOperationCancellationSource.Token).ConfigureAwait(false);
+            await SynchronizePrimaryWorkspaceAsync(_globalOperationCancellationSource.Token)
+                .ConfigureAwait(false);
         }
 
         protected override void OnPaused()
@@ -68,14 +83,18 @@ namespace Microsoft.CodeAnalysis.Remote
             var previousCancellationSource = _globalOperationCancellationSource;
 
             // create new cancellation token source linked with given shutdown cancellation token
-            _globalOperationCancellationSource = CancellationTokenSource.CreateLinkedTokenSource(this.CancellationToken);
+            _globalOperationCancellationSource = CancellationTokenSource.CreateLinkedTokenSource(
+                this.CancellationToken
+            );
 
             CancelAndDispose(previousCancellationSource);
         }
 
         protected override async Task WaitAsync(CancellationToken cancellationToken)
         {
-            var currentToken = await _workQueue.DequeueAsync(cancellationToken).ConfigureAwait(false);
+            var currentToken = await _workQueue
+                .DequeueAsync(cancellationToken)
+                .ConfigureAwait(false);
             lock (_gate)
             {
                 Contract.ThrowIfFalse(_currentToken is null);
@@ -97,7 +116,10 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             if (e.Kind == WorkspaceChangeKind.DocumentChanged)
             {
-                PushTextChanges(e.OldSolution.GetDocument(e.DocumentId), e.NewSolution.GetDocument(e.DocumentId));
+                PushTextChanges(
+                    e.OldSolution.GetDocument(e.DocumentId),
+                    e.NewSolution.GetDocument(e.DocumentId)
+                );
             }
 
             // record that we are busy
@@ -125,19 +147,34 @@ namespace Microsoft.CodeAnalysis.Remote
                 return;
             }
 
-            var client = await RemoteHostClient.TryGetClientAsync(_workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(_workspace, cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
             {
                 return;
             }
 
-            using (Logger.LogBlock(FunctionId.SolutionChecksumUpdater_SynchronizePrimaryWorkspace, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.SolutionChecksumUpdater_SynchronizePrimaryWorkspace,
+                    cancellationToken
+                )
+            )
             {
                 var workspaceVersion = solution.WorkspaceVersion;
-                await client.TryInvokeAsync<IRemoteAssetSynchronizationService>(
-                    solution,
-                    (service, solution, cancellationToken) => service.SynchronizePrimaryWorkspaceAsync(solution, workspaceVersion, cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                await client
+                    .TryInvokeAsync<IRemoteAssetSynchronizationService>(
+                        solution,
+                        (service, solution, cancellationToken) =>
+                            service.SynchronizePrimaryWorkspaceAsync(
+                                solution,
+                                workspaceVersion,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
@@ -168,8 +205,10 @@ namespace Microsoft.CodeAnalysis.Remote
             // VS side. this optimization saves times we need to do full text
             // synchronization for typing scenario.
 
-            if ((oldDocument.TryGetText(out var oldText) == false) ||
-                (newDocument.TryGetText(out var newText) == false))
+            if (
+                (oldDocument.TryGetText(out var oldText) == false)
+                || (newDocument.TryGetText(out var newText) == false)
+            )
             {
                 // we only support case where text already exist
                 return;
@@ -191,20 +230,37 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             // only cancelled when remote host gets shutdown
-            _textChangeQueue.ScheduleTask(nameof(PushTextChanges), async () =>
-            {
-                var client = await RemoteHostClient.TryGetClientAsync(_workspace, CancellationToken).ConfigureAwait(false);
-                if (client == null)
+            _textChangeQueue.ScheduleTask(
+                nameof(PushTextChanges),
+                async () =>
                 {
-                    return;
-                }
+                    var client = await RemoteHostClient
+                        .TryGetClientAsync(_workspace, CancellationToken)
+                        .ConfigureAwait(false);
+                    if (client == null)
+                    {
+                        return;
+                    }
 
-                var state = await oldDocument.State.GetStateChecksumsAsync(CancellationToken).ConfigureAwait(false);
+                    var state = await oldDocument.State
+                        .GetStateChecksumsAsync(CancellationToken)
+                        .ConfigureAwait(false);
 
-                await client.TryInvokeAsync<IRemoteAssetSynchronizationService>(
-                    (service, cancellationToken) => service.SynchronizeTextAsync(oldDocument.Id, state.Text, textChanges, cancellationToken),
-                    CancellationToken).ConfigureAwait(false);
-            }, CancellationToken);
+                    await client
+                        .TryInvokeAsync<IRemoteAssetSynchronizationService>(
+                            (service, cancellationToken) =>
+                                service.SynchronizeTextAsync(
+                                    oldDocument.Id,
+                                    state.Text,
+                                    textChanges,
+                                    cancellationToken
+                                ),
+                            CancellationToken
+                        )
+                        .ConfigureAwait(false);
+                },
+                CancellationToken
+            );
         }
     }
 }

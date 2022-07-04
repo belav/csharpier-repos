@@ -17,7 +17,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 get
                 {
-                    if(_branchCollection == null)
+                    if (_branchCollection == null)
                         _branchCollection = new CollectionDTOController<BranchDTO, short>();
 
                     return _branchCollection;
@@ -30,12 +30,11 @@ namespace AutoMapper.UnitTests.Bug
         {
             public short? ID { get; set; }
             public string Name { get; set; }
-
         }
 
         public class CollectionDTOController<T, K>
-           where T : class
-           where K : struct
+            where T : class
+            where K : struct
         {
             public IEnumerable<T> Models { get; set; }
             public K? SelectedID { get; set; }
@@ -51,8 +50,10 @@ namespace AutoMapper.UnitTests.Bug
             {
                 get
                 {
-                    if(_BranchCollection == null)
-                        _BranchCollection = new CollectionController<Branch, short, EventArgs>(this);
+                    if (_BranchCollection == null)
+                        _BranchCollection = new CollectionController<Branch, short, EventArgs>(
+                            this
+                        );
 
                     return _BranchCollection;
                 }
@@ -64,7 +65,6 @@ namespace AutoMapper.UnitTests.Bug
         {
             public short? ID { get; set; }
             public string Name { get; set; }
-
         }
 
         public class CollectionController<T, K, Z>
@@ -73,20 +73,28 @@ namespace AutoMapper.UnitTests.Bug
             where Z : EventArgs
         {
             private object _owner;
+
             public CollectionController(object owner)
             {
                 _owner = owner;
             }
+
             public IEnumerable<T> Models { get; set; }
             public K? SelectedID { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<OrganizationDTO, Organization>().ForMember(d=>d.BranchCollection, o=>o.UseDestinationValue());
-            cfg.CreateMap<BranchDTO, Branch>();
-            cfg.CreateMap(typeof(CollectionDTOController<,>), typeof(CollectionController<,,>), MemberList.None);
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<OrganizationDTO, Organization>()
+                    .ForMember(d => d.BranchCollection, o => o.UseDestinationValue());
+                cfg.CreateMap<BranchDTO, Branch>();
+                cfg.CreateMap(
+                    typeof(CollectionDTOController<,>),
+                    typeof(CollectionController<,,>),
+                    MemberList.None
+                );
+            });
 
         protected override void Because_of()
         {
@@ -110,7 +118,7 @@ namespace AutoMapper.UnitTests.Bug
             {
                 get
                 {
-                    if(_branchCollection == null)
+                    if (_branchCollection == null)
                         _branchCollection = new CollectionDTOController<BranchDTO, short>();
 
                     return _branchCollection;
@@ -123,12 +131,11 @@ namespace AutoMapper.UnitTests.Bug
         {
             public short? ID { get; set; }
             public string Name { get; set; }
-
         }
 
         public class CollectionDTOController<T, K>
-           where T : class
-           where K : struct
+            where T : class
+            where K : struct
         {
             public IEnumerable<T> Models { get; set; }
             public K? SelectedID { get; set; }
@@ -144,8 +151,10 @@ namespace AutoMapper.UnitTests.Bug
             {
                 get
                 {
-                    if(_BranchCollection == null)
-                        _BranchCollection = new CollectionController<Branch, short, EventArgs>(this);
+                    if (_BranchCollection == null)
+                        _BranchCollection = new CollectionController<Branch, short, EventArgs>(
+                            this
+                        );
 
                     return _BranchCollection;
                 }
@@ -157,7 +166,6 @@ namespace AutoMapper.UnitTests.Bug
         {
             public short? ID { get; set; }
             public string Name { get; set; }
-
         }
 
         public class CollectionController<T, K, Z>
@@ -166,20 +174,27 @@ namespace AutoMapper.UnitTests.Bug
             where Z : EventArgs
         {
             private object _owner;
+
             public CollectionController(object owner)
             {
                 _owner = owner;
             }
+
             public IEnumerable<T> Models { get; set; }
             public K? SelectedID { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<OrganizationDTO, Organization>();
-            cfg.CreateMap<BranchDTO, Branch>();
-            cfg.CreateMap(typeof(CollectionDTOController<,>), typeof(CollectionController<,,>), MemberList.None);
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<OrganizationDTO, Organization>();
+                cfg.CreateMap<BranchDTO, Branch>();
+                cfg.CreateMap(
+                    typeof(CollectionDTOController<,>),
+                    typeof(CollectionController<,,>),
+                    MemberList.None
+                );
+            });
 
         [Fact]
         public void Should_report_missing_constructor()
@@ -188,8 +203,15 @@ namespace AutoMapper.UnitTests.Bug
             var orgDto = new OrganizationDTO { ID = 5, Name = "O1" };
             orgDto.BranchCollection.Models = new BranchDTO[] { branchDto };
 
-            new Action(()=>Mapper.Map<Organization>(orgDto)).ShouldThrowException<AutoMapperMappingException>(
-                ex=>ex.InnerException.Message.ShouldStartWith(typeof(CollectionController<Branch, short, EventArgs>) + " needs to have a constructor with 0 args or only optional args"));
+            new Action(
+                () => Mapper.Map<Organization>(orgDto)
+            ).ShouldThrowException<AutoMapperMappingException>(
+                ex =>
+                    ex.InnerException.Message.ShouldStartWith(
+                        typeof(CollectionController<Branch, short, EventArgs>)
+                            + " needs to have a constructor with 0 args or only optional args"
+                    )
+            );
         }
     }
 }

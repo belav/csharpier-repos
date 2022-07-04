@@ -15,14 +15,19 @@ namespace SerializerTrimmingTest
     {
         static int Main(string[] args)
         {
-            int[] arr = new [] { 1 };
+            int[] arr = new[] { 1 };
             if (JsonSerializer.Serialize(arr, typeof(int[])) != "[1]")
             {
                 return -1;
             }
 
             MyStruct obj = default;
-            if (!TestHelper.JsonEqual(@"{""X"":0,""Y"":0}", JsonSerializer.Serialize(obj, typeof(MyStruct))))
+            if (
+                !TestHelper.JsonEqual(
+                    @"{""X"":0,""Y"":0}",
+                    JsonSerializer.Serialize(obj, typeof(MyStruct))
+                )
+            )
             {
                 return -1;
             }

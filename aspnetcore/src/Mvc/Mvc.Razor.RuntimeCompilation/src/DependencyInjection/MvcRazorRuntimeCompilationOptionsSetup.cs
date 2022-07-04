@@ -6,13 +6,15 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-internal sealed class MvcRazorRuntimeCompilationOptionsSetup : IConfigureOptions<MvcRazorRuntimeCompilationOptions>
+internal sealed class MvcRazorRuntimeCompilationOptionsSetup
+    : IConfigureOptions<MvcRazorRuntimeCompilationOptions>
 {
     private readonly IWebHostEnvironment _hostingEnvironment;
 
     public MvcRazorRuntimeCompilationOptionsSetup(IWebHostEnvironment hostingEnvironment)
     {
-        _hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
+        _hostingEnvironment =
+            hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
     }
 
     public void Configure(MvcRazorRuntimeCompilationOptions options)

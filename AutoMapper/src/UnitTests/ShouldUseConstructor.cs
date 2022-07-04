@@ -8,22 +8,15 @@ namespace AutoMapper.UnitTests
     {
         class Destination
         {
-            internal Destination(int a, string b)
-            {
-            }
+            internal Destination(int a, string b) { }
 
             public int A { get; }
 
             public string B { get; }
 
-            public Destination(int a)
-            {
+            public Destination(int a) { }
 
-            }
-
-            private Destination()
-            {
-            }
+            private Destination() { }
         }
 
         class Source
@@ -31,38 +24,31 @@ namespace AutoMapper.UnitTests
             public int A { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(
-            cfg =>
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
             {
                 cfg.ShouldUseConstructor = c => c.IsAssembly;
                 cfg.CreateMap<Source, Destination>();
             });
 
         [Fact]
-        public void Should_only_map_internal_ctor() => Should.Throw<AutoMapperConfigurationException>(AssertConfigurationIsValid);
+        public void Should_only_map_internal_ctor() =>
+            Should.Throw<AutoMapperConfigurationException>(AssertConfigurationIsValid);
     }
 
     public class ShouldUseConstructorPrivate : NonValidatingSpecBase
     {
-
         class Destination
         {
-            private Destination(int a, string b)
-            {
-            }
+            private Destination(int a, string b) { }
 
             public int A { get; }
 
             public string B { get; }
 
-            internal Destination(int a)
-            {
+            internal Destination(int a) { }
 
-            }
-
-            public Destination()
-            {
-            }
+            public Destination() { }
         }
 
         class Source
@@ -70,37 +56,31 @@ namespace AutoMapper.UnitTests
             public int A { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(
-            cfg =>
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
             {
                 cfg.ShouldUseConstructor = c => c.IsPrivate;
                 cfg.CreateMap<Source, Destination>();
             });
 
         [Fact]
-        public void Should_only_map_private_ctor() => Should.Throw<AutoMapperConfigurationException>(AssertConfigurationIsValid);
+        public void Should_only_map_private_ctor() =>
+            Should.Throw<AutoMapperConfigurationException>(AssertConfigurationIsValid);
     }
 
     public class ShouldUseConstructorPublic : NonValidatingSpecBase
     {
         class Destination
         {
-            public Destination(int a, string b)
-            {
-            }
+            public Destination(int a, string b) { }
 
             public int A { get; }
 
             public string B { get; }
 
-            internal Destination(int a)
-            {
+            internal Destination(int a) { }
 
-            }
-
-            private Destination()
-            {
-            }
+            private Destination() { }
         }
 
         class Source
@@ -108,8 +88,8 @@ namespace AutoMapper.UnitTests
             public int A { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(
-            cfg =>
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
             {
                 cfg.ShouldUseConstructor = c => c.IsPublic;
                 cfg.CreateMap<Source, Destination>();
@@ -126,17 +106,13 @@ namespace AutoMapper.UnitTests
     {
         class Destination
         {
-            public Destination(int a, string b)
-            {
-            }
+            public Destination(int a, string b) { }
 
             public int A { get; }
 
             public string B { get; }
 
-            private Destination()
-            {
-            }
+            private Destination() { }
         }
 
         class Source
@@ -144,8 +120,11 @@ namespace AutoMapper.UnitTests
             public int A { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => 
-            new MapperConfiguration(cfg => { cfg.CreateMap<Source, Destination>(); });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
     }
 
     public class ShouldIgnoreExplicitStaticConstructor : NonValidatingSpecBase
@@ -154,9 +133,7 @@ namespace AutoMapper.UnitTests
         {
             public string B { get; }
 
-            static Destination()
-            {
-            }
+            static Destination() { }
 
             public Destination(string b)
             {
@@ -169,8 +146,11 @@ namespace AutoMapper.UnitTests
             public string A { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => 
-            new MapperConfiguration(cfg => { cfg.CreateMap<Source, Destination>(); });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_ignore_static_constructor()
@@ -197,8 +177,11 @@ namespace AutoMapper.UnitTests
             public string A { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => 
-            new MapperConfiguration(cfg => { cfg.CreateMap<Source, Destination>(); });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_ignore_implicit_static_constructor() =>

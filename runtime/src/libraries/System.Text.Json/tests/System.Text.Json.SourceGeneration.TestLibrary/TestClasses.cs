@@ -11,7 +11,5 @@ namespace System.Text.Json.SourceGeneration.Tests.NETStandard
     }
 
     [JsonSerializable(typeof(MyPoco))]
-    public partial class NETStandardSerializerContext : JsonSerializerContext
-    {
-    }
+    public partial class NETStandardSerializerContext : JsonSerializerContext { }
 }

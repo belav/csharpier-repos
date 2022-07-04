@@ -19,9 +19,16 @@ namespace System.Text.RegularExpressions.Symbolic
 
         private SymbolicRegexInfo(uint i) => _info = i;
 
-        internal static SymbolicRegexInfo Create(bool isAlwaysNullable = false, bool canBeNullable = false,
-            bool startsWithLineAnchor = false, bool startsWithSomeAnchor = false, bool containsSomeAnchor = false,
-            bool isLazyLoop = false, bool isHighPriorityNullable = false, bool containsEffect = false)
+        internal static SymbolicRegexInfo Create(
+            bool isAlwaysNullable = false,
+            bool canBeNullable = false,
+            bool startsWithLineAnchor = false,
+            bool startsWithSomeAnchor = false,
+            bool containsSomeAnchor = false,
+            bool isLazyLoop = false,
+            bool isHighPriorityNullable = false,
+            bool containsEffect = false
+        )
         {
             uint i = 0;
 
@@ -89,37 +96,54 @@ namespace System.Text.RegularExpressions.Symbolic
         /// All other info properties are the logical disjunction of the resepctive info properties
         /// except that IsLazyLoop is false.
         /// </summary>
-        public static SymbolicRegexInfo Alternate(SymbolicRegexInfo left_info, SymbolicRegexInfo right_info) =>
+        public static SymbolicRegexInfo Alternate(
+            SymbolicRegexInfo left_info,
+            SymbolicRegexInfo right_info
+        ) =>
             Create(
                 isAlwaysNullable: left_info.IsNullable || right_info.IsNullable,
                 canBeNullable: left_info.CanBeNullable || right_info.CanBeNullable,
-                startsWithLineAnchor: left_info.StartsWithLineAnchor || right_info.StartsWithLineAnchor,
-                startsWithSomeAnchor: left_info.StartsWithSomeAnchor || right_info.StartsWithSomeAnchor,
+                startsWithLineAnchor: left_info.StartsWithLineAnchor
+                    || right_info.StartsWithLineAnchor,
+                startsWithSomeAnchor: left_info.StartsWithSomeAnchor
+                    || right_info.StartsWithSomeAnchor,
                 containsSomeAnchor: left_info.ContainsSomeAnchor || right_info.ContainsSomeAnchor,
                 isHighPriorityNullable: left_info.IsHighPriorityNullable,
-                containsEffect: left_info.ContainsEffect || right_info.ContainsEffect);
+                containsEffect: left_info.ContainsEffect || right_info.ContainsEffect
+            );
 
         /// <summary>
         /// Concatenation remains high priority nullable if both left and right are so.
         /// Nullability is conjunctive and other properies are essentially disjunctive,
         /// except that IsLazyLoop is false.
         /// </summary>
-        public static SymbolicRegexInfo Concat(SymbolicRegexInfo left_info, SymbolicRegexInfo right_info) =>
+        public static SymbolicRegexInfo Concat(
+            SymbolicRegexInfo left_info,
+            SymbolicRegexInfo right_info
+        ) =>
             Create(
                 isAlwaysNullable: left_info.IsNullable && right_info.IsNullable,
                 canBeNullable: left_info.CanBeNullable && right_info.CanBeNullable,
-                startsWithLineAnchor: left_info.StartsWithLineAnchor || (left_info.CanBeNullable && right_info.StartsWithLineAnchor),
-                startsWithSomeAnchor: left_info.StartsWithSomeAnchor || (left_info.CanBeNullable && right_info.StartsWithSomeAnchor),
+                startsWithLineAnchor: left_info.StartsWithLineAnchor
+                    || (left_info.CanBeNullable && right_info.StartsWithLineAnchor),
+                startsWithSomeAnchor: left_info.StartsWithSomeAnchor
+                    || (left_info.CanBeNullable && right_info.StartsWithSomeAnchor),
                 containsSomeAnchor: left_info.ContainsSomeAnchor || right_info.ContainsSomeAnchor,
-                isHighPriorityNullable: left_info.IsHighPriorityNullable && right_info.IsHighPriorityNullable,
-                containsEffect: left_info.ContainsEffect || right_info.ContainsEffect);
+                isHighPriorityNullable: left_info.IsHighPriorityNullable
+                    && right_info.IsHighPriorityNullable,
+                containsEffect: left_info.ContainsEffect || right_info.ContainsEffect
+            );
 
         /// <summary>
         /// Inherits anchor visibility from the loop body.
         /// Is nullable if either the body is nullable or if the lower bound is 0.
         /// Is high priority nullable when lazy and the lower bound is 0.
         /// </summary>
-        public static SymbolicRegexInfo Loop(SymbolicRegexInfo body_info, int lowerBound, bool isLazy)
+        public static SymbolicRegexInfo Loop(
+            SymbolicRegexInfo body_info,
+            int lowerBound,
+            bool isLazy
+        )
         {
             // Inherit anchor visibility from the loop body
             uint i = body_info._info;
@@ -147,7 +171,8 @@ namespace System.Text.RegularExpressions.Symbolic
             return new SymbolicRegexInfo(i);
         }
 
-        public static SymbolicRegexInfo Effect(SymbolicRegexInfo childInfo) => new SymbolicRegexInfo(childInfo._info | ContainsEffectMask);
+        public static SymbolicRegexInfo Effect(SymbolicRegexInfo childInfo) =>
+            new SymbolicRegexInfo(childInfo._info | ContainsEffectMask);
 
         public override bool Equals(object? obj) => obj is SymbolicRegexInfo i && Equals(i);
 

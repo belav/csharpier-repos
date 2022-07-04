@@ -77,7 +77,11 @@ public interface IRoleStore<TRole> : IDisposable where TRole : class
     /// <param name="normalizedName">The normalized name to set</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    Task SetNormalizedRoleNameAsync(TRole role, string? normalizedName, CancellationToken cancellationToken);
+    Task SetNormalizedRoleNameAsync(
+        TRole role,
+        string? normalizedName,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Finds the role who has the specified ID as an asynchronous operation.

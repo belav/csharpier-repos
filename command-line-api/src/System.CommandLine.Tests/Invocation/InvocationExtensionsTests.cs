@@ -21,10 +21,7 @@ namespace System.CommandLine.Tests.Invocation
 
             await command.InvokeAsync("-h", console);
 
-            console.Out
-                   .ToString()
-                   .Should()
-                   .Contain(theHelpText);
+            console.Out.ToString().Should().Contain(theHelpText);
         }
 
         [Fact]
@@ -38,10 +35,7 @@ namespace System.CommandLine.Tests.Invocation
 
             command.Invoke("-h", console);
 
-            console.Out
-                   .ToString()
-                   .Should()
-                   .Contain(theHelpText);
+            console.Out.ToString().Should().Contain(theHelpText);
         }
 
         [Fact]

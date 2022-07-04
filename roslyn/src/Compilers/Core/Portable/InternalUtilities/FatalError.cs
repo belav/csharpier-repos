@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
 {
     internal static class FatalError
     {
-        public delegate void ErrorReporterHandler(Exception exception, ErrorSeverity severity, bool forceDump);
+        public delegate void ErrorReporterHandler(
+            Exception exception,
+            ErrorSeverity severity,
+            bool forceDump
+        );
         private static ErrorReporterHandler? s_handler;
 
 #pragma warning disable IDE0052 // Remove unread private members - We want to hold onto last exception to make investigation easier
@@ -27,11 +31,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         [DisallowNull]
         public static ErrorReporterHandler? Handler
         {
-            get
-            {
-                return s_handler;
-            }
-
+            get { return s_handler; }
             set
             {
                 if (s_handler != value)
@@ -62,11 +62,18 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         public static void CopyHandlerTo(Assembly assembly)
         {
             var targetType = assembly.GetType(typeof(FatalError).FullName!, throwOnError: true)!;
-            var targetHandlerProperty = targetType.GetProperty(nameof(FatalError.Handler), BindingFlags.Static | BindingFlags.Public)!;
+            var targetHandlerProperty = targetType.GetProperty(
+                nameof(FatalError.Handler),
+                BindingFlags.Static | BindingFlags.Public
+            )!;
             if (Handler is not null)
             {
                 // We need to convert the delegate type to the type in the linked copy since they won't have identity.
-                var convertedDelegate = Delegate.CreateDelegate(targetHandlerProperty.PropertyType, Handler.Target, method: Handler.Method);
+                var convertedDelegate = Delegate.CreateDelegate(
+                    targetHandlerProperty.PropertyType,
+                    Handler.Target,
+                    method: Handler.Method
+                );
                 targetHandlerProperty.SetValue(obj: null, value: convertedDelegate);
             }
             else
@@ -81,7 +88,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// </summary>
         /// <returns><see langword="false"/> to avoid catching the exception.</returns>
         [DebuggerHidden]
-        public static bool ReportAndPropagate(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportAndPropagate(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
             Report(exception, severity);
             return false;
@@ -93,7 +103,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// </summary>
         /// <returns><see langword="false"/> to avoid catching the exception.</returns>
         [DebuggerHidden]
-        public static bool ReportAndPropagateUnlessCanceled(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportAndPropagateUnlessCanceled(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
             if (exception is OperationCanceledException)
             {
@@ -122,9 +135,18 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// <see cref="CancellationToken.IsCancellationRequested"/> set if cancellation is expected.</param>
         /// <returns><see langword="false"/> to avoid catching the exception.</returns>
         [DebuggerHidden]
-        public static bool ReportAndPropagateUnlessCanceled(Exception exception, CancellationToken contextCancellationToken, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportAndPropagateUnlessCanceled(
+            Exception exception,
+            CancellationToken contextCancellationToken,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
-            if (ExceptionUtilities.IsCurrentOperationBeingCancelled(exception, contextCancellationToken))
+            if (
+                ExceptionUtilities.IsCurrentOperationBeingCancelled(
+                    exception,
+                    contextCancellationToken
+                )
+            )
             {
                 return false;
             }
@@ -148,14 +170,20 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// </summary>
         /// <returns>True to catch the exception.</returns>
         [DebuggerHidden]
-        public static bool ReportAndCatch(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportAndCatch(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
             Report(exception, severity);
             return true;
         }
 
         [DebuggerHidden]
-        public static bool ReportWithDumpAndCatch(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportWithDumpAndCatch(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
             Report(exception, severity, forceDump: true);
             return true;
@@ -168,7 +196,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// <returns><see langword="true"/> to catch the exception if the error was reported; otherwise,
         /// <see langword="false"/> to propagate the exception if the operation was cancelled.</returns>
         [DebuggerHidden]
-        public static bool ReportAndCatchUnlessCanceled(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportAndCatchUnlessCanceled(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
             if (exception is OperationCanceledException)
             {
@@ -198,21 +229,33 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// <returns><see langword="true"/> to catch the exception if the error was reported; otherwise,
         /// <see langword="false"/> to propagate the exception if the operation was cancelled.</returns>
         [DebuggerHidden]
-        public static bool ReportAndCatchUnlessCanceled(Exception exception, CancellationToken contextCancellationToken, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportAndCatchUnlessCanceled(
+            Exception exception,
+            CancellationToken contextCancellationToken,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
-            if (ExceptionUtilities.IsCurrentOperationBeingCancelled(exception, contextCancellationToken))
+            if (
+                ExceptionUtilities.IsCurrentOperationBeingCancelled(
+                    exception,
+                    contextCancellationToken
+                )
+            )
             {
                 return false;
             }
 
             return ReportAndCatch(exception, severity);
         }
-
 #endif
 
         private static readonly object s_reportedMarker = new();
 
-        private static void Report(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized, bool forceDump = false)
+        private static void Report(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized,
+            bool forceDump = false
+        )
         {
             // hold onto last exception to make investigation easier
             s_reportedException = exception;
@@ -229,7 +272,11 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                 return;
             }
 
-            if (exception is AggregateException aggregate && aggregate.InnerExceptions.Count == 1 && aggregate.InnerExceptions[0].Data[s_reportedMarker] != null)
+            if (
+                exception is AggregateException aggregate
+                && aggregate.InnerExceptions.Count == 1
+                && aggregate.InnerExceptions[0].Data[s_reportedMarker] != null
+            )
             {
                 return;
             }

@@ -8,7 +8,11 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    [Obsolete(Obsoletions.RijndaelMessage, DiagnosticId = Obsoletions.RijndaelDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.RijndaelMessage,
+        DiagnosticId = Obsoletions.RijndaelDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class Rijndael : SymmetricAlgorithm
     {

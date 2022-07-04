@@ -31,7 +31,8 @@ namespace Microsoft.Win32
         public const int CalendarHijri = 0x08;
         public const int LocalBool = 0x10;
 
-        internal static readonly Type?[] ClassTypes = {
+        internal static readonly Type?[] ClassTypes =
+        {
             typeof(Empty),
             typeof(void),
             typeof(bool),
@@ -52,7 +53,7 @@ namespace Microsoft.Win32
             typeof(TimeSpan),
             typeof(object),
             typeof(decimal),
-            null,  // Enums - what do we do here?
+            null, // Enums - what do we do here?
             typeof(Missing),
             typeof(DBNull),
         };
@@ -72,15 +73,25 @@ namespace Microsoft.Win32
          * Variant and the types that CLR supports explicitly in the
          * CLR Variant class.
          */
-        internal static Variant ChangeType(Variant source, Type targetClass, short options, CultureInfo culture)
+        internal static Variant ChangeType(
+            Variant source,
+            Type targetClass,
+            short options,
+            CultureInfo culture
+        )
         {
             ArgumentNullException.ThrowIfNull(targetClass);
             ArgumentNullException.ThrowIfNull(culture);
 
             Variant result = default;
-            ChangeTypeEx(ref result, ref source,
-                         culture.LCID,
-                         targetClass.TypeHandle.Value, GetCVTypeFromClass(targetClass), options);
+            ChangeTypeEx(
+                ref result,
+                ref source,
+                culture.LCID,
+                targetClass.TypeHandle.Value,
+                GetCVTypeFromClass(targetClass),
+                options
+            );
             return result;
         }
 
@@ -92,7 +103,10 @@ namespace Microsoft.Win32
         private static int GetCVTypeFromClass(Type ctype)
         {
             Debug.Assert(ctype != null);
-            Debug.Assert(ClassTypes[CV_OBJECT] == typeof(object), "OAVariantLib::ClassTypes[CV_OBJECT] == Object.class");
+            Debug.Assert(
+                ClassTypes[CV_OBJECT] == typeof(object),
+                "OAVariantLib::ClassTypes[CV_OBJECT] == Object.class"
+            );
 
             int cvtype = -1;
             for (int i = 0; i < ClassTypes.Length; i++)
@@ -118,7 +132,14 @@ namespace Microsoft.Win32
         #region Private FCalls
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void ChangeTypeEx(ref Variant result, ref Variant source, int lcid, IntPtr typeHandle, int cvType, short flags);
+        private static extern void ChangeTypeEx(
+            ref Variant result,
+            ref Variant source,
+            int lcid,
+            IntPtr typeHandle,
+            int cvType,
+            short flags
+        );
 
         #endregion
     }

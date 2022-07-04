@@ -10,18 +10,12 @@ namespace Internal.IL.Stubs
     {
         MethodSignature IPrefixMangledSignature.BaseSignature
         {
-            get
-            {
-                return _targetSignature;
-            }
+            get { return _targetSignature; }
         }
 
         string IPrefixMangledSignature.Prefix
         {
-            get
-            {
-                return RuntimeMarshallingEnabled ? "CalliWithRuntimeMarshalling" : "Calli";
-            }
+            get { return RuntimeMarshallingEnabled ? "CalliWithRuntimeMarshalling" : "Calli"; }
         }
     }
 }

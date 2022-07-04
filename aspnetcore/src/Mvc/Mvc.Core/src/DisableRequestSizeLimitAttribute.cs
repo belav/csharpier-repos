@@ -9,7 +9,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <summary>
 /// Disables the request body size limit.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public class DisableRequestSizeLimitAttribute : Attribute, IFilterFactory, IOrderedFilter
 {
     /// <summary>

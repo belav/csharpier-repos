@@ -12,7 +12,13 @@ namespace ILCompiler.DependencyAnalysis
 {
     internal static class ReflectionMethodBodyScanner
     {
-        public static bool ResolveType(string name, ModuleDesc callingModule, TypeSystemContext context, out TypeDesc type, out ModuleDesc referenceModule)
+        public static bool ResolveType(
+            string name,
+            ModuleDesc callingModule,
+            TypeSystemContext context,
+            out TypeDesc type,
+            out ModuleDesc referenceModule
+        )
         {
             // This can do enough resolution to resolve "Foo" or "Foo, Assembly, PublicKeyToken=...".
             // The reflection resolution rules are complicated. This is only needed for a heuristic,
@@ -27,7 +33,15 @@ namespace ILCompiler.DependencyAnalysis
             StringBuilder typeName = new StringBuilder();
             StringBuilder typeNamespace = new StringBuilder();
             string containingTypeName = null;
-            while (i < name.Length && (char.IsLetterOrDigit(name[i]) || name[i] == '.' || name[i] == '`' || name[i] == '+'))
+            while (
+                i < name.Length
+                && (
+                    char.IsLetterOrDigit(name[i])
+                    || name[i] == '.'
+                    || name[i] == '`'
+                    || name[i] == '+'
+                )
+            )
             {
                 if (name[i] == '.')
                 {
@@ -75,14 +89,21 @@ namespace ILCompiler.DependencyAnalysis
             referenceModule = callingModule;
             if (assemblyName.Length > 0)
             {
-                referenceModule = context.ResolveAssembly(new AssemblyName(assemblyName.ToString()), false);    
+                referenceModule = context.ResolveAssembly(
+                    new AssemblyName(assemblyName.ToString()),
+                    false
+                );
             }
 
             if (referenceModule == null)
                 return false;
 
             // Resolve type in the assembly
-            MetadataType mdType = referenceModule.GetType(typeNamespace.ToString(), typeName.ToString(), throwIfNotFound: false);
+            MetadataType mdType = referenceModule.GetType(
+                typeNamespace.ToString(),
+                typeName.ToString(),
+                throwIfNotFound: false
+            );
             if (mdType != null && nestedTypeName != null)
                 mdType = mdType.GetNestedType(nestedTypeName);
 
@@ -90,13 +111,17 @@ namespace ILCompiler.DependencyAnalysis
             if (mdType == null && assemblyName.Length == 0)
             {
                 referenceModule = context.SystemModule;
-                mdType = referenceModule.GetType(typeNamespace.ToString(), typeName.ToString(), throwIfNotFound: false);
+                mdType = referenceModule.GetType(
+                    typeNamespace.ToString(),
+                    typeName.ToString(),
+                    throwIfNotFound: false
+                );
                 if (mdType != null && nestedTypeName != null)
                     mdType = mdType.GetNestedType(nestedTypeName);
             }
 
             type = mdType;
-            
+
             return type != null;
         }
     }

@@ -28,8 +28,14 @@ namespace System.Xml.Xsl.Qil
             _debug = debug;
         }
 
-        public QilFactory BaseFactory { get { return _f; } }
-        public bool IsDebug { get { return _debug; } }
+        public QilFactory BaseFactory
+        {
+            get { return _f; }
+        }
+        public bool IsDebug
+        {
+            get { return _debug; }
+        }
 
         #region Convenience methods
 
@@ -226,7 +232,8 @@ namespace System.Xml.Xsl.Qil
         private static void CheckLogicArg(QilNode arg)
         {
             Debug.Assert(arg != null, "Argument shouldn't be null");
-            Debug.Assert(arg.XmlType!.TypeCode == XmlTypeCode.Boolean && arg.XmlType.IsSingleton,
+            Debug.Assert(
+                arg.XmlType!.TypeCode == XmlTypeCode.Boolean && arg.XmlType.IsSingleton,
                 "The operand must be boolean-typed"
             );
         }
@@ -310,7 +317,11 @@ namespace System.Xml.Xsl.Qil
                     case QilNodeType.False:
                         return falseBranch;
                     case QilNodeType.Not:
-                        return this.Conditional(((QilUnary)condition).Child, falseBranch, trueBranch);
+                        return this.Conditional(
+                            ((QilUnary)condition).Child,
+                            falseBranch,
+                            trueBranch
+                        );
                 }
             }
             return _f.Conditional(condition, trueBranch, falseBranch);
@@ -326,7 +337,11 @@ namespace System.Xml.Xsl.Qil
                         // If expr has no side effects, it will be eliminated by optimizer
                         return _f.Loop(_f.Let(expr), branches[0]);
                     case 2:
-                        return _f.Conditional(_f.Eq(expr, _f.LiteralInt32(0)), branches[0], branches[1]);
+                        return _f.Conditional(
+                            _f.Eq(expr, _f.LiteralInt32(0)),
+                            branches[0],
+                            branches[1]
+                        );
                 }
             }
             return _f.Choice(expr, branches);
@@ -373,8 +388,10 @@ namespace System.Xml.Xsl.Qil
             {
                 switch (args.Length)
                 {
-                    case 0: return _f.Sequence();
-                    case 1: return args[0];
+                    case 0:
+                        return _f.Sequence();
+                    case 1:
+                        return args[0];
                 }
             }
             QilList res = _f.Sequence();
@@ -595,6 +612,7 @@ namespace System.Xml.Xsl.Qil
             Debug.Assert(args.NodeType == QilNodeType.FormalParameterList);
             return _f.Function(args, sideEffects, resultType);
         }
+
         public QilFunction Function(QilList args, QilNode defn, QilNode sideEffects)
         {
             Debug.Assert(args.NodeType == QilNodeType.FormalParameterList);
@@ -813,7 +831,12 @@ namespace System.Xml.Xsl.Qil
             return _f.XsltGenerateId(expr);
         }
 
-        public QilNode XsltInvokeEarlyBound(QilNode name, MethodInfo d, XmlQueryType t, IList<QilNode> args)
+        public QilNode XsltInvokeEarlyBound(
+            QilNode name,
+            MethodInfo d,
+            XmlQueryType t,
+            IList<QilNode> args
+        )
         {
             QilList list = _f.ActualParameterList();
             list.Add(args);

@@ -18,20 +18,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping
             CSharpSyntaxFormattingOptions formattingOptions,
             int wrappingColumn,
             OperatorPlacementWhenWrappingPreference operatorPlacement,
-            bool newLinesForBracesInObjectCollectionArrayInitializers)
-            : base(formattingOptions, wrappingColumn, operatorPlacement)
+            bool newLinesForBracesInObjectCollectionArrayInitializers
+        ) : base(formattingOptions, wrappingColumn, operatorPlacement)
         {
-            NewLinesForBracesInObjectCollectionArrayInitializers = newLinesForBracesInObjectCollectionArrayInitializers;
+            NewLinesForBracesInObjectCollectionArrayInitializers =
+                newLinesForBracesInObjectCollectionArrayInitializers;
         }
     }
 
     internal static class CSharpSyntaxWrappingOptionsProviders
     {
-        public static CSharpSyntaxWrappingOptions GetCSharpSyntaxWrappingOptions(this AnalyzerConfigOptions options, CodeActionOptions fallbackOptions)
-            => new(
-                options.GetCSharpSyntaxFormattingOptions((CSharpSyntaxFormattingOptions)fallbackOptions.CleanupOptions.FormattingOptions),
-                operatorPlacement: options.GetOption(CodeStyleOptions2.OperatorPlacementWhenWrapping),
+        public static CSharpSyntaxWrappingOptions GetCSharpSyntaxWrappingOptions(
+            this AnalyzerConfigOptions options,
+            CodeActionOptions fallbackOptions
+        ) =>
+            new(
+                options.GetCSharpSyntaxFormattingOptions(
+                    (CSharpSyntaxFormattingOptions)fallbackOptions.CleanupOptions.FormattingOptions
+                ),
+                operatorPlacement: options.GetOption(
+                    CodeStyleOptions2.OperatorPlacementWhenWrapping
+                ),
                 wrappingColumn: fallbackOptions.WrappingColumn,
-                newLinesForBracesInObjectCollectionArrayInitializers: options.GetOption(CSharpFormattingOptions2.NewLinesForBracesInObjectCollectionArrayInitializers));
+                newLinesForBracesInObjectCollectionArrayInitializers: options.GetOption(
+                    CSharpFormattingOptions2.NewLinesForBracesInObjectCollectionArrayInitializers
+                )
+            );
     }
 }

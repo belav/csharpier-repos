@@ -33,10 +33,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             _languageServerFactory = languageServerFactory;
         }
 
-        public IRazorLanguageServerTarget CreateLanguageServer(JsonRpc jsonRpc, IRazorCapabilitiesProvider razorCapabilitiesProvider)
+        public IRazorLanguageServerTarget CreateLanguageServer(
+            JsonRpc jsonRpc,
+            IRazorCapabilitiesProvider razorCapabilitiesProvider
+        )
         {
             var capabilitiesProvider = new RazorCapabilitiesProvider(razorCapabilitiesProvider);
-            var languageServer = _languageServerFactory.Create(jsonRpc, capabilitiesProvider, NoOpLspLogger.Instance);
+            var languageServer = _languageServerFactory.Create(
+                jsonRpc,
+                capabilitiesProvider,
+                NoOpLspLogger.Instance
+            );
 
             return new RazorLanguageServerTargetWrapper(languageServer);
         }
@@ -50,17 +57,30 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             string? filePath = null,
             bool isGenerated = false,
             bool designTimeOnly = false,
-            IRazorDocumentServiceProvider? razorDocumentServiceProvider = null)
+            IRazorDocumentServiceProvider? razorDocumentServiceProvider = null
+        )
         {
             folders ??= new List<string>();
 
             IDocumentServiceProvider? documentServiceProvider = null;
             if (razorDocumentServiceProvider is not null)
             {
-                documentServiceProvider = new RazorDocumentServiceProviderWrapper(razorDocumentServiceProvider);
+                documentServiceProvider = new RazorDocumentServiceProviderWrapper(
+                    razorDocumentServiceProvider
+                );
             }
 
-            return DocumentInfo.Create(id, name, folders, sourceCodeKind, loader, filePath, isGenerated, designTimeOnly, documentServiceProvider);
+            return DocumentInfo.Create(
+                id,
+                name,
+                folders,
+                sourceCodeKind,
+                loader,
+                filePath,
+                isGenerated,
+                designTimeOnly,
+                documentServiceProvider
+            );
         }
 
         private class RazorCapabilitiesProvider : ICapabilitiesProvider
@@ -72,8 +92,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                 _razorCapabilitiesProvider = razorCapabilitiesProvider;
             }
 
-            public ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
-                => _razorCapabilitiesProvider.GetCapabilities(clientCapabilities);
+            public ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities) =>
+                _razorCapabilitiesProvider.GetCapabilities(clientCapabilities);
         }
     }
 }

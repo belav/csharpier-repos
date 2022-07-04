@@ -24,15 +24,15 @@ public class TagHelperExecutionContext
     /// Internal for testing purposes only.
     /// </summary>
     internal TagHelperExecutionContext(string tagName, TagMode tagMode)
-        : this(tagName,
-               tagMode,
-               items: new Dictionary<object, object>(),
-               uniqueId: string.Empty,
-               executeChildContentAsync: () => Task.CompletedTask,
-               startTagHelperWritingScope: _ => { },
-               endTagHelperWritingScope: () => new DefaultTagHelperContent())
-    {
-    }
+        : this(
+            tagName,
+            tagMode,
+            items: new Dictionary<object, object>(),
+            uniqueId: string.Empty,
+            executeChildContentAsync: () => Task.CompletedTask,
+            startTagHelperWritingScope: _ => { },
+            endTagHelperWritingScope: () => new DefaultTagHelperContent()
+        ) { }
 
     /// <summary>
     /// Instantiates a new <see cref="TagHelperExecutionContext"/>.
@@ -55,7 +55,8 @@ public class TagHelperExecutionContext
         string uniqueId,
         Func<Task> executeChildContentAsync,
         Action<HtmlEncoder> startTagHelperWritingScope,
-        Func<TagHelperContent> endTagHelperWritingScope)
+        Func<TagHelperContent> endTagHelperWritingScope
+    )
     {
         if (startTagHelperWritingScope == null)
         {
@@ -200,7 +201,8 @@ public class TagHelperExecutionContext
         TagMode tagMode,
         IDictionary<object, object> items,
         string uniqueId,
-        Func<Task> executeChildContentAsync)
+        Func<Task> executeChildContentAsync
+    )
     {
         if (tagName == null)
         {
@@ -261,7 +263,10 @@ public class TagHelperExecutionContext
     }
 
     // Internal for testing.
-    internal async Task<TagHelperContent> GetChildContentAsync(bool useCachedResult, HtmlEncoder encoder)
+    internal async Task<TagHelperContent> GetChildContentAsync(
+        bool useCachedResult,
+        HtmlEncoder encoder
+    )
     {
         // Get cached content for this encoder.
         TagHelperContent childContent;

@@ -4,17 +4,11 @@ using Microsoft.EntityFrameworkCore;
 namespace AutoMapper.IntegrationTests;
 
 public class CreateDatabaseIfNotExists<TContext> : DropCreateDatabaseAlways<TContext>
-    where TContext : DbContext, new()
-{
-
-}
+    where TContext : DbContext, new() { }
 
 public class DropCreateDatabaseAlways<TContext> where TContext : DbContext, new()
 {
-    protected virtual void Seed(TContext context)
-    {
-
-    }
+    protected virtual void Seed(TContext context) { }
 
     public async Task Migrate()
     {

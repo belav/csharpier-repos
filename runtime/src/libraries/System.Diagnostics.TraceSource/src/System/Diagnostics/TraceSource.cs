@@ -12,20 +12,18 @@ namespace System.Diagnostics
 {
     public class TraceSource
     {
-        private static readonly List<WeakReference<TraceSource>> s_tracesources = new List<WeakReference<TraceSource>>();
+        private static readonly List<WeakReference<TraceSource>> s_tracesources =
+            new List<WeakReference<TraceSource>>();
         private static int s_LastCollectionCount;
 
         private volatile SourceSwitch? _internalSwitch;
         private volatile TraceListenerCollection? _listeners;
         private readonly SourceLevels _switchLevel;
         private readonly string _sourceName;
-        internal volatile bool _initCalled;   // Whether we've called Initialize already.
+        internal volatile bool _initCalled; // Whether we've called Initialize already.
         private StringDictionary? _attributes;
 
-        public TraceSource(string name)
-            : this(name, SourceLevels.Off)
-        {
-        }
+        public TraceSource(string name) : this(name, SourceLevels.Off) { }
 
         public TraceSource(string name, SourceLevels defaultLevel)
         {
@@ -48,7 +46,9 @@ namespace System.Diagnostics
             {
                 if (s_LastCollectionCount != GC.CollectionCount(2))
                 {
-                    List<WeakReference<TraceSource>> buffer = new List<WeakReference<TraceSource>>(s_tracesources.Count);
+                    List<WeakReference<TraceSource>> buffer = new List<WeakReference<TraceSource>>(
+                        s_tracesources.Count
+                    );
                     for (int i = 0; i < s_tracesources.Count; i++)
                     {
                         if (s_tracesources[i].TryGetTarget(out _))
@@ -185,7 +185,8 @@ namespace System.Diagnostics
                         {
                             TraceListener listener = _listeners[i];
                             listener.TraceEvent(manager, Name, eventType, id);
-                            if (Trace.AutoFlush) listener.Flush();
+                            if (Trace.AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
@@ -199,13 +200,15 @@ namespace System.Diagnostics
                             lock (listener)
                             {
                                 listener.TraceEvent(manager, Name, eventType, id);
-                                if (Trace.AutoFlush) listener.Flush();
+                                if (Trace.AutoFlush)
+                                    listener.Flush();
                             }
                         }
                         else
                         {
                             listener.TraceEvent(manager, Name, eventType, id);
-                            if (Trace.AutoFlush) listener.Flush();
+                            if (Trace.AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
@@ -230,7 +233,8 @@ namespace System.Diagnostics
                         {
                             TraceListener listener = _listeners[i];
                             listener.TraceEvent(manager, Name, eventType, id, message);
-                            if (Trace.AutoFlush) listener.Flush();
+                            if (Trace.AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
@@ -244,13 +248,15 @@ namespace System.Diagnostics
                             lock (listener)
                             {
                                 listener.TraceEvent(manager, Name, eventType, id, message);
-                                if (Trace.AutoFlush) listener.Flush();
+                                if (Trace.AutoFlush)
+                                    listener.Flush();
                             }
                         }
                         else
                         {
                             listener.TraceEvent(manager, Name, eventType, id, message);
-                            if (Trace.AutoFlush) listener.Flush();
+                            if (Trace.AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
@@ -258,7 +264,12 @@ namespace System.Diagnostics
         }
 
         [Conditional("TRACE")]
-        public void TraceEvent(TraceEventType eventType, int id, [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string? format, params object?[]? args)
+        public void TraceEvent(
+            TraceEventType eventType,
+            int id,
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string? format,
+            params object?[]? args
+        )
         {
             Initialize();
 
@@ -275,7 +286,8 @@ namespace System.Diagnostics
                         {
                             TraceListener listener = _listeners[i];
                             listener.TraceEvent(manager, Name, eventType, id, format, args);
-                            if (Trace.AutoFlush) listener.Flush();
+                            if (Trace.AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
@@ -289,13 +301,15 @@ namespace System.Diagnostics
                             lock (listener)
                             {
                                 listener.TraceEvent(manager, Name, eventType, id, format, args);
-                                if (Trace.AutoFlush) listener.Flush();
+                                if (Trace.AutoFlush)
+                                    listener.Flush();
                             }
                         }
                         else
                         {
                             listener.TraceEvent(manager, Name, eventType, id, format, args);
-                            if (Trace.AutoFlush) listener.Flush();
+                            if (Trace.AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
@@ -320,7 +334,8 @@ namespace System.Diagnostics
                         {
                             TraceListener listener = _listeners[i];
                             listener.TraceData(manager, Name, eventType, id, data);
-                            if (Trace.AutoFlush) listener.Flush();
+                            if (Trace.AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
@@ -334,13 +349,15 @@ namespace System.Diagnostics
                             lock (listener)
                             {
                                 listener.TraceData(manager, Name, eventType, id, data);
-                                if (Trace.AutoFlush) listener.Flush();
+                                if (Trace.AutoFlush)
+                                    listener.Flush();
                             }
                         }
                         else
                         {
                             listener.TraceData(manager, Name, eventType, id, data);
-                            if (Trace.AutoFlush) listener.Flush();
+                            if (Trace.AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
@@ -365,7 +382,8 @@ namespace System.Diagnostics
                         {
                             TraceListener listener = _listeners[i];
                             listener.TraceData(manager, Name, eventType, id, data);
-                            if (Trace.AutoFlush) listener.Flush();
+                            if (Trace.AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
@@ -379,13 +397,15 @@ namespace System.Diagnostics
                             lock (listener)
                             {
                                 listener.TraceData(manager, Name, eventType, id, data);
-                                if (Trace.AutoFlush) listener.Flush();
+                                if (Trace.AutoFlush)
+                                    listener.Flush();
                             }
                         }
                         else
                         {
                             listener.TraceData(manager, Name, eventType, id, data);
-                            if (Trace.AutoFlush) listener.Flush();
+                            if (Trace.AutoFlush)
+                                listener.Flush();
                         }
                     }
                 }
@@ -400,7 +420,10 @@ namespace System.Diagnostics
         }
 
         [Conditional("TRACE")]
-        public void TraceInformation([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string? format, params object?[]? args)
+        public void TraceInformation(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string? format,
+            params object?[]? args
+        )
         {
             // No need to call Initialize()
             TraceEvent(TraceEventType.Information, 0, format, args);
@@ -443,7 +466,13 @@ namespace System.Diagnostics
                         {
                             lock (listener)
                             {
-                                listener.TraceTransfer(manager, Name, id, message, relatedActivityId);
+                                listener.TraceTransfer(
+                                    manager,
+                                    Name,
+                                    id,
+                                    message,
+                                    relatedActivityId
+                                );
                                 if (Trace.AutoFlush)
                                 {
                                     listener.Flush();
@@ -479,10 +508,7 @@ namespace System.Diagnostics
 
         public string Name
         {
-            get
-            {
-                return _sourceName;
-            }
+            get { return _sourceName; }
         }
 
         public TraceListenerCollection Listeners

@@ -18,10 +18,7 @@ public class TableMappingBase<TColumnMapping> : Annotatable, ITableMappingBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public TableMappingBase(
-        IEntityType entityType,
-        TableBase table,
-        bool includesDerivedTypes)
+    public TableMappingBase(IEntityType entityType, TableBase table, bool includesDerivedTypes)
     {
         EntityType = entityType;
         Table = table;
@@ -45,8 +42,7 @@ public class TableMappingBase<TColumnMapping> : Annotatable, ITableMappingBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => Table.IsReadOnly;
+    public override bool IsReadOnly => Table.IsReadOnly;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,8 +50,7 @@ public class TableMappingBase<TColumnMapping> : Annotatable, ITableMappingBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual List<TColumnMapping> ColumnMappings { get; }
-        = new();
+    protected virtual List<TColumnMapping> ColumnMappings { get; } = new();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -72,7 +67,7 @@ public class TableMappingBase<TColumnMapping> : Annotatable, ITableMappingBase
 
         ColumnMappings.Add(columnMapping);
         ColumnMappings.Sort(ColumnMappingBaseComparer.Instance);
-        
+
         return true;
     }
 

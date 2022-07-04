@@ -28,10 +28,7 @@ public class ConflictResultTests
     {
         // Arrange
         var result = new Conflict();
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -44,15 +41,24 @@ public class ConflictResultTests
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        Conflict MyApi() { throw new NotImplementedException(); }
+        Conflict MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var context = new EndpointMetadataContext(((Delegate)MyApi).GetMethodInfo(), metadata, null);
+        var context = new EndpointMetadataContext(
+            ((Delegate)MyApi).GetMethodInfo(),
+            metadata,
+            null
+        );
 
         // Act
         PopulateMetadata<Conflict>(context);
 
         // Assert
-        var producesResponseTypeMetadata = context.EndpointMetadata.OfType<ProducesResponseTypeMetadata>().Last();
+        var producesResponseTypeMetadata = context.EndpointMetadata
+            .OfType<ProducesResponseTypeMetadata>()
+            .Last();
         Assert.Equal(StatusCodes.Status409Conflict, producesResponseTypeMetadata.StatusCode);
     }
 
@@ -64,7 +70,10 @@ public class ConflictResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]

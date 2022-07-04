@@ -11,8 +11,10 @@ namespace Microsoft.AspNetCore.Builder;
 /// </summary>
 public class RequestLocalizationOptions
 {
-    private RequestCulture _defaultRequestCulture =
-        new RequestCulture(CultureInfo.CurrentCulture, CultureInfo.CurrentUICulture);
+    private RequestCulture _defaultRequestCulture = new RequestCulture(
+        CultureInfo.CurrentCulture,
+        CultureInfo.CurrentUICulture
+    );
 
     /// <summary>
     /// Creates a new <see cref="RequestLocalizationOptions"/> with default values.
@@ -20,11 +22,11 @@ public class RequestLocalizationOptions
     public RequestLocalizationOptions()
     {
         RequestCultureProviders = new List<IRequestCultureProvider>
-            {
-                new QueryStringRequestCultureProvider { Options = this },
-                new CookieRequestCultureProvider { Options = this },
-                new AcceptLanguageHeaderRequestCultureProvider { Options = this }
-            };
+        {
+            new QueryStringRequestCultureProvider { Options = this },
+            new CookieRequestCultureProvider { Options = this },
+            new AcceptLanguageHeaderRequestCultureProvider { Options = this }
+        };
     }
 
     /// <summary>
@@ -34,10 +36,7 @@ public class RequestLocalizationOptions
     /// </summary>
     public RequestCulture DefaultRequestCulture
     {
-        get
-        {
-            return _defaultRequestCulture;
-        }
+        get { return _defaultRequestCulture; }
         set
         {
             if (value == null)
@@ -92,14 +91,16 @@ public class RequestLocalizationOptions
     /// the current request culture to an entry in this list.
     /// Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </summary>
-    public IList<CultureInfo>? SupportedCultures { get; set; } = new List<CultureInfo> { CultureInfo.CurrentCulture };
+    public IList<CultureInfo>? SupportedCultures { get; set; } =
+        new List<CultureInfo> { CultureInfo.CurrentCulture };
 
     /// <summary>
     /// The UI cultures supported by the application. The <see cref="RequestLocalizationMiddleware"/> will only set
     /// the current request culture to an entry in this list.
     /// Defaults to <see cref="CultureInfo.CurrentUICulture"/>.
     /// </summary>
-    public IList<CultureInfo>? SupportedUICultures { get; set; } = new List<CultureInfo> { CultureInfo.CurrentUICulture };
+    public IList<CultureInfo>? SupportedUICultures { get; set; } =
+        new List<CultureInfo> { CultureInfo.CurrentUICulture };
 
     /// <summary>
     /// An ordered list of providers used to determine a request's culture information. The first provider that

@@ -17,12 +17,11 @@ namespace Microsoft.CodeAnalysis.Structure
         bool CollapseEmptyMetadataImplementationsWhenFirstOpened = true,
         bool CollapseRegionsWhenCollapsingToDefinitions = false,
         int MaximumBannerLength = 80,
-        bool IsMetadataAsSource = false)
+        bool IsMetadataAsSource = false
+    )
     {
         public BlockStructureOptions()
-            : this(ShowBlockStructureGuidesForCommentsAndPreprocessorRegions: false)
-        {
-        }
+            : this(ShowBlockStructureGuidesForCommentsAndPreprocessorRegions: false) { }
 
         public static readonly BlockStructureOptions Default = new();
     }

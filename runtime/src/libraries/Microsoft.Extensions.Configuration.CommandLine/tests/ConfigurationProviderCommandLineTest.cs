@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
     public class ConfigurationProviderCommandLineTest : ConfigurationProviderTestBase
     {
         protected override (IConfigurationProvider Provider, Action Initializer) LoadThroughProvider(
-            TestSection testConfig)
+            TestSection testConfig
+        )
         {
             var args = new List<string>();
             SectionToArgs(args, "", testConfig);
@@ -44,7 +45,9 @@ namespace Microsoft.Extensions.Configuration.CommandLine.Test
         [Fact]
         public override void Load_from_single_provider_with_differing_case_duplicates_throws()
         {
-            AssertConfig(BuildConfigRoot(LoadThroughProvider(TestSection.DuplicatesDifferentCaseTestConfig)));
+            AssertConfig(
+                BuildConfigRoot(LoadThroughProvider(TestSection.DuplicatesDifferentCaseTestConfig))
+            );
         }
     }
 }

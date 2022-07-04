@@ -16,9 +16,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
-internal sealed class JsonTranscodingServerCallContext : ServerCallContext, IServerCallContextFeature
+internal sealed class JsonTranscodingServerCallContext
+    : ServerCallContext,
+        IServerCallContextFeature
 {
-    private static readonly AuthContext UnauthenticatedContext = new AuthContext(null, new Dictionary<string, List<AuthProperty>>());
+    private static readonly AuthContext UnauthenticatedContext = new AuthContext(
+        null,
+        new Dictionary<string, List<AuthProperty>>()
+    );
 
     private readonly IMethod _method;
 
@@ -26,6 +31,7 @@ internal sealed class JsonTranscodingServerCallContext : ServerCallContext, ISer
     public MethodOptions Options { get; }
     public CallHandlerDescriptorInfo DescriptorInfo { get; }
     public bool IsJsonRequestContent { get; private set; }
+
     // Default request encoding to UTF8 so an encoding is available
     // if the request sends an invalid/unsupported encoding.
     public Encoding RequestEncoding { get; private set; } = Encoding.UTF8;
@@ -36,7 +42,13 @@ internal sealed class JsonTranscodingServerCallContext : ServerCallContext, ISer
     private Metadata? _requestHeaders;
     private AuthContext? _authContext;
 
-    public JsonTranscodingServerCallContext(HttpContext httpContext, MethodOptions options, IMethod method, CallHandlerDescriptorInfo descriptorInfo, ILogger logger)
+    public JsonTranscodingServerCallContext(
+        HttpContext httpContext,
+        MethodOptions options,
+        IMethod method,
+        CallHandlerDescriptorInfo descriptorInfo,
+        ILogger logger
+    )
     {
         HttpContext = httpContext;
         Options = options;
@@ -47,7 +59,10 @@ internal sealed class JsonTranscodingServerCallContext : ServerCallContext, ISer
 
     public void Initialize()
     {
-        IsJsonRequestContent = JsonRequestHelpers.HasJsonContentType(HttpContext.Request, out var charset);
+        IsJsonRequestContent = JsonRequestHelpers.HasJsonContentType(
+            HttpContext.Request,
+            out var charset
+        );
         RequestEncoding = JsonRequestHelpers.GetEncodingFromCharset(charset) ?? Encoding.UTF8;
 
         // HttpContext.Items is publically exposed as ServerCallContext.UserState.
@@ -98,14 +113,23 @@ internal sealed class JsonTranscodingServerCallContext : ServerCallContext, ISer
         }
     }
 
-    internal async Task ProcessHandlerErrorAsync(Exception ex, string method, bool isStreaming, JsonSerializerOptions options)
+    internal async Task ProcessHandlerErrorAsync(
+        Exception ex,
+        string method,
+        bool isStreaming,
+        JsonSerializerOptions options
+    )
     {
         Status status;
         if (ex is RpcException rpcException)
         {
             // RpcException is thrown by client code to modify the status returned from the server.
             // Log the status and detail. Don't log the exception to reduce log verbosity.
-            GrpcServerLog.RpcConnectionError(Logger, rpcException.StatusCode, rpcException.Status.Detail);
+            GrpcServerLog.RpcConnectionError(
+                Logger,
+                rpcException.StatusCode,
+                rpcException.Status.Detail
+            );
 
             status = rpcException.Status;
         }
@@ -113,14 +137,23 @@ internal sealed class JsonTranscodingServerCallContext : ServerCallContext, ISer
         {
             GrpcServerLog.ErrorExecutingServiceMethod(Logger, method, ex);
 
-            var message = ErrorMessageHelper.BuildErrorMessage("Exception was thrown by handler.", ex, Options.EnableDetailedErrors);
+            var message = ErrorMessageHelper.BuildErrorMessage(
+                "Exception was thrown by handler.",
+                ex,
+                Options.EnableDetailedErrors
+            );
 
             // Note that the exception given to status won't be returned to the client.
             // It is still useful to set in case an interceptor accesses the status on the server.
             status = new Status(StatusCode.Unknown, message, ex);
         }
 
-        await JsonRequestHelpers.SendErrorResponse(HttpContext.Response, RequestEncoding, status, options);
+        await JsonRequestHelpers.SendErrorResponse(
+            HttpContext.Response,
+            RequestEncoding,
+            status,
+            options
+        );
         if (isStreaming)
         {
             await HttpContext.Response.Body.WriteAsync(GrpcProtocolConstants.StreamingDelimiter);
@@ -142,13 +175,24 @@ internal sealed class JsonTranscodingServerCallContext : ServerCallContext, ISer
                 {
                     // gRPC metadata contains a subset of the request headers
                     // Filter out pseudo headers (start with :) and other known headers
-                    if (header.Key.StartsWith(':') || GrpcProtocolConstants.FilteredHeaders.Contains(header.Key))
+                    if (
+                        header.Key.StartsWith(':')
+                        || GrpcProtocolConstants.FilteredHeaders.Contains(header.Key)
+                    )
                     {
                         continue;
                     }
-                    else if (header.Key.EndsWith(Metadata.BinaryHeaderSuffix, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        header.Key.EndsWith(
+                            Metadata.BinaryHeaderSuffix,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
-                        _requestHeaders.Add(header.Key, GrpcProtocolHelpers.ParseBinaryHeader(header.Value!));
+                        _requestHeaders.Add(
+                            header.Key,
+                            GrpcProtocolHelpers.ParseBinaryHeader(header.Value!)
+                        );
                     }
                     else
                     {
@@ -181,9 +225,10 @@ internal sealed class JsonTranscodingServerCallContext : ServerCallContext, ISer
             {
                 var clientCertificate = HttpContext.Connection.ClientCertificate;
 
-                _authContext = clientCertificate == null
-                    ? UnauthenticatedContext
-                    : AuthContextHelpers.CreateAuthContext(clientCertificate);
+                _authContext =
+                    clientCertificate == null
+                        ? UnauthenticatedContext
+                        : AuthContextHelpers.CreateAuthContext(clientCertificate);
             }
 
             return _authContext;
@@ -192,7 +237,9 @@ internal sealed class JsonTranscodingServerCallContext : ServerCallContext, ISer
 
     protected override IDictionary<object, object> UserStateCore => HttpContext.Items!;
 
-    protected override ContextPropagationToken CreatePropagationTokenCore(ContextPropagationOptions? options)
+    protected override ContextPropagationToken CreatePropagationTokenCore(
+        ContextPropagationOptions? options
+    )
     {
         throw new NotImplementedException();
     }
@@ -211,7 +258,9 @@ internal sealed class JsonTranscodingServerCallContext : ServerCallContext, ISer
             {
                 if (entry.IsBinary)
                 {
-                    HttpContext.Response.Headers[entry.Key] = Convert.ToBase64String(entry.ValueBytes);
+                    HttpContext.Response.Headers[entry.Key] = Convert.ToBase64String(
+                        entry.ValueBytes
+                    );
                 }
                 else
                 {
@@ -230,7 +279,8 @@ internal sealed class JsonTranscodingServerCallContext : ServerCallContext, ISer
         if (!HttpContext.Response.HasStarted)
         {
             HttpContext.Response.StatusCode = StatusCodes.Status200OK;
-            HttpContext.Response.ContentType = contentType ?? MediaType.ReplaceEncoding("application/json", RequestEncoding);
+            HttpContext.Response.ContentType =
+                contentType ?? MediaType.ReplaceEncoding("application/json", RequestEncoding);
         }
     }
 }

@@ -29,8 +29,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 : ProtocolConversions.GetUriFromFilePath(document.FilePath);
         }
 
-        public static Uri? TryGetURI(this TextDocument document, RequestContext? context = null)
-            => ProtocolConversions.TryGetUriFromFilePath(document.FilePath, context);
+        public static Uri? TryGetURI(this TextDocument document, RequestContext? context = null) =>
+            ProtocolConversions.TryGetUriFromFilePath(document.FilePath, context);
 
         public static ImmutableArray<Document> GetDocuments(this Solution solution, Uri documentUri)
         {
@@ -41,7 +41,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return documents;
         }
 
-        public static ImmutableArray<DocumentId> GetDocumentIds(this Solution solution, Uri documentUri)
+        public static ImmutableArray<DocumentId> GetDocumentIds(
+            this Solution solution,
+            Uri documentUri
+        )
         {
             // TODO: we need to normalize this. but for now, we check both absolute and local path
             //       right now, based on who calls this, solution might has "/" or "\\" as directory
@@ -56,7 +59,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return documentIds;
         }
 
-        public static Document? GetDocument(this Solution solution, TextDocumentIdentifier documentIdentifier)
+        public static Document? GetDocument(
+            this Solution solution,
+            TextDocumentIdentifier documentIdentifier
+        )
         {
             var documents = solution.GetDocuments(documentIdentifier.Uri);
             if (documents.Length == 0)
@@ -67,14 +73,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return documents.FindDocumentInProjectContext(documentIdentifier);
         }
 
-        public static Document FindDocumentInProjectContext(this ImmutableArray<Document> documents, TextDocumentIdentifier documentIdentifier)
+        public static Document FindDocumentInProjectContext(
+            this ImmutableArray<Document> documents,
+            TextDocumentIdentifier documentIdentifier
+        )
         {
             if (documents.Length > 1)
             {
                 // We have more than one document; try to find the one that matches the right context
-                if (documentIdentifier is VSTextDocumentIdentifier vsDocumentIdentifier && vsDocumentIdentifier.ProjectContext != null)
+                if (
+                    documentIdentifier is VSTextDocumentIdentifier vsDocumentIdentifier
+                    && vsDocumentIdentifier.ProjectContext != null
+                )
                 {
-                    var projectId = ProtocolConversions.ProjectContextToProjectId(vsDocumentIdentifier.ProjectContext);
+                    var projectId = ProtocolConversions.ProjectContextToProjectId(
+                        vsDocumentIdentifier.ProjectContext
+                    );
                     var matchingDocument = documents.FirstOrDefault(d => d.Project.Id == projectId);
 
                     if (matchingDocument != null)
@@ -89,7 +103,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
                     var solution = documents.First().Project.Solution;
                     // Lookup which of the linked documents is currently active in the workspace.
-                    var documentIdInCurrentContext = solution.Workspace.GetDocumentIdInCurrentContext(documents.First().Id);
+                    var documentIdInCurrentContext =
+                        solution.Workspace.GetDocumentIdInCurrentContext(documents.First().Id);
                     return solution.GetRequiredDocument(documentIdInCurrentContext);
                 }
             }
@@ -100,7 +115,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return documents[0];
         }
 
-        public static async Task<int> GetPositionFromLinePositionAsync(this TextDocument document, LinePosition linePosition, CancellationToken cancellationToken)
+        public static async Task<int> GetPositionFromLinePositionAsync(
+            this TextDocument document,
+            LinePosition linePosition,
+            CancellationToken cancellationToken
+        )
         {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             return text.Lines.GetPosition(linePosition);
@@ -116,7 +135,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return false;
         }
 
-        public static bool HasCompletionListDataCapability(this ClientCapabilities clientCapabilities)
+        public static bool HasCompletionListDataCapability(
+            this ClientCapabilities clientCapabilities
+        )
         {
             if (!TryGetVSCompletionListSetting(clientCapabilities, out var completionListSetting))
             {
@@ -126,7 +147,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return completionListSetting.Data;
         }
 
-        public static bool HasCompletionListCommitCharactersCapability(this ClientCapabilities clientCapabilities)
+        public static bool HasCompletionListCommitCharactersCapability(
+            this ClientCapabilities clientCapabilities
+        )
         {
             if (!TryGetVSCompletionListSetting(clientCapabilities, out var completionListSetting))
             {
@@ -149,14 +172,27 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 case InternalLanguageNames.TypeScript:
                     return "typescript";
                 default:
-                    throw new ArgumentException(string.Format("Document project language {0} is not valid", document.Project.Language));
+                    throw new ArgumentException(
+                        string.Format(
+                            "Document project language {0} is not valid",
+                            document.Project.Language
+                        )
+                    );
             }
         }
 
-        public static ClassifiedTextElement GetClassifiedText(this DefinitionItem definition)
-            => new ClassifiedTextElement(definition.DisplayParts.Select(part => new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text)));
+        public static ClassifiedTextElement GetClassifiedText(this DefinitionItem definition) =>
+            new ClassifiedTextElement(
+                definition.DisplayParts.Select(
+                    part => new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text)
+                )
+            );
 
-        private static bool TryGetVSCompletionListSetting(ClientCapabilities clientCapabilities, [NotNullWhen(returnValue: true)] out VSInternalCompletionListSetting? completionListSetting)
+        private static bool TryGetVSCompletionListSetting(
+            ClientCapabilities clientCapabilities,
+            [NotNullWhen(returnValue: true)]
+                out VSInternalCompletionListSetting? completionListSetting
+        )
         {
             if (clientCapabilities is not VSInternalClientCapabilities vsClientCapabilities)
             {
@@ -171,7 +207,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 return false;
             }
 
-            if (textDocumentCapability.Completion is not VSInternalCompletionSetting vsCompletionSetting)
+            if (
+                textDocumentCapability.Completion
+                is not VSInternalCompletionSetting vsCompletionSetting
+            )
             {
                 completionListSetting = null;
                 return false;

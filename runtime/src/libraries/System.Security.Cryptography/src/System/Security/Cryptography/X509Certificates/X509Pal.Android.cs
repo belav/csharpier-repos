@@ -32,18 +32,29 @@ namespace System.Security.Cryptography.X509Certificates
                 if (certificatePal == null)
                     throw new NotSupportedException(SR.NotSupported_KeyAlgorithm);
 
-                return new ECDiffieHellmanImplementation.ECDiffieHellmanAndroid(DecodeECPublicKey(certificatePal));
+                return new ECDiffieHellmanImplementation.ECDiffieHellmanAndroid(
+                    DecodeECPublicKey(certificatePal)
+                );
             }
 
-            public AsymmetricAlgorithm DecodePublicKey(Oid oid, byte[] encodedKeyValue, byte[] encodedParameters,
-                ICertificatePal? certificatePal)
+            public AsymmetricAlgorithm DecodePublicKey(
+                Oid oid,
+                byte[] encodedKeyValue,
+                byte[] encodedParameters,
+                ICertificatePal? certificatePal
+            )
             {
                 switch (oid.Value)
                 {
                     case Oids.Dsa:
                         if (certificatePal != null)
                         {
-                            var handle = new SafeDsaHandle(GetPublicKey(certificatePal, Interop.AndroidCrypto.PAL_KeyAlgorithm.DSA));
+                            var handle = new SafeDsaHandle(
+                                GetPublicKey(
+                                    certificatePal,
+                                    Interop.AndroidCrypto.PAL_KeyAlgorithm.DSA
+                                )
+                            );
                             return new DSAImplementation.DSAAndroid(handle);
                         }
                         else
@@ -53,7 +64,12 @@ namespace System.Security.Cryptography.X509Certificates
                     case Oids.Rsa:
                         if (certificatePal != null)
                         {
-                            var handle = new SafeRsaHandle(GetPublicKey(certificatePal, Interop.AndroidCrypto.PAL_KeyAlgorithm.RSA));
+                            var handle = new SafeRsaHandle(
+                                GetPublicKey(
+                                    certificatePal,
+                                    Interop.AndroidCrypto.PAL_KeyAlgorithm.RSA
+                                )
+                            );
                             return new RSAImplementation.RSAAndroid(handle);
                         }
                         else
@@ -65,23 +81,39 @@ namespace System.Security.Cryptography.X509Certificates
                 }
             }
 
-            public string X500DistinguishedNameDecode(byte[] encodedDistinguishedName, X500DistinguishedNameFlags flag)
-            {
-                return X500NameEncoder.X500DistinguishedNameDecode(encodedDistinguishedName, true, flag);
-            }
-
-            public byte[] X500DistinguishedNameEncode(string distinguishedName, X500DistinguishedNameFlags flag)
-            {
-                return X500NameEncoder.X500DistinguishedNameEncode(distinguishedName, flag);
-            }
-
-            public string X500DistinguishedNameFormat(byte[] encodedDistinguishedName, bool multiLine)
+            public string X500DistinguishedNameDecode(
+                byte[] encodedDistinguishedName,
+                X500DistinguishedNameFlags flag
+            )
             {
                 return X500NameEncoder.X500DistinguishedNameDecode(
                     encodedDistinguishedName,
                     true,
-                    multiLine ? X500DistinguishedNameFlags.UseNewLines : X500DistinguishedNameFlags.None,
-                    multiLine);
+                    flag
+                );
+            }
+
+            public byte[] X500DistinguishedNameEncode(
+                string distinguishedName,
+                X500DistinguishedNameFlags flag
+            )
+            {
+                return X500NameEncoder.X500DistinguishedNameEncode(distinguishedName, flag);
+            }
+
+            public string X500DistinguishedNameFormat(
+                byte[] encodedDistinguishedName,
+                bool multiLine
+            )
+            {
+                return X500NameEncoder.X500DistinguishedNameDecode(
+                    encodedDistinguishedName,
+                    true,
+                    multiLine
+                        ? X500DistinguishedNameFlags.UseNewLines
+                        : X500DistinguishedNameFlags.None,
+                    multiLine
+                );
             }
 
             public X509ContentType GetCertContentType(ReadOnlySpan<byte> rawData)
@@ -111,10 +143,15 @@ namespace System.Security.Cryptography.X509Certificates
 
             private static SafeEcKeyHandle DecodeECPublicKey(ICertificatePal pal)
             {
-                return new SafeEcKeyHandle(GetPublicKey(pal, Interop.AndroidCrypto.PAL_KeyAlgorithm.EC));
+                return new SafeEcKeyHandle(
+                    GetPublicKey(pal, Interop.AndroidCrypto.PAL_KeyAlgorithm.EC)
+                );
             }
 
-            private static IntPtr GetPublicKey(ICertificatePal pal, Interop.AndroidCrypto.PAL_KeyAlgorithm algorithm)
+            private static IntPtr GetPublicKey(
+                ICertificatePal pal,
+                Interop.AndroidCrypto.PAL_KeyAlgorithm algorithm
+            )
             {
                 AndroidCertificatePal certPal = (AndroidCertificatePal)pal;
                 IntPtr ptr = Interop.AndroidCrypto.X509GetPublicKey(certPal.SafeHandle, algorithm);
@@ -143,7 +180,11 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 SubjectPublicKeyInfoAsn spki = new SubjectPublicKeyInfoAsn
                 {
-                    Algorithm = new AlgorithmIdentifierAsn { Algorithm = Oids.Dsa, Parameters = encodedParameters },
+                    Algorithm = new AlgorithmIdentifierAsn
+                    {
+                        Algorithm = Oids.Dsa,
+                        Parameters = encodedParameters
+                    },
                     SubjectPublicKey = encodedKeyValue,
                 };
 
@@ -159,9 +200,9 @@ namespace System.Security.Cryptography.X509Certificates
 
                 try
                 {
-                   dsa.ImportSubjectPublicKeyInfo(rented.AsSpan(0, written), out _);
-                   toDispose = null;
-                   return dsa;
+                    dsa.ImportSubjectPublicKeyInfo(rented.AsSpan(0, written), out _);
+                    toDispose = null;
+                    return dsa;
                 }
                 finally
                 {

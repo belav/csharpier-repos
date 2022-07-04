@@ -29,7 +29,15 @@ namespace System.Net.WebSockets
         {
             get
             {
-                if (_innerWebSocket != null && !_disposed && (_state == WebSocketState.Connecting || _state == WebSocketState.Open || _state == WebSocketState.CloseSent))
+                if (
+                    _innerWebSocket != null
+                    && !_disposed
+                    && (
+                        _state == WebSocketState.Connecting
+                        || _state == WebSocketState.Open
+                        || _state == WebSocketState.CloseSent
+                    )
+                )
                 {
                     _state = GetReadyState();
                 }
@@ -39,11 +47,18 @@ namespace System.Net.WebSockets
 
         public override WebSocketCloseStatus? CloseStatus => _closeStatus;
         public override string? CloseStatusDescription => _closeStatusDescription;
-        public override string? SubProtocol => _innerWebSocket != null && !_innerWebSocket.IsDisposed ? _innerWebSocket!.GetObjectProperty("protocol")?.ToString() : null;
+        public override string? SubProtocol =>
+            _innerWebSocket != null && !_innerWebSocket.IsDisposed
+                ? _innerWebSocket!.GetObjectProperty("protocol")?.ToString()
+                : null;
 
         #endregion Properties
 
-        internal Task ConnectAsync(Uri uri, List<string>? requestedSubProtocols, CancellationToken cancellationToken)
+        internal Task ConnectAsync(
+            Uri uri,
+            List<string>? requestedSubProtocols,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDisposed();
             if (_state != WebSocketState.None)
@@ -54,7 +69,12 @@ namespace System.Net.WebSockets
             return ConnectAsyncCore(uri, requestedSubProtocols, cancellationToken);
         }
 
-        public override Task SendAsync(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken)
+        public override Task SendAsync(
+            ArraySegment<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -66,15 +86,22 @@ namespace System.Net.WebSockets
                 throw new InvalidOperationException(SR.net_WebSockets_NotConnected);
             }
 
-            if (messageType != WebSocketMessageType.Binary && messageType != WebSocketMessageType.Text)
+            if (
+                messageType != WebSocketMessageType.Binary
+                && messageType != WebSocketMessageType.Text
+            )
             {
-                throw new ArgumentException(SR.Format(SR.net_WebSockets_Argument_InvalidMessageType,
-                    messageType,
-                    nameof(SendAsync),
-                    WebSocketMessageType.Binary,
-                    WebSocketMessageType.Text,
-                    nameof(CloseOutputAsync)),
-                    nameof(messageType));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.net_WebSockets_Argument_InvalidMessageType,
+                        messageType,
+                        nameof(SendAsync),
+                        WebSocketMessageType.Binary,
+                        WebSocketMessageType.Text,
+                        nameof(CloseOutputAsync)
+                    ),
+                    nameof(messageType)
+                );
             }
 
             WebSocketValidate.ValidateArraySegment(buffer, nameof(buffer));
@@ -82,17 +109,25 @@ namespace System.Net.WebSockets
             return SendAsyncCore(buffer, messageType, endOfMessage, cancellationToken);
         }
 
-        public override Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancellationToken)
+        public override Task<WebSocketReceiveResult> ReceiveAsync(
+            ArraySegment<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
-                return Task.FromException<WebSocketReceiveResult>(new OperationCanceledException(cancellationToken));
+                return Task.FromException<WebSocketReceiveResult>(
+                    new OperationCanceledException(cancellationToken)
+                );
             }
             ThrowIfDisposed();
             // fast check of previous _state instead of GetReadyState(), the readyState would be validated on JS side
             if (_state != WebSocketState.Open && _state != WebSocketState.CloseSent)
             {
-                throw new WebSocketException(WebSocketError.InvalidState, SR.Format(SR.net_WebSockets_InvalidState, _state, "Open, CloseSent"));
+                throw new WebSocketException(
+                    WebSocketError.InvalidState,
+                    SR.Format(SR.net_WebSockets_InvalidState, _state, "Open, CloseSent")
+                );
             }
 
             WebSocketValidate.ValidateArraySegment(buffer, nameof(buffer));
@@ -100,7 +135,11 @@ namespace System.Net.WebSockets
             return ReceiveAsyncCore(buffer, cancellationToken);
         }
 
-        public override Task CloseOutputAsync(WebSocketCloseStatus closeStatus, string? statusDescription, CancellationToken cancellationToken)
+        public override Task CloseOutputAsync(
+            WebSocketCloseStatus closeStatus,
+            string? statusDescription,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
@@ -110,15 +149,29 @@ namespace System.Net.WebSockets
             var state = State;
             if (state == WebSocketState.None || state == WebSocketState.Closed)
             {
-                throw new WebSocketException(WebSocketError.InvalidState, SR.Format(SR.net_WebSockets_InvalidState, state, "Connecting, Open, CloseSent, Aborted"));
+                throw new WebSocketException(
+                    WebSocketError.InvalidState,
+                    SR.Format(
+                        SR.net_WebSockets_InvalidState,
+                        state,
+                        "Connecting, Open, CloseSent, Aborted"
+                    )
+                );
             }
 
-            return state == WebSocketState.Open || state == WebSocketState.Connecting || state == WebSocketState.Aborted
+            return
+                state == WebSocketState.Open
+                || state == WebSocketState.Connecting
+                || state == WebSocketState.Aborted
                 ? CloseAsyncCore(closeStatus, statusDescription, false, cancellationToken)
                 : Task.CompletedTask;
         }
 
-        public override Task CloseAsync(WebSocketCloseStatus closeStatus, string? statusDescription, CancellationToken cancellationToken)
+        public override Task CloseAsync(
+            WebSocketCloseStatus closeStatus,
+            string? statusDescription,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
@@ -128,11 +181,27 @@ namespace System.Net.WebSockets
             var state = State;
             if (state == WebSocketState.None || state == WebSocketState.Closed)
             {
-                throw new WebSocketException(WebSocketError.InvalidState, SR.Format(SR.net_WebSockets_InvalidState, state, "Connecting, Open, CloseSent, Aborted"));
+                throw new WebSocketException(
+                    WebSocketError.InvalidState,
+                    SR.Format(
+                        SR.net_WebSockets_InvalidState,
+                        state,
+                        "Connecting, Open, CloseSent, Aborted"
+                    )
+                );
             }
 
-            return state == WebSocketState.Open || state == WebSocketState.Connecting || state == WebSocketState.Aborted || state == WebSocketState.CloseSent
-                ? CloseAsyncCore(closeStatus, statusDescription, state != WebSocketState.Aborted, cancellationToken)
+            return
+                state == WebSocketState.Open
+                || state == WebSocketState.Connecting
+                || state == WebSocketState.Aborted
+                || state == WebSocketState.CloseSent
+                ? CloseAsyncCore(
+                    closeStatus,
+                    statusDescription,
+                    state != WebSocketState.Aborted,
+                    cancellationToken
+                )
                 : Task.CompletedTask;
         }
 
@@ -168,7 +237,11 @@ namespace System.Net.WebSockets
             }
         }
 
-        private async Task ConnectAsyncCore(Uri uri, List<string>? requestedSubProtocols, CancellationToken cancellationToken)
+        private async Task ConnectAsyncCore(
+            Uri uri,
+            List<string>? requestedSubProtocols,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -178,14 +251,29 @@ namespace System.Net.WebSockets
                     _closeStatus = (WebSocketCloseStatus)code;
                     _closeStatusDescription = reason;
                     WebSocketState state = State;
-                    if (state == WebSocketState.Connecting || state == WebSocketState.Open || state == WebSocketState.CloseSent)
+                    if (
+                        state == WebSocketState.Connecting
+                        || state == WebSocketState.Open
+                        || state == WebSocketState.CloseSent
+                    )
                     {
                         _state = WebSocketState.Closed;
                     }
                 };
 
-                var openTask = JavaScript.Runtime.WebSocketOpen(uri.ToString(), subProtocols, onClose, out _innerWebSocket, out IntPtr promiseJSHandle);
-                var wrappedTask = CancelationHelper(openTask, promiseJSHandle, cancellationToken, _state);
+                var openTask = JavaScript.Runtime.WebSocketOpen(
+                    uri.ToString(),
+                    subProtocols,
+                    onClose,
+                    out _innerWebSocket,
+                    out IntPtr promiseJSHandle
+                );
+                var wrappedTask = CancelationHelper(
+                    openTask,
+                    promiseJSHandle,
+                    cancellationToken,
+                    _state
+                );
 
                 await wrappedTask.ConfigureAwait(true);
                 if (State == WebSocketState.Connecting)
@@ -198,7 +286,11 @@ namespace System.Net.WebSockets
                 _state = WebSocketState.Closed;
                 if (_aborted)
                 {
-                    throw new WebSocketException(WebSocketError.Faulted, SR.net_webstatus_ConnectFailure, ex);
+                    throw new WebSocketException(
+                        WebSocketError.Faulted,
+                        SR.net_webstatus_ConnectFailure,
+                        ex
+                    );
                 }
                 throw;
             }
@@ -209,17 +301,33 @@ namespace System.Net.WebSockets
             }
         }
 
-        private async Task SendAsyncCore(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken)
+        private async Task SendAsyncCore(
+            ArraySegment<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                var sendTask = JavaScript.Runtime.WebSocketSend(_innerWebSocket!, buffer, (int)messageType, endOfMessage, out IntPtr promiseJSHandle);
+                var sendTask = JavaScript.Runtime.WebSocketSend(
+                    _innerWebSocket!,
+                    buffer,
+                    (int)messageType,
+                    endOfMessage,
+                    out IntPtr promiseJSHandle
+                );
                 if (sendTask == null)
                 {
                     // return synchronously
                     return;
                 }
-                var wrappedTask = CancelationHelper(sendTask, promiseJSHandle, cancellationToken, _state);
+                var wrappedTask = CancelationHelper(
+                    sendTask,
+                    promiseJSHandle,
+                    cancellationToken,
+                    _state
+                );
 
                 await wrappedTask.ConfigureAwait(true);
             }
@@ -231,25 +339,42 @@ namespace System.Net.WebSockets
             {
                 if (ex.Message.StartsWith("InvalidState:"))
                 {
-                    throw new WebSocketException(WebSocketError.InvalidState, SR.Format(SR.net_WebSockets_InvalidState, State, "Open"), ex);
+                    throw new WebSocketException(
+                        WebSocketError.InvalidState,
+                        SR.Format(SR.net_WebSockets_InvalidState, State, "Open"),
+                        ex
+                    );
                 }
                 throw new WebSocketException(WebSocketError.NativeError, ex);
             }
         }
 
-        private async Task<WebSocketReceiveResult> ReceiveAsyncCore(ArraySegment<byte> buffer, CancellationToken cancellationToken)
+        private async Task<WebSocketReceiveResult> ReceiveAsyncCore(
+            ArraySegment<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 ArraySegment<int> response = new ArraySegment<int>(new int[3]);
-                var receiveTask = JavaScript.Runtime.WebSocketReceive(_innerWebSocket!, buffer, response, out IntPtr promiseJSHandle);
+                var receiveTask = JavaScript.Runtime.WebSocketReceive(
+                    _innerWebSocket!,
+                    buffer,
+                    response,
+                    out IntPtr promiseJSHandle
+                );
                 if (receiveTask == null)
                 {
                     // return synchronously
                     return ConvertResponse(response);
                 }
 
-                var wrappedTask = CancelationHelper(receiveTask, promiseJSHandle, cancellationToken, _state);
+                var wrappedTask = CancelationHelper(
+                    receiveTask,
+                    promiseJSHandle,
+                    cancellationToken,
+                    _state
+                );
                 await wrappedTask.ConfigureAwait(true);
 
                 return ConvertResponse(response);
@@ -262,7 +387,11 @@ namespace System.Net.WebSockets
             {
                 if (ex.Message.StartsWith("InvalidState:"))
                 {
-                    throw new WebSocketException(WebSocketError.InvalidState, SR.Format(SR.net_WebSockets_InvalidState, State, "Open, CloseSent"), ex);
+                    throw new WebSocketException(
+                        WebSocketError.InvalidState,
+                        SR.Format(SR.net_WebSockets_InvalidState, State, "Open, CloseSent"),
+                        ex
+                    );
                 }
                 throw new WebSocketException(WebSocketError.NativeError, ex);
             }
@@ -277,31 +406,66 @@ namespace System.Net.WebSockets
             WebSocketMessageType messageType = (WebSocketMessageType)response[typeIndex];
             if (messageType == WebSocketMessageType.Close)
             {
-                return new WebSocketReceiveResult(response[countIndex], messageType, response[endIndex] != 0, CloseStatus, CloseStatusDescription);
+                return new WebSocketReceiveResult(
+                    response[countIndex],
+                    messageType,
+                    response[endIndex] != 0,
+                    CloseStatus,
+                    CloseStatusDescription
+                );
             }
-            return new WebSocketReceiveResult(response[countIndex], messageType, response[endIndex] != 0);
+            return new WebSocketReceiveResult(
+                response[countIndex],
+                messageType,
+                response[endIndex] != 0
+            );
         }
 
-        private async Task CloseAsyncCore(WebSocketCloseStatus closeStatus, string? statusDescription, bool waitForCloseReceived, CancellationToken cancellationToken)
+        private async Task CloseAsyncCore(
+            WebSocketCloseStatus closeStatus,
+            string? statusDescription,
+            bool waitForCloseReceived,
+            CancellationToken cancellationToken
+        )
         {
             _closeStatus = closeStatus;
             _closeStatusDescription = statusDescription;
 
-            var closeTask = JavaScript.Runtime.WebSocketClose(_innerWebSocket!, (int)closeStatus, statusDescription, waitForCloseReceived, out IntPtr promiseJSHandle);
+            var closeTask = JavaScript.Runtime.WebSocketClose(
+                _innerWebSocket!,
+                (int)closeStatus,
+                statusDescription,
+                waitForCloseReceived,
+                out IntPtr promiseJSHandle
+            );
             if (closeTask != null)
             {
-                var wrappedTask = CancelationHelper(closeTask, promiseJSHandle, cancellationToken, _state);
+                var wrappedTask = CancelationHelper(
+                    closeTask,
+                    promiseJSHandle,
+                    cancellationToken,
+                    _state
+                );
                 await wrappedTask.ConfigureAwait(true);
             }
 
             var state = State;
-            if (state == WebSocketState.Open || state == WebSocketState.Connecting || state == WebSocketState.CloseSent)
+            if (
+                state == WebSocketState.Open
+                || state == WebSocketState.Connecting
+                || state == WebSocketState.CloseSent
+            )
             {
                 _state = waitForCloseReceived ? WebSocketState.Closed : WebSocketState.CloseSent;
             }
         }
 
-        private async ValueTask<object> CancelationHelper(Task<object> jsTask, IntPtr promiseJSHandle, CancellationToken cancellationToken, WebSocketState previousState)
+        private async ValueTask<object> CancelationHelper(
+            Task<object> jsTask,
+            IntPtr promiseJSHandle,
+            CancellationToken cancellationToken,
+            WebSocketState previousState
+        )
         {
             if (jsTask.IsCompletedSuccessfully)
             {
@@ -309,14 +473,16 @@ namespace System.Net.WebSockets
             }
             try
             {
-                using (var receiveRegistration = cancellationToken.Register(() =>
-                {
-                    // this check makes sure that promiseJSHandle is still valid handle
-                    if (!jsTask.IsCompleted)
+                using (
+                    var receiveRegistration = cancellationToken.Register(() =>
                     {
-                        JavaScript.Runtime.CancelPromise(promiseJSHandle);
-                    }
-                }))
+                        // this check makes sure that promiseJSHandle is still valid handle
+                        if (!jsTask.IsCompleted)
+                        {
+                            JavaScript.Runtime.CancelPromise(promiseJSHandle);
+                        }
+                    })
+                )
                 {
                     return await jsTask.ConfigureAwait(true);
                 }
@@ -336,11 +502,19 @@ namespace System.Net.WebSockets
                 if (ex.Message == "OperationCanceledException")
                 {
                     _state = WebSocketState.Aborted;
-                    throw new OperationCanceledException("The operation was cancelled.", ex, cancellationToken);
+                    throw new OperationCanceledException(
+                        "The operation was cancelled.",
+                        ex,
+                        cancellationToken
+                    );
                 }
                 if (previousState == WebSocketState.Connecting)
                 {
-                    throw new WebSocketException(WebSocketError.Faulted, SR.net_webstatus_ConnectFailure, ex);
+                    throw new WebSocketException(
+                        WebSocketError.Faulted,
+                        SR.net_webstatus_ConnectFailure,
+                        ex
+                    );
                 }
                 throw new WebSocketException(WebSocketError.NativeError, ex);
             }

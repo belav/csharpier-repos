@@ -24,7 +24,11 @@ namespace RunTests
         internal ImmutableArray<TestResult> TestResults { get; }
         internal ImmutableArray<ProcessResult> ProcessResults { get; }
 
-        internal RunAllResult(bool succeeded, ImmutableArray<TestResult> testResults, ImmutableArray<ProcessResult> processResults)
+        internal RunAllResult(
+            bool succeeded,
+            ImmutableArray<TestResult> testResults,
+            ImmutableArray<ProcessResult> processResults
+        )
         {
             Succeeded = succeeded;
             TestResults = testResults;
@@ -43,28 +47,41 @@ namespace RunTests
             _options = options;
         }
 
-        internal async Task<RunAllResult> RunAllOnHelixAsync(IEnumerable<AssemblyInfo> assemblyInfoList, CancellationToken cancellationToken)
+        internal async Task<RunAllResult> RunAllOnHelixAsync(
+            IEnumerable<AssemblyInfo> assemblyInfoList,
+            CancellationToken cancellationToken
+        )
         {
             var sourceBranch = Environment.GetEnvironmentVariable("BUILD_SOURCEBRANCH");
             if (sourceBranch is null)
             {
                 sourceBranch = "local";
-                ConsoleUtil.WriteLine($@"BUILD_SOURCEBRANCH environment variable was not set. Using source branch ""{sourceBranch}"" instead");
+                ConsoleUtil.WriteLine(
+                    $@"BUILD_SOURCEBRANCH environment variable was not set. Using source branch ""{sourceBranch}"" instead"
+                );
                 Environment.SetEnvironmentVariable("BUILD_SOURCEBRANCH", sourceBranch);
             }
 
             var msbuildTestPayloadRoot = Path.GetDirectoryName(_options.ArtifactsDirectory);
             if (msbuildTestPayloadRoot is null)
             {
-                throw new IOException($@"Malformed ArtifactsDirectory in options: ""{_options.ArtifactsDirectory}""");
+                throw new IOException(
+                    $@"Malformed ArtifactsDirectory in options: ""{_options.ArtifactsDirectory}"""
+                );
             }
 
-            var isAzureDevOpsRun = Environment.GetEnvironmentVariable("SYSTEM_ACCESSTOKEN") is not null;
+            var isAzureDevOpsRun =
+                Environment.GetEnvironmentVariable("SYSTEM_ACCESSTOKEN") is not null;
             if (!isAzureDevOpsRun)
             {
-                ConsoleUtil.WriteLine("SYSTEM_ACCESSTOKEN environment variable was not set, so test results will not be published.");
+                ConsoleUtil.WriteLine(
+                    "SYSTEM_ACCESSTOKEN environment variable was not set, so test results will not be published."
+                );
                 // in a local run we assume the user runs using the root test.sh and that the test payload is nested in the artifacts directory.
-                msbuildTestPayloadRoot = Path.Combine(msbuildTestPayloadRoot, "artifacts/testPayload");
+                msbuildTestPayloadRoot = Path.Combine(
+                    msbuildTestPayloadRoot,
+                    "artifacts/testPayload"
+                );
             }
             var duplicateDir = Path.Combine(msbuildTestPayloadRoot, ".duplicate");
             var correlationPayload = $@"<HelixCorrelationPayload Include=""{duplicateDir}"" />";
@@ -76,13 +93,17 @@ namespace RunTests
             if (queuedBy is null)
             {
                 queuedBy = "roslyn";
-                ConsoleUtil.WriteLine($@"BUILD_QUEUEDBY environment variable was not set. Using value ""{queuedBy}"" instead");
+                ConsoleUtil.WriteLine(
+                    $@"BUILD_QUEUEDBY environment variable was not set. Using value ""{queuedBy}"" instead"
+                );
             }
 
             var jobName = Environment.GetEnvironmentVariable("SYSTEM_JOBDISPLAYNAME");
             if (jobName is null)
             {
-                ConsoleUtil.WriteLine($"SYSTEM_JOBDISPLAYNAME environment variable was not set. Using a blank TestRunNamePrefix for Helix job.");
+                ConsoleUtil.WriteLine(
+                    $"SYSTEM_JOBDISPLAYNAME environment variable was not set. Using a blank TestRunNamePrefix for Helix job."
+                );
             }
 
             if (Environment.GetEnvironmentVariable("BUILD_REPOSITORY_NAME") is null)
@@ -97,26 +118,47 @@ namespace RunTests
             var buildNumber = Environment.GetEnvironmentVariable("BUILD_BUILDNUMBER") ?? "0";
             var workItems = assemblyInfoList.Select(ai => makeHelixWorkItemProject(ai));
 
-            var globalJson = JsonConvert.DeserializeAnonymousType(File.ReadAllText(getGlobalJsonPath()), new { sdk = new { version = "" } })
-                ?? throw new InvalidOperationException("Failed to deserialize global.json.");
+            var globalJson =
+                JsonConvert.DeserializeAnonymousType(
+                    File.ReadAllText(getGlobalJsonPath()),
+                    new { sdk = new { version = "" } }
+                ) ?? throw new InvalidOperationException("Failed to deserialize global.json.");
 
-            var project = @"
+            var project =
+                @"
 <Project Sdk=""Microsoft.DotNet.Helix.Sdk"" DefaultTargets=""Test"">
     <PropertyGroup>
-        <TestRunNamePrefix>" + jobName + @"_</TestRunNamePrefix>
-        <HelixSource>pr/" + sourceBranch + @"</HelixSource>
+        <TestRunNamePrefix>"
+                + jobName
+                + @"_</TestRunNamePrefix>
+        <HelixSource>pr/"
+                + sourceBranch
+                + @"</HelixSource>
         <HelixType>test</HelixType>
-        <HelixBuild>" + buildNumber + @"</HelixBuild>
-        <HelixTargetQueues>" + _options.HelixQueueName + @"</HelixTargetQueues>
-        <Creator>" + queuedBy + @"</Creator>
+        <HelixBuild>"
+                + buildNumber
+                + @"</HelixBuild>
+        <HelixTargetQueues>"
+                + _options.HelixQueueName
+                + @"</HelixTargetQueues>
+        <Creator>"
+                + queuedBy
+                + @"</Creator>
         <IncludeDotNetCli>true</IncludeDotNetCli>
-        <DotNetCliVersion>" + globalJson.sdk.version + @"</DotNetCliVersion>
+        <DotNetCliVersion>"
+                + globalJson.sdk.version
+                + @"</DotNetCliVersion>
         <DotNetCliPackageType>sdk</DotNetCliPackageType>
-        <EnableAzurePipelinesReporter>" + (isAzureDevOpsRun ? "true" : "false") + @"</EnableAzurePipelinesReporter>
+        <EnableAzurePipelinesReporter>"
+                + (isAzureDevOpsRun ? "true" : "false")
+                + @"</EnableAzurePipelinesReporter>
     </PropertyGroup>
 
     <ItemGroup>
-        " + correlationPayload + string.Join("", workItems) + @"
+        "
+                + correlationPayload
+                + string.Join("", workItems)
+                + @"
     </ItemGroup>
 </Project>
 ";
@@ -128,10 +170,15 @@ namespace RunTests
                 arguments: "build helix-tmp.csproj",
                 captureOutput: true,
                 onOutputDataReceived: (e) => ConsoleUtil.WriteLine(e.Data),
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken
+            );
             var result = await process.Result;
 
-            return new RunAllResult(result.ExitCode == 0, ImmutableArray<TestResult>.Empty, ImmutableArray.Create(result));
+            return new RunAllResult(
+                result.ExitCode == 0,
+                ImmutableArray<TestResult>.Empty,
+                ImmutableArray.Create(result)
+            );
 
             static string getGlobalJsonPath()
             {
@@ -145,7 +192,9 @@ namespace RunTests
                     }
                     path = Path.GetDirectoryName(path);
                 }
-                throw new IOException($@"Could not find global.json by walking up from ""{AppContext.BaseDirectory}"".");
+                throw new IOException(
+                    $@"Could not find global.json by walking up from ""{AppContext.BaseDirectory}""."
+                );
             }
 
             string makeHelixWorkItemProject(AssemblyInfo assemblyInfo)
@@ -155,7 +204,11 @@ namespace RunTests
                 // figure out solutions for issues such as creating file paths in the correct format for the target machine.
                 var isUnix = !RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-                var commandLineArguments = _testExecutor.GetCommandLineArguments(assemblyInfo, useSingleQuotes: isUnix, isHelix: true);
+                var commandLineArguments = _testExecutor.GetCommandLineArguments(
+                    assemblyInfo,
+                    useSingleQuotes: isUnix,
+                    isHelix: true
+                );
                 commandLineArguments = SecurityElement.Escape(commandLineArguments);
                 var setEnvironmentVariable = isUnix ? "export" : "set";
 
@@ -167,12 +220,24 @@ namespace RunTests
                 command.AppendLine($"{setEnvironmentVariable} DOTNET_ROLL_FORWARD_TO_PRERELEASE=1");
                 command.AppendLine("dotnet --info");
 
-                var knownEnvironmentVariables = new[] { "ROSLYN_TEST_IOPERATION", "ROSLYN_TEST_USEDASSEMBLIES" };
+                var knownEnvironmentVariables = new[]
+                {
+                    "ROSLYN_TEST_IOPERATION",
+                    "ROSLYN_TEST_USEDASSEMBLIES"
+                };
                 foreach (var knownEnvironmentVariable in knownEnvironmentVariables)
                 {
-                    if (string.Equals(Environment.GetEnvironmentVariable(knownEnvironmentVariable), "true", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            Environment.GetEnvironmentVariable(knownEnvironmentVariable),
+                            "true",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
-                        command.AppendLine($"{setEnvironmentVariable} {knownEnvironmentVariable}=true");
+                        command.AppendLine(
+                            $"{setEnvironmentVariable} {knownEnvironmentVariable}=true"
+                        );
                     }
                 }
 
@@ -184,21 +249,30 @@ namespace RunTests
                 // precisely to address this problem.
                 var postCommands = new StringBuilder();
 
-                var payloadDirectory = Path.Combine(msbuildTestPayloadRoot, Path.GetDirectoryName(assemblyInfo.AssemblyPath)!);
+                var payloadDirectory = Path.Combine(
+                    msbuildTestPayloadRoot,
+                    Path.GetDirectoryName(assemblyInfo.AssemblyPath)!
+                );
 
                 if (isUnix)
                 {
                     // Write out this command into a separate file; unfortunately the use of single quotes and ; that is required
                     // for the command to work causes too much escaping issues in MSBuild.
-                    File.WriteAllText(Path.Combine(payloadDirectory, "copy-dumps.sh"), "find . -name '*.dmp' -exec cp {} $HELIX_DUMP_FOLDER \\;");
+                    File.WriteAllText(
+                        Path.Combine(payloadDirectory, "copy-dumps.sh"),
+                        "find . -name '*.dmp' -exec cp {} $HELIX_DUMP_FOLDER \\;"
+                    );
                     postCommands.AppendLine("./copy-dumps.sh");
                 }
                 else
                 {
-                    postCommands.AppendLine("for /r %%f in (*.dmp) do copy %%f %HELIX_DUMP_FOLDER%");
+                    postCommands.AppendLine(
+                        "for /r %%f in (*.dmp) do copy %%f %HELIX_DUMP_FOLDER%"
+                    );
                 }
 
-                var workItem = $@"
+                var workItem =
+                    $@"
         <HelixWorkItem Include=""{assemblyInfo.DisplayName}"">
             <PayloadDirectory>{payloadDirectory}</PayloadDirectory>
             <Command>
@@ -214,7 +288,10 @@ namespace RunTests
             }
         }
 
-        internal async Task<RunAllResult> RunAllAsync(IEnumerable<AssemblyInfo> assemblyInfoList, CancellationToken cancellationToken)
+        internal async Task<RunAllResult> RunAllAsync(
+            IEnumerable<AssemblyInfo> assemblyInfoList,
+            CancellationToken cancellationToken
+        )
         {
             // Use 1.5 times the number of processors for unit tests, but only 1 processor for the open integration tests
             // since they perform actual UI operations (such as mouse clicks and sending keystrokes) and we don't want two
@@ -281,10 +358,12 @@ namespace RunTests
 
                 // Display the current status of the TestRunner.
                 // Note: The { ... , 2 } is to right align the values, thus aligns sections into columns.
-                ConsoleUtil.Write($"  {running.Count,2} running, {waiting.Count,2} queued, {completed.Count,2} completed");
+                ConsoleUtil.Write(
+                    $"  {running.Count, 2} running, {waiting.Count, 2} queued, {completed.Count, 2} completed"
+                );
                 if (failures > 0)
                 {
-                    ConsoleUtil.Write($", {failures,2} failures");
+                    ConsoleUtil.Write($", {failures, 2} failures");
                 }
                 ConsoleUtil.WriteLine();
 
@@ -302,7 +381,11 @@ namespace RunTests
                 processResults.AddRange(c.ProcessResults);
             }
 
-            return new RunAllResult((failures == 0), completed.ToImmutableArray(), processResults.ToImmutable());
+            return new RunAllResult(
+                (failures == 0),
+                completed.ToImmutableArray(),
+                processResults.ToImmutable()
+            );
         }
 
         private void Print(List<TestResult> testResults)
@@ -320,7 +403,7 @@ namespace RunTests
             {
                 line.Length = 0;
                 var color = testResult.Succeeded ? Console.ForegroundColor : ConsoleColor.Red;
-                line.Append($"{testResult.DisplayName,-75}");
+                line.Append($"{testResult.DisplayName, -75}");
                 line.Append($" {(testResult.Succeeded ? "PASSED" : "FAILED")}");
                 line.Append($" {testResult.Elapsed}");
                 line.Append($" {(!string.IsNullOrEmpty(testResult.Diagnostics) ? "?" : "")}");
@@ -341,7 +424,10 @@ namespace RunTests
         private void PrintFailedTestResult(TestResult testResult)
         {
             // Save out the error output for easy artifact inspecting
-            var outputLogPath = Path.Combine(_options.LogFilesDirectory, $"xUnitFailure-{testResult.DisplayName}.log");
+            var outputLogPath = Path.Combine(
+                _options.LogFilesDirectory,
+                $"xUnitFailure-{testResult.DisplayName}.log"
+            );
 
             ConsoleUtil.WriteLine($"Errors {testResult.AssemblyName}");
             ConsoleUtil.WriteLine(testResult.ErrorOutput);
@@ -358,7 +444,9 @@ namespace RunTests
             }
             else
             {
-                ConsoleUtil.WriteLine($"xunit produced no error output but had exit code {testResult.ExitCode}. Writing standard output:");
+                ConsoleUtil.WriteLine(
+                    $"xunit produced no error output but had exit code {testResult.ExitCode}. Writing standard output:"
+                );
                 ConsoleUtil.WriteLine(testResult.StandardOutput ?? "(no standard output)");
             }
 
@@ -366,7 +454,11 @@ namespace RunTests
             var htmlResultsFilePath = testResult.TestResultInfo.HtmlResultsFilePath;
             if (!string.IsNullOrEmpty(htmlResultsFilePath))
             {
-                var startInfo = new ProcessStartInfo() { FileName = htmlResultsFilePath, UseShellExecute = true };
+                var startInfo = new ProcessStartInfo()
+                {
+                    FileName = htmlResultsFilePath,
+                    UseShellExecute = true
+                };
                 Process.Start(startInfo);
             }
         }

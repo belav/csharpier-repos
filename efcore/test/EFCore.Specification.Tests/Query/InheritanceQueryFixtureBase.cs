@@ -5,26 +5,23 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<InheritanceContext>, IFilteredQueryFixtureBase
+public abstract class InheritanceQueryFixtureBase
+    : SharedStoreFixtureBase<InheritanceContext>,
+        IFilteredQueryFixtureBase
 {
     private readonly Dictionary<bool, ISetSource> _expectedDataCache = new();
 
     protected override string StoreName { get; } = "InheritanceTest";
 
-    protected virtual bool EnableFilters
-        => false;
+    protected virtual bool EnableFilters => false;
 
-    protected virtual bool IsDiscriminatorMappingComplete
-        => true;
+    protected virtual bool IsDiscriminatorMappingComplete => true;
 
-    protected virtual bool HasDiscriminator
-        => true;
+    protected virtual bool HasDiscriminator => true;
 
-    public Func<DbContext> GetContextCreator()
-        => () => CreateContext();
+    public Func<DbContext> GetContextCreator() => () => CreateContext();
 
-    public virtual ISetSource GetExpectedData()
-        => new InheritanceData();
+    public virtual ISetSource GetExpectedData() => new InheritanceData();
 
     public virtual ISetSource GetFilteredExpectedData(DbContext context)
     {
@@ -39,7 +36,12 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
             var animals = expectedData.Animals.Where(a => a.CountryId == 1).ToList();
             var animalQueries = expectedData.AnimalQueries.Where(a => a.CountryId == 1).ToList();
             expectedData = new InheritanceData(
-                animals, animalQueries, expectedData.Countries, expectedData.Drinks, expectedData.Plants);
+                animals,
+                animalQueries,
+                expectedData.Countries,
+                expectedData.Drinks,
+                expectedData.Plants
+            );
         }
 
         _expectedDataCache[EnableFilters] = expectedData;
@@ -47,8 +49,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
         return expectedData;
     }
 
-    public IReadOnlyDictionary<Type, object> GetEntitySorters()
-        => new Dictionary<Type, Func<object, object>>
+    public IReadOnlyDictionary<Type, object> GetEntitySorters() =>
+        new Dictionary<Type, Func<object, object>>
         {
             { typeof(Animal), e => ((Animal)e)?.Species },
             { typeof(Bird), e => ((Bird)e)?.Species },
@@ -69,11 +71,12 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
             { typeof(Tea), e => ((Tea)e)?.Id },
         }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-    public IReadOnlyDictionary<Type, object> GetEntityAsserters()
-        => new Dictionary<Type, Action<object, object>>
+    public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
+        new Dictionary<Type, Action<object, object>>
         {
             {
-                typeof(Animal), (e, a) =>
+                typeof(Animal),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -89,7 +92,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(Bird), (e, a) =>
+                typeof(Bird),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -107,7 +111,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(Eagle), (e, a) =>
+                typeof(Eagle),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -126,7 +131,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(Kiwi), (e, a) =>
+                typeof(Kiwi),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -145,7 +151,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(AnimalQuery), (e, a) =>
+                typeof(AnimalQuery),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -160,7 +167,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(BirdQuery), (e, a) =>
+                typeof(BirdQuery),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -177,7 +185,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(EagleQuery), (e, a) =>
+                typeof(EagleQuery),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -195,7 +204,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(KiwiQuery), (e, a) =>
+                typeof(KiwiQuery),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -213,7 +223,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(Plant), (e, a) =>
+                typeof(Plant),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -229,7 +240,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(Flower), (e, a) =>
+                typeof(Flower),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -245,7 +257,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(Daisy), (e, a) =>
+                typeof(Daisy),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -261,7 +274,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(Rose), (e, a) =>
+                typeof(Rose),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -278,7 +292,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(Country), (e, a) =>
+                typeof(Country),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -293,7 +308,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(Drink), (e, a) =>
+                typeof(Drink),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -307,7 +323,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(Coke), (e, a) =>
+                typeof(Coke),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -324,7 +341,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(Lilt), (e, a) =>
+                typeof(Lilt),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -340,7 +358,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
                 }
             },
             {
-                typeof(Tea), (e, a) =>
+                typeof(Tea),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -377,11 +396,20 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
 
         if (HasDiscriminator)
         {
-            modelBuilder.Entity<Bird>().HasDiscriminator<string>("Discriminator").IsComplete(IsDiscriminatorMappingComplete);
-            modelBuilder.Entity<Drink>().HasDiscriminator().IsComplete(IsDiscriminatorMappingComplete);
+            modelBuilder
+                .Entity<Bird>()
+                .HasDiscriminator<string>("Discriminator")
+                .IsComplete(IsDiscriminatorMappingComplete);
+            modelBuilder
+                .Entity<Drink>()
+                .HasDiscriminator()
+                .IsComplete(IsDiscriminatorMappingComplete);
         }
 
-        modelBuilder.Entity<KiwiQuery>().HasDiscriminator().IsComplete(IsDiscriminatorMappingComplete);
+        modelBuilder
+            .Entity<KiwiQuery>()
+            .HasDiscriminator()
+            .IsComplete(IsDiscriminatorMappingComplete);
 
         if (EnableFilters)
         {
@@ -393,9 +421,8 @@ public abstract class InheritanceQueryFixtureBase : SharedStoreFixtureBase<Inher
         modelBuilder.Entity<KiwiQuery>();
     }
 
-    protected override void Seed(InheritanceContext context)
-        => InheritanceContext.Seed(context);
+    protected override void Seed(InheritanceContext context) => InheritanceContext.Seed(context);
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder);
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder);
 }

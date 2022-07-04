@@ -15,14 +15,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         private readonly Symbols.PointerTypeSymbol _underlying;
         private ITypeSymbol _lazyPointedAtType;
 
-        public PointerTypeSymbol(Symbols.PointerTypeSymbol underlying, CodeAnalysis.NullableAnnotation nullableAnnotation)
-            : base(nullableAnnotation)
+        public PointerTypeSymbol(
+            Symbols.PointerTypeSymbol underlying,
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        ) : base(nullableAnnotation)
         {
             Debug.Assert(underlying is object);
             _underlying = underlying;
         }
 
-        protected override ITypeSymbol WithNullableAnnotation(CodeAnalysis.NullableAnnotation nullableAnnotation)
+        protected override ITypeSymbol WithNullableAnnotation(
+            CodeAnalysis.NullableAnnotation nullableAnnotation
+        )
         {
             Debug.Assert(nullableAnnotation != _underlying.DefaultNullableAnnotation);
             Debug.Assert(nullableAnnotation != this.NullableAnnotation);
@@ -30,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         }
 
         internal override CSharp.Symbol UnderlyingSymbol => _underlying;
-        internal override Symbols.NamespaceOrTypeSymbol UnderlyingNamespaceOrTypeSymbol => _underlying;
+        internal override Symbols.NamespaceOrTypeSymbol UnderlyingNamespaceOrTypeSymbol =>
+            _underlying;
         internal override Symbols.TypeSymbol UnderlyingTypeSymbol => _underlying;
 
         ITypeSymbol IPointerTypeSymbol.PointedAtType
@@ -39,7 +44,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 if (_lazyPointedAtType is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyPointedAtType, _underlying.PointedAtTypeWithAnnotations.GetPublicSymbol(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyPointedAtType,
+                        _underlying.PointedAtTypeWithAnnotations.GetPublicSymbol(),
+                        null
+                    );
                 }
 
                 return _lazyPointedAtType;
@@ -63,7 +72,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitPointerType(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitPointerType(this, argument);
         }

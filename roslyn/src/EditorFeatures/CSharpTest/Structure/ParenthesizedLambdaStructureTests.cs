@@ -13,14 +13,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
-    public class ParenthesizedLambdaStructureTests : AbstractCSharpSyntaxNodeStructureTests<ParenthesizedLambdaExpressionSyntax>
+    public class ParenthesizedLambdaStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<ParenthesizedLambdaExpressionSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new ParenthesizedLambdaExpressionStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new ParenthesizedLambdaExpressionStructureProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestLambda()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -31,14 +34,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestLambdaInForLoop()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -53,7 +59,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestLambdaInMethodCall1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -64,14 +71,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestLambdaInMethodCall2()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -82,8 +92,10 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
     }
 }

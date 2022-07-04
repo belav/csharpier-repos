@@ -9,8 +9,11 @@ namespace System.Runtime.InteropServices.Marshalling
     /// Marshaller for UTF-16 strings
     /// </summary>
     [CLSCompliant(false)]
-    [CustomTypeMarshaller(typeof(string),
-        Features = CustomTypeMarshallerFeatures.UnmanagedResources | CustomTypeMarshallerFeatures.TwoStageMarshalling)]
+    [CustomTypeMarshaller(
+        typeof(string),
+        Features = CustomTypeMarshallerFeatures.UnmanagedResources
+            | CustomTypeMarshallerFeatures.TwoStageMarshalling
+    )]
     public unsafe ref struct Utf16StringMarshaller
     {
         private void* _nativeValue;

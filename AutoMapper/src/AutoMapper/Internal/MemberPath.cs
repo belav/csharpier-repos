@@ -7,13 +7,14 @@ using System.Reflection;
 namespace AutoMapper.Internal
 {
     using Execution;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public readonly struct MemberPath : IEquatable<MemberPath>
     {
         public static readonly MemberPath Empty = new(Array.Empty<MemberInfo>());
         public readonly MemberInfo[] Members;
 
-        public MemberPath(Stack<Member> members) : this(members.ToMemberInfos()){}
+        public MemberPath(Stack<Member> members) : this(members.ToMemberInfos()) { }
 
         public MemberPath(MemberInfo[] members) => Members = members;
 
@@ -30,7 +31,7 @@ namespace AutoMapper.Internal
         public override int GetHashCode()
         {
             var hashCode = new HashCode();
-            foreach(var member in Members)
+            foreach (var member in Members)
             {
                 hashCode.Add(member);
             }
@@ -39,9 +40,9 @@ namespace AutoMapper.Internal
 
         public override string ToString() => string.Join(".", Members.Select(mi => mi.Name));
 
-        public static bool operator==(MemberPath left, MemberPath right) => left.Equals(right);
+        public static bool operator ==(MemberPath left, MemberPath right) => left.Equals(right);
 
-        public static bool operator!=(MemberPath left, MemberPath right) => !left.Equals(right);
+        public static bool operator !=(MemberPath left, MemberPath right) => !left.Equals(right);
 
         public bool StartsWith(MemberPath path)
         {
@@ -59,6 +60,7 @@ namespace AutoMapper.Internal
             return true;
         }
 
-        public MemberPath Concat(IEnumerable<MemberInfo> memberInfos) => new(Members.Concat(memberInfos).ToArray());
+        public MemberPath Concat(IEnumerable<MemberInfo> memberInfos) =>
+            new(Members.Concat(memberInfos).ToArray());
     }
 }

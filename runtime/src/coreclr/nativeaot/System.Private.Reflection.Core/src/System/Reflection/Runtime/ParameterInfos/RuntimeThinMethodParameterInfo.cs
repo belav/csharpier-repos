@@ -17,25 +17,21 @@ namespace System.Reflection.Runtime.ParameterInfos
     //
     internal sealed partial class RuntimeThinMethodParameterInfo : RuntimeMethodParameterInfo
     {
-        private RuntimeThinMethodParameterInfo(MethodBase member, int position, QSignatureTypeHandle qualifiedParameterTypeHandle, TypeContext typeContext)
-            : base(member, position, qualifiedParameterTypeHandle, typeContext)
-        {
-        }
+        private RuntimeThinMethodParameterInfo(
+            MethodBase member,
+            int position,
+            QSignatureTypeHandle qualifiedParameterTypeHandle,
+            TypeContext typeContext
+        ) : base(member, position, qualifiedParameterTypeHandle, typeContext) { }
 
         public sealed override ParameterAttributes Attributes
         {
-            get
-            {
-                return ParameterAttributes.None;
-            }
+            get { return ParameterAttributes.None; }
         }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
-            get
-            {
-                return Empty<CustomAttributeData>.Enumerable;
-            }
+            get { return Empty<CustomAttributeData>.Enumerable; }
         }
 
         public sealed override object DefaultValue
@@ -69,10 +65,7 @@ namespace System.Reflection.Runtime.ParameterInfos
 
         public sealed override string Name
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public sealed override int MetadataToken

@@ -20,7 +20,9 @@ namespace System.Collections.Specialized
     /// </para>
     /// </devdoc>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class OrderedDictionary : IOrderedDictionary, ISerializable, IDeserializationCallback
     {
         private ArrayList? _objectsArray;
@@ -35,17 +37,11 @@ namespace System.Collections.Specialized
         private const string ReadOnlyName = "ReadOnly"; // Do not rename (binary serialization)
         private const string InitCapacityName = "InitialCapacity"; // Do not rename (binary serialization)
 
-        public OrderedDictionary() : this(0)
-        {
-        }
+        public OrderedDictionary() : this(0) { }
 
-        public OrderedDictionary(int capacity) : this(capacity, null)
-        {
-        }
+        public OrderedDictionary(int capacity) : this(capacity, null) { }
 
-        public OrderedDictionary(IEqualityComparer? comparer) : this(0, comparer)
-        {
-        }
+        public OrderedDictionary(IEqualityComparer? comparer) : this(0, comparer) { }
 
         public OrderedDictionary(int capacity, IEqualityComparer? comparer)
         {
@@ -92,10 +88,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         bool IDictionary.IsFixedSize
         {
-            get
-            {
-                return _readOnly;
-            }
+            get { return _readOnly; }
         }
 
         /// <devdoc>
@@ -103,10 +96,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public bool IsReadOnly
         {
-            get
-            {
-                return _readOnly;
-            }
+            get { return _readOnly; }
         }
 
         /// <devdoc>
@@ -114,10 +104,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         bool ICollection.IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <devdoc>
@@ -129,13 +116,18 @@ namespace System.Collections.Specialized
             {
                 ArrayList objectsArray = EnsureObjectsArray();
                 Hashtable objectsTable = EnsureObjectsTable();
-                return new OrderedDictionaryKeyValueCollection(objectsArray, objectsTable, _comparer);
+                return new OrderedDictionaryKeyValueCollection(
+                    objectsArray,
+                    objectsTable,
+                    _comparer
+                );
             }
         }
 
         private ArrayList EnsureObjectsArray() => _objectsArray ??= new ArrayList(_initialCapacity);
 
-        private Hashtable EnsureObjectsTable() => _objectsTable ??= new Hashtable(_initialCapacity, _comparer);
+        private Hashtable EnsureObjectsTable() =>
+            _objectsTable ??= new Hashtable(_initialCapacity, _comparer);
 
         /// <devdoc>
         /// The SyncRoot object.  Not used because IsSynchronized is false
@@ -373,7 +365,10 @@ namespace System.Collections.Specialized
         public virtual IDictionaryEnumerator GetEnumerator()
         {
             ArrayList objectsArray = EnsureObjectsArray();
-            return new OrderedDictionaryEnumerator(objectsArray, OrderedDictionaryEnumerator.DictionaryEntry);
+            return new OrderedDictionaryEnumerator(
+                objectsArray,
+                OrderedDictionaryEnumerator.DictionaryEntry
+            );
         }
 #endregion
 
@@ -381,7 +376,10 @@ namespace System.Collections.Specialized
         IEnumerator IEnumerable.GetEnumerator()
         {
             ArrayList objectsArray = EnsureObjectsArray();
-            return new OrderedDictionaryEnumerator(objectsArray, OrderedDictionaryEnumerator.DictionaryEntry);
+            return new OrderedDictionaryEnumerator(
+                objectsArray,
+                OrderedDictionaryEnumerator.DictionaryEntry
+            );
         }
 #endregion
 
@@ -413,7 +411,8 @@ namespace System.Collections.Specialized
             {
                 throw new SerializationException(SR.Serialization_InvalidOnDeser);
             }
-            _comparer = (IEqualityComparer?)_siInfo.GetValue(KeyComparerName, typeof(IEqualityComparer));
+            _comparer = (IEqualityComparer?)
+                _siInfo.GetValue(KeyComparerName, typeof(IEqualityComparer));
             _readOnly = _siInfo.GetBoolean(ReadOnlyName);
             _initialCapacity = _siInfo.GetInt32(InitCapacityName);
 
@@ -433,7 +432,9 @@ namespace System.Collections.Specialized
                     }
                     catch
                     {
-                        throw new SerializationException(SR.OrderedDictionary_SerializationMismatch);
+                        throw new SerializationException(
+                            SR.OrderedDictionary_SerializationMismatch
+                        );
                     }
                     objectsArray.Add(entry);
                     objectsTable.Add(entry.Key, entry.Value);
@@ -488,7 +489,10 @@ namespace System.Collections.Specialized
                 get
                 {
                     Debug.Assert(_arrayEnumerator.Current != null);
-                    return new DictionaryEntry(((DictionaryEntry)_arrayEnumerator.Current).Key, ((DictionaryEntry)_arrayEnumerator.Current).Value);
+                    return new DictionaryEntry(
+                        ((DictionaryEntry)_arrayEnumerator.Current).Key,
+                        ((DictionaryEntry)_arrayEnumerator.Current).Value
+                    );
                 }
             }
 
@@ -544,7 +548,11 @@ namespace System.Collections.Specialized
             private readonly Hashtable? _objectsTable;
             private readonly IEqualityComparer? _comparer;
 
-            public OrderedDictionaryKeyValueCollection(ArrayList array, Hashtable objectsTable, IEqualityComparer? comparer)
+            public OrderedDictionaryKeyValueCollection(
+                ArrayList array,
+                Hashtable objectsTable,
+                IEqualityComparer? comparer
+            )
             {
                 _objects = array;
                 _objectsTable = objectsTable;
@@ -563,11 +571,18 @@ namespace System.Collections.Specialized
                 ArgumentNullException.ThrowIfNull(array);
 
                 if (index < 0)
-                    throw new ArgumentOutOfRangeException(nameof(index), index, SR.ArgumentOutOfRange_NeedNonNegNum_Index);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        index,
+                        SR.ArgumentOutOfRange_NeedNonNegNum_Index
+                    );
                 foreach (object? o in _objects)
                 {
                     Debug.Assert(o != null);
-                    array.SetValue(IsKeys ? ((DictionaryEntry)o).Key : ((DictionaryEntry)o).Value, index);
+                    array.SetValue(
+                        IsKeys ? ((DictionaryEntry)o).Key : ((DictionaryEntry)o).Value,
+                        index
+                    );
                     index++;
                 }
             }
@@ -580,7 +595,10 @@ namespace System.Collections.Specialized
 
             IEnumerator IEnumerable.GetEnumerator()
             {
-                return new OrderedDictionaryEnumerator(_objects, IsKeys ? OrderedDictionaryEnumerator.Keys : OrderedDictionaryEnumerator.Values);
+                return new OrderedDictionaryEnumerator(
+                    _objects,
+                    IsKeys ? OrderedDictionaryEnumerator.Keys : OrderedDictionaryEnumerator.Values
+                );
             }
 
             bool IList.Contains(object? value)
@@ -671,7 +689,9 @@ namespace System.Collections.Specialized
 
             private string GetNotSupportedErrorMessage()
             {
-                return IsKeys ? SR.NotSupported_KeyCollectionSet : SR.NotSupported_ValueCollectionSet;
+                return IsKeys
+                    ? SR.NotSupported_KeyCollectionSet
+                    : SR.NotSupported_ValueCollectionSet;
             }
         }
     }

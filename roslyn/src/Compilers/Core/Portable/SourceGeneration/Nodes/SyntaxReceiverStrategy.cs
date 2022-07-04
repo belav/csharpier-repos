@@ -15,13 +15,22 @@ namespace Microsoft.CodeAnalysis
         private readonly SyntaxContextReceiverCreator _receiverCreator;
         private readonly Action<IIncrementalGeneratorOutputNode> _registerOutput;
 
-        public SyntaxReceiverStrategy(SyntaxContextReceiverCreator receiverCreator, Action<IIncrementalGeneratorOutputNode> registerOutput)
+        public SyntaxReceiverStrategy(
+            SyntaxContextReceiverCreator receiverCreator,
+            Action<IIncrementalGeneratorOutputNode> registerOutput
+        )
         {
             _receiverCreator = receiverCreator;
             _registerOutput = registerOutput;
         }
 
-        public ISyntaxInputBuilder GetBuilder(StateTableStore table, object key, bool trackIncrementalSteps, string? name, IEqualityComparer<T>? comparer) => new Builder(this, key, table, trackIncrementalSteps);
+        public ISyntaxInputBuilder GetBuilder(
+            StateTableStore table,
+            object key,
+            bool trackIncrementalSteps,
+            string? name,
+            IEqualityComparer<T>? comparer
+        ) => new Builder(this, key, table, trackIncrementalSteps);
 
         private sealed class Builder : ISyntaxInputBuilder
         {
@@ -32,11 +41,18 @@ namespace Microsoft.CodeAnalysis
             private readonly GeneratorSyntaxWalker? _walker;
             private TimeSpan lastElapsedTime;
 
-            public Builder(SyntaxReceiverStrategy<T> owner, object key, StateTableStore driverStateTable, bool trackIncrementalSteps)
+            public Builder(
+                SyntaxReceiverStrategy<T> owner,
+                object key,
+                StateTableStore driverStateTable,
+                bool trackIncrementalSteps
+            )
             {
                 _owner = owner;
                 _key = key;
-                _nodeStateTable = driverStateTable.GetStateTableOrEmpty<ISyntaxContextReceiver?>(_key).ToBuilder(stepName: null, trackIncrementalSteps);
+                _nodeStateTable = driverStateTable
+                    .GetStateTableOrEmpty<ISyntaxContextReceiver?>(_key)
+                    .ToBuilder(stepName: null, trackIncrementalSteps);
                 try
                 {
                     _receiver = owner._receiverCreator();
@@ -56,7 +72,19 @@ namespace Microsoft.CodeAnalysis
 
             public void SaveStateAndFree(StateTableStore.Builder tables)
             {
-                _nodeStateTable.AddEntry(_receiver, EntryState.Modified, lastElapsedTime, TrackIncrementalSteps ? System.Collections.Immutable.ImmutableArray<(IncrementalGeneratorRunStep, int)>.Empty : default, EntryState.Modified);
+                _nodeStateTable.AddEntry(
+                    _receiver,
+                    EntryState.Modified,
+                    lastElapsedTime,
+                    TrackIncrementalSteps
+                        ? System
+                            .Collections
+                            .Immutable
+                            .ImmutableArray<(IncrementalGeneratorRunStep, int)>
+                            .Empty
+                        : default,
+                    EntryState.Modified
+                );
                 tables.SetTable(_key, _nodeStateTable.ToImmutableAndFree());
             }
 
@@ -64,7 +92,8 @@ namespace Microsoft.CodeAnalysis
                 Lazy<SyntaxNode> root,
                 EntryState state,
                 Lazy<SemanticModel>? model,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (_walker is not null && state != EntryState.Removed)
                 {
@@ -78,7 +107,12 @@ namespace Microsoft.CodeAnalysis
                             lastElapsedTime = stopwatch.Elapsed;
                         }
                     }
-                    catch (Exception e) when (!ExceptionUtilities.IsCurrentOperationBeingCancelled(e, cancellationToken))
+                    catch (Exception e)
+                        when (!ExceptionUtilities.IsCurrentOperationBeingCancelled(
+                                e,
+                                cancellationToken
+                            )
+                        )
                     {
                         throw new UserFunctionException(e);
                     }

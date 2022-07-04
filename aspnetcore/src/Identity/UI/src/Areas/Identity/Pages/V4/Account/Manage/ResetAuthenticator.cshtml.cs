@@ -43,7 +43,8 @@ internal sealed class ResetAuthenticatorModel<TUser> : ResetAuthenticatorModel w
     public ResetAuthenticatorModel(
         UserManager<TUser> userManager,
         SignInManager<TUser> signInManager,
-        ILogger<ResetAuthenticatorModel> logger)
+        ILogger<ResetAuthenticatorModel> logger
+    )
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -72,10 +73,14 @@ internal sealed class ResetAuthenticatorModel<TUser> : ResetAuthenticatorModel w
         await _userManager.SetTwoFactorEnabledAsync(user, false);
         await _userManager.ResetAuthenticatorKeyAsync(user);
         await _userManager.GetUserIdAsync(user);
-        _logger.LogInformation(LoggerEventIds.AuthenticationAppKeyReset, "User has reset their authentication app key.");
+        _logger.LogInformation(
+            LoggerEventIds.AuthenticationAppKeyReset,
+            "User has reset their authentication app key."
+        );
 
         await _signInManager.RefreshSignInAsync(user);
-        StatusMessage = "Your authenticator app key has been reset, you will need to configure your authenticator app using the new key.";
+        StatusMessage =
+            "Your authenticator app key has been reset, you will need to configure your authenticator app using the new key.";
 
         return RedirectToPage("./EnableAuthenticator");
     }

@@ -11,7 +11,8 @@ namespace System.Net.NetworkInformation
         {
             int realCount = Interop.Sys.GetEstimatedTcpConnectionCount();
             int infoCount = realCount * 2;
-            Interop.Sys.NativeTcpConnectionInformation[] infos = new Interop.Sys.NativeTcpConnectionInformation[infoCount];
+            Interop.Sys.NativeTcpConnectionInformation[] infos =
+                new Interop.Sys.NativeTcpConnectionInformation[infoCount];
             fixed (Interop.Sys.NativeTcpConnectionInformation* infosPtr = infos)
             {
                 if (Interop.Sys.GetActiveTcpConnectionInfos(infosPtr, &infoCount) == -1)
@@ -20,7 +21,9 @@ namespace System.Net.NetworkInformation
                 }
             }
 
-            TcpConnectionInformation[] connectionInformations = new TcpConnectionInformation[infoCount];
+            TcpConnectionInformation[] connectionInformations = new TcpConnectionInformation[
+                infoCount
+            ];
             int nextResultIndex = 0;
             for (int i = 0; i < infoCount; i++)
             {
@@ -35,10 +38,18 @@ namespace System.Net.NetworkInformation
                 byte[] localBytes = new byte[nativeInfo.LocalEndPoint.NumAddressBytes];
                 fixed (byte* localBytesPtr = localBytes)
                 {
-                    Buffer.MemoryCopy(nativeInfo.LocalEndPoint.AddressBytes, localBytesPtr, localBytes.Length, localBytes.Length);
+                    Buffer.MemoryCopy(
+                        nativeInfo.LocalEndPoint.AddressBytes,
+                        localBytesPtr,
+                        localBytes.Length,
+                        localBytes.Length
+                    );
                 }
                 IPAddress localIPAddress = new IPAddress(localBytes);
-                IPEndPoint local = new IPEndPoint(localIPAddress, (int)nativeInfo.LocalEndPoint.Port);
+                IPEndPoint local = new IPEndPoint(
+                    localIPAddress,
+                    (int)nativeInfo.LocalEndPoint.Port
+                );
 
                 IPAddress remoteIPAddress;
                 if (nativeInfo.RemoteEndPoint.NumAddressBytes == 0)
@@ -50,13 +61,25 @@ namespace System.Net.NetworkInformation
                     byte[] remoteBytes = new byte[nativeInfo.RemoteEndPoint.NumAddressBytes];
                     fixed (byte* remoteBytesPtr = &remoteBytes[0])
                     {
-                        Buffer.MemoryCopy(nativeInfo.RemoteEndPoint.AddressBytes, remoteBytesPtr, remoteBytes.Length, remoteBytes.Length);
+                        Buffer.MemoryCopy(
+                            nativeInfo.RemoteEndPoint.AddressBytes,
+                            remoteBytesPtr,
+                            remoteBytes.Length,
+                            remoteBytes.Length
+                        );
                     }
                     remoteIPAddress = new IPAddress(remoteBytes);
                 }
 
-                IPEndPoint remote = new IPEndPoint(remoteIPAddress, (int)nativeInfo.RemoteEndPoint.Port);
-                connectionInformations[nextResultIndex++] = new SimpleTcpConnectionInformation(local, remote, state);
+                IPEndPoint remote = new IPEndPoint(
+                    remoteIPAddress,
+                    (int)nativeInfo.RemoteEndPoint.Port
+                );
+                connectionInformations[nextResultIndex++] = new SimpleTcpConnectionInformation(
+                    local,
+                    remote,
+                    state
+                );
             }
 
             if (nextResultIndex != connectionInformations.Length)
@@ -69,12 +92,12 @@ namespace System.Net.NetworkInformation
 
         public override TcpConnectionInformation[] GetActiveTcpConnections()
         {
-            return GetTcpConnections(listeners:false);
+            return GetTcpConnections(listeners: false);
         }
 
         public override IPEndPoint[] GetActiveTcpListeners()
         {
-            TcpConnectionInformation[] allConnections = GetTcpConnections(listeners:true);
+            TcpConnectionInformation[] allConnections = GetTcpConnections(listeners: true);
             var endPoints = new IPEndPoint[allConnections.Length];
             for (int i = 0; i < allConnections.Length; i++)
             {
@@ -111,7 +134,12 @@ namespace System.Net.NetworkInformation
                     byte[] bytes = new byte[endPointInfo.NumAddressBytes];
                     fixed (byte* bytesPtr = &bytes[0])
                     {
-                        Buffer.MemoryCopy(endPointInfo.AddressBytes, bytesPtr, bytes.Length, bytes.Length);
+                        Buffer.MemoryCopy(
+                            endPointInfo.AddressBytes,
+                            bytesPtr,
+                            bytes.Length,
+                            bytes.Length
+                        );
                     }
                     ipAddress = new IPAddress(bytes);
                 }

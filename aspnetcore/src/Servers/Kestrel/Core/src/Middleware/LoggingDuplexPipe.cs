@@ -8,8 +8,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
 internal sealed class LoggingDuplexPipe : DuplexPipeStreamAdapter<LoggingStream>
 {
-    public LoggingDuplexPipe(IDuplexPipe transport, ILogger logger) :
-        base(transport, stream => new LoggingStream(stream, logger))
-    {
-    }
+    public LoggingDuplexPipe(IDuplexPipe transport, ILogger logger)
+        : base(transport, stream => new LoggingStream(stream, logger)) { }
 }

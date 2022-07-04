@@ -45,7 +45,9 @@ public sealed record RelationalConventionSetBuilderDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public RelationalConventionSetBuilderDependencies(IRelationalAnnotationProvider relationalAnnotationProvider)
+    public RelationalConventionSetBuilderDependencies(
+        IRelationalAnnotationProvider relationalAnnotationProvider
+    )
     {
         RelationalAnnotationProvider = relationalAnnotationProvider;
     }

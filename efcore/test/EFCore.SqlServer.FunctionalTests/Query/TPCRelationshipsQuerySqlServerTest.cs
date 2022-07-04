@@ -8,16 +8,16 @@ public class TPCRelationshipsQuerySqlServerTest
 {
     public TPCRelationshipsQuerySqlServerTest(
         TPCRelationshipsQuerySqlServerFixture fixture,
-        ITestOutputHelper testOutputHelper)
-        : base(fixture)
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
         //fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override void Changes_in_derived_related_entities_are_detected()
     {
@@ -53,7 +53,8 @@ LEFT JOIN (
     SELECT [d2].[Id], [d2].[BaseParentId], [d2].[Name], [d2].[DerivedProperty], N'DerivedCollectionOnBase' AS [Discriminator]
     FROM [DerivedCollectionsOnBase] AS [d2]
 ) AS [t2] ON [t1].[Id] = [t2].[BaseParentId]
-ORDER BY [t1].[Id], [t1].[BaseInheritanceRelationshipEntityId], [t1].[Id1], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]");
+ORDER BY [t1].[Id], [t1].[BaseInheritanceRelationshipEntityId], [t1].[Id1], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]"
+        );
     }
 
     public override async Task Include_collection_without_inheritance(bool async)
@@ -80,7 +81,8 @@ END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 LEFT JOIN [CollectionsOnBase] AS [c] ON [t].[Id] = [c].[ParentId]
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]"
+        );
     }
 
     public override async Task Include_collection_without_inheritance_reverse(bool async)
@@ -107,7 +109,8 @@ LEFT JOIN (
 END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t0].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_collection_without_inheritance_with_filter(bool async)
@@ -135,10 +138,13 @@ LEFT JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelation
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 LEFT JOIN [CollectionsOnBase] AS [c] ON [t].[Id] = [c].[ParentId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]"
+        );
     }
 
-    public override async Task Include_collection_without_inheritance_with_filter_reverse(bool async)
+    public override async Task Include_collection_without_inheritance_with_filter_reverse(
+        bool async
+    )
     {
         await base.Include_collection_without_inheritance_with_filter_reverse(async);
 
@@ -163,7 +169,8 @@ END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t0].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 WHERE [c].[Name] <> N'Bar' OR [c].[Name] IS NULL
-ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance(bool async)
@@ -196,7 +203,8 @@ LEFT JOIN (
     SELECT [d2].[Id], [d2].[BaseParentId], [d2].[Name], [d2].[DerivedProperty], N'DerivedCollectionOnBase' AS [Discriminator]
     FROM [DerivedCollectionsOnBase] AS [d2]
 ) AS [t1] ON [t].[Id] = [t1].[BaseParentId]
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_on_derived1(bool async)
@@ -216,7 +224,8 @@ LEFT JOIN (
     SELECT [d1].[Id], [d1].[BaseParentId], [d1].[Name], [d1].[DerivedProperty], N'DerivedCollectionOnBase' AS [Discriminator]
     FROM [DerivedCollectionsOnBase] AS [d1]
 ) AS [t0] ON [d].[Id] = [t0].[BaseParentId]
-ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d0].[DerivedInheritanceRelationshipEntityId], [d0].[Id]");
+ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d0].[DerivedInheritanceRelationshipEntityId], [d0].[Id]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_on_derived2(bool async)
@@ -236,7 +245,8 @@ LEFT JOIN (
     SELECT [d1].[Id], [d1].[Name], [d1].[ParentId], [d1].[DerivedInheritanceRelationshipEntityId], N'DerivedCollectionOnDerived' AS [Discriminator]
     FROM [DerivedCollectionsOnDerived] AS [d1]
 ) AS [t0] ON [d].[Id] = [t0].[ParentId]
-ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d0].[DerivedInheritanceRelationshipEntityId], [d0].[Id]");
+ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d0].[DerivedInheritanceRelationshipEntityId], [d0].[Id]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_on_derived3(bool async)
@@ -250,7 +260,8 @@ LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshi
 LEFT JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d0] ON [d].[Id] = [d0].[DerivedInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedCollectionsOnDerived] AS [d1] ON [d].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d0].[DerivedInheritanceRelationshipEntityId], [d0].[Id]");
+ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d0].[DerivedInheritanceRelationshipEntityId], [d0].[Id]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_on_derived_reverse(bool async)
@@ -270,7 +281,8 @@ LEFT JOIN [DerivedEntities] AS [d0] ON [t].[ParentId] = [d0].[Id]
 LEFT JOIN [OwnedReferences] AS [o] ON [d0].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [OwnedCollections] AS [o0] ON [d0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [d0].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_reverse(bool async)
@@ -303,7 +315,8 @@ LEFT JOIN (
 END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t0].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_with_filter(bool async)
@@ -337,7 +350,8 @@ LEFT JOIN (
     FROM [DerivedCollectionsOnBase] AS [d2]
 ) AS [t1] ON [t].[Id] = [t1].[BaseParentId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_with_filter_reverse(bool async)
@@ -371,7 +385,8 @@ END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t0].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
-ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_without_inheritance(bool async)
@@ -398,7 +413,8 @@ LEFT JOIN (
 END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [r].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [r].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_without_inheritance_on_derived1(bool async)
@@ -412,7 +428,8 @@ LEFT JOIN [ReferencesOnBase] AS [r] ON [d].[Id] = [r].[ParentId]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d0] ON [d].[Id] = [d0].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [d].[Id], [r].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d0].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [r].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d0].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_without_inheritance_on_derived2(bool async)
@@ -426,7 +443,8 @@ LEFT JOIN [ReferencesOnDerived] AS [r] ON [d].[Id] = [r].[ParentId]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d0] ON [d].[Id] = [d0].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [d].[Id], [r].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d0].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [r].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d0].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_without_inheritance_on_derived_reverse(bool async)
@@ -440,7 +458,8 @@ LEFT JOIN [DerivedEntities] AS [d] ON [r].[ParentId] = [d].[Id]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d0] ON [d].[Id] = [d0].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [r].[Id], [d].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d0].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [r].[Id], [d].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d0].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_without_inheritance_reverse(bool async)
@@ -467,7 +486,8 @@ LEFT JOIN (
 END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t0].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [r].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [r].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_without_inheritance_with_filter(bool async)
@@ -495,7 +515,8 @@ END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
-ORDER BY [t].[Id], [r].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [r].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_without_inheritance_with_filter_reverse(bool async)
@@ -523,13 +544,14 @@ END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t0].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 WHERE [r].[Name] <> N'Bar' OR [r].[Name] IS NULL
-ORDER BY [r].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [r].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_with_inheritance(bool async)
     {
         await base.Include_reference_with_inheritance(async);
-        
+
         AssertSql(
             @"SELECT [t].[Id], [t].[Name], [t].[BaseId], [t].[Discriminator], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [o].[Id], [o].[Name], [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t2].[OwnedReferenceOnDerived_Id], [t2].[OwnedReferenceOnDerived_Name], [t0].[BaseParentId], [t0].[Name], [t0].[Discriminator]
 FROM (
@@ -556,7 +578,8 @@ LEFT JOIN (
 END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_with_inheritance_on_derived1(bool async)
@@ -576,7 +599,8 @@ LEFT JOIN (
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [d].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_with_inheritance_on_derived2(bool async)
@@ -596,7 +620,8 @@ LEFT JOIN (
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [d].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_with_inheritance_on_derived4(bool async)
@@ -610,7 +635,8 @@ LEFT JOIN [DerivedReferencesOnDerived] AS [d0] ON [d].[Id] = [d0].[DerivedInheri
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [d].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [d].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_with_inheritance_on_derived_reverse(bool async)
@@ -630,10 +656,13 @@ LEFT JOIN [DerivedEntities] AS [d0] ON [t].[BaseParentId] = [d0].[Id]
 LEFT JOIN [OwnedReferences] AS [o] ON [d0].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [OwnedCollections] AS [o0] ON [d0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [d0].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
-    public override async Task Include_reference_with_inheritance_on_derived_with_filter1(bool async)
+    public override async Task Include_reference_with_inheritance_on_derived_with_filter1(
+        bool async
+    )
     {
         await base.Include_reference_with_inheritance_on_derived_with_filter1(async);
 
@@ -651,10 +680,13 @@ LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshi
 LEFT JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [d].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 WHERE [d].[Name] <> N'Bar' OR [d].[Name] IS NULL
-ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
-    public override async Task Include_reference_with_inheritance_on_derived_with_filter2(bool async)
+    public override async Task Include_reference_with_inheritance_on_derived_with_filter2(
+        bool async
+    )
     {
         await base.Include_reference_with_inheritance_on_derived_with_filter2(async);
 
@@ -672,10 +704,13 @@ LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshi
 LEFT JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [d].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 WHERE [d].[Name] <> N'Bar' OR [d].[Name] IS NULL
-ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
-    public override async Task Include_reference_with_inheritance_on_derived_with_filter4(bool async)
+    public override async Task Include_reference_with_inheritance_on_derived_with_filter4(
+        bool async
+    )
     {
         await base.Include_reference_with_inheritance_on_derived_with_filter4(async);
 
@@ -687,10 +722,13 @@ LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshi
 LEFT JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [d].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 WHERE [d].[Name] <> N'Bar' OR [d].[Name] IS NULL
-ORDER BY [d].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
-    public override async Task Include_reference_with_inheritance_on_derived_with_filter_reverse(bool async)
+    public override async Task Include_reference_with_inheritance_on_derived_with_filter_reverse(
+        bool async
+    )
     {
         await base.Include_reference_with_inheritance_on_derived_with_filter_reverse(async);
 
@@ -708,7 +746,8 @@ LEFT JOIN [OwnedReferences] AS [o] ON [d0].[Id] = [o].[BaseInheritanceRelationsh
 LEFT JOIN [OwnedCollections] AS [o0] ON [d0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [d0].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
-ORDER BY [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_with_inheritance_reverse(bool async)
@@ -741,7 +780,8 @@ LEFT JOIN (
 END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t0].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_with_inheritance_with_filter(bool async)
@@ -775,7 +815,8 @@ END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
-ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_reference_with_inheritance_with_filter_reverse(bool async)
@@ -809,7 +850,8 @@ END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t0].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
-ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_self_reference_with_inheritance(bool async)
@@ -839,7 +881,8 @@ LEFT JOIN [OwnedCollections] AS [o1] ON [t].[Id] = [o1].[BaseInheritanceRelation
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
 LEFT JOIN [OwnedCollections] AS [o2] ON [d0].[Id] = [o2].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d3] ON [d0].[Id] = [d3].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o1].[BaseInheritanceRelationshipEntityId], [o1].[Id], [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [o2].[BaseInheritanceRelationshipEntityId], [o2].[Id], [d3].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o1].[BaseInheritanceRelationshipEntityId], [o1].[Id], [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [o2].[BaseInheritanceRelationshipEntityId], [o2].[Id], [d3].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_self_reference_with_inheritance_reverse(bool async)
@@ -869,7 +912,8 @@ LEFT JOIN [OwnedCollections] AS [o1] ON [d].[Id] = [o1].[BaseInheritanceRelation
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [d].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
 LEFT JOIN [OwnedCollections] AS [o2] ON [t0].[Id] = [o2].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d3] ON [t0].[Id] = [d3].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [t1].[Id], [o1].[BaseInheritanceRelationshipEntityId], [o1].[Id], [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [o2].[BaseInheritanceRelationshipEntityId], [o2].[Id], [d3].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [t1].[Id], [o1].[BaseInheritanceRelationshipEntityId], [o1].[Id], [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [o2].[BaseInheritanceRelationshipEntityId], [o2].[Id], [d3].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Nested_include_collection_reference_on_non_entity_base(bool async)
@@ -884,7 +928,8 @@ LEFT JOIN (
     FROM [PrincipalEntities] AS [p]
     LEFT JOIN [ReferencedEntities] AS [r0] ON [p].[ReferenceId] = [r0].[Id]
 ) AS [t] ON [r].[Id] = [t].[ReferencedEntityId]
-ORDER BY [r].[Id], [t].[Id]");
+ORDER BY [r].[Id], [t].[Id]"
+        );
     }
 
     public override async Task Nested_include_with_inheritance_collection_collection(bool async)
@@ -927,10 +972,13 @@ LEFT JOIN (
         FROM [NestedCollectionsDerived] AS [n0]
     ) AS [t3] ON [t1].[Id] = [t3].[ParentCollectionId]
 ) AS [t2] ON [t].[Id] = [t2].[BaseParentId]
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [t2].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [t2].[Id]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_collection_collection_reverse(bool async)
+    public override async Task Nested_include_with_inheritance_collection_collection_reverse(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_collection_collection_reverse(async);
 
@@ -967,7 +1015,8 @@ LEFT JOIN (
 END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t2].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t2].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Nested_include_with_inheritance_collection_reference(bool async)
@@ -1010,10 +1059,13 @@ LEFT JOIN (
         FROM [NestedReferencesDerived] AS [n0]
     ) AS [t3] ON [t1].[Id] = [t3].[ParentCollectionId]
 ) AS [t2] ON [t].[Id] = [t2].[BaseParentId]
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [t2].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [t2].[Id]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_collection_reference_reverse(bool async)
+    public override async Task Nested_include_with_inheritance_collection_reference_reverse(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_collection_reference_reverse(async);
 
@@ -1050,7 +1102,8 @@ LEFT JOIN (
 END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t2].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t2].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Nested_include_with_inheritance_reference_collection(bool async)
@@ -1090,10 +1143,13 @@ LEFT JOIN (
     SELECT [n0].[Id], [n0].[Name], [n0].[ParentCollectionId], [n0].[ParentReferenceId], N'NestedCollectionDerived' AS [Discriminator]
     FROM [NestedCollectionsDerived] AS [n0]
 ) AS [t3] ON [t0].[Id] = [t3].[ParentReferenceId]
-ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id]");
+ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_reference_collection_on_base(bool async)
+    public override async Task Nested_include_with_inheritance_reference_collection_on_base(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_reference_collection_on_base(async);
 
@@ -1117,10 +1173,13 @@ LEFT JOIN (
     SELECT [n0].[Id], [n0].[Name], [n0].[ParentCollectionId], [n0].[ParentReferenceId], N'NestedCollectionDerived' AS [Discriminator]
     FROM [NestedCollectionsDerived] AS [n0]
 ) AS [t1] ON [t0].[Id] = [t1].[ParentReferenceId]
-ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]");
+ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_reference_collection_reverse(bool async)
+    public override async Task Nested_include_with_inheritance_reference_collection_reverse(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_reference_collection_reverse(async);
 
@@ -1157,7 +1216,8 @@ LEFT JOIN (
 END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t2].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t2].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Nested_include_with_inheritance_reference_reference(bool async)
@@ -1197,10 +1257,13 @@ LEFT JOIN (
 END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_reference_reference_on_base(bool async)
+    public override async Task Nested_include_with_inheritance_reference_reference_on_base(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_reference_reference_on_base(async);
 
@@ -1224,10 +1287,13 @@ LEFT JOIN (
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [d].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [d].[Id], [t0].[Id], [t1].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [t0].[Id], [t1].[Id], [o].[BaseInheritanceRelationshipEntityId], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_reference_reference_reverse(bool async)
+    public override async Task Nested_include_with_inheritance_reference_reference_reverse(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_reference_reference_reverse(async);
 
@@ -1264,7 +1330,8 @@ LEFT JOIN (
 END
 LEFT JOIN [OwnedCollections] AS [o0] ON [t2].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t2].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d2].[DerivedInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Collection_projection_on_base_type(bool async)
@@ -1287,7 +1354,8 @@ LEFT JOIN (
     SELECT [d0].[Id], [d0].[BaseParentId], [d0].[Name], [d0].[DerivedProperty], N'DerivedCollectionOnBase' AS [Discriminator]
     FROM [DerivedCollectionsOnBase] AS [d0]
 ) AS [t0] ON [t].[Id] = [t0].[BaseParentId]
-ORDER BY [t].[Id]");
+ORDER BY [t].[Id]"
+        );
     }
 
     public override async Task Include_on_derived_type_with_queryable_Cast(bool async)
@@ -1315,7 +1383,8 @@ LEFT JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelation
 LEFT JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 LEFT JOIN [DerivedCollectionsOnDerived] AS [d2] ON [t].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
 WHERE [t].[Id] >= 4
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_split(bool async)
@@ -1340,8 +1409,8 @@ LEFT JOIN (
     WHEN [t0].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t0].[Id]
 END
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -1359,8 +1428,8 @@ LEFT JOIN (
 END
 INNER JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -1378,8 +1447,8 @@ LEFT JOIN (
 END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [t1].[Id], [t1].[BaseParentId], [t1].[Name], [t1].[DerivedProperty], [t1].[Discriminator], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [t1].[Id], [t1].[BaseParentId], [t1].[Name], [t1].[DerivedProperty], [t1].[Discriminator], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -1402,13 +1471,14 @@ INNER JOIN (
     SELECT [d1].[Id], [d1].[BaseParentId], [d1].[Name], [d1].[DerivedProperty], N'DerivedCollectionOnBase' AS [Discriminator]
     FROM [DerivedCollectionsOnBase] AS [d1]
 ) AS [t1] ON [t].[Id] = [t1].[BaseParentId]
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_reverse_split(bool async)
     {
         await base.Include_collection_with_inheritance_reverse_split(async);
-        
+
         AssertSql(
             @"SELECT [t].[Id], [t].[BaseParentId], [t].[Name], [t].[DerivedProperty], [t].[Discriminator], [t0].[Id], [t0].[Name], [t0].[BaseId], [t0].[Discriminator], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id], [o].[Id], [o].[Name], [t2].[OwnedReferenceOnDerived_Id], [t2].[OwnedReferenceOnDerived_Name]
 FROM (
@@ -1434,8 +1504,8 @@ LEFT JOIN (
     WHEN [t2].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t2].[Id]
 END
 ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
 FROM (
     SELECT [b].[Id], [b].[BaseParentId]
     FROM [BaseCollectionsOnBase] AS [b]
@@ -1460,8 +1530,8 @@ LEFT JOIN (
 END
 INNER JOIN [OwnedCollections] AS [o0] ON [t0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]",
-                //
-                @"SELECT [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
+            //
+            @"SELECT [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
 FROM (
     SELECT [b].[Id], [b].[BaseParentId]
     FROM [BaseCollectionsOnBase] AS [b]
@@ -1485,7 +1555,8 @@ LEFT JOIN (
     WHEN [t2].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t2].[Id]
 END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t0].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]");
+ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_with_filter_split(bool async)
@@ -1511,8 +1582,8 @@ LEFT JOIN (
 END
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id], [b].[Name]
     FROM [BaseEntities] AS [b]
@@ -1531,8 +1602,8 @@ END
 INNER JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id], [b].[Name]
     FROM [BaseEntities] AS [b]
@@ -1551,8 +1622,8 @@ END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [t1].[Id], [t1].[BaseParentId], [t1].[Name], [t1].[DerivedProperty], [t1].[Discriminator], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [t1].[Id], [t1].[BaseParentId], [t1].[Name], [t1].[DerivedProperty], [t1].[Discriminator], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id], [b].[Name]
     FROM [BaseEntities] AS [b]
@@ -1576,10 +1647,13 @@ INNER JOIN (
     FROM [DerivedCollectionsOnBase] AS [d1]
 ) AS [t1] ON [t].[Id] = [t1].[BaseParentId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]"
+        );
     }
 
-    public override async Task Include_collection_with_inheritance_with_filter_reverse_split(bool async)
+    public override async Task Include_collection_with_inheritance_with_filter_reverse_split(
+        bool async
+    )
     {
         await base.Include_collection_with_inheritance_with_filter_reverse_split(async);
 
@@ -1609,8 +1683,8 @@ LEFT JOIN (
 END
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
 ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
 FROM (
     SELECT [b].[Id], [b].[BaseParentId], [b].[Name]
     FROM [BaseCollectionsOnBase] AS [b]
@@ -1636,8 +1710,8 @@ END
 INNER JOIN [OwnedCollections] AS [o0] ON [t0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
 ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]",
-                //
-                @"SELECT [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
+            //
+            @"SELECT [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
 FROM (
     SELECT [b].[Id], [b].[BaseParentId], [b].[Name]
     FROM [BaseCollectionsOnBase] AS [b]
@@ -1662,7 +1736,8 @@ LEFT JOIN (
 END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t0].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
-ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]");
+ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]"
+        );
     }
 
     public override async Task Include_collection_without_inheritance_split(bool async)
@@ -1687,8 +1762,8 @@ LEFT JOIN (
     WHEN [t0].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t0].[Id]
 END
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -1706,8 +1781,8 @@ LEFT JOIN (
 END
 INNER JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -1725,8 +1800,8 @@ LEFT JOIN (
 END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [c].[Id], [c].[Name], [c].[ParentId], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [c].[Id], [c].[Name], [c].[ParentId], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -1743,7 +1818,8 @@ LEFT JOIN (
     WHEN [t0].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t0].[Id]
 END
 INNER JOIN [CollectionsOnBase] AS [c] ON [t].[Id] = [c].[ParentId]
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]"
+        );
     }
 
     public override async Task Include_collection_without_inheritance_reverse_split(bool async)
@@ -1769,8 +1845,8 @@ LEFT JOIN (
     WHEN [t1].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t1].[Id]
 END
 ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]
 FROM [CollectionsOnBase] AS [c]
 LEFT JOIN (
     SELECT [b].[Id]
@@ -1789,8 +1865,8 @@ LEFT JOIN (
 END
 INNER JOIN [OwnedCollections] AS [o0] ON [t0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]",
-                //
-                @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]
+            //
+            @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]
 FROM [CollectionsOnBase] AS [c]
 LEFT JOIN (
     SELECT [b].[Id]
@@ -1808,7 +1884,8 @@ LEFT JOIN (
     WHEN [t1].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t1].[Id]
 END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t0].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]");
+ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]"
+        );
     }
 
     public override async Task Include_collection_without_inheritance_with_filter_split(bool async)
@@ -1834,8 +1911,8 @@ LEFT JOIN (
 END
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id], [b].[Name]
     FROM [BaseEntities] AS [b]
@@ -1854,8 +1931,8 @@ END
 INNER JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id], [b].[Name]
     FROM [BaseEntities] AS [b]
@@ -1874,8 +1951,8 @@ END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [c].[Id], [c].[Name], [c].[ParentId], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [c].[Id], [c].[Name], [c].[ParentId], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id], [b].[Name]
     FROM [BaseEntities] AS [b]
@@ -1893,10 +1970,13 @@ LEFT JOIN (
 END
 INNER JOIN [CollectionsOnBase] AS [c] ON [t].[Id] = [c].[ParentId]
 WHERE [t].[Name] <> N'Bar' OR [t].[Name] IS NULL
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]"
+        );
     }
 
-    public override async Task Include_collection_without_inheritance_with_filter_reverse_split(bool async)
+    public override async Task Include_collection_without_inheritance_with_filter_reverse_split(
+        bool async
+    )
     {
         await base.Include_collection_without_inheritance_with_filter_reverse_split(async);
 
@@ -1920,8 +2000,8 @@ LEFT JOIN (
 END
 WHERE [c].[Name] <> N'Bar' OR [c].[Name] IS NULL
 ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]
 FROM [CollectionsOnBase] AS [c]
 LEFT JOIN (
     SELECT [b].[Id]
@@ -1941,8 +2021,8 @@ END
 INNER JOIN [OwnedCollections] AS [o0] ON [t0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 WHERE [c].[Name] <> N'Bar' OR [c].[Name] IS NULL
 ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]",
-                //
-                @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]
+            //
+            @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]
 FROM [CollectionsOnBase] AS [c]
 LEFT JOIN (
     SELECT [b].[Id]
@@ -1961,7 +2041,8 @@ LEFT JOIN (
 END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t0].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 WHERE [c].[Name] <> N'Bar' OR [c].[Name] IS NULL
-ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]");
+ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[Id]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_on_derived1_split(bool async)
@@ -1973,20 +2054,20 @@ ORDER BY [c].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t1].[I
 FROM [DerivedEntities] AS [d]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [d].[Id], [o].[BaseInheritanceRelationshipEntityId]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [d].[Id], [o].[BaseInheritanceRelationshipEntityId]
 FROM [DerivedEntities] AS [d]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 INNER JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]",
-                //
-                @"SELECT [d0].[DerivedInheritanceRelationshipEntityId], [d0].[Id], [d0].[Name], [d].[Id], [o].[BaseInheritanceRelationshipEntityId]
+            //
+            @"SELECT [d0].[DerivedInheritanceRelationshipEntityId], [d0].[Id], [d0].[Name], [d].[Id], [o].[BaseInheritanceRelationshipEntityId]
 FROM [DerivedEntities] AS [d]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d0] ON [d].[Id] = [d0].[DerivedInheritanceRelationshipEntityId]
 ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]",
-                //
-                @"SELECT [t0].[Id], [t0].[BaseParentId], [t0].[Name], [t0].[DerivedProperty], [t0].[Discriminator], [d].[Id], [o].[BaseInheritanceRelationshipEntityId]
+            //
+            @"SELECT [t0].[Id], [t0].[BaseParentId], [t0].[Name], [t0].[DerivedProperty], [t0].[Discriminator], [d].[Id], [o].[BaseInheritanceRelationshipEntityId]
 FROM [DerivedEntities] AS [d]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 INNER JOIN (
@@ -1996,7 +2077,8 @@ INNER JOIN (
     SELECT [d0].[Id], [d0].[BaseParentId], [d0].[Name], [d0].[DerivedProperty], N'DerivedCollectionOnBase' AS [Discriminator]
     FROM [DerivedCollectionsOnBase] AS [d0]
 ) AS [t0] ON [d].[Id] = [t0].[BaseParentId]
-ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_on_derived2_split(bool async)
@@ -2007,20 +2089,20 @@ ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]");
 FROM [DerivedEntities] AS [d]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [d].[Id], [o].[BaseInheritanceRelationshipEntityId]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [d].[Id], [o].[BaseInheritanceRelationshipEntityId]
 FROM [DerivedEntities] AS [d]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 INNER JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]",
-                //
-                @"SELECT [d0].[DerivedInheritanceRelationshipEntityId], [d0].[Id], [d0].[Name], [d].[Id], [o].[BaseInheritanceRelationshipEntityId]
+            //
+            @"SELECT [d0].[DerivedInheritanceRelationshipEntityId], [d0].[Id], [d0].[Name], [d].[Id], [o].[BaseInheritanceRelationshipEntityId]
 FROM [DerivedEntities] AS [d]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d0] ON [d].[Id] = [d0].[DerivedInheritanceRelationshipEntityId]
 ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]",
-                //
-                @"SELECT [t0].[Id], [t0].[Name], [t0].[ParentId], [t0].[DerivedInheritanceRelationshipEntityId], [t0].[Discriminator], [d].[Id], [o].[BaseInheritanceRelationshipEntityId]
+            //
+            @"SELECT [t0].[Id], [t0].[Name], [t0].[ParentId], [t0].[DerivedInheritanceRelationshipEntityId], [t0].[Discriminator], [d].[Id], [o].[BaseInheritanceRelationshipEntityId]
 FROM [DerivedEntities] AS [d]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 INNER JOIN (
@@ -2030,7 +2112,8 @@ INNER JOIN (
     SELECT [d0].[Id], [d0].[Name], [d0].[ParentId], [d0].[DerivedInheritanceRelationshipEntityId], N'DerivedCollectionOnDerived' AS [Discriminator]
     FROM [DerivedCollectionsOnDerived] AS [d0]
 ) AS [t0] ON [d].[Id] = [t0].[ParentId]
-ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]"
+        );
     }
 
     public override async Task Include_collection_with_inheritance_on_derived3_split(bool async)
@@ -2059,10 +2142,13 @@ ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]",
 FROM [DerivedEntities] AS [d]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 INNER JOIN [DerivedCollectionsOnDerived] AS [d0] ON [d].[Id] = [d0].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [o].[BaseInheritanceRelationshipEntityId]"
+        );
     }
 
-    public override async Task Include_collection_with_inheritance_on_derived_reverse_split(bool async)
+    public override async Task Include_collection_with_inheritance_on_derived_reverse_split(
+        bool async
+    )
     {
         await base.Include_collection_with_inheritance_on_derived_reverse_split(async);
 
@@ -2078,8 +2164,8 @@ FROM (
 LEFT JOIN [DerivedEntities] AS [d0] ON [t].[ParentId] = [d0].[Id]
 LEFT JOIN [OwnedReferences] AS [o] ON [d0].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId]
 FROM (
     SELECT [b].[Id], [b].[ParentId]
     FROM [BaseCollectionsOnDerived] AS [b]
@@ -2091,8 +2177,8 @@ LEFT JOIN [DerivedEntities] AS [d0] ON [t].[ParentId] = [d0].[Id]
 LEFT JOIN [OwnedReferences] AS [o] ON [d0].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 INNER JOIN [OwnedCollections] AS [o0] ON [d0].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId]",
-                //
-                @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId]
+            //
+            @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId]
 FROM (
     SELECT [b].[Id], [b].[ParentId]
     FROM [BaseCollectionsOnDerived] AS [b]
@@ -2103,10 +2189,13 @@ FROM (
 LEFT JOIN [DerivedEntities] AS [d0] ON [t].[ParentId] = [d0].[Id]
 LEFT JOIN [OwnedReferences] AS [o] ON [d0].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [d0].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId]");
+ORDER BY [t].[Id], [d0].[Id], [o].[BaseInheritanceRelationshipEntityId]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_reference_collection_split(bool async)
+    public override async Task Nested_include_with_inheritance_reference_collection_split(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_reference_collection_split(async);
 
@@ -2135,8 +2224,8 @@ LEFT JOIN (
     WHEN [t2].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t2].[Id]
 END
 ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2161,8 +2250,8 @@ LEFT JOIN (
 END
 INNER JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]",
-                //
-                @"SELECT [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
+            //
+            @"SELECT [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2187,8 +2276,8 @@ LEFT JOIN (
 END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]",
-                //
-                @"SELECT [t3].[Id], [t3].[Name], [t3].[ParentCollectionId], [t3].[ParentReferenceId], [t3].[Discriminator], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
+            //
+            @"SELECT [t3].[Id], [t3].[Name], [t3].[ParentCollectionId], [t3].[ParentReferenceId], [t3].[Discriminator], [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2218,10 +2307,13 @@ INNER JOIN (
     SELECT [n0].[Id], [n0].[Name], [n0].[ParentCollectionId], [n0].[ParentReferenceId], N'NestedCollectionDerived' AS [Discriminator]
     FROM [NestedCollectionsDerived] AS [n0]
 ) AS [t3] ON [t0].[Id] = [t3].[ParentReferenceId]
-ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]");
+ORDER BY [t].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId], [t2].[Id]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_reference_collection_on_base_split(bool async)
+    public override async Task Nested_include_with_inheritance_reference_collection_on_base_split(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_reference_collection_on_base_split(async);
 
@@ -2237,8 +2329,8 @@ LEFT JOIN (
 ) AS [t0] ON [d].[Id] = [t0].[BaseParentId]
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId]
 FROM [DerivedEntities] AS [d]
 LEFT JOIN (
     SELECT [b].[Id], [b].[BaseParentId]
@@ -2250,8 +2342,8 @@ LEFT JOIN (
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 INNER JOIN [OwnedCollections] AS [o0] ON [d].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId]",
-                //
-                @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId]
+            //
+            @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId]
 FROM [DerivedEntities] AS [d]
 LEFT JOIN (
     SELECT [b].[Id], [b].[BaseParentId]
@@ -2263,8 +2355,8 @@ LEFT JOIN (
 LEFT JOIN [OwnedReferences] AS [o] ON [d].[Id] = [o].[BaseInheritanceRelationshipEntityId]
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [d].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId]",
-                //
-                @"SELECT [t1].[Id], [t1].[Name], [t1].[ParentCollectionId], [t1].[ParentReferenceId], [t1].[Discriminator], [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId]
+            //
+            @"SELECT [t1].[Id], [t1].[Name], [t1].[ParentCollectionId], [t1].[ParentReferenceId], [t1].[Discriminator], [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId]
 FROM [DerivedEntities] AS [d]
 LEFT JOIN (
     SELECT [b].[Id], [b].[BaseParentId]
@@ -2281,10 +2373,13 @@ INNER JOIN (
     SELECT [n0].[Id], [n0].[Name], [n0].[ParentCollectionId], [n0].[ParentReferenceId], N'NestedCollectionDerived' AS [Discriminator]
     FROM [NestedCollectionsDerived] AS [n0]
 ) AS [t1] ON [t0].[Id] = [t1].[ParentReferenceId]
-ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId]");
+ORDER BY [d].[Id], [t0].[Id], [o].[BaseInheritanceRelationshipEntityId]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_reference_collection_reverse_split(bool async)
+    public override async Task Nested_include_with_inheritance_reference_collection_reverse_split(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_reference_collection_reverse_split(async);
 
@@ -2320,8 +2415,8 @@ LEFT JOIN (
     WHEN [t4].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t4].[Id]
 END
 ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]
 FROM (
     SELECT [n].[Id], [n].[ParentReferenceId]
     FROM [NestedCollections] AS [n]
@@ -2353,8 +2448,8 @@ LEFT JOIN (
 END
 INNER JOIN [OwnedCollections] AS [o0] ON [t2].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]",
-                //
-                @"SELECT [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]
+            //
+            @"SELECT [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]
 FROM (
     SELECT [n].[Id], [n].[ParentReferenceId]
     FROM [NestedCollections] AS [n]
@@ -2385,10 +2480,13 @@ LEFT JOIN (
     WHEN [t4].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t4].[Id]
 END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t2].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]");
+ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_collection_reference_split(bool async)
+    public override async Task Nested_include_with_inheritance_collection_reference_split(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_collection_reference_split(async);
 
@@ -2410,8 +2508,8 @@ LEFT JOIN (
     WHEN [t0].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t0].[Id]
 END
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2429,8 +2527,8 @@ LEFT JOIN (
 END
 INNER JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2448,8 +2546,8 @@ LEFT JOIN (
 END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [t2].[Id], [t2].[BaseParentId], [t2].[Name], [t2].[DerivedProperty], [t2].[Discriminator], [t2].[Id0], [t2].[Name0], [t2].[ParentCollectionId], [t2].[ParentReferenceId], [t2].[Discriminator0] AS [Discriminator], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [t2].[Id], [t2].[BaseParentId], [t2].[Name], [t2].[DerivedProperty], [t2].[Discriminator], [t2].[Id0], [t2].[Name0], [t2].[ParentCollectionId], [t2].[ParentReferenceId], [t2].[Discriminator0] AS [Discriminator], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2482,10 +2580,13 @@ INNER JOIN (
         FROM [NestedReferencesDerived] AS [n0]
     ) AS [t3] ON [t1].[Id] = [t3].[ParentCollectionId]
 ) AS [t2] ON [t].[Id] = [t2].[BaseParentId]
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_collection_reference_reverse_split(bool async)
+    public override async Task Nested_include_with_inheritance_collection_reference_reverse_split(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_collection_reference_reverse_split(async);
 
@@ -2521,8 +2622,8 @@ LEFT JOIN (
     WHEN [t4].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t4].[Id]
 END
 ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]
 FROM (
     SELECT [n].[Id], [n].[ParentCollectionId]
     FROM [NestedReferences] AS [n]
@@ -2554,8 +2655,8 @@ LEFT JOIN (
 END
 INNER JOIN [OwnedCollections] AS [o0] ON [t2].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]",
-                //
-                @"SELECT [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]
+            //
+            @"SELECT [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]
 FROM (
     SELECT [n].[Id], [n].[ParentCollectionId]
     FROM [NestedReferences] AS [n]
@@ -2586,10 +2687,13 @@ LEFT JOIN (
     WHEN [t4].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t4].[Id]
 END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t2].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]");
+ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_collection_collection_split(bool async)
+    public override async Task Nested_include_with_inheritance_collection_collection_split(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_collection_collection_split(async);
 
@@ -2611,8 +2715,8 @@ LEFT JOIN (
     WHEN [t0].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t0].[Id]
 END
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2630,8 +2734,8 @@ LEFT JOIN (
 END
 INNER JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2649,8 +2753,8 @@ LEFT JOIN (
 END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [t1].[Id], [t1].[BaseParentId], [t1].[Name], [t1].[DerivedProperty], [t1].[Discriminator], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [t1].[Id], [t1].[BaseParentId], [t1].[Name], [t1].[DerivedProperty], [t1].[Discriminator], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2674,8 +2778,8 @@ INNER JOIN (
     FROM [DerivedCollectionsOnBase] AS [d1]
 ) AS [t1] ON [t].[Id] = [t1].[BaseParentId]
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [t1].[Id]",
-                //
-                @"SELECT [t3].[Id], [t3].[Name], [t3].[ParentCollectionId], [t3].[ParentReferenceId], [t3].[Discriminator], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [t1].[Id]
+            //
+            @"SELECT [t3].[Id], [t3].[Name], [t3].[ParentCollectionId], [t3].[ParentReferenceId], [t3].[Discriminator], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [t1].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2705,10 +2809,13 @@ INNER JOIN (
     SELECT [n0].[Id], [n0].[Name], [n0].[ParentCollectionId], [n0].[ParentReferenceId], N'NestedCollectionDerived' AS [Discriminator]
     FROM [NestedCollectionsDerived] AS [n0]
 ) AS [t3] ON [t1].[Id] = [t3].[ParentCollectionId]
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [t1].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id], [t1].[Id]"
+        );
     }
 
-    public override async Task Nested_include_with_inheritance_collection_collection_reverse_split(bool async)
+    public override async Task Nested_include_with_inheritance_collection_collection_reverse_split(
+        bool async
+    )
     {
         await base.Nested_include_with_inheritance_collection_collection_reverse_split(async);
 
@@ -2744,8 +2851,8 @@ LEFT JOIN (
     WHEN [t4].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t4].[Id]
 END
 ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]
 FROM (
     SELECT [n].[Id], [n].[ParentCollectionId]
     FROM [NestedCollections] AS [n]
@@ -2777,8 +2884,8 @@ LEFT JOIN (
 END
 INNER JOIN [OwnedCollections] AS [o0] ON [t2].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]",
-                //
-                @"SELECT [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]
+            //
+            @"SELECT [d2].[DerivedInheritanceRelationshipEntityId], [d2].[Id], [d2].[Name], [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]
 FROM (
     SELECT [n].[Id], [n].[ParentCollectionId]
     FROM [NestedCollections] AS [n]
@@ -2809,13 +2916,16 @@ LEFT JOIN (
     WHEN [t4].[OwnedReferenceOnDerived_Id] IS NOT NULL THEN [t4].[Id]
 END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d2] ON [t2].[Id] = [d2].[DerivedInheritanceRelationshipEntityId]
-ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]");
+ORDER BY [t].[Id], [t0].[Id], [t2].[Id], [o].[BaseInheritanceRelationshipEntityId], [t4].[Id]"
+        );
     }
 
-    public override async Task Nested_include_collection_reference_on_non_entity_base_split(bool async)
+    public override async Task Nested_include_collection_reference_on_non_entity_base_split(
+        bool async
+    )
     {
         await base.Nested_include_collection_reference_on_non_entity_base_split(async);
-        
+
         AssertSql(
             @"SELECT [r].[Id], [r].[Name]
 FROM [ReferencedEntities] AS [r]
@@ -2828,7 +2938,8 @@ INNER JOIN (
     FROM [PrincipalEntities] AS [p]
     LEFT JOIN [ReferencedEntities] AS [r0] ON [p].[ReferenceId] = [r0].[Id]
 ) AS [t] ON [r].[Id] = [t].[ReferencedEntityId]
-ORDER BY [r].[Id]");
+ORDER BY [r].[Id]"
+        );
     }
 
     public override async Task Collection_projection_on_base_type_split(bool async)
@@ -2845,8 +2956,8 @@ FROM (
     FROM [DerivedEntities] AS [d]
 ) AS [t]
 ORDER BY [t].[Id]",
-                //
-                @"SELECT [t0].[Id], [t0].[BaseParentId], [t0].[Name], [t0].[DerivedProperty], [t0].[Discriminator], [t].[Id]
+            //
+            @"SELECT [t0].[Id], [t0].[BaseParentId], [t0].[Name], [t0].[DerivedProperty], [t0].[Discriminator], [t].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2861,7 +2972,8 @@ INNER JOIN (
     SELECT [d0].[Id], [d0].[BaseParentId], [d0].[Name], [d0].[DerivedProperty], N'DerivedCollectionOnBase' AS [Discriminator]
     FROM [DerivedCollectionsOnBase] AS [d0]
 ) AS [t0] ON [t].[Id] = [t0].[BaseParentId]
-ORDER BY [t].[Id]");
+ORDER BY [t].[Id]"
+        );
     }
 
     public override async Task Include_on_derived_type_with_queryable_Cast_split(bool async)
@@ -2887,8 +2999,8 @@ LEFT JOIN (
 END
 WHERE [t].[Id] >= 4
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [o0].[BaseInheritanceRelationshipEntityId], [o0].[Id], [o0].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2907,8 +3019,8 @@ END
 INNER JOIN [OwnedCollections] AS [o0] ON [t].[Id] = [o0].[BaseInheritanceRelationshipEntityId]
 WHERE [t].[Id] >= 4
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [d1].[DerivedInheritanceRelationshipEntityId], [d1].[Id], [d1].[Name], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2927,8 +3039,8 @@ END
 INNER JOIN [DerivedEntities_OwnedCollectionOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 WHERE [t].[Id] >= 4
 ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]",
-                //
-                @"SELECT [d1].[Id], [d1].[Name], [d1].[ParentId], [d1].[DerivedInheritanceRelationshipEntityId], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
+            //
+            @"SELECT [d1].[Id], [d1].[Name], [d1].[ParentId], [d1].[DerivedInheritanceRelationshipEntityId], [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]
 FROM (
     SELECT [b].[Id]
     FROM [BaseEntities] AS [b]
@@ -2946,7 +3058,8 @@ LEFT JOIN (
 END
 INNER JOIN [DerivedCollectionsOnDerived] AS [d1] ON [t].[Id] = [d1].[DerivedInheritanceRelationshipEntityId]
 WHERE [t].[Id] >= 4
-ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]");
+ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]"
+        );
     }
 
     public override void Entity_can_make_separate_relationships_with_base_type_and_derived_type_both()
@@ -2956,12 +3069,11 @@ ORDER BY [t].[Id], [o].[BaseInheritanceRelationshipEntityId], [t0].[Id]");
         AssertSql();
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
     public class TPCRelationshipsQuerySqlServerFixture : TPCRelationshipsQueryRelationalFixture
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
     }
 }

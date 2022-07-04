@@ -41,7 +41,10 @@ namespace System.Net.Security.Tests
         [InlineData(true, false)]
         [InlineData(false, false)]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/68206", TestPlatforms.Android)]
-        public async Task CertificateSelectionCallback_DelayedCertificate_OK(bool delayCertificate, bool sendClientCertificate)
+        public async Task CertificateSelectionCallback_DelayedCertificate_OK(
+            bool delayCertificate,
+            bool sendClientCertificate
+        )
         {
             X509Certificate? remoteCertificate = null;
 
@@ -55,8 +58,19 @@ namespace System.Net.Security.Tests
                 // Force Tls 1.2 to avoid issues with certain OpenSSL versions and Tls 1.3
                 // https://github.com/openssl/openssl/issues/7384
                 clientOptions.EnabledSslProtocols = SslProtocols.Tls12;
-                clientOptions.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
-                clientOptions.LocalCertificateSelectionCallback = (sender, targetHost, localCertificates, certificate, acceptableIssuers) =>
+                clientOptions.RemoteCertificateValidationCallback = (
+                    sender,
+                    certificate,
+                    chain,
+                    sslPolicyErrors
+                ) => true;
+                clientOptions.LocalCertificateSelectionCallback = (
+                    sender,
+                    targetHost,
+                    localCertificates,
+                    certificate,
+                    acceptableIssuers
+                ) =>
                 {
                     count++;
                     remoteCertificate = certificate;
@@ -72,26 +86,37 @@ namespace System.Net.Security.Tests
                 SslServerAuthenticationOptions serverOptions = new SslServerAuthenticationOptions();
                 serverOptions.ServerCertificate = _serverCertificate;
                 serverOptions.ClientCertificateRequired = true;
-                serverOptions.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
+                serverOptions.RemoteCertificateValidationCallback = (
+                    sender,
+                    certificate,
+                    chain,
+                    sslPolicyErrors
+                ) =>
                 {
                     if (sendClientCertificate)
                     {
                         Assert.NotNull(certificate);
                         // The client chain may be incomplete.
-                        Assert.True(sslPolicyErrors == SslPolicyErrors.None || sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors);
+                        Assert.True(
+                            sslPolicyErrors == SslPolicyErrors.None
+                                || sslPolicyErrors == SslPolicyErrors.RemoteCertificateChainErrors
+                        );
                     }
                     else
                     {
-                        Assert.Equal(SslPolicyErrors.RemoteCertificateNotAvailable, sslPolicyErrors);
+                        Assert.Equal(
+                            SslPolicyErrors.RemoteCertificateNotAvailable,
+                            sslPolicyErrors
+                        );
                     }
 
                     return true;
                 };
 
-
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                                client.AuthenticateAsClientAsync(clientOptions),
-                                server.AuthenticateAsServerAsync(serverOptions));
+                    client.AuthenticateAsClientAsync(clientOptions),
+                    server.AuthenticateAsServerAsync(serverOptions)
+                );
 
                 // verify that the session is usable with or without client's certificate
                 await TestHelper.PingPong(client, server);
@@ -109,7 +134,9 @@ namespace System.Net.Security.Tests
         [InlineData(false)]
         [InlineData(true)]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/68206", TestPlatforms.Android)]
-        public async Task CertificateValidationClientServer_EndToEnd_Ok(bool useClientSelectionCallback)
+        public async Task CertificateValidationClientServer_EndToEnd_Ok(
+            bool useClientSelectionCallback
+        )
         {
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, 0);
             var server = new TcpListener(endPoint);
@@ -117,9 +144,11 @@ namespace System.Net.Security.Tests
 
             _clientCertificateRemovedByFilter = false;
 
-            if (PlatformDetection.IsWindows7 &&
-                !useClientSelectionCallback &&
-                !Capability.IsTrustedRootCertificateInstalled())
+            if (
+                PlatformDetection.IsWindows7
+                && !useClientSelectionCallback
+                && !Capability.IsTrustedRootCertificateInstalled()
+            )
             {
                 // https://technet.microsoft.com/en-us/library/hh831771.aspx#BKMK_Changes2012R2
                 // Starting with Windows 8, the "Management of trusted issuers for client authentication" has changed:
@@ -135,7 +164,10 @@ namespace System.Net.Security.Tests
             {
                 IPEndPoint serverEndPoint = (IPEndPoint)server.LocalEndpoint;
 
-                Task clientConnect = clientConnection.ConnectAsync(serverEndPoint.Address, serverEndPoint.Port);
+                Task clientConnect = clientConnection.ConnectAsync(
+                    serverEndPoint.Address,
+                    serverEndPoint.Port
+                );
                 Task<TcpClient> serverAccept = server.AcceptTcpClientAsync();
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(clientConnect, serverAccept);
@@ -148,18 +180,26 @@ namespace System.Net.Security.Tests
                 }
 
                 using (TcpClient serverConnection = await serverAccept)
-                using (SslStream sslClientStream = new SslStream(
-                    clientConnection.GetStream(),
-                    false,
-                    ClientSideRemoteServerCertificateValidation,
-                    clientCertCallback))
-                using (SslStream sslServerStream = new SslStream(
-                    serverConnection.GetStream(),
-                    false,
-                    ServerSideRemoteClientCertificateValidation))
-
+                using (
+                    SslStream sslClientStream = new SslStream(
+                        clientConnection.GetStream(),
+                        false,
+                        ClientSideRemoteServerCertificateValidation,
+                        clientCertCallback
+                    )
+                )
+                using (
+                    SslStream sslServerStream = new SslStream(
+                        serverConnection.GetStream(),
+                        false,
+                        ServerSideRemoteClientCertificateValidation
+                    )
+                )
                 {
-                    string serverName = _serverCertificate.GetNameInfo(X509NameType.SimpleName, false);
+                    string serverName = _serverCertificate.GetNameInfo(
+                        X509NameType.SimpleName,
+                        false
+                    );
                     var clientCerts = new X509CertificateCollection();
 
                     if (!useClientSelectionCallback)
@@ -171,32 +211,55 @@ namespace System.Net.Security.Tests
                         serverName,
                         clientCerts,
                         SslProtocolSupport.DefaultSslProtocols,
-                        false);
+                        false
+                    );
 
                     Task serverAuthentication = sslServerStream.AuthenticateAsServerAsync(
                         _serverCertificate,
                         true,
                         SslProtocolSupport.DefaultSslProtocols,
-                        false);
+                        false
+                    );
 
-                    await TestConfiguration.WhenAllOrAnyFailedWithTimeout(clientAuthentication, serverAuthentication);
+                    await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
+                        clientAuthentication,
+                        serverAuthentication
+                    );
 
                     if (!_clientCertificateRemovedByFilter)
                     {
-                        Assert.True(sslClientStream.IsMutuallyAuthenticated, "sslClientStream.IsMutuallyAuthenticated");
-                        Assert.True(sslServerStream.IsMutuallyAuthenticated, "sslServerStream.IsMutuallyAuthenticated");
+                        Assert.True(
+                            sslClientStream.IsMutuallyAuthenticated,
+                            "sslClientStream.IsMutuallyAuthenticated"
+                        );
+                        Assert.True(
+                            sslServerStream.IsMutuallyAuthenticated,
+                            "sslServerStream.IsMutuallyAuthenticated"
+                        );
 
-                        Assert.Equal(sslServerStream.RemoteCertificate.Subject, _clientCertificate.Subject);
+                        Assert.Equal(
+                            sslServerStream.RemoteCertificate.Subject,
+                            _clientCertificate.Subject
+                        );
                     }
                     else
                     {
-                        Assert.False(sslClientStream.IsMutuallyAuthenticated, "sslClientStream.IsMutuallyAuthenticated");
-                        Assert.False(sslServerStream.IsMutuallyAuthenticated, "sslServerStream.IsMutuallyAuthenticated");
+                        Assert.False(
+                            sslClientStream.IsMutuallyAuthenticated,
+                            "sslClientStream.IsMutuallyAuthenticated"
+                        );
+                        Assert.False(
+                            sslServerStream.IsMutuallyAuthenticated,
+                            "sslServerStream.IsMutuallyAuthenticated"
+                        );
 
                         Assert.Null(sslServerStream.RemoteCertificate);
                     }
 
-                    Assert.Equal(sslClientStream.RemoteCertificate.Subject, _serverCertificate.Subject);
+                    Assert.Equal(
+                        sslClientStream.RemoteCertificate.Subject,
+                        _serverCertificate.Subject
+                    );
                 }
             }
         }
@@ -206,12 +269,18 @@ namespace System.Net.Security.Tests
             string targetHost,
             X509CertificateCollection localCertificates,
             X509Certificate remoteCertificate,
-            string[] acceptableIssuers)
+            string[] acceptableIssuers
+        )
         {
             return _clientCertificate;
         }
 
-        private bool ServerSideRemoteClientCertificateValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        private bool ServerSideRemoteClientCertificateValidation(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             SslPolicyErrors expectedSslPolicyErrors = SslPolicyErrors.None;
 
@@ -241,7 +310,12 @@ namespace System.Net.Security.Tests
             return true;
         }
 
-        private bool ClientSideRemoteServerCertificateValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        private bool ClientSideRemoteServerCertificateValidation(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
             SslPolicyErrors expectedSslPolicyErrors = SslPolicyErrors.None;
 
@@ -266,14 +340,17 @@ namespace System.Net.Security.Tests
             _output.WriteLine("ValidateCertificateAndChain()");
 
             // Verify that the certificate is in the trustedChain.
-            _output.WriteLine($"cert: subject={cert.Subject}, issuer={cert.Issuer}, thumbprint={cert.Thumbprint}");
+            _output.WriteLine(
+                $"cert: subject={cert.Subject}, issuer={cert.Issuer}, thumbprint={cert.Thumbprint}"
+            );
             Assert.Equal(cert.Thumbprint, trustedChain.ChainElements[0].Certificate.Thumbprint);
 
             // Verify that the root certificate in the chain is the one that issued the received certificate.
             foreach (X509ChainElement element in trustedChain.ChainElements)
             {
                 _output.WriteLine(
-                    $"chain cert: subject={element.Certificate.Subject}, issuer={element.Certificate.Issuer}, thumbprint={element.Certificate.Thumbprint}");
+                    $"chain cert: subject={element.Certificate.Subject}, issuer={element.Certificate.Issuer}, thumbprint={element.Certificate.Thumbprint}"
+                );
             }
             Assert.Equal(cert.Issuer, trustedChain.ChainElements[1].Certificate.Subject);
         }

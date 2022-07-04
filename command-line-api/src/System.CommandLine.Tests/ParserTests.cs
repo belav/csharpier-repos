@@ -29,8 +29,7 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<bool>("--flag");
             var option2 = new Option<bool>("--flag2");
-            var result = new Parser(new RootCommand { option, option2 })
-                .Parse("--flag");
+            var result = new Parser(new RootCommand { option, option2 }).Parse("--flag");
 
             result.HasOption(option).Should().BeTrue();
             result.HasOption(option2).Should().BeFalse();
@@ -43,13 +42,7 @@ namespace System.CommandLine.Tests
 
             var optionTwo = new Option<bool>(new[] { "-t", "--two" });
 
-            var result = new Parser(
-                    new RootCommand
-                    {
-                        optionOne,
-                        optionTwo
-                    })
-                .Parse("-o -t");
+            var result = new Parser(new RootCommand { optionOne, optionTwo }).Parse("-o -t");
 
             result.HasOption(optionOne).Should().BeTrue();
             result.HasOption(optionTwo).Should().BeTrue();
@@ -65,9 +58,9 @@ namespace System.CommandLine.Tests
             var result = parser.Parse(prefix);
 
             result.Errors
-                  .Select(e => e.Message)
-                  .Should()
-                  .Contain(LocalizationResources.Instance.UnrecognizedCommandOrArgument(prefix));
+                .Select(e => e.Message)
+                .Should()
+                .Contain(LocalizationResources.Instance.UnrecognizedCommandOrArgument(prefix));
         }
 
         [Fact]
@@ -79,7 +72,10 @@ namespace System.CommandLine.Tests
 
             result.Errors.Should().BeEmpty();
 
-            result.FindResultFor(option).Tokens.Should().ContainSingle(a => a.Value == "some-value");
+            result
+                .FindResultFor(option)
+                .Tokens.Should()
+                .ContainSingle(a => a.Value == "some-value");
         }
 
         [Fact]
@@ -103,7 +99,10 @@ namespace System.CommandLine.Tests
 
             result.Errors.Should().BeEmpty();
 
-            result.FindResultFor(option).Tokens.Should().ContainSingle(a => a.Value == "some-value");
+            result
+                .FindResultFor(option)
+                .Tokens.Should()
+                .ContainSingle(a => a.Value == "some-value");
         }
 
         [Fact]
@@ -128,33 +127,30 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("the-command -xyz");
 
-            result.CommandResult
-                  .Children
-                  .Select(o => o.Symbol.Name)
-                  .Should()
-                  .BeEquivalentTo("x", "y", "z");
+            result.CommandResult.Children
+                .Select(o => o.Symbol.Name)
+                .Should()
+                .BeEquivalentTo("x", "y", "z");
         }
 
         [Fact]
         public void Options_short_forms_do_not_get_unbundled_if_unbundling_is_turned_off()
         {
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             new Command("the-command")
-                             {
-                                 new Option<bool>("-x"),
-                                 new Option<bool>("-y"),
-                                 new Option<bool>("-z")
-                             }
-                         })
-                         .EnablePosixBundling(false)
-                         .Build();
+            var parser = new CommandLineBuilder(
+                new RootCommand
+                {
+                    new Command("the-command")
+                    {
+                        new Option<bool>("-x"),
+                        new Option<bool>("-y"),
+                        new Option<bool>("-z")
+                    }
+                }
+            ).EnablePosixBundling(false).Build();
 
             var result = parser.Parse("the-command -xyz");
 
-            result.UnmatchedTokens
-                  .Should()
-                  .BeEquivalentTo("-xyz");
+            result.UnmatchedTokens.Should().BeEquivalentTo("-xyz");
         }
 
         [Fact]
@@ -167,15 +163,12 @@ namespace System.CommandLine.Tests
                     new Option<bool>("-x"),
                     new Option<bool>("-y"),
                     new Option<bool>("-z")
-                });
+                }
+            );
 
             var result = parser.Parse("the-command --xyz");
 
-            result.CommandResult
-                  .Children
-                  .Select(o => o.Symbol.Name)
-                  .Should()
-                  .BeEquivalentTo("xyz");
+            result.CommandResult.Children.Select(o => o.Symbol.Name).Should().BeEquivalentTo("xyz");
         }
 
         [Fact]
@@ -183,10 +176,7 @@ namespace System.CommandLine.Tests
         {
             var outer = new Command("outer");
             outer.AddOption(new Option<bool>("-a"));
-            var inner = new Command("inner")
-            {
-                new Argument<string[]>()
-            };
+            var inner = new Command("inner") { new Argument<string[]>() };
             inner.AddOption(new Option<bool>("-b"));
             inner.AddOption(new Option<bool>("-c"));
             outer.AddCommand(inner);
@@ -195,11 +185,7 @@ namespace System.CommandLine.Tests
 
             ParseResult result = parser.Parse("outer inner -abc");
 
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("-abc");
+            result.CommandResult.Tokens.Select(t => t.Value).Should().BeEquivalentTo("-abc");
         }
 
         [Fact]
@@ -209,21 +195,13 @@ namespace System.CommandLine.Tests
             var optionB = new Option<bool>("-b");
             var optionC = new Option<bool>("-c");
 
-            var command = new RootCommand
-            {
-                optionA,
-                optionB,
-                optionC
-            };
+            var command = new RootCommand { optionA, optionB, optionC };
 
             var result = command.Parse("-a -bc");
 
-            result.FindResultFor(optionA)
-                  .Tokens
-                  .Should()
-                  .ContainSingle(t => t.Value == "-bc");
+            result.FindResultFor(optionA).Tokens.Should().ContainSingle(t => t.Value == "-bc");
         }
-    
+
         [Fact]
         public void Last_bundled_option_can_accept_argument_with_no_separator()
         {
@@ -231,21 +209,13 @@ namespace System.CommandLine.Tests
             var optionB = new Option<string>("-b") { Arity = ArgumentArity.ZeroOrOne };
             var optionC = new Option<string>("-c") { Arity = ArgumentArity.ExactlyOne };
 
-            var command = new RootCommand
-            {
-                optionA,
-                optionB,
-                optionC
-            };
+            var command = new RootCommand { optionA, optionB, optionC };
 
             var result = command.Parse("-abcvalue");
             result.HasOption(optionA).Should().BeTrue();
             result.HasOption(optionB).Should().BeTrue();
 
-            result.FindResultFor(optionC)
-                .Tokens
-                .Should()
-                .ContainSingle(t => t.Value == "value");
+            result.FindResultFor(optionC).Tokens.Should().ContainSingle(t => t.Value == "value");
         }
 
         [Fact]
@@ -255,21 +225,13 @@ namespace System.CommandLine.Tests
             var optionB = new Option<string>("-b") { Arity = ArgumentArity.ZeroOrOne };
             var optionC = new Option<string>("-c") { Arity = ArgumentArity.ExactlyOne };
 
-            var command = new RootCommand
-            {
-                optionA,
-                optionB,
-                optionC
-            };
+            var command = new RootCommand { optionA, optionB, optionC };
 
             var result = command.Parse("-abc=value");
             result.HasOption(optionA).Should().BeTrue();
             result.HasOption(optionB).Should().BeTrue();
 
-            result.FindResultFor(optionC)
-                .Tokens
-                .Should()
-                .ContainSingle(t => t.Value == "value");
+            result.FindResultFor(optionC).Tokens.Should().ContainSingle(t => t.Value == "value");
         }
 
         [Fact]
@@ -279,21 +241,13 @@ namespace System.CommandLine.Tests
             var optionB = new Option<string>("-b") { Arity = ArgumentArity.ZeroOrOne };
             var optionC = new Option<string>("-c") { Arity = ArgumentArity.ExactlyOne };
 
-            var command = new RootCommand
-            {
-                optionA,
-                optionB,
-                optionC
-            };
+            var command = new RootCommand { optionA, optionB, optionC };
 
             var result = command.Parse("-abc:value");
             result.HasOption(optionA).Should().BeTrue();
             result.HasOption(optionB).Should().BeTrue();
 
-            result.FindResultFor(optionC)
-                .Tokens
-                .Should()
-                .ContainSingle(t => t.Value == "value");
+            result.FindResultFor(optionC).Tokens.Should().ContainSingle(t => t.Value == "value");
         }
 
         [Fact]
@@ -303,21 +257,13 @@ namespace System.CommandLine.Tests
             var optionB = new Option<string>("-b") { Arity = ArgumentArity.ZeroOrOne };
             var optionC = new Option<string>("-c") { Arity = ArgumentArity.ExactlyOne };
 
-            var command = new RootCommand
-            {
-                optionA,
-                optionB,
-                optionC
-            };
+            var command = new RootCommand { optionA, optionB, optionC };
 
             var result = command.Parse("-abvcalue");
             result.HasOption(optionA).Should().BeTrue();
             result.HasOption(optionB).Should().BeTrue();
 
-            result.FindResultFor(optionB)
-                .Tokens
-                .Should()
-                .ContainSingle(t => t.Value == "vcalue");
+            result.FindResultFor(optionB).Tokens.Should().ContainSingle(t => t.Value == "vcalue");
 
             result.HasOption(optionC).Should().BeFalse();
         }
@@ -327,23 +273,19 @@ namespace System.CommandLine.Tests
         {
             var animalsOption = new Option<string[]>(new[] { "-a", "--animals" });
             var vegetablesOption = new Option<string[]>(new[] { "-v", "--vegetables" });
-            var parser = new RootCommand
-            {
-                animalsOption,
-                vegetablesOption
-            };
+            var parser = new RootCommand { animalsOption, vegetablesOption };
 
             var result = parser.Parse("-a cat -v carrot -a dog");
 
-            result.FindResultFor(animalsOption)
-                .Tokens
-                .Select(t => t.Value)
+            result
+                .FindResultFor(animalsOption)
+                .Tokens.Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("cat", "dog");
 
-            result.FindResultFor(vegetablesOption)
-                .Tokens
-                .Select(t => t.Value)
+            result
+                .FindResultFor(vegetablesOption)
+                .Tokens.Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo("carrot");
         }
@@ -351,28 +293,27 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Options_can_be_specified_multiple_times_and_their_arguments_are_collated()
         {
-            var animalsOption = new Option<string[]>(new[] { "-a", "--animals" })
-                .FromAmong("dog", "cat", "sheep");
+            var animalsOption = new Option<string[]>(new[] { "-a", "--animals" }).FromAmong(
+                "dog",
+                "cat",
+                "sheep"
+            );
             var vegetablesOption = new Option<string[]>(new[] { "-v", "--vegetables" });
-            var parser = new Parser(
-                new Command("the-command") {
-                    animalsOption,
-                    vegetablesOption
-                });
+            var parser = new Parser(new Command("the-command") { animalsOption, vegetablesOption });
 
             var result = parser.Parse("the-command -a cat -v carrot -a dog");
 
-            result.FindResultFor(animalsOption)
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("cat", "dog");
+            result
+                .FindResultFor(animalsOption)
+                .Tokens.Select(t => t.Value)
+                .Should()
+                .BeEquivalentTo("cat", "dog");
 
-            result.FindResultFor(vegetablesOption)
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("carrot");
+            result
+                .FindResultFor(vegetablesOption)
+                .Tokens.Select(t => t.Value)
+                .Should()
+                .BeEquivalentTo("carrot");
         }
 
         [Fact]
@@ -381,34 +322,31 @@ namespace System.CommandLine.Tests
             var animalsOption = new Option<string[]>(new[] { "-a", "--animals" });
 
             var vegetablesOption = new Option<string[]>(new[] { "-v", "--vegetables" });
-            
+
             var parser = new Parser(
                 new Command("the-command")
                 {
                     animalsOption,
                     vegetablesOption,
                     new Argument<string[]>()
-                });
+                }
+            );
 
             var result = parser.Parse("the-command -a cat some-arg -v carrot");
 
-            result.FindResultFor(animalsOption)
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("cat");
+            result
+                .FindResultFor(animalsOption)
+                .Tokens.Select(t => t.Value)
+                .Should()
+                .BeEquivalentTo("cat");
 
-            result.FindResultFor(vegetablesOption)
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("carrot");
+            result
+                .FindResultFor(vegetablesOption)
+                .Tokens.Select(t => t.Value)
+                .Should()
+                .BeEquivalentTo("carrot");
 
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("some-arg");
+            result.CommandResult.Tokens.Select(t => t.Value).Should().BeEquivalentTo("some-arg");
         }
 
         [Fact]
@@ -424,18 +362,16 @@ namespace System.CommandLine.Tests
 
             var result = parser.Parse("outer --inner1 argument1 --inner2 argument2");
 
-            result.CommandResult
-                  .Children
-                  .Should()
-                  .ContainSingle(o =>
-                                     o.Symbol.Name == "inner1" &&
-                                     o.Tokens.Single().Value == "argument1");
-            result.CommandResult
-                  .Children
-                  .Should()
-                  .ContainSingle(o =>
-                                     o.Symbol.Name == "inner2" &&
-                                     o.Tokens.Single().Value == "argument2");
+            result.CommandResult.Children
+                .Should()
+                .ContainSingle(
+                    o => o.Symbol.Name == "inner1" && o.Tokens.Single().Value == "argument1"
+                );
+            result.CommandResult.Children
+                .Should()
+                .ContainSingle(
+                    o => o.Symbol.Name == "inner2" && o.Tokens.Single().Value == "argument2"
+                );
         }
 
         [Fact]
@@ -448,28 +384,31 @@ namespace System.CommandLine.Tests
             };
 
             // option before args
-            ParseResult result1 = command.Parse(
-                "move -X the-arg-for-option-x ARG1 ARG2");
+            ParseResult result1 = command.Parse("move -X the-arg-for-option-x ARG1 ARG2");
 
             // option between two args
-            ParseResult result2 = command.Parse(
-                "move ARG1 -X the-arg-for-option-x ARG2");
+            ParseResult result2 = command.Parse("move ARG1 -X the-arg-for-option-x ARG2");
 
             // option after args
-            ParseResult result3 = command.Parse(
-                "move ARG1 ARG2 -X the-arg-for-option-x");
+            ParseResult result3 = command.Parse("move ARG1 ARG2 -X the-arg-for-option-x");
 
             // all should be equivalent
-            result1.Should()
-                   .BeEquivalentTo(
-                       result2,
-                       x => x.IgnoringCyclicReferences()
-                             .Excluding(y => y.WhichGetterHas(CSharpAccessModifier.Internal)));
-            result1.Should()
-                   .BeEquivalentTo(
-                       result3,
-                       x => x.IgnoringCyclicReferences()
-                             .Excluding(y => y.WhichGetterHas(CSharpAccessModifier.Internal)));
+            result1
+                .Should()
+                .BeEquivalentTo(
+                    result2,
+                    x =>
+                        x.IgnoringCyclicReferences()
+                            .Excluding(y => y.WhichGetterHas(CSharpAccessModifier.Internal))
+                );
+            result1
+                .Should()
+                .BeEquivalentTo(
+                    result3,
+                    x =>
+                        x.IgnoringCyclicReferences()
+                            .Excluding(y => y.WhichGetterHas(CSharpAccessModifier.Internal))
+                );
         }
 
         [Theory]
@@ -485,11 +424,11 @@ namespace System.CommandLine.Tests
             var rawSplit = CommandLineStringSplitter.Instance.Split(commandLine);
 
             var command = new Command("the-command")
-                          {
-                              new Argument<string[]>(),
-                              new Option<string>("--one"),
-                              new Option<string[]>("--many")
-                          };
+            {
+                new Argument<string[]>(),
+                new Option<string>("--one"),
+                new Option<string[]>("--many")
+            };
 
             var result = command.Parse(commandLine);
 
@@ -500,13 +439,10 @@ namespace System.CommandLine.Tests
         public void An_outer_command_with_the_same_name_does_not_capture()
         {
             var command = new Command("one")
-                          {
-                              new Command("two")
-                              {
-                                  new Command("three")
-                              },
-                              new Command("three")
-                          };
+            {
+                new Command("two") { new Command("three") },
+                new Command("three")
+            };
 
             ParseResult result = command.Parse("one two three");
 
@@ -517,13 +453,10 @@ namespace System.CommandLine.Tests
         public void An_inner_command_with_the_same_name_does_not_capture()
         {
             var command = new Command("one")
-                          {
-                              new Command("two")
-                              {
-                                  new Command("three")
-                              },
-                              new Command("three")
-                          };
+            {
+                new Command("two") { new Command("three") },
+                new Command("three")
+            };
 
             ParseResult result = command.Parse("one three");
 
@@ -533,29 +466,17 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_nested_commands_all_accept_arguments_then_the_nearest_captures_the_arguments()
         {
-            var command = new Command(
-                "outer")
+            var command = new Command("outer")
             {
                 new Argument<string[]>(),
-                new Command("inner")
-                {
-                    new Argument<string[]>()
-                }
+                new Command("inner") { new Argument<string[]>() }
             };
 
             var result = command.Parse("outer arg1 inner arg2");
 
-            result.CommandResult
-                  .Parent
-                  .Tokens.Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("arg1");
+            result.CommandResult.Parent.Tokens.Select(t => t.Value).Should().BeEquivalentTo("arg1");
 
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("arg2");
+            result.CommandResult.Tokens.Select(t => t.Value).Should().BeEquivalentTo("arg2");
         }
 
         [Fact]
@@ -564,17 +485,11 @@ namespace System.CommandLine.Tests
             var command = new Command("outer")
             {
                 new Argument<string>(),
-                new Command("non-unique")
-                {
-                    new Argument<string>()
-                },
+                new Command("non-unique") { new Argument<string>() },
                 new Command("inner")
                 {
                     new Argument<string>(),
-                    new Command("non-unique")
-                    {
-                        new Argument<string>()
-                    }
+                    new Command("non-unique") { new Argument<string>() }
                 }
             };
 
@@ -587,31 +502,31 @@ namespace System.CommandLine.Tests
         public void When_child_option_will_not_accept_arg_then_parent_can()
         {
             var option = new Option<bool>("-x");
-            var command = new Command("the-command")
-                         {
-                             option,
-                             new Argument<string>()
-                         };
+            var command = new Command("the-command") { option, new Argument<string>() };
 
             var result = command.Parse("the-command -x the-argument");
 
             var optionResult = result.FindResultFor(option);
             optionResult.Tokens.Should().BeEmpty();
-            result.CommandResult.Tokens.Select(t => t.Value).Should().BeEquivalentTo("the-argument");
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
+                .Should()
+                .BeEquivalentTo("the-argument");
         }
 
         [Fact]
         public void When_parent_option_will_not_accept_arg_then_child_can()
         {
             var option = new Option<string>("-x");
-            var command = new Command("the-command")
-            {
-                option
-            };
+            var command = new Command("the-command") { option };
 
             var result = command.Parse("the-command -x the-argument");
 
-            result.FindResultFor(option).Tokens.Select(t => t.Value).Should().BeEquivalentTo("the-argument");
+            result
+                .FindResultFor(option)
+                .Tokens.Select(t => t.Value)
+                .Should()
+                .BeEquivalentTo("the-argument");
             result.CommandResult.Tokens.Should().BeEmpty();
         }
 
@@ -620,11 +535,7 @@ namespace System.CommandLine.Tests
         {
             var child = new Command("child");
 
-            var parent = new RootCommand
-            {
-                new Argument<string>(),
-                child
-            };
+            var parent = new RootCommand { new Argument<string>(), child };
             parent.Name = "parent";
 
             var result = parent.Parse("child");
@@ -640,10 +551,7 @@ namespace System.CommandLine.Tests
             var grandparent = new RootCommand
             {
                 new Argument<string>(),
-                new Command("parent")
-                {
-                    grandchild
-                }
+                new Command("parent") { grandchild }
             };
             grandparent.Name = "grandparent";
 
@@ -656,25 +564,15 @@ namespace System.CommandLine.Tests
         public void When_options_with_the_same_name_are_defined_on_parent_and_child_commands_and_specified_at_the_end_then_it_attaches_to_the_inner_command()
         {
             var outer = new Command("outer")
-                        {
-                            new Command("inner")
-                            {
-                                new Option<bool>("-x")
-                            },
-                            new Option<bool>("-x")
-                        };
+            {
+                new Command("inner") { new Option<bool>("-x") },
+                new Option<bool>("-x")
+            };
 
             ParseResult result = outer.Parse("outer inner -x");
 
-            result.CommandResult
-                  .Parent
-                  .Children
-                  .Should()
-                  .NotContain(o => o.Symbol.Name == "x");
-            result.CommandResult
-                  .Children
-                  .Should()
-                  .ContainSingle(o => o.Symbol.Name == "x");
+            result.CommandResult.Parent.Children.Should().NotContain(o => o.Symbol.Name == "x");
+            result.CommandResult.Children.Should().ContainSingle(o => o.Symbol.Name == "x");
         }
 
         [Fact]
@@ -688,15 +586,8 @@ namespace System.CommandLine.Tests
 
             var result = outer.Parse("outer -x inner");
 
-            result.CommandResult
-                  .Children
-                  .Should()
-                  .BeEmpty();
-            result.CommandResult
-                  .Parent
-                  .Children
-                  .Should()
-                  .ContainSingle(o => o.Symbol.Name == "x");
+            result.CommandResult.Children.Should().BeEmpty();
+            result.CommandResult.Parent.Children.Should().ContainSingle(o => o.Symbol.Name == "x");
         }
 
         [Fact]
@@ -705,27 +596,14 @@ namespace System.CommandLine.Tests
             var outer = new Command("outer")
             {
                 new Argument<string>(),
-                new Command("inner")
-                {
-                    new Argument<string>()
-                }
+                new Command("inner") { new Argument<string>() }
             };
 
             ParseResult result = outer.Parse("outer inner arg1 arg2");
 
-            result.CommandResult
-                  .Parent
-                  .Tokens
-                  .Should()
-                  .BeEmpty();
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("arg1");
-            result.UnmatchedTokens
-                  .Should()
-                  .BeEquivalentTo("arg2");
+            result.CommandResult.Parent.Tokens.Should().BeEmpty();
+            result.CommandResult.Tokens.Select(t => t.Value).Should().BeEquivalentTo("arg1");
+            result.UnmatchedTokens.Should().BeEquivalentTo("arg2");
         }
 
         [Fact]
@@ -735,20 +613,14 @@ namespace System.CommandLine.Tests
             var innerOption = new Option<string>("-x");
 
             var outer = new Command("outer")
-                        {
-                            new Command("inner")
-                            {
-                                innerOption
-                            },
-                            outerOption
-                        };
+            {
+                new Command("inner") { innerOption },
+                outerOption
+            };
 
             var result = outer.Parse("outer inner -x one -x two");
 
-            result.RootCommandResult
-                  .FindResultFor(outerOption)
-                  .Should()
-                  .BeNull();
+            result.RootCommandResult.FindResultFor(outerOption).Should().BeNull();
         }
 
         [Fact]
@@ -756,18 +628,16 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("the-command")
             {
-                new Command("complete")
-                {
-                    new Argument<string>(),
-                    new Option<int>("--position")
-                }
+                new Command("complete") { new Argument<string>(), new Option<int>("--position") }
             };
 
-            ParseResult result = command.Parse("the-command",
-                                               "complete",
-                                               "--position",
-                                               "7",
-                                               "the-command");
+            ParseResult result = command.Parse(
+                "the-command",
+                "complete",
+                "--position",
+                "7",
+                "the-command"
+            );
 
             CommandResult completeResult = result.CommandResult;
 
@@ -777,40 +647,30 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Absolute_unix_style_paths_are_lexed_correctly()
         {
-            var command =
-                @"rm ""/temp/the file.txt""";
+            var command = @"rm ""/temp/the file.txt""";
 
-            var parser = new Parser(new Command("rm")
-            {
-                new Argument<string[]>()
-            });
+            var parser = new Parser(new Command("rm") { new Argument<string[]>() });
 
             var result = parser.Parse(command);
 
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .OnlyContain(a => a == @"/temp/the file.txt");
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
+                .Should()
+                .OnlyContain(a => a == @"/temp/the file.txt");
         }
 
         [Fact]
         public void Absolute_Windows_style_paths_are_lexed_correctly()
         {
-            var command =
-                @"rm ""c:\temp\the file.txt\""";
+            var command = @"rm ""c:\temp\the file.txt\""";
 
-            var parser = new Parser(new Command("rm")
-            {
-                new Argument<string[]>()
-            });
+            var parser = new Parser(new Command("rm") { new Argument<string[]>() });
 
             ParseResult result = parser.Parse(command);
 
-            result.CommandResult
-                  .Tokens
-                  .Should()
-                  .OnlyContain(a => a.Value == @"c:\temp\the file.txt\");
+            result.CommandResult.Tokens
+                .Should()
+                .OnlyContain(a => a.Value == @"c:\temp\the file.txt\");
         }
 
         [Fact]
@@ -818,16 +678,11 @@ namespace System.CommandLine.Tests
         {
             var argument = new Argument<string>("the-arg", () => "default");
 
-            var command = new Command("command")
-            {
-                argument
-            };
+            var command = new Command("command") { argument };
 
             ParseResult result = command.Parse("command");
 
-            result.GetValueForArgument(argument)
-                  .Should()
-                  .Be("default");
+            result.GetValueForArgument(argument).Should().Be("default");
         }
 
         [Fact]
@@ -846,79 +701,53 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_an_option_with_a_default_value_is_not_matched_then_the_option_result_is_implicit()
         {
-            var option = new Option<string>(new[]{ "-o", "--option" }, () => "the-default");
+            var option = new Option<string>(new[] { "-o", "--option" }, () => "the-default");
 
-            var command = new Command("command")
-            {
-                option
-            };
+            var command = new Command("command") { option };
 
             var result = command.Parse("command");
 
-            result.FindResultFor(option)
-                  .IsImplicit
-                  .Should()
-                  .BeTrue();
+            result.FindResultFor(option).IsImplicit.Should().BeTrue();
         }
 
         [Fact]
         public void When_an_option_with_a_default_value_is_not_matched_then_there_are_no_tokens()
         {
-            var option = new Option<string>(
-                "-o", 
-                () => "the-default");
+            var option = new Option<string>("-o", () => "the-default");
 
-            var command = new Command("command")
-            {
-                option
-            };
+            var command = new Command("command") { option };
 
             var result = command.Parse("command");
 
-            result.FindResultFor(option)
-                  .Token
-                  .Should()
-                  .BeEquivalentTo(default(Token));
+            result.FindResultFor(option).Token.Should().BeEquivalentTo(default(Token));
         }
 
         [Fact]
         public void When_an_argument_with_a_default_value_is_not_matched_then_there_are_no_tokens()
         {
-            var argument = new Argument<string>(
-                "o", 
-                () => "the-default");
+            var argument = new Argument<string>("o", () => "the-default");
 
-            var command = new Command("command")
-            {
-                argument
-            };
+            var command = new Command("command") { argument };
             var result = command.Parse("command");
 
-            result.FindResultFor(argument)
-                  .Tokens
-                  .Should()
-                  .BeEmpty();
+            result.FindResultFor(argument).Tokens.Should().BeEmpty();
         }
 
         [Fact]
         public void Command_default_argument_value_does_not_override_parsed_value()
         {
-            var argument = new Argument<DirectoryInfo>(() => new DirectoryInfo(Directory.GetCurrentDirectory()))
+            var argument = new Argument<DirectoryInfo>(
+                () => new DirectoryInfo(Directory.GetCurrentDirectory())
+            )
             {
                 Name = "the-arg"
             };
 
-            var command = new Command("inner")
-            {
-                argument
-            };
+            var command = new Command("inner") { argument };
 
             var result = command.Parse("the-directory");
 
-            result.GetValueForArgument(argument)
-                  ?.Name
-                  .Should()
-                  .Be("the-directory");
+            result.GetValueForArgument(argument)?.Name.Should().Be("the-directory");
         }
 
         [Fact]
@@ -926,49 +755,34 @@ namespace System.CommandLine.Tests
         {
             var outer = new Command("outer")
             {
-                new Command("inner")
-                {
-                    new Argument<string[]>
-                    {
-                        Arity = ArgumentArity.OneOrMore
-                    }
-                }
+                new Command("inner") { new Argument<string[]> { Arity = ArgumentArity.OneOrMore } }
             };
 
             ParseResult result = outer.Parse("outer inner -p:RandomThing=random");
 
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("-p:RandomThing=random");
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
+                .Should()
+                .BeEquivalentTo("-p:RandomThing=random");
         }
 
         [Fact]
         public void The_default_behavior_of_unmatched_tokens_resulting_in_errors_can_be_turned_off()
         {
-            var command = new Command("the-command")
-            {
-                new Argument<string>()
-            };
+            var command = new Command("the-command") { new Argument<string>() };
             command.TreatUnmatchedTokensAsErrors = false;
 
             ParseResult result = command.Parse("the-command arg1 arg2");
 
             result.Errors.Should().BeEmpty();
 
-            result.UnmatchedTokens
-                  .Should()
-                  .BeEquivalentTo("arg2");
+            result.UnmatchedTokens.Should().BeEquivalentTo("arg2");
         }
 
         [Fact]
         public void Option_and_Command_can_have_the_same_alias()
         {
-            var innerCommand = new Command("inner")
-            {
-                new Argument<string[]>()
-            };
+            var innerCommand = new Command("inner") { new Argument<string[]>() };
 
             var option = new Option<bool>("--inner");
 
@@ -981,30 +795,19 @@ namespace System.CommandLine.Tests
 
             var parser = new Parser(outerCommand);
 
-            parser.Parse("outer inner")
-                  .CommandResult
-                  .Command
-                  .Should()
-                  .BeSameAs(innerCommand);
+            parser.Parse("outer inner").CommandResult.Command.Should().BeSameAs(innerCommand);
 
-            parser.Parse("outer --inner")
-                  .CommandResult
-                  .Command
-                  .Should()
-                  .BeSameAs(outerCommand);
+            parser.Parse("outer --inner").CommandResult.Command.Should().BeSameAs(outerCommand);
 
-            parser.Parse("outer --inner inner")
-                  .CommandResult
-                  .Command
-                  .Should()
-                  .BeSameAs(innerCommand);
+            parser
+                .Parse("outer --inner inner")
+                .CommandResult.Command.Should()
+                .BeSameAs(innerCommand);
 
-            parser.Parse("outer --inner inner")
-                  .CommandResult
-                  .Parent
-                  .Children
-                  .Should()
-                  .Contain(c => c.Symbol == option);
+            parser
+                .Parse("outer --inner inner")
+                .CommandResult.Parent.Children.Should()
+                .Contain(c => c.Symbol == option);
         }
 
         [Fact]
@@ -1013,22 +816,18 @@ namespace System.CommandLine.Tests
             var option1 = new Option<bool>(new[] { "-a" });
             var option2 = new Option<bool>(new[] { "--a" });
 
-            var parser = new RootCommand
-            {
-                option1, 
-                option2
-            };
+            var parser = new RootCommand { option1, option2 };
 
-            parser.Parse("-a").CommandResult
-                  .Children
-                  .Select(s => s.Symbol)
-                  .Should()
-                  .BeEquivalentTo(option1);
-            parser.Parse("--a").CommandResult
-                  .Children
-                  .Select(s => s.Symbol)
-                  .Should()
-                  .BeEquivalentTo(option2);
+            parser
+                .Parse("-a")
+                .CommandResult.Children.Select(s => s.Symbol)
+                .Should()
+                .BeEquivalentTo(option1);
+            parser
+                .Parse("--a")
+                .CommandResult.Children.Select(s => s.Symbol)
+                .Should()
+                .BeEquivalentTo(option2);
         }
 
         [Theory]
@@ -1040,7 +839,8 @@ namespace System.CommandLine.Tests
         [InlineData("-x:", "\"\"")]
         public void When_an_option_argument_is_enclosed_in_double_quotes_its_value_retains_the_quotes(
             string arg1,
-            string arg2)
+            string arg2
+        )
         {
             var option = new Option<string[]>("-x");
 
@@ -1048,8 +848,7 @@ namespace System.CommandLine.Tests
 
             parseResult
                 .FindResultFor(option)
-                .Tokens
-                .Select(t => t.Value)
+                .Tokens.Select(t => t.Value)
                 .Should()
                 .BeEquivalentTo(new[] { arg2 });
         }
@@ -1059,10 +858,7 @@ namespace System.CommandLine.Tests
         {
             var rootCommand = new RootCommand
             {
-                new Command("subcommand")
-                {
-                    new Option<DirectoryInfo>("--directory")
-                }
+                new Command("subcommand") { new Option<DirectoryInfo>("--directory") }
             };
 
             var args = new[] { "subcommand", "--directory:", @"c:\" };
@@ -1072,24 +868,22 @@ namespace System.CommandLine.Tests
             result.Errors.Should().BeEmpty();
 
             result.Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentSequenceTo(new[] { "subcommand", "--directory", @"c:\" });
+                .Select(t => t.Value)
+                .Should()
+                .BeEquivalentSequenceTo(new[] { "subcommand", "--directory", @"c:\" });
         }
 
         [Theory]
         [InlineData("-x -y")]
         [InlineData("-x=-y")]
         [InlineData("-x:-y")]
-        public void Option_arguments_can_start_with_prefixes_that_make_them_look_like_options(string input)
+        public void Option_arguments_can_start_with_prefixes_that_make_them_look_like_options(
+            string input
+        )
         {
             var optionX = new Option<string>("-x");
 
-            var command = new Command("command")
-            {
-                optionX,
-                new Option<string>("-z")
-            };
+            var command = new Command("command") { optionX, new Option<string>("-z") };
 
             var result = command.Parse(input);
 
@@ -1097,7 +891,7 @@ namespace System.CommandLine.Tests
 
             valueForOption.Should().Be("-y");
         }
-        
+
         [Fact]
         public void Option_arguments_can_start_with_prefixes_that_make_them_look_like_bundled_options()
         {
@@ -1105,12 +899,7 @@ namespace System.CommandLine.Tests
             var optionB = new Option<bool>("-b");
             var optionC = new Option<bool>("-c");
 
-            var command = new RootCommand
-            {
-                optionA,
-                optionB,
-                optionC
-            };
+            var command = new RootCommand { optionA, optionB, optionC };
 
             var result = command.Parse("-a -bc");
 
@@ -1123,11 +912,7 @@ namespace System.CommandLine.Tests
         public void Option_arguments_can_match_subcommands()
         {
             var optionA = new Option<string>("-a");
-            var root = new RootCommand
-            {
-                new Command("subcommand"),
-                optionA
-            };
+            var root = new RootCommand { new Command("subcommand"), optionA };
 
             var result = root.Parse("-a subcommand");
 
@@ -1141,36 +926,29 @@ namespace System.CommandLine.Tests
         public void Arguments_can_match_subcommands()
         {
             var argument = new Argument<string[]>();
-            var subcommand = new Command("subcommand")
-            {
-                argument
-            };
-            var root = new RootCommand
-            {
-                subcommand
-            };
+            var subcommand = new Command("subcommand") { argument };
+            var root = new RootCommand { subcommand };
 
             var result = root.Parse("subcommand one two three subcommand four");
 
             result.CommandResult.Command.Should().BeSameAs(subcommand);
 
-            result.GetValueForArgument(argument)
-                  .Should()
-                  .BeEquivalentSequenceTo("one", "two", "three", "subcommand", "four");
+            result
+                .GetValueForArgument(argument)
+                .Should()
+                .BeEquivalentSequenceTo("one", "two", "three", "subcommand", "four");
         }
 
         [Theory]
         [InlineData("-x=-y")]
         [InlineData("-x:-y")]
-        public void Option_arguments_can_match_the_aliases_of_sibling_options_when_non_space_argument_delimiter_is_used(string input)
+        public void Option_arguments_can_match_the_aliases_of_sibling_options_when_non_space_argument_delimiter_is_used(
+            string input
+        )
         {
             var optionX = new Option<string>("-x");
 
-            var command = new Command("command")
-            {
-                optionX,
-                new Option<string>("-y")
-            };
+            var command = new Command("command") { optionX, new Option<string>("-y") };
 
             var result = command.Parse(input);
 
@@ -1185,10 +963,7 @@ namespace System.CommandLine.Tests
         {
             var optionX = new Option<string>("-x");
 
-            var command = new RootCommand
-            {
-                optionX
-            };
+            var command = new RootCommand { optionX };
 
             var result = command.Parse("-x -x");
 
@@ -1209,11 +984,7 @@ namespace System.CommandLine.Tests
             var optX = new Option<bool>("-x");
             var optY = new Option<bool>("-y");
 
-            var root = new RootCommand("parent")
-            {
-                optX,
-                optY,
-            };
+            var root = new RootCommand("parent") { optX, optY, };
 
             var result = root.Parse(commandLine);
 
@@ -1229,11 +1000,7 @@ namespace System.CommandLine.Tests
             var optionX = new Option<string[]>("-x");
             var optionY = new Option<string[]>("-y");
 
-            var command = new RootCommand
-            {
-                optionX,
-                optionY
-            };
+            var command = new RootCommand { optionX, optionY };
 
             var result = command.Parse("-x -x -x -y -y -x -y -y -y -x -x -y");
 
@@ -1249,11 +1016,7 @@ namespace System.CommandLine.Tests
             var optionX = new Option<string>("-x");
             var optionY = new Option<bool>("-y");
 
-            var command = new RootCommand
-            {
-                optionX,
-                optionY
-            };
+            var command = new RootCommand { optionX, optionY };
 
             var result = command.Parse("-yxx");
 
@@ -1266,11 +1029,7 @@ namespace System.CommandLine.Tests
             var nameArg = new Argument<string>("name");
             var columnsArg = new Argument<IEnumerable<string>>("columns");
 
-            var command = new Command("add", "Adds a new series")
-            {
-                nameArg,
-                columnsArg
-            };
+            var command = new Command("add", "Adds a new series") { nameArg, columnsArg };
 
             var result = command.Parse("name one two three");
 
@@ -1293,10 +1052,7 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<bool>("-v");
 
-            var command = new Command("command")
-            {
-                option
-            };
+            var command = new Command("command") { option };
 
             var result = command.Parse("-v an-argument");
 
@@ -1306,10 +1062,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_a_command_line_has_unmatched_tokens_they_are_not_applied_to_subsequent_options()
         {
-            var command = new Command("command")
-            {
-                TreatUnmatchedTokensAsErrors = false
-            };
+            var command = new Command("command") { TreatUnmatchedTokensAsErrors = false };
             var optionX = new Option<string>("-x");
             command.AddOption(optionX);
             var optionY = new Option<string>("-y");
@@ -1335,55 +1088,43 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Command_argument_arity_can_be_a_fixed_value_greater_than_1()
         {
-            var argument = new Argument<string[]>
-            {
-                Arity = new ArgumentArity(3, 3)
-            };
-            var command = new Command("the-command")
-            {
-                argument
-            };
+            var argument = new Argument<string[]> { Arity = new ArgumentArity(3, 3) };
+            var command = new Command("the-command") { argument };
 
-            command.Parse("1 2 3")
-                   .CommandResult
-                   .Tokens
-                   .Should()
-                   .BeEquivalentTo(
-                       new Token("1", TokenType.Argument, argument),
-                       new Token("2", TokenType.Argument, argument),
-                       new Token("3", TokenType.Argument, argument));
+            command
+                .Parse("1 2 3")
+                .CommandResult.Tokens.Should()
+                .BeEquivalentTo(
+                    new Token("1", TokenType.Argument, argument),
+                    new Token("2", TokenType.Argument, argument),
+                    new Token("3", TokenType.Argument, argument)
+                );
         }
 
         [Fact]
         public void Command_argument_arity_can_be_a_range_with_a_lower_bound_greater_than_1()
         {
-            var argument = new Argument<string[]>
-            {
-                Arity = new ArgumentArity(3, 5)
-            };
-            var command = new Command("the-command")
-            {
-                argument
-            };
+            var argument = new Argument<string[]> { Arity = new ArgumentArity(3, 5) };
+            var command = new Command("the-command") { argument };
 
-            command.Parse("1 2 3")
-                   .CommandResult
-                   .Tokens
-                   .Should()
-                   .BeEquivalentTo(
-                       new Token("1", TokenType.Argument, argument),
-                       new Token("2", TokenType.Argument, argument),
-                       new Token("3", TokenType.Argument, argument));
-            command.Parse("1 2 3 4 5")
-                   .CommandResult
-                   .Tokens
-                   .Should()
-                   .BeEquivalentTo(
-                       new Token("1", TokenType.Argument, argument),
-                       new Token("2", TokenType.Argument, argument),
-                       new Token("3", TokenType.Argument, argument),
-                       new Token("4", TokenType.Argument, argument),
-                       new Token("5", TokenType.Argument, argument));
+            command
+                .Parse("1 2 3")
+                .CommandResult.Tokens.Should()
+                .BeEquivalentTo(
+                    new Token("1", TokenType.Argument, argument),
+                    new Token("2", TokenType.Argument, argument),
+                    new Token("3", TokenType.Argument, argument)
+                );
+            command
+                .Parse("1 2 3 4 5")
+                .CommandResult.Tokens.Should()
+                .BeEquivalentTo(
+                    new Token("1", TokenType.Argument, argument),
+                    new Token("2", TokenType.Argument, argument),
+                    new Token("3", TokenType.Argument, argument),
+                    new Token("4", TokenType.Argument, argument),
+                    new Token("5", TokenType.Argument, argument)
+                );
         }
 
         [Fact]
@@ -1391,18 +1132,17 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("the-command")
             {
-                new Argument<string[]>
-                {
-                    Arity = new ArgumentArity(2, 3)
-                }
+                new Argument<string[]> { Arity = new ArgumentArity(2, 3) }
             };
 
             var result = command.Parse("1");
 
             result.Errors
-                  .Select(e => e.Message)
-                  .Should()
-                  .Contain(LocalizationResources.Instance.RequiredArgumentMissing(result.CommandResult));
+                .Select(e => e.Message)
+                .Should()
+                .Contain(
+                    LocalizationResources.Instance.RequiredArgumentMissing(result.CommandResult)
+                );
         }
 
         [Fact]
@@ -1410,39 +1150,33 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("the-command")
             {
-                new Argument<string[]>
-                {
-                    Arity = new ArgumentArity(2, 3)
-                }
+                new Argument<string[]> { Arity = new ArgumentArity(2, 3) }
             };
 
             ParseResult parseResult = command.Parse("1 2 3 4");
 
-            parseResult
-                   .Errors
-                   .Select(e => e.Message)
-                   .Should()
-                   .Contain(LocalizationResources.Instance.UnrecognizedCommandOrArgument("4"));
+            parseResult.Errors
+                .Select(e => e.Message)
+                .Should()
+                .Contain(LocalizationResources.Instance.UnrecognizedCommandOrArgument("4"));
         }
 
         [Fact]
         public void Option_argument_arity_can_be_a_fixed_value_greater_than_1()
         {
-            var option = new Option<int[]>("-x") { Arity = new ArgumentArity(3, 3)};
+            var option = new Option<int[]>("-x") { Arity = new ArgumentArity(3, 3) };
 
-            var command = new Command("the-command")
-            {
-                option
-            };
+            var command = new Command("the-command") { option };
 
-            command.Parse("-x 1 -x 2 -x 3")
-                   .FindResultFor(option)
-                   .Tokens
-                   .Should()
-                   .BeEquivalentTo(
-                       new Token("1", TokenType.Argument, default),
-                       new Token("2", TokenType.Argument, default),
-                       new Token("3", TokenType.Argument, default));
+            command
+                .Parse("-x 1 -x 2 -x 3")
+                .FindResultFor(option)
+                .Tokens.Should()
+                .BeEquivalentTo(
+                    new Token("1", TokenType.Argument, default),
+                    new Token("2", TokenType.Argument, default),
+                    new Token("3", TokenType.Argument, default)
+                );
         }
 
         [Fact]
@@ -1450,29 +1184,28 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<string[]>("-x") { Arity = new ArgumentArity(3, 5) };
 
-            var command = new Command("the-command")
-            {
-                option
-            };
+            var command = new Command("the-command") { option };
 
-            command.Parse("-x 1 -x 2 -x 3")
-                   .FindResultFor(option)
-                   .Tokens
-                   .Should()
-                   .BeEquivalentTo(
-                       new Token("1", TokenType.Argument, default),
-                       new Token("2", TokenType.Argument, default),
-                       new Token("3", TokenType.Argument, default));
-            command.Parse("-x 1 -x 2 -x 3 -x 4 -x 5")
-                   .FindResultFor(option)
-                   .Tokens
-                   .Should()
-                   .BeEquivalentTo(
-                       new Token("1", TokenType.Argument, default),
-                       new Token("2", TokenType.Argument, default),
-                       new Token("3", TokenType.Argument, default),
-                       new Token("4", TokenType.Argument, default),
-                       new Token("5", TokenType.Argument, default));
+            command
+                .Parse("-x 1 -x 2 -x 3")
+                .FindResultFor(option)
+                .Tokens.Should()
+                .BeEquivalentTo(
+                    new Token("1", TokenType.Argument, default),
+                    new Token("2", TokenType.Argument, default),
+                    new Token("3", TokenType.Argument, default)
+                );
+            command
+                .Parse("-x 1 -x 2 -x 3 -x 4 -x 5")
+                .FindResultFor(option)
+                .Tokens.Should()
+                .BeEquivalentTo(
+                    new Token("1", TokenType.Argument, default),
+                    new Token("2", TokenType.Argument, default),
+                    new Token("3", TokenType.Argument, default),
+                    new Token("4", TokenType.Argument, default),
+                    new Token("5", TokenType.Argument, default)
+                );
         }
 
         [Fact]
@@ -1480,17 +1213,18 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<int[]>("-x") { Arity = new ArgumentArity(2, 3) };
 
-            var command = new Command("the-command")
-            {
-                option
-            };
+            var command = new Command("the-command") { option };
 
             var result = command.Parse("-x 1");
 
             result.Errors
-                  .Select(e => e.Message)
-                  .Should()
-                  .Contain(LocalizationResources.Instance.RequiredArgumentMissing(result.CommandResult.FindResultFor(option)));
+                .Select(e => e.Message)
+                .Should()
+                .Contain(
+                    LocalizationResources.Instance.RequiredArgumentMissing(
+                        result.CommandResult.FindResultFor(option)
+                    )
+                );
         }
 
         [Fact]
@@ -1498,31 +1232,29 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("the-command")
             {
-                new Option<int[]>("-x") { Arity = new ArgumentArity(2, 3)}
+                new Option<int[]>("-x") { Arity = new ArgumentArity(2, 3) }
             };
 
-            command.Parse("-x 1 2 3 4")
-                   .Errors
-                   .Select(e => e.Message)
-                   .Should()
-                   .Contain(LocalizationResources.Instance.UnrecognizedCommandOrArgument("4"));
+            command
+                .Parse("-x 1 2 3 4")
+                .Errors.Select(e => e.Message)
+                .Should()
+                .Contain(LocalizationResources.Instance.UnrecognizedCommandOrArgument("4"));
         }
-        
+
         [Fact]
         public void Tokens_are_not_split_if_the_part_before_the_delimiter_is_not_an_option()
         {
-            var rootCommand = new RootCommand
-            {
-                Name = "jdbc"
-            };
+            var rootCommand = new RootCommand { Name = "jdbc" };
             rootCommand.Add(new Option<string>("url"));
-            var result = rootCommand.Parse("jdbc url \"jdbc:sqlserver://10.0.0.2;databaseName=main\"");
+            var result = rootCommand.Parse(
+                "jdbc url \"jdbc:sqlserver://10.0.0.2;databaseName=main\""
+            );
 
             result.Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("url",
-                                  "jdbc:sqlserver://10.0.0.2;databaseName=main");
+                .Select(t => t.Value)
+                .Should()
+                .BeEquivalentTo("url", "jdbc:sqlserver://10.0.0.2;databaseName=main");
         }
 
         [Fact]
@@ -1534,16 +1266,9 @@ namespace System.CommandLine.Tests
 
             var argument2 = new Argument<string[]>("arg2");
 
-            var command = new Command("subcommand")
-            {
-                argument1,
-                argument2
-            };
+            var command = new Command("subcommand") { argument1, argument2 };
 
-            var rootCommand = new RootCommand
-            {
-                command
-            };
+            var rootCommand = new RootCommand { command };
 
             var parseResult = rootCommand.Parse("subcommand arg1 arg2");
 
@@ -1558,10 +1283,7 @@ namespace System.CommandLine.Tests
         public void Parsed_value_of_empty_string_arg_is_an_empty_string(string arg1, string arg2)
         {
             var option = new Option<string>("--exec-prefix", getDefaultValue: () => "/usr/local");
-            var rootCommand = new RootCommand
-            {
-                option
-            };
+            var rootCommand = new RootCommand { option };
 
             var result = rootCommand.Parse(new[] { arg1, arg2 });
 

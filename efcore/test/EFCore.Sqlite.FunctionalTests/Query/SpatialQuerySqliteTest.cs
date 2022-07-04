@@ -6,8 +6,10 @@ namespace Microsoft.EntityFrameworkCore.Query;
 [SpatialiteRequired]
 public class SpatialQuerySqliteTest : SpatialQueryRelationalTestBase<SpatialQuerySqliteFixture>
 {
-    public SpatialQuerySqliteTest(SpatialQuerySqliteFixture fixture, ITestOutputHelper testOutputHelper)
-        : base(fixture)
+    public SpatialQuerySqliteTest(
+        SpatialQuerySqliteFixture fixture,
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -28,7 +30,8 @@ FROM ""LineStringEntity"" AS ""l""",
 FROM ""PolygonEntity"" AS ""p""",
             //
             @"SELECT ""m"".""Id"", ""m"".""MultiLineString""
-FROM ""MultiLineStringEntity"" AS ""m""");
+FROM ""MultiLineStringEntity"" AS ""m"""
+        );
     }
 
     public override async Task Distance_on_converted_geometry_type(bool async)
@@ -39,7 +42,8 @@ FROM ""MultiLineStringEntity"" AS ""m""");
             @"@__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Nullable = false) (Size = 60) (DbType = String)
 
 SELECT ""g"".""Id"", Distance(""g"".""Location"", @__point_0) AS ""Distance""
-FROM ""GeoPointEntity"" AS ""g""");
+FROM ""GeoPointEntity"" AS ""g"""
+        );
     }
 
     public override async Task Distance_on_converted_geometry_type_lhs(bool async)
@@ -50,7 +54,8 @@ FROM ""GeoPointEntity"" AS ""g""");
             @"@__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Nullable = false) (Size = 60) (DbType = String)
 
 SELECT ""g"".""Id"", Distance(@__point_0, ""g"".""Location"") AS ""Distance""
-FROM ""GeoPointEntity"" AS ""g""");
+FROM ""GeoPointEntity"" AS ""g"""
+        );
     }
 
     public override async Task Distance_on_converted_geometry_type_constant(bool async)
@@ -59,7 +64,8 @@ FROM ""GeoPointEntity"" AS ""g""");
 
         AssertSql(
             @"SELECT ""g"".""Id"", Distance(""g"".""Location"", GeomFromText('POINT (0 1)')) AS ""Distance""
-FROM ""GeoPointEntity"" AS ""g""");
+FROM ""GeoPointEntity"" AS ""g"""
+        );
     }
 
     public override async Task Distance_on_converted_geometry_type_constant_lhs(bool async)
@@ -68,7 +74,8 @@ FROM ""GeoPointEntity"" AS ""g""");
 
         AssertSql(
             @"SELECT ""g"".""Id"", Distance(GeomFromText('POINT (0 1)'), ""g"".""Location"") AS ""Distance""
-FROM ""GeoPointEntity"" AS ""g""");
+FROM ""GeoPointEntity"" AS ""g"""
+        );
     }
 
     public override async Task WithConversion(bool async)
@@ -77,7 +84,8 @@ FROM ""GeoPointEntity"" AS ""g""");
 
         AssertSql(
             @"SELECT ""g"".""Id"", ""g"".""Location""
-FROM ""GeoPointEntity"" AS ""g""");
+FROM ""GeoPointEntity"" AS ""g"""
+        );
     }
 
     public override async Task Area(bool async)
@@ -86,7 +94,8 @@ FROM ""GeoPointEntity"" AS ""g""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", Area(""p"".""Polygon"") AS ""Area""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task AsBinary(bool async)
@@ -95,7 +104,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", AsBinary(""p"".""Point"") AS ""Binary""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task AsBinary_with_null_check(bool async)
@@ -107,7 +117,8 @@ FROM ""PointEntity"" AS ""p""");
     WHEN ""p"".""Point"" IS NULL THEN NULL
     ELSE AsBinary(""p"".""Point"")
 END AS ""Binary""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task AsText(bool async)
@@ -116,7 +127,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", AsText(""p"".""Point"") AS ""Text""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Boundary(bool async)
@@ -125,7 +137,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", Boundary(""p"".""Polygon"") AS ""Boundary""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Buffer(bool async)
@@ -134,7 +147,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", Buffer(""p"".""Polygon"", 1.0) AS ""Buffer""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Buffer_quadrantSegments(bool async)
@@ -143,7 +157,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", Buffer(""p"".""Polygon"", 1.0, 8) AS ""Buffer""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Centroid(bool async)
@@ -152,7 +167,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", Centroid(""p"".""Polygon"") AS ""Centroid""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Contains(bool async)
@@ -165,7 +181,8 @@ FROM ""PolygonEntity"" AS ""p""");
 SELECT ""p"".""Id"", CASE
     WHEN ""p"".""Polygon"" IS NOT NULL THEN Contains(""p"".""Polygon"", @__point_0)
 END AS ""Contains""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task ConvexHull(bool async)
@@ -174,7 +191,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", ConvexHull(""p"".""Polygon"") AS ""ConvexHull""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task IGeometryCollection_Count(bool async)
@@ -183,7 +201,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""m"".""Id"", NumGeometries(""m"".""MultiLineString"") AS ""Count""
-FROM ""MultiLineStringEntity"" AS ""m""");
+FROM ""MultiLineStringEntity"" AS ""m"""
+        );
     }
 
     public override async Task LineString_Count(bool async)
@@ -192,7 +211,8 @@ FROM ""MultiLineStringEntity"" AS ""m""");
 
         AssertSql(
             @"SELECT ""l"".""Id"", NumPoints(""l"".""LineString"") AS ""Count""
-FROM ""LineStringEntity"" AS ""l""");
+FROM ""LineStringEntity"" AS ""l"""
+        );
     }
 
     public override async Task CoveredBy(bool async)
@@ -205,7 +225,8 @@ FROM ""LineStringEntity"" AS ""l""");
 SELECT ""p"".""Id"", CASE
     WHEN ""p"".""Point"" IS NOT NULL THEN CoveredBy(""p"".""Point"", @__polygon_0)
 END AS ""CoveredBy""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Covers(bool async)
@@ -218,7 +239,8 @@ FROM ""PointEntity"" AS ""p""");
 SELECT ""p"".""Id"", CASE
     WHEN ""p"".""Polygon"" IS NOT NULL THEN Covers(""p"".""Polygon"", @__point_0)
 END AS ""Covers""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Crosses(bool async)
@@ -231,7 +253,8 @@ FROM ""PolygonEntity"" AS ""p""");
 SELECT ""l"".""Id"", CASE
     WHEN ""l"".""LineString"" IS NOT NULL THEN Crosses(""l"".""LineString"", @__lineString_0)
 END AS ""Crosses""
-FROM ""LineStringEntity"" AS ""l""");
+FROM ""LineStringEntity"" AS ""l"""
+        );
     }
 
     public override async Task Difference(bool async)
@@ -242,7 +265,8 @@ FROM ""LineStringEntity"" AS ""l""");
             @"@__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
 
 SELECT ""p"".""Id"", Difference(""p"".""Polygon"", @__polygon_0) AS ""Difference""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Dimension(bool async)
@@ -251,7 +275,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", Dimension(""p"".""Point"") AS ""Dimension""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Disjoint_with_cast_to_nullable(bool async)
@@ -264,7 +289,8 @@ FROM ""PointEntity"" AS ""p""");
 SELECT ""p"".""Id"", CASE
     WHEN ""p"".""Polygon"" IS NOT NULL THEN Disjoint(""p"".""Polygon"", @__point_0)
 END AS ""Disjoint""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Disjoint_with_null_check(bool async)
@@ -278,7 +304,8 @@ SELECT ""p"".""Id"", CASE
     WHEN ""p"".""Polygon"" IS NULL THEN NULL
     WHEN ""p"".""Polygon"" IS NOT NULL THEN Disjoint(""p"".""Polygon"", @__point_0)
 END AS ""Disjoint""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Distance_with_null_check(bool async)
@@ -289,7 +316,8 @@ FROM ""PolygonEntity"" AS ""p""");
             @"@__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Size = 60) (DbType = String)
 
 SELECT ""p"".""Id"", Distance(""p"".""Point"", @__point_0) AS ""Distance""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Distance_with_cast_to_nullable(bool async)
@@ -300,7 +328,8 @@ FROM ""PointEntity"" AS ""p""");
             @"@__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Size = 60) (DbType = String)
 
 SELECT ""p"".""Id"", Distance(""p"".""Point"", @__point_0) AS ""Distance""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Distance_geometry(bool async)
@@ -311,7 +340,8 @@ FROM ""PointEntity"" AS ""p""");
             @"@__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Size = 60) (DbType = String)
 
 SELECT ""p"".""Id"", Distance(""p"".""Geometry"", @__point_0) AS ""Distance""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Distance_constant(bool async)
@@ -320,7 +350,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", Distance(""p"".""Point"", GeomFromText('POINT (0 1)')) AS ""Distance""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Distance_constant_srid_4326(bool async)
@@ -329,7 +360,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", Distance(""p"".""Point"", GeomFromText('POINT (1 1)', 4326)) AS ""Distance""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Distance_constant_lhs(bool async)
@@ -338,7 +370,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", Distance(GeomFromText('POINT (0 1)'), ""p"".""Point"") AS ""Distance""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task EndPoint(bool async)
@@ -347,7 +380,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""l"".""Id"", EndPoint(""l"".""LineString"") AS ""EndPoint""
-FROM ""LineStringEntity"" AS ""l""");
+FROM ""LineStringEntity"" AS ""l"""
+        );
     }
 
     public override async Task Envelope(bool async)
@@ -356,7 +390,8 @@ FROM ""LineStringEntity"" AS ""l""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", Envelope(""p"".""Polygon"") AS ""Envelope""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task EqualsTopologically(bool async)
@@ -369,7 +404,8 @@ FROM ""PolygonEntity"" AS ""p""");
 SELECT ""p"".""Id"", CASE
     WHEN ""p"".""Point"" IS NOT NULL THEN Equals(""p"".""Point"", @__point_0)
 END AS ""EqualsTopologically""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task ExteriorRing(bool async)
@@ -378,7 +414,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", ExteriorRing(""p"".""Polygon"") AS ""ExteriorRing""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task GeometryType(bool async)
@@ -395,7 +432,8 @@ FROM ""PolygonEntity"" AS ""p""");
     WHEN 'MULTIPOLYGON' THEN 'MultiPolygon'
     WHEN 'GEOMETRYCOLLECTION' THEN 'GeometryCollection'
 END AS ""GeometryType""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task GetGeometryN(bool async)
@@ -404,7 +442,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""m"".""Id"", GeometryN(""m"".""MultiLineString"", 0 + 1) AS ""Geometry0""
-FROM ""MultiLineStringEntity"" AS ""m""");
+FROM ""MultiLineStringEntity"" AS ""m"""
+        );
     }
 
     public override async Task GetGeometryN_with_null_argument(bool async)
@@ -416,7 +455,8 @@ FROM ""MultiLineStringEntity"" AS ""m""");
     SELECT MAX(""m0"".""Id"")
     FROM ""MultiLineStringEntity"" AS ""m0""
     WHERE 0) + 1) AS ""Geometry0""
-FROM ""MultiLineStringEntity"" AS ""m""");
+FROM ""MultiLineStringEntity"" AS ""m"""
+        );
     }
 
     public override async Task GetInteriorRingN(bool async)
@@ -428,7 +468,8 @@ FROM ""MultiLineStringEntity"" AS ""m""");
     WHEN NumInteriorRing(""p"".""Polygon"") = 0 THEN NULL
     ELSE InteriorRingN(""p"".""Polygon"", 0 + 1)
 END AS ""InteriorRing0""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task GetPointN(bool async)
@@ -437,7 +478,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""l"".""Id"", PointN(""l"".""LineString"", 0 + 1) AS ""Point0""
-FROM ""LineStringEntity"" AS ""l""");
+FROM ""LineStringEntity"" AS ""l"""
+        );
     }
 
     public override async Task InteriorPoint(bool async)
@@ -446,7 +488,8 @@ FROM ""LineStringEntity"" AS ""l""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", PointOnSurface(""p"".""Polygon"") AS ""InteriorPoint"", ""p"".""Polygon""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Intersection(bool async)
@@ -457,7 +500,8 @@ FROM ""PolygonEntity"" AS ""p""");
             @"@__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
 
 SELECT ""p"".""Id"", Intersection(""p"".""Polygon"", @__polygon_0) AS ""Intersection""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Intersects(bool async)
@@ -470,7 +514,8 @@ FROM ""PolygonEntity"" AS ""p""");
 SELECT ""l"".""Id"", CASE
     WHEN ""l"".""LineString"" IS NOT NULL THEN Intersects(""l"".""LineString"", @__lineString_0)
 END AS ""Intersects""
-FROM ""LineStringEntity"" AS ""l""");
+FROM ""LineStringEntity"" AS ""l"""
+        );
     }
 
     public override async Task ICurve_IsClosed(bool async)
@@ -481,7 +526,8 @@ FROM ""LineStringEntity"" AS ""l""");
             @"SELECT ""l"".""Id"", CASE
     WHEN ""l"".""LineString"" IS NOT NULL THEN IsClosed(""l"".""LineString"")
 END AS ""IsClosed""
-FROM ""LineStringEntity"" AS ""l""");
+FROM ""LineStringEntity"" AS ""l"""
+        );
     }
 
     public override async Task IMultiCurve_IsClosed(bool async)
@@ -492,7 +538,8 @@ FROM ""LineStringEntity"" AS ""l""");
             @"SELECT ""m"".""Id"", CASE
     WHEN ""m"".""MultiLineString"" IS NOT NULL THEN IsClosed(""m"".""MultiLineString"")
 END AS ""IsClosed""
-FROM ""MultiLineStringEntity"" AS ""m""");
+FROM ""MultiLineStringEntity"" AS ""m"""
+        );
     }
 
     public override async Task IsEmpty(bool async)
@@ -503,7 +550,8 @@ FROM ""MultiLineStringEntity"" AS ""m""");
             @"SELECT ""m"".""Id"", CASE
     WHEN ""m"".""MultiLineString"" IS NOT NULL THEN IsEmpty(""m"".""MultiLineString"")
 END AS ""IsEmpty""
-FROM ""MultiLineStringEntity"" AS ""m""");
+FROM ""MultiLineStringEntity"" AS ""m"""
+        );
     }
 
     public override async Task IsRing(bool async)
@@ -514,7 +562,8 @@ FROM ""MultiLineStringEntity"" AS ""m""");
             @"SELECT ""l"".""Id"", CASE
     WHEN ""l"".""LineString"" IS NOT NULL THEN IsRing(""l"".""LineString"")
 END AS ""IsRing""
-FROM ""LineStringEntity"" AS ""l""");
+FROM ""LineStringEntity"" AS ""l"""
+        );
     }
 
     public override async Task IsSimple(bool async)
@@ -525,7 +574,8 @@ FROM ""LineStringEntity"" AS ""l""");
             @"SELECT ""l"".""Id"", CASE
     WHEN ""l"".""LineString"" IS NOT NULL THEN IsSimple(""l"".""LineString"")
 END AS ""IsSimple""
-FROM ""LineStringEntity"" AS ""l""");
+FROM ""LineStringEntity"" AS ""l"""
+        );
     }
 
     public override async Task IsValid(bool async)
@@ -536,7 +586,8 @@ FROM ""LineStringEntity"" AS ""l""");
             @"SELECT ""p"".""Id"", CASE
     WHEN ""p"".""Point"" IS NOT NULL THEN IsValid(""p"".""Point"")
 END AS ""IsValid""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task IsWithinDistance(bool async)
@@ -547,7 +598,8 @@ FROM ""PointEntity"" AS ""p""");
             @"@__point_0='0x0001000000000000000000000000000000000000F03F00000000000000000000...' (Size = 60) (DbType = String)
 
 SELECT ""p"".""Id"", Distance(""p"".""Point"", @__point_0) <= 1.0 AS ""IsWithinDistance""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Item(bool async)
@@ -556,7 +608,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""m"".""Id"", GeometryN(""m"".""MultiLineString"", 0 + 1) AS ""Item0""
-FROM ""MultiLineStringEntity"" AS ""m""");
+FROM ""MultiLineStringEntity"" AS ""m"""
+        );
     }
 
     public override async Task Length(bool async)
@@ -565,7 +618,8 @@ FROM ""MultiLineStringEntity"" AS ""m""");
 
         AssertSql(
             @"SELECT ""l"".""Id"", GLength(""l"".""LineString"") AS ""Length""
-FROM ""LineStringEntity"" AS ""l""");
+FROM ""LineStringEntity"" AS ""l"""
+        );
     }
 
     public override async Task M(bool async)
@@ -574,12 +628,12 @@ FROM ""LineStringEntity"" AS ""l""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", M(""p"".""Point"") AS ""M""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     // No Sqlite Translation
-    public override Task Normalized(bool async)
-        => Task.CompletedTask;
+    public override Task Normalized(bool async) => Task.CompletedTask;
 
     public override async Task NumGeometries(bool async)
     {
@@ -587,7 +641,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""m"".""Id"", NumGeometries(""m"".""MultiLineString"") AS ""NumGeometries""
-FROM ""MultiLineStringEntity"" AS ""m""");
+FROM ""MultiLineStringEntity"" AS ""m"""
+        );
     }
 
     public override async Task NumInteriorRings(bool async)
@@ -596,7 +651,8 @@ FROM ""MultiLineStringEntity"" AS ""m""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", NumInteriorRing(""p"".""Polygon"") AS ""NumInteriorRings""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task NumPoints(bool async)
@@ -605,7 +661,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""l"".""Id"", NumPoints(""l"".""LineString"") AS ""NumPoints""
-FROM ""LineStringEntity"" AS ""l""");
+FROM ""LineStringEntity"" AS ""l"""
+        );
     }
 
     public override async Task OgcGeometryType(bool async)
@@ -622,7 +679,8 @@ FROM ""LineStringEntity"" AS ""l""");
     WHEN 'MULTIPOLYGON' THEN 6
     WHEN 'GEOMETRYCOLLECTION' THEN 7
 END AS ""OgcGeometryType""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Overlaps(bool async)
@@ -635,7 +693,8 @@ FROM ""PointEntity"" AS ""p""");
 SELECT ""p"".""Id"", CASE
     WHEN ""p"".""Polygon"" IS NOT NULL THEN Overlaps(""p"".""Polygon"", @__polygon_0)
 END AS ""Overlaps""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task PointOnSurface(bool async)
@@ -644,7 +703,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", PointOnSurface(""p"".""Polygon"") AS ""PointOnSurface"", ""p"".""Polygon""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Relate(bool async)
@@ -657,7 +717,8 @@ FROM ""PolygonEntity"" AS ""p""");
 SELECT ""p"".""Id"", CASE
     WHEN ""p"".""Polygon"" IS NOT NULL THEN Relate(""p"".""Polygon"", @__polygon_0, '212111212')
 END AS ""Relate""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Reverse(bool async)
@@ -666,7 +727,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""l"".""Id"", ST_Reverse(""l"".""LineString"") AS ""Reverse""
-FROM ""LineStringEntity"" AS ""l""");
+FROM ""LineStringEntity"" AS ""l"""
+        );
     }
 
     public override async Task SRID(bool async)
@@ -675,7 +737,8 @@ FROM ""LineStringEntity"" AS ""l""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", SRID(""p"".""Point"") AS ""SRID""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task SRID_geometry(bool async)
@@ -684,7 +747,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", SRID(""p"".""Geometry"") AS ""SRID""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task StartPoint(bool async)
@@ -693,7 +757,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""l"".""Id"", StartPoint(""l"".""LineString"") AS ""StartPoint""
-FROM ""LineStringEntity"" AS ""l""");
+FROM ""LineStringEntity"" AS ""l"""
+        );
     }
 
     public override async Task SymmetricDifference(bool async)
@@ -704,7 +769,8 @@ FROM ""LineStringEntity"" AS ""l""");
             @"@__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
 
 SELECT ""p"".""Id"", SymDifference(""p"".""Polygon"", @__polygon_0) AS ""SymmetricDifference""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task ToBinary(bool async)
@@ -713,7 +779,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", AsBinary(""p"".""Point"") AS ""Binary""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task ToText(bool async)
@@ -722,7 +789,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", AsText(""p"".""Point"") AS ""Text""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Touches(bool async)
@@ -735,7 +803,8 @@ FROM ""PointEntity"" AS ""p""");
 SELECT ""p"".""Id"", CASE
     WHEN ""p"".""Polygon"" IS NOT NULL THEN Touches(""p"".""Polygon"", @__polygon_0)
 END AS ""Touches""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Union(bool async)
@@ -746,7 +815,8 @@ FROM ""PolygonEntity"" AS ""p""");
             @"@__polygon_0='0x00010000000000000000000000000000000000000000000000000000F03F0000...' (Size = 116) (DbType = String)
 
 SELECT ""p"".""Id"", GUnion(""p"".""Polygon"", @__polygon_0) AS ""Union""
-FROM ""PolygonEntity"" AS ""p""");
+FROM ""PolygonEntity"" AS ""p"""
+        );
     }
 
     public override async Task Union_void(bool async)
@@ -755,7 +825,8 @@ FROM ""PolygonEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""m"".""Id"", UnaryUnion(""m"".""MultiLineString"") AS ""Union""
-FROM ""MultiLineStringEntity"" AS ""m""");
+FROM ""MultiLineStringEntity"" AS ""m"""
+        );
     }
 
     public override async Task Within(bool async)
@@ -768,7 +839,8 @@ FROM ""MultiLineStringEntity"" AS ""m""");
 SELECT ""p"".""Id"", CASE
     WHEN ""p"".""Point"" IS NOT NULL THEN Within(""p"".""Point"", @__polygon_0)
 END AS ""Within""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task X(bool async)
@@ -777,7 +849,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", X(""p"".""Point"") AS ""X""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Y(bool async)
@@ -786,7 +859,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", Y(""p"".""Point"") AS ""Y""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task Z(bool async)
@@ -795,7 +869,8 @@ FROM ""PointEntity"" AS ""p""");
 
         AssertSql(
             @"SELECT ""p"".""Id"", Z(""p"".""Point"") AS ""Z""
-FROM ""PointEntity"" AS ""p""");
+FROM ""PointEntity"" AS ""p"""
+        );
     }
 
     public override async Task IsEmpty_equal_to_null(bool async)
@@ -807,7 +882,8 @@ FROM ""PointEntity"" AS ""p""");
 FROM ""PointEntity"" AS ""p""
 WHERE CASE
     WHEN ""p"".""Point"" IS NOT NULL THEN IsEmpty(""p"".""Point"")
-END IS NULL");
+END IS NULL"
+        );
     }
 
     public override async Task IsEmpty_not_equal_to_null(bool async)
@@ -819,7 +895,8 @@ END IS NULL");
 FROM ""PointEntity"" AS ""p""
 WHERE CASE
     WHEN ""p"".""Point"" IS NOT NULL THEN IsEmpty(""p"".""Point"")
-END IS NOT NULL");
+END IS NOT NULL"
+        );
     }
 
     public override async Task Intersects_equal_to_null(bool async)
@@ -841,7 +918,8 @@ SELECT ""l"".""Id""
 FROM ""LineStringEntity"" AS ""l""
 WHERE CASE
     WHEN ""l"".""LineString"" IS NOT NULL THEN Intersects(@__lineString_0, ""l"".""LineString"")
-END IS NULL");
+END IS NULL"
+        );
     }
 
     public override async Task Intersects_not_equal_to_null(bool async)
@@ -863,9 +941,10 @@ SELECT ""l"".""Id""
 FROM ""LineStringEntity"" AS ""l""
 WHERE CASE
     WHEN ""l"".""LineString"" IS NOT NULL THEN Intersects(@__lineString_0, ""l"".""LineString"")
-END IS NOT NULL");
+END IS NOT NULL"
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

@@ -16,12 +16,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 {
     internal sealed partial class ItemManager : IAsyncCompletionItemManager
     {
-        public const string AggressiveDefaultsMatchingOptionName = "AggressiveDefaultsMatchingOption";
+        public const string AggressiveDefaultsMatchingOptionName =
+            "AggressiveDefaultsMatchingOption";
 
         private readonly RecentItemsManager _recentItemsManager;
         private readonly IGlobalOptionService _globalOptions;
 
-        internal ItemManager(RecentItemsManager recentItemsManager, IGlobalOptionService globalOptions)
+        internal ItemManager(
+            RecentItemsManager recentItemsManager,
+            IGlobalOptionService globalOptions
+        )
         {
             _recentItemsManager = recentItemsManager;
             _globalOptions = globalOptions;
@@ -30,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         public Task<ImmutableArray<VSCompletionItem>> SortCompletionListAsync(
             IAsyncCompletionSession session,
             AsyncCompletionSessionInitialDataSnapshot data,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var stopwatch = SharedStopwatch.StartNew();
             var sessionData = CompletionSessionData.GetOrCreateSessionData(session);
@@ -38,20 +43,32 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (sessionData.TargetTypeFilterExperimentEnabled)
             {
                 AsyncCompletionLogger.LogSessionHasTargetTypeFilterEnabled();
-                if (data.InitialList.Any(i => i.Filters.Any(f => f.DisplayText == FeaturesResources.Target_type_matches)))
+                if (
+                    data.InitialList.Any(
+                        i =>
+                            i.Filters.Any(
+                                f => f.DisplayText == FeaturesResources.Target_type_matches
+                            )
+                    )
+                )
                     AsyncCompletionLogger.LogSessionContainsTargetTypeFilter();
             }
 
             // Sort by default comparer of Roslyn CompletionItem
-            var sortedItems = data.InitialList.OrderBy(CompletionItemData.GetOrAddDummyRoslynItem).ToImmutableArray();
-            AsyncCompletionLogger.LogItemManagerSortTicksDataPoint((int)stopwatch.Elapsed.TotalMilliseconds);
+            var sortedItems = data.InitialList
+                .OrderBy(CompletionItemData.GetOrAddDummyRoslynItem)
+                .ToImmutableArray();
+            AsyncCompletionLogger.LogItemManagerSortTicksDataPoint(
+                (int)stopwatch.Elapsed.TotalMilliseconds
+            );
             return Task.FromResult(sortedItems);
         }
 
         public async Task<FilteredCompletionModel?> UpdateCompletionListAsync(
             IAsyncCompletionSession session,
             AsyncCompletionSessionDataSnapshot data,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var stopwatch = SharedStopwatch.StartNew();
             try
@@ -71,8 +88,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 if (sessionData.CombinedSortedList.HasValue)
                 {
                     // Always use the previously saved combined list if available.
-                    data = new AsyncCompletionSessionDataSnapshot(sessionData.CombinedSortedList.Value, data.Snapshot, data.Trigger, data.InitialTrigger, data.SelectedFilters,
-                        data.IsSoftSelected, data.DisplaySuggestionItem, data.Defaults);
+                    data = new AsyncCompletionSessionDataSnapshot(
+                        sessionData.CombinedSortedList.Value,
+                        data.Snapshot,
+                        data.Trigger,
+                        data.InitialTrigger,
+                        data.SelectedFilters,
+                        data.IsSoftSelected,
+                        data.DisplaySuggestionItem,
+                        data.Defaults
+                    );
                 }
                 else if (sessionData.ExpandedItemsTask != null)
                 {
@@ -87,29 +112,51 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         if (expandedContext.Items.Length > 0)
                         {
                             // Here we rely on the implementation detail of `CompletionItem.CompareTo`, which always put expand items after regular ones.
-                            var itemsBuilder = ImmutableArray.CreateBuilder<VSCompletionItem>(expandedContext.Items.Length + data.InitialSortedList.Length);
+                            var itemsBuilder = ImmutableArray.CreateBuilder<VSCompletionItem>(
+                                expandedContext.Items.Length + data.InitialSortedList.Length
+                            );
                             itemsBuilder.AddRange(data.InitialSortedList);
                             itemsBuilder.AddRange(expandedContext.Items);
                             var combinedList = itemsBuilder.MoveToImmutable();
 
                             // Add expanded items into a combined list, and save it to be used for future updates during the same session.
                             sessionData.CombinedSortedList = combinedList;
-                            var combinedFilterStates = FilterSet.CombineFilterStates(expandedContext.Filters, data.SelectedFilters);
+                            var combinedFilterStates = FilterSet.CombineFilterStates(
+                                expandedContext.Filters,
+                                data.SelectedFilters
+                            );
 
-                            data = new AsyncCompletionSessionDataSnapshot(combinedList, data.Snapshot, data.Trigger, data.InitialTrigger, combinedFilterStates,
-                                data.IsSoftSelected, data.DisplaySuggestionItem, data.Defaults);
+                            data = new AsyncCompletionSessionDataSnapshot(
+                                combinedList,
+                                data.Snapshot,
+                                data.Trigger,
+                                data.InitialTrigger,
+                                combinedFilterStates,
+                                data.IsSoftSelected,
+                                data.DisplaySuggestionItem,
+                                data.Defaults
+                            );
                         }
 
                         AsyncCompletionLogger.LogSessionWithDelayedImportCompletionIncludedInUpdate();
                     }
                 }
 
-                var updater = new CompletionListUpdater(session.ApplicableToSpan, sessionData, data, _recentItemsManager, _globalOptions);
+                var updater = new CompletionListUpdater(
+                    session.ApplicableToSpan,
+                    sessionData,
+                    data,
+                    _recentItemsManager,
+                    _globalOptions
+                );
                 return updater.UpdateCompletionList(cancellationToken);
             }
             finally
             {
-                AsyncCompletionLogger.LogItemManagerUpdateDataPoint((int)stopwatch.Elapsed.TotalMilliseconds, isCanceled: cancellationToken.IsCancellationRequested);
+                AsyncCompletionLogger.LogItemManagerUpdateDataPoint(
+                    (int)stopwatch.Elapsed.TotalMilliseconds,
+                    isCanceled: cancellationToken.IsCancellationRequested
+                );
             }
         }
     }

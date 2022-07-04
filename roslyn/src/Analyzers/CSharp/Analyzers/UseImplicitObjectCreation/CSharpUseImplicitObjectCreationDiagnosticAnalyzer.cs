@@ -17,23 +17,32 @@ using Microsoft.CodeAnalysis.Simplification;
 namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpUseImplicitObjectCreationDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal class CSharpUseImplicitObjectCreationDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpUseImplicitObjectCreationDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseImplicitObjectCreationDiagnosticId,
-                   EnforceOnBuildValues.UseImplicitObjectCreation,
-                   CSharpCodeStyleOptions.ImplicitObjectCreationWhenTypeIsApparent,
-                   LanguageNames.CSharp,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_new), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.new_expression_can_be_simplified), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseImplicitObjectCreationDiagnosticId,
+                EnforceOnBuildValues.UseImplicitObjectCreation,
+                CSharpCodeStyleOptions.ImplicitObjectCreationWhenTypeIsApparent,
+                LanguageNames.CSharp,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_new),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.new_expression_can_be_simplified),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKind.ObjectCreationExpression);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKind.ObjectCreationExpression);
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {
@@ -43,7 +52,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
             if (syntaxTree.Options.LanguageVersion() < LanguageVersion.CSharp9)
                 return;
 
-            var styleOption = context.GetCSharpAnalyzerOptions().ImplicitObjectCreationWhenTypeIsApparent;
+            var styleOption = context
+                .GetCSharpAnalyzerOptions()
+                .ImplicitObjectCreationWhenTypeIsApparent;
             if (!styleOption.Value)
             {
                 // Bail immediately if the user has disabled this feature.
@@ -57,7 +68,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
             // 2. Expression-bodied constructs with an explicit return type.  i.e. `List<int> Prop => new ...` or
             //    `List<int> GetValue(...) => ...` The latter doesn't necessarily have the object creation spatially next to
             //    the type.  However, the type is always in a very easy to ascertain location in C#, so it is treated as
-            //    apparent. 
+            //    apparent.
 
             var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
 
@@ -65,19 +76,33 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
             var semanticModel = context.SemanticModel;
             var cancellationToken = context.CancellationToken;
 
-            if (objectCreation.Parent.IsKind(SyntaxKind.EqualsValueClause) &&
-                objectCreation.Parent.Parent.IsKind(SyntaxKind.VariableDeclarator) &&
-                objectCreation.Parent.Parent.Parent is VariableDeclarationSyntax variableDeclaration &&
-                !variableDeclaration.Type.IsVar)
+            if (
+                objectCreation.Parent.IsKind(SyntaxKind.EqualsValueClause)
+                && objectCreation.Parent.Parent.IsKind(SyntaxKind.VariableDeclarator)
+                && objectCreation.Parent.Parent.Parent
+                    is VariableDeclarationSyntax variableDeclaration
+                && !variableDeclaration.Type.IsVar
+            )
             {
                 typeNode = variableDeclaration.Type;
 
                 var helper = CSharpUseImplicitTypeHelper.Instance;
                 if (helper.ShouldAnalyzeVariableDeclaration(variableDeclaration, cancellationToken))
                 {
-                    var simplifierOptions = context.GetCSharpAnalyzerOptions().GetSimplifierOptions();
+                    var simplifierOptions = context
+                        .GetCSharpAnalyzerOptions()
+                        .GetSimplifierOptions();
 
-                    if (helper.AnalyzeTypeName(typeNode, semanticModel, simplifierOptions, cancellationToken).IsStylePreferred)
+                    if (
+                        helper
+                            .AnalyzeTypeName(
+                                typeNode,
+                                semanticModel,
+                                simplifierOptions,
+                                cancellationToken
+                            )
+                            .IsStylePreferred
+                    )
                     {
                         // this is a case where the user would prefer 'var'.  don't offer to use an implicit object here.
                         return;
@@ -93,7 +118,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
                     ConversionOperatorDeclarationSyntax conversion => conversion.Type,
                     OperatorDeclarationSyntax op => op.ReturnType,
                     BasePropertyDeclarationSyntax property => property.Type,
-                    AccessorDeclarationSyntax(SyntaxKind.GetAccessorDeclaration) { Parent: AccessorListSyntax { Parent: BasePropertyDeclarationSyntax baseProperty } } accessor => baseProperty.Type,
+                    AccessorDeclarationSyntax(SyntaxKind.GetAccessorDeclaration)
+                    {
+                        Parent: AccessorListSyntax
+                        {
+                            Parent: BasePropertyDeclarationSyntax baseProperty
+                        }
+                    } accessor
+                        => baseProperty.Type,
                     _ => null,
                 };
             }
@@ -128,12 +160,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
                 return;
             }
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                objectCreation.Type.GetLocation(),
-                styleOption.Notification.Severity,
-                ImmutableArray.Create(objectCreation.GetLocation()),
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    objectCreation.Type.GetLocation(),
+                    styleOption.Notification.Severity,
+                    ImmutableArray.Create(objectCreation.GetLocation()),
+                    properties: null
+                )
+            );
         }
     }
 }

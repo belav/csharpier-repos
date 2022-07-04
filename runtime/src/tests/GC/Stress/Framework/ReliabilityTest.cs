@@ -18,7 +18,12 @@ public class TestAssemblyLoadContext : AssemblyLoadContext
 {
     List<string> _privatePaths = new List<string>();
     string _applicationBase;
-    public TestAssemblyLoadContext(string name, string applicationBase = null, string[] paths = null) : base(true)
+
+    public TestAssemblyLoadContext(
+        string name,
+        string applicationBase = null,
+        string[] paths = null
+    ) : base(true)
     {
         FriendlyName = name;
 
@@ -42,7 +47,6 @@ public class TestAssemblyLoadContext : AssemblyLoadContext
     public int ExecuteAssemblyByName(string name, string[] args)
     {
         return ExecuteAssembly(name + ".dll", args);
-
     }
 
     public int ExecuteAssembly(string path, string[] args)
@@ -62,20 +66,18 @@ public class TestAssemblyLoadContext : AssemblyLoadContext
                 assembly = LoadFromAssemblyPath(Path.Combine(path, assemblyName.Name + ".dll"));
                 break;
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
 
         if (assembly == null)
         {
             try
             {
-                assembly = LoadFromAssemblyPath(Path.Combine(_applicationBase, assemblyName.Name + ".dll"));
+                assembly = LoadFromAssemblyPath(
+                    Path.Combine(_applicationBase, assemblyName.Name + ".dll")
+                );
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
 
         return assembly;
@@ -95,7 +97,9 @@ public class ReliabilityTest
 {
     private bool _suppressConsoleOutput = false;
 
-    private string _assembly, _debugger, _debuggerOptions;
+    private string _assembly,
+        _debugger,
+        _debuggerOptions;
     private string _basePath;
     private MethodInfo _entryPointMethod = null;
     private string _refOrID;
@@ -109,7 +113,8 @@ public class ReliabilityTest
     private int _concurrentCopies = 1;
     private int _runningCount = 0;
     private int _expectedDuration = -1;
-    private bool _requiresSDK = false, _hasFailed = false;
+    private bool _requiresSDK = false,
+        _hasFailed = false;
     private Guid _guid = Guid.Empty;
     private TestStartModeEnum _testStartMode = TestStartModeEnum.AppDomainLoader;
     private DateTime _startTime = DateTime.Now;
@@ -149,38 +154,20 @@ public class ReliabilityTest
 
     public DateTime StartTime
     {
-        get
-        {
-            return (_startTime);
-        }
-        set
-        {
-            _startTime = value;
-        }
+        get { return (_startTime); }
+        set { _startTime = value; }
     }
 
     public TestAttributes TestAttrs
     {
-        get
-        {
-            return (_testAttrs);
-        }
-        set
-        {
-            _testAttrs = value;
-        }
+        get { return (_testAttrs); }
+        set { _testAttrs = value; }
     }
 
     public int ConcurrentCopies
     {
-        get
-        {
-            return (_concurrentCopies);
-        }
-        set
-        {
-            _concurrentCopies = value;
-        }
+        get { return (_concurrentCopies); }
+        set { _concurrentCopies = value; }
     }
 
     /// <summary>
@@ -188,64 +175,33 @@ public class ReliabilityTest
     /// </summary>
     public int RunningCount
     {
-        get
-        {
-            return (_runningCount);
-        }
-        set
-        {
-            _runningCount = value;
-        }
+        get { return (_runningCount); }
+        set { _runningCount = value; }
     }
 
     public Object TestObject
     {
-        get
-        {
-            return (_testObject);
-        }
-        set
-        {
-            _testObject = value;
-        }
+        get { return (_testObject); }
+        set { _testObject = value; }
     }
 
     public Object MyLoader
     {
-        get
-        {
-            return (_myLoader);
-        }
-        set
-        {
-            _myLoader = value;
-        }
+        get { return (_myLoader); }
+        set { _myLoader = value; }
     }
 
     public bool TestLoadFailed
     {
-        get
-        {
-            return (_testLoadFailed);
-        }
-        set
-        {
-            _testLoadFailed = value;
-        }
+        get { return (_testLoadFailed); }
+        set { _testLoadFailed = value; }
     }
 
     public TestAssemblyLoadContext AssemblyLoadContext
     {
-        get
-        {
-            return _assemblyLoadContext;
-        }
-        set
-        {
-            _assemblyLoadContext = value;
-        }
+        get { return _assemblyLoadContext; }
+        set { _assemblyLoadContext = value; }
     }
-
 
     public bool HasAssemblyLoadContext
     {
@@ -261,36 +217,18 @@ public class ReliabilityTest
 
     public string Assembly
     {
-        get
-        {
-            return (_assembly);
-        }
-        set
-        {
-            _assembly = value;
-        }
+        get { return (_assembly); }
+        set { _assembly = value; }
     }
     public string RefOrID
     {
-        get
-        {
-            return (_refOrID);
-        }
-        set
-        {
-            _refOrID = value;
-        }
+        get { return (_refOrID); }
+        set { _refOrID = value; }
     }
     public string Arguments
     {
-        get
-        {
-            return (_arguments);
-        }
-        set
-        {
-            _arguments = value;
-        }
+        get { return (_arguments); }
+        set { _arguments = value; }
     }
 
     public string[] GetSplitArguments()
@@ -305,25 +243,13 @@ public class ReliabilityTest
 
     public string EntryPoint
     {
-        get
-        {
-            return (_entryPoint);
-        }
-        set
-        {
-            _entryPoint = value;
-        }
+        get { return (_entryPoint); }
+        set { _entryPoint = value; }
     }
     public int SuccessCode
     {
-        get
-        {
-            return (_successCode);
-        }
-        set
-        {
-            _successCode = value;
-        }
+        get { return (_successCode); }
+        set { _successCode = value; }
     }
 
     /// <summary>
@@ -331,38 +257,20 @@ public class ReliabilityTest
     /// </summary>
     public int RunCount
     {
-        get
-        {
-            return (_runCount);
-        }
-        set
-        {
-            _runCount = value;
-        }
+        get { return (_runCount); }
+        set { _runCount = value; }
     }
 
     public bool RequiresSDK
     {
-        get
-        {
-            return (_requiresSDK);
-        }
-        set
-        {
-            _requiresSDK = value;
-        }
+        get { return (_requiresSDK); }
+        set { _requiresSDK = value; }
     }
 
     public MethodInfo EntryPointMethod
     {
-        get
-        {
-            return _entryPointMethod;
-        }
-        set
-        {
-            _entryPointMethod = value;
-        }
+        get { return _entryPointMethod; }
+        set { _entryPointMethod = value; }
     }
 
     public string BasePath
@@ -387,10 +295,7 @@ public class ReliabilityTest
             }
             return (_basePath);
         }
-        set
-        {
-            _basePath = value;
-        }
+        set { _basePath = value; }
     }
 
     /// <summary>
@@ -430,71 +335,38 @@ public class ReliabilityTest
             }
             return (_debugger);
         }
-        set
-        {
-            _debugger = value;
-        }
+        set { _debugger = value; }
     }
 
     public string DebuggerOptions
     {
-        get
-        {
-            return (_debuggerOptions);
-        }
-        set
-        {
-            _debuggerOptions = value;
-        }
+        get { return (_debuggerOptions); }
+        set { _debuggerOptions = value; }
     }
 
     // Expected duration of the test, in minutes
     public int ExpectedDuration
     {
-        get
-        {
-            return (_expectedDuration);
-        }
-        set
-        {
-            _expectedDuration = value;
-        }
+        get { return (_expectedDuration); }
+        set { _expectedDuration = value; }
     }
 
     public TestStartModeEnum TestStartMode
     {
-        get
-        {
-            return (_testStartMode);
-        }
-        set
-        {
-            _testStartMode = value;
-        }
+        get { return (_testStartMode); }
+        set { _testStartMode = value; }
     }
 
     public Guid Guid
     {
-        get
-        {
-            return (_guid);
-        }
-        set
-        {
-            _guid = value;
-        }
+        get { return (_guid); }
+        set { _guid = value; }
     }
 
     public string TestOwner
     {
-        get
-        {
-            return (_testOwner);
-        }
-        set
-        {
-            _testOwner = value;
-        }
+        get { return (_testOwner); }
+        set { _testOwner = value; }
     }
 
     /// <summary>
@@ -502,116 +374,70 @@ public class ReliabilityTest
     /// </summary>
     public string ResultFilename
     {
-        get
-        {
-            return (_resultFilename);
-        }
-        set
-        {
-            _resultFilename = value;
-        }
+        get { return (_resultFilename); }
+        set { _resultFilename = value; }
     }
 
     public List<ReliabilityTest> Group
     {
-        get
-        {
-            return (_group);
-        }
-        set
-        {
-            _group = value;
-        }
+        get { return (_group); }
+        set { _group = value; }
     }
-
 
     public List<string> PreCommands
     {
-        get
-        {
-            return (_preCommands);
-        }
-        set
-        {
-            _preCommands = value;
-        }
+        get { return (_preCommands); }
+        set { _preCommands = value; }
     }
 
     public List<string> PostCommands
     {
-        get
-        {
-            return (_postCommands);
-        }
-        set
-        {
-            _postCommands = value;
-        }
+        get { return (_postCommands); }
+        set { _postCommands = value; }
     }
 
     public bool HasFailed
     {
-        get
-        {
-            return (_hasFailed);
-        }
-        set
-        {
-            _hasFailed = value;
-        }
+        get { return (_hasFailed); }
+        set { _hasFailed = value; }
     }
 
     public int AppDomainIndex
     {
-        get
-        {
-            return (_appDomainIndex);
-        }
-        set
-        {
-            _appDomainIndex = value;
-        }
+        get { return (_appDomainIndex); }
+        set { _appDomainIndex = value; }
     }
 
     public int AssemblyLoadContextIndex
     {
-        get
-        {
-            return (_assemblyLoadContextIndex);
-        }
-        set
-        {
-            _assemblyLoadContextIndex = value;
-        }
+        get { return (_assemblyLoadContextIndex); }
+        set { _assemblyLoadContextIndex = value; }
     }
 
     public int Index
     {
-        get
-        {
-            return (_index);
-        }
-        set
-        {
-            _index = value;
-        }
+        get { return (_index); }
+        set { _index = value; }
     }
 
     public CustomActionType CustomAction
     {
-        get
-        {
-            return (_customAction);
-        }
-        set
-        {
-            _customAction = value;
-        }
+        get { return (_customAction); }
+        set { _customAction = value; }
     }
 
     public override string ToString()
     {
-        return ("Ref/ID: " + _refOrID + " Assembly: " + _assembly + " Arguments: " + _arguments + " SuccessCode: " + _successCode.ToString());
+        return (
+            "Ref/ID: "
+            + _refOrID
+            + " Assembly: "
+            + _assembly
+            + " Arguments: "
+            + _arguments
+            + " SuccessCode: "
+            + _successCode.ToString()
+        );
     }
 
     public object Clone()
@@ -638,4 +464,3 @@ public class ReliabilityTest
         return exitCode;
     }
 }
-

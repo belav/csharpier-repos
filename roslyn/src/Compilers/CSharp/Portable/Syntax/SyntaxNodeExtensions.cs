@@ -9,7 +9,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal static class SyntaxNodeExtensions
     {
-        public static TNode WithAnnotations<TNode>(this TNode node, params SyntaxAnnotation[] annotations) where TNode : CSharpSyntaxNode
+        public static TNode WithAnnotations<TNode>(
+            this TNode node,
+            params SyntaxAnnotation[] annotations
+        ) where TNode : CSharpSyntaxNode
         {
             return (TNode)node.Green.SetAnnotations(annotations).CreateRed();
         }
@@ -51,9 +54,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static bool MayBeNameofOperator(this InvocationExpressionSyntax node)
         {
-            if (node.Expression.Kind() == SyntaxKind.IdentifierName &&
-                ((IdentifierNameSyntax)node.Expression).Identifier.ContextualKind() == SyntaxKind.NameOfKeyword &&
-                node.ArgumentList.Arguments.Count == 1)
+            if (
+                node.Expression.Kind() == SyntaxKind.IdentifierName
+                && ((IdentifierNameSyntax)node.Expression).Identifier.ContextualKind()
+                    == SyntaxKind.NameOfKeyword
+                && node.ArgumentList.Arguments.Count == 1
+            )
             {
                 ArgumentSyntax argument = node.ArgumentList.Arguments[0];
                 if (argument.NameColon == null && argument.RefOrOutKeyword == default)
@@ -70,7 +76,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// with the code that searches for binders.  We don't want the searcher
         /// to skip over any nodes that could have associated binders, especially
         /// if changes are made later.
-        /// 
+        ///
         /// "Local binder" is a term that refers to binders that are
         /// created by LocalBinderFactory.
         /// </summary>
@@ -79,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxKind kind = syntax.Kind();
             switch (kind)
             {
-                case SyntaxKind.InvocationExpression when ((InvocationExpressionSyntax)syntax).MayBeNameofOperator():
+                case SyntaxKind.InvocationExpression
+                    when ((InvocationExpressionSyntax)syntax).MayBeNameofOperator():
                     return true;
                 case SyntaxKind.CatchClause:
                 case SyntaxKind.ParenthesizedLambdaExpression:
@@ -106,7 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return false;
 
                 default:
-                    return syntax is StatementSyntax || IsValidScopeDesignator(syntax as ExpressionSyntax);
+                    return syntax is StatementSyntax
+                        || IsValidScopeDesignator(syntax as ExpressionSyntax);
             }
         }
 
@@ -125,7 +133,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SyntaxKind.ForStatement:
                     var forStmt = (ForStatementSyntax)parent;
-                    return forStmt.Condition == expression || forStmt.Incrementors.FirstOrDefault() == expression;
+                    return forStmt.Condition == expression
+                        || forStmt.Incrementors.FirstOrDefault() == expression;
 
                 case SyntaxKind.ForEachStatement:
                 case SyntaxKind.ForEachVariableStatement:
@@ -168,24 +177,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // In case of a declaration of a Span<T> variable
                 case SyntaxKind.EqualsValueClause:
-                    {
-                        SyntaxNode? variableDeclarator = parentNode.Parent;
+                {
+                    SyntaxNode? variableDeclarator = parentNode.Parent;
 
-                        return variableDeclarator.IsKind(SyntaxKind.VariableDeclarator) &&
-                            variableDeclarator.Parent.IsKind(SyntaxKind.VariableDeclaration);
-                    }
+                    return variableDeclarator.IsKind(SyntaxKind.VariableDeclarator)
+                        && variableDeclarator.Parent.IsKind(SyntaxKind.VariableDeclaration);
+                }
                 // In case of reassignment to a Span<T> variable
                 case SyntaxKind.SimpleAssignmentExpression:
-                    {
-                        return parentNode.Parent.IsKind(SyntaxKind.ExpressionStatement);
-                    }
+                {
+                    return parentNode.Parent.IsKind(SyntaxKind.ExpressionStatement);
+                }
             }
 
             return false;
         }
 
-        internal static CSharpSyntaxNode AnonymousFunctionBody(this SyntaxNode lambda)
-            => ((AnonymousFunctionExpressionSyntax)lambda).Body;
+        internal static CSharpSyntaxNode AnonymousFunctionBody(this SyntaxNode lambda) =>
+            ((AnonymousFunctionExpressionSyntax)lambda).Body;
 
         /// <summary>
         /// Given an initializer expression infer the name of anonymous property or tuple element.
@@ -241,9 +250,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (syntax.Kind() == SyntaxKind.RefType)
             {
                 var refType = (RefTypeSyntax)syntax;
-                refKind = refType.ReadOnlyKeyword.Kind() == SyntaxKind.ReadOnlyKeyword ?
-                    RefKind.RefReadOnly :
-                    RefKind.Ref;
+                refKind =
+                    refType.ReadOnlyKeyword.Kind() == SyntaxKind.ReadOnlyKeyword
+                        ? RefKind.RefReadOnly
+                        : RefKind.Ref;
 
                 syntax = refType.Type;
             }
@@ -254,7 +264,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static ExpressionSyntax? CheckAndUnwrapRefExpression(
             this ExpressionSyntax? syntax,
             BindingDiagnosticBag diagnostics,
-            out RefKind refKind)
+            out RefKind refKind
+        )
         {
             refKind = RefKind.None;
             if (syntax?.Kind() == SyntaxKind.RefExpression)
@@ -268,11 +279,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             return syntax;
         }
 
-        internal static void CheckDeconstructionCompatibleArgument(this ExpressionSyntax expression, BindingDiagnosticBag diagnostics)
+        internal static void CheckDeconstructionCompatibleArgument(
+            this ExpressionSyntax expression,
+            BindingDiagnosticBag diagnostics
+        )
         {
             if (IsDeconstructionCompatibleArgument(expression))
             {
-                diagnostics.Add(ErrorCode.ERR_VarInvocationLvalueReserved, expression.GetLocation());
+                diagnostics.Add(
+                    ErrorCode.ERR_VarInvocationLvalueReserved,
+                    expression.GetLocation()
+                );
             }
         }
 
@@ -291,8 +308,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var invocation = (InvocationExpressionSyntax)expression;
                 var invocationTarget = invocation.Expression;
 
-                return invocationTarget.Kind() == SyntaxKind.IdentifierName &&
-                    ((IdentifierNameSyntax)invocationTarget).IsVar;
+                return invocationTarget.Kind() == SyntaxKind.IdentifierName
+                    && ((IdentifierNameSyntax)invocationTarget).IsVar;
             }
 
             return false;

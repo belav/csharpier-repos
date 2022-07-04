@@ -25,32 +25,51 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
 
         private bool _hasVerified;
 
-        public EditAndContinueTest(CSharpCompilationOptions? options, TargetFramework? targetFramework)
+        public EditAndContinueTest(
+            CSharpCompilationOptions? options,
+            TargetFramework? targetFramework
+        )
         {
             _options = options;
             _targetFramework = targetFramework ?? TargetFramework.Standard;
         }
 
-        internal EditAndContinueTest AddGeneration(string source, Action<GenerationVerifier> validator)
+        internal EditAndContinueTest AddGeneration(
+            string source,
+            Action<GenerationVerifier> validator
+        )
         {
             _hasVerified = false;
 
             Assert.Empty(_generations);
 
-            var compilation = CSharpTestBase.CreateCompilation(source, options: _options, targetFramework: _targetFramework);
+            var compilation = CSharpTestBase.CreateCompilation(
+                source,
+                options: _options,
+                targetFramework: _targetFramework
+            );
 
             var bytes = compilation.EmitToArray();
             var md = ModuleMetadata.CreateFromImage(bytes);
             _disposables.Add(md);
 
-            var baseline = EmitBaseline.CreateInitialBaseline(md, EditAndContinueTestBase.EmptyLocalsProvider);
+            var baseline = EmitBaseline.CreateInitialBaseline(
+                md,
+                EditAndContinueTestBase.EmptyLocalsProvider
+            );
 
-            _generations.Add(new GenerationInfo(compilation, md.MetadataReader, baseline, validator));
+            _generations.Add(
+                new GenerationInfo(compilation, md.MetadataReader, baseline, validator)
+            );
 
             return this;
         }
 
-        internal EditAndContinueTest AddGeneration(string source, SemanticEditDescription[] edits, Action<GenerationVerifier> validator)
+        internal EditAndContinueTest AddGeneration(
+            string source,
+            SemanticEditDescription[] edits,
+            Action<GenerationVerifier> validator
+        )
         {
             _hasVerified = false;
 
@@ -67,7 +86,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             var md = diff.GetMetadata();
             _disposables.Add(md);
 
-            _generations.Add(new GenerationInfo(compilation, md.Reader, diff.NextGeneration, validator));
+            _generations.Add(
+                new GenerationInfo(compilation, md.Reader, diff.NextGeneration, validator)
+            );
 
             return this;
         }
@@ -97,9 +118,22 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             return this;
         }
 
-        private ImmutableArray<SemanticEdit> GetSemanticEdits(SemanticEditDescription[] edits, Compilation oldCompilation, Compilation newCompilation)
+        private ImmutableArray<SemanticEdit> GetSemanticEdits(
+            SemanticEditDescription[] edits,
+            Compilation oldCompilation,
+            Compilation newCompilation
+        )
         {
-            return ImmutableArray.CreateRange(edits.Select(e => new SemanticEdit(e.Kind, e.SymbolProvider(oldCompilation), e.SymbolProvider(newCompilation))));
+            return ImmutableArray.CreateRange(
+                edits.Select(
+                    e =>
+                        new SemanticEdit(
+                            e.Kind,
+                            e.SymbolProvider(oldCompilation),
+                            e.SymbolProvider(newCompilation)
+                        )
+                )
+            );
         }
 
         public void Dispose()

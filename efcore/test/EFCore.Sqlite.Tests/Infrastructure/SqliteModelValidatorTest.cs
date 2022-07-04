@@ -18,9 +18,17 @@ public class SqliteModelValidatorTest : RelationalModelValidatorTest
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameDataTypeMismatch(
-                nameof(Animal), nameof(Animal.Id),
-                nameof(Animal), nameof(Animal.Name), "Name", nameof(Animal), "INTEGER", "TEXT"),
-            modelBuilder);
+                nameof(Animal),
+                nameof(Animal.Id),
+                nameof(Animal),
+                nameof(Animal.Name),
+                "Name",
+                nameof(Animal),
+                "INTEGER",
+                "TEXT"
+            ),
+            modelBuilder
+        );
     }
 
     public override void Detects_duplicate_columns_in_derived_types_with_different_types()
@@ -33,7 +41,17 @@ public class SqliteModelValidatorTest : RelationalModelValidatorTest
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameDataTypeMismatch(
-                typeof(Cat).Name, "Type", typeof(Dog).Name, "Type", "Type", nameof(Animal), "TEXT", "INTEGER"), modelBuilder);
+                typeof(Cat).Name,
+                "Type",
+                typeof(Dog).Name,
+                "Type",
+                "Type",
+                nameof(Animal),
+                "TEXT",
+                "INTEGER"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -47,7 +65,15 @@ public class SqliteModelValidatorTest : RelationalModelValidatorTest
 
         VerifyError(
             SqliteStrings.DuplicateColumnNameSridMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal)), modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -57,8 +83,11 @@ public class SqliteModelValidatorTest : RelationalModelValidatorTest
         modelBuilder.Entity<Animal>().ToTable("Animals", "pet").Ignore(a => a.FavoritePerson);
 
         VerifyWarning(
-            SqliteResources.LogSchemaConfigured(new TestLogger<SqliteLoggingDefinitions>()).GenerateMessage("Animal", "pet"),
-            modelBuilder);
+            SqliteResources
+                .LogSchemaConfigured(new TestLogger<SqliteLoggingDefinitions>())
+                .GenerateMessage("Animal", "pet"),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -68,10 +97,12 @@ public class SqliteModelValidatorTest : RelationalModelValidatorTest
         modelBuilder.HasSequence("Fibonacci");
 
         VerifyWarning(
-            SqliteResources.LogSequenceConfigured(new TestLogger<SqliteLoggingDefinitions>()).GenerateMessage("Fibonacci"),
-            modelBuilder);
+            SqliteResources
+                .LogSequenceConfigured(new TestLogger<SqliteLoggingDefinitions>())
+                .GenerateMessage("Fibonacci"),
+            modelBuilder
+        );
     }
 
-    protected override TestHelpers TestHelpers
-        => SqliteTestHelpers.Instance;
+    protected override TestHelpers TestHelpers => SqliteTestHelpers.Instance;
 }

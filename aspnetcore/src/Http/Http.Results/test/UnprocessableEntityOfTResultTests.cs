@@ -42,10 +42,7 @@ public class UnprocessableEntityOfTResultTests
     {
         // Arrange
         var result = new UnprocessableEntity<string>("Hello");
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -63,10 +60,7 @@ public class UnprocessableEntityOfTResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -80,16 +74,28 @@ public class UnprocessableEntityOfTResultTests
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        UnprocessableEntity<Todo> MyApi() { throw new NotImplementedException(); }
+        UnprocessableEntity<Todo> MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var context = new EndpointMetadataContext(((Delegate)MyApi).GetMethodInfo(), metadata, null);
+        var context = new EndpointMetadataContext(
+            ((Delegate)MyApi).GetMethodInfo(),
+            metadata,
+            null
+        );
 
         // Act
         PopulateMetadata<UnprocessableEntity<Todo>>(context);
 
         // Assert
-        var producesResponseTypeMetadata = context.EndpointMetadata.OfType<ProducesResponseTypeMetadata>().Last();
-        Assert.Equal(StatusCodes.Status422UnprocessableEntity, producesResponseTypeMetadata.StatusCode);
+        var producesResponseTypeMetadata = context.EndpointMetadata
+            .OfType<ProducesResponseTypeMetadata>()
+            .Last();
+        Assert.Equal(
+            StatusCodes.Status422UnprocessableEntity,
+            producesResponseTypeMetadata.StatusCode
+        );
         Assert.Equal(typeof(Todo), producesResponseTypeMetadata.Type);
         Assert.Single(producesResponseTypeMetadata.ContentTypes, "application/json");
     }
@@ -102,14 +108,20 @@ public class UnprocessableEntityOfTResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenContextIsNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("context", () => PopulateMetadata<UnprocessableEntity<object>>(null));
+        Assert.Throws<ArgumentNullException>(
+            "context",
+            () => PopulateMetadata<UnprocessableEntity<object>>(null)
+        );
     }
 
     private static void PopulateMetadata<TResult>(EndpointMetadataContext context)

@@ -35,7 +35,6 @@ namespace System.Security.Cryptography
             return (RC2?)CryptoConfig.CreateFromName(AlgName);
         }
 
-
         public override int KeySize
         {
             get { return KeySizeValue; }

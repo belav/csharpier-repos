@@ -27,15 +27,17 @@ namespace Microsoft.CodeAnalysis.Completion
         public bool UpdateImportCompletionCacheInBackground { get; init; } = false;
         public bool FilterOutOfScopeLocals { get; init; } = true;
         public bool ShowXmlDocCommentCompletion { get; init; } = true;
-        public ExpandedCompletionMode ExpandedCompletionBehavior { get; init; } = ExpandedCompletionMode.AllItems;
+        public ExpandedCompletionMode ExpandedCompletionBehavior { get; init; } =
+            ExpandedCompletionMode.AllItems;
         public NamingStylePreferences? NamingStyleFallbackOptions { get; init; } = null;
 
         public static readonly CompletionOptions Default = new();
 
-        public RecommendationServiceOptions ToRecommendationServiceOptions()
-            => new(
+        public RecommendationServiceOptions ToRecommendationServiceOptions() =>
+            new(
                 FilterOutOfScopeLocals: FilterOutOfScopeLocals,
-                HideAdvancedMembers: HideAdvancedMembers);
+                HideAdvancedMembers: HideAdvancedMembers
+            );
 
         /// <summary>
         /// Whether items from unimported namespaces should be included in the completion list.
@@ -44,7 +46,7 @@ namespace Microsoft.CodeAnalysis.Completion
         /// </summary>
         public bool ShouldShowItemsFromUnimportNamspaces()
         {
-            // Don't trigger import completion if the option value is "default" and the experiment is disabled for the user. 
+            // Don't trigger import completion if the option value is "default" and the experiment is disabled for the user.
             return ShowItemsFromUnimportedNamespaces ?? TypeImportCompletion;
         }
     }

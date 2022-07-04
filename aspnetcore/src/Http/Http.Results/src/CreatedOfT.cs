@@ -49,7 +49,10 @@ public sealed class Created<TValue> : IResult, IEndpointMetadataProvider
         }
         else
         {
-            Location = locationUri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+            Location = locationUri.GetComponents(
+                UriComponents.SerializationInfoString,
+                UriFormat.UriEscaped
+            );
         }
     }
 
@@ -83,10 +86,7 @@ public sealed class Created<TValue> : IResult, IEndpointMetadataProvider
         HttpResultsHelper.Log.WritingResultAsStatusCode(logger, StatusCode);
         httpContext.Response.StatusCode = StatusCode;
 
-        return HttpResultsHelper.WriteResultAsJsonAsync(
-                httpContext,
-                logger,
-                Value);
+        return HttpResultsHelper.WriteResultAsJsonAsync(httpContext, logger, Value);
     }
 
     /// <inheritdoc/>
@@ -94,6 +94,12 @@ public sealed class Created<TValue> : IResult, IEndpointMetadataProvider
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        context.EndpointMetadata.Add(new ProducesResponseTypeMetadata(typeof(TValue), StatusCodes.Status201Created, "application/json"));
+        context.EndpointMetadata.Add(
+            new ProducesResponseTypeMetadata(
+                typeof(TValue),
+                StatusCodes.Status201Created,
+                "application/json"
+            )
+        );
     }
 }

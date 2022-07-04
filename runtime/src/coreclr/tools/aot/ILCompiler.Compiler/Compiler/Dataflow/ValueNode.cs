@@ -17,31 +17,31 @@ namespace ILCompiler.Dataflow
 {
     public enum ValueNodeKind
     {
-        Invalid,                        // in case the Kind field is not initialized properly
+        Invalid, // in case the Kind field is not initialized properly
 
-        Unknown,                        // unknown value, has StaticType from context
+        Unknown, // unknown value, has StaticType from context
 
-        Null,                           // known value
-        SystemType,                     // known value - TypeRepresented
-        RuntimeTypeHandle,              // known value - TypeRepresented
-        KnownString,                    // known value - Contents
-        ConstInt,                       // known value - Int32
-        AnnotatedString,                // string with known annotation
+        Null, // known value
+        SystemType, // known value - TypeRepresented
+        RuntimeTypeHandle, // known value - TypeRepresented
+        KnownString, // known value - Contents
+        ConstInt, // known value - Int32
+        AnnotatedString, // string with known annotation
 
-        MethodParameter,                // symbolic placeholder
-        MethodReturn,                   // symbolic placeholder
+        MethodParameter, // symbolic placeholder
+        MethodReturn, // symbolic placeholder
 
-        RuntimeMethodHandle,            // known value - MethodRepresented
-        SystemReflectionMethodBase,     // known value - MethodRepresented
+        RuntimeMethodHandle, // known value - MethodRepresented
+        SystemReflectionMethodBase, // known value - MethodRepresented
 
         RuntimeTypeHandleForGenericParameter, // symbolic placeholder for generic parameter
-        SystemTypeForGenericParameter,        // symbolic placeholder for generic parameter
+        SystemTypeForGenericParameter, // symbolic placeholder for generic parameter
 
-        MergePoint,                     // structural, multiplexer - Values
-        GetTypeFromString,              // structural, could be known value - KnownString
-        Array,                          // structural, could be known value - Array
+        MergePoint, // structural, multiplexer - Values
+        GetTypeFromString, // structural, could be known value - KnownString
+        Array, // structural, could be known value - Array
 
-        LoadField,                      // structural, could be known value - InstanceValue
+        LoadField, // structural, could be known value - InstanceValue
     }
 
     /// <summary>
@@ -79,7 +79,10 @@ namespace ILCompiler.Dataflow
         /// Allows the enumeration of the direct children of this node.  The ChildCollection struct returned here
         /// supports 'foreach' without allocation.
         /// </summary>
-        public ChildCollection Children { get { return new ChildCollection(this); } }
+        public ChildCollection Children
+        {
+            get { return new ChildCollection(this); }
+        }
 
         /// <summary>
         /// This property allows you to enumerate all 'unique values' represented by a given ValueNode.  The basic idea
@@ -89,10 +92,7 @@ namespace ILCompiler.Dataflow
         /// </summary>
         public UniqueValueCollection UniqueValuesInternal
         {
-            get
-            {
-                return new UniqueValueCollection(this);
-            }
+            get { return new UniqueValueCollection(this); }
         }
 
         /// <summary>
@@ -109,7 +109,10 @@ namespace ILCompiler.Dataflow
         /// return that one value from GetSingleUniqueValue.  If it always returns 'false', it doesn't need to implement
         /// GetSingleUniqueValue.
         /// </summary>
-        protected virtual bool RepresentsExactlyOneValue { get { return false; } }
+        protected virtual bool RepresentsExactlyOneValue
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// GetSingleUniqueValue is called if, and only if, RepresentsExactlyOneValue returns true.  It allows us to
@@ -176,9 +179,15 @@ namespace ILCompiler.Dataflow
                     _index = -1;
                 }
 
-                public ValueNode Current { get { return _parent?.ChildAt(_index); } }
+                public ValueNode Current
+                {
+                    get { return _parent?.ChildAt(_index); }
+                }
 
-                object System.Collections.IEnumerator.Current { get { return Current; } }
+                object System.Collections.IEnumerator.Current
+                {
+                    get { return Current; }
+                }
 
                 public bool MoveNext()
                 {
@@ -191,14 +200,15 @@ namespace ILCompiler.Dataflow
                     _index = -1;
                 }
 
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
             }
 
             readonly ValueNode _parentNode;
 
-            public ChildCollection(ValueNode parentNode) { _parentNode = parentNode; }
+            public ChildCollection(ValueNode parentNode)
+            {
+                _parentNode = parentNode;
+            }
 
             // Used by C# 'foreach', when strongly typed, to avoid allocation.
             public Enumerator GetEnumerator()
@@ -211,13 +221,17 @@ namespace ILCompiler.Dataflow
                 // note the boxing!
                 return new Enumerator(_parentNode);
             }
+
             System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
             {
                 // note the boxing!
                 return new Enumerator(_parentNode);
             }
 
-            public int Count { get { return (_parentNode != null) ? _parentNode.NumChildren : 0; } }
+            public int Count
+            {
+                get { return (_parentNode != null) ? _parentNode.NumChildren : 0; }
+            }
         }
 
         /// <summary>
@@ -274,7 +288,6 @@ namespace ILCompiler.Dataflow
                 return GetEnumerator();
             }
 
-
             public struct Enumerator : IEnumerator<ValueNode>
             {
                 readonly IEnumerator<ValueNode> _multiValueEnumerator;
@@ -322,11 +335,12 @@ namespace ILCompiler.Dataflow
                     }
                 }
 
-                object System.Collections.IEnumerator.Current { get { return Current; } }
-
-                public void Dispose()
+                object System.Collections.IEnumerator.Current
                 {
+                    get { return Current; }
                 }
+
+                public void Dispose() { }
             }
         }
         #endregion
@@ -342,13 +356,25 @@ namespace ILCompiler.Dataflow
     /// </summary>
     public abstract class LeafValueNode : ValueNode
     {
-        protected override int NumChildren { get { return 0; } }
-        protected override ValueNode ChildAt(int index) { throw new InvalidOperationException(); }
+        protected override int NumChildren
+        {
+            get { return 0; }
+        }
 
-        protected override bool RepresentsExactlyOneValue { get { return true; } }
+        protected override ValueNode ChildAt(int index)
+        {
+            throw new InvalidOperationException();
+        }
 
-        protected override ValueNode GetSingleUniqueValue() { return this; }
+        protected override bool RepresentsExactlyOneValue
+        {
+            get { return true; }
+        }
 
+        protected override ValueNode GetSingleUniqueValue()
+        {
+            return this;
+        }
 
         protected override IEnumerable<ValueNode> EvaluateUniqueValues()
         {
@@ -370,7 +396,11 @@ namespace ILCompiler.Dataflow
         /// and should not be used by the caller after returning</param>
         /// <param name="allNodesSeen">Optional. The set of all nodes encountered during a walk after DetectCycle returns</param>
         /// <returns></returns>
-        public static bool DetectCycle(this ValueNode node, HashSet<ValueNode> seenNodes, HashSet<ValueNode> allNodesSeen)
+        public static bool DetectCycle(
+            this ValueNode node,
+            HashSet<ValueNode> seenNodes,
+            HashSet<ValueNode> allNodesSeen
+        )
         {
             if (node == null)
                 return false;
@@ -490,7 +520,11 @@ namespace ILCompiler.Dataflow
             return sb.ToString();
         }
 
-        public static void DumpTree(this ValueNode node, System.IO.TextWriter writer = null, int indentLevel = 0)
+        public static void DumpTree(
+            this ValueNode node,
+            System.IO.TextWriter writer = null,
+            int indentLevel = 0
+        )
         {
             if (writer == null)
                 writer = Console.Out;
@@ -647,7 +681,10 @@ namespace ILCompiler.Dataflow
     /// </summary>
     class SystemTypeForGenericParameterValue : LeafValueWithDynamicallyAccessedMemberNode
     {
-        public SystemTypeForGenericParameterValue(GenericParameterDesc genericParameter, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
+        public SystemTypeForGenericParameterValue(
+            GenericParameterDesc genericParameter,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
+        )
         {
             Kind = ValueNodeKind.SystemTypeForGenericParameter;
 
@@ -667,7 +704,8 @@ namespace ILCompiler.Dataflow
                 return false;
 
             var otherValue = (SystemTypeForGenericParameterValue)other;
-            return this.GenericParameter == otherValue.GenericParameter && this.DynamicallyAccessedMemberTypes == otherValue.DynamicallyAccessedMemberTypes;
+            return this.GenericParameter == otherValue.GenericParameter
+                && this.DynamicallyAccessedMemberTypes == otherValue.DynamicallyAccessedMemberTypes;
         }
 
         public override int GetHashCode()
@@ -677,7 +715,11 @@ namespace ILCompiler.Dataflow
 
         protected override string NodeToString()
         {
-            return ValueNodeDump.ValueNodeToString(this, GenericParameter, DynamicallyAccessedMemberTypes);
+            return ValueNodeDump.ValueNodeToString(
+                this,
+                GenericParameter,
+                DynamicallyAccessedMemberTypes
+            );
         }
     }
 
@@ -703,7 +745,10 @@ namespace ILCompiler.Dataflow
             if (!base.Equals(other))
                 return false;
 
-            return Equals(this.GenericParameter, ((RuntimeTypeHandleForGenericParameterValue)other).GenericParameter);
+            return Equals(
+                this.GenericParameter,
+                ((RuntimeTypeHandleForGenericParameterValue)other).GenericParameter
+            );
         }
 
         public override int GetHashCode()
@@ -739,7 +784,10 @@ namespace ILCompiler.Dataflow
             if (!base.Equals(other))
                 return false;
 
-            return Equals(this.MethodRepresented, ((RuntimeMethodHandleValue)other).MethodRepresented);
+            return Equals(
+                this.MethodRepresented,
+                ((RuntimeMethodHandleValue)other).MethodRepresented
+            );
         }
 
         public override int GetHashCode()
@@ -775,7 +823,10 @@ namespace ILCompiler.Dataflow
             if (!base.Equals(other))
                 return false;
 
-            return Equals(this.MethodRepresented, ((SystemReflectionMethodBaseValue)other).MethodRepresented);
+            return Equals(
+                this.MethodRepresented,
+                ((SystemReflectionMethodBaseValue)other).MethodRepresented
+            );
         }
 
         public override int GetHashCode()
@@ -852,19 +903,22 @@ namespace ILCompiler.Dataflow
     /// </summary>
     class MethodParameterValue : LeafValueWithDynamicallyAccessedMemberNode
     {
-        public MethodParameterValue(MethodDesc method, int parameterIndex, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
+        public MethodParameterValue(
+            MethodDesc method,
+            int parameterIndex,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
+        )
         {
             Kind = ValueNodeKind.MethodParameter;
             StaticType = !method.Signature.IsStatic
-                ? (parameterIndex == 0
-                    ? method.OwningType
-                    : method.Signature[parameterIndex - 1])
+                ? (parameterIndex == 0 ? method.OwningType : method.Signature[parameterIndex - 1])
                 : method.Signature[parameterIndex];
             ParameterIndex = parameterIndex;
             DynamicallyAccessedMemberTypes = dynamicallyAccessedMemberTypes;
-            SourceContext = !method.Signature.IsStatic && parameterIndex == 0 ?
-                new MethodOrigin(method) :
-                new ParameterOrigin(method, parameterIndex);
+            SourceContext =
+                !method.Signature.IsStatic && parameterIndex == 0
+                    ? new MethodOrigin(method)
+                    : new ParameterOrigin(method, parameterIndex);
         }
 
         public int ParameterIndex { get; }
@@ -885,7 +939,11 @@ namespace ILCompiler.Dataflow
 
         protected override string NodeToString()
         {
-            return ValueNodeDump.ValueNodeToString(this, ParameterIndex, DynamicallyAccessedMemberTypes);
+            return ValueNodeDump.ValueNodeToString(
+                this,
+                ParameterIndex,
+                DynamicallyAccessedMemberTypes
+            );
         }
     }
 
@@ -894,7 +952,10 @@ namespace ILCompiler.Dataflow
     /// </summary>
     class AnnotatedStringValue : LeafValueWithDynamicallyAccessedMemberNode
     {
-        public AnnotatedStringValue(Origin sourceContext, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
+        public AnnotatedStringValue(
+            Origin sourceContext,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
+        )
         {
             Kind = ValueNodeKind.AnnotatedString;
 
@@ -926,7 +987,10 @@ namespace ILCompiler.Dataflow
     /// </summary>
     class MethodReturnValue : LeafValueWithDynamicallyAccessedMemberNode
     {
-        public MethodReturnValue(MethodDesc method, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
+        public MethodReturnValue(
+            MethodDesc method,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
+        )
         {
             Kind = ValueNodeKind.MethodReturn;
             StaticType = method.Signature.ReturnType;
@@ -1012,9 +1076,16 @@ namespace ILCompiler.Dataflow
 
         readonly ValueNodeHashSet m_values;
 
-        public ValueNodeHashSet Values { get { return m_values; } }
+        public ValueNodeHashSet Values
+        {
+            get { return m_values; }
+        }
 
-        protected override int NumChildren { get { return Values.Count; } }
+        protected override int NumChildren
+        {
+            get { return Values.Count; }
+        }
+
         protected override ValueNode ChildAt(int index)
         {
             if (index < NumChildren)
@@ -1085,7 +1156,11 @@ namespace ILCompiler.Dataflow
     {
         private readonly TypeResolver _resolver;
 
-        public GetTypeFromStringValue(TypeResolver resolver, ValueNode assemblyIdentity, ValueNode nameString)
+        public GetTypeFromStringValue(
+            TypeResolver resolver,
+            ValueNode assemblyIdentity,
+            ValueNode nameString
+        )
         {
             _resolver = resolver;
             Kind = ValueNodeKind.GetTypeFromString;
@@ -1101,11 +1176,17 @@ namespace ILCompiler.Dataflow
 
         public ValueNode NameString { get; private set; }
 
-        protected override int NumChildren { get { return 2; } }
+        protected override int NumChildren
+        {
+            get { return 2; }
+        }
+
         protected override ValueNode ChildAt(int index)
         {
-            if (index == 0) return AssemblyIdentity;
-            if (index == 1) return NameString;
+            if (index == 0)
+                return AssemblyIdentity;
+            if (index == 1)
+                return NameString;
             throw new InvalidOperationException();
         }
 
@@ -1161,8 +1242,8 @@ namespace ILCompiler.Dataflow
 
             GetTypeFromStringValue otherGtfs = (GetTypeFromStringValue)other;
 
-            return this.AssemblyIdentity.Equals(otherGtfs.AssemblyIdentity) &&
-                this.NameString.Equals(otherGtfs.NameString);
+            return this.AssemblyIdentity.Equals(otherGtfs.AssemblyIdentity)
+                && this.NameString.Equals(otherGtfs.NameString);
         }
 
         public override int GetHashCode()
@@ -1182,7 +1263,10 @@ namespace ILCompiler.Dataflow
     /// </summary>
     class LoadFieldValue : LeafValueWithDynamicallyAccessedMemberNode
     {
-        public LoadFieldValue(FieldDesc fieldToLoad, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
+        public LoadFieldValue(
+            FieldDesc fieldToLoad,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
+        )
         {
             Kind = ValueNodeKind.LoadField;
             StaticType = fieldToLoad.FieldType;
@@ -1266,8 +1350,12 @@ namespace ILCompiler.Dataflow
             ElementType = elementType;
             IndexValues = new Dictionary<int, ValueBasicBlockPair>();
         }
-        private ArrayValue(ValueNode size, TypeDesc elementType, Dictionary<int, ValueBasicBlockPair> indexValues)
-            : this(size, elementType)
+
+        private ArrayValue(
+            ValueNode size,
+            TypeDesc elementType,
+            Dictionary<int, ValueBasicBlockPair> indexValues
+        ) : this(size, elementType)
         {
             IndexValues = indexValues;
         }
@@ -1293,7 +1381,8 @@ namespace ILCompiler.Dataflow
                 return false;
             // If both sets T and O are the same size and "T intersect O" is empty, then T == O.
             HashSet<KeyValuePair<int, ValueBasicBlockPair>> thisValueSet = new(IndexValues);
-            HashSet<KeyValuePair<int, ValueBasicBlockPair>> otherValueSet = new(otherArr.IndexValues);
+            HashSet<KeyValuePair<int, ValueBasicBlockPair>> otherValueSet =
+                new(otherArr.IndexValues);
             thisValueSet.ExceptWith(otherValueSet);
             return thisValueSet.Count == 0;
         }
@@ -1312,7 +1401,8 @@ namespace ILCompiler.Dataflow
 
         protected override ValueNode ChildAt(int index)
         {
-            if (index == 0) return Size;
+            if (index == 0)
+                return Size;
             if (index - 1 <= IndexValues.Count)
                 return IndexValues.Values.ElementAt(index - 1).Value;
 
@@ -1323,19 +1413,11 @@ namespace ILCompiler.Dataflow
     #region ValueNode Collections
     public class ValueNodeList : List<ValueNode>
     {
-        public ValueNodeList()
-        {
-        }
+        public ValueNodeList() { }
 
-        public ValueNodeList(int capacity)
-            : base(capacity)
-        {
-        }
+        public ValueNodeList(int capacity) : base(capacity) { }
 
-        public ValueNodeList(List<ValueNode> other)
-            : base(other)
-        {
-        }
+        public ValueNodeList(List<ValueNode> other) : base(other) { }
 
         public override int GetHashCode()
         {

@@ -19,7 +19,10 @@ namespace Internal.IL
         private readonly PInvokeILEmitterConfiguration _pInvokeILEmitterConfiguration;
         private readonly InteropStateManager _interopStateManager;
 
-        public PInvokeILProvider(PInvokeILEmitterConfiguration pInvokeILEmitterConfiguration, InteropStateManager interopStateManager)
+        public PInvokeILProvider(
+            PInvokeILEmitterConfiguration pInvokeILEmitterConfiguration,
+            InteropStateManager interopStateManager
+        )
         {
             _pInvokeILEmitterConfiguration = pInvokeILEmitterConfiguration;
             _interopStateManager = interopStateManager;
@@ -27,7 +30,11 @@ namespace Internal.IL
 
         public override MethodIL GetMethodIL(MethodDesc method)
         {
-            return PInvokeILEmitter.EmitIL(method, _pInvokeILEmitterConfiguration, _interopStateManager);
+            return PInvokeILEmitter.EmitIL(
+                method,
+                _pInvokeILEmitterConfiguration,
+                _interopStateManager
+            );
         }
 
         public MethodDesc GetCalliStub(MethodSignature signature, ModuleDesc moduleContext)
@@ -37,7 +44,10 @@ namespace Internal.IL
 
         public string GetDirectCallExternName(MethodDesc method)
         {
-            bool directCall = _pInvokeILEmitterConfiguration.GenerateDirectCall(method, out string externName);
+            bool directCall = _pInvokeILEmitterConfiguration.GenerateDirectCall(
+                method,
+                out string externName
+            );
             Debug.Assert(directCall);
             Debug.Assert(externName != null);
             return externName;

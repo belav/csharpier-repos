@@ -28,11 +28,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         public ImmutableArray<CompletionItem>? CombinedSortedList { get; set; }
         public Task<(CompletionContext, RoslynCompletionList)>? ExpandedItemsTask { get; set; }
 
-        private CompletionSessionData()
-        {
-        }
+        private CompletionSessionData() { }
 
-        public static CompletionSessionData GetOrCreateSessionData(IAsyncCompletionSession session)
-            => session.Properties.GetOrCreateSingletonProperty(RoslynCompletionSessionData, static () => new CompletionSessionData());
+        public static CompletionSessionData GetOrCreateSessionData(
+            IAsyncCompletionSession session
+        ) =>
+            session.Properties.GetOrCreateSingletonProperty(
+                RoslynCompletionSessionData,
+                static () => new CompletionSessionData()
+            );
     }
 }

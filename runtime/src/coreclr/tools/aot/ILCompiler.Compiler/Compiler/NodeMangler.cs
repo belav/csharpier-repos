@@ -10,7 +10,7 @@ namespace ILCompiler
     // NodeMangler is responsible for producing mangled names for specific nodes
     // and for node-related purposes, where the name needs to be in a special format
     // on some platform
-    // 
+    //
     public abstract class NodeMangler
     {
         public NameMangler NameMangler;

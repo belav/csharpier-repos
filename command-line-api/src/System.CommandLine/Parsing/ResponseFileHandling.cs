@@ -8,7 +8,6 @@ namespace System.CommandLine.Parsing
     /// </summary>
     public enum ResponseFileHandling
     {
-
         ///<summary>
         /// Each line in the file is treated as a single argument, regardless of whitespace on the line.
         ///</summary>

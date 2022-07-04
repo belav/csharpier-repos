@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.RawStringLiteral
         public RawStringLiteralCommandHandler(
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IGlobalOptionService globalOptions,
-            IEditorOperationsFactoryService editorOperationsFactoryService)
+            IEditorOperationsFactoryService editorOperationsFactoryService
+        )
         {
             _undoHistoryRegistry = undoHistoryRegistry;
             _globalOptions = globalOptions;

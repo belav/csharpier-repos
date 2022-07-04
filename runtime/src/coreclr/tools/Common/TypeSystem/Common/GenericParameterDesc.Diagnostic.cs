@@ -13,10 +13,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual string DiagnosticName
         {
-            get
-            {
-                return string.Concat("T", Index.ToStringInvariant());
-            }
+            get { return string.Concat("T", Index.ToStringInvariant()); }
         }
     }
 }

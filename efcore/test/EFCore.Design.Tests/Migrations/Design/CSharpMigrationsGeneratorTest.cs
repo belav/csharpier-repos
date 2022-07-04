@@ -17,7 +17,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 public class CSharpMigrationsGeneratorTest
 {
     private static readonly string _nl = Environment.NewLine;
-    private static readonly string _toTable = _nl + @"entityTypeBuilder.ToTable(""WithAnnotations"")";
+    private static readonly string _toTable =
+        _nl + @"entityTypeBuilder.ToTable(""WithAnnotations"")";
 
     [ConditionalFact]
     public void Test_new_annotations_handled_for_entity_types()
@@ -89,51 +90,63 @@ public class CSharpMigrationsGeneratorTest
         {
             {
                 RelationalAnnotationNames.TableName,
-                ("MyTable", _nl + "entityTypeBuilder." + nameof(RelationalEntityTypeBuilderExtensions.ToTable) + @"(""MyTable"")")
+                (
+                    "MyTable",
+                    _nl
+                        + "entityTypeBuilder."
+                        + nameof(RelationalEntityTypeBuilderExtensions.ToTable)
+                        + @"(""MyTable"")"
+                )
             },
             {
-                RelationalAnnotationNames.Schema, ("MySchema",
+                RelationalAnnotationNames.Schema,
+                (
+                    "MySchema",
                     _nl
-                    + "entityTypeBuilder."
-                    + nameof(RelationalEntityTypeBuilderExtensions.ToTable)
-                    + @"(""WithAnnotations"", ""MySchema"")")
+                        + "entityTypeBuilder."
+                        + nameof(RelationalEntityTypeBuilderExtensions.ToTable)
+                        + @"(""WithAnnotations"", ""MySchema"")"
+                )
             },
             {
                 RelationalAnnotationNames.MappingStrategy,
-                (RelationalAnnotationNames.TphMappingStrategy,
-                    _toTable
-                    + ";"
-                    + _nl
-                    + _nl
-                    + "entityTypeBuilder.UseTphMappingStrategy()")
+                (
+                    RelationalAnnotationNames.TphMappingStrategy,
+                    _toTable + ";" + _nl + _nl + "entityTypeBuilder.UseTphMappingStrategy()"
+                )
             },
             {
-                CoreAnnotationNames.DiscriminatorProperty, ("Id",
+                CoreAnnotationNames.DiscriminatorProperty,
+                (
+                    "Id",
                     _toTable
-                    + ";"
-                    + _nl
-                    + _nl
-                    + "entityTypeBuilder.HasDiscriminator"
-                    + @"<int>(""Id"")")
+                        + ";"
+                        + _nl
+                        + _nl
+                        + "entityTypeBuilder.HasDiscriminator"
+                        + @"<int>(""Id"")"
+                )
             },
             {
-                CoreAnnotationNames.DiscriminatorValue, ("MyDiscriminatorValue",
+                CoreAnnotationNames.DiscriminatorValue,
+                (
+                    "MyDiscriminatorValue",
                     _toTable
-                    + ";"
-                    + _nl
-                    + _nl
-                    + "entityTypeBuilder.HasDiscriminator"
-                    + "()."
-                    + nameof(DiscriminatorBuilder.HasValue)
-                    + @"(""MyDiscriminatorValue"")")
+                        + ";"
+                        + _nl
+                        + _nl
+                        + "entityTypeBuilder.HasDiscriminator"
+                        + "()."
+                        + nameof(DiscriminatorBuilder.HasValue)
+                        + @"(""MyDiscriminatorValue"")"
+                )
             },
             {
-                RelationalAnnotationNames.Comment, ("My Comment",
-                    _toTable
-                    + ";"
-                    + _nl
-                    + _nl
-                    + @"entityTypeBuilder.HasComment(""My Comment"")")
+                RelationalAnnotationNames.Comment,
+                (
+                    "My Comment",
+                    _toTable + ";" + _nl + _nl + @"entityTypeBuilder.HasComment(""My Comment"")"
+                )
             },
             {
 #pragma warning disable CS0612 // Type or member is obsolete
@@ -143,23 +156,43 @@ public class CSharpMigrationsGeneratorTest
             },
             {
                 RelationalAnnotationNames.ViewName,
-                ("MyView", _nl + "entityTypeBuilder." + nameof(RelationalEntityTypeBuilderExtensions.ToView) + @"(""MyView"")")
+                (
+                    "MyView",
+                    _nl
+                        + "entityTypeBuilder."
+                        + nameof(RelationalEntityTypeBuilderExtensions.ToView)
+                        + @"(""MyView"")"
+                )
             },
             {
                 RelationalAnnotationNames.FunctionName,
-                (null, _nl + "entityTypeBuilder." + nameof(RelationalEntityTypeBuilderExtensions.ToFunction) + @"(null)")
+                (
+                    null,
+                    _nl
+                        + "entityTypeBuilder."
+                        + nameof(RelationalEntityTypeBuilderExtensions.ToFunction)
+                        + @"(null)"
+                )
             },
             {
                 RelationalAnnotationNames.SqlQuery,
-                (null, _nl + "entityTypeBuilder." + nameof(RelationalEntityTypeBuilderExtensions.ToSqlQuery) + @"(null)")
+                (
+                    null,
+                    _nl
+                        + "entityTypeBuilder."
+                        + nameof(RelationalEntityTypeBuilderExtensions.ToSqlQuery)
+                        + @"(null)"
+                )
             }
         };
 
         MissingAnnotationCheck(
             b => b.Entity<WithAnnotations>().Metadata,
-            notForEntityType, forEntityType,
+            notForEntityType,
+            forEntityType,
             a => _toTable,
-            (g, m, b) => g.TestGenerateEntityTypeAnnotations("entityTypeBuilder", (IEntityType)m, b));
+            (g, m, b) => g.TestGenerateEntityTypeAnnotations("entityTypeBuilder", (IEntityType)m, b)
+        );
     }
 
     [ConditionalFact]
@@ -222,71 +255,119 @@ public class CSharpMigrationsGeneratorTest
             RelationalAnnotationNames.GetReaderFieldValue
         };
 
-        var columnMapping = $@"{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnType)}(""default_int_mapping"")";
+        var columnMapping =
+            $@"{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnType)}(""default_int_mapping"")";
 
         // Add a line here if the code generator is supposed to handle this annotation
         // Note that other tests should be added to check code is generated correctly
         var forProperty = new Dictionary<string, (object, string)>
         {
-            { CoreAnnotationNames.MaxLength, (256, $@"{_nl}.{nameof(PropertyBuilder.HasMaxLength)}(256){columnMapping}") },
-            { CoreAnnotationNames.Precision, (4, $@"{_nl}.{nameof(PropertyBuilder.HasPrecision)}(4){columnMapping}") },
-            { CoreAnnotationNames.Scale, (null, $@"{columnMapping}") },
-            { CoreAnnotationNames.Unicode, (false, $@"{_nl}.{nameof(PropertyBuilder.IsUnicode)}(false){columnMapping}") },
             {
-                CoreAnnotationNames.ValueConverter, (new ValueConverter<int, long>(v => v, v => (int)v),
-                    $@"{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnType)}(""default_long_mapping"")")
+                CoreAnnotationNames.MaxLength,
+                (256, $@"{_nl}.{nameof(PropertyBuilder.HasMaxLength)}(256){columnMapping}")
+            },
+            {
+                CoreAnnotationNames.Precision,
+                (4, $@"{_nl}.{nameof(PropertyBuilder.HasPrecision)}(4){columnMapping}")
+            },
+            { CoreAnnotationNames.Scale, (null, $@"{columnMapping}") },
+            {
+                CoreAnnotationNames.Unicode,
+                (false, $@"{_nl}.{nameof(PropertyBuilder.IsUnicode)}(false){columnMapping}")
+            },
+            {
+                CoreAnnotationNames.ValueConverter,
+                (
+                    new ValueConverter<int, long>(v => v, v => (int)v),
+                    $@"{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnType)}(""default_long_mapping"")"
+                )
             },
             {
                 CoreAnnotationNames.ProviderClrType,
-                (typeof(long), $@"{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnType)}(""default_long_mapping"")")
+                (
+                    typeof(long),
+                    $@"{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnType)}(""default_long_mapping"")"
+                )
             },
             {
                 RelationalAnnotationNames.ColumnName,
-                ("MyColumn", $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnName)}(""MyColumn"")")
+                (
+                    "MyColumn",
+                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnName)}(""MyColumn"")"
+                )
             },
             {
                 RelationalAnnotationNames.ColumnOrder,
-                (1, $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnOrder)}(1)")
+                (
+                    1,
+                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnOrder)}(1)"
+                )
             },
             {
                 RelationalAnnotationNames.ColumnType,
-                ("int", $@"{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnType)}(""int"")")
+                (
+                    "int",
+                    $@"{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnType)}(""int"")"
+                )
             },
             {
                 RelationalAnnotationNames.DefaultValueSql,
-                ("some SQL", $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasDefaultValueSql)}(""some SQL"")")
+                (
+                    "some SQL",
+                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasDefaultValueSql)}(""some SQL"")"
+                )
             },
             {
                 RelationalAnnotationNames.ComputedColumnSql,
-                ("some SQL", $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql)}(""some SQL"")")
+                (
+                    "some SQL",
+                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql)}(""some SQL"")"
+                )
             },
             {
                 RelationalAnnotationNames.DefaultValue,
-                ("1", $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasDefaultValue)}(""1"")")
+                (
+                    "1",
+                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasDefaultValue)}(""1"")"
+                )
             },
             {
                 RelationalAnnotationNames.IsFixedLength,
-                (true, $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.IsFixedLength)}()")
+                (
+                    true,
+                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.IsFixedLength)}()"
+                )
             },
             {
                 RelationalAnnotationNames.Comment,
-                ("My Comment", $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasComment)}(""My Comment"")")
+                (
+                    "My Comment",
+                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasComment)}(""My Comment"")"
+                )
             },
             {
-                RelationalAnnotationNames.Collation, ("Some Collation",
-                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.UseCollation)}(""Some Collation"")")
+                RelationalAnnotationNames.Collation,
+                (
+                    "Some Collation",
+                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.UseCollation)}(""Some Collation"")"
+                )
             },
             {
                 RelationalAnnotationNames.IsStored,
-                (null, $@"{columnMapping}{_nl}.HasAnnotation(""{RelationalAnnotationNames.IsStored}"", null)")
+                (
+                    null,
+                    $@"{columnMapping}{_nl}.HasAnnotation(""{RelationalAnnotationNames.IsStored}"", null)"
+                )
             }
         };
 
         MissingAnnotationCheck(
             b => b.Entity<WithAnnotations>().Property(e => e.Id).Metadata,
-            notForProperty, forProperty,
+            notForProperty,
+            forProperty,
             a => $"{columnMapping}",
-            (g, m, b) => g.TestGeneratePropertyAnnotations("propertyBuilder", (IProperty)m, b));
+            (g, m, b) => g.TestGeneratePropertyAnnotations("propertyBuilder", (IProperty)m, b)
+        );
     }
 
     private static void MissingAnnotationCheck(
@@ -294,21 +375,32 @@ public class CSharpMigrationsGeneratorTest
         HashSet<string> invalidAnnotations,
         Dictionary<string, (object Value, string Expected)> validAnnotations,
         Func<string, string> generationDefault,
-        Action<TestCSharpSnapshotGenerator, IMutableAnnotatable, IndentedStringBuilder> test)
+        Action<TestCSharpSnapshotGenerator, IMutableAnnotatable, IndentedStringBuilder> test
+    )
     {
         var sqlServerTypeMappingSource = new SqlServerTypeMappingSource(
             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+        );
 
         var sqlServerAnnotationCodeGenerator = new SqlServerAnnotationCodeGenerator(
-            new AnnotationCodeGeneratorDependencies(sqlServerTypeMappingSource));
+            new AnnotationCodeGeneratorDependencies(sqlServerTypeMappingSource)
+        );
 
         var codeHelper = new CSharpHelper(sqlServerTypeMappingSource);
 
         var generator = new TestCSharpSnapshotGenerator(
-            new CSharpSnapshotGeneratorDependencies(codeHelper, sqlServerTypeMappingSource, sqlServerAnnotationCodeGenerator));
+            new CSharpSnapshotGeneratorDependencies(
+                codeHelper,
+                sqlServerTypeMappingSource,
+                sqlServerAnnotationCodeGenerator
+            )
+        );
 
-        var coreAnnotations = typeof(CoreAnnotationNames).GetFields().Where(f => f.FieldType == typeof(string)).ToList();
+        var coreAnnotations = typeof(CoreAnnotationNames)
+            .GetFields()
+            .Where(f => f.FieldType == typeof(string))
+            .ToList();
 
         foreach (var field in coreAnnotations)
         {
@@ -316,11 +408,19 @@ public class CSharpMigrationsGeneratorTest
 
             Assert.True(
                 CoreAnnotationNames.AllNames.Contains(annotationName),
-                nameof(CoreAnnotationNames) + "." + nameof(CoreAnnotationNames.AllNames) + " doesn't contain " + annotationName);
+                nameof(CoreAnnotationNames)
+                    + "."
+                    + nameof(CoreAnnotationNames.AllNames)
+                    + " doesn't contain "
+                    + annotationName
+            );
         }
 
-        foreach (var field in coreAnnotations.Concat(
-                     typeof(RelationalAnnotationNames).GetFields().Where(f => f.Name != "Prefix")))
+        foreach (
+            var field in coreAnnotations.Concat(
+                typeof(RelationalAnnotationNames).GetFields().Where(f => f.Name != "Prefix")
+            )
+        )
         {
             var annotationName = (string)field.GetValue(null);
 
@@ -329,9 +429,11 @@ public class CSharpMigrationsGeneratorTest
                 var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
                 var metadataItem = createMetadataItem(modelBuilder);
                 metadataItem.SetAnnotation(
-                    annotationName, validAnnotations.ContainsKey(annotationName)
+                    annotationName,
+                    validAnnotations.ContainsKey(annotationName)
                         ? validAnnotations[annotationName].Value
-                        : null);
+                        : null
+                );
 
                 modelBuilder.FinalizeModel(designTime: true);
 
@@ -344,7 +446,10 @@ public class CSharpMigrationsGeneratorTest
                 }
                 catch (Exception e)
                 {
-                    Assert.False(true, $"Annotation '{annotationName}' was not handled by the code generator: {e.Message}");
+                    Assert.False(
+                        true,
+                        $"Annotation '{annotationName}' was not handled by the code generator: {e.Message}"
+                    );
                 }
 
                 try
@@ -355,7 +460,8 @@ public class CSharpMigrationsGeneratorTest
 
                     Assert.Equal(
                         string.IsNullOrEmpty(expected) ? expected : $"{expected};{_nl}",
-                        sb.ToString());
+                        sb.ToString()
+                    );
                 }
                 catch (Exception e)
                 {
@@ -369,21 +475,19 @@ public class CSharpMigrationsGeneratorTest
     private class TestCSharpSnapshotGenerator : CSharpSnapshotGenerator
     {
         public TestCSharpSnapshotGenerator(CSharpSnapshotGeneratorDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         public virtual void TestGenerateEntityTypeAnnotations(
             string builderName,
             IEntityType entityType,
-            IndentedStringBuilder stringBuilder)
-            => GenerateEntityTypeAnnotations(builderName, entityType, stringBuilder);
+            IndentedStringBuilder stringBuilder
+        ) => GenerateEntityTypeAnnotations(builderName, entityType, stringBuilder);
 
         public virtual void TestGeneratePropertyAnnotations(
             string builderName,
             IProperty property,
-            IndentedStringBuilder stringBuilder)
-            => GeneratePropertyAnnotations(builderName, property, stringBuilder);
+            IndentedStringBuilder stringBuilder
+        ) => GeneratePropertyAnnotations(builderName, property, stringBuilder);
     }
 
     // ReSharper disable once ClassNeverInstantiated.Local
@@ -392,46 +496,51 @@ public class CSharpMigrationsGeneratorTest
         public int Id { get; set; }
     }
 
-    private class Derived : WithAnnotations
-    {
-    }
+    private class Derived : WithAnnotations { }
 
     [ConditionalFact]
     public void Snapshot_with_enum_discriminator_uses_converted_values()
     {
         var sqlServerTypeMappingSource = new SqlServerTypeMappingSource(
             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+        );
 
-        var codeHelper = new CSharpHelper(
-            sqlServerTypeMappingSource);
+        var codeHelper = new CSharpHelper(sqlServerTypeMappingSource);
 
         var sqlServerAnnotationCodeGenerator = new SqlServerAnnotationCodeGenerator(
-            new AnnotationCodeGeneratorDependencies(sqlServerTypeMappingSource));
+            new AnnotationCodeGeneratorDependencies(sqlServerTypeMappingSource)
+        );
 
         var generator = new CSharpMigrationsGenerator(
             new MigrationsCodeGeneratorDependencies(
                 sqlServerTypeMappingSource,
-                sqlServerAnnotationCodeGenerator),
+                sqlServerAnnotationCodeGenerator
+            ),
             new CSharpMigrationsGeneratorDependencies(
                 codeHelper,
                 new CSharpMigrationOperationGenerator(
-                    new CSharpMigrationOperationGeneratorDependencies(
-                        codeHelper)),
+                    new CSharpMigrationOperationGeneratorDependencies(codeHelper)
+                ),
                 new CSharpSnapshotGenerator(
                     new CSharpSnapshotGeneratorDependencies(
-                        codeHelper, sqlServerTypeMappingSource, sqlServerAnnotationCodeGenerator))));
+                        codeHelper,
+                        sqlServerTypeMappingSource,
+                        sqlServerAnnotationCodeGenerator
+                    )
+                )
+            )
+        );
 
         var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
         modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
-        modelBuilder.Entity<WithAnnotations>(
-            eb =>
-            {
-                eb.HasDiscriminator<RawEnum>("EnumDiscriminator")
-                    .HasValue(RawEnum.A)
-                    .HasValue<Derived>(RawEnum.B);
-                eb.Property<RawEnum>("EnumDiscriminator").HasConversion<int>();
-            });
+        modelBuilder.Entity<WithAnnotations>(eb =>
+        {
+            eb.HasDiscriminator<RawEnum>("EnumDiscriminator")
+                .HasValue(RawEnum.A)
+                .HasValue<Derived>(RawEnum.B);
+            eb.Property<RawEnum>("EnumDiscriminator").HasConversion<int>();
+        });
 
         var finalizedModel = modelBuilder.FinalizeModel(designTime: true);
 
@@ -439,12 +548,19 @@ public class CSharpMigrationsGeneratorTest
             "MyNamespace",
             typeof(MyContext),
             "MySnapshot",
-            finalizedModel);
+            finalizedModel
+        );
 
         var snapshotModel = CompileModelSnapshot(modelSnapshotCode, "MyNamespace.MySnapshot").Model;
 
-        Assert.Equal((int)RawEnum.A, snapshotModel.FindEntityType(typeof(WithAnnotations)).GetDiscriminatorValue());
-        Assert.Equal((int)RawEnum.B, snapshotModel.FindEntityType(typeof(Derived)).GetDiscriminatorValue());
+        Assert.Equal(
+            (int)RawEnum.A,
+            snapshotModel.FindEntityType(typeof(WithAnnotations)).GetDiscriminatorValue()
+        );
+        Assert.Equal(
+            (int)RawEnum.B,
+            snapshotModel.FindEntityType(typeof(Derived)).GetDiscriminatorValue()
+        );
     }
 
     private static void AssertConverter(ValueConverter valueConverter, string expected)
@@ -458,16 +574,22 @@ public class CSharpMigrationsGeneratorTest
 
         var sqlServerTypeMappingSource = new SqlServerTypeMappingSource(
             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+        );
 
         var codeHelper = new CSharpHelper(sqlServerTypeMappingSource);
 
         var sqlServerAnnotationCodeGenerator = new SqlServerAnnotationCodeGenerator(
-            new AnnotationCodeGeneratorDependencies(sqlServerTypeMappingSource));
+            new AnnotationCodeGeneratorDependencies(sqlServerTypeMappingSource)
+        );
 
         var generator = new TestCSharpSnapshotGenerator(
             new CSharpSnapshotGeneratorDependencies(
-                codeHelper, sqlServerTypeMappingSource, sqlServerAnnotationCodeGenerator));
+                codeHelper,
+                sqlServerTypeMappingSource,
+                sqlServerAnnotationCodeGenerator
+            )
+        );
 
         var sb = new IndentedStringBuilder();
 
@@ -507,7 +629,8 @@ public class CSharpMigrationsGeneratorTest
                     Values = new object[,] { { 1, null, -1 } }
                 }
             },
-            Array.Empty<MigrationOperation>());
+            Array.Empty<MigrationOperation>()
+        );
         Assert.Equal(
             @"using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -554,19 +677,27 @@ namespace MyNamespace
 }
 ",
             migrationCode,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
-        var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder(configure: c => c.RemoveAllConventions());
+        var modelBuilder = SqlServerTestHelpers.Instance.CreateConventionBuilder(
+            configure: c => c.RemoveAllConventions()
+        );
         modelBuilder.HasAnnotation("Some:EnumValue", RegexOptions.Multiline);
-        modelBuilder.HasAnnotation(RelationalAnnotationNames.DbFunctions, new SortedDictionary<string, IDbFunction>());
+        modelBuilder.HasAnnotation(
+            RelationalAnnotationNames.DbFunctions,
+            new SortedDictionary<string, IDbFunction>()
+        );
         modelBuilder.Entity(
-            "T1", eb =>
+            "T1",
+            eb =>
             {
                 eb.Property<int>("Id");
                 eb.Property<string>("C2").IsRequired();
                 eb.Property<int>("C3");
                 eb.HasKey("Id");
-            });
+            }
+        );
         modelBuilder.HasAnnotation(CoreAnnotationNames.ProductVersion, null);
 
         var finalizedModel = modelBuilder.FinalizeModel(designTime: true);
@@ -576,7 +707,8 @@ namespace MyNamespace
             typeof(MyContext),
             "MyMigration",
             "20150511161616_MyMigration",
-            finalizedModel);
+            finalizedModel
+        );
         Assert.Equal(
             @"// <auto-generated />
 using System.Text.RegularExpressions;
@@ -622,7 +754,8 @@ namespace MyNamespace
 }
 ",
             migrationMetadataCode,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         var build = new BuildSource
         {
@@ -632,13 +765,21 @@ namespace MyNamespace
                 BuildReference.ByName("Microsoft.EntityFrameworkCore"),
                 BuildReference.ByName("Microsoft.EntityFrameworkCore.Relational")
             },
-            Sources = { { "Migration.cs", migrationCode }, { "MigrationSnapshot.cs", migrationMetadataCode } },
+            Sources =
+            {
+                { "Migration.cs", migrationCode },
+                { "MigrationSnapshot.cs", migrationMetadataCode }
+            },
             EmitDocumentationDiagnostics = true
         };
 
         var assembly = build.BuildInMemory();
 
-        var migrationType = assembly.GetType("MyNamespace.MyMigration", throwOnError: true, ignoreCase: false);
+        var migrationType = assembly.GetType(
+            "MyNamespace.MyMigration",
+            throwOnError: true,
+            ignoreCase: false
+        );
 
         var contextTypeAttribute = migrationType.GetCustomAttribute<DbContextAttribute>();
         Assert.NotNull(contextTypeAttribute);
@@ -659,8 +800,7 @@ namespace MyNamespace
         B
     }
 
-    private static int MyDbFunction()
-        => throw new NotImplementedException();
+    private static int MyDbFunction() => throw new NotImplementedException();
 
     private class EntityWithConstructorBinding
     {
@@ -679,13 +819,12 @@ namespace MyNamespace
 
         var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
         modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
-        modelBuilder.Entity<EntityWithConstructorBinding>(
-            x =>
-            {
-                x.Property(e => e.Id);
+        modelBuilder.Entity<EntityWithConstructorBinding>(x =>
+        {
+            x.Property(e => e.Id);
 
-                x.Property<Guid>("PropertyWithValueGenerator").HasValueGenerator<GuidValueGenerator>();
-            });
+            x.Property<Guid>("PropertyWithValueGenerator").HasValueGenerator<GuidValueGenerator>();
+        });
         modelBuilder.HasDbFunction(() => MyDbFunction());
 
         var model = modelBuilder.Model;
@@ -695,12 +834,20 @@ namespace MyNamespace
         var property1 = entityType.AddProperty("Pickle", typeof(StringBuilder));
         property1.SetValueConverter(
             new ValueConverter<StringBuilder, string>(
-                v => v.ToString(), v => new StringBuilder(v), new ConverterMappingHints(size: 10)));
+                v => v.ToString(),
+                v => new StringBuilder(v),
+                new ConverterMappingHints(size: 10)
+            )
+        );
 
         var property2 = entityType.AddProperty("Ham", typeof(RawEnum));
         property2.SetValueConverter(
             new ValueConverter<RawEnum, string>(
-                v => v.ToString(), v => (RawEnum)Enum.Parse(typeof(RawEnum), v), new ConverterMappingHints(size: 10)));
+                v => v.ToString(),
+                v => (RawEnum)Enum.Parse(typeof(RawEnum), v),
+                new ConverterMappingHints(size: 10)
+            )
+        );
 
         entityType.SetPrimaryKey(property2);
 
@@ -710,7 +857,8 @@ namespace MyNamespace
             "MyNamespace",
             typeof(MyContext),
             "MySnapshot",
-            finalizedModel);
+            finalizedModel
+        );
         Assert.Equal(
             @"// <auto-generated />
 using System;
@@ -762,7 +910,10 @@ namespace MyNamespace
         }
     }
 }
-", modelSnapshotCode, ignoreLineEndingDifferences: true);
+",
+            modelSnapshotCode,
+            ignoreLineEndingDifferences: true
+        );
 
         var snapshot = CompileModelSnapshot(modelSnapshotCode, "MyNamespace.MySnapshot");
         Assert.Equal(2, snapshot.Model.GetEntityTypes().Count());
@@ -774,52 +925,54 @@ namespace MyNamespace
         var generator = CreateMigrationsCodeGenerator();
 
         var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
-        modelBuilder.Entity<EntityWithEveryPrimitive>(
-            eb =>
-            {
-                eb.Property(e => e.Boolean).HasDefaultValue(false);
-                eb.Property(e => e.Byte).HasDefaultValue(byte.MinValue);
-                eb.Property(e => e.ByteArray).HasDefaultValue(new byte[] { 0 });
-                eb.Property(e => e.Char).HasDefaultValue('0');
-                eb.Property(e => e.DateTime).HasDefaultValue(DateTime.MinValue);
-                eb.Property(e => e.DateTimeOffset).HasDefaultValue(DateTimeOffset.MinValue);
-                eb.Property(e => e.Decimal).HasDefaultValue(decimal.MinValue);
-                eb.Property(e => e.Double).HasDefaultValue(double.MinValue); //double.NegativeInfinity
-                eb.Property(e => e.Enum).HasDefaultValue(Enum1.Default);
-                eb.Property(e => e.NullableEnum).HasDefaultValue(Enum1.Default).HasConversion<string>();
-                eb.Property(e => e.Guid).HasDefaultValue(Guid.NewGuid());
-                eb.Property(e => e.Int16).HasDefaultValue(short.MaxValue);
-                eb.Property(e => e.Int32).HasDefaultValue(int.MaxValue);
-                eb.Property(e => e.Int64).HasDefaultValue(long.MaxValue);
-                eb.Property(e => e.Single).HasDefaultValue(float.Epsilon);
-                eb.Property(e => e.SByte).HasDefaultValue(sbyte.MinValue);
-                eb.Property(e => e.String).HasDefaultValue("'\"'@\r\\\n");
-                eb.Property(e => e.TimeSpan).HasDefaultValue(TimeSpan.MaxValue);
-                eb.Property(e => e.UInt16).HasDefaultValue(ushort.MinValue);
-                eb.Property(e => e.UInt32).HasDefaultValue(uint.MinValue);
-                eb.Property(e => e.UInt64).HasDefaultValue(ulong.MinValue);
-                eb.Property(e => e.NullableBoolean).HasDefaultValue(true);
-                eb.Property(e => e.NullableByte).HasDefaultValue(byte.MaxValue);
-                eb.Property(e => e.NullableChar).HasDefaultValue('\'');
-                eb.Property(e => e.NullableDateTime).HasDefaultValue(DateTime.MaxValue);
-                eb.Property(e => e.NullableDateTimeOffset).HasDefaultValue(DateTimeOffset.MaxValue);
-                eb.Property(e => e.NullableDecimal).HasDefaultValue(decimal.MaxValue);
-                eb.Property(e => e.NullableDouble).HasDefaultValue(0.6822871999174);
-                eb.Property(e => e.NullableEnum).HasDefaultValue(Enum1.One | Enum1.Two);
-                eb.Property(e => e.NullableStringEnum).HasDefaultValue(Enum1.One).HasConversion<string>();
-                eb.Property(e => e.NullableGuid).HasDefaultValue(new Guid());
-                eb.Property(e => e.NullableInt16).HasDefaultValue(short.MinValue);
-                eb.Property(e => e.NullableInt32).HasDefaultValue(int.MinValue);
-                eb.Property(e => e.NullableInt64).HasDefaultValue(long.MinValue);
-                eb.Property(e => e.NullableSingle).HasDefaultValue(0.3333333f);
-                eb.Property(e => e.NullableSByte).HasDefaultValue(sbyte.MinValue);
-                eb.Property(e => e.NullableTimeSpan).HasDefaultValue(TimeSpan.MinValue.Add(new TimeSpan()));
-                eb.Property(e => e.NullableUInt16).HasDefaultValue(ushort.MaxValue);
-                eb.Property(e => e.NullableUInt32).HasDefaultValue(uint.MaxValue);
-                eb.Property(e => e.NullableUInt64).HasDefaultValue(ulong.MaxValue);
+        modelBuilder.Entity<EntityWithEveryPrimitive>(eb =>
+        {
+            eb.Property(e => e.Boolean).HasDefaultValue(false);
+            eb.Property(e => e.Byte).HasDefaultValue(byte.MinValue);
+            eb.Property(e => e.ByteArray).HasDefaultValue(new byte[] { 0 });
+            eb.Property(e => e.Char).HasDefaultValue('0');
+            eb.Property(e => e.DateTime).HasDefaultValue(DateTime.MinValue);
+            eb.Property(e => e.DateTimeOffset).HasDefaultValue(DateTimeOffset.MinValue);
+            eb.Property(e => e.Decimal).HasDefaultValue(decimal.MinValue);
+            eb.Property(e => e.Double).HasDefaultValue(double.MinValue); //double.NegativeInfinity
+            eb.Property(e => e.Enum).HasDefaultValue(Enum1.Default);
+            eb.Property(e => e.NullableEnum).HasDefaultValue(Enum1.Default).HasConversion<string>();
+            eb.Property(e => e.Guid).HasDefaultValue(Guid.NewGuid());
+            eb.Property(e => e.Int16).HasDefaultValue(short.MaxValue);
+            eb.Property(e => e.Int32).HasDefaultValue(int.MaxValue);
+            eb.Property(e => e.Int64).HasDefaultValue(long.MaxValue);
+            eb.Property(e => e.Single).HasDefaultValue(float.Epsilon);
+            eb.Property(e => e.SByte).HasDefaultValue(sbyte.MinValue);
+            eb.Property(e => e.String).HasDefaultValue("'\"'@\r\\\n");
+            eb.Property(e => e.TimeSpan).HasDefaultValue(TimeSpan.MaxValue);
+            eb.Property(e => e.UInt16).HasDefaultValue(ushort.MinValue);
+            eb.Property(e => e.UInt32).HasDefaultValue(uint.MinValue);
+            eb.Property(e => e.UInt64).HasDefaultValue(ulong.MinValue);
+            eb.Property(e => e.NullableBoolean).HasDefaultValue(true);
+            eb.Property(e => e.NullableByte).HasDefaultValue(byte.MaxValue);
+            eb.Property(e => e.NullableChar).HasDefaultValue('\'');
+            eb.Property(e => e.NullableDateTime).HasDefaultValue(DateTime.MaxValue);
+            eb.Property(e => e.NullableDateTimeOffset).HasDefaultValue(DateTimeOffset.MaxValue);
+            eb.Property(e => e.NullableDecimal).HasDefaultValue(decimal.MaxValue);
+            eb.Property(e => e.NullableDouble).HasDefaultValue(0.6822871999174);
+            eb.Property(e => e.NullableEnum).HasDefaultValue(Enum1.One | Enum1.Two);
+            eb.Property(e => e.NullableStringEnum)
+                .HasDefaultValue(Enum1.One)
+                .HasConversion<string>();
+            eb.Property(e => e.NullableGuid).HasDefaultValue(new Guid());
+            eb.Property(e => e.NullableInt16).HasDefaultValue(short.MinValue);
+            eb.Property(e => e.NullableInt32).HasDefaultValue(int.MinValue);
+            eb.Property(e => e.NullableInt64).HasDefaultValue(long.MinValue);
+            eb.Property(e => e.NullableSingle).HasDefaultValue(0.3333333f);
+            eb.Property(e => e.NullableSByte).HasDefaultValue(sbyte.MinValue);
+            eb.Property(e => e.NullableTimeSpan)
+                .HasDefaultValue(TimeSpan.MinValue.Add(new TimeSpan()));
+            eb.Property(e => e.NullableUInt16).HasDefaultValue(ushort.MaxValue);
+            eb.Property(e => e.NullableUInt32).HasDefaultValue(uint.MaxValue);
+            eb.Property(e => e.NullableUInt64).HasDefaultValue(ulong.MaxValue);
 
-                eb.HasKey(e => e.Boolean);
-            });
+            eb.HasKey(e => e.Boolean);
+        });
 
         var finalizedModel = modelBuilder.FinalizeModel(designTime: true);
 
@@ -827,19 +980,22 @@ namespace MyNamespace
             "MyNamespace",
             typeof(MyContext),
             "MySnapshot",
-            finalizedModel);
+            finalizedModel
+        );
 
         var snapshot = CompileModelSnapshot(modelSnapshotCode, "MyNamespace.MySnapshot");
         var entityType = snapshot.Model.GetEntityTypes().Single();
-        Assert.Equal(typeof(EntityWithEveryPrimitive).FullName + " (Dictionary<string, object>)", entityType.DisplayName());
+        Assert.Equal(
+            typeof(EntityWithEveryPrimitive).FullName + " (Dictionary<string, object>)",
+            entityType.DisplayName()
+        );
 
         foreach (var property in modelBuilder.Model.GetEntityTypes().Single().GetProperties())
         {
             var expected = property.GetDefaultValue();
             var actual = entityType.FindProperty(property.Name).GetDefaultValue();
 
-            if (actual != null
-                && expected != null)
+            if (actual != null && expected != null)
             {
                 if (expected.GetType().IsEnum)
                 {
@@ -911,7 +1067,10 @@ namespace MyNamespace
         Two = 2
     }
 
-    private ModelSnapshot CompileModelSnapshot(string modelSnapshotCode, string modelSnapshotTypeName)
+    private ModelSnapshot CompileModelSnapshot(
+        string modelSnapshotCode,
+        string modelSnapshotTypeName
+    )
     {
         var build = new BuildSource
         {
@@ -926,7 +1085,11 @@ namespace MyNamespace
 
         var assembly = build.BuildInMemory();
 
-        var snapshotType = assembly.GetType(modelSnapshotTypeName, throwOnError: true, ignoreCase: false);
+        var snapshotType = assembly.GetType(
+            modelSnapshotTypeName,
+            throwOnError: true,
+            ignoreCase: false
+        );
 
         var contextTypeAttribute = snapshotType.GetCustomAttribute<DbContextAttribute>();
         Assert.NotNull(contextTypeAttribute);
@@ -935,9 +1098,7 @@ namespace MyNamespace
         return (ModelSnapshot)Activator.CreateInstance(snapshotType);
     }
 
-    public class MyContext
-    {
-    }
+    public class MyContext { }
 
     [ConditionalFact]
     public void Namespaces_imported_for_insert_data()
@@ -956,7 +1117,8 @@ namespace MyNamespace
                     Values = new object[,] { { 1, null }, { 2, RegexOptions.Multiline } }
                 }
             },
-            Array.Empty<MigrationOperation>());
+            Array.Empty<MigrationOperation>()
+        );
 
         Assert.Contains("using System.Text.RegularExpressions;", migration);
     }
@@ -980,7 +1142,8 @@ namespace MyNamespace
                     Values = new object[,] { { RegexOptions.Multiline } }
                 }
             },
-            Array.Empty<MigrationOperation>());
+            Array.Empty<MigrationOperation>()
+        );
 
         Assert.Contains("using System.Text.RegularExpressions;", migration);
     }
@@ -1004,7 +1167,8 @@ namespace MyNamespace
                     Values = new object[,] { { 1 } }
                 }
             },
-            Array.Empty<MigrationOperation>());
+            Array.Empty<MigrationOperation>()
+        );
 
         Assert.Contains("using System.Text.RegularExpressions;", migration);
     }
@@ -1026,7 +1190,8 @@ namespace MyNamespace
                     KeyValues = new object[,] { { RegexOptions.Multiline } }
                 }
             },
-            Array.Empty<MigrationOperation>());
+            Array.Empty<MigrationOperation>()
+        );
 
         Assert.Contains("using System.Text.RegularExpressions;", migration);
     }
@@ -1048,7 +1213,8 @@ namespace MyNamespace
                     KeyValues = new object[,] { { 1, 2 }, { 3, 4 } }
                 }
             },
-            Array.Empty<MigrationOperation>());
+            Array.Empty<MigrationOperation>()
+        );
 
         Assert.Contains("#pragma warning disable CA1814", migration);
     }
@@ -1070,7 +1236,8 @@ namespace MyNamespace
                     KeyValues = new object[,] { { 1, 2 } }
                 }
             },
-            Array.Empty<MigrationOperation>());
+            Array.Empty<MigrationOperation>()
+        );
 
         Assert.DoesNotContain("#pragma warning disable CA1814", migration);
     }

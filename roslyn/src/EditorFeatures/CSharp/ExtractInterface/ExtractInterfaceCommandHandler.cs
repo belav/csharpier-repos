@@ -21,9 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractInterface
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ExtractInterfaceCommandHandler(IThreadingContext threadingContext, IGlobalOptionService globalOptions)
-            : base(threadingContext, globalOptions)
-        {
-        }
+        public ExtractInterfaceCommandHandler(
+            IThreadingContext threadingContext,
+            IGlobalOptionService globalOptions
+        ) : base(threadingContext, globalOptions) { }
     }
 }

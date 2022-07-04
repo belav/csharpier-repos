@@ -54,9 +54,10 @@ public sealed class ProblemHttpResult : IResult
         }
 
         return HttpResultsHelper.WriteResultAsJsonAsync<object?>(
-                httpContext,
-                logger,
-                value: ProblemDetails,
-                ContentType);
+            httpContext,
+            logger,
+            value: ProblemDetails,
+            ContentType
+        );
     }
 }

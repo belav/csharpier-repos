@@ -25,8 +25,8 @@ public class SimpleFullyNullableRowForeignKeyValueFactory<TKey> : RowForeignKeyV
     public SimpleFullyNullableRowForeignKeyValueFactory(
         IForeignKeyConstraint foreignKey,
         IColumn column,
-        ColumnAccessors columnAccessors)
-        : base(foreignKey)
+        ColumnAccessors columnAccessors
+    ) : base(foreignKey)
     {
         _column = column;
         _columnAccessors = columnAccessors;
@@ -37,7 +37,10 @@ public class SimpleFullyNullableRowForeignKeyValueFactory<TKey> : RowForeignKeyV
     public override IEqualityComparer<TKey> EqualityComparer { get; }
 
     /// <inheritdoc />
-    public override bool TryCreateDependentKeyValue(object?[] keyValues, [NotNullWhen(true)] out TKey? key)
+    public override bool TryCreateDependentKeyValue(
+        object?[] keyValues,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
         key = (TKey?)keyValues[0];
         return key != null;
@@ -45,7 +48,9 @@ public class SimpleFullyNullableRowForeignKeyValueFactory<TKey> : RowForeignKeyV
 
     /// <inheritdoc />
     public override bool TryCreateDependentKeyValue(
-        IDictionary<string, object?> keyPropertyValues, [NotNullWhen(true)] out TKey? key)
+        IDictionary<string, object?> keyPropertyValues,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
         if (keyPropertyValues.TryGetValue(_column.Name, out var value))
         {
@@ -58,11 +63,21 @@ public class SimpleFullyNullableRowForeignKeyValueFactory<TKey> : RowForeignKeyV
     }
 
     /// <inheritdoc />
-    public override bool TryCreateDependentKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues, [NotNullWhen(true)] out TKey? key)
+    public override bool TryCreateDependentKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
         (key, var present) = fromOriginalValues
-            ? ((Func<IReadOnlyModificationCommand, (TKey, bool)>)_columnAccessors.OriginalValueGetter)(command)
-            : ((Func<IReadOnlyModificationCommand, (TKey, bool)>)_columnAccessors.CurrentValueGetter)(command);
+            ? (
+                (Func<IReadOnlyModificationCommand, (TKey, bool)>)
+                    _columnAccessors.OriginalValueGetter
+            )(command)
+            : (
+                (Func<IReadOnlyModificationCommand, (TKey, bool)>)
+                    _columnAccessors.CurrentValueGetter
+            )(command);
         return present && key != null;
     }
 }

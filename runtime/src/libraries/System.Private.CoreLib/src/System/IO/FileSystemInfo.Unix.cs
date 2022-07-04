@@ -15,13 +15,21 @@ namespace System.IO
             _asDirectory = this is DirectoryInfo;
         }
 
-        internal static FileSystemInfo Create(string fullPath, string fileName, bool asDirectory, ref FileStatus fileStatus)
+        internal static FileSystemInfo Create(
+            string fullPath,
+            string fileName,
+            bool asDirectory,
+            ref FileStatus fileStatus
+        )
         {
             FileSystemInfo info = asDirectory
                 ? new DirectoryInfo(fullPath, fileName: fileName, isNormalized: true)
                 : new FileInfo(fullPath, fileName: fileName, isNormalized: true);
 
-            Debug.Assert(!PathInternal.IsPartiallyQualified(fullPath), $"'{fullPath}' should be fully qualified when constructed from directory enumeration");
+            Debug.Assert(
+                !PathInternal.IsPartiallyQualified(fullPath),
+                $"'{fullPath}' should be fully qualified when constructed from directory enumeration"
+            );
 
             info.Init(ref fileStatus);
             return info;
@@ -79,8 +87,14 @@ namespace System.IO
             // being manipulated concurrently with these checks) is that we throw a
             // FileNotFoundException instead of DirectoryNotFoundException.
 
-            bool directoryError = !Directory.Exists(Path.GetDirectoryName(Path.TrimEndingDirectorySeparator(path)));
-            throw Interop.GetExceptionForIoErrno(new Interop.ErrorInfo(Interop.Error.ENOENT), path, directoryError);
+            bool directoryError = !Directory.Exists(
+                Path.GetDirectoryName(Path.TrimEndingDirectorySeparator(path))
+            );
+            throw Interop.GetExceptionForIoErrno(
+                new Interop.ErrorInfo(Interop.Error.ENOENT),
+                path,
+                directoryError
+            );
         }
 
         // There is no special handling for Unix- see Windows code for the reason we do this

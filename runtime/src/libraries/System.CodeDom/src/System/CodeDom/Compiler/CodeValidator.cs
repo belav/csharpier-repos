@@ -12,7 +12,14 @@ namespace System.CodeDom.Compiler
     // You can pass in any node in the tree that is a subclass of CodeObject.
     internal sealed class CodeValidator
     {
-        private static readonly char[] s_newLineChars = new char[] { '\r', '\n', '\u2028', '\u2029', '\u0085' };
+        private static readonly char[] s_newLineChars = new char[]
+        {
+            '\r',
+            '\n',
+            '\u2028',
+            '\u2029',
+            '\u0085'
+        };
         private CodeTypeDeclaration _currentClass;
 
         internal void ValidateIdentifiers(CodeObject e)
@@ -59,7 +66,10 @@ namespace System.CodeDom.Compiler
             }
             else
             {
-                throw new ArgumentException(SR.Format(SR.InvalidElementType, e.GetType().FullName), nameof(e));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidElementType, e.GetType().FullName),
+                    nameof(e)
+                );
             }
         }
 
@@ -95,7 +105,10 @@ namespace System.CodeDom.Compiler
             }
             else
             {
-                throw new ArgumentException(SR.Format(SR.InvalidElementType, e.GetType().FullName), nameof(e));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidElementType, e.GetType().FullName),
+                    nameof(e)
+                );
             }
         }
 
@@ -138,7 +151,6 @@ namespace System.CodeDom.Compiler
             ValidateTypes(e);
         }
 
-
         private static void ValidateNamespaceStart(CodeNamespace e)
         {
             if (!string.IsNullOrEmpty(e.Name))
@@ -162,7 +174,8 @@ namespace System.CodeDom.Compiler
 
         private void ValidateAttributes(CodeAttributeDeclarationCollection attributes)
         {
-            if (attributes.Count == 0) return;
+            if (attributes.Count == 0)
+                return;
             foreach (CodeAttributeDeclaration current in attributes)
             {
                 ValidateTypeName(current, nameof(current.Name), current.Name);
@@ -289,7 +302,10 @@ namespace System.CodeDom.Compiler
                 ValidateTypeReference(e.PrivateImplementationType);
             }
 
-            if (e.Parameters.Count > 0 && string.Equals(e.Name, "Item", StringComparison.OrdinalIgnoreCase))
+            if (
+                e.Parameters.Count > 0
+                && string.Equals(e.Name, "Item", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 ValidateParameters(e.Parameters);
             }
@@ -300,7 +316,12 @@ namespace System.CodeDom.Compiler
 
             if (e.HasGet)
             {
-                if (!(IsCurrentInterface || (e.Attributes & MemberAttributes.ScopeMask) == MemberAttributes.Abstract))
+                if (
+                    !(
+                        IsCurrentInterface
+                        || (e.Attributes & MemberAttributes.ScopeMask) == MemberAttributes.Abstract
+                    )
+                )
                 {
                     ValidateStatements(e.GetStatements);
                 }
@@ -308,7 +329,12 @@ namespace System.CodeDom.Compiler
 
             if (e.HasSet)
             {
-                if (!(IsCurrentInterface || (e.Attributes & MemberAttributes.ScopeMask) == MemberAttributes.Abstract))
+                if (
+                    !(
+                        IsCurrentInterface
+                        || (e.Attributes & MemberAttributes.ScopeMask) == MemberAttributes.Abstract
+                    )
+                )
                 {
                     ValidateStatements(e.SetStatements);
                 }
@@ -365,8 +391,10 @@ namespace System.CodeDom.Compiler
             ValidateIdentifier(e, nameof(e.Name), e.Name);
             ValidateParameters(e.Parameters);
 
-            if (!IsCurrentInterface
-                && (e.Attributes & MemberAttributes.ScopeMask) != MemberAttributes.Abstract)
+            if (
+                !IsCurrentInterface
+                && (e.Attributes & MemberAttributes.ScopeMask) != MemberAttributes.Abstract
+            )
             {
                 ValidateStatements(e.Statements);
             }
@@ -403,9 +431,7 @@ namespace System.CodeDom.Compiler
             }
         }
 
-        private static void ValidateCommentStatement(CodeCommentStatement e)
-        {
-        }
+        private static void ValidateCommentStatement(CodeCommentStatement e) { }
 
         private void ValidateStatement(CodeStatement e)
         {
@@ -475,7 +501,10 @@ namespace System.CodeDom.Compiler
             }
             else
             {
-                throw new ArgumentException(SR.Format(SR.InvalidElementType, e.GetType().FullName), nameof(e));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidElementType, e.GetType().FullName),
+                    nameof(e)
+                );
             }
         }
 
@@ -646,7 +675,7 @@ namespace System.CodeDom.Compiler
             {
                 if (baseType[i] == '`')
                 {
-                    i++;    // skip the '
+                    i++; // skip the '
                     int numTypeArgs = 0;
                     while (i < baseType.Length && baseType[i] >= '0' && baseType[i] <= '9')
                     {
@@ -661,7 +690,10 @@ namespace System.CodeDom.Compiler
             // Check if we have zero type args for open types.
             if ((totalTypeArgs != e.TypeArguments.Count) && (e.TypeArguments.Count != 0))
             {
-                throw new ArgumentException(SR.Format(SR.ArityDoesntMatch, baseType, e.TypeArguments.Count), nameof(e));
+                throw new ArgumentException(
+                    SR.Format(SR.ArityDoesntMatch, baseType, e.TypeArguments.Count),
+                    nameof(e)
+                );
             }
         }
 
@@ -669,7 +701,12 @@ namespace System.CodeDom.Compiler
         {
             if (!CodeGenerator.IsValidLanguageIndependentTypeName(typeName))
             {
-                string message = SR.Format(SR.InvalidTypeName, typeName, propertyName, e.GetType().FullName);
+                string message = SR.Format(
+                    SR.InvalidTypeName,
+                    typeName,
+                    propertyName,
+                    e.GetType().FullName
+                );
                 throw new ArgumentException(message, nameof(e));
             }
         }
@@ -678,7 +715,12 @@ namespace System.CodeDom.Compiler
         {
             if (!CodeGenerator.IsValidLanguageIndependentIdentifier(identifier))
             {
-                string message = SR.Format(SR.InvalidLanguageIdentifier, identifier, propertyName, e.GetType().FullName);
+                string message = SR.Format(
+                    SR.InvalidLanguageIdentifier,
+                    identifier,
+                    propertyName,
+                    e.GetType().FullName
+                );
                 throw new ArgumentException(message, nameof(e));
             }
         }
@@ -793,7 +835,10 @@ namespace System.CodeDom.Compiler
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Format(SR.InvalidElementType, e.GetType().FullName), nameof(e));
+                    throw new ArgumentException(
+                        SR.Format(SR.InvalidElementType, e.GetType().FullName),
+                        nameof(e)
+                    );
                 }
             }
         }
@@ -964,14 +1009,20 @@ namespace System.CodeDom.Compiler
             }
             else
             {
-                throw new ArgumentException(SR.Format(SR.InvalidElementType, e.GetType().FullName), nameof(e));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidElementType, e.GetType().FullName),
+                    nameof(e)
+                );
             }
         }
 
         private static void ValidateChecksumPragma(CodeChecksumPragma e)
         {
             if (e.FileName.IndexOfAny(Path.GetInvalidPathChars()) != -1)
-                throw new ArgumentException(SR.Format(SR.InvalidPathCharsInChecksum, e.FileName), nameof(e));
+                throw new ArgumentException(
+                    SR.Format(SR.InvalidPathCharsInChecksum, e.FileName),
+                    nameof(e)
+                );
         }
 
         private static void ValidateRegionDirective(CodeRegionDirective e)
@@ -980,8 +1031,14 @@ namespace System.CodeDom.Compiler
                 throw new ArgumentException(SR.Format(SR.InvalidRegion, e.RegionText), nameof(e));
         }
 
-        private bool IsCurrentInterface => _currentClass != null && !(_currentClass is CodeTypeDelegate) ? _currentClass.IsInterface : false;
+        private bool IsCurrentInterface =>
+            _currentClass != null && !(_currentClass is CodeTypeDelegate)
+                ? _currentClass.IsInterface
+                : false;
 
-        private bool IsCurrentEnum => _currentClass != null && !(_currentClass is CodeTypeDelegate) ? _currentClass.IsEnum : false;
+        private bool IsCurrentEnum =>
+            _currentClass != null && !(_currentClass is CodeTypeDelegate)
+                ? _currentClass.IsEnum
+                : false;
     }
 }

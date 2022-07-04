@@ -25,7 +25,9 @@ namespace Internal.Runtime.CompilerServices
 
                 if (((_value.ToInt64()) & IndirectionConstants.IndirectionCellPointer) != 0)
                 {
-                    return *(RuntimeTypeHandle*)(_value.ToInt64() - IndirectionConstants.IndirectionCellPointer);
+                    return *(RuntimeTypeHandle*)(
+                        _value.ToInt64() - IndirectionConstants.IndirectionCellPointer
+                    );
                 }
                 else
                 {

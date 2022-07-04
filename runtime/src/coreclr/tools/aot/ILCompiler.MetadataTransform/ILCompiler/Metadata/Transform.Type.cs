@@ -15,8 +15,10 @@ namespace ILCompiler.Metadata
 {
     partial class Transform<TPolicy>
     {
-        internal EntityMap<Cts.TypeDesc, MetadataRecord> _types =
-            new EntityMap<Cts.TypeDesc, MetadataRecord>(EqualityComparer<Cts.TypeDesc>.Default);
+        internal EntityMap<Cts.TypeDesc, MetadataRecord> _types = new EntityMap<
+            Cts.TypeDesc,
+            MetadataRecord
+        >(EqualityComparer<Cts.TypeDesc>.Default);
 
         private Action<Cts.MetadataType, TypeDefinition> _initTypeDef;
         private Action<Cts.MetadataType, TypeReference> _initTypeRef;
@@ -40,34 +42,59 @@ namespace ILCompiler.Metadata
             switch (type.Category)
             {
                 case Cts.TypeFlags.SzArray:
-                    rec = _types.Create((Cts.ArrayType)type, _initSzArray ?? (_initSzArray = InitializeSzArray));
+                    rec = _types.Create(
+                        (Cts.ArrayType)type,
+                        _initSzArray ?? (_initSzArray = InitializeSzArray)
+                    );
                     break;
                 case Cts.TypeFlags.Array:
-                    rec = _types.Create((Cts.ArrayType)type, _initArray ?? (_initArray = InitializeArray));
+                    rec = _types.Create(
+                        (Cts.ArrayType)type,
+                        _initArray ?? (_initArray = InitializeArray)
+                    );
                     break;
                 case Cts.TypeFlags.ByRef:
-                    rec = _types.Create((Cts.ByRefType)type, _initByRef ?? (_initByRef = InitializeByRef));
+                    rec = _types.Create(
+                        (Cts.ByRefType)type,
+                        _initByRef ?? (_initByRef = InitializeByRef)
+                    );
                     break;
                 case Cts.TypeFlags.Pointer:
-                    rec = _types.Create((Cts.PointerType)type, _initPointer ?? (_initPointer = InitializePointer));
+                    rec = _types.Create(
+                        (Cts.PointerType)type,
+                        _initPointer ?? (_initPointer = InitializePointer)
+                    );
                     break;
                 case Cts.TypeFlags.FunctionPointer:
-                    rec = _types.Create((Cts.FunctionPointerType)type, _initFunctionPointer ?? (_initFunctionPointer = InitializeFunctionPointer));
+                    rec = _types.Create(
+                        (Cts.FunctionPointerType)type,
+                        _initFunctionPointer ?? (_initFunctionPointer = InitializeFunctionPointer)
+                    );
                     break;
                 case Cts.TypeFlags.SignatureTypeVariable:
-                    rec = _types.Create((Cts.SignatureTypeVariable)type, _initTypeVar ?? (_initTypeVar = InitializeTypeVariable));
+                    rec = _types.Create(
+                        (Cts.SignatureTypeVariable)type,
+                        _initTypeVar ?? (_initTypeVar = InitializeTypeVariable)
+                    );
                     break;
                 case Cts.TypeFlags.SignatureMethodVariable:
-                    rec = _types.Create((Cts.SignatureMethodVariable)type, _initMethodVar ?? (_initMethodVar = InitializeMethodVariable));
+                    rec = _types.Create(
+                        (Cts.SignatureMethodVariable)type,
+                        _initMethodVar ?? (_initMethodVar = InitializeMethodVariable)
+                    );
                     break;
                 default:
+
                     {
                         Debug.Assert(type.IsDefType);
 
                         if (!type.IsTypeDefinition)
                         {
                             // Instantiated generic type
-                            rec = _types.Create(type, _initTypeInst ?? (_initTypeInst = InitializeTypeInstance));
+                            rec = _types.Create(
+                                type,
+                                _initTypeInst ?? (_initTypeInst = InitializeTypeInstance)
+                            );
                         }
                         else
                         {
@@ -76,18 +103,23 @@ namespace ILCompiler.Metadata
                             if (_policy.GeneratesMetadata(metadataType))
                             {
                                 Debug.Assert(!_policy.IsBlocked(metadataType));
-                                rec = _types.Create(metadataType, _initTypeDef ?? (_initTypeDef = InitializeTypeDef));
+                                rec = _types.Create(
+                                    metadataType,
+                                    _initTypeDef ?? (_initTypeDef = InitializeTypeDef)
+                                );
                             }
                             else
                             {
-                                rec = _types.Create(metadataType, _initTypeRef ?? (_initTypeRef = InitializeTypeRef));
+                                rec = _types.Create(
+                                    metadataType,
+                                    _initTypeRef ?? (_initTypeRef = InitializeTypeRef)
+                                );
                             }
                         }
                     }
                     break;
             }
-            
- 
+
             Debug.Assert(rec is TypeDefinition || rec is TypeReference || rec is TypeSpecification);
 
             return rec;
@@ -114,21 +146,18 @@ namespace ILCompiler.Metadata
 
         private void InitializeByRef(Cts.ByRefType entity, TypeSpecification record)
         {
-            record.Signature = new ByReferenceSignature
-            {
-                Type = HandleType(entity.ParameterType)
-            };
+            record.Signature = new ByReferenceSignature { Type = HandleType(entity.ParameterType) };
         }
 
         private void InitializePointer(Cts.PointerType entity, TypeSpecification record)
         {
-            record.Signature = new PointerSignature
-            {
-                Type = HandleType(entity.ParameterType)
-            };
+            record.Signature = new PointerSignature { Type = HandleType(entity.ParameterType) };
         }
 
-        private void InitializeFunctionPointer(Cts.FunctionPointerType entity, TypeSpecification record)
+        private void InitializeFunctionPointer(
+            Cts.FunctionPointerType entity,
+            TypeSpecification record
+        )
         {
             record.Signature = new FunctionPointerSignature
             {
@@ -136,20 +165,20 @@ namespace ILCompiler.Metadata
             };
         }
 
-        private void InitializeTypeVariable(Cts.SignatureTypeVariable entity, TypeSpecification record)
+        private void InitializeTypeVariable(
+            Cts.SignatureTypeVariable entity,
+            TypeSpecification record
+        )
         {
-            record.Signature = new TypeVariableSignature
-            {
-                Number = entity.Index
-            };
+            record.Signature = new TypeVariableSignature { Number = entity.Index };
         }
 
-        private void InitializeMethodVariable(Cts.SignatureMethodVariable entity, TypeSpecification record)
+        private void InitializeMethodVariable(
+            Cts.SignatureMethodVariable entity,
+            TypeSpecification record
+        )
         {
-            record.Signature = new MethodTypeVariableSignature
-            {
-                Number = entity.Index
-            };
+            record.Signature = new MethodTypeVariableSignature { Number = entity.Index };
         }
 
         private void InitializeTypeInstance(Cts.TypeDesc entity, TypeSpecification record)
@@ -178,7 +207,7 @@ namespace ILCompiler.Metadata
             Cts.MetadataType containingType = (Cts.MetadataType)entity.ContainingType;
             MetadataRecord parentRecord = HandleType(containingType);
             TypeReference parentReferenceRecord = parentRecord as TypeReference;
-            
+
             if (parentReferenceRecord != null)
             {
                 // Easy case - parent type doesn't have a definition record.
@@ -197,11 +226,16 @@ namespace ILCompiler.Metadata
 
             if (containingType.ContainingType != null)
             {
-                parentReferenceRecord.ParentNamespaceOrType = GetNestedReferenceParent(containingType);
+                parentReferenceRecord.ParentNamespaceOrType = GetNestedReferenceParent(
+                    containingType
+                );
             }
             else
             {
-                parentReferenceRecord.ParentNamespaceOrType = HandleNamespaceReference(containingType.Module, containingType.Namespace);
+                parentReferenceRecord.ParentNamespaceOrType = HandleNamespaceReference(
+                    containingType.Module,
+                    containingType.Namespace
+                );
             }
 
             return parentReferenceRecord;
@@ -217,7 +251,10 @@ namespace ILCompiler.Metadata
             }
             else
             {
-                record.ParentNamespaceOrType = HandleNamespaceReference(entity.Module, entity.Namespace);
+                record.ParentNamespaceOrType = HandleNamespaceReference(
+                    entity.Module,
+                    entity.Namespace
+                );
             }
 
             record.TypeName = HandleString(entity.Name);
@@ -234,13 +271,18 @@ namespace ILCompiler.Metadata
                 record.EnclosingType = enclosingType;
                 enclosingType.NestedTypes.Add(record);
 
-                var namespaceDefinition =
-                    HandleNamespaceDefinition(containingType.Module, entity.ContainingType.Namespace);
+                var namespaceDefinition = HandleNamespaceDefinition(
+                    containingType.Module,
+                    entity.ContainingType.Namespace
+                );
                 record.NamespaceDefinition = namespaceDefinition;
             }
             else
             {
-                var namespaceDefinition = HandleNamespaceDefinition(entity.Module, entity.Namespace);
+                var namespaceDefinition = HandleNamespaceDefinition(
+                    entity.Module,
+                    entity.Namespace
+                );
                 record.NamespaceDefinition = namespaceDefinition;
 
                 if (entity.IsModuleType)
@@ -304,7 +346,9 @@ namespace ILCompiler.Metadata
             {
                 record.GenericParameters.Capacity = entity.Instantiation.Length;
                 foreach (var p in entity.Instantiation)
-                    record.GenericParameters.Add(HandleGenericParameter((Cts.GenericParameterDesc)p));
+                    record.GenericParameters.Add(
+                        HandleGenericParameter((Cts.GenericParameterDesc)p)
+                    );
             }
 
             foreach (var field in entity.GetFields())
@@ -326,7 +370,9 @@ namespace ILCompiler.Metadata
             var ecmaEntity = entity as Cts.Ecma.EcmaType;
             if (ecmaEntity != null)
             {
-                Ecma.TypeDefinition ecmaRecord = ecmaEntity.MetadataReader.GetTypeDefinition(ecmaEntity.Handle);
+                Ecma.TypeDefinition ecmaRecord = ecmaEntity.MetadataReader.GetTypeDefinition(
+                    ecmaEntity.Handle
+                );
 
                 foreach (var e in ecmaRecord.GetEvents())
                 {
@@ -342,10 +388,14 @@ namespace ILCompiler.Metadata
                         record.Properties.Add(prop);
                 }
 
-                Ecma.CustomAttributeHandleCollection customAttributes = ecmaRecord.GetCustomAttributes();
+                Ecma.CustomAttributeHandleCollection customAttributes =
+                    ecmaRecord.GetCustomAttributes();
                 if (customAttributes.Count > 0)
                 {
-                    record.CustomAttributes = HandleCustomAttributes(ecmaEntity.EcmaModule, customAttributes);
+                    record.CustomAttributes = HandleCustomAttributes(
+                        ecmaEntity.EcmaModule,
+                        customAttributes
+                    );
                 }
 
                 /* COMPLETENESS
@@ -373,8 +423,8 @@ namespace ILCompiler.Metadata
                 }*/
             }
 
-            static bool HasNestedTypes(Cts.MetadataType entity)
-                => entity.GetNestedTypes().GetEnumerator().MoveNext();
+            static bool HasNestedTypes(Cts.MetadataType entity) =>
+                entity.GetNestedTypes().GetEnumerator().MoveNext();
         }
 
         private TypeAttributes GetTypeAttributes(Cts.MetadataType type)
@@ -384,7 +434,9 @@ namespace ILCompiler.Metadata
             var ecmaType = type as Cts.Ecma.EcmaType;
             if (ecmaType != null)
             {
-                Ecma.TypeDefinition ecmaRecord = ecmaType.MetadataReader.GetTypeDefinition(ecmaType.Handle);
+                Ecma.TypeDefinition ecmaRecord = ecmaType.MetadataReader.GetTypeDefinition(
+                    ecmaType.Handle
+                );
                 result = ecmaRecord.Attributes;
             }
             else

@@ -22,13 +22,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         IDS_SK_VARIABLE = MessageBase + 2006,
         IDS_SK_EVENT = MessageBase + 2007,
         IDS_SK_TYVAR = MessageBase + 2008,
+
         //IDS_SK_GCLASS = MessageBase + 2009,
         IDS_SK_ALIAS = MessageBase + 2010,
+
         //IDS_SK_EXTERNALIAS = MessageBase + 2011,
         IDS_SK_LABEL = MessageBase + 2012,
         IDS_SK_CONSTRUCTOR = MessageBase + 2013,
 
         IDS_NULL = MessageBase + 10001,
+
         //IDS_RELATEDERROR = MessageBase + 10002,
         //IDS_RELATEDWARNING = MessageBase + 10003,
         IDS_XMLIGNORED = MessageBase + 10004,
@@ -53,6 +56,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         IDS_MethodGroup = MessageBase + 12513,
         IDS_AnonMethod = MessageBase + 12514,
         IDS_FeatureSwitchOnBool = MessageBase + 12517,
+
         //IDS_WarnAsError = MessageBase + 12518,
         IDS_Collection = MessageBase + 12520,
         IDS_FeaturePropertyAccessorMods = MessageBase + 12522,
@@ -108,6 +112,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         IDS_FeatureExpressionBodiedMethod = MessageBase + 12691,
         IDS_FeatureExpressionBodiedProperty = MessageBase + 12692,
         IDS_FeatureExpressionBodiedIndexer = MessageBase + 12693,
+
         // IDS_VersionExperimental = MessageBase + 12694,
         IDS_FeatureNameof = MessageBase + 12695,
         IDS_FeatureDictionaryInitializer = MessageBase + 12696,
@@ -148,6 +153,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         IDS_FeatureRefStructs = MessageBase + 12726,
         IDS_FeatureReadOnlyStructs = MessageBase + 12727,
         IDS_FeatureRefExtensionMethods = MessageBase + 12728,
+
         // IDS_StackAllocExpression = MessageBase + 12729,
         IDS_FeaturePrivateProtected = MessageBase + 12730,
 
@@ -240,6 +246,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         IDS_FeatureNewLinesInInterpolations = MessageBase + 12813,
         IDS_FeatureListPattern = MessageBase + 12814,
+
         // IDS_ParameterNullChecking = MessageBase + 12815, // feature removed from C# 11
 
         IDS_FeatureCacheStaticMethodGroupConversion = MessageBase + 12816,
@@ -308,9 +315,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             this MessageID feature,
             BindingDiagnosticBag diagnostics,
             SyntaxNode syntax,
-            Location? location = null)
+            Location? location = null
+        )
         {
-            var diag = GetFeatureAvailabilityDiagnosticInfo(feature, (CSharpParseOptions)syntax.SyntaxTree.Options);
+            var diag = GetFeatureAvailabilityDiagnosticInfo(
+                feature,
+                (CSharpParseOptions)syntax.SyntaxTree.Options
+            );
             if (diag is object)
             {
                 diagnostics.Add(diag, location ?? syntax.GetLocation());
@@ -323,9 +334,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             this MessageID feature,
             BindingDiagnosticBag diagnostics,
             Compilation compilation,
-            Location location)
+            Location location
+        )
         {
-            if (GetFeatureAvailabilityDiagnosticInfo(feature, (CSharpCompilation)compilation) is { } diagInfo)
+            if (
+                GetFeatureAvailabilityDiagnosticInfo(feature, (CSharpCompilation)compilation) is
+                { } diagInfo
+            )
             {
                 diagnostics.Add(diagInfo, location);
                 return false;
@@ -333,24 +348,45 @@ namespace Microsoft.CodeAnalysis.CSharp
             return true;
         }
 
-        internal static CSDiagnosticInfo? GetFeatureAvailabilityDiagnosticInfo(this MessageID feature, CSharpParseOptions options)
-            => options.IsFeatureEnabled(feature) ? null : GetDisabledFeatureDiagnosticInfo(feature, options.LanguageVersion);
+        internal static CSDiagnosticInfo? GetFeatureAvailabilityDiagnosticInfo(
+            this MessageID feature,
+            CSharpParseOptions options
+        ) =>
+            options.IsFeatureEnabled(feature)
+                ? null
+                : GetDisabledFeatureDiagnosticInfo(feature, options.LanguageVersion);
 
-        internal static CSDiagnosticInfo? GetFeatureAvailabilityDiagnosticInfo(this MessageID feature, CSharpCompilation compilation)
-            => compilation.IsFeatureEnabled(feature) ? null : GetDisabledFeatureDiagnosticInfo(feature, compilation.LanguageVersion);
+        internal static CSDiagnosticInfo? GetFeatureAvailabilityDiagnosticInfo(
+            this MessageID feature,
+            CSharpCompilation compilation
+        ) =>
+            compilation.IsFeatureEnabled(feature)
+                ? null
+                : GetDisabledFeatureDiagnosticInfo(feature, compilation.LanguageVersion);
 
-        private static CSDiagnosticInfo GetDisabledFeatureDiagnosticInfo(MessageID feature, LanguageVersion availableVersion)
+        private static CSDiagnosticInfo GetDisabledFeatureDiagnosticInfo(
+            MessageID feature,
+            LanguageVersion availableVersion
+        )
         {
             string? requiredFeature = feature.RequiredFeature();
             if (requiredFeature != null)
             {
-                return new CSDiagnosticInfo(ErrorCode.ERR_FeatureIsExperimental, feature.Localize(), requiredFeature);
+                return new CSDiagnosticInfo(
+                    ErrorCode.ERR_FeatureIsExperimental,
+                    feature.Localize(),
+                    requiredFeature
+                );
             }
 
             LanguageVersion requiredVersion = feature.RequiredVersion();
             return requiredVersion == LanguageVersion.Preview.MapSpecifiedToEffectiveVersion()
                 ? new CSDiagnosticInfo(ErrorCode.ERR_FeatureInPreview, feature.Localize())
-                : new CSDiagnosticInfo(availableVersion.GetErrorCode(), feature.Localize(), new CSharpRequiredLanguageVersion(requiredVersion));
+                : new CSDiagnosticInfo(
+                    availableVersion.GetErrorCode(),
+                    feature.Localize(),
+                    new CSharpRequiredLanguageVersion(requiredVersion)
+                );
         }
 
         internal static LanguageVersion RequiredVersion(this MessageID feature)
@@ -422,7 +458,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case MessageID.IDS_TopLevelStatements:
                 case MessageID.IDS_FeatureInitOnlySetters: // semantic check
                 case MessageID.IDS_FeatureRecords:
-                case MessageID.IDS_FeatureTargetTypedConditional:  // semantic check
+                case MessageID.IDS_FeatureTargetTypedConditional: // semantic check
                 case MessageID.IDS_FeatureCovariantReturnsForOverrides: // semantic check
                 case MessageID.IDS_FeatureStaticAnonymousFunction: // syntax check
                 case MessageID.IDS_FeatureModuleInitializers: // semantic check on method attribute
@@ -449,7 +485,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case MessageID.IDS_DefaultInterfaceImplementation: // semantic check
                 case MessageID.IDS_OverrideWithConstraints: // semantic check
                 case MessageID.IDS_FeatureNestedStackalloc: // semantic check
-                case MessageID.IDS_FeatureNotNullGenericTypeConstraint:// semantic check
+                case MessageID.IDS_FeatureNotNullGenericTypeConstraint: // semantic check
                 case MessageID.IDS_FeatureSwitchExpression:
                 case MessageID.IDS_FeatureAsyncUsing:
                 case MessageID.IDS_FeatureNullPointerConstantPattern: //semantic check
@@ -467,7 +503,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case MessageID.IDS_FeatureUnmanagedGenericTypeConstraint: // semantic check
                 case MessageID.IDS_FeatureStackAllocInitializer:
                 case MessageID.IDS_FeatureExpressionVariablesInQueriesAndInitializers: // semantic check
-                case MessageID.IDS_FeatureExtensibleFixedStatement:  // semantic check
+                case MessageID.IDS_FeatureExtensibleFixedStatement: // semantic check
                 case MessageID.IDS_FeatureIndexingMovableFixedBuffers: //semantic check
                     return LanguageVersion.CSharp7_3;
 

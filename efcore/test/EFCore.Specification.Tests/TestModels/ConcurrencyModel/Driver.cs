@@ -8,9 +8,7 @@ public class Driver
     private readonly ILazyLoader _loader;
     private Team _team;
 
-    public Driver()
-    {
-    }
+    public Driver() { }
 
     protected Driver(
         ILazyLoader loader,
@@ -23,7 +21,8 @@ public class Driver
         int podiums,
         int poles,
         int fastestLaps,
-        int teamId)
+        int teamId
+    )
     {
         _loader = loader;
 

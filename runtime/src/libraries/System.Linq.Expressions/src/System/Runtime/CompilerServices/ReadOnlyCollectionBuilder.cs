@@ -321,7 +321,8 @@ namespace System.Runtime.CompilerServices
             {
                 return Contains((T)value!);
             }
-            else return false;
+            else
+                return false;
         }
 
         int IList.IndexOf(object? value)
@@ -358,10 +359,7 @@ namespace System.Runtime.CompilerServices
 
         object? IList.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
+            get { return this[index]; }
             set
             {
                 ValidateNullValue(value, nameof(value));
@@ -511,9 +509,7 @@ namespace System.Runtime.CompilerServices
 
             #region IDisposable Members
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             #endregion
 

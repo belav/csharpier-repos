@@ -51,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             IThreadingContext threadingContext,
             VisualStudioWorkspaceImpl workspace,
             IVsHierarchyItemManager vsHierarchyItemManager,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             _threadingContext = threadingContext;
             _workspace = workspace;
@@ -59,40 +60,67 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             _globalOptions = globalOptions;
         }
 
-        public Task<bool> FixAsync(ICodeCleanUpScope scope, ICodeCleanUpExecutionContext context)
-            => scope switch
+        public Task<bool> FixAsync(ICodeCleanUpScope scope, ICodeCleanUpExecutionContext context) =>
+            scope switch
             {
-                TextBufferCodeCleanUpScope textBufferScope => FixTextBufferAsync(textBufferScope, context),
-                IVsHierarchyCodeCleanupScope hierarchyContentScope => FixHierarchyContentAsync(hierarchyContentScope, context),
+                TextBufferCodeCleanUpScope textBufferScope
+                    => FixTextBufferAsync(textBufferScope, context),
+                IVsHierarchyCodeCleanupScope hierarchyContentScope
+                    => FixHierarchyContentAsync(hierarchyContentScope, context),
                 _ => Task.FromResult(false),
             };
 
-        private async Task<bool> FixHierarchyContentAsync(IVsHierarchyCodeCleanupScope hierarchyContent, ICodeCleanUpExecutionContext context)
+        private async Task<bool> FixHierarchyContentAsync(
+            IVsHierarchyCodeCleanupScope hierarchyContent,
+            ICodeCleanUpExecutionContext context
+        )
         {
             var hierarchy = hierarchyContent.Hierarchy;
             if (hierarchy == null)
             {
-                return await FixSolutionAsync(_workspace.CurrentSolution, context).ConfigureAwait(true);
+                return await FixSolutionAsync(_workspace.CurrentSolution, context)
+                    .ConfigureAwait(true);
             }
 
             // Map the hierarchy to a ProjectId. For hierarchies mapping to multitargeted projects, we first try to
             // get the project in the most recent active context, but fall back to the first target framework if no
             // active context is available.
-            var hierarchyToProjectMap = _workspace.Services.GetRequiredService<IHierarchyItemToProjectIdMap>();
+            var hierarchyToProjectMap =
+                _workspace.Services.GetRequiredService<IHierarchyItemToProjectIdMap>();
 
-            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(context.OperationContext.UserCancellationToken);
+            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                context.OperationContext.UserCancellationToken
+            );
 
             ProjectId? projectId = null;
-            if (ErrorHandler.Succeeded(hierarchy.GetProperty((uint)VSConstants.VSITEMID.Root, (int)__VSHPROPID8.VSHPROPID_ActiveIntellisenseProjectContext, out var contextProjectNameObject))
-                && contextProjectNameObject is string contextProjectName)
+            if (
+                ErrorHandler.Succeeded(
+                    hierarchy.GetProperty(
+                        (uint)VSConstants.VSITEMID.Root,
+                        (int)__VSHPROPID8.VSHPROPID_ActiveIntellisenseProjectContext,
+                        out var contextProjectNameObject
+                    )
+                ) && contextProjectNameObject is string contextProjectName
+            )
             {
-                projectId = _workspace.GetProjectWithHierarchyAndName(hierarchy, contextProjectName)?.Id;
+                projectId = _workspace
+                    .GetProjectWithHierarchyAndName(hierarchy, contextProjectName)
+                    ?.Id;
             }
 
             if (projectId is null)
             {
-                var projectHierarchyItem = _vsHierarchyItemManager.GetHierarchyItem(hierarchyContent.Hierarchy, (uint)VSConstants.VSITEMID.Root);
-                if (!hierarchyToProjectMap.TryGetProjectId(projectHierarchyItem, targetFrameworkMoniker: null, out projectId))
+                var projectHierarchyItem = _vsHierarchyItemManager.GetHierarchyItem(
+                    hierarchyContent.Hierarchy,
+                    (uint)VSConstants.VSITEMID.Root
+                );
+                if (
+                    !hierarchyToProjectMap.TryGetProjectId(
+                        projectHierarchyItem,
+                        targetFrameworkMoniker: null,
+                        out projectId
+                    )
+                )
                 {
                     return false;
                 }
@@ -134,7 +162,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
                     }
 
                     var document = solution.GetRequiredDocument(documentId);
-                    var options = _globalOptions.GetCodeActionOptions(document.Project.LanguageServices);
+                    var options = _globalOptions.GetCodeActionOptions(
+                        document.Project.LanguageServices
+                    );
                     return await FixDocumentAsync(document, options, context).ConfigureAwait(true);
                 }
             }
@@ -147,9 +177,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             return FixAsync(solution.Workspace, ApplyFixAsync, context);
 
             // Local function
-            Task<Solution> ApplyFixAsync(ProgressTracker progressTracker, CancellationToken cancellationToken)
+            Task<Solution> ApplyFixAsync(
+                ProgressTracker progressTracker,
+                CancellationToken cancellationToken
+            )
             {
-                return FixSolutionAsync(solution, context.EnabledFixIds, progressTracker, cancellationToken);
+                return FixSolutionAsync(
+                    solution,
+                    context.EnabledFixIds,
+                    progressTracker,
+                    cancellationToken
+                );
             }
         }
 
@@ -158,26 +196,53 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             return FixAsync(project.Solution.Workspace, ApplyFixAsync, context);
 
             // Local function
-            async Task<Solution> ApplyFixAsync(ProgressTracker progressTracker, CancellationToken cancellationToken)
+            async Task<Solution> ApplyFixAsync(
+                ProgressTracker progressTracker,
+                CancellationToken cancellationToken
+            )
             {
-                var newProject = await FixProjectAsync(project, context.EnabledFixIds, progressTracker, addProgressItemsForDocuments: true, cancellationToken).ConfigureAwait(true);
+                var newProject = await FixProjectAsync(
+                        project,
+                        context.EnabledFixIds,
+                        progressTracker,
+                        addProgressItemsForDocuments: true,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(true);
                 return newProject.Solution;
             }
         }
 
-        private Task<bool> FixDocumentAsync(Document document, CodeActionOptions options, ICodeCleanUpExecutionContext context)
+        private Task<bool> FixDocumentAsync(
+            Document document,
+            CodeActionOptions options,
+            ICodeCleanUpExecutionContext context
+        )
         {
             return FixAsync(document.Project.Solution.Workspace, ApplyFixAsync, context);
 
             // Local function
-            async Task<Solution> ApplyFixAsync(ProgressTracker progressTracker, CancellationToken cancellationToken)
+            async Task<Solution> ApplyFixAsync(
+                ProgressTracker progressTracker,
+                CancellationToken cancellationToken
+            )
             {
-                var newDocument = await FixDocumentAsync(document, context.EnabledFixIds, progressTracker, options, cancellationToken).ConfigureAwait(true);
+                var newDocument = await FixDocumentAsync(
+                        document,
+                        context.EnabledFixIds,
+                        progressTracker,
+                        options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(true);
                 return newDocument.Project.Solution;
             }
         }
 
-        private Task<bool> FixTextBufferAsync(TextBufferCodeCleanUpScope textBufferScope, ICodeCleanUpExecutionContext context)
+        private Task<bool> FixTextBufferAsync(
+            TextBufferCodeCleanUpScope textBufferScope,
+            ICodeCleanUpExecutionContext context
+        )
         {
             var buffer = textBufferScope.SubjectBuffer;
 
@@ -198,13 +263,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             return FixAsync(workspace, ApplyFixAsync, context);
 
             // Local function
-            async Task<Solution> ApplyFixAsync(ProgressTracker progressTracker, CancellationToken cancellationToken)
+            async Task<Solution> ApplyFixAsync(
+                ProgressTracker progressTracker,
+                CancellationToken cancellationToken
+            )
             {
                 var document = buffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
                 Contract.ThrowIfNull(document);
 
-                var options = _globalOptions.GetCodeActionOptions(document.Project.LanguageServices);
-                var newDoc = await FixDocumentAsync(document, context.EnabledFixIds, progressTracker, options, cancellationToken).ConfigureAwait(true);
+                var options = _globalOptions.GetCodeActionOptions(
+                    document.Project.LanguageServices
+                );
+                var newDoc = await FixDocumentAsync(
+                        document,
+                        context.EnabledFixIds,
+                        progressTracker,
+                        options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(true);
                 return newDoc.Project.Solution;
             }
         }
@@ -212,32 +289,53 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         private async Task<bool> FixAsync(
             Workspace workspace,
             Func<ProgressTracker, CancellationToken, Task<Solution>> applyFixAsync,
-            ICodeCleanUpExecutionContext context)
+            ICodeCleanUpExecutionContext context
+        )
         {
-            using (var scope = context.OperationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Waiting_for_background_work_to_finish))
+            using (
+                var scope = context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Waiting_for_background_work_to_finish
+                )
+            )
             {
-                var workspaceStatusService = workspace.Services.GetService<IWorkspaceStatusService>();
+                var workspaceStatusService =
+                    workspace.Services.GetService<IWorkspaceStatusService>();
                 if (workspaceStatusService != null)
                 {
-                    await workspaceStatusService.WaitUntilFullyLoadedAsync(context.OperationContext.UserCancellationToken).ConfigureAwait(true);
+                    await workspaceStatusService
+                        .WaitUntilFullyLoadedAsync(context.OperationContext.UserCancellationToken)
+                        .ConfigureAwait(true);
                 }
             }
 
-            using (var scope = context.OperationContext.AddScope(allowCancellation: true, description: EditorFeaturesResources.Applying_changes))
+            using (
+                var scope = context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    description: EditorFeaturesResources.Applying_changes
+                )
+            )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
-                var progressTracker = new ProgressTracker((description, completed, total) =>
-                {
-                    if (scope != null)
+                var progressTracker = new ProgressTracker(
+                    (description, completed, total) =>
                     {
-                        scope.Description = description;
-                        scope.Progress.Report(new VisualStudio.Utilities.ProgressInfo(completed, total));
+                        if (scope != null)
+                        {
+                            scope.Description = description;
+                            scope.Progress.Report(
+                                new VisualStudio.Utilities.ProgressInfo(completed, total)
+                            );
+                        }
                     }
-                });
+                );
 
-                var solution = await applyFixAsync(progressTracker, cancellationToken).ConfigureAwait(true);
+                var solution = await applyFixAsync(progressTracker, cancellationToken)
+                    .ConfigureAwait(true);
 
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 return workspace.TryApplyChanges(solution, progressTracker);
             }
@@ -247,7 +345,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             Solution solution,
             FixIdContainer enabledFixIds,
             ProgressTracker progressTracker,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Prepopulate the solution progress tracker with the total number of documents to process
             foreach (var projectId in solution.ProjectIds)
@@ -266,7 +365,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var project = solution.GetRequiredProject(projectId);
-                var newProject = await FixProjectAsync(project, enabledFixIds, progressTracker, addProgressItemsForDocuments: false, cancellationToken).ConfigureAwait(false);
+                var newProject = await FixProjectAsync(
+                        project,
+                        enabledFixIds,
+                        progressTracker,
+                        addProgressItemsForDocuments: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 solution = newProject.Solution;
             }
 
@@ -278,7 +384,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             FixIdContainer enabledFixIds,
             ProgressTracker progressTracker,
             bool addProgressItemsForDocuments,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (!CanCleanupProject(project))
             {
@@ -303,7 +410,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
                 // to the current document.
                 var documentProgressTracker = new ProgressTracker();
 
-                var fixedDocument = await FixDocumentAsync(document, enabledFixIds, documentProgressTracker, ideOptions, cancellationToken).ConfigureAwait(false);
+                var fixedDocument = await FixDocumentAsync(
+                        document,
+                        enabledFixIds,
+                        documentProgressTracker,
+                        ideOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 project = fixedDocument.Project;
                 progressTracker.ItemCompleted();
             }
@@ -311,15 +425,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             return project;
         }
 
-        private static bool CanCleanupProject(Project project)
-            => project.LanguageServices.GetService<ICodeCleanupService>() != null;
+        private static bool CanCleanupProject(Project project) =>
+            project.LanguageServices.GetService<ICodeCleanupService>() != null;
 
         private static async Task<Document> FixDocumentAsync(
             Document document,
             FixIdContainer enabledFixIds,
             ProgressTracker progressTracker,
             CodeActionOptions ideOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (document.IsGeneratedCode(cancellationToken))
             {
@@ -345,15 +460,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             }
 
             var isFormatDocumentEnabled = enabledFixIds.IsFixIdEnabled(FormatDocumentFixId);
-            var isRemoveUnusedUsingsEnabled = enabledFixIds.IsFixIdEnabled(RemoveUnusedImportsFixId);
+            var isRemoveUnusedUsingsEnabled = enabledFixIds.IsFixIdEnabled(
+                RemoveUnusedImportsFixId
+            );
             var isSortUsingsEnabled = enabledFixIds.IsFixIdEnabled(SortImportsFixId);
             var enabledDiagnostics = new EnabledDiagnosticOptions(
                 isFormatDocumentEnabled,
                 enabedDiagnosticSets.ToImmutableArray(),
-                new OrganizeUsingsSet(isRemoveUnusedUsingsEnabled, isSortUsingsEnabled));
+                new OrganizeUsingsSet(isRemoveUnusedUsingsEnabled, isSortUsingsEnabled)
+            );
 
-            return await codeCleanupService.CleanupAsync(
-                document, enabledDiagnostics, progressTracker, ideOptions.CreateProvider(), cancellationToken).ConfigureAwait(false);
+            return await codeCleanupService
+                .CleanupAsync(
+                    document,
+                    enabledDiagnostics,
+                    progressTracker,
+                    ideOptions.CreateProvider(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
     }
 }

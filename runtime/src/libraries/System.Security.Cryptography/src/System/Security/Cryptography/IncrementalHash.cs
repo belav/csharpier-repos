@@ -88,7 +88,10 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(data);
 
             if (offset < 0)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (count < 0 || (count > data.Length))
                 throw new ArgumentOutOfRangeException(nameof(count));
             if ((data.Length - count) < offset)
@@ -184,9 +187,9 @@ namespace System.Security.Cryptography
             Debug.Assert(destination.Length >= HashLengthInBytes);
 
             Debug.Assert((_hash != null) ^ (_hmac != null));
-            return _hash != null ?
-                _hash.FinalizeHashAndReset(destination) :
-                _hmac!.FinalizeHashAndReset(destination);
+            return _hash != null
+                ? _hash.FinalizeHashAndReset(destination)
+                : _hmac!.FinalizeHashAndReset(destination);
         }
 
         /// <summary>
@@ -277,9 +280,9 @@ namespace System.Security.Cryptography
             Debug.Assert(destination.Length >= HashLengthInBytes);
 
             Debug.Assert((_hash != null) ^ (_hmac != null));
-            return _hash != null ?
-                _hash.GetCurrentHash(destination) :
-                _hmac!.GetCurrentHash(destination);
+            return _hash != null
+                ? _hash.GetCurrentHash(destination)
+                : _hmac!.GetCurrentHash(destination);
         }
 
         /// <summary>
@@ -320,7 +323,10 @@ namespace System.Security.Cryptography
         {
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
 
-            return new IncrementalHash(hashAlgorithm, HashProviderDispenser.CreateHashProvider(hashAlgorithm.Name));
+            return new IncrementalHash(
+                hashAlgorithm,
+                HashProviderDispenser.CreateHashProvider(hashAlgorithm.Name)
+            );
         }
 
         /// <summary>
@@ -376,7 +382,10 @@ namespace System.Security.Cryptography
         /// </exception>
         /// <exception cref="CryptographicException"><paramref name="hashAlgorithm"/> is not a known hash algorithm.</exception>
         [UnsupportedOSPlatform("browser")]
-        public static IncrementalHash CreateHMAC(HashAlgorithmName hashAlgorithm, ReadOnlySpan<byte> key)
+        public static IncrementalHash CreateHMAC(
+            HashAlgorithmName hashAlgorithm,
+            ReadOnlySpan<byte> key
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
 

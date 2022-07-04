@@ -19,8 +19,7 @@ public class LevelOneController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Level1> Get()
-        => _context.LevelOne;
+    public IEnumerable<Level1> Get() => _context.LevelOne;
 
     [HttpGet]
     [EnableQuery]
@@ -31,9 +30,7 @@ public class LevelOneController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class LevelTwoController : TestODataController, IDisposable
@@ -47,8 +44,7 @@ public class LevelTwoController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Level2> Get()
-        => _context.LevelTwo;
+    public IEnumerable<Level2> Get() => _context.LevelTwo;
 
     [HttpGet]
     [EnableQuery]
@@ -59,9 +55,7 @@ public class LevelTwoController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class LevelThreeController : TestODataController, IDisposable
@@ -75,8 +69,7 @@ public class LevelThreeController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Level3> Get()
-        => _context.LevelThree;
+    public IEnumerable<Level3> Get() => _context.LevelThree;
 
     [HttpGet]
     [EnableQuery]
@@ -87,9 +80,7 @@ public class LevelThreeController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
 
 public class LevelFourController : TestODataController, IDisposable
@@ -103,8 +94,7 @@ public class LevelFourController : TestODataController, IDisposable
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<Level4> Get()
-        => _context.LevelFour;
+    public IEnumerable<Level4> Get() => _context.LevelFour;
 
     [HttpGet]
     [EnableQuery]
@@ -115,7 +105,5 @@ public class LevelFourController : TestODataController, IDisposable
         return result == null ? NotFound() : Ok(result);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }

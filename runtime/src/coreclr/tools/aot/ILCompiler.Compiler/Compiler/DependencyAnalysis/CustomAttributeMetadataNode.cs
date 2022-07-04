@@ -34,8 +34,10 @@ namespace ILCompiler.DependencyAnalysis
         //
         // We need to walk the dependencies before placing the node into the graph to find out whether
         // the attribute even can be generated (does it refer to blocked types or something like that?).
-        public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory) => null;
-        
+        public override IEnumerable<DependencyListEntry> GetStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
         protected override string GetName(NodeFactory factory)
         {
             return $"Reflectable custom attribute {_customAttribute.CustomAttributeHandle} in {_customAttribute.Module}";
@@ -45,7 +47,15 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

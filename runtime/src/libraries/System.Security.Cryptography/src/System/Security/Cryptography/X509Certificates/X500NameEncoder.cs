@@ -28,26 +28,48 @@ namespace System.Security.Cryptography.X509Certificates
 
         private static readonly List<char> s_useSemicolonSeparators = new List<char>(1) { ';' };
         private static readonly List<char> s_useCommaSeparators = new List<char>(1) { ',' };
-        private static readonly List<char> s_useNewlineSeparators = new List<char>(2) { '\r', '\n' };
+        private static readonly List<char> s_useNewlineSeparators = new List<char>(2)
+        {
+            '\r',
+            '\n'
+        };
         private static readonly List<char> s_defaultSeparators = new List<char>(2) { ',', ';' };
 
         internal static string X500DistinguishedNameDecode(
             byte[] encodedName,
             bool printOid,
             X500DistinguishedNameFlags flags,
-            bool addTrailingDelimiter = false)
+            bool addTrailingDelimiter = false
+        )
         {
-            bool reverse = (flags & X500DistinguishedNameFlags.Reversed) == X500DistinguishedNameFlags.Reversed;
-            bool quoteIfNeeded = (flags & X500DistinguishedNameFlags.DoNotUseQuotes) != X500DistinguishedNameFlags.DoNotUseQuotes;
-            bool useMultiSeparator = (flags & X500DistinguishedNameFlags.DoNotUsePlusSign) != X500DistinguishedNameFlags.DoNotUsePlusSign;
+            bool reverse =
+                (flags & X500DistinguishedNameFlags.Reversed)
+                == X500DistinguishedNameFlags.Reversed;
+            bool quoteIfNeeded =
+                (flags & X500DistinguishedNameFlags.DoNotUseQuotes)
+                != X500DistinguishedNameFlags.DoNotUseQuotes;
+            bool useMultiSeparator =
+                (flags & X500DistinguishedNameFlags.DoNotUsePlusSign)
+                != X500DistinguishedNameFlags.DoNotUsePlusSign;
             string dnSeparator;
 
-            if ((flags & X500DistinguishedNameFlags.UseSemicolons) == X500DistinguishedNameFlags.UseSemicolons)
+            if (
+                (flags & X500DistinguishedNameFlags.UseSemicolons)
+                == X500DistinguishedNameFlags.UseSemicolons
+            )
             {
                 dnSeparator = "; ";
             }
             // Explicit UseCommas has preference over explicit UseNewLines.
-            else if ((flags & (X500DistinguishedNameFlags.UseNewLines | X500DistinguishedNameFlags.UseCommas)) == X500DistinguishedNameFlags.UseNewLines)
+            else if (
+                (
+                    flags
+                    & (
+                        X500DistinguishedNameFlags.UseNewLines
+                        | X500DistinguishedNameFlags.UseCommas
+                    )
+                ) == X500DistinguishedNameFlags.UseNewLines
+            )
             {
                 dnSeparator = Environment.NewLine;
             }
@@ -69,7 +91,8 @@ namespace System.Security.Cryptography.X509Certificates
                     quoteIfNeeded,
                     dnSeparator,
                     multiValueSparator,
-                    addTrailingDelimiter);
+                    addTrailingDelimiter
+                );
             }
             catch (CryptographicException)
             {
@@ -80,25 +103,39 @@ namespace System.Security.Cryptography.X509Certificates
 
         internal static byte[] X500DistinguishedNameEncode(
             string stringForm,
-            X500DistinguishedNameFlags flags)
+            X500DistinguishedNameFlags flags
+        )
         {
-            bool reverse = (flags & X500DistinguishedNameFlags.Reversed) == X500DistinguishedNameFlags.Reversed;
-            bool noQuotes = (flags & X500DistinguishedNameFlags.DoNotUseQuotes) == X500DistinguishedNameFlags.DoNotUseQuotes;
+            bool reverse =
+                (flags & X500DistinguishedNameFlags.Reversed)
+                == X500DistinguishedNameFlags.Reversed;
+            bool noQuotes =
+                (flags & X500DistinguishedNameFlags.DoNotUseQuotes)
+                == X500DistinguishedNameFlags.DoNotUseQuotes;
 
             List<char> dnSeparators;
 
             // This rank ordering is based off of testing against the Windows implementation.
-            if ((flags & X500DistinguishedNameFlags.UseSemicolons) == X500DistinguishedNameFlags.UseSemicolons)
+            if (
+                (flags & X500DistinguishedNameFlags.UseSemicolons)
+                == X500DistinguishedNameFlags.UseSemicolons
+            )
             {
                 // Just semicolon.
                 dnSeparators = s_useSemicolonSeparators;
             }
-            else if ((flags & X500DistinguishedNameFlags.UseCommas) == X500DistinguishedNameFlags.UseCommas)
+            else if (
+                (flags & X500DistinguishedNameFlags.UseCommas)
+                == X500DistinguishedNameFlags.UseCommas
+            )
             {
                 // Just comma
                 dnSeparators = s_useCommaSeparators;
             }
-            else if ((flags & X500DistinguishedNameFlags.UseNewLines) == X500DistinguishedNameFlags.UseNewLines)
+            else if (
+                (flags & X500DistinguishedNameFlags.UseNewLines)
+                == X500DistinguishedNameFlags.UseNewLines
+            )
             {
                 // CR or LF.  Not "and".  Whichever is first was the separator, the later one is trimmed as whitespace.
                 dnSeparators = s_useNewlineSeparators;
@@ -138,8 +175,10 @@ namespace System.Security.Cryptography.X509Certificates
                 return true;
             }
 
-            if (IsQuotableWhitespace(rdnValue[0]) ||
-                IsQuotableWhitespace(rdnValue[rdnValue.Length - 1]))
+            if (
+                IsQuotableWhitespace(rdnValue[0])
+                || IsQuotableWhitespace(rdnValue[rdnValue.Length - 1])
+            )
             {
                 return true;
             }
@@ -167,8 +206,10 @@ namespace System.Security.Cryptography.X509Certificates
         {
             Oid oid = new Oid(oidValue);
 
-            if (StringComparer.Ordinal.Equals(oid.FriendlyName, oidValue) ||
-                string.IsNullOrEmpty(oid.FriendlyName))
+            if (
+                StringComparer.Ordinal.Equals(oid.FriendlyName, oidValue)
+                || string.IsNullOrEmpty(oid.FriendlyName)
+            )
             {
                 decodedName.Append(OidTagPrefix);
                 decodedName.Append(oid.Value);
@@ -197,7 +238,8 @@ namespace System.Security.Cryptography.X509Certificates
         private static List<byte[]> ParseDistinguishedName(
             string stringForm,
             List<char> dnSeparators,
-            bool noQuotes)
+            bool noQuotes
+        )
         {
             // 16 is way more RDNs than we should ever need. A fairly standard set of values is
             // { E, CN, O, OU, L, S, C } = 7;
@@ -400,7 +442,9 @@ namespace System.Security.Cryptography.X509Certificates
                             Debug.Assert(valueEnd != -1);
                             Debug.Assert(valueStart != -1);
 
-                            encodedSets.Add(ParseRdn(tagOid, chars[valueStart..valueEnd], hadEscapedQuote));
+                            encodedSets.Add(
+                                ParseRdn(tagOid, chars[valueStart..valueEnd], hadEscapedQuote)
+                            );
                             hasTagOid = false;
                             valueStart = -1;
                             valueEnd = -1;
@@ -417,7 +461,9 @@ namespace System.Security.Cryptography.X509Certificates
                         break;
 
                     default:
-                        Debug.Fail($"Invalid parser state. Position {pos}, State {state}, Character {c}, String \"{stringForm}\"");
+                        Debug.Fail(
+                            $"Invalid parser state. Position {pos}, State {state}, Character {c}, String \"{stringForm}\""
+                        );
                         throw new CryptographicException(SR.Cryptography_Invalid_X500Name);
                 }
 
@@ -499,7 +545,11 @@ namespace System.Security.Cryptography.X509Certificates
             return new Oid(str.ToString()).Value; // Value can be null, but permit the null-to-empty conversion.
         }
 
-        private static byte[] ParseRdn(ReadOnlySpan<char> tagOid, ReadOnlySpan<char> chars, bool hadEscapedQuote)
+        private static byte[] ParseRdn(
+            ReadOnlySpan<char> tagOid,
+            ReadOnlySpan<char> chars,
+            bool hadEscapedQuote
+        )
         {
             ReadOnlySpan<char> data = stackalloc char[0];
 

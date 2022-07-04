@@ -7,7 +7,7 @@ namespace System.Drawing.Imaging
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 #if NET7_0_OR_GREATER
-using System.Runtime.InteropServices.Marshalling;
+    using System.Runtime.InteropServices.Marshalling;
 #endif
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -58,7 +58,10 @@ using System.Runtime.InteropServices.Marshalling;
         public int LogicalDpiY;
 
 #if NET7_0_OR_GREATER
-        [CustomTypeMarshaller(typeof(MetafileHeaderWmf), Features = CustomTypeMarshallerFeatures.TwoStageMarshalling)]
+        [CustomTypeMarshaller(
+            typeof(MetafileHeaderWmf),
+            Features = CustomTypeMarshallerFeatures.TwoStageMarshalling
+        )]
         internal unsafe struct InPlaceMarshaller
         {
             [StructLayout(LayoutKind.Sequential, Pack = 8)]

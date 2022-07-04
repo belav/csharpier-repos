@@ -33,19 +33,21 @@ namespace Microsoft.Extensions.Hosting
         {
             if (SystemdHelpers.IsSystemdService())
             {
-                hostBuilder.ConfigureServices((hostContext, services) =>
-                {
-                    services.Configure<ConsoleLoggerOptions>(options =>
+                hostBuilder.ConfigureServices(
+                    (hostContext, services) =>
                     {
-                        options.FormatterName = ConsoleFormatterNames.Systemd;
-                    });
+                        services.Configure<ConsoleLoggerOptions>(options =>
+                        {
+                            options.FormatterName = ConsoleFormatterNames.Systemd;
+                        });
 
-                    // IsSystemdService() will never return true for android/browser/iOS/tvOS
+                        // IsSystemdService() will never return true for android/browser/iOS/tvOS
 #pragma warning disable CA1416 // Validate platform compatibility
-                    services.AddSingleton<ISystemdNotifier, SystemdNotifier>();
-                    services.AddSingleton<IHostLifetime, SystemdLifetime>();
+                        services.AddSingleton<ISystemdNotifier, SystemdNotifier>();
+                        services.AddSingleton<IHostLifetime, SystemdLifetime>();
 #pragma warning restore CA1416 // Validate platform compatibility
-                });
+                    }
+                );
             }
             return hostBuilder;
         }

@@ -31,52 +31,80 @@ internal static partial class Interop
             Closed = 4,
         };
 
-        [LibraryImport(Interop.Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamCreate")]
+        [LibraryImport(
+            Interop.Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamCreate"
+        )]
         internal static partial SafeSslHandle SSLStreamCreate();
 
-        [LibraryImport(Interop.Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamCreateWithCertificates")]
+        [LibraryImport(
+            Interop.Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamCreateWithCertificates"
+        )]
         private static partial SafeSslHandle SSLStreamCreateWithCertificates(
             ref byte pkcs8PrivateKey,
             int pkcs8PrivateKeyLen,
             PAL_KeyAlgorithm algorithm,
             IntPtr[] certs,
-            int certsLen);
-        internal static SafeSslHandle SSLStreamCreateWithCertificates(ReadOnlySpan<byte> pkcs8PrivateKey, PAL_KeyAlgorithm algorithm, IntPtr[] certificates)
+            int certsLen
+        );
+
+        internal static SafeSslHandle SSLStreamCreateWithCertificates(
+            ReadOnlySpan<byte> pkcs8PrivateKey,
+            PAL_KeyAlgorithm algorithm,
+            IntPtr[] certificates
+        )
         {
             return SSLStreamCreateWithCertificates(
                 ref MemoryMarshal.GetReference(pkcs8PrivateKey),
                 pkcs8PrivateKey.Length,
                 algorithm,
                 certificates,
-                certificates.Length);
+                certificates.Length
+            );
         }
 
-        [LibraryImport(Interop.Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamInitialize")]
+        [LibraryImport(
+            Interop.Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamInitialize"
+        )]
         private static partial int SSLStreamInitializeImpl(
             SafeSslHandle sslHandle,
             [MarshalAs(UnmanagedType.U1)] bool isServer,
             SSLReadCallback streamRead,
             SSLWriteCallback streamWrite,
-            int appBufferSize);
+            int appBufferSize
+        );
+
         internal static void SSLStreamInitialize(
             SafeSslHandle sslHandle,
             bool isServer,
             SSLReadCallback streamRead,
             SSLWriteCallback streamWrite,
-            int appBufferSize)
+            int appBufferSize
+        )
         {
-            int ret = SSLStreamInitializeImpl(sslHandle, isServer, streamRead, streamWrite, appBufferSize);
+            int ret = SSLStreamInitializeImpl(
+                sslHandle,
+                isServer,
+                streamRead,
+                streamWrite,
+                appBufferSize
+            );
             if (ret != SUCCESS)
                 throw new SslException();
         }
 
-        [LibraryImport(Interop.Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamSetTargetHost")]
+        [LibraryImport(
+            Interop.Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamSetTargetHost"
+        )]
         private static partial int SSLStreamSetTargetHostImpl(
             SafeSslHandle sslHandle,
-            [MarshalAs(UnmanagedType.LPUTF8Str)] string targetHost);
-        internal static void SSLStreamSetTargetHost(
-            SafeSslHandle sslHandle,
-            string targetHost)
+            [MarshalAs(UnmanagedType.LPUTF8Str)] string targetHost
+        );
+
+        internal static void SSLStreamSetTargetHost(SafeSslHandle sslHandle, string targetHost)
         {
             int ret = SSLStreamSetTargetHostImpl(sslHandle, targetHost);
             if (ret == UNSUPPORTED_API_LEVEL)
@@ -85,7 +113,10 @@ internal static partial class Interop
                 throw new SslException();
         }
 
-        [LibraryImport(Interop.Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamRequestClientAuthentication")]
+        [LibraryImport(
+            Interop.Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamRequestClientAuthentication"
+        )]
         internal static partial void SSLStreamRequestClientAuthentication(SafeSslHandle sslHandle);
 
         [StructLayout(LayoutKind.Sequential)]
@@ -95,9 +126,20 @@ internal static partial class Interop
             public int Length;
         }
 
-        [LibraryImport(Interop.Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamSetApplicationProtocols")]
-        private static unsafe partial int SSLStreamSetApplicationProtocols(SafeSslHandle sslHandle, ApplicationProtocolData[] protocolData, int count);
-        internal static unsafe void SSLStreamSetApplicationProtocols(SafeSslHandle sslHandle, List<SslApplicationProtocol> protocols)
+        [LibraryImport(
+            Interop.Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamSetApplicationProtocols"
+        )]
+        private static unsafe partial int SSLStreamSetApplicationProtocols(
+            SafeSslHandle sslHandle,
+            ApplicationProtocolData[] protocolData,
+            int count
+        );
+
+        internal static unsafe void SSLStreamSetApplicationProtocols(
+            SafeSslHandle sslHandle,
+            List<SslApplicationProtocol> protocols
+        )
         {
             int count = protocols.Count;
             MemoryHandle[] memHandles = new MemoryHandle[count];
@@ -129,20 +171,46 @@ internal static partial class Interop
             }
         }
 
-        [LibraryImport(Interop.Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamSetEnabledProtocols")]
-        private static partial int SSLStreamSetEnabledProtocols(SafeSslHandle sslHandle, ref SslProtocols protocols, int length);
-        internal static void SSLStreamSetEnabledProtocols(SafeSslHandle sslHandle, ReadOnlySpan<SslProtocols> protocols)
+        [LibraryImport(
+            Interop.Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamSetEnabledProtocols"
+        )]
+        private static partial int SSLStreamSetEnabledProtocols(
+            SafeSslHandle sslHandle,
+            ref SslProtocols protocols,
+            int length
+        );
+
+        internal static void SSLStreamSetEnabledProtocols(
+            SafeSslHandle sslHandle,
+            ReadOnlySpan<SslProtocols> protocols
+        )
         {
-            int ret = SSLStreamSetEnabledProtocols(sslHandle, ref MemoryMarshal.GetReference(protocols), protocols.Length);
+            int ret = SSLStreamSetEnabledProtocols(
+                sslHandle,
+                ref MemoryMarshal.GetReference(protocols),
+                protocols.Length
+            );
             if (ret != SUCCESS)
                 throw new SslException();
         }
 
-        [LibraryImport(Interop.Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamHandshake")]
+        [LibraryImport(
+            Interop.Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamHandshake"
+        )]
         internal static partial PAL_SSLStreamStatus SSLStreamHandshake(SafeSslHandle sslHandle);
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamGetApplicationProtocol")]
-        private static partial int SSLStreamGetApplicationProtocol(SafeSslHandle ssl, byte[]? buf, ref int len);
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamGetApplicationProtocol"
+        )]
+        private static partial int SSLStreamGetApplicationProtocol(
+            SafeSslHandle ssl,
+            byte[]? buf,
+            ref int len
+        );
+
         internal static byte[]? SSLStreamGetApplicationProtocol(SafeSslHandle ssl)
         {
             int len = 0;
@@ -158,16 +226,22 @@ internal static partial class Interop
             return bytes;
         }
 
-        [LibraryImport(Interop.Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamRead")]
+        [LibraryImport(
+            Interop.Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamRead"
+        )]
         private static unsafe partial PAL_SSLStreamStatus SSLStreamRead(
             SafeSslHandle sslHandle,
             byte* buffer,
             int length,
-            out int bytesRead);
+            out int bytesRead
+        );
+
         internal static unsafe PAL_SSLStreamStatus SSLStreamRead(
             SafeSslHandle sslHandle,
             ReadOnlySpan<byte> buffer,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             fixed (byte* bufferPtr = buffer)
             {
@@ -175,14 +249,20 @@ internal static partial class Interop
             }
         }
 
-        [LibraryImport(Interop.Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamWrite")]
+        [LibraryImport(
+            Interop.Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamWrite"
+        )]
         private static unsafe partial PAL_SSLStreamStatus SSLStreamWrite(
             SafeSslHandle sslHandle,
             byte* buffer,
-            int length);
+            int length
+        );
+
         internal static unsafe PAL_SSLStreamStatus SSLStreamWrite(
             SafeSslHandle sslHandle,
-            ReadOnlyMemory<byte> buffer)
+            ReadOnlyMemory<byte> buffer
+        )
         {
             using (MemoryHandle memHandle = buffer.Pin())
             {
@@ -190,14 +270,15 @@ internal static partial class Interop
             }
         }
 
-        [LibraryImport(Interop.Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamRelease")]
+        [LibraryImport(
+            Interop.Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamRelease"
+        )]
         internal static partial void SSLStreamRelease(IntPtr ptr);
 
         internal sealed class SslException : Exception
         {
-            internal SslException()
-            {
-            }
+            internal SslException() { }
 
             internal SslException(int errorCode)
             {
@@ -205,8 +286,12 @@ internal static partial class Interop
             }
         }
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamGetProtocol")]
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamGetProtocol"
+        )]
         private static partial int SSLStreamGetProtocol(SafeSslHandle ssl, out IntPtr protocol);
+
         internal static string SSLStreamGetProtocol(SafeSslHandle ssl)
         {
             IntPtr protocolPtr;
@@ -222,14 +307,22 @@ internal static partial class Interop
             return protocol;
         }
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamGetPeerCertificate")]
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamGetPeerCertificate"
+        )]
         internal static partial SafeX509Handle SSLStreamGetPeerCertificate(SafeSslHandle ssl);
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamGetPeerCertificates")]
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamGetPeerCertificates"
+        )]
         private static partial void SSLStreamGetPeerCertificates(
             SafeSslHandle ssl,
             [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] out IntPtr[] certs,
-            out int count);
+            out int count
+        );
+
         internal static IntPtr[]? SSLStreamGetPeerCertificates(SafeSslHandle ssl)
         {
             IntPtr[]? ptrs;
@@ -237,8 +330,15 @@ internal static partial class Interop
             return ptrs;
         }
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamGetCipherSuite")]
-        private static partial int SSLStreamGetCipherSuite(SafeSslHandle ssl, out IntPtr cipherSuite);
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamGetCipherSuite"
+        )]
+        private static partial int SSLStreamGetCipherSuite(
+            SafeSslHandle ssl,
+            out IntPtr cipherSuite
+        );
+
         internal static string SSLStreamGetCipherSuite(SafeSslHandle ssl)
         {
             IntPtr cipherSuitePtr;
@@ -254,15 +354,22 @@ internal static partial class Interop
             return cipherSuite;
         }
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamShutdown")]
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamShutdown"
+        )]
         [return: MarshalAs(UnmanagedType.U1)]
         internal static partial bool SSLStreamShutdown(SafeSslHandle ssl);
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "AndroidCryptoNative_SSLStreamVerifyHostname")]
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "AndroidCryptoNative_SSLStreamVerifyHostname"
+        )]
         [return: MarshalAs(UnmanagedType.U1)]
         internal static partial bool SSLStreamVerifyHostname(
             SafeSslHandle ssl,
-            [MarshalAs(UnmanagedType.LPUTF8Str)] string hostname);
+            [MarshalAs(UnmanagedType.LPUTF8Str)] string hostname
+        );
     }
 }
 
@@ -270,10 +377,7 @@ namespace System.Net
 {
     internal sealed class SafeSslHandle : SafeHandle
     {
-        public SafeSslHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeSslHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

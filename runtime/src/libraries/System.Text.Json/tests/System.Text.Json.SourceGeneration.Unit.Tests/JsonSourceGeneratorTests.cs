@@ -16,7 +16,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         [Fact]
         public void TypeDiscoveryPrimitivePOCO()
         {
-            string source = @"
+            string source =
+                @"
             using System.Text.Json.Serialization;
 
             namespace HelloWorld
@@ -55,7 +56,11 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation newCompilation = CompilationHelper.RunGenerators(compilation, out ImmutableArray<Diagnostic> generatorDiags, generator);
+            Compilation newCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out ImmutableArray<Diagnostic> generatorDiags,
+                generator
+            );
 
             // Make sure compilation was successful.
             CheckCompilationDiagnosticsErrors(generatorDiags);
@@ -71,20 +76,40 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             // Check for received fields, properties and methods in created type.
             string[] expectedPropertyNames = { "PublicPropertyInt", "PublicPropertyString", };
             string[] expectedFieldNames = { "PublicChar", "PublicDouble" };
-            string[] expectedMethodNames = { "get_PrivatePropertyInt", "get_PrivatePropertyString", "get_PublicPropertyInt", "get_PublicPropertyString", "MyMethod", "MySecondMethod", "set_PrivatePropertyInt", "set_PrivatePropertyString", "set_PublicPropertyInt", "set_PublicPropertyString", "UsePrivates" };
-            CheckFieldsPropertiesMethods(myType, expectedFieldNames, expectedPropertyNames, expectedMethodNames);
+            string[] expectedMethodNames =
+            {
+                "get_PrivatePropertyInt",
+                "get_PrivatePropertyString",
+                "get_PublicPropertyInt",
+                "get_PublicPropertyString",
+                "MyMethod",
+                "MySecondMethod",
+                "set_PrivatePropertyInt",
+                "set_PrivatePropertyString",
+                "set_PublicPropertyInt",
+                "set_PublicPropertyString",
+                "UsePrivates"
+            };
+            CheckFieldsPropertiesMethods(
+                myType,
+                expectedFieldNames,
+                expectedPropertyNames,
+                expectedMethodNames
+            );
         }
 
         [Fact]
         public void TypeDiscoveryPrimitiveExternalPOCO()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedLocationCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedLocationCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
 
-            string source = @"
+            string source =
+                @"
             using System.Text.Json.Serialization;
             using ReferencedAssembly;
 
@@ -120,13 +145,23 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
             }";
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage)
+            };
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
 
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation newCompilation = CompilationHelper.RunGenerators(compilation, out ImmutableArray<Diagnostic> generatorDiags, generator);
+            Compilation newCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out ImmutableArray<Diagnostic> generatorDiags,
+                generator
+            );
 
             // Make sure compilation was successful.
             CheckCompilationDiagnosticsErrors(generatorDiags);
@@ -145,31 +180,89 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             // Check for received fields, properties and methods for MyType.
             string[] expectedFieldNamesMyType = { "PublicChar", "PublicDouble" };
             string[] expectedPropertyNamesMyType = { "PublicPropertyInt", "PublicPropertyString" };
-            string[] expectedMethodNamesMyType = { "get_PrivatePropertyInt", "get_PrivatePropertyString", "get_PublicPropertyInt", "get_PublicPropertyString", "MyMethod", "MySecondMethod", "set_PrivatePropertyInt", "set_PrivatePropertyString", "set_PublicPropertyInt", "set_PublicPropertyString", "UsePrivates" };
-            CheckFieldsPropertiesMethods(myType, expectedFieldNamesMyType, expectedPropertyNamesMyType, expectedMethodNamesMyType);
+            string[] expectedMethodNamesMyType =
+            {
+                "get_PrivatePropertyInt",
+                "get_PrivatePropertyString",
+                "get_PublicPropertyInt",
+                "get_PublicPropertyString",
+                "MyMethod",
+                "MySecondMethod",
+                "set_PrivatePropertyInt",
+                "set_PrivatePropertyString",
+                "set_PublicPropertyInt",
+                "set_PublicPropertyString",
+                "UsePrivates"
+            };
+            CheckFieldsPropertiesMethods(
+                myType,
+                expectedFieldNamesMyType,
+                expectedPropertyNamesMyType,
+                expectedMethodNamesMyType
+            );
 
             // Check for NotMyType.
             Assert.Equal("ReferencedAssembly.Location", notMyType.FullName);
 
             // Check for received fields, properties and methods for NotMyType.
             string[] expectedFieldNamesNotMyType = { };
-            string[] expectedPropertyNamesNotMyType = { "Address1", "Address2", "City", "Country", "Id", "Name", "PhoneNumber", "PostalCode", "State" };
-            string[] expectedMethodNamesNotMyType = { "get_Address1", "get_Address2", "get_City", "get_Country", "get_Id", "get_Name", "get_PhoneNumber", "get_PostalCode", "get_State",
-                                                      "set_Address1", "set_Address2", "set_City", "set_Country", "set_Id", "set_Name", "set_PhoneNumber", "set_PostalCode", "set_State" };
-            CheckFieldsPropertiesMethods(notMyType, expectedFieldNamesNotMyType, expectedPropertyNamesNotMyType, expectedMethodNamesNotMyType);
+            string[] expectedPropertyNamesNotMyType =
+            {
+                "Address1",
+                "Address2",
+                "City",
+                "Country",
+                "Id",
+                "Name",
+                "PhoneNumber",
+                "PostalCode",
+                "State"
+            };
+            string[] expectedMethodNamesNotMyType =
+            {
+                "get_Address1",
+                "get_Address2",
+                "get_City",
+                "get_Country",
+                "get_Id",
+                "get_Name",
+                "get_PhoneNumber",
+                "get_PostalCode",
+                "get_State",
+                "set_Address1",
+                "set_Address2",
+                "set_City",
+                "set_Country",
+                "set_Id",
+                "set_Name",
+                "set_PhoneNumber",
+                "set_PostalCode",
+                "set_State"
+            };
+            CheckFieldsPropertiesMethods(
+                notMyType,
+                expectedFieldNamesNotMyType,
+                expectedPropertyNamesNotMyType,
+                expectedMethodNamesNotMyType
+            );
         }
 
         [Fact]
         public void TypeDiscoveryWithRenamedAttribute()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedLocationCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedLocationCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage)
+            };
 
-            string source = @"
+            string source =
+                @"
             using System.Text.Json.Serialization;
             using ReferencedAssembly;
 
@@ -210,11 +303,18 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
             }";
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
 
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation newCompilation = CompilationHelper.RunGenerators(compilation, out var generatorDiags, generator);
+            Compilation newCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out var generatorDiags,
+                generator
+            );
 
             // Make sure compilation was successful.
             CheckCompilationDiagnosticsErrors(generatorDiags);
@@ -232,8 +332,26 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             // Check for received fields, properties and methods for MyType.
             string[] expectedFieldNamesMyType = { "PublicChar", "PublicDouble" };
             string[] expectedPropertyNamesMyType = { "PublicPropertyInt", "PublicPropertyString" };
-            string[] expectedMethodNamesMyType = { "get_PrivatePropertyInt", "get_PrivatePropertyString", "get_PublicPropertyInt", "get_PublicPropertyString", "MyMethod", "MySecondMethod", "set_PrivatePropertyInt", "set_PrivatePropertyString", "set_PublicPropertyInt", "set_PublicPropertyString", "UsePrivates" };
-            CheckFieldsPropertiesMethods(myType, expectedFieldNamesMyType, expectedPropertyNamesMyType, expectedMethodNamesMyType);
+            string[] expectedMethodNamesMyType =
+            {
+                "get_PrivatePropertyInt",
+                "get_PrivatePropertyString",
+                "get_PublicPropertyInt",
+                "get_PublicPropertyString",
+                "MyMethod",
+                "MySecondMethod",
+                "set_PrivatePropertyInt",
+                "set_PrivatePropertyString",
+                "set_PublicPropertyInt",
+                "set_PublicPropertyString",
+                "UsePrivates"
+            };
+            CheckFieldsPropertiesMethods(
+                myType,
+                expectedFieldNamesMyType,
+                expectedPropertyNamesMyType,
+                expectedMethodNamesMyType
+            );
 
             // Check for NotMyType.
             Type notMyType = types["ReferencedAssembly.Location"];
@@ -241,10 +359,45 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             // Check for received fields, properties and methods for NotMyType.
             string[] expectedFieldNamesNotMyType = { };
-            string[] expectedPropertyNamesNotMyType = { "Address1", "Address2", "City", "Country", "Id", "Name", "PhoneNumber", "PostalCode", "State" };
-            string[] expectedMethodNamesNotMyType = { "get_Address1", "get_Address2", "get_City", "get_Country", "get_Id", "get_Name", "get_PhoneNumber", "get_PostalCode", "get_State",
-                                                      "set_Address1", "set_Address2", "set_City", "set_Country", "set_Id", "set_Name", "set_PhoneNumber", "set_PostalCode", "set_State" };
-            CheckFieldsPropertiesMethods(notMyType, expectedFieldNamesNotMyType, expectedPropertyNamesNotMyType, expectedMethodNamesNotMyType);
+            string[] expectedPropertyNamesNotMyType =
+            {
+                "Address1",
+                "Address2",
+                "City",
+                "Country",
+                "Id",
+                "Name",
+                "PhoneNumber",
+                "PostalCode",
+                "State"
+            };
+            string[] expectedMethodNamesNotMyType =
+            {
+                "get_Address1",
+                "get_Address2",
+                "get_City",
+                "get_Country",
+                "get_Id",
+                "get_Name",
+                "get_PhoneNumber",
+                "get_PostalCode",
+                "get_State",
+                "set_Address1",
+                "set_Address2",
+                "set_City",
+                "set_Country",
+                "set_Id",
+                "set_Name",
+                "set_PhoneNumber",
+                "set_PostalCode",
+                "set_State"
+            };
+            CheckFieldsPropertiesMethods(
+                notMyType,
+                expectedFieldNamesNotMyType,
+                expectedPropertyNamesNotMyType,
+                expectedMethodNamesNotMyType
+            );
         }
 
         [Theory]
@@ -252,9 +405,13 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         [InlineData("System.Text.Json.Not", true)]
         [InlineData("System.Text.Json", false)]
         [InlineData("System.Text.Json.Not", false)]
-        public static void LocalJsonSerializableAttributeExpectedShape(string assemblyName, bool includeSTJ)
+        public static void LocalJsonSerializableAttributeExpectedShape(
+            string assemblyName,
+            bool includeSTJ
+        )
         {
-            string source = @"using System;
+            string source =
+                @"using System;
 using System.Text.Json.Serialization;
 
 namespace System.Text.Json.Serialization
@@ -274,10 +431,19 @@ namespace System.Text.Json.Serialization
     }
 }";
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences: null, assemblyName, includeSTJ);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences: null,
+                assemblyName,
+                includeSTJ
+            );
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            CompilationHelper.RunGenerators(compilation, out ImmutableArray<Diagnostic> generatorDiags, generator);
+            CompilationHelper.RunGenerators(
+                compilation,
+                out ImmutableArray<Diagnostic> generatorDiags,
+                generator
+            );
 
             Dictionary<string, Type> types = generator.GetSerializableTypes();
             if (includeSTJ)
@@ -290,9 +456,21 @@ namespace System.Text.Json.Serialization
                 Assert.Null(types);
             }
 
-            CompilationHelper.CheckDiagnosticMessages(DiagnosticSeverity.Info, generatorDiags, Array.Empty<(Location, string)>());
-            CompilationHelper.CheckDiagnosticMessages(DiagnosticSeverity.Warning, generatorDiags, Array.Empty<(Location, string)>());
-            CompilationHelper.CheckDiagnosticMessages(DiagnosticSeverity.Error, generatorDiags, Array.Empty<(Location, string)>());
+            CompilationHelper.CheckDiagnosticMessages(
+                DiagnosticSeverity.Info,
+                generatorDiags,
+                Array.Empty<(Location, string)>()
+            );
+            CompilationHelper.CheckDiagnosticMessages(
+                DiagnosticSeverity.Warning,
+                generatorDiags,
+                Array.Empty<(Location, string)>()
+            );
+            CompilationHelper.CheckDiagnosticMessages(
+                DiagnosticSeverity.Error,
+                generatorDiags,
+                Array.Empty<(Location, string)>()
+            );
         }
 
         [Theory]
@@ -300,9 +478,13 @@ namespace System.Text.Json.Serialization
         [InlineData("System.Text.Json.Not", true)]
         [InlineData("System.Text.Json", false)]
         [InlineData("System.Text.Json.Not", false)]
-        public static void LocalJsonSerializableAttributeUnexpectedShape(string assemblyName, bool includeSTJ)
+        public static void LocalJsonSerializableAttributeUnexpectedShape(
+            string assemblyName,
+            bool includeSTJ
+        )
         {
-            string source = @"using System;
+            string source =
+                @"using System;
 using System.Text.Json.Serialization;
 
 [assembly: JsonSerializable(typeof(int))]
@@ -316,15 +498,36 @@ namespace System.Text.Json.Serialization
     }
 }";
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences: null, assemblyName, includeSTJ);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences: null,
+                assemblyName,
+                includeSTJ
+            );
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            CompilationHelper.RunGenerators(compilation, out ImmutableArray<Diagnostic> generatorDiags, generator);
+            CompilationHelper.RunGenerators(
+                compilation,
+                out ImmutableArray<Diagnostic> generatorDiags,
+                generator
+            );
             Assert.Null(generator.GetSerializableTypes());
 
-            CompilationHelper.CheckDiagnosticMessages(DiagnosticSeverity.Info, generatorDiags, Array.Empty<(Location, string)>());
-            CompilationHelper.CheckDiagnosticMessages(DiagnosticSeverity.Warning, generatorDiags, Array.Empty<(Location, string)>());
-            CompilationHelper.CheckDiagnosticMessages(DiagnosticSeverity.Error, generatorDiags,  Array.Empty<(Location, string)>());
+            CompilationHelper.CheckDiagnosticMessages(
+                DiagnosticSeverity.Info,
+                generatorDiags,
+                Array.Empty<(Location, string)>()
+            );
+            CompilationHelper.CheckDiagnosticMessages(
+                DiagnosticSeverity.Warning,
+                generatorDiags,
+                Array.Empty<(Location, string)>()
+            );
+            CompilationHelper.CheckDiagnosticMessages(
+                DiagnosticSeverity.Error,
+                generatorDiags,
+                Array.Empty<(Location, string)>()
+            );
         }
 
         [Fact]
@@ -334,7 +537,11 @@ namespace System.Text.Json.Serialization
 
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation newCompilation = CompilationHelper.RunGenerators(compilation, out var generatorDiags, generator);
+            Compilation newCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out var generatorDiags,
+                generator
+            );
 
             // Make sure compilation was successful.
             CheckCompilationDiagnosticsErrors(generatorDiags);
@@ -345,12 +552,14 @@ namespace System.Text.Json.Serialization
         public void CollectionDictionarySourceGeneration()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedHighLowTempsCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedHighLowTempsCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
 
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Collections;
             using System.Collections.Generic;
@@ -376,13 +585,23 @@ namespace System.Text.Json.Serialization
                 }
             }";
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage)
+            };
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
 
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation newCompilation = CompilationHelper.RunGenerators(compilation, out var generatorDiags, generator);
+            Compilation newCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out var generatorDiags,
+                generator
+            );
 
             // Make sure compilation was successful.
 
@@ -393,7 +612,8 @@ namespace System.Text.Json.Serialization
         [Fact]
         public void ContextTypeNotInNamespace()
         {
-            string source = @"
+            string source =
+                @"
             using System.Text.Json.Serialization;
 
             [JsonSerializable(typeof(MyType))]
@@ -429,7 +649,11 @@ namespace System.Text.Json.Serialization
 
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation newCompilation = CompilationHelper.RunGenerators(compilation, out ImmutableArray<Diagnostic> generatorDiags, generator);
+            Compilation newCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out ImmutableArray<Diagnostic> generatorDiags,
+                generator
+            );
 
             // Make sure compilation was successful.
             CheckCompilationDiagnosticsErrors(generatorDiags);
@@ -445,21 +669,44 @@ namespace System.Text.Json.Serialization
             // Check for received fields, properties and methods in created type.
             string[] expectedPropertyNames = { "PublicPropertyInt", "PublicPropertyString", };
             string[] expectedFieldNames = { "PublicChar", "PublicDouble" };
-            string[] expectedMethodNames = { "get_PrivatePropertyInt", "get_PrivatePropertyString", "get_PublicPropertyInt", "get_PublicPropertyString", "MyMethod", "MySecondMethod", "set_PrivatePropertyInt", "set_PrivatePropertyString", "set_PublicPropertyInt", "set_PublicPropertyString", "UsePrivates" };
-            CheckFieldsPropertiesMethods(myType, expectedFieldNames, expectedPropertyNames, expectedMethodNames);
+            string[] expectedMethodNames =
+            {
+                "get_PrivatePropertyInt",
+                "get_PrivatePropertyString",
+                "get_PublicPropertyInt",
+                "get_PublicPropertyString",
+                "MyMethod",
+                "MySecondMethod",
+                "set_PrivatePropertyInt",
+                "set_PrivatePropertyString",
+                "set_PublicPropertyInt",
+                "set_PublicPropertyString",
+                "UsePrivates"
+            };
+            CheckFieldsPropertiesMethods(
+                myType,
+                expectedFieldNames,
+                expectedPropertyNames,
+                expectedMethodNames
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/63802", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/63802",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void Record()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedLibRecordCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedLibRecordCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
 
-            string source = @"
+            string source =
+                @"
             using System.Text.Json.Serialization;
 
             namespace HelloWorld
@@ -484,13 +731,20 @@ namespace System.Text.Json.Serialization
                 }
             }";
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage)
+            };
 
             Compilation compilation = CompilationHelper.CreateCompilation(source);
 
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation newCompilation = CompilationHelper.RunGenerators(compilation, out ImmutableArray<Diagnostic> generatorDiags, generator);
+            Compilation newCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out ImmutableArray<Diagnostic> generatorDiags,
+                generator
+            );
 
             // Make sure compilation was successful.
             CheckCompilationDiagnosticsErrors(generatorDiags);
@@ -505,23 +759,37 @@ namespace System.Text.Json.Serialization
 
             // Check for received fields, properties and methods for NotMyType.
             string[] expectedFieldsNames = { "Country", "PhoneNumber" };
-            string[] expectedPropertyNames = { "Address1", "Address2", "City", "Id", "Name", "PostalCode", "State" };
+            string[] expectedPropertyNames =
+            {
+                "Address1",
+                "Address2",
+                "City",
+                "Id",
+                "Name",
+                "PostalCode",
+                "State"
+            };
             CheckFieldsPropertiesMethods(recordType, expectedFieldsNames, expectedPropertyNames);
 
             Assert.Equal(1, recordType.GetConstructors().Length);
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/63802", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/63802",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void RecordInExternalAssembly()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedLibRecordCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedLibRecordCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
 
-            string source = @"
+            string source =
+                @"
             using System.Text.Json.Serialization;
             using ReferencedAssembly;
 
@@ -533,13 +801,23 @@ namespace System.Text.Json.Serialization
                 }
             }";
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage)
+            };
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
 
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation newCompilation = CompilationHelper.RunGenerators(compilation, out ImmutableArray<Diagnostic> generatorDiags, generator);
+            Compilation newCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out ImmutableArray<Diagnostic> generatorDiags,
+                generator
+            );
 
             // Make sure compilation was successful.
             CheckCompilationDiagnosticsErrors(generatorDiags);
@@ -552,7 +830,16 @@ namespace System.Text.Json.Serialization
             Assert.Equal("ReferencedAssembly.LibRecord", recordType.FullName);
 
             string[] expectedFieldsNames = { "Country", "PhoneNumber" };
-            string[] expectedPropertyNames = { "Address1", "Address2", "City", "Id", "Name", "PostalCode", "State" };
+            string[] expectedPropertyNames =
+            {
+                "Address1",
+                "Address2",
+                "City",
+                "Id",
+                "Name",
+                "PostalCode",
+                "State"
+            };
             CheckFieldsPropertiesMethods(recordType, expectedFieldsNames, expectedPropertyNames);
 
             Assert.Equal(1, recordType.GetConstructors().Length);
@@ -562,12 +849,14 @@ namespace System.Text.Json.Serialization
         public void RecordDerivedFromRecordInExternalAssembly()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedSimpleLibRecordCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedSimpleLibRecordCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
 
-            string source = @"
+            string source =
+                @"
             using System.Text.Json.Serialization;
             using ReferencedAssembly;
 
@@ -584,13 +873,23 @@ namespace System.Text.Json.Serialization
                 }
             }";
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage)
+            };
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
 
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation newCompilation = CompilationHelper.RunGenerators(compilation, out ImmutableArray<Diagnostic> generatorDiags, generator);
+            Compilation newCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out ImmutableArray<Diagnostic> generatorDiags,
+                generator
+            );
 
             // Make sure compilation was successful.
             CheckCompilationDiagnosticsErrors(generatorDiags);
@@ -603,15 +902,32 @@ namespace System.Text.Json.Serialization
             Assert.Equal("HelloWorld.AppRecord", recordType.FullName);
 
             string[] expectedFieldsNames = { "Country", "PhoneNumber" };
-            string[] expectedPropertyNames = { "Address1", "Address2", "City", "ExtraData", "Id", "Name", "PostalCode", "State" };
-            CheckFieldsPropertiesMethods(recordType, expectedFieldsNames, expectedPropertyNames, inspectBaseTypes: true);
+            string[] expectedPropertyNames =
+            {
+                "Address1",
+                "Address2",
+                "City",
+                "ExtraData",
+                "Id",
+                "Name",
+                "PostalCode",
+                "State"
+            };
+            CheckFieldsPropertiesMethods(
+                recordType,
+                expectedFieldsNames,
+                expectedPropertyNames,
+                inspectBaseTypes: true
+            );
 
             Assert.Equal(1, recordType.GetConstructors().Length);
         }
 
         private void CheckCompilationDiagnosticsErrors(ImmutableArray<Diagnostic> diagnostics)
         {
-            Assert.Empty(diagnostics.Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            Assert.Empty(
+                diagnostics.Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error)
+            );
         }
 
         private void CheckFieldsPropertiesMethods(
@@ -619,7 +935,8 @@ namespace System.Text.Json.Serialization
             string[] expectedFields,
             string[] expectedProperties,
             string[] expectedMethods = null,
-            bool inspectBaseTypes = false)
+            bool inspectBaseTypes = false
+        )
         {
             BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance;
 
@@ -628,8 +945,14 @@ namespace System.Text.Json.Serialization
 
             if (!inspectBaseTypes)
             {
-                receivedFields = type.GetFields(bindingFlags).Select(field => field.Name).OrderBy(s => s).ToArray();
-                receivedProperties = type.GetProperties(bindingFlags).Select(property => property.Name).OrderBy(s => s).ToArray();
+                receivedFields = type.GetFields(bindingFlags)
+                    .Select(field => field.Name)
+                    .OrderBy(s => s)
+                    .ToArray();
+                receivedProperties = type.GetProperties(bindingFlags)
+                    .Select(property => property.Name)
+                    .OrderBy(s => s)
+                    .ToArray();
             }
             else
             {
@@ -639,16 +962,31 @@ namespace System.Text.Json.Serialization
                 Type currentType = type;
                 while (currentType != null)
                 {
-                    fields.AddRange(currentType.GetFields(bindingFlags).Select(property => property.Name).OrderBy(s => s).ToArray());
-                    props.AddRange(currentType.GetProperties(bindingFlags).Select(property => property.Name).OrderBy(s => s).ToArray());
+                    fields.AddRange(
+                        currentType
+                            .GetFields(bindingFlags)
+                            .Select(property => property.Name)
+                            .OrderBy(s => s)
+                            .ToArray()
+                    );
+                    props.AddRange(
+                        currentType
+                            .GetProperties(bindingFlags)
+                            .Select(property => property.Name)
+                            .OrderBy(s => s)
+                            .ToArray()
+                    );
                     currentType = currentType.BaseType;
                 }
 
                 receivedFields = fields.ToArray();
                 receivedProperties = props.ToArray();
             }
-                
-            string[] receivedMethods = type.GetMethods().Select(method => method.Name).OrderBy(s => s).ToArray();
+
+            string[] receivedMethods = type.GetMethods()
+                .Select(method => method.Name)
+                .OrderBy(s => s)
+                .ToArray();
 
             Array.Sort(receivedFields);
             Array.Sort(receivedProperties);
@@ -671,7 +1009,8 @@ namespace System.Text.Json.Serialization
             // Adding a dependency to an assembly that has internal definitions of public types
             // should not result in a collision and break generation.
             // Verify usage of the extension GetBestTypeByMetadataName(this Compilation) instead of Compilation.GetTypeByMetadataName().
-            var referencedSource = @"
+            var referencedSource =
+                @"
                 namespace System.Text.Json.Serialization
                 {
                     internal class JsonSerializerContext { }
@@ -680,13 +1019,16 @@ namespace System.Text.Json.Serialization
                 }";
 
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateCompilation(referencedSource);
+            Compilation referencedCompilation = CompilationHelper.CreateCompilation(
+                referencedSource
+            );
 
             // Obtain the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
 
             // Generate the code
-            string source = @"
+            string source =
+                @"
                 using System.Text.Json.Serialization;
                 namespace HelloWorld
                 {
@@ -701,17 +1043,31 @@ namespace System.Text.Json.Serialization
                     }
                 }";
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage)
+            };
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
             Compilation newCompilation = CompilationHelper.RunGenerators(
                 compilation,
-                out ImmutableArray<Diagnostic> generatorDiags, generator);
+                out ImmutableArray<Diagnostic> generatorDiags,
+                generator
+            );
 
             // Make sure compilation was successful.
-            Assert.Empty(generatorDiags.Where(diag => diag.Severity.Equals(DiagnosticSeverity.Error)));
-            Assert.Empty(newCompilation.GetDiagnostics().Where(diag => diag.Severity.Equals(DiagnosticSeverity.Error)));
+            Assert.Empty(
+                generatorDiags.Where(diag => diag.Severity.Equals(DiagnosticSeverity.Error))
+            );
+            Assert.Empty(
+                newCompilation
+                    .GetDiagnostics()
+                    .Where(diag => diag.Severity.Equals(DiagnosticSeverity.Error))
+            );
 
             // Should find the generated type.
             Dictionary<string, Type> types = generator.GetSerializableTypes();
@@ -722,7 +1078,8 @@ namespace System.Text.Json.Serialization
         [Fact]
         public static void NoWarningsDueToObsoleteMembers()
         {
-                string source = @"using System;
+            string source =
+                @"using System;
 using System.Text.Json.Serialization;
 
 namespace Test
@@ -741,13 +1098,29 @@ namespace Test
             Compilation compilation = CompilationHelper.CreateCompilation(source);
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation newCompilation = CompilationHelper.RunGenerators(compilation, out _, generator);
+            Compilation newCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out _,
+                generator
+            );
             ImmutableArray<Diagnostic> generatorDiags = newCompilation.GetDiagnostics();
 
             // No diagnostics expected.
-            CompilationHelper.CheckDiagnosticMessages(DiagnosticSeverity.Info, generatorDiags, Array.Empty<(Location, string)>());
-            CompilationHelper.CheckDiagnosticMessages(DiagnosticSeverity.Warning, generatorDiags, Array.Empty<(Location, string)>());
-            CompilationHelper.CheckDiagnosticMessages(DiagnosticSeverity.Error, generatorDiags, Array.Empty<(Location, string)>());
+            CompilationHelper.CheckDiagnosticMessages(
+                DiagnosticSeverity.Info,
+                generatorDiags,
+                Array.Empty<(Location, string)>()
+            );
+            CompilationHelper.CheckDiagnosticMessages(
+                DiagnosticSeverity.Warning,
+                generatorDiags,
+                Array.Empty<(Location, string)>()
+            );
+            CompilationHelper.CheckDiagnosticMessages(
+                DiagnosticSeverity.Error,
+                generatorDiags,
+                Array.Empty<(Location, string)>()
+            );
         }
     }
 }

@@ -33,10 +33,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
     [Trait(Traits.Feature, Traits.Features.Classification)]
     public class SemanticClassifierTests : AbstractCSharpClassifierTests
     {
-        protected override async Task<ImmutableArray<ClassifiedSpan>> GetClassificationSpansAsync(string code, TextSpan span, ParseOptions? options, TestHost testHost)
+        protected override async Task<ImmutableArray<ClassifiedSpan>> GetClassificationSpansAsync(
+            string code,
+            TextSpan span,
+            ParseOptions? options,
+            TestHost testHost
+        )
         {
             using var workspace = CreateWorkspace(code, options, testHost);
-            var document = workspace.CurrentSolution.GetRequiredDocument(workspace.Documents.First().Id);
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.First().Id
+            );
 
             return await GetSemanticClassificationsAsync(document, span);
         }
@@ -50,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 methodName: "M",
                 @"new Class<int>();",
                 testHost,
-                Class("Class"));
+                Class("Class")
+            );
         }
 
         [Theory]
@@ -60,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             await TestInMethodAsync(
                 @"int i = 0; ref var x = ref i;",
                 testHost,
-                Classifications(Keyword("var"), Local("i")));
+                Classifications(Keyword("var"), Local("i"))
+            );
         }
 
         [Theory]
@@ -68,12 +77,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task UsingAlias1(TestHost testHost)
         {
             await TestAsync(
-@"using M = System.Math;",
+                @"using M = System.Math;",
                 testHost,
                 Class("M"),
                 Namespace("System"),
                 Class("Math"),
-                Static("Math"));
+                Static("Math")
+            );
         }
 
         [Theory]
@@ -85,17 +95,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 methodName: "M",
                 @"new Class<dynamic>();",
                 testHost,
-                Classifications(Class("Class"), Keyword("dynamic")));
+                Classifications(Class("Class"), Keyword("dynamic"))
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task UsingTypeAliases(TestHost testHost)
         {
-            var code = @"using Alias = Test; 
+            var code =
+                @"using Alias = Test; 
 class Test { void M() { Test a = new Test(); Alias b = new Alias(); } }";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 code,
                 testHost,
                 Class("Alias"),
@@ -103,7 +116,8 @@ class Test { void M() { Test a = new Test(); Alias b = new Alias(); } }";
                 Class("Test"),
                 Class("Test"),
                 Class("Alias"),
-                Class("Alias"));
+                Class("Alias")
+            );
         }
 
         [Theory]
@@ -111,7 +125,7 @@ class Test { void M() { Test a = new Test(); Alias b = new Alias(); } }";
         public async Task DynamicTypeAlias(TestHost testHost)
         {
             await TestAsync(
-@"using dynamic = System.EventArgs;
+                @"using dynamic = System.EventArgs;
 
 class C
 {
@@ -122,7 +136,8 @@ class C
                 Namespace("System"),
                 Class("EventArgs"),
                 Class("dynamic"),
-                Class("dynamic"));
+                Class("dynamic")
+            );
         }
 
         [Theory]
@@ -130,7 +145,7 @@ class C
         public async Task DynamicAsDelegateName(TestHost testHost)
         {
             await TestAsync(
-@"delegate void dynamic();
+                @"delegate void dynamic();
 
 class C
 {
@@ -140,7 +155,8 @@ class C
     }
 }",
                 testHost,
-                Delegate("dynamic"));
+                Delegate("dynamic")
+            );
         }
 
         [Theory]
@@ -148,7 +164,7 @@ class C
         public async Task DynamicAsInterfaceName(TestHost testHost)
         {
             await TestAsync(
-@"interface dynamic
+                @"interface dynamic
 {
 }
 
@@ -157,7 +173,8 @@ class C
     dynamic d;
 }",
                 testHost,
-                Interface("dynamic"));
+                Interface("dynamic")
+            );
         }
 
         [Theory]
@@ -165,7 +182,7 @@ class C
         public async Task DynamicAsEnumName(TestHost testHost)
         {
             await TestAsync(
-@"enum dynamic
+                @"enum dynamic
 {
 }
 
@@ -174,7 +191,8 @@ class C
     dynamic d;
 }",
                 testHost,
-                Enum("dynamic"));
+                Enum("dynamic")
+            );
         }
 
         [Theory]
@@ -182,7 +200,7 @@ class C
         public async Task DynamicAsClassName(TestHost testHost)
         {
             await TestAsync(
-@"class dynamic
+                @"class dynamic
 {
 }
 
@@ -191,7 +209,8 @@ class C
     dynamic d;
 }",
                 testHost,
-                Class("dynamic"));
+                Class("dynamic")
+            );
         }
 
         [Theory]
@@ -200,7 +219,7 @@ class C
         public async Task DynamicAsRecordName(TestHost testHost)
         {
             await TestAsync(
-@"record dynamic
+                @"record dynamic
 {
 }
 
@@ -209,7 +228,8 @@ class C
     dynamic d;
 }",
                 testHost,
-                Record("dynamic"));
+                Record("dynamic")
+            );
         }
 
         [Theory]
@@ -217,7 +237,7 @@ class C
         public async Task DynamicAsClassNameAndLocalVariableName(TestHost testHost)
         {
             await TestAsync(
-@"class dynamic
+                @"class dynamic
 {
     dynamic()
     {
@@ -225,7 +245,8 @@ class C
     }
 }",
                 testHost,
-                Class("dynamic"));
+                Class("dynamic")
+            );
         }
 
         [Theory]
@@ -233,7 +254,7 @@ class C
         public async Task DynamicAsStructName(TestHost testHost)
         {
             await TestAsync(
-@"struct dynamic
+                @"struct dynamic
 {
 }
 
@@ -242,7 +263,8 @@ class C
     dynamic d;
 }",
                 testHost,
-                Struct("dynamic"));
+                Struct("dynamic")
+            );
         }
 
         [Theory]
@@ -250,7 +272,7 @@ class C
         public async Task DynamicAsGenericClassName(TestHost testHost)
         {
             await TestAsync(
-@"class dynamic<T>
+                @"class dynamic<T>
 {
 }
 
@@ -259,7 +281,8 @@ class C
     dynamic<int> d;
 }",
                 testHost,
-                Class("dynamic"));
+                Class("dynamic")
+            );
         }
 
         [Theory]
@@ -267,7 +290,7 @@ class C
         public async Task DynamicAsGenericClassNameButOtherArity(TestHost testHost)
         {
             await TestAsync(
-@"class dynamic<T>
+                @"class dynamic<T>
 {
 }
 
@@ -276,7 +299,8 @@ class C
     dynamic d;
 }",
                 testHost,
-                Keyword("dynamic"));
+                Keyword("dynamic")
+            );
         }
 
         [Theory]
@@ -284,7 +308,7 @@ class C
         public async Task DynamicAsUndefinedGenericType(TestHost testHost)
         {
             await TestAsync(
-@"class dynamic
+                @"class dynamic
 {
 }
 
@@ -293,7 +317,8 @@ class C
     dynamic<int> d;
 }",
                 testHost,
-                Class("dynamic"));
+                Class("dynamic")
+            );
         }
 
         [Theory]
@@ -301,14 +326,15 @@ class C
         public async Task DynamicAsExternAlias(TestHost testHost)
         {
             await TestAsync(
-@"extern alias dynamic;
+                @"extern alias dynamic;
 
 class C
 {
     dynamic::Goo a;
 }",
-    testHost,
-    Namespace("dynamic"));
+                testHost,
+                Namespace("dynamic")
+            );
         }
 
         [Theory]
@@ -316,15 +342,17 @@ class C
         public async Task GenericClassNameButOtherArity(TestHost testHost)
         {
             await TestAsync(
-@"class A<T>
+                @"class A<T>
 {
 }
 
 class C
 {
     A d;
-}", testHost,
- Class("A"));
+}",
+                testHost,
+                Class("A")
+            );
         }
 
         [Theory]
@@ -332,14 +360,15 @@ class C
         public async Task GenericTypeParameter(TestHost testHost)
         {
             await TestAsync(
-@"class C<T>
+                @"class C<T>
 {
     void M()
     {
         default(T) }
 }",
                 testHost,
-                TypeParameter("T"));
+                TypeParameter("T")
+            );
         }
 
         [Theory]
@@ -347,7 +376,7 @@ class C
         public async Task GenericMethodTypeParameter(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     T M<T>(T t)
     {
@@ -357,7 +386,8 @@ class C
                 testHost,
                 TypeParameter("T"),
                 TypeParameter("T"),
-                TypeParameter("T"));
+                TypeParameter("T")
+            );
         }
 
         [Theory]
@@ -365,7 +395,7 @@ class C
         public async Task GenericMethodTypeParameterInLocalVariableDeclaration(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M<T>()
     {
@@ -373,7 +403,8 @@ class C
     }
 }",
                 testHost,
-                TypeParameter("T"));
+                TypeParameter("T")
+            );
         }
 
         [Theory]
@@ -381,7 +412,7 @@ class C
         public async Task ParameterOfLambda1(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     C()
     {
@@ -390,7 +421,8 @@ class C
     }
 }",
                 testHost,
-                Class("C"));
+                Class("C")
+            );
         }
 
         [Theory]
@@ -398,7 +430,7 @@ class C
         public async Task ParameterOfAnonymousMethod(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     C()
     {
@@ -407,7 +439,8 @@ class C
     }
 }",
                 testHost,
-                Class("C"));
+                Class("C")
+            );
         }
 
         [Theory]
@@ -415,12 +448,13 @@ class C
         public async Task GenericTypeParameterAfterWhere(TestHost testHost)
         {
             await TestAsync(
-@"class C<A, B> where A : B
+                @"class C<A, B> where A : B
 {
 }",
                 testHost,
                 TypeParameter("A"),
-                TypeParameter("B"));
+                TypeParameter("B")
+            );
         }
 
         [Theory]
@@ -428,7 +462,7 @@ class C
         public async Task BaseClass(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
 }
 
@@ -436,7 +470,8 @@ class C2 : C
 {
 }",
                 testHost,
-                Class("C"));
+                Class("C")
+            );
         }
 
         [Theory]
@@ -444,7 +479,7 @@ class C2 : C
         public async Task BaseInterfaceOnInterface(TestHost testHost)
         {
             await TestAsync(
-@"interface T
+                @"interface T
 {
 }
 
@@ -452,7 +487,8 @@ interface T2 : T
 {
 }",
                 testHost,
-                Interface("T"));
+                Interface("T")
+            );
         }
 
         [Theory]
@@ -460,7 +496,7 @@ interface T2 : T
         public async Task BaseInterfaceOnClass(TestHost testHost)
         {
             await TestAsync(
-@"interface T
+                @"interface T
 {
 }
 
@@ -468,7 +504,8 @@ class T2 : T
 {
 }",
                 testHost,
-                Interface("T"));
+                Interface("T")
+            );
         }
 
         [Theory]
@@ -476,7 +513,7 @@ class T2 : T
         public async Task InterfaceColorColor(TestHost testHost)
         {
             await TestAsync(
-@"interface T
+                @"interface T
 {
 }
 
@@ -486,7 +523,8 @@ class T2 : T
 }",
                 testHost,
                 Interface("T"),
-                Interface("T"));
+                Interface("T")
+            );
         }
 
         [Theory]
@@ -494,14 +532,15 @@ class T2 : T
         public async Task DelegateColorColor(TestHost testHost)
         {
             await TestAsync(
-@"delegate void T();
+                @"delegate void T();
 
 class T2
 {
     T T;
 }",
                 testHost,
-                Delegate("T"));
+                Delegate("T")
+            );
         }
 
         [Theory]
@@ -509,7 +548,7 @@ class T2
         public async Task DelegateReturnsItself(TestHost testHost)
         {
             await TestAsync(
-@"delegate T T();
+                @"delegate T T();
 
 class C
 {
@@ -518,7 +557,8 @@ class C
                 testHost,
                 Delegate("T"),
                 Delegate("T"),
-                Delegate("T"));
+                Delegate("T")
+            );
         }
 
         [Theory]
@@ -526,12 +566,13 @@ class C
         public async Task StructColorColor(TestHost testHost)
         {
             await TestAsync(
-@"struct T
+                @"struct T
 {
     T T;
 }",
                 testHost,
-                Struct("T"));
+                Struct("T")
+            );
         }
 
         [Theory]
@@ -539,7 +580,7 @@ class C
         public async Task EnumColorColor(TestHost testHost)
         {
             await TestAsync(
-@"enum T
+                @"enum T
 {
     T,
     T
@@ -550,7 +591,8 @@ class C
     T T;
 }",
                 testHost,
-                Enum("T"));
+                Enum("T")
+            );
         }
 
         [Theory]
@@ -558,12 +600,13 @@ class C
         public async Task DynamicAsGenericTypeParameter(TestHost testHost)
         {
             await TestAsync(
-@"class C<dynamic>
+                @"class C<dynamic>
 {
     dynamic d;
 }",
                 testHost,
-                TypeParameter("dynamic"));
+                TypeParameter("dynamic")
+            );
         }
 
         [Theory]
@@ -571,12 +614,13 @@ class C
         public async Task DynamicAsGenericFieldName(TestHost testHost)
         {
             await TestAsync(
-@"class A<T>
+                @"class A<T>
 {
     T dynamic;
 }",
                 testHost,
-                TypeParameter("T"));
+                TypeParameter("T")
+            );
         }
 
         [Theory]
@@ -584,7 +628,7 @@ class C
         public async Task PropertySameNameAsClass(TestHost testHost)
         {
             await TestAsync(
-@"class N
+                @"class N
 {
     N N { get; set; }
 
@@ -602,7 +646,8 @@ class C
                 Property("N"),
                 Local("n"),
                 Property("N"),
-                Property("N"));
+                Property("N")
+            );
         }
 
         [Theory]
@@ -610,7 +655,7 @@ class C
         public async Task AttributeWithoutAttributeSuffix(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 [Obsolete]
 class C
@@ -618,7 +663,8 @@ class C
 }",
                 testHost,
                 Namespace("System"),
-                Class("Obsolete"));
+                Class("Obsolete")
+            );
         }
 
         [Theory]
@@ -626,7 +672,7 @@ class C
         public async Task AttributeOnNonExistingMember(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class A
 {
@@ -634,7 +680,8 @@ class A
 }",
                 testHost,
                 Namespace("System"),
-                Class("Obsolete"));
+                Class("Obsolete")
+            );
         }
 
         [Theory]
@@ -642,7 +689,7 @@ class A
         public async Task AttributeWithoutAttributeSuffixOnAssembly(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 [assembly: My]
 
@@ -652,7 +699,8 @@ class MyAttribute : Attribute
                 testHost,
                 Namespace("System"),
                 Class("My"),
-                Class("Attribute"));
+                Class("Attribute")
+            );
         }
 
         [Theory]
@@ -660,7 +708,7 @@ class MyAttribute : Attribute
         public async Task AttributeViaNestedClassOrDerivedClass(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 [Base.My]
 [Derived.My]
@@ -681,7 +729,8 @@ class Derived : Base
                 Class("Derived"),
                 Class("My"),
                 Class("Attribute"),
-                Class("Base"));
+                Class("Base")
+            );
         }
 
         [Theory]
@@ -689,7 +738,7 @@ class Derived : Base
         public async Task NamedAndOptional(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void B(C C = null)
     {
@@ -703,7 +752,8 @@ class Derived : Base
                 testHost,
                 Class("C"),
                 Method("B"),
-                Parameter("C"));
+                Parameter("C")
+            );
         }
 
         [Theory]
@@ -715,7 +765,8 @@ class Derived : Base
                 methodName: "M",
                 @"Class<int",
                 testHost,
-                Class("Class"));
+                Class("Class")
+            );
         }
 
         [Theory]
@@ -727,7 +778,8 @@ class Derived : Base
                 methodName: "M",
                 @"Class<int, b",
                 testHost,
-                Class("Class"));
+                Class("Class")
+            );
         }
 
         // The "Color Color" problem is the C# IDE folklore for when
@@ -739,12 +791,13 @@ class Derived : Base
         public async Task ColorColor(TestHost testHost)
         {
             await TestAsync(
-@"class Color
+                @"class Color
 {
     Color Color;
 }",
                 testHost,
-                Class("Color"));
+                Class("Color")
+            );
         }
 
         [Theory]
@@ -752,7 +805,7 @@ class Derived : Base
         public async Task ColorColor2(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     T T = new T();
 
@@ -765,7 +818,8 @@ class Derived : Base
                 Class("T"),
                 Class("T"),
                 Field("T"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory]
@@ -773,7 +827,7 @@ class Derived : Base
         public async Task ColorColor3(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     T T = new T();
 
@@ -788,7 +842,8 @@ class Derived : Base
                 Class("T"),
                 Class("T"),
                 Field("T"),
-                Method("M"));
+                Method("M")
+            );
         }
 
         /// <summary>
@@ -800,7 +855,7 @@ class Derived : Base
         public async Task ColorColor4(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     T T;
 
@@ -812,7 +867,8 @@ class Derived : Base
                 testHost,
                 Class("T"),
                 Field("T"),
-                Field("T"));
+                Field("T")
+            );
         }
 
         /// <summary>
@@ -824,7 +880,7 @@ class Derived : Base
         public async Task ColorColor5(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     static T T;
 
@@ -837,7 +893,8 @@ class Derived : Base
                 Class("T"),
                 Class("T"),
                 Field("T"),
-                Static("T"));
+                Static("T")
+            );
         }
 
         /// <summary>
@@ -848,7 +905,7 @@ class Derived : Base
         public async Task ColorColor6(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     int field;
 
@@ -862,7 +919,8 @@ class Derived : Base
                 Class("T"),
                 Class("T"),
                 Local("T"),
-                Field("field"));
+                Field("field")
+            );
         }
 
         /// <summary>
@@ -873,7 +931,7 @@ class Derived : Base
         public async Task ColorColor7(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     static int field;
 
@@ -888,7 +946,8 @@ class Derived : Base
                 Class("T"),
                 Class("T"),
                 Field("field"),
-                Static("field"));
+                Static("field")
+            );
         }
 
         [Theory]
@@ -896,7 +955,7 @@ class Derived : Base
         public async Task ColorColor8(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     void M(T T)
     {
@@ -913,7 +972,8 @@ class Derived : Base
                 Class("T"),
                 Class("T"),
                 Method("M"),
-                Local("T"));
+                Local("T")
+            );
         }
 
         [Theory]
@@ -921,7 +981,7 @@ class Derived : Base
         public async Task ColorColor9(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     T M(T T)
     {
@@ -934,7 +994,8 @@ class Derived : Base
                 Class("T"),
                 Parameter("T"),
                 Class("T"),
-                Parameter("T"));
+                Parameter("T")
+            );
         }
 
         [Theory]
@@ -943,7 +1004,7 @@ class Derived : Base
         {
             // note: 'var' now binds to the type of the local.
             await TestAsync(
-@"class T
+                @"class T
 {
     void M()
     {
@@ -955,7 +1016,8 @@ class Derived : Base
                 Keyword("var"),
                 Class("T"),
                 Local("T"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory]
@@ -963,7 +1025,7 @@ class Derived : Base
         public async Task ColorColor11(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     void M()
     {
@@ -974,7 +1036,8 @@ class Derived : Base
                 testHost,
                 Keyword("var"),
                 Local("T"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory]
@@ -982,7 +1045,7 @@ class Derived : Base
         public async Task ColorColor12(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     void M()
     {
@@ -994,7 +1057,8 @@ class Derived : Base
                 Class("T"),
                 Class("T"),
                 Keyword("var"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory]
@@ -1002,7 +1066,7 @@ class Derived : Base
         public async Task ColorColor13(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     void M()
     {
@@ -1014,7 +1078,8 @@ class Derived : Base
                 Class("T"),
                 Class("T"),
                 Class("T"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory]
@@ -1022,7 +1087,7 @@ class Derived : Base
         public async Task ColorColor14(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     void M()
     {
@@ -1034,7 +1099,8 @@ class Derived : Base
                 Class("T"),
                 Class("T"),
                 Class("T"),
-                Local("T"));
+                Local("T")
+            );
         }
 
         [Theory]
@@ -1042,7 +1108,7 @@ class Derived : Base
         public async Task NamespaceNameSameAsTypeName1(TestHost testHost)
         {
             await TestAsync(
-@"namespace T
+                @"namespace T
 {
     class T
     {
@@ -1055,7 +1121,8 @@ class Derived : Base
                 testHost,
                 Namespace("T"),
                 Class("T"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory]
@@ -1063,7 +1130,7 @@ class Derived : Base
         public async Task NamespaceNameSameAsTypeNameWithGlobal(TestHost testHost)
         {
             await TestAsync(
-@"namespace T
+                @"namespace T
 {
     class T
     {
@@ -1078,7 +1145,8 @@ class Derived : Base
                 Namespace("T"),
                 Class("T"),
                 Namespace("T"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory]
@@ -1086,7 +1154,7 @@ class Derived : Base
         public async Task AmbiguityTypeAsGenericMethodArgumentVsLocal(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     void M<T>()
     {
@@ -1097,7 +1165,8 @@ class Derived : Base
                 testHost,
                 TypeParameter("T"),
                 Method("M"),
-                TypeParameter("T"));
+                TypeParameter("T")
+            );
         }
 
         [Theory]
@@ -1105,7 +1174,7 @@ class Derived : Base
         public async Task AmbiguityTypeAsGenericArgumentVsLocal(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     class G<T>
     {
@@ -1122,7 +1191,8 @@ class Derived : Base
                 Class("G"),
                 Class("T"),
                 Class("G"),
-                Class("T"));
+                Class("T")
+            );
         }
 
         [Theory]
@@ -1130,7 +1200,7 @@ class Derived : Base
         public async Task AmbiguityTypeAsGenericArgumentVsField(TestHost testHost)
         {
             await TestAsync(
-@"class T
+                @"class T
 {
     class H<T>
     {
@@ -1148,7 +1218,8 @@ class Derived : Base
                 Class("H"),
                 Class("T"),
                 Field("f"),
-                Static("f"));
+                Static("f")
+            );
         }
 
         /// <summary>
@@ -1159,7 +1230,7 @@ class Derived : Base
         public async Task GrammarAmbiguity_7_5_4_2(TestHost testHost)
         {
             await TestAsync(
-@"class M
+                @"class M
 {
     void m()
     {
@@ -1189,7 +1260,8 @@ class Derived : Base
                 Method("F"),
                 Method("G"),
                 Class("A"),
-                Class("B"));
+                Class("B")
+            );
         }
 
         [Theory]
@@ -1197,7 +1269,7 @@ class Derived : Base
         public async Task AnonymousTypePropertyName(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1207,7 +1279,8 @@ class C
                 testHost,
                 Namespace("System"),
                 Keyword("var"),
-                Property("String"));
+                Property("String")
+            );
         }
 
         [Theory]
@@ -1215,7 +1288,7 @@ class C
         public async Task YieldAsATypeName(TestHost testHost)
         {
             await TestAsync(
-@"using System.Collections.Generic;
+                @"using System.Collections.Generic;
 
 class yield
 {
@@ -1233,7 +1306,8 @@ class yield
                 Class("yield"),
                 Class("yield"),
                 Class("yield"),
-                Local("yield"));
+                Local("yield")
+            );
         }
 
         [Theory]
@@ -1241,7 +1315,7 @@ class yield
         public async Task TypeNameDottedNames(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     class Nested
     {
@@ -1251,7 +1325,8 @@ class yield
 }",
                 testHost,
                 Class("C"),
-                Class("Nested"));
+                Class("Nested")
+            );
         }
 
         [Theory]
@@ -1259,7 +1334,7 @@ class yield
         public async Task BindingTypeNameFromBCLViaGlobalAlias(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1268,14 +1343,16 @@ class C
                 testHost,
                 Namespace("System"),
                 Namespace("System"),
-                Class("String"));
+                Class("String")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task BindingTypeNames(TestHost testHost)
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using Str = System.String;
 class C
 {
@@ -1289,7 +1366,8 @@ class C
     global::System.String FCNBCL;
     global::Str GlobalUsingAlias;
 }";
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 code,
                 testHost,
                 Options.Regular,
@@ -1305,7 +1383,8 @@ class C
                 Class("Nested"),
                 Class("C"),
                 Namespace("System"),
-                Class("String"));
+                Class("String")
+            );
         }
 
         [Theory]
@@ -1313,7 +1392,7 @@ class C
         public async Task Constructors(TestHost testHost)
         {
             await TestAsync(
-@"struct S
+                @"struct S
 {
     public int i;
 
@@ -1337,7 +1416,8 @@ class C
                 Keyword("var"),
                 Struct("S"),
                 Keyword("var"),
-                Class("C"));
+                Class("C")
+            );
         }
 
         [Theory]
@@ -1345,7 +1425,7 @@ class C
         public async Task TypesOfClassMembers(TestHost testHost)
         {
             await TestAsync(
-@"class Type
+                @"class Type
 {
     public Type()
     {
@@ -1400,7 +1480,8 @@ class C
                 Class("Type"),
                 Class("Type"),
                 Class("Type"),
-                Class("Type"));
+                Class("Type")
+            );
         }
 
         /// <summary>
@@ -1411,14 +1492,15 @@ class C
         public async Task NAQTypeNameCtor(TestHost testHost)
         {
             await TestInMethodAsync(
-@"System.IO.BufferedStream b = new global::System.IO.BufferedStream();",
+                @"System.IO.BufferedStream b = new global::System.IO.BufferedStream();",
                 testHost,
                 Namespace("System"),
                 Namespace("IO"),
                 Class("BufferedStream"),
                 Namespace("System"),
                 Namespace("IO"),
-                Class("BufferedStream"));
+                Class("BufferedStream")
+            );
         }
 
         [Theory]
@@ -1426,7 +1508,7 @@ class C
         public async Task NAQEnum(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1436,7 +1518,8 @@ class C
                 testHost,
                 Namespace("System"),
                 Namespace("IO"),
-                Enum("DriveType"));
+                Enum("DriveType")
+            );
         }
 
         [Theory]
@@ -1444,7 +1527,7 @@ class C
         public async Task NAQDelegate(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1453,18 +1536,21 @@ class C
 }",
                 testHost,
                 Namespace("System"),
-                Delegate("AssemblyLoadEventHandler"));
+                Delegate("AssemblyLoadEventHandler")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task NAQTypeNameMethodCall(TestHost testHost)
         {
-            await TestInMethodAsync(@"global::System.String.Clone("");",
+            await TestInMethodAsync(
+                @"global::System.String.Clone("");",
                 testHost,
                 Namespace("System"),
                 Class("String"),
-                Method("Clone"));
+                Method("Clone")
+            );
         }
 
         [Theory]
@@ -1472,7 +1558,7 @@ class C
         public async Task NAQEventSubscription(TestHost testHost)
         {
             await TestInMethodAsync(
-@"global::System.AppDomain.CurrentDomain.AssemblyLoad += 
+                @"global::System.AppDomain.CurrentDomain.AssemblyLoad += 
             delegate (object sender, System.AssemblyLoadEventArgs args) {};",
                 testHost,
                 Namespace("System"),
@@ -1481,7 +1567,8 @@ class C
                 Static("CurrentDomain"),
                 Event("AssemblyLoad"),
                 Namespace("System"),
-                Class("AssemblyLoadEventArgs"));
+                Class("AssemblyLoadEventArgs")
+            );
         }
 
         [Theory]
@@ -1489,7 +1576,7 @@ class C
         public async Task AnonymousDelegateParameterType(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1503,7 +1590,8 @@ class C
                 Namespace("System"),
                 Class("EventArgs"),
                 Namespace("System"),
-                Class("EventArgs"));
+                Class("EventArgs")
+            );
         }
 
         [Theory]
@@ -1511,14 +1599,15 @@ class C
         public async Task NAQCtor(TestHost testHost)
         {
             await TestInMethodAsync(
-@"global::System.Collections.DictionaryEntry de = new global::System.Collections.DictionaryEntry();",
+                @"global::System.Collections.DictionaryEntry de = new global::System.Collections.DictionaryEntry();",
                 testHost,
                 Namespace("System"),
                 Namespace("Collections"),
                 Struct("DictionaryEntry"),
                 Namespace("System"),
                 Namespace("Collections"),
-                Struct("DictionaryEntry"));
+                Struct("DictionaryEntry")
+            );
         }
 
         [Theory]
@@ -1527,12 +1616,14 @@ class C
         {
             var code = @"class C { static void M() { global::C.M(); } }";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 ParseOptions(Options.Regular),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory]
@@ -1541,13 +1632,15 @@ class C
         {
             var code = @"class C { static void M() { global::Script.C.M(); } }";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 ParseOptions(Options.Script),
                 Class("Script"),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory]
@@ -1555,7 +1648,7 @@ class C
         public async Task NAQSameFileClassWithNamespace(TestHost testHost)
         {
             await TestAsync(
-@"using @global = N;
+                @"using @global = N;
 
 namespace N
 {
@@ -1574,7 +1667,8 @@ namespace N
                 Namespace("N"),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory]
@@ -1582,7 +1676,7 @@ namespace N
         public async Task NAQSameFileClassWithNamespaceAndEscapedKeyword(TestHost testHost)
         {
             await TestAsync(
-@"using @global = N;
+                @"using @global = N;
 
 namespace N
 {
@@ -1601,7 +1695,8 @@ namespace N
                 Namespace("@global"),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory]
@@ -1609,7 +1704,7 @@ namespace N
         public async Task NAQGlobalWarning(TestHost testHost)
         {
             await TestAsync(
-@"using global = N;
+                @"using global = N;
 
 namespace N
 {
@@ -1628,7 +1723,8 @@ namespace N
                 Namespace("global"),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory]
@@ -1636,7 +1732,7 @@ namespace N
         public async Task NAQUserDefinedNAQNamespace(TestHost testHost)
         {
             await TestAsync(
-@"using goo = N;
+                @"using goo = N;
 
 namespace N
 {
@@ -1655,7 +1751,8 @@ namespace N
                 Namespace("goo"),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory]
@@ -1663,7 +1760,7 @@ namespace N
         public async Task NAQUserDefinedNAQNamespaceDoubleColon(TestHost testHost)
         {
             await TestAsync(
-@"using goo = N;
+                @"using goo = N;
 
 namespace N
 {
@@ -1682,7 +1779,8 @@ namespace N
                 Namespace("goo"),
                 Class("C"),
                 Method("M"),
-                Static("M"));
+                Static("M")
+            );
         }
 
         [Theory]
@@ -1690,7 +1788,7 @@ namespace N
         public async Task NAQUserDefinedNamespace1(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1712,7 +1810,8 @@ namespace A
                 Namespace("B"),
                 Class("D"),
                 Namespace("A"),
-                Namespace("B"));
+                Namespace("B")
+            );
         }
 
         [Theory]
@@ -1720,7 +1819,7 @@ namespace A
         public async Task NAQUserDefinedNamespaceWithGlobal(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1742,7 +1841,8 @@ namespace A
                 Namespace("B"),
                 Class("D"),
                 Namespace("A"),
-                Namespace("B"));
+                Namespace("B")
+            );
         }
 
         [Theory]
@@ -1750,7 +1850,7 @@ namespace A
         public async Task NAQUserDefinedNAQForClass(TestHost testHost)
         {
             await TestAsync(
-@"using IO = global::System.IO;
+                @"using IO = global::System.IO;
 
 class C
 {
@@ -1764,7 +1864,8 @@ class C
                 Namespace("System"),
                 Namespace("IO"),
                 Namespace("IO"),
-                Class("BinaryReader"));
+                Class("BinaryReader")
+            );
         }
 
         [Theory]
@@ -1772,7 +1873,7 @@ class C
         public async Task NAQUserDefinedTypes(TestHost testHost)
         {
             await TestAsync(
-@"using rabbit = MyNameSpace;
+                @"using rabbit = MyNameSpace;
 
 class C
 {
@@ -1853,7 +1954,8 @@ namespace MyNameSpace
                 Delegate("MyDelegate"),
                 Namespace("MyNameSpace"),
                 Namespace("OtherNamespace"),
-                Delegate("MyDelegate"));
+                Delegate("MyDelegate")
+            );
         }
 
         [Theory]
@@ -1861,7 +1963,7 @@ namespace MyNameSpace
         public async Task PreferPropertyOverNestedClass(TestHost testHost)
         {
             await TestAsync(
-@"class Outer
+                @"class Outer
 {
     class A
     {
@@ -1881,7 +1983,8 @@ namespace MyNameSpace
                 Class("A"),
                 Class("A"),
                 Local("a"),
-                Field("B"));
+                Field("B")
+            );
         }
 
         [Theory]
@@ -1889,7 +1992,7 @@ namespace MyNameSpace
         public async Task TypeNameInsideNestedClass(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class Outer
 {
@@ -1911,7 +2014,8 @@ class Outer
                 Class("Console"),
                 Static("Console"),
                 Method("WriteLine"),
-                Static("WriteLine"));
+                Static("WriteLine")
+            );
         }
 
         [Theory]
@@ -1919,7 +2023,7 @@ class Outer
         public async Task StructEnumTypeNames(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1940,7 +2044,8 @@ class C
                 testHost,
                 Namespace("System"),
                 Enum("ConsoleColor"),
-                Struct("Int32"));
+                Struct("Int32")
+            );
         }
 
         [Theory]
@@ -1948,7 +2053,7 @@ class C
         public async Task PreferFieldOverClassWithSameName(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     public int C;
 
@@ -1956,8 +2061,10 @@ class C
     {
         C = 0;
     }
-}", testHost,
- Field("C"));
+}",
+                testHost,
+                Field("C")
+            );
         }
 
         [Theory]
@@ -1965,7 +2072,7 @@ class C
         public async Task AttributeBinding(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 [Serializable]            // Binds to System.SerializableAttribute; colorized
 class Serializable
@@ -2005,7 +2112,8 @@ class ObsoleteAttribute : Attribute
                 Class("Obsolete"),
                 Class("Attribute"),
                 Class("ObsoleteAttribute"),
-                Class("Attribute"));
+                Class("Attribute")
+            );
         }
 
         [Theory]
@@ -2013,16 +2121,17 @@ class ObsoleteAttribute : Attribute
         public async Task ShouldNotClassifyNamespacesAsTypes(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 namespace Roslyn.Compilers.Internal
 {
 }",
-    testHost,
-    Namespace("System"),
-    Namespace("Roslyn"),
-    Namespace("Compilers"),
-    Namespace("Internal"));
+                testHost,
+                Namespace("System"),
+                Namespace("Roslyn"),
+                Namespace("Compilers"),
+                Namespace("Internal")
+            );
         }
 
         [Theory]
@@ -2030,7 +2139,7 @@ namespace Roslyn.Compilers.Internal
         public async Task NestedTypeCantHaveSameNameAsParentType(TestHost testHost)
         {
             await TestAsync(
-@"class Program
+                @"class Program
 {
     class Program
     {
@@ -2044,46 +2153,57 @@ namespace Roslyn.Compilers.Internal
 }",
                 testHost,
                 Class("Program"),
-                Class("Program"));
+                Class("Program")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task NestedTypeCantHaveSameNameAsParentTypeWithGlobalNamespaceAlias(TestHost testHost)
+        public async Task NestedTypeCantHaveSameNameAsParentTypeWithGlobalNamespaceAlias(
+            TestHost testHost
+        )
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     class Program { }
     static void Main(Program p) { }
     global::Program.Program p;
 }";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 ParseOptions(Options.Regular),
                 Class("Program"),
                 Class("Program"),
-                Class("Program"));
+                Class("Program")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task InteractiveNestedTypeCantHaveSameNameAsParentTypeWithGlobalNamespaceAlias(TestHost testHost)
+        public async Task InteractiveNestedTypeCantHaveSameNameAsParentTypeWithGlobalNamespaceAlias(
+            TestHost testHost
+        )
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     class Program { }
     static void Main(Program p) { }
     global::Script.Program.Program p;
 }";
 
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 ParseOptions(Options.Script),
                 Class("Program"),
                 Class("Script"),
                 Class("Program"),
-                Class("Program"));
+                Class("Program")
+            );
         }
 
         [Theory]
@@ -2091,12 +2211,14 @@ namespace Roslyn.Compilers.Internal
         public async Task EnumFieldWithSameNameShouldBePreferredToType(TestHost testHost)
         {
             await TestAsync(
-@"enum E
+                @"enum E
 {
     E,
     F = E
-}", testHost,
- EnumMember("E"));
+}",
+                testHost,
+                EnumMember("E")
+            );
         }
 
         [WorkItem(541150, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541150")]
@@ -2105,7 +2227,7 @@ namespace Roslyn.Compilers.Internal
         public async Task TestGenericVarClassification(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 static class Program
 {
@@ -2118,9 +2240,10 @@ static class Program
 class var<T>
 {
 }",
-    testHost,
-    Namespace("System"),
-    Keyword("var"));
+                testHost,
+                Namespace("System"),
+                Keyword("var")
+            );
         }
 
         [WorkItem(541154, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541154")]
@@ -2129,7 +2252,7 @@ class var<T>
         public async Task TestInaccessibleVarClassification(TestHost testHost)
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 class A
 {
@@ -2148,7 +2271,8 @@ class B : A
                 testHost,
                 Namespace("System"),
                 Class("A"),
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [WorkItem(541154, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541154")]
@@ -2157,7 +2281,7 @@ class B : A
         public async Task TestVarNamedTypeClassification(TestHost testHost)
         {
             await TestAsync(
-@"class var
+                @"class var
 {
     static void Main()
     {
@@ -2165,7 +2289,8 @@ class B : A
     }
 }",
                 testHost,
-                Class("var"));
+                Class("var")
+            );
         }
 
         [WorkItem(9513, "DevDiv_Projects/Roslyn")]
@@ -2174,7 +2299,7 @@ class B : A
         public async Task RegressionFor9513(TestHost testHost)
         {
             await TestAsync(
-@"enum E
+                @"enum E
 {
     A,
     B
@@ -2204,7 +2329,8 @@ class C
                 Enum("E"),
                 EnumMember("B"),
                 Enum("E"),
-                EnumMember("A"));
+                EnumMember("A")
+            );
         }
 
         [WorkItem(542368, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542368")]
@@ -2213,7 +2339,7 @@ class C
         public async Task RegressionFor9572(TestHost testHost)
         {
             await TestAsync(
-@"class A<T, S> where T : A<T, S>.I, A<T, T>.I
+                @"class A<T, S> where T : A<T, S>.I, A<T, T>.I
 {
     public interface I
     {
@@ -2228,7 +2354,8 @@ class C
                 Class("A"),
                 TypeParameter("T"),
                 TypeParameter("T"),
-                Interface("I"));
+                Interface("I")
+            );
         }
 
         [WorkItem(542368, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542368")]
@@ -2236,8 +2363,9 @@ class C
         [CombinatorialData]
         public async Task RegressionFor9831(TestHost testHost)
         {
-            await TestAsync(@"F : A",
-@"public class B<T>
+            await TestAsync(
+                @"F : A",
+                @"public class B<T>
 {
     public class A
     {
@@ -2251,7 +2379,8 @@ public class X : B<X>
     }
 }",
                 testHost,
-                Class("A"));
+                Class("A")
+            );
         }
 
         [WorkItem(542432, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542432")]
@@ -2260,7 +2389,7 @@ public class X : B<X>
         public async Task TestVar(TestHost testHost)
         {
             await TestAsync(
-@"class Program
+                @"class Program
 {
     class var<T>
     {
@@ -2283,7 +2412,8 @@ public class X : B<X>
                 Method("GetVarT"),
                 Static("GetVarT"),
                 Keyword("var"),
-                Class("var"));
+                Class("var")
+            );
         }
 
         [WorkItem(543123, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543123")]
@@ -2292,7 +2422,7 @@ public class X : B<X>
         public async Task TestVar2(TestHost testHost)
         {
             await TestAsync(
-@"class Program
+                @"class Program
 {
     void Main(string[] args)
     {
@@ -2303,7 +2433,8 @@ public class X : B<X>
 }",
                 testHost,
                 Keyword("var"),
-                Parameter("args"));
+                Parameter("args")
+            );
         }
 
         [WorkItem(542778, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542778")]
@@ -2311,8 +2442,9 @@ public class X : B<X>
         [CombinatorialData]
         public async Task TestDuplicateTypeParamWithConstraint(TestHost testHost)
         {
-            await TestAsync(@"where U : IEnumerable<S>",
-@"using System.Collections.Generic;
+            await TestAsync(
+                @"where U : IEnumerable<S>",
+                @"using System.Collections.Generic;
 
 class C<T>
 {
@@ -2324,7 +2456,8 @@ class C<T>
 }",
                 testHost,
                 TypeParameter("U"),
-                Interface("IEnumerable"));
+                Interface("IEnumerable")
+            );
         }
 
         [WorkItem(542685, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542685")]
@@ -2332,9 +2465,7 @@ class C<T>
         [CombinatorialData]
         public async Task OptimisticallyColorFromInDeclaration(TestHost testHost)
         {
-            await TestInExpressionAsync("from ",
-                testHost,
-                Keyword("from"));
+            await TestInExpressionAsync("from ", testHost, Keyword("from"));
         }
 
         [WorkItem(542685, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542685")]
@@ -2343,20 +2474,21 @@ class C<T>
         public async Task OptimisticallyColorFromInAssignment(TestHost testHost)
         {
             await TestInMethodAsync(
-@"var q = 3;
+                @"var q = 3;
 
 q = from",
                 testHost,
                 Keyword("var"),
                 Local("q"),
-                Keyword("from"));
+                Keyword("from")
+            );
         }
 
         [WorkItem(542685, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542685")]
         [Theory]
         [CombinatorialData]
-        public async Task DontColorThingsOtherThanFromInDeclaration(TestHost testHost)
-            => await TestInExpressionAsync("fro ", testHost);
+        public async Task DontColorThingsOtherThanFromInDeclaration(TestHost testHost) =>
+            await TestInExpressionAsync("fro ", testHost);
 
         [WorkItem(542685, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542685")]
         [Theory]
@@ -2364,12 +2496,13 @@ q = from",
         public async Task DontColorThingsOtherThanFromInAssignment(TestHost testHost)
         {
             await TestInMethodAsync(
-@"var q = 3;
+                @"var q = 3;
 
 q = fro",
                 testHost,
                 Keyword("var"),
-                Local("q"));
+                Local("q")
+            );
         }
 
         [WorkItem(542685, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542685")]
@@ -2378,12 +2511,13 @@ q = fro",
         public async Task DontColorFromWhenBoundInDeclaration(TestHost testHost)
         {
             await TestInMethodAsync(
-@"var from = 3;
+                @"var from = 3;
 var q = from",
                 testHost,
                 Keyword("var"),
                 Keyword("var"),
-                Local("from"));
+                Local("from")
+            );
         }
 
         [WorkItem(542685, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542685")]
@@ -2392,7 +2526,7 @@ var q = from",
         public async Task DontColorFromWhenBoundInAssignment(TestHost testHost)
         {
             await TestInMethodAsync(
-@"var q = 3;
+                @"var q = 3;
 var from = 3;
 
 q = from",
@@ -2400,7 +2534,8 @@ q = from",
                 Keyword("var"),
                 Keyword("var"),
                 Local("q"),
-                Local("from"));
+                Local("from")
+            );
         }
 
         [WorkItem(543404, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543404")]
@@ -2409,7 +2544,7 @@ q = from",
         public async Task NewOfClassWithOnlyPrivateConstructor(TestHost testHost)
         {
             await TestAsync(
-@"class X
+                @"class X
 {
     private X()
     {
@@ -2424,7 +2559,8 @@ class Program
     }
 }",
                 testHost,
-                Class("X"));
+                Class("X")
+            );
         }
 
         [WorkItem(544179, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544179")]
@@ -2433,7 +2569,7 @@ class Program
         public async Task TestNullableVersusConditionalAmbiguity1(TestHost testHost)
         {
             await TestAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2445,7 +2581,8 @@ public class C1
 {
 }",
                 testHost,
-                Class("C1"));
+                Class("C1")
+            );
         }
 
         [WorkItem(544179, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544179")]
@@ -2454,7 +2591,7 @@ public class C1
         public async Task TestPointerVersusMultiplyAmbiguity1(TestHost testHost)
         {
             await TestAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2466,16 +2603,19 @@ public class C1
 {
 }",
                 testHost,
-                Class("C1"));
+                Class("C1")
+            );
         }
 
         [WorkItem(544302, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544302")]
         [Theory]
         [CombinatorialData]
-        public async Task EnumTypeAssignedToNamedPropertyOfSameNameInAttributeCtor(TestHost testHost)
+        public async Task EnumTypeAssignedToNamedPropertyOfSameNameInAttributeCtor(
+            TestHost testHost
+        )
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Runtime.InteropServices;
 
 class C
@@ -2490,7 +2630,8 @@ class C
                 Namespace("InteropServices"),
                 Class("DllImport"),
                 Field("CallingConvention"),
-                Enum("CallingConvention"));
+                Enum("CallingConvention")
+            );
         }
 
         [WorkItem(531119, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531119")]
@@ -2499,7 +2640,7 @@ class C
         public async Task OnlyClassifyGenericNameOnce(TestHost testHost)
         {
             await TestAsync(
-@"enum Type
+                @"enum Type
 {
 }
 
@@ -2508,7 +2649,8 @@ struct Type<T>
     Type<int> f;
 }",
                 testHost,
-                Struct("Type"));
+                Struct("Type")
+            );
         }
 
         [Theory]
@@ -2516,7 +2658,7 @@ struct Type<T>
         public async Task NameOf1(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void goo()
     {
@@ -2525,7 +2667,8 @@ struct Type<T>
 }",
                 testHost,
                 Keyword("var"),
-                Keyword("nameof"));
+                Keyword("nameof")
+            );
         }
 
         [Theory]
@@ -2533,7 +2676,7 @@ struct Type<T>
         public async Task NameOf2(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void goo()
     {
@@ -2543,7 +2686,8 @@ struct Type<T>
                 testHost,
                 Keyword("var"),
                 Keyword("nameof"),
-                Class("C"));
+                Class("C")
+            );
         }
 
         [Theory]
@@ -2551,7 +2695,7 @@ struct Type<T>
         public async Task NameOfLocalMethod(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void goo()
     {
@@ -2573,7 +2717,8 @@ struct Type<T>
                 testHost,
                 Keyword("var"),
                 Keyword("nameof"),
-                Method("M"));
+                Method("M")
+            );
         }
 
         [Theory]
@@ -2581,7 +2726,7 @@ struct Type<T>
         public async Task MethodCalledNameOfInScope(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void nameof(int i)
     {
@@ -2595,7 +2740,8 @@ struct Type<T>
 }",
                 testHost,
                 Keyword("var"),
-                Method("nameof"));
+                Method("nameof")
+            );
         }
 
         [WpfFact]
@@ -2604,15 +2750,25 @@ struct Type<T>
         {
             // don't crash
             using var workspace = TestWorkspace.CreateCSharp("");
-            var document = workspace.CurrentSolution.GetRequiredDocument(workspace.Documents.First().Id);
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.First().Id
+            );
 
-            var contentTypeService = document.GetRequiredLanguageService<IContentTypeLanguageService>();
+            var contentTypeService =
+                document.GetRequiredLanguageService<IContentTypeLanguageService>();
             var contentType = contentTypeService.GetDefaultContentType();
-            var extraBuffer = workspace.ExportProvider.GetExportedValue<ITextBufferFactoryService>().CreateTextBuffer("", contentType);
+            var extraBuffer = workspace.ExportProvider
+                .GetExportedValue<ITextBufferFactoryService>()
+                .CreateTextBuffer("", contentType);
 
-            WpfTestRunner.RequireWpfFact($"Creates an {nameof(IWpfTextView)} explicitly with an unrelated buffer");
-            using var disposableView = workspace.ExportProvider.GetExportedValue<ITextEditorFactoryService>().CreateDisposableTextView(extraBuffer);
-            var listenerProvider = workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            WpfTestRunner.RequireWpfFact(
+                $"Creates an {nameof(IWpfTextView)} explicitly with an unrelated buffer"
+            );
+            using var disposableView = workspace.ExportProvider
+                .GetExportedValue<ITextEditorFactoryService>()
+                .CreateDisposableTextView(extraBuffer);
+            var listenerProvider =
+                workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
             var globalOptions = workspace.ExportProvider.GetExportedValue<IGlobalOptionService>();
 
             var provider = new SemanticClassificationViewTaggerProvider(
@@ -2620,9 +2776,11 @@ struct Type<T>
                 workspace.GetService<ClassificationTypeMap>(),
                 globalOptions,
                 visibilityTracker: null,
-                listenerProvider);
+                listenerProvider
+            );
 
-            using var tagger = (IDisposable?)provider.CreateTagger<IClassificationTag>(disposableView.TextView, extraBuffer);
+            using var tagger = (IDisposable?)
+                provider.CreateTagger<IClassificationTag>(disposableView.TextView, extraBuffer);
             using (var edit = extraBuffer.CreateEdit())
             {
                 edit.Insert(0, "class A { }");
@@ -2638,12 +2796,13 @@ struct Type<T>
         public async Task Tuples(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     (int a, int b) x;
 }",
                 testHost,
-                ParseOptions(TestOptions.Regular, Options.Script));
+                ParseOptions(TestOptions.Regular, Options.Script)
+            );
         }
 
         [Theory]
@@ -2651,14 +2810,12 @@ struct Type<T>
         [WorkItem(261049, "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/261049")]
         public async Task DevDiv261049RegressionTest(TestHost testHost)
         {
-            var source = @"
+            var source =
+                @"
         var (a,b) =  Get(out int x, out int y);
         Console.WriteLine($""({a.first}, {a.second})"");";
 
-            await TestInMethodAsync(
-                source,
-                testHost,
-                Keyword("var"), Local("a"), Local("a"));
+            await TestInMethodAsync(source, testHost, Keyword("var"), Local("a"), Local("a"));
         }
 
         [Theory]
@@ -2667,7 +2824,7 @@ struct Type<T>
         public async Task InXmlDocCref_WhenTypeOnlyIsSpecified_ItIsClassified(TestHost testHost)
         {
             await TestAsync(
-@"/// <summary>
+                @"/// <summary>
 /// <see cref=""MyClass""/>
 /// </summary>
 class MyClass
@@ -2676,17 +2833,20 @@ class MyClass
     {
     }
 }",
-    testHost,
-    Class("MyClass"));
+                testHost,
+                Class("MyClass")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         [WorkItem(633, "https://github.com/dotnet/roslyn/issues/633")]
-        public async Task InXmlDocCref_WhenConstructorOnlyIsSpecified_NothingIsClassified(TestHost testHost)
+        public async Task InXmlDocCref_WhenConstructorOnlyIsSpecified_NothingIsClassified(
+            TestHost testHost
+        )
         {
             await TestAsync(
-@"/// <summary>
+                @"/// <summary>
 /// <see cref=""MyClass(int)""/>
 /// </summary>
 class MyClass
@@ -2694,17 +2854,21 @@ class MyClass
     public MyClass(int x)
     {
     }
-}", testHost,
- Class("MyClass"));
+}",
+                testHost,
+                Class("MyClass")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         [WorkItem(633, "https://github.com/dotnet/roslyn/issues/633")]
-        public async Task InXmlDocCref_WhenTypeAndConstructorSpecified_OnlyTypeIsClassified(TestHost testHost)
+        public async Task InXmlDocCref_WhenTypeAndConstructorSpecified_OnlyTypeIsClassified(
+            TestHost testHost
+        )
         {
             await TestAsync(
-@"/// <summary>
+                @"/// <summary>
 /// <see cref=""MyClass.MyClass(int)""/>
 /// </summary>
 class MyClass
@@ -2713,9 +2877,10 @@ class MyClass
     {
     }
 }",
-    testHost,
-    Class("MyClass"),
-    Class("MyClass"));
+                testHost,
+                Class("MyClass"),
+                Class("MyClass")
+            );
         }
 
         [Theory]
@@ -2724,7 +2889,7 @@ class MyClass
         public async Task TestMemberBindingThatLooksGeneric(TestHost testHost)
         {
             await TestAsync(
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace ConsoleApplication1
@@ -2737,19 +2902,20 @@ namespace ConsoleApplication1
         }
     }
 }",
-    testHost,
-    Namespace("System"),
-    Namespace("Diagnostics"),
-    Namespace("System"),
-    Namespace("Threading"),
-    Namespace("Tasks"),
-    Namespace("ConsoleApplication1"),
-    Class("Debug"),
-    Static("Debug"),
-    Method("Assert"),
-    Static("Assert"),
-    Parameter("args"),
-    Property("Length"));
+                testHost,
+                Namespace("System"),
+                Namespace("Diagnostics"),
+                Namespace("System"),
+                Namespace("Threading"),
+                Namespace("Tasks"),
+                Namespace("ConsoleApplication1"),
+                Class("Debug"),
+                Static("Debug"),
+                Method("Assert"),
+                Static("Assert"),
+                Parameter("args"),
+                Property("Length")
+            );
         }
 
         [Theory]
@@ -2758,7 +2924,7 @@ namespace ConsoleApplication1
         public async Task TestAliasQualifiedClass(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System;
 using Col = System.Collections.Generic;
 
@@ -2772,16 +2938,17 @@ namespace AliasTest
         }
     }
 }",
-    testHost,
-    Namespace("System"),
-    Namespace("Col"),
-    Namespace("System"),
-    Namespace("Collections"),
-    Namespace("Generic"),
-    Namespace("AliasTest"),
-    Keyword("var"),
-    Namespace("Col"),
-    Class("List"));
+                testHost,
+                Namespace("System"),
+                Namespace("Col"),
+                Namespace("System"),
+                Namespace("Collections"),
+                Namespace("Generic"),
+                Namespace("AliasTest"),
+                Keyword("var"),
+                Namespace("Col"),
+                Class("List")
+            );
         }
 
         [Theory]
@@ -2789,12 +2956,14 @@ namespace AliasTest
         public async Task TestUnmanagedConstraint_InsideMethod(TestHost testHost)
         {
             // Asserts no Keyword("unmanaged") because it is an identifier.
-            await TestInMethodAsync(@"
+            await TestInMethodAsync(
+                @"
 var unmanaged = 0;
 unmanaged++;",
                 testHost,
                 Keyword("var"),
-                Local("unmanaged"));
+                Local("unmanaged")
+            );
         }
 
         [Theory]
@@ -2805,26 +2974,32 @@ unmanaged++;",
                 "class X<T> where T : unmanaged { }",
                 testHost,
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Type_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface unmanaged {}
 class X<T> where T : unmanaged { }",
                 testHost,
                 TypeParameter("T"),
-                Interface("unmanaged"));
+                Interface("unmanaged")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestUnmanagedConstraint_Type_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_Type_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface unmanaged {}
@@ -2833,28 +3008,32 @@ class X<T> where T : unmanaged { }",
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Method_Keyword(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void M<T>() where T : unmanaged { }
 }",
                 testHost,
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Method_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface unmanaged {}
 class X
 {
@@ -2862,14 +3041,18 @@ class X
 }",
                 testHost,
                 TypeParameter("T"),
-                Interface("unmanaged"));
+                Interface("unmanaged")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestUnmanagedConstraint_Method_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_Method_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface unmanaged {}
@@ -2881,7 +3064,8 @@ class X
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory]
@@ -2892,26 +3076,32 @@ class X
                 "delegate void D<T>() where T : unmanaged;",
                 testHost,
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_Delegate_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface unmanaged {}
 delegate void D<T>() where T : unmanaged;",
                 testHost,
                 TypeParameter("T"),
-                Interface("unmanaged"));
+                Interface("unmanaged")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestUnmanagedConstraint_Delegate_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_Delegate_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface unmanaged {}
@@ -2920,7 +3110,8 @@ delegate void D<T>() where T : unmanaged;",
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory]
@@ -2928,7 +3119,7 @@ delegate void D<T>() where T : unmanaged;",
         public async Task TestRegex1(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -2938,72 +3129,73 @@ class Program
         var r = new Regex(@""$(\a\t\u0020)|[^\p{Lu}-a\w\sa-z-[m-p]]+?(?#comment)|(\b\G\z)|(?<name>sub){0,5}?^"");
     }
 }",
-testHost,
-Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Class("Regex"),
-Regex.Anchor("$"),
-Regex.Grouping("("),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("t"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("u"),
-Regex.OtherEscape("0020"),
-Regex.Grouping(")"),
-Regex.Alternation("|"),
-Regex.CharacterClass("["),
-Regex.CharacterClass("^"),
-Regex.CharacterClass("\\"),
-Regex.CharacterClass("p"),
-Regex.CharacterClass("{"),
-Regex.CharacterClass("Lu"),
-Regex.CharacterClass("}"),
-Regex.Text("-a"),
-Regex.CharacterClass("\\"),
-Regex.CharacterClass("w"),
-Regex.CharacterClass("\\"),
-Regex.CharacterClass("s"),
-Regex.Text("a"),
-Regex.CharacterClass("-"),
-Regex.Text("z"),
-Regex.CharacterClass("-"),
-Regex.CharacterClass("["),
-Regex.Text("m"),
-Regex.CharacterClass("-"),
-Regex.Text("p"),
-Regex.CharacterClass("]"),
-Regex.CharacterClass("]"),
-Regex.Quantifier("+"),
-Regex.Quantifier("?"),
-Regex.Comment("(?#comment)"),
-Regex.Alternation("|"),
-Regex.Grouping("("),
-Regex.Anchor("\\"),
-Regex.Anchor("b"),
-Regex.Anchor("\\"),
-Regex.Anchor("G"),
-Regex.Anchor("\\"),
-Regex.Anchor("z"),
-Regex.Grouping(")"),
-Regex.Alternation("|"),
-Regex.Grouping("("),
-Regex.Grouping("?"),
-Regex.Grouping("<"),
-Regex.Grouping("name"),
-Regex.Grouping(">"),
-Regex.Text("sub"),
-Regex.Grouping(")"),
-Regex.Quantifier("{"),
-Regex.Quantifier("0"),
-Regex.Quantifier(","),
-Regex.Quantifier("5"),
-Regex.Quantifier("}"),
-Regex.Quantifier("?"),
-Regex.Anchor("^"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Class("Regex"),
+                Regex.Anchor("$"),
+                Regex.Grouping("("),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("t"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("u"),
+                Regex.OtherEscape("0020"),
+                Regex.Grouping(")"),
+                Regex.Alternation("|"),
+                Regex.CharacterClass("["),
+                Regex.CharacterClass("^"),
+                Regex.CharacterClass("\\"),
+                Regex.CharacterClass("p"),
+                Regex.CharacterClass("{"),
+                Regex.CharacterClass("Lu"),
+                Regex.CharacterClass("}"),
+                Regex.Text("-a"),
+                Regex.CharacterClass("\\"),
+                Regex.CharacterClass("w"),
+                Regex.CharacterClass("\\"),
+                Regex.CharacterClass("s"),
+                Regex.Text("a"),
+                Regex.CharacterClass("-"),
+                Regex.Text("z"),
+                Regex.CharacterClass("-"),
+                Regex.CharacterClass("["),
+                Regex.Text("m"),
+                Regex.CharacterClass("-"),
+                Regex.Text("p"),
+                Regex.CharacterClass("]"),
+                Regex.CharacterClass("]"),
+                Regex.Quantifier("+"),
+                Regex.Quantifier("?"),
+                Regex.Comment("(?#comment)"),
+                Regex.Alternation("|"),
+                Regex.Grouping("("),
+                Regex.Anchor("\\"),
+                Regex.Anchor("b"),
+                Regex.Anchor("\\"),
+                Regex.Anchor("G"),
+                Regex.Anchor("\\"),
+                Regex.Anchor("z"),
+                Regex.Grouping(")"),
+                Regex.Alternation("|"),
+                Regex.Grouping("("),
+                Regex.Grouping("?"),
+                Regex.Grouping("<"),
+                Regex.Grouping("name"),
+                Regex.Grouping(">"),
+                Regex.Text("sub"),
+                Regex.Grouping(")"),
+                Regex.Quantifier("{"),
+                Regex.Quantifier("0"),
+                Regex.Quantifier(","),
+                Regex.Quantifier("5"),
+                Regex.Quantifier("}"),
+                Regex.Quantifier("?"),
+                Regex.Anchor("^")
+            );
         }
 
         [Theory]
@@ -3011,7 +3203,7 @@ Regex.Anchor("^"));
         public async Task TestRegex2(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3022,71 +3214,72 @@ class Program
         var r = @""$(\a\t\u0020)|[^\p{Lu}-a\w\sa-z-[m-p]]+?(?#comment)|(\b\G\z)|(?<name>sub){0,5}?^"";
     }
 }",
-testHost,
-Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.Grouping("("),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("t"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("u"),
-Regex.OtherEscape("0020"),
-Regex.Grouping(")"),
-Regex.Alternation("|"),
-Regex.CharacterClass("["),
-Regex.CharacterClass("^"),
-Regex.CharacterClass("\\"),
-Regex.CharacterClass("p"),
-Regex.CharacterClass("{"),
-Regex.CharacterClass("Lu"),
-Regex.CharacterClass("}"),
-Regex.Text("-a"),
-Regex.CharacterClass("\\"),
-Regex.CharacterClass("w"),
-Regex.CharacterClass("\\"),
-Regex.CharacterClass("s"),
-Regex.Text("a"),
-Regex.CharacterClass("-"),
-Regex.Text("z"),
-Regex.CharacterClass("-"),
-Regex.CharacterClass("["),
-Regex.Text("m"),
-Regex.CharacterClass("-"),
-Regex.Text("p"),
-Regex.CharacterClass("]"),
-Regex.CharacterClass("]"),
-Regex.Quantifier("+"),
-Regex.Quantifier("?"),
-Regex.Comment("(?#comment)"),
-Regex.Alternation("|"),
-Regex.Grouping("("),
-Regex.Anchor("\\"),
-Regex.Anchor("b"),
-Regex.Anchor("\\"),
-Regex.Anchor("G"),
-Regex.Anchor("\\"),
-Regex.Anchor("z"),
-Regex.Grouping(")"),
-Regex.Alternation("|"),
-Regex.Grouping("("),
-Regex.Grouping("?"),
-Regex.Grouping("<"),
-Regex.Grouping("name"),
-Regex.Grouping(">"),
-Regex.Text("sub"),
-Regex.Grouping(")"),
-Regex.Quantifier("{"),
-Regex.Quantifier("0"),
-Regex.Quantifier(","),
-Regex.Quantifier("5"),
-Regex.Quantifier("}"),
-Regex.Quantifier("?"),
-Regex.Anchor("^"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.Grouping("("),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("t"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("u"),
+                Regex.OtherEscape("0020"),
+                Regex.Grouping(")"),
+                Regex.Alternation("|"),
+                Regex.CharacterClass("["),
+                Regex.CharacterClass("^"),
+                Regex.CharacterClass("\\"),
+                Regex.CharacterClass("p"),
+                Regex.CharacterClass("{"),
+                Regex.CharacterClass("Lu"),
+                Regex.CharacterClass("}"),
+                Regex.Text("-a"),
+                Regex.CharacterClass("\\"),
+                Regex.CharacterClass("w"),
+                Regex.CharacterClass("\\"),
+                Regex.CharacterClass("s"),
+                Regex.Text("a"),
+                Regex.CharacterClass("-"),
+                Regex.Text("z"),
+                Regex.CharacterClass("-"),
+                Regex.CharacterClass("["),
+                Regex.Text("m"),
+                Regex.CharacterClass("-"),
+                Regex.Text("p"),
+                Regex.CharacterClass("]"),
+                Regex.CharacterClass("]"),
+                Regex.Quantifier("+"),
+                Regex.Quantifier("?"),
+                Regex.Comment("(?#comment)"),
+                Regex.Alternation("|"),
+                Regex.Grouping("("),
+                Regex.Anchor("\\"),
+                Regex.Anchor("b"),
+                Regex.Anchor("\\"),
+                Regex.Anchor("G"),
+                Regex.Anchor("\\"),
+                Regex.Anchor("z"),
+                Regex.Grouping(")"),
+                Regex.Alternation("|"),
+                Regex.Grouping("("),
+                Regex.Grouping("?"),
+                Regex.Grouping("<"),
+                Regex.Grouping("name"),
+                Regex.Grouping(">"),
+                Regex.Text("sub"),
+                Regex.Grouping(")"),
+                Regex.Quantifier("{"),
+                Regex.Quantifier("0"),
+                Regex.Quantifier(","),
+                Regex.Quantifier("5"),
+                Regex.Quantifier("}"),
+                Regex.Quantifier("?"),
+                Regex.Anchor("^")
+            );
         }
 
         [Theory]
@@ -3094,7 +3287,7 @@ Regex.Anchor("^"));
         public async Task TestRegex3(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3104,72 +3297,74 @@ class Program
         var r = /* language=regex */@""$(\a\t\u0020\\)|[^\p{Lu}-a\w\sa-z-[m-p]]+?(?#comment)|(\b\G\z)|(?<name>sub){0,5}?^"";
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.Grouping("("),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("t"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("u"),
-Regex.OtherEscape("0020"),
-Regex.SelfEscapedCharacter("\\"),
-Regex.SelfEscapedCharacter("\\"),
-Regex.Grouping(")"),
-Regex.Alternation("|"),
-Regex.CharacterClass("["),
-Regex.CharacterClass("^"),
-Regex.CharacterClass("\\"),
-Regex.CharacterClass("p"),
-Regex.CharacterClass("{"),
-Regex.CharacterClass("Lu"),
-Regex.CharacterClass("}"),
-Regex.Text("-a"),
-Regex.CharacterClass("\\"),
-Regex.CharacterClass("w"),
-Regex.CharacterClass("\\"),
-Regex.CharacterClass("s"),
-Regex.Text("a"),
-Regex.CharacterClass("-"),
-Regex.Text("z"),
-Regex.CharacterClass("-"),
-Regex.CharacterClass("["),
-Regex.Text("m"),
-Regex.CharacterClass("-"),
-Regex.Text("p"),
-Regex.CharacterClass("]"),
-Regex.CharacterClass("]"),
-Regex.Quantifier("+"),
-Regex.Quantifier("?"),
-Regex.Comment("(?#comment)"),
-Regex.Alternation("|"),
-Regex.Grouping("("),
-Regex.Anchor("\\"),
-Regex.Anchor("b"),
-Regex.Anchor("\\"),
-Regex.Anchor("G"),
-Regex.Anchor("\\"),
-Regex.Anchor("z"),
-Regex.Grouping(")"),
-Regex.Alternation("|"),
-Regex.Grouping("("),
-Regex.Grouping("?"),
-Regex.Grouping("<"),
-Regex.Grouping("name"),
-Regex.Grouping(">"),
-Regex.Text("sub"),
-Regex.Grouping(")"),
-Regex.Quantifier("{"),
-Regex.Quantifier("0"),
-Regex.Quantifier(","),
-Regex.Quantifier("5"),
-Regex.Quantifier("}"),
-Regex.Quantifier("?"),
-Regex.Anchor("^"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.Grouping("("),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("t"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("u"),
+                Regex.OtherEscape("0020"),
+                Regex.SelfEscapedCharacter("\\"),
+                Regex.SelfEscapedCharacter("\\"),
+                Regex.Grouping(")"),
+                Regex.Alternation("|"),
+                Regex.CharacterClass("["),
+                Regex.CharacterClass("^"),
+                Regex.CharacterClass("\\"),
+                Regex.CharacterClass("p"),
+                Regex.CharacterClass("{"),
+                Regex.CharacterClass("Lu"),
+                Regex.CharacterClass("}"),
+                Regex.Text("-a"),
+                Regex.CharacterClass("\\"),
+                Regex.CharacterClass("w"),
+                Regex.CharacterClass("\\"),
+                Regex.CharacterClass("s"),
+                Regex.Text("a"),
+                Regex.CharacterClass("-"),
+                Regex.Text("z"),
+                Regex.CharacterClass("-"),
+                Regex.CharacterClass("["),
+                Regex.Text("m"),
+                Regex.CharacterClass("-"),
+                Regex.Text("p"),
+                Regex.CharacterClass("]"),
+                Regex.CharacterClass("]"),
+                Regex.Quantifier("+"),
+                Regex.Quantifier("?"),
+                Regex.Comment("(?#comment)"),
+                Regex.Alternation("|"),
+                Regex.Grouping("("),
+                Regex.Anchor("\\"),
+                Regex.Anchor("b"),
+                Regex.Anchor("\\"),
+                Regex.Anchor("G"),
+                Regex.Anchor("\\"),
+                Regex.Anchor("z"),
+                Regex.Grouping(")"),
+                Regex.Alternation("|"),
+                Regex.Grouping("("),
+                Regex.Grouping("?"),
+                Regex.Grouping("<"),
+                Regex.Grouping("name"),
+                Regex.Grouping(">"),
+                Regex.Text("sub"),
+                Regex.Grouping(")"),
+                Regex.Quantifier("{"),
+                Regex.Quantifier("0"),
+                Regex.Quantifier(","),
+                Regex.Quantifier("5"),
+                Regex.Quantifier("}"),
+                Regex.Quantifier("?"),
+                Regex.Anchor("^")
+            );
         }
 
         [Theory]
@@ -3177,7 +3372,7 @@ Regex.Anchor("^"));
         public async Task TestRegex4(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3187,14 +3382,16 @@ class Program
         var r = /* lang=regex */@""$\a(?#comment)"";
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3202,7 +3399,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegex4_utf8_1(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3212,14 +3409,16 @@ class Program
         var r = /* lang=regex */""$\\a(?#comment)"";
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.OtherEscape(@"\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape(@"\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3227,7 +3426,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegex4_utf8_2(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3237,14 +3436,16 @@ class Program
         var r = /* lang=regex */@""$\a(?#comment)""u8;
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3252,7 +3453,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegex5(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3262,14 +3463,16 @@ class Program
         var r = /* lang=regexp */@""$\a(?#comment)"";
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3277,7 +3480,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegex6(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3287,15 +3490,17 @@ class Program
         var r = /* lang=regexp */@""$\a(?#comment) # not end of line comment"";
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"),
-Regex.Text(" # not end of line comment"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)"),
+                Regex.Text(" # not end of line comment")
+            );
         }
 
         [Theory]
@@ -3303,7 +3508,7 @@ Regex.Text(" # not end of line comment"));
         public async Task TestRegex7(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3313,15 +3518,17 @@ class Program
         var r = /* lang=regexp,ignorepatternwhitespace */@""$\a(?#comment) # is end of line comment"";
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"),
-Regex.Comment("# is end of line comment"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)"),
+                Regex.Comment("# is end of line comment")
+            );
         }
 
         [Theory]
@@ -3329,7 +3536,7 @@ Regex.Comment("# is end of line comment"));
         public async Task TestRegex8(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3339,15 +3546,17 @@ class Program
         var r = /* lang = regexp , ignorepatternwhitespace */@""$\a(?#comment) # is end of line comment"";
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"),
-Regex.Comment("# is end of line comment"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)"),
+                Regex.Comment("# is end of line comment")
+            );
         }
 
         [Theory]
@@ -3355,7 +3564,7 @@ Regex.Comment("# is end of line comment"));
         public async Task TestRegex9(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3365,18 +3574,20 @@ class Program
         var r = new Regex(@""$\a(?#comment) # is end of line comment"", RegexOptions.IgnorePatternWhitespace);
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Class("Regex"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"),
-Regex.Comment("# is end of line comment"),
-Enum("RegexOptions"),
-EnumMember("IgnorePatternWhitespace"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Class("Regex"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)"),
+                Regex.Comment("# is end of line comment"),
+                Enum("RegexOptions"),
+                EnumMember("IgnorePatternWhitespace")
+            );
         }
 
         [Theory]
@@ -3384,7 +3595,7 @@ EnumMember("IgnorePatternWhitespace"));
         public async Task TestRegex10(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3394,16 +3605,18 @@ class Program
         var r = new Regex(@""$\a(?#comment) # is not end of line comment"");
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Class("Regex"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"),
-Regex.Text(" # is not end of line comment"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Class("Regex"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)"),
+                Regex.Text(" # is not end of line comment")
+            );
         }
 
         [Theory]
@@ -3411,7 +3624,7 @@ Regex.Text(" # is not end of line comment"));
         public async Task TestRegex10_utf8(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3422,15 +3635,17 @@ class Program
         var r = @""$\a(?#comment) # is not end of line comment""u8;
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"),
-Regex.Text(" # is not end of line comment"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)"),
+                Regex.Text(" # is not end of line comment")
+            );
         }
 
         [Theory]
@@ -3438,7 +3653,7 @@ Regex.Text(" # is not end of line comment"));
         public async Task TestRegex11(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3446,19 +3661,21 @@ class Program
     // language=regex
     private static string myRegex = @""$(\a\t\u0020)"";
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Regex.Anchor("$"),
-Regex.Grouping("("),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("t"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("u"),
-Regex.OtherEscape("0020"),
-Regex.Grouping(")"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Regex.Anchor("$"),
+                Regex.Grouping("("),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("t"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("u"),
+                Regex.OtherEscape("0020"),
+                Regex.Grouping(")")
+            );
         }
 
         [Theory]
@@ -3466,7 +3683,7 @@ Regex.Grouping(")"));
         public async Task TestRegexSingleLineRawStringLiteral(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3476,14 +3693,16 @@ class Program
         var r = /* lang=regex */ """"""$\a(?#comment)"""""";
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3491,7 +3710,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegexSingleLineRawStringLiteral_utf8(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3501,14 +3720,16 @@ class Program
         var r = /* lang=regex */ """"""$\a(?#comment)""""""u8;
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3516,7 +3737,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegexMultiLineRawStringLiteral(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3528,14 +3749,16 @@ class Program
             """""";
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3543,7 +3766,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegexMultiLineRawStringLiteral_utf8(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3555,14 +3778,16 @@ class Program
             """"""u8;
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory, WorkItem(47079, "https://github.com/dotnet/roslyn/issues/47079")]
@@ -3570,7 +3795,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegexWithSpecialCSharpCharLiterals(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3578,15 +3803,16 @@ class Program
     // the double-quote inside the string should not affect this being classified as a regex.
     private Regex myRegex = new Regex(@""^ """" $"";
 }",
-testHost,
-Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Class("Regex"),
-Class("Regex"),
-Regex.Anchor("^"),
-Regex.Text(@" """" "),
-Regex.Anchor("$"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Class("Regex"),
+                Class("Regex"),
+                Regex.Anchor("^"),
+                Regex.Text(@" """" "),
+                Regex.Anchor("$")
+            );
         }
 
         [Theory, WorkItem(47079, "https://github.com/dotnet/roslyn/issues/47079")]
@@ -3594,7 +3820,7 @@ Regex.Anchor("$"));
         public async Task TestRegexWithSpecialCSharpCharLiterals_utf8(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -3602,13 +3828,14 @@ class Program
     // lang=regex
     private string myRegex = @""^ """" $""u8;
 }",
-testHost,
-Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Regex.Anchor("^"),
-Regex.Text(@" """" "),
-Regex.Anchor("$"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Regex.Anchor("^"),
+                Regex.Text(@" """" "),
+                Regex.Anchor("$")
+            );
         }
 
         [Theory]
@@ -3616,7 +3843,7 @@ Regex.Anchor("$"));
         public async Task TestRegexOnApiWithStringSyntaxAttribute_Field(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -3630,12 +3857,13 @@ class Program
         [|this.field = @""$\a(?#comment)"";|]
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Field("field"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Field("field"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3643,7 +3871,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegexOnApiWithStringSyntaxAttribute_Field2(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -3652,11 +3880,12 @@ class Program
     [StringSyntax(StringSyntaxAttribute.Regex)]
     [|private string field = @""$\a(?#comment)"";|]
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3664,7 +3893,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegexOnApiWithStringSyntaxAttribute_Property(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -3678,12 +3907,13 @@ class Program
         [|this.Prop = @""$\a(?#comment)"";|]
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Property("Prop"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Property("Prop"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3691,7 +3921,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegexOnApiWithStringSyntaxAttribute_Property2(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -3700,11 +3930,12 @@ class Program
     [StringSyntax(StringSyntaxAttribute.Regex)]
     [|private string Prop { get; set; } = @""$\a(?#comment)"";|]
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3712,7 +3943,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegexOnApiWithStringSyntaxAttribute_Argument(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -3727,12 +3958,13 @@ class Program
         [|M(@""$\a(?#comment)"");|]
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Method("M"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Method("M"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3740,7 +3972,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegexOnApiWithStringSyntaxAttribute_ParamsArgument(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -3755,12 +3987,13 @@ class Program
         [|M(@""$\a(?#comment)"");|]
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Method("M"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Method("M"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3768,7 +4001,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegexOnApiWithStringSyntaxAttribute_ArrayArgument(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -3783,20 +4016,23 @@ class Program
         [|M(new string[] { @""$\a(?#comment)"" });|]
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Method("M"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Method("M"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestRegexOnApiWithStringSyntaxAttribute_ImplicitArrayArgument(TestHost testHost)
+        public async Task TestRegexOnApiWithStringSyntaxAttribute_ImplicitArrayArgument(
+            TestHost testHost
+        )
         {
             await TestAsync(
-@"
+                @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -3811,20 +4047,23 @@ class Program
         [|M(new[] { @""$\a(?#comment)"" });|]
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Method("M"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Method("M"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestRegexOnApiWithStringSyntaxAttribute_CollectionArgument(TestHost testHost)
+        public async Task TestRegexOnApiWithStringSyntaxAttribute_CollectionArgument(
+            TestHost testHost
+        )
         {
             await TestAsync(
-@"
+                @"
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
@@ -3840,21 +4079,24 @@ class Program
         [|M(new List<string> { @""$\a(?#comment)"" });|]
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Method("M"),
-Class("List"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Method("M"),
+                Class("List"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestRegexOnApiWithStringSyntaxAttribute_ImplicitCollectionArgument(TestHost testHost)
+        public async Task TestRegexOnApiWithStringSyntaxAttribute_ImplicitCollectionArgument(
+            TestHost testHost
+        )
         {
             await TestAsync(
-@"
+                @"
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
@@ -3870,20 +4112,23 @@ class Program
         [|M(new() { @""$\a(?#comment)"" });|]
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Method("M"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Method("M"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestRegexOnApiWithStringSyntaxAttribute_Argument_Options(TestHost testHost)
+        public async Task TestRegexOnApiWithStringSyntaxAttribute_Argument_Options(
+            TestHost testHost
+        )
         {
             await TestAsync(
-@"
+                @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -3898,15 +4143,16 @@ class Program
         [|M(@""$\a(?#comment) # is end of line comment"", RegexOptions.IgnorePatternWhitespace);|]
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Method("M"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"),
-Regex.Comment("# is end of line comment"),
-Enum("RegexOptions"),
-EnumMember("IgnorePatternWhitespace"));
+                testHost,
+                Method("M"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)"),
+                Regex.Comment("# is end of line comment"),
+                Enum("RegexOptions"),
+                EnumMember("IgnorePatternWhitespace")
+            );
         }
 
         [Theory]
@@ -3914,7 +4160,7 @@ EnumMember("IgnorePatternWhitespace"));
         public async Task TestRegexOnApiWithStringSyntaxAttribute_Attribute(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
@@ -3930,12 +4176,13 @@ class Program
     [|[RegexTest(@""$\a(?#comment)"")]|]
     private string field;
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Class("RegexTest"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Class("RegexTest"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3943,7 +4190,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegexOnApiWithStringSyntaxAttribute_ParamsAttribute(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
@@ -3959,12 +4206,13 @@ class Program
     [|[RegexTest(@""$\a(?#comment)"")]|]
     private string field;
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Class("RegexTest"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Class("RegexTest"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
@@ -3972,7 +4220,7 @@ Regex.Comment("(?#comment)"));
         public async Task TestRegexOnApiWithStringSyntaxAttribute_ArrayAttribute(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
@@ -3988,20 +4236,23 @@ class Program
     [|[RegexTest(new string[] { @""$\a(?#comment)"" })]|]
     private string field;
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Class("RegexTest"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Class("RegexTest"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestRegexOnApiWithStringSyntaxAttribute_ImplicitArrayAttribute(TestHost testHost)
+        public async Task TestRegexOnApiWithStringSyntaxAttribute_ImplicitArrayAttribute(
+            TestHost testHost
+        )
         {
             await TestAsync(
-@"
+                @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
@@ -4017,20 +4268,23 @@ class Program
     [|[RegexTest(new[] { @""$\a(?#comment)"" })]|]
     private string field;
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Class("RegexTest"),
-Regex.Anchor("$"),
-Regex.OtherEscape("\\"),
-Regex.OtherEscape("a"),
-Regex.Comment("(?#comment)"));
+                testHost,
+                Class("RegexTest"),
+                Regex.Anchor("$"),
+                Regex.OtherEscape("\\"),
+                Regex.OtherEscape("a"),
+                Regex.Comment("(?#comment)")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestIncompleteRegexLeadingToStringInsideSkippedTokensInsideADirective(TestHost testHost)
+        public async Task TestIncompleteRegexLeadingToStringInsideSkippedTokensInsideADirective(
+            TestHost testHost
+        )
         {
             await TestAsync(
-@"
+                @"
 using System.Text.RegularExpressions;
 
 class Program
@@ -4048,11 +4302,13 @@ class Program
         var s = /* language=regex */ @""(?#comment)|(\b\G\z)|(?<name>sub){0,5}?^"";
     }
 }",
-testHost, Namespace("System"),
-Namespace("Text"),
-Namespace("RegularExpressions"),
-Keyword("var"),
-Class("Regex"));
+                testHost,
+                Namespace("System"),
+                Namespace("Text"),
+                Namespace("RegularExpressions"),
+                Keyword("var"),
+                Class("Regex")
+            );
         }
 
         [Theory]
@@ -4060,7 +4316,7 @@ Class("Regex"));
         public async Task TestJson1(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 class Program
 {
     void Goo()
@@ -4069,33 +4325,34 @@ class Program
         var r = @""[/*comment*/{ 'goo': 0, bar: -Infinity, """"baz"""": true }, new Date(), text, 'str'] // comment"";
     }
 }",
-testHost,
-Keyword("var"),
-Json.Array("["),
-Json.Comment("/*comment*/"),
-Json.Object("{"),
-Json.PropertyName("'goo'"),
-Json.Punctuation(":"),
-Json.Number("0"),
-Json.PropertyName("bar"),
-Json.Punctuation(":"),
-Json.Operator("-"),
-Json.Keyword("Infinity"),
-Json.PropertyName(@"""""baz"""""),
-Json.Punctuation(":"),
-Json.Keyword("true"),
-Json.Object("}"),
-Json.Punctuation(","),
-Json.Keyword("new"),
-Json.ConstructorName("Date"),
-Json.Punctuation("("),
-Json.Punctuation(")"),
-Json.Punctuation(","),
-Json.Text("text"),
-Json.Punctuation(","),
-Json.String("'str'"),
-Json.Array("]"),
-Json.Comment("// comment"));
+                testHost,
+                Keyword("var"),
+                Json.Array("["),
+                Json.Comment("/*comment*/"),
+                Json.Object("{"),
+                Json.PropertyName("'goo'"),
+                Json.Punctuation(":"),
+                Json.Number("0"),
+                Json.PropertyName("bar"),
+                Json.Punctuation(":"),
+                Json.Operator("-"),
+                Json.Keyword("Infinity"),
+                Json.PropertyName(@"""""baz"""""),
+                Json.Punctuation(":"),
+                Json.Keyword("true"),
+                Json.Object("}"),
+                Json.Punctuation(","),
+                Json.Keyword("new"),
+                Json.ConstructorName("Date"),
+                Json.Punctuation("("),
+                Json.Punctuation(")"),
+                Json.Punctuation(","),
+                Json.Text("text"),
+                Json.Punctuation(","),
+                Json.String("'str'"),
+                Json.Array("]"),
+                Json.Comment("// comment")
+            );
         }
 
         [Theory]
@@ -4103,7 +4360,7 @@ Json.Comment("// comment"));
         public async Task TestJson_RawString(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 class Program
 {
     void Goo()
@@ -4112,16 +4369,17 @@ class Program
         var r = """"""[/*comment*/{ 'goo': 0 }]"""""";
     }
 }",
-testHost,
-Keyword("var"),
-Json.Array("["),
-Json.Comment("/*comment*/"),
-Json.Object("{"),
-Json.PropertyName("'goo'"),
-Json.Punctuation(":"),
-Json.Number("0"),
-Json.Object("}"),
-Json.Array("]"));
+                testHost,
+                Keyword("var"),
+                Json.Array("["),
+                Json.Comment("/*comment*/"),
+                Json.Object("{"),
+                Json.PropertyName("'goo'"),
+                Json.Punctuation(":"),
+                Json.Number("0"),
+                Json.Object("}"),
+                Json.Array("]")
+            );
         }
 
         [Theory]
@@ -4129,7 +4387,7 @@ Json.Array("]"));
         public async Task TestMultiLineJson1(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 class Program
 {
     void Goo()
@@ -4148,43 +4406,45 @@ class Program
             'str'] // comment"";
     }
 }",
-testHost,
-Keyword("var"),
-Json.Array("["),
-Json.Comment("/*comment*/"),
-Json.Object("{"),
-Json.PropertyName("'goo'"),
-Json.Punctuation(":"),
-Json.Number("0"),
-Json.PropertyName("bar"),
-Json.Punctuation(":"),
-Json.Operator("-"),
-Json.Keyword("Infinity"),
-Json.PropertyName(@"""""baz"""""),
-Json.Punctuation(":"),
-Json.Keyword("true"),
-Json.PropertyName("0"),
-Json.Punctuation(":"),
-Json.Keyword("null"),
-Json.Object("}"),
-Json.Punctuation(","),
-Json.Keyword("new"),
-Json.ConstructorName("Date"),
-Json.Punctuation("("),
-Json.Punctuation(")"),
-Json.Punctuation(","),
-Json.Text("text"),
-Json.Punctuation(","),
-Json.String("'str'"),
-Json.Array("]"),
-Json.Comment("// comment"));
+                testHost,
+                Keyword("var"),
+                Json.Array("["),
+                Json.Comment("/*comment*/"),
+                Json.Object("{"),
+                Json.PropertyName("'goo'"),
+                Json.Punctuation(":"),
+                Json.Number("0"),
+                Json.PropertyName("bar"),
+                Json.Punctuation(":"),
+                Json.Operator("-"),
+                Json.Keyword("Infinity"),
+                Json.PropertyName(@"""""baz"""""),
+                Json.Punctuation(":"),
+                Json.Keyword("true"),
+                Json.PropertyName("0"),
+                Json.Punctuation(":"),
+                Json.Keyword("null"),
+                Json.Object("}"),
+                Json.Punctuation(","),
+                Json.Keyword("new"),
+                Json.ConstructorName("Date"),
+                Json.Punctuation("("),
+                Json.Punctuation(")"),
+                Json.Punctuation(","),
+                Json.Text("text"),
+                Json.Punctuation(","),
+                Json.String("'str'"),
+                Json.Array("]"),
+                Json.Comment("// comment")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestJson_NoComment_NotLikelyJson(TestHost testHost)
         {
-            var input = @"
+            var input =
+                @"
 class C
 {
     void Goo()
@@ -4192,16 +4452,15 @@ class C
         var r = @""[1, 2, 3]"";
     }
 }";
-            await TestAsync(input,
-testHost,
-Keyword("var"));
+            await TestAsync(input, testHost, Keyword("var"));
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestJson_NoComment_LikelyJson(TestHost testHost)
         {
-            var input = @"
+            var input =
+                @"
 class C
 {
     void Goo()
@@ -4209,20 +4468,22 @@ class C
         var r = @""[1, { prop: 0 }, 3]"";
     }
 }";
-            await TestAsync(input,
-testHost,
-Keyword("var"),
-Json.Array("["),
-Json.Number("1"),
-Json.Punctuation(","),
-Json.Object("{"),
-Json.PropertyName("prop"),
-Json.Punctuation(":"),
-Json.Number("0"),
-Json.Object("}"),
-Json.Punctuation(","),
-Json.Number("3"),
-Json.Array("]"));
+            await TestAsync(
+                input,
+                testHost,
+                Keyword("var"),
+                Json.Array("["),
+                Json.Number("1"),
+                Json.Punctuation(","),
+                Json.Object("{"),
+                Json.PropertyName("prop"),
+                Json.Punctuation(":"),
+                Json.Number("0"),
+                Json.Object("}"),
+                Json.Punctuation(","),
+                Json.Number("3"),
+                Json.Array("]")
+            );
         }
 
         [Theory]
@@ -4230,7 +4491,7 @@ Json.Array("]"));
         public async Task TestJsonOnApiWithStringSyntaxAttribute_Field(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -4242,15 +4503,16 @@ class Program
         [|this.field = @""[{ 'goo': 0}]"";|]
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Field("field"),
-Json.Array("["),
-Json.Object("{"),
-Json.PropertyName("'goo'"),
-Json.Punctuation(":"),
-Json.Number("0"),
-Json.Object("}"),
-Json.Array("]"));
+                testHost,
+                Field("field"),
+                Json.Array("["),
+                Json.Object("{"),
+                Json.PropertyName("'goo'"),
+                Json.Punctuation(":"),
+                Json.Number("0"),
+                Json.Object("}"),
+                Json.Array("]")
+            );
         }
 
         [Theory]
@@ -4258,7 +4520,7 @@ Json.Array("]"));
         public async Task TestJsonOnApiWithStringSyntaxAttribute_Property(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -4270,15 +4532,16 @@ class Program
         [|this.Prop = @""[{ 'goo': 0}]"";|]
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Property("Prop"),
-Json.Array("["),
-Json.Object("{"),
-Json.PropertyName("'goo'"),
-Json.Punctuation(":"),
-Json.Number("0"),
-Json.Object("}"),
-Json.Array("]"));
+                testHost,
+                Property("Prop"),
+                Json.Array("["),
+                Json.Object("{"),
+                Json.PropertyName("'goo'"),
+                Json.Punctuation(":"),
+                Json.Number("0"),
+                Json.Object("}"),
+                Json.Array("]")
+            );
         }
 
         [Theory]
@@ -4286,7 +4549,7 @@ Json.Array("]"));
         public async Task TestJsonOnApiWithStringSyntaxAttribute_Argument(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -4300,22 +4563,24 @@ class Program
         [|M(@""[{ 'goo': 0}]"");|]
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-testHost,
-Method("M"),
-Json.Array("["),
-Json.Object("{"),
-Json.PropertyName("'goo'"),
-Json.Punctuation(":"),
-Json.Number("0"),
-Json.Object("}"),
-Json.Array("]"));
+                testHost,
+                Method("M"),
+                Json.Array("["),
+                Json.Object("{"),
+                Json.PropertyName("'goo'"),
+                Json.Punctuation(":"),
+                Json.Number("0"),
+                Json.Object("}"),
+                Json.Array("]")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_LocalFunction_Keyword(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -4325,14 +4590,16 @@ class X
 }",
                 testHost,
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface unmanaged {}
 class X
 {
@@ -4343,14 +4610,18 @@ class X
 }",
                 testHost,
                 TypeParameter("T"),
-                Interface("unmanaged"));
+                Interface("unmanaged")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface unmanaged {}
@@ -4365,329 +4636,370 @@ class X
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("unmanaged"));
+                Keyword("unmanaged")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape1(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = ""goo\r\nbar"";",
+            await TestInMethodAsync(
+                @"var goo = ""goo\r\nbar"";",
                 testHost,
                 Keyword("var"),
                 Escape(@"\r"),
-                Escape(@"\n"));
+                Escape(@"\n")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape1_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = ""goo\r\nbar""u8;",
+            await TestInMethodAsync(
+                @"var goo = ""goo\r\nbar""u8;",
                 testHost,
                 Keyword("var"),
                 Escape(@"\r"),
-                Escape(@"\n"));
+                Escape(@"\n")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape2(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = @""goo\r\nbar"";",
-                testHost,
-                Keyword("var"));
+            await TestInMethodAsync(@"var goo = @""goo\r\nbar"";", testHost, Keyword("var"));
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape2_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = @""goo\r\nbar""u8;",
-                testHost,
-                Keyword("var"));
+            await TestInMethodAsync(@"var goo = @""goo\r\nbar""u8;", testHost, Keyword("var"));
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape3(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $""goo{{1}}bar"";",
+            await TestInMethodAsync(
+                @"var goo = $""goo{{1}}bar"";",
                 testHost,
                 Keyword("var"),
                 Escape(@"{{"),
-                Escape(@"}}"));
+                Escape(@"}}")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape3_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $""goo{{1}}bar""u8;",
+            await TestInMethodAsync(
+                @"var goo = $""goo{{1}}bar""u8;",
                 testHost,
                 Keyword("var"),
                 Escape(@"{{"),
-                Escape(@"}}"));
+                Escape(@"}}")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape4(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $@""goo{{1}}bar"";",
+            await TestInMethodAsync(
+                @"var goo = $@""goo{{1}}bar"";",
                 testHost,
                 Keyword("var"),
                 Escape(@"{{"),
-                Escape(@"}}"));
+                Escape(@"}}")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape4_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $@""goo{{1}}bar""u8;",
+            await TestInMethodAsync(
+                @"var goo = $@""goo{{1}}bar""u8;",
                 testHost,
                 Keyword("var"),
                 Escape(@"{{"),
-                Escape(@"}}"));
+                Escape(@"}}")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape5(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $""goo\r{{1}}\nbar"";",
+            await TestInMethodAsync(
+                @"var goo = $""goo\r{{1}}\nbar"";",
                 testHost,
                 Keyword("var"),
                 Escape(@"\r"),
                 Escape(@"{{"),
                 Escape(@"}}"),
-                Escape(@"\n"));
+                Escape(@"\n")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape5_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $""goo\r{{1}}\nbar""u8;",
+            await TestInMethodAsync(
+                @"var goo = $""goo\r{{1}}\nbar""u8;",
                 testHost,
                 Keyword("var"),
                 Escape(@"\r"),
                 Escape(@"{{"),
                 Escape(@"}}"),
-                Escape(@"\n"));
+                Escape(@"\n")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape6(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $@""goo\r{{1}}\nbar"";",
+            await TestInMethodAsync(
+                @"var goo = $@""goo\r{{1}}\nbar"";",
                 testHost,
                 Keyword("var"),
                 Escape(@"{{"),
-                Escape(@"}}"));
+                Escape(@"}}")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape6_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $@""goo\r{{1}}\nbar""u8;",
+            await TestInMethodAsync(
+                @"var goo = $@""goo\r{{1}}\nbar""u8;",
                 testHost,
                 Keyword("var"),
                 Escape(@"{{"),
-                Escape(@"}}"));
+                Escape(@"}}")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape7(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $""goo\r{1}\nbar"";",
+            await TestInMethodAsync(
+                @"var goo = $""goo\r{1}\nbar"";",
                 testHost,
                 Keyword("var"),
                 Escape(@"\r"),
-                Escape(@"\n"));
+                Escape(@"\n")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape7_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $""goo\r{1}\nbar""u8;",
+            await TestInMethodAsync(
+                @"var goo = $""goo\r{1}\nbar""u8;",
                 testHost,
                 Keyword("var"),
                 Escape(@"\r"),
-                Escape(@"\n"));
+                Escape(@"\n")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $@""{{goo{1}bar}}"";",
+            await TestInMethodAsync(
+                @"var goo = $@""{{goo{1}bar}}"";",
                 testHost,
                 Keyword("var"),
                 Escape(@"{{"),
-                Escape(@"}}"));
+                Escape(@"}}")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape8_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $@""{{goo{1}bar}}""u8;",
+            await TestInMethodAsync(
+                @"var goo = $@""{{goo{1}bar}}""u8;",
                 testHost,
                 Keyword("var"),
                 Escape(@"{{"),
-                Escape(@"}}"));
+                Escape(@"}}")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape9(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $@""{{{12:X}}}"";",
+            await TestInMethodAsync(
+                @"var goo = $@""{{{12:X}}}"";",
                 testHost,
                 Keyword("var"),
                 Escape(@"{{"),
-                Escape(@"}}"));
+                Escape(@"}}")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestStringEscape9_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $@""{{{12:X}}}""u8;",
+            await TestInMethodAsync(
+                @"var goo = $@""{{{12:X}}}""u8;",
                 testHost,
                 Keyword("var"),
                 Escape(@"{{"),
-                Escape(@"}}"));
+                Escape(@"}}")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotStringEscapeInRawLiteral1(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = """"""goo\r\nbar"""""";",
-                testHost,
-                Keyword("var"));
+            await TestInMethodAsync(@"var goo = """"""goo\r\nbar"""""";", testHost, Keyword("var"));
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotStringEscapeInRawLiteral1_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = """"""goo\r\nbar""""""u8;",
+            await TestInMethodAsync(
+                @"var goo = """"""goo\r\nbar""""""u8;",
                 testHost,
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotStringEscapeInRawLiteral2(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = """"""
+            await TestInMethodAsync(
+                @"var goo = """"""
     goo\r\nbar
     """""";",
                 testHost,
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotStringEscapeInRawLiteral2_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = """"""
+            await TestInMethodAsync(
+                @"var goo = """"""
     goo\r\nbar
     """"""u8;",
                 testHost,
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotStringEscapeInRawLiteral3(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $""""""
+            await TestInMethodAsync(
+                @"var goo = $""""""
     goo\r\nbar
     """""";",
                 testHost,
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotStringEscapeInRawLiteral3_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $""""""
+            await TestInMethodAsync(
+                @"var goo = $""""""
     goo\r\nbar
     """"""u8;",
                 testHost,
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotStringEscapeInRawLiteral4(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = """"""\"""""";",
-                testHost,
-                Keyword("var"));
+            await TestInMethodAsync(@"var goo = """"""\"""""";", testHost, Keyword("var"));
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotStringEscapeInRawLiteral4_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = """"""\""""""u8;",
-                testHost,
-                Keyword("var"));
+            await TestInMethodAsync(@"var goo = """"""\""""""u8;", testHost, Keyword("var"));
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotStringEscapeInRawLiteral5(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = """"""
+            await TestInMethodAsync(
+                @"var goo = """"""
     \
     """""";",
                 testHost,
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotStringEscapeInRawLiteral5_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = """"""
+            await TestInMethodAsync(
+                @"var goo = """"""
     \
     """"""u8;",
                 testHost,
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotStringEscapeInRawLiteral6(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $""""""
+            await TestInMethodAsync(
+                @"var goo = $""""""
     \
     """""";",
                 testHost,
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotStringEscapeInRawLiteral6_utf8(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $""""""
+            await TestInMethodAsync(
+                @"var goo = $""""""
     \
     """"""u8;",
                 testHost,
-                Keyword("var"));
+                Keyword("var")
+            );
         }
 
         [WorkItem(31200, "https://github.com/dotnet/roslyn/issues/31200")]
@@ -4695,10 +5007,7 @@ class X
         [CombinatorialData]
         public async Task TestCharEscape1(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = '\n';",
-                testHost,
-                Keyword("var"),
-                Escape(@"\n"));
+            await TestInMethodAsync(@"var goo = '\n';", testHost, Keyword("var"), Escape(@"\n"));
         }
 
         [WorkItem(31200, "https://github.com/dotnet/roslyn/issues/31200")]
@@ -4706,10 +5015,7 @@ class X
         [CombinatorialData]
         public async Task TestCharEscape2(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = '\\';",
-                testHost,
-                Keyword("var"),
-                Escape(@"\\"));
+            await TestInMethodAsync(@"var goo = '\\';", testHost, Keyword("var"), Escape(@"\\"));
         }
 
         [WorkItem(31200, "https://github.com/dotnet/roslyn/issues/31200")]
@@ -4717,10 +5023,7 @@ class X
         [CombinatorialData]
         public async Task TestCharEscape3(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = '\'';",
-                testHost,
-                Keyword("var"),
-                Escape(@"\'"));
+            await TestInMethodAsync(@"var goo = '\'';", testHost, Keyword("var"), Escape(@"\'"));
         }
 
         [WorkItem(31200, "https://github.com/dotnet/roslyn/issues/31200")]
@@ -4728,9 +5031,7 @@ class X
         [CombinatorialData]
         public async Task TestCharEscape5(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = '""';",
-                testHost,
-                Keyword("var"));
+            await TestInMethodAsync(@"var goo = '""';", testHost, Keyword("var"));
         }
 
         [WorkItem(31200, "https://github.com/dotnet/roslyn/issues/31200")]
@@ -4738,28 +5039,32 @@ class X
         [CombinatorialData]
         public async Task TestCharEscape4(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = '\u000a';",
+            await TestInMethodAsync(
+                @"var goo = '\u000a';",
                 testHost,
                 Keyword("var"),
-                Escape(@"\u000a"));
+                Escape(@"\u000a")
+            );
         }
 
         [WorkItem(29451, "https://github.com/dotnet/roslyn/issues/29451")]
         [Theory]
         [CombinatorialData]
-        public async Task TestDirectiveStringLiteral(TestHost testHost)
-            => await TestInMethodAsync(@"#line 1 ""a\b""", testHost);
+        public async Task TestDirectiveStringLiteral(TestHost testHost) =>
+            await TestInMethodAsync(@"#line 1 ""a\b""", testHost);
 
         [WorkItem(30378, "https://github.com/dotnet/roslyn/issues/30378")]
         [Theory]
         [CombinatorialData]
         public async Task TestFormatSpecifierInInterpolation(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $""goo{{1:0000}}bar"";",
+            await TestInMethodAsync(
+                @"var goo = $""goo{{1:0000}}bar"";",
                 testHost,
                 Keyword("var"),
                 Escape(@"{{"),
-                Escape(@"}}"));
+                Escape(@"}}")
+            );
         }
 
         [WorkItem(29492, "https://github.com/dotnet/roslyn/issues/29492")]
@@ -4767,7 +5072,8 @@ class X
         [CombinatorialData]
         public async Task TestOverloadedOperator_BinaryExpression(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class C
 {
     void M()
@@ -4792,7 +5098,8 @@ class True
                 Class("True"),
                 Class("True"),
                 Class("True"),
-                Class("True"));
+                Class("True")
+            );
         }
 
         [WorkItem(29492, "https://github.com/dotnet/roslyn/issues/29492")]
@@ -4800,7 +5107,8 @@ class True
         [CombinatorialData]
         public async Task TestOverloadedOperator_PrefixUnaryExpression(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class C
 {
     void M()
@@ -4821,7 +5129,8 @@ class True
                 Keyword("var"),
                 OverloadedOperators.Exclamation,
                 Class("True"),
-                Class("True"));
+                Class("True")
+            );
         }
 
         [WorkItem(29492, "https://github.com/dotnet/roslyn/issues/29492")]
@@ -4829,7 +5138,8 @@ class True
         [CombinatorialData]
         public async Task TestOverloadedOperator_PostfixUnaryExpression(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class C
 {
     void M()
@@ -4856,7 +5166,8 @@ class True
                 OverloadedOperators.PlusPlus,
                 Class("True"),
                 Class("True"),
-                Class("True"));
+                Class("True")
+            );
         }
 
         [WorkItem(29492, "https://github.com/dotnet/roslyn/issues/29492")]
@@ -4864,7 +5175,8 @@ class True
         [CombinatorialData]
         public async Task TestOverloadedOperator_ConditionalExpression(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class C
 {
     void M()
@@ -4887,14 +5199,16 @@ class True
                 OverloadedOperators.EqualsEquals,
                 Class("True"),
                 Class("True"),
-                Class("True"));
+                Class("True")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestCatchDeclarationVariable(TestHost testHost)
         {
-            await TestInMethodAsync(@"
+            await TestInMethodAsync(
+                @"
 try
 {
 }
@@ -4903,7 +5217,8 @@ catch (Exception ex)
     throw ex;
 }",
                 testHost,
-                Local("ex"));
+                Local("ex")
+            );
         }
 
         [Theory]
@@ -4911,12 +5226,14 @@ catch (Exception ex)
         public async Task TestNotNullConstraint_InsideMethod(TestHost testHost)
         {
             // Asserts no Keyword("notnull") because it is an identifier.
-            await TestInMethodAsync(@"
+            await TestInMethodAsync(
+                @"
 var notnull = 0;
 notnull++;",
                 testHost,
                 Keyword("var"),
-                Local("notnull"));
+                Local("notnull")
+            );
         }
 
         [Theory]
@@ -4927,26 +5244,32 @@ notnull++;",
                 "class X<T> where T : notnull { }",
                 testHost,
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_Type_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface notnull {}
 class X<T> where T : notnull { }",
                 testHost,
                 TypeParameter("T"),
-                Interface("notnull"));
+                Interface("notnull")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestNotNullConstraint_Type_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_Type_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface notnull {}
@@ -4955,28 +5278,32 @@ class X<T> where T : notnull { }",
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_Method_Keyword(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void M<T>() where T : notnull { }
 }",
                 testHost,
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_Method_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface notnull {}
 class X
 {
@@ -4984,14 +5311,18 @@ class X
 }",
                 testHost,
                 TypeParameter("T"),
-                Interface("notnull"));
+                Interface("notnull")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestNotNullConstraint_Method_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_Method_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface notnull {}
@@ -5003,7 +5334,8 @@ class X
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory]
@@ -5014,26 +5346,32 @@ class X
                 "delegate void D<T>() where T : notnull;",
                 testHost,
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_Delegate_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface notnull {}
 delegate void D<T>() where T : notnull;",
                 testHost,
                 TypeParameter("T"),
-                Interface("notnull"));
+                Interface("notnull")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestNotNullConstraint_Delegate_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_Delegate_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface notnull {}
@@ -5042,14 +5380,16 @@ delegate void D<T>() where T : notnull;",
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_LocalFunction_Keyword(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -5059,14 +5399,16 @@ class X
 }",
                 testHost,
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotNullConstraint_LocalFunction_ExistingInterface(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 interface notnull {}
 class X
 {
@@ -5077,14 +5419,18 @@ class X
 }",
                 testHost,
                 TypeParameter("T"),
-                Interface("notnull"));
+                Interface("notnull")
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestNotNullConstraint_LocalFunction_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_LocalFunction_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 namespace OtherScope
 {
     interface notnull {}
@@ -5099,14 +5445,16 @@ class X
                 testHost,
                 Namespace("OtherScope"),
                 TypeParameter("T"),
-                Keyword("notnull"));
+                Keyword("notnull")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task NonDiscardVariableDeclaration(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -5114,17 +5462,19 @@ class X
         var _ = int.Parse("""");
     }
 }",
-            testHost,
-            Keyword("var"),
-            Method("Parse"),
-            Static("Parse"));
+                testHost,
+                Keyword("var"),
+                Method("Parse"),
+                Static("Parse")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task NonDiscardVariableDeclarationMultipleDeclarators(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -5132,14 +5482,17 @@ class X
         int i = 1, _ = 1;
         int _ = 2, j = 1;
     }
-}", testHost);
+}",
+                testHost
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DiscardAssignment(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -5147,17 +5500,19 @@ class X
         _ = int.Parse("""");
     }
 }",
-            testHost,
-            Keyword("_"),
-            Method("Parse"),
-            Static("Parse"));
+                testHost,
+                Keyword("_"),
+                Method("Parse"),
+                Static("Parse")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DiscardInOutDeclaration(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -5165,18 +5520,20 @@ class X
         int.TryParse("""", out var _);
     }
 }",
-            testHost,
-            Method("TryParse"),
-            Static("TryParse"),
-            Keyword("var"),
-            Keyword("_"));
+                testHost,
+                Method("TryParse"),
+                Static("TryParse"),
+                Keyword("var"),
+                Keyword("_")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DiscardInOutAssignment(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -5184,17 +5541,19 @@ class X
         int.TryParse("""", out _);
     }
 }",
-            testHost,
-            Method("TryParse"),
-            Static("TryParse"),
-            Keyword("_"));
+                testHost,
+                Method("TryParse"),
+                Static("TryParse"),
+                Keyword("_")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DiscardInDeconstructionAssignment(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -5202,15 +5561,17 @@ class X
         (x, _) = (0, 0);
     }
 }",
-            testHost,
-            Keyword("_"));
+                testHost,
+                Keyword("_")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DiscardInDeconstructionDeclaration(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -5218,15 +5579,17 @@ class X
         (int x, int _) = (0, 0);
     }
 }",
-            testHost,
-            Keyword("_"));
+                testHost,
+                Keyword("_")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DiscardInPatternMatch(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     bool N(object x)
@@ -5234,16 +5597,18 @@ class X
         return x is int _;
     }
 }",
-            testHost,
-            Parameter("x"),
-            Keyword("_"));
+                testHost,
+                Parameter("x"),
+                Keyword("_")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DiscardInSwitch(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     bool N(object x)
@@ -5257,16 +5622,18 @@ class X
         }
     }
 }",
-            testHost,
-            Parameter("x"),
-            Keyword("_"));
+                testHost,
+                Parameter("x"),
+                Keyword("_")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DiscardInSwitchPatternMatch(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     bool N(object x)
@@ -5277,16 +5644,18 @@ class X
         };
     }
 }",
-            testHost,
-            Parameter("x"),
-            Keyword("_"));
+                testHost,
+                Parameter("x"),
+                Keyword("_")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task UnusedUnderscoreParameterInLambda(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -5294,16 +5663,18 @@ class X
         System.Func<int, int> a = (int _) => 0;
     }
 }",
-            testHost,
-            Namespace("System"),
-            Delegate("Func"));
+                testHost,
+                Namespace("System"),
+                Delegate("Func")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task UsedUnderscoreParameterInLambda(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -5311,17 +5682,19 @@ class X
         System.Func<int, int> a = (int _) => _;
     }
 }",
-            testHost,
-            Namespace("System"),
-            Delegate("Func"),
-            Parameter("_"));
+                testHost,
+                Namespace("System"),
+                Delegate("Func"),
+                Parameter("_")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DiscardsInLambda(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -5329,18 +5702,20 @@ class X
         System.Func<int, int, int> a = (int _, int _) => 0;
     }
 }",
-            testHost,
-            Namespace("System"),
-            Delegate("Func"),
-            Keyword("_"),
-            Keyword("_"));
+                testHost,
+                Namespace("System"),
+                Delegate("Func"),
+                Keyword("_"),
+                Keyword("_")
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DiscardsInLambdaWithInferredType(TestHost testHost)
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class X
 {
     void N()
@@ -5348,11 +5723,12 @@ class X
         System.Func<int, int, int> a = (_, _) => 0;
     }
 }",
-            testHost,
-            Namespace("System"),
-            Delegate("Func"),
-            Keyword("_"),
-            Keyword("_"));
+                testHost,
+                Namespace("System"),
+                Delegate("Func"),
+                Keyword("_"),
+                Keyword("_")
+            );
         }
 
         [Theory]
@@ -5362,7 +5738,8 @@ class X
             await TestInMethodAsync(
                 @"nint i = 0; nuint i2 = 0;",
                 testHost,
-                Classifications(Keyword("nint"), Keyword("nuint")));
+                Classifications(Keyword("nint"), Keyword("nuint"))
+            );
         }
 
         [Theory]
@@ -5374,7 +5751,8 @@ class X
                 "M",
                 "nint i = 0;",
                 testHost,
-                Classifications(Class("nint")));
+                Classifications(Class("nint"))
+            );
         }
 
         [Theory]
@@ -5386,7 +5764,8 @@ class X
                 "M",
                 "nuint i = 0;",
                 testHost,
-                Classifications(Class("nuint")));
+                Classifications(Class("nuint"))
+            );
         }
 
         [Theory]
@@ -5394,18 +5773,19 @@ class X
         public async Task StaticBoldingMethodName(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     public static void Method()
     {
         System.Action action = Method;
     }
 }",
-            testHost,
-            Namespace("System"),
-            Delegate("Action"),
-            Method("Method"),
-            Static("Method"));
+                testHost,
+                Namespace("System"),
+                Delegate("Action"),
+                Method("Method"),
+                Static("Method")
+            );
         }
 
         [Theory]
@@ -5413,18 +5793,19 @@ class X
         public async Task StaticBoldingMethodNameNestedInNameof(TestHost testHost)
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     public static void Method()
     {
         _ = nameof(Method);
     }
 }",
-            testHost,
-            Keyword("_"),
-            Keyword("nameof"),
-            Static("Method"),
-            Method("Method"));
+                testHost,
+                Keyword("_"),
+                Keyword("nameof"),
+                Static("Method"),
+                Method("Method")
+            );
         }
 
         [Theory]
@@ -5432,7 +5813,7 @@ class X
         public async Task BoldingMethodNameStaticAndNot(TestHost testHost)
         {
             await TestAsync(
-    @"class C
+                @"class C
 {
     public static void Method()
     {
@@ -5448,11 +5829,12 @@ class X
         _ = nameof(Method);
     }
 }",
-            testHost,
-            Keyword("_"),
-            Keyword("nameof"),
-            Static("Method"),
-            Method("Method"));
+                testHost,
+                Keyword("_"),
+                Keyword("nameof"),
+                Static("Method"),
+                Method("Method")
+            );
         }
 
         [Theory]
@@ -5461,14 +5843,15 @@ class X
         public async Task BasicRecordClassification(TestHost testHost)
         {
             await TestAsync(
-@"record R
+                @"record R
 {
     R r;
 
     R() { }
 }",
                 testHost,
-                Record("R"));
+                Record("R")
+            );
         }
 
         [Theory]
@@ -5477,14 +5860,15 @@ class X
         public async Task ParameterizedRecordClassification(TestHost testHost)
         {
             await TestAsync(
-@"record R(int X, int Y);
+                @"record R(int X, int Y);
 
 class C
 {
     R r;
 }",
                 testHost,
-                Record("R"));
+                Record("R")
+            );
         }
 
         [Theory]
@@ -5492,14 +5876,15 @@ class C
         public async Task BasicRecordClassClassification(TestHost testHost)
         {
             await TestAsync(
-@"record class R
+                @"record class R
 {
     R r;
 
     R() { }
 }",
                 testHost,
-                Record("R"));
+                Record("R")
+            );
         }
 
         [Theory]
@@ -5507,12 +5892,13 @@ class C
         public async Task BasicRecordStructClassification(TestHost testHost)
         {
             await TestAsync(
-@"record struct R
+                @"record struct R
 {
     R property { get; set; }
 }",
                 testHost,
-                RecordStruct("R"));
+                RecordStruct("R")
+            );
         }
 
         [Theory]
@@ -5520,11 +5906,12 @@ class C
         public async Task BasicFileScopedNamespaceClassification(TestHost testHost)
         {
             await TestAsync(
-@"namespace NS;
+                @"namespace NS;
 
 class C { }",
                 testHost,
-                Namespace("NS"));
+                Namespace("NS")
+            );
         }
 
         [Theory]
@@ -5532,12 +5919,13 @@ class C { }",
         public async Task NullCheckedParameterClassification(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 class C
 {
     void M(string s!!) { }
 }",
-                testHost);
+                testHost
+            );
         }
 
         [Theory]
@@ -5546,7 +5934,7 @@ class C
         public async Task MethodGroupClassifications(TestHost testHost)
         {
             await TestAsync(
-@"var f = m;
+                @"var f = m;
 Delegate d = m;
 MulticastDelegate md = m;
 ICloneable c = m;
@@ -5555,14 +5943,15 @@ m(m);
 
 int m(Delegate d) { }",
                 testHost,
-                    Keyword("var"),
-                    Method("m"),
-                    Method("m"),
-                    Method("m"),
-                    Method("m"),
-                    Method("m"),
-                    Method("m"),
-                    Method("m"));
+                Keyword("var"),
+                Method("m"),
+                Method("m"),
+                Method("m"),
+                Method("m"),
+                Method("m"),
+                Method("m"),
+                Method("m")
+            );
         }
     }
 }

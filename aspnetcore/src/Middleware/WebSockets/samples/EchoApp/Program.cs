@@ -11,10 +11,10 @@ public class Program
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>();
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseIISIntegration()
+                    .UseStartup<Startup>();
             })
             .Build();
 

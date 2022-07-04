@@ -24,17 +24,36 @@ namespace System.IO.Tests
         {
             string path = GetTestFilePath();
 
-            var fs1 = new FileStream(path, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+            var fs1 = new FileStream(
+                path,
+                FileMode.Create,
+                FileAccess.ReadWrite,
+                FileShare.ReadWrite
+            );
             fs1.Write(new byte[100], 0, 100);
 
-            using (var fs2 = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (
+                var fs2 = new FileStream(
+                    path,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite
+                )
+            )
             {
                 Assert.Equal(0, fs2.Length);
             }
 
             await fs1.DisposeAsync();
 
-            using (var fs2 = new FileStream(path, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (
+                var fs2 = new FileStream(
+                    path,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite
+                )
+            )
             {
                 Assert.Equal(100, fs2.Length);
             }
@@ -52,7 +71,9 @@ namespace System.IO.Tests
         private sealed class OverridesDisposeFileStream : FileStream
         {
             public bool DisposeInvoked;
+
             public OverridesDisposeFileStream(string path, FileMode mode) : base(path, mode) { }
+
             protected override void Dispose(bool disposing)
             {
                 DisposeInvoked = true;

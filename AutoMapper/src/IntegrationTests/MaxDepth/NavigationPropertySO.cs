@@ -16,7 +16,6 @@ public class NavigationPropertySO : AutoMapperSpecBase, IAsyncLifetime
 
     public class Cust
     {
-
         [Key]
         public int CustomerID { get; set; }
 
@@ -80,16 +79,17 @@ public class NavigationPropertySO : AutoMapperSpecBase, IAsyncLifetime
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Customer, CustomerDTO>().MaxDepth(1);
-        cfg.CreateProjection<Cust, CustDTO>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Customer, CustomerDTO>().MaxDepth(1);
+            cfg.CreateProjection<Cust, CustDTO>();
+        });
 
     [Fact]
     public void Can_map_with_projection()
     {
-        using(var context = new Context())
+        using (var context = new Context())
         {
             _destination = ProjectTo<CustomerDTO>(context.Customers).Single();
             _destination.Id.ShouldBe(1);

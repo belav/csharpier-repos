@@ -37,7 +37,5 @@ public sealed record ModelCodeGeneratorDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public ModelCodeGeneratorDependencies()
-    {
-    }
+    public ModelCodeGeneratorDependencies() { }
 }

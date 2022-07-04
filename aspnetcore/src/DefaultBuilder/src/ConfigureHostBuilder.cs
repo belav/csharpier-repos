@@ -25,7 +25,8 @@ public sealed class ConfigureHostBuilder : IHostBuilder, ISupportsConfigureWebHo
     internal ConfigureHostBuilder(
         HostBuilderContext context,
         ConfigurationManager configuration,
-        IServiceCollection services)
+        IServiceCollection services
+    )
     {
         _configuration = configuration;
         _services = services;
@@ -37,11 +38,15 @@ public sealed class ConfigureHostBuilder : IHostBuilder, ISupportsConfigureWebHo
 
     IHost IHostBuilder.Build()
     {
-        throw new NotSupportedException($"Call {nameof(WebApplicationBuilder)}.{nameof(WebApplicationBuilder.Build)}() instead.");
+        throw new NotSupportedException(
+            $"Call {nameof(WebApplicationBuilder)}.{nameof(WebApplicationBuilder.Build)}() instead."
+        );
     }
 
     /// <inheritdoc />
-    public IHostBuilder ConfigureAppConfiguration(Action<HostBuilderContext, IConfigurationBuilder> configureDelegate)
+    public IHostBuilder ConfigureAppConfiguration(
+        Action<HostBuilderContext, IConfigurationBuilder> configureDelegate
+    )
     {
         // Run these immediately so that they are observable by the imperative code
         configureDelegate(_context, _configuration);
@@ -49,14 +54,19 @@ public sealed class ConfigureHostBuilder : IHostBuilder, ISupportsConfigureWebHo
     }
 
     /// <inheritdoc />
-    public IHostBuilder ConfigureContainer<TContainerBuilder>(Action<HostBuilderContext, TContainerBuilder> configureDelegate)
+    public IHostBuilder ConfigureContainer<TContainerBuilder>(
+        Action<HostBuilderContext, TContainerBuilder> configureDelegate
+    )
     {
         if (configureDelegate is null)
         {
             throw new ArgumentNullException(nameof(configureDelegate));
         }
 
-        _configureContainerActions.Add((context, containerBuilder) => configureDelegate(context, (TContainerBuilder)containerBuilder));
+        _configureContainerActions.Add(
+            (context, containerBuilder) =>
+                configureDelegate(context, (TContainerBuilder)containerBuilder)
+        );
 
         return this;
     }
@@ -66,7 +76,9 @@ public sealed class ConfigureHostBuilder : IHostBuilder, ISupportsConfigureWebHo
     {
         var previousApplicationName = _configuration[HostDefaults.ApplicationKey];
         // Use the real content root so we can compare paths
-        var previousContentRoot = HostingPathResolver.ResolvePath(_context.HostingEnvironment.ContentRootPath);
+        var previousContentRoot = HostingPathResolver.ResolvePath(
+            _context.HostingEnvironment.ContentRootPath
+        );
         var previousContentRootConfig = _configuration[HostDefaults.ContentRootKey];
         var previousEnvironment = _configuration[HostDefaults.EnvironmentKey];
 
@@ -75,27 +87,57 @@ public sealed class ConfigureHostBuilder : IHostBuilder, ISupportsConfigureWebHo
 
         // Disallow changing any host settings this late in the cycle, the reasoning is that we've already loaded the default configuration
         // and done other things based on environment name, application name or content root.
-        if (!string.Equals(previousApplicationName, _configuration[HostDefaults.ApplicationKey], StringComparison.OrdinalIgnoreCase))
+        if (
+            !string.Equals(
+                previousApplicationName,
+                _configuration[HostDefaults.ApplicationKey],
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
-            throw new NotSupportedException($"The application name changed from \"{previousApplicationName}\" to \"{_configuration[HostDefaults.ApplicationKey]}\". Changing the host configuration using WebApplicationBuilder.Host is not supported. Use WebApplication.CreateBuilder(WebApplicationOptions) instead.");
+            throw new NotSupportedException(
+                $"The application name changed from \"{previousApplicationName}\" to \"{_configuration[HostDefaults.ApplicationKey]}\". Changing the host configuration using WebApplicationBuilder.Host is not supported. Use WebApplication.CreateBuilder(WebApplicationOptions) instead."
+            );
         }
 
-        if (!string.Equals(previousContentRootConfig, _configuration[HostDefaults.ContentRootKey], StringComparison.OrdinalIgnoreCase)
-            && !string.Equals(previousContentRoot, HostingPathResolver.ResolvePath(_configuration[HostDefaults.ContentRootKey]), StringComparison.OrdinalIgnoreCase))
+        if (
+            !string.Equals(
+                previousContentRootConfig,
+                _configuration[HostDefaults.ContentRootKey],
+                StringComparison.OrdinalIgnoreCase
+            )
+            && !string.Equals(
+                previousContentRoot,
+                HostingPathResolver.ResolvePath(_configuration[HostDefaults.ContentRootKey]),
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
-            throw new NotSupportedException($"The content root changed from \"{previousContentRoot}\" to \"{HostingPathResolver.ResolvePath(_configuration[HostDefaults.ContentRootKey])}\". Changing the host configuration using WebApplicationBuilder.Host is not supported. Use WebApplication.CreateBuilder(WebApplicationOptions) instead.");
+            throw new NotSupportedException(
+                $"The content root changed from \"{previousContentRoot}\" to \"{HostingPathResolver.ResolvePath(_configuration[HostDefaults.ContentRootKey])}\". Changing the host configuration using WebApplicationBuilder.Host is not supported. Use WebApplication.CreateBuilder(WebApplicationOptions) instead."
+            );
         }
 
-        if (!string.Equals(previousEnvironment, _configuration[HostDefaults.EnvironmentKey], StringComparison.OrdinalIgnoreCase))
+        if (
+            !string.Equals(
+                previousEnvironment,
+                _configuration[HostDefaults.EnvironmentKey],
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
-            throw new NotSupportedException($"The environment changed from \"{previousEnvironment}\" to \"{_configuration[HostDefaults.EnvironmentKey]}\". Changing the host configuration using WebApplicationBuilder.Host is not supported. Use WebApplication.CreateBuilder(WebApplicationOptions) instead.");
+            throw new NotSupportedException(
+                $"The environment changed from \"{previousEnvironment}\" to \"{_configuration[HostDefaults.EnvironmentKey]}\". Changing the host configuration using WebApplicationBuilder.Host is not supported. Use WebApplication.CreateBuilder(WebApplicationOptions) instead."
+            );
         }
 
         return this;
     }
 
     /// <inheritdoc />
-    public IHostBuilder ConfigureServices(Action<HostBuilderContext, IServiceCollection> configureDelegate)
+    public IHostBuilder ConfigureServices(
+        Action<HostBuilderContext, IServiceCollection> configureDelegate
+    )
     {
         // Run these immediately so that they are observable by the imperative code
         configureDelegate(_context, _services);
@@ -103,7 +145,9 @@ public sealed class ConfigureHostBuilder : IHostBuilder, ISupportsConfigureWebHo
     }
 
     /// <inheritdoc />
-    public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(IServiceProviderFactory<TContainerBuilder> factory) where TContainerBuilder : notnull
+    public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
+        IServiceProviderFactory<TContainerBuilder> factory
+    ) where TContainerBuilder : notnull
     {
         if (factory is null)
         {
@@ -115,14 +159,21 @@ public sealed class ConfigureHostBuilder : IHostBuilder, ISupportsConfigureWebHo
     }
 
     /// <inheritdoc />
-    public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory) where TContainerBuilder : notnull
+    public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
+        Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory
+    ) where TContainerBuilder : notnull
     {
         return UseServiceProviderFactory(factory(_context));
     }
 
-    IHostBuilder ISupportsConfigureWebHost.ConfigureWebHost(Action<IWebHostBuilder> configure, Action<WebHostBuilderOptions> configureOptions)
+    IHostBuilder ISupportsConfigureWebHost.ConfigureWebHost(
+        Action<IWebHostBuilder> configure,
+        Action<WebHostBuilderOptions> configureOptions
+    )
     {
-        throw new NotSupportedException("ConfigureWebHost() is not supported by WebApplicationBuilder.Host. Use the WebApplication returned by WebApplicationBuilder.Build() instead.");
+        throw new NotSupportedException(
+            "ConfigureWebHost() is not supported by WebApplicationBuilder.Host. Use the WebApplication returned by WebApplicationBuilder.Build() instead."
+        );
     }
 
     internal void ApplyServiceProviderFactory(HostApplicationBuilder hostApplicationBuilder)
@@ -147,19 +198,28 @@ public sealed class ConfigureHostBuilder : IHostBuilder, ISupportsConfigureWebHo
             }
         }
 
-        hostApplicationBuilder.ConfigureContainer(_serviceProviderFactory, ConfigureContainerBuilderAdapter);
+        hostApplicationBuilder.ConfigureContainer(
+            _serviceProviderFactory,
+            ConfigureContainerBuilderAdapter
+        );
     }
 
-    private sealed class ServiceProviderFactoryAdapter<TContainerBuilder> : IServiceProviderFactory<object> where TContainerBuilder : notnull
+    private sealed class ServiceProviderFactoryAdapter<TContainerBuilder>
+        : IServiceProviderFactory<object> where TContainerBuilder : notnull
     {
         private readonly IServiceProviderFactory<TContainerBuilder> _serviceProviderFactory;
 
-        public ServiceProviderFactoryAdapter(IServiceProviderFactory<TContainerBuilder> serviceProviderFactory)
+        public ServiceProviderFactoryAdapter(
+            IServiceProviderFactory<TContainerBuilder> serviceProviderFactory
+        )
         {
             _serviceProviderFactory = serviceProviderFactory;
         }
 
-        public object CreateBuilder(IServiceCollection services) => _serviceProviderFactory.CreateBuilder(services);
-        public IServiceProvider CreateServiceProvider(object containerBuilder) => _serviceProviderFactory.CreateServiceProvider((TContainerBuilder)containerBuilder);
+        public object CreateBuilder(IServiceCollection services) =>
+            _serviceProviderFactory.CreateBuilder(services);
+
+        public IServiceProvider CreateServiceProvider(object containerBuilder) =>
+            _serviceProviderFactory.CreateServiceProvider((TContainerBuilder)containerBuilder);
     }
 }

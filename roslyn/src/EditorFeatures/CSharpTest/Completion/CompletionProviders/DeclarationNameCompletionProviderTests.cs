@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
 {
     public class DeclarationNameCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        private const string Span = @"
+        private const string Span =
+            @"
 namespace System
 {
     public readonly ref struct Span<T>
@@ -205,7 +206,8 @@ namespace System
     }
 }";
 
-        private const string IAsyncEnumerable = @"
+        private const string IAsyncEnumerable =
+            @"
 namespace System
 {
     public interface IAsyncDisposable
@@ -328,8 +330,8 @@ namespace System.Collections.Generic
     }
 }";
 
-        internal override Type GetCompletionProviderType()
-            => typeof(DeclarationNameCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(DeclarationNameCompletionProvider);
 
         [Theory, Trait(Traits.Feature, Traits.Features.Completion)]
         [WorkItem(48310, "https://github.com/dotnet/roslyn/issues/48310")]
@@ -338,7 +340,8 @@ namespace System.Collections.Generic
         [InlineData("record struct")]
         public async Task TreatRecordPositionalParameterAsProperty(string record)
         {
-            var markup = $@"
+            var markup =
+                $@"
 public class MyClass
 {{
 }}
@@ -351,7 +354,8 @@ public {record} R(MyClass $$
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NameWithOnlyType1()
         {
-            var markup = @"
+            var markup =
+                @"
 public class MyClass
 {
     MyClass $$
@@ -365,7 +369,8 @@ public class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task AsyncTaskOfT()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading.Tasks;
 public class C
 {
@@ -378,7 +383,8 @@ public class C
         [Fact(Skip = "not yet implemented"), Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NonAsyncTaskOfT()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     Task<C> $$
@@ -390,7 +396,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task MethodDeclaration1()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     virtual C $$
@@ -404,7 +411,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task WordBreaking1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -419,7 +427,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task WordBreaking2()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I {}
 public class C
 {
@@ -432,7 +441,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task WordBreaking3()
         {
-            var markup = @"
+            var markup =
+                @"
 interface II {}
 public class C
 {
@@ -445,7 +455,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task WordBreaking4()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo {}
 public class C
 {
@@ -458,7 +469,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task WordBreaking5()
         {
-            var markup = @"
+            var markup =
+                @"
 class SomeWonderfullyLongClassName {}
 public class C
 {
@@ -479,7 +491,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task Parameter1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -492,7 +505,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task Parameter2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -505,7 +519,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task Parameter3()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -519,7 +534,8 @@ public class C
         [WorkItem(45492, "https://github.com/dotnet/roslyn/issues/45492")]
         public async Task Parameter4()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -533,7 +549,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task Parameter5()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -547,7 +564,8 @@ public class C
         [WorkItem(45492, "https://github.com/dotnet/roslyn/issues/45492")]
         public async Task Parameter6()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 
 void Other(CancellationToken cancellationToken) {}
@@ -559,7 +577,8 @@ void Goo(CancellationToken c$$) {}
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task Parameter7()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 
 void Goo(CancellationToken cancellationToken, CancellationToken c$$) {}
@@ -571,7 +590,8 @@ void Goo(CancellationToken cancellationToken, CancellationToken c$$) {}
         [WorkItem(45492, "https://github.com/dotnet/roslyn/issues/45492")]
         public async Task Parameter8()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -586,7 +606,8 @@ public class C
         [WorkItem(45492, "https://github.com/dotnet/roslyn/issues/45492")]
         public async Task Parameter9()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -605,7 +626,8 @@ public class C
         [WorkItem(45492, "https://github.com/dotnet/roslyn/issues/45492")]
         public async Task Parameter10(LanguageVersion languageVersion)
         {
-            var source = @"
+            var source =
+                @"
 public class DbContext { }
 public class C
 {
@@ -636,7 +658,8 @@ public class C
         [WorkItem(45492, "https://github.com/dotnet/roslyn/issues/45492")]
         public async Task Parameter11(LanguageVersion languageVersion)
         {
-            var source = @"
+            var source =
+                @"
 public class DbContext { }
 public class C
 {
@@ -668,7 +691,8 @@ public class C
         [WorkItem(45492, "https://github.com/dotnet/roslyn/issues/45492")]
         public async Task Parameter12(LanguageVersion languageVersion)
         {
-            var source = @"
+            var source =
+                @"
 public class DbContext { }
 public class C
 {
@@ -705,14 +729,20 @@ public class C
                 NamingStyleFallbackOptions = ParameterCamelCaseWithPascalCaseFallback()
             };
 
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
     void Goo(CancellationToken $$
 }
 ";
-            await VerifyItemExistsAsync(markup, "cancellationToken", glyph: (int)Glyph.Parameter, options: options);
+            await VerifyItemExistsAsync(
+                markup,
+                "cancellationToken",
+                glyph: (int)Glyph.Parameter,
+                options: options
+            );
             await VerifyItemIsAbsentAsync(markup, "CancellationToken", options: options);
         }
 
@@ -720,7 +750,8 @@ public class C
         [WorkItem(52534, "https://github.com/dotnet/roslyn/issues/52534")]
         public async Task SuggestParameterNamesFromExistingOverloads()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -737,7 +768,8 @@ public class C
         [WorkItem(52534, "https://github.com/dotnet/roslyn/issues/52534")]
         public async Task SuggestParameterNamesFromExistingOverloads_Constructor()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -755,7 +787,8 @@ public class C
         [WorkItem(52534, "https://github.com/dotnet/roslyn/issues/52534")]
         public async Task DoNotSuggestParameterNamesFromTheSameOverload()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     void M(string name, string $$) { }
@@ -768,7 +801,8 @@ public class C
         [WorkItem(52534, "https://github.com/dotnet/roslyn/issues/52534")]
         public async Task DoNotSuggestParameterNamesFromNonOverloads()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -785,7 +819,8 @@ public class C
         [WorkItem(52534, "https://github.com/dotnet/roslyn/issues/52534")]
         public async Task DoNotSuggestInGenericType()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 public class C
 {
@@ -801,7 +836,8 @@ public class C
         [WorkItem(52534, "https://github.com/dotnet/roslyn/issues/52534")]
         public async Task DoNotSuggestInOptionalParameterDefaultValue()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 public class C
 {
@@ -818,7 +854,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EscapeKeywords1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Text;
 public class C
 {
@@ -834,7 +871,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EscapeKeywords2()
         {
-            var markup = @"
+            var markup =
+                @"
 class For { }
 public class C
 {
@@ -848,7 +886,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EscapeKeywords3()
         {
-            var markup = @"
+            var markup =
+                @"
 class For { }
 public class C
 {
@@ -865,7 +904,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EscapeKeywords4()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Text;
 public class C
 {
@@ -884,7 +924,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeImplementsLazyOfType1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -904,7 +945,8 @@ public class Item { }
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeImplementsLazyOfType2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -923,7 +965,8 @@ public class Item { }
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSuggestionsForInt()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -936,7 +979,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSuggestionsForLong()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -949,7 +993,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSuggestionsForDouble()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -962,7 +1007,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSuggestionsForFloat()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -975,7 +1021,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSuggestionsForSbyte()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -988,7 +1035,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSuggestionsForShort()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -1001,7 +1049,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSuggestionsForUint()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -1014,7 +1063,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSuggestionsForUlong()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -1027,7 +1077,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task SuggestionsForUShort()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -1040,7 +1091,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSuggestionsForBool()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -1053,7 +1105,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSuggestionsForByte()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -1066,7 +1119,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSuggestionsForChar()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class C
 {
@@ -1079,7 +1133,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSuggestionsForString()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     string $$
@@ -1091,7 +1146,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NoSingleLetterClassNameSuggested()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     C $$
@@ -1104,7 +1160,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ArrayElementTypeSuggested()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 public class MyClass
 {
@@ -1118,7 +1175,8 @@ public class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotTriggeredByVar()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     var $$
@@ -1130,7 +1188,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotAfterVoid()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     void $$
@@ -1142,7 +1201,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task AfterGeneric()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     System.Collections.Generic.IEnumerable<C> $$
@@ -1154,7 +1214,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NothingAfterVar()
         {
-            var markup = @"
+            var markup =
+                @"
 public class C
 {
     void goo()
@@ -1169,7 +1230,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCorrectOrder()
         {
-            var markup = @"
+            var markup =
+                @"
 public class MyClass
 {
     MyClass $$
@@ -1177,28 +1239,57 @@ public class MyClass
 ";
             var items = await GetCompletionItemsAsync(markup, SourceCodeKind.Regular);
             Assert.Equal(
-                new[] { "myClass", "my", "@class", "MyClass", "My", "Class", "GetMyClass", "GetMy", "GetClass" },
-                items.Select(item => item.DisplayText));
+                new[]
+                {
+                    "myClass",
+                    "my",
+                    "@class",
+                    "MyClass",
+                    "My",
+                    "Class",
+                    "GetMyClass",
+                    "GetMy",
+                    "GetClass"
+                },
+                items.Select(item => item.DisplayText)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestDescriptionInsideClass()
         {
-            var markup = @"
+            var markup =
+                @"
 public class MyClass
 {
     MyClass $$
 }
 ";
-            await VerifyItemExistsAsync(markup, "myClass", glyph: (int)Glyph.FieldPublic, expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
-            await VerifyItemExistsAsync(markup, "MyClass", glyph: (int)Glyph.PropertyPublic, expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
-            await VerifyItemExistsAsync(markup, "GetMyClass", glyph: (int)Glyph.MethodPublic, expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "myClass",
+                glyph: (int)Glyph.FieldPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
+            await VerifyItemExistsAsync(
+                markup,
+                "MyClass",
+                glyph: (int)Glyph.PropertyPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
+            await VerifyItemExistsAsync(
+                markup,
+                "GetMyClass",
+                glyph: (int)Glyph.MethodPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestDescriptionInsideMethod()
         {
-            var markup = @"
+            var markup =
+                @"
 public class MyClass
 {
     void M()
@@ -1207,7 +1298,12 @@ public class MyClass
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "myClass", glyph: (int)Glyph.Local, expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "myClass",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
             await VerifyItemIsAbsentAsync(markup, "MyClass");
             await VerifyItemIsAbsentAsync(markup, "GetMyClass");
         }
@@ -1216,7 +1312,8 @@ public class MyClass
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task Alias1()
         {
-            var markup = @"
+            var markup =
+                @"
 using MyType = System.String;
 public class C
 {
@@ -1227,11 +1324,13 @@ public class C
             await VerifyItemExistsAsync(markup, "type");
             await VerifyItemExistsAsync(markup, "myType");
         }
+
         [WorkItem(20273, "https://github.com/dotnet/roslyn/issues/20273")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task AliasWithInterfacePattern()
         {
-            var markup = @"
+            var markup =
+                @"
 using IMyType = System.String;
 public class C
 {
@@ -1247,7 +1346,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotAfterExistingName1()
         {
-            var markup = @"
+            var markup =
+                @"
 using IMyType = System.String;
 public class C
 {
@@ -1261,7 +1361,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotAfterExistingName2()
         {
-            var markup = @"
+            var markup =
+                @"
 using IMyType = System.String;
 public class C
 {
@@ -1275,7 +1376,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task OutVarArgument()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void Do(out Test goo)
@@ -1291,7 +1393,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task OutArgument()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void Do(out Test goo)
@@ -1307,7 +1410,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task OutGenericArgument()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void Do<T>(out T goo)
@@ -1323,7 +1427,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleExpressionDeclaration1()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void Do()
@@ -1339,7 +1444,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleExpressionDeclaration2()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void Do()
@@ -1355,7 +1461,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleExpressionDeclaration_NestedTuples()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void Do()
@@ -1371,7 +1478,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleExpressionDeclaration_NestedTuples_CompletionInTheMiddle()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void Do()
@@ -1387,7 +1495,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleElementDefinition1()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void Do()
@@ -1403,7 +1512,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleElementDefinition2()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     (System.Array $$) Test() => default;
@@ -1416,7 +1526,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleElementDefinition3()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     (System.Array array, System.Action $$) Test() => default;
@@ -1429,7 +1540,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleElementDefinition4()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     (System.Array $$
@@ -1442,7 +1554,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleElementDefinition5()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void M((System.Array $$
@@ -1455,7 +1568,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleElementDefinition_NestedTuples()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void M(((int, int), (int, System.Array $$
@@ -1468,7 +1582,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleElementDefinition_InMiddleOfTuple()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void M((int, System.Array $$),int)
@@ -1481,7 +1596,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleElementTypeInference()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void Do()
@@ -1501,7 +1617,8 @@ class Test
         [Fact(Skip = "Not yet supported"), Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleElementInGenericTypeArgument()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void Do()
@@ -1517,7 +1634,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TupleElementInvocationInsideTuple()
         {
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     void Do()
@@ -1534,7 +1652,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task Pluralize1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 class Index
 {
@@ -1548,7 +1667,8 @@ class Index
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task Pluralize2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 class Test
 {
@@ -1562,7 +1682,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task Pluralize3()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 using System.Threading;
 class Test
@@ -1579,7 +1700,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task PluralizeList()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 using System.Threading;
 class Test
@@ -1596,7 +1718,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task PluralizeArray()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 using System.Threading;
 class Test
@@ -1613,7 +1736,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task PluralizeSpan()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 class Test
@@ -1628,7 +1752,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task PluralizeValidGetEnumerator()
         {
-            var markup = @"
+            var markup =
+                @"
 class MyClass
 {
     public void M(MyOwnCollection<MyClass> $$) { }
@@ -1657,7 +1782,8 @@ class MyOwnCollection<T>
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task PluralizeValidGetAsyncEnumerator()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading.Tasks;
 
 class MyClass
@@ -1688,7 +1814,8 @@ class MyOwnCollection<T>
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task PluralizeForUnimplementedIEnumerable()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 class MyClass
@@ -1708,7 +1835,8 @@ class MyOwnCollection<T> : IEnumerable<T>
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task PluralizeForUnimplementedIAsyncEnumerable()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 class MyClass
@@ -1728,7 +1856,8 @@ class MyOwnCollection<T> : IAsyncEnumerable<T>
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InPatternMatching1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 
 public class C
@@ -1749,7 +1878,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InPatternMatching2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 
 public class C
@@ -1770,7 +1900,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InPatternMatching3()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 
 public class C
@@ -1794,7 +1925,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InPatternMatching4()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 
 public class C
@@ -1814,7 +1946,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InPatternMatching5()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 
 public class C
@@ -1834,7 +1967,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InPatternMatching6()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading;
 
 public class C
@@ -1856,7 +1990,8 @@ public class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InUsingStatement1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.IO;
 
 class C
@@ -1873,7 +2008,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InUsingStatement2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.IO;
 
 class C
@@ -1890,7 +2026,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InUsingStatement_Var()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.IO;
 
 class C
@@ -1907,7 +2044,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InForStatement1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.IO;
 
 class C
@@ -1924,7 +2062,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InForStatement2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.IO;
 
 class C
@@ -1941,7 +2080,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InForStatement_Var()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.IO;
 
 class C
@@ -1959,7 +2099,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InForEachStatement()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.IO;
 
 class C
@@ -1976,7 +2117,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InForEachStatement_Var()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.IO;
 
 class C
@@ -1995,7 +2137,8 @@ class C
         {
             ShowNameSuggestions = false;
 
-            var markup = @"
+            var markup =
+                @"
 class Test
 {
     Test $$
@@ -2008,7 +2151,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeImplementsIEnumerableOfType()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public class Class1
@@ -2029,7 +2173,8 @@ public class ContainerBase : IEnumerable<ContainerBase> { }
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeImplementsIEnumerableOfType2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public class Class1
@@ -2050,7 +2195,8 @@ public class Container : ContainerBase { }
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeImplementsIEnumerableOfType3()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public class Class1
@@ -2070,7 +2216,8 @@ public class Container : IEnumerable<Container> { }
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeImplementsIEnumerableOfType4()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -2093,7 +2240,8 @@ public class TaskType : Task<Container> { }
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeImplementsTaskOfType()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading.Tasks;
 
 public class Class1
@@ -2114,7 +2262,8 @@ public class ContainerBase : Task<ContainerBase> { }
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeImplementsTaskOfType2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading.Tasks;
 
 public class Class1
@@ -2135,7 +2284,8 @@ public class ContainerBase : Container { }
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeImplementsTaskOfType3()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -2158,7 +2308,8 @@ public class EnumerableType : IEnumerable<TaskType> { }
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeIsNullableOfNullable()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public class Class1
@@ -2173,12 +2324,16 @@ public class Class1
             await VerifyItemExistsAsync(markup, "nullables");
         }
 
-        [WorkItem(1220195, "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195")]
+        [WorkItem(
+            1220195,
+            "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195"
+        )]
         [WorkItem(36364, "https://github.com/dotnet/roslyn/issues/36364")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeIsNullableStructInLocalWithNullableTypeName()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 public struct ImmutableArray<T> : System.Collections.Generic.IEnumerable<T> { }
@@ -2194,12 +2349,16 @@ public class Class1
             await VerifyItemExistsAsync(markup, "ints");
         }
 
-        [WorkItem(1220195, "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195")]
+        [WorkItem(
+            1220195,
+            "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195"
+        )]
         [WorkItem(36364, "https://github.com/dotnet/roslyn/issues/36364")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeIsNullableStructInLocalWithQuestionMark()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Immutable;
 
 public struct ImmutableArray<T> : System.Collections.Generic.IEnumerable<T> { }
@@ -2215,12 +2374,16 @@ public class Class1
             await VerifyItemExistsAsync(markup, "ints");
         }
 
-        [WorkItem(1220195, "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195")]
+        [WorkItem(
+            1220195,
+            "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195"
+        )]
         [WorkItem(36364, "https://github.com/dotnet/roslyn/issues/36364")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeIsNullableReferenceInLocal()
         {
-            var markup = @"
+            var markup =
+                @"
 #nullable enable
 
 using System.Collections.Generic;
@@ -2236,12 +2399,16 @@ public class Class1
             await VerifyItemExistsAsync(markup, "ints");
         }
 
-        [WorkItem(1220195, "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195")]
+        [WorkItem(
+            1220195,
+            "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195"
+        )]
         [WorkItem(36364, "https://github.com/dotnet/roslyn/issues/36364")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeIsNullableStructInParameterWithNullableTypeName()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 public struct ImmutableArray<T> : System.Collections.Generic.IEnumerable<T> { }
@@ -2256,12 +2423,16 @@ public class Class1
             await VerifyItemExistsAsync(markup, "ints");
         }
 
-        [WorkItem(1220195, "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195")]
+        [WorkItem(
+            1220195,
+            "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195"
+        )]
         [WorkItem(36364, "https://github.com/dotnet/roslyn/issues/36364")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeIsNullableStructInParameterWithQuestionMark()
         {
-            var markup = @"
+            var markup =
+                @"
 public struct ImmutableArray<T> : System.Collections.Generic.IEnumerable<T> { }
 
 public class Class1
@@ -2274,12 +2445,16 @@ public class Class1
             await VerifyItemExistsAsync(markup, "ints");
         }
 
-        [WorkItem(1220195, "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195")]
+        [WorkItem(
+            1220195,
+            "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195"
+        )]
         [WorkItem(36364, "https://github.com/dotnet/roslyn/issues/36364")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TypeIsNullableReferenceInParameter()
         {
-            var markup = @"
+            var markup =
+                @"
 #nullable enable
 
 using System.Collections.Generic;
@@ -2298,7 +2473,8 @@ public class Class1
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EnumerableParameterOfUnmanagedType()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public class Class1
@@ -2315,7 +2491,8 @@ public class Class1
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EnumerableParameterOfObject()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public class Class1
@@ -2332,7 +2509,8 @@ public class Class1
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EnumerableParameterOfString()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public class Class1
@@ -2349,7 +2527,8 @@ public class Class1
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EnumerableGenericTParameter()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public class Class1
@@ -2366,7 +2545,8 @@ public class Class1
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EnumerableGenericTNameParameter()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public class Class1
@@ -2383,7 +2563,8 @@ public class Class1
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EnumerableGenericUnexpectedlyNamedParameter()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public class Class1
@@ -2400,7 +2581,8 @@ public class Class1
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task EnumerableGenericUnexpectedlyNamedParameterBeginsWithT()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Collections.Generic;
 
 public class Class1
@@ -2425,18 +2607,34 @@ public class Class1
                 NamingStyleFallbackOptions = NamesEndWithSuffixPreferences()
             };
 
-            var markup = @"
+            var markup =
+                @"
 class Configuration
 {
     Configuration $$
 }
 ";
-            await VerifyItemExistsAsync(markup, "ConfigurationField", glyph: (int)Glyph.FieldPublic,
-                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name, options: options);
-            await VerifyItemExistsAsync(markup, "ConfigurationProperty", glyph: (int)Glyph.PropertyPublic,
-                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name, options: options);
-            await VerifyItemExistsAsync(markup, "ConfigurationMethod", glyph: (int)Glyph.MethodPublic,
-                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name, options: options);
+            await VerifyItemExistsAsync(
+                markup,
+                "ConfigurationField",
+                glyph: (int)Glyph.FieldPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name,
+                options: options
+            );
+            await VerifyItemExistsAsync(
+                markup,
+                "ConfigurationProperty",
+                glyph: (int)Glyph.PropertyPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name,
+                options: options
+            );
+            await VerifyItemExistsAsync(
+                markup,
+                "ConfigurationMethod",
+                glyph: (int)Glyph.MethodPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name,
+                options: options
+            );
             await VerifyItemIsAbsentAsync(markup, "ConfigurationLocal", options: options);
             await VerifyItemIsAbsentAsync(markup, "ConfigurationLocalFunction", options: options);
         }
@@ -2453,7 +2651,8 @@ class Configuration
                 NamingStyleFallbackOptions = NamesEndWithSuffixPreferences()
             };
 
-            var markup = @"
+            var markup =
+                @"
 class Configuration
 {
     void M()
@@ -2462,10 +2661,20 @@ class Configuration
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "ConfigurationLocal", glyph: (int)Glyph.Local,
-                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name, options: options);
-            await VerifyItemExistsAsync(markup, "ConfigurationLocalFunction", glyph: (int)Glyph.MethodPublic,
-                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name, options: options);
+            await VerifyItemExistsAsync(
+                markup,
+                "ConfigurationLocal",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name,
+                options: options
+            );
+            await VerifyItemExistsAsync(
+                markup,
+                "ConfigurationLocalFunction",
+                glyph: (int)Glyph.MethodPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name,
+                options: options
+            );
             await VerifyItemIsAbsentAsync(markup, "ConfigurationField", options: options);
             await VerifyItemIsAbsentAsync(markup, "ConfigurationMethod", options: options);
             await VerifyItemIsAbsentAsync(markup, "ConfigurationProperty", options: options);
@@ -2475,7 +2684,8 @@ class Configuration
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionDoesNotUseForeachVariableName()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB {}
@@ -2492,15 +2702,20 @@ class ClassA
 }
 ";
             await VerifyItemIsAbsentAsync(markup, "classB");
-            await VerifyItemExistsAsync(markup, "classB1", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB1",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [WorkItem(31304, "https://github.com/dotnet/roslyn/issues/31304")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionDoesNotUseParameterName()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2512,15 +2727,20 @@ class ClassA
 }
 ";
             await VerifyItemIsAbsentAsync(markup, "classB");
-            await VerifyItemExistsAsync(markup, "classB1", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB1",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [WorkItem(31304, "https://github.com/dotnet/roslyn/issues/31304")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionCanUsePropertyName()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2533,15 +2753,20 @@ class ClassA
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [WorkItem(31304, "https://github.com/dotnet/roslyn/issues/31304")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionCanUseFieldName()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2554,15 +2779,20 @@ class ClassA
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [WorkItem(31304, "https://github.com/dotnet/roslyn/issues/31304")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionDoesNotUseLocalName()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2575,15 +2805,20 @@ class ClassA
 }
 ";
             await VerifyItemIsAbsentAsync(markup, "classB");
-            await VerifyItemExistsAsync(markup, "classB1", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB1",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [WorkItem(31304, "https://github.com/dotnet/roslyn/issues/31304")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionDoesNotUseLocalNameMultiple()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2598,15 +2833,20 @@ class ClassA
 ";
             await VerifyItemIsAbsentAsync(markup, "classB");
             await VerifyItemIsAbsentAsync(markup, "classB1");
-            await VerifyItemExistsAsync(markup, "classB2", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB2",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [WorkItem(31304, "https://github.com/dotnet/roslyn/issues/31304")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionDoesNotUseLocalInsideIf()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2622,15 +2862,20 @@ class ClassA
 }
 ";
             await VerifyItemIsAbsentAsync(markup, "classB");
-            await VerifyItemExistsAsync(markup, "classB1", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB1",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [WorkItem(31304, "https://github.com/dotnet/roslyn/issues/31304")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionCanUseClassName()
         {
-            var markup = @"
+            var markup =
+                @"
 class classA
 {
     void M()
@@ -2639,15 +2884,20 @@ class classA
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "classA", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classA",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [WorkItem(31304, "https://github.com/dotnet/roslyn/issues/31304")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionCanUseLocalInDifferentScope()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2663,8 +2913,12 @@ class ClassA
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [InlineData(LanguageVersion.CSharp7)]
@@ -2675,7 +2929,8 @@ class ClassA
         [WorkItem(42049, "https://github.com/dotnet/roslyn/issues/42049")]
         public async Task TestUseLocalAsLocalFunctionParameter(LanguageVersion languageVersion)
         {
-            var source = @"
+            var source =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2690,8 +2945,12 @@ class ClassA
 
             if (languageVersion.MapSpecifiedToEffectiveVersion() >= LanguageVersion.CSharp8)
             {
-                await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Parameter,
-                        expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+                await VerifyItemExistsAsync(
+                    markup,
+                    "classB",
+                    glyph: (int)Glyph.Parameter,
+                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+                );
             }
             else
             {
@@ -2705,9 +2964,12 @@ class ClassA
         [Theory, Trait(Traits.Feature, Traits.Features.Completion)]
         [WorkItem(35891, "https://github.com/dotnet/roslyn/issues/35891")]
         [WorkItem(42049, "https://github.com/dotnet/roslyn/issues/42049")]
-        public async Task TestCompletionDoesNotUseLocalAsLocalFunctionVariable(LanguageVersion languageVersion)
+        public async Task TestCompletionDoesNotUseLocalAsLocalFunctionVariable(
+            LanguageVersion languageVersion
+        )
         {
-            var source = @"
+            var source =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2729,7 +2991,8 @@ class ClassA
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionDoesNotUseLocalInNestedLocalFunction()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2753,7 +3016,8 @@ class ClassA
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionDoesNotUseLocalFunctionParameterInNestedLocalFunction()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2776,7 +3040,8 @@ class ClassA
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionCanUseLocalFunctionParameterAsParameter()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2787,15 +3052,20 @@ class ClassA
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Parameter,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Parameter,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [WorkItem(35891, "https://github.com/dotnet/roslyn/issues/35891")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionCanUseLocalFunctionVariableAsParameter()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2809,15 +3079,20 @@ class ClassA
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Parameter,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Parameter,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [WorkItem(35891, "https://github.com/dotnet/roslyn/issues/35891")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionCanUseLocalFunctionParameterAsVariable()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2831,15 +3106,20 @@ class ClassA
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [WorkItem(35891, "https://github.com/dotnet/roslyn/issues/35891")]
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestCompletionCanUseLocalFunctionVariableAsVariable()
         {
-            var markup = @"
+            var markup =
+                @"
 class ClassA
 {
     class ClassB { }
@@ -2856,14 +3136,19 @@ class ClassA
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestNotForUnboundAsync()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     async $$
@@ -2887,7 +3172,8 @@ class C
                 NamingStyleFallbackOptions = MultipleCamelCaseLocalRules()
             };
 
-            var markup = @"
+            var markup =
+                @"
 public class MyClass
 {
     void M()
@@ -2897,7 +3183,12 @@ public class MyClass
     }
 }
 ";
-            await VerifyItemExistsAsync(markup, "myClass1", glyph: (int)Glyph.Local, options: options);
+            await VerifyItemExistsAsync(
+                markup,
+                "myClass1",
+                glyph: (int)Glyph.Local,
+                options: options
+            );
         }
 
         private static NamingStylePreferences MultipleCamelCaseLocalRules()
@@ -2911,21 +3202,27 @@ public class MyClass
             return new NamingStylePreferences(
                 styles.Select(t => t.specification).ToImmutableArray(),
                 styles.Select(t => t.style).ToImmutableArray(),
-                styles.Select(t => CreateRule(t.specification, t.style)).ToImmutableArray());
+                styles.Select(t => CreateRule(t.specification, t.style)).ToImmutableArray()
+            );
 
             // Local functions
 
-            static (SymbolSpecification specification, NamingStyle style) SpecificationStyle(SymbolKindOrTypeKind kind, string name)
+            static (SymbolSpecification specification, NamingStyle style) SpecificationStyle(
+                SymbolKindOrTypeKind kind,
+                string name
+            )
             {
                 var symbolSpecification = new SymbolSpecification(
                     Guid.NewGuid(),
                     name,
-                    ImmutableArray.Create(kind));
+                    ImmutableArray.Create(kind)
+                );
 
                 var namingStyle = new NamingStyle(
                     Guid.NewGuid(),
                     name,
-                    capitalizationScheme: Capitalization.CamelCase);
+                    capitalizationScheme: Capitalization.CamelCase
+                );
 
                 return (symbolSpecification, namingStyle);
             }
@@ -2939,24 +3236,34 @@ public class MyClass
                 SpecificationStyle(new SymbolKindOrTypeKind(SymbolKind.Property), "Property"),
                 SpecificationStyle(new SymbolKindOrTypeKind(MethodKind.Ordinary), "Method"),
                 SpecificationStyle(new SymbolKindOrTypeKind(SymbolKind.Local), "Local"),
-                SpecificationStyle(new SymbolKindOrTypeKind(MethodKind.LocalFunction), "LocalFunction"),
+                SpecificationStyle(
+                    new SymbolKindOrTypeKind(MethodKind.LocalFunction),
+                    "LocalFunction"
+                ),
             };
 
             return new NamingStylePreferences(
                 specificationStyles.Select(t => t.specification).ToImmutableArray(),
                 specificationStyles.Select(t => t.style).ToImmutableArray(),
-                specificationStyles.Select(t => CreateRule(t.specification, t.style)).ToImmutableArray());
+                specificationStyles
+                    .Select(t => CreateRule(t.specification, t.style))
+                    .ToImmutableArray()
+            );
 
             // Local functions
 
-            static (SymbolSpecification specification, NamingStyle style) SpecificationStyle(SymbolKindOrTypeKind kind, string suffix)
+            static (SymbolSpecification specification, NamingStyle style) SpecificationStyle(
+                SymbolKindOrTypeKind kind,
+                string suffix
+            )
             {
                 var symbolSpecification = new SymbolSpecification(
                     Guid.NewGuid(),
                     name: suffix,
                     ImmutableArray.Create(kind),
                     accessibilityList: default,
-                    modifiers: default);
+                    modifiers: default
+                );
 
                 var namingStyle = new NamingStyle(
                     Guid.NewGuid(),
@@ -2964,7 +3271,8 @@ public class MyClass
                     capitalizationScheme: Capitalization.PascalCase,
                     prefix: "",
                     suffix: suffix,
-                    wordSeparator: "");
+                    wordSeparator: ""
+                );
 
                 return (symbolSpecification, namingStyle);
             }
@@ -2978,13 +3286,19 @@ public class MyClass
                     name: "parameters",
                     ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Parameter)),
                     accessibilityList: default,
-                    modifiers: default),
+                    modifiers: default
+                ),
                 new SymbolSpecification(
                     id: Guid.NewGuid(),
                     name: "fallback",
-                    ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Parameter), new SymbolKindOrTypeKind(SymbolKind.Local)),
+                    ImmutableArray.Create(
+                        new SymbolKindOrTypeKind(SymbolKind.Parameter),
+                        new SymbolKindOrTypeKind(SymbolKind.Local)
+                    ),
                     accessibilityList: default,
-                    modifiers: default));
+                    modifiers: default
+                )
+            );
             var namingStyles = ImmutableArray.Create(
                 new NamingStyle(
                     Guid.NewGuid(),
@@ -2992,23 +3306,31 @@ public class MyClass
                     capitalizationScheme: Capitalization.CamelCase,
                     prefix: "",
                     suffix: "",
-                    wordSeparator: ""),
+                    wordSeparator: ""
+                ),
                 new NamingStyle(
                     Guid.NewGuid(),
                     name: "any_symbol",
                     capitalizationScheme: Capitalization.PascalCase,
                     prefix: "",
                     suffix: "",
-                    wordSeparator: ""));
+                    wordSeparator: ""
+                )
+            );
             return new NamingStylePreferences(
                 symbolSpecifications,
                 namingStyles,
                 namingRules: ImmutableArray.Create(
                     CreateRule(symbolSpecifications[0], namingStyles[0]),
-                    CreateRule(symbolSpecifications[1], namingStyles[1])));
+                    CreateRule(symbolSpecifications[1], namingStyles[1])
+                )
+            );
         }
 
-        private static SerializableNamingRule CreateRule(SymbolSpecification specification, NamingStyle style)
+        private static SerializableNamingRule CreateRule(
+            SymbolSpecification specification,
+            NamingStyle style
+        )
         {
             return new SerializableNamingRule()
             {

@@ -26,8 +26,11 @@ namespace System.Formats.Tar
         /// <param name="archiveStream">The stream to write to.</param>
         /// <param name="globalExtendedAttributes">An optional enumeration of string key-value pairs that represent Global Extended Attributes metadata that should apply to all subsquent entries. If <see langword="null"/>, then no Global Extended Attributes entry is written. If an empty instance is passed, a Global Extended Attributes entry is written with default values.</param>
         /// <param name="leaveOpen"><see langword="false"/> to dispose the <paramref name="archiveStream"/> when this instance is disposed; <see langword="true"/> to leave the stream open.</param>
-        public TarWriter(Stream archiveStream, IEnumerable<KeyValuePair<string, string>>? globalExtendedAttributes = null, bool leaveOpen = false)
-            : this(archiveStream, TarFormat.Pax, leaveOpen)
+        public TarWriter(
+            Stream archiveStream,
+            IEnumerable<KeyValuePair<string, string>>? globalExtendedAttributes = null,
+            bool leaveOpen = false
+        ) : this(archiveStream, TarFormat.Pax, leaveOpen)
         {
             _globalExtendedAttributes = globalExtendedAttributes;
         }
@@ -52,7 +55,13 @@ namespace System.Formats.Tar
                 throw new IOException(SR.IO_NotSupported_UnwritableStream);
             }
 
-            if (archiveFormat is not TarFormat.V7 and not TarFormat.Ustar and not TarFormat.Pax and not TarFormat.Gnu)
+            if (
+                archiveFormat
+                is not TarFormat.V7
+                    and not TarFormat.Ustar
+                    and not TarFormat.Pax
+                    and not TarFormat.Gnu
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(archiveFormat));
             }
@@ -252,7 +261,6 @@ namespace System.Formats.Tar
                         WriteFinalRecords();
                     }
 
-
                     if (!_leaveOpen)
                     {
                         _archiveStream.Dispose();
@@ -294,7 +302,11 @@ namespace System.Formats.Tar
                     Span<byte> buffer = rented.AsSpan(0, TarHelpers.RecordSize);
                     buffer.Clear(); // Rented arrays aren't clean
                     // Write the GEA entry regardless if it has values or not
-                    TarHeader.WriteGlobalExtendedAttributesHeader(_archiveStream, buffer, _globalExtendedAttributes);
+                    TarHeader.WriteGlobalExtendedAttributesHeader(
+                        _archiveStream,
+                        buffer,
+                        _globalExtendedAttributes
+                    );
                 }
                 finally
                 {
@@ -315,6 +327,9 @@ namespace System.Formats.Tar
         }
 
         // Partial method for reading an entry from disk and writing it into the archive stream.
-        partial void ReadFileFromDiskAndWriteToArchiveStreamAsEntry(string fullPath, string entryName);
+        partial void ReadFileFromDiskAndWriteToArchiveStreamAsEntry(
+            string fullPath,
+            string entryName
+        );
     }
 }

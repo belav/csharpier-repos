@@ -26,28 +26,59 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 {
-    internal partial class StringCopyPasteCommandHandler :
-        IChainedCommandHandler<CutCommandArgs>,
-        IChainedCommandHandler<CopyCommandArgs>
+    internal partial class StringCopyPasteCommandHandler
+        : IChainedCommandHandler<CutCommandArgs>,
+            IChainedCommandHandler<CopyCommandArgs>
     {
         public const string KeyAndVersion = nameof(StringCopyPasteCommandHandler) + "V1";
 
-        public CommandState GetCommandState(CutCommandArgs args, Func<CommandState> nextCommandHandler)
-            => nextCommandHandler();
+        public CommandState GetCommandState(
+            CutCommandArgs args,
+            Func<CommandState> nextCommandHandler
+        ) => nextCommandHandler();
 
-        public CommandState GetCommandState(CopyCommandArgs args, Func<CommandState> nextCommandHandler)
-            => nextCommandHandler();
+        public CommandState GetCommandState(
+            CopyCommandArgs args,
+            Func<CommandState> nextCommandHandler
+        ) => nextCommandHandler();
 
-        public void ExecuteCommand(CutCommandArgs args, Action nextCommandHandler, CommandExecutionContext executionContext)
-            => ExecuteCutOrCopyCommand(args.TextView, args.SubjectBuffer, nextCommandHandler, executionContext);
+        public void ExecuteCommand(
+            CutCommandArgs args,
+            Action nextCommandHandler,
+            CommandExecutionContext executionContext
+        ) =>
+            ExecuteCutOrCopyCommand(
+                args.TextView,
+                args.SubjectBuffer,
+                nextCommandHandler,
+                executionContext
+            );
 
-        public void ExecuteCommand(CopyCommandArgs args, Action nextCommandHandler, CommandExecutionContext executionContext)
-            => ExecuteCutOrCopyCommand(args.TextView, args.SubjectBuffer, nextCommandHandler, executionContext);
+        public void ExecuteCommand(
+            CopyCommandArgs args,
+            Action nextCommandHandler,
+            CommandExecutionContext executionContext
+        ) =>
+            ExecuteCutOrCopyCommand(
+                args.TextView,
+                args.SubjectBuffer,
+                nextCommandHandler,
+                executionContext
+            );
 
-        private void ExecuteCutOrCopyCommand(ITextView textView, ITextBuffer subjectBuffer, Action nextCommandHandler, CommandExecutionContext executionContext)
+        private void ExecuteCutOrCopyCommand(
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            Action nextCommandHandler,
+            CommandExecutionContext executionContext
+        )
         {
             Contract.ThrowIfFalse(_threadingContext.HasMainThread);
-            var (dataToStore, copyPasteService) = CaptureCutCopyInformation(textView, subjectBuffer, executionContext.OperationContext.UserCancellationToken);
+            var (dataToStore, copyPasteService) = CaptureCutCopyInformation(
+                textView,
+                subjectBuffer,
+                executionContext.OperationContext.UserCancellationToken
+            );
 
             // Ensure that the copy always goes through all other handlers.
             nextCommandHandler();
@@ -59,20 +90,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         }
 
         private static (string? dataToStore, IStringCopyPasteService service) CaptureCutCopyInformation(
-            ITextView textView, ITextBuffer subjectBuffer, CancellationToken cancellationToken)
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            CancellationToken cancellationToken
+        )
         {
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return default;
 
-            var copyPasteService = document.Project.Solution.Workspace.Services.GetService<IStringCopyPasteService>();
+            var copyPasteService =
+                document.Project.Solution.Workspace.Services.GetService<IStringCopyPasteService>();
             if (copyPasteService == null)
                 return default;
 
             var spans = textView.Selection.GetSnapshotSpansOnBuffer(subjectBuffer);
 
             // We only support smart copy/paste when a single selection is copied (and a single selection is pasted
-            // over).  This vastly simplifies the logic we need, and it means we don't have to try to reimplement the 
+            // over).  This vastly simplifies the logic we need, and it means we don't have to try to reimplement the
             // editor logic for what it means when you are copying X selections and pasting over Y selections.
             if (spans.Count != 1)
                 return default;
@@ -87,12 +123,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             }
 
             var stringExpression = TryGetCompatibleContainingStringExpression(
-                document, new NormalizedSnapshotSpanCollection(span), cancellationToken);
+                document,
+                new NormalizedSnapshotSpanCollection(span),
+                cancellationToken
+            );
             if (stringExpression is null)
                 return default;
 
-            var virtualCharService = document.GetRequiredLanguageService<IVirtualCharLanguageService>();
-            var stringData = StringCopyPasteData.TryCreate(virtualCharService, stringExpression, span.Span.ToTextSpan());
+            var virtualCharService =
+                document.GetRequiredLanguageService<IVirtualCharLanguageService>();
+            var stringData = StringCopyPasteData.TryCreate(
+                virtualCharService,
+                stringExpression,
+                span.Span.ToTextSpan()
+            );
 
             return (stringData?.ToJson(), copyPasteService);
         }

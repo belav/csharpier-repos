@@ -45,7 +45,10 @@ public static class PollyServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <param name="registry">The <see cref="IPolicyRegistry{String}"/>.</param>
     /// <returns>The provided <see cref="IPolicyRegistry{String}"/>.</returns>
-    public static IPolicyRegistry<string> AddPolicyRegistry(this IServiceCollection services, IPolicyRegistry<string> registry)
+    public static IPolicyRegistry<string> AddPolicyRegistry(
+        this IServiceCollection services,
+        IPolicyRegistry<string> registry
+    )
     {
         if (services == null)
         {
@@ -76,7 +79,10 @@ public static class PollyServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <param name="configureRegistry">A delegate that is used to configure an <see cref="IPolicyRegistry{String}"/>.</param>
     /// <returns>The provided <see cref="IServiceCollection"/>.</returns>
-    public static IServiceCollection AddPolicyRegistry(this IServiceCollection services, Action<IServiceProvider, IPolicyRegistry<string>> configureRegistry)
+    public static IServiceCollection AddPolicyRegistry(
+        this IServiceCollection services,
+        Action<IServiceProvider, IPolicyRegistry<string>> configureRegistry
+    )
     {
         if (services == null)
         {
@@ -99,9 +105,15 @@ public static class PollyServiceCollectionExtensions
             return registry;
         });
 
-        services.AddSingleton<IConcurrentPolicyRegistry<string>>(serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>());
-        services.AddSingleton<IPolicyRegistry<string>>(serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>());
-        services.AddSingleton<IReadOnlyPolicyRegistry<string>>(serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>());
+        services.AddSingleton<IConcurrentPolicyRegistry<string>>(
+            serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>()
+        );
+        services.AddSingleton<IPolicyRegistry<string>>(
+            serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>()
+        );
+        services.AddSingleton<IReadOnlyPolicyRegistry<string>>(
+            serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>()
+        );
 
         return services;
     }

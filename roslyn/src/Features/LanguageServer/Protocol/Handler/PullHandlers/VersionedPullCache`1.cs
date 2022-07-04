@@ -11,28 +11,27 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     /// <summary>
-    /// Simplified version of <see cref="VersionedPullCache{TCheapVersion, TExpensiveVersion}"/> that only uses a 
+    /// Simplified version of <see cref="VersionedPullCache{TCheapVersion, TExpensiveVersion}"/> that only uses a
     /// single cheap key to check results against.
     /// </summary>
     internal class VersionedPullCache<TVersion> : VersionedPullCache<TVersion, object?>
     {
-        public VersionedPullCache(string uniqueKey)
-            : base(uniqueKey)
-        {
-        }
+        public VersionedPullCache(string uniqueKey) : base(uniqueKey) { }
 
         public Task<string?> GetNewResultIdAsync(
             Dictionary<Document, PreviousPullResult> documentToPreviousDiagnosticParams,
             Document document,
             Func<Task<TVersion>> computeVersionAsync,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return GetNewResultIdAsync(
                 documentToPreviousDiagnosticParams,
                 document,
                 computeVersionAsync,
                 computeExpensiveVersionAsync: SpecializedTasks.Null<object>,
-                cancellationToken);
+                cancellationToken
+            );
         }
     }
 }

@@ -9,25 +9,45 @@ using Internal.TypeSystem;
 using ILCompiler.DependencyAnalysisFramework;
 using ILCompiler.DependencyAnalysis;
 
-using DependencyList=ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
-using CombinedDependencyList=System.Collections.Generic.List<ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.CombinedDependencyListEntry>;
-using DependencyListEntry=ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyListEntry;
+using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
+using CombinedDependencyList = System.Collections.Generic.List<ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.CombinedDependencyListEntry>;
+using DependencyListEntry = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyListEntry;
 
 namespace ILCompiler.DependencyAnalysis
 {
     public static class CodeBasedDependencyAlgorithm
     {
-        public static void AddDependenciesDueToMethodCodePresence(ref DependencyList dependencies, NodeFactory factory, MethodDesc method, MethodIL methodIL)
+        public static void AddDependenciesDueToMethodCodePresence(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method,
+            MethodIL methodIL
+        )
         {
-            factory.MetadataManager.GetDependenciesDueToMethodCodePresence(ref dependencies, factory, method, methodIL);
+            factory.MetadataManager.GetDependenciesDueToMethodCodePresence(
+                ref dependencies,
+                factory,
+                method,
+                methodIL
+            );
 
-            factory.InteropStubManager.AddDependenciesDueToPInvoke(ref dependencies, factory, method);
+            factory.InteropStubManager.AddDependenciesDueToPInvoke(
+                ref dependencies,
+                factory,
+                method
+            );
 
-            if (method.OwningType is MetadataType mdOwningType
-                && mdOwningType.Module.GetGlobalModuleType().GetStaticConstructor() is MethodDesc moduleCctor)
+            if (
+                method.OwningType is MetadataType mdOwningType
+                && mdOwningType.Module.GetGlobalModuleType().GetStaticConstructor()
+                    is MethodDesc moduleCctor
+            )
             {
                 dependencies ??= new DependencyList();
-                dependencies.Add(factory.MethodEntrypoint(moduleCctor), "Method in a module with initializer");
+                dependencies.Add(
+                    factory.MethodEntrypoint(moduleCctor),
+                    "Method in a module with initializer"
+                );
             }
 
             if (method.IsIntrinsic)
@@ -41,21 +61,27 @@ namespace ILCompiler.DependencyAnalysis
                         // The general purpose code in Comparer/EqualityComparer Create method depends on the template
                         // type loader being able to load the necessary types at runtime.
                         case "Create":
-                            if (method.IsSharedByGenericInstantiations
+                            if (
+                                method.IsSharedByGenericInstantiations
                                 && owningType.Module == factory.TypeSystemContext.SystemModule
-                                && owningType.Namespace == "System.Collections.Generic")
+                                && owningType.Namespace == "System.Collections.Generic"
+                            )
                             {
                                 TypeDesc[] templateDependencies = null;
 
                                 if (owningType.Name == "Comparer`1")
                                 {
-                                    templateDependencies = Internal.IL.Stubs.ComparerIntrinsics.GetPotentialComparersForType(
-                                        owningType.Instantiation[0]);
+                                    templateDependencies =
+                                        Internal.IL.Stubs.ComparerIntrinsics.GetPotentialComparersForType(
+                                            owningType.Instantiation[0]
+                                        );
                                 }
                                 else if (owningType.Name == "EqualityComparer`1")
                                 {
-                                    templateDependencies = Internal.IL.Stubs.ComparerIntrinsics.GetPotentialEqualityComparersForType(
-                                        owningType.Instantiation[0]);
+                                    templateDependencies =
+                                        Internal.IL.Stubs.ComparerIntrinsics.GetPotentialEqualityComparersForType(
+                                            owningType.Instantiation[0]
+                                        );
                                 }
 
                                 if (templateDependencies != null)
@@ -63,7 +89,10 @@ namespace ILCompiler.DependencyAnalysis
                                     dependencies = dependencies ?? new DependencyList();
                                     foreach (TypeDesc templateType in templateDependencies)
                                     {
-                                        dependencies.Add(factory.NativeLayout.TemplateTypeLayout(templateType), "Generic comparer");
+                                        dependencies.Add(
+                                            factory.NativeLayout.TemplateTypeLayout(templateType),
+                                            "Generic comparer"
+                                        );
                                     }
                                 }
                             }
@@ -79,9 +108,17 @@ namespace ILCompiler.DependencyAnalysis
             return method.HasInstantiation || method.OwningType.HasInstantiation;
         }
 
-        public static void AddConditionalDependenciesDueToMethodCodePresence(ref CombinedDependencyList dependencies, NodeFactory factory, MethodDesc method)
+        public static void AddConditionalDependenciesDueToMethodCodePresence(
+            ref CombinedDependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method
+        )
         {
-            factory.MetadataManager.GetConditionalDependenciesDueToMethodCodePresence(ref dependencies, factory, method);
+            factory.MetadataManager.GetConditionalDependenciesDueToMethodCodePresence(
+                ref dependencies,
+                factory,
+                method
+            );
         }
     }
 }

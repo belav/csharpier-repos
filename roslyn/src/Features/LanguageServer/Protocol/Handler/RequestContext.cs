@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             ImmutableDictionary<Uri, SourceText> trackedDocuments,
             ImmutableArray<string> supportedLanguages,
             LspServices lspServices,
-            CancellationToken queueCancellationToken)
+            CancellationToken queueCancellationToken
+        )
         {
             Document = document;
             Solution = solution;
@@ -101,11 +102,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             ImmutableArray<string> supportedLanguages,
             LspServices lspServices,
             CancellationToken queueCancellationToken,
-            CancellationToken requestCancellationToken)
+            CancellationToken requestCancellationToken
+        )
         {
             var lspWorkspaceManager = lspServices.GetRequiredService<LspWorkspaceManager>();
             var logger = lspServices.GetRequiredService<ILspLogger>();
-            var documentChangeTracker = mutatesSolutionState ? (IDocumentChangeTracker)lspWorkspaceManager : new NonMutatingDocumentChangeTracker();
+            var documentChangeTracker = mutatesSolutionState
+                ? (IDocumentChangeTracker)lspWorkspaceManager
+                : new NonMutatingDocumentChangeTracker();
 
             // Retrieve the current LSP tracked text as of this request.
             // This is safe as all creation of request contexts cannot happen concurrently.
@@ -118,22 +122,36 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             if (!requiresLSPSolution)
             {
                 return new RequestContext(
-                    solution: null, logger: logger, clientCapabilities: clientCapabilities, serverKind: serverKind, document: null,
-                    documentChangeTracker: documentChangeTracker, trackedDocuments: trackedDocuments, supportedLanguages: supportedLanguages, lspServices: lspServices,
-                    queueCancellationToken: queueCancellationToken);
+                    solution: null,
+                    logger: logger,
+                    clientCapabilities: clientCapabilities,
+                    serverKind: serverKind,
+                    document: null,
+                    documentChangeTracker: documentChangeTracker,
+                    trackedDocuments: trackedDocuments,
+                    supportedLanguages: supportedLanguages,
+                    lspServices: lspServices,
+                    queueCancellationToken: queueCancellationToken
+                );
             }
 
             Solution? workspaceSolution;
             Document? document = null;
             if (textDocument is not null)
             {
-                // we were given a request associated with a document.  Find the corresponding roslyn document for this. 
+                // we were given a request associated with a document.  Find the corresponding roslyn document for this.
                 // There are certain cases where we may be asked for a document that does not exist (for example a document is removed)
                 // For example, document pull diagnostics can ask us after removal to clear diagnostics for a document.
-                document = await lspWorkspaceManager.GetLspDocumentAsync(textDocument, requestCancellationToken).ConfigureAwait(false);
+                document = await lspWorkspaceManager
+                    .GetLspDocumentAsync(textDocument, requestCancellationToken)
+                    .ConfigureAwait(false);
             }
 
-            workspaceSolution = document?.Project.Solution ?? await lspWorkspaceManager.TryGetHostLspSolutionAsync(requestCancellationToken).ConfigureAwait(false);
+            workspaceSolution =
+                document?.Project.Solution
+                ?? await lspWorkspaceManager
+                    .TryGetHostLspSolutionAsync(requestCancellationToken)
+                    .ConfigureAwait(false);
 
             if (workspaceSolution == null)
             {
@@ -151,7 +169,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 trackedDocuments,
                 supportedLanguages,
                 lspServices,
-                queueCancellationToken);
+                queueCancellationToken
+            );
             return context;
         }
 
@@ -159,19 +178,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         /// Allows a mutating request to open a document and start it being tracked.
         /// Mutating requests are serialized by the execution queue in order to prevent concurrent access.
         /// </summary>
-        public void StartTracking(Uri uri, SourceText initialText)
-            => _documentChangeTracker.StartTracking(uri, initialText);
+        public void StartTracking(Uri uri, SourceText initialText) =>
+            _documentChangeTracker.StartTracking(uri, initialText);
 
         /// <summary>
         /// Allows a mutating request to update the contents of a tracked document.
         /// Mutating requests are serialized by the execution queue in order to prevent concurrent access.
         /// </summary>
-        public void UpdateTrackedDocument(Uri uri, SourceText changedText)
-            => _documentChangeTracker.UpdateTrackedDocument(uri, changedText);
+        public void UpdateTrackedDocument(Uri uri, SourceText changedText) =>
+            _documentChangeTracker.UpdateTrackedDocument(uri, changedText);
 
         public SourceText GetTrackedDocumentSourceText(Uri documentUri)
         {
-            Contract.ThrowIfFalse(_trackedDocuments.ContainsKey(documentUri), $"Attempted to get text for {documentUri} which is not open.");
+            Contract.ThrowIfFalse(
+                _trackedDocuments.ContainsKey(documentUri),
+                $"Attempted to get text for {documentUri} which is not open."
+            );
             return _trackedDocuments[documentUri];
         }
 
@@ -179,26 +201,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         /// Allows a mutating request to close a document and stop it being tracked.
         /// Mutating requests are serialized by the execution queue in order to prevent concurrent access.
         /// </summary>
-        public void StopTracking(Uri uri)
-            => _documentChangeTracker.StopTracking(uri);
+        public void StopTracking(Uri uri) => _documentChangeTracker.StopTracking(uri);
 
-        public bool IsTracking(Uri documentUri)
-            => _trackedDocuments.ContainsKey(documentUri);
+        public bool IsTracking(Uri documentUri) => _trackedDocuments.ContainsKey(documentUri);
 
         /// <summary>
         /// Logs an informational message.
         /// </summary>
-        public void TraceInformation(string message)
-            => _logger.TraceInformation(message);
+        public void TraceInformation(string message) => _logger.TraceInformation(message);
 
-        public void TraceWarning(string message)
-            => _logger.TraceWarning(message);
+        public void TraceWarning(string message) => _logger.TraceWarning(message);
 
-        public void TraceError(string message)
-            => _logger.TraceError(message);
+        public void TraceError(string message) => _logger.TraceError(message);
 
-        public void TraceException(Exception exception)
-            => _logger.TraceException(exception);
+        public void TraceException(Exception exception) => _logger.TraceException(exception);
 
         public T GetRequiredLspService<T>() where T : class, ILspService
         {

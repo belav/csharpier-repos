@@ -8,17 +8,15 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class SqliteTestHelpers : TestHelpers
 {
-    protected SqliteTestHelpers()
-    {
-    }
+    protected SqliteTestHelpers() { }
 
     public static SqliteTestHelpers Instance { get; } = new();
 
-    public override IServiceCollection AddProviderServices(IServiceCollection services)
-        => services.AddEntityFrameworkSqlite();
+    public override IServiceCollection AddProviderServices(IServiceCollection services) =>
+        services.AddEntityFrameworkSqlite();
 
-    public override void UseProviderOptions(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite(new SqliteConnection("Data Source=:memory:"));
+    public override void UseProviderOptions(DbContextOptionsBuilder optionsBuilder) =>
+        optionsBuilder.UseSqlite(new SqliteConnection("Data Source=:memory:"));
 
     public override LoggingDefinitions LoggingDefinitions { get; } = new SqliteLoggingDefinitions();
 }

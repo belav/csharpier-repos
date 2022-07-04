@@ -18,7 +18,9 @@ namespace System.Net.Quic.Tests
         public void UnsupportedPlatforms_ThrowsPlatformNotSupportedException()
         {
             Assert.Throws<PlatformNotSupportedException>(() => CreateQuicListener());
-            Assert.Throws<PlatformNotSupportedException>(() => CreateQuicConnection(new IPEndPoint(IPAddress.Loopback, 0)));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => CreateQuicConnection(new IPEndPoint(IPAddress.Loopback, 0))
+            );
         }
     }
 }

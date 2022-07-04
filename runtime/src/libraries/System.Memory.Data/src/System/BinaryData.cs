@@ -18,7 +18,8 @@ namespace System
     /// </summary>
     public class BinaryData
     {
-        private const string JsonSerializerRequiresUnreferencedCode = "JSON serialization and deserialization might require types that cannot be statically analyzed.";
+        private const string JsonSerializerRequiresUnreferencedCode =
+            "JSON serialization and deserialization might require types that cannot be statically analyzed.";
 
         /// <summary>
         /// The backing store for the <see cref="BinaryData"/> instance.
@@ -50,7 +51,11 @@ namespace System
         /// <param name="type">The type to use when serializing the data. If not specified, <see cref="object.GetType"/> will
         /// be used to determine the type.</param>
         [RequiresUnreferencedCode(JsonSerializerRequiresUnreferencedCode)]
-        public BinaryData(object? jsonSerializable, JsonSerializerOptions? options = default, Type? type = default)
+        public BinaryData(
+            object? jsonSerializable,
+            JsonSerializerOptions? options = default,
+            Type? type = default
+        )
         {
             type ??= jsonSerializable?.GetType() ?? typeof(object);
 
@@ -66,7 +71,11 @@ namespace System
         /// <param name="context">The <see cref="JsonSerializerContext" /> to use when serializing to JSON.</param>
         /// <param name="type">The type to use when serializing the data. If not specified, <see cref="object.GetType"/> will
         /// be used to determine the type.</param>
-        public BinaryData(object? jsonSerializable, JsonSerializerContext context, Type? type = default)
+        public BinaryData(
+            object? jsonSerializable,
+            JsonSerializerContext context,
+            Type? type = default
+        )
         {
             type ??= jsonSerializable?.GetType() ?? typeof(object);
 
@@ -145,7 +154,10 @@ namespace System
         /// <param name="stream">Stream containing the data.</param>
         /// <param name="cancellationToken">A token that may be used to cancel the operation.</param>
         /// <returns>A value representing all of the data remaining in <paramref name="stream"/>.</returns>
-        public static Task<BinaryData> FromStreamAsync(Stream stream, CancellationToken cancellationToken = default)
+        public static Task<BinaryData> FromStreamAsync(
+            Stream stream,
+            CancellationToken cancellationToken = default
+        )
         {
             if (stream is null)
             {
@@ -155,9 +167,13 @@ namespace System
             return FromStreamAsync(stream, async: true, cancellationToken);
         }
 
-        private static async Task<BinaryData> FromStreamAsync(Stream stream, bool async, CancellationToken cancellationToken = default)
+        private static async Task<BinaryData> FromStreamAsync(
+            Stream stream,
+            bool async,
+            CancellationToken cancellationToken = default
+        )
         {
-            const int CopyToBufferSize = 81920;  // the default used by Stream.CopyToAsync
+            const int CopyToBufferSize = 81920; // the default used by Stream.CopyToAsync
             int bufferSize = CopyToBufferSize;
             MemoryStream memoryStream;
 
@@ -166,7 +182,10 @@ namespace System
                 long longLength = stream.Length - stream.Position;
                 if (longLength > int.MaxValue || longLength < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(stream), SR.ArgumentOutOfRange_StreamLengthMustBeNonNegativeInt32);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(stream),
+                        SR.ArgumentOutOfRange_StreamLengthMustBeNonNegativeInt32
+                    );
                 }
 
                 // choose a minimum valid (non-zero) buffer size.
@@ -182,13 +201,17 @@ namespace System
             {
                 if (async)
                 {
-                    await stream.CopyToAsync(memoryStream, bufferSize, cancellationToken).ConfigureAwait(false);
+                    await stream
+                        .CopyToAsync(memoryStream, bufferSize, cancellationToken)
+                        .ConfigureAwait(false);
                 }
                 else
                 {
                     stream.CopyTo(memoryStream, bufferSize);
                 }
-                return new BinaryData(memoryStream.GetBuffer().AsMemory(0, (int)memoryStream.Position));
+                return new BinaryData(
+                    memoryStream.GetBuffer().AsMemory(0, (int)memoryStream.Position)
+                );
             }
         }
 
@@ -201,9 +224,16 @@ namespace System
         /// <param name="options">The options to use when serializing to JSON.</param>
         /// <returns>A value representing the UTF-8 encoding of the JSON representation of <paramref name="jsonSerializable" />.</returns>
         [RequiresUnreferencedCode(JsonSerializerRequiresUnreferencedCode)]
-        public static BinaryData FromObjectAsJson<T>(T jsonSerializable, JsonSerializerOptions? options = default)
+        public static BinaryData FromObjectAsJson<T>(
+            T jsonSerializable,
+            JsonSerializerOptions? options = default
+        )
         {
-            byte[] buffer = JsonSerializer.SerializeToUtf8Bytes(jsonSerializable, typeof(T), options);
+            byte[] buffer = JsonSerializer.SerializeToUtf8Bytes(
+                jsonSerializable,
+                typeof(T),
+                options
+            );
             return new BinaryData(buffer);
         }
 
@@ -215,8 +245,10 @@ namespace System
         /// <param name="jsonSerializable">The data to use.</param>
         /// <param name="jsonTypeInfo">The <see cref="JsonTypeInfo"/> to use when serializing to JSON.</param>
         /// <returns>A value representing the UTF-8 encoding of the JSON representation of <paramref name="jsonSerializable" />.</returns>
-        public static BinaryData FromObjectAsJson<T>(T jsonSerializable, JsonTypeInfo<T> jsonTypeInfo)
-            => new BinaryData(JsonSerializer.SerializeToUtf8Bytes(jsonSerializable, jsonTypeInfo));
+        public static BinaryData FromObjectAsJson<T>(
+            T jsonSerializable,
+            JsonTypeInfo<T> jsonTypeInfo
+        ) => new BinaryData(JsonSerializer.SerializeToUtf8Bytes(jsonSerializable, jsonTypeInfo));
 
         /// <summary>
         /// Converts the value of this instance to a string using UTF-8.
@@ -286,14 +318,15 @@ namespace System
         /// converted to.</typeparam>
         /// <param name="jsonTypeInfo">The <see cref="JsonTypeInfo"/> to use when serializing to JSON.</param>
         /// <returns>The data converted to the specified type.</returns>
-        public T? ToObjectFromJson<T>(JsonTypeInfo<T> jsonTypeInfo)
-            => JsonSerializer.Deserialize<T>(_bytes.Span, jsonTypeInfo);
+        public T? ToObjectFromJson<T>(JsonTypeInfo<T> jsonTypeInfo) =>
+            JsonSerializer.Deserialize<T>(_bytes.Span, jsonTypeInfo);
 
         /// <summary>
         /// Defines an implicit conversion from a <see cref="BinaryData" /> to a <see cref="ReadOnlyMemory{Byte}"/>.
         /// </summary>
         /// <param name="data">The value to be converted.</param>
-        public static implicit operator ReadOnlyMemory<byte>(BinaryData? data) => data?._bytes ?? default;
+        public static implicit operator ReadOnlyMemory<byte>(BinaryData? data) =>
+            data?._bytes ?? default;
 
         /// <summary>
         /// Defines an implicit conversion from a <see cref="BinaryData" /> to a <see cref="ReadOnlySpan{Byte}"/>.

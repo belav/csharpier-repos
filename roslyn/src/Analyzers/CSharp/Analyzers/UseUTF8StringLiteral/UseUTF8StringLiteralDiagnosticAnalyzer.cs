@@ -21,7 +21,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class UseUTF8StringLiteralDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class UseUTF8StringLiteralDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public enum ArrayCreationOperationLocation
         {
@@ -31,31 +32,44 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
         }
 
         public UseUTF8StringLiteralDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseUTF8StringLiteralDiagnosticId,
+            : base(
+                IDEDiagnosticIds.UseUTF8StringLiteralDiagnosticId,
                 EnforceOnBuildValues.UseUTF8StringLiteral,
                 CSharpCodeStyleOptions.PreferUtf8StringLiterals,
                 LanguageNames.CSharp,
-                new LocalizableResourceString(nameof(CSharpAnalyzersResources.Convert_to_UTF8_string_literal), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_UTF8_string_literal), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Convert_to_UTF8_string_literal),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_UTF8_string_literal),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterCompilationStartAction(context =>
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterCompilationStartAction(context =>
             {
                 if (!context.Compilation.LanguageVersion().IsCSharp11OrAbove())
                     return;
 
-                var expressionType = context.Compilation.GetTypeByMetadataName(typeof(System.Linq.Expressions.Expression<>).FullName!);
+                var expressionType = context.Compilation.GetTypeByMetadataName(
+                    typeof(System.Linq.Expressions.Expression<>).FullName!
+                );
 
-                // Temporarily disabling, https://github.com/dotnet/roslyn/issues/61517 tracks the follow up work  
+                // Temporarily disabling, https://github.com/dotnet/roslyn/issues/61517 tracks the follow up work
                 // context.RegisterOperationAction(c => AnalyzeOperation(c, expressionType), OperationKind.ArrayCreation);
             });
 
-        private void AnalyzeOperation(OperationAnalysisContext context, INamedTypeSymbol? expressionType)
+        private void AnalyzeOperation(
+            OperationAnalysisContext context,
+            INamedTypeSymbol? expressionType
+        )
         {
             var arrayCreationOperation = (IArrayCreationOperation)context.Operation;
 
@@ -73,7 +87,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
                 return;
 
             // Must be a byte array
-            if (arrayCreationOperation.Type is not IArrayTypeSymbol { ElementType.SpecialType: SpecialType.System_Byte })
+            if (
+                arrayCreationOperation.Type
+                is not IArrayTypeSymbol { ElementType.SpecialType: SpecialType.System_Byte }
+            )
                 return;
 
             // UTF8 strings are not valid to use in attributes
@@ -83,7 +100,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
             // Can't use a UTF8 string inside an expression tree.
             var semanticModel = context.Operation.SemanticModel;
             Contract.ThrowIfNull(semanticModel);
-            if (arrayCreationOperation.Syntax.IsInExpressionTree(semanticModel, expressionType, context.CancellationToken))
+            if (
+                arrayCreationOperation.Syntax.IsInExpressionTree(
+                    semanticModel,
+                    expressionType,
+                    context.CancellationToken
+                )
+            )
                 return;
 
             var elements = arrayCreationOperation.Initializer.ElementValues;
@@ -96,58 +119,119 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
             if (!TryConvertToUTF8String(builder: null, elements))
                 return;
 
-            if (arrayCreationOperation.Syntax is ImplicitArrayCreationExpressionSyntax or ArrayCreationExpressionSyntax)
+            if (
+                arrayCreationOperation.Syntax
+                is ImplicitArrayCreationExpressionSyntax
+                    or ArrayCreationExpressionSyntax
+            )
             {
-                ReportArrayCreationDiagnostic(context, arrayCreationOperation.Syntax, option.Notification.Severity);
+                ReportArrayCreationDiagnostic(
+                    context,
+                    arrayCreationOperation.Syntax,
+                    option.Notification.Severity
+                );
             }
             else if (elements.Length > 0 && elements[0].Syntax.Parent is ArgumentSyntax)
             {
                 // For regular parameter arrays the code fix will need to search down
-                ReportParameterArrayDiagnostic(context, arrayCreationOperation.Syntax, elements, option.Notification.Severity, ArrayCreationOperationLocation.Descendants);
+                ReportParameterArrayDiagnostic(
+                    context,
+                    arrayCreationOperation.Syntax,
+                    elements,
+                    option.Notification.Severity,
+                    ArrayCreationOperationLocation.Descendants
+                );
             }
-            else if (elements.Length > 0 && elements[0].Syntax.Parent.IsKind(SyntaxKind.CollectionInitializerExpression))
+            else if (
+                elements.Length > 0
+                && elements[0].Syntax.Parent.IsKind(SyntaxKind.CollectionInitializerExpression)
+            )
             {
                 // For collection initializers where the Add method takes a parameter array, the code fix
                 // will have to search up
-                ReportParameterArrayDiagnostic(context, arrayCreationOperation.Syntax, elements, option.Notification.Severity, ArrayCreationOperationLocation.Ancestors);
+                ReportParameterArrayDiagnostic(
+                    context,
+                    arrayCreationOperation.Syntax,
+                    elements,
+                    option.Notification.Severity,
+                    ArrayCreationOperationLocation.Ancestors
+                );
             }
         }
 
-        private void ReportParameterArrayDiagnostic(OperationAnalysisContext context, SyntaxNode syntaxNode, ImmutableArray<IOperation> elements, ReportDiagnostic severity, ArrayCreationOperationLocation operationLocation)
+        private void ReportParameterArrayDiagnostic(
+            OperationAnalysisContext context,
+            SyntaxNode syntaxNode,
+            ImmutableArray<IOperation> elements,
+            ReportDiagnostic severity,
+            ArrayCreationOperationLocation operationLocation
+        )
         {
             // When the first elements parent is as argument, or an edge case for collection
             // initializers where the Add method takes a param array, it means we have a parameter array.
             // We raise the diagnostic on all of the parameters that make up the array. We could do just
             // the first element, but that might be odd seeing: M(1, 2, [|3|], 4, 5)
-            var span = TextSpan.FromBounds(elements[0].Syntax.SpanStart, elements[^1].Syntax.Span.End);
+            var span = TextSpan.FromBounds(
+                elements[0].Syntax.SpanStart,
+                elements[^1].Syntax.Span.End
+            );
             var location = Location.Create(syntaxNode.SyntaxTree, span);
 
             ReportDiagnostic(context, syntaxNode, severity, location, operationLocation);
         }
 
-        private void ReportArrayCreationDiagnostic(OperationAnalysisContext context, SyntaxNode syntaxNode, ReportDiagnostic severity)
+        private void ReportArrayCreationDiagnostic(
+            OperationAnalysisContext context,
+            SyntaxNode syntaxNode,
+            ReportDiagnostic severity
+        )
         {
             // When the user writes the array creation we raise the diagnostic on the first token, which will be the "new" keyword
             var location = syntaxNode.GetFirstToken().GetLocation();
 
-            ReportDiagnostic(context, syntaxNode, severity, location, ArrayCreationOperationLocation.Current);
+            ReportDiagnostic(
+                context,
+                syntaxNode,
+                severity,
+                location,
+                ArrayCreationOperationLocation.Current
+            );
         }
 
-        private void ReportDiagnostic(OperationAnalysisContext context, SyntaxNode syntaxNode, ReportDiagnostic severity, Location location, ArrayCreationOperationLocation operationLocation)
+        private void ReportDiagnostic(
+            OperationAnalysisContext context,
+            SyntaxNode syntaxNode,
+            ReportDiagnostic severity,
+            Location location,
+            ArrayCreationOperationLocation operationLocation
+        )
         {
             // Store the original syntax location so the code fix can find the operation again
             var additionalLocations = ImmutableArray.Create(syntaxNode.GetLocation());
 
             // Also let the code fix where to look to find the operation that originally trigger this diagnostic
-            var properties = ImmutableDictionary<string, string?>.Empty.Add(nameof(ArrayCreationOperationLocation), operationLocation.ToString());
+            var properties = ImmutableDictionary<string, string?>.Empty.Add(
+                nameof(ArrayCreationOperationLocation),
+                operationLocation.ToString()
+            );
 
             context.ReportDiagnostic(
-                DiagnosticHelper.Create(Descriptor, location, severity, additionalLocations, properties));
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    location,
+                    severity,
+                    additionalLocations,
+                    properties
+                )
+            );
         }
 
-        internal static bool TryConvertToUTF8String(StringBuilder? builder, ImmutableArray<IOperation> arrayCreationElements)
+        internal static bool TryConvertToUTF8String(
+            StringBuilder? builder,
+            ImmutableArray<IOperation> arrayCreationElements
+        )
         {
-            for (var i = 0; i < arrayCreationElements.Length;)
+            for (var i = 0; i < arrayCreationElements.Length; )
             {
                 // Need to call a method to do the actual rune decoding as it uses stackalloc, and stackalloc
                 // in a loop is a bad idea
@@ -173,7 +257,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
             return true;
         }
 
-        private static bool TryGetNextRune(ImmutableArray<IOperation> arrayCreationElements, int startIndex, out Rune rune, out int bytesConsumed)
+        private static bool TryGetNextRune(
+            ImmutableArray<IOperation> arrayCreationElements,
+            int startIndex,
+            out Rune rune,
+            out int bytesConsumed
+        )
         {
             rune = default;
             bytesConsumed = 0;
@@ -194,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
             }
 
             // If we can't decode a rune from the array then it can't be represented as a string
-            return Rune.DecodeFromUtf8(array, out rune, out bytesConsumed) == System.Buffers.OperationStatus.Done;
+            return Rune.DecodeFromUtf8(array, out rune, out bytesConsumed)
+                == System.Buffers.OperationStatus.Done;
         }
     }
 }

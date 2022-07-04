@@ -23,12 +23,18 @@ internal sealed partial class MessagePump : IServer, IServerDelegationFeature
 
     private volatile int _stopping;
     private int _outstandingRequests;
-    private readonly TaskCompletionSource _shutdownSignal = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly TaskCompletionSource _shutdownSignal = new TaskCompletionSource(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
     private int _shutdownSignalCompleted;
 
     private readonly ServerAddressesFeature _serverAddresses;
 
-    public MessagePump(IOptions<HttpSysOptions> options, ILoggerFactory loggerFactory, IAuthenticationSchemeProvider authentication)
+    public MessagePump(
+        IOptions<HttpSysOptions> options,
+        ILoggerFactory loggerFactory,
+        IAuthenticationSchemeProvider authentication
+    )
     {
         if (options == null)
         {
@@ -44,7 +50,13 @@ internal sealed partial class MessagePump : IServer, IServerDelegationFeature
 
         if (_options.Authentication.Schemes != AuthenticationSchemes.None)
         {
-            authentication.AddScheme(new AuthenticationScheme(HttpSysDefaults.AuthenticationScheme, displayName: _options.Authentication.AuthenticationDisplayName, handlerType: typeof(AuthenticationHandler)));
+            authentication.AddScheme(
+                new AuthenticationScheme(
+                    HttpSysDefaults.AuthenticationScheme,
+                    displayName: _options.Authentication.AuthenticationDisplayName,
+                    handlerType: typeof(AuthenticationHandler)
+                )
+            );
         }
 
         Features = new FeatureCollection();
@@ -67,7 +79,10 @@ internal sealed partial class MessagePump : IServer, IServerDelegationFeature
 
     internal bool Stopping => _stopping == 1;
 
-    public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken) where TContext : notnull
+    public Task StartAsync<TContext>(
+        IHttpApplication<TContext> application,
+        CancellationToken cancellationToken
+    ) where TContext : notnull
     {
         if (application == null)
         {
@@ -127,7 +142,11 @@ internal sealed partial class MessagePump : IServer, IServerDelegationFeature
         }
 
         // Dispatch to get off the SynchronizationContext and use UnsafeQueueUserWorkItem to avoid capturing the ExecutionContext
-        ThreadPool.UnsafeQueueUserWorkItem(state => state.ActivateRequestProcessingLimits(), this, preferLocal: false);
+        ThreadPool.UnsafeQueueUserWorkItem(
+            state => state.ActivateRequestProcessingLimits(),
+            this,
+            preferLocal: false
+        );
 
         return Task.CompletedTask;
     }

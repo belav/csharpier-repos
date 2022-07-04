@@ -21,9 +21,11 @@ namespace System.Net.WebSockets
 
         public ClientWebSocketOptions Options { get; }
 
-        public override WebSocketCloseStatus? CloseStatus => _innerWebSocket?.WebSocket?.CloseStatus;
+        public override WebSocketCloseStatus? CloseStatus =>
+            _innerWebSocket?.WebSocket?.CloseStatus;
 
-        public override string? CloseStatusDescription => _innerWebSocket?.WebSocket?.CloseStatusDescription;
+        public override string? CloseStatusDescription =>
+            _innerWebSocket?.WebSocket?.CloseStatusDescription;
 
         public override string? SubProtocol => _innerWebSocket?.WebSocket?.SubProtocol;
 
@@ -64,7 +66,14 @@ namespace System.Net.WebSockets
             }
 
             // Check that we have not started already.
-            switch ((InternalState)Interlocked.CompareExchange(ref _state, (int)InternalState.Connecting, (int)InternalState.Created))
+            switch (
+                (InternalState)
+                    Interlocked.CompareExchange(
+                        ref _state,
+                        (int)InternalState.Connecting,
+                        (int)InternalState.Created
+                    )
+            )
             {
                 case InternalState.Disposed:
                     throw new ObjectDisposedException(GetType().FullName);
@@ -86,7 +95,9 @@ namespace System.Net.WebSockets
 
             try
             {
-                await _innerWebSocket.ConnectAsync(uri, cancellationToken, Options).ConfigureAwait(false);
+                await _innerWebSocket
+                    .ConnectAsync(uri, cancellationToken, Options)
+                    .ConfigureAwait(false);
             }
             catch
             {
@@ -94,30 +105,55 @@ namespace System.Net.WebSockets
                 throw;
             }
 
-            if ((InternalState)Interlocked.CompareExchange(ref _state, (int)InternalState.Connected, (int)InternalState.Connecting) != InternalState.Connecting)
+            if (
+                (InternalState)
+                    Interlocked.CompareExchange(
+                        ref _state,
+                        (int)InternalState.Connected,
+                        (int)InternalState.Connecting
+                    ) != InternalState.Connecting
+            )
             {
                 Debug.Assert(_state == (int)InternalState.Disposed);
                 throw new ObjectDisposedException(GetType().FullName);
             }
         }
 
-        public override Task SendAsync(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken) =>
-            ConnectedWebSocket.SendAsync(buffer, messageType, endOfMessage, cancellationToken);
+        public override Task SendAsync(
+            ArraySegment<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            CancellationToken cancellationToken
+        ) => ConnectedWebSocket.SendAsync(buffer, messageType, endOfMessage, cancellationToken);
 
-        public override ValueTask SendAsync(ReadOnlyMemory<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken) =>
-            ConnectedWebSocket.SendAsync(buffer, messageType, endOfMessage, cancellationToken);
+        public override ValueTask SendAsync(
+            ReadOnlyMemory<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            CancellationToken cancellationToken
+        ) => ConnectedWebSocket.SendAsync(buffer, messageType, endOfMessage, cancellationToken);
 
-        public override Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancellationToken) =>
-            ConnectedWebSocket.ReceiveAsync(buffer, cancellationToken);
+        public override Task<WebSocketReceiveResult> ReceiveAsync(
+            ArraySegment<byte> buffer,
+            CancellationToken cancellationToken
+        ) => ConnectedWebSocket.ReceiveAsync(buffer, cancellationToken);
 
-        public override ValueTask<ValueWebSocketReceiveResult> ReceiveAsync(Memory<byte> buffer, CancellationToken cancellationToken) =>
-            ConnectedWebSocket.ReceiveAsync(buffer, cancellationToken);
+        public override ValueTask<ValueWebSocketReceiveResult> ReceiveAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        ) => ConnectedWebSocket.ReceiveAsync(buffer, cancellationToken);
 
-        public override Task CloseAsync(WebSocketCloseStatus closeStatus, string? statusDescription, CancellationToken cancellationToken) =>
-            ConnectedWebSocket.CloseAsync(closeStatus, statusDescription, cancellationToken);
+        public override Task CloseAsync(
+            WebSocketCloseStatus closeStatus,
+            string? statusDescription,
+            CancellationToken cancellationToken
+        ) => ConnectedWebSocket.CloseAsync(closeStatus, statusDescription, cancellationToken);
 
-        public override Task CloseOutputAsync(WebSocketCloseStatus closeStatus, string? statusDescription, CancellationToken cancellationToken) =>
-            ConnectedWebSocket.CloseOutputAsync(closeStatus, statusDescription, cancellationToken);
+        public override Task CloseOutputAsync(
+            WebSocketCloseStatus closeStatus,
+            string? statusDescription,
+            CancellationToken cancellationToken
+        ) => ConnectedWebSocket.CloseOutputAsync(closeStatus, statusDescription, cancellationToken);
 
         private WebSocket ConnectedWebSocket
         {
@@ -150,7 +186,10 @@ namespace System.Net.WebSockets
 
         public override void Dispose()
         {
-            if ((InternalState)Interlocked.Exchange(ref _state, (int)InternalState.Disposed) != InternalState.Disposed)
+            if (
+                (InternalState)Interlocked.Exchange(ref _state, (int)InternalState.Disposed)
+                != InternalState.Disposed
+            )
             {
                 _innerWebSocket?.Dispose();
             }

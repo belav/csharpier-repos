@@ -14,23 +14,29 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class ConsecutiveBracePlacementDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class ConsecutiveBracePlacementDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public ConsecutiveBracePlacementDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.ConsecutiveBracePlacementDiagnosticId,
-                   EnforceOnBuildValues.ConsecutiveBracePlacement,
-                   CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
-                   LanguageNames.CSharp,
-                   new LocalizableResourceString(
-                       nameof(CSharpAnalyzersResources.Consecutive_braces_must_not_have_a_blank_between_them), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.ConsecutiveBracePlacementDiagnosticId,
+                EnforceOnBuildValues.ConsecutiveBracePlacement,
+                CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                LanguageNames.CSharp,
+                new LocalizableResourceString(
+                    nameof(
+                        CSharpAnalyzersResources.Consecutive_braces_must_not_have_a_blank_between_them
+                    ),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxTreeAction(AnalyzeTree);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxTreeAction(AnalyzeTree);
 
         private void AnalyzeTree(SyntaxTreeAnalysisContext context)
         {
@@ -42,7 +48,11 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
             Recurse(context, option.Notification.Severity, stack);
         }
 
-        private void Recurse(SyntaxTreeAnalysisContext context, ReportDiagnostic severity, ArrayBuilder<SyntaxNode> stack)
+        private void Recurse(
+            SyntaxTreeAnalysisContext context,
+            ReportDiagnostic severity,
+            ArrayBuilder<SyntaxNode> stack
+        )
         {
             var tree = context.Tree;
             var cancellationToken = context.CancellationToken;
@@ -59,7 +69,10 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
                 stack.RemoveLast();
 
                 // Don't bother analyzing nodes that have syntax errors in them.
-                if (current.ContainsDiagnostics && current.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error))
+                if (
+                    current.ContainsDiagnostics
+                    && current.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error)
+                )
                     continue;
 
                 foreach (var child in current.ChildNodesAndTokens())
@@ -72,23 +85,33 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
             }
         }
 
-        private void ProcessToken(SyntaxTreeAnalysisContext context, ReportDiagnostic severity, SourceText text, SyntaxToken token)
+        private void ProcessToken(
+            SyntaxTreeAnalysisContext context,
+            ReportDiagnostic severity,
+            SourceText text,
+            SyntaxToken token
+        )
         {
             if (!HasExcessBlankLinesAfter(text, token, out var secondBrace, out _))
                 return;
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                this.Descriptor,
-                secondBrace.GetLocation(),
-                severity,
-                additionalLocations: null,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    this.Descriptor,
+                    secondBrace.GetLocation(),
+                    severity,
+                    additionalLocations: null,
+                    properties: null
+                )
+            );
         }
 
         public static bool HasExcessBlankLinesAfter(
-            SourceText text, SyntaxToken token,
+            SourceText text,
+            SyntaxToken token,
             out SyntaxToken secondBrace,
-            out SyntaxTrivia endOfLineTrivia)
+            out SyntaxTrivia endOfLineTrivia
+        )
         {
             secondBrace = default;
             endOfLineTrivia = default;
@@ -121,7 +144,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
                     return false;
             }
 
-            endOfLineTrivia = secondBrace.LeadingTrivia.Last(t => t.IsKind(SyntaxKind.EndOfLineTrivia));
+            endOfLineTrivia = secondBrace.LeadingTrivia.Last(
+                t => t.IsKind(SyntaxKind.EndOfLineTrivia)
+            );
             return endOfLineTrivia != default;
         }
 

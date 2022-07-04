@@ -5,9 +5,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
 public class TestDriver : Driver
 {
-    public TestDriver()
-    {
-    }
+    public TestDriver() { }
 
     private TestDriver(
         ILazyLoader loader,
@@ -20,8 +18,19 @@ public class TestDriver : Driver
         int podiums,
         int poles,
         int fastestLaps,
-        int teamId)
-        : base(loader, id, name, carNumber, championships, races, wins, podiums, poles, fastestLaps, teamId)
-    {
-    }
+        int teamId
+    )
+        : base(
+            loader,
+            id,
+            name,
+            carNumber,
+            championships,
+            races,
+            wins,
+            podiums,
+            poles,
+            fastestLaps,
+            teamId
+        ) { }
 }

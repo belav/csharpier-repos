@@ -7,7 +7,7 @@ using System.Threading; // For Thread, Mutex
 /// <summary>
 /// Ctor()
 /// </summary>
-/// 
+///
 // tests the default mutex constructor creates
 // a mutex which is not owned.
 public class MutexCtor2
@@ -50,17 +50,19 @@ public class MutexCtor2
                 {
                     if (null == m_Mutex)
                     {
-                        TestLibrary.TestFramework.LogError("001", "Can not construct a new Mutex intance");
+                        TestLibrary.TestFramework.LogError(
+                            "001",
+                            "Can not construct a new Mutex intance"
+                        );
                         retVal = false;
 
                         break;
                     }
 
-                    // Ensure initial owner of the mutex is not the current thread 
+                    // Ensure initial owner of the mutex is not the current thread
                     //  This call should NOT block
                     m_Mutex.WaitOne();
                     m_Mutex.ReleaseMutex();
-
                 } while (false); // do
             }
             catch (Exception e)

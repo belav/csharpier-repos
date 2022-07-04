@@ -40,26 +40,34 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     /// </summary>
     /// <param name="complete">The value indicating if this discriminator mapping is complete.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>
-    public virtual DiscriminatorBuilder IsComplete(bool complete = true)
-        => IsComplete(complete, ConfigurationSource.Explicit)!;
+    public virtual DiscriminatorBuilder IsComplete(bool complete = true) =>
+        IsComplete(complete, ConfigurationSource.Explicit)!;
 
     private DiscriminatorBuilder? IsComplete(bool complete, ConfigurationSource configurationSource)
     {
         if (configurationSource == ConfigurationSource.Explicit)
         {
-            ((IMutableEntityType)EntityTypeBuilder.Metadata).SetDiscriminatorMappingComplete(complete);
+            ((IMutableEntityType)EntityTypeBuilder.Metadata).SetDiscriminatorMappingComplete(
+                complete
+            );
         }
         else
         {
-            if (!((IConventionEntityTypeBuilder)EntityTypeBuilder).CanSetAnnotation(
-                    CoreAnnotationNames.DiscriminatorMappingComplete, complete,
-                    configurationSource == ConfigurationSource.DataAnnotation))
+            if (
+                !((IConventionEntityTypeBuilder)EntityTypeBuilder).CanSetAnnotation(
+                    CoreAnnotationNames.DiscriminatorMappingComplete,
+                    complete,
+                    configurationSource == ConfigurationSource.DataAnnotation
+                )
+            )
             {
                 return null;
             }
 
             ((IConventionEntityType)EntityTypeBuilder.Metadata).SetDiscriminatorMappingComplete(
-                complete, configurationSource == ConfigurationSource.DataAnnotation);
+                complete,
+                configurationSource == ConfigurationSource.DataAnnotation
+            );
         }
 
         return this;
@@ -70,8 +78,8 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     /// </summary>
     /// <param name="value">The discriminator value.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>
-    public virtual DiscriminatorBuilder HasValue(object? value)
-        => HasValue(EntityTypeBuilder, value, ConfigurationSource.Explicit)!;
+    public virtual DiscriminatorBuilder HasValue(object? value) =>
+        HasValue(EntityTypeBuilder, value, ConfigurationSource.Explicit)!;
 
     /// <summary>
     ///     Configures the discriminator value to use for entities of the given generic type.
@@ -79,8 +87,8 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     /// <typeparam name="TEntity">The entity type for which a discriminator value is being set.</typeparam>
     /// <param name="value">The discriminator value.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>
-    public virtual DiscriminatorBuilder HasValue<TEntity>(object? value)
-        => HasValue(typeof(TEntity), value);
+    public virtual DiscriminatorBuilder HasValue<TEntity>(object? value) =>
+        HasValue(typeof(TEntity), value);
 
     /// <summary>
     ///     Configures the discriminator value to use for entities of the given type.
@@ -91,7 +99,9 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     public virtual DiscriminatorBuilder HasValue(Type entityType, object? value)
     {
         var entityTypeBuilder = EntityTypeBuilder.ModelBuilder.Entity(
-            entityType, ConfigurationSource.Explicit);
+            entityType,
+            ConfigurationSource.Explicit
+        );
 
         return HasValue(entityTypeBuilder, value, ConfigurationSource.Explicit)!;
     }
@@ -105,7 +115,9 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     public virtual DiscriminatorBuilder HasValue(string entityTypeName, object? value)
     {
         var entityTypeBuilder = EntityTypeBuilder.ModelBuilder.Entity(
-            entityTypeName, ConfigurationSource.Explicit);
+            entityTypeName,
+            ConfigurationSource.Explicit
+        );
 
         return HasValue(entityTypeBuilder, value, ConfigurationSource.Explicit)!;
     }
@@ -113,7 +125,8 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     private DiscriminatorBuilder? HasValue(
         InternalEntityTypeBuilder? entityTypeBuilder,
         object? value,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         if (entityTypeBuilder == null)
         {
@@ -121,14 +134,25 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
         }
 
         var baseEntityTypeBuilder = EntityTypeBuilder;
-        if (!baseEntityTypeBuilder.Metadata.IsAssignableFrom(entityTypeBuilder.Metadata)
-            && (!baseEntityTypeBuilder.Metadata.ClrType.IsAssignableFrom(entityTypeBuilder.Metadata.ClrType)
-                || entityTypeBuilder.HasBaseType(baseEntityTypeBuilder.Metadata, configurationSource) == null))
+        if (
+            !baseEntityTypeBuilder.Metadata.IsAssignableFrom(entityTypeBuilder.Metadata)
+            && (
+                !baseEntityTypeBuilder.Metadata.ClrType.IsAssignableFrom(
+                    entityTypeBuilder.Metadata.ClrType
+                )
+                || entityTypeBuilder.HasBaseType(
+                    baseEntityTypeBuilder.Metadata,
+                    configurationSource
+                ) == null
+            )
+        )
         {
             throw new InvalidOperationException(
                 CoreStrings.DiscriminatorEntityTypeNotDerived(
                     entityTypeBuilder.Metadata.DisplayName(),
-                    baseEntityTypeBuilder.Metadata.DisplayName()));
+                    baseEntityTypeBuilder.Metadata.DisplayName()
+                )
+            );
         }
 
         if (configurationSource == ConfigurationSource.Explicit)
@@ -137,14 +161,21 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
         }
         else
         {
-            if (!((IConventionDiscriminatorBuilder)this).CanSetValue(
-                    entityTypeBuilder.Metadata, value, configurationSource == ConfigurationSource.DataAnnotation))
+            if (
+                !((IConventionDiscriminatorBuilder)this).CanSetValue(
+                    entityTypeBuilder.Metadata,
+                    value,
+                    configurationSource == ConfigurationSource.DataAnnotation
+                )
+            )
             {
                 return null;
             }
 
-            ((IConventionEntityType)entityTypeBuilder.Metadata)
-                .SetDiscriminatorValue(value, configurationSource == ConfigurationSource.DataAnnotation);
+            ((IConventionEntityType)entityTypeBuilder.Metadata).SetDiscriminatorValue(
+                value,
+                configurationSource == ConfigurationSource.DataAnnotation
+            );
         }
 
         return this;
@@ -159,35 +190,55 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionDiscriminatorBuilder? IConventionDiscriminatorBuilder.IsComplete(bool complete, bool fromDataAnnotation)
-        => IsComplete(complete, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionDiscriminatorBuilder? IConventionDiscriminatorBuilder.IsComplete(
+        bool complete,
+        bool fromDataAnnotation
+    ) =>
+        IsComplete(
+            complete,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool IConventionDiscriminatorBuilder.CanSetIsComplete(bool complete, bool fromDataAnnotation)
-        => ((IConventionEntityTypeBuilder)EntityTypeBuilder).CanSetAnnotation(
-            CoreAnnotationNames.DiscriminatorMappingComplete, fromDataAnnotation);
+    bool IConventionDiscriminatorBuilder.CanSetIsComplete(bool complete, bool fromDataAnnotation) =>
+        ((IConventionEntityTypeBuilder)EntityTypeBuilder).CanSetAnnotation(
+            CoreAnnotationNames.DiscriminatorMappingComplete,
+            fromDataAnnotation
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IConventionDiscriminatorBuilder? IConventionDiscriminatorBuilder.HasValue(object? value, bool fromDataAnnotation)
-        => HasValue(
-            EntityTypeBuilder, value,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IConventionDiscriminatorBuilder? IConventionDiscriminatorBuilder.HasValue(
+        object? value,
+        bool fromDataAnnotation
+    ) =>
+        HasValue(
+            EntityTypeBuilder,
+            value,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
     IConventionDiscriminatorBuilder? IConventionDiscriminatorBuilder.HasValue(
         IConventionEntityType entityType,
         object? value,
-        bool fromDataAnnotation)
-        => HasValue(
-            (InternalEntityTypeBuilder?)entityType.Builder, value,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool fromDataAnnotation
+    ) =>
+        HasValue(
+            (InternalEntityTypeBuilder?)entityType.Builder,
+            value,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
-    bool IConventionDiscriminatorBuilder.CanSetValue(object? value, bool fromDataAnnotation)
-        => ((IConventionDiscriminatorBuilder)this).CanSetValue(EntityTypeBuilder.Metadata, value, fromDataAnnotation);
+    bool IConventionDiscriminatorBuilder.CanSetValue(object? value, bool fromDataAnnotation) =>
+        ((IConventionDiscriminatorBuilder)this).CanSetValue(
+            EntityTypeBuilder.Metadata,
+            value,
+            fromDataAnnotation
+        );
 
     #region Hidden System.Object members
 
@@ -196,8 +247,7 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -206,8 +256,7 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -215,8 +264,7 @@ public class DiscriminatorBuilder : IConventionDiscriminatorBuilder
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

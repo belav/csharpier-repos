@@ -14,9 +14,7 @@ namespace System.Drawing.Imaging
         // are the following: ENHMETAHEADER, MetaHeader, MetafileHeaderWmf, MetafileHeaderEmf.
         private WmfMetaHeader _data;
 
-        public MetaHeader()
-        {
-        }
+        public MetaHeader() { }
 
         internal MetaHeader(WmfMetaHeader header)
         {

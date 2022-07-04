@@ -8,7 +8,9 @@ using System.Runtime.Serialization;
 namespace System.Collections.Generic
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public abstract partial class Comparer<T> : IComparer, IComparer<T>
     {
         // public static Comparer<T> Default is runtime-specific
@@ -24,10 +26,15 @@ namespace System.Collections.Generic
 
         int IComparer.Compare(object? x, object? y)
         {
-            if (x == null) return y == null ? 0 : -1;
-            if (y == null) return 1;
-            if (x is T && y is T) return Compare((T)x, (T)y);
-            ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidArgumentForComparison);
+            if (x == null)
+                return y == null ? 0 : -1;
+            if (y == null)
+                return 1;
+            if (x is T && y is T)
+                return Compare((T)x, (T)y);
+            ThrowHelper.ThrowArgumentException(
+                ExceptionResource.Argument_InvalidArgumentForComparison
+            );
             return 0;
         }
     }
@@ -50,7 +57,9 @@ namespace System.Collections.Generic
     // means another generic instantiation, which can be costly esp.
     // for value types.
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     // Needs to be public to support binary serialization compatibility
     public sealed partial class GenericComparer<T> : Comparer<T> where T : IComparable<T>
     {
@@ -59,10 +68,12 @@ namespace System.Collections.Generic
         {
             if (x != null)
             {
-                if (y != null) return x.CompareTo(y);
+                if (y != null)
+                    return x.CompareTo(y);
                 return 1;
             }
-            if (y != null) return -1;
+            if (y != null)
+                return -1;
             return 0;
         }
 
@@ -70,12 +81,13 @@ namespace System.Collections.Generic
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj != null && GetType() == obj.GetType();
 
-        public override int GetHashCode() =>
-            GetType().GetHashCode();
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     // Needs to be public to support binary serialization compatibility
     public sealed partial class NullableComparer<T> : Comparer<T?> where T : struct, IComparable<T>
     {
@@ -83,10 +95,12 @@ namespace System.Collections.Generic
         {
             if (x.HasValue)
             {
-                if (y.HasValue) return x.value.CompareTo(y.value);
+                if (y.HasValue)
+                    return x.value.CompareTo(y.value);
                 return 1;
             }
-            if (y.HasValue) return -1;
+            if (y.HasValue)
+                return -1;
             return 0;
         }
 
@@ -94,12 +108,13 @@ namespace System.Collections.Generic
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj != null && GetType() == obj.GetType();
 
-        public override int GetHashCode() =>
-            GetType().GetHashCode();
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     // Needs to be public to support binary serialization compatibility
     public sealed partial class ObjectComparer<T> : Comparer<T>
     {
@@ -112,12 +127,12 @@ namespace System.Collections.Generic
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj != null && GetType() == obj.GetType();
 
-        public override int GetHashCode() =>
-            GetType().GetHashCode();
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 
     [Serializable]
-    internal sealed partial class EnumComparer<T> : Comparer<T>, ISerializable where T : struct, Enum
+    internal sealed partial class EnumComparer<T> : Comparer<T>, ISerializable
+        where T : struct, Enum
     {
         public EnumComparer() { }
 
@@ -130,8 +145,7 @@ namespace System.Collections.Generic
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj != null && GetType() == obj.GetType();
 
-        public override int GetHashCode() =>
-            GetType().GetHashCode();
+        public override int GetHashCode() => GetType().GetHashCode();
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {

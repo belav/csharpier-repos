@@ -20,7 +20,8 @@ namespace ILCompiler
 {
     public sealed class RyuJitCompilation : Compilation
     {
-        private readonly ConditionalWeakTable<Thread, CorInfoImpl> _corinfos = new ConditionalWeakTable<Thread, CorInfoImpl>();
+        private readonly ConditionalWeakTable<Thread, CorInfoImpl> _corinfos =
+            new ConditionalWeakTable<Thread, CorInfoImpl>();
         internal readonly RyuJitCompilationOptions _compilationOptions;
         private readonly ExternSymbolMappedField _hardwareIntrinsicFlags;
         private readonly Dictionary<string, InstructionSet> _instructionSetMap;
@@ -43,18 +44,38 @@ namespace ILCompiler
             ProfileDataManager profileDataManager,
             MethodImportationErrorProvider errorProvider,
             RyuJitCompilationOptions options,
-            int parallelism)
-            : base(dependencyGraph, nodeFactory, roots, ilProvider, debugInformationProvider, devirtualizationManager, inliningPolicy, logger)
+            int parallelism
+        )
+            : base(
+                dependencyGraph,
+                nodeFactory,
+                roots,
+                ilProvider,
+                debugInformationProvider,
+                devirtualizationManager,
+                inliningPolicy,
+                logger
+            )
         {
             _compilationOptions = options;
-            _hardwareIntrinsicFlags = new ExternSymbolMappedField(nodeFactory.TypeSystemContext.GetWellKnownType(WellKnownType.Int32), "g_cpuFeatures");
+            _hardwareIntrinsicFlags = new ExternSymbolMappedField(
+                nodeFactory.TypeSystemContext.GetWellKnownType(WellKnownType.Int32),
+                "g_cpuFeatures"
+            );
             InstructionSetSupport = instructionSetSupport;
 
             _instructionSetMap = new Dictionary<string, InstructionSet>();
-            foreach (var instructionSetInfo in InstructionSetFlags.ArchitectureToValidInstructionSets(TypeSystemContext.Target.Architecture))
+            foreach (
+                var instructionSetInfo in InstructionSetFlags.ArchitectureToValidInstructionSets(
+                    TypeSystemContext.Target.Architecture
+                )
+            )
             {
                 if (instructionSetInfo.ManagedName != "")
-                    _instructionSetMap.Add(instructionSetInfo.ManagedName, instructionSetInfo.InstructionSet);
+                    _instructionSetMap.Add(
+                        instructionSetInfo.ManagedName,
+                        instructionSetInfo.InstructionSet
+                    );
             }
 
             _profileDataManager = profileDataManager;
@@ -75,8 +96,10 @@ namespace ILCompiler
             // information proving that it isn't, give RyuJIT the constructed symbol even
             // though we just need the unconstructed one.
             // https://github.com/dotnet/runtimelab/issues/1128
-            bool canPotentiallyConstruct = _devirtualizationManager == null
-                ? true : _devirtualizationManager.CanConstructType(type);
+            bool canPotentiallyConstruct =
+                _devirtualizationManager == null
+                    ? true
+                    : _devirtualizationManager.CanConstructType(type);
             if (canPotentiallyConstruct)
                 return _nodeFactory.MaximallyConstructableType(type);
 
@@ -93,7 +116,7 @@ namespace ILCompiler
             ObjectWritingOptions options = default;
             if ((_compilationOptions & RyuJitCompilationOptions.UseDwarf5) != 0)
                 options |= ObjectWritingOptions.UseDwarf5;
-            
+
             if (_debugInformationProvider is not NullDebugInformationProvider)
                 options |= ObjectWritingOptions.GenerateDebugInfo;
 
@@ -103,7 +126,9 @@ namespace ILCompiler
             ObjectWriter.EmitObject(outputFile, nodes, NodeFactory, options, dumper, _logger);
         }
 
-        protected override void ComputeDependencyNodeDependencies(List<DependencyNodeCore<NodeFactory>> obj)
+        protected override void ComputeDependencyNodeDependencies(
+            List<DependencyNodeCore<NodeFactory>> obj
+        )
         {
             // Determine the list of method we actually need to compile
             var methodsToCompile = new List<MethodCodeNode>();
@@ -117,13 +142,16 @@ namespace ILCompiler
                     // To compute dependencies of the shadow method that tracks dictionary
                     // dependencies we need to ensure there is code for the canonical method body.
                     var dependencyMethod = (ShadowConcreteMethodNode)dependency;
-                    methodCodeNodeNeedingCode = (MethodCodeNode)dependencyMethod.CanonicalMethodNode;
+                    methodCodeNodeNeedingCode = (MethodCodeNode)
+                        dependencyMethod.CanonicalMethodNode;
                 }
 
                 // We might have already queued this method for compilation
                 MethodDesc method = methodCodeNodeNeedingCode.Method;
-                if (method.IsCanonicalMethod(CanonicalFormKind.Any)
-                    && !canonicalMethodsToCompile.Add(method))
+                if (
+                    method.IsCanonicalMethod(CanonicalFormKind.Any)
+                    && !canonicalMethodsToCompile.Add(method)
+                )
                 {
                     continue;
                 }
@@ -140,6 +168,7 @@ namespace ILCompiler
                 CompileMultiThreaded(methodsToCompile);
             }
         }
+
         private void CompileMultiThreaded(List<MethodCodeNode> methodsToCompile)
         {
             if (Logger.IsVerbose)
@@ -150,13 +179,16 @@ namespace ILCompiler
             Parallel.ForEach(
                 methodsToCompile,
                 new ParallelOptions { MaxDegreeOfParallelism = _parallelism },
-                CompileSingleMethod);
+                CompileSingleMethod
+            );
         }
-
 
         private void CompileSingleThreaded(List<MethodCodeNode> methodsToCompile)
         {
-            CorInfoImpl corInfo = _corinfos.GetValue(Thread.CurrentThread, thread => new CorInfoImpl(this));
+            CorInfoImpl corInfo = _corinfos.GetValue(
+                Thread.CurrentThread,
+                thread => new CorInfoImpl(this)
+            );
 
             foreach (MethodCodeNode methodCodeNodeNeedingCode in methodsToCompile)
             {
@@ -171,15 +203,23 @@ namespace ILCompiler
 
         private void CompileSingleMethod(MethodCodeNode methodCodeNodeNeedingCode)
         {
-            CorInfoImpl corInfo = _corinfos.GetValue(Thread.CurrentThread, thread => new CorInfoImpl(this));
+            CorInfoImpl corInfo = _corinfos.GetValue(
+                Thread.CurrentThread,
+                thread => new CorInfoImpl(this)
+            );
             CompileSingleMethod(corInfo, methodCodeNodeNeedingCode);
         }
 
-        private void CompileSingleMethod(CorInfoImpl corInfo, MethodCodeNode methodCodeNodeNeedingCode)
+        private void CompileSingleMethod(
+            CorInfoImpl corInfo,
+            MethodCodeNode methodCodeNodeNeedingCode
+        )
         {
             MethodDesc method = methodCodeNodeNeedingCode.Method;
 
-            TypeSystemException exception = _methodImportationErrorProvider.GetCompilationError(method);
+            TypeSystemException exception = _methodImportationErrorProvider.GetCompilationError(
+                method
+            );
 
             // If we previously failed to import the method, do not try to import it again and go
             // directly to the error path.
@@ -201,35 +241,58 @@ namespace ILCompiler
                 MethodIL throwingIL = TypeSystemThrowingILEmitter.EmitIL(method, exception);
                 corInfo.CompileMethod(methodCodeNodeNeedingCode, throwingIL);
 
-                if (exception is TypeSystemException.InvalidProgramException
+                if (
+                    exception is TypeSystemException.InvalidProgramException
                     && method.OwningType is MetadataType mdOwningType
-                    && mdOwningType.HasCustomAttribute("System.Runtime.InteropServices", "ClassInterfaceAttribute"))
+                    && mdOwningType.HasCustomAttribute(
+                        "System.Runtime.InteropServices",
+                        "ClassInterfaceAttribute"
+                    )
+                )
                 {
                     Logger.LogWarning(method, DiagnosticId.COMInteropNotSupportedInFullAOT);
                 }
                 if ((_compilationOptions & RyuJitCompilationOptions.UseResilience) != 0)
-                    Logger.LogMessage($"Method '{method}' will always throw because: {exception.Message}");
+                    Logger.LogMessage(
+                        $"Method '{method}' will always throw because: {exception.Message}"
+                    );
                 else
-                    Logger.LogError($"Method will always throw because: {exception.Message}", 1005, method, MessageSubCategory.AotAnalysis);
+                    Logger.LogError(
+                        $"Method will always throw because: {exception.Message}",
+                        1005,
+                        method,
+                        MessageSubCategory.AotAnalysis
+                    );
             }
         }
 
         public override MethodIL GetMethodIL(MethodDesc method)
         {
             TypeDesc owningType = method.OwningType;
-            string intrinsicId = InstructionSetSupport.GetHardwareIntrinsicId(TypeSystemContext.Target.Architecture, owningType);
-            if (!string.IsNullOrEmpty(intrinsicId)
-                && HardwareIntrinsicHelpers.IsIsSupportedMethod(method))
+            string intrinsicId = InstructionSetSupport.GetHardwareIntrinsicId(
+                TypeSystemContext.Target.Architecture,
+                owningType
+            );
+            if (
+                !string.IsNullOrEmpty(intrinsicId)
+                && HardwareIntrinsicHelpers.IsIsSupportedMethod(method)
+            )
             {
                 InstructionSet instructionSet = _instructionSetMap[intrinsicId];
 
                 // If this is an instruction set that is optimistically supported, but is not one of the
                 // intrinsics that are known to be always available, emit IL that checks the support level
                 // at runtime.
-                if (!InstructionSetSupport.IsInstructionSetSupported(instructionSet)
-                    && InstructionSetSupport.OptimisticFlags.HasInstructionSet(instructionSet))
+                if (
+                    !InstructionSetSupport.IsInstructionSetSupported(instructionSet)
+                    && InstructionSetSupport.OptimisticFlags.HasInstructionSet(instructionSet)
+                )
                 {
-                    return HardwareIntrinsicHelpers.EmitIsSupportedIL(method, _hardwareIntrinsicFlags, instructionSet);
+                    return HardwareIntrinsicHelpers.EmitIsSupportedIL(
+                        method,
+                        _hardwareIntrinsicFlags,
+                        instructionSet
+                    );
                 }
             }
 

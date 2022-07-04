@@ -27,8 +27,12 @@ public class UserOnlyTest : IClassFixture<ScratchDatabaseFixture>
         services
             .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
             .AddDbContext<TestUserDbContext>(
-                o => o.UseSqlite(fixture.Connection)
-                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)))
+                o =>
+                    o.UseSqlite(fixture.Connection)
+                        .ConfigureWarnings(
+                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                        )
+            )
             .AddIdentityCore<IdentityUser>(o => { })
             .AddEntityFrameworkStores<TestUserDbContext>();
 
@@ -48,7 +52,9 @@ public class UserOnlyTest : IClassFixture<ScratchDatabaseFixture>
     public async Task EnsureStartupUsageWorks()
     {
         var userStore = _builder.ApplicationServices.GetRequiredService<IUserStore<IdentityUser>>();
-        var userManager = _builder.ApplicationServices.GetRequiredService<UserManager<IdentityUser>>();
+        var userManager = _builder.ApplicationServices.GetRequiredService<
+            UserManager<IdentityUser>
+        >();
 
         Assert.NotNull(userStore);
         Assert.NotNull(userManager);
@@ -76,6 +82,8 @@ public class UserOnlyTest : IClassFixture<ScratchDatabaseFixture>
         var userB = new IdentityUser(Guid.NewGuid().ToString());
         userB.Email = "dupe@dupe.com";
         IdentityResultAssert.IsSuccess(await manager.CreateAsync(userB, password));
-        await Assert.ThrowsAsync<InvalidOperationException>(async () => await manager.FindByEmailAsync("dupe@dupe.com"));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            async () => await manager.FindByEmailAsync("dupe@dupe.com")
+        );
     }
 }

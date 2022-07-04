@@ -14,18 +14,27 @@ internal sealed partial class ServerSentEventsServerTransport : IHttpTransport
     private readonly ILogger _logger;
     private readonly HttpConnectionContext? _connection;
 
-    public ServerSentEventsServerTransport(PipeReader application, string connectionId, ILoggerFactory loggerFactory)
-        : this(application, connectionId, connection: null, loggerFactory)
-    { }
+    public ServerSentEventsServerTransport(
+        PipeReader application,
+        string connectionId,
+        ILoggerFactory loggerFactory
+    ) : this(application, connectionId, connection: null, loggerFactory) { }
 
-    public ServerSentEventsServerTransport(PipeReader application, string connectionId, HttpConnectionContext? connection, ILoggerFactory loggerFactory)
+    public ServerSentEventsServerTransport(
+        PipeReader application,
+        string connectionId,
+        HttpConnectionContext? connection,
+        ILoggerFactory loggerFactory
+    )
     {
         _application = application;
         _connectionId = connectionId;
         _connection = connection;
 
         // We create the logger with a string to preserve the logging namespace after the server side transport renames.
-        _logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Connections.Internal.Transports.ServerSentEventsTransport");
+        _logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Connections.Internal.Transports.ServerSentEventsTransport"
+        );
     }
 
     public async Task ProcessRequestAsync(HttpContext context, CancellationToken cancellationToken)
@@ -63,7 +72,11 @@ internal sealed partial class ServerSentEventsServerTransport : IHttpTransport
                         Log.SSEWritingMessage(_logger, buffer.Length);
 
                         _connection?.StartSendCancellation();
-                        await ServerSentEventsMessageFormatter.WriteMessageAsync(buffer, context.Response.Body, _connection?.SendingToken ?? default);
+                        await ServerSentEventsMessageFormatter.WriteMessageAsync(
+                            buffer,
+                            context.Response.Body,
+                            _connection?.SendingToken ?? default
+                        );
                     }
                     else if (result.IsCompleted)
                     {
@@ -85,7 +98,12 @@ internal sealed partial class ServerSentEventsServerTransport : IHttpTransport
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Trace, "Writing a {Count} byte message.", EventName = "SSEWritingMessage")]
+        [LoggerMessage(
+            1,
+            LogLevel.Trace,
+            "Writing a {Count} byte message.",
+            EventName = "SSEWritingMessage"
+        )]
         public static partial void SSEWritingMessage(ILogger logger, long count);
     }
 }

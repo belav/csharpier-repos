@@ -19,20 +19,15 @@
             public string Value { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateProjection<Source, Dest>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateProjection<Source, Dest>();
+            });
 
         protected override void Because_of()
         {
-            var sources = new[]
-            {
-                new Source
-                {
-                    Value = 5
-                }
-            }.AsQueryable();
+            var sources = new[] { new Source { Value = 5 } }.AsQueryable();
 
             _dests = sources.ProjectTo<Dest>(Configuration).ToArray();
         }
@@ -58,20 +53,15 @@
             public string Value { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateProjection<Source, Dest>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateProjection<Source, Dest>();
+            });
 
         protected override void Because_of()
         {
-            var sources = new[]
-            {
-                new Source
-                {
-                    Value = 5
-                }
-            }.AsQueryable();
+            var sources = new[] { new Source { Value = 5 } }.AsQueryable();
 
             _dests = sources.ProjectTo<Dest>(Configuration).ToArray();
         }

@@ -21,10 +21,10 @@ namespace System.Collections.Generic
     [DebuggerTypeProxy(typeof(StackDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public class Stack<T> : IEnumerable<T>,
-        System.Collections.ICollection,
-        IReadOnlyCollection<T>
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public class Stack<T> : IEnumerable<T>, System.Collections.ICollection, IReadOnlyCollection<T>
     {
         private T[] _array; // Storage for stack elements. Do not rename (binary serialization)
         private int _size; // Number of items in the stack. Do not rename (binary serialization)
@@ -42,7 +42,11 @@ namespace System.Collections.Generic
         public Stack(int capacity)
         {
             if (capacity < 0)
-                throw new ArgumentOutOfRangeException(nameof(capacity), capacity, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    capacity,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             _array = new T[capacity];
         }
 
@@ -100,7 +104,11 @@ namespace System.Collections.Generic
 
             if (arrayIndex < 0 || arrayIndex > array.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex), arrayIndex, SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                throw new ArgumentOutOfRangeException(
+                    nameof(arrayIndex),
+                    arrayIndex,
+                    SR.ArgumentOutOfRange_IndexMustBeLessOrEqual
+                );
             }
 
             if (array.Length - arrayIndex < _size)
@@ -133,7 +141,11 @@ namespace System.Collections.Generic
 
             if (arrayIndex < 0 || arrayIndex > array.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex), arrayIndex, SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                throw new ArgumentOutOfRangeException(
+                    nameof(arrayIndex),
+                    arrayIndex,
+                    SR.ArgumentOutOfRange_IndexMustBeLessOrEqual
+                );
             }
 
             if (array.Length - arrayIndex < _size)
@@ -228,7 +240,7 @@ namespace System.Collections.Generic
             T item = array[size];
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
             {
-                array[size] = default!;     // Free memory quicker.
+                array[size] = default!; // Free memory quicker.
             }
             return item;
         }
@@ -294,7 +306,11 @@ namespace System.Collections.Generic
         {
             if (capacity < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), capacity, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    capacity,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (_array.Length < capacity)
@@ -314,11 +330,13 @@ namespace System.Collections.Generic
 
             // Allow the list to grow to maximum possible capacity (~2G elements) before encountering overflow.
             // Note that this check works even when _items.Length overflowed thanks to the (uint) cast.
-            if ((uint)newcapacity > Array.MaxLength) newcapacity = Array.MaxLength;
+            if ((uint)newcapacity > Array.MaxLength)
+                newcapacity = Array.MaxLength;
 
             // If computed capacity is still less than specified, set to the original argument.
             // Capacities exceeding Array.MaxLength will be surfaced as OutOfMemoryException by Array.Resize.
-            if (newcapacity < capacity) newcapacity = capacity;
+            if (newcapacity < capacity)
+                newcapacity = capacity;
 
             Array.Resize(ref _array, newcapacity);
         }
@@ -368,9 +386,10 @@ namespace System.Collections.Generic
             public bool MoveNext()
             {
                 bool retval;
-                if (_version != _stack._version) throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
+                if (_version != _stack._version)
+                    throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
                 if (_index == -2)
-                {  // First call to enumerator.
+                { // First call to enumerator.
                     _index = _stack._size - 1;
                     retval = (_index >= 0);
                     if (retval)
@@ -378,7 +397,7 @@ namespace System.Collections.Generic
                     return retval;
                 }
                 if (_index == -1)
-                {  // End of enumeration.
+                { // End of enumeration.
                     return false;
                 }
 
@@ -403,7 +422,11 @@ namespace System.Collections.Generic
             private void ThrowEnumerationNotStartedOrEnded()
             {
                 Debug.Assert(_index == -1 || _index == -2);
-                throw new InvalidOperationException(_index == -2 ? SR.InvalidOperation_EnumNotStarted : SR.InvalidOperation_EnumEnded);
+                throw new InvalidOperationException(
+                    _index == -2
+                        ? SR.InvalidOperation_EnumNotStarted
+                        : SR.InvalidOperation_EnumEnded
+                );
             }
 
             object? System.Collections.IEnumerator.Current
@@ -413,7 +436,8 @@ namespace System.Collections.Generic
 
             void IEnumerator.Reset()
             {
-                if (_version != _stack._version) throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
+                if (_version != _stack._version)
+                    throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
                 _index = -2;
                 _currentElement = default;
             }

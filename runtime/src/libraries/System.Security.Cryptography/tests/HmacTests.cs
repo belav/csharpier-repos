@@ -30,28 +30,47 @@ namespace System.Security.Cryptography.Tests
 
         protected abstract HashAlgorithm CreateHashAlgorithm();
         protected abstract byte[] HashDataOneShot(byte[] key, byte[] source);
-        protected abstract byte[] HashDataOneShot(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source);
-        protected abstract int HashDataOneShot(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination);
-        protected abstract bool TryHashDataOneShot(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination, out int written);
+        protected abstract byte[] HashDataOneShot(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source
+        );
+        protected abstract int HashDataOneShot(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination
+        );
+        protected abstract bool TryHashDataOneShot(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int written
+        );
         protected abstract byte[] HashDataOneShot(ReadOnlySpan<byte> key, Stream source);
         protected abstract byte[] HashDataOneShot(byte[] key, Stream source);
-        protected abstract int HashDataOneShot(ReadOnlySpan<byte> key, Stream source, Span<byte> destination);
+        protected abstract int HashDataOneShot(
+            ReadOnlySpan<byte> key,
+            Stream source,
+            Span<byte> destination
+        );
 
         protected abstract ValueTask<int> HashDataOneShotAsync(
             ReadOnlyMemory<byte> key,
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         protected abstract ValueTask<byte[]> HashDataOneShotAsync(
             ReadOnlyMemory<byte> key,
             Stream source,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         protected abstract ValueTask<byte[]> HashDataOneShotAsync(
             byte[] key,
             Stream source,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         protected abstract int BlockSize { get; }
         protected abstract int MacSize { get; }
@@ -76,7 +95,12 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        protected async Task VerifyRepeatingAsync(string input, int repeatCount, string hexKey, string output)
+        protected async Task VerifyRepeatingAsync(
+            string input,
+            int repeatCount,
+            string hexKey,
+            string output
+        )
         {
             byte[] key = ByteUtils.HexToByteArray(hexKey);
 
@@ -106,17 +130,31 @@ namespace System.Security.Cryptography.Tests
             AssertExtensions.SequenceEqual(expected, destination);
         }
 
-        protected async Task VerifyHashDataStreamAsync(ReadOnlyMemory<byte> key, Stream stream, string output)
+        protected async Task VerifyHashDataStreamAsync(
+            ReadOnlyMemory<byte> key,
+            Stream stream,
+            string output
+        )
         {
             Memory<byte> destination = new byte[MacSize];
             byte[] expected = ByteUtils.HexToByteArray(output);
-            int written = await HashDataOneShotAsync(key, stream, destination, cancellationToken: default);
+            int written = await HashDataOneShotAsync(
+                key,
+                stream,
+                destination,
+                cancellationToken: default
+            );
 
             Assert.Equal(MacSize, written);
             AssertExtensions.SequenceEqual(expected, destination.Span);
         }
 
-        protected void VerifyHashDataStreamAllocating(byte[] key, Stream stream, string output, bool spanKey)
+        protected void VerifyHashDataStreamAllocating(
+            byte[] key,
+            Stream stream,
+            string output,
+            bool spanKey
+        )
         {
             byte[] expected = ByteUtils.HexToByteArray(output);
             byte[] hmac;
@@ -133,14 +171,23 @@ namespace System.Security.Cryptography.Tests
             Assert.Equal(expected, hmac);
         }
 
-        protected async Task VerifyHashDataStreamAllocatingAsync(byte[] key, Stream stream, string output, bool memoryKey)
+        protected async Task VerifyHashDataStreamAllocatingAsync(
+            byte[] key,
+            Stream stream,
+            string output,
+            bool memoryKey
+        )
         {
             byte[] expected = ByteUtils.HexToByteArray(output);
             byte[] hmac;
 
             if (memoryKey)
             {
-                hmac = await HashDataOneShotAsync(new ReadOnlyMemory<byte>(key), stream, cancellationToken: default);
+                hmac = await HashDataOneShotAsync(
+                    new ReadOnlyMemory<byte>(key),
+                    stream,
+                    cancellationToken: default
+                );
             }
             else
             {
@@ -208,10 +255,7 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        protected void VerifyHmac_KeyAlreadySet(
-            HMAC hmac,
-            int testCaseId,
-            string digest)
+        protected void VerifyHmac_KeyAlreadySet(HMAC hmac, int testCaseId, string digest)
         {
             byte[] digestBytes = ByteUtils.HexToByteArray(digest);
             byte[] computedDigest;
@@ -256,8 +300,14 @@ namespace System.Security.Cryptography.Tests
         {
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>("buffer", () => hash.ComputeHash((byte[])null));
-                AssertExtensions.Throws<ArgumentNullException>("buffer", () => hash.ComputeHash(null, 0, 0));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "buffer",
+                    () => hash.ComputeHash((byte[])null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "buffer",
+                    () => hash.ComputeHash(null, 0, 0)
+                );
                 Assert.Throws<NullReferenceException>(() => hash.ComputeHash((Stream)null));
             }
         }
@@ -267,7 +317,10 @@ namespace System.Security.Cryptography.Tests
         {
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => hash.ComputeHash(Array.Empty<byte>(), -1, 0));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "offset",
+                    () => hash.ComputeHash(Array.Empty<byte>(), -1, 0)
+                );
             }
         }
 
@@ -276,7 +329,10 @@ namespace System.Security.Cryptography.Tests
         {
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(Array.Empty<byte>(), 0, -1));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(Array.Empty<byte>(), 0, -1)
+                );
             }
         }
 
@@ -285,7 +341,10 @@ namespace System.Security.Cryptography.Tests
         {
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(Array.Empty<byte>(), 1, 0));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(Array.Empty<byte>(), 1, 0)
+                );
             }
         }
 
@@ -296,10 +355,22 @@ namespace System.Security.Cryptography.Tests
 
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(nonEmpty, 0, nonEmpty.Length + 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(nonEmpty, 1, nonEmpty.Length));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(nonEmpty, 2, nonEmpty.Length - 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(Array.Empty<byte>(), 0, 1));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(nonEmpty, 0, nonEmpty.Length + 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(nonEmpty, 1, nonEmpty.Length)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(nonEmpty, 2, nonEmpty.Length - 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(Array.Empty<byte>(), 0, 1)
+                );
             }
         }
 
@@ -358,15 +429,19 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public void OneShot_NullKey_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("key", () =>
-                HashDataOneShot(key: (byte[])null, source: Array.Empty<byte>()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "key",
+                () => HashDataOneShot(key: (byte[])null, source: Array.Empty<byte>())
+            );
         }
 
         [Fact]
         public void OneShot_NullSource_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () =>
-                HashDataOneShot(key: Array.Empty<byte>(), source: (byte[])null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => HashDataOneShot(key: Array.Empty<byte>(), source: (byte[])null)
+            );
         }
 
         [Fact]
@@ -376,8 +451,10 @@ namespace System.Security.Cryptography.Tests
             byte[] key = _testKeys[1];
             byte[] data = _testData[1];
 
-            AssertExtensions.Throws<ArgumentException>("destination", () =>
-                HashDataOneShot(key, data, buffer));
+            AssertExtensions.Throws<ArgumentException>(
+                "destination",
+                () => HashDataOneShot(key, data, buffer)
+            );
 
             AssertExtensions.FilledWith<byte>(0, buffer);
         }
@@ -446,7 +523,9 @@ namespace System.Security.Cryptography.Tests
             {
                 byte[] key = _testKeys[caseId];
                 byte[] data = _testData[caseId];
-                Span<byte> buffer = new byte[Math.Max(key.Length, MacSize) + Math.Max(keyOffset, bufferOffset)];
+                Span<byte> buffer = new byte[
+                    Math.Max(key.Length, MacSize) + Math.Max(keyOffset, bufferOffset)
+                ];
 
                 Span<byte> writeBuffer = buffer.Slice(bufferOffset, MacSize);
                 Span<byte> keyBuffer = buffer.Slice(keyOffset, key.Length);
@@ -472,7 +551,9 @@ namespace System.Security.Cryptography.Tests
             {
                 byte[] key = _testKeys[caseId];
                 byte[] data = _testData[caseId];
-                Span<byte> buffer = new byte[Math.Max(data.Length, MacSize) + Math.Max(sourceOffset, bufferOffset)];
+                Span<byte> buffer = new byte[
+                    Math.Max(data.Length, MacSize) + Math.Max(sourceOffset, bufferOffset)
+                ];
 
                 Span<byte> writeBuffer = buffer.Slice(bufferOffset, MacSize);
                 Span<byte> dataBuffer = buffer.Slice(sourceOffset, data.Length);
@@ -507,11 +588,13 @@ namespace System.Security.Cryptography.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
-                () => HashDataOneShot(ReadOnlySpan<byte>.Empty, (Stream)null));
+                () => HashDataOneShot(ReadOnlySpan<byte>.Empty, (Stream)null)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
-                () => HashDataOneShot(Array.Empty<byte>(), (Stream)null));
+                () => HashDataOneShot(Array.Empty<byte>(), (Stream)null)
+            );
         }
 
         [Fact]
@@ -519,11 +602,13 @@ namespace System.Security.Cryptography.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
-                () => HashDataOneShotAsync(ReadOnlyMemory<byte>.Empty, (Stream)null, default));
+                () => HashDataOneShotAsync(ReadOnlyMemory<byte>.Empty, (Stream)null, default)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
-                () => HashDataOneShotAsync(Array.Empty<byte>(), (Stream)null, default));
+                () => HashDataOneShotAsync(Array.Empty<byte>(), (Stream)null, default)
+            );
         }
 
         [Fact]
@@ -531,7 +616,8 @@ namespace System.Security.Cryptography.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "key",
-                () => HashDataOneShot((byte[])null, Stream.Null));
+                () => HashDataOneShot((byte[])null, Stream.Null)
+            );
         }
 
         [Fact]
@@ -539,7 +625,8 @@ namespace System.Security.Cryptography.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "key",
-                () => HashDataOneShotAsync((byte[])null, Stream.Null, default));
+                () => HashDataOneShotAsync((byte[])null, Stream.Null, default)
+            );
         }
 
         [Fact]
@@ -549,12 +636,14 @@ namespace System.Security.Cryptography.Tests
 
             AssertExtensions.Throws<ArgumentException>(
                 "destination",
-                () => HashDataOneShot(Array.Empty<byte>(), Stream.Null, destination));
+                () => HashDataOneShot(Array.Empty<byte>(), Stream.Null, destination)
+            );
             AssertExtensions.FilledWith<byte>(0, destination);
 
             AssertExtensions.Throws<ArgumentException>(
                 "destination",
-                () => HashDataOneShot(ReadOnlySpan<byte>.Empty, Stream.Null, destination));
+                () => HashDataOneShot(ReadOnlySpan<byte>.Empty, Stream.Null, destination)
+            );
             AssertExtensions.FilledWith<byte>(0, destination);
         }
 
@@ -565,12 +654,20 @@ namespace System.Security.Cryptography.Tests
 
             AssertExtensions.Throws<ArgumentException>(
                 "destination",
-                () => HashDataOneShotAsync(Array.Empty<byte>(), Stream.Null, destination, default));
+                () => HashDataOneShotAsync(Array.Empty<byte>(), Stream.Null, destination, default)
+            );
             AssertExtensions.FilledWith<byte>(0, destination);
 
             AssertExtensions.Throws<ArgumentException>(
                 "destination",
-                () => HashDataOneShotAsync(ReadOnlyMemory<byte>.Empty, Stream.Null, destination, default));
+                () =>
+                    HashDataOneShotAsync(
+                        ReadOnlyMemory<byte>.Empty,
+                        Stream.Null,
+                        destination,
+                        default
+                    )
+            );
             AssertExtensions.FilledWith<byte>(0, destination);
         }
 
@@ -579,11 +676,13 @@ namespace System.Security.Cryptography.Tests
         {
             AssertExtensions.Throws<ArgumentException>(
                 "source",
-                () => HashDataOneShot(Array.Empty<byte>(), UntouchableStream.Instance));
+                () => HashDataOneShot(Array.Empty<byte>(), UntouchableStream.Instance)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "source",
-                () => HashDataOneShot(ReadOnlySpan<byte>.Empty, UntouchableStream.Instance));
+                () => HashDataOneShot(ReadOnlySpan<byte>.Empty, UntouchableStream.Instance)
+            );
         }
 
         [Fact]
@@ -591,11 +690,21 @@ namespace System.Security.Cryptography.Tests
         {
             Memory<byte> buffer = new byte[512 / 8];
             CancellationToken cancelledToken = new CancellationToken(canceled: true);
-            ValueTask<int> waitable = HashDataOneShotAsync(ReadOnlyMemory<byte>.Empty, Stream.Null, buffer, cancelledToken);
+            ValueTask<int> waitable = HashDataOneShotAsync(
+                ReadOnlyMemory<byte>.Empty,
+                Stream.Null,
+                buffer,
+                cancelledToken
+            );
             Assert.True(waitable.IsCanceled, nameof(waitable.IsCanceled));
             AssertExtensions.FilledWith<byte>(0, buffer.Span);
 
-            waitable = HashDataOneShotAsync(Array.Empty<byte>(), Stream.Null, buffer, cancelledToken);
+            waitable = HashDataOneShotAsync(
+                Array.Empty<byte>(),
+                Stream.Null,
+                buffer,
+                cancelledToken
+            );
             Assert.True(waitable.IsCanceled, nameof(waitable.IsCanceled));
             AssertExtensions.FilledWith<byte>(0, buffer.Span);
         }
@@ -604,7 +713,11 @@ namespace System.Security.Cryptography.Tests
         public void HashData_Stream_Allocating_Cancelled()
         {
             CancellationToken cancelledToken = new CancellationToken(canceled: true);
-            ValueTask<byte[]> waitable = HashDataOneShotAsync(ReadOnlyMemory<byte>.Empty, Stream.Null, cancelledToken);
+            ValueTask<byte[]> waitable = HashDataOneShotAsync(
+                ReadOnlyMemory<byte>.Empty,
+                Stream.Null,
+                cancelledToken
+            );
             Assert.True(waitable.IsCanceled, nameof(waitable.IsCanceled));
         }
     }

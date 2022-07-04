@@ -21,8 +21,8 @@ public class RedirectContext : PropertiesContext<OpenIdConnectOptions>
         HttpContext context,
         AuthenticationScheme scheme,
         OpenIdConnectOptions options,
-        AuthenticationProperties properties)
-        : base(context, scheme, options, properties) { }
+        AuthenticationProperties properties
+    ) : base(context, scheme, options, properties) { }
 
     /// <summary>
     /// Gets or sets the <see cref="OpenIdConnectMessage"/>.

@@ -27,7 +27,9 @@ internal abstract class Http1MessageBody : MessageBody
         return ReadAsyncInternal(cancellationToken);
     }
 
-    public abstract ValueTask<ReadResult> ReadAsyncInternal(CancellationToken cancellationToken = default);
+    public abstract ValueTask<ReadResult> ReadAsyncInternal(
+        CancellationToken cancellationToken = default
+    );
 
     public override bool TryRead(out ReadResult readResult)
     {
@@ -66,7 +68,10 @@ internal abstract class Http1MessageBody : MessageBody
         }
         catch (InvalidOperationException ex)
         {
-            var connectionAbortedException = new ConnectionAbortedException(CoreStrings.ConnectionAbortedByApplication, ex);
+            var connectionAbortedException = new ConnectionAbortedException(
+                CoreStrings.ConnectionAbortedByApplication,
+                ex
+            );
             _context.ReportApplicationError(connectionAbortedException);
 
             // Have to abort the connection because we can't finish draining the request
@@ -81,7 +86,10 @@ internal abstract class Http1MessageBody : MessageBody
     {
         Log.RequestBodyNotEntirelyRead(_context.ConnectionIdFeature, _context.TraceIdentifier);
 
-        _context.TimeoutControl.SetTimeout(Constants.RequestBodyDrainTimeout.Ticks, TimeoutReason.RequestBodyDrain);
+        _context.TimeoutControl.SetTimeout(
+            Constants.RequestBodyDrainTimeout.Ticks,
+            TimeoutReason.RequestBodyDrain
+        );
 
         try
         {
@@ -96,13 +104,17 @@ internal abstract class Http1MessageBody : MessageBody
         {
             _context.SetBadRequestState(ex);
         }
-        catch (OperationCanceledException ex) when (ex is ConnectionAbortedException || ex is TaskCanceledException)
+        catch (OperationCanceledException ex)
+            when (ex is ConnectionAbortedException || ex is TaskCanceledException)
         {
             Log.RequestBodyDrainTimedOut(_context.ConnectionIdFeature, _context.TraceIdentifier);
         }
         catch (InvalidOperationException ex)
         {
-            var connectionAbortedException = new ConnectionAbortedException(CoreStrings.ConnectionAbortedByApplication, ex);
+            var connectionAbortedException = new ConnectionAbortedException(
+                CoreStrings.ConnectionAbortedByApplication,
+                ex
+            );
             _context.ReportApplicationError(connectionAbortedException);
 
             // Have to abort the connection because we can't finish draining the request
@@ -117,7 +129,8 @@ internal abstract class Http1MessageBody : MessageBody
     public static MessageBody For(
         HttpVersion httpVersion,
         HttpRequestHeaders headers,
-        Http1Connection context)
+        Http1Connection context
+    )
     {
         // see also http://tools.ietf.org/html/rfc2616#section-4.4
         var keepAlive = httpVersion != HttpVersion.Http10;
@@ -135,9 +148,11 @@ internal abstract class Http1MessageBody : MessageBody
         // Ignore upgrades if the request has a body. Technically it's possible to support, but we'd have to add a lot
         // more logic to allow reading/draining the normal body before the connection could be fully upgraded.
         // See https://tools.ietf.org/html/rfc7230#section-6.7, https://tools.ietf.org/html/rfc7540#section-3.2
-        if (upgrade
+        if (
+            upgrade
             && headers.ContentLength.GetValueOrDefault() == 0
-            && headers.HeaderTransferEncoding.Count == 0)
+            && headers.HeaderTransferEncoding.Count == 0
+        )
         {
             context.OnTrailersComplete(); // No trailers for these.
             return new Http1UpgradeMessageBody(context, keepAlive);
@@ -156,7 +171,10 @@ internal abstract class Http1MessageBody : MessageBody
             // status code and then close the connection.
             if (transferCoding != TransferCoding.Chunked)
             {
-                KestrelBadHttpRequestException.Throw(RequestRejectionReason.FinalTransferCodingNotChunked, transferEncoding);
+                KestrelBadHttpRequestException.Throw(
+                    RequestRejectionReason.FinalTransferCodingNotChunked,
+                    transferEncoding
+                );
             }
 
             // TODO may push more into the wrapper rather than just calling into the message body
@@ -170,7 +188,9 @@ internal abstract class Http1MessageBody : MessageBody
 
             if (contentLength == 0)
             {
-                return keepAlive ? MessageBody.ZeroContentLengthKeepAlive : MessageBody.ZeroContentLengthClose;
+                return keepAlive
+                    ? MessageBody.ZeroContentLengthKeepAlive
+                    : MessageBody.ZeroContentLengthClose;
             }
 
             return new Http1ContentLengthMessageBody(context, contentLength, keepAlive);
@@ -178,13 +198,21 @@ internal abstract class Http1MessageBody : MessageBody
 
         // If we got here, request contains no Content-Length or Transfer-Encoding header.
         // Reject with Length Required for HTTP 1.0.
-        if (httpVersion == HttpVersion.Http10 && (context.Method == HttpMethod.Post || context.Method == HttpMethod.Put))
+        if (
+            httpVersion == HttpVersion.Http10
+            && (context.Method == HttpMethod.Post || context.Method == HttpMethod.Put)
+        )
         {
-            KestrelBadHttpRequestException.Throw(RequestRejectionReason.LengthRequiredHttp10, context.Method);
+            KestrelBadHttpRequestException.Throw(
+                RequestRejectionReason.LengthRequiredHttp10,
+                context.Method
+            );
         }
 
         context.OnTrailersComplete(); // No trailers for these.
-        return keepAlive ? MessageBody.ZeroContentLengthKeepAlive : MessageBody.ZeroContentLengthClose;
+        return keepAlive
+            ? MessageBody.ZeroContentLengthKeepAlive
+            : MessageBody.ZeroContentLengthClose;
     }
 
     [StackTraceHidden]
@@ -192,7 +220,9 @@ internal abstract class Http1MessageBody : MessageBody
     {
         if (_readerCompleted)
         {
-            throw new InvalidOperationException("Reading is not allowed after the reader was completed.");
+            throw new InvalidOperationException(
+                "Reading is not allowed after the reader was completed."
+            );
         }
     }
 

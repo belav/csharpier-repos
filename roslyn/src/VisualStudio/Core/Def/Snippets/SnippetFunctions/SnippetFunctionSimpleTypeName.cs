@@ -24,14 +24,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             ITextBuffer subjectBuffer,
             string fieldName,
             string fullyQualifiedName,
-            IThreadingContext threadingContext)
-            : base(snippetExpansionClient, subjectBuffer, threadingContext)
+            IThreadingContext threadingContext
+        ) : base(snippetExpansionClient, subjectBuffer, threadingContext)
         {
             _fieldName = fieldName;
             _fullyQualifiedName = fullyQualifiedName;
         }
 
-        protected override async Task<(int ExitCode, string Value, int HasDefaultValue)> GetDefaultValueAsync(CancellationToken cancellationToken)
+        protected override async Task<(int ExitCode, string Value, int HasDefaultValue)> GetDefaultValueAsync(
+            CancellationToken cancellationToken
+        )
         {
             var value = _fullyQualifiedName;
             var hasDefaultValue = 1;
@@ -45,9 +47,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 return (VSConstants.E_FAIL, value, hasDefaultValue);
             }
 
-            var simplifierOptions = await document.GetSimplifierOptionsAsync(snippetExpansionClient.GlobalOptions, cancellationToken).ConfigureAwait(false);
+            var simplifierOptions = await document
+                .GetSimplifierOptionsAsync(snippetExpansionClient.GlobalOptions, cancellationToken)
+                .ConfigureAwait(false);
 
-            var simplifiedTypeName = await SnippetFunctionService.GetSimplifiedTypeNameAsync(document, fieldSpan.Value, _fullyQualifiedName, simplifierOptions, cancellationToken).ConfigureAwait(false);
+            var simplifiedTypeName = await SnippetFunctionService
+                .GetSimplifiedTypeNameAsync(
+                    document,
+                    fieldSpan.Value,
+                    _fullyQualifiedName,
+                    simplifierOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (string.IsNullOrEmpty(simplifiedTypeName))
             {
                 return (VSConstants.E_FAIL, value, hasDefaultValue);
@@ -65,12 +77,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 return false;
             }
 
-            if (snippetExpansionClient.ExpansionSession.GetFieldSpan(_fieldName, surfaceBufferFieldSpan) != VSConstants.S_OK)
+            if (
+                snippetExpansionClient.ExpansionSession.GetFieldSpan(
+                    _fieldName,
+                    surfaceBufferFieldSpan
+                ) != VSConstants.S_OK
+            )
             {
                 return false;
             }
 
-            if (!snippetExpansionClient.TryGetSubjectBufferSpan(surfaceBufferFieldSpan[0], out var subjectBufferFieldSpan))
+            if (
+                !snippetExpansionClient.TryGetSubjectBufferSpan(
+                    surfaceBufferFieldSpan[0],
+                    out var subjectBufferFieldSpan
+                )
+            )
             {
                 return false;
             }

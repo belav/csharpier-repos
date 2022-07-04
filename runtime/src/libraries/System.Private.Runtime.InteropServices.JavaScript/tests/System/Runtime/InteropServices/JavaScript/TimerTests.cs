@@ -31,7 +31,12 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         [Theory]
         [MemberData(nameof(TestCases))]
-        public async Task TestTimers(int[] timeouts, int? expectedSetCounter, int? expectedSetCounterAfterCleanUp, int? expectedHitCount)
+        public async Task TestTimers(
+            int[] timeouts,
+            int? expectedSetCounter,
+            int? expectedSetCounterAfterCleanUp,
+            int? expectedHitCount
+        )
         {
             int wasCalled = 0;
             Timer[] timers = new Timer[timeouts.Length];
@@ -47,21 +52,28 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 {
                     int index = i;
                     _log.Call(_timersHelper, $"Registering {index} delay {timeouts[i]}");
-                    timers[i] = new Timer((_) =>
-                    {
-                        _log.Call(_timersHelper, $"In timer{index}");
-                        wasCalled++;
-                    }, null, timeouts[i], 0);
+                    timers[i] = new Timer(
+                        (_) =>
+                        {
+                            _log.Call(_timersHelper, $"In timer{index}");
+                            wasCalled++;
+                        },
+                        null,
+                        timeouts[i],
+                        0
+                    );
                 }
 
                 var setCounter = (int)_getRegisterCount.Call(_timersHelper);
                 Assert.True(0 == wasCalled, $"wasCalled: {wasCalled}");
-                Assert.True((expectedSetCounter ?? timeouts.Length) == setCounter, $"setCounter: actual {setCounter} expected {expectedSetCounter}");
-
+                Assert.True(
+                    (expectedSetCounter ?? timeouts.Length) == setCounter,
+                    $"setCounter: actual {setCounter} expected {expectedSetCounter}"
+                );
             }
             finally
             {
-                // the test is quite sensitive to timing and order of execution. 
+                // the test is quite sensitive to timing and order of execution.
                 // Here we are giving time to our timers to finish.
                 var afterLastTimer = timeouts.Length == 0 ? 500 : 500 + timeouts.Max();
 
@@ -71,18 +83,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 _log.Call(_timersHelper, "cleanup");
                 _cleanupWrapper.Call(_timersHelper);
 
-                Assert.True(timeouts.Length == wasCalled, $"wasCalled: actual {wasCalled} expected {timeouts.Length}");
+                Assert.True(
+                    timeouts.Length == wasCalled,
+                    $"wasCalled: actual {wasCalled} expected {timeouts.Length}"
+                );
 
                 if (expectedSetCounterAfterCleanUp != null)
                 {
                     var setCounter = (int)_getRegisterCount.Call(_timersHelper);
-                    Assert.True(expectedSetCounterAfterCleanUp.Value == setCounter, $"setCounter: actual {setCounter} expected {expectedSetCounterAfterCleanUp.Value}");
+                    Assert.True(
+                        expectedSetCounterAfterCleanUp.Value == setCounter,
+                        $"setCounter: actual {setCounter} expected {expectedSetCounterAfterCleanUp.Value}"
+                    );
                 }
 
                 if (expectedHitCount != null)
                 {
                     var hitCounter = (int)_getHitCount.Call(_timersHelper);
-                    Assert.True(expectedHitCount == hitCounter, $"hitCounter: actual {hitCounter} expected {expectedHitCount}");
+                    Assert.True(
+                        expectedHitCount == hitCounter,
+                        $"hitCounter: actual {hitCounter} expected {expectedHitCount}"
+                    );
                 }
 
                 for (int i = 0; i < timeouts.Length; i++)
@@ -96,12 +117,14 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             if (_timersHelper == null)
             {
-                Function helper = new Function(@"
+                Function helper = new Function(
+                    @"
                     const loadTimersJs = async () => {
                         await import('./timers.js');
                     };
                     return loadTimersJs();
-                ");
+                "
+                );
                 await (Task)helper.Call(_timersHelper);
 
                 _timersHelper = (JSObject)Runtime.GetGlobalObject("timersHelper");

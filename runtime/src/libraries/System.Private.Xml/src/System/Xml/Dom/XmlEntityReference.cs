@@ -61,15 +61,8 @@ namespace System.Xml
         // Gets or sets the value of the node.
         public override string? Value
         {
-            get
-            {
-                return null;
-            }
-
-            set
-            {
-                throw new InvalidOperationException(SR.Xdom_EntRef_SetVal);
-            }
+            get { return null; }
+            set { throw new InvalidOperationException(SR.Xdom_EntRef_SetVal); }
         }
 
         // Gets the type of the node.
@@ -95,7 +88,7 @@ namespace System.Xml
         {
             get
             {
-                return true;        // Make entity references readonly
+                return true; // Make entity references readonly
             }
         }
 
@@ -122,10 +115,7 @@ namespace System.Xml
 
         internal override XmlLinkedNode? LastNode
         {
-            get
-            {
-                return _lastChild;
-            }
+            get { return _lastChild; }
             set { _lastChild = value; }
         }
 
@@ -173,10 +163,7 @@ namespace System.Xml
 
         public override string BaseURI
         {
-            get
-            {
-                return OwnerDocument!.BaseURI;
-            }
+            get { return OwnerDocument!.BaseURI; }
         }
 
         private static string ConstructBaseURI(string baseURI, string systemId)

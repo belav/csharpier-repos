@@ -9,10 +9,7 @@ namespace Microsoft.AspNetCore.Testing;
 
 internal class TestHttp1Connection : Http1Connection
 {
-    public TestHttp1Connection(HttpConnectionContext context)
-        : base(context)
-    {
-    }
+    public TestHttp1Connection(HttpConnectionContext context) : base(context) { }
 
     public HttpVersion HttpVersionEnum
     {

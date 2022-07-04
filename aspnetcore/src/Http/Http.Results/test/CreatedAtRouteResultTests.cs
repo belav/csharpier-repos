@@ -18,17 +18,13 @@ public partial class CreatedAtRouteResultTests
         get
         {
             yield return new object[] { null };
-            yield return
-                new object[] {
-                        new Dictionary<string, string>() { { "hello", "world" } }
-                };
-            yield return
-                new object[] {
-                        new RouteValueDictionary(new Dictionary<string, string>() {
-                            { "test", "case" },
-                            { "sample", "route" }
-                        })
-                };
+            yield return new object[] { new Dictionary<string, string>() { { "hello", "world" } } };
+            yield return new object[]
+            {
+                new RouteValueDictionary(
+                    new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+                )
+            };
         }
     }
 
@@ -57,27 +53,38 @@ public partial class CreatedAtRouteResultTests
 
         var result = new CreatedAtRoute(
             routeName: null,
-            routeValues: new Dictionary<string, object>());
+            routeValues: new Dictionary<string, object>()
+        );
 
         // Act & Assert
         await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
             async () => await result.ExecuteAsync(httpContext),
-        "No route matches the supplied values.");
+            "No route matches the supplied values."
+        );
     }
 
     [Fact]
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        CreatedAtRoute MyApi() { throw new NotImplementedException(); }
+        CreatedAtRoute MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var context = new EndpointMetadataContext(((Delegate)MyApi).GetMethodInfo(), metadata, null);
+        var context = new EndpointMetadataContext(
+            ((Delegate)MyApi).GetMethodInfo(),
+            metadata,
+            null
+        );
 
         // Act
         PopulateMetadata<CreatedAtRoute>(context);
 
         // Assert
-        var producesResponseTypeMetadata = context.EndpointMetadata.OfType<ProducesResponseTypeMetadata>().Last();
+        var producesResponseTypeMetadata = context.EndpointMetadata
+            .OfType<ProducesResponseTypeMetadata>()
+            .Last();
         Assert.Equal(StatusCodes.Status201Created, producesResponseTypeMetadata.StatusCode);
     }
 
@@ -89,14 +96,20 @@ public partial class CreatedAtRouteResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenContextIsNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("context", () => PopulateMetadata<CreatedAtRoute>(null));
+        Assert.Throws<ArgumentNullException>(
+            "context",
+            () => PopulateMetadata<CreatedAtRoute>(null)
+        );
     }
 
     private static void PopulateMetadata<TResult>(EndpointMetadataContext context)
@@ -115,10 +128,7 @@ public partial class CreatedAtRouteResultTests
     {
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory, NullLoggerFactory>();
-        services.AddSingleton<LinkGenerator>(new TestLinkGenerator
-        {
-            Url = expectedUrl
-        });
+        services.AddSingleton<LinkGenerator>(new TestLinkGenerator { Url = expectedUrl });
 
         return services.BuildServiceProvider();
     }

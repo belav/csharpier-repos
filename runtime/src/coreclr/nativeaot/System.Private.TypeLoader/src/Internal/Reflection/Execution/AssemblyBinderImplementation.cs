@@ -31,14 +31,40 @@ namespace Internal.Reflection.Execution
             ModuleList.AddModuleRegistrationCallback(RegisterModule);
         }
 
-        public static AssemblyBinderImplementation Instance { get; } = new AssemblyBinderImplementation();
+        public static AssemblyBinderImplementation Instance { get; } =
+            new AssemblyBinderImplementation();
 
-        partial void BindEcmaFilePath(string assemblyPath, ref AssemblyBindResult bindResult, ref Exception exception, ref bool? result);
-        partial void BindEcmaByteArray(byte[] rawAssembly, byte[] rawSymbolStore, ref AssemblyBindResult bindResult, ref Exception exception, ref bool? result);
-        partial void BindEcmaAssemblyName(RuntimeAssemblyName refName, bool cacheMissedLookups, ref AssemblyBindResult result, ref Exception exception, ref Exception preferredException, ref bool resultBoolean);
+        partial void BindEcmaFilePath(
+            string assemblyPath,
+            ref AssemblyBindResult bindResult,
+            ref Exception exception,
+            ref bool? result
+        );
+
+        partial void BindEcmaByteArray(
+            byte[] rawAssembly,
+            byte[] rawSymbolStore,
+            ref AssemblyBindResult bindResult,
+            ref Exception exception,
+            ref bool? result
+        );
+
+        partial void BindEcmaAssemblyName(
+            RuntimeAssemblyName refName,
+            bool cacheMissedLookups,
+            ref AssemblyBindResult result,
+            ref Exception exception,
+            ref Exception preferredException,
+            ref bool resultBoolean
+        );
+
         partial void InsertEcmaLoadedAssemblies(List<AssemblyBindResult> loadedAssemblies);
 
-        public sealed override bool Bind(string assemblyPath, out AssemblyBindResult bindResult, out Exception exception)
+        public sealed override bool Bind(
+            string assemblyPath,
+            out AssemblyBindResult bindResult,
+            out Exception exception
+        )
         {
             bool? result = null;
             exception = null;
@@ -53,13 +79,24 @@ namespace Internal.Reflection.Execution
                 return result.Value;
         }
 
-        public sealed override bool Bind(byte[] rawAssembly, byte[] rawSymbolStore, out AssemblyBindResult bindResult, out Exception exception)
+        public sealed override bool Bind(
+            byte[] rawAssembly,
+            byte[] rawSymbolStore,
+            out AssemblyBindResult bindResult,
+            out Exception exception
+        )
         {
             bool? result = null;
             exception = null;
             bindResult = default(AssemblyBindResult);
 
-            BindEcmaByteArray(rawAssembly, rawSymbolStore, ref bindResult, ref exception, ref result);
+            BindEcmaByteArray(
+                rawAssembly,
+                rawSymbolStore,
+                ref bindResult,
+                ref exception,
+                ref result
+            );
 
             // If the Ecma assembly binder isn't linked in, simply throw PlatformNotSupportedException
             if (!result.HasValue)
@@ -68,7 +105,12 @@ namespace Internal.Reflection.Execution
                 return result.Value;
         }
 
-        public sealed override bool Bind(RuntimeAssemblyName refName, bool cacheMissedLookups, out AssemblyBindResult result, out Exception exception)
+        public sealed override bool Bind(
+            RuntimeAssemblyName refName,
+            bool cacheMissedLookups,
+            out AssemblyBindResult result,
+            out Exception exception
+        )
         {
             bool foundMatch = false;
             result = default(AssemblyBindResult);
@@ -95,13 +137,24 @@ namespace Internal.Reflection.Execution
                 }
             }
 
-            BindEcmaAssemblyName(refName, cacheMissedLookups, ref result, ref exception, ref preferredException, ref foundMatch);
+            BindEcmaAssemblyName(
+                refName,
+                cacheMissedLookups,
+                ref result,
+                ref exception,
+                ref preferredException,
+                ref foundMatch
+            );
             if (exception != null)
                 return false;
 
             if (!foundMatch)
             {
-                exception = preferredException ?? new FileNotFoundException(SR.Format(SR.FileNotFound_AssemblyNotFound, refName.FullName));
+                exception =
+                    preferredException
+                    ?? new FileNotFoundException(
+                        SR.Format(SR.FileNotFound_AssemblyNotFound, refName.FullName)
+                    );
                 return false;
             }
 
@@ -110,7 +163,9 @@ namespace Internal.Reflection.Execution
 
         public sealed override IList<AssemblyBindResult> GetLoadedAssemblies()
         {
-            List<AssemblyBindResult> loadedAssemblies = new List<AssemblyBindResult>(ScopeGroups.Length);
+            List<AssemblyBindResult> loadedAssemblies = new List<AssemblyBindResult>(
+                ScopeGroups.Length
+            );
             foreach (KeyValuePair<RuntimeAssemblyName, ScopeDefinitionGroup> group in ScopeGroups)
             {
                 ScopeDefinitionGroup scopeDefinitionGroup = group.Value;
@@ -130,7 +185,11 @@ namespace Internal.Reflection.Execution
         //
         // Encapsulates the assembly ref->def matching policy.
         //
-        private static bool AssemblyNameMatches(RuntimeAssemblyName refName, RuntimeAssemblyName defName, ref Exception preferredException)
+        private static bool AssemblyNameMatches(
+            RuntimeAssemblyName refName,
+            RuntimeAssemblyName defName,
+            ref Exception preferredException
+        )
         {
             //
             // The defName came from trusted metadata so it should be fully specified.
@@ -143,9 +202,21 @@ namespace Internal.Reflection.Execution
 
             if (refName.Version != null)
             {
-                if (!AssemblyVersionMatches(refVersion: refName.Version, defVersion: defName.Version))
+                if (
+                    !AssemblyVersionMatches(
+                        refVersion: refName.Version,
+                        defVersion: defName.Version
+                    )
+                )
                 {
-                    preferredException = new FileLoadException(SR.Format(SR.FileLoadException_RefDefMismatch, refName.FullName, defName.Version, refName.Version));
+                    preferredException = new FileLoadException(
+                        SR.Format(
+                            SR.FileLoadException_RefDefMismatch,
+                            refName.FullName,
+                            defName.Version,
+                            refName.Version
+                        )
+                    );
                     return false;
                 }
             }
@@ -204,15 +275,22 @@ namespace Internal.Reflection.Execution
                 return;
             }
 
-            LowLevelDictionaryWithIEnumerable<RuntimeAssemblyName, ScopeDefinitionGroup> scopeGroups = new LowLevelDictionaryWithIEnumerable<RuntimeAssemblyName, ScopeDefinitionGroup>();
-            foreach (KeyValuePair<RuntimeAssemblyName, ScopeDefinitionGroup> oldGroup in _scopeGroups)
+            LowLevelDictionaryWithIEnumerable<
+                RuntimeAssemblyName,
+                ScopeDefinitionGroup
+            > scopeGroups =
+                new LowLevelDictionaryWithIEnumerable<RuntimeAssemblyName, ScopeDefinitionGroup>();
+            foreach (
+                KeyValuePair<RuntimeAssemblyName, ScopeDefinitionGroup> oldGroup in _scopeGroups
+            )
             {
                 scopeGroups.Add(oldGroup.Key, oldGroup.Value);
             }
             AddScopesFromReaderToGroups(scopeGroups, nativeFormatModuleInfo.MetadataReader);
 
             // Update reader and scope list
-            KeyValuePair<RuntimeAssemblyName, ScopeDefinitionGroup>[] scopeGroupsArray = new KeyValuePair<RuntimeAssemblyName, ScopeDefinitionGroup>[scopeGroups.Count];
+            KeyValuePair<RuntimeAssemblyName, ScopeDefinitionGroup>[] scopeGroupsArray =
+                new KeyValuePair<RuntimeAssemblyName, ScopeDefinitionGroup>[scopeGroups.Count];
             int i = 0;
             foreach (KeyValuePair<RuntimeAssemblyName, ScopeDefinitionGroup> data in scopeGroups)
             {
@@ -225,13 +303,13 @@ namespace Internal.Reflection.Execution
 
         private KeyValuePair<RuntimeAssemblyName, ScopeDefinitionGroup>[] ScopeGroups
         {
-            get
-            {
-                return _scopeGroups;
-            }
+            get { return _scopeGroups; }
         }
 
-        private static void AddScopesFromReaderToGroups(LowLevelDictionaryWithIEnumerable<RuntimeAssemblyName, ScopeDefinitionGroup> groups, MetadataReader reader)
+        private static void AddScopesFromReaderToGroups(
+            LowLevelDictionaryWithIEnumerable<RuntimeAssemblyName, ScopeDefinitionGroup> groups,
+            MetadataReader reader
+        )
         {
             foreach (ScopeDefinitionHandle scopeDefinitionHandle in reader.ScopeDefinitions)
             {
@@ -239,11 +317,15 @@ namespace Internal.Reflection.Execution
                 ScopeDefinitionGroup scopeDefinitionGroup;
                 if (groups.TryGetValue(defName, out scopeDefinitionGroup))
                 {
-                    scopeDefinitionGroup.AddOverflowScope(new QScopeDefinition(reader, scopeDefinitionHandle));
+                    scopeDefinitionGroup.AddOverflowScope(
+                        new QScopeDefinition(reader, scopeDefinitionHandle)
+                    );
                 }
                 else
                 {
-                    scopeDefinitionGroup = new ScopeDefinitionGroup(new QScopeDefinition(reader, scopeDefinitionHandle));
+                    scopeDefinitionGroup = new ScopeDefinitionGroup(
+                        new QScopeDefinition(reader, scopeDefinitionHandle)
+                    );
                     groups.Add(defName, scopeDefinitionGroup);
                 }
             }
@@ -258,14 +340,14 @@ namespace Internal.Reflection.Execution
                 _canonicalScope = canonicalScope;
             }
 
-            public QScopeDefinition CanonicalScope { get { return _canonicalScope; } }
+            public QScopeDefinition CanonicalScope
+            {
+                get { return _canonicalScope; }
+            }
 
             public IEnumerable<QScopeDefinition> OverflowScopes
             {
-                get
-                {
-                    return _overflowScopes.ToArray();
-                }
+                get { return _overflowScopes.ToArray(); }
             }
 
             public void AddOverflowScope(QScopeDefinition overflowScope)

@@ -21,7 +21,10 @@ namespace ILCompiler
         public void AddCompilationRoots(IRootingServiceProvider rootProvider)
         {
             if (_context.SupportsUniversalCanon)
-                rootProvider.AddCompilationRoot(_context.UniversalCanonType.MakeArrayType(), "Universal generic array support");
+                rootProvider.AddCompilationRoot(
+                    _context.UniversalCanonType.MakeArrayType(),
+                    "Universal generic array support"
+                );
         }
     }
 }

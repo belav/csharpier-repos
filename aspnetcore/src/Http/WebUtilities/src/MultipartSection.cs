@@ -33,7 +33,10 @@ public class MultipartSection
     {
         get
         {
-            if (Headers != null && Headers.TryGetValue(HeaderNames.ContentDisposition, out var values))
+            if (
+                Headers != null
+                && Headers.TryGetValue(HeaderNames.ContentDisposition, out var values)
+            )
             {
                 return values;
             }

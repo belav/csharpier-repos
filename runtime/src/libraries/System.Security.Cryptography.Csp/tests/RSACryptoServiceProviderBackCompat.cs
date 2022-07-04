@@ -33,7 +33,14 @@ namespace System.Security.Cryptography.Csp.Tests
             using (var rsa = new RSACryptoServiceProvider())
             {
                 byte[] oldSignature = rsa.SignData(s_dataToSign, "SHA384");
-                Assert.True(rsa.VerifyData(s_dataToSign, oldSignature, HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1));
+                Assert.True(
+                    rsa.VerifyData(
+                        s_dataToSign,
+                        oldSignature,
+                        HashAlgorithmName.SHA384,
+                        RSASignaturePadding.Pkcs1
+                    )
+                );
             }
         }
 
@@ -43,7 +50,16 @@ namespace System.Security.Cryptography.Csp.Tests
             using (var rsa = new RSACryptoServiceProvider())
             {
                 byte[] oldSignature = rsa.SignData(s_dataToSign, 3, 2, "SHA384");
-                Assert.True(rsa.VerifyData(s_dataToSign, 3, 2, oldSignature, HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1));
+                Assert.True(
+                    rsa.VerifyData(
+                        s_dataToSign,
+                        3,
+                        2,
+                        oldSignature,
+                        HashAlgorithmName.SHA384,
+                        RSASignaturePadding.Pkcs1
+                    )
+                );
             }
         }
 
@@ -57,7 +73,14 @@ namespace System.Security.Cryptography.Csp.Tests
             using (PositionValueStream stream2 = new PositionValueStream(TotalCount))
             {
                 byte[] oldSignature = rsa.SignData(stream1, "SHA384");
-                Assert.True(rsa.VerifyData(stream2, oldSignature, HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1));
+                Assert.True(
+                    rsa.VerifyData(
+                        stream2,
+                        oldSignature,
+                        HashAlgorithmName.SHA384,
+                        RSASignaturePadding.Pkcs1
+                    )
+                );
             }
         }
 
@@ -66,7 +89,11 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var rsa = new RSACryptoServiceProvider())
             {
-                byte[] newSignature = rsa.SignData(s_dataToSign, HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1);
+                byte[] newSignature = rsa.SignData(
+                    s_dataToSign,
+                    HashAlgorithmName.SHA384,
+                    RSASignaturePadding.Pkcs1
+                );
                 Assert.True(rsa.VerifyData(s_dataToSign, "SHA384", newSignature));
             }
         }
@@ -85,7 +112,9 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var rsa = new RSACryptoServiceProvider())
             {
-                Assert.Throws<CryptographicException>(() => rsa.SignHash(Array.Empty<byte>(), "SHA384-9000"));
+                Assert.Throws<CryptographicException>(
+                    () => rsa.SignHash(Array.Empty<byte>(), "SHA384-9000")
+                );
             }
         }
 
@@ -94,7 +123,9 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var rsa = new RSACryptoServiceProvider())
             {
-                Assert.ThrowsAny<CryptographicException>(() => rsa.SignHash(Array.Empty<byte>(), "SHA384"));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => rsa.SignHash(Array.Empty<byte>(), "SHA384")
+                );
             }
         }
 
@@ -111,7 +142,9 @@ namespace System.Security.Cryptography.Csp.Tests
 
                 rsa.ImportParameters(publicParams);
 
-                Assert.Throws<CryptographicException>(() => rsa.SignHash(Array.Empty<byte>(), "SHA384"));
+                Assert.Throws<CryptographicException>(
+                    () => rsa.SignHash(Array.Empty<byte>(), "SHA384")
+                );
             }
         }
 
@@ -122,7 +155,8 @@ namespace System.Security.Cryptography.Csp.Tests
         // (false, false) is not required, that would be equivalent to the RSA AlgorithmImplementation suite.
         public static void VerifyLegacySignVerifyHash(bool useLegacySign, bool useLegacyVerify)
         {
-            byte[] dataHash, signature;
+            byte[] dataHash,
+                signature;
 
             dataHash = SHA256.HashData(TestData.HelloBytes);
 
@@ -130,9 +164,9 @@ namespace System.Security.Cryptography.Csp.Tests
             {
                 rsa.ImportParameters(TestData.RSA2048Params);
 
-                signature = useLegacySign ?
-                    rsa.SignHash(dataHash, "SHA256") :
-                    rsa.SignHash(dataHash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                signature = useLegacySign
+                    ? rsa.SignHash(dataHash, "SHA256")
+                    : rsa.SignHash(dataHash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
             }
 
             bool verified;
@@ -144,11 +178,17 @@ namespace System.Security.Cryptography.Csp.Tests
                     {
                         Modulus = TestData.RSA2048Params.Modulus,
                         Exponent = TestData.RSA2048Params.Exponent,
-                    });
+                    }
+                );
 
-                verified = useLegacyVerify ?
-                    rsa.VerifyHash(dataHash, "SHA256", signature) :
-                    rsa.VerifyHash(dataHash, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                verified = useLegacyVerify
+                    ? rsa.VerifyHash(dataHash, "SHA256", signature)
+                    : rsa.VerifyHash(
+                        dataHash,
+                        signature,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    );
             }
 
             Assert.True(verified);

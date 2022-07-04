@@ -51,9 +51,14 @@ namespace IdeCoreBenchmarks
 
         private void RestoreCompilerSolution()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
             _solutionPath = Path.Combine(roslynRoot, @"Compilers.sln");
-            var restoreOperation = Process.Start("dotnet", $"restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true {_solutionPath}");
+            var restoreOperation = Process.Start(
+                "dotnet",
+                $"restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true {_solutionPath}"
+            );
             restoreOperation.WaitForExit();
             if (restoreOperation.ExitCode != 0)
                 throw new ArgumentException($"Unable to restore {_solutionPath}");
@@ -63,14 +68,19 @@ namespace IdeCoreBenchmarks
         {
             // QueryVisualStudioInstances returns Visual Studio installations on .NET Framework, and .NET Core SDK
             // installations on .NET Core. We use the one with the most recent version.
-            var msBuildInstance = MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(x => x.Version).First();
+            var msBuildInstance = MSBuildLocator
+                .QueryVisualStudioInstances()
+                .OrderByDescending(x => x.Version)
+                .First();
 
             MSBuildLocator.RegisterInstance(msBuildInstance);
         }
 
         private Task LoadSolutionAsync()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
             _solutionPath = Path.Combine(roslynRoot, @"Roslyn.sln");
 
             if (!File.Exists(_solutionPath))
@@ -82,11 +92,14 @@ namespace IdeCoreBenchmarks
                 .Add(typeof(FindReferencesBenchmarks).Assembly);
             var services = MefHostServices.Create(assemblies);
 
-            _workspace = MSBuildWorkspace.Create(new Dictionary<string, string>
+            _workspace = MSBuildWorkspace.Create(
+                new Dictionary<string, string>
                 {
                     // Use the latest language version to force the full set of available analyzers to run on the project.
                     { "LangVersion", "9.0" },
-                }, services);
+                },
+                services
+            );
 
             if (_workspace == null)
                 throw new ArgumentException("Couldn't create workspace");
@@ -95,7 +108,9 @@ namespace IdeCoreBenchmarks
 
             var start = DateTime.Now;
 
-            var solution = _workspace.OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None).Result;
+            var solution = _workspace
+                .OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None)
+                .Result;
             Console.WriteLine("Finished opening roslyn: " + (DateTime.Now - start));
             return Task.CompletedTask;
         }
@@ -110,30 +125,38 @@ namespace IdeCoreBenchmarks
         [Benchmark]
         public async Task RunGenerator()
         {
-            var generator = (new PipelineCallbackGenerator(ctx =>
-            {
-                Console.WriteLine("Registering");
+            var generator = (
+                new PipelineCallbackGenerator(ctx =>
+                {
+                    Console.WriteLine("Registering");
 #if true
-                var input = ctx.SyntaxProvider.CreateSyntaxProvider<ClassDeclarationSyntax>(
-                    (c, _) =>
-                    {
-                        return c is ClassDeclarationSyntax classDecl && classDecl.AttributeLists.Count > 0;
-                    },
-                    (ctx, _) =>
-                    {
-                        var node = (ClassDeclarationSyntax)ctx.Node;
-                        return node;
-                    });
+                    var input = ctx.SyntaxProvider.CreateSyntaxProvider<ClassDeclarationSyntax>(
+                        (c, _) =>
+                        {
+                            return c is ClassDeclarationSyntax classDecl
+                                && classDecl.AttributeLists.Count > 0;
+                        },
+                        (ctx, _) =>
+                        {
+                            var node = (ClassDeclarationSyntax)ctx.Node;
+                            return node;
+                        }
+                    );
 #else
                 var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("System.Text.Json.Serialization.JsonSerializableAttribute");
 #endif
-                ctx.RegisterSourceOutput(input, (spc, node) => { });
-            })).AsSourceGenerator();
+                    ctx.RegisterSourceOutput(input, (spc, node) => { });
+                })
+            ).AsSourceGenerator();
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
-               new ISourceGenerator[] { generator }, parseOptions: CSharpParseOptions.Default);
+                new ISourceGenerator[] { generator },
+                parseOptions: CSharpParseOptions.Default
+            );
 
-            var project = _workspace.CurrentSolution.Projects.Single(p => p.Name == "Microsoft.CodeAnalysis.Workspaces(netstandard2.0)");
+            var project = _workspace.CurrentSolution.Projects.Single(
+                p => p.Name == "Microsoft.CodeAnalysis.Workspaces(netstandard2.0)"
+            );
 
             var start = DateTime.Now;
             Console.WriteLine("Getting compilation: " + project.Name);
@@ -146,7 +169,9 @@ namespace IdeCoreBenchmarks
 
             Console.WriteLine("First generator run: " + (DateTime.Now - start));
 
-            var syntaxTree = compilation.SyntaxTrees.Single(t => t.FilePath.Contains("AbstractCaseCorrectionService"));
+            var syntaxTree = compilation.SyntaxTrees.Single(
+                t => t.FilePath.Contains("AbstractCaseCorrectionService")
+            );
             var sourceText = syntaxTree.GetText();
 
             Console.WriteLine("Start profiling now");
@@ -154,7 +179,9 @@ namespace IdeCoreBenchmarks
             var totalIncrementalTime = TimeSpan.Zero;
             for (var i = 0; i < 10000; i++)
             {
-                var changedText = sourceText.WithChanges(new TextChange(new TextSpan(0, 0), $"// added text{i}\r\n"));
+                var changedText = sourceText.WithChanges(
+                    new TextChange(new TextSpan(0, 0), $"// added text{i}\r\n")
+                );
                 var changedTree = syntaxTree.WithChangedText(changedText);
                 var changedCompilation = compilation.ReplaceSyntaxTree(syntaxTree, changedTree);
 
@@ -174,11 +201,14 @@ namespace IdeCoreBenchmarks
     {
         private readonly Action<IncrementalGeneratorInitializationContext> _registerPipelineCallback;
 
-        public PipelineCallbackGenerator(Action<IncrementalGeneratorInitializationContext> registerPipelineCallback)
+        public PipelineCallbackGenerator(
+            Action<IncrementalGeneratorInitializationContext> registerPipelineCallback
+        )
         {
             _registerPipelineCallback = registerPipelineCallback;
         }
 
-        public void Initialize(IncrementalGeneratorInitializationContext context) => _registerPipelineCallback(context);
+        public void Initialize(IncrementalGeneratorInitializationContext context) =>
+            _registerPipelineCallback(context);
     }
 }

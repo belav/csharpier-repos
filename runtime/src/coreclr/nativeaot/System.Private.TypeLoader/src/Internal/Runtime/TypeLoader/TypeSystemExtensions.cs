@@ -85,8 +85,12 @@ namespace Internal.Runtime.TypeLoader
 
             if (typicalMethod is TypeSystem.NativeFormat.NativeFormatMethod)
             {
-                TypeSystem.NativeFormat.NativeFormatMethod nativeFormatMethod = (TypeSystem.NativeFormat.NativeFormatMethod)typicalMethod;
-                methodSignature = RuntimeSignature.CreateFromMethodHandle(nativeFormatMethod.MetadataUnit.RuntimeModule, nativeFormatMethod.Handle.ToInt());
+                TypeSystem.NativeFormat.NativeFormatMethod nativeFormatMethod =
+                    (TypeSystem.NativeFormat.NativeFormatMethod)typicalMethod;
+                methodSignature = RuntimeSignature.CreateFromMethodHandle(
+                    nativeFormatMethod.MetadataUnit.RuntimeModule,
+                    nativeFormatMethod.Handle.ToInt()
+                );
                 return true;
             }
 #if ECMA_METADATA_SUPPORT
@@ -106,31 +110,52 @@ namespace Internal.Runtime.TypeLoader
         }
 
 #if SUPPORTS_NATIVE_METADATA_TYPE_LOADING
-        public static MethodDesc ToMethodDesc(this RuntimeMethodHandle rmh, TypeSystemContext typeSystemContext)
+        public static MethodDesc ToMethodDesc(
+            this RuntimeMethodHandle rmh,
+            TypeSystemContext typeSystemContext
+        )
         {
             RuntimeTypeHandle declaringTypeHandle;
             MethodNameAndSignature nameAndSignature;
             RuntimeTypeHandle[] genericMethodArgs;
 
-            if (!TypeLoaderEnvironment.Instance.TryGetRuntimeMethodHandleComponents(rmh, out declaringTypeHandle, out nameAndSignature, out genericMethodArgs))
+            if (
+                !TypeLoaderEnvironment.Instance.TryGetRuntimeMethodHandleComponents(
+                    rmh,
+                    out declaringTypeHandle,
+                    out nameAndSignature,
+                    out genericMethodArgs
+                )
+            )
             {
                 return null;
             }
 
             QMethodDefinition methodHandle;
-            if (!TypeLoaderEnvironment.Instance.TryGetMetadataForTypeMethodNameAndSignature(declaringTypeHandle, nameAndSignature, out methodHandle))
+            if (
+                !TypeLoaderEnvironment.Instance.TryGetMetadataForTypeMethodNameAndSignature(
+                    declaringTypeHandle,
+                    nameAndSignature,
+                    out methodHandle
+                )
+            )
             {
                 return null;
             }
 
-            TypeDesc declaringType = typeSystemContext.ResolveRuntimeTypeHandle(declaringTypeHandle);
+            TypeDesc declaringType = typeSystemContext.ResolveRuntimeTypeHandle(
+                declaringTypeHandle
+            );
 
             TypeDesc declaringTypeDefinition = declaringType.GetTypeDefinition();
             MethodDesc typicalMethod = null;
             if (methodHandle.IsNativeFormatMetadataBased)
             {
                 var nativeFormatType = (NativeFormatType)declaringTypeDefinition;
-                typicalMethod = nativeFormatType.MetadataUnit.GetMethod(methodHandle.NativeFormatHandle, nativeFormatType);
+                typicalMethod = nativeFormatType.MetadataUnit.GetMethod(
+                    methodHandle.NativeFormatHandle,
+                    nativeFormatType
+                );
             }
             else if (methodHandle.IsEcmaFormatMetadataBased)
             {
@@ -141,14 +166,21 @@ namespace Internal.Runtime.TypeLoader
 
             MethodDesc methodOnInstantiatedType = typicalMethod;
             if (declaringType != declaringTypeDefinition)
-                methodOnInstantiatedType = typeSystemContext.GetMethodForInstantiatedType(typicalMethod, (InstantiatedType)declaringType);
+                methodOnInstantiatedType = typeSystemContext.GetMethodForInstantiatedType(
+                    typicalMethod,
+                    (InstantiatedType)declaringType
+                );
 
             MethodDesc instantiatedMethod = methodOnInstantiatedType;
             if (genericMethodArgs != null)
             {
                 Debug.Assert(genericMethodArgs.Length > 0);
-                Instantiation genericMethodInstantiation = typeSystemContext.ResolveRuntimeTypeHandles(genericMethodArgs);
-                typeSystemContext.GetInstantiatedMethod(methodOnInstantiatedType, genericMethodInstantiation);
+                Instantiation genericMethodInstantiation =
+                    typeSystemContext.ResolveRuntimeTypeHandles(genericMethodArgs);
+                typeSystemContext.GetInstantiatedMethod(
+                    methodOnInstantiatedType,
+                    genericMethodInstantiation
+                );
             }
 
             return instantiatedMethod;

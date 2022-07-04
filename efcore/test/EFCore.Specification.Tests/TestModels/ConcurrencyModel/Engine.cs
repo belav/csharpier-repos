@@ -10,9 +10,7 @@ public class Engine
     private ICollection<Team> _teams;
     private ICollection<Gearbox> _gearboxes;
 
-    public Engine()
-    {
-    }
+    public Engine() { }
 
     public Engine(ILazyLoader loader, int id, string name)
     {

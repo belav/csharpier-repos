@@ -12,7 +12,7 @@ namespace System.IO.Tests
     public class Directory_Move_Tests : FileSystemWatcherTest
     {
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Expected WatcherChangeTypes are different based on OS
+        [PlatformSpecific(TestPlatforms.Windows)] // Expected WatcherChangeTypes are different based on OS
         public void Directory_Move_To_Same_Directory()
         {
             DirectoryMove_SameDirectory(WatcherChangeTypes.Renamed);
@@ -42,7 +42,10 @@ namespace System.IO.Tests
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(3)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51393", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51393",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public void Directory_Move_Multiple_From_Watched_To_Unwatched(int filesCount)
         {
             DirectoryMove_Multiple_FromWatchedToUnwatched(filesCount, skipOldEvents: false);
@@ -59,14 +62,14 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Expected WatcherChangeTypes are different based on OS
+        [PlatformSpecific(TestPlatforms.Windows)] // Expected WatcherChangeTypes are different based on OS
         public void Windows_Directory_Move_To_Different_Watched_Directory()
         {
             DirectoryMove_DifferentWatchedDirectory(WatcherChangeTypes.Changed);
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Expected WatcherChangeTypes are different based on OS
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Expected WatcherChangeTypes are different based on OS
         public void Unix_Directory_Move_To_Different_Watched_Directory()
         {
             DirectoryMove_DifferentWatchedDirectory(0);
@@ -83,7 +86,10 @@ namespace System.IO.Tests
         [InlineData(true)]
         public void Directory_Move_In_Nested_Directory(bool includeSubdirectories)
         {
-            DirectoryMove_NestedDirectory(includeSubdirectories ? WatcherChangeTypes.Renamed : 0, includeSubdirectories);
+            DirectoryMove_NestedDirectory(
+                includeSubdirectories ? WatcherChangeTypes.Renamed : 0,
+                includeSubdirectories
+            );
         }
 
         [Fact]
@@ -144,28 +150,46 @@ namespace System.IO.Tests
                 Action action = () => Directory.Move(sourcePath, targetPath);
                 Action cleanup = () => Directory.Move(targetPath, sourcePath);
 
-                ExpectEvent(watcher, eventType, action, cleanup, new string[] { sourceDir, adjacentDir });
+                ExpectEvent(
+                    watcher,
+                    eventType,
+                    action,
+                    cleanup,
+                    new string[] { sourceDir, adjacentDir }
+                );
             }
         }
 
-        private void DirectoryMove_Multiple_FromWatchedToUnwatched(int filesCount, bool skipOldEvents)
+        private void DirectoryMove_Multiple_FromWatchedToUnwatched(
+            int filesCount,
+            bool skipOldEvents
+        )
         {
             Assert.InRange(filesCount, 0, int.MaxValue);
 
             string watchedTestDirectory = CreateTestDirectory();
             string unwatchedTestDirectory = CreateTestDirectory();
-            var dirs = Enumerable.Range(0, filesCount)
-                            .Select(i => new
-                            {
-                                DirecoryInWatchedDir = Path.Combine(watchedTestDirectory, $"dir{i}"),
-                                DirecoryInUnwatchedDir = Path.Combine(unwatchedTestDirectory, $"dir{i}")
-                            }).ToArray();
+            var dirs = Enumerable
+                .Range(0, filesCount)
+                .Select(
+                    i =>
+                        new
+                        {
+                            DirecoryInWatchedDir = Path.Combine(watchedTestDirectory, $"dir{i}"),
+                            DirecoryInUnwatchedDir = Path.Combine(unwatchedTestDirectory, $"dir{i}")
+                        }
+                )
+                .ToArray();
 
             Array.ForEach(dirs, (dir) => Directory.CreateDirectory(dir.DirecoryInWatchedDir));
 
             using var watcher = new FileSystemWatcher(watchedTestDirectory, "*");
 
-            Action action = () => Array.ForEach(dirs, dir => Directory.Move(dir.DirecoryInWatchedDir, dir.DirecoryInUnwatchedDir));
+            Action action = () =>
+                Array.ForEach(
+                    dirs,
+                    dir => Directory.Move(dir.DirecoryInWatchedDir, dir.DirecoryInUnwatchedDir)
+                );
 
             // On macOS, for each file we receive two events as describe in comment below.
             int expectEvents = filesCount;
@@ -177,12 +201,15 @@ namespace System.IO.Tests
             if (skipOldEvents)
                 events = events.Where(x => x.EventType != WatcherChangeTypes.Created);
 
-            var expectedEvents = dirs.Select(dir => new FiredEvent(WatcherChangeTypes.Deleted, dir.DirecoryInWatchedDir));
+            var expectedEvents = dirs.Select(
+                dir => new FiredEvent(WatcherChangeTypes.Deleted, dir.DirecoryInWatchedDir)
+            );
 
             // Remove Created events as there is racecondition when create dir and then observe parent folder. It receives Create event altought Watcher is not registered yet.
-            Assert.Equal(expectedEvents, events.Where(x => x.EventType != WatcherChangeTypes.Created));
-
-
+            Assert.Equal(
+                expectedEvents,
+                events.Where(x => x.EventType != WatcherChangeTypes.Created)
+            );
         }
 
         private void DirectoryMove_Multiple_FromUnwatchedToWatched(int filesCount)
@@ -192,21 +219,32 @@ namespace System.IO.Tests
             string watchedTestDirectory = CreateTestDirectory();
             string unwatchedTestDirectory = CreateTestDirectory();
 
-            var dirs = Enumerable.Range(0, filesCount)
-                            .Select(i => new
-                            {
-                                DirecoryInWatchedDir = Path.Combine(watchedTestDirectory, $"dir{i}"),
-                                DirecoryInUnwatchedDir = Path.Combine(unwatchedTestDirectory, $"dir{i}")
-                            }).ToArray();
+            var dirs = Enumerable
+                .Range(0, filesCount)
+                .Select(
+                    i =>
+                        new
+                        {
+                            DirecoryInWatchedDir = Path.Combine(watchedTestDirectory, $"dir{i}"),
+                            DirecoryInUnwatchedDir = Path.Combine(unwatchedTestDirectory, $"dir{i}")
+                        }
+                )
+                .ToArray();
 
             Array.ForEach(dirs, (dir) => Directory.CreateDirectory(dir.DirecoryInUnwatchedDir));
 
             using var watcher = new FileSystemWatcher(watchedTestDirectory, "*");
 
-            Action action = () => Array.ForEach(dirs, dir => Directory.Move(dir.DirecoryInUnwatchedDir, dir.DirecoryInWatchedDir));
+            Action action = () =>
+                Array.ForEach(
+                    dirs,
+                    dir => Directory.Move(dir.DirecoryInUnwatchedDir, dir.DirecoryInWatchedDir)
+                );
 
             List<FiredEvent> events = ExpectEvents(watcher, filesCount, action);
-            var expectedEvents = dirs.Select(dir => new FiredEvent(WatcherChangeTypes.Created, dir.DirecoryInWatchedDir));
+            var expectedEvents = dirs.Select(
+                dir => new FiredEvent(WatcherChangeTypes.Created, dir.DirecoryInWatchedDir)
+            );
 
             Assert.Equal(expectedEvents, events);
         }
@@ -245,7 +283,10 @@ namespace System.IO.Tests
             }
         }
 
-        private void DirectoryMove_NestedDirectory(WatcherChangeTypes eventType, bool includeSubdirectories)
+        private void DirectoryMove_NestedDirectory(
+            WatcherChangeTypes eventType,
+            bool includeSubdirectories
+        )
         {
             string nestedDir = CreateTestDirectory(TestDirectory, "first", "second", "nested");
             using (var watcher = new FileSystemWatcher(TestDirectory, "*"))

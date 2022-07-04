@@ -21,12 +21,17 @@ namespace ILCompiler
         // calling the Use/Configure methods and still get something reasonable back.
         protected Logger _logger = Logger.Null;
         private DependencyTrackingLevel _dependencyTrackingLevel = DependencyTrackingLevel.None;
-        protected IEnumerable<ICompilationRootProvider> _compilationRoots = Array.Empty<ICompilationRootProvider>();
+        protected IEnumerable<ICompilationRootProvider> _compilationRoots =
+            Array.Empty<ICompilationRootProvider>();
         protected OptimizationMode _optimizationMode = OptimizationMode.None;
         protected int _parallelism = -1;
         protected bool _resilient;
 
-        public CompilationBuilder(CompilerTypeSystemContext context, CompilationModuleGroup compilationGroup, NameMangler nameMangler)
+        public CompilationBuilder(
+            CompilerTypeSystemContext context,
+            CompilationModuleGroup compilationGroup,
+            NameMangler nameMangler
+        )
         {
             _context = context;
             _compilationGroup = compilationGroup;
@@ -61,7 +66,9 @@ namespace ILCompiler
             return this;
         }
 
-        public CompilationBuilder UseCompilationRoots(IEnumerable<ICompilationRootProvider> compilationRoots)
+        public CompilationBuilder UseCompilationRoots(
+            IEnumerable<ICompilationRootProvider> compilationRoots
+        )
         {
             _compilationRoots = compilationRoots;
             return this;
@@ -85,7 +92,10 @@ namespace ILCompiler
 
         protected abstract ILProvider GetILProvider();
 
-        protected DependencyAnalyzerBase<NodeFactory> CreateDependencyGraph(NodeFactory factory, IComparer<DependencyNodeCore<NodeFactory>> comparer = null)
+        protected DependencyAnalyzerBase<NodeFactory> CreateDependencyGraph(
+            NodeFactory factory,
+            IComparer<DependencyNodeCore<NodeFactory>> comparer = null
+        )
         {
             return _dependencyTrackingLevel.CreateDependencyGraph(factory, comparer);
         }

@@ -17,13 +17,18 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class HtmlGenerationWithCultureTest : LoggedTest, IClassFixture<MvcTestFixture<StartupWithCultureReplace>>
+public class HtmlGenerationWithCultureTest
+    : LoggedTest,
+        IClassFixture<MvcTestFixture<StartupWithCultureReplace>>
 {
     public HtmlGenerationWithCultureTest(
         ITestOutputHelper testOutputHelper,
-        MvcTestFixture<StartupWithCultureReplace> fixture) : base(testOutputHelper)
+        MvcTestFixture<StartupWithCultureReplace> fixture
+    ) : base(testOutputHelper)
     {
-        Factory = fixture.WithWebHostBuilder(builder => builder.UseStartup<StartupWithCultureReplace>());
+        Factory = fixture.WithWebHostBuilder(
+            builder => builder.UseStartup<StartupWithCultureReplace>()
+        );
         Client = Factory.CreateDefaultClient();
     }
 
@@ -40,7 +45,9 @@ public class HtmlGenerationWithCultureTest : LoggedTest, IClassFixture<MvcTestFi
         string cachedCorrelationId;
 
         // Act - 1
-        var document = await Client.GetHtmlDocumentAsync("/CacheTagHelper_VaryByCulture?culture=fr-Fr&correlationId=10");
+        var document = await Client.GetHtmlDocumentAsync(
+            "/CacheTagHelper_VaryByCulture?culture=fr-Fr&correlationId=10"
+        );
         ReadValuesFromDocument();
 
         // Assert - 1
@@ -49,7 +56,9 @@ public class HtmlGenerationWithCultureTest : LoggedTest, IClassFixture<MvcTestFi
         Assert.Equal("10", cachedCorrelationId);
 
         // Act - 2
-        document = await Client.GetHtmlDocumentAsync("/CacheTagHelper_VaryByCulture?culture=en-GB&correlationId=11");
+        document = await Client.GetHtmlDocumentAsync(
+            "/CacheTagHelper_VaryByCulture?culture=en-GB&correlationId=11"
+        );
         ReadValuesFromDocument();
 
         // Assert - 2
@@ -58,7 +67,9 @@ public class HtmlGenerationWithCultureTest : LoggedTest, IClassFixture<MvcTestFi
         Assert.Equal("11", cachedCorrelationId);
 
         // Act - 3
-        document = await Client.GetHtmlDocumentAsync("/CacheTagHelper_VaryByCulture?culture=fr-Fr&correlationId=14");
+        document = await Client.GetHtmlDocumentAsync(
+            "/CacheTagHelper_VaryByCulture?culture=fr-Fr&correlationId=14"
+        );
         ReadValuesFromDocument();
 
         // Assert - 3
@@ -85,7 +96,9 @@ public class HtmlGenerationWithCultureTest : LoggedTest, IClassFixture<MvcTestFi
         string cachedCorrelationId;
 
         // Act - 1
-        var document = await Client.GetHtmlDocumentAsync("/CacheTagHelper_VaryByCulture?culture=fr-Fr&ui-culture=fr-FR&correlationId=10");
+        var document = await Client.GetHtmlDocumentAsync(
+            "/CacheTagHelper_VaryByCulture?culture=fr-Fr&ui-culture=fr-FR&correlationId=10"
+        );
         ReadValuesFromDocument();
 
         // Assert - 1
@@ -95,7 +108,9 @@ public class HtmlGenerationWithCultureTest : LoggedTest, IClassFixture<MvcTestFi
         Assert.Equal("10", cachedCorrelationId);
 
         // Act - 2
-        document = await Client.GetHtmlDocumentAsync("/CacheTagHelper_VaryByCulture?culture=fr-Fr&ui-culture=fr-CA&correlationId=11");
+        document = await Client.GetHtmlDocumentAsync(
+            "/CacheTagHelper_VaryByCulture?culture=fr-Fr&ui-culture=fr-CA&correlationId=11"
+        );
         ReadValuesFromDocument();
 
         // Assert - 2
@@ -105,7 +120,9 @@ public class HtmlGenerationWithCultureTest : LoggedTest, IClassFixture<MvcTestFi
         Assert.Equal("11", cachedCorrelationId);
 
         // Act - 3
-        document = await Client.GetHtmlDocumentAsync("/CacheTagHelper_VaryByCulture?culture=fr-Fr&ui-culture=fr-FR&correlationId=14");
+        document = await Client.GetHtmlDocumentAsync(
+            "/CacheTagHelper_VaryByCulture?culture=fr-Fr&ui-culture=fr-FR&correlationId=14"
+        );
         ReadValuesFromDocument();
 
         // Assert - 3
@@ -129,16 +146,21 @@ public class HtmlGenerationWithCultureTest : LoggedTest, IClassFixture<MvcTestFi
     {
         // Arrange
         var client = Factory
-            .WithWebHostBuilder(builder => builder
-                .UseStartup<StartupWithCultureReplace>()
-                .ConfigureTestServices(services => services.AddSingleton(LoggerFactory)))
+            .WithWebHostBuilder(
+                builder =>
+                    builder
+                        .UseStartup<StartupWithCultureReplace>()
+                        .ConfigureTestServices(services => services.AddSingleton(LoggerFactory))
+            )
             .CreateDefaultClient();
         string culture;
         string correlationId;
         string cachedCorrelationId;
 
         // Act - 1
-        var document = await client.GetHtmlDocumentAsync("/CacheTagHelper_VaryByCulture?culture=fr-Fr&correlationId=10");
+        var document = await client.GetHtmlDocumentAsync(
+            "/CacheTagHelper_VaryByCulture?culture=fr-Fr&correlationId=10"
+        );
         ReadValuesFromDocument();
 
         // Assert - 1
@@ -147,7 +169,9 @@ public class HtmlGenerationWithCultureTest : LoggedTest, IClassFixture<MvcTestFi
         Assert.Equal("10", cachedCorrelationId);
 
         // Act - 2
-        document = await client.GetHtmlDocumentAsync("/CacheTagHelper_VaryByCulture?culture=fr-Fr&correlationId=11&varyByQueryKey=new-key");
+        document = await client.GetHtmlDocumentAsync(
+            "/CacheTagHelper_VaryByCulture?culture=fr-Fr&correlationId=11&varyByQueryKey=new-key"
+        );
         ReadValuesFromDocument();
 
         // Assert - 2
@@ -157,7 +181,9 @@ public class HtmlGenerationWithCultureTest : LoggedTest, IClassFixture<MvcTestFi
         Assert.Equal("11", cachedCorrelationId);
 
         // Act - 3
-        document = await client.GetHtmlDocumentAsync("/CacheTagHelper_VaryByCulture?culture=fr-Fr&correlationId=14");
+        document = await client.GetHtmlDocumentAsync(
+            "/CacheTagHelper_VaryByCulture?culture=fr-Fr&correlationId=14"
+        );
         ReadValuesFromDocument();
 
         // Assert - 3
@@ -168,7 +194,9 @@ public class HtmlGenerationWithCultureTest : LoggedTest, IClassFixture<MvcTestFi
         {
             // This is logging to investigate potential flakiness in this test tracked by https://github.com/aspnet/Mvc/issues/8281
             var documentContent = document.ToHtml(new HtmlMarkupFormatter());
-            throw new XunitException($"Unexpected correlation Id, reading values from document:{Environment.NewLine}{documentContent}");
+            throw new XunitException(
+                $"Unexpected correlation Id, reading values from document:{Environment.NewLine}{documentContent}"
+            );
         }
 
         Assert.Equal("10", cachedCorrelationId);
@@ -186,7 +214,11 @@ public class HtmlGenerationWithCultureTest : LoggedTest, IClassFixture<MvcTestFi
         var element = document.QuerySelector(selector);
         if (element == null)
         {
-            throw new ArgumentException($"Document does not contain element that matches the selector {selector}: " + Environment.NewLine + document.DocumentElement.OuterHtml);
+            throw new ArgumentException(
+                $"Document does not contain element that matches the selector {selector}: "
+                    + Environment.NewLine
+                    + document.DocumentElement.OuterHtml
+            );
         }
 
         return element;

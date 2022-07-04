@@ -29,6 +29,7 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__array_type_map");
         }
+
         public int Offset => 0;
         public override bool IsShareable => false;
 
@@ -36,13 +37,19 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool StaticDependenciesAreComputed => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             var writer = new NativeWriter();
             var typeMapHashTable = new VertexHashtable();
@@ -70,7 +77,9 @@ namespace ILCompiler.DependencyAnalysis
                 // Look at the constructed type symbol. If a constructed type wasn't emitted, then the array map entry isn't valid for use
                 IEETypeNode arrayTypeSymbol = factory.ConstructedTypeSymbol(arrayType);
 
-                Vertex vertex = writer.GetUnsignedConstant(_externalReferences.GetIndex(arrayTypeSymbol));
+                Vertex vertex = writer.GetUnsignedConstant(
+                    _externalReferences.GetIndex(arrayTypeSymbol)
+                );
 
                 int hashCode = arrayType.GetHashCode();
                 typeMapHashTable.Append((uint)hashCode, hashTableSection.Place(vertex));
@@ -80,7 +89,12 @@ namespace ILCompiler.DependencyAnalysis
 
             _endSymbol.SetSymbolOffset(hashTableBytes.Length);
 
-            return new ObjectData(hashTableBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this, _endSymbol });
+            return new ObjectData(
+                hashTableBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this, _endSymbol }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

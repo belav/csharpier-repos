@@ -11,13 +11,15 @@ namespace System.ServiceModel.Syndication
     {
         private readonly TextSyndicationContentKind _textKind;
 
-        public TextSyndicationContent(string text) : this(text, TextSyndicationContentKind.Plaintext)
-        {
-        }
+        public TextSyndicationContent(string text)
+            : this(text, TextSyndicationContentKind.Plaintext) { }
 
         public TextSyndicationContent(string text, TextSyndicationContentKind textKind)
         {
-            if (textKind < TextSyndicationContentKind.Plaintext || textKind > TextSyndicationContentKind.XHtml)
+            if (
+                textKind < TextSyndicationContentKind.Plaintext
+                || textKind > TextSyndicationContentKind.XHtml
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(textKind));
             }

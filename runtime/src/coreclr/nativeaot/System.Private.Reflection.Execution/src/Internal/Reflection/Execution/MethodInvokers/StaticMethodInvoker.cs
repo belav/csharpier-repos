@@ -18,13 +18,15 @@ namespace Internal.Reflection.Execution.MethodInvokers
     //
     internal sealed class StaticMethodInvoker : MethodInvokerWithMethodInvokeInfo
     {
-        public StaticMethodInvoker(MethodInvokeInfo methodInvokeInfo)
-            : base(methodInvokeInfo)
-        {
-        }
+        public StaticMethodInvoker(MethodInvokeInfo methodInvokeInfo) : base(methodInvokeInfo) { }
 
         [DebuggerGuidedStepThroughAttribute]
-        protected sealed override object Invoke(object thisObject, object[] arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object Invoke(
+            object thisObject,
+            object[] arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             object result = RuntimeAugments.CallDynamicInvokeMethod(
                 thisObject,
@@ -35,7 +37,8 @@ namespace Internal.Reflection.Execution.MethodInvokers
                 arguments,
                 binderBundle,
                 wrapInTargetInvocationException: wrapInTargetInvocationException,
-                methodToCallIsThisCall: false);
+                methodToCallIsThisCall: false
+            );
             System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }

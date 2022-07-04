@@ -50,9 +50,7 @@ namespace System.Formats.Tar
         /// </list>
         /// </remarks>
         public PaxTarEntry(TarEntryType entryType, string entryName)
-            : base(entryType, entryName, TarFormat.Pax)
-        {
-        }
+            : base(entryType, entryName, TarFormat.Pax) { }
 
         /// <summary>
         /// Initializes a new <see cref="PaxTarEntry"/> instance with the specified entry type, entry name and Extended Attributes enumeration.
@@ -83,8 +81,11 @@ namespace System.Formats.Tar
         /// <item>File length, under the name <c>size</c>, as an <see cref="int"/>, if the string representation of the number is larger than 12 bytes.</item>
         /// </list>
         /// </remarks>
-        public PaxTarEntry(TarEntryType entryType, string entryName, IEnumerable<KeyValuePair<string, string>> extendedAttributes)
-            : base(entryType, entryName, TarFormat.Pax)
+        public PaxTarEntry(
+            TarEntryType entryType,
+            string entryName,
+            IEnumerable<KeyValuePair<string, string>> extendedAttributes
+        ) : base(entryType, entryName, TarFormat.Pax)
         {
             ArgumentNullException.ThrowIfNull(extendedAttributes);
             _header.ReplaceNormalAttributesWithExtended(extendedAttributes);
@@ -118,6 +119,7 @@ namespace System.Formats.Tar
         }
 
         // Determines if the current instance's entry type supports setting a data stream.
-        internal override bool IsDataStreamSetterSupported() => EntryType == TarEntryType.RegularFile;
+        internal override bool IsDataStreamSetterSupported() =>
+            EntryType == TarEntryType.RegularFile;
     }
 }

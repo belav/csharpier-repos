@@ -14,14 +14,23 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
     internal class NamespaceSymbolReferenceFinder : AbstractReferenceFinder<INamespaceSymbol>
     {
-        private static readonly SymbolDisplayFormat s_globalNamespaceFormat = new(SymbolDisplayGlobalNamespaceStyle.Included);
+        private static readonly SymbolDisplayFormat s_globalNamespaceFormat =
+            new(SymbolDisplayGlobalNamespaceStyle.Included);
 
-        protected override bool CanFind(INamespaceSymbol symbol)
-            => true;
+        protected override bool CanFind(INamespaceSymbol symbol) => true;
 
-        protected override Task<ImmutableArray<string>> DetermineGlobalAliasesAsync(INamespaceSymbol symbol, Project project, CancellationToken cancellationToken)
+        protected override Task<ImmutableArray<string>> DetermineGlobalAliasesAsync(
+            INamespaceSymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
-            return GetAllMatchingGlobalAliasNamesAsync(project, symbol.Name, arity: 0, cancellationToken);
+            return GetAllMatchingGlobalAliasNamesAsync(
+                project,
+                symbol.Name,
+                arity: 0,
+                cancellationToken
+            );
         }
 
         protected override async Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
@@ -30,24 +39,35 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<Document>.GetInstance(out var result);
 
             var namespaceName = GetNamespaceIdentifierName(symbol);
-            result.AddRange(await FindDocumentsAsync(
-                project, documents, cancellationToken, namespaceName).ConfigureAwait(false));
+            result.AddRange(
+                await FindDocumentsAsync(project, documents, cancellationToken, namespaceName)
+                    .ConfigureAwait(false)
+            );
 
             if (globalAliases != null)
             {
                 foreach (var globalAlias in globalAliases)
                 {
-                    result.AddRange(await FindDocumentsAsync(
-                        project, documents, cancellationToken, globalAlias).ConfigureAwait(false));
+                    result.AddRange(
+                        await FindDocumentsAsync(project, documents, cancellationToken, globalAlias)
+                            .ConfigureAwait(false)
+                    );
                 }
             }
 
-            var documentsWithGlobalAttributes = await FindDocumentsWithGlobalSuppressMessageAttributeAsync(project, documents, cancellationToken).ConfigureAwait(false);
+            var documentsWithGlobalAttributes =
+                await FindDocumentsWithGlobalSuppressMessageAttributeAsync(
+                        project,
+                        documents,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             result.AddRange(documentsWithGlobalAttributes);
 
             return result.ToImmutable();
@@ -60,13 +80,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 : symbol.Name;
         }
 
-        protected override async ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
+        protected override async ValueTask<
+            ImmutableArray<FinderLocation>
+        > FindReferencesInDocumentAsync(
             INamespaceSymbol symbol,
             HashSet<string>? globalAliases,
             Document document,
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var namespaceName = GetNamespaceIdentifierName(symbol);
@@ -74,8 +97,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             using var _ = ArrayBuilder<FinderLocation>.GetInstance(out var initialReferences);
 
             await AddReferencesAsync(
-                symbol, namespaceName, document, semanticModel,
-                initialReferences, cancellationToken).ConfigureAwait(false);
+                    symbol,
+                    namespaceName,
+                    document,
+                    semanticModel,
+                    initialReferences,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (globalAliases != null)
             {
@@ -88,16 +117,37 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                         continue;
 
                     await AddReferencesAsync(
-                        symbol, globalAlias, document, semanticModel,
-                        initialReferences, cancellationToken).ConfigureAwait(false);
+                            symbol,
+                            globalAlias,
+                            document,
+                            semanticModel,
+                            initialReferences,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
 
-            initialReferences.AddRange(await FindLocalAliasReferencesAsync(
-                initialReferences, symbol, document, semanticModel, cancellationToken).ConfigureAwait(false));
+            initialReferences.AddRange(
+                await FindLocalAliasReferencesAsync(
+                        initialReferences,
+                        symbol,
+                        document,
+                        semanticModel,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            );
 
-            initialReferences.AddRange(await FindReferencesInDocumentInsideGlobalSuppressionsAsync(
-                document, semanticModel, symbol, cancellationToken).ConfigureAwait(false));
+            initialReferences.AddRange(
+                await FindReferencesInDocumentInsideGlobalSuppressionsAsync(
+                        document,
+                        semanticModel,
+                        symbol,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            );
 
             return initialReferences.ToImmutable();
         }
@@ -113,20 +163,30 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Document document,
             SemanticModel semanticModel,
             ArrayBuilder<FinderLocation> initialReferences,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             var tokens = await GetIdentifierOrGlobalNamespaceTokensWithTextAsync(
-                document, semanticModel, name, cancellationToken).ConfigureAwait(false);
+                    document,
+                    semanticModel,
+                    name,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            initialReferences.AddRange(await FindReferencesInTokensAsync(
-                symbol,
-                document,
-                semanticModel,
-                tokens,
-                t => syntaxFacts.TextMatch(t.ValueText, name),
-                cancellationToken).ConfigureAwait(false));
+            initialReferences.AddRange(
+                await FindReferencesInTokensAsync(
+                        symbol,
+                        document,
+                        semanticModel,
+                        tokens,
+                        t => syntaxFacts.TextMatch(t.ValueText, name),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            );
         }
     }
 }

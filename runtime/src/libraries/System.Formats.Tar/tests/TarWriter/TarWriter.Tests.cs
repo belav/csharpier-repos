@@ -13,7 +13,9 @@ namespace System.Formats.Tar.Tests
         public void Constructors_NullStream()
         {
             Assert.Throws<ArgumentNullException>(() => new TarWriter(archiveStream: null));
-            Assert.Throws<ArgumentNullException>(() => new TarWriter(archiveStream: null, TarFormat.V7));
+            Assert.Throws<ArgumentNullException>(
+                () => new TarWriter(archiveStream: null, TarFormat.V7)
+            );
         }
 
         [Fact]
@@ -41,31 +43,62 @@ namespace System.Formats.Tar.Tests
             using TarWriter writerV7 = new TarWriter(archiveStream, TarFormat.V7, leaveOpen: true);
             Assert.Equal(TarFormat.V7, writerV7.Format);
 
-            using TarWriter writerUstar = new TarWriter(archiveStream, TarFormat.Ustar, leaveOpen: true);
+            using TarWriter writerUstar = new TarWriter(
+                archiveStream,
+                TarFormat.Ustar,
+                leaveOpen: true
+            );
             Assert.Equal(TarFormat.Ustar, writerUstar.Format);
 
-            using TarWriter writerPax = new TarWriter(archiveStream, TarFormat.Pax, leaveOpen: true);
+            using TarWriter writerPax = new TarWriter(
+                archiveStream,
+                TarFormat.Pax,
+                leaveOpen: true
+            );
             Assert.Equal(TarFormat.Pax, writerPax.Format);
 
-            using TarWriter writerGnu = new TarWriter(archiveStream, TarFormat.Gnu, leaveOpen: true);
+            using TarWriter writerGnu = new TarWriter(
+                archiveStream,
+                TarFormat.Gnu,
+                leaveOpen: true
+            );
             Assert.Equal(TarFormat.Gnu, writerGnu.Format);
 
-            using TarWriter writerNullGeaDefaultPax = new TarWriter(archiveStream, leaveOpen: true, globalExtendedAttributes: null);
+            using TarWriter writerNullGeaDefaultPax = new TarWriter(
+                archiveStream,
+                leaveOpen: true,
+                globalExtendedAttributes: null
+            );
             Assert.Equal(TarFormat.Pax, writerNullGeaDefaultPax.Format);
 
-            using TarWriter writerValidGeaDefaultPax = new TarWriter(archiveStream, leaveOpen: true, globalExtendedAttributes: new Dictionary<string, string>());
+            using TarWriter writerValidGeaDefaultPax = new TarWriter(
+                archiveStream,
+                leaveOpen: true,
+                globalExtendedAttributes: new Dictionary<string, string>()
+            );
             Assert.Equal(TarFormat.Pax, writerValidGeaDefaultPax.Format);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new TarWriter(archiveStream, TarFormat.Unknown));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new TarWriter(archiveStream, (TarFormat)int.MinValue));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new TarWriter(archiveStream, (TarFormat)int.MaxValue));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new TarWriter(archiveStream, TarFormat.Unknown)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new TarWriter(archiveStream, (TarFormat)int.MinValue)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new TarWriter(archiveStream, (TarFormat)int.MaxValue)
+            );
         }
 
         [Fact]
         public void Constructors_UnwritableStream_Throws()
         {
             using MemoryStream archiveStream = new MemoryStream();
-            using WrappedStream wrappedStream = new WrappedStream(archiveStream, canRead: true, canWrite: false, canSeek: false);
+            using WrappedStream wrappedStream = new WrappedStream(
+                archiveStream,
+                canRead: true,
+                canWrite: false,
+                canSeek: false
+            );
             Assert.Throws<IOException>(() => new TarWriter(wrappedStream));
             Assert.Throws<IOException>(() => new TarWriter(wrappedStream, TarFormat.V7));
         }
@@ -89,7 +122,8 @@ namespace System.Formats.Tar.Tests
                     // '\0' = 0
                     TarEntryType.V7RegularFile,
                     // 'a.b' = 97 + 46 + 98 = 241
-                    entryName: "a.b");
+                    entryName: "a.b"
+                );
 
                 // '0000744\0' = 48 + 48 + 48 + 48 + 55 + 52 + 52 + 0 = 351
                 entry.Mode = AssetMode; // octal 744 = u+rxw, g+r, o+r

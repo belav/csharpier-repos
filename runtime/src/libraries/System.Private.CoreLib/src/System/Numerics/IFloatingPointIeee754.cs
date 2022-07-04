@@ -7,13 +7,12 @@ namespace System.Numerics
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     public interface IFloatingPointIeee754<TSelf>
         : IExponentialFunctions<TSelf>,
-          IFloatingPoint<TSelf>,
-          IHyperbolicFunctions<TSelf>,
-          ILogarithmicFunctions<TSelf>,
-          IPowerFunctions<TSelf>,
-          IRootFunctions<TSelf>,
-          ITrigonometricFunctions<TSelf>
-        where TSelf : IFloatingPointIeee754<TSelf>
+            IFloatingPoint<TSelf>,
+            IHyperbolicFunctions<TSelf>,
+            ILogarithmicFunctions<TSelf>,
+            IPowerFunctions<TSelf>,
+            IRootFunctions<TSelf>,
+            ITrigonometricFunctions<TSelf> where TSelf : IFloatingPointIeee754<TSelf>
     {
         /// <summary>Gets the mathematical constant <c>e</c>.</summary>
         static abstract TSelf E { get; }

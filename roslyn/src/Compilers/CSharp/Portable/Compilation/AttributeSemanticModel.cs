@@ -25,8 +25,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxTreeSemanticModel? containingSemanticModelOpt = null,
             SyntaxTreeSemanticModel? parentSemanticModelOpt = null,
             ImmutableDictionary<Symbol, Symbol>? parentRemappedSymbolsOpt = null,
-            int speculatedPosition = 0)
-            : base(syntax, attributeType, new ExecutableCodeBinder(syntax, rootBinder.ContainingMember(), rootBinder), containingSemanticModelOpt, parentSemanticModelOpt, snapshotManagerOpt: null, parentRemappedSymbolsOpt: parentRemappedSymbolsOpt, speculatedPosition)
+            int speculatedPosition = 0
+        )
+            : base(
+                syntax,
+                attributeType,
+                new ExecutableCodeBinder(syntax, rootBinder.ContainingMember(), rootBinder),
+                containingSemanticModelOpt,
+                parentSemanticModelOpt,
+                snapshotManagerOpt: null,
+                parentRemappedSymbolsOpt: parentRemappedSymbolsOpt,
+                speculatedPosition
+            )
         {
             Debug.Assert(syntax != null);
             _aliasOpt = aliasOpt;
@@ -35,29 +45,59 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates an AttributeSemanticModel that allows asking semantic questions about an attribute node.
         /// </summary>
-        public static AttributeSemanticModel Create(SyntaxTreeSemanticModel containingSemanticModel, AttributeSyntax syntax, NamedTypeSymbol attributeType, AliasSymbol aliasOpt, Symbol? attributeTarget, Binder rootBinder, ImmutableDictionary<Symbol, Symbol> parentRemappedSymbolsOpt)
+        public static AttributeSemanticModel Create(
+            SyntaxTreeSemanticModel containingSemanticModel,
+            AttributeSyntax syntax,
+            NamedTypeSymbol attributeType,
+            AliasSymbol aliasOpt,
+            Symbol? attributeTarget,
+            Binder rootBinder,
+            ImmutableDictionary<Symbol, Symbol> parentRemappedSymbolsOpt
+        )
         {
-            rootBinder = attributeTarget is null ? rootBinder : new ContextualAttributeBinder(rootBinder, attributeTarget);
-            return new AttributeSemanticModel(syntax, attributeType, aliasOpt, rootBinder, containingSemanticModel, parentRemappedSymbolsOpt: parentRemappedSymbolsOpt);
+            rootBinder = attributeTarget is null
+                ? rootBinder
+                : new ContextualAttributeBinder(rootBinder, attributeTarget);
+            return new AttributeSemanticModel(
+                syntax,
+                attributeType,
+                aliasOpt,
+                rootBinder,
+                containingSemanticModel,
+                parentRemappedSymbolsOpt: parentRemappedSymbolsOpt
+            );
         }
 
         /// <summary>
         /// Creates a speculative AttributeSemanticModel that allows asking semantic questions about an attribute node that did not appear in the original source code.
         /// </summary>
-        public static AttributeSemanticModel CreateSpeculative(SyntaxTreeSemanticModel parentSemanticModel, AttributeSyntax syntax, NamedTypeSymbol attributeType, AliasSymbol aliasOpt, Binder rootBinder, ImmutableDictionary<Symbol, Symbol> parentRemappedSymbolsOpt, int position)
+        public static AttributeSemanticModel CreateSpeculative(
+            SyntaxTreeSemanticModel parentSemanticModel,
+            AttributeSyntax syntax,
+            NamedTypeSymbol attributeType,
+            AliasSymbol aliasOpt,
+            Binder rootBinder,
+            ImmutableDictionary<Symbol, Symbol> parentRemappedSymbolsOpt,
+            int position
+        )
         {
             Debug.Assert(parentSemanticModel != null);
             Debug.Assert(rootBinder != null);
             Debug.Assert(rootBinder.IsSemanticModelBinder);
-            return new AttributeSemanticModel(syntax, attributeType, aliasOpt, rootBinder, parentSemanticModelOpt: parentSemanticModel, parentRemappedSymbolsOpt: parentRemappedSymbolsOpt, speculatedPosition: position);
+            return new AttributeSemanticModel(
+                syntax,
+                attributeType,
+                aliasOpt,
+                rootBinder,
+                parentSemanticModelOpt: parentSemanticModel,
+                parentRemappedSymbolsOpt: parentRemappedSymbolsOpt,
+                speculatedPosition: position
+            );
         }
 
         private NamedTypeSymbol AttributeType
         {
-            get
-            {
-                return (NamedTypeSymbol)MemberSymbol;
-            }
+            get { return (NamedTypeSymbol)MemberSymbol; }
         }
 
         protected internal override CSharpSyntaxNode GetBindableSyntaxNode(CSharpSyntaxNode node)
@@ -84,13 +124,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             return base.GetBindableSyntaxNode(node);
         }
 
-        internal override BoundNode Bind(Binder binder, CSharpSyntaxNode node, BindingDiagnosticBag diagnostics)
+        internal override BoundNode Bind(
+            Binder binder,
+            CSharpSyntaxNode node,
+            BindingDiagnosticBag diagnostics
+        )
         {
             if (node.Kind() == SyntaxKind.Attribute)
             {
                 var attribute = (AttributeSyntax)node;
                 // note: we should find the attributed member before binding the attribute as part of https://github.com/dotnet/roslyn/issues/53618
-                return binder.BindAttribute(attribute, AttributeType, attributedMember: null, diagnostics);
+                return binder.BindAttribute(
+                    attribute,
+                    AttributeType,
+                    attributedMember: null,
+                    diagnostics
+                );
             }
             else if (SyntaxFacts.IsAttributeName(node))
             {
@@ -108,14 +157,37 @@ namespace Microsoft.CodeAnalysis.CSharp
             DiagnosticBag diagnostics,
             bool createSnapshots,
             out NullableWalker.SnapshotManager? snapshotManager,
-            ref ImmutableDictionary<Symbol, Symbol>? remappedSymbols)
+            ref ImmutableDictionary<Symbol, Symbol>? remappedSymbols
+        )
         {
-            return NullableWalker.AnalyzeAndRewrite(Compilation, symbol: null, boundRoot, binder, initialState: null, diagnostics, createSnapshots, out snapshotManager, ref remappedSymbols);
+            return NullableWalker.AnalyzeAndRewrite(
+                Compilation,
+                symbol: null,
+                boundRoot,
+                binder,
+                initialState: null,
+                diagnostics,
+                createSnapshots,
+                out snapshotManager,
+                ref remappedSymbols
+            );
         }
 
-        protected override void AnalyzeBoundNodeNullability(BoundNode boundRoot, Binder binder, DiagnosticBag diagnostics, bool createSnapshots)
+        protected override void AnalyzeBoundNodeNullability(
+            BoundNode boundRoot,
+            Binder binder,
+            DiagnosticBag diagnostics,
+            bool createSnapshots
+        )
         {
-            NullableWalker.AnalyzeWithoutRewrite(Compilation, symbol: null, boundRoot, binder, diagnostics, createSnapshots);
+            NullableWalker.AnalyzeWithoutRewrite(
+                Compilation,
+                symbol: null,
+                boundRoot,
+                binder,
+                diagnostics,
+                createSnapshots
+            );
         }
 
         protected override bool IsNullableAnalysisEnabled()
@@ -123,48 +195,86 @@ namespace Microsoft.CodeAnalysis.CSharp
             return IsNullableAnalysisEnabledIn(Compilation, (AttributeSyntax)Root);
         }
 
-        internal static bool IsNullableAnalysisEnabledIn(CSharpCompilation compilation, AttributeSyntax syntax)
+        internal static bool IsNullableAnalysisEnabledIn(
+            CSharpCompilation compilation,
+            AttributeSyntax syntax
+        )
         {
             return compilation.IsNullableAnalysisEnabledIn(syntax);
         }
 
-        internal override bool TryGetSpeculativeSemanticModelCore(SyntaxTreeSemanticModel parentModel, int position, ConstructorInitializerSyntax constructorInitializer, out SemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            ConstructorInitializerSyntax constructorInitializer,
+            out SemanticModel? speculativeModel
+        )
         {
             speculativeModel = null;
             return false;
         }
 
-        internal override bool TryGetSpeculativeSemanticModelCore(SyntaxTreeSemanticModel parentModel, int position, PrimaryConstructorBaseTypeSyntax constructorInitializer, out SemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            PrimaryConstructorBaseTypeSyntax constructorInitializer,
+            out SemanticModel? speculativeModel
+        )
         {
             speculativeModel = null;
             return false;
         }
 
-        internal override bool TryGetSpeculativeSemanticModelCore(SyntaxTreeSemanticModel parentModel, int position, EqualsValueClauseSyntax initializer, out SemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            EqualsValueClauseSyntax initializer,
+            out SemanticModel? speculativeModel
+        )
         {
             speculativeModel = null;
             return false;
         }
 
-        internal override bool TryGetSpeculativeSemanticModelCore(SyntaxTreeSemanticModel parentModel, int position, ArrowExpressionClauseSyntax expressionBody, out SemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            ArrowExpressionClauseSyntax expressionBody,
+            out SemanticModel? speculativeModel
+        )
         {
             speculativeModel = null;
             return false;
         }
 
-        internal override bool TryGetSpeculativeSemanticModelCore(SyntaxTreeSemanticModel parentModel, int position, StatementSyntax statement, out SemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            StatementSyntax statement,
+            out SemanticModel? speculativeModel
+        )
         {
             speculativeModel = null;
             return false;
         }
 
-        internal override bool TryGetSpeculativeSemanticModelForMethodBodyCore(SyntaxTreeSemanticModel parentModel, int position, BaseMethodDeclarationSyntax method, out SemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelForMethodBodyCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            BaseMethodDeclarationSyntax method,
+            out SemanticModel? speculativeModel
+        )
         {
             speculativeModel = null;
             return false;
         }
 
-        internal override bool TryGetSpeculativeSemanticModelForMethodBodyCore(SyntaxTreeSemanticModel parentModel, int position, AccessorDeclarationSyntax accessor, out SemanticModel? speculativeModel)
+        internal override bool TryGetSpeculativeSemanticModelForMethodBodyCore(
+            SyntaxTreeSemanticModel parentModel,
+            int position,
+            AccessorDeclarationSyntax accessor,
+            out SemanticModel? speculativeModel
+        )
         {
             speculativeModel = null;
             return false;

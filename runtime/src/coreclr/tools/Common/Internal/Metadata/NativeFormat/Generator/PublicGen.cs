@@ -26,10 +26,7 @@ using System.Linq;
 
 class PublicGen : CsWriter
 {
-    public PublicGen(string fileName)
-        : base(fileName)
-    {
-    }
+    public PublicGen(string fileName) : base(fileName) { }
 
     public void EmitSource()
     {
@@ -40,7 +37,9 @@ class PublicGen : CsWriter
 
         WriteLine("#pragma warning disable 108     // base type 'uint' is not CLS-compliant");
         WriteLine("#pragma warning disable 3009    // base type 'uint' is not CLS-compliant");
-        WriteLine("#pragma warning disable 282     // There is no defined ordering between fields in multiple declarations of partial class or struct");
+        WriteLine(
+            "#pragma warning disable 282     // There is no defined ordering between fields in multiple declarations of partial class or struct"
+        );
         WriteLine();
 
         OpenScope("namespace Internal.Metadata.NativeFormat");
@@ -64,17 +63,15 @@ class PublicGen : CsWriter
             new RecordDef(
                 name: "HandleType",
                 baseTypeName: "byte",
-                members:
-                    new MemberDef[] {
-                        new MemberDef(name: "Null", value: "0x0")
-                    }
+                members: new MemberDef[] { new MemberDef(name: "Null", value: "0x0") }
                     .Concat(
-                        SchemaDef.HandleSchema.Select((name, index) =>
-                            new MemberDef(name: name, value: $"0x{index + 1:x}"))
+                        SchemaDef.HandleSchema.Select(
+                            (name, index) => new MemberDef(name: name, value: $"0x{index + 1:x}")
+                        )
                     )
                     .ToArray()
-                )
-            );
+            )
+        );
     }
 
     private void EmitEnum(RecordDef record)

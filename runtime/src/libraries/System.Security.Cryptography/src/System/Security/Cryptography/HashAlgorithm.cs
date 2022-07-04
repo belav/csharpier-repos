@@ -18,9 +18,12 @@ namespace System.Security.Cryptography
 
         protected HashAlgorithm() { }
 
-        [Obsolete(Obsoletions.DefaultCryptoAlgorithmsMessage, DiagnosticId = Obsoletions.DefaultCryptoAlgorithmsDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
-        public static HashAlgorithm Create() =>
-            CryptoConfigForwarder.CreateDefaultHashAlgorithm();
+        [Obsolete(
+            Obsoletions.DefaultCryptoAlgorithmsMessage,
+            DiagnosticId = Obsoletions.DefaultCryptoAlgorithmsDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
+        public static HashAlgorithm Create() => CryptoConfigForwarder.CreateDefaultHashAlgorithm();
 
         [RequiresUnreferencedCode(CryptoConfigForwarder.CreateFromNameUnreferencedCodeMessage)]
         public static HashAlgorithm? Create(string hashName) =>
@@ -35,7 +38,9 @@ namespace System.Security.Cryptography
                 if (_disposed)
                     throw new ObjectDisposedException(null);
                 if (State != 0)
-                    throw new CryptographicUnexpectedOperationException(SR.Cryptography_HashNotYetFinalized);
+                    throw new CryptographicUnexpectedOperationException(
+                        SR.Cryptography_HashNotYetFinalized
+                    );
 
                 return (byte[]?)HashValue?.Clone();
             }
@@ -51,7 +56,11 @@ namespace System.Security.Cryptography
             return CaptureHashCodeAndReinitialize();
         }
 
-        public bool TryComputeHash(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        public bool TryComputeHash(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (_disposed)
             {
@@ -82,7 +91,10 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(buffer);
 
             if (offset < 0)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (count < 0 || (count > buffer.Length))
                 throw new ArgumentException(SR.Argument_InvalidValue);
             if ((buffer.Length - count) < offset)
@@ -123,7 +135,8 @@ namespace System.Security.Cryptography
 
         public Task<byte[]> ComputeHashAsync(
             Stream inputStream,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(inputStream);
 
@@ -135,7 +148,8 @@ namespace System.Security.Cryptography
 
         private async Task<byte[]> ComputeHashAsyncCore(
             Stream inputStream,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Use ArrayPool.Shared instead of CryptoPool because the array is passed out.
             byte[] rented = ArrayPool<byte>.Shared.Rent(4096);
@@ -143,7 +157,13 @@ namespace System.Security.Cryptography
             int clearLimit = 0;
             int bytesRead;
 
-            while ((bytesRead = await inputStream.ReadAsync(buffer, cancellationToken).ConfigureAwait(false)) > 0)
+            while (
+                (
+                    bytesRead = await inputStream
+                        .ReadAsync(buffer, cancellationToken)
+                        .ConfigureAwait(false)
+                ) > 0
+            )
             {
                 if (bytesRead > clearLimit)
                 {
@@ -200,7 +220,13 @@ namespace System.Security.Cryptography
         public virtual bool CanTransformMultipleBlocks => true;
         public virtual bool CanReuseTransform => true;
 
-        public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[]? outputBuffer, int outputOffset)
+        public int TransformBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount,
+            byte[]? outputBuffer,
+            int outputOffset
+        )
         {
             ValidateTransformBlock(inputBuffer, inputOffset, inputCount);
 
@@ -208,7 +234,10 @@ namespace System.Security.Cryptography
             State = 1;
 
             HashCore(inputBuffer, inputOffset, inputCount);
-            if ((outputBuffer != null) && ((inputBuffer != outputBuffer) || (inputOffset != outputOffset)))
+            if (
+                (outputBuffer != null)
+                && ((inputBuffer != outputBuffer) || (inputOffset != outputOffset))
+            )
             {
                 // We let BlockCopy do the destination array validation
                 Buffer.BlockCopy(inputBuffer, inputOffset, outputBuffer, outputOffset, inputCount);
@@ -244,7 +273,10 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(inputBuffer);
 
             if (inputOffset < 0)
-                throw new ArgumentOutOfRangeException(nameof(inputOffset), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(inputOffset),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (inputCount < 0 || inputCount > inputBuffer.Length)
                 throw new ArgumentException(SR.Argument_InvalidValue);
             if ((inputBuffer.Length - inputCount) < inputOffset)

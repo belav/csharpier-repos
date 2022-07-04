@@ -27,8 +27,8 @@ public class PropertyChangedEventData : PropertyEventData
         EntityEntry entityEntry,
         IProperty property,
         object? oldValue,
-        object? newValue)
-        : base(eventDefinition, messageGenerator, property)
+        object? newValue
+    ) : base(eventDefinition, messageGenerator, property)
     {
         EntityEntry = entityEntry;
         OldValue = oldValue;
@@ -43,8 +43,7 @@ public class PropertyChangedEventData : PropertyEventData
     /// <summary>
     ///     The property.
     /// </summary>
-    public new virtual IProperty Property
-        => (IProperty)base.Property;
+    public new virtual IProperty Property => (IProperty)base.Property;
 
     /// <summary>
     ///     The old value.

@@ -21,7 +21,9 @@ public static class ControllerEndpointRouteBuilderExtensions
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/>.</param>
     /// <returns>An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated with controller actions.</returns>
-    public static ControllerActionEndpointConventionBuilder MapControllers(this IEndpointRouteBuilder endpoints)
+    public static ControllerActionEndpointConventionBuilder MapControllers(
+        this IEndpointRouteBuilder endpoints
+    )
     {
         if (endpoints == null)
         {
@@ -41,7 +43,9 @@ public static class ControllerEndpointRouteBuilderExtensions
     /// <returns>
     /// An <see cref="ControllerActionEndpointConventionBuilder"/> for endpoints associated with controller actions for this route.
     /// </returns>
-    public static ControllerActionEndpointConventionBuilder MapDefaultControllerRoute(this IEndpointRouteBuilder endpoints)
+    public static ControllerActionEndpointConventionBuilder MapDefaultControllerRoute(
+        this IEndpointRouteBuilder endpoints
+    )
     {
         if (endpoints == null)
         {
@@ -56,7 +60,8 @@ public static class ControllerEndpointRouteBuilderExtensions
             "{controller=Home}/{action=Index}/{id?}",
             defaults: null,
             constraints: null,
-            dataTokens: null);
+            dataTokens: null
+        );
     }
 
     /// <summary>
@@ -88,7 +93,8 @@ public static class ControllerEndpointRouteBuilderExtensions
         string pattern,
         object? defaults = null,
         object? constraints = null,
-        object? dataTokens = null)
+        object? dataTokens = null
+    )
     {
         if (endpoints == null)
         {
@@ -103,7 +109,8 @@ public static class ControllerEndpointRouteBuilderExtensions
             pattern,
             new RouteValueDictionary(defaults),
             new RouteValueDictionary(constraints),
-            new RouteValueDictionary(dataTokens));
+            new RouteValueDictionary(dataTokens)
+        );
     }
 
     /// <summary>
@@ -137,7 +144,8 @@ public static class ControllerEndpointRouteBuilderExtensions
         string pattern,
         object? defaults = null,
         object? constraints = null,
-        object? dataTokens = null)
+        object? dataTokens = null
+    )
     {
         if (endpoints == null)
         {
@@ -153,9 +161,16 @@ public static class ControllerEndpointRouteBuilderExtensions
         defaultsDictionary["area"] = defaultsDictionary["area"] ?? areaName;
 
         var constraintsDictionary = new RouteValueDictionary(constraints);
-        constraintsDictionary["area"] = constraintsDictionary["area"] ?? new StringRouteConstraint(areaName);
+        constraintsDictionary["area"] =
+            constraintsDictionary["area"] ?? new StringRouteConstraint(areaName);
 
-        return endpoints.MapControllerRoute(name, pattern, defaultsDictionary, constraintsDictionary, dataTokens);
+        return endpoints.MapControllerRoute(
+            name,
+            pattern,
+            defaultsDictionary,
+            constraintsDictionary,
+            dataTokens
+        );
     }
 
     /// <summary>
@@ -191,7 +206,8 @@ public static class ControllerEndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapFallbackToController(
         this IEndpointRouteBuilder endpoints,
         string action,
-        string controller)
+        string controller
+    )
     {
         if (endpoints == null)
         {
@@ -265,7 +281,8 @@ public static class ControllerEndpointRouteBuilderExtensions
         this IEndpointRouteBuilder endpoints,
         string pattern,
         string action,
-        string controller)
+        string controller
+    )
     {
         if (endpoints == null)
         {
@@ -341,7 +358,8 @@ public static class ControllerEndpointRouteBuilderExtensions
         this IEndpointRouteBuilder endpoints,
         string action,
         string controller,
-        string area)
+        string area
+    )
     {
         if (endpoints == null)
         {
@@ -417,7 +435,8 @@ public static class ControllerEndpointRouteBuilderExtensions
         string pattern,
         string action,
         string controller,
-        string area)
+        string area
+    )
     {
         if (endpoints == null)
         {
@@ -475,8 +494,10 @@ public static class ControllerEndpointRouteBuilderExtensions
     /// Register <typeparamref name="TTransformer"/> with the desired service lifetime in <c>ConfigureServices</c>.
     /// </para>
     /// </remarks>
-    public static void MapDynamicControllerRoute<TTransformer>(this IEndpointRouteBuilder endpoints, string pattern)
-        where TTransformer : DynamicRouteValueTransformer
+    public static void MapDynamicControllerRoute<TTransformer>(
+        this IEndpointRouteBuilder endpoints,
+        string pattern
+    ) where TTransformer : DynamicRouteValueTransformer
     {
         if (endpoints == null)
         {
@@ -505,8 +526,11 @@ public static class ControllerEndpointRouteBuilderExtensions
     /// is required when using <paramref name="state" />.
     /// </para>
     /// </remarks>
-    public static void MapDynamicControllerRoute<TTransformer>(this IEndpointRouteBuilder endpoints, string pattern, object? state)
-        where TTransformer : DynamicRouteValueTransformer
+    public static void MapDynamicControllerRoute<TTransformer>(
+        this IEndpointRouteBuilder endpoints,
+        string pattern,
+        object? state
+    ) where TTransformer : DynamicRouteValueTransformer
     {
         if (endpoints == null)
         {
@@ -520,7 +544,12 @@ public static class ControllerEndpointRouteBuilderExtensions
         RegisterInCache(endpoints.ServiceProvider, controllerDataSource);
 
         // The data source is just used to share the common order with conventionally routed actions.
-        controllerDataSource.AddDynamicControllerEndpoint(endpoints, pattern, typeof(TTransformer), state);
+        controllerDataSource.AddDynamicControllerEndpoint(
+            endpoints,
+            pattern,
+            typeof(TTransformer),
+            state
+        );
     }
 
     /// <summary>
@@ -543,8 +572,12 @@ public static class ControllerEndpointRouteBuilderExtensions
     /// is required when using <paramref name="state" />.
     /// </para>
     /// </remarks>
-    public static void MapDynamicControllerRoute<TTransformer>(this IEndpointRouteBuilder endpoints, string pattern, object state, int order)
-        where TTransformer : DynamicRouteValueTransformer
+    public static void MapDynamicControllerRoute<TTransformer>(
+        this IEndpointRouteBuilder endpoints,
+        string pattern,
+        object state,
+        int order
+    ) where TTransformer : DynamicRouteValueTransformer
     {
         if (endpoints == null)
         {
@@ -558,17 +591,29 @@ public static class ControllerEndpointRouteBuilderExtensions
         RegisterInCache(endpoints.ServiceProvider, controllerDataSource);
 
         // The data source is just used to share the common order with conventionally routed actions.
-        controllerDataSource.AddDynamicControllerEndpoint(endpoints, pattern, typeof(TTransformer), state, order);
+        controllerDataSource.AddDynamicControllerEndpoint(
+            endpoints,
+            pattern,
+            typeof(TTransformer),
+            state,
+            order
+        );
     }
 
-    private static DynamicControllerMetadata CreateDynamicControllerMetadata(string action, string controller, string? area)
+    private static DynamicControllerMetadata CreateDynamicControllerMetadata(
+        string action,
+        string controller,
+        string? area
+    )
     {
-        return new DynamicControllerMetadata(new RouteValueDictionary()
+        return new DynamicControllerMetadata(
+            new RouteValueDictionary()
             {
                 { "action", action },
                 { "controller", controller },
                 { "area", area }
-            });
+            }
+        );
     }
 
     private static void EnsureControllerServices(IEndpointRouteBuilder endpoints)
@@ -576,28 +621,42 @@ public static class ControllerEndpointRouteBuilderExtensions
         var marker = endpoints.ServiceProvider.GetService<MvcMarkerService>();
         if (marker == null)
         {
-            throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                nameof(IServiceCollection),
-                "AddControllers",
-                "ConfigureServices(...)"));
+            throw new InvalidOperationException(
+                Resources.FormatUnableToFindServices(
+                    nameof(IServiceCollection),
+                    "AddControllers",
+                    "ConfigureServices(...)"
+                )
+            );
         }
     }
 
-    private static ControllerActionEndpointDataSource GetOrCreateDataSource(IEndpointRouteBuilder endpoints)
+    private static ControllerActionEndpointDataSource GetOrCreateDataSource(
+        IEndpointRouteBuilder endpoints
+    )
     {
-        var dataSource = endpoints.DataSources.OfType<ControllerActionEndpointDataSource>().FirstOrDefault();
+        var dataSource = endpoints.DataSources
+            .OfType<ControllerActionEndpointDataSource>()
+            .FirstOrDefault();
         if (dataSource == null)
         {
-            var orderProvider = endpoints.ServiceProvider.GetRequiredService<OrderedEndpointsSequenceProviderCache>();
-            var factory = endpoints.ServiceProvider.GetRequiredService<ControllerActionEndpointDataSourceFactory>();
-            dataSource = factory.Create(orderProvider.GetOrCreateOrderedEndpointsSequenceProvider(endpoints));
+            var orderProvider =
+                endpoints.ServiceProvider.GetRequiredService<OrderedEndpointsSequenceProviderCache>();
+            var factory =
+                endpoints.ServiceProvider.GetRequiredService<ControllerActionEndpointDataSourceFactory>();
+            dataSource = factory.Create(
+                orderProvider.GetOrCreateOrderedEndpointsSequenceProvider(endpoints)
+            );
             endpoints.DataSources.Add(dataSource);
         }
 
         return dataSource;
     }
 
-    private static void RegisterInCache(IServiceProvider serviceProvider, ControllerActionEndpointDataSource dataSource)
+    private static void RegisterInCache(
+        IServiceProvider serviceProvider,
+        ControllerActionEndpointDataSource dataSource
+    )
     {
         var cache = serviceProvider.GetRequiredService<DynamicControllerEndpointSelectorCache>();
         cache.AddDataSource(dataSource);

@@ -21,9 +21,13 @@ public class DefaultPocoTest : IClassFixture<ScratchDatabaseFixture>
 
         services
             .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
-            .AddDbContext<IdentityDbContext>(o =>
-                o.UseSqlite(fixture.Connection)
-                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)))
+            .AddDbContext<IdentityDbContext>(
+                o =>
+                    o.UseSqlite(fixture.Connection)
+                        .ConfigureWarnings(
+                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                        )
+            )
             .AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<IdentityDbContext>();
 
@@ -42,7 +46,9 @@ public class DefaultPocoTest : IClassFixture<ScratchDatabaseFixture>
     public async Task EnsureStartupUsageWorks()
     {
         var userStore = _builder.ApplicationServices.GetRequiredService<IUserStore<IdentityUser>>();
-        var userManager = _builder.ApplicationServices.GetRequiredService<UserManager<IdentityUser>>();
+        var userManager = _builder.ApplicationServices.GetRequiredService<
+            UserManager<IdentityUser>
+        >();
 
         Assert.NotNull(userStore);
         Assert.NotNull(userManager);

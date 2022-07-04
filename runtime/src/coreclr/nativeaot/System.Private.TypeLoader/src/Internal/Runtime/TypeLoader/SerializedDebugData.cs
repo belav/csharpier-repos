@@ -119,7 +119,12 @@ namespace Internal.Runtime.TypeLoader
             {
                 Debug.Assert(headerSize > _serializedDataHeaderSize);
 
-                Buffer.MemoryCopy((byte*)DBGVISIBLE_serializedDataHeader, (byte*)header, headerSize, _serializedDataHeaderSize);
+                Buffer.MemoryCopy(
+                    (byte*)DBGVISIBLE_serializedDataHeader,
+                    (byte*)header,
+                    headerSize,
+                    _serializedDataHeaderSize
+                );
 
                 // mark the older header for deletion
                 oldHeader = DBGVISIBLE_serializedDataHeader;
@@ -142,6 +147,7 @@ namespace Internal.Runtime.TypeLoader
                 MemoryHelpers.FreeMemory(oldHeader);
             }
         }
+
         private unsafe int GetAllocatedPhysicalBufferCount()
         {
             if (_serializedDataHeaderSize < HeaderBufferListOffset)
@@ -149,12 +155,15 @@ namespace Internal.Runtime.TypeLoader
 
             return *(int*)(DBGVISIBLE_serializedDataHeader + sizeof(int));
         }
+
         private unsafe void AddAllocatedBufferToHeader(IntPtr buffer, int insertIdx)
         {
             Debug.Assert(insertIdx >= 0);
 
-            int currentPhysicalBufferListSize = _serializedDataHeaderSize == 0 ? 0 :
-                (_serializedDataHeaderSize - HeaderBufferListOffset) / IntPtr.Size;
+            int currentPhysicalBufferListSize =
+                _serializedDataHeaderSize == 0
+                    ? 0
+                    : (_serializedDataHeaderSize - HeaderBufferListOffset) / IntPtr.Size;
             if (currentPhysicalBufferListSize <= insertIdx)
             {
                 // not enough space in the header, grow it
@@ -163,7 +172,9 @@ namespace Internal.Runtime.TypeLoader
 
             Debug.Assert(GetAllocatedPhysicalBufferCount() == insertIdx);
 
-            *(void**)(DBGVISIBLE_serializedDataHeader + HeaderBufferListOffset + IntPtr.Size * insertIdx) = buffer.ToPointer();
+            *(void**)(
+                DBGVISIBLE_serializedDataHeader + HeaderBufferListOffset + IntPtr.Size * insertIdx
+            ) = buffer.ToPointer();
             *(int*)(DBGVISIBLE_serializedDataHeader + sizeof(int)) = insertIdx + 1; // update the buffer count
         }
 
@@ -201,11 +212,14 @@ namespace Internal.Runtime.TypeLoader
                 // no space available in active physical buffer
                 // allocate a new physical buffer
                 _activePhysicalBufferOffset = AllocatePhysicalBuffer(out _activePhysicalBuffer);
-                _activePhysicalBufferAvailableSize = PhysicalBufferSize - _activePhysicalBufferOffset;
+                _activePhysicalBufferAvailableSize =
+                    PhysicalBufferSize - _activePhysicalBufferOffset;
             }
 
-            int availableSize = (_activePhysicalBufferAvailableSize < requestedSize) ?
-                _activePhysicalBufferAvailableSize : requestedSize;
+            int availableSize =
+                (_activePhysicalBufferAvailableSize < requestedSize)
+                    ? _activePhysicalBufferAvailableSize
+                    : requestedSize;
 
             _activePhysicalBufferAvailableSize -= availableSize;
             bufferPtr = new IntPtr(_activePhysicalBuffer.ToInt64() + _activePhysicalBufferOffset);
@@ -237,18 +251,24 @@ namespace Internal.Runtime.TypeLoader
                         throw new OutOfMemoryException();
                 }
                 src.AsSpan().CopyTo(new Span<byte>((void*)dst, src.Length));
-                UpdatePhysicalBufferUsedSize();    // make sure that used physical buffer size is updated
+                UpdatePhysicalBufferUsedSize(); // make sure that used physical buffer size is updated
             }
         }
 
         // Helper method to serialize the data-blob type and flags
-        public static void SerializeDataBlobTypeAndFlags(ref NativePrimitiveEncoder encoder, SerializedDataBlobKind blobType, byte flags)
+        public static void SerializeDataBlobTypeAndFlags(
+            ref NativePrimitiveEncoder encoder,
+            SerializedDataBlobKind blobType,
+            byte flags
+        )
         {
             // make sure that blobType fits in 2 bits and flags fits in 6 bits
             Debug.Assert(blobType < SerializedDataBlobKind.Limit);
-            Debug.Assert((byte)blobType <= 2 && flags <= 0x3F ||
-                (byte)blobType == 3 && flags <= 1 ||
-                (byte)blobType > 3 && flags <= 7);
+            Debug.Assert(
+                (byte)blobType <= 2 && flags <= 0x3F
+                    || (byte)blobType == 3 && flags <= 1
+                    || (byte)blobType > 3 && flags <= 7
+            );
             byte encodedKindAndFlags;
             if (blobType <= (SerializedDataBlobKind)3)
             {
@@ -261,7 +281,11 @@ namespace Internal.Runtime.TypeLoader
             encoder.WriteByte(encodedKindAndFlags);
         }
 
-        public static void RegisterDebugDataForType(TypeBuilder typeBuilder, DefType defType, TypeBuilderState state)
+        public static void RegisterDebugDataForType(
+            TypeBuilder typeBuilder,
+            DefType defType,
+            TypeBuilderState state
+        )
         {
             if (!defType.IsGeneric())
             {
@@ -279,11 +303,18 @@ namespace Internal.Runtime.TypeLoader
             NativePrimitiveEncoder encoder = new NativePrimitiveEncoder();
             encoder.Init();
 
-            IntPtr gcStaticFieldData = TypeLoaderEnvironment.Instance.TryGetGcStaticFieldData(typeBuilder.GetRuntimeTypeHandle(defType));
-            IntPtr nonGcStaticFieldData = TypeLoaderEnvironment.Instance.TryGetNonGcStaticFieldData(typeBuilder.GetRuntimeTypeHandle(defType));
+            IntPtr gcStaticFieldData = TypeLoaderEnvironment.Instance.TryGetGcStaticFieldData(
+                typeBuilder.GetRuntimeTypeHandle(defType)
+            );
+            IntPtr nonGcStaticFieldData = TypeLoaderEnvironment.Instance.TryGetNonGcStaticFieldData(
+                typeBuilder.GetRuntimeTypeHandle(defType)
+            );
 
-            bool isUniversalGenericType = state.TemplateType != null && state.TemplateType.IsCanonicalSubtype(CanonicalFormKind.Universal);
-            bool embeddedTypeSizeAndFieldOffsets = isUniversalGenericType || (state.TemplateType == null);
+            bool isUniversalGenericType =
+                state.TemplateType != null
+                && state.TemplateType.IsCanonicalSubtype(CanonicalFormKind.Universal);
+            bool embeddedTypeSizeAndFieldOffsets =
+                isUniversalGenericType || (state.TemplateType == null);
             uint instanceFieldCount = 0;
             uint staticFieldCount = 0;
 
@@ -306,9 +337,12 @@ namespace Internal.Runtime.TypeLoader
             }
 
             SharedTypeFlags sharedTypeFlags = 0;
-            if (gcStaticFieldData != IntPtr.Zero) sharedTypeFlags |= SharedTypeFlags.HasGCStaticFieldRegion;
-            if (nonGcStaticFieldData != IntPtr.Zero) sharedTypeFlags |= SharedTypeFlags.HasNonGCStaticFieldRegion;
-            if (state.ThreadDataSize != 0) sharedTypeFlags |= SharedTypeFlags.HasThreadStaticFieldRegion;
+            if (gcStaticFieldData != IntPtr.Zero)
+                sharedTypeFlags |= SharedTypeFlags.HasGCStaticFieldRegion;
+            if (nonGcStaticFieldData != IntPtr.Zero)
+                sharedTypeFlags |= SharedTypeFlags.HasNonGCStaticFieldRegion;
+            if (state.ThreadDataSize != 0)
+                sharedTypeFlags |= SharedTypeFlags.HasThreadStaticFieldRegion;
             if (embeddedTypeSizeAndFieldOffsets)
             {
                 sharedTypeFlags |= SerializedDebugData.SharedTypeFlags.HasTypeSize;
@@ -320,18 +354,26 @@ namespace Internal.Runtime.TypeLoader
                     sharedTypeFlags |= SerializedDebugData.SharedTypeFlags.HasStaticFields;
             }
 
-            SerializeDataBlobTypeAndFlags(ref encoder, SerializedDataBlobKind.SharedType, (byte)sharedTypeFlags);
+            SerializeDataBlobTypeAndFlags(
+                ref encoder,
+                SerializedDataBlobKind.SharedType,
+                (byte)sharedTypeFlags
+            );
 
             //
             // The order of these writes is a contract shared between the runtime and debugger engine.
             // Changes here must also be updated in the debugger reader code
             //
-            encoder.WriteUnsignedLong((ulong)typeBuilder.GetRuntimeTypeHandle(defType).ToIntPtr().ToInt64());
+            encoder.WriteUnsignedLong(
+                (ulong)typeBuilder.GetRuntimeTypeHandle(defType).ToIntPtr().ToInt64()
+            );
             encoder.WriteUnsigned((uint)defType.Instantiation.Length);
 
             foreach (var instParam in defType.Instantiation)
             {
-                encoder.WriteUnsignedLong((ulong)typeBuilder.GetRuntimeTypeHandle(instParam).ToIntPtr().ToInt64());
+                encoder.WriteUnsignedLong(
+                    (ulong)typeBuilder.GetRuntimeTypeHandle(instParam).ToIntPtr().ToInt64()
+                );
             }
 
             if (gcStaticFieldData != IntPtr.Zero)
@@ -429,7 +471,11 @@ namespace Internal.Runtime.TypeLoader
         /// <param name="typeBuilder">TypeBuilder is used to query runtime type handle for the type</param>
         /// <param name="defType">Type to emit to the diagnostic stream</param>
         /// <param name="state"></param>
-        public static void RegisterDebugDataForNativeFormatType(TypeBuilder typeBuilder, DefType defType, TypeBuilderState state)
+        public static void RegisterDebugDataForNativeFormatType(
+            TypeBuilder typeBuilder,
+            DefType defType,
+            TypeBuilderState state
+        )
         {
 #if SUPPORTS_NATIVE_METADATA_TYPE_LOADING
             NativeFormatType nativeFormatType = defType as NativeFormatType;
@@ -446,12 +492,19 @@ namespace Internal.Runtime.TypeLoader
             SerializeDataBlobTypeAndFlags(
                 ref encoder,
                 SerializedDataBlobKind.NativeFormatType,
-                nativeFormatTypeFlags);
+                nativeFormatTypeFlags
+            );
 
-            TypeManagerHandle moduleHandle = ModuleList.Instance.GetModuleForMetadataReader(nativeFormatType.MetadataReader);
+            TypeManagerHandle moduleHandle = ModuleList.Instance.GetModuleForMetadataReader(
+                nativeFormatType.MetadataReader
+            );
 
-            encoder.WriteUnsignedLong(unchecked((ulong)typeBuilder.GetRuntimeTypeHandle(defType).ToIntPtr().ToInt64()));
-            encoder.WriteUnsigned(nativeFormatType.Handle.ToHandle(nativeFormatType.MetadataReader).AsUInt());
+            encoder.WriteUnsignedLong(
+                unchecked((ulong)typeBuilder.GetRuntimeTypeHandle(defType).ToIntPtr().ToInt64())
+            );
+            encoder.WriteUnsigned(
+                nativeFormatType.Handle.ToHandle(nativeFormatType.MetadataReader).AsUInt()
+            );
             encoder.WriteUnsignedLong(unchecked((ulong)moduleHandle.GetIntPtrUNSAFE().ToInt64()));
 
             Instance.ThreadSafeWriteBytes(encoder.GetBytes());
@@ -460,26 +513,39 @@ namespace Internal.Runtime.TypeLoader
 #endif
         }
 
-        public static void RegisterDebugDataForMethod(TypeBuilder typeBuilder, InstantiatedMethod method)
+        public static void RegisterDebugDataForMethod(
+            TypeBuilder typeBuilder,
+            InstantiatedMethod method
+        )
         {
             NativePrimitiveEncoder encoder = new NativePrimitiveEncoder();
             encoder.Init();
 
             byte sharedMethodFlags = 0;
-            sharedMethodFlags |= (byte)(method.OwningType.IsGeneric() ? SharedMethodFlags.HasDeclaringTypeHandle : 0);
+            sharedMethodFlags |= (byte)(
+                method.OwningType.IsGeneric() ? SharedMethodFlags.HasDeclaringTypeHandle : 0
+            );
 
-            SerializeDataBlobTypeAndFlags(ref encoder, SerializedDataBlobKind.SharedMethod, sharedMethodFlags);
+            SerializeDataBlobTypeAndFlags(
+                ref encoder,
+                SerializedDataBlobKind.SharedMethod,
+                sharedMethodFlags
+            );
             encoder.WriteUnsignedLong((ulong)method.RuntimeMethodDictionary.ToInt64());
             encoder.WriteUnsigned((uint)method.Instantiation.Length);
 
             foreach (var instParam in method.Instantiation)
             {
-                encoder.WriteUnsignedLong((ulong)typeBuilder.GetRuntimeTypeHandle(instParam).ToIntPtr().ToInt64());
+                encoder.WriteUnsignedLong(
+                    (ulong)typeBuilder.GetRuntimeTypeHandle(instParam).ToIntPtr().ToInt64()
+                );
             }
 
             if (method.OwningType.IsGeneric())
             {
-                encoder.WriteUnsignedLong((ulong)typeBuilder.GetRuntimeTypeHandle(method.OwningType).ToIntPtr().ToInt64());
+                encoder.WriteUnsignedLong(
+                    (ulong)typeBuilder.GetRuntimeTypeHandle(method.OwningType).ToIntPtr().ToInt64()
+                );
             }
 
             Instance.ThreadSafeWriteBytes(encoder.GetBytes());
@@ -489,6 +555,7 @@ namespace Internal.Runtime.TypeLoader
         // in the serialized stream.
         // This information is used by the debugger to detect thunk frames on the callstack.
         private static bool s_tailCallThunkSizeRegistered;
+
         public static void RegisterTailCallThunk(IntPtr thunk)
         {
             NativePrimitiveEncoder encoder = new NativePrimitiveEncoder();
@@ -502,9 +569,11 @@ namespace Internal.Runtime.TypeLoader
                         // Write out the size of thunks used by the calling convention converter
                         // Make sure that this is called only once
                         encoder.Init();
-                        SerializeDataBlobTypeAndFlags(ref encoder,
+                        SerializeDataBlobTypeAndFlags(
+                            ref encoder,
                             SerializedDataBlobKind.StepThroughStubSize,
-                            (byte)StepThroughStubFlags.IsTailCallStub);
+                            (byte)StepThroughStubFlags.IsTailCallStub
+                        );
                         encoder.WriteUnsigned((uint)RuntimeAugments.GetThunkSize());
                         Instance.ThreadSafeWriteBytes(encoder.GetBytes());
                         s_tailCallThunkSizeRegistered = true;
@@ -513,9 +582,11 @@ namespace Internal.Runtime.TypeLoader
             }
 
             encoder.Init();
-            SerializeDataBlobTypeAndFlags(ref encoder,
+            SerializeDataBlobTypeAndFlags(
+                ref encoder,
                 SerializedDataBlobKind.StepThroughStubAddress,
-                (byte)StepThroughStubFlags.IsTailCallStub);
+                (byte)StepThroughStubFlags.IsTailCallStub
+            );
             encoder.WriteUnsignedLong((ulong)thunk.ToInt64());
             Instance.ThreadSafeWriteBytes(encoder.GetBytes());
         }

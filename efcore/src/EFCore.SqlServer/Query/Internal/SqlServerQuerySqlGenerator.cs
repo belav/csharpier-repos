@@ -22,9 +22,10 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqlServerQuerySqlGenerator(QuerySqlGeneratorDependencies dependencies,
-        IRelationalTypeMappingSource typeMappingSource)
-        : base(dependencies)
+    public SqlServerQuerySqlGenerator(
+        QuerySqlGeneratorDependencies dependencies,
+        IRelationalTypeMappingSource typeMappingSource
+    ) : base(dependencies)
     {
         _typeMappingSource = typeMappingSource;
     }
@@ -37,8 +38,7 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
     /// </summary>
     protected override void GenerateTop(SelectExpression selectExpression)
     {
-        if (selectExpression.Limit != null
-            && selectExpression.Offset == null)
+        if (selectExpression.Limit != null && selectExpression.Offset == null)
         {
             Sql.Append("TOP(");
 
@@ -77,8 +77,7 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
         // Note: For Limit without Offset, SqlServer generates TOP()
         if (selectExpression.Offset != null)
         {
-            Sql.AppendLine()
-                .Append("OFFSET ");
+            Sql.AppendLine().Append("OFFSET ");
 
             Visit(selectExpression.Offset);
 
@@ -103,13 +102,22 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
     /// </summary>
     protected override Expression VisitExtension(Expression extensionExpression)
     {
-        if (extensionExpression is TableExpression tableExpression
-            && tableExpression.FindAnnotation(SqlServerAnnotationNames.TemporalOperationType) != null)
+        if (
+            extensionExpression is TableExpression tableExpression
+            && tableExpression.FindAnnotation(SqlServerAnnotationNames.TemporalOperationType)
+                != null
+        )
         {
-            Sql.Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(tableExpression.Name, tableExpression.Schema))
+            Sql.Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        tableExpression.Name,
+                        tableExpression.Schema
+                    )
+                )
                 .Append(" FOR SYSTEM_TIME ");
 
-            var temporalOperationType = (TemporalOperationType)tableExpression[SqlServerAnnotationNames.TemporalOperationType]!;
+            var temporalOperationType = (TemporalOperationType)
+                tableExpression[SqlServerAnnotationNames.TemporalOperationType]!;
 
             switch (temporalOperationType)
             {
@@ -118,20 +126,35 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
                     break;
 
                 case TemporalOperationType.AsOf:
-                    var pointInTime = (DateTime)tableExpression[SqlServerAnnotationNames.TemporalAsOfPointInTime]!;
-        
+                    var pointInTime = (DateTime)
+                        tableExpression[SqlServerAnnotationNames.TemporalAsOfPointInTime]!;
+
                     Sql.Append("AS OF ")
-                        .Append(_typeMappingSource.GetMapping(typeof(DateTime)).GenerateSqlLiteral(pointInTime));
+                        .Append(
+                            _typeMappingSource
+                                .GetMapping(typeof(DateTime))
+                                .GenerateSqlLiteral(pointInTime)
+                        );
                     break;
 
                 case TemporalOperationType.Between:
                 case TemporalOperationType.ContainedIn:
                 case TemporalOperationType.FromTo:
-                    var from = _typeMappingSource.GetMapping(typeof(DateTime)).GenerateSqlLiteral(
-                        (DateTime)tableExpression[SqlServerAnnotationNames.TemporalRangeOperationFrom]!);
+                    var from = _typeMappingSource
+                        .GetMapping(typeof(DateTime))
+                        .GenerateSqlLiteral(
+                            (DateTime)
+                                tableExpression[
+                                    SqlServerAnnotationNames.TemporalRangeOperationFrom
+                                ]!
+                        );
 
-                    var to = _typeMappingSource.GetMapping(typeof(DateTime)).GenerateSqlLiteral(
-                        (DateTime)tableExpression[SqlServerAnnotationNames.TemporalRangeOperationTo]!);
+                    var to = _typeMappingSource
+                        .GetMapping(typeof(DateTime))
+                        .GenerateSqlLiteral(
+                            (DateTime)
+                                tableExpression[SqlServerAnnotationNames.TemporalRangeOperationTo]!
+                        );
 
                     switch (temporalOperationType)
                     {
@@ -160,7 +183,9 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
             if (tableExpression.Alias != null)
             {
                 Sql.Append(AliasSeparator)
-                    .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(tableExpression.Alias));
+                    .Append(
+                        Dependencies.SqlGenerationHelper.DelimitIdentifier(tableExpression.Alias)
+                    );
             }
 
             return tableExpression;

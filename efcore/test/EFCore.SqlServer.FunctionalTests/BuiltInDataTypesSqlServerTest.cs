@@ -11,12 +11,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Microsoft.EntityFrameworkCore;
 
 [SqlServerCondition(SqlServerCondition.IsNotSqlAzure | SqlServerCondition.SupportsUtf8)]
-public class BuiltInDataTypesSqlServerTest : BuiltInDataTypesTestBase<BuiltInDataTypesSqlServerTest.BuiltInDataTypesSqlServerFixture>
+public class BuiltInDataTypesSqlServerTest
+    : BuiltInDataTypesTestBase<BuiltInDataTypesSqlServerTest.BuiltInDataTypesSqlServerFixture>
 {
     private static readonly string _eol = Environment.NewLine;
 
-    public BuiltInDataTypesSqlServerTest(BuiltInDataTypesSqlServerFixture fixture, ITestOutputHelper testOutputHelper)
-        : base(fixture)
+    public BuiltInDataTypesSqlServerTest(
+        BuiltInDataTypesSqlServerFixture fixture,
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -26,18 +29,19 @@ public class BuiltInDataTypesSqlServerTest : BuiltInDataTypesTestBase<BuiltInDat
     public void Sql_translation_uses_type_mapper_when_constant()
     {
         using var context = CreateContext();
-        var results
-            = context.Set<MappedNullableDataTypes>()
-                .Where(e => e.TimeSpanAsTime == new TimeSpan(0, 1, 2))
-                .Select(e => e.Int)
-                .ToList();
+        var results = context
+            .Set<MappedNullableDataTypes>()
+            .Where(e => e.TimeSpanAsTime == new TimeSpan(0, 1, 2))
+            .Select(e => e.Int)
+            .ToList();
 
         Assert.Empty(results);
 
         AssertSql(
             @"SELECT [m].[Int]
 FROM [MappedNullableDataTypes] AS [m]
-WHERE [m].[TimeSpanAsTime] = '00:01:02'");
+WHERE [m].[TimeSpanAsTime] = '00:01:02'"
+        );
     }
 
     [ConditionalFact]
@@ -46,11 +50,11 @@ WHERE [m].[TimeSpanAsTime] = '00:01:02'");
         using var context = CreateContext();
         var timeSpan = new TimeSpan(2, 1, 0);
 
-        var results
-            = context.Set<MappedNullableDataTypes>()
-                .Where(e => e.TimeSpanAsTime == timeSpan)
-                .Select(e => e.Int)
-                .ToList();
+        var results = context
+            .Set<MappedNullableDataTypes>()
+            .Where(e => e.TimeSpanAsTime == timeSpan)
+            .Select(e => e.Int)
+            .ToList();
 
         Assert.Empty(results);
         AssertSql(
@@ -58,7 +62,8 @@ WHERE [m].[TimeSpanAsTime] = '00:01:02'");
 
 SELECT [m].[Int]
 FROM [MappedNullableDataTypes] AS [m]
-WHERE [m].[TimeSpanAsTime] = @__timeSpan_0");
+WHERE [m].[TimeSpanAsTime] = @__timeSpan_0"
+        );
     }
 
     [ConditionalFact]
@@ -66,8 +71,15 @@ WHERE [m].[TimeSpanAsTime] = @__timeSpan_0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedNullableDataTypes>().Add(
-                new MappedNullableDataTypes { Int = 81, StringAsVarcharMax = string.Concat(Enumerable.Repeat("C", 8001)) });
+            context
+                .Set<MappedNullableDataTypes>()
+                .Add(
+                    new MappedNullableDataTypes
+                    {
+                        Int = 81,
+                        StringAsVarcharMax = string.Concat(Enumerable.Repeat("C", 8001))
+                    }
+                );
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -76,7 +88,8 @@ WHERE [m].[TimeSpanAsTime] = @__timeSpan_0");
 
         using (var context = CreateContext())
         {
-            var results = context.Set<MappedNullableDataTypes>()
+            var results = context
+                .Set<MappedNullableDataTypes>()
                 .Where(e => e.Int == 81)
                 .Select(m => m.StringAsVarcharMax.IndexOf("a"))
                 .ToList();
@@ -85,7 +98,8 @@ WHERE [m].[TimeSpanAsTime] = @__timeSpan_0");
             AssertSql(
                 @"SELECT CAST(CHARINDEX('a', [m].[StringAsVarcharMax]) AS int) - 1
 FROM [MappedNullableDataTypes] AS [m]
-WHERE [m].[Int] = 81");
+WHERE [m].[Int] = 81"
+            );
         }
     }
 
@@ -95,11 +109,11 @@ WHERE [m].[Int] = 81");
         using var context = CreateContext();
         var timeSpan = new TimeSpan(2, 1, 0);
 
-        var results
-            = context.Set<MappedNullableDataTypes>()
-                .Where(e => EF.Functions.DateDiffHour(e.TimeSpanAsTime, timeSpan) == 0)
-                .Select(e => e.Int)
-                .ToList();
+        var results = context
+            .Set<MappedNullableDataTypes>()
+            .Where(e => EF.Functions.DateDiffHour(e.TimeSpanAsTime, timeSpan) == 0)
+            .Select(e => e.Int)
+            .ToList();
 
         Assert.Empty(results);
         AssertSql(
@@ -107,7 +121,8 @@ WHERE [m].[Int] = 81");
 
 SELECT [m].[Int]
 FROM [MappedNullableDataTypes] AS [m]
-WHERE DATEDIFF(hour, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
+WHERE DATEDIFF(hour, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
+        );
     }
 
     [ConditionalFact]
@@ -116,11 +131,11 @@ WHERE DATEDIFF(hour, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         using var context = CreateContext();
         var timeSpan = new TimeSpan(2, 1, 0);
 
-        var results
-            = context.Set<MappedNullableDataTypes>()
-                .Where(e => EF.Functions.DateDiffMinute(e.TimeSpanAsTime, timeSpan) == 0)
-                .Select(e => e.Int)
-                .ToList();
+        var results = context
+            .Set<MappedNullableDataTypes>()
+            .Where(e => EF.Functions.DateDiffMinute(e.TimeSpanAsTime, timeSpan) == 0)
+            .Select(e => e.Int)
+            .ToList();
 
         Assert.Empty(results);
         AssertSql(
@@ -128,7 +143,8 @@ WHERE DATEDIFF(hour, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 
 SELECT [m].[Int]
 FROM [MappedNullableDataTypes] AS [m]
-WHERE DATEDIFF(minute, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
+WHERE DATEDIFF(minute, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
+        );
     }
 
     [ConditionalFact]
@@ -137,11 +153,11 @@ WHERE DATEDIFF(minute, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         using var context = CreateContext();
         var timeSpan = new TimeSpan(2, 1, 0);
 
-        var results
-            = context.Set<MappedNullableDataTypes>()
-                .Where(e => EF.Functions.DateDiffSecond(e.TimeSpanAsTime, timeSpan) == 0)
-                .Select(e => e.Int)
-                .ToList();
+        var results = context
+            .Set<MappedNullableDataTypes>()
+            .Where(e => EF.Functions.DateDiffSecond(e.TimeSpanAsTime, timeSpan) == 0)
+            .Select(e => e.Int)
+            .ToList();
 
         Assert.Empty(results);
         AssertSql(
@@ -149,7 +165,8 @@ WHERE DATEDIFF(minute, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 
 SELECT [m].[Int]
 FROM [MappedNullableDataTypes] AS [m]
-WHERE DATEDIFF(second, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
+WHERE DATEDIFF(second, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
+        );
     }
 
     [ConditionalFact]
@@ -158,11 +175,11 @@ WHERE DATEDIFF(second, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         using var context = CreateContext();
         var timeSpan = new TimeSpan(2, 1, 0);
 
-        var results
-            = context.Set<MappedNullableDataTypes>()
-                .Where(e => EF.Functions.DateDiffMillisecond(e.TimeSpanAsTime, timeSpan) == 0)
-                .Select(e => e.Int)
-                .ToList();
+        var results = context
+            .Set<MappedNullableDataTypes>()
+            .Where(e => EF.Functions.DateDiffMillisecond(e.TimeSpanAsTime, timeSpan) == 0)
+            .Select(e => e.Int)
+            .ToList();
 
         Assert.Empty(results);
         AssertSql(
@@ -170,7 +187,8 @@ WHERE DATEDIFF(second, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 
 SELECT [m].[Int]
 FROM [MappedNullableDataTypes] AS [m]
-WHERE DATEDIFF(millisecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
+WHERE DATEDIFF(millisecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
+        );
     }
 
     [ConditionalFact]
@@ -179,11 +197,11 @@ WHERE DATEDIFF(millisecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         using var context = CreateContext();
         var timeSpan = new TimeSpan(2, 1, 0);
 
-        var results
-            = context.Set<MappedNullableDataTypes>()
-                .Where(e => EF.Functions.DateDiffMicrosecond(e.TimeSpanAsTime, timeSpan) == 0)
-                .Select(e => e.Int)
-                .ToList();
+        var results = context
+            .Set<MappedNullableDataTypes>()
+            .Where(e => EF.Functions.DateDiffMicrosecond(e.TimeSpanAsTime, timeSpan) == 0)
+            .Select(e => e.Int)
+            .ToList();
 
         Assert.Empty(results);
         AssertSql(
@@ -191,7 +209,8 @@ WHERE DATEDIFF(millisecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 
 SELECT [m].[Int]
 FROM [MappedNullableDataTypes] AS [m]
-WHERE DATEDIFF(microsecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
+WHERE DATEDIFF(microsecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
+        );
     }
 
     [ConditionalFact]
@@ -200,11 +219,11 @@ WHERE DATEDIFF(microsecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         using var context = CreateContext();
         var timeSpan = new TimeSpan(2, 1, 0);
 
-        var results
-            = context.Set<MappedNullableDataTypes>()
-                .Where(e => EF.Functions.DateDiffNanosecond(e.TimeSpanAsTime, timeSpan) == 0)
-                .Select(e => e.Int)
-                .ToList();
+        var results = context
+            .Set<MappedNullableDataTypes>()
+            .Where(e => EF.Functions.DateDiffNanosecond(e.TimeSpanAsTime, timeSpan) == 0)
+            .Select(e => e.Int)
+            .ToList();
 
         Assert.Empty(results);
         AssertSql(
@@ -212,7 +231,8 @@ WHERE DATEDIFF(microsecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 
 SELECT [m].[Int]
 FROM [MappedNullableDataTypes] AS [m]
-WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
+WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0"
+        );
     }
 
     [ConditionalFact]
@@ -220,62 +240,68 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedNullableDataTypes>().Add(
-                new MappedNullableDataTypes
-                {
-                    Int = 999,
-                    LongAsBigint = 78L,
-                    ShortAsSmallint = 79,
-                    ByteAsTinyint = 80,
-                    UintAsInt = uint.MaxValue,
-                    UlongAsBigint = ulong.MaxValue,
-                    UShortAsSmallint = ushort.MaxValue,
-                    SbyteAsTinyint = sbyte.MinValue,
-                    BoolAsBit = true,
-                    DecimalAsMoney = 81.1m,
-                    DecimalAsSmallmoney = 82.2m,
-                    DoubleAsFloat = 83.3,
-                    FloatAsReal = 84.4f,
-                    DoubleAsDoublePrecision = 85.5,
-                    DateTimeAsDate = new DateTime(1605, 1, 2, 10, 11, 12),
-                    DateTimeOffsetAsDatetimeoffset = new DateTimeOffset(new DateTime(), TimeSpan.Zero),
-                    DateTimeAsDatetime2 = new DateTime(),
-                    DateTimeAsSmalldatetime = new DateTime(2018, 1, 2, 13, 11, 12),
-                    DateTimeAsDatetime = new DateTime(2019, 1, 2, 14, 11, 12),
-                    TimeSpanAsTime = new TimeSpan(0, 11, 15, 12, 2),
-                    StringAsVarcharMax = "C",
-                    StringAsCharVaryingMax = "Your",
-                    StringAsCharacterVaryingMax = "strong",
-                    StringAsNvarcharMax = "don't",
-                    StringAsNationalCharVaryingMax = "help",
-                    StringAsNationalCharacterVaryingMax = "anyone!",
-                    StringAsText = "Gumball Rules!",
-                    StringAsNtext = "Gumball Rules OK!",
-                    BytesAsVarbinaryMax = new byte[] { 89, 90, 91, 92 },
-                    BytesAsBinaryVaryingMax = new byte[] { 93, 94, 95, 96 },
-                    BytesAsImage = new byte[] { 97, 98, 99, 100 },
-                    Decimal = 101.7m,
-                    DecimalAsDec = 102.8m,
-                    DecimalAsNumeric = 103.9m,
-                    GuidAsUniqueidentifier = new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47"),
-                    UintAsBigint = uint.MaxValue,
-                    UlongAsDecimal200 = ulong.MaxValue,
-                    UShortAsInt = ushort.MaxValue,
-                    SByteAsSmallint = sbyte.MinValue,
-                    CharAsVarcharMax = 'A',
-                    CharAsAsCharVaryingMax = 'B',
-                    CharAsCharacterVaryingMax = 'C',
-                    CharAsNvarcharMax = 'D',
-                    CharAsNationalCharVaryingMax = 'E',
-                    CharAsNationalCharacterVaryingMax = 'F',
-                    CharAsText = 'G',
-                    CharAsNtext = 'H',
-                    CharAsInt = 'I',
-                    EnumAsNvarchar20 = StringEnumU16.Value4,
-                    EnumAsVarcharMax = StringEnum16.Value2,
-                    SqlVariantString = "Bang!",
-                    SqlVariantInt = 887876
-                });
+            context
+                .Set<MappedNullableDataTypes>()
+                .Add(
+                    new MappedNullableDataTypes
+                    {
+                        Int = 999,
+                        LongAsBigint = 78L,
+                        ShortAsSmallint = 79,
+                        ByteAsTinyint = 80,
+                        UintAsInt = uint.MaxValue,
+                        UlongAsBigint = ulong.MaxValue,
+                        UShortAsSmallint = ushort.MaxValue,
+                        SbyteAsTinyint = sbyte.MinValue,
+                        BoolAsBit = true,
+                        DecimalAsMoney = 81.1m,
+                        DecimalAsSmallmoney = 82.2m,
+                        DoubleAsFloat = 83.3,
+                        FloatAsReal = 84.4f,
+                        DoubleAsDoublePrecision = 85.5,
+                        DateTimeAsDate = new DateTime(1605, 1, 2, 10, 11, 12),
+                        DateTimeOffsetAsDatetimeoffset = new DateTimeOffset(
+                            new DateTime(),
+                            TimeSpan.Zero
+                        ),
+                        DateTimeAsDatetime2 = new DateTime(),
+                        DateTimeAsSmalldatetime = new DateTime(2018, 1, 2, 13, 11, 12),
+                        DateTimeAsDatetime = new DateTime(2019, 1, 2, 14, 11, 12),
+                        TimeSpanAsTime = new TimeSpan(0, 11, 15, 12, 2),
+                        StringAsVarcharMax = "C",
+                        StringAsCharVaryingMax = "Your",
+                        StringAsCharacterVaryingMax = "strong",
+                        StringAsNvarcharMax = "don't",
+                        StringAsNationalCharVaryingMax = "help",
+                        StringAsNationalCharacterVaryingMax = "anyone!",
+                        StringAsText = "Gumball Rules!",
+                        StringAsNtext = "Gumball Rules OK!",
+                        BytesAsVarbinaryMax = new byte[] { 89, 90, 91, 92 },
+                        BytesAsBinaryVaryingMax = new byte[] { 93, 94, 95, 96 },
+                        BytesAsImage = new byte[] { 97, 98, 99, 100 },
+                        Decimal = 101.7m,
+                        DecimalAsDec = 102.8m,
+                        DecimalAsNumeric = 103.9m,
+                        GuidAsUniqueidentifier = new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47"),
+                        UintAsBigint = uint.MaxValue,
+                        UlongAsDecimal200 = ulong.MaxValue,
+                        UShortAsInt = ushort.MaxValue,
+                        SByteAsSmallint = sbyte.MinValue,
+                        CharAsVarcharMax = 'A',
+                        CharAsAsCharVaryingMax = 'B',
+                        CharAsCharacterVaryingMax = 'C',
+                        CharAsNvarcharMax = 'D',
+                        CharAsNationalCharVaryingMax = 'E',
+                        CharAsNationalCharacterVaryingMax = 'F',
+                        CharAsText = 'G',
+                        CharAsNtext = 'H',
+                        CharAsInt = 'I',
+                        EnumAsNvarchar20 = StringEnumU16.Value4,
+                        EnumAsVarcharMax = StringEnum16.Value2,
+                        SqlVariantString = "Bang!",
+                        SqlVariantInt = 887876
+                    }
+                );
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -285,158 +311,372 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
             var entity = context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999);
 
             long? param1 = 78L;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.LongAsBigint == param1));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.LongAsBigint == param1)
+            );
 
             short? param2 = 79;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.ShortAsSmallint == param2));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.ShortAsSmallint == param2)
+            );
 
             byte? param3 = 80;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.ByteAsTinyint == param3));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.ByteAsTinyint == param3)
+            );
 
             bool? param4 = true;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.BoolAsBit == param4));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.BoolAsBit == param4)
+            );
 
             decimal? param5 = 81.1m;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DecimalAsMoney == param5));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.DecimalAsMoney == param5)
+            );
 
             decimal? param6 = 82.2m;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DecimalAsSmallmoney == param6));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.DecimalAsSmallmoney == param6)
+            );
 
             double? param7a = 83.3;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DoubleAsFloat == param7a));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.DoubleAsFloat == param7a)
+            );
 
             float? param7b = 84.4f;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.FloatAsReal == param7b));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.FloatAsReal == param7b)
+            );
 
             double? param7c = 85.5;
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DoubleAsDoublePrecision == param7c));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.DoubleAsDoublePrecision == param7c)
+            );
 
             DateTime? param8 = new DateTime(1605, 1, 2);
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DateTimeAsDate == param8));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.DateTimeAsDate == param8)
+            );
 
             DateTimeOffset? param9 = new DateTimeOffset(new DateTime(), TimeSpan.Zero);
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DateTimeOffsetAsDatetimeoffset == param9));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.DateTimeOffsetAsDatetimeoffset == param9)
+            );
 
             DateTime? param10 = new DateTime();
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DateTimeAsDatetime2 == param10));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.DateTimeAsDatetime2 == param10)
+            );
 
             DateTime? param11 = new DateTime(2019, 1, 2, 14, 11, 12);
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DateTimeAsDatetime == param11));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.DateTimeAsDatetime == param11)
+            );
 
             DateTime? param12 = new DateTime(2018, 1, 2, 13, 11, 0);
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DateTimeAsSmalldatetime == param12));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.DateTimeAsSmalldatetime == param12)
+            );
 
             TimeSpan? param13 = new TimeSpan(0, 11, 15, 12, 2);
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.TimeSpanAsTime == param13));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.TimeSpanAsTime == param13)
+            );
 
             var param19 = "C";
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.StringAsVarcharMax == param19));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.StringAsVarcharMax == param19)
+            );
 
             var param20 = "Your";
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.StringAsCharVaryingMax == param20));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.StringAsCharVaryingMax == param20)
+            );
 
             var param21 = "strong";
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.StringAsCharacterVaryingMax == param21));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.StringAsCharacterVaryingMax == param21)
+            );
 
             var param27 = "don't";
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.StringAsNvarcharMax == param27));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.StringAsNvarcharMax == param27)
+            );
 
             var param28 = "help";
             Assert.Same(
                 entity,
-                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.StringAsNationalCharVaryingMax == param28));
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.StringAsNationalCharVaryingMax == param28)
+            );
 
             var param29 = "anyone!";
             Assert.Same(
                 entity,
-                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.StringAsNationalCharacterVaryingMax == param29));
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.StringAsNationalCharacterVaryingMax == param29)
+            );
 
             var param35 = new byte[] { 89, 90, 91, 92 };
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.BytesAsVarbinaryMax == param35));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.BytesAsVarbinaryMax == param35)
+            );
 
             var param36 = new byte[] { 93, 94, 95, 96 };
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.BytesAsBinaryVaryingMax == param36));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.BytesAsBinaryVaryingMax == param36)
+            );
 
             decimal? param38 = 102m;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.Decimal == param38));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.Decimal == param38)
+            );
 
             decimal? param39 = 103m;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DecimalAsDec == param39));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.DecimalAsDec == param39)
+            );
 
             decimal? param40 = 104m;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.DecimalAsNumeric == param40));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.DecimalAsNumeric == param40)
+            );
 
             uint? param41 = uint.MaxValue;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.UintAsInt == param41));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.UintAsInt == param41)
+            );
 
             ulong? param42 = ulong.MaxValue;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.UlongAsBigint == param42));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.UlongAsBigint == param42)
+            );
 
             ushort? param43 = ushort.MaxValue;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.UShortAsSmallint == param43));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.UShortAsSmallint == param43)
+            );
 
             sbyte? param44 = sbyte.MinValue;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.SbyteAsTinyint == param44));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.SbyteAsTinyint == param44)
+            );
 
             uint? param45 = uint.MaxValue;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.UintAsBigint == param45));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.UintAsBigint == param45)
+            );
 
             ulong? param46 = ulong.MaxValue;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.UlongAsDecimal200 == param46));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.UlongAsDecimal200 == param46)
+            );
 
             ushort? param47 = ushort.MaxValue;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.UShortAsInt == param47));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.UShortAsInt == param47)
+            );
 
             sbyte? param48 = sbyte.MinValue;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.SByteAsSmallint == param48));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.SByteAsSmallint == param48)
+            );
 
             Guid? param49 = new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47");
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.GuidAsUniqueidentifier == param49));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.GuidAsUniqueidentifier == param49)
+            );
 
             char? param50 = 'A';
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.CharAsVarcharMax == param50));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.CharAsVarcharMax == param50)
+            );
 
             char? param51 = 'B';
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.CharAsAsCharVaryingMax == param51));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.CharAsAsCharVaryingMax == param51)
+            );
 
             char? param52 = 'C';
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.CharAsCharacterVaryingMax == param52));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.CharAsCharacterVaryingMax == param52)
+            );
 
             char? param53 = 'D';
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.CharAsNvarcharMax == param53));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.CharAsNvarcharMax == param53)
+            );
 
             char? param54 = 'E';
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.CharAsNationalCharVaryingMax == param54));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.CharAsNationalCharVaryingMax == param54)
+            );
 
             char? param55 = 'F';
             Assert.Same(
                 entity,
-                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.CharAsNationalCharacterVaryingMax == param55));
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.CharAsNationalCharacterVaryingMax == param55)
+            );
 
             char? param58 = 'I';
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.CharAsInt == param58));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.CharAsInt == param58)
+            );
 
             StringEnumU16? param59 = StringEnumU16.Value4;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.EnumAsNvarchar20 == param59));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.EnumAsNvarchar20 == param59)
+            );
 
             StringEnum16? param60 = StringEnum16.Value2;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.EnumAsVarcharMax == param60));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.EnumAsVarcharMax == param60)
+            );
 
             object param61 = "Bang!";
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.SqlVariantString.Equals(param61)));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.SqlVariantString.Equals(param61))
+            );
 
             object param62 = 887876;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 999 && e.SqlVariantInt.Equals(param62)));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 999 && e.SqlVariantInt.Equals(param62))
+            );
         }
     }
 
@@ -445,8 +685,7 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedNullableDataTypes>().Add(
-                new MappedNullableDataTypes { Int = 911 });
+            context.Set<MappedNullableDataTypes>().Add(new MappedNullableDataTypes { Int = 911 });
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -456,161 +695,363 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
             var entity = context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911);
 
             long? param1 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.LongAsBigint == param1));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.LongAsBigint == param1)
+            );
 
             short? param2 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.ShortAsSmallint == param2));
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && (long?)e.ShortAsSmallint == param2));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.ShortAsSmallint == param2)
+            );
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && (long?)e.ShortAsSmallint == param2)
+            );
 
             byte? param3 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.ByteAsTinyint == param3));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.ByteAsTinyint == param3)
+            );
 
             bool? param4 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.BoolAsBit == param4));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.BoolAsBit == param4)
+            );
 
             decimal? param5 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DecimalAsMoney == param5));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.DecimalAsMoney == param5)
+            );
 
             decimal? param6 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DecimalAsSmallmoney == param6));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.DecimalAsSmallmoney == param6)
+            );
 
             double? param7a = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DoubleAsFloat == param7a));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.DoubleAsFloat == param7a)
+            );
 
             float? param7b = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.FloatAsReal == param7b));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.FloatAsReal == param7b)
+            );
 
             double? param7c = null;
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DoubleAsDoublePrecision == param7c));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.DoubleAsDoublePrecision == param7c)
+            );
 
             DateTime? param8 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DateTimeAsDate == param8));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.DateTimeAsDate == param8)
+            );
 
             DateTimeOffset? param9 = null;
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DateTimeOffsetAsDatetimeoffset == param9));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.DateTimeOffsetAsDatetimeoffset == param9)
+            );
 
             DateTime? param10 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DateTimeAsDatetime2 == param10));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.DateTimeAsDatetime2 == param10)
+            );
 
             DateTime? param11 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DateTimeAsDatetime == param11));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.DateTimeAsDatetime == param11)
+            );
 
             DateTime? param12 = null;
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DateTimeAsSmalldatetime == param12));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.DateTimeAsSmalldatetime == param12)
+            );
 
             TimeSpan? param13 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.TimeSpanAsTime == param13));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.TimeSpanAsTime == param13)
+            );
 
             string param19 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.StringAsVarcharMax == param19));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.StringAsVarcharMax == param19)
+            );
 
             string param20 = null;
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.StringAsCharVaryingMax == param20));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.StringAsCharVaryingMax == param20)
+            );
 
             string param21 = null;
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.StringAsCharacterVaryingMax == param21));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.StringAsCharacterVaryingMax == param21)
+            );
 
             string param27 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.StringAsNvarcharMax == param27));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.StringAsNvarcharMax == param27)
+            );
 
             string param28 = null;
             Assert.Same(
                 entity,
-                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.StringAsNationalCharVaryingMax == param28));
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.StringAsNationalCharVaryingMax == param28)
+            );
 
             string param29 = null;
             Assert.Same(
                 entity,
-                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.StringAsNationalCharacterVaryingMax == param29));
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.StringAsNationalCharacterVaryingMax == param29)
+            );
 
             string param30 = null;
 
             Assert.Same(
                 entity,
-                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.StringAsText == param30));
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.StringAsText == param30)
+            );
 
             string param31 = null;
             Assert.Same(
                 entity,
-                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.StringAsNtext == param31));
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.StringAsNtext == param31)
+            );
 
             byte[] param35 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.BytesAsVarbinaryMax == param35));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.BytesAsVarbinaryMax == param35)
+            );
 
             byte[] param36 = null;
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.BytesAsBinaryVaryingMax == param36));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.BytesAsBinaryVaryingMax == param36)
+            );
 
             byte[] param37 = null;
             Assert.Same(
                 entity,
-                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.BytesAsImage == param37));
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.BytesAsImage == param37)
+            );
 
             decimal? param38 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.Decimal == param38));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.Decimal == param38)
+            );
 
             decimal? param39 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DecimalAsDec == param39));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.DecimalAsDec == param39)
+            );
 
             decimal? param40 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.DecimalAsNumeric == param40));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.DecimalAsNumeric == param40)
+            );
 
             uint? param41 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.UintAsInt == param41));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.UintAsInt == param41)
+            );
 
             ulong? param42 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.UlongAsBigint == param42));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.UlongAsBigint == param42)
+            );
 
             ushort? param43 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.UShortAsSmallint == param43));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.UShortAsSmallint == param43)
+            );
 
             sbyte? param44 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.SbyteAsTinyint == param44));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.SbyteAsTinyint == param44)
+            );
 
             uint? param45 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.UintAsBigint == param45));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.UintAsBigint == param45)
+            );
 
             ulong? param46 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.UlongAsDecimal200 == param46));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.UlongAsDecimal200 == param46)
+            );
 
             ushort? param47 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.UShortAsInt == param47));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.UShortAsInt == param47)
+            );
 
             sbyte? param48 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.SByteAsSmallint == param48));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.SByteAsSmallint == param48)
+            );
 
             Guid? param49 = null;
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.GuidAsUniqueidentifier == param49));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.GuidAsUniqueidentifier == param49)
+            );
 
             char? param50 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.CharAsVarcharMax == param50));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.CharAsVarcharMax == param50)
+            );
 
             char? param51 = null;
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.CharAsAsCharVaryingMax == param51));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.CharAsAsCharVaryingMax == param51)
+            );
 
             char? param52 = null;
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.CharAsCharacterVaryingMax == param52));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.CharAsCharacterVaryingMax == param52)
+            );
 
             char? param53 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.CharAsNvarcharMax == param53));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.CharAsNvarcharMax == param53)
+            );
 
             char? param54 = null;
             Assert.Same(
-                entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.CharAsNationalCharVaryingMax == param54));
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.CharAsNationalCharVaryingMax == param54)
+            );
 
             char? param55 = null;
             Assert.Same(
                 entity,
-                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.CharAsNationalCharacterVaryingMax == param55));
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.CharAsNationalCharacterVaryingMax == param55)
+            );
 
             //char? param56 = null;
             //Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.CharAsText == param56));
@@ -619,18 +1060,43 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
             //Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.CharAsNtext == param57));
 
             char? param58 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.CharAsInt == param58));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.CharAsInt == param58)
+            );
 
             StringEnumU16? param59 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.EnumAsNvarchar20 == param59));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.EnumAsNvarchar20 == param59)
+            );
 
             StringEnum16? param60 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.EnumAsVarcharMax == param60));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.EnumAsVarcharMax == param60)
+            );
 
             object param61 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.SqlVariantString == param61));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.SqlVariantString == param61)
+            );
             object param62 = null;
-            Assert.Same(entity, context.Set<MappedNullableDataTypes>().Single(e => e.Int == 911 && e.SqlVariantInt == param62));
+            Assert.Same(
+                entity,
+                context
+                    .Set<MappedNullableDataTypes>()
+                    .Single(e => e.Int == 911 && e.SqlVariantInt == param62)
+            );
         }
     }
 
@@ -692,15 +1158,15 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p42='anyone!' (Nullable = false) (Size = 4000)
 @p43='Gumball Rules OK!' (Nullable = false) (Size = 4000)
 @p44='"
-            + entity.StringAsNvarcharMax
-            + @"' (Nullable = false) (Size = -1)
+                + entity.StringAsNvarcharMax
+                + @"' (Nullable = false) (Size = -1)
 @p45='Gumball Rules!' (Nullable = false) (Size = 8000) (DbType = AnsiString)
 @p46='"
-            + entity.StringAsVarcharMax
-            + @"' (Nullable = false) (Size = -1) (DbType = AnsiString)
+                + entity.StringAsVarcharMax
+                + @"' (Nullable = false) (Size = -1) (DbType = AnsiString)
 @p47='"
-            + entity.StringAsVarcharMaxUtf8
-            + @"' (Nullable = false) (Size = -1)
+                + entity.StringAsVarcharMaxUtf8
+                + @"' (Nullable = false) (Size = -1)
 @p48='11:15:12'
 @p49='65535'
 @p50='-1'
@@ -709,7 +1175,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p53='-1'
 @p54='18446744073709551615' (Precision = 20)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
@@ -717,8 +1184,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         }
     }
 
-    private string DumpParameters()
-        => Fixture.TestSqlLoggerFactory.Parameters.Single().Replace(", ", _eol);
+    private string DumpParameters() =>
+        Fixture.TestSqlLoggerFactory.Parameters.Single().Replace(", ", _eol);
 
     private static void AssertMappedDataTypes(MappedDataTypes entity, int id)
     {
@@ -739,9 +1206,16 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(85.5, entity.DoubleAsDoublePrecision);
         Assert.Equal(new DateTime(2015, 1, 2), entity.DateTimeAsDate);
         Assert.Equal(
-            new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(1234567), TimeSpan.Zero),
-            entity.DateTimeOffsetAsDatetimeoffset);
-        Assert.Equal(new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(1234567), entity.DateTimeAsDatetime2);
+            new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(1234567),
+                TimeSpan.Zero
+            ),
+            entity.DateTimeOffsetAsDatetimeoffset
+        );
+        Assert.Equal(
+            new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(1234567),
+            entity.DateTimeAsDatetime2
+        );
         Assert.Equal(new DateTime(2018, 1, 2, 13, 11, 00), entity.DateTimeAsSmalldatetime);
         Assert.Equal(new DateTime(2019, 1, 2, 14, 11, 12), entity.DateTimeAsDatetime);
         Assert.Equal(new TimeSpan(11, 15, 12), entity.TimeSpanAsTime);
@@ -762,7 +1236,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(101m, entity.Decimal);
         Assert.Equal(102m, entity.DecimalAsDec);
         Assert.Equal(103m, entity.DecimalAsNumeric);
-        Assert.Equal(new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47"), entity.GuidAsUniqueidentifier);
+        Assert.Equal(
+            new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47"),
+            entity.GuidAsUniqueidentifier
+        );
         Assert.Equal(uint.MaxValue, entity.UintAsBigint);
         Assert.Equal(ulong.MaxValue, entity.UlongAsDecimal200);
         Assert.Equal(ushort.MaxValue, entity.UShortAsInt);
@@ -782,8 +1259,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(887876, entity.SqlVariantInt);
     }
 
-    private static MappedDataTypes CreateMappedDataTypes(int id)
-        => new()
+    private static MappedDataTypes CreateMappedDataTypes(int id) =>
+        new()
         {
             Int = id,
             LongAsBigInt = 78L,
@@ -800,7 +1277,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
             FloatAsReal = 84.4f,
             DoubleAsDoublePrecision = 85.5,
             DateTimeAsDate = new DateTime(2015, 1, 2, 10, 11, 12),
-            DateTimeOffsetAsDatetimeoffset = new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(1234567), TimeSpan.Zero),
+            DateTimeOffsetAsDatetimeoffset = new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(1234567),
+                TimeSpan.Zero
+            ),
             DateTimeAsDatetime2 = new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(1234567),
             DateTimeAsSmalldatetime = new DateTime(2018, 1, 2, 13, 11, 12),
             DateTimeAsDatetime = new DateTime(2019, 1, 2, 14, 11, 12),
@@ -888,12 +1368,12 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p30='Bang!' (Nullable = false) (Size = 5) (DbType = Object)
 @p31='Gumball Rules OK!' (Nullable = false) (Size = 4000)
 @p32='"
-            + entity.StringAsNvarcharMax
-            + @"' (Nullable = false) (Size = -1)
+                + entity.StringAsNvarcharMax
+                + @"' (Nullable = false) (Size = -1)
 @p33='Gumball Rules!' (Nullable = false) (Size = 8000) (DbType = AnsiString)
 @p34='"
-            + entity.StringAsVarcharMax
-            + @"' (Nullable = false) (Size = -1) (DbType = AnsiString)
+                + entity.StringAsVarcharMax
+                + @"' (Nullable = false) (Size = -1) (DbType = AnsiString)
 @p35='11:15:12'
 @p36='65535'
 @p37='-1'
@@ -902,11 +1382,15 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p40='-1'
 @p41='18446744073709551615' (Precision = 20)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertMappedSquareDataTypes(context.Set<MappedSquareDataTypes>().Single(e => e.Int == 77), 77);
+            AssertMappedSquareDataTypes(
+                context.Set<MappedSquareDataTypes>().Single(e => e.Int == 77),
+                77
+            );
         }
     }
 
@@ -928,9 +1412,16 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(84.4f, entity.FloatAsReal);
         Assert.Equal(new DateTime(2015, 1, 2), entity.DateTimeAsDate);
         Assert.Equal(
-            new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(1234567), TimeSpan.Zero),
-            entity.DateTimeOffsetAsDatetimeoffset);
-        Assert.Equal(new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(1234567), entity.DateTimeAsDatetime2);
+            new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(1234567),
+                TimeSpan.Zero
+            ),
+            entity.DateTimeOffsetAsDatetimeoffset
+        );
+        Assert.Equal(
+            new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(1234567),
+            entity.DateTimeAsDatetime2
+        );
         Assert.Equal(new DateTime(2018, 1, 2, 13, 11, 00), entity.DateTimeAsSmalldatetime);
         Assert.Equal(new DateTime(2019, 1, 2, 14, 11, 12), entity.DateTimeAsDatetime);
         Assert.Equal(new TimeSpan(11, 15, 12), entity.TimeSpanAsTime);
@@ -943,7 +1434,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(101m, entity.Decimal);
         Assert.Equal(102m, entity.DecimalAsDec);
         Assert.Equal(103m, entity.DecimalAsNumeric);
-        Assert.Equal(new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47"), entity.GuidAsUniqueidentifier);
+        Assert.Equal(
+            new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47"),
+            entity.GuidAsUniqueidentifier
+        );
         Assert.Equal(uint.MaxValue, entity.UintAsBigint);
         Assert.Equal(ulong.MaxValue, entity.UlongAsDecimal200);
         Assert.Equal(ushort.MaxValue, entity.UShortAsInt);
@@ -959,8 +1453,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(887876, entity.SqlVariantInt);
     }
 
-    private static MappedSquareDataTypes CreateMappedSquareDataTypes(int id)
-        => new()
+    private static MappedSquareDataTypes CreateMappedSquareDataTypes(int id) =>
+        new()
         {
             Int = id,
             LongAsBigInt = 78L,
@@ -976,7 +1470,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
             DoubleAsFloat = 83.3,
             FloatAsReal = 84.4f,
             DateTimeAsDate = new DateTime(2015, 1, 2, 10, 11, 12),
-            DateTimeOffsetAsDatetimeoffset = new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(1234567), TimeSpan.Zero),
+            DateTimeOffsetAsDatetimeoffset = new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(1234567),
+                TimeSpan.Zero
+            ),
             DateTimeAsDatetime2 = new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(1234567),
             DateTimeAsSmalldatetime = new DateTime(2018, 1, 2, 13, 11, 12),
             DateTimeAsDatetime = new DateTime(2019, 1, 2, 14, 11, 12),
@@ -1074,11 +1571,15 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p53='-1' (Nullable = true)
 @p54='18446744073709551615' (Nullable = true) (Precision = 20)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertMappedNullableDataTypes(context.Set<MappedNullableDataTypes>().Single(e => e.Int == 77), 77);
+            AssertMappedNullableDataTypes(
+                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 77),
+                77
+            );
         }
     }
 
@@ -1100,9 +1601,16 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(85.5, entity.DoubleAsDoublePrecision);
         Assert.Equal(new DateTime(2015, 1, 2), entity.DateTimeAsDate);
         Assert.Equal(
-            new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(9876543), TimeSpan.Zero),
-            entity.DateTimeOffsetAsDatetimeoffset);
-        Assert.Equal(new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(9876543), entity.DateTimeAsDatetime2);
+            new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(9876543),
+                TimeSpan.Zero
+            ),
+            entity.DateTimeOffsetAsDatetimeoffset
+        );
+        Assert.Equal(
+            new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(9876543),
+            entity.DateTimeAsDatetime2
+        );
         Assert.Equal(new DateTime(2018, 1, 2, 13, 11, 00), entity.DateTimeAsSmalldatetime);
         Assert.Equal(new DateTime(2019, 1, 2, 14, 11, 12), entity.DateTimeAsDatetime);
         Assert.Equal(new TimeSpan(11, 15, 12), entity.TimeSpanAsTime);
@@ -1120,7 +1628,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(101m, entity.Decimal);
         Assert.Equal(102m, entity.DecimalAsDec);
         Assert.Equal(103m, entity.DecimalAsNumeric);
-        Assert.Equal(new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47"), entity.GuidAsUniqueidentifier);
+        Assert.Equal(
+            new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47"),
+            entity.GuidAsUniqueidentifier
+        );
         Assert.Equal(uint.MaxValue, entity.UintAsBigint);
         Assert.Equal(ulong.MaxValue, entity.UlongAsDecimal200);
         Assert.Equal(ushort.MaxValue, entity.UShortAsInt);
@@ -1140,8 +1651,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(887876, entity.SqlVariantInt);
     }
 
-    private static MappedNullableDataTypes CreateMappedNullableDataTypes(int id)
-        => new()
+    private static MappedNullableDataTypes CreateMappedNullableDataTypes(int id) =>
+        new()
         {
             Int = id,
             LongAsBigint = 78L,
@@ -1158,7 +1669,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
             FloatAsReal = 84.4f,
             DoubleAsDoublePrecision = 85.5,
             DateTimeAsDate = new DateTime(2015, 1, 2, 10, 11, 12),
-            DateTimeOffsetAsDatetimeoffset = new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(9876543), TimeSpan.Zero),
+            DateTimeOffsetAsDatetimeoffset = new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(9876543),
+                TimeSpan.Zero
+            ),
             DateTimeAsDatetime2 = new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(9876543),
             DateTimeAsSmalldatetime = new DateTime(2018, 1, 2, 13, 11, 12),
             DateTimeAsDatetime = new DateTime(2019, 1, 2, 14, 11, 12),
@@ -1268,11 +1782,15 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p53=NULL (DbType = Int64)
 @p54=NULL (Precision = 20) (DbType = Decimal)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertNullMappedNullableDataTypes(context.Set<MappedNullableDataTypes>().Single(e => e.Int == 78), 78);
+            AssertNullMappedNullableDataTypes(
+                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 78),
+                78
+            );
         }
     }
 
@@ -1370,11 +1888,15 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p23='Tha' (Size = 3) (DbType = AnsiString)
 @p24='the' (Size = 3)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertMappedSizedDataTypes(context.Set<MappedSizedDataTypes>().Single(e => e.Id == 77), 77);
+            AssertMappedSizedDataTypes(
+                context.Set<MappedSizedDataTypes>().Single(e => e.Id == 77),
+                77
+            );
         }
     }
 
@@ -1407,8 +1929,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal('F', entity.CharAsNationalCharacterVarying3);
     }
 
-    private static MappedSizedDataTypes CreateMappedSizedDataTypes(int id)
-        => new()
+    private static MappedSizedDataTypes CreateMappedSizedDataTypes(int id) =>
+        new()
         {
             Id = id,
             StringAsChar3 = "Wor",
@@ -1475,11 +1997,15 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p23=NULL (Size = 3) (DbType = AnsiString)
 @p24=NULL (Size = 3)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertNullMappedSizedDataTypes(context.Set<MappedSizedDataTypes>().Single(e => e.Id == 78), 78);
+            AssertNullMappedSizedDataTypes(
+                context.Set<MappedSizedDataTypes>().Single(e => e.Id == 78),
+                78
+            );
         }
     }
 
@@ -1517,7 +2043,9 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedSizedSeparatelyDataTypes>().Add(CreateMappedSizedSeparatelyDataTypes(77));
+            context
+                .Set<MappedSizedSeparatelyDataTypes>()
+                .Add(CreateMappedSizedSeparatelyDataTypes(77));
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -1550,15 +2078,22 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p23='Tha' (Size = 3) (DbType = AnsiString)
 @p24='the' (Size = 3) (DbType = AnsiString)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertMappedSizedSeparatelyDataTypes(context.Set<MappedSizedSeparatelyDataTypes>().Single(e => e.Id == 77), 77);
+            AssertMappedSizedSeparatelyDataTypes(
+                context.Set<MappedSizedSeparatelyDataTypes>().Single(e => e.Id == 77),
+                77
+            );
         }
     }
 
-    private static void AssertMappedSizedSeparatelyDataTypes(MappedSizedSeparatelyDataTypes entity, int id)
+    private static void AssertMappedSizedSeparatelyDataTypes(
+        MappedSizedSeparatelyDataTypes entity,
+        int id
+    )
     {
         Assert.Equal(id, entity.Id);
         Assert.Equal("Wor", entity.StringAsChar3);
@@ -1582,8 +2117,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal('F', entity.CharAsNationalCharacterVarying3);
     }
 
-    private static MappedSizedSeparatelyDataTypes CreateMappedSizedSeparatelyDataTypes(int id)
-        => new()
+    private static MappedSizedSeparatelyDataTypes CreateMappedSizedSeparatelyDataTypes(int id) =>
+        new()
         {
             Id = id,
             StringAsChar3 = "Wor",
@@ -1636,11 +2171,15 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p9='83.3' (Size = 3)
 @p10='12:34:56.7890123' (Scale = 3)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertMappedScaledDataTypes(context.Set<MappedScaledDataTypes>().Single(e => e.Id == 77), 77);
+            AssertMappedScaledDataTypes(
+                context.Set<MappedScaledDataTypes>().Single(e => e.Id == 77),
+                77
+            );
         }
     }
 
@@ -1652,28 +2191,39 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(83.33f, entity.FloatAsFloat25);
         Assert.Equal(85.55f, entity.FloatAsDoublePrecision25);
         Assert.Equal(
-            new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12, 765), TimeSpan.Zero), entity.DateTimeOffsetAsDatetimeoffset3);
+            new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12, 765), TimeSpan.Zero),
+            entity.DateTimeOffsetAsDatetimeoffset3
+        );
         Assert.Equal(new DateTime(2017, 1, 2, 12, 11, 12, 321), entity.DateTimeAsDatetime23);
-        Assert.Equal(TimeSpan.Parse("12:34:56.789", System.Globalization.CultureInfo.InvariantCulture), entity.TimeSpanAsTime3);
+        Assert.Equal(
+            TimeSpan.Parse("12:34:56.789", System.Globalization.CultureInfo.InvariantCulture),
+            entity.TimeSpanAsTime3
+        );
         Assert.Equal(101m, entity.DecimalAsDecimal3);
         Assert.Equal(102m, entity.DecimalAsDec3);
         Assert.Equal(103m, entity.DecimalAsNumeric3);
     }
 
-    private static MappedScaledDataTypes CreateMappedScaledDataTypes(int id)
-        => new()
+    private static MappedScaledDataTypes CreateMappedScaledDataTypes(int id) =>
+        new()
         {
             Id = id,
             FloatAsFloat3 = 83.3f,
             FloatAsDoublePrecision3 = 85.5f,
             FloatAsFloat25 = 83.33f,
             FloatAsDoublePrecision25 = 85.55f,
-            DateTimeOffsetAsDatetimeoffset3 = new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12, 765), TimeSpan.Zero),
+            DateTimeOffsetAsDatetimeoffset3 = new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12, 765),
+                TimeSpan.Zero
+            ),
             DateTimeAsDatetime23 = new DateTime(2017, 1, 2, 12, 11, 12, 321),
             DecimalAsDecimal3 = 101m,
             DecimalAsDec3 = 102m,
             DecimalAsNumeric3 = 103m,
-            TimeSpanAsTime3 = TimeSpan.Parse("12:34:56.7890123", System.Globalization.CultureInfo.InvariantCulture)
+            TimeSpanAsTime3 = TimeSpan.Parse(
+                "12:34:56.7890123",
+                System.Globalization.CultureInfo.InvariantCulture
+            )
         };
 
     [ConditionalFact]
@@ -1681,7 +2231,9 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedScaledSeparatelyDataTypes>().Add(CreateMappedScaledSeparatelyDataTypes(77));
+            context
+                .Set<MappedScaledSeparatelyDataTypes>()
+                .Add(CreateMappedScaledSeparatelyDataTypes(77));
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -1700,15 +2252,22 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p9='83.3' (Size = 3)
 @p10='12:34:56.7890000' (Scale = 3)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertMappedScaledSeparatelyDataTypes(context.Set<MappedScaledSeparatelyDataTypes>().Single(e => e.Id == 77), 77);
+            AssertMappedScaledSeparatelyDataTypes(
+                context.Set<MappedScaledSeparatelyDataTypes>().Single(e => e.Id == 77),
+                77
+            );
         }
     }
 
-    private static void AssertMappedScaledSeparatelyDataTypes(MappedScaledSeparatelyDataTypes entity, int id)
+    private static void AssertMappedScaledSeparatelyDataTypes(
+        MappedScaledSeparatelyDataTypes entity,
+        int id
+    )
     {
         Assert.Equal(id, entity.Id);
         Assert.Equal(83.3f, entity.FloatAsFloat3);
@@ -1716,28 +2275,39 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(83.33f, entity.FloatAsFloat25);
         Assert.Equal(85.55f, entity.FloatAsDoublePrecision25);
         Assert.Equal(
-            new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12, 765), TimeSpan.Zero), entity.DateTimeOffsetAsDatetimeoffset3);
+            new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12, 765), TimeSpan.Zero),
+            entity.DateTimeOffsetAsDatetimeoffset3
+        );
         Assert.Equal(new DateTime(2017, 1, 2, 12, 11, 12, 321), entity.DateTimeAsDatetime23);
         Assert.Equal(101m, entity.DecimalAsDecimal3);
         Assert.Equal(102m, entity.DecimalAsDec3);
         Assert.Equal(103m, entity.DecimalAsNumeric3);
-        Assert.Equal(TimeSpan.Parse("12:34:56.789", System.Globalization.CultureInfo.InvariantCulture), entity.TimeSpanAsTime3);
+        Assert.Equal(
+            TimeSpan.Parse("12:34:56.789", System.Globalization.CultureInfo.InvariantCulture),
+            entity.TimeSpanAsTime3
+        );
     }
 
-    private static MappedScaledSeparatelyDataTypes CreateMappedScaledSeparatelyDataTypes(int id)
-        => new()
+    private static MappedScaledSeparatelyDataTypes CreateMappedScaledSeparatelyDataTypes(int id) =>
+        new()
         {
             Id = id,
             FloatAsFloat3 = 83.3f,
             FloatAsDoublePrecision3 = 85.5f,
             FloatAsFloat25 = 83.33f,
             FloatAsDoublePrecision25 = 85.55f,
-            DateTimeOffsetAsDatetimeoffset3 = new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12, 765), TimeSpan.Zero),
+            DateTimeOffsetAsDatetimeoffset3 = new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12, 765),
+                TimeSpan.Zero
+            ),
             DateTimeAsDatetime23 = new DateTime(2017, 1, 2, 12, 11, 12, 321),
             DecimalAsDecimal3 = 101m,
             DecimalAsDec3 = 102m,
             DecimalAsNumeric3 = 103m,
-            TimeSpanAsTime3 = TimeSpan.Parse("12:34:56.789", System.Globalization.CultureInfo.InvariantCulture)
+            TimeSpanAsTime3 = TimeSpan.Parse(
+                "12:34:56.789",
+                System.Globalization.CultureInfo.InvariantCulture
+            )
         };
 
     [ConditionalFact]
@@ -1756,7 +2326,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p1='83.33000183105469' (Size = 25)
 @p2='83.30000305175781' (Size = 3)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
@@ -1771,8 +2342,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(83.33f, entity.Double25);
     }
 
-    private static DoubleDataTypes CreateDoubleDataTypes(int id)
-        => new()
+    private static DoubleDataTypes CreateDoubleDataTypes(int id) =>
+        new()
         {
             Id = id,
             Double3 = 83.3f,
@@ -1784,7 +2355,9 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedPrecisionAndScaledDataTypes>().Add(CreateMappedPrecisionAndScaledDataTypes(77));
+            context
+                .Set<MappedPrecisionAndScaledDataTypes>()
+                .Add(CreateMappedPrecisionAndScaledDataTypes(77));
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -1796,15 +2369,22 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p2='101.1' (Precision = 5) (Scale = 2)
 @p3='103.3' (Precision = 5) (Scale = 2)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertMappedPrecisionAndScaledDataTypes(context.Set<MappedPrecisionAndScaledDataTypes>().Single(e => e.Id == 77), 77);
+            AssertMappedPrecisionAndScaledDataTypes(
+                context.Set<MappedPrecisionAndScaledDataTypes>().Single(e => e.Id == 77),
+                77
+            );
         }
     }
 
-    private static void AssertMappedPrecisionAndScaledDataTypes(MappedPrecisionAndScaledDataTypes entity, int id)
+    private static void AssertMappedPrecisionAndScaledDataTypes(
+        MappedPrecisionAndScaledDataTypes entity,
+        int id
+    )
     {
         Assert.Equal(id, entity.Id);
         Assert.Equal(101.1m, entity.DecimalAsDecimal52);
@@ -1812,8 +2392,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(103.3m, entity.DecimalAsNumeric52);
     }
 
-    private static MappedPrecisionAndScaledDataTypes CreateMappedPrecisionAndScaledDataTypes(int id)
-        => new()
+    private static MappedPrecisionAndScaledDataTypes CreateMappedPrecisionAndScaledDataTypes(
+        int id
+    ) =>
+        new()
         {
             Id = id,
             DecimalAsDecimal52 = 101.1m,
@@ -1826,7 +2408,9 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedPrecisionAndScaledSeparatelyDataTypes>().Add(CreateMappedPrecisionAndScaledSeparatelyDataTypes(77));
+            context
+                .Set<MappedPrecisionAndScaledSeparatelyDataTypes>()
+                .Add(CreateMappedPrecisionAndScaledSeparatelyDataTypes(77));
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -1838,16 +2422,22 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p2='101.1' (Precision = 5) (Scale = 2)
 @p3='103.3' (Precision = 5) (Scale = 2)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
             AssertMappedPrecisionAndScaledSeparatelyDataTypes(
-                context.Set<MappedPrecisionAndScaledSeparatelyDataTypes>().Single(e => e.Id == 77), 77);
+                context.Set<MappedPrecisionAndScaledSeparatelyDataTypes>().Single(e => e.Id == 77),
+                77
+            );
         }
     }
 
-    private static void AssertMappedPrecisionAndScaledSeparatelyDataTypes(MappedPrecisionAndScaledSeparatelyDataTypes entity, int id)
+    private static void AssertMappedPrecisionAndScaledSeparatelyDataTypes(
+        MappedPrecisionAndScaledSeparatelyDataTypes entity,
+        int id
+    )
     {
         Assert.Equal(id, entity.Id);
         Assert.Equal(101.1m, entity.DecimalAsDecimal52);
@@ -1855,8 +2445,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(103.3m, entity.DecimalAsNumeric52);
     }
 
-    private static MappedPrecisionAndScaledSeparatelyDataTypes CreateMappedPrecisionAndScaledSeparatelyDataTypes(int id)
-        => new()
+    private static MappedPrecisionAndScaledSeparatelyDataTypes CreateMappedPrecisionAndScaledSeparatelyDataTypes(
+        int id
+    ) =>
+        new()
         {
             Id = id,
             DecimalAsDecimal52 = 101.1m,
@@ -1932,15 +2524,22 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p53='-1'
 @p54='18446744073709551615' (Precision = 20)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertMappedDataTypesWithIdentity(context.Set<MappedDataTypesWithIdentity>().Single(e => e.Int == 77), 77);
+            AssertMappedDataTypesWithIdentity(
+                context.Set<MappedDataTypesWithIdentity>().Single(e => e.Int == 77),
+                77
+            );
         }
     }
 
-    private static void AssertMappedDataTypesWithIdentity(MappedDataTypesWithIdentity entity, int id)
+    private static void AssertMappedDataTypesWithIdentity(
+        MappedDataTypesWithIdentity entity,
+        int id
+    )
     {
         Assert.Equal(id, entity.Int);
         Assert.Equal(78, entity.LongAsBigint);
@@ -1958,9 +2557,16 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(85.5, entity.DoubleAsDoublePrecision);
         Assert.Equal(new DateTime(2015, 1, 2), entity.DateTimeAsDate);
         Assert.Equal(
-            new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(7654321), TimeSpan.Zero),
-            entity.DateTimeOffsetAsDatetimeoffset);
-        Assert.Equal(new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(7654321), entity.DateTimeAsDatetime2);
+            new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(7654321),
+                TimeSpan.Zero
+            ),
+            entity.DateTimeOffsetAsDatetimeoffset
+        );
+        Assert.Equal(
+            new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(7654321),
+            entity.DateTimeAsDatetime2
+        );
         Assert.Equal(new DateTime(2018, 1, 2, 13, 11, 00), entity.DateTimeAsSmalldatetime);
         Assert.Equal(new DateTime(2019, 1, 2, 14, 11, 12), entity.DateTimeAsDatetime);
         Assert.Equal(new TimeSpan(11, 15, 12), entity.TimeSpanAsTime);
@@ -1981,7 +2587,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(101m, entity.Decimal);
         Assert.Equal(102m, entity.DecimalAsDec);
         Assert.Equal(103m, entity.DecimalAsNumeric);
-        Assert.Equal(new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47"), entity.GuidAsUniqueidentifier);
+        Assert.Equal(
+            new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47"),
+            entity.GuidAsUniqueidentifier
+        );
         Assert.Equal(uint.MaxValue, entity.UintAsBigint);
         Assert.Equal(ulong.MaxValue, entity.UlongAsDecimal200);
         Assert.Equal(ushort.MaxValue, entity.UShortAsInt);
@@ -2001,8 +2610,8 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(887876, entity.SqlVariantInt);
     }
 
-    private static MappedDataTypesWithIdentity CreateMappedDataTypesWithIdentity(int id)
-        => new()
+    private static MappedDataTypesWithIdentity CreateMappedDataTypesWithIdentity(int id) =>
+        new()
         {
             Int = id,
             LongAsBigint = 78L,
@@ -2019,7 +2628,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
             FloatAsReal = 84.4f,
             DoubleAsDoublePrecision = 85.5,
             DateTimeAsDate = new DateTime(2015, 1, 2, 10, 11, 12),
-            DateTimeOffsetAsDatetimeoffset = new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(7654321), TimeSpan.Zero),
+            DateTimeOffsetAsDatetimeoffset = new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(7654321),
+                TimeSpan.Zero
+            ),
             DateTimeAsDatetime2 = new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(7654321),
             DateTimeAsSmalldatetime = new DateTime(2018, 1, 2, 13, 11, 12),
             DateTimeAsDatetime = new DateTime(2019, 1, 2, 14, 11, 12),
@@ -2066,7 +2678,9 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedNullableDataTypesWithIdentity>().Add(CreateMappedNullableDataTypesWithIdentity(77));
+            context
+                .Set<MappedNullableDataTypesWithIdentity>()
+                .Add(CreateMappedNullableDataTypesWithIdentity(77));
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -2129,15 +2743,22 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p53='18446744073709551615' (Nullable = true) (Precision = 20)
 @p54='-1' (Nullable = true)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertMappedNullableDataTypesWithIdentity(context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 77), 77);
+            AssertMappedNullableDataTypesWithIdentity(
+                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 77),
+                77
+            );
         }
     }
 
-    private static void AssertMappedNullableDataTypesWithIdentity(MappedNullableDataTypesWithIdentity entity, int id)
+    private static void AssertMappedNullableDataTypesWithIdentity(
+        MappedNullableDataTypesWithIdentity entity,
+        int id
+    )
     {
         Assert.Equal(id, entity.Int);
         Assert.Equal(78, entity.LongAsBigint);
@@ -2155,9 +2776,16 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(85.5, entity.DoubleAsDoublePrecision);
         Assert.Equal(new DateTime(2015, 1, 2), entity.DateTimeAsDate);
         Assert.Equal(
-            new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(2345678), TimeSpan.Zero),
-            entity.DateTimeOffsetAsDatetimeoffset);
-        Assert.Equal(new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(2345678), entity.DateTimeAsDatetime2);
+            new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(2345678),
+                TimeSpan.Zero
+            ),
+            entity.DateTimeOffsetAsDatetimeoffset
+        );
+        Assert.Equal(
+            new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(2345678),
+            entity.DateTimeAsDatetime2
+        );
         Assert.Equal(new DateTime(2018, 1, 2, 13, 11, 00), entity.DateTimeAsSmalldatetime);
         Assert.Equal(new DateTime(2019, 1, 2, 14, 11, 12), entity.DateTimeAsDatetime);
         Assert.Equal(new TimeSpan(11, 15, 12), entity.TimeSpanAsTime);
@@ -2175,7 +2803,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(101m, entity.Decimal);
         Assert.Equal(102m, entity.DecimalAsDec);
         Assert.Equal(103m, entity.DecimalAsNumeric);
-        Assert.Equal(new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47"), entity.GuidAsUniqueidentifier);
+        Assert.Equal(
+            new Guid("A8F9F951-145F-4545-AC60-B92FF57ADA47"),
+            entity.GuidAsUniqueidentifier
+        );
         Assert.Equal(uint.MaxValue, entity.UintAsBigint);
         Assert.Equal(ulong.MaxValue, entity.UlongAsDecimal200);
         Assert.Equal(ushort.MaxValue, entity.UShortAsInt);
@@ -2195,8 +2826,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(887876, entity.SqlVariantInt);
     }
 
-    private static MappedNullableDataTypesWithIdentity CreateMappedNullableDataTypesWithIdentity(int id)
-        => new()
+    private static MappedNullableDataTypesWithIdentity CreateMappedNullableDataTypesWithIdentity(
+        int id
+    ) =>
+        new()
         {
             Int = id,
             LongAsBigint = 78L,
@@ -2213,7 +2846,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
             FloatAsReal = 84.4f,
             DoubleAsDoublePrecision = 85.5,
             DateTimeAsDate = new DateTime(2015, 1, 2, 10, 11, 12),
-            DateTimeOffsetAsDatetimeoffset = new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(2345678), TimeSpan.Zero),
+            DateTimeOffsetAsDatetimeoffset = new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12).AddTicks(2345678),
+                TimeSpan.Zero
+            ),
             DateTimeAsDatetime2 = new DateTime(2017, 1, 2, 12, 11, 12).AddTicks(2345678),
             DateTimeAsSmalldatetime = new DateTime(2018, 1, 2, 13, 11, 12),
             DateTimeAsDatetime = new DateTime(2019, 1, 2, 14, 11, 12),
@@ -2260,7 +2896,9 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedNullableDataTypesWithIdentity>().Add(new MappedNullableDataTypesWithIdentity { Int = 78 });
+            context
+                .Set<MappedNullableDataTypesWithIdentity>()
+                .Add(new MappedNullableDataTypesWithIdentity { Int = 78 });
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -2323,18 +2961,22 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p53=NULL (Precision = 20) (DbType = Decimal)
 @p54=NULL (DbType = Int16)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
             AssertNullMappedNullableDataTypesWithIdentity(
-                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 78), 78);
+                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 78),
+                78
+            );
         }
     }
 
     private static void AssertNullMappedNullableDataTypesWithIdentity(
         MappedNullableDataTypesWithIdentity entity,
-        int id)
+        int id
+    )
     {
         Assert.Equal(id, entity.Int);
         Assert.Null(entity.LongAsBigint);
@@ -2395,7 +3037,9 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedSizedDataTypesWithIdentity>().Add(CreateMappedSizedDataTypesWithIdentity(77));
+            context
+                .Set<MappedSizedDataTypesWithIdentity>()
+                .Add(CreateMappedSizedDataTypesWithIdentity(77));
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -2428,15 +3072,22 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p23='Tha' (Size = 3) (DbType = AnsiString)
 @p24='the' (Size = 3)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertMappedSizedDataTypesWithIdentity(context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 77), 77);
+            AssertMappedSizedDataTypesWithIdentity(
+                context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 77),
+                77
+            );
         }
     }
 
-    private static void AssertMappedSizedDataTypesWithIdentity(MappedSizedDataTypesWithIdentity entity, int id)
+    private static void AssertMappedSizedDataTypesWithIdentity(
+        MappedSizedDataTypesWithIdentity entity,
+        int id
+    )
     {
         Assert.Equal(id, entity.Int);
         Assert.Equal("Wor", entity.StringAsChar3);
@@ -2465,8 +3116,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal('F', entity.CharAsNationalCharacterVarying3);
     }
 
-    private static MappedSizedDataTypesWithIdentity CreateMappedSizedDataTypesWithIdentity(int id)
-        => new()
+    private static MappedSizedDataTypesWithIdentity CreateMappedSizedDataTypesWithIdentity(
+        int id
+    ) =>
+        new()
         {
             Int = id,
             StringAsChar3 = "Wor",
@@ -2500,7 +3153,9 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedSizedDataTypesWithIdentity>().Add(new MappedSizedDataTypesWithIdentity { Int = 78 });
+            context
+                .Set<MappedSizedDataTypesWithIdentity>()
+                .Add(new MappedSizedDataTypesWithIdentity { Int = 78 });
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -2533,15 +3188,22 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p23=NULL (Size = 3) (DbType = AnsiString)
 @p24=NULL (Size = 3)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertNullMappedSizedDataTypesWithIdentity(context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 78), 78);
+            AssertNullMappedSizedDataTypesWithIdentity(
+                context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 78),
+                78
+            );
         }
     }
 
-    private static void AssertNullMappedSizedDataTypesWithIdentity(MappedSizedDataTypesWithIdentity entity, int id)
+    private static void AssertNullMappedSizedDataTypesWithIdentity(
+        MappedSizedDataTypesWithIdentity entity,
+        int id
+    )
     {
         Assert.Equal(id, entity.Int);
         Assert.Null(entity.StringAsChar3);
@@ -2575,7 +3237,9 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedScaledDataTypesWithIdentity>().Add(CreateMappedScaledDataTypesWithIdentity(77));
+            context
+                .Set<MappedScaledDataTypesWithIdentity>()
+                .Add(CreateMappedScaledDataTypesWithIdentity(77));
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -2594,15 +3258,22 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p9='77'
 @p10='12:34:56.7890123' (Scale = 3)",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
-            AssertMappedScaledDataTypesWithIdentity(context.Set<MappedScaledDataTypesWithIdentity>().Single(e => e.Int == 77), 77);
+            AssertMappedScaledDataTypesWithIdentity(
+                context.Set<MappedScaledDataTypesWithIdentity>().Single(e => e.Int == 77),
+                77
+            );
         }
     }
 
-    private static void AssertMappedScaledDataTypesWithIdentity(MappedScaledDataTypesWithIdentity entity, int id)
+    private static void AssertMappedScaledDataTypesWithIdentity(
+        MappedScaledDataTypesWithIdentity entity,
+        int id
+    )
     {
         Assert.Equal(id, entity.Int);
         Assert.Equal(83.3f, entity.FloatAsFloat3);
@@ -2610,28 +3281,41 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(83.33f, entity.FloatAsFloat25);
         Assert.Equal(85.55f, entity.FloatAsDoublePrecision25);
         Assert.Equal(
-            new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12, 567), TimeSpan.Zero), entity.DateTimeOffsetAsDatetimeoffset3);
+            new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12, 567), TimeSpan.Zero),
+            entity.DateTimeOffsetAsDatetimeoffset3
+        );
         Assert.Equal(new DateTime(2017, 1, 2, 12, 11, 12, 123), entity.DateTimeAsDatetime23);
         Assert.Equal(101m, entity.DecimalAsDecimal3);
         Assert.Equal(102m, entity.DecimalAsDec3);
         Assert.Equal(103m, entity.DecimalAsNumeric3);
-        Assert.Equal(TimeSpan.Parse("12:34:56.789", System.Globalization.CultureInfo.InvariantCulture), entity.TimeSpanAsTime3);
+        Assert.Equal(
+            TimeSpan.Parse("12:34:56.789", System.Globalization.CultureInfo.InvariantCulture),
+            entity.TimeSpanAsTime3
+        );
     }
 
-    private static MappedScaledDataTypesWithIdentity CreateMappedScaledDataTypesWithIdentity(int id)
-        => new()
+    private static MappedScaledDataTypesWithIdentity CreateMappedScaledDataTypesWithIdentity(
+        int id
+    ) =>
+        new()
         {
             Int = id,
             FloatAsFloat3 = 83.3f,
             FloatAsDoublePrecision3 = 85.5f,
             FloatAsFloat25 = 83.33f,
             FloatAsDoublePrecision25 = 85.55f,
-            DateTimeOffsetAsDatetimeoffset3 = new DateTimeOffset(new DateTime(2016, 1, 2, 11, 11, 12, 567), TimeSpan.Zero),
+            DateTimeOffsetAsDatetimeoffset3 = new DateTimeOffset(
+                new DateTime(2016, 1, 2, 11, 11, 12, 567),
+                TimeSpan.Zero
+            ),
             DateTimeAsDatetime23 = new DateTime(2017, 1, 2, 12, 11, 12, 123),
             DecimalAsDecimal3 = 101m,
             DecimalAsDec3 = 102m,
             DecimalAsNumeric3 = 103m,
-            TimeSpanAsTime3 = TimeSpan.Parse("12:34:56.7890123", System.Globalization.CultureInfo.InvariantCulture)
+            TimeSpanAsTime3 = TimeSpan.Parse(
+                "12:34:56.7890123",
+                System.Globalization.CultureInfo.InvariantCulture
+            )
         };
 
     [ConditionalFact]
@@ -2639,8 +3323,9 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedPrecisionAndScaledDataTypesWithIdentity>().Add(
-                CreateMappedPrecisionAndScaledDataTypesWithIdentity(77));
+            context
+                .Set<MappedPrecisionAndScaledDataTypesWithIdentity>()
+                .Add(CreateMappedPrecisionAndScaledDataTypesWithIdentity(77));
 
             Assert.Equal(1, context.SaveChanges());
         }
@@ -2652,18 +3337,24 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 @p2='103.3' (Precision = 5) (Scale = 2)
 @p3='77'",
             parameters,
-            ignoreLineEndingDifferences: true);
+            ignoreLineEndingDifferences: true
+        );
 
         using (var context = CreateContext())
         {
             AssertMappedPrecisionAndScaledDataTypesWithIdentity(
-                context.Set<MappedPrecisionAndScaledDataTypesWithIdentity>().Single(e => e.Int == 77), 77);
+                context
+                    .Set<MappedPrecisionAndScaledDataTypesWithIdentity>()
+                    .Single(e => e.Int == 77),
+                77
+            );
         }
     }
 
     private static void AssertMappedPrecisionAndScaledDataTypesWithIdentity(
         MappedPrecisionAndScaledDataTypesWithIdentity entity,
-        int id)
+        int id
+    )
     {
         Assert.Equal(id, entity.Int);
         Assert.Equal(101.1m, entity.DecimalAsDecimal52);
@@ -2671,8 +3362,10 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         Assert.Equal(103.3m, entity.DecimalAsNumeric52);
     }
 
-    private static MappedPrecisionAndScaledDataTypesWithIdentity CreateMappedPrecisionAndScaledDataTypesWithIdentity(int id)
-        => new()
+    private static MappedPrecisionAndScaledDataTypesWithIdentity CreateMappedPrecisionAndScaledDataTypesWithIdentity(
+        int id
+    ) =>
+        new()
         {
             Int = id,
             DecimalAsDecimal52 = 101.1m,
@@ -2714,9 +3407,18 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 
         using (var context = CreateContext())
         {
-            AssertMappedNullableDataTypes(context.Set<MappedNullableDataTypes>().Single(e => e.Int == 177), 177);
-            AssertMappedNullableDataTypes(context.Set<MappedNullableDataTypes>().Single(e => e.Int == 178), 178);
-            AssertMappedNullableDataTypes(context.Set<MappedNullableDataTypes>().Single(e => e.Int == 179), 179);
+            AssertMappedNullableDataTypes(
+                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 177),
+                177
+            );
+            AssertMappedNullableDataTypes(
+                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 178),
+                178
+            );
+            AssertMappedNullableDataTypes(
+                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 179),
+                179
+            );
         }
     }
 
@@ -2734,9 +3436,18 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 
         using (var context = CreateContext())
         {
-            AssertNullMappedNullableDataTypes(context.Set<MappedNullableDataTypes>().Single(e => e.Int == 278), 278);
-            AssertNullMappedNullableDataTypes(context.Set<MappedNullableDataTypes>().Single(e => e.Int == 279), 279);
-            AssertNullMappedNullableDataTypes(context.Set<MappedNullableDataTypes>().Single(e => e.Int == 280), 280);
+            AssertNullMappedNullableDataTypes(
+                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 278),
+                278
+            );
+            AssertNullMappedNullableDataTypes(
+                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 279),
+                279
+            );
+            AssertNullMappedNullableDataTypes(
+                context.Set<MappedNullableDataTypes>().Single(e => e.Int == 280),
+                280
+            );
         }
     }
 
@@ -2754,9 +3465,18 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 
         using (var context = CreateContext())
         {
-            AssertMappedSizedDataTypes(context.Set<MappedSizedDataTypes>().Single(e => e.Id == 177), 177);
-            AssertMappedSizedDataTypes(context.Set<MappedSizedDataTypes>().Single(e => e.Id == 178), 178);
-            AssertMappedSizedDataTypes(context.Set<MappedSizedDataTypes>().Single(e => e.Id == 179), 179);
+            AssertMappedSizedDataTypes(
+                context.Set<MappedSizedDataTypes>().Single(e => e.Id == 177),
+                177
+            );
+            AssertMappedSizedDataTypes(
+                context.Set<MappedSizedDataTypes>().Single(e => e.Id == 178),
+                178
+            );
+            AssertMappedSizedDataTypes(
+                context.Set<MappedSizedDataTypes>().Single(e => e.Id == 179),
+                179
+            );
         }
     }
 
@@ -2774,9 +3494,18 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 
         using (var context = CreateContext())
         {
-            AssertNullMappedSizedDataTypes(context.Set<MappedSizedDataTypes>().Single(e => e.Id == 278), 278);
-            AssertNullMappedSizedDataTypes(context.Set<MappedSizedDataTypes>().Single(e => e.Id == 279), 279);
-            AssertNullMappedSizedDataTypes(context.Set<MappedSizedDataTypes>().Single(e => e.Id == 280), 280);
+            AssertNullMappedSizedDataTypes(
+                context.Set<MappedSizedDataTypes>().Single(e => e.Id == 278),
+                278
+            );
+            AssertNullMappedSizedDataTypes(
+                context.Set<MappedSizedDataTypes>().Single(e => e.Id == 279),
+                279
+            );
+            AssertNullMappedSizedDataTypes(
+                context.Set<MappedSizedDataTypes>().Single(e => e.Id == 280),
+                280
+            );
         }
     }
 
@@ -2794,9 +3523,18 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 
         using (var context = CreateContext())
         {
-            AssertMappedScaledDataTypes(context.Set<MappedScaledDataTypes>().Single(e => e.Id == 177), 177);
-            AssertMappedScaledDataTypes(context.Set<MappedScaledDataTypes>().Single(e => e.Id == 178), 178);
-            AssertMappedScaledDataTypes(context.Set<MappedScaledDataTypes>().Single(e => e.Id == 179), 179);
+            AssertMappedScaledDataTypes(
+                context.Set<MappedScaledDataTypes>().Single(e => e.Id == 177),
+                177
+            );
+            AssertMappedScaledDataTypes(
+                context.Set<MappedScaledDataTypes>().Single(e => e.Id == 178),
+                178
+            );
+            AssertMappedScaledDataTypes(
+                context.Set<MappedScaledDataTypes>().Single(e => e.Id == 179),
+                179
+            );
         }
     }
 
@@ -2805,18 +3543,33 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedPrecisionAndScaledDataTypes>().Add(CreateMappedPrecisionAndScaledDataTypes(177));
-            context.Set<MappedPrecisionAndScaledDataTypes>().Add(CreateMappedPrecisionAndScaledDataTypes(178));
-            context.Set<MappedPrecisionAndScaledDataTypes>().Add(CreateMappedPrecisionAndScaledDataTypes(179));
+            context
+                .Set<MappedPrecisionAndScaledDataTypes>()
+                .Add(CreateMappedPrecisionAndScaledDataTypes(177));
+            context
+                .Set<MappedPrecisionAndScaledDataTypes>()
+                .Add(CreateMappedPrecisionAndScaledDataTypes(178));
+            context
+                .Set<MappedPrecisionAndScaledDataTypes>()
+                .Add(CreateMappedPrecisionAndScaledDataTypes(179));
 
             Assert.Equal(3, context.SaveChanges());
         }
 
         using (var context = CreateContext())
         {
-            AssertMappedPrecisionAndScaledDataTypes(context.Set<MappedPrecisionAndScaledDataTypes>().Single(e => e.Id == 177), 177);
-            AssertMappedPrecisionAndScaledDataTypes(context.Set<MappedPrecisionAndScaledDataTypes>().Single(e => e.Id == 178), 178);
-            AssertMappedPrecisionAndScaledDataTypes(context.Set<MappedPrecisionAndScaledDataTypes>().Single(e => e.Id == 179), 179);
+            AssertMappedPrecisionAndScaledDataTypes(
+                context.Set<MappedPrecisionAndScaledDataTypes>().Single(e => e.Id == 177),
+                177
+            );
+            AssertMappedPrecisionAndScaledDataTypes(
+                context.Set<MappedPrecisionAndScaledDataTypes>().Single(e => e.Id == 178),
+                178
+            );
+            AssertMappedPrecisionAndScaledDataTypes(
+                context.Set<MappedPrecisionAndScaledDataTypes>().Single(e => e.Id == 179),
+                179
+            );
         }
     }
 
@@ -2834,9 +3587,18 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
 
         using (var context = CreateContext())
         {
-            AssertMappedDataTypesWithIdentity(context.Set<MappedDataTypesWithIdentity>().Single(e => e.Int == 177), 177);
-            AssertMappedDataTypesWithIdentity(context.Set<MappedDataTypesWithIdentity>().Single(e => e.Int == 178), 178);
-            AssertMappedDataTypesWithIdentity(context.Set<MappedDataTypesWithIdentity>().Single(e => e.Int == 179), 179);
+            AssertMappedDataTypesWithIdentity(
+                context.Set<MappedDataTypesWithIdentity>().Single(e => e.Int == 177),
+                177
+            );
+            AssertMappedDataTypesWithIdentity(
+                context.Set<MappedDataTypesWithIdentity>().Single(e => e.Int == 178),
+                178
+            );
+            AssertMappedDataTypesWithIdentity(
+                context.Set<MappedDataTypesWithIdentity>().Single(e => e.Int == 179),
+                179
+            );
         }
     }
 
@@ -2845,9 +3607,15 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedNullableDataTypesWithIdentity>().Add(CreateMappedNullableDataTypesWithIdentity(177));
-            context.Set<MappedNullableDataTypesWithIdentity>().Add(CreateMappedNullableDataTypesWithIdentity(178));
-            context.Set<MappedNullableDataTypesWithIdentity>().Add(CreateMappedNullableDataTypesWithIdentity(179));
+            context
+                .Set<MappedNullableDataTypesWithIdentity>()
+                .Add(CreateMappedNullableDataTypesWithIdentity(177));
+            context
+                .Set<MappedNullableDataTypesWithIdentity>()
+                .Add(CreateMappedNullableDataTypesWithIdentity(178));
+            context
+                .Set<MappedNullableDataTypesWithIdentity>()
+                .Add(CreateMappedNullableDataTypesWithIdentity(179));
 
             Assert.Equal(3, context.SaveChanges());
         }
@@ -2855,11 +3623,17 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         using (var context = CreateContext())
         {
             AssertMappedNullableDataTypesWithIdentity(
-                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 177), 177);
+                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 177),
+                177
+            );
             AssertMappedNullableDataTypesWithIdentity(
-                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 178), 178);
+                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 178),
+                178
+            );
             AssertMappedNullableDataTypesWithIdentity(
-                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 179), 179);
+                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 179),
+                179
+            );
         }
     }
 
@@ -2868,9 +3642,15 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedNullableDataTypesWithIdentity>().Add(new MappedNullableDataTypesWithIdentity { Int = 278 });
-            context.Set<MappedNullableDataTypesWithIdentity>().Add(new MappedNullableDataTypesWithIdentity { Int = 279 });
-            context.Set<MappedNullableDataTypesWithIdentity>().Add(new MappedNullableDataTypesWithIdentity { Int = 280 });
+            context
+                .Set<MappedNullableDataTypesWithIdentity>()
+                .Add(new MappedNullableDataTypesWithIdentity { Int = 278 });
+            context
+                .Set<MappedNullableDataTypesWithIdentity>()
+                .Add(new MappedNullableDataTypesWithIdentity { Int = 279 });
+            context
+                .Set<MappedNullableDataTypesWithIdentity>()
+                .Add(new MappedNullableDataTypesWithIdentity { Int = 280 });
 
             Assert.Equal(3, context.SaveChanges());
         }
@@ -2878,11 +3658,17 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         using (var context = CreateContext())
         {
             AssertNullMappedNullableDataTypesWithIdentity(
-                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 278), 278);
+                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 278),
+                278
+            );
             AssertNullMappedNullableDataTypesWithIdentity(
-                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 279), 279);
+                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 279),
+                279
+            );
             AssertNullMappedNullableDataTypesWithIdentity(
-                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 280), 280);
+                context.Set<MappedNullableDataTypesWithIdentity>().Single(e => e.Int == 280),
+                280
+            );
         }
     }
 
@@ -2891,18 +3677,33 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedSizedDataTypesWithIdentity>().Add(CreateMappedSizedDataTypesWithIdentity(177));
-            context.Set<MappedSizedDataTypesWithIdentity>().Add(CreateMappedSizedDataTypesWithIdentity(178));
-            context.Set<MappedSizedDataTypesWithIdentity>().Add(CreateMappedSizedDataTypesWithIdentity(179));
+            context
+                .Set<MappedSizedDataTypesWithIdentity>()
+                .Add(CreateMappedSizedDataTypesWithIdentity(177));
+            context
+                .Set<MappedSizedDataTypesWithIdentity>()
+                .Add(CreateMappedSizedDataTypesWithIdentity(178));
+            context
+                .Set<MappedSizedDataTypesWithIdentity>()
+                .Add(CreateMappedSizedDataTypesWithIdentity(179));
 
             Assert.Equal(3, context.SaveChanges());
         }
 
         using (var context = CreateContext())
         {
-            AssertMappedSizedDataTypesWithIdentity(context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 177), 177);
-            AssertMappedSizedDataTypesWithIdentity(context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 178), 178);
-            AssertMappedSizedDataTypesWithIdentity(context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 179), 179);
+            AssertMappedSizedDataTypesWithIdentity(
+                context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 177),
+                177
+            );
+            AssertMappedSizedDataTypesWithIdentity(
+                context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 178),
+                178
+            );
+            AssertMappedSizedDataTypesWithIdentity(
+                context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 179),
+                179
+            );
         }
     }
 
@@ -2911,18 +3712,33 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedSizedDataTypesWithIdentity>().Add(new MappedSizedDataTypesWithIdentity { Int = 278 });
-            context.Set<MappedSizedDataTypesWithIdentity>().Add(new MappedSizedDataTypesWithIdentity { Int = 279 });
-            context.Set<MappedSizedDataTypesWithIdentity>().Add(new MappedSizedDataTypesWithIdentity { Int = 280 });
+            context
+                .Set<MappedSizedDataTypesWithIdentity>()
+                .Add(new MappedSizedDataTypesWithIdentity { Int = 278 });
+            context
+                .Set<MappedSizedDataTypesWithIdentity>()
+                .Add(new MappedSizedDataTypesWithIdentity { Int = 279 });
+            context
+                .Set<MappedSizedDataTypesWithIdentity>()
+                .Add(new MappedSizedDataTypesWithIdentity { Int = 280 });
 
             Assert.Equal(3, context.SaveChanges());
         }
 
         using (var context = CreateContext())
         {
-            AssertNullMappedSizedDataTypesWithIdentity(context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 278), 278);
-            AssertNullMappedSizedDataTypesWithIdentity(context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 279), 279);
-            AssertNullMappedSizedDataTypesWithIdentity(context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 280), 280);
+            AssertNullMappedSizedDataTypesWithIdentity(
+                context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 278),
+                278
+            );
+            AssertNullMappedSizedDataTypesWithIdentity(
+                context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 279),
+                279
+            );
+            AssertNullMappedSizedDataTypesWithIdentity(
+                context.Set<MappedSizedDataTypesWithIdentity>().Single(e => e.Int == 280),
+                280
+            );
         }
     }
 
@@ -2931,18 +3747,33 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedScaledDataTypesWithIdentity>().Add(CreateMappedScaledDataTypesWithIdentity(177));
-            context.Set<MappedScaledDataTypesWithIdentity>().Add(CreateMappedScaledDataTypesWithIdentity(178));
-            context.Set<MappedScaledDataTypesWithIdentity>().Add(CreateMappedScaledDataTypesWithIdentity(179));
+            context
+                .Set<MappedScaledDataTypesWithIdentity>()
+                .Add(CreateMappedScaledDataTypesWithIdentity(177));
+            context
+                .Set<MappedScaledDataTypesWithIdentity>()
+                .Add(CreateMappedScaledDataTypesWithIdentity(178));
+            context
+                .Set<MappedScaledDataTypesWithIdentity>()
+                .Add(CreateMappedScaledDataTypesWithIdentity(179));
 
             Assert.Equal(3, context.SaveChanges());
         }
 
         using (var context = CreateContext())
         {
-            AssertMappedScaledDataTypesWithIdentity(context.Set<MappedScaledDataTypesWithIdentity>().Single(e => e.Int == 177), 177);
-            AssertMappedScaledDataTypesWithIdentity(context.Set<MappedScaledDataTypesWithIdentity>().Single(e => e.Int == 178), 178);
-            AssertMappedScaledDataTypesWithIdentity(context.Set<MappedScaledDataTypesWithIdentity>().Single(e => e.Int == 179), 179);
+            AssertMappedScaledDataTypesWithIdentity(
+                context.Set<MappedScaledDataTypesWithIdentity>().Single(e => e.Int == 177),
+                177
+            );
+            AssertMappedScaledDataTypesWithIdentity(
+                context.Set<MappedScaledDataTypesWithIdentity>().Single(e => e.Int == 178),
+                178
+            );
+            AssertMappedScaledDataTypesWithIdentity(
+                context.Set<MappedScaledDataTypesWithIdentity>().Single(e => e.Int == 179),
+                179
+            );
         }
     }
 
@@ -2951,9 +3782,15 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         using (var context = CreateContext())
         {
-            context.Set<MappedPrecisionAndScaledDataTypesWithIdentity>().Add(CreateMappedPrecisionAndScaledDataTypesWithIdentity(177));
-            context.Set<MappedPrecisionAndScaledDataTypesWithIdentity>().Add(CreateMappedPrecisionAndScaledDataTypesWithIdentity(178));
-            context.Set<MappedPrecisionAndScaledDataTypesWithIdentity>().Add(CreateMappedPrecisionAndScaledDataTypesWithIdentity(179));
+            context
+                .Set<MappedPrecisionAndScaledDataTypesWithIdentity>()
+                .Add(CreateMappedPrecisionAndScaledDataTypesWithIdentity(177));
+            context
+                .Set<MappedPrecisionAndScaledDataTypesWithIdentity>()
+                .Add(CreateMappedPrecisionAndScaledDataTypesWithIdentity(178));
+            context
+                .Set<MappedPrecisionAndScaledDataTypesWithIdentity>()
+                .Add(CreateMappedPrecisionAndScaledDataTypesWithIdentity(179));
 
             Assert.Equal(3, context.SaveChanges());
         }
@@ -2961,11 +3798,23 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
         using (var context = CreateContext())
         {
             AssertMappedPrecisionAndScaledDataTypesWithIdentity(
-                context.Set<MappedPrecisionAndScaledDataTypesWithIdentity>().Single(e => e.Int == 177), 177);
+                context
+                    .Set<MappedPrecisionAndScaledDataTypesWithIdentity>()
+                    .Single(e => e.Int == 177),
+                177
+            );
             AssertMappedPrecisionAndScaledDataTypesWithIdentity(
-                context.Set<MappedPrecisionAndScaledDataTypesWithIdentity>().Single(e => e.Int == 178), 178);
+                context
+                    .Set<MappedPrecisionAndScaledDataTypesWithIdentity>()
+                    .Single(e => e.Int == 178),
+                178
+            );
             AssertMappedPrecisionAndScaledDataTypesWithIdentity(
-                context.Set<MappedPrecisionAndScaledDataTypesWithIdentity>().Single(e => e.Int == 179), 179);
+                context
+                    .Set<MappedPrecisionAndScaledDataTypesWithIdentity>()
+                    .Single(e => e.Int == 179),
+                179
+            );
         }
     }
 
@@ -2974,9 +3823,13 @@ WHERE DATEDIFF(nanosecond, [m].[TimeSpanAsTime], @__timeSpan_1) = 0");
     {
         var actual = QueryForColumnTypes(
             CreateContext(),
-            nameof(ObjectBackedDataTypes), nameof(NullableBackedDataTypes), nameof(NonNullableBackedDataTypes));
+            nameof(ObjectBackedDataTypes),
+            nameof(NullableBackedDataTypes),
+            nameof(NonNullableBackedDataTypes)
+        );
 
-        const string expected = @"Animal.Id ---> [int] [Precision = 10 Scale = 0]
+        const string expected =
+            @"Animal.Id ---> [int] [Precision = 10 Scale = 0]
 AnimalDetails.AnimalId ---> [nullable int] [Precision = 10 Scale = 0]
 AnimalDetails.BoolField ---> [int] [Precision = 10 Scale = 0]
 AnimalDetails.Id ---> [int] [Precision = 10 Scale = 0]
@@ -3516,7 +4369,11 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
         using var context = CreateContext();
         var typeMapper = context.GetService<IRelationalTypeMappingSource>();
 
-        foreach (var property in context.Model.GetEntityTypes().SelectMany(e => e.GetDeclaredProperties()))
+        foreach (
+            var property in context.Model
+                .GetEntityTypes()
+                .SelectMany(e => e.GetDeclaredProperties())
+        )
         {
             var columnType = property.GetColumnType();
             Assert.NotNull(columnType);
@@ -3525,7 +4382,8 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
             {
                 Assert.Equal(
                     columnType.ToLowerInvariant(),
-                    typeMapper.FindMapping(property).StoreType.ToLowerInvariant());
+                    typeMapper.FindMapping(property).StoreType.ToLowerInvariant()
+                );
             }
         }
     }
@@ -3537,13 +4395,14 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
         AssertSql(
             @"SELECT CONVERT(varchar(4), [b].[TestSignedByte]) AS [Sbyte], CONVERT(varchar(3), [b].[TestByte]) AS [Byte], CONVERT(varchar(6), [b].[TestInt16]) AS [Short], CONVERT(varchar(5), [b].[TestUnsignedInt16]) AS [Ushort], CONVERT(varchar(11), [b].[TestInt32]) AS [Int], CONVERT(varchar(10), [b].[TestUnsignedInt32]) AS [Uint], CONVERT(varchar(20), [b].[TestInt64]) AS [Long], CONVERT(varchar(20), [b].[TestUnsignedInt64]) AS [Ulong], CONVERT(varchar(100), [b].[TestSingle]) AS [Float], CONVERT(varchar(100), [b].[TestDouble]) AS [Double], CONVERT(varchar(100), [b].[TestDecimal]) AS [Decimal], CONVERT(varchar(1), [b].[TestCharacter]) AS [Char], CONVERT(varchar(100), [b].[TestDateTime]) AS [DateTime], CONVERT(varchar(100), [b].[TestDateTimeOffset]) AS [DateTimeOffset], CONVERT(varchar(100), [b].[TestTimeSpan]) AS [TimeSpan]
 FROM [BuiltInDataTypes] AS [b]
-WHERE [b].[Id] = 13");
+WHERE [b].[Id] = 13"
+        );
     }
 
     public static string QueryForColumnTypes(DbContext context, params string[] tablesToIgnore)
     {
-        const string query
-            = @"SELECT
+        const string query =
+            @"SELECT
                         TABLE_NAME,
                         COLUMN_NAME,
                         DATA_TYPE,
@@ -3627,9 +4486,11 @@ WHERE [b].[Id] = 13");
                 builder.Append(column.NumericScale);
             }
 
-            if (column.NumericPrecision.HasValue
+            if (
+                column.NumericPrecision.HasValue
                 || column.DateTimePrecision.HasValue
-                || column.NumericScale.HasValue)
+                || column.NumericScale.HasValue
+            )
             {
                 builder.Append("]");
             }
@@ -3641,78 +4502,67 @@ WHERE [b].[Id] = 13");
         return actual;
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
     public class BuiltInDataTypesSqlServerFixture : BuiltInDataTypesFixtureBase
     {
-        public override bool StrictEquality
-            => true;
+        public override bool StrictEquality => true;
 
-        public override bool SupportsAnsi
-            => true;
+        public override bool SupportsAnsi => true;
 
-        public override bool SupportsUnicodeToAnsiConversion
-            => true;
+        public override bool SupportsUnicodeToAnsiConversion => true;
 
-        public override bool SupportsLargeStringComparisons
-            => true;
+        public override bool SupportsLargeStringComparisons => true;
 
-        public override bool SupportsDecimalComparisons
-            => true;
+        public override bool SupportsDecimalComparisons => true;
 
-        public override bool PreservesDateTimeKind
-            => false;
+        public override bool PreservesDateTimeKind => false;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        protected override bool ShouldLogCategory(string logCategory)
-            => logCategory == DbLoggerCategory.Query.Name;
+        protected override bool ShouldLogCategory(string logCategory) =>
+            logCategory == DbLoggerCategory.Query.Name;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
             base.OnModelCreating(modelBuilder, context);
 
-            modelBuilder.Entity<MappedDataTypes>(
-                b =>
-                {
-                    b.HasKey(e => e.Int);
-                    b.Property(e => e.Int).ValueGeneratedNever();
-                    b.Property(e => e.StringAsVarcharMaxUtf8).UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
-                    b.Property(e => e.StringAsCharVaryingMaxUtf8).UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
-                    b.Property(e => e.StringAsCharacterVaryingMaxUtf8).UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
-                });
+            modelBuilder.Entity<MappedDataTypes>(b =>
+            {
+                b.HasKey(e => e.Int);
+                b.Property(e => e.Int).ValueGeneratedNever();
+                b.Property(e => e.StringAsVarcharMaxUtf8)
+                    .UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
+                b.Property(e => e.StringAsCharVaryingMaxUtf8)
+                    .UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
+                b.Property(e => e.StringAsCharacterVaryingMaxUtf8)
+                    .UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
+            });
 
-            modelBuilder.Entity<MappedSquareDataTypes>(
-                b =>
-                {
-                    b.HasKey(e => e.Int);
-                    b.Property(e => e.Int).ValueGeneratedNever();
-                });
+            modelBuilder.Entity<MappedSquareDataTypes>(b =>
+            {
+                b.HasKey(e => e.Int);
+                b.Property(e => e.Int).ValueGeneratedNever();
+            });
 
-            modelBuilder.Entity<MappedNullableDataTypes>(
-                b =>
-                {
-                    b.HasKey(e => e.Int);
-                    b.Property(e => e.Int).ValueGeneratedNever();
-                });
+            modelBuilder.Entity<MappedNullableDataTypes>(b =>
+            {
+                b.HasKey(e => e.Int);
+                b.Property(e => e.Int).ValueGeneratedNever();
+            });
 
             modelBuilder.Entity<MappedDataTypesWithIdentity>();
             modelBuilder.Entity<MappedNullableDataTypesWithIdentity>();
 
-            modelBuilder.Entity<MappedSizedDataTypes>()
-                .Property(e => e.Id)
-                .ValueGeneratedNever();
+            modelBuilder.Entity<MappedSizedDataTypes>().Property(e => e.Id).ValueGeneratedNever();
 
-            modelBuilder.Entity<MappedScaledDataTypes>()
-                .Property(e => e.Id)
-                .ValueGeneratedNever();
+            modelBuilder.Entity<MappedScaledDataTypes>().Property(e => e.Id).ValueGeneratedNever();
 
-            modelBuilder.Entity<MappedPrecisionAndScaledDataTypes>()
+            modelBuilder
+                .Entity<MappedPrecisionAndScaledDataTypes>()
                 .Property(e => e.Id)
                 .ValueGeneratedNever();
 
@@ -3730,84 +4580,88 @@ WHERE [b].[Id] = 13");
             modelBuilder.Entity<MappedScaledDataTypesWithIdentity>();
             modelBuilder.Entity<MappedPrecisionAndScaledDataTypesWithIdentity>();
 
-            modelBuilder.Entity<MappedSizedSeparatelyDataTypes>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                    b.Property(e => e.StringAsChar3).HasMaxLength(3);
-                    b.Property(e => e.StringAsCharacter3).HasMaxLength(3);
-                    b.Property(e => e.StringAsVarchar3).HasMaxLength(3);
-                    b.Property(e => e.StringAsCharVarying3).HasMaxLength(3);
-                    b.Property(e => e.StringAsCharacterVarying3).HasMaxLength(3);
-                    b.Property(e => e.StringAsNchar3).HasMaxLength(3);
-                    b.Property(e => e.StringAsNationalCharacter3).HasMaxLength(3);
-                    b.Property(e => e.StringAsNvarchar3).HasMaxLength(3);
-                    b.Property(e => e.StringAsNationalCharVarying3).HasMaxLength(3);
-                    b.Property(e => e.StringAsNationalCharacterVarying3).HasMaxLength(3);
-                    b.Property(e => e.StringAsChar3Utf8).HasMaxLength(3).UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
-                    b.Property(e => e.StringAsCharacter3Utf8).HasMaxLength(3).UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
-                    b.Property(e => e.StringAsVarchar3Utf8).HasMaxLength(3).UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
-                    b.Property(e => e.StringAsCharVarying3Utf8).HasMaxLength(3).UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
-                    b.Property(e => e.StringAsCharacterVarying3Utf8).HasMaxLength(3).UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
-                    b.Property(e => e.BytesAsBinary3).HasMaxLength(3);
-                    b.Property(e => e.BytesAsVarbinary3).HasMaxLength(3);
-                    b.Property(e => e.BytesAsBinaryVarying3).HasMaxLength(3);
-                    b.Property(e => e.CharAsVarchar3).HasMaxLength(3);
-                    b.Property(e => e.CharAsAsCharVarying3).HasMaxLength(3);
-                    b.Property(e => e.CharAsCharacterVarying3).HasMaxLength(3);
-                    b.Property(e => e.CharAsNvarchar3).HasMaxLength(3);
-                    b.Property(e => e.CharAsNationalCharVarying3).HasMaxLength(3);
-                    b.Property(e => e.CharAsNationalCharacterVarying3).HasMaxLength(3);
-                });
+            modelBuilder.Entity<MappedSizedSeparatelyDataTypes>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+                b.Property(e => e.StringAsChar3).HasMaxLength(3);
+                b.Property(e => e.StringAsCharacter3).HasMaxLength(3);
+                b.Property(e => e.StringAsVarchar3).HasMaxLength(3);
+                b.Property(e => e.StringAsCharVarying3).HasMaxLength(3);
+                b.Property(e => e.StringAsCharacterVarying3).HasMaxLength(3);
+                b.Property(e => e.StringAsNchar3).HasMaxLength(3);
+                b.Property(e => e.StringAsNationalCharacter3).HasMaxLength(3);
+                b.Property(e => e.StringAsNvarchar3).HasMaxLength(3);
+                b.Property(e => e.StringAsNationalCharVarying3).HasMaxLength(3);
+                b.Property(e => e.StringAsNationalCharacterVarying3).HasMaxLength(3);
+                b.Property(e => e.StringAsChar3Utf8)
+                    .HasMaxLength(3)
+                    .UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
+                b.Property(e => e.StringAsCharacter3Utf8)
+                    .HasMaxLength(3)
+                    .UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
+                b.Property(e => e.StringAsVarchar3Utf8)
+                    .HasMaxLength(3)
+                    .UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
+                b.Property(e => e.StringAsCharVarying3Utf8)
+                    .HasMaxLength(3)
+                    .UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
+                b.Property(e => e.StringAsCharacterVarying3Utf8)
+                    .HasMaxLength(3)
+                    .UseCollation("LATIN1_GENERAL_100_CI_AS_SC_UTF8");
+                b.Property(e => e.BytesAsBinary3).HasMaxLength(3);
+                b.Property(e => e.BytesAsVarbinary3).HasMaxLength(3);
+                b.Property(e => e.BytesAsBinaryVarying3).HasMaxLength(3);
+                b.Property(e => e.CharAsVarchar3).HasMaxLength(3);
+                b.Property(e => e.CharAsAsCharVarying3).HasMaxLength(3);
+                b.Property(e => e.CharAsCharacterVarying3).HasMaxLength(3);
+                b.Property(e => e.CharAsNvarchar3).HasMaxLength(3);
+                b.Property(e => e.CharAsNationalCharVarying3).HasMaxLength(3);
+                b.Property(e => e.CharAsNationalCharacterVarying3).HasMaxLength(3);
+            });
 
-            modelBuilder.Entity<MappedScaledSeparatelyDataTypes>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                    b.Property(e => e.FloatAsFloat3).HasPrecision(3);
-                    b.Property(e => e.FloatAsDoublePrecision3).HasPrecision(3);
-                    b.Property(e => e.FloatAsFloat25).HasPrecision(25);
-                    b.Property(e => e.FloatAsDoublePrecision25).HasPrecision(25);
-                    b.Property(e => e.DateTimeOffsetAsDatetimeoffset3).HasPrecision(3);
-                    b.Property(e => e.DateTimeAsDatetime23).HasPrecision(3);
-                    b.Property(e => e.DecimalAsDecimal3).HasPrecision(3);
-                    b.Property(e => e.DecimalAsDec3).HasPrecision(3);
-                    b.Property(e => e.DecimalAsNumeric3).HasPrecision(3);
-                });
+            modelBuilder.Entity<MappedScaledSeparatelyDataTypes>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+                b.Property(e => e.FloatAsFloat3).HasPrecision(3);
+                b.Property(e => e.FloatAsDoublePrecision3).HasPrecision(3);
+                b.Property(e => e.FloatAsFloat25).HasPrecision(25);
+                b.Property(e => e.FloatAsDoublePrecision25).HasPrecision(25);
+                b.Property(e => e.DateTimeOffsetAsDatetimeoffset3).HasPrecision(3);
+                b.Property(e => e.DateTimeAsDatetime23).HasPrecision(3);
+                b.Property(e => e.DecimalAsDecimal3).HasPrecision(3);
+                b.Property(e => e.DecimalAsDec3).HasPrecision(3);
+                b.Property(e => e.DecimalAsNumeric3).HasPrecision(3);
+            });
 
-            modelBuilder.Entity<DoubleDataTypes>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                    b.Property(e => e.Double3).HasPrecision(3);
-                    b.Property(e => e.Double25).HasPrecision(25);
-                });
+            modelBuilder.Entity<DoubleDataTypes>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+                b.Property(e => e.Double3).HasPrecision(3);
+                b.Property(e => e.Double25).HasPrecision(25);
+            });
 
-            modelBuilder.Entity<MappedPrecisionAndScaledSeparatelyDataTypes>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                    b.Property(e => e.DecimalAsDecimal52).HasPrecision(5, 2);
-                    b.Property(e => e.DecimalAsDec52).HasPrecision(5, 2);
-                    b.Property(e => e.DecimalAsNumeric52).HasPrecision(5, 2);
-                });
+            modelBuilder.Entity<MappedPrecisionAndScaledSeparatelyDataTypes>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+                b.Property(e => e.DecimalAsDecimal52).HasPrecision(5, 2);
+                b.Property(e => e.DecimalAsDec52).HasPrecision(5, 2);
+                b.Property(e => e.DecimalAsNumeric52).HasPrecision(5, 2);
+            });
         }
 
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
         {
-            var options = base.AddOptions(builder).ConfigureWarnings(
-                c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
+            var options = base.AddOptions(builder)
+                .ConfigureWarnings(c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
 
             new SqlServerDbContextOptionsBuilder(options).MinBatchSize(1);
 
             return options;
         }
 
-        public override bool SupportsBinaryKeys
-            => true;
+        public override bool SupportsBinaryKeys => true;
 
-        public override DateTime DefaultDateTime
-            => new();
+        public override DateTime DefaultDateTime => new();
     }
 
     [Flags]

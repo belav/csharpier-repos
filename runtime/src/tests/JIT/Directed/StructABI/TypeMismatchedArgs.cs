@@ -7,9 +7,18 @@ using System.Runtime.CompilerServices;
 
 public unsafe class TypeMismatchedArgs
 {
-    private static readonly HfaUnion s_hfaDblFlt = new HfaUnion { DblHfa = { FirstDblValue = 1.0, SecondDblValue = 2.0 } };
-    private static readonly HfaDblLngUnion s_dblLngHfa = new HfaDblLngUnion { DblLng = { FirstLngValue = 10, SecondLngValue = 20 } };
-    private static readonly FourDblLngUnion s_fourDblLngHfa = new FourDblLngUnion { Lngs = { LongOne = 30 } };
+    private static readonly HfaUnion s_hfaDblFlt = new HfaUnion
+    {
+        DblHfa = { FirstDblValue = 1.0, SecondDblValue = 2.0 }
+    };
+    private static readonly HfaDblLngUnion s_dblLngHfa = new HfaDblLngUnion
+    {
+        DblLng = { FirstLngValue = 10, SecondLngValue = 20 }
+    };
+    private static readonly FourDblLngUnion s_fourDblLngHfa = new FourDblLngUnion
+    {
+        Lngs = { LongOne = 30 }
+    };
 
     public static int Main()
     {
@@ -74,7 +83,11 @@ public unsafe class TypeMismatchedArgs
     private static double CallForHfaDblStruct(HfaDblStruct value) => value.FirstDblValue;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static long CallForSplitStructWithFourLongs(int arg0, int arg1, StructWithFourLongs splitArg) => splitArg.LongOne;
+    private static long CallForSplitStructWithFourLongs(
+        int arg0,
+        int arg1,
+        StructWithFourLongs splitArg
+    ) => splitArg.LongOne;
 }
 
 [StructLayout(LayoutKind.Explicit)]
@@ -82,6 +95,7 @@ struct HfaDblLngUnion
 {
     [FieldOffset(0)]
     public HfaDblStruct DblHfa;
+
     [FieldOffset(0)]
     public DblLngStruct DblLng;
 }
@@ -91,6 +105,7 @@ struct HfaUnion
 {
     [FieldOffset(0)]
     public HfaDblStruct DblHfa;
+
     [FieldOffset(0)]
     public HfaFltStruct FltHfa;
 }
@@ -100,6 +115,7 @@ struct FourDblLngUnion
 {
     [FieldOffset(0)]
     public FourDoublesHfaStruct Hfa;
+
     [FieldOffset(0)]
     public StructWithFourLongs Lngs;
 }

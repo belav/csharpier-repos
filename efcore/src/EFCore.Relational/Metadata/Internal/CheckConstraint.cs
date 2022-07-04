@@ -9,7 +9,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, IConventionCheckConstraint, ICheckConstraint
+public class CheckConstraint
+    : ConventionAnnotatable,
+        IMutableCheckConstraint,
+        IConventionCheckConstraint,
+        ICheckConstraint
 {
     private string? _name;
     private InternalCheckConstraintBuilder? _builder;
@@ -27,7 +31,8 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
         IMutableEntityType entityType,
         string name,
         string sql,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         EntityType = entityType;
         ModelName = name;
@@ -38,14 +43,21 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
         if (constraints == null)
         {
             constraints = new SortedDictionary<string, ICheckConstraint>(StringComparer.Ordinal);
-            ((IMutableEntityType)EntityType).SetOrRemoveAnnotation(RelationalAnnotationNames.CheckConstraints, constraints);
+            ((IMutableEntityType)EntityType).SetOrRemoveAnnotation(
+                RelationalAnnotationNames.CheckConstraints,
+                constraints
+            );
         }
 
         if (constraints.ContainsKey(name))
         {
             throw new InvalidOperationException(
                 RelationalStrings.DuplicateCheckConstraint(
-                    name, EntityType.DisplayName(), EntityType.DisplayName()));
+                    name,
+                    EntityType.DisplayName(),
+                    EntityType.DisplayName()
+                )
+            );
         }
 
         var baseCheckConstraint = entityType.BaseType?.FindCheckConstraint(name);
@@ -53,7 +65,11 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
         {
             throw new InvalidOperationException(
                 RelationalStrings.DuplicateCheckConstraint(
-                    name, EntityType.DisplayName(), baseCheckConstraint.EntityType.DisplayName()));
+                    name,
+                    EntityType.DisplayName(),
+                    baseCheckConstraint.EntityType.DisplayName()
+                )
+            );
         }
 
         foreach (var derivedType in entityType.GetDerivedTypes())
@@ -63,7 +79,11 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
             {
                 throw new InvalidOperationException(
                     RelationalStrings.DuplicateCheckConstraint(
-                        name, EntityType.DisplayName(), derivedCheckConstraint.EntityType.DisplayName()));
+                        name,
+                        EntityType.DisplayName(),
+                        derivedCheckConstraint.EntityType.DisplayName()
+                    )
+                );
             }
         }
 
@@ -71,7 +91,10 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
 
         constraints.Add(name, this);
 
-        _builder = new InternalCheckConstraintBuilder(this, ((IConventionModel)entityType.Model).Builder);
+        _builder = new InternalCheckConstraintBuilder(
+            this,
+            ((IConventionModel)entityType.Model).Builder
+        );
     }
 
     /// <summary>
@@ -80,7 +103,9 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static IEnumerable<IReadOnlyCheckConstraint> GetDeclaredCheckConstraints(IReadOnlyEntityType entityType)
+    public static IEnumerable<IReadOnlyCheckConstraint> GetDeclaredCheckConstraints(
+        IReadOnlyEntityType entityType
+    )
     {
         if (entityType is RuntimeEntityType)
         {
@@ -96,9 +121,12 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static IEnumerable<IReadOnlyCheckConstraint> GetCheckConstraints(IReadOnlyEntityType entityType)
-        => entityType.BaseType != null
-            ? GetCheckConstraints(entityType.BaseType).Concat(GetDeclaredCheckConstraints(entityType))
+    public static IEnumerable<IReadOnlyCheckConstraint> GetCheckConstraints(
+        IReadOnlyEntityType entityType
+    ) =>
+        entityType.BaseType != null
+            ? GetCheckConstraints(entityType.BaseType)
+                .Concat(GetDeclaredCheckConstraints(entityType))
             : GetDeclaredCheckConstraints(entityType);
 
     /// <summary>
@@ -109,9 +137,10 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     /// </summary>
     public static IReadOnlyCheckConstraint? FindCheckConstraint(
         IReadOnlyEntityType entityType,
-        string name)
-        => entityType.BaseType?.FindCheckConstraint(name)
-            ?? FindDeclaredCheckConstraint(entityType, name);
+        string name
+    ) =>
+        entityType.BaseType?.FindCheckConstraint(name)
+        ?? FindDeclaredCheckConstraint(entityType, name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -119,7 +148,10 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static IReadOnlyCheckConstraint? FindDeclaredCheckConstraint(IReadOnlyEntityType entityType, string name)
+    public static IReadOnlyCheckConstraint? FindDeclaredCheckConstraint(
+        IReadOnlyEntityType entityType,
+        string name
+    )
     {
         var dataDictionary = GetConstraintsDictionary(entityType);
         return dataDictionary == null
@@ -137,12 +169,12 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     /// </summary>
     public static IMutableCheckConstraint? RemoveCheckConstraint(
         IMutableEntityType entityType,
-        string name)
+        string name
+    )
     {
         var dataDictionary = GetConstraintsDictionary(entityType);
 
-        if (dataDictionary != null
-            && dataDictionary.TryGetValue(name, out var constraint))
+        if (dataDictionary != null && dataDictionary.TryGetValue(name, out var constraint))
         {
             var checkConstraint = (CheckConstraint)constraint;
             checkConstraint.EnsureMutable();
@@ -161,13 +193,17 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static void Attach(IConventionEntityType entityType, IConventionCheckConstraint detachedCheckConstraint)
+    public static void Attach(
+        IConventionEntityType entityType,
+        IConventionCheckConstraint detachedCheckConstraint
+    )
     {
         var newCheckConstraint = new CheckConstraint(
             (IMutableEntityType)entityType,
             detachedCheckConstraint.ModelName,
             detachedCheckConstraint.Sql,
-            detachedCheckConstraint.GetConfigurationSource());
+            detachedCheckConstraint.GetConfigurationSource()
+        );
 
         Attach(detachedCheckConstraint, newCheckConstraint);
     }
@@ -178,17 +214,23 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static void Attach(IConventionCheckConstraint detachedCheckConstraint, IConventionCheckConstraint existingCheckConstraint)
+    public static void Attach(
+        IConventionCheckConstraint detachedCheckConstraint,
+        IConventionCheckConstraint existingCheckConstraint
+    )
     {
         var nameConfigurationSource = detachedCheckConstraint.GetNameConfigurationSource();
         if (nameConfigurationSource != null)
         {
             ((InternalCheckConstraintBuilder)existingCheckConstraint.Builder).HasName(
-                detachedCheckConstraint.Name, nameConfigurationSource.Value);
+                detachedCheckConstraint.Name,
+                nameConfigurationSource.Value
+            );
         }
 
         ((InternalCheckConstraintBuilder)existingCheckConstraint.Builder).MergeAnnotationsFrom(
-            (CheckConstraint)detachedCheckConstraint);
+            (CheckConstraint)detachedCheckConstraint
+        );
     }
 
     /// <summary>
@@ -201,7 +243,8 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
         IReadOnlyCheckConstraint checkConstraint,
         IReadOnlyCheckConstraint duplicateCheckConstraint,
         in StoreObjectIdentifier storeObject,
-        bool shouldThrow)
+        bool shouldThrow
+    )
     {
         if (checkConstraint.Sql != duplicateCheckConstraint.Sql)
         {
@@ -213,7 +256,9 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
                         checkConstraint.EntityType.DisplayName(),
                         duplicateCheckConstraint.ModelName,
                         duplicateCheckConstraint.EntityType.DisplayName(),
-                        checkConstraint.GetName(storeObject)));
+                        checkConstraint.GetName(storeObject)
+                    )
+                );
             }
 
             return false;
@@ -240,8 +285,7 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsInModel
-        => _builder is not null;
+    public virtual bool IsInModel => _builder is not null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -249,8 +293,7 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetRemovedFromModel()
-        => _builder = null;
+    public virtual void SetRemovedFromModel() => _builder = null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -263,8 +306,7 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     /// <summary>
     ///     Indicates whether the check constraint is read-only.
     /// </summary>
-    public override bool IsReadOnly
-        => ((Annotatable)EntityType.Model).IsReadOnly;
+    public override bool IsReadOnly => ((Annotatable)EntityType.Model).IsReadOnly;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -282,9 +324,10 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     /// </summary>
     public virtual string? Name
     {
-        get => EntityType.GetTableName() == null
-            ? null
-            : _name ?? ((IReadOnlyCheckConstraint)this).GetDefaultName();
+        get =>
+            EntityType.GetTableName() == null
+                ? null
+                : _name ?? ((IReadOnlyCheckConstraint)this).GetDefaultName();
         set => SetName(value, ConfigurationSource.Explicit);
     }
 
@@ -305,7 +348,10 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
         {
             foreach (var containingType in EntityType.GetDerivedTypesInclusive())
             {
-                if (StoreObjectIdentifier.Create(containingType, storeObject.StoreObjectType) == storeObject)
+                if (
+                    StoreObjectIdentifier.Create(containingType, storeObject.StoreObjectType)
+                    == storeObject
+                )
                 {
                     return _name ?? ((IReadOnlyCheckConstraint)this).GetDefaultName(storeObject);
                 }
@@ -314,7 +360,10 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
             return null;
         }
 
-        var declaringStoreObject = StoreObjectIdentifier.Create(EntityType, storeObject.StoreObjectType);
+        var declaringStoreObject = StoreObjectIdentifier.Create(
+            EntityType,
+            storeObject.StoreObjectType
+        );
         if (declaringStoreObject == null)
         {
             var tableFound = false;
@@ -324,7 +373,10 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
             {
                 foreach (var containingType in queue.Dequeue().GetDirectlyDerivedTypes())
                 {
-                    declaringStoreObject = StoreObjectIdentifier.Create(containingType, storeObject.StoreObjectType);
+                    declaringStoreObject = StoreObjectIdentifier.Create(
+                        containingType,
+                        storeObject.StoreObjectType
+                    );
                     if (declaringStoreObject == null)
                     {
                         queue.Enqueue(containingType);
@@ -375,8 +427,7 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetNameConfigurationSource()
-        => _nameConfigurationSource;
+    public virtual ConfigurationSource? GetNameConfigurationSource() => _nameConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -392,8 +443,7 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource GetConfigurationSource()
-        => _configurationSource;
+    public virtual ConfigurationSource GetConfigurationSource() => _configurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -401,11 +451,14 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource)
-        => _configurationSource = configurationSource.Max(_configurationSource);
+    public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource) =>
+        _configurationSource = configurationSource.Max(_configurationSource);
 
-    private static SortedDictionary<string, ICheckConstraint>? GetConstraintsDictionary(IReadOnlyEntityType entityType)
-        => (SortedDictionary<string, ICheckConstraint>?)entityType[RelationalAnnotationNames.CheckConstraints];
+    private static SortedDictionary<string, ICheckConstraint>? GetConstraintsDictionary(
+        IReadOnlyEntityType entityType
+    ) =>
+        (SortedDictionary<string, ICheckConstraint>?)
+            entityType[RelationalAnnotationNames.CheckConstraints];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -413,8 +466,8 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((ICheckConstraint)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((ICheckConstraint)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -471,6 +524,9 @@ public class CheckConstraint : ConventionAnnotatable, IMutableCheckConstraint, I
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    string? IConventionCheckConstraint.SetName(string? name, bool fromDataAnnotation)
-        => SetName(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    string? IConventionCheckConstraint.SetName(string? name, bool fromDataAnnotation) =>
+        SetName(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 }

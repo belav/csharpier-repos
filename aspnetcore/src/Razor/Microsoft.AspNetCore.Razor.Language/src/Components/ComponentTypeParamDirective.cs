@@ -12,10 +12,14 @@ internal static class ComponentTypeParamDirective
         DirectiveKind.SingleLine,
         builder =>
         {
-            builder.AddMemberToken(ComponentResources.TypeParamDirective_Token_Name, ComponentResources.TypeParamDirective_Token_Description);
+            builder.AddMemberToken(
+                ComponentResources.TypeParamDirective_Token_Name,
+                ComponentResources.TypeParamDirective_Token_Description
+            );
             builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
             builder.Description = ComponentResources.TypeParamDirective_Description;
-        });
+        }
+    );
 
     public static RazorProjectEngineBuilder Register(RazorProjectEngineBuilder builder)
     {

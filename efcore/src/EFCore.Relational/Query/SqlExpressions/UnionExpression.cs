@@ -25,20 +25,16 @@ public class UnionExpression : SetOperationBase
         string alias,
         SelectExpression source1,
         SelectExpression source2,
-        bool distinct)
-        : this(alias, source1, source2, distinct, annotations: null)
-    {
-    }
+        bool distinct
+    ) : this(alias, source1, source2, distinct, annotations: null) { }
 
     private UnionExpression(
         string alias,
         SelectExpression source1,
         SelectExpression source2,
         bool distinct,
-        IEnumerable<IAnnotation>? annotations)
-        : base(alias, source1, source2, distinct, annotations)
-    {
-    }
+        IEnumerable<IAnnotation>? annotations
+    ) : base(alias, source1, source2, distinct, annotations) { }
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -56,8 +52,8 @@ public class UnionExpression : SetOperationBase
     /// <param name="source1">The <see cref="SetOperationBase.Source1" /> property of the result.</param>
     /// <param name="source2">The <see cref="SetOperationBase.Source2" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual UnionExpression Update(SelectExpression source1, SelectExpression source2)
-        => source1 != Source1 || source2 != Source2
+    public virtual UnionExpression Update(SelectExpression source1, SelectExpression source2) =>
+        source1 != Source1 || source2 != Source2
             ? new UnionExpression(Alias, source1, source2, IsDistinct, GetAnnotations())
             : this;
 
@@ -85,16 +81,15 @@ public class UnionExpression : SetOperationBase
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is UnionExpression unionExpression
-                && Equals(unionExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is UnionExpression unionExpression && Equals(unionExpression)
+        );
 
-    private bool Equals(UnionExpression unionExpression)
-        => base.Equals(unionExpression);
+    private bool Equals(UnionExpression unionExpression) => base.Equals(unionExpression);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), GetType());
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), GetType());
 }

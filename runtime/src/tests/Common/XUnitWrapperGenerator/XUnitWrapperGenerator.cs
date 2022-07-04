@@ -21,102 +21,167 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         var methodsInSource = context.SyntaxProvider.CreateSyntaxProvider(
-                static (node, ct) =>
-                    node.IsKind(SyntaxKind.MethodDeclaration)
-                        && node is MethodDeclarationSyntax method
-                        && method.AttributeLists.Count > 0,
-                static (context, ct) => (IMethodSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node)!);
+            static (node, ct) =>
+                node.IsKind(SyntaxKind.MethodDeclaration)
+                && node is MethodDeclarationSyntax method
+                && method.AttributeLists.Count > 0,
+            static (context, ct) =>
+                (IMethodSymbol)context.SemanticModel.GetDeclaredSymbol(context.Node)!
+        );
 
-        var outOfProcessTests = context.AdditionalTextsProvider.Combine(context.AnalyzerConfigOptionsProvider).SelectMany((data, ct) =>
-        {
-            var (file, options) = data;
-
-            AnalyzerConfigOptions fileOptions = options.GetOptions(file);
-
-            if (fileOptions.IsOutOfProcessTestAssembly())
-            {
-                string? assemblyPath = fileOptions.TestAssemblyRelativePath();
-                string? testDisplayName = fileOptions.TestDisplayName();
-                if (assemblyPath is not null && testDisplayName is not null)
+        var outOfProcessTests = context.AdditionalTextsProvider
+            .Combine(context.AnalyzerConfigOptionsProvider)
+            .SelectMany(
+                (data, ct) =>
                 {
-                    return ImmutableArray.Create<ITestInfo>(new OutOfProcessTest(testDisplayName, assemblyPath));
+                    var (file, options) = data;
+
+                    AnalyzerConfigOptions fileOptions = options.GetOptions(file);
+
+                    if (fileOptions.IsOutOfProcessTestAssembly())
+                    {
+                        string? assemblyPath = fileOptions.TestAssemblyRelativePath();
+                        string? testDisplayName = fileOptions.TestDisplayName();
+                        if (assemblyPath is not null && testDisplayName is not null)
+                        {
+                            return ImmutableArray.Create<ITestInfo>(
+                                new OutOfProcessTest(testDisplayName, assemblyPath)
+                            );
+                        }
+                    }
+
+                    return ImmutableArray<ITestInfo>.Empty;
                 }
-            }
+            );
 
-            return ImmutableArray<ITestInfo>.Empty;
-        });
+        var aliasMap = context.CompilationProvider
+            .Select(
+                (comp, ct) =>
+                {
+                    var aliasMap = ImmutableDictionary.CreateBuilder<string, string>();
+                    aliasMap.Add(comp.Assembly.MetadataName, "global");
+                    foreach (var reference in comp.References)
+                    {
+                        aliasMap.Add(
+                            comp.GetAssemblyOrModuleSymbol(reference)!.MetadataName,
+                            reference.Properties.Aliases.FirstOrDefault() ?? "global"
+                        );
+                    }
 
-        var aliasMap = context.CompilationProvider.Select((comp, ct) =>
-        {
-            var aliasMap = ImmutableDictionary.CreateBuilder<string, string>();
-            aliasMap.Add(comp.Assembly.MetadataName, "global");
-            foreach (var reference in comp.References)
-            {
-                aliasMap.Add(comp.GetAssemblyOrModuleSymbol(reference)!.MetadataName, reference.Properties.Aliases.FirstOrDefault() ?? "global");
-            }
+                    return aliasMap.ToImmutable();
+                }
+            )
+            .WithComparer(
+                new ImmutableDictionaryValueComparer<string, string>(
+                    EqualityComparer<string>.Default
+                )
+            );
 
-            return aliasMap.ToImmutable();
-        }).WithComparer(new ImmutableDictionaryValueComparer<string, string>(EqualityComparer<string>.Default));
+        var assemblyName = context.CompilationProvider.Select(
+            (comp, ct) => comp.Assembly.MetadataName
+        );
 
-        var assemblyName = context.CompilationProvider.Select((comp, ct) => comp.Assembly.MetadataName);
+        var alwaysWriteEntryPoint = context.CompilationProvider.Select(
+            (comp, ct) =>
+                comp.Options.OutputKind == OutputKind.ConsoleApplication
+                && comp.GetEntryPoint(ct) is null
+        );
 
-        var alwaysWriteEntryPoint = context.CompilationProvider.Select((comp, ct) => comp.Options.OutputKind == OutputKind.ConsoleApplication && comp.GetEntryPoint(ct) is null);
-
-        var testsInSource =
-            methodsInSource
+        var testsInSource = methodsInSource
             .Combine(context.AnalyzerConfigOptionsProvider)
             .Combine(aliasMap)
-            .SelectMany((data, ct) => ImmutableArray.CreateRange(GetTestMethodInfosForMethod(data.Left.Left, data.Left.Right, data.Right)));
+            .SelectMany(
+                (data, ct) =>
+                    ImmutableArray.CreateRange(
+                        GetTestMethodInfosForMethod(data.Left.Left, data.Left.Right, data.Right)
+                    )
+            );
 
-        var pathsForReferences = context
-            .AdditionalTextsProvider
+        var pathsForReferences = context.AdditionalTextsProvider
             .Combine(context.AnalyzerConfigOptionsProvider)
-            .Select((data, ct) => new KeyValuePair<string, string?>(data.Left.Path, data.Right.GetOptions(data.Left).SingleTestDisplayName()))
+            .Select(
+                (data, ct) =>
+                    new KeyValuePair<string, string?>(
+                        data.Left.Path,
+                        data.Right.GetOptions(data.Left).SingleTestDisplayName()
+                    )
+            )
             .Where(data => data.Value is not null)
             .Collect()
             .Select((paths, ct) => ImmutableDictionary.CreateRange(paths))
-            .WithComparer(new ImmutableDictionaryValueComparer<string, string?>(EqualityComparer<string?>.Default));
+            .WithComparer(
+                new ImmutableDictionaryValueComparer<string, string?>(
+                    EqualityComparer<string?>.Default
+                )
+            );
 
-        var testsInReferencedAssemblies = context
-            .MetadataReferencesProvider
+        var testsInReferencedAssemblies = context.MetadataReferencesProvider
             .Combine(context.CompilationProvider)
             .Combine(context.AnalyzerConfigOptionsProvider)
             .Combine(pathsForReferences)
             .Combine(aliasMap)
-            .SelectMany((data, ct) =>
-            {
-                var ((((reference, compilation), configOptions), paths), aliasMap) = data;
-                ExternallyReferencedTestMethodsVisitor visitor = new();
-                IEnumerable<IMethodSymbol> testMethods = visitor.Visit(compilation.GetAssemblyOrModuleSymbol(reference))!;
-                ImmutableArray<ITestInfo> tests = ImmutableArray.CreateRange(testMethods.SelectMany(method => GetTestMethodInfosForMethod(method, configOptions, aliasMap)));
-                if (tests.Length == 1 && reference is PortableExecutableReference { FilePath: string pathOnDisk } && paths.TryGetValue(pathOnDisk, out string? referencePath))
+            .SelectMany(
+                (data, ct) =>
                 {
-                    // If we only have one test in the module and we have a display name for the module the test comes from, then rename it to the module name to make on disk discovery easier.
-                    return ImmutableArray.Create((ITestInfo)new TestWithCustomDisplayName(tests[0], referencePath!));
+                    var ((((reference, compilation), configOptions), paths), aliasMap) = data;
+                    ExternallyReferencedTestMethodsVisitor visitor = new();
+                    IEnumerable<IMethodSymbol> testMethods = visitor.Visit(
+                        compilation.GetAssemblyOrModuleSymbol(reference)
+                    )!;
+                    ImmutableArray<ITestInfo> tests = ImmutableArray.CreateRange(
+                        testMethods.SelectMany(
+                            method => GetTestMethodInfosForMethod(method, configOptions, aliasMap)
+                        )
+                    );
+                    if (
+                        tests.Length == 1
+                        && reference is PortableExecutableReference { FilePath: string pathOnDisk }
+                        && paths.TryGetValue(pathOnDisk, out string? referencePath)
+                    )
+                    {
+                        // If we only have one test in the module and we have a display name for the module the test comes from, then rename it to the module name to make on disk discovery easier.
+                        return ImmutableArray.Create(
+                            (ITestInfo)new TestWithCustomDisplayName(tests[0], referencePath!)
+                        );
+                    }
+                    return tests;
                 }
-                return tests;
-            });
+            );
 
-        var allTests = testsInSource.Collect().Combine(testsInReferencedAssemblies.Collect()).Combine(outOfProcessTests.Collect()).SelectMany((tests, ct) => tests.Left.Left.AddRange(tests.Left.Right).AddRange(tests.Right));
+        var allTests = testsInSource
+            .Collect()
+            .Combine(testsInReferencedAssemblies.Collect())
+            .Combine(outOfProcessTests.Collect())
+            .SelectMany(
+                (tests, ct) => tests.Left.Left.AddRange(tests.Left.Right).AddRange(tests.Right)
+            );
 
         context.RegisterImplementationSourceOutput(
             allTests
-            .Combine(context.AnalyzerConfigOptionsProvider)
-            .Where(data =>
-            {
-                var (test, options) = data;
-                var filter = new XUnitWrapperLibrary.TestFilter(options.GlobalOptions.TestFilter(), null);
-                return filter.ShouldRunTest($"{test.ContainingType}.{test.Method}", test.DisplayNameForFiltering, Array.Empty<string>());
-            })
-            .Select((data, ct) => data.Left)
-            .Collect()
-            .Combine(context.AnalyzerConfigOptionsProvider)
-            .Combine(aliasMap)
-            .Combine(assemblyName)
-            .Combine(alwaysWriteEntryPoint),
+                .Combine(context.AnalyzerConfigOptionsProvider)
+                .Where(data =>
+                {
+                    var (test, options) = data;
+                    var filter = new XUnitWrapperLibrary.TestFilter(
+                        options.GlobalOptions.TestFilter(),
+                        null
+                    );
+                    return filter.ShouldRunTest(
+                        $"{test.ContainingType}.{test.Method}",
+                        test.DisplayNameForFiltering,
+                        Array.Empty<string>()
+                    );
+                })
+                .Select((data, ct) => data.Left)
+                .Collect()
+                .Combine(context.AnalyzerConfigOptionsProvider)
+                .Combine(aliasMap)
+                .Combine(assemblyName)
+                .Combine(alwaysWriteEntryPoint),
             static (context, data) =>
             {
-                var ((((methods, configOptions), aliasMap), assemblyName), alwaysWriteEntryPoint) = data;
+                var ((((methods, configOptions), aliasMap), assemblyName), alwaysWriteEntryPoint) =
+                    data;
 
                 if (methods.Length == 0 && !alwaysWriteEntryPoint)
                 {
@@ -125,73 +190,146 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                     return;
                 }
 
-                bool isMergedTestRunnerAssembly = configOptions.GlobalOptions.IsMergedTestRunnerAssembly();
-                configOptions.GlobalOptions.TryGetValue("build_property.TargetOS", out string? targetOS);
+                bool isMergedTestRunnerAssembly =
+                    configOptions.GlobalOptions.IsMergedTestRunnerAssembly();
+                configOptions.GlobalOptions.TryGetValue(
+                    "build_property.TargetOS",
+                    out string? targetOS
+                );
 
                 if (isMergedTestRunnerAssembly)
                 {
-                    if (targetOS?.ToLowerInvariant() is "ios" or "iossimulator" or "tvos" or "tvossimulator" or "maccatalyst" or "android" or "browser")
+                    if (
+                        targetOS?.ToLowerInvariant()
+                        is "ios"
+                            or "iossimulator"
+                            or "tvos"
+                            or "tvossimulator"
+                            or "maccatalyst"
+                            or "android"
+                            or "browser"
+                    )
                     {
-                        context.AddSource("XHarnessRunner.g.cs", GenerateXHarnessTestRunner(methods, aliasMap, assemblyName));
+                        context.AddSource(
+                            "XHarnessRunner.g.cs",
+                            GenerateXHarnessTestRunner(methods, aliasMap, assemblyName)
+                        );
                     }
                     else
                     {
-                        context.AddSource("FullRunner.g.cs", GenerateFullTestRunner(methods, aliasMap, assemblyName));
+                        context.AddSource(
+                            "FullRunner.g.cs",
+                            GenerateFullTestRunner(methods, aliasMap, assemblyName)
+                        );
                     }
                 }
                 else
                 {
                     string consoleType = "System.Console";
-                    context.AddSource("SimpleRunner.g.cs", GenerateStandaloneSimpleTestRunner(methods, aliasMap, consoleType));
+                    context.AddSource(
+                        "SimpleRunner.g.cs",
+                        GenerateStandaloneSimpleTestRunner(methods, aliasMap, consoleType)
+                    );
                 }
-            });
+            }
+        );
     }
 
-    private static string GenerateFullTestRunner(ImmutableArray<ITestInfo> testInfos, ImmutableDictionary<string, string> aliasMap, string assemblyName)
+    private static string GenerateFullTestRunner(
+        ImmutableArray<ITestInfo> testInfos,
+        ImmutableDictionary<string, string> aliasMap,
+        string assemblyName
+    )
     {
         // For simplicity, we'll use top-level statements for the generated Main method.
         StringBuilder builder = new();
-        builder.AppendLine(string.Join("\n", aliasMap.Values.Where(alias => alias != "global").Select(alias => $"extern alias {alias};")));
-        builder.AppendLine("System.Collections.Generic.HashSet<string> testExclusionList = XUnitWrapperLibrary.TestFilter.LoadTestExclusionList();");
+        builder.AppendLine(
+            string.Join(
+                "\n",
+                aliasMap.Values
+                    .Where(alias => alias != "global")
+                    .Select(alias => $"extern alias {alias};")
+            )
+        );
+        builder.AppendLine(
+            "System.Collections.Generic.HashSet<string> testExclusionList = XUnitWrapperLibrary.TestFilter.LoadTestExclusionList();"
+        );
 
-        builder.AppendLine("XUnitWrapperLibrary.TestFilter filter = new (args.Length != 0 ? args[0] : null, testExclusionList);");
+        builder.AppendLine(
+            "XUnitWrapperLibrary.TestFilter filter = new (args.Length != 0 ? args[0] : null, testExclusionList);"
+        );
         builder.AppendLine("XUnitWrapperLibrary.TestSummary summary = new();");
-        builder.AppendLine("System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();");
-        builder.AppendLine("XUnitWrapperLibrary.TestOutputRecorder outputRecorder = new(System.Console.Out);");
+        builder.AppendLine(
+            "System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();"
+        );
+        builder.AppendLine(
+            "XUnitWrapperLibrary.TestOutputRecorder outputRecorder = new(System.Console.Out);"
+        );
         builder.AppendLine("System.Console.SetOut(outputRecorder);");
 
-        ITestReporterWrapper reporter = new WrapperLibraryTestSummaryReporting("summary", "filter", "outputRecorder");
+        ITestReporterWrapper reporter = new WrapperLibraryTestSummaryReporting(
+            "summary",
+            "filter",
+            "outputRecorder"
+        );
 
         foreach (ITestInfo test in testInfos)
         {
             builder.AppendLine(test.GenerateTestExecution(reporter));
         }
 
-        builder.AppendLine($@"System.IO.File.WriteAllText(""{assemblyName}.testResults.xml"", summary.GetTestResultOutput(""{assemblyName}""));");
+        builder.AppendLine(
+            $@"System.IO.File.WriteAllText(""{assemblyName}.testResults.xml"", summary.GetTestResultOutput(""{assemblyName}""));"
+        );
         builder.AppendLine("return 100;");
 
         return builder.ToString();
     }
 
-    private static string GenerateXHarnessTestRunner(ImmutableArray<ITestInfo> testInfos, ImmutableDictionary<string, string> aliasMap, string assemblyName)
+    private static string GenerateXHarnessTestRunner(
+        ImmutableArray<ITestInfo> testInfos,
+        ImmutableDictionary<string, string> aliasMap,
+        string assemblyName
+    )
     {
         // For simplicity, we'll use top-level statements for the generated Main method.
         StringBuilder builder = new();
-        builder.AppendLine(string.Join("\n", aliasMap.Values.Where(alias => alias != "global").Select(alias => $"extern alias {alias};")));
-        builder.AppendLine("System.Collections.Generic.HashSet<string> testExclusionList = XUnitWrapperLibrary.TestFilter.LoadTestExclusionList();");
+        builder.AppendLine(
+            string.Join(
+                "\n",
+                aliasMap.Values
+                    .Where(alias => alias != "global")
+                    .Select(alias => $"extern alias {alias};")
+            )
+        );
+        builder.AppendLine(
+            "System.Collections.Generic.HashSet<string> testExclusionList = XUnitWrapperLibrary.TestFilter.LoadTestExclusionList();"
+        );
 
         builder.AppendLine("try {");
-        builder.AppendLine($@"return await XHarnessRunnerLibrary.RunnerEntryPoint.RunTests(RunTests, ""{assemblyName}"", args.Length != 0 ? args[0] : null, testExclusionList);");
-        builder.AppendLine("} catch(System.Exception ex) { System.Console.WriteLine(ex.ToString()); return 101; }");
+        builder.AppendLine(
+            $@"return await XHarnessRunnerLibrary.RunnerEntryPoint.RunTests(RunTests, ""{assemblyName}"", args.Length != 0 ? args[0] : null, testExclusionList);"
+        );
+        builder.AppendLine(
+            "} catch(System.Exception ex) { System.Console.WriteLine(ex.ToString()); return 101; }"
+        );
 
-        builder.AppendLine("static XUnitWrapperLibrary.TestSummary RunTests(XUnitWrapperLibrary.TestFilter filter)");
+        builder.AppendLine(
+            "static XUnitWrapperLibrary.TestSummary RunTests(XUnitWrapperLibrary.TestFilter filter)"
+        );
         builder.AppendLine("{");
         builder.AppendLine("XUnitWrapperLibrary.TestSummary summary = new();");
         builder.AppendLine("System.Diagnostics.Stopwatch stopwatch = new();");
-        builder.AppendLine("XUnitWrapperLibrary.TestOutputRecorder outputRecorder = new(System.Console.Out);");
+        builder.AppendLine(
+            "XUnitWrapperLibrary.TestOutputRecorder outputRecorder = new(System.Console.Out);"
+        );
         builder.AppendLine("System.Console.SetOut(outputRecorder);");
 
-        ITestReporterWrapper reporter = new WrapperLibraryTestSummaryReporting("summary", "filter", "outputRecorder");
+        ITestReporterWrapper reporter = new WrapperLibraryTestSummaryReporting(
+            "summary",
+            "filter",
+            "outputRecorder"
+        );
 
         foreach (ITestInfo test in testInfos)
         {
@@ -204,15 +342,30 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
         return builder.ToString();
     }
 
-    private static string GenerateStandaloneSimpleTestRunner(ImmutableArray<ITestInfo> testInfos, ImmutableDictionary<string, string> aliasMap, string consoleType)
+    private static string GenerateStandaloneSimpleTestRunner(
+        ImmutableArray<ITestInfo> testInfos,
+        ImmutableDictionary<string, string> aliasMap,
+        string consoleType
+    )
     {
         // For simplicity, we'll use top-level statements for the generated Main method.
         ITestReporterWrapper reporter = new NoTestReporting();
         StringBuilder builder = new();
-        builder.AppendLine(string.Join("\n", aliasMap.Values.Where(alias => alias != "global").Select(alias => $"extern alias {alias};")));
+        builder.AppendLine(
+            string.Join(
+                "\n",
+                aliasMap.Values
+                    .Where(alias => alias != "global")
+                    .Select(alias => $"extern alias {alias};")
+            )
+        );
         builder.AppendLine("try {");
-        builder.AppendLine(string.Join("\n", testInfos.Select(m => m.GenerateTestExecution(reporter))));
-        builder.AppendLine("} catch(System.Exception ex) { System.Console.WriteLine(ex.ToString()); return 101; }");
+        builder.AppendLine(
+            string.Join("\n", testInfos.Select(m => m.GenerateTestExecution(reporter)))
+        );
+        builder.AppendLine(
+            "} catch(System.Exception ex) { System.Console.WriteLine(ex.ToString()); return 101; }"
+        );
         builder.AppendLine("return 100;");
         return builder.ToString();
     }
@@ -256,8 +409,12 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
 
         public override IEnumerable<IMethodSymbol>? VisitMethod(IMethodSymbol symbol)
         {
-            if (symbol.DeclaredAccessibility == Accessibility.Public
-                && symbol.GetAttributes().Any(attr => attr.AttributeClass?.ContainingNamespace.Name == "Xunit"))
+            if (
+                symbol.DeclaredAccessibility == Accessibility.Public
+                && symbol
+                    .GetAttributes()
+                    .Any(attr => attr.AttributeClass?.ContainingNamespace.Name == "Xunit")
+            )
             {
                 return new[] { symbol };
             }
@@ -265,7 +422,11 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
         }
     }
 
-    private static IEnumerable<ITestInfo> GetTestMethodInfosForMethod(IMethodSymbol method, AnalyzerConfigOptionsProvider options, ImmutableDictionary<string, string> aliasMap)
+    private static IEnumerable<ITestInfo> GetTestMethodInfosForMethod(
+        IMethodSymbol method,
+        AnalyzerConfigOptionsProvider options,
+        ImmutableDictionary<string, string> aliasMap
+    )
     {
         bool factAttribute = false;
         bool theoryAttribute = false;
@@ -317,16 +478,32 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
             else if (method.IsStatic && method.ReturnType.SpecialType == SpecialType.System_Int32)
             {
                 // Support the old executable-based test design where an int return of 100 is success.
-                testInfos = ImmutableArray.Create((ITestInfo)new LegacyStandaloneEntryPointTestMethod(method, aliasMap[method.ContainingAssembly.MetadataName]));
+                testInfos = ImmutableArray.Create(
+                    (ITestInfo)
+                        new LegacyStandaloneEntryPointTestMethod(
+                            method,
+                            aliasMap[method.ContainingAssembly.MetadataName]
+                        )
+                );
             }
             else
             {
-                testInfos = ImmutableArray.Create((ITestInfo)new BasicTestMethod(method, aliasMap[method.ContainingAssembly.MetadataName]));
+                testInfos = ImmutableArray.Create(
+                    (ITestInfo)
+                        new BasicTestMethod(
+                            method,
+                            aliasMap[method.ContainingAssembly.MetadataName]
+                        )
+                );
             }
         }
         else if (theoryAttribute)
         {
-            testInfos = CreateTestCases(method, theoryDataAttributes, aliasMap[method.ContainingAssembly.MetadataName]);
+            testInfos = CreateTestCases(
+                method,
+                theoryDataAttributes,
+                aliasMap[method.ContainingAssembly.MetadataName]
+            );
         }
 
         foreach (var filterAttribute in filterAttributes)
@@ -336,27 +513,28 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                 case "Xunit.ConditionalFactAttribute":
                 case "Xunit.ConditionalTheoryAttribute":
                 case "Xunit.ConditionalClassAttribute":
+                {
+                    ITypeSymbol conditionType;
+                    ImmutableArray<TypedConstant> conditionMembers;
+                    if (filterAttribute.AttributeConstructor!.Parameters.Length == 1)
                     {
-                        ITypeSymbol conditionType;
-                        ImmutableArray<TypedConstant> conditionMembers;
-                        if (filterAttribute.AttributeConstructor!.Parameters.Length == 1)
-                        {
-                            conditionType = method.ContainingType;
-                            conditionMembers = filterAttribute.ConstructorArguments[0].Values;
-                        }
-                        else
-                        {
-                            Debug.Assert(filterAttribute.AttributeConstructor!.Parameters.Length == 2);
-                            conditionType = (ITypeSymbol)filterAttribute.ConstructorArguments[0].Value!;
-                            conditionMembers = filterAttribute.ConstructorArguments[1].Values;
-                        }
-                        testInfos = DecorateWithUserDefinedCondition(
-                            testInfos,
-                            conditionType,
-                            conditionMembers,
-                            aliasMap[conditionType.ContainingAssembly.MetadataName]);
-                        break;
+                        conditionType = method.ContainingType;
+                        conditionMembers = filterAttribute.ConstructorArguments[0].Values;
                     }
+                    else
+                    {
+                        Debug.Assert(filterAttribute.AttributeConstructor!.Parameters.Length == 2);
+                        conditionType = (ITypeSymbol)filterAttribute.ConstructorArguments[0].Value!;
+                        conditionMembers = filterAttribute.ConstructorArguments[1].Values;
+                    }
+                    testInfos = DecorateWithUserDefinedCondition(
+                        testInfos,
+                        conditionType,
+                        conditionMembers,
+                        aliasMap[conditionType.ContainingAssembly.MetadataName]
+                    );
+                    break;
+                }
                 case "Xunit.OuterloopAttribute":
                     if (options.GlobalOptions.Priority() == 0)
                     {
@@ -368,34 +546,58 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                 case "Xunit.ActiveIssueAttribute":
                     if (filterAttribute.AttributeConstructor!.Parameters.Length == 3)
                     {
-                        ITypeSymbol conditionType = (ITypeSymbol)filterAttribute.ConstructorArguments[1].Value!;
+                        ITypeSymbol conditionType = (ITypeSymbol)
+                            filterAttribute.ConstructorArguments[1].Value!;
                         testInfos = DecorateWithUserDefinedCondition(
                             testInfos,
                             conditionType,
                             filterAttribute.ConstructorArguments[2].Values,
-                            aliasMap[conditionType.ContainingAssembly.MetadataName]);
+                            aliasMap[conditionType.ContainingAssembly.MetadataName]
+                        );
                         break;
                     }
                     else if (filterAttribute.AttributeConstructor.Parameters.Length == 4)
                     {
                         testInfos = FilterForSkippedRuntime(
                             FilterForSkippedTargetFrameworkMonikers(
-                                DecorateWithSkipOnPlatform(testInfos, (int)filterAttribute.ConstructorArguments[1].Value!, options),
-                                (int)filterAttribute.ConstructorArguments[2].Value!),
-                            (int)filterAttribute.ConstructorArguments[3].Value!, options);
+                                DecorateWithSkipOnPlatform(
+                                    testInfos,
+                                    (int)filterAttribute.ConstructorArguments[1].Value!,
+                                    options
+                                ),
+                                (int)filterAttribute.ConstructorArguments[2].Value!
+                            ),
+                            (int)filterAttribute.ConstructorArguments[3].Value!,
+                            options
+                        );
                     }
                     else
                     {
-                        switch (filterAttribute.AttributeConstructor.Parameters[1].Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat))
+                        switch (
+                            filterAttribute.AttributeConstructor.Parameters[1].Type.ToDisplayString(
+                                SymbolDisplayFormat.FullyQualifiedFormat
+                            )
+                        )
                         {
                             case "global::Xunit.TestPlatforms":
-                                testInfos = DecorateWithSkipOnPlatform(testInfos, (int)filterAttribute.ConstructorArguments[1].Value!, options);
+                                testInfos = DecorateWithSkipOnPlatform(
+                                    testInfos,
+                                    (int)filterAttribute.ConstructorArguments[1].Value!,
+                                    options
+                                );
                                 break;
                             case "global::Xunit.TestRuntimes":
-                                testInfos = FilterForSkippedRuntime(testInfos, (int)filterAttribute.ConstructorArguments[1].Value!, options);
+                                testInfos = FilterForSkippedRuntime(
+                                    testInfos,
+                                    (int)filterAttribute.ConstructorArguments[1].Value!,
+                                    options
+                                );
                                 break;
                             case "global::Xunit.TargetFrameworkMonikers":
-                                testInfos = FilterForSkippedTargetFrameworkMonikers(testInfos, (int)filterAttribute.ConstructorArguments[1].Value!);
+                                testInfos = FilterForSkippedTargetFrameworkMonikers(
+                                    testInfos,
+                                    (int)filterAttribute.ConstructorArguments[1].Value!
+                                );
                                 break;
                             default:
                                 break;
@@ -408,16 +610,31 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                         // If we're building tests not for Mono, we can skip handling the specifics of the SkipOnMonoAttribute.
                         continue;
                     }
-                    testInfos = DecorateWithSkipOnPlatform(testInfos, (int)filterAttribute.ConstructorArguments[1].Value!, options);
+                    testInfos = DecorateWithSkipOnPlatform(
+                        testInfos,
+                        (int)filterAttribute.ConstructorArguments[1].Value!,
+                        options
+                    );
                     break;
                 case "Xunit.SkipOnPlatformAttribute":
-                    testInfos = DecorateWithSkipOnPlatform(testInfos, (int)filterAttribute.ConstructorArguments[0].Value!, options);
+                    testInfos = DecorateWithSkipOnPlatform(
+                        testInfos,
+                        (int)filterAttribute.ConstructorArguments[0].Value!,
+                        options
+                    );
                     break;
                 case "Xunit.PlatformSpecificAttribute":
-                    testInfos = DecorateWithSkipOnPlatform(testInfos, ~(int)filterAttribute.ConstructorArguments[0].Value!, options);
+                    testInfos = DecorateWithSkipOnPlatform(
+                        testInfos,
+                        ~(int)filterAttribute.ConstructorArguments[0].Value!,
+                        options
+                    );
                     break;
                 case "Xunit.SkipOnTargetFrameworkAttribute":
-                    testInfos = FilterForSkippedTargetFrameworkMonikers(testInfos, (int)filterAttribute.ConstructorArguments[0].Value!);
+                    testInfos = FilterForSkippedTargetFrameworkMonikers(
+                        testInfos,
+                        (int)filterAttribute.ConstructorArguments[0].Value!
+                    );
                     break;
                 case "Xunit.SkipOnCoreClrAttribute":
                     if (options.GlobalOptions.RuntimeFlavor().ToLowerInvariant() != "coreclr")
@@ -430,15 +647,30 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                     Xunit.RuntimeConfiguration skippedConfigurations = 0;
                     Xunit.RuntimeTestModes skippedTestModes = 0;
 
-                    for (int i = 1; i < filterAttribute.AttributeConstructor!.Parameters.Length; i++)
+                    for (
+                        int i = 1;
+                        i < filterAttribute.AttributeConstructor!.Parameters.Length;
+                        i++
+                    )
                     {
-                        ReadSkippedInformationFromSkipOnCoreClrAttributeArgument(filterAttribute, i);
+                        ReadSkippedInformationFromSkipOnCoreClrAttributeArgument(
+                            filterAttribute,
+                            i
+                        );
                     }
 
-                    void ReadSkippedInformationFromSkipOnCoreClrAttributeArgument(AttributeData filterAttribute, int argumentIndex)
+                    void ReadSkippedInformationFromSkipOnCoreClrAttributeArgument(
+                        AttributeData filterAttribute,
+                        int argumentIndex
+                    )
                     {
-                        int argumentValue = (int)filterAttribute.ConstructorArguments[argumentIndex].Value!;
-                        switch (filterAttribute.AttributeConstructor!.Parameters[argumentIndex].Type.ToDisplayString())
+                        int argumentValue = (int)
+                            filterAttribute.ConstructorArguments[argumentIndex].Value!;
+                        switch (
+                            filterAttribute.AttributeConstructor!.Parameters[
+                                argumentIndex
+                            ].Type.ToDisplayString()
+                        )
                         {
                             case "Xunit.TestPlatforms":
                                 skippedTestPlatforms = (Xunit.TestPlatforms)argumentValue;
@@ -456,10 +688,22 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
 
                     if (skippedTestModes == Xunit.RuntimeTestModes.Any)
                     {
-                        testInfos = FilterForSkippedRuntime(testInfos, (int)Xunit.TestRuntimes.CoreCLR, options);
+                        testInfos = FilterForSkippedRuntime(
+                            testInfos,
+                            (int)Xunit.TestRuntimes.CoreCLR,
+                            options
+                        );
                     }
-                    testInfos = DecorateWithSkipOnPlatform(testInfos, (int)skippedTestPlatforms, options);
-                    testInfos = DecorateWithSkipOnCoreClrConfiguration(testInfos, skippedTestModes, skippedConfigurations);
+                    testInfos = DecorateWithSkipOnPlatform(
+                        testInfos,
+                        (int)skippedTestPlatforms,
+                        options
+                    );
+                    testInfos = DecorateWithSkipOnCoreClrConfiguration(
+                        testInfos,
+                        skippedTestModes,
+                        skippedConfigurations
+                    );
 
                     break;
             }
@@ -468,11 +712,21 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
         return testInfos;
     }
 
-    private static ImmutableArray<ITestInfo> DecorateWithSkipOnCoreClrConfiguration(ImmutableArray<ITestInfo> testInfos, Xunit.RuntimeTestModes skippedTestModes, Xunit.RuntimeConfiguration skippedConfigurations)
+    private static ImmutableArray<ITestInfo> DecorateWithSkipOnCoreClrConfiguration(
+        ImmutableArray<ITestInfo> testInfos,
+        Xunit.RuntimeTestModes skippedTestModes,
+        Xunit.RuntimeConfiguration skippedConfigurations
+    )
     {
         const string ConditionClass = "TestLibrary.CoreClrConfigurationDetection";
         List<string> conditions = new();
-        if (skippedConfigurations.HasFlag(Xunit.RuntimeConfiguration.Debug | Xunit.RuntimeConfiguration.Checked | Xunit.RuntimeConfiguration.Release))
+        if (
+            skippedConfigurations.HasFlag(
+                Xunit.RuntimeConfiguration.Debug
+                    | Xunit.RuntimeConfiguration.Checked
+                    | Xunit.RuntimeConfiguration.Release
+            )
+        )
         {
             // If all configurations are skipped, just skip the test as a whole
             return ImmutableArray<ITestInfo>.Empty;
@@ -528,10 +782,15 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
             conditions.Add($"!{ConditionClass}.IsGCStressC");
         }
 
-        return ImmutableArray.CreateRange<ITestInfo>(testInfos.Select(t => new ConditionalTest(t, string.Join(" && ", conditions))));
+        return ImmutableArray.CreateRange<ITestInfo>(
+            testInfos.Select(t => new ConditionalTest(t, string.Join(" && ", conditions)))
+        );
     }
 
-    private static ImmutableArray<ITestInfo> FilterForSkippedTargetFrameworkMonikers(ImmutableArray<ITestInfo> testInfos, int v)
+    private static ImmutableArray<ITestInfo> FilterForSkippedTargetFrameworkMonikers(
+        ImmutableArray<ITestInfo> testInfos,
+        int v
+    )
     {
         var tfm = (Xunit.TargetFrameworkMonikers)v;
 
@@ -545,7 +804,11 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
         }
     }
 
-    private static ImmutableArray<ITestInfo> CreateTestCases(IMethodSymbol method, List<AttributeData> theoryDataAttributes, string alias)
+    private static ImmutableArray<ITestInfo> CreateTestCases(
+        IMethodSymbol method,
+        List<AttributeData> theoryDataAttributes,
+        string alias
+    )
     {
         var testCasesBuilder = ImmutableArray.CreateBuilder<ITestInfo>();
         foreach (var attr in theoryDataAttributes)
@@ -553,43 +816,61 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
             switch (attr.AttributeClass!.ToDisplayString())
             {
                 case "Xunit.InlineDataAttribute":
+                {
+                    var args = attr.ConstructorArguments[0].Values;
+                    if (method.Parameters.Length != args.Length)
                     {
-                        var args = attr.ConstructorArguments[0].Values;
-                        if (method.Parameters.Length != args.Length)
-                        {
-                            // Emit diagnostic
-                            continue;
-                        }
-                        var argsAsCode = ImmutableArray.CreateRange(args.Select(a => a.ToCSharpString()));
-                        testCasesBuilder.Add(new BasicTestMethod(method, alias, arguments: argsAsCode));
-                        break;
+                        // Emit diagnostic
+                        continue;
                     }
+                    var argsAsCode = ImmutableArray.CreateRange(
+                        args.Select(a => a.ToCSharpString())
+                    );
+                    testCasesBuilder.Add(new BasicTestMethod(method, alias, arguments: argsAsCode));
+                    break;
+                }
                 case "Xunit.MemberDataAttribute":
+                {
+                    string? memberName = (string?)attr.ConstructorArguments[0].Value;
+                    if (string.IsNullOrEmpty(memberName))
                     {
-                        string? memberName = (string?)attr.ConstructorArguments[0].Value;
-                        if (string.IsNullOrEmpty(memberName))
-                        {
-                            // Emit diagnostic
-                            continue;
-                        }
-                        INamedTypeSymbol memberType = method.ContainingType;
-                        if (attr.NamedArguments.FirstOrDefault(p => p.Key == "MemberType").Value.Value is INamedTypeSymbol memberTypeOverride)
-                        {
-                            memberType = memberTypeOverride;
-                        }
-                        var membersByName = memberType.GetMembers(memberName!);
-                        if (membersByName.Length != 1)
-                        {
-                            // Emit diagnostic
-                            continue;
-                        }
-                        const string argumentVariableIdentifier = "testArguments";
-                        // The display name for the test is an interpolated string that includes the arguments.
-                        string displayNameOverride = $@"$""{alias}::{method.ContainingType.ToDisplayString(FullyQualifiedWithoutGlobalNamespace)}.{method.Name}({{string.Join("","", {argumentVariableIdentifier})}})""";
-                        var argsAsCode = method.Parameters.Select((p, i) => $"({p.Type.ToDisplayString()}){argumentVariableIdentifier}[{i}]").ToImmutableArray();
-                        testCasesBuilder.Add(new MemberDataTest(membersByName[0], new BasicTestMethod(method, alias, argsAsCode, displayNameOverride), alias, argumentVariableIdentifier));
-                        break;
+                        // Emit diagnostic
+                        continue;
                     }
+                    INamedTypeSymbol memberType = method.ContainingType;
+                    if (
+                        attr.NamedArguments.FirstOrDefault(p => p.Key == "MemberType").Value.Value
+                        is INamedTypeSymbol memberTypeOverride
+                    )
+                    {
+                        memberType = memberTypeOverride;
+                    }
+                    var membersByName = memberType.GetMembers(memberName!);
+                    if (membersByName.Length != 1)
+                    {
+                        // Emit diagnostic
+                        continue;
+                    }
+                    const string argumentVariableIdentifier = "testArguments";
+                    // The display name for the test is an interpolated string that includes the arguments.
+                    string displayNameOverride =
+                        $@"$""{alias}::{method.ContainingType.ToDisplayString(FullyQualifiedWithoutGlobalNamespace)}.{method.Name}({{string.Join("","", {argumentVariableIdentifier})}})""";
+                    var argsAsCode = method.Parameters
+                        .Select(
+                            (p, i) =>
+                                $"({p.Type.ToDisplayString()}){argumentVariableIdentifier}[{i}]"
+                        )
+                        .ToImmutableArray();
+                    testCasesBuilder.Add(
+                        new MemberDataTest(
+                            membersByName[0],
+                            new BasicTestMethod(method, alias, argsAsCode, displayNameOverride),
+                            alias,
+                            argumentVariableIdentifier
+                        )
+                    );
+                    break;
+                }
                 default:
                     break;
             }
@@ -597,7 +878,11 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
         return testCasesBuilder.ToImmutable();
     }
 
-    private static ImmutableArray<ITestInfo> FilterForSkippedRuntime(ImmutableArray<ITestInfo> testInfos, int skippedRuntimeValue, AnalyzerConfigOptionsProvider options)
+    private static ImmutableArray<ITestInfo> FilterForSkippedRuntime(
+        ImmutableArray<ITestInfo> testInfos,
+        int skippedRuntimeValue,
+        AnalyzerConfigOptionsProvider options
+    )
     {
         Xunit.TestRuntimes skippedRuntimes = (Xunit.TestRuntimes)skippedRuntimeValue;
         string runtimeFlavor = options.GlobalOptions.RuntimeFlavor().ToLowerInvariant();
@@ -612,7 +897,11 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
         return testInfos;
     }
 
-    private static ImmutableArray<ITestInfo> DecorateWithSkipOnPlatform(ImmutableArray<ITestInfo> testInfos, int v, AnalyzerConfigOptionsProvider options)
+    private static ImmutableArray<ITestInfo> DecorateWithSkipOnPlatform(
+        ImmutableArray<ITestInfo> testInfos,
+        int v,
+        AnalyzerConfigOptionsProvider options
+    )
     {
         Xunit.TestPlatforms platformsToSkip = (Xunit.TestPlatforms)v;
         options.GlobalOptions.TryGetValue("build_property.TargetOS", out string? targetOS);
@@ -633,7 +922,9 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
             // If our target platform encompases one or more of the skipped platforms,
             // emit a runtime platform check here.
             Xunit.TestPlatforms platformsToEnableTest = targetPlatform & ~platformsToSkip;
-            return ImmutableArray.CreateRange(testInfos.Select(t => (ITestInfo)new ConditionalTest(t, platformsToEnableTest)));
+            return ImmutableArray.CreateRange(
+                testInfos.Select(t => (ITestInfo)new ConditionalTest(t, platformsToEnableTest))
+            );
         }
         else
         {
@@ -667,11 +958,23 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
         ImmutableArray<ITestInfo> testInfos,
         ITypeSymbol conditionType,
         ImmutableArray<TypedConstant> values,
-        string externAlias)
+        string externAlias
+    )
     {
-        string condition = string.Join("&&", values.Select(v => $"{externAlias}::{conditionType.ToDisplayString(FullyQualifiedWithoutGlobalNamespace)}.{v.Value}"));
-        return ImmutableArray.CreateRange<ITestInfo>(testInfos.Select(m => new ConditionalTest(m, condition)));
+        string condition = string.Join(
+            "&&",
+            values.Select(
+                v =>
+                    $"{externAlias}::{conditionType.ToDisplayString(FullyQualifiedWithoutGlobalNamespace)}.{v.Value}"
+            )
+        );
+        return ImmutableArray.CreateRange<ITestInfo>(
+            testInfos.Select(m => new ConditionalTest(m, condition))
+        );
     }
 
-    public static readonly SymbolDisplayFormat FullyQualifiedWithoutGlobalNamespace = SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted);
+    public static readonly SymbolDisplayFormat FullyQualifiedWithoutGlobalNamespace =
+        SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
+            SymbolDisplayGlobalNamespaceStyle.Omitted
+        );
 }

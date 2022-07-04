@@ -9,10 +9,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class TableNameFromDbSetConvention :
-    IEntityTypeAddedConvention,
-    IEntityTypeBaseTypeChangedConvention,
-    IModelFinalizingConvention
+public class TableNameFromDbSetConvention
+    : IEntityTypeAddedConvention,
+        IEntityTypeBaseTypeChangedConvention,
+        IModelFinalizingConvention
 {
     private readonly IDictionary<Type, string> _sets;
 
@@ -23,7 +23,8 @@ public class TableNameFromDbSetConvention :
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public TableNameFromDbSetConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         _sets = new Dictionary<Type, string>();
         List<Type>? ambiguousTypes = null;
@@ -74,19 +75,21 @@ public class TableNameFromDbSetConvention :
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionEntityType? newBaseType,
         IConventionEntityType? oldBaseType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
 
-        if (oldBaseType == null
-            && newBaseType != null)
+        if (oldBaseType == null && newBaseType != null)
         {
             entityTypeBuilder.HasNoAnnotation(RelationalAnnotationNames.TableName);
         }
-        else if (oldBaseType != null
-                 && newBaseType == null
-                 && !entityType.HasSharedClrType
-                 && _sets.TryGetValue(entityType.ClrType, out var setName))
+        else if (
+            oldBaseType != null
+            && newBaseType == null
+            && !entityType.HasSharedClrType
+            && _sets.TryGetValue(entityType.ClrType, out var setName)
+        )
         {
             entityTypeBuilder.ToTable(setName);
         }
@@ -99,12 +102,15 @@ public class TableNameFromDbSetConvention :
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
-        if (entityType.BaseType == null
+        if (
+            entityType.BaseType == null
             && !entityType.HasSharedClrType
-            && _sets.TryGetValue(entityType.ClrType, out var setName))
+            && _sets.TryGetValue(entityType.ClrType, out var setName)
+        )
         {
             entityTypeBuilder.ToTable(setName);
         }
@@ -113,21 +119,23 @@ public class TableNameFromDbSetConvention :
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
         {
-            if (entityType.GetTableName() != null
-                && _sets.ContainsKey(entityType.ClrType))
+            if (entityType.GetTableName() != null && _sets.ContainsKey(entityType.ClrType))
             {
                 if (entityType.GetViewNameConfigurationSource() != null)
                 {
                     // Undo the convention change if the entity type is mapped to a view
                     entityType.Builder.HasNoAnnotation(RelationalAnnotationNames.TableName);
                 }
-                
-                if (entityType.GetMappingStrategy() == RelationalAnnotationNames.TpcMappingStrategy
-                    && entityType.IsAbstract())
+
+                if (
+                    entityType.GetMappingStrategy() == RelationalAnnotationNames.TpcMappingStrategy
+                    && entityType.IsAbstract()
+                )
                 {
                     // Undo the convention change if the entity type is mapped using TPC
                     entityType.Builder.HasNoAnnotation(RelationalAnnotationNames.TableName);

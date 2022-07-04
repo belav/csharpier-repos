@@ -16,9 +16,7 @@ public class QueryableInterfaceInheritanceIssue : AutoMapperSpecBase, IAsyncLife
         string Id { get; set; }
     }
 
-    public interface IQueryableInterface : IBaseQueryableInterface
-    {
-    }
+    public interface IQueryableInterface : IBaseQueryableInterface { }
 
     public class QueryableInterfaceImpl : IQueryableInterface
     {
@@ -34,7 +32,13 @@ public class QueryableInterfaceInheritanceIssue : AutoMapperSpecBase, IAsyncLife
     {
         protected override void Seed(ClientContext context)
         {
-            context.Entities.AddRange(new[] { new QueryableInterfaceImpl { Id = "One" }, new QueryableInterfaceImpl { Id = "Two" }});
+            context.Entities.AddRange(
+                new[]
+                {
+                    new QueryableInterfaceImpl { Id = "One" },
+                    new QueryableInterfaceImpl { Id = "Two" }
+                }
+            );
         }
     }
 
@@ -50,7 +54,8 @@ public class QueryableInterfaceInheritanceIssue : AutoMapperSpecBase, IAsyncLife
         _result.FirstOrDefault(dto => dto.Id == "Two").ShouldNotBeNull();
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateProjection<IQueryableInterface, QueryableDto>());
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg => cfg.CreateProjection<IQueryableInterface, QueryableDto>());
 
     public async Task InitializeAsync()
     {

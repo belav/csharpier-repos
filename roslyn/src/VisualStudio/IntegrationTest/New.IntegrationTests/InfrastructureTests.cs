@@ -15,10 +15,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests
 {
     public class InfrastructureTests : AbstractEditorTest
     {
-        public InfrastructureTests()
-            : base(nameof(InfrastructureTests))
-        {
-        }
+        public InfrastructureTests() : base(nameof(InfrastructureTests)) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 
@@ -31,19 +28,30 @@ namespace MyNamespace
 {
 $$
 }",
-                HangMitigatingCancellationToken);
+                HangMitigatingCancellationToken
+            );
 
             // Trigger a call to File.Close to ensure we can recover from it
-            await TestServices.Input.SendAsync(new KeyPress(VirtualKey.F, ShiftState.Alt), VirtualKey.C);
+            await TestServices.Input.SendAsync(
+                new KeyPress(VirtualKey.F, ShiftState.Alt),
+                VirtualKey.C
+            );
 
-            var modalWindow = IntegrationHelper.GetModalWindowFromParentWindow(await TestServices.Shell.GetMainWindowAsync(HangMitigatingCancellationToken));
+            var modalWindow = IntegrationHelper.GetModalWindowFromParentWindow(
+                await TestServices.Shell.GetMainWindowAsync(HangMitigatingCancellationToken)
+            );
             Assert.NotEqual(IntPtr.Zero, modalWindow);
 
-            Assert.Equal("Microsoft Visual Studio", IntegrationHelper.GetTitleForWindow(modalWindow));
+            Assert.Equal(
+                "Microsoft Visual Studio",
+                IntegrationHelper.GetTitleForWindow(modalWindow)
+            );
 
             await TestServices.Input.SendWithoutActivateAsync(VirtualKey.Escape);
 
-            modalWindow = IntegrationHelper.GetModalWindowFromParentWindow(await TestServices.Shell.GetMainWindowAsync(HangMitigatingCancellationToken));
+            modalWindow = IntegrationHelper.GetModalWindowFromParentWindow(
+                await TestServices.Shell.GetMainWindowAsync(HangMitigatingCancellationToken)
+            );
             if (modalWindow != IntPtr.Zero)
             {
                 switch (IntegrationHelper.GetTitleForWindow(modalWindow))

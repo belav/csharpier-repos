@@ -41,15 +41,14 @@ public sealed class NotFound<TValue> : IResult, IEndpointMetadataProvider
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.NotFoundObjectResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.NotFoundObjectResult"
+        );
 
         HttpResultsHelper.Log.WritingResultAsStatusCode(logger, StatusCode);
         httpContext.Response.StatusCode = StatusCode;
 
-        return HttpResultsHelper.WriteResultAsJsonAsync(
-                httpContext,
-                logger: logger,
-                Value);
+        return HttpResultsHelper.WriteResultAsJsonAsync(httpContext, logger: logger, Value);
     }
 
     /// <inheritdoc/>
@@ -57,6 +56,12 @@ public sealed class NotFound<TValue> : IResult, IEndpointMetadataProvider
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        context.EndpointMetadata.Add(new ProducesResponseTypeMetadata(typeof(TValue), StatusCodes.Status404NotFound, "application/json"));
+        context.EndpointMetadata.Add(
+            new ProducesResponseTypeMetadata(
+                typeof(TValue),
+                StatusCodes.Status404NotFound,
+                "application/json"
+            )
+        );
     }
 }

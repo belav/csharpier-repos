@@ -13,6 +13,7 @@ namespace Internal.Runtime.TypeLoader
         TypeSize = 0x4,
         AllocateObject = 0x5,
         DefaultConstructor = 0x6,
+
         // unused = 0x7,
         // unused = 0x8,
         IsInst = 0x9,
@@ -22,6 +23,7 @@ namespace Internal.Runtime.TypeLoader
         ArrayOfTypeHandle = 0xd,
         DirectGcStaticData = 0xe,
         DirectNonGcStaticData = 0xf,
+
         // Insert new fixups applying to type tokens by creating a new block of fixups which apply to type tokens
         EndTypeTokenFixups,
 

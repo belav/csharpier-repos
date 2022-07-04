@@ -31,7 +31,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         private readonly ImmutableArray<TItem> _items;
         private ImmutableArray<ITrackingPoint> _trackingPoints;
 
-        protected AbstractTableEntriesSnapshot(IThreadingContext threadingContext, int version, ImmutableArray<TItem> items, ImmutableArray<ITrackingPoint> trackingPoints)
+        protected AbstractTableEntriesSnapshot(
+            IThreadingContext threadingContext,
+            int version,
+            ImmutableArray<TItem> items,
+            ImmutableArray<ITrackingPoint> trackingPoints
+        )
         {
             ThreadingContext = threadingContext;
             _version = version;
@@ -39,23 +44,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             _trackingPoints = trackingPoints;
         }
 
-        public abstract bool TryNavigateTo(int index, NavigationOptions options, CancellationToken cancellationToken);
-        public abstract bool TryGetValue(int index, string columnName, [NotNullWhen(true)] out object? content);
+        public abstract bool TryNavigateTo(
+            int index,
+            NavigationOptions options,
+            CancellationToken cancellationToken
+        );
+        public abstract bool TryGetValue(
+            int index,
+            string columnName,
+            [NotNullWhen(true)] out object? content
+        );
 
         public int VersionNumber
         {
-            get
-            {
-                return _version;
-            }
+            get { return _version; }
         }
 
         public int Count
         {
-            get
-            {
-                return _items.Length;
-            }
+            get { return _items.Length; }
         }
 
         protected IThreadingContext ThreadingContext { get; }
@@ -68,7 +75,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return -1;
             }
 
-            if (newerSnapshot is not AbstractTableEntriesSnapshot<TItem> ourSnapshot || ourSnapshot.Count == 0)
+            if (
+                newerSnapshot is not AbstractTableEntriesSnapshot<TItem> ourSnapshot
+                || ourSnapshot.Count == 0
+            )
             {
                 // not ours, we don't know how to track index
                 return -1;
@@ -108,8 +118,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             _trackingPoints = default;
         }
 
-        public void Dispose()
-            => StopTracking();
+        public void Dispose() => StopTracking();
 
         internal TItem? GetItem(int index)
         {
@@ -150,7 +159,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             return GetLinePosition(currentSnapshot, trackingPoint);
         }
 
-        private static LinePosition GetLinePosition(ITextSnapshot snapshot, ITrackingPoint trackingPoint)
+        private static LinePosition GetLinePosition(
+            ITextSnapshot snapshot,
+            ITrackingPoint trackingPoint
+        )
         {
             var point = trackingPoint.GetPoint(snapshot);
             var line = point.GetContainingLine();
@@ -158,18 +170,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             return new LinePosition(line.LineNumber, point.Position - line.Start);
         }
 
-        protected bool TryNavigateTo(Workspace workspace, DocumentId documentId, LinePosition position, NavigationOptions options, CancellationToken cancellationToken)
+        protected bool TryNavigateTo(
+            Workspace workspace,
+            DocumentId documentId,
+            LinePosition position,
+            NavigationOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var navigationService = workspace.Services.GetService<IDocumentNavigationService>();
             if (navigationService == null)
                 return false;
 
-            return this.ThreadingContext.JoinableTaskFactory.Run(() =>
-                navigationService.TryNavigateToLineAndOffsetAsync(
-                    this.ThreadingContext, workspace, documentId, position.Line, position.Character, options, cancellationToken));
+            return this.ThreadingContext.JoinableTaskFactory.Run(
+                () =>
+                    navigationService.TryNavigateToLineAndOffsetAsync(
+                        this.ThreadingContext,
+                        workspace,
+                        documentId,
+                        position.Line,
+                        position.Character,
+                        options,
+                        cancellationToken
+                    )
+            );
         }
 
-        protected bool TryNavigateToItem(int index, NavigationOptions options, CancellationToken cancellationToken)
+        protected bool TryNavigateToItem(
+            int index,
+            NavigationOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var item = GetItem(index);
             if (item is null)
@@ -180,14 +211,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             var documentId = item.DocumentId;
             if (documentId is null)
             {
-                if (item is { ProjectId: { } projectId }
-                    && solution.GetProject(projectId) is { } project)
+                if (
+                    item is { ProjectId: { } projectId }
+                    && solution.GetProject(projectId) is { } project
+                )
                 {
                     // We couldn't find a document ID when the item was created, so it may be a source generator
                     // output.
-                    var documents = ThreadingContext.JoinableTaskFactory.Run(() => project.GetSourceGeneratedDocumentsAsync(cancellationToken).AsTask());
+                    var documents = ThreadingContext.JoinableTaskFactory.Run(
+                        () => project.GetSourceGeneratedDocumentsAsync(cancellationToken).AsTask()
+                    );
                     var projectDirectory = Path.GetDirectoryName(project.FilePath);
-                    documentId = documents.FirstOrDefault(document => Path.Combine(projectDirectory, document.FilePath) == item.GetOriginalFilePath())?.Id;
+                    documentId = documents
+                        .FirstOrDefault(
+                            document =>
+                                Path.Combine(projectDirectory, document.FilePath)
+                                == item.GetOriginalFilePath()
+                        )
+                        ?.Id;
                     if (documentId is null)
                         return false;
                 }
@@ -199,10 +240,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
             LinePosition position;
             var document = solution.GetDocument(documentId);
-            if (document is not null
+            if (
+                document is not null
                 && workspace.IsDocumentOpen(documentId)
                 && GetTrackingLineColumn(document, index) is { } trackingLinePosition
-                && trackingLinePosition != LinePosition.Zero)
+                && trackingLinePosition != LinePosition.Zero
+            )
             {
                 // For normal documents already open, try to map the diagnostic location to its current position in a
                 // potentially-edited document.
@@ -221,14 +264,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 #pragma warning disable IDE0060 // Remove unused parameter - Implements interface method for sub-type
         public object? Identity(int index)
 #pragma warning restore IDE0060 // Remove unused parameter
-            => null;
+            =>
+            null;
 
-        public void StartCaching()
-        {
-        }
+        public void StartCaching() { }
 
-        public void StopCaching()
-        {
-        }
+        public void StopCaching() { }
     }
 }

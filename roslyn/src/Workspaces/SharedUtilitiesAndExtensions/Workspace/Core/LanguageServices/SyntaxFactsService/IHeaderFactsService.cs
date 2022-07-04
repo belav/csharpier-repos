@@ -6,7 +6,5 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.LanguageServices
 {
-    internal interface IHeaderFactsService : IHeaderFacts, ILanguageService
-    {
-    }
+    internal interface IHeaderFactsService : IHeaderFacts, ILanguageService { }
 }

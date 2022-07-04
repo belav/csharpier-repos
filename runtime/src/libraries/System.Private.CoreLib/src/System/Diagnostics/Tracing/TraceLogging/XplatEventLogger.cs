@@ -16,10 +16,14 @@ namespace System.Diagnostics.Tracing
 {
     internal sealed partial class XplatEventLogger : EventListener
     {
-        public XplatEventLogger() {}
+        public XplatEventLogger() { }
 
-        private static readonly Lazy<string?> eventSourceNameFilter = new Lazy<string?>(() => CompatibilitySwitch.GetValueInternal("EventSourceFilter"));
-        private static readonly Lazy<string?> eventSourceEventFilter = new Lazy<string?>(() => CompatibilitySwitch.GetValueInternal("EventNameFilter"));
+        private static readonly Lazy<string?> eventSourceNameFilter = new Lazy<string?>(
+            () => CompatibilitySwitch.GetValueInternal("EventSourceFilter")
+        );
+        private static readonly Lazy<string?> eventSourceEventFilter = new Lazy<string?>(
+            () => CompatibilitySwitch.GetValueInternal("EventNameFilter")
+        );
 
         private static bool initializedPersistentListener;
 
@@ -27,7 +31,9 @@ namespace System.Diagnostics.Tracing
         {
             try
             {
-                if (!initializedPersistentListener && XplatEventLogger.IsEventSourceLoggingEnabled())
+                if (
+                    !initializedPersistentListener && XplatEventLogger.IsEventSourceLoggingEnabled()
+                )
                 {
                     initializedPersistentListener = true;
                     return new XplatEventLogger();
@@ -43,18 +49,35 @@ namespace System.Diagnostics.Tracing
         private static partial bool IsEventSourceLoggingEnabled();
 
         [LibraryImport(RuntimeHelpers.QCall, StringMarshalling = StringMarshalling.Utf16)]
-        private static partial void LogEventSource(int eventID, string? eventName, string eventSourceName, string payload);
+        private static partial void LogEventSource(
+            int eventID,
+            string? eventName,
+            string eventSourceName,
+            string payload
+        );
 
-        private static readonly List<char> escape_seq = new List<char> { '\b', '\f', '\n', '\r', '\t', '\"', '\\' };
-        private static readonly Dictionary<char, string> seq_mapping = new Dictionary<char, string>()
+        private static readonly List<char> escape_seq = new List<char>
         {
-            {'\b', "b"},
-            {'\f', "f"},
-            {'\n', "n"},
-            {'\r', "r"},
-            {'\t', "t"},
-            {'\"', "\\\""},
-            {'\\', "\\\\"}
+            '\b',
+            '\f',
+            '\n',
+            '\r',
+            '\t',
+            '\"',
+            '\\'
+        };
+        private static readonly Dictionary<char, string> seq_mapping = new Dictionary<
+            char,
+            string
+        >()
+        {
+            { '\b', "b" },
+            { '\f', "f" },
+            { '\n', "n" },
+            { '\r', "r" },
+            { '\t', "t" },
+            { '\"', "\\\"" },
+            { '\\', "\\\\" }
         };
 
         private static void minimalJsonserializer(string payload, StringBuilder sb)
@@ -73,7 +96,11 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-        private static string Serialize(ReadOnlyCollection<string>? payloadName, ReadOnlyCollection<object?>? payload, string? eventMessage)
+        private static string Serialize(
+            ReadOnlyCollection<string>? payloadName,
+            ReadOnlyCollection<object?>? payload,
+            string? eventMessage
+        )
         {
             if (payloadName == null || payload == null)
                 return string.Empty;
@@ -85,7 +112,7 @@ namespace System.Diagnostics.Tracing
 
             if (payloadName.Count != payload.Count)
             {
-               eventDataCount = Math.Min(payloadName.Count, payload.Count);
+                eventDataCount = Math.Min(payloadName.Count, payload.Count);
             }
 
             var sb = StringBuilderCache.Acquire();
@@ -151,7 +178,7 @@ namespace System.Diagnostics.Tracing
 
             ReadOnlySpan<char> hexFormat = "X2";
             Span<char> hex = stackalloc char[2];
-            for (int i=0; i<byteArray.Length; i++)
+            for (int i = 0; i < byteArray.Length; i++)
             {
                 byteArray[i].TryFormat(hex, out int charsWritten, hexFormat);
                 Debug.Assert(charsWritten == 2);
@@ -161,9 +188,14 @@ namespace System.Diagnostics.Tracing
 
         protected internal override void OnEventSourceCreated(EventSource eventSource)
         {
-
             string? eventSourceFilter = eventSourceNameFilter.Value;
-            if (string.IsNullOrEmpty(eventSourceFilter) || (eventSource.Name.IndexOf(eventSourceFilter, StringComparison.OrdinalIgnoreCase) >= 0))
+            if (
+                string.IsNullOrEmpty(eventSourceFilter)
+                || (
+                    eventSource.Name.IndexOf(eventSourceFilter, StringComparison.OrdinalIgnoreCase)
+                    >= 0
+                )
+            )
             {
                 EnableEvents(eventSource, EventLevel.LogAlways, EventKeywords.All, null);
             }
@@ -182,7 +214,13 @@ namespace System.Diagnostics.Tracing
             }
 
             string? eventFilter = eventSourceEventFilter.Value;
-            if (string.IsNullOrEmpty(eventFilter) || (eventData.EventName!.IndexOf(eventFilter, StringComparison.OrdinalIgnoreCase) >= 0))
+            if (
+                string.IsNullOrEmpty(eventFilter)
+                || (
+                    eventData.EventName!.IndexOf(eventFilter, StringComparison.OrdinalIgnoreCase)
+                    >= 0
+                )
+            )
             {
                 LogOnEventWritten(eventData);
             }
@@ -195,7 +233,11 @@ namespace System.Diagnostics.Tracing
             {
                 try
                 {
-                    payload = Serialize(eventData.PayloadNames, eventData.Payload, eventData.Message);
+                    payload = Serialize(
+                        eventData.PayloadNames,
+                        eventData.Payload,
+                        eventData.Message
+                    );
                 }
                 catch (Exception ex)
                 {
@@ -203,7 +245,12 @@ namespace System.Diagnostics.Tracing
                 }
             }
 
-            LogEventSource(eventData.EventId, eventData.EventName, eventData.EventSource.Name, payload);
+            LogEventSource(
+                eventData.EventId,
+                eventData.EventName,
+                eventData.EventSource.Name,
+                payload
+            );
         }
     }
 }

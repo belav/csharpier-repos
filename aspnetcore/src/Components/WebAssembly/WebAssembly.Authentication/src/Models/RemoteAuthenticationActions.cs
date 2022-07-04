@@ -59,5 +59,7 @@ public class RemoteAuthenticationActions
     /// <param name="action">The <see cref="RemoteAuthenticationActions"/>.</param>
     /// <param name="candidate">The candidate.</param>
     /// <returns>Whether or not is the given <see cref="RemoteAuthenticationActions"/> action.</returns>
-    public static bool IsAction(string action, string candidate) => action != null && string.Equals(action, candidate, System.StringComparison.OrdinalIgnoreCase);
+    public static bool IsAction(string action, string candidate) =>
+        action != null
+        && string.Equals(action, candidate, System.StringComparison.OrdinalIgnoreCase);
 }

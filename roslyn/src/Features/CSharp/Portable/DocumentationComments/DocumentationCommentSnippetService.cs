@@ -15,8 +15,15 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 {
-    [ExportLanguageService(typeof(IDocumentationCommentSnippetService), LanguageNames.CSharp), Shared]
-    internal class DocumentationCommentSnippetService : AbstractDocumentationCommentSnippetService<DocumentationCommentTriviaSyntax, MemberDeclarationSyntax>
+    [
+        ExportLanguageService(typeof(IDocumentationCommentSnippetService), LanguageNames.CSharp),
+        Shared
+    ]
+    internal class DocumentationCommentSnippetService
+        : AbstractDocumentationCommentSnippetService<
+            DocumentationCommentTriviaSyntax,
+            MemberDeclarationSyntax
+        >
     {
         public override string DocumentationCommentCharacter => "/";
 
@@ -25,13 +32,18 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DocumentationCommentSnippetService()
-        {
-        }
+        public DocumentationCommentSnippetService() { }
 
-        protected override MemberDeclarationSyntax? GetContainingMember(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
+        protected override MemberDeclarationSyntax? GetContainingMember(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            return syntaxTree.GetRoot(cancellationToken).FindToken(position).GetAncestor<MemberDeclarationSyntax>();
+            return syntaxTree
+                .GetRoot(cancellationToken)
+                .FindToken(position)
+                .GetAncestor<MemberDeclarationSyntax>();
         }
 
         protected override bool SupportsDocumentationComments(MemberDeclarationSyntax member)
@@ -61,8 +73,13 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             }
         }
 
-        protected override bool HasDocumentationComment(MemberDeclarationSyntax member)
-            => member.GetFirstToken().LeadingTrivia.Any(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia);
+        protected override bool HasDocumentationComment(MemberDeclarationSyntax member) =>
+            member
+                .GetFirstToken()
+                .LeadingTrivia.Any(
+                    SyntaxKind.SingleLineDocumentationCommentTrivia,
+                    SyntaxKind.MultiLineDocumentationCommentTrivia
+                );
 
         protected override int GetPrecedingDocumentationCommentCount(MemberDeclarationSyntax member)
         {
@@ -79,24 +96,24 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             return count;
         }
 
-        protected override bool IsMemberDeclaration(MemberDeclarationSyntax member)
-            => true;
+        protected override bool IsMemberDeclaration(MemberDeclarationSyntax member) => true;
 
-        protected override List<string> GetDocumentationCommentStubLines(MemberDeclarationSyntax member)
+        protected override List<string> GetDocumentationCommentStubLines(
+            MemberDeclarationSyntax member
+        )
         {
-            var list = new List<string>
-            {
-                "/// <summary>",
-                "/// ",
-                "/// </summary>"
-            };
+            var list = new List<string> { "/// <summary>", "/// ", "/// </summary>" };
 
             var typeParameterList = member.GetTypeParameterList();
             if (typeParameterList != null)
             {
                 foreach (var typeParam in typeParameterList.Parameters)
                 {
-                    list.Add("/// <typeparam name=\"" + typeParam.Identifier.ValueText + "\"></typeparam>");
+                    list.Add(
+                        "/// <typeparam name=\""
+                            + typeParam.Identifier.ValueText
+                            + "\"></typeparam>"
+                    );
                 }
             }
 
@@ -109,14 +126,23 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                 }
             }
 
-            if (member.IsKind(SyntaxKind.MethodDeclaration) ||
-                member.IsKind(SyntaxKind.IndexerDeclaration) ||
-                member.IsKind(SyntaxKind.DelegateDeclaration) ||
-                member.IsKind(SyntaxKind.OperatorDeclaration))
+            if (
+                member.IsKind(SyntaxKind.MethodDeclaration)
+                || member.IsKind(SyntaxKind.IndexerDeclaration)
+                || member.IsKind(SyntaxKind.DelegateDeclaration)
+                || member.IsKind(SyntaxKind.OperatorDeclaration)
+            )
             {
                 var returnType = member.GetMemberType();
-                if (returnType != null &&
-                    !(returnType.IsKind(SyntaxKind.PredefinedType, out PredefinedTypeSyntax? predefinedType) && predefinedType.Keyword.IsKindOrHasMatchingText(SyntaxKind.VoidKeyword)))
+                if (
+                    returnType != null
+                    && !(
+                        returnType.IsKind(
+                            SyntaxKind.PredefinedType,
+                            out PredefinedTypeSyntax? predefinedType
+                        ) && predefinedType.Keyword.IsKindOrHasMatchingText(SyntaxKind.VoidKeyword)
+                    )
+                )
                 {
                     list.Add("/// <returns></returns>");
                 }
@@ -126,36 +152,56 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
         }
 
         protected override SyntaxToken GetTokenToRight(
-            SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             if (position >= syntaxTree.GetText(cancellationToken).Length)
             {
                 return default;
             }
 
-            return syntaxTree.GetRoot(cancellationToken).FindTokenOnRightOfPosition(
-                position, includeDirectives: true, includeDocumentationComments: true);
+            return syntaxTree
+                .GetRoot(cancellationToken)
+                .FindTokenOnRightOfPosition(
+                    position,
+                    includeDirectives: true,
+                    includeDocumentationComments: true
+                );
         }
 
         protected override SyntaxToken GetTokenToLeft(
-            SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             if (position < 1)
             {
                 return default;
             }
 
-            return syntaxTree.GetRoot(cancellationToken).FindTokenOnLeftOfPosition(
-                position - 1, includeDirectives: true, includeDocumentationComments: true, includeSkipped: true);
+            return syntaxTree
+                .GetRoot(cancellationToken)
+                .FindTokenOnLeftOfPosition(
+                    position - 1,
+                    includeDirectives: true,
+                    includeDocumentationComments: true,
+                    includeSkipped: true
+                );
         }
 
-        protected override bool IsDocCommentNewLine(SyntaxToken token)
-            => token.RawKind == (int)SyntaxKind.XmlTextLiteralNewLineToken;
+        protected override bool IsDocCommentNewLine(SyntaxToken token) =>
+            token.RawKind == (int)SyntaxKind.XmlTextLiteralNewLineToken;
 
-        protected override bool IsEndOfLineTrivia(SyntaxTrivia trivia)
-            => trivia.RawKind == (int)SyntaxKind.EndOfLineTrivia;
+        protected override bool IsEndOfLineTrivia(SyntaxTrivia trivia) =>
+            trivia.RawKind == (int)SyntaxKind.EndOfLineTrivia;
 
-        protected override bool IsSingleExteriorTrivia(DocumentationCommentTriviaSyntax documentationComment, bool allowWhitespace = false)
+        protected override bool IsSingleExteriorTrivia(
+            DocumentationCommentTriviaSyntax documentationComment,
+            bool allowWhitespace = false
+        )
         {
             if (IsMultilineDocComment(documentationComment))
             {
@@ -193,12 +239,15 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
             return lastTextToken.Kind() == SyntaxKind.XmlTextLiteralNewLineToken
                 && firstTextToken.LeadingTrivia.Count == 1
-                && firstTextToken.LeadingTrivia.ElementAt(0).Kind() == SyntaxKind.DocumentationCommentExteriorTrivia
+                && firstTextToken.LeadingTrivia.ElementAt(0).Kind()
+                    == SyntaxKind.DocumentationCommentExteriorTrivia
                 && firstTextToken.LeadingTrivia.ElementAt(0).ToString() == ExteriorTriviaText
                 && lastTextToken.TrailingTrivia.Count == 0;
         }
 
-        private static IList<SyntaxToken> GetTextTokensFollowingExteriorTrivia(XmlTextSyntax xmlText)
+        private static IList<SyntaxToken> GetTextTokensFollowingExteriorTrivia(
+            XmlTextSyntax xmlText
+        )
         {
             var result = new List<SyntaxToken>();
 
@@ -218,7 +267,9 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
             return result;
         }
 
-        protected override bool EndsWithSingleExteriorTrivia(DocumentationCommentTriviaSyntax? documentationComment)
+        protected override bool EndsWithSingleExteriorTrivia(
+            DocumentationCommentTriviaSyntax? documentationComment
+        )
         {
             if (documentationComment == null)
             {
@@ -247,15 +298,17 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
 
             return lastTextToken.Kind() == SyntaxKind.XmlTextLiteralNewLineToken
                 && firstTextToken.LeadingTrivia.Count == 1
-                && firstTextToken.LeadingTrivia.ElementAt(0).Kind() == SyntaxKind.DocumentationCommentExteriorTrivia
+                && firstTextToken.LeadingTrivia.ElementAt(0).Kind()
+                    == SyntaxKind.DocumentationCommentExteriorTrivia
                 && firstTextToken.LeadingTrivia.ElementAt(0).ToString() == ExteriorTriviaText
                 && lastTextToken.TrailingTrivia.Count == 0;
         }
 
-        protected override bool IsMultilineDocComment(DocumentationCommentTriviaSyntax? documentationComment)
-            => documentationComment.IsMultilineDocComment();
+        protected override bool IsMultilineDocComment(
+            DocumentationCommentTriviaSyntax? documentationComment
+        ) => documentationComment.IsMultilineDocComment();
 
-        protected override bool HasSkippedTrailingTrivia(SyntaxToken token)
-            => token.TrailingTrivia.Any(t => t.Kind() == SyntaxKind.SkippedTokensTrivia);
+        protected override bool HasSkippedTrailingTrivia(SyntaxToken token) =>
+            token.TrailingTrivia.Any(t => t.Kind() == SyntaxKind.SkippedTokensTrivia);
     }
 }

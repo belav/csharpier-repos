@@ -22,74 +22,88 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SearchConditionConvertingExpressionVisitor(
-        ISqlExpressionFactory sqlExpressionFactory)
+    public SearchConditionConvertingExpressionVisitor(ISqlExpressionFactory sqlExpressionFactory)
     {
         _sqlExpressionFactory = sqlExpressionFactory;
     }
 
-    private SqlExpression ApplyConversion(SqlExpression sqlExpression, bool condition)
-        => _isSearchCondition
+    private SqlExpression ApplyConversion(SqlExpression sqlExpression, bool condition) =>
+        _isSearchCondition
             ? ConvertToSearchCondition(sqlExpression, condition)
             : ConvertToValue(sqlExpression, condition);
 
-    private SqlExpression ConvertToSearchCondition(SqlExpression sqlExpression, bool condition)
-        => condition
-            ? sqlExpression
-            : BuildCompareToExpression(sqlExpression);
+    private SqlExpression ConvertToSearchCondition(SqlExpression sqlExpression, bool condition) =>
+        condition ? sqlExpression : BuildCompareToExpression(sqlExpression);
 
-    private SqlExpression ConvertToValue(SqlExpression sqlExpression, bool condition)
-        => condition
+    private SqlExpression ConvertToValue(SqlExpression sqlExpression, bool condition) =>
+        condition
             ? _sqlExpressionFactory.Case(
                 new[]
                 {
                     new CaseWhenClause(
                         SimplifyNegatedBinary(sqlExpression),
-                        _sqlExpressionFactory.ApplyDefaultTypeMapping(_sqlExpressionFactory.Constant(true)))
+                        _sqlExpressionFactory.ApplyDefaultTypeMapping(
+                            _sqlExpressionFactory.Constant(true)
+                        )
+                    )
                 },
-                _sqlExpressionFactory.Constant(false))
+                _sqlExpressionFactory.Constant(false)
+            )
             : sqlExpression;
 
-    private SqlExpression BuildCompareToExpression(SqlExpression sqlExpression)
-        => sqlExpression is SqlConstantExpression sqlConstantExpression
-            && sqlConstantExpression.Value is bool boolValue
-                ? _sqlExpressionFactory.Equal(
-                    boolValue
-                        ? _sqlExpressionFactory.Constant(1)
-                        : _sqlExpressionFactory.Constant(0),
-                    _sqlExpressionFactory.Constant(1))
-                : _sqlExpressionFactory.Equal(
-                    sqlExpression,
-                    _sqlExpressionFactory.Constant(true));
+    private SqlExpression BuildCompareToExpression(SqlExpression sqlExpression) =>
+        sqlExpression is SqlConstantExpression sqlConstantExpression
+        && sqlConstantExpression.Value is bool boolValue
+            ? _sqlExpressionFactory.Equal(
+                boolValue ? _sqlExpressionFactory.Constant(1) : _sqlExpressionFactory.Constant(0),
+                _sqlExpressionFactory.Constant(1)
+            )
+            : _sqlExpressionFactory.Equal(sqlExpression, _sqlExpressionFactory.Constant(true));
 
     private SqlExpression SimplifyNegatedBinary(SqlExpression sqlExpression)
     {
-        if (sqlExpression is SqlUnaryExpression sqlUnaryExpression
+        if (
+            sqlExpression is SqlUnaryExpression sqlUnaryExpression
             && sqlUnaryExpression.OperatorType == ExpressionType.Not
             && sqlUnaryExpression.Type == typeof(bool)
             && sqlUnaryExpression.Operand is SqlBinaryExpression sqlBinaryOperand
-            && (sqlBinaryOperand.OperatorType == ExpressionType.Equal || sqlBinaryOperand.OperatorType == ExpressionType.NotEqual))
+            && (
+                sqlBinaryOperand.OperatorType == ExpressionType.Equal
+                || sqlBinaryOperand.OperatorType == ExpressionType.NotEqual
+            )
+        )
         {
-            if (sqlBinaryOperand.Left.Type == typeof(bool)
+            if (
+                sqlBinaryOperand.Left.Type == typeof(bool)
                 && sqlBinaryOperand.Right.Type == typeof(bool)
-                && (sqlBinaryOperand.Left is SqlConstantExpression
-                    || sqlBinaryOperand.Right is SqlConstantExpression))
+                && (
+                    sqlBinaryOperand.Left is SqlConstantExpression
+                    || sqlBinaryOperand.Right is SqlConstantExpression
+                )
+            )
             {
-                var constant = sqlBinaryOperand.Left as SqlConstantExpression ?? (SqlConstantExpression)sqlBinaryOperand.Right;
+                var constant =
+                    sqlBinaryOperand.Left as SqlConstantExpression
+                    ?? (SqlConstantExpression)sqlBinaryOperand.Right;
                 if (sqlBinaryOperand.Left is SqlConstantExpression)
                 {
                     return _sqlExpressionFactory.MakeBinary(
                         ExpressionType.Equal,
-                        _sqlExpressionFactory.Constant(!(bool)constant.Value!, constant.TypeMapping),
+                        _sqlExpressionFactory.Constant(
+                            !(bool)constant.Value!,
+                            constant.TypeMapping
+                        ),
                         sqlBinaryOperand.Right,
-                        sqlBinaryOperand.TypeMapping)!;
+                        sqlBinaryOperand.TypeMapping
+                    )!;
                 }
 
                 return _sqlExpressionFactory.MakeBinary(
                     ExpressionType.Equal,
                     sqlBinaryOperand.Left,
                     _sqlExpressionFactory.Constant(!(bool)constant.Value!, constant.TypeMapping),
-                    sqlBinaryOperand.TypeMapping)!;
+                    sqlBinaryOperand.TypeMapping
+                )!;
             }
 
             return _sqlExpressionFactory.MakeBinary(
@@ -98,7 +112,8 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
                     : ExpressionType.Equal,
                 sqlBinaryOperand.Left,
                 sqlBinaryOperand.Right,
-                sqlBinaryOperand.TypeMapping)!;
+                sqlBinaryOperand.TypeMapping
+            )!;
         }
 
         return sqlExpression;
@@ -132,7 +147,10 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
 
         _isSearchCondition = parentSearchCondition;
 
-        return ApplyConversion(caseExpression.Update(operand, whenClauses, elseResult), condition: false);
+        return ApplyConversion(
+            caseExpression.Update(operand, whenClauses, elseResult),
+            condition: false
+        );
     }
 
     /// <summary>
@@ -157,8 +175,8 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitColumn(ColumnExpression columnExpression)
-        => ApplyConversion(columnExpression, condition: false);
+    protected override Expression VisitColumn(ColumnExpression columnExpression) =>
+        ApplyConversion(columnExpression, condition: false);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -198,8 +216,8 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitFromSql(FromSqlExpression fromSqlExpression)
-        => fromSqlExpression;
+    protected override Expression VisitFromSql(FromSqlExpression fromSqlExpression) =>
+        fromSqlExpression;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -302,7 +320,15 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
 
         return changed
             ? selectExpression.Update(
-                projections, tables, predicate, groupBy, havingExpression, orderings, limit, offset)
+                projections,
+                tables,
+                predicate,
+                groupBy,
+                havingExpression,
+                orderings,
+                limit,
+                offset
+            )
             : selectExpression;
     }
 
@@ -351,7 +377,8 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
         _isSearchCondition = parentIsSearchCondition;
 
         sqlBinaryExpression = sqlBinaryExpression.Update(newLeft, newRight);
-        var condition = sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
+        var condition =
+            sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
             || sqlBinaryExpression.OperatorType == ExpressionType.OrElse
             || sqlBinaryExpression.OperatorType == ExpressionType.Equal
             || sqlBinaryExpression.OperatorType == ExpressionType.NotEqual
@@ -375,8 +402,7 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
         bool resultCondition;
         switch (sqlUnaryExpression.OperatorType)
         {
-            case ExpressionType.Not
-                when sqlUnaryExpression.Type == typeof(bool):
+            case ExpressionType.Not when sqlUnaryExpression.Type == typeof(bool):
             {
                 _isSearchCondition = true;
                 resultCondition = true;
@@ -403,7 +429,10 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
             default:
                 throw new InvalidOperationException(
                     RelationalStrings.UnsupportedOperatorForSqlExpression(
-                        sqlUnaryExpression.OperatorType, typeof(SqlUnaryExpression)));
+                        sqlUnaryExpression.OperatorType,
+                        typeof(SqlUnaryExpression)
+                    )
+                );
         }
 
         var operand = (SqlExpression)Visit(sqlUnaryExpression.Operand);
@@ -411,9 +440,8 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
         _isSearchCondition = parentSearchCondition;
 
         return SimplifyNegatedBinary(
-            ApplyConversion(
-                sqlUnaryExpression.Update(operand),
-                condition: resultCondition));
+            ApplyConversion(sqlUnaryExpression.Update(operand), condition: resultCondition)
+        );
     }
 
     /// <summary>
@@ -422,8 +450,8 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitSqlConstant(SqlConstantExpression sqlConstantExpression)
-        => ApplyConversion(sqlConstantExpression, condition: false);
+    protected override Expression VisitSqlConstant(SqlConstantExpression sqlConstantExpression) =>
+        ApplyConversion(sqlConstantExpression, condition: false);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -431,8 +459,8 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitSqlFragment(SqlFragmentExpression sqlFragmentExpression)
-        => sqlFragmentExpression;
+    protected override Expression VisitSqlFragment(SqlFragmentExpression sqlFragmentExpression) =>
+        sqlFragmentExpression;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -458,7 +486,8 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
         _isSearchCondition = parentSearchCondition;
         var newFunction = sqlFunctionExpression.Update(instance, arguments);
 
-        var condition = sqlFunctionExpression.Name == "FREETEXT" || sqlFunctionExpression.Name == "CONTAINS";
+        var condition =
+            sqlFunctionExpression.Name == "FREETEXT" || sqlFunctionExpression.Name == "CONTAINS";
 
         return ApplyConversion(newFunction, condition);
     }
@@ -469,7 +498,9 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitTableValuedFunction(TableValuedFunctionExpression tableValuedFunctionExpression)
+    protected override Expression VisitTableValuedFunction(
+        TableValuedFunctionExpression tableValuedFunctionExpression
+    )
     {
         var parentSearchCondition = _isSearchCondition;
         _isSearchCondition = false;
@@ -490,8 +521,9 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitSqlParameter(SqlParameterExpression sqlParameterExpression)
-        => ApplyConversion(sqlParameterExpression, condition: false);
+    protected override Expression VisitSqlParameter(
+        SqlParameterExpression sqlParameterExpression
+    ) => ApplyConversion(sqlParameterExpression, condition: false);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -499,8 +531,7 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitTable(TableExpression tableExpression)
-        => tableExpression;
+    protected override Expression VisitTable(TableExpression tableExpression) => tableExpression;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -623,7 +654,9 @@ public class SearchConditionConvertingExpressionVisitor : SqlExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitScalarSubquery(ScalarSubqueryExpression scalarSubqueryExpression)
+    protected override Expression VisitScalarSubquery(
+        ScalarSubqueryExpression scalarSubqueryExpression
+    )
     {
         var parentSearchCondition = _isSearchCondition;
         var subquery = (SelectExpression)Visit(scalarSubqueryExpression.Subquery);

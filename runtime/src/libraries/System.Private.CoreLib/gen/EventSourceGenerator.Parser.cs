@@ -16,12 +16,18 @@ namespace Generators
 {
     public partial class EventSourceGenerator
     {
-        private static bool IsSyntaxTargetForGeneration(SyntaxNode node, CancellationToken cancellationToken) =>
-            node is ClassDeclarationSyntax { AttributeLists.Count: > 0 };
+        private static bool IsSyntaxTargetForGeneration(
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        ) => node is ClassDeclarationSyntax { AttributeLists.Count: > 0 };
 
-        private static EventSourceClass? GetSemanticTargetForGeneration(GeneratorSyntaxContext context, CancellationToken cancellationToken)
+        private static EventSourceClass? GetSemanticTargetForGeneration(
+            GeneratorSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            const string EventSourceAutoGenerateAttribute = "System.Diagnostics.Tracing.EventSourceAutoGenerateAttribute";
+            const string EventSourceAutoGenerateAttribute =
+                "System.Diagnostics.Tracing.EventSourceAutoGenerateAttribute";
             const string EventSourceAttribute = "System.Diagnostics.Tracing.EventSourceAttribute";
 
             var classDef = (ClassDeclarationSyntax)context.Node;
@@ -33,7 +39,9 @@ namespace Generators
             {
                 foreach (AttributeSyntax ca in cal.Attributes)
                 {
-                    if (sm.GetSymbolInfo(ca, cancellationToken).Symbol is not IMethodSymbol caSymbol)
+                    if (
+                        sm.GetSymbolInfo(ca, cancellationToken).Symbol is not IMethodSymbol caSymbol
+                    )
                     {
                         // badly formed attribute definition, or not the right attribute
                         continue;
@@ -41,7 +49,12 @@ namespace Generators
 
                     string attributeFullName = caSymbol.ContainingType.ToDisplayString();
 
-                    if (attributeFullName.Equals(EventSourceAutoGenerateAttribute, StringComparison.Ordinal))
+                    if (
+                        attributeFullName.Equals(
+                            EventSourceAutoGenerateAttribute,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         autoGenerate = true;
                         continue;
@@ -87,7 +100,8 @@ namespace Generators
                         foreach (AttributeArgumentSyntax arg in args)
                         {
                             string argName = arg.NameEquals!.Name.Identifier.ToString();
-                            string value = sm.GetConstantValue(arg.Expression, cancellationToken).ToString();
+                            string value = sm.GetConstantValue(arg.Expression, cancellationToken)
+                                .ToString();
 
                             switch (argName)
                             {
@@ -124,8 +138,22 @@ namespace Generators
         {
             ReadOnlySpan<byte> namespaceBytes = new byte[] // rely on C# compiler optimization to remove byte[] allocation
             {
-                    0x48, 0x2C, 0x2D, 0xB2, 0xC3, 0x90, 0x47, 0xC8,
-                    0x87, 0xF8, 0x1A, 0x15, 0xBF, 0xC1, 0x30, 0xFB,
+                0x48,
+                0x2C,
+                0x2D,
+                0xB2,
+                0xC3,
+                0x90,
+                0x47,
+                0xC8,
+                0x87,
+                0xF8,
+                0x1A,
+                0x15,
+                0xBF,
+                0xC1,
+                0x30,
+                0xFB,
             };
 
             byte[] bytes = Encoding.BigEndianUnicode.GetBytes(name);
@@ -144,7 +172,7 @@ namespace Generators
 
             Array.Resize(ref bytes, 16);
 
-            bytes[7] = unchecked((byte)((bytes[7] & 0x0F) | 0x50));    // Set high 4 bits of octet 7 to 5, as per RFC 4122
+            bytes[7] = unchecked((byte)((bytes[7] & 0x0F) | 0x50)); // Set high 4 bits of octet 7 to 5, as per RFC 4122
             return new Guid(bytes);
         }
     }

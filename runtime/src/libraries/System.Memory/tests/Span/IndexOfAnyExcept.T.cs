@@ -7,18 +7,45 @@ using Xunit;
 
 namespace System.SpanTests
 {
-    public class IndexOfAnyExceptTests_Byte : IndexOfAnyExceptTests<byte> { protected override byte Create(int value) => (byte)value; }
-    public class IndexOfAnyExceptTests_Char : IndexOfAnyExceptTests<char> { protected override char Create(int value) => (char)value; }
-    public class IndexOfAnyExceptTests_Int32 : IndexOfAnyExceptTests<int> { protected override int Create(int value) => value; }
-    public class IndexOfAnyExceptTests_Int64 : IndexOfAnyExceptTests<long> { protected override long Create(int value) => value; }
-    public class IndexOfAnyExceptTests_String : IndexOfAnyExceptTests<string> { protected override string Create(int value) => ((char)value).ToString(); }
-    public class IndexOfAnyExceptTests_Record : IndexOfAnyExceptTests<SimpleRecord> { protected override SimpleRecord Create(int value) => new SimpleRecord(value); }
+    public class IndexOfAnyExceptTests_Byte : IndexOfAnyExceptTests<byte>
+    {
+        protected override byte Create(int value) => (byte)value;
+    }
+
+    public class IndexOfAnyExceptTests_Char : IndexOfAnyExceptTests<char>
+    {
+        protected override char Create(int value) => (char)value;
+    }
+
+    public class IndexOfAnyExceptTests_Int32 : IndexOfAnyExceptTests<int>
+    {
+        protected override int Create(int value) => value;
+    }
+
+    public class IndexOfAnyExceptTests_Int64 : IndexOfAnyExceptTests<long>
+    {
+        protected override long Create(int value) => value;
+    }
+
+    public class IndexOfAnyExceptTests_String : IndexOfAnyExceptTests<string>
+    {
+        protected override string Create(int value) => ((char)value).ToString();
+    }
+
+    public class IndexOfAnyExceptTests_Record : IndexOfAnyExceptTests<SimpleRecord>
+    {
+        protected override SimpleRecord Create(int value) => new SimpleRecord(value);
+    }
 
     public record SimpleRecord(int Value);
 
     public abstract class IndexOfAnyExceptTests<T> where T : IEquatable<T>
     {
-        private readonly T _a, _b, _c, _d, _e;
+        private readonly T _a,
+            _b,
+            _c,
+            _d,
+            _e;
 
         public IndexOfAnyExceptTests()
         {
@@ -67,7 +94,10 @@ namespace System.SpanTests
             Assert.Equal(-1, LastIndexOfAnyExcept(CreateArray(length, _a), _a));
             Assert.Equal(-1, LastIndexOfAnyExcept(CreateArray(length, _a, _b), _a, _b));
             Assert.Equal(-1, LastIndexOfAnyExcept(CreateArray(length, _a, _b, _c), _a, _b, _c));
-            Assert.Equal(-1, LastIndexOfAnyExcept(CreateArray(length, _a, _b, _c, _d), _a, _b, _c, _d));
+            Assert.Equal(
+                -1,
+                LastIndexOfAnyExcept(CreateArray(length, _a, _b, _c, _d), _a, _b, _c, _d)
+            );
         }
 
         public static IEnumerable<object[]> SomeElementsDontMatch_ReturnsOffset_MemberData()
@@ -86,15 +116,61 @@ namespace System.SpanTests
         [MemberData(nameof(SomeElementsDontMatch_ReturnsOffset_MemberData))]
         public void SomeElementsDontMatch_ReturnsOffset(int length, int[] matchPositions)
         {
-            Assert.Equal(matchPositions[0], IndexOfAnyExcept(Set(CreateArray(length, _a), _e, matchPositions), _a));
-            Assert.Equal(matchPositions[0], IndexOfAnyExcept(Set(CreateArray(length, _a, _b), _e, matchPositions), _a, _b));
-            Assert.Equal(matchPositions[0], IndexOfAnyExcept(Set(CreateArray(length, _a, _b, _c), _e, matchPositions), _a, _b, _c));
-            Assert.Equal(matchPositions[0], IndexOfAnyExcept(Set(CreateArray(length, _a, _b, _c, _d), _e, matchPositions), _a, _b, _c, _d));
+            Assert.Equal(
+                matchPositions[0],
+                IndexOfAnyExcept(Set(CreateArray(length, _a), _e, matchPositions), _a)
+            );
+            Assert.Equal(
+                matchPositions[0],
+                IndexOfAnyExcept(Set(CreateArray(length, _a, _b), _e, matchPositions), _a, _b)
+            );
+            Assert.Equal(
+                matchPositions[0],
+                IndexOfAnyExcept(
+                    Set(CreateArray(length, _a, _b, _c), _e, matchPositions),
+                    _a,
+                    _b,
+                    _c
+                )
+            );
+            Assert.Equal(
+                matchPositions[0],
+                IndexOfAnyExcept(
+                    Set(CreateArray(length, _a, _b, _c, _d), _e, matchPositions),
+                    _a,
+                    _b,
+                    _c,
+                    _d
+                )
+            );
 
-            Assert.Equal(matchPositions[^1], LastIndexOfAnyExcept(Set(CreateArray(length, _a), _e, matchPositions), _a));
-            Assert.Equal(matchPositions[^1], LastIndexOfAnyExcept(Set(CreateArray(length, _a, _b), _e, matchPositions), _a, _b));
-            Assert.Equal(matchPositions[^1], LastIndexOfAnyExcept(Set(CreateArray(length, _a, _b, _c), _e, matchPositions), _a, _b, _c));
-            Assert.Equal(matchPositions[^1], LastIndexOfAnyExcept(Set(CreateArray(length, _a, _b, _c, _d), _e, matchPositions), _a, _b, _c, _d));
+            Assert.Equal(
+                matchPositions[^1],
+                LastIndexOfAnyExcept(Set(CreateArray(length, _a), _e, matchPositions), _a)
+            );
+            Assert.Equal(
+                matchPositions[^1],
+                LastIndexOfAnyExcept(Set(CreateArray(length, _a, _b), _e, matchPositions), _a, _b)
+            );
+            Assert.Equal(
+                matchPositions[^1],
+                LastIndexOfAnyExcept(
+                    Set(CreateArray(length, _a, _b, _c), _e, matchPositions),
+                    _a,
+                    _b,
+                    _c
+                )
+            );
+            Assert.Equal(
+                matchPositions[^1],
+                LastIndexOfAnyExcept(
+                    Set(CreateArray(length, _a, _b, _c, _d), _e, matchPositions),
+                    _a,
+                    _b,
+                    _c,
+                    _d
+                )
+            );
         }
 
         [Fact]
@@ -139,59 +215,129 @@ namespace System.SpanTests
             int result = MemoryExtensions.IndexOfAnyExcept(span, value);
             Assert.Equal(result, MemoryExtensions.IndexOfAnyExcept((ReadOnlySpan<T>)span, value));
             Assert.Equal(result, MemoryExtensions.IndexOfAnyExcept((Span<T>)span, new[] { value }));
-            Assert.Equal(result, MemoryExtensions.IndexOfAnyExcept((ReadOnlySpan<T>)span, new[] { value }));
+            Assert.Equal(
+                result,
+                MemoryExtensions.IndexOfAnyExcept((ReadOnlySpan<T>)span, new[] { value })
+            );
             return result;
         }
+
         private static int IndexOfAnyExcept(Span<T> span, T value0, T value1)
         {
             int result = MemoryExtensions.IndexOfAnyExcept(span, value0, value1);
-            Assert.Equal(result, MemoryExtensions.IndexOfAnyExcept((ReadOnlySpan<T>)span, value0, value1));
-            Assert.Equal(result, MemoryExtensions.IndexOfAnyExcept((Span<T>)span, new[] { value0, value1 }));
-            Assert.Equal(result, MemoryExtensions.IndexOfAnyExcept((ReadOnlySpan<T>)span, new[] { value0, value1 }));
+            Assert.Equal(
+                result,
+                MemoryExtensions.IndexOfAnyExcept((ReadOnlySpan<T>)span, value0, value1)
+            );
+            Assert.Equal(
+                result,
+                MemoryExtensions.IndexOfAnyExcept((Span<T>)span, new[] { value0, value1 })
+            );
+            Assert.Equal(
+                result,
+                MemoryExtensions.IndexOfAnyExcept((ReadOnlySpan<T>)span, new[] { value0, value1 })
+            );
             return result;
         }
+
         private static int IndexOfAnyExcept(Span<T> span, T value0, T value1, T value2)
         {
             int result = MemoryExtensions.IndexOfAnyExcept(span, value0, value1, value2);
-            Assert.Equal(result, MemoryExtensions.IndexOfAnyExcept((ReadOnlySpan<T>)span, value0, value1, value2));
-            Assert.Equal(result, MemoryExtensions.IndexOfAnyExcept((Span<T>)span, new[] { value0, value1, value2 }));
-            Assert.Equal(result, MemoryExtensions.IndexOfAnyExcept((ReadOnlySpan<T>)span, new[] { value0, value1, value2 }));
+            Assert.Equal(
+                result,
+                MemoryExtensions.IndexOfAnyExcept((ReadOnlySpan<T>)span, value0, value1, value2)
+            );
+            Assert.Equal(
+                result,
+                MemoryExtensions.IndexOfAnyExcept((Span<T>)span, new[] { value0, value1, value2 })
+            );
+            Assert.Equal(
+                result,
+                MemoryExtensions.IndexOfAnyExcept(
+                    (ReadOnlySpan<T>)span,
+                    new[] { value0, value1, value2 }
+                )
+            );
             return result;
         }
+
         private static int IndexOfAnyExcept(Span<T> span, params T[] values)
         {
             int result = MemoryExtensions.IndexOfAnyExcept(span, values);
             Assert.Equal(result, MemoryExtensions.IndexOfAnyExcept((ReadOnlySpan<T>)span, values));
             return result;
         }
+
         private static int LastIndexOfAnyExcept(Span<T> span, T value)
         {
             int result = MemoryExtensions.LastIndexOfAnyExcept(span, value);
-            Assert.Equal(result, MemoryExtensions.LastIndexOfAnyExcept((ReadOnlySpan<T>)span, value));
-            Assert.Equal(result, MemoryExtensions.LastIndexOfAnyExcept((Span<T>)span, new[] { value }));
-            Assert.Equal(result, MemoryExtensions.LastIndexOfAnyExcept((ReadOnlySpan<T>)span, new[] { value }));
+            Assert.Equal(
+                result,
+                MemoryExtensions.LastIndexOfAnyExcept((ReadOnlySpan<T>)span, value)
+            );
+            Assert.Equal(
+                result,
+                MemoryExtensions.LastIndexOfAnyExcept((Span<T>)span, new[] { value })
+            );
+            Assert.Equal(
+                result,
+                MemoryExtensions.LastIndexOfAnyExcept((ReadOnlySpan<T>)span, new[] { value })
+            );
             return result;
         }
+
         private static int LastIndexOfAnyExcept(Span<T> span, T value0, T value1)
         {
             int result = MemoryExtensions.LastIndexOfAnyExcept(span, value0, value1);
-            Assert.Equal(result, MemoryExtensions.LastIndexOfAnyExcept((ReadOnlySpan<T>)span, value0, value1));
-            Assert.Equal(result, MemoryExtensions.LastIndexOfAnyExcept((Span<T>)span, new[] { value0, value1 }));
-            Assert.Equal(result, MemoryExtensions.LastIndexOfAnyExcept((ReadOnlySpan<T>)span, new[] { value0, value1 }));
+            Assert.Equal(
+                result,
+                MemoryExtensions.LastIndexOfAnyExcept((ReadOnlySpan<T>)span, value0, value1)
+            );
+            Assert.Equal(
+                result,
+                MemoryExtensions.LastIndexOfAnyExcept((Span<T>)span, new[] { value0, value1 })
+            );
+            Assert.Equal(
+                result,
+                MemoryExtensions.LastIndexOfAnyExcept(
+                    (ReadOnlySpan<T>)span,
+                    new[] { value0, value1 }
+                )
+            );
             return result;
         }
+
         private static int LastIndexOfAnyExcept(Span<T> span, T value0, T value1, T value2)
         {
             int result = MemoryExtensions.LastIndexOfAnyExcept(span, value0, value1, value2);
-            Assert.Equal(result, MemoryExtensions.LastIndexOfAnyExcept((ReadOnlySpan<T>)span, value0, value1, value2));
-            Assert.Equal(result, MemoryExtensions.LastIndexOfAnyExcept((Span<T>)span, new[] { value0, value1, value2 }));
-            Assert.Equal(result, MemoryExtensions.LastIndexOfAnyExcept((ReadOnlySpan<T>)span, new[] { value0, value1, value2 }));
+            Assert.Equal(
+                result,
+                MemoryExtensions.LastIndexOfAnyExcept((ReadOnlySpan<T>)span, value0, value1, value2)
+            );
+            Assert.Equal(
+                result,
+                MemoryExtensions.LastIndexOfAnyExcept(
+                    (Span<T>)span,
+                    new[] { value0, value1, value2 }
+                )
+            );
+            Assert.Equal(
+                result,
+                MemoryExtensions.LastIndexOfAnyExcept(
+                    (ReadOnlySpan<T>)span,
+                    new[] { value0, value1, value2 }
+                )
+            );
             return result;
         }
+
         private static int LastIndexOfAnyExcept(Span<T> span, params T[] values)
         {
             int result = MemoryExtensions.LastIndexOfAnyExcept(span, values);
-            Assert.Equal(result, MemoryExtensions.LastIndexOfAnyExcept((ReadOnlySpan<T>)span, values));
+            Assert.Equal(
+                result,
+                MemoryExtensions.LastIndexOfAnyExcept((ReadOnlySpan<T>)span, values)
+            );
             return result;
         }
     }

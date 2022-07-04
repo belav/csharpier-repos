@@ -8,24 +8,13 @@ namespace AutoMapper.UnitTests.Bug
 {
     public class IgnoreShouldBeInheritedIfConventionCannotMap
     {
-        public class BaseDomain
-        {
+        public class BaseDomain { }
 
-        }
+        public class StandardDomain : BaseDomain { }
 
-        public class StandardDomain : BaseDomain
-        {
-            
-        }
+        public class SpecificDomain : StandardDomain { }
 
-        public class SpecificDomain : StandardDomain
-        {
-        }
-
-        public class MoreSpecificDomain : SpecificDomain
-        {
-            
-        }
+        public class MoreSpecificDomain : SpecificDomain { }
 
         public class Dto
         {
@@ -41,11 +30,9 @@ namespace AutoMapper.UnitTests.Bug
                     .ForMember(d => d.SpecificProperty, m => m.Ignore())
                     .Include<StandardDomain, Dto>();
 
-                cfg.CreateMap<StandardDomain, Dto>()
-                    .Include<SpecificDomain, Dto>();
+                cfg.CreateMap<StandardDomain, Dto>().Include<SpecificDomain, Dto>();
 
-                cfg.CreateMap<SpecificDomain, Dto>()
-                    .Include<MoreSpecificDomain, Dto>();
+                cfg.CreateMap<SpecificDomain, Dto>().Include<MoreSpecificDomain, Dto>();
 
                 cfg.CreateMap<MoreSpecificDomain, Dto>();
             });

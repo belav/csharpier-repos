@@ -18,7 +18,11 @@ namespace Microsoft.WebAssembly.AppHost;
 
 public class WebServer
 {
-    internal static async Task<(ServerURLs, IWebHost)> StartAsync(WebServerOptions options, ILogger logger, CancellationToken token)
+    internal static async Task<(ServerURLs, IWebHost)> StartAsync(
+        WebServerOptions options,
+        ILogger logger,
+        CancellationToken token
+    )
     {
         string[]? urls = new string[] { $"http://127.0.0.1:{options.Port}", "https://127.0.0.1:0" };
 
@@ -29,22 +33,31 @@ public class WebServer
             {
                 logging.AddConsole().AddFilter(null, LogLevel.Warning);
             })
-            .ConfigureServices((ctx, services) =>
-            {
-                if (options.WebServerUseCors)
+            .ConfigureServices(
+                (ctx, services) =>
                 {
-                    services.AddCors(o => o.AddPolicy("AnyCors", builder =>
-                        {
-                            builder.AllowAnyOrigin()
-                                .AllowAnyMethod()
-                                .AllowAnyHeader()
-                                .WithExposedHeaders("*");
-                        }));
+                    if (options.WebServerUseCors)
+                    {
+                        services.AddCors(
+                            o =>
+                                o.AddPolicy(
+                                    "AnyCors",
+                                    builder =>
+                                    {
+                                        builder
+                                            .AllowAnyOrigin()
+                                            .AllowAnyMethod()
+                                            .AllowAnyHeader()
+                                            .WithExposedHeaders("*");
+                                    }
+                                )
+                        );
+                    }
+                    services.AddSingleton(logger);
+                    services.AddSingleton(Options.Create(options));
+                    services.AddRouting();
                 }
-                services.AddSingleton(logger);
-                services.AddSingleton(Options.Create(options));
-                services.AddRouting();
-            })
+            )
             .UseUrls(urls);
 
         if (options.ContentRootPath != null)
@@ -54,28 +67,27 @@ public class WebServer
         await host.StartAsync(token);
 
         ICollection<string>? addresses = host.ServerFeatures
-                            .Get<IServerAddressesFeature>()?
-                            .Addresses;
+            .Get<IServerAddressesFeature>()
+            ?.Addresses;
 
-        string? ipAddress =
-                        addresses?
-                        .Where(a => a.StartsWith("http:", StringComparison.InvariantCultureIgnoreCase))
-                        .Select(a => new Uri(a))
-                        .Select(uri => uri.ToString())
-                        .FirstOrDefault();
+        string? ipAddress = addresses
+            ?.Where(a => a.StartsWith("http:", StringComparison.InvariantCultureIgnoreCase))
+            .Select(a => new Uri(a))
+            .Select(uri => uri.ToString())
+            .FirstOrDefault();
 
-        string? ipAddressSecure =
-                        addresses?
-                        .Where(a => a.StartsWith("https:", StringComparison.OrdinalIgnoreCase))
-                        .Select(a => new Uri(a))
-                        .Select(uri => uri.ToString())
-                        .FirstOrDefault();
+        string? ipAddressSecure = addresses
+            ?.Where(a => a.StartsWith("https:", StringComparison.OrdinalIgnoreCase))
+            .Select(a => new Uri(a))
+            .Select(uri => uri.ToString())
+            .FirstOrDefault();
 
         return ipAddress == null || ipAddressSecure == null
-            ? throw new InvalidOperationException("Failed to determine web server's IP address or port")
+            ? throw new InvalidOperationException(
+                "Failed to determine web server's IP address or port"
+            )
             : (new ServerURLs(ipAddress, ipAddressSecure), host);
     }
-
 }
 
 // FIXME: can be simplified to string[]

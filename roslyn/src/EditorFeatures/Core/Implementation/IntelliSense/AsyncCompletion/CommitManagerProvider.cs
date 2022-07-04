@@ -23,13 +23,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CommitManagerProvider(IThreadingContext threadingContext, RecentItemsManager recentItemsManager)
+        public CommitManagerProvider(
+            IThreadingContext threadingContext,
+            RecentItemsManager recentItemsManager
+        )
         {
             _threadingContext = threadingContext;
             _recentItemsManager = recentItemsManager;
         }
 
-        IAsyncCompletionCommitManager? IAsyncCompletionCommitManagerProvider.GetOrCreate(ITextView textView)
+        IAsyncCompletionCommitManager? IAsyncCompletionCommitManagerProvider.GetOrCreate(
+            ITextView textView
+        )
         {
             if (textView.TextBuffer.IsInLspEditorContext())
             {

@@ -22,9 +22,11 @@ namespace System
 
             // If we didn't get one, or if we got one but we're not supposed to verify it,
             // or if we're supposed to verify it and it passes verification, return the path.
-            if (path.Length == 0 ||
-                option == SpecialFolderOption.DoNotVerify ||
-                Interop.Sys.Access(path, Interop.Sys.AccessMode.R_OK) == 0)
+            if (
+                path.Length == 0
+                || option == SpecialFolderOption.DoNotVerify
+                || Interop.Sys.Access(path, Interop.Sys.AccessMode.R_OK) == 0
+            )
             {
                 return path;
             }
@@ -49,11 +51,15 @@ namespace System
             // https://www.freedesktop.org/software/systemd/man/file-hierarchy.html
             switch (folder)
             {
-                case SpecialFolder.CommonApplicationData: return "/usr/share";
-                case SpecialFolder.CommonTemplates: return "/usr/share/templates";
+                case SpecialFolder.CommonApplicationData:
+                    return "/usr/share";
+                case SpecialFolder.CommonTemplates:
+                    return "/usr/share/templates";
 #if TARGET_OSX
-                case SpecialFolder.ProgramFiles: return "/Applications";
-                case SpecialFolder.System: return "/System";
+                case SpecialFolder.ProgramFiles:
+                    return "/Applications";
+                case SpecialFolder.System:
+                    return "/System";
 #endif
             }
 
@@ -180,26 +186,38 @@ namespace System
                             // Skip past whitespace at beginning of line
                             int pos = 0;
                             SkipWhitespace(line, ref pos);
-                            if (pos >= line.Length) continue;
+                            if (pos >= line.Length)
+                                continue;
 
                             // Skip past requested key name
-                            if (string.CompareOrdinal(line, pos, key, 0, key.Length) != 0) continue;
+                            if (string.CompareOrdinal(line, pos, key, 0, key.Length) != 0)
+                                continue;
                             pos += key.Length;
 
                             // Skip past whitespace and past '='
                             SkipWhitespace(line, ref pos);
-                            if (pos >= line.Length - 4 || line[pos] != '=') continue; // 4 for ="" and at least one char between quotes
+                            if (pos >= line.Length - 4 || line[pos] != '=')
+                                continue; // 4 for ="" and at least one char between quotes
                             pos++; // skip past '='
 
                             // Skip past whitespace and past first quote
                             SkipWhitespace(line, ref pos);
-                            if (pos >= line.Length - 3 || line[pos] != '"') continue; // 3 for "" and at least one char between quotes
+                            if (pos >= line.Length - 3 || line[pos] != '"')
+                                continue; // 3 for "" and at least one char between quotes
                             pos++; // skip past opening '"'
 
                             // Skip past relative prefix if one exists
                             bool relativeToHome = false;
                             const string RelativeToHomePrefix = "$HOME/";
-                            if (string.CompareOrdinal(line, pos, RelativeToHomePrefix, 0, RelativeToHomePrefix.Length) == 0)
+                            if (
+                                string.CompareOrdinal(
+                                    line,
+                                    pos,
+                                    RelativeToHomePrefix,
+                                    0,
+                                    RelativeToHomePrefix.Length
+                                ) == 0
+                            )
                             {
                                 relativeToHome = true;
                                 pos += RelativeToHomePrefix.Length;
@@ -211,13 +229,12 @@ namespace System
 
                             // Find end of path
                             int endPos = line.IndexOf('"', pos);
-                            if (endPos <= pos) continue;
+                            if (endPos <= pos)
+                                continue;
 
                             // Got we need.  Now extract it.
                             string path = line.Substring(pos, endPos - pos);
-                            return relativeToHome ?
-                                Path.Combine(homeDir, path) :
-                                path;
+                            return relativeToHome ? Path.Combine(homeDir, path) : path;
                         }
                     }
                 }
@@ -233,7 +250,8 @@ namespace System
 
         private static void SkipWhitespace(string line, ref int pos)
         {
-            while (pos < line.Length && char.IsWhiteSpace(line[pos])) pos++;
+            while (pos < line.Length && char.IsWhiteSpace(line[pos]))
+                pos++;
         }
     }
 }

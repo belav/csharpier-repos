@@ -33,8 +33,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected TemporalRangeTableExpression(string name, string? schema, string? alias, DateTime from, DateTime to)
-            : base(name, schema, alias)
+        protected TemporalRangeTableExpression(
+            string name,
+            string? schema,
+            string? alias,
+            DateTime from,
+            DateTime to
+        ) : base(name, schema, alias)
         {
             From = from;
             To = to;
@@ -57,7 +62,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public virtual DateTime To { get; }
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), From, To);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), From, To);
     }
 }

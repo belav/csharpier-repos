@@ -18,17 +18,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioDiagnosticModeServiceFactory()
-        {
-        }
+        public VisualStudioDiagnosticModeServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new VisualStudioDiagnosticModeService(workspaceServices.Workspace);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new VisualStudioDiagnosticModeService(workspaceServices.Workspace);
 
         private class VisualStudioDiagnosticModeService : IDiagnosticModeService
         {
             private readonly Workspace _workspace;
-            private readonly Dictionary<Option2<DiagnosticMode>, Lazy<DiagnosticMode>> _optionToMode = new();
+            private readonly Dictionary<
+                Option2<DiagnosticMode>,
+                Lazy<DiagnosticMode>
+            > _optionToMode = new();
 
             public VisualStudioDiagnosticModeService(Workspace workspace)
             {
@@ -47,7 +48,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 {
                     if (!_optionToMode.TryGetValue(option, out var lazy))
                     {
-                        lazy = new Lazy<DiagnosticMode>(() => ComputeDiagnosticMode(option), isThreadSafe: true);
+                        lazy = new Lazy<DiagnosticMode>(
+                            () => ComputeDiagnosticMode(option),
+                            isThreadSafe: true
+                        );
                         _optionToMode.Add(option, lazy);
                     }
 

@@ -25,6 +25,7 @@ public class T
         }
         return (true);
     }
+
     static Object[] o = new Object[5];
 
     public static int Main()
@@ -32,7 +33,8 @@ public class T
         o[1] = "1";
         o[2] = "2";
         o[3] = "3";
-        if (test(ref o, ref o[2], 2)) return 100;
+        if (test(ref o, ref o[2], 2))
+            return 100;
         //error
         return 1;
     }

@@ -17,7 +17,7 @@ public class Test_Github_21011
     [MethodImpl(MethodImplOptions.Synchronized | MethodImplOptions.NoInlining)]
     internal KeyValuePair<uint, float>? GetPair()
     {
-        KeyValuePair<uint,float>? result = new KeyValuePair<uint,float>?();
+        KeyValuePair<uint, float>? result = new KeyValuePair<uint, float>?();
         return result;
     }
 }

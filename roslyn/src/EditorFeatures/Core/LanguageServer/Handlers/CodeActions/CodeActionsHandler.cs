@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// Handles the initial request for code actions. Leaves the Edit and Command properties
     /// of the returned VSCodeActions blank, as these properties should be populated by the
     /// CodeActionsResolveHandler only when the user requests them.
-    /// 
+    ///
     /// TODO - This must be moved to the MS.CA.LanguageServer.Protocol project once the
     /// EditorFeatures references in <see cref="RunCodeActionHandler"/> are removed.
     /// See https://github.com/dotnet/roslyn/issues/55142
@@ -45,16 +45,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public CodeActionsHandler(
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             _codeFixService = codeFixService;
             _codeRefactoringService = codeRefactoringService;
             _globalOptions = globalOptions;
         }
 
-        public TextDocumentIdentifier? GetTextDocumentIdentifier(CodeActionParams request) => request.TextDocument;
+        public TextDocumentIdentifier? GetTextDocumentIdentifier(CodeActionParams request) =>
+            request.TextDocument;
 
-        public async Task<LSP.CodeAction[]> HandleRequestAsync(LSP.CodeActionParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.CodeAction[]> HandleRequestAsync(
+            LSP.CodeActionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             Contract.ThrowIfNull(document);
@@ -62,8 +68,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var options = _globalOptions.GetCodeActionOptionsProvider();
 
             var codeActionsCache = context.GetRequiredLspService<CodeActionsCache>();
-            var codeActions = await CodeActionHelpers.GetVSCodeActionsAsync(
-                request, codeActionsCache, document, options, _codeFixService, _codeRefactoringService, cancellationToken).ConfigureAwait(false);
+            var codeActions = await CodeActionHelpers
+                .GetVSCodeActionsAsync(
+                    request,
+                    codeActionsCache,
+                    document,
+                    options,
+                    _codeFixService,
+                    _codeRefactoringService,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return codeActions;
         }

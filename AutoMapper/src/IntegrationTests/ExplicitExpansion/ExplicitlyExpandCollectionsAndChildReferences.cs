@@ -14,12 +14,15 @@ public class ExplicitlyExpandCollectionsAndChildReferences : AutoMapperSpecBase,
 {
     TrainingCourseDto _course;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Category, CategoryDto>();
-        cfg.CreateProjection<TrainingCourse, TrainingCourseDto>().ForMember(c => c.Content, o => o.ExplicitExpansion());
-        cfg.CreateProjection<TrainingContent, TrainingContentDto>().ForMember(c => c.Category, o => o.ExplicitExpansion());
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Category, CategoryDto>();
+            cfg.CreateProjection<TrainingCourse, TrainingCourseDto>()
+                .ForMember(c => c.Content, o => o.ExplicitExpansion());
+            cfg.CreateProjection<TrainingContent, TrainingContentDto>()
+                .ForMember(c => c.Category, o => o.ExplicitExpansion());
+        });
 
     [Fact]
     public void Should_expand_collections_items()
@@ -73,7 +76,6 @@ public class ExplicitlyExpandCollectionsAndChildReferences : AutoMapperSpecBase,
         public string CategoryName { get; set; }
     }
 
-
     public class TrainingCourseDto
     {
         public int CourseId { get; set; }
@@ -97,6 +99,7 @@ public class ExplicitlyExpandCollectionsAndChildReferences : AutoMapperSpecBase,
 
         public CategoryDto Category { get; set; }
     }
+
     public async Task InitializeAsync()
     {
         var initializer = new DatabaseInitializer();
@@ -105,7 +108,12 @@ public class ExplicitlyExpandCollectionsAndChildReferences : AutoMapperSpecBase,
 
         using (var context = new ClientContext())
         {
-            _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses, null, c => c.Content.Select(co => co.Category)).FirstOrDefault(n => n.CourseName == "Course 1");
+            _course = ProjectTo<TrainingCourseDto>(
+                    context.TrainingCourses,
+                    null,
+                    c => c.Content.Select(co => co.Category)
+                )
+                .FirstOrDefault(n => n.CourseName == "Course 1");
         }
     }
 

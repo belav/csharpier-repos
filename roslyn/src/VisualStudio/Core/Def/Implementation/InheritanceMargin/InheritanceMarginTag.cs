@@ -34,7 +34,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 
         public readonly Workspace Workspace;
 
-        public InheritanceMarginTag(Workspace workspace, int lineNumber, ImmutableArray<InheritanceMarginItem> membersOnLine)
+        public InheritanceMarginTag(
+            Workspace workspace,
+            int lineNumber,
+            ImmutableArray<InheritanceMarginItem> membersOnLine
+        )
         {
             Contract.ThrowIfTrue(membersOnLine.IsEmpty);
 
@@ -58,7 +62,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             {
                 // Multiple members on same line.
                 var aggregateRelationship = membersOnLine
-                    .SelectMany(member => member.TargetItems.Select(target => target.RelationToMember))
+                    .SelectMany(
+                        member => member.TargetItems.Select(target => target.RelationToMember)
+                    )
                     .Aggregate((r1, r2) => r1 | r2);
                 Moniker = InheritanceMarginHelpers.GetMoniker(aggregateRelationship);
             }

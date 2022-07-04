@@ -15,9 +15,11 @@ namespace Internal.Runtime.TypeLoader
     internal class NoMetadataFieldLayoutAlgorithm : FieldLayoutAlgorithm
     {
 #if SUPPORTS_NATIVE_METADATA_TYPE_LOADING
-        private MetadataFieldLayoutAlgorithm _metadataFieldLayoutAlgorithm = new MetadataFieldLayoutAlgorithm();
+        private MetadataFieldLayoutAlgorithm _metadataFieldLayoutAlgorithm =
+            new MetadataFieldLayoutAlgorithm();
 #endif
-        private static NativeLayoutFieldAlgorithm s_nativeLayoutFieldAlgorithm = new NativeLayoutFieldAlgorithm();
+        private static NativeLayoutFieldAlgorithm s_nativeLayoutFieldAlgorithm =
+            new NativeLayoutFieldAlgorithm();
 
         public unsafe override bool ComputeContainsGCPointers(DefType type)
         {
@@ -28,7 +30,10 @@ namespace Internal.Runtime.TypeLoader
         /// Reads the minimal information about type layout encoded in the
         /// MethodTable. That doesn't include field information.
         /// </summary>
-        public unsafe override ComputedInstanceFieldLayout ComputeInstanceLayout(DefType type, InstanceLayoutKind layoutKind)
+        public unsafe override ComputedInstanceFieldLayout ComputeInstanceLayout(
+            DefType type,
+            InstanceLayoutKind layoutKind
+        )
         {
             // If we need the field information, delegate to the native layout algorithm or metadata algorithm
             if (layoutKind != InstanceLayoutKind.TypeOnly)
@@ -55,9 +60,16 @@ namespace Internal.Runtime.TypeLoader
             ComputedInstanceFieldLayout layout = new ComputedInstanceFieldLayout()
             {
                 ByteCountAlignment = new LayoutInt(IntPtr.Size),
-                ByteCountUnaligned = new LayoutInt(MethodTable->IsInterface ? IntPtr.Size : checked((int)MethodTable->FieldByteCountNonGCAligned)),
+                ByteCountUnaligned = new LayoutInt(
+                    MethodTable->IsInterface
+                        ? IntPtr.Size
+                        : checked((int)MethodTable->FieldByteCountNonGCAligned)
+                ),
                 FieldAlignment = new LayoutInt(MethodTable->FieldAlignmentRequirement),
-                Offsets = (layoutKind == InstanceLayoutKind.TypeOnly) ? null : Array.Empty<FieldAndOffset>(), // No fields in EETypes
+                Offsets =
+                    (layoutKind == InstanceLayoutKind.TypeOnly)
+                        ? null
+                        : Array.Empty<FieldAndOffset>(), // No fields in EETypes
             };
 
             if (MethodTable->IsValueType)
@@ -70,7 +82,10 @@ namespace Internal.Runtime.TypeLoader
                 layout.FieldSize = new LayoutInt(IntPtr.Size);
             }
 
-            if ((MethodTable->RareFlags & EETypeRareFlags.RequiresAlign8Flag) == EETypeRareFlags.RequiresAlign8Flag)
+            if (
+                (MethodTable->RareFlags & EETypeRareFlags.RequiresAlign8Flag)
+                == EETypeRareFlags.RequiresAlign8Flag
+            )
             {
                 layout.ByteCountAlignment = new LayoutInt(8);
             }
@@ -78,7 +93,10 @@ namespace Internal.Runtime.TypeLoader
             return layout;
         }
 
-        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(DefType type, StaticLayoutKind layoutKind)
+        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(
+            DefType type,
+            StaticLayoutKind layoutKind
+        )
         {
 #if SUPPORTS_NATIVE_METADATA_TYPE_LOADING
             // We can only reach this for pre-created types where we actually need field information
@@ -104,7 +122,9 @@ namespace Internal.Runtime.TypeLoader
 #endif
         }
 
-        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(DefType type)
+        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
+            DefType type
+        )
         {
             if (type.Context.Target.Architecture == TargetArchitecture.ARM)
             {
@@ -127,8 +147,9 @@ namespace Internal.Runtime.TypeLoader
             else
             {
                 Debug.Assert(
-                    type.Context.Target.Architecture == TargetArchitecture.X86 ||
-                    type.Context.Target.Architecture == TargetArchitecture.X64);
+                    type.Context.Target.Architecture == TargetArchitecture.X86
+                        || type.Context.Target.Architecture == TargetArchitecture.X64
+                );
 
                 return ValueTypeShapeCharacteristics.None;
             }

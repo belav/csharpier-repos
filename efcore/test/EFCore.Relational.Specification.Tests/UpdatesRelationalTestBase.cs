@@ -9,14 +9,11 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFixture>
     where TFixture : UpdatesRelationalFixture
 {
-    protected UpdatesRelationalTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+    protected UpdatesRelationalTestBase(TFixture fixture) : base(fixture) { }
 
     [ConditionalFact]
-    public virtual void SaveChanges_works_for_entities_also_mapped_to_view()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void SaveChanges_works_for_entities_also_mapped_to_view() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var category = context.Categories.Single();
@@ -28,7 +25,8 @@ public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFix
                         Name = "Pear Cider",
                         Price = 1.39M,
                         DependentId = category.Id
-                    });
+                    }
+                );
                 context.Add(
                     new ProductViewTable
                     {
@@ -36,7 +34,8 @@ public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFix
                         Name = "Pear Cobler",
                         Price = 2.39M,
                         DependentId = category.Id
-                    });
+                    }
+                );
 
                 context.SaveChanges();
             },
@@ -47,37 +46,41 @@ public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFix
 
                 Assert.Equal("Pear Cider", tableProduct.Name);
                 Assert.Equal("Pear Cobler", viewProduct.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual void SaveChanges_throws_for_entities_only_mapped_to_view()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var category = context.Categories.Single();
-                context.Add(
-                    new ProductTableView
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = "Pear Cider",
-                        Price = 1.39M,
-                        DependentId = category.Id
-                    });
+    public virtual void SaveChanges_throws_for_entities_only_mapped_to_view() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var category = context.Categories.Single();
+            context.Add(
+                new ProductTableView
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Pear Cider",
+                    Price = 1.39M,
+                    DependentId = category.Id
+                }
+            );
 
-                Assert.Equal(
-                    RelationalStrings.ReadonlyEntitySaved(nameof(ProductTableView)),
-                    Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message);
-            });
+            Assert.Equal(
+                RelationalStrings.ReadonlyEntitySaved(nameof(ProductTableView)),
+                Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message
+            );
+        });
 
     [ConditionalFact]
     public abstract void Identifiers_are_generated_correctly();
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
-    protected override string UpdateConcurrencyMessage
-        => RelationalStrings.UpdateConcurrencyException(1, 0);
+    protected override string UpdateConcurrencyMessage =>
+        RelationalStrings.UpdateConcurrencyException(1, 0);
 
-    protected override string UpdateConcurrencyTokenMessage
-        => RelationalStrings.UpdateConcurrencyException(1, 0);
+    protected override string UpdateConcurrencyTokenMessage =>
+        RelationalStrings.UpdateConcurrencyException(1, 0);
 }

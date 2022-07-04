@@ -25,7 +25,10 @@ namespace IntelHardwareIntrinsicTest
             }
             catch (Exception e)
             {
-                testResult = (X86Serialize.IsSupported || (e is not PlatformNotSupportedException)) ? Fail : Pass;
+                testResult =
+                    (X86Serialize.IsSupported || (e is not PlatformNotSupportedException))
+                        ? Fail
+                        : Pass;
             }
 
             return testResult;

@@ -109,7 +109,10 @@ namespace ActiveDirectoryComInterop
 
         [DispId(11)]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        void Put([MarshalAs(UnmanagedType.BStr)] [In] string bstrName, [MarshalAs(UnmanagedType.Struct)] [In] object vProp);
+        void Put(
+            [MarshalAs(UnmanagedType.BStr)] [In] string bstrName,
+            [MarshalAs(UnmanagedType.Struct)] [In] object vProp
+        );
 
         [DispId(12)]
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -118,11 +121,18 @@ namespace ActiveDirectoryComInterop
 
         [DispId(13)]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        void PutEx([In] int lnControlCode, [MarshalAs(UnmanagedType.BStr)] [In] string bstrName, [MarshalAs(UnmanagedType.Struct)] [In] object vProp);
+        void PutEx(
+            [In] int lnControlCode,
+            [MarshalAs(UnmanagedType.BStr)] [In] string bstrName,
+            [MarshalAs(UnmanagedType.Struct)] [In] object vProp
+        );
 
         [DispId(14)]
         [MethodImpl(MethodImplOptions.InternalCall)]
-        void GetInfoEx([MarshalAs(UnmanagedType.Struct)] [In] object vProperties, [In] int lnReserved);
+        void GetInfoEx(
+            [MarshalAs(UnmanagedType.Struct)] [In] object vProperties,
+            [In] int lnReserved
+        );
     }
 
     // , TypeLibType(TypeLibTypeFlags.FDual | TypeLibTypeFlags.FDispatchable)

@@ -15,9 +15,17 @@ namespace System.Net.WebSockets.Client.Tests
     {
         public AbortTest(ITestOutputHelper output) : base(output) { }
 
-        [OuterLoop("Uses external servers", typeof(PlatformDetection), nameof(PlatformDetection.LocalEchoServerIsNotAvailable))]
+        [OuterLoop(
+            "Uses external servers",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.LocalEchoServerIsNotAvailable)
+        )]
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/63673", typeof(PlatformDetection), nameof(PlatformDetection.IsNodeJS))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/63673",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNodeJS)
+        )]
         public async Task Abort_ConnectAndAbort_ThrowsWebSocketExceptionWithmessage(Uri server)
         {
             using (var cws = new ClientWebSocket())
@@ -31,7 +39,10 @@ namespace System.Net.WebSockets.Client.Tests
                 cws.Abort();
                 WebSocketException ex = await Assert.ThrowsAsync<WebSocketException>(() => t);
 
-                Assert.Equal(ResourceHelper.GetExceptionMessage("net_webstatus_ConnectFailure"), ex.Message);
+                Assert.Equal(
+                    ResourceHelper.GetExceptionMessage("net_webstatus_ConnectFailure"),
+                    ex.Message
+                );
 
                 if (PlatformDetection.IsNetCore) // bug fix in netcoreapp: https://github.com/dotnet/corefx/pull/35960
                 {
@@ -41,96 +52,136 @@ namespace System.Net.WebSockets.Client.Tests
             }
         }
 
-        [OuterLoop("Uses external servers", typeof(PlatformDetection), nameof(PlatformDetection.LocalEchoServerIsNotAvailable))]
+        [OuterLoop(
+            "Uses external servers",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.LocalEchoServerIsNotAvailable)
+        )]
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         public async Task Abort_SendAndAbort_Success(Uri server)
         {
-            await TestCancellation(async (cws) =>
-            {
-                var cts = new CancellationTokenSource(TimeOutMilliseconds);
+            await TestCancellation(
+                async (cws) =>
+                {
+                    var cts = new CancellationTokenSource(TimeOutMilliseconds);
 
-                Task t = cws.SendAsync(
-                    WebSocketData.GetBufferFromText(".delay5sec"),
-                    WebSocketMessageType.Text,
-                    true,
-                    cts.Token);
+                    Task t = cws.SendAsync(
+                        WebSocketData.GetBufferFromText(".delay5sec"),
+                        WebSocketMessageType.Text,
+                        true,
+                        cts.Token
+                    );
 
-                cws.Abort();
+                    cws.Abort();
 
-                await t;
-            }, server);
+                    await t;
+                },
+                server
+            );
         }
 
-        [OuterLoop("Uses external servers", typeof(PlatformDetection), nameof(PlatformDetection.LocalEchoServerIsNotAvailable))]
+        [OuterLoop(
+            "Uses external servers",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.LocalEchoServerIsNotAvailable)
+        )]
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         public async Task Abort_ReceiveAndAbort_Success(Uri server)
         {
-            await TestCancellation(async (cws) =>
-            {
-                var ctsDefault = new CancellationTokenSource(TimeOutMilliseconds);
+            await TestCancellation(
+                async (cws) =>
+                {
+                    var ctsDefault = new CancellationTokenSource(TimeOutMilliseconds);
 
-                await cws.SendAsync(
-                    WebSocketData.GetBufferFromText(".delay5sec"),
-                    WebSocketMessageType.Text,
-                    true,
-                    ctsDefault.Token);
+                    await cws.SendAsync(
+                        WebSocketData.GetBufferFromText(".delay5sec"),
+                        WebSocketMessageType.Text,
+                        true,
+                        ctsDefault.Token
+                    );
 
-                var recvBuffer = new byte[100];
-                var segment = new ArraySegment<byte>(recvBuffer);
+                    var recvBuffer = new byte[100];
+                    var segment = new ArraySegment<byte>(recvBuffer);
 
-                Task t = cws.ReceiveAsync(segment, ctsDefault.Token);
-                cws.Abort();
+                    Task t = cws.ReceiveAsync(segment, ctsDefault.Token);
+                    cws.Abort();
 
-                await t;
-            }, server);
+                    await t;
+                },
+                server
+            );
         }
 
-        [OuterLoop("Uses external servers", typeof(PlatformDetection), nameof(PlatformDetection.LocalEchoServerIsNotAvailable))]
+        [OuterLoop(
+            "Uses external servers",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.LocalEchoServerIsNotAvailable)
+        )]
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         public async Task Abort_CloseAndAbort_Success(Uri server)
         {
-            await TestCancellation(async (cws) =>
-            {
-                var ctsDefault = new CancellationTokenSource(TimeOutMilliseconds);
+            await TestCancellation(
+                async (cws) =>
+                {
+                    var ctsDefault = new CancellationTokenSource(TimeOutMilliseconds);
 
-                await cws.SendAsync(
-                    WebSocketData.GetBufferFromText(".delay5sec"),
-                    WebSocketMessageType.Text,
-                    true,
-                    ctsDefault.Token);
+                    await cws.SendAsync(
+                        WebSocketData.GetBufferFromText(".delay5sec"),
+                        WebSocketMessageType.Text,
+                        true,
+                        ctsDefault.Token
+                    );
 
-                var recvBuffer = new byte[100];
-                var segment = new ArraySegment<byte>(recvBuffer);
+                    var recvBuffer = new byte[100];
+                    var segment = new ArraySegment<byte>(recvBuffer);
 
-                Task t = cws.CloseAsync(WebSocketCloseStatus.NormalClosure, "AbortClose", ctsDefault.Token);
-                cws.Abort();
+                    Task t = cws.CloseAsync(
+                        WebSocketCloseStatus.NormalClosure,
+                        "AbortClose",
+                        ctsDefault.Token
+                    );
+                    cws.Abort();
 
-                await t;
-            }, server);
+                    await t;
+                },
+                server
+            );
         }
 
-        [OuterLoop("Uses external servers", typeof(PlatformDetection), nameof(PlatformDetection.LocalEchoServerIsNotAvailable))]
+        [OuterLoop(
+            "Uses external servers",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.LocalEchoServerIsNotAvailable)
+        )]
         [ConditionalTheory(nameof(WebSocketsSupported)), MemberData(nameof(EchoServers))]
         public async Task ClientWebSocket_Abort_CloseOutputAsync(Uri server)
         {
-            await TestCancellation(async (cws) =>
-            {
-                var ctsDefault = new CancellationTokenSource(TimeOutMilliseconds);
+            await TestCancellation(
+                async (cws) =>
+                {
+                    var ctsDefault = new CancellationTokenSource(TimeOutMilliseconds);
 
-                await cws.SendAsync(
-                    WebSocketData.GetBufferFromText(".delay5sec"),
-                    WebSocketMessageType.Text,
-                    true,
-                    ctsDefault.Token);
+                    await cws.SendAsync(
+                        WebSocketData.GetBufferFromText(".delay5sec"),
+                        WebSocketMessageType.Text,
+                        true,
+                        ctsDefault.Token
+                    );
 
-                var recvBuffer = new byte[100];
-                var segment = new ArraySegment<byte>(recvBuffer);
+                    var recvBuffer = new byte[100];
+                    var segment = new ArraySegment<byte>(recvBuffer);
 
-                Task t = cws.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "AbortShutdown", ctsDefault.Token);
-                cws.Abort();
+                    Task t = cws.CloseOutputAsync(
+                        WebSocketCloseStatus.NormalClosure,
+                        "AbortShutdown",
+                        ctsDefault.Token
+                    );
+                    cws.Abort();
 
-                await t;
-            }, server);
+                    await t;
+                },
+                server
+            );
         }
     }
 }

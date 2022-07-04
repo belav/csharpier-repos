@@ -18,10 +18,20 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
 {
     internal sealed partial class SnippetExpansionClient : AbstractSnippetExpansionClient
     {
-        public SnippetExpansionClient(IContentType languageServiceGuid, ITextView textView, ITextBuffer subjectBuffer, IExpansionServiceProvider expansionServiceProvider, IGlobalOptionService globalOptions)
-            : base(languageServiceGuid, textView, subjectBuffer, expansionServiceProvider, globalOptions)
-        {
-        }
+        public SnippetExpansionClient(
+            IContentType languageServiceGuid,
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            IExpansionServiceProvider expansionServiceProvider,
+            IGlobalOptionService globalOptions
+        )
+            : base(
+                languageServiceGuid,
+                textView,
+                subjectBuffer,
+                expansionServiceProvider,
+                globalOptions
+            ) { }
 
         /// <returns>The tracking span of the inserted "/**/" if there is an $end$ location, null
         /// otherwise.</returns>
@@ -41,21 +51,40 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             SubjectBuffer.Insert(endPosition, commentString);
 
             var commentSpan = new Span(endPosition, commentString.Length);
-            return SubjectBuffer.CurrentSnapshot.CreateTrackingSpan(commentSpan, SpanTrackingMode.EdgeExclusive);
+            return SubjectBuffer.CurrentSnapshot.CreateTrackingSpan(
+                commentSpan,
+                SpanTrackingMode.EdgeExclusive
+            );
         }
 
-        public override IExpansionFunction? GetExpansionFunction(XElement xmlFunctionNode, string fieldName)
+        public override IExpansionFunction? GetExpansionFunction(
+            XElement xmlFunctionNode,
+            string fieldName
+        )
         {
-            if (!TryGetSnippetFunctionInfo(xmlFunctionNode, out var snippetFunctionName, out var param))
+            if (
+                !TryGetSnippetFunctionInfo(
+                    xmlFunctionNode,
+                    out var snippetFunctionName,
+                    out var param
+                )
+            )
             {
                 throw new ArgumentException();
             }
 
             return snippetFunctionName switch
             {
-                "SimpleTypeName" => new SnippetFunctionSimpleTypeName(this, SubjectBuffer, fieldName, param),
+                "SimpleTypeName"
+                    => new SnippetFunctionSimpleTypeName(this, SubjectBuffer, fieldName, param),
                 "ClassName" => new SnippetFunctionClassName(this, SubjectBuffer, fieldName),
-                "GenerateSwitchCases" => new SnippetFunctionGenerateSwitchCases(this, SubjectBuffer, fieldName, param),
+                "GenerateSwitchCases"
+                    => new SnippetFunctionGenerateSwitchCases(
+                        this,
+                        SubjectBuffer,
+                        fieldName,
+                        param
+                    ),
                 _ => null,
             };
         }

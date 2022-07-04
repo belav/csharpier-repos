@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,7 +40,8 @@ class Program
         i = 10;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -62,7 +64,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -74,7 +77,8 @@ class Program
         int i2 = 10;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -98,7 +102,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -110,7 +115,8 @@ class Program
         [|int i2 = i;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -134,7 +140,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod4()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -148,7 +155,8 @@ class Program
         [|i2 += i;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -175,7 +183,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod5()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -189,7 +198,8 @@ class Program
         [|i2 = i;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -215,7 +225,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod6()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -230,7 +241,8 @@ class Program
         [|field = i;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -257,7 +269,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod7()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -270,7 +283,8 @@ class Program
         [|Test(a);|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -295,7 +309,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod8()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -308,7 +323,8 @@ class Program
         [|Test(a);|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -333,7 +349,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod9()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -348,7 +365,8 @@ class Program
         s = args[0] + i.ToString();|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -375,7 +393,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod10()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -393,7 +412,8 @@ class Program
         Console.WriteLine(s);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -423,7 +443,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod11()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -436,7 +457,8 @@ class Program
         i = 10;
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -461,7 +483,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod11_1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -473,7 +496,8 @@ class Program
         int i2 = 10;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -497,7 +521,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod12()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -512,7 +537,8 @@ class Program
         Console.WriteLine(i);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -540,7 +566,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ControlVariableInForeachStatement()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -554,7 +581,8 @@ class Program
         }
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -580,7 +608,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod14()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -594,7 +623,8 @@ class Program
         }
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -621,7 +651,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod15()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -636,7 +667,8 @@ class Program
         System.Console.WriteLine(i);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -665,7 +697,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod16()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -678,7 +711,8 @@ class Program
         System.Console.WriteLine(i);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -704,7 +738,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod17()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -719,7 +754,8 @@ class Program
         System.Console.WriteLine(t1.ToString());
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -746,7 +782,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod18()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -763,7 +800,8 @@ class Program
         return t = new T();
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -793,7 +831,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod19()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -804,7 +843,8 @@ unsafe class Program
         [|int i = 1;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -827,7 +867,8 @@ unsafe class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod20()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -838,7 +879,8 @@ class Program
         [|int i = 1;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -862,7 +904,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod21()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -876,7 +919,8 @@ class Program
         }
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -902,7 +946,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod22()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -922,7 +967,8 @@ class Program
         Console.WriteLine(i);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -956,7 +1002,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod23()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -968,7 +1015,8 @@ class Program
             [|Console.WriteLine(args[0].ToString());|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -992,7 +1040,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod24()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1001,7 +1050,8 @@ class Program
         int y = [|int.Parse(args[0].ToString())|];
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -1021,7 +1071,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod25()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1035,7 +1086,8 @@ class Program
         }
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1061,7 +1113,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod26()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1075,7 +1128,8 @@ class Program
         }
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1101,7 +1155,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod27()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1121,7 +1176,8 @@ class Program
         Console.WriteLine(i);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1155,7 +1211,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod28()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1166,7 +1223,8 @@ class Program
         [|return 1;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1189,7 +1247,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod29()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1209,7 +1268,8 @@ class Program
         }|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1241,7 +1301,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod30()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1252,7 +1313,8 @@ class Program
         [|i = 10;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1275,7 +1337,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod31()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -1290,7 +1353,8 @@ class Program
         return builder.ToString();
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -1317,7 +1381,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod32()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1327,7 +1392,8 @@ class Program
         Console.Write([|v|]);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -1350,7 +1416,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod33()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1363,7 +1430,8 @@ class Program
         }
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -1390,7 +1458,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod34()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1402,7 +1471,8 @@ class Program
     }
 }
 ";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -1427,7 +1497,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod35()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1436,7 +1507,8 @@ class Program
         int[] r = [|new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 }|];
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -1457,7 +1529,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod36()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1466,7 +1539,8 @@ class Program
         [|i = 1;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -1487,7 +1561,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod37()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1496,7 +1571,8 @@ class Program
         [|i = 1;|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -1518,7 +1594,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod38()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1543,7 +1620,8 @@ class Program
         // unassigned = 0;
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -1582,7 +1660,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod39()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1607,7 +1686,8 @@ class Program
         // unassigned = 0;
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -1649,7 +1729,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod40()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1667,7 +1748,7 @@ class Program
             //        // a        //b
             //        NewMethod();
             await TestExtractMethodAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1676,7 +1757,7 @@ class Program
         [|System.Console.WriteLine();|]
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1689,14 +1770,16 @@ class Program
     {
         System.Console.WriteLine();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(632351, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/632351")]
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodFailForTypeInFromClause()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1710,7 +1793,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodFailForTypeInFromClause_1()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1724,7 +1808,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod41()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1735,7 +1820,8 @@ class Program
         Console.WriteLine(y);
     }
 }";
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1759,7 +1845,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod42()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1771,7 +1858,8 @@ class Program
         Console.Write(a + b);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -1796,7 +1884,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod43()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1815,7 +1904,8 @@ class Program
         Console.Write(a + b);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -1847,7 +1937,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod44()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -1860,7 +1951,8 @@ class Program
         Console.Write(a);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -1886,7 +1978,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod45()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 class Program
@@ -1896,7 +1989,8 @@ class Program
         /**/[|;|]/**/
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 class Program
@@ -1920,7 +2014,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod46()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1938,7 +2033,8 @@ class Program
         x = x + 1;
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1969,7 +2065,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod47()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1981,7 +2078,8 @@ class Program
         [|while (true) Console.WriteLine(x);|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2006,7 +2104,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod48()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2017,7 +2116,8 @@ class Program
         int[] x = [|{ 1, 2, 3 }|];
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2041,7 +2141,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod49()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 class Program
@@ -2051,7 +2152,8 @@ class Program
         int x = [|1|];
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 class Program
@@ -2073,7 +2175,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodNormalProperty()
         {
-            var code = @"
+            var code =
+                @"
 class Class
 {
     private static string name;
@@ -2087,7 +2190,8 @@ class Class
         string str = [|Class.Names|];
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class Class
 {
     private static string name;
@@ -2114,7 +2218,8 @@ class Class
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodAutoProperty()
         {
-            var code = @"
+            var code =
+                @"
 class Class
 {
     public string Name { get; set; }
@@ -2127,7 +2232,8 @@ class Class
             // given span is not an expression
             // selection validator should take care of this case
 
-            var expected = @"
+            var expected =
+                @"
 class Class
 {
     public string Name { get; set; }
@@ -2149,7 +2255,8 @@ class Class
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix3994()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2160,7 +2267,8 @@ class Program
         byte x = [|1|];
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2184,7 +2292,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix3996()
         {
-            var code = @"class A<T>
+            var code =
+                @"class A<T>
 {
     class D : A<T> { }
     class B { }
@@ -2203,7 +2312,8 @@ class Program
     }
 }";
 
-            var expected = @"class A<T>
+            var expected =
+                @"class A<T>
 {
     class D : A<T> { }
     class B { }
@@ -2233,7 +2343,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task InsertionPoint()
         {
-            var code = @"class Test
+            var code =
+                @"class Test
 {
     void Method(string i)
     {
@@ -2245,7 +2356,8 @@ class Program
     }
 }";
 
-            var expected = @"class Test
+            var expected =
+                @"class Test
 {
     void Method(string i)
     {
@@ -2269,7 +2381,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4757()
         {
-            var code = @"class GenericMethod
+            var code =
+                @"class GenericMethod
 {
     void Method<T>(T t)
     {
@@ -2278,7 +2391,8 @@ class Program
     }
 }";
 
-            var expected = @"class GenericMethod
+            var expected =
+                @"class GenericMethod
 {
     void Method<T>(T t)
     {
@@ -2299,7 +2413,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4757_2()
         {
-            var code = @"class GenericMethod<T1>
+            var code =
+                @"class GenericMethod<T1>
 {
     void Method<T>(T t)
     {
@@ -2310,7 +2425,8 @@ class Program
     }
 }";
 
-            var expected = @"class GenericMethod<T1>
+            var expected =
+                @"class GenericMethod<T1>
 {
     void Method<T>(T t)
     {
@@ -2333,7 +2449,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4757_3()
         {
-            var code = @"class GenericMethod
+            var code =
+                @"class GenericMethod
 {
     void Method<T, T1>(T t)
     {
@@ -2344,7 +2461,8 @@ class Program
     }
 }";
 
-            var expected = @"class GenericMethod
+            var expected =
+                @"class GenericMethod
 {
     void Method<T, T1>(T t)
     {
@@ -2367,7 +2485,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4758()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class TestOutParameter
 {
     void Method(out int x)
@@ -2377,7 +2496,8 @@ class TestOutParameter
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class TestOutParameter
 {
     void Method(out int x)
@@ -2399,7 +2519,8 @@ class TestOutParameter
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4758_2()
         {
-            var code = @"class TestOutParameter
+            var code =
+                @"class TestOutParameter
 {
     void Method(out int x)
     {
@@ -2408,7 +2529,8 @@ class TestOutParameter
     }
 }";
 
-            var expected = @"class TestOutParameter
+            var expected =
+                @"class TestOutParameter
 {
     void Method(out int x)
     {
@@ -2429,7 +2551,8 @@ class TestOutParameter
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4761()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class A
 {
@@ -2439,7 +2562,8 @@ class A
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class A
 {
@@ -2461,7 +2585,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4779()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -2473,7 +2598,8 @@ class Program
 }
 ";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -2497,7 +2623,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4779_2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -2509,7 +2636,8 @@ class Program
 }
 ";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -2533,7 +2661,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4780()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -2544,7 +2673,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -2567,7 +2697,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4780_2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -2578,7 +2709,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -2601,7 +2733,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4782()
         {
-            var code = @"class A<T>
+            var code =
+                @"class A<T>
 {
     class D : A<T[]> { }
     class B { }
@@ -2615,7 +2748,8 @@ class Program
     }
 }";
 
-            var expected = @"class A<T>
+            var expected =
+                @"class A<T>
 {
     class D : A<T[]> { }
     class B { }
@@ -2640,7 +2774,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4782_2()
         {
-            var code = @"class A<T>
+            var code =
+                @"class A<T>
 {
     class D : A<T[]> { }
     class B { }
@@ -2661,7 +2796,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4791()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     delegate int Func(int a);
 
@@ -2671,7 +2807,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     delegate int Func(int a);
 
@@ -2693,7 +2830,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4809()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     public Program()
     {
@@ -2701,7 +2839,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     public Program()
     {
@@ -2721,7 +2860,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4813()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -2731,7 +2871,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -2753,7 +2894,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4031()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 class Program
@@ -2768,7 +2910,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 class Program
@@ -2795,7 +2938,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix3992()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 class Program
@@ -2807,7 +2951,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 class Program
@@ -2830,7 +2975,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4823()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     private double area = 1.0;
     public double Area
@@ -2846,7 +2992,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     private double area = 1.0;
     public double Area
@@ -2874,7 +3021,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4762()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2884,7 +3032,8 @@ class Program
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2906,7 +3055,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BugFix4744()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2916,7 +3066,8 @@ class Program
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2937,7 +3088,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoNoNoYesNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
     
 class Program
 {
@@ -2954,7 +3106,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
     
 class Program
 {
@@ -2982,7 +3135,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoNoNoYesNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -2999,7 +3153,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3027,7 +3182,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoNoNoYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3046,7 +3202,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3076,7 +3233,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoNoNoYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3095,7 +3253,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3125,7 +3284,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoNoYesYesNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3143,7 +3303,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3173,7 +3334,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoNoYesYesNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3191,7 +3353,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3220,7 +3383,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoNoYesYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3240,7 +3404,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3272,7 +3437,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoNoYesYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3292,7 +3458,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3323,7 +3490,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoYesNoNoNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3341,7 +3509,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoYesNoNoNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3361,7 +3530,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoYesNoYesNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3378,7 +3548,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3404,7 +3575,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoYesNoYesNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3423,7 +3595,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3453,7 +3626,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoYesYesNoNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3467,7 +3641,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3490,7 +3665,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoYesYesNoNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3506,7 +3682,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3532,7 +3709,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoYesYesYesNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3551,7 +3729,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3579,7 +3758,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoNoYesYesYesNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3600,7 +3780,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3631,7 +3812,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesNoNoYesNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3645,7 +3827,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3668,7 +3851,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesNoNoYesNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3684,7 +3868,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3709,7 +3894,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesNoNoYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3725,7 +3911,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3750,7 +3937,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesNoNoYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3768,7 +3956,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3793,12 +3982,13 @@ class Program
         }
 
         // dataflow in and out can be false for symbols in unreachable code
-        // boolean indicates 
+        // boolean indicates
         // dataFlowIn: false, dataFlowOut: false, alwaysAssigned: true, variableDeclared: false, readInside: true, writtenInside: false, readOutside: false, writtenOutside: true
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesNoYesNoNoYes()
         {
-            var code = @"using System.Collections.Generic;
+            var code =
+                @"using System.Collections.Generic;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -3814,7 +4004,8 @@ namespace ConsoleApp1
     }
 }";
 
-            var expected = @"using System.Collections.Generic;
+            var expected =
+                @"using System.Collections.Generic;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -3839,12 +4030,13 @@ namespace ConsoleApp1
         }
 
         // dataflow in and out can be false for symbols in unreachable code
-        // boolean indicates 
+        // boolean indicates
         // dataFlowIn: false, dataFlowOut: false, alwaysAssigned: true, variableDeclared: false, readInside: true, writtenInside: false, readOutside: true, writtenOutside: true
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesNoYesNoYesYes()
         {
-            var code = @"using System.Collections.Generic;
+            var code =
+                @"using System.Collections.Generic;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -3860,7 +4052,8 @@ namespace ConsoleApp1
     }
 }";
 
-            var expected = @"using System.Collections.Generic;
+            var expected =
+                @"using System.Collections.Generic;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -3888,7 +4081,8 @@ namespace ConsoleApp1
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesNoYesYesNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3903,7 +4097,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3928,7 +4123,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesNoYesYesNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3943,7 +4139,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -3968,7 +4165,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesNoYesYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -3985,7 +4183,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4012,7 +4211,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesNoYesYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4029,7 +4229,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4056,7 +4257,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesYesNoYesNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4068,7 +4270,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4089,7 +4292,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesYesNoYesNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4103,7 +4307,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4126,7 +4331,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesYesYesYesNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4139,7 +4345,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4161,7 +4368,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoNoYesYesYesYesNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4176,7 +4384,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4201,7 +4410,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesNoNoNoYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4220,7 +4430,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4250,7 +4461,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesNoNoNoYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4269,7 +4481,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4299,7 +4512,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesNoNoYesYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4319,7 +4533,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4350,7 +4565,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesNoNoYesYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4370,7 +4586,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4401,7 +4618,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesNoYesNoNoYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4421,7 +4639,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesNoYesNoNoYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4443,7 +4662,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesNoYesNoYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4462,7 +4682,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4492,7 +4713,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesNoYesNoYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4513,7 +4735,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4545,7 +4768,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesNoYesYesNoYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4561,7 +4785,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4587,7 +4812,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesNoYesYesNoYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4605,7 +4831,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4633,7 +4860,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesNoYesYesYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4654,7 +4882,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4685,7 +4914,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesNoYesYesYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4708,7 +4938,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4741,7 +4972,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesYesNoNoYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4757,7 +4989,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4782,7 +5015,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesYesNoNoYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4800,7 +5034,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4827,7 +5062,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesYesNoYesYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4844,7 +5080,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4871,7 +5108,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesYesNoYesYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4888,7 +5126,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4915,7 +5154,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesYesYesNoYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4929,7 +5169,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4952,7 +5193,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesYesYesNoYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -4968,7 +5210,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -4993,7 +5236,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesYesYesYesYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5009,7 +5253,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5035,7 +5280,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_NoYesYesYesYesYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5053,7 +5299,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5081,7 +5328,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesNoNoNoYesNoNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5095,7 +5343,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5118,7 +5367,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesNoNoNoYesNoNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5132,7 +5382,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5155,7 +5406,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesNoNoNoYesNoYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5171,7 +5423,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5196,7 +5449,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesNoNoNoYesNoYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5212,7 +5466,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5237,7 +5492,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesNoNoNoYesYesNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5256,7 +5512,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5286,7 +5543,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesNoNoNoYesYesNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5305,7 +5563,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5335,7 +5594,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesNoNoNoYesYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5356,7 +5616,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5388,7 +5649,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesNoNoNoYesYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5409,7 +5671,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5441,7 +5704,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesNoYesNoYesYesNoNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5457,7 +5721,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5483,7 +5748,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesNoYesNoYesYesNoYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5499,7 +5765,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5525,7 +5792,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesNoYesNoYesYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5543,7 +5811,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5571,7 +5840,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesNoYesNoYesYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5589,7 +5859,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5617,7 +5888,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesYesNoNoYesYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5638,7 +5910,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5670,7 +5943,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesYesNoNoYesYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5691,7 +5965,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5723,7 +5998,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesYesYesNoYesYesYesNo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5741,7 +6017,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5769,7 +6046,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task MatrixCase_YesYesYesNoYesYesYesYes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -5787,7 +6065,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -5816,7 +6095,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodInProperty1()
         {
-            var code = @"class C2
+            var code =
+                @"class C2
 {
     static public int Area
     {
@@ -5836,7 +6116,8 @@ class C3
 }
 ";
 
-            var expected = @"class C2
+            var expected =
+                @"class C2
 {
     static public int Area
     {
@@ -5868,7 +6149,8 @@ class C3
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodInProperty2()
         {
-            var code = @"class C3
+            var code =
+                @"class C3
 {
     public static int Area
     {
@@ -5881,7 +6163,8 @@ class C3
 }
 ";
 
-            var expected = @"class C3
+            var expected =
+                @"class C3
 {
     public static int Area
     {
@@ -5905,7 +6188,8 @@ class C3
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodInProperty3()
         {
-            var code = @"class C3
+            var code =
+                @"class C3
 {
     public static int Area
     {
@@ -5917,7 +6201,8 @@ class C3
 }
 ";
 
-            var expected = @"class C3
+            var expected =
+                @"class C3
 {
     public static int Area
     {
@@ -5941,7 +6226,8 @@ class C3
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodProperty()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     private double area = 1.0;
     public double Area
@@ -5959,7 +6245,8 @@ class C3
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     private double area = 1.0;
     public double Area
@@ -5988,7 +6275,8 @@ class C3
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodWithDeclareOneMoreVariablesInSameLineBeUsedAfter()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void M()
     {
@@ -5997,7 +6285,8 @@ class C3
         Console.Write(x + y);
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void M()
     {
@@ -6019,14 +6308,16 @@ class C3
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodWithDeclareOneMoreVariablesInSameLineNotBeUsedAfter()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void M()
     {
         [|int x, y = 1;|]
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void M()
     {
@@ -6045,7 +6336,8 @@ class C3
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodForSplitOutStatementWithComments()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void M()
     {
@@ -6057,7 +6349,8 @@ class C3
         Console.Write(x + y);
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void M()
     {
@@ -6081,7 +6374,8 @@ class C3
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug5098()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -6097,7 +6391,8 @@ class C3
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug5107()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -6108,7 +6403,8 @@ class C3
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -6131,7 +6427,8 @@ class C3
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task LambdaLiftedVariable1()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     delegate void Func(ref int i, int r);
     static void Main(string[] args)
@@ -6146,7 +6443,8 @@ class C3
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     delegate void Func(ref int i, int r);
     static void Main(string[] args)
@@ -6173,7 +6471,8 @@ class C3
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task LambdaLiftedVariable2()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     delegate void Action();
     static void Main(string[] args)
@@ -6192,7 +6491,8 @@ class C3
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     delegate void Action();
     static void Main(string[] args)
@@ -6223,7 +6523,8 @@ class C3
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug5533()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     delegate void TestDelegate(ref int x);
@@ -6236,7 +6537,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     delegate void TestDelegate(ref int x);
@@ -6261,7 +6563,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug5533_1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     delegate void TestDelegate(ref int x);
@@ -6274,7 +6577,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     delegate void TestDelegate(ref int x);
@@ -6299,7 +6603,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug5533_2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     delegate void TestDelegate(ref int x);
@@ -6312,7 +6617,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     delegate void TestDelegate(ref int x);
@@ -6338,7 +6644,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug5533_3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     delegate void TestDelegate(ref int x);
@@ -6351,7 +6658,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     delegate void TestDelegate(ref int x);
@@ -6376,7 +6684,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task LambdaLiftedVariable3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -6395,7 +6704,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -6426,7 +6736,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug5982()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -6438,7 +6749,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -6462,7 +6774,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6041()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     delegate R Del<in T, out R>(T arg);
@@ -6473,7 +6786,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     delegate R Del<in T, out R>(T arg);
@@ -6496,7 +6810,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod50()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -6511,7 +6826,8 @@ class Program
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void Method()
     {
@@ -6537,7 +6853,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod51()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -6556,7 +6873,8 @@ class Program
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void Method()
     {
@@ -6586,7 +6904,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod52()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -6598,7 +6917,8 @@ class Program
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void Method()
     {
@@ -6622,7 +6942,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod53()
         {
-            var code = @"class Class
+            var code =
+                @"class Class
 {
     void Main()
     {
@@ -6638,7 +6959,8 @@ enum Enum { }";
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethod54()
         {
-            var code = @"class Class
+            var code =
+                @"class Class
 {
     void Main([|string|][] args)
     {
@@ -6652,7 +6974,8 @@ enum Enum { }";
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6220()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Main()
     {
@@ -6661,7 +6984,8 @@ enum Enum { }";
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void Main()
     {
@@ -6681,7 +7005,8 @@ enum Enum { }";
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6220_1()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Main()
     {
@@ -6690,7 +7015,8 @@ enum Enum { }";
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void Main()
     {
@@ -6710,7 +7036,8 @@ enum Enum { }";
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6219()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Main()
     {
@@ -6719,7 +7046,8 @@ enum Enum { }";
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void Main()
     {
@@ -6739,7 +7067,8 @@ enum Enum { }";
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6230()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void M()
     {
@@ -6748,7 +7077,8 @@ enum Enum { }";
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void M()
     {
@@ -6768,7 +7098,8 @@ enum Enum { }";
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6230_1()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void M()
     {
@@ -6777,7 +7108,8 @@ enum Enum { }";
     }
 }";
 
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void M()
     {
@@ -6797,7 +7129,8 @@ enum Enum { }";
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6197()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -6813,7 +7146,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -6840,7 +7174,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6277()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -6853,7 +7188,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -6876,7 +7212,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ArgumentlessReturnWithConstIfExpression()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -6888,7 +7225,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -6912,7 +7250,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ArgumentlessReturnWithConstIfExpression_1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -6925,7 +7264,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -6952,7 +7292,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ArgumentlessReturnWithConstIfExpression_2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -6963,7 +7304,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -6985,7 +7327,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ArgumentlessReturnWithConstIfExpression_3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -6997,7 +7340,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -7023,7 +7367,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6313()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -7037,7 +7382,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -7062,7 +7408,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6313_1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -7083,7 +7430,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6313_2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -7104,7 +7452,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6313_3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -7126,7 +7475,8 @@ class Program
         };|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -7160,7 +7510,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6313_4()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -7189,7 +7540,8 @@ class Program
         Console.WriteLine(1);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -7230,7 +7582,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6313_5()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -7247,7 +7600,8 @@ class Program
         };
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -7276,7 +7630,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6313_6()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -7300,7 +7655,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6333()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -7310,7 +7666,8 @@ class Program
         [|p = new Program()|];
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -7333,7 +7690,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6393()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -7343,7 +7701,8 @@ class Program
         return abcd;
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -7366,7 +7725,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6351()
         {
-            var code = @"class Test
+            var code =
+                @"class Test
 {
     void method()
     {
@@ -7382,7 +7742,8 @@ class Program
         }
     }
 }";
-            var expected = @"class Test
+            var expected =
+                @"class Test
 {
     void method()
     {
@@ -7411,7 +7772,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6351_1()
         {
-            var code = @"class Test
+            var code =
+                @"class Test
 {
     void method()
     {
@@ -7427,7 +7789,8 @@ class Program
         }
     }
 }";
-            var expected = @"class Test
+            var expected =
+                @"class Test
 {
     void method()
     {
@@ -7456,7 +7819,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6351_2()
         {
-            var code = @"class Test
+            var code =
+                @"class Test
 {
     void method()
     {
@@ -7472,7 +7836,8 @@ class Program
         }|]
     }
 }";
-            var expected = @"class Test
+            var expected =
+                @"class Test
 {
     void method()
     {
@@ -7499,7 +7864,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6560()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -7508,7 +7874,8 @@ class Program
         int Y = S.Length;
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -7530,12 +7897,14 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6562()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     int y = [|10|];
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     int y = GetY();
@@ -7553,7 +7922,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6562_1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     const int i = [|10|];
@@ -7565,12 +7935,14 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6562_2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     Func<string> f = [|() => ""test""|];
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     Func<string> f = GetF();
@@ -7588,12 +7960,14 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6562_3()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     Func<string> f = () => [|""test""|];
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     Func<string> f = () => NewMethod();
@@ -7611,7 +7985,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6598()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7629,7 +8004,8 @@ class
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Bug6613()
         {
-            var code = @"#define A
+            var code =
+                @"#define A
 using System;
 
 class Program
@@ -7641,7 +8017,8 @@ class Program
         #endif 
     }
 }";
-            var expected = @"#define A
+            var expected =
+                @"#define A
 using System;
 
 class Program
@@ -7666,7 +8043,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task InvalidSelection_MethodBody()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -7691,14 +8069,16 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task StructThis()
         {
-            var code = @"struct S
+            var code =
+                @"struct S
 {
     void Goo()
     {
         [|this = new S();|]
     }
 }";
-            var expected = @"struct S
+            var expected =
+                @"struct S
 {
     void Goo()
     {
@@ -7717,7 +8097,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task DontUseConvertedTypeForImplicitNumericConversion()
         {
-            var code = @"class T
+            var code =
+                @"class T
 {
     void Goo()
     {
@@ -7725,7 +8106,8 @@ class Program
         long x2 = [|x1|];
     }
 }";
-            var expected = @"class T
+            var expected =
+                @"class T
 {
     void Goo()
     {
@@ -7745,7 +8127,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task BreakInSelection()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
  
@@ -7785,7 +8168,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task UnreachableCodeWithReturnStatement()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -7797,7 +8181,8 @@ class Program
         return;
     }
 }";
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -7821,7 +8206,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task DontBlindlyPutCapturedVariable1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     private static readonly int v = 5;
@@ -7844,7 +8230,8 @@ namespace Ros
         }
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     private static readonly int v = 5;
@@ -7879,7 +8266,8 @@ namespace Ros
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task DontBlindlyPutCapturedVariable2()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Program
 {
     private static readonly int v = 5;
@@ -7892,7 +8280,8 @@ class Program
         d(3);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Program
 {
     private static readonly int v = 5;
@@ -7917,7 +8306,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task DontCrashOnRangeVariableSymbol()
         {
-            var code = @"class Test
+            var code =
+                @"class Test
 {
     public void Linq1()
     {
@@ -7931,7 +8321,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractRangeVariable()
         {
-            var code = @"using System.Linq;
+            var code =
+                @"using System.Linq;
 class Test
 {
     public void Linq1()
@@ -7941,7 +8332,8 @@ class Test
     }
 }";
 
-            var expected = @"using System.Linq;
+            var expected =
+                @"using System.Linq;
 class Test
 {
     public void Linq1()
@@ -7962,7 +8354,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task GenericWithErrorType()
         {
-            var code = @"using Goo.Utilities;
+            var code =
+                @"using Goo.Utilities;
 class Goo<T>
 {
 }
@@ -7986,7 +8379,8 @@ namespace Goo.Utilities
         }
     }
 }";
-            var expected = @"using Goo.Utilities;
+            var expected =
+                @"using Goo.Utilities;
 class Goo<T>
 {
 }
@@ -8023,7 +8417,8 @@ namespace Goo.Utilities
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task NamedArgument()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class C
 {
@@ -8034,7 +8429,8 @@ class C
         var y = this[[|y|]: 1];
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class C
 {
@@ -8058,7 +8454,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task QueryExpressionVariable()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -8073,7 +8470,8 @@ class Program
             select a;
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -8101,7 +8499,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task IsExpression()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 class Class1
 {
 }
@@ -8115,7 +8514,8 @@ class IsTest
     {
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 class Class1
 {
 }
@@ -8143,7 +8543,8 @@ class IsTest
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TypeParametersInConstraint()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
  
 class A
@@ -8153,7 +8554,8 @@ class A
         var y = [|x.Count|];
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
  
 class A
@@ -8176,7 +8578,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task GlobalNamespaceInReturnType()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     class System
     {
@@ -8184,7 +8587,8 @@ class A
     }
     static global::System.Action a = () => { global::System.Console.WriteLine(); [|}|];
 }";
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     class System
     {
@@ -8205,7 +8609,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodExpandSelectionOnFor()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -8218,7 +8623,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -8240,7 +8646,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodNotContainerOnFor()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -8250,7 +8657,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -8271,7 +8679,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodExpandSelectionOnForeach()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -8284,7 +8693,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -8306,7 +8716,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodNotContainerOnForeach()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -8319,7 +8730,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -8343,7 +8755,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodNotContainerOnElseClause()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -8358,7 +8771,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -8384,7 +8798,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodExpandSelectionOnLabel()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -8397,7 +8812,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -8421,7 +8837,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodNotContainerOnLabel()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -8434,7 +8851,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -8458,7 +8876,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodExpandSelectionOnSwitch()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -8472,7 +8891,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -8497,7 +8917,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodNotContainerOnSwitch()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -8511,7 +8932,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -8536,7 +8958,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodExpandSelectionOnDo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -8549,7 +8972,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -8571,7 +8995,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodNotContainerOnDo()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -8584,7 +9009,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -8608,7 +9034,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodExpandSelectionOnWhile()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -8621,7 +9048,8 @@ class Program
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -8643,14 +9071,16 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodExpandSelectionOnStruct()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 struct Goo
 {
     static Action a = () => { Console.WriteLine(); [|}|];
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 struct Goo
 {
@@ -8669,7 +9099,8 @@ struct Goo
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodIncludeGlobal()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     class System
     {
@@ -8681,7 +9112,8 @@ struct Goo
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     class System
     {
@@ -8706,7 +9138,8 @@ struct Goo
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodExpandSelection()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -8717,7 +9150,8 @@ struct Goo
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -8738,7 +9172,8 @@ struct Goo
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodRename1()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main()
     {
@@ -8749,7 +9184,8 @@ struct Goo
     private static void NewMethod2() { }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main()
     {
@@ -8773,7 +9209,8 @@ struct Goo
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodRename2()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main()
     {
@@ -8790,7 +9227,8 @@ struct Goo
     private static void NewMethod2() { }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main()
     {
@@ -8820,7 +9258,8 @@ struct Goo
         public async Task ExtractMethodInInteractive1()
         {
             var code = @"int i; [|i = 2|]; i = 3;";
-            var expected = @"int i; i = NewMethod();
+            var expected =
+                @"int i; i = NewMethod();
 
 static int NewMethod()
 {
@@ -8835,7 +9274,8 @@ i = 3;";
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TypeParametersInConstraint1()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
  
 class A
@@ -8845,7 +9285,8 @@ class A
         var y = [|x.Count|];
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
  
 class A
@@ -8869,7 +9310,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TypeParametersInConstraint2()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 interface I<T> where T : IComparable<T>
@@ -8885,7 +9327,8 @@ class A
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 interface I<T> where T : IComparable<T>
@@ -8917,7 +9360,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TypeParametersInConstraint3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 interface I<T> where T : class
@@ -8933,7 +9377,8 @@ class A
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 interface I<T> where T : class
@@ -8964,7 +9409,8 @@ class A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TypeParametersInConstraint4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -8992,7 +9438,8 @@ class B : A
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -9035,7 +9482,8 @@ class B : A
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TypeParametersInConstraintBestEffort()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9055,7 +9503,8 @@ class B : A<string>
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9088,7 +9537,8 @@ class B : A<string>
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ConstructedTypes()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
  
 class Program
@@ -9099,7 +9549,8 @@ class Program
         Action a = () => Console.WriteLine([|x.Count|]);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
  
 class Program
@@ -9123,7 +9574,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TypeInDefault()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
  
@@ -9148,7 +9600,8 @@ class Node<K, T> where T : new()
         Console.WriteLine(Key);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
  
@@ -9186,13 +9639,15 @@ class Node<K, T> where T : new()
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task Script_ArgumentException()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 public static void GetNonVirtualMethod<TDelegate>( Type type, string name)
 {
     Type delegateType = typeof(TDelegate);
      var invoke = [|delegateType|].GetMethod(""Invoke"");
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 public static void GetNonVirtualMethod<TDelegate>( Type type, string name)
 {
     Type delegateType = typeof(TDelegate);
@@ -9211,7 +9666,8 @@ static Type GetDelegateType(Type delegateType)
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ReadOutSideIsUnReachable()
         {
-            var code = @"class Test
+            var code =
+                @"class Test
 {
     public static void Main()
     {
@@ -9225,7 +9681,8 @@ static Type GetDelegateType(Type delegateType)
         System.Console.Write(obj);
     }
 }";
-            var expected = @"class Test
+            var expected =
+                @"class Test
 {
     public static void Main()
     {
@@ -9253,14 +9710,16 @@ static Type GetDelegateType(Type delegateType)
         [WorkItem(543186, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543186")]
         public async Task AnonymousTypePropertyName()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void M()
     {
         var x = new { [|String|] = true };
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void M()
     {
@@ -9279,13 +9738,15 @@ static Type GetDelegateType(Type delegateType)
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ArgumentOfBaseConstrInit()
         {
-            var code = @"class O
+            var code =
+                @"class O
 {
     public O(int t) : base([|t|])
     {
     }
 }";
-            var expected = @"class O
+            var expected =
+                @"class O
 {
     public O(int t) : base(GetT(t))
     {
@@ -9303,7 +9764,8 @@ static Type GetDelegateType(Type delegateType)
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task UnsafeType()
         {
-            var code = @"
+            var code =
+                @"
 unsafe class O
 {
     unsafe public O(int t)
@@ -9311,7 +9773,8 @@ unsafe class O
         [|t = 1;|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 unsafe class O
 {
     unsafe public O(int t)
@@ -9332,7 +9795,8 @@ unsafe class O
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task CastExpressionWithImplicitUserDefinedConversion()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static public implicit operator long(C i)
@@ -9346,7 +9810,8 @@ class C
         int y1 = [|(int)c|];
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static public implicit operator long(C i)
@@ -9373,7 +9838,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task FixedPointerVariable()
         {
-            var code = @"
+            var code =
+                @"
 class Test
 {
     static int x = 0;
@@ -9385,7 +9851,8 @@ class Test
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     static int x = 0;
@@ -9410,7 +9877,8 @@ class Test
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task PointerDeclarationStatement()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     unsafe static void Main()
@@ -9419,7 +9887,8 @@ class Program
         [|int* p2 = p1;|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class Program
 {
     unsafe static void Main()
@@ -9441,7 +9910,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task PrecededByCastExpr()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     static void Main()
@@ -9449,7 +9919,8 @@ class Program
         int i1 = (int)[|5L|];
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class Program
 {
     static void Main()
@@ -9470,7 +9941,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExpressionWithLocalConst()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -9478,7 +9950,8 @@ class Program
         [|a = null;|]
     }
 }";
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -9500,7 +9973,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExpressionWithLocalConst2()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -9508,7 +9982,8 @@ class Program
         [|a = null;|]
     }
 }";
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -9530,7 +10005,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task HiddenPosition()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -9548,10 +10024,12 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task NoCrashInteractive()
         {
-            var code = @"[|if (true)
+            var code =
+                @"[|if (true)
 {
 }|]";
-            var expected = @"NewMethod();
+            var expected =
+                @"NewMethod();
 
 static void NewMethod()
 {
@@ -9560,7 +10038,11 @@ static void NewMethod()
     }
 }";
 
-            await TestExtractMethodAsync(code, expected, parseOptions: new CSharpParseOptions(kind: SourceCodeKind.Script));
+            await TestExtractMethodAsync(
+                code,
+                expected,
+                parseOptions: new CSharpParseOptions(kind: SourceCodeKind.Script)
+            );
         }
 
         [WorkItem(530322, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530322")]
@@ -9568,7 +10050,7 @@ static void NewMethod()
         public async Task ExtractMethodShouldNotBreakFormatting()
         {
             var code =
-@"class C
+                @"class C
 {
     void M(int i, int j, int k)
     {
@@ -9577,7 +10059,8 @@ static void NewMethod()
           2);
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     void M(int i, int j, int k)
     {
@@ -9600,7 +10083,7 @@ static void NewMethod()
         public async Task TestExtractLiteralExpression()
         {
             var code =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -9612,7 +10095,8 @@ class C
 {
     public dynamic X;
 }";
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main()
     {
@@ -9638,7 +10122,7 @@ class C
         public async Task TestExtractCollectionInitializer()
         {
             var code =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -9650,7 +10134,8 @@ class C
 {
     public dynamic X;
 }";
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main()
     {
@@ -9676,7 +10161,7 @@ class C
         public async Task TestExtractCollectionInitializer2()
         {
             var code =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 class Program
 {
@@ -9687,7 +10172,8 @@ class Program
         return new Program { A = { { [|a + 2|], 0 } } }.A.Count;
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 class Program
 {
@@ -9712,7 +10198,7 @@ class Program
         public async Task TestCoClassImplicitConversion()
         {
             var code =
-@"using System;
+                @"using System;
 using System.Runtime.InteropServices;
  
 [CoClass(typeof(C))]
@@ -9727,7 +10213,8 @@ class C : I
         [|new I()|]; // Extract Method
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Runtime.InteropServices;
  
 [CoClass(typeof(C))]
@@ -9756,7 +10243,7 @@ class C : I
         public async Task TestOverloadResolution()
         {
             var code =
-@"using System;
+                @"using System;
  
 static class C
 {
@@ -9779,7 +10266,8 @@ static class E
 {
     public static void Ex(this int x) { }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
  
 static class C
 {
@@ -9816,7 +10304,7 @@ static class E
         public async Task TestOverloadResolution1()
         {
             var code =
-@"using System;
+                @"using System;
  
 static class C
 {
@@ -9839,7 +10327,8 @@ static class E
 {
     public static void Ex(this int x) { }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
  
 static class C
 {
@@ -9876,7 +10365,7 @@ static class E
         public async Task TestOverloadResolution2()
         {
             var code =
-@"using System;
+                @"using System;
  
 static class C
 {
@@ -9899,7 +10388,8 @@ static class E
 {
     public static void Ex(this int x) { }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
  
 static class C
 {
@@ -9936,7 +10426,7 @@ static class E
         public async Task TestTreatEnumSpecial()
         {
             var code =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -9953,7 +10443,8 @@ class Program
         [|Console.WriteLine(a);|]
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -9984,7 +10475,7 @@ class Program
         public async Task TestReturnStatementInAsyncMethod()
         {
             var code =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
  
 class C
 {
@@ -9994,7 +10485,8 @@ class C
         [|return 3;|]
     }
 }";
-            var expected = @"using System.Threading.Tasks;
+            var expected =
+                @"using System.Threading.Tasks;
  
 class C
 {
@@ -10018,7 +10510,7 @@ class C
         public async Task TestAsyncMethodWithRefOrOutParameters()
         {
             var code =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
  
 class C
 {
@@ -10040,7 +10532,7 @@ class C
         public async Task TestAsyncMethodWithWellKnownValueType()
         {
             var code =
-@"using System;
+                @"using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10062,7 +10554,8 @@ class Program
         Console.WriteLine(i);
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10096,7 +10589,7 @@ class Program
         public async Task TestAsyncMethodWithWellKnownValueType1()
         {
             var code =
-@"using System;
+                @"using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10125,7 +10618,7 @@ class Program
         public async Task TestDontPutOutOrRefForStructOff()
         {
             var code =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 namespace ClassLibrary9
 {
@@ -10158,7 +10651,7 @@ namespace ClassLibrary9
         public async Task TestDontPutOutOrRefForStructOn()
         {
             var code =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 namespace ClassLibrary9
 {
@@ -10185,7 +10678,7 @@ namespace ClassLibrary9
     }
 }";
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 namespace ClassLibrary9
 {
@@ -10225,11 +10718,14 @@ namespace ClassLibrary9
         [InlineData("remove", "add")]
         [WorkItem(17474, "https://github.com/dotnet/roslyn/issues/17474")]
         [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
-        public async Task TestExtractMethodEventAccessorUnresolvedName(string testedAccessor, string untestedAccessor)
+        public async Task TestExtractMethodEventAccessorUnresolvedName(
+            string testedAccessor,
+            string untestedAccessor
+        )
         {
             // This code intentionally omits a 'using System;'
             var code =
-$@"namespace ClassLibrary9
+                $@"namespace ClassLibrary9
 {{
     public class Class
     {{
@@ -10241,7 +10737,7 @@ $@"namespace ClassLibrary9
     }}
 }}";
             var expected =
-$@"namespace ClassLibrary9
+                $@"namespace ClassLibrary9
 {{
     public class Class
     {{
@@ -10266,7 +10762,7 @@ $@"namespace ClassLibrary9
         public async Task TestExtractMethodRefPassThrough()
         {
             var code =
-@"using System;
+                @"using System;
 
 namespace ClassLibrary9
 {
@@ -10279,7 +10775,7 @@ namespace ClassLibrary9
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 
 namespace ClassLibrary9
 {
@@ -10305,7 +10801,7 @@ namespace ClassLibrary9
         public async Task TestExtractMethodRefPassThroughDuplicateVariable()
         {
             var code =
-@"using System;
+                @"using System;
 
 namespace ClassLibrary9
 {
@@ -10333,7 +10829,7 @@ namespace ClassLibrary9
     }
 }";
             var expected =
-@"using System;
+                @"using System;
 
 namespace ClassLibrary9
 {
@@ -10373,10 +10869,18 @@ namespace ClassLibrary9
         public async Task ExtractMethod_Argument1()
         {
             var service = new CSharpExtractMethodService();
-            Assert.NotNull(await Record.ExceptionAsync(async () =>
-            {
-                var tree = await service.ExtractMethodAsync(document: null, textSpan: default, localFunction: false, options: default, CancellationToken.None);
-            }));
+            Assert.NotNull(
+                await Record.ExceptionAsync(async () =>
+                {
+                    var tree = await service.ExtractMethodAsync(
+                        document: null,
+                        textSpan: default,
+                        localFunction: false,
+                        options: default,
+                        CancellationToken.None
+                    );
+                })
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
@@ -10384,14 +10888,23 @@ namespace ClassLibrary9
         {
             var solution = new AdhocWorkspace().CurrentSolution;
             var projectId = ProjectId.CreateNewId();
-            var project = solution.AddProject(projectId, "Project", "Project.dll", LanguageNames.CSharp).GetProject(projectId);
+            var project = solution
+                .AddProject(projectId, "Project", "Project.dll", LanguageNames.CSharp)
+                .GetProject(projectId);
 
-            var document = project.AddMetadataReference(TestMetadata.Net451.mscorlib)
-                                  .AddDocument("Document", SourceText.From(""));
+            var document = project
+                .AddMetadataReference(TestMetadata.Net451.mscorlib)
+                .AddDocument("Document", SourceText.From(""));
 
             var service = new CSharpExtractMethodService() as IExtractMethodService;
 
-            await service.ExtractMethodAsync(document, textSpan: default, localFunction: false, ExtractMethodGenerationOptions.GetDefault(project.LanguageServices), CancellationToken.None);
+            await service.ExtractMethodAsync(
+                document,
+                textSpan: default,
+                localFunction: false,
+                ExtractMethodGenerationOptions.GetDefault(project.LanguageServices),
+                CancellationToken.None
+            );
         }
 
         [WpfFact]
@@ -10399,22 +10912,34 @@ namespace ClassLibrary9
         [Trait(Traits.Feature, Traits.Features.Interactive)]
         public void ExtractMethodCommandDisabledInSubmission()
         {
-            using var workspace = TestWorkspace.Create(XElement.Parse(@"
+            using var workspace = TestWorkspace.Create(
+                XElement.Parse(
+                    @"
                 <Workspace>
                     <Submission Language=""C#"" CommonReferences=""true"">  
                         typeof(string).$$Name
                     </Submission>
-                </Workspace> "),
+                </Workspace> "
+                ),
                 workspaceKind: WorkspaceKind.Interactive,
-                composition: EditorTestCompositions.EditorFeaturesWpf);
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             // Force initialization.
-            workspace.GetOpenDocumentIds().Select(id => workspace.GetTestDocument(id).GetTextView()).ToList();
+            workspace
+                .GetOpenDocumentIds()
+                .Select(id => workspace.GetTestDocument(id).GetTextView())
+                .ToList();
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler = workspace.ExportProvider.GetCommandHandler<ExtractMethodCommandHandler>(PredefinedCommandHandlerNames.ExtractMethod, ContentTypeNames.CSharpContentType);
+            var handler = workspace.ExportProvider.GetCommandHandler<ExtractMethodCommandHandler>(
+                PredefinedCommandHandlerNames.ExtractMethod,
+                ContentTypeNames.CSharpContentType
+            );
 
-            var state = handler.GetCommandState(new ExtractMethodCommandArgs(textView, textView.TextBuffer));
+            var state = handler.GetCommandState(
+                new ExtractMethodCommandArgs(textView, textView.TextBuffer)
+            );
             Assert.True(state.IsUnspecified);
         }
 
@@ -10422,7 +10947,8 @@ namespace ClassLibrary9
         [WorkItem(18347, "https://github.com/dotnet/roslyn/issues/18347")]
         public async Task ExtractMethodUnreferencedLocalFunction1()
         {
-            var code = @"namespace ExtractMethodCrashRepro
+            var code =
+                @"namespace ExtractMethodCrashRepro
 {
     public static class SomeClass
     {
@@ -10434,7 +10960,8 @@ namespace ClassLibrary9
         }
     }
 }";
-            var expected = @"namespace ExtractMethodCrashRepro
+            var expected =
+                @"namespace ExtractMethodCrashRepro
 {
     public static class SomeClass
     {
@@ -10459,7 +10986,8 @@ namespace ClassLibrary9
         [WorkItem(18347, "https://github.com/dotnet/roslyn/issues/18347")]
         public async Task ExtractMethodUnreferencedLocalFunction2()
         {
-            var code = @"namespace ExtractMethodCrashRepro
+            var code =
+                @"namespace ExtractMethodCrashRepro
 {
     public static class SomeClass
     {
@@ -10471,7 +10999,8 @@ namespace ClassLibrary9
         }
     }
 }";
-            var expected = @"namespace ExtractMethodCrashRepro
+            var expected =
+                @"namespace ExtractMethodCrashRepro
 {
     public static class SomeClass
     {
@@ -10496,7 +11025,8 @@ namespace ClassLibrary9
         [WorkItem(18347, "https://github.com/dotnet/roslyn/issues/18347")]
         public async Task ExtractMethodUnreferencedLocalFunction3()
         {
-            var code = @"namespace ExtractMethodCrashRepro
+            var code =
+                @"namespace ExtractMethodCrashRepro
 {
     public static class SomeClass
     {
@@ -10508,7 +11038,8 @@ namespace ClassLibrary9
         }
     }
 }";
-            var expected = @"namespace ExtractMethodCrashRepro
+            var expected =
+                @"namespace ExtractMethodCrashRepro
 {
     public static class SomeClass
     {
@@ -10534,7 +11065,8 @@ namespace ClassLibrary9
         [WorkItem(18347, "https://github.com/dotnet/roslyn/issues/18347")]
         public async Task ExtractMethodUnreferencedLocalFunction4()
         {
-            var code = @"namespace ExtractMethodCrashRepro
+            var code =
+                @"namespace ExtractMethodCrashRepro
 {
     public static class SomeClass
     {
@@ -10546,7 +11078,8 @@ namespace ClassLibrary9
         }
     }
 }";
-            var expected = @"namespace ExtractMethodCrashRepro
+            var expected =
+                @"namespace ExtractMethodCrashRepro
 {
     public static class SomeClass
     {
@@ -10572,7 +11105,8 @@ namespace ClassLibrary9
         [WorkItem(18347, "https://github.com/dotnet/roslyn/issues/18347")]
         public async Task ExtractMethodUnreferencedLocalFunction5()
         {
-            var code = @"namespace ExtractMethodCrashRepro
+            var code =
+                @"namespace ExtractMethodCrashRepro
 {
     public static class SomeClass
     {
@@ -10586,7 +11120,8 @@ namespace ClassLibrary9
         }
     }
 }";
-            var expected = @"namespace ExtractMethodCrashRepro
+            var expected =
+                @"namespace ExtractMethodCrashRepro
 {
     public static class SomeClass
     {
@@ -10618,7 +11153,8 @@ namespace ClassLibrary9
         [WorkItem(18347, "https://github.com/dotnet/roslyn/issues/18347")]
         public async Task ExtractMethodFlowsToLocalFunction1(string usageSyntax)
         {
-            var code = $@"namespace ExtractMethodCrashRepro
+            var code =
+                $@"namespace ExtractMethodCrashRepro
 {{
     public static class SomeClass
     {{
@@ -10632,7 +11168,8 @@ namespace ClassLibrary9
         }}
     }}
 }}";
-            var expected = $@"namespace ExtractMethodCrashRepro
+            var expected =
+                $@"namespace ExtractMethodCrashRepro
 {{
     public static class SomeClass
     {{
@@ -10664,7 +11201,8 @@ namespace ClassLibrary9
         [WorkItem(18347, "https://github.com/dotnet/roslyn/issues/18347")]
         public async Task ExtractMethodFlowsToLocalFunction2(string usageSyntax)
         {
-            var code = $@"namespace ExtractMethodCrashRepro
+            var code =
+                $@"namespace ExtractMethodCrashRepro
 {{
     public static class SomeClass
     {{
@@ -10678,7 +11216,8 @@ namespace ClassLibrary9
         }}
     }}
 }}";
-            var expected = $@"namespace ExtractMethodCrashRepro
+            var expected =
+                $@"namespace ExtractMethodCrashRepro
 {{
     public static class SomeClass
     {{
@@ -10714,7 +11253,8 @@ namespace ClassLibrary9
         [WorkItem(18347, "https://github.com/dotnet/roslyn/issues/18347")]
         public async Task ExtractMethodFlowsToLocalFunctionWithUnassignedLocal(string usageSyntax)
         {
-            var code = $@"namespace ExtractMethodCrashRepro
+            var code =
+                $@"namespace ExtractMethodCrashRepro
 {{
     public static class SomeClass
     {{
@@ -10729,7 +11269,8 @@ namespace ClassLibrary9
         }}
     }}
 }}";
-            var expected = $@"namespace ExtractMethodCrashRepro
+            var expected =
+                $@"namespace ExtractMethodCrashRepro
 {{
     public static class SomeClass
     {{
@@ -10758,7 +11299,8 @@ namespace ClassLibrary9
         [WorkItem(18347, "https://github.com/dotnet/roslyn/issues/18347")]
         public async Task ExtractMethodDoesNotFlowToLocalFunction1()
         {
-            var code = @"namespace ExtractMethodCrashRepro
+            var code =
+                @"namespace ExtractMethodCrashRepro
 {
     public static class SomeClass
     {
@@ -10772,7 +11314,8 @@ namespace ClassLibrary9
         }
     }
 }";
-            var expected = @"namespace ExtractMethodCrashRepro
+            var expected =
+                @"namespace ExtractMethodCrashRepro
 {
     public static class SomeClass
     {
@@ -10799,7 +11342,8 @@ namespace ClassLibrary9
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TestUnreachableCodeModifiedInside()
         {
-            var code = @"using System.Collections.Generic;
+            var code =
+                @"using System.Collections.Generic;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -10816,7 +11360,8 @@ namespace ConsoleApp1
     }
 }";
 
-            var expected = @"using System.Collections.Generic;
+            var expected =
+                @"using System.Collections.Generic;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -10838,7 +11383,7 @@ namespace ConsoleApp1
     }
 }";
 
-            // allowMovingDeclaration: false is default behavior on VS. 
+            // allowMovingDeclaration: false is default behavior on VS.
             // it doesn't affect result mostly but it does affect for symbols in unreachable code since
             // data flow in and out for the symbol is always set to false
             await TestExtractMethodAsync(code, expected);
@@ -10847,7 +11392,8 @@ namespace ConsoleApp1
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TestUnreachableCodeModifiedOutside()
         {
-            var code = @"using System.Collections.Generic;
+            var code =
+                @"using System.Collections.Generic;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -10864,7 +11410,8 @@ namespace ConsoleApp1
     }
 }";
 
-            var expected = @"using System.Collections.Generic;
+            var expected =
+                @"using System.Collections.Generic;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -10892,7 +11439,8 @@ namespace ConsoleApp1
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TestUnreachableCodeModifiedBoth()
         {
-            var code = @"using System.Collections.Generic;
+            var code =
+                @"using System.Collections.Generic;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -10910,7 +11458,8 @@ namespace ConsoleApp1
     }
 }";
 
-            var expected = @"using System.Collections.Generic;
+            var expected =
+                @"using System.Collections.Generic;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -10940,7 +11489,8 @@ namespace ConsoleApp1
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TestLocalFunctionParameters()
         {
-            var code = @"using System.Collections.Generic;
+            var code =
+                @"using System.Collections.Generic;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -10957,7 +11507,8 @@ namespace ConsoleApp1
     }
 }";
 
-            var expected = @"using System.Collections.Generic;
+            var expected =
+                @"using System.Collections.Generic;
 using System.Linq;
 
 namespace ConsoleApp1
@@ -10985,7 +11536,8 @@ namespace ConsoleApp1
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TestDataFlowInButNoReadInside()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11013,7 +11565,8 @@ namespace ConsoleApp39
     }
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11052,7 +11605,8 @@ namespace ConsoleApp39
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task AllowBestEffortForUnknownVariableDataFlow()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     void Method(out object test)
@@ -11069,7 +11623,8 @@ class Program
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class Program
 {
     void Method(out object test)
@@ -11098,7 +11653,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodInInterface()
         {
-            var code = @"
+            var code =
+                @"
 interface Program
 {
     void Goo();
@@ -11108,7 +11664,8 @@ interface Program
         [|Goo();|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 interface Program
 {
     void Goo();
@@ -11130,14 +11687,16 @@ interface Program
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodInExpressionBodiedConstructors()
         {
-            var code = @"
+            var code =
+                @"
 class Goo
 {
     private readonly string _bar;
 
     private Goo(string bar) => _bar = [|bar|];
 }";
-            var expected = @"
+            var expected =
+                @"
 class Goo
 {
     private readonly string _bar;
@@ -11156,14 +11715,16 @@ class Goo
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodInExpressionBodiedFinalizers()
         {
-            var code = @"
+            var code =
+                @"
 class Goo
 {
     bool finalized;
 
     ~Goo() => finalized = [|true|];
 }";
-            var expected = @"
+            var expected =
+                @"
 class Goo
 {
     bool finalized;
@@ -11181,7 +11742,8 @@ class Goo
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodInvolvingFunctionPointer()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(delegate*<delegate*<ref string, ref readonly int>> ptr1)
@@ -11191,7 +11753,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M(delegate*<delegate*<ref string, ref readonly int>> ptr1)
@@ -11212,7 +11775,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractMethodInvolvingFunctionPointerWithTypeParameter()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M<T1, T2>(delegate*<T1, T2> ptr1)
@@ -11221,7 +11785,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M<T1, T2>(delegate*<T1, T2> ptr1)
@@ -11241,11 +11806,13 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TopLevelStatement_ValueInAssignment()
         {
-            var code = @"
+            var code =
+                @"
 bool local;
 local = [|true|];
 ";
-            var expected = @"
+            var expected =
+                @"
 bool local;
 
 static bool NewMethod()
@@ -11262,13 +11829,15 @@ local = NewMethod();
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task TopLevelStatement_ArgumentInInvocation()
         {
-            // Note: the cast should be simplified 
+            // Note: the cast should be simplified
             // https://github.com/dotnet/roslyn/issues/44260
 
-            var code = @"
+            var code =
+                @"
 System.Console.WriteLine([|""string""|]);
 ";
-            var expected = @"
+            var expected =
+                @"
 System.Console.WriteLine((string)NewMethod());
 
 static string NewMethod()
@@ -11286,7 +11855,8 @@ static string NewMethod()
         [WorkItem(4950, "https://github.com/dotnet/roslyn/issues/4950")]
         public async Task ExtractMethodInvolvingUnsafeBlock(string keyword)
         {
-            var code = $@"
+            var code =
+                $@"
 using System;
 
 class Program {{
@@ -11307,7 +11877,8 @@ class Program {{
     }}
 }}
 ";
-            var expected = $@"
+            var expected =
+                $@"
 using System;
 
 class Program {{
@@ -11339,7 +11910,8 @@ class Program {{
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractRawStringLiteral_SingleLine()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(int y)
@@ -11347,7 +11919,8 @@ class C
         var s = [|""""""Hello world""""""|];
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M(int y)
@@ -11367,7 +11940,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractRawStringLiteralInterpolation_SingleLine()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(int y)
@@ -11375,7 +11949,8 @@ class C
         var s = [|$""""""{y}""""""|];
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M(int y)
@@ -11395,7 +11970,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractRawStringLiteralInterpolationHole_SingleLine()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(int y)
@@ -11403,7 +11979,8 @@ class C
         var s = $""""""{[|y|]}"""""";
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M(int y)
@@ -11423,7 +12000,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractRawStringLiteral_MultiLine()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(int y)
@@ -11433,7 +12011,8 @@ class C
             """"""|];
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M(int y)
@@ -11455,7 +12034,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ExtractMethod)]
         public async Task ExtractRawStringLiteralInterpolation_MultiLine()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(int y)
@@ -11465,7 +12045,8 @@ class C
             """"""|];
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M(int y)

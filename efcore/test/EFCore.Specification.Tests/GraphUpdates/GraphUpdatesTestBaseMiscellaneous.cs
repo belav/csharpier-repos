@@ -14,8 +14,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [ConditionalTheory] // Issue #23974
     [InlineData(false)]
     [InlineData(true)]
-    public virtual async Task Can_insert_when_FK_has_default_value(bool async)
-        => await ExecuteWithStrategyInTransactionAsync(
+    public virtual async Task Can_insert_when_FK_has_default_value(bool async) =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 if (async)
@@ -34,13 +34,16 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 var queryable = context.Set<Cruiser>().Include(e => e.UserState);
                 var cruiser = async ? (await queryable.SingleAsync()) : queryable.Single();
                 Assert.Equal(cruiser.IdUserState, cruiser.UserState.AccessStateId);
-            });
+            }
+        );
 
     [ConditionalTheory] // Issue #23043
     [InlineData(false)]
     [InlineData(true)]
-    public virtual async Task Saving_multiple_modified_entities_with_the_same_key_does_not_overflow(bool async)
-        => await ExecuteWithStrategyInTransactionAsync(
+    public virtual async Task Saving_multiple_modified_entities_with_the_same_key_does_not_overflow(
+        bool async
+    ) =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 var city = new City { Colleges = { new College() } };
@@ -67,26 +70,42 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 if (Fixture.ForceClientNoAction)
                 {
                     Assert.Equal(
-                        CoreStrings.RelationshipConceptualNullSensitive(nameof(City), nameof(College), $"{{CityId: {city.Id}}}"),
-                        Assert.Throws<InvalidOperationException>(
-                            () => context.Entry(college).State = EntityState.Modified).Message);
+                        CoreStrings.RelationshipConceptualNullSensitive(
+                            nameof(City),
+                            nameof(College),
+                            $"{{CityId: {city.Id}}}"
+                        ),
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => context.Entry(college).State = EntityState.Modified
+                            )
+                            .Message
+                    );
                 }
                 else
                 {
                     Assert.Equal(
-                        CoreStrings.IdentityConflictSensitive(nameof(College), $"{{Id: {college.Id}}}"),
-                        Assert.Throws<InvalidOperationException>(
-                            () => context.Entry(college).State = EntityState.Modified).Message);
+                        CoreStrings.IdentityConflictSensitive(
+                            nameof(College),
+                            $"{{Id: {college.Id}}}"
+                        ),
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => context.Entry(college).State = EntityState.Modified
+                            )
+                            .Message
+                    );
                 }
 
                 return Task.CompletedTask;
-            });
+            }
+        );
 
     [ConditionalTheory] // Issue #22465
     [InlineData(false)]
     [InlineData(true)]
-    public virtual async Task Reset_unknown_original_value_when_current_value_is_set(bool async)
-        => await ExecuteWithStrategyInTransactionAsync(
+    public virtual async Task Reset_unknown_original_value_when_current_value_is_set(bool async) =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 var entityZ = new EntityZ();
@@ -110,8 +129,14 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 context.Entry(eventZ).State = EntityState.Deleted;
 
                 Assert.Same(entityZ, eventZ.EntityZ);
-                Assert.Equal(entityZ.Id, context.Entry(eventZ).Property<long>("EntityZId").CurrentValue);
-                Assert.Equal(entityZ.Id, context.Entry(eventZ).Property<long>("EntityZId").OriginalValue);
+                Assert.Equal(
+                    entityZ.Id,
+                    context.Entry(eventZ).Property<long>("EntityZId").CurrentValue
+                );
+                Assert.Equal(
+                    entityZ.Id,
+                    context.Entry(eventZ).Property<long>("EntityZId").OriginalValue
+                );
 
                 if (async)
                 {
@@ -136,84 +161,107 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.False(context.Set<EventDescriptorZ>().Any());
                     Assert.False(context.Set<EntityZ>().Any());
                 }
-            });
+            }
+        );
 
     [ConditionalTheory] // Issue #19856
     [InlineData(false)]
     [InlineData(true)]
-    public virtual async Task Update_principal_with_shadow_key_owned_collection_throws(bool async)
-        => await ExecuteWithStrategyInTransactionAsync(
-            async context =>
+    public virtual async Task Update_principal_with_shadow_key_owned_collection_throws(
+        bool async
+    ) =>
+        await ExecuteWithStrategyInTransactionAsync(async context =>
+        {
+            var owner = new Owner
             {
-                var owner = new Owner { Owned = new Owned(), OwnedCollection = { new Owned(), new Owned() } };
+                Owned = new Owned(),
+                OwnedCollection = { new Owned(), new Owned() }
+            };
 
+            if (async)
+            {
+                await context.AddAsync(owner);
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                context.Add(owner);
+                context.SaveChanges();
+            }
+
+            context.ChangeTracker.Clear();
+
+            context.Update(owner);
+
+            Assert.Equal(
+                CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
+                (
+                    async
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(
+                            async () => await context.SaveChangesAsync()
+                        )
+                        : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
+                ).Message
+            );
+        });
+
+    [ConditionalTheory] // Issue #19856
+    [InlineData(false)]
+    [InlineData(true)]
+    public virtual async Task Delete_principal_with_shadow_key_owned_collection_throws(
+        bool async
+    ) =>
+        await ExecuteWithStrategyInTransactionAsync(async context =>
+        {
+            var owner = new Owner
+            {
+                Owned = new Owned(),
+                OwnedCollection = { new Owned(), new Owned() }
+            };
+
+            if (async)
+            {
+                await context.AddAsync(owner);
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                context.Add(owner);
+                context.SaveChanges();
+            }
+
+            context.ChangeTracker.Clear();
+
+            context.Attach(owner);
+            context.Remove(owner);
+
+            if (Fixture.ForceClientNoAction)
+            {
                 if (async)
                 {
-                    await context.AddAsync(owner);
-                    await context.SaveChangesAsync();
+                    await Assert.ThrowsAsync<DbUpdateException>(
+                        async () => await context.SaveChangesAsync()
+                    );
                 }
                 else
                 {
-                    context.Add(owner);
-                    context.SaveChanges();
+                    Assert.Throws<DbUpdateException>(() => context.SaveChanges());
                 }
-
-                context.ChangeTracker.Clear();
-
-                context.Update(owner);
-
+            }
+            else
+            {
                 Assert.Equal(
                     CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
-                    (async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(async () => await context.SaveChangesAsync())
-                        : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())).Message);
-            });
-
-    [ConditionalTheory] // Issue #19856
-    [InlineData(false)]
-    [InlineData(true)]
-    public virtual async Task Delete_principal_with_shadow_key_owned_collection_throws(bool async)
-        => await ExecuteWithStrategyInTransactionAsync(
-            async context =>
-            {
-                var owner = new Owner { Owned = new Owned(), OwnedCollection = { new Owned(), new Owned() } };
-
-                if (async)
-                {
-                    await context.AddAsync(owner);
-                    await context.SaveChangesAsync();
-                }
-                else
-                {
-                    context.Add(owner);
-                    context.SaveChanges();
-                }
-
-                context.ChangeTracker.Clear();
-
-                context.Attach(owner);
-                context.Remove(owner);
-
-                if (Fixture.ForceClientNoAction)
-                {
-                    if (async)
-                    {
-                        await Assert.ThrowsAsync<DbUpdateException>(async () => await context.SaveChangesAsync());
-                    }
-                    else
-                    {
-                        Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-                    }
-                }
-                else
-                {
-                    Assert.Equal(
-                        CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
-                        (async
-                            ? await Assert.ThrowsAsync<InvalidOperationException>(async () => await context.SaveChangesAsync())
-                            : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())).Message);
-                }
-            });
+                    (
+                        async
+                            ? await Assert.ThrowsAsync<InvalidOperationException>(
+                                async () => await context.SaveChangesAsync()
+                            )
+                            : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
+                    ).Message
+                );
+            }
+        });
 
     [ConditionalTheory] // Issue #19856
     [InlineData(false, false, false)]
@@ -224,50 +272,60 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(true, false, true)]
     [InlineData(true, true, false)]
     [InlineData(true, true, true)]
-    public virtual async Task Clearing_shadow_key_owned_collection_throws(bool async, bool useUpdate, bool addNew)
-        => await ExecuteWithStrategyInTransactionAsync(
-            async context =>
+    public virtual async Task Clearing_shadow_key_owned_collection_throws(
+        bool async,
+        bool useUpdate,
+        bool addNew
+    ) =>
+        await ExecuteWithStrategyInTransactionAsync(async context =>
+        {
+            var owner = new Owner
             {
-                var owner = new Owner { Owned = new Owned(), OwnedCollection = { new Owned(), new Owned() } };
+                Owned = new Owned(),
+                OwnedCollection = { new Owned(), new Owned() }
+            };
 
-                if (async)
-                {
-                    await context.AddAsync(owner);
-                    await context.SaveChangesAsync();
-                }
-                else
-                {
-                    context.Add(owner);
-                    context.SaveChanges();
-                }
+            if (async)
+            {
+                await context.AddAsync(owner);
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                context.Add(owner);
+                context.SaveChanges();
+            }
 
-                context.ChangeTracker.Clear();
+            context.ChangeTracker.Clear();
 
-                if (useUpdate)
-                {
-                    context.Update(owner);
-                }
-                else
-                {
-                    context.Attach(owner);
-                }
+            if (useUpdate)
+            {
+                context.Update(owner);
+            }
+            else
+            {
+                context.Attach(owner);
+            }
 
-                owner.OwnedCollection = addNew
-                    ? new List<Owned> { new(), new() }
-                    : new List<Owned>();
+            owner.OwnedCollection = addNew ? new List<Owned> { new(), new() } : new List<Owned>();
 
-                Assert.Equal(
-                    CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
-                    (async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(async () => await context.SaveChangesAsync())
-                        : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())).Message);
-            });
+            Assert.Equal(
+                CoreStrings.UnknownShadowKeyValue("Owner.OwnedCollection#Owned", "Id"),
+                (
+                    async
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(
+                            async () => await context.SaveChangesAsync()
+                        )
+                        : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
+                ).Message
+            );
+        });
 
     [ConditionalTheory] // Issue #26330
     [InlineData(false)]
     [InlineData(true)]
-    public virtual async Task Saving_unknown_key_value_marks_it_as_unmodified(bool async)
-        => await ExecuteWithStrategyInTransactionAsync(
+    public virtual async Task Saving_unknown_key_value_marks_it_as_unmodified(bool async) =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 var owner = new OwnerWithNonCompositeOwnedCollection();
@@ -291,15 +349,12 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 {
                     await Assert.ThrowsAsync<InvalidOperationException>(
                         async () =>
-                            _ = async
-                                ? await context.SaveChangesAsync()
-                                : context.SaveChanges());
+                            _ = async ? await context.SaveChangesAsync() : context.SaveChanges()
+                    );
                 }
                 else
                 {
-                    _ = async
-                        ? await context.SaveChangesAsync()
-                        : context.SaveChanges();
+                    _ = async ? await context.SaveChangesAsync() : context.SaveChanges();
                 }
             },
             async context =>
@@ -312,13 +367,14 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
                     Assert.Equal("Rome", owner.Owned.Single().Foo);
                 }
-            });
+            }
+        );
 
     [ConditionalTheory] // Issue #19856
     [InlineData(false)]
     [InlineData(true)]
-    public virtual async Task Update_principal_with_CLR_key_owned_collection(bool async)
-        => await ExecuteWithStrategyInTransactionAsync(
+    public virtual async Task Update_principal_with_CLR_key_owned_collection(bool async) =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 var owner = new OwnerWithKeyedCollection
@@ -326,7 +382,11 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Owned = new Owned(),
                     OwnedWithKey = new OwnedWithKey(),
                     OwnedCollection = { new OwnedWithKey(), new OwnedWithKey() },
-                    OwnedCollectionPrivateKey = { new OwnedWithPrivateKey(), new OwnedWithPrivateKey() }
+                    OwnedCollectionPrivateKey =
+                    {
+                        new OwnedWithPrivateKey(),
+                        new OwnedWithPrivateKey()
+                    }
                 };
 
                 if (async)
@@ -369,13 +429,14 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 Assert.Equal(1, owner.OwnedCollection.Count(e => e.Bar == "OfSoap"));
                 Assert.Equal(2, owner.OwnedCollectionPrivateKey.Count);
                 Assert.Equal(1, owner.OwnedCollectionPrivateKey.Count(e => e.Bar == "OfGold"));
-            });
+            }
+        );
 
     [ConditionalTheory] // Issue #19856
     [InlineData(false)]
     [InlineData(true)]
-    public virtual async Task Delete_principal_with_CLR_key_owned_collection(bool async)
-        => await ExecuteWithStrategyInTransactionAsync(
+    public virtual async Task Delete_principal_with_CLR_key_owned_collection(bool async) =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 var owner = new OwnerWithKeyedCollection
@@ -383,7 +444,11 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Owned = new Owned(),
                     OwnedWithKey = new OwnedWithKey(),
                     OwnedCollection = { new OwnedWithKey(), new OwnedWithKey() },
-                    OwnedCollectionPrivateKey = { new OwnedWithPrivateKey(), new OwnedWithPrivateKey() }
+                    OwnedCollectionPrivateKey =
+                    {
+                        new OwnedWithPrivateKey(),
+                        new OwnedWithPrivateKey()
+                    }
                 };
 
                 if (async)
@@ -406,7 +471,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 {
                     if (async)
                     {
-                        await Assert.ThrowsAsync<DbUpdateException>(async () => await context.SaveChangesAsync());
+                        await Assert.ThrowsAsync<DbUpdateException>(
+                            async () => await context.SaveChangesAsync()
+                        );
                     }
                     else
                     {
@@ -432,9 +499,11 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.False(
                         async
                             ? await context.Set<OwnerWithKeyedCollection>().AnyAsync()
-                            : context.Set<OwnerWithKeyedCollection>().Any());
+                            : context.Set<OwnerWithKeyedCollection>().Any()
+                    );
                 }
-            });
+            }
+        );
 
     [ConditionalTheory] // Issue #19856
     [InlineData(false, false, false)]
@@ -445,8 +514,12 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(true, false, true)]
     [InlineData(true, true, false)]
     [InlineData(true, true, true)]
-    public virtual async Task Clearing_CLR_key_owned_collection(bool async, bool useUpdate, bool addNew)
-        => await ExecuteWithStrategyInTransactionAsync(
+    public virtual async Task Clearing_CLR_key_owned_collection(
+        bool async,
+        bool useUpdate,
+        bool addNew
+    ) =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 var owner = new OwnerWithKeyedCollection
@@ -479,11 +552,19 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 }
 
                 owner.OwnedCollection = addNew
-                    ? new List<OwnedWithKey> { new() { Bar = "OfGold" }, new() { Bar = "OfSoap" } }
+                    ? new List<OwnedWithKey>
+                    {
+                        new() { Bar = "OfGold" },
+                        new() { Bar = "OfSoap" }
+                    }
                     : new List<OwnedWithKey>();
 
                 owner.OwnedCollectionPrivateKey = addNew
-                    ? new List<OwnedWithPrivateKey> { new() { Bar = "OfChocolate" }, new() { Bar = "OfLead" } }
+                    ? new List<OwnedWithPrivateKey>
+                    {
+                        new() { Bar = "OfChocolate" },
+                        new() { Bar = "OfLead" }
+                    }
                     : new List<OwnedWithPrivateKey>();
 
                 if (async)
@@ -507,7 +588,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.Equal(1, owner.OwnedCollection.Count(e => e.Bar == "OfGold"));
                     Assert.Equal(1, owner.OwnedCollection.Count(e => e.Bar == "OfSoap"));
                     Assert.Equal(2, owner.OwnedCollectionPrivateKey.Count);
-                    Assert.Equal(1, owner.OwnedCollectionPrivateKey.Count(e => e.Bar == "OfChocolate"));
+                    Assert.Equal(
+                        1,
+                        owner.OwnedCollectionPrivateKey.Count(e => e.Bar == "OfChocolate")
+                    );
                     Assert.Equal(1, owner.OwnedCollectionPrivateKey.Count(e => e.Bar == "OfLead"));
                 }
                 else
@@ -515,76 +599,93 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.False(owner.OwnedCollection.Any());
                     Assert.False(owner.OwnedCollectionPrivateKey.Any());
                 }
-            });
+            }
+        );
 
     [ConditionalTheory] // Issue #19856
     [InlineData(false, false)]
     [InlineData(false, true)]
     [InlineData(true, false)]
     [InlineData(true, true)]
-    public virtual async Task Update_principal_with_non_generated_shadow_key_owned_collection_throws(bool async, bool delete)
-        => await ExecuteWithStrategyInTransactionAsync(
-            async context =>
+    public virtual async Task Update_principal_with_non_generated_shadow_key_owned_collection_throws(
+        bool async,
+        bool delete
+    ) =>
+        await ExecuteWithStrategyInTransactionAsync(async context =>
+        {
+            var owner = new OwnerNoKeyGeneration { Id = 77, Owned = new OwnedNoKeyGeneration() };
+
+            if (async)
             {
-                var owner = new OwnerNoKeyGeneration { Id = 77, Owned = new OwnedNoKeyGeneration() };
+                await context.AddAsync(owner);
+            }
+            else
+            {
+                context.Add(owner);
+            }
 
-                if (async)
-                {
-                    await context.AddAsync(owner);
-                }
-                else
-                {
-                    context.Add(owner);
-                }
+            context.Entry(owner.Owned).Property("OwnerNoKeyGenerationId").CurrentValue = 77;
 
-                context.Entry(owner.Owned).Property("OwnerNoKeyGenerationId").CurrentValue = 77;
+            var owned1 = new OwnedNoKeyGeneration();
+            owner.OwnedCollection.Add(owned1);
+            context.ChangeTracker.DetectChanges();
+            context.Entry(owned1).Property("OwnerNoKeyGenerationId").CurrentValue = 77;
+            context.Entry(owned1).Property("OwnedNoKeyGenerationId").CurrentValue = 100;
 
-                var owned1 = new OwnedNoKeyGeneration();
-                owner.OwnedCollection.Add(owned1);
-                context.ChangeTracker.DetectChanges();
-                context.Entry(owned1).Property("OwnerNoKeyGenerationId").CurrentValue = 77;
-                context.Entry(owned1).Property("OwnedNoKeyGenerationId").CurrentValue = 100;
+            if (async)
+            {
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                context.SaveChanges();
+            }
 
-                if (async)
-                {
-                    await context.SaveChangesAsync();
-                }
-                else
-                {
-                    context.SaveChanges();
-                }
+            context.ChangeTracker.Clear();
 
-                context.ChangeTracker.Clear();
+            context.Update(owner);
 
-                context.Update(owner);
+            if (delete)
+            {
+                context.Remove(owner);
+            }
 
-                if (delete)
-                {
-                    context.Remove(owner);
-                }
-
-                Assert.Equal(
-                    CoreStrings.UnknownShadowKeyValue(
-                        "OwnerNoKeyGeneration.OwnedCollection#OwnedNoKeyGeneration", "OwnedNoKeyGenerationId"),
-                    (async
-                        ? await Assert.ThrowsAsync<InvalidOperationException>(async () => await context.SaveChangesAsync())
-                        : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())).Message);
-            });
+            Assert.Equal(
+                CoreStrings.UnknownShadowKeyValue(
+                    "OwnerNoKeyGeneration.OwnedCollection#OwnedNoKeyGeneration",
+                    "OwnedNoKeyGenerationId"
+                ),
+                (
+                    async
+                        ? await Assert.ThrowsAsync<InvalidOperationException>(
+                            async () => await context.SaveChangesAsync()
+                        )
+                        : Assert.Throws<InvalidOperationException>(() => context.SaveChanges())
+                ).Message
+            );
+        });
 
     [ConditionalTheory] // Issue #21206
     [InlineData(false)]
     [InlineData(true)]
-    public async Task Discriminator_values_are_not_marked_as_unknown(bool async)
-        => await ExecuteWithStrategyInTransactionAsync(
+    public async Task Discriminator_values_are_not_marked_as_unknown(bool async) =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
-                var partner =
-                    async
-                        ? await context.Set<Partner>().SingleAsync()
-                        : context.Set<Partner>().Single();
+                var partner = async
+                    ? await context.Set<Partner>().SingleAsync()
+                    : context.Set<Partner>().Single();
 
-                var contract1 = new ProviderContract1 { Partner = partner, Details = "Provider 1 Contract Details" };
-                var contract2 = new ProviderContract2 { Partner = partner, Details = "Provider 2 Contract Details" };
+                var contract1 = new ProviderContract1
+                {
+                    Partner = partner,
+                    Details = "Provider 1 Contract Details"
+                };
+                var contract2 = new ProviderContract2
+                {
+                    Partner = partner,
+                    Details = "Provider 2 Contract Details"
+                };
 
                 if (async)
                 {
@@ -609,19 +710,19 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             async context =>
             {
-                var contracts =
-                    async
-                        ? await context.Set<ProviderContract>().ToListAsync()
-                        : context.Set<ProviderContract>().ToList();
+                var contracts = async
+                    ? await context.Set<ProviderContract>().ToListAsync()
+                    : context.Set<ProviderContract>().ToList();
 
                 Assert.Equal(2, contracts.Count);
                 Assert.Equal(1, contracts.Count(e => e is ProviderContract1));
                 Assert.Equal(1, contracts.Count(e => e is ProviderContract2));
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual void Avoid_nulling_shared_FK_property_when_deleting()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Avoid_nulling_shared_FK_property_when_deleting() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var root = context
@@ -715,13 +816,16 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.Equal(root.Id, parent.RootId);
                     Assert.Null(parent.DependantId);
                 }
-            });
+            }
+        );
 
     [ConditionalTheory]
     [InlineData(false)]
     [InlineData(true)]
-    public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(bool nullPrincipal)
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(
+        bool nullPrincipal
+    ) =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var root = context
@@ -804,25 +908,29 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 Assert.Equal(root.Id, dependent.RootId);
                 Assert.Equal(root.Id, parent.RootId);
                 Assert.Null(parent.DependantId);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual void Mutating_discriminator_value_throws_by_convention()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var instance = context.Set<OptionalSingle1Derived>().First();
+    public virtual void Mutating_discriminator_value_throws_by_convention() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var instance = context.Set<OptionalSingle1Derived>().First();
 
-                var propertyEntry = context.Entry(instance).Property("Discriminator");
+            var propertyEntry = context.Entry(instance).Property("Discriminator");
 
-                Assert.Equal(nameof(OptionalSingle1Derived), propertyEntry.CurrentValue);
+            Assert.Equal(nameof(OptionalSingle1Derived), propertyEntry.CurrentValue);
 
-                propertyEntry.CurrentValue = nameof(OptionalSingle1MoreDerived);
+            propertyEntry.CurrentValue = nameof(OptionalSingle1MoreDerived);
 
-                Assert.Equal(
-                    CoreStrings.PropertyReadOnlyAfterSave("Discriminator", nameof(OptionalSingle1Derived)),
-                    Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message);
-            });
+            Assert.Equal(
+                CoreStrings.PropertyReadOnlyAfterSave(
+                    "Discriminator",
+                    nameof(OptionalSingle1Derived)
+                ),
+                Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message
+            );
+        });
 
     [ConditionalFact]
     public virtual void Mutating_discriminator_value_can_be_configured_to_allow_mutation()
@@ -849,14 +957,17 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
                 Assert.IsType<OptionalSingle2>(instance);
                 Assert.Equal(1, propertyEntry.CurrentValue.Value);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
     [InlineData((int)ChangeMechanism.Fk)]
     [InlineData((int)ChangeMechanism.Dependent)]
     [InlineData((int)(ChangeMechanism.Dependent | ChangeMechanism.Fk))]
-    public virtual void Changes_to_Added_relationships_are_picked_up(ChangeMechanism changeMechanism)
+    public virtual void Changes_to_Added_relationships_are_picked_up(
+        ChangeMechanism changeMechanism
+    )
     {
         var id = 0;
 
@@ -902,11 +1013,15 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                var entity = context.Set<OptionalSingle1>().Include(e => e.Root).Single(e => e.Id == id);
+                var entity = context
+                    .Set<OptionalSingle1>()
+                    .Include(e => e.Root)
+                    .Single(e => e.Id == id);
 
                 Assert.Null(entity.Root);
                 Assert.Null(entity.RootId);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -920,7 +1035,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(true, null)]
     public virtual void New_FK_is_not_cleared_on_old_dependent_delete(
         bool loadNewParent,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var childId = 0;
@@ -929,10 +1045,14 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var removed = context.Set<Optional1>().OrderBy(e => e.Id).First();
-                var child = context.Set<Optional2>().OrderBy(e => e.Id).First(e => e.ParentId == removed.Id);
+                var child = context
+                    .Set<Optional2>()
+                    .OrderBy(e => e.Id)
+                    .First(e => e.ParentId == removed.Id);
 
                 removedId = removed.Id;
                 childId = child.Id;
@@ -973,8 +1093,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             },
             context =>
             {
-                if (!Fixture.ForceClientNoAction
-                    && !Fixture.NoStoreCascades)
+                if (!Fixture.ForceClientNoAction && !Fixture.NoStoreCascades)
                 {
                     Assert.Null(context.Set<Optional1>().Find(removedId));
 
@@ -995,7 +1114,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
                     Assert.False(context.ChangeTracker.HasChanges());
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1003,8 +1123,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(CascadeTiming.Immediate)]
     [InlineData(CascadeTiming.Never)]
     [InlineData(null)]
-    public virtual void No_fixup_to_Deleted_entities(
-        CascadeTiming? deleteOrphansTiming)
+    public virtual void No_fixup_to_Deleted_entities(CascadeTiming? deleteOrphansTiming)
     {
         using var context = CreateContext();
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
@@ -1034,337 +1153,339 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     }
 
     [ConditionalFact]
-    public virtual void Notification_entities_can_have_indexes()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var produce = new Produce { Name = "Apple", BarCode = 77 };
-                context.Add(produce);
+    public virtual void Notification_entities_can_have_indexes() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var produce = new Produce { Name = "Apple", BarCode = 77 };
+            context.Add(produce);
 
-                Assert.Equal(EntityState.Added, context.Entry(produce).State);
+            Assert.Equal(EntityState.Added, context.Entry(produce).State);
 
-                Assert.True(context.ChangeTracker.HasChanges());
+            Assert.True(context.ChangeTracker.HasChanges());
 
-                context.SaveChanges();
+            context.SaveChanges();
 
-                Assert.False(context.ChangeTracker.HasChanges());
+            Assert.False(context.ChangeTracker.HasChanges());
 
-                Assert.Equal(EntityState.Unchanged, context.Entry(produce).State);
-                Assert.NotEqual(Guid.Empty, context.Entry(produce).Property(e => e.ProduceId).OriginalValue);
-                Assert.Equal(77, context.Entry(produce).Property(e => e.BarCode).OriginalValue);
+            Assert.Equal(EntityState.Unchanged, context.Entry(produce).State);
+            Assert.NotEqual(
+                Guid.Empty,
+                context.Entry(produce).Property(e => e.ProduceId).OriginalValue
+            );
+            Assert.Equal(77, context.Entry(produce).Property(e => e.BarCode).OriginalValue);
 
-                context.Remove(produce);
-                Assert.Equal(EntityState.Deleted, context.Entry(produce).State);
-                Assert.NotEqual(Guid.Empty, context.Entry(produce).Property(e => e.ProduceId).OriginalValue);
-                Assert.Equal(77, context.Entry(produce).Property(e => e.BarCode).OriginalValue);
+            context.Remove(produce);
+            Assert.Equal(EntityState.Deleted, context.Entry(produce).State);
+            Assert.NotEqual(
+                Guid.Empty,
+                context.Entry(produce).Property(e => e.ProduceId).OriginalValue
+            );
+            Assert.Equal(77, context.Entry(produce).Property(e => e.BarCode).OriginalValue);
 
-                Assert.True(context.ChangeTracker.HasChanges());
+            Assert.True(context.ChangeTracker.HasChanges());
 
-                context.SaveChanges();
+            context.SaveChanges();
 
-                Assert.False(context.ChangeTracker.HasChanges());
+            Assert.False(context.ChangeTracker.HasChanges());
 
-                Assert.Equal(EntityState.Detached, context.Entry(produce).State);
-            });
+            Assert.Equal(EntityState.Detached, context.Entry(produce).State);
+        });
 
     [ConditionalFact]
-    public virtual void Resetting_a_deleted_reference_fixes_up_again()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var bloog = context.Set<Bloog>().Include(e => e.Poosts).Single();
-                var poost1 = bloog.Poosts.First();
-                var poost2 = bloog.Poosts.Skip(1).First();
+    public virtual void Resetting_a_deleted_reference_fixes_up_again() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var bloog = context.Set<Bloog>().Include(e => e.Poosts).Single();
+            var poost1 = bloog.Poosts.First();
+            var poost2 = bloog.Poosts.Skip(1).First();
 
-                Assert.Equal(2, bloog.Poosts.Count());
+            Assert.Equal(2, bloog.Poosts.Count());
+            Assert.Same(bloog, poost1.Bloog);
+            Assert.Same(bloog, poost2.Bloog);
+
+            context.Remove(bloog);
+
+            Assert.True(context.ChangeTracker.HasChanges());
+
+            Assert.Equal(2, bloog.Poosts.Count());
+
+            if (Fixture.ForceClientNoAction)
+            {
                 Assert.Same(bloog, poost1.Bloog);
                 Assert.Same(bloog, poost2.Bloog);
+            }
+            else
+            {
+                Assert.Null(poost1.Bloog);
+                Assert.Null(poost2.Bloog);
+            }
 
-                context.Remove(bloog);
+            poost1.Bloog = bloog;
 
+            Assert.Equal(2, bloog.Poosts.Count());
+
+            if (Fixture.ForceClientNoAction)
+            {
+                Assert.Same(bloog, poost1.Bloog);
+                Assert.Same(bloog, poost2.Bloog);
+            }
+            else
+            {
+                Assert.Same(bloog, poost1.Bloog);
+                Assert.Null(poost2.Bloog);
+            }
+
+            poost1.Bloog = null;
+
+            Assert.Equal(2, bloog.Poosts.Count());
+
+            if (Fixture.ForceClientNoAction)
+            {
+                Assert.Null(poost1.Bloog);
+                Assert.Same(bloog, poost2.Bloog);
+            }
+            else
+            {
+                Assert.Null(poost1.Bloog);
+                Assert.Null(poost2.Bloog);
+            }
+
+            if (!Fixture.ForceClientNoAction)
+            {
                 Assert.True(context.ChangeTracker.HasChanges());
 
-                Assert.Equal(2, bloog.Poosts.Count());
+                context.SaveChanges();
 
-                if (Fixture.ForceClientNoAction)
-                {
-                    Assert.Same(bloog, poost1.Bloog);
-                    Assert.Same(bloog, poost2.Bloog);
-                }
-                else
-                {
-                    Assert.Null(poost1.Bloog);
-                    Assert.Null(poost2.Bloog);
-                }
-
-                poost1.Bloog = bloog;
+                Assert.False(context.ChangeTracker.HasChanges());
 
                 Assert.Equal(2, bloog.Poosts.Count());
-
-                if (Fixture.ForceClientNoAction)
-                {
-                    Assert.Same(bloog, poost1.Bloog);
-                    Assert.Same(bloog, poost2.Bloog);
-                }
-                else
-                {
-                    Assert.Same(bloog, poost1.Bloog);
-                    Assert.Null(poost2.Bloog);
-                }
-
-                poost1.Bloog = null;
-
-                Assert.Equal(2, bloog.Poosts.Count());
-
-                if (Fixture.ForceClientNoAction)
-                {
-                    Assert.Null(poost1.Bloog);
-                    Assert.Same(bloog, poost2.Bloog);
-                }
-                else
-                {
-                    Assert.Null(poost1.Bloog);
-                    Assert.Null(poost2.Bloog);
-                }
-
-                if (!Fixture.ForceClientNoAction)
-                {
-                    Assert.True(context.ChangeTracker.HasChanges());
-
-                    context.SaveChanges();
-
-                    Assert.False(context.ChangeTracker.HasChanges());
-
-                    Assert.Equal(2, bloog.Poosts.Count());
-                    Assert.Null(poost1.Bloog);
-                    Assert.Null(poost2.Bloog);
-                }
-            });
+                Assert.Null(poost1.Bloog);
+                Assert.Null(poost2.Bloog);
+            }
+        });
 
     [ConditionalFact]
-    public virtual void Detaching_principal_entity_will_remove_references_to_it()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var root = LoadOptionalGraph(context);
-                LoadRequiredGraph(context);
-                LoadOptionalAkGraph(context);
-                LoadRequiredAkGraph(context);
-                LoadRequiredCompositeGraph(context);
-                LoadRequiredNonPkGraph(context);
-                LoadOptionalOneToManyGraph(context);
-                LoadRequiredNonPkAkGraph(context);
+    public virtual void Detaching_principal_entity_will_remove_references_to_it() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var root = LoadOptionalGraph(context);
+            LoadRequiredGraph(context);
+            LoadOptionalAkGraph(context);
+            LoadRequiredAkGraph(context);
+            LoadRequiredCompositeGraph(context);
+            LoadRequiredNonPkGraph(context);
+            LoadOptionalOneToManyGraph(context);
+            LoadRequiredNonPkAkGraph(context);
 
-                var optionalSingle = root.OptionalSingle;
-                var requiredSingle = root.RequiredSingle;
-                var optionalSingleAk = root.OptionalSingleAk;
-                var optionalSingleDerived = root.OptionalSingleDerived;
-                var requiredSingleAk = root.RequiredSingleAk;
-                var optionalSingleAkDerived = root.OptionalSingleAkDerived;
-                var optionalSingleMoreDerived = root.OptionalSingleMoreDerived;
-                var requiredNonPkSingle = root.RequiredNonPkSingle;
-                var optionalSingleAkMoreDerived = root.OptionalSingleAkMoreDerived;
-                var requiredNonPkSingleAk = root.RequiredNonPkSingleAk;
-                var requiredNonPkSingleDerived = root.RequiredNonPkSingleDerived;
-                var requiredNonPkSingleAkDerived = root.RequiredNonPkSingleAkDerived;
-                var requiredNonPkSingleMoreDerived = root.RequiredNonPkSingleMoreDerived;
-                var requiredNonPkSingleAkMoreDerived = root.RequiredNonPkSingleAkMoreDerived;
+            var optionalSingle = root.OptionalSingle;
+            var requiredSingle = root.RequiredSingle;
+            var optionalSingleAk = root.OptionalSingleAk;
+            var optionalSingleDerived = root.OptionalSingleDerived;
+            var requiredSingleAk = root.RequiredSingleAk;
+            var optionalSingleAkDerived = root.OptionalSingleAkDerived;
+            var optionalSingleMoreDerived = root.OptionalSingleMoreDerived;
+            var requiredNonPkSingle = root.RequiredNonPkSingle;
+            var optionalSingleAkMoreDerived = root.OptionalSingleAkMoreDerived;
+            var requiredNonPkSingleAk = root.RequiredNonPkSingleAk;
+            var requiredNonPkSingleDerived = root.RequiredNonPkSingleDerived;
+            var requiredNonPkSingleAkDerived = root.RequiredNonPkSingleAkDerived;
+            var requiredNonPkSingleMoreDerived = root.RequiredNonPkSingleMoreDerived;
+            var requiredNonPkSingleAkMoreDerived = root.RequiredNonPkSingleAkMoreDerived;
 
-                Assert.Same(root, optionalSingle.Root);
-                Assert.Same(root, requiredSingle.Root);
-                Assert.Same(root, optionalSingleAk.Root);
-                Assert.Same(root, optionalSingleDerived.DerivedRoot);
-                Assert.Same(root, requiredSingleAk.Root);
-                Assert.Same(root, optionalSingleAkDerived.DerivedRoot);
-                Assert.Same(root, optionalSingleMoreDerived.MoreDerivedRoot);
-                Assert.Same(root, requiredNonPkSingle.Root);
-                Assert.Same(root, optionalSingleAkMoreDerived.MoreDerivedRoot);
-                Assert.Same(root, requiredNonPkSingleAk.Root);
-                Assert.Same(root, requiredNonPkSingleDerived.DerivedRoot);
-                Assert.Same(root, requiredNonPkSingleAkDerived.DerivedRoot);
-                Assert.Same(root, requiredNonPkSingleMoreDerived.MoreDerivedRoot);
-                Assert.Same(root, requiredNonPkSingleAkMoreDerived.MoreDerivedRoot);
+            Assert.Same(root, optionalSingle.Root);
+            Assert.Same(root, requiredSingle.Root);
+            Assert.Same(root, optionalSingleAk.Root);
+            Assert.Same(root, optionalSingleDerived.DerivedRoot);
+            Assert.Same(root, requiredSingleAk.Root);
+            Assert.Same(root, optionalSingleAkDerived.DerivedRoot);
+            Assert.Same(root, optionalSingleMoreDerived.MoreDerivedRoot);
+            Assert.Same(root, requiredNonPkSingle.Root);
+            Assert.Same(root, optionalSingleAkMoreDerived.MoreDerivedRoot);
+            Assert.Same(root, requiredNonPkSingleAk.Root);
+            Assert.Same(root, requiredNonPkSingleDerived.DerivedRoot);
+            Assert.Same(root, requiredNonPkSingleAkDerived.DerivedRoot);
+            Assert.Same(root, requiredNonPkSingleMoreDerived.MoreDerivedRoot);
+            Assert.Same(root, requiredNonPkSingleAkMoreDerived.MoreDerivedRoot);
 
-                Assert.True(root.OptionalChildren.All(e => e.Parent == root));
-                Assert.True(root.RequiredChildren.All(e => e.Parent == root));
-                Assert.True(root.OptionalChildrenAk.All(e => e.Parent == root));
-                Assert.True(root.RequiredChildrenAk.All(e => e.Parent == root));
-                Assert.True(root.RequiredCompositeChildren.All(e => e.Parent == root));
+            Assert.True(root.OptionalChildren.All(e => e.Parent == root));
+            Assert.True(root.RequiredChildren.All(e => e.Parent == root));
+            Assert.True(root.OptionalChildrenAk.All(e => e.Parent == root));
+            Assert.True(root.RequiredChildrenAk.All(e => e.Parent == root));
+            Assert.True(root.RequiredCompositeChildren.All(e => e.Parent == root));
 
-                Assert.False(context.ChangeTracker.HasChanges());
+            Assert.False(context.ChangeTracker.HasChanges());
 
-                context.Entry(optionalSingle).State = EntityState.Detached;
-                context.Entry(requiredSingle).State = EntityState.Detached;
-                context.Entry(optionalSingleAk).State = EntityState.Detached;
-                context.Entry(optionalSingleDerived).State = EntityState.Detached;
-                context.Entry(requiredSingleAk).State = EntityState.Detached;
-                context.Entry(optionalSingleAkDerived).State = EntityState.Detached;
-                context.Entry(optionalSingleMoreDerived).State = EntityState.Detached;
-                context.Entry(requiredNonPkSingle).State = EntityState.Detached;
-                context.Entry(optionalSingleAkMoreDerived).State = EntityState.Detached;
-                context.Entry(requiredNonPkSingleAk).State = EntityState.Detached;
-                context.Entry(requiredNonPkSingleDerived).State = EntityState.Detached;
-                context.Entry(requiredNonPkSingleAkDerived).State = EntityState.Detached;
-                context.Entry(requiredNonPkSingleMoreDerived).State = EntityState.Detached;
-                context.Entry(requiredNonPkSingleAkMoreDerived).State = EntityState.Detached;
+            context.Entry(optionalSingle).State = EntityState.Detached;
+            context.Entry(requiredSingle).State = EntityState.Detached;
+            context.Entry(optionalSingleAk).State = EntityState.Detached;
+            context.Entry(optionalSingleDerived).State = EntityState.Detached;
+            context.Entry(requiredSingleAk).State = EntityState.Detached;
+            context.Entry(optionalSingleAkDerived).State = EntityState.Detached;
+            context.Entry(optionalSingleMoreDerived).State = EntityState.Detached;
+            context.Entry(requiredNonPkSingle).State = EntityState.Detached;
+            context.Entry(optionalSingleAkMoreDerived).State = EntityState.Detached;
+            context.Entry(requiredNonPkSingleAk).State = EntityState.Detached;
+            context.Entry(requiredNonPkSingleDerived).State = EntityState.Detached;
+            context.Entry(requiredNonPkSingleAkDerived).State = EntityState.Detached;
+            context.Entry(requiredNonPkSingleMoreDerived).State = EntityState.Detached;
+            context.Entry(requiredNonPkSingleAkMoreDerived).State = EntityState.Detached;
 
-                Assert.False(context.ChangeTracker.HasChanges());
+            Assert.False(context.ChangeTracker.HasChanges());
 
-                Assert.NotNull(optionalSingle.Root);
-                Assert.NotNull(requiredSingle.Root);
-                Assert.NotNull(optionalSingleAk.Root);
-                Assert.NotNull(optionalSingleDerived.DerivedRoot);
-                Assert.NotNull(requiredSingleAk.Root);
-                Assert.NotNull(optionalSingleAkDerived.DerivedRoot);
-                Assert.NotNull(optionalSingleMoreDerived.MoreDerivedRoot);
-                Assert.NotNull(requiredNonPkSingle.Root);
-                Assert.NotNull(optionalSingleAkMoreDerived.MoreDerivedRoot);
-                Assert.NotNull(requiredNonPkSingleAk.Root);
-                Assert.NotNull(requiredNonPkSingleDerived.DerivedRoot);
-                Assert.NotNull(requiredNonPkSingleAkDerived.DerivedRoot);
-                Assert.NotNull(requiredNonPkSingleMoreDerived.MoreDerivedRoot);
-                Assert.NotNull(requiredNonPkSingleAkMoreDerived.MoreDerivedRoot);
+            Assert.NotNull(optionalSingle.Root);
+            Assert.NotNull(requiredSingle.Root);
+            Assert.NotNull(optionalSingleAk.Root);
+            Assert.NotNull(optionalSingleDerived.DerivedRoot);
+            Assert.NotNull(requiredSingleAk.Root);
+            Assert.NotNull(optionalSingleAkDerived.DerivedRoot);
+            Assert.NotNull(optionalSingleMoreDerived.MoreDerivedRoot);
+            Assert.NotNull(requiredNonPkSingle.Root);
+            Assert.NotNull(optionalSingleAkMoreDerived.MoreDerivedRoot);
+            Assert.NotNull(requiredNonPkSingleAk.Root);
+            Assert.NotNull(requiredNonPkSingleDerived.DerivedRoot);
+            Assert.NotNull(requiredNonPkSingleAkDerived.DerivedRoot);
+            Assert.NotNull(requiredNonPkSingleMoreDerived.MoreDerivedRoot);
+            Assert.NotNull(requiredNonPkSingleAkMoreDerived.MoreDerivedRoot);
 
-                Assert.True(root.OptionalChildren.All(e => e.Parent != null));
-                Assert.True(root.RequiredChildren.All(e => e.Parent != null));
-                Assert.True(root.OptionalChildrenAk.All(e => e.Parent != null));
-                Assert.True(root.RequiredChildrenAk.All(e => e.Parent != null));
-                Assert.True(root.RequiredCompositeChildren.All(e => e.Parent != null));
-            });
+            Assert.True(root.OptionalChildren.All(e => e.Parent != null));
+            Assert.True(root.RequiredChildren.All(e => e.Parent != null));
+            Assert.True(root.OptionalChildrenAk.All(e => e.Parent != null));
+            Assert.True(root.RequiredChildrenAk.All(e => e.Parent != null));
+            Assert.True(root.RequiredCompositeChildren.All(e => e.Parent != null));
+        });
 
     [ConditionalFact]
-    public virtual void Detaching_dependent_entity_will_not_remove_references_to_it()
-        => ExecuteWithStrategyInTransaction(
-            context =>
+    public virtual void Detaching_dependent_entity_will_not_remove_references_to_it() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var root = LoadOptionalGraph(context);
+            LoadRequiredGraph(context);
+            LoadOptionalAkGraph(context);
+            LoadRequiredAkGraph(context);
+            LoadRequiredCompositeGraph(context);
+            LoadRequiredNonPkGraph(context);
+            LoadOptionalOneToManyGraph(context);
+            LoadRequiredNonPkAkGraph(context);
+
+            var optionalSingle = root.OptionalSingle;
+            var requiredSingle = root.RequiredSingle;
+            var optionalSingleAk = root.OptionalSingleAk;
+            var optionalSingleDerived = root.OptionalSingleDerived;
+            var requiredSingleAk = root.RequiredSingleAk;
+            var optionalSingleAkDerived = root.OptionalSingleAkDerived;
+            var optionalSingleMoreDerived = root.OptionalSingleMoreDerived;
+            var requiredNonPkSingle = root.RequiredNonPkSingle;
+            var optionalSingleAkMoreDerived = root.OptionalSingleAkMoreDerived;
+            var requiredNonPkSingleAk = root.RequiredNonPkSingleAk;
+            var requiredNonPkSingleDerived = root.RequiredNonPkSingleDerived;
+            var requiredNonPkSingleAkDerived = root.RequiredNonPkSingleAkDerived;
+            var requiredNonPkSingleMoreDerived = root.RequiredNonPkSingleMoreDerived;
+            var requiredNonPkSingleAkMoreDerived = root.RequiredNonPkSingleAkMoreDerived;
+
+            var optionalChildren = root.OptionalChildren;
+            var requiredChildren = root.RequiredChildren;
+            var optionalChildrenAk = root.OptionalChildrenAk;
+            var requiredChildrenAk = root.RequiredChildrenAk;
+            var requiredCompositeChildren = root.RequiredCompositeChildren;
+            var optionalChild = optionalChildren.First();
+            var requiredChild = requiredChildren.First();
+            var optionalChildAk = optionalChildrenAk.First();
+            var requieredChildAk = requiredChildrenAk.First();
+            var requiredCompositeChild = requiredCompositeChildren.First();
+
+            Assert.Same(root, optionalSingle.Root);
+            Assert.Same(root, requiredSingle.Root);
+            Assert.Same(root, optionalSingleAk.Root);
+            Assert.Same(root, optionalSingleDerived.DerivedRoot);
+            Assert.Same(root, requiredSingleAk.Root);
+            Assert.Same(root, optionalSingleAkDerived.DerivedRoot);
+            Assert.Same(root, optionalSingleMoreDerived.MoreDerivedRoot);
+            Assert.Same(root, requiredNonPkSingle.Root);
+            Assert.Same(root, optionalSingleAkMoreDerived.MoreDerivedRoot);
+            Assert.Same(root, requiredNonPkSingleAk.Root);
+            Assert.Same(root, requiredNonPkSingleDerived.DerivedRoot);
+            Assert.Same(root, requiredNonPkSingleAkDerived.DerivedRoot);
+            Assert.Same(root, requiredNonPkSingleMoreDerived.MoreDerivedRoot);
+            Assert.Same(root, requiredNonPkSingleAkMoreDerived.MoreDerivedRoot);
+
+            Assert.True(optionalChildren.All(e => e.Parent == root));
+            Assert.True(requiredChildren.All(e => e.Parent == root));
+            Assert.True(optionalChildrenAk.All(e => e.Parent == root));
+            Assert.True(requiredChildrenAk.All(e => e.Parent == root));
+            Assert.True(requiredCompositeChildren.All(e => e.Parent == root));
+
+            Assert.False(context.ChangeTracker.HasChanges());
+
+            context.Entry(optionalSingle).State = EntityState.Detached;
+            context.Entry(requiredSingle).State = EntityState.Detached;
+            context.Entry(optionalSingleAk).State = EntityState.Detached;
+            context.Entry(optionalSingleDerived).State = EntityState.Detached;
+            context.Entry(requiredSingleAk).State = EntityState.Detached;
+            context.Entry(optionalSingleAkDerived).State = EntityState.Detached;
+            context.Entry(optionalSingleMoreDerived).State = EntityState.Detached;
+            context.Entry(requiredNonPkSingle).State = EntityState.Detached;
+            context.Entry(optionalSingleAkMoreDerived).State = EntityState.Detached;
+            context.Entry(requiredNonPkSingleAk).State = EntityState.Detached;
+            context.Entry(requiredNonPkSingleDerived).State = EntityState.Detached;
+            context.Entry(requiredNonPkSingleAkDerived).State = EntityState.Detached;
+            context.Entry(requiredNonPkSingleMoreDerived).State = EntityState.Detached;
+            context.Entry(requiredNonPkSingleAkMoreDerived).State = EntityState.Detached;
+            context.Entry(optionalChild).State = EntityState.Detached;
+            context.Entry(requiredChild).State = EntityState.Detached;
+            context.Entry(optionalChildAk).State = EntityState.Detached;
+            context.Entry(requieredChildAk).State = EntityState.Detached;
+
+            foreach (var overlappingEntry in context.ChangeTracker.Entries<OptionalOverlapping2>())
             {
-                var root = LoadOptionalGraph(context);
-                LoadRequiredGraph(context);
-                LoadOptionalAkGraph(context);
-                LoadRequiredAkGraph(context);
-                LoadRequiredCompositeGraph(context);
-                LoadRequiredNonPkGraph(context);
-                LoadOptionalOneToManyGraph(context);
-                LoadRequiredNonPkAkGraph(context);
+                overlappingEntry.State = EntityState.Detached;
+            }
 
-                var optionalSingle = root.OptionalSingle;
-                var requiredSingle = root.RequiredSingle;
-                var optionalSingleAk = root.OptionalSingleAk;
-                var optionalSingleDerived = root.OptionalSingleDerived;
-                var requiredSingleAk = root.RequiredSingleAk;
-                var optionalSingleAkDerived = root.OptionalSingleAkDerived;
-                var optionalSingleMoreDerived = root.OptionalSingleMoreDerived;
-                var requiredNonPkSingle = root.RequiredNonPkSingle;
-                var optionalSingleAkMoreDerived = root.OptionalSingleAkMoreDerived;
-                var requiredNonPkSingleAk = root.RequiredNonPkSingleAk;
-                var requiredNonPkSingleDerived = root.RequiredNonPkSingleDerived;
-                var requiredNonPkSingleAkDerived = root.RequiredNonPkSingleAkDerived;
-                var requiredNonPkSingleMoreDerived = root.RequiredNonPkSingleMoreDerived;
-                var requiredNonPkSingleAkMoreDerived = root.RequiredNonPkSingleAkMoreDerived;
+            context.Entry(requiredCompositeChild).State = EntityState.Detached;
 
-                var optionalChildren = root.OptionalChildren;
-                var requiredChildren = root.RequiredChildren;
-                var optionalChildrenAk = root.OptionalChildrenAk;
-                var requiredChildrenAk = root.RequiredChildrenAk;
-                var requiredCompositeChildren = root.RequiredCompositeChildren;
-                var optionalChild = optionalChildren.First();
-                var requiredChild = requiredChildren.First();
-                var optionalChildAk = optionalChildrenAk.First();
-                var requieredChildAk = requiredChildrenAk.First();
-                var requiredCompositeChild = requiredCompositeChildren.First();
+            Assert.False(context.ChangeTracker.HasChanges());
 
-                Assert.Same(root, optionalSingle.Root);
-                Assert.Same(root, requiredSingle.Root);
-                Assert.Same(root, optionalSingleAk.Root);
-                Assert.Same(root, optionalSingleDerived.DerivedRoot);
-                Assert.Same(root, requiredSingleAk.Root);
-                Assert.Same(root, optionalSingleAkDerived.DerivedRoot);
-                Assert.Same(root, optionalSingleMoreDerived.MoreDerivedRoot);
-                Assert.Same(root, requiredNonPkSingle.Root);
-                Assert.Same(root, optionalSingleAkMoreDerived.MoreDerivedRoot);
-                Assert.Same(root, requiredNonPkSingleAk.Root);
-                Assert.Same(root, requiredNonPkSingleDerived.DerivedRoot);
-                Assert.Same(root, requiredNonPkSingleAkDerived.DerivedRoot);
-                Assert.Same(root, requiredNonPkSingleMoreDerived.MoreDerivedRoot);
-                Assert.Same(root, requiredNonPkSingleAkMoreDerived.MoreDerivedRoot);
+            Assert.Same(root, optionalSingle.Root);
+            Assert.Same(root, requiredSingle.Root);
+            Assert.Same(root, optionalSingleAk.Root);
+            Assert.Same(root, optionalSingleDerived.DerivedRoot);
+            Assert.Same(root, requiredSingleAk.Root);
+            Assert.Same(root, optionalSingleAkDerived.DerivedRoot);
+            Assert.Same(root, optionalSingleMoreDerived.MoreDerivedRoot);
+            Assert.Same(root, requiredNonPkSingle.Root);
+            Assert.Same(root, optionalSingleAkMoreDerived.MoreDerivedRoot);
+            Assert.Same(root, requiredNonPkSingleAk.Root);
+            Assert.Same(root, requiredNonPkSingleDerived.DerivedRoot);
+            Assert.Same(root, requiredNonPkSingleAkDerived.DerivedRoot);
+            Assert.Same(root, requiredNonPkSingleMoreDerived.MoreDerivedRoot);
+            Assert.Same(root, requiredNonPkSingleAkMoreDerived.MoreDerivedRoot);
 
-                Assert.True(optionalChildren.All(e => e.Parent == root));
-                Assert.True(requiredChildren.All(e => e.Parent == root));
-                Assert.True(optionalChildrenAk.All(e => e.Parent == root));
-                Assert.True(requiredChildrenAk.All(e => e.Parent == root));
-                Assert.True(requiredCompositeChildren.All(e => e.Parent == root));
+            Assert.True(optionalChildren.All(e => e.Parent == root));
+            Assert.True(requiredChildren.All(e => e.Parent == root));
+            Assert.True(optionalChildrenAk.All(e => e.Parent == root));
+            Assert.True(requiredChildrenAk.All(e => e.Parent == root));
+            Assert.True(requiredCompositeChildren.All(e => e.Parent == root));
 
-                Assert.False(context.ChangeTracker.HasChanges());
+            Assert.NotNull(root.OptionalSingle);
+            Assert.NotNull(root.RequiredSingle);
+            Assert.NotNull(root.OptionalSingleAk);
+            Assert.NotNull(root.OptionalSingleDerived);
+            Assert.NotNull(root.RequiredSingleAk);
+            Assert.NotNull(root.OptionalSingleAkDerived);
+            Assert.NotNull(root.OptionalSingleMoreDerived);
+            Assert.NotNull(root.RequiredNonPkSingle);
+            Assert.NotNull(root.OptionalSingleAkMoreDerived);
+            Assert.NotNull(root.RequiredNonPkSingleAk);
+            Assert.NotNull(root.RequiredNonPkSingleDerived);
+            Assert.NotNull(root.RequiredNonPkSingleAkDerived);
+            Assert.NotNull(root.RequiredNonPkSingleMoreDerived);
+            Assert.NotNull(root.RequiredNonPkSingleAkMoreDerived);
 
-                context.Entry(optionalSingle).State = EntityState.Detached;
-                context.Entry(requiredSingle).State = EntityState.Detached;
-                context.Entry(optionalSingleAk).State = EntityState.Detached;
-                context.Entry(optionalSingleDerived).State = EntityState.Detached;
-                context.Entry(requiredSingleAk).State = EntityState.Detached;
-                context.Entry(optionalSingleAkDerived).State = EntityState.Detached;
-                context.Entry(optionalSingleMoreDerived).State = EntityState.Detached;
-                context.Entry(requiredNonPkSingle).State = EntityState.Detached;
-                context.Entry(optionalSingleAkMoreDerived).State = EntityState.Detached;
-                context.Entry(requiredNonPkSingleAk).State = EntityState.Detached;
-                context.Entry(requiredNonPkSingleDerived).State = EntityState.Detached;
-                context.Entry(requiredNonPkSingleAkDerived).State = EntityState.Detached;
-                context.Entry(requiredNonPkSingleMoreDerived).State = EntityState.Detached;
-                context.Entry(requiredNonPkSingleAkMoreDerived).State = EntityState.Detached;
-                context.Entry(optionalChild).State = EntityState.Detached;
-                context.Entry(requiredChild).State = EntityState.Detached;
-                context.Entry(optionalChildAk).State = EntityState.Detached;
-                context.Entry(requieredChildAk).State = EntityState.Detached;
-
-                foreach (var overlappingEntry in context.ChangeTracker.Entries<OptionalOverlapping2>())
-                {
-                    overlappingEntry.State = EntityState.Detached;
-                }
-
-                context.Entry(requiredCompositeChild).State = EntityState.Detached;
-
-                Assert.False(context.ChangeTracker.HasChanges());
-
-                Assert.Same(root, optionalSingle.Root);
-                Assert.Same(root, requiredSingle.Root);
-                Assert.Same(root, optionalSingleAk.Root);
-                Assert.Same(root, optionalSingleDerived.DerivedRoot);
-                Assert.Same(root, requiredSingleAk.Root);
-                Assert.Same(root, optionalSingleAkDerived.DerivedRoot);
-                Assert.Same(root, optionalSingleMoreDerived.MoreDerivedRoot);
-                Assert.Same(root, requiredNonPkSingle.Root);
-                Assert.Same(root, optionalSingleAkMoreDerived.MoreDerivedRoot);
-                Assert.Same(root, requiredNonPkSingleAk.Root);
-                Assert.Same(root, requiredNonPkSingleDerived.DerivedRoot);
-                Assert.Same(root, requiredNonPkSingleAkDerived.DerivedRoot);
-                Assert.Same(root, requiredNonPkSingleMoreDerived.MoreDerivedRoot);
-                Assert.Same(root, requiredNonPkSingleAkMoreDerived.MoreDerivedRoot);
-
-                Assert.True(optionalChildren.All(e => e.Parent == root));
-                Assert.True(requiredChildren.All(e => e.Parent == root));
-                Assert.True(optionalChildrenAk.All(e => e.Parent == root));
-                Assert.True(requiredChildrenAk.All(e => e.Parent == root));
-                Assert.True(requiredCompositeChildren.All(e => e.Parent == root));
-
-                Assert.NotNull(root.OptionalSingle);
-                Assert.NotNull(root.RequiredSingle);
-                Assert.NotNull(root.OptionalSingleAk);
-                Assert.NotNull(root.OptionalSingleDerived);
-                Assert.NotNull(root.RequiredSingleAk);
-                Assert.NotNull(root.OptionalSingleAkDerived);
-                Assert.NotNull(root.OptionalSingleMoreDerived);
-                Assert.NotNull(root.RequiredNonPkSingle);
-                Assert.NotNull(root.OptionalSingleAkMoreDerived);
-                Assert.NotNull(root.RequiredNonPkSingleAk);
-                Assert.NotNull(root.RequiredNonPkSingleDerived);
-                Assert.NotNull(root.RequiredNonPkSingleAkDerived);
-                Assert.NotNull(root.RequiredNonPkSingleMoreDerived);
-                Assert.NotNull(root.RequiredNonPkSingleAkMoreDerived);
-
-                Assert.Contains(optionalChild, root.OptionalChildren);
-                Assert.Contains(requiredChild, root.RequiredChildren);
-                Assert.Contains(optionalChildAk, root.OptionalChildrenAk);
-                Assert.Contains(requieredChildAk, root.RequiredChildrenAk);
-                Assert.Contains(requiredCompositeChild, root.RequiredCompositeChildren);
-            });
+            Assert.Contains(optionalChild, root.OptionalChildren);
+            Assert.Contains(requiredChild, root.RequiredChildren);
+            Assert.Contains(optionalChildAk, root.OptionalChildrenAk);
+            Assert.Contains(requieredChildAk, root.RequiredChildrenAk);
+            Assert.Contains(requiredCompositeChild, root.RequiredCompositeChildren);
+        });
 
     [ConditionalTheory]
     [InlineData(CascadeTiming.OnSaveChanges, CascadeTiming.OnSaveChanges)]
@@ -1379,7 +1500,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
     [InlineData(null, null)]
     public virtual void Re_childing_parent_to_new_child_with_delete(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming)
+        CascadeTiming? deleteOrphansTiming
+    )
     {
         var oldId = 0;
         var newId = 0;
@@ -1387,8 +1509,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         ExecuteWithStrategyInTransaction(
             context =>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.CascadeDeleteTiming =
+                    cascadeDeleteTiming ?? CascadeTiming.Never;
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
                 var parent = context.Set<ParentAsAChild>().Include(p => p.ChildAsAParent).Single();
 
@@ -1428,12 +1552,13 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 Assert.Equal(newId, parent.ChildAsAParentId);
                 Assert.Equal(newId, parent.ChildAsAParent.Id);
                 Assert.Null(context.Set<ChildAsAParent>().Find(oldId));
-            });
+            }
+        );
     }
 
     [ConditionalFact]
-    public virtual void Sometimes_not_calling_DetectChanges_when_required_does_not_throw_for_null_ref()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Sometimes_not_calling_DetectChanges_when_required_does_not_throw_for_null_ref() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var dependent = context.Set<BadOrder>().Single();
@@ -1466,11 +1591,12 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 Assert.Null(dependent.BadCustomerId);
                 Assert.Null(dependent.BadCustomer);
                 Assert.Empty(principal.BadOrders);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual void Can_add_valid_first_dependent_when_multiple_possible_principal_sides()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Can_add_valid_first_dependent_when_multiple_possible_principal_sides() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var quizTask = new QuizTask();
@@ -1493,11 +1619,12 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 Assert.Same(quizTask.Choices.Single(), context.Set<TaskChoice>().Single());
 
                 Assert.Empty(context.Set<HiddenAreaTask>().Include(e => e.Choices));
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual void Can_add_valid_second_dependent_when_multiple_possible_principal_sides()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Can_add_valid_second_dependent_when_multiple_possible_principal_sides() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var hiddenAreaTask = new HiddenAreaTask();
@@ -1520,11 +1647,12 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                 Assert.Same(hiddenAreaTask.Choices.Single(), context.Set<TaskChoice>().Single());
 
                 Assert.Empty(context.Set<QuizTask>().Include(e => e.Choices));
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual void Can_add_multiple_dependents_when_multiple_possible_principal_sides()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Can_add_multiple_dependents_when_multiple_possible_principal_sides() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var quizTask = new QuizTask();
@@ -1567,7 +1695,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     Assert.Equal(
                         1,
                         quizTask.Choices.Count(e => e.Id == taskChoice.Id)
-                        + hiddenAreaTask.Choices.Count(e => e.Id == taskChoice.Id));
+                            + hiddenAreaTask.Choices.Count(e => e.Id == taskChoice.Id)
+                    );
                 }
-            });
+            }
+        );
 }

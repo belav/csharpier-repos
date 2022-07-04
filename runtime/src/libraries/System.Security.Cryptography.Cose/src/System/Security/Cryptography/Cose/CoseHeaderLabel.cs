@@ -11,7 +11,8 @@ namespace System.Security.Cryptography.Cose
     public readonly struct CoseHeaderLabel : IEquatable<CoseHeaderLabel>
     {
         internal string LabelName => LabelAsString ?? LabelAsInt32.ToString();
-        private string DebuggerDisplay => $"Label = {LabelName}, Type = {(LabelAsString != null ? typeof(string) : typeof(int))}";
+        private string DebuggerDisplay =>
+            $"Label = {LabelName}, Type = {(LabelAsString != null ? typeof(string) : typeof(int))}";
 
         // https://www.iana.org/assignments/cose/cose.xhtml#header-parameters
         public static CoseHeaderLabel Algorithm => new CoseHeaderLabel(KnownHeaders.Alg);
@@ -20,7 +21,8 @@ namespace System.Security.Cryptography.Cose
         public static CoseHeaderLabel KeyIdentifier => new CoseHeaderLabel(KnownHeaders.Kid);
         public static CoseHeaderLabel IV => new CoseHeaderLabel(KnownHeaders.IV);
         public static CoseHeaderLabel PartialIV => new CoseHeaderLabel(KnownHeaders.PartialIV);
-        public static CoseHeaderLabel CounterSignature => new CoseHeaderLabel(KnownHeaders.CounterSignature);
+        public static CoseHeaderLabel CounterSignature =>
+            new CoseHeaderLabel(KnownHeaders.CounterSignature);
 
         internal int LabelAsInt32 { get; }
         internal string? LabelAsString { get; }
@@ -50,7 +52,8 @@ namespace System.Security.Cryptography.Cose
             return LabelAsString == other.LabelAsString && LabelAsInt32 == other.LabelAsInt32;
         }
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is CoseHeaderLabel otherObj && Equals(otherObj);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is CoseHeaderLabel otherObj && Equals(otherObj);
 
         public override int GetHashCode()
         {
@@ -62,8 +65,10 @@ namespace System.Security.Cryptography.Cose
             return LabelAsInt32.GetHashCode();
         }
 
-        public static bool operator ==(CoseHeaderLabel left, CoseHeaderLabel right) => left.Equals(right);
+        public static bool operator ==(CoseHeaderLabel left, CoseHeaderLabel right) =>
+            left.Equals(right);
 
-        public static bool operator !=(CoseHeaderLabel left, CoseHeaderLabel right) => !left.Equals(right);
+        public static bool operator !=(CoseHeaderLabel left, CoseHeaderLabel right) =>
+            !left.Equals(right);
     }
 }

@@ -12,17 +12,17 @@ namespace System.IO
      * and STG_E_PATHNOTFOUND (0x80030003).
      */
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class DirectoryNotFoundException : IOException
     {
-        public DirectoryNotFoundException()
-            : base(SR.Arg_DirectoryNotFoundException)
+        public DirectoryNotFoundException() : base(SR.Arg_DirectoryNotFoundException)
         {
             HResult = HResults.COR_E_DIRECTORYNOTFOUND;
         }
 
-        public DirectoryNotFoundException(string? message)
-            : base(message)
+        public DirectoryNotFoundException(string? message) : base(message)
         {
             HResult = HResults.COR_E_DIRECTORYNOTFOUND;
         }
@@ -34,8 +34,6 @@ namespace System.IO
         }
 
         protected DirectoryNotFoundException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

@@ -27,7 +27,9 @@ public class TemporaryNumberValueGeneratorFactory : ValueGeneratorFactory
     /// <returns>The newly created value generator.</returns>
     public override ValueGenerator Create(IProperty property, IEntityType entityType)
     {
-        var type = (property.GetValueConverter()?.ProviderClrType ?? property.GetTypeMapping().ClrType).UnwrapEnumType();
+        var type = (
+            property.GetValueConverter()?.ProviderClrType ?? property.GetTypeMapping().ClrType
+        ).UnwrapEnumType();
 
         if (type == typeof(int))
         {
@@ -91,6 +93,10 @@ public class TemporaryNumberValueGeneratorFactory : ValueGeneratorFactory
 
         throw new ArgumentException(
             CoreStrings.InvalidValueGeneratorFactoryProperty(
-                nameof(TemporaryNumberValueGeneratorFactory), property.Name, property.DeclaringEntityType.DisplayName()));
+                nameof(TemporaryNumberValueGeneratorFactory),
+                property.Name,
+                property.DeclaringEntityType.DisplayName()
+            )
+        );
     }
 }

@@ -12,7 +12,8 @@ internal sealed class DefaultClientRequestParametersProvider : IClientRequestPar
 {
     public DefaultClientRequestParametersProvider(
         IAbsoluteUrlFactory urlFactory,
-        IOptions<ApiAuthorizationOptions> options)
+        IOptions<ApiAuthorizationOptions> options
+    )
     {
         UrlFactory = urlFactory;
         Options = options;
@@ -31,7 +32,9 @@ internal sealed class DefaultClientRequestParametersProvider : IClientRequestPar
 #pragma warning restore 0618
         if (!client.Properties.TryGetValue(ApplicationProfilesPropertyNames.Profile, out var type))
         {
-            throw new InvalidOperationException($"Can't determine the type for the client '{clientId}'");
+            throw new InvalidOperationException(
+                $"Can't determine the type for the client '{clientId}'"
+            );
         }
 
         string responseType;
@@ -43,7 +46,9 @@ internal sealed class DefaultClientRequestParametersProvider : IClientRequestPar
                 responseType = "code";
                 break;
             default:
-                throw new InvalidOperationException($"Invalid application type '{type}' for '{clientId}'.");
+                throw new InvalidOperationException(
+                    $"Invalid application type '{type}' for '{clientId}'."
+                );
         }
 
         return new Dictionary<string, string>
@@ -51,7 +56,10 @@ internal sealed class DefaultClientRequestParametersProvider : IClientRequestPar
             ["authority"] = authority,
             ["client_id"] = client.ClientId,
             ["redirect_uri"] = UrlFactory.GetAbsoluteUrl(context, client.RedirectUris.First()),
-            ["post_logout_redirect_uri"] = UrlFactory.GetAbsoluteUrl(context, client.PostLogoutRedirectUris.First()),
+            ["post_logout_redirect_uri"] = UrlFactory.GetAbsoluteUrl(
+                context,
+                client.PostLogoutRedirectUris.First()
+            ),
             ["response_type"] = responseType,
             ["scope"] = string.Join(" ", client.AllowedScopes)
         };

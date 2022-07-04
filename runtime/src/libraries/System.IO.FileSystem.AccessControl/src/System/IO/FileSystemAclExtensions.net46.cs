@@ -7,7 +7,15 @@ namespace System.IO
 {
     public static class FileSystemAclExtensions
     {
-        public static FileStream Create(this FileInfo fileInfo, FileMode mode, FileSystemRights rights, FileShare share, int bufferSize, FileOptions options, FileSecurity fileSecurity)
+        public static FileStream Create(
+            this FileInfo fileInfo,
+            FileMode mode,
+            FileSystemRights rights,
+            FileShare share,
+            int bufferSize,
+            FileOptions options,
+            FileSecurity fileSecurity
+        )
         {
             if (fileInfo == null)
                 throw new ArgumentNullException(nameof(fileInfo));
@@ -15,10 +23,21 @@ namespace System.IO
             if (fileSecurity == null)
                 throw new ArgumentNullException(nameof(fileSecurity));
 
-            return new FileStream(fileInfo.FullName, mode, rights, share, bufferSize, options, fileSecurity);
+            return new FileStream(
+                fileInfo.FullName,
+                mode,
+                rights,
+                share,
+                bufferSize,
+                options,
+                fileSecurity
+            );
         }
 
-        public static void Create(this DirectoryInfo directoryInfo, DirectorySecurity directorySecurity)
+        public static void Create(
+            this DirectoryInfo directoryInfo,
+            DirectorySecurity directorySecurity
+        )
         {
             if (directoryInfo == null)
                 throw new ArgumentNullException(nameof(directoryInfo));
@@ -29,7 +48,10 @@ namespace System.IO
             directoryInfo.Create(directorySecurity);
         }
 
-        public static DirectoryInfo CreateDirectory(this DirectorySecurity directorySecurity, string path)
+        public static DirectoryInfo CreateDirectory(
+            this DirectorySecurity directorySecurity,
+            string path
+        )
         {
             if (directorySecurity == null)
                 throw new ArgumentNullException(nameof(directorySecurity));
@@ -51,7 +73,10 @@ namespace System.IO
             return directoryInfo.GetAccessControl();
         }
 
-        public static DirectorySecurity GetAccessControl(this DirectoryInfo directoryInfo, AccessControlSections includeSections)
+        public static DirectorySecurity GetAccessControl(
+            this DirectoryInfo directoryInfo,
+            AccessControlSections includeSections
+        )
         {
             if (directoryInfo == null)
                 throw new ArgumentNullException(nameof(directoryInfo));
@@ -59,7 +84,10 @@ namespace System.IO
             return directoryInfo.GetAccessControl(includeSections);
         }
 
-        public static void SetAccessControl(this DirectoryInfo directoryInfo, DirectorySecurity directorySecurity)
+        public static void SetAccessControl(
+            this DirectoryInfo directoryInfo,
+            DirectorySecurity directorySecurity
+        )
         {
             if (directoryInfo == null)
                 throw new ArgumentNullException(nameof(directoryInfo));
@@ -78,7 +106,10 @@ namespace System.IO
             return fileInfo.GetAccessControl();
         }
 
-        public static FileSecurity GetAccessControl(this FileInfo fileInfo, AccessControlSections includeSections)
+        public static FileSecurity GetAccessControl(
+            this FileInfo fileInfo,
+            AccessControlSections includeSections
+        )
         {
             if (fileInfo == null)
                 throw new ArgumentNullException(nameof(fileInfo));

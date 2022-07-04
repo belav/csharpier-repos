@@ -38,7 +38,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 
         public readonly Workspace Workspace;
 
-        public InheritanceMarginTag(Workspace workspace, int lineNumber, ImmutableArray<InheritanceMarginItem> membersOnLine)
+        public InheritanceMarginTag(
+            Workspace workspace,
+            int lineNumber,
+            ImmutableArray<InheritanceMarginItem> membersOnLine
+        )
         {
             Contract.ThrowIfTrue(membersOnLine.IsEmpty);
 

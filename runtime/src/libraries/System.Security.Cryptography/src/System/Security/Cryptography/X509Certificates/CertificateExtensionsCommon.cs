@@ -9,8 +9,8 @@ namespace System.Security.Cryptography.X509Certificates
     {
         public static T? GetPublicKey<T>(
             this X509Certificate2 certificate,
-            Predicate<X509Certificate2>? matchesConstraints = null)
-            where T : AsymmetricAlgorithm
+            Predicate<X509Certificate2>? matchesConstraints = null
+        ) where T : AsymmetricAlgorithm
         {
             ArgumentNullException.ThrowIfNull(certificate);
 
@@ -28,7 +28,14 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 byte[] rawEncodedKeyValue = publicKey.EncodedKeyValue.RawData;
                 byte[] rawEncodedParameters = publicKey.EncodedParameters.RawData;
-                return (T)(X509Pal.Instance.DecodePublicKey(algorithmOid, rawEncodedKeyValue, rawEncodedParameters, certificate.Pal));
+                return (T)(
+                    X509Pal.Instance.DecodePublicKey(
+                        algorithmOid,
+                        rawEncodedKeyValue,
+                        rawEncodedParameters,
+                        certificate.Pal
+                    )
+                );
             }
             else if (typeof(T) == typeof(ECDsa))
             {
@@ -36,7 +43,8 @@ namespace System.Security.Cryptography.X509Certificates
             }
             else if (typeof(T) == typeof(ECDiffieHellman))
             {
-                return (T)(object)(X509Pal.Instance.DecodeECDiffieHellmanPublicKey(certificate.Pal));
+                return (T)
+                    (object)(X509Pal.Instance.DecodeECDiffieHellmanPublicKey(certificate.Pal));
             }
 
             Debug.Fail("Expected GetExpectedOidValue() to have thrown before we got here.");
@@ -45,8 +53,8 @@ namespace System.Security.Cryptography.X509Certificates
 
         public static T? GetPrivateKey<T>(
             this X509Certificate2 certificate,
-            Predicate<X509Certificate2>? matchesConstraints = null)
-            where T : AsymmetricAlgorithm
+            Predicate<X509Certificate2>? matchesConstraints = null
+        ) where T : AsymmetricAlgorithm
         {
             ArgumentNullException.ThrowIfNull(certificate);
 

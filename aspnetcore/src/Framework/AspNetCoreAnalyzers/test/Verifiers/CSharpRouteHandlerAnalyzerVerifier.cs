@@ -11,11 +11,11 @@ namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 public static class CSharpRouteHandlerAnalyzerVerifier<TAnalyzer>
     where TAnalyzer : RouteHandlerAnalyzer, new()
 {
-    public static DiagnosticResult Diagnostic(string diagnosticId = null)
-        => CSharpRouteHandlerAnalyzerVerifier<RouteHandlerAnalyzer>.Diagnostic(diagnosticId);
+    public static DiagnosticResult Diagnostic(string diagnosticId = null) =>
+        CSharpRouteHandlerAnalyzerVerifier<RouteHandlerAnalyzer>.Diagnostic(diagnosticId);
 
-    public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor)
-        => new DiagnosticResult(descriptor);
+    public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor) =>
+        new DiagnosticResult(descriptor);
 
     public static Task VerifyAnalyzerAsync(string source, params DiagnosticResult[] expected)
     {

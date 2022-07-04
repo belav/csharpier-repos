@@ -19,10 +19,17 @@ namespace System.Security.Cryptography.Cose.Tests
         internal T DefaultKey => GetKeyHashPair<T>(CoseAlgorithms[0]).Key;
         internal HashAlgorithmName DefaultHash => GetKeyHashPair<T>(CoseAlgorithms[0]).Hash;
         internal abstract List<CoseAlgorithm> CoseAlgorithms { get; }
-        internal abstract byte[] Sign(byte[] content, T key, HashAlgorithmName hashAlgorithm, bool isDetached = false);
+        internal abstract byte[] Sign(
+            byte[] content,
+            T key,
+            HashAlgorithmName hashAlgorithm,
+            bool isDetached = false
+        );
         internal abstract bool Verify(CoseSign1Message msg, T key, byte[] content);
 
-        internal IEnumerable<(T Key, HashAlgorithmName Hash, CoseAlgorithm Algorithm)> GetKeyHashAlgorithmTriplet(bool useNonPrivateKey = false)
+        internal IEnumerable<(T Key, HashAlgorithmName Hash, CoseAlgorithm Algorithm)> GetKeyHashAlgorithmTriplet(
+            bool useNonPrivateKey = false
+        )
         {
             foreach (var algorithm in CoseAlgorithms)
             {
@@ -38,20 +45,37 @@ namespace System.Security.Cryptography.Cose.Tests
             CoseAlgorithm algorithm,
             List<(CoseHeaderLabel, ReadOnlyMemory<byte>)>? expectedProtectedHeaders = null,
             List<(CoseHeaderLabel, ReadOnlyMemory<byte>)>? expectedUnprotectedHeaders = null,
-            bool? expectedDetachedContent = null)
+            bool? expectedDetachedContent = null
+        )
         {
             if (OnlySupportsDetachedContent && expectedDetachedContent != null)
             {
-                throw new InvalidOperationException($"Don't specify {nameof(expectedDetachedContent)}, {GetType()} only supports detached content.");
+                throw new InvalidOperationException(
+                    $"Don't specify {nameof(expectedDetachedContent)}, {GetType()} only supports detached content."
+                );
             }
 
-            AssertSign1MessageCore(encodedMsg, expectedContent, key, algorithm, expectedProtectedHeaders, expectedUnprotectedHeaders, expectedDetachedContent ?? OnlySupportsDetachedContent);
+            AssertSign1MessageCore(
+                encodedMsg,
+                expectedContent,
+                key,
+                algorithm,
+                expectedProtectedHeaders,
+                expectedUnprotectedHeaders,
+                expectedDetachedContent ?? OnlySupportsDetachedContent
+            );
         }
 
         [Fact]
         public void SignVerify()
         {
-            foreach ((T key, HashAlgorithmName hashAlgorithm, CoseAlgorithm algorithm) in GetKeyHashAlgorithmTriplet())
+            foreach (
+                (
+                    T key,
+                    HashAlgorithmName hashAlgorithm,
+                    CoseAlgorithm algorithm
+                ) in GetKeyHashAlgorithmTriplet()
+            )
             {
                 ReadOnlySpan<byte> encodedMsg = Sign(s_sampleContent, key, hashAlgorithm);
                 AssertSign1Message(encodedMsg, s_sampleContent, key, algorithm);
@@ -64,7 +88,9 @@ namespace System.Security.Cryptography.Cose.Tests
         [Fact]
         public void SignWithNullContent()
         {
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => Sign(null!, DefaultKey, DefaultHash));
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
+                () => Sign(null!, DefaultKey, DefaultHash)
+            );
             Assert.True(ex.ParamName == "content" || ex.ParamName == "detachedContent");
         }
 
@@ -82,15 +108,24 @@ namespace System.Security.Cryptography.Cose.Tests
         [Fact]
         public void SignWithNullKey()
         {
-            Assert.Throws<ArgumentNullException>("key", () => Sign(s_sampleContent, null!, DefaultHash));
+            Assert.Throws<ArgumentNullException>(
+                "key",
+                () => Sign(s_sampleContent, null!, DefaultHash)
+            );
         }
 
         [Fact]
         public void SignWithNonPrivateKey()
         {
-            foreach ((T nonPrivateKey, HashAlgorithmName hashAlgorithm, _) in GetKeyHashAlgorithmTriplet(useNonPrivateKey: true))
+            foreach (
+                (T nonPrivateKey, HashAlgorithmName hashAlgorithm, _) in GetKeyHashAlgorithmTriplet(
+                    useNonPrivateKey: true
+                )
+            )
             {
-                Assert.ThrowsAny<CryptographicException>(() => Sign(s_sampleContent, nonPrivateKey, hashAlgorithm));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => Sign(s_sampleContent, nonPrivateKey, hashAlgorithm)
+                );
             }
         }
 
@@ -99,7 +134,9 @@ namespace System.Security.Cryptography.Cose.Tests
         [InlineData("FOO")]
         public void SignWithUnsupportedHashAlgorithm(string hashAlgorithm)
         {
-            Assert.Throws<CryptographicException>(() => Sign(s_sampleContent, DefaultKey, new HashAlgorithmName(hashAlgorithm)));
+            Assert.Throws<CryptographicException>(
+                () => Sign(s_sampleContent, DefaultKey, new HashAlgorithmName(hashAlgorithm))
+            );
         }
 
         [Theory]
@@ -112,31 +149,60 @@ namespace System.Security.Cryptography.Cose.Tests
                 return;
             }
 
-            ReadOnlySpan<byte> messageEncoded = CoseSign1Message.Sign(s_sampleContent, DefaultKey, DefaultHash, isDetached: isDetached);
-            AssertSign1Message(messageEncoded, s_sampleContent, DefaultKey, DefaultAlgorithm, expectedDetachedContent: isDetached);
+            ReadOnlySpan<byte> messageEncoded = CoseSign1Message.Sign(
+                s_sampleContent,
+                DefaultKey,
+                DefaultHash,
+                isDetached: isDetached
+            );
+            AssertSign1Message(
+                messageEncoded,
+                s_sampleContent,
+                DefaultKey,
+                DefaultAlgorithm,
+                expectedDetachedContent: isDetached
+            );
 
             messageEncoded = Sign(s_sampleContent, DefaultKey, DefaultHash, isDetached: isDetached);
-            AssertSign1Message(messageEncoded, s_sampleContent, DefaultKey, DefaultAlgorithm, expectedDetachedContent: isDetached);
+            AssertSign1Message(
+                messageEncoded,
+                s_sampleContent,
+                DefaultKey,
+                DefaultAlgorithm,
+                expectedDetachedContent: isDetached
+            );
         }
     }
 
     public class CoseSign1MessageTests_Sign_ECDsa : CoseSign1MessageTests_Sign<ECDsa>
     {
-        internal override List<CoseAlgorithm> CoseAlgorithms => new() { CoseAlgorithm.ES256, CoseAlgorithm.ES384, CoseAlgorithm.ES512 };
+        internal override List<CoseAlgorithm> CoseAlgorithms =>
+            new() { CoseAlgorithm.ES256, CoseAlgorithm.ES384, CoseAlgorithm.ES512 };
 
-        internal override byte[] Sign(byte[] content, ECDsa key, HashAlgorithmName hashAlgorithm, bool isDetached = false)
-            => CoseSign1Message.Sign(content, key, hashAlgorithm, isDetached: isDetached);
-        internal override bool Verify(CoseSign1Message msg, ECDsa key, byte[] content)
-            => msg.Content.HasValue ? msg.Verify(key) : msg.Verify(key, content);
+        internal override byte[] Sign(
+            byte[] content,
+            ECDsa key,
+            HashAlgorithmName hashAlgorithm,
+            bool isDetached = false
+        ) => CoseSign1Message.Sign(content, key, hashAlgorithm, isDetached: isDetached);
+
+        internal override bool Verify(CoseSign1Message msg, ECDsa key, byte[] content) =>
+            msg.Content.HasValue ? msg.Verify(key) : msg.Verify(key, content);
     }
 
     public class CoseSign1MessageTests_Sign_RSA : CoseSign1MessageTests_Sign<RSA>
     {
-        internal override List<CoseAlgorithm> CoseAlgorithms => new() { CoseAlgorithm.PS256, CoseAlgorithm.PS384, CoseAlgorithm.PS512 };
+        internal override List<CoseAlgorithm> CoseAlgorithms =>
+            new() { CoseAlgorithm.PS256, CoseAlgorithm.PS384, CoseAlgorithm.PS512 };
 
-        internal override byte[] Sign(byte[] content, RSA key, HashAlgorithmName hashAlgorithm, bool isDetached = false)
-            => CoseSign1Message.Sign(content, key, hashAlgorithm, isDetached: isDetached);
-        internal override bool Verify(CoseSign1Message msg, RSA key, byte[] content)
-            => msg.Content.HasValue ? msg.Verify(key) : msg.Verify(key, content);
+        internal override byte[] Sign(
+            byte[] content,
+            RSA key,
+            HashAlgorithmName hashAlgorithm,
+            bool isDetached = false
+        ) => CoseSign1Message.Sign(content, key, hashAlgorithm, isDetached: isDetached);
+
+        internal override bool Verify(CoseSign1Message msg, RSA key, byte[] content) =>
+            msg.Content.HasValue ? msg.Verify(key) : msg.Verify(key, content);
     }
 }

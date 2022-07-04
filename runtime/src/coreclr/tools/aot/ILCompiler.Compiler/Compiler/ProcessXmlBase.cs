@@ -21,7 +21,12 @@ namespace ILCompiler
         private readonly IReadOnlyDictionary<string, bool> _featureSwitchValues;
         protected readonly TypeSystemContext _context;
 
-        public ProcessXmlBase(TypeSystemContext context, XmlReader reader, ModuleDesc owningModule, IReadOnlyDictionary<string, bool> featureSwitchValues)
+        public ProcessXmlBase(
+            TypeSystemContext context,
+            XmlReader reader,
+            ModuleDesc owningModule,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        )
         {
             _reader = reader;
             _owningModule = owningModule;
@@ -138,7 +143,11 @@ namespace ILCompiler
                 if (typeName.Contains('*'))
                     throw new NotSupportedException();
 
-                TypeDesc type = CustomAttributeTypeNameParser.GetTypeByCustomAttributeTypeName(assembly, typeName, throwIfNotFound: false);
+                TypeDesc type = CustomAttributeTypeNameParser.GetTypeByCustomAttributeTypeName(
+                    assembly,
+                    typeName,
+                    throwIfNotFound: false
+                );
                 if (type == null)
                 {
                     //Context.LogWarning ($"Could not resolve type '{fullname}'", 2008, _xmlDocumentLocation);
@@ -208,9 +217,7 @@ namespace ILCompiler
             }
         }
 
-        protected virtual void ProcessMethod(MethodDesc method)
-        {
-        }
+        protected virtual void ProcessMethod(MethodDesc method) { }
 
         private void ProcessField(TypeDesc type)
         {
@@ -233,17 +240,11 @@ namespace ILCompiler
             }
         }
 
-        protected virtual void ProcessField(FieldDesc field)
-        {
-        }
+        protected virtual void ProcessField(FieldDesc field) { }
 
-        protected virtual void ProcessAttribute(TypeDesc type)
-        {
-        }
+        protected virtual void ProcessAttribute(TypeDesc type) { }
 
-        protected virtual void ProcessResource(ModuleDesc module)
-        {
-        }
+        protected virtual void ProcessResource(ModuleDesc module) { }
 
         protected MethodDesc GetMethod(TypeDesc type, string signature)
         {
@@ -300,7 +301,10 @@ namespace ILCompiler
 
             var isDefault = _reader.GetAttribute("featuredefault");
             bool bIsDefault = false;
-            if (!string.IsNullOrEmpty(isDefault) && (!bool.TryParse(isDefault, out bIsDefault) || !bIsDefault))
+            if (
+                !string.IsNullOrEmpty(isDefault)
+                && (!bool.TryParse(isDefault, out bIsDefault) || !bIsDefault)
+            )
             {
                 //context.LogError($"Failed to process '{documentLocation}'. Unsupported value for featuredefault attribute", 1014);
                 return false;
@@ -324,6 +328,7 @@ namespace ILCompiler
                     sb.Append(new string(',', type.Rank - 1));
                 sb.Append(']');
             }
+
             public override void AppendName(StringBuilder sb, ByRefType type)
             {
                 AppendName(sb, type.ParameterType);
@@ -360,12 +365,11 @@ namespace ILCompiler
             {
                 sb.Append(type.Name);
             }
-            public override void AppendName(StringBuilder sb, SignatureMethodVariable type)
-            {
-            }
-            public override void AppendName(StringBuilder sb, SignatureTypeVariable type)
-            {
-            }
+
+            public override void AppendName(StringBuilder sb, SignatureMethodVariable type) { }
+
+            public override void AppendName(StringBuilder sb, SignatureTypeVariable type) { }
+
             protected override void AppendNameForInstantiatedType(StringBuilder sb, DefType type)
             {
                 AppendName(sb, type.GetTypeDefinition());
@@ -382,6 +386,7 @@ namespace ILCompiler
 
                 sb.Append('>');
             }
+
             protected override void AppendNameForNamespaceType(StringBuilder sb, DefType type)
             {
                 if (!String.IsNullOrEmpty(type.Namespace))
@@ -393,7 +398,11 @@ namespace ILCompiler
                 sb.Append(type.Name);
             }
 
-            protected override void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType)
+            protected override void AppendNameForNestedType(
+                StringBuilder sb,
+                DefType nestedType,
+                DefType containingType
+            )
             {
                 AppendName(sb, containingType);
                 sb.Append('/');

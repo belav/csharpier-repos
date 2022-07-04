@@ -39,14 +39,19 @@ public readonly struct HostString : IEquatable<HostString>
 
         if (port <= 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(port), Resources.Exception_PortMustBeGreaterThanZero);
+            throw new ArgumentOutOfRangeException(
+                nameof(port),
+                Resources.Exception_PortMustBeGreaterThanZero
+            );
         }
 
         int index;
-        if (!host.Contains('[')
+        if (
+            !host.Contains('[')
             && (index = host.IndexOf(':')) >= 0
             && index < host.Length - 1
-            && host.IndexOf(':', index + 1) >= 0)
+            && host.IndexOf(':', index + 1) >= 0
+        )
         {
             // IPv6 without brackets ::1 is the only type of host with 2 or more colons
             host = $"[{host}]";
@@ -96,8 +101,15 @@ public readonly struct HostString : IEquatable<HostString>
         {
             GetParts(_value, out _, out var port);
 
-            if (!StringSegment.IsNullOrEmpty(port)
-                && int.TryParse(port.AsSpan(), NumberStyles.None, CultureInfo.InvariantCulture, out var p))
+            if (
+                !StringSegment.IsNullOrEmpty(port)
+                && int.TryParse(
+                    port.AsSpan(),
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out var p
+                )
+            )
             {
                 return p;
             }
@@ -166,9 +178,11 @@ public readonly struct HostString : IEquatable<HostString>
             {
                 // IPv6 in brackets [::1], maybe with port
             }
-            else if ((index = uriComponent.IndexOf(':')) >= 0
+            else if (
+                (index = uriComponent.IndexOf(':')) >= 0
                 && index < uriComponent.Length - 1
-                && uriComponent.IndexOf(':', index + 1) >= 0)
+                && uriComponent.IndexOf(':', index + 1) >= 0
+            )
             {
                 // IPv6 without brackets ::1 is the only type of host with 2 or more colons
             }
@@ -205,9 +219,14 @@ public readonly struct HostString : IEquatable<HostString>
             throw new ArgumentNullException(nameof(uri));
         }
 
-        return new HostString(uri.GetComponents(
-            UriComponents.NormalizedHost | // Always convert punycode to Unicode.
-            UriComponents.HostAndPort, UriFormat.Unescaped));
+        return new HostString(
+            uri.GetComponents(
+                UriComponents.NormalizedHost
+                    | // Always convert punycode to Unicode.
+                    UriComponents.HostAndPort,
+                UriFormat.Unescaped
+            )
+        );
     }
 
     /// <summary>
@@ -344,7 +363,11 @@ public readonly struct HostString : IEquatable<HostString>
     /// <param name="value">The value to get the parts of.</param>
     /// <param name="host">The portion of the <paramref name="value"/> which represents the host.</param>
     /// <param name="port">The portion of the <paramref name="value"/> which represents the port.</param>
-    private static void GetParts(StringSegment value, out StringSegment host, out StringSegment port)
+    private static void GetParts(
+        StringSegment value,
+        out StringSegment host,
+        out StringSegment port
+    )
     {
         int index;
         port = null;
@@ -364,9 +387,11 @@ public readonly struct HostString : IEquatable<HostString>
                 port = value.Subsegment(index + 2);
             }
         }
-        else if ((index = value.IndexOf(':')) >= 0
+        else if (
+            (index = value.IndexOf(':')) >= 0
             && index < value.Length - 1
-            && value.IndexOf(':', index + 1) >= 0)
+            && value.IndexOf(':', index + 1) >= 0
+        )
         {
             // IPv6 without brackets ::1 is the only type of host with 2 or more colons
             host = $"[{value}]";

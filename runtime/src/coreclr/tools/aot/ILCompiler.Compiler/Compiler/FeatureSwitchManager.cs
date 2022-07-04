@@ -24,7 +24,10 @@ namespace ILCompiler
         private readonly FeatureSwitchHashtable _hashtable;
         private readonly ILProvider _nestedILProvider;
 
-        public FeatureSwitchManager(ILProvider nestedILProvider, IEnumerable<KeyValuePair<string, bool>> switchValues)
+        public FeatureSwitchManager(
+            ILProvider nestedILProvider,
+            IEnumerable<KeyValuePair<string, bool>> switchValues
+        )
         {
             _nestedILProvider = nestedILProvider;
             _hashtable = new FeatureSwitchHashtable(new Dictionary<string, bool>(switchValues));
@@ -35,7 +38,10 @@ namespace ILCompiler
             if (method.GetTypicalMethodDefinition() is EcmaMethod ecmaMethod)
             {
                 AssemblyFeatureInfo info = _hashtable.GetOrCreateValue(ecmaMethod.Module);
-                if (info.BodySubstitutions != null && info.BodySubstitutions.TryGetValue(ecmaMethod, out BodySubstitution result))
+                if (
+                    info.BodySubstitutions != null
+                    && info.BodySubstitutions.TryGetValue(ecmaMethod, out BodySubstitution result)
+                )
                     return result;
             }
 
@@ -47,7 +53,10 @@ namespace ILCompiler
             if (field.GetTypicalFieldDefinition() is EcmaField ecmaField)
             {
                 AssemblyFeatureInfo info = _hashtable.GetOrCreateValue(ecmaField.Module);
-                if (info.BodySubstitutions != null && info.FieldSubstitutions.TryGetValue(ecmaField, out object result))
+                if (
+                    info.BodySubstitutions != null
+                    && info.FieldSubstitutions.TryGetValue(ecmaField, out object result)
+                )
                     return result;
             }
 
@@ -182,14 +191,21 @@ namespace ILCompiler
                     offset = reader.Offset;
                     flags[offset] |= OpcodeFlags.InstructionStart;
                     ILOpcode opcode = reader.ReadILOpcode();
-                    if (opcode >= ILOpcode.br_s && opcode <= ILOpcode.blt_un
-                        || opcode == ILOpcode.leave || opcode == ILOpcode.leave_s)
+                    if (
+                        opcode >= ILOpcode.br_s && opcode <= ILOpcode.blt_un
+                        || opcode == ILOpcode.leave
+                        || opcode == ILOpcode.leave_s
+                    )
                     {
                         int destination = reader.ReadBranchDestination(opcode);
                         offsetsToVisit.Push(destination);
 
-                        if (opcode != ILOpcode.leave && opcode != ILOpcode.leave_s
-                            && opcode != ILOpcode.br && opcode != ILOpcode.br_s)
+                        if (
+                            opcode != ILOpcode.leave
+                            && opcode != ILOpcode.leave_s
+                            && opcode != ILOpcode.br
+                            && opcode != ILOpcode.br_s
+                        )
                         {
                             // Branches not tested for above are conditional and the flow falls through.
                             offsetsToVisit.Push(reader.Offset);
@@ -197,12 +213,14 @@ namespace ILCompiler
 
                         flags[offset] |= OpcodeFlags.EndBasicBlock;
                     }
-                    else if (opcode == ILOpcode.ret
+                    else if (
+                        opcode == ILOpcode.ret
                         || opcode == ILOpcode.endfilter
                         || opcode == ILOpcode.endfinally
                         || opcode == ILOpcode.throw_
                         || opcode == ILOpcode.rethrow
-                        || opcode == ILOpcode.jmp)
+                        || opcode == ILOpcode.jmp
+                    )
                     {
                         // Ends basic block.
                         flags[offset] |= OpcodeFlags.EndBasicBlock;
@@ -290,18 +308,39 @@ namespace ILCompiler
                     }
 
                     // All branches are relevant to basic block tracking
-                    if (opcode == ILOpcode.brfalse || opcode == ILOpcode.brfalse_s
-                        || opcode == ILOpcode.brtrue || opcode == ILOpcode.brtrue_s)
+                    if (
+                        opcode == ILOpcode.brfalse
+                        || opcode == ILOpcode.brfalse_s
+                        || opcode == ILOpcode.brtrue
+                        || opcode == ILOpcode.brtrue_s
+                    )
                     {
                         int destination = reader.ReadBranchDestination(opcode);
-                        if (!TryGetConstantArgument(method, methodBytes, flags, offset, 0, out int constant))
+                        if (
+                            !TryGetConstantArgument(
+                                method,
+                                methodBytes,
+                                flags,
+                                offset,
+                                0,
+                                out int constant
+                            )
+                        )
                         {
                             // Can't get the constant - both branches are live.
                             offsetsToVisit.Push(destination);
                             offsetsToVisit.Push(reader.Offset);
                         }
-                        else if ((constant == 0 && (opcode == ILOpcode.brfalse || opcode == ILOpcode.brfalse_s))
-                            || (constant != 0 && (opcode == ILOpcode.brtrue || opcode == ILOpcode.brtrue_s)))
+                        else if (
+                            (
+                                constant == 0
+                                && (opcode == ILOpcode.brfalse || opcode == ILOpcode.brfalse_s)
+                            )
+                            || (
+                                constant != 0
+                                && (opcode == ILOpcode.brtrue || opcode == ILOpcode.brtrue_s)
+                            )
+                        )
                         {
                             // Only the "branch taken" is live.
                             // The fallthrough marks the beginning of a visible (but not live) basic block.
@@ -316,19 +355,45 @@ namespace ILCompiler
                             offsetsToVisit.Push(reader.Offset);
                         }
                     }
-                    else if (opcode == ILOpcode.beq || opcode == ILOpcode.beq_s
-                        || opcode == ILOpcode.bne_un || opcode == ILOpcode.bne_un_s)
+                    else if (
+                        opcode == ILOpcode.beq
+                        || opcode == ILOpcode.beq_s
+                        || opcode == ILOpcode.bne_un
+                        || opcode == ILOpcode.bne_un_s
+                    )
                     {
                         int destination = reader.ReadBranchDestination(opcode);
-                        if (!TryGetConstantArgument(method, methodBytes, flags, offset, 0, out int left)
-                            || !TryGetConstantArgument(method, methodBytes, flags, offset, 1, out int right))
+                        if (
+                            !TryGetConstantArgument(
+                                method,
+                                methodBytes,
+                                flags,
+                                offset,
+                                0,
+                                out int left
+                            )
+                            || !TryGetConstantArgument(
+                                method,
+                                methodBytes,
+                                flags,
+                                offset,
+                                1,
+                                out int right
+                            )
+                        )
                         {
                             // Can't get the constant - both branches are live.
                             offsetsToVisit.Push(destination);
                             offsetsToVisit.Push(reader.Offset);
                         }
-                        else if ((left == right && (opcode == ILOpcode.beq || opcode == ILOpcode.beq_s)
-                            || (left != right) && (opcode == ILOpcode.bne_un || opcode == ILOpcode.bne_un_s)))
+                        else if (
+                            (
+                                left == right
+                                    && (opcode == ILOpcode.beq || opcode == ILOpcode.beq_s)
+                                || (left != right)
+                                    && (opcode == ILOpcode.bne_un || opcode == ILOpcode.bne_un_s)
+                            )
+                        )
                         {
                             // Only the "branch taken" is live.
                             // The fallthrough marks the beginning of a visible (but not live) basic block.
@@ -343,13 +408,20 @@ namespace ILCompiler
                             offsetsToVisit.Push(reader.Offset);
                         }
                     }
-                    else if (opcode >= ILOpcode.br_s && opcode <= ILOpcode.blt_un
-                        || opcode == ILOpcode.leave || opcode == ILOpcode.leave_s)
+                    else if (
+                        opcode >= ILOpcode.br_s && opcode <= ILOpcode.blt_un
+                        || opcode == ILOpcode.leave
+                        || opcode == ILOpcode.leave_s
+                    )
                     {
                         int destination = reader.ReadBranchDestination(opcode);
                         offsetsToVisit.Push(destination);
-                        if (opcode != ILOpcode.leave && opcode != ILOpcode.leave_s
-                            && opcode != ILOpcode.br && opcode != ILOpcode.br_s)
+                        if (
+                            opcode != ILOpcode.leave
+                            && opcode != ILOpcode.leave_s
+                            && opcode != ILOpcode.br
+                            && opcode != ILOpcode.br_s
+                        )
                         {
                             // Branches not tested for above are conditional and the flow falls through.
                             offsetsToVisit.Push(reader.Offset);
@@ -373,12 +445,14 @@ namespace ILCompiler
                         }
                         offsetsToVisit.Push(reader.Offset);
                     }
-                    else if (opcode == ILOpcode.ret
+                    else if (
+                        opcode == ILOpcode.ret
                         || opcode == ILOpcode.endfilter
                         || opcode == ILOpcode.endfinally
                         || opcode == ILOpcode.throw_
                         || opcode == ILOpcode.rethrow
-                        || opcode == ILOpcode.jmp)
+                        || opcode == ILOpcode.jmp
+                    )
                     {
                         reader.Skip(opcode);
 
@@ -401,8 +475,7 @@ namespace ILCompiler
             bool hasUnmarkedIntructions = false;
             foreach (var flag in flags)
             {
-                if ((flag & OpcodeFlags.InstructionStart) != 0 &&
-                    (flag & OpcodeFlags.Mark) == 0)
+                if ((flag & OpcodeFlags.InstructionStart) != 0 && (flag & OpcodeFlags.Mark) == 0)
                 {
                     hasUnmarkedIntructions = true;
                 }
@@ -426,7 +499,10 @@ namespace ILCompiler
                     if (erase)
                         newBody[position] = (byte)ILOpCode.Nop;
                     position++;
-                } while (position < newBody.Length && (flags[position] & OpcodeFlags.VisibleBasicBlockStart) == 0);
+                } while (
+                    position < newBody.Length
+                    && (flags[position] & OpcodeFlags.VisibleBasicBlockStart) == 0
+                );
 
                 // If we had to nop out this basic block, we need to neutralize it by appending
                 // an infinite loop ("br $-2").
@@ -466,7 +542,10 @@ namespace ILCompiler
                 ArrayBuilder<ILSequencePoint> sequencePoints = new ArrayBuilder<ILSequencePoint>();
                 foreach (var sequencePoint in oldSequencePoints)
                 {
-                    if (sequencePoint.Offset < flags.Length && (flags[sequencePoint.Offset] & OpcodeFlags.Mark) != 0)
+                    if (
+                        sequencePoint.Offset < flags.Length
+                        && (flags[sequencePoint.Offset] & OpcodeFlags.Mark) != 0
+                    )
                     {
                         sequencePoints.Add(sequencePoint);
                     }
@@ -478,7 +557,14 @@ namespace ILCompiler
             return new SubstitutedMethodIL(method, newBody, newEHRegions.ToArray(), debugInfo);
         }
 
-        private bool TryGetConstantArgument(MethodIL methodIL, byte[] body, OpcodeFlags[] flags, int offset, int argIndex, out int constant)
+        private bool TryGetConstantArgument(
+            MethodIL methodIL,
+            byte[] body,
+            OpcodeFlags[] flags,
+            int offset,
+            int argIndex,
+            out int constant
+        )
         {
             if ((flags[offset] & OpcodeFlags.BasicBlockStart) != 0)
             {
@@ -499,8 +585,11 @@ namespace ILCompiler
                     if (argIndex == 0)
                     {
                         BodySubstitution substitution = GetSubstitution(method);
-                        if (substitution != null && substitution.Value is int
-                            && (opcode != ILOpcode.callvirt || !method.IsVirtual))
+                        if (
+                            substitution != null
+                            && substitution.Value is int
+                            && (opcode != ILOpcode.callvirt || !method.IsVirtual)
+                        )
                         {
                             constant = (int)substitution.Value;
                             return true;
@@ -570,9 +659,13 @@ namespace ILCompiler
 
                     argIndex--;
                 }
-                else if ((opcode == ILOpcode.ldloc || opcode == ILOpcode.ldloc_s ||
-                    (opcode >= ILOpcode.ldloc_0 && opcode <= ILOpcode.ldloc_3)) &&
-                    ((flags[currentOffset] & OpcodeFlags.BasicBlockStart) == 0))
+                else if (
+                    (
+                        opcode == ILOpcode.ldloc
+                        || opcode == ILOpcode.ldloc_s
+                        || (opcode >= ILOpcode.ldloc_0 && opcode <= ILOpcode.ldloc_3)
+                    ) && ((flags[currentOffset] & OpcodeFlags.BasicBlockStart) == 0)
+                )
                 {
                     // Paired stloc/ldloc that the C# compiler generates in debug code?
                     int locIndex = opcode switch
@@ -582,21 +675,33 @@ namespace ILCompiler
                         _ => opcode - ILOpcode.ldloc_0,
                     };
 
-                    for (int potentialStlocOffset = currentOffset - 1; potentialStlocOffset >= 0; potentialStlocOffset--)
+                    for (
+                        int potentialStlocOffset = currentOffset - 1;
+                        potentialStlocOffset >= 0;
+                        potentialStlocOffset--
+                    )
                     {
                         if ((flags[potentialStlocOffset] & OpcodeFlags.InstructionStart) == 0)
                             continue;
 
                         ILReader nestedReader = new ILReader(body, potentialStlocOffset);
                         ILOpcode otherOpcode = nestedReader.ReadILOpcode();
-                        if ((otherOpcode == ILOpcode.stloc || otherOpcode == ILOpcode.stloc_s ||
-                            (otherOpcode >= ILOpcode.stloc_0 && otherOpcode <= ILOpcode.stloc_3))
+                        if (
+                            (
+                                otherOpcode == ILOpcode.stloc
+                                || otherOpcode == ILOpcode.stloc_s
+                                || (
+                                    otherOpcode >= ILOpcode.stloc_0
+                                    && otherOpcode <= ILOpcode.stloc_3
+                                )
+                            )
                             && otherOpcode switch
                             {
                                 ILOpcode.stloc => nestedReader.ReadILUInt16(),
                                 ILOpcode.stloc_s => nestedReader.ReadILByte(),
                                 _ => otherOpcode - ILOpcode.stloc_0,
-                            } == locIndex)
+                            } == locIndex
+                        )
                         {
                             // Move all the way to the stloc and resume looking for previous instruction.
                             currentOffset = potentialStlocOffset;
@@ -613,8 +718,24 @@ namespace ILCompiler
                 {
                     if (argIndex == 0)
                     {
-                        if (!TryGetConstantArgument(methodIL, body, flags, currentOffset, 0, out int left)
-                                || !TryGetConstantArgument(methodIL, body, flags, currentOffset, 1, out int right))
+                        if (
+                            !TryGetConstantArgument(
+                                methodIL,
+                                body,
+                                flags,
+                                currentOffset,
+                                0,
+                                out int left
+                            )
+                            || !TryGetConstantArgument(
+                                methodIL,
+                                body,
+                                flags,
+                                currentOffset,
+                                1,
+                                out int right
+                            )
+                        )
                         {
                             constant = 0;
                             return false;
@@ -651,7 +772,12 @@ namespace ILCompiler
             private readonly MethodIL _wrappedMethodIL;
             private readonly MethodDebugInformation _debugInfo;
 
-            public SubstitutedMethodIL(MethodIL wrapped, byte[] body, ILExceptionRegion[] ehRegions, MethodDebugInformation debugInfo)
+            public SubstitutedMethodIL(
+                MethodIL wrapped,
+                byte[] body,
+                ILExceptionRegion[] ehRegions,
+                MethodDebugInformation debugInfo
+            )
             {
                 _wrappedMethodIL = wrapped;
                 _body = body;
@@ -662,10 +788,16 @@ namespace ILCompiler
             public override MethodDesc OwningMethod => _wrappedMethodIL.OwningMethod;
             public override int MaxStack => _wrappedMethodIL.MaxStack;
             public override bool IsInitLocals => _wrappedMethodIL.IsInitLocals;
+
             public override ILExceptionRegion[] GetExceptionRegions() => _ehRegions;
+
             public override byte[] GetILBytes() => _body;
+
             public override LocalVariableDefinition[] GetLocals() => _wrappedMethodIL.GetLocals();
-            public override object GetObject(int token, NotFoundBehavior notFoundBehavior) => _wrappedMethodIL.GetObject(token, notFoundBehavior);
+
+            public override object GetObject(int token, NotFoundBehavior notFoundBehavior) =>
+                _wrappedMethodIL.GetObject(token, notFoundBehavior);
+
             public override MethodDebugInformation GetDebugInfo() => _debugInfo;
         }
 
@@ -674,18 +806,26 @@ namespace ILCompiler
             private readonly MethodDebugInformation _originalDebugInformation;
             private readonly ILSequencePoint[] _sequencePoints;
 
-            public SubstitutedDebugInformation(MethodDebugInformation originalDebugInformation, ILSequencePoint[] newSequencePoints)
+            public SubstitutedDebugInformation(
+                MethodDebugInformation originalDebugInformation,
+                ILSequencePoint[] newSequencePoints
+            )
             {
                 _originalDebugInformation = originalDebugInformation;
                 _sequencePoints = newSequencePoints;
             }
 
-            public override IEnumerable<Internal.IL.ILLocalVariable> GetLocalVariables() => _originalDebugInformation.GetLocalVariables();
-            public override IEnumerable<string> GetParameterNames() => _originalDebugInformation.GetParameterNames();
+            public override IEnumerable<Internal.IL.ILLocalVariable> GetLocalVariables() =>
+                _originalDebugInformation.GetLocalVariables();
+
+            public override IEnumerable<string> GetParameterNames() =>
+                _originalDebugInformation.GetParameterNames();
+
             public override IEnumerable<ILSequencePoint> GetSequencePoints() => _sequencePoints;
         }
 
-        private class FeatureSwitchHashtable : LockFreeReaderHashtable<EcmaModule, AssemblyFeatureInfo>
+        private class FeatureSwitchHashtable
+            : LockFreeReaderHashtable<EcmaModule, AssemblyFeatureInfo>
         {
             private readonly Dictionary<string, bool> _switchValues;
 
@@ -694,10 +834,18 @@ namespace ILCompiler
                 _switchValues = switchValues;
             }
 
-            protected override bool CompareKeyToValue(EcmaModule key, AssemblyFeatureInfo value) => key == value.Module;
-            protected override bool CompareValueToValue(AssemblyFeatureInfo value1, AssemblyFeatureInfo value2) => value1.Module == value2.Module;
+            protected override bool CompareKeyToValue(EcmaModule key, AssemblyFeatureInfo value) =>
+                key == value.Module;
+
+            protected override bool CompareValueToValue(
+                AssemblyFeatureInfo value1,
+                AssemblyFeatureInfo value2
+            ) => value1.Module == value2.Module;
+
             protected override int GetKeyHashCode(EcmaModule key) => key.GetHashCode();
-            protected override int GetValueHashCode(AssemblyFeatureInfo value) => value.Module.GetHashCode();
+
+            protected override int GetValueHashCode(AssemblyFeatureInfo value) =>
+                value.Module.GetHashCode();
 
             protected override AssemblyFeatureInfo CreateValueFromKey(EcmaModule key)
             {
@@ -712,15 +860,22 @@ namespace ILCompiler
             public Dictionary<MethodDesc, BodySubstitution> BodySubstitutions { get; }
             public Dictionary<FieldDesc, object> FieldSubstitutions { get; }
 
-            public AssemblyFeatureInfo(EcmaModule module, IReadOnlyDictionary<string, bool> featureSwitchValues)
+            public AssemblyFeatureInfo(
+                EcmaModule module,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            )
             {
                 Module = module;
 
-                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress);
+                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(
+                    module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
+                );
 
                 foreach (var resourceHandle in module.MetadataReader.ManifestResources)
                 {
-                    ManifestResource resource = module.MetadataReader.GetManifestResource(resourceHandle);
+                    ManifestResource resource = module.MetadataReader.GetManifestResource(
+                        resourceHandle
+                    );
 
                     // Don't try to process linked resources or resources in other assemblies
                     if (!resource.Implementation.IsNil)
@@ -731,7 +886,10 @@ namespace ILCompiler
                     string resourceName = module.MetadataReader.GetString(resource.Name);
                     if (resourceName == "ILLink.Substitutions.xml")
                     {
-                        BlobReader reader = resourceDirectory.GetReader((int)resource.Offset, resourceDirectory.Length - (int)resource.Offset);
+                        BlobReader reader = resourceDirectory.GetReader(
+                            (int)resource.Offset,
+                            resourceDirectory.Length - (int)resource.Offset
+                        );
                         int length = (int)reader.ReadUInt32();
 
                         UnmanagedMemoryStream ms;
@@ -740,7 +898,13 @@ namespace ILCompiler
                             ms = new UnmanagedMemoryStream(reader.CurrentPointer, length);
                         }
 
-                        (BodySubstitutions, FieldSubstitutions) = SubstitutionsReader.GetSubstitutions(module.Context, XmlReader.Create(ms), module, featureSwitchValues);
+                        (BodySubstitutions, FieldSubstitutions) =
+                            SubstitutionsReader.GetSubstitutions(
+                                module.Context,
+                                XmlReader.Create(ms),
+                                module,
+                                featureSwitchValues
+                            );
                     }
                 }
             }
@@ -767,6 +931,7 @@ namespace ILCompiler
             private BodySubstitution(object value) => _value = value;
 
             public static BodySubstitution Create(object value) => new BodySubstitution(value);
+
             public MethodIL EmitIL(MethodDesc method)
             {
                 ILEmitter emit = new ILEmitter();
@@ -774,7 +939,13 @@ namespace ILCompiler
 
                 if (_value == Throw)
                 {
-                    codestream.EmitCallThrowHelper(emit, method.Context.GetHelperEntryPoint("ThrowHelpers", "ThrowFeatureBodyRemoved"));
+                    codestream.EmitCallThrowHelper(
+                        emit,
+                        method.Context.GetHelperEntryPoint(
+                            "ThrowHelpers",
+                            "ThrowFeatureBodyRemoved"
+                        )
+                    );
                 }
                 else if (_value == null)
                 {
@@ -797,8 +968,12 @@ namespace ILCompiler
             private readonly Dictionary<MethodDesc, BodySubstitution> _methodSubstitutions;
             private readonly Dictionary<FieldDesc, object> _fieldSubstitutions;
 
-            private SubstitutionsReader(TypeSystemContext context, XmlReader reader, ModuleDesc module, IReadOnlyDictionary<string, bool> featureSwitchValues)
-                : base(context, reader, module, featureSwitchValues)
+            private SubstitutionsReader(
+                TypeSystemContext context,
+                XmlReader reader,
+                ModuleDesc module,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            ) : base(context, reader, module, featureSwitchValues)
             {
                 _methodSubstitutions = new Dictionary<MethodDesc, BodySubstitution>();
                 _fieldSubstitutions = new Dictionary<FieldDesc, object>();
@@ -819,7 +994,12 @@ namespace ILCompiler
                             if (method.Signature.ReturnType.IsVoid)
                                 stubBody = BodySubstitution.EmptyBody;
                             else
-                                stubBody = BodySubstitution.Create(TryCreateSubstitution(method.Signature.ReturnType, GetAttribute("value")));
+                                stubBody = BodySubstitution.Create(
+                                    TryCreateSubstitution(
+                                        method.Signature.ReturnType,
+                                        GetAttribute("value")
+                                    )
+                                );
 
                             if (stubBody != null)
                             {
@@ -860,7 +1040,13 @@ namespace ILCompiler
                     return;
                 }
 
-                if (String.Equals(GetAttribute("initialize"), "true", StringComparison.InvariantCultureIgnoreCase))
+                if (
+                    String.Equals(
+                        GetAttribute("initialize"),
+                        "true",
+                        StringComparison.InvariantCultureIgnoreCase
+                    )
+                )
                 {
                     // We would need to also mess with the cctor of the type to set the field to this value:
                     //
@@ -881,7 +1067,14 @@ namespace ILCompiler
                     case TypeFlags.Int32:
                         if (string.IsNullOrEmpty(value))
                             return 0;
-                        else if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int iresult))
+                        else if (
+                            int.TryParse(
+                                value,
+                                NumberStyles.Integer,
+                                CultureInfo.InvariantCulture,
+                                out int iresult
+                            )
+                        )
                             return iresult;
                         break;
 
@@ -900,7 +1093,15 @@ namespace ILCompiler
                 return null;
             }
 
-            public static (Dictionary<MethodDesc, BodySubstitution>, Dictionary<FieldDesc, object>) GetSubstitutions(TypeSystemContext context, XmlReader reader, ModuleDesc module, IReadOnlyDictionary<string, bool> featureSwitchValues)
+            public static (Dictionary<MethodDesc, BodySubstitution>, Dictionary<
+                FieldDesc,
+                object
+            >) GetSubstitutions(
+                TypeSystemContext context,
+                XmlReader reader,
+                ModuleDesc module,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            )
             {
                 var rdr = new SubstitutionsReader(context, reader, module, featureSwitchValues);
                 rdr.ProcessXml();

@@ -14,30 +14,50 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.DocumentationComments
     {
         internal readonly DocumentationCommentOptions UnderlyingObject;
 
-        internal OmniSharpDocumentationCommentOptionsWrapper(DocumentationCommentOptions underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        internal OmniSharpDocumentationCommentOptionsWrapper(
+            DocumentationCommentOptions underlyingObject
+        ) => UnderlyingObject = underlyingObject;
 
         public OmniSharpDocumentationCommentOptionsWrapper(
             bool autoXmlDocCommentGeneration,
             int tabSize,
             bool useTabs,
-            string newLine)
-            : this(new DocumentationCommentOptions()
-            {
-                LineFormatting = new LineFormattingOptions() { UseTabs = useTabs, TabSize = tabSize, IndentationSize = tabSize, NewLine = newLine },
-                AutoXmlDocCommentGeneration = autoXmlDocCommentGeneration
-            })
-        {
-        }
+            string newLine
+        )
+            : this(
+                new DocumentationCommentOptions()
+                {
+                    LineFormatting = new LineFormattingOptions()
+                    {
+                        UseTabs = useTabs,
+                        TabSize = tabSize,
+                        IndentationSize = tabSize,
+                        NewLine = newLine
+                    },
+                    AutoXmlDocCommentGeneration = autoXmlDocCommentGeneration
+                }
+            ) { }
 
         public static async ValueTask<OmniSharpDocumentationCommentOptionsWrapper> FromDocumentAsync(
             Document document,
             bool autoXmlDocCommentGeneration,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var formattingOptions = await document.GetSyntaxFormattingOptionsAsync(CodeActionOptions.DefaultProvider, cancellationToken).ConfigureAwait(false);
+            var formattingOptions = await document
+                .GetSyntaxFormattingOptionsAsync(
+                    CodeActionOptions.DefaultProvider,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            return new(new() { LineFormatting = formattingOptions.LineFormatting, AutoXmlDocCommentGeneration = autoXmlDocCommentGeneration });
+            return new(
+                new()
+                {
+                    LineFormatting = formattingOptions.LineFormatting,
+                    AutoXmlDocCommentGeneration = autoXmlDocCommentGeneration
+                }
+            );
         }
     }
 }

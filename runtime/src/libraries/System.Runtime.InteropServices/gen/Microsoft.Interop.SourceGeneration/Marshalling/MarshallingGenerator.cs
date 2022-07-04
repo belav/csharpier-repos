@@ -101,7 +101,10 @@ namespace Microsoft.Interop
         /// <param name="info">Object to marshal</param>
         /// <param name="context">Code generation context</param>
         /// <returns>Argument syntax for <paramref name="info"/></returns>
-        ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context);
+        ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        );
 
         /// <summary>
         /// Generate code for marshalling
@@ -136,9 +139,11 @@ namespace Microsoft.Interop
         /// <param name="marshalKind">The marshal kind.</param>
         /// <param name="context">The marshalling context.</param>
         /// <returns></returns>
-        bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context);
+        bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        );
     }
-
 
     /// <summary>
     /// Exception used to indicate marshalling isn't supported.

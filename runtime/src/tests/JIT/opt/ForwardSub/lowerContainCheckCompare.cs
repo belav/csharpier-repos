@@ -5,7 +5,7 @@
 // Run on X64 Windows
 // Seed: 7242107031351932946
 // Reduced from 319.7 KiB to 0.7 KiB in 00:09:00
-// Debug: 
+// Debug:
 // Release: Outputs 0
 public class C0
 {
@@ -15,7 +15,8 @@ public class C0
 public struct S0
 {
     public C0 F0;
-    public S0(C0 f0): this()
+
+    public S0(C0 f0) : this()
     {
         F0 = f0;
     }
@@ -24,6 +25,7 @@ public struct S0
 public class C1
 {
     public long F0;
+
     public C1(long f0)
     {
         F0 = f0;
@@ -34,10 +36,11 @@ public class Program
 {
     public static S0 s_25 = new S0(new C0());
     public static C1[] s_28;
+
     public static int Main()
     {
         int result = 100;
-        s_28 = new C1[]{new C1(0)};
+        s_28 = new C1[] { new C1(0) };
         var vr3 = new C1(-1);
         if (vr3.F0 >= (M35(vr3) & 0))
         {

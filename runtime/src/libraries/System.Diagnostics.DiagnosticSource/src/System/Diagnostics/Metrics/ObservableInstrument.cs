@@ -13,7 +13,7 @@ namespace System.Diagnostics.Metrics
     /// This class supports only the following generic parameter types: <see cref="byte" />, <see cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double" />, and <see cref="decimal" />
     /// </remarks>
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
-        [System.Security.SecuritySafeCriticalAttribute]
+    [System.Security.SecuritySafeCriticalAttribute]
 #endif
     public abstract class ObservableInstrument<T> : Instrument where T : struct
     {
@@ -25,7 +25,8 @@ namespace System.Diagnostics.Metrics
         /// <param name="name">The instrument name. cannot be null.</param>
         /// <param name="unit">Optional instrument unit of measurements.</param>
         /// <param name="description">Optional instrument description.</param>
-        protected ObservableInstrument(Meter meter, string name, string? unit, string? description) : base(meter, name, unit, description)
+        protected ObservableInstrument(Meter meter, string name, string? unit, string? description)
+            : base(meter, name, unit, description)
         {
             ValidateTypeParameter<T>();
         }
@@ -82,6 +83,5 @@ namespace System.Diagnostics.Metrics
             Debug.Assert(false, "Execution shouldn't reach this point");
             return null;
         }
-
     }
 }

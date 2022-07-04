@@ -89,7 +89,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
         string name,
         string? schema,
         IReadOnlyModel model,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         Model = model;
         Name = name;
@@ -129,10 +130,11 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static IEnumerable<ISequence> GetSequences(IReadOnlyModel model)
-        => ((SortedDictionary<(string, string?), ISequence>?)model[RelationalAnnotationNames.Sequences])
-            ?.Values
-            ?? Enumerable.Empty<ISequence>();
+    public static IEnumerable<ISequence> GetSequences(IReadOnlyModel model) =>
+        (
+            (SortedDictionary<(string, string?), ISequence>?)
+                model[RelationalAnnotationNames.Sequences]
+        )?.Values ?? Enumerable.Empty<ISequence>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -142,9 +144,9 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     /// </summary>
     public static ISequence? FindSequence(IReadOnlyModel model, string name, string? schema)
     {
-        var sequences = (SortedDictionary<(string, string?), ISequence>?)model[RelationalAnnotationNames.Sequences];
-        if (sequences == null
-            || !sequences.TryGetValue((name, schema), out var sequence))
+        var sequences = (SortedDictionary<(string, string?), ISequence>?)
+            model[RelationalAnnotationNames.Sequences];
+        if (sequences == null || !sequences.TryGetValue((name, schema), out var sequence))
         {
             return null;
         }
@@ -162,10 +164,12 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
         IMutableModel model,
         string name,
         string? schema,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         var sequence = new Sequence(name, schema, model, configurationSource);
-        var sequences = (SortedDictionary<(string, string?), ISequence>?)model[RelationalAnnotationNames.Sequences];
+        var sequences = (SortedDictionary<(string, string?), ISequence>?)
+            model[RelationalAnnotationNames.Sequences];
         if (sequences == null)
         {
             sequences = new SortedDictionary<(string, string?), ISequence>();
@@ -182,17 +186,14 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static Sequence? SetName(
-        IMutableModel model,
-        Sequence sequence,
-        string name)
+    public static Sequence? SetName(IMutableModel model, Sequence sequence, string name)
     {
         sequence.EnsureMutable();
 
-        var sequences = (SortedDictionary<(string, string?), ISequence>?)model[RelationalAnnotationNames.Sequences];
+        var sequences = (SortedDictionary<(string, string?), ISequence>?)
+            model[RelationalAnnotationNames.Sequences];
         var tuple = (sequence.Name, sequence.Schema);
-        if (sequences == null
-            || !sequences.ContainsKey(tuple))
+        if (sequences == null || !sequences.ContainsKey(tuple))
         {
             return null;
         }
@@ -214,9 +215,9 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     /// </summary>
     public static Sequence? RemoveSequence(IMutableModel model, string name, string? schema)
     {
-        var sequences = (SortedDictionary<(string, string?), ISequence>?)model[RelationalAnnotationNames.Sequences];
-        if (sequences == null
-            || !sequences.TryGetValue((name, schema), out var sequence))
+        var sequences = (SortedDictionary<(string, string?), ISequence>?)
+            model[RelationalAnnotationNames.Sequences];
+        if (sequences == null || !sequences.TryGetValue((name, schema), out var sequence))
         {
             return null;
         }
@@ -246,8 +247,7 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsInModel
-        => _builder is not null;
+    public virtual bool IsInModel => _builder is not null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -255,8 +255,7 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetRemovedFromModel()
-        => _builder = null;
+    public virtual void SetRemovedFromModel() => _builder = null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -269,8 +268,7 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     /// <summary>
     ///     Indicates whether the sequence is read-only.
     /// </summary>
-    public override bool IsReadOnly
-        => ((Annotatable)Model).IsReadOnly;
+    public override bool IsReadOnly => ((Annotatable)Model).IsReadOnly;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -286,8 +284,7 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string? Schema
-        => _schema ?? Model.GetDefaultSchema();
+    public virtual string? Schema => _schema ?? Model.GetDefaultSchema();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -295,8 +292,7 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource GetConfigurationSource()
-        => _configurationSource;
+    public virtual ConfigurationSource GetConfigurationSource() => _configurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -304,8 +300,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource)
-        => _configurationSource = _configurationSource.Max(configurationSource);
+    public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource) =>
+        _configurationSource = _configurationSource.Max(configurationSource);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -331,9 +327,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
 
         _startValue = startValue;
 
-        _startValueConfigurationSource = startValue == null
-            ? null
-            : configurationSource.Max(_startValueConfigurationSource);
+        _startValueConfigurationSource =
+            startValue == null ? null : configurationSource.Max(_startValueConfigurationSource);
 
         return startValue;
     }
@@ -344,8 +339,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetStartValueConfigurationSource()
-        => _startValueConfigurationSource;
+    public virtual ConfigurationSource? GetStartValueConfigurationSource() =>
+        _startValueConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -371,9 +366,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
 
         _incrementBy = incrementBy;
 
-        _incrementByConfigurationSource = incrementBy == null
-            ? null
-            : configurationSource.Max(_incrementByConfigurationSource);
+        _incrementByConfigurationSource =
+            incrementBy == null ? null : configurationSource.Max(_incrementByConfigurationSource);
 
         return incrementBy;
     }
@@ -384,8 +378,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetIncrementByConfigurationSource()
-        => _incrementByConfigurationSource;
+    public virtual ConfigurationSource? GetIncrementByConfigurationSource() =>
+        _incrementByConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -411,9 +405,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
 
         _minValue = minValue;
 
-        _minValueConfigurationSource = minValue == null
-            ? null
-            : configurationSource.Max(_minValueConfigurationSource);
+        _minValueConfigurationSource =
+            minValue == null ? null : configurationSource.Max(_minValueConfigurationSource);
 
         return minValue;
     }
@@ -424,8 +417,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetMinValueConfigurationSource()
-        => _minValueConfigurationSource;
+    public virtual ConfigurationSource? GetMinValueConfigurationSource() =>
+        _minValueConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -451,9 +444,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
 
         _maxValue = maxValue;
 
-        _maxValueConfigurationSource = maxValue == null
-            ? null
-            : configurationSource.Max(_maxValueConfigurationSource);
+        _maxValueConfigurationSource =
+            maxValue == null ? null : configurationSource.Max(_maxValueConfigurationSource);
 
         return maxValue;
     }
@@ -464,8 +456,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetMaxValueConfigurationSource()
-        => _maxValueConfigurationSource;
+    public virtual ConfigurationSource? GetMaxValueConfigurationSource() =>
+        _maxValueConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -473,8 +465,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static IReadOnlyCollection<Type> SupportedTypes { get; }
-        = new[] { typeof(byte), typeof(long), typeof(int), typeof(short), typeof(decimal) };
+    public static IReadOnlyCollection<Type> SupportedTypes { get; } =
+        new[] { typeof(byte), typeof(long), typeof(int), typeof(short), typeof(decimal) };
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -498,17 +490,15 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     {
         EnsureMutable();
 
-        if (type != null
-            && !SupportedTypes.Contains(type))
+        if (type != null && !SupportedTypes.Contains(type))
         {
             throw new ArgumentException(RelationalStrings.BadSequenceType);
         }
 
         _type = type;
 
-        _typeConfigurationSource = type == null
-            ? null
-            : configurationSource.Max(_typeConfigurationSource);
+        _typeConfigurationSource =
+            type == null ? null : configurationSource.Max(_typeConfigurationSource);
 
         return type;
     }
@@ -519,8 +509,7 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetTypeConfigurationSource()
-        => _typeConfigurationSource;
+    public virtual ConfigurationSource? GetTypeConfigurationSource() => _typeConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -546,9 +535,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
 
         _isCyclic = cyclic;
 
-        _isCyclicConfigurationSource = cyclic == null
-            ? null
-            : configurationSource.Max(_isCyclicConfigurationSource);
+        _isCyclicConfigurationSource =
+            cyclic == null ? null : configurationSource.Max(_isCyclicConfigurationSource);
 
         return cyclic;
     }
@@ -559,8 +547,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetIsCyclicConfigurationSource()
-        => _isCyclicConfigurationSource;
+    public virtual ConfigurationSource? GetIsCyclicConfigurationSource() =>
+        _isCyclicConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -568,8 +556,8 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((ISequence)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((ISequence)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -626,8 +614,11 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    long? IConventionSequence.SetStartValue(long? startValue, bool fromDataAnnotation)
-        => SetStartValue(startValue, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    long? IConventionSequence.SetStartValue(long? startValue, bool fromDataAnnotation) =>
+        SetStartValue(
+            startValue,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -636,8 +627,11 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    int? IConventionSequence.SetIncrementBy(int? incrementBy, bool fromDataAnnotation)
-        => SetIncrementBy(incrementBy, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    int? IConventionSequence.SetIncrementBy(int? incrementBy, bool fromDataAnnotation) =>
+        SetIncrementBy(
+            incrementBy,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -646,8 +640,11 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    long? IConventionSequence.SetMinValue(long? minValue, bool fromDataAnnotation)
-        => SetMinValue(minValue, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    long? IConventionSequence.SetMinValue(long? minValue, bool fromDataAnnotation) =>
+        SetMinValue(
+            minValue,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -656,8 +653,11 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    long? IConventionSequence.SetMaxValue(long? maxValue, bool fromDataAnnotation)
-        => SetMaxValue(maxValue, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    long? IConventionSequence.SetMaxValue(long? maxValue, bool fromDataAnnotation) =>
+        SetMaxValue(
+            maxValue,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -666,8 +666,11 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    Type? IConventionSequence.SetType(Type? type, bool fromDataAnnotation)
-        => SetType(type, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    Type? IConventionSequence.SetType(Type? type, bool fromDataAnnotation) =>
+        SetType(
+            type,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -676,8 +679,11 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    bool? IConventionSequence.SetIsCyclic(bool? cyclic, bool fromDataAnnotation)
-        => SetIsCyclic(cyclic, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool? IConventionSequence.SetIsCyclic(bool? cyclic, bool fromDataAnnotation) =>
+        SetIsCyclic(
+            cyclic,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     [Obsolete("Don't use this in any new code")] // DO NOT REMOVE
     // Used in model snapshot processor code path. See issue#18557
@@ -731,8 +737,7 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
 
             var end = value.IndexOf('\'', position);
 
-            while (end + 1 < value.Length
-                   && value[end + 1] == '\'')
+            while (end + 1 < value.Length && value[end + 1] == '\'')
             {
                 end = value.IndexOf('\'', end + 2);
             }
@@ -743,11 +748,11 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
             return extracted.Length == 0 ? null : extracted;
         }
 
-        private static long? AsLong(string? value)
-            => value == null ? null : long.Parse(value, CultureInfo.InvariantCulture);
+        private static long? AsLong(string? value) =>
+            value == null ? null : long.Parse(value, CultureInfo.InvariantCulture);
 
-        private static Type AsType(string value)
-            => value == nameof(Int64)
+        private static Type AsType(string value) =>
+            value == nameof(Int64)
                 ? typeof(long)
                 : value == nameof(Int32)
                     ? typeof(int)
@@ -757,8 +762,7 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
                             ? typeof(decimal)
                             : typeof(byte);
 
-        private static bool AsBool(string? value)
-            => value != null && bool.Parse(value);
+        private static bool AsBool(string? value) => value != null && bool.Parse(value);
 
         private static void EscapeAndQuote(StringBuilder builder, object? value)
         {

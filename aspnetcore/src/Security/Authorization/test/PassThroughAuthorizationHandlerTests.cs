@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.Authorization.Test;
 
 public class PassThroughAuthorizationHandlerTests
 {
-    private IAuthorizationService BuildAuthorizationService(Action<IServiceCollection> setupServices = null)
+    private IAuthorizationService BuildAuthorizationService(
+        Action<IServiceCollection> setupServices = null
+    )
     {
         var services = new ServiceCollection();
         services.AddAuthorizationCore();
@@ -54,7 +56,10 @@ public class PassThroughAuthorizationHandlerTests
 
         public bool Invoked { get; set; }
 
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, SelfRequirement requirement)
+        protected override Task HandleRequirementAsync(
+            AuthorizationHandlerContext context,
+            SelfRequirement requirement
+        )
         {
             Invoked = true;
             if (_fail)
@@ -68,5 +73,4 @@ public class PassThroughAuthorizationHandlerTests
             return Task.FromResult(0);
         }
     }
-
 }

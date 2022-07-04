@@ -21,7 +21,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
     /// <summary>
     /// Implements the Language Server Protocol for XAML
     /// </summary>
-    [ExportLspServiceFactory(typeof(RequestDispatcher), StringConstants.XamlLspLanguagesContract), Shared]
+    [
+        ExportLspServiceFactory(
+            typeof(RequestDispatcher),
+            StringConstants.XamlLspLanguagesContract
+        ),
+        Shared
+    ]
     internal sealed class XamlRequestDispatcherFactory : RequestDispatcherFactory
     {
         private readonly XamlProjectService _projectService;
@@ -31,13 +37,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public XamlRequestDispatcherFactory(
             XamlProjectService projectService,
-            [Import(AllowDefault = true)] IXamlLanguageServerFeedbackService? feedbackService)
+            [Import(AllowDefault = true)] IXamlLanguageServerFeedbackService? feedbackService
+        )
         {
             _projectService = projectService;
             _feedbackService = feedbackService;
         }
 
-        public override ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+        public override ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        )
         {
             return new XamlRequestDispatcher(_projectService, lspServices, _feedbackService);
         }
@@ -50,14 +60,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
             public XamlRequestDispatcher(
                 XamlProjectService projectService,
                 LspServices services,
-                IXamlLanguageServerFeedbackService? feedbackService) : base(services)
+                IXamlLanguageServerFeedbackService? feedbackService
+            ) : base(services)
             {
                 _projectService = projectService;
                 _feedbackService = feedbackService;
             }
 
-            protected override async Task<TResponseType?> ExecuteRequestAsync<TRequestType, TResponseType>(
-                RequestExecutionQueue queue, bool mutatesSolutionState, bool requiresLSPSolution, IRequestHandler<TRequestType, TResponseType> handler, TRequestType request, ClientCapabilities clientCapabilities, string methodName, CancellationToken cancellationToken)
+            protected override async Task<TResponseType?> ExecuteRequestAsync<
+                TRequestType,
+                TResponseType
+            >(
+                RequestExecutionQueue queue,
+                bool mutatesSolutionState,
+                bool requiresLSPSolution,
+                IRequestHandler<TRequestType, TResponseType> handler,
+                TRequestType request,
+                ClientCapabilities clientCapabilities,
+                string methodName,
+                CancellationToken cancellationToken
+            )
                 where TRequestType : class
                 where TResponseType : default
             {
@@ -69,11 +91,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                     documentId = _projectService.TrackOpenDocument(documentUri.LocalPath);
                 }
 
-                using (var requestScope = _feedbackService?.CreateRequestScope(documentId, methodName))
+                using (
+                    var requestScope = _feedbackService?.CreateRequestScope(documentId, methodName)
+                )
                 {
                     try
                     {
-                        return await base.ExecuteRequestAsync(queue, mutatesSolutionState, requiresLSPSolution, handler, request, clientCapabilities, methodName, cancellationToken).ConfigureAwait(false);
+                        return await base.ExecuteRequestAsync(
+                            queue,
+                            mutatesSolutionState,
+                            requiresLSPSolution,
+                            handler,
+                            request,
+                            clientCapabilities,
+                            methodName,
+                            cancellationToken
+                        )
+                            .ConfigureAwait(false);
                     }
                     catch (Exception e) when (e is not OperationCanceledException)
                     {

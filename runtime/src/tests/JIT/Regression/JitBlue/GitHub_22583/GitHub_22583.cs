@@ -16,5 +16,4 @@ class X
         XD y = Lib.GetDelegate();
         return x() + y() + 64;
     }
-    
 }

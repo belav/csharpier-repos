@@ -16,7 +16,9 @@ public unsafe class DelegatesFromExternalAssembly
         short s = 42;
         bool b = true;
 
-        var callback = Marshal.GetDelegateForFunctionPointer<CheckStructWithShortAndBoolCallback>((IntPtr)DisabledRuntimeMarshallingNative.GetStructWithShortAndBoolCallback());
+        var callback = Marshal.GetDelegateForFunctionPointer<CheckStructWithShortAndBoolCallback>(
+            (IntPtr)DisabledRuntimeMarshallingNative.GetStructWithShortAndBoolCallback()
+        );
 
         Assert.True(callback(new StructWithShortAndBool(s, b), s, b));
     }
@@ -27,7 +29,11 @@ public unsafe class DelegatesFromExternalAssembly
         short s = 41;
         bool b = true;
 
-        var callback = Marshal.GetDelegateForFunctionPointer<CheckStructWithShortAndBoolWithVariantBoolCallback>((IntPtr)DisabledRuntimeMarshallingNative.GetStructWithShortAndBoolWithVariantBoolCallback());
+        var callback =
+            Marshal.GetDelegateForFunctionPointer<CheckStructWithShortAndBoolWithVariantBoolCallback>(
+                (IntPtr)
+                    DisabledRuntimeMarshallingNative.GetStructWithShortAndBoolWithVariantBoolCallback()
+            );
 
         Assert.False(callback(new StructWithShortAndBool(s, b), s, b));
     }

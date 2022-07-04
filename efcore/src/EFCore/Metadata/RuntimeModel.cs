@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// </remarks>
 public class RuntimeModel : AnnotatableBase, IRuntimeModel
 {
-    private readonly SortedDictionary<string, RuntimeEntityType> _entityTypes = new(StringComparer.Ordinal);
+    private readonly SortedDictionary<string, RuntimeEntityType> _entityTypes =
+        new(StringComparer.Ordinal);
     private readonly Dictionary<Type, SortedSet<RuntimeEntityType>> _sharedTypes = new();
     private readonly Dictionary<Type, RuntimeTypeMappingConfiguration> _typeConfigurations = new();
     private bool _skipDetectChanges;
@@ -41,8 +42,8 @@ public class RuntimeModel : AnnotatableBase, IRuntimeModel
     /// <summary>
     ///     Sets a value indicating whether <see cref="ChangeTracker.DetectChanges" /> should be called.
     /// </summary>
-    public virtual void SetSkipDetectChanges(bool skipDetectChanges)
-        => _skipDetectChanges = skipDetectChanges;
+    public virtual void SetSkipDetectChanges(bool skipDetectChanges) =>
+        _skipDetectChanges = skipDetectChanges;
 
     /// <summary>
     ///     Adds an entity type with a defining navigation to the model.
@@ -69,7 +70,8 @@ public class RuntimeModel : AnnotatableBase, IRuntimeModel
         ChangeTrackingStrategy changeTrackingStrategy = ChangeTrackingStrategy.Snapshot,
         PropertyInfo? indexerPropertyInfo = null,
         bool propertyBag = false,
-        object? discriminatorValue = null)
+        object? discriminatorValue = null
+    )
     {
         var entityType = new RuntimeEntityType(
             name,
@@ -81,7 +83,8 @@ public class RuntimeModel : AnnotatableBase, IRuntimeModel
             changeTrackingStrategy,
             indexerPropertyInfo,
             propertyBag,
-            discriminatorValue);
+            discriminatorValue
+        );
 
         if (sharedClrType)
         {
@@ -91,7 +94,10 @@ public class RuntimeModel : AnnotatableBase, IRuntimeModel
             }
             else
             {
-                var types = new SortedSet<RuntimeEntityType>(EntityTypeFullNameComparer.Instance) { entityType };
+                var types = new SortedSet<RuntimeEntityType>(EntityTypeFullNameComparer.Instance)
+                {
+                    entityType
+                };
                 _sharedTypes.Add(type, types);
             }
         }
@@ -108,26 +114,22 @@ public class RuntimeModel : AnnotatableBase, IRuntimeModel
     /// </summary>
     /// <param name="name">The name of the entity type to find.</param>
     /// <returns>The entity type, or <see langword="null" /> if none is found.</returns>
-    public virtual RuntimeEntityType? FindEntityType(string name)
-        => _entityTypes.TryGetValue(name, out var entityType)
-            ? entityType
-            : null;
+    public virtual RuntimeEntityType? FindEntityType(string name) =>
+        _entityTypes.TryGetValue(name, out var entityType) ? entityType : null;
 
-    private RuntimeEntityType? FindEntityType(Type type)
-        => FindEntityType(GetDisplayName(type));
+    private RuntimeEntityType? FindEntityType(Type type) => FindEntityType(GetDisplayName(type));
 
     private RuntimeEntityType? FindEntityType(
         string name,
         string definingNavigationName,
-        IReadOnlyEntityType definingEntityType)
-        => FindEntityType(definingEntityType.GetOwnedName(name, definingNavigationName));
+        IReadOnlyEntityType definingEntityType
+    ) => FindEntityType(definingEntityType.GetOwnedName(name, definingNavigationName));
 
     private IEnumerable<RuntimeEntityType> FindEntityTypes(Type type)
     {
         var entityType = FindEntityType(GetDisplayName(type));
-        var result = entityType == null
-            ? Enumerable.Empty<RuntimeEntityType>()
-            : new[] { entityType };
+        var result =
+            entityType == null ? Enumerable.Empty<RuntimeEntityType>() : new[] { entityType };
 
         return _sharedTypes.TryGetValue(type, out var sharedTypes)
             ? result.Concat(sharedTypes)
@@ -154,7 +156,8 @@ public class RuntimeModel : AnnotatableBase, IRuntimeModel
         int? precision = null,
         int? scale = null,
         Type? providerPropertyType = null,
-        ValueConverter? valueConverter = null)
+        ValueConverter? valueConverter = null
+    )
     {
         var typeConfiguration = new RuntimeTypeMappingConfiguration(
             clrType,
@@ -163,18 +166,19 @@ public class RuntimeModel : AnnotatableBase, IRuntimeModel
             precision,
             scale,
             providerPropertyType,
-            valueConverter);
+            valueConverter
+        );
 
         _typeConfigurations.Add(clrType, typeConfiguration);
 
         return typeConfiguration;
     }
 
-    private string GetDisplayName(Type type)
-        => _clrTypeNameMap.GetOrAdd(type, t => t.DisplayName());
+    private string GetDisplayName(Type type) =>
+        _clrTypeNameMap.GetOrAdd(type, t => t.DisplayName());
 
-    private PropertyInfo? FindIndexerPropertyInfo(Type type)
-        => _indexerPropertyInfoMap.GetOrAdd(type, type.FindIndexerProperty());
+    private PropertyInfo? FindIndexerPropertyInfo(Type type) =>
+        _indexerPropertyInfoMap.GetOrAdd(type, type.FindIndexerProperty());
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -182,8 +186,8 @@ public class RuntimeModel : AnnotatableBase, IRuntimeModel
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    object? IRuntimeModel.RelationalModel
-        => ((IAnnotatable)this).FindRuntimeAnnotationValue("Relational:RelationalModel");
+    object? IRuntimeModel.RelationalModel =>
+        ((IAnnotatable)this).FindRuntimeAnnotationValue("Relational:RelationalModel");
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -192,10 +196,11 @@ public class RuntimeModel : AnnotatableBase, IRuntimeModel
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IReadOnlyModel)this).ToDebugString(),
-            () => ((IReadOnlyModel)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IReadOnlyModel)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <inheritdoc />
     bool IRuntimeModel.SkipDetectChanges
@@ -206,99 +211,89 @@ public class RuntimeModel : AnnotatableBase, IRuntimeModel
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    PropertyAccessMode IReadOnlyModel.GetPropertyAccessMode()
-        => throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
+    PropertyAccessMode IReadOnlyModel.GetPropertyAccessMode() =>
+        throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    ChangeTrackingStrategy IReadOnlyModel.GetChangeTrackingStrategy()
-        => throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
+    ChangeTrackingStrategy IReadOnlyModel.GetChangeTrackingStrategy() =>
+        throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool IModel.IsIndexerMethod(MethodInfo methodInfo)
-        => !methodInfo.IsStatic
-            && methodInfo.IsSpecialName
-            && methodInfo.DeclaringType != null
-            && FindIndexerPropertyInfo(methodInfo.DeclaringType) is PropertyInfo indexerProperty
-            && (methodInfo == indexerProperty.GetMethod || methodInfo == indexerProperty.SetMethod);
+    bool IModel.IsIndexerMethod(MethodInfo methodInfo) =>
+        !methodInfo.IsStatic
+        && methodInfo.IsSpecialName
+        && methodInfo.DeclaringType != null
+        && FindIndexerPropertyInfo(methodInfo.DeclaringType) is PropertyInfo indexerProperty
+        && (methodInfo == indexerProperty.GetMethod || methodInfo == indexerProperty.SetMethod);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IReadOnlyEntityType? IReadOnlyModel.FindEntityType(string name)
-        => FindEntityType(name);
+    IReadOnlyEntityType? IReadOnlyModel.FindEntityType(string name) => FindEntityType(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEntityType? IModel.FindEntityType(string name)
-        => FindEntityType(name);
+    IEntityType? IModel.FindEntityType(string name) => FindEntityType(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IReadOnlyEntityType? IReadOnlyModel.FindEntityType(Type type)
-        => FindEntityType(type);
+    IReadOnlyEntityType? IReadOnlyModel.FindEntityType(Type type) => FindEntityType(type);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEntityType? IModel.FindEntityType(Type type)
-        => FindEntityType(type);
+    IEntityType? IModel.FindEntityType(Type type) => FindEntityType(type);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
     IReadOnlyEntityType? IReadOnlyModel.FindEntityType(
         string name,
         string definingNavigationName,
-        IReadOnlyEntityType definingEntityType)
-        => FindEntityType(name, definingNavigationName, (RuntimeEntityType)definingEntityType);
+        IReadOnlyEntityType definingEntityType
+    ) => FindEntityType(name, definingNavigationName, (RuntimeEntityType)definingEntityType);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
     IEntityType? IModel.FindEntityType(
         string name,
         string definingNavigationName,
-        IEntityType definingEntityType)
-        => FindEntityType(name, definingNavigationName, (RuntimeEntityType)definingEntityType);
+        IEntityType definingEntityType
+    ) => FindEntityType(name, definingNavigationName, (RuntimeEntityType)definingEntityType);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
     IReadOnlyEntityType? IReadOnlyModel.FindEntityType(
         Type type,
         string definingNavigationName,
-        IReadOnlyEntityType definingEntityType)
-        => FindEntityType(type.ShortDisplayName(), definingNavigationName, definingEntityType);
+        IReadOnlyEntityType definingEntityType
+    ) => FindEntityType(type.ShortDisplayName(), definingNavigationName, definingEntityType);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyEntityType> IReadOnlyModel.GetEntityTypes()
-        => _entityTypes.Values;
+    IEnumerable<IReadOnlyEntityType> IReadOnlyModel.GetEntityTypes() => _entityTypes.Values;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IEntityType> IModel.GetEntityTypes()
-        => _entityTypes.Values;
+    IEnumerable<IEntityType> IModel.GetEntityTypes() => _entityTypes.Values;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyEntityType> IReadOnlyModel.FindEntityTypes(Type type)
-        => FindEntityTypes(type);
+    IEnumerable<IReadOnlyEntityType> IReadOnlyModel.FindEntityTypes(Type type) =>
+        FindEntityTypes(type);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IEntityType> IModel.FindEntityTypes(Type type)
-        => FindEntityTypes(type);
+    IEnumerable<IEntityType> IModel.FindEntityTypes(Type type) => FindEntityTypes(type);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool IReadOnlyModel.IsShared(Type type)
-        => _sharedTypes.ContainsKey(type);
+    bool IReadOnlyModel.IsShared(Type type) => _sharedTypes.ContainsKey(type);
 
     /// <inheritdoc />
-    IEnumerable<ITypeMappingConfiguration> IModel.GetTypeMappingConfigurations()
-        => _typeConfigurations.Values;
+    IEnumerable<ITypeMappingConfiguration> IModel.GetTypeMappingConfigurations() =>
+        _typeConfigurations.Values;
 
     /// <inheritdoc />
-    ITypeMappingConfiguration? IModel.FindTypeMappingConfiguration(Type propertyType)
-        => _typeConfigurations.Count == 0
-            ? null
-            : _typeConfigurations.GetValueOrDefault(propertyType);
+    ITypeMappingConfiguration? IModel.FindTypeMappingConfiguration(Type propertyType) =>
+        _typeConfigurations.Count == 0 ? null : _typeConfigurations.GetValueOrDefault(propertyType);
 }

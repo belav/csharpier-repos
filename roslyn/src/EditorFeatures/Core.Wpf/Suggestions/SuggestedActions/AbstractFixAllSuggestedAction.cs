@@ -31,9 +31,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             ITextBuffer subjectBuffer,
             IFixAllState fixAllState,
             CodeAction originalCodeAction,
-            AbstractFixAllCodeAction fixAllCodeAction)
-            : base(threadingContext, sourceProvider, workspace, subjectBuffer,
-                   fixAllState.FixAllProvider, fixAllCodeAction)
+            AbstractFixAllCodeAction fixAllCodeAction
+        )
+            : base(
+                threadingContext,
+                sourceProvider,
+                workspace,
+                subjectBuffer,
+                fixAllState.FixAllProvider,
+                fixAllCodeAction
+            )
         {
             OriginalCodeAction = originalCodeAction;
             FixAllState = fixAllState;
@@ -49,9 +56,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         }
 
         protected override async Task InnerInvokeAsync(
-            IProgressTracker progressTracker, CancellationToken cancellationToken)
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             var fixAllKind = FixAllState.FixAllKind;
             var functionId = fixAllKind switch
@@ -61,9 +72,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind)
             };
 
-            using (Logger.LogBlock(functionId, FixAllLogger.CreateCorrelationLogMessage(FixAllState.CorrelationId), cancellationToken))
+            using (
+                Logger.LogBlock(
+                    functionId,
+                    FixAllLogger.CreateCorrelationLogMessage(FixAllState.CorrelationId),
+                    cancellationToken
+                )
+            )
             {
-                await base.InnerInvokeAsync(progressTracker, cancellationToken).ConfigureAwait(false);
+                await base.InnerInvokeAsync(progressTracker, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
     }

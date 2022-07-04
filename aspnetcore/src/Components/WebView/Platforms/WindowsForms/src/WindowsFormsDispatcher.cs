@@ -35,8 +35,7 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
             _dispatchThreadControl = dispatchThreadControl;
         }
 
-        public override bool CheckAccess()
-            => !_dispatchThreadControl.InvokeRequired;
+        public override bool CheckAccess() => !_dispatchThreadControl.InvokeRequired;
 
         public override async Task InvokeAsync(Action workItem)
         {
@@ -97,7 +96,10 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
                 else
                 {
                     var asyncResult = _dispatchThreadControl.BeginInvoke(workItem);
-                    return await Task<TResult>.Factory.FromAsync(asyncResult, result => (TResult)_dispatchThreadControl.EndInvoke(result));
+                    return await Task<TResult>.Factory.FromAsync(
+                        asyncResult,
+                        result => (TResult)_dispatchThreadControl.EndInvoke(result)
+                    );
                 }
             }
             catch (Exception ex)
@@ -121,7 +123,10 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
                 else
                 {
                     var asyncResult = _dispatchThreadControl.BeginInvoke(workItem);
-                    return await Task<TResult>.Factory.FromAsync(asyncResult, result => (TResult)_dispatchThreadControl.EndInvoke(result));
+                    return await Task<TResult>.Factory.FromAsync(
+                        asyncResult,
+                        result => (TResult)_dispatchThreadControl.EndInvoke(result)
+                    );
                 }
             }
             catch (Exception ex)

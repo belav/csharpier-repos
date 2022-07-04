@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [WorkItem(23358, "https://github.com/dotnet/roslyn/issues/23358")]
         public void EmptyOrNullStringConv()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 
 class Test
@@ -37,9 +38,15 @@ class Test
     }
 }
 
-", targetFramework: TargetFramework.NetCoreApp, options: TestOptions.ReleaseExe);
+",
+                targetFramework: TargetFramework.NetCoreApp,
+                options: TestOptions.ReleaseExe
+            );
 
-            CompileAndVerify(comp, expectedOutput: "TrueTrue", verify: Verification.Passes).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp, expectedOutput: "TrueTrue", verify: Verification.Passes)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size       79 (0x4f)
   .maxstack  2
@@ -70,14 +77,16 @@ class Test
   IL_0047:  ceq
   IL_0049:  call       ""void System.Console.Write(bool)""
   IL_004e:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(23358, "https://github.com/dotnet/roslyn/issues/23358")]
         public void EmptyOrNullArrayConv()
         {
-            var comp = CreateCompilationWithMscorlibAndSpan(@"
+            var comp = CreateCompilationWithMscorlibAndSpan(
+                @"
 using System;
 
 class Test
@@ -96,9 +105,14 @@ class Test
     }
 }
 
-", TestOptions.ReleaseExe);
+",
+                TestOptions.ReleaseExe
+            );
 
-            CompileAndVerify(comp, expectedOutput: "TrueTrue", verify: Verification.Passes).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp, expectedOutput: "TrueTrue", verify: Verification.Passes)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size       77 (0x4d)
   .maxstack  2
@@ -132,14 +146,16 @@ class Test
   IL_0045:  ceq
   IL_0047:  call       ""void System.Console.Write(bool)""
   IL_004c:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(23358, "https://github.com/dotnet/roslyn/issues/23358")]
         public void EmptyArrayCtor()
         {
-            var comp = CreateCompilationWithMscorlibAndSpan(@"
+            var comp = CreateCompilationWithMscorlibAndSpan(
+                @"
 using System;
 
 class Test
@@ -157,9 +173,14 @@ class Test
     }
 }
 
-", TestOptions.ReleaseExe);
+",
+                TestOptions.ReleaseExe
+            );
 
-            CompileAndVerify(comp, expectedOutput: "TrueTrue", verify: Verification.Passes).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp, expectedOutput: "TrueTrue", verify: Verification.Passes)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size       69 (0x45)
   .maxstack  2
@@ -187,14 +208,16 @@ class Test
   IL_003d:  ceq
   IL_003f:  call       ""void System.Console.Write(bool)""
   IL_0044:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(23358, "https://github.com/dotnet/roslyn/issues/23358")]
         public void NotConstArrayCtor()
         {
-            var comp = CreateCompilationWithMscorlibAndSpan(@"
+            var comp = CreateCompilationWithMscorlibAndSpan(
+                @"
 using System;
 
 class Test
@@ -210,9 +233,14 @@ class Test
     }
 }
 
-", TestOptions.ReleaseExe);
+",
+                TestOptions.ReleaseExe
+            );
 
-            CompileAndVerify(comp, expectedOutput: "True", verify: Verification.Passes).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp, expectedOutput: "True", verify: Verification.Passes)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size       75 (0x4b)
   .maxstack  5
@@ -244,14 +272,16 @@ class Test
   IL_0043:  ceq
   IL_0045:  call       ""void System.Console.Write(bool)""
   IL_004a:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(23358, "https://github.com/dotnet/roslyn/issues/23358")]
         public void NotConstArrayCtorByte()
         {
-            var comp = CreateCompilationWithMscorlibAndSpan(@"
+            var comp = CreateCompilationWithMscorlibAndSpan(
+                @"
 using System;
 
 class Test
@@ -267,9 +297,14 @@ class Test
     }
 }
 
-", TestOptions.ReleaseExe);
+",
+                TestOptions.ReleaseExe
+            );
 
-            CompileAndVerify(comp, expectedOutput: "True", verify: Verification.Passes).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp, expectedOutput: "True", verify: Verification.Passes)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size       75 (0x4b)
   .maxstack  5
@@ -301,14 +336,16 @@ class Test
   IL_0043:  ceq
   IL_0045:  call       ""void System.Console.Write(bool)""
   IL_004a:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(23358, "https://github.com/dotnet/roslyn/issues/23358")]
         public void NotBlittableArrayConv()
         {
-            var comp = CreateCompilationWithMscorlibAndSpan(@"
+            var comp = CreateCompilationWithMscorlibAndSpan(
+                @"
 using System;
 
 class Test
@@ -321,9 +358,14 @@ class Test
     }
 }
 
-", TestOptions.ReleaseExe);
+",
+                TestOptions.ReleaseExe
+            );
 
-            CompileAndVerify(comp, expectedOutput: "3", verify: Verification.Passes).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp, expectedOutput: "3", verify: Verification.Passes)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size       72 (0x48)
   .maxstack  4
@@ -359,14 +401,16 @@ class Test
   IL_0041:  ldind.ref
   IL_0042:  call       ""void System.Console.Write(object)""
   IL_0047:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(23358, "https://github.com/dotnet/roslyn/issues/23358")]
         public void EnumArrayCtor()
         {
-            var comp = CreateCompilationWithMscorlibAndSpan(@"
+            var comp = CreateCompilationWithMscorlibAndSpan(
+                @"
 using System;
 
 class Test
@@ -383,9 +427,14 @@ class Test
     }
 }
 
-", TestOptions.ReleaseExe);
+",
+                TestOptions.ReleaseExe
+            );
 
-            CompileAndVerify(comp, expectedOutput: "BlueTrue", verify: Verification.Fails).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp, expectedOutput: "BlueTrue", verify: Verification.Fails)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size       70 (0x46)
   .maxstack  3
@@ -416,14 +465,16 @@ class Test
   IL_003e:  ceq
   IL_0040:  call       ""void System.Console.Write(bool)""
   IL_0045:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(23358, "https://github.com/dotnet/roslyn/issues/23358")]
         public void EnumArrayCtorPEVerify()
         {
-            var comp = CreateCompilationWithMscorlibAndSpan(@"
+            var comp = CreateCompilationWithMscorlibAndSpan(
+                @"
 using System;
 
 class Test
@@ -440,9 +491,15 @@ class Test
     }
 }
 
-", TestOptions.ReleaseExe, parseOptions: TestOptions.Regular.WithPEVerifyCompatFeature());
+",
+                TestOptions.ReleaseExe,
+                parseOptions: TestOptions.Regular.WithPEVerifyCompatFeature()
+            );
 
-            CompileAndVerify(comp, expectedOutput: "BlueTrue", verify: Verification.Passes).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp, expectedOutput: "BlueTrue", verify: Verification.Passes)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size       86 (0x56)
   .maxstack  5
@@ -489,14 +546,16 @@ class Test
   IL_004e:  ceq
   IL_0050:  call       ""void System.Console.Write(bool)""
   IL_0055:  ret
-}");
+}"
+                );
         }
 
         [ConditionalFact(typeof(CoreClrOnly))]
         [WorkItem(23358, "https://github.com/dotnet/roslyn/issues/23358")]
         public void ConvInMethodCall()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System;
 
 class Test
@@ -513,9 +572,15 @@ class Test
     }
 }
 
-", targetFramework: TargetFramework.NetCoreApp, options: TestOptions.ReleaseExe);
+",
+                targetFramework: TargetFramework.NetCoreApp,
+                options: TestOptions.ReleaseExe
+            );
 
-            CompileAndVerify(comp, expectedOutput: "P10", verify: Verification.Fails).VerifyIL("Test.Main", @"
+            CompileAndVerify(comp, expectedOutput: "P10", verify: Verification.Fails)
+                .VerifyIL(
+                    "Test.Main",
+                    @"
 {
   // Code size       28 (0x1c)
   .maxstack  3
@@ -526,14 +591,16 @@ class Test
   IL_0011:  newobj     ""System.ReadOnlySpan<byte>..ctor(void*, int)""
   IL_0016:  call       ""void Test.Test1<char, byte>(System.ReadOnlySpan<char>, System.ReadOnlySpan<byte>)""
   IL_001b:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(31685, "https://github.com/dotnet/roslyn/issues/31685")]
         public void ImplicitSpanConversionInLambdaInGenericMethod_01()
         {
-            var comp = CreateCompilationWithMscorlibAndSpan(@"
+            var comp = CreateCompilationWithMscorlibAndSpan(
+                @"
 using System;
 
 class Test
@@ -562,9 +629,13 @@ class Test
         yield break;
     }
 }
-", WithNullableEnable(TestOptions.ReleaseExe));
+",
+                WithNullableEnable(TestOptions.ReleaseExe)
+            );
             var cv = CompileAndVerify(comp, expectedOutput: "", verify: Verification.Passes);
-            cv.VerifyIL("Test.<>c__1<T>.<M1>b__1_0(T[])", @"
+            cv.VerifyIL(
+                "Test.<>c__1<T>.<M1>b__1_0(T[])",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -577,8 +648,11 @@ class Test
   IL_000a:  call       ""ref readonly T System.ReadOnlySpan<T>.this[int].get""
   IL_000f:  pop
   IL_0010:  ret
-}");
-            cv.VerifyIL("Test.<M2>d__2<T>.System.Collections.IEnumerator.MoveNext()", @"{
+}"
+            );
+            cv.VerifyIL(
+                "Test.<M2>d__2<T>.System.Collections.IEnumerator.MoveNext()",
+                @"{
   // Code size       42 (0x2a)
   .maxstack  2
   .locals init (int V_0,
@@ -603,14 +677,16 @@ class Test
   IL_0027:  pop
   IL_0028:  ldc.i4.0
   IL_0029:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem(31685, "https://github.com/dotnet/roslyn/issues/31685")]
         public void ImplicitSpanConversionInLambdaInGenericMethod_02()
         {
-            var comp = CreateCompilationWithMscorlibAndSpan(@"
+            var comp = CreateCompilationWithMscorlibAndSpan(
+                @"
 using System;
 
 public class X
@@ -630,9 +706,13 @@ public class X
         System.Console.WriteLine(d(2));
     }
 }
-", WithNullableEnable(TestOptions.ReleaseExe));
+",
+                WithNullableEnable(TestOptions.ReleaseExe)
+            );
             var cv = CompileAndVerify(comp, expectedOutput: "100", verify: Verification.Passes);
-            cv.VerifyIL("X.<>c__DisplayClass0_0<TSrc>.<Outer>b__0(int)", @"{
+            cv.VerifyIL(
+                "X.<>c__DisplayClass0_0<TSrc>.<Outer>b__0(int)",
+                @"{
   // Code size       26 (0x1a)
   .maxstack  2
   .locals init (System.ReadOnlySpan<TSrc> V_0) //s
@@ -645,14 +725,16 @@ public class X
   IL_000f:  call       ""ref readonly TSrc System.ReadOnlySpan<TSrc>.this[int].get""
   IL_0014:  ldobj      ""TSrc""
   IL_0019:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem(24621, "https://github.com/dotnet/roslyn/issues/24621")]
         public void StaticFieldIsUsedForSpanCreatedFromArrayWithInitializer_Verifiable()
         {
-            var csharp = @"
+            var csharp =
+                @"
 using System;
 
 public class Test
@@ -669,9 +751,19 @@ public class Test
 }";
             var compilationOptions = TestOptions.ReleaseExe;
             var parseOptions = CSharpParseOptions.Default.WithPEVerifyCompatFeature();
-            var compilation = CreateCompilationWithMscorlibAndSpan(csharp, compilationOptions, parseOptions);
-            var verifier = CompileAndVerify(compilation, expectedOutput: "10;20;", verify: Verification.Skipped);
-            verifier.VerifyIL("Test.StaticData.get", @"{
+            var compilation = CreateCompilationWithMscorlibAndSpan(
+                csharp,
+                compilationOptions,
+                parseOptions
+            );
+            var verifier = CompileAndVerify(
+                compilation,
+                expectedOutput: "10;20;",
+                verify: Verification.Skipped
+            );
+            verifier.VerifyIL(
+                "Test.StaticData.get",
+                @"{
   // Code size       22 (0x16)
   .maxstack  4
   IL_0000:  ldc.i4.2
@@ -686,14 +778,16 @@ public class Test
   IL_000f:  stelem.i1
   IL_0010:  call       ""System.ReadOnlySpan<byte> System.ReadOnlySpan<byte>.op_Implicit(byte[])""
   IL_0015:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem(24621, "https://github.com/dotnet/roslyn/issues/24621")]
         public void StaticFieldIsUsedForSpanCreatedFromArrayWithInitializer()
         {
-            var csharp = @"
+            var csharp =
+                @"
 using System;
 
 public class Test
@@ -709,15 +803,22 @@ public class Test
     }
 }";
             var compilation = CreateCompilationWithMscorlibAndSpan(csharp, TestOptions.ReleaseExe);
-            var verifier = CompileAndVerify(compilation, expectedOutput: "10;20;", verify: Verification.Skipped);
-            verifier.VerifyIL("Test.StaticData.get", @"{
+            var verifier = CompileAndVerify(
+                compilation,
+                expectedOutput: "10;20;",
+                verify: Verification.Skipped
+            );
+            verifier.VerifyIL(
+                "Test.StaticData.get",
+                @"{
   // Code size       12 (0xc)
   .maxstack  2
   IL_0000:  ldsflda    ""short <PrivateImplementationDetails>.C330FA753AC5BE3B8FCB52745062F781CC9E0F4FA981A2BD06FCB969355B9469""
   IL_0005:  ldc.i4.2
   IL_0006:  newobj     ""System.ReadOnlySpan<byte>..ctor(void*, int)""
   IL_000b:  ret
-}");
+}"
+            );
         }
     }
 }

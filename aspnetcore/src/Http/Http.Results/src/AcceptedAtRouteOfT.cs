@@ -23,9 +23,7 @@ public sealed class AcceptedAtRoute<TValue> : IResult, IEndpointMetadataProvider
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to format in the entity body.</param>
     internal AcceptedAtRoute(object? routeValues, TValue? value)
-        : this(routeName: null, routeValues: routeValues, value: value)
-    {
-    }
+        : this(routeName: null, routeValues: routeValues, value: value) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AcceptedAtRoute"/> class with the values
@@ -34,10 +32,7 @@ public sealed class AcceptedAtRoute<TValue> : IResult, IEndpointMetadataProvider
     /// <param name="routeName">The name of the route to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to format in the entity body.</param>
-    internal AcceptedAtRoute(
-        string? routeName,
-        object? routeValues,
-        TValue? value)
+    internal AcceptedAtRoute(string? routeName, object? routeValues, TValue? value)
     {
         Value = value;
         RouteName = routeName;
@@ -75,7 +70,8 @@ public sealed class AcceptedAtRoute<TValue> : IResult, IEndpointMetadataProvider
             httpContext,
             RouteName,
             RouteValues,
-            fragment: FragmentString.Empty);
+            fragment: FragmentString.Empty
+        );
 
         if (string.IsNullOrEmpty(url))
         {
@@ -84,7 +80,9 @@ public sealed class AcceptedAtRoute<TValue> : IResult, IEndpointMetadataProvider
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.AcceptedAtRouteResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.AcceptedAtRouteResult"
+        );
 
         httpContext.Response.Headers.Location = url;
 
@@ -99,6 +97,12 @@ public sealed class AcceptedAtRoute<TValue> : IResult, IEndpointMetadataProvider
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        context.EndpointMetadata.Add(new ProducesResponseTypeMetadata(typeof(TValue), StatusCodes.Status202Accepted, "application/json"));
+        context.EndpointMetadata.Add(
+            new ProducesResponseTypeMetadata(
+                typeof(TValue),
+                StatusCodes.Status202Accepted,
+                "application/json"
+            )
+        );
     }
 }

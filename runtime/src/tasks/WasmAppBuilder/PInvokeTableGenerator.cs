@@ -19,7 +19,11 @@ internal sealed class PInvokeTableGenerator
 
     public PInvokeTableGenerator(TaskLoggingHelper log) => Log = log;
 
-    public IEnumerable<string> GenPInvokeTable(string[] pinvokeModules, string[] assemblies, string outputPath)
+    public IEnumerable<string> GenPInvokeTable(
+        string[] pinvokeModules,
+        string[] assemblies,
+        string outputPath
+    )
     {
         var modules = new Dictionary<string, string>();
         foreach (var module in pinvokeModules)
@@ -49,9 +53,15 @@ internal sealed class PInvokeTableGenerator
             }
 
             if (Utils.CopyIfDifferent(tmpFileName, outputPath, useHash: false))
-                Log.LogMessage(MessageImportance.Low, $"Generating pinvoke table to '{outputPath}'.");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Generating pinvoke table to '{outputPath}'."
+                );
             else
-                Log.LogMessage(MessageImportance.Low, $"PInvoke table in {outputPath} is unchanged.");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"PInvoke table in {outputPath} is unchanged."
+                );
         }
         finally
         {
@@ -61,9 +71,22 @@ internal sealed class PInvokeTableGenerator
         return signatures;
     }
 
-    private void CollectPInvokes(List<PInvoke> pinvokes, List<PInvokeCallback> callbacks, List<string> signatures, Type type)
+    private void CollectPInvokes(
+        List<PInvoke> pinvokes,
+        List<PInvokeCallback> callbacks,
+        List<string> signatures,
+        Type type
+    )
     {
-        foreach (var method in type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance))
+        foreach (
+            var method in type.GetMethods(
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Static
+                    | BindingFlags.Instance
+            )
+        )
         {
             try
             {
@@ -71,7 +94,10 @@ internal sealed class PInvokeTableGenerator
             }
             catch (Exception ex)
             {
-                Log.LogMessage(MessageImportance.Low, $"Could not get pinvoke, or callbacks for method {method.Name}: {ex}");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Could not get pinvoke, or callbacks for method {method.Name}: {ex}"
+                );
                 continue;
             }
         }
@@ -80,18 +106,28 @@ internal sealed class PInvokeTableGenerator
         {
             if ((method.Attributes & MethodAttributes.PinvokeImpl) != 0)
             {
-                var dllimport = method.CustomAttributes.First(attr => attr.AttributeType.Name == "DllImportAttribute");
+                var dllimport = method.CustomAttributes.First(
+                    attr => attr.AttributeType.Name == "DllImportAttribute"
+                );
                 var module = (string)dllimport.ConstructorArguments[0].Value!;
-                var entrypoint = (string)dllimport.NamedArguments.First(arg => arg.MemberName == "EntryPoint").TypedValue.Value!;
+                var entrypoint = (string)
+                    dllimport.NamedArguments
+                        .First(arg => arg.MemberName == "EntryPoint")
+                        .TypedValue.Value!;
                 pinvokes.Add(new PInvoke(entrypoint, module, method));
 
                 string? signature = SignatureMapper.MethodToSignature(method);
                 if (signature == null)
                 {
-                    throw new LogAsErrorException($"Unsupported parameter type in method '{type.FullName}.{method.Name}'");
+                    throw new LogAsErrorException(
+                        $"Unsupported parameter type in method '{type.FullName}.{method.Name}'"
+                    );
                 }
 
-                Log.LogMessage(MessageImportance.Normal, $"[pinvoke] Adding signature {signature} for method '{type.FullName}.{method.Name}'");
+                Log.LogMessage(
+                    MessageImportance.Normal,
+                    $"[pinvoke] Adding signature {signature} for method '{type.FullName}.{method.Name}'"
+                );
                 signatures.Add(signature);
             }
 
@@ -99,8 +135,11 @@ internal sealed class PInvokeTableGenerator
             {
                 try
                 {
-                    if (cattr.AttributeType.FullName == "System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute" ||
-                        cattr.AttributeType.Name == "MonoPInvokeCallbackAttribute")
+                    if (
+                        cattr.AttributeType.FullName
+                            == "System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"
+                        || cattr.AttributeType.Name == "MonoPInvokeCallbackAttribute"
+                    )
                         callbacks.Add(new PInvokeCallback(method));
                 }
                 catch
@@ -111,15 +150,19 @@ internal sealed class PInvokeTableGenerator
         }
     }
 
-    private void EmitPInvokeTable(StreamWriter w, Dictionary<string, string> modules, List<PInvoke> pinvokes)
+    private void EmitPInvokeTable(
+        StreamWriter w,
+        Dictionary<string, string> modules,
+        List<PInvoke> pinvokes
+    )
     {
         w.WriteLine("// GENERATED FILE, DO NOT MODIFY");
         w.WriteLine();
 
         var pinvokesGroupedByEntryPoint = pinvokes
-                                            .Where(l => modules.ContainsKey(l.Module))
-                                            .OrderBy(l => l.EntryPoint)
-                                            .GroupBy(l => l.EntryPoint);
+            .Where(l => modules.ContainsKey(l.Module))
+            .OrderBy(l => l.EntryPoint)
+            .GroupBy(l => l.EntryPoint);
 
         var comparer = new PInvokeComparer();
         foreach (IGrouping<string, PInvoke> group in pinvokesGroupedByEntryPoint)
@@ -128,12 +171,18 @@ internal sealed class PInvokeTableGenerator
             PInvoke first = candidates[0];
             if (ShouldTreatAsVariadic(candidates))
             {
-                string imports = string.Join(Environment.NewLine,
-                                            candidates.Select(
-                                                p => $"    {p.Method} (in [{p.Method.DeclaringType?.Assembly.GetName().Name}] {p.Method.DeclaringType})"));
-                Log.LogWarning($"Found a native function ({first.EntryPoint}) with varargs in {first.Module}." +
-                                 " Calling such functions is not supported, and will fail at runtime." +
-                                $" Managed DllImports: {Environment.NewLine}{imports}");
+                string imports = string.Join(
+                    Environment.NewLine,
+                    candidates.Select(
+                        p =>
+                            $"    {p.Method} (in [{p.Method.DeclaringType?.Assembly.GetName().Name}] {p.Method.DeclaringType})"
+                    )
+                );
+                Log.LogWarning(
+                    $"Found a native function ({first.EntryPoint}) with varargs in {first.Module}."
+                        + " Calling such functions is not supported, and will fail at runtime."
+                        + $" Managed DllImports: {Environment.NewLine}{imports}"
+                );
 
                 foreach (var c in candidates)
                     c.Skip = true;
@@ -158,12 +207,27 @@ internal sealed class PInvokeTableGenerator
             string symbol = ModuleNameToId(module) + "_imports";
             w.WriteLine("static PinvokeImport " + symbol + " [] = {");
 
-            var assemblies_pinvokes = pinvokes.
-                Where(l => l.Module == module && !l.Skip).
-                OrderBy(l => l.EntryPoint).
-                GroupBy(d => d.EntryPoint).
-                Select(l => "{\"" + FixupSymbolName(l.Key) + "\", " + FixupSymbolName(l.Key) + "}, " +
-                                "// " + string.Join(", ", l.Select(c => c.Method.DeclaringType!.Module!.Assembly!.GetName()!.Name!).Distinct().OrderBy(n => n)));
+            var assemblies_pinvokes = pinvokes
+                .Where(l => l.Module == module && !l.Skip)
+                .OrderBy(l => l.EntryPoint)
+                .GroupBy(d => d.EntryPoint)
+                .Select(
+                    l =>
+                        "{\""
+                        + FixupSymbolName(l.Key)
+                        + "\", "
+                        + FixupSymbolName(l.Key)
+                        + "}, "
+                        + "// "
+                        + string.Join(
+                            ", ",
+                            l.Select(
+                                    c => c.Method.DeclaringType!.Module!.Assembly!.GetName()!.Name!
+                                )
+                                .Distinct()
+                                .OrderBy(n => n)
+                        )
+                );
 
             foreach (var pinvoke in assemblies_pinvokes)
             {
@@ -210,9 +274,12 @@ internal sealed class PInvokeTableGenerator
 
             int firstNumArgs = first.Method.GetParameters().Length;
             return candidates
-                        .Skip(1)
-                        .Any(c => !TryIsMethodGetParametersUnsupported(c.Method, out _) &&
-                                    c.Method.GetParameters().Length != firstNumArgs);
+                .Skip(1)
+                .Any(
+                    c =>
+                        !TryIsMethodGetParametersUnsupported(c.Method, out _)
+                        && c.Method.GetParameters().Length != firstNumArgs
+                );
         }
     }
 
@@ -224,10 +291,12 @@ internal sealed class PInvokeTableGenerator
 
         foreach (byte b in bytes)
         {
-            if ((b >= (byte)'0' && b <= (byte)'9') ||
-                (b >= (byte)'a' && b <= (byte)'z') ||
-                (b >= (byte)'A' && b <= (byte)'Z') ||
-                (b == (byte)'_'))
+            if (
+                (b >= (byte)'0' && b <= (byte)'9')
+                || (b >= (byte)'a' && b <= (byte)'z')
+                || (b >= (byte)'A' && b <= (byte)'Z')
+                || (b == (byte)'_')
+            )
             {
                 sb.Append((char)b);
             }
@@ -255,19 +324,23 @@ internal sealed class PInvokeTableGenerator
         return FixupSymbolName(sb.ToString());
     }
 
-    private static string MapType(Type t) => t.Name switch
-    {
-        "Void" => "void",
-        nameof(Double) => "double",
-        nameof(Single) => "float",
-        nameof(Int64) => "int64_t",
-        nameof(UInt64) => "uint64_t",
-        _ => "int"
-    };
+    private static string MapType(Type t) =>
+        t.Name switch
+        {
+            "Void" => "void",
+            nameof(Double) => "double",
+            nameof(Single) => "float",
+            nameof(Int64) => "int64_t",
+            nameof(UInt64) => "uint64_t",
+            _ => "int"
+        };
 
     // FIXME: System.Reflection.MetadataLoadContext can't decode function pointer types
     // https://github.com/dotnet/runtime/issues/43791
-    private static bool TryIsMethodGetParametersUnsupported(MethodInfo method, [NotNullWhen(true)] out string? reason)
+    private static bool TryIsMethodGetParametersUnsupported(
+        MethodInfo method,
+        [NotNullWhen(true)] out string? reason
+    )
     {
         try
         {
@@ -301,7 +374,9 @@ internal sealed class PInvokeTableGenerator
 
         if (TryIsMethodGetParametersUnsupported(pinvoke.Method, out string? reason))
         {
-            Log.LogWarning($"Skipping the following DllImport because '{reason}'. {Environment.NewLine}  {pinvoke.Method}");
+            Log.LogWarning(
+                $"Skipping the following DllImport because '{reason}'. {Environment.NewLine}  {pinvoke.Method}"
+            );
             pinvoke.Skip = true;
             return null;
         }
@@ -342,11 +417,17 @@ internal sealed class PInvokeTableGenerator
             bool isVoid = method.ReturnType.FullName == "System.Void";
 
             if (!isVoid && !IsBlittable(method.ReturnType))
-                Error($"The return type '{method.ReturnType.FullName}' of pinvoke callback method '{method}' needs to be blittable.");
+                Error(
+                    $"The return type '{method.ReturnType.FullName}' of pinvoke callback method '{method}' needs to be blittable."
+                );
             foreach (var p in method.GetParameters())
             {
                 if (!IsBlittable(p.ParameterType))
-                    Error("Parameter types of pinvoke callback method '" + method + "' needs to be blittable.");
+                    Error(
+                        "Parameter types of pinvoke callback method '"
+                            + method
+                            + "' needs to be blittable."
+                    );
             }
         }
 
@@ -382,7 +463,9 @@ internal sealed class PInvokeTableGenerator
 
             bool is_void = method.ReturnType.Name == "Void";
 
-            string module_symbol = method.DeclaringType!.Module!.Assembly!.GetName()!.Name!.Replace(".", "_");
+            string module_symbol = method.DeclaringType!.Module!.Assembly!
+                .GetName()!
+                .Name!.Replace(".", "_");
             uint token = (uint)method.MetadataToken;
             string class_name = method.DeclaringType.Name;
             string method_name = method.Name;
@@ -407,7 +490,9 @@ internal sealed class PInvokeTableGenerator
             sb.Append(") { \n");
             if (!is_void)
                 sb.Append(MapType(method.ReturnType) + " res;\n");
-            sb.Append($"((WasmInterpEntrySig_{cb_index})wasm_native_to_interp_ftndescs [{cb_index}].func) (");
+            sb.Append(
+                $"((WasmInterpEntrySig_{cb_index})wasm_native_to_interp_ftndescs [{cb_index}].func) ("
+            );
             pindex = 0;
             if (!is_void)
             {
@@ -449,7 +534,9 @@ internal sealed class PInvokeTableGenerator
         foreach (var cb in callbacks)
         {
             var method = cb.Method;
-            string module_symbol = method.DeclaringType!.Module!.Assembly!.GetName()!.Name!.Replace(".", "_");
+            string module_symbol = method.DeclaringType!.Module!.Assembly!
+                .GetName()!
+                .Name!.Replace(".", "_");
             string class_name = method.DeclaringType.Name;
             string method_name = method.Name;
             w.WriteLine($"\"{module_symbol}_{class_name}_{method_name}\",");
@@ -484,13 +571,14 @@ internal sealed class PInvoke : IEquatable<PInvoke>
     public MethodInfo Method;
     public bool Skip;
 
-    public bool Equals(PInvoke? other)
-        => other != null &&
-            string.Equals(EntryPoint, other.EntryPoint, StringComparison.Ordinal) &&
-            string.Equals(Module, other.Module, StringComparison.Ordinal) &&
-            string.Equals(Method.ToString(), other.Method.ToString(), StringComparison.Ordinal);
+    public bool Equals(PInvoke? other) =>
+        other != null
+        && string.Equals(EntryPoint, other.EntryPoint, StringComparison.Ordinal)
+        && string.Equals(Module, other.Module, StringComparison.Ordinal)
+        && string.Equals(Method.ToString(), other.Method.ToString(), StringComparison.Ordinal);
 
-    public override string ToString() => $"{{ EntryPoint: {EntryPoint}, Module: {Module}, Method: {Method}, Skip: {Skip} }}";
+    public override string ToString() =>
+        $"{{ EntryPoint: {EntryPoint}, Module: {Module}, Method: {Method}, Skip: {Skip} }}";
 }
 
 internal sealed class PInvokeComparer : IEqualityComparer<PInvoke>
@@ -505,8 +593,8 @@ internal sealed class PInvokeComparer : IEqualityComparer<PInvoke>
         return x.Equals(y);
     }
 
-    public int GetHashCode(PInvoke pinvoke)
-        => $"{pinvoke.EntryPoint}{pinvoke.Module}{pinvoke.Method}".GetHashCode();
+    public int GetHashCode(PInvoke pinvoke) =>
+        $"{pinvoke.EntryPoint}{pinvoke.Module}{pinvoke.Method}".GetHashCode();
 }
 
 internal sealed class PInvokeCallback

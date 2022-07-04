@@ -12,10 +12,38 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void InvalidPaths_Throw()
         {
-            Assert.Throws<ArgumentNullException>(() => TarFile.ExtractToDirectory(sourceFileName: null, destinationDirectoryName: "path", overwriteFiles: false));
-            Assert.Throws<ArgumentException>(() => TarFile.ExtractToDirectory(sourceFileName: string.Empty, destinationDirectoryName: "path", overwriteFiles: false));
-            Assert.Throws<ArgumentNullException>(() => TarFile.ExtractToDirectory(sourceFileName: "path", destinationDirectoryName: null, overwriteFiles: false));
-            Assert.Throws<ArgumentException>(() => TarFile.ExtractToDirectory(sourceFileName: "path", destinationDirectoryName: string.Empty, overwriteFiles: false));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceFileName: null,
+                        destinationDirectoryName: "path",
+                        overwriteFiles: false
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceFileName: string.Empty,
+                        destinationDirectoryName: "path",
+                        overwriteFiles: false
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceFileName: "path",
+                        destinationDirectoryName: null,
+                        overwriteFiles: false
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceFileName: "path",
+                        destinationDirectoryName: string.Empty,
+                        overwriteFiles: false
+                    )
+            );
         }
 
         [Fact]
@@ -28,7 +56,14 @@ namespace System.Formats.Tar.Tests
 
             Directory.CreateDirectory(dirPath);
 
-            Assert.Throws<FileNotFoundException>(() => TarFile.ExtractToDirectory(sourceFileName: filePath, destinationDirectoryName: dirPath, overwriteFiles: false));
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceFileName: filePath,
+                        destinationDirectoryName: dirPath,
+                        overwriteFiles: false
+                    )
+            );
         }
 
         [Fact]
@@ -41,7 +76,14 @@ namespace System.Formats.Tar.Tests
 
             File.Create(filePath).Dispose();
 
-            Assert.Throws<DirectoryNotFoundException>(() => TarFile.ExtractToDirectory(sourceFileName: filePath, destinationDirectoryName: dirPath, overwriteFiles: false));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceFileName: filePath,
+                        destinationDirectoryName: dirPath,
+                        overwriteFiles: false
+                    )
+            );
         }
 
         [Theory]
@@ -53,13 +95,21 @@ namespace System.Formats.Tar.Tests
         [InlineData(TestTarFormat.oldgnu)]
         public void Extract_Archive_File(TestTarFormat testFormat)
         {
-            string sourceArchiveFileName = GetTarFilePath(CompressionMethod.Uncompressed, testFormat, "file");
+            string sourceArchiveFileName = GetTarFilePath(
+                CompressionMethod.Uncompressed,
+                testFormat,
+                "file"
+            );
 
             using TempDirectory destination = new TempDirectory();
 
             string filePath = Path.Join(destination.Path, "file.txt");
 
-            TarFile.ExtractToDirectory(sourceArchiveFileName, destination.Path, overwriteFiles: false);
+            TarFile.ExtractToDirectory(
+                sourceArchiveFileName,
+                destination.Path,
+                overwriteFiles: false
+            );
 
             Assert.True(File.Exists(filePath));
         }
@@ -68,7 +118,11 @@ namespace System.Formats.Tar.Tests
         public void Extract_Archive_File_OverwriteTrue()
         {
             string testCaseName = "file";
-            string archivePath = GetTarFilePath(CompressionMethod.Uncompressed, TestTarFormat.pax, testCaseName);
+            string archivePath = GetTarFilePath(
+                CompressionMethod.Uncompressed,
+                TestTarFormat.pax,
+                testCaseName
+            );
 
             using TempDirectory destination = new TempDirectory();
 
@@ -94,7 +148,11 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void Extract_Archive_File_OverwriteFalse()
         {
-            string sourceArchiveFileName = GetTarFilePath(CompressionMethod.Uncompressed, TestTarFormat.pax, "file");
+            string sourceArchiveFileName = GetTarFilePath(
+                CompressionMethod.Uncompressed,
+                TestTarFormat.pax,
+                "file"
+            );
 
             using TempDirectory destination = new TempDirectory();
 
@@ -105,7 +163,14 @@ namespace System.Formats.Tar.Tests
                 writer.WriteLine("My existence should cause an exception");
             }
 
-            Assert.Throws<IOException>(() => TarFile.ExtractToDirectory(sourceArchiveFileName, destination.Path, overwriteFiles: false));
+            Assert.Throws<IOException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceArchiveFileName,
+                        destination.Path,
+                        overwriteFiles: false
+                    )
+            );
         }
 
         [Fact]
@@ -124,7 +189,10 @@ namespace System.Formats.Tar.Tests
                 PaxTarEntry segment2 = new PaxTarEntry(TarEntryType.Directory, "segment1/segment2");
                 writer.WriteEntry(segment2);
 
-                PaxTarEntry file = new PaxTarEntry(TarEntryType.RegularFile, "segment1/segment2/file.txt");
+                PaxTarEntry file = new PaxTarEntry(
+                    TarEntryType.RegularFile,
+                    "segment1/segment2/file.txt"
+                );
                 writer.WriteEntry(file);
             }
 

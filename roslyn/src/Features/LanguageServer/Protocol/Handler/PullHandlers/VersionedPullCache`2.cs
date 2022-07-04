@@ -31,14 +31,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         ///   <item>The resultId reported to the client.</item>
         ///   <item>The TCheapVersion of the data that was used to calculate results.
         ///       <para>
-        ///       Note that this version can change even when nothing has actually changed (for example, forking the 
+        ///       Note that this version can change even when nothing has actually changed (for example, forking the
         ///       LSP text, reloading the same project). So we additionally store:</para></item>
         ///   <item>A TExpensiveVersion (normally a checksum) checksum that will still allow us to reuse data even when
         ///   unimportant changes happen that trigger the cheap version change detection.</item>
         /// </list>
         /// This is used to determine if we need to re-calculate results.
         /// </summary>
-        private readonly Dictionary<(Workspace workspace, DocumentId documentId), (string resultId, TCheapVersion cheapVersion, TExpensiveVersion expensiveVersion)> _documentIdToLastResult = new();
+        private readonly Dictionary<
+            (Workspace workspace, DocumentId documentId),
+            (string resultId, TCheapVersion cheapVersion, TExpensiveVersion expensiveVersion)
+        > _documentIdToLastResult = new();
 
         /// <summary>
         /// The next available id to label results with.  Note that results are tagged on a per-document bases.  That
@@ -63,7 +66,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             Document document,
             Func<Task<TCheapVersion>> computeCheapVersionAsync,
             Func<Task<TExpensiveVersion>> computeExpensiveVersionAsync,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             TCheapVersion cheapVersion;
             TExpensiveVersion expensiveVersion;
@@ -71,10 +75,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var workspace = document.Project.Solution.Workspace;
             using (await _semaphore.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
-                if (documentToPreviousResult.TryGetValue(document, out var previousResult) &&
-                    previousResult.PreviousResultId != null &&
-                    _documentIdToLastResult.TryGetValue((workspace, document.Id), out var lastResult) &&
-                    lastResult.resultId == previousResult.PreviousResultId)
+                if (
+                    documentToPreviousResult.TryGetValue(document, out var previousResult)
+                    && previousResult.PreviousResultId != null
+                    && _documentIdToLastResult.TryGetValue(
+                        (workspace, document.Id),
+                        out var lastResult
+                    )
+                    && lastResult.resultId == previousResult.PreviousResultId
+                )
                 {
                     cheapVersion = await computeCheapVersionAsync().ConfigureAwait(false);
                     if (cheapVersion != null && cheapVersion.Equals(lastResult.cheapVersion))
@@ -89,7 +98,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     // or reloaded a project, so fall back to calculating the full expensive version to determine if
                     // anything is actually changed.
                     expensiveVersion = await computeExpensiveVersionAsync().ConfigureAwait(false);
-                    if (expensiveVersion != null && expensiveVersion.Equals(lastResult.expensiveVersion))
+                    if (
+                        expensiveVersion != null
+                        && expensiveVersion.Equals(lastResult.expensiveVersion)
+                    )
                     {
                         return null;
                     }
@@ -113,7 +125,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 // Note that we can safely update the map before computation as any cancellation or exception
                 // during computation means that the client will never recieve this resultId and so cannot ask us for it.
                 var newResultId = $"{_uniqueKey}:{_nextDocumentResultId++}";
-                _documentIdToLastResult[(document.Project.Solution.Workspace, document.Id)] = (newResultId, cheapVersion, expensiveVersion);
+                _documentIdToLastResult[(document.Project.Solution.Workspace, document.Id)] = (
+                    newResultId,
+                    cheapVersion,
+                    expensiveVersion
+                );
                 return newResultId;
             }
         }

@@ -23,8 +23,8 @@ public class ValueConverterEventData : EventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         Type mappingClrType,
-        ValueConverter valueConverter)
-        : base(eventDefinition, messageGenerator)
+        ValueConverter valueConverter
+    ) : base(eventDefinition, messageGenerator)
     {
         MappingClrType = mappingClrType;
         ValueConverter = valueConverter;

@@ -3,15 +3,15 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class GraphUpdatesSqlServerTptIdentityTest : GraphUpdatesSqlServerTestBase<GraphUpdatesSqlServerTptIdentityTest.SqlServerFixture>
+public class GraphUpdatesSqlServerTptIdentityTest
+    : GraphUpdatesSqlServerTestBase<GraphUpdatesSqlServerTptIdentityTest.SqlServerFixture>
 {
-    public GraphUpdatesSqlServerTptIdentityTest(SqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+    public GraphUpdatesSqlServerTptIdentityTest(SqlServerFixture fixture) : base(fixture) { }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
     public class SqlServerFixture : GraphUpdatesSqlServerFixtureBase
     {
@@ -38,8 +38,12 @@ public class GraphUpdatesSqlServerTptIdentityTest : GraphUpdatesSqlServerTestBas
             modelBuilder.Entity<OptionalSingle1>().ToTable(nameof(OptionalSingle1));
             modelBuilder.Entity<OptionalSingle2>().ToTable(nameof(OptionalSingle2));
             modelBuilder.Entity<RequiredNonPkSingle1>().ToTable(nameof(RequiredNonPkSingle1));
-            modelBuilder.Entity<RequiredNonPkSingle2Derived>().ToTable(nameof(RequiredNonPkSingle2Derived));
-            modelBuilder.Entity<RequiredNonPkSingle2MoreDerived>().ToTable(nameof(RequiredNonPkSingle2MoreDerived));
+            modelBuilder
+                .Entity<RequiredNonPkSingle2Derived>()
+                .ToTable(nameof(RequiredNonPkSingle2Derived));
+            modelBuilder
+                .Entity<RequiredNonPkSingle2MoreDerived>()
+                .ToTable(nameof(RequiredNonPkSingle2MoreDerived));
             modelBuilder.Entity<RequiredAk1>().ToTable(nameof(RequiredAk1));
             modelBuilder.Entity<RequiredAk1Derived>().ToTable(nameof(RequiredAk1Derived));
             modelBuilder.Entity<RequiredAk1MoreDerived>().ToTable(nameof(RequiredAk1MoreDerived));
@@ -48,8 +52,12 @@ public class GraphUpdatesSqlServerTptIdentityTest : GraphUpdatesSqlServerTestBas
             modelBuilder.Entity<OptionalAk1MoreDerived>().ToTable(nameof(OptionalAk1MoreDerived));
             modelBuilder.Entity<RequiredSingleAk1>().ToTable(nameof(RequiredSingleAk1));
             modelBuilder.Entity<OptionalSingleAk1>().ToTable(nameof(OptionalSingleAk1));
-            modelBuilder.Entity<OptionalSingleAk2Derived>().ToTable(nameof(OptionalSingleAk2Derived));
-            modelBuilder.Entity<OptionalSingleAk2MoreDerived>().ToTable(nameof(OptionalSingleAk2MoreDerived));
+            modelBuilder
+                .Entity<OptionalSingleAk2Derived>()
+                .ToTable(nameof(OptionalSingleAk2Derived));
+            modelBuilder
+                .Entity<OptionalSingleAk2MoreDerived>()
+                .ToTable(nameof(OptionalSingleAk2MoreDerived));
             modelBuilder.Entity<RequiredNonPkSingleAk1>().ToTable(nameof(RequiredNonPkSingleAk1));
             modelBuilder.Entity<RequiredAk2>().ToTable(nameof(RequiredAk2));
             modelBuilder.Entity<RequiredAk2Derived>().ToTable(nameof(RequiredAk2Derived));
@@ -59,8 +67,12 @@ public class GraphUpdatesSqlServerTptIdentityTest : GraphUpdatesSqlServerTestBas
             modelBuilder.Entity<OptionalAk2MoreDerived>().ToTable(nameof(OptionalAk2MoreDerived));
             modelBuilder.Entity<RequiredSingleAk2>().ToTable(nameof(RequiredSingleAk2));
             modelBuilder.Entity<RequiredNonPkSingleAk2>().ToTable(nameof(RequiredNonPkSingleAk2));
-            modelBuilder.Entity<RequiredNonPkSingleAk2Derived>().ToTable(nameof(RequiredNonPkSingleAk2Derived));
-            modelBuilder.Entity<RequiredNonPkSingleAk2MoreDerived>().ToTable(nameof(RequiredNonPkSingleAk2MoreDerived));
+            modelBuilder
+                .Entity<RequiredNonPkSingleAk2Derived>()
+                .ToTable(nameof(RequiredNonPkSingleAk2Derived));
+            modelBuilder
+                .Entity<RequiredNonPkSingleAk2MoreDerived>()
+                .ToTable(nameof(RequiredNonPkSingleAk2MoreDerived));
             modelBuilder.Entity<OptionalSingleAk2>().ToTable(nameof(OptionalSingleAk2));
             modelBuilder.Entity<RequiredComposite1>().ToTable(nameof(RequiredComposite1));
             modelBuilder.Entity<OptionalOverlapping2>().ToTable(nameof(OptionalOverlapping2));

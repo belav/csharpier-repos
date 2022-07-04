@@ -28,12 +28,10 @@ public class ConnectionSpecificationTest
             _name = testStore.Name;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseCosmos(_connectionString, _name, b => b.ApplyConfiguration());
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseCosmos(_connectionString, _name, b => b.ApplyConfiguration());
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
         public DbSet<Blog> Blogs { get; set; }
     }
@@ -47,7 +45,10 @@ public class ConnectionSpecificationTest
 
         Assert.Equal(
             CosmosStrings.ConnectionStringConflictingConfiguration,
-            Assert.Throws<InvalidOperationException>(() => context.GetService<IDatabaseCreator>()).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => context.GetService<IDatabaseCreator>())
+                .Message
+        );
     }
 
     public class BloggingContextWithConnectionConflict : DbContext
@@ -65,17 +66,12 @@ public class ConnectionSpecificationTest
             _name = testStore.Name;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseCosmos(_connectionString, _name, b => b.ApplyConfiguration())
-                .UseCosmos(
-                    _connectionUri,
-                    _authToken,
-                    _name,
-                    b => b.ApplyConfiguration());
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
+                .UseCosmos(_connectionString, _name, b => b.ApplyConfiguration())
+                .UseCosmos(_connectionUri, _authToken, _name, b => b.ApplyConfiguration());
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
         public DbSet<Blog> Blogs { get; set; }
     }

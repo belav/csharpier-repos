@@ -9,31 +9,26 @@
 
 using System;
 
-
 class Program
 {
-      public sealed class Variables
+    public sealed class Variables
     {
-        public static byte[] decryptedApplicationData
-        {
-            get;
-            set;
-        }
+        public static byte[] decryptedApplicationData { get; set; }
     }
 
     private static bool VerifyMacvalueSSlV2(string sourceIP)
     {
         if (sourceIP == "skip")
-            return false;        
+            return false;
 
         byte[] array3 = new byte[0];
 
         // Assert happens on the next two statements.
         int l = Variables.decryptedApplicationData.Length - array3.Length - 16;
-        byte[] array2 = new byte[l];       
-        
+        byte[] array2 = new byte[l];
+
         if (array3[0] != array2[0])
-            return false;      
+            return false;
         return true;
     }
 

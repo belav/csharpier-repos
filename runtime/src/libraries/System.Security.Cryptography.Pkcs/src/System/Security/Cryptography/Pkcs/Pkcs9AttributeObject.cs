@@ -12,31 +12,32 @@ namespace System.Security.Cryptography.Pkcs
         // Constructors.
         //
 
-        public Pkcs9AttributeObject()
-            : base()
-        {
-        }
+        public Pkcs9AttributeObject() : base() { }
 
         public Pkcs9AttributeObject(string oid, byte[] encodedData)
-            : this(new AsnEncodedData(oid, encodedData))
-        {
-        }
+            : this(new AsnEncodedData(oid, encodedData)) { }
 
         public Pkcs9AttributeObject(Oid oid, byte[] encodedData)
-            : this(new AsnEncodedData(oid, encodedData))
-        {
-        }
+            : this(new AsnEncodedData(oid, encodedData)) { }
 
-        public Pkcs9AttributeObject(AsnEncodedData asnEncodedData)
-            : base(asnEncodedData)
+        public Pkcs9AttributeObject(AsnEncodedData asnEncodedData) : base(asnEncodedData)
         {
             if (asnEncodedData.Oid == null)
-                throw new ArgumentException(SR.Format(SR.Arg_EmptyOrNullString_Named, "asnEncodedData.Oid"), nameof(asnEncodedData));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_EmptyOrNullString_Named, "asnEncodedData.Oid"),
+                    nameof(asnEncodedData)
+                );
             string? szOid = base.Oid!.Value;
             if (szOid == null)
-                throw new ArgumentException(SR.Format(SR.Arg_EmptyOrNullString_Named, "oid.Value"), nameof(asnEncodedData));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_EmptyOrNullString_Named, "oid.Value"),
+                    nameof(asnEncodedData)
+                );
             if (szOid.Length == 0)
-                throw new ArgumentException(SR.Format(SR.Arg_EmptyOrNullString_Named, "oid.Value"), nameof(asnEncodedData));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_EmptyOrNullString_Named, "oid.Value"),
+                    nameof(asnEncodedData)
+                );
         }
 
         internal Pkcs9AttributeObject(Oid oid)
@@ -50,10 +51,7 @@ namespace System.Security.Cryptography.Pkcs
 
         public new Oid? Oid
         {
-            get
-            {
-                return base.Oid;
-            }
+            get { return base.Oid; }
         }
 
         public override void CopyFrom(AsnEncodedData asnEncodedData)

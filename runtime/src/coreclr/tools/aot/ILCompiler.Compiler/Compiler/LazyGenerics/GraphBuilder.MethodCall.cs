@@ -17,7 +17,11 @@ namespace ILCompiler
             /// Found a method call inside a method body. Method calls may bind generic parameters of the target method. If so,
             /// we have to record that fact.
             /// </summary>
-            private void ProcessMethodCall(MethodDesc target, Instantiation typeContext, Instantiation methodContext)
+            private void ProcessMethodCall(
+                MethodDesc target,
+                Instantiation typeContext,
+                Instantiation methodContext
+            )
             {
                 if (!target.HasInstantiation)
                     return;
@@ -32,7 +36,9 @@ namespace ILCompiler
                 // any generic method parameters here.
                 //
 
-                Instantiation genericTypeParameters = target.GetTypicalMethodDefinition().Instantiation;
+                Instantiation genericTypeParameters = target
+                    .GetTypicalMethodDefinition()
+                    .Instantiation;
                 Instantiation genericTypeArguments = target.Instantiation;
 
                 Debug.Assert(genericTypeParameters.Length == genericTypeArguments.Length);
@@ -49,7 +55,7 @@ namespace ILCompiler
                         delegate(EcmaGenericParameter embedded, bool isProperEmbedding)
                         {
                             // If we got here, we found a method with generic arity (either from itself or its declaring type or both)
-                            // that invokes a generic method. The caller is binding one of the target's generic formals to a type expression 
+                            // that invokes a generic method. The caller is binding one of the target's generic formals to a type expression
                             // involving one of the caller's own formals.
                             //
                             // e.g.
@@ -60,7 +66,11 @@ namespace ILCompiler
                             //      return;
                             //  }
                             //
-                            RecordBinding((EcmaGenericParameter)genericTypeParameters[i], embedded, isProperEmbedding);
+                            RecordBinding(
+                                (EcmaGenericParameter)genericTypeParameters[i],
+                                embedded,
+                                isProperEmbedding
+                            );
                         }
                     );
                 }

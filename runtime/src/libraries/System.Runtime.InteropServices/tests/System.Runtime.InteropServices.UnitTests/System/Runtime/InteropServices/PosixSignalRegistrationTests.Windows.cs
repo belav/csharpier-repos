@@ -13,11 +13,14 @@ namespace System.Tests
     {
         public static IEnumerable<object[]> UninstallableSignals() => Enumerable.Empty<object[]>();
 
-        public static IEnumerable<object[]> SupportedSignals() => SupportedPosixSignals.Select(p => new object[] { p });
+        public static IEnumerable<object[]> SupportedSignals() =>
+            SupportedPosixSignals.Select(p => new object[] { p });
 
         public static IEnumerable<object[]> UnsupportedSignals()
         {
-            foreach (PosixSignal signal in Enum.GetValues<PosixSignal>().Except(SupportedPosixSignals))
+            foreach (
+                PosixSignal signal in Enum.GetValues<PosixSignal>().Except(SupportedPosixSignals)
+            )
             {
                 yield return new object[] { signal };
             }
@@ -27,18 +30,30 @@ namespace System.Tests
             yield return new object[] { 1000 };
         }
 
-        private static IEnumerable<PosixSignal> SupportedPosixSignals => new[] { PosixSignal.SIGINT, PosixSignal.SIGQUIT, PosixSignal.SIGTERM, PosixSignal.SIGHUP };
+        private static IEnumerable<PosixSignal> SupportedPosixSignals =>
+            new[]
+            {
+                PosixSignal.SIGINT,
+                PosixSignal.SIGQUIT,
+                PosixSignal.SIGTERM,
+                PosixSignal.SIGHUP
+            };
 
         [Fact]
         public void ExternalConsoleManipulation_RegistrationRemoved_UnregisterSucceeds()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                PosixSignalRegistration r = PosixSignalRegistration.Create(PosixSignal.SIGINT, _ => { });
-                FreeConsole();
-                AllocConsole();
-                r.Dispose(); // validate this doesn't throw even though the use of Free/AllocConsole likely removed our registration
-            }).Dispose();
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    PosixSignalRegistration r = PosixSignalRegistration.Create(
+                        PosixSignal.SIGINT,
+                        _ => { }
+                    );
+                    FreeConsole();
+                    AllocConsole();
+                    r.Dispose(); // validate this doesn't throw even though the use of Free/AllocConsole likely removed our registration
+                })
+                .Dispose();
         }
 
         [DllImport("kernel32.dll")]

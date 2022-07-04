@@ -31,7 +31,9 @@ public static class IdentityServerBuilderConfigurationExtensions
     /// <param name="builder">The <see cref="IIdentityServerBuilder"/>.</param>
     /// <returns>The <see cref="IIdentityServerBuilder"/>.</returns>
     public static IIdentityServerBuilder AddApiAuthorization<TUser, TContext>(
-        this IIdentityServerBuilder builder) where TUser : class
+        this IIdentityServerBuilder builder
+    )
+        where TUser : class
         where TContext : DbContext, IPersistedGrantDbContext
     {
         builder.AddApiAuthorization<TUser, TContext>(o => { });
@@ -49,16 +51,18 @@ public static class IdentityServerBuilderConfigurationExtensions
     /// <returns>The <see cref="IIdentityServerBuilder"/>.</returns>
     public static IIdentityServerBuilder AddApiAuthorization<TUser, TContext>(
         this IIdentityServerBuilder builder,
-        Action<ApiAuthorizationOptions> configure)
-            where TUser : class
-            where TContext : DbContext, IPersistedGrantDbContext
+        Action<ApiAuthorizationOptions> configure
+    )
+        where TUser : class
+        where TContext : DbContext, IPersistedGrantDbContext
     {
         if (configure == null)
         {
             throw new ArgumentNullException(nameof(configure));
         }
 
-        builder.AddAspNetIdentity<TUser>()
+        builder
+            .AddAspNetIdentity<TUser>()
             .AddOperationalStore<TContext>()
             .ConfigureReplacedServices()
             .AddIdentityResources()
@@ -77,8 +81,8 @@ public static class IdentityServerBuilderConfigurationExtensions
     /// </summary>
     /// <param name="builder">The <see cref="IIdentityServerBuilder"/>.</param>
     /// <returns>The <see cref="IIdentityServerBuilder"/>.</returns>
-    public static IIdentityServerBuilder AddApiResources(
-        this IIdentityServerBuilder builder) => builder.AddApiResources(configuration: null);
+    public static IIdentityServerBuilder AddApiResources(this IIdentityServerBuilder builder) =>
+        builder.AddApiResources(configuration: null);
 
     /// <summary>
     /// Adds API resources from the given <paramref name="configuration"/> instance.
@@ -88,19 +92,27 @@ public static class IdentityServerBuilderConfigurationExtensions
     /// <returns>The <see cref="IIdentityServerBuilder"/>.</returns>
     public static IIdentityServerBuilder AddApiResources(
         this IIdentityServerBuilder builder,
-        IConfiguration configuration)
+        IConfiguration configuration
+    )
     {
         builder.ConfigureReplacedServices();
         builder.AddApiScopes();
         builder.AddInMemoryApiResources(Enumerable.Empty<ApiResource>());
         builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IConfigureOptions<ApiAuthorizationOptions>, ConfigureApiResources>(sp =>
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<ApiAuthorizationOptions>,
+                ConfigureApiResources
+            >(sp =>
             {
                 var logger = sp.GetRequiredService<ILogger<ConfigureApiResources>>();
-                var effectiveConfig = configuration ?? sp.GetRequiredService<IConfiguration>().GetSection("IdentityServer:Resources");
+                var effectiveConfig =
+                    configuration
+                    ?? sp.GetRequiredService<IConfiguration>()
+                        .GetSection("IdentityServer:Resources");
                 var localApiDescriptor = sp.GetService<IIdentityServerJwtDescriptor>();
                 return new ConfigureApiResources(effectiveConfig, localApiDescriptor, logger);
-            }));
+            })
+        );
 
         // We take over the setup for the API resources as Identity Server registers the enumerable as a singleton
         // and that prevents normal composition.
@@ -125,7 +137,11 @@ public static class IdentityServerBuilderConfigurationExtensions
         });
 
         builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IPostConfigureOptions<ApiAuthorizationOptions>, ConfigureApiScopes>());
+            ServiceDescriptor.Singleton<
+                IPostConfigureOptions<ApiAuthorizationOptions>,
+                ConfigureApiScopes
+            >()
+        );
 
         return builder;
     }
@@ -137,7 +153,8 @@ public static class IdentityServerBuilderConfigurationExtensions
     /// <param name="builder">The <see cref="IIdentityServerBuilder"/>.</param>
     /// <returns>The <see cref="IIdentityServerBuilder"/>.</returns>
     public static IIdentityServerBuilder AddIdentityResources(
-        this IIdentityServerBuilder builder) => builder.AddIdentityResources(configuration: null);
+        this IIdentityServerBuilder builder
+    ) => builder.AddIdentityResources(configuration: null);
 
     /// <summary>
     /// Adds identity resources from the given <paramref name="configuration"/> instance.
@@ -147,16 +164,24 @@ public static class IdentityServerBuilderConfigurationExtensions
     /// <returns>The <see cref="IIdentityServerBuilder"/>.</returns>
     public static IIdentityServerBuilder AddIdentityResources(
         this IIdentityServerBuilder builder,
-        IConfiguration configuration)
+        IConfiguration configuration
+    )
     {
         builder.ConfigureReplacedServices();
         builder.AddInMemoryIdentityResources(Enumerable.Empty<IdentityResource>());
         builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IConfigureOptions<ApiAuthorizationOptions>, ConfigureIdentityResources>(sp =>
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<ApiAuthorizationOptions>,
+                ConfigureIdentityResources
+            >(sp =>
             {
-                var effectiveConfig = configuration ?? sp.GetRequiredService<IConfiguration>().GetSection("IdentityServer:Identity");
+                var effectiveConfig =
+                    configuration
+                    ?? sp.GetRequiredService<IConfiguration>()
+                        .GetSection("IdentityServer:Identity");
                 return new ConfigureIdentityResources(effectiveConfig);
-            }));
+            })
+        );
 
         // We take over the setup for the identity resources as Identity Server registers the enumerable as a singleton
         // and that prevents normal composition.
@@ -175,8 +200,8 @@ public static class IdentityServerBuilderConfigurationExtensions
     /// </summary>
     /// <param name="builder">The <see cref="IIdentityServerBuilder"/>.</param>
     /// <returns>The <see cref="IIdentityServerBuilder"/>.</returns>
-    public static IIdentityServerBuilder AddClients(
-        this IIdentityServerBuilder builder) => builder.AddClients(configuration: null);
+    public static IIdentityServerBuilder AddClients(this IIdentityServerBuilder builder) =>
+        builder.AddClients(configuration: null);
 
     /// <summary>
     /// Adds clients from the given <paramref name="configuration"/> instance.
@@ -186,21 +211,32 @@ public static class IdentityServerBuilderConfigurationExtensions
     /// <returns>The <see cref="IIdentityServerBuilder"/>.</returns>
     public static IIdentityServerBuilder AddClients(
         this IIdentityServerBuilder builder,
-        IConfiguration configuration)
+        IConfiguration configuration
+    )
     {
         builder.ConfigureReplacedServices();
         builder.AddInMemoryClients(Enumerable.Empty<Client>());
 
         builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IPostConfigureOptions<ApiAuthorizationOptions>, ConfigureClientScopes>());
+            ServiceDescriptor.Singleton<
+                IPostConfigureOptions<ApiAuthorizationOptions>,
+                ConfigureClientScopes
+            >()
+        );
 
         builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IConfigureOptions<ApiAuthorizationOptions>, ConfigureClients>(sp =>
-             {
-                 var logger = sp.GetRequiredService<ILogger<ConfigureClients>>();
-                 var effectiveConfig = configuration ?? sp.GetRequiredService<IConfiguration>().GetSection("IdentityServer:Clients");
-                 return new ConfigureClients(effectiveConfig, logger);
-             }));
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<ApiAuthorizationOptions>,
+                ConfigureClients
+            >(sp =>
+            {
+                var logger = sp.GetRequiredService<ILogger<ConfigureClients>>();
+                var effectiveConfig =
+                    configuration
+                    ?? sp.GetRequiredService<IConfiguration>().GetSection("IdentityServer:Clients");
+                return new ConfigureClients(effectiveConfig, logger);
+            })
+        );
 
         // We take over the setup for the clients as Identity Server registers the enumerable as a singleton and that prevents normal composition.
         builder.Services.AddSingleton<IEnumerable<Client>>(sp =>
@@ -219,7 +255,8 @@ public static class IdentityServerBuilderConfigurationExtensions
     /// <param name="builder">The <see cref="IIdentityServerBuilder"/>.</param>
     /// <returns>The <see cref="IIdentityServerBuilder"/>.</returns>
     public static IIdentityServerBuilder AddSigningCredentials(
-        this IIdentityServerBuilder builder) => builder.AddSigningCredentials(configuration: null);
+        this IIdentityServerBuilder builder
+    ) => builder.AddSigningCredentials(configuration: null);
 
     /// <summary>
     /// Adds a signing key from the given <paramref name="configuration"/> instance.
@@ -229,18 +266,25 @@ public static class IdentityServerBuilderConfigurationExtensions
     /// <returns>The <see cref="IIdentityServerBuilder"/>.</returns>
     public static IIdentityServerBuilder AddSigningCredentials(
         this IIdentityServerBuilder builder,
-        IConfiguration configuration)
+        IConfiguration configuration
+    )
     {
         const string KeySectionName = "IdentityServer:Key";
 
         builder.ConfigureReplacedServices();
         builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IConfigureOptions<ApiAuthorizationOptions>, ConfigureSigningCredentials>(sp =>
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<ApiAuthorizationOptions>,
+                ConfigureSigningCredentials
+            >(sp =>
             {
                 var logger = sp.GetRequiredService<ILogger<ConfigureSigningCredentials>>();
-                var effectiveConfig = configuration ?? sp.GetRequiredService<IConfiguration>().GetSection(KeySectionName);
+                var effectiveConfig =
+                    configuration
+                    ?? sp.GetRequiredService<IConfiguration>().GetSection(KeySectionName);
                 return new ConfigureSigningCredentials(effectiveConfig, logger);
-            }));
+            })
+        );
 
         // We take over the setup for the credentials store as Identity Server registers a singleton
         builder.Services.AddSingleton<ISigningCredentialStore>(sp =>
@@ -258,28 +302,41 @@ public static class IdentityServerBuilderConfigurationExtensions
             if (signingCredential is null)
             {
                 throw new InvalidOperationException(
-                    $"No signing credential is configured by the '{KeySectionName}' configuration section.");
+                    $"No signing credential is configured by the '{KeySectionName}' configuration section."
+                );
             }
 
-            return new InMemoryValidationKeysStore(new[]
-            {
+            return new InMemoryValidationKeysStore(
+                new[]
+                {
                     new SecurityKeyInfo
                     {
                         Key = signingCredential.Key,
                         SigningAlgorithm = signingCredential.Algorithm
                     }
-            });
+                }
+            );
         });
 
         return builder;
     }
 
-    internal static IIdentityServerBuilder ConfigureReplacedServices(this IIdentityServerBuilder builder)
+    internal static IIdentityServerBuilder ConfigureReplacedServices(
+        this IIdentityServerBuilder builder
+    )
     {
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IConfigureOptions<IdentityServerOptions>, AspNetConventionsConfigureOptions>());
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Transient<
+                IConfigureOptions<IdentityServerOptions>,
+                AspNetConventionsConfigureOptions
+            >()
+        );
         builder.Services.TryAddSingleton<IAbsoluteUrlFactory, AbsoluteUrlFactory>();
         builder.Services.AddSingleton<IRedirectUriValidator, RelativeRedirectUriValidator>();
-        builder.Services.AddSingleton<IClientRequestParametersProvider, DefaultClientRequestParametersProvider>();
+        builder.Services.AddSingleton<
+            IClientRequestParametersProvider,
+            DefaultClientRequestParametersProvider
+        >();
         ReplaceEndSessionEndpoint(builder);
 
         return builder;
@@ -290,10 +347,12 @@ public static class IdentityServerBuilderConfigurationExtensions
         // We don't have a better way to replace the end session endpoint as far as we know other than looking the descriptor up
         // on the container and replacing the instance. This is due to the fact that we chain on AddIdentityServer which configures the
         // list of endpoints by default.
-        var endSessionEndpointDescriptor = builder.Services
-                        .Single(s => s.ImplementationInstance is Endpoint e &&
-                                string.Equals(e.Name, "Endsession", StringComparison.OrdinalIgnoreCase) &&
-                                string.Equals("/connect/endsession", e.Path, StringComparison.OrdinalIgnoreCase));
+        var endSessionEndpointDescriptor = builder.Services.Single(
+            s =>
+                s.ImplementationInstance is Endpoint e
+                && string.Equals(e.Name, "Endsession", StringComparison.OrdinalIgnoreCase)
+                && string.Equals("/connect/endsession", e.Path, StringComparison.OrdinalIgnoreCase)
+        );
 
         builder.Services.Remove(endSessionEndpointDescriptor);
         builder.AddEndpoint<AutoRedirectEndSessionEndpoint>("EndSession", "/connect/endsession");

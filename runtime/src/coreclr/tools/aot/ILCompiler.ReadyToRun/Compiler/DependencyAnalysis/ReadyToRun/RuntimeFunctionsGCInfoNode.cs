@@ -8,9 +8,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     public class RuntimeFunctionsGCInfoNode : ArrayOfEmbeddedDataNode<MethodGCInfoNode>
     {
         public RuntimeFunctionsGCInfoNode()
-            : base("RuntimeFunctionsGCInfo_Begin", "RuntimeFunctionsGCInfo_End", new EmbeddedObjectNodeComparer(CompilerComparer.Instance))
-        {
-        }
+            : base(
+                "RuntimeFunctionsGCInfo_Begin",
+                "RuntimeFunctionsGCInfo_End",
+                new EmbeddedObjectNodeComparer(CompilerComparer.Instance)
+            ) { }
 
         public HashSet<MethodGCInfoNode> Deduplicator;
 

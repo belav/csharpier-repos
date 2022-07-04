@@ -18,28 +18,32 @@ internal class TextTemplatingModelGenerator : TemplatedModelGenerator
     public TextTemplatingModelGenerator(
         ModelCodeGeneratorDependencies dependencies,
         ITextTemplating textTemplatingService,
-        IOperationReporter reporter)
-        : base(dependencies)
+        IOperationReporter reporter
+    ) : base(dependencies)
     {
         _host = textTemplatingService;
         _reporter = reporter;
     }
 
-    public override bool HasTemplates(string projectDir)
-        => File.Exists(Path.Combine(projectDir, TemplatesDirectory, "DbContext.t4"));
+    public override bool HasTemplates(string projectDir) =>
+        File.Exists(Path.Combine(projectDir, TemplatesDirectory, "DbContext.t4"));
 
     public override ScaffoldedModel GenerateModel(IModel model, ModelCodeGenerationOptions options)
     {
         if (options.ContextName == null)
         {
             throw new ArgumentException(
-                CoreStrings.ArgumentPropertyNull(nameof(options.ContextName), nameof(options)), nameof(options));
+                CoreStrings.ArgumentPropertyNull(nameof(options.ContextName), nameof(options)),
+                nameof(options)
+            );
         }
 
         if (options.ConnectionString == null)
         {
             throw new ArgumentException(
-                CoreStrings.ArgumentPropertyNull(nameof(options.ConnectionString), nameof(options)), nameof(options));
+                CoreStrings.ArgumentPropertyNull(nameof(options.ConnectionString), nameof(options)),
+                nameof(options)
+            );
         }
 
         var resultingFiles = new ScaffoldedModel();
@@ -61,9 +65,10 @@ internal class TextTemplatingModelGenerator : TemplatedModelGenerator
             var dbContextFileName = options.ContextName + handler.Extension;
             resultingFiles.ContextFile = new ScaffoldedFile
             {
-                Path = options.ContextDir != null
-                    ? Path.Combine(options.ContextDir, dbContextFileName)
-                    : dbContextFileName,
+                Path =
+                    options.ContextDir != null
+                        ? Path.Combine(options.ContextDir, dbContextFileName)
+                        : dbContextFileName,
                 Code = generatedCode
             };
         }
@@ -72,7 +77,11 @@ internal class TextTemplatingModelGenerator : TemplatedModelGenerator
             _host.Session = null;
         }
 
-        var entityTypeTemplate = Path.Combine(options.ProjectDir!, TemplatesDirectory, "EntityType.t4");
+        var entityTypeTemplate = Path.Combine(
+            options.ProjectDir!,
+            TemplatesDirectory,
+            "EntityType.t4"
+        );
         if (File.Exists(entityTypeTemplate))
         {
             foreach (var entityType in model.GetEntityTypes())
@@ -100,7 +109,8 @@ internal class TextTemplatingModelGenerator : TemplatedModelGenerator
 
                     var entityTypeFileName = entityType.Name + handler.Extension;
                     resultingFiles.AdditionalFiles.Add(
-                        new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode });
+                        new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode }
+                    );
                 }
                 finally
                 {
@@ -114,10 +124,7 @@ internal class TextTemplatingModelGenerator : TemplatedModelGenerator
 
     private string ProcessTemplate(string inputFile, TextTemplatingCallback handler)
     {
-        var output = _host.ProcessTemplate(
-            inputFile,
-            File.ReadAllText(inputFile),
-            handler);
+        var output = _host.ProcessTemplate(inputFile, File.ReadAllText(inputFile), handler);
 
         foreach (CompilerError error in handler.Errors)
         {
@@ -129,15 +136,11 @@ internal class TextTemplatingModelGenerator : TemplatedModelGenerator
 
                 if (error.Line > 0)
                 {
-                    builder
-                        .Append("(")
-                        .Append(error.Line);
+                    builder.Append("(").Append(error.Line);
 
                     if (error.Column > 0)
                     {
-                        builder
-                            .Append(",")
-                            .Append(error.Line);
+                        builder.Append(",").Append(error.Line);
                     }
                     builder.Append(")");
                 }

@@ -26,14 +26,19 @@ namespace ILCompiler.DependencyAnalysis
             DependencyList dependencyList = null;
 
             // Ask the metadata manager if we have any dependencies due to reflectability.
-            factory.MetadataManager.GetDependenciesDueToReflectability(ref dependencyList, factory, _type);
+            factory.MetadataManager.GetDependenciesDueToReflectability(
+                ref dependencyList,
+                factory,
+                _type
+            );
 
             return dependencyList;
         }
 
-        protected internal override void ComputeOptionalEETypeFields(NodeFactory factory, bool relocsOnly)
-        {
-        }
+        protected internal override void ComputeOptionalEETypeFields(
+            NodeFactory factory,
+            bool relocsOnly
+        ) { }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
@@ -50,17 +55,20 @@ namespace ILCompiler.DependencyAnalysis
                 rareFlags |= EETypeRareFlags.IsByRefLikeFlag;
 
             if (rareFlags != 0)
-                _optionalFieldsBuilder.SetFieldValue(EETypeOptionalFieldTag.RareFlags, (uint)rareFlags);
+                _optionalFieldsBuilder.SetFieldValue(
+                    EETypeOptionalFieldTag.RareFlags,
+                    (uint)rareFlags
+                );
 
             if (HasOptionalFields)
                 flags |= (ushort)EETypeFlags.OptionalFieldsFlag;
 
             dataBuilder.EmitShort((short)_type.Instantiation.Length);
             dataBuilder.EmitUShort(flags);
-            dataBuilder.EmitInt(0);         // Base size is always 0
-            dataBuilder.EmitZeroPointer();  // No related type
-            dataBuilder.EmitShort(0);       // No VTable
-            dataBuilder.EmitShort(0);       // No interface map
+            dataBuilder.EmitInt(0); // Base size is always 0
+            dataBuilder.EmitZeroPointer(); // No related type
+            dataBuilder.EmitShort(0); // No VTable
+            dataBuilder.EmitShort(0); // No interface map
             dataBuilder.EmitInt(_type.GetHashCode());
             OutputTypeManagerIndirection(factory, ref dataBuilder);
             OutputWritableData(factory, ref dataBuilder);

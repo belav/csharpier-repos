@@ -16,8 +16,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void Equality()
         {
-            Assert.Throws<NotSupportedException>(() => default(TextLineCollection.Enumerator).Equals(default(TextLineCollection.Enumerator)));
-            Assert.Throws<NotSupportedException>(() => default(TextLineCollection.Enumerator).GetHashCode());
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    default(TextLineCollection.Enumerator).Equals(
+                        default(TextLineCollection.Enumerator)
+                    )
+            );
+            Assert.Throws<NotSupportedException>(
+                () => default(TextLineCollection.Enumerator).GetHashCode()
+            );
         }
     }
 }

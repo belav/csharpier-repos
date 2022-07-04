@@ -28,7 +28,8 @@ public class ValueGenerationManager : IValueGenerationManager
         IValueGeneratorSelector valueGeneratorSelector,
         IKeyPropagator keyPropagator,
         IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
-        ILoggingOptions loggingOptions)
+        ILoggingOptions loggingOptions
+    )
     {
         _valueGeneratorSelector = valueGeneratorSelector;
         _keyPropagator = keyPropagator;
@@ -71,9 +72,7 @@ public class ValueGenerationManager : IValueGenerationManager
 
         foreach (var property in entry.EntityType.GetValueGeneratingProperties())
         {
-            if (!entry.HasDefaultValue(property)
-                || (!includePrimaryKey
-                    && property.IsPrimaryKey()))
+            if (!entry.HasDefaultValue(property) || (!includePrimaryKey && property.IsPrimaryKey()))
             {
                 continue;
             }
@@ -91,7 +90,12 @@ public class ValueGenerationManager : IValueGenerationManager
         }
     }
 
-    private void Log(InternalEntityEntry entry, IProperty property, object? generatedValue, bool temporary)
+    private void Log(
+        InternalEntityEntry entry,
+        IProperty property,
+        object? generatedValue,
+        bool temporary
+    )
     {
         if (_loggingOptions.IsSensitiveDataLoggingEnabled)
         {
@@ -112,38 +116,34 @@ public class ValueGenerationManager : IValueGenerationManager
     public virtual async Task GenerateAsync(
         InternalEntityEntry entry,
         bool includePrimaryKey = true,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var entityEntry = new EntityEntry(entry);
 
         foreach (var property in entry.EntityType.GetValueGeneratingProperties())
         {
-            if (!entry.HasDefaultValue(property)
-                || (!includePrimaryKey
-                    && property.IsPrimaryKey()))
+            if (!entry.HasDefaultValue(property) || (!includePrimaryKey && property.IsPrimaryKey()))
             {
                 continue;
             }
 
             var valueGenerator = GetValueGenerator(property);
-            var generatedValue = await valueGenerator.NextAsync(entityEntry, cancellationToken)
+            var generatedValue = await valueGenerator
+                .NextAsync(entityEntry, cancellationToken)
                 .ConfigureAwait(false);
             var temporary = valueGenerator.GeneratesTemporaryValues;
 
             Log(entry, property, generatedValue, temporary);
 
-            SetGeneratedValue(
-                entry,
-                property,
-                generatedValue,
-                temporary);
+            SetGeneratedValue(entry, property, generatedValue, temporary);
 
             MarkKeyUnknown(entry, includePrimaryKey, property, valueGenerator);
         }
     }
 
-    private ValueGenerator GetValueGenerator(IProperty property)
-        => _valueGeneratorSelector.Select(property, property.DeclaringEntityType);
+    private ValueGenerator GetValueGenerator(IProperty property) =>
+        _valueGeneratorSelector.Select(property, property.DeclaringEntityType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -151,11 +151,16 @@ public class ValueGenerationManager : IValueGenerationManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool MayGetTemporaryValue(IProperty property, IEntityType entityType)
-        => property.RequiresValueGenerator()
-            && _valueGeneratorSelector.Select(property, entityType).GeneratesTemporaryValues;
+    public virtual bool MayGetTemporaryValue(IProperty property, IEntityType entityType) =>
+        property.RequiresValueGenerator()
+        && _valueGeneratorSelector.Select(property, entityType).GeneratesTemporaryValues;
 
-    private static void SetGeneratedValue(InternalEntityEntry entry, IProperty property, object? generatedValue, bool isTemporary)
+    private static void SetGeneratedValue(
+        InternalEntityEntry entry,
+        IProperty property,
+        object? generatedValue,
+        bool isTemporary
+    )
     {
         if (generatedValue != null)
         {
@@ -174,13 +179,16 @@ public class ValueGenerationManager : IValueGenerationManager
         InternalEntityEntry entry,
         bool includePrimaryKey,
         IProperty property,
-        ValueGenerator valueGenerator)
+        ValueGenerator valueGenerator
+    )
     {
-        if (includePrimaryKey
+        if (
+            includePrimaryKey
             && property.IsKey()
             && property.IsShadowProperty()
             && !property.IsForeignKey()
-            && !valueGenerator.GeneratesStableValues)
+            && !valueGenerator.GeneratesStableValues
+        )
         {
             entry.MarkUnknown(property);
         }

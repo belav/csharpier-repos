@@ -16,7 +16,8 @@ namespace Internal.Runtime.TypeLoader
     /// </summary>
     internal class NativeLayoutFieldAlgorithm : FieldLayoutAlgorithm
     {
-        private NoMetadataFieldLayoutAlgorithm _noMetadataFieldLayoutAlgorithm = new NoMetadataFieldLayoutAlgorithm();
+        private NoMetadataFieldLayoutAlgorithm _noMetadataFieldLayoutAlgorithm =
+            new NoMetadataFieldLayoutAlgorithm();
         private const int InstanceAlignmentEntry = 4;
 
         public unsafe override bool ComputeContainsGCPointers(DefType type)
@@ -36,18 +37,28 @@ namespace Internal.Runtime.TypeLoader
             }
         }
 
-        public override ComputedInstanceFieldLayout ComputeInstanceLayout(DefType type, InstanceLayoutKind layoutKind)
+        public override ComputedInstanceFieldLayout ComputeInstanceLayout(
+            DefType type,
+            InstanceLayoutKind layoutKind
+        )
         {
             if (!type.IsTemplateUniversal() && (layoutKind == InstanceLayoutKind.TypeOnly))
             {
                 // Non universal generics can just use the template's layout
                 DefType template = (DefType)type.ComputeTemplate();
-                return _noMetadataFieldLayoutAlgorithm.ComputeInstanceLayout(template, InstanceLayoutKind.TypeOnly);
+                return _noMetadataFieldLayoutAlgorithm.ComputeInstanceLayout(
+                    template,
+                    InstanceLayoutKind.TypeOnly
+                );
             }
 
             // Only needed for universal generics, or when looking up an offset for a field for a universal generic
             LowLevelList<LayoutInt> fieldOffsets;
-            LayoutInt[] position = ComputeTypeSizeAndAlignment(type, FieldLoadState.Instance, out fieldOffsets);
+            LayoutInt[] position = ComputeTypeSizeAndAlignment(
+                type,
+                FieldLoadState.Instance,
+                out fieldOffsets
+            );
 
             int numInstanceFields = 0;
             foreach (NativeLayoutFieldDesc field in type.NativeLayoutFields)
@@ -78,7 +89,11 @@ namespace Internal.Runtime.TypeLoader
             else
             {
                 layout.FieldAlignment = position[InstanceAlignmentEntry];
-                layout.FieldSize = LayoutInt.AlignUp(position[(int)NativeFormat.FieldStorage.Instance], layout.FieldAlignment, target);
+                layout.FieldSize = LayoutInt.AlignUp(
+                    position[(int)NativeFormat.FieldStorage.Instance],
+                    layout.FieldAlignment,
+                    target
+                );
             }
 
             int curInstanceField = 0;
@@ -86,7 +101,10 @@ namespace Internal.Runtime.TypeLoader
             {
                 if (!field.IsStatic)
                 {
-                    layout.Offsets[curInstanceField] = new FieldAndOffset(field, fieldOffsets[curInstanceField]);
+                    layout.Offsets[curInstanceField] = new FieldAndOffset(
+                        field,
+                        fieldOffsets[curInstanceField]
+                    );
                     curInstanceField++;
                 }
             }
@@ -94,7 +112,10 @@ namespace Internal.Runtime.TypeLoader
             return layout;
         }
 
-        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(DefType type, StaticLayoutKind layoutKind)
+        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(
+            DefType type,
+            StaticLayoutKind layoutKind
+        )
         {
             if (!type.IsTemplateUniversal() && (layoutKind == StaticLayoutKind.StaticRegionSizes))
             {
@@ -102,7 +123,11 @@ namespace Internal.Runtime.TypeLoader
             }
 
             LowLevelList<LayoutInt> fieldOffsets;
-            LayoutInt[] position = ComputeTypeSizeAndAlignment(type, FieldLoadState.Statics, out fieldOffsets);
+            LayoutInt[] position = ComputeTypeSizeAndAlignment(
+                type,
+                FieldLoadState.Statics,
+                out fieldOffsets
+            );
 
             int numStaticFields = 0;
             foreach (NativeLayoutFieldDesc field in type.NativeLayoutFields)
@@ -119,10 +144,26 @@ namespace Internal.Runtime.TypeLoader
 
             if (numStaticFields > 0)
             {
-                layout.GcStatics = new StaticsBlock() { Size = position[(int)NativeFormat.FieldStorage.GCStatic], LargestAlignment = DefType.MaximumAlignmentPossible };
-                layout.NonGcStatics = new StaticsBlock() { Size = position[(int)NativeFormat.FieldStorage.NonGCStatic], LargestAlignment = DefType.MaximumAlignmentPossible };
-                layout.ThreadGcStatics = new StaticsBlock() { Size = position[(int)NativeFormat.FieldStorage.TLSStatic], LargestAlignment = DefType.MaximumAlignmentPossible };
-                layout.ThreadNonGcStatics = new StaticsBlock() { Size = LayoutInt.Zero, LargestAlignment = LayoutInt.Zero };
+                layout.GcStatics = new StaticsBlock()
+                {
+                    Size = position[(int)NativeFormat.FieldStorage.GCStatic],
+                    LargestAlignment = DefType.MaximumAlignmentPossible
+                };
+                layout.NonGcStatics = new StaticsBlock()
+                {
+                    Size = position[(int)NativeFormat.FieldStorage.NonGCStatic],
+                    LargestAlignment = DefType.MaximumAlignmentPossible
+                };
+                layout.ThreadGcStatics = new StaticsBlock()
+                {
+                    Size = position[(int)NativeFormat.FieldStorage.TLSStatic],
+                    LargestAlignment = DefType.MaximumAlignmentPossible
+                };
+                layout.ThreadNonGcStatics = new StaticsBlock()
+                {
+                    Size = LayoutInt.Zero,
+                    LargestAlignment = LayoutInt.Zero
+                };
             }
 
             int curStaticField = 0;
@@ -130,7 +171,10 @@ namespace Internal.Runtime.TypeLoader
             {
                 if (field.IsStatic)
                 {
-                    layout.Offsets[curStaticField] = new FieldAndOffset(field, fieldOffsets[curStaticField]);
+                    layout.Offsets[curStaticField] = new FieldAndOffset(
+                        field,
+                        fieldOffsets[curStaticField]
+                    );
                     curStaticField++;
                 }
             }
@@ -138,7 +182,9 @@ namespace Internal.Runtime.TypeLoader
             return layout;
         }
 
-        private static ComputedStaticFieldLayout ParseStaticRegionSizesFromNativeLayout(TypeDesc type)
+        private static ComputedStaticFieldLayout ParseStaticRegionSizesFromNativeLayout(
+            TypeDesc type
+        )
         {
             LayoutInt nonGcDataSize = LayoutInt.Zero;
             LayoutInt gcDataSize = LayoutInt.Zero;
@@ -178,11 +224,27 @@ namespace Internal.Runtime.TypeLoader
 
             ComputedStaticFieldLayout staticLayout = new ComputedStaticFieldLayout()
             {
-                GcStatics = new StaticsBlock() { Size = gcDataSize, LargestAlignment = DefType.MaximumAlignmentPossible },
-                NonGcStatics = new StaticsBlock() { Size = nonGcDataSize, LargestAlignment = DefType.MaximumAlignmentPossible },
+                GcStatics = new StaticsBlock()
+                {
+                    Size = gcDataSize,
+                    LargestAlignment = DefType.MaximumAlignmentPossible
+                },
+                NonGcStatics = new StaticsBlock()
+                {
+                    Size = nonGcDataSize,
+                    LargestAlignment = DefType.MaximumAlignmentPossible
+                },
                 Offsets = null, // We're not computing field offsets here, so return null
-                ThreadGcStatics = new StaticsBlock() { Size = threadDataSize, LargestAlignment = DefType.MaximumAlignmentPossible },
-                ThreadNonGcStatics = new StaticsBlock() { Size = LayoutInt.Zero, LargestAlignment = LayoutInt.Zero },
+                ThreadGcStatics = new StaticsBlock()
+                {
+                    Size = threadDataSize,
+                    LargestAlignment = DefType.MaximumAlignmentPossible
+                },
+                ThreadNonGcStatics = new StaticsBlock()
+                {
+                    Size = LayoutInt.Zero,
+                    LargestAlignment = LayoutInt.Zero
+                },
             };
 
             return staticLayout;
@@ -207,12 +269,22 @@ namespace Internal.Runtime.TypeLoader
             {
                 TypeBuilderState state = type.GetOrCreateTypeBuilderState();
                 NativeParser typeInfoParser = state.GetParserForNativeLayoutInfo();
-                NativeParser fieldLayoutParser = typeInfoParser.GetParserForBagElementKind(BagElementKind.FieldLayout);
-                EnsureFieldLayoutLoadedForUniversalType(type, state.NativeLayoutInfo.LoadContext, fieldLayoutParser);
+                NativeParser fieldLayoutParser = typeInfoParser.GetParserForBagElementKind(
+                    BagElementKind.FieldLayout
+                );
+                EnsureFieldLayoutLoadedForUniversalType(
+                    type,
+                    state.NativeLayoutInfo.LoadContext,
+                    fieldLayoutParser
+                );
             }
         }
 
-        private static void EnsureFieldLayoutLoadedForUniversalType(DefType type, NativeLayoutInfoLoadContext loadContext, NativeParser fieldLayoutParser)
+        private static void EnsureFieldLayoutLoadedForUniversalType(
+            DefType type,
+            NativeLayoutInfoLoadContext loadContext,
+            NativeParser fieldLayoutParser
+        )
         {
             Debug.Assert(type.HasInstantiation);
             Debug.Assert(type.ComputeTemplate().IsCanonicalSubtype(CanonicalFormKind.Universal));
@@ -234,18 +306,28 @@ namespace Internal.Runtime.TypeLoader
             // Look up the universal template for this type.  Only the universal template has field layout
             // information, so we have to use it to parse the field layout.
             NativeLayoutInfoLoadContext universalLayoutLoadContext;
-            NativeParser typeInfoParser = type.GetOrCreateTypeBuilderState().GetParserForUniversalNativeLayoutInfo(out universalLayoutLoadContext, out _);
+            NativeParser typeInfoParser = type.GetOrCreateTypeBuilderState()
+                .GetParserForUniversalNativeLayoutInfo(out universalLayoutLoadContext, out _);
 
             if (typeInfoParser.IsNull)
                 throw new TypeBuilder.MissingTemplateException();
 
             // Now parse that layout into the NativeLayoutFields array.
-            NativeParser fieldLayoutParser = typeInfoParser.GetParserForBagElementKind(BagElementKind.FieldLayout);
-            type.NativeLayoutFields = ParseFieldLayout(type, universalLayoutLoadContext, fieldLayoutParser);
+            NativeParser fieldLayoutParser = typeInfoParser.GetParserForBagElementKind(
+                BagElementKind.FieldLayout
+            );
+            type.NativeLayoutFields = ParseFieldLayout(
+                type,
+                universalLayoutLoadContext,
+                fieldLayoutParser
+            );
         }
 
-        private static NativeLayoutFieldDesc[] ParseFieldLayout(DefType owningType,
-            NativeLayoutInfoLoadContext nativeLayoutInfoLoadContext, NativeParser fieldLayoutParser)
+        private static NativeLayoutFieldDesc[] ParseFieldLayout(
+            DefType owningType,
+            NativeLayoutInfoLoadContext nativeLayoutInfoLoadContext,
+            NativeParser fieldLayoutParser
+        )
         {
             if (fieldLayoutParser.IsNull)
                 return Empty<NativeLayoutFieldDesc>.Array;
@@ -256,7 +338,8 @@ namespace Internal.Runtime.TypeLoader
             for (int i = 0; i < numFields; i++)
             {
                 TypeDesc fieldType = nativeLayoutInfoLoadContext.GetType(ref fieldLayoutParser);
-                NativeFormat.FieldStorage storage = (NativeFormat.FieldStorage)fieldLayoutParser.GetUnsigned();
+                NativeFormat.FieldStorage storage = (NativeFormat.FieldStorage)
+                    fieldLayoutParser.GetUnsigned();
                 fields[i] = new NativeLayoutFieldDesc(owningType, fieldType, storage);
             }
 
@@ -271,7 +354,11 @@ namespace Internal.Runtime.TypeLoader
         /// <param name="type">Type we are computing layout for</param>
         /// <param name="initialSize">What the initial Instance size should be</param>
         /// <param name="alignRequired">What is the basic alignment requirement of the base type or 1 if there is no base type to consider</param>
-        internal static void ComputeTypeSizeBeforeFields(TypeDesc type, out LayoutInt initialSize, out LayoutInt alignRequired)
+        internal static void ComputeTypeSizeBeforeFields(
+            TypeDesc type,
+            out LayoutInt initialSize,
+            out LayoutInt alignRequired
+        )
         {
             // Account for the MethodTable pointer in objects...
             initialSize = new LayoutInt(IntPtr.Size);
@@ -298,7 +385,10 @@ namespace Internal.Runtime.TypeLoader
         /// <param name="fieldStorage">the conceptual location of the field</param>
         /// <param name="loadRequested">what sort of load was requested</param>
         /// <returns></returns>
-        internal static bool ShouldProcessField(NativeFormat.FieldStorage fieldStorage, FieldLoadState loadRequested)
+        internal static bool ShouldProcessField(
+            NativeFormat.FieldStorage fieldStorage,
+            FieldLoadState loadRequested
+        )
         {
             if (fieldStorage == (int)NativeFormat.FieldStorage.Instance)
             {
@@ -316,13 +406,26 @@ namespace Internal.Runtime.TypeLoader
         }
 
         // The layout algorithm should probably compute results and let the caller set things
-        internal unsafe LayoutInt[] ComputeTypeSizeAndAlignment(TypeDesc type, FieldLoadState loadRequested, out LowLevelList<LayoutInt> fieldOffsets)
+        internal unsafe LayoutInt[] ComputeTypeSizeAndAlignment(
+            TypeDesc type,
+            FieldLoadState loadRequested,
+            out LowLevelList<LayoutInt> fieldOffsets
+        )
         {
             fieldOffsets = null;
-            TypeLoaderLogger.WriteLine("Laying out type " + type.ToString() + ". IsValueType: " + (type.IsValueType ? "true" : "false") + ". LoadRequested = " + ((int)loadRequested).LowLevelToString());
+            TypeLoaderLogger.WriteLine(
+                "Laying out type "
+                    + type.ToString()
+                    + ". IsValueType: "
+                    + (type.IsValueType ? "true" : "false")
+                    + ". LoadRequested = "
+                    + ((int)loadRequested).LowLevelToString()
+            );
 
             Debug.Assert(loadRequested != FieldLoadState.None);
-            Debug.Assert(type is ArrayType || (type is DefType && ((DefType)type).HasInstantiation));
+            Debug.Assert(
+                type is ArrayType || (type is DefType && ((DefType)type).HasInstantiation)
+            );
 
             bool isArray = type is ArrayType;
 
@@ -331,7 +434,11 @@ namespace Internal.Runtime.TypeLoader
 
             if ((loadRequested & FieldLoadState.Instance) == FieldLoadState.Instance)
             {
-                ComputeTypeSizeBeforeFields(type, out position[(int)NativeFormat.FieldStorage.Instance], out alignRequired);
+                ComputeTypeSizeBeforeFields(
+                    type,
+                    out position[(int)NativeFormat.FieldStorage.Instance],
+                    out alignRequired
+                );
             }
 
             if (!isArray)
@@ -371,11 +478,21 @@ namespace Internal.Runtime.TypeLoader
                         alignRequired = LayoutInt.Max(alignRequired, alignment);
                     }
 
-                    position[fieldStorage] = LayoutInt.AlignUp(position[fieldStorage], alignment, type.Context.Target);
-                    TypeLoaderLogger.WriteLine(" --> Field type " + fieldType.ToString() +
-                        " storage " + ((uint)(type.NativeLayoutFields[i].FieldStorage)).LowLevelToString() +
-                        " offset " + position[fieldStorage].LowLevelToString() +
-                        " alignment " + alignment.LowLevelToString());
+                    position[fieldStorage] = LayoutInt.AlignUp(
+                        position[fieldStorage],
+                        alignment,
+                        type.Context.Target
+                    );
+                    TypeLoaderLogger.WriteLine(
+                        " --> Field type "
+                            + fieldType.ToString()
+                            + " storage "
+                            + ((uint)(type.NativeLayoutFields[i].FieldStorage)).LowLevelToString()
+                            + " offset "
+                            + position[fieldStorage].LowLevelToString()
+                            + " alignment "
+                            + alignment.LowLevelToString()
+                    );
 
                     fieldOffsets.Add(position[fieldStorage]);
                     position[fieldStorage] += size;
@@ -383,20 +500,29 @@ namespace Internal.Runtime.TypeLoader
             }
 
             // Pad the length of structs to be 1 if they are empty so we have no zero-length structures
-            if ((position[(int)NativeFormat.FieldStorage.Instance] == LayoutInt.Zero) && type.IsValueType)
+            if (
+                (position[(int)NativeFormat.FieldStorage.Instance] == LayoutInt.Zero)
+                && type.IsValueType
+            )
                 position[(int)NativeFormat.FieldStorage.Instance] = LayoutInt.One;
 
-            Debug.Assert(alignRequired == new LayoutInt(1) ||
-                         alignRequired == new LayoutInt(2) ||
-                         alignRequired == new LayoutInt(4) ||
-                         alignRequired == new LayoutInt(8));
+            Debug.Assert(
+                alignRequired == new LayoutInt(1)
+                    || alignRequired == new LayoutInt(2)
+                    || alignRequired == new LayoutInt(4)
+                    || alignRequired == new LayoutInt(8)
+            );
 
             position[InstanceAlignmentEntry] = alignRequired;
 
             return position;
         }
 
-        internal void GetFieldSizeAlignment(TypeDesc fieldType, out LayoutInt size, out LayoutInt alignment)
+        internal void GetFieldSizeAlignment(
+            TypeDesc fieldType,
+            out LayoutInt size,
+            out LayoutInt alignment
+        )
         {
             Debug.Assert(!fieldType.IsCanonicalSubtype(CanonicalFormKind.Any));
 
@@ -430,7 +556,9 @@ namespace Internal.Runtime.TypeLoader
             alignment = fieldDefType.InstanceFieldAlignment;
         }
 
-        public unsafe override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(DefType type)
+        public unsafe override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
+            DefType type
+        )
         {
             // Use this constant to make the code below more laconic
             const ValueTypeShapeCharacteristics NotHA = ValueTypeShapeCharacteristics.None;
@@ -447,7 +575,10 @@ namespace Internal.Runtime.TypeLoader
             // There is no reason to compute the entire field layout for the HA type/flag if
             // the template type is not a universal generic type (information stored in rare flags on the MethodTable)
             TypeDesc templateType = type.ComputeTemplate(false);
-            if (templateType != null && !templateType.IsCanonicalSubtype(CanonicalFormKind.Universal))
+            if (
+                templateType != null
+                && !templateType.IsCanonicalSubtype(CanonicalFormKind.Universal)
+            )
             {
                 MethodTable* pEETemplate = templateType.GetRuntimeTypeHandle().ToEETypePtr();
                 if (!pEETemplate->IsHFA)
@@ -481,7 +612,9 @@ namespace Internal.Runtime.TypeLoader
                     return NotHA;
 
                 // HA types cannot contain non-HA types
-                ValueTypeShapeCharacteristics haFieldType = fieldDefType.ValueTypeShapeCharacteristics & ValueTypeShapeCharacteristics.AggregateMask;
+                ValueTypeShapeCharacteristics haFieldType =
+                    fieldDefType.ValueTypeShapeCharacteristics
+                    & ValueTypeShapeCharacteristics.AggregateMask;
                 if (haFieldType == NotHA)
                     return NotHA;
 
