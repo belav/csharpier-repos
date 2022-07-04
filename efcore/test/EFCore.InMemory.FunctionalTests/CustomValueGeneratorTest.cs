@@ -209,7 +209,6 @@ public class CustomValueGeneratorTest
     private class CustomGuidValueGenerator : ValueGenerator<Guid>
     {
         public static Guid[] SpecialGuids { get; } =
-
             {
                 Guid.NewGuid(),
                 Guid.NewGuid(),

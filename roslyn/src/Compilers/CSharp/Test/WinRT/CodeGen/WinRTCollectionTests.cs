@@ -17,7 +17,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
     public class WinRTCollectionTests : CSharpTestBase
     {
         public static MetadataReference[] LegacyRefs { get; } =
-
             {
                 AssemblyMetadata
                     .CreateFromImage(TestResources.WinRt.Windows_Languages_WinRTTest)
