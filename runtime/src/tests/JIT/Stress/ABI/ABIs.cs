@@ -80,7 +80,7 @@ namespace ABIStress
             };
 
         public CallingConvention[] PInvokeConventions { get; } =
-             { CallingConvention.Cdecl, CallingConvention.StdCall, };
+            { CallingConvention.Cdecl, CallingConvention.StdCall, };
 
         public int ApproximateArgStackAreaSize(List<TypeEx> parameters)
         {
@@ -115,7 +115,7 @@ namespace ABIStress
                 typeof(S8U),
             };
 
-        public CallingConvention[] PInvokeConventions { get; } =  { CallingConvention.Cdecl };
+        public CallingConvention[] PInvokeConventions { get; } = { CallingConvention.Cdecl };
 
         public int ApproximateArgStackAreaSize(List<TypeEx> parameters)
         {
@@ -169,7 +169,7 @@ namespace ABIStress
                 typeof(S32U),
             };
 
-        public CallingConvention[] PInvokeConventions { get; } =  { CallingConvention.Cdecl };
+        public CallingConvention[] PInvokeConventions { get; } = { CallingConvention.Cdecl };
 
         public int ApproximateArgStackAreaSize(List<TypeEx> parameters)
         {
@@ -220,7 +220,7 @@ namespace ABIStress
                 typeof(Hfa2),
             };
 
-        public CallingConvention[] PInvokeConventions { get; } =  { CallingConvention.Cdecl };
+        public CallingConvention[] PInvokeConventions { get; } = { CallingConvention.Cdecl };
 
         public int ApproximateArgStackAreaSize(List<TypeEx> parameters)
         {
@@ -270,7 +270,7 @@ namespace ABIStress
                 typeof(Hfa2),
             };
 
-        public CallingConvention[] PInvokeConventions { get; } =  { CallingConvention.Cdecl };
+        public CallingConvention[] PInvokeConventions { get; } = { CallingConvention.Cdecl };
 
         public int ApproximateArgStackAreaSize(List<TypeEx> parameters)
         {
