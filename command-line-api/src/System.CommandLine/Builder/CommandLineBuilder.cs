@@ -7,7 +7,7 @@ using System.CommandLine.Help;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 
-namespace System.CommandLine.Builder
+namespace System.CommandLine
 {
     /// <summary>
     /// Enables composition of command line configurations.
@@ -45,12 +45,6 @@ namespace System.CommandLine.Builder
         internal bool EnablePosixBundling { get; set; } = true;
         
         internal bool EnableTokenReplacement { get; set; } = true;
-
-        /// <summary>
-        /// Determines the behavior when parsing a double dash (<c>--</c>) in a command line.
-        /// </summary>
-        /// <remarks>When set to <see langword="true"/>, all tokens following <c>--</c> will be placed into the <see cref="ParseResult.UnparsedTokens"/> collection. When set to <see langword="false"/>, all tokens following <c>--</c> will be treated as command arguments, even if they match an existing option.</remarks>
-        internal bool EnableLegacyDoubleDashBehavior { get; set; }
         
         internal void CustomizeHelpLayout(Action<HelpContext> customize) => 
             _customizeHelpBuilder = customize;
@@ -97,7 +91,6 @@ namespace System.CommandLine.Builder
                     Command,
                     enablePosixBundling: EnablePosixBundling,
                     enableDirectives: EnableDirectives,
-                    enableLegacyDoubleDashBehavior: EnableLegacyDoubleDashBehavior,
                     enableTokenReplacement: EnableTokenReplacement,
                     resources: LocalizationResources,
                     middlewarePipeline: _middlewareList is null

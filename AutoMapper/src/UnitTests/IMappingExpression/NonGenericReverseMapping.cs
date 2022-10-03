@@ -1,14 +1,7 @@
-using Xunit;
-using Shouldly;
-using System.Linq;
-
 namespace AutoMapper.UnitTests
 {
     namespace NonGenericReverseMapping
     {
-        using System;
-        using System.Text.RegularExpressions;
-
         public class When_reverse_mapping_classes_with_simple_properties : AutoMapperSpecBase
         {
             private Source _source;
@@ -62,9 +55,11 @@ namespace AutoMapper.UnitTests
                     .ForMember("Ignored", opt => opt.Ignore())
                     .ReverseMap();
             });
+            [Fact]
+            public void Validate() => AssertConfigurationIsValid();
         }
 
-        public class When_reverse_mapping_and_ignoring : SpecBase
+        public class When_reverse_mapping_and_ignoring : NonValidatingSpecBase
         {
             public class Foo
             {

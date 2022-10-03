@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // ReSharper disable InconsistentNaming
+
 namespace Microsoft.EntityFrameworkCore.Query;
 
 public class RawSqlServerTest : NonSharedModelTestBase
@@ -69,7 +70,8 @@ public class RawSqlServerTest : NonSharedModelTestBase
         }
     }
 
-    protected override string StoreName { get; } = "RawSqlServerTest";
+    protected override string StoreName
+        => "RawSqlServerTest";
 
     protected TestSqlLoggerFactory TestSqlLoggerFactory
         => (TestSqlLoggerFactory)ListLoggerFactory;

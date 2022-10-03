@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Text;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
@@ -21,8 +22,8 @@ public static class RelationalIndexExtensions
     /// <returns>The name of the index in the database.</returns>
     public static string? GetDatabaseName(this IReadOnlyIndex index)
         => index.DeclaringEntityType.GetTableName() == null
-        ? null
-        : (string?)index[RelationalAnnotationNames.Name]
+            ? null
+            : (string?)index[RelationalAnnotationNames.Name]
             ?? index.Name
             ?? index.GetDefaultDatabaseName();
 
@@ -33,11 +34,7 @@ public static class RelationalIndexExtensions
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The name of the index in the database.</returns>
     public static string? GetDatabaseName(this IReadOnlyIndex index, in StoreObjectIdentifier storeObject)
-        => storeObject.StoreObjectType != StoreObjectType.Table
-        ? null
-        : (string?)index[RelationalAnnotationNames.Name]
-            ?? index.Name
-            ?? index.GetDefaultDatabaseName(storeObject);
+        => index.GetDatabaseName(storeObject, null);
 
     /// <summary>
     ///     Returns the default name that would be used for this index.
@@ -56,7 +53,7 @@ public static class RelationalIndexExtensions
             .Append("IX_")
             .Append(tableName)
             .Append('_')
-            .AppendJoin(index.Properties.Select(p => p.GetColumnBaseName()), "_")
+            .AppendJoin(index.Properties.Select(p => p.GetColumnName()), "_")
             .ToString();
 
         return Uniquifier.Truncate(baseName, index.DeclaringEntityType.Model.GetMaxIdentifierLength());
@@ -69,60 +66,7 @@ public static class RelationalIndexExtensions
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The default name that would be used for this index.</returns>
     public static string? GetDefaultDatabaseName(this IReadOnlyIndex index, in StoreObjectIdentifier storeObject)
-    {
-        if (storeObject.StoreObjectType != StoreObjectType.Table)
-        {
-            return null;
-        }
-
-        var columnNames = index.Properties.GetColumnNames(storeObject);
-        if (columnNames == null)
-        {
-            return null;
-        }
-
-        var rootIndex = index;
-
-        // Limit traversal to avoid getting stuck in a cycle (validation will throw for these later)
-        // Using a hashset is detrimental to the perf when there are no cycles
-        for (var i = 0; i < Metadata.Internal.RelationalEntityTypeExtensions.MaxEntityTypesSharingTable; i++)
-        {
-            IReadOnlyIndex? linkedIndex = null;
-            foreach (var otherIndex in rootIndex.DeclaringEntityType
-                         .FindRowInternalForeignKeys(storeObject)
-                         .SelectMany(fk => fk.PrincipalEntityType.GetIndexes()))
-            {
-                var otherColumnNames = otherIndex.Properties.GetColumnNames(storeObject);
-                if ((otherColumnNames != null)
-                    && otherColumnNames.SequenceEqual(columnNames))
-                {
-                    linkedIndex = otherIndex;
-                    break;
-                }
-            }
-
-            if (linkedIndex == null)
-            {
-                break;
-            }
-
-            rootIndex = linkedIndex;
-        }
-
-        if (rootIndex != index)
-        {
-            return rootIndex.GetDatabaseName(storeObject);
-        }
-
-        var baseName = new StringBuilder()
-            .Append("IX_")
-            .Append(storeObject.Name)
-            .Append('_')
-            .AppendJoin(columnNames, "_")
-            .ToString();
-
-        return Uniquifier.Truncate(baseName, index.DeclaringEntityType.Model.GetMaxIdentifierLength());
-    }
+        => index.GetDefaultDatabaseName(storeObject, null);
 
     /// <summary>
     ///     Sets the name of the index in the database.
@@ -145,14 +89,10 @@ public static class RelationalIndexExtensions
         this IConventionIndex index,
         string? name,
         bool fromDataAnnotation = false)
-    {
-        index.SetOrRemoveAnnotation(
+        => (string?)index.SetOrRemoveAnnotation(
             RelationalAnnotationNames.Name,
             Check.NullButNotEmpty(name, nameof(name)),
-            fromDataAnnotation);
-
-        return name;
-    }
+            fromDataAnnotation)?.Value;
 
     /// <summary>
     ///     Gets the <see cref="ConfigurationSource" /> for the name of the index in the database.
@@ -168,9 +108,7 @@ public static class RelationalIndexExtensions
     /// <param name="index">The index.</param>
     /// <returns>The index filter expression.</returns>
     public static string? GetFilter(this IReadOnlyIndex index)
-        => (index is RuntimeIndex)
-            ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
-            : (string?)index.FindAnnotation(RelationalAnnotationNames.Filter)?.Value;
+        => (string?)index.FindAnnotation(RelationalAnnotationNames.Filter)?.Value;
 
     /// <summary>
     ///     Returns the index filter expression.
@@ -180,11 +118,6 @@ public static class RelationalIndexExtensions
     /// <returns>The index filter expression.</returns>
     public static string? GetFilter(this IReadOnlyIndex index, in StoreObjectIdentifier storeObject)
     {
-        if (index is RuntimeIndex)
-        {
-            throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
-        }
-
         var annotation = index.FindAnnotation(RelationalAnnotationNames.Filter);
         if (annotation != null)
         {
@@ -213,14 +146,10 @@ public static class RelationalIndexExtensions
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetFilter(this IConventionIndex index, string? value, bool fromDataAnnotation = false)
-    {
-        index.SetAnnotation(
+        => (string?)index.SetAnnotation(
             RelationalAnnotationNames.Filter,
             Check.NullButNotEmpty(value, nameof(value)),
-            fromDataAnnotation);
-
-        return value;
-    }
+            fromDataAnnotation)?.Value;
 
     /// <summary>
     ///     Gets the <see cref="ConfigurationSource" /> for the index filter expression.

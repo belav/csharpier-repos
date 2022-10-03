@@ -116,7 +116,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// This structure is used for capturing initializers of a given index and 
         /// the index value itself.
         /// </summary>
-        private struct IndexDesc
+        private readonly struct IndexDesc
         {
             public IndexDesc(int index, ImmutableArray<BoundExpression> initializers)
             {
@@ -507,7 +507,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             }
 
             var initializers = initializer.Initializers;
-            if (initializers.Any(init => init.ConstantValue == null))
+            if (initializers.Any(static init => init.ConstantValue == null))
             {
                 return -1;
             }

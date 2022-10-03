@@ -1,6 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -23,22 +24,26 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
     private readonly SortedDictionary<string, RuntimeSkipNavigation> _skipNavigations
         = new(StringComparer.Ordinal);
 
+    private readonly SortedDictionary<string, RuntimeServiceProperty> _serviceProperties
+        = new(StringComparer.Ordinal);
+
+    private readonly SortedDictionary<string, RuntimeProperty> _properties;
+
     private readonly SortedDictionary<IReadOnlyList<IReadOnlyProperty>, RuntimeIndex> _unnamedIndexes
         = new(PropertyListComparer.Instance);
 
     private readonly SortedDictionary<string, RuntimeIndex> _namedIndexes
         = new(StringComparer.Ordinal);
 
-    private readonly SortedDictionary<string, RuntimeProperty> _properties;
-
     private readonly SortedDictionary<IReadOnlyList<IReadOnlyProperty>, RuntimeKey> _keys
         = new(PropertyListComparer.Instance);
 
-    private readonly SortedDictionary<string, RuntimeServiceProperty> _serviceProperties
+    private readonly SortedDictionary<string, RuntimeTrigger> _triggers
         = new(StringComparer.Ordinal);
 
     private RuntimeKey? _primaryKey;
     private readonly bool _hasSharedClrType;
+    [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]
     private readonly Type _clrType;
     private readonly RuntimeEntityType? _baseType;
     private readonly SortedSet<RuntimeEntityType> _directlyDerivedTypes = new(EntityTypeFullNameComparer.Instance);
@@ -58,7 +63,6 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
     private Func<ISnapshot>? _storeGeneratedValuesFactory;
     private Func<ValueBuffer, ISnapshot>? _shadowValuesFactory;
     private Func<ISnapshot>? _emptyShadowValuesFactory;
-    private Func<MaterializationContext, object>? _instanceFactory;
     private IProperty[]? _foreignKeyProperties;
     private IProperty[]? _valueGeneratingProperties;
 
@@ -71,7 +75,7 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
     [EntityFrameworkInternal]
     public RuntimeEntityType(
         string name,
-        Type type,
+        [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type type,
         bool sharedClrType,
         RuntimeModel model,
         RuntimeEntityType? baseType,
@@ -757,6 +761,43 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
             : GetDerivedTypes().SelectMany(et => et.GetDeclaredServiceProperties());
 
     /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public virtual RuntimeTrigger AddTrigger(string modelName)
+    {
+        var trigger = new RuntimeTrigger(this, modelName);
+
+        _triggers.Add(modelName, trigger);
+
+        return trigger;
+    }
+
+    /// <summary>
+    ///     Finds a trigger with the given name.
+    /// </summary>
+    /// <param name="modelName">The trigger name.</param>
+    /// <returns>The trigger or <see langword="null" /> if no trigger with the given name was found.</returns>
+    public virtual RuntimeTrigger? FindDeclaredTrigger(string modelName)
+    {
+        Check.NotEmpty(modelName, nameof(modelName));
+
+        return _triggers.TryGetValue(modelName, out var trigger)
+            ? trigger
+            : null;
+    }
+
+    private IEnumerable<RuntimeTrigger> GetDeclaredTriggers()
+        => _triggers.Values;
+
+    private IEnumerable<RuntimeTrigger> GetTriggers()
+        => _baseType != null
+            ? _baseType.GetTriggers().Concat(GetDeclaredTriggers())
+            : GetDeclaredTriggers();
+
+    /// <summary>
     ///     Gets or sets the <see cref="InstantiationBinding" /> for the preferred constructor.
     /// </summary>
     public virtual InstantiationBinding? ConstructorBinding
@@ -797,7 +838,9 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
     /// </summary>
     /// <param name="type">The type to look for the indexer on.</param>
     /// <returns>An indexer property or <see langword="null" />.</returns>
-    public static PropertyInfo? FindIndexerProperty(Type type)
+    public static PropertyInfo? FindIndexerProperty(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
+        Type type)
         => type.FindIndexerProperty();
 
     /// <summary>
@@ -820,6 +863,7 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
             () => ((IReadOnlyEntityType)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
 
     /// <inheritdoc />
+    [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]
     Type IReadOnlyTypeBase.ClrType
     {
         [DebuggerStepThrough]
@@ -1235,6 +1279,26 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
         => GetProperties();
 
     /// <inheritdoc />
+    [DebuggerStepThrough]
+    IReadOnlyTrigger? IReadOnlyEntityType.FindDeclaredTrigger(string name)
+        => FindDeclaredTrigger(name);
+
+    /// <inheritdoc />
+    [DebuggerStepThrough]
+    ITrigger? IEntityType.FindDeclaredTrigger(string name)
+        => FindDeclaredTrigger(name);
+
+    /// <inheritdoc />
+    [DebuggerStepThrough]
+    IEnumerable<IReadOnlyTrigger> IReadOnlyEntityType.GetDeclaredTriggers()
+        => GetDeclaredTriggers();
+
+    /// <inheritdoc />
+    [DebuggerStepThrough]
+    IEnumerable<ITrigger> IEntityType.GetDeclaredTriggers()
+        => GetDeclaredTriggers();
+
+    /// <inheritdoc />
     PropertyCounts IRuntimeEntityType.Counts
         => NonCapturingLazyInitializer.EnsureInitialized(ref _counts, this, static entityType => entityType.CalculateCounts());
 
@@ -1273,34 +1337,6 @@ public class RuntimeEntityType : AnnotatableBase, IRuntimeEntityType
         => NonCapturingLazyInitializer.EnsureInitialized(
             ref _emptyShadowValuesFactory, this,
             static entityType => new EmptyShadowValuesFactoryFactory().CreateEmpty(entityType));
-
-    /// <inheritdoc />
-    Func<MaterializationContext, object> IRuntimeEntityType.InstanceFactory
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _instanceFactory, this,
-            static entityType =>
-            {
-                var binding = entityType._serviceOnlyConstructorBinding;
-                if (binding == null)
-                {
-                    var _ = ((IEntityType)entityType).ConstructorBinding;
-                    binding = entityType._serviceOnlyConstructorBinding;
-                    if (binding == null)
-                    {
-                        throw new InvalidOperationException(
-                            CoreStrings.NoParameterlessConstructor(
-                                ((IReadOnlyEntityType)entityType).DisplayName()));
-                    }
-                }
-
-                var contextParam = Expression.Parameter(typeof(MaterializationContext), "mc");
-
-                return Expression.Lambda<Func<MaterializationContext, object>>(
-                        binding.CreateConstructorExpression(
-                            new ParameterBindingInfo(entityType, contextParam)),
-                        contextParam)
-                    .Compile();
-            });
 
     /// <inheritdoc />
     [DebuggerStepThrough]

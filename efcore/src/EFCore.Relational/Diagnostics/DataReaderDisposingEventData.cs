@@ -9,7 +9,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information and examples.
 /// </remarks>
-public class DataReaderDisposingEventData : DbContextEventData
+public class DataReaderDisposingEventData : DataReaderEventData
 {
     /// <summary>
     ///     Constructs a <see cref="DiagnosticSource" /> event payload for <see cref="RelationalEventId.DataReaderDisposing" />.
@@ -23,8 +23,11 @@ public class DataReaderDisposingEventData : DbContextEventData
     /// <param name="connectionId">A correlation ID that identifies the <see cref="DbConnection" /> instance being used.</param>
     /// <param name="recordsAffected">Gets the number of rows changed, inserted, or deleted by execution of the SQL statement.</param>
     /// <param name="readCount">Gets the number of read operations performed by this reader.</param>
-    /// <param name="startTime">The start time of this event.</param>
-    /// <param name="duration">The duration this event.</param>
+    /// <param name="startTime">The time when the data reader was created.</param>
+    /// <param name="duration">
+    ///     The duration from the time the data reader is created until it is disposed. This corresponds to the time reading
+    ///     for reading results of a query.
+    /// </param>
     public DataReaderDisposingEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
@@ -37,55 +40,15 @@ public class DataReaderDisposingEventData : DbContextEventData
         int readCount,
         DateTimeOffset startTime,
         TimeSpan duration)
-        : base(eventDefinition, messageGenerator, context)
+        : base(
+            eventDefinition, messageGenerator, command, dataReader, context, commandId, connectionId, recordsAffected, readCount, startTime)
     {
-        Command = command;
-        DataReader = dataReader;
-        CommandId = commandId;
-        ConnectionId = connectionId;
-        RecordsAffected = recordsAffected;
-        ReadCount = readCount;
-        StartTime = startTime;
         Duration = duration;
     }
 
     /// <summary>
-    ///     The <see cref="DbCommand" /> that created the reader.
-    /// </summary>
-    public virtual DbCommand Command { get; }
-
-    /// <summary>
-    ///     The <see cref="DbDataReader" /> that is being disposed.
-    /// </summary>
-    public virtual DbDataReader DataReader { get; }
-
-    /// <summary>
-    ///     A correlation ID that identifies the <see cref="DbCommand" /> instance being used.
-    /// </summary>
-    public virtual Guid CommandId { get; }
-
-    /// <summary>
-    ///     A correlation ID that identifies the <see cref="DbConnection" /> instance being used.
-    /// </summary>
-    public virtual Guid ConnectionId { get; }
-
-    /// <summary>
-    ///     Gets the number of rows changed, inserted, or deleted by execution of the SQL statement.
-    /// </summary>
-    public virtual int RecordsAffected { get; }
-
-    /// <summary>
-    ///     Gets the number of read operations performed by this reader.
-    /// </summary>
-    public virtual int ReadCount { get; }
-
-    /// <summary>
-    ///     The start time of this event.
-    /// </summary>
-    public virtual DateTimeOffset StartTime { get; }
-
-    /// <summary>
-    ///     The duration this event.
+    ///     The duration from the time the data reader is created until it is disposed. This corresponds to the time reading
+    ///     for reading results of a query.
     /// </summary>
     public virtual TimeSpan Duration { get; }
 }

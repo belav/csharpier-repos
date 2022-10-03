@@ -559,7 +559,7 @@ namespace System.CommandLine.Tests
             }
 
             [Fact]
-            public void When_tokens_are_passed_on_by_custom_parser_on_last_argument_then_they_become_unparsed_tokens()
+            public void When_tokens_are_passed_on_by_custom_parser_on_last_argument_then_they_become_unmatched_tokens()
             {
 
                 var argument1 = new Argument<int[]>(
@@ -583,7 +583,7 @@ namespace System.CommandLine.Tests
 
                 var parseResult = command.Parse("1 2 3 4 5 6 7 8");
 
-                parseResult.UnparsedTokens
+                parseResult.UnmatchedTokens
                            .Should()
                            .BeEquivalentTo(new[] { "4", "5", "6", "7", "8" },
                                            options => options.WithStrictOrdering());
@@ -675,7 +675,7 @@ namespace System.CommandLine.Tests
             }
 
             [Fact]
-            public void OnlyTake_can_pass_on_all_tokens()
+            public void OnlyTake_can_pass_on_all_tokens_from_one_multiple_arity_argument_to_another()
             {
                 var argument1 = new Argument<int[]>(result =>
                 {
@@ -695,6 +695,92 @@ namespace System.CommandLine.Tests
 
                 result.GetValueForArgument(argument2).Should().BeEquivalentSequenceTo(1, 2, 3);
             }
+
+            [Fact] // https://github.com/dotnet/command-line-api/issues/1759 
+            public void OnlyTake_can_pass_on_all_tokens_from_a_single_arity_argument_to_another()
+            {
+                var scalar = new Argument<int?>(parse: ctx =>
+                {
+                    ctx.OnlyTake(0);
+                    return null;
+                });
+                Argument<int[]> multiple = new();
+
+                var command = new RootCommand
+                {
+                    scalar,
+                    multiple
+                };
+
+                var result = command.Parse("1 2 3");
+
+                result.GetValueForArgument(scalar).Should().BeNull();
+
+                result.GetValueForArgument(multiple).Should().BeEquivalentSequenceTo(1, 2, 3);
+            }
+
+
+            [Fact] //https://github.com/dotnet/command-line-api/issues/1779
+            public void OnlyTake_can_pass_on_all_tokens_from_a_single_arity_argument_to_another_that_also_passes_them_all_on()
+            {
+                var first = new Argument<string>(name: "first", parse: ctx =>
+                {
+                    ctx.OnlyTake(0);
+                    return null;
+                })
+                {
+                    Arity = ArgumentArity.ZeroOrOne
+                };
+
+                var second = new Argument<string[]>(name: "second", parse: ctx =>
+                {
+                    ctx.OnlyTake(0);
+                    return null;
+                })
+                {
+                    Arity = ArgumentArity.ZeroOrMore
+                };
+
+                var third = new Argument<string[]>(name: "third", parse: ctx =>
+                {
+                    ctx.OnlyTake(3);
+                    return new[] { "1", "2", "3" };
+                })
+                {
+                    Arity = ArgumentArity.ZeroOrMore
+                };
+
+                var command = new RootCommand
+                {
+                    first,
+                    second,
+                    third
+                };
+
+                var result = command.Parse("1 2 3");
+
+                result.GetValueForArgument(first).Should().BeNull();
+                result.GetValueForArgument(second).Should().BeEmpty();
+                result.GetValueForArgument(third).Should().BeEquivalentSequenceTo("1", "2", "3");
+            }
+        }
+
+        [Fact]
+        public void Argument_of_enum_can_limit_enum_members_as_valid_values()
+        {
+            var argument = new Argument<ConsoleColor>()
+                .FromAmong(ConsoleColor.Red.ToString(), ConsoleColor.Green.ToString());
+            Command command = new("set-color")
+            {
+                argument
+            };
+
+            var result = command.Parse("set-color Fuschia");
+
+            result.Errors
+                .Select(e => e.Message)
+                .Should()
+                .BeEquivalentTo(new[] { $"Argument 'Fuschia' not recognized. Must be one of:\n\t'Red'\n\t'Green'" });
         }
 
         protected override Symbol CreateSymbol(string name)

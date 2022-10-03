@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis.CodeStyle;
@@ -15,13 +16,14 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.CodeAnalysis.Shared.Collections;
+using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
 
-namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
+namespace Microsoft.CodeAnalysis.CSharp.UseUtf8StringLiteral
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class UseUTF8StringLiteralDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class UseUtf8StringLiteralDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public enum ArrayCreationOperationLocation
         {
@@ -30,13 +32,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
             Current
         }
 
-        public UseUTF8StringLiteralDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseUTF8StringLiteralDiagnosticId,
-                EnforceOnBuildValues.UseUTF8StringLiteral,
+        public UseUtf8StringLiteralDiagnosticAnalyzer()
+            : base(IDEDiagnosticIds.UseUtf8StringLiteralDiagnosticId,
+                EnforceOnBuildValues.UseUtf8StringLiteral,
                 CSharpCodeStyleOptions.PreferUtf8StringLiterals,
-                LanguageNames.CSharp,
-                new LocalizableResourceString(nameof(CSharpAnalyzersResources.Convert_to_UTF8_string_literal), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_UTF8_string_literal), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
+                new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_Utf8_string_literal), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
         {
         }
 
@@ -49,10 +49,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
                 if (!context.Compilation.LanguageVersion().IsCSharp11OrAbove())
                     return;
 
+                if (context.Compilation.GetBestTypeByMetadataName(typeof(ReadOnlySpan<>).FullName!) is null)
+                    return;
+
                 var expressionType = context.Compilation.GetTypeByMetadataName(typeof(System.Linq.Expressions.Expression<>).FullName!);
 
-                // Temporarily disabling, https://github.com/dotnet/roslyn/issues/61517 tracks the follow up work  
-                // context.RegisterOperationAction(c => AnalyzeOperation(c, expressionType), OperationKind.ArrayCreation);
+                context.RegisterOperationAction(c => AnalyzeOperation(c, expressionType), OperationKind.ArrayCreation);
             });
 
         private void AnalyzeOperation(OperationAnalysisContext context, INamedTypeSymbol? expressionType)
@@ -68,7 +70,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
             if (arrayCreationOperation.Initializer is null)
                 return;
 
-            // Using UTF8 string literals as nested array initializers is invalid
+            // Using UTF-8 string literals as nested array initializers is invalid
             if (arrayCreationOperation.DimensionSizes.Length > 1)
                 return;
 
@@ -76,11 +78,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
             if (arrayCreationOperation.Type is not IArrayTypeSymbol { ElementType.SpecialType: SpecialType.System_Byte })
                 return;
 
-            // UTF8 strings are not valid to use in attributes
+            // UTF-8 strings are not valid to use in attributes
             if (arrayCreationOperation.Syntax.Ancestors().OfType<AttributeSyntax>().Any())
                 return;
 
-            // Can't use a UTF8 string inside an expression tree.
+            // Can't use a UTF-8 string inside an expression tree.
             var semanticModel = context.Operation.SemanticModel;
             Contract.ThrowIfNull(semanticModel);
             if (arrayCreationOperation.Syntax.IsInExpressionTree(semanticModel, expressionType, context.CancellationToken))
@@ -93,7 +95,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
             if (arrayCreationOperation.IsImplicit && elements.Length == 0)
                 return;
 
-            if (!TryConvertToUTF8String(builder: null, elements))
+            if (!TryConvertToUtf8String(builder: null, elements))
                 return;
 
             if (arrayCreationOperation.Syntax is ImplicitArrayCreationExpressionSyntax or ArrayCreationExpressionSyntax)
@@ -145,14 +147,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
                 DiagnosticHelper.Create(Descriptor, location, severity, additionalLocations, properties));
         }
 
-        internal static bool TryConvertToUTF8String(StringBuilder? builder, ImmutableArray<IOperation> arrayCreationElements)
+        internal static bool TryConvertToUtf8String(StringBuilder? builder, ImmutableArray<IOperation> arrayCreationElements)
         {
             for (var i = 0; i < arrayCreationElements.Length;)
             {
                 // Need to call a method to do the actual rune decoding as it uses stackalloc, and stackalloc
-                // in a loop is a bad idea
-                if (!TryGetNextRune(arrayCreationElements, i, out var rune, out var bytesConsumed))
+                // in a loop is a bad idea. We also exclude any characters that are control or format chars
+                if (!TryGetNextRune(arrayCreationElements, i, out var rune, out var bytesConsumed) ||
+                    IsControlOrFormatRune(rune))
+                {
                     return false;
+                }
 
                 i += bytesConsumed;
 
@@ -171,6 +176,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUTF8StringLiteral
             }
 
             return true;
+
+            // We allow the three control characters that users are familiar with and wouldn't be surprised to
+            // see in a string literal
+            static bool IsControlOrFormatRune(Rune rune)
+                => Rune.GetUnicodeCategory(rune) is UnicodeCategory.Control or UnicodeCategory.Format
+                    && rune.Value switch
+                    {
+                        '\r' => false,
+                        '\n' => false,
+                        '\t' => false,
+                        _ => true
+                    };
         }
 
         private static bool TryGetNextRune(ImmutableArray<IOperation> arrayCreationElements, int startIndex, out Rune rune, out int bytesConsumed)

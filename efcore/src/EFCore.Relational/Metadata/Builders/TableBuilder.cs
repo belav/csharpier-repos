@@ -10,7 +10,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
 ///     and it is not designed to be directly constructed in your application code.
 /// </summary>
-public class TableBuilder
+public class TableBuilder : IInfrastructure<EntityTypeBuilder>
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -19,32 +19,40 @@ public class TableBuilder
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public TableBuilder(string? name, string? schema, EntityTypeBuilder entityTypeBuilder)
+    public TableBuilder(in StoreObjectIdentifier? storeObject, EntityTypeBuilder entityTypeBuilder)
     {
-        Name = name;
-        Schema = schema;
+        StoreObject = storeObject;
         EntityTypeBuilder = entityTypeBuilder;
     }
 
     /// <summary>
     ///     The specified table name.
     /// </summary>
-    public virtual string? Name { get; }
+    public virtual string? Name
+        => StoreObject?.Name;
 
     /// <summary>
     ///     The specified table schema.
     /// </summary>
-    public virtual string? Schema { get; }
+    public virtual string? Schema
+        => StoreObject?.Schema;
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    [EntityFrameworkInternal]
+    protected virtual StoreObjectIdentifier? StoreObject { get; }
 
     /// <summary>
     ///     The entity type being configured.
     /// </summary>
-    public virtual IMutableEntityType Metadata => EntityTypeBuilder.Metadata;
+    public virtual IMutableEntityType Metadata
+        => EntityTypeBuilder.Metadata;
 
-    /// <summary>
-    ///     The entity type builder.
-    /// </summary>
-    public virtual EntityTypeBuilder EntityTypeBuilder { get; }
+    private EntityTypeBuilder EntityTypeBuilder { get; }
 
     /// <summary>
     ///     Configures the table to be ignored by migrations.
@@ -64,18 +72,93 @@ public class TableBuilder
     /// <summary>
     ///     Configures a database trigger on the table.
     /// </summary>
-    /// <param name="name">The name of the trigger.</param>
+    /// <param name="modelName">The name of the trigger.</param>
     /// <returns>A builder that can be used to configure the database trigger.</returns>
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-triggers">Database triggers</see> for more information and examples.
     /// </remarks>
-    public virtual TriggerBuilder HasTrigger(string name)
-        => new((Trigger)InternalTriggerBuilder.HasTrigger(
-            (IConventionEntityType)Metadata,
+    public virtual TableTriggerBuilder HasTrigger(string modelName)
+    {
+        var trigger = EntityTypeBuilder.HasTrigger(Metadata, modelName).Metadata;
+        if (Name != null)
+        {
+            trigger.SetTableName(Name);
+            trigger.SetTableSchema(Schema);
+        }
+
+        return new TableTriggerBuilder(trigger);
+    }
+
+    /// <summary>
+    ///     Configures a database check constraint when targeting a relational database.
+    /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information and examples.
+    /// </remarks>
+    /// <param name="name">The name of the check constraint.</param>
+    /// <param name="sql">The logical constraint sql used in the check constraint.</param>
+    /// <returns>A builder to configure the check constraint.</returns>
+    public virtual CheckConstraintBuilder HasCheckConstraint(
+        string name,
+        string? sql)
+    {
+        Check.NotEmpty(name, nameof(name));
+        Check.NullButNotEmpty(sql, nameof(sql));
+
+        var checkConstraint = InternalCheckConstraintBuilder.HasCheckConstraint(
+            (IConventionEntityType)EntityTypeBuilder.Metadata,
             name,
-            Name,
-            Schema,
-            ConfigurationSource.Explicit)!);
+            sql,
+            ConfigurationSource.Explicit)!;
+
+        return new CheckConstraintBuilder((IMutableCheckConstraint)checkConstraint);
+    }
+
+    /// <summary>
+    ///     Configures a comment to be applied to the table
+    /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    /// </remarks>
+    /// <param name="comment">The comment for the table.</param>
+    /// <returns>A builder to further configure the table.</returns>
+    public virtual TableBuilder HasComment(string? comment)
+    {
+        EntityTypeBuilder.Metadata.SetComment(comment);
+        return this;
+    }
+
+    /// <summary>
+    ///     Maps the property to a column on the current table and returns an object that can be used
+    ///     to provide table-specific configuration if the property is mapped to more than one table.
+    /// </summary>
+    /// <param name="propertyName">The name of the property to be configured.</param>
+    /// <returns>An object that can be used to configure the property.</returns>
+    public virtual ColumnBuilder Property(string propertyName)
+        => new(GetStoreObjectIdentifier(), EntityTypeBuilder.Property(propertyName));
+
+    /// <summary>
+    ///     Maps the property to a column on the current table and returns an object that can be used
+    ///     to provide table-specific configuration if the property is mapped to more than one table.
+    /// </summary>
+    /// <typeparam name="TProperty">The type of the property to be configured.</typeparam>
+    /// <param name="propertyName">The name of the property to be configured.</param>
+    /// <returns>An object that can be used to configure the property.</returns>
+    public virtual ColumnBuilder<TProperty> Property<TProperty>(string propertyName)
+        => new(GetStoreObjectIdentifier(), EntityTypeBuilder.Property<TProperty>(propertyName));
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    [EntityFrameworkInternal]
+    protected virtual StoreObjectIdentifier GetStoreObjectIdentifier()
+        => StoreObject ?? throw new InvalidOperationException(RelationalStrings.MappingFragmentMissingName);
+
+    EntityTypeBuilder IInfrastructure<EntityTypeBuilder>.Instance
+        => EntityTypeBuilder;
 
     #region Hidden System.Object members
 

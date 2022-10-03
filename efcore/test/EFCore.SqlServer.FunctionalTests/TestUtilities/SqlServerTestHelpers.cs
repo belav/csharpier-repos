@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Diagnostics.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-public class SqlServerTestHelpers : TestHelpers
+public class SqlServerTestHelpers : RelationalTestHelpers
 {
     protected SqlServerTestHelpers()
     {
@@ -17,7 +17,7 @@ public class SqlServerTestHelpers : TestHelpers
     public override IServiceCollection AddProviderServices(IServiceCollection services)
         => services.AddEntityFrameworkSqlServer();
 
-    public override void UseProviderOptions(DbContextOptionsBuilder optionsBuilder)
+    public override DbContextOptionsBuilder UseProviderOptions(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer(new SqlConnection("Database=DummyDatabase"));
 
     public override LoggingDefinitions LoggingDefinitions { get; } = new SqlServerLoggingDefinitions();

@@ -333,6 +333,16 @@ public class ChangeTracker : IResettableService
     private IEntityEntryGraphIterator GraphIterator { get; }
 
     /// <summary>
+    ///     An event fired when an entity is about to be tracked by the context, either because it is returned
+    ///     from a tracking query, or because it is being attached or added to the context.
+    /// </summary>
+    public event EventHandler<EntityTrackingEventArgs> Tracking
+    {
+        add => StateManager.Tracking += value;
+        remove => StateManager.Tracking -= value;
+    }
+
+    /// <summary>
     ///     An event fired when an entity is tracked by the context, either because it was returned
     ///     from a tracking query, or because it was attached or added to the context.
     /// </summary>
@@ -340,6 +350,20 @@ public class ChangeTracker : IResettableService
     {
         add => StateManager.Tracked += value;
         remove => StateManager.Tracked -= value;
+    }
+
+    /// <summary>
+    ///     An event fired when an entity that is tracked by the associated <see cref="DbContext" /> is moving
+    ///     from one <see cref="EntityState" /> to another.
+    /// </summary>
+    /// <remarks>
+    ///     Note that this event does not fire for entities when they are first tracked by the context.
+    ///     Use the <see cref="Tracking" /> event to get notified when the context begins tracking an entity.
+    /// </remarks>
+    public event EventHandler<EntityStateChangingEventArgs> StateChanging
+    {
+        add => StateManager.StateChanging += value;
+        remove => StateManager.StateChanging -= value;
     }
 
     /// <summary>
@@ -354,6 +378,66 @@ public class ChangeTracker : IResettableService
     {
         add => StateManager.StateChanged += value;
         remove => StateManager.StateChanged -= value;
+    }
+
+    /// <summary>
+    ///     An event fired when detecting changes to a single entity is about to happen, either through an
+    ///     explicit call to <see cref="DetectChanges" /> or <see cref="EntityEntry.DetectChanges" />, or automatically, such as part of
+    ///     executing <see cref="DbContext.SaveChanges()" /> or <see cref="DbContext.SaveChangesAsync(System.Threading.CancellationToken)" />.
+    /// </summary>
+    /// <remarks>
+    ///     <see cref="AutoDetectChangesEnabled" /> is set to <see langword="false" /> for the duration of the event to prevent an infinite
+    ///     loop of recursive automatic calls.
+    /// </remarks>
+    public event EventHandler<DetectEntityChangesEventArgs> DetectingEntityChanges
+    {
+        add => ChangeDetector.DetectingEntityChanges += value;
+        remove => ChangeDetector.DetectingEntityChanges -= value;
+    }
+
+    /// <summary>
+    ///     An event fired when any changes have been detected to a single entity, either through an
+    ///     explicit call to <see cref="DetectChanges" /> or <see cref="EntityEntry.DetectChanges" />, or automatically, such as part of
+    ///     executing <see cref="DbContext.SaveChanges()" /> or <see cref="DbContext.SaveChangesAsync(System.Threading.CancellationToken)" />.
+    /// </summary>
+    /// <remarks>
+    ///     <see cref="AutoDetectChangesEnabled" /> is set to <see langword="false" /> for the duration of the event to prevent an infinite
+    ///     loop of recursive automatic calls.
+    /// </remarks>
+    public event EventHandler<DetectedEntityChangesEventArgs> DetectedEntityChanges
+    {
+        add => ChangeDetector.DetectedEntityChanges += value;
+        remove => ChangeDetector.DetectedEntityChanges -= value;
+    }
+
+    /// <summary>
+    ///     An event fired when detecting changes to the entity graph about to happen, either through an
+    ///     explicit call to <see cref="DetectChanges" />, or automatically, such as part of
+    ///     executing <see cref="DbContext.SaveChanges()" /> or <see cref="DbContext.SaveChangesAsync(System.Threading.CancellationToken)" />.
+    /// </summary>
+    /// <remarks>
+    ///     <see cref="AutoDetectChangesEnabled" /> is set to <see langword="false" /> for the duration of the event to prevent an infinite
+    ///     loop of recursive automatic calls.
+    /// </remarks>
+    public event EventHandler<DetectChangesEventArgs> DetectingAllChanges
+    {
+        add => ChangeDetector.DetectingAllChanges += value;
+        remove => ChangeDetector.DetectingAllChanges -= value;
+    }
+
+    /// <summary>
+    ///     An event fired when any changes have been detected to the entity graph, either through an
+    ///     explicit call to <see cref="DetectChanges" />, or automatically, such as part of
+    ///     executing <see cref="DbContext.SaveChanges()" /> or <see cref="DbContext.SaveChangesAsync(System.Threading.CancellationToken)" />.
+    /// </summary>
+    /// <remarks>
+    ///     <see cref="AutoDetectChangesEnabled" /> is set to <see langword="false" /> for the duration of the event to prevent an infinite
+    ///     loop of recursive automatic calls.
+    /// </remarks>
+    public event EventHandler<DetectedChangesEventArgs> DetectedAllChanges
+    {
+        add => ChangeDetector.DetectedAllChanges += value;
+        remove => ChangeDetector.DetectedAllChanges -= value;
     }
 
     /// <summary>

@@ -741,7 +741,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         {
             var immutableBlog = new BlogAsImmutableRecord(title);
 
-            context.Add(immutableBlog);
+            await context.AddAsync(immutableBlog);
             await context.SaveChangesAsync();
 
             Assert.NotEqual(0, immutableBlog.BlogId);
@@ -1609,7 +1609,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
     public abstract class WithConstructorsFixtureBase : SharedStoreFixtureBase<WithConstructorsContext>
     {
-        protected override string StoreName { get; } = "WithConstructors";
+        protected override string StoreName
+            => "WithConstructors";
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

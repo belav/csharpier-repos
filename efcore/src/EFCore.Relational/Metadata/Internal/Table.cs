@@ -22,7 +22,7 @@ public class Table : TableBase, ITable
     public Table(string name, string? schema, RelationalModel model)
         : base(name, schema, model)
     {
-        Columns = new(new ColumnNameComparer(this));
+        Columns = new SortedDictionary<string, IColumnBase>(new ColumnNameComparer(this));
     }
 
     /// <summary>
@@ -142,7 +142,7 @@ public class Table : TableBase, ITable
 
     /// <inheritdoc />
     public virtual bool IsExcludedFromMigrations
-        => EntityTypeMappings.First().EntityType.IsTableExcludedFromMigrations();
+        => EntityTypeMappings.First().EntityType.IsTableExcludedFromMigrations(StoreObjectIdentifier.Table(Name, Schema));
 
     /// <inheritdoc />
     public override IColumnBase? FindColumn(IProperty property)

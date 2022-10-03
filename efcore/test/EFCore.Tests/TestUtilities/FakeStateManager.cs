@@ -23,6 +23,18 @@ public class FakeStateManager : IStateManager
     {
     }
 
+    public (EventHandler<EntityTrackingEventArgs> Tracking, EventHandler<EntityTrackedEventArgs> Tracked,
+        EventHandler<EntityStateChangingEventArgs> StateChanging, EventHandler<EntityStateChangedEventArgs> StateChanged) CaptureEvents()
+        => (null, null, null, null);
+
+    public void SetEvents(
+        EventHandler<EntityTrackingEventArgs> tracking,
+        EventHandler<EntityTrackedEventArgs> tracked,
+        EventHandler<EntityStateChangingEventArgs> stateChanging,
+        EventHandler<EntityStateChangedEventArgs> stateChanged)
+    {
+    }
+
     public int SaveChanges(bool acceptAllChangesOnSuccess)
     {
         SaveChangesCalled = true;
@@ -116,9 +128,6 @@ public class FakeStateManager : IStateManager
         in ValueBuffer valueBuffer)
         => throw new NotImplementedException();
 
-    public void BeginTrackingQuery()
-        => throw new NotImplementedException();
-
     public InternalEntityEntry TryGetEntry(IKey key, object[] keyValues)
         => throw new NotImplementedException();
 
@@ -134,7 +143,7 @@ public class FakeStateManager : IStateManager
     public IInternalEntityEntryNotifier InternalEntityEntryNotifier
         => throw new NotImplementedException();
 
-    public void StateChanging(InternalEntityEntry entry, EntityState newState)
+    public void ChangingState(InternalEntityEntry entry, EntityState newState)
         => throw new NotImplementedException();
 
     public IValueGenerationManager ValueGenerationManager
@@ -150,6 +159,19 @@ public class FakeStateManager : IStateManager
 
     public void RecordReferencedUntrackedEntity(
         object referencedEntity,
+        INavigationBase navigation,
+        InternalEntityEntry referencedFromEntry)
+        => throw new NotImplementedException();
+
+    public void UpdateReferencedUntrackedEntity(
+        object referencedEntity,
+        object newReferencedEntity,
+        INavigationBase navigation,
+        InternalEntityEntry referencedFromEntry)
+        => throw new NotImplementedException();
+
+    public bool ResolveToExistingEntry(
+        InternalEntityEntry newEntry,
         INavigationBase navigation,
         InternalEntityEntry referencedFromEntry)
         => throw new NotImplementedException();
@@ -185,10 +207,20 @@ public class FakeStateManager : IStateManager
     public IModel Model
         => throw new NotImplementedException();
 
+    public event EventHandler<EntityTrackingEventArgs> Tracking;
+
+    public void OnTracking(InternalEntityEntry internalEntityEntry, EntityState state, bool fromQuery)
+        => Tracking?.Invoke(null, null);
+
     public event EventHandler<EntityTrackedEventArgs> Tracked;
 
     public void OnTracked(InternalEntityEntry internalEntityEntry, bool fromQuery)
         => Tracked?.Invoke(null, null);
+
+    public event EventHandler<EntityStateChangingEventArgs> StateChanging;
+
+    public void OnStateChanging(InternalEntityEntry internalEntityEntry, EntityState newState)
+        => StateChanging?.Invoke(null, null);
 
     public event EventHandler<EntityStateChangedEventArgs> StateChanged;
 

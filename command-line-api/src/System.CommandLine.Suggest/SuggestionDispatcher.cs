@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
-using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
@@ -75,9 +74,8 @@ namespace System.CommandLine.Suggest
                 RegisterCommand,
                 CompleteScriptCommand
             };
-
+            root.TreatUnmatchedTokensAsErrors = false;
             Parser = new CommandLineBuilder(root)
-                     .EnableLegacyDoubleDashBehavior()
                      .UseVersionOption()
                      .UseHelp()
                      .UseParseDirective()
@@ -208,7 +206,7 @@ namespace System.CommandLine.Suggest
             int position,
             string targetExeName)
         {
-            var tokens = parseResult.UnparsedTokens;
+            var tokens = parseResult.UnmatchedTokens;
 
             var commandLine = tokens.FirstOrDefault() ?? "";
 

@@ -127,7 +127,8 @@ public class SqlServerModelValidator : RelationalModelValidator
         {
             foreach (var property in entityType.GetDeclaredProperties()
                          .Where(
-                             p => p.GetValueGenerationStrategy() == SqlServerValueGenerationStrategy.SequenceHiLo
+                             p => (p.GetValueGenerationStrategy() == SqlServerValueGenerationStrategy.SequenceHiLo
+                                     || p.GetValueGenerationStrategy() == SqlServerValueGenerationStrategy.Sequence)
                                  && ((IConventionProperty)p).GetValueGenerationStrategyConfigurationSource() != null
                                  && !p.IsKey()
                                  && p.ValueGenerated != ValueGenerated.Never
@@ -136,6 +137,29 @@ public class SqlServerModelValidator : RelationalModelValidator
             {
                 throw new InvalidOperationException(
                     SqlServerStrings.NonKeyValueGeneration(property.Name, property.DeclaringEntityType.DisplayName()));
+            }
+        }
+    }
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    protected override void ValidateValueGeneration(
+        IEntityType entityType,
+        IKey key,
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+    {
+        if (entityType.GetTableName() != null
+            && (string?)entityType[RelationalAnnotationNames.MappingStrategy] == RelationalAnnotationNames.TpcMappingStrategy)
+        {
+            foreach (var storeGeneratedProperty in key.Properties.Where(
+                         p => (p.ValueGenerated & ValueGenerated.OnAdd) != 0
+                             && p.GetValueGenerationStrategy() == SqlServerValueGenerationStrategy.IdentityColumn))
+            {
+                logger.TpcStoreGeneratedIdentityWarning(storeGeneratedProperty);
             }
         }
     }
@@ -263,7 +287,14 @@ public class SqlServerModelValidator : RelationalModelValidator
                     temporalEntityType.DisplayName(), periodProperty.Name, nameof(DateTime)));
         }
 
-        const string expectedPeriodColumnName = "datetime2";
+        const string expectedPeriodColumnNameWithoutPrecision = "datetime2";
+        const string expectedPeriodColumnNameWithPrecision = "datetime2({0})";
+
+        var precision = periodProperty.GetPrecision();
+        var expectedPeriodColumnName = precision != null
+            ? string.Format(expectedPeriodColumnNameWithPrecision, precision.Value)
+            : expectedPeriodColumnNameWithoutPrecision;
+
         if (periodProperty.GetColumnType() != expectedPeriodColumnName)
         {
             throw new InvalidOperationException(
@@ -278,29 +309,11 @@ public class SqlServerModelValidator : RelationalModelValidator
                     temporalEntityType.DisplayName(), periodProperty.Name));
         }
 
-        if (temporalEntityType.GetTableName() is string tableName)
+        if (periodProperty.ValueGenerated != ValueGenerated.OnAddOrUpdate)
         {
-            var storeObjectIdentifier = StoreObjectIdentifier.Table(tableName, temporalEntityType.GetSchema());
-            var periodColumnName = periodProperty.GetColumnName(storeObjectIdentifier);
-
-            var propertiesMappedToPeriodColumn = temporalEntityType.GetProperties().Where(
-                p => p.Name != periodProperty.Name && p.GetColumnName(storeObjectIdentifier) == periodColumnName).ToList();
-            foreach (var propertyMappedToPeriodColumn in propertiesMappedToPeriodColumn)
-            {
-                if (propertyMappedToPeriodColumn.ValueGenerated != ValueGenerated.OnAddOrUpdate)
-                {
-                    throw new InvalidOperationException(
-                        SqlServerStrings.TemporalPropertyMappedToPeriodColumnMustBeValueGeneratedOnAddOrUpdate(
-                            temporalEntityType.DisplayName(), propertyMappedToPeriodColumn.Name, nameof(ValueGenerated.OnAddOrUpdate)));
-                }
-
-                if (propertyMappedToPeriodColumn.TryGetDefaultValue(out var _))
-                {
-                    throw new InvalidOperationException(
-                        SqlServerStrings.TemporalPropertyMappedToPeriodColumnCantHaveDefaultValue(
-                            temporalEntityType.DisplayName(), propertyMappedToPeriodColumn.Name));
-                }
-            }
+            throw new InvalidOperationException(
+                SqlServerStrings.TemporalPropertyMappedToPeriodColumnMustBeValueGeneratedOnAddOrUpdate(
+                    temporalEntityType.DisplayName(), periodProperty.Name, nameof(ValueGenerated.OnAddOrUpdate)));
         }
 
         // TODO: check that period property is excluded from query (once the annotation is added)
@@ -314,8 +327,7 @@ public class SqlServerModelValidator : RelationalModelValidator
     /// </summary>
     protected override void ValidateSharedTableCompatibility(
         IReadOnlyList<IEntityType> mappedTypes,
-        string tableName,
-        string? schema,
+        in StoreObjectIdentifier storeObject,
         IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
     {
         var firstMappedType = mappedTypes[0];
@@ -326,7 +338,7 @@ public class SqlServerModelValidator : RelationalModelValidator
             {
                 throw new InvalidOperationException(
                     SqlServerStrings.IncompatibleTableMemoryOptimizedMismatch(
-                        tableName, firstMappedType.DisplayName(), otherMappedType.DisplayName(),
+                        storeObject.DisplayName(), firstMappedType.DisplayName(), otherMappedType.DisplayName(),
                         isMemoryOptimized ? firstMappedType.DisplayName() : otherMappedType.DisplayName(),
                         !isMemoryOptimized ? firstMappedType.DisplayName() : otherMappedType.DisplayName()));
             }
@@ -355,9 +367,8 @@ public class SqlServerModelValidator : RelationalModelValidator
                 var periodStartProperty = mappedType.GetProperty(periodStartPropertyName!);
                 var periodEndProperty = mappedType.GetProperty(periodEndPropertyName!);
 
-                var storeObjectIdentifier = StoreObjectIdentifier.Table(tableName, mappedType.GetSchema());
-                var periodStartColumnName = periodStartProperty.GetColumnName(storeObjectIdentifier);
-                var periodEndColumnName = periodEndProperty.GetColumnName(storeObjectIdentifier);
+                var periodStartColumnName = periodStartProperty.GetColumnName(storeObject);
+                var periodEndColumnName = periodEndProperty.GetColumnName(storeObject);
 
                 if (expectedPeriodStartColumnName == null)
                 {
@@ -391,7 +402,7 @@ public class SqlServerModelValidator : RelationalModelValidator
             }
         }
 
-        base.ValidateSharedTableCompatibility(mappedTypes, tableName, schema, logger);
+        base.ValidateSharedTableCompatibility(mappedTypes, storeObject, logger);
     }
 
     /// <summary>
@@ -411,14 +422,14 @@ public class SqlServerModelValidator : RelationalModelValidator
 
         foreach (var property in mappedTypes.SelectMany(et => et.GetDeclaredProperties()))
         {
+            var columnName = property.GetColumnName(storeObject);
+            if (columnName == null)
+            {
+                continue;
+            }
+
             if (property.GetValueGenerationStrategy(storeObject) == SqlServerValueGenerationStrategy.IdentityColumn)
             {
-                var columnName = property.GetColumnName(storeObject);
-                if (columnName == null)
-                {
-                    continue;
-                }
-
                 identityColumns[columnName] = property;
             }
         }

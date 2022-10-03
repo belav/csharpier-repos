@@ -1,15 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using AutoMapper.UnitTests;
-using Microsoft.EntityFrameworkCore;
-using Shouldly;
-using Xunit;
+﻿namespace AutoMapper.IntegrationTests;
 
-namespace AutoMapper.IntegrationTests;
-
-public class ParameterizedQueries : AutoMapperSpecBase, IAsyncLifetime
+public class ParameterizedQueries : IntegrationTest<ParameterizedQueries.DatabaseInitializer>
 {
     public class Entity
     {
@@ -24,12 +15,12 @@ public class ParameterizedQueries : AutoMapperSpecBase, IAsyncLifetime
         public string UserName { get; set; }
     }
 
-    private class ClientContext : LocalDbContext
+    public class ClientContext : LocalDbContext
     {
         public DbSet<Entity> Entities { get; set; }
     }
 
-    private class DatabaseInitializer : CreateDatabaseIfNotExists<ClientContext>
+    public class DatabaseInitializer : DropCreateDatabaseAlways<ClientContext>
     {
         protected override void Seed(ClientContext context)
         {
@@ -98,13 +89,4 @@ public class ParameterizedQueries : AutoMapperSpecBase, IAsyncLifetime
             return base.VisitConstant(node);
         }
     }
-
-    public async Task InitializeAsync()
-    {
-        var initializer = new DatabaseInitializer();
-
-        await initializer.Migrate();
-    }
-
-    public Task DisposeAsync() => Task.CompletedTask;
 }

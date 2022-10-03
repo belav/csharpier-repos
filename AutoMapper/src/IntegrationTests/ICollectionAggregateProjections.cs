@@ -1,17 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
-using Shouldly;
-using Xunit;
-
-namespace AutoMapper.IntegrationTests;
-
-using UnitTests;
-using QueryableExtensions;
-using System.Collections.Generic;
-
-public class ICollectionAggregateProjections : AutoMapperSpecBase, IAsyncLifetime
+﻿namespace AutoMapper.IntegrationTests;
+public class ICollectionAggregateProjections : IntegrationTest<ICollectionAggregateProjections.DatabaseInitializer>
 {
     public class Customer
     {
@@ -79,15 +67,4 @@ public class ICollectionAggregateProjections : AutoMapperSpecBase, IAsyncLifetim
             result.ItemCodesSum.ShouldBe(9);
         }
     }
-
-
-    public async Task InitializeAsync()
-    {
-        var initializer = new DatabaseInitializer();
-
-        await initializer.Migrate();
-    }
-
-    public Task DisposeAsync() => Task.CompletedTask;
-
 }

@@ -25,36 +25,19 @@ namespace Microsoft.CodeAnalysis.Remote
         {
         }
 
-        public ValueTask<ImmutableArray<InheritanceMarginItem>> GetGlobalImportItemsAsync(
+        public ValueTask<ImmutableArray<InheritanceMarginItem>> GetInheritanceMarginItemsAsync(
             Checksum solutionChecksum,
             DocumentId documentId,
             TextSpan spanToSearch,
+            bool includeGlobalImports,
             bool frozenPartialSemantics,
             CancellationToken cancellationToken)
         {
-            return RunServiceAsync(solutionChecksum, solution =>
+            return RunServiceAsync(solutionChecksum, async solution =>
             {
-                var document = solution.GetRequiredDocument(documentId);
-                var service = (AbstractInheritanceMarginService)document.GetRequiredLanguageService<IInheritanceMarginService>();
-
-                return service.GetGlobalImportItemsAsync(document, spanToSearch, frozenPartialSemantics, cancellationToken);
-            }, cancellationToken);
-        }
-
-        public ValueTask<ImmutableArray<InheritanceMarginItem>> GetSymbolItemsAsync(
-            Checksum solutionChecksum,
-            ProjectId projectId,
-            DocumentId? documentId,
-            ImmutableArray<(SymbolKey symbolKey, int lineNumber)> symbolKeyAndLineNumbers,
-            bool frozenPartialSemantics,
-            CancellationToken cancellationToken)
-        {
-            return RunServiceAsync(solutionChecksum, solution =>
-            {
-                var project = solution.GetRequiredProject(projectId);
-                var document = solution.GetDocument(documentId);
-
-                return AbstractInheritanceMarginService.GetSymbolItemsAsync(project, document, symbolKeyAndLineNumbers, frozenPartialSemantics, cancellationToken);
+                var document = await solution.GetRequiredDocumentAsync(documentId, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
+                var service = document.GetRequiredLanguageService<IInheritanceMarginService>();
+                return await service.GetInheritanceMemberItemsAsync(document, spanToSearch, includeGlobalImports, frozenPartialSemantics, cancellationToken).ConfigureAwait(false);
             }, cancellationToken);
         }
     }

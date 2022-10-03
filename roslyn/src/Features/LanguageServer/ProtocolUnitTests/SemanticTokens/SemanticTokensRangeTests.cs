@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
 @"{|caret:|}// Comment
 static class C { }
 ";
-            using var testLspServer = await CreateTestLspServerAsync(markup);
+            await using var testLspServer = await CreateTestLspServerAsync(markup);
 
             var range = new LSP.Range { Start = new Position(0, 0), End = new Position(2, 0) };
             var results = await RunGetSemanticTokensRangeAsync(testLspServer, testLspServer.GetLocations("caret").First(), range);
@@ -50,7 +50,7 @@ static class C { }
 @"{|caret:|}// Comment
 static class C { }
 ";
-            using var testLspServer = await CreateTestLspServerAsync(markup);
+            await using var testLspServer = await CreateTestLspServerAsync(markup);
 
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
             var range = new LSP.Range { Start = new Position(0, 0), End = new Position(2, 0) };
@@ -85,7 +85,7 @@ static class C { }
 @"{|caret:|}// Comment
 static class C { }
 ";
-            using var testLspServer = await CreateTestLspServerAsync(markup);
+            await using var testLspServer = await CreateTestLspServerAsync(markup);
 
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
             var range = new LSP.Range { Start = new Position(1, 0), End = new Position(2, 0) };
@@ -120,7 +120,7 @@ static class C { }
 two
 three */ }
 ";
-            using var testLspServer = await CreateTestLspServerAsync(markup);
+            await using var testLspServer = await CreateTestLspServerAsync(markup);
 
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
             var range = new LSP.Range { Start = new Position(0, 0), End = new Position(4, 0) };
@@ -162,7 +162,7 @@ three"";
 }
 ";
 
-            using var testLspServer = await CreateTestLspServerAsync(markup);
+            await using var testLspServer = await CreateTestLspServerAsync(markup);
             var range = new LSP.Range { Start = new Position(0, 0), End = new Position(9, 0) };
             var results = await RunGetSemanticTokensRangeAsync(testLspServer, testLspServer.GetLocations("caret").First(), range);
 
@@ -195,7 +195,7 @@ three"";
 }
 ";
 
-            using var testLspServer = await CreateTestLspServerAsync(markup);
+            await using var testLspServer = await CreateTestLspServerAsync(markup);
 
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
             var range = new LSP.Range { Start = new Position(0, 0), End = new Position(9, 0) };
@@ -248,7 +248,7 @@ class C
 }
 ";
 
-            using var testLspServer = await CreateTestLspServerAsync(markup);
+            await using var testLspServer = await CreateTestLspServerAsync(markup);
 
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
             var range = new LSP.Range { Start = new Position(0, 0), End = new Position(9, 0) };
@@ -302,11 +302,9 @@ class C
         public void TestGetSemanticTokensRange_AssertCustomTokenTypes(string fieldName)
             => Assert.True(SemanticTokensHelpers.RoslynCustomTokenTypes.Contains(fieldName), $"Missing token type {fieldName}.");
 
-        public static IEnumerable<object[]> ClassificationTypeNamesToMatch => typeof(ClassificationTypeNames).GetAllFields().Where(
-            field => field.GetValue(null) is string value &&
-                !SemanticTokensHelpers.ClassificationTypeToSemanticTokenTypeMap.ContainsKey(value) &&
-                !ClassificationTypeNames.AdditiveTypeNames.Contains(value) &&
-                value is not ClassificationTypeNames.ReassignedVariable).Select(field => new object[] { (string)field.GetValue(null) });
+        public static IEnumerable<object[]> ClassificationTypeNamesToMatch => ClassificationTypeNames.AllTypeNames.Where(
+            type => !SemanticTokensHelpers.ClassificationTypeToSemanticTokenTypeMap.ContainsKey(type) &&
+                !ClassificationTypeNames.AdditiveTypeNames.Contains(type)).Select(field => new object[] { field });
 
     }
 }

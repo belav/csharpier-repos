@@ -149,29 +149,29 @@ namespace System.Numerics.Tests
         [Fact]
         public static void op_EqualityTest()
         {
-            Assert.False(EqualityOperatorsHelper<Complex, Complex>.op_Equality(-1.0, 1.0));
-            Assert.False(EqualityOperatorsHelper<Complex, Complex>.op_Equality(-MinNormal, 1.0));
-            Assert.False(EqualityOperatorsHelper<Complex, Complex>.op_Equality(-MaxSubnormal, 1.0));
-            Assert.False(EqualityOperatorsHelper<Complex, Complex>.op_Equality(-0.0, 1.0));
-            Assert.False(EqualityOperatorsHelper<Complex, Complex>.op_Equality(Complex.NaN, 1.0));
-            Assert.False(EqualityOperatorsHelper<Complex, Complex>.op_Equality(0.0, 1.0));
-            Assert.False(EqualityOperatorsHelper<Complex, Complex>.op_Equality(MaxSubnormal, 1.0));
-            Assert.False(EqualityOperatorsHelper<Complex, Complex>.op_Equality(MinNormal, 1.0));
-            Assert.True(EqualityOperatorsHelper<Complex, Complex>.op_Equality(1.0, 1.0));
+            Assert.False(EqualityOperatorsHelper<Complex, Complex, bool>.op_Equality(-1.0, 1.0));
+            Assert.False(EqualityOperatorsHelper<Complex, Complex, bool>.op_Equality(-MinNormal, 1.0));
+            Assert.False(EqualityOperatorsHelper<Complex, Complex, bool>.op_Equality(-MaxSubnormal, 1.0));
+            Assert.False(EqualityOperatorsHelper<Complex, Complex, bool>.op_Equality(-0.0, 1.0));
+            Assert.False(EqualityOperatorsHelper<Complex, Complex, bool>.op_Equality(Complex.NaN, 1.0));
+            Assert.False(EqualityOperatorsHelper<Complex, Complex, bool>.op_Equality(0.0, 1.0));
+            Assert.False(EqualityOperatorsHelper<Complex, Complex, bool>.op_Equality(MaxSubnormal, 1.0));
+            Assert.False(EqualityOperatorsHelper<Complex, Complex, bool>.op_Equality(MinNormal, 1.0));
+            Assert.True(EqualityOperatorsHelper<Complex, Complex, bool>.op_Equality(1.0, 1.0));
         }
 
         [Fact]
         public static void op_InequalityTest()
         {
-            Assert.True(EqualityOperatorsHelper<Complex, Complex>.op_Inequality(-1.0, 1.0));
-            Assert.True(EqualityOperatorsHelper<Complex, Complex>.op_Inequality(-MinNormal, 1.0));
-            Assert.True(EqualityOperatorsHelper<Complex, Complex>.op_Inequality(-MaxSubnormal, 1.0));
-            Assert.True(EqualityOperatorsHelper<Complex, Complex>.op_Inequality(-0.0, 1.0));
-            Assert.True(EqualityOperatorsHelper<Complex, Complex>.op_Inequality(Complex.NaN, 1.0));
-            Assert.True(EqualityOperatorsHelper<Complex, Complex>.op_Inequality(0.0, 1.0));
-            Assert.True(EqualityOperatorsHelper<Complex, Complex>.op_Inequality(MaxSubnormal, 1.0));
-            Assert.True(EqualityOperatorsHelper<Complex, Complex>.op_Inequality(MinNormal, 1.0));
-            Assert.False(EqualityOperatorsHelper<Complex, Complex>.op_Inequality(1.0, 1.0));
+            Assert.True(EqualityOperatorsHelper<Complex, Complex, bool>.op_Inequality(-1.0, 1.0));
+            Assert.True(EqualityOperatorsHelper<Complex, Complex, bool>.op_Inequality(-MinNormal, 1.0));
+            Assert.True(EqualityOperatorsHelper<Complex, Complex, bool>.op_Inequality(-MaxSubnormal, 1.0));
+            Assert.True(EqualityOperatorsHelper<Complex, Complex, bool>.op_Inequality(-0.0, 1.0));
+            Assert.True(EqualityOperatorsHelper<Complex, Complex, bool>.op_Inequality(Complex.NaN, 1.0));
+            Assert.True(EqualityOperatorsHelper<Complex, Complex, bool>.op_Inequality(0.0, 1.0));
+            Assert.True(EqualityOperatorsHelper<Complex, Complex, bool>.op_Inequality(MaxSubnormal, 1.0));
+            Assert.True(EqualityOperatorsHelper<Complex, Complex, bool>.op_Inequality(MinNormal, 1.0));
+            Assert.False(EqualityOperatorsHelper<Complex, Complex, bool>.op_Inequality(1.0, 1.0));
         }
 
         //
@@ -511,6 +511,7 @@ namespace System.Numerics.Tests
         }
 
         [Fact]
+        [ActiveIssue("https://github.com/dotnet/runtime/issues/69795", TestRuntimes.Mono)]
         public static void CreateCheckedFromUIntPtrTest()
         {
             if (Environment.Is64BitProcess)
@@ -756,6 +757,7 @@ namespace System.Numerics.Tests
         }
 
         [Fact]
+        [ActiveIssue("https://github.com/dotnet/runtime/issues/69795", TestRuntimes.Mono)]
         public static void CreateSaturatingFromUIntPtrTest()
         {
             if (Environment.Is64BitProcess)
@@ -1001,6 +1003,7 @@ namespace System.Numerics.Tests
         }
 
         [Fact]
+        [ActiveIssue("https://github.com/dotnet/runtime/issues/69795", TestRuntimes.Mono)]
         public static void CreateTruncatingFromUIntPtrTest()
         {
             if (Environment.Is64BitProcess)

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // ReSharper disable once CheckNamespace
+
 namespace Microsoft.EntityFrameworkCore;
 
 /// <summary>
@@ -25,7 +26,7 @@ public static class SqlServerTableBuilderExtensions
     {
         tableBuilder.Metadata.SetIsTemporal(temporal);
 
-        return new TemporalTableBuilder(tableBuilder.EntityTypeBuilder);
+        return new TemporalTableBuilder(tableBuilder.GetInfrastructure());
     }
 
     /// <summary>
@@ -44,7 +45,7 @@ public static class SqlServerTableBuilderExtensions
     {
         tableBuilder.Metadata.SetIsTemporal(true);
 
-        buildAction(new TemporalTableBuilder(tableBuilder.EntityTypeBuilder));
+        buildAction(new TemporalTableBuilder(tableBuilder.GetInfrastructure()));
 
         return tableBuilder;
     }
@@ -67,7 +68,7 @@ public static class SqlServerTableBuilderExtensions
     {
         tableBuilder.Metadata.SetIsTemporal(temporal);
 
-        return new TemporalTableBuilder<TEntity>(tableBuilder.EntityTypeBuilder);
+        return new TemporalTableBuilder<TEntity>(tableBuilder.GetInfrastructure<EntityTypeBuilder<TEntity>>());
     }
 
     /// <summary>
@@ -87,7 +88,7 @@ public static class SqlServerTableBuilderExtensions
         where TEntity : class
     {
         tableBuilder.Metadata.SetIsTemporal(true);
-        buildAction(new TemporalTableBuilder<TEntity>(tableBuilder.EntityTypeBuilder));
+        buildAction(new TemporalTableBuilder<TEntity>(tableBuilder.GetInfrastructure<EntityTypeBuilder<TEntity>>()));
 
         return tableBuilder;
     }
@@ -108,7 +109,7 @@ public static class SqlServerTableBuilderExtensions
     {
         tableBuilder.Metadata.SetIsTemporal(temporal);
 
-        return new OwnedNavigationTemporalTableBuilder(tableBuilder.OwnedNavigationBuilder);
+        return new OwnedNavigationTemporalTableBuilder(tableBuilder.GetInfrastructure());
     }
 
     /// <summary>
@@ -127,7 +128,7 @@ public static class SqlServerTableBuilderExtensions
     {
         tableBuilder.Metadata.SetIsTemporal(true);
 
-        buildAction(new OwnedNavigationTemporalTableBuilder(tableBuilder.OwnedNavigationBuilder));
+        buildAction(new OwnedNavigationTemporalTableBuilder(tableBuilder.GetInfrastructure()));
 
         return tableBuilder;
     }
@@ -139,18 +140,21 @@ public static class SqlServerTableBuilderExtensions
     ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
     ///     for more information.
     /// </remarks>
-    /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+    /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
+    /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
     /// <param name="temporal">A value indicating whether the table is temporal.</param>
     /// <returns>An object that can be used to configure the temporal table.</returns>
-    public static OwnedNavigationTemporalTableBuilder<TEntity> IsTemporal<TEntity>(
-        this OwnedNavigationTableBuilder<TEntity> tableBuilder,
+    public static OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity> IsTemporal<TOwnerEntity, TDependentEntity>(
+        this OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> tableBuilder,
         bool temporal = true)
-        where TEntity : class
+        where TOwnerEntity : class
+        where TDependentEntity : class
     {
         tableBuilder.Metadata.SetIsTemporal(temporal);
 
-        return new OwnedNavigationTemporalTableBuilder<TEntity>(tableBuilder.OwnedNavigationBuilder);
+        return new OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>(
+            tableBuilder.GetInfrastructure<OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>>());
     }
 
     /// <summary>
@@ -160,17 +164,103 @@ public static class SqlServerTableBuilderExtensions
     ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
     ///     for more information.
     /// </remarks>
-    /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+    /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
+    /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
     /// <param name="tableBuilder">The builder for the table being configured.</param>
     /// <param name="buildAction">An action that performs configuration of the temporal table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationTableBuilder<TEntity> IsTemporal<TEntity>(
-        this OwnedNavigationTableBuilder<TEntity> tableBuilder,
-        Action<OwnedNavigationTemporalTableBuilder<TEntity>> buildAction)
-        where TEntity : class
+    public static OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> IsTemporal<TOwnerEntity, TDependentEntity>(
+        this OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> tableBuilder,
+        Action<OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>> buildAction)
+        where TOwnerEntity : class
+        where TDependentEntity : class
     {
         tableBuilder.Metadata.SetIsTemporal(true);
-        buildAction(new OwnedNavigationTemporalTableBuilder<TEntity>(tableBuilder.OwnedNavigationBuilder));
+        buildAction(
+            new OwnedNavigationTemporalTableBuilder<TOwnerEntity, TDependentEntity>(
+                tableBuilder.GetInfrastructure<OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>>()));
+
+        return tableBuilder;
+    }
+
+    /// <summary>
+    ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
+    /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-memory-optimized">Using SQL Server memory-optimized tables with EF Core</see>
+    ///     for more information and examples.
+    /// </remarks>
+    /// <param name="tableBuilder">The builder for the table being configured.</param>
+    /// <param name="memoryOptimized">A value indicating whether the table is memory-optimized.</param>
+    /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+    public static TableBuilder IsMemoryOptimized(
+        this TableBuilder tableBuilder,
+        bool memoryOptimized = true)
+    {
+        tableBuilder.Metadata.SetIsMemoryOptimized(memoryOptimized);
+
+        return tableBuilder;
+    }
+
+    /// <summary>
+    ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
+    /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-memory-optimized">Using SQL Server memory-optimized tables with EF Core</see>
+    ///     for more information and examples.
+    /// </remarks>
+    /// <typeparam name="TEntity">The entity type being configured.</typeparam>
+    /// <param name="tableBuilder">The builder for the table being configured.</param>
+    /// <param name="memoryOptimized">A value indicating whether the table is memory-optimized.</param>
+    /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+    public static TableBuilder<TEntity> IsMemoryOptimized<TEntity>(
+        this TableBuilder<TEntity> tableBuilder,
+        bool memoryOptimized = true)
+        where TEntity : class
+    {
+        tableBuilder.Metadata.SetIsMemoryOptimized(memoryOptimized);
+
+        return tableBuilder;
+    }
+
+    /// <summary>
+    ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
+    /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-memory-optimized">Using SQL Server memory-optimized tables with EF Core</see>
+    ///     for more information and examples.
+    /// </remarks>
+    /// <param name="tableBuilder">The builder for the table being configured.</param>
+    /// <param name="memoryOptimized">A value indicating whether the table is memory-optimized.</param>
+    /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+    public static OwnedNavigationTableBuilder IsMemoryOptimized(
+        this OwnedNavigationTableBuilder tableBuilder,
+        bool memoryOptimized = true)
+    {
+        tableBuilder.Metadata.SetIsMemoryOptimized(memoryOptimized);
+
+        return tableBuilder;
+    }
+
+    /// <summary>
+    ///     Configures the table that the entity maps to when targeting SQL Server as memory-optimized.
+    /// </summary>
+    /// <remarks>
+    ///     See <see href="https://aka.ms/efcore-docs-memory-optimized">Using SQL Server memory-optimized tables with EF Core</see>
+    ///     for more information and examples.
+    /// </remarks>
+    /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
+    /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
+    /// <param name="tableBuilder">The builder for the table being configured.</param>
+    /// <param name="memoryOptimized">A value indicating whether the table is memory-optimized.</param>
+    /// <returns>The same builder instance so that multiple calls can be chained.</returns>
+    public static OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> IsMemoryOptimized<TOwnerEntity, TDependentEntity>(
+        this OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity> tableBuilder,
+        bool memoryOptimized = true)
+        where TOwnerEntity : class
+        where TDependentEntity : class
+    {
+        tableBuilder.Metadata.SetIsMemoryOptimized(memoryOptimized);
 
         return tableBuilder;
     }

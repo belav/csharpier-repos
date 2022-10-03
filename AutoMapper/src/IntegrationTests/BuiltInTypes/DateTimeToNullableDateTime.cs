@@ -1,14 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper.UnitTests;
-using Microsoft.EntityFrameworkCore;
-using Shouldly;
-using Xunit;
+﻿namespace AutoMapper.IntegrationTests.BuiltInTypes;
 
-namespace AutoMapper.IntegrationTests.BuiltInTypes;
-
-public class DateTimeToNullableDateTime : AutoMapperSpecBase, IAsyncLifetime
+public class DateTimeToNullableDateTime : IntegrationTest<DateTimeToNullableDateTime.DatabaseInitializer>
 {
     public class Parent
     {
@@ -45,13 +37,4 @@ public class DateTimeToNullableDateTime : AutoMapperSpecBase, IAsyncLifetime
             ProjectTo<ParentDto>(context.Parents).Single().Date.ShouldBe(_expected);
         }
     }
-
-    public async Task InitializeAsync()
-    {
-        var initializer = new DatabaseInitializer();
-
-        await initializer.Migrate();
-    }
-
-    public Task DisposeAsync() => Task.CompletedTask;
 }

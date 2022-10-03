@@ -37,6 +37,14 @@ public abstract class DatabindingTestBase<TFixture> : IClassFixture<TFixture>
         var drivers = context.Drivers;
         drivers.Load();
 
+        foreach (var driver in drivers.Local)
+        {
+            var proxy = (IF1Proxy)driver;
+            Assert.True(proxy.CreatedCalled);
+            Assert.True(proxy.InitializingCalled);
+            Assert.True(proxy.InitializedCalled);
+        }
+
         foreach (var driver in drivers.Local.Where(d => d.TeamId == DeletedTeam).ToList())
         {
             drivers.Remove(driver);
@@ -248,13 +256,31 @@ public abstract class DatabindingTestBase<TFixture> : IClassFixture<TFixture>
 
         Assert.Equal(TotalCount, local.Count);
 
-        foreach (var driver in context.Drivers.Local.Where(d => d.TeamId == UnchangedTeam).ToList())
+        var drivers = context.Drivers.Local.Where(d => d.TeamId == UnchangedTeam).ToList();
+
+        foreach (var driver in drivers)
         {
             context.Entry(driver).State = EntityState.Detached;
         }
 
         Assert.Equal(0, local.Count(d => d.TeamId == UnchangedTeam));
         Assert.Equal(TotalCount - UnchangedCount, local.Count);
+        foreach (var driver in drivers)
+        {
+            Assert.False(local.Contains(driver));
+        }
+
+        foreach (var driver in drivers)
+        {
+            Assert.Equal(EntityState.Detached, context.Entry(driver).State);
+        }
+
+        Assert.Equal(0, local.Count(d => d.TeamId == UnchangedTeam));
+        Assert.Equal(TotalCount - UnchangedCount, local.Count);
+        foreach (var driver in drivers)
+        {
+            Assert.False(local.Contains(driver));
+        }
     }
 
     [ConditionalTheory]

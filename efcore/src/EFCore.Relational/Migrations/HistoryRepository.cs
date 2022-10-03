@@ -77,7 +77,7 @@ public abstract class HistoryRepository : IHistoryRepository
         => _migrationIdColumnName ??= EnsureModel()
             .FindEntityType(typeof(HistoryRow))!
             .FindProperty(nameof(HistoryRow.MigrationId))!
-            .GetColumnBaseName();
+            .GetColumnName();
 
     private IModel EnsureModel()
     {
@@ -85,9 +85,8 @@ public abstract class HistoryRepository : IHistoryRepository
         {
             var conventionSet = Dependencies.ConventionSetBuilder.CreateConventionSet();
 
-            // Use public API to remove the convention, issue #214
-            ConventionSet.Remove(conventionSet.ModelInitializedConventions, typeof(DbSetFindingConvention));
-            ConventionSet.Remove(conventionSet.ModelInitializedConventions, typeof(RelationalDbFunctionAttributeConvention));
+            conventionSet.Remove(typeof(DbSetFindingConvention));
+            conventionSet.Remove(typeof(RelationalDbFunctionAttributeConvention));
 
             var modelBuilder = new ModelBuilder(conventionSet);
             modelBuilder.Entity<HistoryRow>(
@@ -111,7 +110,7 @@ public abstract class HistoryRepository : IHistoryRepository
         => _productVersionColumnName ??= EnsureModel()
             .FindEntityType(typeof(HistoryRow))!
             .FindProperty(nameof(HistoryRow.ProductVersion))!
-            .GetColumnBaseName();
+            .GetColumnName();
 
     /// <summary>
     ///     Overridden by database providers to generate SQL that tests for existence of the history table.

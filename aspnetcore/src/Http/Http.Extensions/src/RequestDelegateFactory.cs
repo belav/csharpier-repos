@@ -9,12 +9,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Metadata;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Logging;
@@ -45,7 +46,7 @@ public static partial class RequestDelegateFactory
     private static readonly MethodInfo ExecuteValueTaskOfStringMethod = typeof(RequestDelegateFactory).GetMethod(nameof(ExecuteValueTaskOfString), BindingFlags.NonPublic | BindingFlags.Static)!;
     private static readonly MethodInfo ExecuteTaskResultOfTMethod = typeof(RequestDelegateFactory).GetMethod(nameof(ExecuteTaskResult), BindingFlags.NonPublic | BindingFlags.Static)!;
     private static readonly MethodInfo ExecuteValueResultTaskOfTMethod = typeof(RequestDelegateFactory).GetMethod(nameof(ExecuteValueTaskResult), BindingFlags.NonPublic | BindingFlags.Static)!;
-    private static readonly MethodInfo ExecuteObjectReturnMethod = typeof(RequestDelegateFactory).GetMethod(nameof(ExecuteObjectReturn), BindingFlags.NonPublic | BindingFlags.Static)!;
+    private static readonly MethodInfo ExecuteAwaitedReturnMethod = typeof(RequestDelegateFactory).GetMethod(nameof(ExecuteAwaitedReturn), BindingFlags.NonPublic | BindingFlags.Static)!;
     private static readonly MethodInfo GetRequiredServiceMethod = typeof(ServiceProviderServiceExtensions).GetMethod(nameof(ServiceProviderServiceExtensions.GetRequiredService), BindingFlags.Public | BindingFlags.Static, new Type[] { typeof(IServiceProvider) })!;
     private static readonly MethodInfo GetServiceMethod = typeof(ServiceProviderServiceExtensions).GetMethod(nameof(ServiceProviderServiceExtensions.GetService), BindingFlags.Public | BindingFlags.Static, new Type[] { typeof(IServiceProvider) })!;
     private static readonly MethodInfo ResultWriteResponseAsyncMethod = typeof(RequestDelegateFactory).GetMethod(nameof(ExecuteResultWriteResponse), BindingFlags.NonPublic | BindingFlags.Static)!;
@@ -54,13 +55,14 @@ public static partial class RequestDelegateFactory
     private static readonly MethodInfo WrapObjectAsValueTaskMethod = typeof(RequestDelegateFactory).GetMethod(nameof(WrapObjectAsValueTask), BindingFlags.NonPublic | BindingFlags.Static)!;
     private static readonly MethodInfo TaskOfTToValueTaskOfObjectMethod = typeof(RequestDelegateFactory).GetMethod(nameof(TaskOfTToValueTaskOfObject), BindingFlags.NonPublic | BindingFlags.Static)!;
     private static readonly MethodInfo ValueTaskOfTToValueTaskOfObjectMethod = typeof(RequestDelegateFactory).GetMethod(nameof(ValueTaskOfTToValueTaskOfObject), BindingFlags.NonPublic | BindingFlags.Static)!;
-    private static readonly MethodInfo PopulateMetadataForParameterMethod = typeof(RequestDelegateFactory).GetMethod(nameof(PopulateMetadataForParameter), BindingFlags.NonPublic | BindingFlags.Static)!;
-    private static readonly MethodInfo PopulateMetadataForEndpointMethod = typeof(RequestDelegateFactory).GetMethod(nameof(PopulateMetadataForEndpoint), BindingFlags.NonPublic | BindingFlags.Static)!;
     private static readonly MethodInfo ArrayEmptyOfObjectMethod = typeof(Array).GetMethod(nameof(Array.Empty), BindingFlags.Public | BindingFlags.Static)!.MakeGenericMethod(new Type[] { typeof(object) });
 
-    // Call WriteAsJsonAsync<object?>() to serialize the runtime return type rather than the declared return type.
-    // https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-polymorphism
-    private static readonly MethodInfo JsonResultWriteResponseAsyncMethod = GetMethodInfo<Func<HttpResponse, object?, Task>>((response, value) => HttpResponseJsonExtensions.WriteAsJsonAsync<object?>(response, value, default));
+    private static readonly PropertyInfo QueryIndexerProperty = typeof(IQueryCollection).GetProperty("Item")!;
+    private static readonly PropertyInfo RouteValuesIndexerProperty = typeof(RouteValueDictionary).GetProperty("Item")!;
+    private static readonly PropertyInfo HeaderIndexerProperty = typeof(IHeaderDictionary).GetProperty("Item")!;
+    private static readonly PropertyInfo FormFilesIndexerProperty = typeof(IFormFileCollection).GetProperty("Item")!;
+
+    private static readonly MethodInfo JsonResultWriteResponseAsyncMethod = typeof(RequestDelegateFactory).GetMethod(nameof(WriteJsonResponse), BindingFlags.NonPublic | BindingFlags.Static)!;
 
     private static readonly MethodInfo LogParameterBindingFailedMethod = GetMethodInfo<Action<HttpContext, string, string, string, bool>>((httpContext, parameterType, parameterName, sourceValue, shouldThrow) =>
         Log.ParameterBindingFailed(httpContext, parameterType, parameterName, sourceValue, shouldThrow));
@@ -96,16 +98,38 @@ public static partial class RequestDelegateFactory
     private static readonly BinaryExpression TempSourceStringNullExpr = Expression.Equal(TempSourceStringExpr, Expression.Constant(null));
     private static readonly UnaryExpression TempSourceStringIsNotNullOrEmptyExpr = Expression.Not(Expression.Call(StringIsNullOrEmptyMethod, TempSourceStringExpr));
 
-    private static readonly ConstructorInfo DefaultRouteHandlerInvocationContextConstructor = typeof(DefaultRouteHandlerInvocationContext).GetConstructor(new[] { typeof(HttpContext), typeof(object[]) })!;
-    private static readonly MethodInfo RouteHandlerInvocationContextGetArgument = typeof(RouteHandlerInvocationContext).GetMethod(nameof(RouteHandlerInvocationContext.GetArgument))!;
-    private static readonly ParameterExpression FilterContextExpr = Expression.Parameter(typeof(RouteHandlerInvocationContext), "context");
-    private static readonly MemberExpression FilterContextHttpContextExpr = Expression.Property(FilterContextExpr, typeof(RouteHandlerInvocationContext).GetProperty(nameof(RouteHandlerInvocationContext.HttpContext))!);
+    private static readonly ConstructorInfo DefaultEndpointFilterInvocationContextConstructor = typeof(DefaultEndpointFilterInvocationContext).GetConstructor(new[] { typeof(HttpContext), typeof(object[]) })!;
+    private static readonly MethodInfo EndpointFilterInvocationContextGetArgument = typeof(EndpointFilterInvocationContext).GetMethod(nameof(EndpointFilterInvocationContext.GetArgument))!;
+    private static readonly PropertyInfo ListIndexer = typeof(IList<object>).GetProperty("Item")!;
+    private static readonly ParameterExpression FilterContextExpr = Expression.Parameter(typeof(EndpointFilterInvocationContext), "context");
+    private static readonly MemberExpression FilterContextHttpContextExpr = Expression.Property(FilterContextExpr, typeof(EndpointFilterInvocationContext).GetProperty(nameof(EndpointFilterInvocationContext.HttpContext))!);
+    private static readonly MemberExpression FilterContextArgumentsExpr = Expression.Property(FilterContextExpr, typeof(EndpointFilterInvocationContext).GetProperty(nameof(EndpointFilterInvocationContext.Arguments))!);
     private static readonly MemberExpression FilterContextHttpContextResponseExpr = Expression.Property(FilterContextHttpContextExpr, typeof(HttpContext).GetProperty(nameof(HttpContext.Response))!);
     private static readonly MemberExpression FilterContextHttpContextStatusCodeExpr = Expression.Property(FilterContextHttpContextResponseExpr, typeof(HttpResponse).GetProperty(nameof(HttpResponse.StatusCode))!);
-    private static readonly ParameterExpression InvokedFilterContextExpr = Expression.Parameter(typeof(RouteHandlerInvocationContext), "filterContext");
+    private static readonly ParameterExpression InvokedFilterContextExpr = Expression.Parameter(typeof(EndpointFilterInvocationContext), "filterContext");
 
-    private static readonly string[] DefaultAcceptsContentType = new[] { "application/json" };
+    private static readonly string[] DefaultAcceptsAndProducesContentType = new[] { JsonConstants.JsonContentType };
     private static readonly string[] FormFileContentType = new[] { "multipart/form-data" };
+    private static readonly string[] PlaintextContentType = new[] { "text/plain" };
+
+    /// <summary>
+    /// Returns metadata inferred automatically for the <see cref="RequestDelegate"/> created by <see cref="Create(Delegate, RequestDelegateFactoryOptions?, RequestDelegateMetadataResult?)"/>.
+    /// This includes metadata inferred by <see cref="IEndpointMetadataProvider"/> and <see cref="IEndpointParameterMetadataProvider"/> implemented by parameter and return types to the <paramref name="methodInfo"/>.
+    /// </summary>
+    /// <param name="methodInfo">The <see cref="MethodInfo"/> for the route handler to be passed to <see cref="Create(Delegate, RequestDelegateFactoryOptions?, RequestDelegateMetadataResult?)"/>.</param>
+    /// <param name="options">The options that will be used when calling <see cref="Create(Delegate, RequestDelegateFactoryOptions?, RequestDelegateMetadataResult?)"/>.</param>
+    /// <returns>The <see cref="RequestDelegateMetadataResult"/> to be passed to <see cref="Create(Delegate, RequestDelegateFactoryOptions?, RequestDelegateMetadataResult?)"/>.</returns>
+    [RequiresUnreferencedCode("RequestDelegateFactory performs object creation, serialization and deserialization on the delegates and its parameters. This cannot be statically analyzed.")]
+    public static RequestDelegateMetadataResult InferMetadata(MethodInfo methodInfo, RequestDelegateFactoryOptions? options = null)
+    {
+        var factoryContext = CreateFactoryContext(options);
+        factoryContext.ArgumentExpressions = CreateArgumentsAndInferMetadata(methodInfo, factoryContext);
+
+        return new RequestDelegateMetadataResult
+        {
+            EndpointMetadata = AsReadOnlyList(factoryContext.EndpointBuilder.Metadata),
+        };
+    }
 
     /// <summary>
     /// Creates a <see cref="RequestDelegate"/> implementation for <paramref name="handler"/>.
@@ -114,7 +138,26 @@ public static partial class RequestDelegateFactory
     /// <param name="options">The <see cref="RequestDelegateFactoryOptions"/> used to configure the behavior of the handler.</param>
     /// <returns>The <see cref="RequestDelegateResult"/>.</returns>
     [RequiresUnreferencedCode("RequestDelegateFactory performs object creation, serialization and deserialization on the delegates and its parameters. This cannot be statically analyzed.")]
-    public static RequestDelegateResult Create(Delegate handler, RequestDelegateFactoryOptions? options = null)
+    public static RequestDelegateResult Create(Delegate handler, RequestDelegateFactoryOptions? options)
+    {
+        return Create(handler, options, metadataResult: null);
+    }
+
+    /// <summary>
+    /// Creates a <see cref="RequestDelegate"/> implementation for <paramref name="handler"/>.
+    /// </summary>
+    /// <param name="handler">A request handler with any number of custom parameters that often produces a response with its return value.</param>
+    /// <param name="options">The <see cref="RequestDelegateFactoryOptions"/> used to configure the behavior of the handler.</param>
+    /// <param name="metadataResult">
+    /// The result returned from <see cref="InferMetadata(MethodInfo, RequestDelegateFactoryOptions?)"/> if that was used to inferring metadata before creating the final RequestDelegate.
+    /// If <see langword="null"/>, this call to <see cref="Create(Delegate, RequestDelegateFactoryOptions?, RequestDelegateMetadataResult?)"/> method will infer the metadata that
+    /// <see cref="InferMetadata(MethodInfo, RequestDelegateFactoryOptions?)"/> would have inferred for the same <see cref="Delegate.Method"/> and populate <see cref="RequestDelegateFactoryOptions.EndpointBuilder"/>
+    /// with that metadata. Otherwise, this metadata inference will be skipped as this step has already been done.
+    /// </param>
+    /// <returns>The <see cref="RequestDelegateResult"/>.</returns>
+    [RequiresUnreferencedCode("RequestDelegateFactory performs object creation, serialization and deserialization on the delegates and its parameters. This cannot be statically analyzed.")]
+    [SuppressMessage("ApiDesign", "RS0027:Public API with optional parameter(s) should have the most parameters amongst its public overloads.", Justification = "Required to maintain compatibility")]
+    public static RequestDelegateResult Create(Delegate handler, RequestDelegateFactoryOptions? options = null, RequestDelegateMetadataResult? metadataResult = null)
     {
         if (handler is null)
         {
@@ -127,13 +170,20 @@ public static partial class RequestDelegateFactory
             null => null,
         };
 
-        var factoryContext = CreateFactoryContext(options);
+        var factoryContext = CreateFactoryContext(options, metadataResult, handler);
 
         Expression<Func<HttpContext, object?>> targetFactory = (httpContext) => handler.Target;
-
         var targetableRequestDelegate = CreateTargetableRequestDelegate(handler.Method, targetExpression, factoryContext, targetFactory);
 
-        return new RequestDelegateResult(httpContext => targetableRequestDelegate(handler.Target, httpContext), factoryContext.Metadata);
+        RequestDelegate finalRequestDelegate = targetableRequestDelegate switch
+        {
+            // handler is a RequestDelegate that has not been modified by a filter. Short-circuit and return the original RequestDelegate back.
+            // It's possible a filter factory has still modified the endpoint metadata though.
+            null => (RequestDelegate)handler,
+            _ => httpContext => targetableRequestDelegate(handler.Target, httpContext),
+        };
+
+        return CreateRequestDelegateResult(finalRequestDelegate, factoryContext.EndpointBuilder);
     }
 
     /// <summary>
@@ -143,9 +193,28 @@ public static partial class RequestDelegateFactory
     /// <param name="targetFactory">Creates the <see langword="this"/> for the non-static method.</param>
     /// <param name="options">The <see cref="RequestDelegateFactoryOptions"/> used to configure the behavior of the handler.</param>
     /// <returns>The <see cref="RequestDelegate"/>.</returns>
-
     [RequiresUnreferencedCode("RequestDelegateFactory performs object creation, serialization and deserialization on the delegates and its parameters. This cannot be statically analyzed.")]
-    public static RequestDelegateResult Create(MethodInfo methodInfo, Func<HttpContext, object>? targetFactory = null, RequestDelegateFactoryOptions? options = null)
+    public static RequestDelegateResult Create(MethodInfo methodInfo, Func<HttpContext, object>? targetFactory, RequestDelegateFactoryOptions? options)
+    {
+        return Create(methodInfo, targetFactory, options, metadataResult: null);
+    }
+
+    /// <summary>
+    /// Creates a <see cref="RequestDelegate"/> implementation for <paramref name="methodInfo"/>.
+    /// </summary>
+    /// <param name="methodInfo">A request handler with any number of custom parameters that often produces a response with its return value.</param>
+    /// <param name="targetFactory">Creates the <see langword="this"/> for the non-static method.</param>
+    /// <param name="options">The <see cref="RequestDelegateFactoryOptions"/> used to configure the behavior of the handler.</param>
+    /// <param name="metadataResult">
+    /// The result returned from <see cref="InferMetadata(MethodInfo, RequestDelegateFactoryOptions?)"/> if that was used to inferring metadata before creating the final RequestDelegate.
+    /// If <see langword="null"/>, this call to <see cref="Create(Delegate, RequestDelegateFactoryOptions?, RequestDelegateMetadataResult?)"/> method will infer the metadata that
+    /// <see cref="InferMetadata(MethodInfo, RequestDelegateFactoryOptions?)"/> would have inferred for the same <see cref="Delegate.Method"/> and populate <see cref="RequestDelegateFactoryOptions.EndpointBuilder"/>
+    /// with that metadata. Otherwise, this metadata inference will be skipped as this step has already been done.
+    /// </param>
+    /// <returns>The <see cref="RequestDelegate"/>.</returns>
+    [RequiresUnreferencedCode("RequestDelegateFactory performs object creation, serialization and deserialization on the delegates and its parameters. This cannot be statically analyzed.")]
+    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    public static RequestDelegateResult Create(MethodInfo methodInfo, Func<HttpContext, object>? targetFactory = null, RequestDelegateFactoryOptions? options = null, RequestDelegateMetadataResult? metadataResult = null)
     {
         if (methodInfo is null)
         {
@@ -157,47 +226,83 @@ public static partial class RequestDelegateFactory
             throw new ArgumentException($"{nameof(methodInfo)} does not have a declaring type.");
         }
 
-        var factoryContext = CreateFactoryContext(options);
+        var factoryContext = CreateFactoryContext(options, metadataResult);
+        RequestDelegate finalRequestDelegate;
 
-        if (targetFactory is null)
+        if (methodInfo.IsStatic)
         {
-            if (methodInfo.IsStatic)
-            {
-                var untargetableRequestDelegate = CreateTargetableRequestDelegate(methodInfo, targetExpression: null, factoryContext);
+            var untargetableRequestDelegate = CreateTargetableRequestDelegate(methodInfo, targetExpression: null, factoryContext);
 
-                return new RequestDelegateResult(httpContext => untargetableRequestDelegate(null, httpContext), factoryContext.Metadata);
-            }
+            // CreateTargetableRequestDelegate can only return null given a RequestDelegate passed into the other RDF.Create() overload.
+            Debug.Assert(untargetableRequestDelegate is not null);
 
-            targetFactory = context => Activator.CreateInstance(methodInfo.DeclaringType)!;
+            finalRequestDelegate = httpContext => untargetableRequestDelegate(null, httpContext);
+        }
+        else
+        {
+            targetFactory ??= context => Activator.CreateInstance(methodInfo.DeclaringType)!;
+
+            var targetExpression = Expression.Convert(TargetExpr, methodInfo.DeclaringType);
+            var targetableRequestDelegate = CreateTargetableRequestDelegate(methodInfo, targetExpression, factoryContext, context => targetFactory(context));
+
+            // CreateTargetableRequestDelegate can only return null given a RequestDelegate passed into the other RDF.Create() overload.
+            Debug.Assert(targetableRequestDelegate is not null);
+
+            finalRequestDelegate = httpContext => targetableRequestDelegate(targetFactory(httpContext), httpContext);
         }
 
-        var targetExpression = Expression.Convert(TargetExpr, methodInfo.DeclaringType);
-        var targetableRequestDelegate = CreateTargetableRequestDelegate(methodInfo, targetExpression, factoryContext, context => targetFactory(context));
-
-        return new RequestDelegateResult(httpContext => targetableRequestDelegate(targetFactory(httpContext), httpContext), factoryContext.Metadata);
+        return CreateRequestDelegateResult(finalRequestDelegate, factoryContext.EndpointBuilder);
     }
 
-    private static FactoryContext CreateFactoryContext(RequestDelegateFactoryOptions? options)
+    private static RequestDelegateFactoryContext CreateFactoryContext(RequestDelegateFactoryOptions? options, RequestDelegateMetadataResult? metadataResult = null, Delegate? handler = null)
     {
-        var context = new FactoryContext
+        if (metadataResult?.CachedFactoryContext is not null)
         {
-            ServiceProvider = options?.ServiceProvider,
-            ServiceProviderIsService = options?.ServiceProvider?.GetService<IServiceProviderIsService>(),
+            metadataResult.CachedFactoryContext.MetadataAlreadyInferred = true;
+            // The handler was not passed in to the InferMetadata call that originally created this context.
+            metadataResult.CachedFactoryContext.Handler = handler;
+            return metadataResult.CachedFactoryContext;
+        }
+
+        var serviceProvider = options?.ServiceProvider ?? options?.EndpointBuilder?.ApplicationServices ?? EmptyServiceProvider.Instance;
+        var endpointBuilder = options?.EndpointBuilder ?? new RDFEndpointBuilder(serviceProvider);
+
+        var factoryContext = new RequestDelegateFactoryContext
+        {
+            Handler = handler,
+            ServiceProvider = serviceProvider,
+            ServiceProviderIsService = serviceProvider.GetService<IServiceProviderIsService>(),
             RouteParameters = options?.RouteParameterNames?.ToList(),
             ThrowOnBadRequest = options?.ThrowOnBadRequest ?? false,
             DisableInferredFromBody = options?.DisableInferBodyFromParameters ?? false,
-            Filters = options?.RouteHandlerFilterFactories?.ToList()
+            EndpointBuilder = endpointBuilder,
+            MetadataAlreadyInferred = metadataResult is not null,
         };
 
-        if (options?.InitialEndpointMetadata is not null)
-        {
-            context.Metadata.AddRange(options.InitialEndpointMetadata);
-        }
-
-        return context;
+        return factoryContext;
     }
 
-    private static Func<object?, HttpContext, Task> CreateTargetableRequestDelegate(MethodInfo methodInfo, Expression? targetExpression, FactoryContext factoryContext, Expression<Func<HttpContext, object?>>? targetFactory = null)
+    private static RequestDelegateResult CreateRequestDelegateResult(RequestDelegate finalRequestDelegate, EndpointBuilder endpointBuilder)
+    {
+        endpointBuilder.RequestDelegate = finalRequestDelegate;
+        return new RequestDelegateResult(finalRequestDelegate, AsReadOnlyList(endpointBuilder.Metadata));
+    }
+
+    private static IReadOnlyList<object> AsReadOnlyList(IList<object> metadata)
+    {
+        if (metadata is IReadOnlyList<object> readOnlyList)
+        {
+            return readOnlyList;
+        }
+
+        return new List<object>(metadata);
+    }
+
+    private static Func<object?, HttpContext, Task>? CreateTargetableRequestDelegate(
+        MethodInfo methodInfo,
+        Expression? targetExpression,
+        RequestDelegateFactoryContext factoryContext,
+        Expression<Func<HttpContext, object?>>? targetFactory = null)
     {
         // Non void return type
 
@@ -215,39 +320,41 @@ public static partial class RequestDelegateFactory
         //     return default;
         // }
 
-        // Add MethodInfo as first metadata item
-        factoryContext.Metadata.Insert(0, methodInfo);
+        // If ArgumentExpressions is not null here, it's guaranteed we have already inferred metadata and we can reuse a lot of work.
+        // The converse is not true. Metadata may have already been inferred even if ArgumentExpressions is null, but metadata
+        // inference is skipped internally if necessary.
+        factoryContext.ArgumentExpressions ??= CreateArgumentsAndInferMetadata(methodInfo, factoryContext);
 
-        // CreateArguments will add metadata inferred from parameter details
-        var arguments = CreateArguments(methodInfo.GetParameters(), factoryContext);
+        factoryContext.MethodCall = CreateMethodCall(methodInfo, targetExpression, factoryContext.ArgumentExpressions);
+        EndpointFilterDelegate? filterPipeline = null;
         var returnType = methodInfo.ReturnType;
-        factoryContext.MethodCall = CreateMethodCall(methodInfo, targetExpression, arguments);
-
-        // Add metadata provided by the delegate return type and parameter types next, this will be more specific than inferred metadata from above
-        AddTypeProvidedMetadata(methodInfo,
-            factoryContext.Metadata,
-            factoryContext.ServiceProvider,
-            CollectionsMarshal.AsSpan(factoryContext.Parameters));
-
-        // Add method attributes as metadata *after* any inferred metadata so that the attributes hava a higher specificity
-        AddMethodAttributesAsMetadata(methodInfo, factoryContext.Metadata);
 
         // If there are filters registered on the route handler, then we update the method call and
         // return type associated with the request to allow for the filter invocation pipeline.
-        if (factoryContext.Filters is { Count: > 0 })
+        if (factoryContext.EndpointBuilder.FilterFactories.Count > 0)
         {
-            var filterPipeline = CreateFilterPipeline(methodInfo, targetExpression, factoryContext, targetFactory);
-            Expression<Func<RouteHandlerInvocationContext, ValueTask<object?>>> invokePipeline = (context) => filterPipeline(context);
-            returnType = typeof(ValueTask<object?>);
-            // var filterContext = new RouteHandlerInvocationContext<string, int>(httpContext, name_local, int_local);
-            // invokePipeline.Invoke(filterContext);
-            factoryContext.MethodCall = Expression.Block(
-                new[] { InvokedFilterContextExpr },
-                Expression.Assign(
-                    InvokedFilterContextExpr,
-                    CreateRouteHandlerInvocationContextBase(factoryContext)),
-                    Expression.Invoke(invokePipeline, InvokedFilterContextExpr)
-                );
+            filterPipeline = CreateFilterPipeline(methodInfo, targetExpression, factoryContext, targetFactory);
+
+            if (filterPipeline is not null)
+            {
+                Expression<Func<EndpointFilterInvocationContext, ValueTask<object?>>> invokePipeline = (context) => filterPipeline(context);
+                returnType = typeof(ValueTask<object?>);
+                // var filterContext = new EndpointFilterInvocationContext<string, int>(httpContext, name_local, int_local);
+                // invokePipeline.Invoke(filterContext);
+                factoryContext.MethodCall = Expression.Block(
+                    new[] { InvokedFilterContextExpr },
+                    Expression.Assign(
+                        InvokedFilterContextExpr,
+                        CreateEndpointFilterInvocationContextBase(factoryContext, factoryContext.ArgumentExpressions)),
+                        Expression.Invoke(invokePipeline, InvokedFilterContextExpr)
+                    );
+            }
+        }
+
+        // return null for plain RequestDelegates that have not been modified by filters so we can just pass back the original RequestDelegate.
+        if (filterPipeline is null && factoryContext.Handler is RequestDelegate)
+        {
+            return null;
         }
 
         var responseWritingMethodCall = factoryContext.ParamCheckExpressions.Count > 0 ?
@@ -262,9 +369,26 @@ public static partial class RequestDelegateFactory
         return HandleRequestBodyAndCompileRequestDelegate(responseWritingMethodCall, factoryContext);
     }
 
-    private static RouteHandlerFilterDelegate CreateFilterPipeline(MethodInfo methodInfo, Expression? targetExpression, FactoryContext factoryContext, Expression<Func<HttpContext, object?>>? targetFactory)
+    private static Expression[] CreateArgumentsAndInferMetadata(MethodInfo methodInfo, RequestDelegateFactoryContext factoryContext)
     {
-        Debug.Assert(factoryContext.Filters is not null);
+        // Add any default accepts metadata. This does a lot of reflection and expression tree building, so the results are cached in RequestDelegateFactoryOptions.FactoryContext
+        // For later reuse in Create().
+        var args = CreateArguments(methodInfo.GetParameters(), factoryContext);
+
+        if (!factoryContext.MetadataAlreadyInferred)
+        {
+            PopulateBuiltInResponseTypeMetadata(methodInfo.ReturnType, factoryContext.EndpointBuilder);
+
+            // Add metadata provided by the delegate return type and parameter types next, this will be more specific than inferred metadata from above
+            EndpointMetadataPopulator.PopulateMetadata(methodInfo, factoryContext.EndpointBuilder, factoryContext.Parameters);
+        }
+
+        return args;
+    }
+
+    private static EndpointFilterDelegate? CreateFilterPipeline(MethodInfo methodInfo, Expression? targetExpression, RequestDelegateFactoryContext factoryContext, Expression<Func<HttpContext, object?>>? targetFactory)
+    {
+        Debug.Assert(factoryContext.EndpointBuilder.FilterFactories.Count > 0);
         // httpContext.Response.StatusCode >= 400
         // ? Task.CompletedTask
         // : {
@@ -278,10 +402,10 @@ public static partial class RequestDelegateFactory
         //  When `handler` returns an object, we generate the following wrapper
         //  to convert it to `ValueTask<object?>` as expected in the filter
         //  pipeline.
-        //      ValueTask<object?>.FromResult(handler(RouteHandlerInvocationContext.GetArgument<string>(0), RouteHandlerInvocationContext.GetArgument<int>(1)));
+        //      ValueTask<object?>.FromResult(handler(EndpointFilterInvocationContext.GetArgument<string>(0), EndpointFilterInvocationContext.GetArgument<int>(1)));
         //  When the `handler` is a generic Task or ValueTask we await the task and
         //  create a `ValueTask<object?> from the resulting value.
-        //      new ValueTask<object?>(await handler(RouteHandlerInvocationContext.GetArgument<string>(0), RouteHandlerInvocationContext.GetArgument<int>(1)));
+        //      new ValueTask<object?>(await handler(EndpointFilterInvocationContext.GetArgument<string>(0), EndpointFilterInvocationContext.GetArgument<int>(1)));
         //  When the `handler` returns a void or a void-returning Task, then we return an EmptyHttpResult
         //  to as a ValueTask<object?>
         // }
@@ -297,24 +421,33 @@ public static partial class RequestDelegateFactory
                         : Expression.Assign(TargetExpr, Expression.Invoke(targetFactory, FilterContextHttpContextExpr)),
                     handlerReturnMapping
                 );
-        var filteredInvocation = Expression.Lambda<RouteHandlerFilterDelegate>(
+        var filteredInvocation = Expression.Lambda<EndpointFilterDelegate>(
             Expression.Condition(
                 Expression.GreaterThanOrEqual(FilterContextHttpContextStatusCodeExpr, Expression.Constant(400)),
                 CompletedValueTaskExpr,
                 handlerInvocation),
             FilterContextExpr).Compile();
-        var routeHandlerContext = new RouteHandlerContext(
-            methodInfo,
-            new EndpointMetadataCollection(factoryContext.Metadata));
-
-        for (var i = factoryContext.Filters.Count - 1; i >= 0; i--)
+        var routeHandlerContext = new EndpointFilterFactoryContext
         {
-            var currentFilterFactory = factoryContext.Filters[i];
-            var nextFilter = filteredInvocation;
-            var currentFilter = currentFilterFactory(routeHandlerContext, nextFilter);
-            filteredInvocation = (RouteHandlerInvocationContext context) => currentFilter(context);
+            MethodInfo = methodInfo,
+            ApplicationServices = factoryContext.EndpointBuilder.ApplicationServices,
+        };
 
+        var initialFilteredInvocation = filteredInvocation;
+
+        for (var i = factoryContext.EndpointBuilder.FilterFactories.Count - 1; i >= 0; i--)
+        {
+            var currentFilterFactory = factoryContext.EndpointBuilder.FilterFactories[i];
+            filteredInvocation = currentFilterFactory(routeHandlerContext, filteredInvocation);
         }
+
+        // The filter factories have run without modifying per-request behavior, we can skip running the pipeline.
+        // If a plain old RequestDelegate was passed in (with no generic parameter), we can just return it back directly now.
+        if (ReferenceEquals(initialFilteredInvocation, filteredInvocation))
+        {
+            return null;
+        }
+
         return filteredInvocation;
     }
 
@@ -384,35 +517,42 @@ public static partial class RequestDelegateFactory
         return ExecuteAwaited(task);
     }
 
-    private static Expression CreateRouteHandlerInvocationContextBase(FactoryContext factoryContext)
+    private static Expression CreateEndpointFilterInvocationContextBase(RequestDelegateFactoryContext factoryContext, Expression[] arguments)
     {
         // In the event that a constructor matching the arity of the
         // provided parameters is not found, we fall back to using the
-        // non-generic implementation of RouteHandlerInvocationContext.
+        // non-generic implementation of EndpointFilterInvocationContext.
         Expression paramArray = factoryContext.BoxedArgs.Length > 0
             ? Expression.NewArrayInit(typeof(object), factoryContext.BoxedArgs)
             : Expression.Call(ArrayEmptyOfObjectMethod);
         var fallbackConstruction = Expression.New(
-            DefaultRouteHandlerInvocationContextConstructor,
+            DefaultEndpointFilterInvocationContextConstructor,
             new Expression[] { HttpContextExpr, paramArray });
 
-        var arguments = new Expression[factoryContext.ArgumentExpressions.Length + 1];
-        arguments[0] = HttpContextExpr;
-        factoryContext.ArgumentExpressions.CopyTo(arguments, 1);
+        if (!RuntimeFeature.IsDynamicCodeCompiled)
+        {
+            // For AOT platforms it's not possible to support the closed generic arguments that are based on the
+            // parameter arguments dynamically (for value types). In that case, fallback to boxing the argument list.
+            return fallbackConstruction;
+        }
+
+        var expandedArguments = new Expression[arguments.Length + 1];
+        expandedArguments[0] = HttpContextExpr;
+        arguments.CopyTo(expandedArguments, 1);
 
         var constructorType = factoryContext.ArgumentTypes?.Length switch
         {
-            1 => typeof(RouteHandlerInvocationContext<>),
-            2 => typeof(RouteHandlerInvocationContext<,>),
-            3 => typeof(RouteHandlerInvocationContext<,,>),
-            4 => typeof(RouteHandlerInvocationContext<,,,>),
-            5 => typeof(RouteHandlerInvocationContext<,,,,>),
-            6 => typeof(RouteHandlerInvocationContext<,,,,,>),
-            7 => typeof(RouteHandlerInvocationContext<,,,,,,>),
-            8 => typeof(RouteHandlerInvocationContext<,,,,,,,>),
-            9 => typeof(RouteHandlerInvocationContext<,,,,,,,,>),
-            10 => typeof(RouteHandlerInvocationContext<,,,,,,,,,>),
-            _ => typeof(DefaultRouteHandlerInvocationContext)
+            1 => typeof(EndpointFilterInvocationContext<>),
+            2 => typeof(EndpointFilterInvocationContext<,>),
+            3 => typeof(EndpointFilterInvocationContext<,,>),
+            4 => typeof(EndpointFilterInvocationContext<,,,>),
+            5 => typeof(EndpointFilterInvocationContext<,,,,>),
+            6 => typeof(EndpointFilterInvocationContext<,,,,,>),
+            7 => typeof(EndpointFilterInvocationContext<,,,,,,>),
+            8 => typeof(EndpointFilterInvocationContext<,,,,,,,>),
+            9 => typeof(EndpointFilterInvocationContext<,,,,,,,,>),
+            10 => typeof(EndpointFilterInvocationContext<,,,,,,,,,>),
+            _ => typeof(DefaultEndpointFilterInvocationContext)
         };
 
         if (constructorType.IsGenericType)
@@ -420,85 +560,19 @@ public static partial class RequestDelegateFactory
             var constructor = constructorType.MakeGenericType(factoryContext.ArgumentTypes!).GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance).SingleOrDefault();
             if (constructor == null)
             {
-                // new RouteHandlerInvocationContext(httpContext, (object)name_local, (object)int_local);
+                // new EndpointFilterInvocationContext(httpContext, (object)name_local, (object)int_local);
                 return fallbackConstruction;
             }
 
-            // new RouteHandlerInvocationContext<string, int>(httpContext, name_local, int_local);
-            return Expression.New(constructor, arguments);
+            // new EndpointFilterInvocationContext<string, int>(httpContext, name_local, int_local);
+            return Expression.New(constructor, expandedArguments);
         }
 
-        // new RouteHandlerInvocationContext(httpContext, (object)name_local, (object)int_local);
+        // new EndpointFilterInvocationContext(httpContext, (object)name_local, (object)int_local);
         return fallbackConstruction;
     }
 
-    private static void AddTypeProvidedMetadata(MethodInfo methodInfo, List<object> metadata, IServiceProvider? services, ReadOnlySpan<ParameterInfo> parameters)
-    {
-        object?[]? invokeArgs = null;
-
-        // Get metadata from parameter types
-        foreach (var parameter in parameters)
-        {
-            if (typeof(IEndpointParameterMetadataProvider).IsAssignableFrom(parameter.ParameterType))
-            {
-                // Parameter type implements IEndpointParameterMetadataProvider
-                var parameterContext = new EndpointParameterMetadataContext(parameter, metadata, services);
-                invokeArgs ??= new object[1];
-                invokeArgs[0] = parameterContext;
-                PopulateMetadataForParameterMethod.MakeGenericMethod(parameter.ParameterType).Invoke(null, invokeArgs);
-            }
-
-            if (typeof(IEndpointMetadataProvider).IsAssignableFrom(parameter.ParameterType))
-            {
-                // Parameter type implements IEndpointMetadataProvider
-                var context = new EndpointMetadataContext(methodInfo, metadata, services);
-                invokeArgs ??= new object[1];
-                invokeArgs[0] = context;
-                PopulateMetadataForEndpointMethod.MakeGenericMethod(parameter.ParameterType).Invoke(null, invokeArgs);
-            }
-        }
-
-        // Get metadata from return type
-        var returnType = methodInfo.ReturnType;
-        if (AwaitableInfo.IsTypeAwaitable(returnType, out var awaitableInfo))
-        {
-            returnType = awaitableInfo.ResultType;
-        }
-
-        if (returnType is not null && typeof(IEndpointMetadataProvider).IsAssignableFrom(returnType))
-        {
-            // Return type implements IEndpointMetadataProvider
-            var context = new EndpointMetadataContext(methodInfo, metadata, services);
-            invokeArgs ??= new object[1];
-            invokeArgs[0] = context;
-            PopulateMetadataForEndpointMethod.MakeGenericMethod(returnType).Invoke(null, invokeArgs);
-        }
-    }
-
-    private static void PopulateMetadataForParameter<T>(EndpointParameterMetadataContext parameterContext)
-        where T : IEndpointParameterMetadataProvider
-    {
-        T.PopulateMetadata(parameterContext);
-    }
-
-    private static void PopulateMetadataForEndpoint<T>(EndpointMetadataContext context)
-        where T : IEndpointMetadataProvider
-    {
-        T.PopulateMetadata(context);
-    }
-
-    private static void AddMethodAttributesAsMetadata(MethodInfo methodInfo, List<object> metadata)
-    {
-        var attributes = methodInfo.GetCustomAttributes();
-
-        // This can be null if the delegate is a dynamic method or compiled from an expression tree
-        if (attributes is not null)
-        {
-            metadata.AddRange(attributes);
-        }
-    }
-
-    private static Expression[] CreateArguments(ParameterInfo[]? parameters, FactoryContext factoryContext)
+    private static Expression[] CreateArguments(ParameterInfo[]? parameters, RequestDelegateFactoryContext factoryContext)
     {
         if (parameters is null || parameters.Length == 0)
         {
@@ -508,22 +582,37 @@ public static partial class RequestDelegateFactory
         var args = new Expression[parameters.Length];
 
         factoryContext.ArgumentTypes = new Type[parameters.Length];
-        factoryContext.ArgumentExpressions = new Expression[parameters.Length];
         factoryContext.BoxedArgs = new Expression[parameters.Length];
         factoryContext.Parameters = new List<ParameterInfo>(parameters);
+
+        var hasFilters = factoryContext.EndpointBuilder.FilterFactories.Count > 0;
 
         for (var i = 0; i < parameters.Length; i++)
         {
             args[i] = CreateArgument(parameters[i], factoryContext);
 
-            // Register expressions containing the boxed and unboxed variants
-            // of the route handler's arguments for use in RouteHandlerInvocationContext
-            // construction and route handler invocation.
-            // context.GetArgument<string>(0)
-            factoryContext.ContextArgAccess.Add(Expression.Call(FilterContextExpr, RouteHandlerInvocationContextGetArgument.MakeGenericMethod(parameters[i].ParameterType), Expression.Constant(i)));
-            // (string, name_local), (int, int_local)
+            // Only populate the context args if there are filters for this handler
+            if (hasFilters)
+            {
+                if (RuntimeFeature.IsDynamicCodeSupported)
+                {
+                    // Register expressions containing the boxed and unboxed variants
+                    // of the route handler's arguments for use in EndpointFilterInvocationContext
+                    // construction and route handler invocation.
+                    // context.GetArgument<string>(0)
+                    // (string, name_local), (int, int_local)
+                    factoryContext.ContextArgAccess.Add(Expression.Call(FilterContextExpr, EndpointFilterInvocationContextGetArgument.MakeGenericMethod(parameters[i].ParameterType), Expression.Constant(i)));
+                }
+                else
+                {
+                    // We box if dynamic code isn't supported
+                    factoryContext.ContextArgAccess.Add(Expression.Convert(
+                        Expression.Property(FilterContextArgumentsExpr, ListIndexer, Expression.Constant(i)),
+                    parameters[i].ParameterType));
+                }
+            }
+
             factoryContext.ArgumentTypes[i] = parameters[i].ParameterType;
-            factoryContext.ArgumentExpressions[i] = args[i];
             factoryContext.BoxedArgs[i] = Expression.Convert(args[i], typeof(object));
         }
 
@@ -548,11 +637,27 @@ public static partial class RequestDelegateFactory
         return args;
     }
 
-    private static Expression CreateArgument(ParameterInfo parameter, FactoryContext factoryContext)
+    private static Expression CreateArgument(ParameterInfo parameter, RequestDelegateFactoryContext factoryContext)
     {
         if (parameter.Name is null)
         {
             throw new InvalidOperationException($"Encountered a parameter of type '{parameter.ParameterType}' without a name. Parameters must have a name.");
+        }
+
+        if (parameter.ParameterType.IsByRef)
+        {
+            var attribute = "ref";
+
+            if (parameter.Attributes.HasFlag(ParameterAttributes.In))
+            {
+                attribute = "in";
+            }
+            else if (parameter.Attributes.HasFlag(ParameterAttributes.Out))
+            {
+                attribute = "out";
+            }
+
+            throw new NotSupportedException($"The by reference parameter '{attribute} {TypeNameHelper.GetTypeDisplayName(parameter.ParameterType, fullName: false)} {parameter.Name}' is not supported.");
         }
 
         var parameterCustomAttributes = parameter.GetCustomAttributes();
@@ -566,21 +671,31 @@ public static partial class RequestDelegateFactory
                 throw new InvalidOperationException($"'{routeName}' is not a route parameter.");
             }
 
-            return BindParameterFromProperty(parameter, RouteValuesExpr, routeName, factoryContext, "route");
+            return BindParameterFromProperty(parameter, RouteValuesExpr, RouteValuesIndexerProperty, routeName, factoryContext, "route");
         }
         else if (parameterCustomAttributes.OfType<IFromQueryMetadata>().FirstOrDefault() is { } queryAttribute)
         {
             factoryContext.TrackedParameters.Add(parameter.Name, RequestDelegateFactoryConstants.QueryAttribute);
-            return BindParameterFromProperty(parameter, QueryExpr, queryAttribute.Name ?? parameter.Name, factoryContext, "query string");
+            return BindParameterFromProperty(parameter, QueryExpr, QueryIndexerProperty, queryAttribute.Name ?? parameter.Name, factoryContext, "query string");
         }
         else if (parameterCustomAttributes.OfType<IFromHeaderMetadata>().FirstOrDefault() is { } headerAttribute)
         {
             factoryContext.TrackedParameters.Add(parameter.Name, RequestDelegateFactoryConstants.HeaderAttribute);
-            return BindParameterFromProperty(parameter, HeadersExpr, headerAttribute.Name ?? parameter.Name, factoryContext, "header");
+            return BindParameterFromProperty(parameter, HeadersExpr, HeaderIndexerProperty, headerAttribute.Name ?? parameter.Name, factoryContext, "header");
         }
         else if (parameterCustomAttributes.OfType<IFromBodyMetadata>().FirstOrDefault() is { } bodyAttribute)
         {
             factoryContext.TrackedParameters.Add(parameter.Name, RequestDelegateFactoryConstants.BodyAttribute);
+
+            if (parameter.ParameterType == typeof(Stream))
+            {
+                return RequestStreamExpr;
+            }
+            else if (parameter.ParameterType == typeof(PipeReader))
+            {
+                return RequestPipeReaderExpr;
+            }
+
             return BindParameterFromBody(parameter, bodyAttribute.AllowEmpty, factoryContext);
         }
         else if (parameterCustomAttributes.OfType<IFromFormMetadata>().FirstOrDefault() is { } formAttribute)
@@ -671,12 +786,12 @@ public static partial class RequestDelegateFactory
                     // We're in the fallback case and we have a parameter and route parameter match so don't fallback
                     // to query string in this case
                     factoryContext.TrackedParameters.Add(parameter.Name, RequestDelegateFactoryConstants.RouteParameter);
-                    return BindParameterFromProperty(parameter, RouteValuesExpr, parameter.Name, factoryContext, "route");
+                    return BindParameterFromProperty(parameter, RouteValuesExpr, RouteValuesIndexerProperty, parameter.Name, factoryContext, "route");
                 }
                 else
                 {
                     factoryContext.TrackedParameters.Add(parameter.Name, RequestDelegateFactoryConstants.QueryStringParameter);
-                    return BindParameterFromProperty(parameter, QueryExpr, parameter.Name, factoryContext, "query string");
+                    return BindParameterFromProperty(parameter, QueryExpr, QueryIndexerProperty, parameter.Name, factoryContext, "query string");
                 }
             }
 
@@ -686,12 +801,13 @@ public static partial class RequestDelegateFactory
         else if (factoryContext.DisableInferredFromBody && (
                  (parameter.ParameterType.IsArray && ParameterBindingMethodCache.HasTryParseMethod(parameter.ParameterType.GetElementType()!)) ||
                  parameter.ParameterType == typeof(string[]) ||
-                 parameter.ParameterType == typeof(StringValues)))
+                 parameter.ParameterType == typeof(StringValues) ||
+                 parameter.ParameterType == typeof(StringValues?)))
         {
-            // We only infer parameter types if you have an array of TryParsables/string[]/StringValues, and DisableInferredFromBody is true
+            // We only infer parameter types if you have an array of TryParsables/string[]/StringValues/StringValues?, and DisableInferredFromBody is true
 
             factoryContext.TrackedParameters.Add(parameter.Name, RequestDelegateFactoryConstants.QueryStringParameter);
-            return BindParameterFromProperty(parameter, QueryExpr, parameter.Name, factoryContext, "query string");
+            return BindParameterFromProperty(parameter, QueryExpr, QueryIndexerProperty, parameter.Name, factoryContext, "query string");
         }
         else
         {
@@ -722,7 +838,7 @@ public static partial class RequestDelegateFactory
 
     // If we're calling TryParse or validating parameter optionality and
     // wasParamCheckFailure indicates it failed, set a 400 StatusCode instead of calling the method.
-    private static Expression CreateParamCheckingResponseWritingMethodCall(Type returnType, FactoryContext factoryContext)
+    private static Expression CreateParamCheckingResponseWritingMethodCall(Type returnType, RequestDelegateFactoryContext factoryContext)
     {
         // {
         //     string tempSourceString;
@@ -774,7 +890,7 @@ public static partial class RequestDelegateFactory
 
         // If filters have been registered, we set the `wasParamCheckFailure` property
         // but do not return from the invocation to allow the filters to run.
-        if (factoryContext.Filters is { Count: > 0 })
+        if (factoryContext.EndpointBuilder.FilterFactories.Count > 0)
         {
             // if (wasParamCheckFailure)
             // {
@@ -810,6 +926,47 @@ public static partial class RequestDelegateFactory
         return Expression.Block(localVariables, checkParamAndCallMethod);
     }
 
+    private static void PopulateBuiltInResponseTypeMetadata(Type returnType, EndpointBuilder builder)
+    {
+        if (returnType.IsByRefLike)
+        {
+            throw GetUnsupportedReturnTypeException(returnType);
+        }
+
+        if (returnType == typeof(Task) || returnType == typeof(ValueTask))
+        {
+            returnType = typeof(void);
+        }
+        else if (AwaitableInfo.IsTypeAwaitable(returnType, out _))
+        {
+            var genericTypeDefinition = returnType.IsGenericType ? returnType.GetGenericTypeDefinition() : null;
+
+            if (genericTypeDefinition == typeof(Task<>) || genericTypeDefinition == typeof(ValueTask<>))
+            {
+                returnType = returnType.GetGenericArguments()[0];
+            }
+            else
+            {
+                throw GetUnsupportedReturnTypeException(returnType);
+            }
+        }
+
+        // Skip void returns and IResults. IResults might implement IEndpointMetadataProvider but otherwise we don't know what it might do.
+        if (returnType == typeof(void) || typeof(IResult).IsAssignableFrom(returnType))
+        {
+            return;
+        }
+
+        if (returnType == typeof(string))
+        {
+            builder.Metadata.Add(ProducesResponseTypeMetadata.CreateUnvalidated(type: null, statusCode: 200, PlaintextContentType));
+        }
+        else
+        {
+            builder.Metadata.Add(ProducesResponseTypeMetadata.CreateUnvalidated(returnType, statusCode: 200, DefaultAcceptsAndProducesContentType));
+        }
+    }
+
     private static Expression AddResponseWritingToMethodCall(Expression methodCall, Type returnType)
     {
         // Exact request delegate match
@@ -819,7 +976,7 @@ public static partial class RequestDelegateFactory
         }
         else if (returnType == typeof(object))
         {
-            return Expression.Call(ExecuteObjectReturnMethod, methodCall, HttpContextExpr);
+            return Expression.Call(ExecuteAwaitedReturnMethod, methodCall, HttpContextExpr);
         }
         else if (returnType == typeof(ValueTask<object>))
         {
@@ -904,7 +1061,7 @@ public static partial class RequestDelegateFactory
             else
             {
                 // TODO: Handle custom awaitables
-                throw new NotSupportedException($"Unsupported return type: {returnType}");
+                throw GetUnsupportedReturnTypeException(returnType);
             }
         }
         else if (typeof(IResult).IsAssignableFrom(returnType))
@@ -920,18 +1077,22 @@ public static partial class RequestDelegateFactory
         {
             return Expression.Call(StringResultWriteResponseAsyncMethod, HttpContextExpr, methodCall);
         }
+        else if (returnType.IsByRefLike)
+        {
+            throw GetUnsupportedReturnTypeException(returnType);
+        }
         else if (returnType.IsValueType)
         {
             var box = Expression.TypeAs(methodCall, typeof(object));
-            return Expression.Call(JsonResultWriteResponseAsyncMethod, HttpResponseExpr, box, Expression.Constant(CancellationToken.None));
+            return Expression.Call(JsonResultWriteResponseAsyncMethod, HttpResponseExpr, box);
         }
         else
         {
-            return Expression.Call(JsonResultWriteResponseAsyncMethod, HttpResponseExpr, methodCall, Expression.Constant(CancellationToken.None));
+            return Expression.Call(JsonResultWriteResponseAsyncMethod, HttpResponseExpr, methodCall);
         }
     }
 
-    private static Func<object?, HttpContext, Task> HandleRequestBodyAndCompileRequestDelegate(Expression responseWritingMethodCall, FactoryContext factoryContext)
+    private static Func<object?, HttpContext, Task> HandleRequestBodyAndCompileRequestDelegate(Expression responseWritingMethodCall, RequestDelegateFactoryContext factoryContext)
     {
         if (factoryContext.JsonRequestBodyParameter is null && !factoryContext.ReadForm)
         {
@@ -972,7 +1133,7 @@ public static partial class RequestDelegateFactory
         }
     }
 
-    private static Func<object?, HttpContext, Task> HandleRequestBodyAndCompileRequestDelegateForJson(Expression responseWritingMethodCall, FactoryContext factoryContext)
+    private static Func<object?, HttpContext, Task> HandleRequestBodyAndCompileRequestDelegateForJson(Expression responseWritingMethodCall, RequestDelegateFactoryContext factoryContext)
     {
         Debug.Assert(factoryContext.JsonRequestBodyParameter is not null, "factoryContext.JsonRequestBodyParameter is null for a JSON body.");
 
@@ -1096,7 +1257,7 @@ public static partial class RequestDelegateFactory
 
     private static Func<object?, HttpContext, Task> HandleRequestBodyAndCompileRequestDelegateForForm(
         Expression responseWritingMethodCall,
-        FactoryContext factoryContext)
+        RequestDelegateFactoryContext factoryContext)
     {
         Debug.Assert(factoryContext.FirstFormRequestBodyParameter is not null, "factoryContext.FirstFormRequestBodyParameter is null for a form body.");
 
@@ -1182,8 +1343,6 @@ public static partial class RequestDelegateFactory
                     return (null, false);
                 }
 
-                ThrowIfRequestIsAuthenticated(httpContext);
-
                 try
                 {
                     formValue = await httpContext.Request.ReadFormAsync();
@@ -1203,47 +1362,30 @@ public static partial class RequestDelegateFactory
 
             return (formValue, true);
         }
-
-        static void ThrowIfRequestIsAuthenticated(HttpContext httpContext)
-        {
-            if (httpContext.Connection.ClientCertificate is not null)
-            {
-                throw new BadHttpRequestException(
-                    "Support for binding parameters from an HTTP request's form is not currently supported " +
-                    "if the request is associated with a client certificate. Use of an HTTP request form is " +
-                    "not currently secure for HTTP requests in scenarios which require authentication.");
-            }
-
-            if (!StringValues.IsNullOrEmpty(httpContext.Request.Headers.Authorization))
-            {
-                throw new BadHttpRequestException(
-                    "Support for binding parameters from an HTTP request's form is not currently supported " +
-                    "if the request contains an \"Authorization\" HTTP request header. Use of an HTTP request form is " +
-                    "not currently secure for HTTP requests in scenarios which require authentication.");
-            }
-
-            if (!StringValues.IsNullOrEmpty(httpContext.Request.Headers.Cookie))
-            {
-                throw new BadHttpRequestException(
-                    "Support for binding parameters from an HTTP request's form is not currently supported " +
-                    "if the request contains a \"Cookie\" HTTP request header. Use of an HTTP request form is " +
-                    "not currently secure for HTTP requests in scenarios which require authentication.");
-            }
-        }
     }
 
-    private static Expression GetValueFromProperty(Expression sourceExpression, string key, Type? returnType = null)
+    private static Expression GetValueFromProperty(MemberExpression sourceExpression, PropertyInfo itemProperty, string key, Type? returnType = null)
     {
-        var itemProperty = sourceExpression.Type.GetProperty("Item");
         var indexArguments = new[] { Expression.Constant(key) };
         var indexExpression = Expression.MakeIndex(sourceExpression, itemProperty, indexArguments);
         return Expression.Convert(indexExpression, returnType ?? typeof(string));
     }
 
-    private static Expression BindParameterFromProperties(ParameterInfo parameter, FactoryContext factoryContext)
+    private static Expression BindParameterFromProperties(ParameterInfo parameter, RequestDelegateFactoryContext factoryContext)
     {
+        var parameterType = parameter.ParameterType;
+        var isNullable = Nullable.GetUnderlyingType(parameterType) != null ||
+            factoryContext.NullabilityContext.Create(parameter)?.ReadState == NullabilityState.Nullable;
+
+        if (isNullable)
+        {
+            throw new InvalidOperationException($"The nullable type '{TypeNameHelper.GetTypeDisplayName(parameter.ParameterType, fullName: false)}' is not supported, mark the parameter as non-nullable.");
+        }
+
         var argumentExpression = Expression.Variable(parameter.ParameterType, $"{parameter.Name}_local");
-        var (constructor, parameters) = ParameterBindingMethodCache.FindConstructor(parameter.ParameterType);
+        var (constructor, parameters) = ParameterBindingMethodCache.FindConstructor(parameterType);
+
+        Expression initExpression;
 
         if (constructor is not null && parameters is { Length: > 0 })
         {
@@ -1259,10 +1401,7 @@ public static partial class RequestDelegateFactory
                 factoryContext.Parameters.Add(parameterInfo);
             }
 
-            factoryContext.ParamCheckExpressions.Add(
-                Expression.Assign(
-                    argumentExpression,
-                    Expression.New(constructor, constructorArguments)));
+            initExpression = Expression.New(constructor, constructorArguments);
         }
         else
         {
@@ -1272,7 +1411,7 @@ public static partial class RequestDelegateFactory
             //      arg_local.Property[n] = expression[n],
             //  }
 
-            var properties = parameter.ParameterType.GetProperties();
+            var properties = parameterType.GetProperties();
             var bindings = new List<MemberBinding>(properties.Length);
 
             for (var i = 0; i < properties.Length; i++)
@@ -1287,14 +1426,14 @@ public static partial class RequestDelegateFactory
             }
 
             var newExpression = constructor is null ?
-                Expression.New(parameter.ParameterType) :
+                Expression.New(parameterType) :
                 Expression.New(constructor);
 
-            factoryContext.ParamCheckExpressions.Add(
-                Expression.Assign(
-                    argumentExpression,
-                    Expression.MemberInit(newExpression, bindings)));
+            initExpression = Expression.MemberInit(newExpression, bindings);
         }
+
+        factoryContext.ParamCheckExpressions.Add(
+            Expression.Assign(argumentExpression, initExpression));
 
         factoryContext.TrackedParameters.Add(parameter.Name!, RequestDelegateFactoryConstants.PropertyAsParameter);
         factoryContext.ExtraLocals.Add(argumentExpression);
@@ -1302,7 +1441,7 @@ public static partial class RequestDelegateFactory
         return argumentExpression;
     }
 
-    private static Expression BindParameterFromService(ParameterInfo parameter, FactoryContext factoryContext)
+    private static Expression BindParameterFromService(ParameterInfo parameter, RequestDelegateFactoryContext factoryContext)
     {
         var isOptional = IsOptionalParameter(parameter, factoryContext);
 
@@ -1313,20 +1452,20 @@ public static partial class RequestDelegateFactory
         return Expression.Call(GetRequiredServiceMethod.MakeGenericMethod(parameter.ParameterType), RequestServicesExpr);
     }
 
-    private static Expression BindParameterFromValue(ParameterInfo parameter, Expression valueExpression, FactoryContext factoryContext, string source)
+    private static Expression BindParameterFromValue(ParameterInfo parameter, Expression valueExpression, RequestDelegateFactoryContext factoryContext, string source)
     {
-        var isOptional = IsOptionalParameter(parameter, factoryContext);
+        if (parameter.ParameterType == typeof(string) || parameter.ParameterType == typeof(string[])
+            || parameter.ParameterType == typeof(StringValues) || parameter.ParameterType == typeof(StringValues?))
+        {
+            return BindParameterFromExpression(parameter, valueExpression, factoryContext, source);
+        }
 
+        var isOptional = IsOptionalParameter(parameter, factoryContext);
         var argument = Expression.Variable(parameter.ParameterType, $"{parameter.Name}_local");
 
         var parameterTypeNameConstant = Expression.Constant(TypeNameHelper.GetTypeDisplayName(parameter.ParameterType, fullName: false));
         var parameterNameConstant = Expression.Constant(parameter.Name);
         var sourceConstant = Expression.Constant(source);
-
-        if (parameter.ParameterType == typeof(string) || parameter.ParameterType == typeof(string[]) || parameter.ParameterType == typeof(StringValues))
-        {
-            return BindParameterFromExpression(parameter, valueExpression, factoryContext, source);
-        }
 
         factoryContext.UsingTempSourceString = true;
 
@@ -1543,7 +1682,7 @@ public static partial class RequestDelegateFactory
     private static Expression BindParameterFromExpression(
         ParameterInfo parameter,
         Expression valueExpression,
-        FactoryContext factoryContext,
+        RequestDelegateFactoryContext factoryContext,
         string source)
     {
         var nullability = factoryContext.NullabilityContext.Create(parameter);
@@ -1577,6 +1716,8 @@ public static partial class RequestDelegateFactory
                 )
             );
 
+            // NOTE: when StringValues is used as a parameter, value["some_unpresent_parameter"] returns StringValue.Empty, and it's equivalent to (string?)null
+
             factoryContext.ExtraLocals.Add(argument);
             factoryContext.ParamCheckExpressions.Add(checkRequiredStringParameterBlock);
             return argument;
@@ -1585,6 +1726,16 @@ public static partial class RequestDelegateFactory
         // Allow nullable parameters that don't have a default value
         if (nullability.ReadState != NullabilityState.NotNull && !parameter.HasDefaultValue)
         {
+            if (parameter.ParameterType == typeof(StringValues?))
+            {
+                // when Nullable<StringValues> is used and the actual value is StringValues.Empty, we should pass in a Nullable<StringValues>
+                return Expression.Block(
+                    Expression.Condition(Expression.Equal(valueExpression, Expression.Convert(Expression.Constant(StringValues.Empty), parameter.ParameterType)),
+                            Expression.Convert(Expression.Constant(null), parameter.ParameterType),
+                            valueExpression
+                        )
+                    );
+            }
             return valueExpression;
         }
 
@@ -1600,22 +1751,23 @@ public static partial class RequestDelegateFactory
                 Expression.Convert(Expression.Constant(parameter.DefaultValue), parameter.ParameterType)));
     }
 
-    private static Expression BindParameterFromProperty(ParameterInfo parameter, MemberExpression property, string key, FactoryContext factoryContext, string source) =>
-        BindParameterFromValue(parameter, GetValueFromProperty(property, key, GetExpressionType(parameter.ParameterType)), factoryContext, source);
+    private static Expression BindParameterFromProperty(ParameterInfo parameter, MemberExpression property, PropertyInfo itemProperty, string key, RequestDelegateFactoryContext factoryContext, string source) =>
+        BindParameterFromValue(parameter, GetValueFromProperty(property, itemProperty, key, GetExpressionType(parameter.ParameterType)), factoryContext, source);
 
     private static Type? GetExpressionType(Type type) =>
         type.IsArray ? typeof(string[]) :
         type == typeof(StringValues) ? typeof(StringValues) :
+        type == typeof(StringValues?) ? typeof(StringValues?) :
         null;
 
-    private static Expression BindParameterFromRouteValueOrQueryString(ParameterInfo parameter, string key, FactoryContext factoryContext)
+    private static Expression BindParameterFromRouteValueOrQueryString(ParameterInfo parameter, string key, RequestDelegateFactoryContext factoryContext)
     {
-        var routeValue = GetValueFromProperty(RouteValuesExpr, key);
-        var queryValue = GetValueFromProperty(QueryExpr, key);
+        var routeValue = GetValueFromProperty(RouteValuesExpr, RouteValuesIndexerProperty, key);
+        var queryValue = GetValueFromProperty(QueryExpr, QueryIndexerProperty, key);
         return BindParameterFromValue(parameter, Expression.Coalesce(routeValue, queryValue), factoryContext, "route or query string");
     }
 
-    private static Expression BindParameterFromBindAsync(ParameterInfo parameter, FactoryContext factoryContext)
+    private static Expression BindParameterFromBindAsync(ParameterInfo parameter, RequestDelegateFactoryContext factoryContext)
     {
         // We reference the boundValues array by parameter index here
         var isOptional = IsOptionalParameter(parameter, factoryContext);
@@ -1658,9 +1810,19 @@ public static partial class RequestDelegateFactory
         return Expression.Convert(boundValueExpr, parameter.ParameterType);
     }
 
+    private static void AddInferredAcceptsMetadata(RequestDelegateFactoryContext factoryContext, Type type, string[] contentTypes)
+    {
+        if (factoryContext.MetadataAlreadyInferred)
+        {
+            return;
+        }
+
+        factoryContext.EndpointBuilder.Metadata.Add(new AcceptsMetadata(type, factoryContext.AllowEmptyRequestBody, contentTypes));
+    }
+
     private static Expression BindParameterFromFormFiles(
         ParameterInfo parameter,
-        FactoryContext factoryContext)
+        RequestDelegateFactoryContext factoryContext)
     {
         if (factoryContext.FirstFormRequestBodyParameter is null)
         {
@@ -1672,7 +1834,7 @@ public static partial class RequestDelegateFactory
         // Do not duplicate the metadata if there are multiple form parameters
         if (!factoryContext.ReadForm)
         {
-            factoryContext.Metadata.Add(new AcceptsMetadata(parameter.ParameterType, factoryContext.AllowEmptyRequestBody, FormFileContentType));
+            AddInferredAcceptsMetadata(factoryContext, parameter.ParameterType, FormFileContentType);
         }
 
         factoryContext.ReadForm = true;
@@ -1683,7 +1845,7 @@ public static partial class RequestDelegateFactory
     private static Expression BindParameterFromFormFile(
         ParameterInfo parameter,
         string key,
-        FactoryContext factoryContext,
+        RequestDelegateFactoryContext factoryContext,
         string trackedParameterSource)
     {
         if (factoryContext.FirstFormRequestBodyParameter is null)
@@ -1696,17 +1858,17 @@ public static partial class RequestDelegateFactory
         // Do not duplicate the metadata if there are multiple form parameters
         if (!factoryContext.ReadForm)
         {
-            factoryContext.Metadata.Add(new AcceptsMetadata(parameter.ParameterType, factoryContext.AllowEmptyRequestBody, FormFileContentType));
+            AddInferredAcceptsMetadata(factoryContext, parameter.ParameterType, FormFileContentType);
         }
 
         factoryContext.ReadForm = true;
 
-        var valueExpression = GetValueFromProperty(FormFilesExpr, key, typeof(IFormFile));
+        var valueExpression = GetValueFromProperty(FormFilesExpr, FormFilesIndexerProperty, key, typeof(IFormFile));
 
         return BindParameterFromExpression(parameter, valueExpression, factoryContext, "form file");
     }
 
-    private static Expression BindParameterFromBody(ParameterInfo parameter, bool allowEmpty, FactoryContext factoryContext)
+    private static Expression BindParameterFromBody(ParameterInfo parameter, bool allowEmpty, RequestDelegateFactoryContext factoryContext)
     {
         if (factoryContext.JsonRequestBodyParameter is not null)
         {
@@ -1726,7 +1888,7 @@ public static partial class RequestDelegateFactory
 
         factoryContext.JsonRequestBodyParameter = parameter;
         factoryContext.AllowEmptyRequestBody = allowEmpty || isOptional;
-        factoryContext.Metadata.Add(new AcceptsMetadata(parameter.ParameterType, factoryContext.AllowEmptyRequestBody, DefaultAcceptsContentType));
+        AddInferredAcceptsMetadata(factoryContext, parameter.ParameterType, DefaultAcceptsAndProducesContentType);
 
         if (!factoryContext.AllowEmptyRequestBody)
         {
@@ -1790,7 +1952,7 @@ public static partial class RequestDelegateFactory
         return Expression.Convert(BodyValueExpr, parameter.ParameterType);
     }
 
-    private static bool IsOptionalParameter(ParameterInfo parameter, FactoryContext factoryContext)
+    private static bool IsOptionalParameter(ParameterInfo parameter, RequestDelegateFactoryContext factoryContext)
     {
         if (parameter is PropertyAsParameterInfo argument)
         {
@@ -1831,12 +1993,12 @@ public static partial class RequestDelegateFactory
     {
         static async Task ExecuteAwaited(ValueTask<object> valueTask, HttpContext httpContext)
         {
-            await ExecuteObjectReturn(await valueTask, httpContext);
+            await ExecuteAwaitedReturn(await valueTask, httpContext);
         }
 
         if (valueTask.IsCompletedSuccessfully)
         {
-            return ExecuteObjectReturn(valueTask.GetAwaiter().GetResult(), httpContext);
+            return ExecuteAwaitedReturn(valueTask.GetAwaiter().GetResult(), httpContext);
         }
 
         return ExecuteAwaited(valueTask, httpContext);
@@ -1846,45 +2008,21 @@ public static partial class RequestDelegateFactory
     {
         static async Task ExecuteAwaited(Task<object> task, HttpContext httpContext)
         {
-            await ExecuteObjectReturn(await task, httpContext);
+            await ExecuteAwaitedReturn(await task, httpContext);
         }
 
         if (task.IsCompletedSuccessfully)
         {
-            return ExecuteObjectReturn(task.GetAwaiter().GetResult(), httpContext);
+            return ExecuteAwaitedReturn(task.GetAwaiter().GetResult(), httpContext);
         }
 
         return ExecuteAwaited(task, httpContext);
     }
 
-    private static Task ExecuteObjectReturn(object obj, HttpContext httpContext)
+    private static Task ExecuteAwaitedReturn(object obj, HttpContext httpContext)
     {
-        if (obj is Task<object> taskObj)
-        {
-            return ExecuteTaskOfObject(taskObj, httpContext);
-        }
-        else if (obj is ValueTask<object> valueTaskObj)
-        {
-            return ExecuteValueTaskOfObject(valueTaskObj, httpContext);
-        }
-        else if (obj is Task<IResult?> task)
-        {
-            return ExecuteTaskResult(task, httpContext);
-        }
-        else if (obj is ValueTask<IResult?> valueTask)
-        {
-            return ExecuteValueTaskResult(valueTask, httpContext);
-        }
-        else if (obj is Task<string?> taskString)
-        {
-            return ExecuteTaskOfString(taskString, httpContext);
-        }
-        else if (obj is ValueTask<string?> valueTaskString)
-        {
-            return ExecuteValueTaskOfString(valueTaskString, httpContext);
-        }
         // Terminal built ins
-        else if (obj is IResult result)
+        if (obj is IResult result)
         {
             return ExecuteResultWriteResponse(result, httpContext);
         }
@@ -1896,8 +2034,7 @@ public static partial class RequestDelegateFactory
         else
         {
             // Otherwise, we JSON serialize when we reach the terminal state
-            // Call WriteAsJsonAsync<object?>() to serialize the runtime return type rather than the declared return type.
-            return httpContext.Response.WriteAsJsonAsync<object?>(obj);
+            return WriteJsonResponse(httpContext.Response, obj);
         }
     }
 
@@ -1907,14 +2044,12 @@ public static partial class RequestDelegateFactory
 
         static async Task ExecuteAwaited(Task<T> task, HttpContext httpContext)
         {
-            // Call WriteAsJsonAsync<object?>() to serialize the runtime return type rather than the declared return type.
-            await httpContext.Response.WriteAsJsonAsync<object?>(await task);
+            await WriteJsonResponse(httpContext.Response, await task);
         }
 
         if (task.IsCompletedSuccessfully)
         {
-            // Call WriteAsJsonAsync<object?>() to serialize the runtime return type rather than the declared return type.
-            return httpContext.Response.WriteAsJsonAsync<object?>(task.GetAwaiter().GetResult());
+            return WriteJsonResponse(httpContext.Response, task.GetAwaiter().GetResult());
         }
 
         return ExecuteAwaited(task, httpContext);
@@ -1997,14 +2132,12 @@ public static partial class RequestDelegateFactory
     {
         static async Task ExecuteAwaited(ValueTask<T> task, HttpContext httpContext)
         {
-            // Call WriteAsJsonAsync<object?>() to serialize the runtime return type rather than the declared return type.
-            await httpContext.Response.WriteAsJsonAsync<object?>(await task);
+            await WriteJsonResponse(httpContext.Response, await task);
         }
 
         if (task.IsCompletedSuccessfully)
         {
-            // Call WriteAsJsonAsync<object?>() to serialize the runtime return type rather than the declared return type.
-            return httpContext.Response.WriteAsJsonAsync<object?>(task.GetAwaiter().GetResult());
+            return WriteJsonResponse(httpContext.Response, task.GetAwaiter().GetResult());
         }
 
         return ExecuteAwaited(task, httpContext);
@@ -2054,43 +2187,19 @@ public static partial class RequestDelegateFactory
         await EnsureRequestResultNotNull(result).ExecuteAsync(httpContext);
     }
 
-    private sealed class FactoryContext
+    private static Task WriteJsonResponse(HttpResponse response, object? value)
     {
-        // Options
-        public IServiceProvider? ServiceProvider { get; init; }
-        public IServiceProviderIsService? ServiceProviderIsService { get; init; }
-        public List<string>? RouteParameters { get; init; }
-        public bool ThrowOnBadRequest { get; init; }
-        public bool DisableInferredFromBody { get; init; }
+        // Call WriteAsJsonAsync() with the runtime type to serialize the runtime type rather than the declared type
+        // and avoid source generators issues.
+        // https://github.com/dotnet/aspnetcore/issues/43894
+        // https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-polymorphism
+        return HttpResponseJsonExtensions.WriteAsJsonAsync(response, value, value is null ? typeof(object) : value.GetType(), default);
 
-        // Temporary State
-        public ParameterInfo? JsonRequestBodyParameter { get; set; }
-        public bool AllowEmptyRequestBody { get; set; }
+    }
 
-        public bool UsingTempSourceString { get; set; }
-        public List<ParameterExpression> ExtraLocals { get; } = new();
-        public List<Expression> ParamCheckExpressions { get; } = new();
-        public List<Func<HttpContext, ValueTask<object?>>> ParameterBinders { get; } = new();
-
-        public Dictionary<string, string> TrackedParameters { get; } = new();
-        public bool HasMultipleBodyParameters { get; set; }
-        public bool HasInferredBody { get; set; }
-
-        public List<object> Metadata { get; internal set; } = new();
-
-        public NullabilityInfoContext NullabilityContext { get; } = new();
-
-        public bool ReadForm { get; set; }
-        public ParameterInfo? FirstFormRequestBodyParameter { get; set; }
-        // Properties for constructing and managing filters
-        public List<Expression> ContextArgAccess { get; } = new();
-        public Expression? MethodCall { get; set; }
-        public Type[] ArgumentTypes { get; set; } = Array.Empty<Type>();
-        public Expression[] ArgumentExpressions { get; set; } = Array.Empty<Expression>();
-        public Expression[] BoxedArgs { get; set;  } = Array.Empty<Expression>();
-        public List<Func<RouteHandlerContext, RouteHandlerFilterDelegate, RouteHandlerFilterDelegate>>? Filters { get; init; }
-
-        public List<ParameterInfo> Parameters { get; set; } = new();
+    private static NotSupportedException GetUnsupportedReturnTypeException(Type returnType)
+    {
+        return new NotSupportedException($"Unsupported return type: {TypeNameHelper.GetTypeDisplayName(returnType)}");
     }
 
     private static class RequestDelegateFactoryConstants
@@ -2277,7 +2386,7 @@ public static partial class RequestDelegateFactory
         httpContext.Response.ContentType ??= "text/plain; charset=utf-8";
     }
 
-    private static string BuildErrorMessageForMultipleBodyParameters(FactoryContext factoryContext)
+    private static string BuildErrorMessageForMultipleBodyParameters(RequestDelegateFactoryContext factoryContext)
     {
         var errorMessage = new StringBuilder();
         errorMessage.AppendLine("Failure to infer one or more parameters.");
@@ -2294,7 +2403,7 @@ public static partial class RequestDelegateFactory
         return errorMessage.ToString();
     }
 
-    private static string BuildErrorMessageForInferredBodyParameter(FactoryContext factoryContext)
+    private static string BuildErrorMessageForInferredBodyParameter(RequestDelegateFactoryContext factoryContext)
     {
         var errorMessage = new StringBuilder();
         errorMessage.AppendLine("Body was inferred but the method does not allow inferred body parameters.");
@@ -2311,7 +2420,7 @@ public static partial class RequestDelegateFactory
         return errorMessage.ToString();
     }
 
-    private static string BuildErrorMessageForFormAndJsonBodyParameters(FactoryContext factoryContext)
+    private static string BuildErrorMessageForFormAndJsonBodyParameters(RequestDelegateFactoryContext factoryContext)
     {
         var errorMessage = new StringBuilder();
         errorMessage.AppendLine("An action cannot use both form and JSON body parameters.");
@@ -2325,7 +2434,7 @@ public static partial class RequestDelegateFactory
         return errorMessage.ToString();
     }
 
-    private static void FormatTrackedParameters(FactoryContext factoryContext, StringBuilder errorMessage)
+    private static void FormatTrackedParameters(RequestDelegateFactoryContext factoryContext, StringBuilder errorMessage)
     {
         foreach (var kv in factoryContext.TrackedParameters)
         {
@@ -2349,5 +2458,24 @@ public static partial class RequestDelegateFactory
         {
             return Task.CompletedTask;
         }
+    }
+
+    private sealed class RDFEndpointBuilder : EndpointBuilder
+    {
+        public RDFEndpointBuilder(IServiceProvider applicationServices)
+        {
+            ApplicationServices = applicationServices;
+        }
+
+        public override Endpoint Build()
+        {
+            throw new NotSupportedException();
+        }
+    }
+
+    private sealed class EmptyServiceProvider : IServiceProvider
+    {
+        public static EmptyServiceProvider Instance { get; } = new EmptyServiceProvider();
+        public object? GetService(Type serviceType) => null;
     }
 }

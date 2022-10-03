@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using AutoMapper.QueryableExtensions;
-using AutoMapper.UnitTests;
-using Microsoft.EntityFrameworkCore;
-using Shouldly;
-using Xunit;
+﻿using System.Text.RegularExpressions;
 
 namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
@@ -27,7 +16,7 @@ public static class Ext
 
 // Example of Value Type mapped to appropriate Nullable
 
-public class ProjectionWithExplicitExpansion : AutoMapperSpecBase, IAsyncLifetime
+public class ProjectionWithExplicitExpansion : IntegrationTest<ProjectionWithExplicitExpansion.DatabaseInitializer>
 {
     public class SourceDeepInner
     {
@@ -82,7 +71,7 @@ public class ProjectionWithExplicitExpansion : AutoMapperSpecBase, IAsyncLifetim
 
     private static readonly Source _iqf = _iq.First();
 
-    public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
+    public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
     {
         protected override void Seed(Context context)
         {
@@ -224,13 +213,4 @@ public class ProjectionWithExplicitExpansion : AutoMapperSpecBase, IAsyncLifetim
             sqlSelect.SqlShouldNotSelectColumn(nameof(_iqf.Desc));   dto.Desc.ShouldBeNull();
         }
     }
-
-    public async Task InitializeAsync()
-    {
-        var initializer = new DatabaseInitializer();
-
-        await initializer.Migrate();
-    }
-
-    public Task DisposeAsync() => Task.CompletedTask;
 }

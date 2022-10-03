@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
-using System.CommandLine.Builder;
 using System.CommandLine.Help;
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
@@ -379,7 +378,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Help_default_sections_can_be_wrapped()
         {
-            Command command = new Command("test")
+            Command command = new("test")
             {
                 new Option<string>("--option", "option description")
             };

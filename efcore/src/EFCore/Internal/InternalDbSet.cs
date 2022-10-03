@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -14,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class InternalDbSet<TEntity> :
+public class InternalDbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity> :
     DbSet<TEntity>,
     IQueryable<TEntity>,
     IAsyncEnumerable<TEntity>,
@@ -370,7 +371,7 @@ public class InternalDbSet<TEntity> :
         foreach (var entity in entities)
         {
             await SetEntityStateAsync(
-                    stateManager.GetOrCreateEntry(entity),
+                    stateManager.GetOrCreateEntry(entity, EntityType),
                     EntityState.Added,
                     cancellationToken)
                 .ConfigureAwait(false);
@@ -425,6 +426,26 @@ public class InternalDbSet<TEntity> :
     /// </summary>
     public override void UpdateRange(IEnumerable<TEntity> entities)
         => SetEntityStates(Check.NotNull(entities, nameof(entities)), EntityState.Modified);
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    public override EntityEntry<TEntity> Entry(TEntity entity)
+    {
+        Check.NotNull(entity, nameof(entity));
+
+        var entry = EntryWithoutDetectChanges(entity);
+
+        if (_context.ChangeTracker.AutoDetectChangesEnabled)
+        {
+            entry.DetectChanges();
+        }
+
+        return entry;
+    }
 
     private IEntityFinder<TEntity> Finder
         => (IEntityFinder<TEntity>)_context.GetDependencies().EntityFinderFactory.Create(EntityType);
@@ -499,7 +520,7 @@ public class InternalDbSet<TEntity> :
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     void IResettableService.ResetState()
-        => _localView = null;
+        => _localView?.Reset();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -507,8 +528,6 @@ public class InternalDbSet<TEntity> :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     Task IResettableService.ResetStateAsync(CancellationToken cancellationToken)
     {
         ((IResettableService)this).ResetState();

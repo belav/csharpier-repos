@@ -648,6 +648,7 @@ WHERE "
         GetColumns(connection, tables, filter, viewFilter, typeAliases, databaseCollation);
         GetIndexes(connection, tables, filter);
         GetForeignKeys(connection, tables, filter);
+        GetTriggers(connection, tables, filter);
 
         foreach (var table in tables)
         {
@@ -682,9 +683,8 @@ SELECT
     [cc].[is_persisted] AS [computed_is_persisted],
     CAST([e].[value] AS nvarchar(MAX)) AS [comment],
     [c].[collation_name],
-    [c].[is_sparse]";
-
-        commandText += @"FROM
+    [c].[is_sparse]
+FROM
 (
     SELECT[v].[name], [v].[object_id], [v].[schema_id]
     FROM [sys].[views] v WHERE ";
@@ -1291,6 +1291,45 @@ ORDER BY [table_schema], [table_name], [f].[name], [fc].[constraint_column_id]";
                         table.ForeignKeys.Add(foreignKey);
                     }
                 }
+            }
+        }
+    }
+
+    private void GetTriggers(DbConnection connection, IReadOnlyList<DatabaseTable> tables, string tableFilter)
+    {
+        using var command = connection.CreateCommand();
+        command.CommandText = @"
+SELECT
+    SCHEMA_NAME([t].[schema_id]) AS [table_schema],
+    [t].[name] AS [table_name],
+    [tr].[name] AS [trigger_name]
+FROM [sys].[triggers] AS [tr]
+JOIN [sys].[tables] AS [t] ON [tr].[parent_id] = [t].[object_id]
+WHERE "
+            + tableFilter
+            + @"
+ORDER BY [table_schema], [table_name], [tr].[name]";
+
+        using var reader = command.ExecuteReader();
+        var tableGroups = reader.Cast<DbDataRecord>()
+            .GroupBy(
+                ddr => (tableSchema: ddr.GetValueOrDefault<string>("table_schema"),
+                    tableName: ddr.GetFieldValue<string>("table_name")));
+
+        foreach (var tableGroup in tableGroups)
+        {
+            var tableSchema = tableGroup.Key.tableSchema;
+            var tableName = tableGroup.Key.tableName;
+
+            var table = tables.Single(t => t.Schema == tableSchema && t.Name == tableName);
+
+            foreach (var triggerRecord in tableGroup)
+            {
+                var triggerName = triggerRecord.GetFieldValue<string>("trigger_name");
+
+                // We don't actually scaffold anything beyond the fact that there's a trigger with a given name.
+                // This is to modify the SaveChanges logic to not use OUTPUT without INTO, which is incompatible with triggers.
+                table.Triggers.Add(new DatabaseTrigger { Name = triggerName });
             }
         }
     }

@@ -3231,11 +3231,13 @@ ORDER BY c[""City""], c[""CustomerID""]");
         AssertSql();
     }
 
-    public override async Task Select_DTO_constructor_distinct_with_collection_projection_translated_to_server_with_binding_after_client_eval(bool async)
+    public override async Task
+        Select_DTO_constructor_distinct_with_collection_projection_translated_to_server_with_binding_after_client_eval(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
         await AssertTranslationFailed(
-            () => base.Select_DTO_constructor_distinct_with_collection_projection_translated_to_server_with_binding_after_client_eval(async));
+            () => base
+                .Select_DTO_constructor_distinct_with_collection_projection_translated_to_server_with_binding_after_client_eval(async));
 
         AssertSql();
     }
@@ -4138,10 +4140,16 @@ WHERE (c[""Discriminator""] = ""Customer"")");
         AssertSql();
     }
 
-
     public override async Task String_include_on_incorrect_property_throws(bool async)
     {
         await base.String_include_on_incorrect_property_throws(async);
+
+        AssertSql();
+    }
+
+    public override async Task EF_Property_include_on_incorrect_property_throws(bool async)
+    {
+        await base.EF_Property_include_on_incorrect_property_throws(async);
 
         AssertSql();
     }

@@ -53,7 +53,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
             : base(IDEDiagnosticIds.UseSimpleUsingStatementDiagnosticId,
                    EnforceOnBuildValues.UseSimpleUsingStatement,
                    CSharpCodeStyleOptions.PreferSimpleUsingStatement,
-                   LanguageNames.CSharp,
                    new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_simple_using_statement), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
                    new LocalizableResourceString(nameof(CSharpAnalyzersResources.using_statement_can_be_simplified), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
         {
@@ -155,7 +154,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseSimpleUsingStatement
         }
 
         private static bool DeclaredLocalCausesCollision(ILookup<string, ISymbol> symbolNameToExistingSymbol, ImmutableArray<ILocalSymbol> locals)
-            => locals.Any(local => symbolNameToExistingSymbol[local.Name].Any(otherLocal => !local.Equals(otherLocal)));
+            => locals.Any(static (local, symbolNameToExistingSymbol) => symbolNameToExistingSymbol[local.Name].Any(otherLocal => !local.Equals(otherLocal)), symbolNameToExistingSymbol);
 
         private static bool PreservesSemantics(
             BlockSyntax parentBlock,

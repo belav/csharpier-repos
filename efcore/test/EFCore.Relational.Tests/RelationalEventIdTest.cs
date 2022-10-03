@@ -26,7 +26,7 @@ public class RelationalEventIdTest : EventIdTestBase
         var key = entityType.AddKey(property, ConfigurationSource.Convention);
         var foreignKey = new ForeignKey(new List<Property> { property }, key, entityType, entityType, ConfigurationSource.Convention);
         var index = new Index(new List<Property> { property }, "IndexName", entityType, ConfigurationSource.Convention);
-        var contextServices = RelationalTestHelpers.Instance.CreateContextServices(model.FinalizeModel());
+        var contextServices = FakeRelationalTestHelpers.Instance.CreateContextServices(model.FinalizeModel());
         var updateEntry = new InternalEntityEntry(contextServices.GetRequiredService<IStateManager>(), entityType, new object());
         var columnOperation = new AddColumnOperation
         {
@@ -303,7 +303,7 @@ public class RelationalEventIdTest : EventIdTestBase
         public override CommandType CommandType { get; set; }
         public override bool DesignTimeVisible { get; set; }
         public override UpdateRowSource UpdatedRowSource { get; set; }
-        protected override DbConnection DbConnection { get; set; }
+        protected override DbConnection DbConnection { get; set; } = new FakeDbConnection();
 
         protected override DbParameterCollection DbParameterCollection
             => new FakeDbParameterCollection();

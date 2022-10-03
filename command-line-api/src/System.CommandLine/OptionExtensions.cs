@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.CommandLine.Parsing;
 using System.CommandLine.Completions;
 using System.IO;
-using System.Linq;
 
 namespace System.CommandLine
 {
@@ -26,7 +25,9 @@ namespace System.CommandLine
             params string[] values)
             where TOption : Option
         {
+            option.Argument.AllowedValues?.Clear();
             option.Argument.AddAllowedValues(values);
+            option.Argument.Completions.Clear();
             option.Argument.Completions.Add(values);
 
             return option;

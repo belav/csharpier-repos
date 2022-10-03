@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+#nullable enable
+
 using Microsoft.EntityFrameworkCore.Sqlite.Internal;
 using Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal;
-
-#nullable enable
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
@@ -1212,12 +1212,13 @@ FROM ""People"";",
 
     public class MigrationsSqliteFixture : MigrationsFixtureBase
     {
-        protected override string StoreName { get; } = nameof(MigrationsSqliteTest);
+        protected override string StoreName
+            => nameof(MigrationsSqliteTest);
 
         protected override ITestStoreFactory TestStoreFactory
             => SqliteTestStoreFactory.Instance;
 
-        public override TestHelpers TestHelpers
+        public override RelationalTestHelpers TestHelpers
             => SqliteTestHelpers.Instance;
 
         protected override IServiceCollection AddServices(IServiceCollection serviceCollection)

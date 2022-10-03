@@ -119,7 +119,7 @@ public partial class ModelValidatorTest
     [ConditionalFact]
     public virtual void Throws_when_navigation_to_owned_type_is_not_added_or_ignored()
     {
-        var modelBuilder = CreateConventionalModelBuilder();
+        var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>().Property(a => a.Id);
         modelBuilder.Entity<Cat>().OwnsOne(a => a.FavoritePerson);
         modelBuilder.Entity<Dog>();
@@ -360,5 +360,11 @@ public partial class ModelValidatorTest
     protected class OwnedEntity
     {
         public string Value { get; set; }
+    }
+
+    protected class CarbonComposite
+    {
+        public int Id1 { get; set; }
+        public int Id2 { get; set; }
     }
 }

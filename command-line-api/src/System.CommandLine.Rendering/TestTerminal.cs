@@ -14,13 +14,13 @@ namespace System.CommandLine.Rendering
     {
         private int _cursorLeft;
         private int _cursorTop;
-        private readonly List<ConsoleEvent> _events = new List<ConsoleEvent>();
-        private readonly StringBuilder _outBuffer = new StringBuilder();
-        private readonly StringBuilder _ansiCodeBuffer = new StringBuilder();
+        private readonly List<ConsoleEvent> _events = new();
+        private readonly StringBuilder _outBuffer = new();
+        private readonly StringBuilder _ansiCodeBuffer = new();
         private ConsoleColor _backgroundColor = ConsoleColor.Black;
         private ConsoleColor _foregroundColor = ConsoleColor.White;
-        private readonly RecordingWriter _out = new RecordingWriter();
-        private readonly RecordingWriter _error = new RecordingWriter();
+        private readonly RecordingWriter _out = new();
+        private readonly RecordingWriter _error = new();
 
         public TestTerminal()
         {
@@ -78,11 +78,7 @@ namespace System.CommandLine.Rendering
             RecordEvent(new ColorReset());
         }
 
-        public Region GetRegion() =>
-            new Region(0,
-                       0,
-                       Width,
-                       Height);
+        public Region GetRegion() => new(0, 0, Width, Height);
 
         public void Clear()
         {

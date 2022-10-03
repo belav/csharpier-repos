@@ -14,10 +14,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
 {
     /// <summary>
     ///     <para>
-    ///		    String resources used in EF exceptions, etc.
+    ///         String resources used in EF exceptions, etc.
     ///     </para>
     ///     <para>
-    ///		    These strings are exposed publicly for use by database providers and extensions.
+    ///         These strings are exposed publicly for use by database providers and extensions.
     ///         It is unusual for application code to need these strings.
     ///     </para>
     /// </summary>
@@ -575,6 +575,36 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
                 entityType, entityClrType, genericType);
 
         /// <summary>
+        ///     Debug view threw {message}. Please report this at https://github.com/dotnet/efcore
+        /// </summary>
+        public static string DebugViewError(object? message)
+            => string.Format(
+                GetString("DebugViewError", nameof(message)),
+                message);
+
+        /// <summary>
+        ///     Error creating query expression: {message}.
+        /// </summary>
+        public static string DebugViewQueryExpressionError(object? message)
+            => string.Format(
+                GetString("DebugViewQueryExpressionError", nameof(message)),
+                message);
+
+        /// <summary>
+        ///     Error creating query string: {message}.
+        /// </summary>
+        public static string DebugViewQueryStringError(object? message)
+            => string.Format(
+                GetString("DebugViewQueryStringError", nameof(message)),
+                message);
+
+        /// <summary>
+        ///     The EF.Default&lt;T&gt; property may only be used within Entity Framework ExecuteUpdate method.
+        /// </summary>
+        public static string DefaultMethodInvoked
+            => GetString("DefaultMethodInvoked");
+
+        /// <summary>
         ///     The [DeleteBehavior] attribute may only be specified on navigation properties, and is not supported not on properties making up the foreign key.
         /// </summary>
         public static string DeleteBehaviorAttributeNotOnNavigationProperty
@@ -761,6 +791,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => string.Format(
                 GetString("DuplicatePropertyInKey", nameof(propertyList), nameof(property)),
                 propertyList, property);
+
+        /// <summary>
+        ///     The trigger '{trigger}' cannot be added to the entity type '{entityType}' because another trigger with the same name already exists on entity type '{conflictingEntityType}'.
+        /// </summary>
+        public static string DuplicateTrigger(object? trigger, object? entityType, object? conflictingEntityType)
+            => string.Format(
+                GetString("DuplicateTrigger", nameof(trigger), nameof(entityType), nameof(conflictingEntityType)),
+                trigger, entityType, conflictingEntityType);
 
         /// <summary>
         ///     Cannot translate '{comparisonOperator}' on a subquery expression of entity type '{entityType}' because it has a composite primary key. See https://go.microsoft.com/fwlink/?linkid=2141942 for information on how to rewrite your query.
@@ -1490,14 +1528,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => string.Format(
                 GetString("MissingBackingField", nameof(field), "1_property", "2_entityType"),
                 field, property, entityType);
-
-        /// <summary>
-        ///     Unable to set up a many-to-many relationship between the entity types '{principalEntityType}' and '{declaringEntityType}' because one of the navigations was not specified. Provide a navigation in the 'HasMany' call in 'OnModelCreating'. Consider adding a private property for this.
-        /// </summary>
-        public static string MissingInverseManyToManyNavigation(object? principalEntityType, object? declaringEntityType)
-            => string.Format(
-                GetString("MissingInverseManyToManyNavigation", nameof(principalEntityType), nameof(declaringEntityType)),
-                principalEntityType, declaringEntityType);
 
         /// <summary>
         ///     Runtime metadata changes are not allowed when the model hasn't been marked as read-only.
@@ -2494,14 +2524,6 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => GetString("SetOperationWithDifferentIncludesInOperands");
 
         /// <summary>
-        ///     Unable to set up a many-to-many relationship between '{leftEntityType}.{leftNavigation}' and '{rightEntityType}.{rightNavigation}' because one or both of the navigations don't have a corresponding CLR property. Consider adding a corresponding private property to the entity CLR type.
-        /// </summary>
-        public static string ShadowManyToManyNavigation(object? leftEntityType, object? leftNavigation, object? rightEntityType, object? rightNavigation)
-            => string.Format(
-                GetString("ShadowManyToManyNavigation", nameof(leftEntityType), nameof(leftNavigation), nameof(rightEntityType), nameof(rightNavigation)),
-                leftEntityType, leftNavigation, rightEntityType, rightNavigation);
-
-        /// <summary>
         ///     The shared-type entity type '{entityType}' cannot have a base type.
         /// </summary>
         public static string SharedTypeDerivedType(object? entityType)
@@ -3159,7 +3181,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     static logger => new EventDefinition<string, string, string?, string?, string>(
                         logger.Options,
                         CoreEventId.ContextInitialized,
-                        LogLevel.Information,
+                        LogLevel.Debug,
                         "CoreEventId.ContextInitialized",
                         level => LoggerMessage.Define<string, string, string?, string?, string>(
                             level,

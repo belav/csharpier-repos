@@ -8,6 +8,15 @@ namespace Microsoft.AspNetCore.Analyzers;
 [System.Diagnostics.CodeAnalysis.SuppressMessage("MicrosoftCodeAnalysisReleaseTracking", "RS2008:Enable analyzer release tracking")]
 internal static class DiagnosticDescriptors
 {
+    internal static readonly DiagnosticDescriptor RoutePatternIssue = new(
+        "RP0001",
+        new LocalizableResourceString(nameof(Resources.Invalid_Route_pattern), Resources.ResourceManager, typeof(Resources)),
+        new LocalizableResourceString(nameof(Resources.Route_issue_0), Resources.ResourceManager, typeof(Resources)),
+        "Style",
+        DiagnosticSeverity.Warning,
+        isEnabledByDefault: true,
+        helpLinkUri: "https://aka.ms/aspnet/analyzers");
+
     internal static readonly DiagnosticDescriptor DoNotUseModelBindingAttributesOnRouteHandlerParameters = new(
         "ASP0003",
         "Do not use model binding attributes with route handlers",
@@ -77,6 +86,60 @@ internal static class DiagnosticDescriptors
         "UseStartup cannot be used with WebApplicationBuilder.WebHost",
         "Usage",
         DiagnosticSeverity.Error,
+        isEnabledByDefault: true,
+        helpLinkUri: "https://aka.ms/aspnet/analyzers");
+
+    internal static readonly DiagnosticDescriptor DoNotUseHostConfigureLogging = new(
+        "ASP0011",
+        "Suggest using builder.Logging over Host.ConfigureLogging or WebHost.ConfigureLogging",
+        "Suggest using builder.Logging instead of {0}",
+        "Usage",
+        DiagnosticSeverity.Warning,
+        isEnabledByDefault: true,
+        helpLinkUri: "https://aka.ms/aspnet/analyzers");
+  
+    internal static readonly DiagnosticDescriptor DoNotUseHostConfigureServices = new(
+        "ASP0012",
+        "Suggest using builder.Services over Host.ConfigureServices or WebHost.ConfigureServices",
+        "Suggest using builder.Services instead of {0}",
+        "Usage",
+        DiagnosticSeverity.Warning,
+        isEnabledByDefault: true,
+        helpLinkUri: "https://aka.ms/aspnet/analyzers");
+
+    internal static readonly DiagnosticDescriptor DisallowConfigureAppConfigureHostBuilder = new(
+        "ASP0013",
+        "Suggest switching from using Configure methods to WebApplicationBuilder.Configuration",
+        "Suggest using WebApplicationBuilder.Configuration instead of {0}",
+        "Usage",
+        DiagnosticSeverity.Warning,
+        isEnabledByDefault: true,
+        helpLinkUri: "https://aka.ms/aspnet/analyzers");
+
+    internal static readonly DiagnosticDescriptor UseTopLevelRouteRegistrationsInsteadOfUseEndpoints = new(
+        "ASP0014",
+        "Suggest using top level route registrations",
+        "Suggest using top level route registrations instead of {0}",
+        "Usage",
+        DiagnosticSeverity.Warning,
+        isEnabledByDefault: true,
+        helpLinkUri: "https://aka.ms/aspnet/analyzers");
+
+    internal static readonly DiagnosticDescriptor UseHeaderDictionaryPropertiesInsteadOfIndexer = new(
+        "ASP0015",
+        "Suggest using IHeaderDictionary properties",
+        "The header '{0}' can be accessed using the {1} property",
+        "Usage",
+        DiagnosticSeverity.Info,
+        isEnabledByDefault: true,
+        helpLinkUri: "https://aka.ms/aspnet/analyzers");
+
+    internal static readonly DiagnosticDescriptor DoNotReturnValueFromRequestDelegate = new(
+        "ASP0016",
+        "Do not return a value from RequestDelegate",
+        "The method used to create a RequestDelegate returns Task<{0}>. RequestDelegate discards this value. If this isn't intended then don't return a value or change the method signature to not match RequestDelegate.",
+        "Usage",
+        DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
         helpLinkUri: "https://aka.ms/aspnet/analyzers");
 }

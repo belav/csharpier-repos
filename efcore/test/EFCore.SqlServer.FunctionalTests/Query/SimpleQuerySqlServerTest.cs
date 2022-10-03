@@ -1,9 +1,10 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
-
 // ReSharper disable InconsistentNaming
+
+using Microsoft.Data.SqlClient;
+
 namespace Microsoft.EntityFrameworkCore.Query;
 
 public class SimpleQuerySqlServerTest : SimpleQueryRelationalTestBase
@@ -178,7 +179,10 @@ FROM [Users] AS [u]");
 SELECT [o].[Id], [o].[CancellationDate], [o].[OrderId], [o].[ShippingDate]
 FROM [OrderItems] AS [o]
 INNER JOIN (
-    SELECT [o0].[OrderId] AS [Key]
+    SELECT [o0].[OrderId] AS [Key], MAX(CASE
+        WHEN ([o0].[ShippingDate] IS NULL) AND ([o0].[CancellationDate] IS NULL) THEN [o0].[OrderId]
+        ELSE [o0].[OrderId] - 10000000
+    END) AS [IsPending]
     FROM [OrderItems] AS [o0]
     WHERE [o0].[OrderId] = @__orderId_0
     GROUP BY [o0].[OrderId]
@@ -221,17 +225,17 @@ ORDER BY [t].[Id]");
     SELECT MIN([o].[HourlyRate])
     FROM [TimeSheets] AS [t0]
     LEFT JOIN [Order] AS [o] ON [t0].[OrderId] = [o].[Id]
-    WHERE [t0].[OrderId] IS NOT NULL AND [t].[OrderId] = [t0].[OrderId]) AS [HourlyRate], (
+    WHERE ([t0].[OrderId] IS NOT NULL) AND [t].[OrderId] = [t0].[OrderId]) AS [HourlyRate], (
     SELECT MIN([c].[Id])
     FROM [TimeSheets] AS [t1]
     INNER JOIN [Project] AS [p] ON [t1].[ProjectId] = [p].[Id]
     INNER JOIN [Customers] AS [c] ON [p].[CustomerId] = [c].[Id]
-    WHERE [t1].[OrderId] IS NOT NULL AND [t].[OrderId] = [t1].[OrderId]) AS [CustomerId], (
+    WHERE ([t1].[OrderId] IS NOT NULL) AND [t].[OrderId] = [t1].[OrderId]) AS [CustomerId], (
     SELECT MIN([c0].[Name])
     FROM [TimeSheets] AS [t2]
     INNER JOIN [Project] AS [p0] ON [t2].[ProjectId] = [p0].[Id]
     INNER JOIN [Customers] AS [c0] ON [p0].[CustomerId] = [c0].[Id]
-    WHERE [t2].[OrderId] IS NOT NULL AND [t].[OrderId] = [t2].[OrderId]) AS [CustomerName]
+    WHERE ([t2].[OrderId] IS NOT NULL) AND [t].[OrderId] = [t2].[OrderId]) AS [CustomerName]
 FROM [TimeSheets] AS [t]
 WHERE [t].[OrderId] IS NOT NULL
 GROUP BY [t].[OrderId]");
@@ -247,7 +251,7 @@ GROUP BY [t].[OrderId]");
     FROM [Order] AS [o0]
     WHERE [o0].[CustomerId] = [o].[CustomerId]) AS [CustomerMinHourlyRate], MIN([o].[HourlyRate]) AS [HourlyRate], COUNT(*) AS [Count]
 FROM [Order] AS [o]
-WHERE [o].[Number] <> N'A1' OR [o].[Number] IS NULL
+WHERE [o].[Number] <> N'A1' OR ([o].[Number] IS NULL)
 GROUP BY [o].[CustomerId], [o].[Number]");
     }
 
@@ -259,7 +263,7 @@ GROUP BY [o].[CustomerId], [o].[Number]");
             @"SELECT [t].[Value] AS [A], (
     SELECT MAX([t0].[Id])
     FROM [Table] AS [t0]
-    WHERE [t0].[Value] = (MAX([t].[Id]) * 6) OR ([t0].[Value] IS NULL AND MAX([t].[Id]) IS NULL)) AS [B]
+    WHERE [t0].[Value] = (MAX([t].[Id]) * 6) OR (([t0].[Value] IS NULL) AND (MAX([t].[Id]) IS NULL))) AS [B]
 FROM [Table] AS [t]
 GROUP BY [t].[Value]");
     }
@@ -360,17 +364,17 @@ GROUP BY [t].[Key]");
             @"SELECT (
     SELECT TOP(1) [c1].[SomeOtherNullableDateTime]
     FROM [Child26744] AS [c1]
-    WHERE [p].[Id] = [c1].[ParentId] AND [c1].[SomeNullableDateTime] IS NULL
+    WHERE [p].[Id] = [c1].[ParentId] AND ([c1].[SomeNullableDateTime] IS NULL)
     ORDER BY [c1].[SomeInteger])
 FROM [Parents] AS [p]
 WHERE EXISTS (
     SELECT 1
     FROM [Child26744] AS [c]
-    WHERE [p].[Id] = [c].[ParentId] AND [c].[SomeNullableDateTime] IS NULL) AND (
+    WHERE [p].[Id] = [c].[ParentId] AND ([c].[SomeNullableDateTime] IS NULL)) AND ((
     SELECT TOP(1) [c0].[SomeOtherNullableDateTime]
     FROM [Child26744] AS [c0]
-    WHERE [p].[Id] = [c0].[ParentId] AND [c0].[SomeNullableDateTime] IS NULL
-    ORDER BY [c0].[SomeInteger]) IS NOT NULL");
+    WHERE [p].[Id] = [c0].[ParentId] AND ([c0].[SomeNullableDateTime] IS NULL)
+    ORDER BY [c0].[SomeInteger]) IS NOT NULL)");
     }
 
     public override async Task SelectMany_where_Select(bool async)
@@ -402,8 +406,8 @@ WHERE [t0].[SomeOtherNullableDateTime] IS NOT NULL");
 SELECT [m].[Id], [m].[SomeDate]
 FROM [MyEntities] AS [m]
 WHERE [m].[SomeDate] = @__date_0",
-                //
-                @"@__date_0='2012-12-12T00:00:00.0000000' (DbType = DateTime)
+            //
+            @"@__date_0='2012-12-12T00:00:00.0000000' (DbType = DateTime)
 
 SELECT [m].[Id], [m].[SomeDate]
 FROM [MyEntities] AS [m]
@@ -428,5 +432,100 @@ INNER JOIN (
 ) AS [t0] ON [t].[ParcelNumber] = [t0].[Parcel]
 WHERE [t].[TableId] = 123
 ORDER BY [t].[ParcelNumber]");
+    }
+
+    public override async Task Hierarchy_query_with_abstract_type_sibling(bool async)
+    {
+        await base.Hierarchy_query_with_abstract_type_sibling(async);
+
+        AssertSql(
+            @"SELECT [a].[Id], [a].[Discriminator], [a].[Species], [a].[Name], [a].[EdcuationLevel], [a].[FavoriteToy]
+FROM [Animals] AS [a]
+WHERE [a].[Discriminator] IN (N'Cat', N'Dog') AND ([a].[Species] IS NOT NULL) AND ([a].[Species] LIKE N'F%')");
+    }
+
+    public override async Task Hierarchy_query_with_abstract_type_sibling_TPT(bool async)
+    {
+        await base.Hierarchy_query_with_abstract_type_sibling_TPT(async);
+
+        AssertSql(
+            @"SELECT [a].[Id], [a].[Species], [p].[Name], [c].[EdcuationLevel], [d].[FavoriteToy], CASE
+    WHEN [d].[Id] IS NOT NULL THEN N'Dog'
+    WHEN [c].[Id] IS NOT NULL THEN N'Cat'
+END AS [Discriminator]
+FROM [Animals] AS [a]
+LEFT JOIN [Pets] AS [p] ON [a].[Id] = [p].[Id]
+LEFT JOIN [Cats] AS [c] ON [a].[Id] = [c].[Id]
+LEFT JOIN [Dogs] AS [d] ON [a].[Id] = [d].[Id]
+WHERE (([d].[Id] IS NOT NULL) OR ([c].[Id] IS NOT NULL)) AND ([a].[Species] IS NOT NULL) AND ([a].[Species] LIKE N'F%')");
+    }
+
+    public override async Task Hierarchy_query_with_abstract_type_sibling_TPC(bool async)
+    {
+        await base.Hierarchy_query_with_abstract_type_sibling_TPC(async);
+
+        AssertSql(
+            @"SELECT [t].[Id], [t].[Species], [t].[Name], [t].[EdcuationLevel], [t].[FavoriteToy], [t].[Discriminator]
+FROM (
+    SELECT [c].[Id], [c].[Species], [c].[Name], [c].[EdcuationLevel], NULL AS [FavoriteToy], N'Cat' AS [Discriminator]
+    FROM [Cats] AS [c]
+    UNION ALL
+    SELECT [d].[Id], [d].[Species], [d].[Name], NULL AS [EdcuationLevel], [d].[FavoriteToy], N'Dog' AS [Discriminator]
+    FROM [Dogs] AS [d]
+) AS [t]
+WHERE ([t].[Species] IS NOT NULL) AND ([t].[Species] LIKE N'F%')");
+    }
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task Muliple_occurrences_of_FromSql_in_group_by_aggregate(bool async)
+    {
+        var contextFactory = await InitializeAsync<Context27427>();
+        using var context = contextFactory.CreateContext();
+        var query = context.DemoEntities
+            .FromSqlRaw("SELECT * FROM DemoEntities WHERE Id = {0}", new SqlParameter { Value = 1 })
+            .Select(e => e.Id);
+
+        var query2 = context.DemoEntities
+            .Where(e => query.Contains(e.Id))
+            .GroupBy(e => e.Id)
+            .Select(g => new { g.Key, Aggregate = g.Count() });
+
+        if (async)
+        {
+            await query2.ToListAsync();
+        }
+        else
+        {
+            query2.ToList();
+        }
+
+        AssertSql(
+            @"p0='1'
+
+SELECT [d].[Id] AS [Key], COUNT(*) AS [Aggregate]
+FROM [DemoEntities] AS [d]
+WHERE EXISTS (
+    SELECT 1
+    FROM (
+        SELECT * FROM DemoEntities WHERE Id = @p0
+    ) AS [m]
+    WHERE [m].[Id] = [d].[Id])
+GROUP BY [d].[Id]");
+    }
+
+    protected class Context27427 : DbContext
+    {
+        public Context27427(DbContextOptions options)
+            : base(options)
+        {
+        }
+
+        public DbSet<DemoEntity> DemoEntities { get; set; }
+    }
+
+    protected class DemoEntity
+    {
+        public int Id { get; set; }
     }
 }

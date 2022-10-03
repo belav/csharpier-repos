@@ -1,16 +1,6 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper.UnitTests;
-using Microsoft.EntityFrameworkCore;
-using Shouldly;
-using Xunit;
+﻿namespace AutoMapper.IntegrationTests.MaxDepth;
 
-namespace AutoMapper.IntegrationTests.MaxDepth;
-
-public class NavigationPropertySO : AutoMapperSpecBase, IAsyncLifetime
+public class NavigationPropertySO : IntegrationTest<NavigationPropertySO.DatabaseInitializer>
 {
     CustomerDTO _destination;
 
@@ -62,7 +52,7 @@ public class NavigationPropertySO : AutoMapperSpecBase, IAsyncLifetime
         public DbSet<Cust> Custs { get; set; }
     }
 
-    public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
+    public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
     {
         protected override void Seed(Context context)
         {
@@ -97,13 +87,4 @@ public class NavigationPropertySO : AutoMapperSpecBase, IAsyncLifetime
             _destination.Cust.CustomerID.ShouldBe(1);
         }
     }
-
-    public async Task InitializeAsync()
-    {
-        var initializer = new DatabaseInitializer();
-
-        await initializer.Migrate();
-    }
-
-    public Task DisposeAsync() => Task.CompletedTask;
 }

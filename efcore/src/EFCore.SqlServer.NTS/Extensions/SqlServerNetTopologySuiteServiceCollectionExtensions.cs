@@ -31,7 +31,9 @@ public static class SqlServerNetTopologySuiteServiceCollectionExtensions
         new EntityFrameworkRelationalServicesBuilder(serviceCollection)
             .TryAdd<IRelationalTypeMappingSourcePlugin, SqlServerNetTopologySuiteTypeMappingSourcePlugin>()
             .TryAdd<IMethodCallTranslatorPlugin, SqlServerNetTopologySuiteMethodCallTranslatorPlugin>()
-            .TryAdd<IMemberTranslatorPlugin, SqlServerNetTopologySuiteMemberTranslatorPlugin>();
+            .TryAdd<IAggregateMethodCallTranslatorPlugin, SqlServerNetTopologySuiteAggregateMethodCallTranslatorPlugin>()
+            .TryAdd<IMemberTranslatorPlugin, SqlServerNetTopologySuiteMemberTranslatorPlugin>()
+            .TryAdd<IEvaluatableExpressionFilterPlugin, SqlServerNetTopologySuiteEvaluatableExpressionFilterPlugin>();
 
         return serviceCollection;
     }

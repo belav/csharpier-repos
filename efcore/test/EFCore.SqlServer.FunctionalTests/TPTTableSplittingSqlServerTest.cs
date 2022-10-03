@@ -126,7 +126,7 @@ WHERE [c].[Capacity] IS NOT NULL");
         AssertSql(
             @"SELECT [c].[VehicleName], [c].[Capacity], [c].[FuelType]
 FROM [CombustionEngines] AS [c]
-WHERE [c].[Capacity] IS NOT NULL AND [c].[FuelType] IS NOT NULL");
+WHERE ([c].[Capacity] IS NOT NULL) AND ([c].[FuelType] IS NOT NULL)");
     }
 
     public override async Task Can_change_dependent_instance_non_derived()
@@ -144,8 +144,8 @@ VALUES (@p0, @p1);
 UPDATE [Vehicles] SET [Operator_Name] = @p2
 OUTPUT 1
 WHERE [Name] = @p3;",
-                //
-                @"SELECT TOP(2) [v].[Name], [v].[SeatingCapacity], [c].[AttachedVehicleName], CASE
+            //
+            @"SELECT TOP(2) [v].[Name], [v].[SeatingCapacity], [c].[AttachedVehicleName], CASE
     WHEN [c].[Name] IS NOT NULL THEN N'CompositeVehicle'
     WHEN [p].[Name] IS NOT NULL THEN N'PoweredVehicle'
 END AS [Discriminator], [t].[Name], [t].[Operator_Name], [t].[LicenseType], [t].[Discriminator]
@@ -175,8 +175,8 @@ SET NOCOUNT ON;
 UPDATE [Vehicles] SET [SeatingCapacity] = @p0
 OUTPUT 1
 WHERE [Name] = @p1;",
-                //
-                @"SELECT TOP(2) [v].[Name], [v].[SeatingCapacity], [c].[AttachedVehicleName], CASE
+            //
+            @"SELECT TOP(2) [v].[Name], [v].[SeatingCapacity], [c].[AttachedVehicleName], CASE
     WHEN [c].[Name] IS NOT NULL THEN N'CompositeVehicle'
     WHEN [p].[Name] IS NOT NULL THEN N'PoweredVehicle'
 END AS [Discriminator], [t].[Name], [t].[Operator_Name], [t].[LicenseType], [t].[Discriminator]

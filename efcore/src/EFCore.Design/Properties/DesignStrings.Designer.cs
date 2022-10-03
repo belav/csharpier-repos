@@ -72,7 +72,13 @@ namespace Microsoft.EntityFrameworkCore.Internal
             => GetString("CannotGenerateTypeQualifiedMethodCall");
 
         /// <summary>
-        ///     The entity type '{entityType}' has a custom constructor binding. This is usually caused by using proxies. Compiled model can't be generated, because dynamic proxy types are not supported. If you are not using proxies configure the custom constructor binding in '{customize}' in a partial '{className}' class instead.
+        ///     You cannot add a migration with the name 'Migration'.
+        /// </summary>
+        public static string CircularBaseClassDependency
+            => GetString("CircularBaseClassDependency");
+
+        /// <summary>
+        ///     The entity type '{entityType}' has a custom constructor binding. Compiled model can't be generated, because custom constructor bindings are not supported. Configure the custom constructor binding in '{customize}' in a partial '{className}' class instead.
         /// </summary>
         public static string CompiledModelConstructorBinding(object? entityType, object? customize, object? className)
             => string.Format(
@@ -216,6 +222,14 @@ namespace Microsoft.EntityFrameworkCore.Internal
             => string.Format(
                 GetString("ErrorConnecting", nameof(message)),
                 message);
+
+        /// <summary>
+        ///     Processing '{inputFile}' failed.
+        /// </summary>
+        public static string ErrorGeneratingOutput(object? inputFile)
+            => string.Format(
+                GetString("ErrorGeneratingOutput", nameof(inputFile)),
+                inputFile);
 
         /// <summary>
         ///     The following file(s) already exist in directory '{outputDirectoryName}': {existingFiles}. Use the Force flag to overwrite these files.
@@ -448,6 +462,18 @@ namespace Microsoft.EntityFrameworkCore.Internal
             => string.Format(
                 GetString("NoContext", nameof(assembly)),
                 assembly);
+
+        /// <summary>
+        ///     You must provide a DbContext.t4 file in order to scaffold using custom templates.
+        /// </summary>
+        public static string NoContextTemplate
+            => GetString("NoContextTemplate");
+
+        /// <summary>
+        ///     You've provided an EntityTypeConfiguration.t4 file without a corresponding DbContext.t4 file. The generated DbContext code must be modified to work with your configuration classes. Provide a DbContext.t4 file and try again.
+        /// </summary>
+        public static string NoContextTemplateButConfiguration
+            => GetString("NoContextTemplateButConfiguration");
 
         /// <summary>
         ///     No DbContext named '{name}' was found.
@@ -782,12 +808,6 @@ namespace Microsoft.EntityFrameworkCore.Internal
             => string.Format(
                 GetString("WritingSnapshot", nameof(file)),
                 file);
-
-        /// <summary>
-        ///     You cannot add a migration with the name 'Migration'.
-        /// </summary>
-        public static string CircularBaseClassDependency
-            => GetString("CircularBaseClassDependency");
 
         private static string GetString(string name, params string[] formatterNames)
         {

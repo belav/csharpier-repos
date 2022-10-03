@@ -1,9 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
-
 // ReSharper disable once CheckNamespace
+
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
@@ -60,26 +59,24 @@ public class SqlServerValueGenerationStrategyConvention : IModelInitializedConve
             foreach (var property in entityType.GetDeclaredProperties())
             {
                 SqlServerValueGenerationStrategy? strategy = null;
-                var table = entityType.GetTableName();
-                if (table != null)
+                var declaringTable = property.GetMappedStoreObjects(StoreObjectType.Table).FirstOrDefault();
+                if (declaringTable.Name != null!)
                 {
-                    var storeObject = StoreObjectIdentifier.Table(table, entityType.GetSchema());
-                    strategy = property.GetValueGenerationStrategy(storeObject, Dependencies.TypeMappingSource);
+                    strategy = property.GetValueGenerationStrategy(declaringTable, Dependencies.TypeMappingSource);
                     if (strategy == SqlServerValueGenerationStrategy.None
-                        && !IsStrategyNoneNeeded(property, storeObject))
+                        && !IsStrategyNoneNeeded(property, declaringTable))
                     {
                         strategy = null;
                     }
                 }
                 else
                 {
-                    var view = entityType.GetViewName();
-                    if (view != null)
+                    var declaringView = property.GetMappedStoreObjects(StoreObjectType.View).FirstOrDefault();
+                    if (declaringView.Name != null!)
                     {
-                        var storeObject = StoreObjectIdentifier.View(view, entityType.GetViewSchema());
-                        strategy = property.GetValueGenerationStrategy(storeObject, Dependencies.TypeMappingSource);
+                        strategy = property.GetValueGenerationStrategy(declaringView, Dependencies.TypeMappingSource);
                         if (strategy == SqlServerValueGenerationStrategy.None
-                            && !IsStrategyNoneNeeded(property, storeObject))
+                            && !IsStrategyNoneNeeded(property, declaringView))
                         {
                             strategy = null;
                         }
@@ -87,9 +84,23 @@ public class SqlServerValueGenerationStrategyConvention : IModelInitializedConve
                 }
 
                 // Needed for the annotation to show up in the model snapshot
-                if (strategy != null)
+                if (strategy != null
+                    && declaringTable.Name != null)
                 {
                     property.Builder.HasValueGenerationStrategy(strategy);
+
+                    if (strategy == SqlServerValueGenerationStrategy.Sequence)
+                    {
+                        var sequence = modelBuilder.HasSequence(
+                            property.GetSequenceName(declaringTable)
+                            ?? entityType.GetRootType().ShortName() + modelBuilder.Metadata.GetSequenceNameSuffix(),
+                            property.GetSequenceSchema(declaringTable)
+                            ?? modelBuilder.Metadata.GetSequenceSchema()).Metadata;
+
+                        property.Builder.HasDefaultValueSql(
+                            RelationalDependencies.UpdateSqlGenerator.GenerateObtainNextSequenceValueOperation(
+                                sequence.Name, sequence.Schema));
+                    }
                 }
             }
         }

@@ -1,11 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Shouldly;
-using Xunit;
-
 namespace AutoMapper.UnitTests
 {
     namespace Dictionaries
@@ -482,6 +474,8 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<BaseClassWithDictionary, DerivedClassWithDictionary>());
+            [Fact]
+            public void Validate() => AssertConfigurationIsValid();
         }
     }
 

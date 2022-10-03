@@ -1,88 +1,92 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using AutoMapper.Internal;
+namespace AutoMapper;
 
-namespace AutoMapper
+[DebuggerDisplay("{DestinationMember.Name}")]
+[EditorBrowsable(EditorBrowsableState.Never)]
+public class PropertyMap : MemberMap
 {
-    [DebuggerDisplay("{DestinationMember.Name}")]
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    public class PropertyMap : MemberMap
+    private MemberMapDetails _details;
+    private Type _sourceType;
+    public PropertyMap(MemberInfo destinationMember, Type destinationMemberType, TypeMap typeMap) : base(typeMap)
     {
-        private MemberInfo[] _sourceMembers = Array.Empty<MemberInfo>();
-        private List<ValueTransformerConfiguration> _valueTransformerConfigs;
-        private bool? _canResolveValue;
-        private Type _sourceType;
-        public PropertyMap(MemberInfo destinationMember, Type destinationMemberType, TypeMap typeMap) : base(typeMap)
+        DestinationMember = destinationMember;
+        DestinationType = destinationMemberType;
+    }
+    public PropertyMap(PropertyMap inheritedMappedProperty, TypeMap typeMap) : base(typeMap)
+    {
+        DestinationMember = inheritedMappedProperty.DestinationMember;
+        if (DestinationMember.DeclaringType.ContainsGenericParameters)
         {
-            DestinationMember = destinationMember;
-            DestinationType = destinationMemberType;
+            DestinationMember = typeMap.DestinationSetters.Single(m => m.Name == DestinationMember.Name);
         }
-        public PropertyMap(PropertyMap inheritedMappedProperty, TypeMap typeMap)
-            : this(inheritedMappedProperty.DestinationMember, inheritedMappedProperty.DestinationType, typeMap) => ApplyInheritedPropertyMap(inheritedMappedProperty);
-        public PropertyMap(PropertyMap includedMemberMap, TypeMap typeMap, IncludedMember includedMember)
-            : this(includedMemberMap, typeMap) => IncludedMember = includedMember.Chain(includedMemberMap.IncludedMember);
-        public MemberInfo DestinationMember { get; }
-        public override string DestinationName => DestinationMember.Name;
-        public override Type DestinationType { get; protected set; }
-        public override MemberInfo[] SourceMembers => _sourceMembers;
-        public override bool CanBeSet => ReflectionHelper.CanBeSet(DestinationMember);
-        public override bool Ignored { get; set; }
-        public override bool? AllowNull { get; set; }
-        public int? MappingOrder { get; set; }
-        public override LambdaExpression CustomMapFunction { get; set; }
-        public override LambdaExpression Condition { get; set; }
-        public override LambdaExpression PreCondition { get; set; }
-        public override bool? UseDestinationValue { get; set; }
-        public bool? ExplicitExpansion { get; set; }
-        public override object NullSubstitute { get; set; }
-        public override ValueResolverConfiguration ValueResolverConfig { get; set; }
-        public override ValueResolverConfiguration ValueConverterConfig { get; set; }
-        public override IReadOnlyCollection<ValueTransformerConfiguration> ValueTransformers => _valueTransformerConfigs.NullCheck();
-        public override Type SourceType
+        DestinationType = inheritedMappedProperty.DestinationType;
+        if (DestinationType.ContainsGenericParameters)
         {
-            get => _sourceType ??=
-                ValueConverterConfig?.ResolvedType ??
-                ValueResolverConfig?.ResolvedType ??
-                CustomMapFunction?.ReturnType ??
-                CustomMapExpression?.ReturnType ??
-                (_sourceMembers.Length > 0 ? _sourceMembers[_sourceMembers.Length - 1].GetMemberType() : typeof(object));
-            protected set => _sourceType = value;
+            DestinationType = DestinationMember.GetMemberType();
         }
-        public void MapByConvention(IEnumerable<MemberInfo> sourceMembers) => _sourceMembers = sourceMembers.ToArray();
-        public void ApplyInheritedPropertyMap(PropertyMap inheritedMappedProperty)
+        ApplyInheritedPropertyMap(inheritedMappedProperty);
+    }
+    public PropertyMap(PropertyMap includedMemberMap, TypeMap typeMap, IncludedMember includedMember)
+        : this(includedMemberMap, typeMap) => Details.IncludedMember = includedMember.Chain(includedMemberMap.IncludedMember);
+    private MemberMapDetails Details => _details ??= new();
+    public MemberInfo DestinationMember { get; }
+    public override string DestinationName => DestinationMember?.Name;
+    public override Type DestinationType { get; protected set; }
+    public override MemberInfo[] SourceMembers { get; set; } = Array.Empty<MemberInfo>();
+    public override bool CanBeSet => ReflectionHelper.CanBeSet(DestinationMember);
+    public override bool Ignored { get; set; }
+    public override Type SourceType => _sourceType ??= GetSourceType();
+    public void ApplyInheritedPropertyMap(PropertyMap inheritedMappedProperty)
+    {
+        if (Ignored)
         {
-            if (Ignored)
+            return;
+        }
+        if (!IsResolveConfigured)
+        {
+            if (inheritedMappedProperty.Ignored)
             {
+                Ignored = true;
                 return;
             }
-            if (!IsResolveConfigured)
+            if (inheritedMappedProperty.IsResolveConfigured)
             {
-                if (inheritedMappedProperty.Ignored)
-                {
-                    _canResolveValue = false;
-                    Ignored = true;
-                    return;
-                }
-                _canResolveValue = true;
-                if (inheritedMappedProperty.IsResolveConfigured)
-                {
-                    _sourceType = inheritedMappedProperty._sourceType;
-                    CustomMapExpression = inheritedMappedProperty.CustomMapExpression;
-                    CustomMapFunction = inheritedMappedProperty.CustomMapFunction;
-                    ValueResolverConfig = inheritedMappedProperty.ValueResolverConfig;
-                    ValueConverterConfig = inheritedMappedProperty.ValueConverterConfig;
-                }
-                else if (_sourceMembers.Length == 0)
-                {
-                    _sourceType = inheritedMappedProperty._sourceType;
-                    _sourceMembers = inheritedMappedProperty._sourceMembers;
-                }
+                _sourceType = inheritedMappedProperty._sourceType;
+                Resolver = inheritedMappedProperty.Resolver.CloseGenerics(TypeMap);
             }
+            else if (Resolver == null)
+            {
+                _sourceType = inheritedMappedProperty._sourceType;
+                MapByConvention(inheritedMappedProperty.SourceMembers);
+            }
+        }
+        if (inheritedMappedProperty._details != null)
+        {
+            Details.ApplyInheritedPropertyMap(inheritedMappedProperty._details);
+        }
+    }
+    public override IncludedMember IncludedMember => _details?.IncludedMember;
+    public override bool? AllowNull { get => _details?.AllowNull; set => Details.AllowNull = value; }
+    public int? MappingOrder { get => _details?.MappingOrder; set => Details.MappingOrder = value; }
+    public bool? ExplicitExpansion { get => _details?.ExplicitExpansion; set => Details.ExplicitExpansion = value; }
+    public override bool? UseDestinationValue { get => _details?.UseDestinationValue; set => Details.UseDestinationValue = value; }
+    public override object NullSubstitute { get => _details?.NullSubstitute; set => Details.NullSubstitute = value; }
+    public override LambdaExpression PreCondition { get => _details?.PreCondition; set => Details.PreCondition = value; }
+    public override LambdaExpression Condition { get => _details?.Condition; set => Details.Condition = value; }
+    public void AddValueTransformation(ValueTransformerConfiguration config) => Details.AddValueTransformation(config);
+    public override IReadOnlyCollection<ValueTransformerConfiguration> ValueTransformers => (_details?.ValueTransformers).NullCheck();
+    class MemberMapDetails
+    {
+        public List<ValueTransformerConfiguration> ValueTransformers { get; private set; }
+        public bool? AllowNull;
+        public int? MappingOrder;
+        public bool? ExplicitExpansion;
+        public bool? UseDestinationValue;
+        public object NullSubstitute;
+        public LambdaExpression PreCondition;
+        public LambdaExpression Condition;
+        public IncludedMember IncludedMember;
+        public void ApplyInheritedPropertyMap(MemberMapDetails inheritedMappedProperty)
+        {
             AllowNull ??= inheritedMappedProperty.AllowNull;
             Condition ??= inheritedMappedProperty.Condition;
             PreCondition ??= inheritedMappedProperty.PreCondition;
@@ -90,18 +94,16 @@ namespace AutoMapper
             MappingOrder ??= inheritedMappedProperty.MappingOrder;
             UseDestinationValue ??= inheritedMappedProperty.UseDestinationValue;
             ExplicitExpansion ??= inheritedMappedProperty.ExplicitExpansion;
-            if (inheritedMappedProperty._valueTransformerConfigs != null)
+            if (inheritedMappedProperty.ValueTransformers != null)
             {
-                _valueTransformerConfigs ??= new();
-                _valueTransformerConfigs.InsertRange(0, inheritedMappedProperty._valueTransformerConfigs);
+                ValueTransformers ??= new();
+                ValueTransformers.InsertRange(0, inheritedMappedProperty.ValueTransformers);
             }
         }
-        public override bool CanResolveValue => _canResolveValue ??= !Ignored && (_sourceMembers.Length > 0 || IsResolveConfigured);
-        private bool IsResolveConfigured => (ValueResolverConfig ?? CustomMapFunction ?? CustomMapExpression ?? (object)ValueConverterConfig) != null;
         public void AddValueTransformation(ValueTransformerConfiguration valueTransformerConfiguration)
         {
-            _valueTransformerConfigs ??= new();
-            _valueTransformerConfigs.Add(valueTransformerConfiguration);
+            ValueTransformers ??= new();
+            ValueTransformers.Add(valueTransformerConfiguration);
         }
     }
 }

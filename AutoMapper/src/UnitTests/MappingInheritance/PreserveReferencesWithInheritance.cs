@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AutoMapper.UnitTests
+﻿namespace AutoMapper.UnitTests
 {
     namespace Source
     {
@@ -90,8 +87,8 @@ namespace AutoMapper.UnitTests
             cfg.CreateMap<Source.Parameter, Target.Parameter>();
             cfg.CreateMap<Source.Field, Target.Field>();
         });
-
-        protected override void Because_of()
+        [Fact]
+        public void Should_work()
         {
             var field = new Source.Field { Name = "AddResult", Type = typeof(Int32) };
             var @class = new Source.Class { Properties = new List<Source.Member> { field }, Type = typeof(float) };

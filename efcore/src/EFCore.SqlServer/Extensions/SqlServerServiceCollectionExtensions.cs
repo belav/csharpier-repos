@@ -57,20 +57,16 @@ public static class SqlServerServiceCollectionExtensions
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
     public static IServiceCollection AddSqlServer<TContext>(
         this IServiceCollection serviceCollection,
-        string connectionString,
+        string? connectionString,
         Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null,
         Action<DbContextOptionsBuilder>? optionsAction = null)
         where TContext : DbContext
-    {
-        Check.NotEmpty(connectionString, nameof(connectionString));
-
-        return serviceCollection.AddDbContext<TContext>(
+        => serviceCollection.AddDbContext<TContext>(
             (_, options) =>
             {
                 optionsAction?.Invoke(options);
                 options.UseSqlServer(connectionString, sqlServerOptionsAction);
             });
-    }
 
     /// <summary>
     ///     <para>
@@ -125,6 +121,7 @@ public static class SqlServerServiceCollectionExtensions
             .TryAdd<IQuerySqlGeneratorFactory, SqlServerQuerySqlGeneratorFactory>()
             .TryAdd<IRelationalSqlTranslatingExpressionVisitorFactory, SqlServerSqlTranslatingExpressionVisitorFactory>()
             .TryAdd<ISqlExpressionFactory, SqlServerSqlExpressionFactory>()
+            .TryAdd<IQueryTranslationPostprocessorFactory, SqlServerQueryTranslationPostprocessorFactory>()
             .TryAdd<IRelationalParameterBasedSqlProcessorFactory, SqlServerParameterBasedSqlProcessorFactory>()
             .TryAdd<INavigationExpansionExtensibilityHelper, SqlServerNavigationExpansionExtensibilityHelper>()
             .TryAdd<IQueryableMethodTranslatingExpressionVisitorFactory, SqlServerQueryableMethodTranslatingExpressionVisitorFactory>()

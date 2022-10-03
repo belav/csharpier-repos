@@ -311,7 +311,7 @@ namespace System.Collections.Concurrent
         /// found and removed; otherwise, false.
         /// </returns>
         /// <remarks>
-        /// Both the specifed key and value must match the entry in the dictionary for it to be removed.
+        /// Both the specified key and value must match the entry in the dictionary for it to be removed.
         /// The key is compared using the dictionary's comparer (or the default comparer for <typeparamref name="TKey"/>
         /// if no comparer was provided to the dictionary when it was constructed).  The value is compared using the
         /// default comparer for <typeparamref name="TValue"/>.
@@ -1874,20 +1874,8 @@ namespace System.Collections.Concurrent
         #endregion
 
 
-        private bool AreAllBucketsEmpty()
-        {
-            int[] countPerLock = _tables._countPerLock;
-
-            for (int i = 0; i < countPerLock.Length; i++)
-            {
-                if (countPerLock[i] != 0)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
+        private bool AreAllBucketsEmpty() =>
+            _tables._countPerLock.AsSpan().IndexOfAnyExcept(0) < 0;
 
         /// <summary>
         /// Replaces the bucket table with a larger one. To prevent multiple threads from resizing the
@@ -2109,15 +2097,23 @@ namespace System.Collections.Concurrent
                     ThrowHelper.ThrowOutOfMemoryException();
                 }
 
-                var keys = new List<TKey>(count);
+                if (count == 0)
+                {
+                    // TODO https://github.com/dotnet/runtime/issues/76028: Replace with ReadOnlyCollection<TKey>.Empty.
+                    return Array.Empty<TKey>().AsReadOnly();
+                }
+
+                var keys = new TKey[count];
                 Node?[] buckets = _tables._buckets;
+                int n = 0;
                 for (int i = 0; i < buckets.Length; i++)
                 {
                     for (Node? current = buckets[i]; current != null; current = current._next)
                     {
-                        keys.Add(current._key);
+                        keys[n++] = current._key;
                     }
                 }
+                Debug.Assert(n == count);
 
                 return new ReadOnlyCollection<TKey>(keys);
             }
@@ -2143,15 +2139,23 @@ namespace System.Collections.Concurrent
                     ThrowHelper.ThrowOutOfMemoryException();
                 }
 
-                var values = new List<TValue>(count);
+                if (count == 0)
+                {
+                    // TODO https://github.com/dotnet/runtime/pull/76097:  Replace with ReadOnlyCollection<TValue>.Empty.
+                    return Array.Empty<TValue>().AsReadOnly();
+                }
+
+                var values = new TValue[count];
                 Node?[] buckets = _tables._buckets;
+                int n = 0;
                 for (int i = 0; i < buckets.Length; i++)
                 {
                     for (Node? current = buckets[i]; current != null; current = current._next)
                     {
-                        values.Add(current._value);
+                        values[n++] = current._value;
                     }
                 }
+                Debug.Assert(n == count);
 
                 return new ReadOnlyCollection<TValue>(values);
             }

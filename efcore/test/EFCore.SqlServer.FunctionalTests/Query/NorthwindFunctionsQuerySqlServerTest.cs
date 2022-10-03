@@ -41,7 +41,7 @@ WHERE [o].[OrderDate] = @__myDatetime_0",
 
 SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Orders] AS [o]
-WHERE [o].[OrderDate] <> @__myDatetime_0 OR [o].[OrderDate] IS NULL",
+WHERE [o].[OrderDate] <> @__myDatetime_0 OR ([o].[OrderDate] IS NULL)",
             //
             @"@__myDatetime_0='1998-05-04T00:00:00.0000000' (DbType = DateTime)
 
@@ -75,7 +75,7 @@ WHERE [o].[OrderDate] <= @__myDatetime_0");
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[ContactName] IS NOT NULL AND ([c].[ContactName] LIKE N'M%')");
+WHERE ([c].[ContactName] IS NOT NULL) AND ([c].[ContactName] LIKE N'M%')");
     }
 
     public override async Task String_StartsWith_Identity(bool async)
@@ -85,7 +85,7 @@ WHERE [c].[ContactName] IS NOT NULL AND ([c].[ContactName] LIKE N'M%')");
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[ContactName] = N'' OR ([c].[ContactName] IS NOT NULL AND LEFT([c].[ContactName], LEN([c].[ContactName])) = [c].[ContactName])");
+WHERE [c].[ContactName] = N'' OR (([c].[ContactName] IS NOT NULL) AND LEFT([c].[ContactName], LEN([c].[ContactName])) = [c].[ContactName])");
     }
 
     public override async Task String_StartsWith_Column(bool async)
@@ -95,7 +95,7 @@ WHERE [c].[ContactName] = N'' OR ([c].[ContactName] IS NOT NULL AND LEFT([c].[Co
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[ContactName] = N'' OR ([c].[ContactName] IS NOT NULL AND LEFT([c].[ContactName], LEN([c].[ContactName])) = [c].[ContactName])");
+WHERE [c].[ContactName] = N'' OR (([c].[ContactName] IS NOT NULL) AND LEFT([c].[ContactName], LEN([c].[ContactName])) = [c].[ContactName])");
     }
 
     public override async Task String_StartsWith_MethodCall(bool async)
@@ -105,7 +105,7 @@ WHERE [c].[ContactName] = N'' OR ([c].[ContactName] IS NOT NULL AND LEFT([c].[Co
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[ContactName] IS NOT NULL AND ([c].[ContactName] LIKE N'M%')");
+WHERE ([c].[ContactName] IS NOT NULL) AND ([c].[ContactName] LIKE N'M%')");
     }
 
     public override async Task String_EndsWith_Literal(bool async)
@@ -115,7 +115,7 @@ WHERE [c].[ContactName] IS NOT NULL AND ([c].[ContactName] LIKE N'M%')");
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[ContactName] IS NOT NULL AND ([c].[ContactName] LIKE N'%b')");
+WHERE ([c].[ContactName] IS NOT NULL) AND ([c].[ContactName] LIKE N'%b')");
     }
 
     public override async Task String_EndsWith_Identity(bool async)
@@ -125,7 +125,7 @@ WHERE [c].[ContactName] IS NOT NULL AND ([c].[ContactName] LIKE N'%b')");
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[ContactName] = N'' OR ([c].[ContactName] IS NOT NULL AND RIGHT([c].[ContactName], LEN([c].[ContactName])) = [c].[ContactName])");
+WHERE [c].[ContactName] = N'' OR (([c].[ContactName] IS NOT NULL) AND RIGHT([c].[ContactName], LEN([c].[ContactName])) = [c].[ContactName])");
     }
 
     public override async Task String_EndsWith_Column(bool async)
@@ -135,7 +135,7 @@ WHERE [c].[ContactName] = N'' OR ([c].[ContactName] IS NOT NULL AND RIGHT([c].[C
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[ContactName] = N'' OR ([c].[ContactName] IS NOT NULL AND RIGHT([c].[ContactName], LEN([c].[ContactName])) = [c].[ContactName])");
+WHERE [c].[ContactName] = N'' OR (([c].[ContactName] IS NOT NULL) AND RIGHT([c].[ContactName], LEN([c].[ContactName])) = [c].[ContactName])");
     }
 
     public override async Task String_EndsWith_MethodCall(bool async)
@@ -145,7 +145,7 @@ WHERE [c].[ContactName] = N'' OR ([c].[ContactName] IS NOT NULL AND RIGHT([c].[C
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[ContactName] IS NOT NULL AND ([c].[ContactName] LIKE N'%m')");
+WHERE ([c].[ContactName] IS NOT NULL) AND ([c].[ContactName] LIKE N'%m')");
     }
 
     public override async Task String_Contains_Literal(bool async)
@@ -197,7 +197,7 @@ WHERE [c].[ContactName] LIKE N'%     %'");
         await base.String_Contains_parameter_with_whitespace(async);
 
         AssertSql(
-            @"@__pattern_0='     ' (Size = 4000)
+            @"@__pattern_0='     ' (Size = 30)
 
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
@@ -236,6 +236,63 @@ WHERE SUBSTRING([c].[ContactName], LEN([c].[ContactName]), 1) = N's'");
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE [c].[ContactName] LIKE N'%M%'");
+    }
+
+    [SqlServerCondition(SqlServerCondition.SupportsFunctions2017)]
+    public override async Task String_Join_over_non_nullable_column(bool async)
+    {
+        await base.String_Join_over_non_nullable_column(async);
+
+        AssertSql(
+            @"SELECT [c].[City], COALESCE(STRING_AGG([c].[CustomerID], N'|'), N'') AS [Customers]
+FROM [Customers] AS [c]
+GROUP BY [c].[City]");
+    }
+
+    [SqlServerCondition(SqlServerCondition.SupportsFunctions2017)]
+    public override async Task String_Join_over_nullable_column(bool async)
+    {
+        await base.String_Join_over_nullable_column(async);
+
+        AssertSql(
+            @"SELECT [c].[City], COALESCE(STRING_AGG(COALESCE([c].[Region], N''), N'|'), N'') AS [Regions]
+FROM [Customers] AS [c]
+GROUP BY [c].[City]");
+    }
+
+    [SqlServerCondition(SqlServerCondition.SupportsFunctions2017)]
+    public override async Task String_Join_with_predicate(bool async)
+    {
+        await base.String_Join_with_predicate(async);
+
+        AssertSql(
+            @"SELECT [c].[City], COALESCE(STRING_AGG(CASE
+    WHEN CAST(LEN([c].[ContactName]) AS int) > 10 THEN [c].[CustomerID]
+END, N'|'), N'') AS [Customers]
+FROM [Customers] AS [c]
+GROUP BY [c].[City]");
+    }
+
+    [SqlServerCondition(SqlServerCondition.SupportsFunctions2017)]
+    public override async Task String_Join_with_ordering(bool async)
+    {
+        await base.String_Join_with_ordering(async);
+
+        AssertSql(
+            @"SELECT [c].[City], COALESCE(STRING_AGG([c].[CustomerID], N'|') WITHIN GROUP (ORDER BY [c].[CustomerID] DESC), N'') AS [Customers]
+FROM [Customers] AS [c]
+GROUP BY [c].[City]");
+    }
+
+    [SqlServerCondition(SqlServerCondition.SupportsFunctions2017)]
+    public override async Task String_Concat(bool async)
+    {
+        await base.String_Concat(async);
+
+        AssertSql(
+            @"SELECT [c].[City], COALESCE(STRING_AGG([c].[CustomerID], N''), N'') AS [Customers]
+FROM [Customers] AS [c]
+GROUP BY [c].[City]");
     }
 
     public override async Task String_Compare_simple_zero(bool async)
@@ -411,7 +468,7 @@ WHERE [c].[CustomerID] >= N'ALFKI' AND [c].[CustomerID] < N'CACTU'",
             //
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[ContactTitle] = N'Owner' AND ([c].[Country] <> N'USA' OR [c].[Country] IS NULL)");
+WHERE [c].[ContactTitle] = N'Owner' AND ([c].[Country] <> N'USA' OR ([c].[Country] IS NULL))");
     }
 
     public override async Task String_Compare_to_simple_zero(bool async)
@@ -587,7 +644,7 @@ WHERE [c].[CustomerID] >= N'ALFKI' AND [c].[CustomerID] < N'CACTU'",
             //
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[ContactTitle] = N'Owner' AND ([c].[Country] <> N'USA' OR [c].[Country] IS NULL)");
+WHERE [c].[ContactTitle] = N'Owner' AND ([c].[Country] <> N'USA' OR ([c].[Country] IS NULL))");
     }
 
     public override async Task DateTime_Compare_to_simple_zero(bool async, bool compareTo)
@@ -605,7 +662,7 @@ WHERE [o].[OrderDate] = @__myDatetime_0",
 
 SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Orders] AS [o]
-WHERE [o].[OrderDate] <> @__myDatetime_0 OR [o].[OrderDate] IS NULL",
+WHERE [o].[OrderDate] <> @__myDatetime_0 OR ([o].[OrderDate] IS NULL)",
             //
             @"@__myDatetime_0='1998-05-04T00:00:00.0000000' (DbType = DateTime)
 
@@ -1634,7 +1691,7 @@ FROM [Customers] AS [c]");
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE (CAST(CHARINDEX(N'a', [c].[ContactName]) AS int) - 1) = 1");
+WHERE (CHARINDEX(N'a', [c].[ContactName]) - 1) = 1");
     }
 
     public override async Task Indexof_with_one_parameter_arg(bool async)
@@ -1642,13 +1699,13 @@ WHERE (CAST(CHARINDEX(N'a', [c].[ContactName]) AS int) - 1) = 1");
         await base.Indexof_with_one_parameter_arg(async);
 
         AssertSql(
-            @"@__pattern_0='a' (Size = 4000)
+            @"@__pattern_0='a' (Size = 30)
 
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
 WHERE CASE
     WHEN @__pattern_0 = N'' THEN 0
-    ELSE CAST(CHARINDEX(@__pattern_0, [c].[ContactName]) AS int) - 1
+    ELSE CHARINDEX(@__pattern_0, [c].[ContactName]) - 1
 END = 1");
     }
 
@@ -1659,7 +1716,7 @@ END = 1");
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE (CAST(CHARINDEX(N'a', [c].[ContactName], 3) AS int) - 1) = 4");
+WHERE (CHARINDEX(N'a', [c].[ContactName], 3) - 1) = 4");
     }
 
     public override async Task Indexof_with_parameter_starting_position(bool async)
@@ -1671,7 +1728,7 @@ WHERE (CAST(CHARINDEX(N'a', [c].[ContactName], 3) AS int) - 1) = 4");
 
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE (CAST(CHARINDEX(N'a', [c].[ContactName], @__start_0 + 1) AS int) - 1) = 4");
+WHERE (CHARINDEX(N'a', [c].[ContactName], @__start_0 + 1) - 1) = 4");
     }
 
     public override async Task Replace_with_emptystring(bool async)
@@ -1773,7 +1830,7 @@ WHERE [c].[CustomerID] = N'ALFKI'");
         await base.Substring_with_two_args_with_Index_of(async);
 
         AssertSql(
-            @"SELECT SUBSTRING([c].[ContactName], (CAST(CHARINDEX(N'a', [c].[ContactName]) AS int) - 1) + 1, 3)
+            @"SELECT SUBSTRING([c].[ContactName], (CHARINDEX(N'a', [c].[ContactName]) - 1) + 1, 3)
 FROM [Customers] AS [c]
 WHERE [c].[CustomerID] = N'ALFKI'");
     }
@@ -1785,7 +1842,7 @@ WHERE [c].[CustomerID] = N'ALFKI'");
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[Region] IS NULL OR ([c].[Region] LIKE N'')");
+WHERE ([c].[Region] IS NULL) OR ([c].[Region] LIKE N'')");
     }
 
     public override async Task IsNullOrEmpty_in_projection(bool async)
@@ -1794,7 +1851,7 @@ WHERE [c].[Region] IS NULL OR ([c].[Region] LIKE N'')");
 
         AssertSql(
             @"SELECT [c].[CustomerID] AS [Id], CASE
-    WHEN [c].[Region] IS NULL OR ([c].[Region] LIKE N'') THEN CAST(1 AS bit)
+    WHEN ([c].[Region] IS NULL) OR ([c].[Region] LIKE N'') THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END AS [Value]
 FROM [Customers] AS [c]");
@@ -1807,7 +1864,7 @@ FROM [Customers] AS [c]");
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[Region] IS NOT NULL AND NOT ([c].[Region] LIKE N'')");
+WHERE ([c].[Region] IS NOT NULL) AND NOT ([c].[Region] LIKE N'')");
     }
 
     public override async Task IsNullOrEmpty_negated_in_projection(bool async)
@@ -1816,7 +1873,7 @@ WHERE [c].[Region] IS NOT NULL AND NOT ([c].[Region] LIKE N'')");
 
         AssertSql(
             @"SELECT [c].[CustomerID] AS [Id], CASE
-    WHEN [c].[Region] IS NOT NULL AND NOT ([c].[Region] LIKE N'') THEN CAST(1 AS bit)
+    WHEN ([c].[Region] IS NOT NULL) AND NOT ([c].[Region] LIKE N'') THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END AS [Value]
 FROM [Customers] AS [c]");
@@ -1829,7 +1886,7 @@ FROM [Customers] AS [c]");
         AssertSql(
             @"SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-WHERE [c].[Region] IS NULL OR [c].[Region] = N''");
+WHERE ([c].[Region] IS NULL) OR [c].[Region] = N''");
     }
 
     public override async Task IsNullOrWhiteSpace_in_predicate_on_non_nullable_column(bool async)
@@ -2008,6 +2065,66 @@ WHERE 0 = 1");
 
     public override Task Datetime_subtraction_TotalDays(bool async)
         => AssertTranslationFailed(() => base.Datetime_subtraction_TotalDays(async));
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task StandardDeviation(bool async)
+    {
+        await using var ctx = CreateContext();
+
+        var query = ctx.Set<OrderDetail>()
+            .GroupBy(od => od.ProductID)
+            .Select(
+                g => new
+                {
+                    ProductID = g.Key,
+                    SampleStandardDeviation = EF.Functions.StandardDeviationSample(g.Select(od => od.UnitPrice)),
+                    PopulationStandardDeviation = EF.Functions.StandardDeviationPopulation(g.Select(od => od.UnitPrice))
+                });
+
+        var results = async
+            ? await query.ToListAsync()
+            : query.ToList();
+
+        var product9 = results.Single(r => r.ProductID == 9);
+        Assert.Equal(8.675943752699023, product9.SampleStandardDeviation.Value, 5);
+        Assert.Equal(7.759999999999856, product9.PopulationStandardDeviation.Value, 5);
+
+        AssertSql(
+            @"SELECT [o].[ProductID], STDEV([o].[UnitPrice]) AS [SampleStandardDeviation], STDEVP([o].[UnitPrice]) AS [PopulationStandardDeviation]
+FROM [Order Details] AS [o]
+GROUP BY [o].[ProductID]");
+    }
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task Variance(bool async)
+    {
+        await using var ctx = CreateContext();
+
+        var query = ctx.Set<OrderDetail>()
+            .GroupBy(od => od.ProductID)
+            .Select(
+                g => new
+                {
+                    ProductID = g.Key,
+                    SampleStandardDeviation = EF.Functions.VarianceSample(g.Select(od => od.UnitPrice)),
+                    PopulationStandardDeviation = EF.Functions.VariancePopulation(g.Select(od => od.UnitPrice))
+                });
+
+        var results = async
+            ? await query.ToListAsync()
+            : query.ToList();
+
+        var product9 = results.Single(r => r.ProductID == 9);
+        Assert.Equal(75.2719999999972, product9.SampleStandardDeviation.Value, 5);
+        Assert.Equal(60.217599999997766, product9.PopulationStandardDeviation.Value, 5);
+
+        AssertSql(
+            @"SELECT [o].[ProductID], VAR([o].[UnitPrice]) AS [SampleStandardDeviation], VARP([o].[UnitPrice]) AS [PopulationStandardDeviation]
+FROM [Order Details] AS [o]
+GROUP BY [o].[ProductID]");
+    }
 
     private void AssertSql(params string[] expected)
         => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);

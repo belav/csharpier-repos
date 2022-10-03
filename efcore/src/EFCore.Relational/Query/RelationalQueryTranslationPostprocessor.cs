@@ -39,6 +39,7 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
         query = base.Process(query);
         query = new SelectExpressionProjectionApplyingExpressionVisitor(
             ((RelationalQueryCompilationContext)QueryCompilationContext).QuerySplittingBehavior).Visit(query);
+        query = new SelectExpressionPruningExpressionVisitor().Visit(query);
 
 #if DEBUG
         // Verifies that all SelectExpression are marked as immutable after this point.
@@ -47,7 +48,7 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
         // Which points to possible mutation of a SelectExpression being used in multiple places.
         new TableAliasVerifyingExpressionVisitor().Visit(query);
 #endif
-        query = new SelectExpressionPruningExpressionVisitor().Visit(query);
+
         query = new SqlExpressionSimplifyingExpressionVisitor(RelationalDependencies.SqlExpressionFactory, _useRelationalNulls)
             .Visit(query);
         query = new RelationalValueConverterCompensatingExpressionVisitor(RelationalDependencies.SqlExpressionFactory).Visit(query);
@@ -61,32 +62,18 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
         [return: NotNullIfNotNull("expression")]
         public override Expression? Visit(Expression? expression)
         {
-            if (expression is SelectExpression selectExpression)
+            switch (expression)
             {
-                if (selectExpression.IsMutable())
-                {
+                case SelectExpression selectExpression when selectExpression.IsMutable():
                     throw new InvalidDataException(selectExpression.Print());
-                }
+
+                case ShapedQueryExpression shapedQueryExpression:
+                    Visit(shapedQueryExpression.QueryExpression);
+                    return shapedQueryExpression;
+
+                default:
+                    return base.Visit(expression);
             }
-
-            if (expression is ShapedQueryExpression shapedQueryExpression)
-            {
-                Visit(shapedQueryExpression.QueryExpression);
-
-                return shapedQueryExpression;
-            }
-
-            if (expression is TpcTablesExpression tpcTablesExpression)
-            {
-                foreach (var se in tpcTablesExpression.SelectExpressions)
-                {
-                    Visit(se);
-                }
-
-                return expression;
-            }
-
-            return base.Visit(expression);
         }
     }
 
@@ -102,22 +89,26 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
             switch (expression)
             {
                 case ShapedQueryExpression shapedQueryExpression:
-                    UniquifyAliasInSelectExpression(shapedQueryExpression.QueryExpression);
+                    VerifyUniqueAliasInExpression(shapedQueryExpression.QueryExpression);
                     Visit(shapedQueryExpression.QueryExpression);
                     return shapedQueryExpression;
 
                 case RelationalSplitCollectionShaperExpression relationalSplitCollectionShaperExpression:
-                    UniquifyAliasInSelectExpression(relationalSplitCollectionShaperExpression.SelectExpression);
+                    VerifyUniqueAliasInExpression(relationalSplitCollectionShaperExpression.SelectExpression);
                     Visit(relationalSplitCollectionShaperExpression.InnerShaper);
                     return relationalSplitCollectionShaperExpression;
+
+                case NonQueryExpression nonQueryExpression:
+                    VerifyUniqueAliasInExpression(nonQueryExpression.Expression);
+                    return nonQueryExpression;
 
                 default:
                     return base.Visit(expression);
             }
         }
 
-        private void UniquifyAliasInSelectExpression(Expression selectExpression)
-            => _scopedVisitor.EntryPoint(selectExpression);
+        private void VerifyUniqueAliasInExpression(Expression expression)
+            => _scopedVisitor.EntryPoint(expression);
 
         private sealed class ScopedVisitor : ExpressionVisitor
         {
@@ -128,6 +119,14 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
             {
                 _usedAliases.Clear();
                 _visitedTableExpressionBases.Clear();
+
+                if (expression is SelectExpression selectExpression)
+                {
+                    foreach (var alias in selectExpression.RemovedAliases())
+                    {
+                        _usedAliases.Add(alias);
+                    }
+                }
 
                 var result = Visit(expression);
 
@@ -152,15 +151,6 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
             public override Expression? Visit(Expression? expression)
             {
                 var visitedExpression = base.Visit(expression);
-                if (visitedExpression is TpcTablesExpression tpcTablesExpression)
-                {
-                    // We need to look inside SelectExpressions in TPC for aliases
-                    foreach (var selectExpression in tpcTablesExpression.SelectExpressions)
-                    {
-                        Visit(selectExpression);
-                    }
-                }
-
                 if (visitedExpression is TableExpressionBase tableExpressionBase
                     && !_visitedTableExpressionBases.Contains(tableExpressionBase)
                     && tableExpressionBase.Alias != null)

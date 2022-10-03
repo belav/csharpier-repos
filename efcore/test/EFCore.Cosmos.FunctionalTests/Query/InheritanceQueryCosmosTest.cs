@@ -313,7 +313,7 @@ WHERE c[""Discriminator""] IN (""Eagle"", ""Kiwi"")");
         await base.Discriminator_with_cast_in_shadow_property(async);
 
         AssertSql(
-            @"SELECT VALUE {""Predator"" : c[""EagleId""]}
+            @"SELECT VALUE {""Predator"" : c[""Name""]}
 FROM root c
 WHERE (c[""Discriminator""] IN (""Eagle"", ""Kiwi"") AND (""Kiwi"" = c[""Discriminator""]))");
     }
@@ -442,8 +442,8 @@ WHERE c[""Discriminator""] IN (""Eagle"", ""Kiwi"")");
     {
         await base.GetType_in_hierarchy_in_abstract_base_type(async);
 
-            AssertSql(
-                @"SELECT c
+        AssertSql(
+            @"SELECT c
 FROM root c
 WHERE (c[""Discriminator""] IN (""Eagle"", ""Kiwi"") AND false)");
     }
@@ -452,8 +452,8 @@ WHERE (c[""Discriminator""] IN (""Eagle"", ""Kiwi"") AND false)");
     {
         await base.GetType_in_hierarchy_in_intermediate_type(async);
 
-            AssertSql(
-                @"SELECT c
+        AssertSql(
+            @"SELECT c
 FROM root c
 WHERE (c[""Discriminator""] IN (""Eagle"", ""Kiwi"") AND false)");
     }
@@ -462,8 +462,8 @@ WHERE (c[""Discriminator""] IN (""Eagle"", ""Kiwi"") AND false)");
     {
         await base.GetType_in_hierarchy_in_leaf_type_with_sibling(async);
 
-            AssertSql(
-                @"SELECT c
+        AssertSql(
+            @"SELECT c
 FROM root c
 WHERE (c[""Discriminator""] IN (""Eagle"", ""Kiwi"") AND (c[""Discriminator""] = ""Eagle""))");
     }
@@ -472,8 +472,8 @@ WHERE (c[""Discriminator""] IN (""Eagle"", ""Kiwi"") AND (c[""Discriminator""] =
     {
         await base.GetType_in_hierarchy_in_leaf_type_with_sibling2(async);
 
-            AssertSql(
-                @"SELECT c
+        AssertSql(
+            @"SELECT c
 FROM root c
 WHERE (c[""Discriminator""] IN (""Eagle"", ""Kiwi"") AND (c[""Discriminator""] = ""Kiwi""))");
     }
@@ -482,8 +482,8 @@ WHERE (c[""Discriminator""] IN (""Eagle"", ""Kiwi"") AND (c[""Discriminator""] =
     {
         await base.GetType_in_hierarchy_in_leaf_type_with_sibling2_reverse(async);
 
-            AssertSql(
-                @"SELECT c
+        AssertSql(
+            @"SELECT c
 FROM root c
 WHERE (c[""Discriminator""] IN (""Eagle"", ""Kiwi"") AND (c[""Discriminator""] = ""Kiwi""))");
     }

@@ -100,7 +100,7 @@ ORDER BY (
         FROM [EntityRoots] AS [e0]
         WHERE [e0].[Discriminator] IN (N'EntityBranch', N'EntityLeaf')
     ) AS [t] ON [j].[EntityBranchId] = [t].[Id]
-    WHERE [e].[Id] = [j].[EntityOneId] AND [t].[Name] IS NOT NULL AND ([t].[Name] LIKE N'L%')), [e].[Id]");
+    WHERE [e].[Id] = [j].[EntityOneId] AND ([t].[Name] IS NOT NULL) AND ([t].[Name] LIKE N'L%')), [e].[Id]");
     }
 
     public override async Task Skip_navigation_long_count_without_predicate(bool async)
@@ -128,7 +128,7 @@ ORDER BY (
     SELECT COUNT_BIG(*)
     FROM [EntityTwoEntityTwo] AS [e0]
     INNER JOIN [EntityTwos] AS [e1] ON [e0].[SelfSkipSharedLeftId] = [e1].[Id]
-    WHERE [e].[Id] = [e0].[SelfSkipSharedRightId] AND [e1].[Name] IS NOT NULL AND ([e1].[Name] LIKE N'L%')) DESC, [e].[Id]");
+    WHERE [e].[Id] = [e0].[SelfSkipSharedRightId] AND ([e1].[Name] IS NOT NULL) AND ([e1].[Name] LIKE N'L%')) DESC, [e].[Id]");
     }
 
     public override async Task Skip_navigation_select_many_average(bool async)
@@ -565,10 +565,10 @@ ORDER BY [e].[Id]");
         await base.Include_skip_navigation(async);
 
         AssertSql(
-            @"SELECT [e].[Key1], [e].[Key2], [e].[Key3], [e].[Name], [t].[RootSkipSharedId], [t].[CompositeKeySkipSharedKey1], [t].[CompositeKeySkipSharedKey2], [t].[CompositeKeySkipSharedKey3], [t].[Id], [t].[Discriminator], [t].[Name], [t].[Number], [t].[IsGreen]
+            @"SELECT [e].[Key1], [e].[Key2], [e].[Key3], [e].[Name], [t].[RootSkipSharedId], [t].[CompositeKeySkipSharedKey1], [t].[CompositeKeySkipSharedKey2], [t].[CompositeKeySkipSharedKey3], [t].[Id], [t].[Discriminator], [t].[Name], [t].[Number], [t].[Slumber], [t].[IsGreen], [t].[IsBrown]
 FROM [EntityCompositeKeys] AS [e]
 LEFT JOIN (
-    SELECT [e0].[RootSkipSharedId], [e0].[CompositeKeySkipSharedKey1], [e0].[CompositeKeySkipSharedKey2], [e0].[CompositeKeySkipSharedKey3], [e1].[Id], [e1].[Discriminator], [e1].[Name], [e1].[Number], [e1].[IsGreen]
+    SELECT [e0].[RootSkipSharedId], [e0].[CompositeKeySkipSharedKey1], [e0].[CompositeKeySkipSharedKey2], [e0].[CompositeKeySkipSharedKey3], [e1].[Id], [e1].[Discriminator], [e1].[Name], [e1].[Number], [e1].[Slumber], [e1].[IsGreen], [e1].[IsBrown]
     FROM [EntityCompositeKeyEntityRoot] AS [e0]
     INNER JOIN [EntityRoots] AS [e1] ON [e0].[RootSkipSharedId] = [e1].[Id]
 ) AS [t] ON [e].[Key1] = [t].[CompositeKeySkipSharedKey1] AND [e].[Key2] = [t].[CompositeKeySkipSharedKey2] AND [e].[Key3] = [t].[CompositeKeySkipSharedKey3]
@@ -745,7 +745,7 @@ ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[Composit
         await base.Filtered_then_include_skip_navigation_where(async);
 
         AssertSql(
-            @"SELECT [e].[Id], [e].[Discriminator], [e].[Name], [e].[Number], [e].[IsGreen], [t0].[RootSkipSharedId], [t0].[ThreeSkipSharedId], [t0].[Id], [t0].[CollectionInverseId], [t0].[Name], [t0].[ReferenceInverseId], [t0].[OneId], [t0].[ThreeId], [t0].[Payload], [t0].[Id0], [t0].[Name0]
+            @"SELECT [e].[Id], [e].[Discriminator], [e].[Name], [e].[Number], [e].[Slumber], [e].[IsGreen], [e].[IsBrown], [t0].[RootSkipSharedId], [t0].[ThreeSkipSharedId], [t0].[Id], [t0].[CollectionInverseId], [t0].[Name], [t0].[ReferenceInverseId], [t0].[OneId], [t0].[ThreeId], [t0].[Payload], [t0].[Id0], [t0].[Name0]
 FROM [EntityRoots] AS [e]
 LEFT JOIN (
     SELECT [e0].[RootSkipSharedId], [e0].[ThreeSkipSharedId], [e1].[Id], [e1].[CollectionInverseId], [e1].[Name], [e1].[ReferenceInverseId], [t].[OneId], [t].[ThreeId], [t].[Payload], [t].[Id] AS [Id0], [t].[Name] AS [Name0]
@@ -766,7 +766,7 @@ ORDER BY [e].[Id], [t0].[RootSkipSharedId], [t0].[ThreeSkipSharedId], [t0].[Id],
         await base.Filtered_then_include_skip_navigation_order_by_skip_take(async);
 
         AssertSql(
-            @"SELECT [e].[Id], [e].[Discriminator], [e].[Name], [e].[Number], [e].[IsGreen], [t1].[RootSkipSharedId], [t1].[CompositeKeySkipSharedKey1], [t1].[CompositeKeySkipSharedKey2], [t1].[CompositeKeySkipSharedKey3], [t1].[Key1], [t1].[Key2], [t1].[Key3], [t1].[Name], [t1].[Id], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3], [t1].[ThreeId], [t1].[Id0], [t1].[CollectionInverseId], [t1].[Name0], [t1].[ReferenceInverseId]
+            @"SELECT [e].[Id], [e].[Discriminator], [e].[Name], [e].[Number], [e].[Slumber], [e].[IsGreen], [e].[IsBrown], [t1].[RootSkipSharedId], [t1].[CompositeKeySkipSharedKey1], [t1].[CompositeKeySkipSharedKey2], [t1].[CompositeKeySkipSharedKey3], [t1].[Key1], [t1].[Key2], [t1].[Key3], [t1].[Name], [t1].[Id], [t1].[CompositeId1], [t1].[CompositeId2], [t1].[CompositeId3], [t1].[ThreeId], [t1].[Id0], [t1].[CollectionInverseId], [t1].[Name0], [t1].[ReferenceInverseId]
 FROM [EntityRoots] AS [e]
 LEFT JOIN (
     SELECT [e0].[RootSkipSharedId], [e0].[CompositeKeySkipSharedKey1], [e0].[CompositeKeySkipSharedKey2], [e0].[CompositeKeySkipSharedKey3], [e1].[Key1], [e1].[Key2], [e1].[Key3], [e1].[Name], [t0].[Id], [t0].[CompositeId1], [t0].[CompositeId2], [t0].[CompositeId3], [t0].[ThreeId], [t0].[Id0], [t0].[CollectionInverseId], [t0].[Name] AS [Name0], [t0].[ReferenceInverseId]
@@ -961,9 +961,9 @@ ORDER BY [e].[Id], [t0].[Id], [t0].[ThreeId], [t0].[TwoId]");
         AssertSql(" ");
     }
 
-    public override async Task Filered_includes_accessed_via_different_path_are_merged(bool async)
+    public override async Task Filtered_includes_accessed_via_different_path_are_merged(bool async)
     {
-        await base.Filered_includes_accessed_via_different_path_are_merged(async);
+        await base.Filtered_includes_accessed_via_different_path_are_merged(async);
 
         AssertSql(" ");
     }
@@ -977,10 +977,10 @@ ORDER BY [e].[Id], [t0].[Id], [t0].[ThreeId], [t0].[TwoId]");
 FROM [EntityCompositeKeys] AS [e]
 ORDER BY [e].[Key1], [e].[Key2], [e].[Key3]",
             //
-            @"SELECT [t].[RootSkipSharedId], [t].[CompositeKeySkipSharedKey1], [t].[CompositeKeySkipSharedKey2], [t].[CompositeKeySkipSharedKey3], [t].[Id], [t].[Discriminator], [t].[Name], [t].[Number], [t].[IsGreen], [e].[Key1], [e].[Key2], [e].[Key3]
+            @"SELECT [t].[RootSkipSharedId], [t].[CompositeKeySkipSharedKey1], [t].[CompositeKeySkipSharedKey2], [t].[CompositeKeySkipSharedKey3], [t].[Id], [t].[Discriminator], [t].[Name], [t].[Number], [t].[Slumber], [t].[IsGreen], [t].[IsBrown], [e].[Key1], [e].[Key2], [e].[Key3]
 FROM [EntityCompositeKeys] AS [e]
 INNER JOIN (
-    SELECT [e0].[RootSkipSharedId], [e0].[CompositeKeySkipSharedKey1], [e0].[CompositeKeySkipSharedKey2], [e0].[CompositeKeySkipSharedKey3], [e1].[Id], [e1].[Discriminator], [e1].[Name], [e1].[Number], [e1].[IsGreen]
+    SELECT [e0].[RootSkipSharedId], [e0].[CompositeKeySkipSharedKey1], [e0].[CompositeKeySkipSharedKey2], [e0].[CompositeKeySkipSharedKey3], [e1].[Id], [e1].[Discriminator], [e1].[Name], [e1].[Number], [e1].[Slumber], [e1].[IsGreen], [e1].[IsBrown]
     FROM [EntityCompositeKeyEntityRoot] AS [e0]
     INNER JOIN [EntityRoots] AS [e1] ON [e0].[RootSkipSharedId] = [e1].[Id]
 ) AS [t] ON [e].[Key1] = [t].[CompositeKeySkipSharedKey1] AND [e].[Key2] = [t].[CompositeKeySkipSharedKey2] AND [e].[Key3] = [t].[CompositeKeySkipSharedKey3]
@@ -1217,7 +1217,7 @@ ORDER BY [e].[Key1], [e].[Key2], [e].[Key3], [t0].[CompositeId1], [t0].[Composit
         await base.Filtered_then_include_skip_navigation_where_split(async);
 
         AssertSql(
-            @"SELECT [e].[Id], [e].[Discriminator], [e].[Name], [e].[Number], [e].[IsGreen]
+            @"SELECT [e].[Id], [e].[Discriminator], [e].[Name], [e].[Number], [e].[Slumber], [e].[IsGreen], [e].[IsBrown]
 FROM [EntityRoots] AS [e]
 ORDER BY [e].[Id]",
             //
@@ -1251,7 +1251,7 @@ ORDER BY [e].[Id], [t].[RootSkipSharedId], [t].[ThreeSkipSharedId], [t].[Id]");
         await base.Filtered_then_include_skip_navigation_order_by_skip_take_split(async);
 
         AssertSql(
-            @"SELECT [e].[Id], [e].[Discriminator], [e].[Name], [e].[Number], [e].[IsGreen]
+            @"SELECT [e].[Id], [e].[Discriminator], [e].[Name], [e].[Number], [e].[Slumber], [e].[IsGreen], [e].[IsBrown]
 FROM [EntityRoots] AS [e]
 ORDER BY [e].[Id]",
             //

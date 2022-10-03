@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Internal;
@@ -60,7 +61,7 @@ public class Project : IDisposable
     public ITestOutputHelper Output { get; set; }
     public IMessageSink DiagnosticsMessageSink { get; set; }
 
-    internal async Task<ProcessResult> RunDotNetNewAsync(
+    internal async Task RunDotNetNewAsync(
         string templateName,
         string auth = null,
         string language = null,
@@ -125,10 +126,10 @@ public class Project : IDisposable
             result.ExitCode = -1;
         }
 
-        return result;
+        Assert.True(0 == result.ExitCode, ErrorMessages.GetFailedProcessMessage("create/restore", this, result));
     }
 
-    internal async Task<ProcessResult> RunDotNetPublishAsync(IDictionary<string, string> packageOptions = null, string additionalArgs = null, bool noRestore = true)
+    internal async Task RunDotNetPublishAsync(IDictionary<string, string> packageOptions = null, string additionalArgs = null, bool noRestore = true)
     {
         Output.WriteLine("Publishing ASP.NET Core application...");
 
@@ -149,10 +150,11 @@ public class Project : IDisposable
         }
 
         CaptureBinLogOnFailure(execution);
-        return result;
+
+        Assert.True(0 == result.ExitCode, ErrorMessages.GetFailedProcessMessage("publish", this, result));
     }
 
-    internal async Task<ProcessResult> RunDotNetBuildAsync(IDictionary<string, string> packageOptions = null, string additionalArgs = null, bool errorOnBuildWarning = true)
+    internal async Task RunDotNetBuildAsync(IDictionary<string, string> packageOptions = null, string additionalArgs = null, bool errorOnBuildWarning = true)
     {
         Output.WriteLine("Building ASP.NET Core application...");
 
@@ -171,7 +173,8 @@ public class Project : IDisposable
         }
 
         CaptureBinLogOnFailure(execution);
-        return result;
+
+        Assert.True(0 == result.ExitCode, ErrorMessages.GetFailedProcessMessage("build", this, result));
     }
 
     internal AspNetProcess StartBuiltProjectAsync(bool hasListeningUri = true, ILogger logger = null)
@@ -205,7 +208,7 @@ public class Project : IDisposable
         return new AspNetProcess(DevCert, Output, TemplatePublishDir, projectDll, environment, published: true, hasListeningUri: hasListeningUri, usePublishedAppHost: usePublishedAppHost);
     }
 
-    internal async Task<ProcessResult> RunDotNetEfCreateMigrationAsync(string migrationName)
+    internal async Task RunDotNetEfCreateMigrationAsync(string migrationName)
     {
         var args = $"--verbose --no-build migrations add {migrationName}";
 
@@ -221,10 +224,11 @@ public class Project : IDisposable
 
         using var result = ProcessEx.Run(Output, TemplateOutputDir, command, args);
         await result.Exited;
-        return new ProcessResult(result);
+        var processResult = new ProcessResult(result);
+        Assert.True(0 == processResult.ExitCode, ErrorMessages.GetFailedProcessMessage("run EF migrations", this, processResult));
     }
 
-    internal async Task<ProcessResult> RunDotNetEfUpdateDatabaseAsync()
+    internal async Task RunDotNetEfUpdateDatabaseAsync()
     {
         var args = "--verbose --no-build database update";
 
@@ -240,7 +244,8 @@ public class Project : IDisposable
 
         using var result = ProcessEx.Run(Output, TemplateOutputDir, command, args);
         await result.Exited;
-        return new ProcessResult(result);
+        var processResult = new ProcessResult(result);
+        Assert.True(0 == processResult.ExitCode, ErrorMessages.GetFailedProcessMessage("update database", this, processResult));
     }
 
     // If this fails, you should generate new migrations via migrations/updateMigrations.cmd
@@ -288,13 +293,68 @@ public class Project : IDisposable
         }
     }
 
+    public async Task VerifyLaunchSettings(string[] expectedLaunchProfileNames)
+    {
+        var launchSettingsFiles = Directory.EnumerateFiles(TemplateOutputDir, "launchSettings.json", SearchOption.AllDirectories);
+
+        foreach (var filePath in launchSettingsFiles)
+        {
+            using var launchSettingsFile = File.OpenRead(filePath);
+            using var launchSettings = await JsonDocument.ParseAsync(launchSettingsFile);
+
+            var profiles = launchSettings.RootElement.GetProperty("profiles");
+            var profilesEnumerator = profiles.EnumerateObject().GetEnumerator();
+
+            foreach (var expectedProfileName in expectedLaunchProfileNames)
+            {
+                Assert.True(profilesEnumerator.MoveNext());
+
+                var actualProfile = profilesEnumerator.Current;
+
+                // Launch profile names are case sensitive
+                Assert.Equal(expectedProfileName, actualProfile.Name, StringComparer.Ordinal);
+
+                if (actualProfile.Value.GetProperty("commandName").GetString() == "Project")
+                {
+                    var applicationUrl = actualProfile.Value.GetProperty("applicationUrl");
+                    if (string.Equals(expectedProfileName, "http", StringComparison.Ordinal))
+                    {
+                        Assert.DoesNotContain("https://", applicationUrl.GetString());
+                    }
+
+                    if (string.Equals(expectedProfileName, "https", StringComparison.Ordinal))
+                    {
+                        Assert.StartsWith("https://", applicationUrl.GetString());
+                    }
+                }
+            }
+
+            // Check there are no more launch profiles defined
+            Assert.False(profilesEnumerator.MoveNext());
+
+            if (launchSettings.RootElement.TryGetProperty("iisSettings", out var iisSettings)
+                && iisSettings.TryGetProperty("iisExpress", out var iisExpressSettings))
+            {
+                var iisSslPort = iisExpressSettings.GetProperty("sslPort").GetInt32();
+                if (expectedLaunchProfileNames.Contains("https"))
+                {
+                    Assert.True(iisSslPort >= 44300 && iisSslPort <= 44399, $"IIS Express port was expected to be >= 44300 and <= 44399 but was {iisSslPort} in file {filePath}");
+                }
+                else
+                {
+                    Assert.Equal(0, iisSslPort);
+                }
+            }
+        }
+    }
+
     public string ReadFile(string path)
     {
         AssertFileExists(path, shouldExist: true);
         return File.ReadAllText(Path.Combine(TemplateOutputDir, path));
     }
 
-    internal async Task<ProcessEx> RunDotNetNewRawAsync(string arguments)
+    internal async Task RunDotNetNewRawAsync(string arguments)
     {
         var result = ProcessEx.Run(
             Output,
@@ -304,7 +364,7 @@ public class Project : IDisposable
                 $" --debug:disable-sdk-templates --debug:custom-hive \"{TemplatePackageInstaller.CustomHivePath}\"" +
                 $" -o {TemplateOutputDir}");
         await result.Exited;
-        return result;
+        Assert.True(result.ExitCode == 0, result.GetFormattedOutput());
     }
 
     public void Dispose()
@@ -408,7 +468,7 @@ public class Project : IDisposable
         if (result.ExitCode != 0 && !string.IsNullOrEmpty(ArtifactsLogDir))
         {
             var sourceFile = Path.Combine(TemplateOutputDir, "msbuild.binlog");
-            Assert.True(File.Exists(sourceFile), $"Log for '{ProjectName}' not found in '{sourceFile}'.");
+            Assert.True(File.Exists(sourceFile), $"Log for '{ProjectName}' not found in '{sourceFile}'. Execution output: {result.Output}");
             var destination = Path.Combine(ArtifactsLogDir, ProjectName + ".binlog");
             File.Move(sourceFile, destination, overwrite: true); // binlog will exist on retries
         }

@@ -1245,7 +1245,7 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                             on eVersion.RootEntityId equals eRoot.Id
                             into RootEntities
                         from eRootJoined in RootEntities.DefaultIfEmpty()
-                            // ReSharper disable once ConstantNullCoalescingCondition
+                        // ReSharper disable once ConstantNullCoalescingCondition
                         select new { One = 1, Coalesce = eRootJoined ?? (eVersion ?? eRootJoined) };
 
             var result = query.ToList();
@@ -1259,7 +1259,7 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                             on eVersion.RootEntityId equals eRoot.Id
                             into RootEntities
                         from eRootJoined in RootEntities.DefaultIfEmpty()
-                            // ReSharper disable once ConstantNullCoalescingCondition
+                        // ReSharper disable once ConstantNullCoalescingCondition
                         select new
                         {
                             One = eRootJoined,
@@ -1284,7 +1284,7 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
                             on eVersion.RootEntityId equals eRoot.Id
                             into RootEntities
                         from eRootJoined in RootEntities.DefaultIfEmpty()
-                            // ReSharper disable once MergeConditionalExpression
+                        // ReSharper disable once MergeConditionalExpression
 #pragma warning disable IDE0029 // Use coalesce expression
                         select eRootJoined != null ? eRootJoined : eVersion;
 #pragma warning restore IDE0029 // Use coalesce expression
@@ -1442,18 +1442,15 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
             Contacts.AddRange(
                 new ServiceOperatorContact6986
                 {
-                    UserName = "service.operator@esoterix.co.uk",
-                    ServiceOperator6986 = ServiceOperators.OrderBy(o => o.Id).First()
+                    UserName = "service.operator@esoterix.co.uk", ServiceOperator6986 = ServiceOperators.OrderBy(o => o.Id).First()
                 },
                 new EmployerContact6986
                 {
-                    UserName = "uwe@esoterix.co.uk",
-                    Employer6986 = Employers.OrderBy(e => e.Id).First(e => e.Name == "UWE")
+                    UserName = "uwe@esoterix.co.uk", Employer6986 = Employers.OrderBy(e => e.Id).First(e => e.Name == "UWE")
                 },
                 new EmployerContact6986
                 {
-                    UserName = "hp@esoterix.co.uk",
-                    Employer6986 = Employers.OrderBy(e => e.Id).First(e => e.Name == "Hewlett Packard")
+                    UserName = "hp@esoterix.co.uk", Employer6986 = Employers.OrderBy(e => e.Id).First(e => e.Name == "Hewlett Packard")
                 },
                 new Contact6986 { UserName = "noroles@esoterix.co.uk" });
             SaveChanges();
@@ -3029,7 +3026,7 @@ FROM [Factions] AS [f]
 WHERE EXISTS (
     SELECT 1
     FROM [Leaders] AS [l]
-    WHERE [l].[Name] IS NOT NULL AND ([l].[Name] LIKE N'Bran%') AND [l].[Name] = N'Crach an Craite')");
+    WHERE ([l].[Name] IS NOT NULL) AND ([l].[Name] LIKE N'Bran%') AND [l].[Name] = N'Crach an Craite')");
         }
     }
 
@@ -3585,8 +3582,7 @@ FROM [Prices] AS [p]");
             AddRange(
                 new Employee13025
                 {
-                    Name = "Test1",
-                    Devices = new List<EmployeeDevice13025> { new() { DeviceId = 1, Device = "Battery" } }
+                    Name = "Test1", Devices = new List<EmployeeDevice13025> { new() { DeviceId = 1, Device = "Battery" } }
                 });
 
             SaveChanges();
@@ -3978,7 +3974,7 @@ ORDER BY [p].[Id]");
 
         using (var context = contextFactory.CreateContext())
         {
-            context.Add(new MyContext13079.BaseEntity13079());
+            await context.AddAsync(new MyContext13079.BaseEntity13079());
             context.SaveChanges();
 
             AssertSql(
@@ -4759,7 +4755,7 @@ FROM [Posts] AS [p]");
 FROM [EntitiesWithQueryFilterSelfReference] AS [e]
 WHERE EXISTS (
     SELECT 1
-    FROM [EntitiesWithQueryFilterSelfReference] AS [e0]) AND ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL)");
+    FROM [EntitiesWithQueryFilterSelfReference] AS [e0]) AND ([e].[Name] <> N'Foo' OR ([e].[Name] IS NULL))");
         }
 
         using (var context = contextFactory.CreateContext())
@@ -4776,7 +4772,7 @@ WHERE EXISTS (
     FROM [EntitiesWithQueryFilterSelfReference] AS [e0]
     WHERE EXISTS (
         SELECT 1
-        FROM [EntitiesWithQueryFilterSelfReference] AS [e1])) AND ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL)");
+        FROM [EntitiesWithQueryFilterSelfReference] AS [e1])) AND ([e].[Name] <> N'Foo' OR ([e].[Name] IS NULL))");
         }
     }
 
@@ -5363,16 +5359,16 @@ OUTER APPLY (
     SELECT [s].[ThingId], [t].[Id], [s].[Id] AS [Id0]
     FROM [Things] AS [t]
     LEFT JOIN [Subthings] AS [s] ON [t].[Id] = [s].[ThingId]
-    WHERE (
+    WHERE ((
         SELECT TOP(1) [v].[Id]
         FROM [Values] AS [v]
-        WHERE [e].[Id] = [v].[Entity11023Id]) IS NOT NULL AND ((
+        WHERE [e].[Id] = [v].[Entity11023Id]) IS NOT NULL) AND ((
         SELECT TOP(1) [v0].[Id]
         FROM [Values] AS [v0]
-        WHERE [e].[Id] = [v0].[Entity11023Id]) = [t].[Value11023Id] OR ((
+        WHERE [e].[Id] = [v0].[Entity11023Id]) = [t].[Value11023Id] OR (((
         SELECT TOP(1) [v0].[Id]
         FROM [Values] AS [v0]
-        WHERE [e].[Id] = [v0].[Entity11023Id]) IS NULL AND [t].[Value11023Id] IS NULL))
+        WHERE [e].[Id] = [v0].[Entity11023Id]) IS NULL) AND ([t].[Value11023Id] IS NULL)))
 ) AS [t0]
 ORDER BY [e].[Id], [t0].[Id]");
         }
@@ -5768,7 +5764,7 @@ LEFT JOIN (
         WHEN COALESCE((
             SELECT MAX([d2].[GameNumber])
             FROM [DbGame] AS [d2]
-            WHERE [d1].[Id] IS NOT NULL AND [d1].[Id] = [d2].[SeasonId]), 0) > 10 THEN CAST(1 AS bit)
+            WHERE ([d1].[Id] IS NOT NULL) AND [d1].[Id] = [d2].[SeasonId]), 0) > 10 THEN CAST(1 AS bit)
         ELSE CAST(0 AS bit)
     END AS [IsPastTradeDeadline], [d].[DbTradeId]
     FROM [DbTradeAsset] AS [d]
@@ -6263,7 +6259,7 @@ WHERE (
     SELECT COUNT(*)
     FROM [Customers] AS [c0]
     LEFT JOIN [CustomerMemberships] AS [c1] ON [c0].[Id] = [c1].[CustomerId]
-    WHERE [c1].[Id] IS NOT NULL AND [c0].[Id] = [c].[CustomerId]) > 0");
+    WHERE ([c1].[Id] IS NOT NULL) AND [c0].[Id] = [c].[CustomerId]) > 0");
         }
 
         using (var context = contextFactory.CreateContext())
@@ -7294,13 +7290,13 @@ CROSS JOIN (
 
 SELECT [e].[Id], [e].[Name], [e].[TenantId]
 FROM [Entities] AS [e]
-WHERE ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL) AND [e].[TenantId] = @__ef_filter__p_0",
+WHERE ([e].[Name] <> N'Foo' OR ([e].[Name] IS NULL)) AND [e].[TenantId] = @__ef_filter__p_0",
                 //
                 @"@__ef_filter__p_0='2'
 
 SELECT [e].[Id], [e].[Name], [e].[TenantId]
 FROM [Entities] AS [e]
-WHERE ([e].[Name] <> N'Foo' OR [e].[Name] IS NULL) AND [e].[TenantId] = @__ef_filter__p_0");
+WHERE ([e].[Name] <> N'Foo' OR ([e].[Name] IS NULL)) AND [e].[TenantId] = @__ef_filter__p_0");
         }
     }
 
@@ -8492,8 +8488,7 @@ ORDER BY [t].[Id], [t].[SecondOwner23211Id]");
             Add(
                 new SecondOwner23211
                 {
-                    Dependents = new List<SecondDependent23211> { new(), new() },
-                    Owned = new OwnedType23211 { Value = "A" }
+                    Dependents = new List<SecondDependent23211> { new(), new() }, Owned = new OwnedType23211 { Value = "A" }
                 });
 
             SaveChanges();
@@ -8688,8 +8683,7 @@ WHERE [l].[Name] = N'My Location'");
                             l => l.leftg.DefaultIfEmpty(),
                             (x, y) => new MyContext19253.JoinResult19253<MyContext19253.A19253, MyContext19253.B19253>
                             {
-                                Left = y,
-                                Right = x.right
+                                Left = y, Right = x.right
                             })
                         .Where(z => z.Left.Equals(null)))
                 .ToList();
@@ -8731,8 +8725,7 @@ WHERE [a0].[Id] IS NULL");
                             l => l.leftg.DefaultIfEmpty(),
                             (x, y) => new MyContext19253.JoinResult19253<MyContext19253.A19253, MyContext19253.B19253>
                             {
-                                Left = y,
-                                Right = x.right
+                                Left = y, Right = x.right
                             })
                         .Where(z => z.Left.Equals(null)))
                 .ToList();
@@ -8774,8 +8767,7 @@ WHERE [a0].[Id] IS NULL");
                             l => l.leftg.DefaultIfEmpty(),
                             (x, y) => new MyContext19253.JoinResult19253<MyContext19253.A19253, MyContext19253.B19253>
                             {
-                                Left = y,
-                                Right = x.right
+                                Left = y, Right = x.right
                             }))
                 .ToList();
 
@@ -8815,8 +8807,7 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]");
                             l => l.leftg.DefaultIfEmpty(),
                             (x, y) => new MyContext19253.JoinResult19253<MyContext19253.A19253, MyContext19253.B19253>
                             {
-                                Left = y,
-                                Right = x.right
+                                Left = y, Right = x.right
                             }))
                 .ToList();
 
@@ -9067,7 +9058,7 @@ WHERE JSON_VALUE([b].[JObject], '$.Author') = N'Maumar'");
 
         try
         {
-            context.Add(observableThing);
+            await context.AddAsync(observableThing);
             await context.SaveChangesAsync();
         }
         finally
@@ -9358,12 +9349,12 @@ OUTER APPLY (
     SELECT [m0].[Id], [m0].[Budget], [m0].[Description], [m0].[DurationInMins], [m0].[Name], [m0].[PosterUrl], [m0].[Rating], [m0].[ReleaseDate], [m0].[Revenue]
     FROM [MovieActorEntity] AS [m]
     INNER JOIN [MovieEntity] AS [m0] ON [m].[MovieId] = [m0].[Id]
-    WHERE [t].[Id0] IS NOT NULL AND [t].[Id0] = [m].[ActorId]
+    WHERE ([t].[Id0] IS NOT NULL) AND [t].[Id0] = [m].[ActorId]
     UNION
     SELECT [m2].[Id], [m2].[Budget], [m2].[Description], [m2].[DurationInMins], [m2].[Name], [m2].[PosterUrl], [m2].[Rating], [m2].[ReleaseDate], [m2].[Revenue]
     FROM [MovieDirectorEntity] AS [m1]
     INNER JOIN [MovieEntity] AS [m2] ON [m1].[MovieId] = [m2].[Id]
-    WHERE [t].[Id1] IS NOT NULL AND [t].[Id1] = [m1].[DirectorId]
+    WHERE ([t].[Id1] IS NOT NULL) AND [t].[Id1] = [m1].[DirectorId]
 ) AS [t0]
 ORDER BY [t].[Id], [t].[Id0], [t].[Id1], [p0].[Id]");
     }
@@ -9499,7 +9490,7 @@ FROM (
         SELECT COUNT(*)
         FROM [Cars] AS [c]
         INNER JOIN [Taxis] AS [t0] ON [c].[Id] = [t0].[CarId]
-        WHERE [u].[Id] = [c].[EUserId] AND ([t0].[ReportText] <> N'' OR [t0].[ReportText] IS NULL)) AS [c], [u].[Id]
+        WHERE [u].[Id] = [c].[EUserId] AND ([t0].[ReportText] <> N'' OR ([t0].[ReportText] IS NULL))) AS [c], [u].[Id]
     FROM [Users] AS [u]
 ) AS [t]
 OUTER APPLY (
@@ -10152,8 +10143,7 @@ ORDER BY [t].[Id]");
                         .Select(
                             c => new CollectionViewModel25225
                             {
-                                Id = c.Id,
-                                ParentId = c.ParentId,
+                                Id = c.Id, ParentId = c.ParentId,
                             })
                         .ToArray()
                 });

@@ -386,6 +386,9 @@ namespace Microsoft.EntityFrameworkCore
             public void StateChanged(InternalEntityEntry entry, EntityState oldState, bool fromQuery)
                 => throw new NotImplementedException();
 
+            public void FixupResolved(InternalEntityEntry entry, InternalEntityEntry duplicateEntry)
+                => throw new NotImplementedException();
+
             public bool BeginDelayedFixup()
                 => false;
 
@@ -2992,6 +2995,34 @@ namespace Microsoft.EntityFrameworkCore
                             .AddEntityFrameworkInMemoryDatabase()
                             .BuildServiceProvider(validateScopes: true))
                     .UseInMemoryDatabase(Guid.NewGuid().ToString());
+        }
+
+        [ConditionalFact]
+        public void Throws_adding_singleton_interceptors_in_OnConfiguring_when_UseInternalServiceProvider()
+        {
+            using var context = new SingletonInterceptorFactoryContext();
+            Assert.Equal(
+                CoreStrings.InvalidUseService(
+                    nameof(DbContextOptionsBuilder.AddInterceptors),
+                    nameof(DbContextOptionsBuilder.UseInternalServiceProvider),
+                    nameof(ISingletonInterceptor)),
+                Assert.Throws<InvalidOperationException>(() => context.Model).Message);
+        }
+
+        private class SingletonInterceptorFactoryContext : DbContext
+        {
+            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+                => optionsBuilder
+                    .AddInterceptors(new DummyInterceptor())
+                    .UseInternalServiceProvider(
+                        new ServiceCollection()
+                            .AddEntityFrameworkInMemoryDatabase()
+                            .BuildServiceProvider(validateScopes: true))
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString());
+        }
+
+        private class DummyInterceptor : ISingletonInterceptor
+        {
         }
 
         [ConditionalFact]

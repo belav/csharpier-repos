@@ -3,7 +3,6 @@
 
 using System.IO;
 using FluentAssertions;
-using System.Linq;
 using Xunit;
 
 namespace System.CommandLine.DragonFruit.Tests
@@ -13,6 +12,10 @@ namespace System.CommandLine.DragonFruit.Tests
         private class Program
         {
             public static void Main(bool verbose = false, string flavor = null, int? count = 0)
+            {
+            }
+
+            public static void MainWithoutParam()
             {
             }
         }
@@ -46,6 +49,31 @@ namespace System.CommandLine.DragonFruit.Tests
             helpMetadata.ParameterDescriptions["verbose"].Should().Be("Show verbose output");
             helpMetadata.ParameterDescriptions["flavor"].Should().Be("Which flavor to use");
             helpMetadata.ParameterDescriptions["count"].Should().Be("How many smoothies?");
+        }
+
+        [Fact]
+        public void It_finds_member_without_param()
+        {
+            const string xml = @"<?xml version=""1.0""?>
+<doc>
+    <assembly>
+        <name>DragonFruit</name>
+    </assembly>
+    <members>
+        <member name=""M:System.CommandLine.DragonFruit.Tests." + nameof(XmlDocReaderTests) + @".Program.MainWithoutParam"">
+            <summary>
+            Hello
+            </summary>
+        </member>
+    </members>
+</doc>
+";
+            Action action = Program.MainWithoutParam;
+            var reader = new StringReader(xml);
+            XmlDocReader.TryLoad(reader, out var docReader).Should().BeTrue();
+
+            docReader.TryGetMethodDescription(action.Method, out var helpMetadata).Should().BeTrue();
+            helpMetadata.Description.Should().Be("Hello");
         }
     }
 }

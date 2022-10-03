@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.CommandLine.Binding;
-using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
@@ -21,7 +20,7 @@ namespace System.CommandLine.DragonFruit.Tests
     public class ConfigureFromMethodTests
     {
         private object[] _receivedValues;
-        private readonly TestConsole _testConsole = new TestConsole();
+        private readonly TestConsole _testConsole = new();
 
         [Fact]
         public async Task Generated_boolean_parameters_will_accept_zero_arguments()

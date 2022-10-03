@@ -26,7 +26,9 @@ public abstract class DiagnosticAnalyzerTestBase
         => GetDiagnosticsAsync(source, analyzerDiagnosticsOnly: true, extraUsings);
 
     protected virtual async Task<(Diagnostic[], string)> GetDiagnosticsAsync(
-            string source, bool analyzerDiagnosticsOnly, params string[] extraUsings)
+        string source,
+        bool analyzerDiagnosticsOnly,
+        params string[] extraUsings)
     {
         var sb = new StringBuilder();
         foreach (var @using in _usings.Concat(extraUsings))
@@ -59,11 +61,14 @@ public abstract class DiagnosticAnalyzerTestBase
         var analyzer = CreateDiagnosticAnalyzer();
         var compilationWithAnalyzers
             = compilation
-                .WithOptions(
-                    compilation.Options.WithSpecificDiagnosticOptions(
-                        compilation.Options.SpecificDiagnosticOptions
-                            .AddRange(analyzer.SupportedDiagnostics.ToDictionary(d => d.Id, d => ReportDiagnostic.Default))))
-                .WithAnalyzers(ImmutableArray.Create(analyzer));
+                .WithAnalyzers(
+                    ImmutableArray.Create(analyzer),
+                    new CompilationWithAnalyzersOptions(
+                        new AnalyzerOptions(new ImmutableArray<AdditionalText>()),
+                        onAnalyzerException: null,
+                        concurrentAnalysis: false,
+                        logAnalyzerExecutionTime: false,
+                        reportSuppressedDiagnostics: true));
 
         var diagnostics = analyzerDiagnosticsOnly
             ? await compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync()
@@ -99,10 +104,7 @@ public abstract class DiagnosticAnalyzerTestBase
             .WithCompilationOptions(
                 new CSharpCompilationOptions(
                     OutputKind.DynamicallyLinkedLibrary,
-                    specificDiagnosticOptions: new Dictionary<string, ReportDiagnostic>
-                    {
-                        { "CS1701", ReportDiagnostic.Suppress }
-                    },
+                    specificDiagnosticOptions: new Dictionary<string, ReportDiagnostic> { { "CS1701", ReportDiagnostic.Suppress } },
                     nullableContextOptions: NullableContextOptions.Enable));
     }
 }

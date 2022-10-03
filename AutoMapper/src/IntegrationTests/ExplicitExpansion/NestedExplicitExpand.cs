@@ -1,14 +1,6 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper.UnitTests;
-using Microsoft.EntityFrameworkCore;
-using Shouldly;
-using Xunit;
+﻿namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
-namespace AutoMapper.IntegrationTests.ExplicitExpansion;
-
-public class NestedExplicitExpand : AutoMapperSpecBase, IAsyncLifetime
+public class NestedExplicitExpand : IntegrationTest<NestedExplicitExpand.DatabaseInitializer>
 {
     protected override MapperConfiguration CreateConfiguration() => new(cfg =>
     {
@@ -80,7 +72,7 @@ public class NestedExplicitExpand : AutoMapperSpecBase, IAsyncLifetime
         public DbSet<Class3> Class3Set { get; set; }
     }
 
-    public class DatabaseInitializer : CreateDatabaseIfNotExists<TestContext>
+    public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
     {
         protected override void Seed(TestContext context)
         {
@@ -144,12 +136,4 @@ public class NestedExplicitExpand : AutoMapperSpecBase, IAsyncLifetime
 
         public Class2 Class2 { get; set; }
     }
-    public async Task InitializeAsync()
-    {
-        var initializer = new DatabaseInitializer();
-
-        await initializer.Migrate();
-    }
-
-    public Task DisposeAsync() => Task.CompletedTask;
 }

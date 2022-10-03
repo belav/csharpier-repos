@@ -31,6 +31,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
         public virtual bool NoStoreCascades
             => false;
 
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
+            => base.AddOptions(builder).AddInterceptors(new UpdatingIdentityResolutionInterceptor());
+
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
             modelBuilder.Entity<Root>(
@@ -476,6 +479,64 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                 });
 
             modelBuilder.Entity<City>();
+
+            modelBuilder.Entity<SomethingCategory>().HasData(
+                new SomethingCategory
+                {
+                    Id = 1,
+                    Name = "A"
+                },
+                new SomethingCategory
+                {
+                    Id = 2,
+                    Name = "B"
+                },
+                new SomethingCategory
+                {
+                    Id = 3,
+                    Name = "C"
+                });
+
+            modelBuilder.Entity<Something>().HasOne(s => s.SomethingCategory)
+                .WithMany()
+                .HasForeignKey(s => s.CategoryId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<SomethingOfCategoryA>(builder =>
+            {
+                builder.Property<int>("CategoryId").IsRequired();
+
+                builder.HasKey(nameof(SomethingOfCategoryA.SomethingId), "CategoryId");
+
+                builder.HasOne(d => d.Something)
+                    .WithOne(p => p.SomethingOfCategoryA)
+                    .HasPrincipalKey<Something>(p => new {p.Id, p.CategoryId})
+                    .HasForeignKey<SomethingOfCategoryA>(nameof(SomethingOfCategoryA.SomethingId), "CategoryId")
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                builder.HasOne<SomethingCategory>()
+                    .WithMany()
+                    .HasForeignKey("CategoryId")
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+            modelBuilder.Entity<SomethingOfCategoryB>(builder =>
+            {
+                builder.Property(e => e.CategoryId).IsRequired();
+
+                builder.HasKey(e => new {e.SomethingId, e.CategoryId});
+
+                builder.HasOne(d => d.Something)
+                    .WithOne(p => p.SomethingOfCategoryB)
+                    .HasPrincipalKey<Something>(p => new {p.Id, p.CategoryId})
+                    .HasForeignKey<SomethingOfCategoryB>(socb => new {socb.SomethingId, socb.CategoryId})
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                builder.HasOne(e => e.SomethingCategory)
+                    .WithMany()
+                    .HasForeignKey(e => e.CategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
         }
 
         protected virtual object CreateFullGraph()
@@ -697,23 +758,33 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
         => query;
 
     protected Root LoadRequiredGraph(DbContext context)
+        => QueryRequiredGraph(context)
+            .Single(IsTheRoot);
+
+    protected IOrderedQueryable<Root> QueryRequiredGraph(DbContext context)
         => ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.RequiredChildren).ThenInclude(e => e.Children)
             .Include(e => e.RequiredSingle).ThenInclude(e => e.Single)
-            .OrderBy(e => e.Id)
-            .Single(IsTheRoot);
+            .OrderBy(e => e.Id);
 
     protected Root LoadOptionalGraph(DbContext context)
+        => QueryOptionalGraph(context)
+            .Single(IsTheRoot);
+
+    protected IOrderedQueryable<Root> QueryOptionalGraph(DbContext context)
         => ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.OptionalChildren).ThenInclude(e => e.Children)
             .Include(e => e.OptionalChildren).ThenInclude(e => e.CompositeChildren)
             .Include(e => e.OptionalSingle).ThenInclude(e => e.Single)
             .Include(e => e.OptionalSingleDerived).ThenInclude(e => e.Single)
             .Include(e => e.OptionalSingleMoreDerived).ThenInclude(e => e.Single)
-            .OrderBy(e => e.Id)
-            .Single(IsTheRoot);
+            .OrderBy(e => e.Id);
 
     protected Root LoadRequiredNonPkGraph(DbContext context)
+        => QueryRequiredNonPkGraph(context)
+            .Single(IsTheRoot);
+
+    protected IOrderedQueryable<Root> QueryRequiredNonPkGraph(DbContext context)
         => ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.RequiredNonPkSingle).ThenInclude(e => e.Single)
             .Include(e => e.RequiredNonPkSingleDerived).ThenInclude(e => e.Single)
@@ -721,19 +792,25 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
             .Include(e => e.RequiredNonPkSingleMoreDerived).ThenInclude(e => e.Single)
             .Include(e => e.RequiredNonPkSingleMoreDerived).ThenInclude(e => e.Root)
             .Include(e => e.RequiredNonPkSingleMoreDerived).ThenInclude(e => e.DerivedRoot)
-            .OrderBy(e => e.Id)
-            .Single(IsTheRoot);
+            .OrderBy(e => e.Id);
 
     protected Root LoadRequiredAkGraph(DbContext context)
+        => QueryRequiredAkGraph(context)
+            .Single(IsTheRoot);
+
+    protected IOrderedQueryable<Root> QueryRequiredAkGraph(DbContext context)
         => ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.RequiredChildrenAk).ThenInclude(e => e.Children)
             .Include(e => e.RequiredChildrenAk).ThenInclude(e => e.CompositeChildren)
             .Include(e => e.RequiredSingleAk).ThenInclude(e => e.Single)
             .Include(e => e.RequiredSingleAk).ThenInclude(e => e.SingleComposite)
-            .OrderBy(e => e.Id)
-            .Single(IsTheRoot);
+            .OrderBy(e => e.Id);
 
     protected Root LoadOptionalAkGraph(DbContext context)
+        => QueryOptionalAkGraph(context)
+            .Single(IsTheRoot);
+
+    protected IOrderedQueryable<Root> QueryOptionalAkGraph(DbContext context)
         => ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.OptionalChildrenAk).ThenInclude(e => e.Children)
             .Include(e => e.OptionalChildrenAk).ThenInclude(e => e.CompositeChildren)
@@ -741,10 +818,13 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
             .Include(e => e.OptionalSingleAk).ThenInclude(e => e.SingleComposite)
             .Include(e => e.OptionalSingleAkDerived).ThenInclude(e => e.Single)
             .Include(e => e.OptionalSingleAkMoreDerived).ThenInclude(e => e.Single)
-            .OrderBy(e => e.Id)
-            .Single(IsTheRoot);
+            .OrderBy(e => e.Id);
 
     protected Root LoadRequiredNonPkAkGraph(DbContext context)
+        => QueryRequiredNonPkAkGraph(context)
+            .Single(IsTheRoot);
+
+    protected IOrderedQueryable<Root> QueryRequiredNonPkAkGraph(DbContext context)
         => ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.RequiredNonPkSingleAk).ThenInclude(e => e.Single)
             .Include(e => e.RequiredNonPkSingleAkDerived).ThenInclude(e => e.Single)
@@ -752,23 +832,28 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
             .Include(e => e.RequiredNonPkSingleAkMoreDerived).ThenInclude(e => e.Single)
             .Include(e => e.RequiredNonPkSingleAkMoreDerived).ThenInclude(e => e.Root)
             .Include(e => e.RequiredNonPkSingleAkMoreDerived).ThenInclude(e => e.DerivedRoot)
-            .OrderBy(e => e.Id)
-            .Single(IsTheRoot);
+            .OrderBy(e => e.Id);
 
     protected Root LoadOptionalOneToManyGraph(DbContext context)
+        => QueryOptionalOneToManyGraph(context)
+            .Single(IsTheRoot);
+
+    protected IOrderedQueryable<Root> QueryOptionalOneToManyGraph(DbContext context)
         => ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.OptionalChildren).ThenInclude(e => e.Children)
             .Include(e => e.OptionalChildren).ThenInclude(e => e.CompositeChildren)
             .Include(e => e.OptionalChildrenAk).ThenInclude(e => e.Children)
             .Include(e => e.OptionalChildrenAk).ThenInclude(e => e.CompositeChildren)
-            .OrderBy(e => e.Id)
-            .Single(IsTheRoot);
+            .OrderBy(e => e.Id);
 
     protected Root LoadRequiredCompositeGraph(DbContext context)
+        => QueryRequiredCompositeGraph(context)
+            .Single(IsTheRoot);
+
+    protected IOrderedQueryable<Root> QueryRequiredCompositeGraph(DbContext context)
         => ModifyQueryRoot(context.Set<Root>())
             .Include(e => e.RequiredCompositeChildren).ThenInclude(e => e.CompositeChildren)
-            .OrderBy(e => e.Id)
-            .Single(IsTheRoot);
+            .OrderBy(e => e.Id);
 
     protected static void AssertEntries(IReadOnlyList<EntityEntry> expectedEntries, IReadOnlyList<EntityEntry> actualEntries)
     {
@@ -3470,6 +3555,134 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
         {
             get => _users;
             set => SetWithNotify(value, ref _users);
+        }
+    }
+
+    protected class SomethingCategory : NotifyingEntity
+    {
+        private int _id;
+        private string _name;
+
+        public int Id
+        {
+            get => _id;
+            set => SetWithNotify(value, ref _id);
+        }
+
+        public string Name
+        {
+            get => _name;
+            set => SetWithNotify(value, ref _name);
+        }
+    }
+
+    protected class Something : NotifyingEntity
+    {
+        private int _id;
+        private int _categoryId;
+        private string _name;
+        private SomethingCategory _somethingCategory;
+        private SomethingOfCategoryA _somethingOfCategoryA;
+        private SomethingOfCategoryB _somethingOfCategoryB;
+
+        public int Id
+        {
+            get => _id;
+            set => SetWithNotify(value, ref _id);
+        }
+
+        public int CategoryId
+        {
+            get => _categoryId;
+            set => SetWithNotify(value, ref _categoryId);
+        }
+
+        public string Name
+        {
+            get => _name;
+            set => SetWithNotify(value, ref _name);
+        }
+
+        public virtual SomethingCategory SomethingCategory
+        {
+            get => _somethingCategory;
+            set => SetWithNotify(value, ref _somethingCategory);
+        }
+
+        public virtual SomethingOfCategoryA SomethingOfCategoryA
+        {
+            get => _somethingOfCategoryA;
+            set => SetWithNotify(value, ref _somethingOfCategoryA);
+        }
+
+        public virtual SomethingOfCategoryB SomethingOfCategoryB
+        {
+            get => _somethingOfCategoryB;
+            set => SetWithNotify(value, ref _somethingOfCategoryB);
+        }
+    }
+
+    protected class SomethingOfCategoryA : NotifyingEntity
+    {
+        private int _somethingId;
+        private string _name;
+        private Something _something;
+
+        public int SomethingId
+        {
+            get => _somethingId;
+            set => SetWithNotify(value, ref _somethingId);
+        }
+
+        public string Name
+        {
+            get => _name;
+            set => SetWithNotify(value, ref _name);
+        }
+
+        public virtual Something Something
+        {
+            get => _something;
+            set => SetWithNotify(value, ref _something);
+        }
+    }
+
+    protected class SomethingOfCategoryB : NotifyingEntity
+    {
+        private int _somethingId;
+        private int _categoryId;
+        private string _name;
+        private SomethingCategory _somethingCategory;
+        private Something _something;
+
+        public int SomethingId
+        {
+            get => _somethingId;
+            set => SetWithNotify(value, ref _somethingId);
+        }
+
+        public int CategoryId
+        {
+            get => _categoryId;
+            set => SetWithNotify(value, ref _categoryId);
+        }
+
+        public string Name
+        {
+            get => _name;
+            set => SetWithNotify(value, ref _name);
+        }
+
+        public virtual SomethingCategory SomethingCategory
+        {
+            get => _somethingCategory;
+            set => SetWithNotify(value, ref _somethingCategory);
+        }
+
+        public virtual Something Something
+        {
+            get => _something;
+            set => SetWithNotify(value, ref _something);
         }
     }
 

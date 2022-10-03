@@ -1,15 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper.UnitTests;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Shouldly;
-using Xunit;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
-public class ProjectAndAllowNullCollections : AutoMapperSpecBase, IAsyncLifetime
+public class ProjectAndAllowNullCollections : IntegrationTest<ProjectAndAllowNullCollections.DatabaseInitializer>
 {
     public class Foo
     {
@@ -137,13 +130,4 @@ public class ProjectAndAllowNullCollections : AutoMapperSpecBase, IAsyncLifetime
             foos[0].Bazs.ShouldBeNull();
         }
     }
-
-    public async Task InitializeAsync()
-    {
-        var initializer = new DatabaseInitializer();
-
-        await initializer.Migrate();
-    }
-
-    public Task DisposeAsync() => Task.CompletedTask;
 }

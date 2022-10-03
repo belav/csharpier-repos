@@ -37,7 +37,8 @@ public class SqlServerModificationCommandBatchFactoryTest
                             new RelationalSqlGenerationHelperDependencies()),
                         typeMapper)),
                 new CurrentDbContext(new FakeDbContext()),
-                logger),
+                logger,
+                new FakeDiagnosticsLogger<DbLoggerCategory.Update>()),
             optionsBuilder.Options);
 
         var batch = factory.Create();
@@ -72,7 +73,8 @@ public class SqlServerModificationCommandBatchFactoryTest
                             new RelationalSqlGenerationHelperDependencies()),
                         typeMapper)),
                 new CurrentDbContext(new FakeDbContext()),
-                logger),
+                logger,
+                new FakeDiagnosticsLogger<DbLoggerCategory.Update>()),
             optionsBuilder.Options);
 
         var batch = factory.Create();
@@ -92,7 +94,7 @@ public class SqlServerModificationCommandBatchFactoryTest
     {
         var modificationCommand = new ModificationCommandFactory().CreateNonTrackedModificationCommand(
             new NonTrackedModificationCommandParameters(
-            name, schema, sensitiveLoggingEnabled));
+                name, schema, sensitiveLoggingEnabled));
 
         return modificationCommand;
     }

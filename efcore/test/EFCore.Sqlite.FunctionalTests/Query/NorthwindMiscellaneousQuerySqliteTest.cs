@@ -27,7 +27,7 @@ public class NorthwindMiscellaneousQuerySqliteTest : NorthwindMiscellaneousQuery
         AssertSql(
             @"SELECT ""o"".""CustomerID""
 FROM ""Orders"" AS ""o""
-WHERE ""o"".""OrderDate"" IS NOT NULL AND ('10' = '' OR instr(CAST(""o"".""EmployeeID"" AS TEXT), '10') > 0)");
+WHERE (""o"".""OrderDate"" IS NOT NULL) AND ('10' = '' OR instr(CAST(""o"".""EmployeeID"" AS TEXT), '10') > 0)");
     }
 
     public override async Task Take_Skip(bool async)
@@ -207,7 +207,7 @@ FROM (
 
 SELECT COUNT(*)
 FROM (
-    SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
+    SELECT ""c"".""CustomerID"", ""c"".""Country""
     FROM ""Customers"" AS ""c""
     ORDER BY ""c"".""Country""
     LIMIT -1 OFFSET @__p_0
@@ -223,7 +223,7 @@ FROM (
 
 SELECT COUNT(*)
 FROM (
-    SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
+    SELECT ""c"".""CustomerID"", ""c"".""Country""
     FROM ""Customers"" AS ""c""
     ORDER BY ""c"".""Country""
     LIMIT @__p_0
@@ -239,7 +239,7 @@ FROM (
 
 SELECT COUNT(*)
 FROM (
-    SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
+    SELECT ""c"".""CustomerID""
     FROM ""Customers"" AS ""c""
     LIMIT -1 OFFSET @__p_0
 ) AS ""t""");
@@ -254,7 +254,7 @@ FROM (
 
 SELECT COUNT(*)
 FROM (
-    SELECT ""c"".""CustomerID"", ""c"".""Address"", ""c"".""City"", ""c"".""CompanyName"", ""c"".""ContactName"", ""c"".""ContactTitle"", ""c"".""Country"", ""c"".""Fax"", ""c"".""Phone"", ""c"".""PostalCode"", ""c"".""Region""
+    SELECT ""c"".""CustomerID""
     FROM ""Customers"" AS ""c""
     LIMIT @__p_0
 ) AS ""t""");

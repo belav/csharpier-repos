@@ -24,6 +24,21 @@ public interface ITableMapping : ITableMappingBase
     new IEnumerable<IColumnMapping> ColumnMappings { get; }
 
     /// <summary>
+    ///     Gets the corresponding insert stored procedure mapping if it exists.
+    /// </summary>
+    IStoredProcedureMapping? InsertStoredProcedureMapping { get; }
+
+    /// <summary>
+    ///     Gets the corresponding insert stored procedure mapping if it exists.
+    /// </summary>
+    IStoredProcedureMapping? DeleteStoredProcedureMapping { get; }
+
+    /// <summary>
+    ///     Gets the corresponding insert stored procedure mapping if it exists.
+    /// </summary>
+    IStoredProcedureMapping? UpdateStoredProcedureMapping { get; }
+
+    /// <summary>
     ///     <para>
     ///         Creates a human-readable representation of the given metadata.
     ///     </para>
@@ -40,26 +55,59 @@ public interface ITableMapping : ITableMappingBase
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
 
-        builder.Append(indentString);
-
-        var singleLine = (options & MetadataDebugStringOptions.SingleLine) != 0;
-        if (singleLine)
+        try
         {
-            builder.Append("TableMapping: ");
+            builder.Append(indentString);
+
+            var singleLine = (options & MetadataDebugStringOptions.SingleLine) != 0;
+            if (singleLine)
+            {
+                builder.Append("TableMapping: ");
+            }
+
+            builder
+                .Append(EntityType.Name)
+                .Append(" - ")
+                .Append(Table.Name);
+
+            builder.Append(" ");
+            if (!IncludesDerivedTypes)
+            {
+                builder.Append("!");
+            }
+
+            builder.Append("IncludesDerivedTypes");
+
+            if (IsSharedTablePrincipal != null)
+            {
+                builder.Append(" ");
+                if (!IsSharedTablePrincipal.Value)
+                {
+                    builder.Append("!");
+                }
+
+                builder.Append("IsSharedTablePrincipal");
+            }
+
+            if (IsSplitEntityTypePrincipal != null)
+            {
+                builder.Append(" ");
+                if (!IsSplitEntityTypePrincipal.Value)
+                {
+                    builder.Append("!");
+                }
+
+                builder.Append("IsSplitEntityTypePrincipal");
+            }
+
+            if (!singleLine && (options & MetadataDebugStringOptions.IncludeAnnotations) != 0)
+            {
+                builder.Append(AnnotationsToDebugString(indent + 2));
+            }
         }
-
-        builder.Append(EntityType.Name).Append(" - ");
-
-        builder.Append(Table.Name);
-
-        if (IncludesDerivedTypes)
+        catch (Exception exception)
         {
-            builder.Append(" IncludesDerivedTypes");
-        }
-
-        if (!singleLine && (options & MetadataDebugStringOptions.IncludeAnnotations) != 0)
-        {
-            builder.Append(AnnotationsToDebugString(indent + 2));
+            builder.AppendLine().AppendLine(CoreStrings.DebugViewError(exception.Message));
         }
 
         return builder.ToString();

@@ -16,7 +16,7 @@ using Microsoft.CodeAnalysis.CodeGeneration;
 using Microsoft.CodeAnalysis.CSharp.CodeGeneration;
 using Microsoft.CodeAnalysis.CSharp.CodeStyle;
 using Microsoft.CodeAnalysis.CSharp.Extensions;
-using Microsoft.CodeAnalysis.CSharp.LanguageServices;
+using Microsoft.CodeAnalysis.CSharp.LanguageService;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles;
 using Microsoft.CodeAnalysis.Editing;
@@ -463,7 +463,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 var replacements = new Dictionary<SyntaxNode, SyntaxNode>();
 
                 var declarations = statement.DescendantNodes()
-                    .Where(n => n.IsKind(SyntaxKind.DeclarationExpression, SyntaxKind.DeclarationPattern));
+                    .Where(n => n.Kind() is SyntaxKind.DeclarationExpression or SyntaxKind.DeclarationPattern);
 
                 foreach (var node in declarations)
                 {
@@ -630,7 +630,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 if (CSharpSelectionResult.ShouldCallConfigureAwaitFalse())
                 {
-                    if (AnalyzerResult.ReturnType.GetMembers().Any(x => x is IMethodSymbol
+                    if (AnalyzerResult.ReturnType.GetMembers().Any(static x => x is IMethodSymbol
                         {
                             Name: nameof(Task.ConfigureAwait),
                             Parameters: { Length: 1 } parameters
@@ -854,7 +854,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 var localFunctionKind = new SymbolSpecification.SymbolKindOrTypeKind(MethodKind.LocalFunction);
                 if (LocalFunction)
                 {
-                    if (namingRules.Any(rule => rule.NamingStyle.CapitalizationScheme.Equals(Capitalization.CamelCase) && rule.SymbolSpecification.AppliesTo(localFunctionKind, CreateMethodModifiers(), null)))
+                    if (namingRules.Any(static (rule, arg) => rule.NamingStyle.CapitalizationScheme.Equals(Capitalization.CamelCase) && rule.SymbolSpecification.AppliesTo(arg.localFunctionKind, arg.self.CreateMethodModifiers(), null), (self: this, localFunctionKind)))
                     {
                         methodName = NewMethodCamelCaseStr;
                     }

@@ -1,13 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper.UnitTests;
-using Microsoft.EntityFrameworkCore;
-using Shouldly;
-using Xunit;
-
-namespace AutoMapper.IntegrationTests
+﻿namespace AutoMapper.IntegrationTests
 {
     namespace ChildClassTests
     {
@@ -60,7 +51,7 @@ namespace AutoMapper.IntegrationTests
         }
 
 
-        public class UnitTest : AutoMapperSpecBase, IAsyncLifetime
+        public class UnitTest : IntegrationTest<DatabaseInitializer>
         {
             protected override MapperConfiguration CreateConfiguration() => new(cfg =>
             {
@@ -103,16 +94,6 @@ namespace AutoMapper.IntegrationTests
             }
             [Fact]
             public void MapShouldThrow() => new Action(() => Mapper.Map<SubDTO>(new Sub())).ShouldThrow<AutoMapperConfigurationException>().Message.ShouldBe("CreateProjection works with ProjectTo, not with Map.");
-
-            public async Task InitializeAsync()
-            {
-                var initializer = new DatabaseInitializer();
-
-                await initializer.Migrate();
-            }
-
-            public Task DisposeAsync() => Task.CompletedTask;
         }
-
     }
 }

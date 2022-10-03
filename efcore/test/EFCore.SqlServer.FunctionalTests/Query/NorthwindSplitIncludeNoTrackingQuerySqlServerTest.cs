@@ -1,7 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit.Sdk;
+using Microsoft.EntityFrameworkCore.SqlServer.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
@@ -23,64 +23,14 @@ public class NorthwindSplitIncludeNoTrackingQuerySqlServerTest : NorthwindSplitI
         => TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Include_collection_skip_take_no_order_by(bool async)
-    {
-        // Split query Skip without OrderBy. Issue #21202.
-        Assert.Equal(
-            "0",
-            (((EqualException)(await Assert.ThrowsAsync<TargetInvocationException>(
-                () => base.Include_collection_skip_take_no_order_by(async))).InnerException!.InnerException)!).Actual);
-
-        AssertSql(
-            @"@__p_0='10'
-@__p_1='5'
-
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-ORDER BY [c].[CustomerID]
-OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY",
-            //
-            @"@__p_0='10'
-@__p_1='5'
-
-SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], [t].[CustomerID]
-FROM (
-    SELECT [c].[CustomerID]
-    FROM [Customers] AS [c]
-    ORDER BY (SELECT 1)
-    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
-) AS [t]
-INNER JOIN [Orders] AS [o] ON [t].[CustomerID] = [o].[CustomerID]
-ORDER BY [t].[CustomerID]");
-    }
+        => Assert.Equal(
+            SqlServerStrings.SplitQueryOffsetWithoutOrderBy,
+            (await Assert.ThrowsAsync<InvalidOperationException>(() => base.Include_collection_skip_take_no_order_by(async))).Message);
 
     public override async Task Include_collection_skip_no_order_by(bool async)
-    {
-        // Split query Skip without OrderBy. Issue #21202.
-        Assert.Equal(
-            "0",
-            (((EqualException)(await Assert.ThrowsAsync<TargetInvocationException>(
-                () => base.Include_collection_skip_no_order_by(async))).InnerException!.InnerException)!).Actual);
-
-        AssertSql(
-            @"@__p_0='10'
-
-SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
-FROM [Customers] AS [c]
-ORDER BY [c].[CustomerID]
-OFFSET @__p_0 ROWS",
-            //
-            @"@__p_0='10'
-
-SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], [t].[CustomerID]
-FROM (
-    SELECT [c].[CustomerID]
-    FROM [Customers] AS [c]
-    ORDER BY (SELECT 1)
-    OFFSET @__p_0 ROWS
-) AS [t]
-INNER JOIN [Orders] AS [o] ON [t].[CustomerID] = [o].[CustomerID]
-ORDER BY [t].[CustomerID]");
-    }
+        => Assert.Equal(
+            SqlServerStrings.SplitQueryOffsetWithoutOrderBy,
+            (await Assert.ThrowsAsync<InvalidOperationException>(() => base.Include_collection_skip_no_order_by(async))).Message);
 
     public override async Task Include_reference_GroupBy_Select(bool async)
     {
@@ -462,14 +412,14 @@ WHERE ([o].[OrderID] % 23) = 13");
             @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
-WHERE [o].[CustomerID] IS NOT NULL AND ([o].[CustomerID] LIKE N'F%')
+WHERE ([o].[CustomerID] IS NOT NULL) AND ([o].[CustomerID] LIKE N'F%')
 ORDER BY [o].[OrderID], [c].[CustomerID]",
             //
             @"SELECT [o0].[OrderID], [o0].[ProductID], [o0].[Discount], [o0].[Quantity], [o0].[UnitPrice], [o].[OrderID], [c].[CustomerID]
 FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
 INNER JOIN [Order Details] AS [o0] ON [o].[OrderID] = [o0].[OrderID]
-WHERE [o].[CustomerID] IS NOT NULL AND ([o].[CustomerID] LIKE N'F%')
+WHERE ([o].[CustomerID] IS NOT NULL) AND ([o].[CustomerID] LIKE N'F%')
 ORDER BY [o].[OrderID], [c].[CustomerID]");
     }
 
@@ -1080,13 +1030,13 @@ ORDER BY [t].[CustomerID]");
         AssertSql(
             @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Orders] AS [o]
-WHERE [o].[CustomerID] IS NOT NULL AND ([o].[CustomerID] LIKE N'F%')
+WHERE ([o].[CustomerID] IS NOT NULL) AND ([o].[CustomerID] LIKE N'F%')
 ORDER BY [o].[OrderID]",
             //
             @"SELECT [o0].[OrderID], [o0].[ProductID], [o0].[Discount], [o0].[Quantity], [o0].[UnitPrice], [o].[OrderID]
 FROM [Orders] AS [o]
 INNER JOIN [Order Details] AS [o0] ON [o].[OrderID] = [o0].[OrderID]
-WHERE [o].[CustomerID] IS NOT NULL AND ([o].[CustomerID] LIKE N'F%')
+WHERE ([o].[CustomerID] IS NOT NULL) AND ([o].[CustomerID] LIKE N'F%')
 ORDER BY [o].[OrderID]");
     }
 
@@ -1687,7 +1637,7 @@ ORDER BY [t].[c], [t].[c0], [t].[OrderID], [t].[CustomerID]");
             @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
-WHERE [o].[CustomerID] IS NOT NULL AND ([o].[CustomerID] LIKE N'F%')");
+WHERE ([o].[CustomerID] IS NOT NULL) AND ([o].[CustomerID] LIKE N'F%')");
     }
 
     public override async Task Include_reference_with_filter_reordered(bool async)
@@ -1760,7 +1710,7 @@ WHERE [o].[CustomerID] = N'ALFKI'");
             @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
-WHERE [o].[CustomerID] IS NOT NULL AND ([o].[CustomerID] LIKE N'F%')");
+WHERE ([o].[CustomerID] IS NOT NULL) AND ([o].[CustomerID] LIKE N'F%')");
     }
 
     public override async Task Include_collection_force_alias_uniquefication(bool async)
@@ -2153,7 +2103,7 @@ FROM [Customers] AS [c]
 OUTER APPLY (
     SELECT TOP(5) [o].[OrderID]
     FROM [Orders] AS [o]
-    WHERE [o].[CustomerID] <> [c].[CustomerID] OR [o].[CustomerID] IS NULL
+    WHERE [o].[CustomerID] <> [c].[CustomerID] OR ([o].[CustomerID] IS NULL)
     ORDER BY [c].[CustomerID]
 ) AS [t]
 WHERE [c].[CustomerID] LIKE N'F%'
@@ -2164,7 +2114,7 @@ FROM [Customers] AS [c]
 OUTER APPLY (
     SELECT TOP(5) [o].[OrderID]
     FROM [Orders] AS [o]
-    WHERE [o].[CustomerID] <> [c].[CustomerID] OR [o].[CustomerID] IS NULL
+    WHERE [o].[CustomerID] <> [c].[CustomerID] OR ([o].[CustomerID] IS NULL)
     ORDER BY [c].[CustomerID]
 ) AS [t]
 INNER JOIN [Orders] AS [o0] ON [c].[CustomerID] = [o0].[CustomerID]
@@ -2381,14 +2331,14 @@ ORDER BY [t].[OrderID], [t0].[OrderID], [t0].[OrderID0], [t0].[ProductID]");
             @"SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate], [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
-WHERE [o].[CustomerID] IS NOT NULL AND ([o].[CustomerID] LIKE N'F%')
+WHERE ([o].[CustomerID] IS NOT NULL) AND ([o].[CustomerID] LIKE N'F%')
 ORDER BY [o].[OrderID], [c].[CustomerID]",
             //
             @"SELECT [o0].[OrderID], [o0].[ProductID], [o0].[Discount], [o0].[Quantity], [o0].[UnitPrice], [o].[OrderID], [c].[CustomerID]
 FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
 INNER JOIN [Order Details] AS [o0] ON [o].[OrderID] = [o0].[OrderID]
-WHERE [o].[CustomerID] IS NOT NULL AND ([o].[CustomerID] LIKE N'F%')
+WHERE ([o].[CustomerID] IS NOT NULL) AND ([o].[CustomerID] LIKE N'F%')
 ORDER BY [o].[OrderID], [c].[CustomerID]");
     }
 

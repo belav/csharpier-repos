@@ -38,11 +38,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         public AlwaysActivateInProcLanguageClient(
             CSharpVisualBasicLspServiceProvider lspServiceProvider,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider,
             ExperimentalCapabilitiesProvider defaultCapabilitiesProvider,
-            ILspLoggerFactory lspLoggerFactory,
+            ILspServiceLoggerFactory lspLoggerFactory,
             IThreadingContext threadingContext)
-            : base(lspServiceProvider, globalOptions, listenerProvider, lspLoggerFactory, threadingContext)
+            : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext)
         {
             _experimentalCapabilitiesProvider = defaultCapabilitiesProvider;
         }
@@ -97,7 +96,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                     Range = true,
                     Legend = new SemanticTokensLegend
                     {
-                        TokenTypes = SemanticTokenTypes.AllTypes.Concat(SemanticTokensHelpers.RoslynCustomTokenTypes).ToArray(),
+                        TokenTypes = SemanticTokensHelpers.AllTokenTypes.ToArray(),
                         TokenModifiers = new string[] { SemanticTokenModifiers.Static }
                     }
                 };

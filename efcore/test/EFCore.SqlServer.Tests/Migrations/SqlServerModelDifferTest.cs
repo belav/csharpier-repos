@@ -57,7 +57,7 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                 "Person",
                 x =>
                 {
-                    x.IsMemoryOptimized();
+                    x.ToTable(tb => tb.IsMemoryOptimized());
                 }),
             upOps =>
             {
@@ -107,7 +107,7 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                 "Person",
                 x =>
                 {
-                    x.IsMemoryOptimized();
+                    x.ToTable(tb => tb.IsMemoryOptimized());
                 }),
             upOps =>
             {
@@ -421,16 +421,80 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                 downOps,
                 o =>
                 {
+                    var m = Assert.IsType<DeleteDataOperation>(o);
+                    AssertMultidimensionalArray(
+                        m.KeyValues,
+                        v => Assert.Equal(43, v));
+                },
+                o =>
+                {
                     var operation = Assert.IsType<DropSequenceOperation>(o);
                     Assert.Equal("dbo", operation.Schema);
                     Assert.Equal("EntityFrameworkHiLoSequence", operation.Name);
+                }));
+
+    [ConditionalFact]
+    public void Add_KeySequence_with_seed_data()
+        => Execute(
+            common => common.Entity(
+                "Firefly",
+                x =>
+                {
+                    x.ToTable("Firefly", "dbo");
+                    x.Property<int>("Id");
+                    x.Property<int>("SequenceId");
+                    x.HasData(
+                        new { Id = 42 });
+                }),
+            _ => { },
+            target => target.Entity(
+                "Firefly",
+                x =>
+                {
+                    x.ToTable("Firefly", "dbo");
+                    x.Property<int>("SequenceId").UseSequence(schema: "dbo");
+                    x.HasData(
+                        new { Id = 43 });
+                }),
+            upOps => Assert.Collection(
+                upOps,
+                o =>
+                {
+                    var operation = Assert.IsType<CreateSequenceOperation>(o);
+                    Assert.Equal("dbo", operation.Schema);
+                    Assert.Equal("FireflySequence", operation.Name);
                 },
+                o =>
+                {
+                    var operation = Assert.IsType<AlterColumnOperation>(o);
+                    Assert.Equal("NEXT VALUE FOR [dbo].[FireflySequence]", operation.DefaultValueSql);
+                },
+                o =>
+                {
+                    var m = Assert.IsType<InsertDataOperation>(o);
+                    AssertMultidimensionalArray(
+                        m.Values,
+                        v => Assert.Equal(43, v));
+                }),
+            downOps => Assert.Collection(
+                downOps,
                 o =>
                 {
                     var m = Assert.IsType<DeleteDataOperation>(o);
                     AssertMultidimensionalArray(
                         m.KeyValues,
                         v => Assert.Equal(43, v));
+                },
+                o =>
+                {
+                    var operation = Assert.IsType<DropSequenceOperation>(o);
+                    Assert.Equal("dbo", operation.Schema);
+                    Assert.Equal("FireflySequence", operation.Name);
+                },
+                o =>
+                {
+                    var operation = Assert.IsType<AlterColumnOperation>(o);
+                    Assert.Null(operation.DefaultValueSql);
                 }));
 
     [ConditionalFact]
@@ -960,7 +1024,7 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                         b.HasOne("Animal", null)
                             .WithOne()
                             .HasForeignKey("Cat", "Id")
-                            .OnDelete(DeleteBehavior.ClientCascade)
+                            .OnDelete(DeleteBehavior.Cascade)
                             .IsRequired();
 
                         b.HasOne("Animal", null)
@@ -974,7 +1038,7 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                         b.HasOne("Animal", null)
                             .WithOne()
                             .HasForeignKey("Dog", "Id")
-                            .OnDelete(DeleteBehavior.ClientCascade)
+                            .OnDelete(DeleteBehavior.Cascade)
                             .IsRequired();
 
                         b.HasOne("Animal", null)
@@ -988,7 +1052,7 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
                         b.HasOne("Animal", null)
                             .WithOne()
                             .HasForeignKey("Mouse", "Id")
-                            .OnDelete(DeleteBehavior.ClientCascade)
+                            .OnDelete(DeleteBehavior.Cascade)
                             .IsRequired();
                     });
             },

@@ -7,11 +7,11 @@ public partial class NavigationExpandingExpressionVisitor
 {
     private sealed class EntityReference : Expression, IPrintableExpression
     {
-        public EntityReference(IEntityType entityType, QueryRootExpression? queryRootExpression)
+        public EntityReference(IEntityType entityType, EntityQueryRootExpression? entityQueryRootExpression)
         {
             EntityType = entityType;
             IncludePaths = new IncludeTreeNode(entityType, this, setLoaded: true);
-            QueryRootExpression = queryRootExpression;
+            EntityQueryRootExpression = entityQueryRootExpression;
         }
 
         public IEntityType EntityType { get; }
@@ -21,7 +21,7 @@ public partial class NavigationExpandingExpressionVisitor
         public bool IsOptional { get; private set; }
         public IncludeTreeNode IncludePaths { get; private set; }
         public IncludeTreeNode? LastIncludeTreeNode { get; private set; }
-        public QueryRootExpression? QueryRootExpression { get; }
+        public EntityQueryRootExpression? EntityQueryRootExpression { get; }
 
         public override ExpressionType NodeType
             => ExpressionType.Extension;
@@ -34,7 +34,7 @@ public partial class NavigationExpandingExpressionVisitor
 
         public EntityReference Snapshot()
         {
-            var result = new EntityReference(EntityType, QueryRootExpression) { IsOptional = IsOptional };
+            var result = new EntityReference(EntityType, EntityQueryRootExpression) { IsOptional = IsOptional };
             result.IncludePaths = IncludePaths.Snapshot(result);
 
             return result;
@@ -330,7 +330,7 @@ public partial class NavigationExpandingExpressionVisitor
 
         public ParameterExpression CurrentParameter { get; }
 
-        public Expression GroupingEnumerable { get; }
+        public NavigationExpansionExpression GroupingEnumerable { get; }
 
         public Type SourceElementType
             => CurrentParameter.Type;
@@ -459,7 +459,7 @@ public partial class NavigationExpandingExpressionVisitor
     ///     Owned navigations are not expanded, since they map differently in different providers.
     ///     This remembers such references so that they can still be treated like navigations.
     /// </summary>
-    private sealed class OwnedNavigationReference : Expression
+    private sealed class OwnedNavigationReference : Expression, IPrintableExpression
     {
         public OwnedNavigationReference(Expression parent, INavigation navigation, EntityReference entityReference)
         {
@@ -484,5 +484,17 @@ public partial class NavigationExpandingExpressionVisitor
 
         public override ExpressionType NodeType
             => ExpressionType.Extension;
+
+        void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
+        {
+            expressionPrinter.AppendLine(nameof(OwnedNavigationReference));
+            using (expressionPrinter.Indent())
+            {
+                expressionPrinter.Append("Parent: ");
+                expressionPrinter.Visit(Parent);
+                expressionPrinter.AppendLine();
+                expressionPrinter.Append("Navigation: " + Navigation.Name + " (OWNED)");
+            }
+        }
     }
 }

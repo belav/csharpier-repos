@@ -64,6 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool earlyDecodingWellKnownAttributes,
             BindingDiagnosticBag diagnostics) => null;
 
+        public sealed override RefKind RefKind => RefKind.None;
+
         internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
         {
             Debug.Assert(fieldsBeingBound != null);
@@ -153,7 +155,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected virtual void InferFieldType(ConsList<FieldSymbol> fieldsBeingBound, Binder binder)
         {
-            throw ExceptionUtilities.Unreachable;
+            throw ExceptionUtilities.Unreachable();
         }
 
         private class InferrableGlobalExpressionVariable : GlobalExpressionVariable

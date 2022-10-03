@@ -1,14 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace AutoMapper.UnitTests
+﻿namespace AutoMapper.UnitTests
 {
     namespace ContextItems
     {
-        using Shouldly;
-        using System;
-        using Xunit;
-
         public class When_mapping_with_contextual_values
         {
             public class Source
@@ -25,7 +18,7 @@ namespace AutoMapper.UnitTests
             {
                 public int Resolve(Source src, Dest d, int source, int dest, ResolutionContext context)
                 {
-                    return source + (int)context.Options.Items["Item"];
+                    return source + (int)context.Items["Item"];
                 }
             }
 
@@ -69,7 +62,7 @@ namespace AutoMapper.UnitTests
                 {
                     var inner = ex.InnerException;
                     inner.ShouldBeOfType<InvalidOperationException>();
-                    inner.Message.ShouldBe("You must use a Map overload that takes Action<IMappingOperationOptions>!");
+                    inner.Message.ShouldBe("Context.Items are only available when using a Map overload that takes Action<IMappingOperationOptions>!");
                 });
             }
         }
@@ -119,7 +112,7 @@ namespace AutoMapper.UnitTests
                 var config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<Source, Dest>()
-                        .ForMember(d => d.Value1, opt => opt.MapFrom((source, d, dMember, context) => (int)context.Options.Items["Item"] + source.Value1));
+                        .ForMember(d => d.Value1, opt => opt.MapFrom((source, d, dMember, context) => (int)context.Items["Item"] + source.Value1));
                 });
 
                 var dest = config.CreateMapper().Map<Source, Dest>(new Source { Value1 = 5 }, opt => { opt.Items["Item"] = 10; });

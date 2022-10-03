@@ -10,9 +10,14 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
 public class CSharpEntityTypeGeneratorTest : ModelCodeGeneratorTestBase
 {
+    public CSharpEntityTypeGeneratorTest(ModelCodeGeneratorTestFixture fixture, ITestOutputHelper output)
+        : base(fixture, output)
+    {
+    }
+
     [ConditionalFact]
-    public void KeylessAttribute_is_generated_for_key_less_entity()
-        => Test(
+    public Task KeylessAttribute_is_generated_for_key_less_entity()
+        => TestAsync(
             modelBuilder => modelBuilder.Entity("Vista").HasNoKey(),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -24,12 +29,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+[Keyless]
+public partial class Vista
 {
-    [Keyless]
-    public partial class Vista
-    {
-    }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Vista.cs"));
@@ -38,41 +42,34 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class TestDbContext : DbContext
 {
-    public partial class TestDbContext : DbContext
+    public TestDbContext()
     {
-        public TestDbContext()
-        {
-        }
+    }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
-            : base(options)
-        {
-        }
+    public TestDbContext(DbContextOptions<TestDbContext> options)
+        : base(options)
+    {
+    }
 
-        public virtual DbSet<Vista> Vista { get; set; }
+    public virtual DbSet<Vista> Vista { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning "
                     + DesignStrings.SensitiveInformationWarning
                     + @"
-                optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
-            }
-        }
+        => optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
                     code.ContextFile);
@@ -84,8 +81,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void TableAttribute_is_generated_for_custom_name()
-        => Test(
+    public Task TableAttribute_is_generated_for_custom_name()
+        => TestAsync(
             modelBuilder =>
             {
                 modelBuilder.Entity(
@@ -107,14 +104,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+[Table(""Vistas"")]
+public partial class Vista
 {
-    [Table(""Vistas"")]
-    public partial class Vista
-    {
-        [Key]
-        public int Id { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Vista.cs"));
@@ -127,8 +123,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void TableAttribute_is_not_generated_for_default_schema()
-        => Test(
+    public Task TableAttribute_is_not_generated_for_default_schema()
+        => TestAsync(
             modelBuilder =>
             {
                 modelBuilder.HasDefaultSchema("dbo");
@@ -151,13 +147,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Vista
 {
-    public partial class Vista
-    {
-        [Key]
-        public int Id { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Vista.cs"));
@@ -170,8 +165,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void TableAttribute_is_generated_for_non_default_schema()
-        => Test(
+    public Task TableAttribute_is_generated_for_non_default_schema()
+        => TestAsync(
             modelBuilder =>
             {
                 modelBuilder.HasDefaultSchema("dbo");
@@ -194,14 +189,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+[Table(""Vista"", Schema = ""custom"")]
+public partial class Vista
 {
-    [Table(""Vista"", Schema = ""custom"")]
-    public partial class Vista
-    {
-        [Key]
-        public int Id { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Vista.cs"));
@@ -214,8 +208,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void TableAttribute_is_not_generated_for_views()
-        => Test(
+    public Task TableAttribute_is_not_generated_for_views()
+        => TestAsync(
             modelBuilder => modelBuilder.Entity("Vista").ToView("Vistas", "dbo"),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -227,12 +221,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+[Keyless]
+public partial class Vista
 {
-    [Keyless]
-    public partial class Vista
-    {
-    }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Vista.cs"));
@@ -247,8 +240,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void IndexAttribute_is_generated_for_multiple_indexes_with_name_unique_descending()
-        => Test(
+    public Task IndexAttribute_is_generated_for_multiple_indexes_with_name_unique_descending()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "EntityWithIndexes",
@@ -275,19 +268,21 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+[Index(""C"")]
+[Index(""A"", ""B"", Name = ""IndexOnAAndB"", IsUnique = true, IsDescending = new[] { true, false })]
+[Index(""B"", ""C"", Name = ""IndexOnBAndC"")]
+public partial class EntityWithIndexes
 {
-    [Index(""C"")]
-    [Index(""A"", ""B"", Name = ""IndexOnAAndB"", IsUnique = true, IsDescending = new[] { true, false })]
-    [Index(""B"", ""C"", Name = ""IndexOnBAndC"")]
-    public partial class EntityWithIndexes
-    {
-        [Key]
-        public int Id { get; set; }
-        public int A { get; set; }
-        public int B { get; set; }
-        public int C { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
+
+    public int A { get; set; }
+
+    public int B { get; set; }
+
+    public int C { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "EntityWithIndexes.cs"));
@@ -304,8 +299,74 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void Entity_with_indexes_generates_IndexAttribute_only_for_indexes_without_annotations()
-        => Test(
+    public Task IndexAttribute_is_generated_with_ascending_descending()
+        => TestAsync(
+            modelBuilder => modelBuilder
+                .Entity(
+                    "EntityWithAscendingDescendingIndexes",
+                    x =>
+                    {
+                        x.Property<int>("Id");
+                        x.Property<int>("A");
+                        x.Property<int>("B");
+                        x.HasKey("Id");
+                        x.HasIndex(new[] { "A", "B" }, "AllAscending");
+                        x.HasIndex(new[] { "A", "B" }, "PartiallyDescending").IsDescending(true, false);
+                        x.HasIndex(new[] { "A", "B" }, "AllDescending").IsDescending();
+                    }),
+            new ModelCodeGenerationOptions { UseDataAnnotations = true },
+            code =>
+            {
+                AssertFileContents(
+                    @"using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
+namespace TestNamespace;
+
+[Index(""A"", ""B"", Name = ""AllAscending"")]
+[Index(""A"", ""B"", Name = ""AllDescending"", AllDescending = true)]
+[Index(""A"", ""B"", Name = ""PartiallyDescending"", IsDescending = new[] { true, false })]
+public partial class EntityWithAscendingDescendingIndexes
+{
+    [Key]
+    public int Id { get; set; }
+
+    public int A { get; set; }
+
+    public int B { get; set; }
+}
+",
+                    code.AdditionalFiles.Single(f => f.Path == "EntityWithAscendingDescendingIndexes.cs"));
+            },
+            model =>
+            {
+                var entityType = model.FindEntityType("TestNamespace.EntityWithAscendingDescendingIndexes");
+                var indexes = entityType.GetIndexes();
+                Assert.Collection(
+                    indexes,
+                    i =>
+                    {
+                        Assert.Equal("AllAscending", i.Name);
+                        Assert.Null(i.IsDescending);
+                    },
+                    i =>
+                    {
+                        Assert.Equal("AllDescending", i.Name);
+                        Assert.Equal(Array.Empty<bool>(), i.IsDescending);
+                    },
+                    i =>
+                    {
+                        Assert.Equal("PartiallyDescending", i.Name);
+                        Assert.Equal(new[] { true, false }, i.IsDescending);
+                    });
+            });
+
+    [ConditionalFact]
+    public Task Entity_with_indexes_generates_IndexAttribute_only_for_indexes_without_annotations()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "EntityWithIndexes",
@@ -331,17 +392,19 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+[Index(""A"", ""B"", Name = ""IndexOnAAndB"", IsUnique = true)]
+public partial class EntityWithIndexes
 {
-    [Index(""A"", ""B"", Name = ""IndexOnAAndB"", IsUnique = true)]
-    public partial class EntityWithIndexes
-    {
-        [Key]
-        public int Id { get; set; }
-        public int A { get; set; }
-        public int B { get; set; }
-        public int C { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
+
+    public int A { get; set; }
+
+    public int B { get; set; }
+
+    public int C { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "EntityWithIndexes.cs"));
@@ -350,49 +413,41 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class TestDbContext : DbContext
 {
-    public partial class TestDbContext : DbContext
+    public TestDbContext()
     {
-        public TestDbContext()
-        {
-        }
+    }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
-            : base(options)
-        {
-        }
+    public TestDbContext(DbContextOptions<TestDbContext> options)
+        : base(options)
+    {
+    }
 
-        public virtual DbSet<EntityWithIndexes> EntityWithIndexes { get; set; }
+    public virtual DbSet<EntityWithIndexes> EntityWithIndexes { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning "
                     + DesignStrings.SensitiveInformationWarning
                     + @"
-                optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
-            }
-        }
+        => optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<EntityWithIndexes>(entity =>
         {
-            modelBuilder.Entity<EntityWithIndexes>(entity =>
-            {
-                entity.HasIndex(e => new { e.B, e.C }, ""IndexOnBAndC"")
-                    .HasFilter(""Filter SQL"");
+            entity.HasIndex(e => new { e.B, e.C }, ""IndexOnBAndC"").HasFilter(""Filter SQL"");
 
-                entity.Property(e => e.Id).UseIdentityColumn();
-            });
+            entity.Property(e => e.Id).UseIdentityColumn();
+        });
 
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
                     code.ContextFile);
@@ -401,8 +456,8 @@ namespace TestNamespace
                 Assert.Equal(2, model.FindEntityType("TestNamespace.EntityWithIndexes").GetIndexes().Count()));
 
     [ConditionalFact]
-    public void KeyAttribute_is_generated_for_single_property_and_no_fluent_api()
-        => Test(
+    public Task KeyAttribute_is_generated_for_single_property_and_no_fluent_api()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
@@ -421,13 +476,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Entity
 {
-    public partial class Entity
-    {
-        [Key]
-        public int PrimaryKey { get; set; }
-    }
+    [Key]
+    public int PrimaryKey { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -436,46 +490,39 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class TestDbContext : DbContext
 {
-    public partial class TestDbContext : DbContext
+    public TestDbContext()
     {
-        public TestDbContext()
-        {
-        }
+    }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
-            : base(options)
-        {
-        }
+    public TestDbContext(DbContextOptions<TestDbContext> options)
+        : base(options)
+    {
+    }
 
-        public virtual DbSet<Entity> Entity { get; set; }
+    public virtual DbSet<Entity> Entity { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning "
                     + DesignStrings.SensitiveInformationWarning
                     + @"
-                optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
-            }
-        }
+        => optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Entity>(entity =>
         {
-            modelBuilder.Entity<Entity>(entity =>
-            {
-                entity.Property(e => e.PrimaryKey).UseIdentityColumn();
-            });
+            entity.Property(e => e.PrimaryKey).UseIdentityColumn();
+        });
 
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
                     code.ContextFile);
@@ -484,8 +531,8 @@ namespace TestNamespace
                 Assert.Equal("PrimaryKey", model.FindEntityType("TestNamespace.Entity").FindPrimaryKey().Properties[0].Name));
 
     [ConditionalFact]
-    public void KeyAttribute_is_generated_on_multiple_properties_but_configuring_using_fluent_api_for_composite_key()
-        => Test(
+    public Task KeyAttribute_is_generated_on_multiple_properties_but_and_uses_PrimaryKeyAttribute_for_composite_key()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Post",
@@ -505,15 +552,16 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+[PrimaryKey(""Key"", ""Serial"")]
+public partial class Post
 {
-    public partial class Post
-    {
-        [Key]
-        public int Key { get; set; }
-        [Key]
-        public int Serial { get; set; }
-    }
+    [Key]
+    public int Key { get; set; }
+
+    [Key]
+    public int Serial { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
@@ -522,46 +570,34 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class TestDbContext : DbContext
 {
-    public partial class TestDbContext : DbContext
+    public TestDbContext()
     {
-        public TestDbContext()
-        {
-        }
+    }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
-            : base(options)
-        {
-        }
+    public TestDbContext(DbContextOptions<TestDbContext> options)
+        : base(options)
+    {
+    }
 
-        public virtual DbSet<Post> Post { get; set; }
+    public virtual DbSet<Post> Post { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning "
                     + DesignStrings.SensitiveInformationWarning
                     + @"
-                optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
-            }
-        }
+        => optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Post>(entity =>
-            {
-                entity.HasKey(e => new { e.Key, e.Serial });
-            });
-
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
                     code.ContextFile);
@@ -573,8 +609,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void Required_and_not_required_properties_without_nrt()
-        => Test(
+    public Task Required_and_not_required_properties_without_nrt()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
@@ -596,18 +632,21 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Entity
 {
-    public partial class Entity
-    {
-        [Key]
-        public int Id { get; set; }
-        public int? NonRequiredInt { get; set; }
-        public string NonRequiredString { get; set; }
-        public int RequiredInt { get; set; }
-        [Required]
-        public string RequiredString { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
+
+    public int? NonRequiredInt { get; set; }
+
+    public string NonRequiredString { get; set; }
+
+    public int RequiredInt { get; set; }
+
+    [Required]
+    public string RequiredString { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -622,8 +661,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void Required_and_not_required_properties_with_nrt()
-        => Test(
+    public Task Required_and_not_required_properties_with_nrt()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
@@ -645,17 +684,20 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Entity
 {
-    public partial class Entity
-    {
-        [Key]
-        public int Id { get; set; }
-        public int? NonRequiredInt { get; set; }
-        public string? NonRequiredString { get; set; }
-        public int RequiredInt { get; set; }
-        public string RequiredString { get; set; } = null!;
-    }
+    [Key]
+    public int Id { get; set; }
+
+    public int? NonRequiredInt { get; set; }
+
+    public string? NonRequiredString { get; set; }
+
+    public int RequiredInt { get; set; }
+
+    public string RequiredString { get; set; } = null!;
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -670,8 +712,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void Required_and_not_required_navigations_without_nrt()
-        => Test(
+    public Task Required_and_not_required_navigations_without_nrt()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
@@ -698,31 +740,37 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
-{
-    public partial class Entity
-    {
-        [Key]
-        public int Id { get; set; }
-        public string OptionalReferenceNavigationId { get; set; }
-        public int? OptionalValueNavigationId { get; set; }
-        [Required]
-        public string RequiredReferenceNavigationId { get; set; }
-        public int RequiredValueNavigationId { get; set; }
+namespace TestNamespace;
 
-        [ForeignKey(""OptionalReferenceNavigationId"")]
-        [InverseProperty(""Entity"")]
-        public virtual Dependent2 OptionalReferenceNavigation { get; set; }
-        [ForeignKey(""OptionalValueNavigationId"")]
-        [InverseProperty(""Entity"")]
-        public virtual Dependent4 OptionalValueNavigation { get; set; }
-        [ForeignKey(""RequiredReferenceNavigationId"")]
-        [InverseProperty(""Entity"")]
-        public virtual Dependent1 RequiredReferenceNavigation { get; set; }
-        [ForeignKey(""RequiredValueNavigationId"")]
-        [InverseProperty(""Entity"")]
-        public virtual Dependent3 RequiredValueNavigation { get; set; }
-    }
+public partial class Entity
+{
+    [Key]
+    public int Id { get; set; }
+
+    public string OptionalReferenceNavigationId { get; set; }
+
+    public int? OptionalValueNavigationId { get; set; }
+
+    [Required]
+    public string RequiredReferenceNavigationId { get; set; }
+
+    public int RequiredValueNavigationId { get; set; }
+
+    [ForeignKey(""OptionalReferenceNavigationId"")]
+    [InverseProperty(""Entity"")]
+    public virtual Dependent2 OptionalReferenceNavigation { get; set; }
+
+    [ForeignKey(""OptionalValueNavigationId"")]
+    [InverseProperty(""Entity"")]
+    public virtual Dependent4 OptionalValueNavigation { get; set; }
+
+    [ForeignKey(""RequiredReferenceNavigationId"")]
+    [InverseProperty(""Entity"")]
+    public virtual Dependent1 RequiredReferenceNavigation { get; set; }
+
+    [ForeignKey(""RequiredValueNavigationId"")]
+    [InverseProperty(""Entity"")]
+    public virtual Dependent3 RequiredValueNavigation { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -743,8 +791,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void Required_and_not_required_reference_navigations_with_nrt()
-        => Test(
+    public Task Required_and_not_required_reference_navigations_with_nrt()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
@@ -788,22 +836,24 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
-{
-    public partial class Entity
-    {
-        [Key]
-        public int Id { get; set; }
+namespace TestNamespace;
 
-        [InverseProperty(""Entity"")]
-        public virtual Dependent2? OptionalNavigationWithReferenceForeignKey { get; set; }
-        [InverseProperty(""Entity"")]
-        public virtual Dependent4? OptionalNavigationWithValueForeignKey { get; set; }
-        [InverseProperty(""Entity"")]
-        public virtual Dependent1? RequiredNavigationWithReferenceForeignKey { get; set; }
-        [InverseProperty(""Entity"")]
-        public virtual Dependent3? RequiredNavigationWithValueForeignKey { get; set; }
-    }
+public partial class Entity
+{
+    [Key]
+    public int Id { get; set; }
+
+    [InverseProperty(""Entity"")]
+    public virtual Dependent2? OptionalNavigationWithReferenceForeignKey { get; set; }
+
+    [InverseProperty(""Entity"")]
+    public virtual Dependent4? OptionalNavigationWithValueForeignKey { get; set; }
+
+    [InverseProperty(""Entity"")]
+    public virtual Dependent1? RequiredNavigationWithReferenceForeignKey { get; set; }
+
+    [InverseProperty(""Entity"")]
+    public virtual Dependent3? RequiredNavigationWithValueForeignKey { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -819,8 +869,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void Required_and_not_required_collection_navigations_with_nrt()
-        => Test(
+    public Task Required_and_not_required_collection_navigations_with_nrt()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
@@ -847,30 +897,36 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
-{
-    public partial class Entity
-    {
-        [Key]
-        public int Id { get; set; }
-        public string? OptionalNavigationWithReferenceForeignKeyId { get; set; }
-        public int? OptionalNavigationWithValueForeignKeyId { get; set; }
-        public string RequiredNavigationWithReferenceForeignKeyId { get; set; } = null!;
-        public int RequiredNavigationWithValueForeignKeyId { get; set; }
+namespace TestNamespace;
 
-        [ForeignKey(""OptionalNavigationWithReferenceForeignKeyId"")]
-        [InverseProperty(""Entity"")]
-        public virtual Dependent2? OptionalNavigationWithReferenceForeignKey { get; set; }
-        [ForeignKey(""OptionalNavigationWithValueForeignKeyId"")]
-        [InverseProperty(""Entity"")]
-        public virtual Dependent4? OptionalNavigationWithValueForeignKey { get; set; }
-        [ForeignKey(""RequiredNavigationWithReferenceForeignKeyId"")]
-        [InverseProperty(""Entity"")]
-        public virtual Dependent1 RequiredNavigationWithReferenceForeignKey { get; set; } = null!;
-        [ForeignKey(""RequiredNavigationWithValueForeignKeyId"")]
-        [InverseProperty(""Entity"")]
-        public virtual Dependent3 RequiredNavigationWithValueForeignKey { get; set; } = null!;
-    }
+public partial class Entity
+{
+    [Key]
+    public int Id { get; set; }
+
+    public string? OptionalNavigationWithReferenceForeignKeyId { get; set; }
+
+    public int? OptionalNavigationWithValueForeignKeyId { get; set; }
+
+    public string RequiredNavigationWithReferenceForeignKeyId { get; set; } = null!;
+
+    public int RequiredNavigationWithValueForeignKeyId { get; set; }
+
+    [ForeignKey(""OptionalNavigationWithReferenceForeignKeyId"")]
+    [InverseProperty(""Entity"")]
+    public virtual Dependent2? OptionalNavigationWithReferenceForeignKey { get; set; }
+
+    [ForeignKey(""OptionalNavigationWithValueForeignKeyId"")]
+    [InverseProperty(""Entity"")]
+    public virtual Dependent4? OptionalNavigationWithValueForeignKey { get; set; }
+
+    [ForeignKey(""RequiredNavigationWithReferenceForeignKeyId"")]
+    [InverseProperty(""Entity"")]
+    public virtual Dependent1 RequiredNavigationWithReferenceForeignKey { get; set; } = null!;
+
+    [ForeignKey(""RequiredNavigationWithValueForeignKeyId"")]
+    [InverseProperty(""Entity"")]
+    public virtual Dependent3 RequiredNavigationWithValueForeignKey { get; set; } = null!;
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -878,7 +934,7 @@ namespace TestNamespace
                 for (var i = 1; i <= 4; i++)
                 {
                     Assert.Contains(
-                        "public virtual ICollection<Entity> Entity { get; set; }",
+                        "public virtual ICollection<Entity> Entity { get; }",
                         code.AdditionalFiles.Single(f => f.Path == $"Dependent{i}.cs").Code);
                 }
             },
@@ -898,8 +954,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void RequiredAttribute_is_not_generated_for_key_property()
-        => Test(
+    public Task RequiredAttribute_is_not_generated_for_key_property()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
@@ -918,13 +974,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Entity
 {
-    public partial class Entity
-    {
-        [Key]
-        public string RequiredString { get; set; }
-    }
+    [Key]
+    public string RequiredString { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -933,8 +988,8 @@ namespace TestNamespace
                 Assert.False(model.FindEntityType("TestNamespace.Entity").GetProperty("RequiredString").IsNullable));
 
     [ConditionalFact]
-    public void ColumnAttribute_is_generated_for_property()
-        => Test(
+    public Task ColumnAttribute_is_generated_for_property()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
@@ -957,23 +1012,27 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Entity
 {
-    public partial class Entity
-    {
-        [Key]
-        public int Id { get; set; }
-        [Column(""propertyA"")]
-        public string A { get; set; }
-        [Column(TypeName = ""nchar(10)"")]
-        public string B { get; set; }
-        [Column(""random"", TypeName = ""varchar(200)"")]
-        public string C { get; set; }
-        [Column(TypeName = ""numeric(18, 2)"")]
-        public decimal D { get; set; }
-        [StringLength(100)]
-        public string E { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
+
+    [Column(""propertyA"")]
+    public string A { get; set; }
+
+    [Column(TypeName = ""nchar(10)"")]
+    public string B { get; set; }
+
+    [Column(""random"", TypeName = ""varchar(200)"")]
+    public string C { get; set; }
+
+    [Column(TypeName = ""numeric(18, 2)"")]
+    public decimal D { get; set; }
+
+    [StringLength(100)]
+    public string E { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -982,46 +1041,39 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class TestDbContext : DbContext
 {
-    public partial class TestDbContext : DbContext
+    public TestDbContext()
     {
-        public TestDbContext()
-        {
-        }
+    }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
-            : base(options)
-        {
-        }
+    public TestDbContext(DbContextOptions<TestDbContext> options)
+        : base(options)
+    {
+    }
 
-        public virtual DbSet<Entity> Entity { get; set; }
+    public virtual DbSet<Entity> Entity { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning "
                     + DesignStrings.SensitiveInformationWarning
                     + @"
-                optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
-            }
-        }
+        => optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Entity>(entity =>
         {
-            modelBuilder.Entity<Entity>(entity =>
-            {
-                entity.Property(e => e.Id).UseIdentityColumn();
-            });
+            entity.Property(e => e.Id).UseIdentityColumn();
+        });
 
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
                     code.ContextFile);
@@ -1029,15 +1081,15 @@ namespace TestNamespace
             model =>
             {
                 var entitType = model.FindEntityType("TestNamespace.Entity");
-                Assert.Equal("propertyA", entitType.GetProperty("A").GetColumnBaseName());
+                Assert.Equal("propertyA", entitType.GetProperty("A").GetColumnName());
                 Assert.Equal("nchar(10)", entitType.GetProperty("B").GetColumnType());
-                Assert.Equal("random", entitType.GetProperty("C").GetColumnBaseName());
+                Assert.Equal("random", entitType.GetProperty("C").GetColumnName());
                 Assert.Equal("varchar(200)", entitType.GetProperty("C").GetColumnType());
             });
 
     [ConditionalFact]
-    public void MaxLengthAttribute_is_generated_for_property()
-        => Test(
+    public Task MaxLengthAttribute_is_generated_for_property()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
@@ -1057,17 +1109,18 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Entity
 {
-    public partial class Entity
-    {
-        [Key]
-        public int Id { get; set; }
-        [StringLength(34)]
-        public string A { get; set; }
-        [MaxLength(10)]
-        public byte[] B { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
+
+    [StringLength(34)]
+    public string A { get; set; }
+
+    [MaxLength(10)]
+    public byte[] B { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -1080,8 +1133,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void UnicodeAttribute_is_generated_for_property()
-        => Test(
+    public Task UnicodeAttribute_is_generated_for_property()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
@@ -1102,21 +1155,23 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Entity
 {
-    public partial class Entity
-    {
-        [Key]
-        public int Id { get; set; }
-        [StringLength(34)]
-        [Unicode]
-        public string A { get; set; }
-        [StringLength(34)]
-        [Unicode(false)]
-        public string B { get; set; }
-        [StringLength(34)]
-        public string C { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
+
+    [StringLength(34)]
+    [Unicode]
+    public string A { get; set; }
+
+    [StringLength(34)]
+    [Unicode(false)]
+    public string B { get; set; }
+
+    [StringLength(34)]
+    public string C { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -1130,8 +1185,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void PrecisionAttribute_is_generated_for_property()
-        => Test(
+    public Task PrecisionAttribute_is_generated_for_property()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
@@ -1153,21 +1208,24 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Entity
 {
-    public partial class Entity
-    {
-        [Key]
-        public int Id { get; set; }
-        [Precision(10)]
-        public decimal A { get; set; }
-        [Precision(14, 3)]
-        public decimal B { get; set; }
-        [Precision(5)]
-        public DateTime C { get; set; }
-        [Precision(3)]
-        public DateTimeOffset D { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
+
+    [Precision(10)]
+    public decimal A { get; set; }
+
+    [Precision(14, 3)]
+    public decimal B { get; set; }
+
+    [Precision(5)]
+    public DateTime C { get; set; }
+
+    [Precision(3)]
+    public DateTimeOffset D { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -1183,14 +1241,14 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void Comments_are_generated()
-        => Test(
+    public Task Comments_are_generated()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
                     x =>
                     {
-                        x.HasComment("Entity Comment");
+                        x.ToTable(tb => tb.HasComment("Entity Comment"));
                         x.Property<int>("Id").HasComment("Property Comment");
                     })
             ,
@@ -1204,19 +1262,18 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+/// <summary>
+/// Entity Comment
+/// </summary>
+public partial class Entity
 {
     /// <summary>
-    /// Entity Comment
+    /// Property Comment
     /// </summary>
-    public partial class Entity
-    {
-        /// <summary>
-        /// Property Comment
-        /// </summary>
-        [Key]
-        public int Id { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -1224,17 +1281,18 @@ namespace TestNamespace
             model => { });
 
     [ConditionalFact]
-    public void Comments_complex_are_generated()
-        => Test(
+    public Task Comments_complex_are_generated()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
                     x =>
                     {
-                        x.HasComment(
-                            @"Entity Comment
+                        x.ToTable(
+                            tb => tb.HasComment(
+                                @"Entity Comment
 On multiple lines
-With XML content <br/>");
+With XML content <br/>"));
                         x.Property<int>("Id").HasComment(
                             @"Property Comment
 On multiple lines
@@ -1251,23 +1309,22 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+/// <summary>
+/// Entity Comment
+/// On multiple lines
+/// With XML content &lt;br/&gt;
+/// </summary>
+public partial class Entity
 {
     /// <summary>
-    /// Entity Comment
+    /// Property Comment
     /// On multiple lines
     /// With XML content &lt;br/&gt;
     /// </summary>
-    public partial class Entity
-    {
-        /// <summary>
-        /// Property Comment
-        /// On multiple lines
-        /// With XML content &lt;br/&gt;
-        /// </summary>
-        [Key]
-        public int Id { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -1275,8 +1332,8 @@ namespace TestNamespace
             model => { });
 
     [ConditionalFact]
-    public void Properties_are_sorted_in_order_of_definition_in_table()
-        => Test(
+    public Task Properties_are_sorted_in_order_of_definition_in_table()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Entity",
@@ -1297,15 +1354,16 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Entity
 {
-    public partial class Entity
-    {
-        [Key]
-        public int Id { get; set; }
-        public string FirstProperty { get; set; }
-        public string LastProperty { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
+
+    public string FirstProperty { get; set; }
+
+    public string LastProperty { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
@@ -1313,8 +1371,8 @@ namespace TestNamespace
             model => { });
 
     [ConditionalFact]
-    public void Navigation_properties_are_sorted_after_properties_and_collection_are_initialized_in_ctor()
-        => Test(
+    public Task Navigation_properties_are_sorted_after_properties_and_collection_are_initialized_in_ctor()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Person",
@@ -1329,7 +1387,7 @@ namespace TestNamespace
                         x.Property<int>("Id");
 
                         x.HasOne("Person", "Author").WithMany("Posts");
-                        x.HasMany("Contribution", "Contributions").WithOne();
+                        x.HasMany("Contribution", "Contributions").WithOne("Post");
                     }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -1341,24 +1399,21 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Post
 {
-    public partial class Post
-    {
-        public Post()
-        {
-            Contributions = new HashSet<Contribution>();
-        }
+    [Key]
+    public int Id { get; set; }
 
-        [Key]
-        public int Id { get; set; }
-        public int? AuthorId { get; set; }
+    public int? AuthorId { get; set; }
 
-        [ForeignKey(""AuthorId"")]
-        [InverseProperty(""Posts"")]
-        public virtual Person Author { get; set; }
-        public virtual ICollection<Contribution> Contributions { get; set; }
-    }
+    [ForeignKey(""AuthorId"")]
+    [InverseProperty(""Posts"")]
+    public virtual Person Author { get; set; }
+
+    [InverseProperty(""Post"")]
+    public virtual ICollection<Contribution> Contributions { get; } = new List<Contribution>();
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
@@ -1370,21 +1425,15 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Person
 {
-    public partial class Person
-    {
-        public Person()
-        {
-            Posts = new HashSet<Post>();
-        }
+    [Key]
+    public int Id { get; set; }
 
-        [Key]
-        public int Id { get; set; }
-
-        [InverseProperty(""Author"")]
-        public virtual ICollection<Post> Posts { get; set; }
-    }
+    [InverseProperty(""Author"")]
+    public virtual ICollection<Post> Posts { get; } = new List<Post>();
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Person.cs"));
@@ -1402,8 +1451,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void ForeignKeyAttribute_is_generated_for_composite_fk()
-        => Test(
+    public Task ForeignKeyAttribute_is_generated_for_composite_fk()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Blog",
@@ -1431,19 +1480,20 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
-{
-    public partial class Post
-    {
-        [Key]
-        public int Id { get; set; }
-        public int? BlogId1 { get; set; }
-        public int? BlogId2 { get; set; }
+namespace TestNamespace;
 
-        [ForeignKey(""BlogId1,BlogId2"")]
-        [InverseProperty(""Posts"")]
-        public virtual Blog BlogNavigation { get; set; }
-    }
+public partial class Post
+{
+    [Key]
+    public int Id { get; set; }
+
+    public int? BlogId1 { get; set; }
+
+    public int? BlogId2 { get; set; }
+
+    [ForeignKey(""BlogId1, BlogId2"")]
+    [InverseProperty(""Posts"")]
+    public virtual Blog BlogNavigation { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
@@ -1452,52 +1502,41 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class TestDbContext : DbContext
 {
-    public partial class TestDbContext : DbContext
+    public TestDbContext()
     {
-        public TestDbContext()
-        {
-        }
+    }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
-            : base(options)
-        {
-        }
+    public TestDbContext(DbContextOptions<TestDbContext> options)
+        : base(options)
+    {
+    }
 
-        public virtual DbSet<Blog> Blog { get; set; }
-        public virtual DbSet<Post> Post { get; set; }
+    public virtual DbSet<Blog> Blog { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+    public virtual DbSet<Post> Post { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning "
                     + DesignStrings.SensitiveInformationWarning
                     + @"
-                optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
-            }
-        }
+        => optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Post>(entity =>
         {
-            modelBuilder.Entity<Blog>(entity =>
-            {
-                entity.HasKey(e => new { e.Id1, e.Id2 });
-            });
+            entity.Property(e => e.Id).UseIdentityColumn();
+        });
 
-            modelBuilder.Entity<Post>(entity =>
-            {
-                entity.Property(e => e.Id).UseIdentityColumn();
-            });
-
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
                     code.ContextFile);
@@ -1511,8 +1550,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void ForeignKeyAttribute_InversePropertyAttribute_is_not_generated_for_alternate_key()
-        => Test(
+    public Task ForeignKeyAttribute_InversePropertyAttribute_is_not_generated_for_alternate_key()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Blog",
@@ -1542,17 +1581,18 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
-{
-    public partial class Post
-    {
-        [Key]
-        public int Id { get; set; }
-        public int? BlogId1 { get; set; }
-        public int? BlogId2 { get; set; }
+namespace TestNamespace;
 
-        public virtual Blog BlogNavigation { get; set; }
-    }
+public partial class Post
+{
+    [Key]
+    public int Id { get; set; }
+
+    public int? BlogId1 { get; set; }
+
+    public int? BlogId2 { get; set; }
+
+    public virtual Blog BlogNavigation { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
@@ -1561,57 +1601,48 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class TestDbContext : DbContext
 {
-    public partial class TestDbContext : DbContext
+    public TestDbContext()
     {
-        public TestDbContext()
-        {
-        }
+    }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
-            : base(options)
-        {
-        }
+    public TestDbContext(DbContextOptions<TestDbContext> options)
+        : base(options)
+    {
+    }
 
-        public virtual DbSet<Blog> Blog { get; set; }
-        public virtual DbSet<Post> Post { get; set; }
+    public virtual DbSet<Blog> Blog { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+    public virtual DbSet<Post> Post { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning "
                     + DesignStrings.SensitiveInformationWarning
                     + @"
-                optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
-            }
-        }
+        => optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Blog>(entity =>
         {
-            modelBuilder.Entity<Blog>(entity =>
-            {
-                entity.Property(e => e.Id).UseIdentityColumn();
-            });
+            entity.Property(e => e.Id).UseIdentityColumn();
+        });
 
-            modelBuilder.Entity<Post>(entity =>
-            {
-                entity.Property(e => e.Id).UseIdentityColumn();
+        modelBuilder.Entity<Post>(entity =>
+        {
+            entity.Property(e => e.Id).UseIdentityColumn();
 
-                entity.HasOne(d => d.BlogNavigation)
-                    .WithMany(p => p.Posts)
-                    .HasPrincipalKey(p => new { p.Id1, p.Id2 })
-                    .HasForeignKey(d => new { d.BlogId1, d.BlogId2 });
-            });
+            entity.HasOne(d => d.BlogNavigation).WithMany(p => p.Posts).HasPrincipalKey(p => new { p.Id1, p.Id2 });
+        });
 
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
                     code.ContextFile);
@@ -1626,8 +1657,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void InverseProperty_when_navigation_property_with_same_type_and_navigation_name()
-        => Test(
+    public Task InverseProperty_when_navigation_property_with_same_type_and_navigation_name()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Blog",
@@ -1649,18 +1680,18 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
-{
-    public partial class Post
-    {
-        [Key]
-        public int Id { get; set; }
-        public int? BlogId { get; set; }
+namespace TestNamespace;
 
-        [ForeignKey(""BlogId"")]
-        [InverseProperty(""Posts"")]
-        public virtual Blog Blog { get; set; }
-    }
+public partial class Post
+{
+    [Key]
+    public int Id { get; set; }
+
+    public int? BlogId { get; set; }
+
+    [ForeignKey(""BlogId"")]
+    [InverseProperty(""Posts"")]
+    public virtual Blog Blog { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
@@ -1679,8 +1710,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void InverseProperty_when_navigation_property_with_same_type_and_property_name()
-        => Test(
+    public Task InverseProperty_when_navigation_property_with_same_type_and_property_name()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Blog",
@@ -1702,18 +1733,18 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
-{
-    public partial class Post
-    {
-        [Key]
-        public int Id { get; set; }
-        public int? Blog { get; set; }
+namespace TestNamespace;
 
-        [ForeignKey(""Blog"")]
-        [InverseProperty(""Posts"")]
-        public virtual Blog BlogNavigation { get; set; }
-    }
+public partial class Post
+{
+    [Key]
+    public int Id { get; set; }
+
+    public int? Blog { get; set; }
+
+    [ForeignKey(""Blog"")]
+    [InverseProperty(""Posts"")]
+    public virtual Blog BlogNavigation { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
@@ -1732,8 +1763,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void InverseProperty_when_navigation_property_with_same_type_and_other_navigation_name()
-        => Test(
+    public Task InverseProperty_when_navigation_property_with_same_type_and_other_navigation_name()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Blog",
@@ -1756,22 +1787,24 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
-{
-    public partial class Post
-    {
-        [Key]
-        public int Id { get; set; }
-        public int? BlogId { get; set; }
-        public int? OriginalBlogId { get; set; }
+namespace TestNamespace;
 
-        [ForeignKey(""BlogId"")]
-        [InverseProperty(""Posts"")]
-        public virtual Blog Blog { get; set; }
-        [ForeignKey(""OriginalBlogId"")]
-        [InverseProperty(""OriginalPosts"")]
-        public virtual Blog OriginalBlog { get; set; }
-    }
+public partial class Post
+{
+    [Key]
+    public int Id { get; set; }
+
+    public int? BlogId { get; set; }
+
+    public int? OriginalBlogId { get; set; }
+
+    [ForeignKey(""BlogId"")]
+    [InverseProperty(""Posts"")]
+    public virtual Blog Blog { get; set; }
+
+    [ForeignKey(""OriginalBlogId"")]
+    [InverseProperty(""OriginalPosts"")]
+    public virtual Blog OriginalBlog { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
@@ -1800,8 +1833,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void Entity_with_custom_annotation()
-        => Test(
+    public Task Entity_with_custom_annotation()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "EntityWithAnnotation",
@@ -1821,14 +1854,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+[CustomEntityDataAnnotation(""first argument"")]
+public partial class EntityWithAnnotation
 {
-    [CustomEntityDataAnnotation(""first argument"")]
-    public partial class EntityWithAnnotation
-    {
-        [Key]
-        public int Id { get; set; }
-    }
+    [Key]
+    public int Id { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "EntityWithAnnotation.cs"));
@@ -1837,46 +1869,39 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class TestDbContext : DbContext
 {
-    public partial class TestDbContext : DbContext
+    public TestDbContext()
     {
-        public TestDbContext()
-        {
-        }
+    }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
-            : base(options)
-        {
-        }
+    public TestDbContext(DbContextOptions<TestDbContext> options)
+        : base(options)
+    {
+    }
 
-        public virtual DbSet<EntityWithAnnotation> EntityWithAnnotation { get; set; }
+    public virtual DbSet<EntityWithAnnotation> EntityWithAnnotation { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning "
                     + DesignStrings.SensitiveInformationWarning
                     + @"
-                optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
-            }
-        }
+        => optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<EntityWithAnnotation>(entity =>
         {
-            modelBuilder.Entity<EntityWithAnnotation>(entity =>
-            {
-                entity.Property(e => e.Id).UseIdentityColumn();
-            });
+            entity.Property(e => e.Id).UseIdentityColumn();
+        });
 
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
                     code.ContextFile);
@@ -1885,8 +1910,8 @@ namespace TestNamespace
             skipBuild: true);
 
     [ConditionalFact]
-    public void Entity_property_with_custom_annotation()
-        => Test(
+    public Task Entity_property_with_custom_annotation()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "EntityWithPropertyAnnotation",
@@ -1906,14 +1931,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class EntityWithPropertyAnnotation
 {
-    public partial class EntityWithPropertyAnnotation
-    {
-        [Key]
-        [CustomPropertyDataAnnotation(""first argument"")]
-        public int Id { get; set; }
-    }
+    [Key]
+    [CustomPropertyDataAnnotation(""first argument"")]
+    public int Id { get; set; }
 }
 ",
                     code.AdditionalFiles.Single(f => f.Path == "EntityWithPropertyAnnotation.cs"));
@@ -1922,46 +1946,39 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class TestDbContext : DbContext
 {
-    public partial class TestDbContext : DbContext
+    public TestDbContext()
     {
-        public TestDbContext()
-        {
-        }
+    }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
-            : base(options)
-        {
-        }
+    public TestDbContext(DbContextOptions<TestDbContext> options)
+        : base(options)
+    {
+    }
 
-        public virtual DbSet<EntityWithPropertyAnnotation> EntityWithPropertyAnnotation { get; set; }
+    public virtual DbSet<EntityWithPropertyAnnotation> EntityWithPropertyAnnotation { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning "
                     + DesignStrings.SensitiveInformationWarning
                     + @"
-                optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
-            }
-        }
+        => optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<EntityWithPropertyAnnotation>(entity =>
         {
-            modelBuilder.Entity<EntityWithPropertyAnnotation>(entity =>
-            {
-                entity.Property(e => e.Id).UseIdentityColumn();
-            });
+            entity.Property(e => e.Id).UseIdentityColumn();
+        });
 
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
                     code.ContextFile);
@@ -1970,8 +1987,8 @@ namespace TestNamespace
             skipBuild: true);
 
     [ConditionalFact]
-    public void Scaffold_skip_navigations_default()
-        => Test(
+    public Task Scaffold_skip_navigations_default()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Blog",
@@ -1991,67 +2008,57 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class TestDbContext : DbContext
 {
-    public partial class TestDbContext : DbContext
+    public TestDbContext()
     {
-        public TestDbContext()
-        {
-        }
+    }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
-            : base(options)
-        {
-        }
+    public TestDbContext(DbContextOptions<TestDbContext> options)
+        : base(options)
+    {
+    }
 
-        public virtual DbSet<Blog> Blog { get; set; }
-        public virtual DbSet<Post> Post { get; set; }
+    public virtual DbSet<Blog> Blog { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+    public virtual DbSet<Post> Post { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning "
                     + DesignStrings.SensitiveInformationWarning
                     + @"
-                optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
-            }
-        }
+        => optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Blog>(entity =>
         {
-            modelBuilder.Entity<Blog>(entity =>
-            {
-                entity.Property(e => e.Id).UseIdentityColumn();
+            entity.Property(e => e.Id).UseIdentityColumn();
 
-                entity.HasMany(d => d.Posts)
-                    .WithMany(p => p.Blogs)
-                    .UsingEntity<Dictionary<string, object>>(
-                        ""BlogPost"",
-                        l => l.HasOne<Post>().WithMany().HasForeignKey(""PostsId""),
-                        r => r.HasOne<Blog>().WithMany().HasForeignKey(""BlogsId""),
-                        j =>
-                        {
-                            j.HasKey(""BlogsId"", ""PostsId"");
+            entity.HasMany(d => d.Posts).WithMany(p => p.Blogs)
+                .UsingEntity<Dictionary<string, object>>(
+                    ""BlogPost"",
+                    r => r.HasOne<Post>().WithMany().HasForeignKey(""PostsId""),
+                    l => l.HasOne<Blog>().WithMany().HasForeignKey(""BlogsId""),
+                    j =>
+                    {
+                        j.HasKey(""BlogsId"", ""PostsId"");
+                        j.HasIndex(new[] { ""PostsId"" }, ""IX_BlogPost_PostsId"");
+                    });
+        });
 
-                            j.ToTable(""BlogPost"");
+        modelBuilder.Entity<Post>(entity =>
+        {
+            entity.Property(e => e.Id).UseIdentityColumn();
+        });
 
-                            j.HasIndex(new[] { ""PostsId"" }, ""IX_BlogPost_PostsId"");
-                        });
-            });
-
-            modelBuilder.Entity<Post>(entity =>
-            {
-                entity.Property(e => e.Id).UseIdentityColumn();
-            });
-
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
                     code.ContextFile);
@@ -2060,19 +2067,13 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Blog
 {
-    public partial class Blog
-    {
-        public Blog()
-        {
-            Posts = new HashSet<Post>();
-        }
+    public int Id { get; set; }
 
-        public int Id { get; set; }
-
-        public virtual ICollection<Post> Posts { get; set; }
-    }
+    public virtual ICollection<Post> Posts { get; } = new List<Post>();
 }
 ",
                     code.AdditionalFiles.Single(e => e.Path == "Blog.cs"));
@@ -2081,19 +2082,13 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Post
 {
-    public partial class Post
-    {
-        public Post()
-        {
-            Blogs = new HashSet<Blog>();
-        }
+    public int Id { get; set; }
 
-        public int Id { get; set; }
-
-        public virtual ICollection<Blog> Blogs { get; set; }
-    }
+    public virtual ICollection<Blog> Blogs { get; } = new List<Blog>();
 }
 ",
                     code.AdditionalFiles.Single(e => e.Path == "Post.cs"));
@@ -2123,8 +2118,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void Scaffold_skip_navigations_different_key_type()
-        => Test(
+    public Task Scaffold_skip_navigations_different_key_type()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Blog",
@@ -2144,62 +2139,52 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class TestDbContext : DbContext
 {
-    public partial class TestDbContext : DbContext
+    public TestDbContext()
     {
-        public TestDbContext()
-        {
-        }
+    }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
-            : base(options)
-        {
-        }
+    public TestDbContext(DbContextOptions<TestDbContext> options)
+        : base(options)
+    {
+    }
 
-        public virtual DbSet<Blog> Blog { get; set; }
-        public virtual DbSet<Post> Post { get; set; }
+    public virtual DbSet<Blog> Blog { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+    public virtual DbSet<Post> Post { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning "
                     + DesignStrings.SensitiveInformationWarning
                     + @"
-                optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
-            }
-        }
+        => optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Blog>(entity =>
         {
-            modelBuilder.Entity<Blog>(entity =>
-            {
-                entity.Property(e => e.Id).UseIdentityColumn();
+            entity.Property(e => e.Id).UseIdentityColumn();
 
-                entity.HasMany(d => d.Posts)
-                    .WithMany(p => p.Blogs)
-                    .UsingEntity<Dictionary<string, object>>(
-                        ""BlogPost"",
-                        l => l.HasOne<Post>().WithMany().HasForeignKey(""PostsId""),
-                        r => r.HasOne<Blog>().WithMany().HasForeignKey(""BlogsId""),
-                        j =>
-                        {
-                            j.HasKey(""BlogsId"", ""PostsId"");
+            entity.HasMany(d => d.Posts).WithMany(p => p.Blogs)
+                .UsingEntity<Dictionary<string, object>>(
+                    ""BlogPost"",
+                    r => r.HasOne<Post>().WithMany().HasForeignKey(""PostsId""),
+                    l => l.HasOne<Blog>().WithMany().HasForeignKey(""BlogsId""),
+                    j =>
+                    {
+                        j.HasKey(""BlogsId"", ""PostsId"");
+                        j.HasIndex(new[] { ""PostsId"" }, ""IX_BlogPost_PostsId"");
+                    });
+        });
 
-                            j.ToTable(""BlogPost"");
-
-                            j.HasIndex(new[] { ""PostsId"" }, ""IX_BlogPost_PostsId"");
-                        });
-            });
-
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
                     code.ContextFile);
@@ -2208,19 +2193,13 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Blog
 {
-    public partial class Blog
-    {
-        public Blog()
-        {
-            Posts = new HashSet<Post>();
-        }
+    public int Id { get; set; }
 
-        public int Id { get; set; }
-
-        public virtual ICollection<Post> Posts { get; set; }
-    }
+    public virtual ICollection<Post> Posts { get; } = new List<Post>();
 }
 ",
                     code.AdditionalFiles.Single(e => e.Path == "Blog.cs"));
@@ -2229,19 +2208,13 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Post
 {
-    public partial class Post
-    {
-        public Post()
-        {
-            Blogs = new HashSet<Blog>();
-        }
+    public string Id { get; set; }
 
-        public string Id { get; set; }
-
-        public virtual ICollection<Blog> Blogs { get; set; }
-    }
+    public virtual ICollection<Blog> Blogs { get; } = new List<Blog>();
 }
 ",
                     code.AdditionalFiles.Single(e => e.Path == "Post.cs"));
@@ -2271,8 +2244,8 @@ namespace TestNamespace
             });
 
     [ConditionalFact]
-    public void Scaffold_skip_navigations_default_data_annotations()
-        => Test(
+    public Task Scaffold_skip_navigations_default_data_annotations()
+        => TestAsync(
             modelBuilder => modelBuilder
                 .Entity(
                     "Blog",
@@ -2292,67 +2265,57 @@ namespace TestNamespace
                     @"using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class TestDbContext : DbContext
 {
-    public partial class TestDbContext : DbContext
+    public TestDbContext()
     {
-        public TestDbContext()
-        {
-        }
+    }
 
-        public TestDbContext(DbContextOptions<TestDbContext> options)
-            : base(options)
-        {
-        }
+    public TestDbContext(DbContextOptions<TestDbContext> options)
+        : base(options)
+    {
+    }
 
-        public virtual DbSet<Blog> Blog { get; set; }
-        public virtual DbSet<Post> Post { get; set; }
+    public virtual DbSet<Blog> Blog { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+    public virtual DbSet<Post> Post { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning "
                     + DesignStrings.SensitiveInformationWarning
                     + @"
-                optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
-            }
-        }
+        => optionsBuilder.UseSqlServer(""Initial Catalog=TestDatabase"");
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Blog>(entity =>
         {
-            modelBuilder.Entity<Blog>(entity =>
-            {
-                entity.Property(e => e.Id).UseIdentityColumn();
+            entity.Property(e => e.Id).UseIdentityColumn();
 
-                entity.HasMany(d => d.Posts)
-                    .WithMany(p => p.Blogs)
-                    .UsingEntity<Dictionary<string, object>>(
-                        ""BlogPost"",
-                        l => l.HasOne<Post>().WithMany().HasForeignKey(""PostsId""),
-                        r => r.HasOne<Blog>().WithMany().HasForeignKey(""BlogsId""),
-                        j =>
-                        {
-                            j.HasKey(""BlogsId"", ""PostsId"");
+            entity.HasMany(d => d.Posts).WithMany(p => p.Blogs)
+                .UsingEntity<Dictionary<string, object>>(
+                    ""BlogPost"",
+                    r => r.HasOne<Post>().WithMany().HasForeignKey(""PostsId""),
+                    l => l.HasOne<Blog>().WithMany().HasForeignKey(""BlogsId""),
+                    j =>
+                    {
+                        j.HasKey(""BlogsId"", ""PostsId"");
+                        j.HasIndex(new[] { ""PostsId"" }, ""IX_BlogPost_PostsId"");
+                    });
+        });
 
-                            j.ToTable(""BlogPost"");
+        modelBuilder.Entity<Post>(entity =>
+        {
+            entity.Property(e => e.Id).UseIdentityColumn();
+        });
 
-                            j.HasIndex(new[] { ""PostsId"" }, ""IX_BlogPost_PostsId"");
-                        });
-            });
-
-            modelBuilder.Entity<Post>(entity =>
-            {
-                entity.Property(e => e.Id).UseIdentityColumn();
-            });
-
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 ",
                     code.ContextFile);
@@ -2364,22 +2327,16 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Blog
 {
-    public partial class Blog
-    {
-        public Blog()
-        {
-            Posts = new HashSet<Post>();
-        }
+    [Key]
+    public int Id { get; set; }
 
-        [Key]
-        public int Id { get; set; }
-
-        [ForeignKey(""BlogsId"")]
-        [InverseProperty(""Blogs"")]
-        public virtual ICollection<Post> Posts { get; set; }
-    }
+    [ForeignKey(""BlogsId"")]
+    [InverseProperty(""Blogs"")]
+    public virtual ICollection<Post> Posts { get; } = new List<Post>();
 }
 ",
                     code.AdditionalFiles.Single(e => e.Path == "Blog.cs"));
@@ -2391,22 +2348,16 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestNamespace
+namespace TestNamespace;
+
+public partial class Post
 {
-    public partial class Post
-    {
-        public Post()
-        {
-            Blogs = new HashSet<Blog>();
-        }
+    [Key]
+    public int Id { get; set; }
 
-        [Key]
-        public int Id { get; set; }
-
-        [ForeignKey(""PostsId"")]
-        [InverseProperty(""Posts"")]
-        public virtual ICollection<Blog> Blogs { get; set; }
-    }
+    [ForeignKey(""PostsId"")]
+    [InverseProperty(""Posts"")]
+    public virtual ICollection<Blog> Blogs { get; } = new List<Blog>();
 }
 ",
                     code.AdditionalFiles.Single(e => e.Path == "Post.cs"));

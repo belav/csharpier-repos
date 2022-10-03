@@ -217,6 +217,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     method.IsVirtual ||
                     method.IsOverride ||
                     method.PartialImplementationPart != null ||
+                    method.PartialDefinitionPart != null ||
                     !method.ExplicitOrImplicitInterfaceImplementations().IsEmpty ||
                     method.IsAccessor() ||
                     method.IsAnonymousFunction() ||
@@ -247,7 +248,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
 
                 // Ignore flagging parameters for methods with certain well-known attributes,
                 // which are known to have unused parameters in real world code.
-                if (method.GetAttributes().Any(a => _attributeSetForMethodsToIgnore.Contains(a.AttributeClass)))
+                if (method.GetAttributes().Any(static (a, self) => self._attributeSetForMethodsToIgnore.Contains(a.AttributeClass), this))
                 {
                     return false;
                 }

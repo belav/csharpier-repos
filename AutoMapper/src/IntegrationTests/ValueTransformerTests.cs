@@ -1,15 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
-using AutoMapper.UnitTests;
-using Microsoft.EntityFrameworkCore;
-using Shouldly;
-using Xunit;
-
-namespace AutoMapper.IntegrationTests
+﻿namespace AutoMapper.IntegrationTests
 {
     namespace ValueTransformerTests
     {
-        public class BasicTransforming : AutoMapperSpecBase, IAsyncLifetime
+        public class BasicTransforming : IntegrationTest<BasicTransforming.DatabaseInitializer>
         {
             public class Source
             {
@@ -28,7 +21,7 @@ namespace AutoMapper.IntegrationTests
                 public DbSet<Source> Sources { get; set; }
             }
 
-            public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
+            public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
             {
                 protected override void Seed(Context context)
                 {
@@ -54,18 +47,9 @@ namespace AutoMapper.IntegrationTests
                     dest.Value.ShouldBe("Jimmy is straight up dope");
                 }
             }
-
-            public async Task InitializeAsync()
-            {
-                var initializer = new DatabaseInitializer();
-
-                await initializer.Migrate();
-            }
-
-            public Task DisposeAsync() => Task.CompletedTask;
         }
 
-        public class StackingTransformers : AutoMapperSpecBase, IAsyncLifetime
+        public class StackingTransformers : IntegrationTest<StackingTransformers.DatabaseInitializer>
         {
             public class Source
             {
@@ -84,7 +68,7 @@ namespace AutoMapper.IntegrationTests
                 public DbSet<Source> Sources { get; set; }
             }
 
-            public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
+            public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
             {
                 protected override void Seed(Context context)
                 {
@@ -111,18 +95,9 @@ namespace AutoMapper.IntegrationTests
                     dest.Value.ShouldBe("Jimmy is straight up dope! No joke!");
                 }
             }
-
-            public async Task InitializeAsync()
-            {
-                var initializer = new DatabaseInitializer();
-
-                await initializer.Migrate();
-            }
-
-            public Task DisposeAsync() => Task.CompletedTask;
         }
 
-        public class DifferentProfiles : AutoMapperSpecBase, IAsyncLifetime
+        public class DifferentProfiles : IntegrationTest<DifferentProfiles.DatabaseInitializer>
         {
             public class Source
             {
@@ -148,7 +123,7 @@ namespace AutoMapper.IntegrationTests
                 public DbSet<Source> Sources { get; set; }
             }
 
-            public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
+            public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
             {
                 protected override void Seed(Context context)
                 {
@@ -168,18 +143,9 @@ namespace AutoMapper.IntegrationTests
                     dest.Value.ShouldBe("Jimmy is straight up dope");
                 }
             }
-
-            public async Task InitializeAsync()
-            {
-                var initializer = new DatabaseInitializer();
-
-                await initializer.Migrate();
-            }
-
-            public Task DisposeAsync() => Task.CompletedTask;
         }
 
-        public class StackingRootConfigAndProfileTransform : AutoMapperSpecBase, IAsyncLifetime
+        public class StackingRootConfigAndProfileTransform : IntegrationTest<StackingRootConfigAndProfileTransform.DatabaseInitializer>
         {
             public class Source
             {
@@ -198,7 +164,7 @@ namespace AutoMapper.IntegrationTests
                 public DbSet<Source> Sources { get; set; }
             }
 
-            public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
+            public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
             {
                 protected override void Seed(Context context)
                 {
@@ -227,18 +193,9 @@ namespace AutoMapper.IntegrationTests
                     dest.Value.ShouldBe("Jimmy is straight up dope! No joke!");
                 }
             }
-
-            public async Task InitializeAsync()
-            {
-                var initializer = new DatabaseInitializer();
-
-                await initializer.Migrate();
-            }
-
-            public Task DisposeAsync() => Task.CompletedTask;
         }
 
-        public class TransformingValueTypes : AutoMapperSpecBase, IAsyncLifetime
+        public class TransformingValueTypes : IntegrationTest<TransformingValueTypes.DatabaseInitializer>
         {
             public class Source
             {
@@ -257,7 +214,7 @@ namespace AutoMapper.IntegrationTests
                 public DbSet<Source> Sources { get; set; }
             }
 
-            public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
+            public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
             {
                 protected override void Seed(Context context)
                 {
@@ -286,18 +243,9 @@ namespace AutoMapper.IntegrationTests
                     dest.Value.ShouldBe((5 + 3) * 2);
                 }
             }
-
-            public async Task InitializeAsync()
-            {
-                var initializer = new DatabaseInitializer();
-
-                await initializer.Migrate();
-            }
-
-            public Task DisposeAsync() => Task.CompletedTask;
         }
 
-        public class StackingRootAndProfileAndMemberConfig : AutoMapperSpecBase, IAsyncLifetime
+        public class StackingRootAndProfileAndMemberConfig : IntegrationTest<StackingRootAndProfileAndMemberConfig.DatabaseInitializer>
         {
             public class Source
             {
@@ -316,7 +264,7 @@ namespace AutoMapper.IntegrationTests
                 public DbSet<Source> Sources { get; set; }
             }
 
-            public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
+            public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
             {
                 protected override void Seed(Context context)
                 {
@@ -347,18 +295,9 @@ namespace AutoMapper.IntegrationTests
                     dest.Value.ShouldBe("Jimmy, for real, is straight up dope! No joke!");
                 }
             }
-
-            public async Task InitializeAsync()
-            {
-                var initializer = new DatabaseInitializer();
-
-                await initializer.Migrate();
-            }
-
-            public Task DisposeAsync() => Task.CompletedTask;
         }
 
-        public class StackingTypeMapAndRootAndProfileAndMemberConfig : AutoMapperSpecBase, IAsyncLifetime
+        public class StackingTypeMapAndRootAndProfileAndMemberConfig : IntegrationTest<StackingTypeMapAndRootAndProfileAndMemberConfig.DatabaseInitializer>
         {
             public class Source
             {
@@ -377,7 +316,7 @@ namespace AutoMapper.IntegrationTests
                 public DbSet<Source> Sources { get; set; }
             }
 
-            public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
+            public class DatabaseInitializer : DropCreateDatabaseAlways<Context>
             {
                 protected override void Seed(Context context)
                 {
@@ -408,17 +347,6 @@ namespace AutoMapper.IntegrationTests
                     dest.Value.ShouldBe("Jimmy, seriously, for real, is straight up dope! No joke!");
                 }
             }
-
-            public async Task InitializeAsync()
-            {
-                var initializer = new DatabaseInitializer();
-
-                await initializer.Migrate();
-            }
-
-            public Task DisposeAsync() => Task.CompletedTask;
         }
-
-
     }
 }

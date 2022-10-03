@@ -48,6 +48,9 @@ namespace System.Runtime.InteropServices
             if (del == null)
                 return IntPtr.Zero;
 
+            if (del.GetEETypePtr().IsGeneric)
+                throw new ArgumentException(SR.Argument_NeedNonGenericType, "delegate");
+
             NativeFunctionPointerWrapper? fpWrapper = del.Target as NativeFunctionPointerWrapper;
             if (fpWrapper != null)
             {
@@ -62,7 +65,7 @@ namespace System.Runtime.InteropServices
                 //
                 // Marshalling a managed delegate created from managed code into a native function pointer
                 //
-                return GetPInvokeDelegates().GetValue(del, s_AllocateThunk ?? (s_AllocateThunk = AllocateThunk)).Thunk;
+                return GetPInvokeDelegates().GetValue(del, s_AllocateThunk ??= AllocateThunk).Thunk;
             }
         }
 
@@ -225,6 +228,9 @@ namespace System.Runtime.InteropServices
             // We need to create the delegate that points to the invoke method of a
             // NativeFunctionPointerWrapper derived class
             //
+            if (delegateType.ToEETypePtr().BaseType != EETypePtr.EETypePtrOf<MulticastDelegate>())
+                throw new ArgumentException(SR.Arg_MustBeDelegate, "t");
+
             IntPtr pDelegateCreationStub = RuntimeInteropData.GetForwardDelegateCreationStub(delegateType);
             Debug.Assert(pDelegateCreationStub != IntPtr.Zero);
 

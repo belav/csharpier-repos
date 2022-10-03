@@ -1,16 +1,6 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper.UnitTests;
-using Microsoft.EntityFrameworkCore;
-using Shouldly;
-using Xunit;
+﻿namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
-namespace AutoMapper.IntegrationTests.ExplicitExpansion;
-
-public class ExplicitlyExpandCollectionsAndChildReferences : AutoMapperSpecBase, IAsyncLifetime
+public class ExplicitlyExpandCollectionsAndChildReferences : IntegrationTest<ExplicitlyExpandCollectionsAndChildReferences.DatabaseInitializer>
 {
     TrainingCourseDto _course;
 
@@ -24,10 +14,14 @@ public class ExplicitlyExpandCollectionsAndChildReferences : AutoMapperSpecBase,
     [Fact]
     public void Should_expand_collections_items()
     {
+        using (var context = new ClientContext())
+        {
+            _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses, null, c => c.Content.Select(co => co.Category)).FirstOrDefault(n => n.CourseName == "Course 1");
+        }
         _course.Content[0].Category.CategoryName.ShouldBe("Category 1");
     }
 
-    class DatabaseInitializer : DropCreateDatabaseAlways<ClientContext>
+    public class DatabaseInitializer : DropCreateDatabaseAlways<ClientContext>
     {
         protected override void Seed(ClientContext context)
         {
@@ -40,7 +34,7 @@ public class ExplicitlyExpandCollectionsAndChildReferences : AutoMapperSpecBase,
         }
     }
 
-    class ClientContext : LocalDbContext
+    public class ClientContext : LocalDbContext
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<TrainingCourse> TrainingCourses { get; set; }
@@ -97,17 +91,4 @@ public class ExplicitlyExpandCollectionsAndChildReferences : AutoMapperSpecBase,
 
         public CategoryDto Category { get; set; }
     }
-    public async Task InitializeAsync()
-    {
-        var initializer = new DatabaseInitializer();
-
-        await initializer.Migrate();
-
-        using (var context = new ClientContext())
-        {
-            _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses, null, c => c.Content.Select(co => co.Category)).FirstOrDefault(n => n.CourseName == "Course 1");
-        }
-    }
-
-    public Task DisposeAsync() => Task.CompletedTask;
 }

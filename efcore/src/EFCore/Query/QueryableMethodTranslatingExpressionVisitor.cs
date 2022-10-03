@@ -77,10 +77,11 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
         if (extensionExpression is QueryRootExpression queryRootExpression)
         {
             // Query roots must be processed.
-            if (extensionExpression.GetType() == typeof(QueryRootExpression))
+            if (extensionExpression.GetType() == typeof(EntityQueryRootExpression)
+                && extensionExpression is EntityQueryRootExpression entityQueryRootExpression)
             {
                 // This requires exact type match on query root to avoid processing derived query roots.
-                return CreateShapedQueryExpression(queryRootExpression.EntityType);
+                return CreateShapedQueryExpression(entityQueryRootExpression.EntityType);
             }
 
             throw new InvalidOperationException(
@@ -152,10 +153,7 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
                         var source2 = Visit(methodCallExpression.Arguments[1]);
                         if (source2 is ShapedQueryExpression innerShapedQueryExpression)
                         {
-                            return CheckTranslated(
-                                TranslateConcat(
-                                    shapedQueryExpression,
-                                    innerShapedQueryExpression));
+                            return CheckTranslated(TranslateConcat(shapedQueryExpression, innerShapedQueryExpression));
                         }
 
                         break;
@@ -206,10 +204,7 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
                         var source2 = Visit(methodCallExpression.Arguments[1]);
                         if (source2 is ShapedQueryExpression innerShapedQueryExpression)
                         {
-                            return CheckTranslated(
-                                TranslateExcept(
-                                    shapedQueryExpression,
-                                    innerShapedQueryExpression));
+                            return CheckTranslated(TranslateExcept(shapedQueryExpression, innerShapedQueryExpression));
                         }
 
                         break;

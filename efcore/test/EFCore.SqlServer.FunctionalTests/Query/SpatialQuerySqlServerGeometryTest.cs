@@ -23,7 +23,7 @@ public class SpatialQuerySqlServerGeometryTest : SpatialQueryRelationalTestBase<
         await base.SimpleSelect(async);
 
         AssertSql(
-            @"SELECT [p].[Id], [p].[Geometry], [p].[Point], [p].[PointM], [p].[PointZ], [p].[PointZM]
+            @"SELECT [p].[Id], [p].[Geometry], [p].[Group], [p].[Point], [p].[PointM], [p].[PointZ], [p].[PointZM]
 FROM [PointEntity] AS [p]",
             //
             @"SELECT [l].[Id], [l].[LineString]
@@ -115,6 +115,28 @@ FROM [PolygonEntity] AS [p]");
 FROM [PolygonEntity] AS [p]");
     }
 
+    public override async Task Combine_aggregate(bool async)
+    {
+        await base.Combine_aggregate(async);
+
+        AssertSql(
+            @"SELECT [p].[Group] AS [Id], geometry::CollectionAggregate([p].[Point]) AS [Combined]
+FROM [PointEntity] AS [p]
+WHERE [p].[Point] IS NOT NULL
+GROUP BY [p].[Group]");
+    }
+
+    public override async Task EnvelopeCombine_aggregate(bool async)
+    {
+        await base.EnvelopeCombine_aggregate(async);
+
+        AssertSql(
+            @"SELECT [p].[Group] AS [Id], geometry::EnvelopeAggregate([p].[Point]) AS [Combined]
+FROM [PointEntity] AS [p]
+WHERE [p].[Point] IS NOT NULL
+GROUP BY [p].[Group]");
+    }
+
     public override async Task Contains(bool async)
     {
         await base.Contains(async);
@@ -133,6 +155,17 @@ FROM [PolygonEntity] AS [p]");
         AssertSql(
             @"SELECT [p].[Id], [p].[Polygon].STConvexHull() AS [ConvexHull]
 FROM [PolygonEntity] AS [p]");
+    }
+
+    public override async Task ConvexHull_aggregate(bool async)
+    {
+        await base.ConvexHull_aggregate(async);
+
+        AssertSql(
+            @"SELECT [p].[Group] AS [Id], geometry::ConvexHullAggregate([p].[Point]) AS [ConvexHull]
+FROM [PointEntity] AS [p]
+WHERE [p].[Point] IS NOT NULL
+GROUP BY [p].[Group]");
     }
 
     public override async Task IGeometryCollection_Count(bool async)
@@ -170,6 +203,26 @@ FROM [LineStringEntity] AS [l]");
 
 SELECT [l].[Id], [l].[LineString].STCrosses(@__lineString_0) AS [Crosses]
 FROM [LineStringEntity] AS [l]");
+    }
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task CurveToLine(bool async)
+    {
+        await AssertQuery(
+            async,
+            ss => ss.Set<PolygonEntity>().Select(e => new { e.Id, CurveToLine = EF.Functions.CurveToLine(e.Polygon) }),
+            ss => ss.Set<PolygonEntity>().Select(e => new { e.Id, CurveToLine = (Geometry)e.Polygon }),
+            elementSorter: x => x.Id,
+            elementAsserter: (e, a) =>
+            {
+                Assert.Equal(e.Id, a.Id);
+                Assert.Equal(e.CurveToLine, a.CurveToLine, GeometryComparer.Instance);
+            });
+
+        AssertSql(
+            @"SELECT [p].[Id], [p].[Polygon].STCurveToLine() AS [CurveToLine]
+FROM [PolygonEntity] AS [p]");
     }
 
     public override async Task Difference(bool async)
@@ -699,6 +752,17 @@ SELECT [p].[Id], [p].[Polygon].STUnion(@__polygon_0) AS [Union]
 FROM [PolygonEntity] AS [p]");
     }
 
+    public override async Task Union_aggregate(bool async)
+    {
+        await base.Union_aggregate(async);
+
+        AssertSql(
+            @"SELECT [p].[Group] AS [Id], geometry::UnionAggregate([p].[Point]) AS [Union]
+FROM [PointEntity] AS [p]
+WHERE [p].[Point] IS NOT NULL
+GROUP BY [p].[Group]");
+    }
+
     // No SqlServer Translation
     public override Task Union_void(bool async)
         => Task.CompletedTask;
@@ -746,7 +810,7 @@ FROM [PointEntity] AS [p]");
         await base.XY_with_collection_join(async);
 
         AssertSql(
-            @"SELECT [t].[Id], [t].[c], [t].[c0], [p0].[Id], [p0].[Geometry], [p0].[Point], [p0].[PointM], [p0].[PointZ], [p0].[PointZM]
+            @"SELECT [t].[Id], [t].[c], [t].[c0], [p0].[Id], [p0].[Geometry], [p0].[Group], [p0].[Point], [p0].[PointM], [p0].[PointZ], [p0].[PointZM]
 FROM (
     SELECT TOP(1) [p].[Id], [p].[Point].STX AS [c], [p].[Point].STY AS [c0]
     FROM [PointEntity] AS [p]

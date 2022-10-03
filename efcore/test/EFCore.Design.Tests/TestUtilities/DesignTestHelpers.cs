@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-public class DesignTestHelpers : TestHelpers
+public class DesignTestHelpers : RelationalTestHelpers
 {
     protected DesignTestHelpers()
     {
@@ -16,7 +16,7 @@ public class DesignTestHelpers : TestHelpers
     public override IServiceCollection AddProviderServices(IServiceCollection services)
         => FakeRelationalOptionsExtension.AddEntityFrameworkRelationalDatabase(services);
 
-    public override void UseProviderOptions(DbContextOptionsBuilder optionsBuilder)
+    public override DbContextOptionsBuilder UseProviderOptions(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseFakeRelational();
 
     public override LoggingDefinitions LoggingDefinitions { get; } = new TestRelationalLoggingDefinitions();

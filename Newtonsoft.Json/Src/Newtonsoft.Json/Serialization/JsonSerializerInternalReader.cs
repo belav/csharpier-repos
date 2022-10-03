@@ -1804,6 +1804,7 @@ namespace Newtonsoft.Json.Serialization
             JsonConverter? itemConverter = GetConverter(itemContract, null, contract, member);
 
             JsonReader tokenReader = token.CreateReader();
+            tokenReader.MaxDepth = Serializer.MaxDepth;
             tokenReader.ReadAndAssert(); // Move to first token
 
             object? result;
@@ -2243,6 +2244,13 @@ namespace Newtonsoft.Json.Serialization
                                 }
                                 
                                 continue;
+                            }
+                            else
+                            {
+                                if (!reader.Read())
+                                {
+                                    throw JsonSerializationException.Create(reader, "Unexpected end when setting {0}'s value.".FormatWith(CultureInfo.InvariantCulture, memberName));
+                                }
                             }
                         }
                         else

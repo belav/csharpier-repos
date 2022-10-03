@@ -55,6 +55,8 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
                                 {
                                     oob.ToTable(nameof(Leaf24777));
                                     oob.HasKey(x => new { ProductCommissionRulesetId = x.ModdleAId, x.UnitThreshold });
+                                    oob.Property(x => x.ModdleAId).ValueGeneratedNever();
+                                    oob.Property(x => x.UnitThreshold).ValueGeneratedNever();
                                     oob.WithOwner().HasForeignKey(e => e.ModdleAId);
                                     oob.HasData(
                                         new Leaf24777 { ModdleAId = 1, UnitThreshold = 1 },
@@ -227,4 +229,149 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
                 });
         }
     }
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task Owned_entity_with_all_null_properties_materializes_when_not_containing_another_owned_entity(bool async)
+    {
+        var contextFactory = await InitializeAsync<MyContext28247>(seed: c => c.Seed());
+
+        using var context = contextFactory.CreateContext();
+        var query = context.RotRutCases.OrderBy(e => e.Buyer);
+
+        var result = async
+            ? await query.ToListAsync()
+            : query.ToList();
+
+        Assert.Collection(
+            result,
+            t =>
+            {
+                Assert.Equal("Buyer1", t.Buyer);
+                Assert.NotNull(t.Rot);
+                Assert.Equal(1, t.Rot.ServiceType);
+                Assert.Equal("1", t.Rot.ApartmentNo);
+                Assert.NotNull(t.Rut);
+                Assert.Equal(1, t.Rut.Value);
+            },
+            t =>
+            {
+                Assert.Equal("Buyer2", t.Buyer);
+                Assert.Null(t.Rot);
+                Assert.Null(t.Rut);
+            });
+    }
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task Owned_entity_with_all_null_properties_entity_equality_when_not_containing_another_owned_entity(bool async)
+    {
+        var contextFactory = await InitializeAsync<MyContext28247>(seed: c => c.Seed());
+
+        using var context = contextFactory.CreateContext();
+        var query = context.RotRutCases.AsNoTracking().Select(e => e.Rot).Where(e => e != null);
+
+        var result = async
+            ? await query.ToListAsync()
+            : query.ToList();
+
+        Assert.Collection(
+            result,
+            t =>
+            {
+                Assert.Equal(1, t.ServiceType);
+                Assert.Equal("1", t.ApartmentNo);
+            });
+    }
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual async Task Owned_entity_with_all_null_properties_property_access_when_not_containing_another_owned_entity(bool async)
+    {
+        var contextFactory = await InitializeAsync<MyContext28247>(seed: c => c.Seed());
+
+        using var context = contextFactory.CreateContext();
+        var query = context.RotRutCases.AsNoTracking().Select(e => e.Rot.ApartmentNo);
+
+        var result = async
+            ? await query.ToListAsync()
+            : query.ToList();
+
+        Assert.Collection(
+            result,
+            t =>
+            {
+                Assert.Equal("1", t);
+            },
+            t =>
+            {
+                Assert.Null(t);
+            });
+    }
+
+    protected class MyContext28247 : DbContext
+    {
+        public MyContext28247(DbContextOptions options)
+            : base(options)
+        {
+        }
+
+        public DbSet<RotRutCase> RotRutCases { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+            => modelBuilder.Entity<RotRutCase>(
+                b =>
+                {
+                    b.ToTable("RotRutCases");
+
+                    b.OwnsOne(e => e.Rot);
+                    b.OwnsOne(e => e.Rut);
+                });
+
+        public void Seed()
+        {
+            Add(
+                new RotRutCase
+                {
+                    Buyer = "Buyer1",
+                    Rot = new Rot { ServiceType = 1, ApartmentNo = "1" },
+                    Rut = new Rut { Value = 1 }
+                });
+
+            Add(
+                new RotRutCase
+                {
+                    Buyer = "Buyer2",
+                    Rot = new Rot { ServiceType = null, ApartmentNo = null },
+                    Rut = new Rut { Value = null }
+                });
+
+            SaveChanges();
+        }
+    }
+
+    public class RotRutCase
+    {
+        public int Id { get; set; }
+        public string Buyer { get; set; }
+        public Rot Rot { get; set; }
+        public Rut Rut { get; set; }
+    }
+
+    public class Rot
+    {
+        public int? ServiceType { get; set; }
+        public string ApartmentNo { get; set; }
+    }
+
+    public class Rut
+    {
+        public int? Value { get; set; }
+    }
+
+    protected override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
+        => base.AddOptions(builder).ConfigureWarnings(
+            c => c
+                .Log(RelationalEventId.OptionalDependentWithoutIdentifyingPropertyWarning)
+                .Log(RelationalEventId.OptionalDependentWithAllNullPropertiesWarning));
 }

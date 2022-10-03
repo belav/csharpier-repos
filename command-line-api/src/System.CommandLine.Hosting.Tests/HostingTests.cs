@@ -1,5 +1,4 @@
 ﻿using System.CommandLine.Binding;
-using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.Linq;
@@ -92,11 +91,11 @@ namespace System.CommandLine.Hosting.Tests
         }
 
         [Fact]
-        public static void UseHost_UnparsedTokens_can_propagate_to_Host_Configuration()
+        public static void UseHost_UnmatchedTokens_can_propagate_to_Host_Configuration()
         {
             const string testArgument = "test";
-            const string testKey = "unparsed-config";
-            string commandLineArgs = $"-- --{testKey} {testArgument}";
+            const string testKey = "unmatched-config";
+            string commandLineArgs = $"--{testKey} {testArgument}";
 
             string testConfigValue = null;
 
@@ -111,11 +110,10 @@ namespace System.CommandLine.Hosting.Tests
                 {
                     Handler = CommandHandler.Create<IHost>(Execute),
                 })
-                .EnableLegacyDoubleDashBehavior()
                 .UseHost(host =>
                 {
                     var invocation = (InvocationContext)host.Properties[typeof(InvocationContext)];
-                    var args = invocation.ParseResult.UnparsedTokens.ToArray();
+                    var args = invocation.ParseResult.UnmatchedTokens.ToArray();
                     host.ConfigureHostConfiguration(config =>
                     {
                         config.AddCommandLine(args);
@@ -130,11 +128,11 @@ namespace System.CommandLine.Hosting.Tests
         }
 
         [Fact]
-        public static void UseHost_UnparsedTokens_are_available_in_HostBuilder_factory()
+        public static void UseHost_UnmatchedTokens_are_available_in_HostBuilder_factory()
         {
             const string testArgument = "test";
-            const string testKey = "unparsed-config";
-            string commandLineArgs = $"-- --{testKey} {testArgument}";
+            const string testKey = "unmatched-config";
+            string commandLineArgs = $"--{testKey} {testArgument}";
 
             string testConfigValue = null;
 
@@ -149,7 +147,6 @@ namespace System.CommandLine.Hosting.Tests
                 {
                     Handler = CommandHandler.Create<IHost>(Execute),
                 })
-                .EnableLegacyDoubleDashBehavior()
                 .UseHost(args =>
                 {
                     var host = new HostBuilder();

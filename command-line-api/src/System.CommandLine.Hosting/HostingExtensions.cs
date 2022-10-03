@@ -1,5 +1,4 @@
 ﻿using System.CommandLine.Binding;
-using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using System.CommandLine.NamingConventionBinder;
 using System.Linq;
@@ -21,7 +20,7 @@ namespace System.CommandLine.Hosting
             Action<IHostBuilder> configureHost = null) =>
             builder.AddMiddleware(async (invocation, next) =>
             {
-                var argsRemaining = invocation.ParseResult.UnparsedTokens.ToArray();
+                var argsRemaining = invocation.ParseResult.UnmatchedTokens.ToArray();
                 var hostBuilder = hostBuilderFactory?.Invoke(argsRemaining)
                     ?? new HostBuilder();
                 hostBuilder.Properties[typeof(InvocationContext)] = invocation;

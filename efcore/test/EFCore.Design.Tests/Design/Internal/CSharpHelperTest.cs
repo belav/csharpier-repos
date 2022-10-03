@@ -122,6 +122,62 @@ public class CSharpHelperTest
             "new byte[] { 1, 2 }");
 
     [ConditionalFact]
+    public void Literal_works_when_empty_list()
+        => Literal_works(
+            new List<string>(),
+            @"new List<string>()");
+
+    [ConditionalFact]
+    public void Literal_works_when_list_with_single_element()
+        => Literal_works(
+            new List<string> { "one" },
+            @"new List<string> { ""one"" }");
+
+    [ConditionalFact]
+    public void Literal_works_when_list_of_mixed_objects()
+        => Literal_works(
+            new List<object> { 1, "two" },
+            @"new List<object> { 1, ""two"" }");
+
+    [ConditionalFact]
+    public void Literal_works_when_list_vertical()
+        => Assert.Equal(
+            @"new List<object>
+{
+    1,
+    ""two""
+}".ReplaceLineEndings(), new CSharpHelper(TypeMappingSource).Literal(
+                new List<object> { 1, "two" }, true));
+
+    [ConditionalFact]
+    public void Literal_works_when_empty_dictionary()
+        => Literal_works(
+            new Dictionary<string, int>(),
+            @"new Dictionary<string, int>()");
+
+    [ConditionalFact]
+    public void Literal_works_when_dictionary_with_single_element()
+        => Literal_works(
+            new Dictionary<string, string> { ["one"] = "value" },
+            @"new Dictionary<string, string> { [""one""] = ""value"" }");
+
+    [ConditionalFact]
+    public void Literal_works_when_dictionary_of_mixed_objects()
+        => Literal_works(
+            new Dictionary<string, object> { ["one"] = 1, ["two"] = "Two" },
+            @"new Dictionary<string, object> { [""one""] = 1, [""two""] = ""Two"" }");
+
+    [ConditionalFact]
+    public void Literal_works_when_dictionary_vertical()
+        => Assert.Equal(
+            @"new Dictionary<int, object>
+{
+    [1] = 1,
+    [2] = ""Two""
+}".ReplaceLineEndings(), new CSharpHelper(TypeMappingSource).Literal(
+                new Dictionary<int, object> { [1] = 1, [2] = "Two" }, true));
+
+    [ConditionalFact]
     public void Literal_works_when_multiline_string()
         => Literal_works(
             "multi-line\r\nstring\nwith\r\"",
@@ -317,7 +373,7 @@ public class CSharpHelperTest
 
         var result = new CSharpHelper(TypeMappingSource).Fragment(method);
 
-        Assert.Equal($".TestFunc(){EOL}.TestFunc()", result);
+        Assert.Equal($"{EOL}.TestFunc(){EOL}.TestFunc()", result);
     }
 
     [ConditionalFact]
@@ -329,7 +385,7 @@ public class CSharpHelperTest
 
         var result = new CSharpHelper(TypeMappingSource).Fragment(method);
 
-        Assert.Equal(@$".TestFunc(""One""){EOL}.TestFunc(""Two""){EOL}.TestFunc(""Three"")", result);
+        Assert.Equal(@$"{EOL}.TestFunc(""One""){EOL}.TestFunc(""Two""){EOL}.TestFunc(""Three"")", result);
     }
 
     [ConditionalFact]
@@ -343,7 +399,7 @@ public class CSharpHelperTest
 
         var result = new CSharpHelper(TypeMappingSource).Fragment(method);
 
-        Assert.Equal(@$".TestFunc(""One""){EOL}.TestFunc(""Two""){EOL}.TestFunc(""Three""){EOL}.TestFunc(""Four"")", result);
+        Assert.Equal(@$"{EOL}.TestFunc(""One""){EOL}.TestFunc(""Two""){EOL}.TestFunc(""Three""){EOL}.TestFunc(""Four"")", result);
     }
 
     [ConditionalFact]
@@ -359,11 +415,126 @@ public class CSharpHelperTest
     }
 
     [ConditionalFact]
+    public void Fragment_MethodCallCodeFragment_works_when_nested_closure_with_chain()
+    {
+        var method = new MethodCallCodeFragment(
+            _testFuncMethodInfo,
+            new NestedClosureCodeFragment(
+                "x",
+                new MethodCallCodeFragment(_testFuncMethodInfo, "One")
+                    .Chain(new MethodCallCodeFragment(_testFuncMethodInfo, "Two"))));
+
+        var result = new CSharpHelper(TypeMappingSource).Fragment(method);
+
+        Assert.Equal(
+            @".TestFunc(x => x
+    .TestFunc(""One"")
+    .TestFunc(""Two""))",
+            result,
+            ignoreLineEndingDifferences: true);
+    }
+
+    [ConditionalFact]
+    public void Fragment_MethodCallCodeFragment_with_indent_works_when_nested_closure_with_chain()
+    {
+        var method = new MethodCallCodeFragment(
+            _testFuncMethodInfo,
+            new NestedClosureCodeFragment(
+                "x",
+                new MethodCallCodeFragment(_testFuncMethodInfo, "One")
+                    .Chain(new MethodCallCodeFragment(_testFuncMethodInfo, "Two"))));
+
+        var result = new CSharpHelper(TypeMappingSource).Fragment(method, indent: 1);
+
+        Assert.Equal(
+            @".TestFunc(x => x
+        .TestFunc(""One"")
+        .TestFunc(""Two""))",
+            result,
+            ignoreLineEndingDifferences: true);
+    }
+
+    [ConditionalFact]
+    public void Fragment_MethodCallCodeFragment_with_indent_works_when_chain_and_nested_closure_with_chain()
+    {
+        var method = new MethodCallCodeFragment(_testFuncMethodInfo, "One")
+            .Chain(
+                new MethodCallCodeFragment(
+                    _testFuncMethodInfo,
+                    new NestedClosureCodeFragment(
+                        "x",
+                        new MethodCallCodeFragment(_testFuncMethodInfo, "Two")
+                            .Chain(new MethodCallCodeFragment(_testFuncMethodInfo, "Three")))));
+
+        var result = new CSharpHelper(TypeMappingSource).Fragment(method, indent: 1);
+
+        Assert.Equal(
+            @"
+    .TestFunc(""One"")
+    .TestFunc(x => x
+        .TestFunc(""Two"")
+        .TestFunc(""Three""))",
+            result,
+            ignoreLineEndingDifferences: true);
+    }
+
+    [ConditionalFact]
+    public void Fragment_MethodCallCodeFragment_works_when_nested_closure_with_two_calls()
+    {
+        var method = new MethodCallCodeFragment(
+            _testFuncMethodInfo,
+            new NestedClosureCodeFragment(
+                "x",
+                new[] { new MethodCallCodeFragment(_testFuncMethodInfo, "One"), new MethodCallCodeFragment(_testFuncMethodInfo, "Two") }));
+
+        var result = new CSharpHelper(TypeMappingSource).Fragment(method);
+
+        Assert.Equal(
+            @".TestFunc(x =>
+{
+    x.TestFunc(""One"");
+    x.TestFunc(""Two"");
+})",
+            result,
+            ignoreLineEndingDifferences: true);
+    }
+
+    [ConditionalFact]
+    public void Fragment_MethodCallCodeFragment_with_indent_works_when_chain_and_nested_closure()
+    {
+        var method = new MethodCallCodeFragment(_testFuncMethodInfo, "One")
+            .Chain(
+                new MethodCallCodeFragment(
+                    _testFuncMethodInfo,
+                    new NestedClosureCodeFragment(
+                        "x",
+                        new[]
+                        {
+                            new MethodCallCodeFragment(_testFuncMethodInfo, "Two"),
+                            new MethodCallCodeFragment(_testFuncMethodInfo, "Three")
+                        })));
+
+        var result = new CSharpHelper(TypeMappingSource).Fragment(method, indent: 1);
+
+        Assert.Equal(
+            @"
+    .TestFunc(""One"")
+    .TestFunc(x =>
+    {
+        x.TestFunc(""Two"");
+        x.TestFunc(""Three"");
+    })",
+            result,
+            ignoreLineEndingDifferences: true);
+    }
+
+#pragma warning disable CS0618
+    [ConditionalFact]
     public void Fragment_MethodCallCodeFragment_works_with_identifier()
     {
         var method = new MethodCallCodeFragment(_testFuncMethodInfo, true, 42);
 
-        var result = new CSharpHelper(TypeMappingSource).Fragment(method, instanceIdentifier: "builder");
+        var result = new CSharpHelper(TypeMappingSource).Fragment(method, instanceIdentifier: "builder", typeQualified: false);
 
         Assert.Equal("builder.TestFunc(true, 42)", result);
     }
@@ -373,7 +544,7 @@ public class CSharpHelperTest
     {
         var method = new MethodCallCodeFragment(_testFuncMethodInfo, "One").Chain(new MethodCallCodeFragment(_testFuncMethodInfo));
 
-        var result = new CSharpHelper(TypeMappingSource).Fragment(method, instanceIdentifier: "builder");
+        var result = new CSharpHelper(TypeMappingSource).Fragment(method, instanceIdentifier: "builder", typeQualified: false);
 
         Assert.Equal($@"builder{EOL}    .TestFunc(""One""){EOL}    .TestFunc()", result);
     }
@@ -383,10 +554,11 @@ public class CSharpHelperTest
     {
         var method = new MethodCallCodeFragment(_testFuncMethodInfo, true, 42);
 
-        var result = new CSharpHelper(TypeMappingSource).Fragment(method, instanceIdentifier: "builder");
+        var result = new CSharpHelper(TypeMappingSource).Fragment(method, instanceIdentifier: "builder", typeQualified: false);
 
         Assert.Equal("builder.TestFunc(true, 42)", result);
     }
+#pragma warning restore CS0618
 
     [ConditionalFact]
     public void Really_unknown_literal_with_no_mapping_support()

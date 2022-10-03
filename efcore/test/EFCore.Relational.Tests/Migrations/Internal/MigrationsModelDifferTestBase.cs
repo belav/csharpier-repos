@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Update.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Internal;
@@ -116,10 +115,10 @@ public abstract class MigrationsModelDifferTestBase
     protected abstract TestHelpers TestHelpers { get; }
 
     protected virtual TestHelpers.TestModelBuilder CreateModelBuilder(bool skipConventions)
-        => TestHelpers.CreateConventionBuilder(configure: skipConventions ? c => c.RemoveAllConventions() : null);
+        => TestHelpers.CreateConventionBuilder(configureConventions: skipConventions ? c => c.RemoveAllConventions() : null);
 
     protected virtual MigrationsModelDiffer CreateModelDiffer(DbContextOptions options)
-        => new MigrationsModelDiffer(
+        => new(
             new TestRelationalTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
                 TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()),

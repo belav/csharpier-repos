@@ -1,9 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
-
 // ReSharper disable InconsistentNaming
+
 namespace Microsoft.EntityFrameworkCore;
 
 public class SqlServerQueryTriggersTest : IClassFixture<SqlServerQueryTriggersTest.SqlServerTriggersFixture>
@@ -111,7 +110,9 @@ public class SqlServerQueryTriggersTest : IClassFixture<SqlServerQueryTriggersTe
 
     public class SqlServerTriggersFixture : SharedStoreFixtureBase<DbContext>
     {
-        protected override string StoreName { get; } = "SqlServerQueryTriggers";
+        protected override string StoreName
+            => "SqlServerQueryTriggers";
+
         protected override Type ContextType { get; } = typeof(QueryTriggersContext);
 
         protected override ITestStoreFactory TestStoreFactory

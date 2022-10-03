@@ -26,6 +26,7 @@ public class SqlServerNetTopologySuiteMethodCallTranslatorPlugin : IMethodCallTr
             new SqlServerGeometryMethodTranslator(typeMappingSource, sqlExpressionFactory),
             new SqlServerGeometryCollectionMethodTranslator(typeMappingSource, sqlExpressionFactory),
             new SqlServerLineStringMethodTranslator(typeMappingSource, sqlExpressionFactory),
+            new SqlServerNetTopologySuiteDbFunctionsMethodCallTranslator(typeMappingSource, sqlExpressionFactory),
             new SqlServerPolygonMethodTranslator(typeMappingSource, sqlExpressionFactory)
         };
     }

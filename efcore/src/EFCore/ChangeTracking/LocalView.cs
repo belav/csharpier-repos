@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Internal;
 
@@ -45,7 +46,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 ///     </para>
 /// </remarks>
 /// <typeparam name="TEntity">The type of the entity in the local view.</typeparam>
-public class LocalView<TEntity> :
+public class LocalView<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity> :
     ICollection<TEntity>,
     INotifyCollectionChanged,
     INotifyPropertyChanged,
@@ -56,6 +57,7 @@ public class LocalView<TEntity> :
     private ObservableBackedBindingList<TEntity>? _bindingList;
     private ObservableCollection<TEntity>? _observable;
     private readonly DbContext _context;
+    private readonly IEntityType _entityType;
     private int _countChanges;
     private int? _count;
     private bool _triggeringStateManagerChange;
@@ -72,6 +74,7 @@ public class LocalView<TEntity> :
     public LocalView(DbSet<TEntity> set)
     {
         _context = set.GetService<ICurrentDbContext>().Context;
+        _entityType = set.EntityType;
 
         set.GetService<ILocalViewListener>().RegisterView(StateManagerChangedHandler);
     }
@@ -208,7 +211,7 @@ public class LocalView<TEntity> :
         // to Add it again since doing so would change its state to Added, which is probably not what
         // was wanted in this case.
 
-        var entry = _context.GetDependencies().StateManager.GetOrCreateEntry(item);
+        var entry = _context.GetDependencies().StateManager.GetOrCreateEntry(item, _entityType);
         if (entry.EntityState == EntityState.Deleted
             || entry.EntityState == EntityState.Detached)
         {
@@ -271,7 +274,9 @@ public class LocalView<TEntity> :
     {
         var entry = _context.GetDependencies().StateManager.TryGetEntry(item);
 
-        return entry != null && entry.EntityState != EntityState.Deleted;
+        return entry != null
+            && entry.EntityState != EntityState.Deleted
+            && entry.EntityState != EntityState.Detached;
     }
 
     /// <summary>
@@ -469,6 +474,8 @@ public class LocalView<TEntity> :
     ///     examples.
     /// </remarks>
     /// <returns>The binding list.</returns>
+    [RequiresUnreferencedCode(
+        "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code.")]
     public virtual BindingList<TEntity> ToBindingList()
         => _bindingList ??= new ObservableBackedBindingList<TEntity>(ToObservableCollection());
 
@@ -492,4 +499,23 @@ public class LocalView<TEntity> :
     /// </summary>
     bool IListSource.ContainsListCollection
         => false;
+
+    /// <summary>
+    ///     Resets this view, clearing any <see cref="IBindingList" /> created with <see cref="ToBindingList" /> and
+    ///     any <see cref="ObservableCollection{T}" /> created with <see cref="ToObservableCollection" />, and clearing any
+    ///     events registered on <see cref="PropertyChanged" />, <see cref="PropertyChanging" />, or <see cref="CollectionChanged" />.
+    /// </summary>
+    public virtual void Reset()
+    {
+        _bindingList = null;
+        _observable = null;
+        _countChanges = 0;
+        _count = 0;
+        _triggeringStateManagerChange = false;
+        _triggeringObservableChange = false;
+        _triggeringLocalViewChange = false;
+        PropertyChanged = null;
+        PropertyChanging = null;
+        CollectionChanged = null;
+    }
 }

@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
@@ -205,21 +204,21 @@ public sealed partial class SelectExpression
 
                 case ColumnExpression columnExpression
                     when _groupByDiscovery
-                        && _subquery.ContainsTableReference(columnExpression):
+                    && _subquery.ContainsTableReference(columnExpression):
                     _correlatedTerms.Add(columnExpression);
                     return columnExpression;
 
                 case SqlExpression sqlExpression
                     when !_groupByDiscovery
-                        && sqlExpression is not SqlConstantExpression or SqlParameterExpression
-                        && _correlatedTerms.Contains(sqlExpression):
+                    && sqlExpression is not SqlConstantExpression or SqlParameterExpression
+                    && _correlatedTerms.Contains(sqlExpression):
                     var outerColumn = _subquery.GenerateOuterColumn(_tableReferenceExpression, sqlExpression);
                     _mappings[sqlExpression] = outerColumn;
                     return outerColumn;
 
                 case ColumnExpression columnExpression
                     when !_groupByDiscovery
-                        && _subquery.ContainsTableReference(columnExpression):
+                    && _subquery.ContainsTableReference(columnExpression):
                     var outerColumn1 = _subquery.GenerateOuterColumn(_tableReferenceExpression, columnExpression);
                     _mappings[columnExpression] = outerColumn1;
                     return outerColumn1;
@@ -320,26 +319,26 @@ public sealed partial class SelectExpression
                     // Always skip the table of ColumnExpression since it will traverse into deeper subquery
                     return columnExpression;
 
-                case LeftJoinExpression leftJoinExpression:
-                    var leftJoinTableAlias = leftJoinExpression.Table.Alias!;
+                case PredicateJoinExpressionBase predicateJoinExpressionBase:
+                    var predicateJoinTableAlias = predicateJoinExpressionBase.Table.Alias!;
                     // Visiting the join predicate will add some columns for join table.
                     // But if all the referenced columns are in join predicate only then we can remove the join table.
                     // So if there are no referenced columns yet means there is still potential to remove this table,
                     // In such case we moved the columns encountered in join predicate to other dictionary and later merge
                     // if there are more references to the join table outside of join predicate.
-                    // We currently do this only for LeftJoin since that is the only predicate join table we remove.
                     // We should also remove references to the outer if this column gets removed then that subquery can also remove projections
-                    // But currently we only remove table for TPT scenario in which there are all table expressions which connects via joins.
-                    var joinOnSameLevel = _columnReferenced!.ContainsKey(leftJoinTableAlias);
-                    var noReferences = !joinOnSameLevel || _columnReferenced[leftJoinTableAlias] == null;
-                    base.Visit(leftJoinExpression);
+                    // But currently we only remove table for TPT & entity splitting scenario
+                    // in which there are all table expressions which connects via joins.
+                    var joinOnSameLevel = _columnReferenced!.ContainsKey(predicateJoinTableAlias);
+                    var noReferences = !joinOnSameLevel || _columnReferenced[predicateJoinTableAlias] == null;
+                    base.Visit(predicateJoinExpressionBase);
                     if (noReferences && joinOnSameLevel)
                     {
-                        _columnsUsedInJoinCondition![leftJoinTableAlias] = _columnReferenced[leftJoinTableAlias];
-                        _columnReferenced[leftJoinTableAlias] = null;
+                        _columnsUsedInJoinCondition![predicateJoinTableAlias] = _columnReferenced[predicateJoinTableAlias];
+                        _columnReferenced[predicateJoinTableAlias] = null;
                     }
 
-                    return leftJoinExpression;
+                    return predicateJoinExpressionBase;
 
                 default:
                     return base.Visit(expression);
@@ -405,17 +404,6 @@ public sealed partial class SelectExpression
                 _visitedSelectExpressions.Add(innerSelectExpression);
             }
 
-            if (expression is TpcTablesExpression tpcTablesExpression)
-            {
-                // We uniquify aliases in inner selectexpressions too
-                foreach (var selectExpression in tpcTablesExpression.SelectExpressions)
-                {
-                    Visit(selectExpression);
-                }
-
-                return expression;
-            }
-
             return base.Visit(expression);
         }
     }
@@ -477,6 +465,96 @@ public sealed partial class SelectExpression
             => 0;
     }
 
+    private sealed class TpcTablesExpression : TableExpressionBase
+    {
+        public TpcTablesExpression(
+            string? alias,
+            IEntityType entityType,
+            IReadOnlyList<SelectExpression> subSelectExpressions)
+            : base(alias)
+        {
+            EntityType = entityType;
+            SelectExpressions = subSelectExpressions;
+        }
+
+        private TpcTablesExpression(
+            string? alias,
+            IEntityType entityType,
+            IReadOnlyList<SelectExpression> subSelectExpressions,
+            IEnumerable<IAnnotation>? annotations)
+            : base(alias, annotations)
+        {
+            EntityType = entityType;
+            SelectExpressions = subSelectExpressions;
+        }
+
+        [NotNull]
+        public override string? Alias
+        {
+            get => base.Alias!;
+            internal set => base.Alias = value;
+        }
+
+        public IEntityType EntityType { get; }
+
+        public IReadOnlyList<SelectExpression> SelectExpressions { get; }
+
+        public TpcTablesExpression Prune(IReadOnlyList<string> discriminatorValues)
+        {
+            var subSelectExpressions = discriminatorValues.Count == 0
+                ? new List<SelectExpression> { SelectExpressions[0] }
+                : SelectExpressions.Where(
+                    se =>
+                        discriminatorValues.Contains((string)((SqlConstantExpression)se.Projection[^1].Expression).Value!)).ToList();
+
+            Check.DebugAssert(subSelectExpressions.Count > 0, "TPC must have at least 1 table selected.");
+
+            return new TpcTablesExpression(Alias, EntityType, subSelectExpressions, GetAnnotations());
+        }
+
+        // This is implementation detail hence visitors are not supposed to see inside unless they really need to.
+        protected override Expression VisitChildren(ExpressionVisitor visitor)
+            => this;
+
+        protected override TableExpressionBase CreateWithAnnotations(IEnumerable<IAnnotation> annotations)
+            => new TpcTablesExpression(Alias, EntityType, SelectExpressions, annotations);
+
+        protected override void Print(ExpressionPrinter expressionPrinter)
+        {
+            expressionPrinter.AppendLine("(");
+            using (expressionPrinter.Indent())
+            {
+                expressionPrinter.VisitCollection(SelectExpressions, e => e.AppendLine().AppendLine("UNION ALL"));
+            }
+
+            expressionPrinter.AppendLine()
+                .AppendLine(") AS " + Alias);
+            PrintAnnotations(expressionPrinter);
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object? obj)
+            => obj != null
+                && (ReferenceEquals(this, obj)
+                    || obj is TpcTablesExpression tpcTablesExpression
+                    && Equals(tpcTablesExpression));
+
+        private bool Equals(TpcTablesExpression tpcTablesExpression)
+        {
+            if (!base.Equals(tpcTablesExpression)
+                || EntityType != tpcTablesExpression.EntityType)
+            {
+                return false;
+            }
+
+            return SelectExpressions.SequenceEqual(tpcTablesExpression.SelectExpressions);
+        }
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+            => HashCode.Combine(base.GetHashCode(), EntityType);
+    }
+
     private sealed class ConcreteColumnExpression : ColumnExpression
     {
         private readonly TableReferenceExpression _table;
@@ -535,7 +613,7 @@ public sealed partial class SelectExpression
             => this;
 
         public override ConcreteColumnExpression MakeNullable()
-            => new(Name, _table, Type, TypeMapping!, true);
+            => IsNullable ? this : new ConcreteColumnExpression(Name, _table, Type, TypeMapping!, true);
 
         public void UpdateTableReference(SelectExpression oldSelect, SelectExpression newSelect)
             => _table.UpdateTableReference(oldSelect, newSelect);
@@ -677,7 +755,24 @@ public sealed partial class SelectExpression
                         collectionResultExpression.ElementType);
                 }
 
+                if (value is int)
+                {
+                    var binding = (ProjectionBindingExpression)Visit(collectionResultExpression.ProjectionBindingExpression);
+
+                    return collectionResultExpression.Update(binding);
+                }
+
                 throw new InvalidOperationException();
+            }
+
+            if (expression is RelationalGroupByResultExpression relationalGroupByResultExpression)
+            {
+                // Only element shaper needs remapping
+                return new RelationalGroupByResultExpression(
+                    relationalGroupByResultExpression.KeyIdentifier,
+                    relationalGroupByResultExpression.KeyIdentifierValueComparers,
+                    relationalGroupByResultExpression.KeyShaper,
+                    Visit(relationalGroupByResultExpression.ElementShaper));
             }
 
             return base.Visit(expression);
@@ -824,7 +919,7 @@ public sealed partial class SelectExpression
                 var newProjections = selectExpression._projection.Select(Visit).ToList<ProjectionExpression>();
 
                 var newTables = selectExpression._tables.Select(Visit).ToList<TableExpressionBase>();
-                var tpcTableMap = selectExpression._tables.Zip(newTables)
+                var tpcTablesMap = selectExpression._tables.Select(UnwrapJoinExpression).Zip(newTables.Select(UnwrapJoinExpression))
                     .Where(e => e.First is TpcTablesExpression)
                     .ToDictionary(e => (TpcTablesExpression)e.First, e => (TpcTablesExpression)e.Second);
 
@@ -847,7 +942,8 @@ public sealed partial class SelectExpression
                 var limit = (SqlExpression?)Visit(selectExpression.Limit);
 
                 var newSelectExpression = new SelectExpression(
-                    selectExpression.Alias, newProjections, newTables, newTableReferences, newGroupBy, newOrderings, selectExpression.GetAnnotations())
+                    selectExpression.Alias, newProjections, newTables, newTableReferences, newGroupBy, newOrderings,
+                    selectExpression.GetAnnotations())
                 {
                     Predicate = predicate,
                     Having = havingExpression,
@@ -860,11 +956,13 @@ public sealed partial class SelectExpression
                 };
                 newSelectExpression._mutable = selectExpression._mutable;
 
-                newSelectExpression._tptLeftJoinTables.AddRange(selectExpression._tptLeftJoinTables);
+                newSelectExpression._removableJoinTables.AddRange(selectExpression._removableJoinTables);
+
                 foreach (var kvp in selectExpression._tpcDiscriminatorValues)
                 {
-                    newSelectExpression._tpcDiscriminatorValues[tpcTableMap[kvp.Key]] = kvp.Value;
+                    newSelectExpression._tpcDiscriminatorValues[tpcTablesMap[kvp.Key]] = kvp.Value;
                 }
+
                 // Since identifiers are ColumnExpression, they are not visited since they don't contain SelectExpression inside it.
                 newSelectExpression._identifier.AddRange(selectExpression._identifier);
                 newSelectExpression._childIdentifiers.AddRange(selectExpression._childIdentifiers);
@@ -905,7 +1003,8 @@ public sealed partial class SelectExpression
         private readonly Dictionary<string, TableReferenceExpression> _newTableReferences;
 
         public ColumnExpressionReplacingExpressionVisitor(
-                SelectExpression oldSelectExpression, IEnumerable<TableReferenceExpression> newTableReferences)
+            SelectExpression oldSelectExpression,
+            IEnumerable<TableReferenceExpression> newTableReferences)
         {
             _oldSelectExpression = oldSelectExpression;
             _newTableReferences = newTableReferences.ToDictionary(e => e.Alias);
@@ -923,5 +1022,162 @@ public sealed partial class SelectExpression
                         concreteColumnExpression.TypeMapping!,
                         concreteColumnExpression.IsNullable)
                     : base.Visit(expression);
+    }
+
+    private sealed class TpcTableExpressionRemovingExpressionVisitor : ExpressionVisitor
+    {
+        private readonly HashSet<string> _usedAliases;
+
+        public TpcTableExpressionRemovingExpressionVisitor(HashSet<string> usedAliases)
+        {
+            _usedAliases = usedAliases;
+        }
+
+        [return: NotNullIfNotNull("expression")]
+        public override Expression? Visit(Expression? expression)
+        {
+            if (expression is SelectExpression selectExpression
+                && selectExpression._tpcDiscriminatorValues.Count > 0)
+            {
+                // If selectExpression doesn't have any other component and only TPC tables then we can lift it
+                // We ignore projection here because if this selectExpression has projection from inner TPC
+                // Then TPC will have superset of projection
+                var identitySelect = selectExpression.Offset == null
+                    && selectExpression.Limit == null
+                    && !selectExpression.IsDistinct
+                    && selectExpression.Predicate == null
+                    && selectExpression.Having == null
+                    && selectExpression.Orderings.Count == 0
+                    && selectExpression.GroupBy.Count == 0
+                    && selectExpression.Tables.Count == 1
+                    // Any non-column projection means some composition which cannot be removed
+                    && selectExpression.Projection.All(e => e.Expression is ColumnExpression);
+
+                foreach (var kvp in selectExpression._tpcDiscriminatorValues)
+                {
+                    var tpcTablesExpression = kvp.Key;
+                    var subSelectExpressions = tpcTablesExpression.Prune(kvp.Value.Item2).SelectExpressions
+                        .Select(e => AssignUniqueAliasToTable(e)).ToList();
+                    var firstSelectExpression = subSelectExpressions[0]; // There will be at least one.
+
+                    int[]? reindexingMap = null;
+                    if (identitySelect && selectExpression.Alias == null)
+                    {
+                        // Alias would be null when it is Exists/In like query or top level
+                        // In Exists like query there is no projection
+                        // In InExpression with subquery there will be only 1 projection
+                        // In top-level the ordering of projection matters for shaper
+                        // So for all cases in case of identity select when we are doing the lift, we need to remap projections
+                        reindexingMap = new int[selectExpression.Projection.Count];
+                        var innerProjections = firstSelectExpression.Projection.Select(e => e.Alias).ToList();
+                        var identityMap = true;
+                        for (var i = 0; i < selectExpression.Projection.Count; i++)
+                        {
+                            var newIndex = innerProjections.FindIndex(
+                                e => string.Equals(e, selectExpression.Projection[i].Alias, StringComparison.Ordinal));
+                            if (newIndex == -1)
+                            {
+                                // If for whatever reason outer has additional projection which cannot be remapped we avoid lift
+                                identitySelect = false;
+                                reindexingMap = null;
+                                break;
+                            }
+
+                            identityMap &= (i == newIndex);
+                            reindexingMap[i] = newIndex;
+                        }
+
+                        if (identityMap)
+                        {
+                            // If projection is same on outer/inner we don't need remapping
+                            reindexingMap = null;
+                        }
+                    }
+
+                    if (identitySelect)
+                    {
+                        // If we are lifting then we remove the alias for tpc because it will be unused.
+                        _usedAliases.Remove(tpcTablesExpression.Alias);
+                    }
+
+                    RemapProjections(reindexingMap, firstSelectExpression);
+                    var result = subSelectExpressions[0];
+                    for (var i = 1; i < subSelectExpressions.Count; i++)
+                    {
+                        var setOperationAlias = GenerateUniqueAlias(_usedAliases, "t");
+                        var source1 = result;
+                        var source2 = subSelectExpressions[i];
+                        RemapProjections(reindexingMap, source2);
+                        var generatedSelectExpression = new SelectExpression(alias: null);
+
+                        var unionExpression = new UnionExpression(setOperationAlias, source1, source2, distinct: false);
+                        var tableReferenceExpression = new TableReferenceExpression(generatedSelectExpression, setOperationAlias);
+                        generatedSelectExpression._tables.Add(unionExpression);
+                        generatedSelectExpression._tableReferences.Add(tableReferenceExpression);
+                        foreach (var projection in result.Projection)
+                        {
+                            generatedSelectExpression._projection.Add(
+                                new ProjectionExpression(
+                                    new ConcreteColumnExpression(projection, tableReferenceExpression), projection.Alias));
+                        }
+
+                        generatedSelectExpression._mutable = false;
+                        result = generatedSelectExpression;
+                    }
+
+                    if (identitySelect)
+                    {
+                        result.Alias = selectExpression.Alias;
+                        if (selectExpression.Alias == null)
+                        {
+                            // If top-level them copy over bindings for shaper
+                            result._projectionMapping = selectExpression._projectionMapping;
+                            result._clientProjections = selectExpression._clientProjections;
+                        }
+
+                        // Since identity select implies only 1 table so we can return without worrying about another iteration.
+                        // Identity select shouldn't require base visit.
+                        return result;
+                    }
+
+                    {
+                        result.Alias = tpcTablesExpression.Alias;
+                        var tableIndex =
+                            selectExpression._tables.FindIndex(teb => ReferenceEquals(UnwrapJoinExpression(teb), tpcTablesExpression));
+                        var table = selectExpression._tables[tableIndex];
+                        selectExpression._tables[tableIndex] = (TableExpressionBase)ReplacingExpressionVisitor.Replace(
+                            tpcTablesExpression, result, table);
+                    }
+
+                    SelectExpression AssignUniqueAliasToTable(SelectExpression se)
+                    {
+                        // we assign unique alias to inner tables here so that we can avoid wasting aliases on pruned tables
+                        var table = se._tables[0];
+                        var alias = GenerateUniqueAlias(_usedAliases, table.Alias!);
+                        table.Alias = alias;
+                        se._tableReferences[0].Alias = alias;
+
+                        return se;
+                    }
+                }
+
+                selectExpression._tpcDiscriminatorValues.Clear();
+            }
+
+            return base.Visit(expression);
+        }
+
+        private void RemapProjections(int[]? map, SelectExpression selectExpression)
+        {
+            if (map != null)
+            {
+                var projections = selectExpression.Projection.ToList();
+                selectExpression._projection.Clear();
+                for (var i = 0; i < map.Length; i++)
+                {
+                    selectExpression._projection.Add(projections[map[i]]);
+                }
+            }
+        }
     }
 }

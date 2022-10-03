@@ -1208,7 +1208,7 @@ WHERE ((c[""Discriminator""] = ""Order"") AND false)");
         await base.Regex_IsMatch_MethodCall(async);
 
         AssertSql(
-           @"SELECT c
+            @"SELECT c
 FROM root c
 WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], ""^T""))");
     }
@@ -1218,7 +1218,7 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], "
         await base.Regex_IsMatch_MethodCall_constant_input(async);
 
         AssertSql(
-           @"SELECT c
+            @"SELECT c
 FROM root c
 WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(""ALFKI"", c[""CustomerID""]))");
     }
@@ -1233,9 +1233,9 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(""ALFKI"", c[""Custo
             entryCount: 6);
 
         AssertSql(
-           @"SELECT c
+            @"SELECT c
 FROM root c
-WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], ""^T"", """"))");
+WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], ""^T""))");
     }
 
     [ConditionalTheory]
@@ -1248,7 +1248,7 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], "
             entryCount: 6);
 
         AssertSql(
-         @"SELECT c
+            @"SELECT c
 FROM root c
 WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], ""^T"", ""i""))");
     }
@@ -1263,7 +1263,7 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], "
             entryCount: 6);
 
         AssertSql(
-         @"SELECT c
+            @"SELECT c
 FROM root c
 WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], ""^T"", ""m""))");
     }
@@ -1278,7 +1278,7 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], "
             entryCount: 6);
 
         AssertSql(
-          @"SELECT c
+            @"SELECT c
 FROM root c
 WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], ""^T"", ""s""))");
     }
@@ -1293,7 +1293,7 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], "
             entryCount: 6);
 
         AssertSql(
-           @"SELECT c
+            @"SELECT c
 FROM root c
 WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], ""^T"", ""x""))");
     }
@@ -1304,24 +1304,32 @@ WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], "
     {
         await AssertQuery(
             async,
-            ss => ss.Set<Customer>().Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace)),
+            ss => ss.Set<Customer>().Where(
+                o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace)),
             entryCount: 6);
 
         AssertSql(
-          @"SELECT c
+            @"SELECT c
 FROM root c
 WHERE ((c[""Discriminator""] = ""Customer"") AND RegexMatch(c[""CustomerID""], ""^T"", ""ix""))");
     }
 
-    [Fact]
-    public virtual void Regex_IsMatch_MethodCall_With_Unsupported_Option()
-       => Assert.Throws<InvalidOperationException>(() =>
-           Fixture.CreateContext().Customers.Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.RightToLeft)).ToList());
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual Task Regex_IsMatch_MethodCall_With_Unsupported_Option(bool async)
+        => AssertTranslationFailed(
+            () => AssertQuery(
+                async,
+                ss => ss.Set<Customer>().Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.RightToLeft))));
 
-    [Fact]
-    public virtual void Regex_IsMatch_MethodCall_With_Any_Unsupported_Option()
-       => Assert.Throws<InvalidOperationException>(() =>
-           Fixture.CreateContext().Customers.Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.IgnoreCase | RegexOptions.RightToLeft)).ToList());
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual Task Regex_IsMatch_MethodCall_With_Any_Unsupported_Option(bool async)
+        => AssertTranslationFailed(
+            () => AssertQuery(
+                async,
+                ss => ss.Set<Customer>()
+                    .Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.IgnoreCase | RegexOptions.RightToLeft))));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1442,6 +1450,21 @@ WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5))");
 FROM root c
 WHERE ((c[""Discriminator""] = ""OrderDetail"") AND (c[""Quantity""] < 5))");
     }
+
+    public override Task String_Join_over_non_nullable_column(bool async)
+        => AssertTranslationFailed(() => base.String_Join_over_non_nullable_column(async));
+
+    public override Task String_Join_with_predicate(bool async)
+        => AssertTranslationFailed(() => base.String_Join_with_predicate(async));
+
+    public override Task String_Join_with_ordering(bool async)
+        => AssertTranslationFailed(() => base.String_Join_with_ordering(async));
+
+    public override Task String_Join_over_nullable_column(bool async)
+        => AssertTranslationFailed(() => base.String_Join_over_nullable_column(async));
+
+    public override Task String_Concat(bool async)
+        => AssertTranslationFailed(() => base.String_Concat(async));
 
     private void AssertSql(params string[] expected)
         => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);

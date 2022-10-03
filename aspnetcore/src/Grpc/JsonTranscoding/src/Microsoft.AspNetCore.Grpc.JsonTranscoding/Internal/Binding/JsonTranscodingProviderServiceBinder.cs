@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Google.Api;
 using Google.Protobuf.Reflection;
 using Grpc.AspNetCore.Server;
@@ -228,26 +229,25 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
 
     private static (RoutePattern routePattern, CallHandlerDescriptorInfo descriptorInfo) ParseRoute(string pattern, string body, string responseBody, MethodDescriptor methodDescriptor)
     {
-        if (!pattern.StartsWith('/'))
-        {
-            // This validation is consistent with grpc-gateway code generation.
-            // We should match their validation to be a good member of the eco-system.
-            throw new InvalidOperationException($"Path template '{pattern}' must start with a '/'.");
-        }
+        var httpRoutePattern = HttpRoutePattern.Parse(pattern);
+        var adapter = JsonTranscodingRouteAdapter.Parse(httpRoutePattern);
 
-        var routePattern = RoutePatternFactory.Parse(pattern);
-        return (RoutePatternFactory.Parse(pattern), CreateDescriptorInfo(body, responseBody, methodDescriptor, routePattern));
+        return (RoutePatternFactory.Parse(adapter.ResolvedRouteTemplate), CreateDescriptorInfo(body, responseBody, methodDescriptor, adapter));
     }
 
-    private static CallHandlerDescriptorInfo CreateDescriptorInfo(string body, string responseBody, MethodDescriptor methodDescriptor, RoutePattern routePattern)
+    private static CallHandlerDescriptorInfo CreateDescriptorInfo(string body, string responseBody, MethodDescriptor methodDescriptor, JsonTranscodingRouteAdapter routeAdapter)
     {
-        var routeParameterDescriptors = ServiceDescriptorHelpers.ResolveRouteParameterDescriptors(routePattern, methodDescriptor.InputType);
+        var routeParameterDescriptors = ServiceDescriptorHelpers.ResolveRouteParameterDescriptors(routeAdapter.HttpRoutePattern.Variables, methodDescriptor.InputType);
 
         var bodyDescriptor = ServiceDescriptorHelpers.ResolveBodyDescriptor(body, typeof(TService), methodDescriptor);
 
         FieldDescriptor? responseBodyDescriptor = null;
         if (!string.IsNullOrEmpty(responseBody))
         {
+            if (responseBody.Contains('.', StringComparison.Ordinal))
+            {
+                throw new InvalidOperationException($"The response body field '{responseBody}' references a nested field. The response body field name must be on the top-level response message.");
+            }
             responseBodyDescriptor = methodDescriptor.OutputType.FindFieldByName(responseBody);
             if (responseBodyDescriptor == null)
             {
@@ -259,8 +259,9 @@ internal sealed partial class JsonTranscodingProviderServiceBinder<TService> : S
             responseBodyDescriptor,
             bodyDescriptor?.Descriptor,
             bodyDescriptor?.IsDescriptorRepeated ?? false,
-            bodyDescriptor?.FieldDescriptors,
-            routeParameterDescriptors);
+            bodyDescriptor?.FieldDescriptor,
+            routeParameterDescriptors,
+            routeAdapter);
         return descriptorInfo;
     }
 

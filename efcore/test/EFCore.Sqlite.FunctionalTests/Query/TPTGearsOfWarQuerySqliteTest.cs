@@ -197,11 +197,15 @@ public class TPTGearsOfWarQuerySqliteTest : TPTGearsOfWarQueryRelationalTestBase
             (await Assert.ThrowsAsync<InvalidOperationException>(
                 () => base.Correlated_collections_with_Distinct(async))).Message);
 
-    public override async Task Correlated_collection_with_groupby_with_complex_grouping_key_not_projecting_identifier_column_with_group_aggregate_in_final_projection(bool async)
+    public override async Task
+        Correlated_collection_with_groupby_with_complex_grouping_key_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
+            bool async)
         => Assert.Equal(
             SqliteStrings.ApplyNotSupported,
             (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Correlated_collection_with_groupby_with_complex_grouping_key_not_projecting_identifier_column_with_group_aggregate_in_final_projection(async))).Message);
+                () => base
+                    .Correlated_collection_with_groupby_with_complex_grouping_key_not_projecting_identifier_column_with_group_aggregate_in_final_projection(
+                        async))).Message);
 
     public override async Task Negate_on_binary_expression(bool async)
     {
@@ -230,7 +234,7 @@ WHERE ""s"".""Id"" = -""s"".""Id""");
         AssertSql(
             @"SELECT ""s"".""Id"", ""s"".""Banner"", ""s"".""Banner5"", ""s"".""InternalNumber"", ""s"".""Name""
 FROM ""Squads"" AS ""s""
-WHERE ""s"".""Name"" IS NOT NULL AND NOT (""s"".""Name"" LIKE 'us%')");
+WHERE (""s"".""Name"" IS NOT NULL) AND NOT (""s"".""Name"" LIKE 'us%')");
     }
 
     public override async Task Select_datetimeoffset_comparison_in_projection(bool async)
@@ -368,7 +372,7 @@ WHERE ""s"".""Banner5"" = @__byteArrayParam_0");
 
     public override Task Where_TimeOnly_subtract_TimeOnly(bool async)
         // TimeSpan. Issue #18844.
-        => Assert.ThrowsAsync<InvalidCastException>(() => base.Where_TimeOnly_subtract_TimeOnly(async));
+        => AssertTranslationFailed(() => base.Where_TimeOnly_subtract_TimeOnly(async));
 
     private void AssertSql(params string[] expected)
         => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
