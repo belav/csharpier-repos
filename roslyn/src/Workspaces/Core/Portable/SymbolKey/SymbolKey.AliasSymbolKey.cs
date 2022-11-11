@@ -16,10 +16,15 @@ namespace Microsoft.CodeAnalysis
             {
                 visitor.WriteString(symbol.Name);
                 visitor.WriteSymbolKey(symbol.Target);
-                visitor.WriteString(symbol.DeclaringSyntaxReferences.FirstOrDefault()?.SyntaxTree.FilePath ?? "");
+                visitor.WriteString(
+                    symbol.DeclaringSyntaxReferences.FirstOrDefault()?.SyntaxTree.FilePath ?? ""
+                );
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            )
             {
                 var name = reader.ReadString()!;
                 var targetResolution = reader.ReadSymbolKey(out var targetFailureReason);
@@ -27,7 +32,8 @@ namespace Microsoft.CodeAnalysis
 
                 if (targetFailureReason != null)
                 {
-                    failureReason = $"({nameof(AliasSymbolKey)} {nameof(targetResolution)} failed -> {targetFailureReason})";
+                    failureReason =
+                        $"({nameof(AliasSymbolKey)} {nameof(targetResolution)} failed -> {targetFailureReason})";
                     return default;
                 }
 
@@ -38,7 +44,13 @@ namespace Microsoft.CodeAnalysis
                     if (target != null)
                     {
                         var semanticModel = reader.Compilation.GetSemanticModel(syntaxTree);
-                        var result = Resolve(semanticModel, syntaxTree.GetRoot(reader.CancellationToken), name, target, reader.CancellationToken);
+                        var result = Resolve(
+                            semanticModel,
+                            syntaxTree.GetRoot(reader.CancellationToken),
+                            name,
+                            target,
+                            reader.CancellationToken
+                        );
                         if (result.HasValue)
                         {
                             failureReason = null;
@@ -52,8 +64,12 @@ namespace Microsoft.CodeAnalysis
             }
 
             private static SymbolKeyResolution? Resolve(
-                SemanticModel semanticModel, SyntaxNode syntaxNode, string name, ISymbol target,
-                CancellationToken cancellationToken)
+                SemanticModel semanticModel,
+                SyntaxNode syntaxNode,
+                string name,
+                ISymbol target,
+                CancellationToken cancellationToken
+            )
             {
                 var symbol = semanticModel.GetDeclaredSymbol(syntaxNode, cancellationToken);
                 if (symbol != null)
@@ -61,8 +77,10 @@ namespace Microsoft.CodeAnalysis
                     if (symbol.Kind == SymbolKind.Alias)
                     {
                         var aliasSymbol = (IAliasSymbol)symbol;
-                        if (aliasSymbol.Name == name &&
-                            SymbolEquivalenceComparer.Instance.Equals(aliasSymbol.Target, target))
+                        if (
+                            aliasSymbol.Name == name
+                            && SymbolEquivalenceComparer.Instance.Equals(aliasSymbol.Target, target)
+                        )
                         {
                             return new SymbolKeyResolution(aliasSymbol);
                         }
@@ -79,7 +97,13 @@ namespace Microsoft.CodeAnalysis
                 {
                     if (child.IsNode)
                     {
-                        var result = Resolve(semanticModel, child.AsNode()!, name, target, cancellationToken);
+                        var result = Resolve(
+                            semanticModel,
+                            child.AsNode()!,
+                            name,
+                            target,
+                            cancellationToken
+                        );
                         if (result.HasValue)
                         {
                             return result;

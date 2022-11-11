@@ -15,15 +15,13 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         protected override string LanguageName => LanguageNames.CSharp;
 
-        public CSharpOrganizing()
-            : base(nameof(CSharpOrganizing))
-        {
-        }
+        public CSharpOrganizing() : base(nameof(CSharpOrganizing)) { }
 
         [IdeFact]
         public async Task RemoveAndSort()
         {
-            await SetUpEditorAsync(@"$$
+            await SetUpEditorAsync(
+                @"$$
 using C;
 using B;
 using A;
@@ -35,9 +33,15 @@ class Test
 }
 namespace A { public class CA { } }
 namespace B { public class CB { } }
-namespace C { public class CC { } }", HangMitigatingCancellationToken);
-            await TestServices.Shell.ExecuteCommandAsync(WellKnownCommands.Edit.RemoveAndSort, HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+namespace C { public class CC { } }",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Shell.ExecuteCommandAsync(
+                WellKnownCommands.Edit.RemoveAndSort,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 using A;
 using C;
 
@@ -48,7 +52,9 @@ class Test
 }
 namespace A { public class CA { } }
 namespace B { public class CB { } }
-namespace C { public class CC { } }", cancellationToken: HangMitigatingCancellationToken);
+namespace C { public class CC { } }",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
     }
 }

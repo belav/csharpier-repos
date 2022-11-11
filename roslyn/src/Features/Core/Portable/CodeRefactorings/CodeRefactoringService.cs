@@ -27,51 +27,105 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
     [Export(typeof(ICodeRefactoringService)), Shared]
     internal sealed class CodeRefactoringService : ICodeRefactoringService
     {
-        private readonly Lazy<ImmutableDictionary<string, Lazy<ImmutableArray<CodeRefactoringProvider>>>> _lazyLanguageToProvidersMap;
-        private readonly Lazy<ImmutableDictionary<CodeRefactoringProvider, CodeChangeProviderMetadata>> _lazyRefactoringToMetadataMap;
+        private readonly Lazy<
+            ImmutableDictionary<string, Lazy<ImmutableArray<CodeRefactoringProvider>>>
+        > _lazyLanguageToProvidersMap;
+        private readonly Lazy<
+            ImmutableDictionary<CodeRefactoringProvider, CodeChangeProviderMetadata>
+        > _lazyRefactoringToMetadataMap;
 
-        private ImmutableDictionary<CodeRefactoringProvider, FixAllProviderInfo?> _fixAllProviderMap = ImmutableDictionary<CodeRefactoringProvider, FixAllProviderInfo?>.Empty;
+        private ImmutableDictionary<
+            CodeRefactoringProvider,
+            FixAllProviderInfo?
+        > _fixAllProviderMap = ImmutableDictionary<
+            CodeRefactoringProvider,
+            FixAllProviderInfo?
+        >.Empty;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CodeRefactoringService(
-            [ImportMany] IEnumerable<Lazy<CodeRefactoringProvider, CodeChangeProviderMetadata>> providers)
+            [ImportMany]
+                IEnumerable<Lazy<CodeRefactoringProvider, CodeChangeProviderMetadata>> providers
+        )
         {
             // convert set of all code refactoring providers into a map from language to a lazy initialized list of ordered providers.
-            _lazyLanguageToProvidersMap = new Lazy<ImmutableDictionary<string, Lazy<ImmutableArray<CodeRefactoringProvider>>>>(
+            _lazyLanguageToProvidersMap = new Lazy<
+                ImmutableDictionary<string, Lazy<ImmutableArray<CodeRefactoringProvider>>>
+            >(
                 () =>
                     ImmutableDictionary.CreateRange(
                         DistributeLanguages(providers)
                             .GroupBy(lz => lz.Metadata.Language)
-                            .Select(grp => new KeyValuePair<string, Lazy<ImmutableArray<CodeRefactoringProvider>>>(
-                                grp.Key,
-                                new Lazy<ImmutableArray<CodeRefactoringProvider>>(() => ExtensionOrderer.Order(grp).Select(lz => lz.Value).ToImmutableArray())))));
-            _lazyRefactoringToMetadataMap = new(() => providers.Where(provider => provider.IsValueCreated).ToImmutableDictionary(provider => provider.Value, provider => provider.Metadata));
+                            .Select(
+                                grp =>
+                                    new KeyValuePair<
+                                        string,
+                                        Lazy<ImmutableArray<CodeRefactoringProvider>>
+                                    >(
+                                        grp.Key,
+                                        new Lazy<ImmutableArray<CodeRefactoringProvider>>(
+                                            () =>
+                                                ExtensionOrderer
+                                                    .Order(grp)
+                                                    .Select(lz => lz.Value)
+                                                    .ToImmutableArray()
+                                        )
+                                    )
+                            )
+                    )
+            );
+            _lazyRefactoringToMetadataMap = new(
+                () =>
+                    providers
+                        .Where(provider => provider.IsValueCreated)
+                        .ToImmutableDictionary(
+                            provider => provider.Value,
+                            provider => provider.Metadata
+                        )
+            );
         }
 
-        private static IEnumerable<Lazy<CodeRefactoringProvider, OrderableLanguageMetadata>> DistributeLanguages(IEnumerable<Lazy<CodeRefactoringProvider, CodeChangeProviderMetadata>> providers)
+        private static IEnumerable<
+            Lazy<CodeRefactoringProvider, OrderableLanguageMetadata>
+        > DistributeLanguages(
+            IEnumerable<Lazy<CodeRefactoringProvider, CodeChangeProviderMetadata>> providers
+        )
         {
             foreach (var provider in providers)
             {
                 foreach (var language in provider.Metadata.Languages)
                 {
                     var orderable = new OrderableLanguageMetadata(
-                        provider.Metadata.Name, language, provider.Metadata.AfterTyped, provider.Metadata.BeforeTyped);
-                    yield return new Lazy<CodeRefactoringProvider, OrderableLanguageMetadata>(() => provider.Value, orderable);
+                        provider.Metadata.Name,
+                        language,
+                        provider.Metadata.AfterTyped,
+                        provider.Metadata.BeforeTyped
+                    );
+                    yield return new Lazy<CodeRefactoringProvider, OrderableLanguageMetadata>(
+                        () => provider.Value,
+                        orderable
+                    );
                 }
             }
         }
 
-        private ImmutableDictionary<string, Lazy<ImmutableArray<CodeRefactoringProvider>>> LanguageToProvidersMap
-            => _lazyLanguageToProvidersMap.Value;
+        private ImmutableDictionary<
+            string,
+            Lazy<ImmutableArray<CodeRefactoringProvider>>
+        > LanguageToProvidersMap => _lazyLanguageToProvidersMap.Value;
 
-        private ImmutableDictionary<CodeRefactoringProvider, CodeChangeProviderMetadata> RefactoringToMetadataMap
-            => _lazyRefactoringToMetadataMap.Value;
+        private ImmutableDictionary<
+            CodeRefactoringProvider,
+            CodeChangeProviderMetadata
+        > RefactoringToMetadataMap => _lazyRefactoringToMetadataMap.Value;
 
         private ConcatImmutableArray<CodeRefactoringProvider> GetProviders(Document document)
         {
             var allRefactorings = ImmutableArray<CodeRefactoringProvider>.Empty;
-            if (LanguageToProvidersMap.TryGetValue(document.Project.Language, out var lazyProviders))
+            if (
+                LanguageToProvidersMap.TryGetValue(document.Project.Language, out var lazyProviders)
+            )
             {
                 allRefactorings = lazyProviders.Value;
             }
@@ -83,9 +137,11 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             Document document,
             TextSpan state,
             CodeActionOptionsProvider options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var extensionManager = document.Project.Solution.Services.GetRequiredService<IExtensionManager>();
+            var extensionManager =
+                document.Project.Solution.Services.GetRequiredService<IExtensionManager>();
 
             foreach (var provider in GetProviders(document))
             {
@@ -93,7 +149,16 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 RefactoringToMetadataMap.TryGetValue(provider, out var providerMetadata);
 
                 var refactoring = await GetRefactoringFromProviderAsync(
-                    document, state, provider, providerMetadata, extensionManager, options, isBlocking: false, cancellationToken).ConfigureAwait(false);
+                        document,
+                        state,
+                        provider,
+                        providerMetadata,
+                        extensionManager,
+                        options,
+                        isBlocking: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (refactoring != null)
                 {
@@ -111,31 +176,62 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             CodeActionOptionsProvider options,
             bool isBlocking,
             Func<string, IDisposable?> addOperationScope,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            using (Logger.LogBlock(FunctionId.Refactoring_CodeRefactoringService_GetRefactoringsAsync, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Refactoring_CodeRefactoringService_GetRefactoringsAsync,
+                    cancellationToken
+                )
+            )
             {
-                var extensionManager = document.Project.Solution.Services.GetRequiredService<IExtensionManager>();
+                var extensionManager =
+                    document.Project.Solution.Services.GetRequiredService<IExtensionManager>();
                 using var _ = ArrayBuilder<Task<CodeRefactoring?>>.GetInstance(out var tasks);
 
                 foreach (var provider in GetProviders(document))
                 {
-                    if (priority != CodeActionRequestPriority.None && priority != provider.RequestPriority)
+                    if (
+                        priority != CodeActionRequestPriority.None
+                        && priority != provider.RequestPriority
+                    )
                         continue;
 
-                    tasks.Add(Task.Run(() =>
-                        {
-                            var providerName = provider.GetType().Name;
-                            RefactoringToMetadataMap.TryGetValue(provider, out var providerMetadata);
-
-                            using (addOperationScope(providerName))
-                            using (RoslynEventSource.LogInformationalBlock(FunctionId.Refactoring_CodeRefactoringService_GetRefactoringsAsync, providerName, cancellationToken))
+                    tasks.Add(
+                        Task.Run(
+                            () =>
                             {
-                                return GetRefactoringFromProviderAsync(document, state, provider, providerMetadata,
-                                    extensionManager, options, isBlocking, cancellationToken);
-                            }
-                        },
-                        cancellationToken));
+                                var providerName = provider.GetType().Name;
+                                RefactoringToMetadataMap.TryGetValue(
+                                    provider,
+                                    out var providerMetadata
+                                );
+
+                                using (addOperationScope(providerName))
+                                using (
+                                    RoslynEventSource.LogInformationalBlock(
+                                        FunctionId.Refactoring_CodeRefactoringService_GetRefactoringsAsync,
+                                        providerName,
+                                        cancellationToken
+                                    )
+                                )
+                                {
+                                    return GetRefactoringFromProviderAsync(
+                                        document,
+                                        state,
+                                        provider,
+                                        providerMetadata,
+                                        extensionManager,
+                                        options,
+                                        isBlocking,
+                                        cancellationToken
+                                    );
+                                }
+                            },
+                            cancellationToken
+                        )
+                    );
                 }
 
                 var results = await Task.WhenAll(tasks).ConfigureAwait(false);
@@ -151,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             IExtensionManager extensionManager,
             CodeActionOptionsProvider options,
             bool isBlocking,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (extensionManager.IsDisabled(provider))
@@ -161,9 +258,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
 
             try
             {
-                using var _ = ArrayBuilder<(CodeAction action, TextSpan? applicableToSpan)>.GetInstance(out var actions);
-                var context = new CodeRefactoringContext(document, state,
-
+                using var _ = ArrayBuilder<(
+                    CodeAction action,
+                    TextSpan? applicableToSpan
+                )>.GetInstance(out var actions);
+                var context = new CodeRefactoringContext(
+                    document,
+                    state,
                     // TODO: Can we share code between similar lambdas that we pass to this API in BatchFixAllProvider.cs, CodeFixService.cs and CodeRefactoringService.cs?
                     (action, applicableToSpan) =>
                     {
@@ -180,7 +281,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                     },
                     options,
                     isBlocking,
-                    cancellationToken);
+                    cancellationToken
+                );
 
                 var task = provider.ComputeRefactoringsAsync(context) ?? Task.CompletedTask;
                 await task.ConfigureAwait(false);
@@ -191,12 +293,25 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 }
 
                 var fixAllProviderInfo = extensionManager.PerformFunction(
-                    provider, () => ImmutableInterlocked.GetOrAdd(ref _fixAllProviderMap, provider, FixAllProviderInfo.Create), defaultValue: null);
-                return new CodeRefactoring(provider, actions.ToImmutable(), fixAllProviderInfo, options);
+                    provider,
+                    () =>
+                        ImmutableInterlocked.GetOrAdd(
+                            ref _fixAllProviderMap,
+                            provider,
+                            FixAllProviderInfo.Create
+                        ),
+                    defaultValue: null
+                );
+                return new CodeRefactoring(
+                    provider,
+                    actions.ToImmutable(),
+                    fixAllProviderInfo,
+                    options
+                );
             }
             catch (OperationCanceledException)
             {
-                // We don't want to catch operation canceled exceptions in the catch block 
+                // We don't want to catch operation canceled exceptions in the catch block
                 // below. So catch is here and rethrow it.
                 throw;
             }
@@ -208,7 +323,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             return null;
         }
 
-        private static ImmutableArray<CodeRefactoringProvider> GetProjectRefactorings(Project project)
+        private static ImmutableArray<CodeRefactoringProvider> GetProjectRefactorings(
+            Project project
+        )
         {
             // TODO (https://github.com/dotnet/roslyn/issues/4932): Don't restrict refactorings in Interactive
             if (project.Solution.WorkspaceKind == WorkspaceKind.Interactive)
@@ -218,12 +335,20 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         }
 
         private class ProjectCodeRefactoringProvider
-            : AbstractProjectExtensionProvider<ProjectCodeRefactoringProvider, CodeRefactoringProvider, ExportCodeRefactoringProviderAttribute>
+            : AbstractProjectExtensionProvider<
+                ProjectCodeRefactoringProvider,
+                CodeRefactoringProvider,
+                ExportCodeRefactoringProviderAttribute
+            >
         {
-            protected override ImmutableArray<string> GetLanguages(ExportCodeRefactoringProviderAttribute exportAttribute)
-                => exportAttribute.Languages.ToImmutableArray();
+            protected override ImmutableArray<string> GetLanguages(
+                ExportCodeRefactoringProviderAttribute exportAttribute
+            ) => exportAttribute.Languages.ToImmutableArray();
 
-            protected override bool TryGetExtensionsFromReference(AnalyzerReference reference, out ImmutableArray<CodeRefactoringProvider> extensions)
+            protected override bool TryGetExtensionsFromReference(
+                AnalyzerReference reference,
+                out ImmutableArray<CodeRefactoringProvider> extensions
+            )
             {
                 // check whether the analyzer reference knows how to return fixers directly.
                 if (reference is ICodeRefactoringProviderFactory codeRefactoringProviderFactory)

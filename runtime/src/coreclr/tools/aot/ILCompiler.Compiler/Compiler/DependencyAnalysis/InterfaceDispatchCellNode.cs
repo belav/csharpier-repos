@@ -38,9 +38,16 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool IsShareable => false;
 
-        public static string GetMangledName(NameMangler nameMangler, MethodDesc method, string callSiteIdentifier)
+        public static string GetMangledName(
+            NameMangler nameMangler,
+            MethodDesc method,
+            string callSiteIdentifier
+        )
         {
-            string name = nameMangler.CompilationUnitPrefix + "__InterfaceDispatchCell_" + nameMangler.GetMangledMethodName(method);
+            string name =
+                nameMangler.CompilationUnitPrefix
+                + "__InterfaceDispatchCell_"
+                + nameMangler.GetMangledMethodName(method);
 
             if (!string.IsNullOrEmpty(callSiteIdentifier))
             {
@@ -50,7 +57,8 @@ namespace ILCompiler.DependencyAnalysis
             return name;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override bool StaticDependenciesAreComputed => true;
 
@@ -63,7 +71,11 @@ namespace ILCompiler.DependencyAnalysis
                 result.Add(factory.VirtualMethodUse(_targetMethod), "Interface method use");
             }
 
-            factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(ref result, factory, _targetMethod);
+            factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(
+                ref result,
+                factory,
+                _targetMethod
+            );
 
             TargetArchitecture targetArchitecture = factory.Target.Architecture;
             if (targetArchitecture == TargetArchitecture.ARM)
@@ -72,7 +84,10 @@ namespace ILCompiler.DependencyAnalysis
             }
             else
             {
-                result.Add(factory.ExternSymbol("RhpInitialDynamicInterfaceDispatch"), "Initial interface dispatch stub");
+                result.Add(
+                    factory.ExternSymbol("RhpInitialDynamicInterfaceDispatch"),
+                    "Initial interface dispatch stub"
+                );
             }
 
             result.Add(factory.NecessaryTypeSymbol(_targetMethod.OwningType), "Interface type");
@@ -80,7 +95,11 @@ namespace ILCompiler.DependencyAnalysis
             return result;
         }
 
-        public override void EncodeData(ref ObjectDataBuilder objData, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder objData,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             TargetArchitecture targetArchitecture = factory.Target.Architecture;
             if (targetArchitecture == TargetArchitecture.ARM)
@@ -89,19 +108,29 @@ namespace ILCompiler.DependencyAnalysis
             }
             else
             {
-                objData.EmitPointerReloc(factory.ExternSymbol("RhpInitialDynamicInterfaceDispatch"));
+                objData.EmitPointerReloc(
+                    factory.ExternSymbol("RhpInitialDynamicInterfaceDispatch")
+                );
             }
 
             IEETypeNode interfaceType = factory.NecessaryTypeSymbol(_targetMethod.OwningType);
             if (interfaceType.RepresentsIndirectionCell)
             {
-                objData.EmitReloc(interfaceType, RelocType.IMAGE_REL_BASED_RELPTR32,
-                    (int)InterfaceDispatchCellCachePointerFlags.CachePointerIsIndirectedInterfaceRelativePointer);
+                objData.EmitReloc(
+                    interfaceType,
+                    RelocType.IMAGE_REL_BASED_RELPTR32,
+                    (int)
+                        InterfaceDispatchCellCachePointerFlags.CachePointerIsIndirectedInterfaceRelativePointer
+                );
             }
             else
             {
-                objData.EmitReloc(interfaceType, RelocType.IMAGE_REL_BASED_RELPTR32,
-                    (int)InterfaceDispatchCellCachePointerFlags.CachePointerIsInterfaceRelativePointer);
+                objData.EmitReloc(
+                    interfaceType,
+                    RelocType.IMAGE_REL_BASED_RELPTR32,
+                    (int)
+                        InterfaceDispatchCellCachePointerFlags.CachePointerIsInterfaceRelativePointer
+                );
             }
 
             if (objData.TargetPointerSize == 8)
@@ -122,8 +151,16 @@ namespace ILCompiler.DependencyAnalysis
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
-            var compare = comparer.Compare(_targetMethod, ((InterfaceDispatchCellNode)other)._targetMethod);
-            return compare != 0 ? compare : string.Compare(_callSiteIdentifier, ((InterfaceDispatchCellNode)other)._callSiteIdentifier);
+            var compare = comparer.Compare(
+                _targetMethod,
+                ((InterfaceDispatchCellNode)other)._targetMethod
+            );
+            return compare != 0
+                ? compare
+                : string.Compare(
+                    _callSiteIdentifier,
+                    ((InterfaceDispatchCellNode)other)._callSiteIdentifier
+                );
         }
     }
 }

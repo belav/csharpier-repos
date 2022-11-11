@@ -10,9 +10,7 @@ namespace Microsoft.CodeAnalysis
     {
         private readonly object _gate = new();
 
-        internal WorkspaceRegistration()
-        {
-        }
+        internal WorkspaceRegistration() { }
 
         public Workspace? Workspace { get; private set; }
 
@@ -24,8 +22,7 @@ namespace Microsoft.CodeAnalysis
             RaiseEvents();
         }
 
-        internal void SetWorkspace(Workspace? workspace)
-            => Workspace = workspace;
+        internal void SetWorkspace(Workspace? workspace) => Workspace = workspace;
 
         internal void RaiseEvents()
         {
@@ -41,9 +38,9 @@ namespace Microsoft.CodeAnalysis
                 // https://github.com/dotnet/roslyn/issues/32551
                 //
                 // issue we are working around is the fact this event can happen concurrently
-                // if RegisteryText happens and then UnregisterText happens in perfect timing, 
-                // RegisterText got slightly delayed since it is async event, and UnregisterText happens 
-                // at the same time since it is a synchronous event, and they my happens in 2 different threads, 
+                // if RegisteryText happens and then UnregisterText happens in perfect timing,
+                // RegisterText got slightly delayed since it is async event, and UnregisterText happens
+                // at the same time since it is a synchronous event, and they my happens in 2 different threads,
                 // cause this event to be raised concurrently.
                 // that can cause some listener to mess up its internal state like the issue linked above
                 WorkspaceChanged?.Invoke(this, EventArgs.Empty);

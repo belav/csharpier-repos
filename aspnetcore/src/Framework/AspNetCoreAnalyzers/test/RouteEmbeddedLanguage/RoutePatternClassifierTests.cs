@@ -21,16 +21,22 @@ public class RoutePatternClassifierTests
 
     private TestDiagnosticAnalyzerRunner Runner { get; } = new(new RenderTreeBuilderAnalyzer());
 
-    protected async Task TestAsync(
-        string code,
-        params FormattedClassification[] expected)
+    protected async Task TestAsync(string code, params FormattedClassification[] expected)
     {
         MarkupTestFile.GetSpans(code, out var rewrittenCode, out ImmutableArray<TextSpan> spans);
         Assert.True(spans.Length == 1);
 
         var actual = await Runner.GetClassificationSpansAsync(spans.Single(), rewrittenCode);
         var actualOrdered = actual.OrderBy(t1 => t1.TextSpan.Start).ToList();
-        var actualFormatted = actualOrdered.Select(a => new FormattedClassification(rewrittenCode.Substring(a.TextSpan.Start, a.TextSpan.Length), a.ClassificationType)).ToArray();
+        var actualFormatted = actualOrdered
+            .Select(
+                a =>
+                    new FormattedClassification(
+                        rewrittenCode.Substring(a.TextSpan.Start, a.TextSpan.Length),
+                        a.ClassificationType
+                    )
+            )
+            .ToArray();
 
         Assert.Equal(expected, actualFormatted);
     }
@@ -44,7 +50,7 @@ public class RoutePatternClassifierTests
     public async Task AttributeOnField_Classified()
     {
         await TestAsync(
-@"
+            @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -58,18 +64,19 @@ class Program
         this.field = [|@""{id?}""|];
     }
 }" + EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharp,
-Verbatim(@"@""{id?}"""),
-Regex.CharacterClass("{"),
-Parameter("id"),
-Regex.Anchor("?"),
-Regex.CharacterClass("}"));
+            Verbatim(@"@""{id?}"""),
+            Regex.CharacterClass("{"),
+            Parameter("id"),
+            Regex.Anchor("?"),
+            Regex.CharacterClass("}")
+        );
     }
 
     [Fact]
     public async Task AttributeOnField_TokenReplacementText_TokenReplacementNotClassified()
     {
         await TestAsync(
-@"
+            @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -83,17 +90,18 @@ class Program
         this.field = [|@""[one]/{id}""|];
     }
 }",
-Verbatim(@"@""[one]/{id}"""),
-Regex.CharacterClass("{"),
-Parameter("id"),
-Regex.CharacterClass("}"));
+            Verbatim(@"@""[one]/{id}"""),
+            Regex.CharacterClass("{"),
+            Parameter("id"),
+            Regex.CharacterClass("}")
+        );
     }
 
     [Fact]
     public async Task AttributeOnAction_TokenReplacementText_TokenReplacementClassified()
     {
         await TestAsync(
-@"
+            @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
@@ -105,17 +113,18 @@ public class TestController
     {
     }
 }",
-Verbatim(@"@""[one]"""),
-Regex.CharacterClass("["),
-Regex.CharacterClass("one"),
-Regex.CharacterClass("]"));
+            Verbatim(@"@""[one]"""),
+            Regex.CharacterClass("["),
+            Regex.CharacterClass("one"),
+            Regex.CharacterClass("]")
+        );
     }
 
     [Fact]
     public async Task AttributeOnController_TokenReplacementText_TokenReplacementClassified()
     {
         await TestAsync(
-@"
+            @"
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
@@ -127,9 +136,10 @@ public class TestController
     {
     }
 }",
-Verbatim(@"@""[one]"""),
-Regex.CharacterClass("["),
-Regex.CharacterClass("one"),
-Regex.CharacterClass("]"));
+            Verbatim(@"@""[one]"""),
+            Regex.CharacterClass("["),
+            Regex.CharacterClass("one"),
+            Regex.CharacterClass("]")
+        );
     }
 }

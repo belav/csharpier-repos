@@ -25,10 +25,9 @@ public class StaticFileMiddlewareTests
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app => app.UseStaticFiles());
-            }).Build();
+                webHostBuilder.UseTestServer().Configure(app => app.UseStaticFiles());
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -52,13 +51,19 @@ public class StaticFileMiddlewareTests
         try
         {
             using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .Configure(app => app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true }))
-                .UseWebRoot(AppContext.BaseDirectory);
-            }).Build();
+                .ConfigureWebHost(webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                                app.UseStaticFiles(
+                                    new StaticFileOptions { ServeUnknownFileTypes = true }
+                                )
+                        )
+                        .UseWebRoot(AppContext.BaseDirectory);
+                })
+                .Build();
 
             await host.StartAsync();
 
@@ -79,25 +84,37 @@ public class StaticFileMiddlewareTests
     public async Task ReturnsNotFoundIfSendFileThrows()
     {
         var mockSendFile = new Mock<IHttpResponseBodyFeature>();
-        mockSendFile.Setup(m => m.SendFileAsync(It.IsAny<string>(), It.IsAny<long>(), It.IsAny<long?>(), It.IsAny<CancellationToken>()))
+        mockSendFile
+            .Setup(
+                m =>
+                    m.SendFileAsync(
+                        It.IsAny<string>(),
+                        It.IsAny<long>(),
+                        It.IsAny<long?>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
             .ThrowsAsync(new FileNotFoundException());
         mockSendFile.Setup(m => m.Stream).Returns(Stream.Null);
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.Use(async (ctx, next) =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        ctx.Features.Set(mockSendFile.Object);
-                        await next(ctx);
-                    });
-                    app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true });
-                })
-                .UseWebRoot(AppContext.BaseDirectory);
-            }).Build();
+                        app.Use(
+                            async (ctx, next) =>
+                            {
+                                ctx.Features.Set(mockSendFile.Object);
+                                await next(ctx);
+                            }
+                        );
+                        app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true });
+                    })
+                    .UseWebRoot(AppContext.BaseDirectory);
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -114,16 +131,23 @@ public class StaticFileMiddlewareTests
     {
         using (var fileProvider = new PhysicalFileProvider(AppContext.BaseDirectory))
         {
-            using var host = await StaticFilesTestServer.Create(app => app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = fileProvider
-            }));
+            using var host = await StaticFilesTestServer.Create(
+                app => app.UseStaticFiles(new StaticFileOptions { FileProvider = fileProvider })
+            );
             using var server = host.GetTestServer();
             var fileInfo = fileProvider.GetFileInfo("TestDocument.txt");
             var response = await server.CreateRequest("TestDocument.txt").GetAsync();
 
             var last = fileInfo.LastModified;
-            var trimmed = new DateTimeOffset(last.Year, last.Month, last.Day, last.Hour, last.Minute, last.Second, last.Offset).ToUniversalTime();
+            var trimmed = new DateTimeOffset(
+                last.Year,
+                last.Month,
+                last.Day,
+                last.Hour,
+                last.Minute,
+                last.Second,
+                last.Offset
+            ).ToUniversalTime();
 
             Assert.Equal(response.Content.Headers.LastModified.Value, trimmed);
         }
@@ -133,15 +157,23 @@ public class StaticFileMiddlewareTests
     public async Task NullArguments()
     {
         // No exception, default provided
-        using (await StaticFilesTestServer.Create(app => app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = null })))
-        { }
+        using (
+            await StaticFilesTestServer.Create(
+                app => app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = null })
+            )
+        ) { }
 
         // No exception, default provided
-        using (await StaticFilesTestServer.Create(app => app.UseStaticFiles(new StaticFileOptions { FileProvider = null })))
-        { }
+        using (
+            await StaticFilesTestServer.Create(
+                app => app.UseStaticFiles(new StaticFileOptions { FileProvider = null })
+            )
+        ) { }
 
         // PathString(null) is OK.
-        using var host = await StaticFilesTestServer.Create(app => app.UseStaticFiles((string)null));
+        using var host = await StaticFilesTestServer.Create(
+            app => app.UseStaticFiles((string)null)
+        );
         using var server = host.GetTestServer();
         var response = await server.CreateClient().GetAsync("/");
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -168,13 +200,22 @@ public class StaticFileMiddlewareTests
 
     private async Task FoundFile_Served(string baseUrl, string baseDir, string requestUrl)
     {
-        using (var fileProvider = new PhysicalFileProvider(Path.Combine(AppContext.BaseDirectory, baseDir)))
+        using (
+            var fileProvider = new PhysicalFileProvider(
+                Path.Combine(AppContext.BaseDirectory, baseDir)
+            )
+        )
         {
-            using var host = await StaticFilesTestServer.Create(app => app.UseStaticFiles(new StaticFileOptions
-            {
-                RequestPath = new PathString(baseUrl),
-                FileProvider = fileProvider
-            }));
+            using var host = await StaticFilesTestServer.Create(
+                app =>
+                    app.UseStaticFiles(
+                        new StaticFileOptions
+                        {
+                            RequestPath = new PathString(baseUrl),
+                            FileProvider = fileProvider
+                        }
+                    )
+            );
             using var server = host.GetTestServer();
             var fileInfo = fileProvider.GetFileInfo(Path.GetFileName(requestUrl));
             var response = await server.CreateRequest(requestUrl).GetAsync();
@@ -198,23 +239,38 @@ public class StaticFileMiddlewareTests
     [Fact]
     public async Task File_Served_If_Endpoint_With_Null_RequestDelegate_Is_Active()
     {
-        using (var fileProvider = new PhysicalFileProvider(Path.Combine(AppContext.BaseDirectory, ".")))
+        using (
+            var fileProvider = new PhysicalFileProvider(Path.Combine(AppContext.BaseDirectory, "."))
+        )
         {
-            using var host = await StaticFilesTestServer.Create(app =>
-            {
-                app.UseRouting();
-                app.Use((ctx, next) =>
+            using var host = await StaticFilesTestServer.Create(
+                app =>
                 {
-                    ctx.SetEndpoint(new Endpoint(requestDelegate: null, new EndpointMetadataCollection(), "NullRequestDelegateEndpoint"));
-                    return next();
-                });
-                app.UseStaticFiles(new StaticFileOptions
-                {
-                    RequestPath = new PathString(),
-                    FileProvider = fileProvider
-                });
-                app.UseEndpoints(endpoints => { });
-            }, services => services.AddRouting());
+                    app.UseRouting();
+                    app.Use(
+                        (ctx, next) =>
+                        {
+                            ctx.SetEndpoint(
+                                new Endpoint(
+                                    requestDelegate: null,
+                                    new EndpointMetadataCollection(),
+                                    "NullRequestDelegateEndpoint"
+                                )
+                            );
+                            return next();
+                        }
+                    );
+                    app.UseStaticFiles(
+                        new StaticFileOptions
+                        {
+                            RequestPath = new PathString(),
+                            FileProvider = fileProvider
+                        }
+                    );
+                    app.UseEndpoints(endpoints => { });
+                },
+                services => services.AddRouting()
+            );
             using var server = host.GetTestServer();
             var requestUrl = "/TestDocument.txt";
             var fileInfo = fileProvider.GetFileInfo(Path.GetFileName(requestUrl));
@@ -246,23 +302,38 @@ public class StaticFileMiddlewareTests
             await ctx.Response.WriteAsync(responseText);
         };
 
-        using (var fileProvider = new PhysicalFileProvider(Path.Combine(AppContext.BaseDirectory, ".")))
+        using (
+            var fileProvider = new PhysicalFileProvider(Path.Combine(AppContext.BaseDirectory, "."))
+        )
         {
-            using var host = await StaticFilesTestServer.Create(app =>
-            {
-                app.UseRouting();
-                app.Use((ctx, next) =>
+            using var host = await StaticFilesTestServer.Create(
+                app =>
                 {
-                    ctx.SetEndpoint(new Endpoint(handler, new EndpointMetadataCollection(), "RequestDelegateEndpoint"));
-                    return next();
-                });
-                app.UseStaticFiles(new StaticFileOptions
-                {
-                    RequestPath = new PathString(),
-                    FileProvider = fileProvider
-                });
-                app.UseEndpoints(endpoints => { });
-            }, services => services.AddRouting());
+                    app.UseRouting();
+                    app.Use(
+                        (ctx, next) =>
+                        {
+                            ctx.SetEndpoint(
+                                new Endpoint(
+                                    handler,
+                                    new EndpointMetadataCollection(),
+                                    "RequestDelegateEndpoint"
+                                )
+                            );
+                            return next();
+                        }
+                    );
+                    app.UseStaticFiles(
+                        new StaticFileOptions
+                        {
+                            RequestPath = new PathString(),
+                            FileProvider = fileProvider
+                        }
+                    );
+                    app.UseEndpoints(endpoints => { });
+                },
+                services => services.AddRouting()
+            );
             using var server = host.GetTestServer();
             var requestUrl = "/TestDocument.txt";
 
@@ -270,22 +341,38 @@ public class StaticFileMiddlewareTests
             var responseContent = await response.Content.ReadAsStringAsync();
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal("text/customfortest+plain", response.Content.Headers.ContentType.ToString());
+            Assert.Equal(
+                "text/customfortest+plain",
+                response.Content.Headers.ContentType.ToString()
+            );
             Assert.Equal(responseText, responseContent);
         }
     }
 
     [Theory]
     [MemberData(nameof(ExistingFiles))]
-    public async Task HeadFile_HeadersButNotBodyServed(string baseUrl, string baseDir, string requestUrl)
+    public async Task HeadFile_HeadersButNotBodyServed(
+        string baseUrl,
+        string baseDir,
+        string requestUrl
+    )
     {
-        using (var fileProvider = new PhysicalFileProvider(Path.Combine(AppContext.BaseDirectory, baseDir)))
+        using (
+            var fileProvider = new PhysicalFileProvider(
+                Path.Combine(AppContext.BaseDirectory, baseDir)
+            )
+        )
         {
-            using var host = await StaticFilesTestServer.Create(app => app.UseStaticFiles(new StaticFileOptions
-            {
-                RequestPath = new PathString(baseUrl),
-                FileProvider = fileProvider
-            }));
+            using var host = await StaticFilesTestServer.Create(
+                app =>
+                    app.UseStaticFiles(
+                        new StaticFileOptions
+                        {
+                            RequestPath = new PathString(baseUrl),
+                            FileProvider = fileProvider
+                        }
+                    )
+            );
             using var server = host.GetTestServer();
             var fileInfo = fileProvider.GetFileInfo(Path.GetFileName(requestUrl));
             var response = await server.CreateRequest(requestUrl).SendAsync("HEAD");
@@ -299,28 +386,43 @@ public class StaticFileMiddlewareTests
 
     [Theory]
     [MemberData(nameof(MissingFiles))]
-    public async Task Get_NoMatch_PassesThrough(string baseUrl, string baseDir, string requestUrl) =>
-        await PassesThrough("GET", baseUrl, baseDir, requestUrl);
+    public async Task Get_NoMatch_PassesThrough(
+        string baseUrl,
+        string baseDir,
+        string requestUrl
+    ) => await PassesThrough("GET", baseUrl, baseDir, requestUrl);
 
     [Theory]
     [MemberData(nameof(MissingFiles))]
-    public async Task Head_NoMatch_PassesThrough(string baseUrl, string baseDir, string requestUrl) =>
-        await PassesThrough("HEAD", baseUrl, baseDir, requestUrl);
+    public async Task Head_NoMatch_PassesThrough(
+        string baseUrl,
+        string baseDir,
+        string requestUrl
+    ) => await PassesThrough("HEAD", baseUrl, baseDir, requestUrl);
 
     [Theory]
     [MemberData(nameof(MissingFiles))]
-    public async Task Unknown_NoMatch_PassesThrough(string baseUrl, string baseDir, string requestUrl) =>
-        await PassesThrough("VERB", baseUrl, baseDir, requestUrl);
+    public async Task Unknown_NoMatch_PassesThrough(
+        string baseUrl,
+        string baseDir,
+        string requestUrl
+    ) => await PassesThrough("VERB", baseUrl, baseDir, requestUrl);
 
     [Theory]
     [MemberData(nameof(ExistingFiles))]
-    public async Task Options_Match_PassesThrough(string baseUrl, string baseDir, string requestUrl) =>
-        await PassesThrough("OPTIONS", baseUrl, baseDir, requestUrl);
+    public async Task Options_Match_PassesThrough(
+        string baseUrl,
+        string baseDir,
+        string requestUrl
+    ) => await PassesThrough("OPTIONS", baseUrl, baseDir, requestUrl);
 
     [Theory]
     [MemberData(nameof(ExistingFiles))]
-    public async Task Trace_Match_PassesThrough(string baseUrl, string baseDir, string requestUrl) =>
-        await PassesThrough("TRACE", baseUrl, baseDir, requestUrl);
+    public async Task Trace_Match_PassesThrough(
+        string baseUrl,
+        string baseDir,
+        string requestUrl
+    ) => await PassesThrough("TRACE", baseUrl, baseDir, requestUrl);
 
     [Theory]
     [MemberData(nameof(ExistingFiles))]
@@ -334,18 +436,35 @@ public class StaticFileMiddlewareTests
 
     [Theory]
     [MemberData(nameof(ExistingFiles))]
-    public async Task Unknown_Match_PassesThrough(string baseUrl, string baseDir, string requestUrl) =>
-        await PassesThrough("VERB", baseUrl, baseDir, requestUrl);
+    public async Task Unknown_Match_PassesThrough(
+        string baseUrl,
+        string baseDir,
+        string requestUrl
+    ) => await PassesThrough("VERB", baseUrl, baseDir, requestUrl);
 
-    private async Task PassesThrough(string method, string baseUrl, string baseDir, string requestUrl)
+    private async Task PassesThrough(
+        string method,
+        string baseUrl,
+        string baseDir,
+        string requestUrl
+    )
     {
-        using (var fileProvider = new PhysicalFileProvider(Path.Combine(AppContext.BaseDirectory, baseDir)))
+        using (
+            var fileProvider = new PhysicalFileProvider(
+                Path.Combine(AppContext.BaseDirectory, baseDir)
+            )
+        )
         {
-            using var host = await StaticFilesTestServer.Create(app => app.UseStaticFiles(new StaticFileOptions
-            {
-                RequestPath = new PathString(baseUrl),
-                FileProvider = fileProvider
-            }));
+            using var host = await StaticFilesTestServer.Create(
+                app =>
+                    app.UseStaticFiles(
+                        new StaticFileOptions
+                        {
+                            RequestPath = new PathString(baseUrl),
+                            FileProvider = fileProvider
+                        }
+                    )
+            );
             using var server = host.GetTestServer();
             var response = await server.CreateRequest(requestUrl).SendAsync(method);
             Assert.Null(response.Content.Headers.LastModified);
@@ -353,21 +472,23 @@ public class StaticFileMiddlewareTests
         }
     }
 
-    public static IEnumerable<object[]> MissingFiles => new[]
-    {
-            new[] {"", @".", "/missing.file"},
-            new[] {"/subdir", @".", "/subdir/missing.file"},
-            new[] {"/missing.file", @"./", "/missing.file"},
-            new[] {"", @"./", "/xunit.xml"}
+    public static IEnumerable<object[]> MissingFiles =>
+        new[]
+        {
+            new[] { "", @".", "/missing.file" },
+            new[] { "/subdir", @".", "/subdir/missing.file" },
+            new[] { "/missing.file", @"./", "/missing.file" },
+            new[] { "", @"./", "/xunit.xml" }
         };
 
-    public static IEnumerable<object[]> ExistingFiles => new[]
-    {
-            new[] {"", @".", "/TestDocument.txt"},
-            new[] {"/somedir", @".", "/somedir/TestDocument.txt"},
-            new[] {"/SomeDir", @".", "/soMediR/TestDocument.txt"},
-            new[] {"", @"SubFolder", "/ranges.txt"},
-            new[] {"/somedir", @"SubFolder", "/somedir/ranges.txt"},
-            new[] {"", @"SubFolder", "/Empty.txt"}
+    public static IEnumerable<object[]> ExistingFiles =>
+        new[]
+        {
+            new[] { "", @".", "/TestDocument.txt" },
+            new[] { "/somedir", @".", "/somedir/TestDocument.txt" },
+            new[] { "/SomeDir", @".", "/soMediR/TestDocument.txt" },
+            new[] { "", @"SubFolder", "/ranges.txt" },
+            new[] { "/somedir", @"SubFolder", "/somedir/ranges.txt" },
+            new[] { "", @"SubFolder", "/Empty.txt" }
         };
 }

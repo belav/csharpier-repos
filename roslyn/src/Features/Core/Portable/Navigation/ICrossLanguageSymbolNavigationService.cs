@@ -18,6 +18,9 @@ namespace Microsoft.CodeAnalysis.Navigation
         /// defined at: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/#id-strings.  Should
         /// return <see langword="null"/> if the 3rd party language cannot navigate to this particular symbol.
         /// </summary>
-        Task<INavigableLocation?> TryGetNavigableLocationAsync(string documentationCommentId, CancellationToken cancellationToken);
+        Task<INavigableLocation?> TryGetNavigableLocationAsync(
+            string documentationCommentId,
+            CancellationToken cancellationToken
+        );
     }
 }

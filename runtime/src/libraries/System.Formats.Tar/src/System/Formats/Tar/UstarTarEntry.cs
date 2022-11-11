@@ -10,9 +10,7 @@ namespace System.Formats.Tar
     {
         // Constructor called when reading a TarEntry from a TarReader.
         internal UstarTarEntry(TarHeader header, TarReader readerOfOrigin)
-            : base(header, readerOfOrigin, TarEntryFormat.Ustar)
-        {
-        }
+            : base(header, readerOfOrigin, TarEntryFormat.Ustar) { }
 
         /// <summary>
         /// Initializes a new <see cref="UstarTarEntry"/> instance with the specified entry type and entry name.
@@ -41,8 +39,7 @@ namespace System.Formats.Tar
         /// <exception cref="ArgumentException"><para><paramref name="other"/> is a <see cref="PaxGlobalExtendedAttributesTarEntry"/> and cannot be converted.</para>
         /// <para>-or-</para>
         /// <para>The entry type of <paramref name="other"/> is not supported for conversion to the Ustar format.</para></exception>
-        public UstarTarEntry(TarEntry other)
-            : base(other, TarEntryFormat.Ustar)
+        public UstarTarEntry(TarEntry other) : base(other, TarEntryFormat.Ustar)
         {
             if (other._header._format is TarEntryFormat.Ustar or TarEntryFormat.Pax)
             {
@@ -55,6 +52,7 @@ namespace System.Formats.Tar
         }
 
         // Determines if the current instance's entry type supports setting a data stream.
-        internal override bool IsDataStreamSetterSupported() => EntryType == TarEntryType.RegularFile;
+        internal override bool IsDataStreamSetterSupported() =>
+            EntryType == TarEntryType.RegularFile;
     }
 }

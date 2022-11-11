@@ -26,7 +26,10 @@ namespace System.Reflection.Runtime.TypeParsing
         /// didn't specify an assembly name. How to respond to that is up to the type resolver delegate in getTypeOptions - this class
         /// is just a middleman.
         /// </summary>
-        public abstract Type ResolveType(Assembly containingAssemblyIfAny, GetTypeOptions getTypeOptions);
+        public abstract Type ResolveType(
+            Assembly containingAssemblyIfAny,
+            GetTypeOptions getTypeOptions
+        );
         public abstract override string ToString();
     }
 
@@ -35,7 +38,10 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class AssemblyQualifiedTypeName : TypeName
     {
-        public AssemblyQualifiedTypeName(NonQualifiedTypeName nonQualifiedTypeName, RuntimeAssemblyName assemblyName)
+        public AssemblyQualifiedTypeName(
+            NonQualifiedTypeName nonQualifiedTypeName,
+            RuntimeAssemblyName assemblyName
+        )
         {
             Debug.Assert(nonQualifiedTypeName != null);
             Debug.Assert(assemblyName != null);
@@ -48,7 +54,10 @@ namespace System.Reflection.Runtime.TypeParsing
             return _nonQualifiedTypeName.ToString() + ", " + _assemblyName.FullName;
         }
 
-        public sealed override Type ResolveType(Assembly containingAssemblyIfAny, GetTypeOptions getTypeOptions)
+        public sealed override Type ResolveType(
+            Assembly containingAssemblyIfAny,
+            GetTypeOptions getTypeOptions
+        )
         {
             containingAssemblyIfAny = getTypeOptions.CoreResolveAssembly(_assemblyName);
             if (containingAssemblyIfAny == null)
@@ -63,16 +72,12 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     // Base class for all non-assembly-qualified type names.
     //
-    internal abstract class NonQualifiedTypeName : TypeName
-    {
-    }
+    internal abstract class NonQualifiedTypeName : TypeName { }
 
     //
     // Base class for namespace or nested type.
     //
-    internal abstract class NamedTypeName : NonQualifiedTypeName
-    {
-    }
+    internal abstract class NamedTypeName : NonQualifiedTypeName { }
 
     //
     // Non-nested named type. The full name is the namespace-qualified name. For example, the FullName for
@@ -85,7 +90,10 @@ namespace System.Reflection.Runtime.TypeParsing
             _fullName = fullName;
         }
 
-        public sealed override Type ResolveType(Assembly containingAssemblyIfAny, GetTypeOptions getTypeOptions)
+        public sealed override Type ResolveType(
+            Assembly containingAssemblyIfAny,
+            GetTypeOptions getTypeOptions
+        )
         {
             return getTypeOptions.CoreResolveType(containingAssemblyIfAny, _fullName);
         }
@@ -114,11 +122,20 @@ namespace System.Reflection.Runtime.TypeParsing
             return _declaringType + "+" + _nestedTypeName.EscapeTypeNameIdentifier();
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Reflection implementation")]
-        public sealed override Type ResolveType(Assembly containingAssemblyIfAny, GetTypeOptions getTypeOptions)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Reflection implementation"
+        )]
+        public sealed override Type ResolveType(
+            Assembly containingAssemblyIfAny,
+            GetTypeOptions getTypeOptions
+        )
         {
-            Type declaringType = _declaringType.ResolveType(containingAssemblyIfAny, getTypeOptions);
+            Type declaringType = _declaringType.ResolveType(
+                containingAssemblyIfAny,
+                getTypeOptions
+            );
             if (declaringType == null)
                 return null;
 
@@ -180,21 +197,26 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class ArrayTypeName : HasElementTypeName
     {
-        public ArrayTypeName(TypeName elementTypeName)
-            : base(elementTypeName)
-        {
-        }
+        public ArrayTypeName(TypeName elementTypeName) : base(elementTypeName) { }
 
         public sealed override string ToString()
         {
             return ElementTypeName + "[]";
         }
 
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:AotUnfriendlyApi",
-            Justification = "Used to implement resolving types from strings.")]
-        public sealed override Type ResolveType(Assembly containingAssemblyIfAny, GetTypeOptions getTypeOptions)
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:AotUnfriendlyApi",
+            Justification = "Used to implement resolving types from strings."
+        )]
+        public sealed override Type ResolveType(
+            Assembly containingAssemblyIfAny,
+            GetTypeOptions getTypeOptions
+        )
         {
-            return ElementTypeName.ResolveType(containingAssemblyIfAny, getTypeOptions)?.MakeArrayType();
+            return ElementTypeName
+                .ResolveType(containingAssemblyIfAny, getTypeOptions)
+                ?.MakeArrayType();
         }
     }
 
@@ -203,8 +225,7 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class MultiDimArrayTypeName : HasElementTypeName
     {
-        public MultiDimArrayTypeName(TypeName elementTypeName, int rank)
-            : base(elementTypeName)
+        public MultiDimArrayTypeName(TypeName elementTypeName, int rank) : base(elementTypeName)
         {
             _rank = rank;
         }
@@ -214,11 +235,19 @@ namespace System.Reflection.Runtime.TypeParsing
             return ElementTypeName + "[" + (_rank == 1 ? "*" : new string(',', _rank - 1)) + "]";
         }
 
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:AotUnfriendlyApi",
-            Justification = "Used to implement resolving types from strings.")]
-        public sealed override Type ResolveType(Assembly containingAssemblyIfAny, GetTypeOptions getTypeOptions)
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:AotUnfriendlyApi",
+            Justification = "Used to implement resolving types from strings."
+        )]
+        public sealed override Type ResolveType(
+            Assembly containingAssemblyIfAny,
+            GetTypeOptions getTypeOptions
+        )
         {
-            return ElementTypeName.ResolveType(containingAssemblyIfAny, getTypeOptions)?.MakeArrayType(_rank);
+            return ElementTypeName
+                .ResolveType(containingAssemblyIfAny, getTypeOptions)
+                ?.MakeArrayType(_rank);
         }
 
         private readonly int _rank;
@@ -229,19 +258,21 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class ByRefTypeName : HasElementTypeName
     {
-        public ByRefTypeName(TypeName elementTypeName)
-            : base(elementTypeName)
-        {
-        }
+        public ByRefTypeName(TypeName elementTypeName) : base(elementTypeName) { }
 
         public sealed override string ToString()
         {
             return ElementTypeName + "&";
         }
 
-        public sealed override Type ResolveType(Assembly containingAssemblyIfAny, GetTypeOptions getTypeOptions)
+        public sealed override Type ResolveType(
+            Assembly containingAssemblyIfAny,
+            GetTypeOptions getTypeOptions
+        )
         {
-            return ElementTypeName.ResolveType(containingAssemblyIfAny, getTypeOptions)?.MakeByRefType();
+            return ElementTypeName
+                .ResolveType(containingAssemblyIfAny, getTypeOptions)
+                ?.MakeByRefType();
         }
     }
 
@@ -250,19 +281,21 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class PointerTypeName : HasElementTypeName
     {
-        public PointerTypeName(TypeName elementTypeName)
-            : base(elementTypeName)
-        {
-        }
+        public PointerTypeName(TypeName elementTypeName) : base(elementTypeName) { }
 
         public sealed override string ToString()
         {
             return ElementTypeName + "*";
         }
 
-        public sealed override Type ResolveType(Assembly containingAssemblyIfAny, GetTypeOptions getTypeOptions)
+        public sealed override Type ResolveType(
+            Assembly containingAssemblyIfAny,
+            GetTypeOptions getTypeOptions
+        )
         {
-            return ElementTypeName.ResolveType(containingAssemblyIfAny, getTypeOptions)?.MakePointerType();
+            return ElementTypeName
+                .ResolveType(containingAssemblyIfAny, getTypeOptions)
+                ?.MakePointerType();
         }
     }
 
@@ -271,7 +304,10 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class ConstructedGenericTypeName : NonQualifiedTypeName
     {
-        public ConstructedGenericTypeName(NamedTypeName genericTypeDefinition, IList<TypeName> genericTypeArguments)
+        public ConstructedGenericTypeName(
+            NamedTypeName genericTypeDefinition,
+            IList<TypeName> genericTypeArguments
+        )
         {
             _genericTypeDefinition = genericTypeDefinition;
             _genericTypeArguments = genericTypeArguments;
@@ -295,13 +331,25 @@ namespace System.Reflection.Runtime.TypeParsing
             return s;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2055:RequiresUnreferencedCode",
-            Justification = "Used to implement resolving types from strings.")]
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:AotUnfriendlyApi",
-            Justification = "Used to implement resolving types from strings.")]
-        public sealed override Type ResolveType(Assembly containingAssemblyIfAny, GetTypeOptions getTypeOptions)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2055:RequiresUnreferencedCode",
+            Justification = "Used to implement resolving types from strings."
+        )]
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:AotUnfriendlyApi",
+            Justification = "Used to implement resolving types from strings."
+        )]
+        public sealed override Type ResolveType(
+            Assembly containingAssemblyIfAny,
+            GetTypeOptions getTypeOptions
+        )
         {
-            Type genericTypeDefinition = _genericTypeDefinition.ResolveType(containingAssemblyIfAny, getTypeOptions);
+            Type genericTypeDefinition = _genericTypeDefinition.ResolveType(
+                containingAssemblyIfAny,
+                getTypeOptions
+            );
             if (genericTypeDefinition == null)
                 return null;
 
@@ -310,7 +358,14 @@ namespace System.Reflection.Runtime.TypeParsing
             for (int i = 0; i < numGenericArguments; i++)
             {
                 // Do not pass containingAssemblyIfAny down to ResolveType for the generic type arguments.
-                if ((genericArgumentTypes[i] = _genericTypeArguments[i].ResolveType(null, getTypeOptions)) == null)
+                if (
+                    (
+                        genericArgumentTypes[i] = _genericTypeArguments[i].ResolveType(
+                            null,
+                            getTypeOptions
+                        )
+                    ) == null
+                )
                     return null;
             }
             return genericTypeDefinition.MakeGenericType(genericArgumentTypes);

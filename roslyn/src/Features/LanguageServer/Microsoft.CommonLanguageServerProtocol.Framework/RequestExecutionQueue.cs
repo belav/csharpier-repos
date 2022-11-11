@@ -54,7 +54,10 @@ public class RequestExecutionQueue<TRequestContext> : IRequestExecutionQueue<TRe
     /// The queue containing the ordered LSP requests along with a combined cancellation token
     /// representing the queue's cancellation token and the individual request cancellation token.
     /// </summary>
-    protected readonly AsyncQueue<(IQueueItem<TRequestContext> queueItem, CancellationToken cancellationToken)> _queue = new();
+    protected readonly AsyncQueue<(
+        IQueueItem<TRequestContext> queueItem,
+        CancellationToken cancellationToken
+    )> _queue = new();
     private readonly CancellationTokenSource _cancelSource = new();
 
     /// <summary>
@@ -77,7 +80,9 @@ public class RequestExecutionQueue<TRequestContext> : IRequestExecutionQueue<TRe
         _queueProcessingTask = ProcessQueueAsync();
     }
 
-    protected ITextDocumentIdentifierHandler? GetTextDocumentIdentifierHandler<TRequest, TResponse>(string methodName)
+    protected ITextDocumentIdentifierHandler? GetTextDocumentIdentifierHandler<TRequest, TResponse>(
+        string methodName
+    )
     {
         var handler = GetMethodHandler<TRequest, TResponse>(methodName);
 
@@ -111,7 +116,8 @@ public class RequestExecutionQueue<TRequestContext> : IRequestExecutionQueue<TRe
         TRequest request,
         string methodName,
         ILspServices lspServices,
-        CancellationToken requestCancellationToken)
+        CancellationToken requestCancellationToken
+    )
     {
         // Note: If the queue is not accepting any more items then TryEnqueue below will fail.
 
@@ -127,19 +133,27 @@ public class RequestExecutionQueue<TRequestContext> : IRequestExecutionQueue<TRe
             request,
             handler,
             lspServices,
-            combinedCancellationToken);
+            combinedCancellationToken
+        );
 
         // Run a continuation to ensure the cts is disposed of.
         // We pass CancellationToken.None as we always want to dispose of the source
         // even when the request is cancelled or the queue is shutting down.
-        _ = resultTask.ContinueWith(_ => combinedTokenSource.Dispose(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+        _ = resultTask.ContinueWith(
+            _ => combinedTokenSource.Dispose(),
+            CancellationToken.None,
+            TaskContinuationOptions.ExecuteSynchronously,
+            TaskScheduler.Default
+        );
 
         var didEnqueue = _queue.TryEnqueue((item, combinedCancellationToken));
 
         // If the queue has been shut down the enqueue will fail, so we just fault the task immediately.
         // The queue itself is threadsafe (_queue.TryEnqueue and _queue.Complete use the same lock).
         if (!didEnqueue)
-            return Task.FromException<TResponse>(new InvalidOperationException("Server was requested to shut down."));
+            return Task.FromException<TResponse>(
+                new InvalidOperationException("Server was requested to shut down.")
+            );
 
         return resultTask;
     }
@@ -151,14 +165,18 @@ public class RequestExecutionQueue<TRequestContext> : IRequestExecutionQueue<TRe
         TRequest request,
         IMethodHandler handler,
         ILspServices lspServices,
-        CancellationToken cancellationToken) => QueueItem<TRequest, TResponse, TRequestContext>.Create(mutatesSolutionState,
+        CancellationToken cancellationToken
+    ) =>
+        QueueItem<TRequest, TResponse, TRequestContext>.Create(
+            mutatesSolutionState,
             methodName,
             methodHandler,
             request,
             handler,
             lspServices,
             _logger,
-            cancellationToken);
+            cancellationToken
+        );
 
     private async Task ProcessQueueAsync()
     {
@@ -172,9 +190,12 @@ public class RequestExecutionQueue<TRequestContext> : IRequestExecutionQueue<TRe
                 (IQueueItem<TRequestContext> work, CancellationToken cancellationToken) queueItem;
                 try
                 {
-                    queueItem = await _queue.DequeueAsync(_cancelSource.Token).ConfigureAwait(false);
+                    queueItem = await _queue
+                        .DequeueAsync(_cancelSource.Token)
+                        .ConfigureAwait(false);
                 }
-                catch (OperationCanceledException ex) when (ex.CancellationToken == _cancelSource.Token)
+                catch (OperationCanceledException ex)
+                    when (ex.CancellationToken == _cancelSource.Token)
                 {
                     // The queue's cancellation token was invoked which means we are shutting down the queue.
                     // Exit out of the loop so we stop processing new items.
@@ -186,16 +207,21 @@ public class RequestExecutionQueue<TRequestContext> : IRequestExecutionQueue<TRe
                     var (work, cancellationToken) = queueItem;
                     lspServices = work.LspServices;
 
-                    var cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(CancellationToken, cancellationToken);
+                    var cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+                        CancellationToken,
+                        cancellationToken
+                    );
 
                     // The request context must be created serially inside the queue to so that requests always run
                     // on the correct snapshot as of the last request.
-                    var context = await work.CreateRequestContextAsync(cancellationToken).ConfigureAwait(false);
+                    var context = await work.CreateRequestContextAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     if (work.MutatesServerState)
                     {
                         // Mutating requests block other requests from starting to ensure an up to date snapshot is used.
                         // Since we're explicitly awaiting exceptions to mutating requests will bubble up here.
-                        await work.StartRequestAsync(context, cancellationToken).ConfigureAwait(false);
+                        await work.StartRequestAsync(context, cancellationToken)
+                            .ConfigureAwait(false);
                     }
                     else
                     {
@@ -204,10 +230,14 @@ public class RequestExecutionQueue<TRequestContext> : IRequestExecutionQueue<TRe
                         // via NFW, though these errors don't put us into a bad state as far as the rest of the queue goes.
                         // Furthermore we use Task.Run here to protect ourselves against synchronous execution of work
                         // blocking the request queue for longer periods of time (it enforces parallelizabilty).
-                        _ = Task.Run(() => work.StartRequestAsync(context, cancellationToken), cancellationToken);
+                        _ = Task.Run(
+                            () => work.StartRequestAsync(context, cancellationToken),
+                            cancellationToken
+                        );
                     }
                 }
-                catch (OperationCanceledException ex) when (ex.CancellationToken == queueItem.cancellationToken)
+                catch (OperationCanceledException ex)
+                    when (ex.CancellationToken == queueItem.cancellationToken)
                 {
                     // Explicitly ignore this exception as cancellation occured as a result of our linked cancellation token.
                     // This means either the queue is shutting down or the request itself was cancelled.
@@ -251,15 +281,13 @@ public class RequestExecutionQueue<TRequestContext> : IRequestExecutionQueue<TRe
     }
 
     #region Test Accessor
-    internal TestAccessor GetTestAccessor()
-        => new(this);
+    internal TestAccessor GetTestAccessor() => new(this);
 
     internal readonly struct TestAccessor
     {
         private readonly RequestExecutionQueue<TRequestContext> _queue;
 
-        public TestAccessor(RequestExecutionQueue<TRequestContext> queue)
-            => _queue = queue;
+        public TestAccessor(RequestExecutionQueue<TRequestContext> queue) => _queue = queue;
 
         public bool IsComplete() => _queue._queue.IsCompleted && _queue._queue.IsEmpty;
 
@@ -280,7 +308,9 @@ public class RequestExecutionQueue<TRequestContext> : IRequestExecutionQueue<TRe
         {
             while (!_queue._queue.IsEmpty)
             {
-                var (_, cancellationToken) = await _queue._queue.DequeueAsync().ConfigureAwait(false);
+                var (_, cancellationToken) = await _queue._queue
+                    .DequeueAsync()
+                    .ConfigureAwait(false);
                 if (!cancellationToken.IsCancellationRequested)
                     return false;
             }

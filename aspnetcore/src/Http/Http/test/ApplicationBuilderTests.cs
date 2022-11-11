@@ -41,7 +41,8 @@ public class ApplicationBuilderTests
                 return Task.CompletedTask;
             },
             EndpointMetadataCollection.Empty,
-            "Test endpoint");
+            "Test endpoint"
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.SetEndpoint(endpoint);
@@ -49,9 +50,9 @@ public class ApplicationBuilderTests
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => app.Invoke(httpContext));
 
         var expected =
-            "The request reached the end of the pipeline without executing the endpoint: 'Test endpoint'. " +
-            "Please register the EndpointMiddleware using 'IApplicationBuilder.UseEndpoints(...)' if " +
-            "using routing.";
+            "The request reached the end of the pipeline without executing the endpoint: 'Test endpoint'. "
+            + "Please register the EndpointMiddleware using 'IApplicationBuilder.UseEndpoints(...)' if "
+            + "using routing.";
         Assert.Equal(expected, ex.Message);
         Assert.False(endpointCalled);
     }
@@ -75,7 +76,8 @@ public class ApplicationBuilderTests
                 return Task.CompletedTask;
             },
             EndpointMetadataCollection.Empty,
-            "Test endpoint");
+            "Test endpoint"
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.SetEndpoint(endpoint);

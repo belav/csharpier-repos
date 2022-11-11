@@ -39,16 +39,23 @@ namespace System.Threading.Tasks.Dataflow.Internal
     {
         /// <summary>The source that owns this reordering buffer.</summary>
         private readonly object _owningSource;
+
         /// <summary>A reordering buffer used when parallelism is employed and items may be completed out-of-order.</summary>
         /// <remarks>Also serves as the sync object to protect the contents of this class.</remarks>
-        private readonly Dictionary<long, KeyValuePair<bool, TOutput>> _reorderingBuffer = new Dictionary<long, KeyValuePair<bool, TOutput>>();
+        private readonly Dictionary<long, KeyValuePair<bool, TOutput>> _reorderingBuffer =
+            new Dictionary<long, KeyValuePair<bool, TOutput>>();
+
         /// <summary>Action used to output items in order.</summary>
         private readonly Action<object, TOutput> _outputAction;
+
         /// <summary>The ID of the next item that should be released from the reordering buffer.</summary>
         private long _nextReorderedIdToOutput;
 
         /// <summary>Gets the object used to synchronize all access to the reordering buffer's internals.</summary>
-        private object ValueLock { get { return _reorderingBuffer; } }
+        private object ValueLock
+        {
+            get { return _reorderingBuffer; }
+        }
 
         /// <summary>Initializes the reordering buffer.</summary>
         /// <param name="owningSource">The source that owns this reordering buffer.</param>
@@ -57,7 +64,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             // Validate and store internal arguments
             Debug.Assert(owningSource != null, "Buffer must be associated with a source.");
-            Debug.Assert(outputAction != null, "Action required for when items are to be released.");
+            Debug.Assert(
+                outputAction != null,
+                "Action required for when items are to be released."
+            );
             _owningSource = owningSource;
             _outputAction = outputAction;
         }
@@ -68,7 +78,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <param name="itemIsValid">Specifies whether the item is valid (true) or just a placeholder (false).</param>
         internal void AddItem(long id, TOutput? item, bool itemIsValid)
         {
-            Debug.Assert(id != Common.INVALID_REORDERING_ID, "This ID should never have been handed out.");
+            Debug.Assert(
+                id != Common.INVALID_REORDERING_ID,
+                "This ID should never have been handed out."
+            );
             Common.ContractAssertMonitorStatus(ValueLock, held: false);
 
             // This may be called concurrently, so protect the buffer...
@@ -94,7 +107,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <returns>true if the item is next in line; otherwise, false.</returns>
         internal bool IsNext(long id)
         {
-            Debug.Assert(id != Common.INVALID_REORDERING_ID, "This ID should never have been handed out.");
+            Debug.Assert(
+                id != Common.INVALID_REORDERING_ID,
+                "This ID should never have been handed out."
+            );
             Common.ContractAssertMonitorStatus(ValueLock, held: false);
 
             lock (ValueLock)
@@ -120,7 +136,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// </returns>
         internal bool? AddItemIfNextAndTrusted(long id, TOutput? item, bool isTrusted)
         {
-            Debug.Assert(id != Common.INVALID_REORDERING_ID, "This ID should never have been handed out.");
+            Debug.Assert(
+                id != Common.INVALID_REORDERING_ID,
+                "This ID should never have been handed out."
+            );
             Common.ContractAssertMonitorStatus(ValueLock, held: false);
 
             lock (ValueLock)
@@ -136,9 +155,11 @@ namespace System.Threading.Tasks.Dataflow.Internal
                         OutputNextItem(item, itemIsValid: true);
                         return null;
                     }
-                    else return true;
+                    else
+                        return true;
                 }
-                else return false;
+                else
+                    return false;
             }
         }
 
@@ -159,21 +180,31 @@ namespace System.Threading.Tasks.Dataflow.Internal
             // Note that we're now looking for a different item, and pass this one through.
             // Then release any items which may be pending.
             _nextReorderedIdToOutput++;
-            if (itemIsValid) _outputAction(_owningSource, theNextItem!);
+            if (itemIsValid)
+                _outputAction(_owningSource, theNextItem!);
 
             // Try to get the next available item from the buffer and output it.  Continue to do so
             // until we run out of items in the reordering buffer or don't yet have the next ID buffered.
             KeyValuePair<bool, TOutput> nextOutputItemWithValidity;
-            while (_reorderingBuffer.TryGetValue(_nextReorderedIdToOutput, out nextOutputItemWithValidity))
+            while (
+                _reorderingBuffer.TryGetValue(
+                    _nextReorderedIdToOutput,
+                    out nextOutputItemWithValidity
+                )
+            )
             {
                 _reorderingBuffer.Remove(_nextReorderedIdToOutput);
                 _nextReorderedIdToOutput++;
-                if (nextOutputItemWithValidity.Key) _outputAction(_owningSource, nextOutputItemWithValidity.Value);
+                if (nextOutputItemWithValidity.Key)
+                    _outputAction(_owningSource, nextOutputItemWithValidity.Value);
             }
         }
 
         /// <summary>Gets a item count for debugging purposes.</summary>
-        private int CountForDebugging { get { return _reorderingBuffer.Count; } }
+        private int CountForDebugging
+        {
+            get { return _reorderingBuffer.Count; }
+        }
 
         /// <summary>Provides a debugger type proxy for the buffer.</summary>
         private sealed class DebugView
@@ -185,14 +216,24 @@ namespace System.Threading.Tasks.Dataflow.Internal
             /// <param name="buffer">The buffer being debugged.</param>
             public DebugView(ReorderingBuffer<TOutput> buffer)
             {
-                Debug.Assert(buffer != null, "Need a buffer with which to construct the debug view.");
+                Debug.Assert(
+                    buffer != null,
+                    "Need a buffer with which to construct the debug view."
+                );
                 _buffer = buffer;
             }
 
             /// <summary>Gets a dictionary of buffered items and their reordering IDs.</summary>
-            public Dictionary<long, KeyValuePair<bool, TOutput>> ItemsBuffered { get { return _buffer._reorderingBuffer; } }
+            public Dictionary<long, KeyValuePair<bool, TOutput>> ItemsBuffered
+            {
+                get { return _buffer._reorderingBuffer; }
+            }
+
             /// <summary>Gets the next ID required for outputting.</summary>
-            public long NextIdRequired { get { return _buffer._nextReorderedIdToOutput; } }
+            public long NextIdRequired
+            {
+                get { return _buffer._nextReorderedIdToOutput; }
+            }
         }
     }
 }

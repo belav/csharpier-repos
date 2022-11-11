@@ -88,10 +88,22 @@ namespace System
                 const int LOGON32_PROVIDER_DEFAULT = 0;
                 const int LOGON32_LOGON_INTERACTIVE = 2;
 
-                if (!LogonUser(_userName, ".", testAccountPassword, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, out _accountTokenHandle))
+                if (
+                    !LogonUser(
+                        _userName,
+                        ".",
+                        testAccountPassword,
+                        LOGON32_LOGON_INTERACTIVE,
+                        LOGON32_PROVIDER_DEFAULT,
+                        out _accountTokenHandle
+                    )
+                )
                 {
                     _accountTokenHandle = null;
-                    throw new Exception($"Failed to get SafeAccessTokenHandle for test account {_userName}", new Win32Exception());
+                    throw new Exception(
+                        $"Failed to get SafeAccessTokenHandle for test account {_userName}",
+                        new Win32Exception()
+                    );
                 }
 
                 bool gotRef = false;
@@ -109,15 +121,35 @@ namespace System
             }
         }
 
-        [LibraryImport("advapi32.dll", EntryPoint = "LogonUserW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            "advapi32.dll",
+            EntryPoint = "LogonUserW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool LogonUser(string userName, string domain, string password, int logonType, int logonProvider, out SafeAccessTokenHandle safeAccessTokenHandle);
+        private static partial bool LogonUser(
+            string userName,
+            string domain,
+            string password,
+            int logonType,
+            int logonProvider,
+            out SafeAccessTokenHandle safeAccessTokenHandle
+        );
 
         [LibraryImport("netapi32.dll", SetLastError = true)]
-        internal static partial uint NetUserAdd([MarshalAs(UnmanagedType.LPWStr)]string servername, uint level, ref USER_INFO_1 buf, out uint parm_err);
+        internal static partial uint NetUserAdd(
+            [MarshalAs(UnmanagedType.LPWStr)] string servername,
+            uint level,
+            ref USER_INFO_1 buf,
+            out uint parm_err
+        );
 
         [LibraryImport("netapi32.dll")]
-        internal static partial uint NetUserDel([MarshalAs(UnmanagedType.LPWStr)]string servername, [MarshalAs(UnmanagedType.LPWStr)]string username);
+        internal static partial uint NetUserDel(
+            [MarshalAs(UnmanagedType.LPWStr)] string servername,
+            [MarshalAs(UnmanagedType.LPWStr)] string username
+        );
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct USER_INFO_1
@@ -145,5 +177,4 @@ namespace System
             }
         }
     }
- }
-
+}

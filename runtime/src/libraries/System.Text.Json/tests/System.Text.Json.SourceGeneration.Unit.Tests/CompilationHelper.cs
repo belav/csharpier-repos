@@ -18,13 +18,17 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 {
     public class CompilationHelper
     {
-        private static readonly CSharpParseOptions s_parseOptions =
-            new CSharpParseOptions(kind: SourceCodeKind.Regular, documentationMode: DocumentationMode.Parse)
-            // workaround https://github.com/dotnet/roslyn/pull/55866. We can remove "LangVersion=Preview" when we get a Roslyn build with that change.
-            .WithLanguageVersion(LanguageVersion.Preview);
+        private static readonly CSharpParseOptions s_parseOptions = new CSharpParseOptions(
+            kind: SourceCodeKind.Regular,
+            documentationMode: DocumentationMode.Parse
+        )
+        // workaround https://github.com/dotnet/roslyn/pull/55866. We can remove "LangVersion=Preview" when we get a Roslyn build with that change.
+        .WithLanguageVersion(LanguageVersion.Preview);
 
 #if NETCOREAPP
-        private static readonly Assembly systemRuntimeAssembly = Assembly.Load(new AssemblyName("System.Runtime"));
+        private static readonly Assembly systemRuntimeAssembly = Assembly.Load(
+            new AssemblyName("System.Runtime")
+        );
 #endif
 
         public static Compilation CreateCompilation(
@@ -32,15 +36,18 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             MetadataReference[] additionalReferences = null,
             string assemblyName = "TestAssembly",
             bool includeSTJ = true,
-            Func<CSharpParseOptions, CSharpParseOptions> configureParseOptions = null)
+            Func<CSharpParseOptions, CSharpParseOptions> configureParseOptions = null
+        )
         {
-
-            List<MetadataReference> references = new List<MetadataReference> {
+            List<MetadataReference> references = new List<MetadataReference>
+            {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Type).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(KeyValuePair<,>).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(ContractNamespaceAttribute).Assembly.Location),
+                MetadataReference.CreateFromFile(
+                    typeof(ContractNamespaceAttribute).Assembly.Location
+                ),
                 MetadataReference.CreateFromFile(typeof(JavaScriptEncoder).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(GeneratedCodeAttribute).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(ReadOnlySpan<>).Assembly.Location),
@@ -52,7 +59,11 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             if (includeSTJ)
             {
-                references.Add(MetadataReference.CreateFromFile(typeof(JsonSerializerOptions).Assembly.Location));
+                references.Add(
+                    MetadataReference.CreateFromFile(
+                        typeof(JsonSerializerOptions).Assembly.Location
+                    )
+                );
             }
 
             // Add additional references as needed.
@@ -78,20 +89,28 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             Compilation compilation,
             out ImmutableArray<Diagnostic> diagnostics,
 #if ROSLYN4_0_OR_GREATER
-            params IIncrementalGenerator[] generators)
+            params IIncrementalGenerator[] generators
+        )
         {
             CSharpGeneratorDriver driver = CSharpGeneratorDriver.Create(
                 generators: generators.Select(g => g.AsSourceGenerator()),
-                parseOptions: s_parseOptions);
+                parseOptions: s_parseOptions
+            );
 #else
-            params ISourceGenerator[] generators)
+            params ISourceGenerator[] generators
+        )
         {
             CSharpGeneratorDriver driver = CSharpGeneratorDriver.Create(
                 generators: generators,
-                parseOptions: s_parseOptions);
+                parseOptions: s_parseOptions
+            );
 #endif
 
-            driver.RunGeneratorsAndUpdateCompilation(compilation, out Compilation outCompilation, out diagnostics);
+            driver.RunGeneratorsAndUpdateCompilation(
+                compilation,
+                out Compilation outCompilation,
+                out diagnostics
+            );
             return outCompilation;
         }
 
@@ -108,7 +127,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateReferencedLocationCompilation()
         {
-            string source = @"
+            string source =
+                @"
             namespace ReferencedAssembly
             {
                 public class Location
@@ -130,7 +150,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateCampaignSummaryViewModelCompilation()
         {
-            string source = @"
+            string source =
+                @"
             namespace ReferencedAssembly
             {
                 public class CampaignSummaryViewModel
@@ -149,7 +170,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateActiveOrUpcomingEventCompilation()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             namespace ReferencedAssembly
             {
@@ -171,7 +193,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateReferencedHighLowTempsCompilation()
         {
-            string source = @"
+            string source =
+                @"
             namespace ReferencedAssembly
             {
                 public class HighLowTemps
@@ -186,7 +209,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateRepeatedLocationsCompilation()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Collections;
             using System.Collections.Generic;
@@ -238,7 +262,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateRepeatedLocationsWithResolutionCompilation()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Collections;
             using System.Collections.Generic;
@@ -284,7 +309,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateCompilationWithInitOnlyProperties()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Text.Json.Serialization;
 
@@ -314,7 +340,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateCompilationWithConstructorInitOnlyProperties()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Text.Json.Serialization;
 
@@ -341,7 +368,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateCompilationWithMixedInitOnlyProperties()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Text.Json.Serialization;
 
@@ -369,7 +397,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateCompilationWithRecordPositionalParameters()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Text.Json.Serialization;
 
@@ -399,7 +428,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateCompilationWithInaccessibleJsonIncludeProperties()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Text.Json.Serialization;
 
@@ -430,7 +460,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateReferencedLibRecordCompilation()
         {
-            string source = @"
+            string source =
+                @"
             using System.Text.Json.Serialization;
 
             namespace ReferencedAssembly
@@ -456,7 +487,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateReferencedSimpleLibRecordCompilation()
         {
-            string source = @"
+            string source =
+                @"
             using System.Text.Json.Serialization;
 
             namespace ReferencedAssembly
@@ -483,7 +515,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         public static Compilation CreateReferencedModelWithFullyDocumentedProperties()
         {
-            string source = @"
+            string source =
+                @"
             namespace ReferencedAssembly
             {
                 /// <summary>
@@ -510,7 +543,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             DiagnosticSeverity level,
             ImmutableArray<Diagnostic> diagnostics,
             (Location Location, string Message)[] expectedDiags,
-            bool sort = true)
+            bool sort = true
+        )
         {
             (Location Location, string Message)[] actualDiags = diagnostics
                 .Where(diagnostic => diagnostic.Severity == level)
@@ -524,7 +558,12 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 Array.Sort(expectedDiags);
             }
 
-            if (CultureInfo.CurrentUICulture.Name.StartsWith("en", StringComparison.OrdinalIgnoreCase))
+            if (
+                CultureInfo.CurrentUICulture.Name.StartsWith(
+                    "en",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 Assert.Equal(expectedDiags, actualDiags);
             }

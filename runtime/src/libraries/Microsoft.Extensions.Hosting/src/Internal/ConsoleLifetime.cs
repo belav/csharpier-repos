@@ -23,10 +23,21 @@ namespace Microsoft.Extensions.Hosting.Internal
         private CancellationTokenRegistration _applicationStartedRegistration;
         private CancellationTokenRegistration _applicationStoppingRegistration;
 
-        public ConsoleLifetime(IOptions<ConsoleLifetimeOptions> options, IHostEnvironment environment, IHostApplicationLifetime applicationLifetime, IOptions<HostOptions> hostOptions)
-            : this(options, environment, applicationLifetime, hostOptions, NullLoggerFactory.Instance) { }
+        public ConsoleLifetime(
+            IOptions<ConsoleLifetimeOptions> options,
+            IHostEnvironment environment,
+            IHostApplicationLifetime applicationLifetime,
+            IOptions<HostOptions> hostOptions
+        ) : this(options, environment, applicationLifetime, hostOptions, NullLoggerFactory.Instance)
+        { }
 
-        public ConsoleLifetime(IOptions<ConsoleLifetimeOptions> options, IHostEnvironment environment, IHostApplicationLifetime applicationLifetime, IOptions<HostOptions> hostOptions, ILoggerFactory loggerFactory)
+        public ConsoleLifetime(
+            IOptions<ConsoleLifetimeOptions> options,
+            IHostEnvironment environment,
+            IHostApplicationLifetime applicationLifetime,
+            IOptions<HostOptions> hostOptions,
+            ILoggerFactory loggerFactory
+        )
         {
             ThrowHelper.ThrowIfNull(options?.Value, nameof(options));
             ThrowHelper.ThrowIfNull(applicationLifetime);
@@ -54,16 +65,20 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             if (!Options.SuppressStatusMessages)
             {
-                _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(state =>
-                {
-                    ((ConsoleLifetime)state!).OnApplicationStarted();
-                },
-                this);
-                _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(state =>
-                {
-                    ((ConsoleLifetime)state!).OnApplicationStopping();
-                },
-                this);
+                _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(
+                    state =>
+                    {
+                        ((ConsoleLifetime)state!).OnApplicationStarted();
+                    },
+                    this
+                );
+                _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(
+                    state =>
+                    {
+                        ((ConsoleLifetime)state!).OnApplicationStopping();
+                    },
+                    this
+                );
             }
 
             RegisterShutdownHandlers();

@@ -32,6 +32,8 @@ namespace System.Diagnostics
             }
         }
 
-        private bool InitDataChanged(TraceFilter filter) => !s_initData.TryGetValue(filter, out string previousInitData) || InitData != previousInitData;
+        private bool InitDataChanged(TraceFilter filter) =>
+            !s_initData.TryGetValue(filter, out string previousInitData)
+            || InitData != previousInitData;
     }
 }

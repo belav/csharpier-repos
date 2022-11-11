@@ -37,7 +37,8 @@ internal partial class VectorTest
                 T checkValue = GetValueFromInt<T>(i + 2);
                 for (int j = 0; j < Vector<T>.Count; j++)
                 {
-                    if (!(CheckValue<T>(v[i][j], checkValue))) return Fail;
+                    if (!(CheckValue<T>(v[i][j], checkValue)))
+                        return Fail;
                 }
             }
 
@@ -68,10 +69,14 @@ internal partial class VectorTest
             for (int i = 0; i < v.Length; i++)
             {
                 float checkValue = (float)(i + 2);
-                if (!(CheckValue<float>(v[i].X, checkValue))) return Fail;
-                if (!(CheckValue<float>(v[i].Y, checkValue))) return Fail;
-                if (!(CheckValue<float>(v[i].Z, checkValue))) return Fail;
-                if (!(CheckValue<float>(v[i].W, checkValue))) return Fail;
+                if (!(CheckValue<float>(v[i].X, checkValue)))
+                    return Fail;
+                if (!(CheckValue<float>(v[i].Y, checkValue)))
+                    return Fail;
+                if (!(CheckValue<float>(v[i].Z, checkValue)))
+                    return Fail;
+                if (!(CheckValue<float>(v[i].W, checkValue)))
+                    return Fail;
             }
 
             return Pass;
@@ -101,9 +106,12 @@ internal partial class VectorTest
             for (int i = 0; i < v.Length; i++)
             {
                 float checkValue = (float)(i + 2);
-                if (!(CheckValue<float>(v[i].X, checkValue))) return Fail;
-                if (!(CheckValue<float>(v[i].Y, checkValue))) return Fail;
-                if (!(CheckValue<float>(v[i].Z, checkValue))) return Fail;
+                if (!(CheckValue<float>(v[i].X, checkValue)))
+                    return Fail;
+                if (!(CheckValue<float>(v[i].Y, checkValue)))
+                    return Fail;
+                if (!(CheckValue<float>(v[i].Z, checkValue)))
+                    return Fail;
             }
 
             return Pass;
@@ -133,8 +141,10 @@ internal partial class VectorTest
             for (int i = 0; i < v.Length; i++)
             {
                 float checkValue = (float)(i + 2);
-                if (!(CheckValue<float>(v[i].X, checkValue))) return Fail;
-                if (!(CheckValue<float>(v[i].Y, checkValue))) return Fail;
+                if (!(CheckValue<float>(v[i].X, checkValue)))
+                    return Fail;
+                if (!(CheckValue<float>(v[i].Y, checkValue)))
+                    return Fail;
             }
 
             return Pass;
@@ -146,60 +156,104 @@ internal partial class VectorTest
         int returnVal = Pass;
         try
         {
-            if (VectorArrayTest<float>.VectorArray(1f) != Pass) returnVal = Fail;
-            if (VectorArrayTest<double>.VectorArray(1d) != Pass) returnVal = Fail;
-            if (VectorArrayTest<int>.VectorArray(1) != Pass) returnVal = Fail;
-            if (VectorArrayTest<long>.VectorArray(1L) != Pass) returnVal = Fail;
-            if (Vector4Test.VectorArray(1f) != Pass) returnVal = Fail;
-            if (Vector3Test.VectorArray(1f) != Pass) returnVal = Fail;
-            if (Vector2Test.VectorArray(1f) != Pass) returnVal = Fail;
-            if (VectorArrayTest<ushort>.VectorArray(1) != Pass) returnVal = Fail;
-            if (VectorArrayTest<byte>.VectorArray(1) != Pass) returnVal = Fail;
-            if (VectorArrayTest<short>.VectorArray(1) != Pass) returnVal = Fail;
-            if (VectorArrayTest<sbyte>.VectorArray(1) != Pass) returnVal = Fail;
-            if (VectorArrayTest<uint>.VectorArray(1) != Pass) returnVal = Fail;
-            if (VectorArrayTest<ulong>.VectorArray(1ul) != Pass) returnVal = Fail;
-            if (VectorArrayTest<nint>.VectorArray(1) != Pass) returnVal = Fail;
-            if (VectorArrayTest<nuint>.VectorArray(1) != Pass) returnVal = Fail;
+            if (VectorArrayTest<float>.VectorArray(1f) != Pass)
+                returnVal = Fail;
+            if (VectorArrayTest<double>.VectorArray(1d) != Pass)
+                returnVal = Fail;
+            if (VectorArrayTest<int>.VectorArray(1) != Pass)
+                returnVal = Fail;
+            if (VectorArrayTest<long>.VectorArray(1L) != Pass)
+                returnVal = Fail;
+            if (Vector4Test.VectorArray(1f) != Pass)
+                returnVal = Fail;
+            if (Vector3Test.VectorArray(1f) != Pass)
+                returnVal = Fail;
+            if (Vector2Test.VectorArray(1f) != Pass)
+                returnVal = Fail;
+            if (VectorArrayTest<ushort>.VectorArray(1) != Pass)
+                returnVal = Fail;
+            if (VectorArrayTest<byte>.VectorArray(1) != Pass)
+                returnVal = Fail;
+            if (VectorArrayTest<short>.VectorArray(1) != Pass)
+                returnVal = Fail;
+            if (VectorArrayTest<sbyte>.VectorArray(1) != Pass)
+                returnVal = Fail;
+            if (VectorArrayTest<uint>.VectorArray(1) != Pass)
+                returnVal = Fail;
+            if (VectorArrayTest<ulong>.VectorArray(1ul) != Pass)
+                returnVal = Fail;
+            if (VectorArrayTest<nint>.VectorArray(1) != Pass)
+                returnVal = Fail;
+            if (VectorArrayTest<nuint>.VectorArray(1) != Pass)
+                returnVal = Fail;
 
             if (Sse41.IsSupported || AdvSimd.IsSupported)
             {
                 JitLog jitLog = new JitLog();
-                if (!jitLog.Check("get_Item", "Single")) returnVal = Fail;
-                if (!jitLog.Check("System.Numerics.Vector`1[Single][System.Single]:.ctor(float)")) returnVal = Fail;
-                if (!jitLog.Check("get_Item", "Double")) returnVal = Fail;
-                if (!jitLog.Check("System.Numerics.Vector`1[Double][System.Double]:.ctor(double)")) returnVal = Fail;
-                if (!jitLog.Check("get_Item", "Int32")) returnVal = Fail;
-                if (!jitLog.Check("System.Numerics.Vector`1[Int32][System.Int32]:.ctor(int)")) returnVal = Fail;
-                if (!jitLog.Check("get_Item", "Int64")) returnVal = Fail;
-                if (!jitLog.Check("System.Numerics.Vector`1[Int64][System.Int64]:.ctor(long)")) returnVal = Fail;
-                if (!jitLog.Check("System.Numerics.Vector4:.ctor(float)")) returnVal = Fail;
-                if (!jitLog.Check("System.Numerics.Vector3:.ctor(float)")) returnVal = Fail;
-                if (!jitLog.Check("System.Numerics.Vector2:.ctor(float)")) returnVal = Fail;
-                if (!jitLog.Check("get_Item", "UInt16")) returnVal = Fail;
+                if (!jitLog.Check("get_Item", "Single"))
+                    returnVal = Fail;
+                if (!jitLog.Check("System.Numerics.Vector`1[Single][System.Single]:.ctor(float)"))
+                    returnVal = Fail;
+                if (!jitLog.Check("get_Item", "Double"))
+                    returnVal = Fail;
+                if (!jitLog.Check("System.Numerics.Vector`1[Double][System.Double]:.ctor(double)"))
+                    returnVal = Fail;
+                if (!jitLog.Check("get_Item", "Int32"))
+                    returnVal = Fail;
+                if (!jitLog.Check("System.Numerics.Vector`1[Int32][System.Int32]:.ctor(int)"))
+                    returnVal = Fail;
+                if (!jitLog.Check("get_Item", "Int64"))
+                    returnVal = Fail;
+                if (!jitLog.Check("System.Numerics.Vector`1[Int64][System.Int64]:.ctor(long)"))
+                    returnVal = Fail;
+                if (!jitLog.Check("System.Numerics.Vector4:.ctor(float)"))
+                    returnVal = Fail;
+                if (!jitLog.Check("System.Numerics.Vector3:.ctor(float)"))
+                    returnVal = Fail;
+                if (!jitLog.Check("System.Numerics.Vector2:.ctor(float)"))
+                    returnVal = Fail;
+                if (!jitLog.Check("get_Item", "UInt16"))
+                    returnVal = Fail;
                 // We are not currently recognizing the Vector<UInt16> constructor.
                 if (!Vector.IsHardwareAccelerated)
-                    if (!jitLog.Check("System.Numerics.Vector`1[UInt16][System.UInt16]:.ctor(char)")) returnVal = Fail;
-                if (!jitLog.Check("get_Item", "Byte")) returnVal = Fail;
+                    if (
+                        !jitLog.Check("System.Numerics.Vector`1[UInt16][System.UInt16]:.ctor(char)")
+                    )
+                        returnVal = Fail;
+                if (!jitLog.Check("get_Item", "Byte"))
+                    returnVal = Fail;
                 // We are not currently recognizing the Vector<Byte> constructor.
                 if (!Vector.IsHardwareAccelerated)
-                    if (!jitLog.Check("System.Numerics.Vector`1[Byte][System.Byte]:.ctor(ubyte)")) returnVal = Fail;
-                if (!jitLog.Check("get_Item", "Int16")) returnVal = Fail;
+                    if (!jitLog.Check("System.Numerics.Vector`1[Byte][System.Byte]:.ctor(ubyte)"))
+                        returnVal = Fail;
+                if (!jitLog.Check("get_Item", "Int16"))
+                    returnVal = Fail;
                 // We are not currently recognizing the Vector<Int16> constructor.
                 if (!Vector.IsHardwareAccelerated)
-                    if (!jitLog.Check("System.Numerics.Vector`1[Int16][System.Int16]:.ctor(short)")) returnVal = Fail;
-                if (!jitLog.Check("get_Item", "SByte")) returnVal = Fail;
+                    if (!jitLog.Check("System.Numerics.Vector`1[Int16][System.Int16]:.ctor(short)"))
+                        returnVal = Fail;
+                if (!jitLog.Check("get_Item", "SByte"))
+                    returnVal = Fail;
                 // We are not currently recognizing the Vector<SByte> constructor.
                 if (!Vector.IsHardwareAccelerated)
-                    if (!jitLog.Check("System.Numerics.Vector`1[SByte][System.SByte]:.ctor(byte)")) returnVal = Fail;
-                if (!jitLog.Check("get_Item", "UInt32")) returnVal = Fail;
-                if (!jitLog.Check("System.Numerics.Vector`1[UInt32][System.UInt32]:.ctor(int)")) returnVal = Fail;
-                if (!jitLog.Check("get_Item", "UInt64")) returnVal = Fail;
-                if (!jitLog.Check("System.Numerics.Vector`1[UInt64][System.UInt64]:.ctor(long)")) returnVal = Fail;
-                if (!jitLog.Check("get_Item", "IntPtr")) returnVal = Fail;
-                if (!jitLog.Check("System.Numerics.Vector`1[IntPtr][System.UIntPtr]:.ctor(nuint)")) returnVal = Fail;
-                if (!jitLog.Check("get_Item", "UIntPtr")) returnVal = Fail;
-                if (!jitLog.Check("System.Numerics.Vector`1[UIntPtr][System.IntPtr]:.ctor(nint)")) returnVal = Fail;
+                    if (!jitLog.Check("System.Numerics.Vector`1[SByte][System.SByte]:.ctor(byte)"))
+                        returnVal = Fail;
+                if (!jitLog.Check("get_Item", "UInt32"))
+                    returnVal = Fail;
+                if (!jitLog.Check("System.Numerics.Vector`1[UInt32][System.UInt32]:.ctor(int)"))
+                    returnVal = Fail;
+                if (!jitLog.Check("get_Item", "UInt64"))
+                    returnVal = Fail;
+                if (!jitLog.Check("System.Numerics.Vector`1[UInt64][System.UInt64]:.ctor(long)"))
+                    returnVal = Fail;
+                if (!jitLog.Check("get_Item", "IntPtr"))
+                    returnVal = Fail;
+                if (!jitLog.Check("System.Numerics.Vector`1[IntPtr][System.UIntPtr]:.ctor(nuint)"))
+                    returnVal = Fail;
+                if (!jitLog.Check("get_Item", "UIntPtr"))
+                    returnVal = Fail;
+                if (!jitLog.Check("System.Numerics.Vector`1[UIntPtr][System.IntPtr]:.ctor(nint)"))
+                    returnVal = Fail;
                 jitLog.Dispose();
             }
         }

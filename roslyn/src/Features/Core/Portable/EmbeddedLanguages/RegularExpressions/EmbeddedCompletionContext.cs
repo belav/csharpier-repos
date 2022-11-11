@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                 RegexEmbeddedLanguage language,
                 CompletionContext context,
                 RegexTree tree,
-                SyntaxToken stringToken)
+                SyntaxToken stringToken
+            )
             {
                 _language = language;
                 _context = context;
@@ -42,12 +43,15 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             }
 
             public void AddIfMissing(
-                string displayText, string suffix, string description,
-                RegexNode parentOpt, int? positionOffset = null, string insertionText = null)
+                string displayText,
+                string suffix,
+                string description,
+                RegexNode parentOpt,
+                int? positionOffset = null,
+                string insertionText = null
+            )
             {
-                var replacementStart = parentOpt != null
-                    ? parentOpt.GetSpan().Start
-                    : Position;
+                var replacementStart = parentOpt != null ? parentOpt.GetSpan().Start : Position;
 
                 var replacementSpan = TextSpan.FromBounds(replacementStart, Position);
                 var newPosition = replacementStart + positionOffset;
@@ -60,11 +64,17 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
                     newPosition += escapedInsertionText.Length - insertionText.Length;
                 }
 
-                AddIfMissing(new RegexItem(
-                    displayText, suffix, description,
-                    CompletionChange.Create(
-                        new TextChange(replacementSpan, escapedInsertionText),
-                        newPosition)));
+                AddIfMissing(
+                    new RegexItem(
+                        displayText,
+                        suffix,
+                        description,
+                        CompletionChange.Create(
+                            new TextChange(replacementSpan, escapedInsertionText),
+                            newPosition
+                        )
+                    )
+                );
             }
 
             public void AddIfMissing(RegexItem item)

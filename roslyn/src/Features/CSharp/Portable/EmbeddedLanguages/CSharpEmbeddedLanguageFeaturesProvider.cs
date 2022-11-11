@@ -11,17 +11,22 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.Features.EmbeddedLanguages
 {
-    [ExportLanguageService(typeof(IEmbeddedLanguagesProvider), LanguageNames.CSharp, ServiceLayer.Desktop), Shared]
+    [
+        ExportLanguageService(
+            typeof(IEmbeddedLanguagesProvider),
+            LanguageNames.CSharp,
+            ServiceLayer.Desktop
+        ),
+        Shared
+    ]
     internal class CSharpEmbeddedLanguageFeaturesProvider : AbstractEmbeddedLanguageFeaturesProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEmbeddedLanguageFeaturesProvider()
-            : base(CSharpEmbeddedLanguagesProvider.Info)
-        {
-        }
+        public CSharpEmbeddedLanguageFeaturesProvider() : base(CSharpEmbeddedLanguagesProvider.Info)
+        { }
 
-        public override string EscapeText(string text, SyntaxToken token)
-            => EmbeddedLanguageUtilities.EscapeText(text, token);
+        public override string EscapeText(string text, SyntaxToken token) =>
+            EmbeddedLanguageUtilities.EscapeText(text, token);
     }
 }

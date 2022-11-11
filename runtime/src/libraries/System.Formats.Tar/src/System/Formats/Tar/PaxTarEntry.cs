@@ -16,9 +16,7 @@ namespace System.Formats.Tar
 
         // Constructor called when reading a TarEntry from a TarReader.
         internal PaxTarEntry(TarHeader header, TarReader readerOfOrigin)
-            : base(header, readerOfOrigin, TarEntryFormat.Pax)
-        {
-        }
+            : base(header, readerOfOrigin, TarEntryFormat.Pax) { }
 
         /// <summary>
         /// Initializes a new <see cref="PaxTarEntry"/> instance with the specified entry type, entry name, and the default extended attributes.
@@ -88,8 +86,11 @@ namespace System.Formats.Tar
         /// <exception cref="ArgumentException"><para><paramref name="entryName"/> is empty.</para>
         /// <para>-or-</para>
         /// <para><paramref name="entryType"/> is not supported in the specified format.</para></exception>
-        public PaxTarEntry(TarEntryType entryType, string entryName, IEnumerable<KeyValuePair<string, string>> extendedAttributes)
-            : base(entryType, entryName, TarEntryFormat.Pax, isGea: false)
+        public PaxTarEntry(
+            TarEntryType entryType,
+            string entryName,
+            IEnumerable<KeyValuePair<string, string>> extendedAttributes
+        ) : base(entryType, entryName, TarEntryFormat.Pax, isGea: false)
         {
             ArgumentNullException.ThrowIfNull(extendedAttributes);
 
@@ -106,8 +107,7 @@ namespace System.Formats.Tar
         /// <exception cref="ArgumentException"><para><paramref name="other"/> is a <see cref="PaxGlobalExtendedAttributesTarEntry"/> and cannot be converted.</para>
         /// <para>-or-</para>
         /// <para>The entry type of <paramref name="other"/> is not supported for conversion to the PAX format.</para></exception>
-        public PaxTarEntry(TarEntry other)
-            : base(other, TarEntryFormat.Pax)
+        public PaxTarEntry(TarEntry other) : base(other, TarEntryFormat.Pax)
         {
             if (other._header._format is TarEntryFormat.Ustar or TarEntryFormat.Pax)
             {
@@ -122,8 +122,10 @@ namespace System.Formats.Tar
             {
                 if (other is GnuTarEntry gnuOther)
                 {
-                    _header.ExtendedAttributes[TarHeader.PaxEaATime] = TarHelpers.GetTimestampStringFromDateTimeOffset(gnuOther.AccessTime);
-                    _header.ExtendedAttributes[TarHeader.PaxEaCTime] = TarHelpers.GetTimestampStringFromDateTimeOffset(gnuOther.ChangeTime);
+                    _header.ExtendedAttributes[TarHeader.PaxEaATime] =
+                        TarHelpers.GetTimestampStringFromDateTimeOffset(gnuOther.AccessTime);
+                    _header.ExtendedAttributes[TarHeader.PaxEaCTime] =
+                        TarHelpers.GetTimestampStringFromDateTimeOffset(gnuOther.ChangeTime);
                 }
             }
 
@@ -148,10 +150,12 @@ namespace System.Formats.Tar
         /// <item>File length, under the name <c>size</c>, as an <see cref="int"/>, if the string representation of the number is larger than 12 bytes.</item>
         /// </list>
         /// </remarks>
-        public IReadOnlyDictionary<string, string> ExtendedAttributes => _readOnlyExtendedAttributes ??= _header.ExtendedAttributes.AsReadOnly();
+        public IReadOnlyDictionary<string, string> ExtendedAttributes =>
+            _readOnlyExtendedAttributes ??= _header.ExtendedAttributes.AsReadOnly();
 
         // Determines if the current instance's entry type supports setting a data stream.
-        internal override bool IsDataStreamSetterSupported() => EntryType == TarEntryType.RegularFile;
+        internal override bool IsDataStreamSetterSupported() =>
+            EntryType == TarEntryType.RegularFile;
 
         // Checks if the extended attributes dictionary contains 'atime' and 'ctime'.
         // If any of them is not found, it is added with the value of either the current entry's 'mtime',
@@ -164,7 +168,9 @@ namespace System.Formats.Tar
 
             if (!containsATime || !containsCTime)
             {
-                string secondsFromEpochString = TarHelpers.GetTimestampStringFromDateTimeOffset(useMTime ? _header._mTime : DateTimeOffset.UtcNow);
+                string secondsFromEpochString = TarHelpers.GetTimestampStringFromDateTimeOffset(
+                    useMTime ? _header._mTime : DateTimeOffset.UtcNow
+                );
 
                 if (!containsATime)
                 {

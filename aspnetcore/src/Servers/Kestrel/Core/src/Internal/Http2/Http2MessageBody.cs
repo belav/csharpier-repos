@@ -15,8 +15,7 @@ internal sealed class Http2MessageBody : MessageBody
     private readonly Http2Stream _context;
     private ReadResult _readResult;
 
-    public Http2MessageBody(Http2Stream context)
-        : base(context)
+    public Http2MessageBody(Http2Stream context) : base(context)
     {
         _context = context;
         ExtendedConnect = _context.IsExtendedConnectRequest;
@@ -29,7 +28,10 @@ internal sealed class Http2MessageBody : MessageBody
 
         if (_context.RequestHeaders.ContentLength > maxRequestBodySize)
         {
-            KestrelBadHttpRequestException.Throw(RequestRejectionReason.RequestBodyTooLarge, maxRequestBodySize.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+            KestrelBadHttpRequestException.Throw(
+                RequestRejectionReason.RequestBodyTooLarge,
+                maxRequestBodySize.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)
+            );
         }
     }
 
@@ -94,7 +96,9 @@ internal sealed class Http2MessageBody : MessageBody
     }
 
     [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<>))]
-    public override async ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
+    public override async ValueTask<ReadResult> ReadAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         await TryStartAsync();
 

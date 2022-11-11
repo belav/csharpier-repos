@@ -8,8 +8,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters;
 /// </summary>
 public class InputFormatterResult
 {
-    private static readonly InputFormatterResult _failure = new InputFormatterResult(hasError: true);
-    private static readonly InputFormatterResult _noValue = new InputFormatterResult(hasError: false);
+    private static readonly InputFormatterResult _failure = new InputFormatterResult(
+        hasError: true
+    );
+    private static readonly InputFormatterResult _noValue = new InputFormatterResult(
+        hasError: false
+    );
     private static readonly Task<InputFormatterResult> _failureAsync = Task.FromResult(_failure);
     private static readonly Task<InputFormatterResult> _noValueAsync = Task.FromResult(_noValue);
 

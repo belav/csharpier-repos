@@ -31,10 +31,11 @@ public static class OutputCacheServiceCollectionExtensions
         services.TryAddSingleton<IOutputCacheStore>(sp =>
         {
             var outputCacheOptions = sp.GetRequiredService<IOptions<OutputCacheOptions>>();
-            return new MemoryOutputCacheStore(new MemoryCache(new MemoryCacheOptions
-            {
-                SizeLimit = outputCacheOptions.Value.SizeLimit
-            }));
+            return new MemoryOutputCacheStore(
+                new MemoryCache(
+                    new MemoryCacheOptions { SizeLimit = outputCacheOptions.Value.SizeLimit }
+                )
+            );
         });
         return services;
     }
@@ -45,7 +46,10 @@ public static class OutputCacheServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
     /// <param name="configureOptions">A delegate to configure the <see cref="OutputCacheOptions"/>.</param>
     /// <returns></returns>
-    public static IServiceCollection AddOutputCache(this IServiceCollection services, Action<OutputCacheOptions> configureOptions)
+    public static IServiceCollection AddOutputCache(
+        this IServiceCollection services,
+        Action<OutputCacheOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configureOptions);

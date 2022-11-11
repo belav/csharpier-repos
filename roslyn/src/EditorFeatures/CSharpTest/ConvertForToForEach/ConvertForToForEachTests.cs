@@ -21,13 +21,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertForToForEach)]
     public class ConvertForToForEachTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpConvertForToForEachCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertForToForEachCodeRefactoringProvider();
 
-        private readonly CodeStyleOption2<bool> onWithSilent = new CodeStyleOption2<bool>(true, NotificationOption2.Silent);
+        private readonly CodeStyleOption2<bool> onWithSilent = new CodeStyleOption2<bool>(
+            true,
+            NotificationOption2.Silent
+        );
 
-        private OptionsCollection ImplicitTypeEverywhere()
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection ImplicitTypeEverywhere() =>
+            new OptionsCollection(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, onWithSilent },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithSilent },
@@ -38,7 +43,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForToForEach
         public async Task TestArray1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -50,7 +55,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -61,14 +66,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWarnIfCrossesFunctionBoundary()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -83,7 +89,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -97,14 +103,15 @@ class C
             };
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWarnIfCollectionPotentiallyMutated1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -118,7 +125,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -131,14 +138,15 @@ class C
             {|Warning:list|}.Add(null);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWarnIfCollectionPotentiallyMutated2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -152,7 +160,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -165,14 +173,15 @@ class C
             {|Warning:list|} = null;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNoWarnIfCollectionPropertyAccess()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -186,7 +195,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -199,14 +208,15 @@ class C
             Console.WriteLine(list.Count);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNoWarnIfDoesNotCrossFunctionBoundary()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -221,7 +231,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -235,14 +245,15 @@ class C
             }
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMultipleReferences()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -255,7 +266,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -267,14 +278,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestEmbeddedStatement()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -284,7 +296,7 @@ class C
             Console.WriteLine(array[i]);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -293,14 +305,15 @@ class C
         foreach (string {|Rename:v|} in array)
             Console.WriteLine(v);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestPostIncrement()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -312,7 +325,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -323,14 +336,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestArrayPlusEqualsIncrementor()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -342,7 +356,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -353,14 +367,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestBeforeKeyword()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -372,7 +387,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -383,14 +398,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingAfterOpenParen()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -401,14 +417,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestInParentheses()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -420,7 +437,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -431,14 +448,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingBeforeCloseParen()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -449,14 +467,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(35525, "https://github.com/dotnet/roslyn/issues/35525")]
         public async Task TestInParentheses2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -468,7 +487,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -479,14 +498,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAtEndOfFor()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -498,7 +518,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -509,14 +529,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestForSelected()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -528,7 +549,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -539,14 +560,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestBeforeOpenParen()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -558,7 +580,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -569,14 +591,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAfterCloseParen()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -588,7 +611,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -599,14 +622,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithoutIncrementor()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -617,14 +641,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithoutIncorrectIncrementor1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -635,14 +660,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithoutIncorrectIncrementor2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -653,14 +679,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithoutCondition()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -671,14 +698,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithIncorrectCondition1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -689,14 +717,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithIncorrectCondition2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -707,14 +736,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithoutInitializer()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -725,14 +755,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithInitializerOfVariableOutsideLoop()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -744,14 +775,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithUninitializedVariable()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -762,14 +794,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotStartingAtZero()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -780,14 +813,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithMultipleVariables()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -798,14 +832,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestList1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -818,7 +853,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -830,14 +865,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestChooseNameFromDeclarationStatement()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -851,7 +887,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -863,14 +899,15 @@ class C
             Console.WriteLine(val);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestIgnoreFormattingForReferences()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -884,7 +921,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -896,14 +933,15 @@ class C
             Console.WriteLine(val);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestChooseNameFromDeclarationStatement_PreserveComments()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -919,7 +957,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -933,14 +971,15 @@ class C
             Console.WriteLine(val);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestChooseNameFromDeclarationStatement_PreserveDirectives()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -958,7 +997,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class C
@@ -974,14 +1013,15 @@ class C
 #endif
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingIfVariableUsedNotForIndexing()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -992,14 +1032,15 @@ class C
             Console.WriteLine(i);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingIfVariableUsedForIndexingNonCollection()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1010,14 +1051,15 @@ class C
             Console.WriteLine(other[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWarningIfCollectionWrittenTo()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1029,7 +1071,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1040,14 +1082,15 @@ class C
             {|Warning:v|} = 1;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task UseVarIfPreferred1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1059,7 +1102,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1070,14 +1113,16 @@ class C
             Console.WriteLine(v);
         }
     }
-}", options: ImplicitTypeEverywhere());
+}",
+                options: ImplicitTypeEverywhere()
+            );
         }
 
         [Fact]
         public async Task TestDifferentIndexerAndEnumeratorType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class MyList
 {
@@ -1099,7 +1144,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class MyList
 {
@@ -1120,14 +1165,16 @@ class C
             Console.WriteLine(v);
         }
     }
-}", options: ImplicitTypeEverywhere());
+}",
+                options: ImplicitTypeEverywhere()
+            );
         }
 
         [Fact]
         public async Task TestSameIndexerAndEnumeratorType()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class MyList
 {
@@ -1149,7 +1196,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class MyList
 {
@@ -1170,14 +1217,16 @@ class C
             Console.WriteLine(v);
         }
     }
-}", options: ImplicitTypeEverywhere());
+}",
+                options: ImplicitTypeEverywhere()
+            );
         }
 
         [Fact]
         public async Task TestTrivia()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1191,7 +1240,7 @@ class C
         } // trivia 6
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1204,14 +1253,15 @@ class C
             Console.WriteLine(v);
         } // trivia 6
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotWithDeconstruction()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1222,14 +1272,15 @@ class C
             Console.WriteLine(array[i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMultidimensionalArray1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1240,14 +1291,15 @@ class C
             Console.WriteLine(array[i, 0]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMultidimensionalArray2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1258,14 +1310,15 @@ class C
             Console.WriteLine(array[i, i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestJaggedArray1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1277,7 +1330,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1288,14 +1341,15 @@ class C
             Console.WriteLine(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestJaggedArray2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1307,7 +1361,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1318,14 +1372,15 @@ class C
             Console.WriteLine(v[0]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestJaggedArray3()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1341,7 +1396,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1355,14 +1410,15 @@ class C
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestJaggedArray4()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1377,7 +1433,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1391,14 +1447,15 @@ class C
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestJaggedArray5()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1413,7 +1470,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1427,14 +1484,15 @@ class C
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestJaggedArray6()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1445,14 +1503,15 @@ class C
             Console.WriteLine(array[i][i]);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDoesNotUseLocalFunctionName()
         {
             await TestInRegularAndScript1Async(
-    @"using System;
+                @"using System;
 
 class C
 {
@@ -1466,7 +1525,7 @@ class C
         void v() { }
     }
 }",
-    @"using System;
+                @"using System;
 
 class C
 {
@@ -1479,14 +1538,15 @@ class C
 
         void v() { }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUsesLocalFunctionParameterName()
         {
             await TestInRegularAndScript1Async(
-    @"using System;
+                @"using System;
 
 class C
 {
@@ -1502,7 +1562,7 @@ class C
         }
     }
 }",
-    @"using System;
+                @"using System;
 
 class C
 {
@@ -1517,14 +1577,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDoesNotUseLambdaParameterWithCSharpLessThan8()
         {
             await TestInRegularAndScript1Async(
-    @"using System;
+                @"using System;
 
 class C
 {
@@ -1538,7 +1599,7 @@ class C
         Action<int> myLambda = v => { };
     }
 }",
-    @"using System;
+                @"using System;
 
 class C
 {
@@ -1551,14 +1612,16 @@ class C
 
         Action<int> myLambda = v => { };
     }
-}", parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_3)));
+}",
+                parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp7_3))
+            );
         }
 
         [Fact]
         public async Task TestUsesLambdaParameterNameInCSharp8()
         {
             await TestInRegularAndScript1Async(
-    @"using System;
+                @"using System;
 
 class C
 {
@@ -1572,7 +1635,7 @@ class C
         Action<int> myLambda = v => { };
     }
 }",
-    @"using System;
+                @"using System;
 
 class C
 {
@@ -1585,14 +1648,16 @@ class C
 
         Action<int> myLambda = v => { };
     }
-}", parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp8)));
+}",
+                parameters: new TestParameters(new CSharpParseOptions(LanguageVersion.CSharp8))
+            );
         }
 
         [Fact]
         public async Task TestNotWhenIteratingDifferentLists()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 using System.Collection.Generic;
 
 class Item { public string Value; }
@@ -1609,7 +1674,8 @@ class C
             first.list[i].Value = second.list[i].Value;
         }
     }
-}");
+}"
+            );
         }
     }
 }

@@ -27,10 +27,17 @@ internal class UnitTestGeneratorOrganizeImportsAccessor
         _globalOptions = globalOptions;
     }
 
-    public async Task<Document> OrganizeImportsAsync(Document document, CancellationToken cancellationToken)
+    public async Task<Document> OrganizeImportsAsync(
+        Document document,
+        CancellationToken cancellationToken
+    )
     {
         var organizeImportsService = document.GetRequiredLanguageService<IOrganizeImportsService>();
-        var options = await document.GetOrganizeImportsOptionsAsync(_globalOptions, cancellationToken).ConfigureAwait(false);
-        return await organizeImportsService.OrganizeImportsAsync(document, options, cancellationToken).ConfigureAwait(false);
+        var options = await document
+            .GetOrganizeImportsOptionsAsync(_globalOptions, cancellationToken)
+            .ConfigureAwait(false);
+        return await organizeImportsService
+            .OrganizeImportsAsync(document, options, cancellationToken)
+            .ConfigureAwait(false);
     }
 }

@@ -42,9 +42,9 @@ namespace Internal.CommandLine
 
         private bool Equals(ArgumentToken other)
         {
-            return string.Equals(Modifier, other.Modifier) &&
-                   string.Equals(Name, other.Name) &&
-                   string.Equals(Value, other.Value);
+            return string.Equals(Modifier, other.Modifier)
+                && string.Equals(Name, other.Name)
+                && string.Equals(Value, other.Value);
         }
 
         public override bool Equals(object obj)

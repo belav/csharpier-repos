@@ -10,9 +10,12 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
     {
         /// <summary>
         /// Uses various heuristics to try to find the implementation assembly for a reference assembly without
-        /// loading 
+        /// loading
         /// </summary>
-        bool TryFindImplementationAssemblyPath(string referencedDllPath, [NotNullWhen(true)] out string? implementationDllPath);
+        bool TryFindImplementationAssemblyPath(
+            string referencedDllPath,
+            [NotNullWhen(true)] out string? implementationDllPath
+        );
 
         /// <summary>
         /// Given an implementation assembly path, follows any type forwards that might be in place
@@ -23,7 +26,11 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
         /// To avoid mutiple reads of a single DLL this method caches all type forwards found in any
         /// DLL it loads.
         /// </remarks>
-        string? FollowTypeForwards(ISymbol symbol, string dllPath, IPdbSourceDocumentLogger? logger);
+        string? FollowTypeForwards(
+            ISymbol symbol,
+            string dllPath,
+            IPdbSourceDocumentLogger? logger
+        );
 
         /// <summary>
         /// Clears any cached type forward information

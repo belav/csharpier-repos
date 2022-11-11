@@ -20,19 +20,28 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateDeconstructMethod
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.GenerateDeconstructMethod), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.GenerateDeconstructMethod
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.GenerateEnumMember)]
     internal class GenerateDeconstructMethodCodeFixProvider : CodeFixProvider
     {
         private const string CS8129 = nameof(CS8129); // No suitable Deconstruct instance or extension method was found...
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public GenerateDeconstructMethodCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public GenerateDeconstructMethodCodeFixProvider() { }
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CS8129);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS8129);
 
         public override FixAllProvider GetFixAllProvider()
         {
@@ -54,16 +63,26 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateDeconstructMethod
             var span = context.Span;
             var token = root.FindToken(span.Start);
 
-            var deconstruction = token.GetAncestors<SyntaxNode>()
-                .FirstOrDefault(n => n.Kind() is SyntaxKind.SimpleAssignmentExpression or SyntaxKind.ForEachVariableStatement);
+            var deconstruction = token
+                .GetAncestors<SyntaxNode>()
+                .FirstOrDefault(
+                    n =>
+                        n.Kind()
+                            is SyntaxKind.SimpleAssignmentExpression
+                                or SyntaxKind.ForEachVariableStatement
+                );
 
             if (deconstruction is null)
             {
-                Debug.Fail("The diagnostic can only be produced in context of a deconstruction-assignment or deconstruction-foreach");
+                Debug.Fail(
+                    "The diagnostic can only be produced in context of a deconstruction-assignment or deconstruction-foreach"
+                );
                 return;
             }
 
-            var model = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var model = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             DeconstructionInfo info;
             ITypeSymbol type;
@@ -96,7 +115,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.GenerateDeconstructMethod
             }
 
             var service = document.GetLanguageService<IGenerateDeconstructMemberService>();
-            var codeActions = await service.GenerateDeconstructMethodAsync(document, target, (INamedTypeSymbol)type, context.Options, cancellationToken).ConfigureAwait(false);
+            var codeActions = await service
+                .GenerateDeconstructMethodAsync(
+                    document,
+                    target,
+                    (INamedTypeSymbol)type,
+                    context.Options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             Debug.Assert(!codeActions.IsDefault);
             context.RegisterFixes(codeActions, context.Diagnostics);

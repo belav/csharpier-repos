@@ -20,9 +20,17 @@ namespace ILCompiler.DependencyAnalysis
         private readonly ExternalReferencesTableNode _externalReferences;
         private readonly InteropStateManager _interopStateManager;
 
-        public StructMarshallingStubMapNode(ExternalReferencesTableNode externalReferences, InteropStateManager interopStateManager)
+        public StructMarshallingStubMapNode(
+            ExternalReferencesTableNode externalReferences,
+            InteropStateManager interopStateManager
+        )
         {
-            _endSymbol = new ObjectAndOffsetSymbolNode(this, 0, "__struct_marshalling_stub_map_End", true);
+            _endSymbol = new ObjectAndOffsetSymbolNode(
+                this,
+                0,
+                "__struct_marshalling_stub_map_End",
+                true
+            );
             _externalReferences = externalReferences;
             _interopStateManager = interopStateManager;
         }
@@ -33,6 +41,7 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__struct_marshalling_stub_map");
         }
+
         public int Offset => 0;
         public override bool IsShareable => false;
 
@@ -40,13 +49,19 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool StaticDependenciesAreComputed => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             var writer = new NativeWriter();
             var typeMapHashTable = new VertexHashtable();
@@ -74,9 +89,34 @@ namespace ILCompiler.DependencyAnalysis
                 if (MarshalHelpers.IsStructMarshallingRequired(structType))
                 {
                     Vertex thunks = writer.GetTuple(
-                        writer.GetUnsignedConstant(_externalReferences.GetIndex(factory.MethodEntrypoint(_interopStateManager.GetStructMarshallingManagedToNativeThunk(structType)))),
-                        writer.GetUnsignedConstant(_externalReferences.GetIndex(factory.MethodEntrypoint(_interopStateManager.GetStructMarshallingNativeToManagedThunk(structType)))),
-                        writer.GetUnsignedConstant(_externalReferences.GetIndex(factory.MethodEntrypoint(_interopStateManager.GetStructMarshallingCleanupThunk(structType)))));
+                        writer.GetUnsignedConstant(
+                            _externalReferences.GetIndex(
+                                factory.MethodEntrypoint(
+                                    _interopStateManager.GetStructMarshallingManagedToNativeThunk(
+                                        structType
+                                    )
+                                )
+                            )
+                        ),
+                        writer.GetUnsignedConstant(
+                            _externalReferences.GetIndex(
+                                factory.MethodEntrypoint(
+                                    _interopStateManager.GetStructMarshallingNativeToManagedThunk(
+                                        structType
+                                    )
+                                )
+                            )
+                        ),
+                        writer.GetUnsignedConstant(
+                            _externalReferences.GetIndex(
+                                factory.MethodEntrypoint(
+                                    _interopStateManager.GetStructMarshallingCleanupThunk(
+                                        structType
+                                    )
+                                )
+                            )
+                        )
+                    );
 
                     uint size = (uint)nativeType.InstanceFieldSize.AsInt;
                     marshallingData = writer.GetTuple(writer.GetUnsignedConstant(size), thunks);
@@ -88,14 +128,18 @@ namespace ILCompiler.DependencyAnalysis
                     var row = writer.GetTuple(
                         writer.GetStringConstant(nativeType.Fields[i].Name),
                         writer.GetUnsignedConstant((uint)nativeType.Fields[i].Offset.AsInt)
-                        );
+                    );
 
-                    fieldOffsetData = (fieldOffsetData != null) ? writer.GetTuple(fieldOffsetData, row) : row;
+                    fieldOffsetData =
+                        (fieldOffsetData != null) ? writer.GetTuple(fieldOffsetData, row) : row;
                 }
 
-                uint mask = (uint)((marshallingData != null) ? InteropDataConstants.HasMarshallers : 0) |
-                            (uint)(nativeType.HasInvalidLayout ? InteropDataConstants.HasInvalidLayout : 0) |
-                            (uint)(nativeType.Fields.Length << InteropDataConstants.FieldCountShift);
+                uint mask =
+                    (uint)((marshallingData != null) ? InteropDataConstants.HasMarshallers : 0)
+                    | (uint)(
+                        nativeType.HasInvalidLayout ? InteropDataConstants.HasInvalidLayout : 0
+                    )
+                    | (uint)(nativeType.Fields.Length << InteropDataConstants.FieldCountShift);
 
                 Vertex data = writer.GetUnsignedConstant(mask);
                 if (marshallingData != null)
@@ -105,7 +149,9 @@ namespace ILCompiler.DependencyAnalysis
                     data = writer.GetTuple(data, fieldOffsetData);
 
                 Vertex vertex = writer.GetTuple(
-                    writer.GetUnsignedConstant(_externalReferences.GetIndex(factory.NecessaryTypeSymbol(structType))),
+                    writer.GetUnsignedConstant(
+                        _externalReferences.GetIndex(factory.NecessaryTypeSymbol(structType))
+                    ),
                     data
                 );
 
@@ -117,7 +163,12 @@ namespace ILCompiler.DependencyAnalysis
 
             _endSymbol.SetSymbolOffset(hashTableBytes.Length);
 
-            return new ObjectData(hashTableBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this, _endSymbol });
+            return new ObjectData(
+                hashTableBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this, _endSymbol }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

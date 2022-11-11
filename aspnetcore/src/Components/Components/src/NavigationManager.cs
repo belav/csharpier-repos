@@ -32,7 +32,8 @@ public abstract class NavigationManager
 
     private EventHandler<LocationChangedEventArgs>? _locationChanged;
 
-    private readonly List<Func<LocationChangingContext, ValueTask>> _locationChangingHandlers = new();
+    private readonly List<Func<LocationChangingContext, ValueTask>> _locationChangingHandlers =
+        new();
 
     private CancellationTokenSource? _locationChangingCts;
 
@@ -103,7 +104,10 @@ public abstract class NavigationManager
     /// <param name="uri">The destination URI. This can be absolute, or relative to the base URI
     /// (as returned by <see cref="BaseUri"/>).</param>
     /// <param name="forceLoad">If true, bypasses client-side routing and forces the browser to load the new page from the server, whether or not the URI would normally be handled by the client-side router.</param>
-    public void NavigateTo(string uri, bool forceLoad) // This overload is for binary back-compat with < 6.0
+    public void NavigateTo(
+        string uri,
+        bool forceLoad
+    ) // This overload is for binary back-compat with < 6.0
         => NavigateTo(uri, forceLoad, replace: false);
 
     /// <summary>
@@ -119,11 +123,10 @@ public abstract class NavigationManager
 
         if (replace)
         {
-            NavigateToCore(uri, new NavigationOptions
-            {
-                ForceLoad = forceLoad,
-                ReplaceHistoryEntry = replace,
-            });
+            NavigateToCore(
+                uri,
+                new NavigationOptions { ForceLoad = forceLoad, ReplaceHistoryEntry = replace, }
+            );
         }
         else
         {
@@ -155,8 +158,8 @@ public abstract class NavigationManager
     // already override this, so the framework needs to keep using it for the cases when only pre-6.0 options are used.
     // However, for anyone implementing a new NavigationManager post-6.0, we don't want them to have to override this
     // overload any more, so there's now a default implementation that calls the updated overload.
-    protected virtual void NavigateToCore(string uri, bool forceLoad)
-        => NavigateToCore(uri, new NavigationOptions { ForceLoad = forceLoad });
+    protected virtual void NavigateToCore(string uri, bool forceLoad) =>
+        NavigateToCore(uri, new NavigationOptions { ForceLoad = forceLoad });
 
     /// <summary>
     /// Navigates to the specified URI.
@@ -165,7 +168,9 @@ public abstract class NavigationManager
     /// (as returned by <see cref="BaseUri"/>).</param>
     /// <param name="options">Provides additional <see cref="NavigationOptions"/>.</param>
     protected virtual void NavigateToCore(string uri, NavigationOptions options) =>
-        throw new NotImplementedException($"The type {GetType().FullName} does not support supplying {nameof(NavigationOptions)}. To add support, that type should override {nameof(NavigateToCore)}(string uri, {nameof(NavigationOptions)} options).");
+        throw new NotImplementedException(
+            $"The type {GetType().FullName} does not support supplying {nameof(NavigationOptions)}. To add support, that type should override {nameof(NavigateToCore)}(string uri, {nameof(NavigationOptions)} options)."
+        );
 
     /// <summary>
     /// Called to initialize BaseURI and current URI before these values are used for the first time.
@@ -200,9 +205,7 @@ public abstract class NavigationManager
     /// Allows derived classes to lazily self-initialize. Implementations that support lazy-initialization should override
     /// this method and call <see cref="Initialize(string, string)" />.
     /// </summary>
-    protected virtual void EnsureInitialized()
-    {
-    }
+    protected virtual void EnsureInitialized() { }
 
     /// <summary>
     /// Converts a relative URI into an absolute one (by resolving it
@@ -271,11 +274,15 @@ public abstract class NavigationManager
                 new LocationChangedEventArgs(_uri!, isInterceptedLink)
                 {
                     HistoryEntryState = HistoryEntryState
-                });
+                }
+            );
         }
         catch (Exception ex)
         {
-            throw new LocationChangeException("An exception occurred while dispatching a location changed event.", ex);
+            throw new LocationChangeException(
+                "An exception occurred while dispatching a location changed event.",
+                ex
+            );
         }
     }
 
@@ -286,7 +293,11 @@ public abstract class NavigationManager
     /// <param name="state">The state associated with the target history entry.</param>
     /// <param name="isNavigationIntercepted">Whether this navigation was intercepted from a link.</param>
     /// <returns>A <see cref="ValueTask{TResult}"/> representing the completion of the operation. If the result is <see langword="true"/>, the navigation should continue.</returns>
-    protected async ValueTask<bool> NotifyLocationChangingAsync(string uri, string? state, bool isNavigationIntercepted)
+    protected async ValueTask<bool> NotifyLocationChangingAsync(
+        string uri,
+        string? state,
+        bool isNavigationIntercepted
+    )
     {
         _locationChangingCts?.Cancel();
         _locationChangingCts = null;
@@ -315,7 +326,10 @@ public abstract class NavigationManager
         {
             if (handlerCount == 1)
             {
-                var handlerTask = InvokeLocationChangingHandlerAsync(_locationChangingHandlers[0], context);
+                var handlerTask = InvokeLocationChangingHandlerAsync(
+                    _locationChangingHandlers[0],
+                    context
+                );
 
                 if (handlerTask.IsFaulted)
                 {
@@ -335,7 +349,9 @@ public abstract class NavigationManager
             }
             else
             {
-                var locationChangingHandlersCopy = ArrayPool<Func<LocationChangingContext, ValueTask>>.Shared.Rent(handlerCount);
+                var locationChangingHandlersCopy = ArrayPool<
+                    Func<LocationChangingContext, ValueTask>
+                >.Shared.Rent(handlerCount);
 
                 try
                 {
@@ -345,7 +361,10 @@ public abstract class NavigationManager
 
                     for (var i = 0; i < handlerCount; i++)
                     {
-                        var handlerTask = InvokeLocationChangingHandlerAsync(locationChangingHandlersCopy[i], context);
+                        var handlerTask = InvokeLocationChangingHandlerAsync(
+                            locationChangingHandlersCopy[i],
+                            context
+                        );
 
                         if (handlerTask.IsFaulted)
                         {
@@ -363,7 +382,8 @@ public abstract class NavigationManager
 
                     while (locationChangingTasks.Count != 0)
                     {
-                        var completedHandlerTask = await Task.WhenAny(locationChangingTasks).WaitAsync(cancellationToken);
+                        var completedHandlerTask = await Task.WhenAny(locationChangingTasks)
+                            .WaitAsync(cancellationToken);
 
                         if (completedHandlerTask.IsFaulted)
                         {
@@ -381,7 +401,9 @@ public abstract class NavigationManager
                 }
                 finally
                 {
-                    ArrayPool<Func<LocationChangingContext, ValueTask>>.Shared.Return(locationChangingHandlersCopy);
+                    ArrayPool<Func<LocationChangingContext, ValueTask>>.Shared.Return(
+                        locationChangingHandlersCopy
+                    );
                 }
             }
 
@@ -410,7 +432,10 @@ public abstract class NavigationManager
         }
     }
 
-    private async ValueTask InvokeLocationChangingHandlerAsync(Func<LocationChangingContext, ValueTask> handler, LocationChangingContext context)
+    private async ValueTask InvokeLocationChangingHandlerAsync(
+        Func<LocationChangingContext, ValueTask> handler,
+        LocationChangingContext context
+    )
     {
         try
         {
@@ -431,8 +456,13 @@ public abstract class NavigationManager
     /// </summary>
     /// <param name="ex">The exception to handle.</param>
     /// <param name="context">The context passed to the handler.</param>
-    protected virtual void HandleLocationChangingHandlerException(Exception ex, LocationChangingContext context)
-        => throw new InvalidOperationException($"To support navigation locks, {GetType().Name} must override {nameof(HandleLocationChangingHandlerException)}");
+    protected virtual void HandleLocationChangingHandlerException(
+        Exception ex,
+        LocationChangingContext context
+    ) =>
+        throw new InvalidOperationException(
+            $"To support navigation locks, {GetType().Name} must override {nameof(HandleLocationChangingHandlerException)}"
+        );
 
     /// <summary>
     /// Sets whether navigation is currently locked. If it is, then implementations should not update <see cref="Uri"/> and call
@@ -440,15 +470,19 @@ public abstract class NavigationManager
     /// <see cref="NotifyLocationChangingAsync(string, string?, bool)"/>.
     /// </summary>
     /// <param name="value">Whether navigation is currently locked.</param>
-    protected virtual void SetNavigationLockState(bool value)
-        => throw new NotSupportedException($"To support navigation locks, {GetType().Name} must override {nameof(SetNavigationLockState)}");
+    protected virtual void SetNavigationLockState(bool value) =>
+        throw new NotSupportedException(
+            $"To support navigation locks, {GetType().Name} must override {nameof(SetNavigationLockState)}"
+        );
 
     /// <summary>
     /// Registers a handler to process incoming navigation events.
     /// </summary>
     /// <param name="locationChangingHandler">The handler to process incoming navigation events.</param>
     /// <returns>An <see cref="IDisposable"/> that can be disposed to unregister the location changing handler.</returns>
-    public IDisposable RegisterLocationChangingHandler(Func<LocationChangingContext, ValueTask> locationChangingHandler)
+    public IDisposable RegisterLocationChangingHandler(
+        Func<LocationChangingContext, ValueTask> locationChangingHandler
+    )
     {
         AssertInitialized();
 
@@ -464,11 +498,16 @@ public abstract class NavigationManager
         return new LocationChangingRegistration(locationChangingHandler, this);
     }
 
-    private void RemoveLocationChangingHandler(Func<LocationChangingContext, ValueTask> locationChangingHandler)
+    private void RemoveLocationChangingHandler(
+        Func<LocationChangingContext, ValueTask> locationChangingHandler
+    )
     {
         AssertInitialized();
 
-        if (_locationChangingHandlers.Remove(locationChangingHandler) && _locationChangingHandlers.Count == 0)
+        if (
+            _locationChangingHandlers.Remove(locationChangingHandler)
+            && _locationChangingHandlers.Count == 0
+        )
         {
             SetNavigationLockState(false);
         }
@@ -534,7 +573,10 @@ public abstract class NavigationManager
         private readonly Func<LocationChangingContext, ValueTask> _handler;
         private readonly NavigationManager _navigationManager;
 
-        public LocationChangingRegistration(Func<LocationChangingContext, ValueTask> handler, NavigationManager navigationManager)
+        public LocationChangingRegistration(
+            Func<LocationChangingContext, ValueTask> handler,
+            NavigationManager navigationManager
+        )
         {
             _handler = handler;
             _navigationManager = navigationManager;

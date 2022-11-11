@@ -37,8 +37,7 @@ namespace Microsoft.Interop
     /// </remarks>
     public abstract record MarshallingInfo
     {
-        protected MarshallingInfo()
-        { }
+        protected MarshallingInfo() { }
     }
 
     /// <summary>
@@ -75,17 +74,14 @@ namespace Microsoft.Interop
     /// <summary>
     /// Details that are required when scenario supports strings.
     /// </summary>
-    public record MarshallingInfoStringSupport(
-        CharEncoding CharEncoding
-    ) : MarshallingInfo;
+    public record MarshallingInfoStringSupport(CharEncoding CharEncoding) : MarshallingInfo;
 
     /// <summary>
     /// The provided type was determined to be an "unmanaged" type that can be passed as-is to native code.
     /// </summary>
     /// <param name="IsStrictlyBlittable">Indicates if the type is blittable as defined by the built-in .NET marshallers.</param>
-    public sealed record UnmanagedBlittableMarshallingInfo(
-        bool IsStrictlyBlittable
-    ) : MarshallingInfo;
+    public sealed record UnmanagedBlittableMarshallingInfo(bool IsStrictlyBlittable)
+        : MarshallingInfo;
 
     public abstract record CountInfo
     {
@@ -106,13 +102,15 @@ namespace Microsoft.Interop
         public const string ReturnValueElementName = "return-value";
     }
 
-    public sealed record SizeAndParamIndexInfo(int ConstSize, TypePositionInfo? ParamAtIndex) : CountInfo
+    public sealed record SizeAndParamIndexInfo(int ConstSize, TypePositionInfo? ParamAtIndex)
+        : CountInfo
     {
         public const int UnspecifiedConstSize = -1;
 
         public const TypePositionInfo UnspecifiedParam = null;
 
-        public static readonly SizeAndParamIndexInfo Unspecified = new(UnspecifiedConstSize, UnspecifiedParam);
+        public static readonly SizeAndParamIndexInfo Unspecified =
+            new(UnspecifiedConstSize, UnspecifiedParam);
     }
 
     /// <summary>
@@ -120,7 +118,8 @@ namespace Microsoft.Interop
     /// </summary>
     public record NativeMarshallingAttributeInfo(
         ManagedTypeInfo EntryPointType,
-        CustomTypeMarshallers Marshallers) : MarshallingInfo;
+        CustomTypeMarshallers Marshallers
+    ) : MarshallingInfo;
 
     /// <summary>
     /// Custom type marshalling via MarshalUsingAttribute or NativeMarshallingAttribute for a linear collection
@@ -129,9 +128,8 @@ namespace Microsoft.Interop
         ManagedTypeInfo EntryPointType,
         CustomTypeMarshallers Marshallers,
         CountInfo ElementCountInfo,
-        ManagedTypeInfo PlaceholderTypeParameter) : NativeMarshallingAttributeInfo(
-            EntryPointType,
-            Marshallers);
+        ManagedTypeInfo PlaceholderTypeParameter
+    ) : NativeMarshallingAttributeInfo(EntryPointType, Marshallers);
 
     /// <summary>
     /// Marshalling information is lacking because of support not because it is
@@ -142,5 +140,8 @@ namespace Microsoft.Interop
     /// An indication of "missing support" will trigger the fallback logic, which is
     /// the forwarder marshaller.
     /// </remarks>
-    public sealed record MissingSupportCollectionMarshallingInfo(CountInfo CountInfo, MarshallingInfo ElementMarshallingInfo) : MissingSupportMarshallingInfo;
+    public sealed record MissingSupportCollectionMarshallingInfo(
+        CountInfo CountInfo,
+        MarshallingInfo ElementMarshallingInfo
+    ) : MissingSupportMarshallingInfo;
 }

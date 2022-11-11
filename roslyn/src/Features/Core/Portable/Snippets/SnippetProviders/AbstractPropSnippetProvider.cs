@@ -25,15 +25,35 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
         /// Requires language specificity for the TypeSyntax as well as the
         /// type of the PropertySyntax.
         /// </summary>
-        protected abstract Task<SyntaxNode> GenerateSnippetSyntaxAsync(Document document, int position, CancellationToken cancellationToken);
+        protected abstract Task<SyntaxNode> GenerateSnippetSyntaxAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
 
-        protected override async Task<ImmutableArray<TextChange>> GenerateSnippetTextChangesAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override async Task<ImmutableArray<TextChange>> GenerateSnippetTextChangesAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var propertyDeclaration = await GenerateSnippetSyntaxAsync(document, position, cancellationToken).ConfigureAwait(false);
-            return ImmutableArray.Create(new TextChange(TextSpan.FromBounds(position, position), propertyDeclaration.NormalizeWhitespace().ToFullString()));
+            var propertyDeclaration = await GenerateSnippetSyntaxAsync(
+                    document,
+                    position,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            return ImmutableArray.Create(
+                new TextChange(
+                    TextSpan.FromBounds(position, position),
+                    propertyDeclaration.NormalizeWhitespace().ToFullString()
+                )
+            );
         }
 
-        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(ISyntaxFacts syntaxFacts)
+        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(
+            ISyntaxFacts syntaxFacts
+        )
         {
             return syntaxFacts.IsPropertyDeclaration;
         }

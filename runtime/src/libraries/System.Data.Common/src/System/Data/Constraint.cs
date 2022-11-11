@@ -88,7 +88,8 @@ namespace System.Data
         /// Gets the collection of customized user information.
         /// </summary>
         [Browsable(false)]
-        public PropertyCollection ExtendedProperties => _extendedProperties ??= new PropertyCollection();
+        public PropertyCollection ExtendedProperties =>
+            _extendedProperties ??= new PropertyCollection();
 
         internal abstract bool ContainsColumn(DataColumn column);
         internal abstract bool CanEnableConstraint();
@@ -105,7 +106,10 @@ namespace System.Data
         }
 
         internal abstract void CheckCanAddToCollection(ConstraintCollection constraint);
-        internal abstract bool CanBeRemovedFromCollection(ConstraintCollection constraint, bool fThrowException);
+        internal abstract bool CanBeRemovedFromCollection(
+            ConstraintCollection constraint,
+            bool fThrowException
+        );
 
         internal abstract void CheckConstraint(DataRow row, DataRowAction action);
         internal abstract void CheckState();

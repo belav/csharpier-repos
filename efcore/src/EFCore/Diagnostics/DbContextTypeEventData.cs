@@ -21,8 +21,8 @@ public class DbContextTypeEventData : EventData
     public DbContextTypeEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
-        Type contextType)
-        : base(eventDefinition, messageGenerator)
+        Type contextType
+    ) : base(eventDefinition, messageGenerator)
     {
         ContextType = contextType;
     }

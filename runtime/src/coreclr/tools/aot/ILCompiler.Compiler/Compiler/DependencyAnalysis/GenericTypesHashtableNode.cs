@@ -19,7 +19,12 @@ namespace ILCompiler.DependencyAnalysis
 
         public GenericTypesHashtableNode(ExternalReferencesTableNode externalReferences)
         {
-            _endSymbol = new ObjectAndOffsetSymbolNode(this, 0, "__generic_types_hashtable_End", true);
+            _endSymbol = new ObjectAndOffsetSymbolNode(
+                this,
+                0,
+                "__generic_types_hashtable_End",
+                true
+            );
             _externalReferences = externalReferences;
         }
 
@@ -33,13 +38,20 @@ namespace ILCompiler.DependencyAnalysis
         public override bool IsShareable => false;
         public override ObjectNodeSection Section => _externalReferences.Section;
         public override bool StaticDependenciesAreComputed => true;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             NativeWriter nativeWriter = new NativeWriter();
             VertexHashtable hashtable = new VertexHashtable();
@@ -56,7 +68,11 @@ namespace ILCompiler.DependencyAnalysis
             foreach (var type in factory.MetadataManager.GetTypesWithConstructedEETypes())
             {
                 // If this is an instantiated non-canonical generic type, add it to the generic instantiations hashtable
-                if (!type.HasInstantiation || type.IsGenericDefinition || type.IsCanonicalSubtype(CanonicalFormKind.Any))
+                if (
+                    !type.HasInstantiation
+                    || type.IsGenericDefinition
+                    || type.IsCanonicalSubtype(CanonicalFormKind.Any)
+                )
                     continue;
 
                 var typeSymbol = factory.NecessaryTypeSymbol(type);
@@ -70,7 +86,12 @@ namespace ILCompiler.DependencyAnalysis
 
             _endSymbol.SetSymbolOffset(streamBytes.Length);
 
-            return new ObjectData(streamBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this, _endSymbol });
+            return new ObjectData(
+                streamBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this, _endSymbol }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
     [Export(typeof(ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(PredefinedCommandHandlerNames.GoToDefinition)]
-    internal class GoToDefinitionCommandHandler :
-        ICommandHandler<GoToDefinitionCommandArgs>
+    internal class GoToDefinitionCommandHandler : ICommandHandler<GoToDefinitionCommandArgs>
     {
         private readonly IGlobalOptionService _globalOptionService;
         private readonly IThreadingContext _threadingContext;
@@ -37,12 +36,17 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
         private readonly IAsynchronousOperationListener _listener;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public GoToDefinitionCommandHandler(
             IGlobalOptionService globalOptionService,
             IThreadingContext threadingContext,
             IUIThreadOperationExecutor executor,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _globalOptionService = globalOptionService;
             _threadingContext = threadingContext;
@@ -52,15 +56,25 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
 
         public string DisplayName => EditorFeaturesResources.Go_to_Definition;
 
-        private static (Document?, IGoToDefinitionService?, IAsyncGoToDefinitionService?) GetDocumentAndService(ITextSnapshot snapshot)
+        private static (
+            Document?,
+            IGoToDefinitionService?,
+            IAsyncGoToDefinitionService?
+        ) GetDocumentAndService(ITextSnapshot snapshot)
         {
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
-            return (document, document?.GetLanguageService<IGoToDefinitionService>(), document?.GetLanguageService<IAsyncGoToDefinitionService>());
+            return (
+                document,
+                document?.GetLanguageService<IGoToDefinitionService>(),
+                document?.GetLanguageService<IAsyncGoToDefinitionService>()
+            );
         }
 
         public CommandState GetCommandState(GoToDefinitionCommandArgs args)
         {
-            var (_, service, asyncService) = GetDocumentAndService(args.SubjectBuffer.CurrentSnapshot);
+            var (_, service, asyncService) = GetDocumentAndService(
+                args.SubjectBuffer.CurrentSnapshot
+            );
             return service != null || asyncService != null
                 ? CommandState.Available
                 : CommandState.Unspecified;
@@ -69,7 +83,9 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
         public bool ExecuteCommand(GoToDefinitionCommandArgs args, CommandExecutionContext context)
         {
             var subjectBuffer = args.SubjectBuffer;
-            var (document, service, asyncService) = GetDocumentAndService(subjectBuffer.CurrentSnapshot);
+            var (document, service, asyncService) = GetDocumentAndService(
+                subjectBuffer.CurrentSnapshot
+            );
 
             if (service == null && asyncService == null)
                 return false;
@@ -91,7 +107,10 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             if (!caretPos.HasValue)
                 return false;
 
-            if (asyncService != null && _globalOptionService.GetOption(FeatureOnOffOptions.NavigateAsynchronously))
+            if (
+                asyncService != null
+                && _globalOptionService.GetOption(FeatureOnOffOptions.NavigateAsynchronously)
+            )
             {
                 // We're showing our own UI, ensure the editor doesn't show anything itself.
                 context.OperationContext.TakeOwnership();
@@ -104,7 +123,13 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             {
                 // The language either doesn't support async goto-def, or the option is disabled to navigate
                 // asynchronously.  So fall back to normal synchronous navigation.
-                var succeeded = ExecuteSynchronously(document, service, asyncService, caretPos.Value, context);
+                var succeeded = ExecuteSynchronously(
+                    document,
+                    service,
+                    asyncService,
+                    caretPos.Value,
+                    context
+                );
 
                 if (!succeeded)
                 {
@@ -122,9 +147,15 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             IGoToDefinitionService? service,
             IAsyncGoToDefinitionService? asyncService,
             int position,
-            CommandExecutionContext context)
+            CommandExecutionContext context
+        )
         {
-            using (context.OperationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Navigating_to_definition))
+            using (
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Navigating_to_definition
+                )
+            )
             {
                 var cancellationToken = context.OperationContext.UserCancellationToken;
                 if (asyncService != null)
@@ -132,10 +163,21 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
                     return _threadingContext.JoinableTaskFactory.Run(async () =>
                     {
                         // determine the location first.
-                        var (location, _) = await asyncService.FindDefinitionLocationAsync(
-                            document, position, includeType: true, cancellationToken).ConfigureAwait(false);
-                        return await location.TryNavigateToAsync(
-                            _threadingContext, NavigationOptions.Default, cancellationToken).ConfigureAwait(false);
+                        var (location, _) = await asyncService
+                            .FindDefinitionLocationAsync(
+                                document,
+                                position,
+                                includeType: true,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
+                        return await location
+                            .TryNavigateToAsync(
+                                _threadingContext,
+                                NavigationOptions.Default,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     });
                 }
                 else if (service != null)
@@ -151,34 +193,54 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
 
         private static void ReportFailure(Document document)
         {
-            var notificationService = document.Project.Solution.Services.GetRequiredService<INotificationService>();
+            var notificationService =
+                document.Project.Solution.Services.GetRequiredService<INotificationService>();
             notificationService.SendNotification(
-                FeaturesResources.Cannot_navigate_to_the_symbol_under_the_caret, EditorFeaturesResources.Go_to_Definition, NotificationSeverity.Information);
+                FeaturesResources.Cannot_navigate_to_the_symbol_under_the_caret,
+                EditorFeaturesResources.Go_to_Definition,
+                NotificationSeverity.Information
+            );
         }
 
         private async Task ExecuteAsynchronouslyAsync(
-            GoToDefinitionCommandArgs args, Document document, IAsyncGoToDefinitionService service, SnapshotPoint position)
+            GoToDefinitionCommandArgs args,
+            Document document,
+            IAsyncGoToDefinitionService service,
+            SnapshotPoint position
+        )
         {
             bool succeeded;
 
-            var indicatorFactory = document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+            var indicatorFactory =
+                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
 
             // TODO: prior logic was to get a tracking span of length 1 here.  Preserving that, though it's unclear if
             // that is necessary for the BWI to work properly.
             Contract.ThrowIfTrue(position.Snapshot.Length == 0);
-            var applicableToSpan = position < position.Snapshot.Length
-                ? new SnapshotSpan(position, position + 1)
-                : new SnapshotSpan(position - 1, position);
+            var applicableToSpan =
+                position < position.Snapshot.Length
+                    ? new SnapshotSpan(position, position + 1)
+                    : new SnapshotSpan(position - 1, position);
 
-            using (var backgroundIndicator = indicatorFactory.Create(
-                args.TextView, applicableToSpan,
-                EditorFeaturesResources.Navigating_to_definition))
+            using (
+                var backgroundIndicator = indicatorFactory.Create(
+                    args.TextView,
+                    applicableToSpan,
+                    EditorFeaturesResources.Navigating_to_definition
+                )
+            )
             {
                 var cancellationToken = backgroundIndicator.UserCancellationToken;
 
                 // determine the location first.
-                var (location, _) = await service.FindDefinitionLocationAsync(
-                    document, position, includeType: true, cancellationToken).ConfigureAwait(false);
+                var (location, _) = await service
+                    .FindDefinitionLocationAsync(
+                        document,
+                        position,
+                        includeType: true,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 // make sure that if our background indicator got canceled, that we do not still perform the navigation.
                 if (backgroundIndicator.UserCancellationToken.IsCancellationRequested)
@@ -187,13 +249,20 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
                 // we're about to navigate.  so disable cancellation on focus-lost in our indicator so we don't end up
                 // causing ourselves to self-cancel.
                 backgroundIndicator.CancelOnFocusLost = false;
-                succeeded = await location.TryNavigateToAsync(
-                    _threadingContext, new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true), cancellationToken).ConfigureAwait(false);
+                succeeded = await location
+                    .TryNavigateToAsync(
+                        _threadingContext,
+                        new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             if (!succeeded)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(CancellationToken.None);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    CancellationToken.None
+                );
                 ReportFailure(document);
             }
         }

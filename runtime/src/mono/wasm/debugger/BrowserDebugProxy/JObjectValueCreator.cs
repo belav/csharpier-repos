@@ -25,26 +25,19 @@ internal sealed class JObjectValueCreator
         _logger = logger;
     }
 
-    public static JObject Create<T>(T value,
-                             string type,
-                             string description,
-                             string className = null,
-                             string objectId = null,
-                             string subtype = null,
-                             bool writable = false,
-                             bool isValueType = false,
-                             bool isEnum = false)
+    public static JObject Create<T>(
+        T value,
+        string type,
+        string description,
+        string className = null,
+        string objectId = null,
+        string subtype = null,
+        bool writable = false,
+        bool isValueType = false,
+        bool isEnum = false
+    )
     {
-        var ret = JObject.FromObject(new
-        {
-            value = new
-            {
-                type,
-                value,
-                description
-            },
-            writable
-        });
+        var ret = JObject.FromObject(new { value = new { type, value, description }, writable });
         if (className != null)
             ret["value"]["className"] = className;
         if (objectId != null)
@@ -58,18 +51,31 @@ internal sealed class JObjectValueCreator
         return ret;
     }
 
-    public static JObject CreateFromPrimitiveType(object v, int? stringId = null)
-        => v switch
+    public static JObject CreateFromPrimitiveType(object v, int? stringId = null) =>
+        v switch
         {
-            string s => Create(s, type: "string", description: s, objectId: $"dotnet:object:{stringId}"),
+            string s
+                => Create(s, type: "string", description: s, objectId: $"dotnet:object:{stringId}"),
             char c => CreateJObjectForChar(Convert.ToInt32(c)),
-            bool b => Create(b, type: "boolean", description: b ? "true" : "false", className: "System.Boolean"),
+            bool b
+                => Create(
+                    b,
+                    type: "boolean",
+                    description: b ? "true" : "false",
+                    className: "System.Boolean"
+                ),
 
-            decimal or float or double or
-            byte or sbyte or
-            short or ushort or
-            int or uint or
-            long or ulong
+            decimal
+            or float
+            or double
+            or byte
+            or sbyte
+            or short
+            or ushort
+            or int
+            or uint
+            or long
+            or ulong
                 => CreateJObjectForNumber(v),
 
             _ => null
@@ -78,11 +84,13 @@ internal sealed class JObjectValueCreator
     public static JObject CreateNull(string className)
     {
         ArgumentNullException.ThrowIfNull(className);
-        return Create<object>(value: null,
-                          type: "object",
-                          description: className,
-                          className: className,
-                          subtype: "null");
+        return Create<object>(
+            value: null,
+            type: "object",
+            description: className,
+            className: className,
+            subtype: "null"
+        );
     }
 
     public async Task<JObject> ReadAsVariableValue(
@@ -92,9 +100,11 @@ internal sealed class JObjectValueCreator
         bool isOwn = false,
         int typeIdForObject = -1,
         bool forDebuggerDisplayAttribute = false,
-        bool includeStatic = false)
+        bool includeStatic = false
+    )
     {
-        long initialPos =  /*retDebuggerCmdReader == null ? 0 : */retDebuggerCmdReader.BaseStream.Position;
+        long initialPos = /*retDebuggerCmdReader == null ? 0 : */
+        retDebuggerCmdReader.BaseStream.Position;
         ElementType etype = (ElementType)retDebuggerCmdReader.ReadByte();
         JObject ret = null;
         switch (etype)
@@ -107,118 +117,132 @@ internal sealed class JObjectValueCreator
                 ret = Create(value: "void", type: "void", description: "void");
                 break;
             case ElementType.Boolean:
-                {
-                    var value = retDebuggerCmdReader.ReadInt32();
-                    ret = CreateFromPrimitiveType(value == 1);
-                    break;
-                }
+            {
+                var value = retDebuggerCmdReader.ReadInt32();
+                ret = CreateFromPrimitiveType(value == 1);
+                break;
+            }
             case ElementType.I1:
-                {
-                    var value = retDebuggerCmdReader.ReadSByte();
-                    ret = CreateJObjectForNumber<int>(value);
-                    break;
-                }
+            {
+                var value = retDebuggerCmdReader.ReadSByte();
+                ret = CreateJObjectForNumber<int>(value);
+                break;
+            }
             case ElementType.I2:
             case ElementType.I4:
-                {
-                    var value = retDebuggerCmdReader.ReadInt32();
-                    ret = CreateJObjectForNumber<int>(value);
-                    break;
-                }
+            {
+                var value = retDebuggerCmdReader.ReadInt32();
+                ret = CreateJObjectForNumber<int>(value);
+                break;
+            }
             case ElementType.U1:
-                {
-                    var value = retDebuggerCmdReader.ReadUByte();
-                    ret = CreateJObjectForNumber<int>(value);
-                    break;
-                }
+            {
+                var value = retDebuggerCmdReader.ReadUByte();
+                ret = CreateJObjectForNumber<int>(value);
+                break;
+            }
             case ElementType.U2:
-                {
-                    var value = retDebuggerCmdReader.ReadUShort();
-                    ret = CreateJObjectForNumber<int>(value);
-                    break;
-                }
+            {
+                var value = retDebuggerCmdReader.ReadUShort();
+                ret = CreateJObjectForNumber<int>(value);
+                break;
+            }
             case ElementType.U4:
-                {
-                    var value = retDebuggerCmdReader.ReadUInt32();
-                    ret = CreateJObjectForNumber<uint>(value);
-                    break;
-                }
+            {
+                var value = retDebuggerCmdReader.ReadUInt32();
+                ret = CreateJObjectForNumber<uint>(value);
+                break;
+            }
             case ElementType.R4:
-                {
-                    float value = retDebuggerCmdReader.ReadSingle();
-                    ret = CreateJObjectForNumber<float>(value);
-                    break;
-                }
+            {
+                float value = retDebuggerCmdReader.ReadSingle();
+                ret = CreateJObjectForNumber<float>(value);
+                break;
+            }
             case ElementType.Char:
-                {
-                    var value = retDebuggerCmdReader.ReadInt32();
-                    ret = CreateJObjectForChar(value);
-                    break;
-                }
+            {
+                var value = retDebuggerCmdReader.ReadInt32();
+                ret = CreateJObjectForChar(value);
+                break;
+            }
             case ElementType.I8:
-                {
-                    long value = retDebuggerCmdReader.ReadInt64();
-                    ret = CreateJObjectForNumber<long>(value);
-                    break;
-                }
+            {
+                long value = retDebuggerCmdReader.ReadInt64();
+                ret = CreateJObjectForNumber<long>(value);
+                break;
+            }
             case ElementType.U8:
-                {
-                    ulong value = retDebuggerCmdReader.ReadUInt64();
-                    ret = CreateJObjectForNumber<ulong>(value);
-                    break;
-                }
+            {
+                ulong value = retDebuggerCmdReader.ReadUInt64();
+                ret = CreateJObjectForNumber<ulong>(value);
+                break;
+            }
             case ElementType.R8:
-                {
-                    double value = retDebuggerCmdReader.ReadDouble();
-                    ret = CreateJObjectForNumber<double>(value);
-                    break;
-                }
+            {
+                double value = retDebuggerCmdReader.ReadDouble();
+                ret = CreateJObjectForNumber<double>(value);
+                break;
+            }
             case ElementType.FnPtr:
             case ElementType.Ptr:
-                {
-                    ret = await ReadAsPtrValue(etype, retDebuggerCmdReader, name, token);
-                    break;
-                }
+            {
+                ret = await ReadAsPtrValue(etype, retDebuggerCmdReader, name, token);
+                break;
+            }
             case ElementType.String:
-                {
-                    var stringId = retDebuggerCmdReader.ReadInt32();
-                    string value = await _sdbAgent.GetStringValue(stringId, token);
-                    ret = CreateFromPrimitiveType(value, stringId);
-                    break;
-                }
+            {
+                var stringId = retDebuggerCmdReader.ReadInt32();
+                string value = await _sdbAgent.GetStringValue(stringId, token);
+                ret = CreateFromPrimitiveType(value, stringId);
+                break;
+            }
             case ElementType.SzArray:
             case ElementType.Array:
-                {
-                    ret = await ReadAsArray(retDebuggerCmdReader, token);
-                    break;
-                }
+            {
+                ret = await ReadAsArray(retDebuggerCmdReader, token);
+                break;
+            }
             case ElementType.Class:
             case ElementType.Object:
-                {
-                    ret = await ReadAsObjectValue(retDebuggerCmdReader, typeIdForObject, forDebuggerDisplayAttribute, token);
-                    break;
-                }
+            {
+                ret = await ReadAsObjectValue(
+                    retDebuggerCmdReader,
+                    typeIdForObject,
+                    forDebuggerDisplayAttribute,
+                    token
+                );
+                break;
+            }
             case ElementType.ValueType:
-                {
-                    ret = await ReadAsValueType(retDebuggerCmdReader, name, initialPos, forDebuggerDisplayAttribute, includeStatic, token);
-                    break;
-                }
+            {
+                ret = await ReadAsValueType(
+                    retDebuggerCmdReader,
+                    name,
+                    initialPos,
+                    forDebuggerDisplayAttribute,
+                    includeStatic,
+                    token
+                );
+                break;
+            }
             case (ElementType)ValueTypeId.Null:
-                {
-                    var className = await GetNullObjectClassName();
-                    ret = CreateNull(className);
-                    break;
-                }
+            {
+                var className = await GetNullObjectClassName();
+                ret = CreateNull(className);
+                break;
+            }
             case (ElementType)ValueTypeId.Type:
-                {
-                    retDebuggerCmdReader.ReadInt32();
-                    break;
-                }
+            {
+                retDebuggerCmdReader.ReadInt32();
+                break;
+            }
             default:
-                {
-                    _logger.LogDebug($"Could not evaluate CreateJObjectForVariableValue invalid type {etype}");
-                    break;
-                }
+            {
+                _logger.LogDebug(
+                    $"Could not evaluate CreateJObjectForVariableValue invalid type {etype}"
+                );
+                break;
+            }
         }
         if (ret != null)
         {
@@ -236,37 +260,41 @@ internal sealed class JObjectValueCreator
             {
                 case ElementType.String:
                 case ElementType.Class:
-                    {
-                        var type_id = retDebuggerCmdReader.ReadInt32();
-                        className = await _sdbAgent.GetTypeName(type_id, token);
-                        break;
-
-                    }
+                {
+                    var type_id = retDebuggerCmdReader.ReadInt32();
+                    className = await _sdbAgent.GetTypeName(type_id, token);
+                    break;
+                }
                 case ElementType.SzArray:
                 case ElementType.Array:
+                {
+                    ElementType byte_type = (ElementType)retDebuggerCmdReader.ReadByte();
+                    retDebuggerCmdReader.ReadInt32(); // rank
+                    if (byte_type == ElementType.Class)
                     {
-                        ElementType byte_type = (ElementType)retDebuggerCmdReader.ReadByte();
-                        retDebuggerCmdReader.ReadInt32(); // rank
-                        if (byte_type == ElementType.Class)
-                        {
-                            retDebuggerCmdReader.ReadInt32(); // internal_type_id
-                        }
-                        var type_id = retDebuggerCmdReader.ReadInt32();
-                        className = await _sdbAgent.GetTypeName(type_id, token);
-                        break;
+                        retDebuggerCmdReader.ReadInt32(); // internal_type_id
                     }
+                    var type_id = retDebuggerCmdReader.ReadInt32();
+                    className = await _sdbAgent.GetTypeName(type_id, token);
+                    break;
+                }
                 default:
-                    {
-                        var type_id = retDebuggerCmdReader.ReadInt32();
-                        className = await _sdbAgent.GetTypeName(type_id, token);
-                        break;
-                    }
+                {
+                    var type_id = retDebuggerCmdReader.ReadInt32();
+                    className = await _sdbAgent.GetTypeName(type_id, token);
+                    break;
+                }
             }
             return className;
         }
     }
 
-    private async Task<JObject> ReadAsObjectValue(MonoBinaryReader retDebuggerCmdReader, int typeIdFromAttribute, bool forDebuggerDisplayAttribute, CancellationToken token)
+    private async Task<JObject> ReadAsObjectValue(
+        MonoBinaryReader retDebuggerCmdReader,
+        int typeIdFromAttribute,
+        bool forDebuggerDisplayAttribute,
+        CancellationToken token
+    )
     {
         var objectId = retDebuggerCmdReader.ReadInt32();
         var type_id = await _sdbAgent.GetTypeIdsForObject(objectId, false, token);
@@ -274,7 +302,10 @@ internal sealed class JObjectValueCreator
         string debuggerDisplayAttribute = null;
         if (!forDebuggerDisplayAttribute)
             debuggerDisplayAttribute = await _sdbAgent.GetValueFromDebuggerDisplayAttribute(
-                new DotnetObjectId("object", objectId), type_id[0], token);
+                new DotnetObjectId("object", objectId),
+                type_id[0],
+                token
+            );
         var description = className.ToString();
 
         if (debuggerDisplayAttribute != null)
@@ -293,7 +324,13 @@ internal sealed class JObjectValueCreator
                 return Create(value: className, type: "symbol", description: className);
             }
         }
-        return Create<object>(value: null, type: "object", description: description, className: className, objectId: $"dotnet:object:{objectId}");
+        return Create<object>(
+            value: null,
+            type: "object",
+            description: description,
+            className: className,
+            objectId: $"dotnet:object:{objectId}"
+        );
     }
 
     public async Task<JObject> ReadAsValueType(
@@ -302,7 +339,8 @@ internal sealed class JObjectValueCreator
         long initialPos,
         bool forDebuggerDisplayAttribute,
         bool includeStatic,
-        CancellationToken token)
+        CancellationToken token
+    )
     {
         // FIXME: debugger proxy
         var isEnum = retDebuggerCmdReader.ReadByte() == 1;
@@ -321,7 +359,14 @@ internal sealed class JObjectValueCreator
             if (isNull != 0)
                 return value;
             else
-                return Create<object>(null, "object", className, className, subtype: "null", isValueType: true);
+                return Create<object>(
+                    null,
+                    "object",
+                    className,
+                    className,
+                    subtype: "null",
+                    isValueType: true
+                );
         }
         if (isBoxed && numValues == 1)
         {
@@ -332,28 +377,34 @@ internal sealed class JObjectValueCreator
         }
 
         ValueTypeClass valueType = await ValueTypeClass.CreateFromReader(
-                                                    _sdbAgent,
-                                                    retDebuggerCmdReader,
-                                                    initialPos,
-                                                    className,
-                                                    typeId,
-                                                    numValues,
-                                                    isEnum,
-                                                    includeStatic,
-                                                    token);
+            _sdbAgent,
+            retDebuggerCmdReader,
+            initialPos,
+            className,
+            typeId,
+            numValues,
+            isEnum,
+            includeStatic,
+            token
+        );
         _valueTypes[valueType.Id.Value] = valueType;
         return await valueType.ToJObject(_sdbAgent, forDebuggerDisplayAttribute, token);
     }
+
     public void ClearCache()
     {
         _valueTypes = new Dictionary<int, ValueTypeClass>();
         _pointerValues = new Dictionary<int, PointerValue>();
     }
 
-    public bool TryGetValueTypeById(int valueTypeId, out ValueTypeClass vt) => _valueTypes.TryGetValue(valueTypeId, out vt);
-    public PointerValue GetPointerValue(int pointerId) => _pointerValues.TryGetValue(pointerId, out PointerValue pv) ? pv : null;
+    public bool TryGetValueTypeById(int valueTypeId, out ValueTypeClass vt) =>
+        _valueTypes.TryGetValue(valueTypeId, out vt);
 
-    private static JObject CreateJObjectForNumber<T>(T value) => Create(value, "number", value.ToString(), writable: true);
+    public PointerValue GetPointerValue(int pointerId) =>
+        _pointerValues.TryGetValue(pointerId, out PointerValue pv) ? pv : null;
+
+    private static JObject CreateJObjectForNumber<T>(T value) =>
+        Create(value, "number", value.ToString(), writable: true);
 
     private static JObject CreateJObjectForChar(int value)
     {
@@ -362,7 +413,12 @@ internal sealed class JObjectValueCreator
         return Create(charValue, "symbol", description, writable: true);
     }
 
-    private async Task<JObject> ReadAsPtrValue(ElementType etype, MonoBinaryReader retDebuggerCmdReader, string name, CancellationToken token)
+    private async Task<JObject> ReadAsPtrValue(
+        ElementType etype,
+        MonoBinaryReader retDebuggerCmdReader,
+        string name,
+        CancellationToken token
+    )
     {
         string type;
         string value;
@@ -387,10 +443,20 @@ internal sealed class JObjectValueCreator
             type = "symbol";
             value = className + " " + valueAddress;
         }
-        return Create(value: value, type: type, description: value, className: className, objectId: $"dotnet:pointer:{pointerId}", subtype: "pointer");
+        return Create(
+            value: value,
+            type: type,
+            description: value,
+            className: className,
+            objectId: $"dotnet:pointer:{pointerId}",
+            subtype: "pointer"
+        );
     }
 
-    private async Task<JObject> ReadAsArray(MonoBinaryReader retDebuggerCmdReader, CancellationToken token)
+    private async Task<JObject> ReadAsArray(
+        MonoBinaryReader retDebuggerCmdReader,
+        CancellationToken token
+    )
     {
         var objectId = retDebuggerCmdReader.ReadInt32();
         var className = await _sdbAgent.GetClassNameFromObject(objectId, token);
@@ -399,12 +465,17 @@ internal sealed class JObjectValueCreator
         if (arrayType.LastIndexOf('[') > 0)
             arrayType = arrayType.Insert(arrayType.LastIndexOf('[') + 1, length.ToString());
         if (className.LastIndexOf('[') > 0)
-            className = className.Insert(arrayType.LastIndexOf('[') + 1, new string(',', length.Rank - 1));
-        return Create<object>(value: null,
-                              type: "object",
-                              description: arrayType,
-                              className: className.ToString(),
-                              objectId: "dotnet:array:" + objectId,
-                              subtype: length.Rank == 1 ? "array" : null);
+            className = className.Insert(
+                arrayType.LastIndexOf('[') + 1,
+                new string(',', length.Rank - 1)
+            );
+        return Create<object>(
+            value: null,
+            type: "object",
+            description: arrayType,
+            className: className.ToString(),
+            objectId: "dotnet:array:" + objectId,
+            subtype: length.Rank == 1 ? "array" : null
+        );
     }
 }

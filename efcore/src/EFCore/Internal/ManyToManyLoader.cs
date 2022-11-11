@@ -54,14 +54,19 @@ public class ManyToManyLoader<TEntity, TSourceEntity> : ICollectionLoader<TEntit
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual async Task LoadAsync(InternalEntityEntry entry, CancellationToken cancellationToken = default)
+    public virtual async Task LoadAsync(
+        InternalEntityEntry entry,
+        CancellationToken cancellationToken = default
+    )
     {
         var keyValues = PrepareForLoad(entry);
 
         // Short-circuit for any null key values for perf and because of #6129
         if (keyValues != null)
         {
-            await Query(entry.Context, keyValues).LoadAsync(cancellationToken).ConfigureAwait(false);
+            await Query(entry.Context, keyValues)
+                .LoadAsync(cancellationToken)
+                .ConfigureAwait(false);
         }
 
         entry.SetIsLoaded(_skipNavigation);
@@ -96,7 +101,9 @@ public class ManyToManyLoader<TEntity, TSourceEntity> : ICollectionLoader<TEntit
     {
         if (entry.EntityState == EntityState.Detached)
         {
-            throw new InvalidOperationException(CoreStrings.CannotLoadDetached(_skipNavigation.Name, entry.EntityType.DisplayName()));
+            throw new InvalidOperationException(
+                CoreStrings.CannotLoadDetached(_skipNavigation.Name, entry.EntityType.DisplayName())
+            );
         }
 
         var properties = _skipNavigation.ForeignKey.PrincipalKey.Properties;
@@ -121,12 +128,9 @@ public class ManyToManyLoader<TEntity, TSourceEntity> : ICollectionLoader<TEntit
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    IQueryable ICollectionLoader.Query(InternalEntityEntry entry)
-        => Query(entry);
+    IQueryable ICollectionLoader.Query(InternalEntityEntry entry) => Query(entry);
 
-    private IQueryable<TEntity> Query(
-        DbContext context,
-        object[] keyValues)
+    private IQueryable<TEntity> Query(DbContext context, object[] keyValues)
     {
         var loadProperties = _skipNavigation.ForeignKey.PrincipalKey.Properties;
 
@@ -147,14 +151,21 @@ public class ManyToManyLoader<TEntity, TSourceEntity> : ICollectionLoader<TEntit
             .AsTracking()
             .Where(BuildWhereLambda(loadProperties, new ValueBuffer(keyValues)))
             .SelectMany(BuildSelectManyLambda(_skipNavigation))
-            .NotQuiteInclude(BuildIncludeLambda(_skipNavigation.Inverse, loadProperties, new ValueBuffer(keyValues)))
+            .NotQuiteInclude(
+                BuildIncludeLambda(
+                    _skipNavigation.Inverse,
+                    loadProperties,
+                    new ValueBuffer(keyValues)
+                )
+            )
             .AsQueryable();
     }
 
     private static Expression<Func<TEntity, IEnumerable<TSourceEntity>>> BuildIncludeLambda(
         ISkipNavigation skipNavigation,
         IReadOnlyList<IProperty> keyProperties,
-        ValueBuffer keyValues)
+        ValueBuffer keyValues
+    )
     {
         var whereParameter = Expression.Parameter(typeof(TSourceEntity), "e");
         var entityParameter = Expression.Parameter(typeof(TEntity), "e");
@@ -164,29 +175,38 @@ public class ManyToManyLoader<TEntity, TSourceEntity> : ICollectionLoader<TEntit
                 Expression.Call(
                     EF.PropertyMethod.MakeGenericMethod(skipNavigation.ClrType),
                     entityParameter,
-                    Expression.Constant(skipNavigation.Name, typeof(string))),
+                    Expression.Constant(skipNavigation.Name, typeof(string))
+                ),
                 Expression.Lambda<Func<TSourceEntity, bool>>(
                     ExpressionExtensions.BuildPredicate(keyProperties, keyValues, whereParameter),
-                    whereParameter)), entityParameter);
+                    whereParameter
+                )
+            ),
+            entityParameter
+        );
     }
 
     private static Expression<Func<TSourceEntity, bool>> BuildWhereLambda(
         IReadOnlyList<IProperty> keyProperties,
-        ValueBuffer keyValues)
+        ValueBuffer keyValues
+    )
     {
         var entityParameter = Expression.Parameter(typeof(TSourceEntity), "e");
 
         return Expression.Lambda<Func<TSourceEntity, bool>>(
-            ExpressionExtensions.BuildPredicate(keyProperties, keyValues, entityParameter), entityParameter);
+            ExpressionExtensions.BuildPredicate(keyProperties, keyValues, entityParameter),
+            entityParameter
+        );
     }
 
-    private static Expression<Func<TSourceEntity, IEnumerable<TEntity>>> BuildSelectManyLambda(INavigationBase navigation)
+    private static Expression<Func<TSourceEntity, IEnumerable<TEntity>>> BuildSelectManyLambda(
+        INavigationBase navigation
+    )
     {
         var entityParameter = Expression.Parameter(typeof(TSourceEntity), "e");
         return Expression.Lambda<Func<TSourceEntity, IEnumerable<TEntity>>>(
-            Expression.MakeMemberAccess(
-                entityParameter,
-                navigation.GetIdentifyingMemberInfo()!),
-            entityParameter);
+            Expression.MakeMemberAccess(entityParameter, navigation.GetIdentifyingMemberInfo()!),
+            entityParameter
+        );
     }
 }

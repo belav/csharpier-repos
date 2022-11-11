@@ -24,10 +24,7 @@ public class Program
 
     public void Run(string[] args)
     {
-        ProjectCommandLineApplication userJwts = new(_reporter)
-        {
-            Name = "dotnet user-jwts"
-        };
+        ProjectCommandLineApplication userJwts = new(_reporter) { Name = "dotnet user-jwts" };
 
         userJwts.HelpOption("-h|--help");
 

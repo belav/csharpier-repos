@@ -41,11 +41,10 @@ namespace System.Net.Sockets
         /// </summary>
         /// <param name="preexistingHandle">Handle to wrap</param>
         /// <param name="ownsHandle">Whether to control the handle lifetime</param>
-        public SafeSocketHandle(IntPtr preexistingHandle, bool ownsHandle)
-            : base(ownsHandle: true) // To support canceling on-going operations we need to detect
-                                     // there are no more on-going operations.
-                                     // For that the base-SafeHandle needs to be owning even
-                                     // when the SafeSocketHandle is not.
+        public SafeSocketHandle(IntPtr preexistingHandle, bool ownsHandle) : base(ownsHandle: true) // To support canceling on-going operations we need to detect
+        // there are no more on-going operations.
+        // For that the base-SafeHandle needs to be owning even
+        // when the SafeSocketHandle is not.
         {
             OwnsHandle = ownsHandle; // Track if the SafesocketHandle is owning.
             SetHandleAndValid(preexistingHandle);
@@ -55,16 +54,14 @@ namespace System.Net.Sockets
 
         internal bool HasShutdownSend => _hasShutdownSend;
 
-        private bool TryOwnClose()
-            => Interlocked.CompareExchange(ref _ownClose, 1, 0) == 0;
+        private bool TryOwnClose() => Interlocked.CompareExchange(ref _ownClose, 1, 0) == 0;
 
         private volatile bool _released;
         private bool _hasShutdownSend;
 
         internal void TrackShutdown(SocketShutdown how)
         {
-            if (how == SocketShutdown.Send ||
-                how == SocketShutdown.Both)
+            if (how == SocketShutdown.Send || how == SocketShutdown.Both)
             {
                 _hasShutdownSend = true;
             }
@@ -79,7 +76,8 @@ namespace System.Net.Sockets
             _released = true;
             bool shouldClose = TryOwnClose();
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"shouldClose={shouldClose}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"shouldClose={shouldClose}");
 
             // When shouldClose is true, the user called Dispose on the SafeHandle.
             // When it is false, the handle was closed from the Socket via CloseAsIs.
@@ -100,7 +98,8 @@ namespace System.Net.Sockets
 #endif
                 bool shouldClose = TryOwnClose();
 
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"abortive={abortive}, shouldClose ={shouldClose}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"abortive={abortive}, shouldClose ={shouldClose}");
 
                 Dispose();
 
@@ -140,7 +139,8 @@ namespace System.Net.Sockets
             try
             {
 #endif
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"handle:{handle}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"handle:{handle}");
 
                 canceledOperations |= OnHandleClose();
 
@@ -157,8 +157,11 @@ namespace System.Net.Sockets
             }
             catch (Exception exception)
             {
-                Debug.Assert(ExceptionCheck.IsFatal(exception), $"handle:{handle}, error:{exception}");
-                ret = true;  // Avoid a second assert.
+                Debug.Assert(
+                    ExceptionCheck.IsFatal(exception),
+                    $"handle:{handle}, error:{exception}"
+                );
+                ret = true; // Avoid a second assert.
                 throw;
             }
             finally

@@ -25,7 +25,6 @@ namespace System.Drawing.Internal
         private DeviceContext _dc;
         private bool _disposeDc;
         private Graphics? _graphics; // cached when initialized FromGraphics to be able to call g.ReleaseHdc from Dispose.
-
 #if GDI_FINALIZATION_WATCH
         private string AllocationSite = DbgUtil.StackTrace;
 #endif
@@ -43,10 +42,7 @@ namespace System.Drawing.Internal
             DeviceContext dc = DeviceContext.FromHdc(hDc);
 
             // we create it, we dispose it.
-            return new WindowsGraphics(dc)
-            {
-                _disposeDc = true
-            };
+            return new WindowsGraphics(dc) { _disposeDc = true };
         }
 
         public static WindowsGraphics FromGraphics(Graphics g, ApplyGraphicsProperties properties)
@@ -153,7 +149,7 @@ namespace System.Drawing.Internal
                         _dc.Dispose(disposing);
                     }
 
-                    if (_graphics != null)    // if created from a Graphics object...
+                    if (_graphics != null) // if created from a Graphics object...
                     {
                         _graphics.ReleaseHdcInternal(_dc.Hdc);
                         _graphics = null;

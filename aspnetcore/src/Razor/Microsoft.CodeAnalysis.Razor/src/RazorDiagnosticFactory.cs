@@ -38,8 +38,13 @@ internal static class RazorDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3500",
             () => CodeAnalysisResources.TagHelper_InvalidAttributeNameNotNullOrEmpty,
-            RazorDiagnosticSeverity.Error);
-    public static RazorDiagnostic CreateTagHelper_InvalidAttributeNameNullOrEmpty(string tagHelperDisplayName, string propertyDisplayName)
+            RazorDiagnosticSeverity.Error
+        );
+
+    public static RazorDiagnostic CreateTagHelper_InvalidAttributeNameNullOrEmpty(
+        string tagHelperDisplayName,
+        string propertyDisplayName
+    )
     {
         var diagnostic = RazorDiagnostic.Create(
             TagHelper_InvalidAttributeNameNullOrEmpty,
@@ -47,7 +52,8 @@ internal static class RazorDiagnosticFactory
             tagHelperDisplayName,
             propertyDisplayName,
             TagHelperTypes.HtmlAttributeNameAttribute,
-            TagHelperTypes.HtmlAttributeName.Name);
+            TagHelperTypes.HtmlAttributeName.Name
+        );
 
         return diagnostic;
     }
@@ -56,8 +62,13 @@ internal static class RazorDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3501",
             () => CodeAnalysisResources.TagHelper_InvalidAttributePrefixNotNull,
-            RazorDiagnosticSeverity.Error);
-    public static RazorDiagnostic CreateTagHelper_InvalidAttributePrefixNotNull(string tagHelperDisplayName, string propertyDisplayName)
+            RazorDiagnosticSeverity.Error
+        );
+
+    public static RazorDiagnostic CreateTagHelper_InvalidAttributePrefixNotNull(
+        string tagHelperDisplayName,
+        string propertyDisplayName
+    )
     {
         var diagnostic = RazorDiagnostic.Create(
             TagHelper_InvalidAttributePrefixNotNull,
@@ -66,7 +77,8 @@ internal static class RazorDiagnosticFactory
             propertyDisplayName,
             TagHelperTypes.HtmlAttributeNameAttribute,
             TagHelperTypes.HtmlAttributeName.DictionaryAttributePrefix,
-            "IDictionary<string, TValue>");
+            "IDictionary<string, TValue>"
+        );
 
         return diagnostic;
     }
@@ -75,8 +87,13 @@ internal static class RazorDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3502",
             () => CodeAnalysisResources.TagHelper_InvalidAttributePrefixNull,
-            RazorDiagnosticSeverity.Error);
-    public static RazorDiagnostic CreateTagHelper_InvalidAttributePrefixNull(string tagHelperDisplayName, string propertyDisplayName)
+            RazorDiagnosticSeverity.Error
+        );
+
+    public static RazorDiagnostic CreateTagHelper_InvalidAttributePrefixNull(
+        string tagHelperDisplayName,
+        string propertyDisplayName
+    )
     {
         var diagnostic = RazorDiagnostic.Create(
             TagHelper_InvalidAttributePrefixNull,
@@ -85,7 +102,8 @@ internal static class RazorDiagnosticFactory
             propertyDisplayName,
             TagHelperTypes.HtmlAttributeNameAttribute,
             TagHelperTypes.HtmlAttributeName.DictionaryAttributePrefix,
-            "IDictionary<string, TValue>");
+            "IDictionary<string, TValue>"
+        );
 
         return diagnostic;
     }
@@ -94,14 +112,20 @@ internal static class RazorDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3503",
             () => CodeAnalysisResources.TagHelper_InvalidRequiredAttributeCharacter,
-            RazorDiagnosticSeverity.Error);
-    public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeCharacter(char invalidCharacter, string requiredAttributes)
+            RazorDiagnosticSeverity.Error
+        );
+
+    public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeCharacter(
+        char invalidCharacter,
+        string requiredAttributes
+    )
     {
         var diagnostic = RazorDiagnostic.Create(
             TagHelper_InvalidRequiredAttributeCharacter,
             new SourceSpan(SourceLocation.Undefined, contentLength: 0),
             invalidCharacter,
-            requiredAttributes);
+            requiredAttributes
+        );
 
         return diagnostic;
     }
@@ -110,14 +134,20 @@ internal static class RazorDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3504",
             () => CodeAnalysisResources.TagHelper_PartialRequiredAttributeOperator,
-            RazorDiagnosticSeverity.Error);
-    public static RazorDiagnostic CreateTagHelper_PartialRequiredAttributeOperator(char partialOperator, string requiredAttributes)
+            RazorDiagnosticSeverity.Error
+        );
+
+    public static RazorDiagnostic CreateTagHelper_PartialRequiredAttributeOperator(
+        char partialOperator,
+        string requiredAttributes
+    )
     {
         var diagnostic = RazorDiagnostic.Create(
             TagHelper_PartialRequiredAttributeOperator,
             new SourceSpan(SourceLocation.Undefined, contentLength: 0),
             requiredAttributes,
-            partialOperator);
+            partialOperator
+        );
 
         return diagnostic;
     }
@@ -126,14 +156,20 @@ internal static class RazorDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3505",
             () => CodeAnalysisResources.TagHelper_InvalidRequiredAttributeOperator,
-            RazorDiagnosticSeverity.Error);
-    public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeOperator(char invalidOperator, string requiredAttributes)
+            RazorDiagnosticSeverity.Error
+        );
+
+    public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeOperator(
+        char invalidOperator,
+        string requiredAttributes
+    )
     {
         var diagnostic = RazorDiagnostic.Create(
             TagHelper_InvalidRequiredAttributeOperator,
             new SourceSpan(SourceLocation.Undefined, contentLength: 0),
             invalidOperator,
-            requiredAttributes);
+            requiredAttributes
+        );
 
         return diagnostic;
     }
@@ -142,14 +178,20 @@ internal static class RazorDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3506",
             () => CodeAnalysisResources.TagHelper_InvalidRequiredAttributeMismatchedQuotes,
-            RazorDiagnosticSeverity.Error);
-    public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeMismatchedQuotes(char quote, string requiredAttributes)
+            RazorDiagnosticSeverity.Error
+        );
+
+    public static RazorDiagnostic CreateTagHelper_InvalidRequiredAttributeMismatchedQuotes(
+        char quote,
+        string requiredAttributes
+    )
     {
         var diagnostic = RazorDiagnostic.Create(
             TagHelper_InvalidRequiredAttributeMismatchedQuotes,
             new SourceSpan(SourceLocation.Undefined, contentLength: 0),
             requiredAttributes,
-            quote);
+            quote
+        );
 
         return diagnostic;
     }
@@ -158,17 +200,21 @@ internal static class RazorDiagnosticFactory
         new RazorDiagnosticDescriptor(
             $"{DiagnosticPrefix}3507",
             () => CodeAnalysisResources.TagHelper_CouldNotFindMatchingEndBrace,
-            RazorDiagnosticSeverity.Error);
-    public static RazorDiagnostic CreateTagHelper_CouldNotFindMatchingEndBrace(string requiredAttributes)
+            RazorDiagnosticSeverity.Error
+        );
+
+    public static RazorDiagnostic CreateTagHelper_CouldNotFindMatchingEndBrace(
+        string requiredAttributes
+    )
     {
         var diagnostic = RazorDiagnostic.Create(
             TagHelper_CouldNotFindMatchingEndBrace,
             new SourceSpan(SourceLocation.Undefined, contentLength: 0),
-            requiredAttributes);
+            requiredAttributes
+        );
 
         return diagnostic;
     }
-
 
     #endregion
 }

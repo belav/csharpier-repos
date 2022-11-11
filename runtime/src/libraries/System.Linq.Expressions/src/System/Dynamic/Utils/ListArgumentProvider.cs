@@ -10,8 +10,7 @@ using LinqError = System.Linq.Expressions.Error;
 
 namespace System.Dynamic.Utils
 {
-    internal abstract class ListProvider<T> : IList<T>
-        where T : class
+    internal abstract class ListProvider<T> : IList<T> where T : class
     {
         protected abstract T First { get; }
         protected abstract int ElementCount { get; }
@@ -61,10 +60,7 @@ namespace System.Dynamic.Utils
                 return GetElement(index);
             }
             [ExcludeFromCodeCoverage(Justification = "Unreachable")]
-            set
-            {
-                throw ContractUtils.Unreachable;
-            }
+            set { throw ContractUtils.Unreachable; }
         }
 
         #endregion
@@ -164,6 +160,7 @@ namespace System.Dynamic.Utils
 
         protected override Expression First => _arg0;
         protected override int ElementCount => _provider.ArgumentCount;
+
         protected override Expression GetElement(int index) => _provider.GetArgument(index);
     }
 }

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
         TMemberDeclarationSyntax,
         TBaseMethodDeclarationSyntax,
         TBasePropertyDeclarationSyntax,
-        TAccessorDeclarationSyntax> : ISemanticModelReuseLanguageService
+        TAccessorDeclarationSyntax
+    > : ISemanticModelReuseLanguageService
         where TMemberDeclarationSyntax : SyntaxNode
         where TBaseMethodDeclarationSyntax : TMemberDeclarationSyntax
         where TBasePropertyDeclarationSyntax : TMemberDeclarationSyntax
@@ -30,11 +31,23 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
 
         public abstract SyntaxNode? TryGetContainingMethodBodyForSpeculation(SyntaxNode node);
 
-        protected abstract Task<SemanticModel?> TryGetSpeculativeSemanticModelWorkerAsync(SemanticModel previousSemanticModel, SyntaxNode currentBodyNode, CancellationToken cancellationToken);
-        protected abstract SyntaxList<TAccessorDeclarationSyntax> GetAccessors(TBasePropertyDeclarationSyntax baseProperty);
-        protected abstract TBasePropertyDeclarationSyntax GetBasePropertyDeclaration(TAccessorDeclarationSyntax accessor);
+        protected abstract Task<SemanticModel?> TryGetSpeculativeSemanticModelWorkerAsync(
+            SemanticModel previousSemanticModel,
+            SyntaxNode currentBodyNode,
+            CancellationToken cancellationToken
+        );
+        protected abstract SyntaxList<TAccessorDeclarationSyntax> GetAccessors(
+            TBasePropertyDeclarationSyntax baseProperty
+        );
+        protected abstract TBasePropertyDeclarationSyntax GetBasePropertyDeclaration(
+            TAccessorDeclarationSyntax accessor
+        );
 
-        public async Task<SemanticModel?> TryGetSpeculativeSemanticModelAsync(SemanticModel previousSemanticModel, SyntaxNode currentBodyNode, CancellationToken cancellationToken)
+        public async Task<SemanticModel?> TryGetSpeculativeSemanticModelAsync(
+            SemanticModel previousSemanticModel,
+            SyntaxNode currentBodyNode,
+            CancellationToken cancellationToken
+        )
         {
             var previousSyntaxTree = previousSemanticModel.SyntaxTree;
             var currentSyntaxTree = currentBodyNode.SyntaxTree;
@@ -56,22 +69,30 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                         // Avoid including tree contents in exception message for privacy compliance. Instead, include
                         // in exception type for dump analysis.
                         throw new NonEquivalentTreeException(
-                            "Syntax trees should have been equivalent.", previousSyntaxTree, currentSyntaxTree);
-
+                            "Syntax trees should have been equivalent.",
+                            previousSyntaxTree,
+                            currentSyntaxTree
+                        );
                     }
-                    catch (Exception e) when (FatalError.ReportAndCatch(e))
-                    {
-                    }
+                    catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
                 }
 
                 return null;
             }
 
             return await TryGetSpeculativeSemanticModelWorkerAsync(
-                previousSemanticModel, currentBodyNode, cancellationToken).ConfigureAwait(false);
+                    previousSemanticModel,
+                    currentBodyNode,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        protected SyntaxNode GetPreviousBodyNode(SyntaxNode previousRoot, SyntaxNode currentRoot, SyntaxNode currentBodyNode)
+        protected SyntaxNode GetPreviousBodyNode(
+            SyntaxNode previousRoot,
+            SyntaxNode currentRoot,
+            SyntaxNode currentBodyNode
+        )
         {
             if (currentBodyNode is TAccessorDeclarationSyntax currentAccessor)
             {
@@ -79,11 +100,17 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 // to the current prop/event.
 
                 var currentContainer = GetBasePropertyDeclaration(currentAccessor);
-                var previousContainer = GetPreviousBodyNode(previousRoot, currentRoot, currentContainer);
+                var previousContainer = GetPreviousBodyNode(
+                    previousRoot,
+                    currentRoot,
+                    currentContainer
+                );
 
                 if (previousContainer is not TBasePropertyDeclarationSyntax previousMember)
                 {
-                    Debug.Fail("Previous container didn't map back to a normal accessor container.");
+                    Debug.Fail(
+                        "Previous container didn't map back to a normal accessor container."
+                    );
                     return null;
                 }
 
@@ -92,7 +119,9 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
 
                 if (currentAccessors.Count != previousAccessors.Count)
                 {
-                    Debug.Fail("Accessor count shouldn't have changed as there were no top level edits.");
+                    Debug.Fail(
+                        "Accessor count shouldn't have changed as there were no top level edits."
+                    );
                     return null;
                 }
 
@@ -111,7 +140,9 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 var previousMembers = this.SyntaxFacts.GetMethodLevelMembers(previousRoot);
                 if (currentMembers.Count != previousMembers.Count)
                 {
-                    Debug.Fail("Member count shouldn't have changed as there were no top level edits.");
+                    Debug.Fail(
+                        "Member count shouldn't have changed as there were no top level edits."
+                    );
                     return null;
                 }
 
@@ -127,8 +158,11 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             private readonly SyntaxTree _updatedSyntaxTree;
 #pragma warning restore IDE0052 // Remove unread private members
 
-            public NonEquivalentTreeException(string message, SyntaxTree originalSyntaxTree, SyntaxTree updatedSyntaxTree)
-                : base(message)
+            public NonEquivalentTreeException(
+                string message,
+                SyntaxTree originalSyntaxTree,
+                SyntaxTree updatedSyntaxTree
+            ) : base(message)
             {
                 _originalSyntaxTree = originalSyntaxTree;
                 _updatedSyntaxTree = updatedSyntaxTree;

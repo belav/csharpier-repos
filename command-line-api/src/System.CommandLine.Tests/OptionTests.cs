@@ -120,12 +120,11 @@ namespace System.CommandLine.Tests
         {
             Action create = () => new Option<string>(Array.Empty<string>());
 
-            create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Contain("An option must have at least one alias");
+            create
+                .Should()
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Contain("An option must have at least one alias");
         }
 
         [Fact]
@@ -133,12 +132,11 @@ namespace System.CommandLine.Tests
         {
             Action create = () => new Option<string>(new[] { "" });
 
-            create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Be("An alias cannot be null, empty, or consist entirely of whitespace.");
+            create
+                .Should()
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Be("An alias cannot be null, empty, or consist entirely of whitespace.");
         }
 
         [Fact]
@@ -146,12 +144,11 @@ namespace System.CommandLine.Tests
         {
             Action create = () => new Option<string>(new[] { "  \t" });
 
-            create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Be("An alias cannot be null, empty, or consist entirely of whitespace.");
+            create
+                .Should()
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Be("An alias cannot be null, empty, or consist entirely of whitespace.");
         }
 
         [Fact]
@@ -159,9 +156,7 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<string>(new[] { "-h", "--help", "/?" });
 
-            option.Aliases
-                  .Should()
-                  .BeEquivalentTo("-h", "--help", "/?");
+            option.Aliases.Should().BeEquivalentTo("-h", "--help", "/?");
         }
 
         [Theory]
@@ -169,34 +164,35 @@ namespace System.CommandLine.Tests
         [InlineData(" -x")]
         [InlineData("--aa aa")]
         public void When_an_option_is_created_with_an_alias_that_contains_whitespace_then_an_informative_error_is_returned(
-            string alias)
+            string alias
+        )
         {
             Action create = () => new Option<string>(alias);
 
-            create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Contain($"Alias cannot contain whitespace: \"{alias}\"");
+            create
+                .Should()
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Contain($"Alias cannot contain whitespace: \"{alias}\"");
         }
 
         [Theory]
         [InlineData("-x ")]
         [InlineData(" -x")]
         [InlineData("--aa aa")]
-        public void When_an_option_alias_is_added_and_contains_whitespace_then_an_informative_error_is_returned(string alias)
+        public void When_an_option_alias_is_added_and_contains_whitespace_then_an_informative_error_is_returned(
+            string alias
+        )
         {
             var option = new Option<bool>("-x");
 
             Action addAlias = () => option.AddAlias(alias);
 
-            addAlias.Should()
-                    .Throw<ArgumentException>()
-                    .Which
-                    .Message
-                    .Should()
-                    .Contain($"Alias cannot contain whitespace: \"{alias}\"");
+            addAlias
+                .Should()
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Contain($"Alias cannot contain whitespace: \"{alias}\"");
         }
 
         [Theory]
@@ -209,12 +205,7 @@ namespace System.CommandLine.Tests
             var optionB = new Option<string>(prefix + "b");
             var optionC = new Option<string>(prefix + "c");
 
-            var rootCommand = new RootCommand
-                              {
-                                  optionA,
-                                  optionB,
-                                  optionC
-                              };
+            var rootCommand = new RootCommand { optionA, optionB, optionC };
 
             var result = rootCommand.Parse(prefix + "c value-for-c " + prefix + "a value-for-a");
 
@@ -232,7 +223,7 @@ namespace System.CommandLine.Tests
             option.Description.Should().Be("desc");
             option.IsHidden.Should().BeFalse();
         }
-        
+
         [Fact]
         public void Argument_takes_option_alias_as_its_name_when_it_is_not_provided()
         {
@@ -244,10 +235,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Argument_retains_name_when_it_is_provided()
         {
-            var option = new Option<string>("-alias")
-            {
-                ArgumentHelpName = "arg"
-            };
+            var option = new Option<string>("-alias") { ArgumentHelpName = "arg" };
 
             option.ArgumentHelpName.Should().Be("arg");
         }
@@ -255,17 +243,9 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Option_T_default_value_can_be_set_via_the_constructor()
         {
-            var option = new Option<int>(
-                "-x",
-                parseArgument: parsed => 123,
-                isDefault: true);
+            var option = new Option<int>("-x", parseArgument: parsed => 123, isDefault: true);
 
-            option
-                .Parse("")
-                .FindResultFor(option)
-                .GetValueOrDefault()
-                .Should()
-                .Be(123);
+            option.Parse("").FindResultFor(option).GetValueOrDefault().Should().Be(123);
         }
 
         [Fact]
@@ -275,14 +255,9 @@ namespace System.CommandLine.Tests
 
             option.SetDefaultValue(123);
 
-            option
-                .Parse("")
-                .FindResultFor(option)
-                .GetValueOrDefault()
-                .Should()
-                .Be(123);
+            option.Parse("").FindResultFor(option).GetValueOrDefault().Should().Be(123);
         }
-        
+
         [Fact]
         public void Option_T_default_value_factory_can_be_set_after_instantiation()
         {
@@ -290,29 +265,25 @@ namespace System.CommandLine.Tests
 
             option.SetDefaultValueFactory(() => 123);
 
-            option
-                .Parse("")
-                .FindResultFor(option)
-                .GetValueOrDefault()
-                .Should()
-                .Be(123);
+            option.Parse("").FindResultFor(option).GetValueOrDefault().Should().Be(123);
         }
 
         [Fact]
         public void Option_T_default_value_is_validated()
         {
             var option = new Option<int>("-x", () => 123);
-            option.AddValidator(symbol =>
-                                    symbol.ErrorMessage = symbol.Tokens
-                                                                .Select(t => t.Value)
-                                                                .Where(v => v == "123")
-                                                                .Select(_ => "ERR")
-                                                                .FirstOrDefault());
+            option.AddValidator(
+                symbol =>
+                    symbol.ErrorMessage = symbol.Tokens
+                        .Select(t => t.Value)
+                        .Where(v => v == "123")
+                        .Select(_ => "ERR")
+                        .FirstOrDefault()
+            );
 
             option
                 .Parse("-x 123")
-                .Errors
-                .Select(e => e.Message)
+                .Errors.Select(e => e.Message)
                 .Should()
                 .BeEquivalentTo(new[] { "ERR" });
         }
@@ -323,14 +294,10 @@ namespace System.CommandLine.Tests
             var option = new Option<string>("-x");
 
             var result = option.Parse("");
-            result.HasOption(option)
-                .Should()
-                .BeFalse();
-            result.GetValueForOption(option)
-                .Should()
-                .BeNull();
+            result.HasOption(option).Should().BeFalse();
+            result.GetValueForOption(option).Should().BeNull();
         }
-        
+
         [Fact]
         public void When_Name_is_set_to_its_current_value_then_it_is_not_removed_from_aliases()
         {
@@ -363,28 +330,31 @@ namespace System.CommandLine.Tests
 
             var result = option.Parse("");
 
-            result.HasOption(option)
-                .Should()
-                .BeFalse();
-            result.GetValueForOption(option)
-                .Should()
-                .BeFalse();
+            result.HasOption(option).Should().BeFalse();
+            result.GetValueForOption(option).Should().BeFalse();
         }
 
         [Fact]
         public void Option_of_enum_can_limit_enum_members_as_valid_values()
         {
-            var option = new Option<ConsoleColor>("--color")
-                .FromAmong(ConsoleColor.Red.ToString(), ConsoleColor.Green.ToString());
+            var option = new Option<ConsoleColor>("--color").FromAmong(
+                ConsoleColor.Red.ToString(),
+                ConsoleColor.Green.ToString()
+            );
 
             var result = option.Parse("--color Fuschia");
 
             result.Errors
                 .Select(e => e.Message)
                 .Should()
-                .BeEquivalentTo(new[] { $"Argument 'Fuschia' not recognized. Must be one of:\n\t'Red'\n\t'Green'" });
+                .BeEquivalentTo(
+                    new[]
+                    {
+                        $"Argument 'Fuschia' not recognized. Must be one of:\n\t'Red'\n\t'Green'"
+                    }
+                );
         }
-        
+
         protected override Symbol CreateSymbol(string name) => new Option<string>(name);
     }
 }

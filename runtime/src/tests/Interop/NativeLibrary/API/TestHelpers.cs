@@ -29,7 +29,7 @@ static class TestHelpers
         Assert.Equal(expectedValue, actualValue);
     }
 
-    public static TestResult Run (Func<TestResult> test)
+    public static TestResult Run(Func<TestResult> test)
     {
         TestResult result;
 

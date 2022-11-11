@@ -9,7 +9,8 @@ namespace System.CommandLine.Rendering
     public static class CommandLineBuilderExtensions
     {
         public static CommandLineBuilder UseAnsiTerminalWhenAvailable(
-            this CommandLineBuilder builder)
+            this CommandLineBuilder builder
+        )
         {
             builder.AddMiddleware(context =>
             {
@@ -17,7 +18,8 @@ namespace System.CommandLine.Rendering
 
                 var terminal = console.GetTerminal(
                     PreferVirtualTerminal(context.BindingContext),
-                    OutputMode(context.BindingContext));
+                    OutputMode(context.BindingContext)
+                );
 
                 context.Console = terminal ?? console;
             });
@@ -25,16 +27,11 @@ namespace System.CommandLine.Rendering
             return builder;
         }
 
-        internal static bool PreferVirtualTerminal(
-            this BindingContext context)
+        internal static bool PreferVirtualTerminal(this BindingContext context)
         {
-            if (context.ParseResult.Directives.TryGetValues(
-                "enable-vt",
-                out var trueOrFalse))
+            if (context.ParseResult.Directives.TryGetValues("enable-vt", out var trueOrFalse))
             {
-                if (bool.TryParse(
-                    trueOrFalse.FirstOrDefault(),
-                    out var pvt))
+                if (bool.TryParse(trueOrFalse.FirstOrDefault(), out var pvt))
                 {
                     return pvt;
                 }
@@ -45,13 +42,10 @@ namespace System.CommandLine.Rendering
 
         public static OutputMode OutputMode(this BindingContext context)
         {
-            if (context.ParseResult.Directives.TryGetValues(
-                    "output",
-                    out var modeString) &&
-                Enum.TryParse<OutputMode>(
-                    modeString.FirstOrDefault(),
-                    true,
-                    out var mode))
+            if (
+                context.ParseResult.Directives.TryGetValues("output", out var modeString)
+                && Enum.TryParse<OutputMode>(modeString.FirstOrDefault(), true, out var mode)
+            )
             {
                 return mode;
             }

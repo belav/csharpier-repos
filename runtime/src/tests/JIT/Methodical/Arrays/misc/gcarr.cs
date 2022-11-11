@@ -9,6 +9,7 @@ namespace GCTest_gcarr_cs
     public class Test
     {
         private int _magic = 0x12345678;
+
         public virtual void CheckValid()
         {
             if (_magic != 0x12345678)

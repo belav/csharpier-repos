@@ -17,14 +17,12 @@ namespace System.CommandLine.Parsing
         private LocalizationResources? _resources;
         private readonly Dictionary<Argument, ArgumentResult> _defaultArgumentValues = new();
 
-        private protected SymbolResult(
-            Symbol symbol, 
-            SymbolResult? parent)
+        private protected SymbolResult(Symbol symbol, SymbolResult? parent)
         {
             Symbol = symbol ?? throw new ArgumentNullException(nameof(symbol));
 
             Parent = parent;
-            
+
             Root = parent?.Root;
         }
 
@@ -125,14 +123,12 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <param name="option">The option for which to find a result.</param>
         /// <returns>An option result if the option was matched by the parser or has a default value; otherwise, <c>null</c>.</returns>
-        public virtual OptionResult? FindResultFor(Option option) =>
-            Root?.FindResultFor(option);
+        public virtual OptionResult? FindResultFor(Option option) => Root?.FindResultFor(option);
 
         /// <inheritdoc cref="ParseResult.GetValueForArgument"/>
         public T GetValueForArgument<T>(Argument<T> argument)
         {
-            if (FindResultFor(argument) is { } result &&
-                result.GetValueOrDefault<T>() is { } t)
+            if (FindResultFor(argument) is { } result && result.GetValueOrDefault<T>() is { } t)
             {
                 return t;
             }
@@ -143,8 +139,10 @@ namespace System.CommandLine.Parsing
         /// <inheritdoc cref="ParseResult.GetValueForArgument"/>
         public object? GetValueForArgument(Argument argument)
         {
-            if (FindResultFor(argument) is { } result &&
-                result.GetValueOrDefault<object?>() is { } t)
+            if (
+                FindResultFor(argument) is { } result
+                && result.GetValueOrDefault<object?>() is { } t
+            )
             {
                 return t;
             }
@@ -155,8 +153,7 @@ namespace System.CommandLine.Parsing
         /// <inheritdoc cref="ParseResult.GetValueForOption"/>
         public T? GetValueForOption<T>(Option<T> option)
         {
-            if (FindResultFor(option) is { } result &&
-                result.GetValueOrDefault<T>() is { } t)
+            if (FindResultFor(option) is { } result && result.GetValueOrDefault<T>() is { } t)
             {
                 return t;
             }
@@ -167,8 +164,7 @@ namespace System.CommandLine.Parsing
         /// <inheritdoc cref="ParseResult.GetValueForOption"/>
         public object? GetValueForOption(Option option)
         {
-            if (FindResultFor(option) is { } result && 
-                result.GetValueOrDefault<object?>() is { } t)
+            if (FindResultFor(option) is { } result && result.GetValueOrDefault<object?>() is { } t)
             {
                 return t;
             }
@@ -177,19 +173,17 @@ namespace System.CommandLine.Parsing
         }
 
         internal ArgumentResult GetOrCreateDefaultArgumentResult(Argument argument) =>
-            _defaultArgumentValues.GetOrAdd(
-                argument,
-                arg => new ArgumentResult(arg, this));
+            _defaultArgumentValues.GetOrAdd(argument, arg => new ArgumentResult(arg, this));
 
         internal virtual bool UseDefaultValueFor(Argument argument) => false;
 
         /// <inheritdoc/>
-        public override string ToString() => $"{GetType().Name}: {this.Token()} {string.Join(" ", Tokens.Select(t => t.Value))}";
+        public override string ToString() =>
+            $"{GetType().Name}: {this.Token()} {string.Join(" ", Tokens.Select(t => t.Value))}";
 
         internal ParseError? UnrecognizedArgumentError(Argument argument)
         {
-            if (argument.AllowedValues?.Count > 0 &&
-                Tokens.Count > 0)
+            if (argument.AllowedValues?.Count > 0 && Tokens.Count > 0)
             {
                 for (var i = 0; i < Tokens.Count; i++)
                 {
@@ -200,8 +194,12 @@ namespace System.CommandLine.Parsing
                         if (!argument.AllowedValues.Contains(token.Value))
                         {
                             return new ParseError(
-                                LocalizationResources.UnrecognizedArgument(token.Value, argument.AllowedValues),
-                                this);
+                                LocalizationResources.UnrecognizedArgument(
+                                    token.Value,
+                                    argument.AllowedValues
+                                ),
+                                this
+                            );
                         }
                     }
                 }

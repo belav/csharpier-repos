@@ -19,7 +19,9 @@ internal sealed class TemplateSegment
             var invalidCharacterIndex = Value.IndexOf('*');
             if (invalidCharacterIndex != -1)
             {
-                throw new InvalidOperationException($"Invalid template '{template}'. A catch-all parameter may only have one '*' at the beginning of the segment.");
+                throw new InvalidOperationException(
+                    $"Invalid template '{template}'. A catch-all parameter may only have one '*' at the beginning of the segment."
+                );
             }
         }
         else
@@ -45,7 +47,9 @@ internal sealed class TemplateSegment
                 // then throw an error.
                 else if (questionMarkIndex >= 0)
                 {
-                    throw new ArgumentException($"Malformed parameter '{segment}' in route '{template}'. '?' character can only appear at the end of parameter name.");
+                    throw new ArgumentException(
+                        $"Malformed parameter '{segment}' in route '{template}'. '?' character can only appear at the end of parameter name."
+                    );
                 }
 
                 Constraints = Array.Empty<UrlValueConstraint>();
@@ -55,7 +59,9 @@ internal sealed class TemplateSegment
                 var tokens = Value.Split(':');
                 if (tokens[0].Length == 0)
                 {
-                    throw new ArgumentException($"Malformed parameter '{segment}' in route '{template}' has no name before the constraints list.");
+                    throw new ArgumentException(
+                        $"Malformed parameter '{segment}' in route '{template}' has no name before the constraints list."
+                    );
                 }
 
                 Value = tokens[0];
@@ -81,14 +87,18 @@ internal sealed class TemplateSegment
         {
             if (IsOptional && IsCatchAll)
             {
-                throw new InvalidOperationException($"Invalid segment '{segment}' in route '{template}'. A catch-all parameter cannot be marked optional.");
+                throw new InvalidOperationException(
+                    $"Invalid segment '{segment}' in route '{template}'. A catch-all parameter cannot be marked optional."
+                );
             }
 
             // Moving the check for this here instead of TemplateParser so we can allow catch-all.
             // We checked for '*' up above specifically for catch-all segments, this one checks for all others
             if (Value.IndexOf('*') != -1)
             {
-                throw new InvalidOperationException($"Invalid template '{template}'. The character '*' in parameter segment '{{{segment}}}' is not allowed.");
+                throw new InvalidOperationException(
+                    $"Invalid template '{template}'. The character '*' in parameter segment '{{{segment}}}' is not allowed."
+                );
             }
         }
     }
@@ -128,15 +138,25 @@ internal sealed class TemplateSegment
         }
     }
 
-    public override string ToString() => this switch
-    {
-        { IsParameter: true, IsOptional: false, IsCatchAll: false, Constraints: { Length: 0 } } => $"{{{Value}}}",
-        { IsParameter: true, IsOptional: false, IsCatchAll: false, Constraints: { Length: > 0 } } => $"{{{Value}:{string.Join(':', (object[])Constraints)}}}",
-        { IsParameter: true, IsOptional: true, Constraints: { Length: 0 } } => $"{{{Value}?}}",
-        { IsParameter: true, IsOptional: true, Constraints: { Length: > 0 } } => $"{{{Value}:{string.Join(':', (object[])Constraints)}?}}",
-        { IsParameter: true, IsCatchAll: true, Constraints: { Length: 0 } } => $"{{*{Value}}}",
-        { IsParameter: true, IsCatchAll: true, Constraints: { Length: > 0 } } => $"{{*{Value}:{string.Join(':', (object[])Constraints)}?}}",
-        { IsParameter: false } => Value,
-        _ => throw new InvalidOperationException("Invalid template segment.")
-    };
+    public override string ToString() =>
+        this switch
+        {
+            { IsParameter: true, IsOptional: false, IsCatchAll: false, Constraints: { Length: 0 } }
+                => $"{{{Value}}}",
+            {
+                IsParameter: true,
+                IsOptional: false,
+                IsCatchAll: false,
+                Constraints: { Length: > 0 }
+            }
+                => $"{{{Value}:{string.Join(':', (object[])Constraints)}}}",
+            { IsParameter: true, IsOptional: true, Constraints: { Length: 0 } } => $"{{{Value}?}}",
+            { IsParameter: true, IsOptional: true, Constraints: { Length: > 0 } }
+                => $"{{{Value}:{string.Join(':', (object[])Constraints)}?}}",
+            { IsParameter: true, IsCatchAll: true, Constraints: { Length: 0 } } => $"{{*{Value}}}",
+            { IsParameter: true, IsCatchAll: true, Constraints: { Length: > 0 } }
+                => $"{{*{Value}:{string.Join(':', (object[])Constraints)}?}}",
+            { IsParameter: false } => Value,
+            _ => throw new InvalidOperationException("Invalid template segment.")
+        };
 }

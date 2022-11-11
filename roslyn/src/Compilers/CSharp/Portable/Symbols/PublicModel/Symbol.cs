@@ -16,19 +16,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
     {
         internal abstract CSharp.Symbol UnderlyingSymbol { get; }
 
-        protected static ImmutableArray<TypeWithAnnotations> ConstructTypeArguments(ITypeSymbol[] typeArguments)
+        protected static ImmutableArray<TypeWithAnnotations> ConstructTypeArguments(
+            ITypeSymbol[] typeArguments
+        )
         {
             var builder = ArrayBuilder<TypeWithAnnotations>.GetInstance(typeArguments.Length);
             foreach (var typeArg in typeArguments)
             {
                 var type = typeArg.EnsureCSharpSymbolOrNull(nameof(typeArguments));
-                builder.Add(TypeWithAnnotations.Create(type, (typeArg?.NullableAnnotation.ToInternalAnnotation() ?? NullableAnnotation.NotAnnotated)));
+                builder.Add(
+                    TypeWithAnnotations.Create(
+                        type,
+                        (
+                            typeArg?.NullableAnnotation.ToInternalAnnotation()
+                            ?? NullableAnnotation.NotAnnotated
+                        )
+                    )
+                );
             }
 
             return builder.ToImmutableAndFree();
         }
 
-        protected static ImmutableArray<TypeWithAnnotations> ConstructTypeArguments(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<CodeAnalysis.NullableAnnotation> typeArgumentNullableAnnotations)
+        protected static ImmutableArray<TypeWithAnnotations> ConstructTypeArguments(
+            ImmutableArray<ITypeSymbol> typeArguments,
+            ImmutableArray<CodeAnalysis.NullableAnnotation> typeArgumentNullableAnnotations
+        )
         {
             if (typeArguments.IsDefault)
             {
@@ -36,7 +49,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             }
 
             int n = typeArguments.Length;
-            if (!typeArgumentNullableAnnotations.IsDefault && typeArgumentNullableAnnotations.Length != n)
+            if (
+                !typeArgumentNullableAnnotations.IsDefault
+                && typeArgumentNullableAnnotations.Length != n
+            )
             {
                 throw new ArgumentException(nameof(typeArgumentNullableAnnotations));
             }
@@ -45,7 +61,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             for (int i = 0; i < n; i++)
             {
                 var type = typeArguments[i].EnsureCSharpSymbolOrNull(nameof(typeArguments));
-                var annotation = typeArgumentNullableAnnotations.IsDefault ? NullableAnnotation.Oblivious : typeArgumentNullableAnnotations[i].ToInternalAnnotation();
+                var annotation = typeArgumentNullableAnnotations.IsDefault
+                    ? NullableAnnotation.Oblivious
+                    : typeArgumentNullableAnnotations[i].ToInternalAnnotation();
                 builder.Add(TypeWithAnnotations.Create(type, annotation));
             }
 
@@ -54,26 +72,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ISymbol ISymbol.OriginalDefinition
         {
-            get
-            {
-                return UnderlyingSymbol.OriginalDefinition.GetPublicSymbol();
-            }
+            get { return UnderlyingSymbol.OriginalDefinition.GetPublicSymbol(); }
         }
 
         ISymbol ISymbol.ContainingSymbol
         {
-            get
-            {
-                return UnderlyingSymbol.ContainingSymbol.GetPublicSymbol();
-            }
+            get { return UnderlyingSymbol.ContainingSymbol.GetPublicSymbol(); }
         }
 
         INamedTypeSymbol ISymbol.ContainingType
         {
-            get
-            {
-                return UnderlyingSymbol.ContainingType.GetPublicSymbol();
-            }
+            get { return UnderlyingSymbol.ContainingType.GetPublicSymbol(); }
         }
 
         public sealed override int GetHashCode()
@@ -98,23 +107,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         protected bool Equals(Symbol other, CodeAnalysis.SymbolEqualityComparer equalityComparer)
         {
-            return other is object && UnderlyingSymbol.Equals(other.UnderlyingSymbol, equalityComparer.CompareKind);
+            return other is object
+                && UnderlyingSymbol.Equals(other.UnderlyingSymbol, equalityComparer.CompareKind);
         }
 
         ImmutableArray<Location> ISymbol.Locations
         {
-            get
-            {
-                return UnderlyingSymbol.Locations;
-            }
+            get { return UnderlyingSymbol.Locations; }
         }
 
         ImmutableArray<SyntaxReference> ISymbol.DeclaringSyntaxReferences
         {
-            get
-            {
-                return UnderlyingSymbol.DeclaringSyntaxReferences;
-            }
+            get { return UnderlyingSymbol.DeclaringSyntaxReferences; }
         }
 
         ImmutableArray<AttributeData> ISymbol.GetAttributes()
@@ -124,10 +128,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         Accessibility ISymbol.DeclaredAccessibility
         {
-            get
-            {
-                return UnderlyingSymbol.DeclaredAccessibility;
-            }
+            get { return UnderlyingSymbol.DeclaredAccessibility; }
         }
 
         void ISymbol.Accept(SymbolVisitor visitor)
@@ -144,21 +145,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         protected abstract TResult Accept<TResult>(SymbolVisitor<TResult> visitor);
 
-        TResult ISymbol.Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        TResult ISymbol.Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return Accept(visitor, argument);
         }
 
-        protected abstract TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument);
+        protected abstract TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        );
 
         string ISymbol.GetDocumentationCommentId()
         {
             return UnderlyingSymbol.GetDocumentationCommentId();
         }
 
-        string ISymbol.GetDocumentationCommentXml(CultureInfo preferredCulture, bool expandIncludes, CancellationToken cancellationToken)
+        string ISymbol.GetDocumentationCommentXml(
+            CultureInfo preferredCulture,
+            bool expandIncludes,
+            CancellationToken cancellationToken
+        )
         {
-            return UnderlyingSymbol.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
+            return UnderlyingSymbol.GetDocumentationCommentXml(
+                preferredCulture,
+                expandIncludes,
+                cancellationToken
+            );
         }
 
         string ISymbol.ToDisplayString(SymbolDisplayFormat format)
@@ -171,14 +186,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return SymbolDisplay.ToDisplayParts(this, format);
         }
 
-        string ISymbol.ToMinimalDisplayString(SemanticModel semanticModel, int position, SymbolDisplayFormat format)
+        string ISymbol.ToMinimalDisplayString(
+            SemanticModel semanticModel,
+            int position,
+            SymbolDisplayFormat format
+        )
         {
-            return SymbolDisplay.ToMinimalDisplayString(this, GetCSharpSemanticModel(semanticModel), position, format);
+            return SymbolDisplay.ToMinimalDisplayString(
+                this,
+                GetCSharpSemanticModel(semanticModel),
+                position,
+                format
+            );
         }
 
-        ImmutableArray<SymbolDisplayPart> ISymbol.ToMinimalDisplayParts(SemanticModel semanticModel, int position, SymbolDisplayFormat format)
+        ImmutableArray<SymbolDisplayPart> ISymbol.ToMinimalDisplayParts(
+            SemanticModel semanticModel,
+            int position,
+            SymbolDisplayFormat format
+        )
         {
-            return SymbolDisplay.ToMinimalDisplayParts(this, GetCSharpSemanticModel(semanticModel), position, format);
+            return SymbolDisplay.ToMinimalDisplayParts(
+                this,
+                GetCSharpSemanticModel(semanticModel),
+                position,
+                format
+            );
         }
 
         internal static CSharpSemanticModel GetCSharpSemanticModel(SemanticModel semanticModel)
@@ -186,7 +219,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             var csharpModel = semanticModel as CSharpSemanticModel;
             if (csharpModel == null)
             {
-                throw new ArgumentException(CSharpResources.WrongSemanticModelType, LanguageNames.CSharp);
+                throw new ArgumentException(
+                    CSharpResources.WrongSemanticModelType,
+                    LanguageNames.CSharp
+                );
             }
 
             return csharpModel;
@@ -202,11 +238,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         int ISymbol.MetadataToken => UnderlyingSymbol.MetadataToken;
 
-        IAssemblySymbol ISymbol.ContainingAssembly => UnderlyingSymbol.ContainingAssembly.GetPublicSymbol();
+        IAssemblySymbol ISymbol.ContainingAssembly =>
+            UnderlyingSymbol.ContainingAssembly.GetPublicSymbol();
 
-        IModuleSymbol ISymbol.ContainingModule => UnderlyingSymbol.ContainingModule.GetPublicSymbol();
+        IModuleSymbol ISymbol.ContainingModule =>
+            UnderlyingSymbol.ContainingModule.GetPublicSymbol();
 
-        INamespaceSymbol ISymbol.ContainingNamespace => UnderlyingSymbol.ContainingNamespace.GetPublicSymbol();
+        INamespaceSymbol ISymbol.ContainingNamespace =>
+            UnderlyingSymbol.ContainingNamespace.GetPublicSymbol();
 
         bool ISymbol.IsDefinition => UnderlyingSymbol.IsDefinition;
 
@@ -227,18 +266,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         bool ISymbol.IsAbstract
         {
-            get
-            {
-                return UnderlyingSymbol.IsAbstract;
-            }
+            get { return UnderlyingSymbol.IsAbstract; }
         }
 
         bool ISymbol.IsSealed
         {
-            get
-            {
-                return UnderlyingSymbol.IsSealed;
-            }
+            get { return UnderlyingSymbol.IsSealed; }
         }
 
         bool ISymbol.IsExtern => UnderlyingSymbol.IsExtern;

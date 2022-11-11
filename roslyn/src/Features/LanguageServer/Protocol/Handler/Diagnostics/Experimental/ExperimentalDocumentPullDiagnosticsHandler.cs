@@ -15,41 +15,67 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics.Experimental;
 
-using DocumentDiagnosticReport = SumType<FullDocumentDiagnosticReport, UnchangedDocumentDiagnosticReport>;
+using DocumentDiagnosticReport = SumType<
+    FullDocumentDiagnosticReport,
+    UnchangedDocumentDiagnosticReport
+>;
 
 // A document diagnostic partial report is defined as having the first literal send = DocumentDiagnosticReport (aka the sumtype of changed / unchanged) followed
 // by n DocumentDiagnosticPartialResult literals.
 // See https://github.com/microsoft/vscode-languageserver-node/blob/main/protocol/src/common/proposed.diagnostics.md#textDocument_diagnostic
-using DocumentDiagnosticPartialReport = SumType<FullDocumentDiagnosticReport, UnchangedDocumentDiagnosticReport, DocumentDiagnosticPartialResult>;
+using DocumentDiagnosticPartialReport = SumType<
+    FullDocumentDiagnosticReport,
+    UnchangedDocumentDiagnosticReport,
+    DocumentDiagnosticPartialResult
+>;
 
 [Method(ExperimentalMethods.TextDocumentDiagnostic)]
-internal class ExperimentalDocumentPullDiagnosticsHandler : AbstractDocumentPullDiagnosticHandler<DocumentDiagnosticParams, DocumentDiagnosticPartialReport, DocumentDiagnosticReport?>
+internal class ExperimentalDocumentPullDiagnosticsHandler
+    : AbstractDocumentPullDiagnosticHandler<
+        DocumentDiagnosticParams,
+        DocumentDiagnosticPartialReport,
+        DocumentDiagnosticReport?
+    >
 {
     public ExperimentalDocumentPullDiagnosticsHandler(
         IDiagnosticAnalyzerService analyzerService,
         EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
-        IGlobalOptionService globalOptions)
-        : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions)
-    {
-    }
+        IGlobalOptionService globalOptions
+    ) : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions) { }
 
-    public override TextDocumentIdentifier GetTextDocumentIdentifier(DocumentDiagnosticParams diagnosticsParams) => diagnosticsParams.TextDocument;
+    public override TextDocumentIdentifier GetTextDocumentIdentifier(
+        DocumentDiagnosticParams diagnosticsParams
+    ) => diagnosticsParams.TextDocument;
 
     protected override DiagnosticTag[] ConvertTags(DiagnosticData diagnosticData)
     {
         return ConvertTags(diagnosticData, potentialDuplicate: false);
     }
 
-    protected override DocumentDiagnosticPartialReport CreateReport(TextDocumentIdentifier identifier, VisualStudio.LanguageServer.Protocol.Diagnostic[] diagnostics, string resultId)
-        => new DocumentDiagnosticReport(new FullDocumentDiagnosticReport(resultId, diagnostics));
+    protected override DocumentDiagnosticPartialReport CreateReport(
+        TextDocumentIdentifier identifier,
+        VisualStudio.LanguageServer.Protocol.Diagnostic[] diagnostics,
+        string resultId
+    ) => new DocumentDiagnosticReport(new FullDocumentDiagnosticReport(resultId, diagnostics));
 
-    protected override DocumentDiagnosticPartialReport CreateRemovedReport(TextDocumentIdentifier identifier)
-        => new DocumentDiagnosticReport(new FullDocumentDiagnosticReport(resultId: null, Array.Empty<VisualStudio.LanguageServer.Protocol.Diagnostic>()));
+    protected override DocumentDiagnosticPartialReport CreateRemovedReport(
+        TextDocumentIdentifier identifier
+    ) =>
+        new DocumentDiagnosticReport(
+            new FullDocumentDiagnosticReport(
+                resultId: null,
+                Array.Empty<VisualStudio.LanguageServer.Protocol.Diagnostic>()
+            )
+        );
 
-    protected override DocumentDiagnosticPartialReport CreateUnchangedReport(TextDocumentIdentifier identifier, string resultId)
-        => new DocumentDiagnosticReport(new UnchangedDocumentDiagnosticReport(resultId));
+    protected override DocumentDiagnosticPartialReport CreateUnchangedReport(
+        TextDocumentIdentifier identifier,
+        string resultId
+    ) => new DocumentDiagnosticReport(new UnchangedDocumentDiagnosticReport(resultId));
 
-    protected override DocumentDiagnosticReport? CreateReturn(BufferedProgress<DocumentDiagnosticPartialReport> progress)
+    protected override DocumentDiagnosticReport? CreateReturn(
+        BufferedProgress<DocumentDiagnosticPartialReport> progress
+    )
     {
         // We only ever report one result for document diagnostics, which is the first DocumentDiagnosticReport.
         var progressValues = progress.GetValues();
@@ -66,14 +92,25 @@ internal class ExperimentalDocumentPullDiagnosticsHandler : AbstractDocumentPull
         return null;
     }
 
-    protected override ValueTask<ImmutableArray<IDiagnosticSource>> GetOrderedDiagnosticSourcesAsync(RequestContext context, CancellationToken cancellationToken)
-        => ValueTaskFactory.FromResult(DocumentPullDiagnosticHandler.GetDiagnosticSources(context));
+    protected override ValueTask<
+        ImmutableArray<IDiagnosticSource>
+    > GetOrderedDiagnosticSourcesAsync(
+        RequestContext context,
+        CancellationToken cancellationToken
+    ) => ValueTaskFactory.FromResult(DocumentPullDiagnosticHandler.GetDiagnosticSources(context));
 
-    protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(DocumentDiagnosticParams diagnosticsParams)
+    protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(
+        DocumentDiagnosticParams diagnosticsParams
+    )
     {
         if (diagnosticsParams.PreviousResultId != null && diagnosticsParams.TextDocument != null)
         {
-            return ImmutableArray.Create(new PreviousPullResult(diagnosticsParams.PreviousResultId, diagnosticsParams.TextDocument));
+            return ImmutableArray.Create(
+                new PreviousPullResult(
+                    diagnosticsParams.PreviousResultId,
+                    diagnosticsParams.TextDocument
+                )
+            );
         }
 
         return null;

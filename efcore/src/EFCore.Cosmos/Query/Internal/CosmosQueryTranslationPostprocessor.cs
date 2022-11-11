@@ -22,8 +22,8 @@ public class CosmosQueryTranslationPostprocessor : QueryTranslationPostprocessor
     public CosmosQueryTranslationPostprocessor(
         QueryTranslationPostprocessorDependencies dependencies,
         ISqlExpressionFactory sqlExpressionFactory,
-        QueryCompilationContext queryCompilationContext)
-        : base(dependencies, queryCompilationContext)
+        QueryCompilationContext queryCompilationContext
+    ) : base(dependencies, queryCompilationContext)
     {
         _sqlExpressionFactory = sqlExpressionFactory;
     }
@@ -44,7 +44,9 @@ public class CosmosQueryTranslationPostprocessor : QueryTranslationPostprocessor
             selectExpression.ApplyProjection();
         }
 
-        query = new CosmosValueConverterCompensatingExpressionVisitor(_sqlExpressionFactory).Visit(query);
+        query = new CosmosValueConverterCompensatingExpressionVisitor(_sqlExpressionFactory).Visit(
+            query
+        );
 
         return query;
     }

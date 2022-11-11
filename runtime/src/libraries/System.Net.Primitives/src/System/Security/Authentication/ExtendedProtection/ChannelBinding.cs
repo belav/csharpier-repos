@@ -8,19 +8,10 @@ namespace System.Security.Authentication.ExtendedProtection
 {
     public abstract class ChannelBinding : SafeHandleZeroOrMinusOneIsInvalid
     {
-        protected ChannelBinding()
-            : base(true)
-        {
-        }
+        protected ChannelBinding() : base(true) { }
 
-        protected ChannelBinding(bool ownsHandle)
-            : base(ownsHandle)
-        {
-        }
+        protected ChannelBinding(bool ownsHandle) : base(ownsHandle) { }
 
-        public abstract int Size
-        {
-            get;
-        }
+        public abstract int Size { get; }
     }
 }

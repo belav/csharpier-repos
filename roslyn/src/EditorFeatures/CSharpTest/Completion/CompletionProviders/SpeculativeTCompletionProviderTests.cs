@@ -17,13 +17,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 {
     public class SpeculativeTCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(SpeculativeTCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(SpeculativeTCompletionProvider);
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task IsCommitCharacterTest()
         {
-            const string markup = @"
+            const string markup =
+                @"
 class C
 {
     $$
@@ -33,27 +34,43 @@ class C
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
-        public void IsTextualTriggerCharacterTest()
-            => TestCommonIsTextualTriggerCharacter();
+        public void IsTextualTriggerCharacterTest() => TestCommonIsTextualTriggerCharacter();
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task SendEnterThroughToEditorTest()
         {
-            const string markup = @"
+            const string markup =
+                @"
 class C
 {
     $$
 }";
 
-            await VerifySendEnterThroughToEnterAsync(markup, "T", sendThroughEnterOption: EnterKeyRule.Never, expected: false);
-            await VerifySendEnterThroughToEnterAsync(markup, "T", sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord, expected: true);
-            await VerifySendEnterThroughToEnterAsync(markup, "T", sendThroughEnterOption: EnterKeyRule.Always, expected: true);
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "T",
+                sendThroughEnterOption: EnterKeyRule.Never,
+                expected: false
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "T",
+                sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord,
+                expected: true
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "T",
+                sendThroughEnterOption: EnterKeyRule.Always,
+                expected: true
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InClass()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     $$
@@ -65,7 +82,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InInterface()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I
 {
     $$
@@ -77,7 +95,8 @@ interface I
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InStruct()
         {
-            var markup = @"
+            var markup =
+                @"
 struct S
 {
     $$
@@ -89,7 +108,8 @@ struct S
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInNamespace()
         {
-            var markup = @"
+            var markup =
+                @"
 namespace N
 {
     $$
@@ -101,7 +121,8 @@ namespace N
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInEnum()
         {
-            var markup = @"
+            var markup =
+                @"
 enum E
 {
     $$
@@ -113,7 +134,8 @@ enum E
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task AfterDelegate()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     delegate $$
@@ -125,7 +147,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotAfterVoid()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void $$
@@ -137,7 +160,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotAfterInt()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     int $$
@@ -149,7 +173,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InGeneric()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -163,7 +188,8 @@ class C
         [WorkItem(37224, "https://github.com/dotnet/roslyn/issues/37224")]
         public async Task InRef0()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -177,7 +203,8 @@ class C
         [WorkItem(37224, "https://github.com/dotnet/roslyn/issues/37224")]
         public async Task InRef1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -191,7 +218,8 @@ class C
         [WorkItem(37224, "https://github.com/dotnet/roslyn/issues/37224")]
         public async Task InRefGeneric0()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -205,7 +233,8 @@ class C
         [WorkItem(37224, "https://github.com/dotnet/roslyn/issues/37224")]
         public async Task InRefGeneric1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -219,7 +248,8 @@ class C
         [WorkItem(37224, "https://github.com/dotnet/roslyn/issues/37224")]
         public async Task InRefGeneric2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -233,7 +263,8 @@ class C
         [WorkItem(37224, "https://github.com/dotnet/roslyn/issues/37224")]
         public async Task InRefGeneric3()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -247,7 +278,8 @@ class C
         [WorkItem(37224, "https://github.com/dotnet/roslyn/issues/37224")]
         public async Task InRefReadonlyGeneric()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -261,7 +293,8 @@ class C
         [WorkItem(37268, "https://github.com/dotnet/roslyn/issues/37268")]
         public async Task InQualifiedGeneric0()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -275,7 +308,8 @@ class C
         [WorkItem(37268, "https://github.com/dotnet/roslyn/issues/37268")]
         public async Task InQualifiedGeneric1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -290,7 +324,8 @@ class C
         [WorkItem(37268, "https://github.com/dotnet/roslyn/issues/37268")]
         public async Task InRefAndQualifiedGeneric0()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -305,7 +340,8 @@ class C
         [WorkItem(37268, "https://github.com/dotnet/roslyn/issues/37268")]
         public async Task InRefAndQualifiedGeneric1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -320,7 +356,8 @@ class C
         [WorkItem(37268, "https://github.com/dotnet/roslyn/issues/37268")]
         public async Task InRefAndQualifiedNestedGeneric0()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -335,7 +372,8 @@ class C
         [WorkItem(37268, "https://github.com/dotnet/roslyn/issues/37268")]
         public async Task InRefAndQualifiedNestedGeneric1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -350,7 +388,8 @@ class C
         [WorkItem(37268, "https://github.com/dotnet/roslyn/issues/37268")]
         public async Task InRefAndQualifiedNestedGeneric2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -365,7 +404,8 @@ class C
         [WorkItem(37268, "https://github.com/dotnet/roslyn/issues/37268")]
         public async Task InRefAndQualifiedNestedGeneric3()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -379,7 +419,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InTuple0()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -393,7 +434,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task TupleInMethod0()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -410,7 +452,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task TupleInMethod1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -428,7 +471,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task TupleInMethod2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -444,7 +488,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task TupleInMethod3()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -465,7 +510,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InTupleNot0()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -479,7 +525,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InTuple1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -493,7 +540,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InTupleNot1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -507,7 +555,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InTupleGeneric0()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -521,7 +570,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InTupleGeneric1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -535,7 +585,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InTupleGeneric2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -549,7 +600,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InGenericTuple0()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -563,7 +615,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InGenericTuple1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -577,7 +630,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InGenericTuple1Not()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -591,7 +645,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InGenericTuple2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -605,7 +660,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InGenericTuple2Not()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -619,7 +675,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InGenericTuple3()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -633,7 +690,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InGenericTuple3Not()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -647,7 +705,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InRefTupleQualifiedNestedGeneric0()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -661,7 +720,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InRefTupleQualifiedNestedGeneric1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -675,7 +735,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InRefTupleQualifiedNestedGeneric2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -689,7 +750,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InRefTupleQualifiedNestedGeneric3()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -703,7 +765,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InRefTupleQualifiedNestedGeneric4()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -717,7 +780,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InRefTupleQualifiedNestedGeneric5()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -731,7 +795,8 @@ class C
         [WorkItem(37361, "https://github.com/dotnet/roslyn/issues/37361")]
         public async Task InRefTupleQualifiedNestedGeneric6()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -744,7 +809,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InNestedGeneric1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -757,7 +823,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InNestedGeneric2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 class C
 {
@@ -772,7 +839,12 @@ class C
         {
             var markup = @"$$";
 
-            await VerifyItemExistsAsync(markup, "T", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemExistsAsync(
+                markup,
+                "T",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
@@ -780,7 +852,12 @@ class C
         {
             var markup = @"void $$";
 
-            await VerifyItemIsAbsentAsync(markup, "T", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemIsAbsentAsync(
+                markup,
+                "T",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
@@ -788,46 +865,70 @@ class C
         {
             var markup = @"int $$";
 
-            await VerifyItemIsAbsentAsync(markup, "T", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemIsAbsentAsync(
+                markup,
+                "T",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InGenericInScript()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 Func<$$
 ";
 
-            await VerifyItemExistsAsync(markup, "T", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemExistsAsync(
+                markup,
+                "T",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InNestedGenericInScript1()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 Func<Func<$$
 ";
 
-            await VerifyItemExistsAsync(markup, "T", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemExistsAsync(
+                markup,
+                "T",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InNestedGenericInScript2()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 Func<Func<int,$$
 ";
 
-            await VerifyItemExistsAsync(markup, "T", expectedDescriptionOrNull: null, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyItemExistsAsync(
+                markup,
+                "T",
+                expectedDescriptionOrNull: null,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInComment()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     // $$
@@ -839,7 +940,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotInXmlDocComment()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     /// <summary>
@@ -854,7 +956,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task AfterAsyncTask()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading.Tasks;
 class Program
 {
@@ -867,7 +970,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotOkAfterAsync()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading.Tasks;
 class Program
 {
@@ -881,7 +985,8 @@ class Program
         [WorkItem(968256, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/968256")]
         public async Task UnionOfItemsFromBothContexts()
         {
-            var markup = @"<Workspace>
+            var markup =
+                @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""Proj1"" PreprocessorSymbols=""GOO"">
         <Document FilePath=""CurrentDocument.cs""><![CDATA[
 class C
@@ -910,7 +1015,8 @@ $$
         [WorkItem(1020654, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1020654")]
         public async Task AfterAsyncTaskWithBraceCompletion()
         {
-            var markup = @"
+            var markup =
+                @"
 using System.Threading.Tasks;
 class Program
 {
@@ -924,7 +1030,8 @@ class Program
         [CompilerTrait(CompilerFeature.LocalFunctions)]
         public async Task LocalFunctionReturnType()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public void M()
@@ -939,7 +1046,8 @@ class C
         [CompilerTrait(CompilerFeature.LocalFunctions)]
         public async Task LocalFunctionAfterAyncTask()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public void M()
@@ -954,7 +1062,8 @@ class C
         [CompilerTrait(CompilerFeature.LocalFunctions)]
         public async Task LocalFunctionAfterAsync()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public void M()

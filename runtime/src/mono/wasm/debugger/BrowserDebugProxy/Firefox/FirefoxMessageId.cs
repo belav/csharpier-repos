@@ -18,7 +18,13 @@ public class FirefoxMessageId : MessageId
 
     public override string ToString() => $"msg-{sessionId}:::{id}:::{toId}";
 
-    public override int GetHashCode() => (sessionId?.GetHashCode() ?? 0) ^ (toId?.GetHashCode() ?? 0) ^ id.GetHashCode();
+    public override int GetHashCode() =>
+        (sessionId?.GetHashCode() ?? 0) ^ (toId?.GetHashCode() ?? 0) ^ id.GetHashCode();
 
-    public override bool Equals(object obj) => (obj is FirefoxMessageId) ? ((FirefoxMessageId)obj).sessionId == sessionId && ((FirefoxMessageId)obj).id == id && ((FirefoxMessageId)obj).toId == toId : false;
+    public override bool Equals(object obj) =>
+        (obj is FirefoxMessageId)
+            ? ((FirefoxMessageId)obj).sessionId == sessionId
+                && ((FirefoxMessageId)obj).id == id
+                && ((FirefoxMessageId)obj).toId == toId
+            : false;
 }

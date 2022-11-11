@@ -15,83 +15,106 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<WithNonComparableKey>(
-            eb =>
-            {
-                eb.Property(e => e.Id);
-                eb.HasKey(e => e.Id);
-            });
+        modelBuilder.Entity<WithNonComparableKey>(eb =>
+        {
+            eb.Property(e => e.Id);
+            eb.HasKey(e => e.Id);
+        });
 
         VerifyError(
-            CoreStrings.PropertyNotMapped(nameof(NotComparable), nameof(WithNonComparableKey), nameof(WithNonComparableKey.Id)),
-            modelBuilder);
+            CoreStrings.PropertyNotMapped(
+                nameof(NotComparable),
+                nameof(WithNonComparableKey),
+                nameof(WithNonComparableKey.Id)
+            ),
+            modelBuilder
+        );
     }
 
     public override void Detects_noncomparable_key_property_with_comparer()
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<WithNonComparableKey>(
-            eb =>
-            {
-                eb.Property(e => e.Id).HasConversion(typeof(NotComparable), typeof(CustomValueComparer<NotComparable>));
-                eb.HasKey(e => e.Id);
-            });
+        modelBuilder.Entity<WithNonComparableKey>(eb =>
+        {
+            eb.Property(e => e.Id)
+                .HasConversion(typeof(NotComparable), typeof(CustomValueComparer<NotComparable>));
+            eb.HasKey(e => e.Id);
+        });
 
         VerifyError(
-            CoreStrings.PropertyNotMapped(nameof(NotComparable), nameof(WithNonComparableKey), nameof(WithNonComparableKey.Id)),
-            modelBuilder);
+            CoreStrings.PropertyNotMapped(
+                nameof(NotComparable),
+                nameof(WithNonComparableKey),
+                nameof(WithNonComparableKey.Id)
+            ),
+            modelBuilder
+        );
     }
 
     public override void Detects_noncomparable_key_property_with_provider_comparer()
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<WithNonComparableKey>(
-            eb =>
-            {
-                eb.Property(e => e.Id).HasConversion(
-                    typeof(CastingConverter<NotComparable, NotComparable>), null, typeof(CustomValueComparer<NotComparable>));
-                eb.HasKey(e => e.Id);
-            });
+        modelBuilder.Entity<WithNonComparableKey>(eb =>
+        {
+            eb.Property(e => e.Id)
+                .HasConversion(
+                    typeof(CastingConverter<NotComparable, NotComparable>),
+                    null,
+                    typeof(CustomValueComparer<NotComparable>)
+                );
+            eb.HasKey(e => e.Id);
+        });
 
         VerifyError(
-            CoreStrings.PropertyNotMapped(nameof(NotComparable), nameof(WithNonComparableKey), nameof(WithNonComparableKey.Id)),
-            modelBuilder);
+            CoreStrings.PropertyNotMapped(
+                nameof(NotComparable),
+                nameof(WithNonComparableKey),
+                nameof(WithNonComparableKey.Id)
+            ),
+            modelBuilder
+        );
     }
 
     public override void Detects_unique_index_property_which_cannot_be_compared()
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<WithNonComparableUniqueIndex>(
-            eb =>
-            {
-                eb.HasIndex(e => e.Index).IsUnique();
-            });
+        modelBuilder.Entity<WithNonComparableUniqueIndex>(eb =>
+        {
+            eb.HasIndex(e => e.Index).IsUnique();
+        });
 
         VerifyError(
             CoreStrings.PropertyNotMapped(
-                nameof(NotComparable), nameof(WithNonComparableUniqueIndex), nameof(WithNonComparableUniqueIndex.Index)),
-            modelBuilder);
+                nameof(NotComparable),
+                nameof(WithNonComparableUniqueIndex),
+                nameof(WithNonComparableUniqueIndex.Index)
+            ),
+            modelBuilder
+        );
     }
 
     public override void Ignores_normal_property_which_cannot_be_compared()
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<WithNonComparableNormalProperty>(
-            eb =>
-            {
-                eb.Property(e => e.Id);
-                eb.HasKey(e => e.Id);
-                eb.Property(e => e.Foo);
-            });
+        modelBuilder.Entity<WithNonComparableNormalProperty>(eb =>
+        {
+            eb.Property(e => e.Id);
+            eb.HasKey(e => e.Id);
+            eb.Property(e => e.Foo);
+        });
 
         VerifyError(
             CoreStrings.PropertyNotMapped(
-                nameof(NotComparable), nameof(WithNonComparableNormalProperty), nameof(WithNonComparableNormalProperty.Foo)),
-            modelBuilder);
+                nameof(NotComparable),
+                nameof(WithNonComparableNormalProperty),
+                nameof(WithNonComparableNormalProperty.Foo)
+            ),
+            modelBuilder
+        );
     }
 
     public override void Detects_missing_discriminator_property()
@@ -145,8 +168,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         property.ValueGenerated = ValueGenerated.OnAdd;
 
         VerifyWarning(
-            RelationalResources.LogBoolWithDefaultWarning(new TestLogger<TestRelationalLoggingDefinitions>())
-                .GenerateMessage("ImBool", "E"), modelBuilder);
+            RelationalResources
+                .LogBoolWithDefaultWarning(new TestLogger<TestRelationalLoggingDefinitions>())
+                .GenerateMessage("ImBool", "E"),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -165,8 +191,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         property.ValueGenerated = ValueGenerated.OnAddOrUpdate;
 
         VerifyWarning(
-            RelationalResources.LogBoolWithDefaultWarning(new TestLogger<TestRelationalLoggingDefinitions>())
-                .GenerateMessage("ImBool", "E"), modelBuilder);
+            RelationalResources
+                .LogBoolWithDefaultWarning(new TestLogger<TestRelationalLoggingDefinitions>())
+                .GenerateMessage("ImBool", "E"),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -183,8 +212,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         entityA.FindProperty("Id").SetDefaultValue(1);
 
         VerifyWarning(
-            RelationalResources.LogKeyHasDefaultValue(
-                new TestLogger<TestRelationalLoggingDefinitions>()).GenerateMessage("Id", "A"), modelBuilder);
+            RelationalResources
+                .LogKeyHasDefaultValue(new TestLogger<TestRelationalLoggingDefinitions>())
+                .GenerateMessage("Id", "A"),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -205,8 +237,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         property.SetDefaultValue(1);
 
         VerifyWarning(
-            RelationalResources.LogKeyHasDefaultValue(new TestLogger<TestRelationalLoggingDefinitions>()).GenerateMessage("P0", "A"),
-            modelBuilder);
+            RelationalResources
+                .LogKeyHasDefaultValue(new TestLogger<TestRelationalLoggingDefinitions>())
+                .GenerateMessage("P0", "A"),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -233,8 +268,12 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.IncompatibleTableNoRelationship(
-                "Schema.Table", entityB.DisplayName(), entityA.DisplayName()),
-            modelBuilder);
+                "Schema.Table",
+                entityB.DisplayName(),
+                entityA.DisplayName()
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -261,8 +300,12 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.IncompatibleTableNoRelationship(
-                "Table", entityB.DisplayName(), entityA.DisplayName()),
-            modelBuilder);
+                "Table",
+                entityB.DisplayName(),
+                entityA.DisplayName()
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -289,8 +332,12 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.IncompatibleViewNoRelationship(
-                "Schema.Table", entityB.DisplayName(), entityA.DisplayName()),
-            modelBuilder);
+                "Schema.Table",
+                entityB.DisplayName(),
+                entityA.DisplayName()
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -317,8 +364,12 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.IncompatibleViewNoRelationship(
-                "Table", entityB.DisplayName(), entityA.DisplayName()),
-            modelBuilder);
+                "Table",
+                entityB.DisplayName(),
+                entityA.DisplayName()
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -366,15 +417,29 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne(b => b.A).HasForeignKey<A>(a => a.Id).HasPrincipalKey<B>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne(b => b.A)
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<B>(b => b.Id)
+            .IsRequired();
         modelBuilder.Entity<A>().HasKey(a => a.Id).HasName("Key");
         modelBuilder.Entity<A>().ToTable("Table");
         modelBuilder.Entity<B>().ToTable("Table");
 
         VerifyError(
             RelationalStrings.IncompatibleTableKeyNameMismatch(
-                "Table", nameof(B), nameof(A), "PK_Table", "{'Id'}", "Key", "{'Id'}"),
-            modelBuilder);
+                "Table",
+                nameof(B),
+                nameof(A),
+                "PK_Table",
+                "{'Id'}",
+                "Key",
+                "{'Id'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -382,14 +447,26 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne(b => b.A).HasPrincipalKey<A>(a => a.Id).HasForeignKey<B>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne(b => b.A)
+            .HasPrincipalKey<A>(a => a.Id)
+            .HasForeignKey<B>(b => b.Id)
+            .IsRequired();
         modelBuilder.Entity<A>().ToTable("Table", tb => tb.HasComment("My comment"));
         modelBuilder.Entity<B>().ToTable("Table", tb => tb.HasComment("my comment"));
 
         VerifyError(
             RelationalStrings.IncompatibleTableCommentMismatch(
-                "Table", nameof(A), nameof(B), "My comment", "my comment"),
-            modelBuilder);
+                "Table",
+                nameof(A),
+                nameof(B),
+                "My comment",
+                "my comment"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -397,7 +474,13 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne(b => b.A).HasPrincipalKey<A>(a => a.Id).HasForeignKey<B>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne(b => b.A)
+            .HasPrincipalKey<A>(a => a.Id)
+            .HasForeignKey<B>(b => b.Id)
+            .IsRequired();
         modelBuilder.Entity<A>().ToTable("Table", tb => tb.HasComment("My comment"));
         modelBuilder.Entity<B>().ToTable("Table");
 
@@ -409,15 +492,35 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne(b => b.A).HasForeignKey<A>(a => a.Id).HasPrincipalKey<B>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne(b => b.A)
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<B>(b => b.Id)
+            .IsRequired();
         modelBuilder.Entity<A>().Property(a => a.Id).ValueGeneratedNever().HasColumnName("Key");
         modelBuilder.Entity<A>().ToTable("Table");
-        modelBuilder.Entity<B>().Property(a => a.Id).ValueGeneratedNever().HasColumnName(nameof(B.Id));
+        modelBuilder
+            .Entity<B>()
+            .Property(a => a.Id)
+            .ValueGeneratedNever()
+            .HasColumnName(nameof(B.Id));
         modelBuilder.Entity<B>().ToTable("Table");
 
         VerifyError(
             RelationalStrings.DuplicateKeyColumnMismatch(
-                "{'Id'}", nameof(B), "{'Id'}", nameof(A), "Table", "PK_Table", "{'Id'}", "{'Key'}"), modelBuilder);
+                "{'Id'}",
+                nameof(B),
+                "{'Id'}",
+                nameof(A),
+                "Table",
+                "PK_Table",
+                "{'Id'}",
+                "{'Key'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -425,11 +528,21 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne(b => b.A).HasForeignKey<A>(a => a.Id).HasPrincipalKey<B>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne(b => b.A)
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<B>(b => b.Id)
+            .IsRequired();
         modelBuilder.Entity<A>().Property(a => a.P0).HasColumnName(nameof(A.P0));
         modelBuilder.Entity<A>().Property(a => a.P1).IsRequired();
         modelBuilder.Entity<A>().ToTable("Table");
-        modelBuilder.Entity<B>().Property(b => b.P0).HasColumnName(nameof(A.P0)).HasColumnType("someInt");
+        modelBuilder
+            .Entity<B>()
+            .Property(b => b.P0)
+            .HasColumnName(nameof(A.P0))
+            .HasColumnType("someInt");
         modelBuilder.Entity<B>().ToTable("Table");
 
         Validate(modelBuilder);
@@ -440,13 +553,26 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne().HasForeignKey<A>(a => a.Id).HasPrincipalKey<B>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne()
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<B>(b => b.Id)
+            .IsRequired();
         modelBuilder.Entity<A>().Property(a => a.P0).HasColumnName(nameof(A.P0));
         modelBuilder.Entity<A>().ToTable("Table");
-        modelBuilder.Entity<B>().Property(b => b.P0).HasColumnName(nameof(A.P0)).HasColumnType("someInt");
+        modelBuilder
+            .Entity<B>()
+            .Property(b => b.P0)
+            .HasColumnName(nameof(A.P0))
+            .HasColumnType("someInt");
         modelBuilder.Entity<B>().ToTable("Table");
 
-        VerifyError(RelationalStrings.OptionalDependentWithDependentWithoutIdentifyingProperty(nameof(A)), modelBuilder);
+        VerifyError(
+            RelationalStrings.OptionalDependentWithDependentWithoutIdentifyingProperty(nameof(A)),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -456,8 +582,9 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         modelBuilder.Entity<Owner>().OwnsOne(e => e.Owned);
 
-        var definition =
-            RelationalResources.LogOptionalDependentWithoutIdentifyingProperty(new TestLogger<TestRelationalLoggingDefinitions>());
+        var definition = RelationalResources.LogOptionalDependentWithoutIdentifyingProperty(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
         VerifyWarning(definition.GenerateMessage(nameof(OwnedEntity)), modelBuilder);
     }
 
@@ -466,16 +593,39 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne(b => b.A).HasForeignKey<A>(a => a.Id).HasPrincipalKey<B>(b => b.Id).IsRequired();
-        modelBuilder.Entity<A>().Property(a => a.P0).HasColumnName(nameof(A.P0)).HasColumnType("someInt");
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne(b => b.A)
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<B>(b => b.Id)
+            .IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .Property(a => a.P0)
+            .HasColumnName(nameof(A.P0))
+            .HasColumnType("someInt");
         modelBuilder.Entity<A>().ToTable("Table");
-        modelBuilder.Entity<B>().Property(b => b.P0).HasColumnName(nameof(A.P0)).HasColumnType("default_int_mapping");
+        modelBuilder
+            .Entity<B>()
+            .Property(b => b.P0)
+            .HasColumnName(nameof(A.P0))
+            .HasColumnType("default_int_mapping");
         modelBuilder.Entity<B>().ToTable("Table");
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameDataTypeMismatch(
-                nameof(A), nameof(A.P0), nameof(B), nameof(B.P0), nameof(B.P0), "Table", "someInt", "default_int_mapping"),
-            modelBuilder);
+                nameof(A),
+                nameof(A.P0),
+                nameof(B),
+                nameof(B.P0),
+                nameof(B.P0),
+                "Table",
+                "someInt",
+                "default_int_mapping"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -488,8 +638,15 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameSameHierarchy(
-                nameof(A), nameof(A.P0), nameof(C), "PC", nameof(A.P0), nameof(A)),
-            modelBuilder);
+                nameof(A),
+                nameof(A.P0),
+                nameof(C),
+                "PC",
+                nameof(A.P0),
+                nameof(A)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -497,16 +654,40 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne(b => b.A).HasForeignKey<A>(a => a.Id).HasPrincipalKey<B>(b => b.Id).IsRequired();
-        modelBuilder.Entity<A>().Property(a => a.P0).HasColumnName(nameof(A.P0)).HasColumnType("someInt").HasConversion<long>();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne(b => b.A)
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<B>(b => b.Id)
+            .IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .Property(a => a.P0)
+            .HasColumnName(nameof(A.P0))
+            .HasColumnType("someInt")
+            .HasConversion<long>();
         modelBuilder.Entity<A>().ToTable("Table");
-        modelBuilder.Entity<B>().Property(b => b.P0).HasColumnName(nameof(A.P0)).HasColumnType("someInt");
+        modelBuilder
+            .Entity<B>()
+            .Property(b => b.P0)
+            .HasColumnName(nameof(A.P0))
+            .HasColumnType("someInt");
         modelBuilder.Entity<B>().ToTable("Table");
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameProviderTypeMismatch(
-                nameof(A), nameof(A.P0), nameof(B), nameof(B.P0), nameof(B.P0), "Table", "long", "int"),
-            modelBuilder);
+                nameof(A),
+                nameof(A.P0),
+                nameof(B),
+                nameof(B.P0),
+                nameof(B.P0),
+                "Table",
+                "long",
+                "int"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -514,14 +695,36 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne(b => b.A).HasForeignKey<A>(a => a.Id).HasPrincipalKey<B>(b => b.Id).IsRequired();
-        modelBuilder.Entity<A>().ToTable("Table", tb => tb.HasCheckConstraint("SomeCK", "Id > 0").HasName("CK_Table_SomeCK"));
-        modelBuilder.Entity<B>().ToTable("Table", tb => tb.HasCheckConstraint("SomeOtherCK", "Id > 10").HasName("CK_Table_SomeCK"));
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne(b => b.A)
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<B>(b => b.Id)
+            .IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .ToTable(
+                "Table",
+                tb => tb.HasCheckConstraint("SomeCK", "Id > 0").HasName("CK_Table_SomeCK")
+            );
+        modelBuilder
+            .Entity<B>()
+            .ToTable(
+                "Table",
+                tb => tb.HasCheckConstraint("SomeOtherCK", "Id > 10").HasName("CK_Table_SomeCK")
+            );
 
         VerifyError(
             RelationalStrings.DuplicateCheckConstraintSqlMismatch(
-                "SomeOtherCK", nameof(B), "SomeCK", nameof(A), "CK_Table_SomeCK"),
-            modelBuilder);
+                "SomeOtherCK",
+                nameof(B),
+                "SomeCK",
+                nameof(A),
+                "CK_Table_SomeCK"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -529,14 +732,30 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne(b => b.A).HasForeignKey<A>(a => a.Id).HasPrincipalKey<B>(b => b.Id).IsRequired();
-        modelBuilder.Entity<A>().ToTable("Table", tb => tb.HasCheckConstraint("CK_Table_SomeCK", "Id > 0"));
-        modelBuilder.Entity<B>().ToTable("Table", tb => tb.HasCheckConstraint("CK_Table_SomeCK", "Id > 10"));
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne(b => b.A)
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<B>(b => b.Id)
+            .IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .ToTable("Table", tb => tb.HasCheckConstraint("CK_Table_SomeCK", "Id > 0"));
+        modelBuilder
+            .Entity<B>()
+            .ToTable("Table", tb => tb.HasCheckConstraint("CK_Table_SomeCK", "Id > 10"));
 
         var model = Validate(modelBuilder);
 
-        Assert.Equal("CK_Table_SomeCK1", model.FindEntityType(typeof(A)).GetCheckConstraints().Single().Name);
-        Assert.Equal("CK_Table_SomeCK", model.FindEntityType(typeof(B)).GetCheckConstraints().Single().Name);
+        Assert.Equal(
+            "CK_Table_SomeCK1",
+            model.FindEntityType(typeof(A)).GetCheckConstraints().Single().Name
+        );
+        Assert.Equal(
+            "CK_Table_SomeCK",
+            model.FindEntityType(typeof(B)).GetCheckConstraints().Single().Name
+        );
     }
 
     [ConditionalFact]
@@ -544,14 +763,30 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne(b => b.A).HasForeignKey<A>(a => a.Id).HasPrincipalKey<B>(b => b.Id).IsRequired();
-        modelBuilder.Entity<A>().ToTable("Table", tb => tb.HasCheckConstraint("CK_Table_SomeCK", "Id > 0"));
-        modelBuilder.Entity<B>().ToTable("Table", tb => tb.HasCheckConstraint("CK_Table_SomeCK", "Id > 0"));
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne(b => b.A)
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<B>(b => b.Id)
+            .IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .ToTable("Table", tb => tb.HasCheckConstraint("CK_Table_SomeCK", "Id > 0"));
+        modelBuilder
+            .Entity<B>()
+            .ToTable("Table", tb => tb.HasCheckConstraint("CK_Table_SomeCK", "Id > 0"));
 
         var model = Validate(modelBuilder);
 
-        Assert.Equal("CK_Table_SomeCK", model.FindEntityType(typeof(A)).GetCheckConstraints().Single().Name);
-        Assert.Equal("CK_Table_SomeCK", model.FindEntityType(typeof(B)).GetCheckConstraints().Single().Name);
+        Assert.Equal(
+            "CK_Table_SomeCK",
+            model.FindEntityType(typeof(A)).GetCheckConstraints().Single().Name
+        );
+        Assert.Equal(
+            "CK_Table_SomeCK",
+            model.FindEntityType(typeof(B)).GetCheckConstraints().Single().Name
+        );
     }
 
     [ConditionalFact]
@@ -559,15 +794,28 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne().HasForeignKey<A>(a => a.Id).HasPrincipalKey<B>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne()
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<B>(b => b.Id)
+            .IsRequired();
         modelBuilder.Entity<A>().ToTable("Table");
-        modelBuilder.Entity<A>().HasOne<C>().WithOne().HasForeignKey<A>(a => a.Id).HasPrincipalKey<C>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<C>()
+            .WithOne()
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<C>(b => b.Id)
+            .IsRequired();
         modelBuilder.Entity<C>().HasBaseType((string)null).ToTable("Table");
         modelBuilder.Entity<B>().ToTable("Table");
 
         VerifyError(
             RelationalStrings.IncompatibleTableNoRelationship("Table", nameof(C), nameof(B)),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -575,14 +823,24 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne().HasForeignKey<A>(a => a.Id).HasPrincipalKey<B>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne()
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<B>(b => b.Id)
+            .IsRequired();
         modelBuilder.Entity<A>().ToTable("Table");
-        modelBuilder.Entity<A>().HasOne<B>().WithOne().HasForeignKey<B>(a => a.Id).HasPrincipalKey<A>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne()
+            .HasForeignKey<B>(a => a.Id)
+            .HasPrincipalKey<A>(b => b.Id)
+            .IsRequired();
         modelBuilder.Entity<B>().ToTable("Table");
 
-        VerifyError(
-            CoreStrings.IdentifyingRelationshipCycle("A -> B"),
-            modelBuilder);
+        VerifyError(CoreStrings.IdentifyingRelationshipCycle("A -> B"), modelBuilder);
     }
 
     [ConditionalFact]
@@ -590,21 +848,25 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne().HasForeignKey<A>(a => a.Id).HasPrincipalKey<B>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne()
+            .HasForeignKey<A>(a => a.Id)
+            .HasPrincipalKey<B>(b => b.Id)
+            .IsRequired();
 
         modelBuilder.Entity<A>().ToTable("Table").Property(e => e.P0).IsRequired();
-        modelBuilder.Entity<B>(
-            b =>
-            {
-                b.ToTable("Table");
-                b.Property(bb => bb.Id)
-                    .HasColumnName("Key")
-                    .HasColumnType("someInt")
-                    .HasDefaultValueSql("NEXT value");
+        modelBuilder.Entity<B>(b =>
+        {
+            b.ToTable("Table");
+            b.Property(bb => bb.Id)
+                .HasColumnName("Key")
+                .HasColumnType("someInt")
+                .HasDefaultValueSql("NEXT value");
 
-                b.HasKey(bb => bb.Id)
-                    .HasName("Key");
-            });
+            b.HasKey(bb => bb.Id).HasName("Key");
+        });
 
         Validate(modelBuilder);
     }
@@ -614,7 +876,13 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne().HasPrincipalKey<A>(a => a.Id).HasForeignKey<B>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne()
+            .HasPrincipalKey<A>(a => a.Id)
+            .HasForeignKey<B>(b => b.Id)
+            .IsRequired();
         modelBuilder.Entity<A>().ToTable("Table", t => t.ExcludeFromMigrations());
         modelBuilder.Entity<B>().ToTable("Table", t => t.ExcludeFromMigrations());
 
@@ -656,26 +924,40 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne().HasPrincipalKey<A>(a => a.Id).HasForeignKey<B>(b => b.Id).IsRequired();
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne()
+            .HasPrincipalKey<A>(a => a.Id)
+            .HasForeignKey<B>(b => b.Id)
+            .IsRequired();
         modelBuilder.Entity<A>().ToTable("Table", t => t.ExcludeFromMigrations());
         modelBuilder.Entity<B>().ToTable("Table");
 
         VerifyError(
             RelationalStrings.IncompatibleTableExcludedMismatch(
-                nameof(Table), nameof(A), nameof(B)),
-            modelBuilder);
+                nameof(Table),
+                nameof(A),
+                nameof(B)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_entity_splitting_on_base_type()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>().ToView("Animal").SplitToView("AnimalDetails", s => s.Property(a => a.Name));
+        modelBuilder
+            .Entity<Animal>()
+            .ToView("Animal")
+            .SplitToView("AnimalDetails", s => s.Property(a => a.Name));
         modelBuilder.Entity<Cat>().ToView("Cat");
 
         VerifyError(
             RelationalStrings.EntitySplittingHierarchy(nameof(Animal), "AnimalDetails"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -683,11 +965,15 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>().ToTable("Animal");
-        modelBuilder.Entity<Cat>().ToTable("Cat").SplitToTable("CatDetails", s => s.Property(a => a.Name));
+        modelBuilder
+            .Entity<Cat>()
+            .ToTable("Cat")
+            .SplitToTable("CatDetails", s => s.Property(a => a.Name));
 
         VerifyError(
             RelationalStrings.EntitySplittingHierarchy(nameof(Cat), "CatDetails"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -697,30 +983,42 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder.Entity<Animal>().SplitToView("AnimalDetails", s => s.Property(a => a.Name));
 
         VerifyError(
-            RelationalStrings.EntitySplittingUnmappedMainFragment(nameof(Animal), "AnimalDetails", "View"),
-            modelBuilder);
+            RelationalStrings.EntitySplittingUnmappedMainFragment(
+                nameof(Animal),
+                "AnimalDetails",
+                "View"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_entity_splitting_to_with_conflicting_main()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>().ToTable("Animal").SplitToTable("Animal", s => s.Property(a => a.Name));
+        modelBuilder
+            .Entity<Animal>()
+            .ToTable("Animal")
+            .SplitToTable("Animal", s => s.Property(a => a.Name));
 
         VerifyError(
             RelationalStrings.EntitySplittingConflictingMainFragment(nameof(Animal), "Animal"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_entity_splitting_with_unmapped_PK()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>().SplitToTable("AnimalDetails", s => s.Property(a => a.Id).HasColumnName(null));
+        modelBuilder
+            .Entity<Animal>()
+            .SplitToTable("AnimalDetails", s => s.Property(a => a.Id).HasColumnName(null));
 
         VerifyError(
             RelationalStrings.EntitySplittingMissingPrimaryKey(nameof(Animal), "AnimalDetails"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -731,39 +1029,57 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.EntitySplittingMissingProperties(nameof(Animal), "AnimalDetails"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_entity_splitting_to_table_with_all_properties()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>().SplitToTable(
-            "AnimalDetails", s =>
-            {
-                s.Property(a => a.Name);
-                s.Property("FavoritePersonId");
-            });
+        modelBuilder
+            .Entity<Animal>()
+            .SplitToTable(
+                "AnimalDetails",
+                s =>
+                {
+                    s.Property(a => a.Name);
+                    s.Property("FavoritePersonId");
+                }
+            );
 
         VerifyError(
-            RelationalStrings.EntitySplittingMissingPropertiesMainFragment(nameof(Animal), "Animal"),
-            modelBuilder);
+            RelationalStrings.EntitySplittingMissingPropertiesMainFragment(
+                nameof(Animal),
+                "Animal"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_entity_splitting_to_view_with_all_properties()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>().ToView("Animal").SplitToView(
-            "AnimalDetails", s =>
-            {
-                s.Property(a => a.Name);
-                s.Property("FavoritePersonId");
-            });
+        modelBuilder
+            .Entity<Animal>()
+            .ToView("Animal")
+            .SplitToView(
+                "AnimalDetails",
+                s =>
+                {
+                    s.Property(a => a.Name);
+                    s.Property("FavoritePersonId");
+                }
+            );
 
         VerifyError(
-            RelationalStrings.EntitySplittingMissingPropertiesMainFragment(nameof(Animal), "Animal"),
-            modelBuilder);
+            RelationalStrings.EntitySplittingMissingPropertiesMainFragment(
+                nameof(Animal),
+                "Animal"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -771,37 +1087,47 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Order>(
-            cb =>
-            {
-                cb.Ignore(c => c.Customer);
+        modelBuilder.Entity<Order>(cb =>
+        {
+            cb.Ignore(c => c.Customer);
 
-                cb.ToTable("Order");
+            cb.ToTable("Order");
 
-                cb.SplitToTable(
-                    "OrderDetails", tb =>
-                    {
-                        tb.Property(c => c.PartitionId);
-                    });
+            cb.SplitToTable(
+                "OrderDetails",
+                tb =>
+                {
+                    tb.Property(c => c.PartitionId);
+                }
+            );
 
-                cb.OwnsOne(
-                    c => c.OrderDetails, db =>
-                    {
-                        db.ToTable("Details");
+            cb.OwnsOne(
+                c => c.OrderDetails,
+                db =>
+                {
+                    db.ToTable("Details");
 
-                        db.Property<string>("OtherAddress");
-                        db.SplitToTable(
-                            "Order", tb =>
-                            {
-                                tb.Property("OtherAddress");
-                            });
-                    });
-                cb.Navigation(c => c.OrderDetails).IsRequired();
-            });
+                    db.Property<string>("OtherAddress");
+                    db.SplitToTable(
+                        "Order",
+                        tb =>
+                        {
+                            tb.Property("OtherAddress");
+                        }
+                    );
+                }
+            );
+            cb.Navigation(c => c.OrderDetails).IsRequired();
+        });
 
         VerifyError(
-            RelationalStrings.EntitySplittingUnmatchedMainTableSplitting(nameof(OrderDetails), "Order", nameof(Order)),
-            modelBuilder);
+            RelationalStrings.EntitySplittingUnmatchedMainTableSplitting(
+                nameof(OrderDetails),
+                "Order",
+                nameof(Order)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -809,14 +1135,15 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Cat>()
+        modelBuilder
+            .Entity<Cat>()
             .ToTable("Cats")
             .SplitToTable("Animals", s => s.Property(c => c.Name));
         modelBuilder.Entity<Cat>().HasIndex(nameof(Animal.Name), nameof(Cat.Identity));
 
-        var definition = RelationalResources
-            .LogUnnamedIndexPropertiesMappedToNonOverlappingTables(
-                new TestLogger<TestRelationalLoggingDefinitions>());
+        var definition = RelationalResources.LogUnnamedIndexPropertiesMappedToNonOverlappingTables(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
         VerifyWarning(
             definition.GenerateMessage(
                 nameof(Cat),
@@ -824,9 +1151,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                 nameof(Animal.Name),
                 "{'Animals'}",
                 nameof(Cat.Identity),
-                "{'Cats'}"),
+                "{'Cats'}"
+            ),
             modelBuilder,
-            LogLevel.Error);
+            LogLevel.Error
+        );
     }
 
     [ConditionalFact]
@@ -834,55 +1163,61 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Cat>()
+        modelBuilder
+            .Entity<Cat>()
             .ToTable("Cats")
             .SplitToTable("Animals", s => s.Property(c => c.Name));
         modelBuilder.Entity<Cat>().HasAlternateKey(nameof(Animal.Name), nameof(Cat.Identity));
 
-        var definition = RelationalResources
-            .LogKeyPropertiesNotMappedToTable(new TestLogger<TestRelationalLoggingDefinitions>());
+        var definition = RelationalResources.LogKeyPropertiesNotMappedToTable(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
         VerifyWarning(
-            definition.GenerateMessage(
-                "{'Name', 'Identity'}",
-                nameof(Cat),
-                "Cats"),
+            definition.GenerateMessage("{'Name', 'Identity'}", nameof(Cat), "Cats"),
             modelBuilder,
-            LogLevel.Error);
+            LogLevel.Error
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_unmapped_foreign_keys_in_entity_splitting()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Person>(
-            pb =>
-            {
-                pb.HasKey(p => new { p.Id, p.Name });
-            });
-        modelBuilder.Entity<Cat>().ToTable("Cat")
-            .HasOne<Person>().WithMany()
+        modelBuilder.Entity<Person>(pb =>
+        {
+            pb.HasKey(p => new { p.Id, p.Name });
+        });
+        modelBuilder
+            .Entity<Cat>()
+            .ToTable("Cat")
+            .HasOne<Person>()
+            .WithMany()
             .HasForeignKey("FavoritePersonId", "FavoritePersonName");
 
-        modelBuilder.Entity<Cat>()
-            .SplitToTable("Animals", s => s.Property("FavoritePersonName"));
+        modelBuilder.Entity<Cat>().SplitToTable("Animals", s => s.Property("FavoritePersonName"));
 
-        var definition =
-            RelationalResources.LogForeignKeyPropertiesMappedToUnrelatedTables(new TestLogger<TestRelationalLoggingDefinitions>());
+        var definition = RelationalResources.LogForeignKeyPropertiesMappedToUnrelatedTables(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
         VerifyWarning(
             definition.GenerateMessage(
-                l => l.Log(
-                    definition.Level,
-                    definition.EventId,
-                    definition.MessageFormat,
-                    "{'FavoritePersonId', 'FavoritePersonName'}",
-                    nameof(Cat),
-                    nameof(Person),
-                    "{'FavoritePersonId', 'FavoritePersonName'}",
-                    nameof(Cat),
-                    "{'Id', 'Name'}",
-                    nameof(Person))),
+                l =>
+                    l.Log(
+                        definition.Level,
+                        definition.EventId,
+                        definition.MessageFormat,
+                        "{'FavoritePersonId', 'FavoritePersonName'}",
+                        nameof(Cat),
+                        nameof(Person),
+                        "{'FavoritePersonId', 'FavoritePersonName'}",
+                        nameof(Cat),
+                        "{'Id', 'Name'}",
+                        nameof(Person)
+                    )
+            ),
             modelBuilder,
-            LogLevel.Error);
+            LogLevel.Error
+        );
     }
 
     [ConditionalFact]
@@ -891,13 +1226,30 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
 
-        modelBuilder.Entity<Cat>().Property(c => c.Type).HasColumnName("Type").HasColumnType("someInt");
-        modelBuilder.Entity<Dog>().Property(d => d.Type).HasColumnName("Type").HasColumnType("default_int_mapping");
+        modelBuilder
+            .Entity<Cat>()
+            .Property(c => c.Type)
+            .HasColumnName("Type")
+            .HasColumnType("someInt");
+        modelBuilder
+            .Entity<Dog>()
+            .Property(d => d.Type)
+            .HasColumnName("Type")
+            .HasColumnType("default_int_mapping");
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameDataTypeMismatch(
-                nameof(Cat), nameof(Cat.Type), nameof(Dog), nameof(Dog.Type), nameof(Cat.Type), nameof(Animal), "someInt",
-                "default_int_mapping"), modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Type),
+                nameof(Dog),
+                nameof(Dog.Type),
+                nameof(Cat.Type),
+                nameof(Animal),
+                "someInt",
+                "default_int_mapping"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -911,8 +1263,17 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameMaxLengthMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal), "30",
-                "15"), modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "30",
+                "15"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -926,7 +1287,15 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameUnicodenessMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal)), modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -940,7 +1309,15 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameFixedLengthMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal)), modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -949,15 +1326,24 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
 
-        modelBuilder.Entity<Cat>().Property(c => c.Breed).HasColumnName("Breed").IsConcurrencyToken();
+        modelBuilder
+            .Entity<Cat>()
+            .Property(c => c.Breed)
+            .HasColumnName("Breed")
+            .IsConcurrencyToken();
         modelBuilder.Entity<Dog>().Property(d => d.Breed).HasColumnName("Breed");
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameConcurrencyTokenMismatch(
-                nameof(Cat), nameof(Cat.Breed),
-                nameof(Dog), nameof(Dog.Breed),
-                nameof(Cat.Breed), nameof(Animal)),
-            modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -965,13 +1351,26 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().Property(c => c.Breed).HasColumnName("Breed").HasComputedColumnSql("1");
+        modelBuilder
+            .Entity<Cat>()
+            .Property(c => c.Breed)
+            .HasColumnName("Breed")
+            .HasComputedColumnSql("1");
         modelBuilder.Entity<Dog>().Property(c => c.Breed).HasColumnName("Breed");
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameComputedSqlMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal), "1", ""),
-            modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "1",
+                ""
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -979,13 +1378,30 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().Property(c => c.Breed).HasColumnName("Breed").HasComputedColumnSql("1", true);
-        modelBuilder.Entity<Dog>().Property(c => c.Breed).HasColumnName("Breed").HasComputedColumnSql("1");
+        modelBuilder
+            .Entity<Cat>()
+            .Property(c => c.Breed)
+            .HasColumnName("Breed")
+            .HasComputedColumnSql("1", true);
+        modelBuilder
+            .Entity<Dog>()
+            .Property(c => c.Breed)
+            .HasColumnName("Breed")
+            .HasComputedColumnSql("1");
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameIsStoredMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal), "True", ""),
-            modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "True",
+                ""
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -993,13 +1409,30 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().Property(c => c.Breed).HasColumnName("Breed").HasDefaultValueSql("1");
-        modelBuilder.Entity<Dog>().Property(c => c.Breed).HasColumnName("Breed").HasDefaultValue("1");
+        modelBuilder
+            .Entity<Cat>()
+            .Property(c => c.Breed)
+            .HasColumnName("Breed")
+            .HasDefaultValueSql("1");
+        modelBuilder
+            .Entity<Dog>()
+            .Property(c => c.Breed)
+            .HasColumnName("Breed")
+            .HasDefaultValue("1");
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameDefaultSqlMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal), "NULL", "1"),
-            modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "NULL",
+                "1"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1007,13 +1440,26 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().Property(c => c.Breed).HasColumnName("Breed").HasDefaultValueSql("1");
+        modelBuilder
+            .Entity<Cat>()
+            .Property(c => c.Breed)
+            .HasColumnName("Breed")
+            .HasDefaultValueSql("1");
         modelBuilder.Entity<Dog>().Property(c => c.Breed).HasColumnName("Breed");
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameDefaultSqlMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal), "1", ""),
-            modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "1",
+                ""
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1021,17 +1467,39 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<A>().HasOne<B>().WithOne(b => b.A).HasForeignKey<B>(a => a.Id).HasPrincipalKey<A>(b => b.Id);
-        modelBuilder.Entity<A>().HasOne<G>().WithOne(g => g.A).HasForeignKey<G>(a => a.Id).HasPrincipalKey<A>(b => b.Id)
+        modelBuilder
+            .Entity<A>()
+            .HasOne<B>()
+            .WithOne(b => b.A)
+            .HasForeignKey<B>(a => a.Id)
+            .HasPrincipalKey<A>(b => b.Id);
+        modelBuilder
+            .Entity<A>()
+            .HasOne<G>()
+            .WithOne(g => g.A)
+            .HasForeignKey<G>(a => a.Id)
+            .HasPrincipalKey<A>(b => b.Id)
             .Metadata.IsRequiredDependent = true;
         modelBuilder.Entity<A>().ToTable("Table").Ignore(a => a.P0);
         modelBuilder.Entity<B>().ToTable("Table").Property(b => b.P0).HasColumnName(nameof(A.P0));
-        modelBuilder.Entity<G>().ToTable("Table").Property(g => g.P0).HasColumnName(nameof(A.P0)).IsRequired();
+        modelBuilder
+            .Entity<G>()
+            .ToTable("Table")
+            .Property(g => g.P0)
+            .HasColumnName(nameof(A.P0))
+            .IsRequired();
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameNullabilityMismatch(
-                nameof(B), nameof(B.P0), nameof(G), nameof(G.P0), nameof(A.P0), "Table"),
-            modelBuilder);
+                nameof(B),
+                nameof(B.P0),
+                nameof(G),
+                nameof(G.P0),
+                nameof(A.P0),
+                "Table"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1044,7 +1512,12 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         var model = Validate(modelBuilder);
 
-        var column = model.FindEntityType(typeof(Cat)).FindProperty("OtherId").GetTableColumnMappings().Single().Column;
+        var column = model
+            .FindEntityType(typeof(Cat))
+            .FindProperty("OtherId")
+            .GetTableColumnMappings()
+            .Single()
+            .Column;
 
         Assert.Equal(2, column.PropertyMappings.Count());
         Assert.True(column.IsNullable);
@@ -1056,13 +1529,26 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().Property(c => c.Breed).HasColumnName("Breed").HasComment("My comment");
+        modelBuilder
+            .Entity<Cat>()
+            .Property(c => c.Breed)
+            .HasColumnName("Breed")
+            .HasComment("My comment");
         modelBuilder.Entity<Dog>().Property(c => c.Breed).HasColumnName("Breed");
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameCommentMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal), "My comment", ""),
-            modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "My comment",
+                ""
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1070,13 +1556,26 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().Property(c => c.Breed).HasColumnName("Breed").UseCollation("UTF8");
+        modelBuilder
+            .Entity<Cat>()
+            .Property(c => c.Breed)
+            .HasColumnName("Breed")
+            .UseCollation("UTF8");
         modelBuilder.Entity<Dog>().Property(c => c.Breed).HasColumnName("Breed");
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameCollationMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal), "UTF8", ""),
-            modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "UTF8",
+                ""
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1089,8 +1588,17 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameOrderMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal), 0, null),
-            modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal),
+                0,
+                null
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1103,8 +1611,17 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.DuplicateColumnNamePrecisionMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal), "", "1"),
-            modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "",
+                "1"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1117,8 +1634,17 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.DuplicateColumnNameScaleMismatch(
-                nameof(Cat), nameof(Cat.Breed), nameof(Dog), nameof(Dog.Breed), nameof(Cat.Breed), nameof(Animal), "", "2"),
-            modelBuilder);
+                nameof(Cat),
+                nameof(Cat.Breed),
+                nameof(Dog),
+                nameof(Dog.Breed),
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "",
+                "2"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1126,24 +1652,25 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>(
-            eb =>
-            {
-                eb.Ignore(e => e.Type);
-                eb.Property(c => c.Breed).HasMaxLength(25);
-                eb.Property(c => c.Breed).HasColumnName("BreedName");
-                eb.Property(c => c.Breed).HasDefaultValue("None");
-                eb.Property<bool>("Selected").HasDefaultValue(false);
-            });
-        modelBuilder.Entity<Dog>(
-            eb =>
-            {
-                eb.Ignore(e => e.Type);
-                eb.Property(c => c.Breed).HasMaxLength(25);
-                eb.Property(c => c.Breed).HasColumnName("BreedName");
-                eb.Property(c => c.Breed).HasDefaultValue("None");
-                eb.Property<string>("Selected").IsRequired().HasDefaultValue("false").HasConversion<bool>();
-            });
+        modelBuilder.Entity<Cat>(eb =>
+        {
+            eb.Ignore(e => e.Type);
+            eb.Property(c => c.Breed).HasMaxLength(25);
+            eb.Property(c => c.Breed).HasColumnName("BreedName");
+            eb.Property(c => c.Breed).HasDefaultValue("None");
+            eb.Property<bool>("Selected").HasDefaultValue(false);
+        });
+        modelBuilder.Entity<Dog>(eb =>
+        {
+            eb.Ignore(e => e.Type);
+            eb.Property(c => c.Breed).HasMaxLength(25);
+            eb.Property(c => c.Breed).HasColumnName("BreedName");
+            eb.Property(c => c.Breed).HasDefaultValue("None");
+            eb.Property<string>("Selected")
+                .IsRequired()
+                .HasDefaultValue("false")
+                .HasConversion<bool>();
+        });
 
         Validate(modelBuilder);
     }
@@ -1152,7 +1679,12 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     public virtual void Passes_for_shared_columns()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>().Property(a => a.Id).HasMaxLength(20).HasPrecision(15, 10).IsUnicode();
+        modelBuilder
+            .Entity<Animal>()
+            .Property(a => a.Id)
+            .HasMaxLength(20)
+            .HasPrecision(15, 10)
+            .IsUnicode();
         modelBuilder.Entity<Cat>().OwnsOne(a => a.FavoritePerson);
         modelBuilder.Entity<Dog>().Ignore(d => d.FavoritePerson);
 
@@ -1164,8 +1696,18 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().HasOne<Person>().WithMany().HasForeignKey("FriendId").HasConstraintName("FK");
-        modelBuilder.Entity<Dog>().HasOne<Person>().WithMany().HasForeignKey("FriendId").HasConstraintName("FK");
+        modelBuilder
+            .Entity<Cat>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey("FriendId")
+            .HasConstraintName("FK");
+        modelBuilder
+            .Entity<Dog>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey("FriendId")
+            .HasConstraintName("FK");
 
         modelBuilder.Entity<Cat>().ToTable("Cats");
         modelBuilder.Entity<Dog>().ToTable("Dogs");
@@ -1173,15 +1715,24 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         // Should throw. Issue #23144.
         Assert.Contains(
             "(No exception was thrown)",
-            Assert.Throws<ThrowsException>(
-                () => VerifyError(
-                    RelationalStrings.DuplicateForeignKeyTableMismatch(
-                        "{'FriendId'}", nameof(Dog),
-                        "{'FriendId'}", nameof(Cat),
-                        "FK",
-                        "Cats",
-                        "Dogs"),
-                    modelBuilder)).Message);
+            Assert
+                .Throws<ThrowsException>(
+                    () =>
+                        VerifyError(
+                            RelationalStrings.DuplicateForeignKeyTableMismatch(
+                                "{'FriendId'}",
+                                nameof(Dog),
+                                "{'FriendId'}",
+                                nameof(Cat),
+                                "FK",
+                                "Cats",
+                                "Dogs"
+                            ),
+                            modelBuilder
+                        )
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1189,17 +1740,32 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().HasOne<Person>().WithMany().HasForeignKey("FriendId").HasConstraintName("FK");
-        modelBuilder.Entity<Dog>().HasOne<Animal>().WithMany().HasForeignKey("FriendId").HasConstraintName("FK");
+        modelBuilder
+            .Entity<Cat>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey("FriendId")
+            .HasConstraintName("FK");
+        modelBuilder
+            .Entity<Dog>()
+            .HasOne<Animal>()
+            .WithMany()
+            .HasForeignKey("FriendId")
+            .HasConstraintName("FK");
 
         VerifyError(
             RelationalStrings.DuplicateForeignKeyPrincipalTableMismatch(
-                "{'FriendId'}", nameof(Dog),
-                "{'FriendId'}", nameof(Cat),
-                nameof(Animal), "FK",
+                "{'FriendId'}",
+                nameof(Dog),
+                "{'FriendId'}",
+                nameof(Cat),
                 nameof(Animal),
-                nameof(Person)),
-            modelBuilder);
+                "FK",
+                nameof(Animal),
+                nameof(Person)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1208,19 +1774,34 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>().Property<int>("FriendId");
         modelBuilder.Entity<Animal>().Property<string>("Shadow");
-        modelBuilder.Entity<Cat>().HasOne<Person>().WithMany().HasForeignKey("FriendId", "Shadow").HasPrincipalKey(
-            p => new { p.Id, p.Name }).HasConstraintName("FK");
-        modelBuilder.Entity<Dog>().HasOne<Person>().WithMany().HasForeignKey("FriendId").HasConstraintName("FK");
+        modelBuilder
+            .Entity<Cat>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey("FriendId", "Shadow")
+            .HasPrincipalKey(p => new { p.Id, p.Name })
+            .HasConstraintName("FK");
+        modelBuilder
+            .Entity<Dog>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey("FriendId")
+            .HasConstraintName("FK");
         modelBuilder.Entity<Person>().Property(e => e.Id).ValueGeneratedNever();
 
         VerifyError(
             RelationalStrings.DuplicateForeignKeyColumnMismatch(
-                "{'FriendId'}", nameof(Dog),
-                "{'FriendId', 'Shadow'}", nameof(Cat),
-                nameof(Animal), "FK",
                 "{'FriendId'}",
-                "{'FriendId', 'Shadow'}"),
-            modelBuilder);
+                nameof(Dog),
+                "{'FriendId', 'Shadow'}",
+                nameof(Cat),
+                nameof(Animal),
+                "FK",
+                "{'FriendId'}",
+                "{'FriendId', 'Shadow'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1229,37 +1810,38 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>(
-            et =>
-            {
-                et.Property(c => c.Breed).HasColumnName("Breed");
-                et.HasOne<Person>().WithMany()
-                    .HasForeignKey(
-                        c => new { c.Name, c.Breed })
-                    .HasPrincipalKey(
-                        p => new { p.Name, p.FavoriteBreed })
-                    .HasConstraintName("FK");
-            });
-        modelBuilder.Entity<Dog>(
-            et =>
-            {
-                et.Property(c => c.Breed).HasColumnName("Breed");
-                et.HasOne<Person>().WithMany()
-                    .HasForeignKey(
-                        d => new { d.Breed, d.Name })
-                    .HasPrincipalKey(
-                        p => new { p.FavoriteBreed, p.Name })
-                    .HasConstraintName("FK");
-            });
+        modelBuilder.Entity<Cat>(et =>
+        {
+            et.Property(c => c.Breed).HasColumnName("Breed");
+            et.HasOne<Person>()
+                .WithMany()
+                .HasForeignKey(c => new { c.Name, c.Breed })
+                .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
+                .HasConstraintName("FK");
+        });
+        modelBuilder.Entity<Dog>(et =>
+        {
+            et.Property(c => c.Breed).HasColumnName("Breed");
+            et.HasOne<Person>()
+                .WithMany()
+                .HasForeignKey(d => new { d.Breed, d.Name })
+                .HasPrincipalKey(p => new { p.FavoriteBreed, p.Name })
+                .HasConstraintName("FK");
+        });
 
         VerifyError(
             RelationalStrings.DuplicateForeignKeyColumnMismatch(
-                "{'" + nameof(Dog.Breed) + "', '" + nameof(Dog.Name) + "'}", nameof(Dog),
-                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}", nameof(Cat),
-                nameof(Animal), "FK",
                 "{'" + nameof(Dog.Breed) + "', '" + nameof(Dog.Name) + "'}",
-                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}"),
-            modelBuilder);
+                nameof(Dog),
+                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}",
+                nameof(Cat),
+                nameof(Animal),
+                "FK",
+                "{'" + nameof(Dog.Breed) + "', '" + nameof(Dog.Name) + "'}",
+                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1267,22 +1849,35 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().HasOne<Person>().WithMany().HasForeignKey(
-            c => new { c.Name, c.Breed }).HasPrincipalKey(
-            p => new { p.Name, p.FavoriteBreed }).HasConstraintName("FK");
-        modelBuilder.Entity<Dog>().HasOne<Person>().WithMany().HasForeignKey(
-            d => new { d.Name, d.Breed }).HasPrincipalKey(
-            p => new { p.Name, p.FavoriteBreed }).HasConstraintName("FK");
+        modelBuilder
+            .Entity<Cat>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey(c => new { c.Name, c.Breed })
+            .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
+            .HasConstraintName("FK");
+        modelBuilder
+            .Entity<Dog>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey(d => new { d.Name, d.Breed })
+            .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
+            .HasConstraintName("FK");
         modelBuilder.Entity<Dog>().Property(d => d.Breed).HasColumnName("DogBreed");
 
         VerifyError(
             RelationalStrings.DuplicateForeignKeyColumnMismatch(
-                "{'" + nameof(Dog.Name) + "', '" + nameof(Dog.Breed) + "'}", nameof(Dog),
-                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}", nameof(Cat),
-                nameof(Animal), "FK",
+                "{'" + nameof(Dog.Name) + "', '" + nameof(Dog.Breed) + "'}",
+                nameof(Dog),
+                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}",
+                nameof(Cat),
+                nameof(Animal),
+                "FK",
                 "{'" + nameof(Dog.Name) + "', 'DogBreed'}",
-                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}"),
-            modelBuilder);
+                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1290,22 +1885,35 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>()
-            .HasOne<Person>().WithMany()
-            .HasForeignKey(c => c.Name).HasPrincipalKey(p => p.Name).HasConstraintName("FK");
-        modelBuilder.Entity<Dog>()
-            .HasOne<Person>().WithMany()
-            .HasForeignKey(d => d.Name).HasPrincipalKey(p => p.FavoriteBreed).HasConstraintName("FK");
+        modelBuilder
+            .Entity<Cat>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey(c => c.Name)
+            .HasPrincipalKey(p => p.Name)
+            .HasConstraintName("FK");
+        modelBuilder
+            .Entity<Dog>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey(d => d.Name)
+            .HasPrincipalKey(p => p.FavoriteBreed)
+            .HasConstraintName("FK");
         modelBuilder.Entity<Dog>().Property(d => d.Breed).HasColumnName("DogBreed");
 
         VerifyError(
             RelationalStrings.DuplicateForeignKeyPrincipalColumnMismatch(
-                "{'" + nameof(Dog.Name) + "'}", nameof(Dog),
-                "{'" + nameof(Cat.Name) + "'}", nameof(Cat),
-                nameof(Animal), "FK",
+                "{'" + nameof(Dog.Name) + "'}",
+                nameof(Dog),
+                "{'" + nameof(Cat.Name) + "'}",
+                nameof(Cat),
+                nameof(Animal),
+                "FK",
                 "{'" + nameof(Person.FavoriteBreed) + "'}",
-                "{'" + nameof(Person.Name) + "'}"),
-            modelBuilder);
+                "{'" + nameof(Person.Name) + "'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1313,18 +1921,34 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        var fk1 = modelBuilder.Entity<Cat>().HasOne<Person>().WithMany().HasForeignKey(c => c.Name).HasPrincipalKey(p => p.Name)
-            .HasConstraintName("FK_Animal_Person_Name").Metadata;
-        var fk2 = modelBuilder.Entity<Dog>().HasOne<Person>().WithOne().HasForeignKey<Dog>(d => d.Name)
+        var fk1 = modelBuilder
+            .Entity<Cat>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey(c => c.Name)
+            .HasPrincipalKey(p => p.Name)
+            .HasConstraintName("FK_Animal_Person_Name")
+            .Metadata;
+        var fk2 = modelBuilder
+            .Entity<Dog>()
+            .HasOne<Person>()
+            .WithOne()
+            .HasForeignKey<Dog>(d => d.Name)
             .HasPrincipalKey<Person>(p => p.Name)
-            .HasConstraintName("FK_Animal_Person_Name").Metadata;
+            .HasConstraintName("FK_Animal_Person_Name")
+            .Metadata;
 
         VerifyError(
             RelationalStrings.DuplicateForeignKeyUniquenessMismatch(
-                "{'" + nameof(Dog.Name) + "'}", nameof(Dog),
-                "{'" + nameof(Cat.Name) + "'}", nameof(Cat),
-                nameof(Animal), "FK_Animal_Person_Name"),
-            modelBuilder);
+                "{'" + nameof(Dog.Name) + "'}",
+                nameof(Dog),
+                "{'" + nameof(Cat.Name) + "'}",
+                nameof(Cat),
+                nameof(Animal),
+                "FK_Animal_Person_Name"
+            ),
+            modelBuilder
+        );
 
         var index1 = fk1.DeclaringEntityType.GetDeclaredIndexes().Single();
         var index2 = fk2.DeclaringEntityType.GetDeclaredIndexes().Single();
@@ -1337,18 +1961,36 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().HasOne<Person>().WithMany().HasForeignKey(c => c.Name).HasPrincipalKey(p => p.Name)
-            .OnDelete(DeleteBehavior.Cascade).HasConstraintName("FK_Animal_Person_Name");
-        modelBuilder.Entity<Dog>().HasOne<Person>().WithMany().HasForeignKey(d => d.Name).HasPrincipalKey(p => p.Name)
-            .OnDelete(DeleteBehavior.SetNull).HasConstraintName("FK_Animal_Person_Name");
+        modelBuilder
+            .Entity<Cat>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey(c => c.Name)
+            .HasPrincipalKey(p => p.Name)
+            .OnDelete(DeleteBehavior.Cascade)
+            .HasConstraintName("FK_Animal_Person_Name");
+        modelBuilder
+            .Entity<Dog>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey(d => d.Name)
+            .HasPrincipalKey(p => p.Name)
+            .OnDelete(DeleteBehavior.SetNull)
+            .HasConstraintName("FK_Animal_Person_Name");
 
         VerifyError(
             RelationalStrings.DuplicateForeignKeyDeleteBehaviorMismatch(
-                "{'" + nameof(Dog.Name) + "'}", nameof(Dog),
-                "{'" + nameof(Cat.Name) + "'}", nameof(Cat),
-                nameof(Animal), "FK_Animal_Person_Name",
-                DeleteBehavior.SetNull, DeleteBehavior.Cascade),
-            modelBuilder);
+                "{'" + nameof(Dog.Name) + "'}",
+                nameof(Dog),
+                "{'" + nameof(Cat.Name) + "'}",
+                nameof(Cat),
+                nameof(Animal),
+                "FK_Animal_Person_Name",
+                DeleteBehavior.SetNull,
+                DeleteBehavior.Cascade
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1356,10 +1998,22 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        var fk1 = modelBuilder.Entity<Cat>().HasOne<Person>().WithMany().HasForeignKey(c => c.Name).HasPrincipalKey(p => p.Name)
-            .OnDelete(DeleteBehavior.Cascade).Metadata;
-        var fk2 = modelBuilder.Entity<Dog>().HasOne<Person>().WithMany().HasForeignKey(d => d.Name).HasPrincipalKey(p => p.Name)
-            .OnDelete(DeleteBehavior.SetNull).Metadata;
+        var fk1 = modelBuilder
+            .Entity<Cat>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey(c => c.Name)
+            .HasPrincipalKey(p => p.Name)
+            .OnDelete(DeleteBehavior.Cascade)
+            .Metadata;
+        var fk2 = modelBuilder
+            .Entity<Dog>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey(d => d.Name)
+            .HasPrincipalKey(p => p.Name)
+            .OnDelete(DeleteBehavior.SetNull)
+            .Metadata;
 
         Validate(modelBuilder);
 
@@ -1377,10 +2031,23 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        var fk1 = modelBuilder.Entity<Cat>().HasOne<Person>().WithMany().HasForeignKey(c => c.Name).HasPrincipalKey(p => p.Name)
-            .OnDelete(DeleteBehavior.Cascade).HasConstraintName("FK_Animal_Person_Name").Metadata;
-        var fk2 = modelBuilder.Entity<Dog>().HasOne<Person>().WithMany().HasForeignKey(d => d.Name).HasPrincipalKey(p => p.Name)
-            .OnDelete(DeleteBehavior.SetNull).Metadata;
+        var fk1 = modelBuilder
+            .Entity<Cat>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey(c => c.Name)
+            .HasPrincipalKey(p => p.Name)
+            .OnDelete(DeleteBehavior.Cascade)
+            .HasConstraintName("FK_Animal_Person_Name")
+            .Metadata;
+        var fk2 = modelBuilder
+            .Entity<Dog>()
+            .HasOne<Person>()
+            .WithMany()
+            .HasForeignKey(d => d.Name)
+            .HasPrincipalKey(p => p.Name)
+            .OnDelete(DeleteBehavior.SetNull)
+            .Metadata;
 
         Validate(modelBuilder);
 
@@ -1401,32 +2068,24 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         IReadOnlyForeignKey fk2 = null;
 
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>(
-            et =>
-            {
-                et.Property(c => c.Breed).HasColumnName("Breed");
-                fk1 = et
-                    .HasOne(a => a.FavoritePerson)
-                    .WithMany()
-                    .HasForeignKey(
-                        c => new { c.Name, c.Breed })
-                    .HasPrincipalKey(
-                        p => new { p.Name, p.FavoriteBreed })
-                    .Metadata;
-            });
-        modelBuilder.Entity<Dog>(
-            et =>
-            {
-                et.Property(c => c.Breed).HasColumnName("Breed");
-                fk2 = et
-                    .HasOne(a => (Employee)a.FavoritePerson)
-                    .WithMany()
-                    .HasForeignKey(
-                        c => new { c.Name, c.Breed })
-                    .HasPrincipalKey(
-                        p => new { p.Name, p.FavoriteBreed })
-                    .Metadata;
-            });
+        modelBuilder.Entity<Cat>(et =>
+        {
+            et.Property(c => c.Breed).HasColumnName("Breed");
+            fk1 = et.HasOne(a => a.FavoritePerson)
+                .WithMany()
+                .HasForeignKey(c => new { c.Name, c.Breed })
+                .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
+                .Metadata;
+        });
+        modelBuilder.Entity<Dog>(et =>
+        {
+            et.Property(c => c.Breed).HasColumnName("Breed");
+            fk2 = et.HasOne(a => (Employee)a.FavoritePerson)
+                .WithMany()
+                .HasForeignKey(c => new { c.Name, c.Breed })
+                .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
+                .Metadata;
+        });
 
         Validate(modelBuilder);
 
@@ -1447,34 +2106,26 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         IReadOnlyForeignKey fk2 = null;
 
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>(
-            et =>
-            {
-                et.Property(c => c.Breed).HasColumnName("Breed");
-                fk1 = et
-                    .HasOne<Person>()
-                    .WithMany()
-                    .HasForeignKey(
-                        c => new { c.Name, c.Breed })
-                    .HasPrincipalKey(
-                        p => new { p.Name, p.FavoriteBreed })
-                    .HasConstraintName("FK")
-                    .Metadata;
-            });
-        modelBuilder.Entity<Dog>(
-            et =>
-            {
-                et.Property(c => c.Breed).HasColumnName("Breed");
-                fk2 = et
-                    .HasOne<Employee>()
-                    .WithMany()
-                    .HasForeignKey(
-                        c => new { c.Name, c.Breed })
-                    .HasPrincipalKey(
-                        p => new { p.Name, p.FavoriteBreed })
-                    .HasConstraintName("FK")
-                    .Metadata;
-            });
+        modelBuilder.Entity<Cat>(et =>
+        {
+            et.Property(c => c.Breed).HasColumnName("Breed");
+            fk1 = et.HasOne<Person>()
+                .WithMany()
+                .HasForeignKey(c => new { c.Name, c.Breed })
+                .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
+                .HasConstraintName("FK")
+                .Metadata;
+        });
+        modelBuilder.Entity<Dog>(et =>
+        {
+            et.Property(c => c.Breed).HasColumnName("Breed");
+            fk2 = et.HasOne<Employee>()
+                .WithMany()
+                .HasForeignKey(c => new { c.Name, c.Breed })
+                .HasPrincipalKey(p => new { p.Name, p.FavoriteBreed })
+                .HasConstraintName("FK")
+                .Metadata;
+        });
 
         Validate(modelBuilder);
 
@@ -1497,12 +2148,17 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.DuplicateIndexColumnMismatch(
-                "{'" + nameof(Dog.Name) + "'}", nameof(Dog),
-                "{'" + nameof(Cat.Name) + "', 'Shadow'}", nameof(Cat),
-                nameof(Animal), "IX",
                 "{'" + nameof(Dog.Name) + "'}",
-                "{'" + nameof(Cat.Name) + "', 'Shadow'}"),
-            modelBuilder);
+                nameof(Dog),
+                "{'" + nameof(Cat.Name) + "', 'Shadow'}",
+                nameof(Cat),
+                nameof(Animal),
+                "IX",
+                "{'" + nameof(Dog.Name) + "'}",
+                "{'" + nameof(Cat.Name) + "', 'Shadow'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1511,29 +2167,30 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>(
-            et =>
-            {
-                et.Property(c => c.Breed).HasColumnName("Breed");
-                et.HasIndex(
-                    c => new { c.Name, c.Breed }).HasDatabaseName("IX");
-            });
-        modelBuilder.Entity<Dog>(
-            et =>
-            {
-                et.Property(c => c.Breed).HasColumnName("Breed");
-                et.HasIndex(
-                    d => new { d.Breed, d.Name }).HasDatabaseName("IX");
-            });
+        modelBuilder.Entity<Cat>(et =>
+        {
+            et.Property(c => c.Breed).HasColumnName("Breed");
+            et.HasIndex(c => new { c.Name, c.Breed }).HasDatabaseName("IX");
+        });
+        modelBuilder.Entity<Dog>(et =>
+        {
+            et.Property(c => c.Breed).HasColumnName("Breed");
+            et.HasIndex(d => new { d.Breed, d.Name }).HasDatabaseName("IX");
+        });
 
         VerifyError(
             RelationalStrings.DuplicateIndexColumnMismatch(
-                "{'" + nameof(Dog.Breed) + "', '" + nameof(Dog.Name) + "'}", nameof(Dog),
-                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}", nameof(Cat),
-                nameof(Animal), "IX",
                 "{'" + nameof(Dog.Breed) + "', '" + nameof(Dog.Name) + "'}",
-                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}"),
-            modelBuilder);
+                nameof(Dog),
+                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}",
+                nameof(Cat),
+                nameof(Animal),
+                "IX",
+                "{'" + nameof(Dog.Breed) + "', '" + nameof(Dog.Name) + "'}",
+                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1541,20 +2198,23 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().HasIndex(
-            c => new { c.Name, c.Breed }).HasDatabaseName("IX");
-        modelBuilder.Entity<Dog>().HasIndex(
-            d => new { d.Name, d.Breed }).HasDatabaseName("IX");
+        modelBuilder.Entity<Cat>().HasIndex(c => new { c.Name, c.Breed }).HasDatabaseName("IX");
+        modelBuilder.Entity<Dog>().HasIndex(d => new { d.Name, d.Breed }).HasDatabaseName("IX");
         modelBuilder.Entity<Dog>().Property(d => d.Breed).HasColumnName("DogBreed");
 
         VerifyError(
             RelationalStrings.DuplicateIndexColumnMismatch(
-                "{'" + nameof(Dog.Name) + "', '" + nameof(Dog.Breed) + "'}", nameof(Dog),
-                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}", nameof(Cat),
-                nameof(Animal), "IX",
+                "{'" + nameof(Dog.Name) + "', '" + nameof(Dog.Breed) + "'}",
+                nameof(Dog),
+                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}",
+                nameof(Cat),
+                nameof(Animal),
+                "IX",
                 "{'" + nameof(Dog.Name) + "', 'DogBreed'}",
-                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}"),
-            modelBuilder);
+                "{'" + nameof(Cat.Name) + "', '" + nameof(Cat.Breed) + "'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1562,15 +2222,28 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().HasIndex(c => c.Name).IsUnique().HasDatabaseName("IX_Animal_Name");
-        modelBuilder.Entity<Dog>().HasIndex(d => d.Name).IsUnique(false).HasDatabaseName("IX_Animal_Name");
+        modelBuilder
+            .Entity<Cat>()
+            .HasIndex(c => c.Name)
+            .IsUnique()
+            .HasDatabaseName("IX_Animal_Name");
+        modelBuilder
+            .Entity<Dog>()
+            .HasIndex(d => d.Name)
+            .IsUnique(false)
+            .HasDatabaseName("IX_Animal_Name");
 
         VerifyError(
             RelationalStrings.DuplicateIndexUniquenessMismatch(
-                "{'" + nameof(Dog.Name) + "'}", nameof(Dog),
-                "{'" + nameof(Cat.Name) + "'}", nameof(Cat),
-                nameof(Animal), "IX_Animal_Name"),
-            modelBuilder);
+                "{'" + nameof(Dog.Name) + "'}",
+                nameof(Dog),
+                "{'" + nameof(Cat.Name) + "'}",
+                nameof(Cat),
+                nameof(Animal),
+                "IX_Animal_Name"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1578,17 +2251,28 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().HasIndex(c => c.Name).HasDatabaseName("IX_Animal_Name")
+        modelBuilder
+            .Entity<Cat>()
+            .HasIndex(c => c.Name)
+            .HasDatabaseName("IX_Animal_Name")
             .IsDescending(true);
-        modelBuilder.Entity<Dog>().HasIndex(d => d.Name).HasDatabaseName("IX_Animal_Name")
+        modelBuilder
+            .Entity<Dog>()
+            .HasIndex(d => d.Name)
+            .HasDatabaseName("IX_Animal_Name")
             .IsDescending(false);
 
         VerifyError(
             RelationalStrings.DuplicateIndexSortOrdersMismatch(
-                "{'" + nameof(Dog.Name) + "'}", nameof(Dog),
-                "{'" + nameof(Cat.Name) + "'}", nameof(Cat),
-                nameof(Animal), "IX_Animal_Name"),
-            modelBuilder);
+                "{'" + nameof(Dog.Name) + "'}",
+                nameof(Dog),
+                "{'" + nameof(Cat.Name) + "'}",
+                nameof(Cat),
+                nameof(Animal),
+                "IX_Animal_Name"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1596,16 +2280,30 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().HasIndex(c => c.Name).HasFilter("Foo").HasDatabaseName("IX_Animal_Name");
-        modelBuilder.Entity<Dog>().HasIndex(d => d.Name).HasFilter("Bar").HasDatabaseName("IX_Animal_Name");
+        modelBuilder
+            .Entity<Cat>()
+            .HasIndex(c => c.Name)
+            .HasFilter("Foo")
+            .HasDatabaseName("IX_Animal_Name");
+        modelBuilder
+            .Entity<Dog>()
+            .HasIndex(d => d.Name)
+            .HasFilter("Bar")
+            .HasDatabaseName("IX_Animal_Name");
 
         VerifyError(
             RelationalStrings.DuplicateIndexFiltersMismatch(
-                "{'" + nameof(Dog.Name) + "'}", nameof(Dog),
-                "{'" + nameof(Cat.Name) + "'}", nameof(Cat),
-                nameof(Animal), "IX_Animal_Name",
-                "Bar", "Foo"),
-            modelBuilder);
+                "{'" + nameof(Dog.Name) + "'}",
+                nameof(Dog),
+                "{'" + nameof(Cat.Name) + "'}",
+                nameof(Cat),
+                nameof(Animal),
+                "IX_Animal_Name",
+                "Bar",
+                "Foo"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1613,7 +2311,12 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        var index1 = modelBuilder.Entity<Cat>().HasIndex(c => c.Name).IsUnique().HasDatabaseName("IX_Animal_Name").Metadata;
+        var index1 = modelBuilder
+            .Entity<Cat>()
+            .HasIndex(c => c.Name)
+            .IsUnique()
+            .HasDatabaseName("IX_Animal_Name")
+            .Metadata;
         var index2 = modelBuilder.Entity<Dog>().HasIndex(d => d.Name).IsUnique(false).Metadata;
 
         Validate(modelBuilder);
@@ -1629,18 +2332,16 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         IMutableIndex index1 = null;
         IMutableIndex index2 = null;
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>(
-            et =>
-            {
-                et.Property(c => c.Breed).HasColumnName("Breed");
-                index1 = et.HasIndex(c => c.Breed, "IX_Animal_Breed").Metadata;
-            });
-        modelBuilder.Entity<Dog>(
-            et =>
-            {
-                et.Property(c => c.Breed).HasColumnName("Breed");
-                index2 = et.HasIndex(c => c.Breed, "IX_Animal_Breed").Metadata;
-            });
+        modelBuilder.Entity<Cat>(et =>
+        {
+            et.Property(c => c.Breed).HasColumnName("Breed");
+            index1 = et.HasIndex(c => c.Breed, "IX_Animal_Breed").Metadata;
+        });
+        modelBuilder.Entity<Dog>(et =>
+        {
+            et.Property(c => c.Breed).HasColumnName("Breed");
+            index2 = et.HasIndex(c => c.Breed, "IX_Animal_Breed").Metadata;
+        });
 
         Validate(modelBuilder);
 
@@ -1691,12 +2392,24 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     [ConditionalFact]
     public virtual void Passes_with_missing_concurrency_token_on_the_base_type_without_convention()
     {
-        var modelBuilder = CreateModelBuilderWithoutConvention<TableSharingConcurrencyTokenConvention>();
-        modelBuilder.Entity<Person>().ToTable(nameof(Animal))
-            .Property<byte[]>("Version").IsRowVersion().HasColumnName("Version");
-        modelBuilder.Entity<Animal>().HasOne(a => a.FavoritePerson).WithOne().HasForeignKey<Person>(p => p.Id);
-        modelBuilder.Entity<Cat>()
-            .Property<byte[]>("Version").IsRowVersion().HasColumnName("Version");
+        var modelBuilder =
+            CreateModelBuilderWithoutConvention<TableSharingConcurrencyTokenConvention>();
+        modelBuilder
+            .Entity<Person>()
+            .ToTable(nameof(Animal))
+            .Property<byte[]>("Version")
+            .IsRowVersion()
+            .HasColumnName("Version");
+        modelBuilder
+            .Entity<Animal>()
+            .HasOne(a => a.FavoritePerson)
+            .WithOne()
+            .HasForeignKey<Person>(p => p.Id);
+        modelBuilder
+            .Entity<Cat>()
+            .Property<byte[]>("Version")
+            .IsRowVersion()
+            .HasColumnName("Version");
 
         Validate(modelBuilder);
     }
@@ -1704,25 +2417,46 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     [ConditionalFact]
     public virtual void Detects_missing_concurrency_token_on_the_sharing_type_without_convention()
     {
-        var modelBuilder = CreateModelBuilderWithoutConvention<TableSharingConcurrencyTokenConvention>();
+        var modelBuilder =
+            CreateModelBuilderWithoutConvention<TableSharingConcurrencyTokenConvention>();
         modelBuilder.Entity<Person>().ToTable(nameof(Animal));
-        modelBuilder.Entity<Animal>().HasOne(a => a.FavoritePerson).WithOne().HasForeignKey<Person>(p => p.Id);
-        modelBuilder.Entity<Animal>().Property<byte[]>("Version").IsRowVersion().HasColumnName("Version");
+        modelBuilder
+            .Entity<Animal>()
+            .HasOne(a => a.FavoritePerson)
+            .WithOne()
+            .HasForeignKey<Person>(p => p.Id);
+        modelBuilder
+            .Entity<Animal>()
+            .Property<byte[]>("Version")
+            .IsRowVersion()
+            .HasColumnName("Version");
 
         VerifyError(
             RelationalStrings.MissingConcurrencyColumn(nameof(Person), "Version", nameof(Animal)),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Passes_for_missing_concurrency_token_property_on_the_base_type()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Person>().ToTable(nameof(Animal))
-            .Property<byte[]>("Version").IsRowVersion().HasColumnName("Version");
-        modelBuilder.Entity<Animal>().HasOne(a => a.FavoritePerson).WithOne().HasForeignKey<Person>(p => p.Id);
-        modelBuilder.Entity<Cat>()
-            .Property<byte[]>("Version").IsRowVersion().HasColumnName("Version");
+        modelBuilder
+            .Entity<Person>()
+            .ToTable(nameof(Animal))
+            .Property<byte[]>("Version")
+            .IsRowVersion()
+            .HasColumnName("Version");
+        modelBuilder
+            .Entity<Animal>()
+            .HasOne(a => a.FavoritePerson)
+            .WithOne()
+            .HasForeignKey<Person>(p => p.Id);
+        modelBuilder
+            .Entity<Cat>()
+            .Property<byte[]>("Version")
+            .IsRowVersion()
+            .HasColumnName("Version");
 
         Validate(modelBuilder);
     }
@@ -1731,12 +2465,19 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     public virtual void Passes_for_missing_concurrency_token_property_on_the_base_type_when_derived_is_sharing()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Person>().ToTable(nameof(Animal))
-            .Property<byte[]>("Version").IsRowVersion().HasColumnName("Version");
+        modelBuilder
+            .Entity<Person>()
+            .ToTable(nameof(Animal))
+            .Property<byte[]>("Version")
+            .IsRowVersion()
+            .HasColumnName("Version");
         modelBuilder.Entity<Animal>().Ignore(p => p.FavoritePerson);
         modelBuilder.Entity<Cat>().HasOne<Person>().WithOne().HasForeignKey<Person>(p => p.Id);
-        modelBuilder.Entity<Cat>()
-            .Property<byte[]>("Version").IsRowVersion().HasColumnName("Version");
+        modelBuilder
+            .Entity<Cat>()
+            .Property<byte[]>("Version")
+            .IsRowVersion()
+            .HasColumnName("Version");
 
         var model = Validate(modelBuilder);
 
@@ -1749,14 +2490,23 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Person>().ToTable(nameof(Animal));
-        modelBuilder.Entity<Animal>().HasOne(a => a.FavoritePerson).WithOne().HasForeignKey<Person>(p => p.Id);
-        modelBuilder.Entity<Animal>().Property<ulong>("Version")
-            .HasConversion<byte[]>().IsRowVersion();
+        modelBuilder
+            .Entity<Animal>()
+            .HasOne(a => a.FavoritePerson)
+            .WithOne()
+            .HasForeignKey<Person>(p => p.Id);
+        modelBuilder
+            .Entity<Animal>()
+            .Property<ulong>("Version")
+            .HasConversion<byte[]>()
+            .IsRowVersion();
 
         var model = Validate(modelBuilder);
 
         var personType = model.FindEntityType(typeof(Person))!;
-        var concurrencyProperty = personType.GetDeclaredProperties().Single(p => p.IsConcurrencyToken);
+        var concurrencyProperty = personType
+            .GetDeclaredProperties()
+            .Single(p => p.IsConcurrencyToken);
         Assert.Equal("Version", concurrencyProperty.GetColumnName());
         Assert.Equal(typeof(byte[]), concurrencyProperty.ClrType);
     }
@@ -1765,12 +2515,17 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     public virtual void Passes_for_explicitly_mapped_concurrency_tokens_with_table_sharing()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Person>().ToTable(nameof(Animal))
-            .Property<byte[]>("Version").IsRowVersion();
-        modelBuilder.Entity<Animal>()
-            .HasOne(a => a.FavoritePerson).WithOne().HasForeignKey<Person>(p => p.Id);
-        modelBuilder.Entity<Animal>()
-            .Property<byte[]>("Version").IsRowVersion();
+        modelBuilder
+            .Entity<Person>()
+            .ToTable(nameof(Animal))
+            .Property<byte[]>("Version")
+            .IsRowVersion();
+        modelBuilder
+            .Entity<Animal>()
+            .HasOne(a => a.FavoritePerson)
+            .WithOne()
+            .HasForeignKey<Person>(p => p.Id);
+        modelBuilder.Entity<Animal>().Property<byte[]>("Version").IsRowVersion();
         modelBuilder.Entity<Cat>();
         modelBuilder.Entity<Dog>();
 
@@ -1782,11 +2537,13 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().OwnsOne(
-            a => a.FavoritePerson,
-            pb => pb.Property<byte[]>("Version").IsRowVersion().HasColumnName("Version"));
-        modelBuilder.Entity<Dog>().OwnsOne(
-            a => a.FavoritePerson);
+        modelBuilder
+            .Entity<Cat>()
+            .OwnsOne(
+                a => a.FavoritePerson,
+                pb => pb.Property<byte[]>("Version").IsRowVersion().HasColumnName("Version")
+            );
+        modelBuilder.Entity<Dog>().OwnsOne(a => a.FavoritePerson);
 
         var model = Validate(modelBuilder);
 
@@ -1803,9 +2560,9 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>().Property<byte[]>("Version").IsRowVersion();
-        modelBuilder.Entity<Cat>().OwnsOne(
-            a => a.FavoritePerson,
-            pb => pb.Property<byte[]>("Version").IsRowVersion());
+        modelBuilder
+            .Entity<Cat>()
+            .OwnsOne(a => a.FavoritePerson, pb => pb.Property<byte[]>("Version").IsRowVersion());
         modelBuilder.Entity<Dog>().Ignore(d => d.FavoritePerson);
 
         Validate(modelBuilder);
@@ -1829,7 +2586,9 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Abstract>();
-        modelBuilder.Entity<A>().HasDiscriminator<byte>("ClassType")
+        modelBuilder
+            .Entity<A>()
+            .HasDiscriminator<byte>("ClassType")
             .HasValue<A>(0)
             .HasValue<C>(1)
             .HasValue<D>(2)
@@ -1847,7 +2606,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.InvalidMappedSqlQueryDerivedType(nameof(Cat), nameof(Animal)),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1881,7 +2641,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.NonTphViewClash(nameof(Dog), nameof(Cat), "Cat"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1893,7 +2654,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.NonTphTableClash(nameof(Cat), nameof(Animal), "Animal"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1904,8 +2666,14 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder.Entity<Cat>().ToTable("Cat");
 
         VerifyError(
-            RelationalStrings.TphTableMismatch(nameof(Cat), nameof(Cat), nameof(Animal), nameof(Animal)),
-            modelBuilder);
+            RelationalStrings.TphTableMismatch(
+                nameof(Cat),
+                nameof(Cat),
+                nameof(Animal),
+                nameof(Animal)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1916,8 +2684,14 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder.Entity<Cat>().ToView("Cat");
 
         VerifyError(
-            RelationalStrings.TphViewMismatch(nameof(Cat), nameof(Cat), nameof(Animal), nameof(Animal)),
-            modelBuilder);
+            RelationalStrings.TphViewMismatch(
+                nameof(Cat),
+                nameof(Cat),
+                nameof(Animal),
+                nameof(Animal)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1927,9 +2701,7 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder.Entity<Animal>().HasNoKey();
         modelBuilder.Entity<Cat>().ToTable("Cat");
 
-        VerifyError(
-            RelationalStrings.KeylessMappingStrategy("TPT", nameof(Animal)),
-            modelBuilder);
+        VerifyError(RelationalStrings.KeylessMappingStrategy("TPT", nameof(Animal)), modelBuilder);
     }
 
     [ConditionalFact]
@@ -1937,15 +2709,13 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Animal>()
-            .Ignore(a => a.FavoritePerson);
+        modelBuilder.Entity<Animal>().Ignore(a => a.FavoritePerson);
 
-        modelBuilder.Entity<Cat>(
-            x =>
-            {
-                x.ToTable("Cat");
-                x.HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Person>(c => c.Id);
-            });
+        modelBuilder.Entity<Cat>(x =>
+        {
+            x.ToTable("Cat");
+            x.HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Person>(c => c.Id);
+        });
 
         modelBuilder.Entity<Person>().ToTable("Cat");
 
@@ -1957,22 +2727,20 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Animal>()
-            .Ignore(a => a.FavoritePerson);
+        modelBuilder.Entity<Animal>().Ignore(a => a.FavoritePerson);
 
-        modelBuilder.Entity<Cat>(
-            x =>
-            {
-                x.ToTable("Cat");
-                x.HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Cat>(c => c.Id);
-            });
+        modelBuilder.Entity<Cat>(x =>
+        {
+            x.ToTable("Cat");
+            x.HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Cat>(c => c.Id);
+        });
 
         modelBuilder.Entity<Person>().ToTable("Cat");
 
         VerifyError(
-            RelationalStrings.IncompatibleTableDerivedRelationship(
-                "Cat", "Cat", "Person"),
-            modelBuilder);
+            RelationalStrings.IncompatibleTableDerivedRelationship("Cat", "Cat", "Person"),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -1980,48 +2748,59 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Animal>()
-            .Ignore(a => a.FavoritePerson)
-            .ToView("Animal");
+        modelBuilder.Entity<Animal>().Ignore(a => a.FavoritePerson).ToView("Animal");
 
-        modelBuilder.Entity<Cat>(
-            x =>
-            {
-                x.ToView("Cat");
-                x.HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Cat>(c => c.Id);
-            });
+        modelBuilder.Entity<Cat>(x =>
+        {
+            x.ToView("Cat");
+            x.HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Cat>(c => c.Id);
+        });
 
         modelBuilder.Entity<Person>().ToView("Cat");
 
         VerifyError(
-            RelationalStrings.IncompatibleViewDerivedRelationship(
-                "Cat", "Cat", "Person"),
-            modelBuilder);
+            RelationalStrings.IncompatibleViewDerivedRelationship("Cat", "Cat", "Person"),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_unmapped_foreign_keys_in_TPT()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .Ignore(a => a.FavoritePerson)
             .Property<int>("FavoritePersonId");
-        modelBuilder.Entity<Cat>().ToTable("Cat")
-            .HasOne<Person>().WithMany()
+        modelBuilder
+            .Entity<Cat>()
+            .ToTable("Cat")
+            .HasOne<Person>()
+            .WithMany()
             .HasForeignKey("FavoritePersonId");
 
-        var definition =
-            RelationalResources.LogForeignKeyPropertiesMappedToUnrelatedTables(new TestLogger<TestRelationalLoggingDefinitions>());
+        var definition = RelationalResources.LogForeignKeyPropertiesMappedToUnrelatedTables(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
         VerifyWarning(
             definition.GenerateMessage(
-                l => l.Log(
-                    definition.Level,
-                    definition.EventId,
-                    definition.MessageFormat,
-                    "{'FavoritePersonId'}", nameof(Cat), nameof(Person), "{'FavoritePersonId'}", nameof(Cat), "{'Id'}",
-                    nameof(Person))),
+                l =>
+                    l.Log(
+                        definition.Level,
+                        definition.EventId,
+                        definition.MessageFormat,
+                        "{'FavoritePersonId'}",
+                        nameof(Cat),
+                        nameof(Person),
+                        "{'FavoritePersonId'}",
+                        nameof(Cat),
+                        "{'Id'}",
+                        nameof(Person)
+                    )
+            ),
             modelBuilder,
-            LogLevel.Error);
+            LogLevel.Error
+        );
     }
 
     [ConditionalFact]
@@ -2060,12 +2839,12 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     public virtual void Detects_invalid_MappingStrategy()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>().HasAnnotation(RelationalAnnotationNames.MappingStrategy, "TTT");
+        modelBuilder
+            .Entity<Animal>()
+            .HasAnnotation(RelationalAnnotationNames.MappingStrategy, "TTT");
         modelBuilder.Entity<Cat>();
 
-        VerifyError(
-            RelationalStrings.InvalidMappingStrategy("TTT", nameof(Animal)),
-            modelBuilder);
+        VerifyError(RelationalStrings.InvalidMappingStrategy("TTT", nameof(Animal)), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2074,11 +2853,14 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Cat>().HasBaseType((string)null);
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().ToTable("Cat").ToView("Cat").UseTpcMappingStrategy().HasBaseType(typeof(Animal));
+        modelBuilder
+            .Entity<Cat>()
+            .ToTable("Cat")
+            .ToView("Cat")
+            .UseTpcMappingStrategy()
+            .HasBaseType(typeof(Animal));
 
-        VerifyError(
-            RelationalStrings.DerivedStrategy(nameof(Cat), "TPC"),
-            modelBuilder);
+        VerifyError(RelationalStrings.DerivedStrategy(nameof(Cat), "TPC"), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2088,9 +2870,7 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder.Entity<Abstract>().ToTable("Abstract", "dbo").UseTpcMappingStrategy();
         modelBuilder.Entity<Generic<string>>();
 
-        VerifyError(
-            RelationalStrings.AbstractTpc(nameof(Abstract), "dbo.Abstract"),
-            modelBuilder);
+        VerifyError(RelationalStrings.AbstractTpc(nameof(Abstract), "dbo.Abstract"), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2100,9 +2880,7 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder.Entity<Abstract>().ToView("Abstract").UseTpcMappingStrategy();
         modelBuilder.Entity<Generic<string>>();
 
-        VerifyError(
-            RelationalStrings.AbstractTpc(nameof(Abstract), "Abstract"),
-            modelBuilder);
+        VerifyError(RelationalStrings.AbstractTpc(nameof(Abstract), "Abstract"), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2112,22 +2890,20 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder.Entity<Abstract>().ToFunction("Abstract").UseTpcMappingStrategy();
         modelBuilder.Entity<Generic<string>>();
 
-        VerifyError(
-            RelationalStrings.AbstractTpc(nameof(Abstract), "Abstract"),
-            modelBuilder);
+        VerifyError(RelationalStrings.AbstractTpc(nameof(Abstract), "Abstract"), modelBuilder);
     }
 
     [ConditionalFact]
     public virtual void Detects_UsingStoredProcedure_for_abstract_class_TPC()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Abstract>().InsertUsingStoredProcedure("Insert", s => s.HasParameter(s => s.Id))
+        modelBuilder
+            .Entity<Abstract>()
+            .InsertUsingStoredProcedure("Insert", s => s.HasParameter(s => s.Id))
             .UseTpcMappingStrategy();
         modelBuilder.Entity<Generic<string>>();
 
-        VerifyError(
-            RelationalStrings.AbstractTpc(nameof(Abstract), "Insert"),
-            modelBuilder);
+        VerifyError(RelationalStrings.AbstractTpc(nameof(Abstract), "Insert"), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2140,7 +2916,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.NonTphViewClash(nameof(Dog), nameof(Cat), "Cat"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2152,7 +2929,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.NonTphTableClash(nameof(Cat), nameof(Animal), "Animal"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2169,12 +2947,14 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     public virtual void Detects_view_TPC_with_discriminator()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>().ToView("Animal").UseTpcMappingStrategy().HasDiscriminator<int>("Discriminator");
+        modelBuilder
+            .Entity<Animal>()
+            .ToView("Animal")
+            .UseTpcMappingStrategy()
+            .HasDiscriminator<int>("Discriminator");
         modelBuilder.Entity<Cat>().ToView("Cat");
 
-        VerifyError(
-            RelationalStrings.NonTphMappingStrategy("TPC", nameof(Animal)),
-            modelBuilder);
+        VerifyError(RelationalStrings.NonTphMappingStrategy("TPC", nameof(Animal)), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2182,20 +2962,18 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Animal>(
-            b =>
-            {
-                b.UseTpcMappingStrategy();
-                b.Property(e => e.Id).ValueGeneratedOnAdd();
-            });
+        modelBuilder.Entity<Animal>(b =>
+        {
+            b.UseTpcMappingStrategy();
+            b.Property(e => e.Id).ValueGeneratedOnAdd();
+        });
 
         modelBuilder.Entity<Cat>();
 
-        var definition =
-            RelationalResources.LogTpcStoreGeneratedIdentity(new TestLogger<TestRelationalLoggingDefinitions>());
-        VerifyWarning(
-            definition.GenerateMessage(nameof(Animal), nameof(Animal.Id)),
-            modelBuilder);
+        var definition = RelationalResources.LogTpcStoreGeneratedIdentity(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
+        VerifyWarning(definition.GenerateMessage(nameof(Animal), nameof(Animal.Id)), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2203,16 +2981,20 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .ToTable("Animal")
-            .HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Person>(c => c.Id);
+            .HasOne(c => c.FavoritePerson)
+            .WithOne()
+            .HasForeignKey<Person>(c => c.Id);
 
         modelBuilder.Entity<Person>().ToTable("Animal").UseTpcMappingStrategy();
         modelBuilder.Entity<Employee>().ToTable("Employee");
 
         VerifyError(
             RelationalStrings.TpcTableSharingDependent("Person", "Animal", "Employee", "Employee"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2220,17 +3002,17 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UseTpcMappingStrategy()
             .ToView("Animal")
             .Ignore(a => a.FavoritePerson);
 
-        modelBuilder.Entity<Cat>(
-            x =>
-            {
-                x.ToView("Cat");
-                x.HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Person>(c => c.Id);
-            });
+        modelBuilder.Entity<Cat>(x =>
+        {
+            x.ToView("Cat");
+            x.HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Person>(c => c.Id);
+        });
 
         modelBuilder.Entity<Person>().ToView("Cat");
 
@@ -2242,18 +3024,19 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UseTpcMappingStrategy()
             .ToView("Animal")
-            .HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Person>(c => c.Id);
+            .HasOne(c => c.FavoritePerson)
+            .WithOne()
+            .HasForeignKey<Person>(c => c.Id);
 
         modelBuilder.Entity<Cat>(x => x.ToView("Cat"));
 
         modelBuilder.Entity<Person>().ToView("Animal");
 
-        VerifyError(
-            RelationalStrings.TpcTableSharing("Person", "Animal", "Animal"),
-            modelBuilder);
+        VerifyError(RelationalStrings.TpcTableSharing("Person", "Animal", "Animal"), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2261,23 +3044,20 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Animal>()
-            .UseTpcMappingStrategy()
-            .Ignore(a => a.FavoritePerson);
+        modelBuilder.Entity<Animal>().UseTpcMappingStrategy().Ignore(a => a.FavoritePerson);
 
-        modelBuilder.Entity<Cat>(
-            x =>
-            {
-                x.ToTable("Cat");
-                x.HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Cat>(c => c.Id);
-            });
+        modelBuilder.Entity<Cat>(x =>
+        {
+            x.ToTable("Cat");
+            x.HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Cat>(c => c.Id);
+        });
 
         modelBuilder.Entity<Person>().ToTable("Cat");
 
         VerifyError(
-            RelationalStrings.IncompatibleTableDerivedRelationship(
-                "Cat", "Cat", "Person"),
-            modelBuilder);
+            RelationalStrings.IncompatibleTableDerivedRelationship("Cat", "Cat", "Person"),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2285,49 +3065,64 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UseTpcMappingStrategy()
             .Ignore(a => a.FavoritePerson)
             .ToView("Animal");
 
-        modelBuilder.Entity<Cat>(
-            x =>
-            {
-                x.ToView("Cat");
-                x.HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Cat>(c => c.Id);
-            });
+        modelBuilder.Entity<Cat>(x =>
+        {
+            x.ToView("Cat");
+            x.HasOne(c => c.FavoritePerson).WithOne().HasForeignKey<Cat>(c => c.Id);
+        });
 
         modelBuilder.Entity<Person>().ToView("Cat");
 
         VerifyError(
-            RelationalStrings.IncompatibleViewDerivedRelationship(
-                "Cat", "Cat", "Person"),
-            modelBuilder);
+            RelationalStrings.IncompatibleViewDerivedRelationship("Cat", "Cat", "Person"),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_unmapped_foreign_keys_in_TPC()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>().UseTpcMappingStrategy()
-            .Property(a => a.Id).ValueGeneratedNever();
+        modelBuilder
+            .Entity<Animal>()
+            .UseTpcMappingStrategy()
+            .Property(a => a.Id)
+            .ValueGeneratedNever();
         modelBuilder.Entity<Cat>().ToTable("Cat");
-        modelBuilder.Entity<Person>()
-            .HasOne<Animal>().WithOne(a => a.FavoritePerson)
+        modelBuilder
+            .Entity<Person>()
+            .HasOne<Animal>()
+            .WithOne(a => a.FavoritePerson)
             .HasForeignKey<Person>(p => p.FavoriteBreed)
             .HasPrincipalKey<Animal>(a => a.Name);
 
-        var definition =
-            RelationalResources.LogForeignKeyTpcPrincipal(new TestLogger<TestRelationalLoggingDefinitions>());
+        var definition = RelationalResources.LogForeignKeyTpcPrincipal(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
         VerifyWarning(
             definition.GenerateMessage(
-                l => l.Log(
-                    definition.Level,
-                    definition.EventId,
-                    definition.MessageFormat,
-                    "{'FavoriteBreed'}", nameof(Person), nameof(Animal), nameof(Animal), nameof(Animal), nameof(Person),
-                    nameof(Animal))),
-            modelBuilder);
+                l =>
+                    l.Log(
+                        definition.Level,
+                        definition.EventId,
+                        definition.MessageFormat,
+                        "{'FavoriteBreed'}",
+                        nameof(Person),
+                        nameof(Animal),
+                        nameof(Animal),
+                        nameof(Animal),
+                        nameof(Person),
+                        nameof(Animal)
+                    )
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2350,9 +3145,7 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var property = modelBuilder.Entity<Dog>().Property(a => a.Identity).GetInfrastructure();
         property.HasColumnName("DogName", StoreObjectIdentifier.Table("Dog"));
 
-        VerifyError(
-            RelationalStrings.TableOverrideMismatch("Dog.Identity", "Dog"),
-            modelBuilder);
+        VerifyError(RelationalStrings.TableOverrideMismatch("Dog.Identity", "Dog"), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2360,14 +3153,13 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<Animal>()
-            .Ignore(a => a.FavoritePerson);
+        modelBuilder.Entity<Animal>().Ignore(a => a.FavoritePerson);
 
-        modelBuilder.Entity<Cat>().ToTable("Cat", b => b.Property(c => c.Name).HasColumnName("Name"));
+        modelBuilder
+            .Entity<Cat>()
+            .ToTable("Cat", b => b.Property(c => c.Name).HasColumnName("Name"));
 
-        VerifyError(
-            RelationalStrings.TableOverrideMismatch("Animal.Name", "Cat"),
-            modelBuilder);
+        VerifyError(RelationalStrings.TableOverrideMismatch("Animal.Name", "Cat"), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2390,9 +3182,7 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var property = modelBuilder.Entity<Dog>().Property(a => a.Identity).GetInfrastructure();
         property.HasColumnName("DogName", StoreObjectIdentifier.View("Dog"));
 
-        VerifyError(
-            RelationalStrings.ViewOverrideMismatch("Dog.Identity", "Dog"),
-            modelBuilder);
+        VerifyError(RelationalStrings.ViewOverrideMismatch("Dog.Identity", "Dog"), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2402,9 +3192,7 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var property = modelBuilder.Entity<Animal>().Property(a => a.Name).GetInfrastructure();
         property.HasColumnName("DogName", StoreObjectIdentifier.SqlQuery("Dog"));
 
-        VerifyError(
-            RelationalStrings.SqlQueryOverrideMismatch("Animal.Name", "Dog"),
-            modelBuilder);
+        VerifyError(RelationalStrings.SqlQueryOverrideMismatch("Animal.Name", "Dog"), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2416,7 +3204,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.StoredProcedureOverrideMismatch("Animal.Name", "Dog"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2426,9 +3215,7 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var property = modelBuilder.Entity<Animal>().Property(a => a.Name).GetInfrastructure();
         property.HasColumnName("DogName", StoreObjectIdentifier.DbFunction("Dog"));
 
-        VerifyError(
-            RelationalStrings.FunctionOverrideMismatch("Animal.Name", "Dog"),
-            modelBuilder);
+        VerifyError(RelationalStrings.FunctionOverrideMismatch("Animal.Name", "Dog"), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2441,8 +3228,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         VerifyError(
             RelationalStrings.DbFunctionInvalidReturnType(
                 "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+TestMethods.MethodC()",
-                typeof(TestMethods).ShortDisplayName()),
-            modelBuilder);
+                typeof(TestMethods).ShortDisplayName()
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2450,9 +3239,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionlessModelBuilder();
 
-        var methodInfo
-            = typeof(TestMethods)
-                .GetRuntimeMethod(nameof(TestMethods.MethodA), Array.Empty<Type>());
+        var methodInfo = typeof(TestMethods).GetRuntimeMethod(
+            nameof(TestMethods.MethodA),
+            Array.Empty<Type>()
+        );
 
         modelBuilder.HasDbFunction(methodInfo);
 
@@ -2460,8 +3250,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             RelationalStrings.DbFunctionInvalidReturnEntityType(
                 "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+TestMethods.MethodA()",
                 typeof(IQueryable<TestMethods>).ShortDisplayName(),
-                typeof(TestMethods).ShortDisplayName()),
-            modelBuilder);
+                typeof(TestMethods).ShortDisplayName()
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2475,8 +3267,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             RelationalStrings.DbFunctionInvalidParameterType(
                 "methods",
                 "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+TestMethods.MethodD(Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+TestMethods)",
-                typeof(TestMethods).ShortDisplayName()),
-            modelBuilder);
+                typeof(TestMethods).ShortDisplayName()
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2484,9 +3278,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        var methodInfo
-            = typeof(TestMethods)
-                .GetRuntimeMethod(nameof(TestMethods.MethodA), Array.Empty<Type>());
+        var methodInfo = typeof(TestMethods).GetRuntimeMethod(
+            nameof(TestMethods.MethodA),
+            Array.Empty<Type>()
+        );
 
         var function = modelBuilder.HasDbFunction(methodInfo).Metadata;
 
@@ -2509,7 +3304,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.MappedFunctionNotFound(nameof(TestMethods), "NonExistent"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2526,8 +3322,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                 nameof(TestMethods),
                 "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+TestMethods.MethodE()",
                 "int",
-                nameof(TestMethods)),
-            modelBuilder);
+                nameof(TestMethods)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2543,8 +3341,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                 nameof(Animal),
                 "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+TestMethods.MethodA()",
                 typeof(IQueryable<TestMethods>).ShortDisplayName(),
-                nameof(Animal)),
-            modelBuilder);
+                nameof(Animal)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2552,15 +3352,18 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        ((IConventionEntityType)modelBuilder.Entity<TestMethods>().HasNoKey().Metadata)
-            .Builder.ToFunction(TestMethods.MethodBMi);
+        (
+            (IConventionEntityType)modelBuilder.Entity<TestMethods>().HasNoKey().Metadata
+        ).Builder.ToFunction(TestMethods.MethodBMi);
 
         VerifyError(
             RelationalStrings.InvalidMappedFunctionWithParameters(
                 nameof(TestMethods),
                 "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+TestMethods.MethodB(int)",
-                "{'id'}"),
-            modelBuilder);
+                "{'id'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2570,19 +3373,20 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         var function = modelBuilder.HasDbFunction(TestMethods.MethodAMi).Metadata;
 
-        modelBuilder.Entity<DerivedTestMethods>(
-            db =>
-            {
-                db.HasBaseType((string)null);
-                db.OwnsOne(d => d.SomeTestMethods).ToFunction(function.ModelName);
-                db.OwnsOne(d => d.OtherTestMethods).ToFunction(function.ModelName);
-            });
+        modelBuilder.Entity<DerivedTestMethods>(db =>
+        {
+            db.HasBaseType((string)null);
+            db.OwnsOne(d => d.SomeTestMethods).ToFunction(function.ModelName);
+            db.OwnsOne(d => d.OtherTestMethods).ToFunction(function.ModelName);
+        });
 
         VerifyError(
             RelationalStrings.DbFunctionInvalidIQueryableOwnedReturnType(
                 "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+TestMethods.MethodA()",
-                nameof(TestMethods)),
-            modelBuilder);
+                nameof(TestMethods)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2599,8 +3403,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             RelationalStrings.InvalidMappedFunctionDerivedType(
                 nameof(TestMethods),
                 "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+BaseTestMethods.MethodA()",
-                nameof(BaseTestMethods)),
-            modelBuilder);
+                nameof(BaseTestMethods)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2619,8 +3425,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                 nameof(TestMethods),
                 "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+TestMethods.MethodA()",
                 nameof(BaseTestMethods),
-                "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+BaseTestMethods.MethodA()"),
-            modelBuilder);
+                "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+BaseTestMethods.MethodA()"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -2628,57 +3436,63 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.Entity<DerivedTestMethods>(
-            db =>
-            {
-                db.HasBaseType((string)null);
-                db.OwnsOne(d => d.SomeTestMethods).DeleteUsingStoredProcedure(
+        modelBuilder.Entity<DerivedTestMethods>(db =>
+        {
+            db.HasBaseType((string)null);
+            db.OwnsOne(d => d.SomeTestMethods)
+                .DeleteUsingStoredProcedure(
                     "Delete",
-                    s => s.HasOriginalValueParameter("DerivedTestMethodsId"));
-                db.OwnsOne(d => d.OtherTestMethods).DeleteUsingStoredProcedure(
+                    s => s.HasOriginalValueParameter("DerivedTestMethodsId")
+                );
+            db.OwnsOne(d => d.OtherTestMethods)
+                .DeleteUsingStoredProcedure(
                     "Delete",
-                    s => s.HasOriginalValueParameter("DerivedTestMethodsId"));
-            });
+                    s => s.HasOriginalValueParameter("DerivedTestMethodsId")
+                );
+        });
 
         VerifyError(
             RelationalStrings.StoredProcedureTableSharing(
                 "DerivedTestMethods.OtherTestMethods#TestMethods",
                 "DerivedTestMethods.SomeTestMethods#TestMethods",
-                "Delete"),
-            modelBuilder);
+                "Delete"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_keyless_entity_type_mapped_to_a_stored_procedure()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .Ignore(a => a.FavoritePerson)
             .HasNoKey()
-            .InsertUsingStoredProcedure(
-                s => s
-                    .HasParameter(c => c.Id)
-                    .HasParameter(c => c.Name));
+            .InsertUsingStoredProcedure(s => s.HasParameter(c => c.Id).HasParameter(c => c.Name));
 
         VerifyError(
             RelationalStrings.StoredProcedureKeyless(nameof(Animal), "Animal_Insert"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_tableless_entity_type_mapped_to_some_stored_procedures()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .Ignore(a => a.FavoritePerson)
             .ToTable((string)null)
             .InsertUsingStoredProcedure(s => s.HasParameter(c => c.Id).HasParameter(c => c.Name))
-            .UpdateUsingStoredProcedure(s => s.HasOriginalValueParameter(c => c.Id).HasParameter(c => c.Name))
-            .Property(a => a.Id).ValueGeneratedNever();
+            .UpdateUsingStoredProcedure(
+                s => s.HasOriginalValueParameter(c => c.Id).HasParameter(c => c.Name)
+            )
+            .Property(a => a.Id)
+            .ValueGeneratedNever();
 
-        VerifyError(
-            RelationalStrings.StoredProcedureUnmapped(nameof(Animal)),
-            modelBuilder);
+        VerifyError(RelationalStrings.StoredProcedureUnmapped(nameof(Animal)), modelBuilder);
     }
 
     [ConditionalFact]
@@ -2686,369 +3500,514 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>().HasDiscriminator<int>("Discriminator");
-        modelBuilder.Entity<Cat>().UpdateUsingStoredProcedure("Update", s => s.HasParameter(c => c.Breed));
+        modelBuilder
+            .Entity<Cat>()
+            .UpdateUsingStoredProcedure("Update", s => s.HasParameter(c => c.Breed));
 
         VerifyError(
             RelationalStrings.TphStoredProcedureMismatch(nameof(Cat), "Update", nameof(Animal), ""),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_derived_entity_type_mapped_to_a_different_stored_procedure_in_TPH()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>().UpdateUsingStoredProcedure("Update", s => s.HasParameter(c => c.Id))
+        modelBuilder
+            .Entity<Animal>()
+            .UpdateUsingStoredProcedure("Update", s => s.HasParameter(c => c.Id))
             .HasDiscriminator<string>("Discriminator");
-        modelBuilder.Entity<Cat>().UpdateUsingStoredProcedure("Update2", s => s.HasParameter(c => c.Breed));
+        modelBuilder
+            .Entity<Cat>()
+            .UpdateUsingStoredProcedure("Update2", s => s.HasParameter(c => c.Breed));
 
         VerifyError(
-            RelationalStrings.TphStoredProcedureMismatch(nameof(Cat), "Update2", nameof(Animal), "Update"),
-            modelBuilder);
+            RelationalStrings.TphStoredProcedureMismatch(
+                nameof(Cat),
+                "Update2",
+                nameof(Animal),
+                "Update"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_derived_entity_type_mapped_to_a_different_stored_procedure_instance_in_TPH()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>().UpdateUsingStoredProcedure("Update", s => s.HasParameter(c => c.Id));
-        modelBuilder.Entity<Cat>().UpdateUsingStoredProcedure("Update", s => s.HasParameter(c => c.Breed));
+        modelBuilder
+            .Entity<Animal>()
+            .UpdateUsingStoredProcedure("Update", s => s.HasParameter(c => c.Id));
+        modelBuilder
+            .Entity<Cat>()
+            .UpdateUsingStoredProcedure("Update", s => s.HasParameter(c => c.Breed));
 
         VerifyError(
             RelationalStrings.StoredProcedureTphDuplicate(nameof(Cat), nameof(Animal), "Update"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_missing_generated_stored_procedure_parameters_in_TPH()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UpdateUsingStoredProcedure(
-                "Update", s => s
-                    .HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
-                    .HasParameter(a => a.Name)
-                    .HasParameter((Cat c) => c.Breed)
-                    .HasResultColumn(a => a.Name))
-            .Property(a => a.Name).ValueGeneratedOnUpdate().Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+                "Update",
+                s =>
+                    s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
+                        .HasParameter(a => a.Name)
+                        .HasParameter((Cat c) => c.Breed)
+                        .HasResultColumn(a => a.Name)
+            )
+            .Property(a => a.Name)
+            .ValueGeneratedOnUpdate()
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
         modelBuilder.Entity<Cat>();
 
         VerifyError(
-            RelationalStrings.StoredProcedurePropertiesNotMapped(nameof(Animal), "Update", "{'FavoritePersonId', 'Identity'}"),
-            modelBuilder);
+            RelationalStrings.StoredProcedurePropertiesNotMapped(
+                nameof(Animal),
+                "Update",
+                "{'FavoritePersonId', 'Identity'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_unmatched_stored_procedure_parameters_in_TPH()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UpdateUsingStoredProcedure("Update", s => s.HasParameter("Missing"))
-            .Property(a => a.Name).ValueGeneratedOnUpdate();
+            .Property(a => a.Name)
+            .ValueGeneratedOnUpdate();
 
         VerifyError(
             RelationalStrings.StoredProcedureParameterNotFound("Missing", nameof(Animal), "Update"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_non_key_delete_stored_procedure_params_in_TPH()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .DeleteUsingStoredProcedure(
-                s => s
-                    .HasOriginalValueParameter(a => a.Id)
-                    .HasOriginalValueParameter(a => a.Name))
-            .Property(a => a.Name).ValueGeneratedOnUpdate();
+                s => s.HasOriginalValueParameter(a => a.Id).HasOriginalValueParameter(a => a.Name)
+            )
+            .Property(a => a.Name)
+            .ValueGeneratedOnUpdate();
 
         VerifyError(
-            RelationalStrings.StoredProcedureDeleteNonKeyProperty(nameof(Animal), nameof(Animal.Name), "Animal_Delete"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureDeleteNonKeyProperty(
+                nameof(Animal),
+                nameof(Animal.Name),
+                "Animal_Delete"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_unmatched_stored_procedure_result_columns_in_TPH()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UpdateUsingStoredProcedure("Update", "dbo", s => s.HasResultColumn("Missing"));
 
         VerifyError(
-            RelationalStrings.StoredProcedureResultColumnNotFound("Missing", nameof(Animal), "dbo.Update"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureResultColumnNotFound(
+                "Missing",
+                nameof(Animal),
+                "dbo.Update"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_duplicate_parameter()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .InsertUsingStoredProcedure(
-                s => s
-                    .HasParameter(a => a.Id, p => p.IsOutput())
-                    .HasRowsAffectedParameter(c => c.HasName("Id"))
-                    .HasParameter("FavoritePersonId"));
+                s =>
+                    s.HasParameter(a => a.Id, p => p.IsOutput())
+                        .HasRowsAffectedParameter(c => c.HasName("Id"))
+                        .HasParameter("FavoritePersonId")
+            );
 
         VerifyError(
             RelationalStrings.StoredProcedureDuplicateParameterName("Id", "Animal_Insert"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_duplicate_result_column()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .InsertUsingStoredProcedure(
-                s => s
-                    .HasResultColumn(a => a.Id, c => c.HasName("Id"))
-                    .HasRowsAffectedResultColumn(c => c.HasName("Id"))
-                    .HasParameter("FavoritePersonId"));
+                s =>
+                    s.HasResultColumn(a => a.Id, c => c.HasName("Id"))
+                        .HasRowsAffectedResultColumn(c => c.HasName("Id"))
+                        .HasParameter("FavoritePersonId")
+            );
 
         VerifyError(
             RelationalStrings.StoredProcedureDuplicateResultColumnName("Id", "Animal_Insert"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_non_generated_insert_stored_procedure_result_columns_in_TPH()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .InsertUsingStoredProcedure(s => s.HasResultColumn(a => a.Name));
         modelBuilder.Entity<Cat>();
 
         VerifyError(
-            RelationalStrings.StoredProcedureResultColumnNotGenerated(nameof(Animal), nameof(Animal.Name), "Animal_Insert"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureResultColumnNotGenerated(
+                nameof(Animal),
+                nameof(Animal.Name),
+                "Animal_Insert"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_non_generated_update_stored_procedure_result_columns_in_TPT()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .Ignore(a => a.FavoritePerson)
             .UpdateUsingStoredProcedure(
-                s => s
-                    .HasOriginalValueParameter(a => a.Id)
-                    .HasParameter(a => a.Name))
+                s => s.HasOriginalValueParameter(a => a.Id).HasParameter(a => a.Name)
+            )
             .UseTptMappingStrategy();
-        modelBuilder.Entity<Cat>()
+        modelBuilder
+            .Entity<Cat>()
             .UpdateUsingStoredProcedure("Update", s => s.HasResultColumn(c => c.Breed));
 
         VerifyError(
-            RelationalStrings.StoredProcedureResultColumnNotGenerated(nameof(Cat), nameof(Cat.Breed), "Update"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureResultColumnNotGenerated(
+                nameof(Cat),
+                nameof(Cat.Breed),
+                "Update"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_non_generated_insert_stored_procedure_output_parameter_in_TPC()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .InsertUsingStoredProcedure(s => s.HasParameter(a => a.Name, p => p.IsOutput()))
             .UseTpcMappingStrategy();
         modelBuilder.Entity<Cat>();
 
         VerifyError(
-            RelationalStrings.StoredProcedureOutputParameterNotGenerated(nameof(Animal), nameof(Animal.Name), "Animal_Insert"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureOutputParameterNotGenerated(
+                nameof(Animal),
+                nameof(Animal.Name),
+                "Animal_Insert"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_non_generated_update_stored_procedure_input_output_parameter()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .Ignore(a => a.FavoritePerson)
             .UpdateUsingStoredProcedure(
-                s => s
-                    .HasOriginalValueParameter(a => a.Id)
-                    .HasParameter(a => a.Name, p => p.IsInputOutput()));
+                s =>
+                    s.HasOriginalValueParameter(a => a.Id)
+                        .HasParameter(a => a.Name, p => p.IsInputOutput())
+            );
 
         VerifyError(
-            RelationalStrings.StoredProcedureOutputParameterNotGenerated(nameof(Animal), nameof(Animal.Name), "Animal_Update"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureOutputParameterNotGenerated(
+                nameof(Animal),
+                nameof(Animal.Name),
+                "Animal_Update"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_delete_stored_procedure_result_columns_in_TPH()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .DeleteUsingStoredProcedure("Delete", s => s.HasResultColumn(a => a.Name))
-            .Property(a => a.Name).ValueGeneratedOnUpdate();
+            .Property(a => a.Name)
+            .ValueGeneratedOnUpdate();
 
         VerifyError(
-            RelationalStrings.StoredProcedureResultColumnDelete(nameof(Animal), nameof(Animal.Name), "Delete"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureResultColumnDelete(
+                nameof(Animal),
+                nameof(Animal.Name),
+                "Delete"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_generated_properties_mapped_to_result_and_parameter()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UpdateUsingStoredProcedure(
-                s => s
-                    .HasOriginalValueParameter(a => a.Id)
-                    .HasParameter(a => a.Name, p => p.IsInputOutput())
-                    .HasResultColumn(a => a.Name))
-            .Property(a => a.Name).ValueGeneratedOnUpdate().Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+                s =>
+                    s.HasOriginalValueParameter(a => a.Id)
+                        .HasParameter(a => a.Name, p => p.IsInputOutput())
+                        .HasResultColumn(a => a.Name)
+            )
+            .Property(a => a.Name)
+            .ValueGeneratedOnUpdate()
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
         ;
 
         VerifyError(
-            RelationalStrings.StoredProcedureResultColumnParameterConflict(nameof(Animal), nameof(Animal.Name), "Animal_Update"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureResultColumnParameterConflict(
+                nameof(Animal),
+                nameof(Animal.Name),
+                "Animal_Update"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_generated_properties_mapped_to_original_and_current_parameter()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UpdateUsingStoredProcedure(
-                s => s
-                    .HasOriginalValueParameter(a => a.Id)
-                    .HasParameter(a => a.Name, p => p.IsOutput())
-                    .HasOriginalValueParameter(a => a.Name, p => p.IsInputOutput().HasName("OriginalName")))
-            .Property(a => a.Name).ValueGeneratedOnUpdate();
+                s =>
+                    s.HasOriginalValueParameter(a => a.Id)
+                        .HasParameter(a => a.Name, p => p.IsOutput())
+                        .HasOriginalValueParameter(
+                            a => a.Name,
+                            p => p.IsInputOutput().HasName("OriginalName")
+                        )
+            )
+            .Property(a => a.Name)
+            .ValueGeneratedOnUpdate();
 
         VerifyError(
-            RelationalStrings.StoredProcedureOutputParameterConflict(nameof(Animal), nameof(Animal.Name), "Animal_Update"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureOutputParameterConflict(
+                nameof(Animal),
+                nameof(Animal.Name),
+                "Animal_Update"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_original_value_parameter_on_insert_stored_procedure()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .InsertUsingStoredProcedure(
-                s => s
-                    .HasParameter(a => a.Id)
-                    .HasOriginalValueParameter(a => a.Name));
+                s => s.HasParameter(a => a.Id).HasOriginalValueParameter(a => a.Name)
+            );
 
         VerifyError(
-            RelationalStrings.StoredProcedureOriginalValueParameterOnInsert(nameof(Animal.Name) + "_Original", "Animal_Insert"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureOriginalValueParameterOnInsert(
+                nameof(Animal.Name) + "_Original",
+                "Animal_Insert"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_current_value_parameter_on_delete_stored_procedure()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
-            .DeleteUsingStoredProcedure(s => s.HasParameter(a => a.Id));
+        modelBuilder.Entity<Animal>().DeleteUsingStoredProcedure(s => s.HasParameter(a => a.Id));
 
         VerifyError(
-            RelationalStrings.StoredProcedureCurrentValueParameterOnDelete(nameof(Animal.Id), "Animal_Delete"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureCurrentValueParameterOnDelete(
+                nameof(Animal.Id),
+                "Animal_Delete"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_unmapped_concurrency_token()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UpdateUsingStoredProcedure(
-                s => s
-                    .HasOriginalValueParameter(a => a.Id)
-                    .HasParameter("FavoritePersonId")
-                    .HasParameter(a => a.Name, p => p.IsOutput())
-                    .HasRowsAffectedReturnValue())
-            .Property(a => a.Name).IsRowVersion();
+                s =>
+                    s.HasOriginalValueParameter(a => a.Id)
+                        .HasParameter("FavoritePersonId")
+                        .HasParameter(a => a.Name, p => p.IsOutput())
+                        .HasRowsAffectedReturnValue()
+            )
+            .Property(a => a.Name)
+            .IsRowVersion();
 
         VerifyWarning(
-            RelationalResources.LogStoredProcedureConcurrencyTokenNotMapped(new TestLogger<TestRelationalLoggingDefinitions>())
-                .GenerateMessage(nameof(Animal), "Animal_Update", nameof(Animal.Name)), modelBuilder);
+            RelationalResources
+                .LogStoredProcedureConcurrencyTokenNotMapped(
+                    new TestLogger<TestRelationalLoggingDefinitions>()
+                )
+                .GenerateMessage(nameof(Animal), "Animal_Update", nameof(Animal.Name)),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_rows_affected_with_result_columns()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UpdateUsingStoredProcedure(
-                s => s
-                    .HasOriginalValueParameter(a => a.Id)
-                    .HasParameter("FavoritePersonId")
-                    .HasResultColumn(a => a.Name)
-                    .HasRowsAffectedReturnValue())
-            .Property(a => a.Name).ValueGeneratedOnUpdate();
+                s =>
+                    s.HasOriginalValueParameter(a => a.Id)
+                        .HasParameter("FavoritePersonId")
+                        .HasResultColumn(a => a.Name)
+                        .HasRowsAffectedReturnValue()
+            )
+            .Property(a => a.Name)
+            .ValueGeneratedOnUpdate();
 
         VerifyError(
-            RelationalStrings.StoredProcedureRowsAffectedWithResultColumns(nameof(Animal), "Animal_Update"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureRowsAffectedWithResultColumns(
+                nameof(Animal),
+                "Animal_Update"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_rows_affected_on_insert_stored_procedure()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .InsertUsingStoredProcedure(
-                s => s
-                    .HasParameter(a => a.Id, pb => pb.IsOutput())
-                    .HasParameter("FavoritePersonId")
-                    .HasParameter(a => a.Name)
-                    .HasRowsAffectedReturnValue());
+                s =>
+                    s.HasParameter(a => a.Id, pb => pb.IsOutput())
+                        .HasParameter("FavoritePersonId")
+                        .HasParameter(a => a.Name)
+                        .HasRowsAffectedReturnValue()
+            );
 
         VerifyError(
             RelationalStrings.StoredProcedureRowsAffectedForInsert("Animal_Insert"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_stored_procedure_input_parameter_for_insert_non_save_property()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .InsertUsingStoredProcedure(
                 "Insert",
-                s => s
-                    .HasParameter(a => a.Id, pb => pb.IsOutput())
-                    .HasParameter("FavoritePersonId")
-                    .HasParameter(a => a.Name))
-            .Property(b => b.Name).Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+                s =>
+                    s.HasParameter(a => a.Id, pb => pb.IsOutput())
+                        .HasParameter("FavoritePersonId")
+                        .HasParameter(a => a.Name)
+            )
+            .Property(b => b.Name)
+            .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
 
         VerifyError(
             RelationalStrings.StoredProcedureInputParameterForInsertNonSaveProperty(
-                nameof(Animal.Name), "Insert", nameof(Animal.Name), nameof(Animal), nameof(PropertySaveBehavior.Ignore)),
-            modelBuilder);
+                nameof(Animal.Name),
+                "Insert",
+                nameof(Animal.Name),
+                nameof(Animal),
+                nameof(PropertySaveBehavior.Ignore)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_stored_procedure_input_parameter_for_update_non_save_property()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UpdateUsingStoredProcedure(
                 "Update",
-                s => s
-                    .HasOriginalValueParameter(a => a.Id)
-                    .HasParameter("FavoritePersonId")
-                    .HasParameter(a => a.Name))
-            .Property(b => b.Name).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                s =>
+                    s.HasOriginalValueParameter(a => a.Id)
+                        .HasParameter("FavoritePersonId")
+                        .HasParameter(a => a.Name)
+            )
+            .Property(b => b.Name)
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
         VerifyError(
             RelationalStrings.StoredProcedureInputParameterForUpdateNonSaveProperty(
-                nameof(Animal.Name), "Update", nameof(Animal.Name), nameof(Animal), nameof(PropertySaveBehavior.Ignore)),
-            modelBuilder);
+                nameof(Animal.Name),
+                "Update",
+                nameof(Animal.Name),
+                nameof(Animal),
+                nameof(PropertySaveBehavior.Ignore)
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Passes_for_stored_procedure_without_parameter_for_insert_non_save_property()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .InsertUsingStoredProcedure(
                 "Insert",
-                s => s
-                    .HasParameter(a => a.Id, pb => pb.IsOutput())
-                    .HasParameter("FavoritePersonId"))
-            .Property(b => b.Name).Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+                s => s.HasParameter(a => a.Id, pb => pb.IsOutput()).HasParameter("FavoritePersonId")
+            )
+            .Property(b => b.Name)
+            .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
 
         Validate(modelBuilder);
     }
@@ -3057,13 +4016,14 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     public virtual void Passes_for_stored_procedure_without_parameter_for_update_non_save_property()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UpdateUsingStoredProcedure(
                 "Update",
-                s => s
-                    .HasOriginalValueParameter(a => a.Id)
-                    .HasParameter("FavoritePersonId"))
-            .Property(b => b.Name).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                s => s.HasOriginalValueParameter(a => a.Id).HasParameter("FavoritePersonId")
+            )
+            .Property(b => b.Name)
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
         Validate(modelBuilder);
     }
@@ -3072,11 +4032,14 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     public virtual void Passes_on_valid_UsingDeleteStoredProcedure_in_TPT()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UseTptMappingStrategy()
             .DeleteUsingStoredProcedure("Delete", s => s.HasOriginalValueParameter(a => a.Id))
-            .Property(a => a.Name).ValueGeneratedOnUpdate();
-        modelBuilder.Entity<Cat>()
+            .Property(a => a.Name)
+            .ValueGeneratedOnUpdate();
+        modelBuilder
+            .Entity<Cat>()
             .DeleteUsingStoredProcedure(s => s.HasOriginalValueParameter(a => a.Id));
 
         Validate(modelBuilder);
@@ -3087,11 +4050,15 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     {
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder.Entity<Animal>().UseTptMappingStrategy();
-        modelBuilder.Entity<Cat>().UpdateUsingStoredProcedure(
-            "Update", s => s
-                .HasOriginalValueParameter(c => c.Id)
-                .HasParameter(c => c.Breed)
-                .HasParameter(c => c.Identity));
+        modelBuilder
+            .Entity<Cat>()
+            .UpdateUsingStoredProcedure(
+                "Update",
+                s =>
+                    s.HasOriginalValueParameter(c => c.Id)
+                        .HasParameter(c => c.Breed)
+                        .HasParameter(c => c.Identity)
+            );
 
         Validate(modelBuilder);
     }
@@ -3100,15 +4067,20 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     public virtual void Passes_on_derived_entity_type_not_mapped_to_a_stored_procedure_in_TPT()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UseTptMappingStrategy()
             .UpdateUsingStoredProcedure(
-                "Update", s => s
-                    .HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
-                    .HasParameter(a => a.Name)
-                    .HasParameter("FavoritePersonId")
-                    .HasResultColumn(a => a.Name))
-            .Property(a => a.Name).ValueGeneratedOnUpdate().Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+                "Update",
+                s =>
+                    s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
+                        .HasParameter(a => a.Name)
+                        .HasParameter("FavoritePersonId")
+                        .HasResultColumn(a => a.Name)
+            )
+            .Property(a => a.Name)
+            .ValueGeneratedOnUpdate()
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
         ;
         modelBuilder.Entity<Cat>();
 
@@ -3119,22 +4091,31 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     public virtual void Detects_missing_generated_stored_procedure_parameters_in_TPT()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UseTptMappingStrategy()
             .UpdateUsingStoredProcedure(
-                "Update", s => s
-                    .HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
-                    .HasParameter(a => a.Name)
-                    .HasParameter("FavoritePersonId")
-                    .HasResultColumn(a => a.Name))
-            .Property(a => a.Name).ValueGeneratedOnUpdate().Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+                "Update",
+                s =>
+                    s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
+                        .HasParameter(a => a.Name)
+                        .HasParameter("FavoritePersonId")
+                        .HasResultColumn(a => a.Name)
+            )
+            .Property(a => a.Name)
+            .ValueGeneratedOnUpdate()
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
         ;
-        modelBuilder.Entity<Cat>()
-            .UpdateUsingStoredProcedure(s => s.HasParameter(c => c.Breed));
+        modelBuilder.Entity<Cat>().UpdateUsingStoredProcedure(s => s.HasParameter(c => c.Breed));
 
         VerifyError(
-            RelationalStrings.StoredProcedurePropertiesNotMapped(nameof(Cat), "Cat_Update", "{'Identity', 'Id'}"),
-            modelBuilder);
+            RelationalStrings.StoredProcedurePropertiesNotMapped(
+                nameof(Cat),
+                "Cat_Update",
+                "{'Identity', 'Id'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -3143,128 +4124,181 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder.Entity<Abstract>().UseTptMappingStrategy();
-        modelBuilder.Entity<Generic<string>>()
-            .UpdateUsingStoredProcedure(
-                "Update", s => s
-                    .HasOriginalValueParameter(a => a.Id));
+        modelBuilder
+            .Entity<Generic<string>>()
+            .UpdateUsingStoredProcedure("Update", s => s.HasOriginalValueParameter(a => a.Id));
 
         VerifyError(
-            RelationalStrings.StoredProcedurePropertiesNotMapped("Generic<string>", "Update", "{'P0', 'P1', 'P2', 'P3'}"),
-            modelBuilder);
+            RelationalStrings.StoredProcedurePropertiesNotMapped(
+                "Generic<string>",
+                "Update",
+                "{'P0', 'P1', 'P2', 'P3'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_unmatched_stored_procedure_parameters_in_TPT()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UseTptMappingStrategy()
-            .UpdateUsingStoredProcedure("Update", s => s.HasOriginalValueParameter((Cat c) => c.Breed));
+            .UpdateUsingStoredProcedure(
+                "Update",
+                s => s.HasOriginalValueParameter((Cat c) => c.Breed)
+            );
         modelBuilder.Entity<Cat>();
 
         VerifyError(
-            RelationalStrings.StoredProcedureParameterNotFound(nameof(Cat.Breed), nameof(Animal), "Update"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureParameterNotFound(
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "Update"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_unmatched_stored_procedure_result_columns_in_TPT()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UpdateUsingStoredProcedure("Update", "dbo", s => s.HasResultColumn((Cat c) => c.Breed))
             .UseTptMappingStrategy();
         modelBuilder.Entity<Cat>();
 
         VerifyError(
-            RelationalStrings.StoredProcedureResultColumnNotFound(nameof(Cat.Breed), nameof(Animal), "dbo.Update"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureResultColumnNotFound(
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "dbo.Update"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_InsertUsingStoredProcedure_without_a_name()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        var entityType = (IConventionEntityType)modelBuilder.Entity<Abstract>().UseTpcMappingStrategy().Metadata;
+        var entityType = (IConventionEntityType)
+            modelBuilder.Entity<Abstract>().UseTpcMappingStrategy().Metadata;
         modelBuilder.Entity<Generic<string>>();
         entityType.SetInsertStoredProcedure();
 
         VerifyError(
             RelationalStrings.StoredProcedureNoName(nameof(Abstract), "InsertStoredProcedure"),
-            modelBuilder);
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_missing_generated_stored_procedure_parameters()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UpdateUsingStoredProcedure(
-                "Update", s => s
-                    .HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
-                    .HasParameter(a => a.Name)
-                    .HasParameter("FavoritePersonId")
-                    .HasParameter(a => a.Name))
-            .Property(a => a.Name).ValueGeneratedOnUpdate().Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+                "Update",
+                s =>
+                    s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
+                        .HasParameter(a => a.Name)
+                        .HasParameter("FavoritePersonId")
+                        .HasParameter(a => a.Name)
+            )
+            .Property(a => a.Name)
+            .ValueGeneratedOnUpdate()
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 
         VerifyError(
             RelationalStrings.StoredProcedureGeneratedPropertiesNotMapped(
                 nameof(Animal),
-                "Update", "{'Name'}"),
-            modelBuilder);
+                "Update",
+                "{'Name'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_missing_generated_stored_procedure_parameters_in_TPC()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UseTpcMappingStrategy()
             .UpdateUsingStoredProcedure(
-                "Update", s => s
-                    .HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
-                    .HasParameter(a => a.Name)
-                    .HasParameter("FavoritePersonId")
-                    .HasResultColumn(a => a.Name))
-            .Property(a => a.Name).ValueGeneratedOnUpdate().Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
-        modelBuilder.Entity<Cat>()
+                "Update",
+                s =>
+                    s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
+                        .HasParameter(a => a.Name)
+                        .HasParameter("FavoritePersonId")
+                        .HasResultColumn(a => a.Name)
+            )
+            .Property(a => a.Name)
+            .ValueGeneratedOnUpdate()
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
+        modelBuilder
+            .Entity<Cat>()
             .UpdateUsingStoredProcedure(
-                s => s
-                    .HasResultColumn(a => a.Name)
-                    .HasParameter(c => c.Breed)
-                    .HasParameter(a => a.Name));
+                s =>
+                    s.HasResultColumn(a => a.Name)
+                        .HasParameter(c => c.Breed)
+                        .HasParameter(a => a.Name)
+            );
 
         VerifyError(
-            RelationalStrings.StoredProcedurePropertiesNotMapped(nameof(Cat), "Cat_Update", "{'Identity', 'Id', 'FavoritePersonId'}"),
-            modelBuilder);
+            RelationalStrings.StoredProcedurePropertiesNotMapped(
+                nameof(Cat),
+                "Cat_Update",
+                "{'Identity', 'Id', 'FavoritePersonId'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_unmatched_stored_procedure_parameters_in_TPC()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UseTpcMappingStrategy()
             .UpdateUsingStoredProcedure("Update", s => s.HasParameter((Cat c) => c.Breed));
         modelBuilder.Entity<Cat>();
 
         VerifyError(
-            RelationalStrings.StoredProcedureParameterNotFound(nameof(Cat.Breed), nameof(Animal), "Update"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureParameterNotFound(
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "Update"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Detects_unmatched_stored_procedure_result_columns_in_TPC()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .UpdateUsingStoredProcedure("Update", "dbo", s => s.HasResultColumn((Cat c) => c.Breed))
             .UseTpcMappingStrategy();
         modelBuilder.Entity<Cat>();
 
         VerifyError(
-            RelationalStrings.StoredProcedureResultColumnNotFound(nameof(Cat.Breed), nameof(Animal), "dbo.Update"),
-            modelBuilder);
+            RelationalStrings.StoredProcedureResultColumnNotFound(
+                nameof(Cat.Breed),
+                nameof(Animal),
+                "dbo.Update"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -3275,14 +4309,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder.Entity<Animal>().ToTable((string)null);
         modelBuilder.Entity<Animal>().HasIndex(nameof(Animal.Id), nameof(Animal.Name));
 
-        var definition = RelationalResources
-            .LogUnnamedIndexAllPropertiesNotToMappedToAnyTable(
-                new TestLogger<TestRelationalLoggingDefinitions>());
-        VerifyWarning(
-            definition.GenerateMessage(
-                nameof(Animal),
-                "{'Id', 'Name'}"),
-            modelBuilder);
+        var definition = RelationalResources.LogUnnamedIndexAllPropertiesNotToMappedToAnyTable(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
+        VerifyWarning(definition.GenerateMessage(nameof(Animal), "{'Id', 'Name'}"), modelBuilder);
     }
 
     [ConditionalFact]
@@ -3291,20 +4321,24 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder.Entity<Animal>().ToTable((string)null);
-        modelBuilder.Entity<Animal>()
+        modelBuilder
+            .Entity<Animal>()
             .HasIndex(
                 new[] { nameof(Animal.Id), nameof(Animal.Name) },
-                "IX_AllPropertiesNotMapped");
+                "IX_AllPropertiesNotMapped"
+            );
 
-        var definition = RelationalResources
-            .LogNamedIndexAllPropertiesNotToMappedToAnyTable(
-                new TestLogger<TestRelationalLoggingDefinitions>());
+        var definition = RelationalResources.LogNamedIndexAllPropertiesNotToMappedToAnyTable(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
         VerifyWarning(
             definition.GenerateMessage(
                 "IX_AllPropertiesNotMapped",
                 nameof(Animal),
-                "{'Id', 'Name'}"),
-            modelBuilder);
+                "{'Id', 'Name'}"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -3313,10 +4347,13 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder.Entity<Animal>().ToTable((string)null);
-        modelBuilder.Entity<Cat>().ToTable("Cats")
+        modelBuilder
+            .Entity<Cat>()
+            .ToTable("Cats")
             .HasIndex(
                 new[] { nameof(Cat.Identity), nameof(Animal.Name) },
-                "IX_MixOfMappedAndUnmappedProperties");
+                "IX_MixOfMappedAndUnmappedProperties"
+            );
 
         Validate(modelBuilder);
     }
@@ -3327,19 +4364,19 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().ToTable((string)null)
+        modelBuilder
+            .Entity<Cat>()
+            .ToTable((string)null)
             .HasIndex(nameof(Animal.Name), nameof(Cat.Identity));
 
-        var definition = RelationalResources
-            .LogUnnamedIndexPropertiesBothMappedAndNotMappedToTable(
-                new TestLogger<TestRelationalLoggingDefinitions>());
+        var definition = RelationalResources.LogUnnamedIndexPropertiesBothMappedAndNotMappedToTable(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
         VerifyWarning(
-            definition.GenerateMessage(
-                nameof(Cat),
-                "{'Name', 'Identity'}",
-                "Identity"),
+            definition.GenerateMessage(nameof(Cat), "{'Name', 'Identity'}", "Identity"),
             modelBuilder,
-            LogLevel.Error);
+            LogLevel.Error
+        );
     }
 
     [ConditionalFact]
@@ -3348,22 +4385,27 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder.Entity<Animal>();
-        modelBuilder.Entity<Cat>().ToTable((string)null)
+        modelBuilder
+            .Entity<Cat>()
+            .ToTable((string)null)
             .HasIndex(
                 new[] { nameof(Cat.Identity), nameof(Animal.Name) },
-                "IX_MixOfMappedAndUnmappedProperties");
+                "IX_MixOfMappedAndUnmappedProperties"
+            );
 
-        var definition = RelationalResources
-            .LogNamedIndexPropertiesBothMappedAndNotMappedToTable(
-                new TestLogger<TestRelationalLoggingDefinitions>());
+        var definition = RelationalResources.LogNamedIndexPropertiesBothMappedAndNotMappedToTable(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
         VerifyWarning(
             definition.GenerateMessage(
                 "IX_MixOfMappedAndUnmappedProperties",
                 nameof(Cat),
                 "{'Identity', 'Name'}",
-                "Identity"),
+                "Identity"
+            ),
             modelBuilder,
-            LogLevel.Error);
+            LogLevel.Error
+        );
     }
 
     [ConditionalFact]
@@ -3372,14 +4414,16 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder.Entity<Animal>().ToTable("Animals");
-        modelBuilder.Entity<Cat>().ToTable("Cats")
+        modelBuilder
+            .Entity<Cat>()
+            .ToTable("Cats")
             .HasIndex(nameof(Animal.Id), nameof(Cat.Identity));
 
         Validate(modelBuilder);
 
         Assert.Empty(
-            LoggerFactory.Log
-                .Where(l => l.Level != LogLevel.Trace && l.Level != LogLevel.Debug));
+            LoggerFactory.Log.Where(l => l.Level != LogLevel.Trace && l.Level != LogLevel.Debug)
+        );
     }
 
     [ConditionalFact]
@@ -3391,9 +4435,9 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder.Entity<Cat>().ToTable("Cats");
         modelBuilder.Entity<Cat>().HasIndex(nameof(Animal.Name), nameof(Cat.Identity));
 
-        var definition = RelationalResources
-            .LogUnnamedIndexPropertiesMappedToNonOverlappingTables(
-                new TestLogger<TestRelationalLoggingDefinitions>());
+        var definition = RelationalResources.LogUnnamedIndexPropertiesMappedToNonOverlappingTables(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
         VerifyWarning(
             definition.GenerateMessage(
                 nameof(Cat),
@@ -3401,9 +4445,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                 nameof(Animal.Name),
                 "{'Animals'}",
                 nameof(Cat.Identity),
-                "{'Cats'}"),
+                "{'Cats'}"
+            ),
             modelBuilder,
-            LogLevel.Error);
+            LogLevel.Error
+        );
     }
 
     [ConditionalFact]
@@ -3413,29 +4459,35 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         modelBuilder.Entity<Animal>().ToTable("Animals");
         modelBuilder.Entity<Cat>().ToTable("Cats");
-        modelBuilder.Entity<Cat>()
+        modelBuilder
+            .Entity<Cat>()
             .HasIndex(
                 new[] { nameof(Animal.Name), nameof(Cat.Identity) },
-                "IX_MappedToDifferentTables");
+                "IX_MappedToDifferentTables"
+            );
 
-        var definition = RelationalResources
-            .LogNamedIndexPropertiesMappedToNonOverlappingTables(
-                new TestLogger<TestRelationalLoggingDefinitions>());
+        var definition = RelationalResources.LogNamedIndexPropertiesMappedToNonOverlappingTables(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
         VerifyWarning(
             definition.GenerateMessage(
-                l => l.Log(
-                    definition.Level,
-                    definition.EventId,
-                    definition.MessageFormat,
-                    "IX_MappedToDifferentTables",
-                    nameof(Cat),
-                    "{'Name', 'Identity'}",
-                    nameof(Animal.Name),
-                    "{'Animals'}",
-                    nameof(Cat.Identity),
-                    "{'Cats'}")),
+                l =>
+                    l.Log(
+                        definition.Level,
+                        definition.EventId,
+                        definition.MessageFormat,
+                        "IX_MappedToDifferentTables",
+                        nameof(Cat),
+                        "{'Name', 'Identity'}",
+                        nameof(Animal.Name),
+                        "{'Animals'}",
+                        nameof(Cat.Identity),
+                        "{'Cats'}"
+                    )
+            ),
             modelBuilder,
-            LogLevel.Error);
+            LogLevel.Error
+        );
     }
 
     [ConditionalFact]
@@ -3449,19 +4501,26 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
         VerifyError(
             RelationalStrings.TableValuedFunctionNonTph(
-                TestMethods.MethodFMi.DeclaringType.FullName + "." + TestMethods.MethodFMi.Name + "()", "C"), modelBuilder);
+                TestMethods.MethodFMi.DeclaringType.FullName
+                    + "."
+                    + TestMethods.MethodFMi.Name
+                    + "()",
+                "C"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Passes_for_relational_override_without_inheritance()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Person>(
-            e =>
-            {
-                e.ToTable("foo");
-                e.Property(p => p.Name).Metadata.SetColumnName("bar", StoreObjectIdentifier.Table("foo"));
-            });
+        modelBuilder.Entity<Person>(e =>
+        {
+            e.ToTable("foo");
+            e.Property(p => p.Name)
+                .Metadata.SetColumnName("bar", StoreObjectIdentifier.Table("foo"));
+        });
 
         Validate(modelBuilder);
 
@@ -3472,15 +4531,20 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
     public virtual void Detects_duplicate_column_orders()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<Animal>(
-            x =>
-            {
-                x.Property(a => a.Id).HasColumnOrder(0);
-                x.Property(a => a.Name).HasColumnOrder(0);
-            });
+        modelBuilder.Entity<Animal>(x =>
+        {
+            x.Property(a => a.Id).HasColumnOrder(0);
+            x.Property(a => a.Name).HasColumnOrder(0);
+        });
 
-        var definition = RelationalResources.LogDuplicateColumnOrders(new TestLogger<TestRelationalLoggingDefinitions>());
-        VerifyWarning(definition.GenerateMessage("Animal", "'Id', 'Name'"), modelBuilder, LogLevel.Error);
+        var definition = RelationalResources.LogDuplicateColumnOrders(
+            new TestLogger<TestRelationalLoggingDefinitions>()
+        );
+        VerifyWarning(
+            definition.GenerateMessage("Animal", "'Id', 'Name'"),
+            modelBuilder,
+            LogLevel.Error
+        );
     }
 
     [ConditionalFact]
@@ -3495,8 +4559,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             RelationalStrings.EntityShortNameNotUnique(
                 "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+Outer2+TpcDerived",
                 "TpcDerived",
-                "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+Outer+TpcDerived"),
-            modelBuilder);
+                "Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidatorTest+Outer+TpcDerived"
+            ),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
@@ -3509,19 +4575,21 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder.Entity<TpcBase>().Metadata.SetDiscriminatorProperty(null);
         modelBuilder.Entity<Outer2.TpcDerived>().Metadata.SetDiscriminatorValue(1);
 
-        VerifyError(RelationalStrings.NonTphDiscriminatorValueNotString(1, "TpcDerived"), modelBuilder);
+        VerifyError(
+            RelationalStrings.NonTphDiscriminatorValueNotString(1, "TpcDerived"),
+            modelBuilder
+        );
     }
 
     [ConditionalFact]
     public virtual void Store_generated_in_composite_key()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        modelBuilder.Entity<CarbonComposite>(
-            b =>
-            {
-                b.HasKey(e => new { e.Id1, e.Id2 });
-                b.Property(e => e.Id2).ValueGeneratedOnAdd();
-            });
+        modelBuilder.Entity<CarbonComposite>(b =>
+        {
+            b.HasKey(e => new { e.Id1, e.Id2 });
+            b.Property(e => e.Id2).ValueGeneratedOnAdd();
+        });
 
         Validate(modelBuilder);
 
@@ -3555,43 +4623,49 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         }
     }
 
-    protected override void SetBaseType(IMutableEntityType entityType, IMutableEntityType baseEntityType)
+    protected override void SetBaseType(
+        IMutableEntityType entityType,
+        IMutableEntityType baseEntityType
+    )
     {
         base.SetBaseType(entityType, baseEntityType);
 
-        baseEntityType.SetDiscriminatorProperty(baseEntityType.AddProperty("Discriminator", typeof(string)));
+        baseEntityType.SetDiscriminatorProperty(
+            baseEntityType.AddProperty("Discriminator", typeof(string))
+        );
         baseEntityType.SetDiscriminatorValue(baseEntityType.Name);
         entityType.SetDiscriminatorValue(entityType.Name);
     }
 
     public class TestDecimalToLongConverter : ValueConverter<decimal, long>
     {
-        private static readonly Expression<Func<decimal, long>> convertToProviderExpression = d => (long)(d * 100);
-        private static readonly Expression<Func<long, decimal>> convertFromProviderExpression = l => l / 100m;
+        private static readonly Expression<Func<decimal, long>> convertToProviderExpression = d =>
+            (long)(d * 100);
+        private static readonly Expression<Func<long, decimal>> convertFromProviderExpression = l =>
+            l / 100m;
 
         public TestDecimalToLongConverter()
-            : base(convertToProviderExpression, convertFromProviderExpression)
-        {
-        }
+            : base(convertToProviderExpression, convertFromProviderExpression) { }
     }
 
     public class TestDecimalToDecimalConverter : ValueConverter<decimal, decimal>
     {
-        private static readonly Expression<Func<decimal, decimal>> convertToProviderExpression = d => d * 100m;
-        private static readonly Expression<Func<decimal, decimal>> convertFromProviderExpression = l => l / 100m;
+        private static readonly Expression<Func<decimal, decimal>> convertToProviderExpression =
+            d => d * 100m;
+        private static readonly Expression<Func<decimal, decimal>> convertFromProviderExpression =
+            l => l / 100m;
 
         public TestDecimalToDecimalConverter()
-            : base(convertToProviderExpression, convertFromProviderExpression)
-        {
-        }
+            : base(convertToProviderExpression, convertFromProviderExpression) { }
     }
 
     private class BaseTestMethods
     {
-        public static readonly MethodInfo MethodAMi = typeof(BaseTestMethods).GetTypeInfo().GetDeclaredMethod(nameof(MethodA));
+        public static readonly MethodInfo MethodAMi = typeof(BaseTestMethods)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(MethodA));
 
-        public static IQueryable<BaseTestMethods> MethodA()
-            => throw new NotImplementedException();
+        public static IQueryable<BaseTestMethods> MethodA() => throw new NotImplementedException();
     }
 
     private class DerivedTestMethods : TestMethods
@@ -3603,39 +4677,51 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
     private class TestMethods : BaseTestMethods
     {
-        public static new readonly MethodInfo MethodAMi = typeof(TestMethods).GetTypeInfo().GetDeclaredMethod(nameof(MethodA));
-        public static readonly MethodInfo MethodBMi = typeof(TestMethods).GetTypeInfo().GetDeclaredMethod(nameof(MethodB));
-        public static readonly MethodInfo MethodCMi = typeof(TestMethods).GetTypeInfo().GetDeclaredMethod(nameof(MethodC));
-        public static readonly MethodInfo MethodDMi = typeof(TestMethods).GetTypeInfo().GetDeclaredMethod(nameof(MethodD));
-        public static readonly MethodInfo MethodEMi = typeof(TestMethods).GetTypeInfo().GetDeclaredMethod(nameof(MethodE));
-        public static readonly MethodInfo MethodFMi = typeof(TestMethods).GetTypeInfo().GetDeclaredMethod(nameof(MethodF));
+        public static new readonly MethodInfo MethodAMi = typeof(TestMethods)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(MethodA));
+        public static readonly MethodInfo MethodBMi = typeof(TestMethods)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(MethodB));
+        public static readonly MethodInfo MethodCMi = typeof(TestMethods)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(MethodC));
+        public static readonly MethodInfo MethodDMi = typeof(TestMethods)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(MethodD));
+        public static readonly MethodInfo MethodEMi = typeof(TestMethods)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(MethodE));
+        public static readonly MethodInfo MethodFMi = typeof(TestMethods)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(MethodF));
 
-        public static new IQueryable<TestMethods> MethodA()
-            => throw new NotImplementedException();
+        public static new IQueryable<TestMethods> MethodA() => throw new NotImplementedException();
 
-        public static IQueryable<TestMethods> MethodB(int id)
-            => throw new NotImplementedException();
+        public static IQueryable<TestMethods> MethodB(int id) =>
+            throw new NotImplementedException();
 
-        public static TestMethods MethodC()
-            => throw new NotImplementedException();
+        public static TestMethods MethodC() => throw new NotImplementedException();
 
-        public static int MethodD(TestMethods methods)
-            => throw new NotImplementedException();
+        public static int MethodD(TestMethods methods) => throw new NotImplementedException();
 
-        public static int MethodE()
-            => throw new NotImplementedException();
+        public static int MethodE() => throw new NotImplementedException();
 
-        public static IQueryable<C> MethodF()
-            => throw new NotImplementedException();
+        public static IQueryable<C> MethodF() => throw new NotImplementedException();
     }
 
-    protected virtual TestHelpers.TestModelBuilder CreateModelBuilderWithoutConvention<T>(bool sensitiveDataLoggingEnabled = false)
-        => TestHelpers.CreateConventionBuilder(
-            CreateModelLogger(sensitiveDataLoggingEnabled), CreateValidationLogger(sensitiveDataLoggingEnabled),
-            modelConfigurationBuilder => ConventionSet.Remove(
-                modelConfigurationBuilder.ConventionSet.ModelFinalizingConventions,
-                typeof(T)));
+    protected virtual TestHelpers.TestModelBuilder CreateModelBuilderWithoutConvention<T>(
+        bool sensitiveDataLoggingEnabled = false
+    ) =>
+        TestHelpers.CreateConventionBuilder(
+            CreateModelLogger(sensitiveDataLoggingEnabled),
+            CreateValidationLogger(sensitiveDataLoggingEnabled),
+            modelConfigurationBuilder =>
+                ConventionSet.Remove(
+                    modelConfigurationBuilder.ConventionSet.ModelFinalizingConventions,
+                    typeof(T)
+                )
+        );
 
-    protected override TestHelpers TestHelpers
-        => FakeRelationalTestHelpers.Instance;
+    protected override TestHelpers TestHelpers => FakeRelationalTestHelpers.Instance;
 }

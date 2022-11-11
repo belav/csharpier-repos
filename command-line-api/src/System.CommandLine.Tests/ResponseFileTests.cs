@@ -53,20 +53,12 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_response_file_is_specified_it_loads_options_with_arguments_from_response_file()
         {
-            var responseFile = CreateResponseFile(
-                "--flag",
-                "--flag2",
-                "123");
+            var responseFile = CreateResponseFile("--flag", "--flag2", "123");
 
             var optionOne = new Option<bool>("--flag");
 
             var optionTwo = new Option<int>("--flag2");
-            var result = new RootCommand
-                         {
-                             optionOne,
-                             optionTwo
-                         }
-                .Parse($"@{responseFile}");
+            var result = new RootCommand { optionOne, optionTwo }.Parse($"@{responseFile}");
 
             result.HasOption(optionOne).Should().BeTrue();
             result.GetValueForOption(optionTwo).Should().Be(123);
@@ -76,46 +68,30 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_response_file_is_specified_it_loads_command_arguments_from_response_file()
         {
-            var responseFile = CreateResponseFile(
-                "one",
-                "two",
-                "three");
+            var responseFile = CreateResponseFile("one", "two", "three");
 
-            var result = new RootCommand
-                         {
-                             new Argument<string[]>()
-                         }
-                .Parse($"@{responseFile}");
+            var result = new RootCommand { new Argument<string[]>() }.Parse($"@{responseFile}");
 
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentSequenceTo("one", "two", "three");
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
+                .Should()
+                .BeEquivalentSequenceTo("one", "two", "three");
         }
 
         [Fact]
         public void Response_file_can_provide_subcommand_arguments()
         {
-            var responseFile = CreateResponseFile(
-                "one",
-                "two",
-                "three");
+            var responseFile = CreateResponseFile("one", "two", "three");
 
             var result = new RootCommand
-                         {
-                             new Command("subcommand")
-                             {
-                                 new Argument<string[]>()
-                             }
-                         }
-                .Parse($"subcommand @{responseFile}");
+            {
+                new Command("subcommand") { new Argument<string[]>() }
+            }.Parse($"subcommand @{responseFile}");
 
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentSequenceTo("one", "two", "three");
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
+                .Should()
+                .BeEquivalentSequenceTo("one", "two", "three");
         }
 
         [Fact]
@@ -124,60 +100,40 @@ namespace System.CommandLine.Tests
             var responseFile = CreateResponseFile("subcommand");
 
             var result = new RootCommand
-                         {
-                             new Command("subcommand")
-                             {
-                                 new Argument<string[]>()
-                             }
-                         }
-                .Parse($"@{responseFile} one two three");
+            {
+                new Command("subcommand") { new Argument<string[]>() }
+            }.Parse($"@{responseFile} one two three");
 
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentSequenceTo("one", "two", "three");
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
+                .Should()
+                .BeEquivalentSequenceTo("one", "two", "three");
         }
 
         [Fact]
         public void When_response_file_is_specified_it_loads_subcommand_arguments_from_response_file()
         {
-            var responseFile = CreateResponseFile(
-                "one",
-                "two",
-                "three");
+            var responseFile = CreateResponseFile("one", "two", "three");
 
             var result = new RootCommand
-                         {
-                             new Command("subcommand")
-                             {
-                                 new Argument<string[]>()
-                             }
-                         }
-                .Parse($"subcommand @{responseFile}");
+            {
+                new Command("subcommand") { new Argument<string[]>() }
+            }.Parse($"subcommand @{responseFile}");
 
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentSequenceTo("one", "two", "three");
+            result.CommandResult.Tokens
+                .Select(t => t.Value)
+                .Should()
+                .BeEquivalentSequenceTo("one", "two", "three");
         }
 
         [Fact]
         public void Response_file_can_contain_blank_lines()
         {
-            var responseFile = CreateResponseFile(
-                "--flag",
-                "",
-                "123");
+            var responseFile = CreateResponseFile("--flag", "", "123");
 
             var option = new Option<int>("--flag");
 
-            var result = new RootCommand
-                {
-                    option
-                }
-                .Parse($"@{responseFile}");
+            var result = new RootCommand { option }.Parse($"@{responseFile}");
 
             result.GetValueForOption(option).Should().Be(123);
             result.Errors.Should().BeEmpty();
@@ -195,13 +151,10 @@ namespace System.CommandLine.Tests
                 "# comment two",
                 "#",
                 " # comment two",
-                "--flag2");
+                "--flag2"
+            );
 
-            var result = new RootCommand
-            {
-                optionOne,
-                optionTwo
-            }.Parse($"@{responseFile}");
+            var result = new RootCommand { optionOne, optionTwo }.Parse($"@{responseFile}");
 
             result.HasOption(optionOne).Should().BeTrue();
             result.HasOption(optionTwo).Should().BeTrue();
@@ -214,16 +167,15 @@ namespace System.CommandLine.Tests
             var optionOne = new Option<bool>("--flag");
             var optionTwo = new Option<bool>("--flag2");
 
-            var result = new RootCommand
-                         {
-                             optionOne,
-                             optionTwo
-                         }.Parse("@nonexistent.rsp");
+            var result = new RootCommand { optionOne, optionTwo }.Parse("@nonexistent.rsp");
 
             result.HasOption(optionOne).Should().BeFalse();
             result.HasOption(optionTwo).Should().BeFalse();
             result.Errors.Should().HaveCount(1);
-            result.Errors.Single().Message.Should().Be("Response file not found 'nonexistent.rsp'.");
+            result.Errors
+                .Single()
+                .Message.Should()
+                .Be("Response file not found 'nonexistent.rsp'.");
         }
 
         [Fact]
@@ -232,21 +184,12 @@ namespace System.CommandLine.Tests
             var optionOne = new Option<bool>("--flag");
             var optionTwo = new Option<bool>("--flag2");
 
-            var result = new RootCommand
-                         {
-                             optionOne,
-                             optionTwo
-                         }
-                .Parse("@");
+            var result = new RootCommand { optionOne, optionTwo }.Parse("@");
 
             result.HasOption(optionOne).Should().BeFalse();
             result.HasOption(optionTwo).Should().BeFalse();
             result.Errors.Should().HaveCount(1);
-            result.Errors
-                  .Single()
-                  .Message
-                  .Should()
-                  .Be("Unrecognized command or argument '@'.");
+            result.Errors.Single().Message.Should().Be("Unrecognized command or argument '@'.");
         }
 
         [Fact]
@@ -258,16 +201,15 @@ namespace System.CommandLine.Tests
 
             using (File.Open(nonexistent, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
             {
-                var result = new RootCommand
-                             {
-                                 optionOne,
-                                 optionTwo
-                             }.Parse($"@{nonexistent}");
+                var result = new RootCommand { optionOne, optionTwo }.Parse($"@{nonexistent}");
 
                 result.HasOption(optionOne).Should().BeFalse();
                 result.HasOption(optionTwo).Should().BeFalse();
                 result.Errors.Should().HaveCount(1);
-                result.Errors.Single().Message.Should().StartWith($"Error reading response file '{nonexistent}'");
+                result.Errors
+                    .Single()
+                    .Message.Should()
+                    .StartWith($"Error reading response file '{nonexistent}'");
             }
         }
 
@@ -275,20 +217,17 @@ namespace System.CommandLine.Tests
         [InlineData("--flag \"first value\" --flag2 123")]
         [InlineData("--flag:\"first value\" --flag2:123")]
         [InlineData("--flag=\"first value\" --flag2=123")]
-        public void When_response_file_parse_as_space_separated_returns_expected_values(string input)
+        public void When_response_file_parse_as_space_separated_returns_expected_values(
+            string input
+        )
         {
             var responseFile = CreateResponseFile(input);
 
             var optionOne = new Option<string>("--flag");
             var optionTwo = new Option<int>("--flag2");
 
-            var rootCommand = new RootCommand
-            {
-                optionOne,
-                optionTwo
-            };
-            var parser = new CommandLineBuilder(rootCommand)
-                         .Build();
+            var rootCommand = new RootCommand { optionOne, optionTwo };
+            var parser = new CommandLineBuilder(rootCommand).Build();
 
             var result = parser.Parse($"@{responseFile}");
 
@@ -299,22 +238,19 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_response_file_processing_is_disabled_then_it_returns_response_file_name_as_argument()
         {
-            var command = new RootCommand
-            {
-                new Argument<List<string>>()
-            };
+            var command = new RootCommand { new Argument<List<string>>() };
             var configuration = new CommandLineConfiguration(
                 command,
-                enableTokenReplacement: false);
-            
+                enableTokenReplacement: false
+            );
+
             var parser = new Parser(configuration);
 
             var result = parser.Parse("@file.rsp");
 
             result.Tokens
-                  .Should()
-                  .Contain(t => t.Value == "@file.rsp" && 
-                                t.Type == TokenType.Argument);
+                .Should()
+                .Contain(t => t.Value == "@file.rsp" && t.Type == TokenType.Argument);
             result.Errors.Should().HaveCount(0);
         }
 
@@ -329,12 +265,7 @@ namespace System.CommandLine.Tests
             var option2 = new Option<int>("--two");
             var option3 = new Option<int>("--three");
 
-            var command = new RootCommand
-                          {
-                              option1,
-                              option2,
-                              option3
-                          };
+            var command = new RootCommand { option1, option2, option3 };
 
             var result = command.Parse($"@{file1}");
 
@@ -375,7 +306,12 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_response_file_options_or_arguments_contain_trailing_and_leading_spaces_they_are_ignored()
         {
-            var responseFile = CreateResponseFile(" --option1 ", " value1 ", "\t--option2\t", "\t2\t");
+            var responseFile = CreateResponseFile(
+                " --option1 ",
+                " value1 ",
+                "\t--option2\t",
+                "\t2\t"
+            );
 
             var option1 = new Option<string>("--option1");
             var option2 = new Option<int>("--option2");

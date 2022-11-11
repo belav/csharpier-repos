@@ -16,9 +16,16 @@ namespace System.Net
             X509Certificate2 remoteCertificate,
             bool checkCertName,
             bool isServer,
-            string? hostName)
+            string? hostName
+        )
         {
-            return CertificateValidation.BuildChainAndVerifyProperties(chain, remoteCertificate, checkCertName, isServer, hostName);
+            return CertificateValidation.BuildChainAndVerifyProperties(
+                chain,
+                remoteCertificate,
+                checkCertName,
+                isServer,
+                hostName
+            );
         }
 
         //
@@ -28,7 +35,8 @@ namespace System.Net
             SafeDeleteContext? securityContext,
             bool retrieveChainCertificates,
             ref X509Chain? chain,
-            X509ChainPolicy? chainPolicy)
+            X509ChainPolicy? chainPolicy
+        )
         {
             if (securityContext == null)
             {
@@ -36,7 +44,9 @@ namespace System.Net
             }
 
             X509Certificate2? result = null;
-            IntPtr remoteCertificate = Interop.OpenSsl.GetPeerCertificate((SafeSslHandle)securityContext);
+            IntPtr remoteCertificate = Interop.OpenSsl.GetPeerCertificate(
+                (SafeSslHandle)securityContext
+            );
             try
             {
                 if (remoteCertificate == IntPtr.Zero)
@@ -54,8 +64,10 @@ namespace System.Net
                         chain.ChainPolicy = chainPolicy;
                     }
 
-                    using (SafeSharedX509StackHandle chainStack =
-                        Interop.OpenSsl.GetPeerCertificateChain((SafeSslHandle)securityContext))
+                    using (
+                        SafeSharedX509StackHandle chainStack =
+                            Interop.OpenSsl.GetPeerCertificateChain((SafeSslHandle)securityContext)
+                    )
                     {
                         if (!chainStack.IsInvalid)
                         {
@@ -91,7 +103,8 @@ namespace System.Net
                 }
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Log.RemoteCertificate(result);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Log.RemoteCertificate(result);
             return result;
         }
 
@@ -100,7 +113,11 @@ namespace System.Net
         //
         internal static string[] GetRequestCertificateAuthorities(SafeDeleteContext securityContext)
         {
-            using (SafeSharedX509NameStackHandle names = Interop.Ssl.SslGetClientCAList((SafeSslHandle)securityContext))
+            using (
+                SafeSharedX509NameStackHandle names = Interop.Ssl.SslGetClientCAList(
+                    (SafeSslHandle)securityContext
+                )
+            )
             {
                 if (names.IsInvalid)
                 {
@@ -118,7 +135,12 @@ namespace System.Net
 
                 for (int i = 0; i < nameCount; i++)
                 {
-                    using (SafeSharedX509NameHandle nameHandle = Interop.Crypto.GetX509NameStackField(names, i))
+                    using (
+                        SafeSharedX509NameHandle nameHandle = Interop.Crypto.GetX509NameStackField(
+                            names,
+                            i
+                        )
+                    )
                     {
                         X500DistinguishedName dn = Interop.Crypto.LoadX500Name(nameHandle);
                         clientAuthorityNames[i] = dn.Name;

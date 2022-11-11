@@ -11,7 +11,11 @@ namespace System.Buffers.Text
         //   -----------------------------
         //   tue, 03 jan 2017 08:08:05 gmt
         //
-        private static bool TryFormatDateTimeL(DateTime value, Span<byte> destination, out int bytesWritten)
+        private static bool TryFormatDateTimeL(
+            DateTime value,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length <= 28)
             {

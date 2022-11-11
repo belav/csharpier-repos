@@ -18,40 +18,91 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly PropertySymbol? _equalityContract;
 
-        public SynthesizedRecordEquals(SourceMemberContainerTypeSymbol containingType, PropertySymbol? equalityContract, int memberOffset, BindingDiagnosticBag diagnostics)
-            : base(containingType, WellKnownMemberNames.ObjectEquals, isReadOnly: containingType.IsRecordStruct, hasBody: true, memberOffset, diagnostics)
+        public SynthesizedRecordEquals(
+            SourceMemberContainerTypeSymbol containingType,
+            PropertySymbol? equalityContract,
+            int memberOffset,
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.ObjectEquals,
+                isReadOnly: containingType.IsRecordStruct,
+                hasBody: true,
+                memberOffset,
+                diagnostics
+            )
         {
             Debug.Assert(equalityContract is null == containingType.IsRecordStruct);
             _equalityContract = equalityContract;
         }
 
-        protected override DeclarationModifiers MakeDeclarationModifiers(DeclarationModifiers allowedModifiers, BindingDiagnosticBag diagnostics)
+        protected override DeclarationModifiers MakeDeclarationModifiers(
+            DeclarationModifiers allowedModifiers,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            DeclarationModifiers result = DeclarationModifiers.Public | (ContainingType.IsSealed ? DeclarationModifiers.None : DeclarationModifiers.Virtual);
+            DeclarationModifiers result =
+                DeclarationModifiers.Public
+                | (
+                    ContainingType.IsSealed
+                        ? DeclarationModifiers.None
+                        : DeclarationModifiers.Virtual
+                );
             Debug.Assert((result & ~allowedModifiers) == 0);
             return result;
         }
 
-        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation)
-            MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
+        protected override (
+            TypeWithAnnotations ReturnType,
+            ImmutableArray<ParameterSymbol> Parameters,
+            bool IsVararg,
+            ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation
+        ) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
         {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
-            var annotation = ContainingType.IsRecordStruct ? NullableAnnotation.Oblivious : NullableAnnotation.Annotated;
-            return (ReturnType: TypeWithAnnotations.Create(Binder.GetSpecialType(compilation, SpecialType.System_Boolean, location, diagnostics)),
-                    Parameters: ImmutableArray.Create<ParameterSymbol>(
-                                    new SourceSimpleParameterSymbol(owner: this,
-                                                                    TypeWithAnnotations.Create(ContainingType, annotation),
-                                                                    ordinal: 0, RefKind.None, DeclarationScope.Unscoped, "other", Locations)),
-                    IsVararg: false,
-                    DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty);
+            var annotation = ContainingType.IsRecordStruct
+                ? NullableAnnotation.Oblivious
+                : NullableAnnotation.Annotated;
+            return (
+                ReturnType: TypeWithAnnotations.Create(
+                    Binder.GetSpecialType(
+                        compilation,
+                        SpecialType.System_Boolean,
+                        location,
+                        diagnostics
+                    )
+                ),
+                Parameters: ImmutableArray.Create<ParameterSymbol>(
+                    new SourceSimpleParameterSymbol(
+                        owner: this,
+                        TypeWithAnnotations.Create(ContainingType, annotation),
+                        ordinal: 0,
+                        RefKind.None,
+                        DeclarationScope.Unscoped,
+                        "other",
+                        Locations
+                    )
+                ),
+                IsVararg: false,
+                DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty
+            );
         }
 
         protected override int GetParameterCountFromSyntax() => 1;
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            var F = new SyntheticBoundNodeFactory(this, ContainingType.GetNonNullSyntaxNode(), compilationState, diagnostics);
+            var F = new SyntheticBoundNodeFactory(
+                this,
+                ContainingType.GetNonNullSyntaxNode(),
+                compilationState,
+                diagnostics
+            );
 
             try
             {
@@ -80,7 +131,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         return;
                     }
 
-                    if (_equalityContract.IsStatic || !_equalityContract.Type.Equals(DeclaringCompilation.GetWellKnownType(WellKnownType.System_Type), TypeCompareKind.AllIgnoreOptions))
+                    if (
+                        _equalityContract.IsStatic
+                        || !_equalityContract.Type.Equals(
+                            DeclaringCompilation.GetWellKnownType(WellKnownType.System_Type),
+                            TypeCompareKind.AllIgnoreOptions
+                        )
+                    )
                     {
                         // There is a signature mismatch, an error was reported elsewhere
                         F.CloseMethod(F.ThrowNull());
@@ -97,21 +154,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     // other != null
                     Debug.Assert(!other.Type.IsStructType());
-                    retExpr = F.ObjectNotEqual(other, F.Null(F.SpecialType(SpecialType.System_Object)));
+                    retExpr = F.ObjectNotEqual(
+                        other,
+                        F.Null(F.SpecialType(SpecialType.System_Object))
+                    );
 
                     // EqualityContract == other.EqualityContract
-                    var contractsEqual = F.Call(receiver: null, F.WellKnownMethod(WellKnownMember.System_Type__op_Equality),
-                                                F.Property(F.This(), _equalityContract),
-                                                F.Property(other, _equalityContract));
+                    var contractsEqual = F.Call(
+                        receiver: null,
+                        F.WellKnownMethod(WellKnownMember.System_Type__op_Equality),
+                        F.Property(F.This(), _equalityContract),
+                        F.Property(other, _equalityContract)
+                    );
 
                     retExpr = F.LogicalAnd(retExpr, contractsEqual);
                 }
                 else
                 {
-                    MethodSymbol? baseEquals = ContainingType.GetMembersUnordered().OfType<SynthesizedRecordBaseEquals>().Single().OverriddenMethod;
+                    MethodSymbol? baseEquals = ContainingType
+                        .GetMembersUnordered()
+                        .OfType<SynthesizedRecordBaseEquals>()
+                        .Single()
+                        .OverriddenMethod;
 
-                    if (baseEquals is null || !baseEquals.ContainingType.Equals(ContainingType.BaseTypeNoUseSiteDiagnostics, TypeCompareKind.AllIgnoreOptions) ||
-                        baseEquals.ReturnType.SpecialType != SpecialType.System_Boolean)
+                    if (
+                        baseEquals is null
+                        || !baseEquals.ContainingType.Equals(
+                            ContainingType.BaseTypeNoUseSiteDiagnostics,
+                            TypeCompareKind.AllIgnoreOptions
+                        )
+                        || baseEquals.ReturnType.SpecialType != SpecialType.System_Boolean
+                    )
                     {
                         // There was a problem with overriding of base equals, an error was reported elsewhere
                         F.CloseMethod(F.ThrowNull());
@@ -129,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     retExpr = F.Call(
                         F.Base(baseEquals.ContainingType),
                         baseEquals,
-                        F.Convert(baseEquals.Parameters[0].Type, other));
+                        F.Convert(baseEquals.Parameters[0].Type, other)
+                    );
                 }
 
                 // field1 == other.field1 && ... && fieldN == other.fieldN
@@ -144,7 +218,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         var parameterType = f.Type;
                         if (parameterType.IsUnsafe())
                         {
-                            diagnostics.Add(ErrorCode.ERR_BadFieldTypeInRecord, f.Locations.FirstOrNone(), parameterType);
+                            diagnostics.Add(
+                                ErrorCode.ERR_BadFieldTypeInRecord,
+                                f.Locations.FirstOrNone(),
+                                parameterType
+                            );
                             foundBadField = true;
                         }
                         else if (parameterType.IsRestrictedType())
@@ -157,11 +235,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (fields.Count > 0 && !foundBadField)
                 {
-                    retExpr = MethodBodySynthesizer.GenerateFieldEquals(
-                        retExpr,
-                        other,
-                        fields,
-                        F);
+                    retExpr = MethodBodySynthesizer.GenerateFieldEquals(retExpr, other, fields, F);
                 }
                 else if (retExpr is null)
                 {

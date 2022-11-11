@@ -6,13 +6,19 @@ using System.Xml;
 
 namespace System.Configuration
 {
-    internal sealed class ConfigXmlSignificantWhitespace : XmlSignificantWhitespace, IConfigErrorInfo
+    internal sealed class ConfigXmlSignificantWhitespace
+        : XmlSignificantWhitespace,
+            IConfigErrorInfo
     {
         private string _filename;
         private int _line;
 
-        public ConfigXmlSignificantWhitespace(string filename, int line, string strData, XmlDocument doc)
-            : base(strData, doc)
+        public ConfigXmlSignificantWhitespace(
+            string filename,
+            int line,
+            string strData,
+            XmlDocument doc
+        ) : base(strData, doc)
         {
             _line = line;
             _filename = filename;

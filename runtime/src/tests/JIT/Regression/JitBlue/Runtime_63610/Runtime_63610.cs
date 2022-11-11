@@ -10,16 +10,14 @@ public class Runtime_63610
     {
         try
         {
-             Callee1(x);
+            Callee1(x);
         }
-        catch
-        {
-        }
+        catch { }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static int Callee1(int[] x) => Callee2(x, 0);
-    
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static int Callee2(int[] x, int index)
     {
@@ -30,11 +28,11 @@ public class Runtime_63610
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Callee3() {}
+    private static void Callee3() { }
 
     public static int Main()
     {
-        // Make sure it doesn't assert 
+        // Make sure it doesn't assert
         // https://github.com/dotnet/runtime/issues/63610
         Test(new int[42]);
         return 100;

@@ -24,7 +24,8 @@ namespace ILCompiler.DependencyAnalysis
                 _preinitializationInfo = preinitManager.GetPreinitializationInfo(_type);
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
@@ -57,10 +58,17 @@ namespace ILCompiler.DependencyAnalysis
 
             if (factory.PreinitializationManager.HasEagerStaticConstructor(_type))
             {
-                dependencyList.Add(factory.EagerCctorIndirection(_type.GetStaticConstructor()), "Eager .cctor");
+                dependencyList.Add(
+                    factory.EagerCctorIndirection(_type.GetStaticConstructor()),
+                    "Eager .cctor"
+                );
             }
 
-            ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(ref dependencyList, factory, _type.Module);
+            ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(
+                ref dependencyList,
+                factory,
+                _type.Module
+            );
 
             dependencyList.Add(factory.GCStaticsRegion, "GCStatics Region");
 
@@ -84,7 +92,8 @@ namespace ILCompiler.DependencyAnalysis
             int delta = GCStaticRegionConstants.Uninitialized;
 
             // Set the flag that indicates next pointer following MethodTable is the preinit data
-            bool isPreinitialized = _preinitializationInfo != null && _preinitializationInfo.IsPreinitialized;
+            bool isPreinitialized =
+                _preinitializationInfo != null && _preinitializationInfo.IsPreinitialized;
             if (isPreinitialized)
                 delta |= GCStaticRegionConstants.HasPreInitializedData;
 

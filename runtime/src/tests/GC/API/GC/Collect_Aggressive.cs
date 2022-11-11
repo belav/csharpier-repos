@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 public class AggressiveCollect
 {
-    public static int Main(string[] args )
+    public static int Main(string[] args)
     {
         long before = CreateGarbage();
         GC.Collect(2, GCCollectionMode.Aggressive, blocking: true, compacting: true);
@@ -48,7 +48,10 @@ public class AggressiveCollect
         byte[] largeGarbage = new byte[33 * 1024 * 1024];
 
         // This will force us to use more than one region in the pin object heap
-        byte[] pinnedGarbage = GC.AllocateArray<byte>(33 * 1024 * 1024, /* pinned = */true);
+        byte[] pinnedGarbage = GC.AllocateArray<byte>(
+            33 * 1024 * 1024, /* pinned = */
+            true
+        );
 
         GC.Collect(2, GCCollectionMode.Forced, blocking: true, compacting: true);
         long committed = GC.GetGCMemoryInfo().TotalCommittedBytes;

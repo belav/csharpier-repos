@@ -6,7 +6,6 @@ using Internal.TypeSystem;
 
 namespace Internal.JitInterface
 {
-
     internal static class LoongArch64PassStructInRegister
     {
         public static uint GetLoongArch64PassStructInRegisterFlags(TypeDesc typeDesc)
@@ -23,7 +22,11 @@ namespace Internal.JitInterface
                 }
             }
 
-            if ((numIntroducedFields == 0) || (numIntroducedFields > 2) || (typeDesc.GetElementSize().AsInt > 16))
+            if (
+                (numIntroducedFields == 0)
+                || (numIntroducedFields > 2)
+                || (typeDesc.GetElementSize().AsInt > 16)
+            )
             {
                 return (uint)StructFloatFieldInfoFlags.STRUCT_NO_FLOAT_FIELD;
             }
@@ -31,7 +34,9 @@ namespace Internal.JitInterface
             //// The SIMD Intrinsic types are meant to be handled specially and should not be passed as struct registers
             if (typeDesc.IsIntrinsic)
             {
-                throw new NotImplementedException("For LoongArch64, SIMD would be implemented later");
+                throw new NotImplementedException(
+                    "For LoongArch64, SIMD would be implemented later"
+                );
             }
 
             MetadataType mdType = typeDesc as MetadataType;
@@ -47,11 +52,12 @@ namespace Internal.JitInterface
             // instead of adding additional padding at the end of a one-field structure.
             // We do this check here to save looking up the FixedBufferAttribute when loading the field
             // from metadata.
-            bool isFixedBuffer = numIntroducedFields == 1
-                                    && firstFieldElementType.IsValueType
-                                    && firstField.Offset.AsInt == 0
-                                    && mdType.HasLayout()
-                                    && ((typeDesc.GetElementSize().AsInt % firstFieldSize) == 0);
+            bool isFixedBuffer =
+                numIntroducedFields == 1
+                && firstFieldElementType.IsValueType
+                && firstField.Offset.AsInt == 0
+                && mdType.HasLayout()
+                && ((typeDesc.GetElementSize().AsInt % firstFieldSize) == 0);
 
             if (isFixedBuffer)
             {
@@ -79,96 +85,151 @@ namespace Internal.JitInterface
                 switch (field.FieldType.Category)
                 {
                     case TypeFlags.Double:
-                    {
-                        if (numIntroducedFields == 1)
-                        {
-                            floatFieldFlags = (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_ONLY_ONE;
-                        }
-                        else if (fieldIndex == 0)
-                        {
-                            floatFieldFlags = (uint)StructFloatFieldInfoFlags.STRUCT_FIRST_FIELD_DOUBLE;
-                        }
-                        else if ((floatFieldFlags & (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST) != 0)
-                        {
-                            floatFieldFlags ^= (uint)StructFloatFieldInfoFlags.STRUCT_MERGE_FIRST_SECOND_8;
-                        }
-                        else
-                        {
-                            floatFieldFlags |= (uint)StructFloatFieldInfoFlags.STRUCT_SECOND_FIELD_DOUBLE;
-                        }
-                    }
-                    break;
 
-                    case  TypeFlags.Single:
-                    {
-                        if (numIntroducedFields == 1)
                         {
-                            floatFieldFlags = (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_ONLY_ONE;
+                            if (numIntroducedFields == 1)
+                            {
+                                floatFieldFlags = (uint)
+                                    StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_ONLY_ONE;
+                            }
+                            else if (fieldIndex == 0)
+                            {
+                                floatFieldFlags = (uint)
+                                    StructFloatFieldInfoFlags.STRUCT_FIRST_FIELD_DOUBLE;
+                            }
+                            else if (
+                                (
+                                    floatFieldFlags
+                                    & (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST
+                                ) != 0
+                            )
+                            {
+                                floatFieldFlags ^= (uint)
+                                    StructFloatFieldInfoFlags.STRUCT_MERGE_FIRST_SECOND_8;
+                            }
+                            else
+                            {
+                                floatFieldFlags |= (uint)
+                                    StructFloatFieldInfoFlags.STRUCT_SECOND_FIELD_DOUBLE;
+                            }
                         }
-                        else if (fieldIndex == 0)
+                        break;
+
+                    case TypeFlags.Single:
+
                         {
-                            floatFieldFlags = (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST;
+                            if (numIntroducedFields == 1)
+                            {
+                                floatFieldFlags = (uint)
+                                    StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_ONLY_ONE;
+                            }
+                            else if (fieldIndex == 0)
+                            {
+                                floatFieldFlags = (uint)
+                                    StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST;
+                            }
+                            else if (
+                                (
+                                    floatFieldFlags
+                                    & (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST
+                                ) != 0
+                            )
+                            {
+                                floatFieldFlags ^= (uint)
+                                    StructFloatFieldInfoFlags.STRUCT_MERGE_FIRST_SECOND;
+                            }
+                            else
+                            {
+                                floatFieldFlags |= (uint)
+                                    StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_SECOND;
+                            }
                         }
-                        else if ((floatFieldFlags & (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST) != 0)
-                        {
-                            floatFieldFlags ^= (uint)StructFloatFieldInfoFlags.STRUCT_MERGE_FIRST_SECOND;
-                        }
-                        else
-                        {
-                            floatFieldFlags |= (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_SECOND;
-                        }
-                    }
-                    break;
+                        break;
 
                     case TypeFlags.ValueType:
-                    //case TypeFlags.Class:
-                    //case TypeFlags.Array:
-                    //case TypeFlags.SzArray:
-                    {
-                        uint floatFieldFlags2 = GetLoongArch64PassStructInRegisterFlags(field.FieldType);
-                        if (numIntroducedFields == 1)
-                        {
-                            floatFieldFlags = floatFieldFlags2;
-                        }
-                        else if (field.FieldType.GetElementSize().AsInt > 8)
-                        {
-                            return (uint)StructFloatFieldInfoFlags.STRUCT_NO_FLOAT_FIELD;
-                        }
-                        else if (fieldIndex == 0)
-                        {
-                            if ((floatFieldFlags2 & (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_ONLY_ONE) != 0)
-                            {
-                                floatFieldFlags = (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST;
-                            }
-                            if (field.FieldType.GetElementSize().AsInt == 8)
-                            {
-                                floatFieldFlags |= (uint)StructFloatFieldInfoFlags.STRUCT_FIRST_FIELD_SIZE_IS8;
-                            }
-                        }
-                        else
-                        {
-                            Debug.Assert(fieldIndex == 1);
-                            if ((floatFieldFlags2 & (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_ONLY_ONE) != 0)
-                            {
-                                floatFieldFlags |= (uint)StructFloatFieldInfoFlags.STRUCT_MERGE_FIRST_SECOND;
-                            }
-                            if (field.FieldType.GetElementSize().AsInt == 8)
-                            {
-                                floatFieldFlags |= (uint)StructFloatFieldInfoFlags.STRUCT_SECOND_FIELD_SIZE_IS8;
-                            }
 
-                            floatFieldFlags2 = floatFieldFlags & ((uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST | (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_SECOND);
-                            if (floatFieldFlags2 == 0)
+                        //case TypeFlags.Class:
+                        //case TypeFlags.Array:
+                        //case TypeFlags.SzArray:
+                        {
+                            uint floatFieldFlags2 = GetLoongArch64PassStructInRegisterFlags(
+                                field.FieldType
+                            );
+                            if (numIntroducedFields == 1)
                             {
-                                floatFieldFlags = (uint)StructFloatFieldInfoFlags.STRUCT_NO_FLOAT_FIELD;
+                                floatFieldFlags = floatFieldFlags2;
                             }
-                            else if (floatFieldFlags2 == ((uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST | (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_SECOND))
+                            else if (field.FieldType.GetElementSize().AsInt > 8)
                             {
-                                floatFieldFlags ^= ((uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_ONLY_TWO | (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST | (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_SECOND);
+                                return (uint)StructFloatFieldInfoFlags.STRUCT_NO_FLOAT_FIELD;
+                            }
+                            else if (fieldIndex == 0)
+                            {
+                                if (
+                                    (
+                                        floatFieldFlags2
+                                        & (uint)
+                                            StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_ONLY_ONE
+                                    ) != 0
+                                )
+                                {
+                                    floatFieldFlags = (uint)
+                                        StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST;
+                                }
+                                if (field.FieldType.GetElementSize().AsInt == 8)
+                                {
+                                    floatFieldFlags |= (uint)
+                                        StructFloatFieldInfoFlags.STRUCT_FIRST_FIELD_SIZE_IS8;
+                                }
+                            }
+                            else
+                            {
+                                Debug.Assert(fieldIndex == 1);
+                                if (
+                                    (
+                                        floatFieldFlags2
+                                        & (uint)
+                                            StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_ONLY_ONE
+                                    ) != 0
+                                )
+                                {
+                                    floatFieldFlags |= (uint)
+                                        StructFloatFieldInfoFlags.STRUCT_MERGE_FIRST_SECOND;
+                                }
+                                if (field.FieldType.GetElementSize().AsInt == 8)
+                                {
+                                    floatFieldFlags |= (uint)
+                                        StructFloatFieldInfoFlags.STRUCT_SECOND_FIELD_SIZE_IS8;
+                                }
+
+                                floatFieldFlags2 =
+                                    floatFieldFlags
+                                    & (
+                                        (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST
+                                        | (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_SECOND
+                                    );
+                                if (floatFieldFlags2 == 0)
+                                {
+                                    floatFieldFlags = (uint)
+                                        StructFloatFieldInfoFlags.STRUCT_NO_FLOAT_FIELD;
+                                }
+                                else if (
+                                    floatFieldFlags2
+                                    == (
+                                        (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST
+                                        | (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_SECOND
+                                    )
+                                )
+                                {
+                                    floatFieldFlags ^= (
+                                        (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_ONLY_TWO
+                                        | (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST
+                                        | (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_SECOND
+                                    );
+                                }
                             }
                         }
-                    }
-                    break;
+                        break;
 
                     default:
                     {
@@ -178,21 +239,35 @@ namespace Internal.JitInterface
                             {
                                 if (fieldIndex == 0)
                                 {
-                                    floatFieldFlags = (uint)StructFloatFieldInfoFlags.STRUCT_FIRST_FIELD_SIZE_IS8;
+                                    floatFieldFlags = (uint)
+                                        StructFloatFieldInfoFlags.STRUCT_FIRST_FIELD_SIZE_IS8;
                                 }
-                                else if ((floatFieldFlags & (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST) != 0)
+                                else if (
+                                    (
+                                        floatFieldFlags
+                                        & (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST
+                                    ) != 0
+                                )
                                 {
-                                    floatFieldFlags |= (uint)StructFloatFieldInfoFlags.STRUCT_SECOND_FIELD_SIZE_IS8;
+                                    floatFieldFlags |= (uint)
+                                        StructFloatFieldInfoFlags.STRUCT_SECOND_FIELD_SIZE_IS8;
                                 }
                                 else
                                 {
-                                    floatFieldFlags = (uint)StructFloatFieldInfoFlags.STRUCT_NO_FLOAT_FIELD;
+                                    floatFieldFlags = (uint)
+                                        StructFloatFieldInfoFlags.STRUCT_NO_FLOAT_FIELD;
                                 }
                             }
                         }
                         else if (fieldIndex == 1)
                         {
-                            floatFieldFlags = (floatFieldFlags & (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST) > 0 ? floatFieldFlags : (uint)StructFloatFieldInfoFlags.STRUCT_NO_FLOAT_FIELD;
+                            floatFieldFlags =
+                                (
+                                    floatFieldFlags
+                                    & (uint)StructFloatFieldInfoFlags.STRUCT_FLOAT_FIELD_FIRST
+                                ) > 0
+                                    ? floatFieldFlags
+                                    : (uint)StructFloatFieldInfoFlags.STRUCT_NO_FLOAT_FIELD;
                         }
                         break;
                     }

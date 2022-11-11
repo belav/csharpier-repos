@@ -13,7 +13,8 @@ namespace System.IO
     // (and optionally Flush), as well as any additional ctor/Dispose logic necessary.
     internal abstract class ConsoleStream : Stream
     {
-        private bool _canRead, _canWrite;
+        private bool _canRead,
+            _canWrite;
 
         internal ConsoleStream(FileAccess access)
         {
@@ -30,7 +31,12 @@ namespace System.IO
 
         public override void WriteByte(byte value) => Write(new ReadOnlySpan<byte>(in value));
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateWrite(buffer, offset, count);
 
@@ -50,7 +56,10 @@ namespace System.IO
             }
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             ValidateCanWrite();
 
@@ -83,7 +92,12 @@ namespace System.IO
             return result != 0 ? b : -1;
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateRead(buffer, offset, count);
 
@@ -102,7 +116,10 @@ namespace System.IO
             }
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             ValidateCanRead();
 
@@ -146,7 +163,8 @@ namespace System.IO
 
         public sealed override void SetLength(long value) => throw Error.GetSeekNotSupported();
 
-        public sealed override long Seek(long offset, SeekOrigin origin) => throw Error.GetSeekNotSupported();
+        public sealed override long Seek(long offset, SeekOrigin origin) =>
+            throw Error.GetSeekNotSupported();
 
         protected void ValidateRead(byte[] buffer, int offset, int count)
         {

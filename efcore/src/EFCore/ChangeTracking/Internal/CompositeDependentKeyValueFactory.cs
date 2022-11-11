@@ -22,8 +22,8 @@ public class CompositeDependentKeyValueFactory : CompositeValueFactory
     /// </summary>
     public CompositeDependentKeyValueFactory(
         IForeignKey foreignKey,
-        IPrincipalKeyValueFactory<object[]> principalKeyValueFactory)
-        : base(foreignKey.Properties)
+        IPrincipalKeyValueFactory<object[]> principalKeyValueFactory
+    ) : base(foreignKey.Properties)
     {
         _foreignKey = foreignKey;
         _principalKeyValueFactory = principalKeyValueFactory;
@@ -35,13 +35,17 @@ public class CompositeDependentKeyValueFactory : CompositeValueFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override object CreatePrincipalEquatableKey(IUpdateEntry entry, bool fromOriginalValues)
-        => new EquatableKeyValue<object[]>(
+    public override object CreatePrincipalEquatableKey(
+        IUpdateEntry entry,
+        bool fromOriginalValues
+    ) =>
+        new EquatableKeyValue<object[]>(
             _foreignKey,
             fromOriginalValues
                 ? _principalKeyValueFactory.CreateFromOriginalValues(entry)!
                 : _principalKeyValueFactory.CreateFromCurrentValues(entry)!,
-            EqualityComparer);
+            EqualityComparer
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,8 +53,11 @@ public class CompositeDependentKeyValueFactory : CompositeValueFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override object? CreateDependentEquatableKey(IUpdateEntry entry, bool fromOriginalValues)
-        => fromOriginalValues
+    public override object? CreateDependentEquatableKey(
+        IUpdateEntry entry,
+        bool fromOriginalValues
+    ) =>
+        fromOriginalValues
             ? TryCreateFromOriginalValues(entry, out var originalKeyValue)
                 ? new EquatableKeyValue<object[]>(_foreignKey, originalKeyValue, EqualityComparer)
                 : null

@@ -78,13 +78,18 @@ public class RateLimiterEndpointConventionBuilderExtensionsTests : LoggedTest
     {
         public override Endpoint Build()
         {
-            return new Endpoint(RequestDelegate, new EndpointMetadataCollection(Metadata), DisplayName);
+            return new Endpoint(
+                RequestDelegate,
+                new EndpointMetadataCollection(Metadata),
+                DisplayName
+            );
         }
     }
 
     private class TestEndpointConventionBuilder : IEndpointConventionBuilder
     {
-        public IList<Action<EndpointBuilder>> Conventions { get; } = new List<Action<EndpointBuilder>>();
+        public IList<Action<EndpointBuilder>> Conventions { get; } =
+            new List<Action<EndpointBuilder>>();
 
         public void Add(Action<EndpointBuilder> convention)
         {

@@ -9,20 +9,28 @@ namespace Microsoft.CodeAnalysis.TaskList
 {
     internal static class TaskListOptionsStorage
     {
-        public static readonly Option2<ImmutableArray<string>> Descriptors = new(
-            "TaskListOptionsStorage",
-            "Descriptors",
-            TaskListOptions.Default.Descriptors,
-            new RoamingProfileStorageLocation("Microsoft.VisualStudio.ErrorListPkg.Shims.TaskListOptions.CommentTokens"));
+        public static readonly Option2<ImmutableArray<string>> Descriptors =
+            new(
+                "TaskListOptionsStorage",
+                "Descriptors",
+                TaskListOptions.Default.Descriptors,
+                new RoamingProfileStorageLocation(
+                    "Microsoft.VisualStudio.ErrorListPkg.Shims.TaskListOptions.CommentTokens"
+                )
+            );
 
-        public static readonly Option2<bool> ComputeTaskListItemsForClosedFiles = new(
-            "TaskListOptionsStorage",
-            "ComputeTaskListItemsForClosedFiles",
-            defaultValue: true,
-            new RoamingProfileStorageLocation($"TextEditor.Specific.ComputeTaskListItemsForClosedFiles"));
+        public static readonly Option2<bool> ComputeTaskListItemsForClosedFiles =
+            new(
+                "TaskListOptionsStorage",
+                "ComputeTaskListItemsForClosedFiles",
+                defaultValue: true,
+                new RoamingProfileStorageLocation(
+                    $"TextEditor.Specific.ComputeTaskListItemsForClosedFiles"
+                )
+            );
 
-        public static TaskListOptions GetTaskListOptions(this IGlobalOptionService globalOptions)
-            => new()
+        public static TaskListOptions GetTaskListOptions(this IGlobalOptionService globalOptions) =>
+            new()
             {
                 Descriptors = globalOptions.GetOption(Descriptors),
                 ComputeForClosedFiles = globalOptions.GetOption(ComputeTaskListItemsForClosedFiles)

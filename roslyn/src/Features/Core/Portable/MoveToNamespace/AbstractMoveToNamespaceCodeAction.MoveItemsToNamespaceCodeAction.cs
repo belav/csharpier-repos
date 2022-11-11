@@ -13,10 +13,11 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
         {
             public override string Title => FeaturesResources.Move_contents_to_namespace;
 
-            public MoveItemsToNamespaceCodeAction(IMoveToNamespaceService changeNamespaceService, MoveToNamespaceAnalysisResult analysisResult, CodeCleanupOptionsProvider cleanupOptions)
-                : base(changeNamespaceService, analysisResult, cleanupOptions)
-            {
-            }
+            public MoveItemsToNamespaceCodeAction(
+                IMoveToNamespaceService changeNamespaceService,
+                MoveToNamespaceAnalysisResult analysisResult,
+                CodeCleanupOptionsProvider cleanupOptions
+            ) : base(changeNamespaceService, analysisResult, cleanupOptions) { }
         }
     }
 }

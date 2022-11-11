@@ -72,7 +72,10 @@ namespace System.Drawing
                 if (_color == Color.Empty)
                 {
                     int colorARGB;
-                    int status = Gdip.GdipGetSolidFillColor(new HandleRef(this, NativeBrush), out colorARGB);
+                    int status = Gdip.GdipGetSolidFillColor(
+                        new HandleRef(this, NativeBrush),
+                        out colorARGB
+                    );
                     Gdip.CheckStatus(status);
 
                     _color = Color.FromArgb(colorARGB);
@@ -81,7 +84,6 @@ namespace System.Drawing
                 // GDI+ doesn't understand system colors, so we can't use GdipGetSolidFillColor in the general case.
                 return _color;
             }
-
             set
             {
                 if (_immutable)
@@ -107,7 +109,10 @@ namespace System.Drawing
         // Sets the color even if the brush is considered immutable.
         private void InternalSetColor(Color value)
         {
-            int status = Gdip.GdipSetSolidFillColor(new HandleRef(this, NativeBrush), value.ToArgb());
+            int status = Gdip.GdipSetSolidFillColor(
+                new HandleRef(this, NativeBrush),
+                value.ToArgb()
+            );
             Gdip.CheckStatus(status);
 
             _color = value;

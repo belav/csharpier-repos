@@ -79,7 +79,8 @@ namespace System.Formats.Tar
         // PAX attributes
 
         private Dictionary<string, string>? _ea;
-        internal Dictionary<string, string> ExtendedAttributes => _ea ??= new Dictionary<string, string>();
+        internal Dictionary<string, string> ExtendedAttributes =>
+            _ea ??= new Dictionary<string, string>();
 
         // GNU attributes
 
@@ -91,7 +92,13 @@ namespace System.Formats.Tar
         internal byte[]? _gnuUnusedBytes;
 
         // Constructor called when creating an entry with default common fields.
-        internal TarHeader(TarEntryFormat format, string name = "", int mode = 0, DateTimeOffset mTime = default, TarEntryType typeFlag = TarEntryType.RegularFile)
+        internal TarHeader(
+            TarEntryFormat format,
+            string name = "",
+            int mode = 0,
+            DateTimeOffset mTime = default,
+            TarEntryType typeFlag = TarEntryType.RegularFile
+        )
         {
             _format = format;
             _name = name;
@@ -115,24 +122,28 @@ namespace System.Formats.Tar
             _dataStream = other._dataStream;
         }
 
-        internal void InitializeExtendedAttributesWithExisting(IEnumerable<KeyValuePair<string, string>> existing)
+        internal void InitializeExtendedAttributesWithExisting(
+            IEnumerable<KeyValuePair<string, string>> existing
+        )
         {
             Debug.Assert(_ea == null);
             _ea = new Dictionary<string, string>(existing);
         }
 
-        private static string GetMagicForFormat(TarEntryFormat format) => format switch
-        {
-            TarEntryFormat.Ustar or TarEntryFormat.Pax => UstarMagic,
-            TarEntryFormat.Gnu => GnuMagic,
-            _ => string.Empty,
-        };
+        private static string GetMagicForFormat(TarEntryFormat format) =>
+            format switch
+            {
+                TarEntryFormat.Ustar or TarEntryFormat.Pax => UstarMagic,
+                TarEntryFormat.Gnu => GnuMagic,
+                _ => string.Empty,
+            };
 
-        private static string GetVersionForFormat(TarEntryFormat format) => format switch
-        {
-            TarEntryFormat.Ustar or TarEntryFormat.Pax => UstarVersion,
-            TarEntryFormat.Gnu => GnuVersion,
-            _ => string.Empty,
-        };
+        private static string GetVersionForFormat(TarEntryFormat format) =>
+            format switch
+            {
+                TarEntryFormat.Ustar or TarEntryFormat.Pax => UstarVersion,
+                TarEntryFormat.Gnu => GnuVersion,
+                _ => string.Empty,
+            };
     }
 }

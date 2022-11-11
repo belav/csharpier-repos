@@ -16,11 +16,11 @@ namespace Microsoft.CodeAnalysis.Host
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TaskSchedulerProvider()
-        {
-        }
+        public TaskSchedulerProvider() { }
 
-        public TaskScheduler CurrentContextScheduler
-            => (SynchronizationContext.Current != null) ? TaskScheduler.FromCurrentSynchronizationContext() : TaskScheduler.Default;
+        public TaskScheduler CurrentContextScheduler =>
+            (SynchronizationContext.Current != null)
+                ? TaskScheduler.FromCurrentSynchronizationContext()
+                : TaskScheduler.Default;
     }
 }

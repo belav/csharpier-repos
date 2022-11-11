@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis
         NotAnEvent = 2,
 
         /// <summary>
-        /// The candidate symbol must be a WithEvents member, but it was not. 
+        /// The candidate symbol must be a WithEvents member, but it was not.
         /// </summary>
         NotAWithEventsMember = 3,
 
@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis
         WrongArity = 5,
 
         /// <summary>
-        /// The candidate symbol existed, but was not allowed to be created in a new expression. 
+        /// The candidate symbol existed, but was not allowed to be created in a new expression.
         /// For example, interfaces, static classes, and unconstrained type parameters.
         /// </summary>
         NotCreatable = 6,
@@ -76,7 +76,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// The candidate symbol was in a place where a variable (or sometimes, a property) was
-        /// required, but was not allowed there because it isn't a symbol that can be assigned to. 
+        /// required, but was not allowed there because it isn't a symbol that can be assigned to.
         /// For example, the left hand side of an assignment, or a ref or out parameter.
         /// </summary>
         NotAVariable = 10,
@@ -89,20 +89,20 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// The candidate symbol must be an instance variable, but was used as static, or the
-        /// reverse. 
+        /// reverse.
         /// </summary>
         StaticInstanceMismatch = 12,
 
         /// <summary>
         /// Overload resolution did not choose a method. The candidate symbols are the methods there
-        /// were considered during overload resolution (which may or may not be applicable methods). 
+        /// were considered during overload resolution (which may or may not be applicable methods).
         /// </summary>
         OverloadResolutionFailure = 13,
 
         /// <summary>
         /// Method could not be selected statically.
-        /// The candidate symbols are the methods there were considered during overload resolution 
-        /// (which may or may not be applicable methods). 
+        /// The candidate symbols are the methods there were considered during overload resolution
+        /// (which may or may not be applicable methods).
         /// </summary>
         LateBound = 14,
 

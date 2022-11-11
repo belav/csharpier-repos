@@ -16,7 +16,11 @@ internal sealed class Condition
     public UrlMatch Match { get; }
     public bool OrNext { get; }
 
-    public MatchResults Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public MatchResults Evaluate(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         var pattern = Input.Evaluate(context, ruleBackReferences, conditionBackReferences);
         return Match.Evaluate(pattern, context);

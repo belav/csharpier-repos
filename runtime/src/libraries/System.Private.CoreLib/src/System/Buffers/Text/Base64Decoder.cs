@@ -34,7 +34,13 @@ namespace System.Buffers.Text
         /// - InvalidData - if the input contains bytes outside of the expected base64 range, or if it contains invalid/more than two padding characters,
         ///   or if the input is incomplete (i.e. not a multiple of 4) and <paramref name="isFinalBlock"/> is <see langword="true"/>.
         /// </returns>
-        public static unsafe OperationStatus DecodeFromUtf8(ReadOnlySpan<byte> utf8, Span<byte> bytes, out int bytesConsumed, out int bytesWritten, bool isFinalBlock = true)
+        public static unsafe OperationStatus DecodeFromUtf8(
+            ReadOnlySpan<byte> utf8,
+            Span<byte> bytes,
+            out int bytesConsumed,
+            out int bytesWritten,
+            bool isFinalBlock = true
+        )
         {
             if (utf8.IsEmpty)
             {
@@ -46,7 +52,7 @@ namespace System.Buffers.Text
             fixed (byte* srcBytes = &MemoryMarshal.GetReference(utf8))
             fixed (byte* destBytes = &MemoryMarshal.GetReference(bytes))
             {
-                int srcLength = utf8.Length & ~0x3;  // only decode input up to the closest multiple of 4.
+                int srcLength = utf8.Length & ~0x3; // only decode input up to the closest multiple of 4.
                 int destLength = bytes.Length;
                 int maxSrcLength = srcLength;
                 int decodedLength = GetMaxDecodedFromUtf8Length(srcLength);
@@ -68,16 +74,36 @@ namespace System.Buffers.Text
                     byte* end = srcMax - 45;
                     if (Avx2.IsSupported && (end >= src))
                     {
-                        Avx2Decode(ref src, ref dest, end, maxSrcLength, destLength, srcBytes, destBytes);
+                        Avx2Decode(
+                            ref src,
+                            ref dest,
+                            end,
+                            maxSrcLength,
+                            destLength,
+                            srcBytes,
+                            destBytes
+                        );
 
                         if (src == srcEnd)
                             goto DoneExit;
                     }
 
                     end = srcMax - 24;
-                    if ((Ssse3.IsSupported || AdvSimd.Arm64.IsSupported) && BitConverter.IsLittleEndian && (end >= src))
+                    if (
+                        (Ssse3.IsSupported || AdvSimd.Arm64.IsSupported)
+                        && BitConverter.IsLittleEndian
+                        && (end >= src)
+                    )
                     {
-                        Vector128Decode(ref src, ref dest, end, maxSrcLength, destLength, srcBytes, destBytes);
+                        Vector128Decode(
+                            ref src,
+                            ref dest,
+                            end,
+                            maxSrcLength,
+                            destLength,
+                            srcBytes,
+                            destBytes
+                        );
 
                         if (src == srcEnd)
                             goto DoneExit;
@@ -200,12 +226,12 @@ namespace System.Buffers.Text
                 if (srcLength != utf8.Length)
                     goto InvalidDataExit;
 
-            DoneExit:
+                DoneExit:
                 bytesConsumed = (int)(src - srcBytes);
                 bytesWritten = (int)(dest - destBytes);
                 return OperationStatus.Done;
 
-            DestinationTooSmallExit:
+                DestinationTooSmallExit:
                 if (srcLength != utf8.Length && isFinalBlock)
                     goto InvalidDataExit; // if input is not a multiple of 4, and there is no more data, return invalid data instead
 
@@ -213,12 +239,12 @@ namespace System.Buffers.Text
                 bytesWritten = (int)(dest - destBytes);
                 return OperationStatus.DestinationTooSmall;
 
-            NeedMoreDataExit:
+                NeedMoreDataExit:
                 bytesConsumed = (int)(src - srcBytes);
                 bytesWritten = (int)(dest - destBytes);
                 return OperationStatus.NeedMoreData;
 
-            InvalidDataExit:
+                InvalidDataExit:
                 bytesConsumed = (int)(src - srcBytes);
                 bytesWritten = (int)(dest - destBytes);
                 return OperationStatus.InvalidData;
@@ -255,7 +281,10 @@ namespace System.Buffers.Text
         /// It does not return NeedMoreData since this method tramples the data in the buffer and
         /// hence can only be called once with all the data in the buffer.
         /// </returns>
-        public static unsafe OperationStatus DecodeFromUtf8InPlace(Span<byte> buffer, out int bytesWritten)
+        public static unsafe OperationStatus DecodeFromUtf8InPlace(
+            Span<byte> buffer,
+            out int bytesWritten
+        )
         {
             if (buffer.IsEmpty)
             {
@@ -340,18 +369,26 @@ namespace System.Buffers.Text
                     destIndex += 1;
                 }
 
-            DoneExit:
+                DoneExit:
                 bytesWritten = (int)destIndex;
                 return OperationStatus.Done;
 
-            InvalidExit:
+                InvalidExit:
                 bytesWritten = (int)destIndex;
                 return OperationStatus.InvalidData;
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe void Avx2Decode(ref byte* srcBytes, ref byte* destBytes, byte* srcEnd, int sourceLength, int destLength, byte* srcStart, byte* destStart)
+        private static unsafe void Avx2Decode(
+            ref byte* srcBytes,
+            ref byte* destBytes,
+            byte* srcEnd,
+            int sourceLength,
+            int destLength,
+            byte* srcStart,
+            byte* destStart
+        )
         {
             // If we have AVX2 support, pick off 32 bytes at a time for as long as we can,
             // but make sure that we quit before seeing any == markers at the end of the
@@ -363,54 +400,181 @@ namespace System.Buffers.Text
 
             // The JIT won't hoist these "constants", so help it
             Vector256<sbyte> lutHi = Vector256.Create(
-                0x10, 0x10, 0x01, 0x02,
-                0x04, 0x08, 0x04, 0x08,
-                0x10, 0x10, 0x10, 0x10,
-                0x10, 0x10, 0x10, 0x10,
-                0x10, 0x10, 0x01, 0x02,
-                0x04, 0x08, 0x04, 0x08,
-                0x10, 0x10, 0x10, 0x10,
-                0x10, 0x10, 0x10, 0x10);
+                0x10,
+                0x10,
+                0x01,
+                0x02,
+                0x04,
+                0x08,
+                0x04,
+                0x08,
+                0x10,
+                0x10,
+                0x10,
+                0x10,
+                0x10,
+                0x10,
+                0x10,
+                0x10,
+                0x10,
+                0x10,
+                0x01,
+                0x02,
+                0x04,
+                0x08,
+                0x04,
+                0x08,
+                0x10,
+                0x10,
+                0x10,
+                0x10,
+                0x10,
+                0x10,
+                0x10,
+                0x10
+            );
 
             Vector256<sbyte> lutLo = Vector256.Create(
-                0x15, 0x11, 0x11, 0x11,
-                0x11, 0x11, 0x11, 0x11,
-                0x11, 0x11, 0x13, 0x1A,
-                0x1B, 0x1B, 0x1B, 0x1A,
-                0x15, 0x11, 0x11, 0x11,
-                0x11, 0x11, 0x11, 0x11,
-                0x11, 0x11, 0x13, 0x1A,
-                0x1B, 0x1B, 0x1B, 0x1A);
+                0x15,
+                0x11,
+                0x11,
+                0x11,
+                0x11,
+                0x11,
+                0x11,
+                0x11,
+                0x11,
+                0x11,
+                0x13,
+                0x1A,
+                0x1B,
+                0x1B,
+                0x1B,
+                0x1A,
+                0x15,
+                0x11,
+                0x11,
+                0x11,
+                0x11,
+                0x11,
+                0x11,
+                0x11,
+                0x11,
+                0x11,
+                0x13,
+                0x1A,
+                0x1B,
+                0x1B,
+                0x1B,
+                0x1A
+            );
 
             Vector256<sbyte> lutShift = Vector256.Create(
-                 0, 16, 19, 4,
-                -65, -65, -71, -71,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                0, 16, 19, 4,
-                -65, -65, -71, -71,
-                0, 0, 0, 0,
-                0, 0, 0, 0);
+                0,
+                16,
+                19,
+                4,
+                -65,
+                -65,
+                -71,
+                -71,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                16,
+                19,
+                4,
+                -65,
+                -65,
+                -71,
+                -71,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            );
 
             Vector256<sbyte> packBytesInLaneMask = Vector256.Create(
-                2, 1, 0, 6,
-                5, 4, 10, 9,
-                8, 14, 13, 12,
-                -1, -1, -1, -1,
-                2, 1, 0, 6,
-                5, 4, 10, 9,
-                8, 14, 13, 12,
-                -1, -1, -1, -1);
+                2,
+                1,
+                0,
+                6,
+                5,
+                4,
+                10,
+                9,
+                8,
+                14,
+                13,
+                12,
+                -1,
+                -1,
+                -1,
+                -1,
+                2,
+                1,
+                0,
+                6,
+                5,
+                4,
+                10,
+                9,
+                8,
+                14,
+                13,
+                12,
+                -1,
+                -1,
+                -1,
+                -1
+            );
 
-            Vector256<int> packLanesControl = Vector256.Create(
-                 0, 0, 0, 0,
-                1, 0, 0, 0,
-                2, 0, 0, 0,
-                4, 0, 0, 0,
-                5, 0, 0, 0,
-                6, 0, 0, 0,
-                -1, -1, -1, -1,
-                -1, -1, -1, -1).AsInt32();
+            Vector256<int> packLanesControl = Vector256
+                .Create(
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    2,
+                    0,
+                    0,
+                    0,
+                    4,
+                    0,
+                    0,
+                    0,
+                    5,
+                    0,
+                    0,
+                    0,
+                    6,
+                    0,
+                    0,
+                    0,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                )
+                .AsInt32();
 
             Vector256<sbyte> mask2F = Vector256.Create((sbyte)'/');
             Vector256<sbyte> mergeConstant0 = Vector256.Create(0x01400140).AsSByte();
@@ -425,7 +589,10 @@ namespace System.Buffers.Text
                 AssertRead<Vector256<sbyte>>(src, srcStart, sourceLength);
                 Vector256<sbyte> str = Avx.LoadVector256(src).AsSByte();
 
-                Vector256<sbyte> hiNibbles = Avx2.And(Avx2.ShiftRightLogical(str.AsInt32(), 4).AsSByte(), mask2F);
+                Vector256<sbyte> hiNibbles = Avx2.And(
+                    Avx2.ShiftRightLogical(str.AsInt32(), 4).AsSByte(),
+                    mask2F
+                );
                 Vector256<sbyte> loNibbles = Avx2.And(str, mask2F);
                 Vector256<sbyte> hi = Avx2.Shuffle(lutHi, hiNibbles);
                 Vector256<sbyte> lo = Avx2.Shuffle(lutLo, loNibbles);
@@ -443,7 +610,10 @@ namespace System.Buffers.Text
                 // 00ffffff 00eeeeFF 00ddEEEE 00DDDDDD
                 // 00cccccc 00bbbbCC 00aaBBBB 00AAAAAA
 
-                Vector256<short> merge_ab_and_bc = Avx2.MultiplyAddAdjacent(str.AsByte(), mergeConstant0);
+                Vector256<short> merge_ab_and_bc = Avx2.MultiplyAddAdjacent(
+                    str.AsByte(),
+                    mergeConstant0
+                );
                 // 0000kkkk LLllllll 0000JJJJ JJjjKKKK
                 // 0000hhhh IIiiiiii 0000GGGG GGggHHHH
                 // 0000eeee FFffffff 0000DDDD DDddEEEE
@@ -470,8 +640,7 @@ namespace System.Buffers.Text
 
                 src += 32;
                 dest += 24;
-            }
-            while (src <= srcEnd);
+            } while (src <= srcEnd);
 
             srcBytes = src;
             destBytes = dest;
@@ -479,9 +648,15 @@ namespace System.Buffers.Text
 
         // This can be replaced once https://github.com/dotnet/runtime/issues/63331 is implemented.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Vector128<byte> SimdShuffle(Vector128<byte> left, Vector128<byte> right, Vector128<byte> mask8F)
+        private static Vector128<byte> SimdShuffle(
+            Vector128<byte> left,
+            Vector128<byte> right,
+            Vector128<byte> mask8F
+        )
         {
-            Debug.Assert((Ssse3.IsSupported || AdvSimd.Arm64.IsSupported) && BitConverter.IsLittleEndian);
+            Debug.Assert(
+                (Ssse3.IsSupported || AdvSimd.Arm64.IsSupported) && BitConverter.IsLittleEndian
+            );
 
             if (Ssse3.IsSupported)
             {
@@ -494,9 +669,19 @@ namespace System.Buffers.Text
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe void Vector128Decode(ref byte* srcBytes, ref byte* destBytes, byte* srcEnd, int sourceLength, int destLength, byte* srcStart, byte* destStart)
+        private static unsafe void Vector128Decode(
+            ref byte* srcBytes,
+            ref byte* destBytes,
+            byte* srcEnd,
+            int sourceLength,
+            int destLength,
+            byte* srcStart,
+            byte* destStart
+        )
         {
-            Debug.Assert((Ssse3.IsSupported || AdvSimd.Arm64.IsSupported) && BitConverter.IsLittleEndian);
+            Debug.Assert(
+                (Ssse3.IsSupported || AdvSimd.Arm64.IsSupported) && BitConverter.IsLittleEndian
+            );
 
             // If we have Vector128 support, pick off 16 bytes at a time for as long as we can,
             // but make sure that we quit before seeing any == markers at the end of the
@@ -571,15 +756,23 @@ namespace System.Buffers.Text
             // 1111 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
 
             // The JIT won't hoist these "constants", so help it
-            Vector128<byte>  lutHi = Vector128.Create(0x02011010, 0x08040804, 0x10101010, 0x10101010).AsByte();
-            Vector128<byte>  lutLo = Vector128.Create(0x11111115, 0x11111111, 0x1A131111, 0x1A1B1B1B).AsByte();
-            Vector128<sbyte> lutShift = Vector128.Create(0x04131000, 0xb9b9bfbf, 0x00000000, 0x00000000).AsSByte();
-            Vector128<sbyte> packBytesMask = Vector128.Create(0x06000102, 0x090A0405, 0x0C0D0E08, 0xffffffff).AsSByte();
-            Vector128<byte>  mergeConstant0 = Vector128.Create(0x01400140).AsByte();
+            Vector128<byte> lutHi = Vector128
+                .Create(0x02011010, 0x08040804, 0x10101010, 0x10101010)
+                .AsByte();
+            Vector128<byte> lutLo = Vector128
+                .Create(0x11111115, 0x11111111, 0x1A131111, 0x1A1B1B1B)
+                .AsByte();
+            Vector128<sbyte> lutShift = Vector128
+                .Create(0x04131000, 0xb9b9bfbf, 0x00000000, 0x00000000)
+                .AsSByte();
+            Vector128<sbyte> packBytesMask = Vector128
+                .Create(0x06000102, 0x090A0405, 0x0C0D0E08, 0xffffffff)
+                .AsSByte();
+            Vector128<byte> mergeConstant0 = Vector128.Create(0x01400140).AsByte();
             Vector128<short> mergeConstant1 = Vector128.Create(0x00011000).AsInt16();
-            Vector128<byte>  one = Vector128.Create((byte)1);
-            Vector128<byte>  mask2F = Vector128.Create((byte)'/');
-            Vector128<byte>  mask8F = Vector128.Create((byte)0x8F);
+            Vector128<byte> one = Vector128.Create((byte)1);
+            Vector128<byte> mask2F = Vector128.Create((byte)'/');
+            Vector128<byte> mask8F = Vector128.Create((byte)0x8F);
 
             byte* src = srcBytes;
             byte* dest = destBytes;
@@ -591,7 +784,8 @@ namespace System.Buffers.Text
                 Vector128<byte> str = Vector128.LoadUnsafe(ref *src);
 
                 // lookup
-                Vector128<byte> hiNibbles = Vector128.ShiftRightLogical(str.AsInt32(), 4).AsByte() & mask2F;
+                Vector128<byte> hiNibbles =
+                    Vector128.ShiftRightLogical(str.AsInt32(), 4).AsByte() & mask2F;
                 Vector128<byte> hi = SimdShuffle(lutHi, hiNibbles, mask8F);
                 Vector128<byte> lo = SimdShuffle(lutLo, str, mask8F);
 
@@ -615,12 +809,20 @@ namespace System.Buffers.Text
                 Vector128<short> merge_ab_and_bc;
                 if (Ssse3.IsSupported)
                 {
-                    merge_ab_and_bc = Ssse3.MultiplyAddAdjacent(str.AsByte(), mergeConstant0.AsSByte());
+                    merge_ab_and_bc = Ssse3.MultiplyAddAdjacent(
+                        str.AsByte(),
+                        mergeConstant0.AsSByte()
+                    );
                 }
                 else
                 {
-                    Vector128<ushort> evens = AdvSimd.ShiftLeftLogicalWideningLower(AdvSimd.Arm64.UnzipEven(str, one).GetLower(), 6);
-                    Vector128<ushort> odds = AdvSimd.Arm64.TransposeOdd(str, Vector128<byte>.Zero).AsUInt16();
+                    Vector128<ushort> evens = AdvSimd.ShiftLeftLogicalWideningLower(
+                        AdvSimd.Arm64.UnzipEven(str, one).GetLower(),
+                        6
+                    );
+                    Vector128<ushort> odds = AdvSimd.Arm64
+                        .TransposeOdd(str, Vector128<byte>.Zero)
+                        .AsUInt16();
                     merge_ab_and_bc = Vector128.Add(evens, odds).AsInt16();
                 }
                 // 0000kkkk LLllllll 0000JJJJ JJjjKKKK
@@ -635,8 +837,13 @@ namespace System.Buffers.Text
                 }
                 else
                 {
-                    Vector128<int> ievens = AdvSimd.ShiftLeftLogicalWideningLower(AdvSimd.Arm64.UnzipEven(merge_ab_and_bc, one.AsInt16()).GetLower(), 12);
-                    Vector128<int> iodds = AdvSimd.Arm64.TransposeOdd(merge_ab_and_bc, Vector128<short>.Zero).AsInt32();
+                    Vector128<int> ievens = AdvSimd.ShiftLeftLogicalWideningLower(
+                        AdvSimd.Arm64.UnzipEven(merge_ab_and_bc, one.AsInt16()).GetLower(),
+                        12
+                    );
+                    Vector128<int> iodds = AdvSimd.Arm64
+                        .TransposeOdd(merge_ab_and_bc, Vector128<short>.Zero)
+                        .AsInt32();
                     output = Vector128.Add(ievens, iodds).AsInt32();
                 }
                 // 00000000 JJJJJJjj KKKKkkkk LLllllll
@@ -656,8 +863,7 @@ namespace System.Buffers.Text
 
                 src += 16;
                 dest += 12;
-            }
-            while (src <= srcEnd);
+            } while (src <= srcEnd);
 
             srcBytes = src;
             destBytes = dest;
@@ -696,23 +902,265 @@ namespace System.Buffers.Text
         }
 
         // Pre-computing this table using a custom string(s_characters) and GenerateDecodingMapAndVerify (found in tests)
-        private static ReadOnlySpan<sbyte> DecodingMap => new sbyte[] {
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63,         //62 is placed at index 43 (for +), 63 at index 47 (for /)
-            52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1,         //52-61 are placed at index 48-57 (for 0-9), 64 at index 61 (for =)
-            -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1,         //0-25 are placed at index 65-90 (for A-Z)
-            -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-            41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1,         //26-51 are placed at index 97-122 (for a-z)
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,         // Bytes over 122 ('z') are invalid and cannot be decoded
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,         // Hence, padding the map with 255, which indicates invalid input
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-            -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-        };
+        private static ReadOnlySpan<sbyte> DecodingMap =>
+            new sbyte[]
+            {
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                62,
+                -1,
+                -1,
+                -1,
+                63, //62 is placed at index 43 (for +), 63 at index 47 (for /)
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1, //52-61 are placed at index 48-57 (for 0-9), 64 at index 61 (for =)
+                -1,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1, //0-25 are placed at index 65-90 (for A-Z)
+                -1,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1, //26-51 are placed at index 97-122 (for a-z)
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1, // Bytes over 122 ('z') are invalid and cannot be decoded
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1, // Hence, padding the map with 255, which indicates invalid input
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+                -1,
+            };
     }
 }

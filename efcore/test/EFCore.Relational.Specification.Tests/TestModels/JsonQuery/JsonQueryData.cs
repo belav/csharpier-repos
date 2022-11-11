@@ -296,18 +296,14 @@ public class JsonQueryData : ISetSource
         var entity2 = new JsonEntityBasicForCollection { Id = 2, Name = "EntityCollection2" };
         var entity3 = new JsonEntityBasicForCollection { Id = 3, Name = "EntityCollection3" };
 
-        return new List<JsonEntityBasicForCollection>
-        {
-            entity1,
-            entity2,
-            entity3
-        };
+        return new List<JsonEntityBasicForCollection> { entity1, entity2, entity3 };
     }
 
     public static void WireUp(
         IReadOnlyList<JsonEntityBasic> entitiesBasic,
         IReadOnlyList<JsonEntityBasicForReference> entitiesBasicForReference,
-        IReadOnlyList<JsonEntityBasicForCollection> entitiesBasicForCollection)
+        IReadOnlyList<JsonEntityBasicForCollection> entitiesBasicForCollection
+    )
     {
         entitiesBasic[0].EntityReference = entitiesBasicForReference[0];
         entitiesBasicForReference[0].Parent = entitiesBasic[0];
@@ -332,17 +328,20 @@ public class JsonQueryData : ISetSource
     {
         var e1_r_r = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2100, 1, 1), Fraction = 10.0,
+            Date = new DateTime(2100, 1, 1),
+            Fraction = 10.0,
         };
 
         var e1_r_c1 = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2101, 1, 1), Fraction = 10.1,
+            Date = new DateTime(2101, 1, 1),
+            Fraction = 10.1,
         };
 
         var e1_r_c2 = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2102, 1, 1), Fraction = 10.2,
+            Date = new DateTime(2102, 1, 1),
+            Fraction = 10.2,
         };
 
         var e1_r = new JsonOwnedCustomNameRoot
@@ -356,17 +355,20 @@ public class JsonQueryData : ISetSource
 
         var e1_c1_r = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2110, 1, 1), Fraction = 11.0,
+            Date = new DateTime(2110, 1, 1),
+            Fraction = 11.0,
         };
 
         var e1_c1_c1 = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2111, 1, 1), Fraction = 11.1,
+            Date = new DateTime(2111, 1, 1),
+            Fraction = 11.1,
         };
 
         var e1_c1_c2 = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2112, 1, 1), Fraction = 11.2,
+            Date = new DateTime(2112, 1, 1),
+            Fraction = 11.2,
         };
 
         var e1_c1 = new JsonOwnedCustomNameRoot
@@ -380,17 +382,20 @@ public class JsonQueryData : ISetSource
 
         var e1_c2_r = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2120, 1, 1), Fraction = 12.0,
+            Date = new DateTime(2120, 1, 1),
+            Fraction = 12.0,
         };
 
         var e1_c2_c1 = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2121, 1, 1), Fraction = 12.1,
+            Date = new DateTime(2121, 1, 1),
+            Fraction = 12.1,
         };
 
         var e1_c2_c2 = new JsonOwnedCustomNameBranch
         {
-            Date = new DateTime(2122, 1, 1), Fraction = 12.2,
+            Date = new DateTime(2122, 1, 1),
+            Fraction = 12.2,
         };
 
         var e1_c2 = new JsonOwnedCustomNameRoot
@@ -440,16 +445,12 @@ public class JsonQueryData : ISetSource
             Name = "JsonEntitySingleOwned3",
             OwnedCollection = new List<JsonOwnedLeaf>
             {
-                new() { SomethingSomething = "owned_3_1" }, new() { SomethingSomething = "owned_3_2" },
+                new() { SomethingSomething = "owned_3_1" },
+                new() { SomethingSomething = "owned_3_2" },
             }
         };
 
-        return new List<JsonEntitySingleOwned>
-        {
-            e1,
-            e2,
-            e3
-        };
+        return new List<JsonEntitySingleOwned> { e1, e2, e3 };
     }
 
     public static IReadOnlyList<JsonEntityInheritanceBase> CreateJsonEntitiesInheritance()
@@ -620,7 +621,10 @@ public class JsonQueryData : ISetSource
             TestDouble = -1.23456789,
             TestDecimal = -1234567890.01M,
             TestDateTime = DateTime.Parse("01/01/2000 12:34:56"),
-            TestDateTimeOffset = new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0)),
+            TestDateTimeOffset = new DateTimeOffset(
+                DateTime.Parse("01/01/2000 12:34:56"),
+                TimeSpan.FromHours(-8.0)
+            ),
             TestTimeSpan = new TimeSpan(0, 10, 9, 8, 7),
             TestSingle = -1.234F,
             TestBoolean = true,
@@ -641,7 +645,10 @@ public class JsonQueryData : ISetSource
             TestDouble = -1.2345,
             TestDecimal = -123450.01M,
             TestDateTime = DateTime.Parse("11/11/2100 12:34:56"),
-            TestDateTimeOffset = new DateTimeOffset(DateTime.Parse("11/11/2200 12:34:56"), TimeSpan.FromHours(-5.0)),
+            TestDateTimeOffset = new DateTimeOffset(
+                DateTime.Parse("11/11/2200 12:34:56"),
+                TimeSpan.FromHours(-5.0)
+            ),
             TestTimeSpan = new TimeSpan(0, 6, 5, 4, 3),
             TestSingle = -1.4F,
             TestBoolean = false,
@@ -665,8 +672,7 @@ public class JsonQueryData : ISetSource
         };
     }
 
-    public IQueryable<TEntity> Set<TEntity>()
-        where TEntity : class
+    public IQueryable<TEntity> Set<TEntity>() where TEntity : class
     {
         if (typeof(TEntity) == typeof(EntityBasic))
         {
@@ -695,12 +701,14 @@ public class JsonQueryData : ISetSource
 
         if (typeof(TEntity) == typeof(JsonEntityInheritanceDerived))
         {
-            return (IQueryable<TEntity>)JsonEntitiesInheritance.OfType<JsonEntityInheritanceDerived>().AsQueryable();
+            return (IQueryable<TEntity>)
+                JsonEntitiesInheritance.OfType<JsonEntityInheritanceDerived>().AsQueryable();
         }
 
         if (typeof(TEntity) == typeof(JsonEntityAllTypes))
         {
-            return (IQueryable<TEntity>)JsonEntitiesAllTypes.OfType<JsonEntityAllTypes>().AsQueryable();
+            return (IQueryable<TEntity>)
+                JsonEntitiesAllTypes.OfType<JsonEntityAllTypes>().AsQueryable();
         }
 
         throw new InvalidOperationException("Invalid entity type: " + typeof(TEntity));

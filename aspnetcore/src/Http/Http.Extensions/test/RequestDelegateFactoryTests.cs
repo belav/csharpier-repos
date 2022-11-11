@@ -80,14 +80,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             }
 
             return new List<object[]>
-                {
-                    new object[] { (Action<HttpContext>)TestAction },
-                    new object[] { (Func<HttpContext, Task>)TaskTestAction },
-                    new object[] { (Func<HttpContext, ValueTask>)ValueTaskTestAction },
-                    new object[] { (Action<HttpContext>)StaticTestAction },
-                    new object[] { (Func<HttpContext, Task>)StaticTaskTestAction },
-                    new object[] { (Func<HttpContext, ValueTask>)StaticValueTaskTestAction },
-                };
+            {
+                new object[] { (Action<HttpContext>)TestAction },
+                new object[] { (Func<HttpContext, Task>)TaskTestAction },
+                new object[] { (Func<HttpContext, ValueTask>)ValueTaskTestAction },
+                new object[] { (Action<HttpContext>)StaticTestAction },
+                new object[] { (Func<HttpContext, Task>)StaticTaskTestAction },
+                new object[] { (Func<HttpContext, ValueTask>)StaticValueTaskTestAction },
+            };
         }
     }
 
@@ -116,7 +116,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var methodInfo = typeof(RequestDelegateFactoryTests).GetMethod(
             nameof(StaticTestActionBasicReflection),
             BindingFlags.NonPublic | BindingFlags.Static,
-            new[] { typeof(HttpContext) });
+            new[] { typeof(HttpContext) }
+        );
 
         var factoryResult = RequestDelegateFactory.Create(methodInfo!);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -149,7 +150,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var methodInfo = typeof(TestNonStaticActionClass).GetMethod(
             nameof(TestNonStaticActionClass.NonStaticTestAction),
             BindingFlags.Public | BindingFlags.Instance,
-            new[] { typeof(HttpContext) });
+            new[] { typeof(HttpContext) }
+        );
 
         var invoked = false;
 
@@ -186,12 +188,17 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var methodInfo = typeof(RequestDelegateFactoryTests).GetMethod(
             nameof(StaticTestActionBasicReflection),
             BindingFlags.NonPublic | BindingFlags.Static,
-            new[] { typeof(HttpContext) });
+            new[] { typeof(HttpContext) }
+        );
 
         var serviceProvider = new EmptyServiceProvider();
 
-        var exNullAction = Assert.Throws<ArgumentNullException>(() => RequestDelegateFactory.Create(handler: null!));
-        var exNullMethodInfo1 = Assert.Throws<ArgumentNullException>(() => RequestDelegateFactory.Create(methodInfo: null!));
+        var exNullAction = Assert.Throws<ArgumentNullException>(
+            () => RequestDelegateFactory.Create(handler: null!)
+        );
+        var exNullMethodInfo1 = Assert.Throws<ArgumentNullException>(
+            () => RequestDelegateFactory.Create(methodInfo: null!)
+        );
 
         Assert.Equal("handler", exNullAction.ParamName);
         Assert.Equal("methodInfo", exNullMethodInfo1.ParamName);
@@ -209,7 +216,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.RouteValues[paramName] = originalRouteParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[paramName] = originalRouteParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -233,7 +242,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.RouteValues[paramName] = originalRouteParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[paramName] = originalRouteParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -268,21 +279,22 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         var httpContext = CreateHttpContext();
 
-        var factoryResult = RequestDelegateFactory.Create((int? id, HttpContext httpContext) =>
-        {
-            if (id is not null)
+        var factoryResult = RequestDelegateFactory.Create(
+            (int? id, HttpContext httpContext) =>
             {
-                httpContext.Items["input"] = id;
-            }
-        },
-        new() { RouteParameterNames = new string[] { "id" } });
+                if (id is not null)
+                {
+                    httpContext.Items["input"] = id;
+                }
+            },
+            new() { RouteParameterNames = new string[] { "id" } }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["id"] = "42"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["id"] = "42" }
+        );
 
         await requestDelegate(httpContext);
 
@@ -294,23 +306,21 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         var httpContext = CreateHttpContext();
 
-        var factoryResult = RequestDelegateFactory.Create((int? id, HttpContext httpContext) =>
-        {
-            if (id is not null)
+        var factoryResult = RequestDelegateFactory.Create(
+            (int? id, HttpContext httpContext) =>
             {
-                httpContext.Items["input"] = id;
-            }
-        },
-        new() { RouteParameterNames = new string[] { } });
+                if (id is not null)
+                {
+                    httpContext.Items["input"] = id;
+                }
+            },
+            new() { RouteParameterNames = new string[] { } }
+        );
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["id"] = "41"
-        });
-        httpContext.Request.RouteValues = new()
-        {
-            ["id"] = "42"
-        };
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["id"] = "41" }
+        );
+        httpContext.Request.RouteValues = new() { ["id"] = "42" };
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -324,23 +334,21 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         var httpContext = CreateHttpContext();
 
-        var factoryResult = RequestDelegateFactory.Create((int? id, HttpContext httpContext) =>
-        {
-            if (id is not null)
+        var factoryResult = RequestDelegateFactory.Create(
+            (int? id, HttpContext httpContext) =>
             {
-                httpContext.Items["input"] = id;
-            }
-        },
-        new() { RouteParameterNames = null });
+                if (id is not null)
+                {
+                    httpContext.Items["input"] = id;
+                }
+            },
+            new() { RouteParameterNames = null }
+        );
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["id"] = "41"
-        });
-        httpContext.Request.RouteValues = new()
-        {
-            ["id"] = "42"
-        };
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["id"] = "41" }
+        );
+        httpContext.Request.RouteValues = new() { ["id"] = "42" };
 
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
@@ -372,8 +380,13 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Fact]
     public void SpecifiedEmptyRouteParametersThrowIfRouteParameterDoesNotExist()
     {
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            RequestDelegateFactory.Create(([FromRoute] int id) => { }, new() { RouteParameterNames = Array.Empty<string>() }));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                RequestDelegateFactory.Create(
+                    ([FromRoute] int id) => { },
+                    new() { RouteParameterNames = Array.Empty<string>() }
+                )
+        );
 
         Assert.Equal("'id' is not a route parameter.", ex.Message);
     }
@@ -438,7 +451,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         var httpContext = CreateHttpContext();
 
-        httpContext.Request.RouteValues[paramName] = originalRouteParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[paramName] = originalRouteParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestOptional);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -462,7 +477,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.RouteValues[specifiedName] = originalRouteParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[specifiedName] = originalRouteParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -486,7 +503,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.RouteValues[unmatchedName] = unmatchedRouteParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[unmatchedName] = unmatchedRouteParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -509,42 +528,207 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
             return new[]
             {
-                    // string is not technically "TryParsable", but it's the special case.
-                    new object[] { (Action<HttpContext, string[]>)Store, new[] { "plain string" }, new[] { "plain string" } },
-                    new object[] { (Action<HttpContext, StringValues>)Store, new[] { "1", "2", "3" }, new StringValues(new[] { "1", "2", "3" }) },
-                    new object[] { (Action<HttpContext, int[]>)Store, new[] { "-1", "2", "3" }, new[] { -1,2,3 } },
-                    new object[] { (Action<HttpContext, uint[]>)Store, new[] { "1","42","32"}, new[] { 1U, 42U, 32U } },
-                    new object[] { (Action<HttpContext, bool[]>)Store, new[] { "true", "false" }, new[] { true, false } },
-                    new object[] { (Action<HttpContext, short[]>)Store, new[] { "-42" }, new[] { (short)-42 } },
-                    new object[] { (Action<HttpContext, ushort[]>)Store, new[] { "42" }, new[] { (ushort)42 } },
-                    new object[] { (Action<HttpContext, long[]>)Store, new[] { "-42" }, new[] { -42L } },
-                    new object[] { (Action<HttpContext, ulong[]>)Store, new[] { "42" }, new[] { 42UL } },
-                    new object[] { (Action<HttpContext, IntPtr[]>)Store, new[] { "-42" },new[] { new IntPtr(-42) } },
-                    new object[] { (Action<HttpContext, char[]>)Store, new[] { "A" }, new[] { 'A' } },
-                    new object[] { (Action<HttpContext, double[]>)Store, new[] { "0.5" },new[] { 0.5 } },
-                    new object[] { (Action<HttpContext, float[]>)Store, new[] { "0.5" },new[] { 0.5f } },
-                    new object[] { (Action<HttpContext, Half[]>)Store, new[] { "0.5" }, new[] { (Half)0.5f } },
-                    new object[] { (Action<HttpContext, decimal[]>)Store, new[] { "0.5" },new[] { 0.5m } },
-                    new object[] { (Action<HttpContext, Uri[]>)Store, new[] { "https://example.org" }, new[] { new Uri("https://example.org") } },
-                    new object[] { (Action<HttpContext, DateTime[]>)Store, new[] { now.ToString("o") },new[] { now.ToUniversalTime() } },
-                    new object[] { (Action<HttpContext, DateTimeOffset[]>)Store, new[] { "1970-01-01T00:00:00.0000000+00:00" },new[] { DateTimeOffset.UnixEpoch } },
-                    new object[] { (Action<HttpContext, TimeSpan[]>)Store, new[] { "00:00:42" },new[] { TimeSpan.FromSeconds(42) } },
-                    new object[] { (Action<HttpContext, Guid[]>)Store, new[] { "00000000-0000-0000-0000-000000000000" },new[] { Guid.Empty } },
-                    new object[] { (Action<HttpContext, Version[]>)Store, new[] { "6.0.0.42" }, new[] { new Version("6.0.0.42") } },
-                    new object[] { (Action<HttpContext, BigInteger[]>)Store, new[] { "-42" },new[]{ new BigInteger(-42) } },
-                    new object[] { (Action<HttpContext, IPAddress[]>)Store, new[] { "127.0.0.1" }, new[] { IPAddress.Loopback } },
-                    new object[] { (Action<HttpContext, IPEndPoint[]>)Store, new[] { "127.0.0.1:80" },new[] { new IPEndPoint(IPAddress.Loopback, 80) } },
-                    new object[] { (Action<HttpContext, AddressFamily[]>)Store, new[] { "Unix" },new[] { AddressFamily.Unix } },
-                    new object[] { (Action<HttpContext, ILOpCode[]>)Store, new[] { "Nop" }, new[] { ILOpCode.Nop } },
-                    new object[] { (Action<HttpContext, AssemblyFlags[]>)Store, new[] { "PublicKey,Retargetable" },new[] { AssemblyFlags.PublicKey | AssemblyFlags.Retargetable } },
-                    new object[] { (Action<HttpContext, int?[]>)Store, new[] { "42" }, new int?[] { 42 } },
-                    new object[] { (Action<HttpContext, MyEnum[]>)Store, new[] { "ValueB" },new[] { MyEnum.ValueB } },
-                    new object[] { (Action<HttpContext, MyTryParseRecord[]>)Store, new[] { "https://example.org" },new[] { new MyTryParseRecord(new Uri("https://example.org")) } },
-                    new object?[] { (Action<HttpContext, int[]>)Store, new string[] {}, Array.Empty<int>() },
-                    new object?[] { (Action<HttpContext, int?[]>)Store, new string?[] { "1", "2", null, "4" }, new int?[] { 1,2, null, 4 } },
-                    new object?[] { (Action<HttpContext, int?[]>)Store, new string[] { "1", "2", "", "4" }, new int?[] { 1,2, null, 4 } },
-                    new object[] { (Action<HttpContext, MyTryParseRecord?[]?>)Store, new[] { "" }, new MyTryParseRecord?[] { null } },
-                };
+                // string is not technically "TryParsable", but it's the special case.
+                new object[]
+                {
+                    (Action<HttpContext, string[]>)Store,
+                    new[] { "plain string" },
+                    new[] { "plain string" }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, StringValues>)Store,
+                    new[] { "1", "2", "3" },
+                    new StringValues(new[] { "1", "2", "3" })
+                },
+                new object[]
+                {
+                    (Action<HttpContext, int[]>)Store,
+                    new[] { "-1", "2", "3" },
+                    new[] { -1, 2, 3 }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, uint[]>)Store,
+                    new[] { "1", "42", "32" },
+                    new[] { 1U, 42U, 32U }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, bool[]>)Store,
+                    new[] { "true", "false" },
+                    new[] { true, false }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, short[]>)Store,
+                    new[] { "-42" },
+                    new[] { (short)-42 }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, ushort[]>)Store,
+                    new[] { "42" },
+                    new[] { (ushort)42 }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, long[]>)Store,
+                    new[] { "-42" },
+                    new[] { -42L }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, ulong[]>)Store,
+                    new[] { "42" },
+                    new[] { 42UL }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, IntPtr[]>)Store,
+                    new[] { "-42" },
+                    new[] { new IntPtr(-42) }
+                },
+                new object[] { (Action<HttpContext, char[]>)Store, new[] { "A" }, new[] { 'A' } },
+                new object[]
+                {
+                    (Action<HttpContext, double[]>)Store,
+                    new[] { "0.5" },
+                    new[] { 0.5 }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, float[]>)Store,
+                    new[] { "0.5" },
+                    new[] { 0.5f }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, Half[]>)Store,
+                    new[] { "0.5" },
+                    new[] { (Half)0.5f }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, decimal[]>)Store,
+                    new[] { "0.5" },
+                    new[] { 0.5m }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, Uri[]>)Store,
+                    new[] { "https://example.org" },
+                    new[] { new Uri("https://example.org") }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, DateTime[]>)Store,
+                    new[] { now.ToString("o") },
+                    new[] { now.ToUniversalTime() }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, DateTimeOffset[]>)Store,
+                    new[] { "1970-01-01T00:00:00.0000000+00:00" },
+                    new[] { DateTimeOffset.UnixEpoch }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, TimeSpan[]>)Store,
+                    new[] { "00:00:42" },
+                    new[] { TimeSpan.FromSeconds(42) }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, Guid[]>)Store,
+                    new[] { "00000000-0000-0000-0000-000000000000" },
+                    new[] { Guid.Empty }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, Version[]>)Store,
+                    new[] { "6.0.0.42" },
+                    new[] { new Version("6.0.0.42") }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, BigInteger[]>)Store,
+                    new[] { "-42" },
+                    new[] { new BigInteger(-42) }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, IPAddress[]>)Store,
+                    new[] { "127.0.0.1" },
+                    new[] { IPAddress.Loopback }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, IPEndPoint[]>)Store,
+                    new[] { "127.0.0.1:80" },
+                    new[] { new IPEndPoint(IPAddress.Loopback, 80) }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, AddressFamily[]>)Store,
+                    new[] { "Unix" },
+                    new[] { AddressFamily.Unix }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, ILOpCode[]>)Store,
+                    new[] { "Nop" },
+                    new[] { ILOpCode.Nop }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, AssemblyFlags[]>)Store,
+                    new[] { "PublicKey,Retargetable" },
+                    new[] { AssemblyFlags.PublicKey | AssemblyFlags.Retargetable }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, int?[]>)Store,
+                    new[] { "42" },
+                    new int?[] { 42 }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, MyEnum[]>)Store,
+                    new[] { "ValueB" },
+                    new[] { MyEnum.ValueB }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, MyTryParseRecord[]>)Store,
+                    new[] { "https://example.org" },
+                    new[] { new MyTryParseRecord(new Uri("https://example.org")) }
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, int[]>)Store,
+                    new string[] { },
+                    Array.Empty<int>()
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, int?[]>)Store,
+                    new string?[] { "1", "2", null, "4" },
+                    new int?[] { 1, 2, null, 4 }
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, int?[]>)Store,
+                    new string[] { "1", "2", "", "4" },
+                    new int?[] { 1, 2, null, 4 }
+                },
+                new object[]
+                {
+                    (Action<HttpContext, MyTryParseRecord?[]?>)Store,
+                    new[] { "" },
+                    new MyTryParseRecord?[] { null }
+                },
+            };
         }
     }
 
@@ -561,42 +745,106 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
             return new[]
             {
-                    // string is not technically "TryParsable", but it's the special case.
-                    new object[] { (Action<HttpContext, string>)Store, "plain string", "plain string" },
-                    new object[] { (Action<HttpContext, int>)Store, "-42", -42 },
-                    new object[] { (Action<HttpContext, uint>)Store, "42", 42U },
-                    new object[] { (Action<HttpContext, bool>)Store, "true", true },
-                    new object[] { (Action<HttpContext, short>)Store, "-42", (short)-42 },
-                    new object[] { (Action<HttpContext, ushort>)Store, "42", (ushort)42 },
-                    new object[] { (Action<HttpContext, long>)Store, "-42", -42L },
-                    new object[] { (Action<HttpContext, ulong>)Store, "42", 42UL },
-                    new object[] { (Action<HttpContext, IntPtr>)Store, "-42", new IntPtr(-42) },
-                    new object[] { (Action<HttpContext, char>)Store, "A", 'A' },
-                    new object[] { (Action<HttpContext, double>)Store, "0.5", 0.5 },
-                    new object[] { (Action<HttpContext, float>)Store, "0.5", 0.5f },
-                    new object[] { (Action<HttpContext, Half>)Store, "0.5", (Half)0.5f },
-                    new object[] { (Action<HttpContext, decimal>)Store, "0.5", 0.5m },
-                    new object[] { (Action<HttpContext, Uri>)Store, "https://example.org", new Uri("https://example.org") },
-                    new object[] { (Action<HttpContext, DateTime>)Store, now.ToString("o"), now.ToUniversalTime() },
-                    new object[] { (Action<HttpContext, DateTimeOffset>)Store, "1970-01-01T00:00:00.0000000+00:00", DateTimeOffset.UnixEpoch },
-                    new object[] { (Action<HttpContext, TimeSpan>)Store, "00:00:42", TimeSpan.FromSeconds(42) },
-                    new object[] { (Action<HttpContext, Guid>)Store, "00000000-0000-0000-0000-000000000000", Guid.Empty },
-                    new object[] { (Action<HttpContext, Version>)Store, "6.0.0.42", new Version("6.0.0.42") },
-                    new object[] { (Action<HttpContext, BigInteger>)Store, "-42", new BigInteger(-42) },
-                    new object[] { (Action<HttpContext, IPAddress>)Store, "127.0.0.1", IPAddress.Loopback },
-                    new object[] { (Action<HttpContext, IPEndPoint>)Store, "127.0.0.1:80", new IPEndPoint(IPAddress.Loopback, 80) },
-                    new object[] { (Action<HttpContext, AddressFamily>)Store, "Unix", AddressFamily.Unix },
-                    new object[] { (Action<HttpContext, ILOpCode>)Store, "Nop", ILOpCode.Nop },
-                    new object[] { (Action<HttpContext, AssemblyFlags>)Store, "PublicKey,Retargetable", AssemblyFlags.PublicKey | AssemblyFlags.Retargetable },
-                    new object[] { (Action<HttpContext, int?>)Store, "42", 42 },
-                    new object[] { (Action<HttpContext, MyEnum>)Store, "ValueB", MyEnum.ValueB },
-                    new object[] { (Action<HttpContext, MyTryParseRecord>)Store, "https://example.org", new MyTryParseRecord(new Uri("https://example.org")) },
-                    new object?[] { (Action<HttpContext, int?>)Store, null, null },
-                };
+                // string is not technically "TryParsable", but it's the special case.
+                new object[]
+                {
+                    (Action<HttpContext, string>)Store,
+                    "plain string",
+                    "plain string"
+                },
+                new object[] { (Action<HttpContext, int>)Store, "-42", -42 },
+                new object[] { (Action<HttpContext, uint>)Store, "42", 42U },
+                new object[] { (Action<HttpContext, bool>)Store, "true", true },
+                new object[] { (Action<HttpContext, short>)Store, "-42", (short)-42 },
+                new object[] { (Action<HttpContext, ushort>)Store, "42", (ushort)42 },
+                new object[] { (Action<HttpContext, long>)Store, "-42", -42L },
+                new object[] { (Action<HttpContext, ulong>)Store, "42", 42UL },
+                new object[] { (Action<HttpContext, IntPtr>)Store, "-42", new IntPtr(-42) },
+                new object[] { (Action<HttpContext, char>)Store, "A", 'A' },
+                new object[] { (Action<HttpContext, double>)Store, "0.5", 0.5 },
+                new object[] { (Action<HttpContext, float>)Store, "0.5", 0.5f },
+                new object[] { (Action<HttpContext, Half>)Store, "0.5", (Half)0.5f },
+                new object[] { (Action<HttpContext, decimal>)Store, "0.5", 0.5m },
+                new object[]
+                {
+                    (Action<HttpContext, Uri>)Store,
+                    "https://example.org",
+                    new Uri("https://example.org")
+                },
+                new object[]
+                {
+                    (Action<HttpContext, DateTime>)Store,
+                    now.ToString("o"),
+                    now.ToUniversalTime()
+                },
+                new object[]
+                {
+                    (Action<HttpContext, DateTimeOffset>)Store,
+                    "1970-01-01T00:00:00.0000000+00:00",
+                    DateTimeOffset.UnixEpoch
+                },
+                new object[]
+                {
+                    (Action<HttpContext, TimeSpan>)Store,
+                    "00:00:42",
+                    TimeSpan.FromSeconds(42)
+                },
+                new object[]
+                {
+                    (Action<HttpContext, Guid>)Store,
+                    "00000000-0000-0000-0000-000000000000",
+                    Guid.Empty
+                },
+                new object[]
+                {
+                    (Action<HttpContext, Version>)Store,
+                    "6.0.0.42",
+                    new Version("6.0.0.42")
+                },
+                new object[] { (Action<HttpContext, BigInteger>)Store, "-42", new BigInteger(-42) },
+                new object[]
+                {
+                    (Action<HttpContext, IPAddress>)Store,
+                    "127.0.0.1",
+                    IPAddress.Loopback
+                },
+                new object[]
+                {
+                    (Action<HttpContext, IPEndPoint>)Store,
+                    "127.0.0.1:80",
+                    new IPEndPoint(IPAddress.Loopback, 80)
+                },
+                new object[]
+                {
+                    (Action<HttpContext, AddressFamily>)Store,
+                    "Unix",
+                    AddressFamily.Unix
+                },
+                new object[] { (Action<HttpContext, ILOpCode>)Store, "Nop", ILOpCode.Nop },
+                new object[]
+                {
+                    (Action<HttpContext, AssemblyFlags>)Store,
+                    "PublicKey,Retargetable",
+                    AssemblyFlags.PublicKey | AssemblyFlags.Retargetable
+                },
+                new object[] { (Action<HttpContext, int?>)Store, "42", 42 },
+                new object[] { (Action<HttpContext, MyEnum>)Store, "ValueB", MyEnum.ValueB },
+                new object[]
+                {
+                    (Action<HttpContext, MyTryParseRecord>)Store,
+                    "https://example.org",
+                    new MyTryParseRecord(new Uri("https://example.org"))
+                },
+                new object?[] { (Action<HttpContext, int?>)Store, null, null },
+            };
         }
     }
 
-    private enum MyEnum { ValueA, ValueB, }
+    private enum MyEnum
+    {
+        ValueA,
+        ValueB,
+    }
 
     private record MyTryParseRecord(Uri Uri)
     {
@@ -615,13 +863,18 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private class MyBindAsyncTypeThatThrows
     {
-        public static ValueTask<MyBindAsyncTypeThatThrows?> BindAsync(HttpContext context, ParameterInfo parameter) =>
-            throw new InvalidOperationException("BindAsync failed");
+        public static ValueTask<MyBindAsyncTypeThatThrows?> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        ) => throw new InvalidOperationException("BindAsync failed");
     }
 
     private record MyBindAsyncRecord(Uri Uri)
     {
-        public static ValueTask<MyBindAsyncRecord?> BindAsync(HttpContext context, ParameterInfo parameter)
+        public static ValueTask<MyBindAsyncRecord?> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        )
         {
             Assert.Equal(typeof(MyBindAsyncRecord), parameter.ParameterType);
             Assert.StartsWith("myBindAsyncRecord", parameter.Name);
@@ -642,9 +895,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private record struct MyNullableBindAsyncStruct(Uri Uri)
     {
-        public static ValueTask<MyNullableBindAsyncStruct?> BindAsync(HttpContext context, ParameterInfo parameter)
+        public static ValueTask<MyNullableBindAsyncStruct?> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        )
         {
-            Assert.True(parameter.ParameterType == typeof(MyNullableBindAsyncStruct) || parameter.ParameterType == typeof(MyNullableBindAsyncStruct?));
+            Assert.True(
+                parameter.ParameterType == typeof(MyNullableBindAsyncStruct)
+                    || parameter.ParameterType == typeof(MyNullableBindAsyncStruct?)
+            );
             Assert.Equal("myNullableBindAsyncStruct", parameter.Name);
 
             if (!Uri.TryCreate(context.Request.Headers.Referer, UriKind.Absolute, out var uri))
@@ -658,14 +917,22 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private record struct MyBindAsyncStruct(Uri Uri)
     {
-        public static ValueTask<MyBindAsyncStruct> BindAsync(HttpContext context, ParameterInfo parameter)
+        public static ValueTask<MyBindAsyncStruct> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        )
         {
-            Assert.True(parameter.ParameterType == typeof(MyBindAsyncStruct) || parameter.ParameterType == typeof(MyBindAsyncStruct?));
+            Assert.True(
+                parameter.ParameterType == typeof(MyBindAsyncStruct)
+                    || parameter.ParameterType == typeof(MyBindAsyncStruct?)
+            );
             Assert.Equal("myBindAsyncStruct", parameter.Name);
 
             if (!Uri.TryCreate(context.Request.Headers.Referer, UriKind.Absolute, out var uri))
             {
-                throw new BadHttpRequestException("The request is missing the required Referer header.");
+                throw new BadHttpRequestException(
+                    "The request is missing the required Referer header."
+                );
             }
 
             return new(result: new(uri));
@@ -679,7 +946,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private record MyAwaitedBindAsyncRecord(Uri Uri)
     {
-        public static async ValueTask<MyAwaitedBindAsyncRecord?> BindAsync(HttpContext context, ParameterInfo parameter)
+        public static async ValueTask<MyAwaitedBindAsyncRecord?> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        )
         {
             Assert.Equal(typeof(MyAwaitedBindAsyncRecord), parameter.ParameterType);
             Assert.StartsWith("myAwaitedBindAsyncRecord", parameter.Name);
@@ -697,7 +967,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private record struct MyAwaitedBindAsyncStruct(Uri Uri)
     {
-        public static async ValueTask<MyAwaitedBindAsyncStruct> BindAsync(HttpContext context, ParameterInfo parameter)
+        public static async ValueTask<MyAwaitedBindAsyncStruct> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        )
         {
             Assert.Equal(typeof(MyAwaitedBindAsyncStruct), parameter.ParameterType);
             Assert.Equal("myAwaitedBindAsyncStruct", parameter.Name);
@@ -706,7 +979,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
             if (!Uri.TryCreate(context.Request.Headers.Referer, UriKind.Absolute, out var uri))
             {
-                throw new BadHttpRequestException("The request is missing the required Referer header.");
+                throw new BadHttpRequestException(
+                    "The request is missing the required Referer header."
+                );
             }
 
             return new(uri);
@@ -715,14 +990,22 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private record struct MyBothBindAsyncStruct(Uri Uri)
     {
-        public static ValueTask<MyBothBindAsyncStruct> BindAsync(HttpContext context, ParameterInfo parameter)
+        public static ValueTask<MyBothBindAsyncStruct> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        )
         {
-            Assert.True(parameter.ParameterType == typeof(MyBothBindAsyncStruct) || parameter.ParameterType == typeof(MyBothBindAsyncStruct?));
+            Assert.True(
+                parameter.ParameterType == typeof(MyBothBindAsyncStruct)
+                    || parameter.ParameterType == typeof(MyBothBindAsyncStruct?)
+            );
             Assert.Equal("myBothBindAsyncStruct", parameter.Name);
 
             if (!Uri.TryCreate(context.Request.Headers.Referer, UriKind.Absolute, out var uri))
             {
-                throw new BadHttpRequestException("The request is missing the required Referer header.");
+                throw new BadHttpRequestException(
+                    "The request is missing the required Referer header."
+                );
             }
 
             return new(result: new(uri));
@@ -741,7 +1024,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         {
             if (!Uri.TryCreate(context.Request.Headers.Referer, UriKind.Absolute, out var uri))
             {
-                throw new BadHttpRequestException("The request is missing the required Referer header.");
+                throw new BadHttpRequestException(
+                    "The request is missing the required Referer header."
+                );
             }
 
             return new(result: new(uri));
@@ -779,13 +1064,16 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
     }
 
-    private record MyBindAsyncFromInterfaceRecord(Uri uri) : IBindAsync<MyBindAsyncFromInterfaceRecord>
-    {
-    }
+    private record MyBindAsyncFromInterfaceRecord(Uri uri)
+        : IBindAsync<MyBindAsyncFromInterfaceRecord> { }
 
     [Theory]
     [MemberData(nameof(TryParsableParameters))]
-    public async Task RequestDelegatePopulatesUnattributedTryParsableParametersFromRouteValue(Delegate action, string? routeValue, object? expectedParameterValue)
+    public async Task RequestDelegatePopulatesUnattributedTryParsableParametersFromRouteValue(
+        Delegate action,
+        string? routeValue,
+        object? expectedParameterValue
+    )
     {
         var httpContext = CreateHttpContext();
         httpContext.Request.RouteValues["tryParsable"] = routeValue;
@@ -800,13 +1088,16 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     [Theory]
     [MemberData(nameof(TryParsableParameters))]
-    public async Task RequestDelegatePopulatesUnattributedTryParsableParametersFromQueryString(Delegate action, string? queryValue, object? expectedParameterValue)
+    public async Task RequestDelegatePopulatesUnattributedTryParsableParametersFromQueryString(
+        Delegate action,
+        string? queryValue,
+        object? expectedParameterValue
+    )
     {
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["tryParsable"] = queryValue
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["tryParsable"] = queryValue }
+        );
 
         var factoryResult = RequestDelegateFactory.Create(action);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -819,15 +1110,21 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     [Theory]
     [MemberData(nameof(TryParsableArrayParameters))]
-    public async Task RequestDelegateHandlesArraysFromQueryString(Delegate action, string[]? queryValues, object? expectedParameterValue)
+    public async Task RequestDelegateHandlesArraysFromQueryString(
+        Delegate action,
+        string[]? queryValues,
+        object? expectedParameterValue
+    )
     {
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["tryParsable"] = queryValues
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["tryParsable"] = queryValues }
+        );
 
-        var factoryResult = RequestDelegateFactory.Create(action, new() { DisableInferBodyFromParameters = true });
+        var factoryResult = RequestDelegateFactory.Create(
+            action,
+            new() { DisableInferBodyFromParameters = true }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -839,13 +1136,16 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     [Theory]
     [MemberData(nameof(TryParsableArrayParameters))]
-    public async Task RequestDelegateHandlesDoesNotHandleArraysFromQueryStringWhenBodyIsInferred(Delegate action, string[]? queryValues, object? expectedParameterValue)
+    public async Task RequestDelegateHandlesDoesNotHandleArraysFromQueryStringWhenBodyIsInferred(
+        Delegate action,
+        string[]? queryValues,
+        object? expectedParameterValue
+    )
     {
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["tryParsable"] = queryValues
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["tryParsable"] = queryValues }
+        );
 
         var factoryResult = RequestDelegateFactory.Create(action);
 
@@ -864,17 +1164,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public async Task RequestDelegateHandlesOptionalArraysFromNullQueryString()
     {
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["tryParsable"] = (string?)null
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["tryParsable"] = (string?)null }
+        );
 
         static void StoreNullableIntArray(HttpContext httpContext, int?[]? tryParsable)
         {
             httpContext.Items["tryParsable"] = tryParsable;
         }
 
-        var factoryResult = RequestDelegateFactory.Create(StoreNullableIntArray, new() { DisableInferBodyFromParameters = true });
+        var factoryResult = RequestDelegateFactory.Create(
+            StoreNullableIntArray,
+            new() { DisableInferBodyFromParameters = true }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -888,10 +1190,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public async Task RequestDelegateHandlesOptionalStringValuesFromNullQueryString()
     {
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["values"] = (string?)null
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["values"] = (string?)null }
+        );
 
         static void StoreNullableStringValues(HttpContext httpContext, StringValues? values)
         {
@@ -899,7 +1200,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             httpContext.Items["values"] = values;
         }
 
-        var factoryResult = RequestDelegateFactory.Create(StoreNullableStringValues, new() { DisableInferBodyFromParameters = true });
+        var factoryResult = RequestDelegateFactory.Create(
+            StoreNullableStringValues,
+            new() { DisableInferBodyFromParameters = true }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -913,20 +1217,23 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public async Task RequestDelegateHandlesArraysFromExplicitQueryStringSource()
     {
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["a"] = new(new[] { "1", "2", "3" })
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["a"] = new(new[] { "1", "2", "3" }) }
+        );
 
         httpContext.Request.Headers["Custom"] = new(new[] { "4", "5", "6" });
 
-        var factoryResult = RequestDelegateFactory.Create((HttpContext context,
-            [FromHeader(Name = "Custom")] int[] headerValues,
-            [FromQuery(Name = "a")] int[] queryValues) =>
-        {
-            context.Items["headers"] = headerValues;
-            context.Items["query"] = queryValues;
-        });
+        var factoryResult = RequestDelegateFactory.Create(
+            (
+                HttpContext context,
+                [FromHeader(Name = "Custom")] int[] headerValues,
+                [FromQuery(Name = "a")] int[] queryValues
+            ) =>
+            {
+                context.Items["headers"] = headerValues;
+                context.Items["query"] = queryValues;
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -940,20 +1247,23 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public async Task RequestDelegateHandlesStringValuesFromExplicitQueryStringSource()
     {
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["a"] = new(new[] { "1", "2", "3" })
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["a"] = new(new[] { "1", "2", "3" }) }
+        );
 
         httpContext.Request.Headers["Custom"] = new(new[] { "4", "5", "6" });
 
-        var factoryResult = RequestDelegateFactory.Create((HttpContext context,
-            [FromHeader(Name = "Custom")] StringValues headerValues,
-            [FromQuery(Name = "a")] StringValues queryValues) =>
-        {
-            context.Items["headers"] = headerValues;
-            context.Items["query"] = queryValues;
-        });
+        var factoryResult = RequestDelegateFactory.Create(
+            (
+                HttpContext context,
+                [FromHeader(Name = "Custom")] StringValues headerValues,
+                [FromQuery(Name = "a")] StringValues queryValues
+            ) =>
+            {
+                context.Items["headers"] = headerValues;
+                context.Items["query"] = queryValues;
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -967,20 +1277,23 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public async Task RequestDelegateHandlesNullableStringValuesFromExplicitQueryStringSource()
     {
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["a"] = new(new[] { "1", "2", "3" })
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["a"] = new(new[] { "1", "2", "3" }) }
+        );
 
         httpContext.Request.Headers["Custom"] = new(new[] { "4", "5", "6" });
 
-        var factoryResult = RequestDelegateFactory.Create((HttpContext context,
-            [FromHeader(Name = "Custom")] StringValues? headerValues,
-            [FromQuery(Name = "a")] StringValues? queryValues) =>
-        {
-            context.Items["headers"] = headerValues;
-            context.Items["query"] = queryValues;
-        });
+        var factoryResult = RequestDelegateFactory.Create(
+            (
+                HttpContext context,
+                [FromHeader(Name = "Custom")] StringValues? headerValues,
+                [FromQuery(Name = "a")] StringValues? queryValues
+            ) =>
+            {
+                context.Items["headers"] = headerValues;
+                context.Items["query"] = queryValues;
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -997,12 +1310,16 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         var httpContext = CreateHttpContext();
 
-        var factoryResult = RequestDelegateFactory.Create((HttpContext context,
+        var factoryResult = RequestDelegateFactory.Create(
+            (
+                HttpContext context,
                 [FromHeader(Name = "foo")] StringValues headerValues,
-                [FromQuery(Name = "bar")] StringValues queryValues) =>
-        {
-            invoked = true;
-        });
+                [FromQuery(Name = "bar")] StringValues queryValues
+            ) =>
+            {
+                invoked = true;
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -1019,11 +1336,17 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[0].EventId);
         Assert.Equal(LogLevel.Debug, logs[0].LogLevel);
-        Assert.Equal(@"Required parameter ""StringValues headerValues"" was not provided from header.", logs[0].Message);
+        Assert.Equal(
+            @"Required parameter ""StringValues headerValues"" was not provided from header.",
+            logs[0].Message
+        );
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[1].EventId);
         Assert.Equal(LogLevel.Debug, logs[1].LogLevel);
-        Assert.Equal(@"Required parameter ""StringValues queryValues"" was not provided from query string.", logs[1].Message);
+        Assert.Equal(
+            @"Required parameter ""StringValues queryValues"" was not provided from query string.",
+            logs[1].Message
+        );
     }
 
     [Fact]
@@ -1031,15 +1354,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         var httpContext = CreateHttpContext();
 
-        var factoryResult = RequestDelegateFactory.Create((HttpContext context,
+        var factoryResult = RequestDelegateFactory.Create(
+            (
+                HttpContext context,
                 [FromHeader(Name = "foo")] StringValues? headerValues,
-                [FromQuery(Name = "bar")] StringValues? queryValues) =>
-        {
-            Assert.False(headerValues.HasValue);
-            Assert.False(queryValues.HasValue);
-            context.Items["headers"] = headerValues;
-            context.Items["query"] = queryValues;
-        });
+                [FromQuery(Name = "bar")] StringValues? queryValues
+            ) =>
+            {
+                Assert.False(headerValues.HasValue);
+                Assert.False(queryValues.HasValue);
+                context.Items["headers"] = headerValues;
+                context.Items["query"] = queryValues;
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -1056,15 +1383,16 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         httpContext.Request.RouteValues["tryParsable"] = "42";
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["tryParsable"] = "invalid!"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["tryParsable"] = "invalid!" }
+        );
 
-        var factoryResult = RequestDelegateFactory.Create((HttpContext httpContext, int tryParsable) =>
-        {
-            httpContext.Items["tryParsable"] = tryParsable;
-        });
+        var factoryResult = RequestDelegateFactory.Create(
+            (HttpContext httpContext, int tryParsable) =>
+            {
+                httpContext.Items["tryParsable"] = tryParsable;
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -1080,16 +1408,21 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         httpContext.Request.Headers.Referer = "https://example.org";
 
-        var resultFactory = RequestDelegateFactory.Create((HttpContext httpContext, MyBindAsyncRecord myBindAsyncRecord) =>
-        {
-            httpContext.Items["myBindAsyncRecord"] = myBindAsyncRecord;
-        });
+        var resultFactory = RequestDelegateFactory.Create(
+            (HttpContext httpContext, MyBindAsyncRecord myBindAsyncRecord) =>
+            {
+                httpContext.Items["myBindAsyncRecord"] = myBindAsyncRecord;
+            }
+        );
 
         var requestDelegate = resultFactory.RequestDelegate;
 
         await requestDelegate(httpContext);
 
-        Assert.Equal(new MyBindAsyncRecord(new Uri("https://example.org")), httpContext.Items["myBindAsyncRecord"]);
+        Assert.Equal(
+            new MyBindAsyncRecord(new Uri("https://example.org")),
+            httpContext.Items["myBindAsyncRecord"]
+        );
     }
 
     [Fact]
@@ -1099,15 +1432,20 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         httpContext.Request.Headers.Referer = "https://example.org";
 
-        var resultFactory = RequestDelegateFactory.Create((HttpContext httpContext, MyBindAsyncStruct myBindAsyncStruct) =>
-        {
-            httpContext.Items["myBindAsyncStruct"] = myBindAsyncStruct;
-        });
+        var resultFactory = RequestDelegateFactory.Create(
+            (HttpContext httpContext, MyBindAsyncStruct myBindAsyncStruct) =>
+            {
+                httpContext.Items["myBindAsyncStruct"] = myBindAsyncStruct;
+            }
+        );
 
         var requestDelegate = resultFactory.RequestDelegate;
         await requestDelegate(httpContext);
 
-        Assert.Equal(new MyBindAsyncStruct(new Uri("https://example.org")), httpContext.Items["myBindAsyncStruct"]);
+        Assert.Equal(
+            new MyBindAsyncStruct(new Uri("https://example.org")),
+            httpContext.Items["myBindAsyncStruct"]
+        );
     }
 
     [Fact]
@@ -1117,15 +1455,20 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         httpContext.Request.Headers.Referer = "https://example.org";
 
-        var resultFactory = RequestDelegateFactory.Create((HttpContext httpContext, MyBindAsyncStruct? myBindAsyncStruct) =>
-        {
-            httpContext.Items["myBindAsyncStruct"] = myBindAsyncStruct;
-        });
+        var resultFactory = RequestDelegateFactory.Create(
+            (HttpContext httpContext, MyBindAsyncStruct? myBindAsyncStruct) =>
+            {
+                httpContext.Items["myBindAsyncStruct"] = myBindAsyncStruct;
+            }
+        );
 
         var requestDelegate = resultFactory.RequestDelegate;
         await requestDelegate(httpContext);
 
-        Assert.Equal(new MyBindAsyncStruct(new Uri("https://example.org")), httpContext.Items["myBindAsyncStruct"]);
+        Assert.Equal(
+            new MyBindAsyncStruct(new Uri("https://example.org")),
+            httpContext.Items["myBindAsyncStruct"]
+        );
     }
 
     [Fact]
@@ -1135,35 +1478,47 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         httpContext.Request.Headers.Referer = "https://example.org";
 
-        var resultFactory = RequestDelegateFactory.Create((HttpContext httpContext, MyBothBindAsyncStruct? myBothBindAsyncStruct) =>
-        {
-            httpContext.Items["myBothBindAsyncStruct"] = myBothBindAsyncStruct;
-        });
+        var resultFactory = RequestDelegateFactory.Create(
+            (HttpContext httpContext, MyBothBindAsyncStruct? myBothBindAsyncStruct) =>
+            {
+                httpContext.Items["myBothBindAsyncStruct"] = myBothBindAsyncStruct;
+            }
+        );
 
         var requestDelegate = resultFactory.RequestDelegate;
         await requestDelegate(httpContext);
 
-        Assert.Equal(new MyBothBindAsyncStruct(new Uri("https://example.org")), httpContext.Items["myBothBindAsyncStruct"]);
+        Assert.Equal(
+            new MyBothBindAsyncStruct(new Uri("https://example.org")),
+            httpContext.Items["myBothBindAsyncStruct"]
+        );
     }
 
     [Fact]
     public async Task RequestDelegateUsesTryParseOverBindAsyncGivenExplicitAttribute()
     {
-        var fromRouteFactoryResult = RequestDelegateFactory.Create((HttpContext httpContext, [FromRoute] MyBindAsyncRecord myBindAsyncRecord) => { });
-        var fromQueryFactoryResult = RequestDelegateFactory.Create((HttpContext httpContext, [FromQuery] MyBindAsyncRecord myBindAsyncRecord) => { });
+        var fromRouteFactoryResult = RequestDelegateFactory.Create(
+            (HttpContext httpContext, [FromRoute] MyBindAsyncRecord myBindAsyncRecord) => { }
+        );
+        var fromQueryFactoryResult = RequestDelegateFactory.Create(
+            (HttpContext httpContext, [FromQuery] MyBindAsyncRecord myBindAsyncRecord) => { }
+        );
 
         var httpContext = CreateHttpContext();
         httpContext.Request.RouteValues["myBindAsyncRecord"] = "foo";
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["myBindAsyncRecord"] = "foo"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["myBindAsyncRecord"] = "foo" }
+        );
 
         var fromRouteRequestDelegate = fromRouteFactoryResult.RequestDelegate;
         var fromQueryRequestDelegate = fromQueryFactoryResult.RequestDelegate;
 
-        await Assert.ThrowsAsync<NotImplementedException>(() => fromRouteRequestDelegate(httpContext));
-        await Assert.ThrowsAsync<NotImplementedException>(() => fromQueryRequestDelegate(httpContext));
+        await Assert.ThrowsAsync<NotImplementedException>(
+            () => fromRouteRequestDelegate(httpContext)
+        );
+        await Assert.ThrowsAsync<NotImplementedException>(
+            () => fromQueryRequestDelegate(httpContext)
+        );
     }
 
     [Fact]
@@ -1174,17 +1529,28 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers.Referer = "https://example.org";
 
         var resultFactory = RequestDelegateFactory.Create(
-            (HttpContext httpContext, MyAwaitedBindAsyncRecord myAwaitedBindAsyncRecord, MyAwaitedBindAsyncStruct myAwaitedBindAsyncStruct) =>
+            (
+                HttpContext httpContext,
+                MyAwaitedBindAsyncRecord myAwaitedBindAsyncRecord,
+                MyAwaitedBindAsyncStruct myAwaitedBindAsyncStruct
+            ) =>
             {
                 httpContext.Items["myAwaitedBindAsyncRecord"] = myAwaitedBindAsyncRecord;
                 httpContext.Items["myAwaitedBindAsyncStruct"] = myAwaitedBindAsyncStruct;
-            });
+            }
+        );
 
         var requestDelegate = resultFactory.RequestDelegate;
         await requestDelegate(httpContext);
 
-        Assert.Equal(new MyAwaitedBindAsyncRecord(new Uri("https://example.org")), httpContext.Items["myAwaitedBindAsyncRecord"]);
-        Assert.Equal(new MyAwaitedBindAsyncStruct(new Uri("https://example.org")), httpContext.Items["myAwaitedBindAsyncStruct"]);
+        Assert.Equal(
+            new MyAwaitedBindAsyncRecord(new Uri("https://example.org")),
+            httpContext.Items["myAwaitedBindAsyncRecord"]
+        );
+        Assert.Equal(
+            new MyAwaitedBindAsyncStruct(new Uri("https://example.org")),
+            httpContext.Items["myAwaitedBindAsyncStruct"]
+        );
     }
 
     [Fact]
@@ -1194,16 +1560,21 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         httpContext.Request.Headers.Referer = "https://example.org";
 
-        var resultFactory = RequestDelegateFactory.Create((HttpContext httpContext, MyBindAsyncFromInterfaceRecord myBindAsyncRecord) =>
-        {
-            httpContext.Items["myBindAsyncFromInterfaceRecord"] = myBindAsyncRecord;
-        });
+        var resultFactory = RequestDelegateFactory.Create(
+            (HttpContext httpContext, MyBindAsyncFromInterfaceRecord myBindAsyncRecord) =>
+            {
+                httpContext.Items["myBindAsyncFromInterfaceRecord"] = myBindAsyncRecord;
+            }
+        );
 
         var requestDelegate = resultFactory.RequestDelegate;
 
         await requestDelegate(httpContext);
 
-        Assert.Equal(new MyBindAsyncFromInterfaceRecord(new Uri("https://example.org")), httpContext.Items["myBindAsyncFromInterfaceRecord"]);
+        Assert.Equal(
+            new MyBindAsyncFromInterfaceRecord(new Uri("https://example.org")),
+            httpContext.Items["myBindAsyncFromInterfaceRecord"]
+        );
     }
 
     public static object[][] DelegatesWithAttributesOnNotTryParsableParameters
@@ -1216,19 +1587,26 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
             return new[]
             {
-                    new object[] { (Action<object>)InvalidFromRoute },
-                    new object[] { (Action<object>)InvalidFromQuery },
-                    new object[] { (Action<object>)InvalidFromHeader },
-                };
+                new object[] { (Action<object>)InvalidFromRoute },
+                new object[] { (Action<object>)InvalidFromQuery },
+                new object[] { (Action<object>)InvalidFromHeader },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(DelegatesWithAttributesOnNotTryParsableParameters))]
-    public void CreateThrowsInvalidOperationExceptionWhenAttributeRequiresTryParseMethodThatDoesNotExist(Delegate action)
+    public void CreateThrowsInvalidOperationExceptionWhenAttributeRequiresTryParseMethodThatDoesNotExist(
+        Delegate action
+    )
     {
-        var ex = Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(action));
-        Assert.Equal("No public static bool object.TryParse(string, out object) method found for notTryParsable.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(action)
+        );
+        Assert.Equal(
+            "No public static bool object.TryParse(string, out object) method found for notTryParsable.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -1236,8 +1614,13 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         var unnamedParameter = Expression.Parameter(typeof(int));
         var lambda = Expression.Lambda(Expression.Block(), unnamedParameter);
-        var ex = Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(lambda.Compile()));
-        Assert.Equal("Encountered a parameter of type 'System.Runtime.CompilerServices.Closure' without a name. Parameters must have a name.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(lambda.Compile())
+        );
+        Assert.Equal(
+            "Encountered a parameter of type 'System.Runtime.CompilerServices.Closure' without a name. Parameters must have a name.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -1270,11 +1653,17 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         Assert.Equal(new EventId(3, "ParameterBindingFailed"), logs[0].EventId);
         Assert.Equal(LogLevel.Debug, logs[0].LogLevel);
-        Assert.Equal(@"Failed to bind parameter ""int tryParsable"" from ""invalid!"".", logs[0].Message);
+        Assert.Equal(
+            @"Failed to bind parameter ""int tryParsable"" from ""invalid!"".",
+            logs[0].Message
+        );
 
         Assert.Equal(new EventId(3, "ParameterBindingFailed"), logs[1].EventId);
         Assert.Equal(LogLevel.Debug, logs[1].LogLevel);
-        Assert.Equal(@"Failed to bind parameter ""int tryParsable2"" from ""invalid again!"".", logs[1].Message);
+        Assert.Equal(
+            @"Failed to bind parameter ""int tryParsable2"" from ""invalid again!"".",
+            logs[1].Message
+        );
     }
 
     [Fact]
@@ -1291,10 +1680,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.RouteValues["tryParsable"] = "invalid!";
         httpContext.Request.RouteValues["tryParsable2"] = "invalid again!";
 
-        var factoryResult = RequestDelegateFactory.Create(TestAction, new() { ThrowOnBadRequest = true });
+        var factoryResult = RequestDelegateFactory.Create(
+            TestAction,
+            new() { ThrowOnBadRequest = true }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -1306,7 +1700,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Failed to bind parameter ""int tryParsable"" from ""invalid!"".", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Failed to bind parameter ""int tryParsable"" from ""invalid!"".",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
     }
 
@@ -1321,15 +1718,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>()
-        {
-            ["values"] = new(new[] { "1", "NAN", "3" })
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues>() { ["values"] = new(new[] { "1", "NAN", "3" }) }
+        );
 
-        var factoryResult = RequestDelegateFactory.Create(TestAction, new() { ThrowOnBadRequest = true, DisableInferBodyFromParameters = true });
+        var factoryResult = RequestDelegateFactory.Create(
+            TestAction,
+            new() { ThrowOnBadRequest = true, DisableInferBodyFromParameters = true }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -1341,7 +1742,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Failed to bind parameter ""int[] values"" from ""NAN"".", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Failed to bind parameter ""int[] values"" from ""NAN"".",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
     }
 
@@ -1356,15 +1760,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>()
-        {
-            ["values"] = (string?)null
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues>() { ["values"] = (string?)null }
+        );
 
-        var factoryResult = RequestDelegateFactory.Create(StoreNullableIntArray, new() { ThrowOnBadRequest = true, DisableInferBodyFromParameters = true });
+        var factoryResult = RequestDelegateFactory.Create(
+            StoreNullableIntArray,
+            new() { ThrowOnBadRequest = true, DisableInferBodyFromParameters = true }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -1376,7 +1784,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Failed to bind parameter ""Nullable<int>[] values"" from """".", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Failed to bind parameter ""Nullable<int>[] values"" from """".",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
     }
 
@@ -1387,10 +1798,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         var invoked = false;
 
-        var factoryResult = RequestDelegateFactory.Create((MyBindAsyncRecord myBindAsyncRecord1, MyBindAsyncRecord myBindAsyncRecord2) =>
-        {
-            invoked = true;
-        });
+        var factoryResult = RequestDelegateFactory.Create(
+            (MyBindAsyncRecord myBindAsyncRecord1, MyBindAsyncRecord myBindAsyncRecord2) =>
+            {
+                invoked = true;
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
@@ -1405,11 +1818,17 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[0].EventId);
         Assert.Equal(LogLevel.Debug, logs[0].LogLevel);
-        Assert.Equal(@"Required parameter ""MyBindAsyncRecord myBindAsyncRecord1"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).", logs[0].Message);
+        Assert.Equal(
+            @"Required parameter ""MyBindAsyncRecord myBindAsyncRecord1"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).",
+            logs[0].Message
+        );
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[1].EventId);
         Assert.Equal(LogLevel.Debug, logs[1].LogLevel);
-        Assert.Equal(@"Required parameter ""MyBindAsyncRecord myBindAsyncRecord2"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).", logs[1].Message);
+        Assert.Equal(
+            @"Required parameter ""MyBindAsyncRecord myBindAsyncRecord2"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).",
+            logs[1].Message
+        );
     }
 
     [Fact]
@@ -1419,13 +1838,18 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         var invoked = false;
 
-        var factoryResult = RequestDelegateFactory.Create((MyBindAsyncRecord myBindAsyncRecord1, MyBindAsyncRecord myBindAsyncRecord2) =>
-        {
-            invoked = true;
-        }, new() { ThrowOnBadRequest = true });
+        var factoryResult = RequestDelegateFactory.Create(
+            (MyBindAsyncRecord myBindAsyncRecord1, MyBindAsyncRecord myBindAsyncRecord2) =>
+            {
+                invoked = true;
+            },
+            new() { ThrowOnBadRequest = true }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -1437,7 +1861,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Required parameter ""MyBindAsyncRecord myBindAsyncRecord1"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Required parameter ""MyBindAsyncRecord myBindAsyncRecord1"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
     }
 
@@ -1448,11 +1875,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         var invoked = false;
 
-        var factoryResult = RequestDelegateFactory.Create((MySimpleBindAsyncRecord mySimpleBindAsyncRecord1,
-            MySimpleBindAsyncRecord mySimpleBindAsyncRecord2) =>
-        {
-            invoked = true;
-        });
+        var factoryResult = RequestDelegateFactory.Create(
+            (
+                MySimpleBindAsyncRecord mySimpleBindAsyncRecord1,
+                MySimpleBindAsyncRecord mySimpleBindAsyncRecord2
+            ) =>
+            {
+                invoked = true;
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
@@ -1467,11 +1898,17 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[0].EventId);
         Assert.Equal(LogLevel.Debug, logs[0].LogLevel);
-        Assert.Equal(@"Required parameter ""MySimpleBindAsyncRecord mySimpleBindAsyncRecord1"" was not provided from MySimpleBindAsyncRecord.BindAsync(HttpContext).", logs[0].Message);
+        Assert.Equal(
+            @"Required parameter ""MySimpleBindAsyncRecord mySimpleBindAsyncRecord1"" was not provided from MySimpleBindAsyncRecord.BindAsync(HttpContext).",
+            logs[0].Message
+        );
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[1].EventId);
         Assert.Equal(LogLevel.Debug, logs[1].LogLevel);
-        Assert.Equal(@"Required parameter ""MySimpleBindAsyncRecord mySimpleBindAsyncRecord2"" was not provided from MySimpleBindAsyncRecord.BindAsync(HttpContext).", logs[1].Message);
+        Assert.Equal(
+            @"Required parameter ""MySimpleBindAsyncRecord mySimpleBindAsyncRecord2"" was not provided from MySimpleBindAsyncRecord.BindAsync(HttpContext).",
+            logs[1].Message
+        );
     }
 
     [Fact]
@@ -1481,14 +1918,21 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         var invoked = false;
 
-        var factoryResult = RequestDelegateFactory.Create((MySimpleBindAsyncRecord mySimpleBindAsyncRecord1,
-            MySimpleBindAsyncRecord mySimpleBindAsyncRecord2) =>
-        {
-            invoked = true;
-        }, new() { ThrowOnBadRequest = true });
+        var factoryResult = RequestDelegateFactory.Create(
+            (
+                MySimpleBindAsyncRecord mySimpleBindAsyncRecord1,
+                MySimpleBindAsyncRecord mySimpleBindAsyncRecord2
+            ) =>
+            {
+                invoked = true;
+            },
+            new() { ThrowOnBadRequest = true }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -1500,7 +1944,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Required parameter ""MySimpleBindAsyncRecord mySimpleBindAsyncRecord1"" was not provided from MySimpleBindAsyncRecord.BindAsync(HttpContext).", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Required parameter ""MySimpleBindAsyncRecord mySimpleBindAsyncRecord1"" was not provided from MySimpleBindAsyncRecord.BindAsync(HttpContext).",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
     }
 
@@ -1513,17 +1960,16 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => requestDelegate(httpContext));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => requestDelegate(httpContext)
+        );
         Assert.Equal("BindAsync failed", ex.Message);
     }
 
     [Fact]
     public async Task BindAsyncWithBodyArgument()
     {
-        Todo originalTodo = new()
-        {
-            Name = "Write more tests!"
-        };
+        Todo originalTodo = new() { Name = "Write more tests!" };
 
         var httpContext = CreateHttpContext();
 
@@ -1532,33 +1978,40 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var jsonOptions = new JsonOptions();
         jsonOptions.SerializerOptions.Converters.Add(new TodoJsonConverter());
 
         var mock = new Mock<IServiceProvider>();
-        mock.Setup(m => m.GetService(It.IsAny<Type>())).Returns<Type>(t =>
-        {
-            if (t == typeof(IOptions<JsonOptions>))
+        mock.Setup(m => m.GetService(It.IsAny<Type>()))
+            .Returns<Type>(t =>
             {
-                return Options.Create(jsonOptions);
-            }
-            return null;
-        });
+                if (t == typeof(IOptions<JsonOptions>))
+                {
+                    return Options.Create(jsonOptions);
+                }
+                return null;
+            });
 
         httpContext.RequestServices = mock.Object;
         httpContext.Request.Headers.Referer = "https://example.org";
 
         var invoked = false;
 
-        var factoryResult = RequestDelegateFactory.Create((HttpContext context, MyBindAsyncRecord myBindAsyncRecord, Todo todo) =>
-        {
-            invoked = true;
-            context.Items[nameof(myBindAsyncRecord)] = myBindAsyncRecord;
-            context.Items[nameof(todo)] = todo;
-        });
+        var factoryResult = RequestDelegateFactory.Create(
+            (HttpContext context, MyBindAsyncRecord myBindAsyncRecord, Todo todo) =>
+            {
+                invoked = true;
+                context.Items[nameof(myBindAsyncRecord)] = myBindAsyncRecord;
+                context.Items[nameof(todo)] = todo;
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -1576,10 +2029,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Fact]
     public async Task BindAsyncRunsBeforeBodyBinding()
     {
-        Todo originalTodo = new()
-        {
-            Name = "Write more tests!"
-        };
+        Todo originalTodo = new() { Name = "Write more tests!" };
 
         var httpContext = CreateHttpContext();
 
@@ -1588,33 +2038,40 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var jsonOptions = new JsonOptions();
         jsonOptions.SerializerOptions.Converters.Add(new TodoJsonConverter());
 
         var mock = new Mock<IServiceProvider>();
-        mock.Setup(m => m.GetService(It.IsAny<Type>())).Returns<Type>(t =>
-        {
-            if (t == typeof(IOptions<JsonOptions>))
+        mock.Setup(m => m.GetService(It.IsAny<Type>()))
+            .Returns<Type>(t =>
             {
-                return Options.Create(jsonOptions);
-            }
-            return null;
-        });
+                if (t == typeof(IOptions<JsonOptions>))
+                {
+                    return Options.Create(jsonOptions);
+                }
+                return null;
+            });
 
         httpContext.RequestServices = mock.Object;
         httpContext.Request.Headers.Referer = "https://example.org";
 
         var invoked = false;
 
-        var factoryResult = RequestDelegateFactory.Create((HttpContext context, CustomTodo customTodo, Todo todo) =>
-        {
-            invoked = true;
-            context.Items[nameof(customTodo)] = customTodo;
-            context.Items[nameof(todo)] = todo;
-        });
+        var factoryResult = RequestDelegateFactory.Create(
+            (HttpContext context, CustomTodo customTodo, Todo todo) =>
+            {
+                invoked = true;
+                context.Items[nameof(customTodo)] = customTodo;
+                context.Items[nameof(todo)] = todo;
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -1642,10 +2099,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             deserializedRouteParam = value;
         }
 
-        var query = new QueryCollection(new Dictionary<string, StringValues>()
-        {
-            [paramName] = originalQueryParam.ToString(NumberFormatInfo.InvariantInfo)
-        });
+        var query = new QueryCollection(
+            new Dictionary<string, StringValues>()
+            {
+                [paramName] = originalQueryParam.ToString(NumberFormatInfo.InvariantInfo)
+            }
+        );
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Query = query;
@@ -1676,10 +2135,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             deserializedRouteParam = args.Value;
         }
 
-        var query = new QueryCollection(new Dictionary<string, StringValues>()
-        {
-            [paramName] = originalQueryParam.ToString(NumberFormatInfo.InvariantInfo)
-        });
+        var query = new QueryCollection(
+            new Dictionary<string, StringValues>()
+            {
+                [paramName] = originalQueryParam.ToString(NumberFormatInfo.InvariantInfo)
+            }
+        );
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Query = query;
@@ -1706,7 +2167,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.Headers[customHeaderName] = originalHeaderParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.Headers[customHeaderName] = originalHeaderParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -1732,7 +2195,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.Headers[customHeaderName] = originalHeaderParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.Headers[customHeaderName] = originalHeaderParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -1765,18 +2230,24 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 httpContext.Items.Add("body", todo);
             }
 
-            void TestImpliedFromBodyStruct_ParameterList([AsParameters] ParametersListWithImplictFromBody args)
+            void TestImpliedFromBodyStruct_ParameterList(
+                [AsParameters] ParametersListWithImplictFromBody args
+            )
             {
                 args.HttpContext.Items.Add("body", args.Todo);
             }
 
             return new[]
             {
-                    new[] { (Action<HttpContext, Todo>)TestImpliedFromBody },
-                    new[] { (Action<HttpContext, ITodo>)TestImpliedFromBodyInterface },
-                    new object[] { (Action<HttpContext, TodoStruct>)TestImpliedFromBodyStruct },
-                    new object[] { (Action<ParametersListWithImplictFromBody>)TestImpliedFromBodyStruct_ParameterList },
-                };
+                new[] { (Action<HttpContext, Todo>)TestImpliedFromBody },
+                new[] { (Action<HttpContext, ITodo>)TestImpliedFromBodyInterface },
+                new object[] { (Action<HttpContext, TodoStruct>)TestImpliedFromBodyStruct },
+                new object[]
+                {
+                    (Action<ParametersListWithImplictFromBody>)
+                        TestImpliedFromBodyStruct_ParameterList
+                },
+            };
         }
     }
 
@@ -1789,35 +2260,34 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 httpContext.Items.Add("body", todo);
             }
 
-            void TestExplicitFromBody_ParameterList([AsParameters] ParametersListWithExplictFromBody args)
+            void TestExplicitFromBody_ParameterList(
+                [AsParameters] ParametersListWithExplictFromBody args
+            )
             {
                 args.HttpContext.Items.Add("body", args.Todo);
             }
 
             return new[]
             {
-                    new[] { (Action<HttpContext, Todo>)TestExplicitFromBody },
-                    new object[] { (Action<ParametersListWithExplictFromBody>)TestExplicitFromBody_ParameterList },
+                new[] { (Action<HttpContext, Todo>)TestExplicitFromBody },
+                new object[]
+                {
+                    (Action<ParametersListWithExplictFromBody>)TestExplicitFromBody_ParameterList
+                },
             };
         }
     }
 
     public static object[][] FromBodyActions
     {
-        get
-        {
-            return ExplicitFromBodyActions.Concat(ImplicitFromBodyActions).ToArray();
-        }
+        get { return ExplicitFromBodyActions.Concat(ImplicitFromBodyActions).ToArray(); }
     }
 
     [Theory]
     [MemberData(nameof(FromBodyActions))]
     public async Task RequestDelegatePopulatesFromBodyParameter(Delegate action)
     {
-        Todo originalTodo = new()
-        {
-            Name = "Write more tests!"
-        };
+        Todo originalTodo = new() { Name = "Write more tests!" };
 
         var httpContext = CreateHttpContext();
 
@@ -1826,21 +2296,26 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var jsonOptions = new JsonOptions();
         jsonOptions.SerializerOptions.Converters.Add(new TodoJsonConverter());
 
         var mock = new Mock<IServiceProvider>();
-        mock.Setup(m => m.GetService(It.IsAny<Type>())).Returns<Type>(t =>
-        {
-            if (t == typeof(IOptions<JsonOptions>))
+        mock.Setup(m => m.GetService(It.IsAny<Type>()))
+            .Returns<Type>(t =>
             {
-                return Options.Create(jsonOptions);
-            }
-            return null;
-        });
+                if (t == typeof(IOptions<JsonOptions>))
+                {
+                    return Options.Create(jsonOptions);
+                }
+                return null;
+            });
         httpContext.RequestServices = mock.Object;
 
         var factoryResult = RequestDelegateFactory.Create(action);
@@ -1911,16 +2386,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         var httpContext = CreateHttpContext();
 
-        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(new
-        {
-            Name = "Write more tests!"
-        });
+        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
+            new { Name = "Write more tests!" }
+        );
 
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
 
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var mock = new Mock<IServiceProvider>();
         httpContext.RequestServices = mock.Object;
@@ -1957,16 +2435,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         var httpContext = CreateHttpContext();
 
-        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(new
-        {
-            Name = "Write more tests!"
-        });
+        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
+            new { Name = "Write more tests!" }
+        );
 
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
 
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var mock = new Mock<IServiceProvider>();
         httpContext.RequestServices = mock.Object;
@@ -1999,22 +2480,27 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     [Theory]
     [MemberData(nameof(ImplicitRawFromBodyActions))]
-    public async Task RequestDelegatePopulatesFromImplicitRawBodyParameterPipeReader(Delegate action)
+    public async Task RequestDelegatePopulatesFromImplicitRawBodyParameterPipeReader(
+        Delegate action
+    )
     {
         var httpContext = CreateHttpContext();
 
-        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(new
-        {
-            Name = "Write more tests!"
-        });
+        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
+            new { Name = "Write more tests!" }
+        );
 
         var pipeReader = PipeReader.Create(new MemoryStream(requestBodyBytes));
         var stream = pipeReader.AsStream();
         httpContext.Features.Set<IRequestBodyPipeFeature>(new PipeRequestBodyFeature(pipeReader));
         httpContext.Request.Body = stream;
 
-        httpContext.Request.Headers["Content-Length"] = requestBodyBytes.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = requestBodyBytes.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var mock = new Mock<IServiceProvider>();
         httpContext.RequestServices = mock.Object;
@@ -2029,7 +2515,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         Assert.Same(httpContext.Request.BodyReader, pipeReader);
 
         // Assert that we can read the body from both the pipe reader and Stream after executing and verify that they are empty (the pipe reader isn't seekable here)
-        int read = await httpContext.Request.Body.ReadAsync(new byte[requestBodyBytes.Length].AsMemory());
+        int read = await httpContext.Request.Body.ReadAsync(
+            new byte[requestBodyBytes.Length].AsMemory()
+        );
         Assert.Equal(0, read);
 
         var result = await httpContext.Request.BodyReader.ReadAsync();
@@ -2044,22 +2532,27 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     [Theory]
     [MemberData(nameof(ExplicitRawFromBodyActions))]
-    public async Task RequestDelegatePopulatesFromExplicitRawBodyParameterPipeReader(Delegate action)
+    public async Task RequestDelegatePopulatesFromExplicitRawBodyParameterPipeReader(
+        Delegate action
+    )
     {
         var httpContext = CreateHttpContext();
 
-        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(new
-        {
-            Name = "Write more tests!"
-        });
+        var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(
+            new { Name = "Write more tests!" }
+        );
 
         var pipeReader = PipeReader.Create(new MemoryStream(requestBodyBytes));
         var stream = pipeReader.AsStream();
         httpContext.Features.Set<IRequestBodyPipeFeature>(new PipeRequestBodyFeature(pipeReader));
         httpContext.Request.Body = stream;
 
-        httpContext.Request.Headers["Content-Length"] = requestBodyBytes.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = requestBodyBytes.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var mock = new Mock<IServiceProvider>();
         httpContext.RequestServices = mock.Object;
@@ -2074,7 +2567,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         Assert.Same(httpContext.Request.BodyReader, pipeReader);
 
         // Assert that we can read the body from both the pipe reader and Stream after executing and verify that they are empty (the pipe reader isn't seekable here)
-        int read = await httpContext.Request.Body.ReadAsync(new byte[requestBodyBytes.Length].AsMemory());
+        int read = await httpContext.Request.Body.ReadAsync(
+            new byte[requestBodyBytes.Length].AsMemory()
+        );
         Assert.Equal(0, read);
 
         var result = await httpContext.Request.BodyReader.ReadAsync();
@@ -2093,6 +2588,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         {
             Reader = pipeReader;
         }
+
         public PipeReader Reader { get; set; }
     }
 
@@ -2103,7 +2599,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "0";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(false));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(false)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(action);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -2120,18 +2618,28 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "0";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(false));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(false)
+        );
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton(LoggerFactory);
         httpContext.RequestServices = serviceCollection.BuildServiceProvider();
 
-        var factoryResult = RequestDelegateFactory.Create(action, new RequestDelegateFactoryOptions() { ThrowOnBadRequest = true });
+        var factoryResult = RequestDelegateFactory.Create(
+            action,
+            new RequestDelegateFactoryOptions() { ThrowOnBadRequest = true }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() => requestDelegate(httpContext));
+        var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
         Assert.StartsWith("Implicit body inferred for parameter", ex.Message);
-        Assert.EndsWith("but no body was provided. Did you mean to use a Service instead?", ex.Message);
+        Assert.EndsWith(
+            "but no body was provided. Did you mean to use a Service instead?",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -2159,10 +2667,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Fact]
     public async Task RequestDelegateAllowsEmptyBodyStructGivenCorrectyConfiguredFromBodyParameter()
     {
-        var structToBeZeroed = new BodyStruct
-        {
-            Id = 42
-        };
+        var structToBeZeroed = new BodyStruct { Id = 42 };
 
         void TestAction([FromBody(AllowEmpty = true)] BodyStruct bodyStruct)
         {
@@ -2188,9 +2693,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         Span<byte> Method2() => "hello world"u8.ToArray();
         RefStruct Method3() => new("hello world"u8);
 
-        var ex1 = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(Method1));
-        var ex2 = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(Method2));
-        var ex3 = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(Method3));
+        var ex1 = Assert.Throws<NotSupportedException>(
+            () => RequestDelegateFactory.Create(Method1)
+        );
+        var ex2 = Assert.Throws<NotSupportedException>(
+            () => RequestDelegateFactory.Create(Method2)
+        );
+        var ex3 = Assert.Throws<NotSupportedException>(
+            () => RequestDelegateFactory.Create(Method3)
+        );
 
         Assert.Equal("Unsupported return type: System.ReadOnlySpan<byte>", ex1.Message);
         Assert.Equal("Unsupported return type: System.Span<byte>", ex2.Message);
@@ -2210,7 +2721,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task RequestDelegateLogsIOExceptionsAsDebugDoesNotAbortAndNeverThrows(bool throwOnBadRequests)
+    public async Task RequestDelegateLogsIOExceptionsAsDebugDoesNotAbortAndNeverThrows(
+        bool throwOnBadRequests
+    )
     {
         var invoked = false;
 
@@ -2225,9 +2738,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(ioException);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
-        var factoryResult = RequestDelegateFactory.Create(TestAction, new() { ThrowOnBadRequest = throwOnBadRequests });
+        var factoryResult = RequestDelegateFactory.Create(
+            TestAction,
+            new() { ThrowOnBadRequest = throwOnBadRequests }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
         await requestDelegate(httpContext);
@@ -2258,7 +2776,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(jsonException);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -2273,7 +2793,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var logMessage = Assert.Single(TestSink.Writes);
         Assert.Equal(new EventId(2, "InvalidJsonRequestBody"), logMessage.EventId);
         Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
-        Assert.Equal(@"Failed to read parameter ""Todo todo"" from the request body as JSON.", logMessage.Message);
+        Assert.Equal(
+            @"Failed to read parameter ""Todo todo"" from the request body as JSON.",
+            logMessage.Message
+        );
         Assert.Same(jsonException, logMessage.Exception);
     }
 
@@ -2293,12 +2816,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(jsonException);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
-        var factoryResult = RequestDelegateFactory.Create(TestAction, new() { ThrowOnBadRequest = true });
+        var factoryResult = RequestDelegateFactory.Create(
+            TestAction,
+            new() { ThrowOnBadRequest = true }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -2310,7 +2840,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Failed to read parameter ""Todo todo"" from the request body as JSON.", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Failed to read parameter ""Todo todo"" from the request body as JSON.",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
         Assert.Same(jsonException, badHttpRequestException.InnerException);
     }
@@ -2329,7 +2862,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{"));
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -2344,7 +2879,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var logMessage = Assert.Single(TestSink.Writes);
         Assert.Equal(new EventId(2, "InvalidJsonRequestBody"), logMessage.EventId);
         Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
-        Assert.Equal(@"Failed to read parameter ""Todo todo"" from the request body as JSON.", logMessage.Message);
+        Assert.Equal(
+            @"Failed to read parameter ""Todo todo"" from the request body as JSON.",
+            logMessage.Message
+        );
         Assert.IsType<JsonException>(logMessage.Exception);
     }
 
@@ -2362,12 +2900,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{"));
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
-        var factoryResult = RequestDelegateFactory.Create(TestAction, new() { ThrowOnBadRequest = true });
+        var factoryResult = RequestDelegateFactory.Create(
+            TestAction,
+            new() { ThrowOnBadRequest = true }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -2379,7 +2924,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Failed to read parameter ""Todo todo"" from the request body as JSON.", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Failed to read parameter ""Todo todo"" from the request body as JSON.",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
         Assert.IsType<JsonException>(badHttpRequestException.InnerException);
     }
@@ -2391,9 +2939,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         void TestInferredInvalidAction(Todo value1, Todo value2) { }
         void TestBothInvalidAction(Todo value1, [FromBody] int value2) { }
 
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestAttributedInvalidAction));
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestInferredInvalidAction));
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestBothInvalidAction));
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestAttributedInvalidAction)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestInferredInvalidAction)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestBothInvalidAction)
+        );
     }
 
     [Fact]
@@ -2402,8 +2956,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         void TestTryParseStruct(BadTryParseStruct value1) { }
         void TestTryParseClass(BadTryParseClass value1) { }
 
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestTryParseStruct));
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestTryParseClass));
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestTryParseStruct)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestTryParseClass)
+        );
     }
 
     private struct BadTryParseStruct
@@ -2425,20 +2983,28 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         void TestBindAsyncStruct(BadBindAsyncStruct value1) { }
         void TestBindAsyncClass(BadBindAsyncClass value1) { }
 
-        var ex = Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestBindAsyncStruct));
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestBindAsyncClass));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestBindAsyncStruct)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestBindAsyncClass)
+        );
     }
 
     private struct BadBindAsyncStruct
     {
-        public static Task<BadBindAsyncStruct> BindAsync(HttpContext context, ParameterInfo parameter) =>
-            throw new NotImplementedException();
+        public static Task<BadBindAsyncStruct> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        ) => throw new NotImplementedException();
     }
 
     private class BadBindAsyncClass
     {
-        public static Task<BadBindAsyncClass> BindAsync(HttpContext context, ParameterInfo parameter) =>
-            throw new NotImplementedException();
+        public static Task<BadBindAsyncClass> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        ) => throw new NotImplementedException();
     }
 
     public static object[][] BadArgumentListActions
@@ -2447,29 +3013,55 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         {
             void TestParameterListRecord([AsParameters] BadArgumentListRecord req) { }
             void TestParameterListClass([AsParameters] BadArgumentListClass req) { }
-            void TestParameterListClassWithMutipleConstructors([AsParameters] BadArgumentListClassMultipleCtors req) { }
+            void TestParameterListClassWithMutipleConstructors(
+                [AsParameters] BadArgumentListClassMultipleCtors req
+            ) { }
             void TestParameterListAbstractClass([AsParameters] BadAbstractArgumentListClass req) { }
-            void TestParameterListNoPulicConstructorClass([AsParameters] BadNoPublicConstructorArgumentListClass req) { }
+            void TestParameterListNoPulicConstructorClass(
+                [AsParameters] BadNoPublicConstructorArgumentListClass req
+            ) { }
 
-            static string GetMultipleContructorsError(Type type)
-                => $"Only a single public parameterized constructor is allowed for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'.";
+            static string GetMultipleContructorsError(Type type) =>
+                $"Only a single public parameterized constructor is allowed for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'.";
 
-            static string GetAbstractClassError(Type type)
-                => $"The abstract type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}' is not supported.";
+            static string GetAbstractClassError(Type type) =>
+                $"The abstract type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}' is not supported.";
 
-            static string GetNoContructorsError(Type type)
-                => $"No public parameterless constructor found for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'.";
+            static string GetNoContructorsError(Type type) =>
+                $"No public parameterless constructor found for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'.";
 
-            static string GetInvalidConstructorError(Type type)
-                => $"The public parameterized constructor must contain only parameters that match the declared public properties for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'.";
+            static string GetInvalidConstructorError(Type type) =>
+                $"The public parameterized constructor must contain only parameters that match the declared public properties for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'.";
 
             return new object[][]
             {
-                    new object[] { (Action<BadArgumentListRecord>)TestParameterListRecord, GetMultipleContructorsError(typeof(BadArgumentListRecord)) },
-                    new object[] { (Action<BadArgumentListClass>)TestParameterListClass, GetInvalidConstructorError(typeof(BadArgumentListClass)) },
-                    new object[] { (Action<BadArgumentListClassMultipleCtors>)TestParameterListClassWithMutipleConstructors, GetMultipleContructorsError(typeof(BadArgumentListClassMultipleCtors))  },
-                    new object[] { (Action<BadAbstractArgumentListClass>)TestParameterListAbstractClass, GetAbstractClassError(typeof(BadAbstractArgumentListClass)) },
-                    new object[] { (Action<BadNoPublicConstructorArgumentListClass>)TestParameterListNoPulicConstructorClass, GetNoContructorsError(typeof(BadNoPublicConstructorArgumentListClass)) },
+                new object[]
+                {
+                    (Action<BadArgumentListRecord>)TestParameterListRecord,
+                    GetMultipleContructorsError(typeof(BadArgumentListRecord))
+                },
+                new object[]
+                {
+                    (Action<BadArgumentListClass>)TestParameterListClass,
+                    GetInvalidConstructorError(typeof(BadArgumentListClass))
+                },
+                new object[]
+                {
+                    (Action<BadArgumentListClassMultipleCtors>)
+                        TestParameterListClassWithMutipleConstructors,
+                    GetMultipleContructorsError(typeof(BadArgumentListClassMultipleCtors))
+                },
+                new object[]
+                {
+                    (Action<BadAbstractArgumentListClass>)TestParameterListAbstractClass,
+                    GetAbstractClassError(typeof(BadAbstractArgumentListClass))
+                },
+                new object[]
+                {
+                    (Action<BadNoPublicConstructorArgumentListClass>)
+                        TestParameterListNoPulicConstructorClass,
+                    GetNoContructorsError(typeof(BadNoPublicConstructorArgumentListClass))
+                },
             };
         }
     }
@@ -2478,26 +3070,25 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [MemberData(nameof(BadArgumentListActions))]
     public void BuildRequestDelegateThrowsInvalidOperationExceptionForInvalidParameterListConstructor(
         Delegate @delegate,
-        string errorMessage)
+        string errorMessage
+    )
     {
-        var exception = Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(@delegate));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(@delegate)
+        );
         Assert.Equal(errorMessage, exception.Message);
     }
 
     private record BadArgumentListRecord(int Foo)
     {
-        public BadArgumentListRecord(int foo, int bar)
-            : this(foo)
-        {
-        }
+        public BadArgumentListRecord(int foo, int bar) : this(foo) { }
 
         public int Bar { get; set; }
     }
 
     private class BadNoPublicConstructorArgumentListClass
     {
-        private BadNoPublicConstructorArgumentListClass()
-        { }
+        private BadNoPublicConstructorArgumentListClass() { }
 
         public int Foo { get; set; }
     }
@@ -2509,9 +3100,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private class BadArgumentListClass
     {
-        public BadArgumentListClass(int foo, string name)
-        {
-        }
+        public BadArgumentListClass(int foo, string name) { }
 
         public int Foo { get; set; }
         public int Bar { get; set; }
@@ -2519,13 +3108,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private class BadArgumentListClassMultipleCtors
     {
-        public BadArgumentListClassMultipleCtors(int foo)
-        {
-        }
+        public BadArgumentListClassMultipleCtors(int foo) { }
 
-        public BadArgumentListClassMultipleCtors(int foo, int bar)
-        {
-        }
+        public BadArgumentListClassMultipleCtors(int foo, int bar) { }
 
         public int Foo { get; set; }
         public int Bar { get; set; }
@@ -2547,15 +3132,27 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void BuildRequestDelegateThrowsNotSupportedExceptionForNestedParametersList()
     {
         void TestNestedParameterListRecordOnType([AsParameters] NestedArgumentListRecord req) { }
-        void TestNestedParameterListRecordOnArgument([AsParameters] ClassWithParametersConstructor req) { }
+        void TestNestedParameterListRecordOnArgument(
+            [AsParameters] ClassWithParametersConstructor req
+        ) { }
 
-        Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(TestNestedParameterListRecordOnType));
-        Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(TestNestedParameterListRecordOnArgument));
+        Assert.Throws<NotSupportedException>(
+            () => RequestDelegateFactory.Create(TestNestedParameterListRecordOnType)
+        );
+        Assert.Throws<NotSupportedException>(
+            () => RequestDelegateFactory.Create(TestNestedParameterListRecordOnArgument)
+        );
     }
 
-    private record ParametersListWithImplictFromService(HttpContext HttpContext, IMyService MyService);
+    private record ParametersListWithImplictFromService(
+        HttpContext HttpContext,
+        IMyService MyService
+    );
 
-    private record ParametersListWithExplictFromService(HttpContext HttpContext, [FromService] MyService MyService);
+    private record ParametersListWithExplictFromService(
+        HttpContext HttpContext,
+        [FromService] MyService MyService
+    );
 
     public static object[][] ExplicitFromServiceActions
     {
@@ -2566,27 +3163,47 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 httpContext.Items.Add("service", myService);
             }
 
-            void TestExplicitFromService_FromParameterList([AsParameters] ParametersListWithExplictFromService args)
+            void TestExplicitFromService_FromParameterList(
+                [AsParameters] ParametersListWithExplictFromService args
+            )
             {
                 args.HttpContext.Items.Add("service", args.MyService);
             }
 
-            void TestExplicitFromIEnumerableService(HttpContext httpContext, [FromService] IEnumerable<MyService> myServices)
+            void TestExplicitFromIEnumerableService(
+                HttpContext httpContext,
+                [FromService] IEnumerable<MyService> myServices
+            )
             {
                 httpContext.Items.Add("service", myServices.Single());
             }
 
-            void TestExplicitMultipleFromService(HttpContext httpContext, [FromService] MyService myService, [FromService] IEnumerable<MyService> myServices)
+            void TestExplicitMultipleFromService(
+                HttpContext httpContext,
+                [FromService] MyService myService,
+                [FromService] IEnumerable<MyService> myServices
+            )
             {
                 httpContext.Items.Add("service", myService);
             }
 
             return new object[][]
             {
-                    new[] { (Action<HttpContext, MyService>)TestExplicitFromService },
-                    new object[] { (Action<ParametersListWithExplictFromService>)TestExplicitFromService_FromParameterList },
-                    new[] { (Action<HttpContext, IEnumerable<MyService>>)TestExplicitFromIEnumerableService },
-                    new[] { (Action<HttpContext, MyService, IEnumerable<MyService>>)TestExplicitMultipleFromService },
+                new[] { (Action<HttpContext, MyService>)TestExplicitFromService },
+                new object[]
+                {
+                    (Action<ParametersListWithExplictFromService>)
+                        TestExplicitFromService_FromParameterList
+                },
+                new[]
+                {
+                    (Action<HttpContext, IEnumerable<MyService>>)TestExplicitFromIEnumerableService
+                },
+                new[]
+                {
+                    (Action<HttpContext, MyService, IEnumerable<MyService>>)
+                        TestExplicitMultipleFromService
+                },
             };
         }
     }
@@ -2600,60 +3217,92 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 httpContext.Items.Add("service", myService);
             }
 
-            void TestImpliedFromService_FromParameterList([AsParameters] ParametersListWithImplictFromService args)
+            void TestImpliedFromService_FromParameterList(
+                [AsParameters] ParametersListWithImplictFromService args
+            )
             {
                 args.HttpContext.Items.Add("service", args.MyService);
             }
 
-            void TestImpliedIEnumerableFromService(HttpContext httpContext, IEnumerable<MyService> myServices)
+            void TestImpliedIEnumerableFromService(
+                HttpContext httpContext,
+                IEnumerable<MyService> myServices
+            )
             {
                 httpContext.Items.Add("service", myServices.Single());
             }
 
-            void TestImpliedFromServiceBasedOnContainer(HttpContext httpContext, MyService myService)
+            void TestImpliedFromServiceBasedOnContainer(
+                HttpContext httpContext,
+                MyService myService
+            )
             {
                 httpContext.Items.Add("service", myService);
             }
 
             return new object[][]
             {
-                    new[] { (Action<HttpContext, IMyService>)TestImpliedFromService },
-                    new object[] { (Action<ParametersListWithImplictFromService>)TestImpliedFromService_FromParameterList },
-                    new[] { (Action<HttpContext, IEnumerable<MyService>>)TestImpliedIEnumerableFromService },
-                    new[] { (Action<HttpContext, MyService>)TestImpliedFromServiceBasedOnContainer },
+                new[] { (Action<HttpContext, IMyService>)TestImpliedFromService },
+                new object[]
+                {
+                    (Action<ParametersListWithImplictFromService>)
+                        TestImpliedFromService_FromParameterList
+                },
+                new[]
+                {
+                    (Action<HttpContext, IEnumerable<MyService>>)TestImpliedIEnumerableFromService
+                },
+                new[] { (Action<HttpContext, MyService>)TestImpliedFromServiceBasedOnContainer },
             };
         }
     }
 
     public static object[][] FromServiceActions
     {
-        get
-        {
-            return ImplicitFromServiceActions.Concat(ExplicitFromServiceActions).ToArray();
-        }
+        get { return ImplicitFromServiceActions.Concat(ExplicitFromServiceActions).ToArray(); }
     }
 
     [Fact]
     public void BuildRequestDelegateThrowsNotSupportedExceptionForByRefParameters()
     {
-        void OutMethod(out string foo) { foo = ""; }
+        void OutMethod(out string foo)
+        {
+            foo = "";
+        }
         void InMethod(in string foo) { }
         void RefMethod(ref string foo) { }
 
-        var outParamException = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(OutMethod));
-        var inParamException = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(InMethod));
-        var refParamException = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(RefMethod));
+        var outParamException = Assert.Throws<NotSupportedException>(
+            () => RequestDelegateFactory.Create(OutMethod)
+        );
+        var inParamException = Assert.Throws<NotSupportedException>(
+            () => RequestDelegateFactory.Create(InMethod)
+        );
+        var refParamException = Assert.Throws<NotSupportedException>(
+            () => RequestDelegateFactory.Create(RefMethod)
+        );
 
         var typeName = typeof(string).MakeByRefType().Name;
 
-        Assert.Equal($"The by reference parameter 'out {typeName} foo' is not supported.", outParamException.Message);
-        Assert.Equal($"The by reference parameter 'in {typeName} foo' is not supported.", inParamException.Message);
-        Assert.Equal($"The by reference parameter 'ref {typeName} foo' is not supported.", refParamException.Message);
+        Assert.Equal(
+            $"The by reference parameter 'out {typeName} foo' is not supported.",
+            outParamException.Message
+        );
+        Assert.Equal(
+            $"The by reference parameter 'in {typeName} foo' is not supported.",
+            inParamException.Message
+        );
+        Assert.Equal(
+            $"The by reference parameter 'ref {typeName} foo' is not supported.",
+            refParamException.Message
+        );
     }
 
     [Theory]
     [MemberData(nameof(ImplicitFromServiceActions))]
-    public async Task RequestDelegateRequiresServiceForAllImplicitFromServiceParameters(Delegate action)
+    public async Task RequestDelegateRequiresServiceForAllImplicitFromServiceParameters(
+        Delegate action
+    )
     {
         var httpContext = CreateHttpContext();
 
@@ -2664,7 +3313,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         var message = Assert.Single(TestSink.Writes).Message;
         Assert.StartsWith("Implicit body inferred for parameter", message);
-        Assert.EndsWith("but no body was provided. Did you mean to use a Service instead?", message);
+        Assert.EndsWith(
+            "but no body was provided. Did you mean to use a Service instead?",
+            message
+        );
     }
 
     [Theory]
@@ -2672,7 +3324,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public async Task RequestDelegateWithExplicitFromServiceParameters(Delegate action)
     {
         // IEnumerable<T> always resolves from DI but is empty and throws from test method
-        if (action.Method.Name.Contains("TestExplicitFromIEnumerableService", StringComparison.Ordinal))
+        if (
+            action.Method.Name.Contains(
+                "TestExplicitFromIEnumerableService",
+                StringComparison.Ordinal
+            )
+        )
         {
             return;
         }
@@ -2680,13 +3337,20 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
 
         var requestDelegateResult = RequestDelegateFactory.Create(action);
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => requestDelegateResult.RequestDelegate(httpContext));
-        Assert.Equal("No service for type 'Microsoft.AspNetCore.Routing.Internal.RequestDelegateFactoryTests+MyService' has been registered.", ex.Message);
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => requestDelegateResult.RequestDelegate(httpContext)
+        );
+        Assert.Equal(
+            "No service for type 'Microsoft.AspNetCore.Routing.Internal.RequestDelegateFactoryTests+MyService' has been registered.",
+            ex.Message
+        );
     }
 
     [Theory]
     [MemberData(nameof(FromServiceActions))]
-    public async Task RequestDelegatePopulatesParametersFromServiceWithAndWithoutAttribute(Delegate action)
+    public async Task RequestDelegatePopulatesParametersFromServiceWithAndWithoutAttribute(
+        Delegate action
+    )
     {
         var myOriginalService = new MyService();
 
@@ -2702,7 +3366,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.RequestServices = requestScoped.ServiceProvider;
 
-        var factoryResult = RequestDelegateFactory.Create(action, options: new() { ServiceProvider = services });
+        var factoryResult = RequestDelegateFactory.Create(
+            action,
+            options: new() { ServiceProvider = services }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
         await requestDelegate(httpContext);
@@ -2734,7 +3401,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         HttpContext HttpContext,
         ClaimsPrincipal User,
         HttpRequest HttpRequest,
-        HttpResponse HttpResponse);
+        HttpResponse HttpResponse
+    );
 
     [Fact]
     public async Task RequestDelegatePopulatesHttpContextParameterWithoutAttribute_FromParameterList()
@@ -2906,28 +3574,27 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            Todo originalTodo = new()
-            {
-                Name = "Write even more tests!"
-            };
+            Todo originalTodo = new() { Name = "Write even more tests!" };
 
             Todo TestAction() => originalTodo;
             Task<Todo> TaskTestAction() => Task.FromResult(originalTodo);
             ValueTask<Todo> ValueTaskTestAction() => ValueTask.FromResult(originalTodo);
 
             static Todo StaticTestAction() => new Todo { Name = "Write even more tests!" };
-            static Task<Todo> StaticTaskTestAction() => Task.FromResult(new Todo { Name = "Write even more tests!" });
-            static ValueTask<Todo> StaticValueTaskTestAction() => ValueTask.FromResult(new Todo { Name = "Write even more tests!" });
+            static Task<Todo> StaticTaskTestAction() =>
+                Task.FromResult(new Todo { Name = "Write even more tests!" });
+            static ValueTask<Todo> StaticValueTaskTestAction() =>
+                ValueTask.FromResult(new Todo { Name = "Write even more tests!" });
 
             return new List<object[]>
-                {
-                    new object[] { (Func<Todo>)TestAction },
-                    new object[] { (Func<Task<Todo>>)TaskTestAction},
-                    new object[] { (Func<ValueTask<Todo>>)ValueTaskTestAction},
-                    new object[] { (Func<Todo>)StaticTestAction},
-                    new object[] { (Func<Task<Todo>>)StaticTaskTestAction},
-                    new object[] { (Func<ValueTask<Todo>>)StaticValueTaskTestAction},
-                };
+            {
+                new object[] { (Func<Todo>)TestAction },
+                new object[] { (Func<Task<Todo>>)TaskTestAction },
+                new object[] { (Func<ValueTask<Todo>>)ValueTaskTestAction },
+                new object[] { (Func<Todo>)StaticTestAction },
+                new object[] { (Func<Task<Todo>>)StaticTaskTestAction },
+                new object[] { (Func<ValueTask<Todo>>)StaticValueTaskTestAction },
+            };
         }
     }
 
@@ -2944,10 +3611,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         await requestDelegate(httpContext);
 
-        var deserializedResponseBody = JsonSerializer.Deserialize<Todo>(responseBodyStream.ToArray(), new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        var deserializedResponseBody = JsonSerializer.Deserialize<Todo>(
+            responseBodyStream.ToArray(),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
 
         Assert.NotNull(deserializedResponseBody);
         Assert.Equal("Write even more tests!", deserializedResponseBody!.Name);
@@ -2957,11 +3624,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            TodoChild originalTodo = new()
-            {
-                Name = "Write even more tests!",
-                Child = "With type hierarchies!",
-            };
+            TodoChild originalTodo =
+                new() { Name = "Write even more tests!", Child = "With type hierarchies!", };
 
             Todo TestAction() => originalTodo;
 
@@ -2980,19 +3644,21 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             }
 
             return new List<object[]>
-                {
-                    new object[] { (Func<Todo>)TestAction },
-                    new object[] { (Func<Task<Todo>>)TaskTestAction},
-                    new object[] { (Func<Task<Todo>>)TaskTestActionAwaited},
-                    new object[] { (Func<ValueTask<Todo>>)ValueTaskTestAction},
-                    new object[] { (Func<ValueTask<Todo>>)ValueTaskTestActionAwaited},
-                };
+            {
+                new object[] { (Func<Todo>)TestAction },
+                new object[] { (Func<Task<Todo>>)TaskTestAction },
+                new object[] { (Func<Task<Todo>>)TaskTestActionAwaited },
+                new object[] { (Func<ValueTask<Todo>>)ValueTaskTestAction },
+                new object[] { (Func<ValueTask<Todo>>)ValueTaskTestActionAwaited },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(ChildResult))]
-    public async Task RequestDelegateWritesMembersFromChildTypesToJsonResponseBody(Delegate @delegate)
+    public async Task RequestDelegateWritesMembersFromChildTypesToJsonResponseBody(
+        Delegate @delegate
+    )
     {
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
@@ -3003,10 +3669,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         await requestDelegate(httpContext);
 
-        var deserializedResponseBody = JsonSerializer.Deserialize<TodoChild>(responseBodyStream.ToArray(), new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        var deserializedResponseBody = JsonSerializer.Deserialize<TodoChild>(
+            responseBodyStream.ToArray(),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
 
         Assert.NotNull(deserializedResponseBody);
         Assert.Equal("Write even more tests!", deserializedResponseBody!.Name);
@@ -3015,20 +3681,18 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     public static IEnumerable<object[]> JsonContextActions
     {
-        get
-        {
-            return ComplexResult.Concat(ChildResult);
-        }
+        get { return ComplexResult.Concat(ChildResult); }
     }
 
     [JsonSerializable(typeof(Todo))]
     [JsonSerializable(typeof(TodoChild))]
-    private partial class TestJsonContext : JsonSerializerContext
-    { }
+    private partial class TestJsonContext : JsonSerializerContext { }
 
     [Theory]
     [MemberData(nameof(JsonContextActions))]
-    public async Task RequestDelegateWritesAsJsonResponseBody_WithJsonSerializerContext(Delegate @delegate)
+    public async Task RequestDelegateWritesAsJsonResponseBody_WithJsonSerializerContext(
+        Delegate @delegate
+    )
     {
         var httpContext = CreateHttpContext();
         httpContext.RequestServices = new ServiceCollection()
@@ -3044,10 +3708,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         await requestDelegate(httpContext);
 
-        var deserializedResponseBody = JsonSerializer.Deserialize<Todo>(responseBodyStream.ToArray(), new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        var deserializedResponseBody = JsonSerializer.Deserialize<Todo>(
+            responseBodyStream.ToArray(),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
 
         Assert.NotNull(deserializedResponseBody);
         Assert.Equal("Write even more tests!", deserializedResponseBody!.Name);
@@ -3061,41 +3725,45 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
             CustomResult TestAction() => new CustomResult(resultString);
             Task<CustomResult> TaskTestAction() => Task.FromResult(new CustomResult(resultString));
-            ValueTask<CustomResult> ValueTaskTestAction() => ValueTask.FromResult(new CustomResult(resultString));
+            ValueTask<CustomResult> ValueTaskTestAction() =>
+                ValueTask.FromResult(new CustomResult(resultString));
 
             static CustomResult StaticTestAction() => new CustomResult("Still not enough tests!");
-            static Task<CustomResult> StaticTaskTestAction() => Task.FromResult(new CustomResult("Still not enough tests!"));
-            static ValueTask<CustomResult> StaticValueTaskTestAction() => ValueTask.FromResult(new CustomResult("Still not enough tests!"));
+            static Task<CustomResult> StaticTaskTestAction() =>
+                Task.FromResult(new CustomResult("Still not enough tests!"));
+            static ValueTask<CustomResult> StaticValueTaskTestAction() =>
+                ValueTask.FromResult(new CustomResult("Still not enough tests!"));
 
             // Object return type where the object is IResult
             static object StaticResultAsObject() => new CustomResult("Still not enough tests!");
 
             // Task<object> return type
-            static Task<object> StaticTaskOfIResultAsObject() => Task.FromResult<object>(new CustomResult("Still not enough tests!"));
-            static ValueTask<object> StaticValueTaskOfIResultAsObject() => ValueTask.FromResult<object>(new CustomResult("Still not enough tests!"));
+            static Task<object> StaticTaskOfIResultAsObject() =>
+                Task.FromResult<object>(new CustomResult("Still not enough tests!"));
+            static ValueTask<object> StaticValueTaskOfIResultAsObject() =>
+                ValueTask.FromResult<object>(new CustomResult("Still not enough tests!"));
 
             StructResult TestStructAction() => new StructResult(resultString);
-            Task<StructResult> TaskTestStructAction() => Task.FromResult(new StructResult(resultString));
-            ValueTask<StructResult> ValueTaskTestStructAction() => ValueTask.FromResult(new StructResult(resultString));
+            Task<StructResult> TaskTestStructAction() =>
+                Task.FromResult(new StructResult(resultString));
+            ValueTask<StructResult> ValueTaskTestStructAction() =>
+                ValueTask.FromResult(new StructResult(resultString));
 
             return new List<object[]>
-                {
-                    new object[] { (Func<CustomResult>)TestAction },
-                    new object[] { (Func<Task<CustomResult>>)TaskTestAction},
-                    new object[] { (Func<ValueTask<CustomResult>>)ValueTaskTestAction},
-                    new object[] { (Func<CustomResult>)StaticTestAction},
-                    new object[] { (Func<Task<CustomResult>>)StaticTaskTestAction},
-                    new object[] { (Func<ValueTask<CustomResult>>)StaticValueTaskTestAction},
-
-                    new object[] { (Func<object>)StaticResultAsObject},
-
-                    new object[] { (Func<Task<object>>)StaticTaskOfIResultAsObject},
-                    new object[] { (Func<ValueTask<object>>)StaticValueTaskOfIResultAsObject},
-
-                    new object[] { (Func<StructResult>)TestStructAction },
-                    new object[] { (Func<Task<StructResult>>)TaskTestStructAction },
-                    new object[] { (Func<ValueTask<StructResult>>)ValueTaskTestStructAction },
-                };
+            {
+                new object[] { (Func<CustomResult>)TestAction },
+                new object[] { (Func<Task<CustomResult>>)TaskTestAction },
+                new object[] { (Func<ValueTask<CustomResult>>)ValueTaskTestAction },
+                new object[] { (Func<CustomResult>)StaticTestAction },
+                new object[] { (Func<Task<CustomResult>>)StaticTaskTestAction },
+                new object[] { (Func<ValueTask<CustomResult>>)StaticValueTaskTestAction },
+                new object[] { (Func<object>)StaticResultAsObject },
+                new object[] { (Func<Task<object>>)StaticTaskOfIResultAsObject },
+                new object[] { (Func<ValueTask<object>>)StaticValueTaskOfIResultAsObject },
+                new object[] { (Func<StructResult>)TestStructAction },
+                new object[] { (Func<Task<StructResult>>)TaskTestStructAction },
+                new object[] { (Func<ValueTask<StructResult>>)ValueTaskTestStructAction },
+            };
         }
     }
 
@@ -3129,38 +3797,40 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
             static string StaticTestAction() => "String Test";
             static Task<string> StaticTaskTestAction() => Task.FromResult("String Test");
-            static ValueTask<string> StaticValueTaskTestAction() => ValueTask.FromResult("String Test");
+            static ValueTask<string> StaticValueTaskTestAction() =>
+                ValueTask.FromResult("String Test");
 
             // Dynamic via object
             static object StaticStringAsObjectTestAction() => "String Test";
 
             // Dynamic via Task<object>
-            static Task<object> StaticStringAsTaskObjectTestAction() => Task.FromResult<object>("String Test");
+            static Task<object> StaticStringAsTaskObjectTestAction() =>
+                Task.FromResult<object>("String Test");
 
             // Dynamic via ValueTask<object>
-            static ValueTask<object> StaticStringAsValueTaskObjectTestAction() => ValueTask.FromResult<object>("String Test");
+            static ValueTask<object> StaticStringAsValueTaskObjectTestAction() =>
+                ValueTask.FromResult<object>("String Test");
 
             return new List<object[]>
-                {
-                    new object[] { (Func<string>)TestAction },
-                    new object[] { (Func<Task<string>>)TaskTestAction },
-                    new object[] { (Func<ValueTask<string>>)ValueTaskTestAction },
-                    new object[] { (Func<string>)StaticTestAction },
-                    new object[] { (Func<Task<string>>)StaticTaskTestAction },
-                    new object[] { (Func<ValueTask<string>>)StaticValueTaskTestAction },
-
-                    new object[] { (Func<object>)StaticStringAsObjectTestAction },
-
-                    new object[] { (Func<Task<object>>)StaticStringAsTaskObjectTestAction },
-                    new object[] { (Func<ValueTask<object>>)StaticStringAsValueTaskObjectTestAction },
-
-                };
+            {
+                new object[] { (Func<string>)TestAction },
+                new object[] { (Func<Task<string>>)TaskTestAction },
+                new object[] { (Func<ValueTask<string>>)ValueTaskTestAction },
+                new object[] { (Func<string>)StaticTestAction },
+                new object[] { (Func<Task<string>>)StaticTaskTestAction },
+                new object[] { (Func<ValueTask<string>>)StaticValueTaskTestAction },
+                new object[] { (Func<object>)StaticStringAsObjectTestAction },
+                new object[] { (Func<Task<object>>)StaticStringAsTaskObjectTestAction },
+                new object[] { (Func<ValueTask<object>>)StaticStringAsValueTaskObjectTestAction },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(StringResult))]
-    public async Task RequestDelegateWritesStringReturnValueAndSetContentTypeWhenNull(Delegate @delegate)
+    public async Task RequestDelegateWritesStringReturnValueAndSetContentTypeWhenNull(
+        Delegate @delegate
+    )
     {
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
@@ -3205,14 +3875,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             static ValueTask<int> StaticValueTaskTestAction() => ValueTask.FromResult(42);
 
             return new List<object[]>
-                {
-                    new object[] { (Func<int>)TestAction },
-                    new object[] { (Func<Task<int>>)TaskTestAction },
-                    new object[] { (Func<ValueTask<int>>)ValueTaskTestAction },
-                    new object[] { (Func<int>)StaticTestAction },
-                    new object[] { (Func<Task<int>>)StaticTaskTestAction },
-                    new object[] { (Func<ValueTask<int>>)StaticValueTaskTestAction },
-                };
+            {
+                new object[] { (Func<int>)TestAction },
+                new object[] { (Func<Task<int>>)TaskTestAction },
+                new object[] { (Func<ValueTask<int>>)ValueTaskTestAction },
+                new object[] { (Func<int>)StaticTestAction },
+                new object[] { (Func<Task<int>>)StaticTaskTestAction },
+                new object[] { (Func<ValueTask<int>>)StaticValueTaskTestAction },
+            };
         }
     }
 
@@ -3247,14 +3917,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             static ValueTask<bool> StaticValueTaskTestAction() => ValueTask.FromResult(true);
 
             return new List<object[]>
-                {
-                    new object[] { (Func<bool>)TestAction },
-                    new object[] { (Func<Task<bool>>)TaskTestAction },
-                    new object[] { (Func<ValueTask<bool>>)ValueTaskTestAction },
-                    new object[] { (Func<bool>)StaticTestAction },
-                    new object[] { (Func<Task<bool>>)StaticTaskTestAction },
-                    new object[] { (Func<ValueTask<bool>>)StaticValueTaskTestAction },
-                };
+            {
+                new object[] { (Func<bool>)TestAction },
+                new object[] { (Func<Task<bool>>)TaskTestAction },
+                new object[] { (Func<ValueTask<bool>>)ValueTaskTestAction },
+                new object[] { (Func<bool>)StaticTestAction },
+                new object[] { (Func<Task<bool>>)StaticTaskTestAction },
+                new object[] { (Func<ValueTask<bool>>)StaticValueTaskTestAction },
+            };
         }
     }
 
@@ -3287,19 +3957,42 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             ValueTask<IResult?> ValueTaskTestAction() => ValueTask.FromResult<IResult?>(null);
 
             return new List<object[]>
+            {
+                new object[]
                 {
-                    new object[] { (Func<IResult?>)TestAction, "The IResult returned by the Delegate must not be null." },
-                    new object[] { (Func<Task<IResult?>?>)TaskNullAction, "The IResult in Task<IResult> response must not be null." },
-                    new object[] { (Func<Task<bool?>?>)TaskBoolAction, "The Task returned by the Delegate must not be null." },
-                    new object[] { (Func<Task<IResult?>>)TaskTestAction, "The IResult returned by the Delegate must not be null." },
-                    new object[] { (Func<ValueTask<IResult?>>)ValueTaskTestAction, "The IResult returned by the Delegate must not be null." },
-                };
+                    (Func<IResult?>)TestAction,
+                    "The IResult returned by the Delegate must not be null."
+                },
+                new object[]
+                {
+                    (Func<Task<IResult?>?>)TaskNullAction,
+                    "The IResult in Task<IResult> response must not be null."
+                },
+                new object[]
+                {
+                    (Func<Task<bool?>?>)TaskBoolAction,
+                    "The Task returned by the Delegate must not be null."
+                },
+                new object[]
+                {
+                    (Func<Task<IResult?>>)TaskTestAction,
+                    "The IResult returned by the Delegate must not be null."
+                },
+                new object[]
+                {
+                    (Func<ValueTask<IResult?>>)ValueTaskTestAction,
+                    "The IResult returned by the Delegate must not be null."
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(NullResult))]
-    public async Task RequestDelegateThrowsInvalidOperationExceptionOnNullDelegate(Delegate @delegate, string message)
+    public async Task RequestDelegateThrowsInvalidOperationExceptionOnNullDelegate(
+        Delegate @delegate,
+        string message
+    )
     {
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
@@ -3308,7 +4001,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var factoryResult = RequestDelegateFactory.Create(@delegate);
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var exception = await Assert.ThrowsAnyAsync<InvalidOperationException>(async () => await requestDelegate(httpContext));
+        var exception = await Assert.ThrowsAnyAsync<InvalidOperationException>(
+            async () => await requestDelegate(httpContext)
+        );
         Assert.Contains(message, exception.Message);
     }
 
@@ -3329,17 +4024,17 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             ValueTask<Todo?> ValueTaskTestTodoAction() => ValueTask.FromResult<Todo?>(null);
 
             return new List<object[]>
-                {
-                    new object[] { (Func<bool?>)TestBoolAction },
-                    new object[] { (Func<Task<bool?>>)TaskTestBoolAction },
-                    new object[] { (Func<ValueTask<bool?>>)ValueTaskTestBoolAction },
-                    new object[] { (Func<int?>)TestIntAction },
-                    new object[] { (Func<Task<int?>>)TaskTestIntAction },
-                    new object[] { (Func<ValueTask<int?>>)ValueTaskTestIntAction },
-                    new object[] { (Func<Todo?>)TestTodoAction },
-                    new object[] { (Func<Task<Todo?>>)TaskTestTodoAction },
-                    new object[] { (Func<ValueTask<Todo?>>)ValueTaskTestTodoAction },
-                };
+            {
+                new object[] { (Func<bool?>)TestBoolAction },
+                new object[] { (Func<Task<bool?>>)TaskTestBoolAction },
+                new object[] { (Func<ValueTask<bool?>>)ValueTaskTestBoolAction },
+                new object[] { (Func<int?>)TestIntAction },
+                new object[] { (Func<Task<int?>>)TaskTestIntAction },
+                new object[] { (Func<ValueTask<int?>>)ValueTaskTestIntAction },
+                new object[] { (Func<Todo?>)TestTodoAction },
+                new object[] { (Func<Task<Todo?>>)TaskTestTodoAction },
+                new object[] { (Func<ValueTask<Todo?>>)ValueTaskTestTodoAction },
+            };
         }
     }
 
@@ -3373,27 +4068,116 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             string nullableQueryParseableParam(int? age) => $"Age: {age}";
 
             return new List<object?[]>
+            {
+                new object?[]
                 {
-                    new object?[] { (Func<string, string>)requiredQueryParam, "name", null, true, null},
-                    new object?[] { (Func<string, string>)requiredQueryParam, "name", "TestName", false, "Hello TestName!" },
-                    new object?[] { (Func<string, string>)defaultValueQueryParam, "name", null, false, "Hello DefaultName!" },
-                    new object?[] { (Func<string, string>)defaultValueQueryParam, "name", "TestName", false, "Hello TestName!" },
-                    new object?[] { (Func<string?, string>)nullableQueryParam, "name", null, false, "Hello !" },
-                    new object?[] { (Func<string?, string>)nullableQueryParam, "name", "TestName", false, "Hello TestName!"},
-
-                    new object?[] { (Func<int, string>)requiredParseableQueryParam, "age", null, true, null},
-                    new object?[] { (Func<int, string>)requiredParseableQueryParam, "age", "42", false, "Age: 42" },
-                    new object?[] { (Func<int, string>)defaultValueParseableQueryParam, "age", null, false, "Age: 12" },
-                    new object?[] { (Func<int, string>)defaultValueParseableQueryParam, "age", "42", false, "Age: 42" },
-                    new object?[] { (Func<int?, string>)nullableQueryParseableParam, "age", null, false, "Age: " },
-                    new object?[] { (Func<int?, string>)nullableQueryParseableParam, "age", "42", false, "Age: 42"},
-                };
+                    (Func<string, string>)requiredQueryParam,
+                    "name",
+                    null,
+                    true,
+                    null
+                },
+                new object?[]
+                {
+                    (Func<string, string>)requiredQueryParam,
+                    "name",
+                    "TestName",
+                    false,
+                    "Hello TestName!"
+                },
+                new object?[]
+                {
+                    (Func<string, string>)defaultValueQueryParam,
+                    "name",
+                    null,
+                    false,
+                    "Hello DefaultName!"
+                },
+                new object?[]
+                {
+                    (Func<string, string>)defaultValueQueryParam,
+                    "name",
+                    "TestName",
+                    false,
+                    "Hello TestName!"
+                },
+                new object?[]
+                {
+                    (Func<string?, string>)nullableQueryParam,
+                    "name",
+                    null,
+                    false,
+                    "Hello !"
+                },
+                new object?[]
+                {
+                    (Func<string?, string>)nullableQueryParam,
+                    "name",
+                    "TestName",
+                    false,
+                    "Hello TestName!"
+                },
+                new object?[]
+                {
+                    (Func<int, string>)requiredParseableQueryParam,
+                    "age",
+                    null,
+                    true,
+                    null
+                },
+                new object?[]
+                {
+                    (Func<int, string>)requiredParseableQueryParam,
+                    "age",
+                    "42",
+                    false,
+                    "Age: 42"
+                },
+                new object?[]
+                {
+                    (Func<int, string>)defaultValueParseableQueryParam,
+                    "age",
+                    null,
+                    false,
+                    "Age: 12"
+                },
+                new object?[]
+                {
+                    (Func<int, string>)defaultValueParseableQueryParam,
+                    "age",
+                    "42",
+                    false,
+                    "Age: 42"
+                },
+                new object?[]
+                {
+                    (Func<int?, string>)nullableQueryParseableParam,
+                    "age",
+                    null,
+                    false,
+                    "Age: "
+                },
+                new object?[]
+                {
+                    (Func<int?, string>)nullableQueryParseableParam,
+                    "age",
+                    "42",
+                    false,
+                    "Age: 42"
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(QueryParamOptionalityData))]
-    public async Task RequestDelegateHandlesQueryParamOptionality(Delegate @delegate, string paramName, string? queryParam, bool isInvalid, string? expectedResponse)
+    public async Task RequestDelegateHandlesQueryParamOptionality(
+        Delegate @delegate,
+        string paramName,
+        string? queryParam,
+        bool isInvalid,
+        string? expectedResponse
+    )
     {
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
@@ -3401,10 +4185,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         if (queryParam is not null)
         {
-            httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-            {
-                [paramName] = queryParam
-            });
+            httpContext.Request.Query = new QueryCollection(
+                new Dictionary<string, StringValues> { [paramName] = queryParam }
+            );
         }
 
         var factoryResult = RequestDelegateFactory.Create(@delegate);
@@ -3421,7 +4204,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             Assert.Equal(LogLevel.Debug, log.LogLevel);
             Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), log.EventId);
             var expectedType = paramName == "age" ? "int age" : $"string name";
-            Assert.Equal($@"Required parameter ""{expectedType}"" was not provided from route or query string.", log.Message);
+            Assert.Equal(
+                $@"Required parameter ""{expectedType}"" was not provided from route or query string.",
+                log.Message
+            );
         }
         else
         {
@@ -3444,27 +4230,116 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             string nullableParseableRouteParam(int? age) => $"Age: {age}";
 
             return new List<object?[]>
+            {
+                new object?[]
                 {
-                    new object?[] { (Func<string, string>)requiredRouteParam, "name", null, true, null},
-                    new object?[] { (Func<string, string>)requiredRouteParam, "name", "TestName", false, "Hello TestName!" },
-                    new object?[] { (Func<string, string>)defaultValueRouteParam, "name", null, false, "Hello DefaultName!" },
-                    new object?[] { (Func<string, string>)defaultValueRouteParam, "name", "TestName", false, "Hello TestName!" },
-                    new object?[] { (Func<string?, string>)nullableRouteParam, "name", null, false, "Hello !" },
-                    new object?[] { (Func<string?, string>)nullableRouteParam, "name", "TestName", false, "Hello TestName!" },
-
-                    new object?[] { (Func<int, string>)requiredParseableRouteParam, "age", null, true, null},
-                    new object?[] { (Func<int, string>)requiredParseableRouteParam, "age", "42", false, "Age: 42" },
-                    new object?[] { (Func<int, string>)defaultValueParseableRouteParam, "age", null, false, "Age: 12" },
-                    new object?[] { (Func<int, string>)defaultValueParseableRouteParam, "age", "42", false, "Age: 42" },
-                    new object?[] { (Func<int?, string>)nullableParseableRouteParam, "age", null, false, "Age: " },
-                    new object?[] { (Func<int?, string>)nullableParseableRouteParam, "age", "42", false, "Age: 42"},
-                };
+                    (Func<string, string>)requiredRouteParam,
+                    "name",
+                    null,
+                    true,
+                    null
+                },
+                new object?[]
+                {
+                    (Func<string, string>)requiredRouteParam,
+                    "name",
+                    "TestName",
+                    false,
+                    "Hello TestName!"
+                },
+                new object?[]
+                {
+                    (Func<string, string>)defaultValueRouteParam,
+                    "name",
+                    null,
+                    false,
+                    "Hello DefaultName!"
+                },
+                new object?[]
+                {
+                    (Func<string, string>)defaultValueRouteParam,
+                    "name",
+                    "TestName",
+                    false,
+                    "Hello TestName!"
+                },
+                new object?[]
+                {
+                    (Func<string?, string>)nullableRouteParam,
+                    "name",
+                    null,
+                    false,
+                    "Hello !"
+                },
+                new object?[]
+                {
+                    (Func<string?, string>)nullableRouteParam,
+                    "name",
+                    "TestName",
+                    false,
+                    "Hello TestName!"
+                },
+                new object?[]
+                {
+                    (Func<int, string>)requiredParseableRouteParam,
+                    "age",
+                    null,
+                    true,
+                    null
+                },
+                new object?[]
+                {
+                    (Func<int, string>)requiredParseableRouteParam,
+                    "age",
+                    "42",
+                    false,
+                    "Age: 42"
+                },
+                new object?[]
+                {
+                    (Func<int, string>)defaultValueParseableRouteParam,
+                    "age",
+                    null,
+                    false,
+                    "Age: 12"
+                },
+                new object?[]
+                {
+                    (Func<int, string>)defaultValueParseableRouteParam,
+                    "age",
+                    "42",
+                    false,
+                    "Age: 42"
+                },
+                new object?[]
+                {
+                    (Func<int?, string>)nullableParseableRouteParam,
+                    "age",
+                    null,
+                    false,
+                    "Age: "
+                },
+                new object?[]
+                {
+                    (Func<int?, string>)nullableParseableRouteParam,
+                    "age",
+                    "42",
+                    false,
+                    "Age: 42"
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(RouteParamOptionalityData))]
-    public async Task RequestDelegateHandlesRouteParamOptionality(Delegate @delegate, string paramName, string? routeParam, bool isInvalid, string? expectedResponse)
+    public async Task RequestDelegateHandlesRouteParamOptionality(
+        Delegate @delegate,
+        string paramName,
+        string? routeParam,
+        bool isInvalid,
+        string? expectedResponse
+    )
     {
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
@@ -3475,10 +4350,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             httpContext.Request.RouteValues[paramName] = routeParam;
         }
 
-        var factoryResult = RequestDelegateFactory.Create(@delegate, new()
-        {
-            RouteParameterNames = routeParam is not null ? new[] { paramName } : Array.Empty<string>()
-        });
+        var factoryResult = RequestDelegateFactory.Create(
+            @delegate,
+            new()
+            {
+                RouteParameterNames = routeParam is not null
+                    ? new[] { paramName }
+                    : Array.Empty<string>()
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
 
@@ -3493,7 +4373,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             Assert.Equal(LogLevel.Debug, log.LogLevel);
             Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), log.EventId);
             var expectedType = paramName == "age" ? "int age" : $"string name";
-            Assert.Equal($@"Required parameter ""{expectedType}"" was not provided from query string.", log.Message);
+            Assert.Equal(
+                $@"Required parameter ""{expectedType}"" was not provided from query string.",
+                log.Message
+            );
         }
         else
         {
@@ -3513,20 +4396,43 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             string nullableBodyParam(Todo? todo) => $"Todo: {todo?.Name}";
 
             return new List<object?[]>
+            {
+                new object?[] { (Func<Todo, string>)requiredBodyParam, false, true, null },
+                new object?[]
                 {
-                    new object?[] { (Func<Todo, string>)requiredBodyParam, false, true, null },
-                    new object?[] { (Func<Todo, string>)requiredBodyParam, true, false, "Todo: Default Todo"},
-                    new object?[] { (Func<Todo, string>)defaultValueBodyParam, false, false, "Todo: "},
-                    new object?[] { (Func<Todo, string>)defaultValueBodyParam, true, false, "Todo: Default Todo"},
-                    new object?[] { (Func<Todo?, string>)nullableBodyParam, false, false, "Todo: " },
-                    new object?[] { (Func<Todo?, string>)nullableBodyParam, true, false, "Todo: Default Todo" },
-                };
+                    (Func<Todo, string>)requiredBodyParam,
+                    true,
+                    false,
+                    "Todo: Default Todo"
+                },
+                new object?[] { (Func<Todo, string>)defaultValueBodyParam, false, false, "Todo: " },
+                new object?[]
+                {
+                    (Func<Todo, string>)defaultValueBodyParam,
+                    true,
+                    false,
+                    "Todo: Default Todo"
+                },
+                new object?[] { (Func<Todo?, string>)nullableBodyParam, false, false, "Todo: " },
+                new object?[]
+                {
+                    (Func<Todo?, string>)nullableBodyParam,
+                    true,
+                    false,
+                    "Todo: Default Todo"
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(BodyParamOptionalityData))]
-    public async Task RequestDelegateHandlesBodyParamOptionality(Delegate @delegate, bool hasBody, bool isInvalid, string? expectedResponse)
+    public async Task RequestDelegateHandlesBodyParamOptionality(
+        Delegate @delegate,
+        bool hasBody,
+        bool isInvalid,
+        string? expectedResponse
+    )
     {
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
@@ -3540,7 +4446,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             httpContext.Request.Body = stream;
             httpContext.Request.Headers["Content-Type"] = "application/json";
             httpContext.Request.ContentLength = stream.Length;
-            httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+            httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+                new RequestBodyDetectionFeature(true)
+            );
         }
 
         var jsonOptions = new JsonOptions();
@@ -3563,7 +4471,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             var log = Assert.Single(logs);
             Assert.Equal(LogLevel.Debug, log.LogLevel);
             Assert.Equal(new EventId(5, "ImplicitBodyNotProvided"), log.EventId);
-            Assert.Equal(@"Implicit body inferred for parameter ""todo"" but no body was provided. Did you mean to use a Service instead?", log.Message);
+            Assert.Equal(
+                @"Implicit body inferred for parameter ""todo"" but no body was provided. Did you mean to use a Service instead?",
+                log.Message
+            );
         }
         else
         {
@@ -3583,7 +4494,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             {
                 context.Items["uri"] = myBindAsyncRecord.Uri;
             }
-            void defaultReferenceType(HttpContext context, MyBindAsyncRecord? myBindAsyncRecord = null)
+            void defaultReferenceType(
+                HttpContext context,
+                MyBindAsyncRecord? myBindAsyncRecord = null
+            )
             {
                 context.Items["uri"] = myBindAsyncRecord?.Uri;
             }
@@ -3591,56 +4505,155 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             {
                 context.Items["uri"] = myBindAsyncRecord?.Uri;
             }
-            void requiredReferenceTypeSimple(HttpContext context, MySimpleBindAsyncRecord mySimpleBindAsyncRecord)
+            void requiredReferenceTypeSimple(
+                HttpContext context,
+                MySimpleBindAsyncRecord mySimpleBindAsyncRecord
+            )
             {
                 context.Items["uri"] = mySimpleBindAsyncRecord.Uri;
             }
 
-            void requiredValueType(HttpContext context, MyNullableBindAsyncStruct myNullableBindAsyncStruct)
+            void requiredValueType(
+                HttpContext context,
+                MyNullableBindAsyncStruct myNullableBindAsyncStruct
+            )
             {
                 context.Items["uri"] = myNullableBindAsyncStruct.Uri;
             }
-            void defaultValueType(HttpContext context, MyNullableBindAsyncStruct? myNullableBindAsyncStruct = null)
+            void defaultValueType(
+                HttpContext context,
+                MyNullableBindAsyncStruct? myNullableBindAsyncStruct = null
+            )
             {
                 context.Items["uri"] = myNullableBindAsyncStruct?.Uri;
             }
-            void nullableValueType(HttpContext context, MyNullableBindAsyncStruct? myNullableBindAsyncStruct)
+            void nullableValueType(
+                HttpContext context,
+                MyNullableBindAsyncStruct? myNullableBindAsyncStruct
+            )
             {
                 context.Items["uri"] = myNullableBindAsyncStruct?.Uri;
             }
-            void requiredValueTypeSimple(HttpContext context, MySimpleBindAsyncStruct mySimpleBindAsyncStruct)
+            void requiredValueTypeSimple(
+                HttpContext context,
+                MySimpleBindAsyncStruct mySimpleBindAsyncStruct
+            )
             {
                 context.Items["uri"] = mySimpleBindAsyncStruct.Uri;
             }
 
             return new object?[][]
             {
-                    new object?[] { (Action<HttpContext, MyBindAsyncRecord>)requiredReferenceType, false, true, false },
-                    new object?[] { (Action<HttpContext, MyBindAsyncRecord>)requiredReferenceType, true, false, false, },
-                    new object?[] { (Action<HttpContext, MySimpleBindAsyncRecord>)requiredReferenceTypeSimple, true, false, false },
-
-                    new object?[] { (Action<HttpContext, MyBindAsyncRecord?>)defaultReferenceType, false, false, false, },
-                    new object?[] { (Action<HttpContext, MyBindAsyncRecord?>)defaultReferenceType, true, false, false },
-
-                    new object?[] { (Action<HttpContext, MyBindAsyncRecord?>)nullableReferenceType, false, false, false },
-                    new object?[] { (Action<HttpContext, MyBindAsyncRecord?>)nullableReferenceType, true, false, false },
-
-                    new object?[] { (Action<HttpContext, MyNullableBindAsyncStruct>)requiredValueType, false, true, true },
-                    new object?[] { (Action<HttpContext, MyNullableBindAsyncStruct>)requiredValueType, true, false, true },
-                    new object?[] { (Action<HttpContext, MySimpleBindAsyncStruct>)requiredValueTypeSimple, true, false, true },
-
-                    new object?[] { (Action<HttpContext, MyNullableBindAsyncStruct?>)defaultValueType, false, false, true },
-                    new object?[] { (Action<HttpContext, MyNullableBindAsyncStruct?>)defaultValueType, true, false, true },
-
-                    new object?[] { (Action<HttpContext, MyNullableBindAsyncStruct?>)nullableValueType, false, false, true },
-                    new object?[] { (Action<HttpContext, MyNullableBindAsyncStruct?>)nullableValueType, true, false, true },
+                new object?[]
+                {
+                    (Action<HttpContext, MyBindAsyncRecord>)requiredReferenceType,
+                    false,
+                    true,
+                    false
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MyBindAsyncRecord>)requiredReferenceType,
+                    true,
+                    false,
+                    false,
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MySimpleBindAsyncRecord>)requiredReferenceTypeSimple,
+                    true,
+                    false,
+                    false
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MyBindAsyncRecord?>)defaultReferenceType,
+                    false,
+                    false,
+                    false,
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MyBindAsyncRecord?>)defaultReferenceType,
+                    true,
+                    false,
+                    false
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MyBindAsyncRecord?>)nullableReferenceType,
+                    false,
+                    false,
+                    false
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MyBindAsyncRecord?>)nullableReferenceType,
+                    true,
+                    false,
+                    false
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MyNullableBindAsyncStruct>)requiredValueType,
+                    false,
+                    true,
+                    true
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MyNullableBindAsyncStruct>)requiredValueType,
+                    true,
+                    false,
+                    true
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MySimpleBindAsyncStruct>)requiredValueTypeSimple,
+                    true,
+                    false,
+                    true
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MyNullableBindAsyncStruct?>)defaultValueType,
+                    false,
+                    false,
+                    true
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MyNullableBindAsyncStruct?>)defaultValueType,
+                    true,
+                    false,
+                    true
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MyNullableBindAsyncStruct?>)nullableValueType,
+                    false,
+                    false,
+                    true
+                },
+                new object?[]
+                {
+                    (Action<HttpContext, MyNullableBindAsyncStruct?>)nullableValueType,
+                    true,
+                    false,
+                    true
+                },
             };
         }
     }
 
     [Theory]
     [MemberData(nameof(BindAsyncParamOptionalityData))]
-    public async Task RequestDelegateHandlesBindAsyncOptionality(Delegate routeHandler, bool includeReferer, bool isInvalid, bool isStruct)
+    public async Task RequestDelegateHandlesBindAsyncOptionality(
+        Delegate routeHandler,
+        bool includeReferer,
+        bool isInvalid,
+        bool isStruct
+    )
     {
         var httpContext = CreateHttpContext();
 
@@ -3665,11 +4678,17 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
             if (isStruct)
             {
-                Assert.Equal(@"Required parameter ""MyNullableBindAsyncStruct myNullableBindAsyncStruct"" was not provided from MyNullableBindAsyncStruct.BindAsync(HttpContext, ParameterInfo).", log.Message);
+                Assert.Equal(
+                    @"Required parameter ""MyNullableBindAsyncStruct myNullableBindAsyncStruct"" was not provided from MyNullableBindAsyncStruct.BindAsync(HttpContext, ParameterInfo).",
+                    log.Message
+                );
             }
             else
             {
-                Assert.Equal(@"Required parameter ""MyBindAsyncRecord myBindAsyncRecord"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).", log.Message);
+                Assert.Equal(
+                    @"Required parameter ""MyBindAsyncRecord myBindAsyncRecord"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).",
+                    log.Message
+                );
             }
         }
         else
@@ -3691,27 +4710,52 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            string requiredExplicitService([FromService] MyService service) => $"Service: {service}";
-            string defaultValueExplicitServiceParam([FromService] MyService? service = null) => $"Service: {service}";
-            string nullableExplicitServiceParam([FromService] MyService? service) => $"Service: {service}";
+            string requiredExplicitService([FromService] MyService service) =>
+                $"Service: {service}";
+            string defaultValueExplicitServiceParam([FromService] MyService? service = null) =>
+                $"Service: {service}";
+            string nullableExplicitServiceParam([FromService] MyService? service) =>
+                $"Service: {service}";
 
             return new List<object?[]>
+            {
+                new object?[] { (Func<MyService, string>)requiredExplicitService, false, true },
+                new object?[] { (Func<MyService, string>)requiredExplicitService, true, false },
+                new object?[]
                 {
-                    new object?[] { (Func<MyService, string>)requiredExplicitService, false, true},
-                    new object?[] { (Func<MyService, string>)requiredExplicitService, true, false},
-
-                    new object?[] { (Func<MyService, string>)defaultValueExplicitServiceParam, false, false},
-                    new object?[] { (Func<MyService, string>)defaultValueExplicitServiceParam, true, false},
-
-                    new object?[] { (Func<MyService?, string>)nullableExplicitServiceParam, false, false},
-                    new object?[] { (Func<MyService?, string>)nullableExplicitServiceParam, true, false},
-                };
+                    (Func<MyService, string>)defaultValueExplicitServiceParam,
+                    false,
+                    false
+                },
+                new object?[]
+                {
+                    (Func<MyService, string>)defaultValueExplicitServiceParam,
+                    true,
+                    false
+                },
+                new object?[]
+                {
+                    (Func<MyService?, string>)nullableExplicitServiceParam,
+                    false,
+                    false
+                },
+                new object?[]
+                {
+                    (Func<MyService?, string>)nullableExplicitServiceParam,
+                    true,
+                    false
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(ServiceParamOptionalityData))]
-    public async Task RequestDelegateHandlesServiceParamOptionality(Delegate @delegate, bool hasService, bool isInvalid)
+    public async Task RequestDelegateHandlesServiceParamOptionality(
+        Delegate @delegate,
+        bool hasService,
+        bool isInvalid
+    )
     {
         var httpContext = CreateHttpContext();
 
@@ -3746,18 +4790,21 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            string disallowEmptyAndNonOptional([FromBody(AllowEmpty = false)] Todo todo) => $"{todo}";
+            string disallowEmptyAndNonOptional([FromBody(AllowEmpty = false)] Todo todo) =>
+                $"{todo}";
             string allowEmptyAndNonOptional([FromBody(AllowEmpty = true)] Todo todo) => $"{todo}";
-            string allowEmptyAndOptional([FromBody(AllowEmpty = true)] Todo? todo = null) => $"{todo}";
-            string disallowEmptyAndOptional([FromBody(AllowEmpty = false)] Todo? todo = null) => $"{todo}";
+            string allowEmptyAndOptional([FromBody(AllowEmpty = true)] Todo? todo = null) =>
+                $"{todo}";
+            string disallowEmptyAndOptional([FromBody(AllowEmpty = false)] Todo? todo = null) =>
+                $"{todo}";
 
             return new List<object?[]>
-                {
-                    new object?[] { (Func<Todo, string>)disallowEmptyAndNonOptional, false },
-                    new object?[] { (Func<Todo, string>)allowEmptyAndNonOptional, true },
-                    new object?[] { (Func<Todo, string>)allowEmptyAndOptional, true },
-                    new object?[] { (Func<Todo, string>)disallowEmptyAndOptional, true }
-                };
+            {
+                new object?[] { (Func<Todo, string>)disallowEmptyAndNonOptional, false },
+                new object?[] { (Func<Todo, string>)allowEmptyAndNonOptional, true },
+                new object?[] { (Func<Todo, string>)allowEmptyAndOptional, true },
+                new object?[] { (Func<Todo, string>)disallowEmptyAndOptional, true }
+            };
         }
     }
 
@@ -3780,7 +4827,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             var log = Assert.Single(logs);
             Assert.Equal(LogLevel.Debug, log.LogLevel);
             Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), log.EventId);
-            Assert.Equal(@"Required parameter ""Todo todo"" was not provided from body.", log.Message);
+            Assert.Equal(
+                @"Required parameter ""Todo todo"" was not provided from body.",
+                log.Message
+            );
         }
         else
         {
@@ -3794,7 +4844,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Theory]
     [InlineData(true, "Hello TestName!")]
     [InlineData(false, "Hello !")]
-    public async Task CanSetStringParamAsOptionalWithNullabilityDisability(bool provideValue, string expectedResponse)
+    public async Task CanSetStringParamAsOptionalWithNullabilityDisability(
+        bool provideValue,
+        string expectedResponse
+    )
     {
         string optionalQueryParam(string name = null) => $"Hello {name}!";
 
@@ -3804,10 +4857,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         if (provideValue)
         {
-            httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-            {
-                ["name"] = "TestName"
-            });
+            httpContext.Request.Query = new QueryCollection(
+                new Dictionary<string, StringValues> { ["name"] = "TestName" }
+            );
         }
 
         var factoryResult = RequestDelegateFactory.Create(optionalQueryParam);
@@ -3824,7 +4876,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Theory]
     [InlineData(true, "Age: 42")]
     [InlineData(false, "Age: 0")]
-    public async Task CanSetParseableStringParamAsOptionalWithNullabilityDisability(bool provideValue, string expectedResponse)
+    public async Task CanSetParseableStringParamAsOptionalWithNullabilityDisability(
+        bool provideValue,
+        string expectedResponse
+    )
     {
         string optionalQueryParam(int age = default(int)) => $"Age: {age}";
 
@@ -3834,10 +4889,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         if (provideValue)
         {
-            httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-            {
-                ["age"] = "42"
-            });
+            httpContext.Request.Query = new QueryCollection(
+                new Dictionary<string, StringValues> { ["age"] = "42" }
+            );
         }
 
         var factoryResult = RequestDelegateFactory.Create(optionalQueryParam);
@@ -3854,7 +4908,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Theory]
     [InlineData(true, "Age: 42")]
     [InlineData(false, "Age: ")]
-    public async Task TreatsUnknownNullabilityAsOptionalForReferenceType(bool provideValue, string expectedResponse)
+    public async Task TreatsUnknownNullabilityAsOptionalForReferenceType(
+        bool provideValue,
+        string expectedResponse
+    )
     {
         string optionalQueryParam(string age) => $"Age: {age}";
 
@@ -3864,10 +4921,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         if (provideValue)
         {
-            httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-            {
-                ["age"] = "42"
-            });
+            httpContext.Request.Query = new QueryCollection(
+                new Dictionary<string, StringValues> { ["age"] = "42" }
+            );
         }
 
         var factoryResult = RequestDelegateFactory.Create(optionalQueryParam);
@@ -3892,10 +4948,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "Tester"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "Tester" }
+        );
 
         var factoryResult = RequestDelegateFactory.Create(actionWithExtensionsResult);
 
@@ -3916,15 +4971,18 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/xml";
         httpContext.Request.Headers["Content-Length"] = "1";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton(LoggerFactory);
         httpContext.RequestServices = serviceCollection.BuildServiceProvider();
 
-        var factoryResult = RequestDelegateFactory.Create((HttpContext context, Todo todo) =>
-        {
-        }, new RequestDelegateFactoryOptions() { ThrowOnBadRequest = shouldThrow });
+        var factoryResult = RequestDelegateFactory.Create(
+            (HttpContext context, Todo todo) => { },
+            new RequestDelegateFactoryOptions() { ThrowOnBadRequest = shouldThrow }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
         var request = requestDelegate(httpContext);
@@ -3932,7 +4990,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         if (shouldThrow)
         {
             var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() => request);
-            Assert.Equal("Expected a supported JSON media type but got \"application/xml\".", ex.Message);
+            Assert.Equal(
+                "Expected a supported JSON media type but got \"application/xml\".",
+                ex.Message
+            );
             Assert.Equal(StatusCodes.Status415UnsupportedMediaType, ex.StatusCode);
         }
         else
@@ -3943,7 +5004,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             var logMessage = Assert.Single(TestSink.Writes);
             Assert.Equal(new EventId(6, "UnexpectedContentType"), logMessage.EventId);
             Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
-            Assert.Equal("Expected a supported JSON media type but got \"application/xml\".", logMessage.Message);
+            Assert.Equal(
+                "Expected a supported JSON media type but got \"application/xml\".",
+                logMessage.Message
+            );
         }
     }
 
@@ -3952,10 +5016,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [InlineData(false)]
     public async Task RequestDelegateWithBindAndImplicitBodyRejectsNonJsonContent(bool shouldThrow)
     {
-        Todo originalTodo = new()
-        {
-            Name = "Write more tests!"
-        };
+        Todo originalTodo = new() { Name = "Write more tests!" };
 
         var httpContext = new DefaultHttpContext();
 
@@ -3963,16 +5024,21 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "application/xml";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton(LoggerFactory);
         httpContext.RequestServices = serviceCollection.BuildServiceProvider();
 
-        var factoryResult = RequestDelegateFactory.Create((HttpContext context, JsonTodo customTodo, Todo todo) =>
-        {
-        }, new RequestDelegateFactoryOptions() { ThrowOnBadRequest = shouldThrow });
+        var factoryResult = RequestDelegateFactory.Create(
+            (HttpContext context, JsonTodo customTodo, Todo todo) => { },
+            new RequestDelegateFactoryOptions() { ThrowOnBadRequest = shouldThrow }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
         var request = requestDelegate(httpContext);
@@ -3980,7 +5046,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         if (shouldThrow)
         {
             var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() => request);
-            Assert.Equal("Expected a supported JSON media type but got \"application/xml\".", ex.Message);
+            Assert.Equal(
+                "Expected a supported JSON media type but got \"application/xml\".",
+                ex.Message
+            );
             Assert.Equal(StatusCodes.Status415UnsupportedMediaType, ex.StatusCode);
         }
         else
@@ -3991,7 +5060,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             var logMessage = Assert.Single(TestSink.Writes);
             Assert.Equal(new EventId(6, "UnexpectedContentType"), logMessage.EventId);
             Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
-            Assert.Equal("Expected a supported JSON media type but got \"application/xml\".", logMessage.Message);
+            Assert.Equal(
+                "Expected a supported JSON media type but got \"application/xml\".",
+                logMessage.Message
+            );
         }
     }
 
@@ -4002,27 +5074,50 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             string uriParsing(Uri uri) => $"Uri: {uri.OriginalString}";
 
             return new List<object?[]>
+            {
+                new object?[]
                 {
-                    new object?[] { (Func<Uri, string>)uriParsing, "https://example.org", "Uri: https://example.org" },
-                    new object?[] { (Func<Uri, string>)uriParsing, "https://example.org/path/to/file?name=value1&name=value2", "Uri: https://example.org/path/to/file?name=value1&name=value2" },
-                    new object?[] { (Func<Uri, string>)uriParsing, "/path/to/file?name=value1&name=value2", "Uri: /path/to/file?name=value1&name=value2" },
-                    new object?[] { (Func<Uri, string>)uriParsing, "?name=value1&name=value2", "Uri: ?name=value1&name=value2" },
-                };
+                    (Func<Uri, string>)uriParsing,
+                    "https://example.org",
+                    "Uri: https://example.org"
+                },
+                new object?[]
+                {
+                    (Func<Uri, string>)uriParsing,
+                    "https://example.org/path/to/file?name=value1&name=value2",
+                    "Uri: https://example.org/path/to/file?name=value1&name=value2"
+                },
+                new object?[]
+                {
+                    (Func<Uri, string>)uriParsing,
+                    "/path/to/file?name=value1&name=value2",
+                    "Uri: /path/to/file?name=value1&name=value2"
+                },
+                new object?[]
+                {
+                    (Func<Uri, string>)uriParsing,
+                    "?name=value1&name=value2",
+                    "Uri: ?name=value1&name=value2"
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(UriDelegates))]
-    public async Task RequestDelegateCanProcessUriValues(Delegate @delegate, string uri, string expectedResponse)
+    public async Task RequestDelegateCanProcessUriValues(
+        Delegate @delegate,
+        string uri,
+        string expectedResponse
+    )
     {
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["uri"] = uri
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["uri"] = uri }
+        );
 
         var factoryResult = RequestDelegateFactory.Create(@delegate);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4039,34 +5134,78 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            string dateTimeParsing(DateTime time) => $"Time: {time.ToString("O", CultureInfo.InvariantCulture)}, Kind: {time.Kind}";
+            string dateTimeParsing(DateTime time) =>
+                $"Time: {time.ToString("O", CultureInfo.InvariantCulture)}, Kind: {time.Kind}";
 
             return new List<object?[]>
+            {
+                new object?[]
                 {
-                    new object?[] { (Func<DateTime, string>)dateTimeParsing, "9/20/2021 4:18:44 PM", "Time: 2021-09-20T16:18:44.0000000, Kind: Unspecified" },
-                    new object?[] { (Func<DateTime, string>)dateTimeParsing, "2021-09-20 4:18:44", "Time: 2021-09-20T04:18:44.0000000, Kind: Unspecified" },
-                    new object?[] { (Func<DateTime, string>)dateTimeParsing, "   9/20/2021    4:18:44 PM  ", "Time: 2021-09-20T16:18:44.0000000, Kind: Unspecified" },
-                    new object?[] { (Func<DateTime, string>)dateTimeParsing, "2021-09-20T16:28:02.000-07:00", "Time: 2021-09-20T23:28:02.0000000Z, Kind: Utc" },
-                    new object?[] { (Func<DateTime, string>)dateTimeParsing, "  2021-09-20T 16:28:02.000-07:00  ", "Time: 2021-09-20T23:28:02.0000000Z, Kind: Utc" },
-                    new object?[] { (Func<DateTime, string>)dateTimeParsing, "2021-09-20T23:30:02.000+00:00", "Time: 2021-09-20T23:30:02.0000000Z, Kind: Utc" },
-                    new object?[] { (Func<DateTime, string>)dateTimeParsing, "     2021-09-20T23:30: 02.000+00:00 ", "Time: 2021-09-20T23:30:02.0000000Z, Kind: Utc" },
-                    new object?[] { (Func<DateTime, string>)dateTimeParsing, "2021-09-20 16:48:02-07:00", "Time: 2021-09-20T23:48:02.0000000Z, Kind: Utc" },
-                };
+                    (Func<DateTime, string>)dateTimeParsing,
+                    "9/20/2021 4:18:44 PM",
+                    "Time: 2021-09-20T16:18:44.0000000, Kind: Unspecified"
+                },
+                new object?[]
+                {
+                    (Func<DateTime, string>)dateTimeParsing,
+                    "2021-09-20 4:18:44",
+                    "Time: 2021-09-20T04:18:44.0000000, Kind: Unspecified"
+                },
+                new object?[]
+                {
+                    (Func<DateTime, string>)dateTimeParsing,
+                    "   9/20/2021    4:18:44 PM  ",
+                    "Time: 2021-09-20T16:18:44.0000000, Kind: Unspecified"
+                },
+                new object?[]
+                {
+                    (Func<DateTime, string>)dateTimeParsing,
+                    "2021-09-20T16:28:02.000-07:00",
+                    "Time: 2021-09-20T23:28:02.0000000Z, Kind: Utc"
+                },
+                new object?[]
+                {
+                    (Func<DateTime, string>)dateTimeParsing,
+                    "  2021-09-20T 16:28:02.000-07:00  ",
+                    "Time: 2021-09-20T23:28:02.0000000Z, Kind: Utc"
+                },
+                new object?[]
+                {
+                    (Func<DateTime, string>)dateTimeParsing,
+                    "2021-09-20T23:30:02.000+00:00",
+                    "Time: 2021-09-20T23:30:02.0000000Z, Kind: Utc"
+                },
+                new object?[]
+                {
+                    (Func<DateTime, string>)dateTimeParsing,
+                    "     2021-09-20T23:30: 02.000+00:00 ",
+                    "Time: 2021-09-20T23:30:02.0000000Z, Kind: Utc"
+                },
+                new object?[]
+                {
+                    (Func<DateTime, string>)dateTimeParsing,
+                    "2021-09-20 16:48:02-07:00",
+                    "Time: 2021-09-20T23:48:02.0000000Z, Kind: Utc"
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(DateTimeDelegates))]
-    public async Task RequestDelegateCanProcessDateTimesToUtc(Delegate @delegate, string inputTime, string expectedResponse)
+    public async Task RequestDelegateCanProcessDateTimesToUtc(
+        Delegate @delegate,
+        string inputTime,
+        string expectedResponse
+    )
     {
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["time"] = inputTime
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["time"] = inputTime }
+        );
 
         var factoryResult = RequestDelegateFactory.Create(@delegate);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4083,30 +5222,54 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            string dateTimeOffsetParsing(DateTimeOffset time) => $"Time: {time.ToString("O", CultureInfo.InvariantCulture)}, Offset: {time.Offset}";
+            string dateTimeOffsetParsing(DateTimeOffset time) =>
+                $"Time: {time.ToString("O", CultureInfo.InvariantCulture)}, Offset: {time.Offset}";
 
             return new List<object?[]>
+            {
+                new object?[]
                 {
-                    new object?[] { (Func<DateTimeOffset, string>)dateTimeOffsetParsing, "09/20/2021 16:35:12 +00:00", "Time: 2021-09-20T16:35:12.0000000+00:00, Offset: 00:00:00" },
-                    new object?[] { (Func<DateTimeOffset, string>)dateTimeOffsetParsing, "09/20/2021 11:35:12 +07:00", "Time: 2021-09-20T11:35:12.0000000+07:00, Offset: 07:00:00" },
-                    new object?[] { (Func<DateTimeOffset, string>)dateTimeOffsetParsing, "09/20/2021 16:35:12", "Time: 2021-09-20T16:35:12.0000000+00:00, Offset: 00:00:00" },
-                    new object?[] { (Func<DateTimeOffset, string>)dateTimeOffsetParsing, " 09/20/2021 16:35:12 ", "Time: 2021-09-20T16:35:12.0000000+00:00, Offset: 00:00:00" },
-                };
+                    (Func<DateTimeOffset, string>)dateTimeOffsetParsing,
+                    "09/20/2021 16:35:12 +00:00",
+                    "Time: 2021-09-20T16:35:12.0000000+00:00, Offset: 00:00:00"
+                },
+                new object?[]
+                {
+                    (Func<DateTimeOffset, string>)dateTimeOffsetParsing,
+                    "09/20/2021 11:35:12 +07:00",
+                    "Time: 2021-09-20T11:35:12.0000000+07:00, Offset: 07:00:00"
+                },
+                new object?[]
+                {
+                    (Func<DateTimeOffset, string>)dateTimeOffsetParsing,
+                    "09/20/2021 16:35:12",
+                    "Time: 2021-09-20T16:35:12.0000000+00:00, Offset: 00:00:00"
+                },
+                new object?[]
+                {
+                    (Func<DateTimeOffset, string>)dateTimeOffsetParsing,
+                    " 09/20/2021 16:35:12 ",
+                    "Time: 2021-09-20T16:35:12.0000000+00:00, Offset: 00:00:00"
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(DateTimeOffsetDelegates))]
-    public async Task RequestDelegateCanProcessDateTimeOffsetsToUtc(Delegate @delegate, string inputTime, string expectedResponse)
+    public async Task RequestDelegateCanProcessDateTimeOffsetsToUtc(
+        Delegate @delegate,
+        string inputTime,
+        string expectedResponse
+    )
     {
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["time"] = inputTime
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["time"] = inputTime }
+        );
 
         var factoryResult = RequestDelegateFactory.Create(@delegate);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4123,28 +5286,42 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            string dateOnlyParsing(DateOnly time) => $"Time: {time.ToString("O", CultureInfo.InvariantCulture)}";
+            string dateOnlyParsing(DateOnly time) =>
+                $"Time: {time.ToString("O", CultureInfo.InvariantCulture)}";
 
             return new List<object?[]>
+            {
+                new object?[]
                 {
-                    new object?[] { (Func<DateOnly, string>)dateOnlyParsing, "9/20/2021", "Time: 2021-09-20" },
-                    new object?[] { (Func<DateOnly, string>)dateOnlyParsing, "9 /20 /2021", "Time: 2021-09-20" },
-                };
+                    (Func<DateOnly, string>)dateOnlyParsing,
+                    "9/20/2021",
+                    "Time: 2021-09-20"
+                },
+                new object?[]
+                {
+                    (Func<DateOnly, string>)dateOnlyParsing,
+                    "9 /20 /2021",
+                    "Time: 2021-09-20"
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(DateOnlyDelegates))]
-    public async Task RequestDelegateCanProcessDateOnlyValues(Delegate @delegate, string inputTime, string expectedResponse)
+    public async Task RequestDelegateCanProcessDateOnlyValues(
+        Delegate @delegate,
+        string inputTime,
+        string expectedResponse
+    )
     {
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["time"] = inputTime
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["time"] = inputTime }
+        );
 
         var factoryResult = RequestDelegateFactory.Create(@delegate);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4161,28 +5338,42 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            string timeOnlyParsing(TimeOnly time) => $"Time: {time.ToString("O", CultureInfo.InvariantCulture)}";
+            string timeOnlyParsing(TimeOnly time) =>
+                $"Time: {time.ToString("O", CultureInfo.InvariantCulture)}";
 
             return new List<object?[]>
+            {
+                new object?[]
                 {
-                    new object?[] { (Func<TimeOnly, string>)timeOnlyParsing, "4:34 PM", "Time: 16:34:00.0000000" },
-                    new object?[] { (Func<TimeOnly, string>)timeOnlyParsing, "    4:34 PM   ", "Time: 16:34:00.0000000" },
-                };
+                    (Func<TimeOnly, string>)timeOnlyParsing,
+                    "4:34 PM",
+                    "Time: 16:34:00.0000000"
+                },
+                new object?[]
+                {
+                    (Func<TimeOnly, string>)timeOnlyParsing,
+                    "    4:34 PM   ",
+                    "Time: 16:34:00.0000000"
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(TimeOnlyDelegates))]
-    public async Task RequestDelegateCanProcessTimeOnlyValues(Delegate @delegate, string inputTime, string expectedResponse)
+    public async Task RequestDelegateCanProcessTimeOnlyValues(
+        Delegate @delegate,
+        string inputTime,
+        string expectedResponse
+    )
     {
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["time"] = inputTime
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["time"] = inputTime }
+        );
 
         var factoryResult = RequestDelegateFactory.Create(@delegate);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4198,7 +5389,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task RequestDelegateLogsIOExceptionsForFormAsDebugDoesNotAbortAndNeverThrows(bool throwOnBadRequests)
+    public async Task RequestDelegateLogsIOExceptionsForFormAsDebugDoesNotAbortAndNeverThrows(
+        bool throwOnBadRequests
+    )
     {
         var invoked = false;
 
@@ -4213,9 +5406,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(ioException);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
-        var factoryResult = RequestDelegateFactory.Create(TestAction, new() { ThrowOnBadRequest = throwOnBadRequests });
+        var factoryResult = RequestDelegateFactory.Create(
+            TestAction,
+            new() { ThrowOnBadRequest = throwOnBadRequests }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
         await requestDelegate(httpContext);
@@ -4244,7 +5442,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
         httpContext.Request.Headers["Content-Length"] = "2049";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(new string('x', 2049)));
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4259,7 +5459,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var logMessage = Assert.Single(TestSink.Writes);
         Assert.Equal(new EventId(8, "InvalidFormRequestBody"), logMessage.EventId);
         Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
-        Assert.Equal(@"Failed to read parameter ""IFormFile file"" from the request body as form.", logMessage.Message);
+        Assert.Equal(
+            @"Failed to read parameter ""IFormFile file"" from the request body as form.",
+            logMessage.Message
+        );
         Assert.IsType<InvalidDataException>(logMessage.Exception);
     }
 
@@ -4277,12 +5480,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
         httpContext.Request.Headers["Content-Length"] = "2049";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(new string('x', 2049)));
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
-        var factoryResult = RequestDelegateFactory.Create(TestAction, new() { ThrowOnBadRequest = true });
+        var factoryResult = RequestDelegateFactory.Create(
+            TestAction,
+            new() { ThrowOnBadRequest = true }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => requestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => requestDelegate(httpContext)
+        );
 
         Assert.False(invoked);
 
@@ -4294,7 +5504,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Failed to read parameter ""IFormFile file"" from the request body as form.", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Failed to read parameter ""IFormFile file"" from the request body as form.",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
         Assert.IsType<InvalidDataException>(badHttpRequestException.InnerException);
     }
@@ -4311,14 +5524,30 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         void TestJsonAndFormFileCollection(Todo value1, IFormFileCollection value2) { }
         void TestJsonAndFormFileWithAttribute(Todo value1, [FromForm] IFormFile value2) { }
 
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestFormFileAndJson));
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestFormFilesAndJson));
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestFormFileAndJsonWithAttribute));
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestFormFileCollectionAndJson));
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestJsonAndFormFile));
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestJsonAndFormFiles));
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestJsonAndFormFileCollection));
-        Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(TestJsonAndFormFileWithAttribute));
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestFormFileAndJson)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestFormFilesAndJson)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestFormFileAndJsonWithAttribute)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestFormFileCollectionAndJson)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestJsonAndFormFile)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestJsonAndFormFiles)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestJsonAndFormFileCollection)
+        );
+        Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(TestJsonAndFormFileWithAttribute)
+        );
     }
 
     [Fact]
@@ -4343,7 +5572,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4382,7 +5613,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4409,21 +5642,34 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             formFilesArgument = formFiles;
         }
 
-        var nse = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(TestAction));
-        Assert.Equal("Assigning a value to the IFromFormMetadata.Name property is not supported for parameters of type IFormFileCollection.", nse.Message);
+        var nse = Assert.Throws<NotSupportedException>(
+            () => RequestDelegateFactory.Create(TestAction)
+        );
+        Assert.Equal(
+            "Assigning a value to the IFromFormMetadata.Name property is not supported for parameters of type IFormFileCollection.",
+            nse.Message
+        );
     }
 
     [Fact]
     public void CreateThrowsNotSupportedExceptionIfFromFormParameterIsNotIFormFileCollectionOrIFormFile()
     {
-        void TestActionBool([FromForm] bool value) { };
-        void TestActionInt([FromForm] int value) { };
-        void TestActionObject([FromForm] object value) { };
-        void TestActionString([FromForm] string value) { };
-        void TestActionCancellationToken([FromForm] CancellationToken value) { };
-        void TestActionClaimsPrincipal([FromForm] ClaimsPrincipal value) { };
-        void TestActionHttpContext([FromForm] HttpContext value) { };
-        void TestActionIFormCollection([FromForm] IFormCollection value) { };
+        void TestActionBool([FromForm] bool value) { }
+        ;
+        void TestActionInt([FromForm] int value) { }
+        ;
+        void TestActionObject([FromForm] object value) { }
+        ;
+        void TestActionString([FromForm] string value) { }
+        ;
+        void TestActionCancellationToken([FromForm] CancellationToken value) { }
+        ;
+        void TestActionClaimsPrincipal([FromForm] ClaimsPrincipal value) { }
+        ;
+        void TestActionHttpContext([FromForm] HttpContext value) { }
+        ;
+        void TestActionIFormCollection([FromForm] IFormCollection value) { }
+        ;
 
         AssertNotSupportedExceptionThrown(TestActionBool);
         AssertNotSupportedExceptionThrown(TestActionInt);
@@ -4436,8 +5682,13 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         static void AssertNotSupportedExceptionThrown(Delegate handler)
         {
-            var nse = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(handler));
-            Assert.Equal("IFromFormMetadata is only supported for parameters of type IFormFileCollection and IFormFile.", nse.Message);
+            var nse = Assert.Throws<NotSupportedException>(
+                () => RequestDelegateFactory.Create(handler)
+            );
+            Assert.Equal(
+                "IFromFormMetadata is only supported for parameters of type IFormFileCollection and IFormFile.",
+                nse.Message
+            );
         }
     }
 
@@ -4463,7 +5714,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4497,7 +5750,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4535,7 +5790,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4575,7 +5832,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4617,7 +5876,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4653,7 +5914,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
         httpContext.TraceIdentifier = "my-trace-id";
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
@@ -4693,15 +5956,18 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/xml";
         httpContext.Request.Headers["Content-Length"] = "1";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton(LoggerFactory);
         httpContext.RequestServices = serviceCollection.BuildServiceProvider();
 
-        var factoryResult = RequestDelegateFactory.Create((HttpContext context, IFormFile file) =>
-        {
-        }, new RequestDelegateFactoryOptions() { ThrowOnBadRequest = shouldThrow });
+        var factoryResult = RequestDelegateFactory.Create(
+            (HttpContext context, IFormFile file) => { },
+            new RequestDelegateFactoryOptions() { ThrowOnBadRequest = shouldThrow }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
         var request = requestDelegate(httpContext);
@@ -4709,7 +5975,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         if (shouldThrow)
         {
             var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() => request);
-            Assert.Equal("Expected a supported form media type but got \"application/xml\".", ex.Message);
+            Assert.Equal(
+                "Expected a supported form media type but got \"application/xml\".",
+                ex.Message
+            );
             Assert.Equal(StatusCodes.Status415UnsupportedMediaType, ex.StatusCode);
         }
         else
@@ -4720,7 +5989,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             var logMessage = Assert.Single(TestSink.Writes);
             Assert.Equal(new EventId(7, "UnexpectedContentType"), logMessage.EventId);
             Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
-            Assert.Equal("Expected a supported form media type but got \"application/xml\".", logMessage.Message);
+            Assert.Equal(
+                "Expected a supported form media type but got \"application/xml\".",
+                logMessage.Message
+            );
         }
     }
 
@@ -4746,7 +6018,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4781,7 +6055,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4807,7 +6083,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [InlineData("Cookie", ".AspNetCore.Auth=abc123")]
     public async Task RequestDelegatePopulatesFromIFormFileParameterIfRequestContainsSecureHeader(
         string headerName,
-        string headerValue)
+        string headerValue
+    )
     {
         IFormFile? fileArgument = null;
         TraceIdentifier traceIdArgument = default;
@@ -4831,7 +6108,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
         httpContext.Request.Headers[headerName] = headerValue;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
         httpContext.TraceIdentifier = "my-trace-id";
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
@@ -4870,14 +6149,18 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
         httpContext.TraceIdentifier = "my-trace-id";
 
 #pragma warning disable SYSLIB0026 // Type or member is obsolete
         var clientCertificate = new X509Certificate2();
 #pragma warning restore SYSLIB0026 // Type or member is obsolete
 
-        httpContext.Features.Set<ITlsConnectionFeature>(new TlsConnectionFeature(clientCertificate));
+        httpContext.Features.Set<ITlsConnectionFeature>(
+            new TlsConnectionFeature(clientCertificate)
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -4946,7 +6229,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             Value = 10;
         }
 
-        public ParameterListStructWithMultipleParameterizedContructor(HttpContext httpContext, [FromHeader(Name ="Value")] int value)
+        public ParameterListStructWithMultipleParameterizedContructor(
+            HttpContext httpContext,
+            [FromHeader(Name = "Value")] int value
+        )
         {
             HttpContext = httpContext;
             Value = value;
@@ -4993,7 +6279,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 args.HttpContext.Items.Add("input", args.Value);
             }
 
-            void TestParameterListRecordWithoutPositionalParameters([AsParameters] ParameterListRecordWithoutPositionalParameters args)
+            void TestParameterListRecordWithoutPositionalParameters(
+                [AsParameters] ParameterListRecordWithoutPositionalParameters args
+            )
             {
                 args.HttpContext!.Items.Add("input", args.Value);
             }
@@ -5008,12 +6296,16 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 args.HttpContext.Items.Add("input", args.Value);
             }
 
-            void TestParameterListStructWithParameterizedContructor([AsParameters] ParameterListStructWithParameterizedContructor args)
+            void TestParameterListStructWithParameterizedContructor(
+                [AsParameters] ParameterListStructWithParameterizedContructor args
+            )
             {
                 args.HttpContext.Items.Add("input", args.Value);
             }
 
-            void TestParameterListStructWithMultipleParameterizedContructor([AsParameters] ParameterListStructWithMultipleParameterizedContructor args)
+            void TestParameterListStructWithMultipleParameterizedContructor(
+                [AsParameters] ParameterListStructWithMultipleParameterizedContructor args
+            )
             {
                 args.HttpContext.Items.Add("input", args.Value);
             }
@@ -5023,7 +6315,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 args.HttpContext!.Items.Add("input", args.Value);
             }
 
-            void TestParameterListClassWithParameterizedContructor([AsParameters] ParameterListClassWithParameterizedContructor args)
+            void TestParameterListClassWithParameterizedContructor(
+                [AsParameters] ParameterListClassWithParameterizedContructor args
+            )
             {
                 args.HttpContext.Items.Add("input", args.Value);
             }
@@ -5032,13 +6326,29 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             {
                 new object[] { (Action<ParameterListRecordStruct>)TestParameterListRecordStruct },
                 new object[] { (Action<ParameterListRecordClass>)TestParameterListRecordClass },
-                new object[] { (Action<ParameterListRecordWithoutPositionalParameters>)TestParameterListRecordWithoutPositionalParameters },
+                new object[]
+                {
+                    (Action<ParameterListRecordWithoutPositionalParameters>)
+                        TestParameterListRecordWithoutPositionalParameters
+                },
                 new object[] { (Action<ParameterListStruct>)TestParameterListStruct },
                 new object[] { (Action<ParameterListMutableStruct>)TestParameterListMutableStruct },
-                new object[] { (Action<ParameterListStructWithParameterizedContructor>)TestParameterListStructWithParameterizedContructor },
-                new object[] { (Action<ParameterListStructWithMultipleParameterizedContructor>)TestParameterListStructWithMultipleParameterizedContructor },
+                new object[]
+                {
+                    (Action<ParameterListStructWithParameterizedContructor>)
+                        TestParameterListStructWithParameterizedContructor
+                },
+                new object[]
+                {
+                    (Action<ParameterListStructWithMultipleParameterizedContructor>)
+                        TestParameterListStructWithMultipleParameterizedContructor
+                },
                 new object[] { (Action<ParameterListClass>)TestParameterListClass },
-                new object[] { (Action<ParameterListClassWithParameterizedContructor>)TestParameterListClassWithParameterizedContructor },
+                new object[]
+                {
+                    (Action<ParameterListClassWithParameterizedContructor>)
+                        TestParameterListClassWithParameterizedContructor
+                },
             };
         }
     }
@@ -5051,7 +6361,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         const int originalRouteParam = 42;
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.RouteValues[paramName] = originalRouteParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[paramName] = originalRouteParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         var factoryResult = RequestDelegateFactory.Create(action);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -5065,17 +6377,13 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            void TestParameterListRecordStruct([AsParameters] ParameterListRecordStruct? args)
-            { }
+            void TestParameterListRecordStruct([AsParameters] ParameterListRecordStruct? args) { }
 
-            void TestParameterListRecordClass([AsParameters] ParameterListRecordClass? args)
-            { }
+            void TestParameterListRecordClass([AsParameters] ParameterListRecordClass? args) { }
 
-            void TestParameterListStruct([AsParameters] ParameterListStruct? args)
-            { }
+            void TestParameterListStruct([AsParameters] ParameterListStruct? args) { }
 
-            void TestParameterListClass([AsParameters] ParameterListClass? args)
-            { }
+            void TestParameterListClass([AsParameters] ParameterListClass? args) { }
 
             return new[]
             {
@@ -5094,11 +6402,17 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var parameter = action.Method.GetParameters()[0];
         var httpContext = CreateHttpContext();
 
-        var exception = Assert.Throws<InvalidOperationException>(() => RequestDelegateFactory.Create(action));
-        Assert.Contains($"The nullable type '{TypeNameHelper.GetTypeDisplayName(parameter.ParameterType, fullName: false)}' is not supported, mark the parameter as non-nullable.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => RequestDelegateFactory.Create(action)
+        );
+        Assert.Contains(
+            $"The nullable type '{TypeNameHelper.GetTypeDisplayName(parameter.ParameterType, fullName: false)}' is not supported, mark the parameter as non-nullable.",
+            exception.Message
+        );
     }
 
     private record struct SampleParameterList(int Foo);
+
     private record struct AdditionalSampleParameterList(int Bar);
 
     [Fact]
@@ -5107,15 +6421,23 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         const int foo = 1;
         const int bar = 2;
 
-        void TestAction(HttpContext context, [AsParameters] SampleParameterList args, [AsParameters] AdditionalSampleParameterList args2)
+        void TestAction(
+            HttpContext context,
+            [AsParameters] SampleParameterList args,
+            [AsParameters] AdditionalSampleParameterList args2
+        )
         {
             context.Items.Add("foo", args.Foo);
             context.Items.Add("bar", args2.Bar);
         }
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.RouteValues[nameof(SampleParameterList.Foo)] = foo.ToString(NumberFormatInfo.InvariantInfo);
-        httpContext.Request.RouteValues[nameof(AdditionalSampleParameterList.Bar)] = bar.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[nameof(SampleParameterList.Foo)] = foo.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
+        httpContext.Request.RouteValues[nameof(AdditionalSampleParameterList.Bar)] = bar.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -5129,14 +6451,23 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     [Fact]
     public void RequestDelegateThrowsWhenParameterNameConflicts()
     {
-        void TestAction(HttpContext context, [AsParameters] SampleParameterList args, [AsParameters] SampleParameterList args2)
+        void TestAction(
+            HttpContext context,
+            [AsParameters] SampleParameterList args,
+            [AsParameters] SampleParameterList args2
+        )
         {
             context.Items.Add("foo", args.Foo);
         }
         var httpContext = CreateHttpContext();
 
-        var exception = Assert.Throws<ArgumentException>(() => RequestDelegateFactory.Create(TestAction));
-        Assert.Contains("An item with the same key has already been added. Key: Foo", exception.Message);
+        var exception = Assert.Throws<ArgumentException>(
+            () => RequestDelegateFactory.Create(TestAction)
+        );
+        Assert.Contains(
+            "An item with the same key has already been added. Key: Foo",
+            exception.Message
+        );
     }
 
     private class ParameterListWithReadOnlyProperties
@@ -5159,15 +6490,21 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         const int routeParamValue = 42;
         var expectedInput = new ParameterListWithReadOnlyProperties() { Value = routeParamValue };
 
-        void TestAction(HttpContext context, [AsParameters] ParameterListWithReadOnlyProperties args)
+        void TestAction(
+            HttpContext context,
+            [AsParameters] ParameterListWithReadOnlyProperties args
+        )
         {
             context.Items.Add("input", args);
         }
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.Value)] = routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
-        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.ConstantValue)] = routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
-        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.ReadOnlyValue)] = routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.Value)] =
+            routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.ConstantValue)] =
+            routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.ReadOnlyValue)] =
+            routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
 
         var factoryResult = RequestDelegateFactory.Create(TestAction);
         var requestDelegate = factoryResult.RequestDelegate;
@@ -5180,7 +6517,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         Assert.Equal(expectedInput.ReadOnlyValue, input.ReadOnlyValue);
     }
 
-    private record ParameterListRecordWitDefaultValue(HttpContext HttpContext, [FromRoute] int Value = 42);
+    private record ParameterListRecordWitDefaultValue(
+        HttpContext HttpContext,
+        [FromRoute] int Value = 42
+    );
 
     [Fact]
     public async Task RequestDelegatePopulatesFromParameterListRecordUsesDefaultValue()
@@ -5204,7 +6544,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private class ParameterListWitDefaultValue
     {
-        public ParameterListWitDefaultValue(HttpContext httpContext, [FromRoute]int value = 42)
+        public ParameterListWitDefaultValue(HttpContext httpContext, [FromRoute] int value = 42)
         {
             HttpContext = httpContext;
             Value = value;
@@ -5243,22 +6583,38 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         {
             invoked = true;
             return $"Hello, {name}!";
-        };
+        }
+        ;
 
         var httpContext = CreateHttpContext();
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(HelloName, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            HelloName,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    context.Arguments[0] = context.Arguments[0] != null ? $"{((string)context.Arguments[0]!)}Prefix" : "NULL";
-                    return await next(context);
-                }
-            }),
-        });
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                context.Arguments[0] =
+                                    context.Arguments[0] != null
+                                        ? $"{((string)context.Arguments[0]!)}Prefix"
+                                        : "NULL";
+                                return await next(context);
+                            }
+                    }
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
@@ -5274,22 +6630,33 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "TestName"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "TestName" }
+        );
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create((string name) => $"Hello, {name}!", new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            (string name) => $"Hello, {name}!",
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    return await next(context);
-                }
-            }),
-        });
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                return await next(context);
+                            }
+                    }
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
@@ -5312,26 +6679,39 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var methodInfo = typeof(RequestDelegateFactoryTests).GetMethod(
             nameof(GetString),
             BindingFlags.NonPublic | BindingFlags.Instance,
-            new[] { typeof(string) });
+            new[] { typeof(string) }
+        );
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "TestName"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "TestName" }
+        );
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(methodInfo!, null, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            methodInfo!,
+            null,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    return await next(context);
-                }
-            }),
-        });
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                return await next(context);
+                            }
+                    }
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
@@ -5349,14 +6729,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var methodInfo = typeof(RequestDelegateFactoryTests).GetMethod(
             nameof(GetString),
             BindingFlags.NonPublic | BindingFlags.Instance,
-            new[] { typeof(string) });
+            new[] { typeof(string) }
+        );
         var httpContext = CreateHttpContext();
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "TestName"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "TestName" }
+        );
 
         // Act
         Func<HttpContext, object> targetFactory = (context) =>
@@ -5365,16 +6745,29 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             context.Items["invoked"] = true;
             return Activator.CreateInstance(methodInfo!.DeclaringType!)!;
         };
-        var factoryResult = RequestDelegateFactory.Create(methodInfo!, targetFactory, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            methodInfo!,
+            targetFactory,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    return await next(context);
-                }
-            }),
-        });
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                return await next(context);
+                            }
+                    }
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
@@ -5394,7 +6787,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         string HelloName(string name)
         {
             return $"Hello, {name}!";
-        };
+        }
+        ;
 
         var httpContext = CreateHttpContext();
 
@@ -5402,24 +6796,39 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Response.Body = responseBodyStream;
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(HelloName, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>() {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    if (context.HttpContext.Response.StatusCode == 400)
+        var factoryResult = RequestDelegateFactory.Create(
+            HelloName,
+            new RequestDelegateFactoryOptions()
+            {
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
                     {
-                        return Results.Problem("New response", statusCode: 400);
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                if (context.HttpContext.Response.StatusCode == 400)
+                                {
+                                    return Results.Problem("New response", statusCode: 400);
+                                }
+                                return await next(context);
+                            }
                     }
-                    return await next(context);
-                }
-            }),
-        });
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
         // Assert
-        var decodedResponseBody = JsonSerializer.Deserialize<Mvc.ProblemDetails>(responseBodyStream.ToArray());
+        var decodedResponseBody = JsonSerializer.Deserialize<Mvc.ProblemDetails>(
+            responseBodyStream.ToArray()
+        );
         Assert.Equal(400, httpContext.Response.StatusCode);
         Assert.Equal("New response", decodedResponseBody!.Detail);
     }
@@ -5431,7 +6840,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         string HelloName(string name, int age)
         {
             return $"Hello, {name}! You are {age} years old.";
-        };
+        }
+        ;
 
         var loggerInvoked = 0;
         void Log(string arg) => loggerInvoked++;
@@ -5441,32 +6851,43 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "TestName",
-            ["age"] = "25"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "TestName", ["age"] = "25" }
+        );
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(HelloName, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            HelloName,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    context.Arguments[1] = ((int)context.Arguments[1]!) + 2;
-                    return await next(context);
-                },
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    foreach (var parameter in context.Arguments)
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
                     {
-                        Log(parameter!.ToString() ?? "no arg");
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                context.Arguments[1] = ((int)context.Arguments[1]!) + 2;
+                                return await next(context);
+                            },
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                foreach (var parameter in context.Arguments)
+                                {
+                                    Log(parameter!.ToString() ?? "no arg");
+                                }
+                                return await next(context);
+                            }
                     }
-                    return await next(context);
-                }
-            }),
-        });
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
@@ -5483,39 +6904,52 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         string HelloName(string name)
         {
             return $"Hello, {name}!.";
-        };
+        }
+        ;
 
         var httpContext = CreateHttpContext();
 
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "TestName"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "TestName" }
+        );
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(HelloName, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            HelloName,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) =>
-                {
-                    var parameters = routeHandlerContext.MethodInfo.GetParameters();
-                    var isInt = parameters.Length == 2 && parameters[1].ParameterType == typeof(int);
-                    return async (context) =>
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
                     {
-                        if (isInt)
+                        (routeHandlerContext, next) =>
                         {
-                            context.Arguments[1] = ((int)context.Arguments[1]!) + 2;
-                            return await next(context);
-                        }
-                        return "Is not an int.";
-                    };
-                },
-            }),
-        });
+                            var parameters = routeHandlerContext.MethodInfo.GetParameters();
+                            var isInt =
+                                parameters.Length == 2
+                                && parameters[1].ParameterType == typeof(int);
+                            return async (context) =>
+                            {
+                                if (isInt)
+                                {
+                                    context.Arguments[1] = ((int)context.Arguments[1]!) + 2;
+                                    return await next(context);
+                                }
+                                return "Is not an int.";
+                            };
+                        },
+                    }
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
@@ -5531,7 +6965,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         string HelloName(IFormFileCollection formFiles)
         {
             return $"Got {formFiles.Count} files.";
-        };
+        }
+        ;
 
         var fileContent = new StringContent("hello", Encoding.UTF8, "application/octet-stream");
         var form = new MultipartFormDataContent("some-boundary");
@@ -5545,38 +6980,60 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(HelloName, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            HelloName,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) =>
-                {
-                    string? contentType = null;
-
-                    return async (context) =>
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
                     {
-                        contentType ??= context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<IAcceptsMetadata>()?.ContentTypes.SingleOrDefault();
-
-                        if (contentType == "multipart/form-data")
+                        (routeHandlerContext, next) =>
                         {
-                            return "I see you expect a form.";
-                        }
+                            string? contentType = null;
 
-                        return await next(context);
-                    };
-                },
-            }),
-        });
+                            return async (context) =>
+                            {
+                                contentType ??= context.HttpContext
+                                    .GetEndpoint()
+                                    ?.Metadata.GetMetadata<IAcceptsMetadata>()
+                                    ?.ContentTypes.SingleOrDefault();
 
-        var builder = new RouteEndpointBuilder(factoryResult.RequestDelegate, RoutePatternFactory.Parse("/"), order: 0);
+                                if (contentType == "multipart/form-data")
+                                {
+                                    return "I see you expect a form.";
+                                }
+
+                                return await next(context);
+                            };
+                        },
+                    }
+                ),
+            }
+        );
+
+        var builder = new RouteEndpointBuilder(
+            factoryResult.RequestDelegate,
+            RoutePatternFactory.Parse("/"),
+            order: 0
+        );
         ((List<object>)builder.Metadata).AddRange(factoryResult.EndpointMetadata);
-        httpContext.Features.Set<IEndpointFeature>(new EndpointFeature { Endpoint = builder.Build() });
+        httpContext.Features.Set<IEndpointFeature>(
+            new EndpointFeature { Endpoint = builder.Build() }
+        );
 
         await factoryResult.RequestDelegate(httpContext);
 
@@ -5593,7 +7050,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         string PrintTodo(Todo todo)
         {
             return $"{todo.Name} is {(todo.IsComplete ? "done" : "not done")}.";
-        };
+        }
+        ;
 
         var httpContext = CreateHttpContext();
 
@@ -5601,26 +7059,42 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(PrintTodo, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            PrintTodo,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    Todo originalTodo = (Todo)context.Arguments[0]!;
-                    originalTodo!.IsComplete = !originalTodo.IsComplete;
-                    context.Arguments[0] = originalTodo;
-                    return await next(context);
-                }
-            }),
-        });
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                Todo originalTodo = (Todo)context.Arguments[0]!;
+                                originalTodo!.IsComplete = !originalTodo.IsComplete;
+                                context.Arguments[0] = originalTodo;
+                                return await next(context);
+                            }
+                    }
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
@@ -5636,34 +7110,46 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         string HelloName(string name)
         {
             return $"Hello, {name}!";
-        };
+        }
+        ;
 
         var httpContext = CreateHttpContext();
 
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "TestName"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "TestName" }
+        );
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(HelloName, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            HelloName,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    var previousResult = await next(context);
-                    if (previousResult is string stringResult)
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
                     {
-                        return stringResult.ToUpperInvariant();
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                var previousResult = await next(context);
+                                if (previousResult is string stringResult)
+                                {
+                                    return stringResult.ToUpperInvariant();
+                                }
+                                return previousResult;
+                            }
                     }
-                    return previousResult;
-                }
-            }),
-        });
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
@@ -5679,40 +7165,53 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         string HelloName(string name)
         {
             return $"Hello, {name}!";
-        };
+        }
+        ;
 
         var httpContext = CreateHttpContext();
 
         var responseBodyStream = new MemoryStream();
         httpContext.Response.Body = responseBodyStream;
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "TestName"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "TestName" }
+        );
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(HelloName, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            HelloName,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    var previousResult = await next(context);
-                    if (previousResult is string stringResult)
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
                     {
-                        return stringResult.ToUpperInvariant();
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                var previousResult = await next(context);
+                                if (previousResult is string stringResult)
+                                {
+                                    return stringResult.ToUpperInvariant();
+                                }
+                                return previousResult;
+                            },
+                        (RouteHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                var newValue = $"{context.GetArgument<string>(0)}Prefix";
+                                context.Arguments[0] = newValue;
+                                return await next(context);
+                            }
                     }
-                    return previousResult;
-                },
-                (RouteHandlerContext, next) => async (context) =>
-                {
-                    var newValue = $"{context.GetArgument<string>(0)}Prefix";
-                    context.Arguments[0] = newValue;
-                    return await next(context);
-                }
-            }),
-        });
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
@@ -5761,16 +7260,28 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Response.Body = responseBodyStream;
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(@delegate, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            @delegate,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    return await next(context);
-                }
-            }),
-        });
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                return await next(context);
+                            }
+                    }
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
@@ -5819,16 +7330,28 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Response.Body = responseBodyStream;
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(@delegate, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            @delegate,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    return await next(context);
-                }
-            }),
-        });
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                return await next(context);
+                            }
+                    }
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
@@ -5869,7 +7392,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 new object[] { (Func<ValueTask>)ValueTaskMethod },
                 new object[] { (Func<Task>)TaskMethod },
                 new object[] { (Func<ValueTask>)ValueTaskWithYieldMethod },
-                new object[] { (Func<Task>)TaskWithYieldMethod}
+                new object[] { (Func<Task>)TaskWithYieldMethod }
             };
         }
     }
@@ -5884,16 +7407,28 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Response.Body = responseBodyStream;
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(@delegate, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            @delegate,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    return await next(context);
-                }
-            }),
-        });
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                return await next(context);
+                            }
+                    }
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
@@ -5912,22 +7447,35 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             await tcs.Task;
             await Task.Yield();
             c.Response.StatusCode = 400;
-        };
+        }
+        ;
         var responseBodyStream = new MemoryStream();
         var httpContext = CreateHttpContext();
         httpContext.Response.Body = responseBodyStream;
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(HandlerWithTaskAwait, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            HandlerWithTaskAwait,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    return await next(context);
-                }
-            }),
-        });
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                return await next(context);
+                            }
+                    }
+                ),
+            }
+        );
 
         var requestDelegate = factoryResult.RequestDelegate;
         var request = requestDelegate(httpContext);
@@ -5945,13 +7493,13 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         {
             ValueTask<TodoStruct> ValueTaskOfStructMethod()
             {
-                return ValueTask.FromResult(new TodoStruct {  Name = "Test todo"});
+                return ValueTask.FromResult(new TodoStruct { Name = "Test todo" });
             }
 
             async ValueTask<TodoStruct> ValueTaskOfStructWithYieldMethod()
             {
                 await Task.Yield();
-                return new TodoStruct {  Name = "Test todo" };
+                return new TodoStruct { Name = "Test todo" };
             }
 
             Task<TodoStruct> TaskOfStructMethod()
@@ -5985,24 +7533,36 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Response.Body = responseBodyStream;
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(@delegate, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            @delegate,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    return await next(context);
-                }
-            }),
-        });
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                return await next(context);
+                            }
+                    }
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
 
         Assert.Equal(200, httpContext.Response.StatusCode);
-        var deserializedResponseBody = JsonSerializer.Deserialize<TodoStruct>(responseBodyStream.ToArray(), new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        var deserializedResponseBody = JsonSerializer.Deserialize<TodoStruct>(
+            responseBodyStream.ToArray(),
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+        );
         Assert.Equal("Test todo", deserializedResponseBody.Name);
     }
 
@@ -6010,10 +7570,23 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public async Task RequestDelegateFactory_CanApplyFiltersOnHandlerWithManyArguments()
     {
         // Arrange
-        string HelloName(int? one, string? two, int? three, string? four, int? five, bool? six, string? seven, string? eight, int? nine, string? ten, int? eleven)
+        string HelloName(
+            int? one,
+            string? two,
+            int? three,
+            string? four,
+            int? five,
+            bool? six,
+            string? seven,
+            string? eight,
+            int? nine,
+            string? ten,
+            int? eleven
+        )
         {
             return "Too many arguments!";
-        };
+        }
+        ;
 
         var httpContext = CreateHttpContext();
 
@@ -6021,18 +7594,30 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Response.Body = responseBodyStream;
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(HelloName, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            HelloName,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    Assert.IsType<DefaultEndpointFilterInvocationContext>(context);
-                    Assert.Equal(11, context.Arguments.Count);
-                    return await next(context);
-                }
-            }),
-        });
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                Assert.IsType<DefaultEndpointFilterInvocationContext>(context);
+                                Assert.Equal(11, context.Arguments.Count);
+                                return await next(context);
+                            }
+                    }
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
     }
@@ -6044,7 +7629,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         string HelloName()
         {
             return "No arguments!";
-        };
+        }
+        ;
 
         var httpContext = CreateHttpContext();
 
@@ -6052,18 +7638,30 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Response.Body = responseBodyStream;
 
         // Act
-        var factoryResult = RequestDelegateFactory.Create(HelloName, new RequestDelegateFactoryOptions()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        var factoryResult = RequestDelegateFactory.Create(
+            HelloName,
+            new RequestDelegateFactoryOptions()
             {
-                (routeHandlerContext, next) => async (context) =>
-                {
-                    Assert.IsType<DefaultEndpointFilterInvocationContext>(context);
-                    Assert.Equal(0, context.Arguments.Count);
-                    return await next(context);
-                }
-            }),
-        });
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                            async (context) =>
+                            {
+                                Assert.IsType<DefaultEndpointFilterInvocationContext>(context);
+                                Assert.Equal(0, context.Arguments.Count);
+                                return await next(context);
+                            }
+                    }
+                ),
+            }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
         await requestDelegate(httpContext);
     }
@@ -6088,7 +7686,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var @delegate = () => new object();
         var result = RequestDelegateFactory.Create(@delegate);
 
-        var responseMetadata = Assert.IsAssignableFrom<IProducesResponseTypeMetadata>(Assert.Single(result.EndpointMetadata));
+        var responseMetadata = Assert.IsAssignableFrom<IProducesResponseTypeMetadata>(
+            Assert.Single(result.EndpointMetadata)
+        );
 
         Assert.Equal("application/json", Assert.Single(responseMetadata.ContentTypes));
         Assert.Equal(typeof(object), responseMetadata.Type);
@@ -6100,7 +7700,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var @delegate = () => "Hello";
         var result = RequestDelegateFactory.Create(@delegate);
 
-        var responseMetadata = Assert.IsAssignableFrom<IProducesResponseTypeMetadata>(Assert.Single(result.EndpointMetadata));
+        var responseMetadata = Assert.IsAssignableFrom<IProducesResponseTypeMetadata>(
+            Assert.Single(result.EndpointMetadata)
+        );
 
         Assert.Equal("text/plain", Assert.Single(responseMetadata.ContentTypes));
         Assert.Null(responseMetadata.Type);
@@ -6112,7 +7714,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // Arrange
         var @delegate = (AddsCustomParameterMetadataBindable param1) => { };
         var customMetadata = new CustomEndpointMetadata();
-        var options = new RequestDelegateFactoryOptions { EndpointBuilder = CreateEndpointBuilder(new List<object> { customMetadata }) };
+        var options = new RequestDelegateFactoryOptions
+        {
+            EndpointBuilder = CreateEndpointBuilder(new List<object> { customMetadata })
+        };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options);
@@ -6120,17 +7725,20 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // Assert
         // RouteHandlerEndpointDataSource adds things like the MethodInfo, HttpMethodMetadata and attributes to RouteHandlerOptions.EndointMetadata,
         // but we just specified our CustomEndpointMetadata in this test.
-        Assert.Collection(result.EndpointMetadata,
+        Assert.Collection(
+            result.EndpointMetadata,
             m => Assert.Same(customMetadata, m),
             m => Assert.True(m is ParameterNameMetadata { Name: "param1" }),
-            m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Parameter }));
+            m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Parameter })
+        );
     }
 
     [Fact]
     public void Create_DoesNotAddDelegateAttributes_AsMetadata()
     {
         // Arrange
-        var @delegate = [Attribute1, Attribute2] () => { };
+        var @delegate = [Attribute1, Attribute2]
+        () => { };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate);
@@ -6144,14 +7752,23 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void Create_DiscoversMetadata_FromParametersImplementingIEndpointParameterMetadataProvider()
     {
         // Arrange
-        var @delegate = (AddsCustomParameterMetadataBindable param1, AddsCustomParameterMetadata param2) => { };
+        var @delegate = (
+            AddsCustomParameterMetadataBindable param1,
+            AddsCustomParameterMetadata param2
+        ) => { };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate);
 
         // Assert
-        Assert.Contains(result.EndpointMetadata, m => m is ParameterNameMetadata { Name: "param1" });
-        Assert.Contains(result.EndpointMetadata, m => m is ParameterNameMetadata { Name: "param2" });
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is ParameterNameMetadata { Name: "param1" }
+        );
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is ParameterNameMetadata { Name: "param2" }
+        );
     }
 
     [Fact]
@@ -6164,7 +7781,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate);
 
         // Assert
-        Assert.Contains(result.EndpointMetadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter });
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        );
     }
 
     [Fact]
@@ -6177,7 +7797,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate);
 
         // Assert
-        Assert.Contains(result.EndpointMetadata, m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType });
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        );
     }
 
     [Fact]
@@ -6190,7 +7813,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate);
 
         // Assert
-        Assert.Contains(result.EndpointMetadata, m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType });
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        );
     }
 
     [Fact]
@@ -6203,7 +7829,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate);
 
         // Assert
-        Assert.Contains(result.EndpointMetadata, m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType });
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        );
     }
 
     [Fact]
@@ -6213,17 +7842,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var @delegate = () => new CountsDefaultEndpointMetadataResult();
         var options = new RequestDelegateFactoryOptions
         {
-            EndpointBuilder = CreateEndpointBuilder(new List<object>
-            {
-                new CustomEndpointMetadata { Source = MetadataSource.Caller }
-            }),
+            EndpointBuilder = CreateEndpointBuilder(
+                new List<object> { new CustomEndpointMetadata { Source = MetadataSource.Caller } }
+            ),
         };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(result.EndpointMetadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Caller });
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        );
         // Expecting '1' because only initial metadata will be in the metadata list when this metadata item is added
         Assert.Contains(result.EndpointMetadata, m => m is MetadataCountMetadata { Count: 1 });
     }
@@ -6235,17 +7866,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var @delegate = () => Task.FromResult(new CountsDefaultEndpointMetadataResult());
         var options = new RequestDelegateFactoryOptions
         {
-            EndpointBuilder = CreateEndpointBuilder(new List<object>
-            {
-                new CustomEndpointMetadata { Source = MetadataSource.Caller }
-            }),
+            EndpointBuilder = CreateEndpointBuilder(
+                new List<object> { new CustomEndpointMetadata { Source = MetadataSource.Caller } }
+            ),
         };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(result.EndpointMetadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Caller });
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        );
         // Expecting '1' because only initial metadata will be in the metadata list when this metadata item is added
         Assert.Contains(result.EndpointMetadata, m => m is MetadataCountMetadata { Count: 1 });
     }
@@ -6257,17 +7890,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var @delegate = () => ValueTask.FromResult(new CountsDefaultEndpointMetadataResult());
         var options = new RequestDelegateFactoryOptions
         {
-            EndpointBuilder = CreateEndpointBuilder(new List<object>
-            {
-                new CustomEndpointMetadata { Source = MetadataSource.Caller }
-            }),
+            EndpointBuilder = CreateEndpointBuilder(
+                new List<object> { new CustomEndpointMetadata { Source = MetadataSource.Caller } }
+            ),
         };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(result.EndpointMetadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Caller });
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        );
         // Expecting '1' because only initial metadata will be in the metadata list when this metadata item is added
         Assert.Contains(result.EndpointMetadata, m => m is MetadataCountMetadata { Count: 1 });
     }
@@ -6279,18 +7914,23 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var @delegate = (AddsCustomParameterMetadata param1) => "Hello";
         var options = new RequestDelegateFactoryOptions
         {
-            EndpointBuilder = CreateEndpointBuilder(new List<object>
-            {
-                new CustomEndpointMetadata { Source = MetadataSource.Caller }
-            }),
+            EndpointBuilder = CreateEndpointBuilder(
+                new List<object> { new CustomEndpointMetadata { Source = MetadataSource.Caller } }
+            ),
         };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(result.EndpointMetadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Caller });
-        Assert.Contains(result.EndpointMetadata, m => m is ParameterNameMetadata { Name: "param1" });
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        );
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is ParameterNameMetadata { Name: "param1" }
+        );
     }
 
     [Fact]
@@ -6300,75 +7940,101 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var @delegate = (AddsCustomParameterMetadata param1) => "Hello";
         var options = new RequestDelegateFactoryOptions
         {
-            EndpointBuilder = CreateEndpointBuilder(new List<object>
-            {
-                new CustomEndpointMetadata { Source = MetadataSource.Caller }
-            }),
+            EndpointBuilder = CreateEndpointBuilder(
+                new List<object> { new CustomEndpointMetadata { Source = MetadataSource.Caller } }
+            ),
         };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(result.EndpointMetadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Caller });
-        Assert.Contains(result.EndpointMetadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter });
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        );
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        );
     }
 
     [Fact]
     public void Create_CombinesPropertiesAsParameterMetadata_AndTopLevelParameter()
     {
         // Arrange
-        var @delegate = ([AsParameters] AddsCustomParameterMetadata param1) => new CountsDefaultEndpointMetadataResult();
+        var @delegate = ([AsParameters] AddsCustomParameterMetadata param1) =>
+            new CountsDefaultEndpointMetadataResult();
         var options = new RequestDelegateFactoryOptions
         {
-            EndpointBuilder = CreateEndpointBuilder(new List<object>
-            {
-                new CustomEndpointMetadata { Source = MetadataSource.Caller }
-            }),
+            EndpointBuilder = CreateEndpointBuilder(
+                new List<object> { new CustomEndpointMetadata { Source = MetadataSource.Caller } }
+            ),
         };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(result.EndpointMetadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter });
-        Assert.Contains(result.EndpointMetadata, m => m is ParameterNameMetadata { Name: "param1" });
-        Assert.Contains(result.EndpointMetadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Property });
-        Assert.Contains(result.EndpointMetadata, m => m is ParameterNameMetadata { Name: nameof(AddsCustomParameterMetadata.Data) });
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        );
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is ParameterNameMetadata { Name: "param1" }
+        );
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Property }
+        );
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is ParameterNameMetadata { Name: nameof(AddsCustomParameterMetadata.Data) }
+        );
     }
 
     [Fact]
     public void Create_CombinesAllMetadata_InCorrectOrder()
     {
         // Arrange
-        var @delegate = [Attribute1, Attribute2] (AddsCustomParameterMetadata param1) => new CountsDefaultEndpointMetadataPoco();
+        var @delegate = [Attribute1, Attribute2]
+        (AddsCustomParameterMetadata param1) => new CountsDefaultEndpointMetadataPoco();
         var options = new RequestDelegateFactoryOptions
         {
-            EndpointBuilder = CreateEndpointBuilder(new List<object>
-            {
-                new CustomEndpointMetadata { Source = MetadataSource.Caller }
-            }),
+            EndpointBuilder = CreateEndpointBuilder(
+                new List<object> { new CustomEndpointMetadata { Source = MetadataSource.Caller } }
+            ),
         };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Collection(result.EndpointMetadata,
+        Assert.Collection(
+            result.EndpointMetadata,
             // Initial metadata from RequestDelegateFactoryOptions.EndpointBuilder. If the caller want to override inferred metadata,
             // They need to call InferMetadata first, then add the overriding metadata, and then call Create with InferMetadata's result.
             // This is demonstrated in the following tests.
             m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Caller }),
             // Inferred AcceptsMetadata from RDF for complex type
-            m => Assert.True(m is AcceptsMetadata am && am.RequestType == typeof(AddsCustomParameterMetadata)),
+            m =>
+                Assert.True(
+                    m is AcceptsMetadata am && am.RequestType == typeof(AddsCustomParameterMetadata)
+                ),
             // Inferred ProducesResopnseTypeMetadata from RDF for complex type
-            m => Assert.Equal(typeof(CountsDefaultEndpointMetadataPoco), ((IProducesResponseTypeMetadata)m).Type),
+            m =>
+                Assert.Equal(
+                    typeof(CountsDefaultEndpointMetadataPoco),
+                    ((IProducesResponseTypeMetadata)m).Type
+                ),
             // Metadata provided by parameters implementing IEndpointParameterMetadataProvider
             m => Assert.True(m is ParameterNameMetadata { Name: "param1" }),
             // Metadata provided by parameters implementing IEndpointMetadataProvider
             m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Parameter }),
             // Metadata provided by return type implementing IEndpointMetadataProvider
-            m => Assert.True(m is MetadataCountMetadata { Count: 5 }));
+            m => Assert.True(m is MetadataCountMetadata { Count: 5 })
+        );
     }
 
     [Fact]
@@ -6376,17 +8042,21 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         // Arrange
         var @delegate = (AddsRoutePatternMetadata param1) => { };
-        var builder = new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/test/pattern"), order: 0);
-        var options = new RequestDelegateFactoryOptions
-        {
-            EndpointBuilder = builder,
-        };
+        var builder = new RouteEndpointBuilder(
+            requestDelegate: null,
+            RoutePatternFactory.Parse("/test/pattern"),
+            order: 0
+        );
+        var options = new RequestDelegateFactoryOptions { EndpointBuilder = builder, };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(result.EndpointMetadata, m => m is RoutePatternMetadata { RoutePattern: "/test/pattern" });
+        Assert.Contains(
+            result.EndpointMetadata,
+            m => m is RoutePatternMetadata { RoutePattern: "/test/pattern" }
+        );
     }
 
     [Fact]
@@ -6395,7 +8065,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var invokeCount = 0;
 
         // Arrange
-        var @delegate = [Attribute1, Attribute2] (AddsCustomParameterMetadata param1) =>
+        var @delegate = [Attribute1, Attribute2]
+        (AddsCustomParameterMetadata param1) =>
         {
             invokeCount++;
             return new CountsDefaultEndpointMetadataResult();
@@ -6405,7 +8076,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         {
             EndpointBuilder = CreateEndpointBuilder(),
         };
-        var metadataResult = new RequestDelegateMetadataResult { EndpointMetadata = new List<object>() };
+        var metadataResult = new RequestDelegateMetadataResult
+        {
+            EndpointMetadata = new List<object>()
+        };
         var httpContext = CreateHttpContext();
 
         // An empty object should deserialize to AddsCustomParameterMetadata since it has no required properties.
@@ -6414,8 +8088,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options, metadataResult);
@@ -6434,7 +8112,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void InferMetadata_ThenCreate_CombinesAllMetadata_InCorrectOrder()
     {
         // Arrange
-        var @delegate = [Attribute1, Attribute2] (AddsCustomParameterMetadata param1) => new CountsDefaultEndpointMetadataPoco();
+        var @delegate = [Attribute1, Attribute2]
+        (AddsCustomParameterMetadata param1) => new CountsDefaultEndpointMetadataPoco();
         var options = new RequestDelegateFactoryOptions
         {
             EndpointBuilder = CreateEndpointBuilder(),
@@ -6442,15 +8121,25 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         // Act
         var metadataResult = RequestDelegateFactory.InferMetadata(@delegate.Method, options);
-        options.EndpointBuilder.Metadata.Add(new CustomEndpointMetadata { Source = MetadataSource.Caller });
+        options.EndpointBuilder.Metadata.Add(
+            new CustomEndpointMetadata { Source = MetadataSource.Caller }
+        );
         var result = RequestDelegateFactory.Create(@delegate, options, metadataResult);
 
         // Assert
-        Assert.Collection(result.EndpointMetadata,
+        Assert.Collection(
+            result.EndpointMetadata,
             // Inferred AcceptsMetadata from RDF for complex type
-            m => Assert.True(m is AcceptsMetadata am && am.RequestType == typeof(AddsCustomParameterMetadata)),
+            m =>
+                Assert.True(
+                    m is AcceptsMetadata am && am.RequestType == typeof(AddsCustomParameterMetadata)
+                ),
             // Inferred ProducesResopnseTypeMetadata from RDF for complex type
-            m => Assert.Equal(typeof(CountsDefaultEndpointMetadataPoco), ((IProducesResponseTypeMetadata)m).Type),
+            m =>
+                Assert.Equal(
+                    typeof(CountsDefaultEndpointMetadataPoco),
+                    ((IProducesResponseTypeMetadata)m).Type
+                ),
             // Metadata provided by parameters implementing IEndpointParameterMetadataProvider
             m => Assert.True(m is ParameterNameMetadata { Name: "param1" }),
             // Metadata provided by parameters implementing IEndpointMetadataProvider
@@ -6458,7 +8147,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             // Metadata provided by return type implementing IEndpointMetadataProvider
             m => Assert.True(m is MetadataCountMetadata { Count: 4 }),
             // Entry-specific metadata added after a call to InferMetadata
-            m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Caller }));
+            m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Caller })
+        );
     }
 
     [Fact]
@@ -6533,10 +8223,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // Arrange
         var @delegate = (Todo todo) => new AccessesServicesMetadataResult();
         var metadataService = new MetadataService();
-        var serviceProvider = new ServiceCollection().AddSingleton(metadataService).BuildServiceProvider();
+        var serviceProvider = new ServiceCollection()
+            .AddSingleton(metadataService)
+            .BuildServiceProvider();
 
         // Act
-        var result = RequestDelegateFactory.Create(@delegate, new() { ServiceProvider = serviceProvider });
+        var result = RequestDelegateFactory.Create(
+            @delegate,
+            new() { ServiceProvider = serviceProvider }
+        );
 
         // Assert
         Assert.Contains(result.EndpointMetadata, m => m is MetadataService);
@@ -6548,10 +8243,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // Arrange
         var @delegate = (AccessesServicesMetadataBinder parameter1) => "Test";
         var metadataService = new MetadataService();
-        var serviceProvider = new ServiceCollection().AddSingleton(metadataService).BuildServiceProvider();
+        var serviceProvider = new ServiceCollection()
+            .AddSingleton(metadataService)
+            .BuildServiceProvider();
 
         // Act
-        var result = RequestDelegateFactory.Create(@delegate, new() { ServiceProvider = serviceProvider });
+        var result = RequestDelegateFactory.Create(
+            @delegate,
+            new() { ServiceProvider = serviceProvider }
+        );
 
         // Assert
         Assert.Contains(result.EndpointMetadata, m => m is MetadataService);
@@ -6563,22 +8263,31 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         RequestDelegate initialRequestDelegate = static (context) => Task.CompletedTask;
         var invokeCount = 0;
 
-        RequestDelegateFactoryOptions options = new()
-        {
-            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(new List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>()
+        RequestDelegateFactoryOptions options =
+            new()
             {
-                (routeHandlerContext, next) =>
-                {
-                    invokeCount++;
-                    return next;
-                },
-                (routeHandlerContext, next) =>
-                {
-                    invokeCount++;
-                    return next;
-                },
-            }),
-        };
+                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                    new List<
+                        Func<
+                            EndpointFilterFactoryContext,
+                            EndpointFilterDelegate,
+                            EndpointFilterDelegate
+                        >
+                    >()
+                    {
+                        (routeHandlerContext, next) =>
+                        {
+                            invokeCount++;
+                            return next;
+                        },
+                        (routeHandlerContext, next) =>
+                        {
+                            invokeCount++;
+                            return next;
+                        },
+                    }
+                ),
+            };
 
         var result = RequestDelegateFactory.Create(initialRequestDelegate, options);
         Assert.Same(initialRequestDelegate, result.RequestDelegate);
@@ -6590,10 +8299,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         RequestDelegate requestDelegate = static context => Task.CompletedTask;
 
-        RequestDelegateFactoryOptions options = new()
-        {
-            EndpointBuilder = new RouteEndpointBuilder(null, RoutePatternFactory.Parse("/"), order: 0),
-        };
+        RequestDelegateFactoryOptions options =
+            new()
+            {
+                EndpointBuilder = new RouteEndpointBuilder(
+                    null,
+                    RoutePatternFactory.Parse("/"),
+                    order: 0
+                ),
+            };
 
         var result = RequestDelegateFactory.Create(requestDelegate, options);
 
@@ -6607,13 +8321,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         return new()
         {
-            RequestServices = new ServiceCollection().AddSingleton(LoggerFactory).BuildServiceProvider(),
+            RequestServices = new ServiceCollection()
+                .AddSingleton(LoggerFactory)
+                .BuildServiceProvider(),
             Features =
-                {
-                    [typeof(IHttpResponseFeature)] = responseFeature,
-                    [typeof(IHttpResponseBodyFeature)] = responseFeature,
-                    [typeof(IHttpRequestLifetimeFeature)] = new TestHttpRequestLifetimeFeature(),
-                }
+            {
+                [typeof(IHttpResponseFeature)] = responseFeature,
+                [typeof(IHttpResponseBodyFeature)] = responseFeature,
+                [typeof(IHttpRequestLifetimeFeature)] = new TestHttpRequestLifetimeFeature(),
+            }
         };
     }
 
@@ -6627,10 +8343,19 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         return builder;
     }
 
-    private EndpointBuilder CreateEndpointBuilderFromFilterFactories(IEnumerable<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>> filterFactories)
+    private EndpointBuilder CreateEndpointBuilderFromFilterFactories(
+        IEnumerable<
+            Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>
+        > filterFactories
+    )
     {
         var builder = new RouteEndpointBuilder(null, RoutePatternFactory.Parse("/"), 0);
-        ((List<Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>>)builder.FilterFactories).AddRange(filterFactories);
+        (
+            (List<
+                Func<EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate>
+            >)
+                builder.FilterFactories
+        ).AddRange(filterFactories);
         return builder;
     }
 
@@ -6640,7 +8365,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         public static void PopulateMetadata(MethodInfo method, EndpointBuilder builder)
         {
-            if (builder.ApplicationServices.GetRequiredService<MetadataService>() is { } metadataService)
+            if (
+                builder.ApplicationServices.GetRequiredService<MetadataService>() is
+                { } metadataService
+            )
             {
                 builder.Metadata.Add(metadataService);
             }
@@ -6651,25 +8379,26 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private class AccessesServicesMetadataBinder : IEndpointMetadataProvider
     {
-        public static ValueTask<AccessesServicesMetadataBinder> BindAsync(HttpContext context, ParameterInfo parameter) =>
-            new(new AccessesServicesMetadataBinder());
+        public static ValueTask<AccessesServicesMetadataBinder> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        ) => new(new AccessesServicesMetadataBinder());
 
         public static void PopulateMetadata(MethodInfo method, EndpointBuilder builder)
         {
-            if (builder.ApplicationServices.GetRequiredService<MetadataService>() is { } metadataService)
+            if (
+                builder.ApplicationServices.GetRequiredService<MetadataService>() is
+                { } metadataService
+            )
             {
                 builder.Metadata.Add(metadataService);
             }
         }
     }
 
-    private class Attribute1 : Attribute
-    {
-    }
+    private class Attribute1 : Attribute { }
 
-    private class Attribute2 : Attribute
-    {
-    }
+    private class Attribute2 : Attribute { }
 
     private class AddsCustomEndpointMetadataResult : IEndpointMetadataProvider, IResult
     {
@@ -6683,10 +8412,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private class AddsNoEndpointMetadataResult : IEndpointMetadataProvider, IResult
     {
-        public static void PopulateMetadata(MethodInfo method, EndpointBuilder builder)
-        {
-
-        }
+        public static void PopulateMetadata(MethodInfo method, EndpointBuilder builder) { }
 
         public Task ExecuteAsync(HttpContext httpContext) => throw new NotImplementedException();
     }
@@ -6767,7 +8493,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         public Task ExecuteAsync(HttpContext httpContext) => throw new NotImplementedException();
     }
 
-    private class AddsCustomParameterMetadataAsProperty : IEndpointParameterMetadataProvider, IEndpointMetadataProvider
+    private class AddsCustomParameterMetadataAsProperty
+        : IEndpointParameterMetadataProvider,
+            IEndpointMetadataProvider
     {
         public static void PopulateMetadata(ParameterInfo parameter, EndpointBuilder builder)
         {
@@ -6790,7 +8518,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     // bool TryParse(string, out AddsCustomParameterMetadata)
     // but found
     // static Boolean TryParse(System.String, System.IFormatProvider, AddsCustomParameterMetadata ByRef)
-    private class AddsCustomParameterMetadata : IEndpointParameterMetadataProvider, IEndpointMetadataProvider//, IParsable<AddsCustomParameterMetadata>
+    private class AddsCustomParameterMetadata
+        : IEndpointParameterMetadataProvider,
+            IEndpointMetadataProvider //, IParsable<AddsCustomParameterMetadata>
     {
         public AddsCustomParameterMetadataAsProperty? Data { get; set; }
 
@@ -6813,9 +8543,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         //static AddsCustomParameterMetadata IParsable<AddsCustomParameterMetadata>.Parse(string s, IFormatProvider? provider) => throw new NotSupportedException();
     }
 
-    private class AddsCustomParameterMetadataBindable : IEndpointParameterMetadataProvider, IEndpointMetadataProvider
+    private class AddsCustomParameterMetadataBindable
+        : IEndpointParameterMetadataProvider,
+            IEndpointMetadataProvider
     {
-        public static ValueTask<AddsCustomParameterMetadataBindable> BindAsync(HttpContext context, ParameterInfo parameter) => default;
+        public static ValueTask<AddsCustomParameterMetadataBindable> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        ) => default;
 
         public static void PopulateMetadata(ParameterInfo parameter, EndpointBuilder builder)
         {
@@ -6837,7 +8572,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 return;
             }
 
-            builder.Metadata.Add(new RoutePatternMetadata { RoutePattern = reb.RoutePattern?.RawText ?? string.Empty });
+            builder.Metadata.Add(
+                new RoutePatternMetadata
+                {
+                    RoutePattern = reb.RoutePattern?.RawText ?? string.Empty
+                }
+            );
         }
     }
 
@@ -6885,7 +8625,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private class CustomTodo : Todo
     {
-        public static async ValueTask<CustomTodo?> BindAsync(HttpContext context, ParameterInfo parameter)
+        public static async ValueTask<CustomTodo?> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        )
         {
             Assert.Equal(typeof(CustomTodo), parameter.ParameterType);
             Assert.Equal("customTodo", parameter.Name);
@@ -6898,7 +8641,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private class JsonTodo : Todo
     {
-        public static async ValueTask<JsonTodo?> BindAsync(HttpContext context, ParameterInfo parameter)
+        public static async ValueTask<JsonTodo?> BindAsync(
+            HttpContext context,
+            ParameterInfo parameter
+        )
         {
             // manually call deserialize so we don't check content type
             var body = await JsonSerializer.DeserializeAsync<JsonTodo>(context.Request.Body);
@@ -6918,7 +8664,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     class TodoJsonConverter : JsonConverter<ITodo>
     {
-        public override ITodo? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override ITodo? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             var todo = new Todo();
             while (reader.Read())
@@ -6950,7 +8700,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             return todo;
         }
 
-        public override void Write(Utf8JsonWriter writer, ITodo value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            ITodo value,
+            JsonSerializerOptions options
+        )
         {
             throw new NotImplementedException();
         }
@@ -6986,9 +8740,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         public string? Name { get; set; }
     }
 
-    private class FromServiceAttribute : Attribute, IFromServiceMetadata
-    {
-    }
+    private class FromServiceAttribute : Attribute, IFromServiceMetadata { }
 
     class HttpHandler
     {
@@ -7001,13 +8753,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
     }
 
-    private interface IMyService
-    {
-    }
+    private interface IMyService { }
 
-    private class MyService : IMyService
-    {
-    }
+    private class MyService : IMyService { }
 
     private class CustomResult : IResult
     {
@@ -7056,7 +8804,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         public override long Length => throw new NotImplementedException();
 
-        public override long Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override long Position
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
 
         public override void Flush()
         {
@@ -7093,10 +8845,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             return new EmptyServiceProvider();
         }
 
-        public void Dispose()
-        {
-
-        }
+        public void Dispose() { }
 
         public object? GetService(Type serviceType)
         {
@@ -7112,7 +8861,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         private readonly CancellationTokenSource _requestAbortedCts = new();
 
-        public CancellationToken RequestAborted { get => _requestAbortedCts.Token; set => throw new NotImplementedException(); }
+        public CancellationToken RequestAborted
+        {
+            get => _requestAbortedCts.Token;
+            set => throw new NotImplementedException();
+        }
 
         public void Abort()
         {
@@ -7136,9 +8889,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 HasStarted = true;
                 return Stream.Null;
             }
-            set
-            {
-            }
+            set { }
         }
 
         public Stream Stream
@@ -7171,23 +8922,22 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             return Task.CompletedTask;
         }
 
-        public Task SendFileAsync(string path, long offset, long? count, CancellationToken cancellationToken = default)
+        public Task SendFileAsync(
+            string path,
+            long offset,
+            long? count,
+            CancellationToken cancellationToken = default
+        )
         {
             HasStarted = true;
             return Task.CompletedTask;
         }
 
-        public void DisableBuffering()
-        {
-        }
+        public void DisableBuffering() { }
 
-        public void OnStarting(Func<object, Task> callback, object state)
-        {
-        }
+        public void OnStarting(Func<object, Task> callback, object state) { }
 
-        public void OnCompleted(Func<object, Task> callback, object state)
-        {
-        }
+        public void OnCompleted(Func<object, Task> callback, object state) { }
     }
 
     private class RequestBodyDetectionFeature : IHttpRequestBodyDetectionFeature
@@ -7209,7 +8959,9 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
         public X509Certificate2? ClientCertificate { get; set; }
 
-        public Task<X509Certificate2?> GetClientCertificateAsync(CancellationToken cancellationToken)
+        public Task<X509Certificate2?> GetClientCertificateAsync(
+            CancellationToken cancellationToken
+        )
         {
             throw new NotImplementedException();
         }
@@ -7225,6 +8977,8 @@ internal static class TestExtensionResults
 {
     public static IResult TestResult(this IResultExtensions resultExtensions, string name)
     {
-        return Results.Ok(FormattableString.Invariant($"Hello {name}. This is from an extension method."));
+        return Results.Ok(
+            FormattableString.Invariant($"Hello {name}. This is from an extension method.")
+        );
     }
 }

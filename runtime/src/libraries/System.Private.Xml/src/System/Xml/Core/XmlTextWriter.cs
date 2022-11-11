@@ -186,7 +186,8 @@ namespace System.Xml
         private const int MaxNamespacesWalkCount = 16;
 #endif
 
-        private static readonly string[] s_stateName = {
+        private static readonly string[] s_stateName =
+        {
             "Start",
             "Prolog",
             "PostDTD",
@@ -199,7 +200,8 @@ namespace System.Xml
             "Closed",
         };
 
-        private static readonly string[] s_tokenName = {
+        private static readonly string[] s_tokenName =
+        {
             "PI",
             "Doctype",
             "Comment",
@@ -216,40 +218,224 @@ namespace System.Xml
             "Empty"
         };
 
-        private static readonly State[] s_stateTableDefault = {
+        private static readonly State[] s_stateTableDefault =
+        {
             //                          State.Start      State.Prolog     State.PostDTD    State.Element    State.Attribute  State.Content   State.AttrOnly   State.Epilog
             //
-            /* Token.PI             */ State.Prolog,    State.Prolog,    State.PostDTD,   State.Content,   State.Content,   State.Content,  State.Error,     State.Epilog,
-            /* Token.Doctype        */ State.PostDTD,   State.PostDTD,   State.Error,     State.Error,     State.Error,     State.Error,    State.Error,     State.Error,
-            /* Token.Comment        */ State.Prolog,    State.Prolog,    State.PostDTD,   State.Content,   State.Content,   State.Content,  State.Error,     State.Epilog,
-            /* Token.CData          */ State.Content,   State.Content,   State.Error,     State.Content,   State.Content,   State.Content,  State.Error,     State.Epilog,
-            /* Token.StartElement   */ State.Element,   State.Element,   State.Element,   State.Element,   State.Element,   State.Element,  State.Error,     State.Element,
-            /* Token.EndElement     */ State.Error,     State.Error,     State.Error,     State.Content,   State.Content,   State.Content,  State.Error,     State.Error,
-            /* Token.LongEndElement */ State.Error,     State.Error,     State.Error,     State.Content,   State.Content,   State.Content,  State.Error,     State.Error,
-            /* Token.StartAttribute */ State.AttrOnly,  State.Error,     State.Error,     State.Attribute, State.Attribute, State.Error,    State.Error,     State.Error,
-            /* Token.EndAttribute   */ State.Error,     State.Error,     State.Error,     State.Error,     State.Element,   State.Error,    State.Epilog,     State.Error,
-            /* Token.Content        */ State.Content,   State.Content,   State.Error,     State.Content,   State.Attribute, State.Content,  State.Attribute, State.Epilog,
-            /* Token.Base64         */ State.Content,   State.Content,   State.Error,     State.Content,   State.Attribute, State.Content,  State.Attribute, State.Epilog,
-            /* Token.RawData        */ State.Prolog,    State.Prolog,    State.PostDTD,   State.Content,   State.Attribute, State.Content,  State.Attribute, State.Epilog,
-            /* Token.Whitespace     */ State.Prolog,    State.Prolog,    State.PostDTD,   State.Content,   State.Attribute, State.Content,  State.Attribute, State.Epilog,
+            /* Token.PI             */State.Prolog,
+            State.Prolog,
+            State.PostDTD,
+            State.Content,
+            State.Content,
+            State.Content,
+            State.Error,
+            State.Epilog,
+            /* Token.Doctype        */State.PostDTD,
+            State.PostDTD,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Comment        */State.Prolog,
+            State.Prolog,
+            State.PostDTD,
+            State.Content,
+            State.Content,
+            State.Content,
+            State.Error,
+            State.Epilog,
+            /* Token.CData          */State.Content,
+            State.Content,
+            State.Error,
+            State.Content,
+            State.Content,
+            State.Content,
+            State.Error,
+            State.Epilog,
+            /* Token.StartElement   */State.Element,
+            State.Element,
+            State.Element,
+            State.Element,
+            State.Element,
+            State.Element,
+            State.Error,
+            State.Element,
+            /* Token.EndElement     */State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
+            State.Content,
+            State.Error,
+            State.Error,
+            /* Token.LongEndElement */State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
+            State.Content,
+            State.Error,
+            State.Error,
+            /* Token.StartAttribute */State.AttrOnly,
+            State.Error,
+            State.Error,
+            State.Attribute,
+            State.Attribute,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.EndAttribute   */State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Element,
+            State.Error,
+            State.Epilog,
+            State.Error,
+            /* Token.Content        */State.Content,
+            State.Content,
+            State.Error,
+            State.Content,
+            State.Attribute,
+            State.Content,
+            State.Attribute,
+            State.Epilog,
+            /* Token.Base64         */State.Content,
+            State.Content,
+            State.Error,
+            State.Content,
+            State.Attribute,
+            State.Content,
+            State.Attribute,
+            State.Epilog,
+            /* Token.RawData        */State.Prolog,
+            State.Prolog,
+            State.PostDTD,
+            State.Content,
+            State.Attribute,
+            State.Content,
+            State.Attribute,
+            State.Epilog,
+            /* Token.Whitespace     */State.Prolog,
+            State.Prolog,
+            State.PostDTD,
+            State.Content,
+            State.Attribute,
+            State.Content,
+            State.Attribute,
+            State.Epilog,
         };
 
-        private static readonly State[] s_stateTableDocument = {
+        private static readonly State[] s_stateTableDocument =
+        {
             //                          State.Start      State.Prolog     State.PostDTD    State.Element    State.Attribute  State.Content   State.AttrOnly   State.Epilog
             //
-            /* Token.PI             */ State.Error,     State.Prolog,    State.PostDTD,   State.Content,   State.Content,   State.Content,  State.Error,     State.Epilog,
-            /* Token.Doctype        */ State.Error,     State.PostDTD,   State.Error,     State.Error,     State.Error,     State.Error,    State.Error,     State.Error,
-            /* Token.Comment        */ State.Error,     State.Prolog,    State.PostDTD,   State.Content,   State.Content,   State.Content,  State.Error,     State.Epilog,
-            /* Token.CData          */ State.Error,     State.Error,     State.Error,     State.Content,   State.Content,   State.Content,  State.Error,     State.Error,
-            /* Token.StartElement   */ State.Error,     State.Element,   State.Element,   State.Element,   State.Element,   State.Element,  State.Error,     State.Error,
-            /* Token.EndElement     */ State.Error,     State.Error,     State.Error,     State.Content,   State.Content,   State.Content,  State.Error,     State.Error,
-            /* Token.LongEndElement */ State.Error,     State.Error,     State.Error,     State.Content,   State.Content,   State.Content,  State.Error,     State.Error,
-            /* Token.StartAttribute */ State.Error,     State.Error,     State.Error,     State.Attribute, State.Attribute, State.Error,    State.Error,     State.Error,
-            /* Token.EndAttribute   */ State.Error,     State.Error,     State.Error,     State.Error,     State.Element,   State.Error,    State.Error,     State.Error,
-            /* Token.Content        */ State.Error,     State.Error,     State.Error,     State.Content,   State.Attribute, State.Content,  State.Error,     State.Error,
-            /* Token.Base64         */ State.Error,     State.Error,     State.Error,     State.Content,   State.Attribute, State.Content,  State.Error,     State.Error,
-            /* Token.RawData        */ State.Error,     State.Prolog,    State.PostDTD,   State.Content,   State.Attribute, State.Content,  State.Error,     State.Epilog,
-            /* Token.Whitespace     */ State.Error,     State.Prolog,    State.PostDTD,   State.Content,   State.Attribute, State.Content,  State.Error,     State.Epilog,
+            /* Token.PI             */State.Error,
+            State.Prolog,
+            State.PostDTD,
+            State.Content,
+            State.Content,
+            State.Content,
+            State.Error,
+            State.Epilog,
+            /* Token.Doctype        */State.Error,
+            State.PostDTD,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Comment        */State.Error,
+            State.Prolog,
+            State.PostDTD,
+            State.Content,
+            State.Content,
+            State.Content,
+            State.Error,
+            State.Epilog,
+            /* Token.CData          */State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
+            State.Content,
+            State.Error,
+            State.Error,
+            /* Token.StartElement   */State.Error,
+            State.Element,
+            State.Element,
+            State.Element,
+            State.Element,
+            State.Element,
+            State.Error,
+            State.Error,
+            /* Token.EndElement     */State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
+            State.Content,
+            State.Error,
+            State.Error,
+            /* Token.LongEndElement */State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Content,
+            State.Content,
+            State.Error,
+            State.Error,
+            /* Token.StartAttribute */State.Error,
+            State.Error,
+            State.Error,
+            State.Attribute,
+            State.Attribute,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.EndAttribute   */State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Element,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Content        */State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Attribute,
+            State.Content,
+            State.Error,
+            State.Error,
+            /* Token.Base64         */State.Error,
+            State.Error,
+            State.Error,
+            State.Content,
+            State.Attribute,
+            State.Content,
+            State.Error,
+            State.Error,
+            /* Token.RawData        */State.Error,
+            State.Prolog,
+            State.PostDTD,
+            State.Content,
+            State.Attribute,
+            State.Content,
+            State.Error,
+            State.Epilog,
+            /* Token.Whitespace     */State.Error,
+            State.Prolog,
+            State.PostDTD,
+            State.Content,
+            State.Attribute,
+            State.Content,
+            State.Error,
+            State.Epilog,
         };
 
         //
@@ -290,10 +476,10 @@ namespace System.Xml
 
         // Creates an instance of the XmlTextWriter class using the specified file.
         public XmlTextWriter(string filename, Encoding? encoding)
-        : this(new FileStream(filename, FileMode.Create,
-                              FileAccess.Write, FileShare.Read), encoding)
-        {
-        }
+            : this(
+                new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.Read),
+                encoding
+            ) { }
 
         // Creates an instance of the XmlTextWriter class using the specified TextWriter.
         public XmlTextWriter(TextWriter w) : this()
@@ -341,7 +527,11 @@ namespace System.Xml
         public Formatting Formatting
         {
             get { return _formatting; }
-            set { _formatting = value; _indented = value == Formatting.Indented; }
+            set
+            {
+                _formatting = value;
+                _indented = value == Formatting.Indented;
+            }
         }
 
         // Gets or sets how many IndentChars to write for each level in the hierarchy when Formatting is set to "Indented".
@@ -660,7 +850,9 @@ namespace System.Xml
 
                             // Now verify prefix validity
                             string? definedPrefix = FindPrefix(ns);
-                            if (definedPrefix != null && (prefix == null || prefix == definedPrefix))
+                            if (
+                                definedPrefix != null && (prefix == null || prefix == definedPrefix)
+                            )
                             {
                                 prefix = definedPrefix;
                             }
@@ -689,7 +881,6 @@ namespace System.Xml
                     {
                         _specialAttr = SpecialAttr.XmlLang;
                     }
-
                     else if (localName == "xml:space")
                     {
                         _specialAttr = SpecialAttr.XmlSpace;
@@ -789,7 +980,10 @@ namespace System.Xml
                     throw new ArgumentException(SR.Xml_InvalidPiChars);
                 }
 
-                if (string.Equals(name, "xml", StringComparison.OrdinalIgnoreCase) && _stateTable == s_stateTableDocument)
+                if (
+                    string.Equals(name, "xml", StringComparison.OrdinalIgnoreCase)
+                    && _stateTable == s_stateTableDocument
+                )
                 {
                     throw new ArgumentException(SR.Xml_DupXmlDecl);
                 }
@@ -892,7 +1086,6 @@ namespace System.Xml
             }
         }
 
-
         // Writes out the specified text content.
         public override void WriteChars(char[] buffer, int index, int count)
         {
@@ -964,7 +1157,6 @@ namespace System.Xml
                 throw;
             }
         }
-
 
         // Encodes the specified binary bytes as binhex and writes out the resulting text.
         public override void WriteBinHex(byte[] buffer, int index, int count)
@@ -1215,13 +1407,25 @@ namespace System.Xml
             }
             else if (_currentState == State.Error)
             {
-                throw new InvalidOperationException(SR.Format(SR.Xml_WrongToken, s_tokenName[(int)token], s_stateName[(int)State.Error]));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.Xml_WrongToken,
+                        s_tokenName[(int)token],
+                        s_stateName[(int)State.Error]
+                    )
+                );
             }
 
             State newState = _stateTable[(int)token * 8 + (int)_currentState];
             if (newState == State.Error)
             {
-                throw new InvalidOperationException(SR.Format(SR.Xml_WrongToken, s_tokenName[(int)token], s_stateName[(int)_currentState]));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.Xml_WrongToken,
+                        s_tokenName[(int)token],
+                        s_stateName[(int)_currentState]
+                    )
+                );
             }
 
             switch (token)
@@ -1404,8 +1608,10 @@ namespace System.Xml
                 }
             }
             // Default
-            if ((_stack[_top].defaultNs != _stack[_top - 1].defaultNs) &&
-                (_stack[_top].defaultNsState == NamespaceState.DeclaredButNotWrittenOut))
+            if (
+                (_stack[_top].defaultNs != _stack[_top - 1].defaultNs)
+                && (_stack[_top].defaultNsState == NamespaceState.DeclaredButNotWrittenOut)
+            )
             {
                 _textWriter.Write(" xmlns=");
                 _textWriter.Write(_quoteChar);
@@ -1489,7 +1695,11 @@ namespace System.Xml
                         return;
                 }
 
-                _stack[_top].defaultNsState = (declared ? NamespaceState.DeclaredAndWrittenOut : NamespaceState.DeclaredButNotWrittenOut);
+                _stack[_top].defaultNsState = (
+                    declared
+                        ? NamespaceState.DeclaredAndWrittenOut
+                        : NamespaceState.DeclaredButNotWrittenOut
+                );
             }
             else
             {
@@ -1710,7 +1920,7 @@ namespace System.Xml
                 // Parse NCName (may be prefix, may be local name)
                 int position = ValidateNames.ParseNCName(name);
 
-            Continue:
+                Continue:
                 if (position == nameLength)
                 {
                     return;
@@ -1777,12 +1987,13 @@ namespace System.Xml
             }
         }
 
-
         private static void VerifyPrefixXml(string? prefix, string ns)
         {
-            if (prefix != null &&
-                prefix.Equals("xml", StringComparison.OrdinalIgnoreCase) &&
-                XmlReservedNs.NsXml != ns)
+            if (
+                prefix != null
+                && prefix.Equals("xml", StringComparison.OrdinalIgnoreCase)
+                && XmlReservedNs.NsXml != ns
+            )
             {
                 throw new ArgumentException(SR.Xml_InvalidPrefix);
             }
@@ -1793,7 +2004,8 @@ namespace System.Xml
             if (_top == _stack.Length - 1)
             {
                 TagInfo[] na = new TagInfo[_stack.Length + 10];
-                if (_top > 0) Array.Copy(_stack, na, _top + 1);
+                if (_top > 0)
+                    Array.Copy(_stack, na, _top + 1);
                 _stack = na;
             }
 

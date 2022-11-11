@@ -19,22 +19,25 @@ public static class ColumnAccessorsFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static ColumnAccessors Create(IColumn column)
-        => (ColumnAccessors)GenericCreate
-            .MakeGenericMethod(column.ProviderClrType)
-            .Invoke(null, new object[] { column })!;
+    public static ColumnAccessors Create(IColumn column) =>
+        (ColumnAccessors)
+            GenericCreate
+                .MakeGenericMethod(column.ProviderClrType)
+                .Invoke(null, new object[] { column })!;
 
-    private static readonly MethodInfo GenericCreate
-        = typeof(ColumnAccessorsFactory).GetTypeInfo().GetDeclaredMethod(nameof(CreateGeneric))!;
+    private static readonly MethodInfo GenericCreate = typeof(ColumnAccessorsFactory)
+        .GetTypeInfo()
+        .GetDeclaredMethod(nameof(CreateGeneric))!;
 
     [UsedImplicitly]
-    private static ColumnAccessors CreateGeneric<TColumn>(IColumn column)
-        => new(
-            CreateCurrentValueGetter<TColumn>(column),
-            CreateOriginalValueGetter<TColumn>(column));
+    private static ColumnAccessors CreateGeneric<TColumn>(IColumn column) =>
+        new(CreateCurrentValueGetter<TColumn>(column), CreateOriginalValueGetter<TColumn>(column));
 
-    private static Func<IReadOnlyModificationCommand, (TColumn?, bool)> CreateCurrentValueGetter<TColumn>(IColumn column)
-        => c =>
+    private static Func<
+        IReadOnlyModificationCommand,
+        (TColumn?, bool)
+    > CreateCurrentValueGetter<TColumn>(IColumn column) =>
+        c =>
         {
             if (c.Entries.Count > 0)
             {
@@ -50,16 +53,14 @@ public static class ColumnAccessorsFactory
                     }
 
                     var providerValue = entry.GetCurrentProviderValue(property);
-                    if (providerValue == null
-                        && !typeof(TColumn).IsNullableType())
+                    if (providerValue == null && !typeof(TColumn).IsNullableType())
                     {
                         return (value!, valueFound);
                     }
 
                     value = (TColumn)providerValue!;
                     valueFound = true;
-                    if (entry.EntityState == EntityState.Added
-                        || entry.IsModified(property))
+                    if (entry.EntityState == EntityState.Added || entry.IsModified(property))
                     {
                         return (value, valueFound);
                     }
@@ -68,7 +69,9 @@ public static class ColumnAccessorsFactory
                 return (value, valueFound);
             }
 
-            var modification = c.ColumnModifications.FirstOrDefault(m => m.ColumnName == column.Name);
+            var modification = c.ColumnModifications.FirstOrDefault(
+                m => m.ColumnName == column.Name
+            );
             return modification == null
                 ? (default, false)
                 : modification.Value == null
@@ -76,8 +79,11 @@ public static class ColumnAccessorsFactory
                     : ((TColumn)modification.Value!, true);
         };
 
-    private static Func<IReadOnlyModificationCommand, (TColumn, bool)> CreateOriginalValueGetter<TColumn>(IColumn column)
-        => c =>
+    private static Func<
+        IReadOnlyModificationCommand,
+        (TColumn, bool)
+    > CreateOriginalValueGetter<TColumn>(IColumn column) =>
+        c =>
         {
             if (c.Entries.Count > 0)
             {
@@ -93,16 +99,19 @@ public static class ColumnAccessorsFactory
                     }
 
                     var providerValue = entry.GetOriginalProviderValue(property);
-                    if (providerValue == null
-                        && !typeof(TColumn).IsNullableType())
+                    if (providerValue == null && !typeof(TColumn).IsNullableType())
                     {
                         return (value!, valueFound);
                     }
 
                     value = (TColumn)providerValue!;
                     valueFound = true;
-                    if (entry.EntityState == EntityState.Unchanged
-                        || (entry.EntityState == EntityState.Modified && !entry.IsModified(property)))
+                    if (
+                        entry.EntityState == EntityState.Unchanged
+                        || (
+                            entry.EntityState == EntityState.Modified && !entry.IsModified(property)
+                        )
+                    )
                     {
                         return (value, valueFound);
                     }
@@ -111,7 +120,9 @@ public static class ColumnAccessorsFactory
                 return (value, valueFound);
             }
 
-            var modification = c.ColumnModifications.FirstOrDefault(m => m.ColumnName == column.Name);
+            var modification = c.ColumnModifications.FirstOrDefault(
+                m => m.ColumnName == column.Name
+            );
             return modification == null
                 ? (default!, false)
                 : modification.OriginalValue == null

@@ -14,7 +14,10 @@ public class ClientValidatorProviderContext
     /// <param name="modelMetadata">The <see cref="ModelBinding.ModelMetadata"/> for the model being validated.
     /// </param>
     /// <param name="items">The list of <see cref="ClientValidatorItem"/>s.</param>
-    public ClientValidatorProviderContext(ModelMetadata modelMetadata, IList<ClientValidatorItem> items)
+    public ClientValidatorProviderContext(
+        ModelMetadata modelMetadata,
+        IList<ClientValidatorItem> items
+    )
     {
         ModelMetadata = modelMetadata;
         Results = items;

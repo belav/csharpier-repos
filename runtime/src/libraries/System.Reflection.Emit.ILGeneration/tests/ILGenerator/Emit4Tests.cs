@@ -13,21 +13,32 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void TestEmitCalliBlittable()
         {
-            int a = 1, b = 1, result = 2;
+            int a = 1,
+                b = 1,
+                result = 2;
 
             ModuleBuilder moduleBuilder = Helpers.DynamicModule();
             TypeBuilder typeBuilder = moduleBuilder.DefineType("T", TypeAttributes.Public);
             Type returnType = typeof(int);
 
-            MethodBuilder methodBuilder = typeBuilder.DefineMethod("F",
-                MethodAttributes.Public | MethodAttributes.Static, returnType, new Type[] { typeof(IntPtr), typeof(int), typeof(int) });
+            MethodBuilder methodBuilder = typeBuilder.DefineMethod(
+                "F",
+                MethodAttributes.Public | MethodAttributes.Static,
+                returnType,
+                new Type[] { typeof(IntPtr), typeof(int), typeof(int) }
+            );
             methodBuilder.SetImplementationFlags(MethodImplAttributes.NoInlining);
 
             ILGenerator il = methodBuilder.GetILGenerator();
             il.Emit(OpCodes.Ldarg_1);
             il.Emit(OpCodes.Ldarg_2);
             il.Emit(OpCodes.Ldarg_0);
-            il.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, new Type[] { typeof(int), typeof(int) });
+            il.EmitCalli(
+                OpCodes.Calli,
+                CallingConvention.StdCall,
+                returnType,
+                new Type[] { typeof(int), typeof(int) }
+            );
             il.Emit(OpCodes.Ret);
 
             Type dynamicType = typeBuilder.CreateType();
@@ -48,24 +59,40 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void TestEmitCalliManagedBlittable()
         {
-            int a = 1, b = 1, result = 2;
+            int a = 1,
+                b = 1,
+                result = 2;
 
             ModuleBuilder moduleBuilder = Helpers.DynamicModule();
             TypeBuilder typeBuilder = moduleBuilder.DefineType("T", TypeAttributes.Public);
             Type returnType = typeof(int);
 
-            MethodBuilder methodBuilder = typeBuilder.DefineMethod("F",
-                MethodAttributes.Public | MethodAttributes.Static, returnType, new Type[] { typeof(IntPtr), typeof(int), typeof(int) });
+            MethodBuilder methodBuilder = typeBuilder.DefineMethod(
+                "F",
+                MethodAttributes.Public | MethodAttributes.Static,
+                returnType,
+                new Type[] { typeof(IntPtr), typeof(int), typeof(int) }
+            );
             methodBuilder.SetImplementationFlags(MethodImplAttributes.NoInlining);
 
-            MethodInfo method = typeof(ILGeneratorEmit4).GetMethod(nameof(ILGeneratorEmit4.Int32Sum), BindingFlags.NonPublic | BindingFlags.Static) ?? throw new InvalidOperationException("method is null");
+            MethodInfo method =
+                typeof(ILGeneratorEmit4).GetMethod(
+                    nameof(ILGeneratorEmit4.Int32Sum),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                ) ?? throw new InvalidOperationException("method is null");
             IntPtr funcPtr = method.MethodHandle.GetFunctionPointer();
 
             ILGenerator il = methodBuilder.GetILGenerator();
             il.Emit(OpCodes.Ldarg_1);
             il.Emit(OpCodes.Ldarg_2);
             il.Emit(OpCodes.Ldarg_0);
-            il.EmitCalli(OpCodes.Calli, CallingConventions.Standard, returnType, new Type[] { typeof(int), typeof(int) }, null);
+            il.EmitCalli(
+                OpCodes.Calli,
+                CallingConventions.Standard,
+                returnType,
+                new Type[] { typeof(int), typeof(int) },
+                null
+            );
             il.Emit(OpCodes.Ret);
 
             Type dynamicType = typeBuilder.CreateType();
@@ -81,24 +108,34 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void TestDynamicMethodEmitCalliBlittable()
         {
-            int a = 1, b = 1, result = 2;
+            int a = 1,
+                b = 1,
+                result = 2;
 
             Type returnType = typeof(int);
 
-            var dynamicMethod = new DynamicMethod("F", returnType, new Type[] { typeof(IntPtr), typeof(int), typeof(int) });
+            var dynamicMethod = new DynamicMethod(
+                "F",
+                returnType,
+                new Type[] { typeof(IntPtr), typeof(int), typeof(int) }
+            );
 
             ILGenerator il = dynamicMethod.GetILGenerator();
             il.Emit(OpCodes.Ldarg_1);
             il.Emit(OpCodes.Ldarg_2);
             il.Emit(OpCodes.Ldarg_0);
-            il.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, returnType, new Type[] { typeof(int), typeof(int) });
+            il.EmitCalli(
+                OpCodes.Calli,
+                CallingConvention.StdCall,
+                returnType,
+                new Type[] { typeof(int), typeof(int) }
+            );
             il.Emit(OpCodes.Ret);
 
             var del = new Int32SumStdCall(Int32Sum);
             IntPtr funcPtr = Marshal.GetFunctionPointerForDelegate(del);
 
-            object resultValue = dynamicMethod
-                .Invoke(null, new object[] { funcPtr, a, b });
+            object resultValue = dynamicMethod.Invoke(null, new object[] { funcPtr, a, b });
 
             GC.KeepAlive(del);
 
@@ -110,20 +147,30 @@ namespace System.Reflection.Emit.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2383", TestRuntimes.Mono)]
         public void TestEmitCalliNonBlittable()
         {
-            string input = "Test string!", result = "!gnirts tseT";
+            string input = "Test string!",
+                result = "!gnirts tseT";
 
             ModuleBuilder moduleBuilder = Helpers.DynamicModule();
             TypeBuilder typeBuilder = moduleBuilder.DefineType("T", TypeAttributes.Public);
             Type returnType = typeof(string);
 
-            MethodBuilder methodBuilder = typeBuilder.DefineMethod("F",
-                MethodAttributes.Public | MethodAttributes.Static, returnType, new Type[] { typeof(IntPtr), typeof(string) });
+            MethodBuilder methodBuilder = typeBuilder.DefineMethod(
+                "F",
+                MethodAttributes.Public | MethodAttributes.Static,
+                returnType,
+                new Type[] { typeof(IntPtr), typeof(string) }
+            );
             methodBuilder.SetImplementationFlags(MethodImplAttributes.NoInlining);
 
             ILGenerator il = methodBuilder.GetILGenerator();
             il.Emit(OpCodes.Ldarg_1);
             il.Emit(OpCodes.Ldarg_0);
-            il.EmitCalli(OpCodes.Calli, CallingConvention.Cdecl, returnType, new Type[] { typeof(string) });
+            il.EmitCalli(
+                OpCodes.Calli,
+                CallingConvention.Cdecl,
+                returnType,
+                new Type[] { typeof(string) }
+            );
             il.Emit(OpCodes.Ret);
 
             Type dynamicType = typeBuilder.CreateType();
@@ -144,23 +191,32 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void TestDynamicMethodEmitCalliNonBlittable()
         {
-            string input = "Test string!", result = "!gnirts tseT";
+            string input = "Test string!",
+                result = "!gnirts tseT";
 
             Type returnType = typeof(string);
 
-            var dynamicMethod = new DynamicMethod("F", returnType, new Type[] { typeof(IntPtr), typeof(string) });
+            var dynamicMethod = new DynamicMethod(
+                "F",
+                returnType,
+                new Type[] { typeof(IntPtr), typeof(string) }
+            );
 
             ILGenerator il = dynamicMethod.GetILGenerator();
             il.Emit(OpCodes.Ldarg_1);
             il.Emit(OpCodes.Ldarg_0);
-            il.EmitCalli(OpCodes.Calli, CallingConvention.Cdecl, returnType, new Type[] { typeof(string) });
+            il.EmitCalli(
+                OpCodes.Calli,
+                CallingConvention.Cdecl,
+                returnType,
+                new Type[] { typeof(string) }
+            );
             il.Emit(OpCodes.Ret);
 
             var del = new StringReverseCdecl(StringReverse);
             IntPtr funcPtr = Marshal.GetFunctionPointerForDelegate(del);
 
-            object resultValue = dynamicMethod
-                .Invoke(null, new object[] { funcPtr, input });
+            object resultValue = dynamicMethod.Invoke(null, new object[] { funcPtr, input });
 
             GC.KeepAlive(del);
 

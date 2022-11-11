@@ -30,9 +30,18 @@ namespace System.IO.Pipelines.Tests
         [Fact]
         public void InvalidArgs_Throws()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("pauseWriterThreshold", () => new PipeOptions(pauseWriterThreshold: -2));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("resumeWriterThreshold", () => new PipeOptions(resumeWriterThreshold: -2));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("resumeWriterThreshold", () => new PipeOptions(pauseWriterThreshold: 50, resumeWriterThreshold: 100));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "pauseWriterThreshold",
+                () => new PipeOptions(pauseWriterThreshold: -2)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "resumeWriterThreshold",
+                () => new PipeOptions(resumeWriterThreshold: -2)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "resumeWriterThreshold",
+                () => new PipeOptions(pauseWriterThreshold: 50, resumeWriterThreshold: 100)
+            );
         }
 
         [Theory]

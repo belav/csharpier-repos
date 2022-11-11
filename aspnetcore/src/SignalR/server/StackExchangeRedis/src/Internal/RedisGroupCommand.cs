@@ -30,7 +30,13 @@ internal readonly struct RedisGroupCommand
     /// </summary>
     public string ConnectionId { get; }
 
-    public RedisGroupCommand(int id, string serverName, GroupAction action, string groupName, string connectionId)
+    public RedisGroupCommand(
+        int id,
+        string serverName,
+        GroupAction action,
+        string groupName,
+        string connectionId
+    )
     {
         Id = id;
         ServerName = serverName;

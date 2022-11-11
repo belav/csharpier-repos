@@ -16,7 +16,11 @@ namespace ILCompiler
             /// Found a method call inside a method body. Method calls may bind generic parameters of the target method. If so,
             /// we have to record that fact.
             /// </summary>
-            private void ProcessMethodCall(MethodDesc target, Instantiation typeContext, Instantiation methodContext)
+            private void ProcessMethodCall(
+                MethodDesc target,
+                Instantiation typeContext,
+                Instantiation methodContext
+            )
             {
                 if (!target.HasInstantiation)
                     return;
@@ -31,7 +35,9 @@ namespace ILCompiler
                 // any generic method parameters here.
                 //
 
-                Instantiation genericTypeParameters = target.GetTypicalMethodDefinition().Instantiation;
+                Instantiation genericTypeParameters = target
+                    .GetTypicalMethodDefinition()
+                    .Instantiation;
                 Instantiation genericTypeArguments = target.Instantiation;
 
                 Debug.Assert(genericTypeParameters.Length == genericTypeArguments.Length);
@@ -59,7 +65,11 @@ namespace ILCompiler
                             //      return;
                             //  }
                             //
-                            RecordBinding((EcmaGenericParameter)genericTypeParameters[i], embedded, isProperEmbedding);
+                            RecordBinding(
+                                (EcmaGenericParameter)genericTypeParameters[i],
+                                embedded,
+                                isProperEmbedding
+                            );
                         }
                     );
                 }

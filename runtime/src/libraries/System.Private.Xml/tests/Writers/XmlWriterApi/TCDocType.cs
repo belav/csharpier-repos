@@ -22,9 +22,11 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteEndElement();
             }
 
-            string exp = utils.IsIndent() ?
-                "<!DOCTYPE ROOT PUBLIC \"publicid\" \"sysid\"[<!ENTITY e 'abc'>]>" + Environment.NewLine + "<ROOT />" :
-                "<!DOCTYPE ROOT PUBLIC \"publicid\" \"sysid\"[<!ENTITY e 'abc'>]><ROOT />";
+            string exp = utils.IsIndent()
+                ? "<!DOCTYPE ROOT PUBLIC \"publicid\" \"sysid\"[<!ENTITY e 'abc'>]>"
+                    + Environment.NewLine
+                    + "<ROOT />"
+                : "<!DOCTYPE ROOT PUBLIC \"publicid\" \"sysid\"[<!ENTITY e 'abc'>]><ROOT />";
             Assert.True(utils.CompareString(exp));
         }
 
@@ -39,9 +41,9 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteStartElement("Root");
                 w.WriteEndElement();
             }
-            string exp = utils.IsIndent() ?
-                "<!DOCTYPE test [<!ENTITY e 'abc'>]>" + Environment.NewLine + "<Root />" :
-                "<!DOCTYPE test [<!ENTITY e 'abc'>]><Root />";
+            string exp = utils.IsIndent()
+                ? "<!DOCTYPE test [<!ENTITY e 'abc'>]>" + Environment.NewLine + "<Root />"
+                : "<!DOCTYPE test [<!ENTITY e 'abc'>]><Root />";
             Assert.True(utils.CompareString(exp));
         }
 
@@ -87,13 +89,25 @@ namespace System.Xml.XmlWriterApiTests
                 catch (ArgumentException e)
                 {
                     CError.WriteLineIgnore(e.ToString());
-                    CError.Compare(w.WriteState, (utils.WriterType == WriterType.CharCheckingWriter) ? WriteState.Start : WriteState.Error, "WriteState should be Error");
+                    CError.Compare(
+                        w.WriteState,
+                        (utils.WriterType == WriterType.CharCheckingWriter)
+                            ? WriteState.Start
+                            : WriteState.Error,
+                        "WriteState should be Error"
+                    );
                     return;
                 }
                 catch (NullReferenceException e)
                 {
                     CError.WriteLineIgnore(e.ToString());
-                    CError.Compare(w.WriteState, (utils.WriterType == WriterType.CharCheckingWriter) ? WriteState.Start : WriteState.Error, "WriteState should be Error");
+                    CError.Compare(
+                        w.WriteState,
+                        (utils.WriterType == WriterType.CharCheckingWriter)
+                            ? WriteState.Start
+                            : WriteState.Error,
+                        "WriteState should be Error"
+                    );
                     return;
                 }
             }
@@ -114,7 +128,9 @@ namespace System.Xml.XmlWriterApiTests
                 w.WriteStartElement("Root");
                 w.WriteEndElement();
             }
-            string exp = utils.IsIndent() ? "<!DOCTYPE Root []>]>" + Environment.NewLine + "<Root />" : "<!DOCTYPE Root []>]><Root />";
+            string exp = utils.IsIndent()
+                ? "<!DOCTYPE Root []>]>" + Environment.NewLine + "<Root />"
+                : "<!DOCTYPE Root []>]><Root />";
             Assert.True(utils.CompareString(exp));
         }
 

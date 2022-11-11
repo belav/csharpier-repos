@@ -82,7 +82,12 @@ namespace Internal.IntrinsicSupport
                 }
             }
 
-            bool success = RuntimeAugments.TypeLoaderCallbacks.TryGetConstructedGenericTypeForComponents(openComparerType, new RuntimeTypeHandle[] { comparerTypeArgument }, out comparerType);
+            bool success =
+                RuntimeAugments.TypeLoaderCallbacks.TryGetConstructedGenericTypeForComponents(
+                    openComparerType,
+                    new RuntimeTypeHandle[] { comparerTypeArgument },
+                    out comparerType
+                );
             if (!success)
             {
                 Environment.FailFast("Unable to create comparer");

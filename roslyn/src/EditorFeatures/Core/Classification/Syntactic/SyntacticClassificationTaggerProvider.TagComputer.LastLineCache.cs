@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Classification
             private class LastLineCache
             {
                 // this helper class is primarily to improve active typing perf. don't bother to cache
-                // something very big. 
+                // something very big.
                 private const int MaxClassificationNumber = 32;
 
                 // mutating state
@@ -41,7 +41,10 @@ namespace Microsoft.CodeAnalysis.Classification
                     _classifications.Clear();
                 }
 
-                public bool TryUseCache(SnapshotSpan span, ArrayBuilder<ClassifiedSpan> classifications)
+                public bool TryUseCache(
+                    SnapshotSpan span,
+                    ArrayBuilder<ClassifiedSpan> classifications
+                )
                 {
                     _threadingContext.ThrowIfNotOnUIThread();
 

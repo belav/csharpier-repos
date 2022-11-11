@@ -4,6 +4,7 @@
 using System.Threading.RateLimiting;
 
 namespace Microsoft.AspNetCore.RateLimiting;
+
 internal sealed class NoLimiter<TResource> : PartitionedRateLimiter<TResource>
 {
     public override int GetAvailablePermits(TResource resourceID)
@@ -16,7 +17,11 @@ internal sealed class NoLimiter<TResource> : PartitionedRateLimiter<TResource>
         return new NoLimiterLease();
     }
 
-    protected override ValueTask<RateLimitLease> WaitAsyncCore(TResource resourceID, int permitCount, CancellationToken cancellationToken)
+    protected override ValueTask<RateLimitLease> WaitAsyncCore(
+        TResource resourceID,
+        int permitCount,
+        CancellationToken cancellationToken
+    )
     {
         return new ValueTask<RateLimitLease>(new NoLimiterLease());
     }

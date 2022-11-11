@@ -15,8 +15,14 @@ namespace System.Drawing
         /// <summary>
         /// Internal constructor, this class is created by BufferedGraphicsContext.
         /// </summary>
-        internal BufferedGraphics(Graphics bufferedGraphicsSurface, BufferedGraphicsContext context, Graphics? targetGraphics,
-                                  IntPtr targetDC, Point targetLoc, Size virtualSize)
+        internal BufferedGraphics(
+            Graphics bufferedGraphicsSurface,
+            BufferedGraphicsContext context,
+            Graphics? targetGraphics,
+            IntPtr targetDC,
+            Point targetLoc,
+            Size virtualSize
+        )
         {
             _context = context;
             _bufferedGraphicsSurface = bufferedGraphicsSurface;
@@ -89,7 +95,8 @@ namespace System.Drawing
                     new HandleRef(Graphics, sourceDC),
                     0,
                     0,
-                    Interop.Gdi32.RasterOp.SRCCOPY);
+                    Interop.Gdi32.RasterOp.SRCCOPY
+                );
             }
             finally
             {

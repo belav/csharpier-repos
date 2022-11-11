@@ -34,8 +34,7 @@ namespace System.Runtime
             get => GetGCLatencyMode();
             set
             {
-                if ((value < GCLatencyMode.Batch) ||
-                    (value > GCLatencyMode.SustainedLowLatency))
+                if ((value < GCLatencyMode.Batch) || (value > GCLatencyMode.SustainedLowLatency))
                 {
                     ThrowHelper.ArgumentOutOfRangeException_Enum_Value();
                 }
@@ -46,7 +45,10 @@ namespace System.Runtime
                     throw new InvalidOperationException(SR.InvalidOperation_SetLatencyModeNoGC);
                 }
 
-                Debug.Assert(status == SetLatencyModeStatus.Succeeded, $"Unexpected return value '{status}' from {nameof(SetGCLatencyMode)}.");
+                Debug.Assert(
+                    status == SetLatencyModeStatus.Succeeded,
+                    $"Unexpected return value '{status}' from {nameof(SetGCLatencyMode)}."
+                );
             }
         }
 
@@ -55,8 +57,10 @@ namespace System.Runtime
             get => GetLOHCompactionMode();
             set
             {
-                if ((value < GCLargeObjectHeapCompactionMode.Default) ||
-                    (value > GCLargeObjectHeapCompactionMode.CompactOnce))
+                if (
+                    (value < GCLargeObjectHeapCompactionMode.Default)
+                    || (value > GCLargeObjectHeapCompactionMode.CompactOnce)
+                )
                 {
                     ThrowHelper.ArgumentOutOfRangeException_Enum_Value();
                 }

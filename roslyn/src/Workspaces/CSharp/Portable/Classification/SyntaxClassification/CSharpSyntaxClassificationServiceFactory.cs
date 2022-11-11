@@ -10,17 +10,18 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.Classification.SyntaxClassification
 {
-    [ExportLanguageServiceFactory(typeof(ISyntaxClassificationService), LanguageNames.CSharp), Shared]
+    [
+        ExportLanguageServiceFactory(typeof(ISyntaxClassificationService), LanguageNames.CSharp),
+        Shared
+    ]
     internal class CSharpSyntaxClassificationServiceFactory : ILanguageServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSyntaxClassificationServiceFactory()
-        {
-        }
+        public CSharpSyntaxClassificationServiceFactory() { }
 
         [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
-        public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-            => new CSharpSyntaxClassificationService(languageServices);
+        public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+            new CSharpSyntaxClassificationService(languageServices);
     }
 }

@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_Args4
 {
     const int Pass = 100;
@@ -13,13 +14,15 @@ public class BringUpTest_Args4
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int Args4(int a, int b, int c, int d)
     {
-        return a+b+c+d;
+        return a + b + c + d;
     }
 
     public static int Main()
     {
-        int y = Args4(1,2,3,4);
-        if (y == 10) return Pass;
-        else return Fail;
+        int y = Args4(1, 2, 3, 4);
+        if (y == 10)
+            return Pass;
+        else
+            return Fail;
     }
 }

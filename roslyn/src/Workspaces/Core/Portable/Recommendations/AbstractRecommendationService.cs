@@ -14,33 +14,64 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Recommendations
 {
-    internal abstract partial class AbstractRecommendationService<TSyntaxContext> : IRecommendationService
-        where TSyntaxContext : SyntaxContext
+    internal abstract partial class AbstractRecommendationService<TSyntaxContext>
+        : IRecommendationService where TSyntaxContext : SyntaxContext
     {
         protected abstract AbstractRecommendationServiceRunner CreateRunner(
-            TSyntaxContext context, bool filterOutOfScopeLocals, CancellationToken cancellationToken);
+            TSyntaxContext context,
+            bool filterOutOfScopeLocals,
+            CancellationToken cancellationToken
+        );
 
-        public RecommendedSymbols GetRecommendedSymbolsInContext(SyntaxContext syntaxContext, RecommendationServiceOptions options, CancellationToken cancellationToken)
+        public RecommendedSymbols GetRecommendedSymbolsInContext(
+            SyntaxContext syntaxContext,
+            RecommendationServiceOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var semanticModel = syntaxContext.SemanticModel;
-            var result = CreateRunner((TSyntaxContext)syntaxContext, options.FilterOutOfScopeLocals, cancellationToken).GetRecommendedSymbols();
+            var result = CreateRunner(
+                    (TSyntaxContext)syntaxContext,
+                    options.FilterOutOfScopeLocals,
+                    cancellationToken
+                )
+                .GetRecommendedSymbols();
 
             var namedSymbols = result.NamedSymbols;
             var unnamedSymbols = result.UnnamedSymbols;
 
-            namedSymbols = namedSymbols.FilterToVisibleAndBrowsableSymbols(options.HideAdvancedMembers, semanticModel.Compilation);
-            unnamedSymbols = unnamedSymbols.FilterToVisibleAndBrowsableSymbols(options.HideAdvancedMembers, semanticModel.Compilation);
+            namedSymbols = namedSymbols.FilterToVisibleAndBrowsableSymbols(
+                options.HideAdvancedMembers,
+                semanticModel.Compilation
+            );
+            unnamedSymbols = unnamedSymbols.FilterToVisibleAndBrowsableSymbols(
+                options.HideAdvancedMembers,
+                semanticModel.Compilation
+            );
 
-            var shouldIncludeSymbolContext = new ShouldIncludeSymbolContext(syntaxContext, cancellationToken);
-            namedSymbols = namedSymbols.WhereAsArray(shouldIncludeSymbolContext.ShouldIncludeSymbol);
-            unnamedSymbols = unnamedSymbols.WhereAsArray(shouldIncludeSymbolContext.ShouldIncludeSymbol);
+            var shouldIncludeSymbolContext = new ShouldIncludeSymbolContext(
+                syntaxContext,
+                cancellationToken
+            );
+            namedSymbols = namedSymbols.WhereAsArray(
+                shouldIncludeSymbolContext.ShouldIncludeSymbol
+            );
+            unnamedSymbols = unnamedSymbols.WhereAsArray(
+                shouldIncludeSymbolContext.ShouldIncludeSymbol
+            );
 
             return new RecommendedSymbols(namedSymbols, unnamedSymbols);
         }
 
-        protected static ISet<INamedTypeSymbol> ComputeOuterTypes(SyntaxContext context, CancellationToken cancellationToken)
+        protected static ISet<INamedTypeSymbol> ComputeOuterTypes(
+            SyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            var enclosingSymbol = context.SemanticModel.GetEnclosingSymbol(context.LeftToken.SpanStart, cancellationToken);
+            var enclosingSymbol = context.SemanticModel.GetEnclosingSymbol(
+                context.LeftToken.SpanStart,
+                cancellationToken
+            );
             if (enclosingSymbol != null)
             {
                 var containingType = enclosingSymbol.GetContainingTypeOrThis();
@@ -60,7 +91,10 @@ namespace Microsoft.CodeAnalysis.Recommendations
             private ImmutableArray<INamedTypeSymbol> _lazyOuterTypesAndBases;
             private ImmutableArray<INamedTypeSymbol> _lazyEnclosingTypeBases;
 
-            internal ShouldIncludeSymbolContext(SyntaxContext context, CancellationToken cancellationToken)
+            internal ShouldIncludeSymbolContext(
+                SyntaxContext context,
+                CancellationToken cancellationToken
+            )
             {
                 _context = context;
                 _cancellationToken = cancellationToken;
@@ -101,15 +135,20 @@ namespace Microsoft.CodeAnalysis.Recommendations
                         break;
 
                     case SymbolKind.TypeParameter:
-                        return ((ITypeParameterSymbol)symbol).TypeParameterKind != TypeParameterKind.Cref;
+                        return ((ITypeParameterSymbol)symbol).TypeParameterKind
+                            != TypeParameterKind.Cref;
                 }
 
                 if (_context.IsAttributeNameContext)
                 {
                     return symbol.IsOrContainsAccessibleAttribute(
-                        _context.SemanticModel.GetEnclosingNamedType(_context.LeftToken.SpanStart, _cancellationToken),
+                        _context.SemanticModel.GetEnclosingNamedType(
+                            _context.LeftToken.SpanStart,
+                            _cancellationToken
+                        ),
                         _context.SemanticModel.Compilation.Assembly,
-                        _cancellationToken);
+                        _cancellationToken
+                    );
                 }
 
                 if (_context.IsEnumTypeMemberAccessContext)
@@ -118,20 +157,25 @@ namespace Microsoft.CodeAnalysis.Recommendations
                 }
 
                 // In an expression or statement context, we don't want to display instance members declared in outer containing types.
-                if ((_context.IsStatementContext || _context.IsAnyExpressionContext) &&
-                    !symbol.IsStatic &&
-                    isMember)
+                if (
+                    (_context.IsStatementContext || _context.IsAnyExpressionContext)
+                    && !symbol.IsStatic
+                    && isMember
+                )
                 {
                     var containingTypeOriginalDefinition = symbol.ContainingType.OriginalDefinition;
                     if (this.GetOuterTypesAndBases().Contains(containingTypeOriginalDefinition))
                     {
-                        return this.GetEnclosingTypeBases().Contains(containingTypeOriginalDefinition);
+                        return this.GetEnclosingTypeBases()
+                            .Contains(containingTypeOriginalDefinition);
                     }
                 }
 
                 if (symbol is INamespaceSymbol namespaceSymbol)
                 {
-                    return namespaceSymbol.ContainsAccessibleTypesOrNamespaces(_context.SemanticModel.Compilation.Assembly);
+                    return namespaceSymbol.ContainsAccessibleTypesOrNamespaces(
+                        _context.SemanticModel.Compilation.Assembly
+                    );
                 }
 
                 return true;
@@ -153,10 +197,14 @@ namespace Microsoft.CodeAnalysis.Recommendations
             {
                 if (_lazyEnclosingTypeBases.IsDefault)
                 {
-                    var enclosingType = _context.SemanticModel.GetEnclosingNamedType(_context.LeftToken.SpanStart, _cancellationToken);
-                    _lazyEnclosingTypeBases = enclosingType == null
-                        ? ImmutableArray<INamedTypeSymbol>.Empty
-                        : enclosingType.GetBaseTypes().SelectAsArray(b => b.OriginalDefinition);
+                    var enclosingType = _context.SemanticModel.GetEnclosingNamedType(
+                        _context.LeftToken.SpanStart,
+                        _cancellationToken
+                    );
+                    _lazyEnclosingTypeBases =
+                        enclosingType == null
+                            ? ImmutableArray<INamedTypeSymbol>.Empty
+                            : enclosingType.GetBaseTypes().SelectAsArray(b => b.OriginalDefinition);
                 }
 
                 return _lazyEnclosingTypeBases;

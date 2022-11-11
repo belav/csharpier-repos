@@ -10,7 +10,6 @@ using System.Windows.Forms.Design.Behavior;
 using System.Xml.Linq;
 using System.Windows.Forms;
 
-
 namespace DependecyGraphViewer.Tests
 {
     public class TestFileParsing
@@ -20,13 +19,21 @@ namespace DependecyGraphViewer.Tests
         public static IEnumerable<object[]> GetDgml()
         {
             // no nodes, no edges
-            yield return new object[] { """
+            yield return new object[]
+            {
+                """
                                         <?xml version="1.0" encoding="utf-8"?>
                                         <DirectedGraph Layout="ForceDirected" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
                                         </DirectedGraph>
-                                        """, 0, true, 0 };
+                                        """,
+                0,
+                true,
+                0
+            };
             // only nodes, no edges
-            yield return new object[] { """
+            yield return new object[]
+            {
+                """
                                         <?xml version="1.0" encoding="utf-8"?>
                                         <DirectedGraph Layout="ForceDirected" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
                                           <Nodes>
@@ -36,9 +43,15 @@ namespace DependecyGraphViewer.Tests
                                             <Node Id="3" Bounds="1.92761207529202E-06,0,59.1066666666667,25.96" Label="Node 3" />
                                           </Nodes>
                                         </DirectedGraph>
-                                        """, 4, true, 0 };
+                                        """,
+                4,
+                true,
+                0
+            };
             // nodes and edges
-            yield return new object[] { """
+            yield return new object[]
+            {
+                """
                                         <?xml version="1.0" encoding="utf-8"?>
                                         <DirectedGraph Layout="ForceDirected" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
                                           <Nodes>
@@ -61,9 +74,15 @@ namespace DependecyGraphViewer.Tests
                                             <Property Id="Stroke" DataType="System.Windows.Media.Brush" />
                                           </Properties>
                                         </DirectedGraph>
-                                        """, 4, true, 4 };
+                                        """,
+                4,
+                true,
+                4
+            };
             // invalid graph
-            yield return new object[] { """
+            yield return new object[]
+            {
+                """
                                         <?xml version="1.0" encoding="utf-8"?>
                                         <DirectedGraph Layout="ForceDirected" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
                                             <Nodes>
@@ -74,7 +93,11 @@ namespace DependecyGraphViewer.Tests
                                             <Properties>
                                             </Properties>
                                         </DirectedGraph>
-                                        """, 0, false, 0 };
+                                        """,
+                0,
+                false,
+                0
+            };
         }
 
         [Theory]

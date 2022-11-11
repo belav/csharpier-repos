@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
         string FilePath { get; }
 
         /// <summary>
-        /// The error message produced when a failure occurred attempting to access the project file. 
+        /// The error message produced when a failure occurred attempting to access the project file.
         /// If a failure occurred the project file info will be inaccessible.
         /// </summary>
         DiagnosticLog Log { get; }
@@ -31,7 +31,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
         /// instances of <see cref="ProjectFileInfo"/> if the project is multi-targeted: one for
         /// each target framework.
         /// </summary>
-        Task<ImmutableArray<ProjectFileInfo>> GetProjectFileInfosAsync(CancellationToken cancellationToken);
+        Task<ImmutableArray<ProjectFileInfo>> GetProjectFileInfosAsync(
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Gets the corresponding extension for a source file of a given kind.

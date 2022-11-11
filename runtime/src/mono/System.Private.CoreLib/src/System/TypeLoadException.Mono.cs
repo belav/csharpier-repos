@@ -6,8 +6,7 @@ namespace System
     public partial class TypeLoadException
     {
         // Called by runtime
-        internal TypeLoadException(string className, string assemblyName)
-            : this(null)
+        internal TypeLoadException(string className, string assemblyName) : this(null)
         {
             _className = className;
             _assemblyName = assemblyName;
@@ -24,7 +23,11 @@ namespace System
                 return;
             }
 
-            _message = SR.Format("Could not load type '{0}' from assembly '{1}'.", _className, _assemblyName ?? SR.IO_UnknownFileName);
+            _message = SR.Format(
+                "Could not load type '{0}' from assembly '{1}'.",
+                _className,
+                _assemblyName ?? SR.IO_UnknownFileName
+            );
         }
     }
 }

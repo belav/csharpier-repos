@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
     internal interface IRemoteUnitTestingSearchService
     {
         ValueTask<ImmutableArray<UnitTestingSourceLocation>> GetSourceLocationsAsync(
-            Checksum solutionChecksum, ProjectId projectId, UnitTestingSearchQuery query, CancellationToken cancellationToken);
+            Checksum solutionChecksum,
+            ProjectId projectId,
+            UnitTestingSearchQuery query,
+            CancellationToken cancellationToken
+        );
     }
 
     [DataContract]
@@ -21,6 +25,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
     {
         [DataMember(Order = 0)]
         public readonly DocumentIdSpan DocumentIdSpan;
+
         [DataMember(Order = 1)]
         public readonly FileLinePositionSpan Span;
 
@@ -30,9 +35,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting
             Span = span;
         }
 
-        public async Task<UnitTestingDocumentSpan?> TryRehydrateAsync(Solution solution, CancellationToken cancellationToken)
+        public async Task<UnitTestingDocumentSpan?> TryRehydrateAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
-            var documentSpan = await DocumentIdSpan.TryRehydrateAsync(solution, cancellationToken).ConfigureAwait(false);
+            var documentSpan = await DocumentIdSpan
+                .TryRehydrateAsync(solution, cancellationToken)
+                .ConfigureAwait(false);
             if (documentSpan == null)
                 return null;
 

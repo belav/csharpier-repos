@@ -22,10 +22,15 @@ namespace Microsoft.Interop
 
         public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info)
         {
-            return info.IsByRef ? SignatureBehavior.PointerToNativeType : SignatureBehavior.NativeType;
+            return info.IsByRef
+                ? SignatureBehavior.PointerToNativeType
+                : SignatureBehavior.NativeType;
         }
 
-        public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context)
+        public ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             if (!info.IsByRef)
             {
@@ -54,10 +59,14 @@ namespace Microsoft.Interop
                             PointerType(AsNativeType(info)),
                             SingletonSeparatedList(
                                 VariableDeclarator(Identifier(nativeIdentifier))
-                                    .WithInitializer(EqualsValueClause(
-                                        PrefixUnaryExpression(SyntaxKind.AddressOfExpression,
-                                            IdentifierName(managedIdentifier))
-                                    ))
+                                    .WithInitializer(
+                                        EqualsValueClause(
+                                            PrefixUnaryExpression(
+                                                SyntaxKind.AddressOfExpression,
+                                                IdentifierName(managedIdentifier)
+                                            )
+                                        )
+                                    )
                             )
                         ),
                         EmptyStatement()
@@ -77,7 +86,9 @@ namespace Microsoft.Interop
                             AssignmentExpression(
                                 SyntaxKind.SimpleAssignmentExpression,
                                 IdentifierName(nativeIdentifier),
-                                IdentifierName(managedIdentifier)));
+                                IdentifierName(managedIdentifier)
+                            )
+                        );
                     }
 
                     break;
@@ -86,7 +97,9 @@ namespace Microsoft.Interop
                         AssignmentExpression(
                             SyntaxKind.SimpleAssignmentExpression,
                             IdentifierName(managedIdentifier),
-                            IdentifierName(nativeIdentifier)));
+                            IdentifierName(nativeIdentifier)
+                        )
+                    );
                     break;
                 default:
                     break;
@@ -95,10 +108,14 @@ namespace Microsoft.Interop
 
         public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context)
         {
-            return info.IsByRef && !info.IsManagedReturnPosition && !context.SingleFrameSpansNativeContext;
+            return info.IsByRef
+                && !info.IsManagedReturnPosition
+                && !context.SingleFrameSpansNativeContext;
         }
 
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context) => false;
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        ) => false;
     }
-
 }

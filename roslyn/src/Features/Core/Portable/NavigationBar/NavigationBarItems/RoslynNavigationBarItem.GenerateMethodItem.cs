@@ -12,24 +12,37 @@ namespace Microsoft.CodeAnalysis.NavigationBar
         {
             public readonly SymbolKey MethodToReplicateSymbolKey;
 
-            public GenerateMethod(string text, Glyph glyph, SymbolKey destinationTypeSymbolId, SymbolKey methodToReplicateSymbolId)
-                : base(RoslynNavigationBarItemKind.GenerateMethod, text, glyph, destinationTypeSymbolId)
+            public GenerateMethod(
+                string text,
+                Glyph glyph,
+                SymbolKey destinationTypeSymbolId,
+                SymbolKey methodToReplicateSymbolId
+            )
+                : base(
+                    RoslynNavigationBarItemKind.GenerateMethod,
+                    text,
+                    glyph,
+                    destinationTypeSymbolId
+                )
             {
                 MethodToReplicateSymbolKey = methodToReplicateSymbolId;
             }
 
-            protected internal override SerializableNavigationBarItem Dehydrate()
-                => SerializableNavigationBarItem.GenerateMethod(Text, Glyph, DestinationTypeSymbolKey, MethodToReplicateSymbolKey);
+            protected internal override SerializableNavigationBarItem Dehydrate() =>
+                SerializableNavigationBarItem.GenerateMethod(
+                    Text,
+                    Glyph,
+                    DestinationTypeSymbolKey,
+                    MethodToReplicateSymbolKey
+                );
 
-            public override bool Equals(object? obj)
-                => Equals(obj as GenerateMethod);
+            public override bool Equals(object? obj) => Equals(obj as GenerateMethod);
 
-            public bool Equals(GenerateMethod? other)
-                => base.Equals(other) &&
-                   MethodToReplicateSymbolKey.Equals(other.MethodToReplicateSymbolKey);
+            public bool Equals(GenerateMethod? other) =>
+                base.Equals(other)
+                && MethodToReplicateSymbolKey.Equals(other.MethodToReplicateSymbolKey);
 
-            public override int GetHashCode()
-                => throw new NotImplementedException();
+            public override int GetHashCode() => throw new NotImplementedException();
         }
     }
 }

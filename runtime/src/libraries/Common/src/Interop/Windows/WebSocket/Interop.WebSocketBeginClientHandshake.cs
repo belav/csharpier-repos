@@ -18,6 +18,7 @@ internal static partial class Interop
             HttpHeader[] initialHeaders,
             uint initialHeaderCount,
             out IntPtr additionalHeadersPtr,
-            out uint additionalHeaderCount);
+            out uint additionalHeaderCount
+        );
     }
 }

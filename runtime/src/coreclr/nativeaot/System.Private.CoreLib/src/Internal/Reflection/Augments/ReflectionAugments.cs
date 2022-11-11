@@ -58,18 +58,30 @@ namespace Internal.Reflection.Augments
             EETypeElementType rhType = eeType.ElementType;
             switch (rhType)
             {
-                case EETypeElementType.Boolean: return TypeCode.Boolean;
-                case EETypeElementType.Char: return TypeCode.Char;
-                case EETypeElementType.SByte: return TypeCode.SByte;
-                case EETypeElementType.Byte: return TypeCode.Byte;
-                case EETypeElementType.Int16: return TypeCode.Int16;
-                case EETypeElementType.UInt16: return TypeCode.UInt16;
-                case EETypeElementType.Int32: return TypeCode.Int32;
-                case EETypeElementType.UInt32: return TypeCode.UInt32;
-                case EETypeElementType.Int64: return TypeCode.Int64;
-                case EETypeElementType.UInt64: return TypeCode.UInt64;
-                case EETypeElementType.Single: return TypeCode.Single;
-                case EETypeElementType.Double: return TypeCode.Double;
+                case EETypeElementType.Boolean:
+                    return TypeCode.Boolean;
+                case EETypeElementType.Char:
+                    return TypeCode.Char;
+                case EETypeElementType.SByte:
+                    return TypeCode.SByte;
+                case EETypeElementType.Byte:
+                    return TypeCode.Byte;
+                case EETypeElementType.Int16:
+                    return TypeCode.Int16;
+                case EETypeElementType.UInt16:
+                    return TypeCode.UInt16;
+                case EETypeElementType.Int32:
+                    return TypeCode.Int32;
+                case EETypeElementType.UInt32:
+                    return TypeCode.UInt32;
+                case EETypeElementType.Int64:
+                    return TypeCode.Int64;
+                case EETypeElementType.UInt64:
+                    return TypeCode.UInt64;
+                case EETypeElementType.Single:
+                    return TypeCode.Single;
+                case EETypeElementType.Double:
+                    return TypeCode.Double;
                 default:
                     break;
             }
@@ -89,7 +101,10 @@ namespace Internal.Reflection.Augments
             return TypeCode.Object;
         }
 
-        public static Type MakeGenericSignatureType(Type genericTypeDefinition, Type[] genericTypeArguments)
+        public static Type MakeGenericSignatureType(
+            Type genericTypeDefinition,
+            Type[] genericTypeArguments
+        )
         {
             return new SignatureConstructedGenericType(genericTypeDefinition, genericTypeArguments);
         }
@@ -120,47 +135,99 @@ namespace Internal.Reflection.Augments
     public abstract class ReflectionCoreCallbacks
     {
         public abstract Assembly Load(AssemblyName refName, bool throwOnFileNotFound);
-        public abstract Assembly Load(ReadOnlySpan<byte> rawAssembly, ReadOnlySpan<byte> pdbSymbolStore);
+        public abstract Assembly Load(
+            ReadOnlySpan<byte> rawAssembly,
+            ReadOnlySpan<byte> pdbSymbolStore
+        );
         public abstract Assembly Load(string assemblyPath);
 
         public abstract MethodBase GetMethodFromHandle(RuntimeMethodHandle runtimeMethodHandle);
-        public abstract MethodBase GetMethodFromHandle(RuntimeMethodHandle runtimeMethodHandle, RuntimeTypeHandle declaringTypeHandle);
+        public abstract MethodBase GetMethodFromHandle(
+            RuntimeMethodHandle runtimeMethodHandle,
+            RuntimeTypeHandle declaringTypeHandle
+        );
         public abstract FieldInfo GetFieldFromHandle(RuntimeFieldHandle runtimeFieldHandle);
-        public abstract FieldInfo GetFieldFromHandle(RuntimeFieldHandle runtimeFieldHandle, RuntimeTypeHandle declaringTypeHandle);
+        public abstract FieldInfo GetFieldFromHandle(
+            RuntimeFieldHandle runtimeFieldHandle,
+            RuntimeTypeHandle declaringTypeHandle
+        );
 
         public abstract EventInfo GetImplicitlyOverriddenBaseClassEvent(EventInfo e);
         public abstract MethodInfo GetImplicitlyOverriddenBaseClassMethod(MethodInfo m);
         public abstract PropertyInfo GetImplicitlyOverriddenBaseClassProperty(PropertyInfo p);
 
         public abstract object ActivatorCreateInstance(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type, bool nonPublic);
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type type,
+            bool nonPublic
+        );
         public abstract object ActivatorCreateInstance(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            Type type, BindingFlags bindingAttr, Binder? binder, object?[]? args, CultureInfo? culture, object?[]? activationAttributes);
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+                    | DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )]
+                Type type,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            object?[]? args,
+            CultureInfo? culture,
+            object?[]? activationAttributes
+        );
 
         // V2 api: Creates open or closed delegates to static or instance methods - relaxed signature checking allowed.
-        public abstract Delegate CreateDelegate(Type type, object? firstArgument, MethodInfo method, bool throwOnBindFailure);
+        public abstract Delegate CreateDelegate(
+            Type type,
+            object? firstArgument,
+            MethodInfo method,
+            bool throwOnBindFailure
+        );
 
         // V1 api: Creates open delegates to static or instance methods - relaxed signature checking allowed.
-        public abstract Delegate CreateDelegate(Type type, MethodInfo method, bool throwOnBindFailure);
+        public abstract Delegate CreateDelegate(
+            Type type,
+            MethodInfo method,
+            bool throwOnBindFailure
+        );
 
         // V1 api: Creates closed delegates to instance methods only, relaxed signature checking disallowed.
         [RequiresUnreferencedCode("The target method might be removed")]
-        public abstract Delegate CreateDelegate(Type type, object target, string method, bool ignoreCase, bool throwOnBindFailure);
+        public abstract Delegate CreateDelegate(
+            Type type,
+            object target,
+            string method,
+            bool ignoreCase,
+            bool throwOnBindFailure
+        );
 
         // V1 api: Creates open delegates to static methods only, relaxed signature checking disallowed.
-        public abstract Delegate CreateDelegate(Type type, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target, string method, bool ignoreCase, bool throwOnBindFailure);
+        public abstract Delegate CreateDelegate(
+            Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
+            string method,
+            bool ignoreCase,
+            bool throwOnBindFailure
+        );
 
 #if FEATURE_COMINTEROP
         public abstract Type GetTypeFromCLSID(Guid clsid, string server, bool throwOnError);
 #endif
 
-        public abstract IntPtr GetFunctionPointer(RuntimeMethodHandle runtimeMethodHandle, RuntimeTypeHandle declaringTypeHandle);
+        public abstract IntPtr GetFunctionPointer(
+            RuntimeMethodHandle runtimeMethodHandle,
+            RuntimeTypeHandle declaringTypeHandle
+        );
 
         public abstract void RunModuleConstructor(Module module);
 
-        public abstract void MakeTypedReference(object target, FieldInfo[] flds, out Type type, out int offset);
+        public abstract void MakeTypedReference(
+            object target,
+            FieldInfo[] flds,
+            out Type type,
+            out int offset
+        );
 
         public abstract Assembly[] GetLoadedAssemblies();
 

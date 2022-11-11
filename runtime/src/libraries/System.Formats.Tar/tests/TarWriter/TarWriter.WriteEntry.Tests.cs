@@ -24,8 +24,17 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void WriteEntry_FromUnseekableStream_AdvanceDataStream_WriteFromThatPosition()
         {
-            using MemoryStream source = GetTarMemoryStream(CompressionMethod.Uncompressed, TestTarFormat.ustar, "file");
-            using WrappedStream unseekable = new WrappedStream(source, canRead: true, canWrite: true, canSeek: false);
+            using MemoryStream source = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                TestTarFormat.ustar,
+                "file"
+            );
+            using WrappedStream unseekable = new WrappedStream(
+                source,
+                canRead: true,
+                canWrite: true,
+                canSeek: false
+            );
 
             using MemoryStream destination = new MemoryStream();
 
@@ -36,7 +45,13 @@ namespace System.Formats.Tar.Tests
                 Assert.NotNull(entry.DataStream);
                 entry.DataStream.ReadByte(); // Advance one byte, now the expected string would be "ello file"
 
-                using (TarWriter writer = new TarWriter(destination, TarEntryFormat.Ustar, leaveOpen: true))
+                using (
+                    TarWriter writer = new TarWriter(
+                        destination,
+                        TarEntryFormat.Ustar,
+                        leaveOpen: true
+                    )
+                )
                 {
                     writer.WriteEntry(entry);
                 }
@@ -49,7 +64,9 @@ namespace System.Formats.Tar.Tests
                 Assert.NotNull(entry);
                 Assert.NotNull(entry.DataStream);
 
-                using (StreamReader streamReader = new StreamReader(entry.DataStream, leaveOpen: true))
+                using (
+                    StreamReader streamReader = new StreamReader(entry.DataStream, leaveOpen: true)
+                )
                 {
                     string contents = streamReader.ReadLine();
                     Assert.Equal("ello file", contents);
@@ -94,13 +111,22 @@ namespace System.Formats.Tar.Tests
         public void Write_RegularFileEntry_In_V7Writer(TarEntryFormat entryFormat)
         {
             using MemoryStream archive = new MemoryStream();
-            using (TarWriter writer = new TarWriter(archive, format: TarEntryFormat.V7, leaveOpen: true))
+            using (
+                TarWriter writer = new TarWriter(
+                    archive,
+                    format: TarEntryFormat.V7,
+                    leaveOpen: true
+                )
+            )
             {
                 TarEntry entry = entryFormat switch
                 {
-                    TarEntryFormat.Ustar => new UstarTarEntry(TarEntryType.RegularFile, InitialEntryName),
-                    TarEntryFormat.Pax => new PaxTarEntry(TarEntryType.RegularFile, InitialEntryName),
-                    TarEntryFormat.Gnu => new GnuTarEntry(TarEntryType.RegularFile, InitialEntryName),
+                    TarEntryFormat.Ustar
+                        => new UstarTarEntry(TarEntryType.RegularFile, InitialEntryName),
+                    TarEntryFormat.Pax
+                        => new PaxTarEntry(TarEntryType.RegularFile, InitialEntryName),
+                    TarEntryFormat.Gnu
+                        => new GnuTarEntry(TarEntryType.RegularFile, InitialEntryName),
                     _ => throw new InvalidDataException($"Unexpected format: {entryFormat}")
                 };
 
@@ -175,16 +201,28 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, leaveOpen: true))
             {
-                PaxGlobalExtendedAttributesTarEntry gea1 = new PaxGlobalExtendedAttributesTarEntry(attrs);
+                PaxGlobalExtendedAttributesTarEntry gea1 = new PaxGlobalExtendedAttributesTarEntry(
+                    attrs
+                );
                 writer.WriteEntry(gea1);
 
-                TarEntry entry1 = InvokeTarEntryCreationConstructor(format, TarEntryType.Directory, "dir1");
+                TarEntry entry1 = InvokeTarEntryCreationConstructor(
+                    format,
+                    TarEntryType.Directory,
+                    "dir1"
+                );
                 writer.WriteEntry(entry1);
 
-                PaxGlobalExtendedAttributesTarEntry gea2 = new PaxGlobalExtendedAttributesTarEntry(attrs);
+                PaxGlobalExtendedAttributesTarEntry gea2 = new PaxGlobalExtendedAttributesTarEntry(
+                    attrs
+                );
                 writer.WriteEntry(gea2);
 
-                TarEntry entry2 = InvokeTarEntryCreationConstructor(format, TarEntryType.Directory,  "dir2");
+                TarEntry entry2 = InvokeTarEntryCreationConstructor(
+                    format,
+                    TarEntryType.Directory,
+                    "dir2"
+                );
                 writer.WriteEntry(entry2);
             }
 
@@ -213,7 +251,11 @@ namespace System.Formats.Tar.Tests
         public void WriteTimestampsBeyondEpochalypse(TarEntryFormat format)
         {
             DateTimeOffset epochalypse = new DateTimeOffset(2038, 1, 19, 3, 14, 8, TimeSpan.Zero); // One second past Y2K38
-            TarEntry entry = InvokeTarEntryCreationConstructor(format, TarEntryType.Directory, "dir");
+            TarEntry entry = InvokeTarEntryCreationConstructor(
+                format,
+                TarEntryType.Directory,
+                "dir"
+            );
 
             entry.ModificationTime = epochalypse;
             Assert.Equal(epochalypse, entry.ModificationTime);
@@ -260,9 +302,21 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Gnu)]
         public void WriteTimestampsBeyondOctalLimit(TarEntryFormat format)
         {
-            DateTimeOffset overLimitTimestamp = new DateTimeOffset(2242, 3, 16, 12, 56, 33, TimeSpan.Zero); // One second past the octal limit
+            DateTimeOffset overLimitTimestamp = new DateTimeOffset(
+                2242,
+                3,
+                16,
+                12,
+                56,
+                33,
+                TimeSpan.Zero
+            ); // One second past the octal limit
 
-            TarEntry entry = InvokeTarEntryCreationConstructor(format, TarEntryType.Directory, "dir");
+            TarEntry entry = InvokeTarEntryCreationConstructor(
+                format,
+                TarEntryType.Directory,
+                "dir"
+            );
 
             // Before writing the entry, the timestamps should have no issue
             entry.ModificationTime = overLimitTimestamp;
@@ -323,11 +377,18 @@ namespace System.Formats.Tar.Tests
             MemoryStream ms = new();
             using (TarWriter writer = new(ms, true))
             {
-                TarEntryType entryType = format == TarEntryFormat.V7 ? TarEntryType.V7RegularFile : TarEntryType.RegularFile;
+                TarEntryType entryType =
+                    format == TarEntryFormat.V7
+                        ? TarEntryType.V7RegularFile
+                        : TarEntryType.RegularFile;
                 entry = InvokeTarEntryCreationConstructor(format, entryType, maxPathComponent);
                 writer.WriteEntry(entry);
 
-                entry = InvokeTarEntryCreationConstructor(format, entryType, Path.Join(maxPathComponent, maxPathComponent));
+                entry = InvokeTarEntryCreationConstructor(
+                    format,
+                    entryType,
+                    Path.Join(maxPathComponent, maxPathComponent)
+                );
                 writer.WriteEntry(entry);
             }
 
@@ -339,7 +400,10 @@ namespace System.Formats.Tar.Tests
             Assert.Equal(expectedName, entry.Name);
 
             entry = reader.GetNextEntry();
-            expectedName = GetExpectedNameForFormat(format, Path.Join(maxPathComponent, maxPathComponent));
+            expectedName = GetExpectedNameForFormat(
+                format,
+                Path.Join(maxPathComponent, maxPathComponent)
+            );
             Assert.Equal(expectedName, entry.Name);
 
             Assert.Null(reader.GetNextEntry());
@@ -356,11 +420,16 @@ namespace System.Formats.Tar.Tests
 
         public static IEnumerable<object[]> WriteEntry_TooLongName_Throws_TheoryData()
         {
-            foreach (TarEntryType entryType in new[] { TarEntryType.RegularFile, TarEntryType.Directory })
+            foreach (
+                TarEntryType entryType in new[] { TarEntryType.RegularFile, TarEntryType.Directory }
+            )
             {
                 foreach (string name in GetTooLongNamesTestData(NameCapabilities.Name))
                 {
-                    TarEntryType v7EntryType = entryType is TarEntryType.RegularFile ? TarEntryType.V7RegularFile : entryType;
+                    TarEntryType v7EntryType =
+                        entryType is TarEntryType.RegularFile
+                            ? TarEntryType.V7RegularFile
+                            : entryType;
                     yield return new object[] { TarEntryFormat.V7, v7EntryType, name };
                 }
 
@@ -373,7 +442,11 @@ namespace System.Formats.Tar.Tests
 
         [Theory]
         [MemberData(nameof(WriteEntry_TooLongName_Throws_TheoryData))]
-        public void WriteEntry_TooLongName_Throws(TarEntryFormat entryFormat, TarEntryType entryType, string name)
+        public void WriteEntry_TooLongName_Throws(
+            TarEntryFormat entryFormat,
+            TarEntryType entryType,
+            string name
+        )
         {
             using TarWriter writer = new(new MemoryStream());
 
@@ -383,7 +456,9 @@ namespace System.Formats.Tar.Tests
 
         public static IEnumerable<object[]> WriteEntry_TooLongLinkName_Throws_TheoryData()
         {
-            foreach (TarEntryType entryType in new[] { TarEntryType.SymbolicLink, TarEntryType.HardLink })
+            foreach (
+                TarEntryType entryType in new[] { TarEntryType.SymbolicLink, TarEntryType.HardLink }
+            )
             {
                 foreach (string name in GetTooLongNamesTestData(NameCapabilities.Name))
                 {
@@ -399,7 +474,11 @@ namespace System.Formats.Tar.Tests
 
         [Theory]
         [MemberData(nameof(WriteEntry_TooLongLinkName_Throws_TheoryData))]
-        public void WriteEntry_TooLongLinkName_Throws(TarEntryFormat entryFormat, TarEntryType entryType, string linkName)
+        public void WriteEntry_TooLongLinkName_Throws(
+            TarEntryFormat entryFormat,
+            TarEntryType entryType,
+            string linkName
+        )
         {
             using TarWriter writer = new(new MemoryStream());
 
@@ -412,7 +491,9 @@ namespace System.Formats.Tar.Tests
         public static IEnumerable<object[]> WriteEntry_TooLongUserGroupName_Throws_TheoryData()
         {
             // Not testing Pax as it supports unlimited size uname/gname.
-            foreach (TarEntryFormat entryFormat in new[] { TarEntryFormat.Ustar, TarEntryFormat.Gnu })
+            foreach (
+                TarEntryFormat entryFormat in new[] { TarEntryFormat.Ustar, TarEntryFormat.Gnu }
+            )
             {
                 // Last character doesn't fit fully.
                 yield return new object[] { entryFormat, Repeat(OneByteCharacter, 32 + 1) };
@@ -420,8 +501,16 @@ namespace System.Formats.Tar.Tests
                 yield return new object[] { entryFormat, Repeat(FourBytesCharacter, 32 / 4 + 1) };
 
                 // Last character doesn't fit by one byte.
-                yield return new object[] { entryFormat, Repeat(TwoBytesCharacter, 32 - 2 + 1) + TwoBytesCharacter };
-                yield return new object[] { entryFormat, Repeat(FourBytesCharacter, 32 - 4 + 1) + FourBytesCharacter };
+                yield return new object[]
+                {
+                    entryFormat,
+                    Repeat(TwoBytesCharacter, 32 - 2 + 1) + TwoBytesCharacter
+                };
+                yield return new object[]
+                {
+                    entryFormat,
+                    Repeat(FourBytesCharacter, 32 - 4 + 1) + FourBytesCharacter
+                };
             }
         }
 
@@ -431,7 +520,11 @@ namespace System.Formats.Tar.Tests
         {
             using TarWriter writer = new(new MemoryStream());
 
-            TarEntry entry = InvokeTarEntryCreationConstructor(entryFormat, TarEntryType.RegularFile, "foo");
+            TarEntry entry = InvokeTarEntryCreationConstructor(
+                entryFormat,
+                TarEntryType.RegularFile,
+                "foo"
+            );
             PosixTarEntry posixEntry = Assert.IsAssignableFrom<PosixTarEntry>(entry);
             posixEntry.UserName = userName;
 
@@ -444,7 +537,11 @@ namespace System.Formats.Tar.Tests
         {
             using TarWriter writer = new(new MemoryStream());
 
-            TarEntry entry = InvokeTarEntryCreationConstructor(entryFormat, TarEntryType.RegularFile, "foo");
+            TarEntry entry = InvokeTarEntryCreationConstructor(
+                entryFormat,
+                TarEntryType.RegularFile,
+                "foo"
+            );
             PosixTarEntry posixEntry = Assert.IsAssignableFrom<PosixTarEntry>(entry);
             posixEntry.GroupName = groupName;
 

@@ -18,15 +18,25 @@ public sealed class GrpcJsonTranscodingOptions
     public GrpcJsonTranscodingOptions()
     {
         _unaryOptions = new Lazy<JsonSerializerOptions>(
-            () => JsonConverterHelper.CreateSerializerOptions(new JsonContext(JsonSettings, TypeRegistry)),
-            LazyThreadSafetyMode.ExecutionAndPublication);
+            () =>
+                JsonConverterHelper.CreateSerializerOptions(
+                    new JsonContext(JsonSettings, TypeRegistry)
+                ),
+            LazyThreadSafetyMode.ExecutionAndPublication
+        );
         _serverStreamingOptions = new Lazy<JsonSerializerOptions>(
-            () => JsonConverterHelper.CreateSerializerOptions(new JsonContext(JsonSettings, TypeRegistry), isStreamingOptions: true),
-            LazyThreadSafetyMode.ExecutionAndPublication);
+            () =>
+                JsonConverterHelper.CreateSerializerOptions(
+                    new JsonContext(JsonSettings, TypeRegistry),
+                    isStreamingOptions: true
+                ),
+            LazyThreadSafetyMode.ExecutionAndPublication
+        );
     }
 
     internal JsonSerializerOptions UnarySerializerOptions => _unaryOptions.Value;
-    internal JsonSerializerOptions ServerStreamingSerializerOptions => _serverStreamingOptions.Value;
+    internal JsonSerializerOptions ServerStreamingSerializerOptions =>
+        _serverStreamingOptions.Value;
 
     /// <summary>
     /// Gets or sets the <see cref="Google.Protobuf.Reflection.TypeRegistry"/> used to lookup types from type names.

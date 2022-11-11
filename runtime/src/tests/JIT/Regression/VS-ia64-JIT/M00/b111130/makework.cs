@@ -44,13 +44,10 @@ class test
             Console.WriteLine("In finally1");
         }
 
-
         Console.WriteLine("Never executed");
         return 1;
-    L:
+        L:
         Console.WriteLine("Done");
         return 100;
-
-
     }
 }

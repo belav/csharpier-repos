@@ -70,7 +70,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         /// monikers that don't run into MAX_PATH issues then we absolutely would want to get rid of this.
         /// </summary>
         /// <remarks>All accesses should be on the UI thread.</remarks>
-        private readonly Dictionary<Guid, SourceGeneratedDocumentIdentity> _directoryInfoOnDiskByContainingDirectoryId = new();
+        private readonly Dictionary<
+            Guid,
+            SourceGeneratedDocumentIdentity
+        > _directoryInfoOnDiskByContainingDirectoryId = new();
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -82,11 +85,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             VisualStudioWorkspace visualStudioWorkspace,
             IGlobalOptionService globalOptions,
             VisualStudioDocumentNavigationService visualStudioDocumentNavigationService,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _serviceProvider = serviceProvider;
             _threadingContext = threadingContext;
-            _foregroundThreadAffintizedObject = new ForegroundThreadAffinitizedObject(threadingContext, assertIsForeground: false);
+            _foregroundThreadAffintizedObject = new ForegroundThreadAffinitizedObject(
+                threadingContext,
+                assertIsForeground: false
+            );
             _textDocumentFactoryService = textDocumentFactoryService;
             _temporaryDirectory = Path.Combine(Path.GetTempPath(), "VSGeneratedDocuments");
             _visualStudioWorkspace = visualStudioWorkspace;
@@ -99,15 +106,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
             // The IVsRunningDocumentTable is a free-threaded VS service that allows fetching of the service and advising events
             // to be done without implicitly marshalling to the UI thread.
-            _runningDocumentTable = _serviceProvider.GetService<SVsRunningDocumentTable, IVsRunningDocumentTable>();
+            _runningDocumentTable = _serviceProvider.GetService<
+                SVsRunningDocumentTable,
+                IVsRunningDocumentTable
+            >();
             _runningDocumentTableEventTracker = new RunningDocumentTableEventTracker(
                 threadingContext,
                 editorAdaptersFactoryService,
                 _runningDocumentTable,
-                this);
+                this
+            );
         }
 
-        public void NavigateToSourceGeneratedFile(SourceGeneratedDocument document, TextSpan sourceSpan, CancellationToken cancellationToken)
+        public void NavigateToSourceGeneratedFile(
+            SourceGeneratedDocument document,
+            TextSpan sourceSpan,
+            CancellationToken cancellationToken
+        )
         {
             _foregroundThreadAffintizedObject.AssertIsForeground();
 
@@ -126,7 +141,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             var temporaryFilePath = Path.Combine(
                 _temporaryDirectory,
                 document.Id.Id.ToString(),
-                document.HintName);
+                document.HintName
+            );
 
             Directory.CreateDirectory(Path.GetDirectoryName(temporaryFilePath));
 
@@ -136,14 +152,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 File.WriteAllText(temporaryFilePath, "");
             }
 
-            var openDocumentService = _serviceProvider.GetService<SVsUIShellOpenDocument, IVsUIShellOpenDocument>();
+            var openDocumentService = _serviceProvider.GetService<
+                SVsUIShellOpenDocument,
+                IVsUIShellOpenDocument
+            >();
             var hr = openDocumentService.OpenDocumentViaProject(
                 temporaryFilePath,
                 VSConstants.LOGVIEWID.TextView_guid,
                 out _,
                 out _,
                 out _,
-                out var windowFrame);
+                out var windowFrame
+            );
 
             if (ErrorHandler.Succeeded(hr) && windowFrame != null)
             {
@@ -159,7 +179,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         public bool TryGetGeneratedFileInformation(
             string filePath,
-            out SourceGeneratedDocumentIdentity identity)
+            out SourceGeneratedDocumentIdentity identity
+        )
         {
             _foregroundThreadAffintizedObject.AssertIsForeground();
 
@@ -171,11 +192,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             }
 
             var fileInfo = new FileInfo(filePath);
-            return Guid.TryParse(fileInfo.Directory.Name, out var guid) &&
-                _directoryInfoOnDiskByContainingDirectoryId.TryGetValue(guid, out identity);
+            return Guid.TryParse(fileInfo.Directory.Name, out var guid)
+                && _directoryInfoOnDiskByContainingDirectoryId.TryGetValue(guid, out identity);
         }
 
-        void IRunningDocumentTableEventListener.OnOpenDocument(string moniker, ITextBuffer textBuffer, IVsHierarchy? hierarchy, IVsWindowFrame? windowFrame)
+        void IRunningDocumentTableEventListener.OnOpenDocument(
+            string moniker,
+            ITextBuffer textBuffer,
+            IVsHierarchy? hierarchy,
+            IVsWindowFrame? windowFrame
+        )
         {
             _foregroundThreadAffintizedObject.AssertIsForeground();
 
@@ -184,14 +210,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 // Attach to the text buffer if we haven't already
                 if (!_openFiles.TryGetValue(moniker, out var openFile))
                 {
-                    openFile = new OpenSourceGeneratedFile(this, textBuffer, _visualStudioWorkspace, documentIdentity, _globalOptions, _threadingContext);
+                    openFile = new OpenSourceGeneratedFile(
+                        this,
+                        textBuffer,
+                        _visualStudioWorkspace,
+                        documentIdentity,
+                        _globalOptions,
+                        _threadingContext
+                    );
                     _openFiles.Add(moniker, openFile);
 
-                    _threadingContext.JoinableTaskFactory.Run(() => openFile.RefreshFileAsync(CancellationToken.None).AsTask());
+                    _threadingContext.JoinableTaskFactory.Run(
+                        () => openFile.RefreshFileAsync(CancellationToken.None).AsTask()
+                    );
 
                     // Update the RDT flags to ensure the file can't be saved or appears in any MRUs as it's a temporary generated file name.
-                    var cookie = ((IVsRunningDocumentTable4)_runningDocumentTable).GetDocumentCookie(moniker);
-                    ErrorHandler.ThrowOnFailure(_runningDocumentTable.ModifyDocumentFlags(cookie, (uint)(_VSRDTFLAGS.RDT_CantSave | _VSRDTFLAGS.RDT_DontAddToMRU), fSet: 1));
+                    var cookie = (
+                        (IVsRunningDocumentTable4)_runningDocumentTable
+                    ).GetDocumentCookie(moniker);
+                    ErrorHandler.ThrowOnFailure(
+                        _runningDocumentTable.ModifyDocumentFlags(
+                            cookie,
+                            (uint)(_VSRDTFLAGS.RDT_CantSave | _VSRDTFLAGS.RDT_DontAddToMRU),
+                            fSet: 1
+                        )
+                    );
                 }
 
                 if (windowFrame != null)
@@ -212,13 +255,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             }
         }
 
-        void IRunningDocumentTableEventListener.OnRefreshDocumentContext(string moniker, IVsHierarchy hierarchy)
-        {
-        }
+        void IRunningDocumentTableEventListener.OnRefreshDocumentContext(
+            string moniker,
+            IVsHierarchy hierarchy
+        ) { }
 
-        void IRunningDocumentTableEventListener.OnRenameDocument(string newMoniker, string oldMoniker, ITextBuffer textBuffer)
-        {
-        }
+        void IRunningDocumentTableEventListener.OnRenameDocument(
+            string newMoniker,
+            string oldMoniker,
+            ITextBuffer textBuffer
+        ) { }
 
         private class OpenSourceGeneratedFile : ForegroundThreadAffinitizedObject, IDisposable
         {
@@ -258,8 +304,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             private ImageMoniker _currentWindowFrameImageMoniker = default;
             private IVsInfoBarUIElement? _currentWindowFrameInfoBarElement = null;
 
-            public OpenSourceGeneratedFile(SourceGeneratedFileManager fileManager, ITextBuffer textBuffer, Workspace workspace, SourceGeneratedDocumentIdentity documentIdentity, IGlobalOptionService globalOptions, IThreadingContext threadingContext)
-                : base(threadingContext, assertIsForeground: true)
+            public OpenSourceGeneratedFile(
+                SourceGeneratedFileManager fileManager,
+                ITextBuffer textBuffer,
+                Workspace workspace,
+                SourceGeneratedDocumentIdentity documentIdentity,
+                IGlobalOptionService globalOptions,
+                IThreadingContext threadingContext
+            ) : base(threadingContext, assertIsForeground: true)
             {
                 _fileManager = fileManager;
                 _textBuffer = textBuffer;
@@ -275,7 +327,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         _textBuffer.CurrentSnapshot.GetFullSpan(),
                         SpanTrackingMode.EdgeInclusive,
                         EdgeInsertionMode.Deny,
-                        callback: _ => !_updatingBuffer);
+                        callback: _ => !_updatingBuffer
+                    );
 
                     readOnlyRegionEdit.Apply();
                 }
@@ -286,7 +339,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     TimeSpan.FromSeconds(1),
                     RefreshFileAsync,
                     asyncListener: _fileManager._listener,
-                    _cancellationTokenSource.Token);
+                    _cancellationTokenSource.Token
+                );
             }
 
             private void DisconnectFromWorkspaceIfOpen()
@@ -322,7 +376,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             public async ValueTask RefreshFileAsync(CancellationToken cancellationToken)
             {
                 SourceText? generatedSource = null;
-                var project = _workspace.CurrentSolution.GetProject(_documentIdentity.DocumentId.ProjectId);
+                var project = _workspace.CurrentSolution.GetProject(
+                    _documentIdentity.DocumentId.ProjectId
+                );
 
                 // Locals correspond to the equivalently-named fields; we'll assign these and then assign to the fields while on the
                 // UI thread to avoid any potential race where we update the InfoBar while this is running.
@@ -336,31 +392,60 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 }
                 else
                 {
-                    var generatedDocument = await project.GetSourceGeneratedDocumentAsync(_documentIdentity.DocumentId, cancellationToken).ConfigureAwait(false);
+                    var generatedDocument = await project
+                        .GetSourceGeneratedDocumentAsync(
+                            _documentIdentity.DocumentId,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                     if (generatedDocument != null)
                     {
-                        windowFrameMessageToShow = string.Format(ServicesVSResources.This_file_is_autogenerated_by_0_and_cannot_be_edited, GeneratorDisplayName);
+                        windowFrameMessageToShow = string.Format(
+                            ServicesVSResources.This_file_is_autogenerated_by_0_and_cannot_be_edited,
+                            GeneratorDisplayName
+                        );
                         windowFrameImageMonikerToShow = default;
-                        generatedSource = await generatedDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                        generatedSource = await generatedDocument
+                            .GetTextAsync(cancellationToken)
+                            .ConfigureAwait(false);
                     }
                     else
                     {
                         // The file isn't there anymore; do we still have the generator at all?
-                        if (project.AnalyzerReferences.Any(a => a.GetGenerators(project.Language).Any(g => SourceGeneratedDocumentIdentity.GetGeneratorAssemblyName(g) == _documentIdentity.GeneratorAssemblyName)))
+                        if (
+                            project.AnalyzerReferences.Any(
+                                a =>
+                                    a.GetGenerators(project.Language)
+                                        .Any(
+                                            g =>
+                                                SourceGeneratedDocumentIdentity.GetGeneratorAssemblyName(
+                                                    g
+                                                ) == _documentIdentity.GeneratorAssemblyName
+                                        )
+                            )
+                        )
                         {
-                            windowFrameMessageToShow = string.Format(ServicesVSResources.The_generator_0_that_generated_this_file_has_stopped_generating_this_file, GeneratorDisplayName);
+                            windowFrameMessageToShow = string.Format(
+                                ServicesVSResources.The_generator_0_that_generated_this_file_has_stopped_generating_this_file,
+                                GeneratorDisplayName
+                            );
                             windowFrameImageMonikerToShow = KnownMonikers.StatusError;
                         }
                         else
                         {
-                            windowFrameMessageToShow = string.Format(ServicesVSResources.The_generator_0_that_generated_this_file_has_been_removed_from_the_project, GeneratorDisplayName);
+                            windowFrameMessageToShow = string.Format(
+                                ServicesVSResources.The_generator_0_that_generated_this_file_has_been_removed_from_the_project,
+                                GeneratorDisplayName
+                            );
                             windowFrameImageMonikerToShow = KnownMonikers.StatusError;
                         }
                     }
                 }
 
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 _windowFrameMessageToShow = windowFrameMessageToShow;
                 _windowFrameImageMonikerToShow = windowFrameImageMonikerToShow;
@@ -374,7 +459,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         _updatingBuffer = true;
 
                         // Ensure the encoding matches; this is necessary for debugger checksums to match what is in the PDB.
-                        if (_fileManager._textDocumentFactoryService.TryGetTextDocument(_textBuffer, out var textDocument))
+                        if (
+                            _fileManager._textDocumentFactoryService.TryGetTextDocument(
+                                _textBuffer,
+                                out var textDocument
+                            )
+                        )
                         {
                             textDocument.Encoding = generatedSource.Encoding;
                         }
@@ -385,21 +475,40 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         // will think this is an edit coming from itself, and will skip the dirty update.
 
                         // We'll ask the editor to do the diffing for us so updates don't refresh the entire buffer
-                        using (var edit = _textBuffer.CreateEdit(EditOptions.DefaultMinimalChange, reiteratedVersionNumber: null, editTag: textDocument))
+                        using (
+                            var edit = _textBuffer.CreateEdit(
+                                EditOptions.DefaultMinimalChange,
+                                reiteratedVersionNumber: null,
+                                editTag: textDocument
+                            )
+                        )
                         {
                             // TODO: make the edit in some nicer way than creating a massive string
-                            edit.Replace(startPosition: 0, _textBuffer.CurrentSnapshot.Length, generatedSource.ToString());
+                            edit.Replace(
+                                startPosition: 0,
+                                _textBuffer.CurrentSnapshot.Length,
+                                generatedSource.ToString()
+                            );
                             edit.Apply();
                         }
 
                         // If the file isn't already open, open it now. We may transition between opening and closing
                         // if the file is repeatedly appearing and disappearing.
-                        var connectToWorkspace = _workspace.Options.GetOption(Options.EnableOpeningInWorkspace) ??
-                                                 _workspace.Options.GetOption(Options.EnableOpeningInWorkspaceFeatureFlag);
+                        var connectToWorkspace =
+                            _workspace.Options.GetOption(Options.EnableOpeningInWorkspace)
+                            ?? _workspace.Options.GetOption(
+                                Options.EnableOpeningInWorkspaceFeatureFlag
+                            );
 
-                        if (connectToWorkspace && !_workspace.IsDocumentOpen(_documentIdentity.DocumentId))
+                        if (
+                            connectToWorkspace
+                            && !_workspace.IsDocumentOpen(_documentIdentity.DocumentId)
+                        )
                         {
-                            _workspace.OnSourceGeneratedDocumentOpened(_documentIdentity, _textBuffer.AsTextContainer());
+                            _workspace.OnSourceGeneratedDocumentOpened(
+                                _documentIdentity,
+                                _textBuffer.AsTextContainer()
+                            );
                         }
                     }
                     finally
@@ -428,16 +537,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     // We'll start this work asynchronously to figure out if we need to change; if the file is closed the cancellationToken
                     // is triggered and this will no-op.
-                    var asyncToken = _fileManager._listener.BeginAsyncOperation(nameof(OpenSourceGeneratedFile) + "." + nameof(OnWorkspaceChanged));
+                    var asyncToken = _fileManager._listener.BeginAsyncOperation(
+                        nameof(OpenSourceGeneratedFile) + "." + nameof(OnWorkspaceChanged)
+                    );
 
-                    Task.Run(async () =>
-                    {
-                        if (await oldProject.GetDependentVersionAsync(_cancellationTokenSource.Token).ConfigureAwait(false) !=
-                            await newProject.GetDependentVersionAsync(_cancellationTokenSource.Token).ConfigureAwait(false))
-                        {
-                            _batchingWorkQueue.AddWork();
-                        }
-                    }, _cancellationTokenSource.Token).CompletesAsyncOperation(asyncToken);
+                    Task.Run(
+                            async () =>
+                            {
+                                if (
+                                    await oldProject
+                                        .GetDependentVersionAsync(_cancellationTokenSource.Token)
+                                        .ConfigureAwait(false)
+                                    != await newProject
+                                        .GetDependentVersionAsync(_cancellationTokenSource.Token)
+                                        .ConfigureAwait(false)
+                                )
+                                {
+                                    _batchingWorkQueue.AddWork();
+                                }
+                            },
+                            _cancellationTokenSource.Token
+                        )
+                        .CompletesAsyncOperation(asyncToken);
                 }
             }
 
@@ -455,8 +576,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                 // We'll override the window frame and never show it as dirty, even if there's an underlying edit
                 windowFrame.SetProperty((int)__VSFPROPID2.VSFPROPID_OverrideDirtyState, false);
-                windowFrame.SetProperty((int)__VSFPROPID5.VSFPROPID_OverrideCaption, generatedSourceHintName + " " + ServicesVSResources.generated_suffix);
-                windowFrame.SetProperty((int)__VSFPROPID5.VSFPROPID_OverrideToolTip, generatedSourceHintName + " " + string.Format(ServicesVSResources.generated_by_0_suffix, GeneratorDisplayName));
+                windowFrame.SetProperty(
+                    (int)__VSFPROPID5.VSFPROPID_OverrideCaption,
+                    generatedSourceHintName + " " + ServicesVSResources.generated_suffix
+                );
+                windowFrame.SetProperty(
+                    (int)__VSFPROPID5.VSFPROPID_OverrideToolTip,
+                    generatedSourceHintName
+                        + " "
+                        + string.Format(
+                            ServicesVSResources.generated_by_0_suffix,
+                            GeneratorDisplayName
+                        )
+                );
 
                 EnsureWindowFrameInfoBarUpdated();
             }
@@ -465,20 +597,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             {
                 AssertIsForeground();
 
-                if (_windowFrameMessageToShow == null ||
-                    _windowFrame == null ||
-                    _currentWindowFrameMessage == _windowFrameMessageToShow &&
-                    !_currentWindowFrameImageMoniker.Equals(_windowFrameImageMonikerToShow))
+                if (
+                    _windowFrameMessageToShow == null
+                    || _windowFrame == null
+                    || _currentWindowFrameMessage == _windowFrameMessageToShow
+                        && !_currentWindowFrameImageMoniker.Equals(_windowFrameImageMonikerToShow)
+                )
                 {
                     // We don't have anything to do, or anything to do yet.
                     return;
                 }
 
-                var infoBarFactory = (IVsInfoBarUIFactory)_fileManager._serviceProvider.GetService(typeof(SVsInfoBarUIFactory));
+                var infoBarFactory = (IVsInfoBarUIFactory)
+                    _fileManager._serviceProvider.GetService(typeof(SVsInfoBarUIFactory));
                 Assumes.Present(infoBarFactory);
 
-                if (ErrorHandler.Failed(_windowFrame.GetProperty((int)__VSFPROPID7.VSFPROPID_InfoBarHost, out var infoBarHostObject)) ||
-                    infoBarHostObject is not IVsInfoBarHost infoBarHost)
+                if (
+                    ErrorHandler.Failed(
+                        _windowFrame.GetProperty(
+                            (int)__VSFPROPID7.VSFPROPID_InfoBarHost,
+                            out var infoBarHostObject
+                        )
+                    ) || infoBarHostObject is not IVsInfoBarHost infoBarHost
+                )
                 {
                     return;
                 }
@@ -489,7 +630,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     infoBarHost.RemoveInfoBar(_currentWindowFrameInfoBarElement);
                 }
 
-                var infoBar = new InfoBarModel(_windowFrameMessageToShow, _windowFrameImageMonikerToShow, isCloseButtonVisible: false);
+                var infoBar = new InfoBarModel(
+                    _windowFrameMessageToShow,
+                    _windowFrameImageMonikerToShow,
+                    isCloseButtonVisible: false
+                );
                 var infoBarUI = infoBarFactory.CreateInfoBar(infoBar);
 
                 infoBarHost.AddInfoBar(infoBarUI);
@@ -502,7 +647,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             public void NavigateToSpan(TextSpan sourceSpan, CancellationToken cancellationToken)
             {
                 var sourceText = _textBuffer.CurrentSnapshot.AsText();
-                _fileManager._visualStudioDocumentNavigationService.NavigateTo(_textBuffer, sourceText.GetVsTextSpanForSpan(sourceSpan), cancellationToken);
+                _fileManager._visualStudioDocumentNavigationService.NavigateTo(
+                    _textBuffer,
+                    sourceText.GetVsTextSpanForSpan(sourceSpan),
+                    cancellationToken
+                );
             }
         }
 
@@ -515,21 +664,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             /// This option allows the user to enable this. We are putting this behind a feature flag for now since we could have extensions
             /// surprised by this and we want some time to work through those issues.
             /// </summary>
-            internal static readonly Option2<bool?> EnableOpeningInWorkspace = new(FeatureName, nameof(EnableOpeningInWorkspace), defaultValue: null,
-                new RoamingProfileStorageLocation("TextEditor.Roslyn.Specific.EnableOpeningSourceGeneratedFilesInWorkspaceExperiment"));
+            internal static readonly Option2<bool?> EnableOpeningInWorkspace =
+                new(
+                    FeatureName,
+                    nameof(EnableOpeningInWorkspace),
+                    defaultValue: null,
+                    new RoamingProfileStorageLocation(
+                        "TextEditor.Roslyn.Specific.EnableOpeningSourceGeneratedFilesInWorkspaceExperiment"
+                    )
+                );
 
-            internal static readonly Option2<bool> EnableOpeningInWorkspaceFeatureFlag = new(FeatureName, nameof(EnableOpeningInWorkspaceFeatureFlag), defaultValue: false,
-                new FeatureFlagStorageLocation("Roslyn.SourceGeneratorsEnableOpeningInWorkspace"));
+            internal static readonly Option2<bool> EnableOpeningInWorkspaceFeatureFlag =
+                new(
+                    FeatureName,
+                    nameof(EnableOpeningInWorkspaceFeatureFlag),
+                    defaultValue: false,
+                    new FeatureFlagStorageLocation(
+                        "Roslyn.SourceGeneratorsEnableOpeningInWorkspace"
+                    )
+                );
 
-            ImmutableArray<IOption> IOptionProvider.Options => ImmutableArray.Create<IOption>(
-                EnableOpeningInWorkspace,
-                EnableOpeningInWorkspaceFeatureFlag);
+            ImmutableArray<IOption> IOptionProvider.Options =>
+                ImmutableArray.Create<IOption>(
+                    EnableOpeningInWorkspace,
+                    EnableOpeningInWorkspaceFeatureFlag
+                );
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Options()
-            {
-            }
+            public Options() { }
         }
     }
 }

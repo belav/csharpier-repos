@@ -34,7 +34,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                 if (count == 0)
                 {
                     if (_queriedMembers == null)
-                        return 0;  // This is an uninitialized QueryResult<M>, which is supported and represents a 0-length list of matches.
+                        return 0; // This is an uninitialized QueryResult<M>, which is supported and represents a 0-length list of matches.
 
                     int unfilteredCount = UnfilteredCount;
                     for (int i = 0; i < unfilteredCount; i++)
@@ -51,7 +51,6 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                     }
 
                     _lazyCount = count;
-
                 }
                 return count;
             }
@@ -127,7 +126,10 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             return match;
         }
 
-        private int UnfilteredCount => ((_bindingAttr & BindingFlags.DeclaredOnly) != 0) ? _queriedMembers!.DeclaredOnlyCount : _queriedMembers!.TotalCount;
+        private int UnfilteredCount =>
+            ((_bindingAttr & BindingFlags.DeclaredOnly) != 0)
+                ? _queriedMembers!.DeclaredOnlyCount
+                : _queriedMembers!.TotalCount;
 
         private readonly BindingFlags _bindingAttr;
         private int _lazyCount; // Intentionally not marking as volatile. QueryResult is for short-term use within a single method call - no aspiration to be thread-safe.

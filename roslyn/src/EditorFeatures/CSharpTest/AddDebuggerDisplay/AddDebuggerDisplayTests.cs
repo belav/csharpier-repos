@@ -7,8 +7,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
-using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeRefactoringVerifier<
-    Microsoft.CodeAnalysis.CSharp.AddDebuggerDisplay.CSharpAddDebuggerDisplayCodeRefactoringProvider>;
+using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeRefactoringVerifier<Microsoft.CodeAnalysis.CSharp.AddDebuggerDisplay.CSharpAddDebuggerDisplayCodeRefactoringProvider>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
 {
@@ -18,10 +17,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddDebuggerDisplay
         [Fact]
         public async Task OfferedOnEmptyClass()
         {
-            await VerifyCS.VerifyRefactoringAsync(@"
+            await VerifyCS.VerifyRefactoringAsync(
+                @"
 [||]class C
 {
-}", @"
+}",
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""{"" + nameof(GetDebuggerDisplay) + ""(),nq}"")]
@@ -31,17 +32,20 @@ class C
     {
         return ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task SupportsConstantInterpolatedStrings()
         {
-            var code = @"
+            var code =
+                @"
 [||]class C
 {
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay($""{{{nameof(GetDebuggerDisplay)}(),nq}}"")]
@@ -64,9 +68,11 @@ class C
         [Fact]
         public async Task OfferedOnEmptyRecord()
         {
-            var code = @"
+            var code =
+                @"
 [||]record C;";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""{"" + nameof(GetDebuggerDisplay) + ""(),nq}"")]
@@ -90,10 +96,12 @@ record C
         [Fact]
         public async Task OfferedOnEmptyStruct()
         {
-            await VerifyCS.VerifyRefactoringAsync(@"
+            await VerifyCS.VerifyRefactoringAsync(
+                @"
 [||]struct Foo
 {
-}", @"
+}",
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""{"" + nameof(GetDebuggerDisplay) + ""(),nq}"")]
@@ -103,13 +111,15 @@ struct Foo
     {
         return ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotOfferedOnStaticClass()
         {
-            var code = @"
+            var code =
+                @"
 [||]static class Foo
 {
 }";
@@ -120,7 +130,8 @@ struct Foo
         [Fact]
         public async Task NotOfferedOnInterfaceWithToString()
         {
-            var code = @"
+            var code =
+                @"
 [||]interface IFoo
 {
     string ToString();
@@ -132,7 +143,8 @@ struct Foo
         [Fact]
         public async Task NotOfferedOnEnum()
         {
-            var code = @"
+            var code =
+                @"
 [||]enum Foo
 {
 }";
@@ -143,7 +155,8 @@ struct Foo
         [Fact]
         public async Task NotOfferedOnDelegate()
         {
-            var code = @"
+            var code =
+                @"
 [||]delegate void Foo();";
 
             await VerifyCS.VerifyRefactoringAsync(code, code);
@@ -152,7 +165,8 @@ struct Foo
         [Fact]
         public async Task NotOfferedOnUnrelatedClassMembers()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     [||]public int Foo { get; }
@@ -164,11 +178,13 @@ class C
         [Fact]
         public async Task OfferedOnToString()
         {
-            await VerifyCS.VerifyRefactoringAsync(@"
+            await VerifyCS.VerifyRefactoringAsync(
+                @"
 class C
 {
     public override string [||]ToString() => ""Foo"";
-}", @"
+}",
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""{"" + nameof(GetDebuggerDisplay) + ""(),nq}"")]
@@ -180,17 +196,20 @@ class C
     {
         return ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task OfferedOnShadowingToString()
         {
-            await VerifyCS.VerifyRefactoringAsync(@"
+            await VerifyCS.VerifyRefactoringAsync(
+                @"
 class A
 {
     public new string [||]ToString() => ""Foo"";
-}", @"
+}",
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""{"" + nameof(GetDebuggerDisplay) + ""(),nq}"")]
@@ -202,13 +221,15 @@ class A
     {
         return ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotOfferedOnWrongOverloadOfToString()
         {
-            var code = @"
+            var code =
+                @"
 class A
 {
     public virtual string ToString(int bar = 0) => ""Foo"";
@@ -225,24 +246,28 @@ class B : A
         [Fact]
         public async Task OfferedOnExistingDebuggerDisplayMethod()
         {
-            await VerifyCS.VerifyRefactoringAsync(@"
+            await VerifyCS.VerifyRefactoringAsync(
+                @"
 class C
 {
     private string [||]GetDebuggerDisplay() => ""Foo"";
-}", @"
+}",
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""{"" + nameof(GetDebuggerDisplay) + ""(),nq}"")]
 class C
 {
     private string GetDebuggerDisplay() => ""Foo"";
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotOfferedOnWrongOverloadOfDebuggerDisplayMethod()
         {
-            var code = @"
+            var code =
+                @"
 class A
 {
     private string [||]GetDebuggerDisplay(int bar = 0) => ""Foo"";
@@ -254,12 +279,14 @@ class A
         [Fact]
         public async Task NamespaceImportIsNotDuplicated()
         {
-            await VerifyCS.VerifyRefactoringAsync(@"
+            await VerifyCS.VerifyRefactoringAsync(
+                @"
 using System.Diagnostics;
 
 [||]class C
 {
-}", @"
+}",
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""{"" + nameof(GetDebuggerDisplay) + ""(),nq}"")]
@@ -269,18 +296,21 @@ class C
     {
         return ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NamespaceImportIsSorted()
         {
-            await VerifyCS.VerifyRefactoringAsync(@"
+            await VerifyCS.VerifyRefactoringAsync(
+                @"
 using System.Xml;
 
 [||]class C
 {
-}", @"
+}",
+                @"
 using System.Diagnostics;
 using System.Xml;
 
@@ -291,13 +321,15 @@ class C
     {
         return ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotOfferedWhenAlreadySpecified()
         {
-            var code = @"
+            var code =
+                @"
 [System.Diagnostics.DebuggerDisplay(""Foo"")]
 [||]class C
 {
@@ -309,7 +341,8 @@ class C
         [Fact]
         public async Task NotOfferedWhenAlreadySpecifiedWithSuffix()
         {
-            var code = @"
+            var code =
+                @"
 [System.Diagnostics.DebuggerDisplayAttribute(""Foo"")]
 [||]class C
 {
@@ -321,11 +354,13 @@ class C
         [Fact]
         public async Task OfferedWhenAttributeWithTheSameNameIsSpecified()
         {
-            await VerifyCS.VerifyRefactoringAsync(@"
+            await VerifyCS.VerifyRefactoringAsync(
+                @"
 [{|CS0246:BrokenCode|}.DebuggerDisplay(""Foo"")]
 [||]class C
 {
-}", @"
+}",
+                @"
 using System.Diagnostics;
 
 [{|CS0246:BrokenCode|}.DebuggerDisplay(""Foo"")]
@@ -336,17 +371,20 @@ using System.Diagnostics;
     {
         return ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task OfferedWhenAttributeWithTheSameNameIsSpecifiedWithSuffix()
         {
-            await VerifyCS.VerifyRefactoringAsync(@"
+            await VerifyCS.VerifyRefactoringAsync(
+                @"
 [{|CS0246:BrokenCode|}.DebuggerDisplayAttribute(""Foo"")]
 [||]class C
 {
-}", @"
+}",
+                @"
 using System.Diagnostics;
 
 [{|CS0246:BrokenCode|}.DebuggerDisplayAttribute(""Foo"")]
@@ -357,13 +395,15 @@ using System.Diagnostics;
     {
         return ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task AliasedTypeIsRecognized()
         {
-            var code = @"
+            var code =
+                @"
 using DD = System.Diagnostics.DebuggerDisplayAttribute;
 
 [DD(""Foo"")]
@@ -377,7 +417,8 @@ using DD = System.Diagnostics.DebuggerDisplayAttribute;
         [Fact]
         public async Task OfferedWhenBaseClassHasDebuggerDisplay()
         {
-            await VerifyCS.VerifyRefactoringAsync(@"
+            await VerifyCS.VerifyRefactoringAsync(
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""Foo"")]
@@ -387,7 +428,8 @@ class A
 
 [||]class B : A
 {
-}", @"
+}",
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""Foo"")]
@@ -402,34 +444,40 @@ class B : A
     {
         return ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ExistingDebuggerDisplayMethodIsUsedEvenWhenPublicStaticNonString()
         {
-            await VerifyCS.VerifyRefactoringAsync(@"
+            await VerifyCS.VerifyRefactoringAsync(
+                @"
 [||]class C
 {
     public static object GetDebuggerDisplay() => ""Foo"";
-}", @"
+}",
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""{"" + nameof(GetDebuggerDisplay) + ""(),nq}"")]
 class C
 {
     public static object GetDebuggerDisplay() => ""Foo"";
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ExistingDebuggerDisplayMethodWithParameterIsNotUsed()
         {
-            await VerifyCS.VerifyRefactoringAsync(@"
+            await VerifyCS.VerifyRefactoringAsync(
+                @"
 [||]class C
 {
     private string GetDebuggerDisplay(int foo = 0) => foo.ToString();
-}", @"
+}",
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""{"" + nameof(GetDebuggerDisplay) + ""(),nq}"")]
@@ -441,7 +489,8 @@ class C
     {
         return ToString();
     }
-}");
+}"
+            );
         }
     }
 }

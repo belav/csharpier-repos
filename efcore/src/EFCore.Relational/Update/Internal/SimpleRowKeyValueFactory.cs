@@ -53,9 +53,8 @@ public class SimpleRowKeyValueFactory<TKey> : IRowKeyValueFactory<TKey>
         if (value == null)
         {
             throw new InvalidOperationException(
-                RelationalStrings.NullKeyValue(
-                    _constraint.Table.SchemaQualifiedName,
-                    _column.Name));
+                RelationalStrings.NullKeyValue(_constraint.Table.SchemaQualifiedName, _column.Name)
+            );
         }
 
         return (TKey)value;
@@ -73,9 +72,8 @@ public class SimpleRowKeyValueFactory<TKey> : IRowKeyValueFactory<TKey>
         if (value == null)
         {
             throw new InvalidOperationException(
-                RelationalStrings.NullKeyValue(
-                    _constraint.Table.SchemaQualifiedName,
-                    _column.Name));
+                RelationalStrings.NullKeyValue(_constraint.Table.SchemaQualifiedName, _column.Name)
+            );
         }
 
         return (TKey)value;
@@ -87,18 +85,26 @@ public class SimpleRowKeyValueFactory<TKey> : IRowKeyValueFactory<TKey>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual TKey CreateKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues = false)
+    public virtual TKey CreateKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    )
     {
         var (key, found) = fromOriginalValues
-            ? ((Func<IReadOnlyModificationCommand, (TKey, bool)>)_columnAccessors.OriginalValueGetter)(command)
-            : ((Func<IReadOnlyModificationCommand, (TKey, bool)>)_columnAccessors.CurrentValueGetter)(command);
+            ? (
+                (Func<IReadOnlyModificationCommand, (TKey, bool)>)
+                    _columnAccessors.OriginalValueGetter
+            )(command)
+            : (
+                (Func<IReadOnlyModificationCommand, (TKey, bool)>)
+                    _columnAccessors.CurrentValueGetter
+            )(command);
 
         if (!found)
         {
             throw new InvalidOperationException(
-                RelationalStrings.NullKeyValue(
-                    _constraint.Table.SchemaQualifiedName,
-                    _column.Name));
+                RelationalStrings.NullKeyValue(_constraint.Table.SchemaQualifiedName, _column.Name)
+            );
         }
 
         return key;
@@ -110,25 +116,29 @@ public class SimpleRowKeyValueFactory<TKey> : IRowKeyValueFactory<TKey>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object CreateEquatableKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues = false)
-        => new EquatableKeyValue<TKey>(
+    public virtual object CreateEquatableKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues = false
+    ) =>
+        new EquatableKeyValue<TKey>(
             _constraint,
             CreateKeyValue(command, fromOriginalValues),
-            EqualityComparer);
+            EqualityComparer
+        );
 
-    object[] IRowKeyValueFactory.CreateKeyValue(IReadOnlyModificationCommand command, bool fromOriginalValues)
-        => new object[] { CreateKeyValue(command, fromOriginalValues)! };
+    object[] IRowKeyValueFactory.CreateKeyValue(
+        IReadOnlyModificationCommand command,
+        bool fromOriginalValues
+    ) => new object[] { CreateKeyValue(command, fromOriginalValues)! };
 
     private sealed class NoNullsStructuralEqualityComparer : IEqualityComparer<TKey>
     {
-        private readonly IEqualityComparer _comparer
-            = StructuralComparisons.StructuralEqualityComparer;
+        private readonly IEqualityComparer _comparer =
+            StructuralComparisons.StructuralEqualityComparer;
 
-        public bool Equals(TKey? x, TKey? y)
-            => _comparer.Equals(x, y);
+        public bool Equals(TKey? x, TKey? y) => _comparer.Equals(x, y);
 
-        public int GetHashCode([DisallowNull] TKey obj)
-            => _comparer.GetHashCode(obj);
+        public int GetHashCode([DisallowNull] TKey obj) => _comparer.GetHashCode(obj);
     }
 
     private sealed class NoNullsCustomEqualityComparer : IEqualityComparer<TKey>
@@ -142,10 +152,8 @@ public class SimpleRowKeyValueFactory<TKey> : IRowKeyValueFactory<TKey>
             _hashCode = (Func<TKey, int>)comparer.HashCodeExpression.Compile();
         }
 
-        public bool Equals(TKey? x, TKey? y)
-            => _equals(x, y);
+        public bool Equals(TKey? x, TKey? y) => _equals(x, y);
 
-        public int GetHashCode([DisallowNull] TKey obj)
-            => _hashCode(obj);
+        public int GetHashCode([DisallowNull] TKey obj) => _hashCode(obj);
     }
 }

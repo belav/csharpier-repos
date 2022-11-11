@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
     internal sealed class ClassificationFormatDefinitions
     {
         [Export(typeof(EditorFormatDefinition))]
-        [ClassificationType(ClassificationTypeNames = ClassificationTypeDefinitions.InlineRenameField)]
+        [ClassificationType(
+            ClassificationTypeNames = ClassificationTypeDefinitions.InlineRenameField
+        )]
         [Name(ClassificationTypeDefinitions.InlineRenameField)]
         [Order(After = Priority.High)]
         [UserVisible(true)]

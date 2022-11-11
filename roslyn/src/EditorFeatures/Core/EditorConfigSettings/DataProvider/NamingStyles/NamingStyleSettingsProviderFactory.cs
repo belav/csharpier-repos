@@ -7,7 +7,8 @@ using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.NamingStyles
 {
-    internal class NamingStyleSettingsProviderFactory : IWorkspaceSettingsProviderFactory<NamingStyleSetting>
+    internal class NamingStyleSettingsProviderFactory
+        : IWorkspaceSettingsProviderFactory<NamingStyleSetting>
     {
         private readonly Workspace _workspace;
 

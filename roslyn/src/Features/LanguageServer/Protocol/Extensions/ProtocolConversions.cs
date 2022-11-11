@@ -35,11 +35,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         private const string VisualBasicMarkdownLanguageName = "vb";
         private static readonly Uri SourceGeneratedDocumentBaseUri = new("gen://");
 
-        private static readonly Regex s_markdownEscapeRegex = new(@"([\\`\*_\{\}\[\]\(\)#+\-\.!])", RegexOptions.Compiled);
+        private static readonly Regex s_markdownEscapeRegex =
+            new(@"([\\`\*_\{\}\[\]\(\)#+\-\.!])", RegexOptions.Compiled);
 
         // NOTE: While the spec allows it, don't use Function and Method, as both VS and VS Code display them the same way
         // which can confuse users
-        public static readonly Dictionary<string, LSP.CompletionItemKind> RoslynTagToCompletionItemKind = new Dictionary<string, LSP.CompletionItemKind>()
+        public static readonly Dictionary<
+            string,
+            LSP.CompletionItemKind
+        > RoslynTagToCompletionItemKind = new Dictionary<string, LSP.CompletionItemKind>()
         {
             { WellKnownTags.Public, LSP.CompletionItemKind.Keyword },
             { WellKnownTags.Protected, LSP.CompletionItemKind.Keyword },
@@ -86,14 +90,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             LSP.CompletionContext? context,
             Document document,
             int position,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (context is null)
             {
                 // Some LSP clients don't support sending extra context, so all we can do is invoke
                 return Completion.CompletionTrigger.Invoke;
             }
-            else if (context.TriggerKind is LSP.CompletionTriggerKind.Invoked or LSP.CompletionTriggerKind.TriggerForIncompleteCompletions)
+            else if (
+                context.TriggerKind
+                is LSP.CompletionTriggerKind.Invoked
+                    or LSP.CompletionTriggerKind.TriggerForIncompleteCompletions
+            )
             {
                 if (context is not LSP.VSInternalCompletionContext vsCompletionContext)
                 {
@@ -106,12 +115,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                         return Completion.CompletionTrigger.Invoke;
 
                     case LSP.VSInternalCompletionInvokeKind.Typing:
-                        var insertionChar = await GetInsertionCharacterAsync(document, position, cancellationToken).ConfigureAwait(false);
+                        var insertionChar = await GetInsertionCharacterAsync(
+                                document,
+                                position,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         return Completion.CompletionTrigger.CreateInsertionTrigger(insertionChar);
 
                     case LSP.VSInternalCompletionInvokeKind.Deletion:
                         Contract.ThrowIfNull(context.TriggerCharacter);
-                        Contract.ThrowIfFalse(char.TryParse(context.TriggerCharacter, out var triggerChar));
+                        Contract.ThrowIfFalse(
+                            char.TryParse(context.TriggerCharacter, out var triggerChar)
+                        );
                         return Completion.CompletionTrigger.CreateDeletionTrigger(triggerChar);
 
                     default:
@@ -134,7 +150,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             }
 
             // Local functions
-            static async Task<char> GetInsertionCharacterAsync(Document document, int position, CancellationToken cancellationToken)
+            static async Task<char> GetInsertionCharacterAsync(
+                Document document,
+                int position,
+                CancellationToken cancellationToken
+            )
             {
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
@@ -170,7 +190,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return null;
         }
 
-        public static LSP.TextDocumentPositionParams PositionToTextDocumentPositionParams(int position, SourceText text, Document document)
+        public static LSP.TextDocumentPositionParams PositionToTextDocumentPositionParams(
+            int position,
+            SourceText text,
+            Document document
+        )
         {
             return new LSP.TextDocumentPositionParams()
             {
@@ -179,17 +203,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             };
         }
 
-        public static LSP.TextDocumentIdentifier DocumentToTextDocumentIdentifier(Document document)
-            => new LSP.TextDocumentIdentifier { Uri = document.GetURI() };
+        public static LSP.TextDocumentIdentifier DocumentToTextDocumentIdentifier(
+            Document document
+        ) => new LSP.TextDocumentIdentifier { Uri = document.GetURI() };
 
-        public static LSP.VersionedTextDocumentIdentifier DocumentToVersionedTextDocumentIdentifier(Document document)
-            => new LSP.VersionedTextDocumentIdentifier { Uri = document.GetURI() };
+        public static LSP.VersionedTextDocumentIdentifier DocumentToVersionedTextDocumentIdentifier(
+            Document document
+        ) => new LSP.VersionedTextDocumentIdentifier { Uri = document.GetURI() };
 
-        public static LinePosition PositionToLinePosition(LSP.Position position)
-            => new LinePosition(position.Line, position.Character);
+        public static LinePosition PositionToLinePosition(LSP.Position position) =>
+            new LinePosition(position.Line, position.Character);
 
-        public static LinePositionSpan RangeToLinePositionSpan(LSP.Range range)
-            => new LinePositionSpan(PositionToLinePosition(range.Start), PositionToLinePosition(range.End));
+        public static LinePositionSpan RangeToLinePositionSpan(LSP.Range range) =>
+            new LinePositionSpan(
+                PositionToLinePosition(range.Start),
+                PositionToLinePosition(range.End)
+            );
 
         public static TextSpan RangeToTextSpan(LSP.Range range, SourceText text)
         {
@@ -207,14 +236,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             };
         }
 
-        public static TextChange ContentChangeEventToTextChange(LSP.TextDocumentContentChangeEvent changeEvent, SourceText text)
-            => new TextChange(RangeToTextSpan(changeEvent.Range, text), changeEvent.Text);
+        public static TextChange ContentChangeEventToTextChange(
+            LSP.TextDocumentContentChangeEvent changeEvent,
+            SourceText text
+        ) => new TextChange(RangeToTextSpan(changeEvent.Range, text), changeEvent.Text);
 
-        public static LSP.Position LinePositionToPosition(LinePosition linePosition)
-            => new LSP.Position { Line = linePosition.Line, Character = linePosition.Character };
+        public static LSP.Position LinePositionToPosition(LinePosition linePosition) =>
+            new LSP.Position { Line = linePosition.Line, Character = linePosition.Character };
 
-        public static LSP.Range LinePositionToRange(LinePositionSpan linePositionSpan)
-            => new LSP.Range { Start = LinePositionToPosition(linePositionSpan.Start), End = LinePositionToPosition(linePositionSpan.End) };
+        public static LSP.Range LinePositionToRange(LinePositionSpan linePositionSpan) =>
+            new LSP.Range
+            {
+                Start = LinePositionToPosition(linePositionSpan.Start),
+                End = LinePositionToPosition(linePositionSpan.End)
+            };
 
         public static LSP.Range TextSpanToRange(TextSpan textSpan, SourceText text)
         {
@@ -222,38 +257,65 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return LinePositionToRange(linePosSpan);
         }
 
-        public static Task<LSP.Location?> DocumentSpanToLocationAsync(DocumentSpan documentSpan, CancellationToken cancellationToken)
-            => TextSpanToLocationAsync(documentSpan.Document, documentSpan.SourceSpan, isStale: false, cancellationToken);
+        public static Task<LSP.Location?> DocumentSpanToLocationAsync(
+            DocumentSpan documentSpan,
+            CancellationToken cancellationToken
+        ) =>
+            TextSpanToLocationAsync(
+                documentSpan.Document,
+                documentSpan.SourceSpan,
+                isStale: false,
+                cancellationToken
+            );
 
         public static async Task<LSP.VSInternalLocation?> DocumentSpanToLocationWithTextAsync(
-            DocumentSpan documentSpan, ClassifiedTextElement text, CancellationToken cancellationToken)
+            DocumentSpan documentSpan,
+            ClassifiedTextElement text,
+            CancellationToken cancellationToken
+        )
         {
             var location = await TextSpanToLocationAsync(
-                documentSpan.Document, documentSpan.SourceSpan, isStale: false, cancellationToken).ConfigureAwait(false);
+                    documentSpan.Document,
+                    documentSpan.SourceSpan,
+                    isStale: false,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            return location == null ? null : new LSP.VSInternalLocation
-            {
-                Uri = location.Uri,
-                Range = location.Range,
-                Text = text
-            };
+            return location == null
+                ? null
+                : new LSP.VSInternalLocation
+                {
+                    Uri = location.Uri,
+                    Range = location.Range,
+                    Text = text
+                };
         }
 
         /// <summary>
         /// Compute all the <see cref="LSP.TextDocumentEdit"/> for the input list of changed documents.
         /// Additionally maps the locations of the changed documents if necessary.
         /// </summary>
-        public static async Task<LSP.TextDocumentEdit[]> ChangedDocumentsToTextDocumentEditsAsync<T>(IEnumerable<DocumentId> changedDocuments, Func<DocumentId, T> getNewDocumentFunc,
-                Func<DocumentId, T> getOldDocumentFunc, IDocumentTextDifferencingService? textDiffService, CancellationToken cancellationToken) where T : TextDocument
+        public static async Task<LSP.TextDocumentEdit[]> ChangedDocumentsToTextDocumentEditsAsync<T>(
+            IEnumerable<DocumentId> changedDocuments,
+            Func<DocumentId, T> getNewDocumentFunc,
+            Func<DocumentId, T> getOldDocumentFunc,
+            IDocumentTextDifferencingService? textDiffService,
+            CancellationToken cancellationToken
+        ) where T : TextDocument
         {
-            using var _ = ArrayBuilder<(Uri Uri, LSP.TextEdit TextEdit)>.GetInstance(out var uriToTextEdits);
+            using var _ = ArrayBuilder<(Uri Uri, LSP.TextEdit TextEdit)>.GetInstance(
+                out var uriToTextEdits
+            );
 
             foreach (var docId in changedDocuments)
             {
                 var newDocument = getNewDocumentFunc(docId);
                 var oldDocument = getOldDocumentFunc(docId);
 
-                var oldText = await oldDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                var oldText = await oldDocument
+                    .GetTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 ImmutableArray<TextChange> textChanges;
 
@@ -262,22 +324,33 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 if (newDocument is Document newDoc && oldDocument is Document oldDoc)
                 {
                     Contract.ThrowIfNull(textDiffService);
-                    textChanges = await textDiffService.GetTextChangesAsync(oldDoc, newDoc, cancellationToken).ConfigureAwait(false);
+                    textChanges = await textDiffService
+                        .GetTextChangesAsync(oldDoc, newDoc, cancellationToken)
+                        .ConfigureAwait(false);
                 }
                 else
                 {
-                    var newText = await newDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                    var newText = await newDocument
+                        .GetTextAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     textChanges = newText.GetTextChanges(oldText).ToImmutableArray();
                 }
 
                 // Map all the text changes' spans for this document.
-                var mappedResults = await GetMappedSpanResultAsync(oldDocument, textChanges.Select(tc => tc.Span).ToImmutableArray(), cancellationToken).ConfigureAwait(false);
+                var mappedResults = await GetMappedSpanResultAsync(
+                        oldDocument,
+                        textChanges.Select(tc => tc.Span).ToImmutableArray(),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (mappedResults == null)
                 {
                     // There's no span mapping available, just create text edits from the original text changes.
                     foreach (var textChange in textChanges)
                     {
-                        uriToTextEdits.Add((oldDocument.GetURI(), TextChangeToTextEdit(textChange, oldText)));
+                        uriToTextEdits.Add(
+                            (oldDocument.GetURI(), TextChangeToTextEdit(textChange, oldText))
+                        );
                     }
                 }
                 else
@@ -289,21 +362,36 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                         var textChange = textChanges[i];
                         if (!mappedSpan.IsDefault)
                         {
-                            uriToTextEdits.Add((GetUriFromFilePath(mappedSpan.FilePath), new LSP.TextEdit
-                            {
-                                Range = MappedSpanResultToRange(mappedSpan),
-                                NewText = textChange.NewText ?? string.Empty
-                            }));
+                            uriToTextEdits.Add(
+                                (
+                                    GetUriFromFilePath(mappedSpan.FilePath),
+                                    new LSP.TextEdit
+                                    {
+                                        Range = MappedSpanResultToRange(mappedSpan),
+                                        NewText = textChange.NewText ?? string.Empty
+                                    }
+                                )
+                            );
                         }
                     }
                 }
             }
 
-            var documentEdits = uriToTextEdits.GroupBy(uriAndEdit => uriAndEdit.Uri, uriAndEdit => uriAndEdit.TextEdit, (uri, edits) => new LSP.TextDocumentEdit
-            {
-                TextDocument = new LSP.OptionalVersionedTextDocumentIdentifier { Uri = uri },
-                Edits = edits.ToArray(),
-            }).ToArray();
+            var documentEdits = uriToTextEdits
+                .GroupBy(
+                    uriAndEdit => uriAndEdit.Uri,
+                    uriAndEdit => uriAndEdit.TextEdit,
+                    (uri, edits) =>
+                        new LSP.TextDocumentEdit
+                        {
+                            TextDocument = new LSP.OptionalVersionedTextDocumentIdentifier
+                            {
+                                Uri = uri
+                            },
+                            Edits = edits.ToArray(),
+                        }
+                )
+                .ToArray();
 
             return documentEdits;
         }
@@ -312,9 +400,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             Document document,
             TextSpan textSpan,
             bool isStale,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return TextSpanToLocationAsync(document, textSpan, isStale, context: null, cancellationToken);
+            return TextSpanToLocationAsync(
+                document,
+                textSpan,
+                isStale,
+                context: null,
+                cancellationToken
+            );
         }
 
         public static async Task<LSP.Location?> TextSpanToLocationAsync(
@@ -322,32 +417,49 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             TextSpan textSpan,
             bool isStale,
             RequestContext? context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var result = await GetMappedSpanResultAsync(document, ImmutableArray.Create(textSpan), cancellationToken).ConfigureAwait(false);
+            var result = await GetMappedSpanResultAsync(
+                    document,
+                    ImmutableArray.Create(textSpan),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (result == null)
-                return await TryConvertTextSpanToLocation(document, textSpan, isStale, context, cancellationToken).ConfigureAwait(false);
+                return await TryConvertTextSpanToLocation(
+                        document,
+                        textSpan,
+                        isStale,
+                        context,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
             var mappedSpan = result.Value.Single();
             if (mappedSpan.IsDefault)
-                return await TryConvertTextSpanToLocation(document, textSpan, isStale, context, cancellationToken).ConfigureAwait(false);
+                return await TryConvertTextSpanToLocation(
+                        document,
+                        textSpan,
+                        isStale,
+                        context,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
             var uri = TryGetUriFromFilePath(mappedSpan.FilePath, context);
             if (uri == null)
                 return null;
 
-            return new LSP.Location
-            {
-                Uri = uri,
-                Range = MappedSpanResultToRange(mappedSpan)
-            };
+            return new LSP.Location { Uri = uri, Range = MappedSpanResultToRange(mappedSpan) };
 
             static async Task<LSP.Location?> TryConvertTextSpanToLocation(
                 Document document,
                 TextSpan span,
                 bool isStale,
                 RequestContext? context,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var uri = document.TryGetURI(context);
                 if (uri == null)
@@ -361,13 +473,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                     // to.
                     span = TextSpan.FromBounds(
                         Math.Min(text.Length, span.Start),
-                        Math.Min(text.Length, span.End));
+                        Math.Min(text.Length, span.End)
+                    );
                 }
 
                 return ConvertTextSpanWithTextToLocation(span, text, uri);
             }
 
-            static LSP.Location ConvertTextSpanWithTextToLocation(TextSpan span, SourceText text, Uri documentUri)
+            static LSP.Location ConvertTextSpanWithTextToLocation(
+                TextSpan span,
+                SourceText text,
+                Uri documentUri
+            )
             {
                 var location = new LSP.Location
                 {
@@ -379,8 +496,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             }
         }
 
-        public static LSP.CodeDescription? HelpLinkToCodeDescription(Uri? uri)
-            => (uri != null) ? new LSP.CodeDescription { Href = uri } : null;
+        public static LSP.CodeDescription? HelpLinkToCodeDescription(Uri? uri) =>
+            (uri != null) ? new LSP.CodeDescription { Href = uri } : null;
 
         public static LSP.SymbolKind NavigateToKindToSymbolKind(string kind)
         {
@@ -403,7 +520,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             }
         }
 
-        public static LSP.DocumentHighlightKind HighlightSpanKindToDocumentHighlightKind(HighlightSpanKind kind)
+        public static LSP.DocumentHighlightKind HighlightSpanKindToDocumentHighlightKind(
+            HighlightSpanKind kind
+        )
         {
             switch (kind)
             {
@@ -475,10 +594,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         {
             // Glyph kinds have accessibility modifiers in their name, e.g. ClassPrivate.
             // Remove the accessibility modifier and try to convert to LSP symbol kind.
-            var glyphString = glyph.ToString().Replace(nameof(Accessibility.Public), string.Empty)
-                                              .Replace(nameof(Accessibility.Protected), string.Empty)
-                                              .Replace(nameof(Accessibility.Private), string.Empty)
-                                              .Replace(nameof(Accessibility.Internal), string.Empty);
+            var glyphString = glyph
+                .ToString()
+                .Replace(nameof(Accessibility.Public), string.Empty)
+                .Replace(nameof(Accessibility.Protected), string.Empty)
+                .Replace(nameof(Accessibility.Private), string.Empty)
+                .Replace(nameof(Accessibility.Internal), string.Empty);
 
             if (Enum.TryParse<LSP.SymbolKind>(glyphString, out var symbolKind))
             {
@@ -527,7 +648,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                     return Glyph.None;
                 case LSP.CompletionItemKind.Method:
                 case LSP.CompletionItemKind.Constructor:
-                case LSP.CompletionItemKind.Function:    // We don't use Function, but map it just in case. It has the same icon as Method in VS and VS Code
+                case LSP.CompletionItemKind.Function: // We don't use Function, but map it just in case. It has the same icon as Method in VS and VS Code
                     return Glyph.MethodPublic;
                 case LSP.CompletionItemKind.Field:
                     return Glyph.FieldPublic;
@@ -575,9 +696,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         }
 
         // The mappings here are roughly based off of SymbolUsageInfoExtensions.ToSymbolReferenceKinds.
-        public static LSP.VSInternalReferenceKind[] SymbolUsageInfoToReferenceKinds(SymbolUsageInfo symbolUsageInfo)
+        public static LSP.VSInternalReferenceKind[] SymbolUsageInfoToReferenceKinds(
+            SymbolUsageInfo symbolUsageInfo
+        )
         {
-            using var _ = ArrayBuilder<LSP.VSInternalReferenceKind>.GetInstance(out var referenceKinds);
+            using var _ = ArrayBuilder<LSP.VSInternalReferenceKind>.GetInstance(
+                out var referenceKinds
+            );
             if (symbolUsageInfo.ValueUsageInfoOpt.HasValue)
             {
                 var usageInfo = symbolUsageInfo.ValueUsageInfoOpt.Value;
@@ -657,7 +782,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
             return ProjectId.CreateFromSerialized(
                 Guid.Parse(projectContext.Id.Substring(0, delimiter)),
-                debugName: projectContext.Id.Substring(delimiter + 1));
+                debugName: projectContext.Id.Substring(delimiter + 1)
+            );
         }
 
         public static LSP.VSProjectContext ProjectToProjectContext(Project project)
@@ -684,30 +810,43 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             LSP.FormattingOptions? options,
             Document document,
             IGlobalOptionService globalOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var formattingOptions = await document.GetSyntaxFormattingOptionsAsync(globalOptions, cancellationToken).ConfigureAwait(false);
+            var formattingOptions = await document
+                .GetSyntaxFormattingOptionsAsync(globalOptions, cancellationToken)
+                .ConfigureAwait(false);
 
             if (options != null)
             {
                 // LSP doesn't currently support indent size as an option. However, except in special
                 // circumstances, indent size is usually equivalent to tab size, so we'll just set it.
-                formattingOptions = formattingOptions.With(new LineFormattingOptions()
-                {
-                    UseTabs = !options.InsertSpaces,
-                    TabSize = options.TabSize,
-                    IndentationSize = options.TabSize,
-                    NewLine = formattingOptions.NewLine
-                });
+                formattingOptions = formattingOptions.With(
+                    new LineFormattingOptions()
+                    {
+                        UseTabs = !options.InsertSpaces,
+                        TabSize = options.TabSize,
+                        IndentationSize = options.TabSize,
+                        NewLine = formattingOptions.NewLine
+                    }
+                );
             }
 
             return formattingOptions;
         }
 
-        public static LSP.MarkupContent GetDocumentationMarkupContent(ImmutableArray<TaggedText> tags, Document document, bool featureSupportsMarkdown)
-            => GetDocumentationMarkupContent(tags, document.Project.Language, featureSupportsMarkdown);
+        public static LSP.MarkupContent GetDocumentationMarkupContent(
+            ImmutableArray<TaggedText> tags,
+            Document document,
+            bool featureSupportsMarkdown
+        ) =>
+            GetDocumentationMarkupContent(tags, document.Project.Language, featureSupportsMarkdown);
 
-        public static LSP.MarkupContent GetDocumentationMarkupContent(ImmutableArray<TaggedText> tags, string language, bool featureSupportsMarkdown)
+        public static LSP.MarkupContent GetDocumentationMarkupContent(
+            ImmutableArray<TaggedText> tags,
+            string language,
+            bool featureSupportsMarkdown
+        )
         {
             if (!featureSupportsMarkdown)
             {
@@ -766,13 +905,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
             static string GetStyledText(TaggedText taggedText, bool isInCodeBlock)
             {
-                var text = isInCodeBlock ? taggedText.Text : s_markdownEscapeRegex.Replace(taggedText.Text, @"\$1");
+                var text = isInCodeBlock
+                    ? taggedText.Text
+                    : s_markdownEscapeRegex.Replace(taggedText.Text, @"\$1");
 
                 // For non-cref links, the URI is present in both the hint and target.
-                if (!string.IsNullOrEmpty(taggedText.NavigationHint) && taggedText.NavigationHint == taggedText.NavigationTarget)
+                if (
+                    !string.IsNullOrEmpty(taggedText.NavigationHint)
+                    && taggedText.NavigationHint == taggedText.NavigationTarget
+                )
                     return $"[{text}]({taggedText.NavigationHint})";
 
-                // Markdown ignores spaces at the start of lines outside of code blocks, 
+                // Markdown ignores spaces at the start of lines outside of code blocks,
                 // so to get indented lines we replace the spaces with these.
                 if (!isInCodeBlock)
                     text = text.Replace(" ", "&nbsp;");
@@ -789,7 +933,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             }
         }
 
-        private static async Task<ImmutableArray<MappedSpanResult>?> GetMappedSpanResultAsync(TextDocument textDocument, ImmutableArray<TextSpan> textSpans, CancellationToken cancellationToken)
+        private static async Task<ImmutableArray<MappedSpanResult>?> GetMappedSpanResultAsync(
+            TextDocument textDocument,
+            ImmutableArray<TextSpan> textSpans,
+            CancellationToken cancellationToken
+        )
         {
             if (textDocument is not Document document)
             {
@@ -802,9 +950,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 return null;
             }
 
-            var mappedSpanResult = await spanMappingService.MapSpansAsync(document, textSpans, cancellationToken).ConfigureAwait(false);
-            Contract.ThrowIfFalse(textSpans.Length == mappedSpanResult.Length,
-                $"The number of input spans {textSpans.Length} should match the number of mapped spans returned {mappedSpanResult.Length}");
+            var mappedSpanResult = await spanMappingService
+                .MapSpansAsync(document, textSpans, cancellationToken)
+                .ConfigureAwait(false);
+            Contract.ThrowIfFalse(
+                textSpans.Length == mappedSpanResult.Length,
+                $"The number of input spans {textSpans.Length} should match the number of mapped spans returned {mappedSpanResult.Length}"
+            );
             return mappedSpanResult;
         }
 

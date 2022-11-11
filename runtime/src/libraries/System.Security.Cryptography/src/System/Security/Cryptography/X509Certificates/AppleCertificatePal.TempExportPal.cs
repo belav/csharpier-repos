@@ -40,6 +40,7 @@ namespace System.Security.Cryptography.X509Certificates
             public DateTime NotAfter => _realPal.NotAfter;
             public DateTime NotBefore => _realPal.NotBefore;
             public byte[] RawData => _realPal.RawData;
+
             public byte[] Export(X509ContentType contentType, SafePasswordHandle password) =>
                 _realPal.Export(contentType, password);
         }

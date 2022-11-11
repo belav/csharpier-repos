@@ -30,7 +30,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <summary>
         /// Creates serialization metadata for an object.
         /// </summary>
-        public SourceGenJsonTypeInfo(JsonSerializerOptions options, JsonObjectInfoValues<T> objectInfo) : base(GetConverter(objectInfo), options)
+        public SourceGenJsonTypeInfo(
+            JsonSerializerOptions options,
+            JsonObjectInfoValues<T> objectInfo
+        ) : base(GetConverter(objectInfo), options)
         {
             if (objectInfo.ObjectWithParameterizedConstructorCreator != null)
             {
@@ -61,8 +64,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonCollectionInfoValues<T> collectionInfo,
             Func<JsonConverter<T>> converterCreator,
             object? createObjectWithArgs = null,
-            object? addFunc = null)
-            : base(new JsonMetadataServicesConverter<T>(converterCreator()), options)
+            object? addFunc = null
+        ) : base(new JsonMetadataServicesConverter<T>(converterCreator()), options)
         {
             if (collectionInfo is null)
             {
@@ -93,11 +96,15 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 return new JsonMetadataServicesConverter<T>(
                     () => new LargeObjectWithParameterizedConstructorConverter<T>(),
-                    ConverterStrategy.Object);
+                    ConverterStrategy.Object
+                );
             }
             else
             {
-                return new JsonMetadataServicesConverter<T>(() => new ObjectDefaultConverter<T>(), ConverterStrategy.Object);
+                return new JsonMetadataServicesConverter<T>(
+                    () => new ObjectDefaultConverter<T>(),
+                    ConverterStrategy.Object
+                );
             }
 #pragma warning restore CS8714
         }
@@ -109,7 +116,10 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 if (SerializeHandler == null)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_NoMetadataForTypeCtorParams(Options.TypeInfoResolver, Type);
+                    ThrowHelper.ThrowInvalidOperationException_NoMetadataForTypeCtorParams(
+                        Options.TypeInfoResolver,
+                        Type
+                    );
                 }
 
                 array = Array.Empty<JsonParameterInfoValues>();
@@ -146,7 +156,10 @@ namespace System.Text.Json.Serialization.Metadata
 
                 if (SerializeHandler == null)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_NoMetadataForTypeProperties(Options.TypeInfoResolver, Type);
+                    ThrowHelper.ThrowInvalidOperationException_NoMetadataForTypeProperties(
+                        Options.TypeInfoResolver,
+                        Type
+                    );
                 }
 
                 MetadataSerializationNotSupported = true;
@@ -154,7 +167,9 @@ namespace System.Text.Json.Serialization.Metadata
             }
 
             Dictionary<string, JsonPropertyInfo>? ignoredMembers = null;
-            JsonPropertyDictionary<JsonPropertyInfo> propertyCache = CreatePropertyCache(capacity: array.Length);
+            JsonPropertyDictionary<JsonPropertyInfo> propertyCache = CreatePropertyCache(
+                capacity: array.Length
+            );
 
             for (int i = 0; i < array.Length; i++)
             {
@@ -165,14 +180,24 @@ namespace System.Text.Json.Serialization.Metadata
                 {
                     if (hasJsonInclude)
                     {
-                        Debug.Assert(jsonPropertyInfo.MemberName != null, "MemberName is not set by source gen");
-                        ThrowHelper.ThrowInvalidOperationException_JsonIncludeOnNonPublicInvalid(jsonPropertyInfo.MemberName, jsonPropertyInfo.DeclaringType);
+                        Debug.Assert(
+                            jsonPropertyInfo.MemberName != null,
+                            "MemberName is not set by source gen"
+                        );
+                        ThrowHelper.ThrowInvalidOperationException_JsonIncludeOnNonPublicInvalid(
+                            jsonPropertyInfo.MemberName,
+                            jsonPropertyInfo.DeclaringType
+                        );
                     }
 
                     continue;
                 }
 
-                if (jsonPropertyInfo.MemberType == MemberTypes.Field && !hasJsonInclude && !Options.IncludeFields)
+                if (
+                    jsonPropertyInfo.MemberType == MemberTypes.Field
+                    && !hasJsonInclude
+                    && !Options.IncludeFields
+                )
                 {
                     continue;
                 }

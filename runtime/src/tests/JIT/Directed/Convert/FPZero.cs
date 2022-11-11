@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft. All rights reserved.
+﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 /*
@@ -9,7 +9,7 @@
  * The first call to IsNegativeZero is getting inlined and the second call is not.
  * It appears the code for the non-inlined method is wrong which is how we end up with two different results for the same call with the same arg.
  * It seems that if you compile with /debug we get correct code so I’m thinking the problem is with inlining DoubleToInt64Bits into IsNegativeZero.
- * 
+ *
  */
 
 using System;
@@ -19,9 +19,11 @@ public class MyClass
     public static int Main()
     {
         double d1 = -0e0;
-        if (!IsNegativeZero(d1)) return 101;
+        if (!IsNegativeZero(d1))
+            return 101;
         double d2 = -0e0;
-        if (!IsNegativeZero(d2)) return 101;
+        if (!IsNegativeZero(d2))
+            return 101;
         return 100;
     }
 
@@ -39,4 +41,3 @@ public class MyClass
         return false;
     }
 }
-

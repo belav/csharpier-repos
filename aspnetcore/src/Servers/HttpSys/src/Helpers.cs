@@ -8,7 +8,14 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 
 internal static class Helpers
 {
-    internal static readonly byte[] ChunkTerminator = new byte[] { (byte)'0', (byte)'\r', (byte)'\n', (byte)'\r', (byte)'\n' };
+    internal static readonly byte[] ChunkTerminator = new byte[]
+    {
+        (byte)'0',
+        (byte)'\r',
+        (byte)'\n',
+        (byte)'\r',
+        (byte)'\n'
+    };
     internal static readonly byte[] CRLF = new byte[] { (byte)'\r', (byte)'\n' };
 
     internal static ArraySegment<byte> GetChunkHeader(long size)
@@ -19,7 +26,9 @@ internal static class Helpers
         }
 
         // Greater than 2gb, perf is no longer our concern
-        return new ArraySegment<byte>(Encoding.ASCII.GetBytes(size.ToString("X", CultureInfo.InvariantCulture) + "\r\n"));
+        return new ArraySegment<byte>(
+            Encoding.ASCII.GetBytes(size.ToString("X", CultureInfo.InvariantCulture) + "\r\n")
+        );
     }
 
     /// <summary>

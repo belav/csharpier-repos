@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         /// <param name="updates">Collection of the module updates.</param>
         public ManagedModuleUpdates(
             ManagedModuleUpdateStatus status,
-            ImmutableArray<ManagedModuleUpdate> updates)
+            ImmutableArray<ManagedModuleUpdate> updates
+        )
         {
             Status = status;
             Updates = updates;
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
             ImmutableArray<int> updatedTypes,
             ImmutableArray<ManagedActiveStatementUpdate> activeStatements,
             ImmutableArray<ManagedExceptionRegionUpdate> exceptionRegions,
-            EditAndContinueCapabilities requiredCapabilities)
+            EditAndContinueCapabilities requiredCapabilities
+        )
         {
             Module = module;
 
@@ -90,7 +92,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         }
 
         /// <summary>
-        /// Module version Identifier which the managed update was applied. This uniquely 
+        /// Module version Identifier which the managed update was applied. This uniquely
         /// identifies the symbol file.For Microsoft C++ or Microsoft .NET Framework binaries,
         /// this is a unique value which is embedded in an exe/dll by linkers/compilers when the
         /// dll/exe is built. A new value is generated each time that the dll/exe is compiled.

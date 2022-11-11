@@ -13,7 +13,9 @@ using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.LanguageServer
 {
-    internal class RoslynLanguageServer : AbstractLanguageServer<RequestContext>, IClientCapabilitiesProvider
+    internal class RoslynLanguageServer
+        : AbstractLanguageServer<RequestContext>,
+            IClientCapabilitiesProvider
     {
         private readonly AbstractLspServiceProvider _lspServiceProvider;
         private readonly ImmutableArray<Lazy<ILspService, LspServiceMetadataView>> _baseServices;
@@ -26,15 +28,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             ICapabilitiesProvider capabilitiesProvider,
             ILspServiceLogger logger,
             ImmutableArray<string> supportedLanguages,
-            WellKnownLspServerKinds serverKind)
-            : base(jsonRpc, logger)
+            WellKnownLspServerKinds serverKind
+        ) : base(jsonRpc, logger)
         {
             _lspServiceProvider = lspServiceProvider;
             _serverKind = serverKind;
 
             // Create services that require base dependencies (jsonrpc) or are more complex to create to the set manually.
             _baseServices = GetBaseServices();
-            _serviceCollection = GetServiceCollection(jsonRpc, this, logger, capabilitiesProvider, serverKind, supportedLanguages);
+            _serviceCollection = GetServiceCollection(
+                jsonRpc,
+                this,
+                logger,
+                capabilitiesProvider,
+                serverKind,
+                supportedLanguages
+            );
 
             // This spins up the queue and ensure the LSP is ready to start receiving requests
             Initialize();
@@ -42,7 +51,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
         protected override ILspServices ConstructLspServices()
         {
-            return _lspServiceProvider.CreateServices(_serverKind, _baseServices, _serviceCollection);
+            return _lspServiceProvider.CreateServices(
+                _serverKind,
+                _baseServices,
+                _serviceCollection
+            );
         }
 
         private IServiceCollection GetServiceCollection(
@@ -51,10 +64,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             ILspServiceLogger logger,
             ICapabilitiesProvider capabilitiesProvider,
             WellKnownLspServerKinds serverKind,
-            ImmutableArray<string> supportedLanguages)
+            ImmutableArray<string> supportedLanguages
+        )
         {
             var clientLanguageServerManager = new ClientLanguageServerManager(jsonRpc);
-            var lifeCycleManager = new LspServiceLifeCycleManager(this, logger, clientLanguageServerManager);
+            var lifeCycleManager = new LspServiceLifeCycleManager(
+                this,
+                logger,
+                clientLanguageServerManager
+            );
 
             var serviceCollection = new ServiceCollection()
                 .AddSingleton<IClientLanguageServerManager>(clientLanguageServerManager)
@@ -65,7 +83,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 .AddSingleton<ILifeCycleManager>(lifeCycleManager)
                 .AddSingleton(new ServerInfoProvider(serverKind, supportedLanguages))
                 .AddSingleton<IRequestContextFactory<RequestContext>, RequestContextFactory>()
-                .AddSingleton<IRequestExecutionQueue<RequestContext>>((serviceProvider) => GetRequestExecutionQueue())
+                .AddSingleton<IRequestExecutionQueue<RequestContext>>(
+                    (serviceProvider) => GetRequestExecutionQueue()
+                )
                 .AddSingleton<IClientCapabilitiesManager, ClientCapabilitiesManager>();
             AddHandler<InitializeHandler>(serviceCollection);
             AddHandler<InitializedHandler>(serviceCollection);
@@ -75,7 +95,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return serviceCollection;
         }
 
-        private static void AddHandler<THandler>(IServiceCollection serviceCollection) where THandler : class, IMethodHandler
+        private static void AddHandler<THandler>(IServiceCollection serviceCollection)
+            where THandler : class, IMethodHandler
         {
             _ = serviceCollection.AddSingleton<IMethodHandler, THandler>();
         }
@@ -90,7 +111,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         public ClientCapabilities GetClientCapabilities()
         {
             var lspServices = GetLspServices();
-            var clientCapabilitiesManager = lspServices.GetRequiredService<IClientCapabilitiesManager>();
+            var clientCapabilitiesManager =
+                lspServices.GetRequiredService<IClientCapabilitiesManager>();
             var clientCapabilities = clientCapabilitiesManager.GetClientCapabilities();
 
             return clientCapabilities;

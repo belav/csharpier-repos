@@ -27,9 +27,13 @@ internal sealed class OletxDependentTransaction : OletxTransaction
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.TransactionDependentCloneCreate(TraceSourceType.TraceSourceOleTx, TransactionTraceId, delayCommit
-                ? DependentCloneOption.BlockCommitUntilComplete
-                : DependentCloneOption.RollbackIfNotComplete);
+            etwLog.TransactionDependentCloneCreate(
+                TraceSourceType.TraceSourceOleTx,
+                TransactionTraceId,
+                delayCommit
+                    ? DependentCloneOption.BlockCommitUntilComplete
+                    : DependentCloneOption.RollbackIfNotComplete
+            );
         }
     }
 
@@ -38,7 +42,11 @@ internal sealed class OletxDependentTransaction : OletxTransaction
         TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this, $"{nameof(DependentTransaction)}.{nameof(Complete)}");
+            etwLog.MethodEnter(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(DependentTransaction)}.{nameof(Complete)}"
+            );
         }
 
         Debug.Assert(Disposed == 0, "OletxTransction object is disposed");
@@ -51,14 +59,22 @@ internal sealed class OletxDependentTransaction : OletxTransaction
 
         if (etwLog.IsEnabled())
         {
-            etwLog.TransactionDependentCloneComplete(TraceSourceType.TraceSourceOleTx, TransactionTraceId, "DependentTransaction");
+            etwLog.TransactionDependentCloneComplete(
+                TraceSourceType.TraceSourceOleTx,
+                TransactionTraceId,
+                "DependentTransaction"
+            );
         }
 
         _volatileEnlistmentContainer.DependentCloneCompleted();
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(DependentTransaction)}.{nameof(Complete)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(DependentTransaction)}.{nameof(Complete)}"
+            );
         }
     }
 }

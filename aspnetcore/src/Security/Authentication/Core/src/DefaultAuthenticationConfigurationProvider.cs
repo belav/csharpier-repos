@@ -5,7 +5,8 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-internal sealed class DefaultAuthenticationConfigurationProvider : IAuthenticationConfigurationProvider
+internal sealed class DefaultAuthenticationConfigurationProvider
+    : IAuthenticationConfigurationProvider
 {
     private readonly IConfiguration _configuration;
     private const string AuthenticationKey = "Authentication";
@@ -15,5 +16,6 @@ internal sealed class DefaultAuthenticationConfigurationProvider : IAuthenticati
         _configuration = configuration;
     }
 
-    public IConfiguration AuthenticationConfiguration => _configuration.GetSection(AuthenticationKey);
+    public IConfiguration AuthenticationConfiguration =>
+        _configuration.GetSection(AuthenticationKey);
 }

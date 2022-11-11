@@ -23,14 +23,14 @@ public class ComparisonTestAnd3Chains
     public static bool Eq_long_3(long a1, long a2, long a3) => a1 == 10 & a2 == 11 & a3 == 12;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static bool Eq_ushort_3(ushort a1, ushort a2, ushort a3) => a1 == 10 & a2 == 11 & a3 == 12;
+    public static bool Eq_ushort_3(ushort a1, ushort a2, ushort a3) =>
+        a1 == 10 & a2 == 11 & a3 == 12;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Eq_uint_3(uint a1, uint a2, uint a3) => a1 == 10 & a2 == 11 & a3 == 12;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Eq_ulong_3(ulong a1, ulong a2, ulong a3) => a1 == 10 & a2 == 11 & a3 == 12;
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ne_byte_3(byte a1, byte a2, byte a3) => a1 != 5 & a2 != 5 & a3 != 5;
@@ -53,7 +53,6 @@ public class ComparisonTestAnd3Chains
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ne_ulong_3(ulong a1, ulong a2, ulong a3) => a1 != 5 & a2 != 5 & a3 != 5;
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Lt_byte_3(byte a1, byte a2, byte a3) => a1 < 5 & a2 < 5 & a3 < 5;
 
@@ -74,7 +73,6 @@ public class ComparisonTestAnd3Chains
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Lt_ulong_3(ulong a1, ulong a2, ulong a3) => a1 < 5 & a2 < 5 & a3 < 5;
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Le_byte_3(byte a1, byte a2, byte a3) => a1 <= 5 & a2 <= 5 & a3 <= 5;
@@ -97,7 +95,6 @@ public class ComparisonTestAnd3Chains
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Le_ulong_3(ulong a1, ulong a2, ulong a3) => a1 <= 5 & a2 <= 5 & a3 <= 5;
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Gt_byte_3(byte a1, byte a2, byte a3) => a1 > 5 & a2 > 5 & a3 > 5;
 
@@ -119,7 +116,6 @@ public class ComparisonTestAnd3Chains
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Gt_ulong_3(ulong a1, ulong a2, ulong a3) => a1 > 5 & a2 > 5 & a3 > 5;
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ge_byte_3(byte a1, byte a2, byte a3) => a1 >= 5 & a2 >= 5 & a3 >= 5;
 
@@ -140,7 +136,6 @@ public class ComparisonTestAnd3Chains
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Ge_ulong_3(ulong a1, ulong a2, ulong a3) => a1 >= 5 & a2 >= 5 & a3 >= 5;
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static int Main()

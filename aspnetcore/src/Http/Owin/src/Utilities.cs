@@ -53,7 +53,9 @@ internal static class Utilities
         return new DictionaryStringValuesWrapper(dictionary);
     }
 
-    internal static IDictionary<string, string[]> MakeDictionaryStringArray(IHeaderDictionary dictionary)
+    internal static IDictionary<string, string[]> MakeDictionaryStringArray(
+        IHeaderDictionary dictionary
+    )
     {
         var wrapper = dictionary as DictionaryStringValuesWrapper;
         if (wrapper != null)

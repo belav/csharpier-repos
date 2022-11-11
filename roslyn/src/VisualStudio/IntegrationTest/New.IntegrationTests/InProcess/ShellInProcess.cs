@@ -21,16 +21,37 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var shellMonitorSelection = await GetRequiredGlobalServiceAsync<SVsShellMonitorSelection, IVsMonitorSelection>(cancellationToken);
-            if (!ErrorHandler.Succeeded(shellMonitorSelection.GetCurrentElementValue((uint)VSConstants.VSSELELEMID.SEID_DocumentFrame, out var windowFrameObject)))
+            var shellMonitorSelection = await GetRequiredGlobalServiceAsync<
+                SVsShellMonitorSelection,
+                IVsMonitorSelection
+            >(cancellationToken);
+            if (
+                !ErrorHandler.Succeeded(
+                    shellMonitorSelection.GetCurrentElementValue(
+                        (uint)VSConstants.VSSELELEMID.SEID_DocumentFrame,
+                        out var windowFrameObject
+                    )
+                )
+            )
             {
-                throw new InvalidOperationException("Tried to get the active document frame but no documents were open.");
+                throw new InvalidOperationException(
+                    "Tried to get the active document frame but no documents were open."
+                );
             }
 
             var windowFrame = (IVsWindowFrame)windowFrameObject;
-            if (!ErrorHandler.Succeeded(windowFrame.GetProperty((int)VsFramePropID.IsProvisional, out var isProvisionalObject)))
+            if (
+                !ErrorHandler.Succeeded(
+                    windowFrame.GetProperty(
+                        (int)VsFramePropID.IsProvisional,
+                        out var isProvisionalObject
+                    )
+                )
+            )
             {
-                throw new InvalidOperationException("The active window frame did not have an 'IsProvisional' property.");
+                throw new InvalidOperationException(
+                    "The active window frame did not have an 'IsProvisional' property."
+                );
             }
 
             return (bool)isProvisionalObject;
@@ -43,11 +64,16 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
             return dte.MainWindow.HWnd;
         }
 
-        public async Task<PauseFileChangesRestorer> PauseFileChangesAsync(CancellationToken cancellationToken)
+        public async Task<PauseFileChangesRestorer> PauseFileChangesAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var fileChangeService = await GetRequiredGlobalServiceAsync<SVsFileChangeEx, IVsFileChangeEx3>(cancellationToken);
+            var fileChangeService = await GetRequiredGlobalServiceAsync<
+                SVsFileChangeEx,
+                IVsFileChangeEx3
+            >(cancellationToken);
             Assumes.Present(fileChangeService);
 
             await fileChangeService.Pause();
@@ -59,14 +85,20 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var fileChangeService = await GetRequiredGlobalServiceAsync<SVsFileChangeEx, IVsFileChangeEx>(cancellationToken);
+            var fileChangeService = await GetRequiredGlobalServiceAsync<
+                SVsFileChangeEx,
+                IVsFileChangeEx
+            >(cancellationToken);
             Assumes.Present(fileChangeService);
 
             var jobSynchronizer = fileChangeService.GetPropertyValue("JobSynchronizer");
             Assumes.Present(jobSynchronizer);
 
             var type = jobSynchronizer.GetType();
-            var methodInfo = type.GetMethod("GetActiveSpawnedTasks", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            var methodInfo = type.GetMethod(
+                "GetActiveSpawnedTasks",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Assumes.Present(methodInfo);
 
             while (true)

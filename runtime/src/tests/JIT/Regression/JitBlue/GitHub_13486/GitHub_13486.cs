@@ -8,7 +8,9 @@ class Program
 {
     enum LongEnum : long
     {
-        Option0, Option1, Option2
+        Option0,
+        Option1,
+        Option2
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -17,10 +19,17 @@ class Program
         string s;
         switch (v)
         {
-        case LongEnum.Option0: s = "Option0"; break;
-        case LongEnum.Option1: s = "Option1"; break;
-        case LongEnum.Option2: s = "Option2"; break;
-        default: throw new Exception();
+            case LongEnum.Option0:
+                s = "Option0";
+                break;
+            case LongEnum.Option1:
+                s = "Option1";
+                break;
+            case LongEnum.Option2:
+                s = "Option2";
+                break;
+            default:
+                throw new Exception();
         }
         return s;
     }

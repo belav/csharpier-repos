@@ -10,8 +10,10 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
-                ["StorePairScalarNonTemporal.Vector64.UInt32"] = StorePairScalarNonTemporal_Vector64_UInt32,
+            TestList = new Dictionary<string, Action>()
+            {
+                ["StorePairScalarNonTemporal.Vector64.UInt32"] =
+                    StorePairScalarNonTemporal_Vector64_UInt32,
                 ["StorePairNonTemporal.Vector64.Byte"] = StorePairNonTemporal_Vector64_Byte,
                 ["StorePairNonTemporal.Vector64.Double"] = StorePairNonTemporal_Vector64_Double,
                 ["StorePairNonTemporal.Vector64.Int16"] = StorePairNonTemporal_Vector64_Int16,
@@ -75,8 +77,10 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["TransposeOdd.Vector128.UInt64"] = TransposeOdd_Vector128_UInt64,
                 ["VectorTableLookup.Vector128.Byte"] = VectorTableLookup_Vector128_Byte,
                 ["VectorTableLookup.Vector128.SByte"] = VectorTableLookup_Vector128_SByte,
-                ["VectorTableLookupExtension.Vector128.Byte"] = VectorTableLookupExtension_Vector128_Byte,
-                ["VectorTableLookupExtension.Vector128.SByte"] = VectorTableLookupExtension_Vector128_SByte,
+                ["VectorTableLookupExtension.Vector128.Byte"] =
+                    VectorTableLookupExtension_Vector128_Byte,
+                ["VectorTableLookupExtension.Vector128.SByte"] =
+                    VectorTableLookupExtension_Vector128_SByte,
                 ["UnzipEven.Vector64.Byte"] = UnzipEven_Vector64_Byte,
                 ["UnzipEven.Vector64.Int16"] = UnzipEven_Vector64_Int16,
                 ["UnzipEven.Vector64.Int32"] = UnzipEven_Vector64_Int32,

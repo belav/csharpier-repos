@@ -12,7 +12,8 @@ internal sealed class StartupAnalysis
 
     public StartupAnalysis(
         StartupSymbols startupSymbols,
-        ImmutableDictionary<INamedTypeSymbol, ImmutableArray<object>> analysesByType)
+        ImmutableDictionary<INamedTypeSymbol, ImmutableArray<object>> analysesByType
+    )
     {
         StartupSymbols = startupSymbols;
         _analysesByType = analysesByType;

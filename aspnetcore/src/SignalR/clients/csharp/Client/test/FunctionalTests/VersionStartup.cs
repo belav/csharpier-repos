@@ -18,7 +18,9 @@ public class VersionStartup
         });
 
         services.RemoveAll<IHubProtocol>();
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IHubProtocol>(new VersionedJsonHubProtocol(1000)));
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<IHubProtocol>(new VersionedJsonHubProtocol(1000))
+        );
 
         services.AddAuthentication();
     }

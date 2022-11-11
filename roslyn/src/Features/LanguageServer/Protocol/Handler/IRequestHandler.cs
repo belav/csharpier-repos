@@ -42,6 +42,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         /// <param name="context">The LSP request context, which should have been filled in with document information from <see cref="GetTextDocumentIdentifier(RequestType)"/> if applicable.</param>
         /// <param name="cancellationToken">A cancellation token that can be used to cancel the request processing.</param>
         /// <returns>The LSP response.</returns>
-        Task<ResponseType> HandleRequestAsync(RequestType request, RequestContext context, CancellationToken cancellationToken);
+        Task<ResponseType> HandleRequestAsync(
+            RequestType request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        );
     }
 }

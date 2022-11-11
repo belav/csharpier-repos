@@ -61,14 +61,28 @@ namespace System.Xml.Xsl.Runtime
             _cnt = 1;
         }
 
-        public int SumResult { get { return _result; } }
-        public int AverageResult { get { return _result / _cnt; } }
-        public int MinimumResult { get { return _result; } }
-        public int MaximumResult { get { return _result; } }
+        public int SumResult
+        {
+            get { return _result; }
+        }
+        public int AverageResult
+        {
+            get { return _result / _cnt; }
+        }
+        public int MinimumResult
+        {
+            get { return _result; }
+        }
+        public int MaximumResult
+        {
+            get { return _result; }
+        }
 
-        public bool IsEmpty { get { return _cnt == 0; } }
+        public bool IsEmpty
+        {
+            get { return _cnt == 0; }
+        }
     }
-
 
     /// <summary>
     /// Computes aggregates over a sequence of Int64 values.
@@ -123,14 +137,28 @@ namespace System.Xml.Xsl.Runtime
             _cnt = 1;
         }
 
-        public long SumResult { get { return _result; } }
-        public long AverageResult { get { return _result / (long)_cnt; } }
-        public long MinimumResult { get { return _result; } }
-        public long MaximumResult { get { return _result; } }
+        public long SumResult
+        {
+            get { return _result; }
+        }
+        public long AverageResult
+        {
+            get { return _result / (long)_cnt; }
+        }
+        public long MinimumResult
+        {
+            get { return _result; }
+        }
+        public long MaximumResult
+        {
+            get { return _result; }
+        }
 
-        public bool IsEmpty { get { return _cnt == 0; } }
+        public bool IsEmpty
+        {
+            get { return _cnt == 0; }
+        }
     }
-
 
     /// <summary>
     /// Computes aggregates over a sequence of Decimal values.
@@ -185,14 +213,28 @@ namespace System.Xml.Xsl.Runtime
             _cnt = 1;
         }
 
-        public decimal SumResult { get { return _result; } }
-        public decimal AverageResult { get { return _result / (decimal)_cnt; } }
-        public decimal MinimumResult { get { return _result; } }
-        public decimal MaximumResult { get { return _result; } }
+        public decimal SumResult
+        {
+            get { return _result; }
+        }
+        public decimal AverageResult
+        {
+            get { return _result / (decimal)_cnt; }
+        }
+        public decimal MinimumResult
+        {
+            get { return _result; }
+        }
+        public decimal MaximumResult
+        {
+            get { return _result; }
+        }
 
-        public bool IsEmpty { get { return _cnt == 0; } }
+        public bool IsEmpty
+        {
+            get { return _cnt == 0; }
+        }
     }
-
 
     /// <summary>
     /// Computes aggregates over a sequence of Double values.
@@ -247,11 +289,26 @@ namespace System.Xml.Xsl.Runtime
             _cnt = 1;
         }
 
-        public double SumResult { get { return _result; } }
-        public double AverageResult { get { return _result / (double)_cnt; } }
-        public double MinimumResult { get { return _result; } }
-        public double MaximumResult { get { return _result; } }
+        public double SumResult
+        {
+            get { return _result; }
+        }
+        public double AverageResult
+        {
+            get { return _result / (double)_cnt; }
+        }
+        public double MinimumResult
+        {
+            get { return _result; }
+        }
+        public double MaximumResult
+        {
+            get { return _result; }
+        }
 
-        public bool IsEmpty { get { return _cnt == 0; } }
+        public bool IsEmpty
+        {
+            get { return _cnt == 0; }
+        }
     }
 }

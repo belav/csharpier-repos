@@ -16,15 +16,14 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.CodeFixes
 {
-    public class RemoveDocCommentNodeCodeFixProviderTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class RemoveDocCommentNodeCodeFixProviderTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public RemoveDocCommentNodeCodeFixProviderTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public RemoveDocCommentNodeCodeFixProviderTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpRemoveDocCommentNodeCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpRemoveDocCommentNodeCodeFixProvider());
 
         private async Task TestAsync(string initial, string expected)
         {
@@ -36,7 +35,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesDuplicateParamTag()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -48,7 +47,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -64,7 +63,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesDuplicateParamTag_OnlyParamTags()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <param name=""value""></param>
     /// <param [|name=""value""|]></param>
@@ -73,7 +72,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <param name=""value""></param>
     public void Fizz(int value) {}
@@ -86,7 +85,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesDuplicateParamTag_TagBelowOffendingParamTag()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <param name=""value""></param>
     /// <param [|name=""value""|]></param>
@@ -96,7 +95,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <param name=""value""></param>
     /// <returns></returns>
@@ -110,7 +109,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesDuplicateParamTag_BothParamTagsOnSameLine_DocCommentTagBetweenThem()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -121,7 +120,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -137,7 +136,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesDuplicateParamTag_BothParamTagsOnSameLine_WhitespaceBetweenThem()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -148,7 +147,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -164,7 +163,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesDuplicateParamTag_BothParamTagsOnSameLine_NothingBetweenThem1()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -175,7 +174,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -192,7 +191,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesTag_BothParamTagsOnSameLine_NothingBetweenThem2()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -203,7 +202,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -220,7 +219,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesTag_TrailingTextAfterTag()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -231,7 +230,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -247,7 +246,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesDuplicateParamTag_RawTextBeforeAndAfterNode()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -259,7 +258,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -276,7 +275,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesDuplicateTypeparamTag()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -288,7 +287,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -304,7 +303,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesParamTagWithNoMatchingParameter()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -315,7 +314,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// 
@@ -330,7 +329,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesParamTag_NestedInSummaryTag()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// <param name=""value""></param>
@@ -341,7 +340,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     /// <param name=""value""></param>
@@ -356,7 +355,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         public async Task RemovesParamTag_NestedInSummaryTag_WithChildren()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     /// <summary>
     ///   <param name=""value""></param>
@@ -369,7 +368,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
 ";
 
             var expected =
-@"class Program
+                @"class Program
 {
     /// <summary>
     ///   <param name=""value""></param>
@@ -385,7 +384,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllTypeparamInDocument_DoesNotFixDuplicateParamTags()
         {
-            var initial = @"
+            var initial =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" DocumentationMode=""Diagnose"">
         <Document>
@@ -443,7 +443,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" DocumentationMode=""Diagnose"">
         <Document>
@@ -507,7 +508,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocument()
         {
-            var initial = @"
+            var initial =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" DocumentationMode=""Diagnose"">
         <Document>
@@ -559,7 +561,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" DocumentationMode=""Diagnose"">
         <Document>
@@ -617,7 +620,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInProject()
         {
-            var initial = @"
+            var initial =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" DocumentationMode=""Diagnose"">
         <Document>
@@ -661,7 +665,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -711,7 +716,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInSolution()
         {
-            var initial = @"
+            var initial =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" DocumentationMode=""Diagnose"">
         <Document>
@@ -755,7 +761,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"" DocumentationMode=""Diagnose"">
         <Document>

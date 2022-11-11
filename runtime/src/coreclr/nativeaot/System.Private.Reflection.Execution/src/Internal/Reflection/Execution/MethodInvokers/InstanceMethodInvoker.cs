@@ -20,14 +20,21 @@ namespace Internal.Reflection.Execution.MethodInvokers
     //
     internal sealed class InstanceMethodInvoker : MethodInvokerWithMethodInvokeInfo
     {
-        public InstanceMethodInvoker(MethodInvokeInfo methodInvokeInfo, RuntimeTypeHandle declaringTypeHandle)
-            : base(methodInvokeInfo)
+        public InstanceMethodInvoker(
+            MethodInvokeInfo methodInvokeInfo,
+            RuntimeTypeHandle declaringTypeHandle
+        ) : base(methodInvokeInfo)
         {
             _declaringTypeHandle = declaringTypeHandle;
         }
 
         [DebuggerGuidedStepThroughAttribute]
-        protected sealed override object? Invoke(object? thisObject, object?[]? arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object? Invoke(
+            object? thisObject,
+            object?[]? arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             if (MethodInvokeInfo.IsSupportedSignature) // Workaround to match expected argument validation order
             {
@@ -39,12 +46,19 @@ namespace Internal.Reflection.Execution.MethodInvokers
                 MethodInvokeInfo.LdFtnResult,
                 arguments,
                 binderBundle,
-                wrapInTargetInvocationException);
+                wrapInTargetInvocationException
+            );
             System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
 
-        public sealed override Delegate CreateDelegate(RuntimeTypeHandle delegateType, object target, bool isStatic, bool isVirtual, bool isOpen)
+        public sealed override Delegate CreateDelegate(
+            RuntimeTypeHandle delegateType,
+            object target,
+            bool isStatic,
+            bool isVirtual,
+            bool isOpen
+        )
         {
             if (isOpen)
             {
@@ -60,10 +74,17 @@ namespace Internal.Reflection.Execution.MethodInvokers
 
                 return RuntimeAugments.CreateDelegate(
                     delegateType,
-                    new OpenMethodResolver(_declaringTypeHandle, MethodInvokeInfo.LdFtnResult, default(GCHandle), 0, resolveType).ToIntPtr(),
+                    new OpenMethodResolver(
+                        _declaringTypeHandle,
+                        MethodInvokeInfo.LdFtnResult,
+                        default(GCHandle),
+                        0,
+                        resolveType
+                    ).ToIntPtr(),
                     target,
                     isStatic: isStatic,
-                    isOpen: isOpen);
+                    isOpen: isOpen
+                );
             }
             else
             {

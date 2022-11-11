@@ -15,7 +15,10 @@ namespace System.IO.Pipelines.Tests
 {
     public class CopyToAsyncTests
     {
-        private static readonly PipeOptions s_testOptions = new PipeOptions(readerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        private static readonly PipeOptions s_testOptions = new PipeOptions(
+            readerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
 
         protected Pipe Pipe { get; set; }
         protected virtual PipeReader PipeReader => Pipe.Reader;
@@ -28,14 +31,22 @@ namespace System.IO.Pipelines.Tests
         [Fact]
         public async Task CopyToAsyncThrowsArgumentNullExceptionForNullDestination()
         {
-            await AssertExtensions.ThrowsAsync<ArgumentNullException>("destination", () => PipeReader.CopyToAsync((Stream)null));
-            await AssertExtensions.ThrowsAsync<ArgumentNullException>("destination", () => PipeReader.CopyToAsync((PipeWriter)null));
+            await AssertExtensions.ThrowsAsync<ArgumentNullException>(
+                "destination",
+                () => PipeReader.CopyToAsync((Stream)null)
+            );
+            await AssertExtensions.ThrowsAsync<ArgumentNullException>(
+                "destination",
+                () => PipeReader.CopyToAsync((PipeWriter)null)
+            );
         }
 
         [Fact]
         public async Task CopyToAsyncThrowsTaskCanceledExceptionForAlreadyCancelledToken()
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(() => PipeReader.CopyToAsync(new MemoryStream(), new CancellationToken(true)));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => PipeReader.CopyToAsync(new MemoryStream(), new CancellationToken(true))
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -115,7 +126,13 @@ namespace System.IO.Pipelines.Tests
         {
             using (var pool = new DisposeTrackingBufferPool())
             {
-                Pipe = new Pipe(new PipeOptions(pool, readerScheduler: PipeScheduler.Inline, useSynchronizationContext: false));
+                Pipe = new Pipe(
+                    new PipeOptions(
+                        pool,
+                        readerScheduler: PipeScheduler.Inline,
+                        useSynchronizationContext: false
+                    )
+                );
                 Pipe.Writer.WriteEmpty(4096);
                 Pipe.Writer.WriteEmpty(4096);
                 Pipe.Writer.WriteEmpty(4096);
@@ -128,12 +145,12 @@ namespace System.IO.Pipelines.Tests
                 try
                 {
                     await PipeReader.CopyToAsync(stream);
-                    Assert.True(false, $"CopyToAsync should have failed, wrote {stream.Writes} times.");
+                    Assert.True(
+                        false,
+                        $"CopyToAsync should have failed, wrote {stream.Writes} times."
+                    );
                 }
-                catch (InvalidOperationException)
-                {
-
-                }
+                catch (InvalidOperationException) { }
 
                 Assert.Equal(2, stream.Writes);
 
@@ -173,7 +190,10 @@ namespace System.IO.Pipelines.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public async Task CancelingBetweenReadsThrowsOperationCancelledException()
         {
-            var stream = new WriteCheckMemoryStream { MidWriteCancellation = new CancellationTokenSource() };
+            var stream = new WriteCheckMemoryStream
+            {
+                MidWriteCancellation = new CancellationTokenSource()
+            };
             Task task = PipeReader.CopyToAsync(stream, stream.MidWriteCancellation.Token);
             Pipe.Writer.WriteEmpty(10);
             await Pipe.Writer.FlushAsync();
@@ -197,7 +217,9 @@ namespace System.IO.Pipelines.Tests
         public async Task CancelingPipeWriterViaCancellationTokenThrowsOperationCancelledException()
         {
             // This should make the write call pause
-            var targetPipe = new Pipe(new PipeOptions(pauseWriterThreshold: 1, resumeWriterThreshold: 1));
+            var targetPipe = new Pipe(
+                new PipeOptions(pauseWriterThreshold: 1, resumeWriterThreshold: 1)
+            );
             var cts = new CancellationTokenSource();
             await Pipe.Writer.WriteAsync("Gello World"u8.ToArray());
             Task task = PipeReader.CopyToAsync(targetPipe.Writer, cts.Token);
@@ -211,7 +233,9 @@ namespace System.IO.Pipelines.Tests
         public async Task CancelingPipeWriterViaPendingFlushThrowsOperationCancelledException()
         {
             // This should make the write call pause
-            var targetPipe = new Pipe(new PipeOptions(pauseWriterThreshold: 1, resumeWriterThreshold: 1));
+            var targetPipe = new Pipe(
+                new PipeOptions(pauseWriterThreshold: 1, resumeWriterThreshold: 1)
+            );
             await Pipe.Writer.WriteAsync("Gello World"u8.ToArray());
             Task task = PipeReader.CopyToAsync(targetPipe.Writer);
 
@@ -261,10 +285,15 @@ namespace System.IO.Pipelines.Tests
             PipeReader.Complete();
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0)]
         [InlineData(1)]
-        public async Task ThrowingFromStreamCallsAdvanceToWithStartOfLastReadResult(int throwAfterNWrites)
+        public async Task ThrowingFromStreamCallsAdvanceToWithStartOfLastReadResult(
+            int throwAfterNWrites
+        )
         {
             var wrappedPipeReader = new TestPipeReader(PipeReader);
 

@@ -29,10 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
 
         public static string AutomationName => ServicesVSResources.Value;
 
-        public CodeStyleValueViewModel(CodeStyleSetting setting)
-            => _setting = setting;
+        public CodeStyleValueViewModel(CodeStyleSetting setting) => _setting = setting;
 
-        public void SelectionChanged(int selectedIndex)
-            => _setting.ChangeValue(selectedIndex);
+        public void SelectionChanged(int selectedIndex) => _setting.ChangeValue(selectedIndex);
     }
 }

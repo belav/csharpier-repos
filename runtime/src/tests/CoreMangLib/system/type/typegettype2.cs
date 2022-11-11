@@ -8,7 +8,7 @@ class MyClass
     private int a;
     private int b;
 
-    public MyClass(int aa,int bb)
+    public MyClass(int aa, int bb)
     {
         a = aa;
         b = bb;
@@ -65,13 +65,13 @@ public class TypeGetType2
             Type intType = Type.GetType("System.Int32");
             if (intType.FullName != "System.Int32")
             {
-                TestLibrary.TestFramework.LogError("001","intType is not fetched correctly!");
+                TestLibrary.TestFramework.LogError("001", "intType is not fetched correctly!");
                 retVal = false;
             }
         }
         catch (Exception e)
         {
-            TestLibrary.TestFramework.LogError("002","Unexpected exception occurs: " + e);
+            TestLibrary.TestFramework.LogError("002", "Unexpected exception occurs: " + e);
             retVal = false;
         }
 
@@ -89,13 +89,13 @@ public class TypeGetType2
 
             if (myType != null && myType.FullName != "MyClass")
             {
-                TestLibrary.TestFramework.LogError("003","Fetch the wrong type of an instance!");
+                TestLibrary.TestFramework.LogError("003", "Fetch the wrong type of an instance!");
                 retVal = false;
             }
         }
         catch (Exception e)
         {
-            TestLibrary.TestFramework.LogError("004","Unexpected exception occurs: " + e);
+            TestLibrary.TestFramework.LogError("004", "Unexpected exception occurs: " + e);
             retVal = false;
         }
 
@@ -114,9 +114,7 @@ public class TypeGetType2
             TestLibrary.TestFramework.LogError("005", "No exception occurs!");
             retVal = false;
         }
-        catch (ArgumentNullException)
-        {
-        }
+        catch (ArgumentNullException) { }
         catch (Exception e)
         {
             TestLibrary.TestFramework.LogError("006", "Unexpected exception occurs: " + e);
@@ -136,13 +134,13 @@ public class TypeGetType2
             Type myType = Type.GetType("\\888");
             if (myType != null)
             {
-                TestLibrary.TestFramework.LogError("007","myType should be null!");
+                TestLibrary.TestFramework.LogError("007", "myType should be null!");
                 retVal = false;
             }
         }
         catch (Exception e)
         {
-            TestLibrary.TestFramework.LogError("008","Unexpected exception occurs: " + e);
+            TestLibrary.TestFramework.LogError("008", "Unexpected exception occurs: " + e);
             retVal = false;
         }
 
@@ -160,13 +158,13 @@ public class TypeGetType2
 
             if (myType != null)
             {
-                TestLibrary.TestFramework.LogError("009","The type should be null");
+                TestLibrary.TestFramework.LogError("009", "The type should be null");
                 retVal = false;
             }
         }
         catch (Exception e)
         {
-            TestLibrary.TestFramework.LogError("010","Unexpected exception occurs: " + e);
+            TestLibrary.TestFramework.LogError("010", "Unexpected exception occurs: " + e);
             retVal = false;
         }
 

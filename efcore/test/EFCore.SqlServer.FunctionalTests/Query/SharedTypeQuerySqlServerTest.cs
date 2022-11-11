@@ -5,8 +5,7 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class SharedTypeQuerySqlServerTest : SharedTypeQueryRelationalTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
     public override async Task Can_use_shared_type_entity_type_in_query_filter(bool async)
     {
@@ -18,10 +17,13 @@ FROM [ViewQuery24601] AS [v]
 WHERE EXISTS (
     SELECT 1
     FROM [STET] AS [s]
-    WHERE [s].[Value] = [v].[Value] OR (([s].[Value] IS NULL) AND ([v].[Value] IS NULL)))");
+    WHERE [s].[Value] = [v].[Value] OR (([s].[Value] IS NULL) AND ([v].[Value] IS NULL)))"
+        );
     }
 
-    public override async Task Can_use_shared_type_entity_type_in_query_filter_with_from_sql(bool async)
+    public override async Task Can_use_shared_type_entity_type_in_query_filter_with_from_sql(
+        bool async
+    )
     {
         await base.Can_use_shared_type_entity_type_in_query_filter_with_from_sql(async);
 
@@ -33,6 +35,7 @@ WHERE EXISTS (
     FROM (
         Select * from STET
     ) AS [s]
-    WHERE [s].[Value] = [v].[Value] OR (([s].[Value] IS NULL) AND ([v].[Value] IS NULL)))");
+    WHERE [s].[Value] = [v].[Value] OR (([s].[Value] IS NULL) AND ([v].[Value] IS NULL)))"
+        );
     }
 }

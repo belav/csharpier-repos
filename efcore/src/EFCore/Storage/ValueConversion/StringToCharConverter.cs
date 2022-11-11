@@ -21,10 +21,7 @@ public class StringToCharConverter : StringCharConverter<string, char>
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public StringToCharConverter()
-        : this(null)
-    {
-    }
+    public StringToCharConverter() : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter. This converter preserves order.
@@ -37,16 +34,16 @@ public class StringToCharConverter : StringCharConverter<string, char>
     ///     facets for the converted data.
     /// </param>
     public StringToCharConverter(ConverterMappingHints? mappingHints)
-        : base(
-            ToChar(),
-            ToString(),
-            DefaultHints.With(mappingHints))
-    {
-    }
+        : base(ToChar(), ToString(), DefaultHints.With(mappingHints)) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(string), typeof(char), i => new StringToCharConverter(i.MappingHints), DefaultHints);
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(
+            typeof(string),
+            typeof(char),
+            i => new StringToCharConverter(i.MappingHints),
+            DefaultHints
+        );
 }

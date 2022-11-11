@@ -8,9 +8,7 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class MaterializationInterceptionTestBase : SingletonInterceptorsTestBase
 {
     protected MaterializationInterceptionTestBase(SingletonInterceptorsFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(false)]
@@ -29,7 +27,8 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
 
         context.AddRange(
             new Book { Title = "Amiga ROM Kernel Reference Manual" },
-            new Book { Title = "Amiga Hardware Reference Manual" });
+            new Book { Title = "Amiga Hardware Reference Manual" }
+        );
 
         context.SaveChanges();
         context.ChangeTracker.Clear();
@@ -55,8 +54,10 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
         using var context = CreateContext(interceptors, inject);
 
         var materializer = context.GetService<IEntityMaterializerSource>();
-        var book = (Book)materializer.GetEmptyMaterializer(context.Model.FindEntityType(typeof(Book))!)(
-            new MaterializationContext(ValueBuffer.Empty, context));
+        var book = (Book)
+            materializer.GetEmptyMaterializer(context.Model.FindEntityType(typeof(Book))!)(
+                new MaterializationContext(ValueBuffer.Empty, context)
+            );
 
         Assert.Equal("4", book.MaterializedBy);
         Assert.All(interceptors, i => Assert.Equal(1, i.CalledCount));
@@ -130,25 +131,31 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
                             Assert.Equal(title, ((Book)instance!).Title);
                             break;
                     }
-                })
+                }
+            )
         };
 
         using (context = CreateContext(interceptors, inject))
         {
             var books = new[]
             {
-                new Book { Title = "Amiga ROM Kernel Reference Manual" }, new Book { Title = "Amiga Hardware Reference Manual" }
+                new Book { Title = "Amiga ROM Kernel Reference Manual" },
+                new Book { Title = "Amiga Hardware Reference Manual" }
             };
 
             context.AddRange(books);
 
-            context.Entry(books[0]).Property("Author").CurrentValue = "Commodore Business Machines Inc.";
+            context.Entry(books[0]).Property("Author").CurrentValue =
+                "Commodore Business Machines Inc.";
             context.Entry(books[1]).Property("Author").CurrentValue = "Agnes";
 
             context.SaveChanges();
             context.ChangeTracker.Clear();
 
-            var results = context.Set<Book>().Where(e => books.Select(e => e.Id).Contains(e.Id)).ToList();
+            var results = context
+                .Set<Book>()
+                .Where(e => books.Select(e => e.Id).Contains(e.Id))
+                .ToList();
             Assert.Equal(2, results.Count);
 
             Assert.Equal(2, creatingInstanceCount);
@@ -188,7 +195,10 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
                 (data, instance, method) =>
                 {
                     Assert.Same(context, data.Context);
-                    Assert.Same(data.Context.Model.FindEntityType(typeof(Pamphlet)), data.EntityType);
+                    Assert.Same(
+                        data.Context.Model.FindEntityType(typeof(Pamphlet)),
+                        data.EntityType
+                    );
 
                     var idProperty = data.EntityType.FindProperty(nameof(Pamphlet.Id))!;
                     var id = data.GetPropertyValue<Guid>(nameof(Pamphlet.Id))!;
@@ -236,12 +246,17 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
                             Assert.Equal(title, ((Pamphlet)instance!).Title);
                             break;
                     }
-                })
+                }
+            )
         };
 
         using (context = CreateContext(interceptors, inject))
         {
-            var pamphlets = new[] { new Pamphlet(Guid.Empty, "Rights of Man"), new Pamphlet(Guid.Empty, "Pamphlet des pamphlets") };
+            var pamphlets = new[]
+            {
+                new Pamphlet(Guid.Empty, "Rights of Man"),
+                new Pamphlet(Guid.Empty, "Pamphlet des pamphlets")
+            };
 
             context.AddRange(pamphlets);
 
@@ -251,7 +266,10 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
             context.SaveChanges();
             context.ChangeTracker.Clear();
 
-            var results = context.Set<Pamphlet>().Where(e => pamphlets.Select(e => e.Id).Contains(e.Id)).ToList();
+            var results = context
+                .Set<Pamphlet>()
+                .Where(e => pamphlets.Select(e => e.Id).Contains(e.Id))
+                .ToList();
             Assert.Equal(2, results.Count);
 
             Assert.Equal(2, creatingInstanceCount);
@@ -291,14 +309,18 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
 
         context.AddRange(
             new Book { Title = "Amiga ROM Kernel Reference Manual" },
-            new Book { Title = "Amiga Hardware Reference Manual" });
+            new Book { Title = "Amiga Hardware Reference Manual" }
+        );
 
         context.SaveChanges();
         context.ChangeTracker.Clear();
 
         var results = context.Set<Book>().ToList();
         Assert.All(results, e => Assert.Equal("4", e.MaterializedBy));
-        Assert.All(interceptors.OfType<TestBindingInterceptor>(), i => Assert.Equal(1, i.CalledCount));
+        Assert.All(
+            interceptors.OfType<TestBindingInterceptor>(),
+            i => Assert.Equal(1, i.CalledCount)
+        );
 
         Assert.All(results, e => Assert.Equal("ABC", e.CreatedBy));
         Assert.All(results, e => Assert.Equal("ABC", e.InitializingBy));
@@ -316,18 +338,23 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
 
         public int CalledCount { get; private set; }
 
-        protected Book BookFactory()
-            => new() { MaterializedBy = _id };
+        protected Book BookFactory() => new() { MaterializedBy = _id };
 
-        public InstantiationBinding ModifyBinding(InstantiationBindingInterceptionData interceptionData, InstantiationBinding binding)
+        public InstantiationBinding ModifyBinding(
+            InstantiationBindingInterceptionData interceptionData,
+            InstantiationBinding binding
+        )
         {
             CalledCount++;
 
             return new FactoryMethodBinding(
                 this,
-                typeof(TestBindingInterceptor).GetTypeInfo().GetDeclaredMethod(nameof(BookFactory))!,
+                typeof(TestBindingInterceptor)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod(nameof(BookFactory))!,
                 new List<ParameterBinding>(),
-                interceptionData.EntityType.ClrType);
+                interceptionData.EntityType.ClrType
+            );
         }
     }
 
@@ -336,14 +363,16 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
         private readonly Action<MaterializationInterceptionData, object?, string> _validate;
 
         public ValidatingMaterializationInterceptor(
-            Action<MaterializationInterceptionData, object?, string> validate)
+            Action<MaterializationInterceptionData, object?, string> validate
+        )
         {
             _validate = validate;
         }
 
         public InterceptionResult<object> CreatingInstance(
             MaterializationInterceptionData materializationData,
-            InterceptionResult<object> result)
+            InterceptionResult<object> result
+        )
         {
             _validate(materializationData, null, nameof(CreatingInstance));
 
@@ -352,7 +381,8 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
 
         public object CreatedInstance(
             MaterializationInterceptionData materializationData,
-            object entity)
+            object entity
+        )
         {
             _validate(materializationData, entity, nameof(CreatedInstance));
 
@@ -362,7 +392,8 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
         public InterceptionResult InitializingInstance(
             MaterializationInterceptionData materializationData,
             object entity,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             _validate(materializationData, entity, nameof(InitializingInstance));
 
@@ -371,7 +402,8 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
 
         public object InitializedInstance(
             MaterializationInterceptionData materializationData,
-            object entity)
+            object entity
+        )
         {
             _validate(materializationData, entity, nameof(InitializedInstance));
 
@@ -390,12 +422,13 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
 
         public InterceptionResult<object> CreatingInstance(
             MaterializationInterceptionData materializationData,
-            InterceptionResult<object> result)
-            => result;
+            InterceptionResult<object> result
+        ) => result;
 
         public object CreatedInstance(
             MaterializationInterceptionData materializationData,
-            object entity)
+            object entity
+        )
         {
             ((Book)entity).CreatedBy += _id;
             return entity;
@@ -404,7 +437,8 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
         public InterceptionResult InitializingInstance(
             MaterializationInterceptionData materializationData,
             object entity,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             ((Book)entity).InitializingBy += _id;
             return result;
@@ -412,7 +446,8 @@ public abstract class MaterializationInterceptionTestBase : SingletonInterceptor
 
         public object InitializedInstance(
             MaterializationInterceptionData materializationData,
-            object entity)
+            object entity
+        )
         {
             ((Book)entity).InitializedBy += _id;
             return entity;

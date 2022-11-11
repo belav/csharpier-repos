@@ -28,5 +28,4 @@ namespace System.Net.Security
             _expiry = DateTime.MaxValue;
         }
     }
-
 }

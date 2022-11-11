@@ -12,41 +12,83 @@ namespace Wasm.Build.Tests
 {
     public class InvariantGlobalizationTests : BuildTestBase
     {
-        public InvariantGlobalizationTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+        public InvariantGlobalizationTests(
+            ITestOutputHelper output,
+            SharedBuildPerTestClassFixture buildContext
+        ) : base(output, buildContext) { }
 
-        public static IEnumerable<object?[]> InvariantGlobalizationTestData(bool aot, RunHost host)
-            => ConfigWithAOTData(aot)
-                .Multiply(
-                    new object?[] { null },
-                    new object?[] { false },
-                    new object?[] { true })
+        public static IEnumerable<object?[]> InvariantGlobalizationTestData(
+            bool aot,
+            RunHost host
+        ) =>
+            ConfigWithAOTData(aot)
+                .Multiply(new object?[] { null }, new object?[] { false }, new object?[] { true })
                 .WithRunHosts(host)
                 .UnwrapItemsAsArrays();
 
         // TODO: check that icu bits have been linked out
         [Theory]
-        [MemberData(nameof(InvariantGlobalizationTestData), parameters: new object[] { /*aot*/ false, RunHost.All })]
-        [MemberData(nameof(InvariantGlobalizationTestData), parameters: new object[] { /*aot*/ true, RunHost.All })]
-        public void AOT_InvariantGlobalization(BuildArgs buildArgs, bool? invariantGlobalization, RunHost host, string id)
-            => TestInvariantGlobalization(buildArgs, invariantGlobalization, host, id);
+        [MemberData(
+            nameof(InvariantGlobalizationTestData),
+            parameters: new object[]
+            { /*aot*/
+                false,
+                RunHost.All
+            }
+        )]
+        [MemberData(
+            nameof(InvariantGlobalizationTestData),
+            parameters: new object[]
+            { /*aot*/
+                true,
+                RunHost.All
+            }
+        )]
+        public void AOT_InvariantGlobalization(
+            BuildArgs buildArgs,
+            bool? invariantGlobalization,
+            RunHost host,
+            string id
+        ) => TestInvariantGlobalization(buildArgs, invariantGlobalization, host, id);
 
         // TODO: What else should we use to verify a relinked build?
         [Theory]
-        [MemberData(nameof(InvariantGlobalizationTestData), parameters: new object[] { /*aot*/ false, RunHost.All })]
-        public void RelinkingWithoutAOT(BuildArgs buildArgs, bool? invariantGlobalization, RunHost host, string id)
-            => TestInvariantGlobalization(buildArgs, invariantGlobalization, host, id,
-                                            extraProperties: "<WasmBuildNative>true</WasmBuildNative>",
-                                            dotnetWasmFromRuntimePack: false);
+        [MemberData(
+            nameof(InvariantGlobalizationTestData),
+            parameters: new object[]
+            { /*aot*/
+                false,
+                RunHost.All
+            }
+        )]
+        public void RelinkingWithoutAOT(
+            BuildArgs buildArgs,
+            bool? invariantGlobalization,
+            RunHost host,
+            string id
+        ) =>
+            TestInvariantGlobalization(
+                buildArgs,
+                invariantGlobalization,
+                host,
+                id,
+                extraProperties: "<WasmBuildNative>true</WasmBuildNative>",
+                dotnetWasmFromRuntimePack: false
+            );
 
-        private void TestInvariantGlobalization(BuildArgs buildArgs, bool? invariantGlobalization,
-                                                        RunHost host, string id, string extraProperties="", bool? dotnetWasmFromRuntimePack=null)
+        private void TestInvariantGlobalization(
+            BuildArgs buildArgs,
+            bool? invariantGlobalization,
+            RunHost host,
+            string id,
+            string extraProperties = "",
+            bool? dotnetWasmFromRuntimePack = null
+        )
         {
             string projectName = $"invariant_{invariantGlobalization?.ToString() ?? "unset"}";
             if (invariantGlobalization != null)
-                extraProperties = $"{extraProperties}<InvariantGlobalization>{invariantGlobalization}</InvariantGlobalization>";
+                extraProperties =
+                    $"{extraProperties}<InvariantGlobalization>{invariantGlobalization}</InvariantGlobalization>";
 
             buildArgs = buildArgs with { ProjectName = projectName };
             buildArgs = ExpandBuildArgs(buildArgs, extraProperties);
@@ -54,7 +96,8 @@ namespace Wasm.Build.Tests
             if (dotnetWasmFromRuntimePack == null)
                 dotnetWasmFromRuntimePack = !(buildArgs.AOT || buildArgs.Config == "Release");
 
-            string programText = @"
+            string programText =
+                @"
                 using System;
                 using System.Globalization;
 
@@ -73,22 +116,40 @@ namespace Wasm.Build.Tests
                 return 42;
             ";
 
-            BuildProject(buildArgs,
-                            id: id,
-                            new BuildProjectOptions(
-                                InitProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
-                                DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack,
-                                HasIcudt: invariantGlobalization == null || invariantGlobalization.Value == false));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    InitProject: () =>
+                        File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
+                    DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack,
+                    HasIcudt: invariantGlobalization == null
+                        || invariantGlobalization.Value == false
+                )
+            );
 
             if (invariantGlobalization == true)
             {
-                string output = RunAndTestWasmApp(buildArgs, expectedExitCode: 42, host: host, id: id);
+                string output = RunAndTestWasmApp(
+                    buildArgs,
+                    expectedExitCode: 42,
+                    host: host,
+                    id: id
+                );
                 Assert.Contains("Could not create es-ES culture", output);
-                Assert.Contains("CurrentCulture.NativeName: Invariant Language (Invariant Country)", output);
+                Assert.Contains(
+                    "CurrentCulture.NativeName: Invariant Language (Invariant Country)",
+                    output
+                );
             }
             else
             {
-                string output = RunAndTestWasmApp(buildArgs, expectedExitCode: 42, host: host, id: id);
+                string output = RunAndTestWasmApp(
+                    buildArgs,
+                    expectedExitCode: 42,
+                    host: host,
+                    id: id
+                );
                 Assert.Contains("es-ES: Is Invariant LCID: False, NativeName: es (ES)", output);
 
                 // ignoring the last line of the output which prints the current culture

@@ -9,8 +9,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.Metadata
 {
-    public struct MetadataTransformResult<T>
-        where T : struct, IMetadataPolicy
+    public struct MetadataTransformResult<T> where T : struct, IMetadataPolicy
     {
         private Transform<T> _transform;
 
@@ -19,10 +18,7 @@ namespace ILCompiler.Metadata
         /// </summary>
         public IReadOnlyCollection<ScopeDefinition> Scopes
         {
-            get
-            {
-                return _transform._scopeDefs.Records;
-            }
+            get { return _transform._scopeDefs.Records; }
         }
 
         /// <summary>
@@ -35,10 +31,7 @@ namespace ILCompiler.Metadata
         /// </summary>
         public MetadataTransform Transform
         {
-            get
-            {
-                return _transform;
-            }
+            get { return _transform; }
         }
 
         internal MetadataTransformResult(Transform<T> transform)

@@ -19,14 +19,13 @@ internal class RequiredAttributeDescriptorComparer : IEqualityComparer<RequiredA
     public static readonly RequiredAttributeDescriptorComparer Default =
         new RequiredAttributeDescriptorComparer();
 
-    private RequiredAttributeDescriptorComparer()
-    {
-    }
+    private RequiredAttributeDescriptorComparer() { }
 
     /// <inheritdoc />
     public virtual bool Equals(
         RequiredAttributeDescriptor descriptorX,
-        RequiredAttributeDescriptor descriptorY)
+        RequiredAttributeDescriptor descriptorY
+    )
     {
         if (object.ReferenceEquals(descriptorX, descriptorY))
         {
@@ -38,13 +37,16 @@ internal class RequiredAttributeDescriptorComparer : IEqualityComparer<RequiredA
             return false;
         }
 
-        return
-            descriptorX.CaseSensitive == descriptorY.CaseSensitive &&
-            descriptorX.NameComparison == descriptorY.NameComparison &&
-            descriptorX.ValueComparison == descriptorY.ValueComparison &&
-            string.Equals(descriptorX.Name, descriptorY.Name, StringComparison.Ordinal) &&
-            string.Equals(descriptorX.Value, descriptorY.Value, StringComparison.Ordinal) &&
-            string.Equals(descriptorX.DisplayName, descriptorY.DisplayName, StringComparison.Ordinal);
+        return descriptorX.CaseSensitive == descriptorY.CaseSensitive
+            && descriptorX.NameComparison == descriptorY.NameComparison
+            && descriptorX.ValueComparison == descriptorY.ValueComparison
+            && string.Equals(descriptorX.Name, descriptorY.Name, StringComparison.Ordinal)
+            && string.Equals(descriptorX.Value, descriptorY.Value, StringComparison.Ordinal)
+            && string.Equals(
+                descriptorX.DisplayName,
+                descriptorY.DisplayName,
+                StringComparison.Ordinal
+            );
     }
 
     /// <inheritdoc />

@@ -24,7 +24,10 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static JsonNode? SerializeToNode<TValue>(TValue value, JsonSerializerOptions? options = null)
+        public static JsonNode? SerializeToNode<TValue>(
+            TValue value,
+            JsonSerializerOptions? options = null
+        )
         {
             JsonTypeInfo<TValue> jsonTypeInfo = GetTypeInfo<TValue>(options);
             return WriteNode(value, jsonTypeInfo);
@@ -49,7 +52,11 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static JsonNode? SerializeToNode(object? value, Type inputType, JsonSerializerOptions? options = null)
+        public static JsonNode? SerializeToNode(
+            object? value,
+            Type inputType,
+            JsonSerializerOptions? options = null
+        )
         {
             ValidateInputType(value, inputType);
             JsonTypeInfo typeInfo = GetTypeInfo(options, inputType);
@@ -70,7 +77,10 @@ namespace System.Text.Json
         /// <exception cref="ArgumentNullException">
         /// <paramref name="jsonTypeInfo"/> is <see langword="null"/>.
         /// </exception>
-        public static JsonNode? SerializeToNode<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static JsonNode? SerializeToNode<TValue>(
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo is null)
             {
@@ -99,7 +109,11 @@ namespace System.Text.Json
         /// <exception cref="ArgumentNullException">
         /// <paramref name="inputType"/> or <paramref name="context"/> is <see langword="null"/>.
         /// </exception>
-        public static JsonNode? SerializeToNode(object? value, Type inputType, JsonSerializerContext context)
+        public static JsonNode? SerializeToNode(
+            object? value,
+            Type inputType,
+            JsonSerializerContext context
+        )
         {
             if (context is null)
             {
@@ -111,17 +125,27 @@ namespace System.Text.Json
             return WriteNodeAsObject(value, jsonTypeInfo);
         }
 
-        private static JsonNode? WriteNode<TValue>(in TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        private static JsonNode? WriteNode<TValue>(
+            in TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
             JsonSerializerOptions options = jsonTypeInfo.Options;
 
-            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(jsonTypeInfo.Options, out PooledByteBufferWriter output);
+            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(
+                jsonTypeInfo.Options,
+                out PooledByteBufferWriter output
+            );
 
             try
             {
                 WriteCore(writer, value, jsonTypeInfo);
-                return JsonNode.Parse(output.WrittenMemory.Span, options.GetNodeOptions(), options.GetDocumentOptions());
+                return JsonNode.Parse(
+                    output.WrittenMemory.Span,
+                    options.GetNodeOptions(),
+                    options.GetDocumentOptions()
+                );
             }
             finally
             {
@@ -134,12 +158,19 @@ namespace System.Text.Json
             Debug.Assert(jsonTypeInfo.IsConfigured);
             JsonSerializerOptions options = jsonTypeInfo.Options;
 
-            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(jsonTypeInfo.Options, out PooledByteBufferWriter output);
+            Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(
+                jsonTypeInfo.Options,
+                out PooledByteBufferWriter output
+            );
 
             try
             {
                 WriteCoreAsObject(writer, value, jsonTypeInfo);
-                return JsonNode.Parse(output.WrittenMemory.Span, options.GetNodeOptions(), options.GetDocumentOptions());
+                return JsonNode.Parse(
+                    output.WrittenMemory.Span,
+                    options.GetNodeOptions(),
+                    options.GetDocumentOptions()
+                );
             }
             finally
             {

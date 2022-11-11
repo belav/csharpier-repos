@@ -5,7 +5,6 @@
 using System;
 using Xunit;
 
-
 namespace JitTest_sizeof32_sizeof_cs
 {
     internal struct SimpleStruct

@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.Hosting
     [Serializable]
     public sealed class HostAbortedException : Exception
     {
-        private HostAbortedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        private HostAbortedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostAbortedException"/> class
@@ -49,6 +50,7 @@ namespace Microsoft.Extensions.Hosting
         /// The caller of this constructor is required to ensure that this string has been localized for the
         /// current system culture.
         /// </remarks>
-        public HostAbortedException(string? message, Exception? innerException) : base(message, innerException) { }
+        public HostAbortedException(string? message, Exception? innerException)
+            : base(message, innerException) { }
     }
 }

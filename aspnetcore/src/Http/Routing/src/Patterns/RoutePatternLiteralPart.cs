@@ -12,8 +12,7 @@ namespace Microsoft.AspNetCore.Routing.Patterns;
 [DebuggerDisplay("{DebuggerToString()}")]
 public sealed class RoutePatternLiteralPart : RoutePatternPart
 {
-    internal RoutePatternLiteralPart(string content)
-        : base(RoutePatternPartKind.Literal)
+    internal RoutePatternLiteralPart(string content) : base(RoutePatternPartKind.Literal)
     {
         Debug.Assert(!string.IsNullOrEmpty(content));
         Content = content;

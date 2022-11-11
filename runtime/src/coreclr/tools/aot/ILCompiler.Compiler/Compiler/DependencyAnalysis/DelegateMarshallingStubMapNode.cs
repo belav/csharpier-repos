@@ -18,9 +18,17 @@ namespace ILCompiler.DependencyAnalysis
         private readonly ExternalReferencesTableNode _externalReferences;
         private readonly InteropStateManager _interopStateManager;
 
-        public DelegateMarshallingStubMapNode(ExternalReferencesTableNode externalReferences, InteropStateManager interopStateManager)
+        public DelegateMarshallingStubMapNode(
+            ExternalReferencesTableNode externalReferences,
+            InteropStateManager interopStateManager
+        )
         {
-            _endSymbol = new ObjectAndOffsetSymbolNode(this, 0, "__delegate_marshalling_stub_map_End", true);
+            _endSymbol = new ObjectAndOffsetSymbolNode(
+                this,
+                0,
+                "__delegate_marshalling_stub_map_End",
+                true
+            );
             _externalReferences = externalReferences;
             _interopStateManager = interopStateManager;
         }
@@ -31,6 +39,7 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__delegate_marshalling_stub_map");
         }
+
         public int Offset => 0;
         public override bool IsShareable => false;
 
@@ -38,13 +47,19 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool StaticDependenciesAreComputed => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             var writer = new NativeWriter();
             var typeMapHashTable = new VertexHashtable();
@@ -54,14 +69,36 @@ namespace ILCompiler.DependencyAnalysis
 
             foreach (var delegateType in factory.MetadataManager.GetTypesWithDelegateMarshalling())
             {
-                Vertex thunks= writer.GetTuple(
-                    writer.GetUnsignedConstant(_externalReferences.GetIndex(factory.MethodEntrypoint(_interopStateManager.GetOpenStaticDelegateMarshallingThunk(delegateType)))),
-                    writer.GetUnsignedConstant(_externalReferences.GetIndex(factory.MethodEntrypoint(_interopStateManager.GetClosedDelegateMarshallingThunk(delegateType)))),
-                    writer.GetUnsignedConstant(_externalReferences.GetIndex(factory.MethodEntrypoint(_interopStateManager.GetForwardDelegateCreationThunk(delegateType))))
-                    );
+                Vertex thunks = writer.GetTuple(
+                    writer.GetUnsignedConstant(
+                        _externalReferences.GetIndex(
+                            factory.MethodEntrypoint(
+                                _interopStateManager.GetOpenStaticDelegateMarshallingThunk(
+                                    delegateType
+                                )
+                            )
+                        )
+                    ),
+                    writer.GetUnsignedConstant(
+                        _externalReferences.GetIndex(
+                            factory.MethodEntrypoint(
+                                _interopStateManager.GetClosedDelegateMarshallingThunk(delegateType)
+                            )
+                        )
+                    ),
+                    writer.GetUnsignedConstant(
+                        _externalReferences.GetIndex(
+                            factory.MethodEntrypoint(
+                                _interopStateManager.GetForwardDelegateCreationThunk(delegateType)
+                            )
+                        )
+                    )
+                );
 
                 Vertex vertex = writer.GetTuple(
-                    writer.GetUnsignedConstant(_externalReferences.GetIndex(factory.NecessaryTypeSymbol(delegateType))),
+                    writer.GetUnsignedConstant(
+                        _externalReferences.GetIndex(factory.NecessaryTypeSymbol(delegateType))
+                    ),
                     thunks
                 );
 
@@ -73,7 +110,12 @@ namespace ILCompiler.DependencyAnalysis
 
             _endSymbol.SetSymbolOffset(hashTableBytes.Length);
 
-            return new ObjectData(hashTableBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this, _endSymbol });
+            return new ObjectData(
+                hashTableBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this, _endSymbol }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

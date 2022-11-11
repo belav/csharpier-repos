@@ -66,7 +66,7 @@ namespace System.Runtime.InteropServices.JavaScript
             }
             else if (slot.Type == MarshalerType.Array)
             {
-                if(slot.ElementType == MarshalerType.Byte)
+                if (slot.ElementType == MarshalerType.Byte)
                 {
                     ToManaged(out byte[]? val);
                     value = val;
@@ -88,15 +88,18 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
                 else
                 {
-                    throw new NotImplementedException("ToManaged: " + slot.ElementType+ "[]");
+                    throw new NotImplementedException("ToManaged: " + slot.ElementType + "[]");
                 }
             }
             else if (slot.Type == MarshalerType.Task)
             {
-                ToManaged(out Task<object?>? val, static (ref JSMarshalerArgument arg, out object? value) =>
-                {
-                    arg.ToManaged(out value);
-                });
+                ToManaged(
+                    out Task<object?>? val,
+                    static (ref JSMarshalerArgument arg, out object? value) =>
+                    {
+                        arg.ToManaged(out value);
+                    }
+                );
                 value = val;
             }
             else
@@ -259,14 +262,17 @@ namespace System.Runtime.InteropServices.JavaScript
                 Exception? val = value as Exception;
                 ToJS(val);
             }
-            else if (typeof(Task<object>)==type)
+            else if (typeof(Task<object>) == type)
             {
                 Task<object>? val = value as Task<object>;
-                ToJS<object>(val, (ref JSMarshalerArgument arg, object value) =>
-                {
-                    object? valueRef= value;
-                    arg.ToJS(valueRef);
-                });
+                ToJS<object>(
+                    val,
+                    (ref JSMarshalerArgument arg, object value) =>
+                    {
+                        object? valueRef = value;
+                        arg.ToJS(valueRef);
+                    }
+                );
             }
             else if (typeof(Task).IsAssignableFrom(type))
             {
@@ -307,7 +313,9 @@ namespace System.Runtime.InteropServices.JavaScript
             {
                 throw new NotImplementedException("ToJS: " + type.FullName);
             }
-            else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ArraySegment<>))
+            else if (
+                type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ArraySegment<>)
+            )
             {
                 throw new NotImplementedException("ToJS: " + type.FullName);
             }

@@ -8,6 +8,7 @@ using Moq;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
+
 #pragma warning disable CS0618 // Type or member is obsolete
 public class RazorEngineTest
 {
@@ -94,12 +95,14 @@ public class RazorEngineTest
         Assert.Collection(
             engine.Features,
             f => Assert.Same(features[0], f),
-            f => Assert.Same(features[1], f));
+            f => Assert.Same(features[1], f)
+        );
 
         Assert.Collection(
             engine.Phases,
             p => Assert.Same(phases[0], p),
-            p => Assert.Same(phases[1], p));
+            p => Assert.Same(phases[1], p)
+        );
     }
 
     [Fact]
@@ -129,12 +132,14 @@ public class RazorEngineTest
         Assert.Collection(
             engine.Features,
             f => Assert.Same(features[0], f),
-            f => Assert.Same(features[1], f));
+            f => Assert.Same(features[1], f)
+        );
 
         Assert.Collection(
             engine.Phases,
             p => Assert.Same(phases[0], p),
-            p => Assert.Same(phases[1], p));
+            p => Assert.Same(phases[1], p)
+        );
     }
 
     private static void AssertDefaultRuntimeTargetExtensions(RazorEngine engine)
@@ -146,7 +151,8 @@ public class RazorEngineTest
             feature.TargetExtensions,
             extension => Assert.IsType<MetadataAttributeTargetExtension>(extension),
             extension => Assert.IsType<DefaultTagHelperTargetExtension>(extension),
-            extension => Assert.IsType<PreallocatedAttributeTargetExtension>(extension));
+            extension => Assert.IsType<PreallocatedAttributeTargetExtension>(extension)
+        );
     }
 
     private static void AssertDefaultRuntimeFeatures(IEnumerable<IRazorEngineFeature> features)
@@ -165,7 +171,8 @@ public class RazorEngineTest
             feature => Assert.IsType<DefaultDocumentClassifierPassFeature>(feature),
             feature => Assert.IsType<DefaultRazorParserOptionsFeature>(feature),
             feature => Assert.IsType<DefaultRazorCodeGenerationOptionsFeature>(feature),
-            feature => Assert.IsType<PreallocatedTagHelperAttributeOptimizationPass>(feature));
+            feature => Assert.IsType<PreallocatedTagHelperAttributeOptimizationPass>(feature)
+        );
     }
 
     private static void AssertDefaultRuntimePhases(IReadOnlyList<IRazorEnginePhase> phases)
@@ -179,7 +186,8 @@ public class RazorEngineTest
             phase => Assert.IsType<DefaultRazorDocumentClassifierPhase>(phase),
             phase => Assert.IsType<DefaultRazorDirectiveClassifierPhase>(phase),
             phase => Assert.IsType<DefaultRazorOptimizationPhase>(phase),
-            phase => Assert.IsType<DefaultRazorCSharpLoweringPhase>(phase));
+            phase => Assert.IsType<DefaultRazorCSharpLoweringPhase>(phase)
+        );
     }
 
     private static void AssertDefaultDesignTimeTargetExtensions(RazorEngine engine)
@@ -191,7 +199,8 @@ public class RazorEngineTest
             feature.TargetExtensions,
             extension => Assert.IsType<MetadataAttributeTargetExtension>(extension),
             extension => Assert.IsType<DefaultTagHelperTargetExtension>(extension),
-            extension => Assert.IsType<DesignTimeDirectiveTargetExtension>(extension));
+            extension => Assert.IsType<DesignTimeDirectiveTargetExtension>(extension)
+        );
     }
 
     private static void AssertDefaultDesignTimeFeatures(IEnumerable<IRazorEngineFeature> features)
@@ -211,7 +220,8 @@ public class RazorEngineTest
             feature => Assert.IsType<DefaultRazorParserOptionsFeature>(feature),
             feature => Assert.IsType<DefaultRazorCodeGenerationOptionsFeature>(feature),
             feature => Assert.IsType<SuppressChecksumOptionsFeature>(feature),
-            feature => Assert.IsType<DesignTimeDirectivePass>(feature));
+            feature => Assert.IsType<DesignTimeDirectivePass>(feature)
+        );
     }
 
     private static void AssertDefaultDesignTimePhases(IReadOnlyList<IRazorEnginePhase> phases)
@@ -225,6 +235,7 @@ public class RazorEngineTest
             phase => Assert.IsType<DefaultRazorDocumentClassifierPhase>(phase),
             phase => Assert.IsType<DefaultRazorDirectiveClassifierPhase>(phase),
             phase => Assert.IsType<DefaultRazorOptimizationPhase>(phase),
-            phase => Assert.IsType<DefaultRazorCSharpLoweringPhase>(phase));
+            phase => Assert.IsType<DefaultRazorCSharpLoweringPhase>(phase)
+        );
     }
 }

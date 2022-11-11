@@ -41,8 +41,10 @@ internal static class MvcDetector
         }
 
         // Check name before attribute's for performance.
-        if (!typeSymbol.Name.EndsWith(ControllerTypeNameSuffix, StringComparison.OrdinalIgnoreCase) &&
-            !typeSymbol.HasAttribute(wellKnownTypes.ControllerAttribute))
+        if (
+            !typeSymbol.Name.EndsWith(ControllerTypeNameSuffix, StringComparison.OrdinalIgnoreCase)
+            && !typeSymbol.HasAttribute(wellKnownTypes.ControllerAttribute)
+        )
         {
             return false;
         }

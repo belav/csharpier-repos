@@ -23,9 +23,7 @@ namespace System.CommandLine
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
-        protected Argument()
-        {
-        }
+        protected Argument() { }
 
         /// <summary>
         /// Initializes a new instance of the Argument class.
@@ -49,10 +47,7 @@ namespace System.CommandLine
             {
                 if (!_arity.IsNonDefault)
                 {
-                    _arity = ArgumentArity.Default(
-                        ValueType, 
-                        this, 
-                        FirstParent);
+                    _arity = ArgumentArity.Default(ValueType, this, FirstParent);
                 }
 
                 return _arity;
@@ -61,7 +56,7 @@ namespace System.CommandLine
         }
 
         /// <summary>
-        /// The name used in help output to describe the argument. 
+        /// The name used in help output to describe the argument.
         /// </summary>
         public string? HelpName { get; set; }
 
@@ -75,10 +70,7 @@ namespace System.CommandLine
         /// Gets the list of completion sources for the argument.
         /// </summary>
         public CompletionSourceList Completions =>
-            _completions ??= new CompletionSourceList
-            {
-                CompletionSource.ForType(ValueType)
-            };
+            _completions ??= new CompletionSourceList { CompletionSource.ForType(ValueType) };
 
         /// <summary>
         /// Gets or sets the <see cref="Type" /> that the argument token(s) will be converted to.
@@ -104,14 +96,15 @@ namespace System.CommandLine
             }
         }
 
-        internal List<ValidateSymbolResult<ArgumentResult>> Validators => _validators ??= new ();
+        internal List<ValidateSymbolResult<ArgumentResult>> Validators => _validators ??= new();
 
         /// <summary>
         /// Adds a custom <see cref="ValidateSymbolResult{ArgumentResult}"/> to the argument. Validators can be used
         /// to provide custom errors based on user input.
         /// </summary>
         /// <param name="validate">The delegate to validate the parsed argument.</param>
-        public void AddValidator(ValidateSymbolResult<ArgumentResult> validate) => Validators.Add(validate);
+        public void AddValidator(ValidateSymbolResult<ArgumentResult> validate) =>
+            Validators.Add(validate);
 
         /// <summary>
         /// Gets the default value for the argument.
@@ -126,7 +119,9 @@ namespace System.CommandLine
         {
             if (_defaultValueFactory is null)
             {
-                throw new InvalidOperationException($"Argument \"{Name}\" does not have a default value");
+                throw new InvalidOperationException(
+                    $"Argument \"{Name}\" does not have a default value"
+                );
             }
 
             return _defaultValueFactory.Invoke(argumentResult);
@@ -155,7 +150,7 @@ namespace System.CommandLine
 
             SetDefaultValueFactory(_ => getDefaultValue());
         }
-        
+
         /// <summary>
         /// Sets a delegate to invoke when the default value for the argument is required.
         /// </summary>
@@ -163,7 +158,8 @@ namespace System.CommandLine
         /// <remarks>In this overload, the <see cref="ArgumentResult"/> is provided to the delegate.</remarks>
         public void SetDefaultValueFactory(Func<ArgumentResult, object?> getDefaultValue)
         {
-            _defaultValueFactory = getDefaultValue ?? throw new ArgumentNullException(nameof(getDefaultValue));
+            _defaultValueFactory =
+                getDefaultValue ?? throw new ArgumentNullException(nameof(getDefaultValue));
         }
 
         /// <summary>
@@ -173,10 +169,7 @@ namespace System.CommandLine
 
         internal virtual bool HasCustomParser => false;
 
-        internal static Argument None() => new Argument<bool>
-        {
-            Arity = ArgumentArity.Zero
-        };
+        internal static Argument None() => new Argument<bool> { Arity = ArgumentArity.Zero };
 
         internal void AddAllowedValues(IReadOnlyList<string> values)
         {
@@ -192,9 +185,9 @@ namespace System.CommandLine
         public override IEnumerable<CompletionItem> GetCompletions(CompletionContext context)
         {
             return Completions
-                   .SelectMany(source => source.GetCompletions(context))
-                   .Distinct()
-                   .OrderBy(c => c.SortText, StringComparer.OrdinalIgnoreCase);
+                .SelectMany(source => source.GetCompletions(context))
+                .Distinct()
+                .OrderBy(c => c.SortText, StringComparer.OrdinalIgnoreCase);
         }
 
         /// <inheritdoc />

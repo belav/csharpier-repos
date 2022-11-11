@@ -20,11 +20,16 @@ namespace ILVerify
 {
     class Program : IResolver
     {
-        private readonly Dictionary<string, PEReader> _resolverCache = new Dictionary<string, PEReader>();
+        private readonly Dictionary<string, PEReader> _resolverCache =
+            new Dictionary<string, PEReader>();
 
         private Options _options;
-        private Dictionary<string, string> _inputFilePaths = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase); // map of simple name to file path
-        private Dictionary<string, string> _referenceFilePaths = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase); // map of simple name to file path
+        private Dictionary<string, string> _inputFilePaths = new Dictionary<string, string>(
+            StringComparer.OrdinalIgnoreCase
+        ); // map of simple name to file path
+        private Dictionary<string, string> _referenceFilePaths = new Dictionary<string, string>(
+            StringComparer.OrdinalIgnoreCase
+        ); // map of simple name to file path
         private IReadOnlyList<Regex> _includePatterns;
         private IReadOnlyList<Regex> _excludePatterns;
         private IReadOnlyList<Regex> _ignoreErrorPatterns;
@@ -111,11 +116,14 @@ namespace ILVerify
 
         private int Run()
         {
-            _verifier = new Verifier(this, new VerifierOptions
-            {
-                IncludeMetadataTokensInErrorMessages = _options.Tokens,
-                SanityChecks = _options.SanityChecks
-            });
+            _verifier = new Verifier(
+                this,
+                new VerifierOptions
+                {
+                    IncludeMetadataTokensInErrorMessages = _options.Tokens,
+                    SanityChecks = _options.SanityChecks
+                }
+            );
             _verifier.SetSystemModuleName(new AssemblyName(_options.SystemModule ?? "mscorlib"));
 
             int numErrors = 0;
@@ -135,7 +143,11 @@ namespace ILVerify
             }
         }
 
-        private void PrintVerifyMethodsResult(VerificationResult result, EcmaModule module, string pathOrModuleName)
+        private void PrintVerifyMethodsResult(
+            VerificationResult result,
+            EcmaModule module,
+            string pathOrModuleName
+        )
         {
             Write("[IL]: Error [");
             if (result.Code != VerifierError.None)
@@ -154,7 +166,9 @@ namespace ILVerify
 
             MetadataReader metadataReader = module.MetadataReader;
 
-            TypeDefinition typeDef = metadataReader.GetTypeDefinition(metadataReader.GetMethodDefinition(result.Method).GetDeclaringType());
+            TypeDefinition typeDef = metadataReader.GetTypeDefinition(
+                metadataReader.GetMethodDefinition(result.Method).GetDeclaringType()
+            );
             string typeNamespace = metadataReader.GetString(typeDef.Namespace);
             Write(typeNamespace);
             Write(".");
@@ -246,8 +260,22 @@ namespace ILVerify
             int verifiedTypeCounter = 0;
             int typeCounter = 0;
 
-            VerifyMethods(peReader, module, path, ref numErrors, ref verifiedMethodCounter, ref methodCounter);
-            VerifyTypes(peReader, module, path, ref numErrors, ref verifiedTypeCounter, ref typeCounter);
+            VerifyMethods(
+                peReader,
+                module,
+                path,
+                ref numErrors,
+                ref verifiedMethodCounter,
+                ref methodCounter
+            );
+            VerifyTypes(
+                peReader,
+                module,
+                path,
+                ref numErrors,
+                ref verifiedTypeCounter,
+                ref typeCounter
+            );
 
             if (numErrors > 0)
                 WriteLine(numErrors + " Error(s) Verifying " + path);
@@ -266,7 +294,14 @@ namespace ILVerify
             return numErrors;
         }
 
-        private void VerifyMethods(PEReader peReader, EcmaModule module, string path, ref int numErrors, ref int verifiedMethodCounter, ref int methodCounter)
+        private void VerifyMethods(
+            PEReader peReader,
+            EcmaModule module,
+            string path,
+            ref int numErrors,
+            ref int verifiedMethodCounter,
+            ref int methodCounter
+        )
         {
             numErrors = 0;
             verifiedMethodCounter = 0;
@@ -312,7 +347,14 @@ namespace ILVerify
             }
         }
 
-        private void VerifyTypes(PEReader peReader, EcmaModule module, string path, ref int numErrors, ref int verifiedTypeCounter, ref int typeCounter)
+        private void VerifyTypes(
+            PEReader peReader,
+            EcmaModule module,
+            string path,
+            ref int numErrors,
+            ref int verifiedTypeCounter,
+            ref int typeCounter
+        )
         {
             MetadataReader metadataReader = peReader.GetMetadataReader();
 
@@ -356,13 +398,20 @@ namespace ILVerify
         /// <summary>
         /// This method returns the fully qualified class name.
         /// </summary>
-        private string GetQualifiedClassName(MetadataReader metadataReader, TypeDefinitionHandle typeHandle)
+        private string GetQualifiedClassName(
+            MetadataReader metadataReader,
+            TypeDefinitionHandle typeHandle
+        )
         {
             var typeDef = metadataReader.GetTypeDefinition(typeHandle);
             var typeName = metadataReader.GetString(typeDef.Name);
 
             var namespaceName = metadataReader.GetString(typeDef.Namespace);
-            var assemblyName = metadataReader.GetString(metadataReader.IsAssembly ? metadataReader.GetAssemblyDefinition().Name : metadataReader.GetModuleDefinition().Name);
+            var assemblyName = metadataReader.GetString(
+                metadataReader.IsAssembly
+                    ? metadataReader.GetAssemblyDefinition().Name
+                    : metadataReader.GetModuleDefinition().Name
+            );
 
             StringBuilder builder = new StringBuilder();
             builder.Append($"[{assemblyName}]");
@@ -378,15 +427,24 @@ namespace ILVerify
         /// This method exists to avoid additional assembly resolving, which might be triggered by calling
         /// MethodDesc.ToString().
         /// </summary>
-        private string GetQualifiedMethodName(MetadataReader metadataReader, MethodDefinitionHandle methodHandle)
+        private string GetQualifiedMethodName(
+            MetadataReader metadataReader,
+            MethodDefinitionHandle methodHandle
+        )
         {
             var methodDef = metadataReader.GetMethodDefinition(methodHandle);
             var typeDef = metadataReader.GetTypeDefinition(methodDef.GetDeclaringType());
 
-            var methodName = metadataReader.GetString(metadataReader.GetMethodDefinition(methodHandle).Name);
+            var methodName = metadataReader.GetString(
+                metadataReader.GetMethodDefinition(methodHandle).Name
+            );
             var typeName = metadataReader.GetString(typeDef.Name);
             var namespaceName = metadataReader.GetString(typeDef.Namespace);
-            var assemblyName = metadataReader.GetString(metadataReader.IsAssembly ? metadataReader.GetAssemblyDefinition().Name : metadataReader.GetModuleDefinition().Name);
+            var assemblyName = metadataReader.GetString(
+                metadataReader.IsAssembly
+                    ? metadataReader.GetAssemblyDefinition().Name
+                    : metadataReader.GetModuleDefinition().Name
+            );
 
             StringBuilder builder = new StringBuilder();
             builder.Append($"[{assemblyName}]");
@@ -428,11 +486,10 @@ namespace ILVerify
             return false;
         }
 
-        PEReader IResolver.ResolveAssembly(AssemblyName assemblyName)
-            => Resolve(assemblyName.Name);
+        PEReader IResolver.ResolveAssembly(AssemblyName assemblyName) => Resolve(assemblyName.Name);
 
-        PEReader IResolver.ResolveModule(AssemblyName referencingModule, string fileName)
-            => Resolve(Path.GetFileNameWithoutExtension(fileName));
+        PEReader IResolver.ResolveModule(AssemblyName referencingModule, string fileName) =>
+            Resolve(Path.GetFileNameWithoutExtension(fileName));
 
         public PEReader Resolve(string simpleName)
         {
@@ -442,7 +499,10 @@ namespace ILVerify
             }
 
             string path = null;
-            if (_inputFilePaths.TryGetValue(simpleName, out path) || _referenceFilePaths.TryGetValue(simpleName, out path))
+            if (
+                _inputFilePaths.TryGetValue(simpleName, out path)
+                || _referenceFilePaths.TryGetValue(simpleName, out path)
+            )
             {
                 PEReader result = new PEReader(File.OpenRead(path));
                 _resolverCache.Add(simpleName, result);
@@ -461,23 +521,47 @@ namespace ILVerify
             public Argument<string[]> InputFilePath { get; } =
                 new("input-file-path", "Input file(s)") { Arity = ArgumentArity.OneOrMore };
             public Option<string[]> Reference { get; } =
-                new(new[] { "--reference", "-r" }, "Reference metadata from the specified assembly");
+                new(
+                    new[] { "--reference", "-r" },
+                    "Reference metadata from the specified assembly"
+                );
             public Option<string> SystemModule { get; } =
                 new(new[] { "--system-module", "-s" }, "System module name (default: mscorlib)");
             public Option<bool> SanityChecks { get; } =
-                new(new[] { "--sanity-checks", "-c" }, "Check for valid constructs that are likely mistakes");
+                new(
+                    new[] { "--sanity-checks", "-c" },
+                    "Check for valid constructs that are likely mistakes"
+                );
             public Option<string[]> Include { get; } =
-                new(new[] { "--include", "-i" }, "Use only methods/types/namespaces, which match the given regular expression(s)");
+                new(
+                    new[] { "--include", "-i" },
+                    "Use only methods/types/namespaces, which match the given regular expression(s)"
+                );
             public Option<FileInfo> IncludeFile { get; } =
-                new Option<FileInfo>(new[] { "--include-file" }, "Same as --include, but the regular expression(s) are declared line by line in the specified file.").ExistingOnly();
+                new Option<FileInfo>(
+                    new[] { "--include-file" },
+                    "Same as --include, but the regular expression(s) are declared line by line in the specified file."
+                ).ExistingOnly();
             public Option<string[]> Exclude { get; } =
-                new(new[] { "--exclude", "-e" }, "Skip methods/types/namespaces, which match the given regular expression(s)");
+                new(
+                    new[] { "--exclude", "-e" },
+                    "Skip methods/types/namespaces, which match the given regular expression(s)"
+                );
             public Option<FileInfo> ExcludeFile { get; } =
-                new Option<FileInfo>(new[] { "--exclude-file" }, "Same as --exclude, but the regular expression(s) are declared line by line in the specified file.").ExistingOnly();
+                new Option<FileInfo>(
+                    new[] { "--exclude-file" },
+                    "Same as --exclude, but the regular expression(s) are declared line by line in the specified file."
+                ).ExistingOnly();
             public Option<string[]> IgnoreError { get; } =
-                new(new[] { "--ignore-error", "-g" }, "Ignore errors, which match the given regular expression(s)");
+                new(
+                    new[] { "--ignore-error", "-g" },
+                    "Ignore errors, which match the given regular expression(s)"
+                );
             public Option<FileInfo> IgnoreErrorFile { get; } =
-                new Option<FileInfo>(new[] { "--ignore-error-file" }, "Same as --ignore-error, but the regular expression(s) are declared line by line in the specified file.").ExistingOnly();
+                new Option<FileInfo>(
+                    new[] { "--ignore-error-file" },
+                    "Same as --ignore-error, but the regular expression(s) are declared line by line in the specified file."
+                ).ExistingOnly();
             public Option<bool> Statistics { get; } =
                 new(new[] { "--statistics" }, "Print verification statistics");
             public Option<bool> Verbose { get; } =
@@ -485,8 +569,7 @@ namespace ILVerify
             public Option<bool> Tokens { get; } =
                 new(new[] { "--tokens", "-t" }, "Include metadata tokens in error messages");
 
-            public ILVerifyRootCommand()
-                : base("Tool for verifying MSIL code based on ECMA-335.")
+            public ILVerifyRootCommand() : base("Tool for verifying MSIL code based on ECMA-335.")
             {
                 AddArgument(InputFilePath);
                 AddOption(Reference);
@@ -506,7 +589,9 @@ namespace ILVerify
                 {
                     try
                     {
-                        context.ExitCode = new Program(new Options(this, context.ParseResult)).Run();
+                        context.ExitCode = new Program(
+                            new Options(this, context.ParseResult)
+                        ).Run();
                     }
                     catch (Exception e)
                     {

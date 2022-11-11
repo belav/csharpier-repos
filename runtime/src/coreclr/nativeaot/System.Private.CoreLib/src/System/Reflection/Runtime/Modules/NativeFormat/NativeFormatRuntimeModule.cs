@@ -15,8 +15,7 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
 {
     internal sealed partial class NativeFormatRuntimeModule : RuntimeModule
     {
-        private NativeFormatRuntimeModule(NativeFormatRuntimeAssembly assembly)
-            : base()
+        private NativeFormatRuntimeModule(NativeFormatRuntimeAssembly assembly) : base()
         {
             _assembly = assembly;
         }
@@ -28,16 +27,16 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
             get
             {
                 QScopeDefinition scope = _assembly.Scope;
-                return RuntimeCustomAttributeData.GetCustomAttributes(scope.Reader, scope.ScopeDefinition.ModuleCustomAttributes);
+                return RuntimeCustomAttributeData.GetCustomAttributes(
+                    scope.Reader,
+                    scope.ScopeDefinition.ModuleCustomAttributes
+                );
             }
         }
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                throw new InvalidOperationException(SR.NoMetadataTokenAvailable);
-            }
+            get { throw new InvalidOperationException(SR.NoMetadataTokenAvailable); }
         }
 
         public sealed override Guid ModuleVersionId
@@ -65,7 +64,9 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
         {
             QScopeDefinition scope = _assembly.Scope;
             MetadataReader reader = scope.Reader;
-            return scope.ScopeDefinition.GlobalModuleType.GetNamedType(reader).GetField(name, bindingAttr);
+            return scope.ScopeDefinition.GlobalModuleType
+                .GetNamedType(reader)
+                .GetField(name, bindingAttr);
         }
 
         [RequiresUnreferencedCode("Fields might be removed")]
@@ -73,15 +74,25 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
         {
             QScopeDefinition scope = _assembly.Scope;
             MetadataReader reader = scope.Reader;
-            return scope.ScopeDefinition.GlobalModuleType.GetNamedType(reader).GetFields(bindingFlags);
+            return scope.ScopeDefinition.GlobalModuleType
+                .GetNamedType(reader)
+                .GetFields(bindingFlags);
         }
 
         [RequiresUnreferencedCode("Methods might be removed")]
-        protected sealed override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        protected sealed override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             QScopeDefinition scope = _assembly.Scope;
             MetadataReader reader = scope.Reader;
-            TypeInfos.RuntimeTypeDefinitionTypeInfo runtimeType = scope.ScopeDefinition.GlobalModuleType.GetNamedType(reader);
+            TypeInfos.RuntimeTypeDefinitionTypeInfo runtimeType =
+                scope.ScopeDefinition.GlobalModuleType.GetNamedType(reader);
 
             if (types == null)
             {
@@ -89,7 +100,14 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
             }
             else
             {
-                return runtimeType.GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
+                return runtimeType.GetMethod(
+                    name,
+                    bindingAttr,
+                    binder,
+                    callConvention,
+                    types,
+                    modifiers
+                );
             }
         }
 
@@ -98,7 +116,9 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
         {
             QScopeDefinition scope = _assembly.Scope;
             MetadataReader reader = scope.Reader;
-            return scope.ScopeDefinition.GlobalModuleType.GetNamedType(reader).GetMethods(bindingFlags);
+            return scope.ScopeDefinition.GlobalModuleType
+                .GetNamedType(reader)
+                .GetMethods(bindingFlags);
         }
 
         private readonly NativeFormatRuntimeAssembly _assembly;

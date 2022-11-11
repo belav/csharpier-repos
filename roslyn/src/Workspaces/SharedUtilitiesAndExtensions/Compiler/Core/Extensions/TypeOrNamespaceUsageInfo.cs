@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Represents a reference to a namespace or type on the left side of a dotted name (qualified name or member access).
-        /// For example, 'NS' in <code>NS.Type x = new NS.Type();</code> or <code>NS.Type.StaticMethod();</code> or 
+        /// For example, 'NS' in <code>NS.Type x = new NS.Type();</code> or <code>NS.Type.StaticMethod();</code> or
         /// 'Type' in <code>Type.NestedType x = new Type.NestedType();</code> or <code>Type.StaticMethod();</code>
         /// </summary>
         Qualified = 0x01,

@@ -29,7 +29,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     /// Can be accessed via the <see cref="IDocumentTrackingService"/> as a workspace service.
     /// </summary>
     [Export]
-    internal class VisualStudioActiveDocumentTracker : ForegroundThreadAffinitizedObject, IVsSelectionEvents
+    internal class VisualStudioActiveDocumentTracker
+        : ForegroundThreadAffinitizedObject,
+            IVsSelectionEvents
     {
         private readonly IVsEditorAdaptersFactoryService _editorAdaptersFactoryService;
 
@@ -48,21 +50,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         public VisualStudioActiveDocumentTracker(
             IThreadingContext threadingContext,
             [Import(typeof(SVsServiceProvider))] IAsyncServiceProvider asyncServiceProvider,
-            IVsEditorAdaptersFactoryService editorAdaptersFactoryService)
-            : base(threadingContext, assertIsForeground: false)
+            IVsEditorAdaptersFactoryService editorAdaptersFactoryService
+        ) : base(threadingContext, assertIsForeground: false)
         {
             _editorAdaptersFactoryService = editorAdaptersFactoryService;
             ThreadingContext.RunWithShutdownBlockAsync(async cancellationToken =>
             {
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
-                var monitorSelectionService = (IVsMonitorSelection?)await asyncServiceProvider.GetServiceAsync(typeof(SVsShellMonitorSelection)).ConfigureAwait(true);
+                var monitorSelectionService = (IVsMonitorSelection?)
+                    await asyncServiceProvider
+                        .GetServiceAsync(typeof(SVsShellMonitorSelection))
+                        .ConfigureAwait(true);
                 Assumes.Present(monitorSelectionService);
 
                 // No need to track windows if we are shutting down
                 cancellationToken.ThrowIfCancellationRequested();
 
-                if (ErrorHandler.Succeeded(monitorSelectionService.GetCurrentElementValue((uint)VSConstants.VSSELELEMID.SEID_DocumentFrame, out var value)))
+                if (
+                    ErrorHandler.Succeeded(
+                        monitorSelectionService.GetCurrentElementValue(
+                            (uint)VSConstants.VSSELELEMID.SEID_DocumentFrame,
+                            out var value
+                        )
+                    )
+                )
                 {
                     if (value is IVsWindowFrame windowFrame)
                     {
@@ -169,10 +183,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             this.DocumentsChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        int IVsSelectionEvents.OnSelectionChanged(IVsHierarchy pHierOld, [ComAliasName("Microsoft.VisualStudio.Shell.Interop.VSITEMID")] uint itemidOld, IVsMultiItemSelect pMISOld, ISelectionContainer pSCOld, IVsHierarchy pHierNew, [ComAliasName("Microsoft.VisualStudio.Shell.Interop.VSITEMID")] uint itemidNew, IVsMultiItemSelect pMISNew, ISelectionContainer pSCNew)
-            => VSConstants.E_NOTIMPL;
+        int IVsSelectionEvents.OnSelectionChanged(
+            IVsHierarchy pHierOld,
+            [ComAliasName("Microsoft.VisualStudio.Shell.Interop.VSITEMID")] uint itemidOld,
+            IVsMultiItemSelect pMISOld,
+            ISelectionContainer pSCOld,
+            IVsHierarchy pHierNew,
+            [ComAliasName("Microsoft.VisualStudio.Shell.Interop.VSITEMID")] uint itemidNew,
+            IVsMultiItemSelect pMISNew,
+            ISelectionContainer pSCNew
+        ) => VSConstants.E_NOTIMPL;
 
-        int IVsSelectionEvents.OnElementValueChanged([ComAliasName("Microsoft.VisualStudio.Shell.Interop.VSSELELEMID")] uint elementid, object varValueOld, object varValueNew)
+        int IVsSelectionEvents.OnElementValueChanged(
+            [ComAliasName("Microsoft.VisualStudio.Shell.Interop.VSSELELEMID")] uint elementid,
+            object varValueOld,
+            object varValueNew
+        )
         {
             AssertIsForeground();
 
@@ -180,14 +206,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // Note that sometimes we receive 'SEID_WindowFrame' instead of 'SEID_DocumentFrame'
             // for the newly active document. We ensure that we only process frames for documents
             // and not other tool windows by checking the frame type is 'WINDOWFRAMETYPE_Document'.
-            if (elementid == (uint)VSConstants.VSSELELEMID.SEID_DocumentFrame ||
-                elementid == (uint)VSConstants.VSSELELEMID.SEID_WindowFrame)
+            if (
+                elementid == (uint)VSConstants.VSSELELEMID.SEID_DocumentFrame
+                || elementid == (uint)VSConstants.VSSELELEMID.SEID_WindowFrame
+            )
             {
                 // Remember the newly activated frame so it can be read from another thread.
 
-                if (varValueNew is IVsWindowFrame frame &&
-                    ErrorHandler.Succeeded(frame.GetProperty((int)__VSFPROPID.VSFPROPID_Type, out var frameType)) &&
-                    (int)frameType == (int)__WindowFrameTypeFlags.WINDOWFRAMETYPE_Document)
+                if (
+                    varValueNew is IVsWindowFrame frame
+                    && ErrorHandler.Succeeded(
+                        frame.GetProperty((int)__VSFPROPID.VSFPROPID_Type, out var frameType)
+                    )
+                    && (int)frameType == (int)__WindowFrameTypeFlags.WINDOWFRAMETYPE_Document
+                )
                 {
                     TrackNewActiveWindowFrame(frame);
                 }
@@ -196,8 +228,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             return VSConstants.S_OK;
         }
 
-        int IVsSelectionEvents.OnCmdUIContextChanged([ComAliasName("Microsoft.VisualStudio.Shell.Interop.VSCOOKIE")] uint dwCmdUICookie, [ComAliasName("Microsoft.VisualStudio.OLE.Interop.BOOL")] int fActive)
-            => VSConstants.E_NOTIMPL;
+        int IVsSelectionEvents.OnCmdUIContextChanged(
+            [ComAliasName("Microsoft.VisualStudio.Shell.Interop.VSCOOKIE")] uint dwCmdUICookie,
+            [ComAliasName("Microsoft.VisualStudio.OLE.Interop.BOOL")] int fActive
+        ) => VSConstants.E_NOTIMPL;
 
         /// <summary>
         /// Listens to frame notifications for a visible frame. When the frame becomes invisible or closes,
@@ -221,13 +255,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                 ((IVsWindowFrame2)frame).Advise(this, out _frameEventsCookie);
 
-                if (ErrorHandler.Succeeded(frame.GetProperty((int)__VSFPROPID.VSFPROPID_DocData, out var docData)))
+                if (
+                    ErrorHandler.Succeeded(
+                        frame.GetProperty((int)__VSFPROPID.VSFPROPID_DocData, out var docData)
+                    )
+                )
                 {
                     if (docData is IVsTextBuffer bufferAdapter)
                     {
-                        _textBuffer = _documentTracker._editorAdaptersFactoryService.GetDocumentBuffer(bufferAdapter);
+                        _textBuffer =
+                            _documentTracker._editorAdaptersFactoryService.GetDocumentBuffer(
+                                bufferAdapter
+                            );
 
-                        if (_textBuffer != null && !_textBuffer.ContentType.IsOfType(ContentTypeNames.RoslynContentType))
+                        if (
+                            _textBuffer != null
+                            && !_textBuffer.ContentType.IsOfType(ContentTypeNames.RoslynContentType)
+                        )
                         {
                             _textBuffer.Changed += NonRoslynTextBuffer_Changed;
                         }
@@ -235,8 +279,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 }
             }
 
-            private void NonRoslynTextBuffer_Changed(object sender, TextContentChangedEventArgs e)
-                => _documentTracker.NonRoslynBufferTextChanged?.Invoke(_documentTracker, EventArgs.Empty);
+            private void NonRoslynTextBuffer_Changed(
+                object sender,
+                TextContentChangedEventArgs e
+            ) =>
+                _documentTracker.NonRoslynBufferTextChanged?.Invoke(
+                    _documentTracker,
+                    EventArgs.Empty
+                );
 
             /// <summary>
             /// Returns the current DocumentId for this window frame. Care must be made with this value, since "current" could change asynchronously as the document
@@ -253,11 +303,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 return workspace.GetDocumentIdInCurrentContext(textContainer);
             }
 
-            int IVsWindowFrameNotify.OnDockableChange(int fDockable)
-                => VSConstants.S_OK;
+            int IVsWindowFrameNotify.OnDockableChange(int fDockable) => VSConstants.S_OK;
 
-            int IVsWindowFrameNotify.OnMove()
-                => VSConstants.S_OK;
+            int IVsWindowFrameNotify.OnMove() => VSConstants.S_OK;
 
             int IVsWindowFrameNotify.OnShow(int fShow)
             {
@@ -272,11 +320,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 return VSConstants.S_OK;
             }
 
-            int IVsWindowFrameNotify.OnSize()
-                => VSConstants.S_OK;
+            int IVsWindowFrameNotify.OnSize() => VSConstants.S_OK;
 
-            int IVsWindowFrameNotify2.OnClose(ref uint pgrfSaveOptions)
-                => Disconnect();
+            int IVsWindowFrameNotify2.OnClose(ref uint pgrfSaveOptions) => Disconnect();
 
             private int Disconnect()
             {

@@ -23,18 +23,12 @@ internal static partial class Interop
 
             public string? OID
             {
-                get
-                {
-                    return Marshal.PtrToStringAnsi(pszOID);
-                }
+                get { return Marshal.PtrToStringAnsi(pszOID); }
             }
 
             public string? Name
             {
-                get
-                {
-                    return Marshal.PtrToStringUni(pwszName);
-                }
+                get { return Marshal.PtrToStringUni(pwszName); }
             }
         }
 
@@ -48,7 +42,12 @@ internal static partial class Interop
             CRYPT_OID_INFO_CNG_SIGN_KEY = 6,
         }
 
-        internal static unsafe CRYPT_OID_INFO FindOidInfo(CryptOidInfoKeyType keyType, string key, OidGroup group, bool fallBackToAllGroups)
+        internal static unsafe CRYPT_OID_INFO FindOidInfo(
+            CryptOidInfoKeyType keyType,
+            string key,
+            OidGroup group,
+            bool fallBackToAllGroups
+        )
         {
             const OidGroup CRYPT_OID_DISABLE_SEARCH_DS_FLAG = unchecked((OidGroup)0x80000000);
             Debug.Assert(key != null);
@@ -93,7 +92,11 @@ internal static partial class Interop
                 {
                     // Finally, for compatibility with previous runtimes, if we have a group specified retry the
                     // query with no group
-                    CRYPT_OID_INFO*  allGroupOidInfo = CryptFindOIDInfo(keyType, rawKey, OidGroup.All);
+                    CRYPT_OID_INFO* allGroupOidInfo = CryptFindOIDInfo(
+                        keyType,
+                        rawKey,
+                        OidGroup.All
+                    );
                     if (allGroupOidInfo != null)
                     {
                         return *allGroupOidInfo;
@@ -115,16 +118,20 @@ internal static partial class Interop
         private static bool OidGroupWillNotUseActiveDirectory(OidGroup group)
         {
             // These groups will never cause an Active Directory query
-            return group == OidGroup.HashAlgorithm ||
-                   group == OidGroup.EncryptionAlgorithm ||
-                   group == OidGroup.PublicKeyAlgorithm ||
-                   group == OidGroup.SignatureAlgorithm ||
-                   group == OidGroup.Attribute ||
-                   group == OidGroup.ExtensionOrAttribute ||
-                   group == OidGroup.KeyDerivationFunction;
+            return group == OidGroup.HashAlgorithm
+                || group == OidGroup.EncryptionAlgorithm
+                || group == OidGroup.PublicKeyAlgorithm
+                || group == OidGroup.SignatureAlgorithm
+                || group == OidGroup.Attribute
+                || group == OidGroup.ExtensionOrAttribute
+                || group == OidGroup.KeyDerivationFunction;
         }
 
         [LibraryImport(Interop.Libraries.Crypt32)]
-        private static unsafe partial CRYPT_OID_INFO* CryptFindOIDInfo(CryptOidInfoKeyType dwKeyType, IntPtr pvKey, OidGroup group);
+        private static unsafe partial CRYPT_OID_INFO* CryptFindOIDInfo(
+            CryptOidInfoKeyType dwKeyType,
+            IntPtr pvKey,
+            OidGroup group
+        );
     }
 }

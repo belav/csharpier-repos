@@ -13,18 +13,20 @@ namespace BadMax1
 
         public double Width
         {
-            [MethodImpl(MethodImplOptions.NoInlining)] get { return this._width; }
-            [MethodImpl(MethodImplOptions.NoInlining)] set { this._width = value; }
+            [MethodImpl(MethodImplOptions.NoInlining)]
+            get { return this._width; }
+            [MethodImpl(MethodImplOptions.NoInlining)]
+            set { this._width = value; }
         }
 
         public double Height
         {
-            [MethodImpl(MethodImplOptions.NoInlining)] get { return this._height; }
-            [MethodImpl(MethodImplOptions.NoInlining)] set { this._height = value; }
+            [MethodImpl(MethodImplOptions.NoInlining)]
+            get { return this._height; }
+            [MethodImpl(MethodImplOptions.NoInlining)]
+            set { this._height = value; }
         }
     }
-
-
 
     public class RowInfo
     {
@@ -44,7 +46,6 @@ namespace BadMax1
             return;
         }
     }
-
 
     public static class FpUtils
     {
@@ -66,7 +67,6 @@ namespace BadMax1
         }
     }
 
-
     internal static class App
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -77,14 +77,11 @@ namespace BadMax1
             RowInfo rowInfo;
             Size pageSize;
 
-
             rowInfo = new RowInfo();
             pageSize._width = 826.0;
             pageSize._height = 1066.0;
 
-
             rowInfo.AddPage(pageSize);
-
 
             expectedHeight = 1066.0;
             computedHeight = rowInfo._rowSize._height;
@@ -97,17 +94,13 @@ namespace BadMax1
             else
             {
                 Console.WriteLine(
-                    "Test failed.\r\n" +
-                    "    Expected: ({0})\r\n" +
-                    "    Computed: ({1})",
-
+                    "Test failed.\r\n" + "    Expected: ({0})\r\n" + "    Computed: ({1})",
                     expectedHeight,
                     computedHeight
                 );
             }
             return 101;
         }
-
 
         private static int Main()
         {

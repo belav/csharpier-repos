@@ -58,7 +58,6 @@ namespace System.Runtime.InteropServices.JavaScript
                 }
                 return base.StackTrace + "\r\n" + jsStackTrace;
             }
-
         }
 
         /// <inheritdoc />

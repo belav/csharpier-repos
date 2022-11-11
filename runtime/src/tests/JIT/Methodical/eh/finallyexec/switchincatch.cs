@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// switch in catch 
+// switch in catch
 
 using System;
 using Xunit;
@@ -50,7 +50,6 @@ namespace strswitch_switchincatch_cs
 
             for (int i = 0; i < s.Length; i++)
             {
-
                 beginloop:
                 try
                 {
@@ -76,7 +75,6 @@ namespace strswitch_switchincatch_cs
                             default:
                                 goto continueloop;
                         }
-
                     }
 
                     Console.WriteLine("Unreached");
@@ -88,13 +86,11 @@ namespace strswitch_switchincatch_cs
 
                 continueloop:
                 Console.WriteLine("Continuing");
-
             }
             finish:
             // stop recoding
             testLog.StopRecording();
             return testLog.VerifyOutput();
-
         }
     }
 }

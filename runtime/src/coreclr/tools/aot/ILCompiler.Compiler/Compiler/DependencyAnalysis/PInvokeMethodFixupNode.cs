@@ -28,10 +28,12 @@ namespace ILCompiler.DependencyAnalysis
             sb.Append("__pinvoke_");
             _pInvokeMethodData.AppendMangledName(nameMangler, sb);
         }
+
         public int Offset => 0;
         public override bool IsShareable => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectNodeSection Section => ObjectNodeSection.DataSection;
 
@@ -53,7 +55,10 @@ namespace ILCompiler.DependencyAnalysis
 
             // Entry point name
             string entryPointName = _pInvokeMethodData.EntryPointName;
-            if (factory.Target.IsWindows && entryPointName.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+            if (
+                factory.Target.IsWindows
+                && entryPointName.StartsWith("#", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 // Windows-specific ordinal import
                 // CLR-compatible behavior: Strings that can't be parsed as a signed integer are treated as zero.
@@ -82,7 +87,10 @@ namespace ILCompiler.DependencyAnalysis
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
-            return _pInvokeMethodData.CompareTo(((PInvokeMethodFixupNode)other)._pInvokeMethodData, comparer);
+            return _pInvokeMethodData.CompareTo(
+                ((PInvokeMethodFixupNode)other)._pInvokeMethodData,
+                comparer
+            );
         }
     }
 
@@ -95,26 +103,37 @@ namespace ILCompiler.DependencyAnalysis
         public PInvokeMethodData(PInvokeLazyFixupField pInvokeLazyFixupField)
         {
             PInvokeMetadata metadata = pInvokeLazyFixupField.PInvokeMetadata;
-            ModuleDesc declaringModule = ((MetadataType)pInvokeLazyFixupField.TargetMethod.OwningType).Module;
+            ModuleDesc declaringModule = (
+                (MetadataType)pInvokeLazyFixupField.TargetMethod.OwningType
+            ).Module;
 
             DllImportSearchPath? dllImportSearchPath = default;
             if (declaringModule.Assembly is EcmaAssembly asm)
             {
                 // We look for [assembly:DefaultDllImportSearchPaths(...)]
-                var attrHandle = asm.MetadataReader.GetCustomAttributeHandle(asm.AssemblyDefinition.GetCustomAttributes(),
-                    "System.Runtime.InteropServices", "DefaultDllImportSearchPathsAttribute");
+                var attrHandle = asm.MetadataReader.GetCustomAttributeHandle(
+                    asm.AssemblyDefinition.GetCustomAttributes(),
+                    "System.Runtime.InteropServices",
+                    "DefaultDllImportSearchPathsAttribute"
+                );
                 if (!attrHandle.IsNil)
                 {
                     var attr = asm.MetadataReader.GetCustomAttribute(attrHandle);
                     var decoded = attr.DecodeValue(new CustomAttributeTypeProvider(asm));
-                    if (decoded.FixedArguments.Length == 1 &&
-                        decoded.FixedArguments[0].Value is int searchPath)
+                    if (
+                        decoded.FixedArguments.Length == 1
+                        && decoded.FixedArguments[0].Value is int searchPath
+                    )
                     {
                         dllImportSearchPath = (DllImportSearchPath)searchPath;
                     }
                 }
             }
-            ModuleData = new PInvokeModuleData(metadata.Module, dllImportSearchPath, declaringModule);
+            ModuleData = new PInvokeModuleData(
+                metadata.Module,
+                dllImportSearchPath,
+                declaringModule
+            );
 
             EntryPointName = metadata.Name;
 
@@ -137,9 +156,9 @@ namespace ILCompiler.DependencyAnalysis
 
         public bool Equals(PInvokeMethodData other)
         {
-            return ModuleData.Equals(other.ModuleData) &&
-                EntryPointName == other.EntryPointName &&
-                CharSetMangling == other.CharSetMangling;
+            return ModuleData.Equals(other.ModuleData)
+                && EntryPointName == other.EntryPointName
+                && CharSetMangling == other.CharSetMangling;
         }
 
         public override bool Equals(object obj)
@@ -154,7 +173,10 @@ namespace ILCompiler.DependencyAnalysis
 
         public int CompareTo(PInvokeMethodData other, CompilerComparer comparer)
         {
-            var entryPointCompare = StringComparer.Ordinal.Compare(EntryPointName, other.EntryPointName);
+            var entryPointCompare = StringComparer.Ordinal.Compare(
+                EntryPointName,
+                other.EntryPointName
+            );
             if (entryPointCompare != 0)
                 return entryPointCompare;
 

@@ -28,6 +28,7 @@ namespace Internal.Reflection
             return _moduleType.GetHashCode();
         }
 
-        public override IEnumerable<CustomAttributeData> CustomAttributes => new List<CustomAttributeData>();
+        public override IEnumerable<CustomAttributeData> CustomAttributes =>
+            new List<CustomAttributeData>();
     }
 }

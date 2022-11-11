@@ -11,8 +11,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
 {
-    using VerifyCS = CSharpCodeFixVerifier<CSharpConvertTypeOfToNameOfDiagnosticAnalyzer,
-        CSharpConvertTypeOfToNameOfCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        CSharpConvertTypeOfToNameOfDiagnosticAnalyzer,
+        CSharpConvertTypeOfToNameOfCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.ConvertTypeOfToNameOf)]
     public partial class ConvertTypeOfToNameOfTests
@@ -20,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
         [Fact]
         public async Task BasicType()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -29,7 +32,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -44,7 +48,8 @@ class Test
         [Fact]
         public async Task ClassLibraryType()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -53,7 +58,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -68,7 +74,8 @@ class Test
         [Fact]
         public async Task ClassLibraryTypeWithUsing()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -79,7 +86,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -96,7 +104,8 @@ class Test
         [Fact]
         public async Task NestedCall()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -111,7 +120,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 class Test
@@ -132,7 +142,8 @@ class Test
         [Fact]
         public async Task NotOnVariableContainingType()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 class Test
 {
@@ -149,7 +160,8 @@ class Test
         [Fact]
         public async Task PrimitiveType()
         {
-            var text = @"class Test
+            var text =
+                @"class Test
 {
     void Method()
     {
@@ -157,7 +169,8 @@ class Test
     }
 }
 ";
-            var expected = @"class Test
+            var expected =
+                @"class Test
 {
     void Method()
     {
@@ -171,7 +184,8 @@ class Test
         [Fact]
         public async Task PrimitiveTypeWithUsing()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 
 class Test
 {
@@ -181,7 +195,8 @@ class Test
     }
 }
 ";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Test
 {
@@ -197,7 +212,8 @@ class Test
         [Fact]
         public async Task NotOnGenericType()
         {
-            var text = @"class Test<T>
+            var text =
+                @"class Test<T>
 {
     void Method()
     {
@@ -211,7 +227,8 @@ class Test
         [Fact]
         public async Task NotOnSimilarStatements()
         {
-            var text = @"class Test
+            var text =
+                @"class Test
 {
     void Method()
     {
@@ -227,7 +244,8 @@ class Test
         [Fact]
         public async Task NotInGenericType()
         {
-            var text = @"class Test
+            var text =
+                @"class Test
 {
     class Goo<T> 
     { 
@@ -244,7 +262,8 @@ class Test
         [Fact, WorkItem(47129, "https://github.com/dotnet/roslyn/issues/47129")]
         public async Task NestedInGenericType()
         {
-            var text = @"class Test
+            var text =
+                @"class Test
 {
     class Goo<T> 
     { 
@@ -258,7 +277,8 @@ class Test
     }
 }
 ";
-            var expected = @"class Test
+            var expected =
+                @"class Test
 {
     class Goo<T> 
     { 
@@ -278,7 +298,8 @@ class Test
         [Fact, WorkItem(47129, "https://github.com/dotnet/roslyn/issues/47129")]
         public async Task NestedInGenericType2()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 using System.Collections.Generic;
 
 class Test
@@ -289,7 +310,8 @@ class Test
     }
 }
 ";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 using System.Collections.Generic;
 
 class Test
@@ -306,7 +328,8 @@ class Test
         [Fact, WorkItem(54233, "https://github.com/dotnet/roslyn/issues/54233")]
         public async Task NotOnVoid()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     void M()

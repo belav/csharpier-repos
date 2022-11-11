@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.Tagging
     internal static class CompilationAvailableHelpers
     {
         // this method is super basic.  but it ensures that the remote impl and the local impl always agree.
-        public static Task ComputeCompilationInCurrentProcessAsync(Project project, CancellationToken cancellationToken)
-            => project.GetCompilationAsync(cancellationToken);
+        public static Task ComputeCompilationInCurrentProcessAsync(
+            Project project,
+            CancellationToken cancellationToken
+        ) => project.GetCompilationAsync(cancellationToken);
     }
 }

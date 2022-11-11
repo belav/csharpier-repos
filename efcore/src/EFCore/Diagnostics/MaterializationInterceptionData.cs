@@ -15,7 +15,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 public readonly struct MaterializationInterceptionData
 {
     private readonly MaterializationContext _materializationContext;
-    private readonly Dictionary<IPropertyBase, (object TypedAccessor, Func<MaterializationContext, object?> Accessor)> _valueAccessor;
+    private readonly Dictionary<
+        IPropertyBase,
+        (object TypedAccessor, Func<MaterializationContext, object?> Accessor)
+    > _valueAccessor;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,7 +31,11 @@ public readonly struct MaterializationInterceptionData
     public MaterializationInterceptionData(
         MaterializationContext materializationContext,
         IEntityType entityType,
-        Dictionary<IPropertyBase, (object TypedAccessor, Func<MaterializationContext, object?> Accessor)> valueAccessor)
+        Dictionary<
+            IPropertyBase,
+            (object TypedAccessor, Func<MaterializationContext, object?> Accessor)
+        > valueAccessor
+    )
     {
         _materializationContext = materializationContext;
         _valueAccessor = valueAccessor;
@@ -38,8 +45,7 @@ public readonly struct MaterializationInterceptionData
     /// <summary>
     ///     The current <see cref="DbContext" /> instance being used.
     /// </summary>
-    public DbContext Context
-        => _materializationContext.Context;
+    public DbContext Context => _materializationContext.Context;
 
     /// <summary>
     ///     The type of the entity being materialized.
@@ -55,8 +61,8 @@ public readonly struct MaterializationInterceptionData
     /// </remarks>
     /// <param name="propertyName">The property name.</param>
     /// <returns>The property value.</returns>
-    public T GetPropertyValue<T>(string propertyName)
-        => GetPropertyValue<T>(GetProperty(propertyName));
+    public T GetPropertyValue<T>(string propertyName) =>
+        GetPropertyValue<T>(GetProperty(propertyName));
 
     /// <summary>
     ///     Gets the property value for the property with the given name.
@@ -67,17 +73,21 @@ public readonly struct MaterializationInterceptionData
     /// </remarks>
     /// <param name="propertyName">The property name.</param>
     /// <returns>The property value.</returns>
-    public object? GetPropertyValue(string propertyName)
-        => GetPropertyValue(GetProperty(propertyName));
+    public object? GetPropertyValue(string propertyName) =>
+        GetPropertyValue(GetProperty(propertyName));
 
     private IPropertyBase GetProperty(string propertyName)
     {
-        var property = (IPropertyBase?)EntityType.FindProperty(propertyName)
+        var property =
+            (IPropertyBase?)EntityType.FindProperty(propertyName)
             ?? EntityType.FindServiceProperty(propertyName);
 
         if (property == null)
         {
-            throw new ArgumentException(CoreStrings.PropertyNotFound(propertyName, EntityType.DisplayName()), nameof(propertyName));
+            throw new ArgumentException(
+                CoreStrings.PropertyNotFound(propertyName, EntityType.DisplayName()),
+                nameof(propertyName)
+            );
         }
 
         return property;
@@ -92,8 +102,10 @@ public readonly struct MaterializationInterceptionData
     /// </remarks>
     /// <param name="property">The property.</param>
     /// <returns>The property value.</returns>
-    public T GetPropertyValue<T>(IPropertyBase property)
-        => ((Func<MaterializationContext, T>)_valueAccessor[property].TypedAccessor)(_materializationContext);
+    public T GetPropertyValue<T>(IPropertyBase property) =>
+        ((Func<MaterializationContext, T>)_valueAccessor[property].TypedAccessor)(
+            _materializationContext
+        );
 
     /// <summary>
     ///     Gets the property value for the given property.
@@ -104,6 +116,6 @@ public readonly struct MaterializationInterceptionData
     /// </remarks>
     /// <param name="property">The property.</param>
     /// <returns>The property value.</returns>
-    public object? GetPropertyValue(IPropertyBase property)
-        => _valueAccessor[property].Accessor(_materializationContext);
+    public object? GetPropertyValue(IPropertyBase property) =>
+        _valueAccessor[property].Accessor(_materializationContext);
 }

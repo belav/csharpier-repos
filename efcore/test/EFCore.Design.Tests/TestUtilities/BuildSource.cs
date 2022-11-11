@@ -13,17 +13,18 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class BuildSource
     {
-        public ICollection<BuildReference> References { get; } = new List<BuildReference>
-        {
-            BuildReference.ByName("netstandard"),
-            BuildReference.ByName("System.Collections"),
-            BuildReference.ByName("System.ComponentModel.Annotations"),
-            BuildReference.ByName("System.Data.Common"),
-            BuildReference.ByName("System.Linq.Expressions"),
-            BuildReference.ByName("System.Runtime"),
-            BuildReference.ByName("System.Runtime.Extensions"),
-            BuildReference.ByName("System.Text.RegularExpressions")
-        };
+        public ICollection<BuildReference> References { get; } =
+            new List<BuildReference>
+            {
+                BuildReference.ByName("netstandard"),
+                BuildReference.ByName("System.Collections"),
+                BuildReference.ByName("System.ComponentModel.Annotations"),
+                BuildReference.ByName("System.Data.Common"),
+                BuildReference.ByName("System.Linq.Expressions"),
+                BuildReference.ByName("System.Runtime"),
+                BuildReference.ByName("System.Runtime.Extensions"),
+                BuildReference.ByName("System.Text.RegularExpressions")
+            };
 
         public string TargetDir { get; set; }
         public Dictionary<string, string> Sources { get; set; } = new Dictionary<string, string>();
@@ -40,10 +41,16 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 {
                     if (string.IsNullOrEmpty(reference.Path))
                     {
-                        throw new InvalidOperationException("Could not find path for reference " + reference);
+                        throw new InvalidOperationException(
+                            "Could not find path for reference " + reference
+                        );
                     }
 
-                    File.Copy(reference.Path, Path.Combine(TargetDir, Path.GetFileName(reference.Path)), overwrite: true);
+                    File.Copy(
+                        reference.Path,
+                        Path.Combine(TargetDir, Path.GetFileName(reference.Path)),
+                        overwrite: true
+                    );
                 }
 
                 references.AddRange(reference.References);
@@ -53,7 +60,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 projectName,
                 Sources.Select(s => SyntaxFactory.ParseSyntaxTree(s.Value).WithFilePath(s.Key)),
                 references,
-                CreateOptions());
+                CreateOptions()
+            );
 
             var targetPath = Path.Combine(TargetDir ?? Path.GetTempPath(), projectName + ".dll");
 
@@ -64,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 {
                     throw new InvalidOperationException(
                         $@"Build failed:
-{string.Join(Environment.NewLine, result.Diagnostics)}");
+{string.Join(Environment.NewLine, result.Diagnostics)}"
+                    );
                 }
             }
 
@@ -85,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 projectName,
                 Sources.Select(s => SyntaxFactory.ParseSyntaxTree(s.Value).WithFilePath(s.Key)),
                 references,
-                CreateOptions());
+                CreateOptions()
+            );
 
             Assembly assembly;
             using (var stream = new MemoryStream())
@@ -95,7 +105,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 {
                     throw new InvalidOperationException(
                         $@"Build failed:
-{string.Join(Environment.NewLine, result.Diagnostics)}");
+{string.Join(Environment.NewLine, result.Diagnostics)}"
+                    );
                 }
 
                 assembly = Assembly.Load(stream.ToArray());
@@ -104,18 +115,22 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             return assembly;
         }
 
-        private CSharpCompilationOptions CreateOptions()
-            => new CSharpCompilationOptions(
-                    OutputKind.DynamicallyLinkedLibrary,
-                    nullableContextOptions: NullableReferenceTypes ? NullableContextOptions.Enable : NullableContextOptions.Disable,
-                    reportSuppressedDiagnostics: false,
-                    generalDiagnosticOption: ReportDiagnostic.Error,
-                    specificDiagnosticOptions: new Dictionary<string, ReportDiagnostic>()
-                    {
-                        { "CS1030", ReportDiagnostic.Suppress },
-                        { "CS1701", ReportDiagnostic.Suppress }, { "CS1702", ReportDiagnostic.Suppress }, // Always thrown for .NET Core
-                        { "CS1705", ReportDiagnostic.Suppress }, // Assembly 'AssemblyName1' uses 'TypeName' which has a higher version than referenced assembly 'AssemblyName2'
-                        { "CS8019", ReportDiagnostic.Suppress } // Unnecessary using directive.
-                    });
+        private CSharpCompilationOptions CreateOptions() =>
+            new CSharpCompilationOptions(
+                OutputKind.DynamicallyLinkedLibrary,
+                nullableContextOptions: NullableReferenceTypes
+                    ? NullableContextOptions.Enable
+                    : NullableContextOptions.Disable,
+                reportSuppressedDiagnostics: false,
+                generalDiagnosticOption: ReportDiagnostic.Error,
+                specificDiagnosticOptions: new Dictionary<string, ReportDiagnostic>()
+                {
+                    { "CS1030", ReportDiagnostic.Suppress },
+                    { "CS1701", ReportDiagnostic.Suppress },
+                    { "CS1702", ReportDiagnostic.Suppress }, // Always thrown for .NET Core
+                    { "CS1705", ReportDiagnostic.Suppress }, // Assembly 'AssemblyName1' uses 'TypeName' which has a higher version than referenced assembly 'AssemblyName2'
+                    { "CS8019", ReportDiagnostic.Suppress } // Unnecessary using directive.
+                }
+            );
     }
 }

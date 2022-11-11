@@ -25,24 +25,40 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Squiggles
         where TProvider : AbstractDiagnosticsAdornmentTaggerProvider<TTag>
         where TTag : class, ITag
     {
-        internal static Task<(ImmutableArray<DiagnosticData>, ImmutableArray<ITagSpan<TTag>>)> GetDiagnosticsAndErrorSpans(
+        internal static Task<(
+            ImmutableArray<DiagnosticData>,
+            ImmutableArray<ITagSpan<TTag>>
+        )> GetDiagnosticsAndErrorSpans(
             TestWorkspace workspace,
-            IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>> analyzerMap = null)
+            IReadOnlyDictionary<string, ImmutableArray<DiagnosticAnalyzer>> analyzerMap = null
+        )
         {
-            return SquiggleUtilities.GetDiagnosticsAndErrorSpansAsync<TProvider, TTag>(workspace, analyzerMap);
+            return SquiggleUtilities.GetDiagnosticsAndErrorSpansAsync<TProvider, TTag>(
+                workspace,
+                analyzerMap
+            );
         }
 
-        internal static async Task<IList<ITagSpan<TTag>>> GetErrorsFromUpdateSource(TestWorkspace workspace, DiagnosticsUpdatedArgs updateArgs)
+        internal static async Task<IList<ITagSpan<TTag>>> GetErrorsFromUpdateSource(
+            TestWorkspace workspace,
+            DiagnosticsUpdatedArgs updateArgs
+        )
         {
             var globalOptions = workspace.GetService<IGlobalOptionService>();
             var source = new TestDiagnosticUpdateSource(globalOptions);
 
-            using var wrapper = new DiagnosticTaggerWrapper<TProvider, TTag>(workspace, updateSource: source);
+            using var wrapper = new DiagnosticTaggerWrapper<TProvider, TTag>(
+                workspace,
+                updateSource: source
+            );
 
-            var tagger = wrapper.TaggerProvider.CreateTagger<TTag>(workspace.Documents.First().GetTextBuffer());
+            var tagger = wrapper.TaggerProvider.CreateTagger<TTag>(
+                workspace.Documents.First().GetTextBuffer()
+            );
             using var disposable = (IDisposable)tagger;
 
-            var analyzerServer = (MockDiagnosticAnalyzerService)workspace.GetService<IDiagnosticAnalyzerService>();
+            var analyzerServer = (MockDiagnosticAnalyzerService)
+                workspace.GetService<IDiagnosticAnalyzerService>();
             analyzerServer.Diagnostics = updateArgs.GetAllDiagnosticsRegardlessOfPushPullSetting();
 
             source.RaiseDiagnosticsUpdated(updateArgs);
@@ -55,7 +71,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Squiggles
             return spans;
         }
 
-        internal static DiagnosticData CreateDiagnosticData(TestHostDocument document, TextSpan span)
+        internal static DiagnosticData CreateDiagnosticData(
+            TestHostDocument document,
+            TextSpan span
+        )
         {
             var sourceText = document.GetTextBuffer().CurrentSnapshot.AsText();
             var linePosSpan = sourceText.Lines.GetLinePositionSpan(span);
@@ -70,31 +89,54 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Squiggles
                 projectId: document.Project.Id,
                 customTags: ImmutableArray<string>.Empty,
                 properties: ImmutableDictionary<string, string>.Empty,
-                location: new DiagnosticDataLocation(new FileLinePositionSpan(document.FilePath, linePosSpan), document.Id),
-                language: document.Project.Language);
+                location: new DiagnosticDataLocation(
+                    new FileLinePositionSpan(document.FilePath, linePosSpan),
+                    document.Id
+                ),
+                language: document.Project.Language
+            );
         }
 
         private class TestDiagnosticUpdateSource : IDiagnosticUpdateSource
         {
-            private ImmutableArray<DiagnosticData> _diagnostics = ImmutableArray<DiagnosticData>.Empty;
+            private ImmutableArray<DiagnosticData> _diagnostics =
+                ImmutableArray<DiagnosticData>.Empty;
             private readonly IGlobalOptionService _globalOptions;
 
-            public TestDiagnosticUpdateSource(IGlobalOptionService globalOptions)
-                => _globalOptions = globalOptions;
+            public TestDiagnosticUpdateSource(IGlobalOptionService globalOptions) =>
+                _globalOptions = globalOptions;
 
             public void RaiseDiagnosticsUpdated(DiagnosticsUpdatedArgs args)
             {
-                _diagnostics = args.GetPushDiagnostics(_globalOptions, InternalDiagnosticsOptions.NormalDiagnosticMode);
+                _diagnostics = args.GetPushDiagnostics(
+                    _globalOptions,
+                    InternalDiagnosticsOptions.NormalDiagnosticMode
+                );
                 DiagnosticsUpdated?.Invoke(this, args);
             }
 
             public event EventHandler<DiagnosticsUpdatedArgs> DiagnosticsUpdated;
-            public event EventHandler DiagnosticsCleared { add { } remove { } }
+            public event EventHandler DiagnosticsCleared
+            {
+                add { }
+                remove { }
+            }
 
             public bool SupportGetDiagnostics => false;
 
-            public ValueTask<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(Workspace workspace, ProjectId projectId, DocumentId documentId, object id, bool includeSuppressedDiagnostics = false, CancellationToken cancellationToken = default)
-                => new(includeSuppressedDiagnostics ? _diagnostics : _diagnostics.WhereAsArray(d => !d.IsSuppressed));
+            public ValueTask<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
+                Workspace workspace,
+                ProjectId projectId,
+                DocumentId documentId,
+                object id,
+                bool includeSuppressedDiagnostics = false,
+                CancellationToken cancellationToken = default
+            ) =>
+                new(
+                    includeSuppressedDiagnostics
+                        ? _diagnostics
+                        : _diagnostics.WhereAsArray(d => !d.IsSuppressed)
+                );
         }
     }
 }

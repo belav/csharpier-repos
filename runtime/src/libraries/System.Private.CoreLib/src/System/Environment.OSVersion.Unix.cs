@@ -5,12 +5,16 @@ namespace System
 {
     public static partial class Environment
     {
-        private static OperatingSystem GetOSVersion() => GetOperatingSystem(Interop.Sys.GetUnixRelease());
+        private static OperatingSystem GetOSVersion() =>
+            GetOperatingSystem(Interop.Sys.GetUnixRelease());
 
         // Tests exercise this method for corner cases via private reflection
         private static OperatingSystem GetOperatingSystem(string release)
         {
-            int major = 0, minor = 0, build = 0, revision = 0;
+            int major = 0,
+                minor = 0,
+                build = 0,
+                revision = 0;
 
             // Parse the uname's utsname.release for the first four numbers found.
             // This isn't perfect, but Version already doesn't map exactly to all possible release

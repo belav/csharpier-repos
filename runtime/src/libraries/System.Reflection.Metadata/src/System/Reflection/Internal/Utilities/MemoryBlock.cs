@@ -125,7 +125,6 @@ namespace System.Reflection.Internal
         internal uint PeekUInt32(int offset)
         {
             CheckBounds(offset, sizeof(uint));
-
             unchecked
             {
                 byte* ptr = Pointer + offset;
@@ -186,7 +185,6 @@ namespace System.Reflection.Internal
         internal ushort PeekUInt16(int offset)
         {
             CheckBounds(offset, sizeof(ushort));
-
             unchecked
             {
                 byte* ptr = Pointer + offset;
@@ -260,7 +258,15 @@ namespace System.Reflection.Internal
                         (int)(ptr[0] | (ptr[1] << 8) | (ptr[2] << 16) | (ptr[3] << 24)),
                         (short)(ptr[4] | (ptr[5] << 8)),
                         (short)(ptr[6] | (ptr[7] << 8)),
-                        ptr[8], ptr[9], ptr[10], ptr[11], ptr[12], ptr[13], ptr[14], ptr[15]);
+                        ptr[8],
+                        ptr[9],
+                        ptr[10],
+                        ptr[11],
+                        ptr[12],
+                        ptr[13],
+                        ptr[14],
+                        ptr[15]
+                    );
                 }
             }
         }
@@ -297,7 +303,13 @@ namespace System.Reflection.Internal
         /// <param name="terminator">A character in the ASCII range that marks the end of the string.
         /// If a value other than '\0' is passed we still stop at the null terminator if encountered first.</param>
         /// <returns>The decoded string.</returns>
-        internal string PeekUtf8NullTerminated(int offset, byte[]? prefix, MetadataStringDecoder utf8Decoder, out int numberOfBytesRead, char terminator = '\0')
+        internal string PeekUtf8NullTerminated(
+            int offset,
+            byte[]? prefix,
+            MetadataStringDecoder utf8Decoder,
+            out int numberOfBytesRead,
+            char terminator = '\0'
+        )
         {
             Debug.Assert(terminator <= 0x7F);
             CheckBounds(offset, 0);
@@ -314,16 +326,21 @@ namespace System.Reflection.Internal
         /// If a value other than '\0' is passed we still stop at the null terminator if encountered first.</param>
         /// <param name="numberOfBytesRead">The number of bytes read, which includes the terminator if we did not hit the end of the block.</param>
         /// <returns>Length (byte count) not including terminator.</returns>
-        internal int GetUtf8NullTerminatedLength(int offset, out int numberOfBytesRead, char terminator)
+        internal int GetUtf8NullTerminatedLength(
+            int offset,
+            out int numberOfBytesRead,
+            char terminator
+        )
         {
             CheckBounds(offset, 0);
 
             Debug.Assert(terminator <= 0x7f);
 
             ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(Pointer + offset, Length - offset);
-            int length = terminator != '\0' ?
-                span.IndexOfAny((byte)0, (byte)terminator) :
-                span.IndexOf((byte)0);
+            int length =
+                terminator != '\0'
+                    ? span.IndexOfAny((byte)0, (byte)terminator)
+                    : span.IndexOf((byte)0);
             if (length >= 0)
             {
                 numberOfBytesRead = length + 1; // we also read the terminator
@@ -342,31 +359,67 @@ namespace System.Reflection.Internal
 
             Debug.Assert(asciiChar != 0 && asciiChar <= 0x7f);
 
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(Pointer + startOffset, Length - startOffset);
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                Pointer + startOffset,
+                Length - startOffset
+            );
             int i = span.IndexOfAny((byte)asciiChar, (byte)0);
-            return i >= 0 && span[i] == asciiChar ?
-                startOffset + i :
-                -1;
+            return i >= 0 && span[i] == asciiChar ? startOffset + i : -1;
         }
 
         // comparison stops at null terminator, terminator parameter, or end-of-block -- whichever comes first.
-        internal bool Utf8NullTerminatedEquals(int offset, string text, MetadataStringDecoder utf8Decoder, char terminator, bool ignoreCase)
+        internal bool Utf8NullTerminatedEquals(
+            int offset,
+            string text,
+            MetadataStringDecoder utf8Decoder,
+            char terminator,
+            bool ignoreCase
+        )
         {
-            FastComparisonResult result = Utf8NullTerminatedFastCompare(offset, text, 0, out _, terminator, ignoreCase);
+            FastComparisonResult result = Utf8NullTerminatedFastCompare(
+                offset,
+                text,
+                0,
+                out _,
+                terminator,
+                ignoreCase
+            );
 
             if (result == FastComparisonResult.Inconclusive)
             {
-                string decoded = PeekUtf8NullTerminated(offset, null, utf8Decoder, out _, terminator);
-                return decoded.Equals(text, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+                string decoded = PeekUtf8NullTerminated(
+                    offset,
+                    null,
+                    utf8Decoder,
+                    out _,
+                    terminator
+                );
+                return decoded.Equals(
+                    text,
+                    ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
+                );
             }
 
             return result == FastComparisonResult.Equal;
         }
 
         // comparison stops at null terminator, terminator parameter, or end-of-block -- whichever comes first.
-        internal bool Utf8NullTerminatedStartsWith(int offset, string text, MetadataStringDecoder utf8Decoder, char terminator, bool ignoreCase)
+        internal bool Utf8NullTerminatedStartsWith(
+            int offset,
+            string text,
+            MetadataStringDecoder utf8Decoder,
+            char terminator,
+            bool ignoreCase
+        )
         {
-            FastComparisonResult result = Utf8NullTerminatedFastCompare(offset, text, 0, out _, terminator, ignoreCase);
+            FastComparisonResult result = Utf8NullTerminatedFastCompare(
+                offset,
+                text,
+                0,
+                out _,
+                terminator,
+                ignoreCase
+            );
 
             switch (result)
             {
@@ -380,8 +433,17 @@ namespace System.Reflection.Internal
 
                 default:
                     Debug.Assert(result == FastComparisonResult.Inconclusive);
-                    string decoded = PeekUtf8NullTerminated(offset, null, utf8Decoder, out _, terminator);
-                    return decoded.StartsWith(text, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+                    string decoded = PeekUtf8NullTerminated(
+                        offset,
+                        null,
+                        utf8Decoder,
+                        out _,
+                        terminator
+                    );
+                    return decoded.StartsWith(
+                        text,
+                        ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
+                    );
             }
         }
 
@@ -395,7 +457,14 @@ namespace System.Reflection.Internal
         }
 
         // comparison stops at null terminator, terminator parameter, or end-of-block -- whichever comes first.
-        internal FastComparisonResult Utf8NullTerminatedFastCompare(int offset, string text, int textStart, out int firstDifferenceIndex, char terminator, bool ignoreCase)
+        internal FastComparisonResult Utf8NullTerminatedFastCompare(
+            int offset,
+            string text,
+            int textStart,
+            out int firstDifferenceIndex,
+            char terminator,
+            bool ignoreCase
+        )
         {
             CheckBounds(offset, 0);
 
@@ -418,7 +487,10 @@ namespace System.Reflection.Internal
                 }
 
                 char currentChar = text[currentIndex];
-                if ((currentByte & 0x80) == 0 && StringUtils.IsEqualAscii(currentChar, currentByte, ignoreCaseMask))
+                if (
+                    (currentByte & 0x80) == 0
+                    && StringUtils.IsEqualAscii(currentChar, currentByte, ignoreCaseMask)
+                )
                 {
                     currentIndex++;
                     currentPointer++;
@@ -428,21 +500,28 @@ namespace System.Reflection.Internal
                     firstDifferenceIndex = currentIndex;
 
                     // uncommon non-ascii case --> fall back to slow allocating comparison.
-                    return (currentChar > 0x7F) ? FastComparisonResult.Inconclusive : FastComparisonResult.Unequal;
+                    return (currentChar > 0x7F)
+                        ? FastComparisonResult.Inconclusive
+                        : FastComparisonResult.Unequal;
                 }
             }
 
             firstDifferenceIndex = currentIndex;
 
             bool textTerminated = currentIndex == text.Length;
-            bool bytesTerminated = currentPointer == endPointer || *currentPointer == 0 || *currentPointer == terminator;
+            bool bytesTerminated =
+                currentPointer == endPointer
+                || *currentPointer == 0
+                || *currentPointer == terminator;
 
             if (textTerminated && bytesTerminated)
             {
                 return FastComparisonResult.Equal;
             }
 
-            return textTerminated ? FastComparisonResult.BytesStartWithText : FastComparisonResult.TextStartsWithBytes;
+            return textTerminated
+                ? FastComparisonResult.BytesStartWithText
+                : FastComparisonResult.TextStartsWithBytes;
         }
 
         // comparison stops at null terminator, terminator parameter, or end-of-block -- whichever comes first.
@@ -524,9 +603,7 @@ namespace System.Reflection.Internal
         internal int IndexOfUnchecked(byte b, int start)
         {
             int i = new ReadOnlySpan<byte>(Pointer + start, Length - start).IndexOf(b);
-            return i >= 0 ?
-                i + start :
-                -1;
+            return i >= 0 ? i + start : -1;
         }
 
         // same as Array.BinarySearch, but without using IComparer
@@ -569,12 +646,19 @@ namespace System.Reflection.Internal
             int rowSize,
             int referenceListOffset,
             uint referenceValue,
-            bool isReferenceSmall)
+            bool isReferenceSmall
+        )
         {
             int startRowNumber = 0;
             int endRowNumber = rowCount - 1;
-            uint startValue = PeekReferenceUnchecked(startRowNumber * rowSize + referenceListOffset, isReferenceSmall);
-            uint endValue = PeekReferenceUnchecked(endRowNumber * rowSize + referenceListOffset, isReferenceSmall);
+            uint startValue = PeekReferenceUnchecked(
+                startRowNumber * rowSize + referenceListOffset,
+                isReferenceSmall
+            );
+            uint endValue = PeekReferenceUnchecked(
+                endRowNumber * rowSize + referenceListOffset,
+                isReferenceSmall
+            );
             if (endRowNumber == 1)
             {
                 if (referenceValue >= endValue)
@@ -598,7 +682,10 @@ namespace System.Reflection.Internal
                 }
 
                 int midRowNumber = (startRowNumber + endRowNumber) / 2;
-                uint midReferenceValue = PeekReferenceUnchecked(midRowNumber * rowSize + referenceListOffset, isReferenceSmall);
+                uint midReferenceValue = PeekReferenceUnchecked(
+                    midRowNumber * rowSize + referenceListOffset,
+                    isReferenceSmall
+                );
                 if (referenceValue > midReferenceValue)
                 {
                     startRowNumber = midRowNumber;
@@ -627,14 +714,18 @@ namespace System.Reflection.Internal
             int rowSize,
             int referenceOffset,
             uint referenceValue,
-            bool isReferenceSmall)
+            bool isReferenceSmall
+        )
         {
             int startRowNumber = 0;
             int endRowNumber = rowCount - 1;
             while (startRowNumber <= endRowNumber)
             {
                 int midRowNumber = (startRowNumber + endRowNumber) / 2;
-                uint midReferenceValue = PeekReferenceUnchecked(midRowNumber * rowSize + referenceOffset, isReferenceSmall);
+                uint midReferenceValue = PeekReferenceUnchecked(
+                    midRowNumber * rowSize + referenceOffset,
+                    isReferenceSmall
+                );
                 if (referenceValue > midReferenceValue)
                 {
                     startRowNumber = midRowNumber + 1;
@@ -658,14 +749,18 @@ namespace System.Reflection.Internal
             int rowSize,
             int referenceOffset,
             uint referenceValue,
-            bool isReferenceSmall)
+            bool isReferenceSmall
+        )
         {
             int startRowNumber = 0;
             int endRowNumber = ptrTable.Length - 1;
             while (startRowNumber <= endRowNumber)
             {
                 int midRowNumber = (startRowNumber + endRowNumber) / 2;
-                uint midReferenceValue = PeekReferenceUnchecked((ptrTable[midRowNumber] - 1) * rowSize + referenceOffset, isReferenceSmall);
+                uint midReferenceValue = PeekReferenceUnchecked(
+                    (ptrTable[midRowNumber] - 1) * rowSize + referenceOffset,
+                    isReferenceSmall
+                );
                 if (referenceValue > midReferenceValue)
                 {
                     startRowNumber = midRowNumber + 1;
@@ -693,7 +788,8 @@ namespace System.Reflection.Internal
             uint referenceValue,
             bool isReferenceSmall,
             out int startRowNumber, // [0, rowCount) or -1
-            out int endRowNumber)   // [0, rowCount) or -1
+            out int endRowNumber
+        ) // [0, rowCount) or -1
         {
             int foundRowNumber = BinarySearchReference(
                 rowCount,
@@ -711,15 +807,25 @@ namespace System.Reflection.Internal
             }
 
             startRowNumber = foundRowNumber;
-            while (startRowNumber > 0 &&
-                   PeekReferenceUnchecked((startRowNumber - 1) * rowSize + referenceOffset, isReferenceSmall) == referenceValue)
+            while (
+                startRowNumber > 0
+                && PeekReferenceUnchecked(
+                    (startRowNumber - 1) * rowSize + referenceOffset,
+                    isReferenceSmall
+                ) == referenceValue
+            )
             {
                 startRowNumber--;
             }
 
             endRowNumber = foundRowNumber;
-            while (endRowNumber + 1 < rowCount &&
-                   PeekReferenceUnchecked((endRowNumber + 1) * rowSize + referenceOffset, isReferenceSmall) == referenceValue)
+            while (
+                endRowNumber + 1 < rowCount
+                && PeekReferenceUnchecked(
+                    (endRowNumber + 1) * rowSize + referenceOffset,
+                    isReferenceSmall
+                ) == referenceValue
+            )
             {
                 endRowNumber++;
             }
@@ -735,7 +841,8 @@ namespace System.Reflection.Internal
             uint referenceValue,
             bool isReferenceSmall,
             out int startRowNumber, // [0, ptrTable.Length) or -1
-            out int endRowNumber)   // [0, ptrTable.Length) or -1
+            out int endRowNumber
+        ) // [0, ptrTable.Length) or -1
         {
             int foundRowNumber = BinarySearchReference(
                 ptrTable,
@@ -753,15 +860,25 @@ namespace System.Reflection.Internal
             }
 
             startRowNumber = foundRowNumber;
-            while (startRowNumber > 0 &&
-                   PeekReferenceUnchecked((ptrTable[startRowNumber - 1] - 1) * rowSize + referenceOffset, isReferenceSmall) == referenceValue)
+            while (
+                startRowNumber > 0
+                && PeekReferenceUnchecked(
+                    (ptrTable[startRowNumber - 1] - 1) * rowSize + referenceOffset,
+                    isReferenceSmall
+                ) == referenceValue
+            )
             {
                 startRowNumber--;
             }
 
             endRowNumber = foundRowNumber;
-            while (endRowNumber + 1 < ptrTable.Length &&
-                   PeekReferenceUnchecked((ptrTable[endRowNumber + 1] - 1) * rowSize + referenceOffset, isReferenceSmall) == referenceValue)
+            while (
+                endRowNumber + 1 < ptrTable.Length
+                && PeekReferenceUnchecked(
+                    (ptrTable[endRowNumber + 1] - 1) * rowSize + referenceOffset,
+                    isReferenceSmall
+                ) == referenceValue
+            )
             {
                 endRowNumber++;
             }
@@ -772,7 +889,8 @@ namespace System.Reflection.Internal
             int rowSize,
             int referenceOffset,
             uint referenceValue,
-            bool isReferenceSmall)
+            bool isReferenceSmall
+        )
         {
             int currOffset = referenceOffset;
             int totalSize = this.Length;
@@ -793,7 +911,8 @@ namespace System.Reflection.Internal
         internal bool IsOrderedByReferenceAscending(
             int rowSize,
             int referenceOffset,
-            bool isReferenceSmall)
+            bool isReferenceSmall
+        )
         {
             int offset = referenceOffset;
             int totalSize = this.Length;
@@ -818,7 +937,8 @@ namespace System.Reflection.Internal
             int numberOfRows,
             int rowSize,
             int referenceOffset,
-            bool isReferenceSmall)
+            bool isReferenceSmall
+        )
         {
             int[] ptrTable = new int[numberOfRows];
             uint[] unsortedReferences = new uint[numberOfRows];
@@ -829,7 +949,13 @@ namespace System.Reflection.Internal
             }
 
             ReadColumn(unsortedReferences, rowSize, referenceOffset, isReferenceSmall);
-            Array.Sort(ptrTable, (int a, int b) => { return unsortedReferences[a - 1].CompareTo(unsortedReferences[b - 1]); });
+            Array.Sort(
+                ptrTable,
+                (int a, int b) =>
+                {
+                    return unsortedReferences[a - 1].CompareTo(unsortedReferences[b - 1]);
+                }
+            );
             return ptrTable;
         }
 
@@ -837,7 +963,8 @@ namespace System.Reflection.Internal
             uint[] result,
             int rowSize,
             int referenceOffset,
-            bool isReferenceSmall)
+            bool isReferenceSmall
+        )
         {
             int offset = referenceOffset;
             int totalSize = this.Length;

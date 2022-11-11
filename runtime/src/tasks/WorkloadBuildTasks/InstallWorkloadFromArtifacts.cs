@@ -20,27 +20,28 @@ namespace Microsoft.Workload.Build.Tasks
     public class InstallWorkloadFromArtifacts : Task
     {
         [Required, NotNull]
-        public ITaskItem[]    WorkloadIds        { get; set; } = Array.Empty<ITaskItem>();
+        public ITaskItem[] WorkloadIds { get; set; } = Array.Empty<ITaskItem>();
 
         [Required, NotNull]
-        public ITaskItem[]    InstallTargets     { get; set; } = Array.Empty<ITaskItem>();
+        public ITaskItem[] InstallTargets { get; set; } = Array.Empty<ITaskItem>();
 
         [Required, NotNull]
-        public string?        VersionBand        { get; set; }
+        public string? VersionBand { get; set; }
 
         [Required, NotNull]
-        public string?        LocalNuGetsPath    { get; set; }
+        public string? LocalNuGetsPath { get; set; }
 
         [Required, NotNull]
-        public string?        TemplateNuGetConfigPath { get; set; }
+        public string? TemplateNuGetConfigPath { get; set; }
 
         [Required, NotNull]
-        public string         SdkWithNoWorkloadInstalledPath { get; set; } = string.Empty;
+        public string SdkWithNoWorkloadInstalledPath { get; set; } = string.Empty;
 
-        public bool           OnlyUpdateManifests{ get; set; }
+        public bool OnlyUpdateManifests { get; set; }
 
         private const string s_nugetInsertionTag = "<!-- TEST_RESTORE_SOURCES_INSERTION_LINE -->";
-        private string AllManifestsStampPath => Path.Combine(SdkWithNoWorkloadInstalledPath, ".all-manifests.stamp");
+        private string AllManifestsStampPath =>
+            Path.Combine(SdkWithNoWorkloadInstalledPath, ".all-manifests.stamp");
         private static readonly string[] s_manifestIds = new[]
         {
             "microsoft.net.workload.mono.toolchain",
@@ -55,11 +56,15 @@ namespace Microsoft.Workload.Build.Tasks
             try
             {
                 if (!Directory.Exists(SdkWithNoWorkloadInstalledPath))
-                    throw new LogAsErrorException($"Cannot find {nameof(SdkWithNoWorkloadInstalledPath)}={SdkWithNoWorkloadInstalledPath}");
+                    throw new LogAsErrorException(
+                        $"Cannot find {nameof(SdkWithNoWorkloadInstalledPath)}={SdkWithNoWorkloadInstalledPath}"
+                    );
 
                 if (!Directory.Exists(LocalNuGetsPath))
-                    throw new LogAsErrorException($"Cannot find {nameof(LocalNuGetsPath)}={LocalNuGetsPath} . " +
-                                                    "Set it to the Shipping packages directory in artifacts.");
+                    throw new LogAsErrorException(
+                        $"Cannot find {nameof(LocalNuGetsPath)}={LocalNuGetsPath} . "
+                            + "Set it to the Shipping packages directory in artifacts."
+                    );
 
                 if (!InstallAllManifests())
                     return false;
@@ -70,28 +75,48 @@ namespace Microsoft.Workload.Build.Tasks
                 InstallWorkloadRequest[] selectedRequests = InstallTargets
                     .SelectMany(workloadToInstall =>
                     {
-                        if (!HasMetadata(workloadToInstall, nameof(workloadToInstall), "Variants", Log))
-                            throw new LogAsErrorException($"Missing Variants metadata on item '{workloadToInstall.ItemSpec}'");
+                        if (
+                            !HasMetadata(
+                                workloadToInstall,
+                                nameof(workloadToInstall),
+                                "Variants",
+                                Log
+                            )
+                        )
+                            throw new LogAsErrorException(
+                                $"Missing Variants metadata on item '{workloadToInstall.ItemSpec}'"
+                            );
 
                         return workloadToInstall
-                                .GetMetadata("Variants")
-                                .Split(";", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-                                .Select(v => (variant: v, target: workloadToInstall));
+                            .GetMetadata("Variants")
+                            .Split(
+                                ";",
+                                StringSplitOptions.RemoveEmptyEntries
+                                    | StringSplitOptions.TrimEntries
+                            )
+                            .Select(v => (variant: v, target: workloadToInstall));
                     })
                     .SelectMany(w =>
                     {
-                        IEnumerable<InstallWorkloadRequest> workloads = WorkloadIds.Where(wi => wi.GetMetadata("Variant") == w.variant)
-                                                                                    .Select(wi => new InstallWorkloadRequest(wi, w.target));
+                        IEnumerable<InstallWorkloadRequest> workloads = WorkloadIds
+                            .Where(wi => wi.GetMetadata("Variant") == w.variant)
+                            .Select(wi => new InstallWorkloadRequest(wi, w.target));
                         return workloads.Any()
-                                ? workloads
-                                : throw new LogAsErrorException($"Could not find any workload variant named '{w.variant}'");
-                    }).ToArray();
+                            ? workloads
+                            : throw new LogAsErrorException(
+                                $"Could not find any workload variant named '{w.variant}'"
+                            );
+                    })
+                    .ToArray();
 
                 foreach (InstallWorkloadRequest req in selectedRequests)
                 {
                     if (Directory.Exists(req.TargetPath))
                     {
-                        Log.LogMessage(MessageImportance.Low, $"Deleting directory {req.TargetPath}");
+                        Log.LogMessage(
+                            MessageImportance.Low,
+                            $"Deleting directory {req.TargetPath}"
+                        );
                         Directory.Delete(req.TargetPath, recursive: true);
                     }
                 }
@@ -101,10 +126,16 @@ namespace Microsoft.Workload.Build.Tasks
                 foreach (InstallWorkloadRequest req in selectedRequests)
                 {
                     if (req.TargetPath != lastTargetPath)
-                        Log.LogMessage(MessageImportance.High, $"{Environment.NewLine}** Preparing {req.TargetPath} **");
+                        Log.LogMessage(
+                            MessageImportance.High,
+                            $"{Environment.NewLine}** Preparing {req.TargetPath} **"
+                        );
                     lastTargetPath = req.TargetPath;
 
-                    Log.LogMessage(MessageImportance.High, $"    - {req.WorkloadId}: Installing workload");
+                    Log.LogMessage(
+                        MessageImportance.High,
+                        $"    - {req.WorkloadId}: Installing workload"
+                    );
                     if (!req.Validate(Log))
                         return false;
 
@@ -131,7 +162,10 @@ namespace Microsoft.Workload.Build.Tasks
                 return false;
             }
 
-            Log.LogMessage(MessageImportance.Low, $"Duplicating {SdkWithNoWorkloadInstalledPath} into {req.TargetPath}");
+            Log.LogMessage(
+                MessageImportance.Low,
+                $"Duplicating {SdkWithNoWorkloadInstalledPath} into {req.TargetPath}"
+            );
             Utils.DirectoryCopy(SdkWithNoWorkloadInstalledPath, req.TargetPath);
 
             string nugetConfigContents = GetNuGetConfig();
@@ -148,9 +182,11 @@ namespace Microsoft.Workload.Build.Tasks
             var allManifestPkgs = Directory.EnumerateFiles(LocalNuGetsPath, "*Manifest*nupkg");
             if (!AnyInputsNewerThanOutput(AllManifestsStampPath, allManifestPkgs))
             {
-                Log.LogMessage(MessageImportance.Low,
-                                    $"Skipping installing manifests because the {AllManifestsStampPath} " +
-                                    $"is newer than packages {string.Join(',', allManifestPkgs)}.");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Skipping installing manifests because the {AllManifestsStampPath} "
+                        + $"is newer than packages {string.Join(',', allManifestPkgs)}."
+                );
                 return true;
             }
 
@@ -164,17 +200,27 @@ namespace Microsoft.Workload.Build.Tasks
 
                 if (manifestsInstalled.Contains(req.ManifestName))
                 {
-                    Log.LogMessage(MessageImportance.High, $"** {req.WorkloadId}: Manifests are already installed **");
+                    Log.LogMessage(
+                        MessageImportance.High,
+                        $"** {req.WorkloadId}: Manifests are already installed **"
+                    );
                     continue;
                 }
 
-                Log.LogMessage(MessageImportance.High, $"{Environment.NewLine}** {req.WorkloadId}: Installing manifests **");
-                if (!InstallWorkloadManifest(workload,
-                                             req.ManifestName,
-                                             req.Version,
-                                             SdkWithNoWorkloadInstalledPath,
-                                             nugetConfigContents,
-                                             stopOnMissing: true))
+                Log.LogMessage(
+                    MessageImportance.High,
+                    $"{Environment.NewLine}** {req.WorkloadId}: Installing manifests **"
+                );
+                if (
+                    !InstallWorkloadManifest(
+                        workload,
+                        req.ManifestName,
+                        req.Version,
+                        SdkWithNoWorkloadInstalledPath,
+                        nugetConfigContents,
+                        stopOnMissing: true
+                    )
+                )
                 {
                     return false;
                 }
@@ -190,11 +236,21 @@ namespace Microsoft.Workload.Build.Tasks
             {
                 // HACK - because sdk doesn't yet have the version-less manifest names in the known
                 // workloads list
-                string? txtPath = Directory.EnumerateFiles(Path.Combine(SdkWithNoWorkloadInstalledPath, "sdk"), "IncludedWorkloadManifests.txt",
-                                                new EnumerationOptions { RecurseSubdirectories = true, MaxRecursionDepth = 2})
-                                    .FirstOrDefault();
+                string? txtPath = Directory
+                    .EnumerateFiles(
+                        Path.Combine(SdkWithNoWorkloadInstalledPath, "sdk"),
+                        "IncludedWorkloadManifests.txt",
+                        new EnumerationOptions
+                        {
+                            RecurseSubdirectories = true,
+                            MaxRecursionDepth = 2
+                        }
+                    )
+                    .FirstOrDefault();
                 if (txtPath is null)
-                    throw new LogAsErrorException($"Could not find IncludedWorkloadManifests.txt in {SdkWithNoWorkloadInstalledPath}");
+                    throw new LogAsErrorException(
+                        $"Could not find IncludedWorkloadManifests.txt in {SdkWithNoWorkloadInstalledPath}"
+                    );
 
                 string stampPath = Path.Combine(Path.GetDirectoryName(txtPath)!, ".stamp");
                 if (File.Exists(stampPath))
@@ -231,31 +287,55 @@ namespace Microsoft.Workload.Build.Tasks
 
             // Log.LogMessage(MessageImportance.High, $"{Environment.NewLine}** dotnet workload install {req.WorkloadId} **{Environment.NewLine}");
             (int exitCode, string output) = Utils.TryRunProcess(
-                                                    Log,
-                                                    Path.Combine(req.TargetPath, "dotnet"),
-                                                    $"workload install --skip-manifest-update --no-cache --configfile \"{nugetConfigPath}\" {req.WorkloadId}",
-                                                    workingDir: Path.GetTempPath(),
-                                                    logStdErrAsMessage: req.IgnoreErrors,
-                                                    debugMessageImportance: MessageImportance.Normal);
+                Log,
+                Path.Combine(req.TargetPath, "dotnet"),
+                $"workload install --skip-manifest-update --no-cache --configfile \"{nugetConfigPath}\" {req.WorkloadId}",
+                workingDir: Path.GetTempPath(),
+                logStdErrAsMessage: req.IgnoreErrors,
+                debugMessageImportance: MessageImportance.Normal
+            );
             if (exitCode != 0)
             {
                 if (req.IgnoreErrors)
                 {
                     Log.LogMessage(MessageImportance.High, output);
-                    Log.LogMessage(MessageImportance.High,
-                                    $"{Environment.NewLine} ** Ignoring workload installation failure exit code {exitCode}. **{Environment.NewLine}");
+                    Log.LogMessage(
+                        MessageImportance.High,
+                        $"{Environment.NewLine} ** Ignoring workload installation failure exit code {exitCode}. **{Environment.NewLine}"
+                    );
                 }
                 else
                 {
                     Log.LogError($"workload install failed with exit code {exitCode}: {output}");
                 }
 
-                Log.LogMessage(MessageImportance.Low, $"List of the relevant paths in {req.TargetPath}");
-                foreach (string dir in Directory.EnumerateDirectories(Path.Combine(req.TargetPath, "sdk-manifests"), "*", SearchOption.AllDirectories))
-                    Log.LogMessage(MessageImportance.Low, $"\t{Path.Combine(req.TargetPath, "sdk-manifests", dir)}");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"List of the relevant paths in {req.TargetPath}"
+                );
+                foreach (
+                    string dir in Directory.EnumerateDirectories(
+                        Path.Combine(req.TargetPath, "sdk-manifests"),
+                        "*",
+                        SearchOption.AllDirectories
+                    )
+                )
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        $"\t{Path.Combine(req.TargetPath, "sdk-manifests", dir)}"
+                    );
 
-                foreach (string dir in Directory.EnumerateDirectories(Path.Combine(req.TargetPath, "packs"), "*", SearchOption.AllDirectories))
-                    Log.LogMessage(MessageImportance.Low, $"\t{Path.Combine(req.TargetPath, "packs", dir)}");
+                foreach (
+                    string dir in Directory.EnumerateDirectories(
+                        Path.Combine(req.TargetPath, "packs"),
+                        "*",
+                        SearchOption.AllDirectories
+                    )
+                )
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        $"\t{Path.Combine(req.TargetPath, "packs", dir)}"
+                    );
             }
 
             return !Log.HasLoggedErrors;
@@ -265,16 +345,23 @@ namespace Microsoft.Workload.Build.Tasks
         {
             Log.LogMessage(MessageImportance.Normal, $"    - Updating Targeting pack");
 
-            string pkgPath = Path.Combine(LocalNuGetsPath, $"Microsoft.NETCore.App.Ref.{version}.nupkg");
+            string pkgPath = Path.Combine(
+                LocalNuGetsPath,
+                $"Microsoft.NETCore.App.Ref.{version}.nupkg"
+            );
             if (!File.Exists(pkgPath))
-                throw new LogAsErrorException($"Could not find {pkgPath} needed to update the targeting pack to the newly built one." +
-                                                " Make sure to build the subset `packs`, like `./build.sh -os browser -s mono+libs+packs`.");
+                throw new LogAsErrorException(
+                    $"Could not find {pkgPath} needed to update the targeting pack to the newly built one."
+                        + " Make sure to build the subset `packs`, like `./build.sh -os browser -s mono+libs+packs`."
+                );
 
             string packDir = Path.Combine(sdkPath, "packs", "Microsoft.NETCore.App.Ref");
             string[] dirs = Directory.EnumerateDirectories(packDir).ToArray();
             if (dirs.Length != 1)
-                throw new LogAsErrorException($"Expected to find exactly one versioned directory under {packDir}, but got " +
-                                                string.Join(',', dirs));
+                throw new LogAsErrorException(
+                    $"Expected to find exactly one versioned directory under {packDir}, but got "
+                        + string.Join(',', dirs)
+                );
 
             string dstDir = dirs[0];
 
@@ -289,13 +376,28 @@ namespace Microsoft.Workload.Build.Tasks
         private string GetNuGetConfig()
         {
             string contents = File.ReadAllText(TemplateNuGetConfigPath);
-            if (contents.IndexOf(s_nugetInsertionTag, StringComparison.InvariantCultureIgnoreCase) < 0)
-                throw new LogAsErrorException($"Could not find {s_nugetInsertionTag} in {TemplateNuGetConfigPath}");
+            if (
+                contents.IndexOf(s_nugetInsertionTag, StringComparison.InvariantCultureIgnoreCase)
+                < 0
+            )
+                throw new LogAsErrorException(
+                    $"Could not find {s_nugetInsertionTag} in {TemplateNuGetConfigPath}"
+                );
 
-            return contents.Replace(s_nugetInsertionTag, $@"<add key=""nuget-local"" value=""{LocalNuGetsPath}"" />");
+            return contents.Replace(
+                s_nugetInsertionTag,
+                $@"<add key=""nuget-local"" value=""{LocalNuGetsPath}"" />"
+            );
         }
 
-        private bool InstallWorkloadManifest(ITaskItem workloadId, string name, string version, string sdkDir, string nugetConfigContents, bool stopOnMissing)
+        private bool InstallWorkloadManifest(
+            ITaskItem workloadId,
+            string name,
+            string version,
+            string sdkDir,
+            string nugetConfigContents,
+            bool stopOnMissing
+        )
         {
             Log.LogMessage(MessageImportance.High, $"    - Installing manifest: {name}/{version}");
 
@@ -306,18 +408,26 @@ namespace Microsoft.Workload.Build.Tasks
             string manifestVersionBandDir = Path.Combine(sdkDir, "sdk-manifests", VersionBand);
             if (!Directory.Exists(manifestVersionBandDir))
             {
-                Log.LogMessage(MessageImportance.Low, $"    Could not find {manifestVersionBandDir}. Creating it..");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"    Could not find {manifestVersionBandDir}. Creating it.."
+                );
                 Directory.CreateDirectory(manifestVersionBandDir);
             }
 
             string outputDir = FindSubDirIgnoringCase(manifestVersionBandDir, name);
 
-            PackageReference pkgRef = new(Name: $"{name}.Manifest-{VersionBand}",
-                                          Version: version,
-                                          OutputDir: outputDir,
-                                          relativeSourceDir: "data");
+            PackageReference pkgRef =
+                new(
+                    Name: $"{name}.Manifest-{VersionBand}",
+                    Version: version,
+                    OutputDir: outputDir,
+                    relativeSourceDir: "data"
+                );
 
-            if (!PackageInstaller.Install(new[] { pkgRef }, nugetConfigContents, Log, stopOnMissing))
+            if (
+                !PackageInstaller.Install(new[] { pkgRef }, nugetConfigContents, Log, stopOnMissing)
+            )
                 return false;
 
             string manifestDir = pkgRef.OutputDir;
@@ -332,12 +442,13 @@ namespace Microsoft.Workload.Build.Tasks
             try
             {
                 manifest = JsonSerializer.Deserialize<ManifestInformation>(
-                                                    File.ReadAllBytes(jsonPath),
-                                                    new JsonSerializerOptions(JsonSerializerDefaults.Web)
-                                                    {
-                                                        AllowTrailingCommas = true,
-                                                        ReadCommentHandling = JsonCommentHandling.Skip
-                                                    });
+                    File.ReadAllBytes(jsonPath),
+                    new JsonSerializerOptions(JsonSerializerDefaults.Web)
+                    {
+                        AllowTrailingCommas = true,
+                        ReadCommentHandling = JsonCommentHandling.Skip
+                    }
+                );
 
                 if (manifest == null)
                 {
@@ -355,9 +466,20 @@ namespace Microsoft.Workload.Build.Tasks
             {
                 foreach ((string depName, string depVersion) in manifest.DependsOn)
                 {
-                    if (!InstallWorkloadManifest(workloadId, depName, depVersion, sdkDir, nugetConfigContents, stopOnMissing: false))
+                    if (
+                        !InstallWorkloadManifest(
+                            workloadId,
+                            depName,
+                            depVersion,
+                            sdkDir,
+                            nugetConfigContents,
+                            stopOnMissing: false
+                        )
+                    )
                     {
-                        Log.LogWarning($"Could not install manifest {depName}/{depVersion}. This can be ignored if the workload {workloadId.ItemSpec} doesn't depend on it.");
+                        Log.LogWarning(
+                            $"Could not install manifest {depName}/{depVersion}. This can be ignored if the workload {workloadId.ItemSpec} doesn't depend on it."
+                        );
                         continue;
                     }
                 }
@@ -366,7 +488,12 @@ namespace Microsoft.Workload.Build.Tasks
             return true;
         }
 
-        private static bool HasMetadata(ITaskItem item, string itemName, string metadataName, TaskLoggingHelper log)
+        private static bool HasMetadata(
+            ITaskItem item,
+            string itemName,
+            string metadataName,
+            TaskLoggingHelper log
+        )
         {
             if (!string.IsNullOrEmpty(item.GetMetadata(metadataName)))
                 return true;
@@ -377,30 +504,33 @@ namespace Microsoft.Workload.Build.Tasks
 
         private string FindSubDirIgnoringCase(string parentDir, string dirName)
         {
-            string[] matchingDirs = Directory.EnumerateDirectories(parentDir,
-                                                            dirName,
-                                                            new EnumerationOptions { MatchCasing = MatchCasing.CaseInsensitive })
-                                                .ToArray();
+            string[] matchingDirs = Directory
+                .EnumerateDirectories(
+                    parentDir,
+                    dirName,
+                    new EnumerationOptions { MatchCasing = MatchCasing.CaseInsensitive }
+                )
+                .ToArray();
 
             string? first = matchingDirs.FirstOrDefault();
             if (matchingDirs.Length > 1)
             {
-                Log.LogWarning($"Found multiple directories with names that differ only in case. {string.Join(", ", matchingDirs)}"
-                                + $"{Environment.NewLine}Using the first one: {first}");
+                Log.LogWarning(
+                    $"Found multiple directories with names that differ only in case. {string.Join(", ", matchingDirs)}"
+                        + $"{Environment.NewLine}Using the first one: {first}"
+                );
             }
 
             return first ?? Path.Combine(parentDir, dirName.ToLower(CultureInfo.InvariantCulture));
         }
 
-        private static bool AnyInputsNewerThanOutput(string output, IEnumerable<string> inputs)
-            => inputs.Any(i => Utils.IsNewerThan(i, output));
+        private static bool AnyInputsNewerThanOutput(string output, IEnumerable<string> inputs) =>
+            inputs.Any(i => Utils.IsNewerThan(i, output));
 
         private sealed record ManifestInformation(
             object Version,
             string Description,
-
-            [property: JsonPropertyName("depends-on")]
-            IDictionary<string, string> DependsOn,
+            [property: JsonPropertyName("depends-on")] IDictionary<string, string> DependsOn,
             IDictionary<string, WorkloadInformation> Workloads,
             IDictionary<string, PackVersionInformation> Packs,
             object Data
@@ -410,7 +540,6 @@ namespace Microsoft.Workload.Build.Tasks
             bool Abstract,
             string Kind,
             string Description,
-
             List<string> Packs,
             List<string> Extends,
             List<string> Platforms
@@ -419,26 +548,26 @@ namespace Microsoft.Workload.Build.Tasks
         private sealed record PackVersionInformation(
             string Kind,
             string Version,
-            [property: JsonPropertyName("alias-to")]
-            Dictionary<string, string> AliasTo
+            [property: JsonPropertyName("alias-to")] Dictionary<string, string> AliasTo
         );
 
-        internal sealed record InstallWorkloadRequest(
-            ITaskItem Workload,
-            ITaskItem Target)
+        internal sealed record InstallWorkloadRequest(ITaskItem Workload, ITaskItem Target)
         {
             public string ManifestName => Workload.GetMetadata("ManifestName");
             public string Version => Workload.GetMetadata("Version");
             public string TargetPath => Target.GetMetadata("InstallPath");
             public string StampPath => Target.GetMetadata("StampPath");
-            public bool IgnoreErrors => Workload.GetMetadata("IgnoreErrors").ToLowerInvariant() == "true";
+            public bool IgnoreErrors =>
+                Workload.GetMetadata("IgnoreErrors").ToLowerInvariant() == "true";
             public string WorkloadId => Workload.ItemSpec;
 
             public bool Validate(TaskLoggingHelper log)
             {
-                if (!HasMetadata(Workload, nameof(Workload), "Version", log) ||
-                    !HasMetadata(Workload, nameof(Workload), "ManifestName", log) ||
-                    !HasMetadata(Target, nameof(Target), "InstallPath", log))
+                if (
+                    !HasMetadata(Workload, nameof(Workload), "Version", log)
+                    || !HasMetadata(Workload, nameof(Workload), "ManifestName", log)
+                    || !HasMetadata(Target, nameof(Target), "InstallPath", log)
+                )
                 {
                     return false;
                 }
@@ -454,8 +583,10 @@ namespace Microsoft.Workload.Build.Tasks
         }
     }
 
-    internal sealed record PackageReference(string Name,
-                                     string Version,
-                                     string OutputDir,
-                                     string relativeSourceDir = "");
+    internal sealed record PackageReference(
+        string Name,
+        string Version,
+        string OutputDir,
+        string relativeSourceDir = ""
+    );
 }

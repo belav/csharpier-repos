@@ -19,26 +19,40 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
     {
         private class Rewriter : AbstractReductionRewriter
         {
-            public Rewriter(ObjectPool<IReductionRewriter> pool)
-                : base(pool)
+            public Rewriter(ObjectPool<IReductionRewriter> pool) : base(pool)
             {
                 _simplifyDefaultExpression = SimplifyDefaultExpression;
             }
 
-            private readonly Func<DefaultExpressionSyntax, SemanticModel, CSharpSimplifierOptions, CancellationToken, SyntaxNode> _simplifyDefaultExpression;
+            private readonly Func<
+                DefaultExpressionSyntax,
+                SemanticModel,
+                CSharpSimplifierOptions,
+                CancellationToken,
+                SyntaxNode
+            > _simplifyDefaultExpression;
 
             private SyntaxNode SimplifyDefaultExpression(
                 DefaultExpressionSyntax node,
                 SemanticModel semanticModel,
                 CSharpSimplifierOptions options,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var preferSimpleDefaultExpression = options.PreferSimpleDefaultExpression.Value;
 
-                if (node.CanReplaceWithDefaultLiteral(ParseOptions, preferSimpleDefaultExpression, semanticModel, cancellationToken))
+                if (
+                    node.CanReplaceWithDefaultLiteral(
+                        ParseOptions,
+                        preferSimpleDefaultExpression,
+                        semanticModel,
+                        cancellationToken
+                    )
+                )
                 {
-                    return SyntaxFactory.LiteralExpression(SyntaxKind.DefaultLiteralExpression)
-                                        .WithTriviaFrom(node);
+                    return SyntaxFactory
+                        .LiteralExpression(SyntaxKind.DefaultLiteralExpression)
+                        .WithTriviaFrom(node);
                 }
 
                 return node;
@@ -50,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     node,
                     newNode: base.VisitDefaultExpression(node),
                     parentNode: node.Parent,
-                    simplifier: _simplifyDefaultExpression);
+                    simplifier: _simplifyDefaultExpression
+                );
             }
         }
     }

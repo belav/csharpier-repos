@@ -14,9 +14,9 @@ namespace Microsoft.CodeAnalysis.Options
 {
     /// <summary>
     /// Provides services for reading and writing options.  This will provide support for
-    /// customizations workspaces need to perform around options.  Note that 
-    /// <see cref="IGlobalOptionService"/> options will normally still be offered through 
-    /// implementations of this.  However, implementations may customize things differently 
+    /// customizations workspaces need to perform around options.  Note that
+    /// <see cref="IGlobalOptionService"/> options will normally still be offered through
+    /// implementations of this.  However, implementations may customize things differently
     /// depending on their needs.
     /// </summary>
     internal interface IOptionService : IWorkspaceService
@@ -68,12 +68,19 @@ namespace Microsoft.CodeAnalysis.Options
         IEnumerable<IOption> GetRegisteredOptions();
 
         /// <inheritdoc cref="IGlobalOptionService.TryMapEditorConfigKeyToOption"/>
-        bool TryMapEditorConfigKeyToOption(string key, string? language, [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation, out OptionKey optionKey);
+        bool TryMapEditorConfigKeyToOption(
+            string key,
+            string? language,
+            [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation,
+            out OptionKey optionKey
+        );
 
         /// <summary>
         /// Returns the set of all registered serializable options applicable for the given <paramref name="languages"/>.
         /// </summary>
-        ImmutableHashSet<IOption> GetRegisteredSerializableOptions(ImmutableHashSet<string> languages);
+        ImmutableHashSet<IOption> GetRegisteredSerializableOptions(
+            ImmutableHashSet<string> languages
+        );
 
         event EventHandler<OptionChangedEventArgs> OptionChanged;
 

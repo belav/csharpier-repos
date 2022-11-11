@@ -35,7 +35,8 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     public Index(
         IReadOnlyList<Property> properties,
         EntityType declaringEntityType,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         Properties = properties;
         DeclaringEntityType = declaringEntityType;
@@ -54,8 +55,8 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
         IReadOnlyList<Property> properties,
         string name,
         EntityType declaringEntityType,
-        ConfigurationSource configurationSource)
-        : this(properties, declaringEntityType, configurationSource)
+        ConfigurationSource configurationSource
+    ) : this(properties, declaringEntityType, configurationSource)
     {
         Name = name;
     }
@@ -66,7 +67,11 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyList<Property> Properties { [DebuggerStepThrough] get; }
+    public virtual IReadOnlyList<Property> Properties
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -74,7 +79,11 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string? Name { [DebuggerStepThrough] get; }
+    public virtual string? Name
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -82,7 +91,11 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual EntityType DeclaringEntityType { [DebuggerStepThrough] get; }
+    public virtual EntityType DeclaringEntityType
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -102,9 +115,7 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsInModel
-        => _builder is not null
-            && DeclaringEntityType.IsInModel;
+    public virtual bool IsInModel => _builder is not null && DeclaringEntityType.IsInModel;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -112,8 +123,7 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetRemovedFromModel()
-        => _builder = null;
+    public virtual void SetRemovedFromModel() => _builder = null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -121,8 +131,7 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => DeclaringEntityType.Model.IsReadOnly;
+    public override bool IsReadOnly => DeclaringEntityType.Model.IsReadOnly;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -130,8 +139,7 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource GetConfigurationSource()
-        => _configurationSource;
+    public virtual ConfigurationSource GetConfigurationSource() => _configurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -139,8 +147,8 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource)
-        => _configurationSource = configurationSource.Max(_configurationSource);
+    public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource) =>
+        _configurationSource = configurationSource.Max(_configurationSource);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -182,8 +190,7 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
             : oldIsUnique;
     }
 
-    private static readonly bool DefaultIsUnique
-        = false;
+    private static readonly bool DefaultIsUnique = false;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -191,11 +198,11 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetIsUniqueConfigurationSource()
-        => _isUniqueConfigurationSource;
+    public virtual ConfigurationSource? GetIsUniqueConfigurationSource() =>
+        _isUniqueConfigurationSource;
 
-    private void UpdateIsUniqueConfigurationSource(ConfigurationSource configurationSource)
-        => _isUniqueConfigurationSource = configurationSource.Max(_isUniqueConfigurationSource);
+    private void UpdateIsUniqueConfigurationSource(ConfigurationSource configurationSource) =>
+        _isUniqueConfigurationSource = configurationSource.Max(_isUniqueConfigurationSource);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -215,7 +222,10 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyList<bool>? SetIsDescending(IReadOnlyList<bool>? descending, ConfigurationSource configurationSource)
+    public virtual IReadOnlyList<bool>? SetIsDescending(
+        IReadOnlyList<bool>? descending,
+        ConfigurationSource configurationSource
+    )
     {
         EnsureMutable();
 
@@ -236,13 +246,24 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
             else if (descending.Count > 0)
             {
                 throw new ArgumentException(
-                    CoreStrings.InvalidNumberOfIndexSortOrderValues(DisplayName(), descending.Count, Properties.Count), nameof(descending));
+                    CoreStrings.InvalidNumberOfIndexSortOrderValues(
+                        DisplayName(),
+                        descending.Count,
+                        Properties.Count
+                    ),
+                    nameof(descending)
+                );
             }
         }
 
         var oldIsDescending = IsDescending;
-        var isChanging = descending is null != _isDescending is null
-            || (descending is not null && _isDescending is not null && !descending.SequenceEqual(_isDescending));
+        var isChanging =
+            descending is null != _isDescending is null
+            || (
+                descending is not null
+                && _isDescending is not null
+                && !descending.SequenceEqual(_isDescending)
+            );
         _isDescending = descending;
 
         if (descending == null)
@@ -259,8 +280,7 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
             : oldIsDescending;
     }
 
-    private static readonly bool[]? DefaultIsDescending
-        = null;
+    private static readonly bool[]? DefaultIsDescending = null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -268,11 +288,13 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetIsDescendingConfigurationSource()
-        => _isDescendingConfigurationSource;
+    public virtual ConfigurationSource? GetIsDescendingConfigurationSource() =>
+        _isDescendingConfigurationSource;
 
-    private void UpdateIsDescendingConfigurationSource(ConfigurationSource configurationSource)
-        => _isDescendingConfigurationSource = configurationSource.Max(_isDescendingConfigurationSource);
+    private void UpdateIsDescendingConfigurationSource(ConfigurationSource configurationSource) =>
+        _isDescendingConfigurationSource = configurationSource.Max(
+            _isDescendingConfigurationSource
+        );
 
     /// <summary>
     ///     Runs the conventions when an annotation was set or removed.
@@ -284,8 +306,14 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     protected override IConventionAnnotation? OnAnnotationSet(
         string name,
         IConventionAnnotation? annotation,
-        IConventionAnnotation? oldAnnotation)
-        => Builder.ModelBuilder.Metadata.ConventionDispatcher.OnIndexAnnotationChanged(Builder, name, annotation, oldAnnotation);
+        IConventionAnnotation? oldAnnotation
+    ) =>
+        Builder.ModelBuilder.Metadata.ConventionDispatcher.OnIndexAnnotationChanged(
+            Builder,
+            name,
+            annotation,
+            oldAnnotation
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -293,13 +321,17 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IDependentKeyValueFactory<TKey> GetNullableValueFactory<TKey>()
-        => (IDependentKeyValueFactory<TKey>)NonCapturingLazyInitializer.EnsureInitialized(
-            ref _nullableValueFactory, this, static index =>
-            {
-                index.EnsureReadOnly();
-                return new CompositeValueFactory(index.Properties);
-            });
+    public virtual IDependentKeyValueFactory<TKey> GetNullableValueFactory<TKey>() =>
+        (IDependentKeyValueFactory<TKey>)
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _nullableValueFactory,
+                this,
+                static index =>
+                {
+                    index.EnsureReadOnly();
+                    return new CompositeValueFactory(index.Properties);
+                }
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -307,8 +339,8 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IIndex)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IIndex)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -316,10 +348,11 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IIndex)this).ToDebugString(),
-            () => ((IIndex)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IIndex)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -328,8 +361,7 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual string DisplayName()
-        => Name is null ? Properties.Format() : $"'{Name}'";
+    public virtual string DisplayName() => Name is null ? Properties.Format() : $"'{Name}'";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -458,8 +490,11 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    bool? IConventionIndex.SetIsUnique(bool? unique, bool fromDataAnnotation)
-        => SetIsUnique(unique, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool? IConventionIndex.SetIsUnique(bool? unique, bool fromDataAnnotation) =>
+        SetIsUnique(
+            unique,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -468,6 +503,12 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IReadOnlyList<bool>? IConventionIndex.SetIsDescending(IReadOnlyList<bool>? descending, bool fromDataAnnotation)
-        => SetIsDescending(descending, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    IReadOnlyList<bool>? IConventionIndex.SetIsDescending(
+        IReadOnlyList<bool>? descending,
+        bool fromDataAnnotation
+    ) =>
+        SetIsDescending(
+            descending,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 }

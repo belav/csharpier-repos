@@ -77,8 +77,7 @@ namespace System.Text.Json.Serialization.Metadata
 
             return converters;
 
-            void Add(JsonConverter converter) =>
-                converters.Add(converter.TypeToConvert, converter);
+            void Add(JsonConverter converter) => converters.Add(converter.TypeToConvert, converter);
         }
 
         private static JsonConverter GetBuiltInConverter(Type typeToConvert)
@@ -108,7 +107,10 @@ namespace System.Text.Json.Serialization.Metadata
             }
         }
 
-        internal static bool TryGetDefaultSimpleConverter(Type typeToConvert, [NotNullWhen(true)] out JsonConverter? converter)
+        internal static bool TryGetDefaultSimpleConverter(
+            Type typeToConvert,
+            [NotNullWhen(true)] out JsonConverter? converter
+        )
         {
             if (s_defaultSimpleConverters is null)
             {
@@ -121,18 +123,29 @@ namespace System.Text.Json.Serialization.Metadata
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        internal static JsonConverter? GetCustomConverterForMember(Type typeToConvert, MemberInfo memberInfo, JsonSerializerOptions options)
+        internal static JsonConverter? GetCustomConverterForMember(
+            Type typeToConvert,
+            MemberInfo memberInfo,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(memberInfo is FieldInfo or PropertyInfo);
             Debug.Assert(typeToConvert != null);
 
-            JsonConverterAttribute? converterAttribute = memberInfo.GetUniqueCustomAttribute<JsonConverterAttribute>(inherit: false);
-            return converterAttribute is null ? null : GetConverterFromAttribute(converterAttribute, typeToConvert, memberInfo, options);
+            JsonConverterAttribute? converterAttribute =
+                memberInfo.GetUniqueCustomAttribute<JsonConverterAttribute>(inherit: false);
+            return converterAttribute is null
+                ? null
+                : GetConverterFromAttribute(converterAttribute, typeToConvert, memberInfo, options);
         }
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        internal static JsonConverter GetConverterForType(Type typeToConvert, JsonSerializerOptions options, bool resolveJsonConverterAttribute = true)
+        internal static JsonConverter GetConverterForType(
+            Type typeToConvert,
+            JsonSerializerOptions options,
+            bool resolveJsonConverterAttribute = true
+        )
         {
             RootDefaultInstance(); // Ensure default converters are rooted.
 
@@ -142,10 +155,16 @@ namespace System.Text.Json.Serialization.Metadata
             // Priority 2: Attempt to get converter from [JsonConverter] on the type being converted.
             if (resolveJsonConverterAttribute && converter == null)
             {
-                JsonConverterAttribute? converterAttribute = typeToConvert.GetUniqueCustomAttribute<JsonConverterAttribute>(inherit: false);
+                JsonConverterAttribute? converterAttribute =
+                    typeToConvert.GetUniqueCustomAttribute<JsonConverterAttribute>(inherit: false);
                 if (converterAttribute != null)
                 {
-                    converter = GetConverterFromAttribute(converterAttribute, typeToConvert: typeToConvert, memberInfo: null, options);
+                    converter = GetConverterFromAttribute(
+                        converterAttribute,
+                        typeToConvert: typeToConvert,
+                        memberInfo: null,
+                        options
+                    );
                 }
             }
 
@@ -156,16 +175,27 @@ namespace System.Text.Json.Serialization.Metadata
             converter = options.ExpandConverterFactory(converter, typeToConvert);
             if (!converter.TypeToConvert.IsInSubtypeRelationshipWith(typeToConvert))
             {
-                ThrowHelper.ThrowInvalidOperationException_SerializationConverterNotCompatible(converter.GetType(), converter.TypeToConvert);
+                ThrowHelper.ThrowInvalidOperationException_SerializationConverterNotCompatible(
+                    converter.GetType(),
+                    converter.TypeToConvert
+                );
             }
 
-            JsonSerializerOptions.CheckConverterNullabilityIsSameAsPropertyType(converter, typeToConvert);
+            JsonSerializerOptions.CheckConverterNullabilityIsSameAsPropertyType(
+                converter,
+                typeToConvert
+            );
             return converter;
         }
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        private static JsonConverter GetConverterFromAttribute(JsonConverterAttribute converterAttribute, Type typeToConvert, MemberInfo? memberInfo, JsonSerializerOptions options)
+        private static JsonConverter GetConverterFromAttribute(
+            JsonConverterAttribute converterAttribute,
+            Type typeToConvert,
+            MemberInfo? memberInfo,
+            JsonSerializerOptions options
+        )
         {
             JsonConverter? converter;
 
@@ -177,15 +207,26 @@ namespace System.Text.Json.Serialization.Metadata
                 converter = converterAttribute.CreateConverter(typeToConvert);
                 if (converter == null)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_SerializationConverterOnAttributeNotCompatible(declaringType, memberInfo, typeToConvert);
+                    ThrowHelper.ThrowInvalidOperationException_SerializationConverterOnAttributeNotCompatible(
+                        declaringType,
+                        memberInfo,
+                        typeToConvert
+                    );
                 }
             }
             else
             {
                 ConstructorInfo? ctor = converterType.GetConstructor(Type.EmptyTypes);
-                if (!typeof(JsonConverter).IsAssignableFrom(converterType) || ctor == null || !ctor.IsPublic)
+                if (
+                    !typeof(JsonConverter).IsAssignableFrom(converterType)
+                    || ctor == null
+                    || !ctor.IsPublic
+                )
                 {
-                    ThrowHelper.ThrowInvalidOperationException_SerializationConverterOnAttributeInvalid(declaringType, memberInfo);
+                    ThrowHelper.ThrowInvalidOperationException_SerializationConverterOnAttributeInvalid(
+                        declaringType,
+                        memberInfo
+                    );
                 }
 
                 converter = (JsonConverter)Activator.CreateInstance(converterType)!;
@@ -206,7 +247,11 @@ namespace System.Text.Json.Serialization.Metadata
                     return NullableConverterFactory.CreateValueConverter(underlyingType, converter);
                 }
 
-                ThrowHelper.ThrowInvalidOperationException_SerializationConverterOnAttributeNotCompatible(declaringType, memberInfo, typeToConvert);
+                ThrowHelper.ThrowInvalidOperationException_SerializationConverterOnAttributeNotCompatible(
+                    declaringType,
+                    memberInfo,
+                    typeToConvert
+                );
             }
 
             return converter;

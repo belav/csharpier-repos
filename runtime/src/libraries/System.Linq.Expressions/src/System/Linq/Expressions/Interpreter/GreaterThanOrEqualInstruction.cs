@@ -9,8 +9,28 @@ namespace System.Linq.Expressions.Interpreter
     internal abstract class GreaterThanOrEqualInstruction : Instruction
     {
         private readonly object? _nullValue;
-        private static Instruction? s_SByte, s_Int16, s_Char, s_Int32, s_Int64, s_Byte, s_UInt16, s_UInt32, s_UInt64, s_Single, s_Double;
-        private static Instruction? s_liftedToNullSByte, s_liftedToNullInt16, s_liftedToNullChar, s_liftedToNullInt32, s_liftedToNullInt64, s_liftedToNullByte, s_liftedToNullUInt16, s_liftedToNullUInt32, s_liftedToNullUInt64, s_liftedToNullSingle, s_liftedToNullDouble;
+        private static Instruction? s_SByte,
+            s_Int16,
+            s_Char,
+            s_Int32,
+            s_Int64,
+            s_Byte,
+            s_UInt16,
+            s_UInt32,
+            s_UInt64,
+            s_Single,
+            s_Double;
+        private static Instruction? s_liftedToNullSByte,
+            s_liftedToNullInt16,
+            s_liftedToNullChar,
+            s_liftedToNullInt32,
+            s_liftedToNullInt64,
+            s_liftedToNullByte,
+            s_liftedToNullUInt16,
+            s_liftedToNullUInt32,
+            s_liftedToNullUInt64,
+            s_liftedToNullSingle,
+            s_liftedToNullDouble;
 
         public override int ConsumedStack => 2;
         public override int ProducedStack => 1;
@@ -23,10 +43,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class GreaterThanOrEqualSByte : GreaterThanOrEqualInstruction
         {
-            public GreaterThanOrEqualSByte(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public GreaterThanOrEqualSByte(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -46,10 +63,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class GreaterThanOrEqualInt16 : GreaterThanOrEqualInstruction
         {
-            public GreaterThanOrEqualInt16(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public GreaterThanOrEqualInt16(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -69,10 +83,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class GreaterThanOrEqualChar : GreaterThanOrEqualInstruction
         {
-            public GreaterThanOrEqualChar(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public GreaterThanOrEqualChar(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -92,10 +103,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class GreaterThanOrEqualInt32 : GreaterThanOrEqualInstruction
         {
-            public GreaterThanOrEqualInt32(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public GreaterThanOrEqualInt32(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -115,10 +123,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class GreaterThanOrEqualInt64 : GreaterThanOrEqualInstruction
         {
-            public GreaterThanOrEqualInt64(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public GreaterThanOrEqualInt64(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -138,10 +143,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class GreaterThanOrEqualByte : GreaterThanOrEqualInstruction
         {
-            public GreaterThanOrEqualByte(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public GreaterThanOrEqualByte(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -161,10 +163,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class GreaterThanOrEqualUInt16 : GreaterThanOrEqualInstruction
         {
-            public GreaterThanOrEqualUInt16(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public GreaterThanOrEqualUInt16(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -184,10 +183,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class GreaterThanOrEqualUInt32 : GreaterThanOrEqualInstruction
         {
-            public GreaterThanOrEqualUInt32(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public GreaterThanOrEqualUInt32(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -207,10 +203,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class GreaterThanOrEqualUInt64 : GreaterThanOrEqualInstruction
         {
-            public GreaterThanOrEqualUInt64(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public GreaterThanOrEqualUInt64(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -230,10 +223,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class GreaterThanOrEqualSingle : GreaterThanOrEqualInstruction
         {
-            public GreaterThanOrEqualSingle(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public GreaterThanOrEqualSingle(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -253,10 +243,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class GreaterThanOrEqualDouble : GreaterThanOrEqualInstruction
         {
-            public GreaterThanOrEqualDouble(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public GreaterThanOrEqualDouble(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {

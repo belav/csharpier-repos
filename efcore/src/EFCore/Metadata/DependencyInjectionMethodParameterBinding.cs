@@ -25,8 +25,8 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
         Type parameterType,
         Type serviceType,
         MethodInfo method,
-        params IPropertyBase[]? serviceProperties)
-        : base(parameterType, serviceType, serviceProperties)
+        params IPropertyBase[]? serviceProperties
+    ) : base(parameterType, serviceType, serviceProperties)
     {
         Check.NotNull(method, nameof(method));
 
@@ -47,13 +47,16 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
     /// <returns>The expression tree.</returns>
     public override Expression BindToParameter(
         Expression materializationExpression,
-        Expression entityTypeExpression)
+        Expression entityTypeExpression
+    )
     {
         Check.NotNull(materializationExpression, nameof(materializationExpression));
         Check.NotNull(entityTypeExpression, nameof(entityTypeExpression));
 
-        var parameters = Method.GetParameters().Select(
-            (p, i) => Expression.Parameter(p.ParameterType, "param" + i)).ToArray();
+        var parameters = Method
+            .GetParameters()
+            .Select((p, i) => Expression.Parameter(p.ParameterType, "param" + i))
+            .ToArray();
 
         var serviceVariable = Expression.Variable(ServiceType, "service");
         var delegateVariable = Expression.Variable(ParameterType, "delegate");
@@ -64,20 +67,22 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
             {
                 Expression.Assign(
                     serviceVariable,
-                    base.BindToParameter(materializationExpression, entityTypeExpression)),
+                    base.BindToParameter(materializationExpression, entityTypeExpression)
+                ),
                 Expression.Assign(
                     delegateVariable,
                     Expression.Condition(
                         Expression.ReferenceEqual(serviceVariable, Expression.Constant(null)),
                         Expression.Constant(null, ParameterType),
                         Expression.Lambda(
-                            Expression.Call(
-                                serviceVariable,
-                                Method,
-                                parameters),
-                            parameters))),
+                            Expression.Call(serviceVariable, Method, parameters),
+                            parameters
+                        )
+                    )
+                ),
                 delegateVariable
-            });
+            }
+        );
     }
 
     /// <summary>
@@ -85,6 +90,11 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
     /// </summary>
     /// <param name="consumedProperties">The new consumed properties.</param>
     /// <returns>A copy with replaced consumed properties.</returns>
-    public override ParameterBinding With(IPropertyBase[] consumedProperties)
-        => new DependencyInjectionMethodParameterBinding(ParameterType, ServiceType, Method, consumedProperties);
+    public override ParameterBinding With(IPropertyBase[] consumedProperties) =>
+        new DependencyInjectionMethodParameterBinding(
+            ParameterType,
+            ServiceType,
+            Method,
+            consumedProperties
+        );
 }

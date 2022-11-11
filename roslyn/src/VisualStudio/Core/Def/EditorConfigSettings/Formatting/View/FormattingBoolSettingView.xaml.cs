@@ -34,8 +34,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
         private void CheckBoxChanged(object sender, RoutedEventArgs e)
         {
             var value = RootCheckBox.IsChecked == true;
-            if (_setting.GetValue() is bool currentValue &&
-                value != currentValue)
+            if (_setting.GetValue() is bool currentValue && value != currentValue)
             {
                 _setting.SetValue(value);
             }

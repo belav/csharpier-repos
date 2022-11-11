@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.RemoveAsync
 {
     using VerifyCS = Editor.UnitTests.CodeActions.CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CodeAnalysis.CSharp.RemoveAsyncModifier.CSharpRemoveAsyncModifierCodeFixProvider>;
+        CodeAnalysis.CSharp.RemoveAsyncModifier.CSharpRemoveAsyncModifierCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveAsyncModifier)]
     public class RemoveAsyncModifierTests : CodeAnalysis.CSharp.Test.Utilities.CSharpTestBase
@@ -22,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.RemoveAsync
         public async Task Method_Task_MultipleAndNested()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -73,7 +74,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -131,21 +132,22 @@ class C
 
         return Task.CompletedTask;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Method_Task_EmptyBlockBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
 {
     async Task {|CS1998:Goo|}(){}
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -154,14 +156,15 @@ class C
     {
         return Task.CompletedTask;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Method_Task_BlockBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -174,7 +177,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -188,13 +191,15 @@ class C
 
         return Task.CompletedTask;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Method_ValueTask_BlockBody()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -208,7 +213,8 @@ class C
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -235,7 +241,8 @@ class C
         [Fact]
         public async Task Method_ValueTaskOfT_BlockBody()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -250,7 +257,8 @@ class C
         return 3;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -277,7 +285,8 @@ class C
         [Fact]
         public async Task Method_ValueTask_ExpressionBody()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -285,7 +294,8 @@ class C
     async ValueTask {|CS1998:Goo|}() => System.Console.WriteLine(1);
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -308,7 +318,8 @@ class C
         [Fact]
         public async Task Method_ValueTaskOfT_ExpressionBody()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -316,7 +327,8 @@ class C
     async ValueTask<int> {|CS1998:Goo|}() => 3;
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -336,7 +348,7 @@ class C
         public async Task Method_Task_BlockBody_Throws()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -351,7 +363,7 @@ class C
         throw new System.ApplicationException();
     }
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -365,14 +377,15 @@ class C
 
         throw new System.ApplicationException();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Method_Task_BlockBody_WithLocalFunction()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -390,7 +403,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -409,14 +422,15 @@ class C
 
         return Task.CompletedTask;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Method_Task_BlockBody_WithLambda()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -434,7 +448,7 @@ class C
 
     }
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -452,14 +466,15 @@ class C
 
         return Task.CompletedTask;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Method_TaskOfT_BlockBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -474,7 +489,7 @@ class C
         return 3;
     }
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -488,34 +503,36 @@ class C
 
         return Task.FromResult(3);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Method_TaskOfT_ExpressionBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
 {
     async Task<int> {|CS1998:Goo|}() => 2;
 }",
-@"
+                @"
 using System.Threading.Tasks;
 
 class C
 {
     Task<int> Goo() => Task.FromResult(2);
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Method_Task_ExpressionBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -523,7 +540,7 @@ class C
 {
     async Task {|CS1998:Goo|}() => Console.WriteLine(""Hello"");
 }",
-@"
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -534,14 +551,15 @@ class C
         Console.WriteLine(""Hello"");
         return Task.CompletedTask;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task LocalFunction_Task_BlockBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -556,7 +574,7 @@ class C
         }
     }
 }",
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -572,14 +590,15 @@ class C
             return Task.CompletedTask;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task LocalFunction_Task_ExpressionBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -589,7 +608,7 @@ class C
         async Task {|CS1998:Goo|}() => Console.WriteLine(1);
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -598,14 +617,15 @@ class C
     {
         Task Goo() { Console.WriteLine(1); return Task.CompletedTask; }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task LocalFunction_TaskOfT_BlockBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -617,7 +637,7 @@ class C
         }
     }
 }",
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -628,14 +648,15 @@ class C
             return Task.FromResult(1);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task LocalFunction_TaskOfT_ExpressionBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -644,7 +665,7 @@ class C
         async Task<int> {|CS1998:Goo|}() => 1;
     }
 }",
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -652,14 +673,15 @@ class C
     {
         Task<int> Goo() => Task.FromResult(1);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task AnonymousFunction_Task_BlockBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -674,7 +696,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -691,14 +713,15 @@ class C
             return Task.CompletedTask;
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task AnonymousFunction_TaskOfT_BlockBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -711,7 +734,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -723,14 +746,15 @@ class C
             return Task.FromResult(1);
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task SimpleLambda_TaskOfT_ExpressionBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -740,7 +764,7 @@ class C
         Func<int, Task<int>> foo = async x {|CS1998:=>|} 1;
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -749,14 +773,15 @@ class C
     {
         Func<int, Task<int>> foo = x => Task.FromResult(1);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task SimpleLambda_TaskOfT_BlockBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -768,7 +793,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -780,14 +805,15 @@ class C
             return Task.FromResult(1);
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task SimpleLambda_Task_ExpressionBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -797,7 +823,7 @@ class C
         Func<int, Task> foo = async x {|CS1998:=>|} Console.WriteLine(1);
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -806,14 +832,15 @@ class C
     {
         Func<int, Task> foo = x => { Console.WriteLine(1); return Task.CompletedTask; };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task SimpleLambda_Task_BlockBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -829,7 +856,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -845,14 +872,15 @@ class C
             return Task.CompletedTask;
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ParenthesisedLambda_TaskOfT_ExpressionBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -862,7 +890,7 @@ class C
         Func<Task<int>> foo = async () {|CS1998:=>|} 1;
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -871,14 +899,15 @@ class C
     {
         Func<Task<int>> foo = () => Task.FromResult(1);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ParenthesisedLambda_TaskOfT_BlockBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -890,7 +919,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -902,14 +931,15 @@ class C
             return Task.FromResult(1);
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ParenthesisedLambda_Task_ExpressionBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -919,7 +949,7 @@ class C
         Func<Task> foo = async () {|CS1998:=>|} Console.WriteLine(1);
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -928,14 +958,15 @@ class C
     {
         Func<Task> foo = () => { Console.WriteLine(1); return Task.CompletedTask; };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ParenthesisedLambda_Task_BlockBody()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -951,7 +982,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -967,14 +998,15 @@ class C
             return Task.CompletedTask;
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Method_Task_BlockBody_FullyQualified()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     async System.Threading.Tasks.Task {|CS1998:Goo|}()
@@ -985,7 +1017,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     System.Threading.Tasks.Task Goo()
@@ -997,14 +1029,15 @@ class C
 
         return System.Threading.Tasks.Task.CompletedTask;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Method_TaskOfT_BlockBody_FullyQualified()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     async System.Threading.Tasks.Task<int> {|CS1998:Goo|}()
@@ -1017,7 +1050,7 @@ class C
         return 2;
     }
 }",
-    @"
+                @"
 class C
 {
     System.Threading.Tasks.Task<int> Goo()
@@ -1029,13 +1062,15 @@ class C
 
         return System.Threading.Tasks.Task.FromResult(2);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task IAsyncEnumerable_Missing()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -1063,7 +1098,8 @@ class C
         [Fact]
         public async Task Method_AsyncVoid_Missing()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -1090,7 +1126,8 @@ class C
         [Fact]
         public async Task ParenthesisedLambda_AsyncVoid_Missing()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1108,7 +1145,7 @@ class C
                 TestCode = source,
                 ExpectedDiagnostics =
                 {
-                     // /0/Test0.cs(9,29): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // /0/Test0.cs(9,29): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
                     DiagnosticResult.CompilerWarning("CS1998").WithSpan(9, 29, 9, 31),
                 },
                 FixedCode = source,
@@ -1118,7 +1155,8 @@ class C
         [Fact]
         public async Task SimpleLambda_AsyncVoid_Missing()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 

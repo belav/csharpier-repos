@@ -28,7 +28,8 @@ namespace System.Formats.Asn1
         public void WriteGeneralizedTime(
             DateTimeOffset value,
             bool omitFractionalSeconds = false,
-            Asn1Tag? tag = null)
+            Asn1Tag? tag = null
+        )
         {
             CheckUniversalTag(tag, UniversalTagNumber.GeneralizedTime);
 
@@ -36,7 +37,8 @@ namespace System.Formats.Asn1
             WriteGeneralizedTimeCore(
                 tag?.AsPrimitive() ?? Asn1Tag.GeneralizedTime,
                 value,
-                omitFractionalSeconds);
+                omitFractionalSeconds
+            );
         }
 
         // T-REC-X.680-201508 sec 46
@@ -44,7 +46,8 @@ namespace System.Formats.Asn1
         private void WriteGeneralizedTimeCore(
             Asn1Tag tag,
             DateTimeOffset value,
-            bool omitFractionalSeconds)
+            bool omitFractionalSeconds
+        )
         {
             // GeneralizedTime under BER allows many different options:
             // * (HHmmss), (HHmm), (HH)
@@ -83,9 +86,18 @@ namespace System.Formats.Asn1
                     decimal decimalTicks = floatingTicks;
                     decimalTicks /= TimeSpan.TicksPerSecond;
 
-                    if (!Utf8Formatter.TryFormat(decimalTicks, fraction, out int bytesWritten, new StandardFormat('G')))
+                    if (
+                        !Utf8Formatter.TryFormat(
+                            decimalTicks,
+                            fraction,
+                            out int bytesWritten,
+                            new StandardFormat('G')
+                        )
+                    )
                     {
-                        Debug.Fail($"Utf8Formatter.TryFormat could not format {floatingTicks} / TicksPerSecond");
+                        Debug.Fail(
+                            $"Utf8Formatter.TryFormat could not format {floatingTicks} / TicksPerSecond"
+                        );
                         throw new InvalidOperationException();
                     }
 
@@ -122,12 +134,14 @@ namespace System.Formats.Asn1
             StandardFormat d4 = new StandardFormat('D', 4);
             StandardFormat d2 = new StandardFormat('D', 2);
 
-            if (!Utf8Formatter.TryFormat(year, baseSpan.Slice(0, 4), out _, d4) ||
-                !Utf8Formatter.TryFormat(month, baseSpan.Slice(4, 2), out _, d2) ||
-                !Utf8Formatter.TryFormat(day, baseSpan.Slice(6, 2), out _, d2) ||
-                !Utf8Formatter.TryFormat(hour, baseSpan.Slice(8, 2), out _, d2) ||
-                !Utf8Formatter.TryFormat(minute, baseSpan.Slice(10, 2), out _, d2) ||
-                !Utf8Formatter.TryFormat(second, baseSpan.Slice(12, 2), out _, d2))
+            if (
+                !Utf8Formatter.TryFormat(year, baseSpan.Slice(0, 4), out _, d4)
+                || !Utf8Formatter.TryFormat(month, baseSpan.Slice(4, 2), out _, d2)
+                || !Utf8Formatter.TryFormat(day, baseSpan.Slice(6, 2), out _, d2)
+                || !Utf8Formatter.TryFormat(hour, baseSpan.Slice(8, 2), out _, d2)
+                || !Utf8Formatter.TryFormat(minute, baseSpan.Slice(10, 2), out _, d2)
+                || !Utf8Formatter.TryFormat(second, baseSpan.Slice(12, 2), out _, d2)
+            )
             {
                 Debug.Fail($"Utf8Formatter.TryFormat failed to build components of {normalized:O}");
                 throw new InvalidOperationException();

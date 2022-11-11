@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 IAsynchronousOperationListener asyncListener,
                 Lazy<IStreamingFindUsagesPresenter> streamingPresenter,
                 IGlobalOptionService globalOptions,
-                IInlineRenameService inlineRenameService)
+                IInlineRenameService inlineRenameService
+            )
             {
                 _subjectBuffer = subjectBuffer;
                 _threadingContext = threadingContext;
@@ -58,12 +59,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                 _inlineRenameService = inlineRenameService;
             }
 
-            public async Task<IntellisenseQuickInfoItem> GetQuickInfoItemAsync(IAsyncQuickInfoSession session, CancellationToken cancellationToken)
+            public async Task<IntellisenseQuickInfoItem> GetQuickInfoItemAsync(
+                IAsyncQuickInfoSession session,
+                CancellationToken cancellationToken
+            )
             {
                 // Until https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1611398 is resolved we can't disable
                 // quickinfo in InlineRename. Instead, we return no quickinfo information while the adornment
                 // is being shown. This can be removed after IFeaturesService supports disabling quickinfo
-                if (_globalOptions.GetOption(InlineRenameUIOptions.UseInlineAdornment) && _inlineRenameService.ActiveSession is not null)
+                if (
+                    _globalOptions.GetOption(InlineRenameUIOptions.UseInlineAdornment)
+                    && _inlineRenameService.ActiveSession is not null
+                )
                     return null;
 
                 var triggerPoint = session.GetTriggerPoint(_subjectBuffer.CurrentSnapshot);
@@ -85,32 +92,59 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        var options = _globalOptions.GetSymbolDescriptionOptions(document.Project.Language);
-                        var item = await service.GetQuickInfoAsync(document, triggerPoint.Value, options, cancellationToken).ConfigureAwait(false);
+                        var options = _globalOptions.GetSymbolDescriptionOptions(
+                            document.Project.Language
+                        );
+                        var item = await service
+                            .GetQuickInfoAsync(
+                                document,
+                                triggerPoint.Value,
+                                options,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         if (item != null)
                         {
                             var textVersion = snapshot.Version;
-                            var trackingSpan = textVersion.CreateTrackingSpan(item.Span.ToSpan(), SpanTrackingMode.EdgeInclusive);
-                            var classificationOptions = _globalOptions.GetClassificationOptions(document.Project.Language);
+                            var trackingSpan = textVersion.CreateTrackingSpan(
+                                item.Span.ToSpan(),
+                                SpanTrackingMode.EdgeInclusive
+                            );
+                            var classificationOptions = _globalOptions.GetClassificationOptions(
+                                document.Project.Language
+                            );
 
-                            return await IntellisenseQuickInfoBuilder.BuildItemAsync(
-                                trackingSpan, item, document, classificationOptions,
-                                _threadingContext, _operationExecutor,
-                                _asyncListener, _streamingPresenter, cancellationToken).ConfigureAwait(false);
+                            return await IntellisenseQuickInfoBuilder
+                                .BuildItemAsync(
+                                    trackingSpan,
+                                    item,
+                                    document,
+                                    classificationOptions,
+                                    _threadingContext,
+                                    _operationExecutor,
+                                    _asyncListener,
+                                    _streamingPresenter,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                         }
 
                         return null;
                     }
                 }
-                catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken, ErrorSeverity.Critical))
+                catch (Exception e)
+                    when (FatalError.ReportAndPropagateUnlessCanceled(
+                            e,
+                            cancellationToken,
+                            ErrorSeverity.Critical
+                        )
+                    )
                 {
                     throw ExceptionUtilities.Unreachable();
                 }
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

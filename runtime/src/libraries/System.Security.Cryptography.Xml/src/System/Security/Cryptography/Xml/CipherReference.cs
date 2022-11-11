@@ -19,7 +19,8 @@ namespace System.Security.Cryptography.Xml
             ReferenceType = "CipherReference";
         }
 
-        public CipherReference(string uri, TransformChain transformChain) : base(uri, transformChain)
+        public CipherReference(string uri, TransformChain transformChain)
+            : base(uri, transformChain)
         {
             ReferenceType = "CipherReference";
         }
@@ -33,15 +34,13 @@ namespace System.Security.Cryptography.Xml
                     return null;
                 return _cipherValue;
             }
-            set
-            {
-                _cipherValue = value;
-            }
+            set { _cipherValue = value; }
         }
 
         public override XmlElement GetXml()
         {
-            if (CacheValid) return _cachedXml;
+            if (CacheValid)
+                return _cachedXml;
 
             XmlDocument document = new XmlDocument();
             document.PreserveWhitespace = true;
@@ -54,13 +53,18 @@ namespace System.Security.Cryptography.Xml
                 throw new CryptographicException(SR.Cryptography_Xml_ReferenceTypeRequired);
 
             // Create the Reference
-            XmlElement referenceElement = document.CreateElement(ReferenceType, EncryptedXml.XmlEncNamespaceUrl);
+            XmlElement referenceElement = document.CreateElement(
+                ReferenceType,
+                EncryptedXml.XmlEncNamespaceUrl
+            );
             if (!string.IsNullOrEmpty(Uri))
                 referenceElement.SetAttribute("URI", Uri);
 
             // Add the transforms to the CipherReference
             if (TransformChain.Count > 0)
-                referenceElement.AppendChild(TransformChain.GetXml(document, EncryptedXml.XmlEncNamespaceUrl));
+                referenceElement.AppendChild(
+                    TransformChain.GetXml(document, EncryptedXml.XmlEncNamespaceUrl)
+                );
 
             return referenceElement;
         }

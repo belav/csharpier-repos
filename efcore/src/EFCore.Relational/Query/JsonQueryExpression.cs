@@ -31,7 +31,8 @@ public class JsonQueryExpression : Expression, IPrintableExpression
         ColumnExpression jsonColumn,
         IReadOnlyDictionary<IProperty, ColumnExpression> keyPropertyMap,
         Type type,
-        bool collection)
+        bool collection
+    )
         : this(
             entityType,
             jsonColumn,
@@ -39,9 +40,8 @@ public class JsonQueryExpression : Expression, IPrintableExpression
             path: new List<PathSegment> { new("$") },
             type,
             collection,
-            jsonColumn.IsNullable)
-    {
-    }
+            jsonColumn.IsNullable
+        ) { }
 
     private JsonQueryExpression(
         IEntityType entityType,
@@ -50,7 +50,8 @@ public class JsonQueryExpression : Expression, IPrintableExpression
         IReadOnlyList<PathSegment> path,
         Type type,
         bool collection,
-        bool nullable)
+        bool nullable
+    )
     {
         Check.DebugAssert(entityType.FindPrimaryKey() != null, "primary key is null.");
 
@@ -89,8 +90,7 @@ public class JsonQueryExpression : Expression, IPrintableExpression
     public virtual bool IsNullable { get; }
 
     /// <inheritdoc />
-    public override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
     public override Type Type { get; }
@@ -100,11 +100,18 @@ public class JsonQueryExpression : Expression, IPrintableExpression
     /// </summary>
     public virtual SqlExpression BindProperty(IProperty property)
     {
-        if (!EntityType.IsAssignableFrom(property.DeclaringEntityType)
-            && !property.DeclaringEntityType.IsAssignableFrom(EntityType))
+        if (
+            !EntityType.IsAssignableFrom(property.DeclaringEntityType)
+            && !property.DeclaringEntityType.IsAssignableFrom(EntityType)
+        )
         {
             throw new InvalidOperationException(
-                RelationalStrings.UnableToBindMemberToEntityProjection("property", property.Name, EntityType.DisplayName()));
+                RelationalStrings.UnableToBindMemberToEntityProjection(
+                    "property",
+                    property.Name,
+                    EntityType.DisplayName()
+                )
+            );
         }
 
         if (_keyPropertyMap.TryGetValue(property, out var match))
@@ -119,7 +126,8 @@ public class JsonQueryExpression : Expression, IPrintableExpression
             JsonColumn,
             property,
             newPath,
-            IsNullable || property.IsNullable);
+            IsNullable || property.IsNullable
+        );
     }
 
     /// <summary>
@@ -136,7 +144,9 @@ public class JsonQueryExpression : Expression, IPrintableExpression
                 RelationalStrings.JsonCantNavigateToParentEntity(
                     navigation.ForeignKey.DeclaringEntityType.DisplayName(),
                     navigation.ForeignKey.PrincipalEntityType.DisplayName(),
-                    navigation.Name));
+                    navigation.Name
+                )
+            );
         }
 
         var targetEntityType = navigation.TargetEntityType;
@@ -144,9 +154,18 @@ public class JsonQueryExpression : Expression, IPrintableExpression
         newPath.Add(new PathSegment(targetEntityType.GetJsonPropertyName()!));
 
         var newKeyPropertyMap = new Dictionary<IProperty, ColumnExpression>();
-        var targetPrimaryKeyProperties = targetEntityType.FindPrimaryKey()!.Properties.Take(_keyPropertyMap.Count);
-        var sourcePrimaryKeyProperties = EntityType.FindPrimaryKey()!.Properties.Take(_keyPropertyMap.Count);
-        foreach (var (target, source) in targetPrimaryKeyProperties.Zip(sourcePrimaryKeyProperties, (t, s) => (t, s)))
+        var targetPrimaryKeyProperties = targetEntityType
+            .FindPrimaryKey()!
+            .Properties.Take(_keyPropertyMap.Count);
+        var sourcePrimaryKeyProperties = EntityType
+            .FindPrimaryKey()!
+            .Properties.Take(_keyPropertyMap.Count);
+        foreach (
+            var (target, source) in targetPrimaryKeyProperties.Zip(
+                sourcePrimaryKeyProperties,
+                (t, s) => (t, s)
+            )
+        )
         {
             newKeyPropertyMap[target] = _keyPropertyMap[source];
         }
@@ -158,7 +177,8 @@ public class JsonQueryExpression : Expression, IPrintableExpression
             newPath,
             navigation.ClrType,
             navigation.IsCollection,
-            IsNullable || !navigation.ForeignKey.IsRequiredDependent);
+            IsNullable || !navigation.ForeignKey.IsRequiredDependent
+        );
     }
 
     /// <summary>
@@ -180,7 +200,8 @@ public class JsonQueryExpression : Expression, IPrintableExpression
             Path,
             Type,
             IsCollection,
-            nullable: true);
+            nullable: true
+        );
     }
 
     /// <inheritdoc />
@@ -209,27 +230,37 @@ public class JsonQueryExpression : Expression, IPrintableExpression
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
     public virtual JsonQueryExpression Update(
         ColumnExpression jsonColumn,
-        IReadOnlyDictionary<IProperty, ColumnExpression> keyPropertyMap)
-        => jsonColumn != JsonColumn
-            || keyPropertyMap.Count != _keyPropertyMap.Count
-            || keyPropertyMap.Zip(_keyPropertyMap, (n, o) => n.Value != o.Value).Any(x => x)
-                ? new JsonQueryExpression(EntityType, jsonColumn, keyPropertyMap, Path, Type, IsCollection, IsNullable)
-                : this;
+        IReadOnlyDictionary<IProperty, ColumnExpression> keyPropertyMap
+    ) =>
+        jsonColumn != JsonColumn
+        || keyPropertyMap.Count != _keyPropertyMap.Count
+        || keyPropertyMap.Zip(_keyPropertyMap, (n, o) => n.Value != o.Value).Any(x => x)
+            ? new JsonQueryExpression(
+                EntityType,
+                jsonColumn,
+                keyPropertyMap,
+                Path,
+                Type,
+                IsCollection,
+                IsNullable
+            )
+            : this;
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is JsonQueryExpression jsonQueryExpression
-                && Equals(jsonQueryExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is JsonQueryExpression jsonQueryExpression && Equals(jsonQueryExpression)
+        );
 
-    private bool Equals(JsonQueryExpression jsonQueryExpression)
-        => EntityType.Equals(jsonQueryExpression.EntityType)
-            && JsonColumn.Equals(jsonQueryExpression.JsonColumn)
-            && IsCollection.Equals(jsonQueryExpression.IsCollection)
-            && IsNullable == jsonQueryExpression.IsNullable
-            && Path.SequenceEqual(jsonQueryExpression.Path)
-            && KeyPropertyMapEquals(jsonQueryExpression._keyPropertyMap);
+    private bool Equals(JsonQueryExpression jsonQueryExpression) =>
+        EntityType.Equals(jsonQueryExpression.EntityType)
+        && JsonColumn.Equals(jsonQueryExpression.JsonColumn)
+        && IsCollection.Equals(jsonQueryExpression.IsCollection)
+        && IsNullable == jsonQueryExpression.IsNullable
+        && Path.SequenceEqual(jsonQueryExpression.Path)
+        && KeyPropertyMapEquals(jsonQueryExpression._keyPropertyMap);
 
     private bool KeyPropertyMapEquals(IReadOnlyDictionary<IProperty, ColumnExpression> other)
     {
@@ -251,6 +282,7 @@ public class JsonQueryExpression : Expression, IPrintableExpression
 
     /// <inheritdoc />
     public override int GetHashCode()
-        // not incorporating _keyPropertyMap into the hash, too much work 
-        => HashCode.Combine(EntityType, JsonColumn, IsCollection, Path, IsNullable);
+        // not incorporating _keyPropertyMap into the hash, too much work
+        =>
+        HashCode.Combine(EntityType, JsonColumn, IsCollection, Path, IsNullable);
 }

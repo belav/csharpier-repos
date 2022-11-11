@@ -42,8 +42,8 @@ public static class RelationalKeyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static KeyBuilder<TEntity> HasName<TEntity>(
         this KeyBuilder<TEntity> keyBuilder,
-        string? name)
-        => (KeyBuilder<TEntity>)HasName((KeyBuilder)keyBuilder, name);
+        string? name
+    ) => (KeyBuilder<TEntity>)HasName((KeyBuilder)keyBuilder, name);
 
     /// <summary>
     ///     Configures the name of the key constraint in the database when targeting a relational database.
@@ -61,7 +61,8 @@ public static class RelationalKeyBuilderExtensions
     public static IConventionKeyBuilder? HasName(
         this IConventionKeyBuilder keyBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (keyBuilder.CanSetName(name, fromDataAnnotation))
         {
@@ -85,6 +86,6 @@ public static class RelationalKeyBuilderExtensions
     public static bool CanSetName(
         this IConventionKeyBuilder keyBuilder,
         string? name,
-        bool fromDataAnnotation = false)
-        => keyBuilder.CanSetAnnotation(RelationalAnnotationNames.Name, name, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) => keyBuilder.CanSetAnnotation(RelationalAnnotationNames.Name, name, fromDataAnnotation);
 }

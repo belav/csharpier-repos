@@ -14,9 +14,8 @@ namespace ILCompiler.DependencyAnalysis
         : Internal.Runtime.ITargetBinaryWriter
 #endif
     {
-        public ObjectDataBuilder(NodeFactory factory, bool relocsOnly) : this(factory.Target, relocsOnly)
-        {
-        }
+        public ObjectDataBuilder(NodeFactory factory, bool relocsOnly)
+            : this(factory.Target, relocsOnly) { }
 
         public ObjectDataBuilder(TargetDetails target, bool relocsOnly)
         {
@@ -44,18 +43,12 @@ namespace ILCompiler.DependencyAnalysis
 
         public int CountBytes
         {
-            get
-            {
-                return _data.Count;
-            }
+            get { return _data.Count; }
         }
 
         public int TargetPointerSize
         {
-            get
-            {
-                return _target.PointerSize;
-            }
+            get { return _target.PointerSize; }
         }
 
         /// <summary>
@@ -275,7 +268,9 @@ namespace ILCompiler.DependencyAnalysis
 #if DEBUG
             if (_checkAllSymbolDependenciesMustBeMarked)
             {
-                var node = symbol as ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<NodeFactory>;
+                var node =
+                    symbol
+                    as ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<NodeFactory>;
                 if (node != null)
                     Debug.Assert(node.Marked);
             }
@@ -318,7 +313,13 @@ namespace ILCompiler.DependencyAnalysis
 
         public void EmitPointerReloc(ISymbolNode symbol, int delta = 0)
         {
-            EmitReloc(symbol, (_target.PointerSize == 8) ? RelocType.IMAGE_REL_BASED_DIR64 : RelocType.IMAGE_REL_BASED_HIGHLOW, delta);
+            EmitReloc(
+                symbol,
+                (_target.PointerSize == 8)
+                    ? RelocType.IMAGE_REL_BASED_DIR64
+                    : RelocType.IMAGE_REL_BASED_HIGHLOW,
+                delta
+            );
         }
 
         public ObjectNode.ObjectData ToObjectData()
@@ -327,10 +328,12 @@ namespace ILCompiler.DependencyAnalysis
             Debug.Assert(_numReservations == 0);
 #endif
 
-            ObjectNode.ObjectData returnData = new ObjectNode.ObjectData(_data.ToArray(),
-                                                                         _relocs.ToArray(),
-                                                                         Alignment,
-                                                                         _definedSymbols.ToArray());
+            ObjectNode.ObjectData returnData = new ObjectNode.ObjectData(
+                _data.ToArray(),
+                _relocs.ToArray(),
+                Alignment,
+                _definedSymbols.ToArray()
+            );
 
             return returnData;
         }

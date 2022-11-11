@@ -18,15 +18,14 @@ internal abstract class ClientSettingsStorageLocation : OptionStorageLocation2
 {
     private readonly Func<string?, string> _keyNameFromLanguageName;
 
-    public ClientSettingsStorageLocation(string keyName)
-        => _keyNameFromLanguageName = _ => keyName;
+    public ClientSettingsStorageLocation(string keyName) => _keyNameFromLanguageName = _ => keyName;
 
     /// <summary>
     /// Creates a <see cref="ClientSettingsStorageLocation"/> that has different key names for different languages.
     /// </summary>
     /// <param name="keyNameFromLanguageName">A function that maps from a <see cref="LanguageNames"/> value to the key name.</param>
-    public ClientSettingsStorageLocation(Func<string?, string> keyNameFromLanguageName)
-        => _keyNameFromLanguageName = keyNameFromLanguageName;
+    public ClientSettingsStorageLocation(Func<string?, string> keyNameFromLanguageName) =>
+        _keyNameFromLanguageName = keyNameFromLanguageName;
 
     public abstract bool IsMachineLocal { get; }
 
@@ -36,12 +35,15 @@ internal abstract class ClientSettingsStorageLocation : OptionStorageLocation2
 
         if (languageName != null)
         {
-            keyName = keyName.Replace("%LANGUAGE%", languageName switch
-            {
-                LanguageNames.CSharp => "CSharp",
-                LanguageNames.VisualBasic => "VisualBasic",
-                _ => languageName // handles F#, TypeScript and Xaml
-            });
+            keyName = keyName.Replace(
+                "%LANGUAGE%",
+                languageName switch
+                {
+                    LanguageNames.CSharp => "CSharp",
+                    LanguageNames.VisualBasic => "VisualBasic",
+                    _ => languageName // handles F#, TypeScript and Xaml
+                }
+            );
         }
 
         return keyName;

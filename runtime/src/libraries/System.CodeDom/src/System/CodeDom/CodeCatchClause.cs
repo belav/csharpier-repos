@@ -22,7 +22,11 @@ namespace System.CodeDom
             _catchExceptionType = catchExceptionType;
         }
 
-        public CodeCatchClause(string localName, CodeTypeReference catchExceptionType, params CodeStatement[] statements)
+        public CodeCatchClause(
+            string localName,
+            CodeTypeReference catchExceptionType,
+            params CodeStatement[] statements
+        )
         {
             _localName = localName;
             _catchExceptionType = catchExceptionType;

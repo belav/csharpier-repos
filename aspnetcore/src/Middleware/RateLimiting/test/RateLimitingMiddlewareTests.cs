@@ -20,27 +20,41 @@ public class RateLimitingMiddlewareTests
         var options = CreateOptionsAccessor();
         options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>();
 
-        Assert.Throws<ArgumentNullException>(() => new RateLimitingMiddleware(
-            null,
-            new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-            options,
-            Mock.Of<IServiceProvider>()));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new RateLimitingMiddleware(
+                    null,
+                    new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+                    options,
+                    Mock.Of<IServiceProvider>()
+                )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new RateLimitingMiddleware(c =>
-            {
-                return Task.CompletedTask;
-            },
-            null,
-            options,
-            Mock.Of<IServiceProvider>()));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new RateLimitingMiddleware(
+                    c =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    null,
+                    options,
+                    Mock.Of<IServiceProvider>()
+                )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new RateLimitingMiddleware(c =>
-            {
-                return Task.CompletedTask;
-            },
-            new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-            options,
-            null));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new RateLimitingMiddleware(
+                    c =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+                    options,
+                    null
+                )
+        );
     }
 
     [Fact]
@@ -48,15 +62,19 @@ public class RateLimitingMiddlewareTests
     {
         var flag = false;
         var options = CreateOptionsAccessor();
-        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(true));
-        var middleware = new RateLimitingMiddleware(c =>
+        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(true)
+        );
+        var middleware = new RateLimitingMiddleware(
+            c =>
             {
                 flag = true;
                 return Task.CompletedTask;
             },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         await middleware.Invoke(new DefaultHttpContext());
         Assert.True(flag);
@@ -67,20 +85,24 @@ public class RateLimitingMiddlewareTests
     {
         var onRejectedInvoked = false;
         var options = CreateOptionsAccessor();
-        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(false));
+        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(false)
+        );
         options.Value.OnRejected = (context, token) =>
         {
             onRejectedInvoked = true;
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
+        var middleware = new RateLimitingMiddleware(
+            c =>
             {
                 return Task.CompletedTask;
             },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
         await middleware.Invoke(context).DefaultTimeout();
@@ -93,7 +115,9 @@ public class RateLimitingMiddlewareTests
     {
         var onRejectedInvoked = false;
         var options = CreateOptionsAccessor();
-        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(false));
+        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(false)
+        );
         options.Value.OnRejected = (context, token) =>
         {
             onRejectedInvoked = true;
@@ -101,13 +125,15 @@ public class RateLimitingMiddlewareTests
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
+        var middleware = new RateLimitingMiddleware(
+            c =>
             {
                 return Task.CompletedTask;
             },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
         await middleware.Invoke(context).DefaultTimeout();
@@ -120,19 +146,24 @@ public class RateLimitingMiddlewareTests
     {
         var sink = new TestSink(
             TestSink.EnableWithTypeName<RateLimitingMiddleware>,
-            TestSink.EnableWithTypeName<RateLimitingMiddleware>);
+            TestSink.EnableWithTypeName<RateLimitingMiddleware>
+        );
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
 
         var options = CreateOptionsAccessor();
-        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(false));
+        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(false)
+        );
 
-        var middleware = new RateLimitingMiddleware(c =>
+        var middleware = new RateLimitingMiddleware(
+            c =>
             {
                 return Task.CompletedTask;
             },
             loggerFactory.CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
         context.RequestAborted = new CancellationToken(true);
@@ -153,17 +184,27 @@ public class RateLimitingMiddlewareTests
         var options = CreateOptionsAccessor();
         var name = "myEndpoint";
 
-        var middleware = new RateLimitingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
+        var middleware = new RateLimitingMiddleware(
+            c =>
+            {
+                return Task.CompletedTask;
+            },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
-        context.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)), "Test endpoint"));
-        await Assert.ThrowsAsync<InvalidOperationException>(() => middleware.Invoke(context)).DefaultTimeout();
+        context.SetEndpoint(
+            new Endpoint(
+                c => Task.CompletedTask,
+                new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)),
+                "Test endpoint"
+            )
+        );
+        await Assert
+            .ThrowsAsync<InvalidOperationException>(() => middleware.Invoke(context))
+            .DefaultTimeout();
     }
 
     [Fact]
@@ -172,13 +213,23 @@ public class RateLimitingMiddlewareTests
         var onRejectedInvoked = false;
         var options = CreateOptionsAccessor();
         var name = "myEndpoint";
-        options.Value.AddPolicy<string>(name, (context =>
-        {
-            return RateLimitPartition.Get<string>("myLimiter", (key =>
-            {
-                return new TestRateLimiter(false);
-            }));
-        }));
+        options.Value.AddPolicy<string>(
+            name,
+            (
+                context =>
+                {
+                    return RateLimitPartition.Get<string>(
+                        "myLimiter",
+                        (
+                            key =>
+                            {
+                                return new TestRateLimiter(false);
+                            }
+                        )
+                    );
+                }
+            )
+        );
         options.Value.OnRejected = (context, token) =>
         {
             onRejectedInvoked = true;
@@ -186,16 +237,24 @@ public class RateLimitingMiddlewareTests
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
+        var middleware = new RateLimitingMiddleware(
+            c =>
             {
                 return Task.CompletedTask;
             },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
-        context.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)), "Test endpoint"));
+        context.SetEndpoint(
+            new Endpoint(
+                c => Task.CompletedTask,
+                new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)),
+                "Test endpoint"
+            )
+        );
         await middleware.Invoke(context).DefaultTimeout();
         Assert.True(onRejectedInvoked);
         Assert.Equal(StatusCodes.Status429TooManyRequests, context.Response.StatusCode);
@@ -207,14 +266,17 @@ public class RateLimitingMiddlewareTests
         var onRejectedInvoked = false;
         var options = CreateOptionsAccessor();
         var name = "myEndpoint";
-        options.Value.AddFixedWindowLimiter(name, options =>
-        {
-            options.PermitLimit = 1;
-            options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-            options.QueueLimit = 0;
-            options.Window = TimeSpan.FromSeconds(10);
-            options.AutoReplenishment = false;
-        });
+        options.Value.AddFixedWindowLimiter(
+            name,
+            options =>
+            {
+                options.PermitLimit = 1;
+                options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+                options.QueueLimit = 0;
+                options.Window = TimeSpan.FromSeconds(10);
+                options.AutoReplenishment = false;
+            }
+        );
         options.Value.OnRejected = (context, token) =>
         {
             onRejectedInvoked = true;
@@ -222,16 +284,24 @@ public class RateLimitingMiddlewareTests
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
+        var middleware = new RateLimitingMiddleware(
+            c =>
             {
                 return Task.CompletedTask;
             },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
-        context.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)), "Test endpoint"));
+        context.SetEndpoint(
+            new Endpoint(
+                c => Task.CompletedTask,
+                new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)),
+                "Test endpoint"
+            )
+        );
         await middleware.Invoke(context).DefaultTimeout();
         Assert.False(onRejectedInvoked);
         await middleware.Invoke(context).DefaultTimeout();
@@ -255,16 +325,24 @@ public class RateLimitingMiddlewareTests
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
+        var middleware = new RateLimitingMiddleware(
+            c =>
             {
                 return Task.CompletedTask;
             },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
-        context.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)), "Test endpoint"));
+        context.SetEndpoint(
+            new Endpoint(
+                c => Task.CompletedTask,
+                new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)),
+                "Test endpoint"
+            )
+        );
         await middleware.Invoke(context).DefaultTimeout();
         Assert.False(globalOnRejectedInvoked);
 
@@ -280,7 +358,9 @@ public class RateLimitingMiddlewareTests
         // Endpoint always allows - it should not fire
         options.Value.AddPolicy<string>(name, new TestRateLimiterPolicy("myKey", 404, true));
         // Global never allows - it should fire
-        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(false));
+        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(false)
+        );
         options.Value.OnRejected = (context, token) =>
         {
             globalOnRejectedInvoked = true;
@@ -288,16 +368,24 @@ public class RateLimitingMiddlewareTests
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
+        var middleware = new RateLimitingMiddleware(
+            c =>
             {
                 return Task.CompletedTask;
             },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
-        context.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)), "Test endpoint"));
+        context.SetEndpoint(
+            new Endpoint(
+                c => Task.CompletedTask,
+                new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)),
+                "Test endpoint"
+            )
+        );
         await middleware.Invoke(context).DefaultTimeout();
         Assert.True(globalOnRejectedInvoked);
 
@@ -313,7 +401,9 @@ public class RateLimitingMiddlewareTests
         // Endpoint never allows - it should fire
         options.Value.AddPolicy<string>(name, new TestRateLimiterPolicy("myKey", 404, false));
         // Global always allows - it should not fire
-        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(true));
+        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(true)
+        );
         options.Value.OnRejected = (context, token) =>
         {
             globalOnRejectedInvoked = true;
@@ -321,16 +411,24 @@ public class RateLimitingMiddlewareTests
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
+        var middleware = new RateLimitingMiddleware(
+            c =>
             {
                 return Task.CompletedTask;
             },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
-        context.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)), "Test endpoint"));
+        context.SetEndpoint(
+            new Endpoint(
+                c => Task.CompletedTask,
+                new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)),
+                "Test endpoint"
+            )
+        );
         await middleware.Invoke(context).DefaultTimeout();
         Assert.False(globalOnRejectedInvoked);
 
@@ -346,7 +444,9 @@ public class RateLimitingMiddlewareTests
         // Endpoint never allows - it should not fire
         options.Value.AddPolicy<string>(name, new TestRateLimiterPolicy("myKey", 404, false));
         // Global never allows - it should fire
-        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(false));
+        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(false)
+        );
         options.Value.OnRejected = (context, token) =>
         {
             globalOnRejectedInvoked = true;
@@ -354,16 +454,24 @@ public class RateLimitingMiddlewareTests
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
+        var middleware = new RateLimitingMiddleware(
+            c =>
             {
                 return Task.CompletedTask;
             },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
-        context.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)), "Test endpoint"));
+        context.SetEndpoint(
+            new Endpoint(
+                c => Task.CompletedTask,
+                new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)),
+                "Test endpoint"
+            )
+        );
         await middleware.Invoke(context).DefaultTimeout();
         Assert.True(globalOnRejectedInvoked);
 
@@ -388,26 +496,28 @@ public class RateLimitingMiddlewareTests
 
         // Configure the service provider with the args to the TestRateLimiterPolicy ctor
         var mockServiceProvider = new Mock<IServiceProvider>();
-        mockServiceProvider
-            .Setup(sp => sp.GetService(typeof(string)))
-            .Returns("myKey");
-        mockServiceProvider
-            .Setup(sp => sp.GetService(typeof(int)))
-            .Returns(404);
-        mockServiceProvider
-            .Setup(sp => sp.GetService(typeof(bool)))
-            .Returns(false);
+        mockServiceProvider.Setup(sp => sp.GetService(typeof(string))).Returns("myKey");
+        mockServiceProvider.Setup(sp => sp.GetService(typeof(int))).Returns(404);
+        mockServiceProvider.Setup(sp => sp.GetService(typeof(bool))).Returns(false);
 
-        var middleware = new RateLimitingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
+        var middleware = new RateLimitingMiddleware(
+            c =>
+            {
+                return Task.CompletedTask;
+            },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            mockServiceProvider.Object);
+            mockServiceProvider.Object
+        );
 
         var context = new DefaultHttpContext();
-        context.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)), "Test endpoint"));
+        context.SetEndpoint(
+            new Endpoint(
+                c => Task.CompletedTask,
+                new EndpointMetadataCollection(new EnableRateLimitingAttribute(name)),
+                "Test endpoint"
+            )
+        );
         await middleware.Invoke(context).DefaultTimeout();
         Assert.False(globalOnRejectedInvoked);
 
@@ -423,8 +533,14 @@ public class RateLimitingMiddlewareTests
         var endpointName2 = "myEndpoint2";
         var duplicateKey = "myKey";
         // Two policies with the same partition key should not collide, because DefaultKeyType has reference equality
-        options.Value.AddPolicy<string>(endpointName1, new TestRateLimiterPolicy(duplicateKey, 404, false));
-        options.Value.AddPolicy<string>(endpointName2, new TestRateLimiterPolicy(duplicateKey, 400, false));
+        options.Value.AddPolicy<string>(
+            endpointName1,
+            new TestRateLimiterPolicy(duplicateKey, 404, false)
+        );
+        options.Value.AddPolicy<string>(
+            endpointName2,
+            new TestRateLimiterPolicy(duplicateKey, 400, false)
+        );
         // This OnRejected should be ignored in favor of the ones on the policy
         options.Value.OnRejected = (context, token) =>
         {
@@ -433,17 +549,27 @@ public class RateLimitingMiddlewareTests
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
+        var middleware = new RateLimitingMiddleware(
+            c =>
+            {
+                return Task.CompletedTask;
+            },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
-        var endpoint1 = new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(endpointName1)), "Test endpoint 1");
-        var endpoint2 = new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(endpointName2)), "Test endpoint 2");
+        var endpoint1 = new Endpoint(
+            c => Task.CompletedTask,
+            new EndpointMetadataCollection(new EnableRateLimitingAttribute(endpointName1)),
+            "Test endpoint 1"
+        );
+        var endpoint2 = new Endpoint(
+            c => Task.CompletedTask,
+            new EndpointMetadataCollection(new EnableRateLimitingAttribute(endpointName2)),
+            "Test endpoint 2"
+        );
 
         context.SetEndpoint(endpoint1);
         await middleware.Invoke(context).DefaultTimeout();
@@ -467,20 +593,32 @@ public class RateLimitingMiddlewareTests
         var endpointName2 = "myEndpoint2";
         var duplicateKey = "myKey";
         // Two policies with the same partition key should not collide, because DefaultKeyType has reference equality
-        options.Value.AddPolicy<string>(endpointName1, key =>
-        {
-            return new RateLimitPartition<string>(duplicateKey, partitionKey =>
+        options.Value.AddPolicy<string>(
+            endpointName1,
+            key =>
             {
-                return new TestRateLimiter(false);
-            });
-        });
-        options.Value.AddPolicy<string>(endpointName2, key =>
-        {
-            return new RateLimitPartition<string>(duplicateKey, partitionKey =>
+                return new RateLimitPartition<string>(
+                    duplicateKey,
+                    partitionKey =>
+                    {
+                        return new TestRateLimiter(false);
+                    }
+                );
+            }
+        );
+        options.Value.AddPolicy<string>(
+            endpointName2,
+            key =>
             {
-                return new TestRateLimiter(true);
-            });
-        });
+                return new RateLimitPartition<string>(
+                    duplicateKey,
+                    partitionKey =>
+                    {
+                        return new TestRateLimiter(true);
+                    }
+                );
+            }
+        );
         options.Value.OnRejected = (context, token) =>
         {
             globalOnRejectedInvoked = true;
@@ -488,17 +626,27 @@ public class RateLimitingMiddlewareTests
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
+        var middleware = new RateLimitingMiddleware(
+            c =>
+            {
+                return Task.CompletedTask;
+            },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
-        var endpoint1 = new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(endpointName1)), "Test endpoint 1");
-        var endpoint2 = new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(endpointName2)), "Test endpoint 2");
+        var endpoint1 = new Endpoint(
+            c => Task.CompletedTask,
+            new EndpointMetadataCollection(new EnableRateLimitingAttribute(endpointName1)),
+            "Test endpoint 1"
+        );
+        var endpoint2 = new Endpoint(
+            c => Task.CompletedTask,
+            new EndpointMetadataCollection(new EnableRateLimitingAttribute(endpointName2)),
+            "Test endpoint 2"
+        );
 
         context.SetEndpoint(endpoint1);
         await middleware.Invoke(context).DefaultTimeout();
@@ -522,7 +670,9 @@ public class RateLimitingMiddlewareTests
         // Endpoint never allows
         options.Value.AddPolicy<string>(name, new TestRateLimiterPolicy("myKey", 404, false));
         // Global never allows
-        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(false));
+        options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(false)
+        );
         options.Value.OnRejected = (context, token) =>
         {
             globalOnRejectedInvoked = true;
@@ -530,17 +680,28 @@ public class RateLimitingMiddlewareTests
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
+        var middleware = new RateLimitingMiddleware(
+            c =>
+            {
+                return Task.CompletedTask;
+            },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
         // DisableRateLimitingAttribute last
-        context.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(name), new DisableRateLimitingAttribute()), "Test endpoint"));
+        context.SetEndpoint(
+            new Endpoint(
+                c => Task.CompletedTask,
+                new EndpointMetadataCollection(
+                    new EnableRateLimitingAttribute(name),
+                    new DisableRateLimitingAttribute()
+                ),
+                "Test endpoint"
+            )
+        );
         await middleware.Invoke(context).DefaultTimeout();
         Assert.False(globalOnRejectedInvoked);
 
@@ -548,7 +709,16 @@ public class RateLimitingMiddlewareTests
 
         // DisableRateLimitingAttribute first
         context = new DefaultHttpContext();
-        context.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new DisableRateLimitingAttribute(), new EnableRateLimitingAttribute(name)), "Test endpoint"));
+        context.SetEndpoint(
+            new Endpoint(
+                c => Task.CompletedTask,
+                new EndpointMetadataCollection(
+                    new DisableRateLimitingAttribute(),
+                    new EnableRateLimitingAttribute(name)
+                ),
+                "Test endpoint"
+            )
+        );
         await middleware.Invoke(context).DefaultTimeout();
         Assert.False(globalOnRejectedInvoked);
 
@@ -562,7 +732,10 @@ public class RateLimitingMiddlewareTests
         var options = CreateOptionsAccessor();
         // Policy will disallow
         var policy = new TestRateLimiterPolicy("myKey", 404, false);
-        var defaultRateLimiterPolicy = new DefaultRateLimiterPolicy(RateLimiterOptions.ConvertPartitioner<string>(null, policy.GetPartition), policy.OnRejected);
+        var defaultRateLimiterPolicy = new DefaultRateLimiterPolicy(
+            RateLimiterOptions.ConvertPartitioner<string>(null, policy.GetPartition),
+            policy.OnRejected
+        );
         options.Value.OnRejected = (context, token) =>
         {
             globalOnRejectedInvoked = true;
@@ -570,16 +743,26 @@ public class RateLimitingMiddlewareTests
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
+        var middleware = new RateLimitingMiddleware(
+            c =>
+            {
+                return Task.CompletedTask;
+            },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
-        context.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(defaultRateLimiterPolicy)), "Test endpoint"));
+        context.SetEndpoint(
+            new Endpoint(
+                c => Task.CompletedTask,
+                new EndpointMetadataCollection(
+                    new EnableRateLimitingAttribute(defaultRateLimiterPolicy)
+                ),
+                "Test endpoint"
+            )
+        );
         await middleware.Invoke(context).DefaultTimeout();
         Assert.False(globalOnRejectedInvoked);
 
@@ -593,7 +776,10 @@ public class RateLimitingMiddlewareTests
         var options = CreateOptionsAccessor();
         // Policy will disallow
         var policy = new TestRateLimiterPolicy("myKey1", 404, false);
-        var defaultRateLimiterPolicy = new DefaultRateLimiterPolicy(RateLimiterOptions.ConvertPartitioner<string>(null, policy.GetPartition), policy.OnRejected);
+        var defaultRateLimiterPolicy = new DefaultRateLimiterPolicy(
+            RateLimiterOptions.ConvertPartitioner<string>(null, policy.GetPartition),
+            policy.OnRejected
+        );
 
         var name = "myEndpoint";
         options.Value.AddPolicy<string>(name, new TestRateLimiterPolicy("myKey2", 403, false));
@@ -605,22 +791,33 @@ public class RateLimitingMiddlewareTests
             return ValueTask.CompletedTask;
         };
 
-        var middleware = new RateLimitingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
+        var middleware = new RateLimitingMiddleware(
+            c =>
+            {
+                return Task.CompletedTask;
+            },
             new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
             options,
-            Mock.Of<IServiceProvider>());
+            Mock.Of<IServiceProvider>()
+        );
 
         var context = new DefaultHttpContext();
-        context.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(new EnableRateLimitingAttribute(defaultRateLimiterPolicy), new EnableRateLimitingAttribute(name)), "Test endpoint"));
+        context.SetEndpoint(
+            new Endpoint(
+                c => Task.CompletedTask,
+                new EndpointMetadataCollection(
+                    new EnableRateLimitingAttribute(defaultRateLimiterPolicy),
+                    new EnableRateLimitingAttribute(name)
+                ),
+                "Test endpoint"
+            )
+        );
         await middleware.Invoke(context).DefaultTimeout();
         Assert.False(globalOnRejectedInvoked);
 
         Assert.Equal(StatusCodes.Status403Forbidden, context.Response.StatusCode);
     }
 
-    private IOptions<RateLimiterOptions> CreateOptionsAccessor() => Options.Create(new RateLimiterOptions());
-
+    private IOptions<RateLimiterOptions> CreateOptionsAccessor() =>
+        Options.Create(new RateLimiterOptions());
 }

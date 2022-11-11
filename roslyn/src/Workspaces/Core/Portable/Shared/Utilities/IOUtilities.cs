@@ -28,34 +28,34 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             {
                 return function();
             }
-            catch (Exception e) when (IsNormalIOException(e))
-            {
-            }
+            catch (Exception e) when (IsNormalIOException(e)) { }
 
             return defaultValue;
         }
 
-        public static async Task<T> PerformIOAsync<T>(Func<Task<T>> function, T defaultValue = default)
+        public static async Task<T> PerformIOAsync<T>(
+            Func<Task<T>> function,
+            T defaultValue = default
+        )
         {
             try
             {
                 return await function().ConfigureAwait(false);
             }
-            catch (Exception e) when (IsNormalIOException(e))
-            {
-            }
+            catch (Exception e) when (IsNormalIOException(e)) { }
 
             return defaultValue;
         }
 
         public static bool IsNormalIOException(Exception e)
         {
-            return e is IOException or
-                   SecurityException or
-                   ArgumentException or
-                   UnauthorizedAccessException or
-                   NotSupportedException or
-                   InvalidOperationException;
+            return e
+                is IOException
+                    or SecurityException
+                    or ArgumentException
+                    or UnauthorizedAccessException
+                    or NotSupportedException
+                    or InvalidOperationException;
         }
     }
 }

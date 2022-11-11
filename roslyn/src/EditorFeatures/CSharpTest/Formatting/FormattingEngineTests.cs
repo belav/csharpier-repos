@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         [WpfFact, WorkItem(539682, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539682")]
         public void FormatDocumentCommandHandler()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -57,7 +58,8 @@ int y;
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -73,7 +75,8 @@ int y;
         [WpfFact, WorkItem(539682, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539682")]
         public void FormatDocumentPasteCommandHandler()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -83,7 +86,8 @@ int y;
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -99,7 +103,8 @@ int y;
         [WpfFact, WorkItem(547261, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/547261")]
         public void FormatDocumentReadOnlyWorkspacePasteCommandHandler()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -109,7 +114,8 @@ int y;
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -125,7 +131,8 @@ int y;
         [WpfFact, WorkItem(912965, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/912965")]
         public void DoNotFormatUsingStatementOnReturn()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -135,7 +142,8 @@ int y;
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -145,13 +153,19 @@ int y;
 }
 ";
 
-            AssertFormatWithPasteOrReturn(expected, code, allowDocumentChanges: true, isPaste: false);
+            AssertFormatWithPasteOrReturn(
+                expected,
+                code,
+                allowDocumentChanges: true,
+                isPaste: false
+            );
         }
 
         [WpfFact, WorkItem(912965, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/912965")]
         public void FormatUsingStatementWhenTypingCloseParen()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -161,7 +175,8 @@ int y;
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -177,7 +192,8 @@ int y;
         [WpfFact, WorkItem(912965, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/912965")]
         public void FormatNotUsingStatementOnReturn()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -187,7 +203,8 @@ int y;
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -197,21 +214,28 @@ int y;
 }
 ";
 
-            AssertFormatWithPasteOrReturn(expected, code, allowDocumentChanges: true, isPaste: false);
+            AssertFormatWithPasteOrReturn(
+                expected,
+                code,
+                allowDocumentChanges: true,
+                isPaste: false
+            );
         }
 
         [WorkItem(977133, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/977133")]
         [WpfFact]
         public void DoNotFormatRangeOrFormatTokenOnOpenBraceOnSameLine()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {
         if (true)        {$$
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -225,7 +249,8 @@ int y;
         [WpfFact]
         public void DoNotFormatRangeButFormatTokenOnOpenBraceOnNextLine()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {
@@ -233,7 +258,8 @@ int y;
             {$$
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -248,7 +274,8 @@ int y;
         [WpfFact]
         public void FormatPragmaWarningInbetweenDelegateDeclarationStatement()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -261,7 +288,8 @@ class Program
         };$$
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -281,7 +309,8 @@ class Program
         [WpfFact]
         public void FormatHashRegion()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -290,7 +319,8 @@ class Program
 #region$$
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -306,7 +336,8 @@ class Program
         [WpfFact]
         public void FormatHashEndRegion()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -316,7 +347,8 @@ class Program
 #endregion$$
     }
 }";
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -333,7 +365,8 @@ class Program
         [WpfFact]
         public async Task FormatSpansIndividuallyWithoutCollapsing()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     public void M()
     {
@@ -372,7 +405,8 @@ class Program
         [|if(true){}|]
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     public void M()
     {
@@ -418,7 +452,14 @@ class Program
             var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
             var syntaxRoot = await document.GetSyntaxRootAsync();
             var options = CSharpSyntaxFormattingOptions.Default;
-            var node = Formatter.Format(syntaxRoot, spans, workspace.Services.SolutionServices, options, rules: null, CancellationToken.None);
+            var node = Formatter.Format(
+                syntaxRoot,
+                spans,
+                workspace.Services.SolutionServices,
+                options,
+                rules: null,
+                CancellationToken.None
+            );
             Assert.Equal(expected, node.ToFullString());
         }
 
@@ -426,7 +467,8 @@ class Program
         [WpfFact]
         public void SemicolonInCommentOnLastLineDoesNotFormat()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 
 class Program
 {
@@ -436,7 +478,8 @@ class Program
 }
 // ;$$";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Program
 {
@@ -453,7 +496,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideSingleLineRegularComment_1()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
                               //        {$$
                        static void Main(int a, int b)
@@ -462,7 +506,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
                               //        {
                        static void Main(int a, int b)
@@ -478,7 +523,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideSingleLineRegularComment_2()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
                               //        {$$   
                        static void Main(int a, int b)
@@ -487,7 +533,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
                               //        {   
                        static void Main(int a, int b)
@@ -503,7 +550,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideMultiLineRegularComment_1()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(int          a/*         {$$       */, int b)
     {
@@ -511,7 +559,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(int          a/*         {       */, int b)
     {
@@ -526,7 +575,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideMultiLineRegularComment_2()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(int          a/*         {$$
         */, int b)
@@ -535,7 +585,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(int          a/*         {
         */, int b)
@@ -551,7 +602,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideMultiLineRegularComment_3()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(int          a/*         {$$    
         */, int b)
@@ -560,7 +612,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(int          a/*         {    
         */, int b)
@@ -576,7 +629,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideSingleLineDocComment_1()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
                               ///        {$$
                        static void Main(int a, int b)
@@ -585,7 +639,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
                               ///        {
                        static void Main(int a, int b)
@@ -601,7 +656,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideSingleLineDocComment_2()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
                               ///        {$$   
                        static void Main(int a, int b)
@@ -610,7 +666,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
                               ///        {   
                        static void Main(int a, int b)
@@ -626,7 +683,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideMultiLineDocComment_1()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
                               /**        {$$   **/
                        static void Main(int a, int b)
@@ -635,7 +693,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
                               /**        {   **/
                        static void Main(int a, int b)
@@ -651,7 +710,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideMultiLineDocComment_2()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
                               /**        {$$   
                 **/
@@ -661,7 +721,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
                               /**        {   
                 **/
@@ -678,7 +739,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideMultiLineDocComment_3()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
                               /**        {$$
                 **/
@@ -688,7 +750,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
                               /**        {
                 **/
@@ -705,7 +768,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideInactiveCode()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
                                         #if false
                     {$$
@@ -717,7 +781,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
                                         #if false
                     {
@@ -736,7 +801,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideStringLiteral()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -744,7 +810,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -759,7 +826,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideCharLiteral()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -767,7 +835,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -782,7 +851,8 @@ class Program
         [WpfFact]
         public void NoFormattingInsideCommentsOfPreprocessorDirectives()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
        #region
         #endregion // a/*{$$*/    
@@ -792,7 +862,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
        #region
         #endregion // a/*{*/    
@@ -809,7 +880,8 @@ class Program
         [WpfFact]
         public void ColonInSwitchCase()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -821,7 +893,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -840,7 +913,8 @@ class Program
         [WpfFact]
         public void ColonInDefaultSwitchCase()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -853,7 +927,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -872,7 +947,8 @@ class Program
         [WpfFact]
         public void ColonInPatternSwitchCase01()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main()
     {
@@ -883,7 +959,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main()
     {
@@ -901,7 +978,8 @@ class Program
         [WpfFact]
         public void ColonInLabeledStatement()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -909,7 +987,8 @@ class Program
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -924,13 +1003,15 @@ class Program
         [WpfFact]
         public void DoNotFormatColonInTargetAttribute()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 [method    :$$    C]
 class C : Attribute
 {
 }";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 [method    :    C]
 class C : Attribute
 {
@@ -943,11 +1024,13 @@ class C : Attribute
         [WpfFact]
         public void DoNotFormatColonInBaseList()
         {
-            var code = @"class C   :$$   Attribute
+            var code =
+                @"class C   :$$   Attribute
 {
 }";
 
-            var expected = @"class C   :   Attribute
+            var expected =
+                @"class C   :   Attribute
 {
 }";
             AssertFormatAfterTypeChar(code, expected);
@@ -958,7 +1041,8 @@ class C : Attribute
         [WpfFact]
         public void DoNotFormatColonInThisConstructor()
         {
-            var code = @"class Goo
+            var code =
+                @"class Goo
 {
     Goo(int s)   :$$   this()
     {
@@ -969,7 +1053,8 @@ class C : Attribute
     }
 }";
 
-            var expected = @"class Goo
+            var expected =
+                @"class Goo
 {
     Goo(int s)   :   this()
     {
@@ -987,7 +1072,8 @@ class C : Attribute
         [WpfFact]
         public void DoNotFormatColonInConditionalOperator()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -995,7 +1081,8 @@ class C : Attribute
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1010,7 +1097,8 @@ class C : Attribute
         [WpfFact]
         public void DoNotFormatColonInArgument()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1018,7 +1106,8 @@ class C : Attribute
     }
 }";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1033,7 +1122,8 @@ class C : Attribute
         [WpfFact]
         public void DoNotFormatColonInTypeParameter()
         {
-            var code = @"class Program<T>
+            var code =
+                @"class Program<T>
 {
     class C1<U>
         where   T  :$$  U
@@ -1042,7 +1132,8 @@ class C : Attribute
     }
 }";
 
-            var expected = @"class Program<T>
+            var expected =
+                @"class Program<T>
 {
     class C1<U>
         where   T  :  U
@@ -1057,13 +1148,15 @@ class C : Attribute
         [WpfFact]
         public void DontSmartFormatBracesOnSmartIndentNone()
         {
-            var code = @"class Program<T>
+            var code =
+                @"class Program<T>
 {
     class C1<U>
 {$$
 }";
 
-            var expected = @"class Program<T>
+            var expected =
+                @"class Program<T>
 {
     class C1<U>
 {
@@ -1079,7 +1172,8 @@ class C : Attribute
         [Trait(Traits.Feature, Traits.Features.SmartTokenFormatting)]
         public void StillAutoIndentCloseBraceWhenFormatOnCloseBraceIsOff()
         {
-            var code = @"namespace N
+            var code =
+                @"namespace N
 {
     class C
     {
@@ -1089,7 +1183,8 @@ class C : Attribute
 }
 ";
 
-            var expected = @"namespace N
+            var expected =
+                @"namespace N
 {
     class C
     {
@@ -1111,7 +1206,8 @@ class C : Attribute
         [Trait(Traits.Feature, Traits.Features.SmartTokenFormatting)]
         public void AutoIndentCloseBraceWhenFormatOnTypingIsOff()
         {
-            var code = @"namespace N
+            var code =
+                @"namespace N
 {
     class C
     {
@@ -1121,7 +1217,8 @@ class C : Attribute
 }
 ";
 
-            var expected = @"namespace N
+            var expected =
+                @"namespace N
 {
     class C
     {
@@ -1146,7 +1243,7 @@ class C : Attribute
             // There are tabs in this test case.  Tools that touch the Roslyn repo should
             // not remove these as we are explicitly testing tab behavior.
             var code =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1155,7 +1252,7 @@ class C : Attribute
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1177,7 +1274,8 @@ class C : Attribute
         {
             // There are tabs in this test case.  Tools that touch the Roslyn repo should
             // not remove these as we are explicitly testing tab behavior.
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main()
     {
@@ -1186,7 +1284,7 @@ class C : Attribute
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1212,7 +1310,7 @@ class C : Attribute
 ";
 
             var expected =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -1244,7 +1342,7 @@ class C : Attribute
 ";
 
             var expected =
-@"namespace N
+                @"namespace N
 {
     class C
     {
@@ -1266,7 +1364,7 @@ class C : Attribute
         public void OpenCurlyNotFormattedIfNotAtStartOfLine()
         {
             var code =
-@"
+                @"
 class C
 {
     public  int     P   {$$
@@ -1274,7 +1372,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     public  int     P   {
@@ -1289,7 +1387,7 @@ class C
         public void OpenCurlyFormattedIfAtStartOfLine()
         {
             var code =
-@"
+                @"
 class C
 {
     public  int     P
@@ -1298,7 +1396,7 @@ class C
 ";
 
             var expected =
-@"
+                @"
 class C
 {
     public  int     P
@@ -1312,7 +1410,8 @@ class C
         [WpfFact]
         public void DoNotFormatIncompleteBlockOnSingleLineIfNotTypingCloseCurly1()
         {
-            var code = @"namespace ConsoleApplication1
+            var code =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -1321,7 +1420,8 @@ class C
             get { return true;$$
     }
 }";
-            var expected = @"namespace ConsoleApplication1
+            var expected =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -1336,14 +1436,16 @@ class C
         [WpfFact]
         public void DoNotFormatIncompleteBlockOnSingleLineIfNotTypingCloseCurly2()
         {
-            var code = @"namespace ConsoleApplication1
+            var code =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
         static bool Property { get { return true;$$
     }
 }";
-            var expected = @"namespace ConsoleApplication1
+            var expected =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -1356,14 +1458,16 @@ class C
         [WpfFact]
         public void DoNotFormatIncompleteBlockOnSingleLineIfNotTypingCloseCurly3()
         {
-            var code = @"namespace ConsoleApplication1
+            var code =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
         static bool Property { get;$$
     }
 }";
-            var expected = @"namespace ConsoleApplication1
+            var expected =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -1376,7 +1480,8 @@ class C
         [WpfFact]
         public void DoNotFormatCompleteBlockOnSingleLineIfTypingCloseCurly1()
         {
-            var code = @"namespace ConsoleApplication1
+            var code =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -1384,7 +1489,8 @@ class C
         {
             get { return true; }$$
 }";
-            var expected = @"namespace ConsoleApplication1
+            var expected =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -1398,13 +1504,15 @@ class C
         [WpfFact]
         public void DoNotFormatCompleteBlockOnSingleLineIfTypingCloseCurly2()
         {
-            var code = @"namespace ConsoleApplication1
+            var code =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
         static bool Property { get { return true; }$$
 }";
-            var expected = @"namespace ConsoleApplication1
+            var expected =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -1416,7 +1524,8 @@ class C
         [WpfFact]
         public void FormatIncompleteBlockOnMultipleLinesIfTypingCloseCurly1()
         {
-            var code = @"namespace ConsoleApplication1
+            var code =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -1425,7 +1534,8 @@ class C
             get { return true;
     }$$
 }";
-            var expected = @"namespace ConsoleApplication1
+            var expected =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -1442,7 +1552,8 @@ class C
         [WpfFact]
         public void FormatIncompleteBlockOnMultipleLinesIfTypingCloseCurly2()
         {
-            var code = @"namespace ConsoleApplication1
+            var code =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -1451,7 +1562,8 @@ class C
             get { return true;
     }
 }$$";
-            var expected = @"namespace ConsoleApplication1
+            var expected =
+                @"namespace ConsoleApplication1
 {
     class Program
     {
@@ -1469,7 +1581,7 @@ class C
         public void DoNotFormatCompleteBlockOnSingleLineIfTypingSemicolon()
         {
             var code =
-@"public class Class1
+                @"public class Class1
 {
     void M()
     {
@@ -1479,7 +1591,7 @@ class C
     }
 }";
             var expected =
-@"public class Class1
+                @"public class Class1
 {
     void M()
     {
@@ -1495,7 +1607,7 @@ class C
         public void FormatCompleteBlockOnSingleLineIfTypingCloseCurlyOnLaterLine()
         {
             var code =
-@"public class Class1
+                @"public class Class1
 {
     void M()
     {
@@ -1506,7 +1618,7 @@ class C
     }
 }";
             var expected =
-@"public class Class1
+                @"public class Class1
 {
     void M()
     {
@@ -1525,7 +1637,8 @@ class C
         [WpfFact]
         public void FormatLockStatementWithEmbeddedStatementOnSemicolonDifferentLine()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     private object _l = new object();
     public void M()
@@ -1534,7 +1647,8 @@ class C
                        Console.WriteLine(""d"");$$
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     private object _l = new object();
     public void M()
@@ -1550,7 +1664,8 @@ class C
         [WpfFact]
         public void FormatLockStatementWithEmbeddedStatementOnSemicolonSameLine()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     private object _l = new object();
     public void M()
@@ -1558,7 +1673,8 @@ class C
         lock (_l)      Console.WriteLine(""d"");$$
     }
 }";
-            var expected = @"class C
+            var expected =
+                @"class C
 {
     private object _l = new object();
     public void M()
@@ -1584,7 +1700,8 @@ class C
         [WpfFact, WorkItem(57465, "https://github.com/dotnet/roslyn/issues/57465")]
         public async Task FormatLambdaWithDirective()
         {
-            var code = @"namespace N
+            var code =
+                @"namespace N
 {
     public class C
     {
@@ -1605,7 +1722,8 @@ class C
     }
 }
 ";
-            var expected = @"namespace N
+            var expected =
+                @"namespace N
 {
     public class C
     {
@@ -1633,7 +1751,8 @@ class C
         [WpfFact, WorkItem(57465, "https://github.com/dotnet/roslyn/issues/57465")]
         public async Task FormatLambdaWithComment()
         {
-            var code = @"namespace N
+            var code =
+                @"namespace N
 {
     public class C
     {
@@ -1653,7 +1772,8 @@ if (true)
     }
 }
 ";
-            var expected = @"namespace N
+            var expected =
+                @"namespace N
 {
     public class C
     {
@@ -1683,10 +1803,12 @@ if (true)
         public async Task FormatAttributeAtEndOfFile(bool trailingNewLine)
         {
             var endOfFile = trailingNewLine ? Environment.NewLine : "";
-            var code = $@"using System.Diagnostics.CodeAnalysis;
+            var code =
+                $@"using System.Diagnostics.CodeAnalysis;
 
 [assembly:SuppressMessage(""Globalization"", ""CA1308: Normalize strings to uppercase"", Justification = ""My reason"", Scope = ""member"", Target = ""~M:Method"") ] {endOfFile}";
-            var expected = $@"using System.Diagnostics.CodeAnalysis;
+            var expected =
+                $@"using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage(""Globalization"", ""CA1308: Normalize strings to uppercase"", Justification = ""My reason"", Scope = ""member"", Target = ""~M:Method"")]{endOfFile}";
 
@@ -1699,7 +1821,7 @@ if (true)
         public void DoSmartIndentOpenBraceEvenWithFormatWhileTypingOff1()
         {
             var code =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1709,7 +1831,7 @@ if (true)
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1726,7 +1848,7 @@ if (true)
         public void DoSmartIndentOpenBraceEvenWithFormatWhileTypingOff2()
         {
             var code =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1736,7 +1858,7 @@ if (true)
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1754,7 +1876,7 @@ if (true)
         {
             // We only smart indent the { if it's on it's own line.
             var code =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1763,7 +1885,7 @@ if (true)
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1780,7 +1902,7 @@ if (true)
         {
             // We only smart indent the { if it's on it's own line.
             var code =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1789,7 +1911,7 @@ if (true)
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1806,7 +1928,7 @@ if (true)
         {
             // Typing the { should not affect the formating of the preceding tokens.
             var code =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1816,7 +1938,7 @@ if (true)
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1834,7 +1956,7 @@ if (true)
         {
             // Typing the { should not affect the formating of the preceding tokens.
             var code =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1843,7 +1965,7 @@ if (true)
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1859,14 +1981,14 @@ if (true)
         public void DoSmartIndentOpenBraceEvenWithFormatWhileTypingOff7()
         {
             var code =
-@"class Program
+                @"class Program
 {
     void M()
         {$$
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1880,7 +2002,7 @@ if (true)
         public void DoSmartIndentCloseBraceEvenWithFormatWhileTypingOff1()
         {
             var code =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1891,7 +2013,7 @@ if (true)
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1910,7 +2032,7 @@ if (true)
         {
             // Note that the { is not updated since we are not formatting.
             var code =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1920,7 +2042,7 @@ if (true)
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1937,7 +2059,7 @@ if (true)
         public void DoSmartIndentCloseBraceEvenWithFormatWhileTypingOff3()
         {
             var code =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1945,7 +2067,7 @@ if (true)
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1961,14 +2083,14 @@ if (true)
         {
             // Should not affect formatting of open brace
             var code =
-@"class Program
+                @"class Program
 {
     void M() {
         }$$
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     void M() {
     }
@@ -1980,7 +2102,8 @@ if (true)
         [WpfFact, WorkItem(31907, "https://github.com/dotnet/roslyn/issues/31907")]
         public async Task NullableReferenceTypes()
         {
-            var code = @"[|
+            var code =
+                @"[|
 class MyClass
 {
     void MyMethod()
@@ -1989,7 +2112,8 @@ class MyClass
     }
 }
 |]";
-            var expected = @"
+            var expected =
+                @"
 class MyClass
 {
     void MyMethod()
@@ -2006,12 +2130,14 @@ class MyClass
         [WpfFact]
         public void FormatGeneratedNodeInInitializer()
         {
-            var code = @"new bool[] {
+            var code =
+                @"new bool[] {
     true,
     true
 }";
 
-            var expected = @"new bool[] {
+            var expected =
+                @"new bool[] {
     true,
 true == false, true
 }";
@@ -2019,7 +2145,11 @@ true == false, true
             var tree = SyntaxFactory.ParseSyntaxTree(code, options: TestOptions.Script);
             var root = tree.GetRoot();
 
-            var entry = SyntaxFactory.BinaryExpression(SyntaxKind.EqualsExpression, SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression), SyntaxFactory.LiteralExpression(SyntaxKind.FalseLiteralExpression));
+            var entry = SyntaxFactory.BinaryExpression(
+                SyntaxKind.EqualsExpression,
+                SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression),
+                SyntaxFactory.LiteralExpression(SyntaxKind.FalseLiteralExpression)
+            );
             var newRoot = root.InsertNodesBefore(root.DescendantNodes().Last(), new[] { entry });
             AssertFormatOnArbitraryNode(newRoot, expected);
         }
@@ -2027,7 +2157,8 @@ true == false, true
         [WpfFact, WorkItem(27268, "https://github.com/dotnet/roslyn/issues/27268")]
         public async Task PositionalPattern()
         {
-            var code = @"[|
+            var code =
+                @"[|
 class MyClass
 {
     void MyMethod()
@@ -2040,7 +2171,8 @@ class MyClass
     }
 }
 |]";
-            var expected = @"
+            var expected =
+                @"
 class MyClass
 {
     void MyMethod()
@@ -2060,7 +2192,8 @@ class MyClass
         [WpfFact]
         public async Task WithExpression()
         {
-            var code = @"[|
+            var code =
+                @"[|
 record C(int Property)
 {
     void M()
@@ -2069,7 +2202,8 @@ record C(int Property)
     }
 }
 |]";
-            var expected = @"
+            var expected =
+                @"
 record C(int Property)
 {
     void M()
@@ -2085,7 +2219,8 @@ record C(int Property)
         [WpfFact]
         public async Task WithExpression_MultiLine()
         {
-            var code = @"[|
+            var code =
+                @"[|
 record C(int Property, int Property2)
 {
     void M()
@@ -2098,7 +2233,8 @@ Property2  =  2
     }
 }
 |]";
-            var expected = @"
+            var expected =
+                @"
 record C(int Property, int Property2)
 {
     void M()
@@ -2118,7 +2254,8 @@ record C(int Property, int Property2)
         [WpfFact]
         public async Task WithExpression_MultiLine_UserPositionedBraces()
         {
-            var code = @"[|
+            var code =
+                @"[|
 record C(int Property, int Property2)
 {
     void M()
@@ -2131,7 +2268,8 @@ record C(int Property, int Property2)
     }
 }
 |]";
-            var expected = @"
+            var expected =
+                @"
 record C(int Property, int Property2)
 {
     void M()
@@ -2152,7 +2290,8 @@ record C(int Property, int Property2)
         [WpfFact]
         public void SeparateGroups_KeepMultipleLinesBetweenGroups()
         {
-            var code = @"$$
+            var code =
+                @"$$
 using System.A;
 using System.B;
 
@@ -2161,7 +2300,8 @@ using MS.A;
 using MS.B;
 ";
 
-            var expected = @"$$
+            var expected =
+                @"$$
 using System.A;
 using System.B;
 
@@ -2170,14 +2310,22 @@ using MS.A;
 using MS.B;
 ";
 
-            AssertFormatWithView(expected, code, new OptionsCollection(LanguageNames.CSharp) { { GenerationOptions.SeparateImportDirectiveGroups, true } });
+            AssertFormatWithView(
+                expected,
+                code,
+                new OptionsCollection(LanguageNames.CSharp)
+                {
+                    { GenerationOptions.SeparateImportDirectiveGroups, true }
+                }
+            );
         }
 
         [WorkItem(25003, "https://github.com/dotnet/roslyn/issues/25003")]
         [WpfFact]
         public void SeparateGroups_KeepMultipleLinesBetweenGroups_FileScopedNamespace()
         {
-            var code = @"$$
+            var code =
+                @"$$
 namespace N;
 
 using System.A;
@@ -2188,7 +2336,8 @@ using MS.A;
 using MS.B;
 ";
 
-            var expected = @"$$
+            var expected =
+                @"$$
 namespace N;
 
 using System.A;
@@ -2199,42 +2348,60 @@ using MS.A;
 using MS.B;
 ";
 
-            AssertFormatWithView(expected, code, new OptionsCollection(LanguageNames.CSharp) { { GenerationOptions.SeparateImportDirectiveGroups, true } });
+            AssertFormatWithView(
+                expected,
+                code,
+                new OptionsCollection(LanguageNames.CSharp)
+                {
+                    { GenerationOptions.SeparateImportDirectiveGroups, true }
+                }
+            );
         }
 
         [WorkItem(25003, "https://github.com/dotnet/roslyn/issues/25003")]
         [WpfFact]
         public void SeparateGroups_DoNotGroupIfNotSorted()
         {
-            var code = @"$$
+            var code =
+                @"$$
 using System.B;
 using System.A;
 using MS.B;
 using MS.A;
 ";
 
-            var expected = @"$$
+            var expected =
+                @"$$
 using System.B;
 using System.A;
 using MS.B;
 using MS.A;
 ";
 
-            AssertFormatWithView(expected, code, new OptionsCollection(LanguageNames.CSharp) { { GenerationOptions.SeparateImportDirectiveGroups, true } });
+            AssertFormatWithView(
+                expected,
+                code,
+                new OptionsCollection(LanguageNames.CSharp)
+                {
+                    { GenerationOptions.SeparateImportDirectiveGroups, true }
+                }
+            );
         }
 
         [WorkItem(25003, "https://github.com/dotnet/roslyn/issues/25003")]
         [WpfFact]
         public void SeparateGroups_GroupIfSorted()
         {
-            var code = @"$$
+            var code =
+                @"$$
 using System.A;
 using System.B;
 using MS.A;
 using MS.B;
 ";
 
-            var expected = @"$$
+            var expected =
+                @"$$
 using System.A;
 using System.B;
 
@@ -2242,21 +2409,30 @@ using MS.A;
 using MS.B;
 ";
 
-            AssertFormatWithView(expected, code, new OptionsCollection(LanguageNames.CSharp) { { GenerationOptions.SeparateImportDirectiveGroups, true } });
+            AssertFormatWithView(
+                expected,
+                code,
+                new OptionsCollection(LanguageNames.CSharp)
+                {
+                    { GenerationOptions.SeparateImportDirectiveGroups, true }
+                }
+            );
         }
 
         [WorkItem(25003, "https://github.com/dotnet/roslyn/issues/25003")]
         [WpfFact]
         public void SeparateGroups_GroupIfSorted_RecognizeSystemNotFirst()
         {
-            var code = @"$$
+            var code =
+                @"$$
 using MS.A;
 using MS.B;
 using System.A;
 using System.B;
 ";
 
-            var expected = @"$$
+            var expected =
+                @"$$
 using MS.A;
 using MS.B;
 
@@ -2264,14 +2440,22 @@ using System.A;
 using System.B;
 ";
 
-            AssertFormatWithView(expected, code, new OptionsCollection(LanguageNames.CSharp) { { GenerationOptions.SeparateImportDirectiveGroups, true } });
+            AssertFormatWithView(
+                expected,
+                code,
+                new OptionsCollection(LanguageNames.CSharp)
+                {
+                    { GenerationOptions.SeparateImportDirectiveGroups, true }
+                }
+            );
         }
 
         [WpfFact, WorkItem(58157, "https://github.com/dotnet/roslyn/issues/58157")]
         [Trait(Traits.Feature, Traits.Features.Formatting)]
         public void FormatImplicitObjectCollection()
         {
-            var code = @"class Program
+            var code =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2283,7 +2467,8 @@ using System.B;
 }
 ";
 
-            var expected = @"class Program
+            var expected =
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -2301,7 +2486,8 @@ using System.B;
         [Fact, WorkItem(49492, "https://github.com/dotnet/roslyn/issues/49492")]
         public void PreserveAnnotationsOnMultiLineTrivia()
         {
-            var text = @"
+            var text =
+                @"
 namespace TestApp
 {
     class Test
@@ -2324,7 +2510,12 @@ namespace TestApp
 
             var options = CSharpSyntaxFormattingOptions.Default;
 
-            var formattedRoot = Formatter.Format(root, workspace.Services.SolutionServices, options, CancellationToken.None);
+            var formattedRoot = Formatter.Format(
+                root,
+                workspace.Services.SolutionServices,
+                options,
+                CancellationToken.None
+            );
             var annotatedTrivia = formattedRoot.GetAnnotatedTrivia("marker");
 
             Assert.Single(annotatedTrivia);
@@ -2333,14 +2524,16 @@ namespace TestApp
         [WpfFact]
         public void FormatUserDefinedOperator()
         {
-            var code = @"$$
+            var code =
+                @"$$
 class C
 {
     public static C operator + ( C x, C y){
     }
 }";
 
-            var expected = @"$$
+            var expected =
+                @"$$
 class C
 {
     public static C operator +(C x, C y)
@@ -2354,14 +2547,16 @@ class C
         [WpfFact]
         public void FormatUserDefinedUnaryOperator()
         {
-            var code = @"$$
+            var code =
+                @"$$
 class C
 {
     public static C operator ++ ( C x){
     }
 }";
 
-            var expected = @"$$
+            var expected =
+                @"$$
 class C
 {
     public static C operator ++(C x)
@@ -2375,14 +2570,16 @@ class C
         [WpfFact]
         public void FormatUserDefinedExplicitCastOperator()
         {
-            var code = @"$$
+            var code =
+                @"$$
 class C
 {
     public static explicit operator C ( int x){
     }
 }";
 
-            var expected = @"$$
+            var expected =
+                @"$$
 class C
 {
     public static explicit operator C(int x)
@@ -2396,13 +2593,15 @@ class C
         [WpfFact]
         public void FormatUserDefinedOperatorOnType()
         {
-            var code = @"
+            var code =
+                @"
 interface I1
 {
     abstract static I1 operator + ( I1 x, I1 y);$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface I1
 {
     abstract static I1 operator +(I1 x, I1 y);
@@ -2414,13 +2613,15 @@ interface I1
         [WpfFact]
         public void FormatUserDefinedUnaryOperatorOnType()
         {
-            var code = @"
+            var code =
+                @"
 interface I1
 {
     abstract static I1 operator ++ ( I1 x);$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface I1
 {
     abstract static I1 operator ++(I1 x);
@@ -2432,13 +2633,15 @@ interface I1
         [WpfFact]
         public void FormatUserDefinedExplicitCastOperatorOnType()
         {
-            var code = @"
+            var code =
+                @"
 interface I1<T> where T : I1<T>
 {
     abstract static explicit operator string ( T x);$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface I1<T> where T : I1<T>
 {
     abstract static explicit operator string(T x);
@@ -2450,14 +2653,16 @@ interface I1<T> where T : I1<T>
         [WpfFact]
         public void FormatUserDefinedCheckedOperator()
         {
-            var code = @"$$
+            var code =
+                @"$$
 class C
 {
     public static C operator checked + ( C x, C y){
     }
 }";
 
-            var expected = @"$$
+            var expected =
+                @"$$
 class C
 {
     public static C operator checked +(C x, C y)
@@ -2465,20 +2670,28 @@ class C
     }
 }";
 
-            AssertFormatWithView(expected, code, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview));
+            AssertFormatWithView(
+                expected,
+                code,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.Preview
+                )
+            );
         }
 
         [WpfFact]
         public void FormatUserDefinedCheckedUnaryOperator()
         {
-            var code = @"$$
+            var code =
+                @"$$
 class C
 {
     public static C operator checked ++ ( C x){
     }
 }";
 
-            var expected = @"$$
+            var expected =
+                @"$$
 class C
 {
     public static C operator checked ++(C x)
@@ -2486,20 +2699,28 @@ class C
     }
 }";
 
-            AssertFormatWithView(expected, code, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview));
+            AssertFormatWithView(
+                expected,
+                code,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.Preview
+                )
+            );
         }
 
         [WpfFact]
         public void FormatUserDefinedExplicitCheckedCastOperator()
         {
-            var code = @"$$
+            var code =
+                @"$$
 class C
 {
     public static explicit operator checked C ( int x){
     }
 }";
 
-            var expected = @"$$
+            var expected =
+                @"$$
 class C
 {
     public static explicit operator checked C(int x)
@@ -2507,74 +2728,106 @@ class C
     }
 }";
 
-            AssertFormatWithView(expected, code, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview));
+            AssertFormatWithView(
+                expected,
+                code,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.Preview
+                )
+            );
         }
 
         [WpfFact]
         public void FormatUserDefinedCheckedOperatorOnType()
         {
-            var code = @"
+            var code =
+                @"
 interface I1
 {
     abstract static I1 operator checked + ( I1 x, I1 y);$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface I1
 {
     abstract static I1 operator checked +(I1 x, I1 y);
 }";
 
-            AssertFormatAfterTypeChar(code, expected, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview));
+            AssertFormatAfterTypeChar(
+                code,
+                expected,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.Preview
+                )
+            );
         }
 
         [WpfFact]
         public void FormatUserDefinedCheckedUnaryOperatorOnType()
         {
-            var code = @"
+            var code =
+                @"
 interface I1
 {
     abstract static I1 operator checked ++ ( I1 x);$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface I1
 {
     abstract static I1 operator checked ++(I1 x);
 }";
 
-            AssertFormatAfterTypeChar(code, expected, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview));
+            AssertFormatAfterTypeChar(
+                code,
+                expected,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.Preview
+                )
+            );
         }
 
         [WpfFact]
         public void FormatUserDefinedExplicitCheckedCastOperatorOnType()
         {
-            var code = @"
+            var code =
+                @"
 interface I1<T> where T : I1<T>
 {
     abstract static explicit operator checked string ( T x);$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface I1<T> where T : I1<T>
 {
     abstract static explicit operator checked string(T x);
 }";
 
-            AssertFormatAfterTypeChar(code, expected, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview));
+            AssertFormatAfterTypeChar(
+                code,
+                expected,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.Preview
+                )
+            );
         }
 
         [WpfFact]
         public void FormatUnsignedRightShift()
         {
-            var code = @"$$
+            var code =
+                @"$$
 class C
 {
     public static C operator>>> ( C x, C y){
     }
 }";
 
-            var expected = @"$$
+            var expected =
+                @"$$
 class C
 {
     public static C operator >>>(C x, C y)
@@ -2588,13 +2841,15 @@ class C
         [WpfFact]
         public void FormatUnsignedRightShiftOnType()
         {
-            var code = @"
+            var code =
+                @"
 interface I1
 {
     abstract static I1 operator >>> ( I1 x, I1 y);$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface I1
 {
     abstract static I1 operator >>>(I1 x, I1 y);
@@ -2603,20 +2858,34 @@ interface I1
             AssertFormatAfterTypeChar(code, expected);
         }
 
-        private static void AssertFormatAfterTypeChar(string code, string expected, OptionsCollection globalOptions = null, ParseOptions parseOptions = null)
+        private static void AssertFormatAfterTypeChar(
+            string code,
+            string expected,
+            OptionsCollection globalOptions = null,
+            ParseOptions parseOptions = null
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(code, parseOptions: parseOptions);
 
             var subjectDocument = workspace.Documents.Single();
 
             var commandHandler = workspace.GetService<FormatCommandHandler>();
-            var typedChar = subjectDocument.GetTextBuffer().CurrentSnapshot.GetText(subjectDocument.CursorPosition.Value - 1, 1);
+            var typedChar = subjectDocument
+                .GetTextBuffer()
+                .CurrentSnapshot.GetText(subjectDocument.CursorPosition.Value - 1, 1);
             var textView = subjectDocument.GetTextView();
 
             globalOptions?.SetGlobalOptions(workspace.GlobalOptions);
-            workspace.GlobalOptions.SetEditorOptions(textView.Options.GlobalOptions, subjectDocument.Project.Language);
+            workspace.GlobalOptions.SetEditorOptions(
+                textView.Options.GlobalOptions,
+                subjectDocument.Project.Language
+            );
 
-            commandHandler.ExecuteCommand(new TypeCharCommandArgs(textView, subjectDocument.GetTextBuffer(), typedChar[0]), () => { }, TestCommandExecutionContext.Create());
+            commandHandler.ExecuteCommand(
+                new TypeCharCommandArgs(textView, subjectDocument.GetTextBuffer(), typedChar[0]),
+                () => { },
+                TestCommandExecutionContext.Create()
+            );
 
             var newSnapshot = subjectDocument.GetTextBuffer().CurrentSnapshot;
 

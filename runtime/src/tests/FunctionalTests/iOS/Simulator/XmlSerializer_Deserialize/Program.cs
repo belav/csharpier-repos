@@ -14,10 +14,12 @@ public static class Program
 {
     public static async Task<int> Main(string[] args)
     {
-        using StringReader stringReader = new StringReader(@"<?xml version=""1.0"" encoding=""UTF-8""?>
+        using StringReader stringReader = new StringReader(
+            @"<?xml version=""1.0"" encoding=""UTF-8""?>
             <TestClass>
                 <TestData>sample</TestData> 
-            </TestClass>");
+            </TestClass>"
+        );
 
         var serializer = new XmlSerializer(typeof(TestClass));
         TestClass obj = (TestClass)serializer.Deserialize(stringReader);
@@ -33,9 +35,7 @@ public static class Program
     [XmlType("TestClass", AnonymousType = true, Namespace = "")]
     public class TestClass
     {
-        public TestClass()
-        {
-        }
+        public TestClass() { }
 
         [XmlElement("TestData")]
         public string TestData { get; set; }

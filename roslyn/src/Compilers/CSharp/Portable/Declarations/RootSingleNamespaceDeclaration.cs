@@ -33,12 +33,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<ReferenceDirective> referenceDirectives,
             bool hasAssemblyAttributes,
             ImmutableArray<Diagnostic> diagnostics,
-            QuickAttributes globalAliasedQuickAttributes)
-            : base(string.Empty,
-                   treeNode,
-                   nameLocation: new SourceLocation(treeNode),
-                   children: children,
-                   diagnostics: diagnostics)
+            QuickAttributes globalAliasedQuickAttributes
+        )
+            : base(
+                string.Empty,
+                treeNode,
+                nameLocation: new SourceLocation(treeNode),
+                children: children,
+                diagnostics: diagnostics
+            )
         {
             Debug.Assert(!referenceDirectives.IsDefault);
 
@@ -52,42 +55,27 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public ImmutableArray<ReferenceDirective> ReferenceDirectives
         {
-            get
-            {
-                return _referenceDirectives;
-            }
+            get { return _referenceDirectives; }
         }
 
         public bool HasAssemblyAttributes
         {
-            get
-            {
-                return _hasAssemblyAttributes;
-            }
+            get { return _hasAssemblyAttributes; }
         }
 
         public override bool HasGlobalUsings
         {
-            get
-            {
-                return _hasGlobalUsings;
-            }
+            get { return _hasGlobalUsings; }
         }
 
         public override bool HasUsings
         {
-            get
-            {
-                return _hasUsings;
-            }
+            get { return _hasUsings; }
         }
 
         public override bool HasExternAliases
         {
-            get
-            {
-                return _hasExternAliases;
-            }
+            get { return _hasExternAliases; }
         }
     }
 }

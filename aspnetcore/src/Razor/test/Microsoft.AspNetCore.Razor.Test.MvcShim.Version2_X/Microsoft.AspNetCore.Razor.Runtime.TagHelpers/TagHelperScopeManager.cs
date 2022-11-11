@@ -13,15 +13,15 @@ public class TagHelperScopeManager
 {
     public TagHelperScopeManager(
         Action<HtmlEncoder> startTagHelperWritingScope,
-        Func<TagHelperContent> endTagHelperWritingScope)
-    {
-    }
+        Func<TagHelperContent> endTagHelperWritingScope
+    ) { }
 
     public TagHelperExecutionContext Begin(
         string tagName,
         TagMode tagMode,
         string uniqueId,
-        Func<Task> executeChildContentAsync)
+        Func<Task> executeChildContentAsync
+    )
     {
         throw null;
     }

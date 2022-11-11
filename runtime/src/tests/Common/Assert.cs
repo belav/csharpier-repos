@@ -15,8 +15,7 @@ namespace Xunit
     /// <summary>
     /// A copy of the Xunit.FactAttribute type for assemblies that reference System.Private.CoreLib directly.
     /// </summary>
-    public sealed class FactAttribute : Attribute
-    {}
+    public sealed class FactAttribute : Attribute { }
 
     /// <summary>
     ///    A collection of helper classes to test various conditions within
@@ -48,7 +47,10 @@ namespace Xunit
                 Assert.True(false, $"Expected '{typeof(T)}' to be thrown.");
 
             if (exception is not T)
-                Assert.True(false, $"Expected '{typeof(T)}' to be thrown, however '{exception.GetType()}' was thrown.");
+                Assert.True(
+                    false,
+                    $"Expected '{typeof(T)}' to be thrown, however '{exception.GetType()}' was thrown."
+                );
 
             return (T)exception;
         }
@@ -204,7 +206,6 @@ namespace Xunit
             throw new XunitException(assertionName + ": " + message);
         }
 
-
         [Obsolete("Did you mean to call Assert.Equal()")]
         public static new bool Equals(Object o1, Object o2)
         {
@@ -231,14 +232,8 @@ namespace Xunit
     /// </summary>
     public class XunitException : Exception
     {
-        public XunitException(string message)
-            : base(message)
-        {
-        }
+        public XunitException(string message) : base(message) { }
 
-        public XunitException()
-            : base()
-        {
-        }
+        public XunitException() : base() { }
     }
 }

@@ -24,7 +24,9 @@ public class HasValidatorsValidationMetadataProviderIntegrationTest
         // Act
         var options = services.GetRequiredService<IOptions<MvcOptions>>();
 
-        Assert.IsType<HasValidatorsValidationMetadataProvider>(options.Value.ModelMetadataDetailsProviders.Last());
+        Assert.IsType<HasValidatorsValidationMetadataProvider>(
+            options.Value.ModelMetadataDetailsProviders.Last()
+        );
     }
 
     [Fact]
@@ -35,13 +37,17 @@ public class HasValidatorsValidationMetadataProviderIntegrationTest
         serviceCollection.AddLogging();
         serviceCollection.AddMvc(mvcOptions =>
         {
-            mvcOptions.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(IQueryable)));
+            mvcOptions.ModelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider(typeof(IQueryable))
+            );
         });
         var services = serviceCollection.BuildServiceProvider();
 
         // Act
         var options = services.GetRequiredService<IOptions<MvcOptions>>();
 
-        Assert.IsType<HasValidatorsValidationMetadataProvider>(options.Value.ModelMetadataDetailsProviders.Last());
+        Assert.IsType<HasValidatorsValidationMetadataProvider>(
+            options.Value.ModelMetadataDetailsProviders.Last()
+        );
     }
 }

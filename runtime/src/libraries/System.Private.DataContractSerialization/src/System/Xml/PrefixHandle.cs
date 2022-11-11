@@ -11,7 +11,32 @@ namespace System.Xml
     internal enum PrefixHandleType
     {
         Empty,
-        A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,
+        A,
+        B,
+        C,
+        D,
+        E,
+        F,
+        G,
+        H,
+        I,
+        J,
+        K,
+        L,
+        M,
+        N,
+        O,
+        P,
+        Q,
+        R,
+        S,
+        T,
+        U,
+        V,
+        W,
+        X,
+        Y,
+        Z,
         Buffer,
         Max,
     }
@@ -22,7 +47,36 @@ namespace System.Xml
         private PrefixHandleType _type;
         private int _offset;
         private int _length;
-        private static readonly string[] s_prefixStrings = { "", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+        private static readonly string[] s_prefixStrings =
+        {
+            "",
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h",
+            "i",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "x",
+            "y",
+            "z"
+        };
         private static readonly byte[] s_prefixBuffer = "abcdefghijklmnopqrstuvwxyz"u8.ToArray();
 
         public PrefixHandle(XmlBufferReader bufferReader)
@@ -68,10 +122,7 @@ namespace System.Xml
 
         public bool IsEmpty
         {
-            get
-            {
-                return _type == PrefixHandleType.Empty;
-            }
+            get { return _type == PrefixHandleType.Empty; }
         }
 
         public bool IsXmlns
@@ -84,11 +135,11 @@ namespace System.Xml
                     return false;
                 byte[] buffer = _bufferReader.Buffer;
                 int offset = _offset;
-                return buffer[offset + 0] == 'x' &&
-                       buffer[offset + 1] == 'm' &&
-                       buffer[offset + 2] == 'l' &&
-                       buffer[offset + 3] == 'n' &&
-                       buffer[offset + 4] == 's';
+                return buffer[offset + 0] == 'x'
+                    && buffer[offset + 1] == 'm'
+                    && buffer[offset + 2] == 'l'
+                    && buffer[offset + 3] == 'n'
+                    && buffer[offset + 4] == 's';
             }
         }
 
@@ -102,9 +153,9 @@ namespace System.Xml
                     return false;
                 byte[] buffer = _bufferReader.Buffer;
                 int offset = _offset;
-                return buffer[offset + 0] == 'x' &&
-                       buffer[offset + 1] == 'm' &&
-                       buffer[offset + 2] == 'l';
+                return buffer[offset + 0] == 'x'
+                    && buffer[offset + 1] == 'm'
+                    && buffer[offset + 2] == 'l';
             }
         }
 
@@ -172,6 +223,7 @@ namespace System.Xml
                 return _bufferReader.Buffer;
             }
         }
+
         public int CompareTo(PrefixHandle that)
         {
             return GetString().CompareTo(that.GetString());
@@ -190,7 +242,13 @@ namespace System.Xml
             if (_bufferReader == prefix2._bufferReader)
                 return _bufferReader.Equals2(_offset, _length, prefix2._offset, prefix2._length);
             else
-                return _bufferReader.Equals2(_offset, _length, prefix2._bufferReader, prefix2._offset, prefix2._length);
+                return _bufferReader.Equals2(
+                    _offset,
+                    _length,
+                    prefix2._bufferReader,
+                    prefix2._offset,
+                    prefix2._length
+                );
         }
 
         private bool Equals2(string prefix2)
@@ -205,6 +263,7 @@ namespace System.Xml
         {
             return Equals2(prefix2.Value);
         }
+
         public static bool operator ==(PrefixHandle prefix1, string prefix2)
         {
             return prefix1.Equals2(prefix2);
@@ -234,6 +293,7 @@ namespace System.Xml
         {
             return !prefix1.Equals(prefix2);
         }
+
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
             return Equals(obj as PrefixHandle);

@@ -8,7 +8,8 @@ namespace System.Tests
 {
     public static class ExceptionHelpers
     {
-        public static void ValidateExceptionProperties(Exception e,
+        public static void ValidateExceptionProperties(
+            Exception e,
             int hResult,
             int dataCount = 0,
             string helpLink = null,
@@ -16,7 +17,8 @@ namespace System.Tests
             string message = null,
             string source = null,
             string stackTrace = null,
-            bool validateMessage = true)
+            bool validateMessage = true
+        )
         {
             Assert.Equal(dataCount, e.Data.Count);
             Assert.Equal(helpLink, e.HelpLink);

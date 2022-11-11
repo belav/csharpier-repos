@@ -22,9 +22,18 @@ namespace ILCompiler.DependencyAnalysis
     /// </summary>
     internal static class DynamicDependencyAttributeAlgorithm
     {
-        public static void AddDependenciesDueToDynamicDependencyAttribute(ref DependencyList dependencies, NodeFactory factory, EcmaMethod method)
+        public static void AddDependenciesDueToDynamicDependencyAttribute(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            EcmaMethod method
+        )
         {
-            foreach (var attribute in method.GetDecodedCustomAttributes("System.Diagnostics.CodeAnalysis", "DynamicDependencyAttribute"))
+            foreach (
+                var attribute in method.GetDecodedCustomAttributes(
+                    "System.Diagnostics.CodeAnalysis",
+                    "DynamicDependencyAttribute"
+                )
+            )
             {
                 IEnumerable<TypeSystemEntity> members;
 
@@ -53,23 +62,34 @@ namespace ILCompiler.DependencyAnalysis
                         // DynamicDependencyAttribute(String)
                         targetType = method.OwningType;
                     }
-                    else if (fixedArgs.Length == 2 && fixedArgs[1].Value is TypeDesc typeFromAttribute)
+                    else if (
+                        fixedArgs.Length == 2 && fixedArgs[1].Value is TypeDesc typeFromAttribute
+                    )
                     {
                         // DynamicDependencyAttribute(String, Type)
                         targetType = typeFromAttribute;
                     }
-                    else if (fixedArgs.Length == 3 && fixedArgs[1].Value is string typeStringFromAttribute
-                        && fixedArgs[2].Value is string assemblyStringFromAttribute)
+                    else if (
+                        fixedArgs.Length == 3
+                        && fixedArgs[1].Value is string typeStringFromAttribute
+                        && fixedArgs[2].Value is string assemblyStringFromAttribute
+                    )
                     {
                         // DynamicDependencyAttribute(String, String, String)
-                        ModuleDesc asm = factory.TypeSystemContext.ResolveAssembly(new System.Reflection.AssemblyName(assemblyStringFromAttribute), throwIfNotFound: false);
+                        ModuleDesc asm = factory.TypeSystemContext.ResolveAssembly(
+                            new System.Reflection.AssemblyName(assemblyStringFromAttribute),
+                            throwIfNotFound: false
+                        );
                         if (asm == null)
                         {
                             // _context.LogWarning($"Unresolved assembly '{dynamicDependency.AssemblyName}' in 'DynamicDependencyAttribute'", 2035, context);
                             continue;
                         }
 
-                        targetType = DocumentationSignatureParser.GetTypeByDocumentationSignature((IAssemblyDesc)asm, typeStringFromAttribute);
+                        targetType = DocumentationSignatureParser.GetTypeByDocumentationSignature(
+                            (IAssemblyDesc)asm,
+                            typeStringFromAttribute
+                        );
                         if (targetType == null)
                         {
                             // _context.LogWarning ($"Unresolved type '{typeName}' in DynamicDependencyAttribute", 2036, context);
@@ -82,7 +102,11 @@ namespace ILCompiler.DependencyAnalysis
                         continue;
                     }
 
-                    members = DocumentationSignatureParser.GetMembersByDocumentationSignature(Linkerify(targetType), sigFromAttribute, acceptName: true);
+                    members = DocumentationSignatureParser.GetMembersByDocumentationSignature(
+                        Linkerify(targetType),
+                        sigFromAttribute,
+                        acceptName: true
+                    );
                 }
                 else if (fixedArgs.Length > 0 && fixedArgs[0].Value is int memberTypesFromAttribute)
                 {
@@ -91,18 +115,27 @@ namespace ILCompiler.DependencyAnalysis
                         // DynamicDependencyAttribute(DynamicallyAccessedMemberTypes, Type)
                         targetType = typeFromAttribute;
                     }
-                    else if (fixedArgs.Length == 3 && fixedArgs[1].Value is string typeStringFromAttribute
-                        && fixedArgs[2].Value is string assemblyStringFromAttribute)
+                    else if (
+                        fixedArgs.Length == 3
+                        && fixedArgs[1].Value is string typeStringFromAttribute
+                        && fixedArgs[2].Value is string assemblyStringFromAttribute
+                    )
                     {
                         // DynamicDependencyAttribute(DynamicallyAccessedMemberTypes, String, String)
-                        ModuleDesc asm = factory.TypeSystemContext.ResolveAssembly(new System.Reflection.AssemblyName(assemblyStringFromAttribute), throwIfNotFound: false);
+                        ModuleDesc asm = factory.TypeSystemContext.ResolveAssembly(
+                            new System.Reflection.AssemblyName(assemblyStringFromAttribute),
+                            throwIfNotFound: false
+                        );
                         if (asm == null)
                         {
                             // _context.LogWarning($"Unresolved assembly '{dynamicDependency.AssemblyName}' in 'DynamicDependencyAttribute'", 2035, context);
                             continue;
                         }
 
-                        targetType = DocumentationSignatureParser.GetTypeByDocumentationSignature((IAssemblyDesc)asm, typeStringFromAttribute);
+                        targetType = DocumentationSignatureParser.GetTypeByDocumentationSignature(
+                            (IAssemblyDesc)asm,
+                            typeStringFromAttribute
+                        );
                         if (targetType == null)
                         {
                             // _context.LogWarning ($"Unresolved type '{typeName}' in DynamicDependencyAttribute", 2036, context);
@@ -115,7 +148,10 @@ namespace ILCompiler.DependencyAnalysis
                         continue;
                     }
 
-                    members = Linkerify(targetType).GetDynamicallyAccessedMembers((DynamicallyAccessedMemberTypes)memberTypesFromAttribute);
+                    members = Linkerify(targetType)
+                        .GetDynamicallyAccessedMembers(
+                            (DynamicallyAccessedMemberTypes)memberTypesFromAttribute
+                        );
                 }
                 else
                 {
@@ -131,25 +167,60 @@ namespace ILCompiler.DependencyAnalysis
                     switch (member)
                     {
                         case MethodDesc m:
-                            RootingHelpers.TryGetDependenciesForReflectedMethod(ref dependencies, factory, m, reason);
+                            RootingHelpers.TryGetDependenciesForReflectedMethod(
+                                ref dependencies,
+                                factory,
+                                m,
+                                reason
+                            );
                             break;
                         case FieldDesc field:
-                            RootingHelpers.TryGetDependenciesForReflectedField(ref dependencies, factory, field, reason);
+                            RootingHelpers.TryGetDependenciesForReflectedField(
+                                ref dependencies,
+                                factory,
+                                field,
+                                reason
+                            );
                             break;
                         case MetadataType nestedType:
-                            RootingHelpers.TryGetDependenciesForReflectedType(ref dependencies, factory, nestedType, reason);
+                            RootingHelpers.TryGetDependenciesForReflectedType(
+                                ref dependencies,
+                                factory,
+                                nestedType,
+                                reason
+                            );
                             break;
                         case PropertyPseudoDesc property:
                             if (property.GetMethod != null)
-                                RootingHelpers.TryGetDependenciesForReflectedMethod(ref dependencies, factory, property.GetMethod, reason);
+                                RootingHelpers.TryGetDependenciesForReflectedMethod(
+                                    ref dependencies,
+                                    factory,
+                                    property.GetMethod,
+                                    reason
+                                );
                             if (property.SetMethod != null)
-                                RootingHelpers.TryGetDependenciesForReflectedMethod(ref dependencies, factory, property.SetMethod, reason);
+                                RootingHelpers.TryGetDependenciesForReflectedMethod(
+                                    ref dependencies,
+                                    factory,
+                                    property.SetMethod,
+                                    reason
+                                );
                             break;
                         case EventPseudoDesc @event:
                             if (@event.AddMethod != null)
-                                RootingHelpers.TryGetDependenciesForReflectedMethod(ref dependencies, factory, @event.AddMethod, reason);
+                                RootingHelpers.TryGetDependenciesForReflectedMethod(
+                                    ref dependencies,
+                                    factory,
+                                    @event.AddMethod,
+                                    reason
+                                );
                             if (@event.RemoveMethod != null)
-                                RootingHelpers.TryGetDependenciesForReflectedMethod(ref dependencies, factory, @event.RemoveMethod, reason);
+                                RootingHelpers.TryGetDependenciesForReflectedMethod(
+                                    ref dependencies,
+                                    factory,
+                                    @event.RemoveMethod,
+                                    reason
+                                );
                             break;
                         default:
                             Debug.Fail(member.GetType().ToString());

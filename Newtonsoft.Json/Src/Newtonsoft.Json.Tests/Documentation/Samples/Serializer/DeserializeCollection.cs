@@ -57,7 +57,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // Starcraft, Halo, Legend of Zelda
             #endregion
 
-            Assert.AreEqual("Starcraft, Halo, Legend of Zelda", string.Join(", ", videogames.ToArray()));
+            Assert.AreEqual(
+                "Starcraft, Halo, Legend of Zelda",
+                string.Join(", ", videogames.ToArray())
+            );
         }
     }
 }

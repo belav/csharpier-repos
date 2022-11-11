@@ -9,14 +9,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
 
-public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : CommonTestBase where TCompilation : Compilation
+public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : CommonTestBase
+    where TCompilation : Compilation
 {
-    private static string CompilerFeatureRequiredApplication(
-        bool? isOptional)
+    private static string CompilerFeatureRequiredApplication(bool? isOptional)
     {
         var builder = new BlobBuilder();
         builder.WriteSerializedString("test");
-        var featureLengthAndName = string.Join(" ", builder.ToImmutableArray().Select(b => $"{b:x2}"));
+        var featureLengthAndName = string.Join(
+            " ",
+            builder.ToImmutableArray().Select(b => $"{b:x2}")
+        );
 
         var isOptionalText = isOptional switch
         {
@@ -32,8 +35,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                  """;
     }
 
-    private const string CompilerFeatureRequiredIl =
-        """
+    private const string CompilerFeatureRequiredIl = """
         .class public auto ansi sealed beforefieldinit System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute
              extends [mscorlib]System.Attribute
          {
@@ -115,82 +117,82 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
     // public class OnType
     // {
     // }
-    // 
+    //
     // public class OnMethod
     // {
     //     [CompilerFeatureRequired("test")]
     //     public static void M() {}
     // }
-    // 
+    //
     // public class OnMethodReturn
     // {
     //     [return: CompilerFeatureRequired("test")]
     //     public static void M() {}
     // }
-    // 
+    //
     // public class OnParameter
     // {
     //     public static void M([CompilerFeatureRequired("test")] int param) {}
     // }
-    // 
+    //
     // public class OnField
     // {
     //     [CompilerFeatureRequired("test")]
     //     public static int Field;
     // }
-    // 
+    //
     // public class OnProperty
     // {
     //     [CompilerFeatureRequired("test")]
     //     public static int Property { get => 0; set {} }
     // }
-    // 
+    //
     // public class OnPropertySetter
     // {
     //     public static int Property { get => 0; [CompilerFeatureRequired("test")] set {} }
     // }
-    // 
+    //
     // public class OnPropertyGetter
     // {
     //     public static int Property { [CompilerFeatureRequired("test")] get => 0; set {} }
     // }
-    // 
+    //
     // public class OnEvent
     // {
     //     [CompilerFeatureRequired("test")]
     //     public static event Action Event { add {} remove {} }
     // }
-    // 
+    //
     // public class OnEventAdder
     // {
     //     public static event Action Event { [CompilerFeatureRequired("test")] add {} remove {} }
     // }
-    // 
+    //
     // public class OnEventRemover
     // {
     //     public static event Action Event { [CompilerFeatureRequired("test")] add {} remove {} }
     // }
-    // 
+    //
     // [CompilerFeatureRequired("test")]
     // public enum OnEnum
     // {
     //     A
     // }
-    // 
+    //
     // public enum OnEnumMember
     // {
     //     [CompilerFeatureRequired("test")] A
     // }
-    // 
+    //
     // public class OnClassTypeParameter<[CompilerFeatureRequired("test")] T>
     // {
     // }
-    // 
+    //
     // public class OnMethodTypeParameter
     // {
     //     public static void M<[CompilerFeatureRequired("test")] T>() {}
     // }
-    // 
+    //
     // [CompilerFeatureRequired("test")]
     // public delegate void OnDelegateType();
     //
@@ -613,7 +615,10 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
 
     protected abstract TSource GetUsage();
     protected abstract TCompilation CreateCompilationWithIL(TSource source, string ilSource);
-    protected abstract TCompilation CreateCompilation(TSource source, MetadataReference[] references);
+    protected abstract TCompilation CreateCompilation(
+        TSource source,
+        MetadataReference[] references
+    );
     protected abstract CompilationVerifier CompileAndVerify(TCompilation compilation);
 
     [Theory]
@@ -691,7 +696,6 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
         {{CompilerFeatureRequiredIl}}
         {{GetTestIl(attributeApplication: "")}}
         """;
-
 
         var compiledIl = CompileIL(il);
         var comp = CreateCompilation(source: GetUsage(), references: new[] { compiledIl });

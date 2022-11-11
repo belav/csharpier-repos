@@ -27,7 +27,13 @@ namespace ILLink.Shared.TrimAnalysis
             _logger = logger;
         }
 
-        public DiagnosticContext(in MessageOrigin origin, bool suppressTrimmerDiagnostics, bool suppressAotDiagnostics, bool suppressSingleFileDiagnostics, Logger logger)
+        public DiagnosticContext(
+            in MessageOrigin origin,
+            bool suppressTrimmerDiagnostics,
+            bool suppressAotDiagnostics,
+            bool suppressSingleFileDiagnostics,
+            Logger logger
+        )
         {
             Origin = origin;
             _diagnosticsEnabled = true;

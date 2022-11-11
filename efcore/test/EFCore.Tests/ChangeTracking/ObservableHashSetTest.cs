@@ -15,13 +15,12 @@ public class ObservableHashSetTest
     [ConditionalFact]
     public void Can_construct()
     {
-        Assert.Same(
-            new HashSet<int>().Comparer,
-            new ObservableHashSet<int>().Comparer);
+        Assert.Same(new HashSet<int>().Comparer, new ObservableHashSet<int>().Comparer);
 
         Assert.Same(
             LegacyReferenceEqualityComparer.Instance,
-            new ObservableHashSet<object>(LegacyReferenceEqualityComparer.Instance).Comparer);
+            new ObservableHashSet<object>(LegacyReferenceEqualityComparer.Instance).Comparer
+        );
 
         var testData1 = CreateTestData();
 
@@ -33,7 +32,10 @@ public class ObservableHashSetTest
         var testData2 = CreateTestData().Cast<object>();
 
         var rh2 = new HashSet<object>(testData2, LegacyReferenceEqualityComparer.Instance);
-        var ohs2 = new ObservableHashSet<object>(testData2, LegacyReferenceEqualityComparer.Instance);
+        var ohs2 = new ObservableHashSet<object>(
+            testData2,
+            LegacyReferenceEqualityComparer.Instance
+        );
         Assert.Equal(rh2.OrderBy(i => i), ohs2.OrderBy(i => i));
         Assert.Same(rh2.Comparer, ohs2.Comparer);
     }
@@ -49,8 +51,10 @@ public class ObservableHashSetTest
         var countChange = 1;
         var adding = Array.Empty<string>();
 
-        hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-        hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+        hashSet.PropertyChanging += (s, a) =>
+            AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+        hashSet.PropertyChanged += (s, a) =>
+            AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
         hashSet.CollectionChanged += (s, a) =>
         {
             Assert.Equal(NotifyCollectionChangedAction.Add, a.Action);
@@ -95,8 +99,10 @@ public class ObservableHashSetTest
         var currentCount = testData.Count;
         var countChange = -testData.Count;
 
-        hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-        hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+        hashSet.PropertyChanging += (s, a) =>
+            AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+        hashSet.PropertyChanged += (s, a) =>
+            AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
         hashSet.CollectionChanged += (s, a) =>
         {
             Assert.Equal(NotifyCollectionChangedAction.Replace, a.Action);
@@ -178,8 +184,10 @@ public class ObservableHashSetTest
         var countChange = -1;
         var removing = Array.Empty<string>();
 
-        hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-        hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+        hashSet.PropertyChanging += (s, a) =>
+            AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+        hashSet.PropertyChanged += (s, a) =>
+            AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
         hashSet.CollectionChanged += (s, a) =>
         {
             Assert.Equal(NotifyCollectionChangedAction.Remove, a.Action);
@@ -213,8 +221,7 @@ public class ObservableHashSetTest
     }
 
     [ConditionalFact]
-    public void Not_read_only()
-        => Assert.False(new ObservableHashSet<Random>().IsReadOnly);
+    public void Not_read_only() => Assert.False(new ObservableHashSet<Random>().IsReadOnly);
 
     [ConditionalFact]
     public void Can_union_with()
@@ -227,8 +234,10 @@ public class ObservableHashSetTest
         var countChange = 2;
         var adding = new[] { "Brendan", "Nate" };
 
-        hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-        hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+        hashSet.PropertyChanging += (s, a) =>
+            AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+        hashSet.PropertyChanged += (s, a) =>
+            AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
         hashSet.CollectionChanged += (s, a) =>
         {
             Assert.Equal(NotifyCollectionChangedAction.Replace, a.Action);
@@ -255,13 +264,7 @@ public class ObservableHashSetTest
     [ConditionalFact]
     public void Can_intersect_with()
     {
-        var hashSet = new ObservableHashSet<string>
-        {
-            "Brendan",
-            "Carmack",
-            "Nate",
-            "Palmer"
-        };
+        var hashSet = new ObservableHashSet<string> { "Brendan", "Carmack", "Nate", "Palmer" };
         var countChanging = 0;
         var countChanged = 0;
         var collectionChanged = 0;
@@ -269,8 +272,10 @@ public class ObservableHashSetTest
         var countChange = -2;
         var removing = new[] { "Brendan", "Nate" };
 
-        hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-        hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+        hashSet.PropertyChanging += (s, a) =>
+            AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+        hashSet.PropertyChanged += (s, a) =>
+            AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
         hashSet.CollectionChanged += (s, a) =>
         {
             Assert.Equal(NotifyCollectionChangedAction.Replace, a.Action);
@@ -297,13 +302,7 @@ public class ObservableHashSetTest
     [ConditionalFact]
     public void Can_except_with()
     {
-        var hashSet = new ObservableHashSet<string>
-        {
-            "Brendan",
-            "Carmack",
-            "Nate",
-            "Palmer"
-        };
+        var hashSet = new ObservableHashSet<string> { "Brendan", "Carmack", "Nate", "Palmer" };
         var countChanging = 0;
         var countChanged = 0;
         var collectionChanged = 0;
@@ -311,8 +310,10 @@ public class ObservableHashSetTest
         var countChange = -2;
         var removing = new[] { "Carmack", "Palmer" };
 
-        hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-        hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+        hashSet.PropertyChanging += (s, a) =>
+            AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+        hashSet.PropertyChanged += (s, a) =>
+            AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
         hashSet.CollectionChanged += (s, a) =>
         {
             Assert.Equal(NotifyCollectionChangedAction.Replace, a.Action);
@@ -339,13 +340,7 @@ public class ObservableHashSetTest
     [ConditionalFact]
     public void Can_symmetrical_except_with()
     {
-        var hashSet = new ObservableHashSet<string>
-        {
-            "Brendan",
-            "Carmack",
-            "Nate",
-            "Palmer"
-        };
+        var hashSet = new ObservableHashSet<string> { "Brendan", "Carmack", "Nate", "Palmer" };
         var countChanging = 0;
         var countChanged = 0;
         var collectionChanged = 0;
@@ -354,8 +349,10 @@ public class ObservableHashSetTest
         var removing = new[] { "Carmack", "Palmer" };
         var adding = new[] { "Abrash" };
 
-        hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-        hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+        hashSet.PropertyChanging += (s, a) =>
+            AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+        hashSet.PropertyChanged += (s, a) =>
+            AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
         hashSet.CollectionChanged += (s, a) =>
         {
             Assert.Equal(NotifyCollectionChangedAction.Replace, a.Action);
@@ -387,7 +384,8 @@ public class ObservableHashSetTest
 
         Assert.Equal(
             new HashSet<int>(smallData).IsSubsetOf(bigData),
-            new ObservableHashSet<int>(smallData).IsSubsetOf(bigData));
+            new ObservableHashSet<int>(smallData).IsSubsetOf(bigData)
+        );
     }
 
     [ConditionalFact]
@@ -398,7 +396,8 @@ public class ObservableHashSetTest
 
         Assert.Equal(
             new HashSet<int>(smallData).IsProperSubsetOf(bigData),
-            new ObservableHashSet<int>(smallData).IsProperSubsetOf(bigData));
+            new ObservableHashSet<int>(smallData).IsProperSubsetOf(bigData)
+        );
     }
 
     [ConditionalFact]
@@ -409,7 +408,8 @@ public class ObservableHashSetTest
 
         Assert.Equal(
             new HashSet<int>(bigData).IsSupersetOf(smallData),
-            new ObservableHashSet<int>(bigData).IsSupersetOf(smallData));
+            new ObservableHashSet<int>(bigData).IsSupersetOf(smallData)
+        );
     }
 
     [ConditionalFact]
@@ -420,7 +420,8 @@ public class ObservableHashSetTest
 
         Assert.Equal(
             new HashSet<int>(bigData).IsProperSupersetOf(smallData),
-            new ObservableHashSet<int>(bigData).IsProperSupersetOf(smallData));
+            new ObservableHashSet<int>(bigData).IsProperSupersetOf(smallData)
+        );
     }
 
     [ConditionalFact]
@@ -431,7 +432,8 @@ public class ObservableHashSetTest
 
         Assert.Equal(
             new HashSet<int>(bigData).Overlaps(smallData),
-            new ObservableHashSet<int>(bigData).Overlaps(smallData));
+            new ObservableHashSet<int>(bigData).Overlaps(smallData)
+        );
     }
 
     [ConditionalFact]
@@ -442,7 +444,8 @@ public class ObservableHashSetTest
 
         Assert.Equal(
             new HashSet<int>(data1).SetEquals(data2),
-            new ObservableHashSet<int>(data1).SetEquals(data2));
+            new ObservableHashSet<int>(data1).SetEquals(data2)
+        );
     }
 
     [ConditionalFact]
@@ -463,13 +466,7 @@ public class ObservableHashSetTest
     [ConditionalFact]
     public void Can_remove_with_predicate()
     {
-        var hashSet = new ObservableHashSet<string>
-        {
-            "Brendan",
-            "Carmack",
-            "Nate",
-            "Palmer"
-        };
+        var hashSet = new ObservableHashSet<string> { "Brendan", "Carmack", "Nate", "Palmer" };
         var countChanging = 0;
         var countChanged = 0;
         var collectionChanged = 0;
@@ -477,8 +474,10 @@ public class ObservableHashSetTest
         var countChange = -2;
         var removing = new[] { "Carmack", "Palmer" };
 
-        hashSet.PropertyChanging += (s, a) => AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
-        hashSet.PropertyChanged += (s, a) => AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
+        hashSet.PropertyChanging += (s, a) =>
+            AssertCountChanging(hashSet, s, a, currentCount, ref countChanging);
+        hashSet.PropertyChanged += (s, a) =>
+            AssertCountChanged(hashSet, s, a, ref currentCount, countChange, ref countChanged);
         hashSet.CollectionChanged += (s, a) =>
         {
             Assert.Equal(NotifyCollectionChangedAction.Replace, a.Action);
@@ -520,7 +519,8 @@ public class ObservableHashSetTest
         object sender,
         PropertyChangingEventArgs eventArgs,
         int expectedCount,
-        ref int changingCount)
+        ref int changingCount
+    )
     {
         Assert.Same(hashSet, sender);
         Assert.Equal("Count", eventArgs.PropertyName);
@@ -534,7 +534,8 @@ public class ObservableHashSetTest
         PropertyChangedEventArgs eventArgs,
         ref int expectedCount,
         int countDelta,
-        ref int changedCount)
+        ref int changedCount
+    )
     {
         Assert.Same(hashSet, sender);
         Assert.Equal("Count", eventArgs.PropertyName);

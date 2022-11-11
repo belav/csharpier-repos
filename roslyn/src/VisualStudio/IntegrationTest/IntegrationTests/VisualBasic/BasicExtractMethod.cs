@@ -19,7 +19,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
     [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
     public class BasicExtractMethod : AbstractEditorTest
     {
-        private const string TestSource = @"
+        private const string TestSource =
+            @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -42,9 +43,7 @@ End Module";
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicExtractMethod(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicExtractMethod))
-        {
-        }
+            : base(instanceFactory, nameof(BasicExtractMethod)) { }
 
         [WpfFact]
         public void SimpleExtractMethod()
@@ -54,7 +53,8 @@ End Module";
             VisualStudio.Editor.PlaceCaret("Hello VB!", charsOffset: 3, extendSelection: true);
             VisualStudio.ExecuteCommand(WellKnownCommandNames.Refactor_ExtractMethod);
 
-            var expectedMarkup = @"
+            var expectedMarkup =
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -78,14 +78,23 @@ Module Program
     End Function
 End Module";
 
-            MarkupTestFile.GetSpans(expectedMarkup, out var expectedText, out ImmutableArray<TextSpan> spans);
+            MarkupTestFile.GetSpans(
+                expectedMarkup,
+                out var expectedText,
+                out ImmutableArray<TextSpan> spans
+            );
             VisualStudio.Editor.Verify.TextContains(expectedText);
-            AssertEx.SetEqual(spans, VisualStudio.Editor.GetTagSpans(VisualStudio.InlineRenameDialog.ValidRenameTag));
+            AssertEx.SetEqual(
+                spans,
+                VisualStudio.Editor.GetTagSpans(VisualStudio.InlineRenameDialog.ValidRenameTag)
+            );
 
             VisualStudio.Editor.SendKeys("SayHello", VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(@"    Private Sub SayHello()
+            VisualStudio.Editor.Verify.TextContains(
+                @"    Private Sub SayHello()
         Console.WriteLine(""Hello VB!"")
-    End Sub");
+    End Sub"
+            );
         }
 
         [WpfFact]
@@ -94,9 +103,14 @@ End Module";
             VisualStudio.Editor.SetText(TestSource);
             VisualStudio.Editor.PlaceCaret("a = 5", charsOffset: -1);
             VisualStudio.Editor.PlaceCaret("a * b", charsOffset: 1, extendSelection: true);
-            VisualStudio.Editor.Verify.CodeAction("Extract method", applyFix: true, blockUntilComplete: true);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Extract method",
+                applyFix: true,
+                blockUntilComplete: true
+            );
 
-            var expectedMarkup = @"
+            var expectedMarkup =
+                @"
 Imports System
 Imports System.Collections.Generic
 Imports System.Linq
@@ -121,9 +135,16 @@ Module Program
     End Sub
 End Module";
 
-            MarkupTestFile.GetSpans(expectedMarkup, out var expectedText, out ImmutableArray<TextSpan> spans);
+            MarkupTestFile.GetSpans(
+                expectedMarkup,
+                out var expectedText,
+                out ImmutableArray<TextSpan> spans
+            );
             Assert.Equal(expectedText, VisualStudio.Editor.GetText());
-            AssertEx.SetEqual(spans, VisualStudio.Editor.GetTagSpans(VisualStudio.InlineRenameDialog.ValidRenameTag));
+            AssertEx.SetEqual(
+                spans,
+                VisualStudio.Editor.GetTagSpans(VisualStudio.InlineRenameDialog.ValidRenameTag)
+            );
         }
     }
 }

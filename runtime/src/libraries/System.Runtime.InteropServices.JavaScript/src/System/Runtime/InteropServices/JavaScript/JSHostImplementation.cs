@@ -13,18 +13,29 @@ namespace System.Runtime.InteropServices.JavaScript
     internal static partial class JSHostImplementation
     {
         private const string TaskGetResultName = "get_Result";
-        private static readonly MethodInfo s_taskGetResultMethodInfo = typeof(Task<>).GetMethod(TaskGetResultName)!;
+        private static readonly MethodInfo s_taskGetResultMethodInfo = typeof(Task<>).GetMethod(
+            TaskGetResultName
+        )!;
+
         // we use this to maintain identity of JSHandle for a JSObject proxy
-        public static readonly Dictionary<int, WeakReference<JSObject>> s_csOwnedObjects = new Dictionary<int, WeakReference<JSObject>>();
+        public static readonly Dictionary<int, WeakReference<JSObject>> s_csOwnedObjects =
+            new Dictionary<int, WeakReference<JSObject>>();
+
         // we use this to maintain identity of GCHandle for a managed object
-        public static Dictionary<object, IntPtr> s_gcHandleFromJSOwnedObject = new Dictionary<object, IntPtr>(ReferenceEqualityComparer.Instance);
+        public static Dictionary<object, IntPtr> s_gcHandleFromJSOwnedObject = new Dictionary<
+            object,
+            IntPtr
+        >(ReferenceEqualityComparer.Instance);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RegisterCSOwnedObject(JSObject proxy)
         {
             lock (s_csOwnedObjects)
             {
-                s_csOwnedObjects[(int)proxy.JSHandle] = new WeakReference<JSObject>(proxy, trackResurrection: true);
+                s_csOwnedObjects[(int)proxy.JSHandle] = new WeakReference<JSObject>(
+                    proxy,
+                    trackResurrection: true
+                );
             }
         }
 
@@ -66,7 +77,10 @@ namespace System.Runtime.InteropServices.JavaScript
         //  strong references, allowing the managed object to be collected.
         // This ensures that things like delegates and promises will never 'go away' while JS
         //  is expecting to be able to invoke or await them.
-        public static IntPtr GetJSOwnedObjectGCHandle(object obj, GCHandleType handleType = GCHandleType.Normal)
+        public static IntPtr GetJSOwnedObjectGCHandle(
+            object obj,
+            GCHandleType handleType = GCHandleType.Normal
+        )
         {
             if (obj == null)
                 return IntPtr.Zero;
@@ -141,7 +155,9 @@ namespace System.Runtime.InteropServices.JavaScript
             if (type.IsArray)
             {
                 if (!type.IsSZArray)
-                    throw new JSException("Only single-dimensional arrays with a zero lower bound can be marshaled to JS");
+                    throw new JSException(
+                        "Only single-dimensional arrays with a zero lower bound can be marshaled to JS"
+                    );
 
                 var elementType = type.GetElementType();
                 switch (Type.GetTypeCode(elementType))
@@ -187,7 +203,10 @@ namespace System.Runtime.InteropServices.JavaScript
                 return MarshalType.OBJECT;
         }
 
-        public static char GetCallSignatureCharacterForMarshalType(MarshalType t, char? defaultValue)
+        public static char GetCallSignatureCharacterForMarshalType(
+            MarshalType t,
+            char? defaultValue
+        )
         {
             switch (t)
             {
@@ -241,8 +260,11 @@ namespace System.Runtime.InteropServices.JavaScript
         /// The reason for this restriction is to make this use of Reflection trim-compatible,
         /// ensuring that trimming doesn't change the application's behavior.
         /// </remarks>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Task<T>.Result is preserved by the ILLinker because _taskGetResultMethodInfo was initialized with it.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Task<T>.Result is preserved by the ILLinker because _taskGetResultMethodInfo was initialized with it."
+        )]
         public static MethodInfo GetTaskResultMethodInfo(Type taskType)
         {
             if (taskType != null)
@@ -269,41 +291,58 @@ namespace System.Runtime.InteropServices.JavaScript
             throw new InvalidProgramException();
         }
 
-        public static async Task<JSObject> ImportAsync(string moduleName, string moduleUrl, CancellationToken cancellationToken )
+        public static async Task<JSObject> ImportAsync(
+            string moduleName,
+            string moduleUrl,
+            CancellationToken cancellationToken
+        )
         {
             Task<JSObject> modulePromise = JavaScriptImports.DynamicImport(moduleName, moduleUrl);
             var wrappedTask = CancelationHelper(modulePromise, cancellationToken);
-            await Task.Yield();// this helps to finish the import before we bind the module in [JSImport]
+            await Task.Yield(); // this helps to finish the import before we bind the module in [JSImport]
             return await wrappedTask.ConfigureAwait(true);
         }
 
-        public static async Task<JSObject> CancelationHelper(Task<JSObject> jsTask, CancellationToken cancellationToken)
+        public static async Task<JSObject> CancelationHelper(
+            Task<JSObject> jsTask,
+            CancellationToken cancellationToken
+        )
         {
             if (jsTask.IsCompletedSuccessfully)
             {
                 return jsTask.Result;
             }
-            using (var receiveRegistration = cancellationToken.Register(() =>
-            {
-                CancelablePromise.CancelPromise(jsTask);
-            }))
+            using (
+                var receiveRegistration = cancellationToken.Register(() =>
+                {
+                    CancelablePromise.CancelPromise(jsTask);
+                })
+            )
             {
                 return await jsTask.ConfigureAwait(true);
             }
         }
 
         // res type is first argument
-        public static unsafe JSFunctionBinding GetMethodSignature(ReadOnlySpan<JSMarshalerType> types)
+        public static unsafe JSFunctionBinding GetMethodSignature(
+            ReadOnlySpan<JSMarshalerType> types
+        )
         {
             int argsCount = types.Length - 1;
-            int size = JSFunctionBinding.JSBindingHeader.JSMarshalerSignatureHeaderSize + ((argsCount + 2) * sizeof(JSFunctionBinding.JSBindingType));
+            int size =
+                JSFunctionBinding.JSBindingHeader.JSMarshalerSignatureHeaderSize
+                + ((argsCount + 2) * sizeof(JSFunctionBinding.JSBindingType));
             // this is never unallocated
             IntPtr buffer = Marshal.AllocHGlobal(size);
 
             var signature = new JSFunctionBinding
             {
                 Header = (JSFunctionBinding.JSBindingHeader*)buffer,
-                Sigs = (JSFunctionBinding.JSBindingType*)(buffer + JSFunctionBinding.JSBindingHeader.JSMarshalerSignatureHeaderSize + (2 * sizeof(JSFunctionBinding.JSBindingType))),
+                Sigs = (JSFunctionBinding.JSBindingType*)(
+                    buffer
+                    + JSFunctionBinding.JSBindingHeader.JSMarshalerSignatureHeaderSize
+                    + (2 * sizeof(JSFunctionBinding.JSBindingType))
+                ),
             };
 
             signature.Version = 1;
@@ -324,12 +363,20 @@ namespace System.Runtime.InteropServices.JavaScript
 
             lock (s_csOwnedObjects)
             {
-                if (!s_csOwnedObjects.TryGetValue((int)jsHandle, out WeakReference<JSObject>? reference) ||
-                    !reference.TryGetTarget(out res) ||
-                    res.IsDisposed)
+                if (
+                    !s_csOwnedObjects.TryGetValue(
+                        (int)jsHandle,
+                        out WeakReference<JSObject>? reference
+                    )
+                    || !reference.TryGetTarget(out res)
+                    || res.IsDisposed
+                )
                 {
                     res = new JSObject(jsHandle);
-                    s_csOwnedObjects[(int)jsHandle] = new WeakReference<JSObject>(res, trackResurrection: true);
+                    s_csOwnedObjects[(int)jsHandle] = new WeakReference<JSObject>(
+                        res,
+                        trackResurrection: true
+                    );
                 }
             }
             return res;

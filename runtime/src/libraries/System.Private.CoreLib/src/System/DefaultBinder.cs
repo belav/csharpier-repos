@@ -26,11 +26,20 @@ namespace System
         //
         // The most specific match will be selected.
         //
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:RequiresDynamicCode",
-            Justification = "AOT compiler ensures params arrays are created for reflection-invokable methods")]
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:RequiresDynamicCode",
+            Justification = "AOT compiler ensures params arrays are created for reflection-invokable methods"
+        )]
         public sealed override MethodBase BindToMethod(
-            BindingFlags bindingAttr, MethodBase[] match, ref object?[] args,
-            ParameterModifier[]? modifiers, CultureInfo? cultureInfo, string[]? names, out object? state)
+            BindingFlags bindingAttr,
+            MethodBase[] match,
+            ref object?[] args,
+            ParameterModifier[]? modifiers,
+            CultureInfo? cultureInfo,
+            string[]? names,
+            out object? state
+        )
         {
             if (match == null || match.Length == 0)
                 throw new ArgumentException(SR.Arg_EmptyArray, nameof(match));
@@ -172,9 +181,11 @@ namespace System
 #region Test for paramArray, save paramArray type
                     int lastArgPos = par.Length - 1;
 
-                    if (par[lastArgPos].ParameterType.IsArray
+                    if (
+                        par[lastArgPos].ParameterType.IsArray
                         && par[lastArgPos].IsDefined(typeof(ParamArrayAttribute), true)
-                        && paramOrder[i][lastArgPos] == lastArgPos)
+                        && paramOrder[i][lastArgPos] == lastArgPos
+                    )
                     {
                         if (!par[lastArgPos].ParameterType.IsAssignableFrom(argTypes[lastArgPos]))
                             paramArrayType = par[lastArgPos].ParameterType.GetElementType();
@@ -218,7 +229,10 @@ namespace System
                         // now do a "classic" type check
                         if (pCls.IsPrimitive)
                         {
-                            if (argTypes[index] == null || !CanChangePrimitive(args[index]!.GetType(), pCls))
+                            if (
+                                argTypes[index] == null
+                                || !CanChangePrimitive(args[index]!.GetType(), pCls)
+                            )
                             {
                                 break;
                             }
@@ -256,7 +270,10 @@ namespace System
                     {
                         if (paramArrayType.IsPrimitive)
                         {
-                            if (argTypes[j] == null || !CanChangePrimitive(args[j]?.GetType(), paramArrayType))
+                            if (
+                                argTypes[j] == null
+                                || !CanChangePrimitive(args[j]?.GetType(), paramArrayType)
+                            )
                                 break;
                         }
                         else
@@ -300,7 +317,11 @@ namespace System
 #region Found only one method
                 if (names != null)
                 {
-                    state = new BinderState((int[])paramOrder[0].Clone(), args.Length, paramArrayTypes[0] != null);
+                    state = new BinderState(
+                        (int[])paramOrder[0].Clone(),
+                        args.Length,
+                        paramArrayTypes[0] != null
+                    );
                     ReorderParams(paramOrder[0], args);
                 }
 
@@ -353,8 +374,17 @@ namespace System
                         object[] objs = new object[parms.Length];
                         int paramArrayPos = parms.Length - 1;
                         Array.Copy(args, objs, paramArrayPos);
-                        objs[paramArrayPos] = Array.CreateInstance(paramArrayTypes[0], args.Length - paramArrayPos);
-                        Array.Copy(args, paramArrayPos, (System.Array)objs[paramArrayPos], 0, args.Length - paramArrayPos);
+                        objs[paramArrayPos] = Array.CreateInstance(
+                            paramArrayTypes[0],
+                            args.Length - paramArrayPos
+                        );
+                        Array.Copy(
+                            args,
+                            paramArrayPos,
+                            (System.Array)objs[paramArrayPos],
+                            0,
+                            args.Length - paramArrayPos
+                        );
                         args = objs;
                     }
                 }
@@ -368,8 +398,16 @@ namespace System
             for (i = 1; i < CurIdx; i++)
             {
 #region Walk all of the methods looking the most specific method to invoke
-                int newMin = FindMostSpecificMethod(candidates[currentMin]!, paramOrder[currentMin], paramArrayTypes[currentMin],
-                                                    candidates[i]!, paramOrder[i], paramArrayTypes[i], argTypes, args);
+                int newMin = FindMostSpecificMethod(
+                    candidates[currentMin]!,
+                    paramOrder[currentMin],
+                    paramArrayTypes[currentMin],
+                    candidates[i]!,
+                    paramOrder[i],
+                    paramArrayTypes[i],
+                    argTypes,
+                    args
+                );
 
                 if (newMin == 0)
                 {
@@ -389,7 +427,11 @@ namespace System
             // Reorder (if needed)
             if (names != null)
             {
-                state = new BinderState((int[])paramOrder[currentMin].Clone(), args.Length, paramArrayTypes[currentMin] != null);
+                state = new BinderState(
+                    (int[])paramOrder[currentMin].Clone(),
+                    args.Length,
+                    paramArrayTypes[currentMin] != null
+                );
                 ReorderParams(paramOrder[currentMin], args);
             }
 
@@ -436,8 +478,17 @@ namespace System
                     object[] objs = new object[parameters.Length];
                     int paramArrayPos = parameters.Length - 1;
                     Array.Copy(args, objs, paramArrayPos);
-                    objs[paramArrayPos] = Array.CreateInstance(paramArrayTypes[currentMin], args.Length - paramArrayPos);
-                    Array.Copy(args, paramArrayPos, (System.Array)objs[paramArrayPos], 0, args.Length - paramArrayPos);
+                    objs[paramArrayPos] = Array.CreateInstance(
+                        paramArrayTypes[currentMin],
+                        args.Length - paramArrayPos
+                    );
+                    Array.Copy(
+                        args,
+                        paramArrayPos,
+                        (System.Array)objs[paramArrayPos],
+                        0,
+                        args.Length - paramArrayPos
+                    );
                     args = objs;
                 }
             }
@@ -447,7 +498,12 @@ namespace System
 
         // Given a set of fields that match the base criteria, select a field.
         // if value is null then we have no way to select a field
-        public sealed override FieldInfo BindToField(BindingFlags bindingAttr, FieldInfo[] match, object value, CultureInfo? cultureInfo)
+        public sealed override FieldInfo BindToField(
+            BindingFlags bindingAttr,
+            FieldInfo[] match,
+            object value,
+            CultureInfo? cultureInfo
+        )
         {
             ArgumentNullException.ThrowIfNull(match);
 
@@ -534,7 +590,12 @@ namespace System
         // Given a set of methods that match the base criteria, select a method based
         // upon an array of types.  This method should return null if no method matchs
         // the criteria.
-        public sealed override MethodBase? SelectMethod(BindingFlags bindingAttr, MethodBase[] match, Type[] types, ParameterModifier[]? modifiers)
+        public sealed override MethodBase? SelectMethod(
+            BindingFlags bindingAttr,
+            MethodBase[] match,
+            Type[] types,
+            ParameterModifier[]? modifiers
+        )
         {
             int i;
             int j;
@@ -582,8 +643,10 @@ namespace System
 
                     if (pCls.IsPrimitive)
                     {
-                        if (type.UnderlyingSystemType is not RuntimeType rtType ||
-                            !CanChangePrimitive(rtType, pCls.UnderlyingSystemType))
+                        if (
+                            type.UnderlyingSystemType is not RuntimeType rtType
+                            || !CanChangePrimitive(rtType, pCls.UnderlyingSystemType)
+                        )
                             break;
                     }
                     else
@@ -608,7 +671,16 @@ namespace System
                 paramOrder[i] = i;
             for (i = 1; i < CurIdx; i++)
             {
-                int newMin = FindMostSpecificMethod(candidates[currentMin], paramOrder, null, candidates[i], paramOrder, null, types, null);
+                int newMin = FindMostSpecificMethod(
+                    candidates[currentMin],
+                    paramOrder,
+                    null,
+                    candidates[i],
+                    paramOrder,
+                    null,
+                    types,
+                    null
+                );
                 if (newMin == 0)
                     ambig = true;
                 else
@@ -626,8 +698,13 @@ namespace System
         }
 
         // Given a set of properties that match the base criteria, select one.
-        public sealed override PropertyInfo? SelectProperty(BindingFlags bindingAttr, PropertyInfo[] match, Type? returnType,
-                    Type[]? indexes, ParameterModifier[]? modifiers)
+        public sealed override PropertyInfo? SelectProperty(
+            BindingFlags bindingAttr,
+            PropertyInfo[] match,
+            Type? returnType,
+            Type[]? indexes,
+            ParameterModifier[]? modifiers
+        )
         {
             // Allow a null indexes array. But if it is not null, every element must be non-null as well.
             if (indexes != null)
@@ -643,7 +720,8 @@ namespace System
 
             PropertyInfo[] candidates = (PropertyInfo[])match.Clone();
 
-            int i, j = 0;
+            int i,
+                j = 0;
 
             // Find all the properties that can be described by type indexes parameter
             int CurIdx = 0;
@@ -668,8 +746,10 @@ namespace System
 
                         if (pCls.IsPrimitive)
                         {
-                            if (indexes[j].UnderlyingSystemType is not RuntimeType rtType ||
-                                !CanChangePrimitive(rtType, pCls.UnderlyingSystemType))
+                            if (
+                                indexes[j].UnderlyingSystemType is not RuntimeType rtType
+                                || !CanChangePrimitive(rtType, pCls.UnderlyingSystemType)
+                            )
                                 break;
                         }
                         else
@@ -686,8 +766,13 @@ namespace System
                     {
                         if (candidates[i].PropertyType.IsPrimitive)
                         {
-                            if (returnType.UnderlyingSystemType is not RuntimeType rtType ||
-                                !CanChangePrimitive(rtType, candidates[i].PropertyType.UnderlyingSystemType))
+                            if (
+                                returnType.UnderlyingSystemType is not RuntimeType rtType
+                                || !CanChangePrimitive(
+                                    rtType,
+                                    candidates[i].PropertyType.UnderlyingSystemType
+                                )
+                            )
                                 continue;
                         }
                         else
@@ -712,16 +797,22 @@ namespace System
                 paramOrder[i] = i;
             for (i = 1; i < CurIdx; i++)
             {
-                int newMin = FindMostSpecificType(candidates[currentMin].PropertyType, candidates[i].PropertyType, returnType);
+                int newMin = FindMostSpecificType(
+                    candidates[currentMin].PropertyType,
+                    candidates[i].PropertyType,
+                    returnType
+                );
                 if (newMin == 0 && indexes != null)
-                    newMin = FindMostSpecific(candidates[currentMin].GetIndexParameters(),
-                                              paramOrder,
-                                              null,
-                                              candidates[i].GetIndexParameters(),
-                                              paramOrder,
-                                              null,
-                                              indexes,
-                                              null);
+                    newMin = FindMostSpecific(
+                        candidates[currentMin].GetIndexParameters(),
+                        paramOrder,
+                        null,
+                        candidates[i].GetIndexParameters(),
+                        paramOrder,
+                        null,
+                        indexes,
+                        null
+                    );
                 if (newMin == 0)
                 {
                     newMin = FindMostSpecificProperty(candidates[currentMin], candidates[i]);
@@ -826,7 +917,11 @@ namespace System
 
         // Return any exact bindings that may exist. (This method is not defined on the
         //  Binder and is used by RuntimeType.)
-        public static PropertyInfo? ExactPropertyBinding(PropertyInfo[] match, Type? returnType, Type[]? types)
+        public static PropertyInfo? ExactPropertyBinding(
+            PropertyInfo[] match,
+            Type? returnType,
+            Type[]? types
+        )
         {
             ArgumentNullException.ThrowIfNull(match);
 
@@ -857,13 +952,22 @@ namespace System
             return bestMatch;
         }
 
-        private static int FindMostSpecific(ParameterInfo[] p1, int[] paramOrder1, Type? paramArrayType1,
-                                            ParameterInfo[] p2, int[] paramOrder2, Type? paramArrayType2,
-                                            Type[] types, object?[]? args)
+        private static int FindMostSpecific(
+            ParameterInfo[] p1,
+            int[] paramOrder1,
+            Type? paramArrayType1,
+            ParameterInfo[] p2,
+            int[] paramOrder2,
+            Type? paramArrayType2,
+            Type[] types,
+            object?[]? args
+        )
         {
             // A method using params is always less specific than one not using params
-            if (paramArrayType1 != null && paramArrayType2 == null) return 2;
-            if (paramArrayType2 != null && paramArrayType1 == null) return 1;
+            if (paramArrayType1 != null && paramArrayType2 == null)
+                return 2;
+            if (paramArrayType2 != null && paramArrayType1 == null)
+                return 1;
 
             // now either p1 and p2 both use params or neither does.
 
@@ -875,7 +979,8 @@ namespace System
                 if (args != null && args[i] == Type.Missing)
                     continue;
 
-                Type c1, c2;
+                Type c1,
+                    c2;
 
                 // If a param array is present, then either
                 //      the user re-ordered the parameters in which case
@@ -897,13 +1002,19 @@ namespace System
                 else
                     c2 = p2[paramOrder2[i]].ParameterType;
 
-                if (c1 == c2) continue;
+                if (c1 == c2)
+                    continue;
 
                 switch (FindMostSpecificType(c1, c2, types[i]))
                 {
-                    case 0: return 0;
-                    case 1: p1Less = true; break;
-                    case 2: p2Less = true; break;
+                    case 0:
+                        return 0;
+                    case 1:
+                        p1Less = true;
+                        break;
+                    case 2:
+                        p2Less = true;
+                        break;
                 }
             }
 
@@ -1007,13 +1118,28 @@ namespace System
             }
         }
 
-        private static int FindMostSpecificMethod(MethodBase m1, int[] paramOrder1, Type? paramArrayType1,
-                                                  MethodBase m2, int[] paramOrder2, Type? paramArrayType2,
-                                                  Type[] types, object?[]? args)
+        private static int FindMostSpecificMethod(
+            MethodBase m1,
+            int[] paramOrder1,
+            Type? paramArrayType1,
+            MethodBase m2,
+            int[] paramOrder2,
+            Type? paramArrayType2,
+            Type[] types,
+            object?[]? args
+        )
         {
             // Find the most specific method based on the parameters.
-            int res = FindMostSpecific(m1.GetParametersNoCopy(), paramOrder1, paramArrayType1,
-                                       m2.GetParametersNoCopy(), paramOrder2, paramArrayType2, types, args);
+            int res = FindMostSpecific(
+                m1.GetParametersNoCopy(),
+                paramOrder1,
+                paramArrayType1,
+                m2.GetParametersNoCopy(),
+                paramOrder2,
+                paramArrayType2,
+                types,
+                args
+            );
 
             // If the match was not ambiguous then return the result.
             if (res != 0)
@@ -1055,7 +1181,10 @@ namespace System
 
                 if (hierarchyDepth1 == hierarchyDepth2)
                 {
-                    Debug.Assert(cur1.IsStatic != cur2.IsStatic, "hierarchyDepth1 == hierarchyDepth2");
+                    Debug.Assert(
+                        cur1.IsStatic != cur2.IsStatic,
+                        "hierarchyDepth1 == hierarchyDepth2"
+                    );
                     return 0;
                 }
                 else if (hierarchyDepth1 < hierarchyDepth2)
@@ -1227,8 +1356,10 @@ namespace System
         // This will determine if the source can be converted to the target type
         internal static bool CanChangePrimitive(Type? source, Type? target)
         {
-            if ((source == typeof(IntPtr) && target == typeof(IntPtr)) ||
-                (source == typeof(UIntPtr) && target == typeof(UIntPtr)))
+            if (
+                (source == typeof(IntPtr) && target == typeof(IntPtr))
+                || (source == typeof(UIntPtr) && target == typeof(UIntPtr))
+            )
                 return true;
 
             Primitives widerCodes = s_primitiveConversions[(int)(Type.GetTypeCode(source))];
@@ -1237,26 +1368,62 @@ namespace System
             return (widerCodes & targetCode) != 0;
         }
 
-        private static readonly Primitives[] s_primitiveConversions = {
-            /* Empty    */  0, // not primitive
-            /* Object   */  0, // not primitive
-            /* DBNull   */  0, // not primitive
-            /* Boolean  */  Primitives.Boolean,
-            /* Char     */  Primitives.Char    | Primitives.UInt16 | Primitives.UInt32 | Primitives.Int32  | Primitives.UInt64 | Primitives.Int64  | Primitives.Single |  Primitives.Double,
-            /* SByte    */  Primitives.SByte   | Primitives.Int16  | Primitives.Int32  | Primitives.Int64  | Primitives.Single | Primitives.Double,
-            /* Byte     */  Primitives.Byte    | Primitives.Char   | Primitives.UInt16 | Primitives.Int16  | Primitives.UInt32 | Primitives.Int32  | Primitives.UInt64 |  Primitives.Int64 |  Primitives.Single |  Primitives.Double,
-            /* Int16    */  Primitives.Int16   | Primitives.Int32  | Primitives.Int64  | Primitives.Single | Primitives.Double,
-            /* UInt16   */  Primitives.UInt16  | Primitives.UInt32 | Primitives.Int32  | Primitives.UInt64 | Primitives.Int64  | Primitives.Single | Primitives.Double,
-            /* Int32    */  Primitives.Int32   | Primitives.Int64  | Primitives.Single | Primitives.Double,
-            /* UInt32   */  Primitives.UInt32  | Primitives.UInt64 | Primitives.Int64  | Primitives.Single | Primitives.Double,
-            /* Int64    */  Primitives.Int64   | Primitives.Single | Primitives.Double,
-            /* UInt64   */  Primitives.UInt64  | Primitives.Single | Primitives.Double,
-            /* Single   */  Primitives.Single  | Primitives.Double,
-            /* Double   */  Primitives.Double,
-            /* Decimal  */  Primitives.Decimal,
-            /* DateTime */  Primitives.DateTime,
-            /* [Unused] */  0,
-            /* String   */  Primitives.String,
+        private static readonly Primitives[] s_primitiveConversions =
+        {
+            /* Empty    */0, // not primitive
+            /* Object   */0, // not primitive
+            /* DBNull   */0, // not primitive
+            /* Boolean  */Primitives.Boolean,
+            /* Char     */Primitives.Char
+                | Primitives.UInt16
+                | Primitives.UInt32
+                | Primitives.Int32
+                | Primitives.UInt64
+                | Primitives.Int64
+                | Primitives.Single
+                | Primitives.Double,
+            /* SByte    */Primitives.SByte
+                | Primitives.Int16
+                | Primitives.Int32
+                | Primitives.Int64
+                | Primitives.Single
+                | Primitives.Double,
+            /* Byte     */Primitives.Byte
+                | Primitives.Char
+                | Primitives.UInt16
+                | Primitives.Int16
+                | Primitives.UInt32
+                | Primitives.Int32
+                | Primitives.UInt64
+                | Primitives.Int64
+                | Primitives.Single
+                | Primitives.Double,
+            /* Int16    */Primitives.Int16
+                | Primitives.Int32
+                | Primitives.Int64
+                | Primitives.Single
+                | Primitives.Double,
+            /* UInt16   */Primitives.UInt16
+                | Primitives.UInt32
+                | Primitives.Int32
+                | Primitives.UInt64
+                | Primitives.Int64
+                | Primitives.Single
+                | Primitives.Double,
+            /* Int32    */Primitives.Int32 | Primitives.Int64 | Primitives.Single | Primitives.Double,
+            /* UInt32   */Primitives.UInt32
+                | Primitives.UInt64
+                | Primitives.Int64
+                | Primitives.Single
+                | Primitives.Double,
+            /* Int64    */Primitives.Int64 | Primitives.Single | Primitives.Double,
+            /* UInt64   */Primitives.UInt64 | Primitives.Single | Primitives.Double,
+            /* Single   */Primitives.Single | Primitives.Double,
+            /* Double   */Primitives.Double,
+            /* Decimal  */Primitives.Decimal,
+            /* DateTime */Primitives.DateTime,
+            /* [Unused] */0,
+            /* String   */Primitives.String,
         };
 
         [Flags]

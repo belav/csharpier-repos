@@ -11,8 +11,11 @@ namespace Roslyn.Utilities
 {
     internal static class ImmutableArrayExtensions
     {
-        public static bool Contains<T>(this ImmutableArray<T> items, T item, IEqualityComparer<T>? equalityComparer)
-            => items.IndexOf(item, 0, equalityComparer) >= 0;
+        public static bool Contains<T>(
+            this ImmutableArray<T> items,
+            T item,
+            IEqualityComparer<T>? equalityComparer
+        ) => items.IndexOf(item, 0, equalityComparer) >= 0;
 
         public static ImmutableArray<T> ToImmutableArrayOrEmpty<T>(this T[]? items)
         {
@@ -24,8 +27,10 @@ namespace Roslyn.Utilities
             return ImmutableArray.Create<T>(items);
         }
 
-        public static ConcatImmutableArray<T> ConcatFast<T>(this ImmutableArray<T> first, ImmutableArray<T> second)
-            => new(first, second);
+        public static ConcatImmutableArray<T> ConcatFast<T>(
+            this ImmutableArray<T> first,
+            ImmutableArray<T> second
+        ) => new(first, second);
 
         public static ImmutableArray<T> TakeAsArray<T>(this ImmutableArray<T> array, int count)
         {

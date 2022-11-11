@@ -40,13 +40,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             IGlobalOptionService globalOptions,
             ExperimentalCapabilitiesProvider defaultCapabilitiesProvider,
             ILspServiceLoggerFactory lspLoggerFactory,
-            IThreadingContext threadingContext)
-            : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext)
+            IThreadingContext threadingContext
+        ) : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext)
         {
             _experimentalCapabilitiesProvider = defaultCapabilitiesProvider;
         }
 
-        protected override ImmutableArray<string> SupportedLanguages => ProtocolConstants.RoslynLspLanguages;
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ProtocolConstants.RoslynLspLanguages;
 
         public override ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
         {
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             var isLspEditorEnabled = GlobalOptions.GetOption(LspOptions.LspEditorFeatureFlag);
 
             var serverCapabilities = isLspEditorEnabled
-                ? (VSInternalServerCapabilities)_experimentalCapabilitiesProvider.GetCapabilities(clientCapabilities)
+                ? (VSInternalServerCapabilities)
+                    _experimentalCapabilitiesProvider.GetCapabilities(clientCapabilities)
                 : new VSInternalServerCapabilities()
                 {
                     // Even if the flag is off, we want to include text sync capabilities.
@@ -68,11 +70,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             serverCapabilities.ProjectContextProvider = true;
             serverCapabilities.BreakableRangeProvider = true;
 
-            var isPullDiagnostics = GlobalOptions.IsPullDiagnostics(InternalDiagnosticsOptions.NormalDiagnosticMode);
+            var isPullDiagnostics = GlobalOptions.IsPullDiagnostics(
+                InternalDiagnosticsOptions.NormalDiagnosticMode
+            );
             if (isPullDiagnostics)
             {
                 serverCapabilities.SupportsDiagnosticRequests = true;
-                serverCapabilities.MultipleContextSupportProvider = new VSInternalMultipleContextFeatures { SupportsMultipleContextsDiagnostics = true };
+                serverCapabilities.MultipleContextSupportProvider =
+                    new VSInternalMultipleContextFeatures
+                    {
+                        SupportsMultipleContextsDiagnostics = true
+                    };
             }
 
             // This capability is always enabled as we provide cntrl+Q VS search only via LSP in ever scenario.
@@ -83,7 +91,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             // However, when the experimental LSP editor is enabled we want LSP to power NavigateTo, so we set DisableGoToWorkspaceSymbols=false.
             serverCapabilities.DisableGoToWorkspaceSymbols = !isLspEditorEnabled;
 
-            var isLspSemanticTokensEnabled = GlobalOptions.GetOption(LspOptions.LspSemanticTokensFeatureFlag);
+            var isLspSemanticTokensEnabled = GlobalOptions.GetOption(
+                LspOptions.LspSemanticTokensFeatureFlag
+            );
             if (isLspSemanticTokensEnabled)
             {
                 // Using only range handling has shown to be more performant than using a combination of full/edits/range handling,
@@ -112,8 +122,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         /// they will get no diagnostics.  When not enabled we don't show the failure box (failure will still be recorded in the task status center)
         /// as the failure is not catastrophic.
         /// </summary>
-        public override bool ShowNotificationOnInitializeFailed => GlobalOptions.IsPullDiagnostics(InternalDiagnosticsOptions.NormalDiagnosticMode);
+        public override bool ShowNotificationOnInitializeFailed =>
+            GlobalOptions.IsPullDiagnostics(InternalDiagnosticsOptions.NormalDiagnosticMode);
 
-        public override WellKnownLspServerKinds ServerKind => WellKnownLspServerKinds.AlwaysActiveVSLspServer;
+        public override WellKnownLspServerKinds ServerKind =>
+            WellKnownLspServerKinds.AlwaysActiveVSLspServer;
     }
 }

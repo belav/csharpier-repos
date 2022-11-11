@@ -28,23 +28,35 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 public class HttpsConnectionMiddlewareTests : LoggedTest
 {
     private static readonly X509Certificate2 _x509Certificate2 = TestResources.GetTestCertificate();
-    private static readonly X509Certificate2 _x509Certificate2NoExt = TestResources.GetTestCertificate("no_extensions.pfx");
+    private static readonly X509Certificate2 _x509Certificate2NoExt =
+        TestResources.GetTestCertificate("no_extensions.pfx");
 
     [Fact]
     public async Task CanReadAndWriteWithHttpsConnectionMiddleware()
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions { ServerCertificate = _x509Certificate2 });
-        };
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions { ServerCertificate = _x509Certificate2 }
+            );
+        }
+        ;
 
-        await using (var server = new TestServer(App, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                App,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
-            var result = await server.HttpClientSlim.PostAsync($"https://localhost:{server.Port}/",
-                new FormUrlEncodedContent(new[] {
-                        new KeyValuePair<string, string>("content", "Hello World?")
-                }),
-                validateCertificate: false);
+            var result = await server.HttpClientSlim.PostAsync(
+                $"https://localhost:{server.Port}/",
+                new FormUrlEncodedContent(
+                    new[] { new KeyValuePair<string, string>("content", "Hello World?") }
+                ),
+                validateCertificate: false
+            );
 
             Assert.Equal("content=Hello+World%3F", result);
         }
@@ -53,12 +65,24 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     [Fact]
     public async Task CanReadAndWriteWithHttpsConnectionMiddlewareWithPemCertificate()
     {
-        var configuration = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string>
-        {
-            ["Certificates:Default:Path"] = Path.Combine("shared", "TestCertificates", "https-aspnet.crt"),
-            ["Certificates:Default:KeyPath"] = Path.Combine("shared", "TestCertificates", "https-aspnet.key"),
-            ["Certificates:Default:Password"] = "aspnetcore",
-        }).Build();
+        var configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    ["Certificates:Default:Path"] = Path.Combine(
+                        "shared",
+                        "TestCertificates",
+                        "https-aspnet.crt"
+                    ),
+                    ["Certificates:Default:KeyPath"] = Path.Combine(
+                        "shared",
+                        "TestCertificates",
+                        "https-aspnet.key"
+                    ),
+                    ["Certificates:Default:Password"] = "aspnetcore",
+                }
+            )
+            .Build();
 
         var options = new KestrelServerOptions();
         var env = new Mock<IHostEnvironment>();
@@ -69,22 +93,38 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
 
         var logger = serviceProvider.GetRequiredService<ILogger<KestrelServer>>();
         var httpsLogger = serviceProvider.GetRequiredService<ILogger<HttpsConnectionMiddleware>>();
-        var loader = new KestrelConfigurationLoader(options, configuration, env.Object, reloadOnChange: false, logger, httpsLogger);
+        var loader = new KestrelConfigurationLoader(
+            options,
+            configuration,
+            env.Object,
+            reloadOnChange: false,
+            logger,
+            httpsLogger
+        );
         loader.Load();
 
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
             listenOptions.KestrelServerOptions = options;
             listenOptions.UseHttps();
-        };
+        }
+        ;
 
-        await using (var server = new TestServer(App, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                App,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
-            var result = await server.HttpClientSlim.PostAsync($"https://localhost:{server.Port}/",
-                new FormUrlEncodedContent(new[] {
-                        new KeyValuePair<string, string>("content", "Hello World?")
-                }),
-                validateCertificate: false);
+            var result = await server.HttpClientSlim.PostAsync(
+                $"https://localhost:{server.Port}/",
+                new FormUrlEncodedContent(
+                    new[] { new KeyValuePair<string, string>("content", "Hello World?") }
+                ),
+                validateCertificate: false
+            );
 
             Assert.Equal("content=Hello+World%3F", result);
         }
@@ -95,25 +135,43 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions { ServerCertificate = _x509Certificate2 });
-        };
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions { ServerCertificate = _x509Certificate2 }
+            );
+        }
+        ;
 
-        await using (var server = new TestServer(context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsHandshakeFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.True(tlsFeature.Protocol > SslProtocols.None, "Protocol");
-            Assert.True(tlsFeature.CipherAlgorithm > CipherAlgorithmType.Null, "Cipher");
-            Assert.True(tlsFeature.CipherStrength > 0, "CipherStrength");
-            Assert.True(tlsFeature.HashAlgorithm >= HashAlgorithmType.None, "HashAlgorithm"); // May be None on Linux.
-            Assert.True(tlsFeature.HashStrength >= 0, "HashStrength"); // May be 0 for some algorithms
-            Assert.True(tlsFeature.KeyExchangeAlgorithm >= ExchangeAlgorithmType.None, "KeyExchangeAlgorithm"); // Maybe None on Windows 7
-            Assert.True(tlsFeature.KeyExchangeStrength >= 0, "KeyExchangeStrength"); // May be 0 on mac
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    var tlsFeature = context.Features.Get<ITlsHandshakeFeature>();
+                    Assert.NotNull(tlsFeature);
+                    Assert.True(tlsFeature.Protocol > SslProtocols.None, "Protocol");
+                    Assert.True(tlsFeature.CipherAlgorithm > CipherAlgorithmType.Null, "Cipher");
+                    Assert.True(tlsFeature.CipherStrength > 0, "CipherStrength");
+                    Assert.True(
+                        tlsFeature.HashAlgorithm >= HashAlgorithmType.None,
+                        "HashAlgorithm"
+                    ); // May be None on Linux.
+                    Assert.True(tlsFeature.HashStrength >= 0, "HashStrength"); // May be 0 for some algorithms
+                    Assert.True(
+                        tlsFeature.KeyExchangeAlgorithm >= ExchangeAlgorithmType.None,
+                        "KeyExchangeAlgorithm"
+                    ); // Maybe None on Windows 7
+                    Assert.True(tlsFeature.KeyExchangeStrength >= 0, "KeyExchangeStrength"); // May be 0 on mac
 
-            return context.Response.WriteAsync("hello world");
-        }, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+                    return context.Response.WriteAsync("hello world");
+                },
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
-            var result = await server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
+            var result = await server.HttpClientSlim.GetStringAsync(
+                $"https://localhost:{server.Port}/",
+                validateCertificate: false
+            );
             Assert.Equal("hello world", result);
         }
     }
@@ -123,33 +181,51 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(async (stream, clientHelloInfo, state, cancellationToken) =>
-            {
-                await Task.Yield();
-
-                return new SslServerAuthenticationOptions
+            listenOptions.UseHttps(
+                async (stream, clientHelloInfo, state, cancellationToken) =>
                 {
-                    ServerCertificate = _x509Certificate2,
-                };
-            }, state: null);
+                    await Task.Yield();
+
+                    return new SslServerAuthenticationOptions
+                    {
+                        ServerCertificate = _x509Certificate2,
+                    };
+                },
+                state: null
+            );
         }
 
-        await using (var server = new TestServer(context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsHandshakeFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.True(tlsFeature.Protocol > SslProtocols.None, "Protocol");
-            Assert.True(tlsFeature.CipherAlgorithm > CipherAlgorithmType.Null, "Cipher");
-            Assert.True(tlsFeature.CipherStrength > 0, "CipherStrength");
-            Assert.True(tlsFeature.HashAlgorithm >= HashAlgorithmType.None, "HashAlgorithm"); // May be None on Linux.
-            Assert.True(tlsFeature.HashStrength >= 0, "HashStrength"); // May be 0 for some algorithms
-            Assert.True(tlsFeature.KeyExchangeAlgorithm >= ExchangeAlgorithmType.None, "KeyExchangeAlgorithm"); // Maybe None on Windows 7
-            Assert.True(tlsFeature.KeyExchangeStrength >= 0, "KeyExchangeStrength"); // May be 0 on mac
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    var tlsFeature = context.Features.Get<ITlsHandshakeFeature>();
+                    Assert.NotNull(tlsFeature);
+                    Assert.True(tlsFeature.Protocol > SslProtocols.None, "Protocol");
+                    Assert.True(tlsFeature.CipherAlgorithm > CipherAlgorithmType.Null, "Cipher");
+                    Assert.True(tlsFeature.CipherStrength > 0, "CipherStrength");
+                    Assert.True(
+                        tlsFeature.HashAlgorithm >= HashAlgorithmType.None,
+                        "HashAlgorithm"
+                    ); // May be None on Linux.
+                    Assert.True(tlsFeature.HashStrength >= 0, "HashStrength"); // May be 0 for some algorithms
+                    Assert.True(
+                        tlsFeature.KeyExchangeAlgorithm >= ExchangeAlgorithmType.None,
+                        "KeyExchangeAlgorithm"
+                    ); // Maybe None on Windows 7
+                    Assert.True(tlsFeature.KeyExchangeStrength >= 0, "KeyExchangeStrength"); // May be 0 on mac
 
-            return context.Response.WriteAsync("hello world");
-        }, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+                    return context.Response.WriteAsync("hello world");
+                },
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
-            var result = await server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
+            var result = await server.HttpClientSlim.GetStringAsync(
+                $"https://localhost:{server.Port}/",
+                validateCertificate: false
+            );
             Assert.Equal("hello world", result);
         }
     }
@@ -158,16 +234,21 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     public async Task RequireCertificateFailsWhenNoCertificate()
     {
         var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
-        listenOptions.UseHttps(new HttpsConnectionAdapterOptions
-        {
-            ServerCertificate = _x509Certificate2,
-            ClientCertificateMode = ClientCertificateMode.RequireCertificate
-        });
+        listenOptions.UseHttps(
+            new HttpsConnectionAdapterOptions
+            {
+                ServerCertificate = _x509Certificate2,
+                ClientCertificateMode = ClientCertificateMode.RequireCertificate
+            }
+        );
 
-        await using (var server = new TestServer(App, new TestServiceContext(LoggerFactory), listenOptions))
+        await using (
+            var server = new TestServer(App, new TestServiceContext(LoggerFactory), listenOptions)
+        )
         {
             await Assert.ThrowsAnyAsync<Exception>(
-                () => server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/"));
+                () => server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/")
+            );
         }
     }
 
@@ -176,22 +257,33 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions
-            {
-                ServerCertificate = _x509Certificate2,
-                ClientCertificateMode = ClientCertificateMode.AllowCertificate
-            });
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions
+                {
+                    ServerCertificate = _x509Certificate2,
+                    ClientCertificateMode = ClientCertificateMode.AllowCertificate
+                }
+            );
         }
 
-        await using (var server = new TestServer(context =>
-            {
-                var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
-                Assert.NotNull(tlsFeature);
-                Assert.Null(tlsFeature.ClientCertificate);
-                return context.Response.WriteAsync("hello world");
-            }, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
+                    Assert.NotNull(tlsFeature);
+                    Assert.Null(tlsFeature.ClientCertificate);
+                    return context.Response.WriteAsync("hello world");
+                },
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
-            var result = await server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
+            var result = await server.HttpClientSlim.GetStringAsync(
+                $"https://localhost:{server.Port}/",
+                validateCertificate: false
+            );
             Assert.Equal("hello world", result);
         }
     }
@@ -201,25 +293,44 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps((stream, clientHelloInfo, state, cancellationToken) =>
-                new ValueTask<SslServerAuthenticationOptions>(new SslServerAuthenticationOptions
-                {
-                    ServerCertificate = _x509Certificate2,
-                    ClientCertificateRequired = true,
-                    RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true,
-                    CertificateRevocationCheckMode = X509RevocationMode.NoCheck
-                }), state: null);
+            listenOptions.UseHttps(
+                (stream, clientHelloInfo, state, cancellationToken) =>
+                    new ValueTask<SslServerAuthenticationOptions>(
+                        new SslServerAuthenticationOptions
+                        {
+                            ServerCertificate = _x509Certificate2,
+                            ClientCertificateRequired = true,
+                            RemoteCertificateValidationCallback = (
+                                sender,
+                                certificate,
+                                chain,
+                                sslPolicyErrors
+                            ) => true,
+                            CertificateRevocationCheckMode = X509RevocationMode.NoCheck
+                        }
+                    ),
+                state: null
+            );
         }
 
-        await using (var server = new TestServer(context =>
-            {
-                var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
-                Assert.NotNull(tlsFeature);
-                Assert.Null(tlsFeature.ClientCertificate);
-                return context.Response.WriteAsync("hello world");
-            }, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
+                    Assert.NotNull(tlsFeature);
+                    Assert.Null(tlsFeature.ClientCertificate);
+                    return context.Response.WriteAsync("hello world");
+                },
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
-            var result = await server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
+            var result = await server.HttpClientSlim.GetStringAsync(
+                $"https://localhost:{server.Port}/",
+                validateCertificate: false
+            );
             Assert.Equal("hello world", result);
         }
     }
@@ -227,9 +338,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     [Fact]
     public void ThrowsWhenNoServerCertificateIsProvided()
     {
-        Assert.Throws<ArgumentException>(() => new HttpsConnectionMiddleware(context => Task.CompletedTask,
-            new HttpsConnectionAdapterOptions())
-            );
+        Assert.Throws<ArgumentException>(
+            () =>
+                new HttpsConnectionMiddleware(
+                    context => Task.CompletedTask,
+                    new HttpsConnectionAdapterOptions()
+                )
+        );
     }
 
     [Fact]
@@ -237,10 +352,19 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions { ServerCertificate = _x509Certificate2 });
-        };
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions { ServerCertificate = _x509Certificate2 }
+            );
+        }
+        ;
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -257,20 +381,28 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var selectorCalled = 0;
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions
-            {
-                ServerCertificateSelector = (connection, name) =>
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions
                 {
-                    Assert.NotNull(connection);
-                    Assert.NotNull(connection.Features.Get<SslStream>());
-                    Assert.Equal("localhost", name);
-                    selectorCalled++;
-                    return _x509Certificate2;
+                    ServerCertificateSelector = (connection, name) =>
+                    {
+                        Assert.NotNull(connection);
+                        Assert.NotNull(connection.Features.Get<SslStream>());
+                        Assert.Equal("localhost", name);
+                        selectorCalled++;
+                        return _x509Certificate2;
+                    }
                 }
-            });
+            );
         }
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -288,22 +420,31 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var selectorCalled = 0;
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(async (stream, clientHelloInfo, state, cancellationToken) =>
-            {
-                await Task.Yield();
-
-                Assert.NotNull(stream);
-                Assert.Equal("localhost", clientHelloInfo.ServerName);
-                selectorCalled++;
-
-                return new SslServerAuthenticationOptions
+            listenOptions.UseHttps(
+                async (stream, clientHelloInfo, state, cancellationToken) =>
                 {
-                    ServerCertificate = _x509Certificate2
-                };
-            }, state: null);
+                    await Task.Yield();
+
+                    Assert.NotNull(stream);
+                    Assert.Equal("localhost", clientHelloInfo.ServerName);
+                    selectorCalled++;
+
+                    return new SslServerAuthenticationOptions
+                    {
+                        ServerCertificate = _x509Certificate2
+                    };
+                },
+                state: null
+            );
         }
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -321,24 +462,32 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var selectorCalled = 0;
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions
-            {
-                ServerCertificateSelector = (connection, name) =>
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions
                 {
-                    Assert.NotNull(connection);
-                    Assert.NotNull(connection.Features.Get<SslStream>());
-                    Assert.Equal("localhost", name);
-                    selectorCalled++;
-                    if (selectorCalled == 1)
+                    ServerCertificateSelector = (connection, name) =>
                     {
-                        return _x509Certificate2;
+                        Assert.NotNull(connection);
+                        Assert.NotNull(connection.Features.Get<SslStream>());
+                        Assert.Equal("localhost", name);
+                        selectorCalled++;
+                        if (selectorCalled == 1)
+                        {
+                            return _x509Certificate2;
+                        }
+                        return _x509Certificate2NoExt;
                     }
-                    return _x509Certificate2NoExt;
                 }
-            });
+            );
         }
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -363,24 +512,39 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var selectorCalled = 0;
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions
-            {
-                ServerCertificateSelector = (features, name) =>
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions
                 {
-                    selectorCalled++;
-                    return TestResources.GetTestCertificate("eku.code_signing.pfx");
+                    ServerCertificateSelector = (features, name) =>
+                    {
+                        selectorCalled++;
+                        return TestResources.GetTestCertificate("eku.code_signing.pfx");
+                    }
                 }
-            });
+            );
         }
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
                 var stream = OpenSslStream(connection.Stream);
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
-                await Assert.ThrowsAsync<IOException>(() =>
-                    stream.AuthenticateAsClientAsync("localhost", new X509CertificateCollection(), SslProtocols.Tls12 | SslProtocols.Tls11, false));
+                await Assert.ThrowsAsync<IOException>(
+                    () =>
+                        stream.AuthenticateAsClientAsync(
+                            "localhost",
+                            new X509CertificateCollection(),
+                            SslProtocols.Tls12 | SslProtocols.Tls11,
+                            false
+                        )
+                );
 #pragma warning restore SYSLIB0039
                 Assert.Equal(1, selectorCalled);
             }
@@ -393,21 +557,29 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var selectorCalled = 0;
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions
-            {
-                ServerCertificate = _x509Certificate2NoExt,
-                ServerCertificateSelector = (connection, name) =>
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions
                 {
-                    Assert.NotNull(connection);
-                    Assert.NotNull(connection.Features.Get<SslStream>());
-                    Assert.Equal("localhost", name);
-                    selectorCalled++;
-                    return _x509Certificate2;
+                    ServerCertificate = _x509Certificate2NoExt,
+                    ServerCertificateSelector = (connection, name) =>
+                    {
+                        Assert.NotNull(connection);
+                        Assert.NotNull(connection.Features.Get<SslStream>());
+                        Assert.Equal("localhost", name);
+                        selectorCalled++;
+                        return _x509Certificate2;
+                    }
                 }
-            });
+            );
         }
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -425,24 +597,39 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var selectorCalled = 0;
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions
-            {
-                ServerCertificateSelector = (features, name) =>
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions
                 {
-                    selectorCalled++;
-                    return null;
+                    ServerCertificateSelector = (features, name) =>
+                    {
+                        selectorCalled++;
+                        return null;
+                    }
                 }
-            });
+            );
         }
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
                 var stream = OpenSslStream(connection.Stream);
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
-                await Assert.ThrowsAsync<IOException>(() =>
-                    stream.AuthenticateAsClientAsync("localhost", new X509CertificateCollection(), SslProtocols.Tls12 | SslProtocols.Tls11, false));
+                await Assert.ThrowsAsync<IOException>(
+                    () =>
+                        stream.AuthenticateAsClientAsync(
+                            "localhost",
+                            new X509CertificateCollection(),
+                            SslProtocols.Tls12 | SslProtocols.Tls11,
+                            false
+                        )
+                );
 #pragma warning restore SYSLIB0039
                 Assert.Equal(1, selectorCalled);
             }
@@ -465,14 +652,20 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             });
         }
 
-        await using (var server = new TestServer(context =>
-            {
-                var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
-                Assert.NotNull(tlsFeature);
-                Assert.NotNull(tlsFeature.ClientCertificate);
-                Assert.NotNull(context.Connection.ClientCertificate);
-                return context.Response.WriteAsync("hello world");
-            }, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
+                    Assert.NotNull(tlsFeature);
+                    Assert.NotNull(tlsFeature.ClientCertificate);
+                    Assert.NotNull(context.Connection.ClientCertificate);
+                    return context.Response.WriteAsync("hello world");
+                },
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -501,20 +694,24 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             });
         }
 
-        await using var server = new TestServer(async context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.Null(tlsFeature.ClientCertificate);
-            Assert.Null(context.Connection.ClientCertificate);
+        await using var server = new TestServer(
+            async context =>
+            {
+                var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
+                Assert.NotNull(tlsFeature);
+                Assert.Null(tlsFeature.ClientCertificate);
+                Assert.Null(context.Connection.ClientCertificate);
 
-            var clientCert = await context.Connection.GetClientCertificateAsync();
-            Assert.Null(clientCert);
-            Assert.Null(tlsFeature.ClientCertificate);
-            Assert.Null(context.Connection.ClientCertificate);
+                var clientCert = await context.Connection.GetClientCertificateAsync();
+                Assert.Null(clientCert);
+                Assert.Null(tlsFeature.ClientCertificate);
+                Assert.Null(context.Connection.ClientCertificate);
 
-            await context.Response.WriteAsync("hello world");
-        }, new TestServiceContext(LoggerFactory), ConfigureListenOptions);
+                await context.Response.WriteAsync("hello world");
+            },
+            new TestServiceContext(LoggerFactory),
+            ConfigureListenOptions
+        );
 
         using var connection = server.CreateConnection();
         // SslStream is used to ensure the certificate is actually passed to the server
@@ -530,7 +727,10 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     [InlineData(HttpProtocols.Http1)]
     [InlineData(HttpProtocols.Http1AndHttp2)] // Make sure turning on Http/2 doesn't regress HTTP/1
     [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Missing platform support.")]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/33566#issuecomment-892031659", Queues = HelixConstants.RedhatAmd64)] // Outdated OpenSSL client
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/33566#issuecomment-892031659",
+        Queues = HelixConstants.RedhatAmd64
+    )] // Outdated OpenSSL client
     public async Task CanRenegotiateForClientCertificate(HttpProtocols httpProtocols)
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
@@ -544,20 +744,24 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             });
         }
 
-        await using var server = new TestServer(async context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.Null(tlsFeature.ClientCertificate);
-            Assert.Null(context.Connection.ClientCertificate);
+        await using var server = new TestServer(
+            async context =>
+            {
+                var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
+                Assert.NotNull(tlsFeature);
+                Assert.Null(tlsFeature.ClientCertificate);
+                Assert.Null(context.Connection.ClientCertificate);
 
-            var clientCert = await context.Connection.GetClientCertificateAsync();
-            Assert.NotNull(clientCert);
-            Assert.NotNull(tlsFeature.ClientCertificate);
-            Assert.NotNull(context.Connection.ClientCertificate);
+                var clientCert = await context.Connection.GetClientCertificateAsync();
+                Assert.NotNull(clientCert);
+                Assert.NotNull(tlsFeature.ClientCertificate);
+                Assert.NotNull(context.Connection.ClientCertificate);
 
-            await context.Response.WriteAsync("hello world");
-        }, new TestServiceContext(LoggerFactory), ConfigureListenOptions);
+                await context.Response.WriteAsync("hello world");
+            },
+            new TestServiceContext(LoggerFactory),
+            ConfigureListenOptions
+        );
 
         using var connection = server.CreateConnection();
         // SslStream is used to ensure the certificate is actually passed to the server
@@ -574,31 +778,45 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps((SslStream stream, SslClientHelloInfo clientHelloInfo, object state, CancellationToken cancellationToken) =>
-            {
-                return ValueTask.FromResult(new SslServerAuthenticationOptions()
+            listenOptions.UseHttps(
+                (
+                    SslStream stream,
+                    SslClientHelloInfo clientHelloInfo,
+                    object state,
+                    CancellationToken cancellationToken
+                ) =>
                 {
-                    ServerCertificate = _x509Certificate2,
-                    ClientCertificateRequired = false,
-                    RemoteCertificateValidationCallback = (_, _, _, _) => true,
-                });
-            }, state: null);
+                    return ValueTask.FromResult(
+                        new SslServerAuthenticationOptions()
+                        {
+                            ServerCertificate = _x509Certificate2,
+                            ClientCertificateRequired = false,
+                            RemoteCertificateValidationCallback = (_, _, _, _) => true,
+                        }
+                    );
+                },
+                state: null
+            );
         }
 
-        await using var server = new TestServer(async context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.Null(tlsFeature.ClientCertificate);
-            Assert.Null(context.Connection.ClientCertificate);
+        await using var server = new TestServer(
+            async context =>
+            {
+                var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
+                Assert.NotNull(tlsFeature);
+                Assert.Null(tlsFeature.ClientCertificate);
+                Assert.Null(context.Connection.ClientCertificate);
 
-            var clientCert = await context.Connection.GetClientCertificateAsync();
-            Assert.Null(clientCert);
-            Assert.Null(tlsFeature.ClientCertificate);
-            Assert.Null(context.Connection.ClientCertificate);
+                var clientCert = await context.Connection.GetClientCertificateAsync();
+                Assert.Null(clientCert);
+                Assert.Null(tlsFeature.ClientCertificate);
+                Assert.Null(context.Connection.ClientCertificate);
 
-            await context.Response.WriteAsync("hello world");
-        }, new TestServiceContext(LoggerFactory), ConfigureListenOptions);
+                await context.Response.WriteAsync("hello world");
+            },
+            new TestServiceContext(LoggerFactory),
+            ConfigureListenOptions
+        );
 
         using var connection = server.CreateConnection();
         // SslStream is used to ensure the certificate is actually passed to the server
@@ -612,40 +830,51 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
 
     [ConditionalFact]
     [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Missing platform support.")]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/33566#issuecomment-892031659", Queues = HelixConstants.RedhatAmd64)] // Outdated OpenSSL client
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/33566#issuecomment-892031659",
+        Queues = HelixConstants.RedhatAmd64
+    )] // Outdated OpenSSL client
     public async Task CanRenegotiateForTlsCallbackOptions()
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new TlsHandshakeCallbackOptions()
-            {
-                OnConnection = context =>
+            listenOptions.UseHttps(
+                new TlsHandshakeCallbackOptions()
                 {
-                    context.AllowDelayedClientCertificateNegotation = true;
-                    return ValueTask.FromResult(new SslServerAuthenticationOptions()
+                    OnConnection = context =>
                     {
-                        ServerCertificate = _x509Certificate2,
-                        ClientCertificateRequired = false,
-                        RemoteCertificateValidationCallback = (_, _, _, _) => true,
-                    });
+                        context.AllowDelayedClientCertificateNegotation = true;
+                        return ValueTask.FromResult(
+                            new SslServerAuthenticationOptions()
+                            {
+                                ServerCertificate = _x509Certificate2,
+                                ClientCertificateRequired = false,
+                                RemoteCertificateValidationCallback = (_, _, _, _) => true,
+                            }
+                        );
+                    }
                 }
-            });
+            );
         }
 
-        await using var server = new TestServer(async context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.Null(tlsFeature.ClientCertificate);
-            Assert.Null(context.Connection.ClientCertificate);
+        await using var server = new TestServer(
+            async context =>
+            {
+                var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
+                Assert.NotNull(tlsFeature);
+                Assert.Null(tlsFeature.ClientCertificate);
+                Assert.Null(context.Connection.ClientCertificate);
 
-            var clientCert = await context.Connection.GetClientCertificateAsync();
-            Assert.NotNull(clientCert);
-            Assert.NotNull(tlsFeature.ClientCertificate);
-            Assert.NotNull(context.Connection.ClientCertificate);
+                var clientCert = await context.Connection.GetClientCertificateAsync();
+                Assert.NotNull(clientCert);
+                Assert.NotNull(tlsFeature.ClientCertificate);
+                Assert.NotNull(context.Connection.ClientCertificate);
 
-            await context.Response.WriteAsync("hello world");
-        }, new TestServiceContext(LoggerFactory), ConfigureListenOptions);
+                await context.Response.WriteAsync("hello world");
+            },
+            new TestServiceContext(LoggerFactory),
+            ConfigureListenOptions
+        );
 
         using var connection = server.CreateConnection();
         // SslStream is used to ensure the certificate is actually passed to the server
@@ -659,7 +888,10 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
 
     [ConditionalFact]
     [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Missing platform support.")]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/33566#issuecomment-892031659", Queues = HelixConstants.RedhatAmd64)] // Outdated OpenSSL client
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/33566#issuecomment-892031659",
+        Queues = HelixConstants.RedhatAmd64
+    )] // Outdated OpenSSL client
     public async Task CanRenegotiateForClientCertificateOnHttp1CanReturnNoCert()
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
@@ -673,20 +905,24 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             });
         }
 
-        await using var server = new TestServer(async context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.Null(tlsFeature.ClientCertificate);
-            Assert.Null(context.Connection.ClientCertificate);
+        await using var server = new TestServer(
+            async context =>
+            {
+                var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
+                Assert.NotNull(tlsFeature);
+                Assert.Null(tlsFeature.ClientCertificate);
+                Assert.Null(context.Connection.ClientCertificate);
 
-            var clientCert = await context.Connection.GetClientCertificateAsync();
-            Assert.Null(clientCert);
-            Assert.Null(tlsFeature.ClientCertificate);
-            Assert.Null(context.Connection.ClientCertificate);
+                var clientCert = await context.Connection.GetClientCertificateAsync();
+                Assert.Null(clientCert);
+                Assert.Null(tlsFeature.ClientCertificate);
+                Assert.Null(context.Connection.ClientCertificate);
 
-            await context.Response.WriteAsync("hello world");
-        }, new TestServiceContext(LoggerFactory), ConfigureListenOptions);
+                await context.Response.WriteAsync("hello world");
+            },
+            new TestServiceContext(LoggerFactory),
+            ConfigureListenOptions
+        );
 
         using var connection = server.CreateConnection();
         // SslStream is used to ensure the certificate is actually passed to the server
@@ -701,7 +937,12 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             EnabledSslProtocols = SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12,
 #pragma warning restore SYSLIB0039
         };
-        clientOptions.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+        clientOptions.RemoteCertificateValidationCallback = (
+            sender,
+            certificate,
+            chain,
+            sslPolicyErrors
+        ) => true;
 
         await stream.AuthenticateAsClientAsync(clientOptions);
         await AssertConnectionResult(stream, true);
@@ -713,7 +954,11 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         var streams = new List<SslStream>();
         CertHelper.CleanupCertificates(nameof(ServerCertificateChainInExtraStore));
-        (var clientCertificate, var clientChain) = CertHelper.GenerateCertificates(nameof(ServerCertificateChainInExtraStore), longChain: true, serverCertificate: false);
+        (var clientCertificate, var clientChain) = CertHelper.GenerateCertificates(
+            nameof(ServerCertificateChainInExtraStore),
+            longChain: true,
+            serverCertificate: false
+        );
 
         using (var store = new X509Store(StoreName.CertificateAuthority, StoreLocation.CurrentUser))
         {
@@ -733,27 +978,38 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
 
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions
-            {
-                ServerCertificate = _x509Certificate2,
-                ServerCertificateChain = clientChain,
-                OnAuthenticate = (con, so) =>
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions
                 {
-                    so.ClientCertificateRequired = true;
-                    so.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
+                    ServerCertificate = _x509Certificate2,
+                    ServerCertificateChain = clientChain,
+                    OnAuthenticate = (con, so) =>
                     {
-                        Assert.NotEmpty(chain.ChainPolicy.ExtraStore);
-                        Assert.Contains(clientChain[0], chain.ChainPolicy.ExtraStore);
-                        return true;
-                    };
-                    so.CertificateRevocationCheckMode = X509RevocationMode.NoCheck;
+                        so.ClientCertificateRequired = true;
+                        so.RemoteCertificateValidationCallback = (
+                            sender,
+                            certificate,
+                            chain,
+                            sslPolicyErrors
+                        ) =>
+                        {
+                            Assert.NotEmpty(chain.ChainPolicy.ExtraStore);
+                            Assert.Contains(clientChain[0], chain.ChainPolicy.ExtraStore);
+                            return true;
+                        };
+                        so.CertificateRevocationCheckMode = X509RevocationMode.NoCheck;
+                    }
                 }
-            });
+            );
         }
 
-        await using (var server = new TestServer(
-            context => context.Response.WriteAsync("hello world"),
-            new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => context.Response.WriteAsync("hello world"),
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -782,7 +1038,10 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     // TLS 1.2 and lower have to renegotiate the whole connection to get a client cert, and if that hits an error
     // then the connection is aborted.
     [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Missing platform support.")]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/33566#issuecomment-892031659", Queues = HelixConstants.RedhatAmd64)] // Outdated OpenSSL client
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/33566#issuecomment-892031659",
+        Queues = HelixConstants.RedhatAmd64
+    )] // Outdated OpenSSL client
     public async Task RenegotiateForClientCertificateOnPostWithoutBufferingThrows()
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
@@ -799,18 +1058,24 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         // Under 4kb can sometimes work because it fits into Kestrel's header parsing buffer.
         var expectedBody = new string('a', 1024 * 4);
 
-        await using var server = new TestServer(async context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.Null(tlsFeature.ClientCertificate);
-            Assert.Null(context.Connection.ClientCertificate);
+        await using var server = new TestServer(
+            async context =>
+            {
+                var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
+                Assert.NotNull(tlsFeature);
+                Assert.Null(tlsFeature.ClientCertificate);
+                Assert.Null(context.Connection.ClientCertificate);
 
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Connection.GetClientCertificateAsync());
-            Assert.Equal("Client stream needs to be drained before renegotiation.", ex.Message);
-            Assert.Null(tlsFeature.ClientCertificate);
-            Assert.Null(context.Connection.ClientCertificate);
-        }, new TestServiceContext(LoggerFactory), ConfigureListenOptions);
+                var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => context.Connection.GetClientCertificateAsync()
+                );
+                Assert.Equal("Client stream needs to be drained before renegotiation.", ex.Message);
+                Assert.Null(tlsFeature.ClientCertificate);
+                Assert.Null(context.Connection.ClientCertificate);
+            },
+            new TestServiceContext(LoggerFactory),
+            ConfigureListenOptions
+        );
 
         using var connection = server.CreateConnection();
         // SslStream is used to ensure the certificate is actually passed to the server
@@ -829,24 +1094,38 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         static void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps((_, _, _, _) =>
-                ValueTask.FromResult(new SslServerAuthenticationOptions()
-                {
-                    ServerCertificate = _x509Certificate2,
-                }), state: null);
+            listenOptions.UseHttps(
+                (_, _, _, _) =>
+                    ValueTask.FromResult(
+                        new SslServerAuthenticationOptions()
+                        {
+                            ServerCertificate = _x509Certificate2,
+                        }
+                    ),
+                state: null
+            );
         }
 
-        await using var server = new TestServer(context => Task.CompletedTask,
-            new TestServiceContext(LoggerFactory), ConfigureListenOptions);
+        await using var server = new TestServer(
+            context => Task.CompletedTask,
+            new TestServiceContext(LoggerFactory),
+            ConfigureListenOptions
+        );
 
         using var connection = server.CreateConnection();
         var stream = OpenSslStream(connection.Stream);
-        await stream.AuthenticateAsClientAsync(new SslClientAuthenticationOptions()
-        {
-            // Use a random host name to avoid the TLS session resumption cache.
-            TargetHost = Guid.NewGuid().ToString(),
-            ApplicationProtocols = new() { SslApplicationProtocol.Http2, SslApplicationProtocol.Http11, },
-        });
+        await stream.AuthenticateAsClientAsync(
+            new SslClientAuthenticationOptions()
+            {
+                // Use a random host name to avoid the TLS session resumption cache.
+                TargetHost = Guid.NewGuid().ToString(),
+                ApplicationProtocols = new()
+                {
+                    SslApplicationProtocol.Http2,
+                    SslApplicationProtocol.Http11,
+                },
+            }
+        );
         Assert.Equal(SslApplicationProtocol.Http2, stream.NegotiatedApplicationProtocol);
     }
 
@@ -857,29 +1136,42 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         static void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new TlsHandshakeCallbackOptions()
-            {
-                OnConnection = context =>
+            listenOptions.UseHttps(
+                new TlsHandshakeCallbackOptions()
                 {
-                    return ValueTask.FromResult(new SslServerAuthenticationOptions()
+                    OnConnection = context =>
                     {
-                        ServerCertificate = _x509Certificate2,
-                    });
+                        return ValueTask.FromResult(
+                            new SslServerAuthenticationOptions()
+                            {
+                                ServerCertificate = _x509Certificate2,
+                            }
+                        );
+                    }
                 }
-            });
+            );
         }
 
-        await using var server = new TestServer(context => Task.CompletedTask,
-            new TestServiceContext(LoggerFactory), ConfigureListenOptions);
+        await using var server = new TestServer(
+            context => Task.CompletedTask,
+            new TestServiceContext(LoggerFactory),
+            ConfigureListenOptions
+        );
 
         using var connection = server.CreateConnection();
         var stream = OpenSslStream(connection.Stream);
-        await stream.AuthenticateAsClientAsync(new SslClientAuthenticationOptions()
-        {
-            // Use a random host name to avoid the TLS session resumption cache.
-            TargetHost = Guid.NewGuid().ToString(),
-            ApplicationProtocols = new() { SslApplicationProtocol.Http2, SslApplicationProtocol.Http11, },
-        });
+        await stream.AuthenticateAsClientAsync(
+            new SslClientAuthenticationOptions()
+            {
+                // Use a random host name to avoid the TLS session resumption cache.
+                TargetHost = Guid.NewGuid().ToString(),
+                ApplicationProtocols = new()
+                {
+                    SslApplicationProtocol.Http2,
+                    SslApplicationProtocol.Http11,
+                },
+            }
+        );
         Assert.Equal(SslApplicationProtocol.Http2, stream.NegotiatedApplicationProtocol);
     }
 
@@ -889,36 +1181,52 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         static void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new TlsHandshakeCallbackOptions()
-            {
-                OnConnection = context =>
+            listenOptions.UseHttps(
+                new TlsHandshakeCallbackOptions()
                 {
-                    return ValueTask.FromResult(new SslServerAuthenticationOptions()
+                    OnConnection = context =>
                     {
-                        ServerCertificate = _x509Certificate2,
-                        ApplicationProtocols = new(),
-                    });
+                        return ValueTask.FromResult(
+                            new SslServerAuthenticationOptions()
+                            {
+                                ServerCertificate = _x509Certificate2,
+                                ApplicationProtocols = new(),
+                            }
+                        );
+                    }
                 }
-            });
+            );
         }
 
-        await using var server = new TestServer(context => Task.CompletedTask,
-            new TestServiceContext(LoggerFactory), ConfigureListenOptions);
+        await using var server = new TestServer(
+            context => Task.CompletedTask,
+            new TestServiceContext(LoggerFactory),
+            ConfigureListenOptions
+        );
 
         using var connection = server.CreateConnection();
         var stream = OpenSslStream(connection.Stream);
-        await stream.AuthenticateAsClientAsync(new SslClientAuthenticationOptions()
-        {
-            // Use a random host name to avoid the TLS session resumption cache.
-            TargetHost = Guid.NewGuid().ToString(),
-            ApplicationProtocols = new() { SslApplicationProtocol.Http2, SslApplicationProtocol.Http11, },
-        });
+        await stream.AuthenticateAsClientAsync(
+            new SslClientAuthenticationOptions()
+            {
+                // Use a random host name to avoid the TLS session resumption cache.
+                TargetHost = Guid.NewGuid().ToString(),
+                ApplicationProtocols = new()
+                {
+                    SslApplicationProtocol.Http2,
+                    SslApplicationProtocol.Http11,
+                },
+            }
+        );
         Assert.Equal(default, stream.NegotiatedApplicationProtocol);
     }
 
     [ConditionalFact]
     [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Missing platform support.")]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/33566#issuecomment-892031659", Queues = HelixConstants.RedhatAmd64)] // Outdated OpenSSL client
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/33566#issuecomment-892031659",
+        Queues = HelixConstants.RedhatAmd64
+    )] // Outdated OpenSSL client
     public async Task CanRenegotiateForClientCertificateOnPostIfDrained()
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
@@ -934,23 +1242,27 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
 
         var expectedBody = new string('a', 1024 * 4);
 
-        await using var server = new TestServer(async context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.Null(tlsFeature.ClientCertificate);
-            Assert.Null(context.Connection.ClientCertificate);
+        await using var server = new TestServer(
+            async context =>
+            {
+                var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
+                Assert.NotNull(tlsFeature);
+                Assert.Null(tlsFeature.ClientCertificate);
+                Assert.Null(context.Connection.ClientCertificate);
 
-            // Read the body before requesting the client cert
-            var body = await new StreamReader(context.Request.Body).ReadToEndAsync();
-            Assert.Equal(expectedBody, body);
+                // Read the body before requesting the client cert
+                var body = await new StreamReader(context.Request.Body).ReadToEndAsync();
+                Assert.Equal(expectedBody, body);
 
-            var clientCert = await context.Connection.GetClientCertificateAsync();
-            Assert.NotNull(clientCert);
-            Assert.NotNull(tlsFeature.ClientCertificate);
-            Assert.NotNull(context.Connection.ClientCertificate);
-            await context.Response.WriteAsync("hello world");
-        }, new TestServiceContext(LoggerFactory), ConfigureListenOptions);
+                var clientCert = await context.Connection.GetClientCertificateAsync();
+                Assert.NotNull(clientCert);
+                Assert.NotNull(tlsFeature.ClientCertificate);
+                Assert.NotNull(context.Connection.ClientCertificate);
+                await context.Response.WriteAsync("hello world");
+            },
+            new TestServiceContext(LoggerFactory),
+            ConfigureListenOptions
+        );
 
         using var connection = server.CreateConnection();
         // SslStream is used to ensure the certificate is actually passed to the server
@@ -964,7 +1276,10 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
 
     [ConditionalFact]
     [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Missing platform support.")]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/33566#issuecomment-892031659", Queues = HelixConstants.RedhatAmd64)] // Outdated OpenSSL client
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/33566#issuecomment-892031659",
+        Queues = HelixConstants.RedhatAmd64
+    )] // Outdated OpenSSL client
     public async Task RenegotationFailureCausesConnectionClose()
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
@@ -980,21 +1295,29 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
 
         var expectedBody = new string('a', 1024 * 4);
 
-        await using var server = new TestServer(async context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.Null(tlsFeature.ClientCertificate);
-            Assert.Null(context.Connection.ClientCertificate);
+        await using var server = new TestServer(
+            async context =>
+            {
+                var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
+                Assert.NotNull(tlsFeature);
+                Assert.Null(tlsFeature.ClientCertificate);
+                Assert.Null(context.Connection.ClientCertificate);
 
-            // Request the client cert while there's still body data in the buffers
-            var ioe = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Connection.GetClientCertificateAsync());
-            Assert.Equal("Client stream needs to be drained before renegotiation.", ioe.Message);
+                // Request the client cert while there's still body data in the buffers
+                var ioe = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => context.Connection.GetClientCertificateAsync()
+                );
+                Assert.Equal(
+                    "Client stream needs to be drained before renegotiation.",
+                    ioe.Message
+                );
 
-            context.Response.ContentLength = 11;
-            await context.Response.WriteAsync("hello world");
-
-        }, new TestServiceContext(LoggerFactory), ConfigureListenOptions);
+                context.Response.ContentLength = 11;
+                await context.Response.WriteAsync("hello world");
+            },
+            new TestServiceContext(LoggerFactory),
+            ConfigureListenOptions
+        );
 
         using var connection = server.CreateConnection();
         // SslStream is used to ensure the certificate is actually passed to the server
@@ -1004,7 +1327,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var stream = OpenSslStreamWithCert(connection.Stream);
         await stream.AuthenticateAsClientAsync(Guid.NewGuid().ToString());
 
-        var request = Encoding.UTF8.GetBytes($"POST / HTTP/1.1\r\nHost: localhost\r\nContent-Length: {expectedBody.Length}\r\n\r\n{expectedBody}");
+        var request = Encoding.UTF8.GetBytes(
+            $"POST / HTTP/1.1\r\nHost: localhost\r\nContent-Length: {expectedBody.Length}\r\n\r\n{expectedBody}"
+        );
         await stream.WriteAsync(request, 0, request.Length).DefaultTimeout();
         var reader = new StreamReader(stream);
         Assert.Equal("HTTP/1.1 200 OK", await reader.ReadLineAsync().DefaultTimeout());
@@ -1021,12 +1346,23 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions { ServerCertificate = _x509Certificate2 });
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions { ServerCertificate = _x509Certificate2 }
+            );
         }
 
-        await using (var server = new TestServer(context => context.Response.WriteAsync(context.Request.Scheme), new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => context.Response.WriteAsync(context.Request.Scheme),
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
-            var result = await server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
+            var result = await server.HttpClientSlim.GetStringAsync(
+                $"https://localhost:{server.Port}/",
+                validateCertificate: false
+            );
             Assert.Equal("https", result);
         }
     }
@@ -1047,7 +1383,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             });
         }
 
-        await using (var server = new TestServer(context => context.Response.WriteAsync("hello world"), new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => context.Response.WriteAsync("hello world"),
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             // SslStream is used to ensure the certificate is actually passed to the server
             // HttpClient might not send the certificate because it is invalid or it doesn't match any
@@ -1057,7 +1399,14 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                 var stream = OpenSslStreamWithCert(connection.Stream);
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
                 var ex = await Assert.ThrowsAnyAsync<Exception>(
-                    async () => await stream.AuthenticateAsClientAsync("localhost", new X509CertificateCollection(), SslProtocols.Tls, false));
+                    async () =>
+                        await stream.AuthenticateAsClientAsync(
+                            "localhost",
+                            new X509CertificateCollection(),
+                            SslProtocols.Tls,
+                            false
+                        )
+                );
 #pragma warning restore SYSLIB0039
             }
         }
@@ -1066,26 +1415,36 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     [Theory]
     [InlineData(ClientCertificateMode.AllowCertificate)]
     [InlineData(ClientCertificateMode.RequireCertificate)]
-    public async Task ClientCertificateValidationGetsCalledWithNotNullParameters(ClientCertificateMode mode)
+    public async Task ClientCertificateValidationGetsCalledWithNotNullParameters(
+        ClientCertificateMode mode
+    )
     {
         var clientCertificateValidationCalled = false;
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions
-            {
-                ServerCertificate = _x509Certificate2,
-                ClientCertificateMode = mode,
-                ClientCertificateValidation = (certificate, chain, sslPolicyErrors) =>
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions
                 {
-                    clientCertificateValidationCalled = true;
-                    Assert.NotNull(certificate);
-                    Assert.NotNull(chain);
-                    return true;
+                    ServerCertificate = _x509Certificate2,
+                    ClientCertificateMode = mode,
+                    ClientCertificateValidation = (certificate, chain, sslPolicyErrors) =>
+                    {
+                        clientCertificateValidationCalled = true;
+                        Assert.NotNull(certificate);
+                        Assert.NotNull(chain);
+                        return true;
+                    }
                 }
-            });
+            );
         }
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1104,15 +1463,23 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions
-            {
-                ServerCertificate = _x509Certificate2,
-                ClientCertificateMode = mode,
-                ClientCertificateValidation = (certificate, chain, sslPolicyErrors) => false
-            });
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions
+                {
+                    ServerCertificate = _x509Certificate2,
+                    ClientCertificateMode = mode,
+                    ClientCertificateValidation = (certificate, chain, sslPolicyErrors) => false
+                }
+            );
         }
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1130,14 +1497,22 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     {
         void ConfigureListenOptions(ListenOptions listenOptions)
         {
-            listenOptions.UseHttps(new HttpsConnectionAdapterOptions
-            {
-                ServerCertificate = _x509Certificate2,
-                ClientCertificateMode = mode
-            });
+            listenOptions.UseHttps(
+                new HttpsConnectionAdapterOptions
+                {
+                    ServerCertificate = _x509Certificate2,
+                    ClientCertificateMode = mode
+                }
+            );
         }
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1157,12 +1532,19 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             {
                 options.ServerCertificate = _x509Certificate2;
                 options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-                options.ClientCertificateValidation = (certificate, x509Chain, sslPolicyErrors) => false;
+                options.ClientCertificateValidation = (certificate, x509Chain, sslPolicyErrors) =>
+                    false;
                 options.AllowAnyClientCertificate();
             });
         }
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1196,7 +1578,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             return context.Response.WriteAsync("hello world");
         };
 
-        await using (var server = new TestServer(app, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
+        await using (
+            var server = new TestServer(
+                app,
+                new TestServiceContext(LoggerFactory),
+                ConfigureListenOptions
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1216,10 +1604,10 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var cert = new X509Certificate2(certPath, "testPassword");
         Assert.Empty(cert.Extensions.OfType<X509EnhancedKeyUsageExtension>());
 
-        new HttpsConnectionMiddleware(context => Task.CompletedTask, new HttpsConnectionAdapterOptions
-        {
-            ServerCertificate = cert,
-        });
+        new HttpsConnectionMiddleware(
+            context => Task.CompletedTask,
+            new HttpsConnectionAdapterOptions { ServerCertificate = cert, }
+        );
     }
 
     [Theory]
@@ -1234,10 +1622,10 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var eku = Assert.Single(cert.Extensions.OfType<X509EnhancedKeyUsageExtension>());
         Assert.NotEmpty(eku.EnhancedKeyUsages);
 
-        new HttpsConnectionMiddleware(context => Task.CompletedTask, new HttpsConnectionAdapterOptions
-        {
-            ServerCertificate = cert,
-        });
+        new HttpsConnectionMiddleware(
+            context => Task.CompletedTask,
+            new HttpsConnectionAdapterOptions { ServerCertificate = cert, }
+        );
     }
 
     [Theory]
@@ -1252,11 +1640,13 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var eku = Assert.Single(cert.Extensions.OfType<X509EnhancedKeyUsageExtension>());
         Assert.NotEmpty(eku.EnhancedKeyUsages);
 
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            new HttpsConnectionMiddleware(context => Task.CompletedTask, new HttpsConnectionAdapterOptions
-            {
-                ServerCertificate = cert,
-            }));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                new HttpsConnectionMiddleware(
+                    context => Task.CompletedTask,
+                    new HttpsConnectionAdapterOptions { ServerCertificate = cert, }
+                )
+        );
 
         Assert.Equal(CoreStrings.FormatInvalidServerCertificateEku(cert.Thumbprint), ex.Message);
     }
@@ -1265,7 +1655,10 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     [InlineData(HttpProtocols.Http1)]
     [InlineData(HttpProtocols.Http2)]
     [InlineData(HttpProtocols.Http1AndHttp2)]
-    [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Missing SslStream ALPN support: https://github.com/dotnet/runtime/issues/27727")]
+    [OSSkipCondition(
+        OperatingSystems.MacOSX,
+        SkipReason = "Missing SslStream ALPN support: https://github.com/dotnet/runtime/issues/27727"
+    )]
     [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10)]
     public async Task ListenOptionsProtolsCanBeSetAfterUseHttps(HttpProtocols httpProtocols)
     {
@@ -1275,28 +1668,40 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             listenOptions.Protocols = httpProtocols;
         }
 
-        await using var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory), ConfigureListenOptions);
+        await using var server = new TestServer(
+            context => Task.CompletedTask,
+            new TestServiceContext(LoggerFactory),
+            ConfigureListenOptions
+        );
         using var connection = server.CreateConnection();
 
         var sslOptions = new SslClientAuthenticationOptions
         {
             TargetHost = "localhost",
             EnabledSslProtocols = SslProtocols.None,
-            ApplicationProtocols = new List<SslApplicationProtocol> { SslApplicationProtocol.Http11, SslApplicationProtocol.Http2 },
+            ApplicationProtocols = new List<SslApplicationProtocol>
+            {
+                SslApplicationProtocol.Http11,
+                SslApplicationProtocol.Http2
+            },
         };
 
         using var stream = OpenSslStream(connection.Stream);
         await stream.AuthenticateAsClientAsync(sslOptions);
 
         Assert.Equal(
-            httpProtocols.HasFlag(HttpProtocols.Http2) ?
-                SslApplicationProtocol.Http2 :
-                SslApplicationProtocol.Http11,
-            stream.NegotiatedApplicationProtocol);
+            httpProtocols.HasFlag(HttpProtocols.Http2)
+                ? SslApplicationProtocol.Http2
+                : SslApplicationProtocol.Http11,
+            stream.NegotiatedApplicationProtocol
+        );
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.MacOSX | OperatingSystems.Linux, SkipReason = "Downgrade logic only applies on Windows")]
+    [OSSkipCondition(
+        OperatingSystems.MacOSX | OperatingSystems.Linux,
+        SkipReason = "Downgrade logic only applies on Windows"
+    )]
     [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
     public void Http1AndHttp2DowngradeToHttp1ForHttpsOnIncompatibleWindowsVersions()
     {
@@ -1311,7 +1716,10 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.MacOSX | OperatingSystems.Linux, SkipReason = "Downgrade logic only applies on Windows")]
+    [OSSkipCondition(
+        OperatingSystems.MacOSX | OperatingSystems.Linux,
+        SkipReason = "Downgrade logic only applies on Windows"
+    )]
     [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10)]
     public void Http1AndHttp2DoesNotDowngradeOnCompatibleWindowsVersions()
     {
@@ -1326,7 +1734,10 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.MacOSX | OperatingSystems.Linux, SkipReason = "Error logic only applies on Windows")]
+    [OSSkipCondition(
+        OperatingSystems.MacOSX | OperatingSystems.Linux,
+        SkipReason = "Error logic only applies on Windows"
+    )]
     [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81)]
     public void Http2ThrowsOnIncompatibleWindowsVersions()
     {
@@ -1336,11 +1747,20 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             HttpProtocols = HttpProtocols.Http2
         };
 
-        Assert.Throws<NotSupportedException>(() => new HttpsConnectionMiddleware(context => Task.CompletedTask, httpConnectionAdapterOptions));
+        Assert.Throws<NotSupportedException>(
+            () =>
+                new HttpsConnectionMiddleware(
+                    context => Task.CompletedTask,
+                    httpConnectionAdapterOptions
+                )
+        );
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.MacOSX | OperatingSystems.Linux, SkipReason = "Error logic only applies on Windows")]
+    [OSSkipCondition(
+        OperatingSystems.MacOSX | OperatingSystems.Linux,
+        SkipReason = "Error logic only applies on Windows"
+    )]
     [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10)]
     public void Http2DoesNotThrowOnCompatibleWindowsVersions()
     {
@@ -1380,16 +1800,32 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     /// HttpClient might not send the certificate because it is invalid or it doesn't match any
     /// of the certificate authorities sent by the server in the SSL handshake.
     /// </summary>
-    private static SslStream OpenSslStreamWithCert(Stream rawStream, X509Certificate2 clientCertificate = null)
+    private static SslStream OpenSslStreamWithCert(
+        Stream rawStream,
+        X509Certificate2 clientCertificate = null
+    )
     {
-        return new SslStream(rawStream, false, (sender, certificate, chain, errors) => true,
-            (sender, host, certificates, certificate, issuers) => clientCertificate ?? _x509Certificate2);
+        return new SslStream(
+            rawStream,
+            false,
+            (sender, certificate, chain, errors) => true,
+            (sender, host, certificates, certificate, issuers) =>
+                clientCertificate ?? _x509Certificate2
+        );
     }
 
-    private static async Task AssertConnectionResult(SslStream stream, bool success, string body = null)
+    private static async Task AssertConnectionResult(
+        SslStream stream,
+        bool success,
+        string body = null
+    )
     {
-        var request = body == null ? Encoding.UTF8.GetBytes("GET / HTTP/1.0\r\n\r\n")
-            : Encoding.UTF8.GetBytes($"POST / HTTP/1.0\r\nContent-Length: {body.Length}\r\n\r\n{body}");
+        var request =
+            body == null
+                ? Encoding.UTF8.GetBytes("GET / HTTP/1.0\r\n\r\n")
+                : Encoding.UTF8.GetBytes(
+                    $"POST / HTTP/1.0\r\nContent-Length: {body.Length}\r\n\r\n{body}"
+                );
         await stream.WriteAsync(request, 0, request.Length);
         var reader = new StreamReader(stream);
         string line = null;

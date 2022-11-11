@@ -18,8 +18,7 @@ public class AcceptedResult : ObjectResult
     /// Initializes a new instance of the <see cref="AcceptedResult"/> class with the values
     /// provided.
     /// </summary>
-    public AcceptedResult()
-        : base(value: null)
+    public AcceptedResult() : base(value: null)
     {
         StatusCode = DefaultStatusCode;
     }
@@ -30,8 +29,7 @@ public class AcceptedResult : ObjectResult
     /// </summary>
     /// <param name="location">The location at which the status of requested content can be monitored.</param>
     /// <param name="value">The value to format in the entity body.</param>
-    public AcceptedResult(string? location, [ActionResultObjectValue] object? value)
-        : base(value)
+    public AcceptedResult(string? location, [ActionResultObjectValue] object? value) : base(value)
     {
         Location = location;
         StatusCode = DefaultStatusCode;
@@ -43,8 +41,7 @@ public class AcceptedResult : ObjectResult
     /// </summary>
     /// <param name="locationUri">The location at which the status of requested content can be monitored.</param>
     /// <param name="value">The value to format in the entity body.</param>
-    public AcceptedResult(Uri locationUri, [ActionResultObjectValue] object? value)
-        : base(value)
+    public AcceptedResult(Uri locationUri, [ActionResultObjectValue] object? value) : base(value)
     {
         if (locationUri == null)
         {
@@ -57,7 +54,10 @@ public class AcceptedResult : ObjectResult
         }
         else
         {
-            Location = locationUri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+            Location = locationUri.GetComponents(
+                UriComponents.SerializationInfoString,
+                UriFormat.UriEscaped
+            );
         }
 
         StatusCode = DefaultStatusCode;

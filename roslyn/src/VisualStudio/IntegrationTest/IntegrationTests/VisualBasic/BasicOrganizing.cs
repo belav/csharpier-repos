@@ -17,14 +17,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicOrganizing(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicOrganizing))
-        {
-        }
+            : base(instanceFactory, nameof(BasicOrganizing)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Organizing)]
         public void RemoveAndSort()
         {
-            SetUpEditor(@"Imports System.Linq$$
+            SetUpEditor(
+                @"Imports System.Linq$$
 Imports System
 Imports System.Runtime.InteropServices
 Imports System.Runtime.CompilerServices
@@ -32,16 +31,18 @@ Class Test
     Sub Method(<CallerMemberName> Optional str As String = Nothing)
         Dim data As COMException
     End Sub
-End Class");
+End Class"
+            );
             VisualStudio.ExecuteCommand("Edit.RemoveAndSort");
-            VisualStudio.Editor.Verify.TextContains(@"Imports System.Runtime.CompilerServices
+            VisualStudio.Editor.Verify.TextContains(
+                @"Imports System.Runtime.CompilerServices
 Imports System.Runtime.InteropServices
 Class Test
     Sub Method(<CallerMemberName> Optional str As String = Nothing)
         Dim data As COMException
     End Sub
-End Class");
-
+End Class"
+            );
         }
     }
 }

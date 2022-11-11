@@ -25,12 +25,13 @@ namespace System.Reflection.Emit
         // Constructs a EventBuilder.
         //
         internal EventBuilder(
-            ModuleBuilder mod,                    // the module containing this EventBuilder
-            string name,                    // Event name
-            EventAttributes attr,                    // event attribute such as Public, Private, and Protected defined above
-                                                     // int            eventType,                // event type
-            TypeBuilder type,                    // containing type
-            int evToken)
+            ModuleBuilder mod, // the module containing this EventBuilder
+            string name, // Event name
+            EventAttributes attr, // event attribute such as Public, Private, and Protected defined above
+            // int            eventType,                // event type
+            TypeBuilder type, // containing type
+            int evToken
+        )
         {
             m_name = name;
             m_module = mod;
@@ -46,7 +47,10 @@ namespace System.Reflection.Emit
             return m_evToken;
         }
 
-        private void SetMethodSemantics(MethodBuilder mdBuilder, MethodSemanticsAttributes semantics)
+        private void SetMethodSemantics(
+            MethodBuilder mdBuilder,
+            MethodSemanticsAttributes semantics
+        )
         {
             ArgumentNullException.ThrowIfNull(mdBuilder);
 
@@ -56,7 +60,8 @@ namespace System.Reflection.Emit
                 new QCallModule(ref module),
                 m_evToken,
                 semantics,
-                mdBuilder.MetadataToken);
+                mdBuilder.MetadataToken
+            );
         }
 
         public void SetAddOnMethod(MethodBuilder mdBuilder)
@@ -92,7 +97,8 @@ namespace System.Reflection.Emit
                 m_module,
                 m_evToken,
                 m_module.GetConstructorToken(con),
-                binaryAttribute);
+                binaryAttribute
+            );
         }
 
         // Use this function if client wishes to build CustomAttribute using CustomAttributeBuilder
@@ -105,8 +111,8 @@ namespace System.Reflection.Emit
         }
 
         // These are package private so that TypeBuilder can access them.
-        private string m_name;         // The name of the event
-        private int m_evToken;      // The token of this event
+        private string m_name; // The name of the event
+        private int m_evToken; // The token of this event
         private ModuleBuilder m_module;
         private EventAttributes m_attributes;
         private TypeBuilder m_type;

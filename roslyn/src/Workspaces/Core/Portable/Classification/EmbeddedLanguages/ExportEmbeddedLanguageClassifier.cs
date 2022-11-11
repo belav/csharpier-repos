@@ -37,8 +37,10 @@ namespace Microsoft.CodeAnalysis.Classification
         public string[] Identifiers { get; }
 
         public ExportEmbeddedLanguageClassifierAttribute(
-            string name, string language, params string[] identifiers)
-            : base(typeof(IEmbeddedLanguageClassifier))
+            string name,
+            string language,
+            params string[] identifiers
+        ) : base(typeof(IEmbeddedLanguageClassifier))
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Language = language ?? throw new ArgumentNullException(nameof(language));
@@ -53,14 +55,18 @@ namespace Microsoft.CodeAnalysis.Classification
     /// </summary>
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class)]
-    internal sealed class ExportEmbeddedLanguageClassifierInternalAttribute : ExportEmbeddedLanguageClassifierAttribute
+    internal sealed class ExportEmbeddedLanguageClassifierInternalAttribute
+        : ExportEmbeddedLanguageClassifierAttribute
     {
         /// <inheritdoc cref="EmbeddedLanguageMetadata.SupportsUnannotatedAPIs"/>
         public bool SupportsUnannotatedAPIs { get; }
 
         public ExportEmbeddedLanguageClassifierInternalAttribute(
-            string name, string language, bool supportsUnannotatedAPIs, params string[] identifiers)
-            : base(name, language, identifiers)
+            string name,
+            string language,
+            bool supportsUnannotatedAPIs,
+            params string[] identifiers
+        ) : base(name, language, identifiers)
         {
             SupportsUnannotatedAPIs = supportsUnannotatedAPIs;
         }

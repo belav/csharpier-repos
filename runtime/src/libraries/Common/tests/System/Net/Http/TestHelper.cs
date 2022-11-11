@@ -17,7 +17,8 @@ namespace System.Net.Http.Functional.Tests
 {
     public static class TestHelper
     {
-        public static TimeSpan PassingTestTimeout => TimeSpan.FromMilliseconds(PassingTestTimeoutMilliseconds);
+        public static TimeSpan PassingTestTimeout =>
+            TimeSpan.FromMilliseconds(PassingTestTimeoutMilliseconds);
         public static int PassingTestTimeoutMilliseconds => 60 * 1000;
 
         public static bool JsonMessageContainsKeyValue(string message, string key, string value)
@@ -26,8 +27,8 @@ namespace System.Net.Http.Functional.Tests
             value = value.Replace("\\", "\\\\").Replace("\"", "\\\"");
 
             // In HTTP2, all header names are in lowercase. So accept either the original header name or the lowercase version.
-            return message.Contains($"\"{key}\": \"{value}\"") ||
-                message.Contains($"\"{key.ToLowerInvariant()}\": \"{value}\"");
+            return message.Contains($"\"{key}\": \"{value}\"")
+                || message.Contains($"\"{key.ToLowerInvariant()}\": \"{value}\"");
         }
 
         public static bool JsonMessageContainsKey(string message, string key)
@@ -39,7 +40,8 @@ namespace System.Net.Http.Functional.Tests
             string responseContent,
             byte[] expectedMD5Hash,
             bool chunkedUpload,
-            string requestBody)
+            string requestBody
+        )
         {
             // [ActiveIssue("https://github.com/dotnet/runtime/issues/37669", TestPlatforms.Browser)]
             if (!PlatformDetection.IsBrowser)
@@ -52,10 +54,16 @@ namespace System.Net.Http.Functional.Tests
             // Verify upload semantics: 'Content-Length' vs. 'Transfer-Encoding: chunked'.
             if (requestBody != null)
             {
-                bool requestUsedContentLengthUpload =
-                    JsonMessageContainsKeyValue(responseContent, "Content-Length", requestBody.Length.ToString());
-                bool requestUsedChunkedUpload =
-                    JsonMessageContainsKeyValue(responseContent, "Transfer-Encoding", "chunked");
+                bool requestUsedContentLengthUpload = JsonMessageContainsKeyValue(
+                    responseContent,
+                    "Content-Length",
+                    requestBody.Length.ToString()
+                );
+                bool requestUsedChunkedUpload = JsonMessageContainsKeyValue(
+                    responseContent,
+                    "Transfer-Encoding",
+                    "chunked"
+                );
                 if (requestBody.Length > 0)
                 {
                     Assert.NotEqual(requestUsedContentLengthUpload, requestUsedChunkedUpload);
@@ -64,17 +72,20 @@ namespace System.Net.Http.Functional.Tests
                 }
 
                 // Verify that request body content was correctly sent to server.
-                Assert.True(JsonMessageContainsKeyValue(responseContent, "BodyContent", requestBody), "Valid request body");
+                Assert.True(
+                    JsonMessageContainsKeyValue(responseContent, "BodyContent", requestBody),
+                    "Valid request body"
+                );
             }
         }
 
         public static void VerifyRequestMethod(HttpResponseMessage response, string expectedMethod)
         {
-           IEnumerable<string> values = response.Headers.GetValues("X-HttpRequest-Method");
-           foreach (string value in values)
-           {
-               Assert.Equal(expectedMethod, value);
-           }
+            IEnumerable<string> values = response.Headers.GetValues("X-HttpRequest-Method");
+            foreach (string value in values)
+            {
+                Assert.Equal(expectedMethod, value);
+            }
         }
 
         public static byte[] ComputeMD5Hash(string data)
@@ -92,27 +103,47 @@ namespace System.Net.Http.Functional.Tests
 
         public static Task WhenAllCompletedOrAnyFailed(params Task[] tasks)
         {
-            return TaskTimeoutExtensions.WhenAllOrAnyFailed(tasks, PlatformDetection.IsArmProcess || PlatformDetection.IsArm64Process ? PassingTestTimeoutMilliseconds * 5 : PassingTestTimeoutMilliseconds);
+            return TaskTimeoutExtensions.WhenAllOrAnyFailed(
+                tasks,
+                PlatformDetection.IsArmProcess || PlatformDetection.IsArm64Process
+                    ? PassingTestTimeoutMilliseconds * 5
+                    : PassingTestTimeoutMilliseconds
+            );
         }
 
-        public static Task WhenAllCompletedOrAnyFailedWithTimeout(int timeoutInMilliseconds, params Task[] tasks)
+        public static Task WhenAllCompletedOrAnyFailedWithTimeout(
+            int timeoutInMilliseconds,
+            params Task[] tasks
+        )
         {
             return TaskTimeoutExtensions.WhenAllOrAnyFailed(tasks, timeoutInMilliseconds);
         }
 
 #if NETCOREAPP
-        public static Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> AllowAllCertificates = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+        public static Func<
+            HttpRequestMessage,
+            X509Certificate2,
+            X509Chain,
+            SslPolicyErrors,
+            bool
+        > AllowAllCertificates = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 #else
-        public static Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> AllowAllCertificates = (_, __, ___, ____) => true;
+        public static Func<
+            HttpRequestMessage,
+            X509Certificate2,
+            X509Chain,
+            SslPolicyErrors,
+            bool
+        > AllowAllCertificates = (_, __, ___, ____) => true;
 #endif
 
         public static IPAddress GetIPv6LinkLocalAddress() =>
             NetworkInterface
                 .GetAllNetworkInterfaces()
-                .Where(i => !i.Description.StartsWith("PANGP Virtual Ethernet"))    // This is a VPN adapter, but is reported as a regular Ethernet interface with
-                                                                                    // a valid link-local address, but the link-local address doesn't actually work.
-                                                                                    // So just manually filter it out.
-                .Where(i => !i.Name.Contains("Tailscale"))                          // Same as PANGP above.
+                .Where(i => !i.Description.StartsWith("PANGP Virtual Ethernet")) // This is a VPN adapter, but is reported as a regular Ethernet interface with
+                // a valid link-local address, but the link-local address doesn't actually work.
+                // So just manually filter it out.
+                .Where(i => !i.Name.Contains("Tailscale")) // Same as PANGP above.
                 .SelectMany(i => i.GetIPProperties().UnicastAddresses)
                 .Select(a => a.Address)
                 .Where(a => a.IsIPv6LinkLocal)
@@ -133,18 +164,29 @@ namespace System.Net.Http.Functional.Tests
                     $"CN={name}",
                     root,
                     HashAlgorithmName.SHA256,
-                    RSASignaturePadding.Pkcs1);
+                    RSASignaturePadding.Pkcs1
+                );
 
-                req.CertificateExtensions.Add(new X509BasicConstraintsExtension(true, false, 0, true));
-                req.CertificateExtensions.Add(new X509SubjectKeyIdentifierExtension(req.PublicKey, false));
-                req.CertificateExtensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.KeyEncipherment | X509KeyUsageFlags.DataEncipherment, false));
+                req.CertificateExtensions.Add(
+                    new X509BasicConstraintsExtension(true, false, 0, true)
+                );
+                req.CertificateExtensions.Add(
+                    new X509SubjectKeyIdentifierExtension(req.PublicKey, false)
+                );
+                req.CertificateExtensions.Add(
+                    new X509KeyUsageExtension(
+                        X509KeyUsageFlags.DigitalSignature
+                            | X509KeyUsageFlags.KeyEncipherment
+                            | X509KeyUsageFlags.DataEncipherment,
+                        false
+                    )
+                );
                 req.CertificateExtensions.Add(
                     new X509EnhancedKeyUsageExtension(
-                            new OidCollection()
-                                {
-                                    new Oid("1.3.6.1.5.5.7.3.1", null),
-                                }, false));
-
+                        new OidCollection() { new Oid("1.3.6.1.5.5.7.3.1", null), },
+                        false
+                    )
+                );
 
                 SubjectAlternativeNameBuilder builder = new SubjectAlternativeNameBuilder();
                 builder.AddDnsName(name);
@@ -176,7 +218,10 @@ namespace System.Net.Http.Functional.Tests
                 // On Android, it is not enough to set the custom validation callback, the certificates also need to be trusted by the OS.
                 // See HttpClientHandlerTestBase.SocketsHttpHandler.cs:CreateHttpClientHandler for more details.
 
-                handler.SslOptions.RemoteCertificateValidationCallback = delegate { return true; };
+                handler.SslOptions.RemoteCertificateValidationCallback = delegate
+                {
+                    return true;
+                };
             }
 
             return handler;

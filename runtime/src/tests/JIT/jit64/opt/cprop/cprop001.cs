@@ -28,8 +28,6 @@ public class LIM
         return -1;
     }
 
-
-
     public static int GetInt(int x)
     {
         try
@@ -41,7 +39,6 @@ public class LIM
             throw;
         }
     }
-
 
     public static void Accumulate(int x)
     {

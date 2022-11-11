@@ -16,27 +16,46 @@ namespace System.IO
                 switch (entryPath[i])
                 {
                     // We found at least one character that needs to be replaced.
-                    case < (char)32 or '?' or ':' or '*' or '"' or '<' or '>' or '|':
-                        return string.Create(entryPath.Length, (i, entryPath), (dest, state) =>
-                        {
-                            string entryPath = state.entryPath;
-
-                            // Copy over to the new string everything until the character, then
-                            // substitute for the found character.
-                            entryPath.AsSpan(0, state.i).CopyTo(dest);
-                            dest[state.i] = '_';
-
-                            // Continue looking for and replacing any more illegal characters.
-                            for (int i = state.i + 1; i < entryPath.Length; i++)
+                    case < (char)32
+                    or '?'
+                    or ':'
+                    or '*'
+                    or '"'
+                    or '<'
+                    or '>'
+                    or '|':
+                        return string.Create(
+                            entryPath.Length,
+                            (i, entryPath),
+                            (dest, state) =>
                             {
-                                char c = entryPath[i];
-                                dest[i] = c switch
+                                string entryPath = state.entryPath;
+
+                                // Copy over to the new string everything until the character, then
+                                // substitute for the found character.
+                                entryPath.AsSpan(0, state.i).CopyTo(dest);
+                                dest[state.i] = '_';
+
+                                // Continue looking for and replacing any more illegal characters.
+                                for (int i = state.i + 1; i < entryPath.Length; i++)
                                 {
-                                    < (char)32 or '?' or ':' or '*' or '"' or '<' or '>' or '|' => '_',
-                                    _ => c,
-                                };
+                                    char c = entryPath[i];
+                                    dest[i] = c switch
+                                    {
+                                        < (char)32
+                                        or '?'
+                                        or ':'
+                                        or '*'
+                                        or '"'
+                                        or '<'
+                                        or '>'
+                                        or '|'
+                                            => '_',
+                                        _ => c,
+                                    };
+                                }
                             }
-                        });
+                        );
                 }
             }
 
@@ -44,7 +63,10 @@ namespace System.IO
             return entryPath;
         }
 
-        public static unsafe string EntryFromPath(ReadOnlySpan<char> path, bool appendPathSeparator = false)
+        public static unsafe string EntryFromPath(
+            ReadOnlySpan<char> path,
+            bool appendPathSeparator = false
+        )
         {
             // Remove leading separators.
             int nonSlash = path.IndexOfAnyExcept('/', '\\');
@@ -58,31 +80,36 @@ namespace System.IO
 
             if (path.IsEmpty)
             {
-                return appendPathSeparator ?
-                    "/" :
-                    string.Empty;
+                return appendPathSeparator ? "/" : string.Empty;
             }
 
             fixed (char* pathPtr = &MemoryMarshal.GetReference(path))
             {
-                return string.Create(appendPathSeparator ? path.Length + 1 : path.Length, (appendPathSeparator, (IntPtr)pathPtr, path.Length), static (dest, state) =>
-                {
-                    ReadOnlySpan<char> path = new ReadOnlySpan<char>((char*)state.Item2, state.Length);
-                    path.CopyTo(dest);
-                    if (state.appendPathSeparator)
+                return string.Create(
+                    appendPathSeparator ? path.Length + 1 : path.Length,
+                    (appendPathSeparator, (IntPtr)pathPtr, path.Length),
+                    static (dest, state) =>
                     {
-                        dest[^1] = '/';
-                    }
+                        ReadOnlySpan<char> path = new ReadOnlySpan<char>(
+                            (char*)state.Item2,
+                            state.Length
+                        );
+                        path.CopyTo(dest);
+                        if (state.appendPathSeparator)
+                        {
+                            dest[^1] = '/';
+                        }
 
-                    // To ensure tar files remain compatible with Unix, and per the ZIP File Format Specification 4.4.17.1,
-                    // all slashes should be forward slashes.
-                    int pos;
-                    while ((pos = dest.IndexOf('\\')) >= 0)
-                    {
-                        dest[pos] = '/';
-                        dest = dest.Slice(pos + 1);
+                        // To ensure tar files remain compatible with Unix, and per the ZIP File Format Specification 4.4.17.1,
+                        // all slashes should be forward slashes.
+                        int pos;
+                        while ((pos = dest.IndexOf('\\')) >= 0)
+                        {
+                            dest[pos] = '/';
+                            dest = dest.Slice(pos + 1);
+                        }
                     }
-                });
+                );
             }
         }
     }

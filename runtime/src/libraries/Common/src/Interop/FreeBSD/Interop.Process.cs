@@ -21,10 +21,10 @@ internal static partial class Interop
 
         internal struct proc_stats
         {
-            internal long startTime;        /* time_t */
+            internal long startTime; /* time_t */
             internal int nice;
-            internal ulong userTime;        /* in ticks */
-            internal ulong systemTime;      /* in ticks */
+            internal ulong userTime; /* in ticks */
+            internal ulong systemTime; /* in ticks */
         }
 
         /// <summary>
@@ -70,14 +70,14 @@ internal static partial class Interop
             }
         }
 
-
         /// <summary>
         /// Gets executable name for process given it's PID
         /// </summary>
         /// <param name="pid">The PID of the process</param>
         public static unsafe string GetProcPath(int pid)
         {
-            Span<int> sysctlName = stackalloc int[] { CTL_KERN, KERN_PROC, KERN_PROC_PATHNAME, pid };
+            Span<int> sysctlName =
+                stackalloc int[] { CTL_KERN, KERN_PROC, KERN_PROC_PATHNAME, pid };
             byte* pBuffer = null;
             int bytesLength = 0;
 
@@ -172,8 +172,12 @@ internal static partial class Interop
                     {
                         ret.startTime = (int)info->ki_start.tv_sec;
                         ret.nice = info->ki_nice;
-                        ret.userTime = (ulong)info->ki_rusage.ru_utime.tv_sec * SecondsToNanoseconds + (ulong)info->ki_rusage.ru_utime.tv_usec * MicroSecondsToNanoSeconds;
-                        ret.systemTime = (ulong)info->ki_rusage.ru_stime.tv_sec * SecondsToNanoseconds + (ulong)info->ki_rusage.ru_stime.tv_usec * MicroSecondsToNanoSeconds;
+                        ret.userTime =
+                            (ulong)info->ki_rusage.ru_utime.tv_sec * SecondsToNanoseconds
+                            + (ulong)info->ki_rusage.ru_utime.tv_usec * MicroSecondsToNanoSeconds;
+                        ret.systemTime =
+                            (ulong)info->ki_rusage.ru_stime.tv_sec * SecondsToNanoseconds
+                            + (ulong)info->ki_rusage.ru_stime.tv_usec * MicroSecondsToNanoSeconds;
                     }
                     else
                     {
@@ -184,8 +188,14 @@ internal static partial class Interop
                             {
                                 ret.startTime = (int)list[i].ki_start.tv_sec;
                                 ret.nice = list[i].ki_nice;
-                                ret.userTime = (ulong)list[i].ki_rusage.ru_utime.tv_sec * SecondsToNanoseconds + (ulong)list[i].ki_rusage.ru_utime.tv_usec * MicroSecondsToNanoSeconds;
-                                ret.systemTime = (ulong)list[i].ki_rusage.ru_stime.tv_sec * SecondsToNanoseconds + (ulong)list[i].ki_rusage.ru_stime.tv_usec * MicroSecondsToNanoSeconds;
+                                ret.userTime =
+                                    (ulong)list[i].ki_rusage.ru_utime.tv_sec * SecondsToNanoseconds
+                                    + (ulong)list[i].ki_rusage.ru_utime.tv_usec
+                                        * MicroSecondsToNanoSeconds;
+                                ret.systemTime =
+                                    (ulong)list[i].ki_rusage.ru_stime.tv_sec * SecondsToNanoseconds
+                                    + (ulong)list[i].ki_rusage.ru_stime.tv_usec
+                                        * MicroSecondsToNanoSeconds;
                                 break;
                             }
                         }

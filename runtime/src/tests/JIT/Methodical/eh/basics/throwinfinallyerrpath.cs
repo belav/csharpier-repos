@@ -7,7 +7,6 @@ using Xunit;
 
 namespace hello_throwinfinallyerrpath_basics_cs
 {
-
     public class Class1
     {
         private static TestUtil.TestLog testLog;
@@ -32,6 +31,7 @@ namespace hello_throwinfinallyerrpath_basics_cs
         {
             Console.WriteLine("in Try catch");
         }
+
         static public void inTry2()
         {
             Console.WriteLine("in Try finally");
@@ -41,10 +41,12 @@ namespace hello_throwinfinallyerrpath_basics_cs
         {
             Console.WriteLine("in Catch");
         }
+
         static public void inFinally()
         {
             Console.WriteLine("in Finally");
         }
+
         [Fact]
         static public int TestEntryPoint()
         {

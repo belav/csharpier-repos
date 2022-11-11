@@ -7,15 +7,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 internal sealed class ZeroContentLengthMessageBody : MessageBody
 {
-    public ZeroContentLengthMessageBody(bool keepAlive)
-        : base(null!) // Ok to pass null here because this type overrides all the base methods
+    public ZeroContentLengthMessageBody(bool keepAlive) : base(null!) // Ok to pass null here because this type overrides all the base methods
     {
         RequestKeepAlive = keepAlive;
     }
 
     public override bool IsEmpty => true;
 
-    public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default) => new ValueTask<ReadResult>(new ReadResult(default, isCanceled: false, isCompleted: true));
+    public override ValueTask<ReadResult> ReadAsync(
+        CancellationToken cancellationToken = default
+    ) => new ValueTask<ReadResult>(new ReadResult(default, isCanceled: false, isCompleted: true));
 
     public override Task ConsumeAsync() => Task.CompletedTask;
 

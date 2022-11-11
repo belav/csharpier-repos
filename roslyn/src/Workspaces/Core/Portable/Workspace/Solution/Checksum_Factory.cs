@@ -65,8 +65,7 @@ namespace Microsoft.CodeAnalysis
                 {
                     hash.AppendData(buffer, 0, bytesRead);
                 }
-            }
-            while (bytesRead > 0);
+            } while (bytesRead > 0);
 
             var bytes = hash.GetHashAndReset();
 
@@ -74,7 +73,7 @@ namespace Microsoft.CodeAnalysis
             // will truncate it to predetermined size. for more detail,
             // see the Checksum type
             //
-            // the truncation can happen since different hash algorithm or 
+            // the truncation can happen since different hash algorithm or
             // same algorithm on different platform can have different hash size
             // which might be bigger than the Checksum HashSize.
             //

@@ -11,10 +11,7 @@ public class TagHelperAttributeList : ReadOnlyTagHelperAttributeList, IList<TagH
     /// <summary>
     /// Instantiates a new instance of <see cref="TagHelperAttributeList"/> with an empty collection.
     /// </summary>
-    public TagHelperAttributeList()
-        : base()
-    {
-    }
+    public TagHelperAttributeList() : base() { }
 
     /// <summary>
     /// Instantiates a new instance of <see cref="TagHelperAttributeList"/> with the specified
@@ -35,8 +32,7 @@ public class TagHelperAttributeList : ReadOnlyTagHelperAttributeList, IList<TagH
     /// <paramref name="attributes"/>.
     /// </summary>
     /// <param name="attributes">The collection to wrap.</param>
-    public TagHelperAttributeList(List<TagHelperAttribute> attributes)
-        : base(attributes)
+    public TagHelperAttributeList(List<TagHelperAttribute> attributes) : base(attributes)
     {
         if (attributes == null)
         {
@@ -50,10 +46,7 @@ public class TagHelperAttributeList : ReadOnlyTagHelperAttributeList, IList<TagH
     /// </remarks>
     public new TagHelperAttribute this[int index]
     {
-        get
-        {
-            return base[index];
-        }
+        get { return base[index]; }
         set
         {
             if (value == null)

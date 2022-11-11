@@ -31,7 +31,12 @@ namespace Microsoft.Extensions.Logging.EventSource
         /// <inheritdoc />
         public ILogger CreateLogger(string categoryName)
         {
-            return _loggers = new EventSourceLogger(categoryName, _factoryID, _eventSource, _loggers);
+            return _loggers = new EventSourceLogger(
+                categoryName,
+                _factoryID,
+                _eventSource,
+                _loggers
+            );
         }
 
         /// <inheritdoc />

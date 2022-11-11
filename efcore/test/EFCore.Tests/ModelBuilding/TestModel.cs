@@ -26,24 +26,20 @@ public abstract partial class ModelBuilderTest
 
     protected class Ingredient
     {
-        public static readonly PropertyInfo BurgerIdProperty = typeof(Ingredient).GetProperty("BurgerId")!;
+        public static readonly PropertyInfo BurgerIdProperty = typeof(Ingredient).GetProperty(
+            "BurgerId"
+        )!;
 
         public int Id { get; set; }
         public int? BurgerId { get; set; }
         public BigMak? BigMak { get; set; }
     }
 
-    protected class Pickle : Ingredient
-    {
-    }
+    protected class Pickle : Ingredient { }
 
-    protected class Bun : Ingredient
-    {
-    }
+    protected class Bun : Ingredient { }
 
-    protected class SesameBun : Bun
-    {
-    }
+    protected class SesameBun : Bun { }
 
     protected class Whoopper
     {
@@ -89,7 +85,9 @@ public abstract partial class ModelBuilderTest
     {
         public static readonly PropertyInfo IdProperty = typeof(Customer).GetProperty("Id")!;
         public static readonly PropertyInfo NameProperty = typeof(Customer).GetProperty("Name")!;
-        public static readonly PropertyInfo AlternateKeyProperty = typeof(Customer).GetProperty("AlternateKey")!;
+        public static readonly PropertyInfo AlternateKeyProperty = typeof(Customer).GetProperty(
+            "AlternateKey"
+        )!;
 
         public int Id { get; set; }
         public Guid AlternateKey { get; set; }
@@ -109,9 +107,7 @@ public abstract partial class ModelBuilderTest
         public ICollection<SpecialOrder>? SpecialOrders { get; set; }
     }
 
-    protected class OtherCustomer : Customer
-    {
-    }
+    protected class OtherCustomer : Customer { }
 
     protected class DetailsBase
     {
@@ -137,7 +133,9 @@ public abstract partial class ModelBuilderTest
 
     protected class Order : INotifyPropertyChanged
     {
-        public static readonly PropertyInfo DetailsProperty = typeof(Order).GetProperty(nameof(Details))!;
+        public static readonly PropertyInfo DetailsProperty = typeof(Order).GetProperty(
+            nameof(Details)
+        )!;
 
         public int OrderId { get; set; }
 
@@ -160,8 +158,12 @@ public abstract partial class ModelBuilderTest
 
     private class OrderProduct
     {
-        public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(nameof(OrderId))!;
-        public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct).GetProperty(nameof(ProductId))!;
+        public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(
+            nameof(OrderId)
+        )!;
+        public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct).GetProperty(
+            nameof(ProductId)
+        )!;
 
         public int OrderId { get; set; }
         public int ProductId { get; set; }
@@ -261,7 +263,9 @@ public abstract partial class ModelBuilderTest
 
     protected class OrderDetails : DetailsBase
     {
-        public static readonly PropertyInfo OrderIdProperty = typeof(OrderDetails).GetProperty("OrderId")!;
+        public static readonly PropertyInfo OrderIdProperty = typeof(OrderDetails).GetProperty(
+            "OrderId"
+        )!;
 
         public int OrderId { get; set; }
         public Order Order { get; set; } = null!;
@@ -372,13 +376,13 @@ public abstract partial class ModelBuilderTest
         public Guid? UpdatedById { get; set; }
     }
 
-    protected class SelfRefManyToOneDerived : SelfRefManyToOne
-    {
-    }
+    protected class SelfRefManyToOneDerived : SelfRefManyToOne { }
 
     protected class Book
     {
-        public static readonly PropertyInfo BookDetailsNavigation = typeof(Book).GetProperty("Details")!;
+        public static readonly PropertyInfo BookDetailsNavigation = typeof(Book).GetProperty(
+            "Details"
+        )!;
 
         public int Id { get; set; }
 
@@ -421,13 +425,9 @@ public abstract partial class ModelBuilderTest
         public BookLabel? BookLabel { get; set; }
     }
 
-    protected class ExtraSpecialBookLabel : SpecialBookLabel
-    {
-    }
+    protected class ExtraSpecialBookLabel : SpecialBookLabel { }
 
-    protected class AnotherBookLabel : BookLabel
-    {
-    }
+    protected class AnotherBookLabel : BookLabel { }
 
     private class EntityWithoutId
     {
@@ -631,7 +631,8 @@ public abstract partial class ModelBuilderTest
 
         [NotMapped]
         [ForeignKey("FkProperty")]
-        public OneToOneDependentEntityWithAnnotation NavOneToOneDependentEntityWithAnnotation { get; set; } = null!;
+        public OneToOneDependentEntityWithAnnotation NavOneToOneDependentEntityWithAnnotation { get; set; } =
+            null!;
     }
 
     protected class OneToOneDependentEntityWithAnnotation
@@ -642,7 +643,8 @@ public abstract partial class ModelBuilderTest
         public int OneToOnePrincipalEntityWithAnnotationId { get; set; }
 
         [NotMapped]
-        public OneToOnePrincipalEntityWithAnnotation NavOneToOnePrincipalEntityWithAnnotation { get; set; } = null!;
+        public OneToOnePrincipalEntityWithAnnotation NavOneToOnePrincipalEntityWithAnnotation { get; set; } =
+            null!;
     }
 
     protected class BaseTypeWithKeyAnnotation
@@ -658,9 +660,7 @@ public abstract partial class ModelBuilderTest
         public PrincipalTypeWithKeyAnnotation Navigation { get; set; } = null!;
     }
 
-    protected class DerivedTypeWithKeyAnnotation : BaseTypeWithKeyAnnotation
-    {
-    }
+    protected class DerivedTypeWithKeyAnnotation : BaseTypeWithKeyAnnotation { }
 
     protected class PrincipalTypeWithKeyAnnotation
     {
@@ -692,30 +692,20 @@ public abstract partial class ModelBuilderTest
         public virtual CityViewModel CityVM { get; set; } = null!;
     }
 
-    protected class CitizenViewModel : PersonBaseViewModel
-    {
-    }
+    protected class CitizenViewModel : PersonBaseViewModel { }
 
-    protected abstract class ServicePersonViewModel : PersonBaseViewModel
-    {
-    }
+    protected abstract class ServicePersonViewModel : PersonBaseViewModel { }
 
-    protected class DoctorViewModel : ServicePersonViewModel
-    {
-    }
+    protected class DoctorViewModel : ServicePersonViewModel { }
 
-    protected class PoliceViewModel : ServicePersonViewModel
-    {
-    }
+    protected class PoliceViewModel : ServicePersonViewModel { }
 
     protected class StringIdBase
     {
         public string Id { get; set; } = "";
     }
 
-    protected class StringIdDerived : StringIdBase
-    {
-    }
+    protected class StringIdDerived : StringIdBase { }
 
     protected class Friendship
     {
@@ -831,9 +821,7 @@ public abstract partial class ModelBuilderTest
         public OwnedTypeInheritance2 Owned2 { get; set; } = null!;
     }
 
-    protected class DerivedOwner : BaseOwner
-    {
-    }
+    protected class DerivedOwner : BaseOwner { }
 
     [Owned]
     protected class OwnedTypeInheritance1
@@ -885,9 +873,10 @@ public abstract partial class ModelBuilderTest
                     return _optional;
                 }
 
-                throw new InvalidOperationException($"Indexer property with key {name} is not defined on {nameof(IndexedClass)}.");
+                throw new InvalidOperationException(
+                    $"Indexer property with key {name} is not defined on {nameof(IndexedClass)}."
+                );
             }
-
             set
             {
                 if (string.Equals(name, "Required", StringComparison.Ordinal))
@@ -900,7 +889,9 @@ public abstract partial class ModelBuilderTest
                 }
                 else
                 {
-                    throw new InvalidOperationException($"Indexer property with key {name} is not defined on {nameof(IndexedClass)}.");
+                    throw new InvalidOperationException(
+                        $"Indexer property with key {name} is not defined on {nameof(IndexedClass)}."
+                    );
                 }
             }
         }
@@ -1201,13 +1192,9 @@ public abstract partial class ModelBuilderTest
         public ICollection<DreJr>? Jrs { get; set; }
     }
 
-    protected class Dre
-    {
-    }
+    protected class Dre { }
 
-    protected class DreJr : Dre
-    {
-    }
+    protected class DreJr : Dre { }
 
     protected class Store
     {

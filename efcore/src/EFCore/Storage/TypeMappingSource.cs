@@ -28,20 +28,21 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 /// </remarks>
 public abstract class TypeMappingSource : TypeMappingSourceBase
 {
-    private readonly ConcurrentDictionary<(TypeMappingInfo, Type?, ValueConverter?), CoreTypeMapping?> _explicitMappings = new();
+    private readonly ConcurrentDictionary<
+        (TypeMappingInfo, Type?, ValueConverter?),
+        CoreTypeMapping?
+    > _explicitMappings = new();
 
     /// <summary>
     ///     Initializes a new instance of the this class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-    protected TypeMappingSource(TypeMappingSourceDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    protected TypeMappingSource(TypeMappingSourceDependencies dependencies) : base(dependencies) { }
 
     private CoreTypeMapping? FindMappingWithConversion(
         in TypeMappingInfo mappingInfo,
-        IReadOnlyList<IProperty>? principals)
+        IReadOnlyList<IProperty>? principals
+    )
     {
         Type? providerClrType = null;
         ValueConverter? customConverter = null;
@@ -70,7 +71,11 @@ public abstract class TypeMappingSource : TypeMappingSourceBase
             }
         }
 
-        var resolvedMapping = FindMappingWithConversion(mappingInfo, providerClrType, customConverter);
+        var resolvedMapping = FindMappingWithConversion(
+            mappingInfo,
+            providerClrType,
+            customConverter
+        );
 
         ValidateMapping(resolvedMapping, principals?[0]);
 
@@ -80,14 +85,15 @@ public abstract class TypeMappingSource : TypeMappingSourceBase
     private CoreTypeMapping? FindMappingWithConversion(
         TypeMappingInfo mappingInfo,
         Type? providerClrType,
-        ValueConverter? customConverter)
-        => _explicitMappings.GetOrAdd(
+        ValueConverter? customConverter
+    ) =>
+        _explicitMappings.GetOrAdd(
             (mappingInfo, providerClrType, customConverter),
             static (k, self) =>
             {
                 var (info, providerType, converter) = k;
-                var mapping = providerType == null
-                    || providerType == info.ClrType
+                var mapping =
+                    providerType == null || providerType == info.ClrType
                         ? self.FindMapping(info)
                         : null;
 
@@ -96,21 +102,27 @@ public abstract class TypeMappingSource : TypeMappingSourceBase
                     var sourceType = info.ClrType;
                     if (sourceType != null)
                     {
-                        foreach (var converterInfo in self.Dependencies
-                                     .ValueConverterSelector
-                                     .Select(sourceType, providerType))
+                        foreach (
+                            var converterInfo in self.Dependencies.ValueConverterSelector.Select(
+                                sourceType,
+                                providerType
+                            )
+                        )
                         {
                             var mappingInfoUsed = info.WithConverter(converterInfo);
                             mapping = self.FindMapping(mappingInfoUsed);
 
-                            if (mapping == null
-                                && providerType != null)
+                            if (mapping == null && providerType != null)
                             {
-                                foreach (var secondConverterInfo in self.Dependencies
-                                             .ValueConverterSelector
-                                             .Select(providerType))
+                                foreach (
+                                    var secondConverterInfo in self.Dependencies.ValueConverterSelector.Select(
+                                        providerType
+                                    )
+                                )
                                 {
-                                    mapping = self.FindMapping(mappingInfoUsed.WithConverter(secondConverterInfo));
+                                    mapping = self.FindMapping(
+                                        mappingInfoUsed.WithConverter(secondConverterInfo)
+                                    );
 
                                     if (mapping != null)
                                     {
@@ -129,15 +141,15 @@ public abstract class TypeMappingSource : TypeMappingSourceBase
                     }
                 }
 
-                if (mapping != null
-                    && converter != null)
+                if (mapping != null && converter != null)
                 {
                     mapping = mapping.Clone(converter);
                 }
 
                 return mapping;
             },
-            this);
+            this
+        );
 
     /// <summary>
     ///     Finds the type mapping for a given <see cref="IProperty" />.
@@ -168,8 +180,8 @@ public abstract class TypeMappingSource : TypeMappingSourceBase
     /// </remarks>
     /// <param name="type">The CLR type.</param>
     /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
-    public override CoreTypeMapping? FindMapping(Type type)
-        => FindMappingWithConversion(new TypeMappingInfo(type), null);
+    public override CoreTypeMapping? FindMapping(Type type) =>
+        FindMappingWithConversion(new TypeMappingInfo(type), null);
 
     /// <summary>
     ///     Finds the type mapping for a given <see cref="Type" />, taking pre-convention configuration into the account.
@@ -201,7 +213,8 @@ public abstract class TypeMappingSource : TypeMappingSourceBase
                 unicode: typeConfiguration.IsUnicode(),
                 size: typeConfiguration.GetMaxLength(),
                 precision: typeConfiguration.GetPrecision(),
-                scale: typeConfiguration.GetScale());
+                scale: typeConfiguration.GetScale()
+            );
         }
 
         return FindMappingWithConversion(mappingInfo, providerClrType, customConverter);
@@ -222,6 +235,6 @@ public abstract class TypeMappingSource : TypeMappingSourceBase
     /// </remarks>
     /// <param name="member">The field or property.</param>
     /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
-    public override CoreTypeMapping? FindMapping(MemberInfo member)
-        => FindMappingWithConversion(new TypeMappingInfo(member), null);
+    public override CoreTypeMapping? FindMapping(MemberInfo member) =>
+        FindMappingWithConversion(new TypeMappingInfo(member), null);
 }

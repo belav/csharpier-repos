@@ -11,12 +11,12 @@ using System.Xml.Serialization;
 using Xunit;
 using Xunit.Abstractions;
 
-
 namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 {
     public class SurrogateTests
     {
         private readonly ITestOutputHelper _output;
+
         public SurrogateTests(ITestOutputHelper output)
         {
             _output = output;
@@ -24,7 +24,11 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 
         [Theory]
         [MemberData(nameof(SurrogateProvider_MemberData))]
-        public void SurrogateProvider(Type type, ISerializationSurrogateProvider surrogate, Action<string, XmlSchemaSet> schemaCheck = null)
+        public void SurrogateProvider(
+            Type type,
+            ISerializationSurrogateProvider surrogate,
+            Action<string, XmlSchemaSet> schemaCheck = null
+        )
         {
             ExportOptions options = new ExportOptions() { DataContractSurrogate = surrogate };
             XsdDataContractExporter exporter = new XsdDataContractExporter() { Options = options };
@@ -36,93 +40,294 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             if (schemaCheck != null)
                 schemaCheck(schema, exporter.Schemas);
         }
+
         public static IEnumerable<object[]> SurrogateProvider_MemberData()
         {
-            yield return new object[] { typeof(SurrogateTests.CircleContainer), new NodeToSerializableNode(new CircleToSquare(new XmlSerializerToXmlFormatter(null))), (string s, XmlSchemaSet ss) => {
-                SchemaUtils.OrderedContains(@"<xs:schema xmlns:tns=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" elementFormDefault=""qualified"" targetNamespace=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">", ref s);
+            yield return new object[]
+            {
+                typeof(SurrogateTests.CircleContainer),
+                new NodeToSerializableNode(
+                    new CircleToSquare(new XmlSerializerToXmlFormatter(null))
+                ),
+                (string s, XmlSchemaSet ss) =>
+                {
+                    SchemaUtils.OrderedContains(
+                        @"<xs:schema xmlns:tns=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" elementFormDefault=""qualified"" targetNamespace=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
+                        ref s
+                    );
 
-                SchemaUtils.OrderedContains(@"<xs:complexType name=""SurrogateTests.CircleContainer"">", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element minOccurs=""0"" name=""Circles"" nillable=""true"" type=""tns:ArrayOfSurrogateTests.Circle"">", ref s);
-                SchemaUtils.OrderedContains(@"<Surrogate xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:string"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">Property</Surrogate>", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element minOccurs=""0"" name=""circle"" nillable=""true"" type=""tns:SurrogateTests.Square"">", ref s);
-                SchemaUtils.OrderedContains(@"<Surrogate xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:string"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">Field</Surrogate>", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""SurrogateTests.CircleContainer"" nillable=""true"" type=""tns:SurrogateTests.CircleContainer"" />", ref s);
+                    SchemaUtils.OrderedContains(
+                        @"<xs:complexType name=""SurrogateTests.CircleContainer"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element minOccurs=""0"" name=""Circles"" nillable=""true"" type=""tns:ArrayOfSurrogateTests.Circle"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<Surrogate xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:string"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">Property</Surrogate>",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element minOccurs=""0"" name=""circle"" nillable=""true"" type=""tns:SurrogateTests.Square"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<Surrogate xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:string"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">Field</Surrogate>",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""SurrogateTests.CircleContainer"" nillable=""true"" type=""tns:SurrogateTests.CircleContainer"" />",
+                        ref s
+                    );
 
-                SchemaUtils.OrderedContains(@"<xs:complexType name=""ArrayOfSurrogateTests.Circle"">", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element minOccurs=""0"" maxOccurs=""unbounded"" name=""SurrogateTests.Circle"" nillable=""true"" type=""tns:SurrogateTests.Square"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""ArrayOfSurrogateTests.Circle"" nillable=""true"" type=""tns:ArrayOfSurrogateTests.Circle"" />", ref s);
+                    SchemaUtils.OrderedContains(
+                        @"<xs:complexType name=""ArrayOfSurrogateTests.Circle"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element minOccurs=""0"" maxOccurs=""unbounded"" name=""SurrogateTests.Circle"" nillable=""true"" type=""tns:SurrogateTests.Square"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""ArrayOfSurrogateTests.Circle"" nillable=""true"" type=""tns:ArrayOfSurrogateTests.Circle"" />",
+                        ref s
+                    );
 
-                SchemaUtils.OrderedContains(@"<xs:complexType name=""SurrogateTests.Square"">", ref s);
-                SchemaUtils.OrderedContains(@"<Surrogate xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" z:Id=""1"" xmlns:d1p1=""http://schemas.datacontract.org/2004/07/System"" i:type=""d1p1:Version"" xmlns:z=""http://schemas.microsoft.com/2003/10/Serialization/"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">", ref s);
-                SchemaUtils.OrderedContains(@"<d1p1:_Build>0</d1p1:_Build>", ref s);
-                SchemaUtils.OrderedContains(@"<d1p1:_Major>7</d1p1:_Major>", ref s);
-                SchemaUtils.OrderedContains(@"<d1p1:_Minor>0</d1p1:_Minor>", ref s);
-                SchemaUtils.OrderedContains(@"<d1p1:_Revision>0</d1p1:_Revision>", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""Side"" type=""xs:int"">", ref s);
-                SchemaUtils.OrderedContains(@"<Surrogate xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:string"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">Field</Surrogate>", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""SurrogateTests.Square"" nillable=""true"" type=""tns:SurrogateTests.Square"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">", ref s);
-            } };
-            yield return new object[] { typeof(SurrogateTests.Node), new NodeToSerializableNode(new CircleToSquare(new XmlSerializerToXmlFormatter(null))), (string s, XmlSchemaSet ss) => {
-                SchemaUtils.OrderedContains(@"<xs:schema xmlns:tns=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" elementFormDefault=""qualified"" targetNamespace=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">", ref s);
+                    SchemaUtils.OrderedContains(
+                        @"<xs:complexType name=""SurrogateTests.Square"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<Surrogate xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" z:Id=""1"" xmlns:d1p1=""http://schemas.datacontract.org/2004/07/System"" i:type=""d1p1:Version"" xmlns:z=""http://schemas.microsoft.com/2003/10/Serialization/"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(@"<d1p1:_Build>0</d1p1:_Build>", ref s);
+                    SchemaUtils.OrderedContains(@"<d1p1:_Major>7</d1p1:_Major>", ref s);
+                    SchemaUtils.OrderedContains(@"<d1p1:_Minor>0</d1p1:_Minor>", ref s);
+                    SchemaUtils.OrderedContains(@"<d1p1:_Revision>0</d1p1:_Revision>", ref s);
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""Side"" type=""xs:int"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<Surrogate xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:string"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">Field</Surrogate>",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""SurrogateTests.Square"" nillable=""true"" type=""tns:SurrogateTests.Square"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
+                        ref s
+                    );
+                }
+            };
+            yield return new object[]
+            {
+                typeof(SurrogateTests.Node),
+                new NodeToSerializableNode(
+                    new CircleToSquare(new XmlSerializerToXmlFormatter(null))
+                ),
+                (string s, XmlSchemaSet ss) =>
+                {
+                    SchemaUtils.OrderedContains(
+                        @"<xs:schema xmlns:tns=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" elementFormDefault=""qualified"" targetNamespace=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
+                        ref s
+                    );
 
-                SchemaUtils.OrderedContains(@"<xs:complexType name=""SurrogateTests.SerializableNode"">", ref s);
-                SchemaUtils.OrderedContains(@"<Surrogate xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" z:Id=""1"" xmlns:d1p1=""http://schemas.datacontract.org/2004/07/System"" i:type=""d1p1:Version"" xmlns:z=""http://schemas.microsoft.com/2003/10/Serialization/"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">", ref s);
-                SchemaUtils.OrderedContains(@"<d1p1:_Build>0</d1p1:_Build>", ref s);
-                SchemaUtils.OrderedContains(@"<d1p1:_Major>7</d1p1:_Major>", ref s);
-                SchemaUtils.OrderedContains(@"<d1p1:_Minor>0</d1p1:_Minor>", ref s);
-                SchemaUtils.OrderedContains(@"<d1p1:_Revision>0</d1p1:_Revision>", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""next"" nillable=""true"" type=""tns:SurrogateTests.SerializableNode"">", ref s);
-                SchemaUtils.OrderedContains(@"<Surrogate xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:string"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">Field</Surrogate>", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""SurrogateTests.SerializableNode"" nillable=""true"" type=""tns:SurrogateTests.SerializableNode"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">", ref s);
-            } };
-            yield return new object[] { typeof(SurrogateTests.XmlSerializerPerson), new NodeToSerializableNode(new CircleToSquare(new XmlSerializerToXmlFormatter(null))), (string s, XmlSchemaSet ss) => {
-                SchemaUtils.OrderedContains(@"<xs:schema elementFormDefault=""qualified"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""XmlSerializerPersonElement"" nillable=""true"" type=""XmlSerializerPerson"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:complexType name=""XmlSerializerPerson"">", ref s);
-                SchemaUtils.OrderedContains(@"<Surrogate xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:string"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">XmlSerializable</Surrogate>", ref s);
-                SchemaUtils.OrderedContains(@"<xs:attribute name=""Name"" type=""xs:string"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:attribute name=""Age"" type=""xs:int"" use=""required"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""XmlSerializerPerson"" nillable=""true"" type=""XmlSerializerPerson"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">", ref s);
-            } };
-            yield return new object[] { typeof(SurrogateTests.ValidSurrogateTest), new PersonSurrogate(), (string s, XmlSchemaSet ss) => {
-                SchemaUtils.OrderedContains(@"<xs:schema xmlns:tns=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" elementFormDefault=""qualified"" targetNamespace=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">", ref s);
-                SchemaUtils.OrderedContains(@"<xs:complexType name=""SurrogateTests.ValidSurrogateTest"">", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element minOccurs=""0"" name=""Friends"" nillable=""true"" type=""tns:ArrayOfSurrogateTests.NonSerializablePerson"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""SurrogateTests.ValidSurrogateTest"" nillable=""true"" type=""tns:SurrogateTests.ValidSurrogateTest"" />", ref s);
+                    SchemaUtils.OrderedContains(
+                        @"<xs:complexType name=""SurrogateTests.SerializableNode"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<Surrogate xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" z:Id=""1"" xmlns:d1p1=""http://schemas.datacontract.org/2004/07/System"" i:type=""d1p1:Version"" xmlns:z=""http://schemas.microsoft.com/2003/10/Serialization/"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(@"<d1p1:_Build>0</d1p1:_Build>", ref s);
+                    SchemaUtils.OrderedContains(@"<d1p1:_Major>7</d1p1:_Major>", ref s);
+                    SchemaUtils.OrderedContains(@"<d1p1:_Minor>0</d1p1:_Minor>", ref s);
+                    SchemaUtils.OrderedContains(@"<d1p1:_Revision>0</d1p1:_Revision>", ref s);
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""next"" nillable=""true"" type=""tns:SurrogateTests.SerializableNode"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<Surrogate xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:string"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">Field</Surrogate>",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""SurrogateTests.SerializableNode"" nillable=""true"" type=""tns:SurrogateTests.SerializableNode"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
+                        ref s
+                    );
+                }
+            };
+            yield return new object[]
+            {
+                typeof(SurrogateTests.XmlSerializerPerson),
+                new NodeToSerializableNode(
+                    new CircleToSquare(new XmlSerializerToXmlFormatter(null))
+                ),
+                (string s, XmlSchemaSet ss) =>
+                {
+                    SchemaUtils.OrderedContains(
+                        @"<xs:schema elementFormDefault=""qualified"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""XmlSerializerPersonElement"" nillable=""true"" type=""XmlSerializerPerson"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:complexType name=""XmlSerializerPerson"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<Surrogate xmlns:d1p1=""http://www.w3.org/2001/XMLSchema"" i:type=""d1p1:string"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">XmlSerializable</Surrogate>",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:attribute name=""Name"" type=""xs:string"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:attribute name=""Age"" type=""xs:int"" use=""required"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""XmlSerializerPerson"" nillable=""true"" type=""XmlSerializerPerson"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
+                        ref s
+                    );
+                }
+            };
+            yield return new object[]
+            {
+                typeof(SurrogateTests.ValidSurrogateTest),
+                new PersonSurrogate(),
+                (string s, XmlSchemaSet ss) =>
+                {
+                    SchemaUtils.OrderedContains(
+                        @"<xs:schema xmlns:tns=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" elementFormDefault=""qualified"" targetNamespace=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:complexType name=""SurrogateTests.ValidSurrogateTest"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element minOccurs=""0"" name=""Friends"" nillable=""true"" type=""tns:ArrayOfSurrogateTests.NonSerializablePerson"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""SurrogateTests.ValidSurrogateTest"" nillable=""true"" type=""tns:SurrogateTests.ValidSurrogateTest"" />",
+                        ref s
+                    );
 
-                SchemaUtils.OrderedContains(@"<xs:complexType name=""ArrayOfSurrogateTests.NonSerializablePerson"">", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element minOccurs=""0"" maxOccurs=""unbounded"" name=""SurrogateTests.NonSerializablePerson"" nillable=""true"" type=""tns:SurrogateTests.Person"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""ArrayOfSurrogateTests.NonSerializablePerson"" nillable=""true"" type=""tns:ArrayOfSurrogateTests.NonSerializablePerson"" />", ref s);
+                    SchemaUtils.OrderedContains(
+                        @"<xs:complexType name=""ArrayOfSurrogateTests.NonSerializablePerson"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element minOccurs=""0"" maxOccurs=""unbounded"" name=""SurrogateTests.NonSerializablePerson"" nillable=""true"" type=""tns:SurrogateTests.Person"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""ArrayOfSurrogateTests.NonSerializablePerson"" nillable=""true"" type=""tns:ArrayOfSurrogateTests.NonSerializablePerson"" />",
+                        ref s
+                    );
 
-                SchemaUtils.OrderedContains(@"<xs:complexType name=""SurrogateTests.Person"">", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element minOccurs=""0"" name=""name"" nillable=""true"" type=""xs:string"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""SurrogateTests.Person"" nillable=""true"" type=""tns:SurrogateTests.Person"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">", ref s);
-            } };
-            yield return new object[] { typeof(SurrogateTests.ValidSurrogateTestDC), new PersonSurrogate(), (string s, XmlSchemaSet ss) => {
-                SchemaUtils.OrderedContains(@"<xs:schema xmlns:tns=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" elementFormDefault=""qualified"" targetNamespace=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">", ref s);
+                    SchemaUtils.OrderedContains(
+                        @"<xs:complexType name=""SurrogateTests.Person"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element minOccurs=""0"" name=""name"" nillable=""true"" type=""xs:string"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""SurrogateTests.Person"" nillable=""true"" type=""tns:SurrogateTests.Person"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
+                        ref s
+                    );
+                }
+            };
+            yield return new object[]
+            {
+                typeof(SurrogateTests.ValidSurrogateTestDC),
+                new PersonSurrogate(),
+                (string s, XmlSchemaSet ss) =>
+                {
+                    SchemaUtils.OrderedContains(
+                        @"<xs:schema xmlns:tns=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" elementFormDefault=""qualified"" targetNamespace=""http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
+                        ref s
+                    );
 
-                SchemaUtils.OrderedContains(@"<xs:complexType name=""SurrogateTests.ValidSurrogateTestDC"">", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element minOccurs=""0"" name=""Friends"" nillable=""true"" type=""tns:ArrayOfSurrogateTests.NonSerializablePersonDC"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""SurrogateTests.ValidSurrogateTestDC"" nillable=""true"" type=""tns:SurrogateTests.ValidSurrogateTestDC"" />", ref s);
+                    SchemaUtils.OrderedContains(
+                        @"<xs:complexType name=""SurrogateTests.ValidSurrogateTestDC"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element minOccurs=""0"" name=""Friends"" nillable=""true"" type=""tns:ArrayOfSurrogateTests.NonSerializablePersonDC"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""SurrogateTests.ValidSurrogateTestDC"" nillable=""true"" type=""tns:SurrogateTests.ValidSurrogateTestDC"" />",
+                        ref s
+                    );
 
-                SchemaUtils.OrderedContains(@"<xs:complexType name=""ArrayOfSurrogateTests.NonSerializablePersonDC"">", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element minOccurs=""0"" maxOccurs=""unbounded"" name=""SurrogateTests.NonSerializablePersonDC"" nillable=""true"" type=""tns:SurrogateTests.PersonDC"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""ArrayOfSurrogateTests.NonSerializablePersonDC"" nillable=""true"" type=""tns:ArrayOfSurrogateTests.NonSerializablePersonDC"" />", ref s);
+                    SchemaUtils.OrderedContains(
+                        @"<xs:complexType name=""ArrayOfSurrogateTests.NonSerializablePersonDC"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element minOccurs=""0"" maxOccurs=""unbounded"" name=""SurrogateTests.NonSerializablePersonDC"" nillable=""true"" type=""tns:SurrogateTests.PersonDC"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""ArrayOfSurrogateTests.NonSerializablePersonDC"" nillable=""true"" type=""tns:ArrayOfSurrogateTests.NonSerializablePersonDC"" />",
+                        ref s
+                    );
 
-                SchemaUtils.OrderedContains(@"<xs:complexType name=""SurrogateTests.PersonDC"">", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element minOccurs=""0"" name=""name"" nillable=""true"" type=""xs:string"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:element name=""SurrogateTests.PersonDC"" nillable=""true"" type=""tns:SurrogateTests.PersonDC"" />", ref s);
-                SchemaUtils.OrderedContains(@"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">", ref s);
-            } };
+                    SchemaUtils.OrderedContains(
+                        @"<xs:complexType name=""SurrogateTests.PersonDC"">",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element minOccurs=""0"" name=""name"" nillable=""true"" type=""xs:string"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:element name=""SurrogateTests.PersonDC"" nillable=""true"" type=""tns:SurrogateTests.PersonDC"" />",
+                        ref s
+                    );
+                    SchemaUtils.OrderedContains(
+                        @"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
+                        ref s
+                    );
+                }
+            };
         }
 
         [Theory]
         [MemberData(nameof(SurrogateProvider_Negative_MemberData))]
-        public void SurrogateProvider_Negative(Type badType, ISerializationSurrogateProvider surrogate, Type exceptionType, string exMsg = null)
+        public void SurrogateProvider_Negative(
+            Type badType,
+            ISerializationSurrogateProvider surrogate,
+            Type exceptionType,
+            string exMsg = null
+        )
         {
             XsdDataContractExporter exporter = new XsdDataContractExporter();
             exporter.Options = new ExportOptions();
@@ -132,16 +337,28 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             if (exMsg != null)
                 Assert.Equal(exMsg, ex.Message);
         }
+
         public static IEnumerable<object[]> SurrogateProvider_Negative_MemberData()
         {
-            yield return new object[] { typeof(SurrogateTests.InvalidSurrogateTest), new CollectionASurrogate(), typeof(InvalidDataContractException) };
-            yield return new object[] { typeof(SurrogateTests.InvalidSurrogateTestDC), new CollectionASurrogate(), typeof(InvalidDataContractException) };
+            yield return new object[]
+            {
+                typeof(SurrogateTests.InvalidSurrogateTest),
+                new CollectionASurrogate(),
+                typeof(InvalidDataContractException)
+            };
+            yield return new object[]
+            {
+                typeof(SurrogateTests.InvalidSurrogateTestDC),
+                new CollectionASurrogate(),
+                typeof(InvalidDataContractException)
+            };
         }
 
         #region SurrogateProviders
         public class CircleToSquare : ISerializationSurrogateProvider2
         {
             ISerializationSurrogateProvider2? _nextSurrogate;
+
             public CircleToSquare(ISerializationSurrogateProvider2? nextSurrogate)
             {
                 this._nextSurrogate = nextSurrogate;
@@ -156,21 +373,35 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 
             public object GetCustomDataToExport(Type clrType, Type dcType)
             {
-                if (clrType == typeof(SurrogateTests.Circle) && dcType == typeof(SurrogateTests.Square))
+                if (
+                    clrType == typeof(SurrogateTests.Circle)
+                    && dcType == typeof(SurrogateTests.Square)
+                )
                     return clrType.Assembly.GetName().Version;
-                return (_nextSurrogate != null) ? _nextSurrogate.GetCustomDataToExport(clrType, dcType) : null;
+                return (_nextSurrogate != null)
+                    ? _nextSurrogate.GetCustomDataToExport(clrType, dcType)
+                    : null;
             }
 
-            public object GetCustomDataToExport(MemberInfo memberInfo, Type dcType) => memberInfo.MemberType.ToString();
+            public object GetCustomDataToExport(MemberInfo memberInfo, Type dcType) =>
+                memberInfo.MemberType.ToString();
+
             public void GetKnownCustomDataTypes(Collection<Type> knownTypes) { }
-            public object GetObjectToSerialize(object obj, Type memberType) => throw new NotImplementedException();
-            public object GetDeserializedObject(object obj, Type memberType) => throw new NotImplementedException();
-            public Type GetReferencedTypeOnImport(string name, string ns, object customData) => null;
+
+            public object GetObjectToSerialize(object obj, Type memberType) =>
+                throw new NotImplementedException();
+
+            public object GetDeserializedObject(object obj, Type memberType) =>
+                throw new NotImplementedException();
+
+            public Type GetReferencedTypeOnImport(string name, string ns, object customData) =>
+                null;
         }
 
         public class NodeToSerializableNode : ISerializationSurrogateProvider2
         {
             ISerializationSurrogateProvider2? _nextSurrogate;
+
             public NodeToSerializableNode(ISerializationSurrogateProvider2? nextSurrogate)
             {
                 this._nextSurrogate = nextSurrogate;
@@ -185,22 +416,36 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 
             public object GetCustomDataToExport(Type clrType, Type dcType)
             {
-                if (clrType == typeof(SurrogateTests.Node) && dcType == typeof(SurrogateTests.SerializableNode))
+                if (
+                    clrType == typeof(SurrogateTests.Node)
+                    && dcType == typeof(SurrogateTests.SerializableNode)
+                )
                     return clrType.Assembly.GetName().Version;
-                return (_nextSurrogate != null) ? _nextSurrogate.GetCustomDataToExport(clrType, dcType) : null;
+                return (_nextSurrogate != null)
+                    ? _nextSurrogate.GetCustomDataToExport(clrType, dcType)
+                    : null;
             }
 
-            public object GetCustomDataToExport(MemberInfo memberInfo, Type dcType) => memberInfo.MemberType.ToString();
-            public void GetKnownCustomDataTypes(Collection<Type> knownTypes) => knownTypes.Add(typeof(Version));
-            public object GetObjectToSerialize(object obj, Type memberType) => throw new NotImplementedException();
-            public object GetDeserializedObject(object obj, Type memberType) => throw new NotImplementedException();
-            public Type GetReferencedTypeOnImport(string name, string ns, object customData) => null;
-        }
+            public object GetCustomDataToExport(MemberInfo memberInfo, Type dcType) =>
+                memberInfo.MemberType.ToString();
 
+            public void GetKnownCustomDataTypes(Collection<Type> knownTypes) =>
+                knownTypes.Add(typeof(Version));
+
+            public object GetObjectToSerialize(object obj, Type memberType) =>
+                throw new NotImplementedException();
+
+            public object GetDeserializedObject(object obj, Type memberType) =>
+                throw new NotImplementedException();
+
+            public Type GetReferencedTypeOnImport(string name, string ns, object customData) =>
+                null;
+        }
 
         public class XmlSerializerToXmlFormatter : ISerializationSurrogateProvider2
         {
             ISerializationSurrogateProvider2? _nextSurrogate;
+
             public XmlSerializerToXmlFormatter(ISerializationSurrogateProvider2? nextSurrogate)
             {
                 this._nextSurrogate = nextSurrogate;
@@ -215,16 +460,30 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 
             public object GetCustomDataToExport(Type clrType, Type dcType)
             {
-                if (clrType == typeof(SurrogateTests.XmlSerializerPerson) && dcType == typeof(SurrogateTests.XmlSerializerAdapter<SurrogateTests.XmlSerializerPerson>))
+                if (
+                    clrType == typeof(SurrogateTests.XmlSerializerPerson)
+                    && dcType
+                        == typeof(SurrogateTests.XmlSerializerAdapter<SurrogateTests.XmlSerializerPerson>)
+                )
                     return "XmlSerializable";
-                return (_nextSurrogate != null) ? _nextSurrogate.GetCustomDataToExport(clrType, dcType) : null;
+                return (_nextSurrogate != null)
+                    ? _nextSurrogate.GetCustomDataToExport(clrType, dcType)
+                    : null;
             }
 
-            public object GetCustomDataToExport(MemberInfo memberInfo, Type dcType) => memberInfo.MemberType.ToString();
+            public object GetCustomDataToExport(MemberInfo memberInfo, Type dcType) =>
+                memberInfo.MemberType.ToString();
+
             public void GetKnownCustomDataTypes(Collection<Type> knownTypes) { }
-            public Type GetReferencedTypeOnImport(string name, string ns, object customData) => null;
-            public object GetObjectToSerialize(object obj, Type memberType) => throw new NotImplementedException();
-            public object GetDeserializedObject(object obj, Type memberType) => throw new NotImplementedException();
+
+            public Type GetReferencedTypeOnImport(string name, string ns, object customData) =>
+                null;
+
+            public object GetObjectToSerialize(object obj, Type memberType) =>
+                throw new NotImplementedException();
+
+            public object GetDeserializedObject(object obj, Type memberType) =>
+                throw new NotImplementedException();
         }
 
         class PersonSurrogate : ISerializationSurrogateProvider2
@@ -245,12 +504,14 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 
             public object GetObjectToSerialize(object obj, Type targetType)
             {
-                SurrogateTests.NonSerializablePerson nonSerializablePerson = obj as SurrogateTests.NonSerializablePerson;
+                SurrogateTests.NonSerializablePerson nonSerializablePerson =
+                    obj as SurrogateTests.NonSerializablePerson;
                 if (nonSerializablePerson != null)
                 {
                     return new Person();
                 }
-                SurrogateTests.NonSerializablePersonDC nonSerializablePersonDC = obj as SurrogateTests.NonSerializablePersonDC;
+                SurrogateTests.NonSerializablePersonDC nonSerializablePersonDC =
+                    obj as SurrogateTests.NonSerializablePersonDC;
                 if (nonSerializablePersonDC != null)
                 {
                     return new SurrogateTests.PersonDC();
@@ -273,9 +534,17 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 return obj;
             }
 
-            public Type GetReferencedTypeOnImport(string typeName, string typeNamespace, object customData)
+            public Type GetReferencedTypeOnImport(
+                string typeName,
+                string typeNamespace,
+                object customData
+            )
             {
-                if (typeNamespace.Equals("http://schemas.datacontract.org/2004/07/Suites.SchemaExport"))
+                if (
+                    typeNamespace.Equals(
+                        "http://schemas.datacontract.org/2004/07/Suites.SchemaExport"
+                    )
+                )
                 {
                     if (typeName.Equals("DataContractSurrogateTest.Person"))
                     {
@@ -290,7 +559,12 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             }
 
             public object GetCustomDataToExport(Type clrType, Type dataContractType) => null;
-            public object GetCustomDataToExport(System.Reflection.MemberInfo memberInfo, Type dataContractType) => null;
+
+            public object GetCustomDataToExport(
+                System.Reflection.MemberInfo memberInfo,
+                Type dataContractType
+            ) => null;
+
             public void GetKnownCustomDataTypes(Collection<Type> customDataTypes) { }
         }
 
@@ -311,7 +585,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 ExporterTypesTests.CollectionA collectionA = obj as ExporterTypesTests.CollectionA;
                 if (collectionA != null)
                 {
-                    ExporterTypesTests.CollectionWithoutParameterlessCtor<int> validCollection = new ExporterTypesTests.CollectionWithoutParameterlessCtor<int>(1);
+                    ExporterTypesTests.CollectionWithoutParameterlessCtor<int> validCollection =
+                        new ExporterTypesTests.CollectionWithoutParameterlessCtor<int>(1);
                     validCollection.Add(1);
                     return validCollection;
                 }
@@ -320,7 +595,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 
             public object GetDeserializedObject(object obj, Type targetType)
             {
-                ExporterTypesTests.CollectionWithoutParameterlessCtor<int> validCollection = obj as ExporterTypesTests.CollectionWithoutParameterlessCtor<int>;
+                ExporterTypesTests.CollectionWithoutParameterlessCtor<int> validCollection =
+                    obj as ExporterTypesTests.CollectionWithoutParameterlessCtor<int>;
                 if (validCollection != null)
                 {
                     return new ExporterTypesTests.CollectionA();
@@ -328,9 +604,17 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 return obj;
             }
 
-            public Type GetReferencedTypeOnImport(string typeName, string typeNamespace, object customData)
+            public Type GetReferencedTypeOnImport(
+                string typeName,
+                string typeNamespace,
+                object customData
+            )
             {
-                if (typeNamespace.Equals("http://schemas.datacontract.org/2004/07/Suites.SchemaExport"))
+                if (
+                    typeNamespace.Equals(
+                        "http://schemas.datacontract.org/2004/07/Suites.SchemaExport"
+                    )
+                )
                 {
                     if (typeName.Equals("ExporterTypesTests.CollectionWithoutParameterlessCtor`1"))
                     {
@@ -341,7 +625,12 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             }
 
             public object GetCustomDataToExport(Type clrType, Type dataContractType) => null;
-            public object GetCustomDataToExport(System.Reflection.MemberInfo memberInfo, Type dataContractType) => null;
+
+            public object GetCustomDataToExport(
+                System.Reflection.MemberInfo memberInfo,
+                Type dataContractType
+            ) => null;
+
             public void GetKnownCustomDataTypes(Collection<Type> customDataTypes) { }
         }
         #endregion
@@ -356,7 +645,11 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             {
                 get
                 {
-                    friends = friends ?? new ExporterTypesTests.CollectionWithoutParameterlessCtor<NonSerializablePerson>(2);
+                    friends =
+                        friends
+                        ?? new ExporterTypesTests.CollectionWithoutParameterlessCtor<NonSerializablePerson>(
+                            2
+                        );
                     return friends;
                 }
             }
@@ -368,10 +661,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 
             public ExporterTypesTests.CollectionA Surrogated
             {
-                get
-                {
-                    return localList;
-                }
+                get { return localList; }
             }
         }
 
@@ -385,7 +675,11 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             {
                 get
                 {
-                    friends = friends ?? new ExporterTypesTests.CollectionWithoutParameterlessCtor<NonSerializablePersonDC>(2);
+                    friends =
+                        friends
+                        ?? new ExporterTypesTests.CollectionWithoutParameterlessCtor<NonSerializablePersonDC>(
+                            2
+                        );
                     return friends;
                 }
             }
@@ -399,10 +693,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             public ExporterTypesTests.CollectionA Surrogated
             {
-                get
-                {
-                    return localList;
-                }
+                get { return localList; }
             }
         }
 
@@ -411,8 +702,13 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         {
             [DataMember]
             Circle circle;
+
             [DataMember]
-            public Circle[] Circles { get { return null; } set { } }
+            public Circle[] Circles
+            {
+                get { return null; }
+                set { }
+            }
         }
 
         [Serializable]
@@ -442,8 +738,10 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         public class XmlSerializerPerson
         {
             public XmlSerializerPerson() { }
+
             [XmlAttribute]
             public string Name;
+
             [XmlAttribute]
             public int Age;
         }
@@ -482,7 +780,10 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 return new XmlQualifiedName(xmlTypeMapping.TypeName, xmlTypeMapping.Namespace);
             }
 
-            private static void ValidationCallbackWithErrorCode(object sender, ValidationEventArgs args)
+            private static void ValidationCallbackWithErrorCode(
+                object sender,
+                ValidationEventArgs args
+            )
             {
                 Console.WriteLine("Schema warning: " + args.Message);
             }

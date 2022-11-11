@@ -21,11 +21,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RequestDispatcherFactory()
-        {
-        }
+        public RequestDispatcherFactory() { }
 
-        public virtual ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+        public virtual ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        )
         {
             return new RequestDispatcher(lspServices);
         }

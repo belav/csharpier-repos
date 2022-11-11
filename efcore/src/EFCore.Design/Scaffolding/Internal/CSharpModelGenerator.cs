@@ -27,8 +27,8 @@ public class CSharpModelGenerator : ModelCodeGenerator
     public CSharpModelGenerator(
         ModelCodeGeneratorDependencies dependencies,
         IOperationReporter reporter,
-        IServiceProvider serviceProvider)
-        : base(dependencies)
+        IServiceProvider serviceProvider
+    ) : base(dependencies)
     {
         _reporter = reporter;
         _serviceProvider = serviceProvider;
@@ -40,8 +40,7 @@ public class CSharpModelGenerator : ModelCodeGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string Language
-        => "C#";
+    public override string Language => "C#";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,27 +48,36 @@ public class CSharpModelGenerator : ModelCodeGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override ScaffoldedModel GenerateModel(
-        IModel model,
-        ModelCodeGenerationOptions options)
+    public override ScaffoldedModel GenerateModel(IModel model, ModelCodeGenerationOptions options)
     {
         if (options.ContextName == null)
         {
             throw new ArgumentException(
-                CoreStrings.ArgumentPropertyNull(nameof(options.ContextName), nameof(options)), nameof(options));
+                CoreStrings.ArgumentPropertyNull(nameof(options.ContextName), nameof(options)),
+                nameof(options)
+            );
         }
 
         if (options.ConnectionString == null)
         {
             throw new ArgumentException(
-                CoreStrings.ArgumentPropertyNull(nameof(options.ConnectionString), nameof(options)), nameof(options));
+                CoreStrings.ArgumentPropertyNull(nameof(options.ConnectionString), nameof(options)),
+                nameof(options)
+            );
         }
 
         var host = new TextTemplatingEngineHost(_serviceProvider);
-        var contextTemplate = new CSharpDbContextGenerator { Host = host, Session = host.CreateSession() };
+        var contextTemplate = new CSharpDbContextGenerator
+        {
+            Host = host,
+            Session = host.CreateSession()
+        };
         contextTemplate.Session.Add("Model", model);
         contextTemplate.Session.Add("Options", options);
-        contextTemplate.Session.Add("NamespaceHint", options.ContextNamespace ?? options.ModelNamespace);
+        contextTemplate.Session.Add(
+            "NamespaceHint",
+            options.ContextNamespace ?? options.ModelNamespace
+        );
         contextTemplate.Session.Add("ProjectDefaultNamespace", options.RootNamespace);
         contextTemplate.Initialize();
 
@@ -81,9 +89,10 @@ public class CSharpModelGenerator : ModelCodeGenerator
         {
             ContextFile = new ScaffoldedFile
             {
-                Path = options.ContextDir != null
-                    ? Path.Combine(options.ContextDir, dbContextFileName)
-                    : dbContextFileName,
+                Path =
+                    options.ContextDir != null
+                        ? Path.Combine(options.ContextDir, dbContextFileName)
+                        : dbContextFileName,
                 Code = generatedCode
             }
         };
@@ -91,7 +100,11 @@ public class CSharpModelGenerator : ModelCodeGenerator
         foreach (var entityType in model.GetEntityTypes())
         {
             host.Initialize();
-            var entityTypeTemplate = new CSharpEntityTypeGenerator { Host = host, Session = host.CreateSession() };
+            var entityTypeTemplate = new CSharpEntityTypeGenerator
+            {
+                Host = host,
+                Session = host.CreateSession()
+            };
             entityTypeTemplate.Session.Add("EntityType", entityType);
             entityTypeTemplate.Session.Add("Options", options);
             entityTypeTemplate.Session.Add("NamespaceHint", options.ModelNamespace);
@@ -107,7 +120,8 @@ public class CSharpModelGenerator : ModelCodeGenerator
             // output EntityType poco .cs file
             var entityTypeFileName = entityType.Name + host.Extension;
             resultingFiles.AdditionalFiles.Add(
-                new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode });
+                new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode }
+            );
         }
 
         return resultingFiles;
@@ -124,7 +138,9 @@ public class CSharpModelGenerator : ModelCodeGenerator
 
         if (transformation.Errors.HasErrors)
         {
-            throw new OperationException(DesignStrings.ErrorGeneratingOutput(transformation.GetType().Name));
+            throw new OperationException(
+                DesignStrings.ErrorGeneratingOutput(transformation.GetType().Name)
+            );
         }
 
         return output;

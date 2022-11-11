@@ -21,12 +21,19 @@ namespace Microsoft.Interop
 
         public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info)
         {
-            return info.IsByRef ? SignatureBehavior.PointerToNativeType : SignatureBehavior.NativeType;
+            return info.IsByRef
+                ? SignatureBehavior.PointerToNativeType
+                : SignatureBehavior.NativeType;
         }
 
-        public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context)
+        public ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
-            return info.IsByRef ? ValueBoundaryBehavior.AddressOfNativeIdentifier : ValueBoundaryBehavior.NativeIdentifier;
+            return info.IsByRef
+                ? ValueBoundaryBehavior.AddressOfNativeIdentifier
+                : ValueBoundaryBehavior.NativeIdentifier;
         }
 
         public IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
@@ -55,14 +62,27 @@ namespace Microsoft.Interop
                                     InvocationExpression(
                                         MemberAccessExpression(
                                             SyntaxKind.SimpleMemberAccessExpression,
-                                            ParseName(TypeNames.System_Runtime_InteropServices_Marshal),
-                                            IdentifierName("GetFunctionPointerForDelegate")),
-                                        ArgumentList(SingletonSeparatedList(Argument(IdentifierName(managedIdentifier))))),
-                                    LiteralExpression(SyntaxKind.DefaultLiteralExpression))));
+                                            ParseName(
+                                                TypeNames.System_Runtime_InteropServices_Marshal
+                                            ),
+                                            IdentifierName("GetFunctionPointerForDelegate")
+                                        ),
+                                        ArgumentList(
+                                            SingletonSeparatedList(
+                                                Argument(IdentifierName(managedIdentifier))
+                                            )
+                                        )
+                                    ),
+                                    LiteralExpression(SyntaxKind.DefaultLiteralExpression)
+                                )
+                            )
+                        );
                     }
                     break;
                 case StubCodeContext.Stage.Unmarshal:
-                    if (info.IsManagedReturnPosition || (info.IsByRef && info.RefKind != RefKind.In))
+                    if (
+                        info.IsManagedReturnPosition || (info.IsByRef && info.RefKind != RefKind.In)
+                    )
                     {
                         // <managedIdentifier> = <nativeIdentifier> != default : Marshal.GetDelegateForFunctionPointer<<managedType>>(<nativeIdentifier>) : null;
                         yield return ExpressionStatement(
@@ -73,18 +93,33 @@ namespace Microsoft.Interop
                                     BinaryExpression(
                                         SyntaxKind.NotEqualsExpression,
                                         IdentifierName(nativeIdentifier),
-                                        LiteralExpression(SyntaxKind.DefaultLiteralExpression)),
+                                        LiteralExpression(SyntaxKind.DefaultLiteralExpression)
+                                    ),
                                     InvocationExpression(
                                         MemberAccessExpression(
                                             SyntaxKind.SimpleMemberAccessExpression,
-                                            ParseName(TypeNames.System_Runtime_InteropServices_Marshal),
+                                            ParseName(
+                                                TypeNames.System_Runtime_InteropServices_Marshal
+                                            ),
                                             GenericName(Identifier("GetDelegateForFunctionPointer"))
-                                            .WithTypeArgumentList(
-                                                TypeArgumentList(
-                                                    SingletonSeparatedList(
-                                                        info.ManagedType.Syntax)))),
-                                        ArgumentList(SingletonSeparatedList(Argument(IdentifierName(nativeIdentifier))))),
-                                    LiteralExpression(SyntaxKind.NullLiteralExpression))));
+                                                .WithTypeArgumentList(
+                                                    TypeArgumentList(
+                                                        SingletonSeparatedList(
+                                                            info.ManagedType.Syntax
+                                                        )
+                                                    )
+                                                )
+                                        ),
+                                        ArgumentList(
+                                            SingletonSeparatedList(
+                                                Argument(IdentifierName(nativeIdentifier))
+                                            )
+                                        )
+                                    ),
+                                    LiteralExpression(SyntaxKind.NullLiteralExpression)
+                                )
+                            )
+                        );
                     }
                     break;
                 case StubCodeContext.Stage.NotifyForSuccessfulInvoke:
@@ -93,7 +128,13 @@ namespace Microsoft.Interop
                         yield return ExpressionStatement(
                             InvocationExpression(
                                 ParseName("global::System.GC.KeepAlive"),
-                                ArgumentList(SingletonSeparatedList(Argument(IdentifierName(managedIdentifier))))));
+                                ArgumentList(
+                                    SingletonSeparatedList(
+                                        Argument(IdentifierName(managedIdentifier))
+                                    )
+                                )
+                            )
+                        );
                     }
                     break;
                 default:
@@ -103,6 +144,9 @@ namespace Microsoft.Interop
 
         public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) => true;
 
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context) => false;
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        ) => false;
     }
 }

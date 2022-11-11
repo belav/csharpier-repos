@@ -14,14 +14,14 @@ public class DefaultRazorEngineTest
         // Arrange
         var features = new IRazorEngineFeature[]
         {
-                Mock.Of<IRazorEngineFeature>(),
-                Mock.Of<IRazorEngineFeature>(),
+            Mock.Of<IRazorEngineFeature>(),
+            Mock.Of<IRazorEngineFeature>(),
         };
 
         var phases = new IRazorEnginePhase[]
         {
-                Mock.Of<IRazorEnginePhase>(),
-                Mock.Of<IRazorEnginePhase>(),
+            Mock.Of<IRazorEnginePhase>(),
+            Mock.Of<IRazorEnginePhase>(),
         };
 
         // Act
@@ -45,14 +45,14 @@ public class DefaultRazorEngineTest
         // Arrange
         var features = new IRazorEngineFeature[]
         {
-                Mock.Of<IRazorEngineFeature>(),
-                Mock.Of<IRazorEngineFeature>(),
+            Mock.Of<IRazorEngineFeature>(),
+            Mock.Of<IRazorEngineFeature>(),
         };
 
         var phases = new IRazorEnginePhase[]
         {
-                Mock.Of<IRazorEnginePhase>(),
-                Mock.Of<IRazorEnginePhase>(),
+            Mock.Of<IRazorEnginePhase>(),
+            Mock.Of<IRazorEnginePhase>(),
         };
 
         var engine = new DefaultRazorEngine(features, phases);

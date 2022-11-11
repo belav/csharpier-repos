@@ -125,7 +125,8 @@ public class Interfaces
             counter += itfs[i].GetAnInt();
         }
 
-        string expected = "Foo0Foo1Foo2Foo3Foo4Foo5Foo6Foo7Foo8Foo9Foo10Foo11Foo12Foo13Foo14Foo15Foo16Foo17Foo18Foo19Foo20Foo21Foo22Foo23Foo24Foo25Foo26Foo27Foo28Foo29Foo30Foo31Foo32Foo33Foo34Foo35Foo36Foo37Foo38Foo39Foo40Foo41Foo42Foo43Foo44Foo45Foo46Foo47Foo48Foo49";
+        string expected =
+            "Foo0Foo1Foo2Foo3Foo4Foo5Foo6Foo7Foo8Foo9Foo10Foo11Foo12Foo13Foo14Foo15Foo16Foo17Foo18Foo19Foo20Foo21Foo22Foo23Foo24Foo25Foo26Foo27Foo28Foo29Foo30Foo31Foo32Foo33Foo34Foo35Foo36Foo37Foo38Foo39Foo40Foo41Foo42Foo43Foo44Foo45Foo46Foo47Foo48Foo49";
 
         if (!expected.Equals(sb.ToString()))
         {
@@ -212,56 +213,655 @@ public class Interfaces
         public int ManyParameters(int a, int b, int c, int d, int e, int f, int g, int h) => 42;
     }
 
-    class Foo0 : MyInterface { public int GetAnInt() { return 0; } public string GetAString() { return "Foo0"; } }
-    class Foo1 : MyInterface { public int GetAnInt() { return 1; } public string GetAString() { return "Foo1"; } }
-    class Foo2 : MyInterface { public int GetAnInt() { return 2; } public string GetAString() { return "Foo2"; } }
-    class Foo3 : MyInterface { public int GetAnInt() { return 3; } public string GetAString() { return "Foo3"; } }
-    class Foo4 : MyInterface { public int GetAnInt() { return 4; } public string GetAString() { return "Foo4"; } }
-    class Foo5 : MyInterface { public int GetAnInt() { return 5; } public string GetAString() { return "Foo5"; } }
-    class Foo6 : MyInterface { public int GetAnInt() { return 6; } public string GetAString() { return "Foo6"; } }
-    class Foo7 : MyInterface { public int GetAnInt() { return 7; } public string GetAString() { return "Foo7"; } }
-    class Foo8 : MyInterface { public int GetAnInt() { return 8; } public string GetAString() { return "Foo8"; } }
-    class Foo9 : MyInterface { public int GetAnInt() { return 9; } public string GetAString() { return "Foo9"; } }
-    class Foo10 : MyInterface { public int GetAnInt() { return 10; } public string GetAString() { return "Foo10"; } }
-    class Foo11 : MyInterface { public int GetAnInt() { return 11; } public string GetAString() { return "Foo11"; } }
-    class Foo12 : MyInterface { public int GetAnInt() { return 12; } public string GetAString() { return "Foo12"; } }
-    class Foo13 : MyInterface { public int GetAnInt() { return 13; } public string GetAString() { return "Foo13"; } }
-    class Foo14 : MyInterface { public int GetAnInt() { return 14; } public string GetAString() { return "Foo14"; } }
-    class Foo15 : MyInterface { public int GetAnInt() { return 15; } public string GetAString() { return "Foo15"; } }
-    class Foo16 : MyInterface { public int GetAnInt() { return 16; } public string GetAString() { return "Foo16"; } }
-    class Foo17 : MyInterface { public int GetAnInt() { return 17; } public string GetAString() { return "Foo17"; } }
-    class Foo18 : MyInterface { public int GetAnInt() { return 18; } public string GetAString() { return "Foo18"; } }
-    class Foo19 : MyInterface { public int GetAnInt() { return 19; } public string GetAString() { return "Foo19"; } }
-    class Foo20 : MyInterface { public int GetAnInt() { return 20; } public string GetAString() { return "Foo20"; } }
-    class Foo21 : MyInterface { public int GetAnInt() { return 21; } public string GetAString() { return "Foo21"; } }
-    class Foo22 : MyInterface { public int GetAnInt() { return 22; } public string GetAString() { return "Foo22"; } }
-    class Foo23 : MyInterface { public int GetAnInt() { return 23; } public string GetAString() { return "Foo23"; } }
-    class Foo24 : MyInterface { public int GetAnInt() { return 24; } public string GetAString() { return "Foo24"; } }
-    class Foo25 : MyInterface { public int GetAnInt() { return 25; } public string GetAString() { return "Foo25"; } }
-    class Foo26 : MyInterface { public int GetAnInt() { return 26; } public string GetAString() { return "Foo26"; } }
-    class Foo27 : MyInterface { public int GetAnInt() { return 27; } public string GetAString() { return "Foo27"; } }
-    class Foo28 : MyInterface { public int GetAnInt() { return 28; } public string GetAString() { return "Foo28"; } }
-    class Foo29 : MyInterface { public int GetAnInt() { return 29; } public string GetAString() { return "Foo29"; } }
-    class Foo30 : MyInterface { public int GetAnInt() { return 30; } public string GetAString() { return "Foo30"; } }
-    class Foo31 : MyInterface { public int GetAnInt() { return 31; } public string GetAString() { return "Foo31"; } }
-    class Foo32 : MyInterface { public int GetAnInt() { return 32; } public string GetAString() { return "Foo32"; } }
-    class Foo33 : MyInterface { public int GetAnInt() { return 33; } public string GetAString() { return "Foo33"; } }
-    class Foo34 : MyInterface { public int GetAnInt() { return 34; } public string GetAString() { return "Foo34"; } }
-    class Foo35 : MyInterface { public int GetAnInt() { return 35; } public string GetAString() { return "Foo35"; } }
-    class Foo36 : MyInterface { public int GetAnInt() { return 36; } public string GetAString() { return "Foo36"; } }
-    class Foo37 : MyInterface { public int GetAnInt() { return 37; } public string GetAString() { return "Foo37"; } }
-    class Foo38 : MyInterface { public int GetAnInt() { return 38; } public string GetAString() { return "Foo38"; } }
-    class Foo39 : MyInterface { public int GetAnInt() { return 39; } public string GetAString() { return "Foo39"; } }
-    class Foo40 : MyInterface { public int GetAnInt() { return 40; } public string GetAString() { return "Foo40"; } }
-    class Foo41 : MyInterface { public int GetAnInt() { return 41; } public string GetAString() { return "Foo41"; } }
-    class Foo42 : MyInterface { public int GetAnInt() { return 42; } public string GetAString() { return "Foo42"; } }
-    class Foo43 : MyInterface { public int GetAnInt() { return 43; } public string GetAString() { return "Foo43"; } }
-    class Foo44 : MyInterface { public int GetAnInt() { return 44; } public string GetAString() { return "Foo44"; } }
-    class Foo45 : MyInterface { public int GetAnInt() { return 45; } public string GetAString() { return "Foo45"; } }
-    class Foo46 : MyInterface { public int GetAnInt() { return 46; } public string GetAString() { return "Foo46"; } }
-    class Foo47 : MyInterface { public int GetAnInt() { return 47; } public string GetAString() { return "Foo47"; } }
-    class Foo48 : MyInterface { public int GetAnInt() { return 48; } public string GetAString() { return "Foo48"; } }
-    class Foo49 : MyInterface { public int GetAnInt() { return 49; } public string GetAString() { return "Foo49"; } }
+    class Foo0 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 0;
+        }
+
+        public string GetAString()
+        {
+            return "Foo0";
+        }
+    }
+
+    class Foo1 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 1;
+        }
+
+        public string GetAString()
+        {
+            return "Foo1";
+        }
+    }
+
+    class Foo2 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 2;
+        }
+
+        public string GetAString()
+        {
+            return "Foo2";
+        }
+    }
+
+    class Foo3 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 3;
+        }
+
+        public string GetAString()
+        {
+            return "Foo3";
+        }
+    }
+
+    class Foo4 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 4;
+        }
+
+        public string GetAString()
+        {
+            return "Foo4";
+        }
+    }
+
+    class Foo5 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 5;
+        }
+
+        public string GetAString()
+        {
+            return "Foo5";
+        }
+    }
+
+    class Foo6 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 6;
+        }
+
+        public string GetAString()
+        {
+            return "Foo6";
+        }
+    }
+
+    class Foo7 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 7;
+        }
+
+        public string GetAString()
+        {
+            return "Foo7";
+        }
+    }
+
+    class Foo8 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 8;
+        }
+
+        public string GetAString()
+        {
+            return "Foo8";
+        }
+    }
+
+    class Foo9 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 9;
+        }
+
+        public string GetAString()
+        {
+            return "Foo9";
+        }
+    }
+
+    class Foo10 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 10;
+        }
+
+        public string GetAString()
+        {
+            return "Foo10";
+        }
+    }
+
+    class Foo11 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 11;
+        }
+
+        public string GetAString()
+        {
+            return "Foo11";
+        }
+    }
+
+    class Foo12 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 12;
+        }
+
+        public string GetAString()
+        {
+            return "Foo12";
+        }
+    }
+
+    class Foo13 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 13;
+        }
+
+        public string GetAString()
+        {
+            return "Foo13";
+        }
+    }
+
+    class Foo14 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 14;
+        }
+
+        public string GetAString()
+        {
+            return "Foo14";
+        }
+    }
+
+    class Foo15 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 15;
+        }
+
+        public string GetAString()
+        {
+            return "Foo15";
+        }
+    }
+
+    class Foo16 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 16;
+        }
+
+        public string GetAString()
+        {
+            return "Foo16";
+        }
+    }
+
+    class Foo17 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 17;
+        }
+
+        public string GetAString()
+        {
+            return "Foo17";
+        }
+    }
+
+    class Foo18 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 18;
+        }
+
+        public string GetAString()
+        {
+            return "Foo18";
+        }
+    }
+
+    class Foo19 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 19;
+        }
+
+        public string GetAString()
+        {
+            return "Foo19";
+        }
+    }
+
+    class Foo20 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 20;
+        }
+
+        public string GetAString()
+        {
+            return "Foo20";
+        }
+    }
+
+    class Foo21 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 21;
+        }
+
+        public string GetAString()
+        {
+            return "Foo21";
+        }
+    }
+
+    class Foo22 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 22;
+        }
+
+        public string GetAString()
+        {
+            return "Foo22";
+        }
+    }
+
+    class Foo23 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 23;
+        }
+
+        public string GetAString()
+        {
+            return "Foo23";
+        }
+    }
+
+    class Foo24 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 24;
+        }
+
+        public string GetAString()
+        {
+            return "Foo24";
+        }
+    }
+
+    class Foo25 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 25;
+        }
+
+        public string GetAString()
+        {
+            return "Foo25";
+        }
+    }
+
+    class Foo26 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 26;
+        }
+
+        public string GetAString()
+        {
+            return "Foo26";
+        }
+    }
+
+    class Foo27 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 27;
+        }
+
+        public string GetAString()
+        {
+            return "Foo27";
+        }
+    }
+
+    class Foo28 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 28;
+        }
+
+        public string GetAString()
+        {
+            return "Foo28";
+        }
+    }
+
+    class Foo29 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 29;
+        }
+
+        public string GetAString()
+        {
+            return "Foo29";
+        }
+    }
+
+    class Foo30 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 30;
+        }
+
+        public string GetAString()
+        {
+            return "Foo30";
+        }
+    }
+
+    class Foo31 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 31;
+        }
+
+        public string GetAString()
+        {
+            return "Foo31";
+        }
+    }
+
+    class Foo32 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 32;
+        }
+
+        public string GetAString()
+        {
+            return "Foo32";
+        }
+    }
+
+    class Foo33 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 33;
+        }
+
+        public string GetAString()
+        {
+            return "Foo33";
+        }
+    }
+
+    class Foo34 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 34;
+        }
+
+        public string GetAString()
+        {
+            return "Foo34";
+        }
+    }
+
+    class Foo35 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 35;
+        }
+
+        public string GetAString()
+        {
+            return "Foo35";
+        }
+    }
+
+    class Foo36 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 36;
+        }
+
+        public string GetAString()
+        {
+            return "Foo36";
+        }
+    }
+
+    class Foo37 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 37;
+        }
+
+        public string GetAString()
+        {
+            return "Foo37";
+        }
+    }
+
+    class Foo38 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 38;
+        }
+
+        public string GetAString()
+        {
+            return "Foo38";
+        }
+    }
+
+    class Foo39 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 39;
+        }
+
+        public string GetAString()
+        {
+            return "Foo39";
+        }
+    }
+
+    class Foo40 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 40;
+        }
+
+        public string GetAString()
+        {
+            return "Foo40";
+        }
+    }
+
+    class Foo41 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 41;
+        }
+
+        public string GetAString()
+        {
+            return "Foo41";
+        }
+    }
+
+    class Foo42 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 42;
+        }
+
+        public string GetAString()
+        {
+            return "Foo42";
+        }
+    }
+
+    class Foo43 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 43;
+        }
+
+        public string GetAString()
+        {
+            return "Foo43";
+        }
+    }
+
+    class Foo44 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 44;
+        }
+
+        public string GetAString()
+        {
+            return "Foo44";
+        }
+    }
+
+    class Foo45 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 45;
+        }
+
+        public string GetAString()
+        {
+            return "Foo45";
+        }
+    }
+
+    class Foo46 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 46;
+        }
+
+        public string GetAString()
+        {
+            return "Foo46";
+        }
+    }
+
+    class Foo47 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 47;
+        }
+
+        public string GetAString()
+        {
+            return "Foo47";
+        }
+    }
+
+    class Foo48 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 48;
+        }
+
+        public string GetAString()
+        {
+            return "Foo48";
+        }
+    }
+
+    class Foo49 : MyInterface
+    {
+        public int GetAnInt()
+        {
+            return 49;
+        }
+
+        public string GetAString()
+        {
+            return "Foo49";
+        }
+    }
 
     #endregion
 
@@ -279,7 +879,6 @@ public class Interfaces
             Console.WriteLine(" Expected: TestClass");
             return Fail;
         }
-
 
         if (myInterface.GetAnInt() != 1)
         {
@@ -309,6 +908,7 @@ public class Interfaces
     class TestClass<T> : MyInterface, Interface<T>
     {
         T _t;
+
         public TestClass(T t)
         {
             _t = t;
@@ -404,9 +1004,11 @@ public class Interfaces
         }
     }
 
-    static IContravariantInterface<string> s_contravariantObject = new TypeWithVariantInterfaces<object>();
+    static IContravariantInterface<string> s_contravariantObject =
+        new TypeWithVariantInterfaces<object>();
     static ICovariantInterface<object> s_covariantObject = new TypeWithVariantInterfaces<string>();
-    static IEnumerable<int> s_arrayCovariantObject = (IEnumerable<int>)(object)new uint[] { 5, 10, 15 };
+    static IEnumerable<int> s_arrayCovariantObject =
+        (IEnumerable<int>)(object)new uint[] { 5, 10, 15 };
 
     private static int TestVariantInterfaces()
     {
@@ -427,6 +1029,7 @@ public class Interfaces
     }
 
     class SpecialArrayBase { }
+
     class SpecialArrayDerived : SpecialArrayBase { }
 
     // NOTE: ICollection is not a variant interface, but arrays can cast with it as if it was
@@ -489,6 +1092,7 @@ public class Interfaces
         }
 
         class Foo : IFoo { }
+
         class Bar : IBar { }
 
         class Baz : IFoo
@@ -587,8 +1191,15 @@ public class Interfaces
             public string GetInnerValue() => InnerValue;
         }
 
-        class Atom1 { public override string ToString() => "The Atom1"; }
-        class Atom2 { public override string ToString() => "The Atom2"; }
+        class Atom1
+        {
+            public override string ToString() => "The Atom1";
+        }
+
+        class Atom2
+        {
+            public override string ToString() => "The Atom2";
+        }
 
         public static void Run()
         {
@@ -596,10 +1207,16 @@ public class Interfaces
 
             var x = new Derived<Atom1, Atom2>() { InnerValue = "My inner value" };
             string r1 = ((IFace<Atom1>)x).GrabValue(new Atom1());
-            if (r1 != "'My inner value' over 'Interfaces+TestSharedInterfaceMethods+Atom1' with 'The Atom1'")
+            if (
+                r1
+                != "'My inner value' over 'Interfaces+TestSharedInterfaceMethods+Atom1' with 'The Atom1'"
+            )
                 throw new Exception();
             string r2 = ((IFace<Atom2>)x).GrabValue(new Atom2());
-            if (r2 != "'My inner value' over 'Interfaces+TestSharedInterfaceMethods+Atom2' with 'The Atom2'")
+            if (
+                r2
+                != "'My inner value' over 'Interfaces+TestSharedInterfaceMethods+Atom2' with 'The Atom2'"
+            )
                 throw new Exception();
 
             IFace<object> o = new Yadda() { InnerValue = "SomeString" };
@@ -611,13 +1228,12 @@ public class Interfaces
 
     class TestCovariantReturns
     {
-        interface IFoo
-        {
-        }
+        interface IFoo { }
 
         class Foo : IFoo
         {
             public readonly string State;
+
             public Foo(string state) => State = state;
         }
 
@@ -695,7 +1311,8 @@ public class Interfaces
             }
 
             {
-                DerivedWithOverriddenUnusedVirtual b = new SuperDerivedWithOverriddenUnusedVirtual();
+                DerivedWithOverriddenUnusedVirtual b =
+                    new SuperDerivedWithOverriddenUnusedVirtual();
                 if (b.GetFoo().State != "SuperDerivedWithOverriddenUnusedVirtual")
                     throw new Exception();
             }
@@ -710,7 +1327,8 @@ public class Interfaces
 
     class TestVariantInterfaceOptimizations
     {
-        static IEnumerable<Other> s_others = (IEnumerable<Other>)(object)new This[3] { (This)33, (This)66, (This)1 };
+        static IEnumerable<Other> s_others =
+            (IEnumerable<Other>)(object)new This[3] { (This)33, (This)66, (This)1 };
 
         enum This : sbyte { }
 
@@ -728,9 +1346,12 @@ public class Interfaces
             T DoCovariant(object value);
         }
 
-        class CoAndContravariantOverSealed : IContravariantInterface<object>, ICovariantInterface<MySealedClass>
+        class CoAndContravariantOverSealed
+            : IContravariantInterface<object>,
+                ICovariantInterface<MySealedClass>
         {
             public string DoContravariant(object value) => "Hello";
+
             public MySealedClass DoCovariant(object value) => null;
         }
 
@@ -759,10 +1380,17 @@ public class Interfaces
     {
         class CastableClass<TInterface, TImpl> : IDynamicInterfaceCastable
         {
-            RuntimeTypeHandle IDynamicInterfaceCastable.GetInterfaceImplementation(RuntimeTypeHandle interfaceType)
-                => interfaceType.Equals(typeof(TInterface).TypeHandle) ? typeof(TImpl).TypeHandle : default;
-            bool IDynamicInterfaceCastable.IsInterfaceImplemented(RuntimeTypeHandle interfaceType, bool throwIfNotImplemented)
-                => interfaceType.Equals(typeof(TInterface).TypeHandle);
+            RuntimeTypeHandle IDynamicInterfaceCastable.GetInterfaceImplementation(
+                RuntimeTypeHandle interfaceType
+            ) =>
+                interfaceType.Equals(typeof(TInterface).TypeHandle)
+                    ? typeof(TImpl).TypeHandle
+                    : default;
+
+            bool IDynamicInterfaceCastable.IsInterfaceImplemented(
+                RuntimeTypeHandle interfaceType,
+                bool throwIfNotImplemented
+            ) => interfaceType.Equals(typeof(TInterface).TypeHandle);
         }
 
         interface IInterface
@@ -816,13 +1444,15 @@ public class Interfaces
             }
 
             {
-                IInterface o = (IInterface)new CastableClass<IInterface, IInterfaceIndirectCastableImpl>();
+                IInterface o = (IInterface)
+                    new CastableClass<IInterface, IInterfaceIndirectCastableImpl>();
                 if (o.GetCookie() != "IInterfaceImpl")
                     throw new Exception();
             }
 
             {
-                IInterface o = (IInterface)new CastableClass<IInterface, IInterfaceCastableImpl<int>>();
+                IInterface o = (IInterface)
+                    new CastableClass<IInterface, IInterfaceCastableImpl<int>>();
                 if (o.GetCookie() != "Int32")
                     throw new Exception();
             }
@@ -844,7 +1474,9 @@ public class Interfaces
         static object CallFrob<T>() where T : IFoo => T.Frob();
 
         class Gen<T> { }
+
         struct Struct1 { }
+
         struct Struct2 { }
 
         public static void Run()
@@ -868,25 +1500,33 @@ public class Interfaces
         class SimpleClass : ISimple
         {
             public static string GetCookie() => "SimpleClass";
-            public static string GetCookieGeneric<T>() => $"SimpleClass.GetCookieGeneric<{typeof(T).Name}>";
+
+            public static string GetCookieGeneric<T>() =>
+                $"SimpleClass.GetCookieGeneric<{typeof(T).Name}>";
         }
 
         struct SimpleStruct : ISimple
         {
             public static string GetCookie() => "SimpleStruct";
-            public static string GetCookieGeneric<T>() => $"SimpleStruct.GetCookieGeneric<{typeof(T).Name}>";
+
+            public static string GetCookieGeneric<T>() =>
+                $"SimpleStruct.GetCookieGeneric<{typeof(T).Name}>";
         }
 
         struct SimpleGenericStruct<T> : ISimple
         {
             public static string GetCookie() => $"SimpleGenericStruct<{typeof(T).Name}>";
-            public static string GetCookieGeneric<U>() => $"SimpleGenericStruct<{typeof(T).Name}>.GetCookieGeneric<{typeof(U).Name}>";
+
+            public static string GetCookieGeneric<U>() =>
+                $"SimpleGenericStruct<{typeof(T).Name}>.GetCookieGeneric<{typeof(U).Name}>";
         }
 
         class SimpleGenericClass<T> : ISimple
         {
             public static string GetCookie() => $"SimpleGenericClass<{typeof(T).Name}>";
-            public static string GetCookieGeneric<U>() => $"SimpleGenericClass<{typeof(T).Name}>.GetCookieGeneric<{typeof(U).Name}>";
+
+            public static string GetCookieGeneric<U>() =>
+                $"SimpleGenericClass<{typeof(T).Name}>.GetCookieGeneric<{typeof(U).Name}>";
         }
 
         interface IVariant<in T>
@@ -902,44 +1542,55 @@ public class Interfaces
         class SimpleVariantTwice : IVariant<Base>, IVariant<Mid>
         {
             public static string WhichMethod(Base b) => "SimpleVariantTwice.WhichMethod(Base)";
+
             public static string WhichMethod(Mid b) => "SimpleVariantTwice.WhichMethod(Mid)";
         }
 
         class VariantWithInheritanceBase : IVariant<Mid>
         {
-            public static string WhichMethod(Mid b) => "VariantWithInheritanceBase.WhichMethod(Mid)";
+            public static string WhichMethod(Mid b) =>
+                "VariantWithInheritanceBase.WhichMethod(Mid)";
         }
 
         class VariantWithInheritanceDerived : VariantWithInheritanceBase, IVariant<Base>
         {
-            public static string WhichMethod(Base b) => "VariantWithInheritanceDerived.WhichMethod(Base)";
+            public static string WhichMethod(Base b) =>
+                "VariantWithInheritanceDerived.WhichMethod(Base)";
         }
 
         class GenericVariantWithInheritanceBase<T> : IVariant<T>
         {
-            public static string WhichMethod(T b) => "GenericVariantWithInheritanceBase.WhichMethod(T)";
+            public static string WhichMethod(T b) =>
+                "GenericVariantWithInheritanceBase.WhichMethod(T)";
         }
 
-        class GenericVariantWithInheritanceDerived<T> : GenericVariantWithInheritanceBase<T>, IVariant<T>
+        class GenericVariantWithInheritanceDerived<T>
+            : GenericVariantWithInheritanceBase<T>,
+                IVariant<T>
         {
-            public static new string WhichMethod(T b) => $"GenericVariantWithInheritanceDerived.WhichMethod({typeof(T).Name})";
+            public static new string WhichMethod(T b) =>
+                $"GenericVariantWithInheritanceDerived.WhichMethod({typeof(T).Name})";
         }
 
         class GenericVariantWithHiddenBase : IVariant<Mid>
         {
-            public static string WhichMethod(Mid b) => "GenericVariantWithHiddenBase.WhichMethod(Mid)";
+            public static string WhichMethod(Mid b) =>
+                "GenericVariantWithHiddenBase.WhichMethod(Mid)";
         }
 
         class GenericVariantWithHiddenDerived<T> : GenericVariantWithHiddenBase, IVariant<T>
         {
-            public static string WhichMethod(T b) => $"GenericVariantWithHiddenDerived.WhichMethod({typeof(T).Name})";
+            public static string WhichMethod(T b) =>
+                $"GenericVariantWithHiddenDerived.WhichMethod({typeof(T).Name})";
         }
 
         struct Struct { }
-        class Base { }
-        class Mid : Base { }
-        class Derived : Mid { }
 
+        class Base { }
+
+        class Mid : Base { }
+
+        class Derived : Mid { }
 
         static void TestSimpleInterface<T>(string expected) where T : ISimple
         {
@@ -997,35 +1648,73 @@ public class Interfaces
             TestSimpleInterface<SimpleGenericClass<Base>>("SimpleGenericClass<Base>");
             TestSimpleInterface<SimpleGenericStruct<Base>>("SimpleGenericStruct<Base>");
 
-            TestSimpleInterfaceWithGenericMethod<SimpleClass, Base>("SimpleClass.GetCookieGeneric<Base>");
-            TestSimpleInterfaceWithGenericMethod<SimpleStruct, Base>("SimpleStruct.GetCookieGeneric<Base>");
-            TestSimpleInterfaceWithGenericMethod<SimpleClass, Struct>("SimpleClass.GetCookieGeneric<Struct>");
-            TestSimpleInterfaceWithGenericMethod<SimpleStruct, Struct>("SimpleStruct.GetCookieGeneric<Struct>");
+            TestSimpleInterfaceWithGenericMethod<SimpleClass, Base>(
+                "SimpleClass.GetCookieGeneric<Base>"
+            );
+            TestSimpleInterfaceWithGenericMethod<SimpleStruct, Base>(
+                "SimpleStruct.GetCookieGeneric<Base>"
+            );
+            TestSimpleInterfaceWithGenericMethod<SimpleClass, Struct>(
+                "SimpleClass.GetCookieGeneric<Struct>"
+            );
+            TestSimpleInterfaceWithGenericMethod<SimpleStruct, Struct>(
+                "SimpleStruct.GetCookieGeneric<Struct>"
+            );
 
-            TestSimpleInterfaceWithGenericMethod<SimpleGenericClass<Base>, Base>("SimpleGenericClass<Base>.GetCookieGeneric<Base>");
-            TestSimpleInterfaceWithGenericMethod<SimpleGenericStruct<Base>, Base>("SimpleGenericStruct<Base>.GetCookieGeneric<Base>");
-            TestSimpleInterfaceWithGenericMethod<SimpleGenericClass<Base>, Struct>("SimpleGenericClass<Base>.GetCookieGeneric<Struct>");
-            TestSimpleInterfaceWithGenericMethod<SimpleGenericStruct<Base>, Struct>("SimpleGenericStruct<Base>.GetCookieGeneric<Struct>");
+            TestSimpleInterfaceWithGenericMethod<SimpleGenericClass<Base>, Base>(
+                "SimpleGenericClass<Base>.GetCookieGeneric<Base>"
+            );
+            TestSimpleInterfaceWithGenericMethod<SimpleGenericStruct<Base>, Base>(
+                "SimpleGenericStruct<Base>.GetCookieGeneric<Base>"
+            );
+            TestSimpleInterfaceWithGenericMethod<SimpleGenericClass<Base>, Struct>(
+                "SimpleGenericClass<Base>.GetCookieGeneric<Struct>"
+            );
+            TestSimpleInterfaceWithGenericMethod<SimpleGenericStruct<Base>, Struct>(
+                "SimpleGenericStruct<Base>.GetCookieGeneric<Struct>"
+            );
 
             TestVariantInterface<SimpleVariant, Base>("SimpleVariant.WhichMethod(Base)");
             TestVariantInterface<SimpleVariant, Derived>("SimpleVariant.WhichMethod(Base)");
 
             TestVariantInterface<SimpleVariantTwice, Base>("SimpleVariantTwice.WhichMethod(Base)");
             TestVariantInterface<SimpleVariantTwice, Mid>("SimpleVariantTwice.WhichMethod(Mid)");
-            TestVariantInterface<SimpleVariantTwice, Derived>("SimpleVariantTwice.WhichMethod(Base)");
+            TestVariantInterface<SimpleVariantTwice, Derived>(
+                "SimpleVariantTwice.WhichMethod(Base)"
+            );
 
-            TestVariantInterface<VariantWithInheritanceDerived, Base>("VariantWithInheritanceDerived.WhichMethod(Base)");
-            TestVariantInterface<VariantWithInheritanceDerived, Mid>("VariantWithInheritanceDerived.WhichMethod(Base)");
-            TestVariantInterface<VariantWithInheritanceDerived, Derived>("VariantWithInheritanceDerived.WhichMethod(Base)");
+            TestVariantInterface<VariantWithInheritanceDerived, Base>(
+                "VariantWithInheritanceDerived.WhichMethod(Base)"
+            );
+            TestVariantInterface<VariantWithInheritanceDerived, Mid>(
+                "VariantWithInheritanceDerived.WhichMethod(Base)"
+            );
+            TestVariantInterface<VariantWithInheritanceDerived, Derived>(
+                "VariantWithInheritanceDerived.WhichMethod(Base)"
+            );
 
-            TestVariantInterface<GenericVariantWithInheritanceDerived<Base>, Base>("GenericVariantWithInheritanceDerived.WhichMethod(Base)");
-            TestVariantInterface<GenericVariantWithInheritanceDerived<Base>, Mid>("GenericVariantWithInheritanceDerived.WhichMethod(Base)");
-            TestVariantInterface<GenericVariantWithInheritanceDerived<Mid>, Mid>("GenericVariantWithInheritanceDerived.WhichMethod(Mid)");
+            TestVariantInterface<GenericVariantWithInheritanceDerived<Base>, Base>(
+                "GenericVariantWithInheritanceDerived.WhichMethod(Base)"
+            );
+            TestVariantInterface<GenericVariantWithInheritanceDerived<Base>, Mid>(
+                "GenericVariantWithInheritanceDerived.WhichMethod(Base)"
+            );
+            TestVariantInterface<GenericVariantWithInheritanceDerived<Mid>, Mid>(
+                "GenericVariantWithInheritanceDerived.WhichMethod(Mid)"
+            );
 
-            TestVariantInterface<GenericVariantWithHiddenDerived<Base>, Base>("GenericVariantWithHiddenDerived.WhichMethod(Base)");
-            TestVariantInterface<GenericVariantWithHiddenDerived<Base>, Mid>("GenericVariantWithHiddenDerived.WhichMethod(Base)");
-            TestVariantInterface<GenericVariantWithHiddenDerived<Mid>, Mid>("GenericVariantWithHiddenDerived.WhichMethod(Mid)");
-            TestVariantInterface<GenericVariantWithHiddenDerived<Derived>, Mid>("GenericVariantWithHiddenBase.WhichMethod(Mid)");
+            TestVariantInterface<GenericVariantWithHiddenDerived<Base>, Base>(
+                "GenericVariantWithHiddenDerived.WhichMethod(Base)"
+            );
+            TestVariantInterface<GenericVariantWithHiddenDerived<Base>, Mid>(
+                "GenericVariantWithHiddenDerived.WhichMethod(Base)"
+            );
+            TestVariantInterface<GenericVariantWithHiddenDerived<Mid>, Mid>(
+                "GenericVariantWithHiddenDerived.WhichMethod(Mid)"
+            );
+            TestVariantInterface<GenericVariantWithHiddenDerived<Derived>, Mid>(
+                "GenericVariantWithHiddenBase.WhichMethod(Mid)"
+            );
         }
     }
 
@@ -1072,6 +1761,7 @@ public class Interfaces
         class Atom { }
 
         static string GetCookie<T>() where T : IFoo => T.GetCookie();
+
         static string GetCookie<T, U>() where T : IFoo<U> => T.GetCookie();
 
         public static void Run()
@@ -1114,17 +1804,20 @@ public class Interfaces
         class Foo : IFoo
         {
             public static int CallMeDirect() => 2019;
+
             public static int CallMeIndirect() => 2022;
         }
 
         class FrobCaller<T> where T : IFoo
         {
             public static int CallDirect() => T.CallMeDirect();
+
             public static int CallIndirect()
             {
                 Func<int> d = T.CallMeIndirect;
                 return d();
             }
+
             public static int CallDefault() => T.DefaultImplemented();
         }
 
@@ -1169,24 +1862,29 @@ public class Interfaces
         class Foo<T> : IFoo<T>
         {
             public static (int, Type) CallMeDirect() => (2019, typeof(T[,]));
+
             public static (int, Type) CallMeIndirect() => (2022, typeof(T[,,]));
         }
 
         class FrobCaller<T, U> where T : IFoo<U>
         {
             public static (int, Type) CallDirect() => T.CallMeDirect();
+
             public static (int, Type) CallIndirect()
             {
                 Func<(int, Type)> d = T.CallMeIndirect;
                 return d();
             }
+
             public static (int, Type) CallDefault() => T.DefaultImplemented();
         }
 
         class Wrapper<T>
         {
             public static (int, Type) CallDirect() => FrobCaller<Foo<T>, T>.CallDirect();
+
             public static (int, Type) CallIndirect() => FrobCaller<Foo<T>, T>.CallIndirect();
+
             public static (int, Type) CallDefault() => FrobCaller<Foo<T>, T>.CallDefault();
         }
 
@@ -1239,21 +1937,25 @@ public class Interfaces
         class AbjectFail<T> : IFoo<T>
         {
             public static (int, Type) CallMeDirect() => (2019, typeof(T[,]));
+
             public static (int, Type) CallMeIndirect() => (2022, typeof(T[,,]));
         }
 
         class FrobCaller<T, U> where T : IFoo<U>
         {
             public static (int, Type) CallDirect() => T.CallMeDirect();
+
             public static (int, Type) CallIndirect()
             {
                 Func<(int, Type)> d = T.CallMeIndirect;
                 return d();
             }
+
             public static (int, Type) CallDefault() => T.DefaultImplemented();
         }
 
         class AtomBase { }
+
         class Atom : AtomBase { }
 
         static Type s_atomType = typeof(Atom);
@@ -1261,14 +1963,20 @@ public class Interfaces
 
         public static void Run()
         {
-            Type t = typeof(FrobCaller<,>).MakeGenericType(typeof(AbjectFail<AtomBase>), s_atomType);
+            Type t = typeof(FrobCaller<,>).MakeGenericType(
+                typeof(AbjectFail<AtomBase>),
+                s_atomType
+            );
 
             {
                 var mi = t.GetMethod("CallDirect");
                 var result = ((int, Type))mi.Invoke(null, Array.Empty<object>());
                 if (result.Item1 != 2019)
                     throw new Exception();
-                if (result.Item2.GetArrayRank() != 2 || result.Item2.GetElementType() != s_atomBaseType)
+                if (
+                    result.Item2.GetArrayRank() != 2
+                    || result.Item2.GetElementType() != s_atomBaseType
+                )
                     throw new Exception();
             }
 
@@ -1277,7 +1985,10 @@ public class Interfaces
                 var result = ((int, Type))mi.Invoke(null, Array.Empty<object>());
                 if (result.Item1 != 2022)
                     throw new Exception();
-                if (result.Item2.GetArrayRank() != 3 || result.Item2.GetElementType() != s_atomBaseType)
+                if (
+                    result.Item2.GetArrayRank() != 3
+                    || result.Item2.GetElementType() != s_atomBaseType
+                )
                     throw new Exception();
             }
 
@@ -1286,7 +1997,10 @@ public class Interfaces
                 var result = ((int, Type))mi.Invoke(null, Array.Empty<object>());
                 if (result.Item1 != 42)
                     throw new Exception();
-                if (result.Item2.GetArrayRank() != 1 || result.Item2.GetElementType() != s_atomBaseType)
+                if (
+                    result.Item2.GetArrayRank() != 1
+                    || result.Item2.GetElementType() != s_atomBaseType
+                )
                     throw new Exception();
             }
         }
@@ -1295,6 +2009,7 @@ public class Interfaces
     class TestStaticDefaultMethodAmbiguity
     {
         class Atom1 { }
+
         class Atom2 { }
 
         interface IFoo<T>
@@ -1307,11 +2022,10 @@ public class Interfaces
             static (Type, Type) IFoo<U>.DisambiguateMe() => (typeof(T), typeof(U));
         }
 
-        struct GenericStruct<T, U> : IBar<T[], U>
-        {
-        }
+        struct GenericStruct<T, U> : IBar<T[], U> { }
 
         static (Type, Type) CallTheCall<T, U>() where T : IFoo<U> => T.DisambiguateMe();
+
         static (Type, Type) DelegateTheCall<T, U>() where T : IFoo<U>
         {
             Func<(Type, Type)> d = T.DisambiguateMe;
@@ -1344,12 +2058,14 @@ public class Interfaces
         struct GenericStruct<T> : IFoo
         {
             public int State;
+
             public void Frob() => State++;
         }
 
         class GenericClass<T> : IFoo
         {
             public int State;
+
             public void Frob() => State++;
         }
 
@@ -1397,6 +2113,7 @@ public class Interfaces
         }
 
         class SimpleClass : IBar { }
+
         struct SimpleStruct : IBar { }
 
         static int Call<T>(int val) where T : IFoo => T.GetCookie(val);
@@ -1433,6 +2150,7 @@ public class Interfaces
         }
 
         class SimpleClass : IBar<Atom1> { }
+
         struct SimpleStruct : IBar<Atom2> { }
 
         static (int, Type) Call<T>(int val) where T : IFoo => T.GetCookie(val);
@@ -1444,6 +2162,7 @@ public class Interfaces
         }
 
         class Atom1 { }
+
         class Atom2 { }
 
         public static void Run()

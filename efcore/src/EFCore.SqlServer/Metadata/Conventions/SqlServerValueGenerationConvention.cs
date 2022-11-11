@@ -27,10 +27,8 @@ public class SqlServerValueGenerationConvention : RelationalValueGenerationConve
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public SqlServerValueGenerationConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
-        : base(dependencies, relationalDependencies)
-    {
-    }
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    ) : base(dependencies, relationalDependencies) { }
 
     /// <summary>
     ///     Called after an annotation is changed on a property.
@@ -45,7 +43,8 @@ public class SqlServerValueGenerationConvention : RelationalValueGenerationConve
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
         if (name == SqlServerAnnotationNames.ValueGenerationStrategy)
         {
@@ -53,7 +52,13 @@ public class SqlServerValueGenerationConvention : RelationalValueGenerationConve
             return;
         }
 
-        base.ProcessPropertyAnnotationChanged(propertyBuilder, name, annotation, oldAnnotation, context);
+        base.ProcessPropertyAnnotationChanged(
+            propertyBuilder,
+            name,
+            annotation,
+            oldAnnotation,
+            context
+        );
     }
 
     /// <summary>
@@ -69,11 +74,15 @@ public class SqlServerValueGenerationConvention : RelationalValueGenerationConve
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
-        if ((name == SqlServerAnnotationNames.TemporalPeriodStartPropertyName
-                || name == SqlServerAnnotationNames.TemporalPeriodEndPropertyName)
-            && annotation?.Value is string propertyName)
+        if (
+            (
+                name == SqlServerAnnotationNames.TemporalPeriodStartPropertyName
+                || name == SqlServerAnnotationNames.TemporalPeriodEndPropertyName
+            ) && annotation?.Value is string propertyName
+        )
         {
             var periodProperty = entityTypeBuilder.Metadata.FindProperty(propertyName);
             periodProperty?.Builder.ValueGenerated(GetValueGenerated(periodProperty));
@@ -87,7 +96,13 @@ public class SqlServerValueGenerationConvention : RelationalValueGenerationConve
             }
         }
 
-        base.ProcessEntityTypeAnnotationChanged(entityTypeBuilder, name, annotation, oldAnnotation, context);
+        base.ProcessEntityTypeAnnotationChanged(
+            entityTypeBuilder,
+            name,
+            annotation,
+            oldAnnotation,
+            context
+        );
     }
 
     /// <summary>
@@ -98,10 +113,12 @@ public class SqlServerValueGenerationConvention : RelationalValueGenerationConve
     protected override ValueGenerated? GetValueGenerated(IConventionProperty property)
     {
         // TODO: move to relational?
-        if (property.DeclaringEntityType.IsMappedToJson()
+        if (
+            property.DeclaringEntityType.IsMappedToJson()
             && !property.DeclaringEntityType.FindOwnership()!.IsUnique
 #pragma warning disable EF1001 // Internal EF Core API usage.
-            && property.IsOrdinalKeyProperty())
+            && property.IsOrdinalKeyProperty()
+        )
 #pragma warning restore EF1001 // Internal EF Core API usage.
         {
             return ValueGenerated.OnAdd;
@@ -124,29 +141,42 @@ public class SqlServerValueGenerationConvention : RelationalValueGenerationConve
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The store value generation strategy to set for the given property.</returns>
-    public static new ValueGenerated? GetValueGenerated(IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
-        => RelationalValueGenerationConvention.GetValueGenerated(property, storeObject)
-            ?? (property.GetValueGenerationStrategy(storeObject) != SqlServerValueGenerationStrategy.None
+    public static new ValueGenerated? GetValueGenerated(
+        IReadOnlyProperty property,
+        in StoreObjectIdentifier storeObject
+    ) =>
+        RelationalValueGenerationConvention.GetValueGenerated(property, storeObject)
+        ?? (
+            property.GetValueGenerationStrategy(storeObject)
+            != SqlServerValueGenerationStrategy.None
                 ? ValueGenerated.OnAdd
-                : null);
+                : null
+        );
 
     private static ValueGenerated? GetValueGenerated(
         IReadOnlyProperty property,
         in StoreObjectIdentifier storeObject,
-        ITypeMappingSource typeMappingSource)
-        => GetTemporalValueGenerated(property)
-            ?? RelationalValueGenerationConvention.GetValueGenerated(property, storeObject)
-            ?? (property.GetValueGenerationStrategy(storeObject, typeMappingSource) != SqlServerValueGenerationStrategy.None
+        ITypeMappingSource typeMappingSource
+    ) =>
+        GetTemporalValueGenerated(property)
+        ?? RelationalValueGenerationConvention.GetValueGenerated(property, storeObject)
+        ?? (
+            property.GetValueGenerationStrategy(storeObject, typeMappingSource)
+            != SqlServerValueGenerationStrategy.None
                 ? ValueGenerated.OnAdd
-                : null);
+                : null
+        );
 
     private static ValueGenerated? GetTemporalValueGenerated(IReadOnlyProperty property)
     {
         var entityType = property.DeclaringEntityType;
-        return entityType.IsTemporal()
-            && (entityType.GetPeriodStartPropertyName() == property.Name
-                || entityType.GetPeriodEndPropertyName() == property.Name)
-                ? ValueGenerated.OnAddOrUpdate
-                : null;
+        return
+            entityType.IsTemporal()
+            && (
+                entityType.GetPeriodStartPropertyName() == property.Name
+                || entityType.GetPeriodEndPropertyName() == property.Name
+            )
+            ? ValueGenerated.OnAddOrUpdate
+            : null;
     }
 }

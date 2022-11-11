@@ -3,7 +3,8 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public class TPTInheritanceBulkUpdatesSqliteTest : TPTInheritanceBulkUpdatesTestBase<TPTInheritanceBulkUpdatesSqliteFixture>
+public class TPTInheritanceBulkUpdatesSqliteTest
+    : TPTInheritanceBulkUpdatesTestBase<TPTInheritanceBulkUpdatesSqliteFixture>
 {
     public TPTInheritanceBulkUpdatesSqliteTest(TPTInheritanceBulkUpdatesSqliteFixture fixture)
         : base(fixture)
@@ -12,8 +13,8 @@ public class TPTInheritanceBulkUpdatesSqliteTest : TPTInheritanceBulkUpdatesTest
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Delete_where_hierarchy(bool async)
     {
@@ -112,7 +113,8 @@ WHERE (
     LEFT JOIN ""Birds"" AS ""b"" ON ""a"".""Id"" = ""b"".""Id""
     LEFT JOIN ""Eagle"" AS ""e"" ON ""a"".""Id"" = ""e"".""Id""
     LEFT JOIN ""Kiwi"" AS ""k"" ON ""a"".""Id"" = ""k"".""Id""
-    WHERE ""c"".""Id"" = ""a"".""CountryId"" AND ""a"".""CountryId"" > 0) > 0");
+    WHERE ""c"".""Id"" = ""a"".""CountryId"" AND ""a"".""CountryId"" > 0) > 0"
+        );
     }
 
     public override async Task Update_where_using_hierarchy_derived(bool async)
@@ -128,7 +130,8 @@ WHERE (
     LEFT JOIN ""Birds"" AS ""b"" ON ""a"".""Id"" = ""b"".""Id""
     LEFT JOIN ""Eagle"" AS ""e"" ON ""a"".""Id"" = ""e"".""Id""
     LEFT JOIN ""Kiwi"" AS ""k"" ON ""a"".""Id"" = ""k"".""Id""
-    WHERE ""c"".""Id"" = ""a"".""CountryId"" AND (""k"".""Id"" IS NOT NULL) AND ""a"".""CountryId"" > 0) > 0");
+    WHERE ""c"".""Id"" = ""a"".""CountryId"" AND (""k"".""Id"" IS NOT NULL) AND ""a"".""CountryId"" > 0) > 0"
+        );
     }
 
     public override async Task Update_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -138,12 +141,11 @@ WHERE (
         AssertExecuteUpdateSql();
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    private void AssertExecuteUpdateSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
+    private void AssertExecuteUpdateSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
 }

@@ -97,7 +97,6 @@ namespace System.Xml.Xsl.Runtime
             _size = 1;
         }
 
-
         //-----------------------------------------------
         // IEnumerable implementation
         //-----------------------------------------------
@@ -110,7 +109,6 @@ namespace System.Xml.Xsl.Runtime
             return new IListEnumerator<T>(this);
         }
 
-
         //-----------------------------------------------
         // IEnumerable<T> implementation
         //-----------------------------------------------
@@ -122,7 +120,6 @@ namespace System.Xml.Xsl.Runtime
         {
             return new IListEnumerator<T>(this);
         }
-
 
         //-----------------------------------------------
         // ICollection implementation
@@ -162,7 +159,6 @@ namespace System.Xml.Xsl.Runtime
 
             Array.Copy(_items, 0, array, index, _size);
         }
-
 
         //-----------------------------------------------
         // ICollection<T> implementation
@@ -216,7 +212,6 @@ namespace System.Xml.Xsl.Runtime
         {
             throw new NotSupportedException();
         }
-
 
         //-----------------------------------------------
         // IList implementation
@@ -309,7 +304,6 @@ namespace System.Xml.Xsl.Runtime
             throw new NotSupportedException();
         }
 
-
         //-----------------------------------------------
         // IList<T> implementation
         //-----------------------------------------------
@@ -353,7 +347,6 @@ namespace System.Xml.Xsl.Runtime
         {
             throw new NotSupportedException();
         }
-
 
         //-----------------------------------------------
         // XmlQuerySequence methods
@@ -410,9 +403,7 @@ namespace System.Xml.Xsl.Runtime
         /// This method is called when one or more items in the cache have been added or removed.
         /// By default, it does nothing, but subclasses can override it.
         /// </summary>
-        protected virtual void OnItemsChanged()
-        {
-        }
+        protected virtual void OnItemsChanged() { }
     }
 
     /// <summary>
@@ -456,16 +447,12 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Construct sequence from the specified array.
         /// </summary>
-        public XmlQueryItemSequence() : base()
-        {
-        }
+        public XmlQueryItemSequence() : base() { }
 
         /// <summary>
         /// Construct sequence with the specified initial capacity.
         /// </summary>
-        public XmlQueryItemSequence(int capacity) : base(capacity)
-        {
-        }
+        public XmlQueryItemSequence(int capacity) : base(capacity) { }
 
         /// <summary>
         /// Construct singleton sequence from a single item.
@@ -515,7 +502,10 @@ namespace System.Xml.Xsl.Runtime
         /// If "seq" is non-null, then clear it and reuse it.  Otherwise, create a new XmlQueryNodeSequence.
         /// Add "nav" to the sequence.
         /// </summary>
-        public static XmlQueryNodeSequence CreateOrReuse(XmlQueryNodeSequence seq, XPathNavigator navigator)
+        public static XmlQueryNodeSequence CreateOrReuse(
+            XmlQueryNodeSequence seq,
+            XPathNavigator navigator
+        )
         {
             if (seq != null)
             {
@@ -530,16 +520,12 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Construct sequence with the specified initial capacity.
         /// </summary>
-        public XmlQueryNodeSequence() : base()
-        {
-        }
+        public XmlQueryNodeSequence() : base() { }
 
         /// <summary>
         /// Construct sequence from the specified array.
         /// </summary>
-        public XmlQueryNodeSequence(int capacity) : base(capacity)
-        {
-        }
+        public XmlQueryNodeSequence(int capacity) : base(capacity) { }
 
         /// <summary>
         /// Construct sequence from the specified array, cloning each navigator before adding it.
@@ -553,9 +539,7 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Construct sequence from the specified array.
         /// </summary>
-        public XmlQueryNodeSequence(XPathNavigator[] array, int size) : base(array, size)
-        {
-        }
+        public XmlQueryNodeSequence(XPathNavigator[] array, int size) : base(array, size) { }
 
         /// <summary>
         /// Construct singleton sequence from a single navigator.
@@ -595,7 +579,8 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         public XmlQueryNodeSequence DocOrderDistinct(IComparer<XPathNavigator> comparer)
         {
-            int iEach, iDistinct;
+            int iEach,
+                iDistinct;
             XPathNavigator[] sortArray;
 
             if (_docOrderDistinct != null)

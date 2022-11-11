@@ -7,16 +7,19 @@ namespace System.Net.WebSockets
 {
     public class WebSocketReceiveResult
     {
-        public WebSocketReceiveResult(int count, WebSocketMessageType messageType, bool endOfMessage)
-            : this(count, messageType, endOfMessage, null, null)
-        {
-        }
+        public WebSocketReceiveResult(
+            int count,
+            WebSocketMessageType messageType,
+            bool endOfMessage
+        ) : this(count, messageType, endOfMessage, null, null) { }
 
-        public WebSocketReceiveResult(int count,
+        public WebSocketReceiveResult(
+            int count,
             WebSocketMessageType messageType,
             bool endOfMessage,
             WebSocketCloseStatus? closeStatus,
-            string? closeStatusDescription)
+            string? closeStatusDescription
+        )
         {
             if (count < 0)
             {

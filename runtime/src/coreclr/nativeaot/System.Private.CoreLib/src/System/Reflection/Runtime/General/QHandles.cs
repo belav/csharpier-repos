@@ -25,14 +25,17 @@ namespace Internal.Reflection.Core
             _handle = handle;
         }
 
-        public MetadataReader Reader { get { return _reader; } }
-        public ScopeDefinitionHandle Handle { get { return _handle; } }
+        public MetadataReader Reader
+        {
+            get { return _reader; }
+        }
+        public ScopeDefinitionHandle Handle
+        {
+            get { return _handle; }
+        }
         public ScopeDefinition ScopeDefinition
         {
-            get
-            {
-                return _handle.GetScopeDefinition(_reader);
-            }
+            get { return _handle.GetScopeDefinition(_reader); }
         }
 
         public override bool Equals(object obj)
@@ -73,8 +76,14 @@ namespace System.Reflection.Runtime.General
             _handle = handle;
         }
 
-        public MetadataReader Reader { get { return _reader; } }
-        public Handle Handle { get { return _handle; } }
+        public MetadataReader Reader
+        {
+            get { return _reader; }
+        }
+        public Handle Handle
+        {
+            get { return _handle; }
+        }
 
         public override bool Equals(object obj)
         {
@@ -116,10 +125,19 @@ namespace System.Reflection.Runtime.General
             return new QMethodDefinition(reader, token);
         }
 
-        public object Reader { get { return _reader; } }
-        public int Token { get { return _handle; } }
+        public object Reader
+        {
+            get { return _reader; }
+        }
+        public int Token
+        {
+            get { return _handle; }
+        }
 
-        public bool IsValid { get { return _reader == null; } }
+        public bool IsValid
+        {
+            get { return _reader == null; }
+        }
 
         public static QMethodDefinition Null => default;
 
@@ -131,10 +149,19 @@ namespace System.Reflection.Runtime.General
     [CLSCompliant(false)]
     public partial struct QTypeDefinition
     {
-        public object Reader { get { return _reader; } }
-        public int Token { get { return _handle; } }
+        public object Reader
+        {
+            get { return _reader; }
+        }
+        public int Token
+        {
+            get { return _handle; }
+        }
 
-        public bool IsValid { get { return _reader == null; } }
+        public bool IsValid
+        {
+            get { return _reader == null; }
+        }
 
         public static QTypeDefinition Null => default;
 
@@ -142,15 +169,23 @@ namespace System.Reflection.Runtime.General
         private readonly int _handle;
     }
 
-
     [ReflectionBlocked]
     [CLSCompliant(false)]
     public partial struct QTypeDefRefOrSpec
     {
-        public object Reader { get { return _reader; } }
-        public int Handle { get { return _handle; } }
+        public object Reader
+        {
+            get { return _reader; }
+        }
+        public int Handle
+        {
+            get { return _handle; }
+        }
 
-        public bool IsValid { get { return _reader == null; } }
+        public bool IsValid
+        {
+            get { return _reader == null; }
+        }
 
         public static QTypeDefRefOrSpec Null => default;
 
@@ -168,8 +203,14 @@ namespace System.Reflection.Runtime.General
             _handle = handle;
         }
 
-        public MetadataReader Reader { get { return _reader; } }
-        public GenericParameterHandle Handle { get { return _handle; } }
+        public MetadataReader Reader
+        {
+            get { return _reader; }
+        }
+        public GenericParameterHandle Handle
+        {
+            get { return _handle; }
+        }
 
         public override bool Equals(object obj)
         {

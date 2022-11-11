@@ -16,16 +16,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToTuple)]
     public partial class ConvertAnonymousTypeToTupleTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpConvertAnonymousTypeToTupleCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertAnonymousTypeToTupleCodeRefactoringProvider();
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact]
         public async Task ConvertSingleAnonymousType()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -34,7 +38,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -49,7 +54,8 @@ class Test
         [Fact]
         public async Task NotOnEmptyAnonymousType()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class Test
 {
     void Method()
@@ -57,13 +63,15 @@ class Test
         var t1 = [||]new { };
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task NotOnSingleFieldAnonymousType()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class Test
 {
     void Method()
@@ -71,13 +79,15 @@ class Test
         var t1 = [||]new { a = 1 };
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public async Task ConvertSingleAnonymousTypeWithInferredName()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int b)
@@ -86,7 +96,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int b)
@@ -101,7 +112,8 @@ class Test
         [Fact]
         public async Task ConvertMultipleInstancesInSameMethod()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -111,7 +123,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -127,7 +140,8 @@ class Test
         [Fact]
         public async Task ConvertMultipleInstancesAcrossMethods()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -143,7 +157,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -165,7 +180,8 @@ class Test
         [Fact]
         public async Task OnlyConvertMatchingTypesInSameMethod()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int b)
@@ -177,7 +193,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int b)
@@ -195,7 +212,8 @@ class Test
         [Fact]
         public async Task TestFixAllInSingleMethod()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int b)
@@ -207,7 +225,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int b)
@@ -225,7 +244,8 @@ class Test
         [Fact]
         public async Task TestFixNotAcrossMethods()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -241,7 +261,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -263,7 +284,8 @@ class Test
         [Fact]
         public async Task TestTrivia()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -272,7 +294,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -287,7 +310,8 @@ class Test
         [Fact]
         public async Task TestFixAllNestedTypes()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -296,7 +320,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -311,7 +336,8 @@ class Test
         [Fact]
         public async Task ConvertMultipleNestedInstancesInSameMethod()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -320,7 +346,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -335,7 +362,8 @@ class Test
         [Fact]
         public async Task ConvertWithLambda1()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -348,7 +376,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -367,7 +396,8 @@ class Test
         [Fact]
         public async Task ConvertWithLambda2()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -380,7 +410,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -399,7 +430,8 @@ class Test
         [Fact]
         public async Task ConvertWithLocalFunction1()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -412,7 +444,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -431,7 +464,8 @@ class Test
         [Fact]
         public async Task ConvertWithLocalFunction2()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -444,7 +478,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -463,7 +498,8 @@ class Test
         [Fact]
         public async Task TestIncompleteAnonymousType()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -472,7 +508,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()

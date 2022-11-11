@@ -21,7 +21,9 @@ public class JsonReading
     public void GlobalSetup()
     {
         _requestJson = (new HelloRequest() { Name = "Hello world" }).ToString();
-        _serializerOptions = JsonConverterHelper.CreateSerializerOptions(new JsonContext(new GrpcJsonSettings { WriteIndented = false }, TypeRegistry.Empty));
+        _serializerOptions = JsonConverterHelper.CreateSerializerOptions(
+            new JsonContext(new GrpcJsonSettings { WriteIndented = false }, TypeRegistry.Empty)
+        );
         _jsonFormatter = new JsonParser(new JsonParser.Settings(recursionLimit: 100));
     }
 

@@ -44,16 +44,17 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
         string storeType,
         DbType? dbType = System.Data.DbType.DateTime2,
         SqlDbType? sqlDbType = null,
-        StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision)
+        StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision
+    )
         : this(
             new RelationalTypeMappingParameters(
                 new CoreTypeMappingParameters(typeof(DateTime)),
                 storeType,
                 storeTypePostfix,
-                dbType),
-            sqlDbType)
-    {
-    }
+                dbType
+            ),
+            sqlDbType
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -61,8 +62,10 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected SqlServerDateTimeTypeMapping(RelationalTypeMappingParameters parameters, SqlDbType? sqlDbType)
-        : base(parameters)
+    protected SqlServerDateTimeTypeMapping(
+        RelationalTypeMappingParameters parameters,
+        SqlDbType? sqlDbType
+    ) : base(parameters)
     {
         _sqlDbType = sqlDbType;
     }
@@ -73,8 +76,7 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SqlDbType? SqlType
-        => _sqlDbType;
+    public virtual SqlDbType? SqlType => _sqlDbType;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -96,8 +98,7 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
             ((SqlParameter)parameter).SqlDbType = SqlDbType.Date;
         }
 
-        if (Size.HasValue
-            && Size.Value != -1)
+        if (Size.HasValue && Size.Value != -1)
         {
             parameter.Size = Size.Value;
         }
@@ -114,8 +115,8 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqlServerDateTimeTypeMapping(parameters, _sqlDbType);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqlServerDateTimeTypeMapping(parameters, _sqlDbType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -139,8 +140,7 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
                     if (Precision.HasValue)
                     {
                         var precision = Precision.Value;
-                        if (precision <= 7
-                            && precision >= 0)
+                        if (precision <= 7 && precision >= 0)
                         {
                             return _dateTime2Formats[precision];
                         }

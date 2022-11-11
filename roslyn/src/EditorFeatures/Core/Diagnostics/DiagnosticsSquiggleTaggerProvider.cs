@@ -25,10 +25,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     [ContentType(ContentTypeNames.RoslynContentType)]
     [ContentType(ContentTypeNames.XamlContentType)]
     [TagType(typeof(IErrorTag))]
-    internal partial class DiagnosticsSquiggleTaggerProvider : AbstractDiagnosticsAdornmentTaggerProvider<IErrorTag>
+    internal partial class DiagnosticsSquiggleTaggerProvider
+        : AbstractDiagnosticsAdornmentTaggerProvider<IErrorTag>
     {
         private static readonly IEnumerable<Option2<bool>> s_tagSourceOptions =
-            ImmutableArray.Create(EditorComponentOnOffOptions.Tagger, InternalFeatureOnOffOptions.Squiggles);
+            ImmutableArray.Create(
+                EditorComponentOnOffOptions.Tagger,
+                InternalFeatureOnOffOptions.Squiggles
+            );
 
         protected override IEnumerable<Option2<bool>> Options => s_tagSourceOptions;
 
@@ -40,10 +44,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IDiagnosticAnalyzerService analyzerService,
             IGlobalOptionService globalOptions,
             [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, diagnosticService, analyzerService, globalOptions, visibilityTracker, listenerProvider)
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                diagnosticService,
+                analyzerService,
+                globalOptions,
+                visibilityTracker,
+                listenerProvider
+            ) { }
 
         protected internal override bool SupportsDignosticMode(DiagnosticMode mode)
         {
@@ -53,11 +63,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         protected internal override bool IncludeDiagnostic(DiagnosticData diagnostic)
         {
-            var isUnnecessary = diagnostic.Severity == DiagnosticSeverity.Hidden && diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary);
+            var isUnnecessary =
+                diagnostic.Severity == DiagnosticSeverity.Hidden
+                && diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary);
 
-            return
-                (diagnostic.Severity == DiagnosticSeverity.Warning || diagnostic.Severity == DiagnosticSeverity.Error || isUnnecessary) &&
-                !string.IsNullOrWhiteSpace(diagnostic.Message);
+            return (
+                    diagnostic.Severity == DiagnosticSeverity.Warning
+                    || diagnostic.Severity == DiagnosticSeverity.Error
+                    || isUnnecessary
+                ) && !string.IsNullOrWhiteSpace(diagnostic.Message);
         }
 
         protected override IErrorTag? CreateTag(Workspace workspace, DiagnosticData diagnostic)
@@ -67,7 +81,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (errorType == null)
             {
                 // unknown diagnostic kind.
-                // we don't provide tagging for unknown diagnostic kind. 
+                // we don't provide tagging for unknown diagnostic kind.
                 //
                 // it should be provided by the one who introduced the new diagnostic kind.
                 return null;
@@ -84,14 +98,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return null;
             }
 
-            return GetErrorTypeFromDiagnosticTags(diagnostic) ??
-                   GetErrorTypeFromDiagnosticSeverity(diagnostic);
+            return GetErrorTypeFromDiagnosticTags(diagnostic)
+                ?? GetErrorTypeFromDiagnosticSeverity(diagnostic);
         }
 
         private static string? GetErrorTypeFromDiagnosticTags(DiagnosticData diagnostic)
         {
-            if (diagnostic.Severity == DiagnosticSeverity.Error &&
-                diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.EditAndContinue))
+            if (
+                diagnostic.Severity == DiagnosticSeverity.Error
+                && diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.EditAndContinue)
+            )
             {
                 return EditAndContinueErrorTypeDefinition.Name;
             }

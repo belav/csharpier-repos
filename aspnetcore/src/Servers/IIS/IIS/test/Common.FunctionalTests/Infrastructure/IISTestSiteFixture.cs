@@ -20,9 +20,7 @@ public class IISTestSiteFixture : IDisposable
     private IISDeploymentResult _deploymentResult;
     private readonly Action<IISDeploymentParameters> _configure;
 
-    public IISTestSiteFixture() : this(_ => { })
-    {
-    }
+    public IISTestSiteFixture() : this(_ => { }) { }
 
     public IISDeploymentParameters DeploymentParameters { get; }
 
@@ -43,7 +41,9 @@ public class IISTestSiteFixture : IDisposable
             TargetFramework = Tfm.Default,
             HostingModel = HostingModel.InProcess,
             PublishApplicationBeforeDeployment = true,
-            ApplicationPublisher = new PublishedApplicationPublisher(Helpers.GetInProcessTestSitesName()),
+            ApplicationPublisher = new PublishedApplicationPublisher(
+                Helpers.GetInProcessTestSitesName()
+            ),
             ServerType = DeployerSelector.ServerType
         };
     }
@@ -72,7 +72,9 @@ public class IISTestSiteFixture : IDisposable
     {
         if (_forwardingProvider.LoggerFactory != null)
         {
-            throw new InvalidOperationException("Test instance is already attached to this fixture");
+            throw new InvalidOperationException(
+                "Test instance is already attached to this fixture"
+            );
         }
 
         _forwardingProvider.LoggerFactory = test.LoggerFactory;
@@ -153,7 +155,13 @@ public class IISTestSiteFixture : IDisposable
         public ILogger Logger { get; set; }
         public string Name { get; set; }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        )
         {
             Logger?.Log(logLevel, eventId, state, exception, formatter);
         }

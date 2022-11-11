@@ -23,7 +23,8 @@ namespace System.Data.Tests
     // test class: see https://xunit.net/docs/running-tests-in-parallel.html.
     public class RestrictedTypeHandlingTests
     {
-        private const string AppDomainDataSetDefaultAllowedTypesKey = "System.Data.DataSetDefaultAllowedTypes";
+        private const string AppDomainDataSetDefaultAllowedTypesKey =
+            "System.Data.DataSetDefaultAllowedTypes";
 
         private static readonly Type[] _alwaysAllowedTypes = new Type[]
         {
@@ -61,13 +62,11 @@ namespace System.Data.Tests
             typeof(SqlMoney),
             typeof(SqlSingle),
             typeof(SqlString),
-
             /* non-primitives, but common */
             typeof(object),
             typeof(Type),
             typeof(BigInteger),
             typeof(Uri),
-
             /* frequently used System.Drawing types */
             typeof(Color),
             typeof(Point),
@@ -76,7 +75,6 @@ namespace System.Data.Tests
             typeof(RectangleF),
             typeof(Size),
             typeof(SizeF),
-
             /* to test that enums are allowed */
             typeof(StringComparison),
         };
@@ -102,7 +100,10 @@ namespace System.Data.Tests
             // multi-dim arrays and non-sz arrays are forbidden
 
             yield return new object[] { typeof(int[,]) };
-            yield return new object[] { Array.CreateInstance(typeof(int), new[] { 1 }, new[] { 1 }).GetType() };
+            yield return new object[]
+            {
+                Array.CreateInstance(typeof(int), new[] { 1 }, new[] { 1 }).GetType()
+            };
 
             // HashSet<T> isn't in the allow list
 
@@ -224,10 +225,10 @@ namespace System.Data.Tests
 
             try
             {
-                AppDomain.CurrentDomain.SetData(AppDomainDataSetDefaultAllowedTypesKey, new Type[]
-                {
-                    typeof(MyCustomClass)
-                });
+                AppDomain.CurrentDomain.SetData(
+                    AppDomainDataSetDefaultAllowedTypesKey,
+                    new Type[] { typeof(MyCustomClass) }
+                );
 
                 table = ReadXml<DataTable>(asXml);
 
@@ -272,7 +273,11 @@ namespace System.Data.Tests
 
             DataTable table = new DataTable("MyTable");
             table.Columns.Add("ColumnA", typeof(object));
-            table.Columns.Add("ColumnB", typeof(object), "CONVERT(ColumnA, 'System.Text.StringBuilder')");
+            table.Columns.Add(
+                "ColumnB",
+                typeof(object),
+                "CONVERT(ColumnA, 'System.Text.StringBuilder')"
+            );
 
             string asXml = WriteXmlWithSchema(table.WriteXml);
 
@@ -383,7 +388,10 @@ namespace System.Data.Tests
             Assert.Throws<SerializationException>(() => table.ReadXml(new StringReader(asXml)));
         }
 
-        private static string WriteXmlWithSchema(Action<TextWriter, XmlWriteMode> writeMethod, XmlWriteMode xmlWriteMode = XmlWriteMode.WriteSchema)
+        private static string WriteXmlWithSchema(
+            Action<TextWriter, XmlWriteMode> writeMethod,
+            XmlWriteMode xmlWriteMode = XmlWriteMode.WriteSchema
+        )
         {
             StringWriter writer = new StringWriter();
             writeMethod(writer, xmlWriteMode);
@@ -397,9 +405,7 @@ namespace System.Data.Tests
             return newObj;
         }
 
-        private sealed class MyCustomClass
-        {
-        }
+        private sealed class MyCustomClass { }
 
         public sealed class MyXmlSerializableClass : IXmlSerializable
         {
@@ -434,7 +440,9 @@ namespace System.Data.Tests
                 string tempPath = Path.GetTempFileName();
                 File.WriteAllText(tempPath, "This better not be written...");
                 File.Delete(tempPath);
-                throw new UnreachableException("Unreachable code (SerializationGuard should have kicked in)");
+                throw new UnreachableException(
+                    "Unreachable code (SerializationGuard should have kicked in)"
+                );
             }
 
             public void WriteXml(XmlWriter writer)

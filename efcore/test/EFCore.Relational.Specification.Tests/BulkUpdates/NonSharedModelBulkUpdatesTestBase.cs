@@ -5,16 +5,21 @@ namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
 public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
 {
-    protected override string StoreName
-        => "NonSharedModelBulkUpdatesTests";
+    protected override string StoreName => "NonSharedModelBulkUpdatesTests";
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Delete_aggregate_root_when_eager_loaded_owned_collection(bool async)
     {
-        var contextFactory = await InitializeAsync<Context28671>(onModelCreating: mb => mb.Entity<Owner>().Ignore(e => e.OwnedReference));
-        await AssertDelete(async, contextFactory.CreateContext,
-            context => context.Set<Owner>(), rowsAffectedCount: 0);
+        var contextFactory = await InitializeAsync<Context28671>(
+            onModelCreating: mb => mb.Entity<Owner>().Ignore(e => e.OwnedReference)
+        );
+        await AssertDelete(
+            async,
+            contextFactory.CreateContext,
+            context => context.Set<Owner>(),
+            rowsAffectedCount: 0
+        );
     }
 
     [ConditionalTheory]
@@ -22,43 +27,52 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
     public virtual async Task Delete_aggregate_root_when_table_sharing_with_owned(bool async)
     {
         var contextFactory = await InitializeAsync<Context28671>();
-        await AssertDelete(async, contextFactory.CreateContext,
-            context => context.Set<Owner>(), rowsAffectedCount: 0);
+        await AssertDelete(
+            async,
+            contextFactory.CreateContext,
+            context => context.Set<Owner>(),
+            rowsAffectedCount: 0
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task Delete_aggregate_root_when_table_sharing_with_non_owned_throws(bool async)
+    public virtual async Task Delete_aggregate_root_when_table_sharing_with_non_owned_throws(
+        bool async
+    )
     {
-        var contextFactory = await InitializeAsync<Context28671>(
-            onModelCreating: mb =>
-            {
-                mb.Entity<Owner>().HasOne<OtherReference>().WithOne().HasForeignKey<OtherReference>(e => e.Id);
-                mb.Entity<OtherReference>().ToTable(nameof(Owner));
-            });
-
+        var contextFactory = await InitializeAsync<Context28671>(onModelCreating: mb =>
+        {
+            mb.Entity<Owner>()
+                .HasOne<OtherReference>()
+                .WithOne()
+                .HasForeignKey<OtherReference>(e => e.Id);
+            mb.Entity<OtherReference>().ToTable(nameof(Owner));
+        });
 
         await AssertTranslationFailedWithDetails(
-            () => AssertDelete(async, contextFactory.CreateContext,
-            context => context.Set<Owner>(), rowsAffectedCount: 0),
-            RelationalStrings.ExecuteDeleteOnTableSplitting(nameof(Owner)));
+            () =>
+                AssertDelete(
+                    async,
+                    contextFactory.CreateContext,
+                    context => context.Set<Owner>(),
+                    rowsAffectedCount: 0
+                ),
+            RelationalStrings.ExecuteDeleteOnTableSplitting(nameof(Owner))
+        );
     }
 
     protected class Context28671 : DbContext
     {
-        public Context28671(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public Context28671(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Owner>(
-                b =>
-                {
-                    b.OwnsOne(e => e.OwnedReference);
-                    b.OwnsMany(e => e.OwnedCollections);
-                });
+            modelBuilder.Entity<Owner>(b =>
+            {
+                b.OwnsOne(e => e.OwnedReference);
+                b.OwnsMany(e => e.OwnedCollections);
+            });
         }
     }
 
@@ -96,33 +110,37 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
     {
         var contextFactory = await InitializeAsync<Context28745>();
         await AssertDelete(
-            async, contextFactory.CreateContext,
-            context => context.Posts.Where(p => p.Blog!.Title!.StartsWith("Arthur")), rowsAffectedCount: 1);
+            async,
+            contextFactory.CreateContext,
+            context => context.Posts.Where(p => p.Blog!.Title!.StartsWith("Arthur")),
+            rowsAffectedCount: 1
+        );
     }
 
     protected class Context28745 : DbContext
     {
-        public Context28745(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public Context28745(DbContextOptions options) : base(options) { }
 
-        public DbSet<Blog> Blogs
-            => Set<Blog>();
+        public DbSet<Blog> Blogs => Set<Blog>();
 
-        public DbSet<Post> Posts
-            => Set<Post>();
+        public DbSet<Post> Posts => Set<Post>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Blog>()
-                .HasData(new Blog { Id = 1, Title = "Arthur" }, new Blog { Id = 2, Title = "Brice" });
+            modelBuilder
+                .Entity<Blog>()
+                .HasData(
+                    new Blog { Id = 1, Title = "Arthur" },
+                    new Blog { Id = 2, Title = "Brice" }
+                );
 
-            modelBuilder.Entity<Post>()
+            modelBuilder
+                .Entity<Post>()
                 .HasData(
                     new { Id = 1, BlogId = 1 },
                     new { Id = 2, BlogId = 2 },
-                    new { Id = 3, BlogId = 2 });
+                    new { Id = 3, BlogId = 2 }
+                );
         }
     }
 
@@ -148,13 +166,14 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
         bool async,
         Func<TContext> contextCreator,
         Func<TContext, IQueryable<TResult>> query,
-        int rowsAffectedCount)
-        where TContext : DbContext
+        int rowsAffectedCount
+    ) where TContext : DbContext
     {
         if (async)
         {
             await TestHelpers.ExecuteWithStrategyInTransactionAsync(
-                contextCreator, UseTransaction,
+                contextCreator,
+                UseTransaction,
                 async context =>
                 {
                     var processedQuery = query(context);
@@ -162,12 +181,14 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
                     var result = await processedQuery.ExecuteDeleteAsync();
 
                     Assert.Equal(rowsAffectedCount, result);
-                });
+                }
+            );
         }
         else
         {
             TestHelpers.ExecuteWithStrategyInTransaction(
-                contextCreator, UseTransaction,
+                contextCreator,
+                UseTransaction,
                 context =>
                 {
                     var processedQuery = query(context);
@@ -175,7 +196,8 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
                     var result = processedQuery.ExecuteDelete();
 
                     Assert.Equal(rowsAffectedCount, result);
-                });
+                }
+            );
         }
     }
 
@@ -184,14 +206,16 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
         Func<TContext> contextCreator,
         Func<TContext, IQueryable<TResult>> query,
         Expression<Func<SetPropertyCalls<TResult>, SetPropertyCalls<TResult>>> setPropertyCalls,
-        int rowsAffectedCount)
+        int rowsAffectedCount
+    )
         where TResult : class
         where TContext : DbContext
     {
         if (async)
         {
             await TestHelpers.ExecuteWithStrategyInTransactionAsync(
-                contextCreator, UseTransaction,
+                contextCreator,
+                UseTransaction,
                 async context =>
                 {
                     var processedQuery = query(context);
@@ -199,12 +223,14 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
                     var result = await processedQuery.ExecuteUpdateAsync(setPropertyCalls);
 
                     Assert.Equal(rowsAffectedCount, result);
-                });
+                }
+            );
         }
         else
         {
             TestHelpers.ExecuteWithStrategyInTransaction(
-                contextCreator, UseTransaction,
+                contextCreator,
+                UseTransaction,
                 context =>
                 {
                     var processedQuery = query(context);
@@ -212,24 +238,26 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
                     var result = processedQuery.ExecuteUpdate(setPropertyCalls);
 
                     Assert.Equal(rowsAffectedCount, result);
-                });
+                }
+            );
         }
     }
 
-    protected static async Task AssertTranslationFailedWithDetails(Func<Task> query, string details)
-        => Assert.Contains(
+    protected static async Task AssertTranslationFailedWithDetails(
+        Func<Task> query,
+        string details
+    ) =>
+        Assert.Contains(
             RelationalStrings.NonQueryTranslationFailedWithDetails("", details)[21..],
-            (await Assert.ThrowsAsync<InvalidOperationException>(query))
-            .Message);
+            (await Assert.ThrowsAsync<InvalidOperationException>(query)).Message
+        );
 
-    public void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    public void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction) =>
+        facade.UseTransaction(transaction.GetDbTransaction());
 
-    protected TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    protected TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-    protected void ClearLog()
-        => TestSqlLoggerFactory.Clear();
+    protected void ClearLog() => TestSqlLoggerFactory.Clear();
 
     #endregion
 }

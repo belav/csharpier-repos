@@ -7,10 +7,7 @@ namespace System.Web.Helpers.AntiXsrf
     {
         public IAntiForgeryAdditionalDataProvider AdditionalDataProvider
         {
-            get
-            {
-                return AntiForgeryConfig.AdditionalDataProvider;
-            }
+            get { return AntiForgeryConfig.AdditionalDataProvider; }
         }
 
         public string CookieName

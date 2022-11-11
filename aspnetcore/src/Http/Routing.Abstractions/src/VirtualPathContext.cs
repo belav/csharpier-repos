@@ -19,10 +19,8 @@ public class VirtualPathContext
     public VirtualPathContext(
         HttpContext httpContext,
         RouteValueDictionary ambientValues,
-        RouteValueDictionary values)
-        : this(httpContext, ambientValues, values, null)
-    {
-    }
+        RouteValueDictionary values
+    ) : this(httpContext, ambientValues, values, null) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="VirtualPathContext"/>.
@@ -35,7 +33,8 @@ public class VirtualPathContext
         HttpContext httpContext,
         RouteValueDictionary ambientValues,
         RouteValueDictionary values,
-        string? routeName)
+        string? routeName
+    )
     {
         HttpContext = httpContext;
         AmbientValues = ambientValues;

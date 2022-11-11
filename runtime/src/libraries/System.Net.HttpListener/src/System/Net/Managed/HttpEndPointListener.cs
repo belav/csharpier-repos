@@ -45,7 +45,7 @@ namespace System.Net
         private readonly Dictionary<HttpConnection, HttpConnection> _unregisteredConnections;
         private Dictionary<ListenerPrefix, HttpListener> _prefixes;
         private List<ListenerPrefix>? _unhandledPrefixes; // host = '*'
-        private List<ListenerPrefix>? _allPrefixes;       // host = '+'
+        private List<ListenerPrefix>? _allPrefixes; // host = '+'
         private X509Certificate? _cert;
         private bool _secure;
 
@@ -198,7 +198,10 @@ namespace System.Net
                     if (p.Host != host || p.Port != port)
                         continue;
 
-                    if (path.StartsWith(ppath, StringComparison.Ordinal) || pathSlash.StartsWith(ppath, StringComparison.Ordinal))
+                    if (
+                        path.StartsWith(ppath, StringComparison.Ordinal)
+                        || pathSlash.StartsWith(ppath, StringComparison.Ordinal)
+                    )
                     {
                         bestLength = ppath.Length;
                         bestMatch = localPrefixes[p];
@@ -230,7 +233,12 @@ namespace System.Net
             return null;
         }
 
-        private static HttpListener? MatchFromList(string? host, string path, List<ListenerPrefix>? list, out ListenerPrefix? prefix)
+        private static HttpListener? MatchFromList(
+            string? host,
+            string path,
+            List<ListenerPrefix>? list,
+            out ListenerPrefix? prefix
+        )
         {
             prefix = null;
             if (list == null)
@@ -264,7 +272,10 @@ namespace System.Net
             foreach (ListenerPrefix p in list)
             {
                 if (p.Path == prefix.Path)
-                    throw new HttpListenerException((int)HttpStatusCode.BadRequest, SR.Format(SR.net_listener_already, prefix));
+                    throw new HttpListenerException(
+                        (int)HttpStatusCode.BadRequest,
+                        SR.Format(SR.net_listener_already, prefix)
+                    );
             }
             list.Add(prefix);
         }
@@ -326,10 +337,15 @@ namespace System.Net
                 do
                 {
                     current = _unhandledPrefixes;
-                    future = current != null ? new List<ListenerPrefix>(current) : new List<ListenerPrefix>();
+                    future =
+                        current != null
+                            ? new List<ListenerPrefix>(current)
+                            : new List<ListenerPrefix>();
                     prefix._listener = listener;
                     AddSpecial(future, prefix);
-                } while (Interlocked.CompareExchange(ref _unhandledPrefixes, future, current) != current);
+                } while (
+                    Interlocked.CompareExchange(ref _unhandledPrefixes, future, current) != current
+                );
                 return;
             }
 
@@ -338,20 +354,27 @@ namespace System.Net
                 do
                 {
                     current = _allPrefixes;
-                    future = current != null ? new List<ListenerPrefix>(current) : new List<ListenerPrefix>();
+                    future =
+                        current != null
+                            ? new List<ListenerPrefix>(current)
+                            : new List<ListenerPrefix>();
                     prefix._listener = listener;
                     AddSpecial(future, prefix);
                 } while (Interlocked.CompareExchange(ref _allPrefixes, future, current) != current);
                 return;
             }
 
-            Dictionary<ListenerPrefix, HttpListener> prefs, p2;
+            Dictionary<ListenerPrefix, HttpListener> prefs,
+                p2;
             do
             {
                 prefs = _prefixes;
                 if (prefs.ContainsKey(prefix))
                 {
-                    throw new HttpListenerException((int)HttpStatusCode.BadRequest, SR.Format(SR.net_listener_already, prefix));
+                    throw new HttpListenerException(
+                        (int)HttpStatusCode.BadRequest,
+                        SR.Format(SR.net_listener_already, prefix)
+                    );
                 }
                 p2 = new Dictionary<ListenerPrefix, HttpListener>(prefs);
                 p2[prefix] = listener;
@@ -367,10 +390,15 @@ namespace System.Net
                 do
                 {
                     current = _unhandledPrefixes;
-                    future = current != null ? new List<ListenerPrefix>(current) : new List<ListenerPrefix>();
+                    future =
+                        current != null
+                            ? new List<ListenerPrefix>(current)
+                            : new List<ListenerPrefix>();
                     if (!RemoveSpecial(future, prefix))
                         break; // Prefix not found
-                } while (Interlocked.CompareExchange(ref _unhandledPrefixes, future, current) != current);
+                } while (
+                    Interlocked.CompareExchange(ref _unhandledPrefixes, future, current) != current
+                );
 
                 CheckIfRemove();
                 return;
@@ -381,7 +409,10 @@ namespace System.Net
                 do
                 {
                     current = _allPrefixes;
-                    future = current != null ? new List<ListenerPrefix>(current) : new List<ListenerPrefix>();
+                    future =
+                        current != null
+                            ? new List<ListenerPrefix>(current)
+                            : new List<ListenerPrefix>();
                     if (!RemoveSpecial(future, prefix))
                         break; // Prefix not found
                 } while (Interlocked.CompareExchange(ref _allPrefixes, future, current) != current);
@@ -389,7 +420,8 @@ namespace System.Net
                 return;
             }
 
-            Dictionary<ListenerPrefix, HttpListener> prefs, p2;
+            Dictionary<ListenerPrefix, HttpListener> prefs,
+                p2;
             do
             {
                 prefs = _prefixes;

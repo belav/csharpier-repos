@@ -17,14 +17,16 @@ namespace Microsoft.AspNetCore.Analyzers.WebApplicationBuilder.Fixers;
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(WebApplicationBuilderFixer)), Shared]
 public sealed class WebApplicationBuilderFixer : CodeFixProvider
 {
-    public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(
-        // Add other diagnostic descriptor id's
-        DiagnosticDescriptors.DoNotUseHostConfigureLogging.Id,
-        DiagnosticDescriptors.DoNotUseHostConfigureServices.Id,
-        DiagnosticDescriptors.DisallowConfigureAppConfigureHostBuilder.Id
-     );
+    public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+        ImmutableArray.Create(
+            // Add other diagnostic descriptor id's
+            DiagnosticDescriptors.DoNotUseHostConfigureLogging.Id,
+            DiagnosticDescriptors.DoNotUseHostConfigureServices.Id,
+            DiagnosticDescriptors.DisallowConfigureAppConfigureHostBuilder.Id
+        );
 
-    public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
+    public sealed override FixAllProvider GetFixAllProvider() =>
+        WellKnownFixAllProviders.BatchFixer;
 
     public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
     {
@@ -47,7 +49,8 @@ public sealed class WebApplicationBuilderFixer : CodeFixProvider
                     identifierMethod = "Services";
                     break;
 
-                case string when id == DiagnosticDescriptors.DisallowConfigureAppConfigureHostBuilder.Id:
+                case string
+                    when id == DiagnosticDescriptors.DisallowConfigureAppConfigureHostBuilder.Id:
                     message = "Fix references to Configuration properties on WebApplicationBuilder";
                     identifierMethod = "Configuration";
                     break;
@@ -55,33 +58,60 @@ public sealed class WebApplicationBuilderFixer : CodeFixProvider
 
             context.Document.TryGetSyntaxRoot(out var root);
 
-            if (!CanFixWebApplicationBuilder(diagnostic, SyntaxFactory.IdentifierName(identifierMethod), root, out var invocation))
+            if (
+                !CanFixWebApplicationBuilder(
+                    diagnostic,
+                    SyntaxFactory.IdentifierName(identifierMethod),
+                    root,
+                    out var invocation
+                )
+            )
             {
                 continue;
             }
 
             context.RegisterCodeFix(
-                        CodeAction.Create(
-                            message,
-                            cancellationToken => FixWebApplicationBuilderAsync(diagnostic, context.Document, invocation, cancellationToken),
-                            equivalenceKey:
-                            id),
-                            diagnostic);
+                CodeAction.Create(
+                    message,
+                    cancellationToken =>
+                        FixWebApplicationBuilderAsync(
+                            diagnostic,
+                            context.Document,
+                            invocation,
+                            cancellationToken
+                        ),
+                    equivalenceKey: id
+                ),
+                diagnostic
+            );
         }
 
         return Task.CompletedTask;
     }
 
-    private static async Task<Document> FixWebApplicationBuilderAsync(Diagnostic diagnostic, Document document, InvocationExpressionSyntax invocation, CancellationToken cancellationToken)
+    private static async Task<Document> FixWebApplicationBuilderAsync(
+        Diagnostic diagnostic,
+        Document document,
+        InvocationExpressionSyntax invocation,
+        CancellationToken cancellationToken
+    )
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
-        var diagnosticTarget = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+        var diagnosticTarget = root.FindNode(
+            diagnostic.Location.SourceSpan,
+            getInnermostNodeForTie: true
+        );
 
         return document.WithSyntaxRoot(root.ReplaceNode(diagnosticTarget, invocation));
     }
 
-    private static bool CanFixWebApplicationBuilder(Diagnostic diagnostic, IdentifierNameSyntax identifierMethod, SyntaxNode root, out InvocationExpressionSyntax invocationName)
+    private static bool CanFixWebApplicationBuilder(
+        Diagnostic diagnostic,
+        IdentifierNameSyntax identifierMethod,
+        SyntaxNode root,
+        out InvocationExpressionSyntax invocationName
+    )
     {
         invocationName = null;
 
@@ -91,27 +121,40 @@ public sealed class WebApplicationBuilderFixer : CodeFixProvider
         }
 
         // builder.Host.ConfigureLogging(builder => builder.AddJsonConsole());
-        var diagnosticTarget = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+        var diagnosticTarget = root.FindNode(
+            diagnostic.Location.SourceSpan,
+            getInnermostNodeForTie: true
+        );
 
         if (diagnosticTarget is InvocationExpressionSyntax invocation)
         {
             // No modification are made if the invocation isn't accessing a method on `builder.Host` or `builder.WebHost`.
-            if (invocation.Expression is not MemberAccessExpressionSyntax hostBasedInvocationMethodExpr
-                || hostBasedInvocationMethodExpr.Expression is not MemberAccessExpressionSyntax configureMethodOnHostAccessExpr)
+            if (
+                invocation.Expression
+                    is not MemberAccessExpressionSyntax hostBasedInvocationMethodExpr
+                || hostBasedInvocationMethodExpr.Expression
+                    is not MemberAccessExpressionSyntax configureMethodOnHostAccessExpr
+            )
             {
                 return false;
             }
 
-            configureMethodOnHostAccessExpr = configureMethodOnHostAccessExpr.WithName(identifierMethod);
+            configureMethodOnHostAccessExpr = configureMethodOnHostAccessExpr.WithName(
+                identifierMethod
+            );
             var indentation = hostBasedInvocationMethodExpr.GetLeadingTrivia();
 
             // builder.Host.ConfigureLogging => builder.Logging
             // builder.WebHost.ConfigureServices => builder.Services
-            hostBasedInvocationMethodExpr = hostBasedInvocationMethodExpr.WithExpression(configureMethodOnHostAccessExpr)
-                .NormalizeWhitespace().WithLeadingTrivia(indentation);
+            hostBasedInvocationMethodExpr = hostBasedInvocationMethodExpr
+                .WithExpression(configureMethodOnHostAccessExpr)
+                .NormalizeWhitespace()
+                .WithLeadingTrivia(indentation);
 
-            if (invocation.ArgumentList.Arguments.SingleOrDefault() is not { } initArgument
-                || initArgument.Expression is not LambdaExpressionSyntax lambdaExpr)
+            if (
+                invocation.ArgumentList.Arguments.SingleOrDefault() is not { } initArgument
+                || initArgument.Expression is not LambdaExpressionSyntax lambdaExpr
+            )
             {
                 return false;
             }
@@ -121,8 +164,10 @@ public sealed class WebApplicationBuilderFixer : CodeFixProvider
                 var lambdaStatements = lambdaExpr.Block.Statements;
                 foreach (var statement in lambdaStatements)
                 {
-                    if (statement is not ExpressionStatementSyntax currentStatement
-                        || currentStatement.Expression is not InvocationExpressionSyntax expr)
+                    if (
+                        statement is not ExpressionStatementSyntax currentStatement
+                        || currentStatement.Expression is not InvocationExpressionSyntax expr
+                    )
                     {
                         return false;
                     }
@@ -139,7 +184,9 @@ public sealed class WebApplicationBuilderFixer : CodeFixProvider
 
                     hostBasedInvocationMethodExpr = hostBasedInvocationMethodExpr.WithName(method);
                     invocation = invocation.Update(hostBasedInvocationMethodExpr, argument);
-                    hostBasedInvocationMethodExpr = hostBasedInvocationMethodExpr.WithExpression(invocation);
+                    hostBasedInvocationMethodExpr = hostBasedInvocationMethodExpr.WithExpression(
+                        invocation
+                    );
                 }
             }
             else
@@ -159,7 +206,9 @@ public sealed class WebApplicationBuilderFixer : CodeFixProvider
                 var method = bodyExpression.Name;
 
                 hostBasedInvocationMethodExpr = hostBasedInvocationMethodExpr.WithName(method);
-                invocation = invocation.WithExpression(hostBasedInvocationMethodExpr).WithArgumentList(arguments);
+                invocation = invocation
+                    .WithExpression(hostBasedInvocationMethodExpr)
+                    .WithArgumentList(arguments);
             }
             invocationName = invocation;
             return true;

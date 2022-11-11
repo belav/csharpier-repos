@@ -26,6 +26,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
     public class AssemblyLoadTestFixtureCollection : ICollectionFixture<AssemblyLoadTestFixture>
     {
         public const string Name = nameof(AssemblyLoadTestFixtureCollection);
+
         private AssemblyLoadTestFixtureCollection() { }
     }
 
@@ -35,7 +36,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         private ICompilerServerLogger Logger { get; }
         private AssemblyLoadTestFixture TestFixture { get; }
 
-        public AnalyzerConsistencyCheckerTests(ITestOutputHelper testOutputHelper, AssemblyLoadTestFixture testFixture)
+        public AnalyzerConsistencyCheckerTests(
+            ITestOutputHelper testOutputHelper,
+            AssemblyLoadTestFixture testFixture
+        )
         {
             Logger = new XunitCompilerServerLogger(testOutputHelper);
             TestFixture = testFixture;
@@ -47,8 +51,15 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             var directory = Temp.CreateDirectory();
             var alphaDll = directory.CopyFile(TestFixture.Alpha.Path);
 
-            var analyzerReferences = ImmutableArray.Create(new CommandLineAnalyzerReference("Alpha.dll"));
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, new InMemoryAssemblyLoader(), Logger);
+            var analyzerReferences = ImmutableArray.Create(
+                new CommandLineAnalyzerReference("Alpha.dll")
+            );
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                new InMemoryAssemblyLoader(),
+                Logger
+            );
 
             Assert.True(result);
         }
@@ -60,9 +71,15 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 new CommandLineAnalyzerReference("Alpha.dll"),
                 new CommandLineAnalyzerReference("Beta.dll"),
                 new CommandLineAnalyzerReference("Gamma.dll"),
-                new CommandLineAnalyzerReference("Delta.dll"));
+                new CommandLineAnalyzerReference("Delta.dll")
+            );
 
-            var result = AnalyzerConsistencyChecker.Check(Path.GetDirectoryName(TestFixture.Alpha.Path), analyzerReferences, new InMemoryAssemblyLoader(), Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                Path.GetDirectoryName(TestFixture.Alpha.Path),
+                analyzerReferences,
+                new InMemoryAssemblyLoader(),
+                Logger
+            );
             Assert.True(result);
         }
 
@@ -85,9 +102,15 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             var analyzerReferences = ImmutableArray.Create(
                 new CommandLineAnalyzerReference("Alpha.dll"),
                 new CommandLineAnalyzerReference("Gamma.dll"),
-                new CommandLineAnalyzerReference("Delta.dll"));
+                new CommandLineAnalyzerReference("Delta.dll")
+            );
 
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, assemblyLoader, Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                assemblyLoader,
+                Logger
+            );
 
             Assert.False(result);
         }
@@ -99,9 +122,15 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             directory.CopyFile(TestFixture.Delta1.Path);
 
             var analyzerReferences = ImmutableArray.Create(
-                new CommandLineAnalyzerReference("Delta.dll"));
+                new CommandLineAnalyzerReference("Delta.dll")
+            );
 
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, TestAnalyzerAssemblyLoader.LoadNotImplemented, Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                TestAnalyzerAssemblyLoader.LoadNotImplemented,
+                Logger
+            );
 
             Assert.False(result);
         }
@@ -115,25 +144,34 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 name,
                 new[] { SyntaxFactory.ParseSyntaxTree(@"class C {}") },
                 references: new MetadataReference[] { NetStandard20.netstandard },
-                options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, warningLevel: Diagnostic.MaxWarningLevel));
+                options: new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary,
+                    warningLevel: Diagnostic.MaxWarningLevel
+                )
+            );
             var compFile = directory.CreateFile(name);
             comp.Emit(compFile.Path);
 
-
             var analyzerReferences = ImmutableArray.Create(new CommandLineAnalyzerReference(name));
 
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, new InMemoryAssemblyLoader(), Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                new InMemoryAssemblyLoader(),
+                Logger
+            );
 
             Assert.True(result);
         }
 
         private class InMemoryAssemblyLoader : IAnalyzerAssemblyLoader
         {
-            private readonly Dictionary<string, Assembly> _assemblies = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
+            private readonly Dictionary<string, Assembly> _assemblies = new Dictionary<
+                string,
+                Assembly
+            >(StringComparer.OrdinalIgnoreCase);
 
-            public void AddDependencyLocation(string fullPath)
-            {
-            }
+            public void AddDependencyLocation(string fullPath) { }
 
             public Assembly LoadFromPath(string fullPath)
             {

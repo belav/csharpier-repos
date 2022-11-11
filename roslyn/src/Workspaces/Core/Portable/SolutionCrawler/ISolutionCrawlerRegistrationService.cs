@@ -16,6 +16,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         void Register(Workspace workspace);
         void Unregister(Workspace workspace, bool blockingShutdown = false);
 
-        void AddAnalyzerProvider(IIncrementalAnalyzerProvider provider, IncrementalAnalyzerProviderMetadata metadata);
+        void AddAnalyzerProvider(
+            IIncrementalAnalyzerProvider provider,
+            IncrementalAnalyzerProviderMetadata metadata
+        );
     }
 }

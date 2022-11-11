@@ -3,24 +3,27 @@
 
 namespace System.Runtime.Versioning
 {
-    [AttributeUsage(AttributeTargets.Assembly |
-                AttributeTargets.Module |
-                AttributeTargets.Class |
-                AttributeTargets.Interface |
-                AttributeTargets.Delegate |
-                AttributeTargets.Struct |
-                AttributeTargets.Enum |
-                AttributeTargets.Constructor |
-                AttributeTargets.Method |
-                AttributeTargets.Property |
-                AttributeTargets.Field |
-                AttributeTargets.Event, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Module
+            | AttributeTargets.Class
+            | AttributeTargets.Interface
+            | AttributeTargets.Delegate
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Event,
+        Inherited = false
+    )]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else
     internal
 #endif
-        sealed class RequiresPreviewFeaturesAttribute : Attribute
+    sealed class RequiresPreviewFeaturesAttribute : Attribute
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RequiresPreviewFeaturesAttribute"/> class.

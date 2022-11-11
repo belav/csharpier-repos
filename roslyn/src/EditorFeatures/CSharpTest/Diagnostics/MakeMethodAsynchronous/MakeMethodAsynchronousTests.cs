@@ -17,21 +17,20 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeMethodAsynchronous
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeMethodAsynchronous)]
-    public partial class MakeMethodAsynchronousTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class MakeMethodAsynchronousTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public MakeMethodAsynchronousTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public MakeMethodAsynchronousTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpMakeMethodAsynchronousCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpMakeMethodAsynchronousCodeFixProvider());
 
         [Fact, WorkItem(33082, "https://github.com/dotnet/roslyn/issues/33082")]
         public async Task AwaitInVoidMethodWithModifiers()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -43,7 +42,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -60,7 +59,7 @@ class Program
         public async Task AwaitInTaskMainMethodWithModifiers()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -72,7 +71,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -82,11 +81,21 @@ class Program
         await Task.Delay(1);
     }
 }";
-            await TestAsync(initial, expected, parseOptions: CSharpParseOptions.Default,
-                compilationOptions: new CSharpCompilationOptions(OutputKind.ConsoleApplication));
+            await TestAsync(
+                initial,
+                expected,
+                parseOptions: CSharpParseOptions.Default,
+                compilationOptions: new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+            );
 
             // no option offered to keep void
-            await TestActionCountAsync(initial, count: 1, new TestParameters(compilationOptions: new CSharpCompilationOptions(OutputKind.ConsoleApplication)));
+            await TestActionCountAsync(
+                initial,
+                count: 1,
+                new TestParameters(
+                    compilationOptions: new CSharpCompilationOptions(OutputKind.ConsoleApplication)
+                )
+            );
         }
 
         [Fact, WorkItem(26312, "https://github.com/dotnet/roslyn/issues/26312")]
@@ -94,7 +103,7 @@ class Program
         public async Task AwaitInVoidMainMethodWithModifiers_NotEntryPoint()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -106,7 +115,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -123,7 +132,7 @@ class Program
         public async Task AwaitInVoidMethodWithModifiers2()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program 
@@ -135,7 +144,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program 
@@ -152,7 +161,7 @@ class Program
         public async Task AwaitInTaskMethodNoModifiers()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program 
@@ -164,7 +173,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program 
@@ -181,7 +190,7 @@ class Program
         public async Task AwaitInTaskMethodWithModifiers()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -193,7 +202,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -210,7 +219,7 @@ class Program
         public async Task AwaitInLambdaFunction()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -223,7 +232,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -241,7 +250,7 @@ class Program
         public async Task AwaitInLambdaAction()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -253,7 +262,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -270,7 +279,7 @@ class Program
         public async Task BadAwaitInNonAsyncMethod()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class Program
 {
     void Test()
@@ -280,7 +289,7 @@ class Program
 }";
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class Program
 {
     async void Test()
@@ -295,7 +304,7 @@ class Program
         public async Task BadAwaitInNonAsyncMethod2()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class Program
 {
     Task Test()
@@ -305,7 +314,7 @@ class Program
 }";
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class Program
 {
     async Task Test()
@@ -320,7 +329,7 @@ class Program
         public async Task BadAwaitInNonAsyncMethod3()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class Program
 {
     Task<int> Test()
@@ -330,7 +339,7 @@ class Program
 }";
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class Program
 {
     async Task<int> Test()
@@ -345,7 +354,7 @@ class Program
         public async Task BadAwaitInNonAsyncMethod4()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class Program
 {
     int Test()
@@ -355,7 +364,7 @@ class Program
 }";
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 class Program
 {
     async Task<int> TestAsync()
@@ -370,7 +379,7 @@ class Program
         public async Task BadAwaitInNonAsyncMethod5()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     void Test()
     {
@@ -379,7 +388,7 @@ class Program
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     async void Test()
     {
@@ -393,7 +402,7 @@ class Program
         public async Task BadAwaitInNonAsyncMethod6()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     Task Test()
     {
@@ -402,7 +411,7 @@ class Program
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     async Task Test()
     {
@@ -416,7 +425,7 @@ class Program
         public async Task BadAwaitInNonAsyncMethod7()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     Task<int> Test()
     {
@@ -425,7 +434,7 @@ class Program
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     async Task<int> Test()
     {
@@ -439,7 +448,7 @@ class Program
         public async Task BadAwaitInNonAsyncMethod8()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     int Test()
     {
@@ -448,7 +457,7 @@ class Program
 }";
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class Program
 {
@@ -464,7 +473,7 @@ class Program
         public async Task BadAwaitInNonAsyncMethod9()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     Program Test()
     {
@@ -473,7 +482,7 @@ class Program
 }";
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class Program
 {
@@ -489,7 +498,7 @@ class Program
         public async Task BadAwaitInNonAsyncMethod10()
         {
             var initial =
-@"class Program
+                @"class Program
 {
     asdf Test()
     {
@@ -498,7 +507,7 @@ class Program
 }";
 
             var expected =
-@"class Program
+                @"class Program
 {
     async System.Threading.Tasks.Task<asdf> TestAsync()
     {
@@ -512,7 +521,7 @@ class Program
         public async Task BadAwaitInEnumerableMethod()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -524,7 +533,7 @@ class Program
 }" + IAsyncEnumerable;
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -541,7 +550,7 @@ class Program
         public async Task BadAwaitInEnumerableMethodMissingIAsyncEnumerableType()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -553,7 +562,7 @@ class Program
 }";
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -570,7 +579,7 @@ class Program
         public async Task BadAwaitInEnumerableMethodWithReturn()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -582,7 +591,7 @@ class Program
 }";
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -599,7 +608,7 @@ class Program
         public async Task BadAwaitInEnumerableMethodWithYieldInsideLocalFunction()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -616,7 +625,7 @@ class Program
 }";
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -638,7 +647,7 @@ class Program
         public async Task BadAwaitInEnumeratorMethodWithReturn()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -650,7 +659,7 @@ class Program
 }";
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -667,7 +676,7 @@ class Program
         public async Task BadAwaitInEnumeratorMethod()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -679,7 +688,7 @@ class Program
 }" + IAsyncEnumerable;
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -696,7 +705,7 @@ class Program
         public async Task BadAwaitInEnumeratorLocalFunction()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -711,7 +720,7 @@ class Program
 }" + IAsyncEnumerable;
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -731,7 +740,7 @@ class Program
         public async Task BadAwaitInIAsyncEnumerableMethod()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -743,7 +752,7 @@ class Program
 }" + IAsyncEnumerable;
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -760,7 +769,7 @@ class Program
         public async Task BadAwaitInIAsyncEnumeratorMethod()
         {
             var initial =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -772,7 +781,7 @@ class Program
 }" + IAsyncEnumerable;
 
             var expected =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
 {
@@ -789,7 +798,7 @@ class Program
         public async Task AwaitInMember()
         {
             var code =
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class Program
 {
@@ -802,7 +811,7 @@ class Program
         public async Task AddAsyncInDelegate()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -815,7 +824,7 @@ class Program
         });
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -827,14 +836,15 @@ class Program
             return ""Test"";
         });
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task AddAsyncInDelegate2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -847,7 +857,7 @@ class Program
         });
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -859,14 +869,15 @@ class Program
             return ""Test"";
         });
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task AddAsyncInDelegate3()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -879,7 +890,7 @@ class Program
         });
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -891,14 +902,15 @@ class Program
             return ""Test"";
         });
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(6477, @"https://github.com/dotnet/roslyn/issues/6477")]
         public async Task NullNodeCrash()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -912,7 +924,8 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(33082, "https://github.com/dotnet/roslyn/issues/33082")]
@@ -920,7 +933,7 @@ class C
         public async Task AwaitInValueTaskMethod()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 namespace System.Threading.Tasks {
@@ -938,7 +951,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 namespace System.Threading.Tasks {
@@ -961,7 +974,7 @@ class Program
         public async Task AwaitInValueTaskWithoutGenericMethod()
         {
             var initial =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 namespace System.Threading.Tasks {
@@ -979,7 +992,7 @@ class Program
 }";
 
             var expected =
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 namespace System.Threading.Tasks {
@@ -1002,7 +1015,7 @@ class Program
         public async Task AddAsyncInLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -1019,7 +1032,7 @@ class C
         return 1;
     }
 }",
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -1035,7 +1048,8 @@ class C
     {
         return 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14133, "https://github.com/dotnet/roslyn/issues/14133")]
@@ -1043,7 +1057,7 @@ class C
         public async Task AddAsyncInLocalFunctionKeepVoidReturn()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -1060,7 +1074,7 @@ class C
         return 1;
     }
 }",
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -1077,7 +1091,8 @@ class C
         return 1;
     }
 }",
-index: 1);
+                index: 1
+            );
         }
 
         [Theory]
@@ -1087,10 +1102,15 @@ index: 1);
         [InlineData(0, "Task", "Task", "M2")]
         [WorkItem(18307, "https://github.com/dotnet/roslyn/issues/18307")]
         [WorkItem(33082, "https://github.com/dotnet/roslyn/issues/33082")]
-        public async Task AddAsyncInLocalFunctionKeepsTrivia(int codeFixIndex, string initialReturn, string expectedReturn, string expectedName)
+        public async Task AddAsyncInLocalFunctionKeepsTrivia(
+            int codeFixIndex,
+            string initialReturn,
+            string expectedReturn,
+            string expectedName
+        )
         {
             await TestInRegularAndScriptAsync(
-$@"using System.Threading.Tasks;
+                $@"using System.Threading.Tasks;
 
 class C
 {{
@@ -1108,7 +1128,7 @@ class C
         return 1;
     }}
 }}",
-$@"using System.Threading.Tasks;
+                $@"using System.Threading.Tasks;
 
 class C
 {{
@@ -1126,7 +1146,8 @@ class C
         return 1;
     }}
 }}",
-                index: codeFixIndex);
+                index: codeFixIndex
+            );
         }
 
         [Theory]
@@ -1136,10 +1157,15 @@ class C
         [InlineData("public", 1, "void", "M2")]
         [WorkItem(18307, "https://github.com/dotnet/roslyn/issues/18307")]
         [WorkItem(33082, "https://github.com/dotnet/roslyn/issues/33082")]
-        public async Task AddAsyncKeepsTrivia(string modifiers, int codeFixIndex, string expectedReturn, string expectedName)
+        public async Task AddAsyncKeepsTrivia(
+            string modifiers,
+            int codeFixIndex,
+            string expectedReturn,
+            string expectedName
+        )
         {
             await TestInRegularAndScriptAsync(
-$@"using System.Threading.Tasks;
+                $@"using System.Threading.Tasks;
 
 class C
 {{
@@ -1154,7 +1180,7 @@ class C
         return 1;
     }}
 }}",
-$@"using System.Threading.Tasks;
+                $@"using System.Threading.Tasks;
 
 class C
 {{
@@ -1169,14 +1195,15 @@ class C
         return 1;
     }}
 }}",
-                index: codeFixIndex);
+                index: codeFixIndex
+            );
         }
 
         [Fact]
         public async Task MethodWithAwaitUsing()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1185,7 +1212,7 @@ class C
         }
     }
 }",
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -1195,14 +1222,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MethodWithRegularUsing()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1210,14 +1238,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MethodWithAwaitForEach()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1226,7 +1255,7 @@ class C
         }
     }
 }",
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -1236,14 +1265,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MethodWithRegularForEach()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1251,14 +1281,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MethodWithAwaitForEachVariable()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1267,7 +1298,7 @@ class C
         }
     }
 }",
-@"using System.Threading.Tasks;
+                @"using System.Threading.Tasks;
 
 class C
 {
@@ -1277,14 +1308,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MethodWithRegularForEachVariable()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1292,14 +1324,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MethodWithNullableReturn()
         {
             await TestInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 using System.Threading.Tasks;
 class C
 {
@@ -1309,7 +1342,7 @@ class C
         return null;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 using System.Threading.Tasks;
 class C
 {
@@ -1318,14 +1351,15 @@ class C
         await Task.Delay(1);
         return null;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task EnumerableMethodWithNullableType()
         {
             var initial =
-@"#nullable enable
+                @"#nullable enable
 using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
@@ -1338,7 +1372,7 @@ class Program
 }" + IAsyncEnumerable;
 
             var expected =
-@"#nullable enable
+                @"#nullable enable
 using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
@@ -1356,7 +1390,7 @@ class Program
         public async Task EnumeratorMethodWithNullableType()
         {
             var initial =
-@"#nullable enable
+                @"#nullable enable
 using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program
@@ -1369,7 +1403,7 @@ class Program
 }" + IAsyncEnumerable;
 
             var expected =
-@"#nullable enable
+                @"#nullable enable
 using System.Threading.Tasks;
 using System.Collections.Generic;
 class Program

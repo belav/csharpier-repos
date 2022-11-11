@@ -31,20 +31,15 @@ public class PathSegment
     public virtual string Key { get; }
 
     /// <inheritdoc />
-    public override string ToString()
-        => (Key == "$" ? "" : ".") + Key;
+    public override string ToString() => (Key == "$" ? "" : ".") + Key;
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is PathSegment pathSegment
-                && Equals(pathSegment));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (ReferenceEquals(this, obj) || obj is PathSegment pathSegment && Equals(pathSegment));
 
-    private bool Equals(PathSegment pathSegment)
-        => Key == pathSegment.Key;
+    private bool Equals(PathSegment pathSegment) => Key == pathSegment.Key;
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(Key);
+    public override int GetHashCode() => HashCode.Combine(Key);
 }

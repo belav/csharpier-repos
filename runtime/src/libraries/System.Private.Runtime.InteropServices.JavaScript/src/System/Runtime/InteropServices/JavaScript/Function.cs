@@ -14,11 +14,9 @@ namespace System.Runtime.InteropServices.JavaScript
     /// </remarks>
     public class Function : JSObject
     {
-        public Function(params object[] args) : base(nameof(Function), args)
-        { }
+        public Function(params object[] args) : base(nameof(Function), args) { }
 
-        internal Function(IntPtr jsHandle) : base(jsHandle)
-        { }
+        internal Function(IntPtr jsHandle) : base(jsHandle) { }
 
         /// <summary>
         /// The Apply() method calls a function with a given this value, and arguments provided as an array (or an array-like object).
@@ -26,7 +24,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <returns>The apply.</returns>
         /// <param name="thisArg">This argument.</param>
         /// <param name="argsArray">Arguments.</param>
-        public object Apply(object? thisArg, object[]? argsArray = null) => Invoke("apply", thisArg, argsArray);
+        public object Apply(object? thisArg, object[]? argsArray = null) =>
+            Invoke("apply", thisArg, argsArray);
 
         /// <summary>
         /// Creates a new Function that, when called, has its this keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
@@ -34,7 +33,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <returns>The bind.</returns>
         /// <param name="thisArg">This argument.</param>
         /// <param name="argsArray">Arguments.</param>
-        public Function Bind(object? thisArg, object[]? argsArray = null) => (Function)Invoke("bind", thisArg, argsArray);
+        public Function Bind(object? thisArg, object[]? argsArray = null) =>
+            (Function)Invoke("bind", thisArg, argsArray);
 
         /// <summary>
         /// Calls a function with a given `this` value and arguments provided individually.

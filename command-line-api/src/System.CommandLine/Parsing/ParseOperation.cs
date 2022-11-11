@@ -11,9 +11,7 @@ namespace System.CommandLine.Parsing
         private readonly CommandLineConfiguration _configuration;
         private int _index;
 
-        public ParseOperation(
-            TokenizeResult tokenizeResult,
-            CommandLineConfiguration configuration)
+        public ParseOperation(TokenizeResult tokenizeResult, CommandLineConfiguration configuration)
         {
             _tokenizeResult = tokenizeResult;
             _configuration = configuration;
@@ -43,10 +41,7 @@ namespace System.CommandLine.Parsing
 
         private CommandNode ParseRootCommand()
         {
-            var rootCommandNode = new CommandNode(
-                CurrentToken,
-                _configuration.RootCommand,
-                null);
+            var rootCommandNode = new CommandNode(CurrentToken, _configuration.RootCommand, null);
 
             Advance();
 
@@ -59,7 +54,11 @@ namespace System.CommandLine.Parsing
 
         private void ParseSubcommand(CommandNode parentNode)
         {
-            var commandNode = new CommandNode(CurrentToken, (Command)CurrentToken.Symbol!, parentNode);
+            var commandNode = new CommandNode(
+                CurrentToken,
+                (Command)CurrentToken.Symbol!,
+                parentNode
+            );
 
             Advance();
 
@@ -85,7 +84,11 @@ namespace System.CommandLine.Parsing
                 }
                 else if (currentTokenType == TokenType.Argument)
                 {
-                    ParseCommandArguments(parent, ref currentArgumentCount, ref currentArgumentIndex);
+                    ParseCommandArguments(
+                        parent,
+                        ref currentArgumentCount,
+                        ref currentArgumentIndex
+                    );
                 }
                 else
                 {
@@ -95,7 +98,11 @@ namespace System.CommandLine.Parsing
             }
         }
 
-        private void ParseCommandArguments(CommandNode commandNode, ref int currentArgumentCount, ref int currentArgumentIndex)
+        private void ParseCommandArguments(
+            CommandNode commandNode,
+            ref int currentArgumentCount,
+            ref int currentArgumentIndex
+        )
         {
             while (More(out TokenType currentTokenType) && currentTokenType == TokenType.Argument)
             {
@@ -108,7 +115,8 @@ namespace System.CommandLine.Parsing
                         var argumentNode = new CommandArgumentNode(
                             CurrentToken,
                             argument,
-                            commandNode);
+                            commandNode
+                        );
 
                         commandNode.AddChildNode(argumentNode);
 
@@ -135,10 +143,7 @@ namespace System.CommandLine.Parsing
 
         private void ParseOption(CommandNode parent)
         {
-            OptionNode optionNode = new(
-                CurrentToken,
-                (Option)CurrentToken.Symbol!,
-                parent);
+            OptionNode optionNode = new(CurrentToken, (Option)CurrentToken.Symbol!, parent);
 
             Advance();
 
@@ -168,16 +173,14 @@ namespace System.CommandLine.Parsing
                         return;
                     }
                 }
-                else if (argument.ValueType == typeof(bool) && !bool.TryParse(CurrentToken.Value, out _))
+                else if (
+                    argument.ValueType == typeof(bool) && !bool.TryParse(CurrentToken.Value, out _)
+                )
                 {
                     return;
                 }
 
-                optionNode.AddChildNode(
-                    new OptionArgumentNode(
-                        CurrentToken,
-                        argument,
-                        optionNode));
+                optionNode.AddChildNode(new OptionArgumentNode(CurrentToken, argument, optionNode));
 
                 argumentCount++;
 
@@ -203,15 +206,10 @@ namespace System.CommandLine.Parsing
             {
                 var token = CurrentToken;
                 var withoutBrackets = token.Value.Substring(1, token.Value.Length - 2);
-                var keyAndValue = withoutBrackets.Split(new[]
-                {
-                    ':'
-                }, 2);
+                var keyAndValue = withoutBrackets.Split(new[] { ':' }, 2);
 
                 var key = keyAndValue[0];
-                var value = keyAndValue.Length == 2
-                                ? keyAndValue[1]
-                                : null;
+                var value = keyAndValue.Length == 2 ? keyAndValue[1] : null;
 
                 var directiveNode = new DirectiveNode(token, parent, key, value);
 

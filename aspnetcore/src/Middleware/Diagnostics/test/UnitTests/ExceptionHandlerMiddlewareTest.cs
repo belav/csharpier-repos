@@ -17,17 +17,21 @@ public class ExceptionHandlerMiddlewareTest
     {
         // Arrange
         var httpContext = CreateHttpContext();
-        httpContext.SetEndpoint(new Endpoint((_) => Task.CompletedTask, new EndpointMetadataCollection(), "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint((_) => Task.CompletedTask, new EndpointMetadataCollection(), "Test")
+        );
         httpContext.Request.RouteValues["John"] = "Doe";
 
-        var optionsAccessor = CreateOptionsAccessor(
-            exceptionHandler: context =>
-            {
-                Assert.Empty(context.Request.RouteValues);
-                Assert.Null(context.GetEndpoint());
-                return Task.CompletedTask;
-            });
-        var middleware = CreateMiddleware(_ => throw new InvalidOperationException(), optionsAccessor);
+        var optionsAccessor = CreateOptionsAccessor(exceptionHandler: context =>
+        {
+            Assert.Empty(context.Request.RouteValues);
+            Assert.Null(context.GetEndpoint());
+            return Task.CompletedTask;
+        });
+        var middleware = CreateMiddleware(
+            _ => throw new InvalidOperationException(),
+            optionsAccessor
+        );
 
         // Act & Assert
         await middleware.Invoke(httpContext);
@@ -38,20 +42,26 @@ public class ExceptionHandlerMiddlewareTest
     {
         // Arrange
         var httpContext = CreateHttpContext();
-        var endpoint = new Endpoint((_) => Task.CompletedTask, new EndpointMetadataCollection(), "Test");
+        var endpoint = new Endpoint(
+            (_) => Task.CompletedTask,
+            new EndpointMetadataCollection(),
+            "Test"
+        );
         httpContext.SetEndpoint(endpoint);
         httpContext.Request.RouteValues["John"] = "Doe";
 
-        var optionsAccessor = CreateOptionsAccessor(
-            exceptionHandler: context =>
-            {
-                var feature = context.Features.Get<IExceptionHandlerPathFeature>();
-                Assert.Equal(endpoint, feature.Endpoint);
-                Assert.Equal("Doe", feature.RouteValues["John"]);
+        var optionsAccessor = CreateOptionsAccessor(exceptionHandler: context =>
+        {
+            var feature = context.Features.Get<IExceptionHandlerPathFeature>();
+            Assert.Equal(endpoint, feature.Endpoint);
+            Assert.Equal("Doe", feature.RouteValues["John"]);
 
-                return Task.CompletedTask;
-            });
-        var middleware = CreateMiddleware(_ => throw new InvalidOperationException(), optionsAccessor);
+            return Task.CompletedTask;
+        });
+        var middleware = CreateMiddleware(
+            _ => throw new InvalidOperationException(),
+            optionsAccessor
+        );
 
         // Act & Assert
         await middleware.Invoke(httpContext);
@@ -59,17 +69,15 @@ public class ExceptionHandlerMiddlewareTest
 
     private HttpContext CreateHttpContext()
     {
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new TestServiceProvider()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = new TestServiceProvider() };
 
         return httpContext;
     }
 
     private IOptions<ExceptionHandlerOptions> CreateOptionsAccessor(
         RequestDelegate exceptionHandler = null,
-        string exceptionHandlingPath = null)
+        string exceptionHandlingPath = null
+    )
     {
         exceptionHandler ??= c => Task.CompletedTask;
         var options = new ExceptionHandlerOptions()
@@ -83,7 +91,8 @@ public class ExceptionHandlerMiddlewareTest
 
     private ExceptionHandlerMiddleware CreateMiddleware(
         RequestDelegate next,
-        IOptions<ExceptionHandlerOptions> options)
+        IOptions<ExceptionHandlerOptions> options
+    )
     {
         next ??= c => Task.CompletedTask;
         var listener = new DiagnosticListener("Microsoft.AspNetCore");
@@ -92,7 +101,8 @@ public class ExceptionHandlerMiddlewareTest
             next,
             NullLoggerFactory.Instance,
             options,
-            listener);
+            listener
+        );
 
         return middleware;
     }
